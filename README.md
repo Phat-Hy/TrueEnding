@@ -1,4 +1,6 @@
-# Project The Maybe(Not) Last Story
+# Project The Maybe(Not) Last Story (`TrueEnding`)
+
+[![Repository](https://img.shields.io/badge/GitHub-Phat--Hy%2FTrueEnding-blue)](https://github.com/Phat-Hy/TrueEnding)
 
 > **A reverse engineering, decompilation, and native PC recompilation effort for *The Last Story* (Nintendo Wii).**
 

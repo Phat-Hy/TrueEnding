@@ -1,5 +1,6 @@
 # The Last Story — Project Journal & Progress Tracker
 
+> **Repository**: [Phat-Hy/TrueEnding](https://github.com/Phat-Hy/TrueEnding)  
 > **Project**: Project The Maybe(Not) Last Story (Wii Decompilation & Native PC Recompilation)  
 > **Workflow**: Harness Skills (`hs:brainstorm` ➔ `hs:plan` ➔ `hs:build` ➔ `hs:code-review` ➔ `hs:ship`)  
 > **Architecture Foundation**: Nintendo Wii PowerPC 750CL / RVL-SDK Decompilation (`dtk`, `objdiff`, CodeWarrior) + Modern PC Port / Recomp Layer (ModernGekko / SDL2 / Vulkan / DirectX)
