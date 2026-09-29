@@ -128,6 +128,10 @@ config.libs = [
         "mw_version": "Wii/1.0",
         "cflags": cflags_base,
         "objects": [
+            Object(True, "__init_hardware.c"),
+            Object(True, "memcpy.c"),
+            Object(True, "memset.c"),
+            Object(True, "global_destructor_chain.c"),
             Object(True, "__init_cpp_exceptions.cpp"),
         ],
     },

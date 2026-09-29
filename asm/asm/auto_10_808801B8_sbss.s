@@ -620,9 +620,9 @@
 .endobj __stdio_exit
 
 # .sbss:0x1A8 | 0x80880360 | size: 0x4
-.obj lbl_80880360, global
+.obj __msl_constraint_handler_80880360, global
 	.skip 0x4
-.endobj lbl_80880360
+.endobj __msl_constraint_handler_80880360
 	.skip 0x4
 
 # .sbss:0x1B0 | 0x80880368 | size: 0x8

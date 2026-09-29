@@ -33,8 +33,6 @@ SECTIONS
 
 FORCEACTIVE
 {
-    __init_cpp_exceptions
-    __fini_cpp_exceptions
     fn_800082AC
     fn_8003E688
     fn_80041A50
@@ -123,6 +121,8 @@ FORCEACTIVE
     fn_805D7CC0
     fn_805E0630
     fn_80695270
+    __init_cpp_exceptions
+    __fini_cpp_exceptions
     fn_80705300
     fn_8070B060
     fn_80713480

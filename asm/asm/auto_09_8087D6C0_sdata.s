@@ -5552,12 +5552,7 @@
 .obj lbl_8087EB48, global
 	.2byte 0x0064
 .endobj lbl_8087EB48
-
-# .sdata:0x148A | 0x8087EB4A | size: 0x2
-.obj gap_09_8087EB4A_sdata, global
-.hidden gap_09_8087EB4A_sdata
 	.2byte 0x0000
-.endobj gap_09_8087EB4A_sdata
 
 # .sdata:0x148C | 0x8087EB4C | size: 0x4
 .obj lbl_8087EB4C, global

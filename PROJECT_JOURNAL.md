@@ -20,7 +20,8 @@
 | **STEP-007** | `2026-09-29T21:27:00+07:00` | Setup | Installed `dtk` v1.8.4; successfully analyzed 8.18MB `main.dol`, discovered 18,103 functions, and split 361 object slices | **Completed** | `dtk-split` |
 | **STEP-008** | `2026-09-29T21:45:00+07:00` | Build | Configured build system (`configure.py` + `ninja`), CodeWarrior v4.3 b145 toolchain, and `objdiff.json` | **Completed** | `build-env` |
 | **STEP-009** | `2026-09-29T21:47:00+07:00` | Match | Decompiled `src/__init_cpp_exceptions.cpp` and achieved first **100.0% byte-for-byte binary match**! | **Completed** | `match-first-fn` |
-| **STEP-010** | *Up Next* | Decomp | Map RVL-SDK OS & Memory functions (`OSInit`, `memcpy`, `memset`) and decompile startup routines | **In Progress** | `decomp-startup` |
+| **STEP-010** | `2026-09-29T22:20:00+07:00` | Match | Decompiled `global_destructor_chain.c`, `__init_hardware.c`, `memcpy.c`, `memset.c` (5 units, 9 functions, 1,192 bytes — **100.0% matched**!) | **Completed** | `decomp-startup-done` |
+| **STEP-011** | *Up Next* | Decomp | Map RVL-SDK Core Subsystems (`OSInit`, `OSAlloc`, `OSThread`, `GX`, `DVD`) and decompile OS initialization | **In Progress** | `decomp-os-init` |
 
 ---
 

@@ -25852,16 +25852,16 @@
 	.4byte fn_80642D40+0x44
 .endobj jumptable_807B66C0
 
-# .data:0x18EFC | 0x807B66E4 | size: 0x1C
+# .data:0x18EFC | 0x807B66E4 | size: 0x1B
 .obj lbl_807B66E4, global
-	.4byte 0x4C324341
-	.4byte 0x50202D20
-	.4byte 0x73743A20
-	.4byte 0x434C4F53
-	.4byte 0x45442065
-	.4byte 0x76743A20
-	.4byte 0x25640000
+	.string "L2CAP - st: CLOSED evt: %d"
 .endobj lbl_807B66E4
+
+# .data:0x18F17 | 0x807B66FF | size: 0x1
+.obj gap_07_807B66FF_data, global
+.hidden gap_07_807B66FF_data
+	.byte 0x00
+.endobj gap_07_807B66FF_data
 
 # .data:0x18F18 | 0x807B6700 | size: 0x80
 .obj lbl_807B6700, global
@@ -25934,19 +25934,16 @@
 	.4byte fn_80642D8C+0x214
 .endobj jumptable_807B6780
 
-# .data:0x19014 | 0x807B67FC | size: 0x28
+# .data:0x19014 | 0x807B67FC | size: 0x25
 .obj lbl_807B67FC, global
-	.4byte 0x4C324341
-	.4byte 0x50202D20
-	.4byte 0x73743A20
-	.4byte 0x4F524947
-	.4byte 0x5F57345F
-	.4byte 0x5345435F
-	.4byte 0x434F4D50
-	.4byte 0x20657674
-	.4byte 0x3A202564
-	.4byte 0x00000000
+	.string "L2CAP - st: ORIG_W4_SEC_COMP evt: %d"
 .endobj lbl_807B67FC
+
+# .data:0x19039 | 0x807B6821 | size: 0x3
+.obj gap_07_807B6821_data, global
+.hidden gap_07_807B6821_data
+	.byte 0x00, 0x00, 0x00
+.endobj gap_07_807B6821_data
 
 # .data:0x1903C | 0x807B6824 | size: 0x6C
 .obj jumptable_807B6824, global
@@ -26277,16 +26274,16 @@
 	.4byte fn_80643714+0x368
 .endobj jumptable_807B6C78
 
-# .data:0x19500 | 0x807B6CE8 | size: 0x1C
+# .data:0x19500 | 0x807B6CE8 | size: 0x19
 .obj lbl_807B6CE8, global
-	.4byte 0x4C324341
-	.4byte 0x50202D20
-	.4byte 0x73743A20
-	.4byte 0x4F50454E
-	.4byte 0x20657674
-	.4byte 0x3A202564
-	.4byte 0x00000000
+	.string "L2CAP - st: OPEN evt: %d"
 .endobj lbl_807B6CE8
+
+# .data:0x19519 | 0x807B6D01 | size: 0x3
+.obj gap_07_807B6D01_data, global
+.hidden gap_07_807B6D01_data
+	.byte 0x00, 0x00, 0x00
+.endobj gap_07_807B6D01_data
 
 # .data:0x1951C | 0x807B6D04 | size: 0x6C
 .obj jumptable_807B6D04, global
@@ -27375,18 +27372,16 @@
 	.4byte fn_8064AA08+0xC8
 .endobj jumptable_807B7C20
 
-# .data:0x1A45C | 0x807B7C44 | size: 0x24
+# .data:0x1A45C | 0x807B7C44 | size: 0x21
 .obj lbl_807B7C44, global
-	.4byte 0x7266635F
-	.4byte 0x6D785F73
-	.4byte 0x6D5F7361
-	.4byte 0x626D655F
-	.4byte 0x77616974
-	.4byte 0x5F756120
-	.4byte 0x2D206576
-	.4byte 0x743A2564
-	.4byte 0x00000000
+	.string "rfc_mx_sm_sabme_wait_ua - evt:%d"
 .endobj lbl_807B7C44
+
+# .data:0x1A47D | 0x807B7C65 | size: 0x3
+.obj gap_07_807B7C65_data, global
+.hidden gap_07_807B7C65_data
+	.byte 0x00, 0x00, 0x00
+.endobj gap_07_807B7C65_data
 
 # .data:0x1A480 | 0x807B7C68 | size: 0x3C
 .obj jumptable_807B7C68, global

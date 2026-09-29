@@ -1,2 +1,4 @@
 asm/config.json: \
-  orig/main.dol
+  orig/main.dol \
+  config/splits.txt \
+  config/symbols.txt

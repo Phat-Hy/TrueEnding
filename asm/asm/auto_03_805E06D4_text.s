@@ -200061,7 +200061,7 @@
 
 # .text:0xA6808 | 0x80686EDC | size: 0x18
 .fn __msl_runtime_constraint_violation_s, global
-/* 80686EDC 0068153C  81 8D AC A0 */	lwz r12, lbl_80880360@sda21(r0)
+/* 80686EDC 0068153C  81 8D AC A0 */	lwz r12, __msl_constraint_handler_80880360@sda21(r0)
 /* 80686EE0 00681540  2C 0C 00 00 */	cmpwi r12, 0x0
 /* 80686EE4 00681544  4D 82 00 20 */	beqlr
 /* 80686EE8 00681548  7D 89 03 A6 */	mtctr r12

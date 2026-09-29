@@ -11,7 +11,7 @@ extern __eti_init_info _eti_init_info[];
 int __register_fragment(void*, void*);
 void __unregister_fragment(int);
 
-int fragmentID_8087ED28 = -2;
+extern int fragmentID_8087ED28;
 
 void __init_cpp_exceptions(void) {
     if (fragmentID_8087ED28 == -2) {

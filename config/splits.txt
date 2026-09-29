@@ -12,3 +12,15 @@ Sections:
 	.sbss       type:bss align:32
 	.sdata2     type:rodata align:32
 	.sbss2      type:bss align:8
+
+global_destructor_chain.c:
+	.text       start:0x80695420 end:0x80695480
+
+__init_hardware.c:
+	.init       start:0x80004360 end:0x800043C4
+
+memcpy.c:
+	.init       start:0x800062F8 end:0x80006594
+
+memset.c:
+	.init       start:0x80006594 end:0x80006678

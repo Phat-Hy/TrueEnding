@@ -2561,6 +2561,33 @@
       }
     },
     {
+      "name": "main/global_destructor_chain",
+      "target_path": "build/SLSEXJ/obj/global_destructor_chain.o",
+      "base_path": "build/SLSEXJ/src/global_destructor_chain.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 48 -sdata2 48 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/global_destructor_chain.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/global_destructor_chain.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/auto_03_80695480_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80695480_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
       "name": "main/auto_fn_80695720_text",
       "target_path": "build/SLSEXJ/obj/auto_fn_80695720_text.o",
       "metadata": {
@@ -2921,6 +2948,71 @@
       "metadata": {
         "progress_categories": [],
         "auto_generated": true
+      }
+    },
+    {
+      "name": "main/__init_hardware",
+      "target_path": "build/SLSEXJ/obj/__init_hardware.o",
+      "base_path": "build/SLSEXJ/src/__init_hardware.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 48 -sdata2 48 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/__init_hardware.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/__init_hardware.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/auto_00_800043C4_init",
+      "target_path": "build/SLSEXJ/obj/auto_00_800043C4_init.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/memcpy",
+      "target_path": "build/SLSEXJ/obj/memcpy.o",
+      "base_path": "build/SLSEXJ/src/memcpy.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 48 -sdata2 48 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/memcpy.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/memcpy.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/memset",
+      "target_path": "build/SLSEXJ/obj/memset.o",
+      "base_path": "build/SLSEXJ/src/memset.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 48 -sdata2 48 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/memset.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/memset.c",
+        "progress_categories": [],
+        "auto_generated": false
       }
     }
   ],
