@@ -1,0 +1,50 @@
+.include "macros.inc"
+.file "auto_fn_8072D180_text"
+
+# 0x8072D180..0x8072D204 | size: 0x84
+.text
+.balign 4
+
+# .text:0x0 | 0x8072D180 | size: 0x84
+.fn fn_8072D180, global
+/* 8072D180 007277E0  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 8072D184 007277E4  7C 08 02 A6 */	mflr r0
+/* 8072D188 007277E8  90 01 00 14 */	stw r0, 0x14(r1)
+/* 8072D18C 007277EC  88 0D AE C8 */	lbz r0, lbl_80880588@sda21(r0)
+/* 8072D190 007277F0  7C 00 07 75 */	extsb. r0, r0
+/* 8072D194 007277F4  40 82 00 2C */	bne .L_8072D1C0
+/* 8072D198 007277F8  38 6D AE BC */	li r3, lbl_8088057C@sda21
+/* 8072D19C 007277FC  4B FF 81 65 */	bl fn_80725300
+/* 8072D1A0 00727800  3C 80 80 72 */	lis r4, fn_80725310@ha
+/* 8072D1A4 00727804  3C A0 80 88 */	lis r5, lbl_8087D6A0@ha
+/* 8072D1A8 00727808  38 84 53 10 */	addi r4, r4, fn_80725310@l
+/* 8072D1AC 0072780C  38 6D AE BC */	li r3, lbl_8088057C@sda21
+/* 8072D1B0 00727810  38 A5 D6 A0 */	addi r5, r5, lbl_8087D6A0@l
+/* 8072D1B4 00727814  4B F6 82 6D */	bl __register_global_object
+/* 8072D1B8 00727818  38 00 00 01 */	li r0, 0x1
+/* 8072D1BC 0072781C  98 0D AE C8 */	stb r0, lbl_80880588@sda21(r0)
+.L_8072D1C0:
+/* 8072D1C0 00727820  88 0D AE C9 */	lbz r0, lbl_80880589@sda21(r0)
+/* 8072D1C4 00727824  7C 00 07 75 */	extsb. r0, r0
+/* 8072D1C8 00727828  40 82 00 2C */	bne .L_8072D1F4
+/* 8072D1CC 0072782C  38 6D AE C4 */	li r3, lbl_80880584@sda21
+/* 8072D1D0 00727830  4B FF 85 E1 */	bl fn_807257B0
+/* 8072D1D4 00727834  3C 80 80 72 */	lis r4, fn_807257C0@ha
+/* 8072D1D8 00727838  3C A0 80 88 */	lis r5, lbl_8087D6AC@ha
+/* 8072D1DC 0072783C  38 84 57 C0 */	addi r4, r4, fn_807257C0@l
+/* 8072D1E0 00727840  38 6D AE C4 */	li r3, lbl_80880584@sda21
+/* 8072D1E4 00727844  38 A5 D6 AC */	addi r5, r5, lbl_8087D6AC@l
+/* 8072D1E8 00727848  4B F6 82 39 */	bl __register_global_object
+/* 8072D1EC 0072784C  38 00 00 01 */	li r0, 0x1
+/* 8072D1F0 00727850  98 0D AE C9 */	stb r0, lbl_80880589@sda21(r0)
+.L_8072D1F4:
+/* 8072D1F4 00727854  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 8072D1F8 00727858  7C 08 03 A6 */	mtlr r0
+/* 8072D1FC 0072785C  38 21 00 10 */	addi r1, r1, 0x10
+/* 8072D200 00727860  4E 80 00 20 */	blr
+.endfn fn_8072D180
+
+# 0x8072D430..0x8072D434 | size: 0x4
+.section .ctors, "a"
+.balign 4
+	.4byte fn_8072D180

@@ -1,0 +1,138 @@
+MEMORY
+{
+    text : origin = 0x80004000
+}
+
+SECTIONS
+{
+    GROUP:
+    {
+        .init ALIGN(0x4):{}
+        extab ALIGN(0x8):{}
+        extabindex ALIGN(0x10):{}
+        .text ALIGN(0x10):{}
+        .ctors ALIGN(0x4):{}
+        .dtors ALIGN(0x10):{}
+        .rodata ALIGN(0x40):{}
+        .data ALIGN(0x10):{}
+        .bss ALIGN(0x40):{}
+        .sdata ALIGN(0x10):{}
+        .sbss ALIGN(0x20):{}
+        .sdata2 ALIGN(0x20):{}
+        .sbss2 ALIGN(0x8):{}
+        .stack ALIGN(0x100):{}
+    } > text
+
+    _stack_end = _f_sbss2 + SIZEOF(.sbss2);
+    _stack_addr = (_stack_end + 0x10000 + 0x7) & ~0x7;
+    _db_stack_addr = (_stack_addr + 0x2000);
+    _db_stack_end = _stack_addr;
+    __ArenaLo = (_db_stack_addr + 0x1f) & ~0x1f;
+    __ArenaHi = 0x81700000;
+}
+
+FORCEACTIVE
+{
+    __init_cpp_exceptions
+    __fini_cpp_exceptions
+    fn_800082AC
+    fn_8003E688
+    fn_80041A50
+    fn_80077058
+    fn_80081DC8
+    fn_800A291C
+    fn_800B6684
+    fn_800C41B4
+    fn_800D5714
+    fn_800E29B4
+    fn_8010DB68
+    fn_801175EC
+    fn_80121EB0
+    fn_80124FFC
+    fn_801A226C
+    fn_801CCE18
+    fn_801CFC58
+    fn_801D54A0
+    fn_801D8080
+    fn_801E7FD8
+    fn_801EA390
+    fn_801F1EA0
+    fn_801F33A8
+    fn_80201E1C
+    fn_80216994
+    fn_8021CB7C
+    fn_80224A2C
+    fn_80234A60
+    fn_802371AC
+    fn_802378E0
+    fn_80243700
+    fn_802441CC
+    fn_80254530
+    fn_8025A03C
+    fn_8027276C
+    fn_80287E54
+    fn_802B753C
+    fn_802C7BC8
+    fn_802CCAFC
+    fn_802CFFC8
+    fn_802DDCFC
+    fn_802E20FC
+    fn_8030DA1C
+    fn_8031B09C
+    fn_80376AD4
+    fn_803B2780
+    fn_803B338C
+    fn_803CCF38
+    fn_803E78B4
+    fn_80423340
+    fn_80425FB0
+    fn_804405CC
+    fn_8045824C
+    fn_80468F48
+    fn_80479940
+    fn_80490850
+    fn_8049CDA0
+    fn_804AE7C4
+    fn_804B4C20
+    fn_804C2FC8
+    fn_804C563C
+    fn_804C8748
+    fn_804CD94C
+    fn_804FF47C
+    fn_804FF964
+    fn_80501068
+    fn_80514580
+    fn_8051B904
+    fn_80521DFC
+    fn_805290FC
+    fn_80530FB4
+    fn_8053AF38
+    fn_8053C564
+    fn_8053C6CC
+    fn_8053CF48
+    fn_80545CEC
+    fn_80548C9C
+    fn_8055A444
+    fn_8056313C
+    fn_8057501C
+    fn_805AE250
+    fn_805CD990
+    fn_805D3C90
+    fn_805D41E0
+    fn_805D5690
+    fn_805D7CC0
+    fn_805E0630
+    fn_80695270
+    fn_80705300
+    fn_8070B060
+    fn_80713480
+    fn_80716030
+    fn_80718780
+    fn_8071D0D0
+    fn_80721880
+    fn_80725C80
+    fn_80725D90
+    fn_807263D0
+    fn_807267C0
+    fn_8072D180
+}

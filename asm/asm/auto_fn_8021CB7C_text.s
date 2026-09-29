@@ -1,0 +1,68 @@
+.include "macros.inc"
+.file "auto_fn_8021CB7C_text"
+
+# 0x8021CB7C..0x8021CC50 | size: 0xD4
+.text
+.balign 4
+
+# .text:0x0 | 0x8021CB7C | size: 0xD4
+.fn fn_8021CB7C, global
+/* 8021CB7C 002171DC  94 21 FF E0 */	stwu r1, -0x20(r1)
+/* 8021CB80 002171E0  7C 08 02 A6 */	mflr r0
+/* 8021CB84 002171E4  90 01 00 24 */	stw r0, 0x24(r1)
+/* 8021CB88 002171E8  93 E1 00 1C */	stw r31, 0x1c(r1)
+/* 8021CB8C 002171EC  3F E0 80 22 */	lis r31, fn_8021CC50@ha
+/* 8021CB90 002171F0  38 9F CC 50 */	addi r4, r31, fn_8021CC50@l
+/* 8021CB94 002171F4  93 C1 00 18 */	stw r30, 0x18(r1)
+/* 8021CB98 002171F8  3B C0 00 00 */	li r30, 0x0
+/* 8021CB9C 002171FC  93 A1 00 14 */	stw r29, 0x14(r1)
+/* 8021CBA0 00217200  3F A0 80 7C */	lis r29, lbl_807C7FF8@ha
+/* 8021CBA4 00217204  3B BD 7F F8 */	addi r29, r29, lbl_807C7FF8@l
+/* 8021CBA8 00217208  38 7D 00 10 */	addi r3, r29, 0x10
+/* 8021CBAC 0021720C  93 DD 00 10 */	stw r30, 0x10(r29)
+/* 8021CBB0 00217210  38 BD 00 00 */	addi r5, r29, 0x0
+/* 8021CBB4 00217214  93 C3 00 04 */	stw r30, 0x4(r3)
+/* 8021CBB8 00217218  48 47 88 69 */	bl __register_global_object
+/* 8021CBBC 0021721C  38 7D 00 28 */	addi r3, r29, 0x28
+/* 8021CBC0 00217220  93 DD 00 28 */	stw r30, 0x28(r29)
+/* 8021CBC4 00217224  38 9F CC 50 */	addi r4, r31, fn_8021CC50@l
+/* 8021CBC8 00217228  38 BD 00 18 */	addi r5, r29, 0x18
+/* 8021CBCC 0021722C  93 C3 00 04 */	stw r30, 0x4(r3)
+/* 8021CBD0 00217230  48 47 88 51 */	bl __register_global_object
+/* 8021CBD4 00217234  38 7D 00 40 */	addi r3, r29, 0x40
+/* 8021CBD8 00217238  93 DD 00 40 */	stw r30, 0x40(r29)
+/* 8021CBDC 0021723C  38 9F CC 50 */	addi r4, r31, fn_8021CC50@l
+/* 8021CBE0 00217240  38 BD 00 30 */	addi r5, r29, 0x30
+/* 8021CBE4 00217244  93 C3 00 04 */	stw r30, 0x4(r3)
+/* 8021CBE8 00217248  48 47 88 39 */	bl __register_global_object
+/* 8021CBEC 0021724C  38 7D 00 58 */	addi r3, r29, 0x58
+/* 8021CBF0 00217250  93 DD 00 58 */	stw r30, 0x58(r29)
+/* 8021CBF4 00217254  38 9F CC 50 */	addi r4, r31, fn_8021CC50@l
+/* 8021CBF8 00217258  38 BD 00 48 */	addi r5, r29, 0x48
+/* 8021CBFC 0021725C  93 C3 00 04 */	stw r30, 0x4(r3)
+/* 8021CC00 00217260  48 47 88 21 */	bl __register_global_object
+/* 8021CC04 00217264  38 7D 00 70 */	addi r3, r29, 0x70
+/* 8021CC08 00217268  93 DD 00 70 */	stw r30, 0x70(r29)
+/* 8021CC0C 0021726C  38 9F CC 50 */	addi r4, r31, fn_8021CC50@l
+/* 8021CC10 00217270  38 BD 00 60 */	addi r5, r29, 0x60
+/* 8021CC14 00217274  93 C3 00 04 */	stw r30, 0x4(r3)
+/* 8021CC18 00217278  48 47 88 09 */	bl __register_global_object
+/* 8021CC1C 0021727C  38 7D 00 88 */	addi r3, r29, 0x88
+/* 8021CC20 00217280  93 DD 00 88 */	stw r30, 0x88(r29)
+/* 8021CC24 00217284  38 9F CC 50 */	addi r4, r31, fn_8021CC50@l
+/* 8021CC28 00217288  38 BD 00 78 */	addi r5, r29, 0x78
+/* 8021CC2C 0021728C  93 C3 00 04 */	stw r30, 0x4(r3)
+/* 8021CC30 00217290  48 47 87 F1 */	bl __register_global_object
+/* 8021CC34 00217294  80 01 00 24 */	lwz r0, 0x24(r1)
+/* 8021CC38 00217298  83 E1 00 1C */	lwz r31, 0x1c(r1)
+/* 8021CC3C 0021729C  83 C1 00 18 */	lwz r30, 0x18(r1)
+/* 8021CC40 002172A0  83 A1 00 14 */	lwz r29, 0x14(r1)
+/* 8021CC44 002172A4  7C 08 03 A6 */	mtlr r0
+/* 8021CC48 002172A8  38 21 00 20 */	addi r1, r1, 0x20
+/* 8021CC4C 002172AC  4E 80 00 20 */	blr
+.endfn fn_8021CB7C
+
+# 0x8072D308..0x8072D30C | size: 0x4
+.section .ctors, "a"
+.balign 4
+	.4byte fn_8021CB7C

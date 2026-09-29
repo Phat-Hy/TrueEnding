@@ -1,0 +1,34 @@
+.include "macros.inc"
+.file "auto_03_8068B728_text"
+
+# 0x8068B728..0x8068B770 | size: 0x48
+.text
+.balign 4
+
+# .text:0x0 | 0x8068B728 | size: 0x8
+.fn fn_8068B728, global
+/* 8068B728 00685D88  80 63 00 04 */	lwz r3, 0x4(r3)
+/* 8068B72C 00685D8C  4E 80 00 20 */	blr
+.endfn fn_8068B728
+
+# .text:0x8 | 0x8068B730 | size: 0x40
+.fn fn_8068B730, global
+/* 8068B730 00685D90  88 0D AC C5 */	lbz r0, lbl_80880385@sda21(r0)
+/* 8068B734 00685D94  2C 00 00 00 */	cmpwi r0, 0x0
+/* 8068B738 00685D98  40 82 00 18 */	bne .L_8068B750
+/* 8068B73C 00685D9C  88 0D AC C0 */	lbz r0, lbl_80880380@sda21(r0)
+/* 8068B740 00685DA0  7C 00 07 75 */	extsb. r0, r0
+/* 8068B744 00685DA4  40 82 00 0C */	bne .L_8068B750
+/* 8068B748 00685DA8  38 00 00 01 */	li r0, 0x1
+/* 8068B74C 00685DAC  98 0D AC C0 */	stb r0, lbl_80880380@sda21(r0)
+.L_8068B750:
+/* 8068B750 00685DB0  88 0D AC C0 */	lbz r0, lbl_80880380@sda21(r0)
+/* 8068B754 00685DB4  38 60 00 01 */	li r3, 0x1
+/* 8068B758 00685DB8  98 6D AC C5 */	stb r3, lbl_80880385@sda21(r0)
+/* 8068B75C 00685DBC  7C 00 07 75 */	extsb. r0, r0
+/* 8068B760 00685DC0  40 82 00 08 */	bne .L_8068B768
+/* 8068B764 00685DC4  98 6D AC C0 */	stb r3, lbl_80880380@sda21(r0)
+.L_8068B768:
+/* 8068B768 00685DC8  38 6D AC C4 */	li r3, lbl_80880384@sda21
+/* 8068B76C 00685DCC  4E 80 00 20 */	blr
+.endfn fn_8068B730

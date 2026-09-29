@@ -1,0 +1,125 @@
+.include "macros.inc"
+.file "auto_fn_80695720_text"
+
+# 0x80007B94..0x80007BAC | size: 0x18
+.section extab, "a"
+.balign 4
+
+# extab:0x0 | 0x80007B94 | size: 0x18
+.obj "@etb_80007B94", local
+.hidden "@etb_80007B94"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: No
+ * Saved CR: No
+ * Saved GPR range: r27-r31
+ * 
+ * PC actions:
+ * PC=00000070, Action: 000010
+ * 
+ * Exception actions:
+ * 000010:
+ * Type: DESTROYLOCAL
+ * Local: 0x8(SP)
+ * Dtor: "dtor_80695824"
+ * Has end bit
+ */
+	.4byte 0x28080000
+	.4byte 0x00000070
+	.4byte 0x00000010
+	.4byte 0x00000000
+	.4byte 0x82000008
+	.4byte dtor_80695824
+.endobj "@etb_80007B94"
+
+# 0x800080F8..0x80008104 | size: 0xC
+.section extabindex, "a"
+.balign 4
+
+# extabindex:0x0 | 0x800080F8 | size: 0xC
+.obj "@eti_800080F8", local
+.hidden "@eti_800080F8"
+	.4byte fn_80695720
+	.4byte 0x00000104
+	.4byte "@etb_80007B94"
+.endobj "@eti_800080F8"
+
+# 0x80695720..0x80695824 | size: 0x104
+.text
+.balign 4
+
+# .text:0x0 | 0x80695720 | size: 0x104
+.fn fn_80695720, global
+/* 80695720 0068FD80  94 21 FF C0 */	stwu r1, -0x40(r1)
+/* 80695724 0068FD84  7C 08 02 A6 */	mflr r0
+/* 80695728 0068FD88  2C 03 00 00 */	cmpwi r3, 0x0
+/* 8069572C 0068FD8C  90 01 00 44 */	stw r0, 0x44(r1)
+/* 80695730 0068FD90  BF 61 00 2C */	stmw r27, 0x2c(r1)
+/* 80695734 0068FD94  7C 7E 1B 78 */	mr r30, r3
+/* 80695738 0068FD98  7C 9B 23 78 */	mr r27, r4
+/* 8069573C 0068FD9C  7C DC 33 78 */	mr r28, r6
+/* 80695740 0068FDA0  7C FD 3B 78 */	mr r29, r7
+/* 80695744 0068FDA4  41 82 00 C8 */	beq .L_8069580C
+/* 80695748 0068FDA8  2C 04 00 00 */	cmpwi r4, 0x0
+/* 8069574C 0068FDAC  90 C3 00 00 */	stw r6, 0x0(r3)
+/* 80695750 0068FDB0  3B C3 00 10 */	addi r30, r3, 0x10
+/* 80695754 0068FDB4  90 E3 00 04 */	stw r7, 0x4(r3)
+/* 80695758 0068FDB8  41 82 00 B4 */	beq .L_8069580C
+/* 8069575C 0068FDBC  38 00 00 00 */	li r0, 0x0
+/* 80695760 0068FDC0  93 C1 00 08 */	stw r30, 0x8(r1)
+/* 80695764 0068FDC4  7F DF F3 78 */	mr r31, r30
+/* 80695768 0068FDC8  90 C1 00 0C */	stw r6, 0xc(r1)
+/* 8069576C 0068FDCC  90 E1 00 10 */	stw r7, 0x10(r1)
+/* 80695770 0068FDD0  90 A1 00 14 */	stw r5, 0x14(r1)
+/* 80695774 0068FDD4  90 01 00 18 */	stw r0, 0x18(r1)
+/* 80695778 0068FDD8  48 00 00 28 */	b .L_806957A0
+.L_8069577C:
+/* 8069577C 0068FDDC  7F 6C DB 78 */	mr r12, r27
+/* 80695780 0068FDE0  7F E3 FB 78 */	mr r3, r31
+/* 80695784 0068FDE4  38 80 00 01 */	li r4, 0x1
+/* 80695788 0068FDE8  7D 89 03 A6 */	mtctr r12
+/* 8069578C 0068FDEC  4E 80 04 21 */	bctrl
+/* 80695790 0068FDF0  80 61 00 18 */	lwz r3, 0x18(r1)
+/* 80695794 0068FDF4  7F FF E2 14 */	add r31, r31, r28
+/* 80695798 0068FDF8  38 03 00 01 */	addi r0, r3, 0x1
+/* 8069579C 0068FDFC  90 01 00 18 */	stw r0, 0x18(r1)
+.L_806957A0:
+/* 806957A0 0068FE00  80 81 00 18 */	lwz r4, 0x18(r1)
+/* 806957A4 0068FE04  7C 04 E8 40 */	cmplw r4, r29
+/* 806957A8 0068FE08  41 80 FF D4 */	blt .L_8069577C
+/* 806957AC 0068FE0C  80 01 00 10 */	lwz r0, 0x10(r1)
+/* 806957B0 0068FE10  7C 04 00 40 */	cmplw r4, r0
+/* 806957B4 0068FE14  40 80 00 58 */	bge .L_8069580C
+/* 806957B8 0068FE18  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 806957BC 0068FE1C  2C 00 00 00 */	cmpwi r0, 0x0
+/* 806957C0 0068FE20  41 82 00 4C */	beq .L_8069580C
+/* 806957C4 0068FE24  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 806957C8 0068FE28  80 61 00 08 */	lwz r3, 0x8(r1)
+/* 806957CC 0068FE2C  7C 00 21 D6 */	mullw r0, r0, r4
+/* 806957D0 0068FE30  7F E3 02 14 */	add r31, r3, r0
+/* 806957D4 0068FE34  48 00 00 2C */	b .L_80695800
+.L_806957D8:
+/* 806957D8 0068FE38  80 01 00 0C */	lwz r0, 0xc(r1)
+/* 806957DC 0068FE3C  38 80 FF FF */	li r4, -0x1
+/* 806957E0 0068FE40  81 81 00 14 */	lwz r12, 0x14(r1)
+/* 806957E4 0068FE44  7F E0 F8 50 */	subf r31, r0, r31
+/* 806957E8 0068FE48  7F E3 FB 78 */	mr r3, r31
+/* 806957EC 0068FE4C  7D 89 03 A6 */	mtctr r12
+/* 806957F0 0068FE50  4E 80 04 21 */	bctrl
+/* 806957F4 0068FE54  80 61 00 18 */	lwz r3, 0x18(r1)
+/* 806957F8 0068FE58  38 03 FF FF */	subi r0, r3, 0x1
+/* 806957FC 0068FE5C  90 01 00 18 */	stw r0, 0x18(r1)
+.L_80695800:
+/* 80695800 0068FE60  80 01 00 18 */	lwz r0, 0x18(r1)
+/* 80695804 0068FE64  2C 00 00 00 */	cmpwi r0, 0x0
+/* 80695808 0068FE68  40 82 FF D0 */	bne .L_806957D8
+.L_8069580C:
+/* 8069580C 0068FE6C  7F C3 F3 78 */	mr r3, r30
+/* 80695810 0068FE70  BB 61 00 2C */	lmw r27, 0x2c(r1)
+/* 80695814 0068FE74  80 01 00 44 */	lwz r0, 0x44(r1)
+/* 80695818 0068FE78  7C 08 03 A6 */	mtlr r0
+/* 8069581C 0068FE7C  38 21 00 40 */	addi r1, r1, 0x40
+/* 80695820 0068FE80  4E 80 00 20 */	blr
+.endfn fn_80695720

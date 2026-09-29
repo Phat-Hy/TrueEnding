@@ -1,0 +1,272 @@
+.include "macros.inc"
+.file "auto_fn_80691F24_text"
+
+# 0x80007694..0x80007754 | size: 0xC0
+.section extab, "a"
+.balign 4
+
+# extab:0x0 | 0x80007694 | size: 0xC0
+.obj "@etb_80007694", local
+.hidden "@etb_80007694"
+/*
+ * Flag values:
+ * Has Elf Vector: No
+ * Large Frame: Yes
+ * Has Frame Pointer: Yes
+ * Saved CR: No
+ * Saved GPR range: r26-r31
+ * 
+ * PC actions:
+ * PC=000000F8, Action: 000018
+ * PC=0000017C, Action: 0000BC
+ * 
+ * Exception actions:
+ * 000018:
+ * Type: DESTROYLOCAL
+ * Local: 0x10(FP)
+ * Dtor: "dtor_80691EE4"
+ * 000020:
+ * Type: DESTROYMEMBER
+ * Member: 0xC(r29)
+ * Dtor: "dtor_80013D60"
+ * 00002C:
+ * Type: DESTROYMEMBER
+ * Member: 0x0(r29)
+ * Dtor: "dtor_80691E68"
+ * 000038:
+ * Type: DESTROYMEMBER
+ * Member: 0xC(r29)
+ * Dtor: "dtor_80013D60"
+ * 000044:
+ * Type: DESTROYMEMBER
+ * Member: 0x0(r29)
+ * Dtor: "dtor_80691E68"
+ * 000050:
+ * Type: DESTROYMEMBER
+ * Member: 0xC(r29)
+ * Dtor: "dtor_80013D60"
+ * 00005C:
+ * Type: DESTROYMEMBER
+ * Member: 0x0(r29)
+ * Dtor: "dtor_80691E68"
+ * 000068:
+ * Type: DESTROYMEMBER
+ * Member: 0xC(r29)
+ * Dtor: "dtor_80013D60"
+ * 000074:
+ * Type: DESTROYMEMBER
+ * Member: 0x0(r29)
+ * Dtor: "dtor_80691E68"
+ * 000080:
+ * Type: DESTROYMEMBER
+ * Member: 0xC(r29)
+ * Dtor: "dtor_80013D60"
+ * 00008C:
+ * Type: DESTROYMEMBER
+ * Member: 0x0(r29)
+ * Dtor: "dtor_80691E68"
+ * 000098:
+ * Type: DESTROYMEMBER
+ * Member: 0xC(r29)
+ * Dtor: "dtor_80013D60"
+ * 0000A4:
+ * Type: DESTROYMEMBER
+ * Member: 0x0(r29)
+ * Dtor: "dtor_80691E68"
+ * 0000B0:
+ * Type: SPECIFICATION
+ * Local: 0x48(FP)
+ * PC: 00000174
+ * Types: 0
+ * Has end bit
+ * 0000BC:
+ * Type: ACTIVECATCHBLOCK
+ * Local: 0x48(FP)
+ * Has end bit
+ */
+	.4byte 0x30180000
+	.4byte 0x000000F8
+	.4byte 0x00000018
+	.4byte 0x0000017C
+	.4byte 0x000000BC
+	.4byte 0x00000000
+	.4byte 0x02000010
+	.4byte dtor_80691EE4
+	.4byte 0x0780001D
+	.4byte 0x0000000C
+	.4byte dtor_80013D60
+	.4byte 0x0780001D
+	.4byte 0x00000000
+	.4byte dtor_80691E68
+	.4byte 0x0780001D
+	.4byte 0x0000000C
+	.4byte dtor_80013D60
+	.4byte 0x0780001D
+	.4byte 0x00000000
+	.4byte dtor_80691E68
+	.4byte 0x0780001D
+	.4byte 0x0000000C
+	.4byte dtor_80013D60
+	.4byte 0x0780001D
+	.4byte 0x00000000
+	.4byte dtor_80691E68
+	.4byte 0x0780001D
+	.4byte 0x0000000C
+	.4byte dtor_80013D60
+	.4byte 0x0780001D
+	.4byte 0x00000000
+	.4byte dtor_80691E68
+	.4byte 0x0780001D
+	.4byte 0x0000000C
+	.4byte dtor_80013D60
+	.4byte 0x0780001D
+	.4byte 0x00000000
+	.4byte dtor_80691E68
+	.4byte 0x0780001D
+	.4byte 0x0000000C
+	.4byte dtor_80013D60
+	.4byte 0x0780001D
+	.4byte 0x00000000
+	.4byte dtor_80691E68
+	.4byte 0x8F000000
+	.4byte 0x00000174
+	.4byte 0x00000048
+	.4byte 0x8D000048
+.endobj "@etb_80007694"
+
+# 0x80007FB4..0x80007FC0 | size: 0xC
+.section extabindex, "a"
+.balign 4
+
+# extabindex:0x0 | 0x80007FB4 | size: 0xC
+.obj "@eti_80007FB4", local
+.hidden "@eti_80007FB4"
+	.4byte fn_80691F24
+	.4byte 0x0000019C
+	.4byte "@etb_80007694"
+.endobj "@eti_80007FB4"
+
+# 0x80691F24..0x806920C0 | size: 0x19C
+.text
+.balign 4
+
+# .text:0x0 | 0x80691F24 | size: 0x19C
+.fn fn_80691F24, global
+/* 80691F24 0068C584  94 21 FF 80 */	stwu r1, -0x80(r1)
+/* 80691F28 0068C588  7C 08 02 A6 */	mflr r0
+/* 80691F2C 0068C58C  2C 03 00 00 */	cmpwi r3, 0x0
+/* 80691F30 0068C590  90 01 00 84 */	stw r0, 0x84(r1)
+/* 80691F34 0068C594  BF 41 00 68 */	stmw r26, 0x68(r1)
+/* 80691F38 0068C598  7C 3F 0B 78 */	mr r31, r1
+/* 80691F3C 0068C59C  7C 7D 1B 78 */	mr r29, r3
+/* 80691F40 0068C5A0  7C 9E 23 78 */	mr r30, r4
+/* 80691F44 0068C5A4  41 82 01 4C */	beq .L_80692090
+/* 80691F48 0068C5A8  88 0D AC E4 */	lbz r0, lbl_808803A4@sda21(r0)
+/* 80691F4C 0068C5AC  2C 00 00 00 */	cmpwi r0, 0x0
+/* 80691F50 0068C5B0  40 82 00 30 */	bne .L_80691F80
+/* 80691F54 0068C5B4  80 0D AC E0 */	lwz r0, lbl_808803A0@sda21(r0)
+/* 80691F58 0068C5B8  2C 00 00 00 */	cmpwi r0, 0x0
+/* 80691F5C 0068C5BC  40 82 00 24 */	bne .L_80691F80
+/* 80691F60 0068C5C0  38 0D AC D8 */	li r0, lbl_80880398@sda21
+/* 80691F64 0068C5C4  2C 00 00 00 */	cmpwi r0, 0x0
+/* 80691F68 0068C5C8  41 82 00 08 */	beq .L_80691F70
+/* 80691F6C 0068C5CC  90 3F 00 44 */	stw r1, 0x44(r31)
+.L_80691F70:
+/* 80691F70 0068C5D0  3C 60 80 69 */	lis r3, fn_80691E50@ha
+/* 80691F74 0068C5D4  90 0D AC E0 */	stw r0, lbl_808803A0@sda21(r0)
+/* 80691F78 0068C5D8  38 63 1E 50 */	addi r3, r3, fn_80691E50@l
+/* 80691F7C 0068C5DC  4B FF 4F 5D */	bl fn_80686ED8
+.L_80691F80:
+/* 80691F80 0068C5E0  80 0D AC E0 */	lwz r0, lbl_808803A0@sda21(r0)
+/* 80691F84 0068C5E4  38 60 00 01 */	li r3, 0x1
+/* 80691F88 0068C5E8  98 6D AC E4 */	stb r3, lbl_808803A4@sda21(r0)
+/* 80691F8C 0068C5EC  2C 00 00 00 */	cmpwi r0, 0x0
+/* 80691F90 0068C5F0  40 82 00 24 */	bne .L_80691FB4
+/* 80691F94 0068C5F4  38 0D AC D8 */	li r0, lbl_80880398@sda21
+/* 80691F98 0068C5F8  2C 00 00 00 */	cmpwi r0, 0x0
+/* 80691F9C 0068C5FC  41 82 00 08 */	beq .L_80691FA4
+/* 80691FA0 0068C600  90 3F 00 2C */	stw r1, 0x2c(r31)
+.L_80691FA4:
+/* 80691FA4 0068C604  3C 60 80 69 */	lis r3, fn_80691E50@ha
+/* 80691FA8 0068C608  90 0D AC E0 */	stw r0, lbl_808803A0@sda21(r0)
+/* 80691FAC 0068C60C  38 63 1E 50 */	addi r3, r3, fn_80691E50@l
+/* 80691FB0 0068C610  4B FF 4F 29 */	bl fn_80686ED8
+.L_80691FB4:
+/* 80691FB4 0068C614  80 6D AC E0 */	lwz r3, lbl_808803A0@sda21(r0)
+/* 80691FB8 0068C618  38 00 00 01 */	li r0, 0x1
+/* 80691FBC 0068C61C  90 7F 00 10 */	stw r3, 0x10(r31)
+/* 80691FC0 0068C620  3B 40 00 00 */	li r26, 0x0
+/* 80691FC4 0068C624  83 7D 00 04 */	lwz r27, 0x4(r29)
+/* 80691FC8 0068C628  3B 80 00 00 */	li r28, 0x0
+/* 80691FCC 0068C62C  98 1F 00 14 */	stb r0, 0x14(r31)
+/* 80691FD0 0068C630  48 00 00 54 */	b .L_80692024
+.L_80691FD4:
+/* 80691FD4 0068C634  80 7D 00 00 */	lwz r3, 0x0(r29)
+/* 80691FD8 0068C638  7C 63 E0 2E */	lwzx r3, r3, r28
+/* 80691FDC 0068C63C  2C 03 00 00 */	cmpwi r3, 0x0
+/* 80691FE0 0068C640  41 82 00 3C */	beq .L_8069201C
+/* 80691FE4 0068C644  80 03 00 04 */	lwz r0, 0x4(r3)
+/* 80691FE8 0068C648  34 00 FF FF */	subic. r0, r0, 0x1
+/* 80691FEC 0068C64C  90 03 00 04 */	stw r0, 0x4(r3)
+/* 80691FF0 0068C650  40 82 00 08 */	bne .L_80691FF8
+/* 80691FF4 0068C654  48 00 00 08 */	b .L_80691FFC
+.L_80691FF8:
+/* 80691FF8 0068C658  38 60 00 00 */	li r3, 0x0
+.L_80691FFC:
+/* 80691FFC 0068C65C  2C 03 00 00 */	cmpwi r3, 0x0
+/* 80692000 0068C660  41 82 00 1C */	beq .L_8069201C
+/* 80692004 0068C664  81 83 00 00 */	lwz r12, 0x0(r3)
+/* 80692008 0068C668  38 00 00 01 */	li r0, 0x1
+/* 8069200C 0068C66C  7C 04 07 34 */	extsh r4, r0
+/* 80692010 0068C670  81 8C 00 08 */	lwz r12, 0x8(r12)
+/* 80692014 0068C674  7D 89 03 A6 */	mtctr r12
+/* 80692018 0068C678  4E 80 04 21 */	bctrl
+.L_8069201C:
+/* 8069201C 0068C67C  3B 9C 00 04 */	addi r28, r28, 0x4
+/* 80692020 0068C680  3B 5A 00 01 */	addi r26, r26, 0x1
+.L_80692024:
+/* 80692024 0068C684  7C 1A D8 40 */	cmplw r26, r27
+/* 80692028 0068C688  41 80 FF AC */	blt .L_80691FD4
+/* 8069202C 0068C68C  34 1D 00 0C */	addic. r0, r29, 0xc
+/* 80692030 0068C690  41 82 00 18 */	beq .L_80692048
+/* 80692034 0068C694  80 1D 00 0C */	lwz r0, 0xc(r29)
+/* 80692038 0068C698  54 00 0F FF */	srwi. r0, r0, 31
+/* 8069203C 0068C69C  41 82 00 0C */	beq .L_80692048
+/* 80692040 0068C6A0  80 7D 00 14 */	lwz r3, 0x14(r29)
+/* 80692044 0068C6A4  4B 9F 26 41 */	bl dtor_80084684
+.L_80692048:
+/* 80692048 0068C6A8  2C 1D 00 00 */	cmpwi r29, 0x0
+/* 8069204C 0068C6AC  41 82 00 34 */	beq .L_80692080
+/* 80692050 0068C6B0  41 82 00 30 */	beq .L_80692080
+/* 80692054 0068C6B4  41 82 00 2C */	beq .L_80692080
+/* 80692058 0068C6B8  41 82 00 28 */	beq .L_80692080
+/* 8069205C 0068C6BC  80 7D 00 00 */	lwz r3, 0x0(r29)
+/* 80692060 0068C6C0  2C 03 00 00 */	cmpwi r3, 0x0
+/* 80692064 0068C6C4  41 82 00 1C */	beq .L_80692080
+/* 80692068 0068C6C8  80 9D 00 04 */	lwz r4, 0x4(r29)
+/* 8069206C 0068C6CC  38 00 00 00 */	li r0, 0x0
+/* 80692070 0068C6D0  98 1F 00 08 */	stb r0, 0x8(r31)
+/* 80692074 0068C6D4  7C 04 20 50 */	subf r0, r4, r4
+/* 80692078 0068C6D8  90 1D 00 04 */	stw r0, 0x4(r29)
+/* 8069207C 0068C6DC  4B 9F 26 09 */	bl dtor_80084684
+.L_80692080:
+/* 80692080 0068C6E0  7F C0 07 35 */	extsh. r0, r30
+/* 80692084 0068C6E4  40 81 00 0C */	ble .L_80692090
+/* 80692088 0068C6E8  7F A3 EB 78 */	mr r3, r29
+/* 8069208C 0068C6EC  4B 9F 25 F9 */	bl dtor_80084684
+.L_80692090:
+/* 80692090 0068C6F0  7F A3 EB 78 */	mr r3, r29
+/* 80692094 0068C6F4  48 00 00 10 */	b .L_806920A4
+/* 80692098 0068C6F8  38 7F 00 48 */	addi r3, r31, 0x48
+/* 8069209C 0068C6FC  48 00 54 19 */	bl fn_806974B4
+.L_806920A0:
+/* 806920A0 0068C700  48 00 00 00 */	b .L_806920A0
+.L_806920A4:
+/* 806920A4 0068C704  7F EA FB 78 */	mr r10, r31
+/* 806920A8 0068C708  BB 4A 00 68 */	lmw r26, 0x68(r10)
+/* 806920AC 0068C70C  81 41 00 00 */	lwz r10, 0x0(r1)
+/* 806920B0 0068C710  80 0A 00 04 */	lwz r0, 0x4(r10)
+/* 806920B4 0068C714  7D 41 53 78 */	mr r1, r10
+/* 806920B8 0068C718  7C 08 03 A6 */	mtlr r0
+/* 806920BC 0068C71C  4E 80 00 20 */	blr
+.endfn fn_80691F24

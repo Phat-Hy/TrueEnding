@@ -17,7 +17,8 @@
 | **STEP-004** | `2026-09-29T20:53:00+07:00` | Plan | Formulated `plans/001-tls-decomp-and-recomp-pipeline.md` & Journal tracking system | **Completed** | `plan-init` |
 | **STEP-005** | `2026-09-29T20:55:00+07:00` | Build | Configured `.gitignore` and initialized local git repository with tracking tags | **Completed** | `repo-init` |
 | **STEP-006** | `2026-09-29T21:25:00+07:00` | Ingest | Extracted 8.18MB `main.dol` (monolithic, 0 `.rel`s); identified CodeWarrior v4.3 b145 & RVL_SDK 3.2+ | **Completed** | `ingest-dol` |
-| **STEP-007** | *Up Next* | Setup | Download & configure `dtk` (decomp-toolkit) to split sections and generate symbols map | **In Progress** | `dtk-setup` |
+| **STEP-007** | `2026-09-29T21:27:00+07:00` | Setup | Installed `dtk` v1.8.4; successfully analyzed 8.18MB `main.dol`, discovered 18,103 functions, and split 361 object slices | **Completed** | `dtk-split` |
+| **STEP-008** | *Up Next* | Build | Configure build environment (`configure.py` / `ninja`), CodeWarrior toolchain, and `objdiff.json` | **In Progress** | `build-env` |
 
 ---
 
