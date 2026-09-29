@@ -21,7 +21,8 @@
 | **STEP-008** | `2026-09-29T21:45:00+07:00` | Build | Configured build system (`configure.py` + `ninja`), CodeWarrior v4.3 b145 toolchain, and `objdiff.json` | **Completed** | `build-env` |
 | **STEP-009** | `2026-09-29T21:47:00+07:00` | Match | Decompiled `src/__init_cpp_exceptions.cpp` and achieved first **100.0% byte-for-byte binary match**! | **Completed** | `match-first-fn` |
 | **STEP-010** | `2026-09-29T22:20:00+07:00` | Match | Decompiled `global_destructor_chain.c`, `__init_hardware.c`, `memcpy.c`, `memset.c` (5 units, 9 functions, 1,192 bytes — **100.0% matched**!) | **Completed** | `decomp-startup-done` |
-| **STEP-011** | *Up Next* | Decomp | Map RVL-SDK Core Subsystems (`OSInit`, `OSAlloc`, `OSThread`, `GX`, `DVD`) and decompile OS initialization | **In Progress** | `decomp-os-init` |
+| **STEP-011** | `2026-09-30T01:00:00+07:00` | Match | Decompiled core RVL-SDK subsystem `src/OSTime.c` (6 functions, 1,704 bytes code, 96 bytes data tables — **100.0% byte-for-byte binary match**!) | **Completed** | `decomp-os-time` |
+| **STEP-012** | *Up Next* | Decomp | Decompile and match RVL-SDK `OSThread.c` threading and context switching subsystem | **In Progress** | `decomp-os-thread` |
 
 ---
 
@@ -50,3 +51,7 @@ Each milestone is associated with a Git commit and tag. If you ever need to roll
 * **ADR-002 (Dual-Track Strategy)**: Pursue matching C/C++ source decompilation for engine reconstruction and modding, while maintaining a parallel static recompilation track (`DolRecomp` + `ModernGekko`) for accelerated native PC bringup.
 * **ADR-003 (Clean Room & Copyright Hygiene)**: Disc images, raw ROM dumps, proprietary asset packs, and proprietary Metrowerks CodeWarrior binaries are strictly excluded from git tracking via `.gitignore`.
 * **ADR-004 (Platform Abstraction Layer)**: Decouple all RVL-SDK calls (`GX` graphics, `AX` audio, `WPAD` input, `DVD` disk IO) behind modular HAL interfaces to allow drop-in replacement with modern PC backends (SDL2, DirectX 11/12, Vulkan).
+* **ADR-005 (CodeWarrior 4.3 b145 Optimization & Variable Allocation Heuristics)**:
+  - Non-volatile register allocation in CodeWarrior PPC is heavily sensitive to declaration order and common subexpression elimination (CSE).
+  - Division and modulo operations across 64-bit `OSTime` produce optimal temporary spills (`r26`, `r28`) when evaluated as common subexpressions rather than mutating the input l-value.
+  - In `OSTime.c`, leap-year calculation relies on the static inline helper `__OSGetLeapDays(year)` which is shared between `OSTicksToCalendarTime` and `OSCalendarTimeToTicks`.

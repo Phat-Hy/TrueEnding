@@ -119,6 +119,23 @@ cflags_base = [
     "-i ./src",
 ]
 
+# Base C/C++ compiler flags for OS library
+cflags_os = [
+    "-nodefaults",
+    "-proc gekko",
+    "-align powerpc",
+    "-enum int",
+    "-fp hard",
+    "-O4,p",
+    "-inline auto",
+    "-Cpp_exceptions on",
+    "-RTTI off",
+    "-sdata 8",
+    "-sdata2 8",
+    "-i ./include",
+    "-i ./src",
+]
+
 config.cflags = cflags_base
 
 # Registered libraries and translation units
@@ -133,6 +150,14 @@ config.libs = [
             Object(True, "memset.c"),
             Object(True, "global_destructor_chain.c"),
             Object(True, "__init_cpp_exceptions.cpp"),
+        ],
+    },
+    {
+        "lib": "OS",
+        "mw_version": "Wii/1.0",
+        "cflags": cflags_os,
+        "objects": [
+            Object(True, "OSTime.c"),
         ],
     },
 ]

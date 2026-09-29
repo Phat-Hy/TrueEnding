@@ -13,6 +13,13 @@ Sections:
 	.sdata2     type:rodata align:32
 	.sbss2      type:bss align:8
 
+OSThread.c:
+	.text       start:0x805F4930 end:0x805F5F90
+
+OSTime.c:
+	.text       start:0x805F5F90 end:0x805F6660
+	.data       start:0x8079DA60 end:0x8079DAC0
+
 global_destructor_chain.c:
 	.text       start:0x80695420 end:0x80695480
 

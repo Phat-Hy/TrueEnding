@@ -97,14 +97,6 @@
       }
     },
     {
-      "name": "main/auto_07_807BADF8_data",
-      "target_path": "build/SLSEXJ/obj/auto_07_807BADF8_data.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
       "name": "main/auto_06_8072D480_rodata",
       "target_path": "build/SLSEXJ/obj/auto_06_8072D480_rodata.o",
       "metadata": {
@@ -1499,6 +1491,57 @@
     {
       "name": "main/auto_03_805E06D4_text",
       "target_path": "build/SLSEXJ/obj/auto_03_805E06D4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/OSThread",
+      "target_path": "build/SLSEXJ/obj/OSThread.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/OSTime",
+      "target_path": "build/SLSEXJ/obj/OSTime.o",
+      "base_path": "build/SLSEXJ/src/OSTime.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/OSTime.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/OSTime.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/auto_07_8079DAC0_data",
+      "target_path": "build/SLSEXJ/obj/auto_07_8079DAC0_data.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_07_807BADF8_data",
+      "target_path": "build/SLSEXJ/obj/auto_07_807BADF8_data.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_805F6660_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_805F6660_text.o",
       "metadata": {
         "progress_categories": [],
         "auto_generated": true
