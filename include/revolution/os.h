@@ -2,26 +2,14 @@
 #define REVOLUTION_OS_H
 
 #include "revolution/types.h"
+#include "revolution/os/OSTime.h"
+#include "revolution/os/OSContext.h"
+#include "revolution/os/OSThread.h"
+#include "revolution/os/OSAlarm.h"
 
 #ifdef __cplusplus
 extern "C" {
 #endif
-
-typedef s64 OSTime;
-typedef u32 OSTick;
-
-typedef struct OSCalendarTime {
-    int sec;   // 0x00
-    int min;   // 0x04
-    int hour;  // 0x08
-    int mday;  // 0x0C
-    int mon;   // 0x10
-    int year;  // 0x14
-    int wday;  // 0x18
-    int yday;  // 0x1C
-    int msec;  // 0x20
-    int usec;  // 0x24
-} OSCalendarTime;
 
 #define OS_BUS_CLOCK (*(u32*)0x800000F8)
 #define OS_CORE_CLOCK (*(u32*)0x800000FC)
@@ -41,13 +29,6 @@ typedef struct OSCalendarTime {
 BOOL OSDisableInterrupts(void);
 BOOL OSEnableInterrupts(void);
 BOOL OSRestoreInterrupts(BOOL level);
-
-OSTime OSGetTime(void);
-OSTick OSGetTick(void);
-OSTime __OSGetSystemTime(void);
-OSTime __OSTimeToSystemTime(OSTime time);
-void OSTicksToCalendarTime(OSTime ticks, OSCalendarTime* td);
-OSTime OSCalendarTimeToTicks(const OSCalendarTime* td);
 
 #ifdef __cplusplus
 }

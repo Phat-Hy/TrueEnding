@@ -1560,14 +1560,14 @@
 .endobj DefaultThread_807CB658
 
 # .bss:0x52B0 | 0x807CB970 | size: 0x100
-.obj lbl_807CB970, global
+.obj RunQueue, global
 	.skip 0x100
-.endobj lbl_807CB970
+.endobj RunQueue
 
 # .bss:0x53B0 | 0x807CBA70 | size: 0x5F0
-.obj lbl_807CBA70, global
+.obj IdleContext, global
 	.skip 0x5F0
-.endobj lbl_807CBA70
+.endobj IdleContext
 
 # .bss:0x59A0 | 0x807CC060 | size: 0x20
 .obj StmEhInBuf_807CC060, global

@@ -1,11 +1,24 @@
 .include "macros.inc"
 .file "OSThread.c"
 
-# 0x805F4930..0x805F5F90 | size: 0x1660
+# 0x805F4920..0x805F5F90 | size: 0x1670
 .text
 .balign 4
 
-# .text:0x0 | 0x805F4930 | size: 0x284
+# .text:0x0 | 0x805F4920 | size: 0x4
+.fn DefaultSwitchThreadCallback, global
+/* 805F4920 005EEF80  4E 80 00 20 */	blr
+.endfn DefaultSwitchThreadCallback
+
+# .text:0x4 | 0x805F4924 | size: 0xC
+.fn gap_03_805F4924_text, global
+.hidden gap_03_805F4924_text
+/* 805F4924 005EEF84  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+/* 805F4928 005EEF88  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+/* 805F492C 005EEF8C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+.endfn gap_03_805F4924_text
+
+# .text:0x10 | 0x805F4930 | size: 0x284
 .fn __OSThreadInit, global
 /* 805F4930 005EEF90  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 805F4934 005EEF94  7C 08 02 A6 */	mflr r0
@@ -178,7 +191,7 @@
 /* 805F4BB0 005EF210  4E 80 00 20 */	blr
 .endfn __OSThreadInit
 
-# .text:0x284 | 0x805F4BB4 | size: 0xC
+# .text:0x294 | 0x805F4BB4 | size: 0xC
 .fn gap_03_805F4BB4_text, global
 .hidden gap_03_805F4BB4_text
 /* 805F4BB4 005EF214  00 00 00 00 */	.4byte 0x00000000 /* invalid */
@@ -186,7 +199,7 @@
 /* 805F4BBC 005EF21C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F4BB4_text
 
-# .text:0x290 | 0x805F4BC0 | size: 0x10
+# .text:0x2A0 | 0x805F4BC0 | size: 0x10
 .fn OSInitThreadQueue, global
 /* 805F4BC0 005EF220  38 00 00 00 */	li r0, 0x0
 /* 805F4BC4 005EF224  90 03 00 04 */	stw r0, 0x4(r3)
@@ -194,29 +207,29 @@
 /* 805F4BCC 005EF22C  4E 80 00 20 */	blr
 .endfn OSInitThreadQueue
 
-# .text:0x2A0 | 0x805F4BD0 | size: 0xC
-.fn fn_805F4BD0, global
+# .text:0x2B0 | 0x805F4BD0 | size: 0xC
+.fn OSGetCurrentThread, global
 /* 805F4BD0 005EF230  3C 60 80 00 */	lis r3, 0x8000
 /* 805F4BD4 005EF234  80 63 00 E4 */	lwz r3, 0xe4(r3)
 /* 805F4BD8 005EF238  4E 80 00 20 */	blr
-.endfn fn_805F4BD0
+.endfn OSGetCurrentThread
 
-# .text:0x2AC | 0x805F4BDC | size: 0x4
+# .text:0x2BC | 0x805F4BDC | size: 0x4
 .fn gap_03_805F4BDC_text, global
 .hidden gap_03_805F4BDC_text
 /* 805F4BDC 005EF23C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F4BDC_text
 
-# .text:0x2B0 | 0x805F4BE0 | size: 0x14
-.fn fn_805F4BE0, global
+# .text:0x2C0 | 0x805F4BE0 | size: 0x14
+.fn OSIsThreadSuspended, global
 /* 805F4BE0 005EF240  80 63 02 CC */	lwz r3, 0x2cc(r3)
 /* 805F4BE4 005EF244  7C 03 00 D0 */	neg r0, r3
 /* 805F4BE8 005EF248  7C 00 18 78 */	andc r0, r0, r3
 /* 805F4BEC 005EF24C  54 03 0F FE */	srwi r3, r0, 31
 /* 805F4BF0 005EF250  4E 80 00 20 */	blr
-.endfn fn_805F4BE0
+.endfn OSIsThreadSuspended
 
-# .text:0x2C4 | 0x805F4BF4 | size: 0xC
+# .text:0x2D4 | 0x805F4BF4 | size: 0xC
 .fn gap_03_805F4BF4_text, global
 .hidden gap_03_805F4BF4_text
 /* 805F4BF4 005EF254  00 00 00 00 */	.4byte 0x00000000 /* invalid */
@@ -224,8 +237,8 @@
 /* 805F4BFC 005EF25C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F4BF4_text
 
-# .text:0x2D0 | 0x805F4C00 | size: 0x2C
-.fn fn_805F4C00, global
+# .text:0x2E0 | 0x805F4C00 | size: 0x2C
+.fn OSIsThreadTerminated, global
 /* 805F4C00 005EF260  A0 03 02 C8 */	lhz r0, 0x2c8(r3)
 /* 805F4C04 005EF264  38 60 00 01 */	li r3, 0x1
 /* 805F4C08 005EF268  28 00 00 08 */	cmplwi r0, 0x8
@@ -238,15 +251,15 @@
 /* 805F4C20 005EF280  7C 00 1B 78 */	or r0, r0, r3
 /* 805F4C24 005EF284  54 03 0F FE */	srwi r3, r0, 31
 /* 805F4C28 005EF288  4E 80 00 20 */	blr
-.endfn fn_805F4C00
+.endfn OSIsThreadTerminated
 
-# .text:0x2FC | 0x805F4C2C | size: 0x4
+# .text:0x30C | 0x805F4C2C | size: 0x4
 .fn gap_03_805F4C2C_text, global
 .hidden gap_03_805F4C2C_text
 /* 805F4C2C 005EF28C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F4C2C_text
 
-# .text:0x300 | 0x805F4C30 | size: 0x3C
+# .text:0x310 | 0x805F4C30 | size: 0x3C
 .fn OSDisableScheduler, global
 /* 805F4C30 005EF290  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 805F4C34 005EF294  7C 08 02 A6 */	mflr r0
@@ -265,13 +278,13 @@
 /* 805F4C68 005EF2C8  4E 80 00 20 */	blr
 .endfn OSDisableScheduler
 
-# .text:0x33C | 0x805F4C6C | size: 0x4
+# .text:0x34C | 0x805F4C6C | size: 0x4
 .fn gap_03_805F4C6C_text, global
 .hidden gap_03_805F4C6C_text
 /* 805F4C6C 005EF2CC  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F4C6C_text
 
-# .text:0x340 | 0x805F4C70 | size: 0x3C
+# .text:0x350 | 0x805F4C70 | size: 0x3C
 .fn OSEnableScheduler, global
 /* 805F4C70 005EF2D0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 805F4C74 005EF2D4  7C 08 02 A6 */	mflr r0
@@ -290,14 +303,14 @@
 /* 805F4CA8 005EF308  4E 80 00 20 */	blr
 .endfn OSEnableScheduler
 
-# .text:0x37C | 0x805F4CAC | size: 0x4
+# .text:0x38C | 0x805F4CAC | size: 0x4
 .fn gap_03_805F4CAC_text, global
 .hidden gap_03_805F4CAC_text
 /* 805F4CAC 005EF30C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F4CAC_text
 
-# .text:0x380 | 0x805F4CB0 | size: 0x68
-.fn fn_805F4CB0, global
+# .text:0x390 | 0x805F4CB0 | size: 0x68
+.fn UnsetRun, global
 /* 805F4CB0 005EF310  80 A3 02 E0 */	lwz r5, 0x2e0(r3)
 /* 805F4CB4 005EF314  80 83 02 DC */	lwz r4, 0x2dc(r3)
 /* 805F4CB8 005EF318  2C 05 00 00 */	cmpwi r5, 0x0
@@ -329,17 +342,17 @@
 /* 805F4D0C 005EF36C  38 00 00 00 */	li r0, 0x0
 /* 805F4D10 005EF370  90 03 02 DC */	stw r0, 0x2dc(r3)
 /* 805F4D14 005EF374  4E 80 00 20 */	blr
-.endfn fn_805F4CB0
+.endfn UnsetRun
 
-# .text:0x3E8 | 0x805F4D18 | size: 0x8
+# .text:0x3F8 | 0x805F4D18 | size: 0x8
 .fn gap_03_805F4D18_text, global
 .hidden gap_03_805F4D18_text
 /* 805F4D18 005EF378  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 /* 805F4D1C 005EF37C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F4D18_text
 
-# .text:0x3F0 | 0x805F4D20 | size: 0x40
-.fn fn_805F4D20, global
+# .text:0x400 | 0x805F4D20 | size: 0x40
+.fn __OSGetEffectivePriority, global
 /* 805F4D20 005EF380  80 83 02 D4 */	lwz r4, 0x2d4(r3)
 /* 805F4D24 005EF384  80 63 02 F4 */	lwz r3, 0x2f4(r3)
 /* 805F4D28 005EF388  48 00 00 28 */	b .L_805F4D50
@@ -359,10 +372,10 @@
 /* 805F4D54 005EF3B4  40 82 FF DC */	bne .L_805F4D30
 /* 805F4D58 005EF3B8  7C 83 23 78 */	mr r3, r4
 /* 805F4D5C 005EF3BC  4E 80 00 20 */	blr
-.endfn fn_805F4D20
+.endfn __OSGetEffectivePriority
 
-# .text:0x430 | 0x805F4D60 | size: 0x1A8
-.fn fn_805F4D60, global
+# .text:0x440 | 0x805F4D60 | size: 0x1A8
+.fn SetPriority, global
 /* 805F4D60 005EF3C0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 805F4D64 005EF3C4  7C 08 02 A6 */	mflr r0
 /* 805F4D68 005EF3C8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -379,10 +392,10 @@
 /* 805F4D94 005EF3F4  41 82 01 4C */	beq .L_805F4EE0
 /* 805F4D98 005EF3F8  48 00 01 54 */	b .L_805F4EEC
 .L_805F4D9C:
-/* 805F4D9C 005EF3FC  4B FF FF 15 */	bl fn_805F4CB0
-/* 805F4DA0 005EF400  3C 60 80 7D */	lis r3, lbl_807CB970@ha
+/* 805F4D9C 005EF3FC  4B FF FF 15 */	bl UnsetRun
+/* 805F4DA0 005EF400  3C 60 80 7D */	lis r3, RunQueue@ha
 /* 805F4DA4 005EF404  57 E0 18 38 */	slwi r0, r31, 3
-/* 805F4DA8 005EF408  38 63 B9 70 */	addi r3, r3, lbl_807CB970@l
+/* 805F4DA8 005EF408  38 63 B9 70 */	addi r3, r3, RunQueue@l
 /* 805F4DAC 005EF40C  93 FE 02 D0 */	stw r31, 0x2d0(r30)
 /* 805F4DB0 005EF410  7C 63 02 14 */	add r3, r3, r0
 /* 805F4DB4 005EF414  90 7E 02 DC */	stw r3, 0x2dc(r30)
@@ -488,17 +501,17 @@
 /* 805F4EFC 005EF55C  7C 08 03 A6 */	mtlr r0
 /* 805F4F00 005EF560  38 21 00 10 */	addi r1, r1, 0x10
 /* 805F4F04 005EF564  4E 80 00 20 */	blr
-.endfn fn_805F4D60
+.endfn SetPriority
 
-# .text:0x5D8 | 0x805F4F08 | size: 0x8
+# .text:0x5E8 | 0x805F4F08 | size: 0x8
 .fn gap_03_805F4F08_text, global
 .hidden gap_03_805F4F08_text
 /* 805F4F08 005EF568  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 /* 805F4F0C 005EF56C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F4F08_text
 
-# .text:0x5E0 | 0x805F4F10 | size: 0x50
-.fn fn_805F4F10, global
+# .text:0x5F0 | 0x805F4F10 | size: 0x50
+.fn __OSPromoteThread, global
 /* 805F4F10 005EF570  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 805F4F14 005EF574  7C 08 02 A6 */	mflr r0
 /* 805F4F18 005EF578  90 01 00 14 */	stw r0, 0x14(r1)
@@ -512,7 +525,7 @@
 /* 805F4F34 005EF594  7C 00 F8 00 */	cmpw r0, r31
 /* 805F4F38 005EF598  40 81 00 14 */	ble .L_805F4F4C
 /* 805F4F3C 005EF59C  7F E4 FB 78 */	mr r4, r31
-/* 805F4F40 005EF5A0  4B FF FE 21 */	bl fn_805F4D60
+/* 805F4F40 005EF5A0  4B FF FE 21 */	bl SetPriority
 /* 805F4F44 005EF5A4  2C 03 00 00 */	cmpwi r3, 0x0
 /* 805F4F48 005EF5A8  40 82 FF DC */	bne .L_805F4F24
 .L_805F4F4C:
@@ -521,9 +534,9 @@
 /* 805F4F54 005EF5B4  7C 08 03 A6 */	mtlr r0
 /* 805F4F58 005EF5B8  38 21 00 10 */	addi r1, r1, 0x10
 /* 805F4F5C 005EF5BC  4E 80 00 20 */	blr
-.endfn fn_805F4F10
+.endfn __OSPromoteThread
 
-# .text:0x630 | 0x805F4F60 | size: 0x22C
+# .text:0x640 | 0x805F4F60 | size: 0x22C
 .fn SelectThread, local
 /* 805F4F60 005EF5C0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 805F4F64 005EF5C4  7C 08 02 A6 */	mflr r0
@@ -562,9 +575,9 @@
 .L_805F4FE0:
 /* 805F4FE0 005EF640  38 00 00 01 */	li r0, 0x1
 /* 805F4FE4 005EF644  B0 05 02 C8 */	sth r0, 0x2c8(r5)
-/* 805F4FE8 005EF648  3C 60 80 7D */	lis r3, lbl_807CB970@ha
+/* 805F4FE8 005EF648  3C 60 80 7D */	lis r3, RunQueue@ha
 /* 805F4FEC 005EF64C  80 05 02 D0 */	lwz r0, 0x2d0(r5)
-/* 805F4FF0 005EF650  38 63 B9 70 */	addi r3, r3, lbl_807CB970@l
+/* 805F4FF0 005EF650  38 63 B9 70 */	addi r3, r3, RunQueue@l
 /* 805F4FF4 005EF654  54 00 18 38 */	slwi r0, r0, 3
 /* 805F4FF8 005EF658  7C 63 02 14 */	add r3, r3, r0
 /* 805F4FFC 005EF65C  90 65 02 DC */	stw r3, 0x2dc(r5)
@@ -610,9 +623,9 @@
 /* 805F508C 005EF6EC  7D 89 03 A6 */	mtctr r12
 /* 805F5090 005EF6F0  4E 80 04 21 */	bctrl
 /* 805F5094 005EF6F4  38 00 00 00 */	li r0, 0x0
-/* 805F5098 005EF6F8  3C 60 80 7D */	lis r3, lbl_807CBA70@ha
+/* 805F5098 005EF6F8  3C 60 80 7D */	lis r3, IdleContext@ha
 /* 805F509C 005EF6FC  90 1F 00 E4 */	stw r0, 0xe4(r31)
-/* 805F50A0 005EF700  38 63 BA 70 */	addi r3, r3, lbl_807CBA70@l
+/* 805F50A0 005EF700  38 63 BA 70 */	addi r3, r3, IdleContext@l
 /* 805F50A4 005EF704  4B FF 89 CD */	bl OSSetCurrentContext
 .L_805F50A8:
 /* 805F50A8 005EF708  4B FF CD F9 */	bl OSEnableInterrupts
@@ -625,15 +638,15 @@
 /* 805F50C0 005EF720  80 0D A5 A0 */	lwz r0, RunQueueBits_8087FC60@sda21(r0)
 /* 805F50C4 005EF724  2C 00 00 00 */	cmpwi r0, 0x0
 /* 805F50C8 005EF728  41 82 FF E0 */	beq .L_805F50A8
-/* 805F50CC 005EF72C  3C 60 80 7D */	lis r3, lbl_807CBA70@ha
-/* 805F50D0 005EF730  38 63 BA 70 */	addi r3, r3, lbl_807CBA70@l
+/* 805F50CC 005EF72C  3C 60 80 7D */	lis r3, IdleContext@ha
+/* 805F50D0 005EF730  38 63 BA 70 */	addi r3, r3, IdleContext@l
 /* 805F50D4 005EF734  4B FF 8B DD */	bl OSClearContext
 .L_805F50D8:
 /* 805F50D8 005EF738  38 80 00 00 */	li r4, 0x0
 /* 805F50DC 005EF73C  90 8D A5 9C */	stw r4, RunQueueHint_8087FC5C@sda21(r0)
 /* 805F50E0 005EF740  80 0D A5 A0 */	lwz r0, RunQueueBits_8087FC60@sda21(r0)
-/* 805F50E4 005EF744  3C 60 80 7D */	lis r3, lbl_807CB970@ha
-/* 805F50E8 005EF748  38 63 B9 70 */	addi r3, r3, lbl_807CB970@l
+/* 805F50E4 005EF744  3C 60 80 7D */	lis r3, RunQueue@ha
+/* 805F50E8 005EF748  38 63 B9 70 */	addi r3, r3, RunQueue@l
 /* 805F50EC 005EF74C  7C 05 00 34 */	cntlzw r5, r0
 /* 805F50F0 005EF750  54 A0 18 38 */	slwi r0, r5, 3
 /* 805F50F4 005EF754  7F C3 00 6E */	lwzux r30, r3, r0
@@ -680,13 +693,13 @@
 /* 805F5188 005EF7E8  4E 80 00 20 */	blr
 .endfn SelectThread
 
-# .text:0x85C | 0x805F518C | size: 0x4
+# .text:0x86C | 0x805F518C | size: 0x4
 .fn gap_03_805F518C_text, global
 .hidden gap_03_805F518C_text
 /* 805F518C 005EF7EC  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F518C_text
 
-# .text:0x860 | 0x805F5190 | size: 0x18
+# .text:0x870 | 0x805F5190 | size: 0x18
 .fn __OSReschedule, global
 /* 805F5190 005EF7F0  80 0D A5 9C */	lwz r0, RunQueueHint_8087FC5C@sda21(r0)
 /* 805F5194 005EF7F4  2C 00 00 00 */	cmpwi r0, 0x0
@@ -696,15 +709,15 @@
 /* 805F51A4 005EF804  4E 80 00 20 */	blr
 .endfn __OSReschedule
 
-# .text:0x878 | 0x805F51A8 | size: 0x8
+# .text:0x888 | 0x805F51A8 | size: 0x8
 .fn gap_03_805F51A8_text, global
 .hidden gap_03_805F51A8_text
 /* 805F51A8 005EF808  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 /* 805F51AC 005EF80C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F51A8_text
 
-# .text:0x880 | 0x805F51B0 | size: 0x26C
-.fn fn_805F51B0, global
+# .text:0x890 | 0x805F51B0 | size: 0x26C
+.fn OSCreateThread, global
 /* 805F51B0 005EF810  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 805F51B4 005EF814  7C 08 02 A6 */	mflr r0
 /* 805F51B8 005EF818  90 01 00 24 */	stw r0, 0x24(r1)
@@ -742,9 +755,9 @@
 /* 805F5230 005EF890  93 C6 FF F8 */	stw r30, -0x8(r6)
 /* 805F5234 005EF894  93 C6 FF FC */	stw r30, -0x4(r6)
 /* 805F5238 005EF898  4B FF 8A A9 */	bl fn_805EDCE0
-/* 805F523C 005EF89C  3C 60 80 5F */	lis r3, fn_805F5420@ha
+/* 805F523C 005EF89C  3C 60 80 5F */	lis r3, OSExitThread@ha
 /* 805F5240 005EF8A0  7C 9C D8 50 */	subf r4, r28, r27
-/* 805F5244 005EF8A4  38 63 54 20 */	addi r3, r3, fn_805F5420@l
+/* 805F5244 005EF8A4  38 63 54 20 */	addi r3, r3, OSExitThread@l
 /* 805F5248 005EF8A8  90 7F 00 84 */	stw r3, 0x84(r31)
 /* 805F524C 005EF8AC  3C 60 DE AE */	lis r3, 0xdeae
 /* 805F5250 005EF8B0  93 5F 00 0C */	stw r26, 0xc(r31)
@@ -867,16 +880,16 @@
 /* 805F5410 005EFA70  7C 08 03 A6 */	mtlr r0
 /* 805F5414 005EFA74  38 21 00 20 */	addi r1, r1, 0x20
 /* 805F5418 005EFA78  4E 80 00 20 */	blr
-.endfn fn_805F51B0
+.endfn OSCreateThread
 
-# .text:0xAEC | 0x805F541C | size: 0x4
+# .text:0xAFC | 0x805F541C | size: 0x4
 .fn gap_03_805F541C_text, global
 .hidden gap_03_805F541C_text
 /* 805F541C 005EFA7C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F541C_text
 
-# .text:0xAF0 | 0x805F5420 | size: 0xE4
-.fn fn_805F5420, global
+# .text:0xB00 | 0x805F5420 | size: 0xE4
+.fn OSExitThread, global
 /* 805F5420 005EFA80  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 805F5424 005EFA84  7C 08 02 A6 */	mflr r0
 /* 805F5428 005EFA88  90 01 00 24 */	stw r0, 0x24(r1)
@@ -922,7 +935,7 @@
 /* 805F54B0 005EFB10  7F C3 F3 78 */	mr r3, r30
 /* 805F54B4 005EFB14  4B FF DE 2D */	bl fn_805F32E0
 /* 805F54B8 005EFB18  38 7E 02 E8 */	addi r3, r30, 0x2e8
-/* 805F54BC 005EFB1C  48 00 08 A5 */	bl fn_805F5D60
+/* 805F54BC 005EFB1C  48 00 08 A5 */	bl OSWakeupThread
 /* 805F54C0 005EFB20  38 00 00 01 */	li r0, 0x1
 /* 805F54C4 005EFB24  90 0D A5 9C */	stw r0, RunQueueHint_8087FC5C@sda21(r0)
 /* 805F54C8 005EFB28  80 0D A5 9C */	lwz r0, RunQueueHint_8087FC5C@sda21(r0)
@@ -941,9 +954,9 @@
 /* 805F54F8 005EFB58  7C 08 03 A6 */	mtlr r0
 /* 805F54FC 005EFB5C  38 21 00 20 */	addi r1, r1, 0x20
 /* 805F5500 005EFB60  4E 80 00 20 */	blr
-.endfn fn_805F5420
+.endfn OSExitThread
 
-# .text:0xBD4 | 0x805F5504 | size: 0xC
+# .text:0xBE4 | 0x805F5504 | size: 0xC
 .fn gap_03_805F5504_text, global
 .hidden gap_03_805F5504_text
 /* 805F5504 005EFB64  00 00 00 00 */	.4byte 0x00000000 /* invalid */
@@ -951,7 +964,7 @@
 /* 805F550C 005EFB6C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F5504_text
 
-# .text:0xBE0 | 0x805F5510 | size: 0x1D4
+# .text:0xBF0 | 0x805F5510 | size: 0x1D4
 .fn OSCancelThread, global
 /* 805F5510 005EFB70  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 805F5514 005EFB74  7C 08 02 A6 */	mflr r0
@@ -976,7 +989,7 @@
 /* 805F555C 005EFBBC  2C 00 00 00 */	cmpwi r0, 0x0
 /* 805F5560 005EFBC0  41 81 00 E0 */	bgt .L_805F5640
 /* 805F5564 005EFBC4  7F C3 F3 78 */	mr r3, r30
-/* 805F5568 005EFBC8  4B FF F7 49 */	bl fn_805F4CB0
+/* 805F5568 005EFBC8  4B FF F7 49 */	bl UnsetRun
 /* 805F556C 005EFBCC  48 00 00 D4 */	b .L_805F5640
 .L_805F5570:
 /* 805F5570 005EFBD0  38 00 00 01 */	li r0, 0x1
@@ -1033,7 +1046,7 @@
 /* 805F5618 005EFC78  80 03 02 D0 */	lwz r0, 0x2d0(r3)
 /* 805F561C 005EFC7C  7C 00 20 00 */	cmpw r0, r4
 /* 805F5620 005EFC80  41 82 00 20 */	beq .L_805F5640
-/* 805F5624 005EFC84  4B FF F7 3D */	bl fn_805F4D60
+/* 805F5624 005EFC84  4B FF F7 3D */	bl SetPriority
 /* 805F5628 005EFC88  2C 03 00 00 */	cmpwi r3, 0x0
 /* 805F562C 005EFC8C  40 82 FF AC */	bne .L_805F55D8
 /* 805F5630 005EFC90  48 00 00 10 */	b .L_805F5640
@@ -1075,7 +1088,7 @@
 /* 805F56A0 005EFD00  7F C3 F3 78 */	mr r3, r30
 /* 805F56A4 005EFD04  4B FF DC 3D */	bl fn_805F32E0
 /* 805F56A8 005EFD08  38 7E 02 E8 */	addi r3, r30, 0x2e8
-/* 805F56AC 005EFD0C  48 00 06 B5 */	bl fn_805F5D60
+/* 805F56AC 005EFD0C  48 00 06 B5 */	bl OSWakeupThread
 /* 805F56B0 005EFD10  80 0D A5 9C */	lwz r0, RunQueueHint_8087FC5C@sda21(r0)
 /* 805F56B4 005EFD14  2C 00 00 00 */	cmpwi r0, 0x0
 /* 805F56B8 005EFD18  41 82 00 0C */	beq .L_805F56C4
@@ -1093,7 +1106,7 @@
 /* 805F56E0 005EFD40  4E 80 00 20 */	blr
 .endfn OSCancelThread
 
-# .text:0xDB4 | 0x805F56E4 | size: 0xC
+# .text:0xDC4 | 0x805F56E4 | size: 0xC
 .fn gap_03_805F56E4_text, global
 .hidden gap_03_805F56E4_text
 /* 805F56E4 005EFD44  00 00 00 00 */	.4byte 0x00000000 /* invalid */
@@ -1101,8 +1114,8 @@
 /* 805F56EC 005EFD4C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F56E4_text
 
-# .text:0xDC0 | 0x805F56F0 | size: 0x144
-.fn fn_805F56F0, global
+# .text:0xDD0 | 0x805F56F0 | size: 0x144
+.fn OSJoinThread, global
 /* 805F56F0 005EFD50  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 805F56F4 005EFD54  7C 08 02 A6 */	mflr r0
 /* 805F56F8 005EFD58  90 01 00 24 */	stw r0, 0x24(r1)
@@ -1197,9 +1210,9 @@
 /* 805F5828 005EFE88  7C 08 03 A6 */	mtlr r0
 /* 805F582C 005EFE8C  38 21 00 20 */	addi r1, r1, 0x20
 /* 805F5830 005EFE90  4E 80 00 20 */	blr
-.endfn fn_805F56F0
+.endfn OSJoinThread
 
-# .text:0xF04 | 0x805F5834 | size: 0xC
+# .text:0xF14 | 0x805F5834 | size: 0xC
 .fn gap_03_805F5834_text, global
 .hidden gap_03_805F5834_text
 /* 805F5834 005EFE94  00 00 00 00 */	.4byte 0x00000000 /* invalid */
@@ -1207,8 +1220,8 @@
 /* 805F583C 005EFE9C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F5834_text
 
-# .text:0xF10 | 0x805F5840 | size: 0x29C
-.fn fn_805F5840, global
+# .text:0xF20 | 0x805F5840 | size: 0x29C
+.fn OSResumeThread, global
 /* 805F5840 005EFEA0  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 805F5844 005EFEA4  7C 08 02 A6 */	mflr r0
 /* 805F5848 005EFEA8  90 01 00 24 */	stw r0, 0x24(r1)
@@ -1250,9 +1263,9 @@
 .L_805F58C8:
 /* 805F58C8 005EFF28  2C 04 00 00 */	cmpwi r4, 0x0
 /* 805F58CC 005EFF2C  40 82 FF DC */	bne .L_805F58A8
-/* 805F58D0 005EFF30  3C 60 80 7D */	lis r3, lbl_807CB970@ha
+/* 805F58D0 005EFF30  3C 60 80 7D */	lis r3, RunQueue@ha
 /* 805F58D4 005EFF34  54 A0 18 38 */	slwi r0, r5, 3
-/* 805F58D8 005EFF38  38 63 B9 70 */	addi r3, r3, lbl_807CB970@l
+/* 805F58D8 005EFF38  38 63 B9 70 */	addi r3, r3, RunQueue@l
 /* 805F58DC 005EFF3C  90 BD 02 D0 */	stw r5, 0x2d0(r29)
 /* 805F58E0 005EFF40  7C 63 02 14 */	add r3, r3, r0
 /* 805F58E4 005EFF44  90 7D 02 DC */	stw r3, 0x2dc(r29)
@@ -1385,7 +1398,7 @@
 /* 805F5A88 005F00E8  80 03 02 D0 */	lwz r0, 0x2d0(r3)
 /* 805F5A8C 005F00EC  7C 00 20 00 */	cmpw r0, r4
 /* 805F5A90 005F00F0  41 82 00 10 */	beq .L_805F5AA0
-/* 805F5A94 005F00F4  4B FF F2 CD */	bl fn_805F4D60
+/* 805F5A94 005F00F4  4B FF F2 CD */	bl SetPriority
 /* 805F5A98 005F00F8  2C 03 00 00 */	cmpwi r3, 0x0
 /* 805F5A9C 005F00FC  40 82 FF A8 */	bne .L_805F5A44
 .L_805F5AA0:
@@ -1405,16 +1418,16 @@
 /* 805F5AD0 005F0130  7C 08 03 A6 */	mtlr r0
 /* 805F5AD4 005F0134  38 21 00 20 */	addi r1, r1, 0x20
 /* 805F5AD8 005F0138  4E 80 00 20 */	blr
-.endfn fn_805F5840
+.endfn OSResumeThread
 
-# .text:0x11AC | 0x805F5ADC | size: 0x4
+# .text:0x11BC | 0x805F5ADC | size: 0x4
 .fn gap_03_805F5ADC_text, global
 .hidden gap_03_805F5ADC_text
 /* 805F5ADC 005F013C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F5ADC_text
 
-# .text:0x11B0 | 0x805F5AE0 | size: 0x18C
-.fn fn_805F5AE0, global
+# .text:0x11C0 | 0x805F5AE0 | size: 0x18C
+.fn OSSuspendThread, global
 /* 805F5AE0 005F0140  94 21 FF E0 */	stwu r1, -0x20(r1)
 /* 805F5AE4 005F0144  7C 08 02 A6 */	mflr r0
 /* 805F5AE8 005F0148  90 01 00 24 */	stw r0, 0x24(r1)
@@ -1444,7 +1457,7 @@
 /* 805F5B44 005F01A4  48 00 00 EC */	b .L_805F5C30
 .L_805F5B48:
 /* 805F5B48 005F01A8  7F A3 EB 78 */	mr r3, r29
-/* 805F5B4C 005F01AC  4B FF F1 65 */	bl fn_805F4CB0
+/* 805F5B4C 005F01AC  4B FF F1 65 */	bl UnsetRun
 /* 805F5B50 005F01B0  48 00 00 E0 */	b .L_805F5C30
 .L_805F5B54:
 /* 805F5B54 005F01B4  80 9D 02 E0 */	lwz r4, 0x2e0(r29)
@@ -1509,7 +1522,7 @@
 /* 805F5C18 005F0278  80 03 02 D0 */	lwz r0, 0x2d0(r3)
 /* 805F5C1C 005F027C  7C 00 20 00 */	cmpw r0, r4
 /* 805F5C20 005F0280  41 82 00 10 */	beq .L_805F5C30
-/* 805F5C24 005F0284  4B FF F1 3D */	bl fn_805F4D60
+/* 805F5C24 005F0284  4B FF F1 3D */	bl SetPriority
 /* 805F5C28 005F0288  2C 03 00 00 */	cmpwi r3, 0x0
 /* 805F5C2C 005F028C  40 82 FF A8 */	bne .L_805F5BD4
 .L_805F5C30:
@@ -1529,15 +1542,15 @@
 /* 805F5C60 005F02C0  7C 08 03 A6 */	mtlr r0
 /* 805F5C64 005F02C4  38 21 00 20 */	addi r1, r1, 0x20
 /* 805F5C68 005F02C8  4E 80 00 20 */	blr
-.endfn fn_805F5AE0
+.endfn OSSuspendThread
 
-# .text:0x133C | 0x805F5C6C | size: 0x4
+# .text:0x134C | 0x805F5C6C | size: 0x4
 .fn gap_03_805F5C6C_text, global
 .hidden gap_03_805F5C6C_text
 /* 805F5C6C 005F02CC  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F5C6C_text
 
-# .text:0x1340 | 0x805F5C70 | size: 0xF0
+# .text:0x1350 | 0x805F5C70 | size: 0xF0
 .fn OSSleepThread, global
 /* 805F5C70 005F02D0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 805F5C74 005F02D4  7C 08 02 A6 */	mflr r0
@@ -1610,8 +1623,8 @@
 /* 805F5D5C 005F03BC  4E 80 00 20 */	blr
 .endfn OSSleepThread
 
-# .text:0x1430 | 0x805F5D60 | size: 0xF8
-.fn fn_805F5D60, global
+# .text:0x1440 | 0x805F5D60 | size: 0xF8
+.fn OSWakeupThread, global
 /* 805F5D60 005F03C0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 805F5D64 005F03C4  7C 08 02 A6 */	mflr r0
 /* 805F5D68 005F03C8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -1619,9 +1632,9 @@
 /* 805F5D70 005F03D0  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 805F5D74 005F03D4  7C 7E 1B 78 */	mr r30, r3
 /* 805F5D78 005F03D8  4B FF C1 09 */	bl OSDisableInterrupts
-/* 805F5D7C 005F03DC  3C A0 80 7D */	lis r5, lbl_807CB970@ha
+/* 805F5D7C 005F03DC  3C A0 80 7D */	lis r5, RunQueue@ha
 /* 805F5D80 005F03E0  7C 7F 1B 78 */	mr r31, r3
-/* 805F5D84 005F03E4  38 A5 B9 70 */	addi r5, r5, lbl_807CB970@l
+/* 805F5D84 005F03E4  38 A5 B9 70 */	addi r5, r5, RunQueue@l
 /* 805F5D88 005F03E8  38 C0 00 00 */	li r6, 0x0
 /* 805F5D8C 005F03EC  38 60 00 01 */	li r3, 0x1
 /* 805F5D90 005F03F0  48 00 00 88 */	b .L_805F5E18
@@ -1681,17 +1694,17 @@
 /* 805F5E4C 005F04AC  7C 08 03 A6 */	mtlr r0
 /* 805F5E50 005F04B0  38 21 00 10 */	addi r1, r1, 0x10
 /* 805F5E54 005F04B4  4E 80 00 20 */	blr
-.endfn fn_805F5D60
+.endfn OSWakeupThread
 
-# .text:0x1528 | 0x805F5E58 | size: 0x8
+# .text:0x1538 | 0x805F5E58 | size: 0x8
 .fn gap_03_805F5E58_text, global
 .hidden gap_03_805F5E58_text
 /* 805F5E58 005F04B8  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 /* 805F5E5C 005F04BC  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F5E58_text
 
-# .text:0x1530 | 0x805F5E60 | size: 0x80
-.fn fn_805F5E60, global
+# .text:0x1540 | 0x805F5E60 | size: 0x80
+.fn SleepAlarmHandler, global
 /* 805F5E60 005F04C0  94 21 FF F0 */	stwu r1, -0x10(r1)
 /* 805F5E64 005F04C4  7C 08 02 A6 */	mflr r0
 /* 805F5E68 005F04C8  90 01 00 14 */	stw r0, 0x14(r1)
@@ -1723,17 +1736,17 @@
 /* 805F5EBC 005F051C  41 82 00 10 */	beq .L_805F5ECC
 /* 805F5EC0 005F0520  7F E3 FB 78 */	mr r3, r31
 /* 805F5EC4 005F0524  4B FF 69 BD */	bl fn_805EC880
-/* 805F5EC8 005F0528  4B FF F9 79 */	bl fn_805F5840
+/* 805F5EC8 005F0528  4B FF F9 79 */	bl OSResumeThread
 .L_805F5ECC:
 /* 805F5ECC 005F052C  80 01 00 14 */	lwz r0, 0x14(r1)
 /* 805F5ED0 005F0530  83 E1 00 0C */	lwz r31, 0xc(r1)
 /* 805F5ED4 005F0534  7C 08 03 A6 */	mtlr r0
 /* 805F5ED8 005F0538  38 21 00 10 */	addi r1, r1, 0x10
 /* 805F5EDC 005F053C  4E 80 00 20 */	blr
-.endfn fn_805F5E60
+.endfn SleepAlarmHandler
 
-# .text:0x15B0 | 0x805F5EE0 | size: 0xA8
-.fn fn_805F5EE0, global
+# .text:0x15C0 | 0x805F5EE0 | size: 0xA8
+.fn OSSleepTicks, global
 /* 805F5EE0 005F0540  94 21 FF B0 */	stwu r1, -0x50(r1)
 /* 805F5EE4 005F0544  7C 08 02 A6 */	mflr r0
 /* 805F5EE8 005F0548  90 01 00 54 */	stw r0, 0x54(r1)
@@ -1757,14 +1770,14 @@
 /* 805F5F2C 005F058C  7F E4 FB 78 */	mr r4, r31
 /* 805F5F30 005F0590  38 61 00 08 */	addi r3, r1, 0x8
 /* 805F5F34 005F0594  4B FF 69 5D */	bl fn_805EC890
-/* 805F5F38 005F0598  3C E0 80 5F */	lis r7, fn_805F5E60@ha
+/* 805F5F38 005F0598  3C E0 80 5F */	lis r7, SleepAlarmHandler@ha
 /* 805F5F3C 005F059C  7F 86 E3 78 */	mr r6, r28
 /* 805F5F40 005F05A0  7F A5 EB 78 */	mr r5, r29
 /* 805F5F44 005F05A4  38 61 00 08 */	addi r3, r1, 0x8
-/* 805F5F48 005F05A8  38 E7 5E 60 */	addi r7, r7, fn_805F5E60@l
+/* 805F5F48 005F05A8  38 E7 5E 60 */	addi r7, r7, SleepAlarmHandler@l
 /* 805F5F4C 005F05AC  4B FF 63 F5 */	bl OSSetAlarm
 /* 805F5F50 005F05B0  7F E3 FB 78 */	mr r3, r31
-/* 805F5F54 005F05B4  4B FF FB 8D */	bl fn_805F5AE0
+/* 805F5F54 005F05B4  4B FF FB 8D */	bl OSSuspendThread
 /* 805F5F58 005F05B8  38 61 00 08 */	addi r3, r1, 0x8
 /* 805F5F5C 005F05BC  4B FF 64 E5 */	bl fn_805EC440
 /* 805F5F60 005F05C0  7F C3 F3 78 */	mr r3, r30
@@ -1778,9 +1791,9 @@
 /* 805F5F7C 005F05DC  7C 08 03 A6 */	mtlr r0
 /* 805F5F80 005F05E0  38 21 00 50 */	addi r1, r1, 0x50
 /* 805F5F84 005F05E4  4E 80 00 20 */	blr
-.endfn fn_805F5EE0
+.endfn OSSleepTicks
 
-# .text:0x1658 | 0x805F5F88 | size: 0x8
+# .text:0x1668 | 0x805F5F88 | size: 0x8
 .fn gap_03_805F5F88_text, global
 .hidden gap_03_805F5F88_text
 /* 805F5F88 005F05E8  00 00 00 00 */	.4byte 0x00000000 /* invalid */

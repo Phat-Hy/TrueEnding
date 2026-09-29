@@ -40,6 +40,9 @@ typedef int BOOL;
 #define NULL 0
 #endif
 
+void* memset(void* dest, int val, u32 count);
+void* memcpy(void* dest, const void* src, u32 count);
+
 #ifdef __cplusplus
 }
 #endif

@@ -4491,7 +4491,7 @@
 
 # .sdata:0x10D8 | 0x8087E798 | size: 0x4
 .obj SwitchThreadCallback_8087E798, global
-	.4byte fn_805F4920
+	.4byte DefaultSwitchThreadCallback
 .endobj SwitchThreadCallback_8087E798
 
 # .sdata:0x10DC | 0x8087E79C | size: 0x4
