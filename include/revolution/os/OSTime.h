@@ -26,7 +26,7 @@ typedef struct OSCalendarTime {
 OSTime OSGetTime(void);
 OSTick OSGetTick(void);
 OSTime __OSGetSystemTime(void);
-OSTime __OSTimeToSystemTime(void);
+OSTime __OSTimeToSystemTime(OSTime time);
 void OSTicksToCalendarTime(OSTime ticks, OSCalendarTime* td);
 OSTime OSCalendarTimeToTicks(const OSCalendarTime* td);
 

@@ -13,6 +13,11 @@ Sections:
 	.sdata2     type:rodata align:32
 	.sbss2      type:bss align:8
 
+OSAlarm.c:
+	.text       start:0x805EC080 end:0x805EC950
+	.data       start:0x8079C2A8 end:0x8079C2B8
+	.sbss       start:0x8087FBE0 end:0x8087FBE8
+
 OSThread.c:
 	.text       start:0x805F4920 end:0x805F5F90
 	.bss        start:0x807CB658 end:0x807CC060

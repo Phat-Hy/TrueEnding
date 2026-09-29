@@ -21,8 +21,10 @@
 | **STEP-008** | `2026-09-29T21:45:00+07:00` | Build | Configured build system (`configure.py` + `ninja`), CodeWarrior v4.3 b145 toolchain, and `objdiff.json` | **Completed** | `build-env` |
 | **STEP-009** | `2026-09-29T21:47:00+07:00` | Match | Decompiled `src/__init_cpp_exceptions.cpp` and achieved first **100.0% byte-for-byte binary match**! | **Completed** | `match-first-fn` |
 | **STEP-010** | `2026-09-29T22:20:00+07:00` | Match | Decompiled `global_destructor_chain.c`, `__init_hardware.c`, `memcpy.c`, `memset.c` (5 units, 9 functions, 1,192 bytes — **100.0% matched**!) | **Completed** | `decomp-startup-done` |
+| **STEP-011** | `2026-09-30T01:00:00+07:00` | Match | Decompiled core RVL-SDK subsystem `src/OSTime.c` (6 functions, 1,704 bytes code, 96 bytes data tables — **100.0% byte-for-byte binary match**!) | **Completed** | `decomp-os-time` |
 | **STEP-012** | `2026-09-30T02:10:00+07:00` | Match | Decompiled core RVL-SDK threading subsystem `src/OSThread.c` (24 functions, 5,744 bytes code — **100.0% byte-for-byte binary match**!) | **Completed** | `decomp-os-thread` |
-| **STEP-013** | *Up Next* | Decomp | Decompile and match next RVL-SDK OS subsystem / core engine slice | **In Progress** | `decomp-next-subsystem` |
+| **STEP-013** | `2026-09-30T02:45:00+07:00` | Match | Decompiled core RVL-SDK alarm subsystem `src/OSAlarm.c` (13 functions, 2,196 bytes code, 16 bytes data, 8 bytes sbss — **100.0% byte-for-byte binary match**!) | **Completed** | `decomp-os-alarm` |
+| **STEP-014** | *Up Next* | Decomp | Decompile and match next RVL-SDK OS subsystem (`OSContext.c` / `OSAlloc.c`) | **In Progress** | `decomp-next-subsystem` |
 
 ---
 
@@ -59,3 +61,9 @@ Each milestone is associated with a Git commit and tag. If you ever need to roll
   - In `src/OSThread.c`, priority queue bit manipulation requires `RunQueueBits |= 1 << (31 - priority)` compound assignment to yield `slw r0, r3, r0` rather than `slw r3, r4, r3`.
   - Priority comparison before context switching in `SelectThread` splits into distinct statements (`if (!yield) { priority = __cntlzw(RunQueueBits); if (currentThread->priority <= priority) return NULL; }`).
   - In Metrowerks CodeWarrior 4.3 b145, local variable declaration order (`head; mutex; priority;` vs `priority; mutex; head;`) controls volatile register pairing in inlined traversal loops. Utilizing an internal static inline `GetEffectivePriority` for mutex owner priority propagation ensures clean 100.0% matching across `OSCancelThread`, `OSResumeThread`, and `OSSuspendThread` while keeping standalone `__OSGetEffectivePriority` byte-matched.
+* **ADR-007 (Alarm Subsystem Layout & Decrementer Comparison Codegen)**:
+  - The `OSAlarm` struct layout in RVL-SDK defines `prev` before `next` (`OSAlarm* prev; OSAlarm* next;`), contrary to superficial conventions.
+  - In `SetTimer`, testing remaining time with `if (delta < 0) { PPCMtdec(0); } else if (delta < 0x80000000LL) { ... }` generates the exact target `neg.` and `beq` sequence across all inlined call sites (`InsertAlarm`, `OSCancelAlarm`, `DecrementerExceptionCallback`).
+  - Safe queue traversal loops in `fn_805EC7E0` and `__OSCancelThreadAlarms` require the pattern `next = alarm ? alarm->next : NULL; while (alarm) { ... alarm = next; next = next ? next->next : NULL; }`.
+  - In `__OSCancelThreadAlarms`, declaring `BOOL enabled;` before `alarm` and `next` guarantees identical volatile/non-volatile register allocation (`r31` for `enabled`, `r30` for `next`).
+

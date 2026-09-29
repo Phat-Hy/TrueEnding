@@ -73,14 +73,6 @@
       }
     },
     {
-      "name": "main/auto_07_8079D7E8_data",
-      "target_path": "build/SLSEXJ/obj/auto_07_8079D7E8_data.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
       "name": "main/auto_06_8072D480_rodata",
       "target_path": "build/SLSEXJ/obj/auto_06_8072D480_rodata.o",
       "metadata": {
@@ -1475,6 +1467,49 @@
     {
       "name": "main/auto_03_805E06D4_text",
       "target_path": "build/SLSEXJ/obj/auto_03_805E06D4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/OSAlarm",
+      "target_path": "build/SLSEXJ/obj/OSAlarm.o",
+      "base_path": "build/SLSEXJ/src/OSAlarm.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/OSAlarm.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/OSAlarm.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/auto_10_8087FBE8_sbss",
+      "target_path": "build/SLSEXJ/obj/auto_10_8087FBE8_sbss.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_07_8079C2B8_data",
+      "target_path": "build/SLSEXJ/obj/auto_07_8079C2B8_data.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_805EC950_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_805EC950_text.o",
       "metadata": {
         "progress_categories": [],
         "auto_generated": true

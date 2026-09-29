@@ -157,6 +157,7 @@ config.libs = [
         "mw_version": "Wii/1.0",
         "cflags": cflags_os,
         "objects": [
+            Object(True, "OSAlarm.c"),
             Object(True, "OSThread.c"),
             Object(True, "OSTime.c"),
         ],

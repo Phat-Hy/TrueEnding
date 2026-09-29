@@ -15,8 +15,8 @@ struct OSAlarm {
     OSAlarmHandler handler;
     u32 tag;
     OSTime fire;
-    OSAlarm* next;
     OSAlarm* prev;
+    OSAlarm* next;
     OSTime period;
     OSTime start;
     void* userData;

@@ -2,7 +2,19 @@ import sys
 import json
 import subprocess
 
-def diff_func(func_name, unit="main/OSThread"):
+def diff_func(func_name, unit=None):
+    if unit is None:
+        with open("build/SLSEXJ/report.json") as f:
+            d = json.load(f)
+        for u in d.get("units", []):
+            for fn in u.get("functions", []):
+                if fn.get("name") == func_name:
+                    unit = u.get("name").replace("src/", "main/").replace(".c", "")
+                    break
+            if unit:
+                break
+    if not unit:
+        unit = "main/OSAlarm"
     cmd = ["tools\\objdiff-cli.exe", "diff", "-p", ".", "-u", unit, "-o", "temp_diff.json", func_name]
     res = subprocess.run(cmd, capture_output=True, text=True)
     if res.returncode != 0:
@@ -21,7 +33,7 @@ def diff_func(func_name, unit="main/OSThread"):
     l_insts = left_syms[sym].get("instructions", [])
     r_insts = right_syms[sym].get("instructions", [])
     
-    print(f"=== {sym}: target (left) {len(l_insts)} insts, built (right) {len(r_insts)} insts ===")
+    print(f"=== {sym} ({unit}): target (left) {len(l_insts)} insts, built (right) {len(r_insts)} insts ===")
     
     max_len = max(len(l_insts), len(r_insts))
     diff_count = 0
@@ -62,19 +74,21 @@ def diff_func(func_name, unit="main/OSThread"):
             
     print(f"Total actual diff instructions: {diff_count}/{max_len}")
 
-def list_funcs():
+def list_funcs(filter_str="OSAlarm"):
     with open('build/SLSEXJ/report.json') as f:
         d = json.load(f)
     for u in d.get('units', []):
-        if 'OSThread' in u.get('name', ''):
+        if filter_str in u.get('name', ''):
+            print(f"--- {u.get('name')} ---")
             for fn in u.get('functions', []):
                 print(f"{fn.get('name'):28} {fn.get('fuzzy_match_percent', 0):6.2f}% {fn.get('total_code', 0)} bytes")
 
 if __name__ == "__main__":
     args = [a for a in sys.argv[1:] if not a.startswith("-")]
     if "--list" in sys.argv:
-        list_funcs()
+        target = args[0] if len(args) > 0 else "OSAlarm"
+        list_funcs(target)
     elif len(args) > 0:
-        diff_func(args[0], args[1] if len(args) > 1 else "main/OSThread")
+        diff_func(args[0], args[1] if len(args) > 1 else None)
     else:
-        print("Usage: python tools/diff_helper.py <func_name> [-a] or --list")
+        print("Usage: python tools/diff_helper.py <func_name> [-a] or --list [filter]")

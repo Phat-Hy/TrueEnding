@@ -30,6 +30,23 @@ BOOL OSDisableInterrupts(void);
 BOOL OSEnableInterrupts(void);
 BOOL OSRestoreInterrupts(BOOL level);
 
+typedef u8 __OSException;
+#define __OS_EXCEPTION_DECREMENTER 8
+
+typedef void (*__OSExceptionHandler)(__OSException exception, OSContext* context);
+__OSExceptionHandler __OSGetExceptionHandler(__OSException exception);
+__OSExceptionHandler __OSSetExceptionHandler(__OSException exception, __OSExceptionHandler handler);
+
+typedef BOOL (*OSShutdownFunction)(BOOL final);
+typedef struct OSShutdownFunctionInfo OSShutdownFunctionInfo;
+struct OSShutdownFunctionInfo {
+    OSShutdownFunction func;
+    u32 priority;
+    OSShutdownFunctionInfo* next;
+    OSShutdownFunctionInfo* prev;
+};
+void OSRegisterShutdownFunction(OSShutdownFunctionInfo* info);
+
 #ifdef __cplusplus
 }
 #endif
