@@ -16,7 +16,8 @@
 | **STEP-003** | `2026-09-29T20:52:30+07:00` | Setup | Added `reverse-engineer` agent and `decomp-matching` skill into `.agents/` | **Completed** | `agent-tools-ready` |
 | **STEP-004** | `2026-09-29T20:53:00+07:00` | Plan | Formulated `plans/001-tls-decomp-and-recomp-pipeline.md` & Journal tracking system | **Completed** | `plan-init` |
 | **STEP-005** | `2026-09-29T20:55:00+07:00` | Build | Configured `.gitignore` and initialized local git repository with tracking tags | **Completed** | `repo-init` |
-| **STEP-006** | *Awaiting Ingestion* | Ingest | Dump/Extract `main.dol` from game image, analyze header, detect compiler & SDK version | **Pending** | `awaiting-rom` |
+| **STEP-006** | `2026-09-29T21:25:00+07:00` | Ingest | Extracted 8.18MB `main.dol` (monolithic, 0 `.rel`s); identified CodeWarrior v4.3 b145 & RVL_SDK 3.2+ | **Completed** | `ingest-dol` |
+| **STEP-007** | *Up Next* | Setup | Download & configure `dtk` (decomp-toolkit) to split sections and generate symbols map | **In Progress** | `dtk-setup` |
 
 ---
 
