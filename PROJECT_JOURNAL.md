@@ -18,7 +18,9 @@
 | **STEP-005** | `2026-09-29T20:55:00+07:00` | Build | Configured `.gitignore` and initialized local git repository with tracking tags | **Completed** | `repo-init` |
 | **STEP-006** | `2026-09-29T21:25:00+07:00` | Ingest | Extracted 8.18MB `main.dol` (monolithic, 0 `.rel`s); identified CodeWarrior v4.3 b145 & RVL_SDK 3.2+ | **Completed** | `ingest-dol` |
 | **STEP-007** | `2026-09-29T21:27:00+07:00` | Setup | Installed `dtk` v1.8.4; successfully analyzed 8.18MB `main.dol`, discovered 18,103 functions, and split 361 object slices | **Completed** | `dtk-split` |
-| **STEP-008** | *Up Next* | Build | Configure build environment (`configure.py` / `ninja`), CodeWarrior toolchain, and `objdiff.json` | **In Progress** | `build-env` |
+| **STEP-008** | `2026-09-29T21:45:00+07:00` | Build | Configured build system (`configure.py` + `ninja`), CodeWarrior v4.3 b145 toolchain, and `objdiff.json` | **Completed** | `build-env` |
+| **STEP-009** | `2026-09-29T21:47:00+07:00` | Match | Decompiled `src/__init_cpp_exceptions.cpp` and achieved first **100.0% byte-for-byte binary match**! | **Completed** | `match-first-fn` |
+| **STEP-010** | *Up Next* | Decomp | Map RVL-SDK OS & Memory functions (`OSInit`, `memcpy`, `memset`) and decompile startup routines | **In Progress** | `decomp-startup` |
 
 ---
 

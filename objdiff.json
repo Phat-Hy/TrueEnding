@@ -1,0 +1,2928 @@
+{
+  "min_version": "2.0.0-beta.5",
+  "custom_make": "ninja",
+  "build_target": false,
+  "watch_patterns": [
+    "*.c",
+    "*.cc",
+    "*.cp",
+    "*.cpp",
+    "*.cxx",
+    "*.c++",
+    "*.h",
+    "*.hh",
+    "*.hp",
+    "*.hpp",
+    "*.hxx",
+    "*.h++",
+    "*.pch",
+    "*.pch++",
+    "*.inc",
+    "*.py",
+    "*.yml",
+    "*.txt",
+    "*.json"
+  ],
+  "units": [
+    {
+      "name": "main/auto_12_808893A0_sbss2",
+      "target_path": "build/SLSEXJ/obj/auto_12_808893A0_sbss2.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_11_808805A0_sdata2",
+      "target_path": "build/SLSEXJ/obj/auto_11_808805A0_sdata2.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_10_8087EE60_sbss",
+      "target_path": "build/SLSEXJ/obj/auto_10_8087EE60_sbss.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_10_8087FCEC_sbss",
+      "target_path": "build/SLSEXJ/obj/auto_10_8087FCEC_sbss.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_10_808801B8_sbss",
+      "target_path": "build/SLSEXJ/obj/auto_10_808801B8_sbss.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_09_8087D6C0_sdata",
+      "target_path": "build/SLSEXJ/obj/auto_09_8087D6C0_sdata.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_08_807C66C0_bss",
+      "target_path": "build/SLSEXJ/obj/auto_08_807C66C0_bss.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_07_807704A0_data",
+      "target_path": "build/SLSEXJ/obj/auto_07_807704A0_data.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_07_8079D7E8_data",
+      "target_path": "build/SLSEXJ/obj/auto_07_8079D7E8_data.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_07_807BADF8_data",
+      "target_path": "build/SLSEXJ/obj/auto_07_807BADF8_data.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_06_8072D480_rodata",
+      "target_path": "build/SLSEXJ/obj/auto_06_8072D480_rodata.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_800081C0_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_800081C0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_800082AC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_800082AC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8000CBD0_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8000CBD0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8003E688_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8003E688_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8003E6B8_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8003E6B8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80041A50_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80041A50_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80041A80_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80041A80_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80077058_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80077058_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8007708C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8007708C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80081DC8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80081DC8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80081E54_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80081E54_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_800A291C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_800A291C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_800A2978_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_800A2978_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_800B6684_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_800B6684_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_800B66A4_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_800B66A4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_800C41B4_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_800C41B4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_800C41D0_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_800C41D0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_800D5714_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_800D5714_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_800D5738_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_800D5738_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_800E29B4_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_800E29B4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_800E2A10_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_800E2A10_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8010DB68_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8010DB68_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8010DB88_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8010DB88_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_801175EC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_801175EC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8011770C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8011770C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80121EB0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80121EB0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80121F00_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80121F00_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80124FFC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80124FFC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80125320_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80125320_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_801A226C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_801A226C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_801A2290_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_801A2290_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_801CCE18_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_801CCE18_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_801CCE50_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_801CCE50_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_801CFC58_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_801CFC58_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_801CFD68_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_801CFD68_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_801D54A0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_801D54A0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_801D54C0_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_801D54C0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_801D8080_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_801D8080_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_801D80A0_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_801D80A0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_801E7FD8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_801E7FD8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_801E7FF8_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_801E7FF8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_801EA390_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_801EA390_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_801EA4B0_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_801EA4B0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_801F1EA0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_801F1EA0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_801F2398_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_801F2398_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_801F33A8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_801F33A8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_801F33D4_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_801F33D4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80201E1C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80201E1C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80201E78_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80201E78_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80216994_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80216994_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80216A2C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80216A2C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8021CB7C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8021CB7C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8021CC50_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8021CC50_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80224A2C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80224A2C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8022513C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8022513C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80234A60_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80234A60_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80234A8C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80234A8C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_802371AC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_802371AC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_802371BC_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_802371BC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_802378E0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_802378E0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8023793C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8023793C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80243700_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80243700_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8024372C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8024372C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_802441CC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_802441CC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80244228_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80244228_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80254530_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80254530_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8025457C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8025457C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8025A03C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8025A03C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8025A060_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8025A060_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8027276C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8027276C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8027278C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8027278C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80287E54_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80287E54_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80287E7C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80287E7C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_802B753C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_802B753C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_802B77AC_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_802B77AC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_802C7BC8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_802C7BC8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_802C7BE4_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_802C7BE4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_802CCAFC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_802CCAFC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_802CCB20_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_802CCB20_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_802CFFC8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_802CFFC8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_802D0038_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_802D0038_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_802DDCFC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_802DDCFC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_802DDD1C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_802DDD1C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_802E20FC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_802E20FC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_802E211C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_802E211C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8030DA1C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8030DA1C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8030DA20_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8030DA20_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8031B09C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8031B09C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8031B0A8_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8031B0A8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80376AD4_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80376AD4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80376B68_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80376B68_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_803B2780_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_803B2780_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_803B27AC_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_803B27AC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_803B338C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_803B338C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_803B33F8_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_803B33F8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_803CCF38_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_803CCF38_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_803CCF64_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_803CCF64_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_803E78B4_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_803E78B4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_803E836C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_803E836C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80423340_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80423340_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8042335C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8042335C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80425FB0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80425FB0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80426108_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80426108_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_804405CC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_804405CC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_804405F8_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_804405F8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8045824C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8045824C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80458270_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80458270_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80468F48_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80468F48_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80468F54_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80468F54_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80479940_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80479940_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80479998_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80479998_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80490850_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80490850_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80490884_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80490884_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8049CDA0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8049CDA0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8049CDBC_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8049CDBC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_804AE7C4_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_804AE7C4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_804AE820_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_804AE820_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_804B4C20_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_804B4C20_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_804B4C50_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_804B4C50_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_804C2FC8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_804C2FC8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_804C2FF8_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_804C2FF8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_804C563C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_804C563C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_804C566C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_804C566C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_804C8748_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_804C8748_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_804C8778_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_804C8778_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_804CD94C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_804CD94C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_804CD97C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_804CD97C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_804FF47C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_804FF47C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_804FF964_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_804FF964_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_804FF9C0_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_804FF9C0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80501068_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80501068_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_805010C4_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_805010C4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80514580_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80514580_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80514724_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80514724_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8051B904_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8051B904_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8051B924_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8051B924_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80521DFC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80521DFC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80521E20_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80521E20_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_805290FC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_805290FC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8052911C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8052911C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80530FB4_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80530FB4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80531018_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80531018_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8053AF38_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8053AF38_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8053AFBC_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8053AFBC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8053C564_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8053C564_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8053C6A8_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8053C6A8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8053C6CC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8053C6CC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8053C754_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8053C754_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8053CF48_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8053CF48_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8053D0F8_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8053D0F8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80545CEC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80545CEC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80545FFC_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80545FFC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80548C9C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80548C9C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80548D58_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80548D58_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8055A444_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8055A444_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8055A4A0_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8055A4A0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8056313C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8056313C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_805634D4_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_805634D4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8057501C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8057501C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80575F10_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80575F10_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_805AE250_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_805AE250_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_805AE270_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_805AE270_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_805CD990_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_805CD990_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_805CD9A4_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_805CD9A4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_805D3C90_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_805D3C90_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_805D3CA0_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_805D3CA0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_805D41E0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_805D41E0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_805D41F4_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_805D41F4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_805D5690_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_805D5690_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_805D56A4_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_805D56A4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_805D7CC0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_805D7CC0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_805D7CD4_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_805D7CD4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_805E0630_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_805E0630_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_805E06D4_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_805E06D4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068B39C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068B39C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068B47C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068B47C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068B50C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068B50C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8068B60C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8068B60C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068B610_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068B610_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8068B728_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8068B728_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068B770_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068B770_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8068BA50_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8068BA50_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_dtor_8068BA80_text",
+      "target_path": "build/SLSEXJ/obj/auto_dtor_8068BA80_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068BAC0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068BAC0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068BB54_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068BB54_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8068BC10_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8068BC10_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068BC30_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068BC30_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068BD60_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068BD60_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068C040_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068C040_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_dtor_8068C0D4_text",
+      "target_path": "build/SLSEXJ/obj/auto_dtor_8068C0D4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068C164_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068C164_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8068C220_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8068C220_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068C240_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068C240_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068C370_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068C370_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_dtor_8068C3E8_text",
+      "target_path": "build/SLSEXJ/obj/auto_dtor_8068C3E8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068C440_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068C440_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068C4B8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068C4B8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068C72C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068C72C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068C9A0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068C9A0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8068CD1C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8068CD1C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068CD2C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068CD2C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8068D0A8_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8068D0A8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068D0B8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068D0B8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068D170_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068D170_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068D3A0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068D3A0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8068D40C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8068D40C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068D414_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068D414_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8068D7AC_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8068D7AC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068D7B8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068D7B8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068D9BC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068D9BC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068DA74_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068DA74_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068DC84_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068DC84_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8068DCF0_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8068DCF0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068DCF8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068DCF8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8068E080_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8068E080_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068E09C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068E09C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068E270_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068E270_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068E3FC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068E3FC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068E554_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068E554_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068E6E8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068E6E8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068E878_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068E878_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8068EA10_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8068EA10_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068EA70_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068EA70_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8068EAF8_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8068EAF8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068EB20_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068EB20_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8068EBA8_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8068EBA8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068EBF8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068EBF8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068EC74_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068EC74_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068ECF4_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068ECF4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068EF6C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068EF6C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068EFFC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068EFFC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068F138_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068F138_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068F410_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068F410_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8068F630_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8068F630_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068F658_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068F658_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068F6D0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068F6D0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068F74C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068F74C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068F9B8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068F9B8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068FA48_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068FA48_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068FB84_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068FB84_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8068FE5C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8068FE5C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80690068_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80690068_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80690094_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80690094_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_806901D0_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_806901D0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80690230_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80690230_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_806903A8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_806903A8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80690524_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80690524_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80690630_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80690630_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80690A98_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80690A98_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80690D60_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80690D60_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80690D70_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80690D70_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80690E9C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80690E9C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80690EF4_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80690EF4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80691050_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80691050_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_806911CC_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_806911CC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_806912D8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_806912D8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8069172C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8069172C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8069194C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8069194C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_dtor_80691AC0_text",
+      "target_path": "build/SLSEXJ/obj/auto_dtor_80691AC0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80691B44_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80691B44_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80691B80_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80691B80_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80691C90_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80691C90_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80691C9C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80691C9C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80691CFC_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80691CFC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80691D08_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80691D08_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80691E1C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80691E1C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_dtor_80691E68_text",
+      "target_path": "build/SLSEXJ/obj/auto_dtor_80691E68_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_dtor_80691EE4_text",
+      "target_path": "build/SLSEXJ/obj/auto_dtor_80691EE4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80691F24_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80691F24_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_806920C0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_806920C0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_806926D4_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_806926D4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8069293C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8069293C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8069298C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8069298C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_806929FC_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_806929FC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80692BC4_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80692BC4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80692BFC_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80692BFC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80692C04_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80692C04_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80692C3C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80692C3C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_dtor_80692EFC_text",
+      "target_path": "build/SLSEXJ/obj/auto_dtor_80692EFC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_dtor_80692F78_text",
+      "target_path": "build/SLSEXJ/obj/auto_dtor_80692F78_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80692FF4_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80692FF4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_806930D4_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_806930D4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_806936C0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_806936C0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80693730_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80693730_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80693758_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80693758_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80693798_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80693798_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80693884_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80693884_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_806939C8_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_806939C8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80693AB8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80693AB8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80694008_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80694008_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80694048_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80694048_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8069407C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8069407C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_806940A8_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_806940A8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80694328_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80694328_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_806943B8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_806943B8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_806945A4_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_806945A4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80694790_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80694790_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80694C38_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80694C38_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_806950E0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_806950E0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8069512C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8069512C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_dtor_80695138_text",
+      "target_path": "build/SLSEXJ/obj/auto_dtor_80695138_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8069519C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8069519C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80695230_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80695230_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80695270_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80695270_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_806952C4_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_806952C4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8069533C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8069533C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80695720_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80695720_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_dtor_80695824_text",
+      "target_path": "build/SLSEXJ/obj/auto_dtor_80695824_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_806958E0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_806958E0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_806959D8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_806959D8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80695A50_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80695A50_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80695AD0_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80695AD0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80695B28_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80695B28_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80695D84_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80695D84_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/__init_cpp_exceptions",
+      "target_path": "build/SLSEXJ/obj/__init_cpp_exceptions.o",
+      "base_path": "build/SLSEXJ/src/__init_cpp_exceptions.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 48 -sdata2 48 -lang=c++",
+        "ctx_path": "build/SLSEXJ/src/__init_cpp_exceptions.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/__init_cpp_exceptions.cpp",
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_806965E8_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_806965E8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_806966F4_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_806966F4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_806968A4_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_806968A4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80696A54_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80696A54_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80696FA8_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80696FA8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_806974B4_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_806974B4_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8069766C_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8069766C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_806976AC_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_806976AC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_806977B0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_806977B0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80697BB8_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80697BB8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80705300_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80705300_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80705340_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80705340_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8070B060_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8070B060_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8070B06C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8070B06C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80713480_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80713480_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8071348C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8071348C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80716030_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80716030_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8071603C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8071603C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80718780_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80718780_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_807187C8_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_807187C8_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8071D0D0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8071D0D0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8071D0DC_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8071D0DC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80721880_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80721880_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8072188C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8072188C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80725C80_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80725C80_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80725C8C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80725C8C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_80725D90_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_80725D90_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_80725D9C_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80725D9C_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_807263D0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_807263D0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_807263DC_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_807263DC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_807267C0_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_807267C0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_807267CC_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_807267CC_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_fn_8072D180_text",
+      "target_path": "build/SLSEXJ/obj/auto_fn_8072D180_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_8072D204_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8072D204_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_00_80004000_init",
+      "target_path": "build/SLSEXJ/obj/auto_00_80004000_init.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    }
+  ],
+  "progress_categories": []
+}
