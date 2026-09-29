@@ -1,0 +1,58 @@
+# Disc images, dumps, and original game binaries (Do not commit copyrighted assets)
+*.iso
+*.rvz
+*.wbfs
+*.gcm
+*.wia
+*.cso
+orig/
+disc/
+dump/
+assets/extracted/
+
+# Build artifacts
+build/
+bin/
+obj/
+*.o
+*.d
+*.ninja
+.ninja_log
+.ninja_deps
+compile_commands.json
+
+# Compilers and SDK binaries (proprietary tools)
+tools/mwcc*
+tools/bin/
+*.exe
+
+# Python / Scripts
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+venv/
+env/
+
+# Environment & sensitive files
+.env
+.env.local
+*.pem
+credentials*
+
+# Node / Tools
+node_modules/
+.npm/
+
+# Logs & temp
+*.log
+tmp/
+temp/
+.cache/
+
+# IDE / OS
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+.DS_Store
