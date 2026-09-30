@@ -146,16 +146,126 @@ def compile_test():
         return False
 
 
+def build_runner(jobs: int = 12):
+    """Compile all lifted chunks and link the native PC host runner."""
+    from concurrent.futures import ThreadPoolExecutor
+
+    chunks_dir = GENERATED_DIR / "chunks"
+    obj_dir = RECOMP_DIR / "chunks"
+    obj_dir.mkdir(parents=True, exist_ok=True)
+
+    if not chunks_dir.exists():
+        print(f"Error: {chunks_dir} not found. Run 'python tools/recomp_harness.py lift' first.")
+        return False
+
+    chunk_files = sorted(list(chunks_dir.glob("*.c")))
+    if not chunk_files:
+        print(f"Error: no chunks found in {chunks_dir}")
+        return False
+
+    # 1. Compile core support objects
+    support_files = [
+        (ROOT_DIR / "tools" / "DolRecomp" / "src" / "cpu" / "cpu.c", RECOMP_DIR / "cpu.o"),
+        (ROOT_DIR / "tools" / "DolRecomp" / "src" / "frontend" / "container" / "dol.c", RECOMP_DIR / "dol.o"),
+        (ROOT_DIR / "recomp" / "replacements.c", RECOMP_DIR / "replacements.o"),
+        (ROOT_DIR / "recomp" / "host_runner.c", RECOMP_DIR / "host_runner.o"),
+    ]
+
+    includes = [
+        "-I", str(ROOT_DIR / "recomp"),
+        "-I", str(ROOT_DIR / "tools" / "DolRecomp" / "src"),
+        "-I", str(GENERATED_DIR),
+    ]
+
+    for src, obj in support_files:
+        if not obj.exists() or obj.stat().st_mtime < src.stat().st_mtime:
+            print(f"Compiling {src.name} -> {obj.name}...")
+            cmd = [str(GCC_BIN), "-c", str(src), "-o", str(obj)] + includes + ["-O2"]
+            res = subprocess.run(cmd)
+            if res.returncode != 0:
+                print(f"Failed to compile {src}")
+                return False
+
+    # 2. Compile chunks in parallel (with incremental check)
+    to_compile = []
+    all_objs = [str(obj.resolve()) for _, obj in support_files]
+    for c_file in chunk_files:
+        o_file = obj_dir / (c_file.stem + ".o")
+        all_objs.append(str(o_file.resolve()))
+        if not o_file.exists() or o_file.stat().st_mtime < c_file.stat().st_mtime:
+            to_compile.append((c_file, o_file))
+
+    print(f"Total chunks: {len(chunk_files)} ({len(to_compile)} to compile, {len(chunk_files) - len(to_compile)} cached)")
+
+    if to_compile:
+        def compile_chunk(item):
+            src, obj = item
+            cmd = [str(GCC_BIN), "-c", str(src), "-o", str(obj)] + includes + ["-O1"]
+            res = subprocess.run(cmd)
+            return res.returncode == 0
+
+        t0 = time.time()
+        print(f"Compiling {len(to_compile)} chunks with {jobs} worker threads...")
+        with ThreadPoolExecutor(max_workers=jobs) as ex:
+            results = list(ex.map(compile_chunk, to_compile))
+        t1 = time.time()
+
+        if not all(results):
+            print("Error: one or more chunks failed to compile.")
+            return False
+        print(f"Chunk compilation completed in {t1 - t0:.2f} seconds.")
+
+    # 3. Link executable using response file
+    runner_exe = RECOMP_DIR / "tls_runner.exe"
+    rsp_path = RECOMP_DIR / "objects.rsp"
+    with open(rsp_path, "w", encoding="utf-8") as f:
+        for obj in all_objs:
+            f.write(f'"{obj.replace(os.sep, "/")}"\n')
+
+    print(f"Linking {runner_exe.name} with {len(all_objs)} object files...")
+    link_cmd = [
+        str(GCC_BIN),
+        f"@{rsp_path}",
+        "-o", str(runner_exe),
+        "-lm",
+    ]
+    t0 = time.time()
+    res = subprocess.run(link_cmd)
+    t1 = time.time()
+
+    if res.returncode != 0 or not runner_exe.exists():
+        print(f"Error: linking failed with exit code {res.returncode}")
+        return False
+
+    print(f"SUCCESS! Built native PC runner: {runner_exe} ({runner_exe.stat().st_size / (1024*1024):.2f} MB) in {t1 - t0:.2f}s")
+    return True
+
+
+def run_runner(blocks: int = 10000):
+    """Run the native PC runner against the original main.dol."""
+    runner_exe = RECOMP_DIR / "tls_runner.exe"
+    if not runner_exe.exists():
+        print(f"Runner executable {runner_exe} not found. Building first...")
+        if not build_runner():
+            return False
+
+    cmd = [str(runner_exe), "--dol", str(DOL_PATH), "--blocks", str(blocks)]
+    print(f"Executing: {' '.join(cmd)}\n")
+    res = subprocess.run(cmd)
+    return res.returncode == 0
+
+
 def main():
     parser = argparse.ArgumentParser(description="DolRecomp PC Lifting Harness for The Last Story")
     parser.add_argument(
         "action",
-        choices=["lift", "status", "convert-symbols", "compile-test"],
+        choices=["lift", "status", "convert-symbols", "compile-test", "build-runner", "run"],
         default="status",
         nargs="?",
         help="Action to perform",
     )
-    parser.add_argument("-j", "--jobs", type=int, default=8, help="Number of worker jobs for lifting")
+    parser.add_argument("-j", "--jobs", type=int, default=12, help="Number of worker jobs for parallel work")
+    parser.add_argument("--blocks", type=int, default=10000, help="Max blocks to execute in runner")
     args = parser.parse_args()
 
     if args.action == "convert-symbols":
@@ -166,7 +276,12 @@ def main():
         check_status()
     elif args.action == "compile-test":
         compile_test()
+    elif args.action == "build-runner":
+        build_runner(jobs=args.jobs)
+    elif args.action == "run":
+        run_runner(blocks=args.blocks)
 
 
 if __name__ == "__main__":
     main()
+

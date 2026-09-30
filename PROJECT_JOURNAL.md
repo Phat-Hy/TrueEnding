@@ -27,7 +27,8 @@
 | **STEP-014** | `2026-09-30T14:35:00+07:00` | Recomp | Configured DolRecomp static recompiler harness & portable GCC toolchain; successfully lifted `main.dol` (1,875,456 instructions across 459 C chunks, 0 unknown opcodes, 18,189 symbols mapped); verified host x64 compilation | **Completed** | `dolrecomp-harness-ready` |
 | **STEP-015** | `2026-09-30T19:50:00+07:00` | Match | Decompiled core RVL-SDK context subsystem `src/OSContext.c` (15 functions, 2,256 bytes code, 440 bytes data, 4 bytes sdata — **100.0% byte-for-byte binary match**!) | **Completed** | `decomp-os-context` |
 | **STEP-016** | `2026-09-30T19:58:00+07:00` | Match | Decompiled core RVL-SDK memory arena subsystem `src/OSArena.c` (13 functions, 256 bytes code, 8 bytes sdata, 8 bytes sbss — **100.0% byte-for-byte binary match**!) | **Completed** | `decomp-os-arena` |
-| **STEP-017** | *Up Next* | Runtime / Recomp | Advance Option B: Set up native PC recompilation runner harness and integrate replacement C functions | **In Progress** | `recomp-runner-bringup` |
+| **STEP-017** | `2026-09-30T20:08:00+07:00` | Runtime / Recomp | Built native PC recompilation runner `tls_runner.exe` linking all 459 lifted C chunks + replacement bridge; verified execution from entry point `0x80004050` through CRT initialization into `__OSThreadInit` (`LR: 0x805F49E4`, 290k+ instructions executed) | **Completed** | `recomp-runner-bringup` |
+| **STEP-018** | *Up Next* | Match / Runtime | Decompile next core OS subsystem (`OSInterrupt.c` / `OSError.c`) and wire Wii hardware MMIO intercepts in PC runner | **In Progress** | `decomp-os-interrupt` |
 
 ---
 

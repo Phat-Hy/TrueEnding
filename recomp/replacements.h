@@ -1,0 +1,24 @@
+#ifndef RECOMP_REPLACEMENTS_H
+#define RECOMP_REPLACEMENTS_H
+
+#include "cpu/cpu.h"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+// Dispatches a function call if a native replacement exists.
+// Returns 1 if handled, 0 if original recompiled code should run.
+int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address);
+
+// Fallback handler for privileged or cache instructions (dcbf, icbi, etc.)
+void handle_instruction_fallback(CPUState* cpu, u32 raw, u32 cia);
+
+// Resolves a guest PowerPC address to a host pointer.
+void* resolve_guest_pointer(CPUState* ctx, u32 addr);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // RECOMP_REPLACEMENTS_H
