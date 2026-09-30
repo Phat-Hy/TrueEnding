@@ -42,6 +42,43 @@ void handle_instruction_fallback(CPUState* cpu, u32 raw, u32 cia) {
     cpu->pc = cia + 4;
 }
 
+static u32 s_mmio_regs[0x2000]; // Hash storage for common MMIO offsets
+
+static inline u32 mmio_hash(u32 ea) {
+    return (ea >> 2) & 0x1FFF;
+}
+
+u64 mmio_external_read(CPUState* cpu, u32 ea, u8 size) {
+    (void)cpu;
+    // Hollywood Version / ID register
+    if (ea == 0xCD006024) {
+        return 0x00000021; // Hollywood revision 2.1
+    }
+    // Memory controller / bus clock
+    if (ea == 0xCC004000) {
+        return 0x00000001;
+    }
+    // DSP control status
+    if (ea == 0xCC00500A) {
+        return 0;
+    }
+    // Video Interface
+    if (ea == 0xCC00206C) {
+        return 0;
+    }
+    // IPC status (Starlet acknowledgment ready)
+    if (ea == 0xCD006434) {
+        return 0x00000002;
+    }
+    return s_mmio_regs[mmio_hash(ea)];
+}
+
+void mmio_external_write(CPUState* cpu, u32 ea, u64 value, u8 size) {
+    (void)cpu;
+    (void)size;
+    s_mmio_regs[mmio_hash(ea)] = (u32)value;
+}
+
 static u32 s_simulated_ticks = 0;
 
 int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {

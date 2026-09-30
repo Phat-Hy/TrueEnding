@@ -7,6 +7,7 @@
 #include "revolution/os/OSThread.h"
 #include "revolution/os/OSAlarm.h"
 #include "revolution/os/OSArena.h"
+#include "revolution/os/OSInterrupt.h"
 
 #ifdef __cplusplus
 extern "C" {

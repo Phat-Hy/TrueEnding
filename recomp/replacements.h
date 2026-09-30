@@ -14,6 +14,10 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address);
 // Fallback handler for privileged or cache instructions (dcbf, icbi, etc.)
 void handle_instruction_fallback(CPUState* cpu, u32 raw, u32 cia);
 
+// Hardware MMIO handlers for Hollywood / Broadway registers
+u64 mmio_external_read(CPUState* cpu, u32 ea, u8 size);
+void mmio_external_write(CPUState* cpu, u32 ea, u64 value, u8 size);
+
 // Resolves a guest PowerPC address to a host pointer.
 void* resolve_guest_pointer(CPUState* ctx, u32 addr);
 

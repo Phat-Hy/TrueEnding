@@ -106,6 +106,8 @@ int main(int argc, char** argv) {
 
     // Initialize initial PowerPC state
     cpu.instruction_fallback = handle_instruction_fallback;
+    cpu.external_read = mmio_external_read;
+    cpu.external_write = mmio_external_write;
     cpu.gpr[1] = 0x80700000; // Initial stack pointer
     cpu.msr = 0x00002000;    // FP enabled
 

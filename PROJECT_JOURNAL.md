@@ -28,7 +28,9 @@
 | **STEP-015** | `2026-09-30T19:50:00+07:00` | Match | Decompiled core RVL-SDK context subsystem `src/OSContext.c` (15 functions, 2,256 bytes code, 440 bytes data, 4 bytes sdata — **100.0% byte-for-byte binary match**!) | **Completed** | `decomp-os-context` |
 | **STEP-016** | `2026-09-30T19:58:00+07:00` | Match | Decompiled core RVL-SDK memory arena subsystem `src/OSArena.c` (13 functions, 256 bytes code, 8 bytes sdata, 8 bytes sbss — **100.0% byte-for-byte binary match**!) | **Completed** | `decomp-os-arena` |
 | **STEP-017** | `2026-09-30T20:08:00+07:00` | Runtime / Recomp | Built native PC recompilation runner `tls_runner.exe` linking all 459 lifted C chunks + replacement bridge; verified execution from entry point `0x80004050` through CRT initialization into `__OSThreadInit` (`LR: 0x805F49E4`, 290k+ instructions executed) | **Completed** | `recomp-runner-bringup` |
-| **STEP-018** | *Up Next* | Match / Runtime | Decompile next core OS subsystem (`OSInterrupt.c` / `OSError.c`) and wire Wii hardware MMIO intercepts in PC runner | **In Progress** | `decomp-os-interrupt` |
+| **STEP-018** | `2026-09-30T20:23:00+07:00` | Match | Decompiled core RVL-SDK interrupt subsystem `src/OSInterrupt.c` (11 functions, 1,928 bytes code, 48 bytes data, 24 bytes sbss — **100.0% byte-for-byte binary match**!) | **Completed** | `decomp-os-interrupt` |
+| **STEP-019** | `2026-09-30T20:24:00+07:00` | Runtime / Recomp | Implemented Hollywood/Broadway MMIO intercept architecture (`mmio_external_read`/`mmio_external_write`), advancing PC runner execution past `__OSThreadInit` into EXI/SI subsystem (`Final PC: 0x805E7FF0`, 670,000+ native instructions executed) | **Completed** | `recomp-mmio-runner` |
+| **STEP-020** | *Up Next* | Match / Runtime | Decompile next core OS subsystem (`OSError.c` / `OSAlloc.c`) and advance EXI/SI device responses in PC runner | **In Progress** | `decomp-os-error` |
 
 ---
 

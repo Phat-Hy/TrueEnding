@@ -160,6 +160,7 @@ config.libs = [
             Object(True, "OSAlarm.c"),
             Object(True, "OSArena.c"),
             Object(True, "OSContext.c"),
+            Object(True, "OSInterrupt.c"),
             Object(True, "OSThread.c"),
             Object(True, "OSTime.c"),
         ],
