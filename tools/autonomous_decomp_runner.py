@@ -155,8 +155,9 @@ Output the COMPLETE updated contents of `{c_file}` inside a ```c ... ``` code bl
     ]
 
     for attempt in range(1, max_attempts + 1):
-        log_print(f"\n--- [Attempt {attempt}/{max_attempts}] Requesting solution from local Qwen2.5-Coder... ---")
-        reply = query_llm(messages)
+        temp = round(0.2 + (attempt - 1) * 0.08, 2)
+        log_print(f"\n--- [Attempt {attempt}/{max_attempts}] Requesting solution from local Qwen2.5-Coder (temp={temp})... ---")
+        reply = query_llm(messages, temperature=temp)
         if not reply:
             log_print("[Warning] No reply from local model. Retrying in 3s...")
             time.sleep(3)
@@ -221,8 +222,23 @@ Output the COMPLETE updated contents of `{c_file}` inside a ```c ... ``` code bl
             run_command(f'git commit -m "decomp({module_name}): 100% match {func_name} (autonomous local agent)"')
             return True
 
-        messages.append({"role": "assistant", "content": f"```c\n{c_code}\n```"})
-        messages.append({"role": "user", "content": f"Compilation succeeded, but assembly diff remains:\n```text\n{diff_out}\n```\nAnalyze the instruction and register differences (left is target, right is built). Adjust variable order, expressions, or types to match the target registers and return the updated C file in ```c ... ```."})
+        # Keep a clean sliding window (system prompt + latest state) to prevent context explosion
+        messages = [
+            {"role": "system", "content": SYSTEM_PROMPT},
+            {"role": "user", "content": f"""We are matching function `{func_name}` in `{c_file}` for Wii USA SLSEXJ.
+Current C file:
+```c
+{final_code_to_write}
+```
+
+Current Assembly Diff:
+```text
+{diff_out}
+```
+
+Analyze the instruction and register differences (left is target, right is built).
+Adjust variable order, control flow, or expressions to match the target assembly and return the updated C file in ```c ... ```."""}
+        ]
 
     log_print(f"\n[Notice] Function `{func_name}` did not reach 100% after {max_attempts} attempts. Moving to next task.")
     return False
