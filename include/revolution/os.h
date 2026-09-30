@@ -30,6 +30,9 @@ BOOL OSDisableInterrupts(void);
 BOOL OSEnableInterrupts(void);
 BOOL OSRestoreInterrupts(BOOL level);
 
+void OSReport(const char* fmt, ...);
+void OSPanic(const char* file, int line, const char* fmt, ...);
+
 typedef u8 __OSException;
 #define __OS_EXCEPTION_DECREMENTER 8
 

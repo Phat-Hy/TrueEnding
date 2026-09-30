@@ -1,0 +1,878 @@
+.include "macros.inc"
+.file "OSContext.c"
+
+# 0x805ED800..0x805EE0D0 | size: 0x8D0
+.text
+.balign 4
+
+# .text:0x0 | 0x805ED800 | size: 0x124
+.fn __OSLoadFPUContext, local
+/* 805ED800 005E7E60  A0 A4 01 A2 */	lhz r5, 0x1a2(r4)
+/* 805ED804 005E7E64  54 A5 07 FF */	clrlwi. r5, r5, 31
+/* 805ED808 005E7E68  41 82 01 18 */	beq .L_805ED920
+/* 805ED80C 005E7E6C  C8 04 01 90 */	lfd f0, 0x190(r4)
+/* 805ED810 005E7E70  FD FE 05 8E */	mtfsf 255, f0
+/* 805ED814 005E7E74  7C B8 E2 A6 */	mfspr r5, HID2
+/* 805ED818 005E7E78  54 A5 1F FF */	extrwi. r5, r5, 1, 2
+/* 805ED81C 005E7E7C  41 82 00 84 */	beq .L_805ED8A0
+/* 805ED820 005E7E80  E0 04 01 C8 */	psq_l f0, 0x1c8(r4), 0, qr0
+/* 805ED824 005E7E84  E0 24 01 D0 */	psq_l f1, 0x1d0(r4), 0, qr0
+/* 805ED828 005E7E88  E0 44 01 D8 */	psq_l f2, 0x1d8(r4), 0, qr0
+/* 805ED82C 005E7E8C  E0 64 01 E0 */	psq_l f3, 0x1e0(r4), 0, qr0
+/* 805ED830 005E7E90  E0 84 01 E8 */	psq_l f4, 0x1e8(r4), 0, qr0
+/* 805ED834 005E7E94  E0 A4 01 F0 */	psq_l f5, 0x1f0(r4), 0, qr0
+/* 805ED838 005E7E98  E0 C4 01 F8 */	psq_l f6, 0x1f8(r4), 0, qr0
+/* 805ED83C 005E7E9C  E0 E4 02 00 */	psq_l f7, 0x200(r4), 0, qr0
+/* 805ED840 005E7EA0  E1 04 02 08 */	psq_l f8, 0x208(r4), 0, qr0
+/* 805ED844 005E7EA4  E1 24 02 10 */	psq_l f9, 0x210(r4), 0, qr0
+/* 805ED848 005E7EA8  E1 44 02 18 */	psq_l f10, 0x218(r4), 0, qr0
+/* 805ED84C 005E7EAC  E1 64 02 20 */	psq_l f11, 0x220(r4), 0, qr0
+/* 805ED850 005E7EB0  E1 84 02 28 */	psq_l f12, 0x228(r4), 0, qr0
+/* 805ED854 005E7EB4  E1 A4 02 30 */	psq_l f13, 0x230(r4), 0, qr0
+/* 805ED858 005E7EB8  E1 C4 02 38 */	psq_l f14, 0x238(r4), 0, qr0
+/* 805ED85C 005E7EBC  E1 E4 02 40 */	psq_l f15, 0x240(r4), 0, qr0
+/* 805ED860 005E7EC0  E2 04 02 48 */	psq_l f16, 0x248(r4), 0, qr0
+/* 805ED864 005E7EC4  E2 24 02 50 */	psq_l f17, 0x250(r4), 0, qr0
+/* 805ED868 005E7EC8  E2 44 02 58 */	psq_l f18, 0x258(r4), 0, qr0
+/* 805ED86C 005E7ECC  E2 64 02 60 */	psq_l f19, 0x260(r4), 0, qr0
+/* 805ED870 005E7ED0  E2 84 02 68 */	psq_l f20, 0x268(r4), 0, qr0
+/* 805ED874 005E7ED4  E2 A4 02 70 */	psq_l f21, 0x270(r4), 0, qr0
+/* 805ED878 005E7ED8  E2 C4 02 78 */	psq_l f22, 0x278(r4), 0, qr0
+/* 805ED87C 005E7EDC  E2 E4 02 80 */	psq_l f23, 0x280(r4), 0, qr0
+/* 805ED880 005E7EE0  E3 04 02 88 */	psq_l f24, 0x288(r4), 0, qr0
+/* 805ED884 005E7EE4  E3 24 02 90 */	psq_l f25, 0x290(r4), 0, qr0
+/* 805ED888 005E7EE8  E3 44 02 98 */	psq_l f26, 0x298(r4), 0, qr0
+/* 805ED88C 005E7EEC  E3 64 02 A0 */	psq_l f27, 0x2a0(r4), 0, qr0
+/* 805ED890 005E7EF0  E3 84 02 A8 */	psq_l f28, 0x2a8(r4), 0, qr0
+/* 805ED894 005E7EF4  E3 A4 02 B0 */	psq_l f29, 0x2b0(r4), 0, qr0
+/* 805ED898 005E7EF8  E3 C4 02 B8 */	psq_l f30, 0x2b8(r4), 0, qr0
+/* 805ED89C 005E7EFC  E3 E4 02 C0 */	psq_l f31, 0x2c0(r4), 0, qr0
+.L_805ED8A0:
+/* 805ED8A0 005E7F00  C8 04 00 90 */	lfd f0, 0x90(r4)
+/* 805ED8A4 005E7F04  C8 24 00 98 */	lfd f1, 0x98(r4)
+/* 805ED8A8 005E7F08  C8 44 00 A0 */	lfd f2, 0xa0(r4)
+/* 805ED8AC 005E7F0C  C8 64 00 A8 */	lfd f3, 0xa8(r4)
+/* 805ED8B0 005E7F10  C8 84 00 B0 */	lfd f4, 0xb0(r4)
+/* 805ED8B4 005E7F14  C8 A4 00 B8 */	lfd f5, 0xb8(r4)
+/* 805ED8B8 005E7F18  C8 C4 00 C0 */	lfd f6, 0xc0(r4)
+/* 805ED8BC 005E7F1C  C8 E4 00 C8 */	lfd f7, 0xc8(r4)
+/* 805ED8C0 005E7F20  C9 04 00 D0 */	lfd f8, 0xd0(r4)
+/* 805ED8C4 005E7F24  C9 24 00 D8 */	lfd f9, 0xd8(r4)
+/* 805ED8C8 005E7F28  C9 44 00 E0 */	lfd f10, 0xe0(r4)
+/* 805ED8CC 005E7F2C  C9 64 00 E8 */	lfd f11, 0xe8(r4)
+/* 805ED8D0 005E7F30  C9 84 00 F0 */	lfd f12, 0xf0(r4)
+/* 805ED8D4 005E7F34  C9 A4 00 F8 */	lfd f13, 0xf8(r4)
+/* 805ED8D8 005E7F38  C9 C4 01 00 */	lfd f14, 0x100(r4)
+/* 805ED8DC 005E7F3C  C9 E4 01 08 */	lfd f15, 0x108(r4)
+/* 805ED8E0 005E7F40  CA 04 01 10 */	lfd f16, 0x110(r4)
+/* 805ED8E4 005E7F44  CA 24 01 18 */	lfd f17, 0x118(r4)
+/* 805ED8E8 005E7F48  CA 44 01 20 */	lfd f18, 0x120(r4)
+/* 805ED8EC 005E7F4C  CA 64 01 28 */	lfd f19, 0x128(r4)
+/* 805ED8F0 005E7F50  CA 84 01 30 */	lfd f20, 0x130(r4)
+/* 805ED8F4 005E7F54  CA A4 01 38 */	lfd f21, 0x138(r4)
+/* 805ED8F8 005E7F58  CA C4 01 40 */	lfd f22, 0x140(r4)
+/* 805ED8FC 005E7F5C  CA E4 01 48 */	lfd f23, 0x148(r4)
+/* 805ED900 005E7F60  CB 04 01 50 */	lfd f24, 0x150(r4)
+/* 805ED904 005E7F64  CB 24 01 58 */	lfd f25, 0x158(r4)
+/* 805ED908 005E7F68  CB 44 01 60 */	lfd f26, 0x160(r4)
+/* 805ED90C 005E7F6C  CB 64 01 68 */	lfd f27, 0x168(r4)
+/* 805ED910 005E7F70  CB 84 01 70 */	lfd f28, 0x170(r4)
+/* 805ED914 005E7F74  CB A4 01 78 */	lfd f29, 0x178(r4)
+/* 805ED918 005E7F78  CB C4 01 80 */	lfd f30, 0x180(r4)
+/* 805ED91C 005E7F7C  CB E4 01 88 */	lfd f31, 0x188(r4)
+.L_805ED920:
+/* 805ED920 005E7F80  4E 80 00 20 */	blr
+.endfn __OSLoadFPUContext
+
+# .text:0x124 | 0x805ED924 | size: 0xC
+.fn gap_03_805ED924_text, global
+.hidden gap_03_805ED924_text
+/* 805ED924 005E7F84  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+/* 805ED928 005E7F88  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+/* 805ED92C 005E7F8C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+.endfn gap_03_805ED924_text
+
+# .text:0x130 | 0x805ED930 | size: 0x128
+.fn __OSSaveFPUContext, local
+/* 805ED930 005E7F90  A0 65 01 A2 */	lhz r3, 0x1a2(r5)
+/* 805ED934 005E7F94  60 63 00 01 */	ori r3, r3, 0x1
+/* 805ED938 005E7F98  B0 65 01 A2 */	sth r3, 0x1a2(r5)
+/* 805ED93C 005E7F9C  D8 05 00 90 */	stfd f0, 0x90(r5)
+/* 805ED940 005E7FA0  D8 25 00 98 */	stfd f1, 0x98(r5)
+/* 805ED944 005E7FA4  D8 45 00 A0 */	stfd f2, 0xa0(r5)
+/* 805ED948 005E7FA8  D8 65 00 A8 */	stfd f3, 0xa8(r5)
+/* 805ED94C 005E7FAC  D8 85 00 B0 */	stfd f4, 0xb0(r5)
+/* 805ED950 005E7FB0  D8 A5 00 B8 */	stfd f5, 0xb8(r5)
+/* 805ED954 005E7FB4  D8 C5 00 C0 */	stfd f6, 0xc0(r5)
+/* 805ED958 005E7FB8  D8 E5 00 C8 */	stfd f7, 0xc8(r5)
+/* 805ED95C 005E7FBC  D9 05 00 D0 */	stfd f8, 0xd0(r5)
+/* 805ED960 005E7FC0  D9 25 00 D8 */	stfd f9, 0xd8(r5)
+/* 805ED964 005E7FC4  D9 45 00 E0 */	stfd f10, 0xe0(r5)
+/* 805ED968 005E7FC8  D9 65 00 E8 */	stfd f11, 0xe8(r5)
+/* 805ED96C 005E7FCC  D9 85 00 F0 */	stfd f12, 0xf0(r5)
+/* 805ED970 005E7FD0  D9 A5 00 F8 */	stfd f13, 0xf8(r5)
+/* 805ED974 005E7FD4  D9 C5 01 00 */	stfd f14, 0x100(r5)
+/* 805ED978 005E7FD8  D9 E5 01 08 */	stfd f15, 0x108(r5)
+/* 805ED97C 005E7FDC  DA 05 01 10 */	stfd f16, 0x110(r5)
+/* 805ED980 005E7FE0  DA 25 01 18 */	stfd f17, 0x118(r5)
+/* 805ED984 005E7FE4  DA 45 01 20 */	stfd f18, 0x120(r5)
+/* 805ED988 005E7FE8  DA 65 01 28 */	stfd f19, 0x128(r5)
+/* 805ED98C 005E7FEC  DA 85 01 30 */	stfd f20, 0x130(r5)
+/* 805ED990 005E7FF0  DA A5 01 38 */	stfd f21, 0x138(r5)
+/* 805ED994 005E7FF4  DA C5 01 40 */	stfd f22, 0x140(r5)
+/* 805ED998 005E7FF8  DA E5 01 48 */	stfd f23, 0x148(r5)
+/* 805ED99C 005E7FFC  DB 05 01 50 */	stfd f24, 0x150(r5)
+/* 805ED9A0 005E8000  DB 25 01 58 */	stfd f25, 0x158(r5)
+/* 805ED9A4 005E8004  DB 45 01 60 */	stfd f26, 0x160(r5)
+/* 805ED9A8 005E8008  DB 65 01 68 */	stfd f27, 0x168(r5)
+/* 805ED9AC 005E800C  DB 85 01 70 */	stfd f28, 0x170(r5)
+/* 805ED9B0 005E8010  DB A5 01 78 */	stfd f29, 0x178(r5)
+/* 805ED9B4 005E8014  DB C5 01 80 */	stfd f30, 0x180(r5)
+/* 805ED9B8 005E8018  DB E5 01 88 */	stfd f31, 0x188(r5)
+/* 805ED9BC 005E801C  FC 00 04 8E */	mffs f0
+/* 805ED9C0 005E8020  D8 05 01 90 */	stfd f0, 0x190(r5)
+/* 805ED9C4 005E8024  C8 05 00 90 */	lfd f0, 0x90(r5)
+/* 805ED9C8 005E8028  7C 78 E2 A6 */	mfspr r3, HID2
+/* 805ED9CC 005E802C  54 63 1F FF */	extrwi. r3, r3, 1, 2
+/* 805ED9D0 005E8030  41 82 00 84 */	beq .L_805EDA54
+/* 805ED9D4 005E8034  F0 05 01 C8 */	psq_st f0, 0x1c8(r5), 0, qr0
+/* 805ED9D8 005E8038  F0 25 01 D0 */	psq_st f1, 0x1d0(r5), 0, qr0
+/* 805ED9DC 005E803C  F0 45 01 D8 */	psq_st f2, 0x1d8(r5), 0, qr0
+/* 805ED9E0 005E8040  F0 65 01 E0 */	psq_st f3, 0x1e0(r5), 0, qr0
+/* 805ED9E4 005E8044  F0 85 01 E8 */	psq_st f4, 0x1e8(r5), 0, qr0
+/* 805ED9E8 005E8048  F0 A5 01 F0 */	psq_st f5, 0x1f0(r5), 0, qr0
+/* 805ED9EC 005E804C  F0 C5 01 F8 */	psq_st f6, 0x1f8(r5), 0, qr0
+/* 805ED9F0 005E8050  F0 E5 02 00 */	psq_st f7, 0x200(r5), 0, qr0
+/* 805ED9F4 005E8054  F1 05 02 08 */	psq_st f8, 0x208(r5), 0, qr0
+/* 805ED9F8 005E8058  F1 25 02 10 */	psq_st f9, 0x210(r5), 0, qr0
+/* 805ED9FC 005E805C  F1 45 02 18 */	psq_st f10, 0x218(r5), 0, qr0
+/* 805EDA00 005E8060  F1 65 02 20 */	psq_st f11, 0x220(r5), 0, qr0
+/* 805EDA04 005E8064  F1 85 02 28 */	psq_st f12, 0x228(r5), 0, qr0
+/* 805EDA08 005E8068  F1 A5 02 30 */	psq_st f13, 0x230(r5), 0, qr0
+/* 805EDA0C 005E806C  F1 C5 02 38 */	psq_st f14, 0x238(r5), 0, qr0
+/* 805EDA10 005E8070  F1 E5 02 40 */	psq_st f15, 0x240(r5), 0, qr0
+/* 805EDA14 005E8074  F2 05 02 48 */	psq_st f16, 0x248(r5), 0, qr0
+/* 805EDA18 005E8078  F2 25 02 50 */	psq_st f17, 0x250(r5), 0, qr0
+/* 805EDA1C 005E807C  F2 45 02 58 */	psq_st f18, 0x258(r5), 0, qr0
+/* 805EDA20 005E8080  F2 65 02 60 */	psq_st f19, 0x260(r5), 0, qr0
+/* 805EDA24 005E8084  F2 85 02 68 */	psq_st f20, 0x268(r5), 0, qr0
+/* 805EDA28 005E8088  F2 A5 02 70 */	psq_st f21, 0x270(r5), 0, qr0
+/* 805EDA2C 005E808C  F2 C5 02 78 */	psq_st f22, 0x278(r5), 0, qr0
+/* 805EDA30 005E8090  F2 E5 02 80 */	psq_st f23, 0x280(r5), 0, qr0
+/* 805EDA34 005E8094  F3 05 02 88 */	psq_st f24, 0x288(r5), 0, qr0
+/* 805EDA38 005E8098  F3 25 02 90 */	psq_st f25, 0x290(r5), 0, qr0
+/* 805EDA3C 005E809C  F3 45 02 98 */	psq_st f26, 0x298(r5), 0, qr0
+/* 805EDA40 005E80A0  F3 65 02 A0 */	psq_st f27, 0x2a0(r5), 0, qr0
+/* 805EDA44 005E80A4  F3 85 02 A8 */	psq_st f28, 0x2a8(r5), 0, qr0
+/* 805EDA48 005E80A8  F3 A5 02 B0 */	psq_st f29, 0x2b0(r5), 0, qr0
+/* 805EDA4C 005E80AC  F3 C5 02 B8 */	psq_st f30, 0x2b8(r5), 0, qr0
+/* 805EDA50 005E80B0  F3 E5 02 C0 */	psq_st f31, 0x2c0(r5), 0, qr0
+.L_805EDA54:
+/* 805EDA54 005E80B4  4E 80 00 20 */	blr
+.endfn __OSSaveFPUContext
+
+# .text:0x258 | 0x805EDA58 | size: 0x8
+.fn gap_03_805EDA58_text, global
+.hidden gap_03_805EDA58_text
+/* 805EDA58 005E80B8  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+/* 805EDA5C 005E80BC  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+.endfn gap_03_805EDA58_text
+
+# .text:0x260 | 0x805EDA60 | size: 0x8
+.fn OSSaveFPUContext, global
+/* 805EDA60 005E80C0  38 A3 00 00 */	addi r5, r3, 0x0
+/* 805EDA64 005E80C4  4B FF FE CC */	b __OSSaveFPUContext
+.endfn OSSaveFPUContext
+
+# .text:0x268 | 0x805EDA68 | size: 0x8
+.fn gap_03_805EDA68_text, global
+.hidden gap_03_805EDA68_text
+/* 805EDA68 005E80C8  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+/* 805EDA6C 005E80CC  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+.endfn gap_03_805EDA68_text
+
+# .text:0x270 | 0x805EDA70 | size: 0x5C
+.fn OSSetCurrentContext, global
+/* 805EDA70 005E80D0  3C 80 80 00 */	lis r4, 0x8000
+/* 805EDA74 005E80D4  90 64 00 D4 */	stw r3, 0xd4(r4)
+/* 805EDA78 005E80D8  54 65 00 BE */	clrlwi r5, r3, 2
+/* 805EDA7C 005E80DC  90 A4 00 C0 */	stw r5, 0xc0(r4)
+/* 805EDA80 005E80E0  80 A4 00 D8 */	lwz r5, 0xd8(r4)
+/* 805EDA84 005E80E4  7C 05 18 00 */	cmpw r5, r3
+/* 805EDA88 005E80E8  40 82 00 20 */	bne .L_805EDAA8
+/* 805EDA8C 005E80EC  80 C3 01 9C */	lwz r6, 0x19c(r3)
+/* 805EDA90 005E80F0  60 C6 20 00 */	ori r6, r6, 0x2000
+/* 805EDA94 005E80F4  90 C3 01 9C */	stw r6, 0x19c(r3)
+/* 805EDA98 005E80F8  7C C0 00 A6 */	mfmsr r6
+/* 805EDA9C 005E80FC  60 C6 00 02 */	ori r6, r6, 0x2
+/* 805EDAA0 005E8100  7C C0 01 24 */	mtmsr r6
+/* 805EDAA4 005E8104  4E 80 00 20 */	blr
+.L_805EDAA8:
+/* 805EDAA8 005E8108  80 C3 01 9C */	lwz r6, 0x19c(r3)
+/* 805EDAAC 005E810C  54 C6 04 E2 */	rlwinm r6, r6, 0, 19, 17
+/* 805EDAB0 005E8110  90 C3 01 9C */	stw r6, 0x19c(r3)
+/* 805EDAB4 005E8114  7C C0 00 A6 */	mfmsr r6
+/* 805EDAB8 005E8118  54 C6 04 E2 */	rlwinm r6, r6, 0, 19, 17
+/* 805EDABC 005E811C  60 C6 00 02 */	ori r6, r6, 0x2
+/* 805EDAC0 005E8120  7C C0 01 24 */	mtmsr r6
+/* 805EDAC4 005E8124  4C 00 01 2C */	isync
+/* 805EDAC8 005E8128  4E 80 00 20 */	blr
+.endfn OSSetCurrentContext
+
+# .text:0x2CC | 0x805EDACC | size: 0x4
+.fn gap_03_805EDACC_text, global
+.hidden gap_03_805EDACC_text
+/* 805EDACC 005E812C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+.endfn gap_03_805EDACC_text
+
+# .text:0x2D0 | 0x805EDAD0 | size: 0xC
+.fn OSGetCurrentContext, global
+/* 805EDAD0 005E8130  3C 60 80 00 */	lis r3, 0x8000
+/* 805EDAD4 005E8134  80 63 00 D4 */	lwz r3, 0xd4(r3)
+/* 805EDAD8 005E8138  4E 80 00 20 */	blr
+.endfn OSGetCurrentContext
+
+# .text:0x2DC | 0x805EDADC | size: 0x4
+.fn gap_03_805EDADC_text, global
+.hidden gap_03_805EDADC_text
+/* 805EDADC 005E813C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+.endfn gap_03_805EDADC_text
+
+# .text:0x2E0 | 0x805EDAE0 | size: 0x80
+.fn OSSaveContext, global
+/* 805EDAE0 005E8140  BD A3 00 34 */	stmw r13, 0x34(r3)
+/* 805EDAE4 005E8144  7C 11 E2 A6 */	mfspr r0, GQR1
+/* 805EDAE8 005E8148  90 03 01 A8 */	stw r0, 0x1a8(r3)
+/* 805EDAEC 005E814C  7C 12 E2 A6 */	mfspr r0, GQR2
+/* 805EDAF0 005E8150  90 03 01 AC */	stw r0, 0x1ac(r3)
+/* 805EDAF4 005E8154  7C 13 E2 A6 */	mfspr r0, GQR3
+/* 805EDAF8 005E8158  90 03 01 B0 */	stw r0, 0x1b0(r3)
+/* 805EDAFC 005E815C  7C 14 E2 A6 */	mfspr r0, GQR4
+/* 805EDB00 005E8160  90 03 01 B4 */	stw r0, 0x1b4(r3)
+/* 805EDB04 005E8164  7C 15 E2 A6 */	mfspr r0, GQR5
+/* 805EDB08 005E8168  90 03 01 B8 */	stw r0, 0x1b8(r3)
+/* 805EDB0C 005E816C  7C 16 E2 A6 */	mfspr r0, GQR6
+/* 805EDB10 005E8170  90 03 01 BC */	stw r0, 0x1bc(r3)
+/* 805EDB14 005E8174  7C 17 E2 A6 */	mfspr r0, GQR7
+/* 805EDB18 005E8178  90 03 01 C0 */	stw r0, 0x1c0(r3)
+/* 805EDB1C 005E817C  7C 00 00 26 */	mfcr r0
+/* 805EDB20 005E8180  90 03 00 80 */	stw r0, 0x80(r3)
+/* 805EDB24 005E8184  7C 08 02 A6 */	mflr r0
+/* 805EDB28 005E8188  90 03 00 84 */	stw r0, 0x84(r3)
+/* 805EDB2C 005E818C  90 03 01 98 */	stw r0, 0x198(r3)
+/* 805EDB30 005E8190  7C 00 00 A6 */	mfmsr r0
+/* 805EDB34 005E8194  90 03 01 9C */	stw r0, 0x19c(r3)
+/* 805EDB38 005E8198  7C 09 02 A6 */	mfctr r0
+/* 805EDB3C 005E819C  90 03 00 88 */	stw r0, 0x88(r3)
+/* 805EDB40 005E81A0  7C 01 02 A6 */	mfxer r0
+/* 805EDB44 005E81A4  90 03 00 8C */	stw r0, 0x8c(r3)
+/* 805EDB48 005E81A8  90 23 00 04 */	stw r1, 0x4(r3)
+/* 805EDB4C 005E81AC  90 43 00 08 */	stw r2, 0x8(r3)
+/* 805EDB50 005E81B0  38 00 00 01 */	li r0, 0x1
+/* 805EDB54 005E81B4  90 03 00 0C */	stw r0, 0xc(r3)
+/* 805EDB58 005E81B8  38 60 00 00 */	li r3, 0x0
+/* 805EDB5C 005E81BC  4E 80 00 20 */	blr
+.endfn OSSaveContext
+
+# .text:0x360 | 0x805EDB60 | size: 0xD8
+.fn OSLoadContext, global
+/* 805EDB60 005E81C0  3C 80 80 5F */	lis r4, OSDisableInterrupts@ha
+/* 805EDB64 005E81C4  80 C3 01 98 */	lwz r6, 0x198(r3)
+/* 805EDB68 005E81C8  38 A4 1E 80 */	addi r5, r4, OSDisableInterrupts@l
+/* 805EDB6C 005E81CC  7C 06 28 40 */	cmplw r6, r5
+/* 805EDB70 005E81D0  40 81 00 18 */	ble .L_805EDB88
+/* 805EDB74 005E81D4  3C 80 80 5F */	lis r4, OSDisableInterrupts+0xC@ha
+/* 805EDB78 005E81D8  38 04 1E 8C */	addi r0, r4, OSDisableInterrupts+0xC@l
+/* 805EDB7C 005E81DC  7C 06 00 40 */	cmplw r6, r0
+/* 805EDB80 005E81E0  40 80 00 08 */	bge .L_805EDB88
+/* 805EDB84 005E81E4  90 A3 01 98 */	stw r5, 0x198(r3)
+.L_805EDB88:
+/* 805EDB88 005E81E8  80 03 00 00 */	lwz r0, 0x0(r3)
+/* 805EDB8C 005E81EC  80 23 00 04 */	lwz r1, 0x4(r3)
+/* 805EDB90 005E81F0  80 43 00 08 */	lwz r2, 0x8(r3)
+/* 805EDB94 005E81F4  A0 83 01 A2 */	lhz r4, 0x1a2(r3)
+/* 805EDB98 005E81F8  54 85 07 BD */	rlwinm. r5, r4, 0, 30, 30
+/* 805EDB9C 005E81FC  41 82 00 14 */	beq .L_805EDBB0
+/* 805EDBA0 005E8200  54 84 07 FA */	rlwinm r4, r4, 0, 31, 29
+/* 805EDBA4 005E8204  B0 83 01 A2 */	sth r4, 0x1a2(r3)
+/* 805EDBA8 005E8208  B8 A3 00 14 */	lmw r5, 0x14(r3)
+/* 805EDBAC 005E820C  48 00 00 08 */	b .L_805EDBB4
+.L_805EDBB0:
+/* 805EDBB0 005E8210  B9 A3 00 34 */	lmw r13, 0x34(r3)
+.L_805EDBB4:
+/* 805EDBB4 005E8214  80 83 01 A8 */	lwz r4, 0x1a8(r3)
+/* 805EDBB8 005E8218  7C 91 E3 A6 */	mtspr GQR1, r4
+/* 805EDBBC 005E821C  80 83 01 AC */	lwz r4, 0x1ac(r3)
+/* 805EDBC0 005E8220  7C 92 E3 A6 */	mtspr GQR2, r4
+/* 805EDBC4 005E8224  80 83 01 B0 */	lwz r4, 0x1b0(r3)
+/* 805EDBC8 005E8228  7C 93 E3 A6 */	mtspr GQR3, r4
+/* 805EDBCC 005E822C  80 83 01 B4 */	lwz r4, 0x1b4(r3)
+/* 805EDBD0 005E8230  7C 94 E3 A6 */	mtspr GQR4, r4
+/* 805EDBD4 005E8234  80 83 01 B8 */	lwz r4, 0x1b8(r3)
+/* 805EDBD8 005E8238  7C 95 E3 A6 */	mtspr GQR5, r4
+/* 805EDBDC 005E823C  80 83 01 BC */	lwz r4, 0x1bc(r3)
+/* 805EDBE0 005E8240  7C 96 E3 A6 */	mtspr GQR6, r4
+/* 805EDBE4 005E8244  80 83 01 C0 */	lwz r4, 0x1c0(r3)
+/* 805EDBE8 005E8248  7C 97 E3 A6 */	mtspr GQR7, r4
+/* 805EDBEC 005E824C  80 83 00 80 */	lwz r4, 0x80(r3)
+/* 805EDBF0 005E8250  7C 8F F1 20 */	mtcrf 255, r4
+/* 805EDBF4 005E8254  80 83 00 84 */	lwz r4, 0x84(r3)
+/* 805EDBF8 005E8258  7C 88 03 A6 */	mtlr r4
+/* 805EDBFC 005E825C  80 83 00 88 */	lwz r4, 0x88(r3)
+/* 805EDC00 005E8260  7C 89 03 A6 */	mtctr r4
+/* 805EDC04 005E8264  80 83 00 8C */	lwz r4, 0x8c(r3)
+/* 805EDC08 005E8268  7C 81 03 A6 */	mtxer r4
+/* 805EDC0C 005E826C  7C 80 00 A6 */	mfmsr r4
+/* 805EDC10 005E8270  54 84 04 5E */	rlwinm r4, r4, 0, 17, 15
+/* 805EDC14 005E8274  54 84 07 FA */	rlwinm r4, r4, 0, 31, 29
+/* 805EDC18 005E8278  7C 80 01 24 */	mtmsr r4
+/* 805EDC1C 005E827C  80 83 01 98 */	lwz r4, 0x198(r3)
+/* 805EDC20 005E8280  7C 9A 03 A6 */	mtsrr0 r4
+/* 805EDC24 005E8284  80 83 01 9C */	lwz r4, 0x19c(r3)
+/* 805EDC28 005E8288  7C 9B 03 A6 */	mtsrr1 r4
+/* 805EDC2C 005E828C  80 83 00 10 */	lwz r4, 0x10(r3)
+/* 805EDC30 005E8290  80 63 00 0C */	lwz r3, 0xc(r3)
+/* 805EDC34 005E8294  4C 00 00 64 */	rfi
+.endfn OSLoadContext
+
+# .text:0x438 | 0x805EDC38 | size: 0x8
+.fn gap_03_805EDC38_text, global
+.hidden gap_03_805EDC38_text
+/* 805EDC38 005E8298  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+/* 805EDC3C 005E829C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+.endfn gap_03_805EDC38_text
+
+# .text:0x440 | 0x805EDC40 | size: 0x8
+.fn OSGetStackPointer, global
+/* 805EDC40 005E82A0  7C 23 0B 78 */	mr r3, r1
+/* 805EDC44 005E82A4  4E 80 00 20 */	blr
+.endfn OSGetStackPointer
+
+# .text:0x448 | 0x805EDC48 | size: 0x8
+.fn gap_03_805EDC48_text, global
+.hidden gap_03_805EDC48_text
+/* 805EDC48 005E82A8  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+/* 805EDC4C 005E82AC  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+.endfn gap_03_805EDC48_text
+
+# .text:0x450 | 0x805EDC50 | size: 0x30
+.fn fn_805EDC50, global
+/* 805EDC50 005E82B0  7C 08 02 A6 */	mflr r0
+/* 805EDC54 005E82B4  7C 25 0B 78 */	mr r5, r1
+/* 805EDC58 005E82B8  94 A4 FF F8 */	stwu r5, -0x8(r4)
+/* 805EDC5C 005E82BC  7C 81 23 78 */	mr r1, r4
+/* 805EDC60 005E82C0  90 05 00 04 */	stw r0, 0x4(r5)
+/* 805EDC64 005E82C4  7C 68 03 A6 */	mtlr r3
+/* 805EDC68 005E82C8  4E 80 00 21 */	blrl
+/* 805EDC6C 005E82CC  80 A1 00 00 */	lwz r5, 0x0(r1)
+/* 805EDC70 005E82D0  80 05 00 04 */	lwz r0, 0x4(r5)
+/* 805EDC74 005E82D4  7C 08 03 A6 */	mtlr r0
+/* 805EDC78 005E82D8  7C A1 2B 78 */	mr r1, r5
+/* 805EDC7C 005E82DC  4E 80 00 20 */	blr
+.endfn fn_805EDC50
+
+# .text:0x480 | 0x805EDC80 | size: 0x30
+.fn fn_805EDC80, global
+/* 805EDC80 005E82E0  7C 08 02 A6 */	mflr r0
+/* 805EDC84 005E82E4  7C 29 0B 78 */	mr r9, r1
+/* 805EDC88 005E82E8  95 28 FF F8 */	stwu r9, -0x8(r8)
+/* 805EDC8C 005E82EC  7D 01 43 78 */	mr r1, r8
+/* 805EDC90 005E82F0  90 09 00 04 */	stw r0, 0x4(r9)
+/* 805EDC94 005E82F4  7C E8 03 A6 */	mtlr r7
+/* 805EDC98 005E82F8  4E 80 00 21 */	blrl
+/* 805EDC9C 005E82FC  80 A1 00 00 */	lwz r5, 0x0(r1)
+/* 805EDCA0 005E8300  80 05 00 04 */	lwz r0, 0x4(r5)
+/* 805EDCA4 005E8304  7C 08 03 A6 */	mtlr r0
+/* 805EDCA8 005E8308  7C A1 2B 78 */	mr r1, r5
+/* 805EDCAC 005E830C  4E 80 00 20 */	blr
+.endfn fn_805EDC80
+
+# .text:0x4B0 | 0x805EDCB0 | size: 0x24
+.fn OSClearContext, global
+/* 805EDCB0 005E8310  38 A0 00 00 */	li r5, 0x0
+/* 805EDCB4 005E8314  B0 A3 01 A0 */	sth r5, 0x1a0(r3)
+/* 805EDCB8 005E8318  3C 80 80 00 */	lis r4, 0x8000
+/* 805EDCBC 005E831C  B0 A3 01 A2 */	sth r5, 0x1a2(r3)
+/* 805EDCC0 005E8320  80 04 00 D8 */	lwz r0, 0xd8(r4)
+/* 805EDCC4 005E8324  7C 03 00 40 */	cmplw r3, r0
+/* 805EDCC8 005E8328  4C 82 00 20 */	bnelr
+/* 805EDCCC 005E832C  90 A4 00 D8 */	stw r5, 0xd8(r4)
+/* 805EDCD0 005E8330  4E 80 00 20 */	blr
+.endfn OSClearContext
+
+# .text:0x4D4 | 0x805EDCD4 | size: 0xC
+.fn gap_03_805EDCD4_text, global
+.hidden gap_03_805EDCD4_text
+/* 805EDCD4 005E8334  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+/* 805EDCD8 005E8338  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+/* 805EDCDC 005E833C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+.endfn gap_03_805EDCD4_text
+
+# .text:0x4E0 | 0x805EDCE0 | size: 0xBC
+.fn OSInitContext, global
+/* 805EDCE0 005E8340  90 83 01 98 */	stw r4, 0x198(r3)
+/* 805EDCE4 005E8344  90 A3 00 04 */	stw r5, 0x4(r3)
+/* 805EDCE8 005E8348  39 60 00 00 */	li r11, 0x0
+/* 805EDCEC 005E834C  61 6B 90 32 */	ori r11, r11, 0x9032
+/* 805EDCF0 005E8350  91 63 01 9C */	stw r11, 0x19c(r3)
+/* 805EDCF4 005E8354  38 00 00 00 */	li r0, 0x0
+/* 805EDCF8 005E8358  90 03 00 80 */	stw r0, 0x80(r3)
+/* 805EDCFC 005E835C  90 03 00 8C */	stw r0, 0x8c(r3)
+/* 805EDD00 005E8360  90 43 00 08 */	stw r2, 0x8(r3)
+/* 805EDD04 005E8364  91 A3 00 34 */	stw r13, 0x34(r3)
+/* 805EDD08 005E8368  90 03 00 0C */	stw r0, 0xc(r3)
+/* 805EDD0C 005E836C  90 03 00 10 */	stw r0, 0x10(r3)
+/* 805EDD10 005E8370  90 03 00 14 */	stw r0, 0x14(r3)
+/* 805EDD14 005E8374  90 03 00 18 */	stw r0, 0x18(r3)
+/* 805EDD18 005E8378  90 03 00 1C */	stw r0, 0x1c(r3)
+/* 805EDD1C 005E837C  90 03 00 20 */	stw r0, 0x20(r3)
+/* 805EDD20 005E8380  90 03 00 24 */	stw r0, 0x24(r3)
+/* 805EDD24 005E8384  90 03 00 28 */	stw r0, 0x28(r3)
+/* 805EDD28 005E8388  90 03 00 2C */	stw r0, 0x2c(r3)
+/* 805EDD2C 005E838C  90 03 00 30 */	stw r0, 0x30(r3)
+/* 805EDD30 005E8390  90 03 00 38 */	stw r0, 0x38(r3)
+/* 805EDD34 005E8394  90 03 00 3C */	stw r0, 0x3c(r3)
+/* 805EDD38 005E8398  90 03 00 40 */	stw r0, 0x40(r3)
+/* 805EDD3C 005E839C  90 03 00 44 */	stw r0, 0x44(r3)
+/* 805EDD40 005E83A0  90 03 00 48 */	stw r0, 0x48(r3)
+/* 805EDD44 005E83A4  90 03 00 4C */	stw r0, 0x4c(r3)
+/* 805EDD48 005E83A8  90 03 00 50 */	stw r0, 0x50(r3)
+/* 805EDD4C 005E83AC  90 03 00 54 */	stw r0, 0x54(r3)
+/* 805EDD50 005E83B0  90 03 00 58 */	stw r0, 0x58(r3)
+/* 805EDD54 005E83B4  90 03 00 5C */	stw r0, 0x5c(r3)
+/* 805EDD58 005E83B8  90 03 00 60 */	stw r0, 0x60(r3)
+/* 805EDD5C 005E83BC  90 03 00 64 */	stw r0, 0x64(r3)
+/* 805EDD60 005E83C0  90 03 00 68 */	stw r0, 0x68(r3)
+/* 805EDD64 005E83C4  90 03 00 6C */	stw r0, 0x6c(r3)
+/* 805EDD68 005E83C8  90 03 00 70 */	stw r0, 0x70(r3)
+/* 805EDD6C 005E83CC  90 03 00 74 */	stw r0, 0x74(r3)
+/* 805EDD70 005E83D0  90 03 00 78 */	stw r0, 0x78(r3)
+/* 805EDD74 005E83D4  90 03 00 7C */	stw r0, 0x7c(r3)
+/* 805EDD78 005E83D8  90 03 01 A4 */	stw r0, 0x1a4(r3)
+/* 805EDD7C 005E83DC  90 03 01 A8 */	stw r0, 0x1a8(r3)
+/* 805EDD80 005E83E0  90 03 01 AC */	stw r0, 0x1ac(r3)
+/* 805EDD84 005E83E4  90 03 01 B0 */	stw r0, 0x1b0(r3)
+/* 805EDD88 005E83E8  90 03 01 B4 */	stw r0, 0x1b4(r3)
+/* 805EDD8C 005E83EC  90 03 01 B8 */	stw r0, 0x1b8(r3)
+/* 805EDD90 005E83F0  90 03 01 BC */	stw r0, 0x1bc(r3)
+/* 805EDD94 005E83F4  90 03 01 C0 */	stw r0, 0x1c0(r3)
+/* 805EDD98 005E83F8  4B FF FF 18 */	b OSClearContext
+.endfn OSInitContext
+
+# .text:0x59C | 0x805EDD9C | size: 0x4
+.fn gap_03_805EDD9C_text, global
+.hidden gap_03_805EDD9C_text
+/* 805EDD9C 005E83FC  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+.endfn gap_03_805EDD9C_text
+
+# .text:0x5A0 | 0x805EDDA0 | size: 0x260
+.fn OSDumpContext, global
+/* 805EDDA0 005E8400  94 21 FD 10 */	stwu r1, -0x2f0(r1)
+/* 805EDDA4 005E8404  7C 08 02 A6 */	mflr r0
+/* 805EDDA8 005E8408  90 01 02 F4 */	stw r0, 0x2f4(r1)
+/* 805EDDAC 005E840C  39 61 02 F0 */	addi r11, r1, 0x2f0
+/* 805EDDB0 005E8410  48 0A 80 F5 */	bl _savegpr_25
+/* 805EDDB4 005E8414  3F 80 80 7A */	lis r28, lbl_8079C4C0@ha
+/* 805EDDB8 005E8418  7C 7E 1B 78 */	mr r30, r3
+/* 805EDDBC 005E841C  3B 9C C4 C0 */	addi r28, r28, lbl_8079C4C0@l
+/* 805EDDC0 005E8420  7F C4 F3 78 */	mr r4, r30
+/* 805EDDC4 005E8424  38 7C 00 00 */	addi r3, r28, 0x0
+/* 805EDDC8 005E8428  4C C6 31 82 */	crclr cr1eq
+/* 805EDDCC 005E842C  48 00 03 05 */	bl OSReport
+/* 805EDDD0 005E8430  7F DA F3 78 */	mr r26, r30
+/* 805EDDD4 005E8434  3B 20 00 00 */	li r25, 0x0
+.L_805EDDD8:
+/* 805EDDD8 005E8438  81 1A 00 40 */	lwz r8, 0x40(r26)
+/* 805EDDDC 005E843C  7F 24 CB 78 */	mr r4, r25
+/* 805EDDE0 005E8440  80 BA 00 00 */	lwz r5, 0x0(r26)
+/* 805EDDE4 005E8444  38 7C 00 48 */	addi r3, r28, 0x48
+/* 805EDDE8 005E8448  7D 09 43 78 */	mr r9, r8
+/* 805EDDEC 005E844C  38 F9 00 10 */	addi r7, r25, 0x10
+/* 805EDDF0 005E8450  7C A6 2B 78 */	mr r6, r5
+/* 805EDDF4 005E8454  4C C6 31 82 */	crclr cr1eq
+/* 805EDDF8 005E8458  48 00 02 D9 */	bl OSReport
+/* 805EDDFC 005E845C  3B 39 00 01 */	addi r25, r25, 0x1
+/* 805EDE00 005E8460  3B 5A 00 04 */	addi r26, r26, 0x4
+/* 805EDE04 005E8464  28 19 00 10 */	cmplwi r25, 0x10
+/* 805EDE08 005E8468  41 80 FF D0 */	blt .L_805EDDD8
+/* 805EDE0C 005E846C  80 9E 00 84 */	lwz r4, 0x84(r30)
+/* 805EDE10 005E8470  38 7C 00 78 */	addi r3, r28, 0x78
+/* 805EDE14 005E8474  80 BE 00 80 */	lwz r5, 0x80(r30)
+/* 805EDE18 005E8478  4C C6 31 82 */	crclr cr1eq
+/* 805EDE1C 005E847C  48 00 02 B5 */	bl OSReport
+/* 805EDE20 005E8480  80 9E 01 98 */	lwz r4, 0x198(r30)
+/* 805EDE24 005E8484  38 7C 00 A8 */	addi r3, r28, 0xa8
+/* 805EDE28 005E8488  80 BE 01 9C */	lwz r5, 0x19c(r30)
+/* 805EDE2C 005E848C  4C C6 31 82 */	crclr cr1eq
+/* 805EDE30 005E8490  48 00 02 A1 */	bl OSReport
+/* 805EDE34 005E8494  38 7C 00 D8 */	addi r3, r28, 0xd8
+/* 805EDE38 005E8498  4C C6 31 82 */	crclr cr1eq
+/* 805EDE3C 005E849C  48 00 02 95 */	bl OSReport
+/* 805EDE40 005E84A0  7F DA F3 78 */	mr r26, r30
+/* 805EDE44 005E84A4  3B 20 00 00 */	li r25, 0x0
+.L_805EDE48:
+/* 805EDE48 005E84A8  80 BA 01 A4 */	lwz r5, 0x1a4(r26)
+/* 805EDE4C 005E84AC  7F 24 CB 78 */	mr r4, r25
+/* 805EDE50 005E84B0  80 FA 01 B4 */	lwz r7, 0x1b4(r26)
+/* 805EDE54 005E84B4  38 7C 00 EC */	addi r3, r28, 0xec
+/* 805EDE58 005E84B8  38 D9 00 04 */	addi r6, r25, 0x4
+/* 805EDE5C 005E84BC  4C C6 31 82 */	crclr cr1eq
+/* 805EDE60 005E84C0  48 00 02 71 */	bl OSReport
+/* 805EDE64 005E84C4  3B 39 00 01 */	addi r25, r25, 0x1
+/* 805EDE68 005E84C8  3B 5A 00 04 */	addi r26, r26, 0x4
+/* 805EDE6C 005E84CC  28 19 00 04 */	cmplwi r25, 0x4
+/* 805EDE70 005E84D0  41 80 FF D8 */	blt .L_805EDE48
+/* 805EDE74 005E84D4  A0 1E 01 A2 */	lhz r0, 0x1a2(r30)
+/* 805EDE78 005E84D8  54 00 07 FF */	clrlwi. r0, r0, 31
+/* 805EDE7C 005E84DC  41 82 01 18 */	beq .L_805EDF94
+/* 805EDE80 005E84E0  48 00 40 01 */	bl OSDisableInterrupts
+/* 805EDE84 005E84E4  3C C0 80 00 */	lis r6, 0x8000
+/* 805EDE88 005E84E8  38 A0 00 00 */	li r5, 0x0
+/* 805EDE8C 005E84EC  83 66 00 D4 */	lwz r27, 0xd4(r6)
+/* 805EDE90 005E84F0  38 81 00 08 */	addi r4, r1, 0x8
+/* 805EDE94 005E84F4  7C 7F 1B 78 */	mr r31, r3
+/* 805EDE98 005E84F8  B0 A1 01 A8 */	sth r5, 0x1a8(r1)
+/* 805EDE9C 005E84FC  B0 A1 01 AA */	sth r5, 0x1aa(r1)
+/* 805EDEA0 005E8500  80 06 00 D8 */	lwz r0, 0xd8(r6)
+/* 805EDEA4 005E8504  7C 04 00 40 */	cmplw r4, r0
+/* 805EDEA8 005E8508  40 82 00 08 */	bne .L_805EDEB0
+/* 805EDEAC 005E850C  90 A6 00 D8 */	stw r5, 0xd8(r6)
+.L_805EDEB0:
+/* 805EDEB0 005E8510  38 61 00 08 */	addi r3, r1, 0x8
+/* 805EDEB4 005E8514  4B FF FB BD */	bl OSSetCurrentContext
+/* 805EDEB8 005E8518  38 7C 01 10 */	addi r3, r28, 0x110
+/* 805EDEBC 005E851C  4C C6 31 82 */	crclr cr1eq
+/* 805EDEC0 005E8520  48 00 02 11 */	bl OSReport
+/* 805EDEC4 005E8524  7F DA F3 78 */	mr r26, r30
+/* 805EDEC8 005E8528  3B 20 00 00 */	li r25, 0x0
+.L_805EDECC:
+/* 805EDECC 005E852C  C8 3A 00 98 */	lfd f1, 0x98(r26)
+/* 805EDED0 005E8530  48 0A 7E B5 */	bl fn_80695D84
+/* 805EDED4 005E8534  C8 3A 00 90 */	lfd f1, 0x90(r26)
+/* 805EDED8 005E8538  7C 7D 1B 78 */	mr r29, r3
+/* 805EDEDC 005E853C  48 0A 7E A9 */	bl fn_80695D84
+/* 805EDEE0 005E8540  7C 65 1B 78 */	mr r5, r3
+/* 805EDEE4 005E8544  7F 24 CB 78 */	mr r4, r25
+/* 805EDEE8 005E8548  7F A7 EB 78 */	mr r7, r29
+/* 805EDEEC 005E854C  38 7C 01 24 */	addi r3, r28, 0x124
+/* 805EDEF0 005E8550  38 D9 00 01 */	addi r6, r25, 0x1
+/* 805EDEF4 005E8554  4C C6 31 82 */	crclr cr1eq
+/* 805EDEF8 005E8558  48 00 01 D9 */	bl OSReport
+/* 805EDEFC 005E855C  3B 39 00 02 */	addi r25, r25, 0x2
+/* 805EDF00 005E8560  3B 5A 00 10 */	addi r26, r26, 0x10
+/* 805EDF04 005E8564  28 19 00 20 */	cmplwi r25, 0x20
+/* 805EDF08 005E8568  41 80 FF C4 */	blt .L_805EDECC
+/* 805EDF0C 005E856C  38 7C 01 40 */	addi r3, r28, 0x140
+/* 805EDF10 005E8570  4C C6 31 82 */	crclr cr1eq
+/* 805EDF14 005E8574  48 00 01 BD */	bl OSReport
+/* 805EDF18 005E8578  7F DA F3 78 */	mr r26, r30
+/* 805EDF1C 005E857C  3B 20 00 00 */	li r25, 0x0
+.L_805EDF20:
+/* 805EDF20 005E8580  C8 3A 01 D0 */	lfd f1, 0x1d0(r26)
+/* 805EDF24 005E8584  48 0A 7E 61 */	bl fn_80695D84
+/* 805EDF28 005E8588  C8 3A 01 C8 */	lfd f1, 0x1c8(r26)
+/* 805EDF2C 005E858C  7C 7D 1B 78 */	mr r29, r3
+/* 805EDF30 005E8590  48 0A 7E 55 */	bl fn_80695D84
+/* 805EDF34 005E8594  7C 65 1B 78 */	mr r5, r3
+/* 805EDF38 005E8598  7F 24 CB 78 */	mr r4, r25
+/* 805EDF3C 005E859C  7F A7 EB 78 */	mr r7, r29
+/* 805EDF40 005E85A0  38 7C 01 54 */	addi r3, r28, 0x154
+/* 805EDF44 005E85A4  38 D9 00 01 */	addi r6, r25, 0x1
+/* 805EDF48 005E85A8  4C C6 31 82 */	crclr cr1eq
+/* 805EDF4C 005E85AC  48 00 01 85 */	bl OSReport
+/* 805EDF50 005E85B0  3B 39 00 02 */	addi r25, r25, 0x2
+/* 805EDF54 005E85B4  3B 5A 00 10 */	addi r26, r26, 0x10
+/* 805EDF58 005E85B8  28 19 00 20 */	cmplwi r25, 0x20
+/* 805EDF5C 005E85BC  41 80 FF C4 */	blt .L_805EDF20
+/* 805EDF60 005E85C0  38 A0 00 00 */	li r5, 0x0
+/* 805EDF64 005E85C4  B0 A1 01 A8 */	sth r5, 0x1a8(r1)
+/* 805EDF68 005E85C8  3C 60 80 00 */	lis r3, 0x8000
+/* 805EDF6C 005E85CC  38 81 00 08 */	addi r4, r1, 0x8
+/* 805EDF70 005E85D0  B0 A1 01 AA */	sth r5, 0x1aa(r1)
+/* 805EDF74 005E85D4  80 03 00 D8 */	lwz r0, 0xd8(r3)
+/* 805EDF78 005E85D8  7C 04 00 40 */	cmplw r4, r0
+/* 805EDF7C 005E85DC  40 82 00 08 */	bne .L_805EDF84
+/* 805EDF80 005E85E0  90 A3 00 D8 */	stw r5, 0xd8(r3)
+.L_805EDF84:
+/* 805EDF84 005E85E4  7F 63 DB 78 */	mr r3, r27
+/* 805EDF88 005E85E8  4B FF FA E9 */	bl OSSetCurrentContext
+/* 805EDF8C 005E85EC  7F E3 FB 78 */	mr r3, r31
+/* 805EDF90 005E85F0  48 00 3F 31 */	bl OSRestoreInterrupts
+.L_805EDF94:
+/* 805EDF94 005E85F4  38 7C 01 74 */	addi r3, r28, 0x174
+/* 805EDF98 005E85F8  4C C6 31 82 */	crclr cr1eq
+/* 805EDF9C 005E85FC  48 00 01 35 */	bl OSReport
+/* 805EDFA0 005E8600  83 3E 00 04 */	lwz r25, 0x4(r30)
+/* 805EDFA4 005E8604  3B 40 00 00 */	li r26, 0x0
+/* 805EDFA8 005E8608  48 00 00 20 */	b .L_805EDFC8
+.L_805EDFAC:
+/* 805EDFAC 005E860C  80 B9 00 00 */	lwz r5, 0x0(r25)
+/* 805EDFB0 005E8610  7F 24 CB 78 */	mr r4, r25
+/* 805EDFB4 005E8614  80 D9 00 04 */	lwz r6, 0x4(r25)
+/* 805EDFB8 005E8618  38 7C 01 9C */	addi r3, r28, 0x19c
+/* 805EDFBC 005E861C  4C C6 31 82 */	crclr cr1eq
+/* 805EDFC0 005E8620  48 00 01 11 */	bl OSReport
+/* 805EDFC4 005E8624  83 39 00 00 */	lwz r25, 0x0(r25)
+.L_805EDFC8:
+/* 805EDFC8 005E8628  2C 19 00 00 */	cmpwi r25, 0x0
+/* 805EDFCC 005E862C  41 82 00 1C */	beq .L_805EDFE8
+/* 805EDFD0 005E8630  3C 19 00 01 */	addis r0, r25, 0x1
+/* 805EDFD4 005E8634  28 00 FF FF */	cmplwi r0, 0xffff
+/* 805EDFD8 005E8638  41 82 00 10 */	beq .L_805EDFE8
+/* 805EDFDC 005E863C  28 1A 00 10 */	cmplwi r26, 0x10
+/* 805EDFE0 005E8640  3B 5A 00 01 */	addi r26, r26, 0x1
+/* 805EDFE4 005E8644  41 80 FF C8 */	blt .L_805EDFAC
+.L_805EDFE8:
+/* 805EDFE8 005E8648  39 61 02 F0 */	addi r11, r1, 0x2f0
+/* 805EDFEC 005E864C  48 0A 7F 05 */	bl _restgpr_25
+/* 805EDFF0 005E8650  80 01 02 F4 */	lwz r0, 0x2f4(r1)
+/* 805EDFF4 005E8654  7C 08 03 A6 */	mtlr r0
+/* 805EDFF8 005E8658  38 21 02 F0 */	addi r1, r1, 0x2f0
+/* 805EDFFC 005E865C  4E 80 00 20 */	blr
+.endfn OSDumpContext
+
+# .text:0x800 | 0x805EE000 | size: 0x84
+.fn OSSwitchFPUContext, local
+/* 805EE000 005E8660  7C A0 00 A6 */	mfmsr r5
+/* 805EE004 005E8664  60 A5 20 00 */	ori r5, r5, 0x2000
+/* 805EE008 005E8668  7C A0 01 24 */	mtmsr r5
+/* 805EE00C 005E866C  4C 00 01 2C */	isync
+/* 805EE010 005E8670  80 A4 01 9C */	lwz r5, 0x19c(r4)
+/* 805EE014 005E8674  60 A5 20 00 */	ori r5, r5, 0x2000
+/* 805EE018 005E8678  7C BB 03 A6 */	mtsrr1 r5
+/* 805EE01C 005E867C  3C 60 80 00 */	lis r3, 0x8000
+/* 805EE020 005E8680  80 A3 00 D8 */	lwz r5, 0xd8(r3)
+/* 805EE024 005E8684  90 83 00 D8 */	stw r4, 0xd8(r3)
+/* 805EE028 005E8688  7C 05 20 00 */	cmpw r5, r4
+/* 805EE02C 005E868C  41 82 00 14 */	beq .L_805EE040
+/* 805EE030 005E8690  2C 05 00 00 */	cmpwi r5, 0x0
+/* 805EE034 005E8694  41 82 00 08 */	beq .L_805EE03C
+/* 805EE038 005E8698  4B FF F8 F9 */	bl __OSSaveFPUContext
+.L_805EE03C:
+/* 805EE03C 005E869C  4B FF F7 C5 */	bl __OSLoadFPUContext
+.L_805EE040:
+/* 805EE040 005E86A0  80 64 00 80 */	lwz r3, 0x80(r4)
+/* 805EE044 005E86A4  7C 6F F1 20 */	mtcrf 255, r3
+/* 805EE048 005E86A8  80 64 00 84 */	lwz r3, 0x84(r4)
+/* 805EE04C 005E86AC  7C 68 03 A6 */	mtlr r3
+/* 805EE050 005E86B0  80 64 01 98 */	lwz r3, 0x198(r4)
+/* 805EE054 005E86B4  7C 7A 03 A6 */	mtsrr0 r3
+/* 805EE058 005E86B8  80 64 00 88 */	lwz r3, 0x88(r4)
+/* 805EE05C 005E86BC  7C 69 03 A6 */	mtctr r3
+/* 805EE060 005E86C0  80 64 00 8C */	lwz r3, 0x8c(r4)
+/* 805EE064 005E86C4  7C 61 03 A6 */	mtxer r3
+/* 805EE068 005E86C8  A0 64 01 A2 */	lhz r3, 0x1a2(r4)
+/* 805EE06C 005E86CC  54 63 07 FA */	rlwinm r3, r3, 0, 31, 29
+/* 805EE070 005E86D0  B0 64 01 A2 */	sth r3, 0x1a2(r4)
+/* 805EE074 005E86D4  80 A4 00 14 */	lwz r5, 0x14(r4)
+/* 805EE078 005E86D8  80 64 00 0C */	lwz r3, 0xc(r4)
+/* 805EE07C 005E86DC  80 84 00 10 */	lwz r4, 0x10(r4)
+/* 805EE080 005E86E0  4C 00 00 64 */	rfi
+.endfn OSSwitchFPUContext
+
+# .text:0x884 | 0x805EE084 | size: 0xC
+.fn gap_03_805EE084_text, global
+.hidden gap_03_805EE084_text
+/* 805EE084 005E86E4  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+/* 805EE088 005E86E8  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+/* 805EE08C 005E86EC  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+.endfn gap_03_805EE084_text
+
+# .text:0x890 | 0x805EE090 | size: 0x38
+.fn __OSContextInit, global
+/* 805EE090 005E86F0  94 21 FF F0 */	stwu r1, -0x10(r1)
+/* 805EE094 005E86F4  7C 08 02 A6 */	mflr r0
+/* 805EE098 005E86F8  3C 80 80 5F */	lis r4, OSSwitchFPUContext@ha
+/* 805EE09C 005E86FC  38 60 00 07 */	li r3, 0x7
+/* 805EE0A0 005E8700  90 01 00 14 */	stw r0, 0x14(r1)
+/* 805EE0A4 005E8704  38 84 E0 00 */	addi r4, r4, OSSwitchFPUContext@l
+/* 805EE0A8 005E8708  4B FF DD 79 */	bl __OSSetExceptionHandler
+/* 805EE0AC 005E870C  3C 60 80 00 */	lis r3, 0x8000
+/* 805EE0B0 005E8710  38 00 00 00 */	li r0, 0x0
+/* 805EE0B4 005E8714  90 03 00 D8 */	stw r0, 0xd8(r3)
+/* 805EE0B8 005E8718  80 01 00 14 */	lwz r0, 0x14(r1)
+/* 805EE0BC 005E871C  7C 08 03 A6 */	mtlr r0
+/* 805EE0C0 005E8720  38 21 00 10 */	addi r1, r1, 0x10
+/* 805EE0C4 005E8724  4E 80 00 20 */	blr
+.endfn __OSContextInit
+
+# .text:0x8C8 | 0x805EE0C8 | size: 0x8
+.fn gap_03_805EE0C8_text, global
+.hidden gap_03_805EE0C8_text
+/* 805EE0C8 005E8728  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+/* 805EE0CC 005E872C  00 00 00 00 */	.4byte 0x00000000 /* invalid */
+.endfn gap_03_805EE0C8_text
+
+# 0x8079C4C0..0x8079C678 | size: 0x1B8
+.data
+.balign 8
+
+# .data:0x0 | 0x8079C4C0 | size: 0x1B8
+.obj lbl_8079C4C0, global
+	.4byte 0x2D2D2D2D
+	.4byte 0x2D2D2D2D
+	.4byte 0x2D2D2D2D
+	.4byte 0x2D2D2D2D
+	.4byte 0x2D2D2D2D
+	.4byte 0x2D2D2D2D
+	.4byte 0x2D20436F
+	.4byte 0x6E746578
+	.4byte 0x74203078
+	.4byte 0x25303878
+	.4byte 0x202D2D2D
+	.4byte 0x2D2D2D2D
+	.4byte 0x2D2D2D2D
+	.4byte 0x2D2D2D2D
+	.4byte 0x2D2D2D2D
+	.4byte 0x2D2D2D2D
+	.4byte 0x2D2D0A00
+	.4byte 0x00000000
+	.4byte 0x72252D32
+	.4byte 0x6420203D
+	.4byte 0x20307825
+	.4byte 0x30387820
+	.4byte 0x28253134
+	.4byte 0x64292020
+	.4byte 0x72252D32
+	.4byte 0x6420203D
+	.4byte 0x20307825
+	.4byte 0x30387820
+	.4byte 0x28253134
+	.4byte 0x64290A00
+	.4byte 0x4C522020
+	.4byte 0x203D2030
+	.4byte 0x78253038
+	.4byte 0x78202020
+	.4byte 0x20202020
+	.4byte 0x20202020
+	.4byte 0x20202020
+	.4byte 0x20202020
+	.4byte 0x43522020
+	.4byte 0x203D2030
+	.4byte 0x78253038
+	.4byte 0x780A0000
+	.4byte 0x53525230
+	.4byte 0x203D2030
+	.4byte 0x78253038
+	.4byte 0x78202020
+	.4byte 0x20202020
+	.4byte 0x20202020
+	.4byte 0x20202020
+	.4byte 0x20202020
+	.4byte 0x53525231
+	.4byte 0x203D2030
+	.4byte 0x78253038
+	.4byte 0x780A0000
+	.4byte 0x0A475152
+	.4byte 0x732D2D2D
+	.4byte 0x2D2D2D2D
+	.4byte 0x2D2D2D0A
+	.4byte 0x00000000
+	.4byte 0x67717225
+	.4byte 0x64203D20
+	.4byte 0x30782530
+	.4byte 0x38782009
+	.4byte 0x20677172
+	.4byte 0x2564203D
+	.4byte 0x20307825
+	.4byte 0x3038780A
+	.4byte 0x00000000
+	.4byte 0x0A0A4650
+	.4byte 0x52732D2D
+	.4byte 0x2D2D2D2D
+	.4byte 0x2D2D2D2D
+	.4byte 0x0A000000
+	.4byte 0x66722564
+	.4byte 0x20093D20
+	.4byte 0x25642009
+	.4byte 0x20667225
+	.4byte 0x6420093D
+	.4byte 0x2025640A
+	.4byte 0x00000000
+	.4byte 0x0A0A5053
+	.4byte 0x46732D2D
+	.4byte 0x2D2D2D2D
+	.4byte 0x2D2D2D2D
+	.4byte 0x0A000000
+	.4byte 0x70732564
+	.4byte 0x20093D20
+	.4byte 0x30782578
+	.4byte 0x20092070
+	.4byte 0x73256420
+	.4byte 0x093D2030
+	.4byte 0x7825780A
+	.4byte 0x00000000
+	.4byte 0x0A416464
+	.4byte 0x72657373
+	.4byte 0x3A202020
+	.4byte 0x20202042
+	.4byte 0x61636B20
+	.4byte 0x43686169
+	.4byte 0x6E202020
+	.4byte 0x204C5220
+	.4byte 0x53617665
+	.4byte 0x0A000000
+	.4byte 0x30782530
+	.4byte 0x38783A20
+	.4byte 0x20203078
+	.4byte 0x25303878
+	.4byte 0x20202020
+	.4byte 0x30782530
+	.4byte 0x38780A00
+.endobj lbl_8079C4C0
+
+# 0x8087E770..0x8087E798 | size: 0x28
+.section .sdata, "wa"
+.balign 8
+
+# .sdata:0x0 | 0x8087E770 | size: 0x4
+.obj __OSFpscrEnableBits, global
+	.4byte 0x000000F8
+.endobj __OSFpscrEnableBits
+
+# .sdata:0x4 | 0x8087E774 | size: 0x2
+.obj "@703_8087E774", global
+	.string "\n"
+.endobj "@703_8087E774"
+
+# .sdata:0x6 | 0x8087E776 | size: 0x2
+.obj gap_09_8087E776_sdata, global
+.hidden gap_09_8087E776_sdata
+	.2byte 0x0000
+.endobj gap_09_8087E776_sdata
+
+# .sdata:0x8 | 0x8087E778 | size: 0x8
+.obj lbl_8087E778, global
+	.string "%016llx"
+.endobj lbl_8087E778
+
+# .sdata:0x10 | 0x8087E780 | size: 0x3
+.obj lbl_8087E780, global
+	.string "%d"
+.endobj lbl_8087E780
+
+# .sdata:0x13 | 0x8087E783 | size: 0x5
+.obj gap_09_8087E783_sdata, global
+.hidden gap_09_8087E783_sdata
+	.4byte 0x00000000
+	.byte 0x00
+.endobj gap_09_8087E783_sdata
+
+# .sdata:0x18 | 0x8087E788 | size: 0x4
+.obj lbl_8087E788, global
+	.string "%s\n"
+.endobj lbl_8087E788
+
+# .sdata:0x1C | 0x8087E78C | size: 0x4
+.obj gap_09_8087E78C_sdata, global
+.hidden gap_09_8087E78C_sdata
+	.4byte 0x00000000
+.endobj gap_09_8087E78C_sdata
+
+# .sdata:0x20 | 0x8087E790 | size: 0x8
+.obj lbl_8087E790, global
+	.2byte 0xFFFF
+	.2byte 0x0000
+	.2byte 0x0000
+	.2byte 0x0000
+.endobj lbl_8087E790

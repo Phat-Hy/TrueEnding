@@ -1516,6 +1516,49 @@
       }
     },
     {
+      "name": "main/OSContext",
+      "target_path": "build/SLSEXJ/obj/OSContext.o",
+      "base_path": "build/SLSEXJ/src/OSContext.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/OSContext.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/OSContext.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/auto_09_8087E774_sdata",
+      "target_path": "build/SLSEXJ/obj/auto_09_8087E774_sdata.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_07_8079C678_data",
+      "target_path": "build/SLSEXJ/obj/auto_07_8079C678_data.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_805EE0D0_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_805EE0D0_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
       "name": "main/OSThread",
       "target_path": "build/SLSEXJ/obj/OSThread.o",
       "base_path": "build/SLSEXJ/src/OSThread.o",

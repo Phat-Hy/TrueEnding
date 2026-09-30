@@ -1,0 +1,143 @@
+.include "macros.inc"
+.file "auto_07_8079C2B8_data"
+
+# 0x8079C2B8..0x8079C4C0 | size: 0x208
+.data
+.balign 8
+
+# .data:0x0 | 0x8079C2B8 | size: 0x80
+.obj DSPInitCode_8079C2B8, global
+	.4byte 0x029F0010
+	.4byte 0x029F0033
+	.4byte 0x029F0034
+	.4byte 0x029F0035
+	.4byte 0x029F0036
+	.4byte 0x029F0037
+	.4byte 0x029F0038
+	.4byte 0x029F0039
+	.4byte 0x12061203
+	.4byte 0x12041205
+	.4byte 0x00808000
+	.4byte 0x0088FFFF
+	.4byte 0x00841000
+	.4byte 0x0064001D
+	.4byte 0x02180000
+	.4byte 0x81001C1E
+	.4byte 0x00441B1E
+	.4byte 0x00840800
+	.4byte 0x00640027
+	.4byte 0x191E0000
+	.4byte 0x00DEFFFC
+	.4byte 0x02A08000
+	.4byte 0x029C0028
+	.4byte 0x16FC0054
+	.4byte 0x16FD4348
+	.4byte 0x002102FF
+	.4byte 0x02FF02FF
+	.4byte 0x02FF02FF
+	.4byte 0x02FF02FF
+	.4byte 0x00000000
+	.4byte 0x00000000
+	.4byte 0x00000000
+.endobj DSPInitCode_8079C2B8
+
+# .data:0x80 | 0x8079C338 | size: 0x18
+.obj "@909_8079C338", global
+	.string "Machine check received\n"
+.endobj "@909_8079C338"
+
+# .data:0x98 | 0x8079C350 | size: 0x170
+.obj lbl_8079C350, global
+	.4byte 0x48494432
+	.4byte 0x203D2030
+	.4byte 0x78257820
+	.4byte 0x20205352
+	.4byte 0x5231203D
+	.4byte 0x20307825
+	.4byte 0x780A0000
+	.4byte 0x00000000
+	.4byte 0x4D616368
+	.4byte 0x696E6520
+	.4byte 0x63686563
+	.4byte 0x6B207761
+	.4byte 0x73206E6F
+	.4byte 0x7420444D
+	.4byte 0x412F6C6F
+	.4byte 0x636B6564
+	.4byte 0x20636163
+	.4byte 0x68652072
+	.4byte 0x656C6174
+	.4byte 0x65640A00
+	.4byte 0x444D4145
+	.4byte 0x72726F72
+	.4byte 0x48616E64
+	.4byte 0x6C657228
+	.4byte 0x293A2041
+	.4byte 0x6E206572
+	.4byte 0x726F7220
+	.4byte 0x6F636375
+	.4byte 0x72726564
+	.4byte 0x20776869
+	.4byte 0x6C652070
+	.4byte 0x726F6365
+	.4byte 0x7373696E
+	.4byte 0x6720444D
+	.4byte 0x412E0A00
+	.4byte 0x54686520
+	.4byte 0x666F6C6C
+	.4byte 0x6F77696E
+	.4byte 0x67206572
+	.4byte 0x726F7273
+	.4byte 0x20686176
+	.4byte 0x65206265
+	.4byte 0x656E2064
+	.4byte 0x65746563
+	.4byte 0x74656420
+	.4byte 0x616E6420
+	.4byte 0x636C6561
+	.4byte 0x72656420
+	.4byte 0x3A0A0000
+	.4byte 0x092D2052
+	.4byte 0x65717565
+	.4byte 0x73746564
+	.4byte 0x2061206C
+	.4byte 0x6F636B65
+	.4byte 0x64206361
+	.4byte 0x63686520
+	.4byte 0x74616720
+	.4byte 0x74686174
+	.4byte 0x20776173
+	.4byte 0x20616C72
+	.4byte 0x65616479
+	.4byte 0x20696E20
+	.4byte 0x74686520
+	.4byte 0x63616368
+	.4byte 0x650A0000
+	.4byte 0x092D2044
+	.4byte 0x4D412061
+	.4byte 0x7474656D
+	.4byte 0x70746564
+	.4byte 0x20746F20
+	.4byte 0x61636365
+	.4byte 0x7373206E
+	.4byte 0x6F726D61
+	.4byte 0x6C206361
+	.4byte 0x6368650A
+	.4byte 0x00000000
+	.4byte 0x092D2044
+	.4byte 0x4D41206D
+	.4byte 0x69737365
+	.4byte 0x6420696E
+	.4byte 0x20646174
+	.4byte 0x61206361
+	.4byte 0x6368650A
+	.4byte 0x00000000
+	.4byte 0x092D2044
+	.4byte 0x4D412071
+	.4byte 0x75657565
+	.4byte 0x206F7665
+	.4byte 0x72666C6F
+	.4byte 0x7765640A
+	.4byte 0x00000000
+	.4byte 0x00000000
+.endobj lbl_8079C350

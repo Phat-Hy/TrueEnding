@@ -29,8 +29,8 @@
 /* 805F4948 005EEFA8  38 A0 00 10 */	li r5, 0x10
 /* 805F494C 005EEFAC  38 00 FF FF */	li r0, -0x1
 /* 805F4950 005EEFB0  93 E1 00 1C */	stw r31, 0x1c(r1)
-/* 805F4954 005EEFB4  3F E0 80 7D */	lis r31, DefaultThread_807CB658@ha
-/* 805F4958 005EEFB8  3B FF B6 58 */	addi r31, r31, DefaultThread_807CB658@l
+/* 805F4954 005EEFB4  3F E0 80 7D */	lis r31, DefaultThread@ha
+/* 805F4958 005EEFB8  3B FF B6 58 */	addi r31, r31, DefaultThread@l
 /* 805F495C 005EEFBC  93 C1 00 18 */	stw r30, 0x18(r1)
 /* 805F4960 005EEFC0  3B DF 00 00 */	addi r30, r31, 0x0
 /* 805F4964 005EEFC4  93 A1 00 14 */	stw r29, 0x14(r1)
@@ -61,7 +61,7 @@
 /* 805F49C8 005EF028  90 BE 03 08 */	stw r5, 0x308(r30)
 /* 805F49CC 005EF02C  38 03 BA BE */	subi r0, r3, 0x4542
 /* 805F49D0 005EF030  90 05 00 00 */	stw r0, 0x0(r5)
-/* 805F49D4 005EF034  81 8D 90 D8 */	lwz r12, SwitchThreadCallback_8087E798@sda21(r0)
+/* 805F49D4 005EF034  81 8D 90 D8 */	lwz r12, SwitchThreadCallback@sda21(r0)
 /* 805F49D8 005EF038  80 7D 00 E4 */	lwz r3, 0xe4(r29)
 /* 805F49DC 005EF03C  7D 89 03 A6 */	mtctr r12
 /* 805F49E0 005EF040  4E 80 04 21 */	bctrl
@@ -127,9 +127,9 @@
 .L_805F4ABC:
 /* 805F4ABC 005EF11C  38 00 00 02 */	li r0, 0x2
 /* 805F4AC0 005EF120  38 60 00 00 */	li r3, 0x0
-/* 805F4AC4 005EF124  90 6D A5 A0 */	stw r3, RunQueueBits_8087FC60@sda21(r0)
+/* 805F4AC4 005EF124  90 6D A5 A0 */	stw r3, RunQueueBits@sda21(r0)
 /* 805F4AC8 005EF128  38 9F 03 18 */	addi r4, r31, 0x318
-/* 805F4ACC 005EF12C  90 6D A5 9C */	stw r3, RunQueueHint_8087FC5C@sda21(r0)
+/* 805F4ACC 005EF12C  90 6D A5 9C */	stw r3, RunQueueHint@sda21(r0)
 /* 805F4AD0 005EF130  7C 09 03 A6 */	mtctr r0
 .L_805F4AD4:
 /* 805F4AD4 005EF134  90 64 00 04 */	stw r3, 0x4(r4)
@@ -181,7 +181,7 @@
 /* 805F4B88 005EF1E8  93 BE 02 FC */	stw r29, 0x2fc(r30)
 /* 805F4B8C 005EF1EC  93 C4 00 E0 */	stw r30, 0xe0(r4)
 /* 805F4B90 005EF1F0  4B FF 91 21 */	bl OSClearContext
-/* 805F4B94 005EF1F4  93 AD A5 98 */	stw r29, Reschedule_8087FC58@sda21(r0)
+/* 805F4B94 005EF1F4  93 AD A5 98 */	stw r29, Reschedule@sda21(r0)
 /* 805F4B98 005EF1F8  80 01 00 24 */	lwz r0, 0x24(r1)
 /* 805F4B9C 005EF1FC  83 E1 00 1C */	lwz r31, 0x1c(r1)
 /* 805F4BA0 005EF200  83 C1 00 18 */	lwz r30, 0x18(r1)
@@ -266,9 +266,9 @@
 /* 805F4C38 005EF298  90 01 00 14 */	stw r0, 0x14(r1)
 /* 805F4C3C 005EF29C  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 805F4C40 005EF2A0  4B FF D2 41 */	bl OSDisableInterrupts
-/* 805F4C44 005EF2A4  83 ED A5 98 */	lwz r31, Reschedule_8087FC58@sda21(r0)
+/* 805F4C44 005EF2A4  83 ED A5 98 */	lwz r31, Reschedule@sda21(r0)
 /* 805F4C48 005EF2A8  38 1F 00 01 */	addi r0, r31, 0x1
-/* 805F4C4C 005EF2AC  90 0D A5 98 */	stw r0, Reschedule_8087FC58@sda21(r0)
+/* 805F4C4C 005EF2AC  90 0D A5 98 */	stw r0, Reschedule@sda21(r0)
 /* 805F4C50 005EF2B0  4B FF D2 71 */	bl OSRestoreInterrupts
 /* 805F4C54 005EF2B4  7F E3 FB 78 */	mr r3, r31
 /* 805F4C58 005EF2B8  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -291,9 +291,9 @@
 /* 805F4C78 005EF2D8  90 01 00 14 */	stw r0, 0x14(r1)
 /* 805F4C7C 005EF2DC  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 805F4C80 005EF2E0  4B FF D2 01 */	bl OSDisableInterrupts
-/* 805F4C84 005EF2E4  83 ED A5 98 */	lwz r31, Reschedule_8087FC58@sda21(r0)
+/* 805F4C84 005EF2E4  83 ED A5 98 */	lwz r31, Reschedule@sda21(r0)
 /* 805F4C88 005EF2E8  38 1F FF FF */	subi r0, r31, 0x1
-/* 805F4C8C 005EF2EC  90 0D A5 98 */	stw r0, Reschedule_8087FC58@sda21(r0)
+/* 805F4C8C 005EF2EC  90 0D A5 98 */	stw r0, Reschedule@sda21(r0)
 /* 805F4C90 005EF2F0  4B FF D2 31 */	bl OSRestoreInterrupts
 /* 805F4C94 005EF2F4  7F E3 FB 78 */	mr r3, r31
 /* 805F4C98 005EF2F8  83 E1 00 0C */	lwz r31, 0xc(r1)
@@ -333,11 +333,11 @@
 /* 805F4CEC 005EF34C  40 82 00 20 */	bne .L_805F4D0C
 /* 805F4CF0 005EF350  80 03 02 D0 */	lwz r0, 0x2d0(r3)
 /* 805F4CF4 005EF354  38 80 00 01 */	li r4, 0x1
-/* 805F4CF8 005EF358  80 AD A5 A0 */	lwz r5, RunQueueBits_8087FC60@sda21(r0)
+/* 805F4CF8 005EF358  80 AD A5 A0 */	lwz r5, RunQueueBits@sda21(r0)
 /* 805F4CFC 005EF35C  20 00 00 1F */	subfic r0, r0, 0x1f
 /* 805F4D00 005EF360  7C 80 00 30 */	slw r0, r4, r0
 /* 805F4D04 005EF364  7C A0 00 78 */	andc r0, r5, r0
-/* 805F4D08 005EF368  90 0D A5 A0 */	stw r0, RunQueueBits_8087FC60@sda21(r0)
+/* 805F4D08 005EF368  90 0D A5 A0 */	stw r0, RunQueueBits@sda21(r0)
 .L_805F4D0C:
 /* 805F4D0C 005EF36C  38 00 00 00 */	li r0, 0x0
 /* 805F4D10 005EF370  90 03 02 DC */	stw r0, 0x2dc(r3)
@@ -414,12 +414,12 @@
 /* 805F4DE0 005EF440  90 1E 02 E0 */	stw r0, 0x2e0(r30)
 /* 805F4DE4 005EF444  93 C4 00 04 */	stw r30, 0x4(r4)
 /* 805F4DE8 005EF448  80 1E 02 D0 */	lwz r0, 0x2d0(r30)
-/* 805F4DEC 005EF44C  80 8D A5 A0 */	lwz r4, RunQueueBits_8087FC60@sda21(r0)
+/* 805F4DEC 005EF44C  80 8D A5 A0 */	lwz r4, RunQueueBits@sda21(r0)
 /* 805F4DF0 005EF450  20 00 00 1F */	subfic r0, r0, 0x1f
 /* 805F4DF4 005EF454  7C 60 00 30 */	slw r0, r3, r0
 /* 805F4DF8 005EF458  7C 80 03 78 */	or r0, r4, r0
-/* 805F4DFC 005EF45C  90 0D A5 A0 */	stw r0, RunQueueBits_8087FC60@sda21(r0)
-/* 805F4E00 005EF460  90 6D A5 9C */	stw r3, RunQueueHint_8087FC5C@sda21(r0)
+/* 805F4DFC 005EF45C  90 0D A5 A0 */	stw r0, RunQueueBits@sda21(r0)
+/* 805F4E00 005EF460  90 6D A5 9C */	stw r3, RunQueueHint@sda21(r0)
 /* 805F4E04 005EF464  48 00 00 E8 */	b .L_805F4EEC
 .L_805F4E08:
 /* 805F4E08 005EF468  80 C3 02 E0 */	lwz r6, 0x2e0(r3)
@@ -490,7 +490,7 @@
 /* 805F4EDC 005EF53C  48 00 00 14 */	b .L_805F4EF0
 .L_805F4EE0:
 /* 805F4EE0 005EF540  38 00 00 01 */	li r0, 0x1
-/* 805F4EE4 005EF544  90 0D A5 9C */	stw r0, RunQueueHint_8087FC5C@sda21(r0)
+/* 805F4EE4 005EF544  90 0D A5 9C */	stw r0, RunQueueHint@sda21(r0)
 /* 805F4EE8 005EF548  90 83 02 D0 */	stw r4, 0x2d0(r3)
 .L_805F4EEC:
 /* 805F4EEC 005EF54C  38 60 00 00 */	li r3, 0x0
@@ -544,13 +544,13 @@
 /* 805F4F6C 005EF5CC  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 805F4F70 005EF5D0  93 C1 00 08 */	stw r30, 0x8(r1)
 /* 805F4F74 005EF5D4  7C 7E 1B 78 */	mr r30, r3
-/* 805F4F78 005EF5D8  80 0D A5 98 */	lwz r0, Reschedule_8087FC58@sda21(r0)
+/* 805F4F78 005EF5D8  80 0D A5 98 */	lwz r0, Reschedule@sda21(r0)
 /* 805F4F7C 005EF5DC  2C 00 00 00 */	cmpwi r0, 0x0
 /* 805F4F80 005EF5E0  40 81 00 0C */	ble .L_805F4F8C
 /* 805F4F84 005EF5E4  38 60 00 00 */	li r3, 0x0
 /* 805F4F88 005EF5E8  48 00 01 EC */	b .L_805F5174
 .L_805F4F8C:
-/* 805F4F8C 005EF5EC  4B FF 8B 45 */	bl fn_805EDAD0
+/* 805F4F8C 005EF5EC  4B FF 8B 45 */	bl OSGetCurrentContext
 /* 805F4F90 005EF5F0  3C 80 80 00 */	lis r4, 0x8000
 /* 805F4F94 005EF5F4  80 A4 00 E4 */	lwz r5, 0xe4(r4)
 /* 805F4F98 005EF5F8  7C 03 28 40 */	cmplw r3, r5
@@ -565,7 +565,7 @@
 /* 805F4FB8 005EF618  40 82 00 94 */	bne .L_805F504C
 /* 805F4FBC 005EF61C  2C 1E 00 00 */	cmpwi r30, 0x0
 /* 805F4FC0 005EF620  40 82 00 20 */	bne .L_805F4FE0
-/* 805F4FC4 005EF624  80 6D A5 A0 */	lwz r3, RunQueueBits_8087FC60@sda21(r0)
+/* 805F4FC4 005EF624  80 6D A5 A0 */	lwz r3, RunQueueBits@sda21(r0)
 /* 805F4FC8 005EF628  80 05 02 D0 */	lwz r0, 0x2d0(r5)
 /* 805F4FCC 005EF62C  7C 63 00 34 */	cntlzw r3, r3
 /* 805F4FD0 005EF630  7C 00 18 00 */	cmpw r0, r3
@@ -596,27 +596,27 @@
 /* 805F5028 005EF688  80 85 02 DC */	lwz r4, 0x2dc(r5)
 /* 805F502C 005EF68C  90 A4 00 04 */	stw r5, 0x4(r4)
 /* 805F5030 005EF690  80 05 02 D0 */	lwz r0, 0x2d0(r5)
-/* 805F5034 005EF694  80 8D A5 A0 */	lwz r4, RunQueueBits_8087FC60@sda21(r0)
+/* 805F5034 005EF694  80 8D A5 A0 */	lwz r4, RunQueueBits@sda21(r0)
 /* 805F5038 005EF698  20 00 00 1F */	subfic r0, r0, 0x1f
 /* 805F503C 005EF69C  7C 60 00 30 */	slw r0, r3, r0
 /* 805F5040 005EF6A0  7C 80 03 78 */	or r0, r4, r0
-/* 805F5044 005EF6A4  90 0D A5 A0 */	stw r0, RunQueueBits_8087FC60@sda21(r0)
-/* 805F5048 005EF6A8  90 6D A5 9C */	stw r3, RunQueueHint_8087FC5C@sda21(r0)
+/* 805F5044 005EF6A4  90 0D A5 A0 */	stw r0, RunQueueBits@sda21(r0)
+/* 805F5048 005EF6A8  90 6D A5 9C */	stw r3, RunQueueHint@sda21(r0)
 .L_805F504C:
 /* 805F504C 005EF6AC  A0 05 01 A2 */	lhz r0, 0x1a2(r5)
 /* 805F5050 005EF6B0  54 00 07 BD */	rlwinm. r0, r0, 0, 30, 30
 /* 805F5054 005EF6B4  40 82 00 1C */	bne .L_805F5070
 /* 805F5058 005EF6B8  7C A3 2B 78 */	mr r3, r5
-/* 805F505C 005EF6BC  4B FF 8A 85 */	bl fn_805EDAE0
+/* 805F505C 005EF6BC  4B FF 8A 85 */	bl OSSaveContext
 /* 805F5060 005EF6C0  2C 03 00 00 */	cmpwi r3, 0x0
 /* 805F5064 005EF6C4  41 82 00 0C */	beq .L_805F5070
 /* 805F5068 005EF6C8  38 60 00 00 */	li r3, 0x0
 /* 805F506C 005EF6CC  48 00 01 08 */	b .L_805F5174
 .L_805F5070:
-/* 805F5070 005EF6D0  80 0D A5 A0 */	lwz r0, RunQueueBits_8087FC60@sda21(r0)
+/* 805F5070 005EF6D0  80 0D A5 A0 */	lwz r0, RunQueueBits@sda21(r0)
 /* 805F5074 005EF6D4  2C 00 00 00 */	cmpwi r0, 0x0
 /* 805F5078 005EF6D8  40 82 00 60 */	bne .L_805F50D8
-/* 805F507C 005EF6DC  81 8D 90 D8 */	lwz r12, SwitchThreadCallback_8087E798@sda21(r0)
+/* 805F507C 005EF6DC  81 8D 90 D8 */	lwz r12, SwitchThreadCallback@sda21(r0)
 /* 805F5080 005EF6E0  3F E0 80 00 */	lis r31, 0x8000
 /* 805F5084 005EF6E4  80 7F 00 E4 */	lwz r3, 0xe4(r31)
 /* 805F5088 005EF6E8  38 80 00 00 */	li r4, 0x0
@@ -631,11 +631,11 @@
 /* 805F50A8 005EF708  4B FF CD F9 */	bl OSEnableInterrupts
 /* 805F50AC 005EF70C  60 00 00 00 */	nop
 .L_805F50B0:
-/* 805F50B0 005EF710  80 0D A5 A0 */	lwz r0, RunQueueBits_8087FC60@sda21(r0)
+/* 805F50B0 005EF710  80 0D A5 A0 */	lwz r0, RunQueueBits@sda21(r0)
 /* 805F50B4 005EF714  2C 00 00 00 */	cmpwi r0, 0x0
 /* 805F50B8 005EF718  41 82 FF F8 */	beq .L_805F50B0
 /* 805F50BC 005EF71C  4B FF CD C5 */	bl OSDisableInterrupts
-/* 805F50C0 005EF720  80 0D A5 A0 */	lwz r0, RunQueueBits_8087FC60@sda21(r0)
+/* 805F50C0 005EF720  80 0D A5 A0 */	lwz r0, RunQueueBits@sda21(r0)
 /* 805F50C4 005EF724  2C 00 00 00 */	cmpwi r0, 0x0
 /* 805F50C8 005EF728  41 82 FF E0 */	beq .L_805F50A8
 /* 805F50CC 005EF72C  3C 60 80 7D */	lis r3, IdleContext@ha
@@ -643,8 +643,8 @@
 /* 805F50D4 005EF734  4B FF 8B DD */	bl OSClearContext
 .L_805F50D8:
 /* 805F50D8 005EF738  38 80 00 00 */	li r4, 0x0
-/* 805F50DC 005EF73C  90 8D A5 9C */	stw r4, RunQueueHint_8087FC5C@sda21(r0)
-/* 805F50E0 005EF740  80 0D A5 A0 */	lwz r0, RunQueueBits_8087FC60@sda21(r0)
+/* 805F50DC 005EF73C  90 8D A5 9C */	stw r4, RunQueueHint@sda21(r0)
+/* 805F50E0 005EF740  80 0D A5 A0 */	lwz r0, RunQueueBits@sda21(r0)
 /* 805F50E4 005EF744  3C 60 80 7D */	lis r3, RunQueue@ha
 /* 805F50E8 005EF748  38 63 B9 70 */	addi r3, r3, RunQueue@l
 /* 805F50EC 005EF74C  7C 05 00 34 */	cntlzw r5, r0
@@ -663,10 +663,10 @@
 /* 805F5118 005EF778  40 82 00 1C */	bne .L_805F5134
 /* 805F511C 005EF77C  20 05 00 1F */	subfic r0, r5, 0x1f
 /* 805F5120 005EF780  38 60 00 01 */	li r3, 0x1
-/* 805F5124 005EF784  80 8D A5 A0 */	lwz r4, RunQueueBits_8087FC60@sda21(r0)
+/* 805F5124 005EF784  80 8D A5 A0 */	lwz r4, RunQueueBits@sda21(r0)
 /* 805F5128 005EF788  7C 60 00 30 */	slw r0, r3, r0
 /* 805F512C 005EF78C  7C 80 00 78 */	andc r0, r4, r0
-/* 805F5130 005EF790  90 0D A5 A0 */	stw r0, RunQueueBits_8087FC60@sda21(r0)
+/* 805F5130 005EF790  90 0D A5 A0 */	stw r0, RunQueueBits@sda21(r0)
 .L_805F5134:
 /* 805F5134 005EF794  38 00 00 00 */	li r0, 0x0
 /* 805F5138 005EF798  90 1E 02 DC */	stw r0, 0x2dc(r30)
@@ -674,7 +674,7 @@
 /* 805F5140 005EF7A0  3F E0 80 00 */	lis r31, 0x8000
 /* 805F5144 005EF7A4  B0 1E 02 C8 */	sth r0, 0x2c8(r30)
 /* 805F5148 005EF7A8  7F C4 F3 78 */	mr r4, r30
-/* 805F514C 005EF7AC  81 8D 90 D8 */	lwz r12, SwitchThreadCallback_8087E798@sda21(r0)
+/* 805F514C 005EF7AC  81 8D 90 D8 */	lwz r12, SwitchThreadCallback@sda21(r0)
 /* 805F5150 005EF7B0  80 7F 00 E4 */	lwz r3, 0xe4(r31)
 /* 805F5154 005EF7B4  7D 89 03 A6 */	mtctr r12
 /* 805F5158 005EF7B8  4E 80 04 21 */	bctrl
@@ -701,7 +701,7 @@
 
 # .text:0x870 | 0x805F5190 | size: 0x18
 .fn __OSReschedule, global
-/* 805F5190 005EF7F0  80 0D A5 9C */	lwz r0, RunQueueHint_8087FC5C@sda21(r0)
+/* 805F5190 005EF7F0  80 0D A5 9C */	lwz r0, RunQueueHint@sda21(r0)
 /* 805F5194 005EF7F4  2C 00 00 00 */	cmpwi r0, 0x0
 /* 805F5198 005EF7F8  4D 82 00 20 */	beqlr
 /* 805F519C 005EF7FC  38 60 00 00 */	li r3, 0x0
@@ -754,7 +754,7 @@
 /* 805F522C 005EF88C  93 C3 02 F4 */	stw r30, 0x2f4(r3)
 /* 805F5230 005EF890  93 C6 FF F8 */	stw r30, -0x8(r6)
 /* 805F5234 005EF894  93 C6 FF FC */	stw r30, -0x4(r6)
-/* 805F5238 005EF898  4B FF 8A A9 */	bl fn_805EDCE0
+/* 805F5238 005EF898  4B FF 8A A9 */	bl OSInitContext
 /* 805F523C 005EF89C  3C 60 80 5F */	lis r3, OSExitThread@ha
 /* 805F5240 005EF8A0  7C 9C D8 50 */	subf r4, r28, r27
 /* 805F5244 005EF8A4  38 63 54 20 */	addi r3, r3, OSExitThread@l
@@ -783,7 +783,7 @@
 /* 805F52A0 005EF900  60 84 00 01 */	ori r4, r4, 0x1
 /* 805F52A4 005EF904  B0 9F 01 A2 */	sth r4, 0x1a2(r31)
 /* 805F52A8 005EF908  38 BF 01 C8 */	addi r5, r31, 0x1c8
-/* 805F52AC 005EF90C  80 8D 90 B0 */	lwz r4, lbl_8087E770@sda21(r0)
+/* 805F52AC 005EF90C  80 8D 90 B0 */	lwz r4, __OSFpscrEnableBits@sda21(r0)
 /* 805F52B0 005EF910  54 84 06 38 */	rlwinm r4, r4, 0, 24, 28
 /* 805F52B4 005EF914  60 84 00 04 */	ori r4, r4, 0x4
 /* 805F52B8 005EF918  90 9F 01 94 */	stw r4, 0x194(r31)
@@ -933,12 +933,12 @@
 /* 805F54AC 005EFB0C  93 9E 02 D8 */	stw r28, 0x2d8(r30)
 .L_805F54B0:
 /* 805F54B0 005EFB10  7F C3 F3 78 */	mr r3, r30
-/* 805F54B4 005EFB14  4B FF DE 2D */	bl fn_805F32E0
+/* 805F54B4 005EFB14  4B FF DE 2D */	bl __OSUnlockAllMutex
 /* 805F54B8 005EFB18  38 7E 02 E8 */	addi r3, r30, 0x2e8
 /* 805F54BC 005EFB1C  48 00 08 A5 */	bl OSWakeupThread
 /* 805F54C0 005EFB20  38 00 00 01 */	li r0, 0x1
-/* 805F54C4 005EFB24  90 0D A5 9C */	stw r0, RunQueueHint_8087FC5C@sda21(r0)
-/* 805F54C8 005EFB28  80 0D A5 9C */	lwz r0, RunQueueHint_8087FC5C@sda21(r0)
+/* 805F54C4 005EFB24  90 0D A5 9C */	stw r0, RunQueueHint@sda21(r0)
+/* 805F54C8 005EFB28  80 0D A5 9C */	lwz r0, RunQueueHint@sda21(r0)
 /* 805F54CC 005EFB2C  2C 00 00 00 */	cmpwi r0, 0x0
 /* 805F54D0 005EFB30  41 82 00 0C */	beq .L_805F54DC
 /* 805F54D4 005EFB34  38 60 00 00 */	li r3, 0x0
@@ -975,7 +975,7 @@
 /* 805F5528 005EFB88  4B FF C9 59 */	bl OSDisableInterrupts
 /* 805F552C 005EFB8C  7C 7F 1B 78 */	mr r31, r3
 /* 805F5530 005EFB90  7F C3 F3 78 */	mr r3, r30
-/* 805F5534 005EFB94  4B FF 73 6D */	bl fn_805EC8A0
+/* 805F5534 005EFB94  4B FF 73 6D */	bl __OSCancelThreadAlarms
 /* 805F5538 005EFB98  A0 1E 02 C8 */	lhz r0, 0x2c8(r30)
 /* 805F553C 005EFB9C  2C 00 00 01 */	cmpwi r0, 0x1
 /* 805F5540 005EFBA0  41 82 00 18 */	beq .L_805F5558
@@ -993,7 +993,7 @@
 /* 805F556C 005EFBCC  48 00 00 D4 */	b .L_805F5640
 .L_805F5570:
 /* 805F5570 005EFBD0  38 00 00 01 */	li r0, 0x1
-/* 805F5574 005EFBD4  90 0D A5 9C */	stw r0, RunQueueHint_8087FC5C@sda21(r0)
+/* 805F5574 005EFBD4  90 0D A5 9C */	stw r0, RunQueueHint@sda21(r0)
 /* 805F5578 005EFBD8  48 00 00 C8 */	b .L_805F5640
 .L_805F557C:
 /* 805F557C 005EFBDC  80 9E 02 E0 */	lwz r4, 0x2e0(r30)
@@ -1086,10 +1086,10 @@
 /* 805F569C 005EFCFC  B0 1E 02 C8 */	sth r0, 0x2c8(r30)
 .L_805F56A0:
 /* 805F56A0 005EFD00  7F C3 F3 78 */	mr r3, r30
-/* 805F56A4 005EFD04  4B FF DC 3D */	bl fn_805F32E0
+/* 805F56A4 005EFD04  4B FF DC 3D */	bl __OSUnlockAllMutex
 /* 805F56A8 005EFD08  38 7E 02 E8 */	addi r3, r30, 0x2e8
 /* 805F56AC 005EFD0C  48 00 06 B5 */	bl OSWakeupThread
-/* 805F56B0 005EFD10  80 0D A5 9C */	lwz r0, RunQueueHint_8087FC5C@sda21(r0)
+/* 805F56B0 005EFD10  80 0D A5 9C */	lwz r0, RunQueueHint@sda21(r0)
 /* 805F56B4 005EFD14  2C 00 00 00 */	cmpwi r0, 0x0
 /* 805F56B8 005EFD18  41 82 00 0C */	beq .L_805F56C4
 /* 805F56BC 005EFD1C  38 60 00 00 */	li r3, 0x0
@@ -1284,12 +1284,12 @@
 /* 805F5910 005EFF70  90 1D 02 E0 */	stw r0, 0x2e0(r29)
 /* 805F5914 005EFF74  93 A4 00 04 */	stw r29, 0x4(r4)
 /* 805F5918 005EFF78  80 1D 02 D0 */	lwz r0, 0x2d0(r29)
-/* 805F591C 005EFF7C  80 8D A5 A0 */	lwz r4, RunQueueBits_8087FC60@sda21(r0)
+/* 805F591C 005EFF7C  80 8D A5 A0 */	lwz r4, RunQueueBits@sda21(r0)
 /* 805F5920 005EFF80  20 00 00 1F */	subfic r0, r0, 0x1f
 /* 805F5924 005EFF84  7C 60 00 30 */	slw r0, r3, r0
 /* 805F5928 005EFF88  7C 80 03 78 */	or r0, r4, r0
-/* 805F592C 005EFF8C  90 0D A5 A0 */	stw r0, RunQueueBits_8087FC60@sda21(r0)
-/* 805F5930 005EFF90  90 6D A5 9C */	stw r3, RunQueueHint_8087FC5C@sda21(r0)
+/* 805F592C 005EFF8C  90 0D A5 A0 */	stw r0, RunQueueBits@sda21(r0)
+/* 805F5930 005EFF90  90 6D A5 9C */	stw r3, RunQueueHint@sda21(r0)
 /* 805F5934 005EFF94  48 00 01 6C */	b .L_805F5AA0
 .L_805F5938:
 /* 805F5938 005EFF98  80 9D 02 E0 */	lwz r4, 0x2e0(r29)
@@ -1402,7 +1402,7 @@
 /* 805F5A98 005F00F8  2C 03 00 00 */	cmpwi r3, 0x0
 /* 805F5A9C 005F00FC  40 82 FF A8 */	bne .L_805F5A44
 .L_805F5AA0:
-/* 805F5AA0 005F0100  80 0D A5 9C */	lwz r0, RunQueueHint_8087FC5C@sda21(r0)
+/* 805F5AA0 005F0100  80 0D A5 9C */	lwz r0, RunQueueHint@sda21(r0)
 /* 805F5AA4 005F0104  2C 00 00 00 */	cmpwi r0, 0x0
 /* 805F5AA8 005F0108  41 82 00 0C */	beq .L_805F5AB4
 /* 805F5AAC 005F010C  38 60 00 00 */	li r3, 0x0
@@ -1452,7 +1452,7 @@
 /* 805F5B34 005F0194  48 00 00 FC */	b .L_805F5C30
 .L_805F5B38:
 /* 805F5B38 005F0198  38 00 00 01 */	li r0, 0x1
-/* 805F5B3C 005F019C  90 0D A5 9C */	stw r0, RunQueueHint_8087FC5C@sda21(r0)
+/* 805F5B3C 005F019C  90 0D A5 9C */	stw r0, RunQueueHint@sda21(r0)
 /* 805F5B40 005F01A0  B0 1D 02 C8 */	sth r0, 0x2c8(r29)
 /* 805F5B44 005F01A4  48 00 00 EC */	b .L_805F5C30
 .L_805F5B48:
@@ -1526,7 +1526,7 @@
 /* 805F5C28 005F0288  2C 03 00 00 */	cmpwi r3, 0x0
 /* 805F5C2C 005F028C  40 82 FF A8 */	bne .L_805F5BD4
 .L_805F5C30:
-/* 805F5C30 005F0290  80 0D A5 9C */	lwz r0, RunQueueHint_8087FC5C@sda21(r0)
+/* 805F5C30 005F0290  80 0D A5 9C */	lwz r0, RunQueueHint@sda21(r0)
 /* 805F5C34 005F0294  2C 00 00 00 */	cmpwi r0, 0x0
 /* 805F5C38 005F0298  41 82 00 0C */	beq .L_805F5C44
 /* 805F5C3C 005F029C  38 60 00 00 */	li r3, 0x0
@@ -1606,8 +1606,8 @@
 /* 805F5D20 005F0380  90 83 02 E0 */	stw r4, 0x2e0(r3)
 .L_805F5D24:
 /* 805F5D24 005F0384  38 00 00 01 */	li r0, 0x1
-/* 805F5D28 005F0388  90 0D A5 9C */	stw r0, RunQueueHint_8087FC5C@sda21(r0)
-/* 805F5D2C 005F038C  80 0D A5 9C */	lwz r0, RunQueueHint_8087FC5C@sda21(r0)
+/* 805F5D28 005F0388  90 0D A5 9C */	stw r0, RunQueueHint@sda21(r0)
+/* 805F5D2C 005F038C  80 0D A5 9C */	lwz r0, RunQueueHint@sda21(r0)
 /* 805F5D30 005F0390  2C 00 00 00 */	cmpwi r0, 0x0
 /* 805F5D34 005F0394  41 82 00 0C */	beq .L_805F5D40
 /* 805F5D38 005F0398  38 60 00 00 */	li r3, 0x0
@@ -1670,17 +1670,17 @@
 /* 805F5DF4 005F0454  80 88 02 DC */	lwz r4, 0x2dc(r8)
 /* 805F5DF8 005F0458  91 04 00 04 */	stw r8, 0x4(r4)
 /* 805F5DFC 005F045C  80 08 02 D0 */	lwz r0, 0x2d0(r8)
-/* 805F5E00 005F0460  80 8D A5 A0 */	lwz r4, RunQueueBits_8087FC60@sda21(r0)
+/* 805F5E00 005F0460  80 8D A5 A0 */	lwz r4, RunQueueBits@sda21(r0)
 /* 805F5E04 005F0464  20 00 00 1F */	subfic r0, r0, 0x1f
 /* 805F5E08 005F0468  7C 60 00 30 */	slw r0, r3, r0
 /* 805F5E0C 005F046C  7C 80 03 78 */	or r0, r4, r0
-/* 805F5E10 005F0470  90 0D A5 A0 */	stw r0, RunQueueBits_8087FC60@sda21(r0)
-/* 805F5E14 005F0474  90 6D A5 9C */	stw r3, RunQueueHint_8087FC5C@sda21(r0)
+/* 805F5E10 005F0470  90 0D A5 A0 */	stw r0, RunQueueBits@sda21(r0)
+/* 805F5E14 005F0474  90 6D A5 9C */	stw r3, RunQueueHint@sda21(r0)
 .L_805F5E18:
 /* 805F5E18 005F0478  81 1E 00 00 */	lwz r8, 0x0(r30)
 /* 805F5E1C 005F047C  2C 08 00 00 */	cmpwi r8, 0x0
 /* 805F5E20 005F0480  40 82 FF 78 */	bne .L_805F5D98
-/* 805F5E24 005F0484  80 0D A5 9C */	lwz r0, RunQueueHint_8087FC5C@sda21(r0)
+/* 805F5E24 005F0484  80 0D A5 9C */	lwz r0, RunQueueHint@sda21(r0)
 /* 805F5E28 005F0488  2C 00 00 00 */	cmpwi r0, 0x0
 /* 805F5E2C 005F048C  41 82 00 0C */	beq .L_805F5E38
 /* 805F5E30 005F0490  38 60 00 00 */	li r3, 0x0
@@ -1710,7 +1710,7 @@
 /* 805F5E68 005F04C8  90 01 00 14 */	stw r0, 0x14(r1)
 /* 805F5E6C 005F04CC  93 E1 00 0C */	stw r31, 0xc(r1)
 /* 805F5E70 005F04D0  7C 7F 1B 78 */	mr r31, r3
-/* 805F5E74 005F04D4  4B FF 6A 0D */	bl fn_805EC880
+/* 805F5E74 005F04D4  4B FF 6A 0D */	bl OSGetAlarmUserData
 /* 805F5E78 005F04D8  A0 03 02 C8 */	lhz r0, 0x2c8(r3)
 /* 805F5E7C 005F04DC  2C 00 00 00 */	cmpwi r0, 0x0
 /* 805F5E80 005F04E0  40 82 00 0C */	bne .L_805F5E8C
@@ -1735,7 +1735,7 @@
 /* 805F5EB8 005F0518  2C 00 00 00 */	cmpwi r0, 0x0
 /* 805F5EBC 005F051C  41 82 00 10 */	beq .L_805F5ECC
 /* 805F5EC0 005F0520  7F E3 FB 78 */	mr r3, r31
-/* 805F5EC4 005F0524  4B FF 69 BD */	bl fn_805EC880
+/* 805F5EC4 005F0524  4B FF 69 BD */	bl OSGetAlarmUserData
 /* 805F5EC8 005F0528  4B FF F9 79 */	bl OSResumeThread
 .L_805F5ECC:
 /* 805F5ECC 005F052C  80 01 00 14 */	lwz r0, 0x14(r1)
@@ -1769,7 +1769,7 @@
 /* 805F5F28 005F0588  4B FF 61 B9 */	bl OSCreateAlarm
 /* 805F5F2C 005F058C  7F E4 FB 78 */	mr r4, r31
 /* 805F5F30 005F0590  38 61 00 08 */	addi r3, r1, 0x8
-/* 805F5F34 005F0594  4B FF 69 5D */	bl fn_805EC890
+/* 805F5F34 005F0594  4B FF 69 5D */	bl OSSetAlarmUserData
 /* 805F5F38 005F0598  3C E0 80 5F */	lis r7, SleepAlarmHandler@ha
 /* 805F5F3C 005F059C  7F 86 E3 78 */	mr r6, r28
 /* 805F5F40 005F05A0  7F A5 EB 78 */	mr r5, r29
@@ -1779,7 +1779,7 @@
 /* 805F5F50 005F05B0  7F E3 FB 78 */	mr r3, r31
 /* 805F5F54 005F05B4  4B FF FB 8D */	bl OSSuspendThread
 /* 805F5F58 005F05B8  38 61 00 08 */	addi r3, r1, 0x8
-/* 805F5F5C 005F05BC  4B FF 64 E5 */	bl fn_805EC440
+/* 805F5F5C 005F05BC  4B FF 64 E5 */	bl OSCancelAlarm
 /* 805F5F60 005F05C0  7F C3 F3 78 */	mr r3, r30
 /* 805F5F64 005F05C4  4B FF BF 5D */	bl OSRestoreInterrupts
 .L_805F5F68:
@@ -1799,3 +1799,62 @@
 /* 805F5F88 005F05E8  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 /* 805F5F8C 005F05EC  00 00 00 00 */	.4byte 0x00000000 /* invalid */
 .endfn gap_03_805F5F88_text
+
+# 0x807CB658..0x807CC060 | size: 0xA08
+.section .bss, "wa", @nobits
+.balign 8
+
+# .bss:0x0 | 0x807CB658 | size: 0x318
+.obj DefaultThread, local
+	.skip 0x318
+.endobj DefaultThread
+
+# .bss:0x318 | 0x807CB970 | size: 0x100
+.obj RunQueue, global
+	.skip 0x100
+.endobj RunQueue
+
+# .bss:0x418 | 0x807CBA70 | size: 0x5F0
+.obj IdleContext, global
+	.skip 0x5F0
+.endobj IdleContext
+
+# 0x8087E798..0x8087E7A0 | size: 0x8
+.section .sdata, "wa"
+.balign 8
+
+# .sdata:0x0 | 0x8087E798 | size: 0x4
+.obj SwitchThreadCallback, local
+	.4byte DefaultSwitchThreadCallback
+.endobj SwitchThreadCallback
+
+# .sdata:0x4 | 0x8087E79C | size: 0x4
+.obj gap_09_8087E79C_sdata, global
+.hidden gap_09_8087E79C_sdata
+	.4byte 0x00000000
+.endobj gap_09_8087E79C_sdata
+
+# 0x8087FC58..0x8087FC68 | size: 0x10
+.section .sbss, "wa", @nobits
+.balign 8
+
+# .sbss:0x0 | 0x8087FC58 | size: 0x4
+.obj Reschedule, local
+	.skip 0x4
+.endobj Reschedule
+
+# .sbss:0x4 | 0x8087FC5C | size: 0x4
+.obj RunQueueHint, local
+	.skip 0x4
+.endobj RunQueueHint
+
+# .sbss:0x8 | 0x8087FC60 | size: 0x4
+.obj RunQueueBits, local
+	.skip 0x4
+.endobj RunQueueBits
+
+# .sbss:0xC | 0x8087FC64 | size: 0x4
+.obj gap_10_8087FC64_sbss, global
+.hidden gap_10_8087FC64_sbss
+	.skip 0x4
+.endobj gap_10_8087FC64_sbss
