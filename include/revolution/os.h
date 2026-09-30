@@ -9,6 +9,7 @@
 #include "revolution/os/OSArena.h"
 #include "revolution/os/OSInterrupt.h"
 #include "revolution/os/OSError.h"
+#include "revolution/os/OSCache.h"
 
 #ifdef __cplusplus
 extern "C" {

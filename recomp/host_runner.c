@@ -99,15 +99,69 @@ static void init_wii_low_memory(CPUState* cpu) {
     mem_write32(cpu, 0x8087FFA0, 1);
 }
 
+static void host_wakeup_thread(CPUState* cpu, u32 thread_addr) {
+    u16 state = mem_read16(cpu, thread_addr + 0x2C8);
+    if (state != 4) return; // not WAITING
+    u32 wait_queue = mem_read32(cpu, thread_addr + 0x2DC);
+    if (wait_queue != 0) {
+        mem_write32(cpu, wait_queue, 0); // head = NULL
+        mem_write32(cpu, wait_queue + 4, 0); // tail = NULL
+    }
+    mem_write32(cpu, thread_addr + 0x2DC, 0); // thread->queue = NULL
+    mem_write16(cpu, thread_addr + 0x2C8, 1); // thread->state = OS_THREAD_STATE_READY (1)
+
+    u32 priority = mem_read32(cpu, thread_addr + 0x2D0); // priority
+    if (priority > 31) priority = 16;
+    u32 rq_entry = 0x807CB970 + priority * 8;
+    u32 tail = mem_read32(cpu, rq_entry + 4);
+    if (tail == 0) {
+        mem_write32(cpu, rq_entry, thread_addr); // head = thread
+    } else {
+        mem_write32(cpu, tail + 0x2E4, thread_addr); // tail->link.next = thread
+    }
+    mem_write32(cpu, thread_addr + 0x2E0, tail); // thread->link.prev = tail
+    mem_write32(cpu, thread_addr + 0x2E4, 0); // thread->link.next = NULL
+    mem_write32(cpu, rq_entry + 4, thread_addr); // tail = thread
+
+    u32 run_bits = mem_read32(cpu, 0x8087FC60);
+    run_bits |= (1u << (31 - priority));
+    mem_write32(cpu, 0x8087FC60, run_bits); // RunQueueBits
+    mem_write32(cpu, 0x8087FC5C, 1); // RunQueueHint = TRUE
+}
+
+static void host_simulate_vblank(CPUState* cpu, int frame_num) {
+    // 1. Advance graphics frame queue read index to match write index
+    u16 write_idx = mem_read16(cpu, 0x807C6FB8);
+    mem_write16(cpu, 0x807C6FBA, write_idx);
+
+    // 2. Clear VBlank flags at r13
+    mem_write8(cpu, 0x808852A0 - 26599, 0);
+    mem_write8(cpu, 0x808852A0 - 26598, 0);
+
+    // 3. Advance simulated timebase (~1/60 sec at 60MHz bus clock = 1,000,000 ticks)
+    cpu->timebase += 1000000;
+
+    // 4. Wake up any thread waiting on 0x807C6F60
+    u32 waiting_thread = mem_read32(cpu, 0x807C6F60);
+    if (waiting_thread != 0) {
+        printf("[Runner] VBlank frame %d: waking thread 0x%08X (write_idx=%u)\n",
+               frame_num, waiting_thread, write_idx);
+        host_wakeup_thread(cpu, waiting_thread);
+    }
+}
+
 int main(int argc, char** argv) {
     const char* dol_path = "orig/main.dol";
     u32 max_blocks = 10000;
+    int max_frames = 10;
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--dol") == 0 && i + 1 < argc) {
             dol_path = argv[++i];
         } else if (strcmp(argv[i], "--blocks") == 0 && i + 1 < argc) {
             max_blocks = (u32)atoi(argv[++i]);
+        } else if (strcmp(argv[i], "--frames") == 0 && i + 1 < argc) {
+            max_frames = atoi(argv[++i]);
         }
     }
 
@@ -146,13 +200,25 @@ int main(int argc, char** argv) {
     cpu.gpr[1] = 0x80700000; // Initial stack pointer
     cpu.msr = 0x00002000;    // FP enabled
 
-    printf("[Runner] Starting execution from entry point 0x%08X (limit: %u blocks)...\n",
-           cpu.pc, max_blocks);
+    printf("[Runner] Starting execution from entry point 0x%08X (limit: %u blocks/slice, frames: %d)...\n",
+           cpu.pc, max_blocks, max_frames);
 
-    int result = dolrecomp_run_blocks(&cpu, max_blocks);
+    int result = 0;
+    for (int frame = 0; frame < max_frames; frame++) {
+        result = dolrecomp_run_blocks(&cpu, max_blocks);
+        if (cpu.exception != 0) {
+            printf("\n[Runner] CPU Exception 0x%08X at PC 0x%08X\n", cpu.exception, cpu.pc);
+            break;
+        }
+
+        // If CPU is idle in scheduler, fire a simulated VBlank
+        if (cpu.pc == 0x805F50B0 || mem_read32(&cpu, 0x8087FC60) == 0) {
+            host_simulate_vblank(&cpu, frame);
+        }
+    }
 
     printf("\n[Runner] Execution paused after run_blocks (result = %d)\n", result);
-    printf("         Final PC: 0x%08X, LR: 0x%08X, SP: 0x%08X\n", cpu.pc, cpu.lr, cpu.gpr[1]);
+    printf("         Final PC: 0x805F50B0? Actual PC: 0x%08X, LR: 0x%08X, SP: 0x%08X\n", cpu.pc, cpu.lr, cpu.gpr[1]);
     printf("         Exception: 0x%08X, ProgramExc: 0x%08X\n", cpu.exception, cpu.program_exception);
     printf("         SRR0 (Faulting CIA): 0x%08X, SRR1: 0x%08X\n", cpu.srr0, cpu.srr1);
     printf("         Downcount: %lld\n", (long long)cpu.downcount);
@@ -166,6 +232,57 @@ int main(int argc, char** argv) {
         if (caller_sp <= cur_sp || caller_sp >= 0x81000000) break;
         cur_sp = caller_sp;
     }
+
+    printf("\n[Runner] Active PowerPC Threads:\n");
+    u32 thread_addr = mem_read32(&cpu, 0x800000DC); // __OSActiveThreadQueue.head
+    int t_idx = 0;
+    while (thread_addr != 0 && t_idx < 16) {
+        u16 state = mem_read16(&cpu, thread_addr + 0x2C8);
+        u32 prio = mem_read32(&cpu, thread_addr + 0x2D0);
+        u32 pc = mem_read32(&cpu, thread_addr + 0x198); // context.srr0
+        u32 lr = mem_read32(&cpu, thread_addr + 0x190); // context.lr
+        u32 sp = mem_read32(&cpu, thread_addr + 0x004); // context.gpr[1]
+        u32 wait_queue = mem_read32(&cpu, thread_addr + 0x2DC);
+        printf("         Thread %d: Addr=0x%08X State=%u Prio=%u Queue=0x%08X PC=0x%08X LR=0x%08X SP=0x%08X\n",
+               t_idx++, thread_addr, state, prio, wait_queue, pc, lr, sp);
+        thread_addr = mem_read32(&cpu, thread_addr + 0x2FC); // linkActive.next
+    }
+
+    u32 cur_thread = mem_read32(&cpu, 0x800000E4);
+    u32 run_bits = mem_read32(&cpu, 0x8087FC60);
+    printf("         CurrentThread: 0x%08X, RunQueueBits: 0x%08X\n", cur_thread, run_bits);
+
+    printf("\n[Runner] Active Alarms (AlarmQueue at 0x8087FBE0):\n");
+    u32 alarm_addr = mem_read32(&cpu, 0x8087FBE0); // AlarmQueue.head
+    u32 alarm_tail = mem_read32(&cpu, 0x8087FBE4); // AlarmQueue.tail
+    printf("         Queue Head: 0x%08X, Tail: 0x%08X\n", alarm_addr, alarm_tail);
+    int a_idx = 0;
+    while (alarm_addr != 0 && a_idx < 16) {
+        u32 handler = mem_read32(&cpu, alarm_addr + 0x00);
+        u32 tag = mem_read32(&cpu, alarm_addr + 0x04);
+        u32 fire_hi = mem_read32(&cpu, alarm_addr + 0x08);
+        u32 fire_lo = mem_read32(&cpu, alarm_addr + 0x0C);
+        u32 prev = mem_read32(&cpu, alarm_addr + 0x10);
+        u32 next = mem_read32(&cpu, alarm_addr + 0x14);
+        u32 period_hi = mem_read32(&cpu, alarm_addr + 0x18);
+        u32 period_lo = mem_read32(&cpu, alarm_addr + 0x1C);
+        u32 start_hi = mem_read32(&cpu, alarm_addr + 0x20);
+        u32 start_lo = mem_read32(&cpu, alarm_addr + 0x24);
+        printf("         Alarm %d: Addr=0x%08X Handler=0x%08X Tag=%u Fire=0x%08X%08X Period=0x%08X%08X Next=0x%08X\n",
+               a_idx++, alarm_addr, handler, tag, fire_hi, fire_lo, period_hi, period_lo, next);
+        alarm_addr = next;
+    }
+
+    printf("\n[Runner] Graphics Frame Queue (0x807C6F60 - 0x807C6FC0):\n");
+    for (u32 a = 0x807C6F60; a <= 0x807C6FC0; a += 16) {
+        printf("         0x%08X: %08X %08X %08X %08X\n",
+               a, mem_read32(&cpu, a), mem_read32(&cpu, a + 4),
+               mem_read32(&cpu, a + 8), mem_read32(&cpu, a + 12));
+    }
+
+    u8 r13_26599 = mem_read8(&cpu, 0x808852A0 - 26599);
+    u8 r13_26598 = mem_read8(&cpu, 0x808852A0 - 26598);
+    printf("         Flags at r13: -26599 = %u, -26598 = %u\n", r13_26599, r13_26598);
 
     cpu_free(&cpu);
     return 0;

@@ -1551,6 +1551,25 @@
       }
     },
     {
+      "name": "main/OSCache",
+      "target_path": "build/SLSEXJ/obj/OSCache.o",
+      "base_path": "build/SLSEXJ/src/OSCache.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/OSCache.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/OSCache.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
       "name": "main/OSContext",
       "target_path": "build/SLSEXJ/obj/OSContext.o",
       "base_path": "build/SLSEXJ/src/OSContext.o",

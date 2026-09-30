@@ -49,6 +49,8 @@ node_modules/
 
 # Logs & temp
 *.log
+report.json
+temp_diff.json
 tmp/
 temp/
 .cache/

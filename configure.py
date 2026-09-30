@@ -159,6 +159,7 @@ config.libs = [
         "objects": [
             Object(True, "OSAlarm.c"),
             Object(True, "OSArena.c"),
+            Object(True, "OSCache.c"),
             Object(True, "OSContext.c"),
             Object(True, "OSError.c"),
             Object(True, "OSInterrupt.c"),

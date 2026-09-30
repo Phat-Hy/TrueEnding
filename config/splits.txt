@@ -23,6 +23,10 @@ OSArena.c:
 	.sdata      start:0x8087E768 end:0x8087E770
 	.sbss       start:0x8087FBF0 end:0x8087FBF8
 
+OSCache.c:
+	.text       start:0x805ED140 end:0x805ED800
+	.data       start:0x8079C338 end:0x8079C4C0
+
 OSContext.c:
 	.text       start:0x805ED800 end:0x805EE0D0
 	.data       start:0x8079C4C0 end:0x8079C678
