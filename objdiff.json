@@ -1516,6 +1516,41 @@
       }
     },
     {
+      "name": "main/OSArena",
+      "target_path": "build/SLSEXJ/obj/OSArena.o",
+      "base_path": "build/SLSEXJ/src/OSArena.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/OSArena.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/OSArena.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/auto_10_8087FBF8_sbss",
+      "target_path": "build/SLSEXJ/obj/auto_10_8087FBF8_sbss.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_03_805ECC80_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_805ECC80_text.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
       "name": "main/OSContext",
       "target_path": "build/SLSEXJ/obj/OSContext.o",
       "base_path": "build/SLSEXJ/src/OSContext.o",

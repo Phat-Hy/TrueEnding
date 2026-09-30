@@ -158,6 +158,7 @@ config.libs = [
         "cflags": cflags_os,
         "objects": [
             Object(True, "OSAlarm.c"),
+            Object(True, "OSArena.c"),
             Object(True, "OSContext.c"),
             Object(True, "OSThread.c"),
             Object(True, "OSTime.c"),

@@ -18,6 +18,11 @@ OSAlarm.c:
 	.data       start:0x8079C2A8 end:0x8079C2B8
 	.sbss       start:0x8087FBE0 end:0x8087FBE8
 
+OSArena.c:
+	.text       start:0x805ECB80 end:0x805ECC80
+	.sdata      start:0x8087E768 end:0x8087E770
+	.sbss       start:0x8087FBF0 end:0x8087FBF8
+
 OSContext.c:
 	.text       start:0x805ED800 end:0x805EE0D0
 	.data       start:0x8079C4C0 end:0x8079C678
