@@ -8,7 +8,8 @@ def diff_func(func_name, unit=None):
             d = json.load(f)
         for u in d.get("units", []):
             for fn in u.get("functions", []):
-                if fn.get("name") == func_name:
+                fn_name = fn.get("name", "")
+                if fn_name == func_name or fn_name.startswith(f"{func_name}_"):
                     unit = u.get("name").replace("src/", "main/").replace(".c", "")
                     break
             if unit:
@@ -25,15 +26,24 @@ def diff_func(func_name, unit=None):
     left_syms = {s["name"]: s for s in data.get("left", {}).get("symbols", [])}
     right_syms = {s["name"]: s for s in data.get("right", {}).get("symbols", [])}
     
-    sym = func_name
-    if sym not in left_syms or sym not in right_syms:
-        print(f"Symbol {sym} not found in left or right")
+    def find_sym(syms, name):
+        if name in syms:
+            return syms[name]
+        for k, v in syms.items():
+            if k == name or k.startswith(f"{name}_"):
+                return v
+        return None
+
+    l_sym = find_sym(left_syms, func_name)
+    r_sym = find_sym(right_syms, func_name)
+    if not l_sym or not r_sym:
+        print(f"Symbol {func_name} not found in left or right")
         return
     
-    l_insts = left_syms[sym].get("instructions", [])
-    r_insts = right_syms[sym].get("instructions", [])
+    l_insts = l_sym.get("instructions", [])
+    r_insts = r_sym.get("instructions", [])
     
-    print(f"=== {sym} ({unit}): target (left) {len(l_insts)} insts, built (right) {len(r_insts)} insts ===")
+    print(f"=== {func_name} ({unit}): target (left) {len(l_insts)} insts, built (right) {len(r_insts)} insts ===")
     
     max_len = max(len(l_insts), len(r_insts))
     diff_count = 0

@@ -165,6 +165,7 @@ config.libs = [
             Object(True, "OSInterrupt.c"),
             Object(True, "OSThread.c"),
             Object(True, "OSTime.c"),
+            Object(False, "OSReset.c"),
         ],
     },
 ]
