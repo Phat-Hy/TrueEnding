@@ -30,6 +30,19 @@ RULES:
 4. Output ONLY valid C code inside a ```c ... ``` code block. No fluff, no preamble.
 """
 
+LOG_FILE = "logs/autonomous_agent.log"
+os.makedirs("logs", exist_ok=True)
+
+def log_print(msg):
+    timestamp = time.strftime("[%Y-%m-%d %H:%M:%S]")
+    line = f"{timestamp} {msg}"
+    print(msg)
+    try:
+        with open(LOG_FILE, "a", encoding="utf-8") as f:
+            f.write(line + "\n")
+    except Exception:
+        pass
+
 def query_llm(messages, max_tokens=2048, temperature=0.15):
     payload = {
         "model": MODEL_ID,
@@ -75,16 +88,16 @@ def log_worklog(entry):
 def autonomous_match_function(module_name, func_name, max_attempts=8):
     c_file = f"src/{module_name}.c"
     obj_file = f"build/SLSEXJ/src/{module_name}.o"
-    print(f"\n=======================================================")
-    print(f"  [Autonomous Agent] Targeting: {func_name} ({module_name})")
-    print(f"=======================================================")
+    log_print(f"\n=======================================================")
+    log_print(f"  [Autonomous Agent] Targeting: {func_name} ({module_name})")
+    log_print(f"=======================================================")
 
     # Get initial diff or disassembly
     initial_diff = run_diff(func_name)
-    print(f"[Diff Helper Output]:\n{initial_diff[:400]}...")
+    log_print(f"[Diff Helper Output]:\n{initial_diff[:400]}...")
 
     if "Total actual diff instructions: 0/" in initial_diff:
-        print(f"[SUCCESS] {func_name} is ALREADY 100.0% MATCH!")
+        log_print(f"[SUCCESS] {func_name} is ALREADY 100.0% MATCH!")
         return True
 
     current_c = ""
@@ -110,38 +123,38 @@ Output the COMPLETE updated contents of `{c_file}` inside a ```c ... ``` code bl
     ]
 
     for attempt in range(1, max_attempts + 1):
-        print(f"\n--- [Attempt {attempt}/{max_attempts}] Requesting solution from local Qwen2.5-Coder... ---")
+        log_print(f"\n--- [Attempt {attempt}/{max_attempts}] Requesting solution from local Qwen2.5-Coder... ---")
         reply = query_llm(messages)
         if not reply:
-            print("[Warning] No reply from local model. Retrying in 3s...")
+            log_print("[Warning] No reply from local model. Retrying in 3s...")
             time.sleep(3)
             continue
 
         c_code = extract_c_code(reply)
         if not c_code or len(c_code) < 30:
-            print("[Warning] Failed to parse C code from model response.")
+            log_print("[Warning] Failed to parse C code from model response.")
             continue
 
         # Write to file
         with open(c_file, "w", encoding="utf-8") as f:
             f.write(c_code)
-        print(f"[Disk] Wrote {len(c_code)} bytes to {c_file}")
+        log_print(f"[Disk] Wrote {len(c_code)} bytes to {c_file}")
 
         # Compile
         compile_cmd = f".\\tools\\w64devkit\\bin\\ninja.exe {obj_file}"
         code, compile_out = run_command(compile_cmd)
         if code != 0:
-            print(f"[Compile Error]:\n{compile_out[:300]}...")
+            log_print(f"[Compile Error]:\n{compile_out[:300]}...")
             messages.append({"role": "assistant", "content": f"```c\n{c_code}\n```"})
             messages.append({"role": "user", "content": f"The compilation failed with this error:\n```text\n{compile_out}\n```\nPlease fix the compilation error and return the full updated C file in ```c ... ```."})
             continue
 
         # Run diff
         diff_out = run_diff(func_name)
-        print(f"[Diff]:\n{diff_out[:300]}...")
+        log_print(f"[Diff]:\n{diff_out[:300]}...")
 
         if "Total actual diff instructions: 0/" in diff_out:
-            print(f"\n🎉 [100.0% MATCH ACHIEVED] Function `{func_name}` matched completely with 0 diffs!")
+            log_print(f"\n🎉 [100.0% MATCH ACHIEVED] Function `{func_name}` matched completely with 0 diffs!")
             worklog_entry = f"### Session - {time.strftime('%Y-%m-%d %H:%M:%S')}\n- **Module**: `{module_name}`\n- **Function**: `{func_name}`\n- **Status**: 100.0% MATCH (0 diff bytes)\n- **Attempts**: {attempt}\n"
             log_worklog(worklog_entry)
             
@@ -153,7 +166,7 @@ Output the COMPLETE updated contents of `{c_file}` inside a ```c ... ``` code bl
         messages.append({"role": "assistant", "content": f"```c\n{c_code}\n```"})
         messages.append({"role": "user", "content": f"Compilation succeeded, but assembly diff remains:\n```text\n{diff_out}\n```\nAnalyze the instruction and register differences (left is target, right is built). Adjust variable order, expressions, or types to match the target registers and return the updated C file in ```c ... ```."})
 
-    print(f"\n[Notice] Function `{func_name}` did not reach 100% after {max_attempts} attempts. Moving to next task.")
+    log_print(f"\n[Notice] Function `{func_name}` did not reach 100% after {max_attempts} attempts. Moving to next task.")
     return False
 
 if __name__ == "__main__":
