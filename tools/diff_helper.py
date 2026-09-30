@@ -35,9 +35,17 @@ def diff_func(func_name, unit=None):
         return None
 
     l_sym = find_sym(left_syms, func_name)
+    if not l_sym:
+        print(f"Symbol {func_name} not found in target binary")
+        return
     r_sym = find_sym(right_syms, func_name)
-    if not l_sym or not r_sym:
-        print(f"Symbol {func_name} not found in left or right")
+    if not r_sym:
+        l_insts = l_sym.get("instructions", [])
+        print(f"=== {func_name} ({unit}): TARGET ASSEMBLY ({len(l_insts)} instructions) [Not yet defined in C] ===")
+        for i, item in enumerate(l_insts):
+            inst = item.get("instruction", {})
+            addr = f"{int(inst.get('address', '0')):04x}" if 'address' in inst else "    "
+            print(f"    {i:2d} | {addr}: {inst.get('formatted', '')}")
         return
     
     l_insts = l_sym.get("instructions", [])

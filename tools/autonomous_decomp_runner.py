@@ -27,8 +27,9 @@ RULES:
    * 0x800000D8 = *(OSContext**)0x800000D8 (__OSFPUContext)
    * 0x800000D4 = *(OSContext**)0x800000D4 (__OSCurrentContext)
 3. Variable declaration order controls non-volatile register assignment (r31 -> r14).
-4. Inlined PowerPC sync instructions require `asm { sync }`.
-5. Output ONLY valid C code inside a ```c ... ``` code block. No fluff, no preamble.
+4. CodeWarrior compiler NEVER supports GCC `asm volatile ("...")` syntax! Always write clean C code. If inline assembly is strictly required, use CodeWarrior syntax `asm { ... }`.
+5. Retain all existing functions in the file so they remain 100% matched.
+6. Output ONLY valid C code inside a ```c ... ``` code block. No fluff, no preamble.
 """
 
 LOG_FILE = "logs/autonomous_agent.log"
@@ -166,10 +167,36 @@ Output the COMPLETE updated contents of `{c_file}` inside a ```c ... ``` code bl
             log_print("[Warning] Failed to parse C code from model response.")
             continue
 
+        # Check if model output dropped existing matched functions
+        final_code_to_write = c_code
+        if current_c and func_name in c_code:
+            # Check for existing functions defined in current_c
+            existing_fn_matches = re.findall(r'(\b[a-zA-Z0-9_]+\s*\([^)]*\)\s*\{)', current_c)
+            dropped = False
+            for fn_sig in existing_fn_matches:
+                fn_name = fn_sig.split('(')[0].split()[-1]
+                if fn_name != func_name and fn_name not in c_code:
+                    dropped = True
+                    break
+            if dropped:
+                log_print("[Safety] Model response omitted existing functions; merging function update safely...")
+                # If func_name is already in current_c, replace it, else append
+                pattern = rf'([a-zA-Z0-9_]+\s+{re.escape(func_name)}\s*\([^)]*\)\s*\{{.*?\n\}})'
+                if re.search(pattern, current_c, re.DOTALL):
+                    # Replace only this function
+                    new_func_match = re.search(rf'([a-zA-Z0-9_]+\s+{re.escape(func_name)}\s*\([^)]*\)\s*\{{.*?\n\}})', c_code, re.DOTALL)
+                    if new_func_match:
+                        final_code_to_write = re.sub(pattern, new_func_match.group(1), current_c, flags=re.DOTALL)
+                    else:
+                        final_code_to_write = current_c + "\n\n" + c_code
+                else:
+                    # Append new code
+                    final_code_to_write = current_c.rstrip() + "\n\n" + c_code
+
         # Write to file
         with open(c_file, "w", encoding="utf-8") as f:
-            f.write(c_code)
-        log_print(f"[Disk] Wrote {len(c_code)} bytes to {c_file}")
+            f.write(final_code_to_write)
+        log_print(f"[Disk] Wrote {len(final_code_to_write)} bytes to {c_file}")
 
         # Compile
         compile_cmd = f".\\tools\\w64devkit\\bin\\ninja.exe {obj_file}"

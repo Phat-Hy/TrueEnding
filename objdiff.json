@@ -1761,8 +1761,81 @@
       }
     },
     {
-      "name": "main/auto_03_805F6660_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_805F6660_text.o",
+      "name": "main/OSIpc",
+      "target_path": "build/SLSEXJ/obj/OSIpc.o",
+      "base_path": "build/SLSEXJ/src/OSIpc.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/OSIpc.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": false,
+        "reverse_fn_order": false,
+        "source_path": "src/OSIpc.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/OSReset",
+      "target_path": "build/SLSEXJ/obj/OSReset.o",
+      "base_path": "build/SLSEXJ/src/OSReset.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/OSReset.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": false,
+        "reverse_fn_order": false,
+        "source_path": "src/OSReset.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/auto_10_8087FCB0_sbss",
+      "target_path": "build/SLSEXJ/obj/auto_10_8087FCB0_sbss.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/auto_09_8087E7B0_sdata",
+      "target_path": "build/SLSEXJ/obj/auto_09_8087E7B0_sdata.o",
+      "metadata": {
+        "progress_categories": [],
+        "auto_generated": true
+      }
+    },
+    {
+      "name": "main/OSPlayTime",
+      "target_path": "build/SLSEXJ/obj/OSPlayTime.o",
+      "base_path": "build/SLSEXJ/src/OSPlayTime.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/OSPlayTime.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": false,
+        "reverse_fn_order": false,
+        "source_path": "src/OSPlayTime.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/auto_03_805F86B0_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_805F86B0_text.o",
       "metadata": {
         "progress_categories": [],
         "auto_generated": true
