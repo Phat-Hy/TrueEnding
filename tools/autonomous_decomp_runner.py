@@ -20,16 +20,19 @@ SYSTEM_PROMPT = """You are the Reverse Engineering & Native PC Porting Specialis
 You are matching Metrowerks CodeWarrior 4.3 build 145 PPC 750CL disassembly 100.0% byte-for-byte (-O4,p -inline auto).
 
 RULES:
-1. Header: Always use `#include "revolution/os.h"`. Never include `<ultra64.h>` (this is Nintendo Wii RVL-SDK, not N64).
-2. Low memory pointers:
+1. Header: Always use `#include "revolution/os.h"`. Never include `<ultra64.h>`.
+2. CRITICAL: NEVER write raw assembly mnemonics (e.g. `stwu`, `lis`, `mr`, `lwz`) directly as C statements!
+   - Either write clean high-level C code (using functions, if-conditions, loops, variables).
+   - OR, if writing assembly, wrap it in CodeWarrior asm syntax:
+     `asm void Func(void) { nofralloc ... }` or `asm { ... }`.
+3. Low memory pointers:
    * 0x800000DC = *(OSThreadQueue*)0x800000DC (__OSActiveThreadQueue)
    * 0x800000E4 = *(OSThread**)0x800000E4 (__OSCurrentThread)
    * 0x800000D8 = *(OSContext**)0x800000D8 (__OSFPUContext)
    * 0x800000D4 = *(OSContext**)0x800000D4 (__OSCurrentContext)
-3. Variable declaration order controls non-volatile register assignment (r31 -> r14).
-4. CodeWarrior compiler NEVER supports GCC `asm volatile ("...")` syntax! Always write clean C code. If inline assembly is strictly required, use CodeWarrior syntax `asm { ... }`.
-5. Retain all existing functions in the file so they remain 100% matched.
-6. Output ONLY valid C code inside a ```c ... ``` code block. No fluff, no preamble.
+4. Variable declaration order controls non-volatile register assignment (r31 -> r14).
+5. Always preserve all existing matched functions in the file.
+6. Output ONLY valid C code inside a ```c ... ``` code block. No conversational filler.
 """
 
 LOG_FILE = "logs/autonomous_agent.log"
@@ -66,10 +69,27 @@ def query_llm(messages, max_tokens=2048, temperature=0.15):
 def extract_c_code(text):
     if not text:
         return None
+    text = text.strip()
     matches = re.findall(r"```(?:c|cpp)?\s*(.*?)\s*```", text, re.DOTALL)
     if matches:
         return matches[-1].strip()
-    return text.strip()
+    if text.startswith("```"):
+        lines = text.splitlines()
+        if lines and lines[0].startswith("```"):
+            lines = lines[1:]
+        if lines and lines[-1].strip() == "```":
+            lines = lines[:-1]
+        return "\n".join(lines).strip()
+    return text
+
+def extract_compiler_errors(output):
+    error_lines = []
+    for line in output.splitlines():
+        if "# Error:" in line or "#   (" in line or "Error:" in line or "#    File:" in line or "#       " in line:
+            error_lines.append(line)
+    if error_lines:
+        return "\n".join(error_lines[:15])
+    return output[-500:]
 
 def run_command(cmd):
     p = subprocess.run(cmd, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -203,9 +223,18 @@ Output the COMPLETE updated contents of `{c_file}` inside a ```c ... ``` code bl
         compile_cmd = f".\\tools\\w64devkit\\bin\\ninja.exe {obj_file}"
         code, compile_out = run_command(compile_cmd)
         if code != 0:
-            log_print(f"[Compile Error]:\n{compile_out[:300]}...")
-            messages.append({"role": "assistant", "content": f"```c\n{c_code}\n```"})
-            messages.append({"role": "user", "content": f"The compilation failed with this error:\n```text\n{compile_out}\n```\nPlease fix the compilation error and return the full updated C file in ```c ... ```."})
+            err_summary = extract_compiler_errors(compile_out)
+            log_print(f"[Compile Error]:\n{err_summary[:400]}...")
+            messages = [
+                {"role": "system", "content": SYSTEM_PROMPT},
+                {"role": "user", "content": f"""We are matching function `{func_name}` in `{c_file}` for Wii USA SLSEXJ.
+Current C file had compilation errors with CodeWarrior:
+```text
+{err_summary}
+```
+
+Please fix the errors in `{c_file}` and return the full updated valid C code inside a ```c ... ``` block."""}
+            ]
             continue
 
         # Run diff
@@ -264,6 +293,9 @@ if __name__ == "__main__":
         ("OSReset", "__OSReadStateFlags"),
         ("OSReset", "__OSInitSTM"),
         ("OSReset", "__OSHotReset"),
+        ("OSReset", "__OSUnRegisterStateEvent"),
+        ("OSReset", "__OSStartPlayRecord"),
+        ("OSReset", "__OSStopPlayRecord"),
     ]
 
     # If args passed, run specific function, else run default queue
