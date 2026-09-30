@@ -12,15 +12,6 @@ extern s32 fn_8061E850(NANDFileInfo* info, const void* buf, u32 length);
 extern s32 fn_8061E760(NANDFileInfo* info, void* buf, u32 length);
 extern s32 fn_8061FB70(NANDFileInfo* info);
 extern s32 fn_8061E470(const char* path);
-extern s32 fn_8061D080(s32 fd, s32 req, void* in, u32 inLen, void* out, u32 outLen);
-
-extern u32 StmReady;
-extern s32 StmImDesc;
-extern const char lbl_807A9928[];
-extern const char lbl_807A996C[];
-extern u8 lbl_807CC0A0[];
-extern u8 lbl_807CC0C0[];
-void ICFlashInvalidate(void);
 
 void __OSDefaultResetCallback(void) {
 }
@@ -173,4 +164,4 @@ lbl_0e88:
     mtlr r0
     addi r1, r1, 0xb0
     blr
-}
+}
