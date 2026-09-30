@@ -30,7 +30,11 @@
 | **STEP-017** | `2026-09-30T20:08:00+07:00` | Runtime / Recomp | Built native PC recompilation runner `tls_runner.exe` linking all 459 lifted C chunks + replacement bridge; verified execution from entry point `0x80004050` through CRT initialization into `__OSThreadInit` (`LR: 0x805F49E4`, 290k+ instructions executed) | **Completed** | `recomp-runner-bringup` |
 | **STEP-018** | `2026-09-30T20:23:00+07:00` | Match | Decompiled core RVL-SDK interrupt subsystem `src/OSInterrupt.c` (11 functions, 1,928 bytes code, 48 bytes data, 24 bytes sbss — **100.0% byte-for-byte binary match**!) | **Completed** | `decomp-os-interrupt` |
 | **STEP-019** | `2026-09-30T20:24:00+07:00` | Runtime / Recomp | Implemented Hollywood/Broadway MMIO intercept architecture (`mmio_external_read`/`mmio_external_write`), advancing PC runner execution past `__OSThreadInit` into EXI/SI subsystem (`Final PC: 0x805E7FF0`, 670,000+ native instructions executed) | **Completed** | `recomp-mmio-runner` |
-| **STEP-020** | *Up Next* | Match / Runtime | Decompile next core OS subsystem (`OSError.c` / `OSAlloc.c`) and advance EXI/SI device responses in PC runner | **In Progress** | `decomp-os-error` |
+| **STEP-020** | `2026-09-30T21:03:00+07:00` | Match | Decompiled core RVL-SDK error handling subsystem `src/OSError.c` (5 functions, 1,848 bytes code, 736 bytes data, 68 bytes bss — **100.0% byte-for-byte binary match across all 5 functions**!) | **Completed** | `decomp-os-error` |
+| **STEP-021** | `2026-09-30T21:04:00+07:00` | Runtime / Recomp | Resolved DOL BSS loading ordering, configured Wii low-memory OS BI2/arena tables (`0x80003110`–`0x80003138`), and implemented Starlet/IOS IPC subsystem; runner advanced past EXI, SI, OS kernel, SC, NAND, DVD, VI, GX into *The Last Story* engine stages `0`–`7` | **Completed** | `recomp-ipc-bringup` |
+| **STEP-022** | `2026-09-30T21:08:00+07:00` | Runtime / Recomp | Implemented Bluetooth HCI device handshake (`/dev/usb/oh1/57e/305`), advancing past WPAD & KPAD controller stacks; added graceful U8 archive header fallback for `ARCInitHandle` | **Completed** | `recomp-wpad-hbm` |
+| **STEP-023** | `2026-09-30T21:23:00+07:00` | Runtime / Recomp | Emulated AI sample counter (`0xCD006C08`), DSP hardware mailboxes (`0xCC005000`–`0xCC005006`), and `AXReady` flag (`0x8087FFA0`); completed AI, AX audio mixer, and DSP init; PC Runner executed **over 267M cycles** without exceptions, entering *The Last Story* `main()` and OS thread scheduler idle loop | **Completed** | `recomp-game-mainloop` |
+| **STEP-024** | *Up Next* | Match / Runtime | Decompile next RVL-SDK subsystem (`OSAlloc.c` / `OSMemory.c`) and implement alarm decrementer timer ticks to drive game thread dispatch in PC runner | **In Progress** | `decomp-os-alloc` |
 
 ---
 
@@ -77,4 +81,17 @@ Each milestone is associated with a Git commit and tag. If you ever need to roll
   - Lifted entire 8.18 MB monolithic Wii DOL (`orig/main.dol`) into 459 portable C chunks comprising 1,875,456 PowerPC instructions with zero unknown opcodes and 18,189 mapped symbol signatures.
   - Successfully validated host x64 compilation of lifted chunks with GCC (`chunk_0000.o` produced in 0.62s).
   - Adopted dual-track replacement architecture via `DOLRECOMP_ENABLE_REPLACEMENTS` and `ModernGekko` `RECOMP_PATCH`: 100% byte-matched decompiled C functions (such as `OSTime.c`, `OSThread.c`, `OSAlarm.c`) directly override recompiled PowerPC code at runtime without modifying the generated chunks, ensuring seamless migration towards full source decompilation.
+* **ADR-009 (Error Subsystem & Exception Register Matching Codegen)**:
+  - In `OSError.c`, `__OSActiveThreadQueue` is accessed via the low-memory address `*(OSThreadQueue*)0x800000DC` (`lis r5, 0x8000; lwz r9, 0xdc(r5)`).
+  - Unrolled 32-element floating-point register zeroing in `OSSetErrorHandler` evaluates `*((u32*)&thread->context.fpr[i] + 1) = (u32)-1; *(u32*)&thread->context.fpr[i] = (u32)-1;` storing the +4 word offset before the 0 word offset to generate the exact loop with count 2 (`mtctr r0; bdnz`).
+  - Floating-point status register masking uses `0x6005F8FF` (`lis r, 0x6006; subi r, r, 0x701`).
+  - In `__OSUnhandledException`, checking `(context->srr1 & 2) == 0` for non-recoverable exceptions branches directly to `OSReport` without executing any error handlers.
+* **ADR-010 (Wii Low-Memory & Starlet IPC Layout for Native Host Bringup)**:
+  - In `host_runner.c`, zeroing the total DOL BSS span must strictly precede copying data sections into memory, preventing `.sdata` and `.sdata2` initialization vectors (such as `SwitchThreadCallback`) from being overwritten with zeroes.
+  - Wii low memory requires BI2 / BootInfo tables at `0x80003110`–`0x80003138` (MEM1 Arena `0x8088A000`–`0x817F0000`, MEM2 Arena `0x90002000`–`0x93FE0000`, IPC buffer `0x93FE0000`–`0x94000000`).
+  - Standard Starlet / IOS IPC endpoints (`/dev/stm`, `/dev/fs`, `/dev/es`, `/dev/di`, `/dev/net/kd/request`) return valid mock descriptors and immediate 0 (success) acknowledgments.
+* **ADR-011 (Audio Interface & DSP Hardware Handshake Emulation)**:
+  - AI sample counter register (`0xCD006C08` / `0xCC006C08`) must return an advancing sample counter on consecutive reads to satisfy hardware timer polling in `AIInit`.
+  - DSP mailbox register `0xCC005004` (DSP-to-CPU) bit 15 (`0x8000`) indicates ready DSP mail; `0xCC005000` (CPU-to-DSP) bit 15 indicates consumed mail. Emulating this handshake allows `DSPInit` to complete synchronously without external DSP microcode interrupts.
+  - Setting `AXReady` flag (`0x8087FFA0`) allows `AXInit` to advance past its DSP callback barrier into high-level audio system setup.
 
