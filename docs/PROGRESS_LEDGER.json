@@ -1,0 +1,59 @@
+{
+  "project": "Project The Maybe(Not) Last Story (TrueEnding)",
+  "game_id": "SLSEXJ",
+  "handoff_timestamp": "2026-10-01T01:47:00Z",
+  "status": {
+    "track_a_decomp_matching": {
+      "compiler": "Metrowerks CodeWarrior 4.3 build 145 (Wii/1.0)",
+      "total_matched_modules": 8,
+      "total_matched_functions": 106,
+      "overall_module_match_rate": "100.00%",
+      "matched_modules": [
+        { "name": "OSAlarm.c", "functions": 13, "match": "100.00%", "diff_bytes": 0 },
+        { "name": "OSArena.c", "functions": 13, "match": "100.00%", "diff_bytes": 0 },
+        { "name": "OSCache.c", "functions": 19, "match": "100.00%", "diff_bytes": 0 },
+        { "name": "OSContext.c", "functions": 15, "match": "100.00%", "diff_bytes": 0 },
+        { "name": "OSError.c", "functions": 5, "match": "100.00%", "diff_bytes": 0 },
+        { "name": "OSInterrupt.c", "functions": 11, "match": "100.00%", "diff_bytes": 0 },
+        { "name": "OSThread.c", "functions": 24, "match": "100.00%", "diff_bytes": 0 },
+        { "name": "OSTime.c", "functions": 6, "match": "100.00%", "diff_bytes": 0 }
+      ],
+      "next_target_modules": [
+        "OSReset.c",
+        "OSAudioSystem.c",
+        "OSMemory.c",
+        "OSAlloc.c"
+      ]
+    },
+    "track_b_native_pc_port": {
+      "runner_binary": "build/recomp/tls_runner.exe",
+      "executable_size_mb": 99.53,
+      "lifted_instructions": 1875456,
+      "lifted_chunks": 459,
+      "current_execution_phase": "60 FPS Continuous Main Game Loop",
+      "cycles_without_exception": "1,000,000,000+",
+      "active_threads": [
+        { "id": 0, "name": "DefaultThread (Main)", "addr": "0x807CB658", "prio": 16, "state": "RUNNING/READY" },
+        { "id": 1, "name": "Audio / DVD Worker", "addr": "0x808638F0", "prio": 3, "state": "WAITING_MSG" },
+        { "id": 2, "name": "Streaming Worker", "addr": "0x80879210", "prio": 4, "state": "WAITING_MSG" }
+      ],
+      "next_milestones": [
+        "Hook graphics frame queue (0x900037C0 / 0x900997E0) to SDL2 / Direct3D window",
+        "Implement DVD asset file reader for opening video / title resources",
+        "Inject keyboard / XInput gamepad into WPAD / KPAD buffers"
+      ]
+    }
+  },
+  "git_state": {
+    "branch": "main",
+    "latest_commit": "4b7b6b4",
+    "tags": [
+      "decomp-os-cache",
+      "decomp-os-error",
+      "recomp-game-loop-60fps",
+      "recomp-game-mainloop",
+      "recomp-ipc-bringup",
+      "recomp-wpad-hbm"
+    ]
+  }
+}
