@@ -24,7 +24,8 @@
 | **STEP-011** | `2026-09-30T01:00:00+07:00` | Match | Decompiled core RVL-SDK subsystem `src/OSTime.c` (6 functions, 1,704 bytes code, 96 bytes data tables — **100.0% byte-for-byte binary match**!) | **Completed** | `decomp-os-time` |
 | **STEP-012** | `2026-09-30T02:10:00+07:00` | Match | Decompiled core RVL-SDK threading subsystem `src/OSThread.c` (24 functions, 5,744 bytes code — **100.0% byte-for-byte binary match**!) | **Completed** | `decomp-os-thread` |
 | **STEP-013** | `2026-09-30T02:45:00+07:00` | Match | Decompiled core RVL-SDK alarm subsystem `src/OSAlarm.c` (13 functions, 2,196 bytes code, 16 bytes data, 8 bytes sbss — **100.0% byte-for-byte binary match**!) | **Completed** | `decomp-os-alarm` |
-| **STEP-014** | *Up Next* | Decomp | Decompile and match next RVL-SDK OS subsystem (`OSContext.c` / `OSAlloc.c`) | **In Progress** | `decomp-next-subsystem` |
+| **STEP-014** | `2026-09-30T14:35:00+07:00` | Recomp | Configured DolRecomp static recompiler harness & portable GCC toolchain; successfully lifted `main.dol` (1,875,456 instructions across 459 C chunks, 0 unknown opcodes, 18,189 symbols mapped); verified host x64 compilation | **Completed** | `dolrecomp-harness-ready` |
+| **STEP-015** | *Up Next* | Match / Runtime | Decompile next core OS subsystem (`OSContext.c` / `OSAlloc.c`) and integrate replacement bridge into host runner | **In Progress** | `decomp-and-host-bridge` |
 
 ---
 
@@ -66,4 +67,9 @@ Each milestone is associated with a Git commit and tag. If you ever need to roll
   - In `SetTimer`, testing remaining time with `if (delta < 0) { PPCMtdec(0); } else if (delta < 0x80000000LL) { ... }` generates the exact target `neg.` and `beq` sequence across all inlined call sites (`InsertAlarm`, `OSCancelAlarm`, `DecrementerExceptionCallback`).
   - Safe queue traversal loops in `fn_805EC7E0` and `__OSCancelThreadAlarms` require the pattern `next = alarm ? alarm->next : NULL; while (alarm) { ... alarm = next; next = next ? next->next : NULL; }`.
   - In `__OSCancelThreadAlarms`, declaring `BOOL enabled;` before `alarm` and `next` guarantees identical volatile/non-volatile register allocation (`r31` for `enabled`, `r30` for `next`).
+* **ADR-008 (Static Recompilation & Decompilation Replacement Bridge — DolRecomp + ModernGekko)**:
+  - Installed portable GCC 16.2 (`w64devkit`) and built `dolrecomp.exe` locally via Ninja + CMake.
+  - Lifted entire 8.18 MB monolithic Wii DOL (`orig/main.dol`) into 459 portable C chunks comprising 1,875,456 PowerPC instructions with zero unknown opcodes and 18,189 mapped symbol signatures.
+  - Successfully validated host x64 compilation of lifted chunks with GCC (`chunk_0000.o` produced in 0.62s).
+  - Adopted dual-track replacement architecture via `DOLRECOMP_ENABLE_REPLACEMENTS` and `ModernGekko` `RECOMP_PATCH`: 100% byte-matched decompiled C functions (such as `OSTime.c`, `OSThread.c`, `OSAlarm.c`) directly override recompiled PowerPC code at runtime without modifying the generated chunks, ensuring seamless migration towards full source decompilation.
 

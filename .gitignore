@@ -24,6 +24,9 @@ compile_commands.json
 # Compilers and SDK binaries (proprietary tools)
 tools/mwcc*
 tools/bin/
+tools/w64devkit/
+tools/DolRecomp/
+tools/ModernGekko/
 *.exe
 
 # Python / Scripts
