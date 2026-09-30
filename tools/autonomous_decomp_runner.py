@@ -86,7 +86,37 @@ def log_worklog(entry):
     except Exception as e:
         print(f"Warning: could not write to {log_path}: {e}")
 
+def ensure_module_configured(module_name):
+    """Auto-provision module build target if missing so the agent never stalls on unknown targets."""
+    c_file = f"src/{module_name}.c"
+    obj_target = f"build\\SLSEXJ\\src\\{module_name}.o"
+    
+    # 1. Ensure C stub exists
+    if not os.path.exists(c_file):
+        with open(c_file, "w", encoding="utf-8") as f:
+            f.write('#include "revolution/os.h"\n\n')
+        log_print(f"[Auto-Provision] Created initial stub {c_file}")
+
+    # 2. Check build.ninja
+    needs_reconfigure = False
+    if os.path.exists("build.ninja"):
+        with open("build.ninja", "r", encoding="utf-8", errors="replace") as f:
+            ninja_content = f.read()
+        if obj_target not in ninja_content:
+            needs_reconfigure = True
+    else:
+        needs_reconfigure = True
+
+    if needs_reconfigure:
+        log_print(f"[Auto-Provision] Module {module_name} not in build.ninja. Running configure.py...")
+        run_command("python configure.py")
+        run_command(f".\\tools\\w64devkit\\bin\\ninja.exe build/SLSEXJ/src/{module_name}.o")
+        run_command(".\\tools\\objdiff-cli.exe report generate -o report.json")
+        run_command("copy report.json build\\SLSEXJ\\report.json")
+        log_print(f"[Auto-Provision] Successfully registered and initialized build target for {module_name}!")
+
 def autonomous_match_function(module_name, func_name, max_attempts=8):
+    ensure_module_configured(module_name)
     c_file = f"src/{module_name}.c"
     obj_file = f"build/SLSEXJ/src/{module_name}.o"
     log_print(f"\n=======================================================")
