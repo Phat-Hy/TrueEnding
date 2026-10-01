@@ -48,5 +48,28 @@ When you complete or attempt any work:
 
 ## Work Sessions Log
 
-*(Odysseus / Nanbeige sessions will be appended below)*
+### [2026-10-01 07:35] Session 1: Autonomous Matching of OSReset.c Functions
+- **Track**: Track A: Decomp
+- **Target File(s)**: `src/OSReset.c`
+- **Goal**: Match RVL-SDK `OSReset.c` functions using local Qwen2.5-Coder-7B and autonomous decomp runner.
+- **Functions Worked On & 100% Matched (0 diffs)**:
+  - `__OSDefaultResetCallback`: 100.0% MATCH
+  - `__OSDefaultPowerCallback`: 100.0% MATCH
+  - `__OSInitSTM`: 100.0% MATCH (280 bytes)
+  - `__OSHotReset`: 100.0% MATCH (116 bytes)
+  - `__OSUnRegisterStateEvent`: 100.0% MATCH (120 bytes)
+  - `__OSStartPlayRecord`: 100.0% MATCH (84 bytes)
+  - `__OSStopPlayRecord`: 100.0% MATCH (492 bytes)
+  - `__OSWriteStateFlags`: 100.0% MATCH (224 bytes)
+  - `__OSReadStateFlags`: 100.0% MATCH (292 bytes)
+- **Key Code Changes / Decisions**:
+  - Fixed autonomous decomp runner symbol extractor: reads `config/symbols.txt` (39,945 symbols) to automatically deduce types and sizes.
+  - Excluded standard SDK headers (`include/**/*.h`) and PPC keywords from false declaration generation.
+  - Calculated relative branch offsets (`int(target, 16) - base_offset`) in CodeWarrior inline assembly fallback.
+  - Mapped condition register pseudo-ops (e.g. `crclr cr1eq` -> `crclr 6`).
+  - Corrected function ordering in `src/OSReset.c` to preserve exact object layout offsets.
+- **Verification Output**:
+  - `python tools/autonomous_decomp_runner.py --queue` passes all 9 targeted functions with 100.0% MATCH (0 diff bytes).
+- **Status**: 9 of 16 functions in `OSReset.c` now 100.0% matched. Remaining functions are internal event handlers / state callbacks (`__OSStateEventHandler`, `PlayRecordCallback`, `fn_805F6BF0`, `fn_805F6CF0`, `fn_805F6DF0`, `fn_805F6EB0`, `fn_805F7040`).
+
 
