@@ -55,6 +55,7 @@ def diff_func(func_name, unit=None):
     
     max_len = max(len(l_insts), len(r_insts))
     diff_count = 0
+    reloc_count = 0
     all_mode = "-a" in sys.argv or "--all" in sys.argv
     for i in range(max_len):
         l_item = l_insts[i] if i < len(l_insts) else {}
@@ -76,7 +77,7 @@ def diff_func(func_name, unit=None):
             r_mnem = r_inst.get('parts', [{}])[0].get('opcode', {}).get('mnemonic')
             
             is_reloc_only = False
-            if 'relocation' in l_item and 'relocation' in r_item and l_mnem == r_mnem:
+            if 'relocation' in l_inst and 'relocation' in r_inst and l_mnem == r_mnem:
                 # Compare non-reloc arguments
                 l_args = [p.get('arg', {}).get('opaque') for p in l_inst.get('parts', []) if 'opaque' in p.get('arg', {})]
                 r_args = [p.get('arg', {}).get('opaque') for p in r_inst.get('parts', []) if 'opaque' in p.get('arg', {})]
@@ -84,13 +85,19 @@ def diff_func(func_name, unit=None):
                     is_reloc_only = True
             
             if diff_kind:
-                diff_count += 1
+                if not is_reloc_only:
+                    diff_count += 1
+                else:
+                    reloc_count += 1
                 flag = "~" if is_reloc_only else "*"
             else:
                 flag = " "
             print(f"{flag} {i:3d} | {l_addr}: {l_str:<40} | {r_addr}: {r_str}")
             
-    print(f"Total actual diff instructions: {diff_count}/{max_len}")
+    if reloc_count > 0 and diff_count == 0:
+        print(f"Total actual diff instructions: 0/{max_len} ({reloc_count} relocations match 100.0%)")
+    else:
+        print(f"Total actual diff instructions: {diff_count}/{max_len}")
 
 def list_funcs(filter_str="OSAlarm"):
     with open('build/SLSEXJ/report.json') as f:
