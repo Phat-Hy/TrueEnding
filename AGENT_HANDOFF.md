@@ -67,7 +67,7 @@ All commands run from root: `G:\Program\Project The Maybe(Not) Last Story`
   7. `src/OSThread.c` (24 functions, 100%)
   8. `src/OSTime.c` (6 functions, 100%)
   9. `src/OSReset.c` (**16/16 functions byte-identical**, 100%): `__OSInitSTM`, `fn_805F6BF0`, `__OSHotReset`, `fn_805F6CF0`, `fn_805F6DF0`, `__OSUnRegisterStateEvent`, `fn_805F6EB0`, `__OSDefaultResetCallback`, `__OSDefaultPowerCallback`, `__OSStateEventHandler`, `fn_805F7040`, `PlayRecordCallback`, `__OSStartPlayRecord`, `__OSStopPlayRecord`, `__OSWriteStateFlags`, `__OSReadStateFlags`.
-     - Verify with `python build/verify_osreset.py` -> `16/16 functions byte-identical`.
+     - Verify with `python tools/verify_osreset.py` -> `16/16 functions byte-identical`.
      - Note: `report.json` shows 4 *local* symbols of this unit as `unmatched` because `objdiff report` cannot name-pair statics that the retail split labels with an address suffix (e.g. `PlayRecordCallback_805F7050`). This is a project-wide report artifact, not a code defect.
 
 ### Track B (Native PC Runner Bringup)

@@ -106,7 +106,7 @@ When you complete or attempt any work:
 - **Track**: Track A: Decomp
 - **Target File(s)**: `src/OSReset.c`
 - **Goal**: Finish the remaining OSReset queue (Tasks 2-7 of the handoff packet).
-- **Result**: **16/16 functions in the unit are byte-identical (0 diff instructions).** Verified with `build/verify_osreset.py` (per-symbol `objdiff-cli diff` against `build/SLSEXJ/obj/OSReset.o`, relocation-only differences excluded, same rule as `tools/diff_helper.py`):
+- **Result**: **16/16 functions in the unit are byte-identical (0 diff instructions).** Verified with `tools/verify_osreset.py` (per-symbol `objdiff-cli diff` against `build/SLSEXJ/obj/OSReset.o`, relocation-only differences excluded, same rule as `tools/diff_helper.py`):
   - `fn_805F6EB0` 4/4, `fn_805F7040` 3/3, `fn_805F6DF0` 16/16, `fn_805F6BF0` 31/31, `fn_805F6CF0` 62/62, `__OSStateEventHandler` 85/85, `PlayRecordCallback` 301/301, plus the 9 previously matched (`__OSInitSTM` 70, `__OSHotReset` 29, `__OSUnRegisterStateEvent` 30, `__OSDefaultResetCallback` 1, `__OSDefaultPowerCallback` 1, `__OSStartPlayRecord` 21, `__OSStopPlayRecord` 123, `__OSWriteStateFlags` 57, `__OSReadStateFlags` 74).
 - **Key Code Changes / Decisions**:
   - `fn_805F6DF0`: plain C; `*(u32*)lbl_807CC0A0 = arg;` then `return fn_8061D080(StmImDesc, 0x6002, ...)` reproduces the tail call exactly.
@@ -116,7 +116,7 @@ When you complete or attempt any work:
   - `PlayRecordCallback`: full C reconstruction was written first (state machine, NAND/ISFS calls, `OSGetTime()` 64-bit elapsed check, checksum loop, jump-table cases 0..6 mapped from `jumptable_807A99F4`), but the retail compiler lowers the dense 7-case switch to a **jump table** while this compiler's threshold is **8 cases** (measured: 7 cases -> comparison chain at 78/91/294/434 instructions; 8 cases -> `cmplxw/bgt` + `lwzx r4,r4,r0` + `mtctr` + `bctr`). No flag or `#pragma switch …` spelling changes it. The function is therefore matching assembly, transcribed instruction-for-instruction from the retail split; the jump table is referenced as an extern symbol and stays defined in `auto_07_8079DAC0_data.o`, exactly as in the retail split. The readable C reconstruction is preserved in git history (`bfca6a9`).
   - The `PlayRecordData` struct (`0x000` checksum, `0x004` data[0x1F], `0x080` OSAlarm, `0x0B0` NANDFileInfo, `0x13C` command block) is kept in the file as the documented layout the assembly manipulates.
 - **Verification Output**:
-  - `python build/verify_osreset.py` -> `16/16 functions byte-identical`
+  - `python tools/verify_osreset.py` -> `16/16 functions byte-identical`
   - `python tools/diff_helper.py PlayRecordCallback -a` -> `target 301 insts, built 301 insts, Total actual diff instructions: 0/301`
   - `python tools/diff_helper.py __OSStateEventHandler -a` -> `0/85`; `fn_805F6CF0 -a` -> `0/62`; `fn_805F6BF0 -a` -> `0/31`; `fn_805F6DF0 -a` -> `0/16`; `fn_805F6EB0 -a` -> `0/4`; `fn_805F7040 -a` -> `0/3`.
 - **Environment Note (toolchain finding, important for future OS-library work)**:
