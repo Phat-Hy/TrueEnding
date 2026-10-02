@@ -45,6 +45,7 @@ extern u8 StmEhOutBuf[0x20];
 extern const char lbl_807A9900[];
 extern const char lbl_807A9914[];
 extern const char lbl_807A9928[];
+extern const char lbl_807A9934[];
 extern const char lbl_807A996C[];
 extern u8 lbl_807CC0A0[];
 extern u8 lbl_807CC0C0[];
@@ -136,6 +137,19 @@ lbl_805F6BD0:
     blr
 }
 
+void fn_805F6BF0(void) {
+    *(volatile u16*)0xCC002002 = 0;
+    if (!StmReady) {
+        OSPanic(lbl_807A9928, 0x15c, lbl_807A9934);
+    }
+    *(u32*)lbl_807CC0A0 = 0;
+    fn_8061D080(StmImDesc, 0x2003, lbl_807CC0A0, 0x20, lbl_807CC0C0, 0x20);
+    OSDisableInterrupts();
+    ICFlashInvalidate();
+    for (;;) {
+    }
+}
+
 asm void __OSHotReset(void) {
     nofralloc
     stwu r1, -0x10(r1)
@@ -169,6 +183,14 @@ lbl_0040:
     nop
 lbl_0070:
     b lbl_0070
+}
+
+s32 fn_805F6DF0(u32 arg) {
+    if (!StmReady) {
+        return -6;
+    }
+    *(u32*)lbl_807CC0A0 = arg;
+    return fn_8061D080(StmImDesc, 0x6002, lbl_807CC0A0, 0x20, lbl_807CC0C0, 0x20);
 }
 
 s32 __OSUnRegisterStateEvent(void) {
