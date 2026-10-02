@@ -125,4 +125,23 @@ When you complete or attempt any work:
   - `report.json` still shows `unmatched` for the four *local* symbols in this unit (`__OSDefaultResetCallback_805F6EC0`, `__OSDefaultPowerCallback_805F6ED0`, `__OSStateEventHandler_805F6EE0`, `PlayRecordCallback_805F7050`) even at 0 diffs — a project-wide `objdiff` symbol-pairing artifact (17,702 of 17,720 suffixed target symbols are unpaired), not a code defect. A symbol-name normalisation step in `objdiff.json` would make `report.json` reflect the true 100 %.
   - If a full `main.dol` link is attempted, confirm `jumptable_807A99F4` resolves from `auto_07_8079DAC0_data.o` (it is declared extern, not defined, in `src/OSReset.c`, matching the retail split).
 
+---
+
+### [2026-10-02 23:05] Session 4: Track B — controller input scouting (Task 2), ledger refresh
+- **Track**: Track B: PC Runner (+ Track A bookkeeping)
+- **Target File(s)**: `docs/PROGRESS_LEDGER.json`, `recomp/replacements.c` (investigation only, reverted)
+- **Goal**: Refresh the ledger after `OSReset.c` completion, then implement the WPAD/KPAD controller input mock.
+- **Completed**:
+  - `docs/PROGRESS_LEDGER.json`: Track A now records 9 matched modules / 122 matched functions (OSReset.c 16/16 added, with a `recent_module_findings` note about the retail-vs-project compiler difference); `next_target_modules` is now `OSAudioSystem.c`, `OSMemory.c`, `OSAlloc.c`.
+- **Task 2 investigation (controller input)** — findings, no code shipped:
+  - The existing "WPAD/KPAD ready" stubs (`0x8062CA30` / `0x80632414`) do **not** hook KPADInit. `fn_80632414` is an 8-instruction predicate returning `*(u8*)(0x80820018 + 0x64E) == 5`; `fn_8062CA30` is its critical-section wrapper (`fn_80628150` / `fn_80628160`). The region `0x8062C000-0x8064xxxx` is the **Bluetooth (BTM) + WPAD state machinery** — it references the debug string `"BTM_SetAfhChannels first: %d (%d) last: %d (%d)"` at `0x807B43D0`. Forcing the state byte at `0x80820666` to `5` is what currently makes the game see "pad ready".
+  - The real SDK libraries were located through their `__RVL_SDK` version pointers: **KPAD** `~0x80657230-0x8065F1E0` (`KPADInit` at `0x80657B00` loads `lbl_8087EB20` -> `"<< RVL_SDK - KPAD "` at `0x807B8960`) and **WPAD** from `~0x8065F1E0` (`WPADInit` at `0x8065F1E0` loads `lbl_8087EBB8` -> `0x807B92C8`), consistent with the WPAD callback-warning strings referenced at `0x80660DB8` / `0x80660E48`.
+  - Instrumented `dolrecomp_dispatch_replacement` temporarily (game -> pad-library call trace to `pad_trace.txt`) and ran 300 vblank frames (125 s). The pad transport is alive: `fn_806572D0` is called **once per channel (0-3) per frame** from the low-level driver at `0x800DDE18`. But the game **never calls the KPAD/WPAD read API** in that window — only boot-time state queries and per-channel setup (`fn_806373C8(chan, ctx, 0, 0, 1, 0, 0)` from the pad-module init at `0x80651560`).
+  - Probe reverted (`git checkout -- recomp/replacements.c`) and the runner rebuilt clean, so the committed tree and `tls_runner.exe` match.
+- **Blockers / Open Questions**:
+  - **Task 2 cannot be verified yet**: injecting a mock status has no observable endpoint while the game is still in boot/intro. Reaching an interactive screen depends on disc asset streaming (Task 3), so the recommended order is **Task 3 first, then Task 2**.
+  - When resuming Task 2: re-run the region probe (temporary block in `dolrecomp_dispatch_replacement`, region `0x80657000-0x80670000`, logging `ctx->lr` plus GPR3-GPR6) once the game polls input, then hook the exact `WPADRead`/`KPADRead` entry point, fill the caller-visible status struct, and feed it from Win32 `GetAsyncKeyState`.
+  - The runner executes 300 frames cleanly with no exception, so Task 3 (DVD/VFS serving of `wt/` archives and `.thp` movies) is the live blocker for further progress.
+
+
 
