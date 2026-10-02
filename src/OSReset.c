@@ -49,8 +49,11 @@ extern const char lbl_807A9934[];
 extern const char lbl_807A996C[];
 extern u8 lbl_807CC0A0[];
 extern u8 lbl_807CC0C0[];
+extern u8 lbl_807CC0E0[];
+extern u8 lbl_807CC100[];
 
 extern void __OSStateEventHandler(s32, void*);
+extern s32 fn_805F6EB0(void);
 extern s32 IOS_Open(const char* path, u32 mode);
 extern s32 IOS_IoctlAsync(s32 fd, s32 cmd, void* in_buf, u32 in_len, void* out_buf, u32 out_len, void* cb, void* cb_arg);
 
@@ -183,6 +186,76 @@ lbl_0040:
     nop
 lbl_0070:
     b lbl_0070
+}
+
+asm s32 fn_805F6CF0(u32 arg0, u32 arg1, u32 arg2) {
+    nofralloc
+    stwu r1, -0x20(r1)
+    mflr r0
+    stw r0, 0x24(r1)
+    stw r31, 0x1c(r1)
+    mr r31, r5
+    stw r30, 0x18(r1)
+    mr r30, r4
+    stw r29, 0x14(r1)
+    mr r29, r3
+    lwz r0, StmReady
+    cmpwi r0, 0x0
+    bne lbl_0258
+    li r3, -0xa
+    b lbl_02fc
+lbl_0258:
+    bl OSDisableInterrupts
+    lwz r0, StmVdInUse
+    cmpwi r0, 0x0
+    beq lbl_0274
+    bl OSRestoreInterrupts
+    li r3, 0x0
+    b lbl_02fc
+lbl_0274:
+    li r0, 0x1
+    stw r0, StmVdInUse
+    bl OSRestoreInterrupts
+    slwi r4, r29, 7
+    lis r3, lbl_807CC0E0@ha
+    addi r5, r3, lbl_807CC0E0@l
+    slwi r0, r30, 3
+    li r12, 0x0
+    or r4, r4, r31
+    or r4, r4, r0
+    stw r4, lbl_807CC0E0@l(r3)
+    li r11, -0x1
+    lis r0, 0xffff
+    lis r7, lbl_807CC100@ha
+    lis r9, fn_805F6EB0@ha
+    lwz r3, StmImDesc
+    addi r7, r7, lbl_807CC100@l
+    stw r12, 0x4(r5)
+    addi r9, r9, fn_805F6EB0@l
+    li r4, 0x5001
+    li r6, 0x20
+    stw r12, 0x8(r5)
+    li r8, 0x20
+    li r10, 0x0
+    stw r12, 0xc(r5)
+    stw r12, 0x10(r5)
+    stw r11, 0x14(r5)
+    stw r0, 0x18(r5)
+    stw r12, 0x1c(r5)
+    bl IOS_IoctlAsync
+    cmpwi r3, 0x0
+    beq lbl_02f8
+    b lbl_02fc
+lbl_02f8:
+    li r3, 0x1
+lbl_02fc:
+    lwz r0, 0x24(r1)
+    lwz r31, 0x1c(r1)
+    lwz r30, 0x18(r1)
+    lwz r29, 0x14(r1)
+    mtlr r0
+    addi r1, r1, 0x20
+    blr
 }
 
 s32 fn_805F6DF0(u32 arg) {
