@@ -132,6 +132,17 @@ void mmio_external_write(CPUState* cpu, u32 ea, u64 value, u8 size) {
 
 static u32 s_simulated_ticks = 0;
 
+/* Current guest time, matching the OSGetTime replacement below. */
+static u64 guest_time_now(CPUState* ctx) {
+    return ctx->timebase + (u64)s_simulated_ticks;
+}
+
+/* System time the OS uses for alarms: __OSGetSystemTime() = OSGetTime() + *(OSTime*)0x800030D8 */
+u64 tls_guest_system_time(CPUState* ctx) {
+    u64 bias = ((u64)mem_read32(ctx, 0x800030D8) << 32) | mem_read32(ctx, 0x800030DC);
+    return guest_time_now(ctx) + bias;
+}
+
 static void format_and_print_osreport(CPUState* ctx, const char* fmt) {
     int gpr_idx = 4;
     printf("[TLS OSReport] ");
@@ -369,7 +380,8 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
         // OSGetTime: 64-bit timebase in (r3, r4)
         case 0x805F5F90: {
-            u64 tb = ctx->timebase + (u64)(s_simulated_ticks += 1000);
+            s_simulated_ticks += 1000;
+            u64 tb = guest_time_now(ctx);
             ctx->gpr[3] = (u32)(tb >> 32);
             ctx->gpr[4] = (u32)(tb & 0xFFFFFFFF);
             ctx->pc = ctx->lr;

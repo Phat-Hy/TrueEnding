@@ -191,6 +191,26 @@ When you complete or attempt any work:
   - Because callbacks are drained once per frame slice, a caller that spins waiting for completion only advances one step per slice; for this kind of diagnosis run with a small `--blocks` (e.g. `--blocks 300000`) so slices return quickly — a 400-frame run then completes in ~1 s and shows the identical stall.
   - Next: instrument the active-thread queue / message queues at the stall (`__OSActiveThreadQueue` `0x800000DC`, and the DVD/streaming worker addresses above) to find what the main thread blocks on — most likely a message from the DVD worker thread that our synchronous transfer model never posts.
 
+---
+
+### [2026-10-03 03:05] Session 7: Track B — OSAlarm expiry emulation unblocks the loader (Task 3, increment 3)
+- **Track**: Track B: PC Runner
+- **Target File(s)**: `recomp/replacements.c`, `recomp/replacements.h`, `recomp/host_runner.c`
+- **Diagnosis (the real cause of the Session 6 stall)**:
+  - A temporary dispatch probe over the OSThread region showed the main thread's stack ending in `OSSleepTicks` (`0x805F5EE0`) → `OSSuspendThread` (`0x805F5AE0`), with a pending alarm whose handler is `SleepAlarmHandler` (`0x805F5E60`).
+  - Root cause: the runner never models the **decrementer interrupt**, so `OSAlarm` never expires. `DecrementerExceptionCallback` (`0x805EC560`) is what normally walks `AlarmQueue` (`0x8087FBE0`) and runs handlers; without it any `OSSleepTicks`/`OSSetAlarm` user sleeps forever. The existing vblank pump only woke threads parked in the graphics frame queue (`0x807C6F60`).
+- **Implementation**:
+  - `recomp/replacements.c`: `guest_time_now()` now backs both the `OSGetTime` hook and a new exported `tls_guest_system_time()` = `OSGetTime() + *(OSTime*)0x800030D8` (matching `__OSGetSystemTime`).
+  - `recomp/host_runner.c`: new `host_service_alarms()` runs every frame before the vblank pump — it unlinks alarms whose `fire` has passed from `AlarmQueue`, clears `handler`/`next`, and stages `handler(alarm, context)` (`r3 = alarm`, `r4 = current SP`, `lr = 0x805F50B0`) so the guest's own `OSResumeThread`/scheduler does the wake-up.
+- **Verification Output**:
+  - `.\build\recomp\tls_runner.exe --blocks 300000 --frames 3000` completes in ~9 s, and the game now **streams its whole preload set** — `pack/filesystem.pkh`, `pack/eventpacks.pkh`, `pack/levels.pkh`, `preload/boot.pkh`, `camp.pkh`, `change_dg.pkh`, `change_dg_cache.pkh`, `game_start_dg.pkh`, `na000_00.pkh`, `na000_00_town.pkh`, `saveload.pkh`, `shop.pkh`, … — with every completion callback serviced.
+  - Loader milestones now run through `0, 0.1, 0.2, 1 … 7` (previously frozen at `2`), and the SDK libraries **`WPAD` and `KPAD` now initialise**.
+  - Main thread ends healthy: `Thread 0 State=2 (RUNNING)`, `CurrentThread = 0x807CB658`, `RunQueueBits = 0`, no exception, empty alarm queue.
+- **State of play / next**:
+  - The pad stack Task 2 needs is now live in the runner, so `WPADRead`/`KPADRead` can be re-identified with the region probe once the game polls input.
+  - The remaining wait sits inside the game's own resource pipeline (`0x8046C2A4` ← `0x8046DD78` ← `0x80474048` ← `0x8046DC98` ← `0x8006BAD0` ← `0x80440C88` ← `0x80440FA4` ← `0x80440690` ← `0x8047AE80`), with no alarm pending and no run queue entries — the next investigation is that chain (likely a resource/NAND/movie request whose producer never completes).
+
+
 
 
 

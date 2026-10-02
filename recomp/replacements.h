@@ -25,6 +25,10 @@ void* resolve_guest_pointer(CPUState* ctx, u32 addr);
 // frame loop, mirroring the retail DVD thread). Returns 1 when one was staged.
 int tls_dvd_service_callback(CPUState* ctx);
 
+// Current guest system time (OSGetTime + the OS system-time bias at 0x800030D8),
+// used by the runner to know when an OSAlarm is due.
+u64 tls_guest_system_time(CPUState* ctx);
+
 #ifdef __cplusplus
 }
 #endif

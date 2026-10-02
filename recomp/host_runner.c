@@ -129,8 +129,47 @@ static void host_wakeup_thread(CPUState* cpu, u32 thread_addr) {
     mem_write32(cpu, 0x8087FC5C, 1); // RunQueueHint = TRUE
 }
 
-static void host_simulate_vblank(CPUState* cpu, int frame_num) {
-    // 1. Advance graphics frame queue read index to match write index
+// The runner does not model the decrementer interrupt, so OSAlarm expiry is
+// emulated here: every frame, alarms whose fire time has passed are unlinked
+// from AlarmQueue (0x8087FBE0) and their handler(alarm, context) is run.
+static void host_service_alarms(CPUState* cpu) {
+    for (int i = 0; i < 16; i++) {
+        u32 head = mem_read32(cpu, 0x8087FBE0);
+        if (head == 0) {
+            return;
+        }
+        u64 fire = ((u64)mem_read32(cpu, head + 0x08) << 32) | mem_read32(cpu, head + 0x0C);
+        if (fire > tls_guest_system_time(cpu)) {
+            return;
+        }
+        u32 next = mem_read32(cpu, head + 0x14); // alarm->next
+        mem_write32(cpu, 0x8087FBE0, next);
+        if (next != 0) {
+            mem_write32(cpu, next + 0x10, 0); // next->prev = NULL
+        } else {
+            mem_write32(cpu, 0x8087FBE4, 0);
+        }
+        u32 handler = mem_read32(cpu, head + 0x00);
+        if (handler == 0) {
+            continue; // cancelled alarm
+        }
+        mem_write32(cpu, head + 0x00, 0); // alarm->handler = NULL
+        mem_write32(cpu, head + 0x14, 0); // alarm->next = NULL
+
+        cpu->gpr[3] = head;      // OSAlarm* alarm
+        cpu->gpr[4] = cpu->gpr[1]; // OSContext* (handlers ignore it; must be readable)
+        cpu->lr = 0x805F50B0;    // return into the scheduler idle point
+        cpu->pc = handler;
+        dolrecomp_run_blocks(cpu, 50000);
+        if (cpu->exception != 0) {
+            printf("\n[Runner] CPU Exception 0x%08X at PC 0x%08X (alarm handler 0x%08X)\n",
+                   cpu->exception, cpu->pc, handler);
+            return;
+        }
+    }
+}
+
+static void host_simulate_vblank(CPUState* cpu, int frame_num) {    // 1. Advance graphics frame queue read index to match write index
     u16 write_idx = mem_read16(cpu, 0x807C6FB8);
     mem_write16(cpu, 0x807C6FBA, write_idx);
 
@@ -210,6 +249,9 @@ int main(int argc, char** argv) {
             printf("\n[Runner] CPU Exception 0x%08X at PC 0x%08X\n", cpu.exception, cpu.pc);
             break;
         }
+
+        // Emulated OSAlarm expiry (no decrementer interrupt in the runner)
+        host_service_alarms(&cpu);
 
         // If CPU is idle in scheduler, fire a simulated VBlank
         if (cpu.pc == 0x805F50B0 || mem_read32(&cpu, 0x8087FC60) == 0) {
