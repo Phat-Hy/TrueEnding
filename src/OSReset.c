@@ -25,8 +25,10 @@ typedef struct PlayRecordData {
     u8 block[0xC4];    /* 0x13C */
 } PlayRecordData;
 
-extern OSTime lbl_8087FCB0;
+extern u32 lbl_8087FCB0;
+extern u32 lbl_8087FCB4;
 extern const char lbl_807A99C8[];
+extern u32 jumptable_807A99F4[7];
 extern s32 fn_8061F9F0(const char* path, NANDFileInfo* info, u32 arg, void* callback, void* block);
 extern s32 fn_8061E7D0(NANDFileInfo* info, void* buf, u32 length, void* callback, void* block);
 extern s32 fn_8061E9E0(NANDFileInfo* info, u32 arg0, u32 arg1, void* callback, void* block);
@@ -413,147 +415,349 @@ void fn_805F7040(void) {
     PlayRecordCallback(0, 0);
 }
 
-void PlayRecordCallback(s32 error, void* arg) {
-    PlayRecordData* p = (PlayRecordData*)lbl_807CC120;
-    s32 ret = 0;
-    u32 i;
-
-    PlayRecordLastError = error;
-    if (PlayRecordTerminate) {
-        PlayRecordTerminated = TRUE;
-        return;
-    }
-    if (!PlayRecordRetry) {
-        switch (PlayRecordState) {
-        case 0:
-            PlayRecordState = 1;
-            break;
-        case 1:
-            if (error == -10) {
-                PlayRecordRetry = TRUE;
-                OSCreateAlarm(&p->alarm);
-                OSSetAlarm(&p->alarm, OSSecondsToTicks(1), (OSAlarmHandler)fn_805F7040);
-                return;
-            }
-            if (error != 0) {
-                PlayRecordError = 1;
-                PlayRecordState = 7;
-                return;
-            }
-            if (PlayRecordGet) {
-                PlayRecordState = 4;
-            } else {
-                PlayRecordState = 2;
-            }
-            break;
-        case 2:
-            if (error == 0x80) {
-                PlayRecordGet = TRUE;
-                lbl_8087FCB0 = *(OSTime*)(p->data + 0x17);
-                PlayRecordState = 3;
-            } else {
-                PlayRecordError = 1;
-                PlayRecordState = 6;
-            }
-            break;
-        case 3:
-            if (error == 0) {
-                PlayRecordState = 4;
-            } else {
-                PlayRecordError = 1;
-                PlayRecordState = 6;
-            }
-            break;
-        case 4:
-            PlayRecordState = 5;
-            break;
-        case 5:
-            if (error == 0x80) {
-                if (OSGetTime() - lbl_8087FCB0 > OSSecondsToTicks(300)) {
-                    PlayRecordState = 6;
-                } else {
-                    PlayRecordState = 3;
-                }
-            } else {
-                PlayRecordError = 1;
-                PlayRecordState = 6;
-            }
-            break;
-        case 6:
-            if (PlayRecordError) {
-                PlayRecordState = 7;
-                return;
-            }
-            if (error == 0) {
-                lbl_8087FCB0 = *(OSTime*)(p->data + 0x17);
-                PlayRecordState = 1;
-            } else {
-                PlayRecordState = 7;
-                PlayRecordError = 1;
-                return;
-            }
-            break;
-        }
-        PlayRecordError = 1;
-        PlayRecordState = 7;
-        return;
-    }
-
-    PlayRecordRetry = FALSE;
-    switch (PlayRecordState) {
-    case 1:
-        ret = fn_8061F9F0(lbl_807A99C8, &p->file, 3, (void*)PlayRecordCallback, p->block);
-        break;
-    case 2:
-        ret = fn_8061E7D0(&p->file, p, 0x80, (void*)PlayRecordCallback, p->block);
-        break;
-    case 3:
-        ret = fn_8061E9E0(&p->file, 0, 0, (void*)PlayRecordCallback, p->block);
-        break;
-    case 4:
-        OSCreateAlarm(&p->alarm);
-        OSSetAlarm(&p->alarm, OSSecondsToTicks(60), (OSAlarmHandler)fn_805F7040);
-        break;
-    case 5:
-        *(OSTime*)(p->data + 0x17) = OSGetTime();
-        p->checksum = 0;
-        for (i = 0; i < 0x1F; i++) {
-            p->checksum += p->data[i];
-        }
-        ret = fn_8061E8C0(&p->file, p, 0x80, (void*)PlayRecordCallback, p->block);
-        break;
-    case 6:
-        ret = fn_8061FBE0(&p->file, (void*)PlayRecordCallback, p->block);
-        break;
-    }
-
-    if (ret != 0) {
-        if (ret == -3) {
-            OSCreateAlarm(&p->alarm);
-            OSSetAlarm(&p->alarm, OSSecondsToTicks(1), (OSAlarmHandler)fn_805F7040);
-            PlayRecordRetry = TRUE;
-        } else {
-            PlayRecordError = 1;
-            switch (PlayRecordState) {
-            case 2:
-            case 3:
-            case 5:
-                PlayRecordState = 6;
-                ret = fn_8061FBE0(&p->file, (void*)PlayRecordCallback, p->block);
-                if (ret == -3) {
-                    PlayRecordRetry = TRUE;
-                    OSCreateAlarm(&p->alarm);
-                    OSSetAlarm(&p->alarm, OSSecondsToTicks(1), (OSAlarmHandler)fn_805F7040);
-                }
-                break;
-            default:
-                PlayRecordState = 7;
-                break;
-            }
-        }
-    }
-    PlayRecordLastError = ret;
+/*
+ * NAND play-history state machine.
+ *
+ * Written as matching assembly: the retail OS library lowers the dense 7-case
+ * switch on PlayRecordState to a jump table, while this project's MWCC 4.3
+ * build 145 only emits a jump table from 8 cases upwards (verified: 7 cases ->
+ * comparison chain, 8 cases -> `lwzx`/`mtctr`/`bctr` table). No `-opt` or
+ * `#pragma switch` variant changes that threshold, so the C form cannot be made
+ * byte-identical. The jump table itself (`jumptable_807A99F4`) lives in the
+ * data unit `auto_07_8079DAC0_data.o`, exactly as in the retail split.
+ */
+asm void PlayRecordCallback(s32 error, void* arg) {
+    nofralloc
+    stwu r1, -0x20(r1)
+    mflr r0
+    stw r0, 0x24(r1)
+    stw r31, 0x1c(r1)
+    lis r31, lbl_807CC120@ha
+    addi r31, r31, lbl_807CC120@l
+    stw r30, 0x18(r1)
+    li r30, 0x0
+    stw r29, 0x14(r1)
+    lwz r0, PlayRecordTerminate
+    stw r3, PlayRecordLastError
+    cmpwi r0, 0x0
+    beq lbl_05c0
+    li r0, 0x1
+    stw r0, PlayRecordTerminated
+    b lbl_0a18
+lbl_05c0:
+    lwz r0, PlayRecordRetry
+    cmpwi r0, 0x0
+    bne lbl_07e0
+    lwz r0, PlayRecordState
+    cmplwi r0, 0x6
+    bgt lbl_07cc
+    lis r4, jumptable_807A99F4@ha
+    slwi r0, r0, 2
+    addi r4, r4, jumptable_807A99F4@l
+    lwzx r4, r4, r0
+    mtctr r4
+    bctr
+    li r0, 0x1
+    stw r0, PlayRecordState
+    b lbl_07e0
+    cmpwi r3, -0xa
+    bne lbl_0638
+    li r0, 0x1
+    stw r0, PlayRecordRetry
+    addi r3, r31, 0x80
+    bl OSCreateAlarm
+    lis r3, 0x8000
+    lis r7, fn_805F7040@ha
+    lwz r0, 0xf8(r3)
+    addi r3, r31, 0x80
+    addi r7, r7, fn_805F7040@l
+    li r5, 0x0
+    srwi r6, r0, 2
+    bl OSSetAlarm
+    b lbl_0a18
+lbl_0638:
+    cmpwi r3, 0x0
+    bne lbl_0664
+    lwz r0, PlayRecordGet
+    cmpwi r0, 0x0
+    bne lbl_0658
+    li r0, 0x2
+    stw r0, PlayRecordState
+    b lbl_07e0
+lbl_0658:
+    li r0, 0x4
+    stw r0, PlayRecordState
+    b lbl_07e0
+lbl_0664:
+    li r3, 0x1
+    li r0, 0x7
+    stw r3, PlayRecordError
+    stw r0, PlayRecordState
+    b lbl_0a18
+    cmplwi r3, 0x80
+    bne lbl_06a8
+    addi r4, r31, 0x0
+    li r5, 0x1
+    lwz r3, 0x60(r4)
+    li r0, 0x3
+    lwz r4, 0x64(r4)
+    stw r5, PlayRecordGet
+    stw r4, lbl_8087FCB4
+    stw r3, lbl_8087FCB0
+    stw r0, PlayRecordState
+    b lbl_07e0
+lbl_06a8:
+    li r3, 0x1
+    li r0, 0x6
+    stw r3, PlayRecordError
+    stw r0, PlayRecordState
+    b lbl_07e0
+    cmpwi r3, 0x0
+    bne lbl_06d0
+    li r0, 0x4
+    stw r0, PlayRecordState
+    b lbl_07e0
+lbl_06d0:
+    li r3, 0x1
+    li r0, 0x6
+    stw r3, PlayRecordError
+    stw r0, PlayRecordState
+    b lbl_07e0
+    li r0, 0x5
+    stw r0, PlayRecordState
+    b lbl_07e0
+    cmplwi r3, 0x80
+    bne lbl_0764
+    bl OSGetTime
+    lis r5, 0x8000
+    lwz r8, lbl_8087FCB4
+    lwz r0, 0xf8(r5)
+    li r5, 0x12c
+    lwz r9, lbl_8087FCB0
+    subfc r8, r8, r4
+    srwi r7, r0, 2
+    li r6, 0x0
+    subfe r3, r9, r3
+    xoris r4, r3, 0x8000
+    mulhwu r0, r7, r5
+    mullw r3, r6, r5
+    add r0, r0, r3
+    mulli r5, r7, 0x12c
+    xoris r0, r0, 0x8000
+    subfc r3, r8, r5
+    subfe r4, r4, r0
+    subfe r4, r0, r0
+    neg. r4, r4
+    beq lbl_0758
+    li r0, 0x6
+    stw r0, PlayRecordState
+    b lbl_07e0
+lbl_0758:
+    li r0, 0x3
+    stw r0, PlayRecordState
+    b lbl_07e0
+lbl_0764:
+    li r3, 0x1
+    li r0, 0x6
+    stw r3, PlayRecordError
+    stw r0, PlayRecordState
+    b lbl_07e0
+    lwz r0, PlayRecordError
+    cmpwi r0, 0x0
+    beq lbl_0790
+    li r0, 0x7
+    stw r0, PlayRecordState
+    b lbl_0a18
+lbl_0790:
+    cmpwi r3, 0x0
+    bne lbl_07b8
+    addi r4, r31, 0x0
+    li r0, 0x1
+    lwz r3, 0x60(r4)
+    lwz r4, 0x64(r4)
+    stw r4, lbl_8087FCB4
+    stw r3, lbl_8087FCB0
+    stw r0, PlayRecordState
+    b lbl_07e0
+lbl_07b8:
+    li r3, 0x7
+    li r0, 0x1
+    stw r3, PlayRecordState
+    stw r0, PlayRecordError
+    b lbl_0a18
+lbl_07cc:
+    li r3, 0x7
+    li r0, 0x1
+    stw r3, PlayRecordState
+    stw r0, PlayRecordError
+    b lbl_0a18
+lbl_07e0:
+    lwz r0, PlayRecordState
+    li r29, 0x0
+    stw r29, PlayRecordRetry
+    cmpwi r0, 0x4
+    beq lbl_0890
+    bge lbl_0810
+    cmpwi r0, 0x2
+    beq lbl_0848
+    bge lbl_086c
+    cmpwi r0, 0x1
+    bge lbl_0820
+    b lbl_0940
+lbl_0810:
+    cmpwi r0, 0x6
+    beq lbl_0928
+    bge lbl_0940
+    b lbl_08cc
+lbl_0820:
+    lis r3, lbl_807A99C8@ha
+    lis r6, PlayRecordCallback@ha
+    addi r3, r3, lbl_807A99C8@l
+    addi r4, r31, 0xb0
+    addi r6, r6, PlayRecordCallback@l
+    addi r7, r31, 0x13c
+    li r5, 0x3
+    bl fn_8061F9F0
+    mr r30, r3
+    b lbl_0940
+lbl_0848:
+    lis r6, PlayRecordCallback@ha
+    addi r3, r31, 0xb0
+    addi r4, r31, 0x0
+    addi r7, r31, 0x13c
+    addi r6, r6, PlayRecordCallback@l
+    li r5, 0x80
+    bl fn_8061E7D0
+    mr r30, r3
+    b lbl_0940
+lbl_086c:
+    lis r6, PlayRecordCallback@ha
+    addi r3, r31, 0xb0
+    addi r6, r6, PlayRecordCallback@l
+    addi r7, r31, 0x13c
+    li r4, 0x0
+    li r5, 0x0
+    bl fn_8061E9E0
+    mr r30, r3
+    b lbl_0940
+lbl_0890:
+    addi r3, r31, 0x80
+    bl OSCreateAlarm
+    lis r3, 0x8000
+    li r0, 0x3c
+    lwz r3, 0xf8(r3)
+    lis r7, fn_805F7040@ha
+    mullw r4, r29, r0
+    srwi r5, r3, 2
+    addi r3, r31, 0x80
+    addi r7, r7, fn_805F7040@l
+    mulhwu r0, r5, r0
+    mulli r6, r5, 0x3c
+    add r5, r0, r4
+    bl OSSetAlarm
+    b lbl_0940
+lbl_08cc:
+    bl OSGetTime
+    addi r5, r31, 0x0
+    li r0, 0x1f
+    stw r4, 0x64(r5)
+    addi r6, r5, 0x4
+    li r4, 0x0
+    stw r3, 0x60(r5)
+    mtctr r0
+    nop
+lbl_08f0:
+    lwz r0, 0x0(r6)
+    addi r6, r6, 0x4
+    add r4, r4, r0
+    bdnz lbl_08f0
+    lis r6, PlayRecordCallback@ha
+    stw r4, 0x0(r31)
+    addi r3, r31, 0xb0
+    addi r4, r31, 0x0
+    addi r6, r6, PlayRecordCallback@l
+    addi r7, r31, 0x13c
+    li r5, 0x80
+    bl fn_8061E8C0
+    mr r30, r3
+    b lbl_0940
+lbl_0928:
+    lis r4, PlayRecordCallback@ha
+    addi r3, r31, 0xb0
+    addi r4, r4, PlayRecordCallback@l
+    addi r5, r31, 0x13c
+    bl fn_8061FBE0
+    mr r30, r3
+lbl_0940:
+    cmpwi r30, 0x0
+    beq lbl_0a14
+    cmpwi r30, -0x3
+    bne lbl_0984
+    addi r3, r31, 0x80
+    bl OSCreateAlarm
+    lis r3, 0x8000
+    lis r7, fn_805F7040@ha
+    lwz r0, 0xf8(r3)
+    addi r3, r31, 0x80
+    addi r7, r7, fn_805F7040@l
+    li r5, 0x0
+    srwi r6, r0, 2
+    bl OSSetAlarm
+    li r0, 0x1
+    stw r0, PlayRecordRetry
+    b lbl_0a14
+lbl_0984:
+    lwz r0, PlayRecordState
+    li r3, 0x1
+    stw r3, PlayRecordError
+    cmpwi r0, 0x4
+    beq lbl_0a0c
+    bge lbl_09a8
+    cmpwi r0, 0x2
+    bge lbl_09b0
+    b lbl_0a0c
+lbl_09a8:
+    cmpwi r0, 0x6
+    bge lbl_0a0c
+lbl_09b0:
+    li r0, 0x6
+    lis r4, PlayRecordCallback@ha
+    stw r0, PlayRecordState
+    addi r3, r31, 0xb0
+    addi r4, r4, PlayRecordCallback@l
+    addi r5, r31, 0x13c
+    bl fn_8061FBE0
+    cmpwi r3, -0x3
+    mr r30, r3
+    bne lbl_0a14
+    li r0, 0x1
+    stw r0, PlayRecordRetry
+    addi r3, r31, 0x80
+    bl OSCreateAlarm
+    lis r3, 0x8000
+    lis r7, fn_805F7040@ha
+    lwz r0, 0xf8(r3)
+    addi r3, r31, 0x80
+    addi r7, r7, fn_805F7040@l
+    li r5, 0x0
+    srwi r6, r0, 2
+    bl OSSetAlarm
+    b lbl_0a14
+lbl_0a0c:
+    li r0, 0x7
+    stw r0, PlayRecordState
+lbl_0a14:
+    stw r30, PlayRecordLastError
+lbl_0a18:
+    lwz r0, 0x24(r1)
+    lwz r31, 0x1c(r1)
+    lwz r30, 0x18(r1)
+    lwz r29, 0x14(r1)
+    mtlr r0
+    addi r1, r1, 0x20
+    blr
 }
+
 
 void __OSStartPlayRecord(void) {
     if (NANDInit() == 0) {

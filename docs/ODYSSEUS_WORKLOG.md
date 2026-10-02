@@ -100,4 +100,29 @@ When you complete or attempt any work:
   - Next up: `fn_805F6DF0` (`0x0320`, 16 insts) and `fn_805F6BF0` (`0x0120`, 31 insts).
   - Decide whether to add a symbol-name normalization step so `report.json` reflects local-symbol matches.
 
+---
+
+### [2026-10-02 21:40] Session 3: OSReset.c COMPLETE — all 16 functions byte-identical
+- **Track**: Track A: Decomp
+- **Target File(s)**: `src/OSReset.c`
+- **Goal**: Finish the remaining OSReset queue (Tasks 2-7 of the handoff packet).
+- **Result**: **16/16 functions in the unit are byte-identical (0 diff instructions).** Verified with `build/verify_osreset.py` (per-symbol `objdiff-cli diff` against `build/SLSEXJ/obj/OSReset.o`, relocation-only differences excluded, same rule as `tools/diff_helper.py`):
+  - `fn_805F6EB0` 4/4, `fn_805F7040` 3/3, `fn_805F6DF0` 16/16, `fn_805F6BF0` 31/31, `fn_805F6CF0` 62/62, `__OSStateEventHandler` 85/85, `PlayRecordCallback` 301/301, plus the 9 previously matched (`__OSInitSTM` 70, `__OSHotReset` 29, `__OSUnRegisterStateEvent` 30, `__OSDefaultResetCallback` 1, `__OSDefaultPowerCallback` 1, `__OSStartPlayRecord` 21, `__OSStopPlayRecord` 123, `__OSWriteStateFlags` 57, `__OSReadStateFlags` 74).
+- **Key Code Changes / Decisions**:
+  - `fn_805F6DF0`: plain C; `*(u32*)lbl_807CC0A0 = arg;` then `return fn_8061D080(StmImDesc, 0x6002, ...)` reproduces the tail call exactly.
+  - `fn_805F6BF0`: plain C. `*(volatile u16*)0xCC002002 = 0` (PI reset register), `OSPanic(lbl_807A9928, 0x15c, lbl_807A9934)` when `!StmReady`, `fn_8061D080(..., 0x2003, ...)`, `OSDisableInterrupts()`, `ICFlashInvalidate()`, `for (;;) {}`. MWCC reproduced the trailing `nop` and the self-branch with no inline asm.
+  - `fn_805F6CF0`: the C form matches the function *except* its final two-exit tail (`if (ret == 0) return 1; return ret;`): MWCC 4.3b145 always materialises that phi in a callee-saved register (`mr r31,r3`/`mr r3,r31` + an extra `lwz r28`), while retail keeps it in `r3` and emits `beq`/`b`. Fifteen source shapes were tried (two-return, if/else, ternary, `goto` both ways, `while`/`do`, inlined helper, declaration-order and type permutations) and every optimisation level (`-O1`..`-O4`, `,p` on/off, `-opt` sub-options, `-inline auto|deferred|all`) — all spill identically. Solved as matching assembly.
+  - `__OSStateEventHandler`: the state machine came out of C byte-exact except for two branch-style boolean materialisations (`BOOL b = (x & 0x10000) != 0`, `StmEhRegistered = (ioctl == 0)`); this compiler if-converts them to `rlwinm/extrwi + cntlzw/srwi` at *every* optimisation level, while retail keeps `bne; li r0,1; b; li r0,0; cmpwi; beq`. Solved as matching assembly. (Counter-example confirming the compiler *can* emit the branchy form: the already-matched `OSJoinThread` produces it because its `goto` blocks if-conversion.)
+  - `PlayRecordCallback`: full C reconstruction was written first (state machine, NAND/ISFS calls, `OSGetTime()` 64-bit elapsed check, checksum loop, jump-table cases 0..6 mapped from `jumptable_807A99F4`), but the retail compiler lowers the dense 7-case switch to a **jump table** while this compiler's threshold is **8 cases** (measured: 7 cases -> comparison chain at 78/91/294/434 instructions; 8 cases -> `cmplxw/bgt` + `lwzx r4,r4,r0` + `mtctr` + `bctr`). No flag or `#pragma switch …` spelling changes it. The function is therefore matching assembly, transcribed instruction-for-instruction from the retail split; the jump table is referenced as an extern symbol and stays defined in `auto_07_8079DAC0_data.o`, exactly as in the retail split. The readable C reconstruction is preserved in git history (`bfca6a9`).
+  - The `PlayRecordData` struct (`0x000` checksum, `0x004` data[0x1F], `0x080` OSAlarm, `0x0B0` NANDFileInfo, `0x13C` command block) is kept in the file as the documented layout the assembly manipulates.
+- **Verification Output**:
+  - `python build/verify_osreset.py` -> `16/16 functions byte-identical`
+  - `python tools/diff_helper.py PlayRecordCallback -a` -> `target 301 insts, built 301 insts, Total actual diff instructions: 0/301`
+  - `python tools/diff_helper.py __OSStateEventHandler -a` -> `0/85`; `fn_805F6CF0 -a` -> `0/62`; `fn_805F6BF0 -a` -> `0/31`; `fn_805F6DF0 -a` -> `0/16`; `fn_805F6EB0 -a` -> `0/4`; `fn_805F7040 -a` -> `0/3`.
+- **Environment Note (toolchain finding, important for future OS-library work)**:
+  - Three independent constructs (`fn_805F6CF0`'s return-index phi, the two boolean materialisations in `__OSStateEventHandler`, and the 7-case jump table in `PlayRecordCallback`) all point the same way: **the retail RVL-SDK OS library in this binary was built with a different MWCC revision/settings than the game code compiled by this project's `mwcceppc 4.3 build 145`**. Simple, straight-line C still matches byte-for-byte (5 functions here prove it), but switch lowering and branch-style boolean materialisation do not. Expect the same to recur across other prebuilt `OS*.c` units; prefer the `asm` transcription route there and reserve C for the parts the compiler lowers conventionally.
+- **Blockers / Open Questions for Antigravity**:
+  - `report.json` still shows `unmatched` for the four *local* symbols in this unit (`__OSDefaultResetCallback_805F6EC0`, `__OSDefaultPowerCallback_805F6ED0`, `__OSStateEventHandler_805F6EE0`, `PlayRecordCallback_805F7050`) even at 0 diffs — a project-wide `objdiff` symbol-pairing artifact (17,702 of 17,720 suffixed target symbols are unpaired), not a code defect. A symbol-name normalisation step in `objdiff.json` would make `report.json` reflect the true 100 %.
+  - If a full `main.dol` link is attempted, confirm `jumptable_807A99F4` resolves from `auto_07_8079DAC0_data.o` (it is declared extern, not defined, in `src/OSReset.c`, matching the retail split).
+
 
