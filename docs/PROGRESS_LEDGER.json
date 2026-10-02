@@ -133,7 +133,7 @@
         },
         "asset_root": "orig/DATA/files (override with TLS_ASSET_ROOT); tracing via TLS_DVD_TRACE=1",
         "evidence": "Boots past arena/OS init into DVD/VI/GX and prints the game's own loader progress 0 / 0.1 / 0.2 / 1 / 2; serves pack/filesystem.pkh (755296 requested -> 755268 bytes) from the host.",
-        "open_item": "DVDReadAsyncPrio completion callbacks (r7 / DVDFileInfo+0x38, e.g. 0x8046BBE0 from call site 0x8046CAD0) are not invoked yet. The caller tests r3 immediately after the call, so completion must be deferred: queue (callback, fileInfo) and service it from the runner frame loop in recomp/host_runner.c through the 0x805FA5B0 trampoline (r3 = 0, r4 = fileInfo)."
+        "open_item": "DVDReadAsyncPrio completion callbacks are now deferred and serviced (tls_dvd_service_callback, drained from the runner frame loop in recomp/host_runner.c; 8 per frame, r3 = 0 DVD_STATE_END, r4 = fileInfo, lr = 0x805F50B0). Verified: callback 0x8046BBE0 for the pack/filesystem.pkh read runs. Remaining blocker: after the first transfer the game settles with no runnable threads (RunQueueBits = 0), only Thread 0 (0x807CB658) left, nothing waiting on the frame queue (0x807C6F60 = 0); the Audio/DVD worker (0x808638F0) and Streaming worker (0x80879210) are gone from the active thread queue. Next: instrument __OSActiveThreadQueue (0x800000DC) and those worker threads at the stall to find what the main thread blocks on - most likely a message from the DVD worker that a synchronous transfer model never posts."
       }
     }
   },

@@ -21,6 +21,10 @@ void mmio_external_write(CPUState* cpu, u32 ea, u64 value, u8 size);
 // Resolves a guest PowerPC address to a host pointer.
 void* resolve_guest_pointer(CPUState* ctx, u32 addr);
 
+// Stages one queued DVD completion callback for execution (used by the runner
+// frame loop, mirroring the retail DVD thread). Returns 1 when one was staged.
+int tls_dvd_service_callback(CPUState* ctx);
+
 #ifdef __cplusplus
 }
 #endif

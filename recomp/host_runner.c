@@ -215,6 +215,16 @@ int main(int argc, char** argv) {
         if (cpu.pc == 0x805F50B0 || mem_read32(&cpu, 0x8087FC60) == 0) {
             host_simulate_vblank(&cpu, frame);
         }
+
+        // Drain deferred DVD completion callbacks (retail runs these on the DVD
+        // thread; the game's callers branch on DVDReadAsyncPrio's r3 before it).
+        for (int serviced = 0; serviced < 8 && tls_dvd_service_callback(&cpu); serviced++) {
+            result = dolrecomp_run_blocks(&cpu, 50000);
+            if (cpu.exception != 0) {
+                printf("\n[Runner] CPU Exception 0x%08X at PC 0x%08X (DVD callback)\n", cpu.exception, cpu.pc);
+                break;
+            }
+        }
     }
 
     printf("\n[Runner] Execution paused after run_blocks (result = %d)\n", result);

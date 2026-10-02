@@ -282,6 +282,65 @@ static void dvd_fill_file_info(CPUState* ctx, u32 fi_addr, u32 id, const HostAss
     mem_write32(ctx, fi_addr + 0x38, 0);          /* no pending callback */
 }
 
+/* ------------------------------------------------------------------
+ * Deferred DVD completion callbacks.
+ *
+ * Retail invokes DVDReadAsyncPrio's callback later, from the DVD
+ * thread, and the caller inspects r3 immediately after the call
+ * (e.g. 0x8046CAD4 branches on it), so the callback cannot run inline.
+ * We queue (callback, fileInfo) and let the runner's frame loop drain
+ * the queue, mirroring how the retail DVD thread completes transfers.
+ * ------------------------------------------------------------------ */
+#define TLS_DVD_MAX_PENDING 32
+#define TLS_DVD_IDLE_PC 0x805F50B0u /* OS scheduler idle loop used by the runner */
+
+typedef struct PendingDvdCallback {
+    u32 callback;
+    u32 file_info;
+} PendingDvdCallback;
+
+static PendingDvdCallback s_dvd_pending[TLS_DVD_MAX_PENDING];
+static u32 s_dvd_pending_head = 0;
+static u32 s_dvd_pending_tail = 0;
+static u32 s_dvd_callbacks_run = 0;
+
+static void dvd_queue_callback(u32 callback, u32 file_info) {
+    if (!callback) {
+        return;
+    }
+    u32 next = (s_dvd_pending_tail + 1) % TLS_DVD_MAX_PENDING;
+    if (next == s_dvd_pending_head) {
+        return; // queue full: drop rather than corrupt
+    }
+    s_dvd_pending[s_dvd_pending_tail].callback = callback;
+    s_dvd_pending[s_dvd_pending_tail].file_info = file_info;
+    s_dvd_pending_tail = next;
+}
+
+/* Sets up the guest to run one queued callback. Returns 1 when a call was staged. */
+int tls_dvd_service_callback(CPUState* ctx) {
+    if (s_dvd_pending_head == s_dvd_pending_tail) {
+        return 0;
+    }
+    PendingDvdCallback pending = s_dvd_pending[s_dvd_pending_head];
+    s_dvd_pending_head = (s_dvd_pending_head + 1) % TLS_DVD_MAX_PENDING;
+    if (!pending.callback) {
+        return 0;
+    }
+
+    ctx->gpr[3] = 0;                 /* result: DVD_STATE_END */
+    ctx->gpr[4] = pending.file_info; /* DVDFileInfo* */
+    ctx->lr = TLS_DVD_IDLE_PC;       /* return into the scheduler idle point */
+    ctx->pc = pending.callback;
+    s_dvd_callbacks_run++;
+    if (getenv("TLS_DVD_TRACE") && s_dvd_callbacks_run <= 12) {
+        printf("[TLS DVD] callback #%u -> %08X fileInfo=%08X\n", s_dvd_callbacks_run,
+               pending.callback, pending.file_info);
+        fflush(stdout);
+    }
+    return 1;
+}
+
 int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
     switch (address) {
         // OSReport: printf diagnostic messages to host console
@@ -508,6 +567,9 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 mem_write32(ctx, fi_addr + 0x20, transferred); // transferredSize
                 mem_write32(ctx, fi_addr + 0x38, callback);
                 mem_write32(ctx, fi_addr + 0x0C, 0); // DVD_STATE_END
+            }
+            if (ok) {
+                dvd_queue_callback(callback, fi_addr); // drained by the runner frame loop
             }
             ctx->gpr[3] = ok ? 1 : 0;
             ctx->pc = ctx->lr;

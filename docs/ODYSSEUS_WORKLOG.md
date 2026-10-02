@@ -171,6 +171,27 @@ When you complete or attempt any work:
   - Intended fix: queue `(callback, fileInfo)` in `replacements.c` and service the queue from the runner's frame loop in `recomp/host_runner.c` (the `for (frame ...) { dolrecomp_run_blocks(...) }` loop, ~line 207): pop one entry, then chain-execute the SDK trampoline `0x805FA5B0` with `r3 = 0` (`DVD_STATE_END`), `r4 = fileInfo`, letting the callback return into the runner. This is the next concrete task for Task 3.
   - If a later load path needs directory/name lookups (`DVDOpen` with split paths) or the sync `DVDReadPrio` (`0x805FA5D0`), those route through the hooked primitives already.
 
+---
+
+### [2026-10-03 02:10] Session 6: Track B — deferred DVD completion callbacks (Task 3, increment 2)
+- **Track**: Track B: PC Runner
+- **Target File(s)**: `recomp/replacements.c`, `recomp/replacements.h`, `recomp/host_runner.c`
+- **Goal**: Invoke the `DVDReadAsyncPrio` completion callbacks that increment 1 skipped, without corrupting the caller's return-value check.
+- **Implementation**:
+  - `recomp/replacements.c`: a small pending queue (32 entries) holds `(callback, fileInfo)` pairs; `DVDReadAsyncPrio` enqueues on a successful transfer instead of calling inline. `tls_dvd_service_callback(CPUState*)` (declared in `recomp/replacements.h`) pops one entry and stages the call faithfully to the retail DVD thread: `r3 = 0` (`DVD_STATE_END`), `r4 = fileInfo`, `lr = 0x805F50B0` (the scheduler idle point the runner already treats as idle), `pc = callback`.
+  - `recomp/host_runner.c`: the frame loop drains up to 8 staged callbacks per frame (50k blocks each) right after the vblank simulation, and reports an exception if a callback faults.
+  - The game's callback here (`0x8046BBE0`) is a 4-instruction leaf — `*(u32*)(fileInfo+0x2C) = 2` — so running it outside the DVD thread is safe.
+- **Verification Output**:
+  - `TLS_DVD_TRACE=1 .\build\recomp\tls_runner.exe --blocks 12000000 --frames 4`:
+    - `[TLS DVD] read #1 pack/filesystem.pkh off=0 len=755296 -> 755268 bytes lr=8046CAD4 cb=8046BBE0`
+    - `[TLS DVD] callback #1 -> 8046BBE0 fileInfo=80C90B44`
+  - No exception, and the loader progress markers (`0`, `0.1`, `0.2`, `1`, `2`) still print.
+- **New blocker found (next investigation for Task 3)**:
+  - After the first transfer the game settles with **no runnable threads**: the end-of-run dump shows `RunQueueBits = 0`, only Thread 0 (`0x807CB658`) left, and no thread waiting on the graphics frame queue (`0x807C6F60 == 0`), so `host_simulate_vblank()` has nothing to wake. The Audio/DVD worker (`0x808638F0`) and Streaming worker (`0x80879210`) that were alive in the pre-asset baseline are gone from the active thread queue.
+  - Because callbacks are drained once per frame slice, a caller that spins waiting for completion only advances one step per slice; for this kind of diagnosis run with a small `--blocks` (e.g. `--blocks 300000`) so slices return quickly — a 400-frame run then completes in ~1 s and shows the identical stall.
+  - Next: instrument the active-thread queue / message queues at the stall (`__OSActiveThreadQueue` `0x800000DC`, and the DVD/streaming worker addresses above) to find what the main thread blocks on — most likely a message from the DVD worker thread that our synchronous transfer model never posts.
+
+
 
 
 
