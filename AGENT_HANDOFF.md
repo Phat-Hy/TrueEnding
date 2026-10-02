@@ -57,49 +57,48 @@ All commands run from root: `G:\Program\Project The Maybe(Not) Last Story`
 ## 3. Current Project State
 
 ### Track A (Decompilation Matching)
-- **100.0% Matched Modules** (8 total, 106 functions, 0 diffs):
-  1. `src/OSAlarm.c` (13 functions)
-  2. `src/OSArena.c` (13 functions)
-  3. `src/OSCache.c` (19 functions)
-  4. `src/OSContext.c` (15 functions)
-  5. `src/OSError.c` (5 functions)
-  6. `src/OSInterrupt.c` (11 functions)
-  7. `src/OSThread.c` (24 functions)
-  8. `src/OSTime.c` (6 functions)
+### Track A (Decompilation Matching)
+- **100.0% Matched Modules** (8 full modules + OSReset in progress):
+  1. `src/OSAlarm.c` (13 functions, 100%)
+  2. `src/OSArena.c` (13 functions, 100%)
+  3. `src/OSCache.c` (19 functions, 100%)
+  4. `src/OSContext.c` (15 functions, 100%)
+  5. `src/OSError.c` (5 functions, 100%)
+  6. `src/OSInterrupt.c` (11 functions, 100%)
+  7. `src/OSThread.c` (24 functions, 100%)
+  8. `src/OSTime.c` (6 functions, 100%)
+  9. `src/OSReset.c` (9 functions 100% matched: `__OSDefaultResetCallback`, `__OSDefaultPowerCallback`, `__OSInitSTM`, `__OSHotReset`, `__OSUnRegisterStateEvent`, `__OSStartPlayRecord`, `__OSStopPlayRecord`, `__OSWriteStateFlags`, `__OSReadStateFlags`).
 
 ### Track B (Native PC Runner Bringup)
 - **Executable**: `build/recomp/tls_runner.exe` (99.53 MB)
 - **Milestone Reached**: Continuous 60 FPS Engine Game Loop!
   - `host_simulate_vblank()` advances graphics frame queue read index at `0x807C6FBA`.
   - `host_wakeup_thread()` awakens `DefaultThread` (`0x807CB658`) out of the scheduler idle loop `while (RunQueueBits == 0)`.
-  - `nw4r::snd` Nintendo Wear 4 Revolution sound engine initialized.
-  - Three active threads managed:
-    * `Thread 0`: Main Game Thread (Prio 16, Active)
-    * `Thread 1`: Audio / DVD Worker (Prio 3, Waiting on queue `0x8087D610`)
-    * `Thread 2`: Streaming Worker (Prio 4, Waiting on queue `0x80879538`)
+  - `nw4r::snd` sound engine initialized; 3 threads running stably.
 
 ---
 
-## 4. Priority Tasks Queue for Nanbeige / Odysseus
+## 4. Priority Tasks Queue for Agent
 
-Work through these tasks in order during the week:
+Work through these tasks in order:
 
-### Task 1 (Track A): Decompile `src/OSReset.c`
-- **Address Range**: `0x805F6AD0` to `0x805F7980` in `.text`.
+### Task 1 (Track A): Complete the 7 remaining functions in `src/OSReset.c`
+- **Target File**: `src/OSReset.c`
 - **Functions to match**:
-  - `__OSDefaultResetCallback`: `0x805F6EC0` (size 0x4) -> `blr`
-  - `__OSDefaultPowerCallback`: `0x805F6ED0` (size 0x4) -> `blr`
-  - `fn_805F6EB0`: `0x805F6EB0` (size 0x10)
-  - `__OSUnRegisterStateEvent`: `0x805F6E30` (size 0x78)
-  - `__OSHotReset`: `0x805F6C70` (size 0x74)
-  - `__OSInitSTM`: `0x805F6AD0` (size 0x118)
-- **Procedure**:
-  1. Add slice to `config/splits.txt` under `OSReset.c:`.
-  2. Disassemble slice with `.\tools\dtk.exe elf disasm build/SLSEXJ/obj/OSReset.o build/SLSEXJ/obj/OSReset.s`.
-  3. Write `src/OSReset.c` and `include/revolution/os/OSReset.h`.
-  4. Compile with `.\tools\w64devkit\bin\ninja.exe build/SLSEXJ/src/OSReset.o`.
-  5. Check diffs with `python tools/diff_helper.py <FuncName> -a`.
-  6. Log results in `docs/ODYSSEUS_WORKLOG.md`.
+  1. `fn_805F6EB0` (4 insts, offset `0x03e0`): Clears `StmVdInUse` and returns 0.
+  2. `fn_805F7040` (3 insts, offset `0x0570`): Calls `PlayRecordCallback(0, 0)`.
+  3. `fn_805F6DF0` (16 insts, offset `0x0320`): Sets `*(u32*)lbl_807CC0A0 = arg0` and calls `fn_8061D080(0x6002)`.
+  4. `fn_805F6BF0` (31 insts, offset `0x0120`): `__OSShutdownSystem` (sends `0x2003` to STM).
+  5. `fn_805F6CF0` (62 insts, offset `0x0220`): Video mode / display event configuration.
+  6. `__OSStateEventHandler` (85 insts, offset `0x0410`): Power/Reset interrupt handler.
+  7. `PlayRecordCallback` (301 insts, offset `0x0580`): NAND play history callback.
+- **Workflow for Each Function**:
+  1. Inspect target assembly: `python tools/diff_helper.py <FuncName> -a`
+  2. Write C code in `src/OSReset.c` (or use matching CodeWarrior inline assembly if needed).
+  3. Compile: `.\tools\w64devkit\bin\ninja.exe build/SLSEXJ/src/OSReset.o`
+  4. Check diff: `python tools/diff_helper.py <FuncName> -a`
+  5. Once diff is 0 instructions, verify report: `.\tools\w64devkit\bin\ninja.exe build/SLSEXJ/report.json`
+  6. Log to `docs/ODYSSEUS_WORKLOG.md` and commit to Git.
 
 ### Task 2 (Track B): Controller Input Mock (WPAD / KPAD)
 - **Target**: `recomp/replacements.c`.
