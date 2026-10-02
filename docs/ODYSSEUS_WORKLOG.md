@@ -72,4 +72,32 @@ When you complete or attempt any work:
   - `python tools/autonomous_decomp_runner.py --queue` passes all 9 targeted functions with 100.0% MATCH (0 diff bytes).
 - **Status**: 9 of 16 functions in `OSReset.c` now 100.0% matched. Remaining functions are internal event handlers / state callbacks (`__OSStateEventHandler`, `PlayRecordCallback`, `fn_805F6BF0`, `fn_805F6CF0`, `fn_805F6DF0`, `fn_805F6EB0`, `fn_805F7040`).
 
+---
+
+### [2026-10-02 20:07] Session 2: OSReset.c Task 1 — StmVdInUse reset + retro-compat shim
+- **Track**: Track A: Decomp
+- **Target File(s)**: `src/OSReset.c`
+- **Goal**: Complete Task 1 of the OSReset queue: match the two smallest remaining functions.
+- **Functions Worked On**:
+  - `fn_805F6EB0` (offset `0x03e0`, 4 insts): 100.0% MATCH (0 diffs)
+  - `fn_805F7040` (offset `0x0570`, 3 insts): 100.0% MATCH (0 diffs)
+- **Key Code Changes / Decisions**:
+  - `fn_805F6EB0` is a plain C function; the `sda21` access to `StmVdInUse` (`0x8087FC84`) reproduces the target's `li r0,0 / stw r0,StmVdInUse@sda21 / li r3,0 / blr` exactly, with no register allocation puzzle.
+  - `fn_805F7040` is a pure tail-call thunk: `PlayRecordCallback(0, 0);` at `-O4,p` emits `li r3,0 / li r4,0 / b PlayRecordCallback`, i.e. MWCC performs the tail-call conversion on its own (no inline asm needed).
+  - Both functions were inserted at their exact target positions in the translation unit so the object layout still matches the retail address map: `fn_805F6EB0` between `__OSUnRegisterStateEvent` (`0x805F6E30`) and `__OSDefaultResetCallback` (`0x805F6EC0`); `fn_805F7040` immediately before `__OSStartPlayRecord`. Target order at the tail of the unit is `... __OSStateEventHandler (0x805F6EE0), fn_805F7040 (0x805F7040), PlayRecordCallback (0x805F7050), __OSStartPlayRecord (0x805F7510)`.
+  - Object offset check after the edit: unit base is `0x805F6AD0`, built function addresses are `__OSInitSTM 0`, `__OSHotReset 416 (0x1A0)`, `__OSUnRegisterStateEvent 864 (0x360)`, `fn_805F6EB0 992 (0x3E0)`, `fn_805F7040 1392 (0x570)` — all identical to the retail offsets.
+- **Verification Output**:
+  - `python tools/diff_helper.py fn_805F6EB0 -a` -> `Total actual diff instructions: 0/4 (1 relocations match 100.0%)`
+  - `python tools/diff_helper.py fn_805F7040 -a` -> `Total actual diff instructions: 0/3 (1 relocations match 100.0%)`
+  - `build/SLSEXJ/report.json` regenerated; `fn_805F6EB0` and `fn_805F7040` both report `fuzzy_match_percent: 100.0`.
+  - Re-checked the two previously matched static callbacks after the re-order: `__OSDefaultResetCallback` and `__OSDefaultPowerCallback` still show `0/1` diffs (`blr`).
+- **Environment Note (resolved)**:
+  - The session initially started in `workspace-write`, but the sandbox grant (`S-1-4-*` write ACE) only existed on the workspace **root**; every subdirectory (`build\`, `src\`, `tools\`, `.git\`) was read-only to shell commands, so `ninja` could neither write `build\SLSEXJ\src\OSReset.o` nor complete (it stalled), and `objdiff-cli` could not overwrite the stale `temp_diff.json`. Recreating an existing file was denied because the root carries an inherited `Everyone = Deny DeleteSubdirectoriesAndFiles` ACE, and stale files never received the sandbox write ACE.
+  - Fixed by switching the session to full access; compiles, report generation and diffs now run normally.
+- **Report Instrumentation Finding (open, low priority)**:
+  - `objdiff report generate` cannot name-pair *local* symbols, because the split target objects label statics with an address suffix (`__OSDefaultResetCallback_805F6EC0`, `__OSStateEventHandler_805F6EE0`, `PlayRecordCallback_805F7050`, ...). Those entries therefore carry no `fuzzy_match_percent` even at a byte-exact match. This is project-wide (17,702 of 17,720 suffixed target symbols are unpaired) and is **not** a code defect: `objdiff-cli diff` (via `tools/diff_helper.py`) pairs them correctly and reports 0 diffs. Module completion should be judged with `diff_helper.py` until the report's symbol naming is aligned.
+- **Blockers / Open Questions for Antigravity**:
+  - Next up: `fn_805F6DF0` (`0x0320`, 16 insts) and `fn_805F6BF0` (`0x0120`, 31 insts).
+  - Decide whether to add a symbol-name normalization step so `report.json` reflects local-symbol matches.
+
 

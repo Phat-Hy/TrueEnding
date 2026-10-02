@@ -187,10 +187,19 @@ s32 __OSUnRegisterStateEvent(void) {
     return ret;
 }
 
+s32 fn_805F6EB0(void) {
+    StmVdInUse = 0;
+    return 0;
+}
+
 static void __OSDefaultResetCallback(void) {
 }
 
 static void __OSDefaultPowerCallback(void) {
+}
+
+void fn_805F7040(void) {
+    PlayRecordCallback(0, 0);
 }
 
 void __OSStartPlayRecord(void) {
