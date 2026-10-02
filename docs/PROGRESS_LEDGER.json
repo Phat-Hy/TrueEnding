@@ -118,6 +118,22 @@
         "sampling_pump": "fn_806572D0 is invoked once per channel (0-3) per vblank from the low-level driver at 0x800DDE18, so the pad transport itself is alive in the runner.",
         "blocker": "Across 300 simulated vblank frames the game never calls the KPAD/WPAD read API, so injected input currently has no observable endpoint. The game is still in boot/intro and needs disc asset streaming (Task 3) before an interactive screen is reached.",
         "next_step": "Re-identify WPADRead/KPADRead after Task 3 lets the game reach an input-polling screen; instrument dolrecomp_dispatch_replacement with a temporary region probe to confirm the exact entry point."
+      },
+      "dvd_asset_streaming_2026_10_03": {
+        "status": "first increment working - host asset serving via synthetic DVD entry numbers",
+        "root_cause": "The retail disc FST is absent in the runner (FstStart_8087FCE8 = 0, MaxEntryNum_8087FCE0 = 0, boot header FST fields at 0x80000038/0x8000003C = 0), so __DVDConvertPathToEntrynum could never resolve a path and no asset could be opened.",
+        "hooked_functions": {
+          "__DVDConvertPathToEntrynum": "0x805F9EF0 -> synthetic host file id (or -1)",
+          "DVDFastOpen": "0x805FA200 -> writes size at DVDFileInfo+0x34, id at +0x30, state +0x0C = DVD_STATE_END",
+          "DVDOpen": "0x805FA270 (routed through the two hooks above)",
+          "DVDClose": "0x805FA390 (plus the existing 0x80605140 stub)",
+          "DVDReadAsyncPrio": "0x805FA4E0 -> fread straight into guest memory, transferredSize at +0x20",
+          "DVDReadAbsAsyncPrio": "0x805FE860 (internal, untouched)",
+          "completion_trampoline": "0x805FA5B0 (bctr through DVDFileInfo+0x38)"
+        },
+        "asset_root": "orig/DATA/files (override with TLS_ASSET_ROOT); tracing via TLS_DVD_TRACE=1",
+        "evidence": "Boots past arena/OS init into DVD/VI/GX and prints the game's own loader progress 0 / 0.1 / 0.2 / 1 / 2; serves pack/filesystem.pkh (755296 requested -> 755268 bytes) from the host.",
+        "open_item": "DVDReadAsyncPrio completion callbacks (r7 / DVDFileInfo+0x38, e.g. 0x8046BBE0 from call site 0x8046CAD0) are not invoked yet. The caller tests r3 immediately after the call, so completion must be deferred: queue (callback, fileInfo) and service it from the runner frame loop in recomp/host_runner.c through the 0x805FA5B0 trampoline (r3 = 0, r4 = fileInfo)."
       }
     }
   },

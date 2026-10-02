@@ -175,6 +175,113 @@ static void format_and_print_osreport(CPUState* ctx, const char* fmt) {
     fflush(stdout);
 }
 
+/* ------------------------------------------------------------------
+ * Host-backed DVD asset serving (Task 3)
+ *
+ * The retail disc's FST is absent in the static-recomp runner
+ * (FstStart_8087FCE8 == 0), so the SDK's __DVDConvertPathToEntrynum /
+ * DVDFastOpen cannot resolve anything and no asset can be loaded.
+ *
+ * We bypass the FST entirely:
+ *   __DVDConvertPathToEntrynum(path)  -> synthetic id for a host file
+ *   DVDFastOpen(entrynum, fileInfo)   -> expose size + id in DVDFileInfo
+ *   DVDReadAsyncPrio(...)             -> copy bytes straight from the host
+ *
+ * Guest memory is big-endian, so all DVDFileInfo fields go through
+ * mem_read32 / mem_write32.
+ * ------------------------------------------------------------------ */
+#define TLS_MAX_HOST_FILES 4096
+#define TLS_PATH_MAX 256
+
+typedef struct HostAsset {
+    char path[TLS_PATH_MAX];
+    u32 size;
+} HostAsset;
+
+static HostAsset s_host_assets[TLS_MAX_HOST_FILES];
+static u32 s_host_asset_count = 0;
+static const char* s_asset_root = NULL;
+static u32 s_dvd_read_ok = 0;
+static u32 s_dvd_read_fail = 0;
+
+static const char* asset_root(void) {
+    if (!s_asset_root) {
+        const char* env = getenv("TLS_ASSET_ROOT");
+        s_asset_root = (env && env[0]) ? env : "orig/DATA/files";
+    }
+    return s_asset_root;
+}
+
+static void asset_full_path(const char* rel, char* out, size_t out_size) {
+    snprintf(out, out_size, "%s/%s", asset_root(), rel);
+}
+
+/* Map a guest disc path to a synthetic entry number (0 = not found). */
+static u32 host_asset_lookup(const char* guest_path) {
+    if (!guest_path) {
+        return 0;
+    }
+    const char* p = guest_path;
+    while (*p == '/' || *p == '\\') {
+        p++;
+    }
+    char rel[TLS_PATH_MAX];
+    size_t i = 0;
+    for (; p[i] && i < sizeof(rel) - 1; i++) {
+        rel[i] = (p[i] == '\\') ? '/' : p[i];
+    }
+    rel[i] = '\0';
+    if (i == 0) {
+        return 0;
+    }
+
+    for (u32 k = 0; k < s_host_asset_count; k++) {
+        if (strcmp(s_host_assets[k].path, rel) == 0) {
+            return k + 1; /* cached */
+        }
+    }
+    if (s_host_asset_count >= TLS_MAX_HOST_FILES) {
+        return 0;
+    }
+
+    char full[512];
+    asset_full_path(rel, full, sizeof(full));
+    FILE* f = fopen(full, "rb");
+    if (!f) {
+        return 0;
+    }
+    if (fseek(f, 0, SEEK_END) != 0) {
+        fclose(f);
+        return 0;
+    }
+    long size = ftell(f);
+    fclose(f);
+    if (size < 0) {
+        return 0;
+    }
+
+    strncpy(s_host_assets[s_host_asset_count].path, rel, TLS_PATH_MAX - 1);
+    s_host_assets[s_host_asset_count].path[TLS_PATH_MAX - 1] = '\0';
+    s_host_assets[s_host_asset_count].size = (u32)size;
+    s_host_asset_count++;
+    return s_host_asset_count;
+}
+
+static const HostAsset* host_asset_by_id(u32 id) {
+    if (id == 0 || id > s_host_asset_count) {
+        return NULL;
+    }
+    return &s_host_assets[id - 1];
+}
+
+/* Fill a DVDFileInfo: +0x0C state, +0x30 startAddr, +0x34 length, +0x38 callback */
+static void dvd_fill_file_info(CPUState* ctx, u32 fi_addr, u32 id, const HostAsset* asset) {
+    mem_write32(ctx, fi_addr + 0x0C, 0);          /* DVD_STATE_END */
+    mem_write32(ctx, fi_addr + 0x30, id);         /* synthetic host file id */
+    mem_write32(ctx, fi_addr + 0x34, asset->size);
+    mem_write32(ctx, fi_addr + 0x38, 0);          /* no pending callback */
+}
+
 int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
     switch (address) {
         // OSReport: printf diagnostic messages to host console
@@ -312,6 +419,104 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         }
         case 0x80605140: { // DVDClose
             ctx->gpr[3] = 1; // Success
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // __DVDConvertPathToEntrynum(const char* path) -> synthetic host file id
+        case 0x805F9EF0: {
+            const char* path = (const char*)resolve_guest_pointer(ctx, ctx->gpr[3]);
+            u32 id = host_asset_lookup(path);
+            if (getenv("TLS_DVD_TRACE") && !id) {
+                printf("[TLS DVD] convert MISS: \"%s\"\n", path ? path : "(bad ptr)");
+                fflush(stdout);
+            }
+            ctx->gpr[3] = id ? id : 0xFFFFFFFFu; // -1 when absent, like the SDK
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // DVDFastOpen(s32 entrynum, DVDFileInfo* fileInfo)
+        case 0x805FA200: {
+            u32 entry = ctx->gpr[3];
+            u32 fi_addr = ctx->gpr[4];
+            u8* fi = (u8*)resolve_guest_pointer(ctx, fi_addr);
+            const HostAsset* asset = host_asset_by_id(entry);
+            if (!fi || !asset) {
+                ctx->gpr[3] = 0;
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            dvd_fill_file_info(ctx, fi_addr, entry, asset);
+            ctx->gpr[3] = 1;
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // DVDReadAsyncPrio(fileInfo, addr, length, offset, callback, prio)
+        // Served synchronously from the host file; the command block is left in
+        // DVD_STATE_END so polling callers see the transfer as complete.
+        //
+        // KNOWN LIMITATION: the game's completion callback (passed in r7, also
+        // stored at fileInfo+0x38) is *not* invoked yet. Retail runs it later
+        // from the DVD thread, i.e. after the caller has resumed, and the caller
+        // tests r3 immediately after the call (e.g. 0x8046CAD4 branches on the
+        // return value), so invoking it inline would break that check. Servicing
+        // queued callbacks from the runner's frame loop is the intended fix.
+        case 0x805FA4E0: {
+            u32 fi_addr = ctx->gpr[3];
+            u32 dst_addr = ctx->gpr[4];
+            s32 length = (s32)ctx->gpr[5];
+            s32 offset = (s32)ctx->gpr[6];
+            u32 callback = ctx->gpr[7];
+            u8* fi = (u8*)resolve_guest_pointer(ctx, fi_addr);
+            void* dst = resolve_guest_pointer(ctx, dst_addr);
+            u32 id = fi ? mem_read32(ctx, fi_addr + 0x30) : 0;
+            const HostAsset* asset = host_asset_by_id(id);
+            int ok = 0;
+            u32 transferred = 0;
+
+            if (fi && dst && asset && length > 0 && offset >= 0) {
+                char full[512];
+                asset_full_path(asset->path, full, sizeof(full));
+                FILE* f = fopen(full, "rb");
+                if (f) {
+                    if (fseek(f, offset, SEEK_SET) == 0) {
+                        transferred = (u32)fread(dst, 1, (size_t)length, f);
+                        ok = 1; // a short read simply means the transfer hit EOF
+                    }
+                    fclose(f);
+                }
+            }
+            if (ok) {
+                s_dvd_read_ok++;
+                if (getenv("TLS_DVD_TRACE") && s_dvd_read_ok <= 12) {
+                    printf("[TLS DVD] read #%u %s off=%d len=%d -> %u bytes lr=%08X cb=%08X\n", s_dvd_read_ok,
+                           asset ? asset->path : "?", offset, length, transferred, ctx->lr, callback);
+                    fflush(stdout);
+                }
+            } else {
+                s_dvd_read_fail++;
+            }
+            if (!ok && getenv("TLS_DVD_TRACE")) {
+                printf("[TLS DVD] read FAIL id=%u off=%d len=%d fi=%08X dst=%08X\n",
+                       id, offset, length, fi_addr, dst_addr);
+                fflush(stdout);
+            }
+            if (fi) {
+                mem_write32(ctx, fi_addr + 0x1C, transferred); // currTransferSize
+                mem_write32(ctx, fi_addr + 0x20, transferred); // transferredSize
+                mem_write32(ctx, fi_addr + 0x38, callback);
+                mem_write32(ctx, fi_addr + 0x0C, 0); // DVD_STATE_END
+            }
+            ctx->gpr[3] = ok ? 1 : 0;
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // DVDClose(DVDFileInfo*) - SDK implementation, no host state to drop
+        case 0x805FA390: {
+            ctx->gpr[3] = 1;
             ctx->pc = ctx->lr;
             return 1;
         }

@@ -143,5 +143,34 @@ When you complete or attempt any work:
   - When resuming Task 2: re-run the region probe (temporary block in `dolrecomp_dispatch_replacement`, region `0x80657000-0x80670000`, logging `ctx->lr` plus GPR3-GPR6) once the game polls input, then hook the exact `WPADRead`/`KPADRead` entry point, fill the caller-visible status struct, and feed it from Win32 `GetAsyncKeyState`.
   - The runner executes 300 frames cleanly with no exception, so Task 3 (DVD/VFS serving of `wt/` archives and `.thp` movies) is the live blocker for further progress.
 
+---
+
+### [2026-10-03 01:20] Session 5: Track B — Task 3 DVD asset streaming (first increment, WORKING)
+- **Track**: Track B: PC Runner
+- **Target File(s)**: `recomp/replacements.c`
+- **Goal**: Serve the game's disc assets from the host filesystem so it can leave its boot stall.
+- **Root cause found**: the retail disc FST is **absent** in the static-recomp runner — a runtime probe reported `FstStart_8087FCE8 = 0`, `MaxEntryNum_8087FCE0 = 0`, `__DVDLayoutFormat = 0` and boot-header FST fields `[0x80000038] = [0x8000003C] = 0`. Every `__DVDConvertPathToEntrynum` therefore failed and no asset could ever be opened. That — not the pad stack — is why the game sat in boot.
+- **SDK DVD functions identified in the binary** (all previously unnamed `fn_805Fxxxx`):
+  - `__DVDConvertPathToEntrynum` = `0x805F9EF0` (path walker over `FstStart_8087FCE8`; 219 asset paths resolved at boot)
+  - `DVDFastOpen` = `0x805FA200` — validates `entrynum < MaxEntryNum`, then writes `DVDFileInfo`: `+0x0C` state, `+0x30` startAddr, `+0x34` length, `+0x38` callback
+  - `DVDOpen` = `0x805FA270`, `DVDClose` = `0x805FA390`
+  - `DVDReadAsyncPrio` = `0x805FA4E0` (6 args `fileInfo, addr, length, offset, callback, prio`; OSPanics at lines `0x34d`/`0x353`; forwards to `DVDReadAbsAsyncPrio` = `0x805FE860` with completion trampoline `0x805FA5B0`, which `bctr`s through `fileInfo+0x38`)
+  - existing stubs kept: `DVDSync` `0x80603FF0`, `DVDClose` `0x80605140`
+- **Implementation** (`recomp/replacements.c`):
+  - Host asset table (4096 entries) rooted at `orig/DATA/files`, overridable with `TLS_ASSET_ROOT`; `host_asset_lookup()` normalises the guest path (`\`->`/`, leading slashes stripped), caches misses, and records the host file size.
+  - `__DVDConvertPathToEntrynum` returns a synthetic id (or `-1`) for a host file; `DVDFastOpen` publishes `size` in `+0x34` and the id in `+0x30`; `DVDReadAsyncPrio` `fread`s straight into the guest buffer (guest memory written through `mem_write32`, so endianness is handled), sets `currTransferSize`/`transferredSize` (`+0x1C`/`+0x20`) and leaves the command block in `DVD_STATE_END` (`+0x0C = 0`); `DVDClose` returns TRUE.
+  - Diagnostic tracing is gated behind `TLS_DVD_TRACE=1`.
+- **Verification Output**:
+  - `python tools/recomp_harness.py build-runner` -> `SUCCESS! ... tls_runner.exe (99.53 MB)`
+  - `TLS_DVD_TRACE=1 .\build\recomp\tls_runner.exe --blocks 40000000 --frames 3`:
+    - `[TLS DVD] read #1 pack/filesystem.pkh off=0 len=755296 -> 755268 bytes lr=8046CAD4 cb=8046BBE0`
+    - the game now boots past arena/OS init into DVD/VI/GX and prints its own loading progress: `0`, `0.1`, `0.2`, `1`, `2` (previously it never got beyond `MEM1/MEM2 Arena`).
+  - Note: with asset streaming live the game spends its budget inside its own loader, so `--frames N` runs need a much larger `--blocks` (200 vblank frames did not complete inside 2e9 blocks / ~19 min).
+- **KNOWLEDGE / Next Step (async completion)**:
+  - `DVDReadAsyncPrio` completion callbacks are **not invoked yet**. The observed call site (`0x8046CAD0` in the game's FS module, callback `0x8046BBE0`) tests the return value immediately at `0x8046CAD4` (`cmpwi r3,0` → `bc 4,2` to the success path), so invoking the callback inline would corrupt that check — retail runs it later from the DVD thread.
+  - Intended fix: queue `(callback, fileInfo)` in `replacements.c` and service the queue from the runner's frame loop in `recomp/host_runner.c` (the `for (frame ...) { dolrecomp_run_blocks(...) }` loop, ~line 207): pop one entry, then chain-execute the SDK trampoline `0x805FA5B0` with `r3 = 0` (`DVD_STATE_END`), `r4 = fileInfo`, letting the callback return into the runner. This is the next concrete task for Task 3.
+  - If a later load path needs directory/name lookups (`DVDOpen` with split paths) or the sync `DVDReadPrio` (`0x805FA5D0`), those route through the hooked primitives already.
+
+
 
 
