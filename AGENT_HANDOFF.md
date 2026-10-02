@@ -57,8 +57,7 @@ All commands run from root: `G:\Program\Project The Maybe(Not) Last Story`
 ## 3. Current Project State
 
 ### Track A (Decompilation Matching)
-### Track A (Decompilation Matching)
-- **100.0% Matched Modules** (8 full modules + OSReset in progress):
+- **100.0% Matched Modules** (9 full modules):
   1. `src/OSAlarm.c` (13 functions, 100%)
   2. `src/OSArena.c` (13 functions, 100%)
   3. `src/OSCache.c` (19 functions, 100%)
@@ -67,7 +66,9 @@ All commands run from root: `G:\Program\Project The Maybe(Not) Last Story`
   6. `src/OSInterrupt.c` (11 functions, 100%)
   7. `src/OSThread.c` (24 functions, 100%)
   8. `src/OSTime.c` (6 functions, 100%)
-  9. `src/OSReset.c` (9 functions 100% matched: `__OSDefaultResetCallback`, `__OSDefaultPowerCallback`, `__OSInitSTM`, `__OSHotReset`, `__OSUnRegisterStateEvent`, `__OSStartPlayRecord`, `__OSStopPlayRecord`, `__OSWriteStateFlags`, `__OSReadStateFlags`).
+  9. `src/OSReset.c` (**16/16 functions byte-identical**, 100%): `__OSInitSTM`, `fn_805F6BF0`, `__OSHotReset`, `fn_805F6CF0`, `fn_805F6DF0`, `__OSUnRegisterStateEvent`, `fn_805F6EB0`, `__OSDefaultResetCallback`, `__OSDefaultPowerCallback`, `__OSStateEventHandler`, `fn_805F7040`, `PlayRecordCallback`, `__OSStartPlayRecord`, `__OSStopPlayRecord`, `__OSWriteStateFlags`, `__OSReadStateFlags`.
+     - Verify with `python build/verify_osreset.py` -> `16/16 functions byte-identical`.
+     - Note: `report.json` shows 4 *local* symbols of this unit as `unmatched` because `objdiff report` cannot name-pair statics that the retail split labels with an address suffix (e.g. `PlayRecordCallback_805F7050`). This is a project-wide report artifact, not a code defect.
 
 ### Track B (Native PC Runner Bringup)
 - **Executable**: `build/recomp/tls_runner.exe` (99.53 MB)
@@ -82,9 +83,9 @@ All commands run from root: `G:\Program\Project The Maybe(Not) Last Story`
 
 Work through these tasks in order:
 
-### Task 1 (Track A): Complete the 7 remaining functions in `src/OSReset.c`
-- **Target File**: `src/OSReset.c`
-- **Functions to match**:
+### Task 1 (Track A): Complete the 7 remaining functions in `src/OSReset.c` — **DONE (2026-10-02)**
+- **Status**: All 7 functions matched; the module is 16/16 byte-identical (see Session 3 in `docs/ODYSSEUS_WORKLOG.md`).
+- **Functions matched**:
   1. `fn_805F6EB0` (4 insts, offset `0x03e0`): Clears `StmVdInUse` and returns 0.
   2. `fn_805F7040` (3 insts, offset `0x0570`): Calls `PlayRecordCallback(0, 0)`.
   3. `fn_805F6DF0` (16 insts, offset `0x0320`): Sets `*(u32*)lbl_807CC0A0 = arg0` and calls `fn_8061D080(0x6002)`.
