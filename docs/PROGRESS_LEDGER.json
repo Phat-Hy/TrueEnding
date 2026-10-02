@@ -123,7 +123,7 @@
   },
   "git_state": {
     "branch": "main",
-    "latest_commit": "097f8bb",
+    "latest_commit": "65fa20a",
     "tags": [
       "decomp-os-cache",
       "decomp-os-error",
