@@ -47,6 +47,7 @@ extern const char lbl_807A9914[];
 extern const char lbl_807A9928[];
 extern const char lbl_807A9934[];
 extern const char lbl_807A996C[];
+extern const char lbl_807A99A4[];
 extern u8 lbl_807CC0A0[];
 extern u8 lbl_807CC0C0[];
 extern u8 lbl_807CC0E0[];
@@ -56,6 +57,8 @@ extern void __OSStateEventHandler(s32, void*);
 extern s32 fn_805F6EB0(void);
 extern s32 IOS_Open(const char* path, u32 mode);
 extern s32 IOS_IoctlAsync(s32 fd, s32 cmd, void* in_buf, u32 in_len, void* out_buf, u32 out_len, void* cb, void* cb_arg);
+
+extern void fn_806056A0(void);
 
 static void __OSDefaultResetCallback(void);
 static void __OSDefaultPowerCallback(void);
@@ -291,6 +294,103 @@ static void __OSDefaultResetCallback(void) {
 }
 
 static void __OSDefaultPowerCallback(void) {
+}
+
+asm void __OSStateEventHandler(s32 result, void* arg) {
+    nofralloc
+    stwu r1, -0x10(r1)
+    mflr r0
+    cmpwi r3, 0x0
+    stw r0, 0x14(r1)
+    stw r31, 0xc(r1)
+    beq lbl_0444
+    lis r3, lbl_807A9928@ha
+    lis r5, lbl_807A99A4@ha
+    addi r3, r3, lbl_807A9928@l
+    li r4, 0x334
+    addi r5, r5, lbl_807A99A4@l
+    crclr 6
+    bl OSPanic
+lbl_0444:
+    lis r3, StmEhOutBuf@ha
+    li r0, 0x0
+    lwz r3, StmEhOutBuf@l(r3)
+    stw r0, StmEhRegistered
+    subis r0, r3, 0x2
+    cmplwi r0, 0x0
+    bne lbl_0514
+    lis r3, 0xcc00
+    lwz r0, 0x3000(r3)
+    rlwinm. r0, r0, 0, 15, 15
+    bne lbl_0478
+    li r0, 0x1
+    b lbl_047c
+lbl_0478:
+    li r0, 0x0
+lbl_047c:
+    cmpwi r0, 0x0
+    beq lbl_04b8
+    bl OSDisableInterrupts
+    lwz r12, ResetCallback
+    lis r4, __OSDefaultResetCallback@ha
+    addi r4, r4, __OSDefaultResetCallback@l
+    li r0, 0x1
+    mr r31, r3
+    stw r0, ResetDown
+    stw r4, ResetCallback
+    mtctr r12
+    bctrl
+    mr r3, r31
+    bl OSRestoreInterrupts
+    bl fn_806056A0
+lbl_04b8:
+    bl OSDisableInterrupts
+    mr r31, r3
+    lis r5, StmEhInBuf@ha
+    lis r7, StmEhOutBuf@ha
+    lis r9, __OSStateEventHandler@ha
+    lwz r3, StmEhDesc
+    addi r5, r5, StmEhInBuf@l
+    addi r7, r7, StmEhOutBuf@l
+    addi r9, r9, __OSStateEventHandler@l
+    li r4, 0x1000
+    li r6, 0x20
+    li r8, 0x20
+    li r10, 0x0
+    bl IOS_IoctlAsync
+    cmpwi r3, 0x0
+    bne lbl_0504
+    li r0, 0x1
+    stw r0, StmEhRegistered
+    b lbl_050c
+lbl_0504:
+    li r0, 0x0
+    stw r0, StmEhRegistered
+lbl_050c:
+    mr r3, r31
+    bl OSRestoreInterrupts
+lbl_0514:
+    lis r3, StmEhOutBuf@ha
+    lwz r0, StmEhOutBuf@l(r3)
+    cmplwi r0, 0x800
+    bne lbl_054c
+    bl OSDisableInterrupts
+    lwz r12, PowerCallback
+    lis r4, __OSDefaultPowerCallback@ha
+    addi r4, r4, __OSDefaultPowerCallback@l
+    mr r31, r3
+    stw r4, PowerCallback
+    mtctr r12
+    bctrl
+    mr r3, r31
+    bl OSRestoreInterrupts
+lbl_054c:
+    lwz r31, 0xc(r1)
+    li r3, 0x0
+    lwz r0, 0x14(r1)
+    mtlr r0
+    addi r1, r1, 0x10
+    blr
 }
 
 void fn_805F7040(void) {
