@@ -17,6 +17,22 @@ typedef struct NANDFileInfo {
     u8 _dummy[0x8c];
 } NANDFileInfo;
 
+typedef struct PlayRecordData {
+    u32 checksum;      /* 0x000 */
+    u32 data[0x1F];    /* 0x004 */
+    OSAlarm alarm;     /* 0x080 */
+    NANDFileInfo file; /* 0x0B0 */
+    u8 block[0xC4];    /* 0x13C */
+} PlayRecordData;
+
+extern OSTime lbl_8087FCB0;
+extern const char lbl_807A99C8[];
+extern s32 fn_8061F9F0(const char* path, NANDFileInfo* info, u32 arg, void* callback, void* block);
+extern s32 fn_8061E7D0(NANDFileInfo* info, void* buf, u32 length, void* callback, void* block);
+extern s32 fn_8061E9E0(NANDFileInfo* info, u32 arg0, u32 arg1, void* callback, void* block);
+extern s32 fn_8061E8C0(NANDFileInfo* info, void* buf, u32 length, void* callback, void* block);
+extern s32 fn_8061FBE0(NANDFileInfo* info, void* callback, void* block);
+
 extern const char lbl_807A9A10[];
 extern u32 lbl_807CC320[8];
 
@@ -395,6 +411,148 @@ lbl_054c:
 
 void fn_805F7040(void) {
     PlayRecordCallback(0, 0);
+}
+
+void PlayRecordCallback(s32 error, void* arg) {
+    PlayRecordData* p = (PlayRecordData*)lbl_807CC120;
+    s32 ret = 0;
+    u32 i;
+
+    PlayRecordLastError = error;
+    if (PlayRecordTerminate) {
+        PlayRecordTerminated = TRUE;
+        return;
+    }
+    if (!PlayRecordRetry) {
+        switch (PlayRecordState) {
+        case 0:
+            PlayRecordState = 1;
+            break;
+        case 1:
+            if (error == -10) {
+                PlayRecordRetry = TRUE;
+                OSCreateAlarm(&p->alarm);
+                OSSetAlarm(&p->alarm, OSSecondsToTicks(1), (OSAlarmHandler)fn_805F7040);
+                return;
+            }
+            if (error != 0) {
+                PlayRecordError = 1;
+                PlayRecordState = 7;
+                return;
+            }
+            if (PlayRecordGet) {
+                PlayRecordState = 4;
+            } else {
+                PlayRecordState = 2;
+            }
+            break;
+        case 2:
+            if (error == 0x80) {
+                PlayRecordGet = TRUE;
+                lbl_8087FCB0 = *(OSTime*)(p->data + 0x17);
+                PlayRecordState = 3;
+            } else {
+                PlayRecordError = 1;
+                PlayRecordState = 6;
+            }
+            break;
+        case 3:
+            if (error == 0) {
+                PlayRecordState = 4;
+            } else {
+                PlayRecordError = 1;
+                PlayRecordState = 6;
+            }
+            break;
+        case 4:
+            PlayRecordState = 5;
+            break;
+        case 5:
+            if (error == 0x80) {
+                if (OSGetTime() - lbl_8087FCB0 > OSSecondsToTicks(300)) {
+                    PlayRecordState = 6;
+                } else {
+                    PlayRecordState = 3;
+                }
+            } else {
+                PlayRecordError = 1;
+                PlayRecordState = 6;
+            }
+            break;
+        case 6:
+            if (PlayRecordError) {
+                PlayRecordState = 7;
+                return;
+            }
+            if (error == 0) {
+                lbl_8087FCB0 = *(OSTime*)(p->data + 0x17);
+                PlayRecordState = 1;
+            } else {
+                PlayRecordState = 7;
+                PlayRecordError = 1;
+                return;
+            }
+            break;
+        }
+        PlayRecordError = 1;
+        PlayRecordState = 7;
+        return;
+    }
+
+    PlayRecordRetry = FALSE;
+    switch (PlayRecordState) {
+    case 1:
+        ret = fn_8061F9F0(lbl_807A99C8, &p->file, 3, (void*)PlayRecordCallback, p->block);
+        break;
+    case 2:
+        ret = fn_8061E7D0(&p->file, p, 0x80, (void*)PlayRecordCallback, p->block);
+        break;
+    case 3:
+        ret = fn_8061E9E0(&p->file, 0, 0, (void*)PlayRecordCallback, p->block);
+        break;
+    case 4:
+        OSCreateAlarm(&p->alarm);
+        OSSetAlarm(&p->alarm, OSSecondsToTicks(60), (OSAlarmHandler)fn_805F7040);
+        break;
+    case 5:
+        *(OSTime*)(p->data + 0x17) = OSGetTime();
+        p->checksum = 0;
+        for (i = 0; i < 0x1F; i++) {
+            p->checksum += p->data[i];
+        }
+        ret = fn_8061E8C0(&p->file, p, 0x80, (void*)PlayRecordCallback, p->block);
+        break;
+    case 6:
+        ret = fn_8061FBE0(&p->file, (void*)PlayRecordCallback, p->block);
+        break;
+    }
+
+    if (ret != 0) {
+        if (ret == -3) {
+            OSCreateAlarm(&p->alarm);
+            OSSetAlarm(&p->alarm, OSSecondsToTicks(1), (OSAlarmHandler)fn_805F7040);
+            PlayRecordRetry = TRUE;
+        } else {
+            PlayRecordError = 1;
+            switch (PlayRecordState) {
+            case 2:
+            case 3:
+            case 5:
+                PlayRecordState = 6;
+                ret = fn_8061FBE0(&p->file, (void*)PlayRecordCallback, p->block);
+                if (ret == -3) {
+                    PlayRecordRetry = TRUE;
+                    OSCreateAlarm(&p->alarm);
+                    OSSetAlarm(&p->alarm, OSSecondsToTicks(1), (OSAlarmHandler)fn_805F7040);
+                }
+                break;
+            default:
+                PlayRecordState = 7;
+                break;
+            }
+        }
+    }
+    PlayRecordLastError = ret;
 }
 
 void __OSStartPlayRecord(void) {
