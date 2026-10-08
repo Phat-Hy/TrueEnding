@@ -23,6 +23,11 @@ Directed by **Hironobu Sakaguchi** (creator of *Final Fantasy*) with music by **
 1. **Track A — Byte-Matching Decompilation**: Reconstructing the original C/C++ source code to achieve a **100.00% byte-for-byte binary match** against the retail Wii binary (`SLSEXJ`) using the official Metrowerks CodeWarrior 4.3 compiler (`Wii/1.0`).
 2. **Track B — Native PC Port (Static Recompilation)**: Translating the game's PowerPC bytecode into native C/C++ running directly on modern x86-64 / ARM64 hardware with custom hardware runtime hooks, uncapped frame rates (60+ FPS), high-definition rendering, and modern controller/mouse-keyboard support—**without emulation overhead**.
 
+### Decompilation Methodology: Two-Tier Matching Architecture
+To optimize execution velocity and preserve token budgets, Track A follows a targeted two-tier strategy:
+- **Method B (Batch Assembly-C Pipeline)**: Applied to hardware SDK boilerplate & low-level drivers (Graphics `GX`, Audio `AX`/`AXFX`/`DSP`, Storage `ISFS`/`NAND`, Inter-Process `IPC`). Rapidly locks down complete peripheral subsystems with 100.00% byte matches and zero regressions.
+- **Method A (Deep C Algorithmic Matching)**: Applied to core game logic (Sakaguchi/Feelplus gameplay scripts, battle calculation engines, AI state machines, character physics) where semantic understanding is required to implement high-performance native PC hooks (Track B).
+
 ---
 
 ## Current Progress Tracker

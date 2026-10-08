@@ -34,6 +34,9 @@ PROJECT OPERATIONAL RULES:
 5. STEP-BY-STEP WORKFLOW:
    - Tackle ONE function or feature at a time.
    - Document any register mismatch, loop unrolling difference, or MMIO finding in `docs/ODYSSEUS_WORKLOG.md`.
+6. STRATEGIC DUAL-METHOD MATCHING MANDATE:
+   - Method B (Batch Assembly-C Pipeline): Use for Hardware SDK boilerplate & low-level drivers (GX, AX/AXFX/DSP, ISFS, IPC, NAND, PAD, SC). Rapidly lock down complete subsystems to push overall project milestones with minimal token consumption.
+   - Method A (Deep C Algorithmic Matching): Use for Core Game Logic (Sakaguchi/Feelplus gameplay scripts, battle calculation engines, AI state machines, character physics) where full semantic understanding is required to create native PC replacement hooks (Track B).
 ```
 
 ---

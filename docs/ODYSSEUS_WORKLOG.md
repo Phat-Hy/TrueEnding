@@ -27,6 +27,29 @@ When you complete or attempt any work:
 
 ---
 
+## Strategic Execution Protocol: Dual-Method Matching Plan
+
+To maximize progress velocity while preserving frontier token efficiency, all future decompilation execution strictly follows this two-tier methodology:
+
+### Tier 1: Method B — Batch Assembly-C Pipeline (High-Throughput Subsystem Locking)
+- **Primary Scope**:
+  - **Hardware SDK boilerplate & low-level drivers**: Graphics (`GX`), Audio (`AX`, `AXFX`, `DSP`), Storage/Filesystems (`ISFS`, `NAND`), Inter-Process Communication (`IPC`), Controllers (`PAD`), System Configuration (`SC`), and hardware bootstrap vectors.
+  - **Milestone Acceleration**: Rapidly locking down entire subsystems to push overall game progress past major percentage milestones (e.g. 2.5%, 5.0%, 10.0%, 20.0%) with minimal token burn.
+- **Operational Workflow**:
+  - Extract symbols, branches, and relocations from DOL/ELF splits via `dtk`.
+  - Automatically generate `.c` translation units with resolved small-data thresholds (`-sdata 8`), local static mangles (`@LOCAL@`, `<var>$<id>`), jump tables (`@ha`/`@l`), and condition registers (`crclr 6`).
+  - Batch compile and verify full modules (10–40 functions at a time) in 1 shot using CodeWarrior with `nofralloc`.
+
+### Tier 2: Method A — Deep C Algorithmic Matching (Semantic Core Reverse-Engineering)
+- **Primary Scope**:
+  - **Core Game Logic & Gameplay Scripts**: Sakaguchi / Feelplus gameplay systems, battle mechanics, character physics, AI state machines, event scripts, and quest managers.
+  - **High-Value Bridge Functions**: Functions where full algorithmic and data structure understanding is required to implement native C/C++ replacement hooks for modern PC platforms (Track B).
+- **Operational Workflow**:
+  - Reverse-engineer human-readable, idiomatic C structs, types, loops, and control flow.
+  - Fine-tune variable declaration ordering, expression trees, and branch patterns to satisfy Metrowerks CodeWarrior 4.3 `-O4,p` register allocation down to 0 byte differences.
+
+---
+
 ### Worklog Entry Template
 
 ```markdown
