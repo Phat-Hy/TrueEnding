@@ -27,16 +27,16 @@ Directed by **Hironobu Sakaguchi** (creator of *Final Fantasy*) with music by **
 
 ## Current Progress Tracker
 
-> Updated as of **October 2026** — Milestone **>1.68% Overall Code Match & 125 KB Barrier Surpassed! (Entire Nintendo AX, AXFX & DSP Subsystems 100% Matched)**
+> Updated as of **October 2026** — Milestone **>2.09% Overall Code Match & 156 KB Barrier Surpassed! (Entire Nintendo AX, AXFX, DSP & GX Graphics Pipelines 100% Matched)**
 
 ### Overall Metrics
 
 | Metric | Target (`main.dol`) | Matched | Progress |
 | :--- | :--- | :--- | :--- |
-| **Total Code Bytes** | 7,477,324 bytes | **125,520 bytes** | **1.68%** |
-| **Total Functions** | 18,120 functions | **527 functions** | **2.91%** |
-| **Fully Matched Modules** | ~410 modules | **52 modules** | **12.68%** |
-| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 52 matched modules) |
+| **Total Code Bytes** | 7,477,324 bytes | **156,328 bytes** | **2.09%** |
+| **Total Functions** | 18,120 functions | **700 functions** | **3.86%** |
+| **Fully Matched Modules** | ~410 modules | **61 modules** | **14.88%** |
+| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 61 matched modules) |
 | **PC Runner Status** | Boot & Loop | **60 FPS Continuous Loop** | Boot, Subsystems Init, Resource Loader, 200+ Frames, Dual Framebuffers |
 
 ---
@@ -74,6 +74,16 @@ Directed by **Hironobu Sakaguchi** (creator of *Final Fantasy*) with music by **
 | | [`AXFXHooks.c`](file:///src/AXFXHooks.c) | 6 / 6 | 88 B | **100.00%** | Audio effects memory allocation hooks and coefficient access |
 | **Digital Signal Processor (DSP)** | [`dsp.c`](file:///src/dsp.c) | 6 / 6 | 272 B | **100.00%** | Hardware DSP mailbox communications, interrupt control, init |
 | *(100% Complete — 2 Modules)* | [`dsp_task.c`](file:///src/dsp_task.c) | 11 / 11 | 3,192 B | **100.00%** | DSP task scheduling queue, execution, context switching |
+| **Graphics Accelerator (GX)** | [`GXInit.c`](file:///src/GXInit.c) | 4 / 4 | 4,180 B | **100.00%** | GX hardware initialization, revision check, FIFO setup |
+| *(100% Complete — 10 Modules)* | [`GXFifo.c`](file:///src/GXFifo.c) | 14 / 14 | 2,808 B | **100.00%** | CPU and GP graphics command FIFO stream management |
+| | [`GXAttr.c`](file:///src/GXAttr.c) | 12 / 12 | 3,364 B | **100.00%** | Vertex attribute descriptor and array formats |
+| | [`GXMisc.c`](file:///src/GXMisc.c) | 21 / 21 | 2,184 B | **100.00%** | Miscellaneous GX state, tokens, draw sync, PE init |
+| | [`GXGeometry.c`](file:///src/GXGeometry.c) | 10 / 10 | 1,836 B | **100.00%** | Primitive assembly, dirty state sync, vertex drawing |
+| | [`GXFrameBuf.c`](file:///src/GXFrameBuf.c) | 14 / 14 | 2,608 B | **100.00%** | Framebuffer copying, disp copy, vertical scaling |
+| | [`GXLight.c`](file:///src/GXLight.c) | 18 / 18 | 3,080 B | **100.00%** | Hardware lighting, color/pos/dir, spotlight, attenuation |
+| | [`GXTexture.c`](file:///src/GXTexture.c) | 34 / 34 | 3,788 B | **100.00%** | Texture objects, TMEM tile cache, TLUT regions, LOD |
+| | [`GXBump.c`](file:///src/GXBump.c) | 8 / 8 | 740 B | **100.00%** | Indirect texturing, bump mapping matrices and scales |
+| | [`GXTev.c`](file:///src/GXTev.c) | 38 / 38 | 6,220 B | **100.00%** | Texture Environment, multi-stage color/alpha combiners |
 | **Controller (PAD)** | [`pad.c`](file:///src/pad.c) | 1 / 1 | 92 B | **100.00%** | Calibration flag control (`__PADDisableRecalibration`) |
 | *(100% Complete)* | | | | | |
 | **Math & Matrix** | [`PSMTX.c`](file:///src/PSMTX.c) | 7 / 7 | 1,280 B | **100.00%** | Paired-single hardware accelerated matrix operations |

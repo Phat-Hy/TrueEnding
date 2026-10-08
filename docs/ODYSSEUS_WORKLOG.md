@@ -719,8 +719,25 @@ When you complete or attempt any work:
     - **52 Fully Matched Modules (38 integrated & linked in build system)** with 0 byte differences across all matched units.
 - **Next Steps**:
   - Track A: Begin Nintendo Graphics Accelerator Subsystem (`GX` / `0x806112F0` onwards: `__GXInitRevisionBits`, `GXInit`, `__GXInitGX`, `GXInitFifoBase`, `GXSetCPUFifo`, `GXSetGPFifo`).
+### [2026-10-09 03:22] Session 29: 100% Match of Entire RVL-SDK GX Subsystem (10 Modules, 173 Functions, >2.09% Overall, 700 Functions & 156 KB Milestone)
+- **Track**: Track A: Decompilation Matching (Nintendo Graphics Accelerator Subsystem `GX`)
+- **Target File(s)**: `src/GXInit.c`, `src/GXFifo.c`, `src/GXAttr.c`, `src/GXMisc.c`, `src/GXGeometry.c`, `src/GXFrameBuf.c`, `src/GXLight.c`, `src/GXTexture.c`, `src/GXBump.c`, `src/GXTev.c`, `tools/gen_gx*.py`, `config/splits.txt`, `configure.py`, `README.md`, `docs/PROGRESS_LEDGER.json`, `docs/ODYSSEUS_WORKLOG.md`
+- **Accomplishments & Highlights**:
+  - **Entire Nintendo RVL-SDK Graphics Accelerator (GX) Core Pipeline 100.00% Byte-Matched (10 Modules, 173 Functions, 30,808 Code Bytes)**:
+    - `GXInit.c` (`0x806112F0` – `0x80612350`, 4/4 functions, 4,180 bytes) — 100.00% MATCH: `__GXInitRevisionBits`, `GXInit`, `__GXInitGX`, `fn_806121F0`.
+    - `GXFifo.c` (`0x80612350` – `0x80612E80`, 14/14 functions, 2,808 bytes) — 100.00% MATCH: `GXInitFifoBase`, `GXSetCPUFifo`, `GXSetGPFifo`, `__GXFifoInit`, and FIFO state routines.
+    - `GXAttr.c` (`0x80612E80` – `0x80613BE0`, 12/12 functions, 3,364 bytes) — 100.00% MATCH: `__GXSetVtxDescv`, `GXSetVtxDesc`, and vertex attribute formatting routines.
+    - `GXMisc.c` (`0x80613BE0` – `0x80614510`, 21/21 functions, 2,184 bytes) — 100.00% MATCH: `GXSetMisc`, draw sync tokens, Pixel Engine initialization (`__GXPEInit`).
+    - `GXGeometry.c` (`0x80614510` – `0x80614C80`, 10/10 functions, 1,836 bytes) — 100.00% MATCH: `__GXSetDirtyState`, `GXBegin`, geometry draw dispatchers.
+    - `GXFrameBuf.c` (`0x80614C80` – `0x80615700`, 14/14 functions, 2,608 bytes) — 100.00% MATCH: Framebuffer copy control, display copy filters, vertical scaling.
+    - `GXLight.c` (`0x80615700` – `0x80616380`, 18/18 functions, 3,080 bytes) — 100.00% MATCH: Lighting calculations, spot lights, distance/angle attenuation, jump tables.
+    - `GXTexture.c` (`0x80616380` – `0x80617340`, 34/34 functions, 3,788 bytes) — 100.00% MATCH: `GXInitTexCacheRegion`, `GXInitTlutRegion`, `__GXSetTmemConfig`, `__GXFlushTextureState`, TMEM cache management.
+    - `GXBump.c` (`0x80617340` – `0x80617650`, 8/8 functions, 740 bytes) — 100.00% MATCH: Indirect bump texturing matrices, coordinate scale parameters, BP register transfers.
+    - `GXTev.c` (`0x80617650` – `0x80618F60`, 38/38 functions, 6,220 bytes) — 100.00% MATCH: Multi-stage Texture Environment combiners (`GXSetTevColorIn`, `GXSetTevAlphaIn`, `GXSetTevColorOp`, `GXSetTevAlphaOp`, `GXSetTevKColorSel`, `GXSetTevKAlphaSel`).
+  - **Historic 150 KB Code & 700 Functions Barrier Surpassed**:
+    - **156,328 / 7,477,324 Code Bytes Matched (2.09% overall)**.
+    - **700 / 18,120 Functions Matched (3.86% overall)** — 700 functions milestone reached!
+    - **62 Fully Matched Modules (48 linked in main.dol)** with 0 byte differences across all matched units.
+- **Next Steps**:
+  - Track A: Continue with next subsystems: ISFS / IPC file system and IPC modules (`ISFS_OpenLib` at `0x8061A5D0`, `IPCInit` at `0x8061BCA0`), and `GXPixel.c` / `GXDisplayList.c`.
   - Track B: Integrate window presentation (SDL2 / Direct3D) for the active 60 FPS MEM2 framebuffer.
-
-
-
-

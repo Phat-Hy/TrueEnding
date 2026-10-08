@@ -171,6 +171,36 @@ dsp.c:
 dsp_task.c:
 	.text       start:0x80610640 end:0x806112F0
 
+GXInit.c:
+	.text       start:0x806112F0 end:0x80612350
+
+GXFifo.c:
+	.text       start:0x80612350 end:0x80612E80
+
+GXAttr.c:
+	.text       start:0x80612E80 end:0x80613BE0
+
+GXMisc.c:
+	.text       start:0x80613BE0 end:0x80614510
+
+GXGeometry.c:
+	.text       start:0x80614510 end:0x80614C80
+
+GXFrameBuf.c:
+	.text       start:0x80614C80 end:0x80615700
+
+GXLight.c:
+	.text       start:0x80615700 end:0x80616380
+
+GXTexture.c:
+	.text       start:0x80616380 end:0x80617340
+
+GXBump.c:
+	.text       start:0x80617340 end:0x80617650
+
+GXTev.c:
+	.text       start:0x80617650 end:0x80618F60
+
 global_destructor_chain.c:
 	.text       start:0x80695420 end:0x80695480
 
