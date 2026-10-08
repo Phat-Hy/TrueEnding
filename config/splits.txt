@@ -201,6 +201,18 @@ GXBump.c:
 GXTev.c:
 	.text       start:0x80617650 end:0x80618F60
 
+isfs.c:
+	.text       start:0x8061A5D0 end:0x8061BCA0
+
+ipc.c:
+	.text       start:0x8061BCA0 end:0x8061C1E0
+
+ipcclt.c:
+	.text       start:0x8061C1E0 end:0x8061DD20
+
+ipcprof.c:
+	.text       start:0x8061DD20 end:0x8061E130
+
 global_destructor_chain.c:
 	.text       start:0x80695420 end:0x80695480
 

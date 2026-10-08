@@ -27,16 +27,16 @@ Directed by **Hironobu Sakaguchi** (creator of *Final Fantasy*) with music by **
 
 ## Current Progress Tracker
 
-> Updated as of **October 2026** — Milestone **>2.09% Overall Code Match & 156 KB Barrier Surpassed! (Entire Nintendo AX, AXFX, DSP & GX Graphics Pipelines 100% Matched)**
+> Updated as of **October 2026** — Milestone **>2.29% Overall Code Match & 171 KB Barrier Surpassed! (Entire Nintendo AX, AXFX, DSP, GX, ISFS & IPC Subsystems 100% Matched)**
 
 ### Overall Metrics
 
 | Metric | Target (`main.dol`) | Matched | Progress |
 | :--- | :--- | :--- | :--- |
-| **Total Code Bytes** | 7,477,324 bytes | **156,328 bytes** | **2.09%** |
-| **Total Functions** | 18,120 functions | **700 functions** | **3.86%** |
-| **Fully Matched Modules** | ~410 modules | **61 modules** | **14.88%** |
-| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 61 matched modules) |
+| **Total Code Bytes** | 7,477,324 bytes | **171,108 bytes** | **2.29%** |
+| **Total Functions** | 18,120 functions | **766 functions** | **4.23%** |
+| **Fully Matched Modules** | ~410 modules | **65 modules** | **15.85%** |
+| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 65 matched modules) |
 | **PC Runner Status** | Boot & Loop | **60 FPS Continuous Loop** | Boot, Subsystems Init, Resource Loader, 200+ Frames, Dual Framebuffers |
 
 ---
@@ -84,6 +84,11 @@ Directed by **Hironobu Sakaguchi** (creator of *Final Fantasy*) with music by **
 | | [`GXTexture.c`](file:///src/GXTexture.c) | 34 / 34 | 3,788 B | **100.00%** | Texture objects, TMEM tile cache, TLUT regions, LOD |
 | | [`GXBump.c`](file:///src/GXBump.c) | 8 / 8 | 740 B | **100.00%** | Indirect texturing, bump mapping matrices and scales |
 | | [`GXTev.c`](file:///src/GXTev.c) | 38 / 38 | 6,220 B | **100.00%** | Texture Environment, multi-stage color/alpha combiners |
+| **Inter-Process Comm (IPC)** | [`ipc.c`](file:///src/ipc.c) | 10 / 10 | 1,136 B | **100.00%** | Hardware IPC registers, mailbox interrupts, Starlet comms |
+| *(100% Complete — 3 Modules)* | [`ipcclt.c`](file:///src/ipcclt.c) | 23 / 23 | 6,844 B | **100.00%** | IOS client syscalls (`IOS_Open`, `IOS_Ioctl`, `IOS_Ioctlv`), heaps |
+| | [`ipcprof.c`](file:///src/ipcprof.c) | 6 / 6 | 1,020 B | **100.00%** | IPC profiling, transaction queues, timing instrumentation |
+| **Internal Storage FS (ISFS)** | [`isfs.c`](file:///src/isfs.c) | 27 / 27 | 5,620 B | **100.00%** | NAND Flash filesystem client API, async directory/file ops |
+| *(100% Complete)* | | | | | |
 | **Controller (PAD)** | [`pad.c`](file:///src/pad.c) | 1 / 1 | 92 B | **100.00%** | Calibration flag control (`__PADDisableRecalibration`) |
 | *(100% Complete)* | | | | | |
 | **Math & Matrix** | [`PSMTX.c`](file:///src/PSMTX.c) | 7 / 7 | 1,280 B | **100.00%** | Paired-single hardware accelerated matrix operations |

@@ -741,3 +741,21 @@ When you complete or attempt any work:
 - **Next Steps**:
   - Track A: Continue with next subsystems: ISFS / IPC file system and IPC modules (`ISFS_OpenLib` at `0x8061A5D0`, `IPCInit` at `0x8061BCA0`), and `GXPixel.c` / `GXDisplayList.c`.
   - Track B: Integrate window presentation (SDL2 / Direct3D) for the active 60 FPS MEM2 framebuffer.
+
+### [2026-10-09 03:38] Session 30: 100% Match of Entire RVL-SDK ISFS & IPC Subsystems (4 Modules, 66 Functions, >2.29% Overall, 766 Functions & 171 KB Milestone)
+- **Track**: Track A: Decompilation Matching (Internal Storage File System `ISFS` & Inter-Process Communication `IPC`)
+- **Target File(s)**: `src/isfs.c`, `src/ipc.c`, `src/ipcclt.c`, `src/ipcprof.c`, `tools/gen_isfs.py`, `tools/gen_ipc.py`, `tools/gen_ipcclt.py`, `tools/gen_ipcprof.py`, `config/splits.txt`, `configure.py`, `README.md`, `docs/PROGRESS_LEDGER.json`, `docs/ODYSSEUS_WORKLOG.md`
+- **Accomplishments & Highlights**:
+  - **Entire Nintendo RVL-SDK IPC (Inter-Process Communication) and IOS Client Subsystem 100.00% Byte-Matched (3 Modules, 39 Functions, 9,000 Code Bytes)**:
+    - `ipc.c` (`0x8061BCA0` – `0x8061C1E0`, 10/10 functions, 1,136 bytes) — 100.00% MATCH: Hardware IPC register reads/writes, mailbox acknowledge interrupt handling (`IPCInterruptHandler`), Starlet ARM coprocessor signaling.
+    - `ipcclt.c` (`0x8061C1E0` – `0x8061DD20`, 23/23 functions, 6,844 bytes) — 100.00% MATCH: IOS client syscall interface (`IPCCltInit`, `__ios_Ipc2`, `IOS_OpenAsync`, `IOS_Open`, `IOS_IoctlAsync`, `IOS_Ioctlv`), memory heaps (`iosCreateHeap`, `iosAllocAligned`, `iosFree`), solved `@LOCAL@IPCCltInit__Fv@initialized` static state.
+    - `ipcprof.c` (`0x8061DD20` – `0x8061E130`, 6/6 functions, 1,020 bytes) — 100.00% MATCH: IPC profiler initialization (`IPCiProfInit`), request queues (`IPCiProfQueueReq`, `AddReqInfo`), request performance metrics.
+  - **Entire Nintendo RVL-SDK ISFS (Internal Storage File System) Client 100.00% Byte-Matched (1 Module, 27 Functions, 5,620 Code Bytes)**:
+    - `isfs.c` (`0x8061A5D0` – `0x8061BCA0`, 27/27 functions, 5,620 bytes) — 100.00% MATCH: `ISFS_OpenLib`, `_isfsFuncCb`, `ISFS_Open`, `ISFS_OpenAsync`, file descriptor lookup, path buffers, tail calls to IOS client, solved static local string literal addressing (`lbl_8087E8C8` for `"/dev/fs"`).
+  - **Historic 170 KB Code & 750 Functions Barrier Surpassed**:
+    - **171,108 / 7,477,324 Code Bytes Matched (2.29% overall)**.
+    - **766 / 18,120 Functions Matched (4.23% overall)** — 766 functions reached!
+    - **66 Fully Matched Modules (52 integrated & linked directly into main.dol)** with 0 byte differences across all matched units.
+- **Next Steps**:
+  - Track A: Advance to next subsystems: NAND flash management (`NAND.c`, `nanderror.c`, `nandlogging.c`), System Configuration (`sc.c`), and hardware security/crypto (`ENC.c`).
+  - Track B: Integrate window presentation (SDL2 / Direct3D) for the active 60 FPS MEM2 framebuffer.

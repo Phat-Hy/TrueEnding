@@ -214,6 +214,10 @@ config.libs = [
             Object(True, "GXTexture.c"),
             Object(True, "GXBump.c"),
             Object(True, "GXTev.c"),
+            Object(True, "isfs.c"),
+            Object(True, "ipc.c"),
+            Object(True, "ipcclt.c"),
+            Object(True, "ipcprof.c"),
         ],
     },
 ]

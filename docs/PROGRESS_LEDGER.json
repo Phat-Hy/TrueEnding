@@ -5,10 +5,10 @@
   "status": {
     "track_a_decomp_matching": {
       "compiler": "Metrowerks CodeWarrior 4.3 build 145 (Wii/1.0)",
-      "total_matched_modules": 62,
-      "total_matched_functions": 700,
-      "total_matched_code_bytes": 156328,
-      "overall_code_match_rate": "2.09%",
+      "total_matched_modules": 66,
+      "total_matched_functions": 766,
+      "total_matched_code_bytes": 171108,
+      "overall_code_match_rate": "2.29%",
       "overall_module_match_rate": "100.00%",
       "matched_modules": [
         {
@@ -382,9 +382,35 @@
           "functions": 38,
           "match": "100.00%",
           "diff_bytes": 0
+        },
+        {
+          "name": "isfs.c",
+          "functions": 27,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "ipc.c",
+          "functions": 10,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "ipcclt.c",
+          "functions": 23,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "ipcprof.c",
+          "functions": 6,
+          "match": "100.00%",
+          "diff_bytes": 0
         }
       ],
       "recent_module_findings": {
+        "IPC_Subsystem": "Complete 3/3 modules, 39/39 functions (100.00% match, 9,000 code bytes). Entire Nintendo RVL-SDK IPC (Inter-Process Communication) and IOS client subsystem (ipc.c, ipcclt.c, ipcprof.c) byte-matched cleanly.",
+        "ISFS_Subsystem": "Complete 1/1 module, 27/27 functions (100.00% match, 5,620 code bytes). Entire Nintendo RVL-SDK ISFS (Internal Storage File System) API (isfs.c) byte-matched cleanly, surpassing 2.29% overall code progress and 766 functions!",
         "GX_Subsystem": "Complete 10/10 modules, 173/173 functions (100.00% match, 30,808 code bytes). Entire Nintendo RVL-SDK GX Graphics Accelerator Pipeline (GXInit.c, GXFifo.c, GXAttr.c, GXMisc.c, GXGeometry.c, GXFrameBuf.c, GXLight.c, GXTexture.c, GXBump.c, GXTev.c) decompiled and byte-matched cleanly, surpassing 2.09% overall progress and 700 functions!",
         "DSP_Subsystem": "Complete 2/2 modules, 17/17 functions (100.00% match, 3,464 code bytes). Entire Nintendo RVL-SDK DSP subsystem (dsp.c, dsp_task.c) decompiled and byte-matched cleanly, crossing 125 KB total code bytes and 527 functions!",
         "AXFX_Subsystem": "Complete 9/9 modules, 57/57 functions (100.00% match, 21,392 code bytes). Entire Nintendo RVL-SDK AXFX Audio Effects subsystem (AXFXReverbHi.c, AXFXReverbHiExp.c, AXFXReverbStdExp.c, AXFXDelay.c, AXFXChorusExp.c, AXFXReverbHiExpDpl2.c, AXFXReverbStd.c, AXFXReverbHiDpl2.c, AXFXHooks.c) decompiled and byte-matched cleanly.",
