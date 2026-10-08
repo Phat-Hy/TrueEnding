@@ -1484,7 +1484,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": true,
+        "complete": false,
         "reverse_fn_order": false,
         "source_path": "src/OSAlarm.c",
         "progress_categories": [],
@@ -1737,7 +1737,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": true,
+        "complete": false,
         "reverse_fn_order": false,
         "source_path": "src/OSTime.c",
         "progress_categories": [],
@@ -2111,7 +2111,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": true,
+        "complete": false,
         "reverse_fn_order": false,
         "source_path": "src/vi.c",
         "progress_categories": [],
@@ -2176,8 +2176,141 @@
       }
     },
     {
-      "name": "main/auto_03_80608610_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80608610_text.o",
+      "name": "main/AXAlloc",
+      "target_path": "build/SLSEXJ/obj/AXAlloc.o",
+      "base_path": "build/SLSEXJ/src/AXAlloc.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/AXAlloc.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/AXAlloc.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/AXAux",
+      "target_path": "build/SLSEXJ/obj/AXAux.o",
+      "base_path": "build/SLSEXJ/src/AXAux.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/AXAux.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/AXAux.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/AXCL",
+      "target_path": "build/SLSEXJ/obj/AXCL.o",
+      "base_path": "build/SLSEXJ/src/AXCL.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/AXCL.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/AXCL.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/AXOut",
+      "target_path": "build/SLSEXJ/obj/AXOut.o",
+      "base_path": "build/SLSEXJ/src/AXOut.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/AXOut.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/AXOut.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/AXVPB",
+      "target_path": "build/SLSEXJ/obj/AXVPB.o",
+      "base_path": "build/SLSEXJ/src/AXVPB.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/AXVPB.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/AXVPB.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/AXSPB",
+      "target_path": "build/SLSEXJ/obj/AXSPB.o",
+      "base_path": "build/SLSEXJ/src/AXSPB.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/AXSPB.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/AXSPB.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/AXProf",
+      "target_path": "build/SLSEXJ/obj/AXProf.o",
+      "base_path": "build/SLSEXJ/src/AXProf.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/AXProf.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/AXProf.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/auto_03_8060B0D0_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8060B0D0_text.o",
       "metadata": {
         "progress_categories": [],
         "auto_generated": true

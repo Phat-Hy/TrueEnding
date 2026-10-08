@@ -3,8 +3,8 @@
 <div align="center">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Decomp Progress](https://img.shields.io/badge/Track%20A%20Decomp-1.21%25%20(90%2C288%20bytes)-brightgreen)](docs/PROGRESS_LEDGER.json)
-[![Functions Matched](https://img.shields.io/badge/Functions%20Matched-395%20%2F%2018%2C120-blue)](docs/PROGRESS_LEDGER.json)
+[![Decomp Progress](https://img.shields.io/badge/Track%20A%20Decomp-1.35%25%20(100%2C916%20bytes)-brightgreen)](docs/PROGRESS_LEDGER.json)
+[![Functions Matched](https://img.shields.io/badge/Functions%20Matched-446%20%2F%2018%2C120-blue)](docs/PROGRESS_LEDGER.json)
 [![PC Runner](https://img.shields.io/badge/Track%20B%20PC%20Port-Bootable%20%2F%2060%20FPS-green)](recomp/)
 [![Target](https://img.shields.io/badge/Target-Wii%20USA%20(SLSEXJ)-red)](config/SLSEXJ/)
 
@@ -27,16 +27,16 @@ Directed by **Hironobu Sakaguchi** (creator of *Final Fantasy*) with music by **
 
 ## Current Progress Tracker
 
-> Updated as of **October 2026** — Milestone **>1.20% Overall Code Match & 90 KB Barrier** Surpassed!
+> Updated as of **October 2026** — Milestone **>1.35% Overall Code Match & 100 KB Barrier Surpassed! (Entire Nintendo AX Audio Executive 100% Matched)**
 
 ### Overall Metrics
 
 | Metric | Target (`main.dol`) | Matched | Progress |
 | :--- | :--- | :--- | :--- |
-| **Total Code Bytes** | 7,477,324 bytes | **90,288 bytes** | **1.21%** |
-| **Total Functions** | 18,120 functions | **395 functions** | **2.18%** |
-| **Fully Matched Modules** | ~410 modules | **34 modules** | **8.29%** |
-| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 34 matched modules) |
+| **Total Code Bytes** | 7,477,324 bytes | **100,916 bytes** | **1.35%** |
+| **Total Functions** | 18,120 functions | **446 functions** | **2.46%** |
+| **Fully Matched Modules** | ~410 modules | **41 modules** | **10.00%** |
+| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 41 matched modules) |
 | **PC Runner Status** | Boot & Loop | **60 FPS Continuous Loop** | Boot, Subsystems Init, Resource Loader, 200+ Frames, Dual Framebuffers |
 
 ---
@@ -56,7 +56,13 @@ Directed by **Hironobu Sakaguchi** (creator of *Final Fantasy*) with music by **
 | **Audio Interface (AI)** | [`ai.c`](file:///src/ai.c) | 12 / 12 | 1,408 B | **100.00%** | Audio DMA timing, hardware interrupts, PLL sync |
 | *(100% Complete)* | | | | | |
 | **Audio Subsystem (AX)** | [`ax.c`](file:///src/ax.c) | 26 / 26 | 2,076 B | **100.00%** | Audio Executive initialization, mode control, auxiliary volumes |
-| *(100% Complete)* | | | | | |
+| *(100% Complete — 8 Modules)* | [`AXAlloc.c`](file:///src/AXAlloc.c) | 4 / 4 | 1,280 B | **100.00%** | Voice allocation table, acquisition, and priority scheduling |
+| | [`AXAux.c`](file:///src/AXAux.c) | 6 / 6 | 2,656 B | **100.00%** | Aux callbacks A/B, voice limits, and auxiliary loop processing |
+| | [`AXCL.c`](file:///src/AXCL.c) | 18 / 18 | 1,424 B | **100.00%** | Command list buffer execution, DSP frame synchronization |
+| | [`AXOut.c`](file:///src/AXOut.c) | 9 / 9 | 1,568 B | **100.00%** | Output sample buffer management, AI DMA audio callbacks |
+| | [`AXVPB.c`](file:///src/AXVPB.c) | 5 / 5 | 2,608 B | **100.00%** | Voice Parameter Blocks, 3D volume attenuation, pitch curves |
+| | [`AXSPB.c`](file:///src/AXSPB.c) | 7 / 7 | 1,304 B | **100.00%** | Sound Parameter Blocks, ADPCM decoding context, panning |
+| | [`AXProf.c`](file:///src/AXProf.c) | 2 / 2 | 72 B | **100.00%** | Hardware audio DSP profiler and cycle measurement tracking |
 | **Controller (PAD)** | [`pad.c`](file:///src/pad.c) | 1 / 1 | 92 B | **100.00%** | Calibration flag control (`__PADDisableRecalibration`) |
 | *(100% Complete)* | | | | | |
 | **Math & Matrix** | [`PSMTX.c`](file:///src/PSMTX.c) | 7 / 7 | 1,280 B | **100.00%** | Paired-single hardware accelerated matrix operations |

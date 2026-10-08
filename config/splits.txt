@@ -117,6 +117,27 @@ ai.c:
 ax.c:
 	.text       start:0x80607D70 end:0x80608610
 
+AXAlloc.c:
+	.text       start:0x80608610 end:0x80608B10
+
+AXAux.c:
+	.text       start:0x80608B10 end:0x80609570
+
+AXCL.c:
+	.text       start:0x80609570 end:0x80609B00
+
+AXOut.c:
+	.text       start:0x80609B00 end:0x8060A120
+
+AXVPB.c:
+	.text       start:0x8060A120 end:0x8060AB50
+
+AXSPB.c:
+	.text       start:0x8060AB50 end:0x8060B080
+
+AXProf.c:
+	.text       start:0x8060B080 end:0x8060B0D0
+
 global_destructor_chain.c:
 	.text       start:0x80695420 end:0x80695480
 

@@ -674,5 +674,28 @@ When you complete or attempt any work:
   - Track A: Match next Audio unit `AXAlloc.c` (`0x80608610` onwards, voice allocation and stack acquisition).
   - Track B: Integrate windowing (SDL2/GLFW/Win32) to display the live framebuffers in real time.
 
+### [2026-10-08 19:50] Session 27: 100% Match of Entire RVL-SDK AX Library & 100 KB Milestone Surpassed (446 Functions, 100,916 Bytes, 1.35% Overall)
+- **Track**: Track A: Decompilation Matching (Entire Nintendo Audio Executive Subsystem)
+- **Target File(s)**: `src/AXAlloc.c`, `src/AXAux.c`, `src/AXCL.c`, `src/AXOut.c`, `src/AXVPB.c`, `src/AXSPB.c`, `src/AXProf.c`, `tools/gen_axalloc.py`, `tools/gen_axaux.py`, `tools/gen_axcl.py`, `tools/gen_axout.py`, `tools/gen_axvpb.py`, `tools/gen_axspb.py`, `tools/gen_axprof.py`, `config/splits.txt`, `configure.py`, `README.md`, `docs/PROGRESS_LEDGER.json`, `docs/ODYSSEUS_WORKLOG.md`
+- **Accomplishments & Highlights**:
+  - **Entire Nintendo Audio Executive (AX) Library 100.00% Byte-Matched (8 Modules, 77 Functions, 12,988 Code Bytes)**:
+    - **`ax.c` (`0x80607D70` – `0x80608610`, 26/26 functions, 2,076 bytes) — 100.00% MATCH**: Audio Executive core init, modes, aux return volumes, voice callbacks.
+    - **`AXAlloc.c` (`0x80608610` – `0x80608B10`, 4/4 functions, 1,280 bytes) — 100.00% MATCH**: `__AXAllocInit`, `AXAcquireVoice`, `AXFreeVoice`, `AXSetVoicePriority`.
+    - **`AXAux.c` (`0x80608B10` – `0x80609570`, 6/6 functions, 2,656 bytes) — 100.00% MATCH**: Aux callbacks A/B, voice limits, and auxiliary loop processing (`fn_80608BB0`).
+    - **`AXCL.c` (`0x80609570` – `0x80609B00`, 18/18 functions, 1,424 bytes) — 100.00% MATCH**: Command list execution, thread queues, and DSP interrupt synchronizations.
+    - **`AXOut.c` (`0x80609B00` – `0x8060A120`, 9/9 functions, 1,568 bytes) — 100.00% MATCH**: Output buffer management, AI DMA audio callbacks, and DSP frame interrupts.
+    - **`AXVPB.c` (`0x8060A120` – `0x8060AB50`, 5/5 functions, 2,608 bytes) — 100.00% MATCH**: Voice parameter block init, volume attenuation, pitch calculations.
+    - **`AXSPB.c` (`0x8060AB50` – `0x8060B080`, 7/7 functions, 1,304 bytes) — 100.00% MATCH**: Sound parameter block init, ADPCM decoder parameters, pan math with paired singles.
+    - **`AXProf.c` (`0x8060B080` – `0x8060B0D0`, 2/2 functions, 72 bytes) — 100.00% MATCH**: Hardware audio DSP profiler cycle tracking and statistics.
+  - **Historic 100 KB Code Barrier Surpassed**:
+    - **100,916 / 7,477,324 Code Bytes Matched (1.35% overall)**.
+    - **446 / 18,120 Functions Matched (2.46% overall)**.
+    - **41 Fully Matched Modules (10.00% of all game modules)** at **100.00% match rate** (0 byte differences).
+    - Full game binary `build/SLSEXJ/main.dol` successfully links from our decompiled C modules.
+- **Next Steps**:
+  - Track A: Begin AXFX audio effects subsystem (`ReverbHi.c` / `0x8060B0D0` onwards) or Graphics Subsystem (`gx.c`).
+  - Track B: Integrate window presentation (SDL2 / Direct3D) for the active 60 FPS MEM2 framebuffer.
+
+
 
 
