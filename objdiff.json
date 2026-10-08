@@ -2092,7 +2092,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/vi3in1.c",
         "progress_categories": [],
@@ -2111,7 +2111,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/vi.c",
         "progress_categories": [],
@@ -2130,7 +2130,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/pad.c",
         "progress_categories": [],
@@ -2149,7 +2149,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/ai.c",
         "progress_categories": [],
@@ -2157,8 +2157,27 @@
       }
     },
     {
-      "name": "main/auto_03_80607D70_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80607D70_text.o",
+      "name": "main/ax",
+      "target_path": "build/SLSEXJ/obj/ax.o",
+      "base_path": "build/SLSEXJ/src/ax.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/ax.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/ax.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/auto_03_80608610_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80608610_text.o",
       "metadata": {
         "progress_categories": [],
         "auto_generated": true

@@ -5,10 +5,10 @@
   "status": {
     "track_a_decomp_matching": {
       "compiler": "Metrowerks CodeWarrior 4.3 build 145 (Wii/1.0)",
-      "total_matched_modules": 33,
-      "total_matched_functions": 369,
-      "total_matched_code_bytes": 88212,
-      "overall_code_match_rate": "1.18%",
+      "total_matched_modules": 34,
+      "total_matched_functions": 395,
+      "total_matched_code_bytes": 90288,
+      "overall_code_match_rate": "1.21%",
       "overall_module_match_rate": "100.00%",
       "matched_modules": [
         {
@@ -208,9 +208,16 @@
           "functions": 12,
           "match": "100.00%",
           "diff_bytes": 0
+        },
+        {
+          "name": "ax.c",
+          "functions": 26,
+          "match": "100.00%",
+          "diff_bytes": 0
         }
       ],
       "recent_module_findings": {
+        "ax.c": "Complete 26/26 (100.00% match, 2,076 code bytes). Entire Audio Executive core module (AXInit, AXQuit, AXSetMode, AXGetMode, auxiliary volumes, voice callbacks) byte-matched cleanly.",
         "ai.c": "Complete 12/12 (100.00% match, 1,408 code bytes). Entire AI Audio Interface subsystem (fn_806077A0, fn_806077F0, fn_80607870, fn_80607890, fn_806078A0, fn_806078C0, fn_806078D0, fn_806078E0, AIInit, __AIHandler, fn_80607B30, fn_80607BA0) byte-matched.",
         "pad.c": "Complete 1/1 (100.00% match, 92 code bytes). __PADDisableRecalibration byte-matched cleanly by matching volatile low memory access pattern.",
         "vi.c": "Complete 32/32 (100.00% match, 12,544 code bytes). Entire primary Video Interface subsystem byte-matched. Crossed the historic >1.00% overall game progress milestone!",

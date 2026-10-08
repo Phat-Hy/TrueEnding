@@ -114,6 +114,9 @@ pad.c:
 ai.c:
 	.text       start:0x806077A0 end:0x80607D70
 
+ax.c:
+	.text       start:0x80607D70 end:0x80608610
+
 global_destructor_chain.c:
 	.text       start:0x80695420 end:0x80695480
 

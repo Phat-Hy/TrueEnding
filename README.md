@@ -3,8 +3,8 @@
 <div align="center">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Decomp Progress](https://img.shields.io/badge/Track%20A%20Decomp-1.18%25%20(88%2C212%20bytes)-brightgreen)](docs/PROGRESS_LEDGER.json)
-[![Functions Matched](https://img.shields.io/badge/Functions%20Matched-369%20%2F%2018%2C120-blue)](docs/PROGRESS_LEDGER.json)
+[![Decomp Progress](https://img.shields.io/badge/Track%20A%20Decomp-1.21%25%20(90%2C288%20bytes)-brightgreen)](docs/PROGRESS_LEDGER.json)
+[![Functions Matched](https://img.shields.io/badge/Functions%20Matched-395%20%2F%2018%2C120-blue)](docs/PROGRESS_LEDGER.json)
 [![PC Runner](https://img.shields.io/badge/Track%20B%20PC%20Port-Bootable%20%2F%2060%20FPS-green)](recomp/)
 [![Target](https://img.shields.io/badge/Target-Wii%20USA%20(SLSEXJ)-red)](config/SLSEXJ/)
 
@@ -27,17 +27,17 @@ Directed by **Hironobu Sakaguchi** (creator of *Final Fantasy*) with music by **
 
 ## Current Progress Tracker
 
-> Updated as of **October 2026** — Milestone **>1.00% Overall Code Match** Surpassed!
+> Updated as of **October 2026** — Milestone **>1.20% Overall Code Match & 90 KB Barrier** Surpassed!
 
 ### Overall Metrics
 
 | Metric | Target (`main.dol`) | Matched | Progress |
 | :--- | :--- | :--- | :--- |
-| **Total Code Bytes** | 7,477,324 bytes | **88,212 bytes** | **1.18%** |
-| **Total Functions** | 18,120 functions | **369 functions** | **2.04%** |
-| **Fully Matched Modules** | ~410 modules | **33 modules** | **8.05%** |
-| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across matched modules) |
-| **PC Runner Status** | Boot & Loop | **60 FPS Continuous Loop** | Boot, Subsystems Init, Resource Loader, 0 Exceptions |
+| **Total Code Bytes** | 7,477,324 bytes | **90,288 bytes** | **1.21%** |
+| **Total Functions** | 18,120 functions | **395 functions** | **2.18%** |
+| **Fully Matched Modules** | ~410 modules | **34 modules** | **8.29%** |
+| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 34 matched modules) |
+| **PC Runner Status** | Boot & Loop | **60 FPS Continuous Loop** | Boot, Subsystems Init, Resource Loader, 200+ Frames, Dual Framebuffers |
 
 ---
 
@@ -54,6 +54,8 @@ Directed by **Hironobu Sakaguchi** (creator of *Final Fantasy*) with music by **
 | **Video Interface (VI)** | [`vi3in1.c`](file:///src/vi3in1.c) | 10 / 10 | 5,732 B | **100.00%** | Retrace interrupts, horizontal/vertical timing, DTV modes |
 | *(100% Complete)* | [`vi.c`](file:///src/vi.c) | 32 / 32 | 12,544 B | **100.00%** | Video display filters, RGB imm modes, TV formats |
 | **Audio Interface (AI)** | [`ai.c`](file:///src/ai.c) | 12 / 12 | 1,408 B | **100.00%** | Audio DMA timing, hardware interrupts, PLL sync |
+| *(100% Complete)* | | | | | |
+| **Audio Subsystem (AX)** | [`ax.c`](file:///src/ax.c) | 26 / 26 | 2,076 B | **100.00%** | Audio Executive initialization, mode control, auxiliary volumes |
 | *(100% Complete)* | | | | | |
 | **Controller (PAD)** | [`pad.c`](file:///src/pad.c) | 1 / 1 | 92 B | **100.00%** | Calibration flag control (`__PADDisableRecalibration`) |
 | *(100% Complete)* | | | | | |
@@ -79,7 +81,6 @@ Directed by **Hironobu Sakaguchi** (creator of *Final Fantasy*) with music by **
 | | [`global_destructor_chain.c`](file:///src/global_destructor_chain.c) | 2 / 2 | 96 B | **100.00%** | C++ global object teardown |
 | | [`__init_hardware.c`](file:///src/__init_hardware.c) | 2 / 2 | 100 B | **100.00%** | Early hardware initialization vector |
 | | [`init_user.c`](file:///src/init_user.c) | 1 / 1 | 28 B | **100.00%** | CRT user initialization stub |
-| **Audio Subsystem (AX)** | `ax.c` | In Progress | ~16 KB | Planning | Audio Executive mixing and DSP command processing |
 | **Graphics Subsystem (GX)**| `gx.c` | Next | ~45 KB | Planning | Flipper/Hollywood GPU command lists, textures, lighting |
 
 ---

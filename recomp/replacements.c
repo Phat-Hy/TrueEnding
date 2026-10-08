@@ -58,6 +58,10 @@ void handle_instruction_fallback(CPUState* cpu, u32 raw, u32 cia) {
 }
 
 static u32 s_mmio_regs[0x2000]; // Hash storage for common MMIO offsets
+static u32 s_cp_read_ptr = 0;
+static u32 s_cp_bp_addr = 0;
+static u8  s_cp_bp_reached = 0;
+static u16 s_pe_draw_token = 0;
 
 static inline u32 mmio_hash(u32 ea) {
     return (ea >> 2) & 0x1FFF;
@@ -101,6 +105,32 @@ u64 mmio_external_read(CPUState* cpu, u32 ea, u8 size) {
         return (s_ai_samples += 32);
     }
 
+    // CP (Command Processor / GP FIFO) registers (0xCC000000 / 0xCD000000)
+    if ((ea & 0xFFFFFE00) == 0xCC000000 || (ea & 0xFFFFFE00) == 0xCD000000) {
+        u32 reg = ea & 0x7F;
+        // 0x00: CP Status Register (SR)
+        // Bit 1: Read idle (1), Bit 2: Command idle (1), Bit 3: Breakpoint reached
+        if (reg == 0x00) {
+            u16 sr = 0x0006;
+            if (s_cp_bp_reached) sr |= (1 << 3);
+            return sr;
+        }
+        // 0x28 / 0x2A: Read Pointer (CB_RP)
+        if (reg == 0x28) return (s_cp_read_ptr >> 16) & 0xFFFF;
+        if (reg == 0x2A) return s_cp_read_ptr & 0xFFFF;
+        // 0x30 / 0x32: FIFO distance / count (0 = caught up / idle)
+        if (reg == 0x30 || reg == 0x32) return 0;
+    }
+
+    // PE (Pixel Engine) registers: 0xCC001000 / 0xCD001000
+    if ((ea & 0xFFFFFE00) == 0xCC001000 || (ea & 0xFFFFFE00) == 0xCD001000) {
+        u32 reg = ea & 0x7F;
+        // 0x04: PE Token (GXReadDrawSync)
+        if (reg == 0x04) {
+            return s_pe_draw_token;
+        }
+    }
+
     // EXI (External Interface) registers (0xCD006800 / 0xCC006800)
     if ((ea & 0xFFFFFE00) == 0xCD006800 || (ea & 0xFFFFFE00) == 0xCC006800) {
         u32 reg = ea & 0x3F;
@@ -130,6 +160,33 @@ u64 mmio_external_read(CPUState* cpu, u32 ea, u8 size) {
 void mmio_external_write(CPUState* cpu, u32 ea, u64 value, u8 size) {
     (void)cpu;
     (void)size;
+    // PI FIFO Write Pointer: align to 32-byte units (wiikit commit ae77320)
+    if (ea == 0xCC00000C || ea == 0xCD00000C) {
+        value &= ~0x1FULL;
+        s_cp_read_ptr = (u32)value; // Read pointer catches up with write pointer
+    }
+
+    // CP Breakpoint and Control registers
+    if ((ea & 0xFFFFFE00) == 0xCC000000 || (ea & 0xFFFFFE00) == 0xCD000000) {
+        u32 reg = ea & 0x7F;
+        if (reg == 0x3C) {
+            s_cp_bp_addr = (s_cp_bp_addr & 0x0000FFFF) | ((u32)value << 16);
+            s_cp_bp_reached = 1;
+        } else if (reg == 0x3E) {
+            s_cp_bp_addr = (s_cp_bp_addr & 0xFFFF0000) | ((u32)value & 0xFFFF);
+            s_cp_bp_reached = 1;
+        } else if (reg == 0x02) {
+            if (!(value & 0x02)) {
+                s_cp_bp_reached = 0; // Clear BP
+            }
+        }
+    }
+
+    // PE Token register (0xCC001004 / 0xCD001004)
+    if (ea == 0xCC001004 || ea == 0xCD001004) {
+        s_pe_draw_token = (u16)value;
+    }
+
     // EXI Control Registers: immediately clear TSTART (bit 0) upon write completion
     if ((ea & 0xFFFFFE00) == 0xCD006800 || (ea & 0xFFFFFE00) == 0xCC006800) {
         u32 reg = ea & 0x3F;
@@ -850,6 +907,57 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             ctx->pc = ctx->lr;
             return 1;
         }
+
+        // WPADGetInfo(s32 chan, WPADInfo* info)
+        case 0x80660D80: {
+            s32 chan = (s32)ctx->gpr[3];
+            u32 info_addr = ctx->gpr[4];
+            u8* info = (u8*)resolve_guest_pointer(ctx, info_addr);
+            if (info) {
+                memset(info, 0, 8);
+                info[0] = 0; // dpd: 0
+                info[1] = 1; // attach: 1 (Classic Controller / Extension attached)
+                info[2] = 0; // lowBat: 0
+                info[3] = 1; // led: LED 1
+                info[4] = 0; // protocol
+                info[5] = 0; // firmware
+                info[6] = 4; // battery: 4 (full)
+                info[7] = 0;
+            }
+            if (getenv("TLS_WPAD_TRACE")) {
+                printf("[TLS WPADGetInfo] chan=%d info=0x%08X (attach=1, bat=4)\n", chan, info_addr);
+                fflush(stdout);
+            }
+            ctx->gpr[3] = 0; // WPAD_ERR_NONE
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // WPADGetInfoAsync(s32 chan, WPADInfo* info, WPADCallback cb)
+        case 0x80660E10: {
+            s32 chan = (s32)ctx->gpr[3];
+            u32 info_addr = ctx->gpr[4];
+            u8* info = (u8*)resolve_guest_pointer(ctx, info_addr);
+            if (info) {
+                memset(info, 0, 8);
+                info[0] = 0; // dpd: 0
+                info[1] = 1; // attach: 1 (Classic Controller / Extension attached)
+                info[2] = 0; // lowBat: 0
+                info[3] = 1; // led: LED 1
+                info[4] = 0; // protocol
+                info[5] = 0; // firmware
+                info[6] = 4; // battery: 4 (full)
+                info[7] = 0;
+            }
+            if (getenv("TLS_WPAD_TRACE")) {
+                printf("[TLS WPADGetInfoAsync] chan=%d info=0x%08X (attach=1, bat=4)\n", chan, info_addr);
+                fflush(stdout);
+            }
+            ctx->gpr[3] = 0; // WPAD_ERR_NONE
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
 
         // ARCInitHandle(void* arc_data, ARCHandle* handle)
         case 0x80625BF0: {

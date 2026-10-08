@@ -652,4 +652,27 @@ When you complete or attempt any work:
   - Track A: Subsystem next in line: `ax.c` (Audio eXecutive subsystem starting at `0x80607D70`).
   - Track B: Host runner presentation surface integration for active MEM2 framebuffer display.
 
+### [2026-10-08 19:25] Session 26: 100% Match of ax.c (Audio Executive) + GP FIFO Pacing & WPAD Hooks (395 Functions, 90,288 Bytes, 1.21% Overall)
+- **Track**: Dual-Track: Track A (RVL-SDK Audio Subsystem `ax.c`) & Track B (Native PC Runner GP/WPAD Enhancements)
+- **Target File(s)**: `src/ax.c`, `tools/gen_ax.py`, `config/splits.txt`, `configure.py`, `recomp/replacements.c`, `README.md`, `docs/PROGRESS_LEDGER.json`, `docs/ODYSSEUS_WORKLOG.md`
+- **Accomplishments & Highlights**:
+  - **Track B: Native PC Runner Pacing & Input Progression**:
+    - **GP FIFO Breakpoint & Pacing**: Modeled CP Status (`0xCC000000`), Breakpoint address (`0x3C`/`0x3E`), and PI FIFO 32-byte write pointer masking (`v & ~0x1Fu`) based on `vs-sr-dev/wiikit` commit `ae77320`.
+    - **PE Draw Sync Token**: Implemented PE Token register (`0xCC001004`/`0xCD001004`) tracking to allow `GXReadDrawSync()` / `GXSetDrawSync()` tokens to pass without frame pacing deadlocks.
+    - **WPAD Remote Disconnection Bypass**: Added `WPADGetInfo` (`0x80660D80`) and `WPADGetInfoAsync` (`0x80660E10`) hooks to synthesize active Classic Controller attached state (`attach=1`, `battery=4`, `led=1`) returning `WPAD_ERR_NONE` (0), preventing the "Communications with the Wii Remote have been interrupted" freeze.
+    - **Runtime Verification**: `tls_runner.exe` executed smoothly for 200+ continuous frames without exceptions, proceeding past `preload/camp.pkh`, fully initializing `NW4R - SND`, completing `data/d2anime/ui_loading.d2b` UI loading animation, and actively rendering dual framebuffers to `build/recomp/framebuffer_0.ppm` and `framebuffer_1.ppm`.
+  - **Track A: `ax.c` (26/26 functions, 2,076 code bytes) — 100.00% MATCH**:
+    - Disassembled and authored via `tools/gen_ax.py`.
+    - Matched all 26 functions across `.text` `0x80607D70` – `0x80608610`: `fn_80607D70` (AXInit), `fn_80607DD0`, `fn_80607DE0`, `fn_80607E00`, `fn_80607EB0`, `fn_80607F60`, `fn_80607F80`, `fn_80607F90`, `fn_80608020`, `fn_806080A0`, `fn_80608230`, `fn_806082D0`, `fn_806083F0`, and all auxiliary return volume accessors (`fn_80608430` through `fn_806085F0`).
+    - Handled `@ha`/`@l` relocations on large data symbols and resolved duplicate `memset` definitions with `revolution/types.h`.
+    - Achieved 100.00% exact byte match across all 26 functions with 0 diff bytes.
+  - **Milestone Surpassed**:
+    - Marked `vi3in1.c`, `vi.c`, `pad.c`, `ai.c`, and `ax.c` as matching in `configure.py`.
+    - Official project progress: **34 Modules 100% Matched**, **395 Functions Matched**, **90,288 Code Bytes Matched (1.21% overall)**.
+    - Crossed the **90 KB Code Barrier**!
+- **Next Steps**:
+  - Track A: Match next Audio unit `AXAlloc.c` (`0x80608610` onwards, voice allocation and stack acquisition).
+  - Track B: Integrate windowing (SDL2/GLFW/Win32) to display the live framebuffers in real time.
+
+
 
