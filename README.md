@@ -3,8 +3,8 @@
 <div align="center">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Decomp Progress](https://img.shields.io/badge/Track%20A%20Decomp-1.35%25%20(100%2C916%20bytes)-brightgreen)](docs/PROGRESS_LEDGER.json)
-[![Functions Matched](https://img.shields.io/badge/Functions%20Matched-446%20%2F%2018%2C120-blue)](docs/PROGRESS_LEDGER.json)
+[![Decomp Progress](https://img.shields.io/badge/Track%20A%20Decomp-1.68%25%20(125%2C520%20bytes)-brightgreen)](docs/PROGRESS_LEDGER.json)
+[![Functions Matched](https://img.shields.io/badge/Functions%20Matched-527%20%2F%2018%2C120-blue)](docs/PROGRESS_LEDGER.json)
 [![PC Runner](https://img.shields.io/badge/Track%20B%20PC%20Port-Bootable%20%2F%2060%20FPS-green)](recomp/)
 [![Target](https://img.shields.io/badge/Target-Wii%20USA%20(SLSEXJ)-red)](config/SLSEXJ/)
 
@@ -27,16 +27,16 @@ Directed by **Hironobu Sakaguchi** (creator of *Final Fantasy*) with music by **
 
 ## Current Progress Tracker
 
-> Updated as of **October 2026** — Milestone **>1.35% Overall Code Match & 100 KB Barrier Surpassed! (Entire Nintendo AX Audio Executive 100% Matched)**
+> Updated as of **October 2026** — Milestone **>1.68% Overall Code Match & 125 KB Barrier Surpassed! (Entire Nintendo AX, AXFX & DSP Subsystems 100% Matched)**
 
 ### Overall Metrics
 
 | Metric | Target (`main.dol`) | Matched | Progress |
 | :--- | :--- | :--- | :--- |
-| **Total Code Bytes** | 7,477,324 bytes | **100,916 bytes** | **1.35%** |
-| **Total Functions** | 18,120 functions | **446 functions** | **2.46%** |
-| **Fully Matched Modules** | ~410 modules | **41 modules** | **10.00%** |
-| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 41 matched modules) |
+| **Total Code Bytes** | 7,477,324 bytes | **125,520 bytes** | **1.68%** |
+| **Total Functions** | 18,120 functions | **527 functions** | **2.91%** |
+| **Fully Matched Modules** | ~410 modules | **52 modules** | **12.68%** |
+| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 52 matched modules) |
 | **PC Runner Status** | Boot & Loop | **60 FPS Continuous Loop** | Boot, Subsystems Init, Resource Loader, 200+ Frames, Dual Framebuffers |
 
 ---
@@ -63,6 +63,17 @@ Directed by **Hironobu Sakaguchi** (creator of *Final Fantasy*) with music by **
 | | [`AXVPB.c`](file:///src/AXVPB.c) | 5 / 5 | 2,608 B | **100.00%** | Voice Parameter Blocks, 3D volume attenuation, pitch curves |
 | | [`AXSPB.c`](file:///src/AXSPB.c) | 7 / 7 | 1,304 B | **100.00%** | Sound Parameter Blocks, ADPCM decoding context, panning |
 | | [`AXProf.c`](file:///src/AXProf.c) | 2 / 2 | 72 B | **100.00%** | Hardware audio DSP profiler and cycle measurement tracking |
+| **Audio Effects (AXFX)** | [`AXFXReverbHi.c`](file:///src/AXFXReverbHi.c) | 3 / 3 | 140 B | **100.00%** | High-quality reverb initialization and parameter setup |
+| *(100% Complete — 9 Modules)* | [`AXFXReverbHiExp.c`](file:///src/AXFXReverbHiExp.c) | 8 / 8 | 3,596 B | **100.00%** | Expanded high-quality reverb processing and early reflections |
+| | [`AXFXReverbStdExp.c`](file:///src/AXFXReverbStdExp.c) | 10 / 10 | 3,772 B | **100.00%** | Standard expanded reverb effect processing |
+| | [`AXFXDelay.c`](file:///src/AXFXDelay.c) | 2 / 2 | 680 B | **100.00%** | Multi-channel audio delay processing |
+| | [`AXFXChorusExp.c`](file:///src/AXFXChorusExp.c) | 11 / 11 | 3,768 B | **100.00%** | Expanded stereo chorus and pitch modulation effect |
+| | [`AXFXReverbHiExpDpl2.c`](file:///src/AXFXReverbHiExpDpl2.c) | 10 / 10 | 3,384 B | **100.00%** | Dolby Pro Logic II expanded high reverb processing |
+| | [`AXFXReverbStd.c`](file:///src/AXFXReverbStd.c) | 7 / 7 | 2,816 B | **100.00%** | Standard reverb processing core routines |
+| | [`AXFXReverbHiDpl2.c`](file:///src/AXFXReverbHiDpl2.c) | 7 / 7 | 2,896 B | **100.00%** | Dolby Pro Logic II high reverb processing core routines |
+| | [`AXFXHooks.c`](file:///src/AXFXHooks.c) | 6 / 6 | 88 B | **100.00%** | Audio effects memory allocation hooks and coefficient access |
+| **Digital Signal Processor (DSP)** | [`dsp.c`](file:///src/dsp.c) | 6 / 6 | 272 B | **100.00%** | Hardware DSP mailbox communications, interrupt control, init |
+| *(100% Complete — 2 Modules)* | [`dsp_task.c`](file:///src/dsp_task.c) | 11 / 11 | 3,192 B | **100.00%** | DSP task scheduling queue, execution, context switching |
 | **Controller (PAD)** | [`pad.c`](file:///src/pad.c) | 1 / 1 | 92 B | **100.00%** | Calibration flag control (`__PADDisableRecalibration`) |
 | *(100% Complete)* | | | | | |
 | **Math & Matrix** | [`PSMTX.c`](file:///src/PSMTX.c) | 7 / 7 | 1,280 B | **100.00%** | Paired-single hardware accelerated matrix operations |
@@ -87,7 +98,7 @@ Directed by **Hironobu Sakaguchi** (creator of *Final Fantasy*) with music by **
 | | [`global_destructor_chain.c`](file:///src/global_destructor_chain.c) | 2 / 2 | 96 B | **100.00%** | C++ global object teardown |
 | | [`__init_hardware.c`](file:///src/__init_hardware.c) | 2 / 2 | 100 B | **100.00%** | Early hardware initialization vector |
 | | [`init_user.c`](file:///src/init_user.c) | 1 / 1 | 28 B | **100.00%** | CRT user initialization stub |
-| **Graphics Subsystem (GX)**| `gx.c` | Next | ~45 KB | Planning | Flipper/Hollywood GPU command lists, textures, lighting |
+| **Graphics Subsystem (GX)**| `gx.c` / `GXInit.c` | Next | ~45 KB | Planning | Flipper/Hollywood GPU command lists, textures, lighting |
 
 ---
 

@@ -138,6 +138,39 @@ AXSPB.c:
 AXProf.c:
 	.text       start:0x8060B080 end:0x8060B0D0
 
+AXFXReverbHi.c:
+	.text       start:0x8060B0D0 end:0x8060B180
+
+AXFXReverbHiExp.c:
+	.text       start:0x8060B180 end:0x8060BFE0
+
+AXFXReverbStdExp.c:
+	.text       start:0x8060BFE0 end:0x8060CEE0
+
+AXFXDelay.c:
+	.text       start:0x8060CEE0 end:0x8060D190
+
+AXFXChorusExp.c:
+	.text       start:0x8060D190 end:0x8060E080
+
+AXFXReverbHiExpDpl2.c:
+	.text       start:0x8060E080 end:0x8060EDF0
+
+AXFXReverbStd.c:
+	.text       start:0x8060EDF0 end:0x8060F910
+
+AXFXReverbHiDpl2.c:
+	.text       start:0x8060F910 end:0x80610490
+
+AXFXHooks.c:
+	.text       start:0x80610490 end:0x80610510
+
+dsp.c:
+	.text       start:0x80610510 end:0x80610640
+
+dsp_task.c:
+	.text       start:0x80610640 end:0x806112F0
+
 global_destructor_chain.c:
 	.text       start:0x80695420 end:0x80695480
 

@@ -2309,8 +2309,217 @@
       }
     },
     {
-      "name": "main/auto_03_8060B0D0_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8060B0D0_text.o",
+      "name": "main/AXFXReverbHi",
+      "target_path": "build/SLSEXJ/obj/AXFXReverbHi.o",
+      "base_path": "build/SLSEXJ/src/AXFXReverbHi.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/AXFXReverbHi.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/AXFXReverbHi.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/AXFXReverbHiExp",
+      "target_path": "build/SLSEXJ/obj/AXFXReverbHiExp.o",
+      "base_path": "build/SLSEXJ/src/AXFXReverbHiExp.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/AXFXReverbHiExp.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/AXFXReverbHiExp.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/AXFXReverbStdExp",
+      "target_path": "build/SLSEXJ/obj/AXFXReverbStdExp.o",
+      "base_path": "build/SLSEXJ/src/AXFXReverbStdExp.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/AXFXReverbStdExp.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/AXFXReverbStdExp.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/AXFXDelay",
+      "target_path": "build/SLSEXJ/obj/AXFXDelay.o",
+      "base_path": "build/SLSEXJ/src/AXFXDelay.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/AXFXDelay.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/AXFXDelay.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/AXFXChorusExp",
+      "target_path": "build/SLSEXJ/obj/AXFXChorusExp.o",
+      "base_path": "build/SLSEXJ/src/AXFXChorusExp.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/AXFXChorusExp.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/AXFXChorusExp.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/AXFXReverbHiExpDpl2",
+      "target_path": "build/SLSEXJ/obj/AXFXReverbHiExpDpl2.o",
+      "base_path": "build/SLSEXJ/src/AXFXReverbHiExpDpl2.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/AXFXReverbHiExpDpl2.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/AXFXReverbHiExpDpl2.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/AXFXReverbStd",
+      "target_path": "build/SLSEXJ/obj/AXFXReverbStd.o",
+      "base_path": "build/SLSEXJ/src/AXFXReverbStd.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/AXFXReverbStd.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/AXFXReverbStd.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/AXFXReverbHiDpl2",
+      "target_path": "build/SLSEXJ/obj/AXFXReverbHiDpl2.o",
+      "base_path": "build/SLSEXJ/src/AXFXReverbHiDpl2.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/AXFXReverbHiDpl2.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/AXFXReverbHiDpl2.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/AXFXHooks",
+      "target_path": "build/SLSEXJ/obj/AXFXHooks.o",
+      "base_path": "build/SLSEXJ/src/AXFXHooks.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/AXFXHooks.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/AXFXHooks.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/dsp",
+      "target_path": "build/SLSEXJ/obj/dsp.o",
+      "base_path": "build/SLSEXJ/src/dsp.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/dsp.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/dsp.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/dsp_task",
+      "target_path": "build/SLSEXJ/obj/dsp_task.o",
+      "base_path": "build/SLSEXJ/src/dsp_task.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/dsp_task.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/dsp_task.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/auto_03_806112F0_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_806112F0_text.o",
       "metadata": {
         "progress_categories": [],
         "auto_generated": true
