@@ -63,6 +63,57 @@ OSReset.c:
 OSPlayTime.c:
 	.text       start:0x805F7980 end:0x805F86B0
 
+OSTitle.c:
+	.text       start:0x805F86B0 end:0x805F88C0
+
+init_user.c:
+	.text       start:0x805F88C0 end:0x805F8980
+
+PSMTX.c:
+	.text       start:0x805F8980 end:0x805F8E70
+
+mtx.c:
+	.text       start:0x805F8E70 end:0x805F9640
+
+mtx44.c:
+	.text       start:0x805F9640 end:0x805F98D0
+
+vec.c:
+	.text       start:0x805F98D0 end:0x805F99F0
+
+quat.c:
+	.text       start:0x805F99F0 end:0x805F9EC0
+
+DVDFS.c:
+	.text       start:0x805F9EC0 end:0x805FA8D0
+
+dvd.c:
+	.text       start:0x805FA8D0 end:0x805FF4F0
+
+dvdqueue.c:
+	.text       start:0x805FF4F0 end:0x805FF800
+
+dvderror.c:
+	.text       start:0x805FF800 end:0x80600280
+
+dvdFatal.c:
+	.text       start:0x80600280 end:0x80600400
+
+dvd_broadway.c:
+	.text       start:0x80600400 end:0x80602ED0
+
+vi3in1.c:
+	.text       start:0x80602ED0 end:0x80604580
+
+vi.c:
+	.text       start:0x80604580 end:0x80607740
+
+pad.c:
+	.text       start:0x80607740 end:0x806077A0
+
+ai.c:
+	.text       start:0x806077A0 end:0x80607D70
+
 global_destructor_chain.c:
 	.text       start:0x80695420 end:0x80695480
 

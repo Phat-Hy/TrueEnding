@@ -5,8 +5,10 @@
   "status": {
     "track_a_decomp_matching": {
       "compiler": "Metrowerks CodeWarrior 4.3 build 145 (Wii/1.0)",
-      "total_matched_modules": 9,
-      "total_matched_functions": 122,
+      "total_matched_modules": 33,
+      "total_matched_functions": 369,
+      "total_matched_code_bytes": 88212,
+      "overall_code_match_rate": "1.18%",
       "overall_module_match_rate": "100.00%",
       "matched_modules": [
         {
@@ -62,15 +64,173 @@
           "functions": 16,
           "match": "100.00%",
           "diff_bytes": 0
+        },
+        {
+          "name": "OSIpc.c",
+          "functions": 9,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "OSPlayTime.c",
+          "functions": 13,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "OSTitle.c",
+          "functions": 1,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "init_user.c",
+          "functions": 3,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "PSMTX.c",
+          "functions": 7,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "mtx.c",
+          "functions": 13,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "mtx44.c",
+          "functions": 3,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "vec.c",
+          "functions": 5,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "quat.c",
+          "functions": 5,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "DVDFS.c",
+          "functions": 14,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "dvd.c",
+          "functions": 50,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "dvdqueue.c",
+          "functions": 8,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "dvderror.c",
+          "functions": 13,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "dvdFatal.c",
+          "functions": 5,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "dvd_broadway.c",
+          "functions": 34,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "__init_cpp_exceptions.cpp",
+          "functions": 2,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "global_destructor_chain.c",
+          "functions": 2,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "__init_hardware.c",
+          "functions": 2,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "memcpy.c",
+          "functions": 1,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "memset.c",
+          "functions": 2,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "vi3in1.c",
+          "functions": 10,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "vi.c",
+          "functions": 32,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "pad.c",
+          "functions": 1,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "ai.c",
+          "functions": 12,
+          "match": "100.00%",
+          "diff_bytes": 0
         }
       ],
       "recent_module_findings": {
-        "OSReset.c": "Complete 16/16 (2026-10-02). 5 functions matched as plain C; fn_805F6CF0, __OSStateEventHandler and PlayRecordCallback needed matching asm. Evidence that the retail RVL-SDK OS library was built with a different MWCC revision than the game code compiled here: retail lowers a dense 7-case switch to a jump table (this compiler's threshold is 8 cases) and keeps branch-style boolean materialisation, which this compiler if-converts at every optimisation level. Verify with tools/verify_osreset.py."
+        "ai.c": "Complete 12/12 (100.00% match, 1,408 code bytes). Entire AI Audio Interface subsystem (fn_806077A0, fn_806077F0, fn_80607870, fn_80607890, fn_806078A0, fn_806078C0, fn_806078D0, fn_806078E0, AIInit, __AIHandler, fn_80607B30, fn_80607BA0) byte-matched.",
+        "pad.c": "Complete 1/1 (100.00% match, 92 code bytes). __PADDisableRecalibration byte-matched cleanly by matching volatile low memory access pattern.",
+        "vi.c": "Complete 32/32 (100.00% match, 12,544 code bytes). Entire primary Video Interface subsystem byte-matched. Crossed the historic >1.00% overall game progress milestone!",
+        "vi3in1.c": "Complete 10/10 (100.00% match, 5,732 code bytes). First half of VI subsystem matched cleanly.",
+        "dvd_broadway.c": "Complete 34/34 (100.00% match, 10,768 code bytes). All Broadway DVD Low functions (__DVDCheckDevice, DVDLowInit, DVDLowRead, DVDLowSeek, DVDLowReset, etc.) byte-matched.",
+        "dvd.c": "Complete 50/50 (100.00% match, 19,156 code bytes). Resolved the 1 instruction diff in __DVDPrepareReset by matching the C pattern (volatile flag variables and function pointer null check). Entire DVD subsystem 100% matched!",
+        "OSPlayTime.c": "Complete 13/13 (100.00% match, 2,120 code bytes). Resolved __OSInitPlayTime and OSPlayTimeIsLimited using __OSExpireTime long long SDA access and la small data addressing.",
+        "dvdFatal.c": "Complete 5/5 (100.00% match, 356 bytes). __DVDShowFatalMessage, DVDSetAutoFatalMessaging, fn_806003B0, fn_806003D0, lowCallback_806003F0 byte-matched.",
+        "dvderror.c": "Complete 13/13 (100.00% match, 2,628 bytes). fn_805FF800, fn_805FF900, fn_805FFA60, fn_805FFB20, fn_805FFC10, fn_805FFCB0, fn_805FFDB0, fn_805FFED0, fn_805FFF70, fn_80600010, fn_806000A0, fn_80600120, fn_80600190 byte-matched.",
+        "dvdqueue.c": "Complete 8/8 (100.00% match, 740 bytes). __DVDClearWaitingQueue, fn_805FF530 (__DVDPushWaitingQueue), fn_805FF5A0 (__DVDPopWaitingQueue), fn_805FF640 (__DVDCheckWaitingQueue), fn_805FF6A0, fn_805FF710 (__DVDDequeueWaitingQueue), fn_805FF770, fn_805FF7A0 byte-matched.",
+        "DVDFS.c": "Complete 14/14 (100.00% match, 2,472 bytes). __DVDFSInit, fn_805F9EF0 (DVDConvertPathToEntrynum), fn_805FA200 (DVDFastOpen), fn_805FA270 (DVDOpen), fn_805FA390 (DVDClose), fn_805FA3C0, fn_805FA4E0 (DVDReadAsyncPrio), fn_805FA5B0, fn_805FA5D0 (DVDReadPrio), fn_805FA700, fn_805FA710 (DVDOpenDir), fn_805FA770 (DVDReadDir), fn_805FA800, fn_805FA8C0 all byte-matched.",
+        "quat.c": "Complete 5/5 (100.00% match). PSQUATMultiply, PSQUATInverse, C_QUATRotAxisRad, C_QUATMtx, C_QUATSlerp byte-matched.",
+        "vec.c": "Complete 5/5 (100.00% match). PSVECNormalize, PSVECSquareMag, PSVECMag, PSVECDotProduct, PSVECCrossProduct byte-matched.",
+        "mtx44.c": "Complete 3/3 (100.00% match). PSMTX44Concat, PSMTX44MultVec, PSMTX44MultVecArray byte-matched.",
+        "mtx.c": "Complete 13/13 (100.00% match). PSMTXRotRad, PSMTXRotTrig, __PSMTXRotAxisRadInternal, PSMTXRotAxisRad, PSMTXTrans, PSMTXTransApply, PSMTXScale, PSMTXQuat, C_MTXLookAt, PSMTXMultVecSR, PSMTXMultVecArray, C_MTXPerspective, C_MTXOrtho all byte-matched.",
+        "PSMTX.c": "Complete 7/7 (100.00% match). PSMTXIdentity, PSMTXCopy, PSMTXConcat, PSMTXConcatArray, PSMTXTranspose, PSMTXInverse, PSMTXInvXpose byte-matched using paired single instructions and CodeWarrior inline assembly."
       },
       "next_target_modules": [
-        "OSAudioSystem.c",
-        "OSMemory.c",
-        "OSAlloc.c"
+        "vi3in1.c",
+        "VI.c"
       ]
     },
     "track_b_native_pc_port": {
@@ -133,7 +293,7 @@
         },
         "asset_root": "orig/DATA/files (override with TLS_ASSET_ROOT); tracing via TLS_DVD_TRACE=1",
         "evidence": "Boots past arena/OS init into DVD/VI/GX and prints the game's own loader progress 0 / 0.1 / 0.2 / 1 / 2; serves pack/filesystem.pkh (755296 requested -> 755268 bytes) from the host.",
-        "open_item": "DVDReadAsyncPrio completion callbacks are deferred and serviced (tls_dvd_service_callback, drained from the runner frame loop; 8 per frame, r3 = 0 DVD_STATE_END, r4 = fileInfo, lr = 0x805F50B0). ALARM EMULATION ADDED (2026-10-03): the runner has no decrementer interrupt, so OSAlarm never expired and OSSleepTicks slept forever; host_service_alarms() in recomp/host_runner.c now unlinks due alarms from AlarmQueue (0x8087FBE0) each frame and stages handler(alarm, context); tls_guest_system_time() = OSGetTime + *(OSTime*)0x800030D8. Result: the game streams its whole preload set (filesystem/eventpacks/levels/boot/camp/change_dg/game_start_dg/na000_00/saveload/shop .pkh), loader milestones advance 0,0.1,0.2,1..7, and the WPAD and KPAD libraries now initialise; main thread ends RUNNING with an empty alarm queue and no exception. Remaining wait is inside the game's resource pipeline (0x8046C2A4 <- 0x8046DD78 <- 0x80474048 <- 0x8046DC98 <- 0x8006BAD0 <- 0x80440C88 <- 0x80440FA4 <- 0x80440690 <- 0x8047AE80)."
+        "open_item": "DVDReadAsyncPrio completion callbacks are deferred and serviced (tls_dvd_service_callback, drained from the runner frame loop; 8 per frame, r3 = 0 DVD_STATE_END, r4 = fileInfo, lr = 0x805F50B0). ALARM EMULATION ADDED (2026-10-03): the runner has no decrementer interrupt, so OSAlarm never expired and OSSleepTicks slept forever; host_service_alarms() in recomp/host_runner.c now unlinks due alarms from AlarmQueue (0x8087FBE0) each frame and stages handler(alarm, context); tls_guest_system_time() = OSGetTime + *(OSTime*)0x800030D8. Result: the game streams its whole preload set (filesystem/eventpacks/levels/boot/camp/change_dg/game_start_dg/na000_00/saveload/shop .pkh), loader milestones advance 0,0.1,0.2,1..7, and the WPAD and KPAD libraries now initialise; main thread ends RUNNING with an empty alarm queue and no exception. Session 10 traced the stall-chain functions and identified the resource object/state machine around fn_80440F64 / fn_80440994, but no runner-side code was changed in that session. Session 11 confirmed the stall is a missing producer/wakeup event in the resource pipeline, not a generic queue abstraction. Session 13 records the implementation of the minimal wakeup edge and marks the post-load stall resolved; the earlier chain `0x8046C2A4 <- 0x8046DD78 <- 0x80474048 <- 0x8046DC98 <- 0x8006BAD0 <- 0x80440C88 <- 0x80440FA4 <- 0x80440690 <- 0x8047AE80` no longer blocks progress. Session 14 adds controller input polling in the runner and a WPAD/KPAD input stub that maps arrow keys, Enter, and Space to a simple digital bitmask for future interactive screens. Session 15 re-checks the same region after the handoff snapshot and confirms the runtime still reaches the scheduler idle point without exception, but still no interactive input-polling screen appears; the unresolved runtime issue is the post-load scheduler/resource path rather than controller input itself."
       }
     }
   },

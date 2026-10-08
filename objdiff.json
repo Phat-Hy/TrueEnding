@@ -1834,8 +1834,331 @@
       }
     },
     {
-      "name": "main/auto_03_805F86B0_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_805F86B0_text.o",
+      "name": "main/OSTitle",
+      "target_path": "build/SLSEXJ/obj/OSTitle.o",
+      "base_path": "build/SLSEXJ/src/OSTitle.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/OSTitle.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": false,
+        "reverse_fn_order": false,
+        "source_path": "src/OSTitle.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/init_user",
+      "target_path": "build/SLSEXJ/obj/init_user.o",
+      "base_path": "build/SLSEXJ/src/init_user.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 48 -sdata2 48 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/init_user.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/init_user.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/PSMTX",
+      "target_path": "build/SLSEXJ/obj/PSMTX.o",
+      "base_path": "build/SLSEXJ/src/PSMTX.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/PSMTX.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/PSMTX.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/mtx",
+      "target_path": "build/SLSEXJ/obj/mtx.o",
+      "base_path": "build/SLSEXJ/src/mtx.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/mtx.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/mtx.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/mtx44",
+      "target_path": "build/SLSEXJ/obj/mtx44.o",
+      "base_path": "build/SLSEXJ/src/mtx44.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/mtx44.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/mtx44.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/vec",
+      "target_path": "build/SLSEXJ/obj/vec.o",
+      "base_path": "build/SLSEXJ/src/vec.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/vec.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/vec.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/quat",
+      "target_path": "build/SLSEXJ/obj/quat.o",
+      "base_path": "build/SLSEXJ/src/quat.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/quat.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/quat.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/DVDFS",
+      "target_path": "build/SLSEXJ/obj/DVDFS.o",
+      "base_path": "build/SLSEXJ/src/DVDFS.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/DVDFS.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": false,
+        "reverse_fn_order": false,
+        "source_path": "src/DVDFS.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/dvd",
+      "target_path": "build/SLSEXJ/obj/dvd.o",
+      "base_path": "build/SLSEXJ/src/dvd.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/dvd.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": false,
+        "reverse_fn_order": false,
+        "source_path": "src/dvd.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/dvdqueue",
+      "target_path": "build/SLSEXJ/obj/dvdqueue.o",
+      "base_path": "build/SLSEXJ/src/dvdqueue.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/dvdqueue.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": false,
+        "reverse_fn_order": false,
+        "source_path": "src/dvdqueue.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/dvderror",
+      "target_path": "build/SLSEXJ/obj/dvderror.o",
+      "base_path": "build/SLSEXJ/src/dvderror.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/dvderror.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": false,
+        "reverse_fn_order": false,
+        "source_path": "src/dvderror.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/dvdFatal",
+      "target_path": "build/SLSEXJ/obj/dvdFatal.o",
+      "base_path": "build/SLSEXJ/src/dvdFatal.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/dvdFatal.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": false,
+        "reverse_fn_order": false,
+        "source_path": "src/dvdFatal.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/dvd_broadway",
+      "target_path": "build/SLSEXJ/obj/dvd_broadway.o",
+      "base_path": "build/SLSEXJ/src/dvd_broadway.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/dvd_broadway.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": false,
+        "reverse_fn_order": false,
+        "source_path": "src/dvd_broadway.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/vi3in1",
+      "target_path": "build/SLSEXJ/obj/vi3in1.o",
+      "base_path": "build/SLSEXJ/src/vi3in1.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/vi3in1.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": false,
+        "reverse_fn_order": false,
+        "source_path": "src/vi3in1.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/vi",
+      "target_path": "build/SLSEXJ/obj/vi.o",
+      "base_path": "build/SLSEXJ/src/vi.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/vi.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": false,
+        "reverse_fn_order": false,
+        "source_path": "src/vi.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/pad",
+      "target_path": "build/SLSEXJ/obj/pad.o",
+      "base_path": "build/SLSEXJ/src/pad.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/pad.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": false,
+        "reverse_fn_order": false,
+        "source_path": "src/pad.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/ai",
+      "target_path": "build/SLSEXJ/obj/ai.o",
+      "base_path": "build/SLSEXJ/src/ai.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/ai.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": false,
+        "reverse_fn_order": false,
+        "source_path": "src/ai.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/auto_03_80607D70_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80607D70_text.o",
       "metadata": {
         "progress_categories": [],
         "auto_generated": true
@@ -3000,7 +3323,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": true,
+        "complete": false,
         "reverse_fn_order": false,
         "source_path": "src/__init_cpp_exceptions.cpp",
         "progress_categories": [],

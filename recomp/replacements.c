@@ -3,6 +3,21 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#ifdef _WIN32
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+#else
+static short GetAsyncKeyState(int vKey) {
+    (void)vKey;
+    return 0;
+}
+#define VK_LEFT 0
+#define VK_RIGHT 1
+#define VK_UP 2
+#define VK_DOWN 3
+#define VK_RETURN 4
+#define VK_SPACE 5
+#endif
 
 void* resolve_guest_pointer(CPUState* ctx, u32 addr) {
     if (addr >= GC_RAM_BASE && addr < GC_RAM_BASE + ctx->ram_size) {
@@ -132,9 +147,33 @@ void mmio_external_write(CPUState* cpu, u32 ea, u64 value, u8 size) {
 
 static u32 s_simulated_ticks = 0;
 
+static u8 s_controller_button_bits = 0;
+static u32 s_controller_poll_count = 0;
+
 /* Current guest time, matching the OSGetTime replacement below. */
 static u64 guest_time_now(CPUState* ctx) {
     return ctx->timebase + (u64)s_simulated_ticks;
+}
+
+static u8 tls_poll_controller_buttons(void) {
+    u8 buttons = 0;
+#ifdef _WIN32
+    if (GetAsyncKeyState(VK_LEFT) & 0x8000) buttons |= 0x08;
+    if (GetAsyncKeyState(VK_RIGHT) & 0x8000) buttons |= 0x04;
+    if (GetAsyncKeyState(VK_UP) & 0x8000) buttons |= 0x01;
+    if (GetAsyncKeyState(VK_DOWN) & 0x8000) buttons |= 0x02;
+    if (GetAsyncKeyState(VK_RETURN) & 0x8000) buttons |= 0x08;
+    if (GetAsyncKeyState(VK_SPACE) & 0x8000) buttons |= 0x04;
+#endif
+    return buttons;
+}
+
+int tls_service_controller_input(CPUState* ctx) {
+    (void)ctx;
+    u8 buttons = tls_poll_controller_buttons();
+    s_controller_button_bits = buttons;
+    s_controller_poll_count++;
+    return buttons != 0;
 }
 
 /* System time the OS uses for alarms: __OSGetSystemTime() = OSGetTime() + *(OSTime*)0x800030D8 */
@@ -157,23 +196,53 @@ static void format_and_print_osreport(CPUState* ctx, const char* fmt) {
             while (*p == '-' || *p == '+' || *p == ' ' || *p == '#' || *p == '0' || (*p >= '0' && *p <= '9') || *p == '.') p++;
             while (*p == 'l' || *p == 'h' || *p == 'z') p++;
             if (*p == 's') {
-                u32 s_addr = (gpr_idx <= 10) ? ctx->gpr[gpr_idx++] : 0;
+                u32 s_addr;
+                if (gpr_idx <= 10) {
+                    s_addr = ctx->gpr[gpr_idx++];
+                } else {
+                    s_addr = 0;
+                }
                 const char* s = (const char*)resolve_guest_pointer(ctx, s_addr);
                 fputs(s ? s : "(null)", stdout);
             } else if (*p == 'd' || *p == 'i') {
-                s32 v = (gpr_idx <= 10) ? (s32)ctx->gpr[gpr_idx++] : 0;
+                s32 v;
+                if (gpr_idx <= 10) {
+                    v = (s32)ctx->gpr[gpr_idx++];
+                } else {
+                    v = 0;
+                }
                 printf("%d", v);
             } else if (*p == 'u') {
-                u32 v = (gpr_idx <= 10) ? ctx->gpr[gpr_idx++] : 0;
+                u32 v;
+                if (gpr_idx <= 10) {
+                    v = ctx->gpr[gpr_idx++];
+                } else {
+                    v = 0;
+                }
                 printf("%u", v);
             } else if (*p == 'x' || *p == 'X') {
-                u32 v = (gpr_idx <= 10) ? ctx->gpr[gpr_idx++] : 0;
+                u32 v;
+                if (gpr_idx <= 10) {
+                    v = ctx->gpr[gpr_idx++];
+                } else {
+                    v = 0;
+                }
                 printf((*p == 'x') ? "%x" : "%X", v);
             } else if (*p == 'p') {
-                u32 v = (gpr_idx <= 10) ? ctx->gpr[gpr_idx++] : 0;
+                u32 v;
+                if (gpr_idx <= 10) {
+                    v = ctx->gpr[gpr_idx++];
+                } else {
+                    v = 0;
+                }
                 printf("0x%08X", v);
             } else if (*p == 'c') {
-                u32 v = (gpr_idx <= 10) ? ctx->gpr[gpr_idx++] : 0;
+                u32 v;
+                if (gpr_idx <= 10) {
+                    v = ctx->gpr[gpr_idx++];
+                } else {
+                    v = 0;
+                }
                 putchar((char)v);
             } else {
                 putchar('%');
@@ -315,6 +384,18 @@ static u32 s_dvd_pending_head = 0;
 static u32 s_dvd_pending_tail = 0;
 static u32 s_dvd_callbacks_run = 0;
 
+#define TLS_MQ_MAX 32
+
+typedef struct PendingMessageQueueWakeup {
+    u32 queue_addr;
+    u32 message_addr;
+} PendingMessageQueueWakeup;
+
+static PendingMessageQueueWakeup s_pending_mq[TLS_MQ_MAX];
+static u32 s_pending_mq_head = 0;
+static u32 s_pending_mq_tail = 0;
+static u32 s_pending_mq_count = 0;
+
 static void dvd_queue_callback(u32 callback, u32 file_info) {
     if (!callback) {
         return;
@@ -328,9 +409,13 @@ static void dvd_queue_callback(u32 callback, u32 file_info) {
     s_dvd_pending_tail = next;
 }
 
+
 /* Sets up the guest to run one queued callback. Returns 1 when a call was staged. */
 int tls_dvd_service_callback(CPUState* ctx) {
     if (s_dvd_pending_head == s_dvd_pending_tail) {
+        return 0;
+    }
+    if (!tls_is_idle_address(ctx->pc)) {
         return 0;
     }
     PendingDvdCallback pending = s_dvd_pending[s_dvd_pending_head];
@@ -344,7 +429,7 @@ int tls_dvd_service_callback(CPUState* ctx) {
     ctx->lr = TLS_DVD_IDLE_PC;       /* return into the scheduler idle point */
     ctx->pc = pending.callback;
     s_dvd_callbacks_run++;
-    if (getenv("TLS_DVD_TRACE") && s_dvd_callbacks_run <= 12) {
+    if (getenv("TLS_DVD_TRACE") && s_dvd_callbacks_run <= 128) {
         printf("[TLS DVD] callback #%u -> %08X fileInfo=%08X\n", s_dvd_callbacks_run,
                pending.callback, pending.file_info);
         fflush(stdout);
@@ -352,7 +437,47 @@ int tls_dvd_service_callback(CPUState* ctx) {
     return 1;
 }
 
+int tls_service_message_queues(CPUState* ctx) {
+    (void)ctx;
+    return 0;
+}
+
+/* Ring buffer of the most recent dispatched guest functions, for stall diagnosis. */
+#define TLS_RECENT_MAX 64
+static u32 s_recent_calls[TLS_RECENT_MAX];
+static u32 s_recent_count = 0;
+static u32 s_recent_pos = 0;
+
+int tls_is_idle_address(u32 address) {
+    return address == 0x805F50B0u || address == 0x805F5060u || address == 0x805F5094u ||
+           address == 0x805F50A8u || address == 0x805F50ACu;
+}
+
+void tls_record_recent_call(u32 address) {
+    if (tls_is_idle_address(address)) {
+        return;
+    }
+    s_recent_calls[s_recent_pos] = address;
+    s_recent_pos = (s_recent_pos + 1) % TLS_RECENT_MAX;
+    if (s_recent_count < TLS_RECENT_MAX) {
+        s_recent_count++;
+    }
+}
+
+void tls_dump_recent_calls(void) {
+    printf("\n[Runner] Last %u non-idle guest functions (oldest first):\n", s_recent_count);
+    for (u32 i = 0; i < s_recent_count; i++) {
+        u32 idx = (s_recent_pos + TLS_RECENT_MAX - s_recent_count + i) % TLS_RECENT_MAX;
+        printf("         0x%08X\n", s_recent_calls[idx]);
+    }
+}
+
+u32 g_count_c1c8 = 0;
+u32 g_count_bbf0 = 0;
+
 int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
+    tls_record_recent_call(address);
+
     switch (address) {
         // OSReport: printf diagnostic messages to host console
         case 0x805EE0D0: {
@@ -391,6 +516,88 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // OSGetTick: 32-bit tick counter in r3
         case 0x805F5FB0: {
             ctx->gpr[3] = (s_simulated_ticks += 1000);
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // __OSGetSystemTime: 64-bit system time in (r3, r4)
+        case 0x805F5FC0: {
+            s_simulated_ticks += 2000;
+            u64 tb = tls_guest_system_time(ctx);
+            ctx->gpr[3] = (u32)(tb >> 32);
+            ctx->gpr[4] = (u32)(tb & 0xFFFFFFFF);
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // __VIDelay: timing delay loop on video encoder
+        case 0x806056D0: {
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // Diagnostic monitoring for resource pipeline
+        case 0x8046C1C8: {
+            if (++g_count_c1c8 <= 60) {
+                printf("[TLS 8046C1C8] #%u lr=0x%08X\n", g_count_c1c8, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // continue to original code
+        }
+        case 0x8046BBF0: {
+            if (++g_count_bbf0 <= 80) {
+                u32 item = ctx->gpr[4];
+                u32 st = mem_read32(ctx, item);
+                u32 cnt = mem_read32(ctx, item + 80);
+                u32 sub0 = mem_read32(ctx, item + 84);
+                u32 req = sub0 ? mem_read32(ctx, sub0) : 0;
+                printf("[TLS 8046BBF0] #%u item=0x%08X status=%u cnt=%u req=0x%08X req_st=%u (lr=0x%08X)\n",
+                       g_count_bbf0, item, st, cnt, req, req ? mem_read8(ctx, req + 4) : 0, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // continue to original code
+        }
+        case 0x8046BEE0: {
+            printf("[TLS 8046BBF0] EXIT lr=0x%08X\n", ctx->lr);
+            fflush(stdout);
+            return 0;
+        }
+        case 0x806254D0: {
+            printf("[TLS CXDecompressFast] ENTER src=0x%08X dst=0x%08X (lr=0x%08X)\n",
+                   ctx->gpr[3], ctx->gpr[4], ctx->lr);
+            fflush(stdout);
+            return 0;
+        }
+        case 0x80625728: {
+            printf("[TLS CXUncompressLZ] EXIT dst=0x%08X (lr=0x%08X)\n",
+                   ctx->gpr[4], ctx->lr);
+            fflush(stdout);
+            return 0;
+        }
+        case 0x80473104: {
+            static u32 count_3104 = 0;
+            if (++count_3104 <= 80) {
+                u32 req = ctx->gpr[3];
+                u32 new_st = ctx->gpr[4];
+                printf("[TLS SetReqStatus] #%u req=0x%08X -> %u (lr=0x%08X)\n",
+                       count_3104, req, new_st, ctx->lr);
+                fflush(stdout);
+            }
+            return 0;
+        }
+        case 0x80473184: {
+            static u32 count_3184 = 0;
+            if (++count_3184 <= 80) {
+                u32 req = ctx->gpr[3];
+                printf("[TLS ReqDoneCb] #%u req=0x%08X status=%u (lr=0x%08X)\n",
+                       count_3184, req, mem_read8(ctx, req + 4), ctx->lr);
+                fflush(stdout);
+            }
+            return 0;
+        }
+        case 0x805F3A80: // OSSendMessage
+        case 0x805F3B00: // OSReceiveMessage
+        case 0x805F3B40: { // OSJamMessage
             ctx->pc = ctx->lr;
             return 1;
         }
@@ -494,6 +701,31 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 1;
         }
 
+        // __VISendI2CData: I2C transmission to AVE-RVL video encoder
+        case 0x80605AB0: {
+            ctx->gpr[3] = 0; // Success
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // VISetNextFrameBuffer: capture guest framebuffer pointer
+        case 0x80607120: {
+            u32 fb = ctx->gpr[3];
+            static u32 s_last_fb = 0;
+            if (fb != s_last_fb) {
+                printf("[TLS VI] VISetNextFrameBuffer: 0x%08X (lr=0x%08X)\n", fb, ctx->lr);
+                fflush(stdout);
+                s_last_fb = fb;
+            }
+            if (ctx->gpr[13]) {
+                mem_write32(ctx, ctx->gpr[13] - 22556, fb);
+                u32 flags = mem_read32(ctx, ctx->gpr[13] - 22568);
+                mem_write32(ctx, ctx->gpr[13] - 22568, flags | 0x10);
+            }
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
         // __DVDConvertPathToEntrynum(const char* path) -> synthetic host file id
         case 0x805F9EF0: {
             const char* path = (const char*)resolve_guest_pointer(ctx, ctx->gpr[3]);
@@ -561,7 +793,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             }
             if (ok) {
                 s_dvd_read_ok++;
-                if (getenv("TLS_DVD_TRACE") && s_dvd_read_ok <= 12) {
+                if (getenv("TLS_DVD_TRACE") && s_dvd_read_ok <= 128) {
                     printf("[TLS DVD] read #%u %s off=%d len=%d -> %u bytes lr=%08X cb=%08X\n", s_dvd_read_ok,
                            asset ? asset->path : "?", offset, length, transferred, ctx->lr, callback);
                     fflush(stdout);
@@ -601,6 +833,20 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u8* state = (u8*)resolve_guest_pointer(ctx, 0x80820666);
             if (state) *state = 5;
             ctx->gpr[3] = 1;
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // WPAD/KPAD input polling: synthesize a small button mask from host keys.
+        // The game mostly needs a ready controller and a few digital buttons for boot/menu flow.
+        case 0x8062CB10:
+        case 0x80632B40: {
+            u8 buttons = tls_poll_controller_buttons();
+            s_controller_button_bits = buttons;
+            s_controller_poll_count++;
+            u8* state = (u8*)resolve_guest_pointer(ctx, 0x80820666);
+            if (state) *state = 5;
+            ctx->gpr[3] = buttons;
             ctx->pc = ctx->lr;
             return 1;
         }
@@ -663,6 +909,16 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // DSPInit / DSPReset hardware mailbox handshake: no-op on PC
         case 0x80610DA0: {
             printf("[TLS DSPReset] Completed simulated DSP hardware handshake\n");
+            fflush(stdout);
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // GXCopyDisp(void* dest, u8 clear)
+        case 0x80615420: {
+            u32 dest = ctx->gpr[3];
+            u8 clear = (u8)ctx->gpr[4];
+            printf("[TLS GXCopyDisp] dest=0x%08X clear=%u\n", dest, clear);
             fflush(stdout);
             ctx->pc = ctx->lr;
             return 1;

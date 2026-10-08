@@ -7,6 +7,11 @@ extern u32 PlayRecordLastError;
 extern u32 PlayRecordRetry;
 extern u32 PlayRecordTerminated;
 extern u32 PlayRecordTerminate;
+#define PlayRecordCallback PlayRecordCallback_805F7050
+#define __OSDefaultResetCallback __OSDefaultResetCallback_805F6EC0
+#define __OSDefaultPowerCallback __OSDefaultPowerCallback_805F6ED0
+#define __OSStateEventHandler __OSStateEventHandler_805F6EE0
+
 extern u32 PlayRecordState;
 extern u32 PlayRecordGet;
 extern u32 PlayRecordError;
@@ -78,8 +83,8 @@ extern s32 IOS_IoctlAsync(s32 fd, s32 cmd, void* in_buf, u32 in_len, void* out_b
 
 extern void fn_806056A0(void);
 
-static void __OSDefaultResetCallback(void);
-static void __OSDefaultPowerCallback(void);
+void __OSDefaultResetCallback(void);
+void __OSDefaultPowerCallback(void);
 
 asm BOOL __OSInitSTM(void) {
     nofralloc
@@ -308,10 +313,10 @@ s32 fn_805F6EB0(void) {
     return 0;
 }
 
-static void __OSDefaultResetCallback(void) {
+void __OSDefaultResetCallback(void) {
 }
 
-static void __OSDefaultPowerCallback(void) {
+void __OSDefaultPowerCallback(void) {
 }
 
 asm void __OSStateEventHandler(s32 result, void* arg) {

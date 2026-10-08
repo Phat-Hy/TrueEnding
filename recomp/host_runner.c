@@ -133,6 +133,9 @@ static void host_wakeup_thread(CPUState* cpu, u32 thread_addr) {
 // emulated here: every frame, alarms whose fire time has passed are unlinked
 // from AlarmQueue (0x8087FBE0) and their handler(alarm, context) is run.
 static void host_service_alarms(CPUState* cpu) {
+    if (!tls_is_idle_address(cpu->pc)) {
+        return;
+    }
     for (int i = 0; i < 16; i++) {
         u32 head = mem_read32(cpu, 0x8087FBE0);
         if (head == 0) {
@@ -160,6 +163,7 @@ static void host_service_alarms(CPUState* cpu) {
         cpu->gpr[4] = cpu->gpr[1]; // OSContext* (handlers ignore it; must be readable)
         cpu->lr = 0x805F50B0;    // return into the scheduler idle point
         cpu->pc = handler;
+        cpu->downcount = 50000000;
         dolrecomp_run_blocks(cpu, 50000);
         if (cpu->exception != 0) {
             printf("\n[Runner] CPU Exception 0x%08X at PC 0x%08X (alarm handler 0x%08X)\n",
@@ -244,32 +248,46 @@ int main(int argc, char** argv) {
 
     int result = 0;
     for (int frame = 0; frame < max_frames; frame++) {
+        cpu.downcount = 50000000;
         result = dolrecomp_run_blocks(&cpu, max_blocks);
         if (cpu.exception != 0) {
             printf("\n[Runner] CPU Exception 0x%08X at PC 0x%08X\n", cpu.exception, cpu.pc);
             break;
         }
 
+        // If the CPU was in the middle of active execution, let it run until idle
+        int drain_iters = 0;
+        while (!tls_is_idle_address(cpu.pc) && drain_iters < 10) {
+            cpu.downcount = 50000000;
+            result = dolrecomp_run_blocks(&cpu, 1000000);
+            if (cpu.exception != 0) break;
+            drain_iters++;
+        }
+
         // Emulated OSAlarm expiry (no decrementer interrupt in the runner)
         host_service_alarms(&cpu);
 
-        // If CPU is idle in scheduler, fire a simulated VBlank
-        if (cpu.pc == 0x805F50B0 || mem_read32(&cpu, 0x8087FC60) == 0) {
-            host_simulate_vblank(&cpu, frame);
-        }
+        // Advance graphics frame queue and simulated timebase each frame
+        host_simulate_vblank(&cpu, frame);
+
+        // Poll host input so WPAD/KPAD stubs can see live keyboard state.
+        tls_service_controller_input(&cpu);
 
         // Drain deferred DVD completion callbacks (retail runs these on the DVD
         // thread; the game's callers branch on DVDReadAsyncPrio's r3 before it).
         for (int serviced = 0; serviced < 8 && tls_dvd_service_callback(&cpu); serviced++) {
+            cpu.downcount = 50000000;
             result = dolrecomp_run_blocks(&cpu, 50000);
             if (cpu.exception != 0) {
                 printf("\n[Runner] CPU Exception 0x%08X at PC 0x%08X (DVD callback)\n", cpu.exception, cpu.pc);
                 break;
             }
         }
+
     }
 
     printf("\n[Runner] Execution paused after run_blocks (result = %d)\n", result);
+    tls_dump_recent_calls();
     printf("         Final PC: 0x805F50B0? Actual PC: 0x%08X, LR: 0x%08X, SP: 0x%08X\n", cpu.pc, cpu.lr, cpu.gpr[1]);
     printf("         Exception: 0x%08X, ProgramExc: 0x%08X\n", cpu.exception, cpu.program_exception);
     printf("         SRR0 (Faulting CIA): 0x%08X, SRR1: 0x%08X\n", cpu.srr0, cpu.srr1);
@@ -335,6 +353,159 @@ int main(int argc, char** argv) {
     u8 r13_26599 = mem_read8(&cpu, 0x808852A0 - 26599);
     u8 r13_26598 = mem_read8(&cpu, 0x808852A0 - 26598);
     printf("         Flags at r13: -26599 = %u, -26598 = %u\n", r13_26599, r13_26598);
+
+    // Framebuffer capture
+    u32 fb0_addr = mem_read32(&cpu, 0x807C6F70);
+    u32 fb1_addr = mem_read32(&cpu, 0x807C6F80);
+    if (fb0_addr) {
+        u8* fb = (u8*)resolve_guest_pointer(&cpu, fb0_addr);
+        if (fb) {
+            FILE* f = fopen("build/recomp/framebuffer_0.ppm", "wb");
+            if (f) {
+                fprintf(f, "P6\n640 480\n255\n");
+                for (int y = 0; y < 480; y++) {
+                    for (int x = 0; x < 640; x += 2) {
+                        int off = (y * 640 + x) * 2;
+                        u8 y0 = fb[off + 0], u = fb[off + 1], y1 = fb[off + 2], v = fb[off + 3];
+                        int c0 = (int)y0 - 16, c1 = (int)y1 - 16, d = (int)u - 128, e = (int)v - 128;
+                        int r0 = (298 * c0 + 409 * e + 128) >> 8;
+                        int g0 = (298 * c0 - 100 * d - 208 * e + 128) >> 8;
+                        int b0 = (298 * c0 + 516 * d + 128) >> 8;
+                        int r1 = (298 * c1 + 409 * e + 128) >> 8;
+                        int g1 = (298 * c1 - 100 * d - 208 * e + 128) >> 8;
+                        int b1 = (298 * c1 + 516 * d + 128) >> 8;
+                        fputc(r0 < 0 ? 0 : (r0 > 255 ? 255 : r0), f);
+                        fputc(g0 < 0 ? 0 : (g0 > 255 ? 255 : g0), f);
+                        fputc(b0 < 0 ? 0 : (b0 > 255 ? 255 : b0), f);
+                        fputc(r1 < 0 ? 0 : (r1 > 255 ? 255 : r1), f);
+                        fputc(g1 < 0 ? 0 : (g1 > 255 ? 255 : g1), f);
+                        fputc(b1 < 0 ? 0 : (b1 > 255 ? 255 : b1), f);
+                    }
+                }
+                fclose(f);
+                printf("[Runner] Dumped Framebuffer 0 (0x%08X) to build/recomp/framebuffer_0.ppm\n", fb0_addr);
+            }
+        }
+    }
+    if (fb1_addr) {
+        u8* fb = (u8*)resolve_guest_pointer(&cpu, fb1_addr);
+        if (fb) {
+            FILE* f = fopen("build/recomp/framebuffer_1.ppm", "wb");
+            if (f) {
+                fprintf(f, "P6\n640 480\n255\n");
+                for (int y = 0; y < 480; y++) {
+                    for (int x = 0; x < 640; x += 2) {
+                        int off = (y * 640 + x) * 2;
+                        u8 y0 = fb[off + 0], u = fb[off + 1], y1 = fb[off + 2], v = fb[off + 3];
+                        int c0 = (int)y0 - 16, c1 = (int)y1 - 16, d = (int)u - 128, e = (int)v - 128;
+                        int r0 = (298 * c0 + 409 * e + 128) >> 8;
+                        int g0 = (298 * c0 - 100 * d - 208 * e + 128) >> 8;
+                        int b0 = (298 * c0 + 516 * d + 128) >> 8;
+                        int r1 = (298 * c1 + 409 * e + 128) >> 8;
+                        int g1 = (298 * c1 - 100 * d - 208 * e + 128) >> 8;
+                        int b1 = (298 * c1 + 516 * d + 128) >> 8;
+                        fputc(r0 < 0 ? 0 : (r0 > 255 ? 255 : r0), f);
+                        fputc(g0 < 0 ? 0 : (g0 > 255 ? 255 : g0), f);
+                        fputc(b0 < 0 ? 0 : (b0 > 255 ? 255 : b0), f);
+                        fputc(r1 < 0 ? 0 : (r1 > 255 ? 255 : r1), f);
+                        fputc(g1 < 0 ? 0 : (g1 > 255 ? 255 : g1), f);
+                        fputc(b1 < 0 ? 0 : (b1 > 255 ? 255 : b1), f);
+                    }
+                }
+                fclose(f);
+                printf("[Runner] Dumped Framebuffer 1 (0x%08X) to build/recomp/framebuffer_1.ppm\n", fb1_addr);
+            }
+        }
+    }
+
+    u32 p_f510 = mem_read32(&cpu, 0x8087F510);
+    u32 p_f518 = mem_read32(&cpu, 0x8087F518);
+    u32 p_ee94 = mem_read32(&cpu, 0x8087EE94);
+    printf("\n[Runner] Stall Diagnostics (calls: c1c8=%u, bbf0=%u):\n", g_count_c1c8, g_count_bbf0);
+    printf("         lbl_8087F510 = 0x%08X\n", p_f510);
+    if (p_f510) {
+        u32 p_arr = mem_read32(&cpu, p_f510 + 0x10);
+        printf("           p_f510->0x10 = 0x%08X\n", p_arr);
+        if (p_arr) {
+            u32 frame0_sp = 0x80898DC8;
+            printf("           Frame 0 (0x%08X): [0]=0x%08X [4]=0x%08X [8]=0x%08X [12]=0x%08X [16]=0x%08X [20]=0x%08X [24]=0x%08X [28]=0x%08X [32]=0x%08X [36]=0x%08X\n",
+                   frame0_sp,
+                   mem_read32(&cpu, frame0_sp), mem_read32(&cpu, frame0_sp + 4),
+                   mem_read32(&cpu, frame0_sp + 8), mem_read32(&cpu, frame0_sp + 12),
+                   mem_read32(&cpu, frame0_sp + 16), mem_read32(&cpu, frame0_sp + 20),
+                   mem_read32(&cpu, frame0_sp + 24), mem_read32(&cpu, frame0_sp + 28),
+                   mem_read32(&cpu, frame0_sp + 32), mem_read32(&cpu, frame0_sp + 36));
+            u32 buf0 = mem_read32(&cpu, p_arr + 4);
+            printf("           item[0] buffer 0x%08X: %08X %08X %08X %08X\n", buf0,
+                   mem_read32(&cpu, buf0), mem_read32(&cpu, buf0 + 4),
+                   mem_read32(&cpu, buf0 + 8), mem_read32(&cpu, buf0 + 12));
+            printf("           item[0] words: [0]=0x%08X [4]=0x%08X [8]=0x%08X [12]=0x%08X [16]=0x%08X\n",
+                   mem_read32(&cpu, p_arr), mem_read32(&cpu, p_arr + 4), mem_read32(&cpu, p_arr + 8),
+                   mem_read32(&cpu, p_arr + 12), mem_read32(&cpu, p_arr + 16));
+            printf("           item[1] status at 0x%08X = %u, count(80) = %u, sub[0](84) = 0x%08X\n",
+                   p_arr + 0x400b8, mem_read32(&cpu, p_arr + 0x400b8), mem_read32(&cpu, p_arr + 0x400b8 + 80), mem_read32(&cpu, p_arr + 0x400b8 + 84));
+            u32 sub0 = mem_read32(&cpu, p_arr + 84);
+            if (sub0) {
+                u32 req0 = mem_read32(&cpu, sub0);
+                printf("             item[0]->sub[0]: req=0x%08X [4]=0x%08X [8]=0x%08X [28]=0x%08X [32]=0x%08X\n",
+                       req0, mem_read32(&cpu, sub0 + 4), mem_read32(&cpu, sub0 + 8),
+                       mem_read32(&cpu, sub0 + 28), mem_read32(&cpu, sub0 + 32));
+                if (req0) {
+                    char name0[64];
+                    for (int c = 0; c < 63; c++) name0[c] = (char)mem_read8(&cpu, req0 + 6 + c);
+                    name0[63] = 0;
+                    printf("               item[0] req string: \"%s\", status: %u\n", name0, mem_read8(&cpu, req0 + 4));
+                }
+            }
+            u32 fi0 = p_arr + 20;
+            u32 fi1 = p_arr + 0x400b8 + 20;
+            printf("             item[0] DVDFileInfo at 0x%08X: id(0x30)=%u, len(0x34)=%u, cb(0x38)=0x%08X\n",
+                   fi0, mem_read32(&cpu, fi0 + 0x30), mem_read32(&cpu, fi0 + 0x34), mem_read32(&cpu, fi0 + 0x38));
+            printf("             item[1] DVDFileInfo at 0x%08X: id(0x30)=%u, len(0x34)=%u, cb(0x38)=0x%08X\n",
+                   fi1, mem_read32(&cpu, fi1 + 0x30), mem_read32(&cpu, fi1 + 0x34), mem_read32(&cpu, fi1 + 0x38));
+        }
+    }
+    printf("         lbl_8087F518 = 0x%08X\n", p_f518);
+    if (p_f518) {
+        u32 vt = mem_read32(&cpu, p_f518);
+        printf("           p_f518 vtable = 0x%08X\n", vt);
+        if (vt) {
+            for (int k = 0; k < 8; k++) {
+                printf("             vt[%d] = 0x%08X\n", k, mem_read32(&cpu, vt + k * 4));
+            }
+        }
+    }
+    printf("         lbl_8087EE94 = 0x%08X\n", p_ee94);
+    if (p_ee94) {
+        u32 ee94_cnt = mem_read32(&cpu, p_ee94);
+        u32 ee94_arr = mem_read32(&cpu, p_ee94 + 8);
+        printf("           ee94 count=%u, arr=0x%08X\n", ee94_cnt, ee94_arr);
+        for (u32 k = 0; k < ee94_cnt && k < 8; k++) {
+            u32 slot = ee94_arr + k * 20;
+            printf("             ee94[%u]: [0]=0x%08X [4]=0x%08X [8]=0x%08X [12]=0x%08X [16]=0x%08X\n",
+                   k, mem_read32(&cpu, slot), mem_read32(&cpu, slot + 4),
+                   mem_read32(&cpu, slot + 8), mem_read32(&cpu, slot + 12), mem_read32(&cpu, slot + 16));
+        }
+    }
+
+    printf("\n[Runner] Frame 3 & 4 Stack Dump (0x80898E28 - 0x80898EC0):\n");
+    for (u32 addr = 0x80898E28; addr < 0x80898EC0; addr += 16) {
+        printf("         0x%08X: %08X %08X %08X %08X\n", addr,
+               mem_read32(&cpu, addr), mem_read32(&cpu, addr + 4),
+               mem_read32(&cpu, addr + 8), mem_read32(&cpu, addr + 12));
+    }
+
+    u32 req = mem_read32(&cpu, 0x80898EA4);
+    printf("\n[Runner] Resource Request Object at 0x%08X:\n", req);
+    if (req) {
+        for (u32 off = 0; off < 64; off += 16) {
+            printf("         +0x%02X: %08X %08X %08X %08X\n", off,
+                   mem_read32(&cpu, req + off), mem_read32(&cpu, req + off + 4),
+                   mem_read32(&cpu, req + off + 8), mem_read32(&cpu, req + off + 12));
+        }
+        u8 req_status = mem_read8(&cpu, req + 4);
+        printf("         req status byte (+4) = %u\n", req_status);
+    }
 
     cpu_free(&cpu);
     return 0;

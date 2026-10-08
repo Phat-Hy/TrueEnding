@@ -49,6 +49,8 @@ node_modules/
 
 # Logs & temp
 *.log
+temp_*.txt
+.acl-repair*
 report.json
 temp_diff.json
 tmp/
