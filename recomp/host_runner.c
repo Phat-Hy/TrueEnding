@@ -13,6 +13,7 @@
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <mmsystem.h>
 #include "gfx_backend.h"
 
 static HWND s_hwnd = NULL;
@@ -95,6 +96,7 @@ static bool init_display_window(int width, int height, GfxBackendType backend_ty
              gfx_backend_get_name(), vsync ? "VSync ON" : "VSync OFF");
     SetWindowTextA(s_hwnd, title);
 
+    timeBeginPeriod(1);
     printf("[Runner] Display window initialized (%dx%d) using %s\n",
            width, height, gfx_backend_get_name());
     return true;
@@ -115,9 +117,9 @@ static bool update_display_window(const u8* yuyv_fb) {
 
     if (s_window_closed) return false;
 
-    if (yuyv_fb) {
-        gfx_backend_present(yuyv_fb, 640, 480);
-    }
+    static uint8_t s_black_fb[640 * 480 * 2] = {0};
+    const uint8_t* present_fb = yuyv_fb ? yuyv_fb : s_black_fb;
+    gfx_backend_present(present_fb, 640, 480);
     return true;
 }
 #endif
@@ -241,9 +243,54 @@ static void host_wakeup_thread(CPUState* cpu, u32 thread_addr) {
     mem_write32(cpu, 0x8087FC5C, 1); // RunQueueHint = TRUE
 }
 
+static void host_insert_alarm(CPUState* cpu, u32 alarm, u32 handler) {
+    u64 period = ((u64)mem_read32(cpu, alarm + 0x18) << 32) | mem_read32(cpu, alarm + 0x1C);
+    u64 fire = 0;
+    if (period > 0) {
+        u64 cur_time = tls_guest_system_time(cpu);
+        u64 start = ((u64)mem_read32(cpu, alarm + 0x20) << 32) | mem_read32(cpu, alarm + 0x24);
+        fire = start;
+        if (start < cur_time) {
+            fire += ((cur_time - start) / period) * period + period;
+        }
+    }
+    mem_write32(cpu, alarm + 0x00, handler);
+    mem_write32(cpu, alarm + 0x08, (u32)(fire >> 32));
+    mem_write32(cpu, alarm + 0x0C, (u32)(fire & 0xFFFFFFFF));
+
+    u32 next = mem_read32(cpu, 0x8087FBE0); // AlarmQueue.head
+    while (next != 0) {
+        u64 next_fire = ((u64)mem_read32(cpu, next + 0x08) << 32) | mem_read32(cpu, next + 0x0C);
+        if (next_fire > fire) {
+            u32 prev = mem_read32(cpu, next + 0x10);
+            mem_write32(cpu, alarm + 0x10, prev); // alarm->prev = next->prev
+            mem_write32(cpu, next + 0x10, alarm); // next->prev = alarm
+            mem_write32(cpu, alarm + 0x14, next); // alarm->next = next
+            if (prev != 0) {
+                mem_write32(cpu, prev + 0x14, alarm); // prev->next = alarm
+            } else {
+                mem_write32(cpu, 0x8087FBE0, alarm); // AlarmQueue.head = alarm
+            }
+            return;
+        }
+        next = mem_read32(cpu, next + 0x14);
+    }
+    // Append to tail
+    u32 tail = mem_read32(cpu, 0x8087FBE4); // AlarmQueue.tail
+    mem_write32(cpu, alarm + 0x14, 0); // alarm->next = NULL
+    mem_write32(cpu, 0x8087FBE4, alarm); // AlarmQueue.tail = alarm
+    mem_write32(cpu, alarm + 0x10, tail); // alarm->prev = tail
+    if (tail != 0) {
+        mem_write32(cpu, tail + 0x14, alarm); // tail->next = alarm
+    } else {
+        mem_write32(cpu, 0x8087FBE0, alarm); // AlarmQueue.head = alarm
+        mem_write32(cpu, 0x8087FBE4, alarm); // AlarmQueue.tail = alarm
+    }
+}
+
 // The runner does not model the decrementer interrupt, so OSAlarm expiry is
-// emulated here: every frame, alarms whose fire time has passed are unlinked
-// from AlarmQueue (0x8087FBE0) and their handler(alarm, context) is run.
+// emulated here: every frame, alarms whose fire time has passed are serviced.
+// Periodic alarms (period > 0) are re-enqueued for their next interval.
 static void host_service_alarms(CPUState* cpu) {
     if (!tls_is_idle_address(cpu->pc)) {
         return;
@@ -270,6 +317,11 @@ static void host_service_alarms(CPUState* cpu) {
         }
         mem_write32(cpu, head + 0x00, 0); // alarm->handler = NULL
         mem_write32(cpu, head + 0x14, 0); // alarm->next = NULL
+
+        u64 period = ((u64)mem_read32(cpu, head + 0x18) << 32) | mem_read32(cpu, head + 0x1C);
+        if (period > 0) {
+            host_insert_alarm(cpu, head, handler);
+        }
 
         cpu->gpr[3] = head;      // OSAlarm* alarm
         cpu->gpr[4] = cpu->gpr[1]; // OSContext* (handlers ignore it; must be readable)
@@ -307,7 +359,7 @@ static void host_simulate_vblank(CPUState* cpu, int frame_num) {    // 1. Advanc
 
 int main(int argc, char** argv) {
     const char* dol_path = "orig/main.dol";
-    u32 max_blocks = 10000;
+    u32 max_blocks = 100000;
     int max_frames = 10;
     bool frames_specified = false;
     bool enable_window = false;
@@ -448,9 +500,9 @@ int main(int argc, char** argv) {
 
         // Drain deferred DVD completion callbacks (retail runs these on the DVD
         // thread; the game's callers branch on DVDReadAsyncPrio's r3 before it).
-        for (int serviced = 0; serviced < 8 && tls_dvd_service_callback(&cpu); serviced++) {
+        for (int serviced = 0; serviced < 32 && tls_dvd_service_callback(&cpu); serviced++) {
             cpu.downcount = 50000000;
-            result = dolrecomp_run_blocks(&cpu, 50000);
+            result = dolrecomp_run_blocks(&cpu, 100000);
             if (cpu.exception != 0) {
                 printf("\n[Runner] CPU Exception 0x%08X at PC 0x%08X (DVD callback)\n", cpu.exception, cpu.pc);
                 break;

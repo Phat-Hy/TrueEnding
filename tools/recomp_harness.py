@@ -237,6 +237,7 @@ def build_runner(jobs: int = 12):
         "-ld3d11",
         "-ldxgi",
         "-ldxguid",
+        "-lwinmm",
     ]
     t0 = time.time()
     res = subprocess.run(link_cmd)
