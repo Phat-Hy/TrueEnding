@@ -2809,6 +2809,202 @@ runtime.c:
 Gecko_ExceptionPPC.c:
 	.text       start:0x806965E8 end:0x80698088
 
+game_net_nwc24_init.c:
+	.text       start:0x80698088 end:0x8069A0D0
+game_net_sdk_001.c:
+	.text       start:0x8069A0D0 end:0x8069C10C
+
+game_net_sdk_002.c:
+	.text       start:0x8069C10C end:0x8069E1BC
+
+game_net_sdk_003.c:
+	.text       start:0x8069E1BC end:0x806A02C0
+
+game_net_sdk_004.c:
+	.text       start:0x806A02C0 end:0x806A236C
+
+game_net_sdk_005.c:
+	.text       start:0x806A236C end:0x806A4530
+
+game_net_sdk_006.c:
+	.text       start:0x806A4530 end:0x806A6568
+game_net_sdk_007.c:
+	.text       start:0x806A6568 end:0x806A8D84
+
+game_net_sdk_008.c:
+	.text       start:0x806A8D84 end:0x806AB8A4
+
+game_net_sdk_009.c:
+	.text       start:0x806AB8A4 end:0x806AD8E4
+
+game_net_sdk_010.c:
+	.text       start:0x806AD8E4 end:0x806AF910
+
+game_net_sdk_011.c:
+	.text       start:0x806AF910 end:0x806B19FC
+
+game_net_sdk_012.c:
+	.text       start:0x806B19FC end:0x806B3AE0
+game_net_sdk_013.c:
+	.text       start:0x806B3AE0 end:0x806B842C
+
+game_net_sdk_014.c:
+	.text       start:0x806B842C end:0x806BAC78
+
+game_net_sdk_015.c:
+	.text       start:0x806BAC78 end:0x806BCD34
+
+game_net_sdk_016.c:
+	.text       start:0x806BCD34 end:0x806BFB94
+
+game_net_sdk_017.c:
+	.text       start:0x806BFB94 end:0x806C287C
+
+game_net_sdk_018.c:
+	.text       start:0x806C287C end:0x806C4B2C
+game_net_sdk_019.c:
+	.text       start:0x806C4B2C end:0x806C86F8
+
+game_net_sdk_020.c:
+	.text       start:0x806C86F8 end:0x806CB394
+
+game_net_sdk_021.c:
+	.text       start:0x806CB394 end:0x806CD3BC
+
+game_net_sdk_022.c:
+	.text       start:0x806CD3BC end:0x806CF56C
+
+game_net_sdk_023.c:
+	.text       start:0x806CF56C end:0x806D158C
+
+game_net_sdk_024.c:
+	.text       start:0x806D158C end:0x806D35EC
+game_net_sdk_025.c:
+	.text       start:0x806D35EC end:0x806D5798
+
+game_net_sdk_026.c:
+	.text       start:0x806D5798 end:0x806D7860
+
+game_net_sdk_027.c:
+	.text       start:0x806D7860 end:0x806D9890
+
+game_net_sdk_028.c:
+	.text       start:0x806D9890 end:0x806DB9DC
+
+game_net_sdk_029.c:
+	.text       start:0x806DB9DC end:0x806DDA2C
+
+game_net_sdk_030.c:
+	.text       start:0x806DDA2C end:0x806DFC94
+game_net_sdk_031.c:
+	.text       start:0x806DFC94 end:0x806E200C
+
+game_net_sdk_032.c:
+	.text       start:0x806E200C end:0x806E4234
+
+game_net_sdk_033.c:
+	.text       start:0x806E4234 end:0x806E624C
+
+game_net_sdk_034.c:
+	.text       start:0x806E624C end:0x806E8648
+
+game_net_sdk_035.c:
+	.text       start:0x806E8648 end:0x806EA68C
+
+game_net_sdk_036.c:
+	.text       start:0x806EA68C end:0x806EC77C
+game_net_sdk_037.c:
+	.text       start:0x806EC77C end:0x806EE7D4
+
+game_net_sdk_038.c:
+	.text       start:0x806EE7D4 end:0x806F08A8
+
+game_net_sdk_039.c:
+	.text       start:0x806F08A8 end:0x806F28B4
+
+game_net_sdk_040.c:
+	.text       start:0x806F28B4 end:0x806F4974
+
+game_net_sdk_041.c:
+	.text       start:0x806F4974 end:0x806F6A24
+
+game_net_sdk_042.c:
+	.text       start:0x806F6A24 end:0x806F8A60
+game_net_sdk_043.c:
+	.text       start:0x806F8A60 end:0x806FAEF0
+
+game_net_sdk_044.c:
+	.text       start:0x806FAEF0 end:0x806FCFD4
+
+game_net_sdk_045.c:
+	.text       start:0x806FCFD4 end:0x806FF128
+
+game_net_sdk_046.c:
+	.text       start:0x806FF128 end:0x80701468
+
+game_net_sdk_047.c:
+	.text       start:0x80701468 end:0x8070360C
+
+game_net_sdk_048.c:
+	.text       start:0x8070360C end:0x807056AC
+game_net_sdk_049.c:
+	.text       start:0x807056AC end:0x807076C0
+
+game_net_sdk_050.c:
+	.text       start:0x807076C0 end:0x807096F4
+
+game_net_sdk_051.c:
+	.text       start:0x807096F4 end:0x8070B7B4
+
+game_net_sdk_052.c:
+	.text       start:0x8070B7B4 end:0x8070D84C
+
+game_net_sdk_053.c:
+	.text       start:0x8070D84C end:0x8070FACC
+
+game_net_sdk_054.c:
+	.text       start:0x8070FACC end:0x80711BC0
+game_net_sdk_055.c:
+	.text       start:0x80711BC0 end:0x80713C10
+
+game_net_sdk_056.c:
+	.text       start:0x80713C10 end:0x80715D5C
+
+game_net_sdk_057.c:
+	.text       start:0x80715D5C end:0x80717E94
+
+game_net_sdk_058.c:
+	.text       start:0x80717E94 end:0x80719F68
+
+game_net_sdk_059.c:
+	.text       start:0x80719F68 end:0x8071BF80
+
+game_net_sdk_060.c:
+	.text       start:0x8071BF80 end:0x8071E178
+game_net_sdk_061.c:
+	.text       start:0x8071E178 end:0x8072036C
+
+game_net_sdk_062.c:
+	.text       start:0x8072036C end:0x80722438
+
+game_net_sdk_063.c:
+	.text       start:0x80722438 end:0x807244F0
+
+game_net_sdk_064.c:
+	.text       start:0x807244F0 end:0x807264F4
+
+game_net_sdk_065.c:
+	.text       start:0x807264F4 end:0x80728620
+
+game_net_sdk_066.c:
+	.text       start:0x80728620 end:0x8072A7C8
+
+game_net_sdk_067.c:
+	.text       start:0x8072A7C8 end:0x8072CC78
+
+game_net_sdk_068.c:
+	.text       start:0x8072CC78 end:0x8072D204
+
 __init_hardware.c:
 	.init       start:0x80004360 end:0x800043C4
 

@@ -17822,195 +17822,1314 @@
       }
     },
     {
-      "name": "main/auto_03_80698088_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80698088_text.o",
+      "name": "main/game_net_nwc24_init",
+      "target_path": "build/SLSEXJ/obj/game_net_nwc24_init.o",
+      "base_path": "build/SLSEXJ/src/game_net_nwc24_init.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_nwc24_init.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_nwc24_init.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80705300_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80705300_text.o",
+      "name": "main/game_net_sdk_001",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_001.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_001.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_001.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_001.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_80705340_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80705340_text.o",
+      "name": "main/game_net_sdk_002",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_002.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_002.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_002.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_002.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_8070B060_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8070B060_text.o",
+      "name": "main/game_net_sdk_003",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_003.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_003.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_003.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_003.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_8070B06C_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8070B06C_text.o",
+      "name": "main/game_net_sdk_004",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_004.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_004.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_004.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_004.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80713480_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80713480_text.o",
+      "name": "main/game_net_sdk_005",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_005.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_005.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_005.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_005.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_8071348C_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8071348C_text.o",
+      "name": "main/game_net_sdk_006",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_006.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_006.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_006.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_006.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80716030_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80716030_text.o",
+      "name": "main/game_net_sdk_007",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_007.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_007.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_007.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_007.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_8071603C_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8071603C_text.o",
+      "name": "main/game_net_sdk_008",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_008.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_008.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_008.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_008.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80718780_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80718780_text.o",
+      "name": "main/game_net_sdk_009",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_009.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_009.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_009.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_009.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_807187C8_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_807187C8_text.o",
+      "name": "main/game_net_sdk_010",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_010.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_010.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_010.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_010.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_8071D0D0_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8071D0D0_text.o",
+      "name": "main/game_net_sdk_011",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_011.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_011.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_011.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_011.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_8071D0DC_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8071D0DC_text.o",
+      "name": "main/game_net_sdk_012",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_012.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_012.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_012.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_012.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80721880_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80721880_text.o",
+      "name": "main/game_net_sdk_013",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_013.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_013.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_013.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_013.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_8072188C_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8072188C_text.o",
+      "name": "main/game_net_sdk_014",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_014.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_014.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_014.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_014.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80725C80_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80725C80_text.o",
+      "name": "main/game_net_sdk_015",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_015.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_015.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_015.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_015.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_80725C8C_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80725C8C_text.o",
+      "name": "main/game_net_sdk_016",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_016.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_016.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_016.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_016.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80725D90_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80725D90_text.o",
+      "name": "main/game_net_sdk_017",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_017.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_017.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_017.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_017.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_80725D9C_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80725D9C_text.o",
+      "name": "main/game_net_sdk_018",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_018.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_018.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_018.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_018.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_807263D0_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_807263D0_text.o",
+      "name": "main/game_net_sdk_019",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_019.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_019.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_019.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_019.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_807263DC_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_807263DC_text.o",
+      "name": "main/game_net_sdk_020",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_020.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_020.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_020.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_020.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_807267C0_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_807267C0_text.o",
+      "name": "main/game_net_sdk_021",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_021.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_021.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_021.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_021.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_807267CC_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_807267CC_text.o",
+      "name": "main/game_net_sdk_022",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_022.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_022.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_022.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_022.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_8072D180_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8072D180_text.o",
+      "name": "main/game_net_sdk_023",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_023.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_023.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_023.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_023.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_024",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_024.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_024.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_024.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_024.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_025",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_025.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_025.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_025.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_025.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_026",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_026.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_026.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_026.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_026.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_027",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_027.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_027.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_027.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_027.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_028",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_028.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_028.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_028.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_028.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_029",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_029.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_029.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_029.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_029.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_030",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_030.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_030.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_030.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_030.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_031",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_031.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_031.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_031.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_031.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_032",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_032.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_032.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_032.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_032.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_033",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_033.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_033.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_033.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_033.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_034",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_034.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_034.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_034.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_034.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_035",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_035.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_035.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_035.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_035.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_036",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_036.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_036.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_036.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_036.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_037",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_037.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_037.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_037.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_037.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_038",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_038.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_038.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_038.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_038.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_039",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_039.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_039.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_039.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_039.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_040",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_040.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_040.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_040.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_040.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_041",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_041.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_041.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_041.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_041.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_042",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_042.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_042.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_042.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_042.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_043",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_043.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_043.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_043.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_043.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_044",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_044.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_044.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_044.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_044.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_045",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_045.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_045.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_045.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_045.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_046",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_046.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_046.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_046.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_046.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_047",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_047.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_047.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_047.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_047.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_048",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_048.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_048.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_048.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_048.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_049",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_049.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_049.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_049.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_049.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_050",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_050.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_050.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_050.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_050.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_051",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_051.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_051.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_051.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_051.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_052",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_052.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_052.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_052.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_052.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_053",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_053.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_053.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_053.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_053.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_054",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_054.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_054.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_054.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_054.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_055",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_055.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_055.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_055.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_055.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_056",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_056.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_056.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_056.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_056.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_057",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_057.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_057.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_057.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_057.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_058",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_058.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_058.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_058.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_058.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_059",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_059.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_059.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_059.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_059.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_060",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_060.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_060.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_060.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_060.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_061",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_061.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_061.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_061.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_061.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_062",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_062.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_062.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_062.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_062.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_063",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_063.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_063.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_063.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_063.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_064",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_064.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_064.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_064.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_064.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_065",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_065.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_065.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_065.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_065.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_066",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_066.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_066.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_066.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_066.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_067",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_067.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_067.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_067.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_067.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_net_sdk_068",
+      "target_path": "build/SLSEXJ/obj/game_net_sdk_068.o",
+      "base_path": "build/SLSEXJ/src/game_net_sdk_068.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_net_sdk_068.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_net_sdk_068.c",
+        "progress_categories": [],
+        "auto_generated": false
       }
     },
     {
