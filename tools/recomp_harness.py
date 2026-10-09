@@ -168,6 +168,8 @@ def build_runner(jobs: int = 12):
         (ROOT_DIR / "tools" / "DolRecomp" / "src" / "cpu" / "cpu.c", RECOMP_DIR / "cpu.o"),
         (ROOT_DIR / "tools" / "DolRecomp" / "src" / "frontend" / "container" / "dol.c", RECOMP_DIR / "dol.o"),
         (ROOT_DIR / "recomp" / "replacements.c", RECOMP_DIR / "replacements.o"),
+        (ROOT_DIR / "recomp" / "gfx_d3d11.c", RECOMP_DIR / "gfx_d3d11.o"),
+        (ROOT_DIR / "recomp" / "gfx_backend.c", RECOMP_DIR / "gfx_backend.o"),
         (ROOT_DIR / "recomp" / "host_runner.c", RECOMP_DIR / "host_runner.o"),
     ]
 
@@ -230,6 +232,9 @@ def build_runner(jobs: int = 12):
         "-lm",
         "-lgdi32",
         "-luser32",
+        "-ld3d11",
+        "-ldxgi",
+        "-ldxguid",
     ]
     t0 = time.time()
     res = subprocess.run(link_cmd)

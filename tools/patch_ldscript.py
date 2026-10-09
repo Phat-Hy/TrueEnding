@@ -19,6 +19,17 @@ EXTRA_SYMBOLS = """
     lbl_8079D7F8 = 0x8079D7F8;
     lbl_8079D864 = 0x8079D864;
     lbl_8079D9E4 = 0x8079D9E4;
+    __OSDBINTEND = 0x805EBE04;
+    __OSDBJUMPEND = 0x805EBE14;
+    lbl_8079BE98 = 0x8079BE98;
+    lbl_8087E734 = 0x8087E734;
+    lbl_8087E73C = 0x8087E73C;
+    lbl_8087E744 = 0x8087E744;
+    lbl_8087E748 = 0x8087E748;
+    lbl_LOCAL_SIInit__Fv_Initialized = 0x8087FB84;
+    lbl_LOCAL_SIGetType__Fl_cmdTypeAndStatus = 0x8087FB88;
+    lbl_808884F0 = 0x808884F0;
+    lbl_808884F4 = 0x808884F4;
 }
 """
 

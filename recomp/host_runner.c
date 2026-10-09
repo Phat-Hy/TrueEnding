@@ -13,15 +13,26 @@
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include "gfx_backend.h"
 
 static HWND s_hwnd = NULL;
-static HDC s_hdc = NULL;
-static u32 s_rgb_pixels[640 * 480];
-static BITMAPINFO s_bmi = {0};
 static bool s_window_closed = false;
+static GfxConfig s_gfx_config = {0};
 
 static LRESULT CALLBACK window_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
     switch (msg) {
+        case WM_SIZE:
+            if (wParam != SIZE_MINIMIZED) {
+                gfx_backend_resize(LOWORD(lParam), HIWORD(lParam));
+            }
+            return 0;
+        case WM_SYSKEYDOWN:
+            // Alt + Enter toggles fullscreen
+            if (wParam == VK_RETURN && (lParam & (1 << 29))) {
+                gfx_backend_toggle_fullscreen();
+                return 0;
+            }
+            break;
         case WM_CLOSE:
             s_window_closed = true;
             DestroyWindow(hwnd);
@@ -41,7 +52,7 @@ static LRESULT CALLBACK window_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM l
     return DefWindowProcA(hwnd, msg, wParam, lParam);
 }
 
-static bool init_display_window(int width, int height) {
+static bool init_display_window(int width, int height, GfxBackendType backend_type, bool vsync, int target_fps) {
     WNDCLASSA wc = {0};
     wc.lpfnWndProc = window_proc;
     wc.hInstance = GetModuleHandle(NULL);
@@ -55,7 +66,7 @@ static bool init_display_window(int width, int height) {
 
     s_hwnd = CreateWindowA(
         "TLS_Runner_Class",
-        "Project The Maybe(Not) Last Story (TrueEnding) - Native PC Port [60 FPS]",
+        "Project The Maybe(Not) Last Story - Native PC Port [Hardware Accelerated]",
         WS_OVERLAPPEDWINDOW | WS_VISIBLE,
         CW_USEDEFAULT, CW_USEDEFAULT,
         r.right - r.left, r.bottom - r.top,
@@ -64,21 +75,33 @@ static bool init_display_window(int width, int height) {
 
     if (!s_hwnd) return false;
 
-    s_hdc = GetDC(s_hwnd);
+    s_gfx_config.backend_type = backend_type;
+    s_gfx_config.window_width = width;
+    s_gfx_config.window_height = height;
+    s_gfx_config.render_scale = 2; // 1080p scale
+    s_gfx_config.target_fps = target_fps;
+    s_gfx_config.vsync = vsync;
+    s_gfx_config.fullscreen = false;
+    s_gfx_config.aspect_ratio = GFX_ASPECT_16_9;
 
-    s_bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
-    s_bmi.bmiHeader.biWidth = 640;
-    s_bmi.bmiHeader.biHeight = -480; // top-down
-    s_bmi.bmiHeader.biPlanes = 1;
-    s_bmi.bmiHeader.biBitCount = 32;
-    s_bmi.bmiHeader.biCompression = BI_RGB;
+    if (!gfx_backend_init(s_hwnd, &s_gfx_config)) {
+        printf("[Runner] Warning: Failed to initialize graphics backend, window output disabled.\n");
+        return false;
+    }
 
-    printf("[Runner] Real-time display window initialized (%dx%d, StretchDIBits 60 FPS)\n", width, height);
+    char title[256];
+    snprintf(title, sizeof(title),
+             "Project The Maybe(Not) Last Story (TrueEnding) - Native PC Port [%s, %s]",
+             gfx_backend_get_name(), vsync ? "VSync ON" : "VSync OFF");
+    SetWindowTextA(s_hwnd, title);
+
+    printf("[Runner] Display window initialized (%dx%d) using %s\n",
+           width, height, gfx_backend_get_name());
     return true;
 }
 
 static bool update_display_window(const u8* yuyv_fb) {
-    if (!s_hwnd || !s_hdc || s_window_closed) return false;
+    if (!s_hwnd || s_window_closed) return false;
 
     MSG msg;
     while (PeekMessageA(&msg, NULL, 0, 0, PM_REMOVE)) {
@@ -93,48 +116,7 @@ static bool update_display_window(const u8* yuyv_fb) {
     if (s_window_closed) return false;
 
     if (yuyv_fb) {
-        for (int y = 0; y < 480; y++) {
-            for (int x = 0; x < 640; x += 2) {
-                int off = (y * 640 + x) * 2;
-                u8 y0 = yuyv_fb[off + 0], u = yuyv_fb[off + 1], y1 = yuyv_fb[off + 2], v = yuyv_fb[off + 3];
-                int c0 = (int)y0 - 16, c1 = (int)y1 - 16, d = (int)u - 128, e = (int)v - 128;
-                
-                int r0 = (298 * c0 + 409 * e + 128) >> 8;
-                int g0 = (298 * c0 - 100 * d - 208 * e + 128) >> 8;
-                int b0 = (298 * c0 + 516 * d + 128) >> 8;
-                
-                int r1 = (298 * c1 + 409 * e + 128) >> 8;
-                int g1 = (298 * c1 - 100 * d - 208 * e + 128) >> 8;
-                int b1 = (298 * c1 + 516 * d + 128) >> 8;
-
-                r0 = r0 < 0 ? 0 : (r0 > 255 ? 255 : r0);
-                g0 = g0 < 0 ? 0 : (g0 > 255 ? 255 : g0);
-                b0 = b0 < 0 ? 0 : (b0 > 255 ? 255 : b0);
-
-                r1 = r1 < 0 ? 0 : (r1 > 255 ? 255 : r1);
-                g1 = g1 < 0 ? 0 : (g1 > 255 ? 255 : g1);
-                b1 = b1 < 0 ? 0 : (b1 > 255 ? 255 : b1);
-
-                s_rgb_pixels[y * 640 + x]     = (r0 << 16) | (g0 << 8) | b0;
-                s_rgb_pixels[y * 640 + x + 1] = (r1 << 16) | (g1 << 8) | b1;
-            }
-        }
-
-        RECT client;
-        GetClientRect(s_hwnd, &client);
-        int dst_w = client.right - client.left;
-        int dst_h = client.bottom - client.top;
-
-        SetStretchBltMode(s_hdc, COLORONCOLOR);
-        StretchDIBits(
-            s_hdc,
-            0, 0, dst_w, dst_h,
-            0, 0, 640, 480,
-            s_rgb_pixels,
-            &s_bmi,
-            DIB_RGB_COLORS,
-            SRCCOPY
-        );
+        gfx_backend_present(yuyv_fb, 640, 480);
     }
     return true;
 }
@@ -331,9 +313,30 @@ int main(int argc, char** argv) {
     int win_width = 1280;
     int win_height = 720;
     int target_fps = 60; // Default 60 FPS (0 = uncapped)
+    GfxBackendType backend_type = GFX_BACKEND_AUTO;
+    bool vsync = true;
 
     for (int i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "--dol") == 0 && i + 1 < argc) {
+        if (strcmp(argv[i], "--help") == 0 || strcmp(argv[i], "-h") == 0) {
+            printf("Project The Maybe(Not) Last Story (TrueEnding) Native PC Runner\n");
+            printf("Usage: %s [options]\n\n", argv[0]);
+            printf("Options:\n");
+            printf("  --dol <path>      Path to input DOL file (default: orig/main.dol)\n");
+            printf("  --blocks <N>      Max blocks per slice (default: 10000)\n");
+            printf("  --frames <N>      Simulated frames to run (default: 10)\n");
+            printf("  --window, -w      Enable interactive display window\n");
+            printf("  --width <pixels>  Display window width (default: 1280)\n");
+            printf("  --height <pixels> Display window height (default: 720)\n");
+            printf("  --fps <N>         Target frame rate cap (30, 60, 120, 0=uncapped, default: 60)\n");
+            printf("  --gfx <backend>   Graphics backend: auto, d3d11, gdi (default: auto)\n");
+            printf("  --vsync <0|1>     Enable (1) or disable (0) vertical sync (default: 1)\n");
+            printf("  --novsync         Disable vertical sync\n");
+            printf("  --help, -h        Show this help message\n\n");
+            printf("Interactive Controls:\n");
+            printf("  Alt + Enter       Toggle Fullscreen / Windowed\n");
+            printf("  Escape / Close    Exit runner\n");
+            return 0;
+        } else if (strcmp(argv[i], "--dol") == 0 && i + 1 < argc) {
             dol_path = argv[++i];
         } else if (strcmp(argv[i], "--blocks") == 0 && i + 1 < argc) {
             max_blocks = (u32)atoi(argv[++i]);
@@ -347,6 +350,14 @@ int main(int argc, char** argv) {
             win_height = atoi(argv[++i]);
         } else if (strcmp(argv[i], "--fps") == 0 && i + 1 < argc) {
             target_fps = atoi(argv[++i]);
+        } else if (strcmp(argv[i], "--gfx") == 0 && i + 1 < argc) {
+            i++;
+            if (strcmp(argv[i], "d3d11") == 0) backend_type = GFX_BACKEND_D3D11;
+            else if (strcmp(argv[i], "gdi") == 0) backend_type = GFX_BACKEND_GDI;
+        } else if (strcmp(argv[i], "--vsync") == 0 && i + 1 < argc) {
+            vsync = atoi(argv[++i]) != 0;
+        } else if (strcmp(argv[i], "--novsync") == 0) {
+            vsync = false;
         }
     }
 
@@ -387,7 +398,7 @@ int main(int argc, char** argv) {
 
 #ifdef _WIN32
     if (enable_window) {
-        init_display_window(win_width, win_height);
+        init_display_window(win_width, win_height, backend_type, vsync, target_fps);
     }
 #endif
 
@@ -683,6 +694,12 @@ int main(int argc, char** argv) {
         u8 req_status = mem_read8(&cpu, req + 4);
         printf("         req status byte (+4) = %u\n", req_status);
     }
+
+#ifdef _WIN32
+    if (enable_window) {
+        gfx_backend_shutdown();
+    }
+#endif
 
     cpu_free(&cpu);
     return 0;
