@@ -237,8 +237,86 @@ scsystem.c:
 scapi.c:
 	.text       start:0x80624980 end:0x80628000
 
+hcis.c:
+	.text       start:0x80628000 end:0x806286D0
+
+bta_sys.c:
+	.text       start:0x806286D0 end:0x8062A06C
+
+bta_dm.c:
+	.text       start:0x8062A06C end:0x8062DC74
+
+bta_hh.c:
+	.text       start:0x8062DC74 end:0x8062FE10
+
+btm_acl.c:
+	.text       start:0x8062FE10 end:0x80632414
+
+btm_dev.c:
+	.text       start:0x80632414 end:0x80633C38
+
+btm_inq.c:
+	.text       start:0x80633C38 end:0x80636408
+
+btm_sco.c:
+	.text       start:0x80636408 end:0x80637274
+
+btm_sec.c:
+	.text       start:0x80637274 end:0x8063B644
+
+gap.c:
+	.text       start:0x8063B644 end:0x8063EE48
+
+hid.c:
+	.text       start:0x8063EE48 end:0x80642174
+
+l2cap.c:
+	.text       start:0x80642174 end:0x806482EC
+
+rfcomm.c:
+	.text       start:0x806482EC end:0x8064E72C
+
+sdp.c:
+	.text       start:0x8064E72C end:0x80653D44
+
+tpl.c:
+	.text       start:0x80653D44 end:0x806540A0
+
+gx_draw.c:
+	.text       start:0x806540A0 end:0x806583E0
+
+gx_anim.c:
+	.text       start:0x806583E0 end:0x8065B990
+
+usb.c:
+	.text       start:0x8065B990 end:0x806604A0
+
+kpad.c:
+	.text       start:0x806604A0 end:0x806636A0
+
+wpad.c:
+	.text       start:0x806636A0 end:0x8066A1A0
+
+wpad_mem.c:
+	.text       start:0x8066A1A0 end:0x8066EAE0
+
+wpad_core.c:
+	.text       start:0x8066EAE0 end:0x80674F18
+
+trk.c:
+	.text       start:0x80674F18 end:0x8067B46C
+
+msl_c.c:
+	.text       start:0x8067B46C end:0x80686EF4
+
+msl_cpp.c:
+	.text       start:0x80686EF4 end:0x80695420
+
 global_destructor_chain.c:
 	.text       start:0x80695420 end:0x80695480
+
+runtime.c:
+	.text       start:0x80695480 end:0x80696578
 
 __init_hardware.c:
 	.init       start:0x80004360 end:0x800043C4

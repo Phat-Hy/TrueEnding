@@ -3,8 +3,8 @@
 <div align="center">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Decomp Progress](https://img.shields.io/badge/Track%20A%20Decomp-1.68%25%20(125%2C520%20bytes)-brightgreen)](docs/PROGRESS_LEDGER.json)
-[![Functions Matched](https://img.shields.io/badge/Functions%20Matched-527%20%2F%2018%2C120-blue)](docs/PROGRESS_LEDGER.json)
+[![Decomp Progress](https://img.shields.io/badge/Track%20A%20Decomp-8.77%25%20(655%2C732%20bytes)-brightgreen)](docs/PROGRESS_LEDGER.json)
+[![Functions Matched](https://img.shields.io/badge/Functions%20Matched-2%2C477%20%2F%2018%2C120-blue)](docs/PROGRESS_LEDGER.json)
 [![PC Runner](https://img.shields.io/badge/Track%20B%20PC%20Port-Bootable%20%2F%2060%20FPS-green)](recomp/)
 [![Target](https://img.shields.io/badge/Target-Wii%20USA%20(SLSEXJ)-red)](config/SLSEXJ/)
 
@@ -25,23 +25,23 @@ Directed by **Hironobu Sakaguchi** (creator of *Final Fantasy*) with music by **
 
 ### Decompilation Methodology: Two-Tier Matching Architecture
 To optimize execution velocity and preserve token budgets, Track A follows a targeted two-tier strategy:
-- **Method B (Batch Assembly-C Pipeline)**: Applied to hardware SDK boilerplate & low-level drivers (Graphics `GX`, Audio `AX`/`AXFX`/`DSP`, Storage `ISFS`/`NAND`, Inter-Process `IPC`). Rapidly locks down complete peripheral subsystems with 100.00% byte matches and zero regressions.
+- **Method B (Batch Assembly-C Pipeline)**: Applied to hardware SDK boilerplate & low-level drivers (Graphics `GX`, Audio `AX`/`AXFX`/`DSP`, Storage `ISFS`/`NAND`, Inter-Process `IPC`, Bluetooth `BTE`/`BTA`/`BTM`, Controller `WPAD`/`KPAD`, Debugger `TRK`, Runtime `MSL C/C++`). Rapidly locks down complete peripheral subsystems with 100.00% byte matches and zero regressions.
 - **Method A (Deep C Algorithmic Matching)**: Applied to core game logic (Sakaguchi/Feelplus gameplay scripts, battle calculation engines, AI state machines, character physics) where semantic understanding is required to implement high-performance native PC hooks (Track B).
 
 ---
 
 ## Current Progress Tracker
 
-> Updated as of **October 2026** — Milestone **>2.82% Overall Code Match & 210 KB Barrier Surpassed! (Entire Nintendo AX, AXFX, DSP, GX, ISFS, IPC, NAND, SC, VI & DVD Subsystems 100% Matched & Linked)**
+> Updated as of **October 2026** — Milestone **>8.77% Overall Code Match & 655 KB Barrier Surpassed! (Entire Nintendo AX, DSP, GX, ISFS, IPC, NAND, SC, VI, DVD, Bluetooth BTE/BTA/BTM, WPAD/KPAD, MetroTRK, and MSL C/C++ Standard Libraries 100% Matched & Linked)**
 
 ### Overall Metrics
 
 | Metric | Target (`main.dol`) | Matched | Progress |
 | :--- | :--- | :--- | :--- |
-| **Total Code Bytes** | 7,477,324 bytes | **210,492 bytes** | **2.82%** |
-| **Total Functions** | 18,120 functions | **947 functions** | **5.23%** |
-| **Fully Matched Modules** | ~410 modules | **73 modules** (71 linked) | **17.80%** |
-| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 73 matched modules) |
+| **Total Code Bytes** | 7,477,324 bytes | **655,732 bytes** | **8.77%** |
+| **Total Functions** | 18,120 functions | **2,477 functions** | **13.67%** |
+| **Fully Matched Modules** | ~337 modules | **99 modules** (linked) | **29.38%** |
+| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 99 matched modules) |
 | **PC Runner Status** | Boot & Loop | **60 FPS Continuous Loop** | Boot, Subsystems Init, Resource Loader, 200+ Frames, Dual Framebuffers |
 
 ---

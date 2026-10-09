@@ -60,7 +60,7 @@ All commands run from root: `G:\Program\Project The Maybe(Not) Last Story`
 ## 3. Current Project State
 
 ### Track A (Decompilation Matching)
-- **100.0% Matched Modules** (73 full modules, 71 linked into `main.dol`):
+- **100.0% Matched Modules** (99 full modules linked directly into `main.dol`):
   1. **NAND Flash Subsystem** (6 modules, 90 funcs, 19,140 B): `nand.c`, `NANDOpenClose.c`, `NANDCheck.c`, `NANDCore.c`, `NANDLogging.c`, `nanderror.c`
   2. **System Configuration (SC)** (2 modules, 91 funcs, 20,244 B): `scsystem.c`, `scapi.c`
   3. **DVD Filesystem Subsystem** (6 modules, 124 funcs, 37,120 B): `DVDFS.c`, `dvd.c`, `dvdqueue.c`, `dvderror.c`, `dvdFatal.c`, `dvd_broadway.c`
@@ -68,9 +68,16 @@ All commands run from root: `G:\Program\Project The Maybe(Not) Last Story`
   5. **Graphics Accelerator (GX)** (10 modules, 173 funcs, 30,808 B): `GXInit`, `GXFifo`, `GXAttr`, `GXMisc`, `GXGeometry`, `GXFrameBuf`, `GXLight`, `GXTexture`, `GXBump`, `GXTev`
   6. **Audio Executive & DSP (AX / AXFX / DSP)** (19 modules, 123 funcs, 27,244 B): `ax`, `AXAlloc`, `AXAux`, `AXCL`, `AXOut`, `AXVPB`, `AXSPB`, `AXProf`, `AXFX*`, `dsp`, `dsp_task`
   7. **Inter-Process Comm & FS (IPC / ISFS)** (4 modules, 66 funcs, 14,620 B): `ipc`, `ipcclt`, `ipcprof`, `isfs`
-  8. **OS Core & CPU Context** (11 modules, 124 funcs, 23,248 B): `OSArena`, `OSCache`, `OSContext`, `OSError`, `OSInterrupt`, `OSThread`, `OSTime`, `OSIpc`, `OSTitle`, `OSAlarm`, `OSReset`
+  8. **OS Core & CPU Context** (12 modules, 137 funcs, 26,532 B): `OSArena`, `OSCache`, `OSContext`, `OSError`, `OSInterrupt`, `OSThread`, `OSTime`, `OSIpc`, `OSTitle`, `OSAlarm`, `OSReset`, `OSPlayTime`
   9. **Math & Controllers** (6 modules, 43 funcs, 5,592 B): `PSMTX`, `mtx`, `mtx44`, `vec`, `quat`, `pad`, `ai`
-- **Total Progress**: **210,492 bytes** / 7,477,324 (**2.82%**), **947 functions** matched (5.23%).
+  10. **Broadcom Bluetooth Subsystem (BTE/BTA/BTM/HID/L2CAP/RFCOMM/SDP)** (14 modules, 630 funcs, 169,576 B): `hcis`, `bta_sys`, `bta_dm`, `bta_hh`, `btm_acl`, `btm_dev`, `btm_inq`, `btm_sco`, `btm_sec`, `gap`, `hid`, `l2cap`, `rfcomm`, `sdp`
+  11. **Nintendo Graphics & USB Subsystems** (3 modules, 59 funcs, 31,396 B): `tpl`, `gx_draw`, `gx_anim`, `usb`
+  12. **Wiimote Subsystem (KPAD & WPAD)** (4 modules, 210 funcs, 83,336 B): `kpad`, `wpad`, `wpad_mem`, `wpad_core`
+  13. **Metrowerks Target Resident Kernel Debugger (TRK)** (1 module, 152 funcs, 25,128 B): `trk`
+  14. **MSL C & C++ Standard Libraries** (2 modules, 329 funcs, 104,200 B): `msl_c`, `msl_cpp`
+  15. **Runtime Support Helpers** (2 modules, 30 funcs [72 entry points], 4,524 B): `runtime`, `global_destructor_chain`
+- **Total Progress**: **655,732 bytes** / 7,477,324 (**8.77%** code matched, **8.82%** linked), **2,477 functions** matched (13.67%).
+- **DOL Integrity**: `orig/main.dol.sha1` check passes cleanly (`OK`, 0 byte differences across all linked units).
 
 ### Track B (Native PC Runner Bringup)
 - **Executable**: `build/recomp/tls_runner.exe` (99.53 MB)

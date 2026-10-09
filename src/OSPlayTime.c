@@ -6,7 +6,7 @@ extern const char lbl_807A9BA0[];
 extern const char lbl_807A9BC0[];
 extern const char lbl_807A9BD4[];
 extern const char lbl_807A9BE4[];
-extern u8 lbl_8087E7B0;
+static const char lbl_8087E7B0[] = "Expired";
 
 extern u16 lbl_80764738[];
 extern u32 lbl_80764758[];

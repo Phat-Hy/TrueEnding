@@ -47,7 +47,7 @@ def generate_module(mod_name):
     b_syms = set(re.findall(r'\bb\s+([\w@]+)', text))
     ha_syms = set(re.findall(r'([\w@]+)@ha', text))
     l_syms = set(re.findall(r'([\w@]+)@l', text))
-    sda_syms = set(re.findall(r'([\w@]+)@sda21', text))
+    sda_syms = set(re.findall(r'([\w@]+?)(?:\+[0-9A-Fa-fx]+)?@sda21', text))
 
     fn_set = set(funcs.keys())
     
@@ -65,6 +65,7 @@ def generate_module(mod_name):
     # Step 4: Emit C source
     out_lines = [
         '#include "revolution/types.h"',
+        '#pragma function_align 4',
         '',
         '/* External function declarations */'
     ]
@@ -87,12 +88,18 @@ def generate_module(mod_name):
     out_lines.append('')
     out_lines.append('/* Small data declarations */')
     for s in sorted(sda_syms):
-        out_lines.append(f'extern u32 {s};')
+        if re.match(r'^[a-zA-Z_]', s):
+            out_lines.append(f'extern u32 {s};')
 
     out_lines.append('')
     out_lines.append('/* Function declarations */')
     for fn_name in funcs.keys():
         out_lines.append(f'void {fn_name}(void);')
+
+    sym_entries = sorted(set(re.findall(r'\.sym\s+([\w@]+),\s*global', text)))
+    for sym_name in sym_entries:
+        if sym_name not in funcs:
+            out_lines.append(f'void {sym_name}(void);')
 
     out_lines.append('')
 
@@ -107,6 +114,11 @@ def generate_module(mod_name):
             if not line:
                 continue
             if line.startswith('.fn ') or line.startswith('.endfn '):
+                continue
+            if line.startswith('.sym '):
+                m_sym = re.match(r'\.sym\s+([\w@]+),\s*global', line)
+                if m_sym:
+                    out_lines.append(f'entry {m_sym.group(1)}')
                 continue
             if line.startswith('.L_'):
                 label_name = line.split(':')[0].strip()
@@ -125,6 +137,19 @@ def generate_module(mod_name):
                 # Remove @sda21(r0)
                 inst_str = re.sub(r'@sda21\(r0\)', '', inst_str)
                 inst_str = inst_str.replace('@sda21', '')
+                # Fix paired singles quantizer registers qr0..qr7 -> 0..7
+                inst_str = re.sub(r'\bqr(\d)\b', r'\1', inst_str)
+                # Fix trap word unsigned immediate twui -> twi 31
+                inst_str = re.sub(r'\btwui\s+(\w+),\s*0x0\b', r'twi 31, \1, 0', inst_str)
+                inst_str = re.sub(r'\btwui\s+(\w+),\s*(\w+)\b', r'twi 31, \1, \2', inst_str)
+                # Handle addic. with symbol @l
+                m_addic = re.match(r'addic\.\s+(r\d+),\s*(r\d+),\s*lbl_([0-9A-Fa-f]{8})@l', inst_str)
+                if m_addic:
+                    lo_val = int(m_addic.group(3), 16) & 0xffff
+                    if lo_val & 0x8000:
+                        lo_val -= 0x10000
+                # Convert .4byte to opword
+                inst_str = re.sub(r'^\.4byte\s+(0x[0-9A-Fa-f]+).*', r'opword \1', inst_str)
                 out_lines.append(f'    {inst_str}')
 
         out_lines.append('}\n')

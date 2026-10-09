@@ -1791,7 +1791,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/OSReset.c",
         "progress_categories": [],
@@ -1826,7 +1826,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/OSPlayTime.c",
         "progress_categories": [],
@@ -2944,1067 +2944,478 @@
       }
     },
     {
-      "name": "main/auto_03_80628000_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80628000_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068B39C_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068B39C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068B47C_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068B47C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068B50C_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068B50C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_8068B60C_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8068B60C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068B610_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068B610_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_8068B728_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8068B728_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068B770_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068B770_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_8068BA50_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8068BA50_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_dtor_8068BA80_text",
-      "target_path": "build/SLSEXJ/obj/auto_dtor_8068BA80_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068BAC0_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068BAC0_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068BB54_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068BB54_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_8068BC10_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8068BC10_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068BC30_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068BC30_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068BD60_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068BD60_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068C040_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068C040_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_dtor_8068C0D4_text",
-      "target_path": "build/SLSEXJ/obj/auto_dtor_8068C0D4_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068C164_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068C164_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_8068C220_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8068C220_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068C240_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068C240_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068C370_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068C370_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_dtor_8068C3E8_text",
-      "target_path": "build/SLSEXJ/obj/auto_dtor_8068C3E8_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068C440_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068C440_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068C4B8_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068C4B8_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068C72C_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068C72C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068C9A0_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068C9A0_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_8068CD1C_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8068CD1C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068CD2C_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068CD2C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_8068D0A8_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8068D0A8_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068D0B8_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068D0B8_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068D170_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068D170_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068D3A0_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068D3A0_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_8068D40C_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8068D40C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068D414_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068D414_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_8068D7AC_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8068D7AC_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068D7B8_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068D7B8_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068D9BC_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068D9BC_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068DA74_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068DA74_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068DC84_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068DC84_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_8068DCF0_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8068DCF0_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068DCF8_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068DCF8_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_8068E080_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8068E080_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068E09C_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068E09C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068E270_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068E270_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068E3FC_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068E3FC_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068E554_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068E554_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068E6E8_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068E6E8_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068E878_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068E878_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_8068EA10_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8068EA10_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068EA70_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068EA70_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_8068EAF8_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8068EAF8_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068EB20_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068EB20_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_8068EBA8_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8068EBA8_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068EBF8_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068EBF8_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068EC74_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068EC74_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068ECF4_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068ECF4_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068EF6C_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068EF6C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068EFFC_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068EFFC_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068F138_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068F138_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068F410_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068F410_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_8068F630_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8068F630_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068F658_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068F658_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068F6D0_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068F6D0_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068F74C_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068F74C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068F9B8_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068F9B8_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068FA48_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068FA48_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068FB84_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068FB84_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8068FE5C_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8068FE5C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_80690068_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80690068_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80690094_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80690094_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_806901D0_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_806901D0_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80690230_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80690230_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_806903A8_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_806903A8_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80690524_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80690524_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80690630_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80690630_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80690A98_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80690A98_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_80690D60_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80690D60_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80690D70_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80690D70_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_80690E9C_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80690E9C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80690EF4_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80690EF4_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80691050_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80691050_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_806911CC_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_806911CC_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_806912D8_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_806912D8_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8069172C_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8069172C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8069194C_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8069194C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_dtor_80691AC0_text",
-      "target_path": "build/SLSEXJ/obj/auto_dtor_80691AC0_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_80691B44_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80691B44_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80691B80_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80691B80_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_80691C90_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80691C90_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80691C9C_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80691C9C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_80691CFC_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80691CFC_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80691D08_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80691D08_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_80691E1C_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80691E1C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_dtor_80691E68_text",
-      "target_path": "build/SLSEXJ/obj/auto_dtor_80691E68_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_dtor_80691EE4_text",
-      "target_path": "build/SLSEXJ/obj/auto_dtor_80691EE4_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80691F24_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80691F24_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_806920C0_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_806920C0_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_806926D4_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_806926D4_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_8069293C_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8069293C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_8069298C_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8069298C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_806929FC_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_806929FC_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80692BC4_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80692BC4_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_80692BFC_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80692BFC_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80692C04_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80692C04_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80692C3C_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80692C3C_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_dtor_80692EFC_text",
-      "target_path": "build/SLSEXJ/obj/auto_dtor_80692EFC_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_dtor_80692F78_text",
-      "target_path": "build/SLSEXJ/obj/auto_dtor_80692F78_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80692FF4_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80692FF4_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_806930D4_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_806930D4_text.o",
-      "metadata": {
+      "name": "main/hcis",
+      "target_path": "build/SLSEXJ/obj/hcis.o",
+      "base_path": "build/SLSEXJ/src/hcis.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/hcis.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/hcis.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_806936C0_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_806936C0_text.o",
-      "metadata": {
+      "name": "main/bta_sys",
+      "target_path": "build/SLSEXJ/obj/bta_sys.o",
+      "base_path": "build/SLSEXJ/src/bta_sys.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/bta_sys.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/bta_sys.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_80693730_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80693730_text.o",
+      "name": "main/bta_dm",
+      "target_path": "build/SLSEXJ/obj/bta_dm.o",
+      "base_path": "build/SLSEXJ/src/bta_dm.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/bta_dm.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/bta_dm.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80693758_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80693758_text.o",
+      "name": "main/bta_hh",
+      "target_path": "build/SLSEXJ/obj/bta_hh.o",
+      "base_path": "build/SLSEXJ/src/bta_hh.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/bta_hh.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/bta_hh.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_80693798_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80693798_text.o",
+      "name": "main/btm_acl",
+      "target_path": "build/SLSEXJ/obj/btm_acl.o",
+      "base_path": "build/SLSEXJ/src/btm_acl.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/btm_acl.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/btm_acl.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80693884_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80693884_text.o",
+      "name": "main/btm_dev",
+      "target_path": "build/SLSEXJ/obj/btm_dev.o",
+      "base_path": "build/SLSEXJ/src/btm_dev.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/btm_dev.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/btm_dev.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_806939C8_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_806939C8_text.o",
+      "name": "main/btm_inq",
+      "target_path": "build/SLSEXJ/obj/btm_inq.o",
+      "base_path": "build/SLSEXJ/src/btm_inq.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/btm_inq.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/btm_inq.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80693AB8_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80693AB8_text.o",
+      "name": "main/btm_sco",
+      "target_path": "build/SLSEXJ/obj/btm_sco.o",
+      "base_path": "build/SLSEXJ/src/btm_sco.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/btm_sco.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/btm_sco.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80694008_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80694008_text.o",
+      "name": "main/btm_sec",
+      "target_path": "build/SLSEXJ/obj/btm_sec.o",
+      "base_path": "build/SLSEXJ/src/btm_sec.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/btm_sec.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/btm_sec.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80694048_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80694048_text.o",
+      "name": "main/gap",
+      "target_path": "build/SLSEXJ/obj/gap.o",
+      "base_path": "build/SLSEXJ/src/gap.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/gap.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/gap.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_8069407C_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8069407C_text.o",
+      "name": "main/hid",
+      "target_path": "build/SLSEXJ/obj/hid.o",
+      "base_path": "build/SLSEXJ/src/hid.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/hid.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/hid.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_806940A8_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_806940A8_text.o",
+      "name": "main/l2cap",
+      "target_path": "build/SLSEXJ/obj/l2cap.o",
+      "base_path": "build/SLSEXJ/src/l2cap.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/l2cap.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/l2cap.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80694328_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80694328_text.o",
+      "name": "main/rfcomm",
+      "target_path": "build/SLSEXJ/obj/rfcomm.o",
+      "base_path": "build/SLSEXJ/src/rfcomm.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/rfcomm.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/rfcomm.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_806943B8_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_806943B8_text.o",
+      "name": "main/sdp",
+      "target_path": "build/SLSEXJ/obj/sdp.o",
+      "base_path": "build/SLSEXJ/src/sdp.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/sdp.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/sdp.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_806945A4_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_806945A4_text.o",
+      "name": "main/tpl",
+      "target_path": "build/SLSEXJ/obj/tpl.o",
+      "base_path": "build/SLSEXJ/src/tpl.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/tpl.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/tpl.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80694790_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80694790_text.o",
+      "name": "main/gx_draw",
+      "target_path": "build/SLSEXJ/obj/gx_draw.o",
+      "base_path": "build/SLSEXJ/src/gx_draw.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/gx_draw.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/gx_draw.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80694C38_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80694C38_text.o",
+      "name": "main/gx_anim",
+      "target_path": "build/SLSEXJ/obj/gx_anim.o",
+      "base_path": "build/SLSEXJ/src/gx_anim.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/gx_anim.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/gx_anim.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_806950E0_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_806950E0_text.o",
+      "name": "main/usb",
+      "target_path": "build/SLSEXJ/obj/usb.o",
+      "base_path": "build/SLSEXJ/src/usb.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/usb.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/usb.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_8069512C_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8069512C_text.o",
+      "name": "main/kpad",
+      "target_path": "build/SLSEXJ/obj/kpad.o",
+      "base_path": "build/SLSEXJ/src/kpad.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/kpad.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/kpad.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_dtor_80695138_text",
-      "target_path": "build/SLSEXJ/obj/auto_dtor_80695138_text.o",
+      "name": "main/wpad",
+      "target_path": "build/SLSEXJ/obj/wpad.o",
+      "base_path": "build/SLSEXJ/src/wpad.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/wpad.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/wpad.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_8069519C_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_8069519C_text.o",
+      "name": "main/wpad_mem",
+      "target_path": "build/SLSEXJ/obj/wpad_mem.o",
+      "base_path": "build/SLSEXJ/src/wpad_mem.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/wpad_mem.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/wpad_mem.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80695230_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80695230_text.o",
+      "name": "main/wpad_core",
+      "target_path": "build/SLSEXJ/obj/wpad_core.o",
+      "base_path": "build/SLSEXJ/src/wpad_core.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/wpad_core.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/wpad_core.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_80695270_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80695270_text.o",
+      "name": "main/trk",
+      "target_path": "build/SLSEXJ/obj/trk.o",
+      "base_path": "build/SLSEXJ/src/trk.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/trk.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/trk.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_fn_806952C4_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_806952C4_text.o",
+      "name": "main/msl_c",
+      "target_path": "build/SLSEXJ/obj/msl_c.o",
+      "base_path": "build/SLSEXJ/src/msl_c.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/msl_c.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/msl_c.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_8069533C_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8069533C_text.o",
+      "name": "main/msl_cpp",
+      "target_path": "build/SLSEXJ/obj/msl_cpp.o",
+      "base_path": "build/SLSEXJ/src/msl_cpp.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/msl_cpp.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/msl_cpp.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
@@ -4027,75 +3438,22 @@
       }
     },
     {
-      "name": "main/auto_03_80695480_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80695480_text.o",
+      "name": "main/runtime",
+      "target_path": "build/SLSEXJ/obj/runtime.o",
+      "base_path": "build/SLSEXJ/src/runtime.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/runtime.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/runtime.c",
         "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80695720_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80695720_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_dtor_80695824_text",
-      "target_path": "build/SLSEXJ/obj/auto_dtor_80695824_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_806958E0_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_806958E0_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_806959D8_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_806959D8_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80695A50_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80695A50_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_80695AD0_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80695AD0_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_fn_80695B28_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_80695B28_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
-      }
-    },
-    {
-      "name": "main/auto_03_80695D84_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_80695D84_text.o",
-      "metadata": {
-        "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {

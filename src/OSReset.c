@@ -3,18 +3,11 @@ extern void _restgpr_26();
 #include "revolution/os.h"
 
 extern u8 lbl_807CC120[0x200];
-extern u32 PlayRecordLastError;
-extern u32 PlayRecordRetry;
-extern u32 PlayRecordTerminated;
-extern u32 PlayRecordTerminate;
 #define PlayRecordCallback PlayRecordCallback_805F7050
 #define __OSDefaultResetCallback __OSDefaultResetCallback_805F6EC0
 #define __OSDefaultPowerCallback __OSDefaultPowerCallback_805F6ED0
 #define __OSStateEventHandler __OSStateEventHandler_805F6EE0
 
-extern u32 PlayRecordState;
-extern u32 PlayRecordGet;
-extern u32 PlayRecordError;
 extern void PlayRecordCallback(s32, void*);
 extern s32 NANDInit(void);
 
@@ -50,11 +43,14 @@ extern s32 fn_8061FB70(NANDFileInfo* info);
 extern s32 fn_8061E470(const char* path);
 extern s32 fn_8061D080();
 
-typedef void (*OSResetCallback)(void);
-
-OSResetCallback PowerCallback;
-OSResetCallback ResetCallback;
-u8 Debug_BBA;
+#define ResetDown ResetDown_8087FC70
+#define StmReady StmReady_8087FC74
+#define StmImDesc StmImDesc_8087FC78
+#define StmEhDesc StmEhDesc_8087FC7C
+#define StmEhRegistered StmEhRegistered_8087FC80
+#define StmVdInUse StmVdInUse_8087FC84
+#define StmEhInBuf StmEhInBuf_807CC060
+#define StmEhOutBuf StmEhOutBuf_807CC080
 
 extern BOOL ResetDown;
 extern BOOL StmReady;
@@ -64,6 +60,26 @@ extern volatile BOOL StmEhRegistered;
 extern BOOL StmVdInUse;
 extern u8 StmEhInBuf[0x20];
 extern u8 StmEhOutBuf[0x20];
+
+u32 PlayRecordState = 9;
+u32 gap_09_8087E7AC_sdata = 0;
+
+typedef void (*OSResetCallback)(void);
+
+#define PowerCallback PowerCallback_8087FC88
+#define ResetCallback ResetCallback_8087FC8C
+#define Debug_BBA Debug_BBA_8087FC90
+
+OSResetCallback PowerCallback;
+OSResetCallback ResetCallback;
+u8 Debug_BBA;
+u8 gap_10_8087FC91_sbss[7];
+u32 PlayRecordGet;
+u32 PlayRecordError;
+u32 PlayRecordTerminate;
+u32 PlayRecordTerminated;
+u32 PlayRecordRetry;
+u32 PlayRecordLastError;
 
 extern const char lbl_807A9900[];
 extern const char lbl_807A9914[];
