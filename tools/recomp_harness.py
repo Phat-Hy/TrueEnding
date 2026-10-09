@@ -228,6 +228,8 @@ def build_runner(jobs: int = 12):
         f"@{rsp_path}",
         "-o", str(runner_exe),
         "-lm",
+        "-lgdi32",
+        "-luser32",
     ]
     t0 = time.time()
     res = subprocess.run(link_cmd)

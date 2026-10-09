@@ -81,11 +81,22 @@
       }
     },
     {
-      "name": "main/auto_03_800081C0_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_800081C0_text.o",
+      "name": "main/entry",
+      "target_path": "build/SLSEXJ/obj/entry.o",
+      "base_path": "build/SLSEXJ/src/entry.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 48 -sdata2 48 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/entry.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/entry.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {

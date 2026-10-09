@@ -60,7 +60,7 @@ All commands run from root: `G:\Program\Project The Maybe(Not) Last Story`
 ## 3. Current Project State
 
 ### Track A (Decompilation Matching)
-- **100.0% Matched Modules** (114 full modules linked directly into `main.dol`):
+- **100.0% Matched Modules** (115 full modules linked directly into `main.dol`):
   1. **NAND Flash Subsystem** (6 modules, 90 funcs, 19,140 B): `nand.c`, `NANDOpenClose.c`, `NANDCheck.c`, `NANDCore.c`, `NANDLogging.c`, `nanderror.c`
   2. **System Configuration (SC)** (2 modules, 91 funcs, 20,244 B): `scsystem.c`, `scapi.c`
   3. **DVD Filesystem Subsystem** (6 modules, 124 funcs, 37,120 B): `DVDFS.c`, `dvd.c`, `dvdqueue.c`, `dvderror.c`, `dvdFatal.c`, `dvd_broadway.c`
@@ -76,13 +76,19 @@ All commands run from root: `G:\Program\Project The Maybe(Not) Last Story`
   13. **Metrowerks Target Resident Kernel Debugger (TRK)** (1 module, 152 funcs, 25,128 B): `trk`
   14. **MSL C & C++ Standard Libraries** (2 modules, 329 funcs, 104,200 B): `msl_c`, `msl_cpp`
   15. **Runtime Support & C++ Exceptions** (6 modules, 49 funcs, 12,852 B): `__init_hardware`, `memcpy`, `memset`, `global_destructor_chain`, `runtime`, `__init_cpp_exceptions`, `Gecko_ExceptionPPC`
-- **Total Progress**: **692,116 bytes** / 7,477,324 (**9.26%** code matched, **9.31%** linked), **2,609 functions** matched (14.40%).
+  16. **Game Core Entry Point** (1 module, 2 funcs, 236 B): `entry.c` (0x800081C0 - 0x800082AC)
+- **Total Progress**: **692,352 bytes** / 7,477,324 (**9.26%** code matched, **9.32%** linked), **2,611 functions** matched (14.41%).
 - **DOL Integrity**: `orig/main.dol.sha1` check passes cleanly (`OK`, 0 byte differences across all linked units).
 
 ### Track B (Native PC Runner Bringup)
-- **Executable**: `build/recomp/tls_runner.exe` (99.53 MB)
-- **Milestone Reached**: Continuous 60 FPS Engine Game Loop!
+- **Executable**: `build/recomp/tls_runner.exe` (99.55 MB)
+- **Interactive Live Display**: Win32 window (`--window`, StretchDIBits 60 FPS pacing, 640x480 native YUV422 -> RGB32).
+- **Controller System**: Dynamic XInput support + Win32 keyboard fallback mapped to `KPADRead` and `KPADGetStatus`.
+- **Milestone Reached**: Continuous 60 FPS Engine Game Loop with Live Asset Streaming!
   - `host_simulate_vblank()` advances graphics frame queue read index at `0x807C6FBA`.
+  - Host DVD filesystem streaming packages (`filesystem.pkh`/`pk`, `boot.pkh`/`pk`) from `orig/DATA/files/`.
+  - `CXDecompressFast` runtime decompressor executing on retail chunks.
+  - NW4R Sound Engine initialized, 3 threads running stably.
   - `host_wakeup_thread()` awakens `DefaultThread` (`0x807CB658`) out of the scheduler idle loop `while (RunQueueBits == 0)`.
   - `nw4r::snd` sound engine initialized; 3 threads running stably.
 

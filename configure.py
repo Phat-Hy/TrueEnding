@@ -141,6 +141,14 @@ config.cflags = cflags_base
 # Registered libraries and translation units
 config.libs = [
     {
+        "lib": "Game",
+        "mw_version": "Wii/1.0",
+        "cflags": cflags_base,
+        "objects": [
+            Object(True, "entry.c"),
+        ],
+    },
+    {
         "lib": "Runtime",
         "mw_version": "Wii/1.0",
         "cflags": cflags_base,

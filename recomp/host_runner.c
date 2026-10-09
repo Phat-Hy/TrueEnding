@@ -10,6 +10,136 @@
 #define DOLRECOMP_ENABLE_REPLACEMENTS 1
 #include "generated.h"
 
+#ifdef _WIN32
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
+static HWND s_hwnd = NULL;
+static HDC s_hdc = NULL;
+static u32 s_rgb_pixels[640 * 480];
+static BITMAPINFO s_bmi = {0};
+static bool s_window_closed = false;
+
+static LRESULT CALLBACK window_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+    switch (msg) {
+        case WM_CLOSE:
+            s_window_closed = true;
+            DestroyWindow(hwnd);
+            return 0;
+        case WM_DESTROY:
+            s_window_closed = true;
+            PostQuitMessage(0);
+            return 0;
+        case WM_KEYDOWN:
+            if (wParam == VK_ESCAPE) {
+                s_window_closed = true;
+                DestroyWindow(hwnd);
+                return 0;
+            }
+            break;
+    }
+    return DefWindowProcA(hwnd, msg, wParam, lParam);
+}
+
+static bool init_display_window(int width, int height) {
+    WNDCLASSA wc = {0};
+    wc.lpfnWndProc = window_proc;
+    wc.hInstance = GetModuleHandle(NULL);
+    wc.lpszClassName = "TLS_Runner_Class";
+    wc.hCursor = LoadCursor(NULL, IDC_ARROW);
+    wc.hbrBackground = (HBRUSH)GetStockObject(BLACK_BRUSH);
+    RegisterClassA(&wc);
+
+    RECT r = {0, 0, width, height};
+    AdjustWindowRect(&r, WS_OVERLAPPEDWINDOW, FALSE);
+
+    s_hwnd = CreateWindowA(
+        "TLS_Runner_Class",
+        "Project The Maybe(Not) Last Story (TrueEnding) - Native PC Port [60 FPS]",
+        WS_OVERLAPPEDWINDOW | WS_VISIBLE,
+        CW_USEDEFAULT, CW_USEDEFAULT,
+        r.right - r.left, r.bottom - r.top,
+        NULL, NULL, GetModuleHandle(NULL), NULL
+    );
+
+    if (!s_hwnd) return false;
+
+    s_hdc = GetDC(s_hwnd);
+
+    s_bmi.bmiHeader.biSize = sizeof(BITMAPINFOHEADER);
+    s_bmi.bmiHeader.biWidth = 640;
+    s_bmi.bmiHeader.biHeight = -480; // top-down
+    s_bmi.bmiHeader.biPlanes = 1;
+    s_bmi.bmiHeader.biBitCount = 32;
+    s_bmi.bmiHeader.biCompression = BI_RGB;
+
+    printf("[Runner] Real-time display window initialized (%dx%d, StretchDIBits 60 FPS)\n", width, height);
+    return true;
+}
+
+static bool update_display_window(const u8* yuyv_fb) {
+    if (!s_hwnd || !s_hdc || s_window_closed) return false;
+
+    MSG msg;
+    while (PeekMessageA(&msg, NULL, 0, 0, PM_REMOVE)) {
+        if (msg.message == WM_QUIT) {
+            s_window_closed = true;
+            return false;
+        }
+        TranslateMessage(&msg);
+        DispatchMessageA(&msg);
+    }
+
+    if (s_window_closed) return false;
+
+    if (yuyv_fb) {
+        for (int y = 0; y < 480; y++) {
+            for (int x = 0; x < 640; x += 2) {
+                int off = (y * 640 + x) * 2;
+                u8 y0 = yuyv_fb[off + 0], u = yuyv_fb[off + 1], y1 = yuyv_fb[off + 2], v = yuyv_fb[off + 3];
+                int c0 = (int)y0 - 16, c1 = (int)y1 - 16, d = (int)u - 128, e = (int)v - 128;
+                
+                int r0 = (298 * c0 + 409 * e + 128) >> 8;
+                int g0 = (298 * c0 - 100 * d - 208 * e + 128) >> 8;
+                int b0 = (298 * c0 + 516 * d + 128) >> 8;
+                
+                int r1 = (298 * c1 + 409 * e + 128) >> 8;
+                int g1 = (298 * c1 - 100 * d - 208 * e + 128) >> 8;
+                int b1 = (298 * c1 + 516 * d + 128) >> 8;
+
+                r0 = r0 < 0 ? 0 : (r0 > 255 ? 255 : r0);
+                g0 = g0 < 0 ? 0 : (g0 > 255 ? 255 : g0);
+                b0 = b0 < 0 ? 0 : (b0 > 255 ? 255 : b0);
+
+                r1 = r1 < 0 ? 0 : (r1 > 255 ? 255 : r1);
+                g1 = g1 < 0 ? 0 : (g1 > 255 ? 255 : g1);
+                b1 = b1 < 0 ? 0 : (b1 > 255 ? 255 : b1);
+
+                s_rgb_pixels[y * 640 + x]     = (r0 << 16) | (g0 << 8) | b0;
+                s_rgb_pixels[y * 640 + x + 1] = (r1 << 16) | (g1 << 8) | b1;
+            }
+        }
+
+        RECT client;
+        GetClientRect(s_hwnd, &client);
+        int dst_w = client.right - client.left;
+        int dst_h = client.bottom - client.top;
+
+        SetStretchBltMode(s_hdc, COLORONCOLOR);
+        StretchDIBits(
+            s_hdc,
+            0, 0, dst_w, dst_h,
+            0, 0, 640, 480,
+            s_rgb_pixels,
+            &s_bmi,
+            DIB_RGB_COLORS,
+            SRCCOPY
+        );
+    }
+    return true;
+}
+#endif
+
 
 static bool load_dol_into_cpu(CPUState* cpu, const char* path) {
     DOLFile dol;
@@ -197,6 +327,9 @@ int main(int argc, char** argv) {
     const char* dol_path = "orig/main.dol";
     u32 max_blocks = 10000;
     int max_frames = 10;
+    bool enable_window = false;
+    int win_width = 1280;
+    int win_height = 720;
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--dol") == 0 && i + 1 < argc) {
@@ -205,6 +338,12 @@ int main(int argc, char** argv) {
             max_blocks = (u32)atoi(argv[++i]);
         } else if (strcmp(argv[i], "--frames") == 0 && i + 1 < argc) {
             max_frames = atoi(argv[++i]);
+        } else if (strcmp(argv[i], "--window") == 0 || strcmp(argv[i], "-w") == 0) {
+            enable_window = true;
+        } else if (strcmp(argv[i], "--width") == 0 && i + 1 < argc) {
+            win_width = atoi(argv[++i]);
+        } else if (strcmp(argv[i], "--height") == 0 && i + 1 < argc) {
+            win_height = atoi(argv[++i]);
         }
     }
 
@@ -243,11 +382,24 @@ int main(int argc, char** argv) {
     cpu.gpr[1] = 0x80700000; // Initial stack pointer
     cpu.msr = 0x00002000;    // FP enabled
 
+#ifdef _WIN32
+    if (enable_window) {
+        init_display_window(win_width, win_height);
+    }
+#endif
+
     printf("[Runner] Starting execution from entry point 0x%08X (limit: %u blocks/slice, frames: %d)...\n",
            cpu.pc, max_blocks, max_frames);
 
     int result = 0;
     for (int frame = 0; frame < max_frames; frame++) {
+#ifdef _WIN32
+        LARGE_INTEGER qpc_freq, t_start, t_end;
+        if (enable_window) {
+            QueryPerformanceFrequency(&qpc_freq);
+            QueryPerformanceCounter(&t_start);
+        }
+#endif
         cpu.downcount = 50000000;
         result = dolrecomp_run_blocks(&cpu, max_blocks);
         if (cpu.exception != 0) {
@@ -284,6 +436,25 @@ int main(int argc, char** argv) {
             }
         }
 
+#ifdef _WIN32
+        if (enable_window) {
+            u32 fb0 = mem_read32(&cpu, 0x807C6F70);
+            u32 fb1 = mem_read32(&cpu, 0x807C6F80);
+            u32 active_fb = (frame % 2 == 0) ? (fb0 ? fb0 : fb1) : (fb1 ? fb1 : fb0);
+            const u8* fb_bytes = active_fb ? (const u8*)resolve_guest_pointer(&cpu, active_fb) : NULL;
+            if (!update_display_window(fb_bytes)) {
+                printf("[Runner] Window closed by user at frame %d.\n", frame);
+                break;
+            }
+
+            // 60 FPS pacing (~16.6ms per frame)
+            QueryPerformanceCounter(&t_end);
+            double elapsed_ms = (double)(t_end.QuadPart - t_start.QuadPart) * 1000.0 / (double)qpc_freq.QuadPart;
+            if (elapsed_ms < 16.666) {
+                Sleep((DWORD)(16.666 - elapsed_ms));
+            }
+        }
+#endif
     }
 
     printf("\n[Runner] Execution paused after run_blocks (result = %d)\n", result);
