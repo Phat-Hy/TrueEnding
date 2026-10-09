@@ -16,7 +16,9 @@ EXTRA_SYMBOLS = """
     lbl_807BADF8 = 0x807BADF8;
     lbl_80765840 = 0x80765840;
     lbl_807BB4A8 = 0x807BB4A8;
-    lbl_8087EBE8 = @wstringBase0_8087EBE8;
+    lbl_8079D7F8 = 0x8079D7F8;
+    lbl_8079D864 = 0x8079D864;
+    lbl_8079D9E4 = 0x8079D9E4;
 }
 """
 

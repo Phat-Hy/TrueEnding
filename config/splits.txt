@@ -18,10 +18,16 @@ OSAlarm.c:
 	.data       start:0x8079C2A8 end:0x8079C2B8
 	.sbss       start:0x8087FBE0 end:0x8087FBE8
 
+OSAlloc.c:
+	.text       start:0x805EC950 end:0x805ECB80
+
 OSArena.c:
 	.text       start:0x805ECB80 end:0x805ECC80
 	.sdata      start:0x8087E768 end:0x8087E770
 	.sbss       start:0x8087FBF0 end:0x8087FBF8
+
+OSAudioSystem.c:
+	.text       start:0x805ECC80 end:0x805ED140
 
 OSCache.c:
 	.text       start:0x805ED140 end:0x805ED800
@@ -37,10 +43,37 @@ OSError.c:
 	.data       start:0x8079C678 end:0x8079C958
 	.bss        start:0x807CB2B0 end:0x807CB2F4
 
+OSExec.c:
+	.text       start:0x805EE820 end:0x805EF630
+
+OSFatal.c:
+	.text       start:0x805EF630 end:0x805F05B0
+
+OSFont.c:
+	.text       start:0x805F05B0 end:0x805F1E80
+
 OSInterrupt.c:
 	.text       start:0x805F1E80 end:0x805F2650
 	.data       start:0x8079D7B8 end:0x8079D7E8
 	.sbss       start:0x8087FC20 end:0x8087FC38
+
+OSModule.c:
+	.text       start:0x805F2650 end:0x805F2950
+
+OSMemory.c:
+	.text       start:0x805F2950 end:0x805F32E0
+
+OSMutex.c:
+	.text       start:0x805F32E0 end:0x805F34C0
+
+OSReboot.c:
+	.text       start:0x805F34C0 end:0x805F3F30
+
+OSSram.c:
+	.text       start:0x805F3F30 end:0x805F48A0
+
+OSSystemCall.c:
+	.text       start:0x805F48A0 end:0x805F4920
 
 OSThread.c:
 	.text       start:0x805F4920 end:0x805F5F90
@@ -201,6 +234,12 @@ GXBump.c:
 GXTev.c:
 	.text       start:0x80617650 end:0x80618F60
 
+GXPixel.c:
+	.text       start:0x80618F60 end:0x8061A010
+
+GXDisplayList.c:
+	.text       start:0x8061A010 end:0x8061A5D0
+
 isfs.c:
 	.text       start:0x8061A5D0 end:0x8061BCA0
 
@@ -317,6 +356,9 @@ global_destructor_chain.c:
 
 runtime.c:
 	.text       start:0x80695480 end:0x80696578
+
+Gecko_ExceptionPPC.c:
+	.text       start:0x806965E8 end:0x80698088
 
 __init_hardware.c:
 	.init       start:0x80004360 end:0x800043C4

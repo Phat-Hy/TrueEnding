@@ -30,7 +30,8 @@ def generate_module(mod_name):
 
     # Sanitize quoted symbols before any parsing
     text = re.sub(r'"@\w*_?([0-9A-Fa-f]{8})"', r'lbl_\1', text)
-    text = re.sub(r'"@([^"]+)"', r'lbl_\1', text)
+    text = re.sub(r'"@([^"]+)"', lambda m: 'lbl_' + re.sub(r'[^0-9A-Za-z_]', '_', m.group(1)), text)
+    text = re.sub(r'"([^"]+)"', lambda m: re.sub(r'[^0-9A-Za-z_]', '_', m.group(1)), text)
 
     # Step 2: Parse functions
     sections = re.split(r'\.fn\s+([\w@]+)', text)

@@ -1,5 +1,8 @@
 extern "C" {
 
+#pragma exceptions off
+#pragma function_align 4
+
 typedef struct __eti_init_info {
     void* eti_start;
     void* eti_end;
@@ -35,9 +38,10 @@ extern void __destroy_global_chain(void);
 
 #pragma section ".ctors$10"
 #pragma section ".dtors$10"
+#pragma section ".dtors$15"
 
-__declspec(section ".ctors$10") const __void_func __init_cpp_exceptions_reference = __init_cpp_exceptions;
-__declspec(section ".dtors$10") const __void_func __destroy_global_chain_reference = __destroy_global_chain;
-__declspec(section ".dtors$10") const __void_func __fini_cpp_exceptions_reference = __fini_cpp_exceptions;
+__declspec(section ".ctors$10") extern const __void_func __init_cpp_exceptions_reference = __init_cpp_exceptions;
+__declspec(section ".dtors$10") extern const __void_func __destroy_global_chain_reference = __destroy_global_chain;
+__declspec(section ".dtors$15") extern const __void_func __fini_cpp_exceptions_reference = __fini_cpp_exceptions;
 
 }

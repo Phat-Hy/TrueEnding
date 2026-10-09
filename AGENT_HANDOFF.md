@@ -60,23 +60,23 @@ All commands run from root: `G:\Program\Project The Maybe(Not) Last Story`
 ## 3. Current Project State
 
 ### Track A (Decompilation Matching)
-- **100.0% Matched Modules** (99 full modules linked directly into `main.dol`):
+- **100.0% Matched Modules** (114 full modules linked directly into `main.dol`):
   1. **NAND Flash Subsystem** (6 modules, 90 funcs, 19,140 B): `nand.c`, `NANDOpenClose.c`, `NANDCheck.c`, `NANDCore.c`, `NANDLogging.c`, `nanderror.c`
   2. **System Configuration (SC)** (2 modules, 91 funcs, 20,244 B): `scsystem.c`, `scapi.c`
   3. **DVD Filesystem Subsystem** (6 modules, 124 funcs, 37,120 B): `DVDFS.c`, `dvd.c`, `dvdqueue.c`, `dvderror.c`, `dvdFatal.c`, `dvd_broadway.c`
   4. **Video Interface (VI)** (2 modules, 42 funcs, 18,276 B): `vi.c`, `vi3in1.c`
-  5. **Graphics Accelerator (GX)** (10 modules, 173 funcs, 30,808 B): `GXInit`, `GXFifo`, `GXAttr`, `GXMisc`, `GXGeometry`, `GXFrameBuf`, `GXLight`, `GXTexture`, `GXBump`, `GXTev`
+  5. **Graphics Accelerator (GX)** (12 modules, 204 funcs, 36,552 B): `GXInit`, `GXFifo`, `GXAttr`, `GXMisc`, `GXGeometry`, `GXFrameBuf`, `GXLight`, `GXTexture`, `GXBump`, `GXTev`, `GXPixel`, `GXDisplayList`
   6. **Audio Executive & DSP (AX / AXFX / DSP)** (19 modules, 123 funcs, 27,244 B): `ax`, `AXAlloc`, `AXAux`, `AXCL`, `AXOut`, `AXVPB`, `AXSPB`, `AXProf`, `AXFX*`, `dsp`, `dsp_task`
   7. **Inter-Process Comm & FS (IPC / ISFS)** (4 modules, 66 funcs, 14,620 B): `ipc`, `ipcclt`, `ipcprof`, `isfs`
-  8. **OS Core & CPU Context** (12 modules, 137 funcs, 26,532 B): `OSArena`, `OSCache`, `OSContext`, `OSError`, `OSInterrupt`, `OSThread`, `OSTime`, `OSIpc`, `OSTitle`, `OSAlarm`, `OSReset`, `OSPlayTime`
+  8. **OS Core & CPU Context** (24 modules, 222 funcs, 51,760 B): `OSAlarm`, `OSAlloc`, `OSArena`, `OSAudioSystem`, `OSCache`, `OSContext`, `OSError`, `OSExec`, `OSFatal`, `OSFont`, `OSInterrupt`, `OSModule`, `OSMemory`, `OSMutex`, `OSReboot`, `OSSram`, `OSSystemCall`, `OSThread`, `OSTime`, `OSIpc`, `OSReset`, `OSPlayTime`, `OSTitle`, `init_user` — *(ENTIRE OS SUBSYSTEM 100% COMPLETE & LINKED)*
   9. **Math & Controllers** (6 modules, 43 funcs, 5,592 B): `PSMTX`, `mtx`, `mtx44`, `vec`, `quat`, `pad`, `ai`
   10. **Broadcom Bluetooth Subsystem (BTE/BTA/BTM/HID/L2CAP/RFCOMM/SDP)** (14 modules, 630 funcs, 169,576 B): `hcis`, `bta_sys`, `bta_dm`, `bta_hh`, `btm_acl`, `btm_dev`, `btm_inq`, `btm_sco`, `btm_sec`, `gap`, `hid`, `l2cap`, `rfcomm`, `sdp`
   11. **Nintendo Graphics & USB Subsystems** (3 modules, 59 funcs, 31,396 B): `tpl`, `gx_draw`, `gx_anim`, `usb`
   12. **Wiimote Subsystem (KPAD & WPAD)** (4 modules, 210 funcs, 83,336 B): `kpad`, `wpad`, `wpad_mem`, `wpad_core`
   13. **Metrowerks Target Resident Kernel Debugger (TRK)** (1 module, 152 funcs, 25,128 B): `trk`
   14. **MSL C & C++ Standard Libraries** (2 modules, 329 funcs, 104,200 B): `msl_c`, `msl_cpp`
-  15. **Runtime Support Helpers** (2 modules, 30 funcs [72 entry points], 4,524 B): `runtime`, `global_destructor_chain`
-- **Total Progress**: **655,732 bytes** / 7,477,324 (**8.77%** code matched, **8.82%** linked), **2,477 functions** matched (13.67%).
+  15. **Runtime Support & C++ Exceptions** (6 modules, 49 funcs, 12,852 B): `__init_hardware`, `memcpy`, `memset`, `global_destructor_chain`, `runtime`, `__init_cpp_exceptions`, `Gecko_ExceptionPPC`
+- **Total Progress**: **692,116 bytes** / 7,477,324 (**9.26%** code matched, **9.31%** linked), **2,609 functions** matched (14.40%).
 - **DOL Integrity**: `orig/main.dol.sha1` check passes cleanly (`OK`, 0 byte differences across all linked units).
 
 ### Track B (Native PC Runner Bringup)
