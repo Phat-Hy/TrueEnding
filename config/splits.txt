@@ -2095,6 +2095,78 @@ game_net_dlc_mgr.c:
 
 game_net_dlc_catalog.c:
 	.text       start:0x80549D90 end:0x8054D798
+game_wii_remote_pointer.c:
+	.text       start:0x8054D798 end:0x8054F384
+
+game_wii_remote_accel.c:
+	.text       start:0x8054F384 end:0x805510FC
+
+game_wii_remote_rumble.c:
+	.text       start:0x805510FC end:0x805534A8
+
+game_wii_remote_speaker.c:
+	.text       start:0x805534A8 end:0x805553D8
+
+game_wii_remote_sound.c:
+	.text       start:0x805553D8 end:0x80557ABC
+
+game_wii_remote_stream.c:
+	.text       start:0x80557ABC end:0x80559B30
+game_wii_nunchuk_stick.c:
+	.text       start:0x80559B30 end:0x8055B5E8
+
+game_wii_nunchuk_accel.c:
+	.text       start:0x8055B5E8 end:0x8055D004
+
+game_wii_nunchuk_calib.c:
+	.text       start:0x8055D004 end:0x8055F040
+
+game_wii_classic_stick.c:
+	.text       start:0x8055F040 end:0x80560D90
+
+game_wii_classic_button.c:
+	.text       start:0x80560D90 end:0x805628BC
+
+game_wii_classic_calib.c:
+	.text       start:0x805628BC end:0x80564344
+game_wii_mii_loader.c:
+	.text       start:0x80564344 end:0x80565F38
+
+game_wii_mii_parser.c:
+	.text       start:0x80565F38 end:0x8056795C
+
+game_wii_mii_icon.c:
+	.text       start:0x8056795C end:0x805693D0
+
+game_wii_mii_render.c:
+	.text       start:0x805693D0 end:0x8056B2C4
+
+game_wii_home_menu_mgr.c:
+	.text       start:0x8056B2C4 end:0x8056D070
+
+game_wii_home_menu_view.c:
+	.text       start:0x8056D070 end:0x8056F2FC
+game_wii_home_menu_anim.c:
+	.text       start:0x8056F2FC end:0x80570CFC
+
+game_wii_home_menu_sound.c:
+	.text       start:0x80570CFC end:0x805727A8
+
+game_wii_home_menu_draw.c:
+	.text       start:0x805727A8 end:0x80574564
+
+game_wii_power_callback.c:
+	.text       start:0x80574564 end:0x80575F70
+
+game_wii_reset_callback.c:
+	.text       start:0x80575F70 end:0x80577CC4
+
+game_wii_standby_callback.c:
+	.text       start:0x80577CC4 end:0x805797C0
+
+
+
+
 
 
 

@@ -213,6 +213,34 @@ ALL_MODULES = [
     ("game_net_stats_display", "0x80545CEC", "0x8054770C"),
     ("game_net_dlc_mgr", "0x8054770C", "0x80549D90"),
     ("game_net_dlc_catalog", "0x80549D90", "0x8054D798"),
+    # Batch 31 (180..186)
+    ("game_wii_remote_pointer", "0x8054D798", "0x8054F384"),
+    ("game_wii_remote_accel", "0x8054F384", "0x805510FC"),
+    ("game_wii_remote_rumble", "0x805510FC", "0x805534A8"),
+    ("game_wii_remote_speaker", "0x805534A8", "0x805553D8"),
+    ("game_wii_remote_sound", "0x805553D8", "0x80557ABC"),
+    ("game_wii_remote_stream", "0x80557ABC", "0x80559B30"),
+    # Batch 32 (186..192)
+    ("game_wii_nunchuk_stick", "0x80559B30", "0x8055B5E8"),
+    ("game_wii_nunchuk_accel", "0x8055B5E8", "0x8055D004"),
+    ("game_wii_nunchuk_calib", "0x8055D004", "0x8055F040"),
+    ("game_wii_classic_stick", "0x8055F040", "0x80560D90"),
+    ("game_wii_classic_button", "0x80560D90", "0x805628BC"),
+    ("game_wii_classic_calib", "0x805628BC", "0x80564344"),
+    # Batch 33 (192..198)
+    ("game_wii_mii_loader", "0x80564344", "0x80565F38"),
+    ("game_wii_mii_parser", "0x80565F38", "0x8056795C"),
+    ("game_wii_mii_icon", "0x8056795C", "0x805693D0"),
+    ("game_wii_mii_render", "0x805693D0", "0x8056B2C4"),
+    ("game_wii_home_menu_mgr", "0x8056B2C4", "0x8056D070"),
+    ("game_wii_home_menu_view", "0x8056D070", "0x8056F2FC"),
+    # Batch 34 (198..204)
+    ("game_wii_home_menu_anim", "0x8056F2FC", "0x80570CFC"),
+    ("game_wii_home_menu_sound", "0x80570CFC", "0x805727A8"),
+    ("game_wii_home_menu_draw", "0x805727A8", "0x80574564"),
+    ("game_wii_power_callback", "0x80574564", "0x80575F70"),
+    ("game_wii_reset_callback", "0x80575F70", "0x80577CC4"),
+    ("game_wii_standby_callback", "0x80577CC4", "0x805797C0"),
 ]
 
 def run_cmd(cmd):
