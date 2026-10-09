@@ -1282,6 +1282,58 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u8 clear = (u8)ctx->gpr[4];
             printf("[TLS GXCopyDisp] dest=0x%08X clear=%u\n", dest, clear);
             fflush(stdout);
+            if (dest) {
+                u32* p_gx = (u32*)resolve_guest_pointer(ctx, 0x80888718);
+                u32 gx_data_addr = p_gx ? *p_gx : 0;
+                u32 clear_color_word = 0x10801080; // Standard broadcast black in YUYV422 (Y=16, U=128, Y=16, V=128)
+                if (gx_data_addr) {
+                    u32 clr = mem_read32(ctx, gx_data_addr + 0x220);
+                    u8 r = (clr >> 24) & 0xFF;
+                    u8 g = (clr >> 16) & 0xFF;
+                    u8 b = (clr >> 8) & 0xFF;
+                    if (r != 0 || g != 0 || b != 0) {
+                        int y = ((66 * r + 129 * g + 25 * b + 128) >> 8) + 16;
+                        int u = ((-38 * r - 74 * g + 112 * b + 128) >> 8) + 128;
+                        int v = ((112 * r - 94 * g - 18 * b + 128) >> 8) + 128;
+                        clear_color_word = ((y & 0xFF) << 24) | ((u & 0xFF) << 16) | ((y & 0xFF) << 8) | (v & 0xFF);
+                    }
+                }
+                u32* dst = (u32*)resolve_guest_pointer(ctx, dest);
+                if (dst) {
+                    for (int i = 0; i < 640 * 480 / 2; i++) {
+                        dst[i] = clear_color_word;
+                    }
+
+                    static int s_dumped_disp = 0;
+                    if (!s_dumped_disp++) {
+                        FILE* f = fopen("build/recomp/framebuffer_disp.ppm", "wb");
+                        if (f) {
+                            fprintf(f, "P6\n640 480\n255\n");
+                            const u8* fb = (const u8*)dst;
+                            for (int y = 0; y < 480; y++) {
+                                for (int x = 0; x < 640; x += 2) {
+                                    int off = (y * 640 + x) * 2;
+                                    u8 y0 = fb[off + 0], u = fb[off + 1], y1 = fb[off + 2], v = fb[off + 3];
+                                    int c0 = (int)y0 - 16, c1 = (int)y1 - 16, d = (int)u - 128, e = (int)v - 128;
+                                    int r0 = (298 * c0 + 409 * e + 128) >> 8;
+                                    int g0 = (298 * c0 - 100 * d - 208 * e + 128) >> 8;
+                                    int b0 = (298 * c0 + 516 * d + 128) >> 8;
+                                    int r1 = (298 * c1 + 409 * e + 128) >> 8;
+                                    int g1 = (298 * c1 - 100 * d - 208 * e + 128) >> 8;
+                                    int b1 = (298 * c1 + 516 * d + 128) >> 8;
+                                    fputc(r0 < 0 ? 0 : (r0 > 255 ? 255 : r0), f);
+                                    fputc(g0 < 0 ? 0 : (g0 > 255 ? 255 : g0), f);
+                                    fputc(b0 < 0 ? 0 : (b0 > 255 ? 255 : b0), f);
+                                    fputc(r1 < 0 ? 0 : (r1 > 255 ? 255 : r1), f);
+                                    fputc(g1 < 0 ? 0 : (g1 > 255 ? 255 : g1), f);
+                                    fputc(b1 < 0 ? 0 : (b1 > 255 ? 255 : b1), f);
+                                }
+                            }
+                            fclose(f);
+                        }
+                    }
+                }
+            }
             ctx->pc = ctx->lr;
             return 1;
         }
