@@ -1687,6 +1687,78 @@ game_battle_ai_yurick.c:
 
 game_battle_ai_general.c:
 	.text       start:0x8043C334 end:0x80440184
+game_gmk_item_slot.c:
+	.text       start:0x80440184 end:0x80441E54
+
+game_gmk_slot_anime.c:
+	.text       start:0x80441E54 end:0x8044386C
+
+game_gmk_slot_cache.c:
+	.text       start:0x8044386C end:0x80445F44
+
+game_gmk_slot_draw.c:
+	.text       start:0x80445F44 end:0x804479B8
+
+game_gmk_slot_event.c:
+	.text       start:0x804479B8 end:0x80449448
+
+game_gmk_slot_trigger.c:
+	.text       start:0x80449448 end:0x8044B44C
+game_boss_cocoon_init.c:
+	.text       start:0x8044B44C end:0x8044D028
+
+game_boss_cocoon_state.c:
+	.text       start:0x8044D028 end:0x8044EA34
+
+game_boss_cocoon_move.c:
+	.text       start:0x8044EA34 end:0x80450590
+
+game_boss_cocoon_anim.c:
+	.text       start:0x80450590 end:0x80452370
+
+game_boss_cocoon_action.c:
+	.text       start:0x80452370 end:0x80453DB4
+
+game_boss_cocoon_ai.c:
+	.text       start:0x80453DB4 end:0x80455D80
+game_boss_cocoon_skill.c:
+	.text       start:0x80455D80 end:0x80457C48
+
+game_boss_cocoon_damage.c:
+	.text       start:0x80457C48 end:0x804596E8
+
+game_boss_cocoon_rage.c:
+	.text       start:0x804596E8 end:0x8045B40C
+
+game_boss_cocoon_laser.c:
+	.text       start:0x8045B40C end:0x8045D1EC
+
+game_boss_cocoon_sub.c:
+	.text       start:0x8045D1EC end:0x8045ECC4
+
+game_boss_cocoon_phase2.c:
+	.text       start:0x8045ECC4 end:0x80460A90
+game_boss_cocoon_phase3.c:
+	.text       start:0x80460A90 end:0x804628B4
+
+game_boss_cocoon_tail.c:
+	.text       start:0x804628B4 end:0x80464608
+
+game_boss_cocoon_claw.c:
+	.text       start:0x80464608 end:0x80466370
+
+game_boss_cocoon_roar.c:
+	.text       start:0x80466370 end:0x80467F50
+
+game_boss_cocoon_death.c:
+	.text       start:0x80467F50 end:0x804699A4
+
+game_boss_cocoon_fx.c:
+	.text       start:0x804699A4 end:0x8046B798
+
+
+
+
 
 
 
