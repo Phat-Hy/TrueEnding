@@ -34,6 +34,24 @@ game_actor.c:
 game_battle.c:
 	.text       start:0x80017128 end:0x8001B4A4
 
+game_entity.c:
+	.text       start:0x8001B4A4 end:0x8001E0A8
+
+game_property.c:
+	.text       start:0x8001E0A8 end:0x8001EDE8
+
+game_camera.c:
+	.text       start:0x8001EDE8 end:0x8002008C
+
+game_stage.c:
+	.text       start:0x8002008C end:0x800251B4
+
+game_collision.c:
+	.text       start:0x800251B4 end:0x8002806C
+
+game_physics.c:
+	.text       start:0x8002806C end:0x8002B9D0
+
 OSAlarm.c:
 	.text       start:0x805EC080 end:0x805EC950
 	.data       start:0x8079C2A8 end:0x8079C2B8

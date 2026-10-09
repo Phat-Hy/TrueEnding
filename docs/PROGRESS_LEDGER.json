@@ -5,13 +5,49 @@
   "status": {
     "track_a_decomp_matching": {
       "compiler": "Metrowerks CodeWarrior 4.3 build 145 (Wii/1.0)",
-      "total_matched_modules": 121,
-      "total_matched_functions": 2782,
-      "total_matched_code_bytes": 770680,
-      "overall_code_match_rate": "10.31%",
-      "overall_linked_rate": "10.37%",
+      "total_matched_modules": 127,
+      "total_matched_functions": 3080,
+      "total_matched_code_bytes": 837540,
+      "overall_code_match_rate": "11.20%",
+      "overall_linked_rate": "11.26%",
       "overall_module_match_rate": "100.00%",
       "matched_modules": [
+        {
+          "name": "game_physics.c",
+          "functions": 50,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_collision.c",
+          "functions": 40,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_stage.c",
+          "functions": 76,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_camera.c",
+          "functions": 26,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_property.c",
+          "functions": 70,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_entity.c",
+          "functions": 36,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
         {
           "name": "entry.c",
           "functions": 2,

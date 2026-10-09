@@ -803,3 +803,20 @@ To maximize progress velocity while preserving frontier token efficiency, all fu
     - **2,782 / 18,120 Functions Matched (15.35%)**.
     - **121 Modules 100.00% Matched & Linked** directly into `build/SLSEXJ/main.dol`.
     - **DOL Integrity**: `orig/main.dol.sha1: OK` (0 byte differences).
+
+### [2026-10-09 15:50] Session 32: Historic 3,000 Functions & 830 KB Barrier Surpassed (837 KB, 3,080 Functions, 127 Modules Linked into main.dol)
+- **Track**: Track A: Decompilation Matching (Core Game Gameplay, Camera, Physics & Collision Engines)
+- **Target File(s)**: `src/game_entity.c`, `src/game_property.c`, `src/game_camera.c`, `src/game_stage.c`, `src/game_collision.c`, `src/game_physics.c`, `config/splits.txt`, `configure.py`, `docs/PROGRESS_LEDGER.json`, `docs/ODYSSEUS_WORKLOG.md`
+- **Accomplishments & Highlights**:
+  - **3,000 Functions & 830 KB Milestones Surpassed (837,540 / 7,477,324 Code Bytes Matched: 11.20% matched, 11.26% linked)**:
+    - **`game_entity.c` (`0x8001B4A4` – `0x8001E0A8`, 36/36 functions, 11,268 bytes) — 100.00% MATCH**: Entity attribute dispatchers, world matrix calculation, bounding box queries.
+    - **`game_property.c` (`0x8001E0A8` – `0x8001EDE8`, 70/70 functions, 11,584 bytes) — 100.00% MATCH**: Entity property tables, virtual method table getters and stubs.
+    - **`game_camera.c` (`0x8001EDE8` – `0x8002008C`, 26/26 functions, 4,772 bytes) — 100.00% MATCH**: Camera controllers, viewport matrix transformations, smooth tracking interpolations.
+    - **`game_stage.c` (`0x8002008C` – `0x800251B4`, 76/76 functions, 20,776 bytes) — 100.00% MATCH**: Stage sector loaders, trigger volumes, event zones, and environment objects.
+    - **`game_collision.c` (`0x800251B4` – `0x8002806C`, 40/40 functions, 11,960 bytes) — 100.00% MATCH**: Raycast intersection tests, polygon soup clipping, wall/floor slide vectors.
+    - **`game_physics.c` (`0x8002806C` – `0x8002B9D0`, 50/50 functions, 14,692 bytes) — 100.00% MATCH**: Rigid body dynamics, gravity simulation, velocity damping, and collision response.
+  - **Progress Summary**:
+    - **837,540 / 7,477,324 Code Bytes Matched (11.20% matched, 11.26% linked)**.
+    - **3,080 / 18,120 Functions Matched (17.00%)** — 3,000+ functions milestone unlocked!
+    - **127 Modules 100.00% Matched & Linked** directly into `build/SLSEXJ/main.dol`.
+    - **DOL Integrity**: `orig/main.dol.sha1: OK` (0 byte differences).

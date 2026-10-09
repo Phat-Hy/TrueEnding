@@ -152,6 +152,12 @@ config.libs = [
             Object(True, "game_manager.c"),
             Object(True, "game_actor.c"),
             Object(True, "game_battle.c"),
+            Object(True, "game_entity.c"),
+            Object(True, "game_property.c"),
+            Object(True, "game_camera.c"),
+            Object(True, "game_stage.c"),
+            Object(True, "game_collision.c"),
+            Object(True, "game_physics.c"),
         ],
     },
     {
