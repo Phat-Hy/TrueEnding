@@ -15,7 +15,7 @@ extern void fn_80604050(void);
 extern void fn_80604300(void);
 extern void fn_806043E0(void);
 extern void fn_80624A50(void);
-extern void fn_80695FFC(void);
+extern void __div2i(void);
 extern void fn_80696324(void);
 
 /* External data symbols (> 8 bytes) */
@@ -1357,7 +1357,7 @@ lbl_fn_806056D0_1178:
     slwi r3, r0, 3
     slwi r4, r7, 3
     rlwimi r3, r7, 3, 29, 31
-    bl fn_80695FFC
+    bl __div2i
     srawi r5, r29, 31
     xoris r0, r3, 0x8000
     xoris r5, r5, 0x8000
@@ -1413,7 +1413,7 @@ lbl_fn_80605760_1240:
     slwi r3, r0, 3
     slwi r4, r7, 3
     rlwimi r3, r7, 3, 29, 31
-    bl fn_80695FFC
+    bl __div2i
     xoris r0, r3, 0x8000
     xoris r5, r25, 0x8000
     subfc r3, r26, r4
@@ -1470,7 +1470,7 @@ lbl_fn_80605760_130c:
     slwi r3, r0, 3
     slwi r4, r7, 3
     rlwimi r3, r7, 3, 29, 31
-    bl fn_80695FFC
+    bl __div2i
     xoris r0, r3, 0x8000
     xoris r5, r28, 0x8000
     subfc r3, r27, r4
@@ -1494,7 +1494,7 @@ lbl_fn_80605760_1368:
     slwi r3, r0, 3
     slwi r4, r7, 3
     rlwimi r3, r7, 3, 29, 31
-    bl fn_80695FFC
+    bl __div2i
     xoris r0, r3, 0x8000
     xoris r5, r28, 0x8000
     subfc r3, r27, r4
@@ -1528,7 +1528,7 @@ lbl_fn_80605760_13ec:
     slwi r3, r0, 3
     slwi r4, r7, 3
     rlwimi r3, r7, 3, 29, 31
-    bl fn_80695FFC
+    bl __div2i
     xoris r0, r3, 0x8000
     xoris r5, r28, 0x8000
     subfc r3, r29, r4
@@ -1555,7 +1555,7 @@ lbl_fn_80605760_1454:
     slwi r3, r0, 3
     slwi r4, r7, 3
     rlwimi r3, r7, 3, 29, 31
-    bl fn_80695FFC
+    bl __div2i
     xoris r0, r3, 0x8000
     xoris r5, r29, 0x8000
     subfc r3, r30, r4
@@ -1662,7 +1662,7 @@ lbl_fn_80605AB0_15d4:
     slwi r3, r0, 3
     slwi r4, r7, 3
     rlwimi r3, r7, 3, 29, 31
-    bl fn_80695FFC
+    bl __div2i
     xoris r0, r3, 0x8000
     xoris r5, r22, 0x8000
     subfc r3, r23, r4
@@ -1684,7 +1684,7 @@ lbl_fn_80605AB0_1628:
     slwi r3, r0, 3
     slwi r4, r7, 3
     rlwimi r3, r7, 3, 29, 31
-    bl fn_80695FFC
+    bl __div2i
     xoris r0, r3, 0x8000
     xoris r5, r22, 0x8000
     subfc r3, r23, r4
@@ -1755,7 +1755,7 @@ lbl_fn_80605AB0_1724:
     slwi r3, r0, 3
     slwi r4, r7, 3
     rlwimi r3, r7, 3, 29, 31
-    bl fn_80695FFC
+    bl __div2i
     xoris r0, r3, 0x8000
     xoris r5, r25, 0x8000
     subfc r3, r24, r4
@@ -1779,7 +1779,7 @@ lbl_fn_80605AB0_1780:
     slwi r3, r0, 3
     slwi r4, r7, 3
     rlwimi r3, r7, 3, 29, 31
-    bl fn_80695FFC
+    bl __div2i
     xoris r0, r3, 0x8000
     xoris r5, r25, 0x8000
     subfc r3, r24, r4
@@ -1810,7 +1810,7 @@ lbl_fn_80605AB0_17f8:
     slwi r3, r0, 3
     slwi r4, r7, 3
     rlwimi r3, r7, 3, 29, 31
-    bl fn_80695FFC
+    bl __div2i
     xoris r0, r3, 0x8000
     xoris r5, r25, 0x8000
     subfc r3, r24, r4
@@ -1834,7 +1834,7 @@ lbl_fn_80605AB0_1854:
     slwi r3, r0, 3
     slwi r4, r7, 3
     rlwimi r3, r7, 3, 29, 31
-    bl fn_80695FFC
+    bl __div2i
     xoris r0, r3, 0x8000
     xoris r5, r25, 0x8000
     subfc r3, r24, r4
@@ -1909,7 +1909,7 @@ lbl_fn_80605AB0_1964:
     slwi r3, r0, 3
     slwi r4, r7, 3
     rlwimi r3, r7, 3, 29, 31
-    bl fn_80695FFC
+    bl __div2i
     xoris r0, r3, 0x8000
     xoris r5, r26, 0x8000
     subfc r3, r27, r4
@@ -1936,7 +1936,7 @@ lbl_fn_80605AB0_19cc:
     slwi r3, r0, 3
     slwi r4, r7, 3
     rlwimi r3, r7, 3, 29, 31
-    bl fn_80695FFC
+    bl __div2i
     xoris r0, r3, 0x8000
     xoris r5, r26, 0x8000
     subfc r3, r27, r4

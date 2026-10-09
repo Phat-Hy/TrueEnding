@@ -32,16 +32,16 @@ To optimize execution velocity and preserve token budgets, Track A follows a tar
 
 ## Current Progress Tracker
 
-> Updated as of **October 2026** — Milestone **>2.29% Overall Code Match & 171 KB Barrier Surpassed! (Entire Nintendo AX, AXFX, DSP, GX, ISFS & IPC Subsystems 100% Matched)**
+> Updated as of **October 2026** — Milestone **>2.82% Overall Code Match & 210 KB Barrier Surpassed! (Entire Nintendo AX, AXFX, DSP, GX, ISFS, IPC, NAND, SC, VI & DVD Subsystems 100% Matched & Linked)**
 
 ### Overall Metrics
 
 | Metric | Target (`main.dol`) | Matched | Progress |
 | :--- | :--- | :--- | :--- |
-| **Total Code Bytes** | 7,477,324 bytes | **171,108 bytes** | **2.29%** |
-| **Total Functions** | 18,120 functions | **766 functions** | **4.23%** |
-| **Fully Matched Modules** | ~410 modules | **65 modules** | **15.85%** |
-| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 65 matched modules) |
+| **Total Code Bytes** | 7,477,324 bytes | **210,492 bytes** | **2.82%** |
+| **Total Functions** | 18,120 functions | **947 functions** | **5.23%** |
+| **Fully Matched Modules** | ~410 modules | **73 modules** (71 linked) | **17.80%** |
+| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 73 matched modules) |
 | **PC Runner Status** | Boot & Loop | **60 FPS Continuous Loop** | Boot, Subsystems Init, Resource Loader, 200+ Frames, Dual Framebuffers |
 
 ---
@@ -50,8 +50,16 @@ To optimize execution velocity and preserve token budgets, Track A follows a tar
 
 | Subsystem | Module | Functions | Code Bytes | Match Rate | Description |
 | :--- | :--- | :---: | :---: | :---: | :--- |
+| **NAND Flash Subsystem** | [`nand.c`](file:///src/nand.c) | 31 / 31 | 4,692 B | **100.00%** | File creation, deletion, read/write, permissions, directories |
+| *(100% Complete — 6 Modules)* | [`NANDOpenClose.c`](file:///src/NANDOpenClose.c) | 10 / 10 | 1,988 B | **100.00%** | File handle allocation, sync/async open, close, and callbacks |
+| | [`NANDCheck.c`](file:///src/NANDCheck.c) | 17 / 17 | 5,204 B | **100.00%** | Flash block verification, inode checks, allocation tables |
+| | [`NANDCore.c`](file:///src/NANDCore.c) | 26 / 26 | 4,924 B | **100.00%** | Core NAND initialization (`NANDInit`), path conversion, status |
+| | [`NANDLogging.c`](file:///src/NANDLogging.c) | 3 / 3 | 1,584 B | **100.00%** | Error log message queuing, async routine, shared descriptor |
+| | [`nanderror.c`](file:///src/nanderror.c) | 3 / 3 | 748 B | **100.00%** | Automatic error messaging, screen notifications |
+| **System Config (SC)** | [`scsystem.c`](file:///src/scsystem.c) | 25 / 25 | 6,684 B | **100.00%** | System configuration init (`SCInit`), reload conf, NVRAM |
+| *(100% Complete — 2 Modules)* | [`scapi.c`](file:///src/scapi.c) | 66 / 66 | 13,560 B | **100.00%** | SC query API (`SCGetLanguage`, aspect ratio, sound mode, time) |
 | **DVD Subsystem** | [`DVDFS.c`](file:///src/DVDFS.c) | 14 / 14 | 2,472 B | **100.00%** | File system initialization, directory and async read routines |
-| *(100% Complete)* | [`dvd.c`](file:///src/dvd.c) | 50 / 50 | 19,156 B | **100.00%** | Core DVD command queuing, drive control, reset handling |
+| *(100% Complete & Linked)* | [`dvd.c`](file:///src/dvd.c) | 50 / 50 | 19,156 B | **100.00%** | Core DVD command queuing, drive control, reset handling |
 | | [`dvdqueue.c`](file:///src/dvdqueue.c) | 8 / 8 | 740 B | **100.00%** | Multi-priority circular doubly linked request queues |
 | | [`dvderror.c`](file:///src/dvderror.c) | 13 / 13 | 2,628 B | **100.00%** | Error handling, NAND logging, disc ID verification |
 | | [`dvdFatal.c`](file:///src/dvdFatal.c) | 5 / 5 | 356 B | **100.00%** | Fatal error reporting and multilingual screen presentation |

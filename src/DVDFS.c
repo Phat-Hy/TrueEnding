@@ -1,10 +1,10 @@
 #include "revolution/types.h"
 
 
-extern u32 BootInfo;
-extern u32 FstStart;
-extern u32 MaxEntryNum;
-extern u32 FstStringStart;
+static u32 BootInfo;
+static u32 FstStart;
+static u32 MaxEntryNum;
+static u32 FstStringStart;
 extern u32 lbl_8087FCD0;
 extern u32 __DVDLongFileNameFlag;
 extern u32 __DVDLayoutFormat;

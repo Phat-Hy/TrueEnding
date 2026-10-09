@@ -213,6 +213,30 @@ ipcclt.c:
 ipcprof.c:
 	.text       start:0x8061DD20 end:0x8061E130
 
+nand.c:
+	.text       start:0x8061E130 end:0x8061F480
+
+NANDOpenClose.c:
+	.text       start:0x8061F480 end:0x8061FC80
+
+NANDCheck.c:
+	.text       start:0x8061FC80 end:0x80621150
+
+NANDCore.c:
+	.text       start:0x80621150 end:0x80622550
+
+NANDLogging.c:
+	.text       start:0x80622550 end:0x80622BA0
+
+nanderror.c:
+	.text       start:0x80622BA0 end:0x80622EA0
+
+scsystem.c:
+	.text       start:0x80622EA0 end:0x80624980
+
+scapi.c:
+	.text       start:0x80624980 end:0x80628000
+
 global_destructor_chain.c:
 	.text       start:0x80695420 end:0x80695480
 

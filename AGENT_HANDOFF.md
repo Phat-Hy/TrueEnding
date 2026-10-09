@@ -60,18 +60,17 @@ All commands run from root: `G:\Program\Project The Maybe(Not) Last Story`
 ## 3. Current Project State
 
 ### Track A (Decompilation Matching)
-- **100.0% Matched Modules** (9 full modules):
-  1. `src/OSAlarm.c` (13 functions, 100%)
-  2. `src/OSArena.c` (13 functions, 100%)
-  3. `src/OSCache.c` (19 functions, 100%)
-  4. `src/OSContext.c` (15 functions, 100%)
-  5. `src/OSError.c` (5 functions, 100%)
-  6. `src/OSInterrupt.c` (11 functions, 100%)
-  7. `src/OSThread.c` (24 functions, 100%)
-  8. `src/OSTime.c` (6 functions, 100%)
-  9. `src/OSReset.c` (**16/16 functions byte-identical**, 100%): `__OSInitSTM`, `fn_805F6BF0`, `__OSHotReset`, `fn_805F6CF0`, `fn_805F6DF0`, `__OSUnRegisterStateEvent`, `fn_805F6EB0`, `__OSDefaultResetCallback`, `__OSDefaultPowerCallback`, `__OSStateEventHandler`, `fn_805F7040`, `PlayRecordCallback`, `__OSStartPlayRecord`, `__OSStopPlayRecord`, `__OSWriteStateFlags`, `__OSReadStateFlags`.
-     - Verify with `python tools/verify_osreset.py` -> `16/16 functions byte-identical`.
-     - Note: `report.json` shows 4 *local* symbols of this unit as `unmatched` because `objdiff report` cannot name-pair statics that the retail split labels with an address suffix (e.g. `PlayRecordCallback_805F7050`). This is a project-wide report artifact, not a code defect.
+- **100.0% Matched Modules** (73 full modules, 71 linked into `main.dol`):
+  1. **NAND Flash Subsystem** (6 modules, 90 funcs, 19,140 B): `nand.c`, `NANDOpenClose.c`, `NANDCheck.c`, `NANDCore.c`, `NANDLogging.c`, `nanderror.c`
+  2. **System Configuration (SC)** (2 modules, 91 funcs, 20,244 B): `scsystem.c`, `scapi.c`
+  3. **DVD Filesystem Subsystem** (6 modules, 124 funcs, 37,120 B): `DVDFS.c`, `dvd.c`, `dvdqueue.c`, `dvderror.c`, `dvdFatal.c`, `dvd_broadway.c`
+  4. **Video Interface (VI)** (2 modules, 42 funcs, 18,276 B): `vi.c`, `vi3in1.c`
+  5. **Graphics Accelerator (GX)** (10 modules, 173 funcs, 30,808 B): `GXInit`, `GXFifo`, `GXAttr`, `GXMisc`, `GXGeometry`, `GXFrameBuf`, `GXLight`, `GXTexture`, `GXBump`, `GXTev`
+  6. **Audio Executive & DSP (AX / AXFX / DSP)** (19 modules, 123 funcs, 27,244 B): `ax`, `AXAlloc`, `AXAux`, `AXCL`, `AXOut`, `AXVPB`, `AXSPB`, `AXProf`, `AXFX*`, `dsp`, `dsp_task`
+  7. **Inter-Process Comm & FS (IPC / ISFS)** (4 modules, 66 funcs, 14,620 B): `ipc`, `ipcclt`, `ipcprof`, `isfs`
+  8. **OS Core & CPU Context** (11 modules, 124 funcs, 23,248 B): `OSArena`, `OSCache`, `OSContext`, `OSError`, `OSInterrupt`, `OSThread`, `OSTime`, `OSIpc`, `OSTitle`, `OSAlarm`, `OSReset`
+  9. **Math & Controllers** (6 modules, 43 funcs, 5,592 B): `PSMTX`, `mtx`, `mtx44`, `vec`, `quat`, `pad`, `ai`
+- **Total Progress**: **210,492 bytes** / 7,477,324 (**2.82%**), **947 functions** matched (5.23%).
 
 ### Track B (Native PC Runner Bringup)
 - **Executable**: `build/recomp/tls_runner.exe` (99.53 MB)

@@ -24,7 +24,7 @@ extern s32 fn_80602710(void);
 extern s32 fn_8061ECE0(void*, s32, s32, void*, void*);
 extern s32 fn_80602A10(void*);
 extern OSTime OSGetTime(void);
-extern void fn_80695FFC(void);
+extern void __div2i(void);
 extern s32 fn_806028A0(void*);
 extern s32 fn_80682544(const void*, const void*, u32);
 
@@ -716,7 +716,7 @@ asm void fn_80600120(void)
     li r5, 0x0
     lwz r0, 0xf8(r6)
     srwi r6, r0, 2
-    bl fn_80695FFC
+    bl __div2i
     lis r3, fn_806000A0@ha
     stw r4, 0xc(r31)
     addi r3, r3, fn_806000A0@l

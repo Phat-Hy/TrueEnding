@@ -1484,7 +1484,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/OSAlarm.c",
         "progress_categories": [],
@@ -1737,7 +1737,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/OSTime.c",
         "progress_categories": [],
@@ -1772,7 +1772,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/OSIpc.c",
         "progress_categories": [],
@@ -1845,7 +1845,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/OSTitle.c",
         "progress_categories": [],
@@ -1978,7 +1978,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/DVDFS.c",
         "progress_categories": [],
@@ -1997,7 +1997,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/dvd.c",
         "progress_categories": [],
@@ -2016,7 +2016,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/dvdqueue.c",
         "progress_categories": [],
@@ -2035,7 +2035,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/dvderror.c",
         "progress_categories": [],
@@ -2054,7 +2054,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/dvdFatal.c",
         "progress_categories": [],
@@ -2073,7 +2073,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/dvd_broadway.c",
         "progress_categories": [],
@@ -2111,7 +2111,7 @@
         "build_ctx": true
       },
       "metadata": {
-        "complete": false,
+        "complete": true,
         "reverse_fn_order": false,
         "source_path": "src/vi.c",
         "progress_categories": [],
@@ -2792,8 +2792,160 @@
       }
     },
     {
-      "name": "main/auto_03_8061E130_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8061E130_text.o",
+      "name": "main/nand",
+      "target_path": "build/SLSEXJ/obj/nand.o",
+      "base_path": "build/SLSEXJ/src/nand.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/nand.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/nand.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/NANDOpenClose",
+      "target_path": "build/SLSEXJ/obj/NANDOpenClose.o",
+      "base_path": "build/SLSEXJ/src/NANDOpenClose.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/NANDOpenClose.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/NANDOpenClose.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/NANDCheck",
+      "target_path": "build/SLSEXJ/obj/NANDCheck.o",
+      "base_path": "build/SLSEXJ/src/NANDCheck.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/NANDCheck.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/NANDCheck.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/NANDCore",
+      "target_path": "build/SLSEXJ/obj/NANDCore.o",
+      "base_path": "build/SLSEXJ/src/NANDCore.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/NANDCore.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/NANDCore.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/NANDLogging",
+      "target_path": "build/SLSEXJ/obj/NANDLogging.o",
+      "base_path": "build/SLSEXJ/src/NANDLogging.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/NANDLogging.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/NANDLogging.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/nanderror",
+      "target_path": "build/SLSEXJ/obj/nanderror.o",
+      "base_path": "build/SLSEXJ/src/nanderror.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/nanderror.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/nanderror.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/scsystem",
+      "target_path": "build/SLSEXJ/obj/scsystem.o",
+      "base_path": "build/SLSEXJ/src/scsystem.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/scsystem.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/scsystem.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/scapi",
+      "target_path": "build/SLSEXJ/obj/scapi.o",
+      "base_path": "build/SLSEXJ/src/scapi.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 8 -sdata2 8 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/scapi.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/scapi.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/auto_03_80628000_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_80628000_text.o",
       "metadata": {
         "progress_categories": [],
         "auto_generated": true

@@ -40,7 +40,7 @@ extern u8 lbl_807D1480[];
 extern u8 lbl_807D14A0[];
 
 /* External small data symbols (<= 8 bytes, SDA21) */
-extern u32 lbl_80888598;
+static const u32 lbl_80888598 = 0xFFFFFF00;
 extern u8 lbl_8087E7F8[8];
 extern u8 lbl_8087E800[8];
 extern u32 lbl_8087E80C;
