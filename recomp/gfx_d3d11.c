@@ -29,6 +29,7 @@ typedef struct {
     int win_height;
     bool vsync;
     bool fullscreen;
+    GfxAspectRatio aspect_ratio;
     uint32_t* rgba_staging;
 } D3D11Backend;
 
@@ -119,6 +120,7 @@ bool d3d11_init(HWND hwnd, const GfxConfig* config) {
     s_d3d11.win_height = config->window_height;
     s_d3d11.vsync = config->vsync;
     s_d3d11.fullscreen = config->fullscreen;
+    s_d3d11.aspect_ratio = config->aspect_ratio;
     s_d3d11.fb_width = 640;
     s_d3d11.fb_height = 480;
 
@@ -291,18 +293,44 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
         }
     }
 
-    // Set Viewport
+    // Set Render Target
+    ID3D11DeviceContext_OMSetRenderTargets(s_d3d11.context, 1, &s_d3d11.rtv, NULL);
+
+    // Clear backbuffer to solid black (letterbox / pillarbox bars)
+    const FLOAT black_color[4] = {0.0f, 0.0f, 0.0f, 1.0f};
+    ID3D11DeviceContext_ClearRenderTargetView(s_d3d11.context, s_d3d11.rtv, black_color);
+
+    // Calculate Aspect Ratio Preserving Viewport
+    float vx = 0.0f, vy = 0.0f;
+    float vw = (float)s_d3d11.win_width;
+    float vh = (float)s_d3d11.win_height;
+
+    if (s_d3d11.aspect_ratio != GFX_ASPECT_STRETCH && s_d3d11.win_height > 0) {
+        float target_aspect = (s_d3d11.aspect_ratio == GFX_ASPECT_4_3) ? (4.0f / 3.0f) : (16.0f / 9.0f);
+        float win_aspect = (float)s_d3d11.win_width / (float)s_d3d11.win_height;
+        if (win_aspect > target_aspect) {
+            // Window is wider than target -> pillarbox (black bars on left/right)
+            vh = (float)s_d3d11.win_height;
+            vw = (float)s_d3d11.win_height * target_aspect;
+            vx = ((float)s_d3d11.win_width - vw) * 0.5f;
+            vy = 0.0f;
+        } else {
+            // Window is taller than target -> letterbox (black bars on top/bottom)
+            vw = (float)s_d3d11.win_width;
+            vh = (float)s_d3d11.win_width / target_aspect;
+            vx = 0.0f;
+            vy = ((float)s_d3d11.win_height - vh) * 0.5f;
+        }
+    }
+
     D3D11_VIEWPORT vp = {0};
-    vp.TopLeftX = 0;
-    vp.TopLeftY = 0;
-    vp.Width = (FLOAT)s_d3d11.win_width;
-    vp.Height = (FLOAT)s_d3d11.win_height;
+    vp.TopLeftX = vx;
+    vp.TopLeftY = vy;
+    vp.Width = vw;
+    vp.Height = vh;
     vp.MinDepth = 0.0f;
     vp.MaxDepth = 1.0f;
     ID3D11DeviceContext_RSSetViewports(s_d3d11.context, 1, &vp);
-
-    // Set Render Target
-    ID3D11DeviceContext_OMSetRenderTargets(s_d3d11.context, 1, &s_d3d11.rtv, NULL);
 
     // Bind Pipeline
     ID3D11DeviceContext_IASetPrimitiveTopology(s_d3d11.context, D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);

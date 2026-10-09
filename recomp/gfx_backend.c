@@ -10,6 +10,11 @@ extern bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height)
 extern void d3d11_resize(int new_width, int new_height);
 extern void d3d11_shutdown(void);
 
+extern bool d3d12_init(HWND hwnd, const GfxConfig* config);
+extern bool d3d12_present(const uint8_t* yuyv_data, int fb_width, int fb_height);
+extern void d3d12_resize(int new_width, int new_height);
+extern void d3d12_shutdown(void);
+
 static GfxConfig s_active_config = {0};
 static GfxBackendType s_active_backend = GFX_BACKEND_GDI;
 static HWND s_hwnd = NULL;
@@ -96,7 +101,18 @@ bool gfx_backend_init(HWND hwnd, const GfxConfig* config) {
     s_active_config = *config;
     s_hwnd = hwnd;
 
-    // Attempt Direct3D 11 hardware backend first unless user specifically requested GDI
+    // Direct3D 12 requested or AUTO (modern first)
+    if (config->backend_type == GFX_BACKEND_D3D12 || config->backend_type == GFX_BACKEND_AUTO) {
+        if (d3d12_init(hwnd, config)) {
+            s_active_backend = GFX_BACKEND_D3D12;
+            return true;
+        }
+        if (config->backend_type == GFX_BACKEND_D3D12) {
+            printf("[GFX] Direct3D 12 initialization failed, falling back to D3D11...\n");
+        }
+    }
+
+    // Direct3D 11 requested or fallback from AUTO / D3D12
     if (config->backend_type == GFX_BACKEND_AUTO ||
         config->backend_type == GFX_BACKEND_D3D11 ||
         config->backend_type == GFX_BACKEND_D3D12) {
@@ -117,7 +133,9 @@ bool gfx_backend_init(HWND hwnd, const GfxConfig* config) {
 }
 
 bool gfx_backend_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
-    if (s_active_backend == GFX_BACKEND_D3D11) {
+    if (s_active_backend == GFX_BACKEND_D3D12) {
+        return d3d12_present(yuyv_data, fb_width, fb_height);
+    } else if (s_active_backend == GFX_BACKEND_D3D11) {
         return d3d11_present(yuyv_data, fb_width, fb_height);
     } else {
         return gdi_present(yuyv_data, fb_width, fb_height);
@@ -127,7 +145,9 @@ bool gfx_backend_present(const uint8_t* yuyv_data, int fb_width, int fb_height) 
 void gfx_backend_resize(int new_width, int new_height) {
     s_active_config.window_width = new_width;
     s_active_config.window_height = new_height;
-    if (s_active_backend == GFX_BACKEND_D3D11) {
+    if (s_active_backend == GFX_BACKEND_D3D12) {
+        d3d12_resize(new_width, new_height);
+    } else if (s_active_backend == GFX_BACKEND_D3D11) {
         d3d11_resize(new_width, new_height);
     }
 }
@@ -159,7 +179,9 @@ void gfx_backend_toggle_fullscreen(void) {
 }
 
 void gfx_backend_shutdown(void) {
-    if (s_active_backend == GFX_BACKEND_D3D11) {
+    if (s_active_backend == GFX_BACKEND_D3D12) {
+        d3d12_shutdown();
+    } else if (s_active_backend == GFX_BACKEND_D3D11) {
         d3d11_shutdown();
     } else {
         gdi_shutdown();

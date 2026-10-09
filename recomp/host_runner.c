@@ -328,7 +328,7 @@ int main(int argc, char** argv) {
             printf("  --width <pixels>  Display window width (default: 1280)\n");
             printf("  --height <pixels> Display window height (default: 720)\n");
             printf("  --fps <N>         Target frame rate cap (30, 60, 120, 0=uncapped, default: 60)\n");
-            printf("  --gfx <backend>   Graphics backend: auto, d3d11, gdi (default: auto)\n");
+            printf("  --gfx <backend>   Graphics backend: auto, d3d12, d3d11, gdi (default: auto)\n");
             printf("  --vsync <0|1>     Enable (1) or disable (0) vertical sync (default: 1)\n");
             printf("  --novsync         Disable vertical sync\n");
             printf("  --help, -h        Show this help message\n\n");
@@ -352,7 +352,8 @@ int main(int argc, char** argv) {
             target_fps = atoi(argv[++i]);
         } else if (strcmp(argv[i], "--gfx") == 0 && i + 1 < argc) {
             i++;
-            if (strcmp(argv[i], "d3d11") == 0) backend_type = GFX_BACKEND_D3D11;
+            if (strcmp(argv[i], "d3d12") == 0) backend_type = GFX_BACKEND_D3D12;
+            else if (strcmp(argv[i], "d3d11") == 0) backend_type = GFX_BACKEND_D3D11;
             else if (strcmp(argv[i], "gdi") == 0) backend_type = GFX_BACKEND_GDI;
         } else if (strcmp(argv[i], "--vsync") == 0 && i + 1 < argc) {
             vsync = atoi(argv[++i]) != 0;
