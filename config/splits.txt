@@ -2163,6 +2163,78 @@ game_wii_reset_callback.c:
 
 game_wii_standby_callback.c:
 	.text       start:0x80577CC4 end:0x805797C0
+game_util_stream_read.c:
+	.text       start:0x805797C0 end:0x8057B4A4
+
+game_util_stream_write.c:
+	.text       start:0x8057B4A4 end:0x8057CED0
+
+game_util_stream_pipe.c:
+	.text       start:0x8057CED0 end:0x8057EAF4
+
+game_util_math_matrix.c:
+	.text       start:0x8057EAF4 end:0x8058057C
+
+game_util_math_quat.c:
+	.text       start:0x8058057C end:0x80581FDC
+
+game_util_math_spline.c:
+	.text       start:0x80581FDC end:0x80584178
+game_util_heap_block.c:
+	.text       start:0x80584178 end:0x80585C70
+
+game_util_heap_chunk.c:
+	.text       start:0x80585C70 end:0x80587B74
+
+game_util_heap_defrag.c:
+	.text       start:0x80587B74 end:0x805895B8
+
+game_util_compress_lz.c:
+	.text       start:0x805895B8 end:0x8058B408
+
+game_util_compress_yaz.c:
+	.text       start:0x8058B408 end:0x8058CF64
+
+game_util_compress_lzo.c:
+	.text       start:0x8058CF64 end:0x8058ECD8
+game_util_string_hash.c:
+	.text       start:0x8058ECD8 end:0x80590AAC
+
+game_util_string_table.c:
+	.text       start:0x80590AAC end:0x80593030
+
+game_util_string_format.c:
+	.text       start:0x80593030 end:0x80595F7C
+
+game_util_debug_assert.c:
+	.text       start:0x80595F7C end:0x80598534
+
+game_util_debug_trace.c:
+	.text       start:0x80598534 end:0x80599FB8
+
+game_util_debug_log.c:
+	.text       start:0x80599FB8 end:0x8059C088
+game_util_crc32.c:
+	.text       start:0x8059C088 end:0x8059DA90
+
+game_util_md5.c:
+	.text       start:0x8059DA90 end:0x8059F660
+
+game_util_sha1.c:
+	.text       start:0x8059F660 end:0x805A1288
+
+game_util_base64.c:
+	.text       start:0x805A1288 end:0x805A2FD4
+
+game_util_random_mt.c:
+	.text       start:0x805A2FD4 end:0x805A49E8
+
+game_util_timer_perf.c:
+	.text       start:0x805A49E8 end:0x805A6404
+
+
+
+
 
 
 

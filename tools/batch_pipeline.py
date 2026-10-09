@@ -241,6 +241,34 @@ ALL_MODULES = [
     ("game_wii_power_callback", "0x80574564", "0x80575F70"),
     ("game_wii_reset_callback", "0x80575F70", "0x80577CC4"),
     ("game_wii_standby_callback", "0x80577CC4", "0x805797C0"),
+    # Batch 35 (204..210)
+    ("game_util_stream_read", "0x805797C0", "0x8057B4A4"),
+    ("game_util_stream_write", "0x8057B4A4", "0x8057CED0"),
+    ("game_util_stream_pipe", "0x8057CED0", "0x8057EAF4"),
+    ("game_util_math_matrix", "0x8057EAF4", "0x8058057C"),
+    ("game_util_math_quat", "0x8058057C", "0x80581FDC"),
+    ("game_util_math_spline", "0x80581FDC", "0x80584178"),
+    # Batch 36 (210..216)
+    ("game_util_heap_block", "0x80584178", "0x80585C70"),
+    ("game_util_heap_chunk", "0x80585C70", "0x80587B74"),
+    ("game_util_heap_defrag", "0x80587B74", "0x805895B8"),
+    ("game_util_compress_lz", "0x805895B8", "0x8058B408"),
+    ("game_util_compress_yaz", "0x8058B408", "0x8058CF64"),
+    ("game_util_compress_lzo", "0x8058CF64", "0x8058ECD8"),
+    # Batch 37 (216..222)
+    ("game_util_string_hash", "0x8058ECD8", "0x80590AAC"),
+    ("game_util_string_table", "0x80590AAC", "0x80593030"),
+    ("game_util_string_format", "0x80593030", "0x80595F7C"),
+    ("game_util_debug_assert", "0x80595F7C", "0x80598534"),
+    ("game_util_debug_trace", "0x80598534", "0x80599FB8"),
+    ("game_util_debug_log", "0x80599FB8", "0x8059C088"),
+    # Batch 38 (222..228)
+    ("game_util_crc32", "0x8059C088", "0x8059DA90"),
+    ("game_util_md5", "0x8059DA90", "0x8059F660"),
+    ("game_util_sha1", "0x8059F660", "0x805A1288"),
+    ("game_util_base64", "0x805A1288", "0x805A2FD4"),
+    ("game_util_random_mt", "0x805A2FD4", "0x805A49E8"),
+    ("game_util_timer_perf", "0x805A49E8", "0x805A6404"),
 ]
 
 def run_cmd(cmd):
