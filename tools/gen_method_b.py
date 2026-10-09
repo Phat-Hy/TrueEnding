@@ -13,6 +13,20 @@ KNOWN_DECLS = {
     'OSPanic': 'extern void OSPanic(const char* file, int line, const char* msg, ...);',
 }
 
+SYM_MAP = {}
+def get_sym_addr(sym):
+    global SYM_MAP
+    m_hex = re.search(r'([0-9A-Fa-f]{8})', sym)
+    if m_hex:
+        return int(m_hex.group(1), 16)
+    if not SYM_MAP and os.path.exists("config/symbols.txt"):
+        with open("config/symbols.txt", "r") as f:
+            for l in f:
+                m = re.match(r'([\w@]+)\s*=\s*[^:]+:0x([0-9A-Fa-f]+);', l)
+                if m:
+                    SYM_MAP[m.group(1)] = int(m.group(2), 16)
+    return SYM_MAP.get(sym)
+
 def generate_module(mod_name):
     print(f"=== Processing {mod_name} ===")
     obj_path = f"build/SLSEXJ/obj/{mod_name}.o"
@@ -147,13 +161,17 @@ def generate_module(mod_name):
                 # Fix trap word unsigned immediate twui -> twi 31
                 inst_str = re.sub(r'\btwui\s+(\w+),\s*0x0\b', r'twi 31, \1, 0', inst_str)
                 inst_str = re.sub(r'\btwui\s+(\w+),\s*(\w+)\b', r'twi 31, \1, \2', inst_str)
-                # Handle addic. with symbol @l
-                m_addic = re.match(r'addic\.\s+(r\d+),\s*(r\d+),\s*lbl_([0-9A-Fa-f]{8})@l', inst_str)
+                # Handle addic and addic. with symbol @l
+                m_addic = re.match(r'addic(\.?)\s+(r\d+),\s*(r\d+),\s*([\w@]+)@l', inst_str)
                 if m_addic:
-                    lo_val = int(m_addic.group(3), 16) & 0xffff
-                    if lo_val & 0x8000:
-                        lo_val -= 0x10000
-                    inst_str = f"addic. {m_addic.group(1)}, {m_addic.group(2)}, {lo_val}"
+                    dot = m_addic.group(1)
+                    sym = m_addic.group(4)
+                    addr = get_sym_addr(sym)
+                    if addr is not None:
+                        lo_val = addr & 0xffff
+                        if lo_val & 0x8000:
+                            lo_val -= 0x10000
+                        inst_str = f"addic{dot} {m_addic.group(2)}, {m_addic.group(3)}, {lo_val}"
                 # Convert .4byte to opword
                 inst_str = re.sub(r'^\.4byte\s+(0x[0-9A-Fa-f]+).*', r'opword \1', inst_str)
                 out_lines.append(f'    {inst_str}')

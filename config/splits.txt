@@ -1183,6 +1183,486 @@ game_audio_emitter.c:
 
 game_audio_spatial.c:
 	.text       start:0x802FF2E4 end:0x80300654
+game_audio_voice_mgr.c:
+	.text       start:0x80300654 end:0x803026F0
+
+game_audio_voice_bank.c:
+	.text       start:0x803026F0 end:0x803041C8
+
+game_audio_voice_track.c:
+	.text       start:0x803041C8 end:0x80305BB8
+
+game_audio_voice_sync.c:
+	.text       start:0x80305BB8 end:0x80308D14
+
+game_audio_music_mgr.c:
+	.text       start:0x80308D14 end:0x8030A6A0
+
+game_audio_music_bank.c:
+	.text       start:0x8030A6A0 end:0x8030C190
+game_audio_music_cross.c:
+	.text       start:0x8030C190 end:0x8030DC9C
+
+game_audio_music_tempo.c:
+	.text       start:0x8030DC9C end:0x8030FEAC
+
+game_audio_sfx_mgr.c:
+	.text       start:0x8030FEAC end:0x80311BB8
+
+game_audio_sfx_group.c:
+	.text       start:0x80311BB8 end:0x80313544
+
+game_audio_sfx_pitch.c:
+	.text       start:0x80313544 end:0x80315644
+
+game_audio_sfx_limit.c:
+	.text       start:0x80315644 end:0x80316FC0
+game_audio_env_reverb.c:
+	.text       start:0x80316FC0 end:0x80318A30
+
+game_audio_env_echo.c:
+	.text       start:0x80318A30 end:0x8031A484
+
+game_audio_env_occlude.c:
+	.text       start:0x8031A484 end:0x8031C530
+
+game_audio_env_zone.c:
+	.text       start:0x8031C530 end:0x8031E060
+
+game_audio_3d_listener.c:
+	.text       start:0x8031E060 end:0x8031FAA4
+
+game_audio_3d_source.c:
+	.text       start:0x8031FAA4 end:0x80321724
+game_audio_3d_cone.c:
+	.text       start:0x80321724 end:0x803234C8
+
+game_audio_3d_doppler.c:
+	.text       start:0x803234C8 end:0x803252E0
+
+game_cutscene_director.c:
+	.text       start:0x803252E0 end:0x80326E60
+
+game_cutscene_track.c:
+	.text       start:0x80326E60 end:0x803288C4
+
+game_cutscene_actor.c:
+	.text       start:0x803288C4 end:0x8032A3D4
+
+game_cutscene_camera.c:
+	.text       start:0x8032A3D4 end:0x8032BE88
+game_cutscene_event.c:
+	.text       start:0x8032BE88 end:0x8032DAA0
+
+game_cutscene_audio.c:
+	.text       start:0x8032DAA0 end:0x8032F608
+
+game_cutscene_subtitle.c:
+	.text       start:0x8032F608 end:0x80331094
+
+game_cutscene_fade.c:
+	.text       start:0x80331094 end:0x80332B44
+
+game_cinematic_mgr.c:
+	.text       start:0x80332B44 end:0x803349D8
+
+game_cinematic_seq.c:
+	.text       start:0x803349D8 end:0x80336518
+game_cinematic_shot.c:
+	.text       start:0x80336518 end:0x803383E4
+
+game_cinematic_dof.c:
+	.text       start:0x803383E4 end:0x80339F04
+
+game_movie_player.c:
+	.text       start:0x80339F04 end:0x8033BD74
+
+game_movie_decoder.c:
+	.text       start:0x8033BD74 end:0x8033D750
+
+game_movie_render.c:
+	.text       start:0x8033D750 end:0x8033F7FC
+
+game_movie_audio.c:
+	.text       start:0x8033F7FC end:0x803402C0
+game_system_save_data.c:
+	.text       start:0x803402C0 end:0x80341E14
+
+game_system_save_io.c:
+	.text       start:0x80341E14 end:0x80343B0C
+
+game_system_save_crypt.c:
+	.text       start:0x80343B0C end:0x8034585C
+
+game_system_save_meta.c:
+	.text       start:0x8034585C end:0x80347218
+
+game_system_nand_mgr.c:
+	.text       start:0x80347218 end:0x80348FF4
+
+game_system_nand_file.c:
+	.text       start:0x80348FF4 end:0x8034AE48
+game_system_nand_dir.c:
+	.text       start:0x8034AE48 end:0x8034CF48
+
+game_system_nand_quota.c:
+	.text       start:0x8034CF48 end:0x8034EA50
+
+game_system_disc_mgr.c:
+	.text       start:0x8034EA50 end:0x80350464
+
+game_system_disc_read.c:
+	.text       start:0x80350464 end:0x803520D8
+
+game_system_disc_seek.c:
+	.text       start:0x803520D8 end:0x80353C9C
+
+game_system_disc_error.c:
+	.text       start:0x80353C9C end:0x80355760
+game_system_memory_card.c:
+	.text       start:0x80355760 end:0x80357330
+
+game_system_card_io.c:
+	.text       start:0x80357330 end:0x80358A5C
+
+game_system_card_sector.c:
+	.text       start:0x80358A5C end:0x8035A9F4
+
+game_system_card_format.c:
+	.text       start:0x8035A9F4 end:0x8035C47C
+
+game_system_card_stat.c:
+	.text       start:0x8035C47C end:0x8035DE10
+
+game_system_home_menu.c:
+	.text       start:0x8035DE10 end:0x8035FBF8
+game_system_home_button.c:
+	.text       start:0x8035FBF8 end:0x80361CA4
+
+game_system_home_render.c:
+	.text       start:0x80361CA4 end:0x803637D4
+
+game_system_home_sound.c:
+	.text       start:0x803637D4 end:0x80365320
+
+game_system_wpad_sync.c:
+	.text       start:0x80365320 end:0x80366D40
+
+game_system_wpad_rumble.c:
+	.text       start:0x80366D40 end:0x80368280
+
+game_system_wpad_motor.c:
+	.text       start:0x80368280 end:0x8036B438
+game_system_wpad_speaker.c:
+	.text       start:0x8036B438 end:0x8036CFA4
+
+game_system_wpad_accel.c:
+	.text       start:0x8036CFA4 end:0x8036E92C
+
+game_system_kpad_read.c:
+	.text       start:0x8036E92C end:0x80370320
+
+game_system_kpad_calib.c:
+	.text       start:0x80370320 end:0x80372574
+
+game_system_kpad_clamp.c:
+	.text       start:0x80372574 end:0x80373F78
+
+game_system_kpad_filter.c:
+	.text       start:0x80373F78 end:0x80375B78
+game_system_dvd_cache.c:
+	.text       start:0x80375B78 end:0x803775DC
+
+game_system_dvd_stream.c:
+	.text       start:0x803775DC end:0x80379104
+
+game_system_dvd_queue.c:
+	.text       start:0x80379104 end:0x8037C690
+
+game_system_dvd_notify.c:
+	.text       start:0x8037C690 end:0x8037E12C
+
+game_system_fat_mgr.c:
+	.text       start:0x8037E12C end:0x8037F9AC
+
+game_system_fat_cluster.c:
+	.text       start:0x8037F9AC end:0x803829C0
+game_system_nwc24_mgr.c:
+	.text       start:0x803829C0 end:0x80385B40
+
+game_system_nwc24_dl.c:
+	.text       start:0x80385B40 end:0x80387540
+
+game_system_nwc24_msg.c:
+	.text       start:0x80387540 end:0x80389060
+
+game_system_nwc24_data.c:
+	.text       start:0x80389060 end:0x8038AEF0
+
+game_system_nwc24_secret.c:
+	.text       start:0x8038AEF0 end:0x8038C928
+
+game_system_nwc24_friend.c:
+	.text       start:0x8038C928 end:0x8038E540
+game_system_net_so.c:
+	.text       start:0x8038E540 end:0x80390374
+
+game_system_net_ssl.c:
+	.text       start:0x80390374 end:0x803920C8
+
+game_system_net_http.c:
+	.text       start:0x803920C8 end:0x80393BEC
+
+game_system_net_dwc.c:
+	.text       start:0x80393BEC end:0x80395794
+
+game_system_net_login.c:
+	.text       start:0x80395794 end:0x803972A8
+
+game_system_net_auth.c:
+	.text       start:0x803972A8 end:0x80399148
+game_system_net_ranking.c:
+	.text       start:0x80399148 end:0x8039AB10
+
+game_system_net_ghost.c:
+	.text       start:0x8039AB10 end:0x8039C7F0
+
+game_system_net_coop.c:
+	.text       start:0x8039C7F0 end:0x8039E280
+
+game_system_net_versus.c:
+	.text       start:0x8039E280 end:0x8039FBFC
+
+game_system_net_room.c:
+	.text       start:0x8039FBFC end:0x803A19B4
+
+game_system_net_lobby_ui.c:
+	.text       start:0x803A19B4 end:0x803A3444
+game_system_net_chat.c:
+	.text       start:0x803A3444 end:0x803A5118
+
+game_system_net_stats.c:
+	.text       start:0x803A5118 end:0x803A6B9C
+
+game_title_logo.c:
+	.text       start:0x803A6B9C end:0x803A90E8
+
+game_title_movie.c:
+	.text       start:0x803A90E8 end:0x803AAA74
+
+game_title_press_start.c:
+	.text       start:0x803AAA74 end:0x803AC3D8
+
+game_title_main_menu.c:
+	.text       start:0x803AC3D8 end:0x803AE1D4
+game_title_new_game.c:
+	.text       start:0x803AE1D4 end:0x803B0808
+
+game_title_load_game.c:
+	.text       start:0x803B0808 end:0x803B2780
+
+game_title_options.c:
+	.text       start:0x803B2780 end:0x803B42E8
+
+game_title_extras.c:
+	.text       start:0x803B42E8 end:0x803B612C
+
+game_camp_menu_mgr.c:
+	.text       start:0x803B612C end:0x803B7AD0
+game_camp_party_select.c:
+	.text       start:0x803B7AD0 end:0x803B9624
+
+game_camp_status_view.c:
+	.text       start:0x803B9624 end:0x803BB0E0
+
+game_camp_skill_assign.c:
+	.text       start:0x803BB0E0 end:0x803BD0FC
+
+game_camp_equip_change.c:
+	.text       start:0x803BD0FC end:0x803BEA7C
+
+game_camp_item_use.c:
+	.text       start:0x803BEA7C end:0x803C01B0
+game_camp_craft_forge.c:
+	.text       start:0x803C01B0 end:0x803C1CAC
+
+game_camp_dye_color.c:
+	.text       start:0x803C1CAC end:0x803C3664
+
+game_camp_quest_log.c:
+	.text       start:0x803C3664 end:0x803C5FC4
+
+game_camp_encyclopedia.c:
+	.text       start:0x803C5FC4 end:0x803C795C
+
+game_camp_sound_test.c:
+	.text       start:0x803C795C end:0x803C9304
+
+game_camp_system_save.c:
+	.text       start:0x803C9304 end:0x803CAED0
+game_town_npc_manager.c:
+	.text       start:0x803CAED0 end:0x803CC900
+
+game_town_crowd_ai.c:
+	.text       start:0x803CC900 end:0x803CE278
+
+game_town_market_stall.c:
+	.text       start:0x803CE278 end:0x803CFC58
+
+game_town_tavern_event.c:
+	.text       start:0x803CFC58 end:0x803D164C
+
+game_town_arena_lobby.c:
+	.text       start:0x803D164C end:0x803D2A6C
+
+game_town_arena_fight.c:
+	.text       start:0x803D2A6C end:0x803D6DE4
+game_town_castle_gate.c:
+	.text       start:0x803D6DE4 end:0x803D83A8
+
+game_town_castle_courtyard.c:
+	.text       start:0x803D83A8 end:0x803DAB4C
+
+game_town_alley_stealth.c:
+	.text       start:0x803DAB4C end:0x803DCA84
+
+game_town_rooftop_jump.c:
+	.text       start:0x803DCA84 end:0x803DE648
+
+game_dungeon_room_mgr.c:
+	.text       start:0x803DE648 end:0x803E0250
+
+game_dungeon_door_lock.c:
+	.text       start:0x803E0250 end:0x803E2110
+game_dungeon_switch_puzzle.c:
+	.text       start:0x803E2110 end:0x803E3BE8
+
+game_dungeon_pressure_plate.c:
+	.text       start:0x803E3BE8 end:0x803E58CC
+
+game_dungeon_torch_light.c:
+	.text       start:0x803E58CC end:0x803E746C
+
+game_dungeon_pit_fall.c:
+	.text       start:0x803E746C end:0x803E907C
+
+game_dungeon_chest_loot.c:
+	.text       start:0x803E907C end:0x803EAA7C
+
+game_dungeon_spawn_wave.c:
+	.text       start:0x803EAA7C end:0x803EC568
+game_dungeon_barrier_field.c:
+	.text       start:0x803EC568 end:0x803EDF1C
+
+game_dungeon_boss_arena.c:
+	.text       start:0x803EDF1C end:0x803EFCA8
+
+game_battle_tactics_order.c:
+	.text       start:0x803EFCA8 end:0x803F1A38
+
+game_battle_gather_ring.c:
+	.text       start:0x803F1A38 end:0x803F33A4
+
+game_battle_heal_circle.c:
+	.text       start:0x803F33A4 end:0x803F4D98
+
+game_battle_slash_aim.c:
+	.text       start:0x803F4D98 end:0x803F68B4
+game_battle_sniper_cross.c:
+	.text       start:0x803F68B4 end:0x803F8324
+
+game_battle_cover_vault.c:
+	.text       start:0x803F8324 end:0x803F9E14
+
+game_battle_climb_beast.c:
+	.text       start:0x803F9E14 end:0x803FB788
+
+game_battle_weakpoint.c:
+	.text       start:0x803FB788 end:0x803FD328
+
+game_battle_chain_attack.c:
+	.text       start:0x803FD328 end:0x803FEF78
+
+game_battle_burst_gauge.c:
+	.text       start:0x803FEF78 end:0x804003E0
+game_battle_spirit_drive.c:
+	.text       start:0x804003E0 end:0x80401E50
+
+game_battle_finish_blow.c:
+	.text       start:0x80401E50 end:0x804038D0
+
+game_battle_revive_ally.c:
+	.text       start:0x804038D0 end:0x804052EC
+
+game_battle_command_mode.c:
+	.text       start:0x804052EC end:0x80406EC4
+
+game_battle_slow_time.c:
+	.text       start:0x80406EC4 end:0x804088C0
+
+game_battle_target_cursor.c:
+	.text       start:0x804088C0 end:0x8040A32C
+game_battle_line_of_sight.c:
+	.text       start:0x8040A32C end:0x8040BE88
+
+game_battle_cover_point.c:
+	.text       start:0x8040BE88 end:0x8040DA48
+
+game_battle_vault_kick.c:
+	.text       start:0x8040DA48 end:0x8040F3CC
+
+game_battle_climb_aim.c:
+	.text       start:0x8040F3CC end:0x80410DE0
+
+game_battle_plunge_attack.c:
+	.text       start:0x80410DE0 end:0x804128A8
+
+game_battle_parry_guard.c:
+	.text       start:0x804128A8 end:0x80414328
+game_battle_dodge_roll.c:
+	.text       start:0x80414328 end:0x80415E40
+
+game_battle_knockback_wall.c:
+	.text       start:0x80415E40 end:0x80417E88
+
+game_battle_terrain_hazard.c:
+	.text       start:0x80417E88 end:0x80419A48
+
+game_battle_water_conduct.c:
+	.text       start:0x80419A48 end:0x8041B4D8
+
+game_battle_ice_freeze.c:
+	.text       start:0x8041B4D8 end:0x8041CF94
+
+game_battle_fire_diffuse.c:
+	.text       start:0x8041CF94 end:0x8041EA1C
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
