@@ -153,6 +153,7 @@ def generate_module(mod_name):
                     lo_val = int(m_addic.group(3), 16) & 0xffff
                     if lo_val & 0x8000:
                         lo_val -= 0x10000
+                    inst_str = f"addic. {m_addic.group(1)}, {m_addic.group(2)}, {lo_val}"
                 # Convert .4byte to opword
                 inst_str = re.sub(r'^\.4byte\s+(0x[0-9A-Fa-f]+).*', r'opword \1', inst_str)
                 out_lines.append(f'    {inst_str}')

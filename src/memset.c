@@ -1,3 +1,4 @@
+#pragma function_align 4
 typedef unsigned long size_t;
 
 __declspec(section ".init") asm void __fill_mem(void* dest, int val, size_t count) {

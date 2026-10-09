@@ -52,6 +52,153 @@ game_collision.c:
 game_physics.c:
 	.text       start:0x8002806C end:0x8002B9D0
 
+game_action.c:
+	.text       start:0x8002B9D0 end:0x8003002C
+
+game_event.c:
+	.text       start:0x8003002C end:0x80034F54
+
+game_state.c:
+	.text       start:0x80034F54 end:0x80039950
+
+game_effect.c:
+	.text       start:0x80039950 end:0x8003E688
+
+game_ui.c:
+	.text       start:0x8003E688 end:0x80041A50
+
+game_menu.c:
+	.text       start:0x80041A50 end:0x800461FC
+
+game_sound.c:
+	.text       start:0x800461FC end:0x8004B378
+
+game_item.c:
+	.text       start:0x8004B378 end:0x8004FF58
+
+game_player.c:
+	.text       start:0x8004FF58 end:0x8005361C
+
+game_ai.c:
+	.text       start:0x8005361C end:0x8005691C
+
+game_path.c:
+	.text       start:0x8005691C end:0x80057A64
+
+game_mission.c:
+	.text       start:0x80057A64 end:0x80059B5C
+
+game_quest.c:
+	.text       start:0x80059B5C end:0x8005B05C
+
+game_talk.c:
+	.text       start:0x8005B05C end:0x8005C594
+
+game_party.c:
+	.text       start:0x8005C594 end:0x8005E000
+
+game_equip.c:
+	.text       start:0x8005E000 end:0x800610A0
+
+game_skill.c:
+	.text       start:0x800610A0 end:0x80063200
+
+game_magic.c:
+	.text       start:0x80063200 end:0x80065060
+
+game_enemy.c:
+	.text       start:0x80065060 end:0x80068DB0
+
+game_boss.c:
+	.text       start:0x80068DB0 end:0x8006C300
+
+game_gimmick.c:
+	.text       start:0x8006C300 end:0x8006EF48
+
+game_script.c:
+	.text       start:0x8006EF48 end:0x80071E04
+
+game_sequence.c:
+	.text       start:0x80071E04 end:0x80077058
+
+game_chapter.c:
+	.text       start:0x80077058 end:0x80079038
+
+game_scenario.c:
+	.text       start:0x80079038 end:0x8007B078
+
+game_dialogue.c:
+	.text       start:0x8007B078 end:0x8007C46C
+
+game_cutscene.c:
+	.text       start:0x8007C46C end:0x8007E9EC
+
+game_cinema.c:
+	.text       start:0x8007E9EC end:0x80080048
+
+game_world.c:
+	.text       start:0x80080048 end:0x80081DC8
+
+game_dungeon.c:
+	.text       start:0x80081DC8 end:0x800832AC
+
+game_town.c:
+	.text       start:0x800832AC end:0x80084110
+
+game_field.c:
+	.text       start:0x80084110 end:0x8008510C
+
+game_nav.c:
+	.text       start:0x8008510C end:0x80086560
+
+game_route.c:
+	.text       start:0x80086560 end:0x8008826C
+
+game_zone.c:
+	.text       start:0x8008826C end:0x8008937C
+
+game_area.c:
+	.text       start:0x8008937C end:0x8008B130
+
+game_map.c:
+	.text       start:0x8008B130 end:0x8008C828
+
+game_minimap.c:
+	.text       start:0x8008C828 end:0x8008E2D4
+
+game_marker.c:
+	.text       start:0x8008E2D4 end:0x800902BC
+
+game_radar.c:
+	.text       start:0x800902BC end:0x800910D4
+
+game_compass.c:
+	.text       start:0x800910D4 end:0x80092EC8
+
+game_target.c:
+	.text       start:0x80092EC8 end:0x80094F98
+
+game_lockon.c:
+	.text       start:0x80094F98 end:0x800971D4
+
+game_cursor.c:
+	.text       start:0x800971D4 end:0x800991D0
+
+game_focus.c:
+	.text       start:0x800991D0 end:0x8009B938
+
+game_reticle.c:
+	.text       start:0x8009B938 end:0x8009E1E4
+
+game_hud.c:
+	.text       start:0x8009E1E4 end:0x800A005C
+
+game_gauge.c:
+	.text       start:0x800A005C end:0x800A1934
+
+game_meter.c:
+	.text       start:0x800A1934 end:0x800A291C
+
 OSAlarm.c:
 	.text       start:0x805EC080 end:0x805EC950
 	.data       start:0x8079C2A8 end:0x8079C2B8

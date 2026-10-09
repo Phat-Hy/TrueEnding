@@ -1,17 +1,311 @@
 {
   "project": "Project The Maybe(Not) Last Story (TrueEnding)",
   "game_id": "SLSEXJ",
-  "handoff_timestamp": "2026-10-01T01:47:00Z",
+  "handoff_timestamp": "2026-10-09T16:56:00Z",
   "status": {
     "track_a_decomp_matching": {
       "compiler": "Metrowerks CodeWarrior 4.3 build 145 (Wii/1.0)",
-      "total_matched_modules": 127,
-      "total_matched_functions": 3080,
-      "total_matched_code_bytes": 837540,
-      "overall_code_match_rate": "11.20%",
-      "overall_linked_rate": "11.26%",
+      "total_matched_modules": 176,
+      "total_matched_functions": 4226,
+      "total_matched_code_bytes": 1321952,
+      "overall_code_match_rate": "17.68%",
+      "overall_linked_rate": "17.78%",
       "overall_module_match_rate": "100.00%",
       "matched_modules": [
+        {
+          "name": "game_meter.c",
+          "functions": 8,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_gauge.c",
+          "functions": 17,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_hud.c",
+          "functions": 19,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_reticle.c",
+          "functions": 13,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_focus.c",
+          "functions": 14,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_cursor.c",
+          "functions": 24,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_lockon.c",
+          "functions": 14,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_target.c",
+          "functions": 29,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_compass.c",
+          "functions": 16,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_radar.c",
+          "functions": 9,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_marker.c",
+          "functions": 10,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_minimap.c",
+          "functions": 12,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_map.c",
+          "functions": 12,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_area.c",
+          "functions": 36,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_zone.c",
+          "functions": 4,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_route.c",
+          "functions": 25,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_nav.c",
+          "functions": 5,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_field.c",
+          "functions": 28,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_town.c",
+          "functions": 10,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_dungeon.c",
+          "functions": 12,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_world.c",
+          "functions": 14,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_cinema.c",
+          "functions": 8,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_cutscene.c",
+          "functions": 1,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_dialogue.c",
+          "functions": 8,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_scenario.c",
+          "functions": 27,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_chapter.c",
+          "functions": 10,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_sequence.c",
+          "functions": 28,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_script.c",
+          "functions": 30,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_gimmick.c",
+          "functions": 16,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_boss.c",
+          "functions": 55,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_enemy.c",
+          "functions": 21,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_magic.c",
+          "functions": 9,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_skill.c",
+          "functions": 13,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_equip.c",
+          "functions": 20,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_party.c",
+          "functions": 25,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_talk.c",
+          "functions": 20,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_quest.c",
+          "functions": 10,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_mission.c",
+          "functions": 39,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_path.c",
+          "functions": 17,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_ai.c",
+          "functions": 7,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_player.c",
+          "functions": 23,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_item.c",
+          "functions": 22,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_sound.c",
+          "functions": 72,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_menu.c",
+          "functions": 76,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_ui.c",
+          "functions": 21,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_effect.c",
+          "functions": 39,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_state.c",
+          "functions": 78,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_event.c",
+          "functions": 68,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_action.c",
+          "functions": 52,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
         {
           "name": "game_physics.c",
           "functions": 50,
@@ -483,6 +777,294 @@
         {
           "name": "ipcprof.c",
           "functions": 6,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "OSAlloc.c",
+          "functions": 3,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "OSAudioSystem.c",
+          "functions": 3,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "OSExec.c",
+          "functions": 9,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "OSFatal.c",
+          "functions": 5,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "OSFont.c",
+          "functions": 13,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "OSModule.c",
+          "functions": 5,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "OSMemory.c",
+          "functions": 17,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "OSMutex.c",
+          "functions": 6,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "OSReboot.c",
+          "functions": 13,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "OSSram.c",
+          "functions": 8,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "OSSystemCall.c",
+          "functions": 2,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "GXPixel.c",
+          "functions": 18,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "GXDisplayList.c",
+          "functions": 13,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "nand.c",
+          "functions": 31,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "NANDOpenClose.c",
+          "functions": 10,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "NANDCheck.c",
+          "functions": 17,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "NANDCore.c",
+          "functions": 26,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "NANDLogging.c",
+          "functions": 3,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "nanderror.c",
+          "functions": 3,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "scsystem.c",
+          "functions": 25,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "scapi.c",
+          "functions": 66,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "hcis.c",
+          "functions": 15,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "bta_sys.c",
+          "functions": 44,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "bta_dm.c",
+          "functions": 98,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "bta_hh.c",
+          "functions": 33,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "btm_acl.c",
+          "functions": 38,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "btm_dev.c",
+          "functions": 29,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "btm_inq.c",
+          "functions": 38,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "btm_sco.c",
+          "functions": 15,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "btm_sec.c",
+          "functions": 47,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "gap.c",
+          "functions": 72,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "hid.c",
+          "functions": 33,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "l2cap.c",
+          "functions": 80,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "rfcomm.c",
+          "functions": 104,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "sdp.c",
+          "functions": 56,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "tpl.c",
+          "functions": 4,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "gx_draw.c",
+          "functions": 31,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "gx_anim.c",
+          "functions": 24,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "usb.c",
+          "functions": 53,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "kpad.c",
+          "functions": 36,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "wpad.c",
+          "functions": 33,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "wpad_mem.c",
+          "functions": 37,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "wpad_core.c",
+          "functions": 104,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "trk.c",
+          "functions": 150,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "msl_c.c",
+          "functions": 118,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "msl_cpp.c",
+          "functions": 210,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "runtime.c",
+          "functions": 28,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "Gecko_ExceptionPPC.c",
+          "functions": 17,
           "match": "100.00%",
           "diff_bytes": 0
         }

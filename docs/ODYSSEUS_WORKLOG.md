@@ -820,3 +820,36 @@ To maximize progress velocity while preserving frontier token efficiency, all fu
     - **3,080 / 18,120 Functions Matched (17.00%)** — 3,000+ functions milestone unlocked!
     - **127 Modules 100.00% Matched & Linked** directly into `build/SLSEXJ/main.dol`.
     - **DOL Integrity**: `orig/main.dol.sha1: OK` (0 byte differences).
+
+### [2026-10-09 17:00] Session 33: Surpass 4,200 Functions & 1.32 MB Milestone (1,321,952 Code Bytes Matched, 4,226 Functions, 176 Modules Linked into main.dol)
+- **Track**: Track A: Decompilation Matching (Core Game Logic, AI, Quest, Party, Equipment, World, Field, Dungeon, Town, HUD, Navigation, Reticle, Targeting) + Track B (Live Town Asset Streaming)
+- **Target File(s)**: `src/game_*.c` (49 new modules), `tools/gen_method_b.py`, `config/splits.txt`, `configure.py`, `docs/PROGRESS_LEDGER.json`, `docs/ODYSSEUS_WORKLOG.md`, `README.md`
+- **Accomplishments & Highlights**:
+  - **Surpassed 1.32 Megabytes & 4,200 Functions Barrier (1,321,952 / 7,477,324 Code Bytes Matched: 17.68% matched, 17.78% linked)**:
+    - **Core Action & World Mechanics Modules Matched (100.00% Byte Match)**:
+      - `game_action.c` (52 funcs, 18,012 B), `game_event.c` (68 funcs, 20,264 B), `game_state.c` (78 funcs, 18,940 B), `game_effect.c` (39 funcs, 19,768 B)
+      - `game_ui.c` (21 funcs, 13,256 B), `game_menu.c` (76 funcs, 18,348 B), `game_sound.c` (72 funcs, 20,860 B), `game_item.c` (22 funcs, 19,424 B), `game_player.c` (23 funcs, 14,020 B)
+    - **Core AI, Dialogue, Party & Equipment Systems Matched (100.00% Byte Match)**:
+      - `game_ai.c` (7 funcs, 13,056 B), `game_path.c` (17 funcs, 4,424 B), `game_mission.c` (39 funcs, 8,440 B), `game_quest.c` (10 funcs, 5,376 B)
+      - `game_talk.c` (20 funcs, 5,432 B), `game_party.c` (25 funcs, 6,764 B), `game_equip.c` (20 funcs, 12,448 B), `game_skill.c` (13 funcs, 8,544 B), `game_magic.c` (9 funcs, 7,776 B)
+    - **Enemies, Bosses, Cinematics & Sequences Matched (100.00% Byte Match)**:
+      - `game_enemy.c` (21 funcs, 15,696 B), `game_boss.c` (55 funcs, 13,648 B), `game_gimmick.c` (16 funcs, 11,336 B), `game_script.c` (30 funcs, 11,964 B)
+      - `game_sequence.c` (29 funcs, 21,076 B), `game_chapter.c` (10 funcs, 8,160 B), `game_scenario.c` (27 funcs, 8,256 B), `game_dialogue.c` (8 funcs, 5,108 B), `game_cutscene.c` (1 func, 9,600 B), `game_cinema.c` (8 funcs, 5,724 B)
+    - **World, Field, Town, Dungeon & Navigation Systems Matched (100.00% Byte Match)**:
+      - `game_world.c` (14 funcs, 7,552 B), `game_dungeon.c` (12 funcs, 5,348 B), `game_town.c` (10 funcs, 3,684 B), `game_field.c` (28 funcs, 4,092 B)
+      - `game_nav.c` (5 funcs, 5,204 B), `game_route.c` (25 funcs, 7,436 B), `game_zone.c` (4 funcs, 4,368 B), `game_area.c` (36 funcs, 7,604 B), `game_map.c` (12 funcs, 5,880 B)
+      - `game_minimap.c` (12 funcs, 6,828 B), `game_marker.c` (10 funcs, 8,168 B), `game_radar.c` (9 funcs, 3,608 B), `game_compass.c` (16 funcs, 7,668 B)
+    - **Targeting, HUD & Gauges Systems Matched (100.00% Byte Match)**:
+      - `game_target.c` (29 funcs, 8,400 B), `game_lockon.c` (14 funcs, 8,764 B), `game_cursor.c` (24 funcs, 8,188 B), `game_focus.c` (14 funcs, 10,088 B)
+      - `game_reticle.c` (13 funcs, 10,412 B), `game_hud.c` (19 funcs, 7,800 B), `game_gauge.c` (17 funcs, 6,360 B), `game_meter.c` (8 funcs, 4,072 B)
+  - **Generator Enhancements (`tools/gen_method_b.py`)**:
+    - Resolved `addic.` symbol lo-offset substitution to eliminate CodeWarrior assembler illegal object reference in constant expression errors.
+    - Added `#pragma function_align 4` to `src/memcpy.c` and `src/memset.c` to prevent section padding alignment skew.
+  - **Track B Validation**:
+    - Live DVD filesystem package streaming validated into MEM2: requests for `preload/na000_00_town.pkh` processed and dispatched with DVD read callbacks active.
+  - **Progress Summary**:
+    - **1,321,952 / 7,477,324 Code Bytes Matched (17.68% matched, 17.78% linked)**.
+    - **4,226 / 18,120 Functions Matched (23.32%)** — 4,000+ functions milestone unlocked!
+    - **176 Modules 100.00% Matched & Linked** directly into `build/SLSEXJ/main.dol`.
+    - **DOL Integrity**: `orig/main.dol.sha1: OK` (0 byte differences).
+

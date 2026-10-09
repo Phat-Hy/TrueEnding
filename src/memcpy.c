@@ -1,3 +1,4 @@
+#pragma function_align 4
 typedef unsigned long size_t;
 
 __declspec(section ".init") asm void* memcpy(void* dest, const void* src, size_t count) {
