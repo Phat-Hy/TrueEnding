@@ -302,6 +302,9 @@ game_sky.c:
 game_water.c:
 	.text       start:0x800DD8A8 end:0x800DF0F0
 
+game_water_ripple.c:
+	.text       start:0x800DF0F0 end:0x800E0908
+
 game_particle.c:
 	.text       start:0x800E0908 end:0x800E22E8
 game_emitter.c:
@@ -321,6 +324,10 @@ game_wind.c:
 
 game_sound_fx.c:
 	.text       start:0x800EA9D4 end:0x800EC1F4
+
+game_cam_controller.c:
+	.text       start:0x800EC1F4 end:0x800EDFE8
+
 game_cam_mode.c:
 	.text       start:0x800EDFE8 end:0x800EF7A0
 
