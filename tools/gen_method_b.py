@@ -130,9 +130,13 @@ def generate_module(mod_name):
                 inst_str = line.split('*/', 1)[1].strip()
                 # Replace .L_ in branch instructions
                 inst_str = re.sub(r'\.L_([0-9A-Fa-f]+)', f'lbl_{fn_name}_\\1', inst_str)
-                # Fix condition registers
-                inst_str = inst_str.replace('crclr cr1eq', 'crclr 6')
-                inst_str = inst_str.replace('crclr cr0eq', 'crclr 2')
+                # Fix condition registers (e.g. cr1eq -> 6)
+                def cr_bit_sub(m):
+                    cr_num = int(m.group(1))
+                    kind = m.group(2)
+                    offset = {'lt': 0, 'gt': 1, 'eq': 2, 'so': 3, 'un': 3}[kind]
+                    return str(cr_num * 4 + offset)
+                inst_str = re.sub(r'\bcr([0-7])(lt|gt|eq|so|un)\b', cr_bit_sub, inst_str)
                 # Convert li rX, sym@sda21 to la rX, sym
                 inst_str = re.sub(r'li\s+(r\d+),\s*([\w@]+)@sda21', r'la \1, \2', inst_str)
                 # Remove @sda21(r0)

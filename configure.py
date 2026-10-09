@@ -146,6 +146,12 @@ config.libs = [
         "cflags": cflags_base,
         "objects": [
             Object(True, "entry.c"),
+            Object(True, "game_init.c"),
+            Object(True, "game_scene.c"),
+            Object(True, "game_system.c"),
+            Object(True, "game_manager.c"),
+            Object(True, "game_actor.c"),
+            Object(True, "game_battle.c"),
         ],
     },
     {

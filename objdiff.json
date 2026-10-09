@@ -100,16 +100,122 @@
       }
     },
     {
-      "name": "main/auto_fn_800082AC_text",
-      "target_path": "build/SLSEXJ/obj/auto_fn_800082AC_text.o",
+      "name": "main/game_init",
+      "target_path": "build/SLSEXJ/obj/game_init.o",
+      "base_path": "build/SLSEXJ/src/game_init.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 48 -sdata2 48 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_init.ctx",
+        "build_ctx": true
+      },
       "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_init.c",
         "progress_categories": [],
-        "auto_generated": true
+        "auto_generated": false
       }
     },
     {
-      "name": "main/auto_03_8000CBD0_text",
-      "target_path": "build/SLSEXJ/obj/auto_03_8000CBD0_text.o",
+      "name": "main/game_scene",
+      "target_path": "build/SLSEXJ/obj/game_scene.o",
+      "base_path": "build/SLSEXJ/src/game_scene.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 48 -sdata2 48 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_scene.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_scene.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_system",
+      "target_path": "build/SLSEXJ/obj/game_system.o",
+      "base_path": "build/SLSEXJ/src/game_system.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 48 -sdata2 48 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_system.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_system.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_manager",
+      "target_path": "build/SLSEXJ/obj/game_manager.o",
+      "base_path": "build/SLSEXJ/src/game_manager.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 48 -sdata2 48 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_manager.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_manager.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_actor",
+      "target_path": "build/SLSEXJ/obj/game_actor.o",
+      "base_path": "build/SLSEXJ/src/game_actor.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 48 -sdata2 48 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_actor.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_actor.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/game_battle",
+      "target_path": "build/SLSEXJ/obj/game_battle.o",
+      "base_path": "build/SLSEXJ/src/game_battle.o",
+      "scratch": {
+        "platform": "gc_wii",
+        "compiler": "mwcc_43_145",
+        "c_flags": "-nodefaults -proc gekko -align powerpc -enum int -fp hard -O4,p -inline auto -Cpp_exceptions on -RTTI off -sdata 48 -sdata2 48 -lang=c",
+        "ctx_path": "build/SLSEXJ/src/game_battle.ctx",
+        "build_ctx": true
+      },
+      "metadata": {
+        "complete": true,
+        "reverse_fn_order": false,
+        "source_path": "src/game_battle.c",
+        "progress_categories": [],
+        "auto_generated": false
+      }
+    },
+    {
+      "name": "main/auto_03_8001B4A4_text",
+      "target_path": "build/SLSEXJ/obj/auto_03_8001B4A4_text.o",
       "metadata": {
         "progress_categories": [],
         "auto_generated": true

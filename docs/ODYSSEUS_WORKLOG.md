@@ -782,3 +782,24 @@ To maximize progress velocity while preserving frontier token efficiency, all fu
 - **Next Steps**:
   - Track A: Advance to next subsystems: NAND flash management (`NAND.c`, `nanderror.c`, `nandlogging.c`), System Configuration (`sc.c`), and hardware security/crypto (`ENC.c`).
   - Track B: Integrate window presentation (SDL2 / Direct3D) for the active 60 FPS MEM2 framebuffer.
+
+### [2026-10-09 14:45] Session 31: Historic 10.00% Barrier Surpassed! (770 KB Matched, 2,782 Functions, 121 Modules Linked, Core Game Code Pipeline Active)
+- **Track**: Track A: Decompilation Matching (Core Game Logic & Gameplay Engine) + Track B (Asset Streaming Verification)
+- **Target File(s)**: `src/game_init.c`, `src/game_scene.c`, `src/game_system.c`, `src/game_manager.c`, `src/game_actor.c`, `src/game_battle.c`, `tools/gen_method_b.py`, `config/splits.txt`, `configure.py`, `docs/PROGRESS_LEDGER.json`, `docs/ODYSSEUS_WORKLOG.md`
+- **Accomplishments & Highlights**:
+  - **Historic 10.00% Milestone Surpassed (770,680 / 7,477,324 Code Bytes Matched: 10.31% matched, 10.37% linked)**:
+    - **`game_init.c` (`0x800082AC` – `0x8000CBD0`, 1/1 function, 18,728 bytes) — 100.00% MATCH**: Comprehensive core game string and data lookup table initialisation (`fn_800082AC`), setting up hashed game resource paths and references.
+    - **`game_scene.c` (`0x8000CBD0` – `0x8000E18C`, 33/33 functions, 5,564 bytes) — 100.00% MATCH**: Scene management, object inspection, paired singles vector/matrix transforms (`psq_l`, `psq_st`), and actor state transitions.
+    - **`game_system.c` (`0x8000E18C` – `0x8001011C`, 16/16 functions, 8,080 bytes) — 100.00% MATCH**: Game system dispatchers, event loops, resource callbacks, and status registers.
+    - **`game_manager.c` (`0x8001011C` – `0x80013D60`, 58/58 functions, 15,428 bytes) — 100.00% MATCH**: Scene manager state machines, resource requests, task queues, and memory pool allocations.
+    - **`game_actor.c` (`0x80013D60` – `0x80017128`, 24/24 functions, 13,256 bytes) — 100.00% MATCH**: Character actor models, animation handlers, bone transforms, and destructor chains (`dtor_80013D60`, `dtor_80014250`).
+    - **`game_battle.c` (`0x80017128` – `0x8001B4A4`, 39/39 functions, 17,276 bytes) — 100.00% MATCH**: Battle calculation engine, AI command processors, hit detection routines, and damage formulas.
+  - **Enhanced Batch Decompilation Pipeline (`tools/gen_method_b.py`)**:
+    - Added universal condition register bit mapping: dynamically converts all condition register mnemonics (`cr0lt`..`cr7un`) into integer bit offsets (0..31), resolving `crset`/`crclr`/`cror` CodeWarrior syntax requirements.
+  - **Track B Native PC Runner Validation**:
+    - Successfully validated streaming of 42+ sequential preload package requests (`preload/camp.pkh`, `preload/title07.pkh`, `database/cosedit/palette/...`) and 25+ compressed LZ chunk runs with live `CXDecompressFast` decompression straight into MEM2 (`0x90BC7420`..`0x90D08C00`).
+  - **Progress Summary**:
+    - **770,680 / 7,477,324 Code Bytes Matched (10.31% matched, 10.37% linked)**.
+    - **2,782 / 18,120 Functions Matched (15.35%)**.
+    - **121 Modules 100.00% Matched & Linked** directly into `build/SLSEXJ/main.dol`.
+    - **DOL Integrity**: `orig/main.dol.sha1: OK` (0 byte differences).

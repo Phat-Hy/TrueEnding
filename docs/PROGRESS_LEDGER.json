@@ -5,12 +5,55 @@
   "status": {
     "track_a_decomp_matching": {
       "compiler": "Metrowerks CodeWarrior 4.3 build 145 (Wii/1.0)",
-      "total_matched_modules": 66,
-      "total_matched_functions": 766,
-      "total_matched_code_bytes": 171108,
-      "overall_code_match_rate": "2.29%",
+      "total_matched_modules": 121,
+      "total_matched_functions": 2782,
+      "total_matched_code_bytes": 770680,
+      "overall_code_match_rate": "10.31%",
+      "overall_linked_rate": "10.37%",
       "overall_module_match_rate": "100.00%",
       "matched_modules": [
+        {
+          "name": "entry.c",
+          "functions": 2,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_init.c",
+          "functions": 1,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_scene.c",
+          "functions": 33,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_system.c",
+          "functions": 16,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_manager.c",
+          "functions": 58,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_actor.c",
+          "functions": 24,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_battle.c",
+          "functions": 39,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
         {
           "name": "OSAlarm.c",
           "functions": 13,
