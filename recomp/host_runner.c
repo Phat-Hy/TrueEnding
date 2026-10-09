@@ -15,6 +15,7 @@
 #include <windows.h>
 #include <mmsystem.h>
 #include "gfx_backend.h"
+#include "audio_player.h"
 
 static HWND s_hwnd = NULL;
 static bool s_window_closed = false;
@@ -368,6 +369,9 @@ int main(int argc, char** argv) {
     int target_fps = 60; // Default 60 FPS (0 = uncapped)
     GfxBackendType backend_type = GFX_BACKEND_AUTO;
     bool vsync = true;
+    bool enable_audio = true;
+    const char* bgm_path = "orig/DATA/files/sound/stream/BGM_SYST001_TITLE.brstm";
+    float audio_volume = 1.0f;
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--help") == 0 || strcmp(argv[i], "-h") == 0) {
@@ -375,7 +379,7 @@ int main(int argc, char** argv) {
             printf("Usage: %s [options]\n\n", argv[0]);
             printf("Options:\n");
             printf("  --dol <path>      Path to input DOL file (default: orig/main.dol)\n");
-            printf("  --blocks <N>      Max blocks per slice (default: 10000)\n");
+            printf("  --blocks <N>      Max blocks per slice (default: 100000)\n");
             printf("  --frames <N>      Simulated frames to run (0=unlimited, default: 10 in headless, unlimited in windowed)\n");
             printf("  --window, -w      Enable interactive display window\n");
             printf("  --width <pixels>  Display window width (default: 1280)\n");
@@ -384,6 +388,9 @@ int main(int argc, char** argv) {
             printf("  --gfx <backend>   Graphics backend: auto, d3d12, d3d11, gdi (default: auto)\n");
             printf("  --vsync <0|1>     Enable (1) or disable (0) vertical sync (default: 1)\n");
             printf("  --novsync         Disable vertical sync\n");
+            printf("  --no-audio        Disable native audio playback\n");
+            printf("  --bgm <path>      BRSTM music track to stream (default: title theme)\n");
+            printf("  --vol <0.0-1.0>   Master audio volume (default: 1.0)\n");
             printf("  --help, -h        Show this help message\n\n");
             printf("Interactive Controls:\n");
             printf("  Alt + Enter       Toggle Fullscreen / Windowed\n");
@@ -413,6 +420,12 @@ int main(int argc, char** argv) {
             vsync = atoi(argv[++i]) != 0;
         } else if (strcmp(argv[i], "--novsync") == 0) {
             vsync = false;
+        } else if (strcmp(argv[i], "--no-audio") == 0) {
+            enable_audio = false;
+        } else if (strcmp(argv[i], "--bgm") == 0 && i + 1 < argc) {
+            bgm_path = argv[++i];
+        } else if (strcmp(argv[i], "--vol") == 0 && i + 1 < argc) {
+            audio_volume = (float)atof(argv[++i]);
         }
     }
 
@@ -460,6 +473,15 @@ int main(int argc, char** argv) {
         init_display_window(win_width, win_height, backend_type, vsync, target_fps);
     }
 #endif
+
+    if (enable_audio) {
+        if (audio_player_init(48000, 2)) {
+            audio_player_set_volume(audio_volume);
+            if (bgm_path && strlen(bgm_path) > 0) {
+                audio_player_play_brstm(bgm_path, true);
+            }
+        }
+    }
 
     printf("[Runner] Starting execution from entry point 0x%08X (limit: %u blocks/slice, frames: %d, target FPS: %d%s)...\n",
            cpu.pc, max_blocks, max_frames, target_fps, target_fps <= 0 ? " [uncapped]" : "");
@@ -509,6 +531,10 @@ int main(int argc, char** argv) {
             }
         }
 
+        if (enable_audio) {
+            audio_player_update();
+        }
+
 #ifdef _WIN32
         if (enable_window) {
             u32 fb0 = mem_read32(&cpu, 0x807C6F70);
@@ -531,6 +557,10 @@ int main(int argc, char** argv) {
             }
         }
 #endif
+    }
+
+    if (enable_audio) {
+        audio_player_shutdown();
     }
 
     printf("\n[Runner] Execution paused after run_blocks (result = %d)\n", result);
