@@ -1636,6 +1636,60 @@ game_battle_ice_freeze.c:
 
 game_battle_fire_diffuse.c:
 	.text       start:0x8041CF94 end:0x8041EA1C
+game_battle_wind_disperse.c:
+	.text       start:0x8041EA1C end:0x80420490
+
+game_battle_light_holy.c:
+	.text       start:0x80420490 end:0x80421E54
+
+game_battle_dark_curse.c:
+	.text       start:0x80421E54 end:0x804238E8
+
+game_battle_element_chain.c:
+	.text       start:0x804238E8 end:0x80425498
+
+game_battle_status_burn.c:
+	.text       start:0x80425498 end:0x804273A4
+
+game_battle_status_freeze.c:
+	.text       start:0x804273A4 end:0x80428DE8
+game_battle_status_paralyze.c:
+	.text       start:0x80428DE8 end:0x8042A98C
+
+game_battle_status_sleep.c:
+	.text       start:0x8042A98C end:0x8042C30C
+
+game_battle_status_silence.c:
+	.text       start:0x8042C30C end:0x8042DFD4
+
+game_battle_status_daze.c:
+	.text       start:0x8042DFD4 end:0x8042F97C
+
+game_battle_ai_zael.c:
+	.text       start:0x8042F97C end:0x80431314
+
+game_battle_ai_calista.c:
+	.text       start:0x80431314 end:0x80432C90
+game_battle_ai_dagran.c:
+	.text       start:0x80432C90 end:0x80434604
+
+game_battle_ai_syrenne.c:
+	.text       start:0x80434604 end:0x80436000
+
+game_battle_ai_lowell.c:
+	.text       start:0x80436000 end:0x80438814
+
+game_battle_ai_mirania.c:
+	.text       start:0x80438814 end:0x8043A530
+
+game_battle_ai_yurick.c:
+	.text       start:0x8043A530 end:0x8043C334
+
+game_battle_ai_general.c:
+	.text       start:0x8043C334 end:0x80440184
+
+
+
 
 
 
