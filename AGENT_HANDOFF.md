@@ -76,8 +76,8 @@ All commands run from root: `G:\Program\Project The Maybe(Not) Last Story`
   13. **Metrowerks Target Resident Kernel Debugger (TRK)** (1 module, 152 funcs, 25,128 B): `trk`
   14. **MSL C & C++ Standard Libraries** (2 modules, 329 funcs, 104,200 B): `msl_c`, `msl_cpp`
   15. **Runtime Support & C++ Exceptions** (6 modules, 49 funcs, 12,852 B): `__init_hardware`, `memcpy`, `memset`, `global_destructor_chain`, `runtime`, `__init_cpp_exceptions`, `Gecko_ExceptionPPC`
-  16. **Game Core Engine, Actions, Battles, Cameras, Stages, AI, Quests, World, Town, Field, Dungeons, HUD & Targeting Subsystems** (62 modules, 1,617 funcs, 629,836 B): `entry.c`, `game_init.c` through `game_meter.c` (0x800081C0 - 0x800A291C)
-- **Total Progress**: **1,321,952 bytes** / 7,477,324 (**17.68%** code matched, **17.78%** linked), **4,226 functions** matched (23.32%), **176 modules** linked.
+  16. **Game Core Engine, Actions, Battles, Cameras, Stages, AI, Quests, World, Town, Field, Dungeons, HUD, Targeting, 2D Graphics, 3D Mesh, Materials, Shaders, Skeletons & Animation Rigging** (86 modules, 2,085 funcs, 807,024 B): `entry.c`, `game_init.c` through `game_rig.c` (0x800081C0 - 0x800CDD40)
+- **Total Progress**: **1,499,140 bytes** / 7,477,324 (**20.05%** code matched, **20.15%** linked), **4,694 functions** matched (25.91%), **200 modules** linked.
 - **DOL Integrity**: `orig/main.dol.sha1` check passes cleanly (`OK`, 0 byte differences across all linked units).
 
 ### Track B (Native PC Runner Bringup)

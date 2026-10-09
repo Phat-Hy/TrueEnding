@@ -3,8 +3,8 @@
 <div align="center">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Decomp Progress](https://img.shields.io/badge/Track%20A%20Decomp-17.68%25%20(1%2C321%2C952%20bytes)-brightgreen)](docs/PROGRESS_LEDGER.json)
-[![Functions Matched](https://img.shields.io/badge/Functions%20Matched-4%2C226%20%2F%2018%2C120-blue)](docs/PROGRESS_LEDGER.json)
+[![Decomp Progress](https://img.shields.io/badge/Track%20A%20Decomp-20.05%25%20(1%2C499%2C140%20bytes)-brightgreen)](docs/PROGRESS_LEDGER.json)
+[![Functions Matched](https://img.shields.io/badge/Functions%20Matched-4%2C694%20%2F%2018%2C120-blue)](docs/PROGRESS_LEDGER.json)
 [![PC Runner](https://img.shields.io/badge/Track%20B%20PC%20Port-Interactive%20Window%20%2F%2060%20FPS-green)](recomp/)
 [![Target](https://img.shields.io/badge/Target-Wii%20USA%20(SLSEXJ)-red)](config/SLSEXJ/)
 
@@ -32,16 +32,16 @@ To optimize execution velocity and preserve token budgets, Track A follows a tar
 
 ## Current Progress Tracker
 
-> Updated as of **October 2026** — Milestone **>17.68% Overall Code Match & 1.32 MB Barrier Surpassed! (Entire Nintendo RVL-SDK Subsystem 100% Linked + 62 Core Game Logic, Battle, Camera, Stage, Collision, Physics, AI, Scenario, Field, Town, Dungeon, HUD & Target Modules 100% Matched & Linked into main.dol)**
+> Updated as of **October 2026** — Milestone **>20.00% Overall Code Match Barrier Surpassed! (1.49 MB Code, 4,694 Functions, 200 Translation Units 100% Byte-Matched & Linked into main.dol)**
 
 ### Overall Metrics
 
 | Metric | Target (`main.dol`) | Matched | Progress |
 | :--- | :--- | :--- | :--- |
-| **Total Code Bytes** | 7,477,324 bytes | **1,321,952 bytes** | **17.68%** (17.78% linked) |
-| **Total Functions** | 18,120 functions | **4,226 functions** | **23.32%** |
-| **Fully Matched Modules** | 388 modules | **176 modules** (linked) | **45.36%** |
-| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 176 matched modules) |
+| **Total Code Bytes** | 7,477,324 bytes | **1,499,140 bytes** | **20.05%** (20.15% linked) |
+| **Total Functions** | 18,120 functions | **4,694 functions** | **25.91%** |
+| **Fully Matched Modules** | 407 modules | **200 modules** (linked) | **49.14%** |
+| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 200 matched modules) |
 | **PC Runner Status** | Interactive Window | **60 FPS Live Window & Controller** | Real-Time Win32 Window, Dynamic XInput + Keyboard, 3 Threads, DVD Asset Streaming |
 
 ---

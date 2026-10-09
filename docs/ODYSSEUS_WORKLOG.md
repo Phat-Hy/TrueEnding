@@ -853,3 +853,24 @@ To maximize progress velocity while preserving frontier token efficiency, all fu
     - **176 Modules 100.00% Matched & Linked** directly into `build/SLSEXJ/main.dol`.
     - **DOL Integrity**: `orig/main.dol.sha1: OK` (0 byte differences).
 
+### [2026-10-09 17:10] Session 34: Historic 20.00% Code Barrier Surpassed! (1.49 MB Code, 4,694 Functions, 200 Modules Linked into main.dol)
+- **Track**: Track A: Decompilation Matching (Core Game UI, Layout, Windows, 2D Graphics, 3D Mesh, Shaders, Skeletons, Inverse Kinematics, Skinning & Rigging) + Track B (PC Bringup)
+- **Target File(s)**: `src/game_*.c` (24 new modules), `config/splits.txt`, `configure.py`, `docs/PROGRESS_LEDGER.json`, `docs/ODYSSEUS_WORKLOG.md`, `README.md`, `AGENT_HANDOFF.md`
+- **Accomplishments & Highlights**:
+  - **Surpassed Historic 20.00% Code Barrier (1,499,140 / 7,477,324 Code Bytes Matched: 20.05% matched, 20.15% linked)**:
+    - **UI, Text, Fonts & Layout Subsystems Matched (100.00% Byte Match)**:
+      - `game_font.c` (32 funcs, 9,968 B), `game_msg.c` (30 funcs, 7,112 B), `game_window.c` (20 funcs, 5,668 B), `game_cursor_ui.c` (37 funcs, 5,668 B)
+      - `game_layout.c` (7 funcs, 8,024 B), `game_pane.c` (7 funcs, 6,524 B), `game_textbox.c` (9 funcs, 7,800 B), `game_graphic.c` (9 funcs, 7,532 B)
+    - **2D Drawing, 3D Mesh, Materials & Shaders Subsystems Matched (100.00% Byte Match)**:
+      - `game_render_ui.c` (10 funcs, 5,872 B), `game_draw_2d.c` (39 funcs, 7,312 B), `game_sprite.c` (9 funcs, 8,644 B), `game_texture.c` (19 funcs, 3,704 B)
+      - `game_material.c` (4 funcs, 9,420 B), `game_shader.c` (3 funcs, 8,096 B), `game_mesh.c` (17 funcs, 9,296 B), `game_model.c` (7 funcs, 6,048 B), `game_motion.c` (20 funcs, 8,512 B)
+    - **Skeletons, Skinning, Joints, Inverse Kinematics & Rigging Matched (100.00% Byte Match)**:
+      - `game_skeleton.c` (29 funcs, 7,784 B), `game_skin.c` (40 funcs, 8,168 B), `game_joint.c` (12 funcs, 7,256 B)
+      - `game_ik.c` (37 funcs, 7,888 B), `game_cluster.c` (12 funcs, 6,280 B), `game_morph.c` (54 funcs, 5,076 B), `game_rig.c` (5 funcs, 9,536 B)
+  - **Progress Summary**:
+    - **1,499,140 / 7,477,324 Code Bytes Matched (20.05% matched, 20.15% linked)** — 1.49 MB code milestone!
+    - **4,694 / 18,120 Functions Matched (25.91%)** — over one quarter of all game functions matched!
+    - **200 Modules 100.00% Matched & Linked** directly into `build/SLSEXJ/main.dol`.
+    - **DOL Integrity**: `orig/main.dol.sha1: OK` (0 byte differences).
+
+

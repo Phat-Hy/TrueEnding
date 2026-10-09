@@ -199,6 +199,78 @@ game_gauge.c:
 game_meter.c:
 	.text       start:0x800A1934 end:0x800A291C
 
+game_font.c:
+	.text       start:0x800A291C end:0x800A500C
+
+game_msg.c:
+	.text       start:0x800A500C end:0x800A6BD4
+
+game_window.c:
+	.text       start:0x800A6BD4 end:0x800A81F8
+
+game_cursor_ui.c:
+	.text       start:0x800A81F8 end:0x800A981C
+
+game_layout.c:
+	.text       start:0x800A981C end:0x800AB774
+
+game_pane.c:
+	.text       start:0x800AB774 end:0x800AD0F0
+
+game_textbox.c:
+	.text       start:0x800AD0F0 end:0x800AEF68
+
+game_graphic.c:
+	.text       start:0x800AEF68 end:0x800B0CD4
+
+game_render_ui.c:
+	.text       start:0x800B0CD4 end:0x800B23C4
+
+game_draw_2d.c:
+	.text       start:0x800B23C4 end:0x800B4054
+
+game_sprite.c:
+	.text       start:0x800B4054 end:0x800B6218
+
+game_texture.c:
+	.text       start:0x800B6218 end:0x800B7090
+
+game_material.c:
+	.text       start:0x800B7090 end:0x800B955C
+
+game_shader.c:
+	.text       start:0x800B955C end:0x800BB4FC
+
+game_mesh.c:
+	.text       start:0x800BB4FC end:0x800BD94C
+
+game_model.c:
+	.text       start:0x800BD94C end:0x800BF0EC
+
+game_motion.c:
+	.text       start:0x800BF0EC end:0x800C122C
+
+game_skeleton.c:
+	.text       start:0x800C122C end:0x800C3094
+
+game_skin.c:
+	.text       start:0x800C3094 end:0x800C507C
+
+game_joint.c:
+	.text       start:0x800C507C end:0x800C6CD4
+
+game_ik.c:
+	.text       start:0x800C6CD4 end:0x800C8BA4
+
+game_cluster.c:
+	.text       start:0x800C8BA4 end:0x800CA42C
+
+game_morph.c:
+	.text       start:0x800CA42C end:0x800CB800
+
+game_rig.c:
+	.text       start:0x800CB800 end:0x800CDD40
+
 OSAlarm.c:
 	.text       start:0x805EC080 end:0x805EC950
 	.data       start:0x8079C2A8 end:0x8079C2B8

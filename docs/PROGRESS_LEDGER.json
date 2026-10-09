@@ -1,17 +1,161 @@
 {
   "project": "Project The Maybe(Not) Last Story (TrueEnding)",
   "game_id": "SLSEXJ",
-  "handoff_timestamp": "2026-10-09T16:56:00Z",
+  "handoff_timestamp": "2026-10-09T17:08:00Z",
   "status": {
     "track_a_decomp_matching": {
       "compiler": "Metrowerks CodeWarrior 4.3 build 145 (Wii/1.0)",
-      "total_matched_modules": 176,
-      "total_matched_functions": 4226,
-      "total_matched_code_bytes": 1321952,
-      "overall_code_match_rate": "17.68%",
-      "overall_linked_rate": "17.78%",
+      "total_matched_modules": 200,
+      "total_matched_functions": 4694,
+      "total_matched_code_bytes": 1499140,
+      "overall_code_match_rate": "20.05%",
+      "overall_linked_rate": "20.15%",
       "overall_module_match_rate": "100.00%",
       "matched_modules": [
+        {
+          "name": "game_rig.c",
+          "functions": 5,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_morph.c",
+          "functions": 54,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_cluster.c",
+          "functions": 12,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_ik.c",
+          "functions": 37,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_joint.c",
+          "functions": 12,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_skin.c",
+          "functions": 40,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_skeleton.c",
+          "functions": 29,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_motion.c",
+          "functions": 20,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_model.c",
+          "functions": 7,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_mesh.c",
+          "functions": 17,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_shader.c",
+          "functions": 3,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_material.c",
+          "functions": 4,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_texture.c",
+          "functions": 19,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_sprite.c",
+          "functions": 9,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_draw_2d.c",
+          "functions": 39,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_render_ui.c",
+          "functions": 10,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_graphic.c",
+          "functions": 9,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_textbox.c",
+          "functions": 9,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_pane.c",
+          "functions": 7,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_layout.c",
+          "functions": 7,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_cursor_ui.c",
+          "functions": 37,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_window.c",
+          "functions": 20,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_msg.c",
+          "functions": 30,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
+        {
+          "name": "game_font.c",
+          "functions": 32,
+          "match": "100.00%",
+          "diff_bytes": 0
+        },
         {
           "name": "game_meter.c",
           "functions": 8,
