@@ -309,6 +309,7 @@ int main(int argc, char** argv) {
     const char* dol_path = "orig/main.dol";
     u32 max_blocks = 10000;
     int max_frames = 10;
+    bool frames_specified = false;
     bool enable_window = false;
     int win_width = 1280;
     int win_height = 720;
@@ -323,7 +324,7 @@ int main(int argc, char** argv) {
             printf("Options:\n");
             printf("  --dol <path>      Path to input DOL file (default: orig/main.dol)\n");
             printf("  --blocks <N>      Max blocks per slice (default: 10000)\n");
-            printf("  --frames <N>      Simulated frames to run (default: 10)\n");
+            printf("  --frames <N>      Simulated frames to run (0=unlimited, default: 10 in headless, unlimited in windowed)\n");
             printf("  --window, -w      Enable interactive display window\n");
             printf("  --width <pixels>  Display window width (default: 1280)\n");
             printf("  --height <pixels> Display window height (default: 720)\n");
@@ -342,6 +343,7 @@ int main(int argc, char** argv) {
             max_blocks = (u32)atoi(argv[++i]);
         } else if (strcmp(argv[i], "--frames") == 0 && i + 1 < argc) {
             max_frames = atoi(argv[++i]);
+            frames_specified = true;
         } else if (strcmp(argv[i], "--window") == 0 || strcmp(argv[i], "-w") == 0) {
             enable_window = true;
         } else if (strcmp(argv[i], "--width") == 0 && i + 1 < argc) {
@@ -360,6 +362,10 @@ int main(int argc, char** argv) {
         } else if (strcmp(argv[i], "--novsync") == 0) {
             vsync = false;
         }
+    }
+
+    if (enable_window && !frames_specified) {
+        max_frames = 0; // Continuous interactive execution
     }
 
     printf("=================================================================\n");
@@ -407,7 +413,7 @@ int main(int argc, char** argv) {
            cpu.pc, max_blocks, max_frames, target_fps, target_fps <= 0 ? " [uncapped]" : "");
 
     int result = 0;
-    for (int frame = 0; frame < max_frames; frame++) {
+    for (int frame = 0; max_frames == 0 || frame < max_frames; frame++) {
 #ifdef _WIN32
         LARGE_INTEGER qpc_freq, t_start, t_end;
         if (enable_window) {
