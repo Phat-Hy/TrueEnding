@@ -2027,6 +2027,78 @@ game_net_error_code.c:
 
 game_net_error_dialog.c:
 	.text       start:0x8051CF7C end:0x8051EC54
+game_net_rank_board.c:
+	.text       start:0x8051EC54 end:0x80520B08
+
+game_net_rank_fetch.c:
+	.text       start:0x80520B08 end:0x805226A8
+
+game_net_rank_submit.c:
+	.text       start:0x805226A8 end:0x80524824
+
+game_net_rank_cache.c:
+	.text       start:0x80524824 end:0x8052624C
+
+game_net_avatar_custom.c:
+	.text       start:0x8052624C end:0x805282AC
+
+game_net_avatar_sync.c:
+	.text       start:0x805282AC end:0x8052A66C
+game_net_trade_mgr.c:
+	.text       start:0x8052A66C end:0x8052C0EC
+
+game_net_trade_item.c:
+	.text       start:0x8052C0EC end:0x8052DEA8
+
+game_net_trade_offer.c:
+	.text       start:0x8052DEA8 end:0x8052FA48
+
+game_net_trade_confirm.c:
+	.text       start:0x8052FA48 end:0x80531814
+
+game_net_spectate_mgr.c:
+	.text       start:0x80531814 end:0x80533A2C
+
+game_net_spectate_cam.c:
+	.text       start:0x80533A2C end:0x805363F8
+game_net_spectate_view.c:
+	.text       start:0x805363F8 end:0x805381A4
+
+game_net_spectate_hud.c:
+	.text       start:0x805381A4 end:0x80539CF0
+
+game_net_patch_mgr.c:
+	.text       start:0x80539CF0 end:0x8053B7B8
+
+game_net_patch_verify.c:
+	.text       start:0x8053B7B8 end:0x8053D3E4
+
+game_net_patch_apply.c:
+	.text       start:0x8053D3E4 end:0x8053EF74
+
+game_net_stats_summary.c:
+	.text       start:0x8053EF74 end:0x80540A0C
+game_net_stats_history.c:
+	.text       start:0x80540A0C end:0x80542688
+
+game_net_stats_record.c:
+	.text       start:0x80542688 end:0x80544294
+
+game_net_stats_upload.c:
+	.text       start:0x80544294 end:0x80545CEC
+
+game_net_stats_display.c:
+	.text       start:0x80545CEC end:0x8054770C
+
+game_net_dlc_mgr.c:
+	.text       start:0x8054770C end:0x80549D90
+
+game_net_dlc_catalog.c:
+	.text       start:0x80549D90 end:0x8054D798
+
+
+
+
 
 
 

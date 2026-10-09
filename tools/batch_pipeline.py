@@ -185,6 +185,34 @@ ALL_MODULES = [
     ("game_net_error_mgr", "0x805193B8", "0x8051B168"),
     ("game_net_error_code", "0x8051B168", "0x8051CF7C"),
     ("game_net_error_dialog", "0x8051CF7C", "0x8051EC54"),
+    # Batch 27 (156..162)
+    ("game_net_rank_board", "0x8051EC54", "0x80520B08"),
+    ("game_net_rank_fetch", "0x80520B08", "0x805226A8"),
+    ("game_net_rank_submit", "0x805226A8", "0x80524824"),
+    ("game_net_rank_cache", "0x80524824", "0x8052624C"),
+    ("game_net_avatar_custom", "0x8052624C", "0x805282AC"),
+    ("game_net_avatar_sync", "0x805282AC", "0x8052A66C"),
+    # Batch 28 (162..168)
+    ("game_net_trade_mgr", "0x8052A66C", "0x8052C0EC"),
+    ("game_net_trade_item", "0x8052C0EC", "0x8052DEA8"),
+    ("game_net_trade_offer", "0x8052DEA8", "0x8052FA48"),
+    ("game_net_trade_confirm", "0x8052FA48", "0x80531814"),
+    ("game_net_spectate_mgr", "0x80531814", "0x80533A2C"),
+    ("game_net_spectate_cam", "0x80533A2C", "0x805363F8"),
+    # Batch 29 (168..174)
+    ("game_net_spectate_view", "0x805363F8", "0x805381A4"),
+    ("game_net_spectate_hud", "0x805381A4", "0x80539CF0"),
+    ("game_net_patch_mgr", "0x80539CF0", "0x8053B7B8"),
+    ("game_net_patch_verify", "0x8053B7B8", "0x8053D3E4"),
+    ("game_net_patch_apply", "0x8053D3E4", "0x8053EF74"),
+    ("game_net_stats_summary", "0x8053EF74", "0x80540A0C"),
+    # Batch 30 (174..180)
+    ("game_net_stats_history", "0x80540A0C", "0x80542688"),
+    ("game_net_stats_record", "0x80542688", "0x80544294"),
+    ("game_net_stats_upload", "0x80544294", "0x80545CEC"),
+    ("game_net_stats_display", "0x80545CEC", "0x8054770C"),
+    ("game_net_dlc_mgr", "0x8054770C", "0x80549D90"),
+    ("game_net_dlc_catalog", "0x80549D90", "0x8054D798"),
 ]
 
 def run_cmd(cmd):
