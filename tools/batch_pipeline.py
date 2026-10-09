@@ -269,6 +269,34 @@ ALL_MODULES = [
     ("game_util_base64", "0x805A1288", "0x805A2FD4"),
     ("game_util_random_mt", "0x805A2FD4", "0x805A49E8"),
     ("game_util_timer_perf", "0x805A49E8", "0x805A6404"),
+    # Batch 39 (228..234)
+    ("game_drv_archive_mount", "0x805A6404", "0x805A96C4"),
+    ("game_drv_archive_file", "0x805A96C4", "0x805AB1B4"),
+    ("game_drv_archive_dir", "0x805AB1B4", "0x805ADB2C"),
+    ("game_drv_dvd_stream", "0x805ADB2C", "0x805AF618"),
+    ("game_drv_dvd_cache", "0x805AF618", "0x805B191C"),
+    ("game_drv_dvd_queue", "0x805B191C", "0x805B33BC"),
+    # Batch 40 (234..240)
+    ("game_drv_audio_bus", "0x805B33BC", "0x805B4DF4"),
+    ("game_drv_audio_dsp", "0x805B4DF4", "0x805B68A4"),
+    ("game_drv_audio_mix", "0x805B68A4", "0x805B8DB8"),
+    ("game_drv_audio_voice", "0x805B8DB8", "0x805BA924"),
+    ("game_drv_audio_reverb", "0x805BA924", "0x805BC6CC"),
+    ("game_drv_audio_filter", "0x805BC6CC", "0x805BE380"),
+    # Batch 41 (240..246)
+    ("game_drv_gx_fifo_cmd", "0x805BE380", "0x805BFDE0"),
+    ("game_drv_gx_fifo_flush", "0x805BFDE0", "0x805C1900"),
+    ("game_drv_gx_state_mgr", "0x805C1900", "0x805C3330"),
+    ("game_drv_gx_tex_cache", "0x805C3330", "0x805C4FA0"),
+    ("game_drv_gx_shader_buf", "0x805C4FA0", "0x805C7A10"),
+    ("game_drv_gx_draw_call", "0x805C7A10", "0x805C95D0"),
+    # Batch 42 (246..252)
+    ("game_drv_render_target", "0x805C95D0", "0x805CC170"),
+    ("game_drv_render_pass", "0x805CC170", "0x805CDB80"),
+    ("game_drv_render_post", "0x805CDB80", "0x805CF6E0"),
+    ("game_drv_render_fx", "0x805CF6E0", "0x805D1500"),
+    ("game_drv_render_geom", "0x805D1500", "0x805D2F60"),
+    ("game_drv_render_light", "0x805D2F60", "0x805D4E70"),
 ]
 
 def run_cmd(cmd):

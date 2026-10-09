@@ -2231,6 +2231,78 @@ game_util_random_mt.c:
 
 game_util_timer_perf.c:
 	.text       start:0x805A49E8 end:0x805A6404
+game_drv_archive_mount.c:
+	.text       start:0x805A6404 end:0x805A96C4
+
+game_drv_archive_file.c:
+	.text       start:0x805A96C4 end:0x805AB1B4
+
+game_drv_archive_dir.c:
+	.text       start:0x805AB1B4 end:0x805ADB2C
+
+game_drv_dvd_stream.c:
+	.text       start:0x805ADB2C end:0x805AF618
+
+game_drv_dvd_cache.c:
+	.text       start:0x805AF618 end:0x805B191C
+
+game_drv_dvd_queue.c:
+	.text       start:0x805B191C end:0x805B33BC
+game_drv_audio_bus.c:
+	.text       start:0x805B33BC end:0x805B4DF4
+
+game_drv_audio_dsp.c:
+	.text       start:0x805B4DF4 end:0x805B68A4
+
+game_drv_audio_mix.c:
+	.text       start:0x805B68A4 end:0x805B8DB8
+
+game_drv_audio_voice.c:
+	.text       start:0x805B8DB8 end:0x805BA924
+
+game_drv_audio_reverb.c:
+	.text       start:0x805BA924 end:0x805BC6CC
+
+game_drv_audio_filter.c:
+	.text       start:0x805BC6CC end:0x805BE380
+game_drv_gx_fifo_cmd.c:
+	.text       start:0x805BE380 end:0x805BFDE0
+
+game_drv_gx_fifo_flush.c:
+	.text       start:0x805BFDE0 end:0x805C1900
+
+game_drv_gx_state_mgr.c:
+	.text       start:0x805C1900 end:0x805C3330
+
+game_drv_gx_tex_cache.c:
+	.text       start:0x805C3330 end:0x805C4FA0
+
+game_drv_gx_shader_buf.c:
+	.text       start:0x805C4FA0 end:0x805C7A10
+
+game_drv_gx_draw_call.c:
+	.text       start:0x805C7A10 end:0x805C95D0
+game_drv_render_target.c:
+	.text       start:0x805C95D0 end:0x805CC170
+
+game_drv_render_pass.c:
+	.text       start:0x805CC170 end:0x805CDB80
+
+game_drv_render_post.c:
+	.text       start:0x805CDB80 end:0x805CF6E0
+
+game_drv_render_fx.c:
+	.text       start:0x805CF6E0 end:0x805D1500
+
+game_drv_render_geom.c:
+	.text       start:0x805D1500 end:0x805D2F60
+
+game_drv_render_light.c:
+	.text       start:0x805D2F60 end:0x805D4E70
+
+
+
+
 
 
 
