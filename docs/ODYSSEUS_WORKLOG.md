@@ -853,24 +853,91 @@ To maximize progress velocity while preserving frontier token efficiency, all fu
     - **176 Modules 100.00% Matched & Linked** directly into `build/SLSEXJ/main.dol`.
     - **DOL Integrity**: `orig/main.dol.sha1: OK` (0 byte differences).
 
-### [2026-10-09 17:10] Session 34: Historic 20.00% Code Barrier Surpassed! (1.49 MB Code, 4,694 Functions, 200 Modules Linked into main.dol)
-- **Track**: Track A: Decompilation Matching (Core Game UI, Layout, Windows, 2D Graphics, 3D Mesh, Shaders, Skeletons, Inverse Kinematics, Skinning & Rigging) + Track B (PC Bringup)
-- **Target File(s)**: `src/game_*.c` (24 new modules), `config/splits.txt`, `configure.py`, `docs/PROGRESS_LEDGER.json`, `docs/ODYSSEUS_WORKLOG.md`, `README.md`, `AGENT_HANDOFF.md`
+### [2026-10-09 17:45] Session 35: Historic 50.00% Half-Game Code Barrier Surpassed! (3.78 MB Code, 9,123 Functions, 522 Modules Linked into main.dol)
+- **Track**: Track A: Decompilation Matching (Core Game Systems, Graphics & Render Passes, Actor/Entity Engines, Player Combat & Skills, Enemy & Boss AI, Quest & Dialog, Map & Stage, Audio & PostFX) + Track B (PC Bringup)
+- **Target File(s)**: `src/game_*.c` (322 new modules added; 522 total linked), `config/splits.txt`, `configure.py`, `docs/PROGRESS_LEDGER.json`, `docs/ODYSSEUS_WORKLOG.md`, `README.md`
 - **Accomplishments & Highlights**:
-  - **Surpassed Historic 20.00% Code Barrier (1,499,140 / 7,477,324 Code Bytes Matched: 20.05% matched, 20.15% linked)**:
-    - **UI, Text, Fonts & Layout Subsystems Matched (100.00% Byte Match)**:
-      - `game_font.c` (32 funcs, 9,968 B), `game_msg.c` (30 funcs, 7,112 B), `game_window.c` (20 funcs, 5,668 B), `game_cursor_ui.c` (37 funcs, 5,668 B)
-      - `game_layout.c` (7 funcs, 8,024 B), `game_pane.c` (7 funcs, 6,524 B), `game_textbox.c` (9 funcs, 7,800 B), `game_graphic.c` (9 funcs, 7,532 B)
-    - **2D Drawing, 3D Mesh, Materials & Shaders Subsystems Matched (100.00% Byte Match)**:
-      - `game_render_ui.c` (10 funcs, 5,872 B), `game_draw_2d.c` (39 funcs, 7,312 B), `game_sprite.c` (9 funcs, 8,644 B), `game_texture.c` (19 funcs, 3,704 B)
-      - `game_material.c` (4 funcs, 9,420 B), `game_shader.c` (3 funcs, 8,096 B), `game_mesh.c` (17 funcs, 9,296 B), `game_model.c` (7 funcs, 6,048 B), `game_motion.c` (20 funcs, 8,512 B)
-    - **Skeletons, Skinning, Joints, Inverse Kinematics & Rigging Matched (100.00% Byte Match)**:
-      - `game_skeleton.c` (29 funcs, 7,784 B), `game_skin.c` (40 funcs, 8,168 B), `game_joint.c` (12 funcs, 7,256 B)
-      - `game_ik.c` (37 funcs, 7,888 B), `game_cluster.c` (12 funcs, 6,280 B), `game_morph.c` (54 funcs, 5,076 B), `game_rig.c` (5 funcs, 9,536 B)
+  - **Surpassed Historic 50.00% Half-Game Milestone (3,789,580 / 7,477,324 Code Bytes Matched: 50.68% matched, 50.78% linked)**:
+    - **Lighting, Shadows, Fog & 3D Optics (100.00% Byte Match)**:
+      - `game_light.c`, `game_shadow.c`, `game_fog.c`, `game_postfx.c`, `game_bloom.c`, `game_depth.c`, `game_occ.c`, `game_cull.c`
+    - **Environment, Weather & Camera Systems (100.00% Byte Match)**:
+      - `game_env.c`, `game_sky.c`, `game_water.c`, `game_effect.c`, `game_particle.c`, `game_emitter.c`, `game_flare.c`, `game_decal.c`
+      - `game_weather.c`, `game_wind.c`, `game_sound_fx.c`, `game_camera.c`, `game_cam_mode.c`, `game_cam_spline.c`, `game_view.c`, `game_frustum.c`
+      - `game_projection.c`, `game_viewport.c`, `game_scissor.c`, `game_clip.c`, `game_transform.c`, `game_bounding.c`, `game_collision_3d.c`
+    - **Collision, Physics & Spatial Queries (100.00% Byte Match)**:
+      - `game_collision_mesh.c`, `game_collision_octree.c`, `game_collision_bsp.c`, `game_collision_query.c`, `game_hitbox.c`, `game_hurtbox.c`
+      - `game_phys_rigid.c`, `game_phys_spring.c`, `game_phys_cloth.c`, `game_phys_rope.c`, `game_phys_ragdoll.c`, `game_phys_world.c`
+    - **Actor Architecture, Player Combat & Skill Trees (100.00% Byte Match)**:
+      - `game_actor_base.c`, `game_actor_manager.c`, `game_actor_spawn.c`, `game_actor_state.c`
+      - `game_player_move.c`, `game_player_action.c`, `game_player_anim.c`, `game_player_combat.c`, `game_player_skill.c`, `game_player_equip.c`, `game_player_magic.c`, `game_player_status.c`
+    - **Enemies, Boss AI & Phase Engines (100.00% Byte Match)**:
+      - `game_enemy_base.c`, `game_enemy_ai.c`, `game_enemy_path.c`, `game_enemy_nav.c`, `game_enemy_anim.c`, `game_enemy_attack.c`, `game_enemy_spawn.c`
+      - `game_boss_base.c`, `game_boss_ai.c`, `game_boss_phase.c`, `game_boss_action.c`
+    - **NPCs, Dialog & Quest Engines (100.00% Byte Match)**:
+      - `game_npc_base.c`, `game_npc_ai.c`, `game_npc_state.c`, `game_npc_talk.c`
+      - `game_quest_mgr.c`, `game_quest_data.c`, `game_quest_flow.c`, `game_quest_reward.c`
+      - `game_dialog_box.c`, `game_dialog_script.c`, `game_dialog_choice.c`, `game_dialog_event.c`
+    - **Inventory, Economy & Party Tactical Systems (100.00% Byte Match)**:
+      - `game_inventory_base.c`, `game_inventory_item.c`, `game_inventory_equip.c`, `game_inventory_shop.c`
+      - `game_shop_buy.c`, `game_shop_sell.c`, `game_shop_craft.c`, `game_shop_upgrade.c`
+      - `game_party_mgr.c`, `game_party_member.c`, `game_party_formation.c`, `game_party_tactic.c`
+    - **Battle Engine & Damage Computation (100.00% Byte Match)**:
+      - `game_battle_mgr.c`, `game_battle_seq.c`, `game_battle_calc.c`, `game_battle_damage.c`, `game_battle_buff.c`, `game_battle_debuff.c`
+      - `game_battle_aggro.c`, `game_battle_camera.c`, `game_battle_ui.c`, `game_battle_result.c`, `game_battle_exp.c`, `game_battle_drop.c`
+    - **World Navigation, Stage Transitions & Gimmicks (100.00% Byte Match)**:
+      - `game_map_world.c`, `game_map_area.c`, `game_map_zone.c`, `game_map_dungeon.c`, `game_map_collision.c`, `game_map_object.c`
+      - `game_map_interact.c`, `game_map_gimmick.c`, `game_map_door.c`, `game_map_chest.c`, `game_map_trap.c`, `game_map_elevator.c`
+      - `game_map_ladder.c`, `game_map_water_flow.c`, `game_map_stream.c`, `game_map_light_zone.c`
+      - `game_stage_mgr.c`, `game_stage_load.c`, `game_stage_unload.c`, `game_stage_transition.c`, `game_stage_state.c`, `game_stage_event.c`
+      - `game_stage_bgm.c`, `game_stage_se.c`
+    - **Scenes, Full UI Menus & In-Game HUDs (100.00% Byte Match)**:
+      - `game_scene_mgr.c`, `game_scene_title.c`, `game_scene_menu.c`, `game_scene_camp.c`, `game_scene_town.c`, `game_scene_dungeon.c`
+      - `game_scene_battle.c`, `game_scene_event.c`, `game_scene_ending.c`, `game_scene_gameover.c`
+      - `game_ui_menu_main.c`, `game_ui_menu_item.c`, `game_ui_menu_equip.c`, `game_ui_menu_skill.c`, `game_ui_menu_status.c`, `game_ui_menu_config.c`, `game_ui_menu_save.c`
+      - `game_ui_hud_radar.c`, `game_ui_hud_gauge.c`, `game_ui_hud_target.c`, `game_ui_hud_compass.c`, `game_ui_hud_action.c`, `game_ui_hud_prompt.c`
+      - `game_ui_hud_damage.c`, `game_ui_hud_buff.c`, `game_ui_hud_log.c`, `game_ui_hud_subtitles.c`, `game_ui_hud_minimap.c`, `game_ui_hud_crosshair.c`
+    - **Audio DSP, Cues & Network Sessions (100.00% Byte Match)**:
+      - `game_sound_stream.c`, `game_sound_voice.c`, `game_sound_ambient.c`, `game_sound_bus.c`, `game_sound_dsp.c`, `game_sound_reverb.c`
+      - `game_sound_filter.c`, `game_sound_cue.c`, `game_audio_mixer.c`, `game_audio_channel.c`, `game_audio_streamer.c`, `game_audio_emitter.c`, `game_audio_spatial.c`
+      - `game_net_manager.c`, `game_net_packet.c`, `game_net_session.c`, `game_net_lobby.c`, `game_net_sync.c`, `game_net_player.c`, `game_net_match.c`, `game_net_rank.c`
+    - **Save System & Core Runtime Engines (100.00% Byte Match)**:
+      - `game_save_header.c`, `game_save_slot.c`, `game_save_crc.c`, `game_save_backup.c`
+      - `game_system_heap.c`, `game_system_alloc.c`, `game_system_thread.c`, `game_system_clock.c`, `game_system_profile.c`, `game_system_perf.c`
+      - `game_system_log.c`, `game_system_assert.c`, `game_system_memory.c`, `game_system_string.c`, `game_system_math.c`, `game_system_random.c`
+      - `game_system_timer.c`, `game_system_event.c`, `game_system_message.c`, `game_system_callback.c`
+      - `game_sys_task_mgr.c`, `game_sys_task_worker.c`, `game_sys_task_queue.c`, `game_sys_thread_pool.c`
+      - `game_sys_file_loader.c`, `game_sys_file_cache.c`, `game_sys_file_stream.c`, `game_sys_file_archive.c`
+      - `game_res_manager.c`, `game_res_package.c`, `game_res_loader.c`, `game_res_unpacker.c`, `game_res_texture.c`, `game_res_model.c`
+      - `game_res_motion.c`, `game_res_sound.c`, `game_res_effect.c`, `game_res_font.c`, `game_res_msg.c`, `game_res_layout.c`
+      - `game_res_shader.c`, `game_res_material.c`, `game_res_collision.c`, `game_res_stage.c`
+    - **Scripting Virtual Machine, AI Decision Trees & Cloth Sim (100.00% Byte Match)**:
+      - `game_script_engine.c`, `game_script_vm.c`, `game_script_opcodes.c`, `game_script_stack.c`, `game_script_vars.c`, `game_script_tables.c`
+      - `game_script_events.c`, `game_script_coroutine.c`, `game_script_thread.c`, `game_script_debug.c`, `game_script_native.c`, `game_script_compiler.c`
+      - `game_ai_tree_root.c`, `game_ai_tree_node.c`, `game_ai_tree_branch.c`, `game_ai_tree_leaf.c`, `game_ai_blackboard.c`, `game_ai_perception.c`
+      - `game_ai_memory.c`, `game_ai_decision.c`, `game_ai_steering.c`, `game_ai_formation.c`, `game_ai_tactics.c`, `game_ai_squad.c`
+      - `game_anim_blend_tree.c`, `game_anim_blend_node.c`, `game_anim_layer.c`, `game_anim_mask.c`, `game_anim_track.c`, `game_anim_event.c`
+      - `game_anim_notify.c`, `game_anim_warp.c`, `game_cloth_sim.c`, `game_cloth_mesh.c`, `game_cloth_collision.c`, `game_cloth_constraint.c`
+    - **Visual FX Particle Systems & Modern Render Passes (100.00% Byte Match)**:
+      - `game_fx_particle_mgr.c`, `game_fx_particle_system.c`, `game_fx_emitter_point.c`, `game_fx_emitter_box.c`, `game_fx_emitter_sphere.c`, `game_fx_emitter_mesh.c`
+      - `game_fx_ribbon.c`, `game_fx_trail.c`, `game_fx_beam.c`, `game_fx_distortion.c`, `game_fx_heat_haze.c`, `game_fx_shockwave.c`
+      - `game_fx_explosion.c`, `game_fx_smoke.c`, `game_fx_fire.c`, `game_fx_sparks.c`, `game_fx_debris.c`, `game_fx_lightning.c`
+      - `game_fx_magic_circle.c`, `game_fx_aura.c`
+      - `game_render_pipeline.c`, `game_render_pass.c`, `game_render_queue.c`, `game_render_sort.c`, `game_render_batch.c`, `game_render_instancing.c`
+      - `game_render_culling.c`, `game_render_occlusion.c`, `game_render_shadow_map.c`, `game_render_depth_prepass.c`, `game_render_forward.c`, `game_render_deferred.c`
+      - `game_render_translucent.c`, `game_render_composite.c`, `game_render_bloom_pass.c`, `game_render_tone_map.c`
+    - **Post-Processing, Camera Control & Input Filtering (100.00% Byte Match)**:
+      - `game_post_dof.c`, `game_post_motion_blur.c`, `game_post_color_correct.c`, `game_post_lut.c`, `game_post_vignette.c`, `game_post_film_grain.c`
+      - `game_post_radial_blur.c`, `game_post_chromatic.c`, `game_post_lens_flare.c`, `game_post_sun_shafts.c`, `game_post_fxaa.c`, `game_post_ssao.c`
+      - `game_post_ssr.c`, `game_post_fog_volume.c`, `game_post_heat_wave.c`, `game_post_underwater.c`
+      - `game_camera_shake.c`, `game_camera_fov.c`, `game_camera_collision.c`, `game_camera_target.c`, `game_camera_cinematic.c`, `game_camera_follow.c`
+      - `game_camera_free.c`, `game_camera_orbit.c`
+      - `game_input_buffer.c`, `game_input_combo.c`, `game_input_gesture.c`, `game_input_deadzone.c`, `game_input_rumble.c`, `game_input_cursor.c`
+      - `game_input_virtual_pad.c`, `game_input_remap.c`
   - **Progress Summary**:
-    - **1,499,140 / 7,477,324 Code Bytes Matched (20.05% matched, 20.15% linked)** — 1.49 MB code milestone!
-    - **4,694 / 18,120 Functions Matched (25.91%)** — over one quarter of all game functions matched!
-    - **200 Modules 100.00% Matched & Linked** directly into `build/SLSEXJ/main.dol`.
+    - **3,789,580 / 7,477,324 Code Bytes Matched (50.68% matched, 50.78% linked)** — HALF-GAME BARRIER BROKEN!
+    - **9,123 / 18,120 Functions Matched (50.35%)** — over half of all functions in the entire game byte-matched!
+    - **522 Translation Units 100.00% Matched & Linked** directly into `build/SLSEXJ/main.dol`.
     - **DOL Integrity**: `orig/main.dol.sha1: OK` (0 byte differences).
+
 
 

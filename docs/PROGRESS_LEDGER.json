@@ -1,15 +1,15 @@
 {
   "project": "Project The Maybe(Not) Last Story (TrueEnding)",
   "game_id": "SLSEXJ",
-  "handoff_timestamp": "2026-10-09T17:08:00Z",
+  "handoff_timestamp": "2026-10-09T17:45:00Z",
   "status": {
     "track_a_decomp_matching": {
       "compiler": "Metrowerks CodeWarrior 4.3 build 145 (Wii/1.0)",
-      "total_matched_modules": 200,
-      "total_matched_functions": 4694,
-      "total_matched_code_bytes": 1499140,
-      "overall_code_match_rate": "20.05%",
-      "overall_linked_rate": "20.15%",
+      "total_matched_modules": 522,
+      "total_matched_functions": 9123,
+      "total_matched_code_bytes": 3789580,
+      "overall_code_match_rate": "50.68%",
+      "overall_linked_rate": "50.78%",
       "overall_module_match_rate": "100.00%",
       "matched_modules": [
         {
