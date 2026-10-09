@@ -297,6 +297,20 @@ ALL_MODULES = [
     ("game_drv_render_fx", "0x805CF6E0", "0x805D1500"),
     ("game_drv_render_geom", "0x805D1500", "0x805D2F60"),
     ("game_drv_render_light", "0x805D2F60", "0x805D4E70"),
+    # Batch 43 (252..258)
+    ("game_drv_gx_scissor", "0x805D4E70", "0x805D6E60"),
+    ("game_drv_gx_viewport", "0x805D6E60", "0x805D8E70"),
+    ("game_drv_gx_transform", "0x805D8E70", "0x805DA960"),
+    ("game_drv_gx_lighting", "0x805DA960", "0x805DC3B0"),
+    ("game_drv_gx_material", "0x805DC3B0", "0x805DDE20"),
+    ("game_drv_gx_display_list", "0x805DDE20", "0x805DFA30"),
+    # Batch 44 (258..264)
+    ("game_drv_gx_vertex_cache", "0x805DFA30", "0x805E1430"),
+    ("game_drv_gx_index_buf", "0x805E1430", "0x805E2EB0"),
+    ("game_drv_gx_perf_query", "0x805E2EB0", "0x805E4960"),
+    ("game_drv_gx_texture_env", "0x805E4960", "0x805E6740"),
+    ("game_drv_gx_fog_mode", "0x805E6740", "0x805E8230"),
+    ("game_drv_gx_alpha_blend", "0x805E8230", "0x805E9F50"),
 ]
 
 def run_cmd(cmd):
