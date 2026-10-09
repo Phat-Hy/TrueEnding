@@ -118,7 +118,40 @@ static bool update_display_window(const u8* yuyv_fb) {
 
     if (s_window_closed) return false;
 
-    static uint8_t s_black_fb[640 * 480 * 2] = {0};
+    // Real-time FPS calculation in title bar
+    static LARGE_INTEGER s_last_fps_qpc = {0};
+    static LARGE_INTEGER s_qpc_freq = {0};
+    static int s_fps_frame_count = 0;
+    if (s_qpc_freq.QuadPart == 0) {
+        QueryPerformanceFrequency(&s_qpc_freq);
+        QueryPerformanceCounter(&s_last_fps_qpc);
+    }
+    s_fps_frame_count++;
+    LARGE_INTEGER now_qpc;
+    QueryPerformanceCounter(&now_qpc);
+    double elapsed_fps_sec = (double)(now_qpc.QuadPart - s_last_fps_qpc.QuadPart) / (double)s_qpc_freq.QuadPart;
+    if (elapsed_fps_sec >= 0.5) {
+        double current_fps = (double)s_fps_frame_count / elapsed_fps_sec;
+        char title[256];
+        snprintf(title, sizeof(title),
+                 "The Last Story (TrueEnding PC Port) - [%s | %.1f FPS | %s]",
+                 gfx_backend_get_name(), current_fps, s_gfx_config.vsync ? "VSync ON" : "VSync OFF");
+        SetWindowTextA(s_hwnd, title);
+        s_last_fps_qpc = now_qpc;
+        s_fps_frame_count = 0;
+    }
+
+    static uint8_t s_black_fb[640 * 480 * 2];
+    static bool s_black_fb_inited = false;
+    if (!s_black_fb_inited) {
+        for (int i = 0; i < 640 * 480 * 2; i += 4) {
+            s_black_fb[i + 0] = 16;
+            s_black_fb[i + 1] = 128;
+            s_black_fb[i + 2] = 16;
+            s_black_fb[i + 3] = 128;
+        }
+        s_black_fb_inited = true;
+    }
     const uint8_t* present_fb = yuyv_fb ? yuyv_fb : s_black_fb;
     gfx_backend_present(present_fb, 640, 480);
     return true;
