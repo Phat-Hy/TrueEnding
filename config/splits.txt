@@ -1823,6 +1823,78 @@ game_coliseum_reward.c:
 
 game_coliseum_ranking.c:
 	.text       start:0x80495EA8 end:0x80498354
+game_net_lobby_mgr.c:
+	.text       start:0x80498354 end:0x80499D60
+
+game_net_lobby_room.c:
+	.text       start:0x80499D60 end:0x8049B780
+
+game_net_lobby_match.c:
+	.text       start:0x8049B780 end:0x8049D1A4
+
+game_net_lobby_player.c:
+	.text       start:0x8049D1A4 end:0x8049EBAC
+
+game_net_lobby_sync.c:
+	.text       start:0x8049EBAC end:0x804A0614
+
+game_net_lobby_chat.c:
+	.text       start:0x804A0614 end:0x804A2078
+game_net_coop_mgr.c:
+	.text       start:0x804A2078 end:0x804A3AF0
+
+game_net_coop_session.c:
+	.text       start:0x804A3AF0 end:0x804A55FC
+
+game_net_coop_spawn.c:
+	.text       start:0x804A55FC end:0x804A71F0
+
+game_net_coop_boss.c:
+	.text       start:0x804A71F0 end:0x804A9E44
+
+game_net_coop_drop.c:
+	.text       start:0x804A9E44 end:0x804ABA2C
+
+game_net_coop_score.c:
+	.text       start:0x804ABA2C end:0x804AD738
+game_net_packet_mgr.c:
+	.text       start:0x804AD738 end:0x804AF1BC
+
+game_net_packet_queue.c:
+	.text       start:0x804AF1BC end:0x804B0F58
+
+game_net_crypt_core.c:
+	.text       start:0x804B0F58 end:0x804B2C20
+
+game_net_crypt_key.c:
+	.text       start:0x804B2C20 end:0x804B4678
+
+game_net_crypt_cipher.c:
+	.text       start:0x804B4678 end:0x804B6204
+
+game_net_crypt_auth.c:
+	.text       start:0x804B6204 end:0x804B7F88
+game_net_versus_mgr.c:
+	.text       start:0x804B7F88 end:0x804B9B68
+
+game_net_versus_rule.c:
+	.text       start:0x804B9B68 end:0x804BBB60
+
+game_net_versus_map.c:
+	.text       start:0x804BBB60 end:0x804BD9B0
+
+game_net_versus_stat.c:
+	.text       start:0x804BD9B0 end:0x804BF550
+
+game_net_versus_leader.c:
+	.text       start:0x804BF550 end:0x804C0F88
+
+game_net_versus_award.c:
+	.text       start:0x804C0F88 end:0x804C2994
+
+
+
+
 
 
 

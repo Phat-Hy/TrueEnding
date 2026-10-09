@@ -101,6 +101,34 @@ ALL_MODULES = [
     ("game_coliseum_score", "0x804923AC", "0x80494354"),
     ("game_coliseum_reward", "0x80494354", "0x80495EA8"),
     ("game_coliseum_ranking", "0x80495EA8", "0x80498354"),
+    # Batch 15 (84..90)
+    ("game_net_lobby_mgr", "0x80498354", "0x80499D60"),
+    ("game_net_lobby_room", "0x80499D60", "0x8049B780"),
+    ("game_net_lobby_match", "0x8049B780", "0x8049D1A4"),
+    ("game_net_lobby_player", "0x8049D1A4", "0x8049EBAC"),
+    ("game_net_lobby_sync", "0x8049EBAC", "0x804A0614"),
+    ("game_net_lobby_chat", "0x804A0614", "0x804A2078"),
+    # Batch 16 (90..96)
+    ("game_net_coop_mgr", "0x804A2078", "0x804A3AF0"),
+    ("game_net_coop_session", "0x804A3AF0", "0x804A55FC"),
+    ("game_net_coop_spawn", "0x804A55FC", "0x804A71F0"),
+    ("game_net_coop_boss", "0x804A71F0", "0x804A9E44"),
+    ("game_net_coop_drop", "0x804A9E44", "0x804ABA2C"),
+    ("game_net_coop_score", "0x804ABA2C", "0x804AD738"),
+    # Batch 17 (96..102)
+    ("game_net_packet_mgr", "0x804AD738", "0x804AF1BC"),
+    ("game_net_packet_queue", "0x804AF1BC", "0x804B0F58"),
+    ("game_net_crypt_core", "0x804B0F58", "0x804B2C20"),
+    ("game_net_crypt_key", "0x804B2C20", "0x804B4678"),
+    ("game_net_crypt_cipher", "0x804B4678", "0x804B6204"),
+    ("game_net_crypt_auth", "0x804B6204", "0x804B7F88"),
+    # Batch 18 (102..108)
+    ("game_net_versus_mgr", "0x804B7F88", "0x804B9B68"),
+    ("game_net_versus_rule", "0x804B9B68", "0x804BBB60"),
+    ("game_net_versus_map", "0x804BBB60", "0x804BD9B0"),
+    ("game_net_versus_stat", "0x804BD9B0", "0x804BF550"),
+    ("game_net_versus_leader", "0x804BF550", "0x804C0F88"),
+    ("game_net_versus_award", "0x804C0F88", "0x804C2994"),
 ]
 
 def run_cmd(cmd):
