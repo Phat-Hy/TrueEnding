@@ -330,6 +330,7 @@ int main(int argc, char** argv) {
     bool enable_window = false;
     int win_width = 1280;
     int win_height = 720;
+    int target_fps = 60; // Default 60 FPS (0 = uncapped)
 
     for (int i = 1; i < argc; i++) {
         if (strcmp(argv[i], "--dol") == 0 && i + 1 < argc) {
@@ -344,6 +345,8 @@ int main(int argc, char** argv) {
             win_width = atoi(argv[++i]);
         } else if (strcmp(argv[i], "--height") == 0 && i + 1 < argc) {
             win_height = atoi(argv[++i]);
+        } else if (strcmp(argv[i], "--fps") == 0 && i + 1 < argc) {
+            target_fps = atoi(argv[++i]);
         }
     }
 
@@ -388,8 +391,8 @@ int main(int argc, char** argv) {
     }
 #endif
 
-    printf("[Runner] Starting execution from entry point 0x%08X (limit: %u blocks/slice, frames: %d)...\n",
-           cpu.pc, max_blocks, max_frames);
+    printf("[Runner] Starting execution from entry point 0x%08X (limit: %u blocks/slice, frames: %d, target FPS: %d%s)...\n",
+           cpu.pc, max_blocks, max_frames, target_fps, target_fps <= 0 ? " [uncapped]" : "");
 
     int result = 0;
     for (int frame = 0; frame < max_frames; frame++) {
@@ -447,11 +450,14 @@ int main(int argc, char** argv) {
                 break;
             }
 
-            // 60 FPS pacing (~16.6ms per frame)
-            QueryPerformanceCounter(&t_end);
-            double elapsed_ms = (double)(t_end.QuadPart - t_start.QuadPart) * 1000.0 / (double)qpc_freq.QuadPart;
-            if (elapsed_ms < 16.666) {
-                Sleep((DWORD)(16.666 - elapsed_ms));
+            // Frame pacing based on target_fps (0 = uncapped)
+            if (target_fps > 0) {
+                QueryPerformanceCounter(&t_end);
+                double elapsed_ms = (double)(t_end.QuadPart - t_start.QuadPart) * 1000.0 / (double)qpc_freq.QuadPart;
+                double frame_budget_ms = 1000.0 / (double)target_fps;
+                if (elapsed_ms < frame_budget_ms) {
+                    Sleep((DWORD)(frame_budget_ms - elapsed_ms));
+                }
             }
         }
 #endif
