@@ -204,33 +204,244 @@ void mmio_external_write(CPUState* cpu, u32 ea, u64 value, u8 size) {
 
 static u32 s_simulated_ticks = 0;
 
-static u8 s_controller_button_bits = 0;
-static u32 s_controller_poll_count = 0;
-
 /* Current guest time, matching the OSGetTime replacement below. */
 static u64 guest_time_now(CPUState* ctx) {
     return ctx->timebase + (u64)s_simulated_ticks;
 }
 
-static u8 tls_poll_controller_buttons(void) {
-    u8 buttons = 0;
+/* --- Enhanced Controller Input Subsystem (XInput + Win32 Keyboard + KPAD) --- */
+#define WPAD_BUTTON_LEFT          0x0001
+#define WPAD_BUTTON_RIGHT         0x0002
+#define WPAD_BUTTON_DOWN          0x0004
+#define WPAD_BUTTON_UP            0x0008
+#define WPAD_BUTTON_PLUS          0x0010
+#define WPAD_BUTTON_2             0x0100
+#define WPAD_BUTTON_1             0x0200
+#define WPAD_BUTTON_B             0x0400
+#define WPAD_BUTTON_A             0x0800
+#define WPAD_BUTTON_MINUS         0x1000
+#define WPAD_BUTTON_HOME          0x8000
+
+#define WPAD_CL_BUTTON_UP         0x0001
+#define WPAD_CL_BUTTON_LEFT       0x0002
+#define WPAD_CL_BUTTON_ZR         0x0004
+#define WPAD_CL_BUTTON_X          0x0008
+#define WPAD_CL_BUTTON_A          0x0010
+#define WPAD_CL_BUTTON_Y          0x0020
+#define WPAD_CL_BUTTON_B          0x0040
+#define WPAD_CL_BUTTON_ZL         0x0080
+#define WPAD_CL_BUTTON_FULL_R     0x0200
+#define WPAD_CL_BUTTON_PLUS       0x0400
+#define WPAD_CL_BUTTON_HOME       0x0800
+#define WPAD_CL_BUTTON_MINUS      0x1000
+#define WPAD_CL_BUTTON_FULL_L     0x2000
+#define WPAD_CL_BUTTON_DOWN       0x4000
+#define WPAD_CL_BUTTON_RIGHT      0x8000
+
+typedef struct HostControllerState {
+    u32 core_hold;
+    u32 core_trig;
+    u32 core_release;
+    u32 cl_hold;
+    u32 cl_trig;
+    u32 cl_release;
+    f32 stick_l_x;
+    f32 stick_l_y;
+    f32 stick_r_x;
+    f32 stick_r_y;
+    f32 trigger_l;
+    f32 trigger_r;
+    f32 ir_x;
+    f32 ir_y;
+} HostControllerState;
+
+static HostControllerState s_ctrl_state = {0};
+static u32 s_last_core_hold = 0;
+static u32 s_last_cl_hold = 0;
+static u8 s_controller_button_bits = 0;
+static u32 s_controller_poll_count = 0;
+
 #ifdef _WIN32
-    if (GetAsyncKeyState(VK_LEFT) & 0x8000) buttons |= 0x08;
-    if (GetAsyncKeyState(VK_RIGHT) & 0x8000) buttons |= 0x04;
-    if (GetAsyncKeyState(VK_UP) & 0x8000) buttons |= 0x01;
-    if (GetAsyncKeyState(VK_DOWN) & 0x8000) buttons |= 0x02;
-    if (GetAsyncKeyState(VK_RETURN) & 0x8000) buttons |= 0x08;
-    if (GetAsyncKeyState(VK_SPACE) & 0x8000) buttons |= 0x04;
+typedef struct _XINPUT_GAMEPAD_LOCAL {
+    WORD  wButtons;
+    BYTE  bLeftTrigger;
+    BYTE  bRightTrigger;
+    SHORT sThumbLX;
+    SHORT sThumbLY;
+    SHORT sThumbRX;
+    SHORT sThumbRY;
+} XINPUT_GAMEPAD_LOCAL;
+
+typedef struct _XINPUT_STATE_LOCAL {
+    DWORD                dwPacketNumber;
+    XINPUT_GAMEPAD_LOCAL Gamepad;
+} XINPUT_STATE_LOCAL;
+
+typedef DWORD (WINAPI *PFN_XInputGetStateLocal)(DWORD dwUserIndex, XINPUT_STATE_LOCAL* pState);
+static PFN_XInputGetStateLocal s_pfnXInputGetState = NULL;
+static int s_xinput_checked = 0;
+
+static void init_xinput_dynamic(void) {
+    if (s_xinput_checked) return;
+    s_xinput_checked = 1;
+    HMODULE h = LoadLibraryA("xinput1_4.dll");
+    if (!h) h = LoadLibraryA("xinput1_3.dll");
+    if (!h) h = LoadLibraryA("xinput9_1_0.dll");
+    if (h) {
+        s_pfnXInputGetState = (PFN_XInputGetStateLocal)GetProcAddress(h, "XInputGetState");
+        if (s_pfnXInputGetState) {
+            printf("[TLS Controller] Dynamic XInput support active\n");
+            fflush(stdout);
+        }
+    }
+}
 #endif
-    return buttons;
+
+static void write_guest_f32(CPUState* ctx, u32 addr, f32 val) {
+    u32 raw;
+    memcpy(&raw, &val, 4);
+    mem_write32(ctx, addr, raw);
+}
+
+static void fill_kpad_status(CPUState* ctx, u32 status_addr) {
+    // 0x00: Wiimote core buttons
+    mem_write32(ctx, status_addr + 0x00, s_ctrl_state.core_hold);
+    mem_write32(ctx, status_addr + 0x04, s_ctrl_state.core_trig);
+    mem_write32(ctx, status_addr + 0x08, s_ctrl_state.core_release);
+
+    // 0x0C: Accelerometer (default neutral gravity upright: 0, 0, 1)
+    write_guest_f32(ctx, status_addr + 0x0C, 0.0f);
+    write_guest_f32(ctx, status_addr + 0x10, 0.0f);
+    write_guest_f32(ctx, status_addr + 0x14, 1.0f);
+    write_guest_f32(ctx, status_addr + 0x18, 1.0f); // acc_value
+    write_guest_f32(ctx, status_addr + 0x1C, 0.0f); // acc_speed
+
+    // 0x20: Pointer position
+    write_guest_f32(ctx, status_addr + 0x20, s_ctrl_state.ir_x);
+    write_guest_f32(ctx, status_addr + 0x24, s_ctrl_state.ir_y);
+    write_guest_f32(ctx, status_addr + 0x28, 0.0f); // vec.x
+    write_guest_f32(ctx, status_addr + 0x2C, 0.0f); // vec.y
+    write_guest_f32(ctx, status_addr + 0x30, 0.0f); // speed
+
+    // 0x34: Device type (2 = Classic Controller)
+    mem_write8(ctx, status_addr + 0x34, 2);
+    // 0x35: Error (0 = OK)
+    mem_write8(ctx, status_addr + 0x35, 0);
+    mem_write16(ctx, status_addr + 0x36, 0);
+
+    // 0x38: Classic Controller Extension
+    mem_write32(ctx, status_addr + 0x38, s_ctrl_state.cl_hold);
+    mem_write32(ctx, status_addr + 0x3C, s_ctrl_state.cl_trig);
+    mem_write32(ctx, status_addr + 0x40, s_ctrl_state.cl_release);
+    write_guest_f32(ctx, status_addr + 0x44, s_ctrl_state.stick_l_x);
+    write_guest_f32(ctx, status_addr + 0x48, s_ctrl_state.stick_l_y);
+    write_guest_f32(ctx, status_addr + 0x4C, s_ctrl_state.stick_r_x);
+    write_guest_f32(ctx, status_addr + 0x50, s_ctrl_state.stick_r_y);
+    write_guest_f32(ctx, status_addr + 0x54, s_ctrl_state.trigger_l);
+    write_guest_f32(ctx, status_addr + 0x58, s_ctrl_state.trigger_r);
 }
 
 int tls_service_controller_input(CPUState* ctx) {
     (void)ctx;
-    u8 buttons = tls_poll_controller_buttons();
-    s_controller_button_bits = buttons;
+    u32 cur_core = 0;
+    u32 cur_cl = 0;
+    f32 lx = 0.0f, ly = 0.0f;
+    f32 rx = 0.0f, ry = 0.0f;
+    f32 tl = 0.0f, tr = 0.0f;
+
+#ifdef _WIN32
+    init_xinput_dynamic();
+    if (s_pfnXInputGetState) {
+        XINPUT_STATE_LOCAL xi;
+        if (s_pfnXInputGetState(0, &xi) == 0) { // ERROR_SUCCESS = 0
+            WORD w = xi.Gamepad.wButtons;
+            if (w & 0x0001) { cur_core |= WPAD_BUTTON_UP;    cur_cl |= WPAD_CL_BUTTON_UP; }
+            if (w & 0x0002) { cur_core |= WPAD_BUTTON_DOWN;  cur_cl |= WPAD_CL_BUTTON_DOWN; }
+            if (w & 0x0004) { cur_core |= WPAD_BUTTON_LEFT;  cur_cl |= WPAD_CL_BUTTON_LEFT; }
+            if (w & 0x0008) { cur_core |= WPAD_BUTTON_RIGHT; cur_cl |= WPAD_CL_BUTTON_RIGHT; }
+            if (w & 0x1000) { cur_core |= WPAD_BUTTON_A;     cur_cl |= WPAD_CL_BUTTON_A; }
+            if (w & 0x2000) { cur_core |= WPAD_BUTTON_B;     cur_cl |= WPAD_CL_BUTTON_B; }
+            if (w & 0x4000) { cur_core |= WPAD_BUTTON_1;     cur_cl |= WPAD_CL_BUTTON_X; }
+            if (w & 0x8000) { cur_core |= WPAD_BUTTON_2;     cur_cl |= WPAD_CL_BUTTON_Y; }
+            if (w & 0x0010) { cur_core |= WPAD_BUTTON_PLUS;  cur_cl |= WPAD_CL_BUTTON_PLUS; }
+            if (w & 0x0020) { cur_core |= WPAD_BUTTON_MINUS; cur_cl |= WPAD_CL_BUTTON_MINUS; }
+            if (w & 0x0100) { cur_cl |= WPAD_CL_BUTTON_ZL; }
+            if (w & 0x0200) { cur_cl |= WPAD_CL_BUTTON_ZR; }
+            if (xi.Gamepad.bLeftTrigger > 30) {
+                cur_cl |= WPAD_CL_BUTTON_FULL_L;
+                tl = (f32)xi.Gamepad.bLeftTrigger / 255.0f;
+            }
+            if (xi.Gamepad.bRightTrigger > 30) {
+                cur_cl |= WPAD_CL_BUTTON_FULL_R;
+                tr = (f32)xi.Gamepad.bRightTrigger / 255.0f;
+            }
+            if (abs(xi.Gamepad.sThumbLX) > 7849) lx = (f32)xi.Gamepad.sThumbLX / 32767.0f;
+            if (abs(xi.Gamepad.sThumbLY) > 7849) ly = (f32)xi.Gamepad.sThumbLY / 32767.0f;
+            if (abs(xi.Gamepad.sThumbRX) > 8689) rx = (f32)xi.Gamepad.sThumbRX / 32767.0f;
+            if (abs(xi.Gamepad.sThumbRY) > 8689) ry = (f32)xi.Gamepad.sThumbRY / 32767.0f;
+        }
+    }
+
+    // Win32 Keyboard Mapping (WASD & Arrows, Space/Enter=A, Esc/X=B, etc.)
+    if ((GetAsyncKeyState(VK_LEFT) & 0x8000) || (GetAsyncKeyState('A') & 0x8000)) {
+        cur_core |= WPAD_BUTTON_LEFT;  cur_cl |= WPAD_CL_BUTTON_LEFT;  lx = -1.0f;
+    }
+    if ((GetAsyncKeyState(VK_RIGHT) & 0x8000) || (GetAsyncKeyState('D') & 0x8000)) {
+        cur_core |= WPAD_BUTTON_RIGHT; cur_cl |= WPAD_CL_BUTTON_RIGHT; lx = 1.0f;
+    }
+    if ((GetAsyncKeyState(VK_UP) & 0x8000) || (GetAsyncKeyState('W') & 0x8000)) {
+        cur_core |= WPAD_BUTTON_UP;    cur_cl |= WPAD_CL_BUTTON_UP;    ly = 1.0f;
+    }
+    if ((GetAsyncKeyState(VK_DOWN) & 0x8000) || (GetAsyncKeyState('S') & 0x8000)) {
+        cur_core |= WPAD_BUTTON_DOWN;  cur_cl |= WPAD_CL_BUTTON_DOWN;  ly = -1.0f;
+    }
+    if ((GetAsyncKeyState(VK_RETURN) & 0x8000) || (GetAsyncKeyState(VK_SPACE) & 0x8000) || (GetAsyncKeyState('Z') & 0x8000)) {
+        cur_core |= WPAD_BUTTON_A; cur_cl |= WPAD_CL_BUTTON_A;
+    }
+    if ((GetAsyncKeyState(VK_ESCAPE) & 0x8000) || (GetAsyncKeyState(VK_BACK) & 0x8000) || (GetAsyncKeyState('X') & 0x8000)) {
+        cur_core |= WPAD_BUTTON_B; cur_cl |= WPAD_CL_BUTTON_B;
+    }
+    if (GetAsyncKeyState('C') & 0x8000) {
+        cur_core |= WPAD_BUTTON_1; cur_cl |= WPAD_CL_BUTTON_X;
+    }
+    if (GetAsyncKeyState('V') & 0x8000) {
+        cur_core |= WPAD_BUTTON_2; cur_cl |= WPAD_CL_BUTTON_Y;
+    }
+    if ((GetAsyncKeyState(VK_TAB) & 0x8000) || (GetAsyncKeyState('1') & 0x8000)) {
+        cur_core |= WPAD_BUTTON_PLUS; cur_cl |= WPAD_CL_BUTTON_PLUS;
+    }
+    if (GetAsyncKeyState('2') & 0x8000) {
+        cur_core |= WPAD_BUTTON_MINUS; cur_cl |= WPAD_CL_BUTTON_MINUS;
+    }
+    if (GetAsyncKeyState(VK_SHIFT) & 0x8000) {
+        cur_cl |= WPAD_CL_BUTTON_ZL;
+    }
+    if (GetAsyncKeyState(VK_CONTROL) & 0x8000) {
+        cur_cl |= WPAD_CL_BUTTON_ZR;
+    }
+#endif
+
+    s_ctrl_state.core_hold = cur_core;
+    s_ctrl_state.core_trig = cur_core & ~s_last_core_hold;
+    s_ctrl_state.core_release = ~cur_core & s_last_core_hold;
+
+    s_ctrl_state.cl_hold = cur_cl;
+    s_ctrl_state.cl_trig = cur_cl & ~s_last_cl_hold;
+    s_ctrl_state.cl_release = ~cur_cl & s_last_cl_hold;
+
+    s_ctrl_state.stick_l_x = lx;
+    s_ctrl_state.stick_l_y = ly;
+    s_ctrl_state.stick_r_x = rx;
+    s_ctrl_state.stick_r_y = ry;
+    s_ctrl_state.trigger_l = tl;
+    s_ctrl_state.trigger_r = tr;
+
+    s_last_core_hold = cur_core;
+    s_last_cl_hold = cur_cl;
+
+    s_controller_button_bits = (u8)cur_core;
     s_controller_poll_count++;
-    return buttons != 0;
+    return (cur_core != 0 || cur_cl != 0);
 }
 
 /* System time the OS uses for alarms: __OSGetSystemTime() = OSGetTime() + *(OSTime*)0x800030D8 */
@@ -894,16 +1105,13 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 1;
         }
 
-        // WPAD/KPAD input polling: synthesize a small button mask from host keys.
-        // The game mostly needs a ready controller and a few digital buttons for boot/menu flow.
+        // WPAD legacy probe/poll stubs
         case 0x8062CB10:
         case 0x80632B40: {
-            u8 buttons = tls_poll_controller_buttons();
-            s_controller_button_bits = buttons;
-            s_controller_poll_count++;
+            tls_service_controller_input(ctx);
             u8* state = (u8*)resolve_guest_pointer(ctx, 0x80820666);
             if (state) *state = 5;
-            ctx->gpr[3] = buttons;
+            ctx->gpr[3] = s_controller_button_bits;
             ctx->pc = ctx->lr;
             return 1;
         }
@@ -954,6 +1162,52 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 fflush(stdout);
             }
             ctx->gpr[3] = 0; // WPAD_ERR_NONE
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // KPADGetStatus (s32 chan) -> returns device type for channel
+        case 0x80661B10: {
+            s32 chan = (s32)ctx->gpr[3];
+            if (chan == 0) {
+                ctx->gpr[3] = 2; // 2 = WPAD_DEV_CLASSIC (Classic Controller attached)
+            } else {
+                ctx->gpr[3] = (u32)-1;
+            }
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // KPADRead(s32 chan, KPADStatus* status, u32 count)
+        case 0x80661B60: {
+            s32 chan = (s32)ctx->gpr[3];
+            u32 status_addr = ctx->gpr[4];
+            u32 count = ctx->gpr[5];
+            if (chan == 0 && status_addr != 0 && count > 0) {
+                fill_kpad_status(ctx, status_addr);
+                ctx->gpr[3] = 1; // 1 sample returned
+            } else {
+                ctx->gpr[3] = 0;
+            }
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // KPADGetUnifiedWpadStatus(s32 chan)
+        case 0x80663160: {
+            ctx->gpr[3] = 0; // WPAD_ERR_NONE
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // KPAD configuration setters (PosParam, AccParam, StickClamp, ButtonFilter, Reset, Enable)
+        case 0x80660CF0:
+        case 0x80660EA0:
+        case 0x80660B90:
+        case 0x80660C50:
+        case 0x80660C90:
+        case 0x806631A0: {
+            ctx->gpr[3] = 0;
             ctx->pc = ctx->lr;
             return 1;
         }
