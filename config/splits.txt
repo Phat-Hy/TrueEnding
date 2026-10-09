@@ -1959,6 +1959,78 @@ game_flow_new_game_plus.c:
 
 game_flow_gallery_mgr.c:
 	.text       start:0x804F147C end:0x804F2ED0
+game_net_msg_handler.c:
+	.text       start:0x804F2ED0 end:0x804F4CBC
+
+game_net_msg_queue.c:
+	.text       start:0x804F4CBC end:0x804F6E98
+
+game_net_msg_dispatch.c:
+	.text       start:0x804F6E98 end:0x804FA7CC
+
+game_net_msg_serial.c:
+	.text       start:0x804FA7CC end:0x804FC244
+
+game_net_msg_buffer.c:
+	.text       start:0x804FC244 end:0x804FE2E0
+
+game_net_msg_filter.c:
+	.text       start:0x804FE2E0 end:0x804FFE08
+game_net_func_msg.c:
+	.text       start:0x804FFE08 end:0x80502100
+
+game_net_func_call.c:
+	.text       start:0x80502100 end:0x80503B08
+
+game_net_func_param.c:
+	.text       start:0x80503B08 end:0x80505514
+
+game_net_func_result.c:
+	.text       start:0x80505514 end:0x805072C8
+
+game_net_func_event.c:
+	.text       start:0x805072C8 end:0x80508CC8
+
+game_net_func_reply.c:
+	.text       start:0x80508CC8 end:0x8050A730
+game_net_p2p_mgr.c:
+	.text       start:0x8050A730 end:0x8050C16C
+
+game_net_p2p_socket.c:
+	.text       start:0x8050C16C end:0x8050DB78
+
+game_net_p2p_data_r.c:
+	.text       start:0x8050DB78 end:0x8050F5AC
+
+game_net_p2p_data_w.c:
+	.text       start:0x8050F5AC end:0x80510FBC
+
+game_net_p2p_ack.c:
+	.text       start:0x80510FBC end:0x80512A38
+
+game_net_p2p_resend.c:
+	.text       start:0x80512A38 end:0x8051445C
+game_net_ping_mgr.c:
+	.text       start:0x8051445C end:0x80515F2C
+
+game_net_ping_rtt.c:
+	.text       start:0x80515F2C end:0x805179A0
+
+game_net_ping_timeout.c:
+	.text       start:0x805179A0 end:0x805193B8
+
+game_net_error_mgr.c:
+	.text       start:0x805193B8 end:0x8051B168
+
+game_net_error_code.c:
+	.text       start:0x8051B168 end:0x8051CF7C
+
+game_net_error_dialog.c:
+	.text       start:0x8051CF7C end:0x8051EC54
+
+
+
+
 
 
 

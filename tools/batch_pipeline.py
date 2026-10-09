@@ -157,6 +157,34 @@ ALL_MODULES = [
     ("game_flow_clear_save", "0x804ED76C", "0x804EF9B8"),
     ("game_flow_new_game_plus", "0x804EF9B8", "0x804F147C"),
     ("game_flow_gallery_mgr", "0x804F147C", "0x804F2ED0"),
+    # Batch 23 (132..138)
+    ("game_net_msg_handler", "0x804F2ED0", "0x804F4CBC"),
+    ("game_net_msg_queue", "0x804F4CBC", "0x804F6E98"),
+    ("game_net_msg_dispatch", "0x804F6E98", "0x804FA7CC"),
+    ("game_net_msg_serial", "0x804FA7CC", "0x804FC244"),
+    ("game_net_msg_buffer", "0x804FC244", "0x804FE2E0"),
+    ("game_net_msg_filter", "0x804FE2E0", "0x804FFE08"),
+    # Batch 24 (138..144)
+    ("game_net_func_msg", "0x804FFE08", "0x80502100"),
+    ("game_net_func_call", "0x80502100", "0x80503B08"),
+    ("game_net_func_param", "0x80503B08", "0x80505514"),
+    ("game_net_func_result", "0x80505514", "0x805072C8"),
+    ("game_net_func_event", "0x805072C8", "0x80508CC8"),
+    ("game_net_func_reply", "0x80508CC8", "0x8050A730"),
+    # Batch 25 (144..150)
+    ("game_net_p2p_mgr", "0x8050A730", "0x8050C16C"),
+    ("game_net_p2p_socket", "0x8050C16C", "0x8050DB78"),
+    ("game_net_p2p_data_r", "0x8050DB78", "0x8050F5AC"),
+    ("game_net_p2p_data_w", "0x8050F5AC", "0x80510FBC"),
+    ("game_net_p2p_ack", "0x80510FBC", "0x80512A38"),
+    ("game_net_p2p_resend", "0x80512A38", "0x8051445C"),
+    # Batch 26 (150..156)
+    ("game_net_ping_mgr", "0x8051445C", "0x80515F2C"),
+    ("game_net_ping_rtt", "0x80515F2C", "0x805179A0"),
+    ("game_net_ping_timeout", "0x805179A0", "0x805193B8"),
+    ("game_net_error_mgr", "0x805193B8", "0x8051B168"),
+    ("game_net_error_code", "0x8051B168", "0x8051CF7C"),
+    ("game_net_error_dialog", "0x8051CF7C", "0x8051EC54"),
 ]
 
 def run_cmd(cmd):
