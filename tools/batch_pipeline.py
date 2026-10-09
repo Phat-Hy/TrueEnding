@@ -73,6 +73,34 @@ ALL_MODULES = [
     ("game_boss_cocoon_roar", "0x80466370", "0x80467F50"),
     ("game_boss_cocoon_death", "0x80467F50", "0x804699A4"),
     ("game_boss_cocoon_fx", "0x804699A4", "0x8046B798"),
+    # Batch 11 (60..66)
+    ("game_boss_cocoon_shield", "0x8046B798", "0x8046D19C"),
+    ("game_boss_cocoon_weak", "0x8046D19C", "0x8046EBC4"),
+    ("game_boss_cocoon_laser_aim", "0x8046EBC4", "0x80470604"),
+    ("game_boss_cocoon_spin", "0x80470604", "0x8047202C"),
+    ("game_boss_cocoon_rush", "0x8047202C", "0x80473B20"),
+    ("game_boss_cocoon_shockwave", "0x80473B20", "0x80475DF8"),
+    # Batch 12 (66..72)
+    ("game_event_cutscene_mgr", "0x80475DF8", "0x8047782C"),
+    ("game_event_cutscene_cam", "0x8047782C", "0x8047961C"),
+    ("game_event_cutscene_actor", "0x8047961C", "0x8047B594"),
+    ("game_event_cutscene_voice", "0x8047B594", "0x8047DC98"),
+    ("game_event_cutscene_fade", "0x8047DC98", "0x8047F6B0"),
+    ("game_event_cutscene_skip", "0x8047F6B0", "0x804814E8"),
+    # Batch 13 (72..78)
+    ("game_quest_sub_mgr", "0x804814E8", "0x80483644"),
+    ("game_quest_sub_stage", "0x80483644", "0x80485964"),
+    ("game_quest_sub_target", "0x80485964", "0x80487490"),
+    ("game_quest_sub_reward", "0x80487490", "0x80489280"),
+    ("game_quest_sub_dialog", "0x80489280", "0x8048AF9C"),
+    ("game_quest_sub_complete", "0x8048AF9C", "0x8048D3A4"),
+    # Batch 14 (78..84)
+    ("game_coliseum_mgr", "0x8048D3A4", "0x8048EE78"),
+    ("game_coliseum_round", "0x8048EE78", "0x80490884"),
+    ("game_coliseum_enemy", "0x80490884", "0x804923AC"),
+    ("game_coliseum_score", "0x804923AC", "0x80494354"),
+    ("game_coliseum_reward", "0x80494354", "0x80495EA8"),
+    ("game_coliseum_ranking", "0x80495EA8", "0x80498354"),
 ]
 
 def run_cmd(cmd):

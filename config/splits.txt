@@ -1755,6 +1755,78 @@ game_boss_cocoon_death.c:
 
 game_boss_cocoon_fx.c:
 	.text       start:0x804699A4 end:0x8046B798
+game_boss_cocoon_shield.c:
+	.text       start:0x8046B798 end:0x8046D19C
+
+game_boss_cocoon_weak.c:
+	.text       start:0x8046D19C end:0x8046EBC4
+
+game_boss_cocoon_laser_aim.c:
+	.text       start:0x8046EBC4 end:0x80470604
+
+game_boss_cocoon_spin.c:
+	.text       start:0x80470604 end:0x8047202C
+
+game_boss_cocoon_rush.c:
+	.text       start:0x8047202C end:0x80473B20
+
+game_boss_cocoon_shockwave.c:
+	.text       start:0x80473B20 end:0x80475DF8
+game_event_cutscene_mgr.c:
+	.text       start:0x80475DF8 end:0x8047782C
+
+game_event_cutscene_cam.c:
+	.text       start:0x8047782C end:0x8047961C
+
+game_event_cutscene_actor.c:
+	.text       start:0x8047961C end:0x8047B594
+
+game_event_cutscene_voice.c:
+	.text       start:0x8047B594 end:0x8047DC98
+
+game_event_cutscene_fade.c:
+	.text       start:0x8047DC98 end:0x8047F6B0
+
+game_event_cutscene_skip.c:
+	.text       start:0x8047F6B0 end:0x804814E8
+game_quest_sub_mgr.c:
+	.text       start:0x804814E8 end:0x80483644
+
+game_quest_sub_stage.c:
+	.text       start:0x80483644 end:0x80485964
+
+game_quest_sub_target.c:
+	.text       start:0x80485964 end:0x80487490
+
+game_quest_sub_reward.c:
+	.text       start:0x80487490 end:0x80489280
+
+game_quest_sub_dialog.c:
+	.text       start:0x80489280 end:0x8048AF9C
+
+game_quest_sub_complete.c:
+	.text       start:0x8048AF9C end:0x8048D3A4
+game_coliseum_mgr.c:
+	.text       start:0x8048D3A4 end:0x8048EE78
+
+game_coliseum_round.c:
+	.text       start:0x8048EE78 end:0x80490884
+
+game_coliseum_enemy.c:
+	.text       start:0x80490884 end:0x804923AC
+
+game_coliseum_score.c:
+	.text       start:0x804923AC end:0x80494354
+
+game_coliseum_reward.c:
+	.text       start:0x80494354 end:0x80495EA8
+
+game_coliseum_ranking.c:
+	.text       start:0x80495EA8 end:0x80498354
+
+
+
+
 
 
 
