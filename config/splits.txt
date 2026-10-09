@@ -1891,6 +1891,78 @@ game_net_versus_leader.c:
 
 game_net_versus_award.c:
 	.text       start:0x804C0F88 end:0x804C2994
+game_net_replay_mgr.c:
+	.text       start:0x804C2994 end:0x804C4530
+
+game_net_replay_data.c:
+	.text       start:0x804C4530 end:0x804C66C8
+
+game_net_replay_play.c:
+	.text       start:0x804C66C8 end:0x804C8204
+
+game_net_sync_clock.c:
+	.text       start:0x804C8204 end:0x804C9C88
+
+game_net_sync_state.c:
+	.text       start:0x804C9C88 end:0x804CB74C
+
+game_net_sync_event.c:
+	.text       start:0x804CB74C end:0x804CD2F8
+game_net_friend_mgr.c:
+	.text       start:0x804CD2F8 end:0x804CEF84
+
+game_net_friend_list.c:
+	.text       start:0x804CEF84 end:0x804D1400
+
+game_net_friend_invite.c:
+	.text       start:0x804D1400 end:0x804D5F08
+
+game_net_voice_chat.c:
+	.text       start:0x804D5F08 end:0x804D807C
+
+game_net_voice_codec.c:
+	.text       start:0x804D807C end:0x804D9BF8
+
+game_net_voice_buffer.c:
+	.text       start:0x804D9BF8 end:0x804DBC84
+game_flow_title_mgr.c:
+	.text       start:0x804DBC84 end:0x804DD9D0
+
+game_flow_title_menu.c:
+	.text       start:0x804DD9D0 end:0x804DF408
+
+game_flow_title_logo.c:
+	.text       start:0x804DF408 end:0x804E2844
+
+game_flow_opening_movie.c:
+	.text       start:0x804E2844 end:0x804E4490
+
+game_flow_chapter_intro.c:
+	.text       start:0x804E4490 end:0x804E6510
+
+game_flow_chapter_outro.c:
+	.text       start:0x804E6510 end:0x804E8094
+game_flow_epilogue_mgr.c:
+	.text       start:0x804E8094 end:0x804E9C68
+
+game_flow_credits_roll.c:
+	.text       start:0x804E9C68 end:0x804EB754
+
+game_flow_credits_draw.c:
+	.text       start:0x804EB754 end:0x804ED76C
+
+game_flow_clear_save.c:
+	.text       start:0x804ED76C end:0x804EF9B8
+
+game_flow_new_game_plus.c:
+	.text       start:0x804EF9B8 end:0x804F147C
+
+game_flow_gallery_mgr.c:
+	.text       start:0x804F147C end:0x804F2ED0
+
+
+
+
 
 
 

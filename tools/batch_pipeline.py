@@ -129,6 +129,34 @@ ALL_MODULES = [
     ("game_net_versus_stat", "0x804BD9B0", "0x804BF550"),
     ("game_net_versus_leader", "0x804BF550", "0x804C0F88"),
     ("game_net_versus_award", "0x804C0F88", "0x804C2994"),
+    # Batch 19 (108..114)
+    ("game_net_replay_mgr", "0x804C2994", "0x804C4530"),
+    ("game_net_replay_data", "0x804C4530", "0x804C66C8"),
+    ("game_net_replay_play", "0x804C66C8", "0x804C8204"),
+    ("game_net_sync_clock", "0x804C8204", "0x804C9C88"),
+    ("game_net_sync_state", "0x804C9C88", "0x804CB74C"),
+    ("game_net_sync_event", "0x804CB74C", "0x804CD2F8"),
+    # Batch 20 (114..120)
+    ("game_net_friend_mgr", "0x804CD2F8", "0x804CEF84"),
+    ("game_net_friend_list", "0x804CEF84", "0x804D1400"),
+    ("game_net_friend_invite", "0x804D1400", "0x804D5F08"),
+    ("game_net_voice_chat", "0x804D5F08", "0x804D807C"),
+    ("game_net_voice_codec", "0x804D807C", "0x804D9BF8"),
+    ("game_net_voice_buffer", "0x804D9BF8", "0x804DBC84"),
+    # Batch 21 (120..126)
+    ("game_flow_title_mgr", "0x804DBC84", "0x804DD9D0"),
+    ("game_flow_title_menu", "0x804DD9D0", "0x804DF408"),
+    ("game_flow_title_logo", "0x804DF408", "0x804E2844"),
+    ("game_flow_opening_movie", "0x804E2844", "0x804E4490"),
+    ("game_flow_chapter_intro", "0x804E4490", "0x804E6510"),
+    ("game_flow_chapter_outro", "0x804E6510", "0x804E8094"),
+    # Batch 22 (126..132)
+    ("game_flow_epilogue_mgr", "0x804E8094", "0x804E9C68"),
+    ("game_flow_credits_roll", "0x804E9C68", "0x804EB754"),
+    ("game_flow_credits_draw", "0x804EB754", "0x804ED76C"),
+    ("game_flow_clear_save", "0x804ED76C", "0x804EF9B8"),
+    ("game_flow_new_game_plus", "0x804EF9B8", "0x804F147C"),
+    ("game_flow_gallery_mgr", "0x804F147C", "0x804F2ED0"),
 ]
 
 def run_cmd(cmd):
