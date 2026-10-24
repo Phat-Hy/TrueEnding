@@ -1,4 +1,46 @@
 # DeepSeek Harness Handover Dossier: Project The Maybe(Not) Last Story
+
+> ## READ THIS FIRST (state at commit `f52de56`)
+>
+> **Sections 3–5b are historical.** They contain claims that were later disproven (the CMPR luma
+> fallback, the "task vtable zeroed" theory, the `+0x2AC` state machine, the anime-track clamps).
+> **§5c supersedes all of them** — read §5c, and §5c.8 is the current resume point.
+>
+> **Where the work stands.** The Chapter-1 stall is no longer a mystery box:
+> - The hand-edited generated chunks (which had been injecting fake clamps) are re-lifted from
+>   `orig/main.dol`, and the four clamp blocks in `recomp/replacements.c` are deleted. That fixed real
+>   memory corruption: the clamps zeroed a staging buffer size, so the engine `memcpy`'d animation data
+>   to address 0 and destroyed the OS low page including `__OSCurrentThread` (§5c.1).
+> - On the faithful build the title renders, the menu advances, Chapter 1's packs decompress,
+>   `GameTask::Init` runs and reaches state 3 at ~frame 690, and then the boot thread's frame loop
+>   stops at **frame 829**. After that the guest genuinely idles: `PC = 0x805F50B0` (the SDK idle
+>   routine), `RunQueueBits = 0`, both created threads asleep with no work (§5c.6–5c.8).
+> - Three host-side bugs were found and fixed while testing: the missing retrace reschedule word, the
+>   idle predicate that refused to execute, and the stray-sentinel recovery that parked the CPU forever
+>   (§5c.8).
+>
+> **The single next target.** Stop the host-callback sentinel leak (`lr = 0xFFFFFFFC` gets saved into a
+> thread context; log line `[TLS HostCallback] Stray host sentinel ... lr=0xFFFFFFFF` fires once per
+> run), then re-answer why the boot thread stops re-entering `SequenceManager::Update` after the
+> `0x80534074` dispatch at frame 829. Do **not** re-run the three disproved experiments or the
+> interrupt-handler-only-call in §5c.8.
+>
+> **First commands.**
+> ```powershell
+> git log --oneline -8                                  # 3edb040..f52de56 are the current session
+> python tools/recomp_harness.py build-runner           # chunks are already lifted; ~1 s
+> $env:TLS_SLEEP_TAIL="1"; $env:TLS_VBLANK_PROBE="820"
+> build\recomp\tls_runner.exe --window --frames 900 --fps 60 --no-audio
+> ```
+> Reproduces the frame-829 boundary in ~15 s. If `build-recomp` writes are denied, the workspace
+> sandbox needs full file access for this session (see §5c.4 note).
+>
+> **Rules that have already cost time.** Never hand-edit `build/recomp/generated/chunks` — re-lift.
+> Never mutate guest state to "make progress" — the probes in §5c.4 exist so measurement replaces that.
+> `build/` is git-ignored, so a fresh checkout must run `python tools/recomp_harness.py lift`.
+
+---
+
 **Date**: October 24, 2026  
 **Target Title**: *The Last Story* (Wii / RVL-SLSE-USA / SLSEXJ)  
 **Workspace**: `G:\Program\Project The Maybe(Not) Last Story`  
