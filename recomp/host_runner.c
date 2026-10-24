@@ -310,12 +310,17 @@ static void host_report_runaway_slice(int frame, int frame_blocks, const char* w
  * and writes the thread state through it, so once it is junk the sleep/reschedule
  * pair cannot work and the caller spins. Sample it every block while
  * TLS_WATCH_CURRENT_THREAD=1 and name the block that changed it. */
+static u32 s_first_thread = 0; /* thread running at the first dispatch: the boot/main thread */
 static void host_watch_os_current_thread(CPUState* ctx, u32 block_pc) {
     static int s_enabled = -1;
     static u32 s_prev = 0;
     static int s_reports = 0;
     static int s_bad_reports = 0;
     static int s_have_prev = 0;
+    /* Remember the thread running at the first dispatch: that is the boot/main
+     * thread, and reporting its state at shutdown distinguishes "still blocked on
+     * a queue" from "returned, so it no longer exists". */
+    if (!s_first_thread) s_first_thread = mem_read32(ctx, 0x800000E4);
     if (s_enabled < 0) {
         s_enabled = getenv("TLS_WATCH_CURRENT_THREAD") ? 1 : 0;
     }
@@ -1031,6 +1036,13 @@ int main(int argc, char** argv) {
         printf("\n[Texture 0x90742780]: resolve_guest_pointer returned NULL!\n");
     }
     tls_dump_recent_calls();
+    if (s_first_thread) {
+        u32 bt = s_first_thread;
+        printf("\n[Runner] Boot thread 0x%08X at shutdown: state=%u susp=%d prio=%u queue=0x%08X (current=0x%08X, runbits=0x%08X)\n",
+               bt, (unsigned)mem_read16(&cpu, bt + 0x2C8), (int)mem_read32(&cpu, bt + 0x2CC),
+               mem_read32(&cpu, bt + 0x2D0), mem_read32(&cpu, bt + 0x2DC),
+               mem_read32(&cpu, 0x800000E4), mem_read32(&cpu, 0x8087FC60));
+    }
     tls_dump_sleep_queues(&cpu);
     tls_dump_watched_object(&cpu);
     tls_dump_wake_queues(&cpu);

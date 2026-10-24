@@ -353,6 +353,57 @@ i.e. what should keep handing the engine thread jobs. `TaskManager` still holds 
 two update entries (`0x80363DBC`, `0x803646C4`) at the end of the run, so the engine thread that
 should be executing them is exactly the one parked on `0x8087D610`.
 
+### 5c.6 The scheduler is consistent at the end — the guest has nothing left to run
+
+The worker's wait function was then read from the generated code rather than from a comment tail, and
+it is a normal idle-worker loop, not a broken wait:
+
+```
+0x8071D950: r30 = mgr; disableInterrupts; *(u8*)(mgr+40) = 0
+loop:
+0x8071D97C: OSSleepThread(mgr+44)      ; 0x8087D610
+0x8071D988: bl 0x8071D5D0              ; pop a pending job (three lists at mgr+0/+12/+24)
+0x8071D990: if (job != 0) -> have job
+0x8071D994: if (*(u8*)(mgr+40)) -> leave
+            else loop
+```
+
+With `mgr = 0x8087D5E4` the object reads: three empty job lists, `job(+0x24)=0`,
+`flag(+0x28)=0`, and the worker enqueued on `+0x2C`. That is a healthy worker with no work to do.
+Its queue was signalled 20 times, all at or before frame 307; after that nothing posts work.
+
+`TLS_WATCH_CURRENT_THREAD` now also records the thread running at the first dispatch and prints it at
+shutdown, which settles what the final state is:
+
+```
+Boot thread 0x807CB658 at shutdown: state=2 susp=0 prio=16 queue=0x00000000
+                                     (current=0x807CB658, runbits=0x00000000)
+```
+
+So the boot/main thread is the current thread, marked RUNNING, with `RunQueueBits == 0`, sitting in
+the OS idle path. The two created threads are both legitimately idle. **Nothing is corrupted and no
+wakeup is missing at the end: the guest simply has no runnable work**, which is why run lengths past
+frame ~840 are a quiet idle loop reporting 60 FPS for free.
+
+That moves the question one step upstream again, and pins it to the sequence layer. The sequence
+manager is *not* stalled before Chapter 1, which §5b could not tell: it switches into sequence
+`0x0C` and the active object is the GameTask (vtable `0x8078A3D0`, slots `0x80366454` IsReady /
+`0x80366E54` Init / `0x80368280` Update / `0x8036B7F4` Draw):
+
+```
+Update #442 ... active=0x00000000 next=0x0000000C
+Update #443 ... active=0x81116720 ('<null>' vt=0x8078A3D0) next=0x00000000
+Update #450 ... active=0x81116720 ('<null>' vt=0x8078A3D0) next=0x00000000
+[GameTask] Init #9 ENTER task=0x81116720 state=0 (last=0)
+```
+
+So Chapter 1's task *is* the active sequence, but `Init` is re-entered every frame with `state = 0`
+and never advances, so Update/Draw never run and the two engine threads stay idle. The next defect to
+explain is therefore inside `GameTask::Init`'s state-0 gate (`f4f0=` / `f470=` in the Init log), not
+in the sequence handoff.
+
+
+
 
 ### 5c.3 Remaining fake-progress in the HLE (next to remove)
 
