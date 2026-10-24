@@ -890,6 +890,13 @@ seeing where the previous frame's content repeats. (2) whether the write should 
 tiled) - the observed picture arrives at all, which means the tile layout is at least close, and a
 linear-vs-tiled A/B on the same frame is the quickest way to tell.
 
+That A/B now exists: `TLS_EFB_LINEAR=1` writes the copy rows linearly (R,G,B,A) instead of tiling, so both
+layouts can be produced from the same frame. First result at frame 2340 with `TLS_FB_RGBA8=1`: the tiled
+write gives 15827 unique colours and a recognisable (doubled) game frame; the linear write gives 14985
+unique colours but 93% of the image decodes as pure white. Neither is right yet, so the destination
+row-pitch question (1) is still the leading candidate - compare `build/recomp/framebuffer_0.ppm` between
+the two runs before changing anything else.
+
 **What the rest of the work needs** (unchanged): on `0x52` read back the current EFB region from the D3D11 render target
 (the screenshot path in `gfx_d3d11.c` already does `CopyResource` + `Map(READ)` into a staging texture)
 and convert it to the destination format the register names (RGBA8 first; RGB565 next), then write it into
