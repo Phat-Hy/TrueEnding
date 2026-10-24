@@ -811,12 +811,29 @@ was in MEM2 - which is exactly the black interior and pink sky-coloured region o
 `10-title-hero-cave-frame2200.png`. `GXCopyDisp` (0x805... via `recomp/replacements.c:5620`) runs the
 original guest code, so the *display* copy path exists; only the EFB->texture path is missing.
 
-**What implementing it needs** (next task, not started): record `0x49`/`0x4A`/`0x4B`, and on `0x52`
-read back the current EFB region from the D3D11 render target (the screenshot path in `gfx_d3d11.c`
-already does `CopyResource` + `Map(READ)` into a staging texture) and convert it to the GX destination
-format the register names (RGBA8/RGB565 at minimum), then write it into guest memory at the destination
-address with the requested stride. That single feature covers the water, the menu blur/reflection and
-most effect textures that currently sample uninitialised memory.
+**The copy registers are decoded** (`tools/decode_bp_copy.py`, validated against the two copies the
+game issues every frame at 2340):
+
+| Register | Value | Meaning |
+|---|---|---|
+| `0x49` | `0x000000` | source left/top = (0,0) |
+| `0x4A` | `0x06FE7F` | source right/bottom = (639,447) - the full frame |
+| `0x4A` | `0x01BC9F` | source right/bottom = (159,111) - quarter-res reflection |
+| `0x4B` | `0x81C68E` | dest phys `0x1038D1C0` = guest `0x9038D1C0`, format 0 (RGBA8) |
+| `0x4B` | `0x829B7F` | dest phys `0x10536FE0` = guest `0x90536FE0`, format 0 (RGBA8) |
+| `0x52` | `0x010A43` / `0x01003B` | execute the copy |
+
+Layout: `0x49`/`0x4A` hold `x` in bits 0..9 and `y` in bits 10..19; `0x4B` holds **dest address >> 5 in
+bits 0..23** (the low five bits are implicit, which is why a 22-bit field cannot reach MEM2) and the format
+in bits 24..26; the guest address is `physical + 0x80000000` (flat model). Both destinations land in MEM2
+next to the other texture allocations, which is the cross-check that the decode is right.
+
+**What implementing it needs** (next task, not started): record `0x49`/`0x4A`/`0x4B` in
+`gx_pipeline_process_bp()`, and on `0x52` read back the current EFB region from the D3D11 render target
+(the screenshot path in `gfx_d3d11.c` already does `CopyResource` + `Map(READ)` into a staging texture)
+and convert it to the destination format the register names (RGBA8 first; RGB565 next), then write it into
+guest memory at `dest`, honouring the source rectangle. That single feature covers the water, the menu
+blur/reflection and most effect textures that currently sample uninitialised memory.
 
 **Per-batch dump probe (new, inert unless set).** `TLS_BATCH_DUMP=<frame>` prints every draw batch of
 that frame with `vtx`, texture address/size/format, `blend/src/dst/sub`, `persp/zwrite/ztest` and the
