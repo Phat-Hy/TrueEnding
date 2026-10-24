@@ -14,8 +14,10 @@
 > `asm/ldscript.lcf` defines). After the fix:
 > - a 2400-frame run keeps `SequenceManager::Update` to frame 2398, `GameTask::Init` ends at 1032 and
 >   `GameTask::Update`/`Draw` run to 2398, with 200k–262k GX vertices per frame;
-> - the Chapter 1 (Gurgan Cave) scene renders: water, rock walls, sky, moving camera. Reference frames
->   in `build/recomp/d3d11_screenshot_{1100,1200,1500}.ppm`;
+> - the Chapter 1 (Gurgan Cave) scene renders: water, rock walls, sky, moving camera — and the title menu
+>   before it. Evidence frames: `docs/evidence/08-title-menu-frame500.png`,
+> `09-chapter1-cave-frame1200.png`, `10-chapter1-cave-frame1500.png` (the runner also writes
+> `build/recomp/d3d11_screenshot_*.ppm` at frames 100…1800 on every windowed run);
 > - no stray sentinel, no non-code dispatch after the two known boot-time ones, no exception.
 > - `TLS_ARENALO=0x8088A000` restores the old behaviour exactly (`Init` 31 calls, last 829, stray
 >   sentinel), so the fix is A/B verifiable.
@@ -614,10 +616,12 @@ frame 1500: GX 99774 vtx (91 batches) | frame 2160: GX 262143 vtx (62 batches)
 ```
 
 No stray sentinel, no non-code dispatch after the two known boot-time ones, no CPU exception, and the
-Gurgan Cave scene is on screen (`build/recomp/d3d11_screenshot_1100.ppm`, `_1200`, `_1500`: rock walls,
-water with a sky reflection, a moving camera). A/B with `TLS_ARENALO=0x8088A000` restores the old
-signature byte for byte — `Init calls=31 last=829`, `SequenceManager calls=472 last=829`, stray sentinel
-— so the causal link is measured, not argued.
+title menu and the Gurgan Cave scene are on screen: `docs/evidence/08-title-menu-frame500.png` (MENU /
+CONTINUE / NEW GAME / MULTIPLAYER over the cave), `09-chapter1-cave-frame1200.png` and
+`10-chapter1-cave-frame1500.png` (rock walls, water with a sky reflection, a moving camera). A/B with
+`TLS_ARENALO=0x8088A000` restores the old signature byte for byte — `Init calls=31 last=829`,
+`SequenceManager calls=472 last=829`, stray sentinel — so the causal link is measured, not argued.
+`--headless --frames 900` also passes frame 830 (`GameTask::Init` still running at 898).
 
 **New probes and tools (all inert unless set):**
 
