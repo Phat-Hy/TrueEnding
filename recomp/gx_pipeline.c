@@ -257,6 +257,13 @@ void gx_pipeline_set_pointer_resolver(GxResolvePtrFunc func) {
     s_resolve_ptr = func;
 }
 
+/* Per-display-list dump (two lines each, thousands per frame). TLS_PIPELINE_TRACE=1. */
+static int tls_pipeline_trace_enabled(void) {
+    static int s_on = -1;
+    if (s_on < 0) s_on = getenv("TLS_PIPELINE_TRACE") ? 1 : 0;
+    return s_on;
+}
+
 void gx_pipeline_init(void) {
     memset(s_vtx_desc, 0, sizeof(s_vtx_desc));
     memset(s_vtx_fmt, 0, sizeof(s_vtx_fmt));
@@ -1649,7 +1656,8 @@ void gx_pipeline_process_display_list(const uint8_t* data, uint32_t size) {
 
     if (size > 64) {
         static uint32_t s_large_dl_proc = 0;
-        if (++s_large_dl_proc <= 20 || s_large_dl_proc % 50 == 0) {
+        ++s_large_dl_proc;
+        if (tls_pipeline_trace_enabled() && (s_large_dl_proc <= 20 || s_large_dl_proc % 50 == 0)) {
             printf("[GX Pipeline DL] #%u (frame %u): size=%u bytes, first bytes:\n   ",
                    s_large_dl_proc, s_gx_frame_idx, size);
             for (uint32_t b = 0; b < 32 && b < size; b++) printf("%02X ", data[b]);

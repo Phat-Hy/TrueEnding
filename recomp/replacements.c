@@ -423,6 +423,154 @@ static u32 s_latched_cl_release = 0;
 static u8 s_controller_button_bits = 0;
 static u32 s_controller_poll_count = 0;
 
+/* ---------------------------------------------------------------------------
+ * Deterministic host input script.
+ *
+ * The runner used to advance the title with two synthetic triggers: `sim_press`
+ * (0x800A555C action 4 returned "pressed" on call counts 10/50/130/190) and a
+ * hardcoded headless press schedule (frames 250..265, 460..475, 800..815). Both
+ * fabricated the *answer* instead of the *input*, so the engine's own action
+ * evaluator (0x800DEEDC) never ran and the menu state machine walked modes
+ * 1->25 without ever handing the sequence over - and no run could reach gameplay.
+ *
+ * This drives the real input path instead: frame-indexed button windows are ORed
+ * into the same host controller state the keyboard fills, so KPADRead/PadManager
+ * and the engine's edge bookkeeping see ordinary button presses.
+ *
+ *   TLS_INPUT_SCRIPT="640-652:A,900-912:DOWN,1000-1012:A"
+ *
+ * Frames are inclusive, buttons are separated by '+' (e.g. 700-710:A+DOWN).
+ * ------------------------------------------------------------------------- */
+#define TLS_INPUT_SCRIPT_MAX 32
+typedef struct {
+    int start;
+    int end;
+    u32 core;
+    u32 cl;
+} TlsScriptedPress;
+
+static TlsScriptedPress s_script[TLS_INPUT_SCRIPT_MAX];
+static int s_script_count = -1;
+
+static bool tls_name_eq(const char* name, size_t len, const char* want) {
+    size_t n = strlen(want);
+    if (len != n) return false;
+    for (size_t i = 0; i < len; i++) {
+        char a = name[i], b = want[i];
+        if (a >= 'a' && a <= 'z') a = (char)(a - 'a' + 'A');
+        if (b >= 'a' && b <= 'z') b = (char)(b - 'a' + 'A');
+        if (a != b) return false;
+    }
+    return true;
+}
+
+static u32 tls_button_core_mask(const char* name, size_t len) {
+#define BTN_MATCH(s) tls_name_eq(name, len, s)
+    if (BTN_MATCH("A"))     return WPAD_BUTTON_A;
+    if (BTN_MATCH("B"))     return WPAD_BUTTON_B;
+    if (BTN_MATCH("1"))     return WPAD_BUTTON_1;
+    if (BTN_MATCH("2"))     return WPAD_BUTTON_2;
+    if (BTN_MATCH("UP"))    return WPAD_BUTTON_UP;
+    if (BTN_MATCH("DOWN"))  return WPAD_BUTTON_DOWN;
+    if (BTN_MATCH("LEFT"))  return WPAD_BUTTON_LEFT;
+    if (BTN_MATCH("RIGHT")) return WPAD_BUTTON_RIGHT;
+    if (BTN_MATCH("PLUS") || BTN_MATCH("START")) return WPAD_BUTTON_PLUS;
+    if (BTN_MATCH("MINUS")) return WPAD_BUTTON_MINUS;
+#undef BTN_MATCH
+    return 0;
+}
+
+static u32 tls_button_cl_mask(const char* name, size_t len) {
+#define BTN_MATCH(s) tls_name_eq(name, len, s)
+    if (BTN_MATCH("A"))     return WPAD_CL_BUTTON_A;
+    if (BTN_MATCH("B"))     return WPAD_CL_BUTTON_B;
+    if (BTN_MATCH("X"))     return WPAD_CL_BUTTON_X;
+    if (BTN_MATCH("Y"))     return WPAD_CL_BUTTON_Y;
+    if (BTN_MATCH("UP"))    return WPAD_CL_BUTTON_UP;
+    if (BTN_MATCH("DOWN"))  return WPAD_CL_BUTTON_DOWN;
+    if (BTN_MATCH("LEFT"))  return WPAD_CL_BUTTON_LEFT;
+    if (BTN_MATCH("RIGHT")) return WPAD_CL_BUTTON_RIGHT;
+    if (BTN_MATCH("PLUS") || BTN_MATCH("START")) return WPAD_CL_BUTTON_PLUS;
+    if (BTN_MATCH("MINUS")) return WPAD_CL_BUTTON_MINUS;
+    if (BTN_MATCH("ZL") || BTN_MATCH("L")) return WPAD_CL_BUTTON_ZL;
+    if (BTN_MATCH("ZR") || BTN_MATCH("R")) return WPAD_CL_BUTTON_ZR;
+#undef BTN_MATCH
+    return 0;
+}
+
+/* Parse TLS_INPUT_SCRIPT once. Returns the number of presses loaded. */
+static int tls_input_script_load(void) {
+    if (s_script_count >= 0) return s_script_count;
+    s_script_count = 0;
+    const char* spec = getenv("TLS_INPUT_SCRIPT");
+    if (!spec || !*spec) return 0;
+
+    char buf[512];
+    strncpy(buf, spec, sizeof(buf) - 1);
+    buf[sizeof(buf) - 1] = '\0';
+    printf("[Input] deterministic script: %s\n", buf);
+    fflush(stdout);
+
+    for (char* item = strtok(buf, ","); item && s_script_count < TLS_INPUT_SCRIPT_MAX;
+         item = strtok(NULL, ",")) {
+        while (*item == ' ') item++;
+        char* colon = strchr(item, ':');
+        if (!colon) continue;
+        *colon = '\0';
+        char* range = item;
+        char* buttons = colon + 1;
+        char* dash = strchr(range, '-');
+        int start = atoi(range);
+        int end = dash ? atoi(dash + 1) : start;
+        if (end < start) { int tmp = start; start = end; end = tmp; }
+        if (start < 0) continue;
+
+        u32 core = 0, cl = 0;
+        /* "0xHEX" presses a literal raw mask on both devices. Single-bit masks are
+         * how the engine's action ids are decoded without guessing which button
+         * produced which action. */
+        if (buttons[0] == '0' && (buttons[1] == 'x' || buttons[1] == 'X')) {
+            u32 raw = (u32)strtoul(buttons, NULL, 0);
+            core = raw;
+            cl = raw;
+        }
+        for (char* btn = (core || cl) ? NULL : strtok(buttons, "+"); btn; btn = strtok(NULL, "+")) {
+            size_t len = strlen(btn);
+            core |= tls_button_core_mask(btn, len);
+            cl |= tls_button_cl_mask(btn, len);
+        }
+        if (!core && !cl) {
+            printf("[Input] script entry '%s' has no known button\n", buttons);
+            continue;
+        }
+        s_script[s_script_count].start = start;
+        s_script[s_script_count].end = end;
+        s_script[s_script_count].core = core;
+        s_script[s_script_count].cl = cl;
+        s_script_count++;
+        /* 'A' on the Classic Controller maps to A|Y in this runner's keyboard table
+         * (the game's own bindings expect the Y alias), so mirror it for scripts. */
+        if (cl & WPAD_CL_BUTTON_A) s_script[s_script_count - 1].cl |= WPAD_CL_BUTTON_Y;
+    }
+    for (int i = 0; i < s_script_count; i++) {
+        printf("[Input]   frames %d-%d -> core=0x%08X cl=0x%08X\n",
+               s_script[i].start, s_script[i].end, s_script[i].core, s_script[i].cl);
+    }
+    fflush(stdout);
+    return s_script_count;
+}
+
+static void tls_input_script_apply(int frame, u32* core, u32* cl) {
+    if (tls_input_script_load() == 0) return;
+    for (int i = 0; i < s_script_count; i++) {
+        if (frame >= s_script[i].start && frame <= s_script[i].end) {
+            *core |= s_script[i].core;
+            *cl |= s_script[i].cl;
+        }
+    }
+}
+
+
 void tls_input_new_frame(void) {
     s_latched_core_trig = 0;
     s_latched_cl_trig = 0;
@@ -646,19 +794,10 @@ int tls_service_controller_input(CPUState* ctx) {
     }
 
     extern int g_runner_current_frame;
-    extern bool g_interactive_mode;
-    if (!g_interactive_mode) {
-        // In headless testing:
-        // Strap screen is active frame 185+, timer >= 45 at frame 230+. Simulate A press at 250..265.
-        // Title Screen is active frame 380+. Simulate A press at 460..475.
-        // New Game / Chapter 1 advance at 800..815.
-        if ((g_runner_current_frame >= 250 && g_runner_current_frame <= 265) ||
-            (g_runner_current_frame >= 460 && g_runner_current_frame <= 475) ||
-            (g_runner_current_frame >= 800 && g_runner_current_frame <= 815)) {
-            cur_core |= WPAD_BUTTON_A | WPAD_BUTTON_2;
-            cur_cl   |= WPAD_CL_BUTTON_A | WPAD_CL_BUTTON_Y;
-        }
-    }
+    /* Scripted presses land in the same state the keyboard fills, so the guest's own
+     * action evaluator sees ordinary edges. Replaces the old hardcoded "press A at
+     * frames 250/460/800" schedule, which produced presses the engine never asked for. */
+    tls_input_script_apply(g_runner_current_frame, &cur_core, &cur_cl);
 #endif
 
     u32 new_core_trig = cur_core & ~s_last_core_hold;
@@ -1117,6 +1256,15 @@ int tls_ipc_service_callback(CPUState* ctx) {
 int tls_service_message_queues(CPUState* ctx) {
     (void)ctx;
     return 0;
+}
+
+/* High-frequency draw-path telemetry. These prints fire per draw call (thousands
+ * per frame); a single run produced ~120k lines and spent milliseconds per frame in
+ * synchronous console I/O. TLS_DRAW_TRACE=1 restores them. */
+static int tls_draw_trace_enabled(void) {
+    static int s_on = -1;
+    if (s_on < 0) s_on = getenv("TLS_DRAW_TRACE") ? 1 : 0;
+    return s_on;
 }
 
 /* Ring buffer of the most recent dispatched guest functions, for stall diagnosis.
@@ -2080,7 +2228,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // fn_80071AFC: Display copy and frame queue submission
         case 0x80071AFC: {
             static int s_71afc_count = 0;
-            if (++s_71afc_count <= 20 || s_71afc_count % 300 == 0) {
+            if (tls_draw_trace_enabled() && (++s_71afc_count <= 20 || s_71afc_count % 300 == 0)) {
                 printf("[TLS 80071AFC DisplayCopy] #%d lr=0x%08X r3=0x%08X\n",
                        s_71afc_count, ctx->lr, ctx->gpr[3]);
                 fflush(stdout);
@@ -2104,7 +2252,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // Diagnostic monitoring for resource pipeline
         case 0x8046DD60: {
             static int s_dd60_cnt = 0;
-            if (++s_dd60_cnt <= 10 || s_dd60_cnt % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_dd60_cnt <= 10 || s_dd60_cnt % 60 == 0)) {
                 u32 sm = ctx->gpr[3];
                 u32 q40 = sm ? mem_read32(ctx, sm + 0x4040) : 0;
                 u32 cnt38 = sm ? mem_read32(ctx, sm + 0x4038) : 0;
@@ -2205,7 +2353,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // 0x800A0A68: Gauge / Actor node map registration
         case 0x800A0A68: {
             static u32 s_a68_cnt = 0;
-            if (++s_a68_cnt <= 20 || s_a68_cnt % 50 == 0) {
+            if (tls_draw_trace_enabled() && (++s_a68_cnt <= 20 || s_a68_cnt % 50 == 0)) {
                 u32 slot = ctx->gpr[3];
                 u32 k0 = slot ? mem_read32(ctx, slot) : 0;
                 u32 k1 = slot ? mem_read32(ctx, slot + 4) : 0;
@@ -2241,7 +2389,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // Bypassed to eliminate all infinite tree rotation cycles on circular or corrupted UI gauge nodes
         case 0x800A1F84: {
             static u32 s_1f84_cnt = 0;
-            if (++s_1f84_cnt <= 10 || s_1f84_cnt % 50 == 0) {
+            if (tls_draw_trace_enabled() && (++s_1f84_cnt <= 10 || s_1f84_cnt % 50 == 0)) {
                 printf("[TLS RBTree] Bypassed _Rb_tree_rebalance_for_erase (#%u, z=0x%08X root=0x%08X lr=0x%08X)\n",
                        s_1f84_cnt, ctx->gpr[3], ctx->gpr[4], ctx->lr);
                 fflush(stdout);
@@ -3290,7 +3438,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 return 1;
             }
             static int s_6e8c_calls = 0;
-            if (++s_6e8c_calls <= 10 || s_6e8c_calls % 50 == 0) {
+            if (tls_draw_trace_enabled() && (++s_6e8c_calls <= 10 || s_6e8c_calls % 50 == 0)) {
                 printf("[TLS 800A6E8C] Relocating script stream #%d: desc=0x%08X ptr=0x%08X len=%u (lr=0x%08X)\n",
                        s_6e8c_calls, desc, ptr, len, ctx->lr);
                 fflush(stdout);
@@ -3379,13 +3527,95 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0; // normal valid traversal
         }
 
-        // Game pad action trigger check (0x800A555C)
-        case 0x800A555C: {
-            u32 action = ctx->gpr[5];
-            static int s_a555c_calls = 0;
-            if (++s_a555c_calls <= 10 || s_a555c_calls % 120 == 0) {
-                printf("[TLS 0x800A555C] action=%u\n", action);
+        /* PadManager update (0x800DDD18): the only code in the DOL that stores into
+         * the per-channel action bitmask the whole input API queries
+         * (`*(0x8087EBF8) + 0x3C28 + chan*4`). When menus ignore real button presses,
+         * the first thing to establish is whether this runs at all and with which
+         * object, so TLS_PADUPDATE_PROBE=1 names the call. */
+        case 0x800DDD18: {
+            static int s_pu_probe = -1;
+            static int s_pu_n = 0;
+            if (s_pu_probe < 0) s_pu_probe = getenv("TLS_PADUPDATE_PROBE") ? 1 : 0;
+            if (s_pu_probe && (++s_pu_n <= 6 || s_pu_n % 120 == 0)) {
+                extern int g_runner_current_frame;
+                u32 pm = mem_read32(ctx, 0x8087EBF8);
+                printf("[TLS PadUpdate] #%d frame=%d r3=0x%08X r4=0x%08X pm=0x%08X "
+                       "mask0=0x%08X hold=0x%04X trig=0x%04X (lr=0x%08X)\n",
+                       s_pu_n, g_runner_current_frame, ctx->gpr[3], ctx->gpr[4], pm,
+                       pm ? mem_read32(ctx, pm + 15400) : 0,
+                       s_ctrl_state.core_hold, s_ctrl_state.core_trig, ctx->lr);
                 fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        /* memset (0x80006648). The pad update clears the action tables with three
+         * 16-byte memsets at PadManager+0x3C28/0x3C38/0x3C48, so the first memset
+         * targets the table the whole input API queries. Printing those names the
+         * manager the update actually uses; if it differs from *(0x8087EBF8), input
+         * can never be seen by the menus. TLS_MEMSET_PROBE=1. */
+        case 0x80006648: {
+            static int s_ms_probe = -1;
+            static int s_ms_n = 0;
+            if (s_ms_probe < 0) s_ms_probe = getenv("TLS_MEMSET_PROBE") ? 1 : 0;
+            if (s_ms_probe && ctx->gpr[4] == 0 && ctx->gpr[5] == 16 && s_ms_n < 24 && ctx->lr == 0x800DDDD0u) {
+                extern int g_runner_current_frame;
+                s_ms_n++;
+                printf("[TLS MemsetProbe] frame=%d dst=0x%08X (global=r13-26280) mask_before=0x%08X hold=0x%04X\n",
+                       g_runner_current_frame, ctx->gpr[3], ctx->gpr[13] - 26280u,
+                       mem_read32(ctx, ctx->gpr[3]), s_ctrl_state.core_hold);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // Game pad action trigger check (0x800A555C)
+        case 0x800A555C: {            u32 action = ctx->gpr[5];
+            static int s_a555c_calls = 0;
+            /* which manager the caller passes and what its action table holds: two
+             * PadManager instances would make "input arrives but nothing reacts" */
+            static int s_a555c_probe = -1;
+            if (s_a555c_probe < 0) s_a555c_probe = getenv("TLS_ACTION_PROBE") ? 1 : 0;
+            if (tls_draw_trace_enabled() && (++s_a555c_calls <= 10 || s_a555c_calls % 120 == 0)) {
+                printf("[TLS 0x800A555C] action=%u mgr=0x%08X chan=%u mask=0x%08X\n",
+                       action, ctx->gpr[3], ctx->gpr[4],
+                       (ctx->gpr[3] && resolve_guest_pointer(ctx, ctx->gpr[3] + 15400))
+                           ? mem_read32(ctx, ctx->gpr[3] + 15400) : 0);
+                fflush(stdout);
+            }
+            if (s_a555c_probe) {
+                extern int g_runner_current_frame;
+                /* TLS_ACTION_TRACE="395-405" prints every call inside that frame window. */
+                static int s_trace_lo = -2, s_trace_hi = -1;
+                if (s_trace_lo == -2) {
+                    const char* w = getenv("TLS_ACTION_TRACE");
+                    if (w) sscanf(w, "%d-%d", &s_trace_lo, &s_trace_hi);
+                    else s_trace_lo = -1;
+                }
+                if (s_trace_lo >= 0 && g_runner_current_frame >= s_trace_lo && g_runner_current_frame <= s_trace_hi) {
+                    u32 pm = ctx->gpr[13] - 26280u;
+                    u32 mg = resolve_guest_pointer(ctx, pm) ? mem_read32(ctx, pm) : 0;
+                    u32 mask = mg ? mem_read32(ctx, mg + 15400 + (ctx->gpr[4] & 3) * 4) : 0;
+                    u32 real_action = 0;
+                    u32 map = 0x807328A8u;
+                    if (resolve_guest_pointer(ctx, map + (action & 31) * 4)) {
+                        real_action = mem_read32(ctx, map + (action & 31) * 4);
+                    }
+                    printf("[TLS ActionTrace] frame=%d action=%u real=%u chan=%u mask=0x%08X bit=%d\n",
+                           g_runner_current_frame, action, real_action, ctx->gpr[4], mask,
+                           (mask >> (real_action & 31)) & 1);
+                    fflush(stdout);
+                }
+                u32 mgr = ctx->gpr[3];
+                u32 m0 = (mgr && resolve_guest_pointer(ctx, mgr + 15400)) ? mem_read32(ctx, mgr + 15400) : 0;
+                static int s_last_f = -1;
+                if (m0 != 0 && g_runner_current_frame != s_last_f) {
+                    s_last_f = g_runner_current_frame;
+                    printf("[TLS ActionProbe] frame=%d action=%u mgr=0x%08X mask0=0x%08X bit=%d hold=0x%04X\n",
+                           g_runner_current_frame, action, mgr, m0, (m0 >> (action & 31)) & 1,
+                           s_ctrl_state.core_hold);
+                    fflush(stdout);
+                }
             }
             // Filter Home button (action 17 / 0x11)
             if (action == 17 || action == 0x11) {
@@ -3393,42 +3623,51 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 ctx->pc = ctx->lr;
                 return 1;
             }
-            if (action == 4) { // Action 4 = Title Screen "Push Any Button" / Confirm / A
-                tls_service_controller_input(ctx);
-                static int s_act4_count = 0;
-                s_act4_count++;
-                extern bool g_interactive_mode;
-                bool sim_press = (!g_interactive_mode && (s_act4_count == 10 || s_act4_count == 50 || s_act4_count == 130 || s_act4_count == 190));
-                if (sim_press) {
-                    static int s_push_log = 0;
-                    if (++s_push_log <= 15) {
-                        printf("[TLS Input] 0x800A555C (Action 4) Push Any Button triggered! (#%d sim=%d) cl_hold=0x%X core_hold=0x%X trig=0x%X\n",
-                               s_push_log, sim_press, s_ctrl_state.cl_hold, s_ctrl_state.core_hold, s_ctrl_state.cl_trig);
-                        fflush(stdout);
-                    }
-                    ctx->gpr[3] = 1;
-                    ctx->pc = ctx->lr;
-                    return 1;
-                }
-                // Real input must go through the game's own action evaluator (0x800DEEDC).
-                // Returning 1 here reported "pressed" on every query while skipping that
-                // evaluator's internal edge bookkeeping, so the action never transitioned
-                // back to released: the title logged "Push Any Button triggered" and then
-                // sat in mode 1 forever instead of advancing to the title menu.
-            }
+            /* The `sim_press` fabrication that lived here (action 4 returned "pressed"
+             * on call counts 10/50/130/190 while the runner was headless) is gone: it
+             * answered the question instead of supplying the input, so the engine's
+             * action evaluator never ran and the title could not hand the sequence
+             * over. Input now comes only from the host state that TLS_INPUT_SCRIPT and
+             * the keyboard feed, and the guest evaluates it itself. */
             return 0; // Run original code naturally via 0x800DEEDC (handles Dpad, sticks, all buttons)
         }
 
         // Game pad button trigger query by action (0x800DEEDC)
         case 0x800DEEDC: {
-            u32 action_id = ctx->gpr[5];
-            if (action_id == 11 || action_id == 3) { // Action 11 (Push Any Button), Action 3 (Confirm / Button A)
-                tls_service_controller_input(ctx);
-                if ((s_ctrl_state.cl_trig & (WPAD_CL_BUTTON_A | WPAD_CL_BUTTON_PLUS)) ||
-                    (s_ctrl_state.core_trig & (WPAD_BUTTON_A | WPAD_BUTTON_2 | WPAD_BUTTON_PLUS))) {
-                    ctx->gpr[3] = 1;
-                    ctx->pc = ctx->lr;
-                    return 1;
+            /* This used to synthesize "pressed" for actions 11/3 (push-any-button and
+             * confirm) as soon as any trigger bit was set, which skipped the evaluator's
+             * own latch/edge bookkeeping the menus depend on. Supplying the input state
+             * is enough; the guest decides. */
+            /* The evaluator itself is trivial (`1 << action` tested against a per-channel
+             * action bitmask at PadManager+0x3C28). When the menus ignore real input the
+             * question is always whether that bitmask carries the press, so read it back:
+             * TLS_PAD_PROBE=1 prints it whenever it changes, with the host state beside it. */
+            static int s_pad_probe = -1;
+            if (s_pad_probe < 0) s_pad_probe = getenv("TLS_PAD_PROBE") ? 1 : 0;
+            if (s_pad_probe) {
+                extern int g_runner_current_frame;
+                /* The action API loads its manager with `lwz r3, -26280(r13)`; use the
+                 * guest's own r13 instead of assuming the SDA base, so the probe cannot read
+                 * a different word than the code does. */
+                u32 pad_global = ctx->gpr[13] - 26280u;
+                u32 pad_mgr = resolve_guest_pointer(ctx, pad_global) ? mem_read32(ctx, pad_global) : 0;
+                u32 chan = ctx->gpr[4];
+                u32 action = ctx->gpr[5];
+                u32 mask = (pad_mgr && chan < 4 && resolve_guest_pointer(ctx, pad_mgr + 15400 + chan * 4))
+                               ? mem_read32(ctx, pad_mgr + 15400 + chan * 4) : 0;
+                static int s_last_frame = -1;
+                static u32 s_last_mask = 0xDEADBEEF;
+                /* One line per frame (first query of that frame) plus any mask change:
+                 * per-change-only logging hides presses when the queried action ids
+                 * repeat, which is exactly when "did my press reach the pad" matters. */
+                if (g_runner_current_frame != s_last_frame || mask != s_last_mask) {
+                    s_last_frame = g_runner_current_frame;
+                    s_last_mask = mask;
+                    printf("[TLS PadProbe] frame=%d pad=0x%08X chan=%u action=%u mask=0x%08X bit=%d "
+                           "hold=0x%04X trig=0x%04X\n",
+                           g_runner_current_frame, pad_mgr, chan, action, mask,
+                           (mask >> (action & 31)) & 1, s_ctrl_state.core_hold, s_ctrl_state.core_trig);
+                    fflush(stdout);
                 }
             }
             return 0; // Run original code
@@ -3445,7 +3684,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // atn::LoadScene task update (0x80477D60)
         case 0x80477D60: {
             static int s_loadscene_calls = 0;
-            if (++s_loadscene_calls <= 20 || s_loadscene_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_loadscene_calls <= 20 || s_loadscene_calls % 60 == 0)) {
                 printf("[TLS LoadScene] #%d task=0x%08X scene=0x%08X (lr=0x%08X)\n",
                        s_loadscene_calls, ctx->gpr[3], ctx->gpr[4], ctx->lr);
                 fflush(stdout);
@@ -3588,7 +3827,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         case 0x800F26D4: {
             u32 obj = ctx->gpr[3];
             static int s_vt_calls = 0;
-            if (++s_vt_calls <= 10 || s_vt_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_vt_calls <= 10 || s_vt_calls % 60 == 0)) {
                 printf("[TLS ViewTask] Init #%d obj=0x%08X (lr=0x%08X)\n", s_vt_calls, obj, ctx->lr);
                 fflush(stdout);
             }
@@ -3598,7 +3837,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // ViewTask::CheckResources (0x800F3490)
         case 0x800F3490: {
             static int s_vtr_calls = 0;
-            if (++s_vtr_calls <= 10 || s_vtr_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_vtr_calls <= 10 || s_vtr_calls % 60 == 0)) {
                 u32 obj = ctx->gpr[3];
                 printf("[TLS ViewTask] CheckResources (800F3490) #%d obj=0x%08X (lr=0x%08X)\n",
                        s_vtr_calls, obj, ctx->lr);
@@ -3610,7 +3849,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // ViewTask::CheckPending (0x800F3B4C)
         case 0x800F3B4C: {
             static int s_vtp_calls = 0;
-            if (++s_vtp_calls <= 10 || s_vtp_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_vtp_calls <= 10 || s_vtp_calls % 60 == 0)) {
                 u32 obj = ctx->gpr[3];
                 printf("[TLS ViewTask] CheckPending (800F3B4C) #%d obj=0x%08X (lr=0x%08X)\n",
                        s_vtp_calls, obj, ctx->lr);
@@ -3721,7 +3960,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 state = task ? mem_read32(ctx, task + 0x54e4) : 0;
             u32 prev = task ? mem_read32(ctx, task + 0x54e8) : 0;
             u32 timer = task ? mem_read32(ctx, task + 0x54ec) : 0;
-            if (++s_game_updates <= 10 || s_game_updates % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_game_updates <= 10 || s_game_updates % 60 == 0)) {
                 printf("[TLS GameTask] Update #%d task=0x%08X state=%u prev=%u timer=%u (lr=0x%08X)\n",
                        s_game_updates, task, state, prev, timer, ctx->lr);
                 fflush(stdout);
@@ -3737,7 +3976,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 state = task ? mem_read32(ctx, task + 0x54e4) : 0;
             u32 f8a0 = mem_read32(ctx, 0x8087F8A0);
             u32 t48 = f8a0 ? mem_read32(ctx, f8a0 + 0x48) : 0;
-            if (++s_game_draws <= 10 || s_game_draws % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_game_draws <= 10 || s_game_draws % 60 == 0)) {
                 u32 r868 = task ? mem_read32(ctx, task + 0x868) : 0;
                 u32 r56d4 = task ? mem_read32(ctx, task + 0x56d4) : 0;
                 u32 r5590 = task ? mem_read32(ctx, task + 0x5590) : 0;
@@ -3783,7 +4022,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // 0x802368B0 (RenderQueue::Dispatch)
         case 0x802368B0: {
             static int s_rq_disp = 0;
-            if (++s_rq_disp <= 10 || s_rq_disp % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_rq_disp <= 10 || s_rq_disp % 60 == 0)) {
                 printf("[TLS RenderQueue] Dispatch #%d r3=0x%08X r4=0x%08X (lr=0x%08X)\n",
                        s_rq_disp, ctx->gpr[3], ctx->gpr[4], ctx->lr);
                 fflush(stdout);
@@ -3794,7 +4033,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // 0x80235BF8 (RenderQueue::Flush/Draw)
         case 0x80235BF8: {
             static int s_rq_flush = 0;
-            if (++s_rq_flush <= 10 || s_rq_flush % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_rq_flush <= 10 || s_rq_flush % 60 == 0)) {
                 printf("[TLS RenderQueue] Flush #%d r3=0x%08X (lr=0x%08X)\n",
                        s_rq_flush, ctx->gpr[3], ctx->lr);
                 fflush(stdout);
@@ -3827,7 +4066,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 }
             }
 
-            if (++s_rq_draw_passes <= 10 || s_rq_draw_passes % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_rq_draw_passes <= 10 || s_rq_draw_passes % 60 == 0)) {
                 printf("[TLS 800BDBC8] RenderQueue::DrawPasses #%d rq=0x%08X efa8=0x%08X(104=%u) lr=0x%08X\n",
                        s_rq_draw_passes, rq, efa8, f104, ctx->lr);
                 if (rq) {
@@ -3851,7 +4090,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // 0x800BDB58 (RenderQueue::Push)
         case 0x800BDB58: {
             static int s_rq_push = 0;
-            if (++s_rq_push <= 20 || s_rq_push % 100 == 0) {
+            if (tls_draw_trace_enabled() && (++s_rq_push <= 20 || s_rq_push % 100 == 0)) {
                 printf("[TLS 800BDB58] RenderQueue::Push #%d rq=0x%08X item=0x%08X pass=%u (lr=0x%08X)\n",
                        s_rq_push, ctx->gpr[3], ctx->gpr[4], ctx->gpr[5], ctx->lr);
                 fflush(stdout);
@@ -3864,7 +4103,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             static int s_model_updates = 0;
             u32 model = ctx->gpr[3];
             u32 st = model ? (mem_read32(ctx, model + 0x20c) >> 24) : 0;
-            if (++s_model_updates <= 10 || s_model_updates % 200 == 0) {
+            if (tls_draw_trace_enabled() && (++s_model_updates <= 10 || s_model_updates % 200 == 0)) {
                 printf("[TLS 8008B140] Model::Update #%d model=0x%08X st=%u (20c=0x%08X, lr=0x%08X)\n",
                        s_model_updates, model, st, model ? mem_read32(ctx, model + 0x20c) : 0, ctx->lr);
                 fflush(stdout);
@@ -3932,7 +4171,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
             u32 sub_cnt = model ? mem_read32(ctx, model + 260) : 0;
 
-            if (++s_model_render <= 20 || s_model_render % 100 == 0) {
+            if (tls_draw_trace_enabled() && (++s_model_render <= 20 || s_model_render % 100 == 0)) {
                 sub_cnt = mem_read32(ctx, model + 260);
                 printf("[TLS 8008CD60] Model::Render #%d model=0x%08X st=%u 20c=0x%X sub=%u 164=0x%X 168=0x%X 16c=0x%X s5c=0x%X (lr=0x%08X)\n",
                        s_model_render, model, (mem_read32(ctx, model + 0x20c) >> 24), mem_read32(ctx, model + 0x20c), sub_cnt, f164, f168, mem_read32(ctx, model + 0x16c), s5c, ctx->lr);
@@ -3944,7 +4183,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // 0x800709F4 (ChunkAABBOverlapCheck)
         case 0x800709F4: {
             static int s_709f4_calls = 0;
-            if (++s_709f4_calls <= 10 || s_709f4_calls % 100 == 0) {
+            if (tls_draw_trace_enabled() && (++s_709f4_calls <= 10 || s_709f4_calls % 100 == 0)) {
                 printf("[TLS 800709F4] ChunkAABBOverlapCheck #%d r3=0x%08X r4=0x%08X (lr=0x%08X)\n",
                        s_709f4_calls, ctx->gpr[3], ctx->gpr[4], ctx->lr);
                 fflush(stdout);
@@ -3957,7 +4196,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // 0x8004FF58 (FrustumSphereCull)
         case 0x8004FF58: {
             static int s_cull_calls = 0;
-            if (++s_cull_calls <= 10 || s_cull_calls % 1000 == 0) {
+            if (tls_draw_trace_enabled() && (++s_cull_calls <= 10 || s_cull_calls % 1000 == 0)) {
                 u32 frustum = ctx->gpr[3];
                 u32 sphere = ctx->gpr[4];
                 f32 sx = read_guest_f32(ctx, sphere);
@@ -3981,7 +4220,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 st = cur20c >> 24;
             u32 buf58 = model ? mem_read32(ctx, model + 0x58) : 0;
 
-            if (++s_d6c0_calls <= 20 || s_d6c0_calls % 100 == 0) {
+            if (tls_draw_trace_enabled() && (++s_d6c0_calls <= 20 || s_d6c0_calls % 100 == 0)) {
                 u32 sub_cnt = model ? mem_read32(ctx, model + 260) : 0;
                 printf("[TLS 8008D6C0] Model::DrawPass2 #%d model=0x%08X st=%u 20c=0x%08X sub_cnt=%u (lr=0x%08X)\n",
                        s_d6c0_calls, model, st, model ? mem_read32(ctx, model + 0x20c) : 0, sub_cnt, ctx->lr);
@@ -3993,7 +4232,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // 0x8008D78C (Model::DrawMeshDirect)
         case 0x8008D78C: {
             static int s_d78c_calls = 0;
-            if (++s_d78c_calls <= 20 || s_d78c_calls % 100 == 0) {
+            if (tls_draw_trace_enabled() && (++s_d78c_calls <= 20 || s_d78c_calls % 100 == 0)) {
                 printf("[TLS 8008D78C] Model::DrawMeshDirect #%d model=0x%08X rq=0x%08X (lr=0x%08X)\n",
                        s_d78c_calls, ctx->gpr[3], ctx->gpr[4], ctx->lr);
                 fflush(stdout);
@@ -4011,7 +4250,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 ctx->pc = ctx->lr;
                 return 1;
             }
-            if (++s_91684_calls <= 20 || s_91684_calls % 100 == 0) {
+            if (tls_draw_trace_enabled() && (++s_91684_calls <= 20 || s_91684_calls % 100 == 0)) {
                 printf("[TLS 80091684] SetupSkinning #%d model=0x%08X buf58=0x%08X (lr=0x%08X)\n",
                        s_91684_calls, mdl, buf58, ctx->lr);
                 fflush(stdout);
@@ -4123,7 +4362,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 c4c = chunk ? mem_read32(ctx, chunk + 0x4C) : 0;
             u32 cnt64 = chunk ? mem_read32(ctx, chunk + 0x64) : 0;
             u32 arr90 = chunk ? mem_read32(ctx, chunk + 0x90) : 0;
-            if (++s_chunk_calls <= 20 || s_chunk_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_chunk_calls <= 20 || s_chunk_calls % 60 == 0)) {
                 printf("[TLS 804732DC] SceneChunk #%d chunk=0x%08X st=%u a0=0x%X 4c=0x%X cnt=%u arr=0x%X (lr=0x%08X)\n",
                        s_chunk_calls, chunk, st, a0, c4c, cnt64, arr90, ctx->lr);
                 fflush(stdout);
@@ -4134,7 +4373,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // 0x80363C10 (GameTask Model Render Entry)
         case 0x80363C10: {
             static int s_gt_model_render = 0;
-            if (++s_gt_model_render <= 20 || s_gt_model_render % 100 == 0) {
+            if (tls_draw_trace_enabled() && (++s_gt_model_render <= 20 || s_gt_model_render % 100 == 0)) {
                 printf("[TLS 80363C10] GameTask::ModelRender #%d obj=0x%08X (lr=0x%08X)\n",
                        s_gt_model_render, ctx->gpr[3], ctx->lr);
                 fflush(stdout);
@@ -4145,7 +4384,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // 0x8009DE60 (DrawMeshPacket)
         case 0x8009DE60: {
             static int s_draw_pkt = 0;
-            if (++s_draw_pkt <= 20 || s_draw_pkt % 100 == 0) {
+            if (tls_draw_trace_enabled() && (++s_draw_pkt <= 20 || s_draw_pkt % 100 == 0)) {
                 printf("[TLS 8009DE60] DrawMeshPacket #%d pkt=0x%08X (lr=0x%08X)\n",
                        s_draw_pkt, ctx->gpr[3], ctx->lr);
                 fflush(stdout);
@@ -4160,7 +4399,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 list = ctx->gpr[3];
             u32 size = ctx->gpr[4];
             if (size > 64) {
-                if (++s_gx_cdl_large <= 30 || s_gx_cdl_large % 50 == 0) {
+                if (tls_draw_trace_enabled() && (++s_gx_cdl_large <= 30 || s_gx_cdl_large % 50 == 0)) {
                     const u8* ptr = (const u8*)resolve_guest_pointer(ctx, list);
                     printf("[TLS GXCallDisplayList] LARGE DL #%d list=0x%08X size=%u (lr=0x%08X)",
                            s_gx_cdl_large, list, size, ctx->lr);
@@ -4172,7 +4411,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                     }
                     fflush(stdout);
                 }
-            } else if (++s_gx_cdl <= 10 || s_gx_cdl % 200 == 0) {
+            } else if (tls_draw_trace_enabled() && (++s_gx_cdl <= 10 || s_gx_cdl % 200 == 0)) {
                 printf("[TLS GXCallDisplayList] #%d list=0x%08X size=%u (lr=0x%08X)\n",
                        s_gx_cdl, list, size, ctx->lr);
                 fflush(stdout);
@@ -4187,7 +4426,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 r3ee0 = scene ? mem_read32(ctx, scene + 0x3EE0) : 0;
             u32 r3ee0_flags = r3ee0 ? mem_read32(ctx, r3ee0 + 0x38) : 0;
             u32 count48 = scene ? mem_read32(ctx, scene + 0x48) : 0;
-            if (++s_scene_draws <= 5 || s_scene_draws % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_scene_draws <= 5 || s_scene_draws % 60 == 0)) {
                 printf("[TLS SceneTask] Draw #%d scene=0x%08X 3ee0=0x%08X (flags=0x%08X) count48=%u (lr=0x%08X)\n",
                        s_scene_draws, scene, r3ee0, r3ee0_flags, count48, ctx->lr);
                 if (s_scene_draws == 5 && scene && count48 > 0) {
@@ -4216,7 +4455,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 f8a0 = mem_read32(ctx, 0x8087F8A0);
             u32 t48 = f8a0 ? mem_read32(ctx, f8a0 + 0x48) : 0;
             u32 t48_flags = t48 ? mem_read32(ctx, t48 + 0x38) : 0;
-            if (++s_cc90_calls <= 10 || s_cc90_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_cc90_calls <= 10 || s_cc90_calls % 60 == 0)) {
                 printf("[TLS 8036CC90] DrawScene #%d task=0x%08X 868=%u 56d4=0x%08X t48=0x%08X flags=0x%08X (lr=0x%08X)\n",
                        s_cc90_calls, task, r868, r56d4, t48, t48_flags, ctx->lr);
                 fflush(stdout);
@@ -4227,7 +4466,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // 0x800E4278 (Scene/Model Render pass from GameTask)
         case 0x800E4278: {
             static int s_e4278_calls = 0;
-            if (++s_e4278_calls <= 10 || s_e4278_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_e4278_calls <= 10 || s_e4278_calls % 60 == 0)) {
                 printf("[TLS 800E4278] Render call #%d r3=0x%08X r4=0x%08X (lr=0x%08X)\n",
                        s_e4278_calls, ctx->gpr[3], ctx->gpr[4], ctx->lr);
                 fflush(stdout);
@@ -4247,7 +4486,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 f2 = t2 ? mem_read32(ctx, t2 + 0x38) : 0;
             u32 f3 = t3 ? mem_read32(ctx, t3 + 0x38) : 0;
             u32 f4 = t4 ? mem_read32(ctx, t4 + 0x38) : 0;
-            if (++s_sm_init_calls <= 20 || s_sm_init_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_sm_init_calls <= 20 || s_sm_init_calls % 60 == 0)) {
                 printf("[TLS SceneManager::Init] #%d sm=0x%08X t1=0x%08X(f=0x%X) t2=0x%08X(f=0x%X) t3=0x%08X(f=0x%X) t4=0x%08X(f=0x%X)\n",
                        s_sm_init_calls, sm, t1, f1, t2, f2, t3, f3, t4, f4);
                 fflush(stdout);
@@ -4304,7 +4543,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // BootTask::Update (0x8010F720)
         case 0x8010F720: {
             static int s_boot_updates = 0;
-            if (++s_boot_updates <= 10 || s_boot_updates % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_boot_updates <= 10 || s_boot_updates % 60 == 0)) {
                 u32 timer_raw = mem_read32(ctx, ctx->gpr[3] + 0x94);
                 float timer_val;
                 memcpy(&timer_val, &timer_raw, 4);
@@ -4325,7 +4564,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // StrapTask::IsReady (0x805A6404)
         case 0x805A6404: {
             static int s_strap_ready_calls = 0;
-            if (++s_strap_ready_calls <= 5 || s_strap_ready_calls % 30 == 0) {
+            if (tls_draw_trace_enabled() && (++s_strap_ready_calls <= 5 || s_strap_ready_calls % 30 == 0)) {
                 printf("[TLS StrapTask] IsReady #%d task=0x%08X (lr=0x%08X)\n",
                        s_strap_ready_calls, ctx->gpr[3], ctx->lr);
                 fflush(stdout);
@@ -4377,7 +4616,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // NewTitleTask::IsReady (0x80532ABC)
         case 0x80532ABC: {
             static int s_title_ready_calls = 0;
-            if (++s_title_ready_calls <= 10 || s_title_ready_calls % 30 == 0) {
+            if (tls_draw_trace_enabled() && (++s_title_ready_calls <= 10 || s_title_ready_calls % 30 == 0)) {
                 u32 task = ctx->gpr[3];
                 u32 state = task ? mem_read32(ctx, task + 680) : 0;
                 u32 req438 = task ? mem_read32(ctx, task + 0x438) : 0;
@@ -4500,7 +4739,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 task = ctx->gpr[3];
             static int s_655c_calls = 0;
             u32 st_ac = resolve_guest_pointer(ctx, task) ? mem_read32(ctx, task + 0xAC) : 0;
-            if (++s_655c_calls <= 20 || s_655c_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_655c_calls <= 20 || s_655c_calls % 60 == 0)) {
                 u32 lh1 = task + 0x84;
                 u32 lh2 = task + 0xA4;
                 u32 req1 = resolve_guest_pointer(ctx, task) ? mem_read32(ctx, lh1 + 4) : 0;
@@ -4565,7 +4804,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 count = resolve_guest_pointer(ctx, obj) ? mem_read32(ctx, obj + 120) : 0;
             u32 arr = resolve_guest_pointer(ctx, obj) ? mem_read32(ctx, obj + 124) : 0;
             static int s_3c0f48_calls = 0;
-            if (++s_3c0f48_calls <= 20 || s_3c0f48_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_3c0f48_calls <= 20 || s_3c0f48_calls % 60 == 0)) {
                 printf("[TLS 803C0F48] #%d obj=0x%08X cam_id=%u count=%u arr=0x%08X (lr=0x%08X)\n",
                        s_3c0f48_calls, obj, cam_id, count, arr, ctx->lr);
                 fflush(stdout);
@@ -4591,7 +4830,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             }
             u32 flg = r4 ? mem_read32(ctx, r4 + 56) : 0xFFFFFFFF;
             static int s_1f683c_calls = 0;
-            if (++s_1f683c_calls <= 10 || s_1f683c_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_1f683c_calls <= 10 || s_1f683c_calls % 60 == 0)) {
                 printf("[TLS 801F683C] #%d task=0x%08X r4=0x%08X (flg=0x%08X) -> completed\n", s_1f683c_calls, task, r4, flg);
                 fflush(stdout);
             }
@@ -4603,7 +4842,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 task = ctx->gpr[3];
             u32 st68 = task ? mem_read32(ctx, task + 0x68) : 0;
             static int s_c91c_calls = 0;
-            if (++s_c91c_calls <= 10 || s_c91c_calls % 30 == 0) {
+            if (tls_draw_trace_enabled() && (++s_c91c_calls <= 10 || s_c91c_calls % 30 == 0)) {
                 printf("[TLS 803EC91C] #%d task=0x%08X st68=%u lr=0x%08X\n", s_c91c_calls, task, st68, ctx->lr);
                 fflush(stdout);
             }
@@ -4614,7 +4853,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         case 0x8044E1BC: {
             u32 arg = ctx->gpr[3];
             static int s_e1bc_calls = 0;
-            if (++s_e1bc_calls <= 5 || s_e1bc_calls % 30 == 0) {
+            if (tls_draw_trace_enabled() && (++s_e1bc_calls <= 5 || s_e1bc_calls % 30 == 0)) {
                 u32 mgr = mem_read32(ctx, 0x8087F4F8);
                 u32 cnt48 = mgr ? mem_read32(ctx, mgr + 0x48) : 0;
                 u32 arr50 = mgr ? mem_read32(ctx, mgr + 0x50) : 0;
@@ -4658,7 +4897,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 task_e4 = task ? mem_read32(ctx, task + 0xE4) : 0;
             u32 flg_e4 = task_e4 ? mem_read32(ctx, task_e4 + 0x38) : 0;
             static int s_4095f0_calls = 0;
-            if (++s_4095f0_calls <= 10 || s_4095f0_calls % 30 == 0) {
+            if (tls_draw_trace_enabled() && (++s_4095f0_calls <= 10 || s_4095f0_calls % 30 == 0)) {
                 printf("[TLS 804095F0 GimmickTask] IsReady #%d task=0x%08X st68=%u 64_st=%u 19c_cnt=%u e4=0x%08X (f38=0x%X) lr=0x%08X\n",
                        s_4095f0_calls, task, st68, st64, cnt19c, task_e4, flg_e4, ctx->lr);
                 fflush(stdout);
@@ -4716,7 +4955,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u8 v340 = obj ? mem_read8(ctx, obj + 340) : 0xFF;
             u32 mgr = mem_read32(ctx, 0x8087EC48);
             u32 m348 = mgr ? mem_read32(ctx, mgr + 348) : 0;
-            if (++s_8d3c_calls <= 10 || s_8d3c_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_8d3c_calls <= 10 || s_8d3c_calls % 60 == 0)) {
                 printf("[TLS 803B8D3C] #%d obj=0x%08X (v340=%u) mgr=0x%08X (m348=%u) (lr=0x%08X)\n",
                        s_8d3c_calls, obj, v340, mgr, m348, ctx->lr);
                 fflush(stdout);
@@ -4782,7 +5021,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 mem_write32(ctx, mgr + 0x15C, 0); // mgr->state = 0 (idle)
             }
             static int s_4228_calls = 0;
-            if (++s_4228_calls <= 5 || s_4228_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_4228_calls <= 5 || s_4228_calls % 60 == 0)) {
                 printf("[TLS 800A4228] #%d mgr=0x%08X -> returning 0 (idle, lr=0x%08X)\n",
                        s_4228_calls, mgr, ctx->lr);
                 fflush(stdout);
@@ -4803,7 +5042,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 mem_write32(ctx, out_err, 0); // no error
             }
             static int s_472c_calls = 0;
-            if (++s_472c_calls <= 5 || s_472c_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_472c_calls <= 5 || s_472c_calls % 60 == 0)) {
                 printf("[TLS SaveCheck] fn_800A472C called! (lr=0x%08X) -> returning 1 (SUCCESS, len=1348992)\n", ctx->lr);
                 fflush(stdout);
             }
@@ -4865,6 +5104,36 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                        pad_edge ? "   <== PAD EDGE" : "");
                 fflush(stdout);
                 if (!pad_edge && s_after_press > 0) s_after_press--;
+            }
+            /* Mode 1 -> 2 is gated by two things (0x80534264..0x805342A4):
+             *   1. caller action 4, which the action map sends to real bit 11
+             *      (classic-controller A, 0x0010) - see tools/decode_input_maps.py
+             *   2. a float compare between *(*(task+72)+160) and *(*(task+72)+256)
+             * When a press arrives and the mode still does not move, one of those two
+             * is the reason; print both so it stops being a guess. TLS_TITLE_GATE=1. */
+            {
+                static int s_gate = -1;
+                if (s_gate < 0) s_gate = getenv("TLS_TITLE_GATE") ? 1 : 0;
+                if (s_gate && mode == 1) {
+                    extern int g_runner_current_frame;
+                    u32 pad_global = ctx->gpr[13] - 26280u;
+                    u32 pad = resolve_guest_pointer(ctx, pad_global) ? mem_read32(ctx, pad_global) : 0;
+                    u32 trig = (pad && resolve_guest_pointer(ctx, pad + 15400)) ? mem_read32(ctx, pad + 15400) : 0;
+                    u32 holder = task ? mem_read32(ctx, task + 72) : 0;
+                    u32 f160 = 0, f256 = 0;
+                    f32 a = 0.0f, b = 0.0f;
+                    if (holder && resolve_guest_pointer(ctx, holder)) {
+                        f160 = mem_read32(ctx, holder + 160);
+                        f256 = mem_read32(ctx, holder + 256);
+                        memcpy(&a, &f160, 4);
+                        memcpy(&b, &f256, 4);
+                    }
+                    printf("[TLS TitleGate] frame=%d mode=1 realbit11(A)=%d trigger=0x%08X "
+                           "f160=%.4f f256=%.4f pass=%d hold=0x%04X\n",
+                           g_runner_current_frame, (trig >> 11) & 1, trig, a, b, (b <= a),
+                           s_ctrl_state.core_hold);
+                    fflush(stdout);
+                }
             }
             return 0; // Run original code naturally!
         }
@@ -5050,7 +5319,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 l50 = task ? mem_read32(ctx, task + 0x50) : 0;
             u32 l5c = task ? mem_read32(ctx, task + 0x5C) : 0;
             u32 l60 = task ? mem_read32(ctx, task + 0x60) : 0;
-            if (++s_title_draws <= 5 || s_title_draws % 30 == 0) {
+            if (tls_draw_trace_enabled() && (++s_title_draws <= 5 || s_title_draws % 30 == 0)) {
                 printf("[TLS NewTitleTask] Draw #%d task=0x%08X mode=%u eeb0=0x%08X (c18=0x%08X, s1c=0x%08X, p14=0x%08X)\n",
                        s_title_draws, task, mode, eeb0,
                        task ? mem_read32(ctx, task + 0x18) : 0,
@@ -5102,7 +5371,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 task = ctx->gpr[3];
             u32 child = task ? mem_read32(ctx, task + 0x18) : 0;
             static int s_d3fa4_calls = 0;
-            if (++s_d3fa4_calls <= 20 || s_d3fa4_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_d3fa4_calls <= 20 || s_d3fa4_calls % 60 == 0)) {
                 printf("[TLS 800D3FA4] #%d task=0x%08X child=0x%08X lr=0x%08X\n",
                        s_d3fa4_calls, task, child, ctx->lr);
                 if (child) {
@@ -5129,7 +5398,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         }
         case 0x800C310C: {
             static int s_c310c_calls = 0;
-            if (++s_c310c_calls <= 10 || s_c310c_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_c310c_calls <= 10 || s_c310c_calls % 60 == 0)) {
                 u32 mgr = mem_read32(ctx, 0x8087EE90);
                 u32 p4 = mgr ? mem_read32(ctx, mgr + 4) : 0;
                 u32 cnt394 = mgr ? mem_read32(ctx, mgr + 0x394) : 0;
@@ -5150,7 +5419,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 req = task ? mem_read32(ctx, task + 0x58 + 4) : 0;
             u8 st = req ? mem_read8(ctx, req + 4) : 0;
             static int s_49dee4_calls = 0;
-            if (++s_49dee4_calls <= 20 || s_49dee4_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_49dee4_calls <= 20 || s_49dee4_calls % 60 == 0)) {
                 printf("[TLS 8049DEE4] #%d task=0x%08X req=0x%08X status=%u (lr=0x%08X)\n",
                        s_49dee4_calls, task, req, st, ctx->lr);
                 fflush(stdout);
@@ -5181,7 +5450,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         case 0x806140C0: {
             mem_write8(ctx, 0x808800A8, 1);
             static int s_drawdone_cnt = 0;
-            if (++s_drawdone_cnt <= 20 || s_drawdone_cnt % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_drawdone_cnt <= 20 || s_drawdone_cnt % 60 == 0)) {
                 printf("[TLS GX] GXDrawDone #%d completed (LR=0x%08X)\n", s_drawdone_cnt, ctx->lr);
                 fflush(stdout);
             }
@@ -5226,7 +5495,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 obj = ctx->gpr[3];
             u32 state = obj ? mem_read32(ctx, obj + 644) : 0;
             static int s_calls_4424c = 0;
-            if (++s_calls_4424c <= 10 || s_calls_4424c % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_calls_4424c <= 10 || s_calls_4424c % 60 == 0)) {
                 printf("[TLS 4424C] #%d obj=0x%08X state=+644=%u (lr=0x%08X)\n", s_calls_4424c, obj, state, ctx->lr);
                 fflush(stdout);
             }
@@ -5236,7 +5505,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // atn::LH_Scene notify ready (0x804780AC)
         case 0x804780AC: {
             static int s_scene_ready_calls = 0;
-            if (++s_scene_ready_calls <= 20 || s_scene_ready_calls % 60 == 0) {
+            if (tls_draw_trace_enabled() && (++s_scene_ready_calls <= 20 || s_scene_ready_calls % 60 == 0)) {
                 u32 req = ctx->gpr[3];
                 u8 st = req ? mem_read8(ctx, req + 4) : 0;
                 printf("[TLS SceneReady] #%d req=0x%08X status=%u (lr=0x%08X)\n",
