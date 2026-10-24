@@ -1395,6 +1395,20 @@ int main(int argc, char** argv) {
                  * (handover 5c.11) writes it as a 4x4-tiled RGBA8 texture - not the
                  * YUV422 the runner used to assume. TLS_FB_RGBA8=1 decodes the tiled
                  * layout so the copy can actually be looked at. */
+                if (getenv("TLS_FB_RGB565")) {
+                    for (int y = 0; y < 480; y++) {
+                        for (int x = 0; x < 640; x++) {
+                            const u8* p = fb + ((size_t)y * 640 + x) * 2;
+                            u16 v = (u16)(p[0] | (p[1] << 8));
+                            fputc(((v >> 11) & 0x1F) * 255 / 31, f);
+                            fputc(((v >> 5) & 0x3F) * 255 / 63, f);
+                            fputc((v & 0x1F) * 255 / 31, f);
+                        }
+                    }
+                    fclose(f);
+                    printf("[Runner] Dumped Framebuffer 0 (0x%08X) as RGB565 to build/recomp/framebuffer_0.ppm\n", fb0_addr);
+                    goto fb0_done;
+                }
                 if (getenv("TLS_FB_RGBA8")) {
                     for (int y = 0; y < 480; y++) {
                         for (int x = 0; x < 640; x++) {

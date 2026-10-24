@@ -1228,12 +1228,24 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                     /* A/B: display copies may want a row-linear scanout buffer rather
                      * than the 4x4-tiled texture layout. TLS_EFB_LINEAR=1 writes rows
                      * linearly (R,G,B,A) so the two can be compared on one frame. */
+                    /* The two VI scanout buffers are 16bpp linear (614400 B each: the
+                     * gap between 0x900037C0 and 0x900997E0 is 614432). Writing 32-bit
+                     * pixels into them overran into the next buffer - that was the
+                     * doubled image in the guest framebuffer dump (handover 5c.11).
+                     * Display copies therefore go out as RGB565 rows; texture copies
+                     * keep the 4x4-tiled RGBA8 layout. TLS_EFB_LINEAR=1 forces the old
+                     * linear-RGBA write for A/B. */
                     static int s_linear = -1;
                     if (s_linear < 0) s_linear = getenv("TLS_EFB_LINEAR") ? 1 : 0;
-                    if (s_linear) {
+                    bool is_display_copy = (dst_guest == 0x900997E0u || dst_guest == 0x900037C0u);
+                    if (is_display_copy && !s_linear) {
+                        uint16_t* out = (uint16_t*)guest;
+                        uint32_t row = (y0 + gy) * 640u + (x0 + gx);
+                        out[row] = (uint16_t)(((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3));
+                    } else if (s_linear) {
                         uint8_t* px = guest + ((size_t)gy * w + gx) * 4;
                         px[0] = r; px[1] = g; px[2] = b; px[3] = a;
-                    } else {
+                    } else if (!is_display_copy) {
                         uint32_t tile = (gy / 4) * tiles_x + (gx / 4);
                         uint32_t within = (gy % 4) * 4 + (gx % 4);
                         uint8_t* tile_base = guest + (size_t)tile * 64;
