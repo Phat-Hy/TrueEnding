@@ -187,3 +187,31 @@ After the press-start dismissal the title state advances, but the layout rendere
 - [`tools/compile_shaders.py`](file:///G:/Program/Project%20The%20Maybe(Not)%20Last%20Story/tools/compile_shaders.py) - HLSL pixel/vertex shader compiler.
 - [`recomp/replacements.c`](file:///G:/Program/Project%20The%20Maybe(Not)%20Last%20Story/recomp/replacements.c) - High-level emulation of Wii OS, KPAD, DVD streaming, and task scheduling.
 - [`recomp/host_runner.c`](file:///G:/Program/Project%20The%20Maybe(Not)%20Last%20Story/recomp/host_runner.c) - Main host entry point, message pump, and VBlank simulation loop.
+
+## 7. Resuming this work
+
+**Branch:** `fix/2d-render-and-handoff` (commit `295e777`) — all fixes below are committed there.
+`main` still has the pre-session state.
+
+**Build and run (unchanged):**
+```powershell
+python tools/compile_shaders.py          # -> build/recomp/gx_shaders_d3d11.inl
+python tools/recomp_harness.py build-runner
+Play_TheLastStory.bat                    # --window --fps 60
+```
+After editing shaders, **touch `recomp/gfx_d3d11.c`** or the recompile is skipped (the `.inl` is not
+a tracked dependency of that translation unit).
+
+**Set expectations for verification:** automated key injection into the game window is unreliable
+(`keybd_event` + `SetForegroundWindow`, long holds help). Press keys at the real window when it matters.
+
+**Where to look:**
+- `docs/evidence/` — six downscaled before/after captures proving the particle, logo-plate and UI-text fixes
+- `tools/debug/` — the accumulated one-off diagnostic scripts (log parsers, memory probes, dump helpers)
+- `logs/session-archive-interactive_debug.log` — the last full interactive session, 76 MB, for reference
+- `DEEPSEEK_HARNESS_HANDOVER.md` §5b — **read this before §3–§5**, it supersedes several earlier claims
+
+**The single open question:** why does GX submission stop immediately after `GameTask::Init`?
+`ViewTask`/scene initialise, the guest keeps running with zero exceptions, `GameLoadTask +0x1C`
+advances (184 -> 408) and GX output grows during loading (1140 -> 2628 verts) — then the screen
+goes black to the end of the run. Loader, exception path and the missing menu are all ruled out.
