@@ -789,6 +789,41 @@ recompiler's sources are excluded from git (`tools/DolRecomp/` in `.gitignore`);
 
 
 
+### 5c.11 Why the water/reflection is black and pink: EFB copies are not emulated
+
+The title's lake surface (and every effect that samples the framebuffer) is a render-to-texture pass:
+the game renders the scene, copies the EFB into a texture, then samples that texture on the water. The
+copy is issued through the GX BP registers, and the pipeline implements none of them.
+
+Measured with `TLS_F900_PROBE=1 TLS_F900_FRAME=2340` (the existing per-BP dump):
+
+```
+[F900 BP] reg=0x49 val=0x000000     <- TEXCOPYSRC (source rect: left/top)
+[F900 BP] reg=0x4A val=0x06FE7F     <- TEXCOPYSRC (right/bottom)
+[F900 BP] reg=0x4B val=0x829B7F     <- TEXCOPYDST (dest address, format, stride)
+[F900 BP] reg=0x52 val=0x01003B     <- TEXCOPYEXEC (do the copy; clear flags)
+```
+
+`gx_pipeline_process_bp()` handles only `0x00` (GENMODE), `0x40` (ZMODE), `0x41` (CMODE0), `0x4F`/`0x50`
+(clear colour), `0xF3` (alpha compare), `0x64`/`0x65` (TLUT), `0x30` (matrix index) and the vertex
+descriptor registers. `0x49`/`0x4A`/`0x4B`/`0x52` are ignored, so the destination texture keeps whatever
+was in MEM2 - which is exactly the black interior and pink sky-coloured region on the lake surface in
+`10-title-hero-cave-frame2200.png`. `GXCopyDisp` (0x805... via `recomp/replacements.c:5620`) runs the
+original guest code, so the *display* copy path exists; only the EFB->texture path is missing.
+
+**What implementing it needs** (next task, not started): record `0x49`/`0x4A`/`0x4B`, and on `0x52`
+read back the current EFB region from the D3D11 render target (the screenshot path in `gfx_d3d11.c`
+already does `CopyResource` + `Map(READ)` into a staging texture) and convert it to the GX destination
+format the register names (RGBA8/RGB565 at minimum), then write it into guest memory at the destination
+address with the requested stride. That single feature covers the water, the menu blur/reflection and
+most effect textures that currently sample uninitialised memory.
+
+**Per-batch dump probe (new, inert unless set).** `TLS_BATCH_DUMP=<frame>` prints every draw batch of
+that frame with `vtx`, texture address/size/format, `blend/src/dst/sub`, `persp/zwrite/ztest` and the
+batch's vertex-coordinate range, which is how a black region can be attributed to a batch instead of
+guessed at (example at frame 2340: 51 batches, all `fmt=14` = CMPR, batches 0-18 opaque depth-writing,
+19+ blended particles/UI).
+
 ### 5c.7 The stop is the boot thread's own loop ending at frame 829
 
 > **Superseded by §5c.9.** The loop did not "end": the boot thread returned into garbage because an

@@ -1327,6 +1327,47 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                 if (take_shot) {
                     printf("[D3D11 Frame %d] Total Batches: %u, Total Vtx: %u\n", s_d3d11_dump_count, batch_count, gx_vtx_count);
                 }
+                /* Per-batch dump for visual defects: which batch covers which part of
+                 * the frame, with its texture binding and blend/depth state. Used to
+                 * find out whether a black or pink region is an untextured batch, a
+                 * missing texture, or a blend/depth problem. TLS_BATCH_DUMP=<frame>,
+                 * TLS_BATCH_DUMP_MAX=<count> (default 48). */
+                {
+                    static int s_dump_frame = -2, s_dump_max = 48;
+                    if (s_dump_frame == -2) {
+                        const char* f = getenv("TLS_BATCH_DUMP");
+                        const char* m = getenv("TLS_BATCH_DUMP_MAX");
+                        s_dump_frame = f ? atoi(f) : -1;
+                        if (m) s_dump_max = atoi(m);
+                    }
+                    if (s_dump_frame >= 0 && (int)s_d3d11_dump_count == s_dump_frame) {
+                        printf("[BatchDump] frame=%d batches=%u vtx=%u\n",
+                               s_d3d11_dump_count, batch_count, gx_vtx_count);
+                        uint32_t shown = 0;
+                        for (uint32_t b = 0; b < batch_count && (int)shown < s_dump_max; b++) {
+                            const GxDrawBatch* bd = &batches[b];
+                            if (bd->vertex_count == 0) continue;
+                            float minx = 1e9f, maxx = -1e9f, miny = 1e9f, maxy = -1e9f;
+                            for (uint32_t vi = 0; vi < bd->vertex_count; vi++) {
+                                const GxVertex* v = &gx_vtx[bd->vertex_offset + vi];
+                                if (v->x < minx) minx = v->x;
+                                if (v->x > maxx) maxx = v->x;
+                                if (v->y < miny) miny = v->y;
+                                if (v->y > maxy) maxy = v->y;
+                            }
+                            printf("  b%u vtx=%u tex=%d addr=0x%08X %ux%u fmt=%u tlut=0x%08X "
+                                   "blend=%d src=%u dst=%u sub=%d persp=%d zwrite=%d ztest=%d "
+                                   "ndc=[%.2f..%.2f, %.2f..%.2f]\n",
+                                   b, bd->vertex_count, bd->has_texture, bd->tex.guest_addr,
+                                   bd->tex.width, bd->tex.height, bd->tex.format, bd->tex.tlut_addr,
+                                   bd->blend_enable, bd->src_factor, bd->dst_factor, bd->subtract,
+                                   bd->is_perspective, bd->depth_write_enable, bd->depth_test_enable,
+                                   minx, maxx, miny, maxy);
+                            shown++;
+                        }
+                        fflush(stdout);
+                    }
+                }
                 for (uint32_t b = 0; b < batch_count; b++) {
                     const GxDrawBatch* batch = &batches[b];
                     if (batch->vertex_count == 0) continue;
