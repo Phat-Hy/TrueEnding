@@ -870,6 +870,15 @@ format the guest actually configured (or decode the tiled RGBA8), then (b) look 
 the water is on screen to confirm the reflection, and (c) check that the staging readback (up to 5 copies
 per frame, each a GPU->CPU sync) does not cost too much frame time.
 
+**(a) is done and it proves the copy works.** The dump assumed YUV422; `TLS_FB_RGBA8=1` decodes the guest VI
+buffer as 4x4-tiled RGBA8 instead, and the dumped buffer now contains the game's own picture:
+`docs/evidence/12-efb-copy-guest-framebuffer.png` shows "THE LAST STORY" and the "PUSH" prompt in the guest
+framebuffer (15827 unique colours, up from 1 uniform colour). So pixels really do travel GPU -> guest memory
+through the new path. Two residual artefacts are visible in that image and are the next thing to fix: the
+frame appears **doubled** (logo near the top and again in the middle - a tile-row/stride offset in the write)
+and there is a bright green field plus a noisy strip (the two VI buffers being copied at different times).
+Fixing the tile-row offset is the last step before the lake can be judged visually.
+
 **What the rest of the work needs** (unchanged): on `0x52` read back the current EFB region from the D3D11 render target
 (the screenshot path in `gfx_d3d11.c` already does `CopyResource` + `Map(READ)` into a staging texture)
 and convert it to the destination format the register names (RGBA8 first; RGB565 next), then write it into

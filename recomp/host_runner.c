@@ -1391,6 +1391,26 @@ int main(int argc, char** argv) {
             FILE* f = fopen("build/recomp/framebuffer_0.ppm", "wb");
             if (f) {
                 fprintf(f, "P6\n640 480\n255\n");
+                /* The guest fills this buffer through GXCopyDisp, and the EFB copy path
+                 * (handover 5c.11) writes it as a 4x4-tiled RGBA8 texture - not the
+                 * YUV422 the runner used to assume. TLS_FB_RGBA8=1 decodes the tiled
+                 * layout so the copy can actually be looked at. */
+                if (getenv("TLS_FB_RGBA8")) {
+                    for (int y = 0; y < 480; y++) {
+                        for (int x = 0; x < 640; x++) {
+                            int tile = (y / 4) * 160 + (x / 4);
+                            int within = (y % 4) * 4 + (x % 4);
+                            const u8* t = fb + (size_t)tile * 64;
+                            fputc(t[within * 2 + 1], f);      /* R */
+                            fputc(t[32 + within * 2 + 0], f); /* G */
+                            fputc(t[32 + within * 2 + 1], f); /* B */
+                        }
+                    }
+                    fclose(f);
+                    printf("[Runner] Dumped Framebuffer 0 (0x%08X) as tiled RGBA8 to "
+                           "build/recomp/framebuffer_0.ppm\n", fb0_addr);
+                    goto fb0_done;
+                }
                 for (int y = 0; y < 480; y++) {
                     for (int x = 0; x < 640; x += 2) {
                         int off = (y * 640 + x) * 2;
@@ -1414,6 +1434,7 @@ int main(int argc, char** argv) {
                 printf("[Runner] Dumped Framebuffer 0 (0x%08X) to build/recomp/framebuffer_0.ppm\n", fb0_addr);
             }
         }
+    fb0_done:;
     }
     if (fb1_addr) {
         u8* fb = (u8*)resolve_guest_pointer(&cpu, fb1_addr);
