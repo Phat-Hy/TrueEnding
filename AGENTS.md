@@ -41,15 +41,25 @@ DeepSeek Harness has access to the following domain-specific skills located in `
 ## 4. Key Architectural Facts for The Last Story (USA / SLSEXJ)
 
 1. **CMPR Alpha Mechanics**:
-   - In *The Last Story*, UI text elements (*"PRESS ANY BUTTON"*, *"NEW GAME"*) and particle glints are CMPR (DXT1) format with embedded alpha = 0.0 (`[248, 252, 248, 0]`).
-   - The pixel shader must use luminance fallback for CMPR text:
+   - **CORRECTED — do not use a luminance fallback for alpha.** The guidance that used to live here
+     (`texA = (texColor.a > 0.01f) ? texColor.a : luma`) was wrong and has been removed from
+     `tools/compile_shaders.py`. It replaced every legitimately transparent texel with its brightness,
+     which turned the title logo plate, the menu text and every particle sparkle into solid opaque
+     rectangles. Verified against the Dolphin dumps: the title logo (`tex1_512x64_42cb…_14.png`) is a
+     fully opaque cream plate with black lettering, and particle glows are opaque beige with a brighter
+     core — the cut-out is produced by the GX TEV alpha stage, not by luminance in the texture.
+   - Correct pixel-shader contract (`PSAlpha`):
      ```hlsl
-     float luma = max(texColor.r, max(texColor.g, texColor.b));
-     float texA = (texColor.a > 0.01f) ? texColor.a : luma;
-     float alpha = texA * input.color.a;
+     float va = (input.color.a > 0.001f) ? input.color.a : 1.0f; // GX: zero vertex alpha -> texture alpha only
+     float alpha = texColor.a * va;
      if (alpha <= 0.005f) discard;
      return float4(texColor.rgb * input.color.rgb, alpha);
      ```
+   - Artwork that is *dark ink on a light plate* (title logo, button prompts) is handled in
+     `recomp/gfx_d3d11.c` by an "ink matte" reconstruction of that TEV stage (alpha from how far each
+     texel falls below the plate luminance, white RGB so the batch vertex colour tints the glyphs).
+     Particle glows use the complementary baseline-subtraction path. **Do not** apply baseline
+     subtraction to ink artwork or to small (≤16×16) UI textures.
 2. **Dolphin Reference Run**:
    - 354 dumped textures are ready for comparison in: `%APPDATA%\Dolphin Emulator\Dump\Textures\SLSEXJ\`.
    - Full reference log: `%APPDATA%\Dolphin Emulator\Logs\dolphin.log`.
