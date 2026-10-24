@@ -1,42 +1,56 @@
 # DeepSeek Harness Handover Dossier: Project The Maybe(Not) Last Story
 
-> ## READ THIS FIRST (state at commit `f52de56`)
+> ## READ THIS FIRST (state at commit `9b552d9`)
 >
 > **Sections 3–5b are historical.** They contain claims that were later disproven (the CMPR luma
 > fallback, the "task vtable zeroed" theory, the `+0x2AC` state machine, the anime-track clamps).
-> **§5c supersedes all of them** — read §5c, and §5c.8 is the current resume point.
+> **§5c supersedes all of them** — read §5c and §5c.9, which is the current state.
 >
-> **Where the work stands.** The Chapter-1 stall is no longer a mystery box:
-> - The hand-edited generated chunks (which had been injecting fake clamps) are re-lifted from
->   `orig/main.dol`, and the four clamp blocks in `recomp/replacements.c` are deleted. That fixed real
->   memory corruption: the clamps zeroed a staging buffer size, so the engine `memcpy`'d animation data
->   to address 0 and destroyed the OS low page including `__OSCurrentThread` (§5c.1).
-> - On the faithful build the title renders, the menu advances, Chapter 1's packs decompress,
->   `GameTask::Init` runs and reaches state 3 at ~frame 690, and then the boot thread's frame loop
->   stops at **frame 829**. After that the guest genuinely idles: `PC = 0x805F50B0` (the SDK idle
->   routine), `RunQueueBits = 0`, both created threads asleep with no work (§5c.6–5c.8).
-> - Three host-side bugs were found and fixed while testing: the missing retrace reschedule word, the
->   idle predicate that refused to execute, and the stray-sentinel recovery that parked the CPU forever
->   (§5c.8).
+> **The frame-829 stall is fixed.** Its cause was neither the scheduler nor a lost wakeup: the host
+> hardcoded the MEM1 arena low to `0x8088A000`, which is inside the boot thread's own stack, so the
+> engine's 1 MB heap grew through live stack and at frame 830 an allocation returned a stack address.
+> `fn_800838B8` stored it and returned through its clobbered save slot, and the boot thread executed
+> string data as code (§5c.9). The arena low is now derived from the DOL (`0x8089B3C0`, the layout
+> `asm/ldscript.lcf` defines). After the fix:
+> - a 2400-frame run keeps `SequenceManager::Update` to frame 2398, `GameTask::Init` ends at 1032 and
+>   `GameTask::Update`/`Draw` run to 2398, with 200k–262k GX vertices per frame;
+> - the Chapter 1 (Gurgan Cave) scene renders: water, rock walls, sky, moving camera. Reference frames
+>   in `build/recomp/d3d11_screenshot_{1100,1200,1500}.ppm`;
+> - no stray sentinel, no non-code dispatch after the two known boot-time ones, no exception.
+> - `TLS_ARENALO=0x8088A000` restores the old behaviour exactly (`Init` 31 calls, last 829, stray
+>   sentinel), so the fix is A/B verifiable.
 >
-> **The single next target.** Stop the host-callback sentinel leak (`lr = 0xFFFFFFFC` gets saved into a
-> thread context; log line `[TLS HostCallback] Stray host sentinel ... lr=0xFFFFFFFF` fires once per
-> run), then re-answer why the boot thread stops re-entering `SequenceManager::Update` after the
-> `0x80534074` dispatch at frame 829. Do **not** re-run the three disproved experiments or the
-> interrupt-handler-only-call in §5c.8.
+> **Also corrected:** §5c.8's "single next target" (the host-callback sentinel leak) was a *symptom* of
+> that stack corruption, not a cause. The leak itself has never been observed; it is now repaired if it
+> ever happens (`host_repair_sentinel_in_thread`, `TLS_HOSTCALLBACK_PROBE`).
+>
+> **Where the work stands / next targets.** The engine now loads and draws Chapter 1 continuously. Open
+> items, in the order they are worth attacking:
+> 1. Visual parity: the cave draws, but the water/reflection pass is visibly wrong (black cut-outs,
+>    pink sky reflections in the water) and GX vertex counts saturate at `0x3FFFF` (262143) on heavy
+>    frames — check whether that is a real guest cap or a pipeline buffer limit.
+> 2. Gameplay: the camera moves but no player character/HUD has been confirmed on screen yet; the
+>    remaining Chapter-1 load steps (`CharaTask` state, `SceneReady`, streaming queue) should be
+>    followed with the taps and `Streaming Queue` line.
+> 3. The two boot-time non-code dispatches (`0x005F2A10`, `0x005F2A90`, both `lr=0x805F2F18/48` at
+>    frame 0) are still handled by the generic safeguard and deserve a name.
 >
 > **First commands.**
 > ```powershell
-> git log --oneline -8                                  # 3edb040..f52de56 are the current session
+> git log --oneline -8                                  # f52de56..9b552d9 are the current session
 > python tools/recomp_harness.py build-runner           # chunks are already lifted; ~1 s
-> $env:TLS_SLEEP_TAIL="1"; $env:TLS_VBLANK_PROBE="820"
-> build\recomp\tls_runner.exe --window --frames 900 --fps 60 --no-audio
+> $env:TLS_VBLANK_PROBE="820"
+> build\recomp\tls_runner.exe --window --frames 2400 --fps 60 --no-audio
 > ```
-> Reproduces the frame-829 boundary in ~15 s. If `build-recomp` writes are denied, the workspace
-> sandbox needs full file access for this session (see §5c.4 note).
+> Passes frame 830 and keeps drawing; `build/recomp/d3d11_screenshot_*.ppm` is written automatically at
+> frames 100…1800. If `build-recomp` writes are denied, the workspace sandbox needs full file access for
+> this session (see §5c.4 note).
 >
 > **Rules that have already cost time.** Never hand-edit `build/recomp/generated/chunks` — re-lift.
-> Never mutate guest state to "make progress" — the probes in §5c.4 exist so measurement replaces that.
+> Never mutate guest state to "make progress" — the probes in §5c.4 and §5c.9 exist so measurement
+> replaces that. Never guess a low-memory constant (`0x8000310C`, `0x80000030`): the guest's `OSInit`
+> trusts it and the linker script in `asm/ldscript.lcf` defines the truth — derive it, and check it
+> against `OSThread.stackBase/stackEnd`.
 > `build/` is git-ignored, so a fresh checkout must run `python tools/recomp_harness.py lift`.
 
 ---
@@ -397,6 +411,10 @@ should be executing them is exactly the one parked on `0x8087D610`.
 
 ### 5c.6 The scheduler is consistent at the end — the guest has nothing left to run
 
+> **Superseded by §5c.9.** The scheduler was healthy, but the reason the guest had nothing left to run
+> is that the boot thread had already been derailed by a corrupted return address (an engine heap
+> inside its own stack). The queue/thread measurements here are still valid.
+
 The worker's wait function was then read from the generated code rather than from a comment tail, and
 it is a normal idle-worker loop, not a broken wait:
 
@@ -504,7 +522,8 @@ re-entering `SequenceManager::Update` after frame 829.
    leak itself is still an open defect in the host-callback design (host invokes handlers with
    `lr = 0xFFFFFFFC`, and a handler that runs the scheduler saves it into a thread context).
 
-**Where to go next, in priority order:**
+**Where to go next, in priority order:** *(superseded by §5c.9 — item 1 was based on a symptom and
+item 2 is answered; read §5c.9 first and keep this list only for its measurements)*
 
 1. Stop the sentinel leak: `host_call_guest()`/`host_service_alarms()` should not let a guest context
    switch capture `lr = 0xFFFFFFFC`; the safe shape is to save the interrupted thread's registers into
@@ -517,8 +536,119 @@ re-entering `SequenceManager::Update` after frame 829.
    `__OSInterruptTable` is at `*(0x8087F810)`; a faithful retrace needs the OS's own exception-entry
    path, not a direct handler call.
 
+### 5c.9 The frame-829 stall was the host's MEM1 arena low: the engine heap lived inside the stack
+
+**Answer.** The boot thread did not stop looping because of the scheduler, a lost wakeup, or the
+`0x80534074` dispatch. It stopped because **an allocation returned a live stack address and the callee
+destroyed its own caller's frame**. The host had been telling the guest where MEM1's arena starts, and
+the number was inside the boot thread's stack.
+
+**The value is authoritative, not advisory.** `OSInit` (0x805EB660) at `0x805EB780` does
+`lwz r3,12556(0x80000000)` → `*(0x8000310C)`; if non-zero it jumps straight to
+`OSSetMEM1ArenaLo(that value)` at `0x805EB7E8` and skips its own computation. Watched with
+`TLS_WATCH_ADDR=0x8087E768` (that is `__OSArenaLo`, `-28504(r13)`):
+
+```
+[Runner] WATCH 0x8087E768: 0xFFFFFFFF -> 0x8088A000 by block pc=0x805ECC10 lr=0x805EB7EC (frame 0)
+```
+
+`0x8088A000` was a host constant in `init_wii_low_memory()` ("BI2 MEM1 ArenaLo"). The application's
+linker layout (`asm/ldscript.lcf`) says what it should have been, and the run confirms both halves of
+that layout:
+
+| Fact | Value | Confirmed by |
+|---|---|---|
+| end of `.bss` / `_stack_end` | `0x808893B0` | DOL load line `BSS: 0x807C66C0 - 0x808893B0` |
+| main-thread stack | `0x808893B0 … 0x808993B0` (64 KB) | `OSThread.stackEnd/stackBase` of `0x807CB658` |
+| debugger stack (`_db_stack_addr`) | `0x808993B0 + 0x2000` | `__OSThreadInit`-side layout in the lcf |
+| `__ArenaLo` therefore | `align32(0x8089B3B0)` = `0x8089B3C0` | lcf `__ArenaLo = (_db_stack_addr + 0x1f) & ~0x1f` |
+
+So the old constant sat **0xC50 bytes above the end of `.bss`**, i.e. *inside* the boot thread's stack,
+not above it.
+
+**How that became a stop at exactly frame 830.** The engine's memory manager (`fn_80082CAC`) does
+`lo = OSGetMEM1ArenaLo(); hi = OSGetMEM1ArenaHi();` and creates a 1 MB heap on `lo` via
+`fn_80084EE8(manager+408, lo, 0x100000)` → `fn_8022AB18(lo, 0x100000, 1)` → arena `0x8088A008`. That
+heap grows upward *through the stack*; nothing notices until it reaches live frames. At frame 830 the
+taps and a 256-dispatch tail (`TLS_TAIL_RING=1 TLS_TAIL_PROBE=1`) show the exact chain:
+
+```
+f=830 pc=0x800838B8 lr=0x8008CA74 sp=0x80898D58 r3=0x807C709C r4=0xA0 r5=0x20 r6=9   ; alloc through vtable
+f=830 pc=0x80084F30 lr=0x80083930 ...                                              ; vtable slot 3
+f=830 pc=0x8022B848 lr=0x80083930 r3=0x8088A008 r4=0x20 r5=0xA0                     ; (arena, align, size)
+f=830 pc=0x8022A930 lr=0x80083930 ...                                              ; heap allocator
+f=830 pc=0x80083930 lr=0x80083930 sp=0x80898D28 r3=0x80898D60  <-- STACK ADDRESS RETURNED
+f=830 pc=0x000000A8 lr=0x000000AA sp=0x80898D58 r3=0x80898D60  <-- returned to garbage
+```
+
+`0x80898D60` is inside the live stack window, `0x80898D28` is the current `sp`. `fn_800838B8`'s
+epilogue (`lmw r27,12(r1); lwz r0,0x34(r1); mtlr r0; addi r1,r1,0x30; blr`) then loaded
+`0x000000AA` from its own clobbered save slot and returned to `0xA8`. Everything after that in the log
+is consequence: the safeguard recovers to the task scheduler, the boot thread executes string data as
+code (`0x65787474` = `"extu"` from a `"…el/textures/…"` path), and the last stray jump lands on
+`0xFFFFFFFC` — which is where the `lr=0xFFFFFFFF` "stray host sentinel" line came from.
+
+**Correction to §5c.8's priority 1.** The host-callback sentinel leak was *not* a cause and has never
+been observed: with `TLS_HOSTCALLBACK_PROBE=1` every host callback ends at the sentinel with the thread
+unchanged, and `host_repair_sentinel_in_thread()` never fires. The single stray-sentinel report was the
+tail of the stack corruption above. The repair is kept because the leak would be silent and fatal if it
+ever did happen, but do not "fix" the callback design for it.
+
+**The fix** (`recomp/host_runner.c`): the low-memory map is derived from the DOL instead of guessed.
+
+```c
+arena_lo = align32(dol.bss_address + dol.bss_size      /* static end            */
+                   + 0x10000                            /* main thread stack     */
+                   + 0x2000);                           /* debugger stack        */
+/* 0x8089B3C0 for this build; TLS_ARENALO=<hex> overrides for A/B only. */
+```
+
+**Evidence.** 2400-frame run at 60 fps, `--window --no-audio`:
+
+```
+GameTask::Init           calls=149    first=658    last=1032
+GameTask::Update         calls=678    first=1033   last=2398
+GameTask::Draw           calls=678    first=1034   last=2398
+SequenceManager::Update  calls=1267   first=167    last=2398
+frame 1500: GX 99774 vtx (91 batches) | frame 2160: GX 262143 vtx (62 batches)
+```
+
+No stray sentinel, no non-code dispatch after the two known boot-time ones, no CPU exception, and the
+Gurgan Cave scene is on screen (`build/recomp/d3d11_screenshot_1100.ppm`, `_1200`, `_1500`: rock walls,
+water with a sky reflection, a moving camera). A/B with `TLS_ARENALO=0x8088A000` restores the old
+signature byte for byte — `Init calls=31 last=829`, `SequenceManager calls=472 last=829`, stray sentinel
+— so the causal link is measured, not argued.
+
+**New probes and tools (all inert unless set):**
+
+| Knob | Effect |
+|---|---|
+| `TLS_TAIL_RING=1` | keeps the last 256 dispatches (pc, lr, sp, r3–r7, ctr, frame, callback depth) |
+| `TLS_TAIL_PROBE=1` | dumps that ring at the first non-code address (×3) and at a stray sentinel |
+| `TLS_TRACE_FROM=<frame>` | streams every dispatch from that frame (`TLS_TRACE_MAX`, default 400) |
+| `TLS_HOSTCALLBACK_PROBE=1` | names each host callback, where it ended, and whether the thread changed |
+| `TLS_ARENALO=<hex>` | overrides the computed arena low (A/B only — do not ship a value this way) |
+| shutdown | the boot thread line now also prints `stackBase`/`stackEnd` and whether `SP` is inside |
+| `tools/resolve_symbol.py 0x80083930` | names guest addresses from `config/symbols.txt` |
+
+**What is still open after this fix** (observed, not guessed):
+
+- The water/reflection pass renders with black cut-outs and a pink sky reflection (see the screenshots);
+  GX vertex counts hit exactly `0x3FFFF` (262143) on heavy frames, which may be a pipeline buffer cap
+  rather than the guest's own limit.
+- No player character or HUD has been confirmed yet; the camera moves through the cave while
+  `Streaming Queue: active="data/texture/pc_hand_paint_a.texture"` shows character assets arriving.
+- Two non-code dispatches remain, both at frame 0 (`0x005F2A10`/`0x005F2A90`, `lr=0x805F2F18/0x805F2F48`,
+  `0x805F2E90` → `OSMemory.c` region). They are handled by the generic safeguard and the run continues;
+  they deserve a name before the safeguard is ever tightened.
+
+
 
 ### 5c.7 The stop is the boot thread's own loop ending at frame 829
+
+> **Superseded by §5c.9.** The loop did not "end": the boot thread returned into garbage because an
+> allocation had overwritten its stack frame. The measurements below are still the ones that pinned the
+> frame; the conclusion is not.
 
 Two new probes pin the transition exactly. `tls_dump_taps()` records call count and first/last frame
 for the four GameTask methods plus the sequence manager:
