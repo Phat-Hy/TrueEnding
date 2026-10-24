@@ -729,6 +729,15 @@ The cause is the bit-extract at `0x80534294`. The asm listing renders the same b
 CR0[SO]; under the architectural layout it is CR7[LT]. Neither is the CR0[EQ] that `fcmpo`+`cror`
 produced, so the gate cannot pass.
 
+**Observed behaviour of the gate (measured, and it is inconsistent).** `.L_805342D0` writes `f256 := f160`
+(0 → 150) and commits fade state. Because the branch is taken on *every* press once that has happened,
+`SetMode(2)` is only reachable on the **first** press that arrives while `f256` is still 0 — i.e. the very
+first frames of mode 1. That matches the runs: a single `A` at frame 400 sometimes walks the mode machine
+`1→2→3→4→5→9→11→12→16→17→18→19→20→22→25` (15 transitions) and sometimes stays in mode 1, depending on
+which frame the title actually reaches mode 1 in that run (asset streaming timing varies). Pressing
+repeatedly makes it *worse*, not better: the first press locks the gate and every later press re-enters
+the dead branch. That nondeterminism belongs to the gate, not to the input script.
+
 **Next experiment (prepared, not yet landed).** `mfcr` is emitted as a raw `ctx->gpr[rd] = ctx->cr` and
 `mtcrf` as a raw masked copy, so the guest sees the emulator's reversed CR image instead of the
 architectural one. Converting at that boundary (`guest = bitreverse32(cr)`, and the same on the way in)
