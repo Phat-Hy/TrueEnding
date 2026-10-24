@@ -1204,8 +1204,190 @@ static void ios_close_fd(int fd) {
     }
 }
 
+/* Wait-loop probe. The Chapter 1 handoff wedges with the guest parked inside
+ * OSSleepThread on the queue at 0x807C6F60, called from the drain loop at
+ * 0x80071CFC..0x80071D44, ~175 times per frame. That loop reads two halfwords
+ * (0x807C6FB8 / 0x807C6FBA) and keeps sleeping while their difference says the
+ * producer is more than one entry ahead of the consumer - so either the counter
+ * is never advanced by whatever "consumes" it, or the waiter is not the party
+ * that is supposed to be woken. Name the waiter (guest back chain) and the exact
+ * counter values instead of guessing which of those it is.
+ * Inert unless TLS_WAIT_PROBE=1. */
+static void tls_wait_probe(CPUState* ctx, u32 queue_addr) {
+    static int s_enabled = -1;
+    static u32 s_calls = 0;
+    static u32 s_reports = 0;
+    if (s_enabled < 0) {
+        s_enabled = getenv("TLS_WAIT_PROBE") ? 1 : 0;
+    }
+    if (!s_enabled) return;
+    if (queue_addr < 0x807C0000u || queue_addr >= 0x807D0000u) return;
+
+    s_calls++;
+    bool full = (s_calls <= 6) || (s_calls % 2000u) == 0u;
+    if (!full && (s_calls % 250u) != 0u) return;
+    if (!full && s_reports > 400u) return;
+    s_reports++;
+
+    u32 w = mem_read16(ctx, 0x807C6FB8);
+    u32 r = mem_read16(ctx, 0x807C6FBA);
+    u32 runbits = mem_read32(ctx, 0x8087FC60);
+    u32 cur = mem_read32(ctx, 0x800000E4);
+    u32 tstate = cur ? (u32)mem_read16(ctx, cur + 0x2C8) : 0;
+    s32 tsusp = cur ? (s32)mem_read32(ctx, cur + 0x2CC) : 0;
+    u32 tqueue = cur ? mem_read32(ctx, cur + 0x2DC) : 0;
+    printf("[TLS WAIT] #%u q=0x%08X W=%u R=%u lr=0x%08X runbits=0x%08X cur=0x%08X st=%u susp=%d tq=0x%08X\n",
+           s_calls, queue_addr, w, r, ctx->lr, runbits, cur, tstate, tsusp, tqueue);
+    if (full) {
+        /* Guest stack walk: each frame starts with the caller's SP then its LR. */
+        u32 sp = ctx->gpr[1];
+        for (int depth = 0; depth < 10; depth++) {
+            if (sp < 0x80000000u || sp >= 0x84000000u || (sp & 3u)) break;
+            u32 back = mem_read32(ctx, sp);
+            u32 saved_lr = mem_read32(ctx, sp + 4);
+            printf("           frame %d sp=0x%08X lr=0x%08X back=0x%08X\n",
+                   depth, sp, saved_lr, back);
+            if (back <= sp) break;
+            sp = back;
+        }
+    }
+    fflush(stdout);
+}
+
+/* Registry of every OSThreadQueue the guest has slept on, plus a dump of the
+ * ones that still hold waiters. The Chapter 1 wedge leaves the guest parked in
+ * the OS idle loop (0x805F50B0) with RunQueueBits == 0, which means every thread
+ * is blocked and nothing on the host side ever signals the queue they are on.
+ * Enumerating the still-occupied queues names the missing wake source directly
+ * instead of guessing at it. */
+#define TLS_SLEEP_QUEUE_MAX 48
+static u32 s_sleep_queues[TLS_SLEEP_QUEUE_MAX];
+static u32 s_sleep_queue_lr[TLS_SLEEP_QUEUE_MAX];
+static u32 s_sleep_queue_count = 0;
+
+static void tls_note_sleep_queue(u32 queue_addr, u32 caller_lr) {
+    if (queue_addr < 0x80000000u || queue_addr >= 0x94000000u) return;
+    for (u32 i = 0; i < s_sleep_queue_count; i++) {
+        if (s_sleep_queues[i] == queue_addr) return;
+    }
+    if (s_sleep_queue_count < TLS_SLEEP_QUEUE_MAX) {
+        s_sleep_queue_lr[s_sleep_queue_count] = caller_lr;
+        s_sleep_queues[s_sleep_queue_count++] = queue_addr;
+    }
+}
+void tls_dump_sleep_queues(CPUState* ctx) {
+    printf("\n[Runner] OSThreadQueues that still hold waiters (%u queues observed):\n",
+           s_sleep_queue_count);
+    for (u32 i = 0; i < s_sleep_queue_count; i++) {
+        u32 q = s_sleep_queues[i];
+        u32 head = mem_read32(ctx, q);
+        if (!head) continue;
+        if (head < 0x80000000u || head >= 0x94000000u) {
+            printf("         queue 0x%08X: head 0x%08X (not a thread pointer)\n", q, head);
+            continue;
+        }
+        printf("         queue 0x%08X (first sleep from lr=0x%08X):\n", q, s_sleep_queue_lr[i]);
+        u32 t = head;
+        for (int n = 0; n < 8 && t >= 0x80000000u && t < 0x94000000u; n++) {
+            u16 state = mem_read16(ctx, t + 0x2C8);
+            s32 susp = (s32)mem_read32(ctx, t + 0x2CC);
+            u32 prio = mem_read32(ctx, t + 0x2D0);
+            u32 srr0 = mem_read32(ctx, t + 0x198);   /* context.srr0 = resume PC */
+            u32 lr = mem_read32(ctx, t + 0x084);     /* context.lr */
+            u32 sp = mem_read32(ctx, t + 0x004);     /* context.gpr[1] */
+            printf("            thread 0x%08X state=%u susp=%d prio=%u resumePC=0x%08X lr=0x%08X sp=0x%08X\n",
+                   t, state, susp, prio, srr0, lr, sp);
+            /* Walk the blocked thread's own stack: each frame stores the caller's
+             * SP then the caller's LR, so these return addresses name the call
+             * chain that blocked it. */
+            u32 f = sp;
+            for (int depth = 0; depth < 6; depth++) {
+                if (f < 0x80000000u || f >= 0x84000000u || (f & 3u)) break;
+                u32 back = mem_read32(ctx, f);
+                printf("               sp=0x%08X callerLR=0x%08X back=0x%08X\n",
+                       f, mem_read32(ctx, f + 4), back);
+                if (back <= f) break;
+                f = back;
+            }
+            u32 next = mem_read32(ctx, t + 0x2E0);
+            if (next == t) break;
+            t = next;
+        }
+    }
+    fflush(stdout);
+}
+
+void tls_dump_watched_object(CPUState* ctx) {
+    const char* env = getenv("TLS_DUMP_OBJ");
+    if (!env) return;
+    u32 base = (u32)strtoul(env, NULL, 0);
+    if (base < 0x80000000u || !resolve_guest_pointer(ctx, base)) return;
+    printf("\n[Runner] Object dump at 0x%08X (TLS_DUMP_OBJ):\n", base);
+    for (u32 off = 0; off < 0x80; off += 16) {
+        printf("         0x%08X:", base + off);
+        for (u32 j = 0; j < 16; j += 4) printf(" %08X", mem_read32(ctx, base + off + j));
+        printf("\n");
+    }
+    /* Follow the first heap-looking pointers: a stalled operation manager keeps
+     * its pending request in one of its fields, and request objects often carry
+     * the source file name as inline text. */
+    for (u32 off = 0; off < 0x40; off += 4) {
+        u32 p = mem_read32(ctx, base + off);
+        if (p < 0x80000000u || p >= 0x94000000u || (p & 3u) || !resolve_guest_pointer(ctx, p)) continue;
+        printf("         -> [0x%02X] 0x%08X:\n", off, p);
+        for (u32 k = 0; k < 0x40; k += 16) {
+            printf("            0x%08X:", p + k);
+            for (u32 j = 0; j < 16; j += 4) printf(" %08X", mem_read32(ctx, p + k + j));
+            printf("\n");
+        }
+        for (u32 off2 = 0; off2 < 0x40; off2++) {
+            const char* s = (const char*)resolve_guest_pointer(ctx, p + off2);
+            if (!s) continue;
+            if ((s[0] >= 'a' && s[0] <= 'z') && (s[1] >= 'a' && s[1] <= 'z') && s[2] == '/') {
+                printf("            name@0x%02X: '%s'\n", off2, s);
+                break;
+            }
+        }
+    }
+    fflush(stdout);
+}
+
+/* The anime-track "safeguards" that used to live here clamped gpr[24], gpr[25] and
+ * the words at 300(r26)/316(r29) whenever they exceeded 256. Their premise was wrong:
+ * the recompiled code at 0x80200D00 loads 304(r26) - a pointer - and 0x80200D7C loads
+ * 312(r29); neither is a track count, so the clamps rewrote memory the loop never
+ * reads. One of them also zeroed gpr[24] before fn_801FFA04 sized a staging buffer,
+ * which left the buffer NULL and made the engine memcpy animation data to address 0,
+ * destroying __OSCurrentThread at 0x800000E4 and the rest of the OS low page. Verified
+ * by TLS_MEMCPY_PROBE: memcpy(dst=0x00000000, src=0x90303F14, len=450) from
+ * lr=0x801FFFB4 stopped happening once the generated chunks were re-lifted with
+ * DolRecomp and the in-chunk copies of these clamps were gone. They are removed for
+ * good; TLS_MEMCPY_PROBE / TLS_WATCH_CURRENT_THREAD still watch for their return. */
+
 int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
     tls_record_recent_call(address);
+
+    /* memcpy watch for writes into the OS low page. A byte-copy through
+     * memcpy (0x800062F8, whose tail loop is 0x80006460) with a NULL destination
+     * overwrote 0x80000000-0x800001C1 - including __OSCurrentThread at
+     * 0x800000E4 - whenever fn_801FFA04's staging buffer had been zeroed. Nothing
+     * in the game should ever copy into the first 16 KB of MEM1, so name the
+     * caller, destination, source and length of any such copy. Inert unless
+     * TLS_MEMCPY_PROBE=1. */
+    if (address == 0x800062F8u) {
+        static int s_probe = -1;
+        static int s_reports = 0;
+        if (s_probe < 0) s_probe = getenv("TLS_MEMCPY_PROBE") ? 1 : 0;
+        if (s_probe) {
+            u32 dst = ctx->gpr[3], src = ctx->gpr[4], len = ctx->gpr[5];
+            if (dst < 0x80004000u && s_reports < 16) {
+                s_reports++;
+                printf("[TLS MEMCPY] dst=0x%08X src=0x%08X len=%u lr=0x%08X sp=0x%08X\n",
+                       dst, src, len, ctx->lr, ctx->gpr[1]);
+                fflush(stdout);
+            }
+        }
+    }
 
     // Host callback sentinel: the runner enters guest callbacks (OSAlarm
     // handlers, DVD/IPC completion routines) with LR = TLS_HOST_CALLBACK_SENTINEL
@@ -1482,6 +1664,8 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // OSSleepThread probe & queue sanity check
         case 0x805F5C70: {
             u32 queue_addr = ctx->gpr[3];
+            tls_wait_probe(ctx, queue_addr);
+            tls_note_sleep_queue(queue_addr, ctx->lr);
             static u32 count_sleep = 0;
             if (++count_sleep <= 50 || count_sleep % 100 == 0) {
                 printf("[TLS OSSleepThread] #%u queue=0x%08X lr=0x%08X\n",
@@ -1742,6 +1926,14 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         case 0x805F3A80: // OSSendMessage
         case 0x805F3B00: // OSReceiveMessage
         case 0x805F3B40: { // OSJamMessage
+            /* OPEN ITEM: these three are answered as synchronous no-ops, but the
+             * recompiled runtime's real message-queue entry points are
+             * OSSendMessage at 0x805F26D0 and OSReceiveMessage at 0x805F27A0
+             * (verified in the disassembly: the sender bumps mq->used at +0x1C and
+             * wakes mq+8; the receiver sleeps on mq+8). Whatever these three
+             * addresses are, a caller that inspects the result is being told the
+             * call succeeded. Do not extend this pattern: identify each address
+             * from the disassembly before deciding, as with the rest of this file. */
             ctx->pc = ctx->lr;
             return 1;
         }
@@ -2978,80 +3170,11 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0; // Run original code
         }
 
-        // Safeguards against corrupt animation track counts in fn_801FFA04
-        case 0x801FFCA0:
-        case 0x801FFD2C:
-        case 0x801FFDC0:
-        case 0x801FFE50: {
-            u32 r24 = ctx->gpr[24];
-            if (r24 > 256) {
-                printf("[TLS AnimeTrack] Guarded corrupt track count %u -> 0 at 0x%08X (lr=0x%08X)\n",
-                       r24, ctx->pc, ctx->lr);
-                fflush(stdout);
-                ctx->gpr[24] = 0;
-            }
-            return 0; // Run original code with cleaned count
-        }
-
-        // Anime setup track loop safeguard (0x80200080)
-        case 0x80200080: {
-            u32 r24 = ctx->gpr[24];
-            if (r24 > 256) {
-                ctx->gpr[24] = 0;
-                ctx->gpr[25] = 0;
-            }
-            return 0; // Run original code
-        }
-
-        // Anime setup track search loop (0x80200D00)
-        case 0x80200D00: {
-            static int s_loop_entry_count = 0;
-            u32 r26 = ctx->gpr[26];
-            u32 r27 = ctx->gpr[27];
-            u32 r30 = ctx->gpr[30];
-            u32 count = mem_read32(ctx, r26 + 300);
-            u32 container_cnt = r30 ? mem_read32(ctx, r30 + 4) : 0;
-            if (r27 == 0 || r27 % 500 == 0) {
-                printf("[TLS 80200D00] #%d r26=0x%08X i=%u / count=%u, container 0x%08X cnt=%u\n",
-                       ++s_loop_entry_count, r26, r27, count, r30, container_cnt);
-                fflush(stdout);
-            }
-            if (count > 500) {
-                // If count is corrupt/unreasonable, clamp it so we don't stall
-                printf("[TLS 80200D00] CLAMPING excessive count %u -> 100 for r26=0x%08X\n", count, r26);
-                mem_write32(ctx, r26 + 300, 100);
-            }
-            return 0; // Run original code
-        }
-
-        // Anime setup inner track binding loop (0x80200D5C, 0x80200D7C, 0x80200E68)
-        // Failure Point 1: At 0x80200D7C, GameLoadTask enters an inner loop iterating tracks up to 316(r29).
-        // If 316(r29) is excessive / corrupt (>256), the linear dictionary search (fn_801F3E20) burns 8.6ms
-        // every frame endlessly, preventing SceneTask from launching Chapter 1.
-        case 0x80200D5C:
-        case 0x80200D7C:
-        case 0x80200E68: {
-            u32 r29 = ctx->gpr[29];
-            if (r29 >= 0x80000000 && r29 < 0x94000000) {
-                u32 count = mem_read32(ctx, r29 + 316);
-                u32 cur_idx = ctx->gpr[25];
-                if (count > 256) {
-                    static u32 s_clamp_d7c = 0;
-                    if (s_clamp_d7c++ < 20) {
-                        printf("[TLS 80200D7C] Clamping excessive track count %u (idx=%u) -> %u at r29=0x%08X (lr=0x%08X)\n",
-                               count, cur_idx, cur_idx + 8, r29, ctx->lr);
-                        fflush(stdout);
-                    }
-                    mem_write32(ctx, r29 + 316, cur_idx + 8);
-                }
-            }
-            return 0; // Run recompiled code with sanitized track count
-        }
-
         // CreateGameTask (0x80365708)
         case 0x80365708: {
             printf("[TLS CreateGameTask] Called! factory=0x%08X mgr=0x%08X (lr=0x%08X)\n",
                    ctx->gpr[3], ctx->gpr[4], ctx->lr);
+
             fflush(stdout);
             return 0; // Run original code
         }

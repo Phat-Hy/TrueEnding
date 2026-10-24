@@ -46,6 +46,10 @@ void tls_record_recent_call(u32 address);
 void tls_dump_recent_calls(void);
 int tls_is_idle_address(u32 address);
 
+// Dump every OSThreadQueue the guest has slept on that still holds waiters.
+void tls_dump_sleep_queues(CPUState* ctx);
+void tls_dump_watched_object(CPUState* ctx);
+
 // Return address the host plants in LR before entering a guest callback
 // (OSAlarm handler, DVD/IPC completion routine) so the callback's `blr` lands
 // back in the host. It is a host-side sentinel, not guest code, and dispatching

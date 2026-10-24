@@ -215,3 +215,109 @@ a tracked dependency of that translation unit).
 `ViewTask`/scene initialise, the guest keeps running with zero exceptions, `GameLoadTask +0x1C`
 advances (184 -> 408) and GX output grows during loading (1140 -> 2628 verts) — then the screen
 goes black to the end of the run. Loader, exception path and the missing menu are all ruled out.
+
+---
+
+## 5c. Addendum — session findings that supersede §5b's "exact current break point"
+
+Everything below was measured on this tree (`--window --frames 900/1000/2400 --fps 60`, host audio
+off), with the generated chunks **re-lifted from `orig/main.dol`** rather than hand-edited.
+
+### 5c.1 The generated chunks had been hand-edited, and that was destroying guest memory
+
+`python tools/recomp_harness.py lift` regenerated 459 chunks; **11 of them differed** from the
+committed-in-`build/` copies, i.e. they carried hand-injected clamps:
+
+| Injected code | Where | What it actually clamps |
+|---|---|---|
+| `if (ctx->gpr[24] > 256) ctx->gpr[24] = 0;` (8 sites) | `chunk_0126` (0x801FFC08…) | `gpr[24]` — the animation track count **and** the staging-buffer size |
+| `if (mem_read32(ctx, ea) > 256) mem_write32(ctx, ea, 0);` (4 sites) | `chunk_0127` (0x80200D…) | memory the loop never reads |
+
+The premise behind them was wrong. The instructions at those addresses are **not count loads**:
+
+```
+0x80200D00:  lwz r4, 304(r26)     ; a pointer, not "count at 300(r26)"
+0x80200D7C:  lwz r0, 312(r29)     ; not "track count at 316(r29)"
+```
+
+**Causal chain that the clamps created** (all observed, not inferred):
+
+1. `fn_801FFA04` sizes a staging buffer at `0x801FFC48` (`r3 = count`, `r4 = 8` element size) and
+   stores the result at `*(struct+0x84)` (`0x801FFC4C`).
+2. The injected clamp zeroes `gpr[24]` first, so the size becomes 0, the allocation is skipped and
+   `*(struct+0x84)` is stored as **0** (`0x801FFC58`).
+3. At `0x801FFF9C` the engine loads that field as a `memcpy` destination and copies the animation
+   data: `memcpy(dst=0x00000000, src=0x90303F14, len=450)` from `lr=0x801FFFB4`.
+4. Physical address 0 is guest `0x80000000`, so the copy overwrites `0x80000000–0x800001C1` —
+   the OS low page, **including `__OSCurrentThread` at `0x800000E4`**, which afterwards read
+   `0x80000001`. `OSSleepThread` loads that global and writes the thread state through it, so from
+   that moment sleep/reschedule is writing into garbage and the run wedges.
+
+**Verification:** `TLS_MEMCPY_PROBE=1` named the copy and stopped printing it after the re-lift;
+`TLS_WATCH_CURRENT_THREAD=1` showed the `__OSCurrentThread -> 0x80000001 [INVALID]` transition at
+frame 671 before the re-lift and no invalid transition after it. The four clamp blocks in
+`recomp/replacements.c` (cases `0x801FFCA0/0x801FFD2C/0x801FFDC0/0x801FFE50`, `0x80200080`,
+`0x80200D00`, `0x80200D5C/0x80200D7C/0x80200E68`) were removed for the same reason: same wrong
+offsets, same fake progress, and they rewrote guest memory.
+
+**Lesson to keep:** the chunk files are generated. Never patch them; re-lift. If a re-lift changes
+more than the DOL change explains, that diff is the hand-edit inventory.
+
+### 5c.2 Where the game actually stops (faithful build)
+
+Timeline on a 2400-frame run:
+
+| Frames | State |
+|---|---|
+| 0–240 | boot, `GX: 0 vtx` while assets load |
+| 240–420 | title renders: 78 → 50 013 verts/frame |
+| 420–610 | title menu, 35k–40k verts/frame, guest parked at the OS idle loop between frames |
+| 610–690 | Chapter 1 packs decompress, `GameTask::Init` #1/#2, `ViewTask::Init`, `SceneManager::Init`, ~90 `fn_801FFA04` animation binds |
+| 690–840 | load continues, GX 0 |
+| 840 → 2400 | **GX 0 for the rest of the run, guest parked at `0x805F50B0` (OS idle loop)**, `RunQueueBits == 0`, zero exceptions |
+
+The runner still reports 60 FPS because each frame executes almost no blocks — the guest is fully
+idle, not busy. `tls_dump_sleep_queues()` (new, runs at shutdown) shows **exactly two blocked
+threads**:
+
+```
+queue 0x8087D610 (first sleep from lr=0x8071D984)   <- main/worker thread 0x808638F0, prio 3
+    stack: 0x805F5420 -> 0x8071DC00 -> 0x8071D984 (drain loop at 0x8071D860) -> OSSleepThread
+queue 0x80879538 (first sleep from lr=0x805F27F8)   <- thread 0x80879210, prio 4
+    parked inside OSReceiveMessage (0x805F27A0) waiting for a mailbox message
+```
+
+The `0x8071D860` drain function walks three 12-byte list heads, calls a virtual destructor on each
+entry, then waits for `*(mgr+36)` to become 0 — i.e. it is waiting for a **pending operation/stream
+request to complete**. The text dump at the end of the run names it:
+`Streaming Queue: active="data/texture/water03_we01.texture" status=1`.
+
+So the open question is no longer "why does GX stop" but: **which producer is supposed to clear the
+pending operation at `*(0x8087D5xx+36)` and feed the mailbox at `0x80879530`?** Nothing on the host
+side ever signals either one.
+
+### 5c.3 Remaining fake-progress in the HLE (next to remove)
+
+- `case 0x805F3A80 / 0x805F3B00 / 0x805F3B40` in `recomp/replacements.c` return "success"
+  immediately, but the recompiled runtime's real `OSSendMessage`/`OSReceiveMessage` are
+  `0x805F26D0` / `0x805F27A0`. Annotated in place as an open item — identify before touching.
+- `0x800A555C` action 4 (`sim_press`) and the `--game` sequence override
+  (`mem_write32(mgr+80, 2)` in `0x800C3720`) advance the title without real input. They are what
+  lets a headless run reach Chapter 1 at all, but they are synthetic triggers. The replacement is a
+  frame-indexed deterministic input script feeding the same host input state the keyboard feeds.
+
+### 5c.4 New debug switches (all inert unless set)
+
+| Variable | Effect |
+|---|---|
+| `TLS_MEMCPY_PROBE=1` | names any `memcpy` whose destination is below `0x80004000` (OS low page) |
+| `TLS_WATCH_CURRENT_THREAD=1` | reports every `__OSCurrentThread` change, flags non-thread values |
+| `TLS_WAIT_PROBE=1` | logs `OSSleepThread` on the `0x807C6Fxx` queues with the two halfword counters and a guest stack walk |
+| `TLS_DUMP_OBJ=0x…` | hex-dumps that guest address at shutdown plus every heap pointer it finds in it, with inline file names |
+| `TLS_NO_FRAMEQUEUE_HACK=1` | stops the runner from rewriting `0x807C6FBA` / force-waking `0x807C6F60` every vblank |
+| `TLS_DUMP_EVERY=<n>` | (existing) dense frame capture |
+| shutdown | `tls_dump_sleep_queues()` always prints occupied `OSThreadQueue`s with each waiter's stack |
+
+**Build/run note:** `build/` is git-ignored, so the re-lift is not in git history —
+run `python tools/recomp_harness.py lift` after checking out.
+

@@ -303,6 +303,56 @@ static void host_report_runaway_slice(int frame, int frame_blocks, const char* w
     fflush(stdout);
 }
 
+/* __OSCurrentThread watchpoint. tls_wait_probe showed the guest sleeping inside
+ * OSSleepThread on 0x807C6F60 with the queue argument correct but the wake never
+ * arriving; the same probe read __OSCurrentThread (0x800000E4) as 0x80000001 and
+ * later 0x90000004 - neither is a thread object. OSSleepThread loads that global
+ * and writes the thread state through it, so once it is junk the sleep/reschedule
+ * pair cannot work and the caller spins. Sample it every block while
+ * TLS_WATCH_CURRENT_THREAD=1 and name the block that changed it. */
+static void host_watch_os_current_thread(CPUState* ctx, u32 block_pc) {
+    static int s_enabled = -1;
+    static u32 s_prev = 0;
+    static int s_reports = 0;
+    static int s_bad_reports = 0;
+    static int s_have_prev = 0;
+    if (s_enabled < 0) {
+        s_enabled = getenv("TLS_WATCH_CURRENT_THREAD") ? 1 : 0;
+    }
+    if (!s_enabled) return;
+    u32 cur = mem_read32(ctx, 0x800000E4);
+    if (!s_have_prev) { s_prev = cur; s_have_prev = 1; return; }
+    if (cur == s_prev) return;
+    u32 prev = s_prev;
+    s_prev = cur;
+    /* Anything that is not a 4-byte aligned address in the MEM1/MEM2 heaps is not
+     * an OSThread. Those transitions are the ones that matter; ordinary thread
+     * switches between two real thread objects are summarised by count only. */
+    bool invalid = (cur != 0) && ((cur & 3u) != 0u || cur < 0x80000000u);
+    if (invalid) {
+        if (s_bad_reports++ >= 40) return;
+    } else if (s_reports >= 6) {
+        return;
+    } else {
+        s_reports++;
+    }
+    printf("[Runner] __OSCurrentThread 0x%08X -> 0x%08X%s by block pc=0x%08X lr=0x%08X sp=0x%08X (frame %d)\n",
+           prev, cur, invalid ? " [INVALID]" : "", block_pc, ctx->lr, ctx->gpr[1], g_runner_current_frame);
+    printf("         0x800000C0:");
+    for (u32 a = 0x800000C0; a < 0x80000100; a += 4) printf(" %08X", mem_read32(ctx, a));
+    printf("\n");
+    u32 sp = ctx->gpr[1];
+    for (int depth = 0; depth < 8; depth++) {
+        if (sp < 0x80000000u || sp >= 0x80800000u || (sp & 3u)) break;
+        u32 back = mem_read32(ctx, sp);
+        u32 saved_lr = mem_read32(ctx, sp + 4);
+        printf("         frame %d sp=0x%08X lr=0x%08X back=0x%08X\n", depth, sp, saved_lr, back);
+        if (back <= sp) break;
+        sp = back;
+    }
+    fflush(stdout);
+}
+
 static inline int tls_run_blocks(CPUState* ctx, u32 max_blocks) {
     u32 blocks = 0;
     s_slice_sample_count = 0;
@@ -314,6 +364,7 @@ static inline int tls_run_blocks(CPUState* ctx, u32 max_blocks) {
         if (!dolrecomp_call(ctx, ctx->pc)) return 0;
         if (ctx->exception) return 0;
         blocks++;
+        host_watch_os_current_thread(ctx, pc_before);
 
         if ((blocks & 1023u) == 0u && s_slice_sample_count < 64) {
             s_slice_samples[s_slice_sample_count++] = ctx->pc;
@@ -539,9 +590,25 @@ static void host_service_alarms(CPUState* cpu) {
 
 static void host_simulate_vblank(CPUState* cpu, int frame_num) {
     (void)frame_num;
-    // 1. Advance graphics frame queue read index to match write index
-    u16 write_idx = mem_read16(cpu, 0x807C6FB8);
-    mem_write16(cpu, 0x807C6FBA, write_idx);
+    /* 0x807C6F60 is not free real estate. The guest treats it as an OSThreadQueue
+     * (OSSleepThread(0x807C6F60) from the drain loop at 0x80071CFC) *and* keeps its
+     * own two halfword counters at 0x807C6FB8 / 0x807C6FBA, which is what that loop
+     * tests. The previous unconditional "read index := write index" silently
+     * rewrote the guest's own counter once per frame, and the force-wakeup moved
+     * waiters to the run queue behind __OSReschedule's back. Both are guesses about
+     * what this word means; TLS_NO_FRAMEQUEUE_HACK=1 removes them so the effect can
+     * be measured instead of assumed. */
+    static int s_hack = -1;
+    if (s_hack < 0) {
+        s_hack = getenv("TLS_NO_FRAMEQUEUE_HACK") ? 0 : 1;
+        printf("[Runner] VBlank frame-queue hack: %s\n", s_hack ? "enabled (legacy)" : "DISABLED (TLS_NO_FRAMEQUEUE_HACK)");
+        fflush(stdout);
+    }
+    if (s_hack) {
+        // 1. Advance graphics frame queue read index to match write index
+        u16 write_idx = mem_read16(cpu, 0x807C6FB8);
+        mem_write16(cpu, 0x807C6FBA, write_idx);
+    }
 
     // 2. Signal VBlank retrace flags at r13 (pre-retrace at -26599, post-retrace at -26598)
     mem_write8(cpu, 0x808852A0 - 26599, 1);
@@ -551,7 +618,9 @@ static void host_simulate_vblank(CPUState* cpu, int frame_num) {
     cpu->timebase += 1000000;
 
     // 4. Safely wake up threads waiting on graphics frame queue if any
-    host_wakeup_thread_queue(cpu, 0x807C6F60);
+    if (s_hack) {
+        host_wakeup_thread_queue(cpu, 0x807C6F60);
+    }
 }
 
 int main(int argc, char** argv) {
@@ -923,6 +992,8 @@ int main(int argc, char** argv) {
         printf("\n[Texture 0x90742780]: resolve_guest_pointer returned NULL!\n");
     }
     tls_dump_recent_calls();
+    tls_dump_sleep_queues(&cpu);
+    tls_dump_watched_object(&cpu);
     printf("         Final PC: 0x805F50B0? Actual PC: 0x%08X, LR: 0x%08X, SP: 0x%08X\n", cpu.pc, cpu.lr, cpu.gpr[1]);
     printf("         Exception: 0x%08X, ProgramExc: 0x%08X\n", cpu.exception, cpu.program_exception);
     printf("         SRR0 (Faulting CIA): 0x%08X, SRR1: 0x%08X\n", cpu.srr0, cpu.srr1);
