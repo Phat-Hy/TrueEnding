@@ -62,6 +62,14 @@ static uint8_t s_alpha_ref0 = 0;
 
 static float s_clear_color[4] = {0.0f, 0.0f, 0.0f, 1.0f};
 
+/* EFB -> texture copy state (see the 0x49/0x4A/0x4B/0x52 handling in
+ * gx_pipeline_process_bp). Decoded with tools/decode_bp_copy.py. */
+static uint32_t s_efb_copy_x0 = 0, s_efb_copy_y0 = 0;
+static uint32_t s_efb_copy_x1 = 639, s_efb_copy_y1 = 479;
+static uint32_t s_efb_copy_dst_guest = 0;
+static uint32_t s_efb_copy_format = 0;
+static uint32_t s_efb_copy_count = 0;
+
 void gx_pipeline_set_clear_color(float r, float g, float b, float a) {
     s_clear_color[0] = r;
     s_clear_color[1] = g;
@@ -720,6 +728,42 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
         return;
     }
     static uint8_t s_clear_r = 0, s_clear_g = 0, s_clear_b = 0, s_clear_a = 255;
+    /* EFB copy registers (TEXCOPYSRC 0x49/0x4A, TEXCOPYDST 0x4B, TEXCOPYEXEC 0x52).
+     * The game copies the framebuffer into MEM2 textures every frame - that is how the
+     * water reflection and the menu blur are produced - and until now these writes were
+     * dropped, so those textures sampled uninitialised memory (handover 5c.11).
+     * The registers are recorded here and each copy is reported under
+     * TLS_EFB_COPY_PROBE=1; performing the GPU->guest-memory copy is the next step
+     * (source rect is decoded, destination is a 4x4-tiled GX texture). */
+    if (reg == 0x49) { // TEXCOPYSRC (left/top)
+        s_efb_copy_x0 = val & 0x3FF;
+        s_efb_copy_y0 = (val >> 10) & 0x3FF;
+        return;
+    }
+    if (reg == 0x4A) { // TEXCOPYSRC (right/bottom)
+        s_efb_copy_x1 = val & 0x3FF;
+        s_efb_copy_y1 = (val >> 10) & 0x3FF;
+        return;
+    }
+    if (reg == 0x4B) { // TEXCOPYDST (address >> 5 in bits 0..23, format in 24..26)
+        s_efb_copy_dst_guest = 0x80000000u + ((val & 0xFFFFFF) << 5);
+        s_efb_copy_format = (val >> 24) & 0x7;
+        return;
+    }
+    if (reg == 0x52) { // TEXCOPYEXEC
+        static int s_copy_probe = -1;
+        static int s_copy_reports = 0;
+        if (s_copy_probe < 0) s_copy_probe = getenv("TLS_EFB_COPY_PROBE") ? 1 : 0;
+        s_efb_copy_count++;
+        if (s_copy_probe && s_copy_reports < 12) {
+            s_copy_reports++;
+            printf("[EfbCopy] #%u src=(%u,%u)-(%u,%u) dst=0x%08X fmt=%u (raw exec=0x%06X)\n",
+                   s_efb_copy_count, s_efb_copy_x0, s_efb_copy_y0, s_efb_copy_x1, s_efb_copy_y1,
+                   s_efb_copy_dst_guest, s_efb_copy_format, val);
+            fflush(stdout);
+        }
+        return;
+    }
     if (reg == 0x4F) { // BP_CLEAR_AR
         s_clear_r = (uint8_t)(val & 0xFF);
         s_clear_a = (uint8_t)((val >> 8) & 0xFF);

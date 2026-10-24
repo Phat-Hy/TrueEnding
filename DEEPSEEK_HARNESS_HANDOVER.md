@@ -828,8 +828,23 @@ bits 0..23** (the low five bits are implicit, which is why a 22-bit field cannot
 in bits 24..26; the guest address is `physical + 0x80000000` (flat model). Both destinations land in MEM2
 next to the other texture allocations, which is the cross-check that the decode is right.
 
-**What implementing it needs** (next task, not started): record `0x49`/`0x4A`/`0x4B` in
-`gx_pipeline_process_bp()`, and on `0x52` read back the current EFB region from the D3D11 render target
+**The registers are now recorded and every copy is reported** (`TLS_EFB_COPY_PROBE=1`), which names
+all four destinations the game copies into every frame:
+
+```
+[EfbCopy] #1 src=(0,0)-(639,447) dst=0x900997E0 fmt=0   <- VI framebuffer 0
+[EfbCopy] #2 src=(0,0)-(639,447) dst=0x9038D1C0 fmt=0   <- reflection/blur texture
+[EfbCopy] #3 src=(0,0)-(639,447) dst=0x90536FE0 fmt=0   <- second reflection target
+[EfbCopy] #5 src=(0,0)-(639,447) dst=0x900037C0 fmt=0   <- VI framebuffer 1
+```
+
+So the missing feature is not only the water: it also means **the guest never writes its own VI
+framebuffers** (`0x900037C0`/`0x900997E0` are the two addresses the runner dumps at shutdown, and they
+come out as uniform garbage - the visible picture only exists because the D3D11 backend draws the decoded
+GX primitives itself). Implementing the copy fixes the water, the menu blur/reflection *and* the guest XFB
+in one change.
+
+**What implementing it needs** (next task, not started): on `0x52` read back the current EFB region from the D3D11 render target
 (the screenshot path in `gfx_d3d11.c` already does `CopyResource` + `Map(READ)` into a staging texture)
 and convert it to the destination format the register names (RGBA8 first; RGB565 next), then write it into
 guest memory at `dest`, honouring the source rectangle. That single feature covers the water, the menu
