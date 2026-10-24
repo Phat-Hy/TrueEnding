@@ -62,6 +62,8 @@ typedef struct {
     uint32_t* gx_staging_rgba;
     uint32_t gx_staging_capacity;
     uint32_t frame_counter;
+    /* viewport rect used to scale the GX image onto the backbuffer (EFB copy) */
+    float vp_x, vp_y, vp_w, vp_h;
     
     int fb_width;
     int fb_height;
@@ -72,6 +74,9 @@ typedef struct {
     GfxAspectRatio aspect_ratio;
     uint32_t* rgba_staging;
 } D3D11Backend;
+
+/* EFB -> texture copy (implemented below, registered by d3d11_init). */
+static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1, uint32_t format);
 
 static D3D11Backend s_d3d11 = {0};
 
@@ -325,6 +330,7 @@ bool d3d11_init(HWND hwnd, const GfxConfig* config) {
 
     printf("[D3D11] Initialized Direct3D 11 Hardware Graphics Pipeline (%dx%d, VSync: %s)\n",
            s_d3d11.win_width, s_d3d11.win_height, s_d3d11.vsync ? "ON" : "OFF");
+    gx_pipeline_set_efb_copy_hook(d3d11_efb_copy_to_guest);
     return true;
 }
 
@@ -1106,6 +1112,83 @@ static void save_backbuffer_bmp(const char* bmp_path) {
     }
 }
 
+/* GX EFB -> texture copy (BP 0x52). Reads the requested GX-space rectangle out of the
+ * backbuffer and writes it into guest memory as a GX RGBA8 texture, in the same 4x4
+ * tile layout that decode_gx_texture() reads (32 bytes of A/R pairs, then 32 bytes of
+ * G/B pairs, per tile). This is what produces the water reflection, the menu blur and
+ * the guest's own VI framebuffers - none of which existed while the copy was ignored
+ * (handover 5c.11). */
+static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0,
+                                    uint32_t x1, uint32_t y1, uint32_t format) {
+    if (!s_d3d11.device || !s_d3d11.context || !s_d3d11.swap_chain) return;
+    if (format != 0) {
+        static int s_fmt_reported = 0;
+        if (s_fmt_reported++ < 4) {
+            printf("[EfbCopy] format %u not implemented (only RGBA8); copy skipped\n", format);
+            fflush(stdout);
+        }
+        return;
+    }
+    if (x1 < x0 || y1 < y0) return;
+
+    uint32_t w = x1 - x0 + 1;
+    uint32_t h = y1 - y0 + 1;
+    if (w > 1024 || h > 1024) return;
+
+    uint8_t* guest = (uint8_t*)host_resolve_gx_guest_addr(dst_guest);
+    if (!guest) {
+        static int s_addr_reported = 0;
+        if (s_addr_reported++ < 4) {
+            printf("[EfbCopy] destination 0x%08X is not mapped; copy skipped\n", dst_guest);
+            fflush(stdout);
+        }
+        return;
+    }
+
+    ID3D11Texture2D* back_buffer = NULL;
+    if (FAILED(IDXGISwapChain_GetBuffer(s_d3d11.swap_chain, 0, &IID_ID3D11Texture2D, (void**)&back_buffer)))
+        return;
+
+    D3D11_TEXTURE2D_DESC desc;
+    ID3D11Texture2D_GetDesc(back_buffer, &desc);
+    desc.Usage = D3D11_USAGE_STAGING;
+    desc.BindFlags = 0;
+    desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+    desc.MiscFlags = 0;
+    ID3D11Texture2D* staging = NULL;
+    if (SUCCEEDED(ID3D11Device_CreateTexture2D(s_d3d11.device, &desc, NULL, &staging))) {
+        ID3D11DeviceContext_CopyResource(s_d3d11.context, (ID3D11Resource*)staging, (ID3D11Resource*)back_buffer);
+        D3D11_MAPPED_SUBRESOURCE mapped;
+        if (SUCCEEDED(ID3D11DeviceContext_Map(s_d3d11.context, (ID3D11Resource*)staging, 0, D3D11_MAP_READ, 0, &mapped))) {
+            const uint8_t* src = (const uint8_t*)mapped.pData;
+            float sx = (s_d3d11.vp_w > 0.0f) ? (s_d3d11.vp_w / 640.0f) : (float)desc.Width / 640.0f;
+            float sy = (s_d3d11.vp_h > 0.0f) ? (s_d3d11.vp_h / 480.0f) : (float)desc.Height / 480.0f;
+            uint32_t tiles_x = (w + 3) / 4;
+            for (uint32_t gy = 0; gy < h; gy++) {
+                uint32_t py = (uint32_t)(s_d3d11.vp_y + ((float)(y0 + gy) + 0.5f) * sy);
+                if (py >= desc.Height) py = desc.Height - 1;
+                const uint8_t* row = src + (size_t)py * mapped.RowPitch;
+                for (uint32_t gx = 0; gx < w; gx++) {
+                    uint32_t px = (uint32_t)(s_d3d11.vp_x + ((float)(x0 + gx) + 0.5f) * sx);
+                    if (px >= desc.Width) px = desc.Width - 1;
+                    const uint8_t* p = row + (size_t)px * 4;
+                    uint8_t b = p[0], g = p[1], r = p[2], a = p[3];
+                    uint32_t tile = (gy / 4) * tiles_x + (gx / 4);
+                    uint32_t within = (gy % 4) * 4 + (gx % 4);
+                    uint8_t* tile_base = guest + (size_t)tile * 64;
+                    tile_base[within * 2 + 0] = a;
+                    tile_base[within * 2 + 1] = r;
+                    tile_base[32 + within * 2 + 0] = g;
+                    tile_base[32 + within * 2 + 1] = b;
+                }
+            }
+            ID3D11DeviceContext_Unmap(s_d3d11.context, (ID3D11Resource*)staging, 0);
+        }
+        ID3D11Texture2D_Release(staging);
+    }
+    ID3D11Texture2D_Release(back_buffer);
+}
+
 bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     if (!s_d3d11.device || !s_d3d11.swap_chain) return false;
 
@@ -1223,6 +1306,10 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
         }
     }
 
+    s_d3d11.vp_x = vx;
+    s_d3d11.vp_y = vy;
+    s_d3d11.vp_w = vw;
+    s_d3d11.vp_h = vh;
     D3D11_VIEWPORT vp = {0};
     vp.TopLeftX = vx;
     vp.TopLeftY = vy;

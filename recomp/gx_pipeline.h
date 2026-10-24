@@ -93,6 +93,14 @@ const GxVertex* gx_pipeline_get_vertices(uint32_t* out_count);
 // Non-zero means visible geometry was dropped; report it, never hide it.
 uint32_t gx_pipeline_get_dropped_vertices(void);
 
+// Performs an EFB -> texture copy for the guest (called on TEXCOPYEXEC, BP 0x52).
+// (dst_guest, x0, y0, x1, y1, format) with format 0 = RGBA8, 1 = RGB565.
+// Implemented by the active graphics backend; when unset the copy is recorded and
+// reported but not performed (see handover 5c.11).
+typedef void (*GxEfbCopyFunc)(uint32_t dst_guest, uint32_t x0, uint32_t y0,
+                              uint32_t x1, uint32_t y1, uint32_t format);
+void gx_pipeline_set_efb_copy_hook(GxEfbCopyFunc func);
+
 // Active texture state
 typedef struct {
     uint32_t width;

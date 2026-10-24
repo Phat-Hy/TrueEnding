@@ -844,7 +844,22 @@ come out as uniform garbage - the visible picture only exists because the D3D11 
 GX primitives itself). Implementing the copy fixes the water, the menu blur/reflection *and* the guest XFB
 in one change.
 
-**What implementing it needs** (next task, not started): on `0x52` read back the current EFB region from the D3D11 render target
+**First implementation landed, timing still wrong.** `0x52` now calls a backend hook
+(`gx_pipeline_set_efb_copy_hook`) and `gfx_d3d11.c` implements the copy: read the requested GX-space
+rectangle out of the backbuffer through a staging texture (viewport rect captured in `d3d11_present`),
+then write it into guest memory as a GX RGBA8 texture in the same 4x4 tile layout that
+`decode_gx_texture()` reads (32 bytes of A/R pairs then 32 bytes of G/B pairs per tile). Measured effect:
+the guest VI framebuffers are no longer uniform - `framebuffer_0/1.ppm` went from 1 unique colour to 2948
+and 507 - and the run is stable (950 frames, no exception, picture unchanged).
+
+What is still wrong is *when* the copy happens. This backend is frame-batched: `d3d11_present()` draws the
+whole frame's geometry at end of frame, so a copy the guest issues mid-frame reads a backbuffer that holds
+the previous frame's composite (and mostly the clear colour). The dump still shows ~48% clear-green, so the
+next step is to keep the last *completed* frame in a dedicated render target (or copy it aside at end of
+frame) and serve EFB copies from that, instead of from the live swap-chain buffer. The copy plumbing,
+format handling (RGBA8 only; other formats are reported and skipped) and guest-side tiling are done.
+
+**What the rest of the work needs** (unchanged): on `0x52` read back the current EFB region from the D3D11 render target
 (the screenshot path in `gfx_d3d11.c` already does `CopyResource` + `Map(READ)` into a staging texture)
 and convert it to the destination format the register names (RGBA8 first; RGB565 next), then write it into
 guest memory at `dest`, honouring the source rectangle. That single feature covers the water, the menu

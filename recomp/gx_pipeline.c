@@ -69,6 +69,7 @@ static uint32_t s_efb_copy_x1 = 639, s_efb_copy_y1 = 479;
 static uint32_t s_efb_copy_dst_guest = 0;
 static uint32_t s_efb_copy_format = 0;
 static uint32_t s_efb_copy_count = 0;
+static GxEfbCopyFunc s_efb_copy_hook = NULL;
 
 void gx_pipeline_set_clear_color(float r, float g, float b, float a) {
     s_clear_color[0] = r;
@@ -259,6 +260,10 @@ static inline float parse_comp_value(const uint8_t* p, uint8_t comp_type, uint8_
             *advance = 4;
             return read_f32_be(p);
     }
+}
+
+void gx_pipeline_set_efb_copy_hook(GxEfbCopyFunc func) {
+    s_efb_copy_hook = func;
 }
 
 void gx_pipeline_set_pointer_resolver(GxResolvePtrFunc func) {
@@ -755,6 +760,10 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
         static int s_copy_reports = 0;
         if (s_copy_probe < 0) s_copy_probe = getenv("TLS_EFB_COPY_PROBE") ? 1 : 0;
         s_efb_copy_count++;
+        if (s_efb_copy_hook) {
+            s_efb_copy_hook(s_efb_copy_dst_guest, s_efb_copy_x0, s_efb_copy_y0,
+                            s_efb_copy_x1, s_efb_copy_y1, s_efb_copy_format);
+        }
         if (s_copy_probe && s_copy_reports < 12) {
             s_copy_reports++;
             printf("[EfbCopy] #%u src=(%u,%u)-(%u,%u) dst=0x%08X fmt=%u (raw exec=0x%06X)\n",
