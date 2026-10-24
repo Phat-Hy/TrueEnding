@@ -753,8 +753,11 @@ was implemented and built — 479 `mfcr` sites picked it up — but it changed n
 reversal maps bit 28 ↔ bit 3, and this instruction needs neither) and was reverted rather than left
 unverified. The remaining question is therefore narrower: which bit does the *retail* machine's
 `extrwi. r0,r0,1,2` read, and what does `0x80534294` need to test for `SetMode(2)` to run. Instrument
-`ctx->cr` at `0x80534288`–`0x80534298` (e.g. by hooking a nearby dispatch point or by adding a temporary
-`label_` probe) and compare with `f0/f9` — that single measurement settles it. Toolchain note: the
+`ctx->cr` at `0x80534288`–`0x80534298` and compare with `f0/f9` — that single measurement settles it.
+The cheapest way to get it: the generated chunk assigns `ctx->pc = 0x80534288u;` before every instruction,
+so insert a one-line `printf` there **in `build/recomp/generated/chunks` as a throwaway measurement**, run
+once, then immediately `python tools/recomp_harness.py lift` to restore the generated file. Editing a chunk
+as a *fix* is forbidden (handover 5c.1); using it as a temporary instrument and re-lifting is not. Toolchain note: the
 recompiler's sources are excluded from git (`tools/DolRecomp/` in `.gitignore`); rebuild them with
 `ninja -C tools/DolRecomp/build` and re-lift (`python tools/recomp_harness.py lift`).
 
