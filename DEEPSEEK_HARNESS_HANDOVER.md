@@ -1145,9 +1145,11 @@ frame 357  mode 1   (press any button)
 ```
 
 The MENU screen draws correctly (`MENU`, `CONTINUE`, `NEW GAME`, `MULTIPLAYER` with Japanese sublabels, the
-selection mark on NEW GAME); **its background is a flat cyan field** instead of the cave/lake, which is the
-§5c.11 EFB-copy item showing up on screen. ~300 `pack/filesystem.pk` reads stream in during `GameTask::Init`
-(`data/material/*.material`, `data/model/pc_ga_m_a00.model`, ...).
+selection mark on NEW GAME) - `docs/evidence/13-title-menu-newgame-frame1800.png`; **its background is a flat
+cyan field** instead of the cave/lake, which is the §5c.11 EFB-copy item showing up on screen. The save dialog
+that mode 6 draws is `docs/evidence/14-save-dialog-corrupt-frame1300.png`, and the black screen after the
+handoff is `docs/evidence/15-post-handoff-black-frame1800.png`. ~300 `pack/filesystem.pk` reads stream in
+during `GameTask::Init` (`data/material/*.material`, `data/model/pc_ga_m_a00.model`, ...).
 
 #### The new stall: after the handoff the frame budget is consumed with no output
 
