@@ -897,6 +897,27 @@ unique colours but 93% of the image decodes as pure white. Neither is right yet,
 row-pitch question (1) is still the leading candidate - compare `build/recomp/framebuffer_0.ppm` between
 the two runs before changing anything else.
 
+**Root cause of the artefacts found (measurement only, not yet fixed).** The two VI framebuffer addresses
+the display copy targets are `0x900997E0` and `0x900037C0`, i.e. **614432 bytes apart** - and
+640x480x2 = 614400. Each VI buffer is therefore **16 bits per pixel** (RGB565 or YUV422), a linear scanout
+buffer, *not* the 32-bit RGBA8 layout the copy writes. Writing 4 bytes/pixel for a 640x448 rect means
+1146880 bytes into a 614400-byte buffer: the write runs straight past the end of one buffer into the next,
+which is exactly the doubled image, the bright field and the noisy strip seen in
+`docs/evidence/12-efb-copy-guest-framebuffer.png`.
+
+So the two copy classes need different encodings and one code path cannot serve both:
+
+| Copy | Destination | Encoding |
+|---|---|---|
+| display (`GXCopyDisp`) | the two VI buffers, 614400 B each | 16-bit linear scanout (RGB565 first; YUV422 if the picture is wrong) |
+| texture (`GXCopyTex`) | `0x9038D1C0`, `0x90536FE0`, `0x903DBDC0`, 640x448 or 160x112 | 4x4-tiled RGBA8 (current code) |
+
+The BP 0x4B format field reads 0 for both classes, so the distinction has to come from tracking
+`GXSetDispCopyFmt`/`GXSetDispCopyYScale` state or from the destination range - implement the display path
+as RGB565 linear first, keep the tiled path for the reflection textures, and check the lake reflection with
+`TLS_FB_RGBA8` off (the dump must then decode the XFB as RGB565, which is what its original YUV422 code
+should be replaced with, not supplemented).
+
 **What the rest of the work needs** (unchanged): on `0x52` read back the current EFB region from the D3D11 render target
 (the screenshot path in `gfx_d3d11.c` already does `CopyResource` + `Map(READ)` into a staging texture)
 and convert it to the destination format the register names (RGBA8 first; RGB565 next), then write it into
