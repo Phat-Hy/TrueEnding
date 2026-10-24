@@ -957,6 +957,14 @@ encoding (the tiled/RGB565 details above), not the source.
 copy is finished, the check is not only "does the lake look right" but "do the sampled textures match those
 dumps" - in particular the reflection target that receives the 160x112 copy, which is the one the water
 surface samples. Compare against the matching `tex1_*` files rather than eyeballing the lake.
+
+**Dumping the copy destinations works** (`TLS_EFB_DUMP=<first frame>`), which is the instrument for that
+comparison: it writes `build/recomp/efb_tex_<n>_<addr>.ppm`, decoded with the tiled RGBA8 layout, for the
+first copies after the given frame. First use at frame 1000: `efb_tex_0_9038D1C0.ppm` (640x448) decodes to
+243 unique colours, 99% pure black with ~850 white pixels - i.e. the logo screen, which is what is on screen
+at that point in the attract sequence, not the cave. The instrument needs a frame where the *cave* renders
+(the water only samples these textures then), so pick the frame from a run that reaches it rather than a
+fixed number.
 `TLS_FB_RGBA8` off (the dump must then decode the XFB as RGB565, which is what its original YUV422 code
 should be replaced with, not supplemented).
 

@@ -1285,6 +1285,44 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                 }
             }
             ID3D11DeviceContext_Unmap(s_d3d11.context, (ID3D11Resource*)staging, 0);
+            /* Dump a copy destination as a PPM, decoded with the same tile layout, so the
+             * picture the guest will sample can be compared with the Dolphin reference
+             * dump. TLS_EFB_DUMP=<frame> dumps the copies issued in that frame. */
+            {
+                static int s_dump_frame = -2;
+                if (s_dump_frame == -2) {
+                    const char* f = getenv("TLS_EFB_DUMP");
+                    s_dump_frame = f ? atoi(f) : -1;
+                }
+                extern int g_runner_current_frame;
+                if (s_dump_frame >= 0 && g_runner_current_frame >= s_dump_frame) {
+                    static int s_dump_n = 0;
+                    if (s_dump_n < 4) {
+                        char path[96];
+                        snprintf(path, sizeof(path), "build/recomp/efb_tex_%d_%08X.ppm",
+                                 s_dump_n, dst_guest);
+                        FILE* df = fopen(path, "wb");
+                        if (df) {
+                            fprintf(df, "P6\n%u %u\n255\n", w, h);
+                            uint32_t dtx = (w + 3) / 4;
+                            for (uint32_t yy = 0; yy < h; yy++) {
+                                for (uint32_t xx = 0; xx < w; xx++) {
+                                    uint32_t tile = (yy / 4) * dtx + (xx / 4);
+                                    uint32_t within = (yy % 4) * 4 + (xx % 4);
+                                    const uint8_t* t = guest + (size_t)tile * 64;
+                                    fputc(t[within * 2 + 1], df);
+                                    fputc(t[32 + within * 2 + 0], df);
+                                    fputc(t[32 + within * 2 + 1], df);
+                                }
+                            }
+                            fclose(df);
+                            printf("[EfbDump] %s (%ux%u)\n", path, w, h);
+                            fflush(stdout);
+                        }
+                        s_dump_n++;
+                    }
+                }
+            }
             /* Proof that the copy delivered content: count distinct byte values in the
              * first 4 KB of the destination. A destination that is still uninitialised
              * reads as one or two values; a real picture has many. TLS_EFB_CHECK=1. */
