@@ -3293,6 +3293,20 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // SequenceManager::Update (0x800C3720)
         case 0x800C3720: {
             { extern int g_runner_current_frame; tls_tap(4, "SequenceManager::Update", g_runner_current_frame); }
+            /* Which loop drives the sequence update? ctx->lr at entry is the
+             * caller's continuation, so logging distinct callers names the loop
+             * whose exit condition ends the whole game. */
+            {
+                static u32 s_callers[4];
+                static int s_caller_n = 0;
+                int known = 0;
+                for (int i = 0; i < s_caller_n; i++) if (s_callers[i] == ctx->lr) known = 1;
+                if (!known) {
+                    if (s_caller_n < 4) s_callers[s_caller_n++] = ctx->lr;
+                    printf("[TLS SequenceManager] caller lr=0x%08X sp=0x%08X\n", ctx->lr, ctx->gpr[1]);
+                    fflush(stdout);
+                }
+            }
             static int s_seq_updates = 0;
             static u32 s_last_active = 0;
             u32 mgr = ctx->gpr[3];

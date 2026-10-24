@@ -479,6 +479,17 @@ static void host_wakeup_thread_queue(CPUState* cpu, u32 queue_addr) {
     // Safely unlink all waiting threads from this queue and move to RunQueue directly in guest memory
     u32 cur = head;
     while (cur >= 0x80000000 && cur < 0x82000000) {
+        {
+            static int s_wp = -1;
+            if (s_wp < 0) s_wp = getenv("TLS_WAKE_PROBE") ? 1 : 0;
+            if (s_wp) {
+                printf("[WAKE] q=0x%08X thr=0x%08X state=%u susp=%d prio=%u bits_before=0x%08X\n",
+                       queue_addr, cur, (unsigned)mem_read16(cpu, cur + 0x2C8),
+                       (int)mem_read32(cpu, cur + 0x2CC), mem_read32(cpu, cur + 0x2D0),
+                       mem_read32(cpu, 0x8087FC60));
+                fflush(stdout);
+            }
+        }
         u32 next = mem_read32(cpu, cur + 0x2E0); // cur->link.next
         if (!next) {
             mem_write32(cpu, queue_addr + 4, 0); // queue->tail = NULL
@@ -513,6 +524,30 @@ static void host_wakeup_thread_queue(CPUState* cpu, u32 queue_addr) {
         }
         cur = next;
     }
+}
+
+/* Run one guest function as a host-invoked "interrupt" and restore the CPU
+ * registers afterwards. Memory effects persist, which is what a scheduler call
+ * needs: OSWakeupThread moves a thread from a wait queue to a run queue by
+ * writing guest memory. The hand-rolled queue surgery this replaces raced the
+ * guest mid-__OSReschedule (observed at frame 829: __OSCurrentThread was 0 while
+ * the thread was still on the queue) and left the boot thread unwakeable. */
+static bool host_call_guest(CPUState* cpu, u32 fn, u32 arg) {
+    if (!fn) return false;
+    CPUState saved = *cpu;
+    cpu->gpr[3] = arg;
+    cpu->lr = TLS_HOST_CALLBACK_SENTINEL;
+    cpu->pc = fn;
+    cpu->downcount = 10000;
+    g_host_callback_depth++;
+    tls_run_blocks(cpu, 4000);
+    g_host_callback_depth--;
+    u32 ended_at = cpu->pc;
+    saved.timebase = cpu->timebase;
+    *cpu = saved;
+    cpu->exception = 0;
+    cpu->program_exception = 0;
+    return ended_at == TLS_HOST_CALLBACK_SENTINEL || ended_at == 0;
 }
 
 static void host_insert_alarm(CPUState* cpu, u32 alarm, u32 handler) {
@@ -654,16 +689,56 @@ static void host_simulate_vblank(CPUState* cpu, int frame_num) {
         mem_write16(cpu, 0x807C6FBA, write_idx);
     }
 
+    /* VBlank-side trace. The boot thread's last action before the engine goes
+     * quiet is OSSleepThread(0x807C6F60) from the GX-fifo drain loop, and the only
+     * thing that ever wakes it is the host. Print what the host sees at each
+     * vblank - fifo counters, queue head, run bits, current thread - so the frame
+     * where the wakeup stops being delivered becomes visible. TLS_VBLANK_PROBE=<n>. */
+    {
+        static int s_vb_from = -2;
+        if (s_vb_from == -2) {
+            const char* e = getenv("TLS_VBLANK_PROBE");
+            s_vb_from = e ? atoi(e) : -1;
+        }
+        if (s_vb_from >= 0 && g_runner_current_frame >= s_vb_from) {
+            u32 head = mem_read32(cpu, 0x807C6F60);
+            printf("[VBLANK] frame=%d W=%u R=%u qhead=0x%08X runbits=0x%08X cur=0x%08X headstate=%u\n",
+                   g_runner_current_frame,
+                   (unsigned)mem_read16(cpu, 0x807C6FB8),
+                   (unsigned)mem_read16(cpu, 0x807C6FBA),
+                   head, mem_read32(cpu, 0x8087FC60), mem_read32(cpu, 0x800000E4),
+                   (head >= 0x80000000u && head < 0x94000000u) ? (unsigned)mem_read16(cpu, head + 0x2C8) : 0);
+            fflush(stdout);
+        }
+    }
+
     // 2. Signal VBlank retrace flags at r13 (pre-retrace at -26599, post-retrace at -26598)
     mem_write8(cpu, 0x808852A0 - 26599, 1);
     mem_write8(cpu, 0x808852A0 - 26598, 1);
 
+
     // 3. Advance simulated timebase (~1/60 sec at 60MHz bus clock = 1,000,000 ticks)
     cpu->timebase += 1000000;
 
-    // 4. Safely wake up threads waiting on graphics frame queue if any
+    // 4. Wake whoever waits on the graphics frame queue. Two ways:
+    //    legacy - hand-edit the guest thread queue (races __OSReschedule),
+    //    guest  - call the guest's own OSWakeupThread so its accounting is used.
     if (s_hack) {
-        host_wakeup_thread_queue(cpu, 0x807C6F60);
+        static int s_wake_mode = -1;
+        if (s_wake_mode < 0) {
+            const char* e = getenv("TLS_FRAMEQUEUE_WAKE");
+            s_wake_mode = (e && e[0] == 'g') ? 1 : 0;
+            printf("[Runner] Frame-queue wake mode: %s\n", s_wake_mode ? "guest OSWakeupThread" : "legacy host surgery");
+            fflush(stdout);
+        }
+        if (s_wake_mode == 1) {
+            u32 head = mem_read32(cpu, 0x807C6F60);
+            if (head >= 0x80000000u && head < 0x94000000u) {
+                host_call_guest(cpu, 0x805F5D60u, 0x807C6F60u);
+            }
+        } else {
+            host_wakeup_thread_queue(cpu, 0x807C6F60);
+        }
     }
 }
 
