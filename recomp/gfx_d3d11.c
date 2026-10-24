@@ -62,6 +62,10 @@ typedef struct {
     uint32_t* gx_staging_rgba;
     uint32_t gx_staging_capacity;
     uint32_t frame_counter;
+    /* last completed frame, source for EFB -> texture copies */
+    ID3D11Texture2D* efb_snapshot;
+    UINT efb_snapshot_w, efb_snapshot_h;
+
     /* viewport rect used to scale the GX image onto the backbuffer (EFB copy) */
     float vp_x, vp_y, vp_w, vp_h;
     
@@ -1112,6 +1116,45 @@ static void save_backbuffer_bmp(const char* bmp_path) {
     }
 }
 
+/* Copy the finished backbuffer aside so EFB copies see a complete picture instead of
+ * the mid-frame clear colour. Called at the end of d3d11_present(), after the GX
+ * batches have been drawn. */
+static void d3d11_capture_efb_snapshot(void) {
+    ID3D11Texture2D* back_buffer = NULL;
+    if (FAILED(IDXGISwapChain_GetBuffer(s_d3d11.swap_chain, 0, &IID_ID3D11Texture2D, (void**)&back_buffer)))
+        return;
+    D3D11_TEXTURE2D_DESC desc;
+    ID3D11Texture2D_GetDesc(back_buffer, &desc);
+    HRESULT hr_snap = 0;
+    if (!s_d3d11.efb_snapshot || s_d3d11.efb_snapshot_w != desc.Width || s_d3d11.efb_snapshot_h != desc.Height) {
+        if (s_d3d11.efb_snapshot) ID3D11Texture2D_Release(s_d3d11.efb_snapshot);
+        D3D11_TEXTURE2D_DESC sd = desc;
+        sd.Usage = D3D11_USAGE_DEFAULT;
+        sd.BindFlags = 0;
+        sd.CPUAccessFlags = 0;
+        sd.MiscFlags = 0;
+        sd.SampleDesc.Count = 1;
+        sd.SampleDesc.Quality = 0;
+        sd.MipLevels = 1;
+        sd.ArraySize = 1;
+        hr_snap = ID3D11Device_CreateTexture2D(s_d3d11.device, &sd, NULL, &s_d3d11.efb_snapshot);
+        if (FAILED(hr_snap)) {
+            printf("[EfbSnapshot] creation FAILED (0x%08lX)\n", (unsigned long)hr_snap);
+            fflush(stdout);
+            s_d3d11.efb_snapshot = NULL;
+            ID3D11Texture2D_Release(back_buffer);
+            return;
+        }
+        s_d3d11.efb_snapshot_w = desc.Width;
+        s_d3d11.efb_snapshot_h = desc.Height;
+        printf("[EfbSnapshot] created %ux%u\n", desc.Width, desc.Height);
+        fflush(stdout);
+    }
+    ID3D11DeviceContext_CopyResource(s_d3d11.context, (ID3D11Resource*)s_d3d11.efb_snapshot,
+                                     (ID3D11Resource*)back_buffer);
+    ID3D11Texture2D_Release(back_buffer);
+}
+
 /* GX EFB -> texture copy (BP 0x52). Reads the requested GX-space rectangle out of the
  * backbuffer and writes it into guest memory as a GX RGBA8 texture, in the same 4x4
  * tile layout that decode_gx_texture() reads (32 bytes of A/R pairs, then 32 bytes of
@@ -1145,19 +1188,28 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
         return;
     }
 
-    ID3D11Texture2D* back_buffer = NULL;
-    if (FAILED(IDXGISwapChain_GetBuffer(s_d3d11.swap_chain, 0, &IID_ID3D11Texture2D, (void**)&back_buffer)))
-        return;
+    {
+        static int s_src = 0;
+        if (s_src < 3) { s_src++; printf("[EfbCopySrc] %s snapshot=%p\n",
+            s_d3d11.efb_snapshot ? "snapshot" : "backbuffer", (void*)s_d3d11.efb_snapshot); fflush(stdout); }
+    }
+    ID3D11Texture2D* source = s_d3d11.efb_snapshot;
+    bool have_backbuffer = false;
+    if (!source) {
+        if (FAILED(IDXGISwapChain_GetBuffer(s_d3d11.swap_chain, 0, &IID_ID3D11Texture2D, (void**)&source)))
+            return;
+        have_backbuffer = true;
+    }
 
     D3D11_TEXTURE2D_DESC desc;
-    ID3D11Texture2D_GetDesc(back_buffer, &desc);
+    ID3D11Texture2D_GetDesc(source, &desc);
     desc.Usage = D3D11_USAGE_STAGING;
     desc.BindFlags = 0;
     desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
     desc.MiscFlags = 0;
     ID3D11Texture2D* staging = NULL;
     if (SUCCEEDED(ID3D11Device_CreateTexture2D(s_d3d11.device, &desc, NULL, &staging))) {
-        ID3D11DeviceContext_CopyResource(s_d3d11.context, (ID3D11Resource*)staging, (ID3D11Resource*)back_buffer);
+        ID3D11DeviceContext_CopyResource(s_d3d11.context, (ID3D11Resource*)staging, (ID3D11Resource*)source);
         D3D11_MAPPED_SUBRESOURCE mapped;
         if (SUCCEEDED(ID3D11DeviceContext_Map(s_d3d11.context, (ID3D11Resource*)staging, 0, D3D11_MAP_READ, 0, &mapped))) {
             const uint8_t* src = (const uint8_t*)mapped.pData;
@@ -1186,7 +1238,7 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
         }
         ID3D11Texture2D_Release(staging);
     }
-    ID3D11Texture2D_Release(back_buffer);
+    if (have_backbuffer) ID3D11Texture2D_Release(source);
 }
 
 bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
@@ -1280,6 +1332,11 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
 
     // Clear backbuffer to solid black
     FLOAT clear_color[4] = {0.0f, 0.0f, 0.0f, 1.0f};
+    {
+        static int s_cc = 0;
+        if (s_cc < 2) { s_cc++; printf("[EfbClear] clear = %.2f %.2f %.2f %.2f\n",
+            clear_color[0], clear_color[1], clear_color[2], clear_color[3]); fflush(stdout); }
+    }
     ID3D11DeviceContext_ClearRenderTargetView(s_d3d11.context, s_d3d11.rtv, clear_color);
     if (s_d3d11.dsv) {
         ID3D11DeviceContext_ClearDepthStencilView(s_d3d11.context, s_d3d11.dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
@@ -1722,6 +1779,7 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     }
 
     // Present with V-Sync
+    d3d11_capture_efb_snapshot();
     IDXGISwapChain_Present(s_d3d11.swap_chain, s_d3d11.vsync ? 1 : 0, 0);
     gx_pipeline_end_frame();
     return true;

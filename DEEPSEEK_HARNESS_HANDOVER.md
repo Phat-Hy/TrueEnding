@@ -852,12 +852,18 @@ then write it into guest memory as a GX RGBA8 texture in the same 4x4 tile layou
 the guest VI framebuffers are no longer uniform - `framebuffer_0/1.ppm` went from 1 unique colour to 2948
 and 507 - and the run is stable (950 frames, no exception, picture unchanged).
 
-What is still wrong is *when* the copy happens. This backend is frame-batched: `d3d11_present()` draws the
-whole frame's geometry at end of frame, so a copy the guest issues mid-frame reads a backbuffer that holds
-the previous frame's composite (and mostly the clear colour). The dump still shows ~48% clear-green, so the
-next step is to keep the last *completed* frame in a dedicated render target (or copy it aside at end of
-frame) and serve EFB copies from that, instead of from the live swap-chain buffer. The copy plumbing,
-format handling (RGBA8 only; other formats are reported and skipped) and guest-side tiling are done.
+*When* the copy happens was fixed the same round: `d3d11_present()` ends by copying the finished
+backbuffer into `s_d3d11.efb_snapshot` and EFB copies read that, so a mid-frame copy sees the last
+completed frame instead of the mid-frame clear. Diagnostics confirm the ordering (`[EfbSnapshot] created
+1280x720`, `[EfbCopySrc] snapshot ...` from frame 2 onward) and that the clear colour is black, not green.
+
+What the framebuffer dump still cannot show is the *picture*: the guest copies into a **4x4-tiled RGBA8**
+texture, while the runner's `framebuffer_*.ppm` writer reads the VI buffer linearly, so a correct copy looks
+like scrambled green blocks in the dump (1073/633 unique colours instead of 1 uniform one - the buffer is
+demonstrably being written). Next steps, in order: (a) teach the dump to decode the VI buffer with the
+format the guest actually configured (or decode the tiled RGBA8), then (b) look at the lake at a frame where
+the water is on screen to confirm the reflection, and (c) check that the staging readback (up to 5 copies
+per frame, each a GPU->CPU sync) does not cost too much frame time.
 
 **What the rest of the work needs** (unchanged): on `0x52` read back the current EFB region from the D3D11 render target
 (the screenshot path in `gfx_d3d11.c` already does `CopyResource` + `Map(READ)` into a staging texture)
