@@ -172,6 +172,8 @@ def build_runner(jobs: int = 12):
         (ROOT_DIR / "recomp" / "gfx_d3d12.c", RECOMP_DIR / "gfx_d3d12.o"),
         (ROOT_DIR / "recomp" / "gfx_backend.c", RECOMP_DIR / "gfx_backend.o"),
         (ROOT_DIR / "recomp" / "audio_player.c", RECOMP_DIR / "audio_player.o"),
+        (ROOT_DIR / "recomp" / "gx_pipeline.c", RECOMP_DIR / "gx_pipeline.o"),
+        (ROOT_DIR / "recomp" / "tls_debug.c", RECOMP_DIR / "tls_debug.o"),
         (ROOT_DIR / "recomp" / "host_runner.c", RECOMP_DIR / "host_runner.o"),
     ]
 

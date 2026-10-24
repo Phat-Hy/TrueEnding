@@ -6,6 +6,7 @@
 #include "cpu/cpu.h"
 #include "frontend/container/dol.h"
 #include "replacements.h"
+#include "gx_pipeline.h"
 
 #define DOLRECOMP_ENABLE_REPLACEMENTS 1
 #include "generated.h"
@@ -16,7 +17,11 @@
 #include <mmsystem.h>
 #include "gfx_backend.h"
 #include "audio_player.h"
+#include "tls_debug.h"
 
+bool g_interactive_mode = false;
+bool g_auto_start_game = false; // Default: clean natural boot into Title Screen
+int g_runner_current_frame = 0;
 static HWND s_hwnd = NULL;
 static bool s_window_closed = false;
 static GfxConfig s_gfx_config = {0};
@@ -43,13 +48,6 @@ static LRESULT CALLBACK window_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM l
             s_window_closed = true;
             PostQuitMessage(0);
             return 0;
-        case WM_KEYDOWN:
-            if (wParam == VK_ESCAPE) {
-                s_window_closed = true;
-                DestroyWindow(hwnd);
-                return 0;
-            }
-            break;
     }
     return DefWindowProcA(hwnd, msg, wParam, lParam);
 }
@@ -90,6 +88,11 @@ static bool init_display_window(int width, int height, GfxBackendType backend_ty
         printf("[Runner] Warning: Failed to initialize graphics backend, window output disabled.\n");
         return false;
     }
+
+    ShowWindow(s_hwnd, SW_SHOWNORMAL);
+    UpdateWindow(s_hwnd);
+    SetForegroundWindow(s_hwnd);
+    SetFocus(s_hwnd);
 
     char title[256];
     snprintf(title, sizeof(title),
@@ -209,6 +212,7 @@ static bool load_dol_into_cpu(CPUState* cpu, const char* path) {
         }
     }
 
+    printf("[DOL CHECK] 0x807785E4 after load = 0x%08X (expected 0x80084F30)\n", mem_read32(cpu, 0x807785E4));
     cpu->pc = dol.header.entry_point;
     dol_free(&dol);
     return true;
@@ -216,16 +220,16 @@ static bool load_dol_into_cpu(CPUState* cpu, const char* path) {
 
 static void init_wii_low_memory(CPUState* cpu) {
     // Standard Wii low memory configuration (OS hardware/arena pointers)
-    mem_write32(cpu, 0x80000028, 0x01800000); // MEM1 size: 24 MB
+    mem_write32(cpu, 0x80000028, 0x04000000); // MEM1 size: 64 MB
     mem_write32(cpu, 0x8000002C, 0x00000002); // Console type: Wii
     mem_write32(cpu, 0x80000030, 0x8088A000); // ArenaLo
-    mem_write32(cpu, 0x80000034, 0x817F0000); // ArenaHi
+    mem_write32(cpu, 0x80000034, 0x83FE0000); // ArenaHi
 
     mem_write32(cpu, 0x800000E4, 0);          // __OSCurrentThread = NULL
     mem_write32(cpu, 0x800000E8, 0);          // __OSCurrentContext = NULL
 
     mem_write32(cpu, 0x800000F0, 0x04000000); // MEM2 size: 64 MB
-    mem_write32(cpu, 0x800000F4, 729000000);  // CPU clock: 729 MHz (0x2BF20000)
+    mem_write32(cpu, 0x800000F4, 0);          // Wii mode (no GameCube BI2)
     mem_write32(cpu, 0x800000F8, 243000000);  // Bus clock: 243 MHz (0x0E7BE200)
     mem_write32(cpu, 0x800000FC, 60750000);   // Time base frequency: 60.75 MHz (0x039EF880)
 
@@ -234,9 +238,8 @@ static void init_wii_low_memory(CPUState* cpu) {
     mem_write32(cpu, 0x800030E8, 0x93FE0000); // MEM2 ArenaHi
 
     // OS BI2 table
-    mem_write32(cpu, 0x80003110, 0x80003120); // BI2 Debug/flag table pointer
-    mem_write32(cpu, 0x80003118, 0x8088A000); // BI2 MEM1 ArenaLo
-    mem_write32(cpu, 0x8000311C, 0x817F0000); // BI2 MEM1 ArenaHi
+    mem_write32(cpu, 0x8000310C, 0x8088A000); // BI2 MEM1 ArenaLo
+    mem_write32(cpu, 0x80003110, 0x83FE0000); // BI2 MEM1 ArenaHi
     mem_write32(cpu, 0x80003124, 0x90002000); // BI2 MEM2 ArenaLo
     mem_write32(cpu, 0x80003128, 0x93FE0000); // BI2 MEM2 ArenaHi
     mem_write32(cpu, 0x80003130, 0x93FE0000); // BI2 IPC Buffer Lo
@@ -245,36 +248,176 @@ static void init_wii_low_memory(CPUState* cpu) {
 
     // Pre-initialize AX audio readiness flag in .sbss (0x8087FFA0)
     mem_write32(cpu, 0x8087FFA0, 1);
+
+    // Pre-initialize NAND and FS library readiness flags
+    mem_write32(cpu, 0x80880120, 2); // s_libState = 2 (NAND_LIB_INITIALIZED)
+    mem_write32(cpu, 0x8087E8C0, 1); // __fsFd = 1 (ISFS initialized)
 }
 
-static void host_wakeup_thread(CPUState* cpu, u32 thread_addr) {
-    u16 state = mem_read16(cpu, thread_addr + 0x2C8);
-    if (state != 4) return; // not WAITING
-    u32 wait_queue = mem_read32(cpu, thread_addr + 0x2DC);
-    if (wait_queue != 0) {
-        mem_write32(cpu, wait_queue, 0); // head = NULL
-        mem_write32(cpu, wait_queue + 4, 0); // tail = NULL
-    }
-    mem_write32(cpu, thread_addr + 0x2DC, 0); // thread->queue = NULL
-    mem_write16(cpu, thread_addr + 0x2C8, 1); // thread->state = OS_THREAD_STATE_READY (1)
+static inline bool tls_is_system_idle(CPUState* ctx) {
+    return tls_is_idle_address(ctx->pc) &&
+           mem_read32(ctx, 0x8087FC60) == 0;
+}
 
-    u32 priority = mem_read32(cpu, thread_addr + 0x2D0); // priority
-    if (priority > 31) priority = 16;
-    u32 rq_entry = 0x807CB970 + priority * 8;
-    u32 tail = mem_read32(cpu, rq_entry + 4);
-    if (tail == 0) {
-        mem_write32(cpu, rq_entry, thread_addr); // head = thread
-    } else {
-        mem_write32(cpu, tail + 0x2E4, thread_addr); // tail->link.next = thread
+/* Task-vtable watchpoint. The Chapter 1 handoff dies because the task scheduler
+ * executes `lwz r12,12(r12); bctrl` (0x800D28B4) on task objects whose vtable
+ * word is 0, so it reads guest address 0x0C and calls 0x01FFFFFC. These two
+ * objects are the ones TaskManager still holds when that happens; report every
+ * change to their vtable word together with the block that performed it, so the
+ * writer - not its victim - is named. */
+static void host_watch_task_vtables(CPUState* ctx, u32 block_pc) {
+    static const u32 s_addrs[2] = {0x80ADC930u, 0x80B7C950u};
+    static u32 s_prev[2] = {0xDEADBEEFu, 0xDEADBEEFu};
+    static u32 s_reports = 0;
+    for (int i = 0; i < 2; i++) {
+        u32 vt = mem_read32(ctx, s_addrs[i]);
+        if (s_prev[i] != 0xDEADBEEFu && vt != s_prev[i] && s_reports < 8) {
+            s_reports++;
+            printf("[Runner] Task vtable watch: 0x%08X 0x%08X -> 0x%08X by block 0x%08X "
+                   "(frame %d, lr=0x%08X sp=0x%08X)\n",
+                   s_addrs[i], s_prev[i], vt, block_pc, g_runner_current_frame,
+                   ctx->lr, ctx->gpr[1]);
+            fflush(stdout);
+        }
+        s_prev[i] = vt;
     }
-    mem_write32(cpu, thread_addr + 0x2E0, tail); // thread->link.prev = tail
-    mem_write32(cpu, thread_addr + 0x2E4, 0); // thread->link.next = NULL
-    mem_write32(cpu, rq_entry + 4, thread_addr); // tail = thread
+}
 
-    u32 run_bits = mem_read32(cpu, 0x8087FC60);
-    run_bits |= (1u << (31 - priority));
-    mem_write32(cpu, 0x8087FC60, run_bits); // RunQueueBits
-    mem_write32(cpu, 0x8087FC5C, 1); // RunQueueHint = TRUE
+/* Sampled dispatch addresses from the most recent interpreter slice. Used to name
+ * the code responsible when a frame burns its entire block budget without
+ * producing any geometry - the failure mode where the window keeps reporting a
+ * healthy 60 FPS while nothing renders. Sampling one block in 1024 keeps the
+ * hot path at a single predictable branch. */
+static u32 s_slice_samples[64];
+static u32 s_slice_sample_count;
+
+static void host_report_runaway_slice(int frame, int frame_blocks, const char* why) {
+    static u32 s_reports = 0;
+    if (s_reports >= 3) return;
+    s_reports++;
+    printf("[Runner] Frame %d burned %d blocks without rendering (%s); sampled dispatches:\n",
+           frame, frame_blocks, why);
+    for (u32 i = 0; i < s_slice_sample_count; i++) {
+        printf("           0x%08X\n", s_slice_samples[i]);
+    }
+    fflush(stdout);
+}
+
+static inline int tls_run_blocks(CPUState* ctx, u32 max_blocks) {
+    u32 blocks = 0;
+    s_slice_sample_count = 0;
+    while (max_blocks == 0u || blocks < max_blocks) {
+        if (tls_is_system_idle(ctx)) {
+            break;
+        }
+        u32 pc_before = ctx->pc;
+        if (!dolrecomp_call(ctx, ctx->pc)) return 0;
+        if (ctx->exception) return 0;
+        blocks++;
+
+        if ((blocks & 1023u) == 0u && s_slice_sample_count < 64) {
+            s_slice_samples[s_slice_sample_count++] = ctx->pc;
+        }
+        if ((blocks & 7u) == 0u) {
+            host_watch_task_vtables(ctx, pc_before);
+        }
+
+        // A dispatch that leaves PC where it was cannot make progress. Inside
+        // the DOL image that is legitimate (the guest's own spin loops, e.g. the
+        // boot handshake at 0x800065EC and the OS idle loop, do exactly this and
+        // are expected to run until the block budget ends the slice). Outside the
+        // DOL image there is no block to return to at all, so the interpreter
+        // would re-enter the same dead dispatch forever at ~zero cost: that is
+        // the wedge that reported a healthy 60 FPS over a black screen
+        // (PC pinning at the 0xFFFFFFFC host-callback sentinel). End the slice
+        // and say so instead of hiding it.
+        if (ctx->pc == pc_before && !(ctx->pc >= 0x80003000u && ctx->pc < 0x80730000u)) {
+            static u32 s_reported_pcs[8];
+            static u32 s_reported_count = 0;
+            u32 i = 0;
+            while (i < s_reported_count && s_reported_pcs[i] != pc_before) i++;
+            if (i == s_reported_count && s_reported_count < 8) {
+                s_reported_pcs[s_reported_count++] = pc_before;
+                printf("[Runner] Dead dispatch: PC 0x%08X is outside guest code and did not advance "
+                       "(lr=0x%08X sp=0x%08X cur_thread=0x%08X run_bits=0x%08X) - ending slice\n",
+                       pc_before, ctx->lr, ctx->gpr[1],
+                       mem_read32(ctx, 0x800000E4), mem_read32(ctx, 0x8087FC60));
+                fflush(stdout);
+            }
+            return (int)blocks;
+        }
+
+        if (*(uint32_t*)(ctx->ram + 0x007785E4) != 0x304F0880) {
+            printf("[CORRUPT DETECTED IN BLOCK] PC=0x%08X LR=0x%08X block=%u val=0x%08X\n",
+                   ctx->pc, ctx->lr, blocks, mem_read32(ctx, 0x807785E4));
+            printf("[CORRUPT] Memory around 0x807785C0 - 0x80778600:\n");
+            for (u32 a = 0x807785C0; a < 0x80778600; a += 16) {
+                printf("  0x%08X: %08X %08X %08X %08X\n",
+                       a, mem_read32(ctx, a), mem_read32(ctx, a+4),
+                       mem_read32(ctx, a+8), mem_read32(ctx, a+12));
+            }
+            fflush(stdout);
+            static const u32 s_vtable_orig[16] = {
+                0x00000000, 0x00000000, 0x807320D0, 0x807785B8,
+                0x807320E8, 0x00000000, 0x80778608, 0x00000000,
+                0x80084E78, 0x80084F30, 0x80084F58, 0x80084F6C,
+                0x80084F7C, 0x80084FA8, 0x807785D0, 0x00000000
+            };
+            for (int i = 0; i < 16; i++) {
+                mem_write32(ctx, 0x807785C0 + i * 4, s_vtable_orig[i]);
+            }
+        }
+    }
+    return (int)blocks;
+}
+
+static void host_wakeup_thread_queue(CPUState* cpu, u32 queue_addr) {
+    u32 head = mem_read32(cpu, queue_addr);
+    if (!head || head < 0x80000000 || head >= 0x82000000) {
+        if (head != 0) {
+            mem_write32(cpu, queue_addr, 0);
+            mem_write32(cpu, queue_addr + 4, 0);
+        }
+        return;
+    }
+
+    // Safely unlink all waiting threads from this queue and move to RunQueue directly in guest memory
+    u32 cur = head;
+    while (cur >= 0x80000000 && cur < 0x82000000) {
+        u32 next = mem_read32(cpu, cur + 0x2E0); // cur->link.next
+        if (!next) {
+            mem_write32(cpu, queue_addr + 4, 0); // queue->tail = NULL
+        } else {
+            mem_write32(cpu, next + 0x2E4, 0);   // next->link.prev = NULL
+        }
+        mem_write32(cpu, queue_addr, next);       // queue->head = next
+
+        mem_write16(cpu, cur + 0x2C8, 1);        // thread->state = OS_THREAD_STATE_READY (1)
+        s32 suspend = (s32)mem_read32(cpu, cur + 0x2CC);
+        if (suspend <= 0) {
+            // SetRun(thread)
+            u32 prio = mem_read32(cpu, cur + 0x2D0);
+            if (prio < 32) {
+                u32 rq = 0x807CB970 + prio * 8;  // RunQueue[prio]
+                mem_write32(cpu, cur + 0x2DC, rq); // thread->queue = rq
+                u32 tail = mem_read32(cpu, rq + 4);
+                if (!tail) {
+                    mem_write32(cpu, rq, cur);    // rq->head = cur
+                } else {
+                    mem_write32(cpu, tail + 0x2E0, cur); // tail->link.next = cur
+                }
+                mem_write32(cpu, cur + 0x2E4, tail); // cur->link.prev = tail
+                mem_write32(cpu, cur + 0x2E0, 0);    // cur->link.next = NULL
+                mem_write32(cpu, rq + 4, cur);       // rq->tail = cur
+
+                u32 bits = mem_read32(cpu, 0x8087FC60); // RunQueueBits
+                bits |= (1u << (31 - prio));
+                mem_write32(cpu, 0x8087FC60, bits);
+                mem_write32(cpu, 0x8087FC5C, 1);        // RunQueueHint = TRUE
+            }
+        }
+        cur = next;
+    }
 }
 
 static void host_insert_alarm(CPUState* cpu, u32 alarm, u32 handler) {
@@ -357,46 +500,69 @@ static void host_service_alarms(CPUState* cpu) {
             host_insert_alarm(cpu, head, handler);
         }
 
-        cpu->gpr[3] = head;      // OSAlarm* alarm
-        cpu->gpr[4] = cpu->gpr[1]; // OSContext* (handlers ignore it; must be readable)
-        cpu->lr = 0x805F50B0;    // return into the scheduler idle point
+        CPUState saved_state = *cpu;
+        u32 initial_cur_thread = mem_read32(cpu, 0x800000E4);
+
+        cpu->gpr[3] = head;        // OSAlarm* alarm
+        cpu->gpr[4] = cpu->gpr[1]; // OSContext*
+        cpu->lr = TLS_HOST_CALLBACK_SENTINEL; // host sentinel; see replacements.h
         cpu->pc = handler;
-        cpu->downcount = 50000000;
-        dolrecomp_run_blocks(cpu, 50000);
-        if (cpu->exception != 0) {
-            printf("\n[Runner] CPU Exception 0x%08X at PC 0x%08X (alarm handler 0x%08X)\n",
-                   cpu->exception, cpu->pc, handler);
-            return;
+        cpu->downcount = 10000;
+        g_host_callback_depth++;
+        tls_run_blocks(cpu, 1000);
+        g_host_callback_depth--;
+
+        // A handler that runs scheduler code with the sentinel still in LR can
+        // push that sentinel into a thread context, which later surfaces as a
+        // jump to 0xFFFFFFFC in the middle of frame execution. Report it once
+        // that is observed rather than letting it hide in the frame loop.
+        u32 final_cur_thread = mem_read32(cpu, 0x800000E4);
+        if (final_cur_thread != initial_cur_thread) {
+            static u32 s_alarm_switch_reports = 0;
+            if (s_alarm_switch_reports < 4) {
+                s_alarm_switch_reports++;
+                printf("[Runner] Alarm handler 0x%08X ran scheduler code "
+                       "(cur_thread 0x%08X -> 0x%08X, pc=0x%08X)\n",
+                       handler, initial_cur_thread, final_cur_thread, cpu->pc);
+                fflush(stdout);
+            }
         }
+
+        // In RVL-SDK, OSAlarm callbacks are interrupt handlers that run on the interrupt stack.
+        // Once the alarm callback finishes, the CPU state must ALWAYS be restored to the interrupted state.
+        saved_state.timebase = cpu->timebase; // preserve timebase advancement
+        *cpu = saved_state;
+        cpu->exception = 0;
+        cpu->program_exception = 0;
     }
 }
 
-static void host_simulate_vblank(CPUState* cpu, int frame_num) {    // 1. Advance graphics frame queue read index to match write index
+static void host_simulate_vblank(CPUState* cpu, int frame_num) {
+    (void)frame_num;
+    // 1. Advance graphics frame queue read index to match write index
     u16 write_idx = mem_read16(cpu, 0x807C6FB8);
     mem_write16(cpu, 0x807C6FBA, write_idx);
 
-    // 2. Clear VBlank flags at r13
-    mem_write8(cpu, 0x808852A0 - 26599, 0);
-    mem_write8(cpu, 0x808852A0 - 26598, 0);
+    // 2. Signal VBlank retrace flags at r13 (pre-retrace at -26599, post-retrace at -26598)
+    mem_write8(cpu, 0x808852A0 - 26599, 1);
+    mem_write8(cpu, 0x808852A0 - 26598, 1);
 
     // 3. Advance simulated timebase (~1/60 sec at 60MHz bus clock = 1,000,000 ticks)
     cpu->timebase += 1000000;
 
-    // 4. Wake up any thread waiting on 0x807C6F60
-    u32 waiting_thread = mem_read32(cpu, 0x807C6F60);
-    if (waiting_thread != 0) {
-        printf("[Runner] VBlank frame %d: waking thread 0x%08X (write_idx=%u)\n",
-               frame_num, waiting_thread, write_idx);
-        host_wakeup_thread(cpu, waiting_thread);
-    }
+    // 4. Safely wake up threads waiting on graphics frame queue if any
+    host_wakeup_thread_queue(cpu, 0x807C6F60);
 }
 
 int main(int argc, char** argv) {
+#ifdef _WIN32
+    timeBeginPeriod(1);
+#endif
     const char* dol_path = "orig/main.dol";
-    u32 max_blocks = 100000;
+    u32 max_blocks = 300000;
     int max_frames = 10;
     bool frames_specified = false;
-    bool enable_window = false;
+    bool enable_window = true;
     int win_width = 1280;
     int win_height = 720;
     int target_fps = 60; // Default 60 FPS (0 = uncapped)
@@ -412,9 +578,10 @@ int main(int argc, char** argv) {
             printf("Usage: %s [options]\n\n", argv[0]);
             printf("Options:\n");
             printf("  --dol <path>      Path to input DOL file (default: orig/main.dol)\n");
-            printf("  --blocks <N>      Max blocks per slice (default: 100000)\n");
-            printf("  --frames <N>      Simulated frames to run (0=unlimited, default: 10 in headless, unlimited in windowed)\n");
-            printf("  --window, -w      Enable interactive display window\n");
+            printf("  --blocks <N>      Max blocks per slice (default: 500000)\n");
+            printf("  --frames <N>      Simulated frames to run (0=unlimited, default: 0 in windowed, 10 in headless)\n");
+            printf("  --window, -w      Enable interactive display window (default)\n");
+            printf("  --headless        Run in headless console mode without display window\n");
             printf("  --width <pixels>  Display window width (default: 1280)\n");
             printf("  --height <pixels> Display window height (default: 720)\n");
             printf("  --fps <N>         Target frame rate cap (30, 60, 120, 0=uncapped, default: 60)\n");
@@ -427,15 +594,22 @@ int main(int argc, char** argv) {
             printf("  --help, -h        Show this help message\n\n");
             printf("Interactive Controls:\n");
             printf("  Alt + Enter       Toggle Fullscreen / Windowed\n");
-            printf("  Escape / Close    Exit runner\n");
+            printf("  F12               Save Backbuffer Screenshot (build/recomp/d3d11_screenshot.ppm)\n");
+            printf("  Space / Enter / Z / Left Click: A Button\n");
+            printf("  Escape / Backspace / X / Right Click: B Button\n");
+            printf("  WASD / Arrow Keys: Analog Stick / D-Pad\n");
+            printf("  1 / Tab: + Button | 2: - Button | Shift: ZL | Ctrl: ZR\n");
+            printf("  Escape / Close: Exit runner\n");
             return 0;
         } else if (strcmp(argv[i], "--dol") == 0 && i + 1 < argc) {
             dol_path = argv[++i];
         } else if (strcmp(argv[i], "--blocks") == 0 && i + 1 < argc) {
             max_blocks = (u32)atoi(argv[++i]);
-        } else if (strcmp(argv[i], "--frames") == 0 && i + 1 < argc) {
+        } else if ((strcmp(argv[i], "--frames") == 0 || strcmp(argv[i], "-f") == 0) && i + 1 < argc) {
             max_frames = atoi(argv[++i]);
             frames_specified = true;
+        } else if (strcmp(argv[i], "--headless") == 0) {
+            enable_window = false;
         } else if (strcmp(argv[i], "--window") == 0 || strcmp(argv[i], "-w") == 0) {
             enable_window = true;
         } else if (strcmp(argv[i], "--width") == 0 && i + 1 < argc) {
@@ -459,16 +633,71 @@ int main(int argc, char** argv) {
             bgm_path = argv[++i];
         } else if (strcmp(argv[i], "--vol") == 0 && i + 1 < argc) {
             audio_volume = (float)atof(argv[++i]);
+        } else if (strcmp(argv[i], "--stage") == 0 && i + 1 < argc) {
+            extern char g_tls_stage_override[32];
+            strncpy(g_tls_stage_override, argv[++i], 31);
+            printf("[Runner] Stage override active: %s\n", g_tls_stage_override);
+        } else if (strcmp(argv[i], "--title") == 0 || strcmp(argv[i], "-t") == 0) {
+            g_auto_start_game = false;
+            printf("[Runner] Title screen enabled.\n");
+        } else if (strcmp(argv[i], "--game") == 0 || strcmp(argv[i], "--cave") == 0 || strcmp(argv[i], "-g") == 0) {
+            g_auto_start_game = true;
+            printf("[Runner] Direct campaign launch enabled (Chapter 1 Gurgan Cave).\n");
         }
     }
 
-    if (enable_window && !frames_specified) {
+    g_interactive_mode = enable_window && !frames_specified;
+
+    if (g_interactive_mode) {
         max_frames = 0; // Continuous interactive execution
+    }
+
+    if (enable_window) {
+        if (!frames_specified) {
+            FILE* log_fp = freopen("interactive_debug.log", "a", stdout);
+            if (log_fp) {
+                setvbuf(stdout, NULL, _IOLBF, 8192);
+                printf("\n--- New Interactive Session Started ---\n");
+                printf("[Runner] Persistent interactive logging initialized: interactive_debug.log\n");
+                fflush(stdout);
+            }
+        }
+    }
+
+#ifdef _WIN32
+    CreateDirectoryA("SaveData", NULL);
+    CreateDirectoryA("savedata", NULL);
+#endif
+
+    // Ensure savedata.dat exists with proper size (0x149580 = 1348992 bytes)
+    FILE* sf = fopen("savedata/savedata.dat", "rb");
+    long sf_size = 0;
+    if (sf) {
+        fseek(sf, 0, SEEK_END);
+        sf_size = ftell(sf);
+        fclose(sf);
+    }
+    if (sf_size < 1348992) {
+        sf = fopen("savedata/savedata.dat", "wb");
+        if (sf) {
+            static const uint8_t zero_block[4096] = {0};
+            for (uint32_t i = 0; i < 1348992 / 4096; i++) {
+                fwrite(zero_block, 1, 4096, sf);
+            }
+            if (1348992 % 4096 > 0) {
+                fwrite(zero_block, 1, 1348992 % 4096, sf);
+            }
+            fclose(sf);
+            printf("[Runner] Initialized empty savedata/savedata.dat (%u bytes)\n", 1348992);
+        }
     }
 
     printf("=================================================================\n");
     printf("  Project The Maybe(Not) Last Story (TrueEnding) Native PC Runner\n");
     printf("  Recompiled Architecture: PowerPC 750CL (Gekko) -> x86_64\n");
+    printf("  Controls: Enter/Space/Z/LeftClick: A | Esc/Backspace/X: B\n");
+    printf("            WASD/Arrow Keys: Movement | 1/Tab: + | 2: - | V: Button 2\n");
+    printf("            F12: Screenshot\n");
     printf("=================================================================\n\n");
 
     CPUState cpu;
@@ -501,6 +730,12 @@ int main(int argc, char** argv) {
     cpu.gpr[1] = 0x80700000; // Initial stack pointer
     cpu.msr = 0x00002000;    // FP enabled
 
+    // Initialize GX hardware graphics pipeline decoder
+    host_set_active_cpu(&cpu);
+    gx_pipeline_init();
+    gx_pipeline_set_pointer_resolver(host_resolve_gx_guest_addr);
+    tls_debug_init();
+
 #ifdef _WIN32
     if (enable_window) {
         init_display_window(win_width, win_height, backend_type, vsync, target_fps);
@@ -520,7 +755,9 @@ int main(int argc, char** argv) {
            cpu.pc, max_blocks, max_frames, target_fps, target_fps <= 0 ? " [uncapped]" : "");
 
     int result = 0;
-    for (int frame = 0; max_frames == 0 || frame < max_frames; frame++) {
+    int frame = 0;
+    for (; max_frames == 0 || frame < max_frames; frame++) {
+        gx_pipeline_begin_frame();
 #ifdef _WIN32
         LARGE_INTEGER qpc_freq, t_start, t_end;
         if (enable_window) {
@@ -528,75 +765,163 @@ int main(int argc, char** argv) {
             QueryPerformanceCounter(&t_start);
         }
 #endif
-        cpu.downcount = 50000000;
-        result = dolrecomp_run_blocks(&cpu, max_blocks);
-        if (cpu.exception != 0) {
-            printf("\n[Runner] CPU Exception 0x%08X at PC 0x%08X\n", cpu.exception, cpu.pc);
-            break;
-        }
+        // 1. Advance VBlank and timebase at start of frame, then service expired alarms
+        g_runner_current_frame = frame;
+        host_simulate_vblank(&cpu, frame);
+        host_service_alarms(&cpu);
+        LARGE_INTEGER t1, t2, t4;
+        QueryPerformanceCounter(&t1);
 
-        // If the CPU was in the middle of active execution, let it run until idle
+        // 2. Poll host input and update controller structures
+        tls_input_new_frame();
+        tls_service_controller_input(&cpu);
+
+        // 3. Run CPU blocks for the active thread(s)
+        int frame_blocks = 0;
+        int ran = 0;
+        if (!tls_is_system_idle(&cpu)) {
+            cpu.downcount = 50000;
+            ran = tls_run_blocks(&cpu, max_blocks);
+            frame_blocks += ran;
+            result = ran;
+            if (cpu.exception != 0) {
+                printf("\n[Runner] CPU Exception 0x%08X at PC 0x%08X\n", cpu.exception, cpu.pc);
+                break;
+            }
+        }
+        // 4. If thread is still doing work, run it until idle
         int drain_iters = 0;
-        while (!tls_is_idle_address(cpu.pc) && drain_iters < 10) {
-            cpu.downcount = 50000000;
-            result = dolrecomp_run_blocks(&cpu, 1000000);
+        while (!tls_is_system_idle(&cpu) && drain_iters < 1) {
+            cpu.downcount = 10000;
+            ran = tls_run_blocks(&cpu, 5000);
+            frame_blocks += ran;
             if (cpu.exception != 0) break;
             drain_iters++;
         }
 
-        // Emulated OSAlarm expiry (no decrementer interrupt in the runner)
-        host_service_alarms(&cpu);
+        // 5. Drain any deferred DVD/IPC completion callbacks and sub-frame alarms
+        for (int step = 0; step < 4; step++) {
+            bool cb_work = false;
+            while (tls_dvd_service_callback(&cpu) || tls_ipc_service_callback(&cpu)) {
+                cpu.downcount = 10000;
+                ran = tls_run_blocks(&cpu, 4000);
+                frame_blocks += ran;
+                cb_work = true;
+                if (cpu.exception != 0) break;
+            }
+            if (cpu.exception != 0) break;
 
-        // Advance graphics frame queue and simulated timebase each frame
-        host_simulate_vblank(&cpu, frame);
-
-        // Poll host input so WPAD/KPAD stubs can see live keyboard state.
-        tls_service_controller_input(&cpu);
-
-        // Drain deferred DVD completion callbacks (retail runs these on the DVD
-        // thread; the game's callers branch on DVDReadAsyncPrio's r3 before it).
-        for (int serviced = 0; serviced < 32 && tls_dvd_service_callback(&cpu); serviced++) {
-            cpu.downcount = 50000000;
-            result = dolrecomp_run_blocks(&cpu, 100000);
-            if (cpu.exception != 0) {
-                printf("\n[Runner] CPU Exception 0x%08X at PC 0x%08X (DVD callback)\n", cpu.exception, cpu.pc);
-                break;
+            cpu.timebase += 62500;
+            host_service_alarms(&cpu);
+            bool pc_busy = !tls_is_system_idle(&cpu);
+            if (pc_busy || cb_work) {
+                cpu.downcount = 10000;
+                ran = tls_run_blocks(&cpu, 4000);
+                frame_blocks += ran;
+            } else {
+                break; // Idle and no callbacks pending - frame execution complete!
             }
         }
+        QueryPerformanceCounter(&t2);
 
         if (enable_audio) {
             audio_player_update();
         }
 
+        uint32_t dbg_vtx = 0;
+        gx_pipeline_get_vertices(&dbg_vtx);
+        uint32_t dbg_batches = 0;
+        gx_pipeline_get_draw_batches(&dbg_batches);
+
+        // A frame that consumes its whole block budget is normal during boot
+        // (decompression, DVD streaming): the blocks do real work and cost
+        // 5-40 ms. What is never normal is burning the whole budget in ~1 ms -
+        // hundreds of millions of blocks per second can only mean the dispatcher
+        // is cycling through addresses that execute no guest logic. That is the
+        // wedge that reported a healthy 60 FPS over a black screen, so name the
+        // addresses responsible instead of presenting it as a frame rate.
+        if (enable_window && qpc_freq.QuadPart > 0 && frame_blocks >= 150000) {
+            double cpu_ms = (double)(t2.QuadPart - t1.QuadPart) * 1000.0 / (double)qpc_freq.QuadPart;
+            if (cpu_ms > 0.0001 && (double)frame_blocks / cpu_ms > 120000.0) {
+                host_report_runaway_slice(frame, frame_blocks, "blocks far too cheap to be guest code");
+            }
+        }
+
+        tls_debug_frame(&cpu, frame, dbg_vtx, dbg_batches);
+
 #ifdef _WIN32
         if (enable_window) {
-            u32 fb0 = mem_read32(&cpu, 0x807C6F70);
-            u32 fb1 = mem_read32(&cpu, 0x807C6F80);
-            u32 active_fb = (frame % 2 == 0) ? (fb0 ? fb0 : fb1) : (fb1 ? fb1 : fb0);
-            const u8* fb_bytes = active_fb ? (const u8*)resolve_guest_pointer(&cpu, active_fb) : NULL;
+            extern uint32_t g_last_vi_framebuffer;
+            u32 active_fb = g_last_vi_framebuffer;
+            if (!active_fb || !resolve_guest_pointer(&cpu, active_fb)) {
+                active_fb = 0x900997E0; // Safe default VI framebuffer
+            }
+            const u8* fb_bytes = (const u8*)resolve_guest_pointer(&cpu, active_fb);
             if (!update_display_window(fb_bytes)) {
                 printf("[Runner] Window closed by user at frame %d.\n", frame);
                 break;
             }
+        }
+        QueryPerformanceCounter(&t4);
 
-            // Frame pacing based on target_fps (0 = uncapped)
-            if (target_fps > 0) {
-                QueryPerformanceCounter(&t_end);
-                double elapsed_ms = (double)(t_end.QuadPart - t_start.QuadPart) * 1000.0 / (double)qpc_freq.QuadPart;
-                double frame_budget_ms = 1000.0 / (double)target_fps;
-                if (elapsed_ms < frame_budget_ms) {
-                    Sleep((DWORD)(frame_budget_ms - elapsed_ms));
-                }
+        if (enable_window && target_fps > 0) {
+            // High-precision frame pacing locked to target_fps
+            QueryPerformanceCounter(&t_end);
+            double elapsed_ms = (double)(t_end.QuadPart - t_start.QuadPart) * 1000.0 / (double)qpc_freq.QuadPart;
+            double frame_budget_ms = 1000.0 / (double)target_fps;
+            if (elapsed_ms < frame_budget_ms) {
+                DWORD sleep_ms = (DWORD)(frame_budget_ms - elapsed_ms);
+                if (sleep_ms > 1) Sleep(sleep_ms - 1);
+                do {
+                    QueryPerformanceCounter(&t_end);
+                    elapsed_ms = (double)(t_end.QuadPart - t_start.QuadPart) * 1000.0 / (double)qpc_freq.QuadPart;
+                } while (elapsed_ms < frame_budget_ms);
             }
+        } else {
+            QueryPerformanceCounter(&t_end);
+        }
+
+        if (frame % 30 == 0 && qpc_freq.QuadPart > 0) {
+            double ms_vb  = (double)(t1.QuadPart - t_start.QuadPart) * 1000.0 / (double)qpc_freq.QuadPart;
+            double ms_cpu = (double)(t2.QuadPart - t1.QuadPart) * 1000.0 / (double)qpc_freq.QuadPart;
+            double ms_gfx = (double)(t4.QuadPart - t2.QuadPart) * 1000.0 / (double)qpc_freq.QuadPart;
+            double ms_tot = (double)(t_end.QuadPart - t_start.QuadPart) * 1000.0 / (double)qpc_freq.QuadPart;
+            printf("[Runner] Frame %d (%d blks) | VBlank: %.2fms, CPU: %.2fms, Gfx/Present: %.2fms | Total: %.2fms (%.1f FPS)\n",
+                   frame, frame_blocks, ms_vb, ms_cpu, ms_gfx, ms_tot, ms_tot > 0.0 ? 1000.0 / ms_tot : 0.0);
+            fflush(stdout);
+        }
+
+        if (!enable_window && (frame % 60 == 0 || frame < 5)) {
+            printf("[Runner] Headless Frame %d / %d (%d blks)\n", frame, max_frames, frame_blocks);
+            fflush(stdout);
         }
 #endif
     }
+    printf("\n[Runner] Completed %d of %d requested frames (CPU Exception: 0x%08X)\n",
+           frame, max_frames, cpu.exception);
 
     if (enable_audio) {
         audio_player_shutdown();
     }
 
     printf("\n[Runner] Execution paused after run_blocks (result = %d)\n", result);
+    void* p_tex = resolve_guest_pointer(&cpu, 0x90742780);
+    if (p_tex) {
+        const u8* b = (const u8*)p_tex;
+        printf("\n[Texture 0x90742780 Header (first 64 bytes)]:\n  ");
+        for (int i = 0; i < 64; i++) {
+            printf("%02X ", b[i]);
+            if ((i + 1) % 16 == 0) printf("\n  ");
+        }
+        printf("\n[Texture 0x907427C0 Data (first 64 bytes)]:\n  ");
+        for (int i = 0; i < 64; i++) {
+            printf("%02X ", b[64 + i]);
+            if ((i + 1) % 16 == 0) printf("\n  ");
+        }
+        printf("\n");
+    } else {
+        printf("\n[Texture 0x90742780]: resolve_guest_pointer returned NULL!\n");
+    }
     tls_dump_recent_calls();
     printf("         Final PC: 0x805F50B0? Actual PC: 0x%08X, LR: 0x%08X, SP: 0x%08X\n", cpu.pc, cpu.lr, cpu.gpr[1]);
     printf("         Exception: 0x%08X, ProgramExc: 0x%08X\n", cpu.exception, cpu.program_exception);
@@ -604,13 +929,21 @@ int main(int argc, char** argv) {
     printf("         Downcount: %lld\n", (long long)cpu.downcount);
 
     u32 cur_sp = cpu.gpr[1];
-    printf("\n[Runner] PowerPC Call Stack Backtrace:\n");
+    printf("\n[Runner] PowerPC Call Stack Backtrace (Active SP):\n");
     for (int depth = 0; depth < 10 && cur_sp != 0; depth++) {
         u32 caller_sp = mem_read32(&cpu, cur_sp);
         u32 caller_lr = mem_read32(&cpu, cur_sp + 4);
         printf("         Frame %d: SP=0x%08X, LR=0x%08X\n", depth, cur_sp, caller_lr);
         if (caller_sp <= cur_sp || caller_sp >= 0x81000000) break;
         cur_sp = caller_sp;
+    }
+
+    printf("\n[Runner] Stack Code Pointers between 0x80897C00 and 0x80898800:\n");
+    for (u32 a = 0x80897C00; a < 0x80898800; a += 4) {
+        u32 val = mem_read32(&cpu, a);
+        if (val >= 0x80003000 && val < 0x80700000 && (val & 3) == 0) {
+            printf("         0x%08X: 0x%08X\n", a, val);
+        }
     }
 
     printf("\n[Runner] Active PowerPC Threads:\n");
@@ -620,11 +953,19 @@ int main(int argc, char** argv) {
         u16 state = mem_read16(&cpu, thread_addr + 0x2C8);
         u32 prio = mem_read32(&cpu, thread_addr + 0x2D0);
         u32 pc = mem_read32(&cpu, thread_addr + 0x198); // context.srr0
-        u32 lr = mem_read32(&cpu, thread_addr + 0x190); // context.lr
+        u32 t_lr = mem_read32(&cpu, thread_addr + 0x84); // context.lr
         u32 sp = mem_read32(&cpu, thread_addr + 0x004); // context.gpr[1]
         u32 wait_queue = mem_read32(&cpu, thread_addr + 0x2DC);
         printf("         Thread %d: Addr=0x%08X State=%u Prio=%u Queue=0x%08X PC=0x%08X LR=0x%08X SP=0x%08X\n",
-               t_idx++, thread_addr, state, prio, wait_queue, pc, lr, sp);
+               t_idx++, thread_addr, state, prio, wait_queue, pc, t_lr, sp);
+        u32 tsp = sp;
+        for (int d = 0; d < 8 && tsp != 0; d++) {
+            u32 nxt = mem_read32(&cpu, tsp);
+            u32 frame_lr = mem_read32(&cpu, tsp + 4);
+            printf("           T%d Frame %d: SP=0x%08X LR=0x%08X\n", t_idx - 1, d, tsp, frame_lr);
+            if (nxt <= tsp || nxt >= 0x81000000) break;
+            tsp = nxt;
+        }
         thread_addr = mem_read32(&cpu, thread_addr + 0x2FC); // linkActive.next
     }
 
@@ -663,6 +1004,16 @@ int main(int argc, char** argv) {
     u8 r13_26599 = mem_read8(&cpu, 0x808852A0 - 26599);
     u8 r13_26598 = mem_read8(&cpu, 0x808852A0 - 26598);
     printf("         Flags at r13: -26599 = %u, -26598 = %u\n", r13_26599, r13_26598);
+
+    printf("\n[Runner] GameLoadTask Object 0x80ADC930 Dump:\n");
+    for (int i = 0; i < 64; i += 4) {
+        printf("   +0x%02X: 0x%08X\n", i, mem_read32(&cpu, 0x80ADC930 + i));
+    }
+
+    printf("\n[Runner] Scene Task Object 0x80B7C950 Dump:\n");
+    for (int i = 0; i < 64; i += 4) {
+        printf("   +0x%02X: 0x%08X\n", i, mem_read32(&cpu, 0x80B7C950 + i));
+    }
 
     // Framebuffer capture
     u32 fb0_addr = mem_read32(&cpu, 0x807C6F70);
@@ -728,99 +1079,13 @@ int main(int argc, char** argv) {
         }
     }
 
-    u32 p_f510 = mem_read32(&cpu, 0x8087F510);
-    u32 p_f518 = mem_read32(&cpu, 0x8087F518);
-    u32 p_ee94 = mem_read32(&cpu, 0x8087EE94);
-    printf("\n[Runner] Stall Diagnostics (calls: c1c8=%u, bbf0=%u):\n", g_count_c1c8, g_count_bbf0);
-    printf("         lbl_8087F510 = 0x%08X\n", p_f510);
-    if (p_f510) {
-        u32 p_arr = mem_read32(&cpu, p_f510 + 0x10);
-        printf("           p_f510->0x10 = 0x%08X\n", p_arr);
-        if (p_arr) {
-            u32 frame0_sp = 0x80898DC8;
-            printf("           Frame 0 (0x%08X): [0]=0x%08X [4]=0x%08X [8]=0x%08X [12]=0x%08X [16]=0x%08X [20]=0x%08X [24]=0x%08X [28]=0x%08X [32]=0x%08X [36]=0x%08X\n",
-                   frame0_sp,
-                   mem_read32(&cpu, frame0_sp), mem_read32(&cpu, frame0_sp + 4),
-                   mem_read32(&cpu, frame0_sp + 8), mem_read32(&cpu, frame0_sp + 12),
-                   mem_read32(&cpu, frame0_sp + 16), mem_read32(&cpu, frame0_sp + 20),
-                   mem_read32(&cpu, frame0_sp + 24), mem_read32(&cpu, frame0_sp + 28),
-                   mem_read32(&cpu, frame0_sp + 32), mem_read32(&cpu, frame0_sp + 36));
-            u32 buf0 = mem_read32(&cpu, p_arr + 4);
-            printf("           item[0] buffer 0x%08X: %08X %08X %08X %08X\n", buf0,
-                   mem_read32(&cpu, buf0), mem_read32(&cpu, buf0 + 4),
-                   mem_read32(&cpu, buf0 + 8), mem_read32(&cpu, buf0 + 12));
-            printf("           item[0] words: [0]=0x%08X [4]=0x%08X [8]=0x%08X [12]=0x%08X [16]=0x%08X\n",
-                   mem_read32(&cpu, p_arr), mem_read32(&cpu, p_arr + 4), mem_read32(&cpu, p_arr + 8),
-                   mem_read32(&cpu, p_arr + 12), mem_read32(&cpu, p_arr + 16));
-            printf("           item[1] status at 0x%08X = %u, count(80) = %u, sub[0](84) = 0x%08X\n",
-                   p_arr + 0x400b8, mem_read32(&cpu, p_arr + 0x400b8), mem_read32(&cpu, p_arr + 0x400b8 + 80), mem_read32(&cpu, p_arr + 0x400b8 + 84));
-            u32 sub0 = mem_read32(&cpu, p_arr + 84);
-            if (sub0) {
-                u32 req0 = mem_read32(&cpu, sub0);
-                printf("             item[0]->sub[0]: req=0x%08X [4]=0x%08X [8]=0x%08X [28]=0x%08X [32]=0x%08X\n",
-                       req0, mem_read32(&cpu, sub0 + 4), mem_read32(&cpu, sub0 + 8),
-                       mem_read32(&cpu, sub0 + 28), mem_read32(&cpu, sub0 + 32));
-                if (req0) {
-                    char name0[64];
-                    for (int c = 0; c < 63; c++) name0[c] = (char)mem_read8(&cpu, req0 + 6 + c);
-                    name0[63] = 0;
-                    printf("               item[0] req string: \"%s\", status: %u\n", name0, mem_read8(&cpu, req0 + 4));
-                }
-            }
-            u32 fi0 = p_arr + 20;
-            u32 fi1 = p_arr + 0x400b8 + 20;
-            printf("             item[0] DVDFileInfo at 0x%08X: id(0x30)=%u, len(0x34)=%u, cb(0x38)=0x%08X\n",
-                   fi0, mem_read32(&cpu, fi0 + 0x30), mem_read32(&cpu, fi0 + 0x34), mem_read32(&cpu, fi0 + 0x38));
-            printf("             item[1] DVDFileInfo at 0x%08X: id(0x30)=%u, len(0x34)=%u, cb(0x38)=0x%08X\n",
-                   fi1, mem_read32(&cpu, fi1 + 0x30), mem_read32(&cpu, fi1 + 0x34), mem_read32(&cpu, fi1 + 0x38));
-        }
-    }
-    printf("         lbl_8087F518 = 0x%08X\n", p_f518);
-    if (p_f518) {
-        u32 vt = mem_read32(&cpu, p_f518);
-        printf("           p_f518 vtable = 0x%08X\n", vt);
-        if (vt) {
-            for (int k = 0; k < 8; k++) {
-                printf("             vt[%d] = 0x%08X\n", k, mem_read32(&cpu, vt + k * 4));
-            }
-        }
-    }
-    printf("         lbl_8087EE94 = 0x%08X\n", p_ee94);
-    if (p_ee94) {
-        u32 ee94_cnt = mem_read32(&cpu, p_ee94);
-        u32 ee94_arr = mem_read32(&cpu, p_ee94 + 8);
-        printf("           ee94 count=%u, arr=0x%08X\n", ee94_cnt, ee94_arr);
-        for (u32 k = 0; k < ee94_cnt && k < 8; k++) {
-            u32 slot = ee94_arr + k * 20;
-            printf("             ee94[%u]: [0]=0x%08X [4]=0x%08X [8]=0x%08X [12]=0x%08X [16]=0x%08X\n",
-                   k, mem_read32(&cpu, slot), mem_read32(&cpu, slot + 4),
-                   mem_read32(&cpu, slot + 8), mem_read32(&cpu, slot + 12), mem_read32(&cpu, slot + 16));
-        }
-    }
-
-    printf("\n[Runner] Frame 3 & 4 Stack Dump (0x80898E28 - 0x80898EC0):\n");
-    for (u32 addr = 0x80898E28; addr < 0x80898EC0; addr += 16) {
-        printf("         0x%08X: %08X %08X %08X %08X\n", addr,
-               mem_read32(&cpu, addr), mem_read32(&cpu, addr + 4),
-               mem_read32(&cpu, addr + 8), mem_read32(&cpu, addr + 12));
-    }
-
-    u32 req = mem_read32(&cpu, 0x80898EA4);
-    printf("\n[Runner] Resource Request Object at 0x%08X:\n", req);
-    if (req) {
-        for (u32 off = 0; off < 64; off += 16) {
-            printf("         +0x%02X: %08X %08X %08X %08X\n", off,
-                   mem_read32(&cpu, req + off), mem_read32(&cpu, req + off + 4),
-                   mem_read32(&cpu, req + off + 8), mem_read32(&cpu, req + off + 12));
-        }
-        u8 req_status = mem_read8(&cpu, req + 4);
-        printf("         req status byte (+4) = %u\n", req_status);
-    }
+    tls_debug_dump_full(&cpu, frame, "Runner Execution Completed");
 
 #ifdef _WIN32
     if (enable_window) {
         gfx_backend_shutdown();
     }
+    timeEndPeriod(1);
 #endif
 
     cpu_free(&cpu);

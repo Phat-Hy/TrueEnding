@@ -101,26 +101,25 @@ bool gfx_backend_init(HWND hwnd, const GfxConfig* config) {
     s_active_config = *config;
     s_hwnd = hwnd;
 
-    // Direct3D 12 requested or AUTO (modern first)
-    if (config->backend_type == GFX_BACKEND_D3D12 || config->backend_type == GFX_BACKEND_AUTO) {
-        if (d3d12_init(hwnd, config)) {
-            s_active_backend = GFX_BACKEND_D3D12;
-            return true;
-        }
-        if (config->backend_type == GFX_BACKEND_D3D12) {
-            printf("[GFX] Direct3D 12 initialization failed, falling back to D3D11...\n");
-        }
-    }
-
-    // Direct3D 11 requested or fallback from AUTO / D3D12
-    if (config->backend_type == GFX_BACKEND_AUTO ||
-        config->backend_type == GFX_BACKEND_D3D11 ||
-        config->backend_type == GFX_BACKEND_D3D12) {
+    // Direct3D 11 requested or AUTO (primary: hardware-accelerated, full GX texture pipeline)
+    if (config->backend_type == GFX_BACKEND_D3D11 || config->backend_type == GFX_BACKEND_AUTO) {
         if (d3d11_init(hwnd, config)) {
             s_active_backend = GFX_BACKEND_D3D11;
             return true;
         }
-        printf("[GFX] Direct3D 11 initialization failed, falling back to GDI...\n");
+        if (config->backend_type == GFX_BACKEND_D3D11) {
+            printf("[GFX] Direct3D 11 initialization failed, falling back to D3D12...\n");
+        }
+    }
+
+    // Direct3D 12 requested or fallback from AUTO / D3D11
+    if (config->backend_type == GFX_BACKEND_D3D12 ||
+        config->backend_type == GFX_BACKEND_AUTO) {
+        if (d3d12_init(hwnd, config)) {
+            s_active_backend = GFX_BACKEND_D3D12;
+            return true;
+        }
+        printf("[GFX] Direct3D 12 initialization failed, falling back to GDI...\n");
     }
 
     // Fallback to GDI
