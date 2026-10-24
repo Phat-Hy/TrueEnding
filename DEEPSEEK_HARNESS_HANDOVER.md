@@ -879,6 +879,17 @@ frame appears **doubled** (logo near the top and again in the middle - a tile-ro
 and there is a bright green field plus a noisy strip (the two VI buffers being copied at different times).
 Fixing the tile-row offset is the last step before the lake can be judged visually.
 
+One deduction already narrows it: the *source* is known-good. The D3D11 backbuffer screenshots taken at the
+same frames (`d3d11_screenshot_*.ppm`, the pipeline that draws the gx batches) show a single, correctly
+placed logo, so the doubling is introduced by the copy's tiled write, not by the readback. Concretely, check
+in this order: (1) the destination's real row pitch - the VI buffer may be allocated wider than the 640 the
+copy rect uses, in which case `tile = (gy/4)*tiles_x + (gx/4)` puts each 4-row band at the wrong byte
+offset; measure it by looking for the guest's allocation size or by dumping `dst_guest` before the copy and
+seeing where the previous frame's content repeats. (2) whether the write should be row-linear instead of
+4x4-tiled for *display* copies (the GX display copy produces a scanout buffer; only the texture copies are
+tiled) - the observed picture arrives at all, which means the tile layout is at least close, and a
+linear-vs-tiled A/B on the same frame is the quickest way to tell.
+
 **What the rest of the work needs** (unchanged): on `0x52` read back the current EFB region from the D3D11 render target
 (the screenshot path in `gfx_d3d11.c` already does `CopyResource` + `Map(READ)` into a staging texture)
 and convert it to the destination format the register names (RGBA8 first; RGB565 next), then write it into
