@@ -1,45 +1,79 @@
 ---
 name: plan
-description: Turn a chosen approach into concrete steps, files to change, and completion criteria. Use before implementing anything beyond a trivial fix.
+description: Plan systematic, clean, phase-by-phase implementation for the entire game lifecycle in native PC recompilation.
 ---
 
-# Plan
+# Master Game Lifecycle Execution Plan
 
 ## Purpose
+Guide the progressive verification and implementation of the recompiled Wii game engine across all operational phases:
+1. Boot & Strap Screen
+2. Title Screen & Menus (New Game / Save Management / Options)
+3. Chapter 1: Gurgan Cave (Combat mechanics, particle effects, 3D meshes, enemy AI)
+4. Chapter 2–44: Full Campaign (Lazulis City, Arena, Dungeons, Bosses, Cutscenes, Epilogue)
 
-Turn an idea that's already been chosen (see `brainstorm`) into something
-concrete enough to execute: what files change, in what order, and how you'll
-know it's done.
+---
 
-## Core principles
+## Core Planning Directives
 
-- Clarify scope before listing steps - what's in, what's explicitly out.
-- List specific files/changes, not vague phases like "improve backend".
-- Name risks up front, and how you'll check for them (a test, a manual check).
-- Keep the plan proportional to the task - a one-file fix doesn't need the
-  same ceremony as a multi-file feature.
+### 1. Unified Engine Observability First
+Before attempting to fix a symptom in any chapter or scene:
+* Check the **Sequence Manager** (`0x8087EE90`) and **Task Manager** (`0x8087EE94`).
+* Check the **Resource Loader Queue** (`lbl_8087F510`).
+* Check the **Input State** (`PadManager` / `WPAD`).
+* Check the **Graphics Backend** (batches, textures, blend modes).
+* NEVER use synthetic state overrides to jump ahead. If a task isn't advancing, determine what resource or event it is waiting for and provide it cleanly.
 
-This skill only produces plan documents - it does not carry a HARD-GATE
-itself since it never writes implementation code. The gate belongs to the
-skill that implements (see `build`).
+### 2. Systematic Phase Roadmap
 
-## Minimal `plan.md` shape
+```mermaid
+flowchart TD
+    Phase1["Phase 1: Boot & Strap Screen"] --> Phase2["Phase 2: Title Screen & Save Load"]
+    Phase2 --> Phase3["Phase 3: Chapter 1 Gurgan Cave"]
+    Phase3 --> Phase4["Phase 4: Lazulis City & World Exploration"]
+    Phase4 --> Phase5["Phase 5: Full Campaign Progression & Epilogue"]
+```
 
-A plan file only needs:
+#### Phase 1: Boot & Strap Screen
+- **Milestones**:
+  - RVL-SDK OS boot, memory arenas (MEM1 24MB, MEM2 64MB), threading, and interrupt controllers initialized.
+  - Strap screen asset (`strapA_en.texture`) loaded and presented cleanly.
+  - Clean dismissal via either timeout or user confirmation ('A' button).
+  - Transition to Title Sequence without lingering XFB cache artifacts.
 
-- **Overview** - what this plan accomplishes and why.
-- **Steps** - an ordered list of concrete changes.
-- **Completion criteria** - how you'll verify each step actually works.
+#### Phase 2: Title Screen & Save Management
+- **Milestones**:
+  - Title assets (`title00.pk` - `title08.pk`, `titlle_white.map`, `radial.texture`) loaded.
+  - 3D cave background model and camera animations rendered at 60 FPS.
+  - 2D Title Logo, "Press Any Button" prompt, and Menu items (New Game, Load Game, Options) rendered with pixel-perfect alpha testing (no black/white boxes).
+  - User input smoothly navigates menus.
+  - Save file creation and loading (`savedata/savedata.dat`, 1.35MB) validated.
 
-That's it - no required frontmatter schema, no separate phase files, no
-fixed set of modes. Add structure only when the task's size actually calls
-for it.
+#### Phase 3: Chapter 1 Gurgan Cave & Combat System
+- **Milestones**:
+  - Map loading (`game_start_dg.pk`, `change_dg.pk`).
+  - Player character model (Zael), companions, and enemy beasts loaded with skeletal animations and skinning matrices.
+  - Real-time combat system: sword slashes, cover system, crossbow aiming, command mode, magic circles.
+  - Shader pipeline: normal mapping, specular highlights, point lights, radial blur, depth of field.
+  - Audio: dynamic battle music switching, sound effects, voice lines.
 
-## Make it yours
+#### Phase 4: Lazulis City & World Exploration
+- **Milestones**:
+  - Large-scale city rendering (`na000_00_town.pk`, `na000_00.pk`).
+  - Dynamic crowd AI, NPC interactions, dialogue textboxes, mini-map, compass HUD.
+  - Shop system, weapon upgrade, tavern events, stealth mechanics.
 
-Decide how much detail a plan needs based on the size of the assignment.
-For a quick fix, three bullet points might be the whole plan; for a
-multi-file feature, write more.
+#### Phase 5: Full Campaign Progression & Epilogue
+- **Milestones**:
+  - Event script VM (`LastWorld.sel`, script coroutines, event triggers).
+  - Movie streaming (`orig/DATA/files/movie/*.thp`).
+  - All 44 chapters playable end-to-end with persistent saves.
 
-Reference: `references/scope-and-tradeoffs.md` for questions to ask about
-scope and a simple approach-comparison table.
+---
+
+## Completion Criteria Checklist
+- [ ] Zero unhandled CPU exceptions or guest aborts.
+- [ ] Zero thread queue corruption warnings (`Resetting invalid queue head`).
+- [ ] Zero linear console spam in loops.
+- [ ] 60.0 FPS locked presentation in Direct3D 11 / Direct3D 12.
+- [ ] 100% natural progression with standard controller / keyboard input.

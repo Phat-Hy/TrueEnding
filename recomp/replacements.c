@@ -1,11 +1,41 @@
 #include "replacements.h"
+#include "gx_pipeline.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+
+static CPUState* s_current_active_cpu = NULL;
+u32 g_tls_rbtree_1354_cnt = 0;
+u32 g_tls_rbtree_195c_cnt = 0;
+u32 g_tls_rbtree_19e0_cnt = 0;
+u32 g_tls_rbtree_b04_cnt = 0;
+u32 g_tls_rbtree_b88_cnt = 0;
+
+void host_set_active_cpu(CPUState* cpu) {
+    s_current_active_cpu = cpu;
+}
+
+const void* host_resolve_gx_guest_addr(uint32_t addr) {
+    if (!s_current_active_cpu) return NULL;
+    void* p = resolve_guest_pointer(s_current_active_cpu, addr);
+    if (!p) {
+        if (addr < 0x04000000) {
+            // Physical MEM1 address (0x00000000 - 0x03FFFFFF)
+            p = resolve_guest_pointer(s_current_active_cpu, 0x80000000 | addr);
+        } else if (addr >= 0x10000000 && addr < 0x18000000) {
+            // Physical MEM2 address (0x10000000 - 0x13FFFFFF)
+            p = resolve_guest_pointer(s_current_active_cpu, 0x90000000 | (addr & 0x03FFFFFF));
+        } else if ((addr & 0xFE000000) == 0x82000000) {
+            p = resolve_guest_pointer(s_current_active_cpu, 0x90000000 | (addr & 0x03FFFFFF));
+        }
+    }
+    return p;
+}
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#include <mmsystem.h>
 #else
 static short GetAsyncKeyState(int vKey) {
     (void)vKey;
@@ -33,6 +63,9 @@ void* resolve_guest_pointer(CPUState* ctx, u32 addr) {
         if (addr >= WII_MEM2_UNCACHED && addr < WII_MEM2_UNCACHED + ctx->mem2_size) {
             return ctx->mem2 + (addr - WII_MEM2_UNCACHED);
         }
+    }
+    if (addr >= 0xE0000000 && addr < 0xE0010000) {
+        return g_locked_cache + (addr - 0xE0000000);
     }
     return NULL;
 }
@@ -69,6 +102,29 @@ static inline u32 mmio_hash(u32 ea) {
 
 u64 mmio_external_read(CPUState* cpu, u32 ea, u8 size) {
     (void)cpu;
+    // Physical memory below 0x04000000 that fell through resolve_addr
+    if (ea < 0x04000000) {
+        if (cpu && cpu->ram && ea + size <= cpu->ram_size) {
+            u64 val = 0;
+            for (u8 i = 0; i < size; i++) {
+                val = (val << 8) | cpu->ram[ea + i];
+            }
+            return val;
+        }
+        return 0;
+    }
+    // Locked L1 Data Cache Scratchpad (0xE0000000 - 0xE000FFFF)
+    if (ea >= 0xE0000000 && ea < 0xE0010000) {
+        u32 offset = ea - 0xE0000000;
+        if (offset + size <= sizeof(g_locked_cache)) {
+            u64 val = 0;
+            for (u8 i = 0; i < size; i++) {
+                val = (val << 8) | g_locked_cache[offset + i];
+            }
+            return val;
+        }
+        return 0;
+    }
     // Hollywood Version / ID register
     if (ea == 0xCD006024 || ea == 0xCC006024) {
         return 0x00000021; // Hollywood revision 2.1
@@ -82,7 +138,11 @@ u64 mmio_external_read(CPUState* cpu, u32 ea, u8 size) {
         return 0; // Bit 15/16 clear: CPU mailbox empty (consumed by DSP)
     }
     if (ea == 0xCC005004 || ea == 0xCD005004) {
-        return 0x8000; // Bit 15/16 set: DSP has mail / ready
+        // If called by __OSStopAudioSystem (0x805ED070 - 0x805ED140), return 0 to exit loop!
+        if (cpu && cpu->pc >= 0x805ED070 && cpu->pc <= 0x805ED140) {
+            return 0;
+        }
+        return 0x8000; // Bit 15 set: DSP has mail / ready for DSP task runner
     }
     if (ea == 0xCC005006 || ea == 0xCD005006) {
         return 0; // Low 16 bits of DSP mail
@@ -154,12 +214,82 @@ u64 mmio_external_read(CPUState* cpu, u32 ea, u8 size) {
         }
     }
 
+    // DSP (Digital Signal Processor) registers (0xCC005000 / 0xCD005000)
+    if ((ea & 0xFFFFFE00) == 0xCD005000 || (ea & 0xFFFFFE00) == 0xCC005000) {
+        u32 reg = ea & 0xFF;
+        // 0x04: DSP Mailbox High, 0x06: DSP Mailbox Low
+        // __OSStopAudioSystem loops while ((r3<<16 | r0) & ~1) != 0, so returning 0 exits immediately!
+        if (reg == 0x04 || reg == 0x06) {
+            return 0;
+        }
+        // DSP Control/Status register (0x0A): bit 0 (DSPINIT) clears immediately when initialized
+        if (reg == 0x0A) {
+            u16 val = (u16)s_mmio_regs[mmio_hash(ea)];
+            return val & ~0x0601u; // clear DSPINIT (bit 0), DSPHALT, etc.
+        }
+    }
+
     return s_mmio_regs[mmio_hash(ea)];
 }
 
 void mmio_external_write(CPUState* cpu, u32 ea, u64 value, u8 size) {
-    (void)cpu;
-    (void)size;
+    s_current_active_cpu = cpu;
+
+    // Physical memory below 0x04000000 that fell through resolve_addr
+    if (ea < 0x04000000) {
+        if (cpu && cpu->ram && ea + size <= cpu->ram_size) {
+            for (u8 i = 0; i < size; i++) {
+                cpu->ram[ea + i] = (u8)(value >> ((size - 1 - i) * 8));
+            }
+        }
+        return;
+    }
+
+    // Locked L1 Data Cache Scratchpad (0xE0000000 - 0xE000FFFF)
+    if (ea >= 0xE0000000 && ea < 0xE0010000) {
+        u32 offset = ea - 0xE0000000;
+        if (offset + size <= sizeof(g_locked_cache)) {
+            for (u8 i = 0; i < size; i++) {
+                g_locked_cache[offset + i] = (u8)(value >> ((size - 1 - i) * 8));
+            }
+        }
+        return;
+    }
+
+    // Graphics Command FIFO / WGPIPE (0xCC008000 - 0xCC00803F / 0xCD008000 - 0xCD00803F)
+    if ((ea & ~0x3Fu) == 0xCC008000u || (ea & ~0x3Fu) == 0xCD008000u) {
+        gx_pipeline_set_debug_pc(cpu->pc, cpu->lr);
+        if (size == 1 && ((value & 0xF8) == 0x80 || (value & 0xF8) == 0x90 || (value & 0xF8) == 0x98 || (value & 0xF8) == 0xA0)) {
+            static uint32_t s_gx_begin_count = 0;
+            if (++s_gx_begin_count <= 15) {
+                printf("[GXBegin #%u] cmd=0x%02X PC=0x%08X LR=0x%08X\n", s_gx_begin_count, (unsigned)value, cpu->pc, cpu->lr);
+                fflush(stdout);
+            }
+        }
+        if (size == 1) {
+            gx_pipeline_feed_byte((uint8_t)value);
+        } else if (size == 2) {
+            uint8_t b[2];
+            b[0] = (uint8_t)(value >> 8);
+            b[1] = (uint8_t)(value & 0xFF);
+            gx_pipeline_feed_bytes(b, 2);
+        } else if (size == 4) {
+            uint8_t b[4];
+            b[0] = (uint8_t)(value >> 24);
+            b[1] = (uint8_t)(value >> 16);
+            b[2] = (uint8_t)(value >> 8);
+            b[3] = (uint8_t)(value & 0xFF);
+            gx_pipeline_feed_bytes(b, 4);
+        } else if (size == 8) {
+            uint8_t b[8];
+            for (int i = 0; i < 8; i++) {
+                b[i] = (uint8_t)(value >> (56 - i * 8));
+            }
+            gx_pipeline_feed_bytes(b, 8);
+        }
+        return;
+    }
+
     // PI FIFO Write Pointer: align to 32-byte units (wiikit commit ae77320)
     if (ea == 0xCC00000C || ea == 0xCD00000C) {
         value &= ~0x1FULL;
@@ -187,6 +317,37 @@ void mmio_external_write(CPUState* cpu, u32 ea, u64 value, u8 size) {
         s_pe_draw_token = (u16)value;
     }
 
+    // PE ZMODE and CMODE0 registers (0xCC001000 / 0xCD001000 and 0xCC001002 / 0xCD001002)
+    if (ea == 0xCC001000 || ea == 0xCD001000) {
+        if (size == 4) {
+            uint16_t zmode = (uint16_t)(value >> 16);
+            uint16_t cmode0 = (uint16_t)(value & 0xFFFF);
+            bool z_test = (zmode & 1) != 0;
+            uint8_t z_func = (uint8_t)((zmode >> 1) & 7);
+            bool z_write = ((zmode >> 4) & 1) != 0;
+            gx_pipeline_set_z_mode(z_test, z_func, z_write);
+
+            bool bl_enable = (cmode0 & 1) != 0;
+            uint8_t bl_dst = (uint8_t)((cmode0 >> 5) & 7);
+            uint8_t bl_src = (uint8_t)((cmode0 >> 8) & 7);
+            bool bl_sub = ((cmode0 >> 11) & 1) != 0;
+            gx_pipeline_set_blend_mode(bl_enable, bl_src, bl_dst, bl_sub);
+        } else if (size == 2) {
+            uint16_t zmode = (uint16_t)value;
+            bool z_test = (zmode & 1) != 0;
+            uint8_t z_func = (uint8_t)((zmode >> 1) & 7);
+            bool z_write = ((zmode >> 4) & 1) != 0;
+            gx_pipeline_set_z_mode(z_test, z_func, z_write);
+        }
+    } else if (ea == 0xCC001002 || ea == 0xCD001002) {
+        uint16_t cmode0 = (uint16_t)value;
+        bool bl_enable = (cmode0 & 1) != 0;
+        uint8_t bl_dst = (uint8_t)((cmode0 >> 5) & 7);
+        uint8_t bl_src = (uint8_t)((cmode0 >> 8) & 7);
+        bool bl_sub = ((cmode0 >> 11) & 1) != 0;
+        gx_pipeline_set_blend_mode(bl_enable, bl_src, bl_dst, bl_sub);
+    }
+
     // EXI Control Registers: immediately clear TSTART (bit 0) upon write completion
     if ((ea & 0xFFFFFE00) == 0xCD006800 || (ea & 0xFFFFFE00) == 0xCC006800) {
         u32 reg = ea & 0x3F;
@@ -202,11 +363,8 @@ void mmio_external_write(CPUState* cpu, u32 ea, u64 value, u8 size) {
     s_mmio_regs[mmio_hash(ea)] = (u32)value;
 }
 
-static u32 s_simulated_ticks = 0;
-
-/* Current guest time, matching the OSGetTime replacement below. */
 static u64 guest_time_now(CPUState* ctx) {
-    return ctx->timebase + (u64)s_simulated_ticks;
+    return ctx->timebase;
 }
 
 /* --- Enhanced Controller Input Subsystem (XInput + Win32 Keyboard + KPAD) --- */
@@ -258,8 +416,19 @@ typedef struct HostControllerState {
 static HostControllerState s_ctrl_state = {0};
 static u32 s_last_core_hold = 0;
 static u32 s_last_cl_hold = 0;
+static u32 s_latched_core_trig = 0;
+static u32 s_latched_cl_trig = 0;
+static u32 s_latched_core_release = 0;
+static u32 s_latched_cl_release = 0;
 static u8 s_controller_button_bits = 0;
 static u32 s_controller_poll_count = 0;
+
+void tls_input_new_frame(void) {
+    s_latched_core_trig = 0;
+    s_latched_cl_trig = 0;
+    s_latched_core_release = 0;
+    s_latched_cl_release = 0;
+}
 
 #ifdef _WIN32
 typedef struct _XINPUT_GAMEPAD_LOCAL {
@@ -303,7 +472,17 @@ static void write_guest_f32(CPUState* ctx, u32 addr, f32 val) {
     mem_write32(ctx, addr, raw);
 }
 
+static f32 read_guest_f32(CPUState* ctx, u32 addr) {
+    u32 raw = mem_read32(ctx, addr);
+    f32 val;
+    memcpy(&val, &raw, 4);
+    return val;
+}
+
 static void fill_kpad_status(CPUState* ctx, u32 status_addr) {
+    u8* p = (u8*)resolve_guest_pointer(ctx, status_addr);
+    if (p) memset(p, 0, 0xF0);
+
     // 0x00: Wiimote core buttons
     mem_write32(ctx, status_addr + 0x00, s_ctrl_state.core_hold);
     mem_write32(ctx, status_addr + 0x04, s_ctrl_state.core_trig);
@@ -323,13 +502,13 @@ static void fill_kpad_status(CPUState* ctx, u32 status_addr) {
     write_guest_f32(ctx, status_addr + 0x2C, 0.0f); // vec.y
     write_guest_f32(ctx, status_addr + 0x30, 0.0f); // speed
 
-    // 0x34: Device type (2 = Classic Controller)
+    // 0x34: Device type (standard KPADStatus: 2 = Classic Controller)
     mem_write8(ctx, status_addr + 0x34, 2);
     // 0x35: Error (0 = OK)
     mem_write8(ctx, status_addr + 0x35, 0);
     mem_write16(ctx, status_addr + 0x36, 0);
 
-    // 0x38: Classic Controller Extension
+    // 0x38: Classic Controller Extension (standard KPADStatus)
     mem_write32(ctx, status_addr + 0x38, s_ctrl_state.cl_hold);
     mem_write32(ctx, status_addr + 0x3C, s_ctrl_state.cl_trig);
     mem_write32(ctx, status_addr + 0x40, s_ctrl_state.cl_release);
@@ -339,6 +518,23 @@ static void fill_kpad_status(CPUState* ctx, u32 status_addr) {
     write_guest_f32(ctx, status_addr + 0x50, s_ctrl_state.stick_r_y);
     write_guest_f32(ctx, status_addr + 0x54, s_ctrl_state.trigger_l);
     write_guest_f32(ctx, status_addr + 0x58, s_ctrl_state.trigger_r);
+
+    // 0x5C: Extended Device Type (used by TLS PadManager at 0x800DDD18 and 0x806572E0)
+    mem_write8(ctx, status_addr + 0x5C, 2); // WPAD_DEV_CLASSIC
+    mem_write8(ctx, status_addr + 0x5D, 0); // WPAD_ERR_NONE
+    mem_write8(ctx, status_addr + 0x5E, 0);
+    mem_write8(ctx, status_addr + 0x5F, 0);
+
+    // 0x60: Extended Classic Controller buttons & sticks (TLS PadManager layout)
+    mem_write32(ctx, status_addr + 0x60, s_ctrl_state.cl_hold);
+    mem_write32(ctx, status_addr + 0x64, s_ctrl_state.cl_trig);
+    mem_write32(ctx, status_addr + 0x68, s_ctrl_state.cl_release);
+    write_guest_f32(ctx, status_addr + 0x6C, s_ctrl_state.stick_l_x);
+    write_guest_f32(ctx, status_addr + 0x70, s_ctrl_state.stick_l_y);
+    write_guest_f32(ctx, status_addr + 0x74, s_ctrl_state.stick_r_x);
+    write_guest_f32(ctx, status_addr + 0x78, s_ctrl_state.stick_r_y);
+    write_guest_f32(ctx, status_addr + 0x7C, s_ctrl_state.trigger_l);
+    write_guest_f32(ctx, status_addr + 0x80, s_ctrl_state.trigger_r);
 }
 
 int tls_service_controller_input(CPUState* ctx) {
@@ -353,32 +549,60 @@ int tls_service_controller_input(CPUState* ctx) {
     init_xinput_dynamic();
     if (s_pfnXInputGetState) {
         XINPUT_STATE_LOCAL xi;
-        if (s_pfnXInputGetState(0, &xi) == 0) { // ERROR_SUCCESS = 0
-            WORD w = xi.Gamepad.wButtons;
-            if (w & 0x0001) { cur_core |= WPAD_BUTTON_UP;    cur_cl |= WPAD_CL_BUTTON_UP; }
-            if (w & 0x0002) { cur_core |= WPAD_BUTTON_DOWN;  cur_cl |= WPAD_CL_BUTTON_DOWN; }
-            if (w & 0x0004) { cur_core |= WPAD_BUTTON_LEFT;  cur_cl |= WPAD_CL_BUTTON_LEFT; }
-            if (w & 0x0008) { cur_core |= WPAD_BUTTON_RIGHT; cur_cl |= WPAD_CL_BUTTON_RIGHT; }
-            if (w & 0x1000) { cur_core |= WPAD_BUTTON_A;     cur_cl |= WPAD_CL_BUTTON_A; }
-            if (w & 0x2000) { cur_core |= WPAD_BUTTON_B;     cur_cl |= WPAD_CL_BUTTON_B; }
-            if (w & 0x4000) { cur_core |= WPAD_BUTTON_1;     cur_cl |= WPAD_CL_BUTTON_X; }
-            if (w & 0x8000) { cur_core |= WPAD_BUTTON_2;     cur_cl |= WPAD_CL_BUTTON_Y; }
-            if (w & 0x0010) { cur_core |= WPAD_BUTTON_PLUS;  cur_cl |= WPAD_CL_BUTTON_PLUS; }
-            if (w & 0x0020) { cur_core |= WPAD_BUTTON_MINUS; cur_cl |= WPAD_CL_BUTTON_MINUS; }
-            if (w & 0x0100) { cur_cl |= WPAD_CL_BUTTON_ZL; }
-            if (w & 0x0200) { cur_cl |= WPAD_CL_BUTTON_ZR; }
-            if (xi.Gamepad.bLeftTrigger > 30) {
-                cur_cl |= WPAD_CL_BUTTON_FULL_L;
-                tl = (f32)xi.Gamepad.bLeftTrigger / 255.0f;
+        for (DWORD i = 0; i < 4; i++) {
+            if (s_pfnXInputGetState(i, &xi) == 0) { // ERROR_SUCCESS = 0
+                WORD w = xi.Gamepad.wButtons;
+                if (w & 0x0001) { cur_core |= WPAD_BUTTON_UP;    cur_cl |= WPAD_CL_BUTTON_UP; }
+                if (w & 0x0002) { cur_core |= WPAD_BUTTON_DOWN;  cur_cl |= WPAD_CL_BUTTON_DOWN; }
+                if (w & 0x0004) { cur_core |= WPAD_BUTTON_LEFT;  cur_cl |= WPAD_CL_BUTTON_LEFT; }
+                if (w & 0x0008) { cur_core |= WPAD_BUTTON_RIGHT; cur_cl |= WPAD_CL_BUTTON_RIGHT; }
+                if (w & 0x1000) { cur_core |= WPAD_BUTTON_A;     cur_cl |= WPAD_CL_BUTTON_A; }
+                if (w & 0x2000) { cur_core |= WPAD_BUTTON_B;     cur_cl |= WPAD_CL_BUTTON_B; }
+                if (w & 0x4000) { cur_core |= WPAD_BUTTON_1;     cur_cl |= WPAD_CL_BUTTON_X; }
+                if (w & 0x8000) { cur_core |= WPAD_BUTTON_2;     cur_cl |= WPAD_CL_BUTTON_Y; }
+                if (w & 0x0010) { cur_core |= WPAD_BUTTON_PLUS;  cur_cl |= WPAD_CL_BUTTON_PLUS; }
+                if (w & 0x0020) { cur_core |= WPAD_BUTTON_MINUS; cur_cl |= WPAD_CL_BUTTON_MINUS; }
+                if (w & 0x0100) { cur_cl |= WPAD_CL_BUTTON_ZL; }
+                if (w & 0x0200) { cur_cl |= WPAD_CL_BUTTON_ZR; }
+                if (xi.Gamepad.bLeftTrigger > 30) {
+                    cur_cl |= WPAD_CL_BUTTON_FULL_L;
+                    if (tl == 0.0f) tl = (f32)xi.Gamepad.bLeftTrigger / 255.0f;
+                }
+                if (xi.Gamepad.bRightTrigger > 30) {
+                    cur_cl |= WPAD_CL_BUTTON_FULL_R;
+                    if (tr == 0.0f) tr = (f32)xi.Gamepad.bRightTrigger / 255.0f;
+                }
+                if (abs(xi.Gamepad.sThumbLX) > 7849 && lx == 0.0f) lx = (f32)xi.Gamepad.sThumbLX / 32767.0f;
+                if (abs(xi.Gamepad.sThumbLY) > 7849 && ly == 0.0f) ly = (f32)xi.Gamepad.sThumbLY / 32767.0f;
+                if (abs(xi.Gamepad.sThumbRX) > 8689 && rx == 0.0f) rx = (f32)xi.Gamepad.sThumbRX / 32767.0f;
+                if (abs(xi.Gamepad.sThumbRY) > 8689 && ry == 0.0f) ry = (f32)xi.Gamepad.sThumbRY / 32767.0f;
             }
-            if (xi.Gamepad.bRightTrigger > 30) {
-                cur_cl |= WPAD_CL_BUTTON_FULL_R;
-                tr = (f32)xi.Gamepad.bRightTrigger / 255.0f;
+        }
+    }
+
+    // Direct WinMM joystick polling (DirectInput, DualSense native, virtual controllers)
+    for (UINT jid = JOYSTICKID1; jid <= JOYSTICKID2; jid++) {
+        JOYINFOEX ji = {0};
+        ji.dwSize = sizeof(JOYINFOEX);
+        ji.dwFlags = JOY_RETURNALL;
+        if (joyGetPosEx(jid, &ji) == JOYERR_NOERROR) {
+            DWORD b = ji.dwButtons;
+            if (b & 0x01) { cur_core |= WPAD_BUTTON_A; cur_cl |= WPAD_CL_BUTTON_A; }
+            if (b & 0x02) { cur_core |= WPAD_BUTTON_B; cur_cl |= WPAD_CL_BUTTON_B; }
+            if (b & 0x04) { cur_core |= WPAD_BUTTON_1; cur_cl |= WPAD_CL_BUTTON_X; }
+            if (b & 0x08) { cur_core |= WPAD_BUTTON_2; cur_cl |= WPAD_CL_BUTTON_Y; }
+            if (b & 0x10) { cur_cl |= WPAD_CL_BUTTON_ZL; }
+            if (b & 0x20) { cur_cl |= WPAD_CL_BUTTON_ZR; }
+            if (b & 0x40) { cur_cl |= WPAD_CL_BUTTON_FULL_L; }
+            if (b & 0x80) { cur_cl |= WPAD_CL_BUTTON_FULL_R; }
+            if (b & 0x100) { cur_core |= WPAD_BUTTON_MINUS; cur_cl |= WPAD_CL_BUTTON_MINUS; }
+            if (b & 0x200) { cur_core |= WPAD_BUTTON_PLUS;  cur_cl |= WPAD_CL_BUTTON_PLUS; }
+            if (ji.dwPOV != 0xFFFF && ji.dwPOV != 65535) {
+                if (ji.dwPOV == 0 || ji.dwPOV == 4500 || ji.dwPOV == 31500) { cur_core |= WPAD_BUTTON_UP; cur_cl |= WPAD_CL_BUTTON_UP; }
+                if (ji.dwPOV == 9000 || ji.dwPOV == 4500 || ji.dwPOV == 13500) { cur_core |= WPAD_BUTTON_RIGHT; cur_cl |= WPAD_CL_BUTTON_RIGHT; }
+                if (ji.dwPOV == 18000 || ji.dwPOV == 13500 || ji.dwPOV == 22500) { cur_core |= WPAD_BUTTON_DOWN; cur_cl |= WPAD_CL_BUTTON_DOWN; }
+                if (ji.dwPOV == 27000 || ji.dwPOV == 22500 || ji.dwPOV == 31500) { cur_core |= WPAD_BUTTON_LEFT; cur_cl |= WPAD_CL_BUTTON_LEFT; }
             }
-            if (abs(xi.Gamepad.sThumbLX) > 7849) lx = (f32)xi.Gamepad.sThumbLX / 32767.0f;
-            if (abs(xi.Gamepad.sThumbLY) > 7849) ly = (f32)xi.Gamepad.sThumbLY / 32767.0f;
-            if (abs(xi.Gamepad.sThumbRX) > 8689) rx = (f32)xi.Gamepad.sThumbRX / 32767.0f;
-            if (abs(xi.Gamepad.sThumbRY) > 8689) ry = (f32)xi.Gamepad.sThumbRY / 32767.0f;
         }
     }
 
@@ -395,10 +619,11 @@ int tls_service_controller_input(CPUState* ctx) {
     if ((GetAsyncKeyState(VK_DOWN) & 0x8000) || (GetAsyncKeyState('S') & 0x8000)) {
         cur_core |= WPAD_BUTTON_DOWN;  cur_cl |= WPAD_CL_BUTTON_DOWN;  ly = -1.0f;
     }
-    if ((GetAsyncKeyState(VK_RETURN) & 0x8000) || (GetAsyncKeyState(VK_SPACE) & 0x8000) || (GetAsyncKeyState('Z') & 0x8000)) {
-        cur_core |= WPAD_BUTTON_A; cur_cl |= WPAD_CL_BUTTON_A;
+    if ((GetAsyncKeyState(VK_RETURN) & 0x8000) || (GetAsyncKeyState(VK_SPACE) & 0x8000) || (GetAsyncKeyState('Z') & 0x8000) || (GetAsyncKeyState('E') & 0x8000) || (GetAsyncKeyState('F') & 0x8000) || (GetAsyncKeyState(VK_LBUTTON) & 0x8000) || (GetAsyncKeyState('2') & 0x8000)) {
+        cur_core |= WPAD_BUTTON_A | WPAD_BUTTON_2;
+        cur_cl   |= WPAD_CL_BUTTON_A | WPAD_CL_BUTTON_Y;
     }
-    if ((GetAsyncKeyState(VK_ESCAPE) & 0x8000) || (GetAsyncKeyState(VK_BACK) & 0x8000) || (GetAsyncKeyState('X') & 0x8000)) {
+    if ((GetAsyncKeyState(VK_ESCAPE) & 0x8000) || (GetAsyncKeyState(VK_BACK) & 0x8000) || (GetAsyncKeyState('X') & 0x8000) || (GetAsyncKeyState('Q') & 0x8000) || (GetAsyncKeyState(VK_RBUTTON) & 0x8000)) {
         cur_core |= WPAD_BUTTON_B; cur_cl |= WPAD_CL_BUTTON_B;
     }
     if (GetAsyncKeyState('C') & 0x8000) {
@@ -410,7 +635,7 @@ int tls_service_controller_input(CPUState* ctx) {
     if ((GetAsyncKeyState(VK_TAB) & 0x8000) || (GetAsyncKeyState('1') & 0x8000)) {
         cur_core |= WPAD_BUTTON_PLUS; cur_cl |= WPAD_CL_BUTTON_PLUS;
     }
-    if (GetAsyncKeyState('2') & 0x8000) {
+    if ((GetAsyncKeyState(VK_OEM_MINUS) & 0x8000) || (GetAsyncKeyState('M') & 0x8000)) {
         cur_core |= WPAD_BUTTON_MINUS; cur_cl |= WPAD_CL_BUTTON_MINUS;
     }
     if (GetAsyncKeyState(VK_SHIFT) & 0x8000) {
@@ -419,15 +644,52 @@ int tls_service_controller_input(CPUState* ctx) {
     if (GetAsyncKeyState(VK_CONTROL) & 0x8000) {
         cur_cl |= WPAD_CL_BUTTON_ZR;
     }
+
+    extern int g_runner_current_frame;
+    extern bool g_interactive_mode;
+    if (!g_interactive_mode) {
+        // In headless testing:
+        // Strap screen is active frame 185+, timer >= 45 at frame 230+. Simulate A press at 250..265.
+        // Title Screen is active frame 380+. Simulate A press at 460..475.
+        // New Game / Chapter 1 advance at 800..815.
+        if ((g_runner_current_frame >= 250 && g_runner_current_frame <= 265) ||
+            (g_runner_current_frame >= 460 && g_runner_current_frame <= 475) ||
+            (g_runner_current_frame >= 800 && g_runner_current_frame <= 815)) {
+            cur_core |= WPAD_BUTTON_A | WPAD_BUTTON_2;
+            cur_cl   |= WPAD_CL_BUTTON_A | WPAD_CL_BUTTON_Y;
+        }
+    }
 #endif
 
+    u32 new_core_trig = cur_core & ~s_last_core_hold;
+    u32 new_cl_trig   = cur_cl & ~s_last_cl_hold;
+    u32 new_core_rel  = ~cur_core & s_last_core_hold;
+    u32 new_cl_rel    = ~cur_cl & s_last_cl_hold;
+
+    s_latched_core_trig |= new_core_trig;
+    s_latched_cl_trig   |= new_cl_trig;
+    s_latched_core_release |= new_core_rel;
+    s_latched_cl_release   |= new_cl_rel;
+
     s_ctrl_state.core_hold = cur_core;
-    s_ctrl_state.core_trig = cur_core & ~s_last_core_hold;
-    s_ctrl_state.core_release = ~cur_core & s_last_core_hold;
+    s_ctrl_state.core_trig = s_latched_core_trig;
+    s_ctrl_state.core_release = s_latched_core_release;
 
     s_ctrl_state.cl_hold = cur_cl;
-    s_ctrl_state.cl_trig = cur_cl & ~s_last_cl_hold;
-    s_ctrl_state.cl_release = ~cur_cl & s_last_cl_hold;
+    s_ctrl_state.cl_trig = s_latched_cl_trig;
+    s_ctrl_state.cl_release = s_latched_cl_release;
+
+    if (s_ctrl_state.cl_trig != 0) {
+        printf("[Input] Player Pressed: 0x%08X (A=%d, B=%d, X=%d, Y=%d, Dpad=%d, Stick=[%.2f, %.2f])\n",
+               s_ctrl_state.cl_trig,
+               (s_ctrl_state.cl_trig & WPAD_CL_BUTTON_A) ? 1 : 0,
+               (s_ctrl_state.cl_trig & WPAD_CL_BUTTON_B) ? 1 : 0,
+               (s_ctrl_state.cl_trig & WPAD_CL_BUTTON_X) ? 1 : 0,
+               (s_ctrl_state.cl_trig & WPAD_CL_BUTTON_Y) ? 1 : 0,
+               (s_ctrl_state.cl_trig & (WPAD_CL_BUTTON_UP | WPAD_CL_BUTTON_DOWN | WPAD_CL_BUTTON_LEFT | WPAD_CL_BUTTON_RIGHT)) ? 1 : 0,
+               lx, ly);
+        fflush(stdout);
+    }
 
     s_ctrl_state.stick_l_x = lx;
     s_ctrl_state.stick_l_y = ly;
@@ -441,6 +703,86 @@ int tls_service_controller_input(CPUState* ctx) {
 
     s_controller_button_bits = (u8)cur_core;
     s_controller_poll_count++;
+
+    // 1. Raw Bluetooth HID buffer emulation
+    mem_write16(ctx, 0x8081FB5C, (u16)cur_core);
+    mem_write16(ctx, 0x8081FB70, 0x0030); // report ID 0x30
+    mem_write32(ctx, 0x8087FE80, 0);      // global controller error flag
+    mem_write32(ctx, 0x8087FDE0, 0);
+
+    // 2. WPAD Subsystem state
+    u8* wpad_state = (u8*)resolve_guest_pointer(ctx, 0x8082E508);
+    if (wpad_state) *wpad_state = 3; // WPAD_STATE_SETUP (ready)
+    u8* pad_init_done = (u8*)resolve_guest_pointer(ctx, 0x808801A4);
+    if (pad_init_done) *pad_init_done = 1;
+
+    // 3. Channel 0 Internal Controller Buffer at 0x80828318
+    mem_write32(ctx, 0x80828318 + 0x00, s_ctrl_state.core_hold);
+    mem_write32(ctx, 0x80828318 + 0x04, s_ctrl_state.core_trig);
+    mem_write32(ctx, 0x80828318 + 0x08, s_ctrl_state.core_release);
+    mem_write8(ctx,  0x80828318 + 0x5c, 2); // Dev type = Classic Controller
+    mem_write8(ctx,  0x80828318 + 0x5d, 0); // err = 0
+    mem_write8(ctx,  0x80828318 + 0x5e, 0);
+    mem_write8(ctx,  0x80828318 + 0x5f, 0);
+    mem_write32(ctx, 0x80828318 + 0x60, s_ctrl_state.cl_hold);
+    mem_write32(ctx, 0x80828318 + 0x64, s_ctrl_state.cl_trig);
+    mem_write32(ctx, 0x80828318 + 0x68, s_ctrl_state.cl_release);
+    mem_write8(ctx,  0x80828318 + 0x17b, 1); // 1 sample queued
+
+    // Queued sample at 0x80828318 + 0x180
+    mem_write16(ctx, 0x80828318 + 0x180 + 0x00, (u16)s_ctrl_state.core_hold);
+    mem_write8(ctx,  0x80828318 + 0x180 + 0x29, 0);
+    mem_write16(ctx, 0x80828318 + 0x180 + 0x2a, (u16)s_ctrl_state.cl_hold);
+    mem_write8(ctx,  0x80828318 + 0x180 + 0x40, 0);
+
+    // Controller connection & enable flags (ensure reset flag 0x640 is 0 so SDK does not error out)
+    mem_write8(ctx, 0x80828318 + 0x640, 0); // No reset pending
+    mem_write8(ctx, 0x80828318 + 0x641, 0);
+    mem_write8(ctx, 0x80828318 + 0x642, 1);
+    mem_write8(ctx, 0x80828318 + 0x643, 2); // Dev type = Classic
+    mem_write8(ctx, 0x80828318 + 0x645, 1); // Connected
+    mem_write8(ctx, 0x80828318 + 0x648, 1); // Enabled
+    mem_write8(ctx, 0x80828318 + 0x649, 1); // Enabled
+
+    // Ensure DVD drive initialized flag at 0x8087FE44 (-22964 from r13) is set so DVDGetDriveStatus sees ready drive
+    mem_write32(ctx, 0x8087FE44, 1);
+
+    // 4. Game Pad Managers: primary at 0x8087F150, home/system check at 0x8087F018, title/menu at 0x8087EF70
+    u32 pad_mgrs[3];
+    pad_mgrs[0] = mem_read32(ctx, 0x8087F150);
+    pad_mgrs[1] = mem_read32(ctx, 0x8087F018);
+    pad_mgrs[2] = mem_read32(ctx, 0x8087EF70);
+
+    u32 mask = 0;
+    if ((cur_core & WPAD_BUTTON_LEFT)  || (cur_cl & WPAD_CL_BUTTON_LEFT))  mask |= (1 << 0);
+    if ((cur_core & WPAD_BUTTON_RIGHT) || (cur_cl & WPAD_CL_BUTTON_RIGHT)) mask |= (1 << 1);
+    if ((cur_core & WPAD_BUTTON_DOWN)  || (cur_cl & WPAD_CL_BUTTON_DOWN))  mask |= (1 << 2);
+    if ((cur_core & WPAD_BUTTON_UP)    || (cur_cl & WPAD_CL_BUTTON_UP))    mask |= (1 << 3);
+    if ((cur_core & WPAD_BUTTON_B)     || (cur_cl & WPAD_CL_BUTTON_B))     mask |= (1 << 4) | (1 << 10);  // Cancel / Action 5 (bit 10)
+    if ((cur_core & WPAD_BUTTON_A)     || (cur_cl & WPAD_CL_BUTTON_A))     mask |= (1 << 14) | (1 << 11); // Confirm / Action 4 (bit 11)
+    if ((cur_core & WPAD_BUTTON_1)     || (cur_cl & WPAD_CL_BUTTON_X))     mask |= (1 << 10);
+    if ((cur_core & WPAD_BUTTON_2)     || (cur_cl & WPAD_CL_BUTTON_Y))     mask |= (1 << 11);
+    if ((cur_core & WPAD_BUTTON_PLUS)  || (cur_cl & WPAD_CL_BUTTON_PLUS))  mask |= (1 << 12) | (1 << 11); // Plus also triggers confirm
+    if ((cur_core & WPAD_BUTTON_MINUS) || (cur_cl & WPAD_CL_BUTTON_MINUS)) mask |= (1 << 13);
+
+    static u32 s_last_game_mask = 0;
+    u32 trig = mask & ~s_last_game_mask;
+    u32 rel = ~mask & s_last_game_mask;
+    s_last_game_mask = mask;
+
+    for (int i = 0; i < 3; i++) {
+        u32 pad_mgr = pad_mgrs[i];
+        if (pad_mgr != 0) {
+            mem_write32(ctx, pad_mgr + 0x40c0, 1); // Channel 0 enabled
+            mem_write32(ctx, pad_mgr + 0x3c00, 1); // Channel 0 connected
+            mem_write8(ctx,  pad_mgr + 0x5c, 2);   // Classic Controller attached
+            mem_write8(ctx,  pad_mgr + 0x5d, 0);   // err = 0
+            mem_write32(ctx, pad_mgr + 0x3c18, mask);
+            mem_write32(ctx, pad_mgr + 0x3c28, trig);
+            mem_write32(ctx, pad_mgr + 0x3c38, rel);
+        }
+    }
+
     return (cur_core != 0 || cur_cl != 0);
 }
 
@@ -560,6 +902,9 @@ static const char* asset_root(void) {
     return s_asset_root;
 }
 
+char g_tls_stage_override[32] = {0};
+uint32_t g_last_vi_framebuffer = 0;
+
 static void asset_full_path(const char* rel, char* out, size_t out_size) {
     snprintf(out, out_size, "%s/%s", asset_root(), rel);
 }
@@ -642,9 +987,13 @@ static void dvd_fill_file_info(CPUState* ctx, u32 fi_addr, u32 id, const HostAss
 #define TLS_DVD_MAX_PENDING 32
 #define TLS_DVD_IDLE_PC 0x805F50B0u /* OS scheduler idle loop used by the runner */
 
+/* TLS_HOST_CALLBACK_SENTINEL (0xFFFFFFFC) is declared in replacements.h because
+ * host_runner.c plants it in LR before entering guest callbacks. */
+
 typedef struct PendingDvdCallback {
     u32 callback;
     u32 file_info;
+    s32 result;
 } PendingDvdCallback;
 
 static PendingDvdCallback s_dvd_pending[TLS_DVD_MAX_PENDING];
@@ -664,7 +1013,7 @@ static u32 s_pending_mq_head = 0;
 static u32 s_pending_mq_tail = 0;
 static u32 s_pending_mq_count = 0;
 
-static void dvd_queue_callback(u32 callback, u32 file_info) {
+static void dvd_queue_callback(u32 callback, u32 file_info, s32 result) {
     if (!callback) {
         return;
     }
@@ -674,12 +1023,31 @@ static void dvd_queue_callback(u32 callback, u32 file_info) {
     }
     s_dvd_pending[s_dvd_pending_tail].callback = callback;
     s_dvd_pending[s_dvd_pending_tail].file_info = file_info;
+    s_dvd_pending[s_dvd_pending_tail].result = result;
     s_dvd_pending_tail = next;
 }
 
 
 /* Sets up the guest to run one queued callback. Returns 1 when a call was staged. */
 int tls_dvd_service_callback(CPUState* ctx) {
+    if (s_dvd_pending_head == s_dvd_pending_tail) {
+        return 0;
+    }
+    // Drain any lightweight 0x8046BBE0 stream callbacks directly without requiring a thread context switch
+    while (s_dvd_pending_head != s_dvd_pending_tail) {
+        PendingDvdCallback* pending = &s_dvd_pending[s_dvd_pending_head];
+        if (pending->callback == 0x8046BBE0) {
+            u32 fi_addr = pending->file_info;
+            u32 target = fi_addr ? mem_read32(ctx, fi_addr + 0x2C) : 0;
+            if (target != 0x807C6F60 && target != 0x800000E4 && resolve_guest_pointer(ctx, target)) {
+                mem_write32(ctx, target, 2);
+            }
+            s_dvd_callbacks_run++;
+            s_dvd_pending_head = (s_dvd_pending_head + 1) % TLS_DVD_MAX_PENDING;
+            continue;
+        }
+        break;
+    }
     if (s_dvd_pending_head == s_dvd_pending_tail) {
         return 0;
     }
@@ -692,16 +1060,57 @@ int tls_dvd_service_callback(CPUState* ctx) {
         return 0;
     }
 
-    ctx->gpr[3] = 0;                 /* result: DVD_STATE_END */
-    ctx->gpr[4] = pending.file_info; /* DVDFileInfo* */
-    ctx->lr = TLS_DVD_IDLE_PC;       /* return into the scheduler idle point */
+    ctx->gpr[3] = (u32)pending.result; /* result: bytes transferred (or error code) */
+    ctx->gpr[4] = pending.file_info;   /* DVDFileInfo* */
+    ctx->lr = TLS_DVD_IDLE_PC;         /* return into the scheduler idle point */
     ctx->pc = pending.callback;
     s_dvd_callbacks_run++;
     if (getenv("TLS_DVD_TRACE") && s_dvd_callbacks_run <= 128) {
-        printf("[TLS DVD] callback #%u -> %08X fileInfo=%08X\n", s_dvd_callbacks_run,
-               pending.callback, pending.file_info);
+        printf("[TLS DVD] callback #%u -> %08X fileInfo=%08X res=%d\n", s_dvd_callbacks_run,
+               pending.callback, pending.file_info, pending.result);
         fflush(stdout);
     }
+    return 1;
+}
+
+#define TLS_IPC_MAX_PENDING 64
+typedef struct {
+    u32 callback;
+    s32 result;
+    u32 usrdata;
+} PendingIpcCallback;
+
+static PendingIpcCallback s_ipc_pending[TLS_IPC_MAX_PENDING];
+static u32 s_ipc_pending_head = 0;
+static u32 s_ipc_pending_tail = 0;
+
+static void tls_ipc_enqueue_callback(u32 callback, s32 result, u32 usrdata) {
+    if (!callback) return;
+    u32 next = (s_ipc_pending_tail + 1) % TLS_IPC_MAX_PENDING;
+    if (next == s_ipc_pending_head) return;
+    s_ipc_pending[s_ipc_pending_tail].callback = callback;
+    s_ipc_pending[s_ipc_pending_tail].result = result;
+    s_ipc_pending[s_ipc_pending_tail].usrdata = usrdata;
+    s_ipc_pending_tail = next;
+}
+
+int tls_ipc_service_callback(CPUState* ctx) {
+    if (s_ipc_pending_head == s_ipc_pending_tail) {
+        return 0;
+    }
+    if (!tls_is_idle_address(ctx->pc)) {
+        return 0;
+    }
+    PendingIpcCallback pending = s_ipc_pending[s_ipc_pending_head];
+    s_ipc_pending_head = (s_ipc_pending_head + 1) % TLS_IPC_MAX_PENDING;
+    if (!pending.callback) {
+        return 0;
+    }
+
+    ctx->gpr[3] = (u32)pending.result;
+    ctx->gpr[4] = pending.usrdata;
+    ctx->lr = TLS_DVD_IDLE_PC;
+    ctx->pc = pending.callback;
     return 1;
 }
 
@@ -717,8 +1126,7 @@ static u32 s_recent_count = 0;
 static u32 s_recent_pos = 0;
 
 int tls_is_idle_address(u32 address) {
-    return address == 0x805F50B0u || address == 0x805F5060u || address == 0x805F5094u ||
-           address == 0x805F50A8u || address == 0x805F50ACu;
+    return (address >= 0x805F50B0u && address <= 0x805F50BCu);
 }
 
 void tls_record_recent_call(u32 address) {
@@ -743,8 +1151,208 @@ void tls_dump_recent_calls(void) {
 u32 g_count_c1c8 = 0;
 u32 g_count_bbf0 = 0;
 
+/* Depth of host-driven guest callback execution; see TLS_HOST_CALLBACK_SENTINEL. */
+int g_host_callback_depth = 0;
+
+static inline bool is_valid_task_node(CPUState* ctx, u32 node) {
+    if (node < 0x80000000 || node >= 0x82000000 || (node & 3) != 0) return false;
+    u32 vt = mem_read32(ctx, node);
+    if (vt < 0x80003000 || vt >= 0x80800000 || (vt & 3) != 0) return false;
+    // Task vtable must have a valid Init method at vt + 0x0C in DOL executable code
+    u32 fn_init = mem_read32(ctx, vt + 0x0C);
+    if (fn_init < 0x80003000 || fn_init >= 0x80730000 || (fn_init & 3) != 0) return false;
+    return true;
+}
+
+static void sanitize_task_tree(CPUState* ctx, u32 node, int depth) {
+    (void)ctx; (void)node; (void)depth;
+}
+
+static inline void sanitize_task_children(CPUState* ctx, u32 parent) {
+    sanitize_task_tree(ctx, parent, 0);
+}
+
+typedef struct {
+    FILE* fp;
+    char path[128];
+    uint32_t mode;
+    bool in_use;
+} IosFile;
+
+static IosFile s_ios_files[16] = {0};
+
+static int ios_alloc_fd(const char* path, uint32_t mode, FILE* fp) {
+    for (int i = 1; i < 16; i++) {
+        if (!s_ios_files[i].in_use) {
+            s_ios_files[i].in_use = true;
+            s_ios_files[i].fp = fp;
+            s_ios_files[i].mode = mode;
+            strncpy(s_ios_files[i].path, path ? path : "", sizeof(s_ios_files[i].path) - 1);
+            return i;
+        }
+    }
+    return 1;
+}
+
+static void ios_close_fd(int fd) {
+    if (fd >= 1 && fd < 16 && s_ios_files[fd].in_use) {
+        if (s_ios_files[fd].fp) {
+            fclose(s_ios_files[fd].fp);
+            s_ios_files[fd].fp = NULL;
+        }
+        s_ios_files[fd].in_use = false;
+    }
+}
+
 int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
     tls_record_recent_call(address);
+
+    // Host callback sentinel: the runner enters guest callbacks (OSAlarm
+    // handlers, DVD/IPC completion routines) with LR = TLS_HOST_CALLBACK_SENTINEL
+    // so the callback's `blr` returns control to the host.
+    //
+    // This address is NOT guest code. Dispatching it as a basic block used to
+    // self-loop here at ~zero cost: the interpreter then burned its entire
+    // block budget every frame without rendering or reaching the idle loop,
+    // which is why a wedged run kept reporting a healthy 60 FPS over a black
+    // screen (frame_blocks == 300000 + 5000 + 4*4000 == 321000 every frame).
+    //
+    // It also starved host_service_alarms(), which only fires while PC sits at
+    // the idle point, so the DVD/alarm work that could have unstuck the guest
+    // never ran again. Reaching the sentinel means "this guest call frame
+    // returned to the host": park at the scheduler idle point and let the
+    // runner service alarms/wakeups and schedule the next ready thread.
+    if (address == TLS_HOST_CALLBACK_SENTINEL) {
+        if (g_host_callback_depth > 0) {
+            // The callback returned to the host. Produce nothing further: report
+            // "no block executed" so the interpreter slice ends right here and the
+            // runner resumes ownership of the CPU state immediately. Running on
+            // from a sentinel PC would execute the OS dispatch loop with the
+            // callback's register state and then be thrown away by the caller's
+            // saved-state restore, mutating guest scheduling state for nothing.
+            return 0;
+        }
+
+        // Sentinel reached outside any host callback: some guest frame was left
+        // with the sentinel in its return address (e.g. a handler that let the
+        // scheduler run saved it into a thread context). Park at the scheduler
+        // idle point instead of self-looping, which also re-enables
+        // host_service_alarms() - it only services alarms while PC is idle.
+        static u32 s_sentinel_hits = 0;
+        if (s_sentinel_hits < 8) {
+            printf("[TLS HostCallback] Stray host sentinel in frame execution #%u "
+                   "(lr=0x%08X sp=0x%08X cur_thread=0x%08X run_bits=0x%08X) -> scheduler idle\n",
+                   s_sentinel_hits + 1, ctx->lr, ctx->gpr[1],
+                   mem_read32(ctx, 0x800000E4), mem_read32(ctx, 0x8087FC60));
+            fflush(stdout);
+        }
+        s_sentinel_hits++;
+        ctx->pc = TLS_DVD_IDLE_PC;
+        ctx->lr = TLS_DVD_IDLE_PC;
+        return 1;
+    }
+
+    // Generic non-code address safeguard (null pointer / corrupt indirect calls / heap calls)
+    // Guest executable DOL code strictly exists between 0x80003100 and 0x80730000.
+    if (address < 0x80003000 || address >= 0x80730000) {
+        // CharaTask model LoadAsync call sites (0x80135B50, 0x80135F64)
+        if (ctx->lr == 0x80135B54 || ctx->lr == 0x80135F68) {
+            u32 path_ptr = ctx->gpr[4];
+            const char* path = (const char*)resolve_guest_pointer(ctx, path_ptr);
+            printf("[TLS CharaTask] LoadAsync redirect (LR=0x%08X): lh=0x%08X path='%s'\n",
+                   ctx->lr, ctx->gpr[3], path ? path : "(null)");
+            fflush(stdout);
+            mem_write32(ctx, ctx->gpr[3], 0x8078FBB0); // restore atn::LH_Binary vtable
+            ctx->pc = 0x804705B8; // call atn::LH_Binary::LoadAsync
+            return 1;
+        }
+
+        // Float-vector virtual calls in fn_800F29D0 (copy/destruct of function delegates)
+        if (ctx->lr == 0x800F2AC4 || ctx->lr == 0x800F2B00 || ctx->lr == 0x800F2B9C) {
+            ctx->pc = ctx->lr;
+            ctx->gpr[3] = 0;
+            return 1;
+        }
+
+        static u32 s_invalid_addr_count = 0;
+        if (++s_invalid_addr_count <= 30) {
+            printf("[TLS Safeguard] Bypassed invalid jump to 0x%08X (LR=0x%08X, SP=0x%08X, r3=0x%08X, r12=0x%08X)\n",
+                   address, ctx->lr, ctx->gpr[1], ctx->gpr[3], ctx->gpr[12]);
+            if (ctx->gpr[3] >= 0x80000000 && ctx->gpr[3] < 0x82000000) {
+                u32 node = ctx->gpr[3];
+                printf("  [TLS Safeguard] r3 obj 0x%08X (+0..+0x20): %08X %08X %08X %08X %08X %08X %08X %08X %08X\n",
+                       node,
+                       mem_read32(ctx, node), mem_read32(ctx, node + 4),
+                       mem_read32(ctx, node + 8), mem_read32(ctx, node + 12),
+                       mem_read32(ctx, node + 16), mem_read32(ctx, node + 20),
+                       mem_read32(ctx, node + 24), mem_read32(ctx, node + 28),
+                       mem_read32(ctx, node + 32));
+            }
+            fflush(stdout);
+        }
+        if (ctx->lr < 0x80003000 || ctx->lr >= 0x80730000) {
+            u32 caller_lr = 0;
+            u32 restored_sp = 0;
+            // 1. Walk the current stack frame chain from ctx->gpr[1]
+            u32 cur_sp = ctx->gpr[1];
+            for (int depth = 0; depth < 16 && cur_sp >= 0x80000000 && cur_sp < 0x83000000; depth++) {
+                u32 cand = mem_read32(ctx, cur_sp + 4);
+                if (cand >= 0x80003000 && cand < 0x80730000) {
+                    caller_lr = cand;
+                    restored_sp = cur_sp;
+                    break;
+                }
+                u32 nxt = mem_read32(ctx, cur_sp);
+                if (nxt <= cur_sp || nxt >= 0x83000000) break;
+                cur_sp = nxt;
+            }
+            // 2. If address itself was a stack pointer (e.g. 0x808993A0), check its chain
+            if (caller_lr == 0 && address >= 0x80000000 && address < 0x83000000) {
+                u32 addr_sp = address;
+                for (int depth = 0; depth < 8 && addr_sp >= 0x80000000 && addr_sp < 0x83000000; depth++) {
+                    u32 cand = mem_read32(ctx, addr_sp + 4);
+                    if (cand >= 0x80003000 && cand < 0x80730000) {
+                        caller_lr = cand;
+                        restored_sp = addr_sp;
+                        break;
+                    }
+                    u32 nxt = mem_read32(ctx, addr_sp);
+                    if (nxt <= addr_sp || nxt >= 0x83000000) break;
+                    addr_sp = nxt;
+                }
+            }
+            // 3. If r3 is a Task object (tag XTASKTAG 0x58544153), recover to Task scheduler return site
+            if (caller_lr == 0) {
+                u32 node = ctx->gpr[3];
+                if (node >= 0x80000000 && node < 0x83000000 && mem_read32(ctx, node + 8) == 0x58544153) {
+                    caller_lr = 0x800D28FC; // Task::Execute return site in fn_800D2868
+                    printf("[TLS Safeguard] Recovered Task 0x%08X to Task scheduler (0x800D28FC)\n", node);
+                    fflush(stdout);
+                }
+            }
+
+            if (caller_lr != 0) {
+                ctx->pc = caller_lr;
+                if (restored_sp != 0) {
+                    ctx->gpr[1] = restored_sp;
+                }
+            } else {
+                ctx->pc = 0x800D28FC; // Default to task scheduler loop instead of idle!
+            }
+        } else {
+            if ((ctx->lr >= 0x800D2868 && ctx->lr <= 0x800D2AD8) ||
+                (ctx->pc >= 0x800D2868 && ctx->pc <= 0x800D2AD8)) {
+                // Task::Execute / Task::InitLoop / Task::DrawLoop
+                // Recover directly to 0x800D2AB0 (cleanly advance to next sibling r29->0x1C)
+                ctx->pc = 0x800D2AB0;
+                ctx->gpr[3] = 0;
+            } else {
+                ctx->pc = ctx->lr;
+                ctx->gpr[3] = 0;
+            }
+        }
+        return 1;
+    }
 
     switch (address) {
         // OSReport: printf diagnostic messages to host console
@@ -773,8 +1381,8 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
         // OSGetTime: 64-bit timebase in (r3, r4)
         case 0x805F5F90: {
-            s_simulated_ticks += 1000;
-            u64 tb = guest_time_now(ctx);
+            ctx->timebase += 200;
+            u64 tb = ctx->timebase;
             ctx->gpr[3] = (u32)(tb >> 32);
             ctx->gpr[4] = (u32)(tb & 0xFFFFFFFF);
             ctx->pc = ctx->lr;
@@ -783,17 +1391,152 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
         // OSGetTick: 32-bit tick counter in r3
         case 0x805F5FB0: {
-            ctx->gpr[3] = (s_simulated_ticks += 1000);
+            ctx->timebase += 100;
+            ctx->gpr[3] = (u32)(ctx->timebase & 0xFFFFFFFF);
             ctx->pc = ctx->lr;
             return 1;
         }
 
         // __OSGetSystemTime: 64-bit system time in (r3, r4)
         case 0x805F5FC0: {
-            s_simulated_ticks += 2000;
+            ctx->timebase += 200;
             u64 tb = tls_guest_system_time(ctx);
             ctx->gpr[3] = (u32)(tb >> 32);
             ctx->gpr[4] = (u32)(tb & 0xFFFFFFFF);
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        case 0x8059F878: {
+            u32 r3 = ctx->gpr[3];
+            // Self-healing guard: repair any corrupted LinkLists in nw4r SoundArchivePlayer
+            for (int offset = 72; offset <= 152; offset += 40) {
+                u32 count = mem_read32(ctx, r3 + offset);
+                u32 head = mem_read32(ctx, r3 + offset + 4);
+                u32 sentinel = r3 + offset + 4;
+                if (count > 0 && (head == 0 || head == sentinel)) {
+                    printf("[TLS 8059F878] Healing corrupted list at r3+0x%X (count=%u, head=0x%08X) -> reset to empty\n",
+                           offset, count, head);
+                    mem_write32(ctx, r3 + offset, 0);
+                    mem_write32(ctx, r3 + offset + 4, sentinel);
+                    mem_write32(ctx, r3 + offset + 8, sentinel);
+                }
+            }
+            return 0;
+        }
+
+        case 0x8059EA18: {
+            return 0;
+        }
+
+        case 0x80724DF0: {
+            u32 file_addr = ctx->gpr[3];
+            u32 line = ctx->gpr[4];
+            u32 msg_addr = ctx->gpr[5];
+            const char* file = (const char*)resolve_guest_pointer(ctx, file_addr);
+            const char* msg = (const char*)resolve_guest_pointer(ctx, msg_addr);
+            printf("[TLS ASSERT 80724DF0] %s:%u: %s (caller LR=0x%08X, r1=0x%08X)\n",
+                   file ? file : "<null>", line, msg ? msg : "<null>", ctx->lr, ctx->gpr[1]);
+            fflush(stdout);
+            return 0;
+        }
+
+        // abort() / panic() handler (0x80686EA4)
+                // 0x8022B114 (dlfree / MSL free safe bounds check)
+        case 0x8022B114: {
+            u32 heap = ctx->gpr[3];
+            u32 ptr = ctx->gpr[4];
+            if (!ptr) {
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            if (!resolve_guest_pointer(ctx, heap) || !resolve_guest_pointer(ctx, ptr)) {
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            u32 heap_start = mem_read32(ctx, heap + 16);
+            if (ptr < heap_start + 8 || ptr >= 0x94000000) {
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            return 0; // Run original code safely
+        }
+
+        // abort() / panic() handler (0x80686EA4)
+        case 0x80686EA4: {
+            printf("[TLS WARNING] abort() called from LR=0x%08X! Bypassing termination to keep game running.\n", ctx->lr);
+            fflush(stdout);
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // exit() handler (0x805F8930)
+        case 0x805F8930: {
+            printf("[TLS WARNING] exit(%d) called from LR=0x%08X! Bypassing termination to keep game running.\n",
+                   (int)ctx->gpr[3], ctx->lr);
+            fflush(stdout);
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // OSSleepThread probe & queue sanity check
+        case 0x805F5C70: {
+            u32 queue_addr = ctx->gpr[3];
+            static u32 count_sleep = 0;
+            if (++count_sleep <= 50 || count_sleep % 100 == 0) {
+                printf("[TLS OSSleepThread] #%u queue=0x%08X lr=0x%08X\n",
+                       count_sleep, queue_addr, ctx->lr);
+                fflush(stdout);
+            }
+            if (queue_addr >= 0x80000000 && queue_addr < 0x82000000) {
+                u32 head = mem_read32(ctx, queue_addr);
+                if (head != 0 && (head < 0x80000000 || head >= 0x82000000)) {
+                    static int s_qreset_log = 0;
+                    if (++s_qreset_log <= 5) {
+                        printf("[TLS OSSleepThread] Resetting invalid queue head 0x%08X at 0x%08X\n", head, queue_addr);
+                        fflush(stdout);
+                    }
+                    mem_write32(ctx, queue_addr, 0);
+                    mem_write32(ctx, queue_addr + 4, 0);
+                }
+            }
+            return 0; // Let original SDK OSSleepThread run
+        }
+
+        // OSWakeupThread probe
+        case 0x805F5D60: {
+            static u32 count_wakeup = 0;
+            if (++count_wakeup <= 50) {
+                printf("[TLS OSWakeupThread] #%u queue=0x%08X lr=0x%08X\n", count_wakeup, ctx->gpr[3], ctx->lr);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
+        // OSSleepTicks probe
+        case 0x805F5EE0: {
+            static u32 count_ticks = 0;
+            if (++count_ticks <= 50) {
+                u64 ticks = ((u64)ctx->gpr[3] << 32) | ctx->gpr[4];
+                printf("[TLS OSSleepTicks] #%u ticks=%lld lr=0x%08X\n", count_ticks, (long long)ticks, ctx->lr);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
+        // __OSReschedule probe
+        case 0x805F5190: {
+            static u32 count_resched = 0;
+            if (++count_resched <= 20) {
+                printf("[TLS __OSReschedule] #%u lr=0x%08X\n", count_resched, ctx->lr);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
+        // NAND PlayRecord alarm callbacks (0x805F7040 / 0x805F7050) - no-op on PC
+        case 0x805F7040:
+        case 0x805F7050: {
             ctx->pc = ctx->lr;
             return 1;
         }
@@ -804,7 +1547,49 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 1;
         }
 
+        // fn_80071AFC: Display copy and frame queue submission
+        case 0x80071AFC: {
+            static int s_71afc_count = 0;
+            if (++s_71afc_count <= 20 || s_71afc_count % 300 == 0) {
+                printf("[TLS 80071AFC DisplayCopy] #%d lr=0x%08X r3=0x%08X\n",
+                       s_71afc_count, ctx->lr, ctx->gpr[3]);
+                fflush(stdout);
+            }
+            return 0; // Let original recompiled code run to perform GX display list flush and frame copy
+        }
+
+        // Model material lighting channel setup (fn_8009C508)
+        case 0x8009C508: {
+            u32 r3 = ctx->gpr[3];
+            u32 r4 = (r3 >= 0x80000000 && r3 < 0x94000000) ? mem_read32(ctx, r3 + 8) : 0;
+            u32 r30 = (r4 >= 0x80000000 && r4 < 0x94000000) ? mem_read32(ctx, r4 + 16) : 0;
+            if (r30 < 0x80000000 || r30 >= 0x94000000) {
+                // Invalid or null lightgroup pointer -- return immediately to avoid corrupt dereference / infinite loop
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            return 0; // Valid lightgroup, execute original recompiled code
+        }
+
         // Diagnostic monitoring for resource pipeline
+        case 0x8046DD60: {
+            static int s_dd60_cnt = 0;
+            if (++s_dd60_cnt <= 10 || s_dd60_cnt % 60 == 0) {
+                u32 sm = ctx->gpr[3];
+                u32 q40 = sm ? mem_read32(ctx, sm + 0x4040) : 0;
+                u32 cnt38 = sm ? mem_read32(ctx, sm + 0x4038) : 0;
+                u32 cur_req = q40 ? mem_read32(ctx, q40 + 8) : 0;
+                u8 cur_st = cur_req ? mem_read8(ctx, cur_req + 4) : 0;
+                char cur_name[64] = {0};
+                if (cur_req) {
+                    for (int c = 0; c < 63; c++) cur_name[c] = (char)mem_read8(ctx, cur_req + 6 + c);
+                }
+                printf("[TLS 8046DD60] StreamManager::Update #%d sm=0x%08X (q40=0x%08X, cnt38=%u, req=0x%08X st=%u '%s', lr=0x%08X)\n",
+                       s_dd60_cnt, sm, q40, cnt38, cur_req, cur_st, cur_name, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
         case 0x8046C1C8: {
             if (++g_count_c1c8 <= 60) {
                 printf("[TLS 8046C1C8] #%u lr=0x%08X\n", g_count_c1c8, ctx->lr);
@@ -813,28 +1598,51 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0; // continue to original code
         }
         case 0x8046BBF0: {
-            if (++g_count_bbf0 <= 80) {
+            if (++g_count_bbf0 <= 300) {
                 u32 item = ctx->gpr[4];
                 u32 st = mem_read32(ctx, item);
                 u32 cnt = mem_read32(ctx, item + 80);
                 u32 sub0 = mem_read32(ctx, item + 84);
                 u32 req = sub0 ? mem_read32(ctx, sub0) : 0;
-                printf("[TLS 8046BBF0] #%u item=0x%08X status=%u cnt=%u req=0x%08X req_st=%u (lr=0x%08X)\n",
-                       g_count_bbf0, item, st, cnt, req, req ? mem_read8(ctx, req + 4) : 0, ctx->lr);
+                char name[64] = {0};
+                if (req) {
+                    for (int c = 0; c < 63; c++) name[c] = (char)mem_read8(ctx, req + 6 + c);
+                }
+                printf("[TLS 8046BBF0] #%u item=0x%08X (buf=0x%08X, len=%u) cnt=%u sub0=0x%08X: req=0x%08X st=%u (4=%u, 8=0x%08X, 28=%u, 32=%u) name='%s'\n",
+                       g_count_bbf0, item, mem_read32(ctx, item + 4), mem_read32(ctx, item + 8),
+                       cnt, sub0, req, req ? mem_read8(ctx, req + 4) : 0,
+                       sub0 ? mem_read32(ctx, sub0 + 4) : 0, sub0 ? mem_read32(ctx, sub0 + 8) : 0,
+                       sub0 ? mem_read32(ctx, sub0 + 28) : 0, sub0 ? mem_read32(ctx, sub0 + 32) : 0,
+                       name);
                 fflush(stdout);
             }
             return 0; // continue to original code
-        }
-        case 0x8046BEE0: {
-            printf("[TLS 8046BBF0] EXIT lr=0x%08X\n", ctx->lr);
-            fflush(stdout);
-            return 0;
         }
         case 0x806254D0: {
             printf("[TLS CXDecompressFast] ENTER src=0x%08X dst=0x%08X (lr=0x%08X)\n",
                    ctx->gpr[3], ctx->gpr[4], ctx->lr);
             fflush(stdout);
             return 0;
+        }
+        case 0x80695720: {
+            u32 arr = ctx->gpr[3];
+            u32 ctor = ctx->gpr[4];
+            u32 elem_sz = ctx->gpr[6];
+            u32 cnt = ctx->gpr[7];
+            static int s_cna_cnt = 0;
+            if (++s_cna_cnt <= 30 || cnt > 1000) {
+                printf("[TLS MSL __construct_new_array] #%d arr=0x%08X ctor=0x%08X elem_sz=%u count=%u (lr=0x%08X)\n",
+                       s_cna_cnt, arr, ctor, elem_sz, cnt, ctx->lr);
+                fflush(stdout);
+            }
+            if (arr == 0 || !resolve_guest_pointer(ctx, arr) || cnt > 65536) {
+                printf("[TLS MSL __construct_new_array] SAFELY SKIPPED CORRUPT ARRAY: arr=0x%08X cnt=%u (lr=0x%08X)!\n",
+                       arr, cnt, ctx->lr);
+                fflush(stdout);
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            return 0; // Run original code
         }
         case 0x80625728: {
             printf("[TLS CXUncompressLZ] EXIT dst=0x%08X (lr=0x%08X)\n",
@@ -863,6 +1671,74 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             }
             return 0;
         }
+
+        // 0x800A0A68: Gauge / Actor node map registration
+        case 0x800A0A68: {
+            static u32 s_a68_cnt = 0;
+            if (++s_a68_cnt <= 20 || s_a68_cnt % 50 == 0) {
+                u32 slot = ctx->gpr[3];
+                u32 k0 = slot ? mem_read32(ctx, slot) : 0;
+                u32 k1 = slot ? mem_read32(ctx, slot + 4) : 0;
+                printf("[TLS 800A0A68] #%u slot=0x%08X (k0=0x%08X, k1=0x%08X) r4=0x%08X r5=0x%08X (lr=0x%08X)\n",
+                       s_a68_cnt, slot, k0, k1, ctx->gpr[4], ctx->gpr[5], ctx->lr);
+                fflush(stdout);
+            }
+            extern u32 g_tls_rbtree_b04_cnt;
+            extern u32 g_tls_rbtree_b88_cnt;
+            g_tls_rbtree_b04_cnt = 0;
+            g_tls_rbtree_b88_cnt = 0;
+            return 0;
+        }
+
+        // 0x800A0C3C & 0x800A0CB8: Red-Black tree upward traversal loops in std::map::erase
+        // Only break if explicitly looping back to header node 0x807C73CC
+        case 0x800A0C3C: {
+            if (ctx->gpr[3] == 0x807C73CC || ctx->gpr[29] == 0x807C73CC) {
+                ctx->pc = 0x800A0CF8;
+                return 1;
+            }
+            return 0;
+        }
+        case 0x800A0CB8: {
+            if (ctx->gpr[3] == 0x807C73CC || ctx->gpr[30] == 0x807C73CC) {
+                ctx->pc = 0x800A0CF8;
+                return 1;
+            }
+            return 0;
+        }
+
+        // 0x800A1F84: _Rb_tree_rebalance_for_erase in fn_800A1F84
+        // Bypassed to eliminate all infinite tree rotation cycles on circular or corrupted UI gauge nodes
+        case 0x800A1F84: {
+            static u32 s_1f84_cnt = 0;
+            if (++s_1f84_cnt <= 10 || s_1f84_cnt % 50 == 0) {
+                printf("[TLS RBTree] Bypassed _Rb_tree_rebalance_for_erase (#%u, z=0x%08X root=0x%08X lr=0x%08X)\n",
+                       s_1f84_cnt, ctx->gpr[3], ctx->gpr[4], ctx->lr);
+                fflush(stdout);
+            }
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // 0x8003E120 & 0x8003E130: _Rb_tree_rebalance (insertion)
+        case 0x8003E120: {
+            u32 node = ctx->gpr[3];
+            u32 root = ctx->gpr[4];
+            if (node) {
+                u32 ea = node + 8;
+                mem_write32(ctx, ea, mem_read32(ctx, ea) | 1);
+            }
+            if (root) {
+                u32 ea = root + 8;
+                mem_write32(ctx, ea, mem_read32(ctx, ea) & ~1u);
+            }
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+        case 0x8003E130: {
+            ctx->pc = ctx->lr;
+            return 1;
+        }
         case 0x805F3A80: // OSSendMessage
         case 0x805F3B00: // OSReceiveMessage
         case 0x805F3B40: { // OSJamMessage
@@ -878,11 +1754,28 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 1;
         }
 
+        // EXISync: Immediately acknowledge transfer complete
+        case 0x805E7FB0: {
+            u32 chan = ctx->gpr[3];
+            u32 ecb = 0x807CAF50 + (chan & 3) * 64;
+            u32 st = mem_read32(ctx, ecb + 0x0C);
+            mem_write32(ctx, ecb + 0x0C, st & ~0x7u);
+            ctx->gpr[3] = 1;
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
         // Interrupt controls (dummy pass-through on native host)
         case 0x805F1E80: // OSDisableInterrupts
         case 0x805F1EA0: // OSEnableInterrupts
         case 0x805F1EC0: { // OSRestoreInterrupts
             ctx->gpr[3] = 1; // previous state = enabled
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // OSYieldThread (0x805EAA00: sc; blr)
+        case 0x805EAA00: {
             ctx->pc = ctx->lr;
             return 1;
         }
@@ -901,46 +1794,268 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         }
 
         // IOS / Starlet IPC services
+        case 0x8061C590:
+        case 0x8061C650: { // IOS_OpenAsync
+            u32 path_addr = ctx->gpr[3];
+            u32 mode = ctx->gpr[4];
+            u32 cb = ctx->gpr[5];
+            u32 usrdata = ctx->gpr[6];
+            const char* path = (const char*)resolve_guest_pointer(ctx, path_addr);
+            printf("[TLS IOS_OpenAsync] %s (mode=%u cb=0x%08X)\n", path ? path : "(null)", mode, cb);
+            fflush(stdout);
+
+            if (path && strstr(path, "/dev/net")) {
+                printf("[TLS IOS_OpenAsync] %s -> device does not exist (offline code -6)\n", path);
+                fflush(stdout);
+                tls_ipc_enqueue_callback(cb, -6, usrdata);
+                ctx->gpr[3] = 0;
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+
+            FILE* fp = NULL;
+            if (path && strstr(path, "savedata")) {
+#ifdef _WIN32
+                CreateDirectoryA("savedata", NULL);
+#endif
+                if (mode & 2) {
+                    fp = fopen("savedata/savedata.dat", "w+b");
+                } else {
+                    fp = fopen("savedata/savedata.dat", "r+b");
+                    if (!fp) fp = fopen("savedata/savedata.dat", "rb");
+                }
+                if (!fp) {
+                    fp = fopen("savedata/savedata.dat", "w+b");
+                    if (fp) {
+                        static const uint8_t zero_block[4096] = {0};
+                        for (uint32_t i = 0; i < 1348992 / 4096; i++) {
+                            fwrite(zero_block, 1, 4096, fp);
+                        }
+                        if (1348992 % 4096 > 0) {
+                            fwrite(zero_block, 1, 1348992 % 4096, fp);
+                        }
+                        fflush(fp);
+                        fseek(fp, 0, SEEK_SET);
+                        printf("[TLS IOS_OpenAsync] Auto-created savedata/savedata.dat (1348992 bytes)\n");
+                        fflush(stdout);
+                    }
+                }
+            }
+
+            int fd = ios_alloc_fd(path, mode, fp);
+            tls_ipc_enqueue_callback(cb, fd, usrdata); // Return fd
+            ctx->gpr[3] = 0; // IPC_ERR_NONE
+            ctx->pc = ctx->lr;
+            return 1;
+        }
         case 0x8061C6B0: { // IOS_Open
             u32 path_addr = ctx->gpr[3];
+            u32 mode = ctx->gpr[4];
             const char* path = (const char*)resolve_guest_pointer(ctx, path_addr);
-            printf("[TLS IOS_Open] %s\n", path ? path : "(null)");
+            printf("[TLS IOS_Open] %s (mode=%u)\n", path ? path : "(null)", mode);
             fflush(stdout);
-            ctx->gpr[3] = 1; // Return valid file descriptor 1
+
+            if (path && strstr(path, "/dev/net")) {
+                printf("[TLS IOS_Open] %s -> device does not exist (offline code -6)\n", path);
+                fflush(stdout);
+                ctx->gpr[3] = (u32)-6; // IPC_RESULT_NOEXISTS
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+
+            FILE* fp = NULL;
+            if (path && strstr(path, "savedata")) {
+#ifdef _WIN32
+                CreateDirectoryA("savedata", NULL);
+#endif
+                if (mode & 2) {
+                    fp = fopen("savedata/savedata.dat", "w+b");
+                } else {
+                    fp = fopen("savedata/savedata.dat", "r+b");
+                    if (!fp) fp = fopen("savedata/savedata.dat", "rb");
+                }
+                if (!fp) {
+                    fp = fopen("savedata/savedata.dat", "w+b");
+                    if (fp) {
+                        static const uint8_t zero_block[4096] = {0};
+                        for (uint32_t i = 0; i < 1348992 / 4096; i++) {
+                            fwrite(zero_block, 1, 4096, fp);
+                        }
+                        if (1348992 % 4096 > 0) {
+                            fwrite(zero_block, 1, 1348992 % 4096, fp);
+                        }
+                        fflush(fp);
+                        fseek(fp, 0, SEEK_SET);
+                        printf("[TLS IOS_Open] Auto-created savedata/savedata.dat (1348992 bytes)\n");
+                        fflush(stdout);
+                    }
+                }
+            }
+            int fd = ios_alloc_fd(path, mode, fp);
+            ctx->gpr[3] = (u32)fd;
             ctx->pc = ctx->lr;
             return 1;
         }
         case 0x8061C7E0: { // IOS_Close
+            u32 fd = ctx->gpr[3];
+            ios_close_fd(fd);
             ctx->gpr[3] = 0; // Success
             ctx->pc = ctx->lr;
             return 1;
         }
+        case 0x8061C840: { // IOS_CloseAsync
+            u32 fd = ctx->gpr[3];
+            u32 cb = ctx->gpr[4];
+            u32 usrdata = ctx->gpr[5];
+            ios_close_fd(fd);
+            tls_ipc_enqueue_callback(cb, 0, usrdata);
+            ctx->gpr[3] = 0;
+            ctx->pc = ctx->lr;
+            return 1;
+        }
         case 0x8061C8A0: { // IOS_Read
+            u32 fd = ctx->gpr[3];
             u32 buf_addr = ctx->gpr[4];
             u32 len = ctx->gpr[5];
             void* buf = resolve_guest_pointer(ctx, buf_addr);
             if (buf && len > 0) {
-                memset(buf, 0, len);
+                FILE* fp = (fd >= 1 && fd < 16 && s_ios_files[fd].in_use) ? s_ios_files[fd].fp : NULL;
+                if (fp) {
+                    size_t n = fread(buf, 1, len, fp);
+                    if (n < len) memset((uint8_t*)buf + n, 0, len - n);
+                } else {
+                    memset(buf, 0, len);
+                }
             }
             ctx->gpr[3] = len; // Return bytes read = len (Success)
             ctx->pc = ctx->lr;
             return 1;
         }
-        case 0x8061CAB0: // IOS_Write
-        case 0x8061CB60: { // IOS_WriteAsync / IOS_Write
+        case 0x8061C950: { // IOS_ReadAsync
+            u32 fd = ctx->gpr[3];
+            u32 buf_addr = ctx->gpr[4];
             u32 len = ctx->gpr[5];
+            u32 cb = ctx->gpr[6];
+            u32 usrdata = ctx->gpr[7];
+            void* buf = resolve_guest_pointer(ctx, buf_addr);
+            if (buf && len > 0) {
+                FILE* fp = (fd >= 1 && fd < 16 && s_ios_files[fd].in_use) ? s_ios_files[fd].fp : NULL;
+                if (fp) {
+                    size_t n = fread(buf, 1, len, fp);
+                    if (n < len) memset((uint8_t*)buf + n, 0, len - n);
+                } else {
+                    memset(buf, 0, len);
+                }
+            }
+            tls_ipc_enqueue_callback(cb, (s32)len, usrdata);
+            ctx->gpr[3] = 0;
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+        case 0x8061CA50: // IOS_Write
+        case 0x8061CAB0: {
+            u32 fd = ctx->gpr[3];
+            u32 buf_addr = ctx->gpr[4];
+            u32 len = ctx->gpr[5];
+            void* buf = resolve_guest_pointer(ctx, buf_addr);
+            if (buf && len > 0) {
+                FILE* fp = (fd >= 1 && fd < 16 && s_ios_files[fd].in_use) ? s_ios_files[fd].fp : NULL;
+                if (fp) {
+                    fwrite(buf, 1, len, fp);
+                    fflush(fp);
+                }
+            }
             ctx->gpr[3] = len; // Return bytes written = len
             ctx->pc = ctx->lr;
             return 1;
         }
-        case 0x8061CC60: // IOS_Seek
-        case 0x8061CD70: { // IOS_SeekAsync
-            ctx->gpr[3] = 0; // Return offset 0
+        case 0x8061CB60: { // IOS_WriteAsync
+            u32 fd = ctx->gpr[3];
+            u32 buf_addr = ctx->gpr[4];
+            u32 len = ctx->gpr[5];
+            u32 cb = ctx->gpr[6];
+            u32 usrdata = ctx->gpr[7];
+            void* buf = resolve_guest_pointer(ctx, buf_addr);
+            if (buf && len > 0) {
+                FILE* fp = (fd >= 1 && fd < 16 && s_ios_files[fd].in_use) ? s_ios_files[fd].fp : NULL;
+                if (fp) {
+                    fwrite(buf, 1, len, fp);
+                    fflush(fp);
+                }
+            }
+            tls_ipc_enqueue_callback(cb, (s32)len, usrdata);
+            ctx->gpr[3] = 0;
             ctx->pc = ctx->lr;
             return 1;
         }
+        case 0x8061CC60: { // IOS_Seek
+            u32 fd = ctx->gpr[3];
+            s32 offset = (s32)ctx->gpr[4];
+            u32 origin = ctx->gpr[5];
+            int whence = SEEK_SET;
+            if (origin == 1) whence = SEEK_CUR;
+            else if (origin == 2) whence = SEEK_END;
+            long cur_pos = 0;
+            FILE* fp = (fd >= 1 && fd < 16 && s_ios_files[fd].in_use) ? s_ios_files[fd].fp : NULL;
+            if (fp) {
+                fseek(fp, offset, whence);
+                cur_pos = ftell(fp);
+            }
+            ctx->gpr[3] = (u32)cur_pos;
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+        case 0x8061CD70: { // IOS_SeekAsync
+            u32 fd = ctx->gpr[3];
+            s32 offset = (s32)ctx->gpr[4];
+            u32 origin = ctx->gpr[5];
+            u32 cb = ctx->gpr[6];
+            u32 usrdata = ctx->gpr[7];
+            int whence = SEEK_SET;
+            if (origin == 1) whence = SEEK_CUR;
+            else if (origin == 2) whence = SEEK_END;
+            long cur_pos = 0;
+            FILE* fp = (fd >= 1 && fd < 16 && s_ios_files[fd].in_use) ? s_ios_files[fd].fp : NULL;
+            if (fp) {
+                fseek(fp, offset, whence);
+                cur_pos = ftell(fp);
+            }
+            tls_ipc_enqueue_callback(cb, (s32)cur_pos, usrdata);
+            ctx->gpr[3] = 0;
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+        case 0x8061CE50:
         case 0x8061D080: { // IOS_Ioctl
             ctx->gpr[3] = 0; // Success
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+        case 0x8061CF40:
+        case 0x8061CF80:
+        case 0x8061D1B0: { // IOS_IoctlAsync
+            u32 out_buf = ctx->gpr[7];
+            u32 out_len = ctx->gpr[8];
+            u32 cb = ctx->gpr[9];
+            u32 usrdata = ctx->gpr[10];
+            if (out_buf && out_len > 0) {
+                void* dst = resolve_guest_pointer(ctx, out_buf);
+                if (dst) {
+                    memset(dst, 0, out_len);
+                }
+            }
+            printf("[TLS IOS_IoctlAsync] cb=0x%08X usrdata=0x%08X (lr=0x%08X)\n", cb, usrdata, ctx->lr);
+            fflush(stdout);
+            tls_ipc_enqueue_callback(cb, 0, usrdata);
+            ctx->gpr[3] = 0;
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+        case 0x8061D2F0: { // IOS_IoctlvAsync
+            u32 cb = ctx->gpr[8];
+            u32 usrdata = ctx->gpr[9];
+            tls_ipc_enqueue_callback(cb, 0, usrdata);
+            ctx->gpr[3] = 0;
             ctx->pc = ctx->lr;
             return 1;
         }
@@ -957,7 +2072,62 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 1;
         }
 
+        // NAND error handlers
+        // NANDSetAutoErrorMessaging (0x80622E20)
+        case 0x80622E20: {
+            printf("[TLS NAND] NANDSetAutoErrorMessaging(enable=%u) lr=0x%08X -> returning 0\n", ctx->gpr[3], ctx->lr);
+            fflush(stdout);
+            ctx->gpr[3] = 0; // previous state = disabled
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // __NANDShowErrorMessage (0x80622BA0)
+        case 0x80622BA0: {
+            s32 err = (s32)ctx->gpr[3];
+            printf("[TLS NAND] __NANDShowErrorMessage err=%d (0x%08X) caller lr=0x%08X -> bypassed\n",
+                   err, (u32)err, ctx->lr);
+            fflush(stdout);
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // __NANDPrintErrorMessage (0x80622E80)
+        case 0x80622E80: {
+            s32 err = (s32)ctx->gpr[3];
+            printf("[TLS NAND] __NANDPrintErrorMessage err=%d (0x%08X) caller lr=0x%08X -> bypassed\n",
+                   err, (u32)err, ctx->lr);
+            fflush(stdout);
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
         // DVD services
+        // __DVDCheckDevice (0x80600120) - Broadway disc drive security check
+        case 0x80600120: {
+            printf("[TLS DVD] __DVDCheckDevice called (lr=0x%08X) -> bypassed (returning 1)\n", ctx->lr);
+            fflush(stdout);
+            ctx->gpr[3] = 1; // Success
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // __DVDShowFatalMessage (0x80600280) / fn_806003D0
+        case 0x80600280:
+        case 0x806003D0: {
+            printf("[TLS DVD] Fatal disc dialog bypassed (pc=0x%08X lr=0x%08X)\n", ctx->pc, ctx->lr);
+            fflush(stdout);
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // DVD fatal alarm callbacks (fn_805FAD40, fn_805FAD50)
+        case 0x805FAD40:
+        case 0x805FAD50: {
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
         case 0x80603FF0: { // DVDSync
             ctx->gpr[3] = 1; // DVD_STATE_END / Success
             ctx->pc = ctx->lr;
@@ -979,6 +2149,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // VISetNextFrameBuffer: capture guest framebuffer pointer
         case 0x80607120: {
             u32 fb = ctx->gpr[3];
+            g_last_vi_framebuffer = fb;
             static u32 s_last_fb = 0;
             if (fb != s_last_fb) {
                 printf("[TLS VI] VISetNextFrameBuffer: 0x%08X (lr=0x%08X)\n", fb, ctx->lr);
@@ -996,12 +2167,17 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
         // __DVDConvertPathToEntrynum(const char* path) -> synthetic host file id
         case 0x805F9EF0: {
-            const char* path = (const char*)resolve_guest_pointer(ctx, ctx->gpr[3]);
-            u32 id = host_asset_lookup(path);
-            if (getenv("TLS_DVD_TRACE") && !id) {
-                printf("[TLS DVD] convert MISS: \"%s\"\n", path ? path : "(bad ptr)");
-                fflush(stdout);
+            char* path = (char*)resolve_guest_pointer(ctx, ctx->gpr[3]);
+            const char* stage_env = g_tls_stage_override[0] ? g_tls_stage_override : getenv("TLS_STAGE");
+            if (stage_env && strlen(stage_env) == 8 && path) {
+                char* found = strstr(path, "dg004_01");
+                if (found) {
+                    memcpy(found, stage_env, 8);
+                }
             }
+            u32 id = host_asset_lookup(path);
+            printf("[TLS DVD] convert: \"%s\" -> id=%u\n", path ? path : "(bad ptr)", id);
+            fflush(stdout);
             ctx->gpr[3] = id ? id : 0xFFFFFFFFu; // -1 when absent, like the SDK
             ctx->pc = ctx->lr;
             return 1;
@@ -1047,21 +2223,26 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             int ok = 0;
             u32 transferred = 0;
 
-            if (fi && dst && asset && length > 0 && offset >= 0) {
-                char full[512];
-                asset_full_path(asset->path, full, sizeof(full));
-                FILE* f = fopen(full, "rb");
-                if (f) {
-                    if (fseek(f, offset, SEEK_SET) == 0) {
-                        transferred = (u32)fread(dst, 1, (size_t)length, f);
-                        ok = 1; // a short read simply means the transfer hit EOF
+            if (fi && asset && length >= 0 && offset >= 0) {
+                if (length == 0) {
+                    ok = 1;
+                    transferred = 0;
+                } else if (dst) {
+                    char full[512];
+                    asset_full_path(asset->path, full, sizeof(full));
+                    FILE* f = fopen(full, "rb");
+                    if (f) {
+                        if (fseek(f, offset, SEEK_SET) == 0) {
+                            transferred = (u32)fread(dst, 1, (size_t)length, f);
+                            ok = 1; // a short read simply means the transfer hit EOF
+                        }
+                        fclose(f);
                     }
-                    fclose(f);
                 }
             }
             if (ok) {
                 s_dvd_read_ok++;
-                if (getenv("TLS_DVD_TRACE") && s_dvd_read_ok <= 128) {
+                if (s_dvd_read_ok <= 256 || s_dvd_read_ok % 50 == 0) {
                     printf("[TLS DVD] read #%u %s off=%d len=%d -> %u bytes lr=%08X cb=%08X\n", s_dvd_read_ok,
                            asset ? asset->path : "?", offset, length, transferred, ctx->lr, callback);
                     fflush(stdout);
@@ -1081,15 +2262,109 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 mem_write32(ctx, fi_addr + 0x0C, 0); // DVD_STATE_END
             }
             if (ok) {
-                dvd_queue_callback(callback, fi_addr); // drained by the runner frame loop
+                if (callback == 0x8046BBE0) {
+                    u32 target = fi_addr ? mem_read32(ctx, fi_addr + 0x2C) : 0;
+                    if (target != 0x807C6F60 && target != 0x800000E4 && resolve_guest_pointer(ctx, target)) {
+                        mem_write32(ctx, target, 2);
+                    }
+                    s_dvd_callbacks_run++;
+                } else {
+                    dvd_queue_callback(callback, fi_addr, (s32)transferred); // drained by the runner frame loop
+                }
             }
             ctx->gpr[3] = ok ? 1 : 0;
             ctx->pc = ctx->lr;
             return 1;
         }
 
+        // DVDReadPrio(fileInfo, addr, length, offset, prio) - synchronous read
+        case 0x805FA5D0: {
+            u32 fi_addr = ctx->gpr[3];
+            u32 dst_addr = ctx->gpr[4];
+            s32 length = (s32)ctx->gpr[5];
+            s32 offset = (s32)ctx->gpr[6];
+            u8* fi = (u8*)resolve_guest_pointer(ctx, fi_addr);
+            void* dst = resolve_guest_pointer(ctx, dst_addr);
+            u32 id = fi ? mem_read32(ctx, fi_addr + 0x30) : 0;
+            const HostAsset* asset = host_asset_by_id(id);
+            int ok = 0;
+            u32 transferred = 0;
+
+            if (fi && asset && length >= 0 && offset >= 0) {
+                if (length == 0) {
+                    ok = 1;
+                    transferred = 0;
+                } else if (dst) {
+                    char full[512];
+                    asset_full_path(asset->path, full, sizeof(full));
+                    FILE* f = fopen(full, "rb");
+                    if (f) {
+                        if (fseek(f, offset, SEEK_SET) == 0) {
+                            transferred = (u32)fread(dst, 1, (size_t)length, f);
+                            ok = 1;
+                        }
+                        fclose(f);
+                    }
+                }
+            }
+            if (ok) {
+                s_dvd_read_ok++;
+                if (s_dvd_read_ok <= 256 || s_dvd_read_ok % 50 == 0) {
+                    printf("[TLS DVD] sync read #%u %s off=%d len=%d -> %u bytes lr=%08X\n", s_dvd_read_ok,
+                           asset ? asset->path : "?", offset, length, transferred, ctx->lr);
+                    fflush(stdout);
+                }
+            } else {
+                s_dvd_read_fail++;
+            }
+            if (!ok && getenv("TLS_DVD_TRACE")) {
+                printf("[TLS DVD] sync read FAIL id=%u off=%d len=%d fi=%08X dst=%08X\n",
+                       id, offset, length, fi_addr, dst_addr);
+                fflush(stdout);
+            }
+            if (fi) {
+                mem_write32(ctx, fi_addr + 0x1C, transferred); // currTransferSize
+                mem_write32(ctx, fi_addr + 0x20, transferred); // transferredSize
+                mem_write32(ctx, fi_addr + 0x0C, 0); // DVD_STATE_END
+            }
+            ctx->gpr[3] = ok ? (s32)transferred : -1;
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
         // DVDClose(DVDFileInfo*) - SDK implementation, no host state to drop
         case 0x805FA390: {
+            ctx->gpr[3] = 1;
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // DVDGetDriveStatus() -> DVD_STATE_END (0 = ready / idle, no error)
+        case 0x805FEB00: {
+            ctx->gpr[3] = 0; // DVD_STATE_END
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // fn_805FEF70: synchronous DVD command execution / wait
+        case 0x805FEF70: {
+            static u32 count_fef70 = 0;
+            u32 block = ctx->gpr[3];
+            if (block) {
+                mem_write32(ctx, block + 0x0C, 0); // DVD_STATE_END
+            }
+            if (++count_fef70 <= 32) {
+                printf("[TLS DVD] fn_805FEF70 #%u block=0x%08X (lr=0x%08X) -> completed\n",
+                       count_fef70, block, ctx->lr);
+                fflush(stdout);
+            }
+            ctx->gpr[3] = 1;
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // DVDCheckDisk() / DVDGetCommandBlockStatus (0x805FF120) -> 1 (disc OK)
+        case 0x805FF120: {
             ctx->gpr[3] = 1;
             ctx->pc = ctx->lr;
             return 1;
@@ -1117,6 +2392,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         }
 
         // WPADGetInfo(s32 chan, WPADInfo* info)
+        case 0x80660D60:
         case 0x80660D80: {
             s32 chan = (s32)ctx->gpr[3];
             u32 info_addr = ctx->gpr[4];
@@ -1142,6 +2418,8 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         }
 
         // WPADGetInfoAsync(s32 chan, WPADInfo* info, WPADCallback cb)
+        // Note: 0x80660DF0 is the true function entry, 0x80660E10 is after preamble
+        case 0x80660DF0:
         case 0x80660E10: {
             s32 chan = (s32)ctx->gpr[3];
             u32 info_addr = ctx->gpr[4];
@@ -1166,6 +2444,19 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 1;
         }
 
+        // fn_80660FF0 (synchronous WPADGetInfo wait loop / thread sleep)
+        case 0x80660FF0:
+        case 0x80661010: {
+            s32 chan = (s32)ctx->gpr[3];
+            if (getenv("TLS_WPAD_TRACE")) {
+                printf("[TLS WPADSyncWait] chan=%d bypassed (returning 0)\n", chan);
+                fflush(stdout);
+            }
+            ctx->gpr[3] = 0; // WPAD_ERR_NONE
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
         // KPADGetStatus (s32 chan) -> returns device type for channel
         case 0x80661B10: {
             s32 chan = (s32)ctx->gpr[3];
@@ -1179,16 +2470,50 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         }
 
         // KPADRead(s32 chan, KPADStatus* status, u32 count)
+        // 0x80661B60 is the SDK entry; 0x806572D0 and 0x806572E0 are the internal game-linked KPADRead functions!
+        case 0x806572D0:
+        case 0x806572E0:
         case 0x80661B60: {
+            tls_service_controller_input(ctx);
             s32 chan = (s32)ctx->gpr[3];
             u32 status_addr = ctx->gpr[4];
             u32 count = ctx->gpr[5];
-            if (chan == 0 && status_addr != 0 && count > 0) {
+            if ((chan >= 0 && chan < 4) && status_addr != 0 && count > 0) {
                 fill_kpad_status(ctx, status_addr);
                 ctx->gpr[3] = 1; // 1 sample returned
             } else {
+                if (status_addr != 0) {
+                    mem_write8(ctx, status_addr + 0x5C, 0xFD);
+                    mem_write8(ctx, status_addr + 0x5D, (u8)-1);
+                }
                 ctx->gpr[3] = 0;
             }
+            static int s_kpad_reads = 0;
+            int kpad_n = ++s_kpad_reads;
+            if (kpad_n <= 10 || kpad_n % 60 == 0) {
+                printf("[TLS KPADRead] #%d chan=%d status_addr=0x%08X count=%u hold=0x%04X trig=0x%04X\n",
+                       kpad_n, chan, status_addr, count, s_ctrl_state.core_hold, s_ctrl_state.core_trig);
+                fflush(stdout);
+            }
+            // Every read that actually carries a button press must be visible: the
+            // periodic sampling above almost always misses a short press, which makes
+            // "the game ignores my input" indistinguishable from "input never arrived".
+            if ((s_ctrl_state.core_hold | s_ctrl_state.core_trig) != 0) {
+                static int s_kpad_press_logs = 0;
+                if (s_kpad_press_logs < 40) {
+                    s_kpad_press_logs++;
+                    printf("[TLS KPADRead] PRESS #%d chan=%d hold=0x%04X trig=0x%04X\n",
+                           kpad_n, chan, s_ctrl_state.core_hold, s_ctrl_state.core_trig);
+                    fflush(stdout);
+                }
+            }
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // WPADGetStatus (0x8065F540) -> returns 3 (WPAD_STATE_SETUP)
+        case 0x8065F540: {
+            ctx->gpr[3] = 3;
             ctx->pc = ctx->lr;
             return 1;
         }
@@ -1200,12 +2525,53 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 1;
         }
 
+        // WPADGetDevType(s32 chan) -> returns device type (2 = WPAD_DEV_CLASSIC)
+        case 0x80663610: {
+            s32 chan = (s32)ctx->gpr[3];
+            ctx->gpr[3] = (chan == 0) ? 2 : (u32)-1;
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // WPADProbe(s32 chan, u32* type)
+        case 0x80660CF0: {
+            s32 chan = (s32)ctx->gpr[3];
+            u32 type_ptr = ctx->gpr[4];
+            if (chan == 0) {
+                if (type_ptr != 0) {
+                    mem_write32(ctx, type_ptr, 2); // WPAD_DEV_CLASSIC
+                }
+                ctx->gpr[3] = 0; // WPAD_ERR_NONE
+            } else {
+                ctx->gpr[3] = (u32)-1; // WPAD_ERR_NO_CONTROLLER
+            }
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // WPADRead(s32 chan, void* buf)
+        case 0x806616F0: {
+            s32 chan = (s32)ctx->gpr[3];
+            u32 buf_ptr = ctx->gpr[4];
+            if (chan == 0 && buf_ptr != 0) {
+                mem_write16(ctx, buf_ptr + 0x00, (u16)s_ctrl_state.core_hold);
+                mem_write8(ctx,  buf_ptr + 0x29, 0); // err = 0
+                mem_write16(ctx, buf_ptr + 0x2a, (u16)s_ctrl_state.cl_hold);
+                mem_write8(ctx,  buf_ptr + 0x40, 0); // format = 0
+                ctx->gpr[3] = 0; // WPAD_ERR_NONE
+            } else {
+                ctx->gpr[3] = (u32)-1;
+            }
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
         // KPAD configuration setters (PosParam, AccParam, StickClamp, ButtonFilter, Reset, Enable)
-        case 0x80660CF0:
         case 0x80660EA0:
         case 0x80660B90:
         case 0x80660C50:
         case 0x80660C90:
+        case 0x80661300:
         case 0x806631A0: {
             ctx->gpr[3] = 0;
             ctx->pc = ctx->lr;
@@ -1276,66 +2642,2123 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 1;
         }
 
-        // GXCopyDisp(void* dest, u8 clear)
-        case 0x80615420: {
-            u32 dest = ctx->gpr[3];
-            u8 clear = (u8)ctx->gpr[4];
-            printf("[TLS GXCopyDisp] dest=0x%08X clear=%u\n", dest, clear);
+        // Table loader 10 (skill param table)
+        case 0x80210ACC: {
+            printf("[TLS Table] fn_80210ACC (skill_param_text) entered\n");
             fflush(stdout);
-            if (dest) {
-                u32* p_gx = (u32*)resolve_guest_pointer(ctx, 0x80888718);
-                u32 gx_data_addr = p_gx ? *p_gx : 0;
-                u32 clear_color_word = 0x10801080; // Standard broadcast black in YUYV422 (Y=16, U=128, Y=16, V=128)
-                if (gx_data_addr) {
-                    u32 clr = mem_read32(ctx, gx_data_addr + 0x220);
-                    u8 r = (clr >> 24) & 0xFF;
-                    u8 g = (clr >> 16) & 0xFF;
-                    u8 b = (clr >> 8) & 0xFF;
-                    if (r != 0 || g != 0 || b != 0) {
-                        int y = ((66 * r + 129 * g + 25 * b + 128) >> 8) + 16;
-                        int u = ((-38 * r - 74 * g + 112 * b + 128) >> 8) + 128;
-                        int v = ((112 * r - 94 * g - 18 * b + 128) >> 8) + 128;
-                        clear_color_word = ((y & 0xFF) << 24) | ((u & 0xFF) << 16) | ((y & 0xFF) << 8) | (v & 0xFF);
-                    }
-                }
-                u32* dst = (u32*)resolve_guest_pointer(ctx, dest);
-                if (dst) {
-                    for (int i = 0; i < 640 * 480 / 2; i++) {
-                        dst[i] = clear_color_word;
-                    }
+            return 0;
+        }
 
-                    static int s_dumped_disp = 0;
-                    if (!s_dumped_disp++) {
-                        FILE* f = fopen("build/recomp/framebuffer_disp.ppm", "wb");
-                        if (f) {
-                            fprintf(f, "P6\n640 480\n255\n");
-                            const u8* fb = (const u8*)dst;
-                            for (int y = 0; y < 480; y++) {
-                                for (int x = 0; x < 640; x += 2) {
-                                    int off = (y * 640 + x) * 2;
-                                    u8 y0 = fb[off + 0], u = fb[off + 1], y1 = fb[off + 2], v = fb[off + 3];
-                                    int c0 = (int)y0 - 16, c1 = (int)y1 - 16, d = (int)u - 128, e = (int)v - 128;
-                                    int r0 = (298 * c0 + 409 * e + 128) >> 8;
-                                    int g0 = (298 * c0 - 100 * d - 208 * e + 128) >> 8;
-                                    int b0 = (298 * c0 + 516 * d + 128) >> 8;
-                                    int r1 = (298 * c1 + 409 * e + 128) >> 8;
-                                    int g1 = (298 * c1 - 100 * d - 208 * e + 128) >> 8;
-                                    int b1 = (298 * c1 + 516 * d + 128) >> 8;
-                                    fputc(r0 < 0 ? 0 : (r0 > 255 ? 255 : r0), f);
-                                    fputc(g0 < 0 ? 0 : (g0 > 255 ? 255 : g0), f);
-                                    fputc(b0 < 0 ? 0 : (b0 > 255 ? 255 : b0), f);
-                                    fputc(r1 < 0 ? 0 : (r1 > 255 ? 255 : r1), f);
-                                    fputc(g1 < 0 ? 0 : (g1 > 255 ? 255 : g1), f);
-                                    fputc(b1 < 0 ? 0 : (b1 > 255 ? 255 : b1), f);
-                                }
+
+        // Controller update called from main game loop (0x80479C34)
+        case 0x800A5554: {
+            static int s_pad_updates = 0;
+            if (s_pad_updates++ % 60 == 0) {
+                printf("\n=============================================================\n");
+                printf("[TLS Engine] Active Main Game Loop: update #%d\n", s_pad_updates);
+                printf("=============================================================\n\n");
+            }
+            return 0;
+        }
+
+        // fn_800A6BD4 / fn_800A6BDC: Animation curve / spline evaluator
+        case 0x800A6BD4:
+        case 0x800A6BDC: {
+            if (address == 0x800A6BD4) {
+                u32 ea = ctx->gpr[13] + (u32)(s32)(-26432);
+                union { float f; u32 u; } conv;
+                conv.f = (float)ctx->fpr[1];
+                mem_write32(ctx, ea, conv.u);
+            }
+            u32 stream = ctx->gpr[3];
+            if (stream < 0x80000000 || stream >= 0x94000000) {
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            // Robust stream validator: must terminate with 0xFF within 128 bytes with all valid opcodes
+            u32 cur = stream;
+            bool valid = false;
+            for (int i = 0; i < 128; i++) {
+                if (cur < 0x80000000 || cur >= 0x94000000) break;
+                u8 op = mem_read8(ctx, cur);
+                if (op == 0xFF) { valid = true; break; }
+                if (op > 16) break; // Invalid opcode (> 16 and != 0xFF)
+                if (op == 0 || op == 1 || (op >= 3 && op <= 11)) {
+                    cur += 5;
+                } else {
+                    cur += 1;
+                }
+            }
+            if (!valid) {
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            return 0; // Valid pointer & valid terminating bytecode: run recompiled evaluator!
+        }
+
+        // 0x80239D58: Item / Asset table lookup
+        case 0x80239D58: {
+            u32 container = ctx->gpr[3];
+            if (container < 0x80000000 || container >= 0x94000000) {
+                ctx->gpr[3] = 0; // Not found
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            u32 count = mem_read32(ctx, container + 216);
+            u32 array = mem_read32(ctx, container + 224);
+            if (count > 20000 || (count > 0 && (array < 0x80000000 || array >= 0x94000000))) {
+                printf("[TLS 80239D58] Clamped invalid lookup: container=0x%08X count=%u arr=0x%08X (lr=0x%08X)\n",
+                       container, count, array, ctx->lr);
+                fflush(stdout);
+                ctx->gpr[3] = 0;
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            return 0; // Run original code
+        }
+
+        // 0x80360A2C: Fade Coordinator
+        case 0x80360A2C: {
+            static int s_fade_log_count = 0;
+            u32 r3_obj = ctx->gpr[3];
+            u32 val_408 = (r3_obj >= 0x80000000 && r3_obj < 0x94000000) ? mem_read32(ctx, r3_obj + 408) : 0xFFFFFFFF;
+            u32 screen_mgr = ctx->gpr[13] ? mem_read32(ctx, ctx->gpr[13] - 26672) : 0;
+            u32 val_1028 = (screen_mgr >= 0x80000000 && screen_mgr < 0x94000000) ? mem_read32(ctx, screen_mgr + 1028) : 0xFFFFFFFF;
+            u32 val_984 = (screen_mgr >= 0x80000000 && screen_mgr < 0x94000000) ? mem_read32(ctx, screen_mgr + 984) : 0xFFFFFFFF;
+            if (s_fade_log_count++ < 20 || (s_fade_log_count % 60 == 0)) {
+                printf("[TLS 80360A2C #%d] r3=0x%08X 408=%u, screen_mgr=0x%08X (1028=%u, 984=%u), lr=0x%08X -> returning 0 (FADE COMPLETE)\n",
+                       s_fade_log_count, r3_obj, val_408, screen_mgr, val_1028, val_984, ctx->lr);
+                fflush(stdout);
+            }
+            ctx->gpr[3] = 0; // Signal fade completed so GameTask::Init advances to State 2
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // fn_800A6E8C: UI/Script stream relocator & symbol fixup
+        case 0x800A6E8C: {
+            u32 desc = ctx->gpr[3];
+            u32 r4_arg = ctx->gpr[4];
+            if (!desc) {
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            u32 len = mem_read32(ctx, desc);
+            u32 ptr = mem_read32(ctx, desc + 4);
+            if (!len || !ptr) {
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            static int s_6e8c_calls = 0;
+            if (++s_6e8c_calls <= 10 || s_6e8c_calls % 50 == 0) {
+                printf("[TLS 800A6E8C] Relocating script stream #%d: desc=0x%08X ptr=0x%08X len=%u (lr=0x%08X)\n",
+                       s_6e8c_calls, desc, ptr, len, ctx->lr);
+                fflush(stdout);
+            }
+            u32 cur = ptr;
+            u32 end = ptr + len;
+            u32 r31_val = 0x8087EF80;
+            while (cur < end) {
+                u8 b = mem_read8(ctx, cur);
+                if (b == 0xFF) {
+                    cur += 1;
+                } else if (b == 0) {
+                    cur += 5;
+                } else if (b == 1) {
+                    u32 r29 = cur + 1;
+                    u32 v = mem_read32(ctx, r29);
+                    if (v != 0) {
+                        u32 v_hi = (v + 0x00010000) >> 16;
+                        if (v_hi == 0xFFFF || v == 0xFFFFFFFF) {
+                            mem_write32(ctx, r29, r31_val);
+                        } else {
+                            u32 v_idx = v - 1;
+                            u32 r28_base = r4_arg ? mem_read32(ctx, r4_arg) : 0;
+                            if (r28_base) {
+                                u32 target = mem_read32(ctx, r28_base + (v_idx * 4));
+                                mem_write32(ctx, r29, target);
                             }
-                            fclose(f);
                         }
                     }
+                    cur += 5;
+                } else if ((b >= 2 && b <= 9) || b == 0x10) {
+                    cur += 1;
+                } else {
+                    // Unknown token or padding byte: advance 1 byte to prevent infinite loop
+                    cur += 1;
                 }
             }
             ctx->pc = ctx->lr;
             return 1;
+        }
+
+        // Task / Scene node registration (fn_800D1D94)
+        case 0x800D1D94: {
+            static u32 count_1d94 = 0;
+            u32 node = ctx->gpr[3];
+            u32 parent = ctx->gpr[4];
+            if (++count_1d94 <= 100 || (count_1d94 % 100 == 0) || parent == 0x818204E0) {
+                printf("[TLS NodeReg] #%u node=0x%08X parent=0x%08X (lr=0x%08X)\n", count_1d94, node, parent, ctx->lr);
+                if (parent) {
+                    u32 c = mem_read32(ctx, parent + 24); // first child
+                    printf("       parent=0x%08X child=0x%08X\n", parent, c);
+                    int depth = 0;
+                    while (c && depth < 20) {
+                        u32 next = mem_read32(ctx, c + 28); // next sibling
+                        printf("         [%d] child=0x%08X next=0x%08X\n", depth++, c, next);
+                        if (next == c || next == node) {
+                            printf("         CYCLE DETECTED: child=0x%08X next=0x%08X!\n", c, next);
+                            break;
+                        }
+                        c = next;
+                    }
+                }
+                fflush(stdout);
+            }
+            return 0; // continue to original code
+        }
+
+        // Loop inside fn_800D1D94 (finding end of child list)
+        case 0x800D1DF0: {
+            u32 slot = ctx->gpr[3];
+            u32 child = mem_read32(ctx, slot);
+            if (!resolve_guest_pointer(ctx, child) || (child & 3) != 0) {
+                // Not a valid heap node pointer -> terminate traversal at slot!
+                ctx->gpr[0] = 0;
+                ctx->pc = 0x800D1E00;
+                return 1;
+            }
+            u32 next = mem_read32(ctx, child + 28);
+            if (next == child || (next != 0 && (!resolve_guest_pointer(ctx, next) || (next & 3) != 0))) {
+                // Self-loop or invalid next pointer -> terminate traversal at child!
+                ctx->gpr[0] = 0;
+                ctx->gpr[3] = child + 28;
+                ctx->pc = 0x800D1E00;
+                return 1;
+            }
+            return 0; // normal valid traversal
+        }
+
+        // Game pad action trigger check (0x800A555C)
+        case 0x800A555C: {
+            u32 action = ctx->gpr[5];
+            static int s_a555c_calls = 0;
+            if (++s_a555c_calls <= 10 || s_a555c_calls % 120 == 0) {
+                printf("[TLS 0x800A555C] action=%u\n", action);
+                fflush(stdout);
+            }
+            // Filter Home button (action 17 / 0x11)
+            if (action == 17 || action == 0x11) {
+                ctx->gpr[3] = 0;
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            if (action == 4) { // Action 4 = Title Screen "Push Any Button" / Confirm / A
+                tls_service_controller_input(ctx);
+                static int s_act4_count = 0;
+                s_act4_count++;
+                extern bool g_interactive_mode;
+                bool sim_press = (!g_interactive_mode && (s_act4_count == 10 || s_act4_count == 50 || s_act4_count == 130 || s_act4_count == 190));
+                if (sim_press) {
+                    static int s_push_log = 0;
+                    if (++s_push_log <= 15) {
+                        printf("[TLS Input] 0x800A555C (Action 4) Push Any Button triggered! (#%d sim=%d) cl_hold=0x%X core_hold=0x%X trig=0x%X\n",
+                               s_push_log, sim_press, s_ctrl_state.cl_hold, s_ctrl_state.core_hold, s_ctrl_state.cl_trig);
+                        fflush(stdout);
+                    }
+                    ctx->gpr[3] = 1;
+                    ctx->pc = ctx->lr;
+                    return 1;
+                }
+                // Real input must go through the game's own action evaluator (0x800DEEDC).
+                // Returning 1 here reported "pressed" on every query while skipping that
+                // evaluator's internal edge bookkeeping, so the action never transitioned
+                // back to released: the title logged "Push Any Button triggered" and then
+                // sat in mode 1 forever instead of advancing to the title menu.
+            }
+            return 0; // Run original code naturally via 0x800DEEDC (handles Dpad, sticks, all buttons)
+        }
+
+        // Game pad button trigger query by action (0x800DEEDC)
+        case 0x800DEEDC: {
+            u32 action_id = ctx->gpr[5];
+            if (action_id == 11 || action_id == 3) { // Action 11 (Push Any Button), Action 3 (Confirm / Button A)
+                tls_service_controller_input(ctx);
+                if ((s_ctrl_state.cl_trig & (WPAD_CL_BUTTON_A | WPAD_CL_BUTTON_PLUS)) ||
+                    (s_ctrl_state.core_trig & (WPAD_BUTTON_A | WPAD_BUTTON_2 | WPAD_BUTTON_PLUS))) {
+                    ctx->gpr[3] = 1;
+                    ctx->pc = ctx->lr;
+                    return 1;
+                }
+            }
+            return 0; // Run original code
+        }
+
+        // Controller trigger check called by StrapTask, TitleTask, menus (0x800A5920, 0x800A59F0, 0x800A5AA4)
+        case 0x800A5920:
+        case 0x800A59F0:
+        case 0x800A5AA4: {
+            // Run original PPC code naturally using PadManager and KPADRead!
+            return 0;
+        }
+
+        // atn::LoadScene task update (0x80477D60)
+        case 0x80477D60: {
+            static int s_loadscene_calls = 0;
+            if (++s_loadscene_calls <= 20 || s_loadscene_calls % 60 == 0) {
+                printf("[TLS LoadScene] #%d task=0x%08X scene=0x%08X (lr=0x%08X)\n",
+                       s_loadscene_calls, ctx->gpr[3], ctx->gpr[4], ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // SequenceManager::Update (0x800C3720)
+        case 0x800C3720: {
+            static int s_seq_updates = 0;
+            static u32 s_last_active = 0;
+            u32 mgr = ctx->gpr[3];
+            u32 active_task = mgr ? mem_read32(ctx, mgr + 72) : 0;
+            u32 next_seq = mgr ? mem_read32(ctx, mgr + 80) : 0;
+            u32 seq_84 = mgr ? mem_read32(ctx, mgr + 84) : 0;
+            s_seq_updates++;
+
+            static bool s_printed_units = false;
+            if (!s_printed_units && mgr) {
+                u32 arr_ptr = mem_read32(ctx, mgr + 0x4C + 4);
+                u32 count = mem_read32(ctx, mgr + 0x4C + 8);
+                printf("[TLS SequenceManager] Factory count: %u, arr_ptr=0x%08X\n", count, arr_ptr);
+                for (u32 i = 0; i < count; i++) {
+                    u32 unit = mem_read32(ctx, arr_ptr + i * 4);
+                    u32 factory = unit ? mem_read32(ctx, unit + 4) : 0;
+                    const char* uname = unit ? (const char*)resolve_guest_pointer(ctx, unit + 8) : "<null>";
+                    printf("   [%u] unit=0x%08X factory=0x%08X name='%s'\n", i, unit, factory, uname ? uname : "<null>");
+                }
+                fflush(stdout);
+                s_printed_units = true;
+            }
+
+            extern bool g_auto_start_game;
+            static bool s_advanced_to_game = false;
+            // Advance directly into "Game" (Sequence ID = 2: Chapter 1 Gurgan Cave) once boot preload completes (update >= 80):
+            if (g_auto_start_game && !s_advanced_to_game && s_seq_updates >= 80 && mgr) {
+                printf("\n=============================================================\n");
+                printf("[TLS SequenceManager] Auto-Advancing to 'Game' (Sequence ID = 2: Chapter 1 Gurgan Cave)!\n");
+                printf("=============================================================\n\n");
+                fflush(stdout);
+                mem_write32(ctx, mgr + 80, 2); // 2 = Game sequence!
+                mem_write32(ctx, mgr + 72, 0); // Clear active task to trigger spawn of next sequence!
+                s_advanced_to_game = true;
+            }
+
+            if (s_seq_updates <= 10 || s_seq_updates % 30 == 0 || next_seq != 0 || active_task != s_last_active) {
+                u32 vt = active_task ? mem_read32(ctx, active_task) : 0;
+                u32 name_ptr = active_task ? mem_read32(ctx, active_task + 4) : 0;
+                const char* tname = name_ptr ? (const char*)resolve_guest_pointer(ctx, name_ptr) : "<none>";
+                printf("[TLS SequenceManager] Update #%d mgr=0x%08X active=0x%08X ('%s' vt=0x%08X) next=0x%08X (+84=0x%08X)\n",
+                       s_seq_updates, mgr, active_task, tname ? tname : "<null>", vt, next_seq, seq_84);
+                if (vt) {
+                    printf("     active vt: [0]=0x%08X [1]=0x%08X [2]=0x%08X [3]=0x%08X [4]=0x%08X [5]=0x%08X [6]=0x%08X [7]=0x%08X\n",
+                           mem_read32(ctx, vt), mem_read32(ctx, vt + 4), mem_read32(ctx, vt + 8), mem_read32(ctx, vt + 12),
+                           mem_read32(ctx, vt + 16), mem_read32(ctx, vt + 20), mem_read32(ctx, vt + 24), mem_read32(ctx, vt + 28));
+                }
+                fflush(stdout);
+                s_last_active = active_task;
+            }
+            return 0; // Run original code
+        }
+
+        // fn_801FFA04 (Anime setup)
+        case 0x801FFA04: {
+            u32 r3 = ctx->gpr[3], r4 = ctx->gpr[4], r5 = ctx->gpr[5], r6 = ctx->gpr[6], r7 = ctx->gpr[7];
+            static int s_ffa04_calls = 0;
+            printf("[TLS 801FFA04] #%d r3=0x%08X r4=0x%08X r5=0x%08X r6=0x%08X r7=%u (lr=0x%08X)\n",
+                   ++s_ffa04_calls, r3, r4, r5, r6, r7, ctx->lr);
+            fflush(stdout);
+            return 0; // Run original code
+        }
+
+        // Safeguards against corrupt animation track counts in fn_801FFA04
+        case 0x801FFCA0:
+        case 0x801FFD2C:
+        case 0x801FFDC0:
+        case 0x801FFE50: {
+            u32 r24 = ctx->gpr[24];
+            if (r24 > 256) {
+                printf("[TLS AnimeTrack] Guarded corrupt track count %u -> 0 at 0x%08X (lr=0x%08X)\n",
+                       r24, ctx->pc, ctx->lr);
+                fflush(stdout);
+                ctx->gpr[24] = 0;
+            }
+            return 0; // Run original code with cleaned count
+        }
+
+        // Anime setup track loop safeguard (0x80200080)
+        case 0x80200080: {
+            u32 r24 = ctx->gpr[24];
+            if (r24 > 256) {
+                ctx->gpr[24] = 0;
+                ctx->gpr[25] = 0;
+            }
+            return 0; // Run original code
+        }
+
+        // Anime setup track search loop (0x80200D00)
+        case 0x80200D00: {
+            static int s_loop_entry_count = 0;
+            u32 r26 = ctx->gpr[26];
+            u32 r27 = ctx->gpr[27];
+            u32 r30 = ctx->gpr[30];
+            u32 count = mem_read32(ctx, r26 + 300);
+            u32 container_cnt = r30 ? mem_read32(ctx, r30 + 4) : 0;
+            if (r27 == 0 || r27 % 500 == 0) {
+                printf("[TLS 80200D00] #%d r26=0x%08X i=%u / count=%u, container 0x%08X cnt=%u\n",
+                       ++s_loop_entry_count, r26, r27, count, r30, container_cnt);
+                fflush(stdout);
+            }
+            if (count > 500) {
+                // If count is corrupt/unreasonable, clamp it so we don't stall
+                printf("[TLS 80200D00] CLAMPING excessive count %u -> 100 for r26=0x%08X\n", count, r26);
+                mem_write32(ctx, r26 + 300, 100);
+            }
+            return 0; // Run original code
+        }
+
+        // Anime setup inner track binding loop (0x80200D5C, 0x80200D7C, 0x80200E68)
+        // Failure Point 1: At 0x80200D7C, GameLoadTask enters an inner loop iterating tracks up to 316(r29).
+        // If 316(r29) is excessive / corrupt (>256), the linear dictionary search (fn_801F3E20) burns 8.6ms
+        // every frame endlessly, preventing SceneTask from launching Chapter 1.
+        case 0x80200D5C:
+        case 0x80200D7C:
+        case 0x80200E68: {
+            u32 r29 = ctx->gpr[29];
+            if (r29 >= 0x80000000 && r29 < 0x94000000) {
+                u32 count = mem_read32(ctx, r29 + 316);
+                u32 cur_idx = ctx->gpr[25];
+                if (count > 256) {
+                    static u32 s_clamp_d7c = 0;
+                    if (s_clamp_d7c++ < 20) {
+                        printf("[TLS 80200D7C] Clamping excessive track count %u (idx=%u) -> %u at r29=0x%08X (lr=0x%08X)\n",
+                               count, cur_idx, cur_idx + 8, r29, ctx->lr);
+                        fflush(stdout);
+                    }
+                    mem_write32(ctx, r29 + 316, cur_idx + 8);
+                }
+            }
+            return 0; // Run recompiled code with sanitized track count
+        }
+
+        // CreateGameTask (0x80365708)
+        case 0x80365708: {
+            printf("[TLS CreateGameTask] Called! factory=0x%08X mgr=0x%08X (lr=0x%08X)\n",
+                   ctx->gpr[3], ctx->gpr[4], ctx->lr);
+            fflush(stdout);
+            return 0; // Run original code
+        }
+
+        // GameTask::IsReady (0x80366454)
+        case 0x80366454: {
+            static int s_game_ready_calls = 0;
+            s_game_ready_calls++;
+            u32 task = ctx->gpr[3];
+            printf("[TLS GameTask] IsReady #%d task=0x%08X (lr=0x%08X)\n", s_game_ready_calls, task, ctx->lr);
+            fflush(stdout);
+            return 0; // Run original code
+        }
+
+        // OSLockMutex (0x805F3130)
+        // OSTryLockMutex (0x805F3350)
+        case 0x805F3130:
+        case 0x805F3350: {
+            u32 mutex = ctx->gpr[3];
+            if (mutex) {
+                u32 cur_thread = mem_read32(ctx, 0x800000E4);
+                u32 owner = mem_read32(ctx, mutex + 8);
+                u32 count = mem_read32(ctx, mutex + 12);
+                if (count == 0 && owner != 0) {
+                    printf("[TLS OSMutex] Resetting stale owner 0x%08X on unlocked mutex 0x%08X (count=0, lr=0x%08X)\n",
+                           owner, mutex, ctx->lr);
+                    fflush(stdout);
+                    mem_write32(ctx, mutex + 8, 0);
+                } else if (owner != 0 && owner != cur_thread) {
+                    if (owner < 0x807C0000 || owner >= 0x82000000) {
+                        printf("[TLS OSMutex] Resetting invalid owner 0x%08X on mutex 0x%08X (count=%u, lr=0x%08X)\n",
+                               owner, mutex, count, ctx->lr);
+                        fflush(stdout);
+                        mem_write32(ctx, mutex + 8, 0);
+                        mem_write32(ctx, mutex + 12, 0);
+                    } else {
+                        printf("[TLS OSMutex] CONTENTION on mutex 0x%08X! owner=0x%08X (cur=0x%08X, count=%u, lr=0x%08X)\n",
+                               mutex, owner, cur_thread, count, ctx->lr);
+                        fflush(stdout);
+                    }
+                }
+            }
+            return 0; // Run original code
+        }
+
+        // ViewTask::Init (0x800F26D4)
+        case 0x800F26D4: {
+            u32 obj = ctx->gpr[3];
+            static int s_vt_calls = 0;
+            if (++s_vt_calls <= 10 || s_vt_calls % 60 == 0) {
+                printf("[TLS ViewTask] Init #%d obj=0x%08X (lr=0x%08X)\n", s_vt_calls, obj, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // ViewTask::CheckResources (0x800F3490)
+        case 0x800F3490: {
+            static int s_vtr_calls = 0;
+            if (++s_vtr_calls <= 10 || s_vtr_calls % 60 == 0) {
+                u32 obj = ctx->gpr[3];
+                printf("[TLS ViewTask] CheckResources (800F3490) #%d obj=0x%08X (lr=0x%08X)\n",
+                       s_vtr_calls, obj, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // ViewTask::CheckPending (0x800F3B4C)
+        case 0x800F3B4C: {
+            static int s_vtp_calls = 0;
+            if (++s_vtp_calls <= 10 || s_vtp_calls % 60 == 0) {
+                u32 obj = ctx->gpr[3];
+                printf("[TLS ViewTask] CheckPending (800F3B4C) #%d obj=0x%08X (lr=0x%08X)\n",
+                       s_vtp_calls, obj, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // GameTask::Init (0x80366E54)
+        case 0x80366E54: {
+            u32 task = ctx->gpr[3];
+            u32 state = task ? mem_read32(ctx, task + 0x10DC) : 0;
+            static int s_gt_init_calls = 0;
+            static u32 s_last_gt_state = 0xFFFFFFFF;
+            if (++s_gt_init_calls <= 20 || s_gt_init_calls % 60 == 0 || state != s_last_gt_state) {
+                printf("[TLS GameTask] Init #%d ENTER task=0x%08X state=%u (last=%u, lr=0x%08X)\n",
+                       s_gt_init_calls, task, state, s_last_gt_state, ctx->lr);
+                s_last_gt_state = state;
+                if (task) {
+                    u32 child = mem_read32(ctx, task + 0x18);
+                    int c_idx = 0;
+                    while (child && c_idx < 10) {
+                        u32 vt = mem_read32(ctx, child);
+                        u32 flags = mem_read32(ctx, child + 0x38);
+                        printf("     child[%d]=0x%08X vt=0x%08X flags=0x%08X (init=%d)\n",
+                               c_idx++, child, vt, flags, (flags & 2) != 0);
+                        child = mem_read32(ctx, child + 0x1C);
+                    }
+                    u32 f4f0 = mem_read32(ctx, 0x8087F4F0);
+                    u32 f470 = mem_read32(ctx, 0x8087F470);
+                    printf("     State 0 check: f4f0=0x%08X f470=0x%08X\n", f4f0, f470);
+                    if (state == 2) {
+                        u32 f8a0 = mem_read32(ctx, 0x8087F8A0);
+                        u32 t48 = f8a0 ? mem_read32(ctx, f8a0 + 0x48) : 0;
+                        if (t48) {
+                            u32 cur_f = mem_read32(ctx, t48 + 0x38);
+                            if ((cur_f & 2) == 0) {
+                                mem_write32(ctx, t48 + 0x38, cur_f | 2);
+                            }
+                        }
+                        u32 f38 = t48 ? mem_read32(ctx, t48 + 0x38) : 0;
+                        u32 f890 = mem_read32(ctx, 0x8087F890);
+                        printf("     State 2 check: f8a0=0x%08X t48=0x%08X f38=0x%08X(init=%d) f890=0x%08X\n",
+                               f8a0, t48, f38, (f38 & 2) != 0, f890);
+                        if (f890) {
+                            for (int i = 0; i < 6; i++) {
+                                u32 ct = mem_read32(ctx, f890 + 0x5C + i * 4);
+                                u32 cf = ct ? mem_read32(ctx, ct + 0x38) : 0;
+                                printf("       chara[%d]=0x%08X flags=0x%08X (init=%d)\n",
+                                       i, ct, cf, (cf & 2) != 0);
+                            }
+                        }
+                    }
+                }
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // fn_800D2494 (Task scheduler top-level Init)
+        // fn_800D2494 (Task scheduler top-level Init)
+        case 0x800D2494: {
+            return 0; // Run original code
+        }
+
+        // fn_800D2868 (Task scheduler traverse and dispatch)
+        case 0x800D2868: {
+            static int s_2868_calls = 0;
+            if (++s_2868_calls <= 10) {
+                u32 parent = ctx->gpr[3];
+                u32 first_child = parent ? mem_read32(ctx, parent + 0x18) : 0;
+                printf("[TLS 800D2868] #%d parent=0x%08X child=0x%08X (lr=0x%08X)\n",
+                       s_2868_calls, parent, first_child, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code naturally without any hijacking!
+        }
+
+        // fn_800D26A4 (Task scheduler recursive Init)
+        case 0x800D26A4: {
+            return 0; // Run original code
+        }
+
+        // fn_800D2AD8 (Task scheduler Draw traversal)
+        case 0x800D2AD8: {
+            return 0; // Run original code
+        }
+
+
+        // GameTask::Update (0x80368280)
+        case 0x80368280: {
+            static int s_game_updates = 0;
+            u32 task = ctx->gpr[3];
+            u32 state = task ? mem_read32(ctx, task + 0x54e4) : 0;
+            u32 prev = task ? mem_read32(ctx, task + 0x54e8) : 0;
+            u32 timer = task ? mem_read32(ctx, task + 0x54ec) : 0;
+            if (++s_game_updates <= 10 || s_game_updates % 60 == 0) {
+                printf("[TLS GameTask] Update #%d task=0x%08X state=%u prev=%u timer=%u (lr=0x%08X)\n",
+                       s_game_updates, task, state, prev, timer, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code naturally
+        }
+
+        // GameTask::Draw (0x8036B7F4)
+        case 0x8036B7F4: {
+            static int s_game_draws = 0;
+            u32 task = ctx->gpr[3];
+            u32 state = task ? mem_read32(ctx, task + 0x54e4) : 0;
+            u32 f8a0 = mem_read32(ctx, 0x8087F8A0);
+            u32 t48 = f8a0 ? mem_read32(ctx, f8a0 + 0x48) : 0;
+            if (++s_game_draws <= 10 || s_game_draws % 60 == 0) {
+                u32 r868 = task ? mem_read32(ctx, task + 0x868) : 0;
+                u32 r56d4 = task ? mem_read32(ctx, task + 0x56d4) : 0;
+                u32 r5590 = task ? mem_read32(ctx, task + 0x5590) : 0;
+                u32 r10d8 = task ? mem_read32(ctx, task + 0x10d8) : 0;
+                u32 r64 = r10d8 ? mem_read32(ctx, r10d8 + 0x64) : 0;
+                u32 r48_cam = r64 ? mem_read32(ctx, r64 + 0x48) : 0;
+                u32 r4c_cam = r64 ? mem_read32(ctx, r64 + 0x4C) : 0;
+                u32 t48_flags = t48 ? mem_read32(ctx, t48 + 0x38) : 0;
+                u32 z_55c = t48 ? mem_read32(ctx, t48 + 0x55c) : 0;
+                u32 z_560 = t48 ? mem_read32(ctx, t48 + 0x560) : 0;
+                u32 z_1450 = t48 ? mem_read32(ctx, t48 + 0x1450) : 0;
+                u32 z_12a4 = t48 ? mem_read32(ctx, t48 + 0x12a4) : 0;
+                f32 zx = t48 ? read_guest_f32(ctx, t48 + 0x528) : 0.0f;
+                f32 zy = t48 ? read_guest_f32(ctx, t48 + 0x52c) : 0.0f;
+                f32 zz = t48 ? read_guest_f32(ctx, t48 + 0x530) : 0.0f;
+                u32 zm = t48 ? mem_read32(ctx, t48 + 0xB0) : 0;
+                printf("[TLS GameTask] Draw #%d task=0x%08X state=%u 5590=0x%08X cam=0x%08X r64=0x%08X (48=%u, 4c=%u)\n"
+                       "     Zael=0x%08X flags=0x%08X 55c=%u 560=%u 1450=%u 12a4=0x%08X pos=(%.2f, %.2f, %.2f) zm=0x%08X\n",
+                       s_game_draws, task, state, r5590, r10d8, r64, r48_cam, r4c_cam,
+                       t48, t48_flags, z_55c, z_560, z_1450, z_12a4, zx, zy, zz, zm);
+                u32 efa8 = mem_read32(ctx, 0x8087EFA8);
+                if (efa8) {
+                    printf("     RenderMgr(efa8=0x%X): d4=[%.2f, %.2f, %.2f, %.2f] e4=[%.2f, %.2f, %.2f, %.2f] 374=[%.2f, %.2f, %.2f, %.2f]\n",
+                           efa8,
+                           read_guest_f32(ctx, efa8 + 0xd4), read_guest_f32(ctx, efa8 + 0xd8), read_guest_f32(ctx, efa8 + 0xdc), read_guest_f32(ctx, efa8 + 0xe0),
+                           read_guest_f32(ctx, efa8 + 0xe4), read_guest_f32(ctx, efa8 + 0xe8), read_guest_f32(ctx, efa8 + 0xec), read_guest_f32(ctx, efa8 + 0xf0),
+                           read_guest_f32(ctx, efa8 + 0x374), read_guest_f32(ctx, efa8 + 0x378), read_guest_f32(ctx, efa8 + 0x37c), read_guest_f32(ctx, efa8 + 0x380));
+                }
+                if (r64) {
+                    printf("     Cam r64=0x%X: +0=[%.2f, %.2f, %.2f, %.2f] +10=[%.2f, %.2f, %.2f, %.2f] +20=[%.2f, %.2f, %.2f, %.2f]\n",
+                           r64,
+                           read_guest_f32(ctx, r64 + 0x00), read_guest_f32(ctx, r64 + 0x04), read_guest_f32(ctx, r64 + 0x08), read_guest_f32(ctx, r64 + 0x0C),
+                           read_guest_f32(ctx, r64 + 0x10), read_guest_f32(ctx, r64 + 0x14), read_guest_f32(ctx, r64 + 0x18), read_guest_f32(ctx, r64 + 0x1C),
+                           read_guest_f32(ctx, r64 + 0x20), read_guest_f32(ctx, r64 + 0x24), read_guest_f32(ctx, r64 + 0x28), read_guest_f32(ctx, r64 + 0x2C));
+                }
+                fflush(stdout);
+            }
+
+            // GameTask::Draw
+            return 0; // Run original code
+        }
+
+        // 0x802368B0 (RenderQueue::Dispatch)
+        case 0x802368B0: {
+            static int s_rq_disp = 0;
+            if (++s_rq_disp <= 10 || s_rq_disp % 60 == 0) {
+                printf("[TLS RenderQueue] Dispatch #%d r3=0x%08X r4=0x%08X (lr=0x%08X)\n",
+                       s_rq_disp, ctx->gpr[3], ctx->gpr[4], ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // 0x80235BF8 (RenderQueue::Flush/Draw)
+        case 0x80235BF8: {
+            static int s_rq_flush = 0;
+            if (++s_rq_flush <= 10 || s_rq_flush % 60 == 0) {
+                printf("[TLS RenderQueue] Flush #%d r3=0x%08X (lr=0x%08X)\n",
+                       s_rq_flush, ctx->gpr[3], ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // 0x800BDBC8 (RenderQueue::DrawPasses - Main 3D pass renderer)
+        case 0x800BDBC8: {
+            static int s_rq_draw_passes = 0;
+            u32 rq = ctx->gpr[3];
+            u32 efa8 = mem_read32(ctx, 0x8087EFA8);
+            u32 f104 = efa8 ? mem_read32(ctx, efa8 + 0x104) : 0;
+            if (efa8 && f104 == 0) {
+                // Ensure pass 3 gate is open
+                mem_write32(ctx, efa8 + 0x104, 1);
+            }
+
+            if (rq) {
+                // Ensure pass renderers have their active flag set if they have pending items
+                for (int p = 0; p < 20; p++) {
+                    u32 cnt = mem_read32(ctx, rq + 0xA0 + p * 4);
+                    u32 pr = mem_read32(ctx, rq + p * 4);
+                    if (pr && cnt > 0) {
+                        u32 pr_f4 = mem_read32(ctx, pr + 4);
+                        if (pr_f4 == 0) {
+                            mem_write32(ctx, pr + 4, 1);
+                        }
+                    }
+                }
+            }
+
+            if (++s_rq_draw_passes <= 10 || s_rq_draw_passes % 60 == 0) {
+                printf("[TLS 800BDBC8] RenderQueue::DrawPasses #%d rq=0x%08X efa8=0x%08X(104=%u) lr=0x%08X\n",
+                       s_rq_draw_passes, rq, efa8, f104, ctx->lr);
+                if (rq) {
+                    printf("     Active passes: ");
+                    for (int p = 0; p < 20; p++) {
+                        u32 cnt = mem_read32(ctx, rq + 0xA0 + p * 4);
+                        u32 pr = mem_read32(ctx, rq + p * 4);
+                        u32 head = mem_read32(ctx, rq + 0x50 + p * 4);
+                        if (cnt > 0 || head != 0) {
+                            printf("P%d(cnt=%u,pr=0x%X,f4=%u,hd=0x%X) ",
+                                   p, cnt, pr, pr ? mem_read32(ctx, pr + 4) : 0, head);
+                        }
+                    }
+                    printf("\n");
+                }
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // 0x800BDB58 (RenderQueue::Push)
+        case 0x800BDB58: {
+            static int s_rq_push = 0;
+            if (++s_rq_push <= 20 || s_rq_push % 100 == 0) {
+                printf("[TLS 800BDB58] RenderQueue::Push #%d rq=0x%08X item=0x%08X pass=%u (lr=0x%08X)\n",
+                       s_rq_push, ctx->gpr[3], ctx->gpr[4], ctx->gpr[5], ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // 0x8008B140 (Model::Update)
+        case 0x8008B140: {
+            static int s_model_updates = 0;
+            u32 model = ctx->gpr[3];
+            u32 st = model ? (mem_read32(ctx, model + 0x20c) >> 24) : 0;
+            if (++s_model_updates <= 10 || s_model_updates % 200 == 0) {
+                printf("[TLS 8008B140] Model::Update #%d model=0x%08X st=%u (20c=0x%08X, lr=0x%08X)\n",
+                       s_model_updates, model, st, model ? mem_read32(ctx, model + 0x20c) : 0, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // 0x800804D0 (Model::FindNodeIndexByType)
+        case 0x800804D0: {
+            u32 node_tbl = ctx->gpr[3];
+            u32 type = ctx->gpr[4];
+            if (!resolve_guest_pointer(ctx, node_tbl)) {
+                ctx->gpr[3] = 0xFFFFFFFFu; // -1 (not found)
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            u8 count = mem_read8(ctx, node_tbl + 0x4A);
+            u32 arr = mem_read32(ctx, node_tbl + 0x0C);
+            if (!resolve_guest_pointer(ctx, arr) || count > 64) {
+                ctx->gpr[3] = 0xFFFFFFFFu; // -1 (not found)
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            for (u32 i = 0; i < count; i++) {
+                s8 t = (s8)mem_read8(ctx, arr + i * 0x14 + 0x10);
+                if (t == (s8)type) {
+                    ctx->gpr[3] = i;
+                    ctx->pc = ctx->lr;
+                    return 1;
+                }
+            }
+            ctx->gpr[3] = 0xFFFFFFFFu;
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // 0x8008BD10 (Model::InitSubmeshes)
+        case 0x8008BD10: {
+            u32 model = ctx->gpr[3];
+            u32 f16c = model ? mem_read32(ctx, model + 0x16c) : 0;
+            static int s_initsub_cnt = 0;
+            if (++s_initsub_cnt <= 15) {
+                printf("[TLS 8008BD10] Model::InitSubmeshes #%d model=0x%08X f16c=0x%08X (lr=0x%08X)\n",
+                       s_initsub_cnt, model, f16c, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code (chunk 33 handles NULL r4 safely at label_8008BD2C)
+        }
+
+        // 0x8008C444 (Model::InitSubmeshes loop condition safeguard)
+        case 0x8008C444: {
+            return 0; // Run original code
+        }
+
+        // 0x8008CD60 (Model::Render)
+        case 0x8008CD60: {
+            static int s_model_render = 0;
+            u32 model = ctx->gpr[3];
+            u32 f164 = model ? mem_read32(ctx, model + 0x164) : 0;
+            u32 f168 = model ? mem_read32(ctx, model + 0x168) : 0;
+            u32 f16c = model ? mem_read32(ctx, model + 0x16c) : 0;
+            u32 s5c = f168 ? mem_read32(ctx, f168 + 0x5C) : 0;
+            u32 buf58 = model ? mem_read32(ctx, model + 0x58) : 0;
+            u32 st = model ? (mem_read32(ctx, model + 0x20c) >> 24) : 0;
+
+            u32 sub_cnt = model ? mem_read32(ctx, model + 260) : 0;
+
+            if (++s_model_render <= 20 || s_model_render % 100 == 0) {
+                sub_cnt = mem_read32(ctx, model + 260);
+                printf("[TLS 8008CD60] Model::Render #%d model=0x%08X st=%u 20c=0x%X sub=%u 164=0x%X 168=0x%X 16c=0x%X s5c=0x%X (lr=0x%08X)\n",
+                       s_model_render, model, (mem_read32(ctx, model + 0x20c) >> 24), mem_read32(ctx, model + 0x20c), sub_cnt, f164, f168, mem_read32(ctx, model + 0x16c), s5c, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // 0x800709F4 (ChunkAABBOverlapCheck)
+        case 0x800709F4: {
+            static int s_709f4_calls = 0;
+            if (++s_709f4_calls <= 10 || s_709f4_calls % 100 == 0) {
+                printf("[TLS 800709F4] ChunkAABBOverlapCheck #%d r3=0x%08X r4=0x%08X (lr=0x%08X)\n",
+                       s_709f4_calls, ctx->gpr[3], ctx->gpr[4], ctx->lr);
+                fflush(stdout);
+            }
+            ctx->gpr[3] = 1; // Always visible (hardware rasterizer performs true depth and clipping)
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // 0x8004FF58 (FrustumSphereCull)
+        case 0x8004FF58: {
+            static int s_cull_calls = 0;
+            if (++s_cull_calls <= 10 || s_cull_calls % 1000 == 0) {
+                u32 frustum = ctx->gpr[3];
+                u32 sphere = ctx->gpr[4];
+                f32 sx = read_guest_f32(ctx, sphere);
+                f32 sy = read_guest_f32(ctx, sphere + 4);
+                f32 sz = read_guest_f32(ctx, sphere + 8);
+                f32 sr = read_guest_f32(ctx, sphere + 12);
+                printf("[TLS 8004FF58] FrustumCull #%d frustum=0x%08X sphere=(%.2f, %.2f, %.2f, r=%.2f)\n",
+                       s_cull_calls, frustum, sx, sy, sz, sr);
+                fflush(stdout);
+            }
+            ctx->gpr[3] = 1; // Always visible (hardware D3D11 rasterizer performs true clip & depth culling)
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // 0x8008D6C0 (Model::DrawPass2Callback)
+        case 0x8008D6C0: {
+            static int s_d6c0_calls = 0;
+            u32 model = ctx->gpr[3];
+            u32 cur20c = model ? mem_read32(ctx, model + 0x20c) : 0;
+            u32 st = cur20c >> 24;
+            u32 buf58 = model ? mem_read32(ctx, model + 0x58) : 0;
+
+            if (++s_d6c0_calls <= 20 || s_d6c0_calls % 100 == 0) {
+                u32 sub_cnt = model ? mem_read32(ctx, model + 260) : 0;
+                printf("[TLS 8008D6C0] Model::DrawPass2 #%d model=0x%08X st=%u 20c=0x%08X sub_cnt=%u (lr=0x%08X)\n",
+                       s_d6c0_calls, model, st, model ? mem_read32(ctx, model + 0x20c) : 0, sub_cnt, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // 0x8008D78C (Model::DrawMeshDirect)
+        case 0x8008D78C: {
+            static int s_d78c_calls = 0;
+            if (++s_d78c_calls <= 20 || s_d78c_calls % 100 == 0) {
+                printf("[TLS 8008D78C] Model::DrawMeshDirect #%d model=0x%08X rq=0x%08X (lr=0x%08X)\n",
+                       s_d78c_calls, ctx->gpr[3], ctx->gpr[4], ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // 0x80091684 (Model::SetupSkinningAndDrawSubmeshes)
+        case 0x80091684: {
+            static int s_91684_calls = 0;
+            u32 mdl = ctx->gpr[3];
+            u32 buf58 = mdl ? mem_read32(ctx, mdl + 0x58) : 0;
+            if (buf58 < 0x80800000) {
+                // No skinning matrix buffer allocated for this model! Skip to prevent static data corruption.
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            if (++s_91684_calls <= 20 || s_91684_calls % 100 == 0) {
+                printf("[TLS 80091684] SetupSkinning #%d model=0x%08X buf58=0x%08X (lr=0x%08X)\n",
+                       s_91684_calls, mdl, buf58, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // 0x8009A0F8 (TransformSkinningMatricesToBuffer)
+        case 0x8009A0F8: {
+            u32 dst = ctx->gpr[3];
+            u32 lc = ctx->gpr[4];
+            u32 cnt = ctx->gpr[6];
+            if (dst < 0x80800000) {
+                printf("[TLS 8009A0F8] BLOCKED CORRUPTING WRITE: dst=0x%08X lc=0x%08X cnt=%u (lr=0x%08X)\n",
+                       dst, lc, cnt, ctx->lr);
+                fflush(stdout);
+                ctx->pc = ctx->lr;
+                return 1; // Safely skip writing into code/static data
+            }
+            return 0; // Run original code
+        }
+
+        // 0x8009A2C0 (TransformSkinningMatricesToBufferPass2)
+        case 0x8009A2C0: {
+            u32 dst_ptr_addr = ctx->gpr[3];
+            u32 dst = dst_ptr_addr ? mem_read32(ctx, dst_ptr_addr) : 0;
+            u32 lc = ctx->gpr[4];
+            u32 cnt = ctx->gpr[6];
+            if (dst < 0x80800000) {
+                printf("[TLS 8009A2C0] BLOCKED CORRUPTING WRITE: ptr=0x%08X dst=0x%08X lc=0x%08X cnt=%u (lr=0x%08X)\n",
+                       dst_ptr_addr, dst, lc, cnt, ctx->lr);
+                fflush(stdout);
+                ctx->pc = ctx->lr;
+                return 1; // Safely skip writing into code/static data
+            }
+            return 0; // Run original code
+        }
+
+        // 0x805ED460 (LC DMA: Locked Cache -> RAM)
+        case 0x805ED460: {
+            u32 dst = ctx->gpr[3];
+            u32 src = ctx->gpr[4];
+            u32 len = ctx->gpr[5];
+            void* p_dst = resolve_guest_pointer(ctx, dst);
+            void* p_src = resolve_guest_pointer(ctx, src);
+            if (p_dst && p_src && len > 0) {
+                memcpy(p_dst, p_src, len);
+            }
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // 0x805ED500 (LC DMA: RAM -> Locked Cache)
+        case 0x805ED500: {
+            u32 dst = ctx->gpr[3];
+            u32 src = ctx->gpr[4];
+            u32 len = ctx->gpr[5];
+            void* p_dst = resolve_guest_pointer(ctx, dst);
+            void* p_src = resolve_guest_pointer(ctx, src);
+            if (p_dst && p_src && len > 0) {
+                memcpy(p_dst, p_src, len);
+            }
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // 0x805ED400 (LC DMA block transfer: LC -> RAM)
+        case 0x805ED400: {
+            u32 dst = ctx->gpr[3];
+            u32 src = ctx->gpr[4];
+            u32 lines = ctx->gpr[5];
+            u32 len = (lines == 0 ? 128 : lines) * 32;
+            void* p_dst = resolve_guest_pointer(ctx, dst);
+            void* p_src = resolve_guest_pointer(ctx, src);
+            if (p_dst && p_src && len > 0) {
+                memcpy(p_dst, p_src, len);
+            }
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // 0x805ED430 (LC DMA block transfer: RAM -> LC)
+        case 0x805ED430: {
+            u32 dst = ctx->gpr[3];
+            u32 src = ctx->gpr[4];
+            u32 lines = ctx->gpr[5];
+            u32 len = (lines == 0 ? 128 : lines) * 32;
+            void* p_dst = resolve_guest_pointer(ctx, dst);
+            void* p_src = resolve_guest_pointer(ctx, src);
+            if (p_dst && p_src && len > 0) {
+                memcpy(p_dst, p_src, len);
+            }
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // 0x805ED5A0 (LC DMA Wait / Poll HID2)
+        case 0x805ED5A0: {
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // 0x804732DC (SceneChunk Update/Instantiate)
+        case 0x804732DC: {
+            static int s_chunk_calls = 0;
+            u32 chunk = ctx->gpr[3];
+            u8 st = chunk ? mem_read8(ctx, chunk + 4) : 0;
+            u32 a0 = chunk ? mem_read32(ctx, chunk + 0xA0) : 0;
+            u32 c4c = chunk ? mem_read32(ctx, chunk + 0x4C) : 0;
+            u32 cnt64 = chunk ? mem_read32(ctx, chunk + 0x64) : 0;
+            u32 arr90 = chunk ? mem_read32(ctx, chunk + 0x90) : 0;
+            if (++s_chunk_calls <= 20 || s_chunk_calls % 60 == 0) {
+                printf("[TLS 804732DC] SceneChunk #%d chunk=0x%08X st=%u a0=0x%X 4c=0x%X cnt=%u arr=0x%X (lr=0x%08X)\n",
+                       s_chunk_calls, chunk, st, a0, c4c, cnt64, arr90, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // 0x80363C10 (GameTask Model Render Entry)
+        case 0x80363C10: {
+            static int s_gt_model_render = 0;
+            if (++s_gt_model_render <= 20 || s_gt_model_render % 100 == 0) {
+                printf("[TLS 80363C10] GameTask::ModelRender #%d obj=0x%08X (lr=0x%08X)\n",
+                       s_gt_model_render, ctx->gpr[3], ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // 0x8009DE60 (DrawMeshPacket)
+        case 0x8009DE60: {
+            static int s_draw_pkt = 0;
+            if (++s_draw_pkt <= 20 || s_draw_pkt % 100 == 0) {
+                printf("[TLS 8009DE60] DrawMeshPacket #%d pkt=0x%08X (lr=0x%08X)\n",
+                       s_draw_pkt, ctx->gpr[3], ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // 0x80618030 (GXCallDisplayList)
+        case 0x80618030: {
+            static int s_gx_cdl = 0;
+            static int s_gx_cdl_large = 0;
+            u32 list = ctx->gpr[3];
+            u32 size = ctx->gpr[4];
+            if (size > 64) {
+                if (++s_gx_cdl_large <= 30 || s_gx_cdl_large % 50 == 0) {
+                    const u8* ptr = (const u8*)resolve_guest_pointer(ctx, list);
+                    printf("[TLS GXCallDisplayList] LARGE DL #%d list=0x%08X size=%u (lr=0x%08X)",
+                           s_gx_cdl_large, list, size, ctx->lr);
+                    if (ptr) {
+                        printf(" bytes: %02X %02X %02X %02X %02X %02X %02X %02X\n",
+                               ptr[0], ptr[1], ptr[2], ptr[3], ptr[4], ptr[5], ptr[6], ptr[7]);
+                    } else {
+                        printf("\n");
+                    }
+                    fflush(stdout);
+                }
+            } else if (++s_gx_cdl <= 10 || s_gx_cdl % 200 == 0) {
+                printf("[TLS GXCallDisplayList] #%d list=0x%08X size=%u (lr=0x%08X)\n",
+                       s_gx_cdl, list, size, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // 0x8046E058 (SceneTask::Draw)
+        case 0x8046E058: {
+            static int s_scene_draws = 0;
+            u32 scene = ctx->gpr[3];
+            u32 r3ee0 = scene ? mem_read32(ctx, scene + 0x3EE0) : 0;
+            u32 r3ee0_flags = r3ee0 ? mem_read32(ctx, r3ee0 + 0x38) : 0;
+            u32 count48 = scene ? mem_read32(ctx, scene + 0x48) : 0;
+            if (++s_scene_draws <= 5 || s_scene_draws % 60 == 0) {
+                printf("[TLS SceneTask] Draw #%d scene=0x%08X 3ee0=0x%08X (flags=0x%08X) count48=%u (lr=0x%08X)\n",
+                       s_scene_draws, scene, r3ee0, r3ee0_flags, count48, ctx->lr);
+                if (s_scene_draws == 5 && scene && count48 > 0) {
+                    for (u32 i = 0; i < 20 && i < count48; ++i) {
+                        u32 elem = mem_read32(ctx, scene + 0x4C + i * 4);
+                        u32 vtbl = elem ? mem_read32(ctx, elem) : 0;
+                        u32 m_ptr = elem ? mem_read32(ctx, elem + 4) : 0;
+                        u32 e4c = elem ? mem_read32(ctx, elem + 0x4C) : 0;
+                        u32 e5c = elem ? mem_read32(ctx, elem + 0x5C) : 0;
+                        const char* name = elem ? (const char*)resolve_guest_pointer(ctx, elem + 6) : "";
+                        printf("    elem[%u]=0x%08X name='%s' vtbl=0x%08X 4c=%u 5c=0x%08X\n",
+                               i, elem, name ? name : "", vtbl, e4c, e5c);
+                    }
+                }
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // 0x8036CC90 (GameTask::DrawScene)
+        case 0x8036CC90: {
+            static int s_cc90_calls = 0;
+            u32 task = ctx->gpr[3];
+            u32 r868 = task ? mem_read32(ctx, task + 0x868) : 0;
+            u32 r56d4 = task ? mem_read32(ctx, task + 0x56d4) : 0;
+            u32 f8a0 = mem_read32(ctx, 0x8087F8A0);
+            u32 t48 = f8a0 ? mem_read32(ctx, f8a0 + 0x48) : 0;
+            u32 t48_flags = t48 ? mem_read32(ctx, t48 + 0x38) : 0;
+            if (++s_cc90_calls <= 10 || s_cc90_calls % 60 == 0) {
+                printf("[TLS 8036CC90] DrawScene #%d task=0x%08X 868=%u 56d4=0x%08X t48=0x%08X flags=0x%08X (lr=0x%08X)\n",
+                       s_cc90_calls, task, r868, r56d4, t48, t48_flags, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // 0x800E4278 (Scene/Model Render pass from GameTask)
+        case 0x800E4278: {
+            static int s_e4278_calls = 0;
+            if (++s_e4278_calls <= 10 || s_e4278_calls % 60 == 0) {
+                printf("[TLS 800E4278] Render call #%d r3=0x%08X r4=0x%08X (lr=0x%08X)\n",
+                       s_e4278_calls, ctx->gpr[3], ctx->gpr[4], ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // SceneManager::Init (0x80487184)
+        case 0x80487184: {
+            static int s_sm_init_calls = 0;
+            u32 sm = ctx->gpr[3];
+            u32 t1 = sm ? mem_read32(ctx, sm + 0x1A7C) : 0;
+            u32 t2 = sm ? mem_read32(ctx, sm + 0x1A80) : 0;
+            u32 t3 = sm ? mem_read32(ctx, sm + 0x1AA8) : 0;
+            u32 t4 = sm ? mem_read32(ctx, sm + 0x1A9C) : 0;
+            u32 f1 = t1 ? mem_read32(ctx, t1 + 0x38) : 0;
+            u32 f2 = t2 ? mem_read32(ctx, t2 + 0x38) : 0;
+            u32 f3 = t3 ? mem_read32(ctx, t3 + 0x38) : 0;
+            u32 f4 = t4 ? mem_read32(ctx, t4 + 0x38) : 0;
+            if (++s_sm_init_calls <= 20 || s_sm_init_calls % 60 == 0) {
+                printf("[TLS SceneManager::Init] #%d sm=0x%08X t1=0x%08X(f=0x%X) t2=0x%08X(f=0x%X) t3=0x%08X(f=0x%X) t4=0x%08X(f=0x%X)\n",
+                       s_sm_init_calls, sm, t1, f1, t2, f2, t3, f3, t4, f4);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+
+
+        // SequenceManager::UnregisterTask (0x800C37E4)
+        case 0x800C37E4: {
+            u32 mgr = ctx->gpr[3];
+            u32 task = ctx->gpr[4];
+            u32 active_task = mgr ? mem_read32(ctx, mgr + 72) : 0;
+            printf("[TLS SequenceManager] UnregisterTask mgr=0x%08X task=0x%08X (active=0x%08X, lr=0x%08X)\n",
+                   mgr, task, active_task, ctx->lr);
+            fflush(stdout);
+            return 0; // Run original code
+        }
+
+        // CreateNewTitleTask (0x80531ED4)
+        case 0x80531ED4: {
+            printf("[TLS CreateNewTitleTask] Called! factory=0x%08X mgr=0x%08X (lr=0x%08X)\n",
+                   ctx->gpr[3], ctx->gpr[4], ctx->lr);
+            fflush(stdout);
+            return 0; // Run original code
+        }
+
+        // OSFatal (0x805F03C0)
+        case 0x805F03C0: {
+            u32 fg = ctx->gpr[3];
+            u32 bg = ctx->gpr[4];
+            u32 msg_ptr = ctx->gpr[5];
+            const char* msg = msg_ptr ? (const char*)resolve_guest_pointer(ctx, msg_ptr) : "<null>";
+            printf("\n=============================================================\n");
+            printf("[TLS OSFatal] FATAL ERROR TRIGGERED!\n");
+            printf("  Message: %s\n", msg ? msg : "<null>");
+            printf("  Caller LR: 0x%08X\n", ctx->lr);
+            printf("=============================================================\n\n");
+            fflush(stdout);
+            ctx->pc = ctx->lr;
+            return 1; // Do not hang in infinite loop
+        }
+
+        // SequenceManager::SetNextSequence (0x80572B70)
+        case 0x80572B70: {
+            const char* name = (const char*)resolve_guest_pointer(ctx, ctx->gpr[4]);
+            printf("[TLS Sequence] SetNextSequence('%s') mgr=0x%08X (lr=0x%08X)\n",
+                   name ? name : "<null>", ctx->gpr[3], ctx->lr);
+            fflush(stdout);
+            return 0; // Run original code
+        }
+
+        // BootTask::Update (0x8010F720)
+        case 0x8010F720: {
+            static int s_boot_updates = 0;
+            if (++s_boot_updates <= 10 || s_boot_updates % 60 == 0) {
+                u32 timer_raw = mem_read32(ctx, ctx->gpr[3] + 0x94);
+                float timer_val;
+                memcpy(&timer_val, &timer_raw, 4);
+                printf("[TLS BootTask] Update #%d task=0x%08X timer=%.2f (+4=0x%08X)\n",
+                       s_boot_updates, ctx->gpr[3], timer_val, mem_read32(ctx, ctx->gpr[3] + 4));
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // StrapTask::Init (0x805A6370)
+        case 0x805A6370: {
+            printf("[TLS StrapTask] Init! task=0x%08X (lr=0x%08X)\n", ctx->gpr[3], ctx->lr);
+            fflush(stdout);
+            return 0;
+        }
+
+        // StrapTask::IsReady (0x805A6404)
+        case 0x805A6404: {
+            static int s_strap_ready_calls = 0;
+            if (++s_strap_ready_calls <= 5 || s_strap_ready_calls % 30 == 0) {
+                printf("[TLS StrapTask] IsReady #%d task=0x%08X (lr=0x%08X)\n",
+                       s_strap_ready_calls, ctx->gpr[3], ctx->lr);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
+        // StrapTask::Update (0x805A646C)
+        case 0x805A646C: {
+            u32 task = ctx->gpr[3];
+            static int s_strap_updates = 0;
+            s_strap_updates++;
+            if (task) {
+                u32 st = mem_read32(ctx, task + 0x48);
+                u32 timer = mem_read32(ctx, task + 0x50);
+                if (st == 0 && timer >= 60) {
+                    // Smoothly transition from strap screen into title screen after 1 second
+                    mem_write32(ctx, task + 0x48, 2);
+                    mem_write32(ctx, task + 0x4C, 0);
+                    printf("[TLS StrapTask] Auto-advancing past strap screen into Title (timer=%u)\n", timer);
+                    fflush(stdout);
+                }
+            }
+            if (s_strap_updates <= 5 || s_strap_updates % 60 == 0) {
+                u32 st = task ? mem_read32(ctx, task + 0x48) : 0;
+                u32 timer = task ? mem_read32(ctx, task + 0x50) : 0;
+                printf("[TLS StrapTask] Update #%d task=0x%08X st=%u timer=%u/600\n",
+                       s_strap_updates, task, st, timer);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // NewTitleTask constructor (0x80531F48)
+        case 0x80531F48: {
+            printf("[TLS NewTitleTask] Constructor task=0x%08X arg4=0x%08X arg5=0x%08X (lr=0x%08X)\n",
+                   ctx->gpr[3], ctx->gpr[4], ctx->gpr[5], ctx->lr);
+            fflush(stdout);
+            return 0;
+        }
+
+        // NewTitleTask::Init (0x805327B4)
+        case 0x805327B4: {
+            printf("[TLS NewTitleTask] Init! task=0x%08X (lr=0x%08X)\n", ctx->gpr[3], ctx->lr);
+            fflush(stdout);
+            return 0;
+        }
+
+        // NewTitleTask::IsReady (0x80532ABC)
+        case 0x80532ABC: {
+            static int s_title_ready_calls = 0;
+            if (++s_title_ready_calls <= 10 || s_title_ready_calls % 30 == 0) {
+                u32 task = ctx->gpr[3];
+                u32 state = task ? mem_read32(ctx, task + 680) : 0;
+                u32 req438 = task ? mem_read32(ctx, task + 0x438) : 0;
+                u32 req43c = task ? mem_read32(ctx, task + 0x43C) : 0;
+                u8 st43c = req43c ? mem_read8(ctx, req43c + 4) : 0;
+                u32 req290_4 = task ? mem_read32(ctx, task + 0x294) : 0;
+                u32 req290_8 = task ? mem_read32(ctx, task + 0x298) : 0;
+                u8 st290 = req290_8 ? mem_read8(ctx, req290_8 + 4) : 0;
+                u32 req29c_4 = task ? mem_read32(ctx, task + 0x2A0) : 0;
+                u32 req29c_8 = task ? mem_read32(ctx, task + 0x2A4) : 0;
+                u8 st29c = req29c_8 ? mem_read8(ctx, req29c_8 + 4) : 0;
+                u32 c310c_mgr = mem_read32(ctx, 0x8087EE90);
+                u32 t_cnt = c310c_mgr ? mem_read32(ctx, c310c_mgr + 0x394) : 0;
+                printf("[TLS NewTitleTask] IsReady #%d task=0x%08X state=%u | 438=[%08X,%08X st=%u] 290=[%08X,%08X st=%u] 29c=[%08X,%08X st=%u] c310c_mgr=%08X cnt=%u\n",
+                       s_title_ready_calls, task, state, req438, req43c, st43c,
+                       req290_4, req290_8, st290, req29c_4, req29c_8, st29c, c310c_mgr, t_cnt);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
+        // fn_8009076C (Model::UpdateNodeMatrices)
+        case 0x8009076C: {
+            u32 model = ctx->gpr[3];
+            if (!resolve_guest_pointer(ctx, model)) {
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            u32 hint = mem_read32(ctx, model + 0x50);
+            u32 sub_m = model + hint * 0x18;
+            u32 container = resolve_guest_pointer(ctx, sub_m) ? mem_read32(ctx, sub_m + 0x16C) : 0;
+            if (!resolve_guest_pointer(ctx, container)) {
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            return 0; // Run original code
+        }
+
+        // fn_80091CFC (Model::FindBoneIndex)
+        case 0x80091CFC: {
+            u32 model = ctx->gpr[3];
+            u32 name_ptr = ctx->gpr[4];
+            const char* name = (const char*)resolve_guest_pointer(ctx, name_ptr);
+            u32 container = resolve_guest_pointer(ctx, model) ? mem_read32(ctx, model + 0x16C) : 0;
+            u32 count = resolve_guest_pointer(ctx, container) ? mem_read32(ctx, container + 0x44) : 0;
+            static int s_fbi_calls = 0;
+            if (++s_fbi_calls <= 20 || s_fbi_calls % 100 == 0 || count > 512) {
+                printf("[TLS Model] FindBoneIndex #%d model=0x%08X name='%s' container=0x%08X count=%u (lr=0x%08X)\n",
+                       s_fbi_calls, model, name ? name : "(null)", container, count, ctx->lr);
+                fflush(stdout);
+            }
+            if (!resolve_guest_pointer(ctx, container) || count > 512) {
+                ctx->gpr[3] = 0xFFFFFFFF; // bone not found (-1)
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            return 0; // Run original code
+        }
+
+        // fn_80092814 (Model::FindNodeIndexByName(model, name, index_hint))
+        case 0x80092814: {
+            u32 model = ctx->gpr[3];
+            u32 name_ptr = ctx->gpr[4];
+            u32 hint = ctx->gpr[5];
+            const char* name = (const char*)resolve_guest_pointer(ctx, name_ptr);
+            u32 sub_model = model + hint * 0x18;
+            u32 container = resolve_guest_pointer(ctx, sub_model) ? mem_read32(ctx, sub_model + 0x16C) : 0;
+            u32 count = resolve_guest_pointer(ctx, container) ? mem_read32(ctx, container + 0x44) : 0;
+            static int s_814_calls = 0;
+            if (++s_814_calls <= 20 || s_814_calls % 100 == 0 || count > 512) {
+                printf("[TLS Model] FindNodeIndexByName #%d model=0x%08X name='%s' hint=%u container=0x%08X count=%u (lr=0x%08X)\n",
+                       s_814_calls, model, name ? name : "(null)", hint, container, count, ctx->lr);
+                fflush(stdout);
+            }
+            if (!resolve_guest_pointer(ctx, container) || count > 512) {
+                ctx->gpr[3] = 0xFFFFFFFF; // node not found (-1)
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            return 0; // Run original code
+        }
+
+        // fn_800928B0 (Model::FindNodeIndexByHash(model, hash, index_hint))
+        case 0x800928B0: {
+            u32 model = ctx->gpr[3];
+            u32 hash = ctx->gpr[4];
+            u32 hint = ctx->gpr[5];
+            u32 sub_model = model + hint * 0x18;
+            u32 container = resolve_guest_pointer(ctx, sub_model) ? mem_read32(ctx, sub_model + 0x16C) : 0;
+            u32 count = resolve_guest_pointer(ctx, container) ? mem_read32(ctx, container + 0x44) : 0;
+            if (!resolve_guest_pointer(ctx, container) || count > 512) {
+                ctx->gpr[3] = 0xFFFFFFFF; // node not found (-1)
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            return 0; // Run original code
+        }
+
+        // fn_80093F58 (Model::AddNode)
+        case 0x80093F58: {
+            return 0; // Run original code naturally
+        }
+
+        // fn_8009A584 / fn_8009A5A8 (Model::CalculateWorldMatrices)
+        case 0x8009A584:
+        case 0x8009A5A8: {
+            u32 param_struct = ctx->gpr[3];
+            u32 container = resolve_guest_pointer(ctx, param_struct) ? mem_read32(ctx, param_struct) : 0;
+            u32 count = resolve_guest_pointer(ctx, container) ? mem_read32(ctx, container + 0x44) : 0;
+            if (!resolve_guest_pointer(ctx, container) || count == 0 || count > 512) {
+                // No nodes to calculate world matrices for; return safely
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            return 0; // Run original code
+        }
+
+        // fn_8013655C (CharaTask readiness check)
+        case 0x8013655C: {
+            u32 task = ctx->gpr[3];
+            static int s_655c_calls = 0;
+            u32 st_ac = resolve_guest_pointer(ctx, task) ? mem_read32(ctx, task + 0xAC) : 0;
+            if (++s_655c_calls <= 20 || s_655c_calls % 60 == 0) {
+                u32 lh1 = task + 0x84;
+                u32 lh2 = task + 0xA4;
+                u32 req1 = resolve_guest_pointer(ctx, task) ? mem_read32(ctx, lh1 + 4) : 0;
+                u32 req2 = resolve_guest_pointer(ctx, task) ? mem_read32(ctx, lh2 + 4) : 0;
+                u8 st1 = resolve_guest_pointer(ctx, req1) ? mem_read8(ctx, req1 + 4) : 0xFF;
+                u8 st2 = resolve_guest_pointer(ctx, req2) ? mem_read8(ctx, req2 + 4) : 0xFF;
+                printf("[TLS CharaTask] 8013655C check #%d task=0x%08X (ac=%u, req1=0x%08X st=%u, req2=0x%08X st=%u) (lr=0x%08X)\n",
+                       s_655c_calls, task, st_ac, req1, st1, req2, st2, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // fn_800E2DD4 (CharaTask::Init virtual method)
+        case 0x800E2DD4: {
+            u32 task = ctx->gpr[3];
+            u32 f8a0 = mem_read32(ctx, 0x8087F8A0);
+            u32 active_chara = f8a0 ? mem_read32(ctx, f8a0 + 0x48) : 0;
+            static int s_e2dd4_calls = 0;
+            if (++s_e2dd4_calls <= 20 || s_e2dd4_calls % 60 == 0 || task == active_chara) {
+                printf("[TLS CharaTask] 800E2DD4 Init #%d task=0x%08X active=0x%08X (lr=0x%08X)\n",
+                       s_e2dd4_calls, task, active_chara, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // fn_801EB078 (Spawn / Point of interest distributor)
+        case 0x801EB078: {
+            u32 obj = ctx->gpr[3];
+            if (!resolve_guest_pointer(ctx, obj)) {
+                static int s_bypassed_null_78 = 0;
+                if (++s_bypassed_null_78 <= 5) {
+                    printf("[TLS 801EB078] Bypassed NULL obj=0x%08X (lr=0x%08X)\n", obj, ctx->lr);
+                    fflush(stdout);
+                }
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            return 0; // Run original code
+        }
+
+        // fn_801EB188 (Subsystem element processor)
+        case 0x801EB188: {
+            u32 obj = ctx->gpr[3];
+            if (!resolve_guest_pointer(ctx, obj)) {
+                static int s_bypassed_null_188 = 0;
+                if (++s_bypassed_null_188 <= 5) {
+                    printf("[TLS 801EB188] Bypassed NULL obj=0x%08X (lr=0x%08X)\n", obj, ctx->lr);
+                    fflush(stdout);
+                }
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            return 0; // Run original code
+        }
+
+        // fn_803C0F48 (Scene camera / viewport setup)
+        case 0x803C0F48: {
+            u32 obj = ctx->gpr[3];
+            u32 cam_id = ctx->gpr[4];
+            u32 count = resolve_guest_pointer(ctx, obj) ? mem_read32(ctx, obj + 120) : 0;
+            u32 arr = resolve_guest_pointer(ctx, obj) ? mem_read32(ctx, obj + 124) : 0;
+            static int s_3c0f48_calls = 0;
+            if (++s_3c0f48_calls <= 20 || s_3c0f48_calls % 60 == 0) {
+                printf("[TLS 803C0F48] #%d obj=0x%08X cam_id=%u count=%u arr=0x%08X (lr=0x%08X)\n",
+                       s_3c0f48_calls, obj, cam_id, count, arr, ctx->lr);
+                fflush(stdout);
+            }
+            if (!resolve_guest_pointer(ctx, obj)) {
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            return 0; // Run original code
+        }
+
+        // fn_80367A40 (State 3 subsystem setup)
+        // fn_801F683C (child[0] of child[9] Init method)
+        case 0x801F683C: {
+            u32 task = ctx->gpr[3];
+            u32 r4 = task ? mem_read32(ctx, task + 72) : 0;
+            if (resolve_guest_pointer(ctx, r4)) {
+                u32 cur_flg = mem_read32(ctx, r4 + 56);
+                if ((cur_flg & 2) == 0) {
+                    // Mark background resource task ready (set bit 1)
+                    mem_write32(ctx, r4 + 56, cur_flg | 2);
+                }
+            }
+            u32 flg = r4 ? mem_read32(ctx, r4 + 56) : 0xFFFFFFFF;
+            static int s_1f683c_calls = 0;
+            if (++s_1f683c_calls <= 10 || s_1f683c_calls % 60 == 0) {
+                printf("[TLS 801F683C] #%d task=0x%08X r4=0x%08X (flg=0x%08X) -> completed\n", s_1f683c_calls, task, r4, flg);
+                fflush(stdout);
+            }
+            return 0; // Run original code which will now call 0x800D246C, set 0x4 on r4, and return 1!
+        }
+
+        // fn_803EC91C
+        case 0x803EC91C: {
+            u32 task = ctx->gpr[3];
+            u32 st68 = task ? mem_read32(ctx, task + 0x68) : 0;
+            static int s_c91c_calls = 0;
+            if (++s_c91c_calls <= 10 || s_c91c_calls % 30 == 0) {
+                printf("[TLS 803EC91C] #%d task=0x%08X st68=%u lr=0x%08X\n", s_c91c_calls, task, st68, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // fn_8044E1BC
+        case 0x8044E1BC: {
+            u32 arg = ctx->gpr[3];
+            static int s_e1bc_calls = 0;
+            if (++s_e1bc_calls <= 5 || s_e1bc_calls % 30 == 0) {
+                u32 mgr = mem_read32(ctx, 0x8087F4F8);
+                u32 cnt48 = mgr ? mem_read32(ctx, mgr + 0x48) : 0;
+                u32 arr50 = mgr ? mem_read32(ctx, mgr + 0x50) : 0;
+                printf("[TLS 8044E1BC] #%d arg=0x%08X mgr=0x%08X cnt48=%u (arr=0x%08X)\n", s_e1bc_calls, arg, mgr, cnt48, arr50);
+                if (arr50) {
+                    for (u32 g = 0; g < cnt48; g++) {
+                        u32 grp = arr50 + g * 0x84;
+                        u32 m_cnt = mem_read32(ctx, grp + 0x40);
+                        for (u32 m = 0; m < m_cnt; m++) {
+                            u32 mdl = mem_read32(ctx, grp + 0x44 + m * 4);
+                            if (mdl) {
+                                u32 f38 = mem_read32(ctx, mdl + 0x38);
+                                if ((f38 & 2) == 0) {
+                                    u32 name_p = mem_read32(ctx, mdl + 4);
+                                    const char* name = name_p ? (const char*)resolve_guest_pointer(ctx, name_p) : "";
+                                    u32 vt = mem_read32(ctx, mdl);
+                                    u32 rdy = vt ? mem_read32(ctx, vt + 12) : 0;
+                                    u32 p14 = mem_read32(ctx, mdl + 0x14);
+                                    u32 p18 = mem_read32(ctx, mdl + 0x18);
+                                    u32 p1c = mem_read32(ctx, mdl + 0x1C);
+                                    printf("     grp[%u] mdl[%u]=0x%08X ('%s') NOT READY: f38=0x%X vt=0x%X(rdy=0x%X) p14=0x%X p18=0x%X p1c=0x%X\n",
+                                           g, m, mdl, name ? name : "", f38, vt, rdy, p14, p18, p1c);
+                                }
+                            }
+                        }
+                    }
+                }
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // fn_804095F0 (GimmickTask::IsReady)
+        case 0x804095F0: {
+            u32 task = ctx->gpr[3];
+            u32 st68 = task ? mem_read32(ctx, task + 0x68) : 0;
+            u32 req60 = task ? mem_read32(ctx, task + 0x60) : 0;
+            u32 req64 = task ? mem_read32(ctx, task + 0x64) : 0;
+            u8 st64 = req64 ? mem_read8(ctx, req64 + 4) : 0;
+            u32 cnt19c = task ? mem_read32(ctx, task + 0x19C + 4) : 0;
+            u32 task_e4 = task ? mem_read32(ctx, task + 0xE4) : 0;
+            u32 flg_e4 = task_e4 ? mem_read32(ctx, task_e4 + 0x38) : 0;
+            static int s_4095f0_calls = 0;
+            if (++s_4095f0_calls <= 10 || s_4095f0_calls % 30 == 0) {
+                printf("[TLS 804095F0 GimmickTask] IsReady #%d task=0x%08X st68=%u 64_st=%u 19c_cnt=%u e4=0x%08X (f38=0x%X) lr=0x%08X\n",
+                       s_4095f0_calls, task, st68, st64, cnt19c, task_e4, flg_e4, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // fn_80219558 (Subsystem ID lookup)
+        case 0x80219558: {
+            static int s_219558_calls = 0;
+            s_219558_calls++;
+            if (ctx->lr == 0x80367D6C) {
+                u32 node = ctx->gpr[26];
+                u32 next = (node >= 0x80000000 && node < 0x82000000) ? mem_read32(ctx, node + 5292) : 0;
+                if (s_219558_calls == 5) {
+                    printf("[TLS 80219558] Memory around node 0x%08X + 5292:\n", node);
+                    for (int off = 5260; off <= 5320; off += 4) {
+                        u32 val = (node + off < 0x82000000) ? mem_read32(ctx, node + off) : 0;
+                        printf("  +%d (0x%X): 0x%08X\n", off, off, val);
+                    }
+                    fflush(stdout);
+                }
+                if (s_219558_calls <= 25 || s_219558_calls % 100 == 0) {
+                    printf("[TLS 80219558] #%d node=0x%08X id=%u next=0x%08X\n", s_219558_calls, node, ctx->gpr[3], next);
+                    fflush(stdout);
+                }
+            } else if (s_219558_calls <= 5) {
+                printf("[TLS 80219558] #%d id=%u (lr=0x%08X)\n", s_219558_calls, ctx->gpr[3], ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+
+        case 0x80470528: {
+            u32 ptr = ctx->gpr[3];
+            if (resolve_guest_pointer(ctx, ptr) && (ptr & 3) == 0) {
+                u32 obj = mem_read32(ctx, ptr);
+                if (resolve_guest_pointer(ctx, obj) && (obj & 3) == 0) {
+                    u32 ref = mem_read32(ctx, obj + 0x2C);
+                    if (ref > 0) {
+                        mem_write32(ctx, obj + 0x2C, ref - 1);
+                    }
+                }
+                mem_write32(ctx, ptr, 0);
+            }
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // fn_803B8D3C (Async loader / task progress check)
+        case 0x803B8D3C: {
+            static int s_8d3c_calls = 0;
+            u32 obj = ctx->gpr[3];
+            u8 v340 = obj ? mem_read8(ctx, obj + 340) : 0xFF;
+            u32 mgr = mem_read32(ctx, 0x8087EC48);
+            u32 m348 = mgr ? mem_read32(ctx, mgr + 348) : 0;
+            if (++s_8d3c_calls <= 10 || s_8d3c_calls % 60 == 0) {
+                printf("[TLS 803B8D3C] #%d obj=0x%08X (v340=%u) mgr=0x%08X (m348=%u) (lr=0x%08X)\n",
+                       s_8d3c_calls, obj, v340, mgr, m348, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // Task::Update for 0x80E93220 (0x800A2DE0)
+        case 0x800A2DE0: {
+            u32 obj = ctx->gpr[3];
+            u32 state = obj ? mem_read32(ctx, obj + 348) : 0;
+            static int s_2de0_calls = 0;
+            if (++s_2de0_calls <= 5 || s_2de0_calls % 60 == 0 || state != 0) {
+                printf("[TLS 800A2DE0] Update #%d obj=0x%08X state=+348=%u (lr=0x%08X)\n",
+                       s_2de0_calls, obj, state, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // fn_80620220 (NANDCheckAsync)
+        case 0x80620220:
+        case 0x80620250: {
+            u32 out_answer = ctx->gpr[6];
+            u32 cb = ctx->gpr[8];
+            u32 block = ctx->gpr[9];
+            if (out_answer && out_answer >= 0x80000000 && out_answer < 0x94000000) {
+                mem_write32(ctx, out_answer, 0); // 0 = NAND_CHECK_OK
+            }
+            if (cb) {
+                tls_ipc_enqueue_callback(cb, 0, block);
+            }
+            ctx->gpr[3] = 0; // NAND_RESULT_OK
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // fn_80620BD0 (NANDGetStatusAsync)
+        case 0x80620BD0: {
+            u32 status_ptr = ctx->gpr[4];
+            u32 cb = ctx->gpr[5];
+            u32 block = ctx->gpr[6];
+            if (status_ptr && status_ptr >= 0x80000000 && status_ptr < 0x94000000) {
+                mem_write32(ctx, status_ptr + 0x00, 1346432); // length = 1346432 bytes
+                mem_write32(ctx, status_ptr + 0x04, 0);
+            }
+            if (cb) {
+                tls_ipc_enqueue_callback(cb, 0, block);
+            }
+            ctx->gpr[3] = 0;
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // fn_800A4228 (Check pending count at mgr+348 / +0x15C)
+        case 0x800A4228: {
+            u32 mgr = ctx->gpr[3];
+            u32 out_addr = ctx->gpr[4];
+            if (out_addr) {
+                mem_write32(ctx, out_addr, 0); // *out = 0 (no error)
+            }
+            if (mgr) {
+                mem_write32(ctx, mgr + 0x15C, 0); // mgr->state = 0 (idle)
+            }
+            static int s_4228_calls = 0;
+            if (++s_4228_calls <= 5 || s_4228_calls % 60 == 0) {
+                printf("[TLS 800A4228] #%d mgr=0x%08X -> returning 0 (idle, lr=0x%08X)\n",
+                       s_4228_calls, mgr, ctx->lr);
+                fflush(stdout);
+            }
+            ctx->gpr[3] = 0; // return 0 (idle / ready)
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // fn_800A472C (Save data status check)
+        case 0x800A472C: {
+            u32 out_len = ctx->gpr[4];
+            u32 out_err = ctx->gpr[5];
+            if (out_len && out_len >= 0x80000000 && out_len < 0x94000000) {
+                mem_write32(ctx, out_len, 1348992); // 1348992 bytes (0x149580)
+            }
+            if (out_err && out_err >= 0x80000000 && out_err < 0x94000000) {
+                mem_write32(ctx, out_err, 0); // no error
+            }
+            static int s_472c_calls = 0;
+            if (++s_472c_calls <= 5 || s_472c_calls % 60 == 0) {
+                printf("[TLS SaveCheck] fn_800A472C called! (lr=0x%08X) -> returning 1 (SUCCESS, len=1348992)\n", ctx->lr);
+                fflush(stdout);
+            }
+            ctx->gpr[3] = 1; // 1 = SUCCESS in game logic (0 = Error/Recreate prompt)
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // fn_803B8270 (FinishAsync / set v340=0)
+        case 0x803B8270: {
+            u32 obj = ctx->gpr[3];
+            printf("[TLS 803B8270] FinishAsync! obj=0x%08X (lr=0x%08X)\n", obj, ctx->lr);
+            fflush(stdout);
+            return 0; // Run original code
+        }
+
+        // fn_80533BE0 (TitleTask::SetMode)
+        case 0x80533BE0: {
+            u32 old_mode = mem_read32(ctx, ctx->gpr[3] + 0x2AC);
+            u32 new_mode = ctx->gpr[4];
+            printf("[TLS TitleMode] SetMode: new_mode=%u (old=%u) lr=0x%08X\n",
+                   new_mode, old_mode, ctx->lr);
+            fflush(stdout);
+            return 0; // Run original code
+        }
+
+        // NewTitleTask::Update (0x80534074)
+        case 0x80534074: {
+            u32 task = ctx->gpr[3];
+            u32 mode = task ? mem_read32(ctx, task + 0x2AC) : 0;
+            static int s_upd_log = 0;
+            static int s_after_press = 0;
+            static u32 s_last_mode = 0xFFFFFFFFu;
+            bool pad_edge = (s_ctrl_state.core_trig | s_ctrl_state.cl_trig) != 0;
+            if (pad_edge) s_after_press = 12;
+            if (mode != s_last_mode) {
+                // The title advances 1->2->4->5->9 but never draws a menu layout, so the
+                // question is which guest functions run at the transition. Dump the recent
+                // dispatch ring right at the flip instead of at end of run.
+                printf("[TLS NewTitleTask] MODE TRANSITION %u -> %u (task=0x%08X)\n",
+                       s_last_mode, mode, task);
+                if (mode >= 2) {
+                    tls_dump_recent_calls();
+                }
+                fflush(stdout);
+                s_last_mode = mode;
+            }
+            if (++s_upd_log <= 10 || s_upd_log % 60 == 0 || pad_edge || s_after_press > 0) {
+                // The press-start state machine either observes the button edge and moves a
+                // state field, or it never sees it. Log the edge together with the candidate
+                // state words for a short window after each press so the difference shows.
+                printf("[TLS NewTitleTask] Update #%d task=0x%08X mode=%u trig=0x%04X/0x%04X "
+                       "f48=0x%08X f2a8=0x%08X f2ac=0x%08X f2b0=0x%08X%s\n",
+                       s_upd_log, task, mode, s_ctrl_state.core_trig, s_ctrl_state.cl_trig,
+                       task ? mem_read32(ctx, task + 0x48) : 0,
+                       task ? mem_read32(ctx, task + 0x2A8) : 0,
+                       mode,
+                       task ? mem_read32(ctx, task + 0x2B0) : 0,
+                       pad_edge ? "   <== PAD EDGE" : "");
+                fflush(stdout);
+                if (!pad_edge && s_after_press > 0) s_after_press--;
+            }
+            return 0; // Run original code naturally!
+        }
+
+        case 0x8005DD60: {
+            printf("[TLS fn_8005DD60] Called! lr=0x%08X eeb0_before=0x%08X\n", ctx->lr, mem_read32(ctx, 0x8087EEB0));
+            fflush(stdout);
+            return 0; // Run naturally
+        }
+
+        case 0x8047A4C8: {
+            printf("[TLS fn_8047A4C8] Called! lr=0x%08X\n", ctx->lr);
+            fflush(stdout);
+            return 0; // Run naturally
+        }
+
+        // LayoutTask::Draw (0x801F4514)
+        case 0x801F4514: {
+            u32 obj = ctx->gpr[3];
+            u32 f_fc = obj ? mem_read32(ctx, obj + 0xFC) : 0;
+            u32 f_38 = obj ? mem_read32(ctx, obj + 0x38) : 0;
+            u32 vt48 = obj ? mem_read32(ctx, obj + 0x48) : 0;
+            u32 cnt48 = obj ? mem_read32(ctx, obj + 0x48 + 4) : 0;
+            u32 arr48 = obj ? mem_read32(ctx, obj + 0x48 + 0xC) : 0;
+            float f_100, f_104, f_a0;
+            u32 u100 = obj ? mem_read32(ctx, obj + 0x100) : 0;
+            u32 u104 = obj ? mem_read32(ctx, obj + 0x104) : 0;
+            u32 ua0 = obj ? mem_read32(ctx, obj + 0xA0) : 0;
+            memcpy(&f_100, &u100, 4); memcpy(&f_104, &u104, 4); memcpy(&f_a0, &ua0, 4);
+            static int s_layout_draws = 0;
+            s_layout_draws++;
+            if (obj == 0x8114EAE0 || s_layout_draws <= 5 || s_layout_draws % 60 == 0) {
+                printf("[TLS LayoutTask::Draw] #%d obj=0x%08X fc=0x%08X (b1=%u,b4=%u) f38=0x%08X f100=%.2f f104=%.2f fa0=%.2f cnt48=%u\n",
+                       s_layout_draws, obj, f_fc, (f_fc >> 30) & 1, (f_fc >> 27) & 1, f_38, f_100, f_104, f_a0, cnt48);
+                if (arr48 && cnt48 > 0) {
+                    for (u32 i = 0; i < cnt48; i++) {
+                        u32 ch = mem_read32(ctx, arr48 + i * 4);
+                        u32 cvt = ch ? mem_read32(ctx, ch) : 0;
+                        u32 m14 = cvt ? mem_read32(ctx, cvt + 0x14) : 0;
+                        u32 m18 = cvt ? mem_read32(ctx, cvt + 0x18) : 0;
+                        u32 ch_f10 = ch ? mem_read32(ctx, ch + 0x10) : 0;
+                        u32 ch_f184 = ch ? mem_read32(ctx, ch + 0x184) : 0;
+                        printf("   ch[%u]=0x%08X (vt=0x%08X m14=0x%08X m18=0x%08X f10=0x%08X f184=0x%08X)\n",
+                               i, ch, cvt, m14, m18, ch_f10, ch_f184);
+                    }
+                }
+                fflush(stdout);
+            }
+
+            return 0; // Run naturally
+        }
+
+        // fn_8005E3E4 (2D UI quad submission)
+        case 0x8005E3E4:
+        case 0x8005E40C: {
+            u32 eeb0 = mem_read32(ctx, 0x8087EEB0);
+            static int s_e3e4_cnt = 0;
+            if (++s_e3e4_cnt <= 15) {
+                float m[3][4];
+                for (int r = 0; r < 3; r++) {
+                    for (int c = 0; c < 4; c++) {
+                        u32 val = mem_read32(ctx, eeb0 + 0xA4 + (r * 4 + c) * 4);
+                        memcpy(&m[r][c], &val, 4);
+                    }
+                }
+                double df1 = ctx->fpr[1];
+                double df2 = ctx->fpr[2];
+                double df3 = ctx->fpr[3];
+                double df4 = ctx->fpr[4];
+                printf("[TLS 8005E40C #%d] f1=%.2f f2=%.2f f3=%.2f f4=%.2f (lr=0x%08X)\n",
+                       s_e3e4_cnt, df1, df2, df3, df4, ctx->lr);
+                printf("   mtx0: [%.4f, %.4f, %.4f, %.4f]\n", m[0][0], m[0][1], m[0][2], m[0][3]);
+                printf("   mtx1: [%.4f, %.4f, %.4f, %.4f]\n", m[1][0], m[1][1], m[1][2], m[1][3]);
+                printf("   mtx2: [%.4f, %.4f, %.4f, %.4f]\n", m[2][0], m[2][1], m[2][2], m[2][3]);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // fn_800656C8 (UI Quad Draw to WGPIPE)
+        case 0x800656C8: {
+            static int s_656c8_cnt = 0;
+            u32 pkt = ctx->gpr[3];
+            if (++s_656c8_cnt <= 10) {
+                u32 f4 = pkt ? mem_read32(ctx, pkt + 4) : 0;
+                u32 vbuf = pkt ? mem_read32(ctx, pkt + 8) : 0;
+                printf("[TLS 800656C8 #%d] pkt=0x%08X f4=%u vbuf=0x%08X (lr=0x%08X)\n",
+                       s_656c8_cnt, pkt, f4, vbuf, ctx->lr);
+                if (vbuf) {
+                    for (int vi = 0; vi < 4; vi++) {
+                        u32 ux = mem_read32(ctx, vbuf + vi * 24);
+                        u32 uy = mem_read32(ctx, vbuf + vi * 24 + 4);
+                        u32 ucol = mem_read32(ctx, vbuf + vi * 24 + 12);
+                        u32 uu = mem_read32(ctx, vbuf + vi * 24 + 16);
+                        u32 uv = mem_read32(ctx, vbuf + vi * 24 + 20);
+                        float fx, fy, fu, fv;
+                        memcpy(&fx, &ux, 4); memcpy(&fy, &uy, 4);
+                        memcpy(&fu, &uu, 4); memcpy(&fv, &uv, 4);
+                        printf("     v[%d]: pos=(%.3f, %.3f) col=0x%08X uv=(%.3f, %.3f)\n",
+                               vi, fx, fy, ucol, fu, fv);
+                    }
+                }
+                fflush(stdout);
+            }
+            return 0;
+        }
+
+        // fn_801ED928 (pane transform / world position calculation)
+        case 0x801ED928: {
+            u32 pane = ctx->gpr[3];
+            static int s_ed9_cnt = 0;
+            if (++s_ed9_cnt <= 15) {
+                float p48, p4c, p50, pdc, pe0, pe4, pe8, pf8;
+                u32 u48 = pane ? mem_read32(ctx, pane + 0x48) : 0;
+                u32 u4c = pane ? mem_read32(ctx, pane + 0x4C) : 0;
+                u32 u50 = pane ? mem_read32(ctx, pane + 0x50) : 0;
+                u32 udc = pane ? mem_read32(ctx, pane + 0xDC) : 0;
+                u32 ue0 = pane ? mem_read32(ctx, pane + 0xE0) : 0;
+                u32 ue4 = pane ? mem_read32(ctx, pane + 0xE4) : 0;
+                u32 ue8 = pane ? mem_read32(ctx, pane + 0xE8) : 0;
+                u32 uf8 = pane ? mem_read32(ctx, pane + 0xF8) : 0;
+                u32 parent = pane ? mem_read32(ctx, pane + 0x100) : 0;
+                memcpy(&p48, &u48, 4); memcpy(&p4c, &u4c, 4); memcpy(&p50, &u50, 4);
+                memcpy(&pdc, &udc, 4); memcpy(&pe0, &ue0, 4); memcpy(&pe4, &ue4, 4);
+                memcpy(&pe8, &ue8, 4); memcpy(&pf8, &uf8, 4);
+                printf("[TLS 801ED928 #%d] pane=0x%08X pos=(%.2f, %.2f, %.2f) sz=(%.2f, %.2f) parent=0x%08X (lr=0x%08X)\n",
+                       s_ed9_cnt, pane, p48, p4c, p50, pe4, pe8, parent, ctx->lr);
+                if (s_ed9_cnt <= 2) {
+                    printf("[Pane 0x%08X Dump]:\n", pane);
+                    for (int i = 0; i < 0x120; i += 16) {
+                        printf("  +%02X: %08X %08X %08X %08X\n", i,
+                               mem_read32(ctx, pane + i), mem_read32(ctx, pane + i + 4),
+                               mem_read32(ctx, pane + i + 8), mem_read32(ctx, pane + i + 12));
+                    }
+                }
+                fflush(stdout);
+            }
+            return 0; // Run naturally
+        }
+
+        // fn_801EDC78 (pane animation visibility check)
+        case 0x801EDC78: {
+            return 0; // Run naturally
+        }
+
+        // fn_800D59B8 (resource pending check)
+        case 0x800D59B8: {
+            if (ctx->lr >= 0x801F9F00 && ctx->lr <= 0x801FA020) {
+                ctx->gpr[3] = 0; // Resource ready!
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            return 0; // Run naturally
+        }
+
+        // fn_801F9FB0 (pane draw callback)
+        case 0x801F9FB0: {
+            return 0; // Run naturally
+        }
+
+        // GXSetCopyClear (0x80615190)
+        case 0x80615190: {
+            u32 color_ptr = ctx->gpr[3];
+            u32 z = ctx->gpr[4];
+            u8 r = color_ptr ? mem_read8(ctx, color_ptr + 0) : 0;
+            u8 g = color_ptr ? mem_read8(ctx, color_ptr + 1) : 0;
+            u8 b = color_ptr ? mem_read8(ctx, color_ptr + 2) : 0;
+            u8 a = color_ptr ? mem_read8(ctx, color_ptr + 3) : 0;
+            if (ctx->lr == 0x800719AC || ctx->lr == 0x806119DC || r != 0 || g != 0 || b != 0) {
+                gx_pipeline_set_clear_color(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
+            }
+            return 0; // Run original code
+        }
+
+        // NewTitleTask::Draw (0x805363F8)
+        case 0x805363F8: {
+            static int s_title_draws = 0;
+            u32 task = ctx->gpr[3];
+            u32 mode = task ? mem_read32(ctx, task + 0x2AC) : 0;
+            u32 eeb0 = mem_read32(ctx, 0x8087EEB0);
+            u32 l48 = task ? mem_read32(ctx, task + 0x48) : 0;
+            u32 l4c = task ? mem_read32(ctx, task + 0x4C) : 0;
+            u32 l50 = task ? mem_read32(ctx, task + 0x50) : 0;
+            u32 l5c = task ? mem_read32(ctx, task + 0x5C) : 0;
+            u32 l60 = task ? mem_read32(ctx, task + 0x60) : 0;
+            if (++s_title_draws <= 5 || s_title_draws % 30 == 0) {
+                printf("[TLS NewTitleTask] Draw #%d task=0x%08X mode=%u eeb0=0x%08X (c18=0x%08X, s1c=0x%08X, p14=0x%08X)\n",
+                       s_title_draws, task, mode, eeb0,
+                       task ? mem_read32(ctx, task + 0x18) : 0,
+                       task ? mem_read32(ctx, task + 0x1C) : 0,
+                       task ? mem_read32(ctx, task + 0x14) : 0);
+                if (task) {
+                    u32 cur_child = mem_read32(ctx, task + 0x18);
+                    int c_idx = 0;
+                    while (cur_child && c_idx < 10) {
+                        u32 c_vt = mem_read32(ctx, cur_child);
+                        u32 c_f38 = mem_read32(ctx, cur_child + 0x38);
+                        u32 c_m14 = c_vt ? mem_read32(ctx, c_vt + 0x14) : 0;
+                        u32 cu100 = mem_read32(ctx, cur_child + 0x100);
+                        u32 cu104 = mem_read32(ctx, cur_child + 0x104);
+                        u32 cua0 = mem_read32(ctx, cur_child + 0xA0);
+                        float cf100, cf104, cfa0;
+                        memcpy(&cf100, &cu100, 4); memcpy(&cf104, &cu104, 4); memcpy(&cfa0, &cua0, 4);
+                        printf("     child[%d]=0x%08X (vt=0x%08X f38=0x%08X f100=%.2f f104=%.2f fa0=%.2f)\n",
+                               c_idx, cur_child, c_vt, c_f38, cf100, cf104, cfa0);
+                        cur_child = mem_read32(ctx, cur_child + 0x1C);
+                        c_idx++;
+                    }
+                }
+                if (l5c) {
+                    u32 u100 = mem_read32(ctx, l5c + 0x100);
+                    u32 u104 = mem_read32(ctx, l5c + 0x104);
+                    u32 ua0 = mem_read32(ctx, l5c + 0xa0);
+                    float f100, f104, fa0;
+                    memcpy(&f100, &u100, 4); memcpy(&f104, &u104, 4); memcpy(&fa0, &ua0, 4);
+                    printf("   l5c (0x%08X): vt=0x%08X f38=0x%08X fc=0x%08X f100=%.2f f104=%.2f fa0=%.2f\n",
+                           l5c, mem_read32(ctx, l5c), mem_read32(ctx, l5c + 0x38), mem_read32(ctx, l5c + 0xFC), f100, f104, fa0);
+                }
+                if (l60) {
+                    u32 u100 = mem_read32(ctx, l60 + 0x100);
+                    u32 u104 = mem_read32(ctx, l60 + 0x104);
+                    u32 ua0 = mem_read32(ctx, l60 + 0xa0);
+                    float f100, f104, fa0;
+                    memcpy(&f100, &u100, 4); memcpy(&f104, &u104, 4); memcpy(&fa0, &ua0, 4);
+                    printf("   l60 (0x%08X): vt=0x%08X f38=0x%08X fc=0x%08X f100=%.2f f104=%.2f fa0=%.2f\n",
+                           l60, mem_read32(ctx, l60), mem_read32(ctx, l60 + 0x38), mem_read32(ctx, l60 + 0xFC), f100, f104, fa0);
+                }
+                fflush(stdout);
+            }
+            return 0;
+        }
+
+        // Sub-checks called by NewTitleTask::IsReady and GameTask::Init
+        case 0x800D3FA4: {
+            u32 task = ctx->gpr[3];
+            u32 child = task ? mem_read32(ctx, task + 0x18) : 0;
+            static int s_d3fa4_calls = 0;
+            if (++s_d3fa4_calls <= 20 || s_d3fa4_calls % 60 == 0) {
+                printf("[TLS 800D3FA4] #%d task=0x%08X child=0x%08X lr=0x%08X\n",
+                       s_d3fa4_calls, task, child, ctx->lr);
+                if (child) {
+                    u32 f38 = mem_read32(ctx, child + 0x38);
+                    u32 c18 = mem_read32(ctx, child + 0x18);
+                    u32 c1c = mem_read32(ctx, child + 0x1C);
+                    printf("     child: f38=0x%X (bit30=%u) c18=0x%08X c1c=0x%08X\n",
+                           f38, (f38 >> 1) & 1, c18, c1c);
+                    if (c1c) {
+                        u32 sib_f38 = mem_read32(ctx, c1c + 0x38);
+                        u32 sib_18 = mem_read32(ctx, c1c + 0x18);
+                        u32 sib_1c = mem_read32(ctx, c1c + 0x1C);
+                        u32 vt = mem_read32(ctx, c1c);
+                        u32 fn_init = vt ? mem_read32(ctx, vt + 8) : 0;
+                        u32 fn_ready = vt ? mem_read32(ctx, vt + 12) : 0;
+                        u32 fn_update = vt ? mem_read32(ctx, vt + 16) : 0;
+                        printf("     sibling1 (0x%08X): f38=0x%X (bit30=%u) 18=0x%08X 1c=0x%08X vt=0x%08X (init=0x%08X rdy=0x%08X upd=0x%08X)\n",
+                               c1c, sib_f38, (sib_f38 >> 1) & 1, sib_18, sib_1c, vt, fn_init, fn_ready, fn_update);
+                    }
+                }
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+        case 0x800C310C: {
+            static int s_c310c_calls = 0;
+            if (++s_c310c_calls <= 10 || s_c310c_calls % 60 == 0) {
+                u32 mgr = mem_read32(ctx, 0x8087EE90);
+                u32 p4 = mgr ? mem_read32(ctx, mgr + 4) : 0;
+                u32 cnt394 = mgr ? mem_read32(ctx, mgr + 0x394) : 0;
+                u32 cnt3a0 = mgr ? mem_read32(ctx, mgr + 0x3A0) : 0;
+                u32 cnt400 = mgr ? mem_read32(ctx, mgr + 0x400) : 0;
+                u32 cnt404 = mgr ? mem_read32(ctx, mgr + 0x404) : 0;
+                printf("[TLS 800C310C] #%d mgr=0x%08X (p4=0x%08X) cnt394=%u cnt3a0=%u 400=%u 404=%u lr=0x%08X\n",
+                       s_c310c_calls, mgr, p4, cnt394, cnt3a0, cnt400, cnt404, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code naturally
+        }
+
+
+        // 0x8049DEE4 (Title Map Task / titlle_white.map IsReady)
+        case 0x8049DEE4: {
+            u32 task = ctx->gpr[3];
+            u32 req = task ? mem_read32(ctx, task + 0x58 + 4) : 0;
+            u8 st = req ? mem_read8(ctx, req + 4) : 0;
+            static int s_49dee4_calls = 0;
+            if (++s_49dee4_calls <= 20 || s_49dee4_calls % 60 == 0) {
+                printf("[TLS 8049DEE4] #%d task=0x%08X req=0x%08X status=%u (lr=0x%08X)\n",
+                       s_49dee4_calls, task, req, st, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // DVD stream read completion callback (0x8046BBE0)
+        case 0x8046BBE0: {
+            u32 fi_addr = ctx->gpr[4];
+            u32 target = fi_addr ? mem_read32(ctx, fi_addr + 0x2C) : 0;
+            if (target != 0x807C6F60 && target != 0x800000E4 && resolve_guest_pointer(ctx, target)) {
+                mem_write32(ctx, target, 2);
+            }
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+
+        // fn_800EF3EC (camera mode resource loading & initialization)
+        case 0x800EF3EC: {
+            printf("[TLS Camera] fn_800EF3EC called! cam_obj=0x%08X (lr=0x%08X)\n", ctx->gpr[3], ctx->lr);
+            fflush(stdout);
+            return 0; // Run original code
+        }
+
+        // GXDrawDone (0x806140C0)
+        case 0x806140C0: {
+            mem_write8(ctx, 0x808800A8, 1);
+            static int s_drawdone_cnt = 0;
+            if (++s_drawdone_cnt <= 20 || s_drawdone_cnt % 60 == 0) {
+                printf("[TLS GX] GXDrawDone #%d completed (LR=0x%08X)\n", s_drawdone_cnt, ctx->lr);
+                fflush(stdout);
+            }
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // fn_80536CAC (Title BGM & layout startup)
+        case 0x80536CAC: {
+            printf("[TLS TitleSub] 80536CAC called! task=0x%08X (lr=0x%08X)\n", ctx->gpr[3], ctx->lr);
+            fflush(stdout);
+            return 0; // Run original code
+        }
+
+        // fn_8004AE84 (sound stream open)
+        case 0x8004AE84: {
+            printf("[TLS TitleSub] 8004AE84 called! task=0x%08X (lr=0x%08X)\n", ctx->gpr[3], ctx->lr);
+            fflush(stdout);
+            return 0; // Run original code
+        }
+
+        // fn_8049D68C (create child task)
+        case 0x8049D68C: {
+            printf("[TLS TitleSub] 8049D68C called! parent=0x%08X desc=0x%08X (lr=0x%08X)\n", ctx->gpr[3], ctx->gpr[4], ctx->lr);
+            fflush(stdout);
+            return 0; // Run original code
+        }
+
+        // fn_8004B0E4 (sound stream ready check)
+        case 0x8004B0E4: {
+            if (ctx->lr >= 0x80532000 && ctx->lr <= 0x80537000) {
+                printf("[TLS TitleSub] 8004B0E4 arg3=0x%08X (lr=0x%08X) -> ret 0 (ready)\n", ctx->gpr[3], ctx->lr);
+                fflush(stdout);
+            }
+            ctx->gpr[3] = 0; // ready
+            ctx->pc = ctx->lr;
+            return 1;
+        }
+
+        // 0x8004424C (Strap/Scene task state check)
+        case 0x8004424C: {
+            u32 obj = ctx->gpr[3];
+            u32 state = obj ? mem_read32(ctx, obj + 644) : 0;
+            static int s_calls_4424c = 0;
+            if (++s_calls_4424c <= 10 || s_calls_4424c % 60 == 0) {
+                printf("[TLS 4424C] #%d obj=0x%08X state=+644=%u (lr=0x%08X)\n", s_calls_4424c, obj, state, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // atn::LH_Scene notify ready (0x804780AC)
+        case 0x804780AC: {
+            static int s_scene_ready_calls = 0;
+            if (++s_scene_ready_calls <= 20 || s_scene_ready_calls % 60 == 0) {
+                u32 req = ctx->gpr[3];
+                u8 st = req ? mem_read8(ctx, req + 4) : 0;
+                printf("[TLS SceneReady] #%d req=0x%08X status=%u (lr=0x%08X)\n",
+                       s_scene_ready_calls, req, st, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run original code
+        }
+
+        // GXCopyDisp(void* dest, u8 clear)
+        case 0x80615420: {
+            u32 dest = ctx->gpr[3];
+            u8 clear = (u8)ctx->gpr[4];
+            uint32_t prim_cnt = gx_pipeline_get_primitive_count();
+            uint32_t vtx_cnt = gx_pipeline_get_vertex_count();
+            if (prim_cnt > 0 || vtx_cnt > 0) {
+                static uint32_t s_last_gx_log = 0;
+                static uint32_t s_gx_fctr = 0;
+                if (++s_gx_fctr - s_last_gx_log >= 60) {
+                    printf("[TLS GXCopyDisp] Frame %u: Captured %u primitives, %u vertices\n", s_gx_fctr, prim_cnt, vtx_cnt);
+                    s_last_gx_log = s_gx_fctr;
+                }
+            }
+            return 0; // Run original GXCopyDisp code naturally
         }
 
         default:

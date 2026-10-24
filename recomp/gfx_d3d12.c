@@ -9,6 +9,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include "gfx_backend.h"
+#include "gx_pipeline.h"
 
 #define NUM_BACK_BUFFERS 2
 
@@ -29,6 +30,10 @@ typedef struct {
     UINT64 fence_values[NUM_BACK_BUFFERS];
     UINT frame_index;
 
+    // GX 3D Pipeline resources
+    ID3D12Resource* gx_vbo_upload;
+    ID3D12PipelineState* gx_pso;
+
     // Framebuffer texture & upload buffer
     ID3D12Resource* fb_texture;
     ID3D12Resource* fb_upload_buffer;
@@ -44,57 +49,11 @@ typedef struct {
 
 static D3D12Backend s_d3d12 = {0};
 
-// Precompiled bytecode for fullscreen triangle vertex shader (Shader Model 5.0)
-static const uint8_t s_d3d12_vs_bytecode[] = {
-    68,88,66,67,41,202,118,217,148,229,195,145,177,153,30,111,81,189,178,135,1,0,0,0,
-    144,2,0,0,5,0,0,0,52,0,0,0,140,0,0,0,188,0,0,0,32,1,0,0,164,1,0,0,
-    82,68,69,70,80,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,28,0,0,0,0,4,255,255,
-    0,1,0,0,60,0,0,0,77,105,99,114,111,115,111,102,116,32,40,82,41,32,72,76,
-    83,76,32,83,104,97,100,101,114,32,67,111,109,112,105,108,101,114,32,49,48,46,49,0,
-    73,83,71,78,40,0,0,0,1,0,0,0,8,0,0,0,32,0,0,0,0,0,0,0,6,0,0,0,
-    1,0,0,0,0,0,0,0,1,1,0,0,83,86,95,86,101,114,116,101,120,73,68,0,
-    79,83,71,78,92,0,0,0,2,0,0,0,8,0,0,0,32,0,0,0,0,0,0,0,1,0,0,0,
-    3,0,0,0,0,0,0,0,15,0,0,0,44,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,
-    1,0,0,0,3,12,0,0,83,86,95,80,111,115,105,116,105,111,110,0,84,69,88,67,
-    79,79,82,68,0,171,83,72,68,82,124,0,0,0,64,0,1,0,31,0,0,0,94,0,0,4,
-    10,16,16,0,0,0,0,0,5,0,0,4,242,32,16,0,0,0,0,0,1,0,0,2,
-    101,0,0,4,242,32,16,0,0,0,0,0,1,0,0,2,103,0,0,4,242,32,16,0,
-    1,0,0,0,1,0,0,2,24,0,0,7,50,0,16,0,10,16,16,0,0,0,0,0,
-    2,64,0,0,0,0,0,0,1,0,0,0,86,0,0,5,50,0,16,0,70,0,16,0,
-    2,64,0,0,2,0,0,0,2,0,0,0,86,0,0,7,50,32,16,0,1,0,0,0,
-    70,0,16,0,2,64,0,0,0,0,0,64,0,0,0,192,2,64,0,0,0,0,128,191,
-    0,0,128,63,54,0,0,5,50,32,16,0,0,0,0,0,70,32,16,0,1,0,0,0,
-    54,0,0,5,194,32,16,0,0,0,0,0,2,64,0,0,0,0,0,0,0,0,128,63,
-    56,0,0,5,50,32,16,0,1,0,0,0,70,0,16,0,62,0,0,1,
-    83,84,65,84,116,0,0,0,9,0,0,0,1,0,0,0,0,0,0,0,2,0,0,0,4,0,0,0,
-    0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-    2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-};
+#include "../build/recomp/d3d12_shaders.inl"
 
-// Precompiled bytecode for texture sampling pixel shader
-static const uint8_t s_d3d12_ps_bytecode[] = {
-    68,88,66,67,163,149,152,112,197,149,173,171,200,90,120,44,87,143,156,151,1,0,0,0,
-    148,2,0,0,5,0,0,0,52,0,0,0,224,0,0,0,60,1,0,0,112,1,0,0,168,1,0,0,
-    82,68,69,70,164,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,28,0,0,0,0,4,255,255,
-    0,1,0,0,140,0,0,0,60,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,1,0,0,0,1,0,0,0,115,109,112,0,116,101,120,0,77,105,99,114,
-    111,115,111,102,116,32,40,82,41,32,72,76,83,76,32,83,104,97,100,101,114,32,67,111,
-    109,112,105,108,101,114,32,49,48,46,49,0,73,83,71,78,84,0,0,0,2,0,0,0,
-    8,0,0,0,32,0,0,0,0,0,0,0,1,0,0,0,3,0,0,0,0,0,0,0,15,0,0,0,
-    44,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,1,0,0,0,3,3,0,0,83,86,
-    95,80,111,115,105,116,105,111,110,0,84,69,88,67,79,79,82,68,0,171,79,83,71,78,
-    44,0,0,0,1,0,0,0,8,0,0,0,32,0,0,0,0,0,0,0,0,0,0,0,3,0,0,0,
-    0,0,0,0,15,0,0,0,83,86,95,84,97,114,103,101,116,0,171,171,83,72,68,82,
-    48,0,0,0,64,0,0,0,12,0,0,0,90,0,0,3,0,96,16,0,0,0,0,0,
-    88,0,0,4,0,112,16,0,0,0,0,0,2,0,0,0,98,16,0,3,50,16,16,0,
-    1,0,0,0,101,0,0,3,242,32,16,0,0,0,0,0,69,0,0,9,242,32,16,0,
-    0,0,0,0,70,16,16,0,1,0,0,0,70,126,16,0,0,0,0,0,0,96,16,0,
-    0,0,0,0,62,0,0,1,83,84,65,84,116,0,0,0,1,0,0,0,0,0,0,0,
-    0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-    0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-};
+
+#include "../build/recomp/gx_shaders_d3d12.inl"
+
 
 static inline uint8_t clamp_u8_d3d12(int v) {
     return (uint8_t)(v < 0 ? 0 : (v > 255 ? 255 : v));
@@ -404,6 +363,92 @@ bool d3d12_init(HWND hwnd, const GfxConfig* config) {
     hr = ID3D12Device_CreateGraphicsPipelineState(s_d3d12.device, &pso_desc, &IID_ID3D12PipelineState, (void**)&s_d3d12.pipeline_state);
     if (FAILED(hr)) return false;
 
+    // 7b. Create GX 3D Pipeline State & Upload Buffer
+    D3D12_INPUT_ELEMENT_DESC gx_elements[] = {
+        { "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT,    0, 0,  D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+        { "NORMAL",   0, DXGI_FORMAT_R32G32B32_FLOAT,    0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+        { "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT,       0, 24, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+        { "COLOR",    0, DXGI_FORMAT_R8G8B8A8_UNORM,     0, 32, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
+    };
+    D3D12_GRAPHICS_PIPELINE_STATE_DESC gx_pso_desc = {
+        .pRootSignature = s_d3d12.root_signature,
+        .VS = { .pShaderBytecode = s_gx_vs_bytecode, .BytecodeLength = sizeof(s_gx_vs_bytecode) },
+        .PS = { .pShaderBytecode = s_gx_ps_bytecode, .BytecodeLength = sizeof(s_gx_ps_bytecode) },
+        .InputLayout = { .pInputElementDescs = gx_elements, .NumElements = 4 },
+        .RasterizerState = {
+            .FillMode = D3D12_FILL_MODE_SOLID,
+            .CullMode = D3D12_CULL_MODE_NONE,
+            .FrontCounterClockwise = FALSE,
+            .DepthBias = 0,
+            .DepthBiasClamp = 0.0f,
+            .SlopeScaledDepthBias = 0.0f,
+            .DepthClipEnable = TRUE,
+            .MultisampleEnable = FALSE,
+            .AntialiasedLineEnable = FALSE,
+            .ForcedSampleCount = 0,
+            .ConservativeRaster = D3D12_CONSERVATIVE_RASTERIZATION_MODE_OFF
+        },
+        .BlendState = {
+            .AlphaToCoverageEnable = FALSE,
+            .IndependentBlendEnable = FALSE,
+            .RenderTarget = {
+                [0] = {
+                    .BlendEnable = TRUE,
+                    .LogicOpEnable = FALSE,
+                    .SrcBlend = D3D12_BLEND_SRC_ALPHA,
+                    .DestBlend = D3D12_BLEND_INV_SRC_ALPHA,
+                    .BlendOp = D3D12_BLEND_OP_ADD,
+                    .SrcBlendAlpha = D3D12_BLEND_ONE,
+                    .DestBlendAlpha = D3D12_BLEND_ZERO,
+                    .BlendOpAlpha = D3D12_BLEND_OP_ADD,
+                    .LogicOp = D3D12_LOGIC_OP_NOOP,
+                    .RenderTargetWriteMask = D3D12_COLOR_WRITE_ENABLE_ALL
+                }
+            }
+        },
+        .DepthStencilState = { .DepthEnable = FALSE, .StencilEnable = FALSE },
+        .SampleMask = UINT_MAX,
+        .PrimitiveTopologyType = D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE,
+        .NumRenderTargets = 1,
+        .RTVFormats = { [0] = DXGI_FORMAT_R8G8B8A8_UNORM },
+        .SampleDesc = { .Count = 1, .Quality = 0 },
+        .NodeMask = 0,
+        .Flags = D3D12_PIPELINE_STATE_FLAG_NONE
+    };
+    hr = ID3D12Device_CreateGraphicsPipelineState(s_d3d12.device, &gx_pso_desc, &IID_ID3D12PipelineState, (void**)&s_d3d12.gx_pso);
+    if (FAILED(hr)) return false;
+
+    D3D12_HEAP_PROPERTIES upload_heap = {
+        .Type = D3D12_HEAP_TYPE_UPLOAD,
+        .CPUPageProperty = D3D12_CPU_PAGE_PROPERTY_UNKNOWN,
+        .MemoryPoolPreference = D3D12_MEMORY_POOL_UNKNOWN,
+        .CreationNodeMask = 1,
+        .VisibleNodeMask = 1
+    };
+    D3D12_RESOURCE_DESC vbo_desc = {
+        .Dimension = D3D12_RESOURCE_DIMENSION_BUFFER,
+        .Alignment = 0,
+        .Width = GX_MAX_BATCH_VERTICES * sizeof(GxVertex),
+        .Height = 1,
+        .DepthOrArraySize = 1,
+        .MipLevels = 1,
+        .Format = DXGI_FORMAT_UNKNOWN,
+        .SampleDesc = { .Count = 1, .Quality = 0 },
+        .Layout = D3D12_TEXTURE_LAYOUT_ROW_MAJOR,
+        .Flags = D3D12_RESOURCE_FLAG_NONE
+    };
+    hr = ID3D12Device_CreateCommittedResource(
+        s_d3d12.device,
+        &upload_heap,
+        D3D12_HEAP_FLAG_NONE,
+        &vbo_desc,
+        D3D12_RESOURCE_STATE_GENERIC_READ,
+        NULL,
+        &IID_ID3D12Resource,
+        (void**)&s_d3d12.gx_vbo_upload
+    );
+    if (FAILED(hr)) return false;
+
     // 8. Create Command Allocators & List
     for (UINT i = 0; i < NUM_BACK_BUFFERS; i++) {
         hr = ID3D12Device_CreateCommandAllocator(s_d3d12.device, D3D12_COMMAND_LIST_TYPE_DIRECT, &IID_ID3D12CommandAllocator, (void**)&s_d3d12.command_allocators[i]);
@@ -620,6 +665,29 @@ bool d3d12_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     ID3D12GraphicsCommandList_IASetPrimitiveTopology(s_d3d12.command_list, D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
     ID3D12GraphicsCommandList_DrawInstanced(s_d3d12.command_list, 3, 1, 0, 0);
 
+    // Draw GX decoded primitives if present
+    uint32_t gx_vtx_count = 0;
+    const GxVertex* gx_vtx = gx_pipeline_get_vertices(&gx_vtx_count);
+    if (gx_vtx && gx_vtx_count > 0 && s_d3d12.gx_vbo_upload && s_d3d12.gx_pso) {
+        void* mapped_vbo = NULL;
+        D3D12_RANGE read_range = {0, 0};
+        HRESULT map_hr = ID3D12Resource_Map(s_d3d12.gx_vbo_upload, 0, &read_range, &mapped_vbo);
+        if (SUCCEEDED(map_hr)) {
+            memcpy(mapped_vbo, gx_vtx, gx_vtx_count * sizeof(GxVertex));
+            ID3D12Resource_Unmap(s_d3d12.gx_vbo_upload, 0, NULL);
+
+            D3D12_VERTEX_BUFFER_VIEW vbv = {
+                .BufferLocation = ID3D12Resource_GetGPUVirtualAddress(s_d3d12.gx_vbo_upload),
+                .SizeInBytes = (UINT)(gx_vtx_count * sizeof(GxVertex)),
+                .StrideInBytes = sizeof(GxVertex)
+            };
+            ID3D12GraphicsCommandList_SetPipelineState(s_d3d12.command_list, s_d3d12.gx_pso);
+            ID3D12GraphicsCommandList_IASetVertexBuffers(s_d3d12.command_list, 0, 1, &vbv);
+            ID3D12GraphicsCommandList_IASetPrimitiveTopology(s_d3d12.command_list, D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+            ID3D12GraphicsCommandList_DrawInstanced(s_d3d12.command_list, gx_vtx_count, 1, 0, 0);
+        }
+    }
+
     // Transition back to PRESENT
     D3D12_RESOURCE_BARRIER b_present = {
         .Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION,
@@ -690,6 +758,14 @@ void d3d12_shutdown(void) {
     if (s_d3d12.rgba_staging) {
         free(s_d3d12.rgba_staging);
         s_d3d12.rgba_staging = NULL;
+    }
+    if (s_d3d12.gx_vbo_upload) {
+        ID3D12Resource_Release(s_d3d12.gx_vbo_upload);
+        s_d3d12.gx_vbo_upload = NULL;
+    }
+    if (s_d3d12.gx_pso) {
+        ID3D12PipelineState_Release(s_d3d12.gx_pso);
+        s_d3d12.gx_pso = NULL;
     }
     if (s_d3d12.fb_upload_buffer) {
         ID3D12Resource_Release(s_d3d12.fb_upload_buffer);
