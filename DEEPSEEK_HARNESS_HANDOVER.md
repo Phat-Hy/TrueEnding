@@ -296,6 +296,64 @@ So the open question is no longer "why does GX stop" but: **which producer is su
 pending operation at `*(0x8087D5xx+36)` and feed the mailbox at `0x80879530`?** Nothing on the host
 side ever signals either one.
 
+### 5c.5 Follow-up measurements (this round) — the waiter is an idle job worker
+
+Three measurements narrow the above to a single class of defect.
+
+**Only three queues are ever slept on** in a whole run (`TLS_WAIT_PROBE=all` reports one line per
+distinct queue): `0x807C6F60` (GX-fifo drain), `0x8087D610`, `0x80879538`. So there is no hidden
+fourth waiter.
+
+**Only two guest threads exist**, both created at frame 170 (`OSCreateThread` probe):
+
+| Thread | Prio | Entry | Role |
+|---|---|---|---|
+| `0x808638F0` | 3 | `0x8071DBE0` | engine job worker, loop at `0x8071DC14` |
+| `0x80879210` | 4 | `0x80718C40` | mailbox worker, blocks in `OSReceiveMessage` |
+
+Everything before frame 170 — and the entire title screen and Chapter-1 load after it — runs on the
+original boot thread `0x807CB658`.
+
+**The worker's condition was measured, not inferred.** `TLS_LOSTWAKE_PROBE=1` reads the field the
+caller tests at the moment it calls `OSSleepThread`, and it prints
+`pending(+0x24)=0x00000000 <-- sleeping with the condition ALREADY satisfied` at frames 170 and 307,
+i.e. the worker sleeps while `*(base+0x24) == 0` and must be woken when a job arrives. It is an
+**idle worker waiting for work**, not a thread waiting for a stuck request to finish.
+
+The producer side (`0x8071D6E0` region) is:
+
+```
+0x8071D714: stw  r3, 36(r29)    ; pending = job
+0x8071D71C: stb  r31, 12(r3)
+0x8071D720: lwz  r12, 0(r3)     ; vtable
+0x8071D72C: bctrl               ; run the job synchronously, in the producer's own thread
+0x8071D730: stw  r31, 36(r29)   ; pending = 0
+0x8071D734: addi r3, r29, 52    ; <-- wakes manager+0x34 (0x8087D618)
+0x8071D738: bl   OSWakeupThread
+```
+
+The worker sleeps on `manager+0x2C` (`0x8087D610`), the producer wakes `manager+0x34`
+(`0x8087D618`). Both queues were signalled **exactly 20 times, all at or before frame 307**, and
+never again — so after frame 307 no job is ever produced, the worker stays parked, and the boot
+thread keeps the title screen alive until it reaches the handoff and goes to the OS idle loop.
+
+**Dead ends now excluded (do not re-investigate):**
+
+- The HLE stubs at `0x805F3A80 / 0x805F3B00 / 0x805F3B40` are **dead code**: `0x805F3A80` is the
+  middle of a larger OS-init routine (`bl 0x805F6C70`), not a function entry, and intra-chunk control
+  flow reaches such addresses with a plain `goto`, never through the dispatcher. The real
+  `OSSendMessage`/`OSReceiveMessage` are `0x805F26D0`/`0x805F27A0` and run the recompiled code.
+- The mailbox waiter is not the blocker: the game performs **zero** `OSSendMessage` calls in a
+  1000-frame run, and the mailbox receives exactly once (frame 170).
+- `__OSCurrentThread` corruption is gone on the faithful build (`TLS_WATCH_CURRENT_THREAD` reports no
+  invalid transition), so the §5c.1 chain is fixed, not merely hidden.
+
+**The next concrete target:** who is supposed to call the producer at `0x8071D6E0` after frame 307 —
+i.e. what should keep handing the engine thread jobs. `TaskManager` still holds `GameTask` with its
+two update entries (`0x80363DBC`, `0x803646C4`) at the end of the run, so the engine thread that
+should be executing them is exactly the one parked on `0x8087D610`.
+
+
 ### 5c.3 Remaining fake-progress in the HLE (next to remove)
 
 - `case 0x805F3A80 / 0x805F3B00 / 0x805F3B40` in `recomp/replacements.c` return "success"

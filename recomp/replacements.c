@@ -1215,18 +1215,34 @@ static void ios_close_fd(int fd) {
  * Inert unless TLS_WAIT_PROBE=1. */
 static void tls_wait_probe(CPUState* ctx, u32 queue_addr) {
     static int s_enabled = -1;
+    static int s_all = 0;
     static u32 s_calls = 0;
     static u32 s_reports = 0;
+    static u32 s_seen_q[16];
+    static int s_seen_n = 0;
     if (s_enabled < 0) {
-        s_enabled = getenv("TLS_WAIT_PROBE") ? 1 : 0;
+        const char* env = getenv("TLS_WAIT_PROBE");
+        s_enabled = env ? 1 : 0;
+        s_all = (env && env[0] == 'a') ? 1 : 0;   /* TLS_WAIT_PROBE=all */
     }
     if (!s_enabled) return;
-    if (queue_addr < 0x807C0000u || queue_addr >= 0x807D0000u) return;
+    if (!s_all && (queue_addr < 0x807C0000u || queue_addr >= 0x807D0000u)) return;
 
     s_calls++;
-    bool full = (s_calls <= 6) || (s_calls % 2000u) == 0u;
-    if (!full && (s_calls % 250u) != 0u) return;
-    if (!full && s_reports > 400u) return;
+    bool full = false;
+    if (s_all) {
+        /* One detailed report per distinct queue: regime matters, per-call spam
+         * does not. */
+        int known = 0;
+        for (int i = 0; i < s_seen_n; i++) if (s_seen_q[i] == queue_addr) known = 1;
+        if (known) return;
+        if (s_seen_n < 16) s_seen_q[s_seen_n++] = queue_addr;
+        full = true;
+    } else {
+        full = (s_calls <= 6) || (s_calls % 2000u) == 0u;
+        if (!full && (s_calls % 250u) != 0u) return;
+        if (!full && s_reports > 400u) return;
+    }
     s_reports++;
 
     u32 w = mem_read16(ctx, 0x807C6FB8);
@@ -1236,8 +1252,8 @@ static void tls_wait_probe(CPUState* ctx, u32 queue_addr) {
     u32 tstate = cur ? (u32)mem_read16(ctx, cur + 0x2C8) : 0;
     s32 tsusp = cur ? (s32)mem_read32(ctx, cur + 0x2CC) : 0;
     u32 tqueue = cur ? mem_read32(ctx, cur + 0x2DC) : 0;
-    printf("[TLS WAIT] #%u q=0x%08X W=%u R=%u lr=0x%08X runbits=0x%08X cur=0x%08X st=%u susp=%d tq=0x%08X\n",
-           s_calls, queue_addr, w, r, ctx->lr, runbits, cur, tstate, tsusp, tqueue);
+    printf("[TLS WAIT] #%u q=0x%08X W=%u R=%u lr=0x%08X runbits=0x%08X cur=0x%08X st=%u susp=%d tq=0x%08X r30=0x%08X\n",
+           s_calls, queue_addr, w, r, ctx->lr, runbits, cur, tstate, tsusp, tqueue, ctx->gpr[30]);
     if (full) {
         /* Guest stack walk: each frame starts with the caller's SP then its LR. */
         u32 sp = ctx->gpr[1];
@@ -1313,6 +1329,39 @@ void tls_dump_sleep_queues(CPUState* ctx) {
             if (next == t) break;
             t = next;
         }
+    }
+    fflush(stdout);
+}
+
+/* Wake registry: who signals which OSThreadQueue. A deadlock is usually a queue
+ * that has waiters and never receives a wakeup, so counting OSWakeupThread per
+ * queue (and printing the first caller) separates "nobody signals it" from "the
+ * signal is delivered but does not release the waiter". Dumped at shutdown. */
+#define TLS_WAKE_QUEUE_MAX 64
+static u32 s_wake_q[TLS_WAKE_QUEUE_MAX];
+static u32 s_wake_count[TLS_WAKE_QUEUE_MAX];
+static u32 s_wake_lr[TLS_WAKE_QUEUE_MAX];
+static u32 s_wake_qn = 0;
+
+static void tls_note_wake(u32 queue_addr, u32 caller_lr) {
+    if (queue_addr < 0x80000000u || queue_addr >= 0x94000000u) return;
+    for (u32 i = 0; i < s_wake_qn; i++) {
+        if (s_wake_q[i] == queue_addr) { s_wake_count[i]++; return; }
+    }
+    if (s_wake_qn < TLS_WAKE_QUEUE_MAX) {
+        s_wake_q[s_wake_qn] = queue_addr;
+        s_wake_count[s_wake_qn] = 1;
+        s_wake_lr[s_wake_qn] = caller_lr;
+        s_wake_qn++;
+    }
+}
+
+void tls_dump_wake_queues(CPUState* ctx) {
+    (void)ctx;
+    printf("\n[Runner] OSWakeupThread calls per queue (%u queues signalled):\n", s_wake_qn);
+    for (u32 i = 0; i < s_wake_qn; i++) {
+        printf("         0x%08X  x%-6u first caller lr=0x%08X\n",
+               s_wake_q[i], s_wake_count[i], s_wake_lr[i]);
     }
     fflush(stdout);
 }
@@ -1666,6 +1715,27 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 queue_addr = ctx->gpr[3];
             tls_wait_probe(ctx, queue_addr);
             tls_note_sleep_queue(queue_addr, ctx->lr);
+            /* Lost-wakeup test for the Chapter-1 stall. The engine's worker at
+             * 0x8071D950 sleeps while *(r30+0x24) != 0; queue r30+0x2C is the one it
+             * blocks on. If it ever enqueues while that field is already 0, the
+             * producer cleared the condition without delivering the wakeup, which is
+             * a different defect from "the producer never ran". */
+            {
+                static int s_lw = -1;
+                static int s_lw_reports = 0;
+                if (s_lw < 0) s_lw = getenv("TLS_LOSTWAKE_PROBE") ? 1 : 0;
+                if (s_lw && ctx->lr == 0x8071D984u && s_lw_reports < 20) {
+                    extern int g_runner_current_frame;
+                    u32 base = ctx->gpr[30];
+                    u32 pending = (base && resolve_guest_pointer(ctx, base))
+                                      ? mem_read32(ctx, base + 36) : 0;
+                    s_lw_reports++;
+                    printf("[TLS LOSTWAKE] frame=%d base=0x%08X queue=0x%08X pending(+0x24)=0x%08X %s\n",
+                           g_runner_current_frame, base, queue_addr, pending,
+                           pending == 0 ? "<-- sleeping with the condition ALREADY satisfied" : "");
+                    fflush(stdout);
+                }
+            }
             static u32 count_sleep = 0;
             if (++count_sleep <= 50 || count_sleep % 100 == 0) {
                 printf("[TLS OSSleepThread] #%u queue=0x%08X lr=0x%08X\n",
@@ -1690,8 +1760,50 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // OSWakeupThread probe
         case 0x805F5D60: {
             static u32 count_wakeup = 0;
+            tls_note_wake(ctx->gpr[3], ctx->lr);
             if (++count_wakeup <= 50) {
                 printf("[TLS OSWakeupThread] #%u queue=0x%08X lr=0x%08X\n", count_wakeup, ctx->gpr[3], ctx->lr);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
+        /* The drain function that blocks the Chapter-1 handoff. It walks three
+         * 12-byte list heads, runs a virtual destructor per entry, then sleeps on
+         * queue manager+0x34 until manager+0x24 (the pending-operation pointer)
+         * clears. Naming the manager instance is what lets the pending request be
+         * identified; report each distinct one once. */
+        case 0x8071D860: {
+            static u32 s_seen[8];
+            static int s_seen_n = 0;
+            static int s_reports = 0;
+            u32 mgr = ctx->gpr[3];
+            int known = 0;
+            for (int i = 0; i < s_seen_n; i++) if (s_seen[i] == mgr) known = 1;
+            if (!known) {
+                if (s_seen_n < 8) s_seen[s_seen_n++] = mgr;
+                if (s_reports++ < 12) {
+                    extern int g_runner_current_frame;
+                    u32 pending = (mgr && resolve_guest_pointer(ctx, mgr)) ? mem_read32(ctx, mgr + 0x24) : 0;
+                    printf("[TLS Drain] frame=%d manager=0x%08X pending(+0x24)=0x%08X lr=0x%08X\n",
+                           g_runner_current_frame, mgr, pending, ctx->lr);
+                    fflush(stdout);
+                }
+            }
+            return 0;
+        }
+
+        /* OSCreateThread(thread, func, param, stack, stackSize, prio, attr):
+         * record which guest function each thread was created to run, so thread
+         * objects seen blocked in the deadlock dump can be named. */
+        case 0x805F51B0: {
+            static int s_thr_cap = 0;
+            extern int g_runner_current_frame;
+            if (s_thr_cap < 24) {
+                s_thr_cap++;
+                printf("[TLS OSCreateThread] frame=%d thread=0x%08X entry=0x%08X param=0x%08X stack=0x%08X size=0x%X prio=%u\n",
+                       g_runner_current_frame, ctx->gpr[3], ctx->gpr[4], ctx->gpr[5],
+                       ctx->gpr[6], ctx->gpr[7], ctx->gpr[8]);
                 fflush(stdout);
             }
             return 0;
@@ -1923,17 +2035,19 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             ctx->pc = ctx->lr;
             return 1;
         }
-        case 0x805F3A80: // OSSendMessage
-        case 0x805F3B00: // OSReceiveMessage
-        case 0x805F3B40: { // OSJamMessage
-            /* OPEN ITEM: these three are answered as synchronous no-ops, but the
-             * recompiled runtime's real message-queue entry points are
-             * OSSendMessage at 0x805F26D0 and OSReceiveMessage at 0x805F27A0
-             * (verified in the disassembly: the sender bumps mq->used at +0x1C and
-             * wakes mq+8; the receiver sleeps on mq+8). Whatever these three
-             * addresses are, a caller that inspects the result is being told the
-             * call succeeded. Do not extend this pattern: identify each address
-             * from the disassembly before deciding, as with the rest of this file. */
+        case 0x805F3A80: // dead: mid-function address inside OS init (disassembly: `bl 0x805F6C70`)
+        case 0x805F3B00: // dead: not a function entry either
+        case 0x805F3B40: { // dead: not a function entry either
+            /* These three are not function entries - 0x805F3A80 is the middle of a
+             * larger OS-init routine - so the dispatcher can only reach them if
+             * something jumps into the middle of that function, which intra-chunk
+             * control flow does with a plain goto, not a dispatch. The stubs are
+             * therefore never executed and are NOT the reason any caller misbehaves.
+             * The runtime's real message-queue entry points are OSSendMessage at
+             * 0x805F26D0 and OSReceiveMessage at 0x805F27A0, and those run the
+             * recompiled code (verified: the sender bumps mq->used at +0x1C and wakes
+             * mq+8; the receiver sleeps on mq+8). Kept only so the addresses are not
+             * silently handed to the interpreter if that ever changes. */
             ctx->pc = ctx->lr;
             return 1;
         }

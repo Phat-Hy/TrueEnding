@@ -353,6 +353,44 @@ static void host_watch_os_current_thread(CPUState* ctx, u32 block_pc) {
     fflush(stdout);
 }
 
+/* Generic sampled memory watch. TLS_WATCH_ADDR=0xAAAAAAAA,0xBBBBBBBB (up to 4)
+ * reports every change of those words together with the block that made it.
+ * Sampling once per dispatched block catches stores of any width (byte, word,
+ * memcpy), which a mem_write32 hook would miss. It follows a stalled manager's
+ * pending-operation pointer and thread-queue heads without hardcoding addresses. */
+static void host_watch_addrs(CPUState* ctx, u32 block_pc) {
+    static int s_init = -1;
+    static u32 s_addr[4];
+    static u32 s_prev[4];
+    static int s_n = 0;
+    static int s_reports = 0;
+    if (s_init < 0) {
+        s_init = 1;
+        const char* env = getenv("TLS_WATCH_ADDR");
+        if (env) {
+            const char* p = env;
+            while (*p && s_n < 4) {
+                s_addr[s_n] = (u32)strtoul(p, (char**)&p, 0);
+                s_prev[s_n] = 0xDEADBEEFu;
+                s_n++;
+                while (*p == ',' || *p == ' ') p++;
+            }
+        }
+    }
+    if (s_n == 0) return;
+    for (int i = 0; i < s_n; i++) {
+        u32 v = mem_read32(ctx, s_addr[i]);
+        if (s_prev[i] == 0xDEADBEEFu) { s_prev[i] = v; continue; }
+        if (v == s_prev[i]) continue;
+        u32 old = s_prev[i];
+        s_prev[i] = v;
+        if (s_reports++ >= 300) continue;
+        printf("[Runner] WATCH 0x%08X: 0x%08X -> 0x%08X by block pc=0x%08X lr=0x%08X (frame %d)\n",
+               s_addr[i], old, v, block_pc, ctx->lr, g_runner_current_frame);
+        fflush(stdout);
+    }
+}
+
 static inline int tls_run_blocks(CPUState* ctx, u32 max_blocks) {
     u32 blocks = 0;
     s_slice_sample_count = 0;
@@ -365,6 +403,7 @@ static inline int tls_run_blocks(CPUState* ctx, u32 max_blocks) {
         if (ctx->exception) return 0;
         blocks++;
         host_watch_os_current_thread(ctx, pc_before);
+        host_watch_addrs(ctx, pc_before);
 
         if ((blocks & 1023u) == 0u && s_slice_sample_count < 64) {
             s_slice_samples[s_slice_sample_count++] = ctx->pc;
@@ -994,6 +1033,7 @@ int main(int argc, char** argv) {
     tls_dump_recent_calls();
     tls_dump_sleep_queues(&cpu);
     tls_dump_watched_object(&cpu);
+    tls_dump_wake_queues(&cpu);
     printf("         Final PC: 0x805F50B0? Actual PC: 0x%08X, LR: 0x%08X, SP: 0x%08X\n", cpu.pc, cpu.lr, cpu.gpr[1]);
     printf("         Exception: 0x%08X, ProgramExc: 0x%08X\n", cpu.exception, cpu.program_exception);
     printf("         SRR0 (Faulting CIA): 0x%08X, SRR1: 0x%08X\n", cpu.srr0, cpu.srr1);
