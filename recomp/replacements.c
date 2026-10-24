@@ -505,15 +505,26 @@ static int tls_input_script_load(void) {
     const char* spec = getenv("TLS_INPUT_SCRIPT");
     if (!spec || !*spec) return 0;
 
-    char buf[512];
-    strncpy(buf, spec, sizeof(buf) - 1);
-    buf[sizeof(buf) - 1] = '\0';
-    printf("[Input] deterministic script: %s\n", buf);
+    printf("[Input] deterministic script: %s\n", spec);
     fflush(stdout);
 
-    for (char* item = strtok(buf, ","); item && s_script_count < TLS_INPUT_SCRIPT_MAX;
-         item = strtok(NULL, ",")) {
-        while (*item == ' ') item++;
+    /* Split items and buttons by hand: this used to call strtok() for the item list
+     * and strtok() again for the '+' button list, and the inner call reset the outer
+     * iteration state, so only the *first* entry of a multi-entry script was ever
+     * recorded. A second press therefore never reached the pad, which is what made
+     * the title's fade gate look "first-press-only" (handover 5c.10). */
+    const char* cursor = spec;
+    while (*cursor && s_script_count < TLS_INPUT_SCRIPT_MAX) {
+        while (*cursor == ' ') cursor++;
+        const char* item_end = strchr(cursor, ',');
+        if (!item_end) item_end = cursor + strlen(cursor);
+        char item[96];
+        size_t item_len = (size_t)(item_end - cursor);
+        if (item_len >= sizeof(item)) item_len = sizeof(item) - 1;
+        memcpy(item, cursor, item_len);
+        item[item_len] = '\0';
+        cursor = *item_end ? item_end + 1 : item_end;
+
         char* colon = strchr(item, ':');
         if (!colon) continue;
         *colon = '\0';
@@ -533,11 +544,19 @@ static int tls_input_script_load(void) {
             u32 raw = (u32)strtoul(buttons, NULL, 0);
             core = raw;
             cl = raw;
-        }
-        for (char* btn = (core || cl) ? NULL : strtok(buttons, "+"); btn; btn = strtok(NULL, "+")) {
-            size_t len = strlen(btn);
-            core |= tls_button_core_mask(btn, len);
-            cl |= tls_button_cl_mask(btn, len);
+        } else {
+            for (char* btn = buttons; btn && *btn; ) {
+                char* plus = strchr(btn, '+');
+                size_t len = plus ? (size_t)(plus - btn) : strlen(btn);
+                char name[32];
+                if (len >= sizeof(name)) len = sizeof(name) - 1;
+                memcpy(name, btn, len);
+                name[len] = '\0';
+                while (len && name[len - 1] == ' ') name[--len] = '\0';
+                core |= tls_button_core_mask(name, len);
+                cl |= tls_button_cl_mask(name, len);
+                btn = plus ? plus + 1 : NULL;
+            }
         }
         if (!core && !cl) {
             printf("[Input] script entry '%s' has no known button\n", buttons);
@@ -574,12 +593,17 @@ static void tls_input_script_apply(int frame, u32* core, u32* cl) {
  * State-triggered accept press.
  *
  * A frame-indexed script cannot press at the right moment when the frame at which
- * the title reaches a mode varies between runs (it does - streaming timing), and
- * the title's press-start gate is first-press-only (see handover 5c.10). So allow
- * a press *triggered by the guest's own state*: when the title task enters one of
- * the modes named in TLS_AUTO_ACCEPT ("1" by default), press A for a short hold.
- * This is still just a button press - nothing is written to guest state except the
- * same controller data the keyboard writes.
+ * the title reaches a mode varies between runs (it does - streaming timing). So
+ * allow a press *triggered by the guest's own state*: when the title task enters
+ * one of the modes named in TLS_AUTO_ACCEPT ("1" by default), press A for a short
+ * hold. This is still just a button press - nothing is written to guest state
+ * except the same controller data the keyboard writes.
+ *
+ * Note: the "the title gate is first-press-only" premise this comment used to carry
+ * was a symptom of TLS_INPUT_SCRIPT only ever loading its first entry (see the
+ * strtok note above), not of the gate. With multi-entry scripts the gate behaves
+ * exactly as the DOL code reads: it opens once the fade value at task[0x48]+0x100
+ * reaches the 150 at +0xA0, which the first accepted press is what sets.
  * ------------------------------------------------------------------------- */
 #define TLS_AUTO_ACCEPT_MAX 16
 static int s_accept_modes[TLS_AUTO_ACCEPT_MAX];
@@ -1417,6 +1441,42 @@ typedef struct {
 } IosFile;
 
 static IosFile s_ios_files[16] = {0};
+
+/* Open the host stand-in for the NAND save file.
+ *
+ * The guest's save-data check distinguishes "no save data yet" (a fresh console)
+ * from "the data is corrupt" purely by what the NAND layer answers, so fabricating
+ * a zero-filled file when there is none makes every first boot take the corrupt
+ * path - measured: the title asks "The save data cannot be used because the data
+ * is corrupted. Recreate save data?" instead of offering a new game. So: create
+ * only when the guest asked to create, and report "no such file" otherwise. */
+static bool ios_open_savedata(uint32_t mode, FILE** out_fp) {
+#ifdef _WIN32
+    CreateDirectoryA("savedata", NULL);
+#endif
+    const char* path = "savedata/savedata.dat";
+    FILE* fp = NULL;
+    if (mode & 2u) { // create
+        fp = fopen(path, "r+b");
+        if (!fp) {
+            fp = fopen(path, "w+b");
+            if (fp) {
+                static const uint8_t zero_block[4096] = {0};
+                for (uint32_t i = 0; i < 1348992 / 4096; i++) fwrite(zero_block, 1, 4096, fp);
+                if (1348992 % 4096 > 0) fwrite(zero_block, 1, 1348992 % 4096, fp);
+                fflush(fp);
+                fseek(fp, 0, SEEK_SET);
+                printf("[TLS NAND] created savedata/savedata.dat (1348992 bytes)\n");
+                fflush(stdout);
+            }
+        }
+    } else {
+        fp = fopen(path, "rb");
+    }
+    if (!fp) return false;
+    *out_fp = fp;
+    return true;
+}
 
 static int ios_alloc_fd(const char* path, uint32_t mode, FILE* fp) {
     for (int i = 1; i < 16; i++) {
@@ -2347,6 +2407,78 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0; // Valid lightgroup, execute original recompiled code
         }
 
+        /* fn_8022A054 is the engine's TLSF allocator: it walks the free-list table at
+         * manager+0x12C. After the title->game handoff the guest burns the whole block
+         * budget every frame with the PC parked inside it (handover 5c.10 follow-up),
+         * so count the calls per frame and name each caller before assuming the free
+         * list is corrupt. TLS_ALLOC_PROBE=1. */
+        case 0x8022A054: {
+            static int s_alloc = -1;
+            if (s_alloc < 0) s_alloc = getenv("TLS_ALLOC_PROBE") ? 1 : 0;
+            if (s_alloc) {
+                extern int g_runner_current_frame;
+                static int s_frame = -1;
+                static unsigned s_in_frame = 0, s_first_size = 0, s_last_size = 0;
+                if (g_runner_current_frame != s_frame) {
+                    if (s_in_frame > 0 && (s_in_frame > 100 || s_frame % 60 == 0)) {
+                        printf("[TLS Alloc] frame %d: %u allocator calls (first size=%u last=%u)\n",
+                               s_frame, s_in_frame, s_first_size, s_last_size);
+                        fflush(stdout);
+                    }
+                    s_frame = g_runner_current_frame;
+                    s_in_frame = 0;
+                    s_first_size = ctx->gpr[4];
+                }
+                s_last_size = ctx->gpr[4];
+                s_in_frame++;
+            }
+            /* TLS_ALLOC_PROBE=2 additionally inspects the free-list table
+             * (manager+0x12C, 32 roots, blocks linked through +0x10) for a cycle.
+             * The allocator's search loop only terminates when the next pointer reads
+             * 0, so a self-referencing or circular chain is why the guest can burn the
+             * whole block budget inside one call. */
+            if (s_alloc >= 2) {
+                extern int g_runner_current_frame;
+                static int s_table_reports = 0;
+                u32 mgr = ctx->gpr[3];
+                if (s_table_reports < 6 && mgr && resolve_guest_pointer(ctx, mgr)) {
+                    bool bad = false;
+                    int bad_root = -1;
+                    u32 cycle_at = 0, chain_len = 0;
+                    for (int root = 0; root < 32 && !bad; root++) {
+                        u32 b = mem_read32(ctx, mgr + 0x12C + (u32)root * 4);
+                        u32 seen[128];
+                        int n = 0;
+                        u32 len = 0;
+                        while (b && len < 4096) {
+                            bool repeat = false;
+                            for (int k = 0; k < n; k++) if (seen[k] == b) { repeat = true; break; }
+                            if (repeat) { bad = true; bad_root = root; cycle_at = b; chain_len = len; break; }
+                            if (n < 128) seen[n++] = b;
+                            if (!resolve_guest_pointer(ctx, b)) { bad = true; bad_root = root; cycle_at = b; chain_len = len; break; }
+                            b = mem_read32(ctx, b + 0x10);
+                            len++;
+                        }
+                    }
+                    if (bad) {
+                        s_table_reports++;
+                        printf("[TLS Alloc] frame=%d size=%u lr=0x%08X mgr=0x%08X: FREE LIST BROKEN "
+                               "(root=%d cycle_at=0x%08X after %u blocks)\n",
+                               g_runner_current_frame, ctx->gpr[4], ctx->lr, mgr, bad_root, cycle_at, chain_len);
+                        for (int root = 0; root < 32; root++) {
+                            u32 b = mem_read32(ctx, mgr + 0x12C + (u32)root * 4);
+                            if (!b) continue;
+                            printf("        root[%2d]=0x%08X hdr[0]=0x%08X hdr[4]=0x%08X next10=0x%08X next14=0x%08X\n",
+                                   root, b, mem_read32(ctx, b), mem_read32(ctx, b + 4),
+                                   mem_read32(ctx, b + 0x10), mem_read32(ctx, b + 0x14));
+                        }
+                        fflush(stdout);
+                    }
+                }
+            }
+            return 0; // Run original code
+        }
+
         // Diagnostic monitoring for resource pipeline
         case 0x8046DD60: {
             static int s_dd60_cnt = 0;
@@ -2601,30 +2733,13 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
             FILE* fp = NULL;
             if (path && strstr(path, "savedata")) {
-#ifdef _WIN32
-                CreateDirectoryA("savedata", NULL);
-#endif
-                if (mode & 2) {
-                    fp = fopen("savedata/savedata.dat", "w+b");
-                } else {
-                    fp = fopen("savedata/savedata.dat", "r+b");
-                    if (!fp) fp = fopen("savedata/savedata.dat", "rb");
-                }
-                if (!fp) {
-                    fp = fopen("savedata/savedata.dat", "w+b");
-                    if (fp) {
-                        static const uint8_t zero_block[4096] = {0};
-                        for (uint32_t i = 0; i < 1348992 / 4096; i++) {
-                            fwrite(zero_block, 1, 4096, fp);
-                        }
-                        if (1348992 % 4096 > 0) {
-                            fwrite(zero_block, 1, 1348992 % 4096, fp);
-                        }
-                        fflush(fp);
-                        fseek(fp, 0, SEEK_SET);
-                        printf("[TLS IOS_OpenAsync] Auto-created savedata/savedata.dat (1348992 bytes)\n");
-                        fflush(stdout);
-                    }
+                if (!ios_open_savedata(mode, &fp)) {
+                    printf("[TLS IOS_OpenAsync] %s -> no such file (-6), NAND has no save data\n", path);
+                    fflush(stdout);
+                    tls_ipc_enqueue_callback(cb, -6, usrdata); // IPC_RESULT_NOEXISTS
+                    ctx->gpr[3] = 0; // IPC_ERR_NONE
+                    ctx->pc = ctx->lr;
+                    return 1;
                 }
             }
 
@@ -2651,30 +2766,12 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
             FILE* fp = NULL;
             if (path && strstr(path, "savedata")) {
-#ifdef _WIN32
-                CreateDirectoryA("savedata", NULL);
-#endif
-                if (mode & 2) {
-                    fp = fopen("savedata/savedata.dat", "w+b");
-                } else {
-                    fp = fopen("savedata/savedata.dat", "r+b");
-                    if (!fp) fp = fopen("savedata/savedata.dat", "rb");
-                }
-                if (!fp) {
-                    fp = fopen("savedata/savedata.dat", "w+b");
-                    if (fp) {
-                        static const uint8_t zero_block[4096] = {0};
-                        for (uint32_t i = 0; i < 1348992 / 4096; i++) {
-                            fwrite(zero_block, 1, 4096, fp);
-                        }
-                        if (1348992 % 4096 > 0) {
-                            fwrite(zero_block, 1, 1348992 % 4096, fp);
-                        }
-                        fflush(fp);
-                        fseek(fp, 0, SEEK_SET);
-                        printf("[TLS IOS_Open] Auto-created savedata/savedata.dat (1348992 bytes)\n");
-                        fflush(stdout);
-                    }
+                if (!ios_open_savedata(mode, &fp)) {
+                    printf("[TLS IOS_Open] %s -> no such file (-6), NAND has no save data\n", path);
+                    fflush(stdout);
+                    ctx->gpr[3] = (u32)-6; // IPC_RESULT_NOEXISTS
+                    ctx->pc = ctx->lr;
+                    return 1;
                 }
             }
             int fd = ios_alloc_fd(path, mode, fp);
@@ -5131,22 +5228,22 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
         // fn_800A472C (Save data status check)
         case 0x800A472C: {
-            u32 out_len = ctx->gpr[4];
-            u32 out_err = ctx->gpr[5];
-            if (out_len && out_len >= 0x80000000 && out_len < 0x94000000) {
-                mem_write32(ctx, out_len, 1348992); // 1348992 bytes (0x149580)
-            }
-            if (out_err && out_err >= 0x80000000 && out_err < 0x94000000) {
-                mem_write32(ctx, out_err, 0); // no error
-            }
-            static int s_472c_calls = 0;
-            if (tls_draw_trace_enabled() && (++s_472c_calls <= 5 || s_472c_calls % 60 == 0)) {
-                printf("[TLS SaveCheck] fn_800A472C called! (lr=0x%08X) -> returning 1 (SUCCESS, len=1348992)\n", ctx->lr);
+            /* This used to answer for the guest: gpr[3]=1 plus a fabricated length of
+             * 1348992 bytes. That is fabricated *state*, and it is why the title's
+             * mode 5 (save check) always took the "data problem" branch to mode 9 and
+             * then looped back to the title instead of offering NEW GAME (handover
+             * 5c.10). The guest's own implementation is small and self-contained:
+             *   800A472C  if (fn_8061EF90(mgr + 0x234) == 0) return 1;
+             *             *out = fn_800A4494(mgr); return 0;
+             * and the NAND/IOS layer underneath it is already HLE'd, so run it. */
+            static int s_472c_probe = -1;
+            if (s_472c_probe < 0) s_472c_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;
+            if (s_472c_probe) {
+                printf("[TLS SaveCheck] fn_800A472C running original (mgr=0x%08X out_len=0x%08X out_err=0x%08X lr=0x%08X)\n",
+                       ctx->gpr[3], ctx->gpr[4], ctx->gpr[5], ctx->lr);
                 fflush(stdout);
             }
-            ctx->gpr[3] = 1; // 1 = SUCCESS in game logic (0 = Error/Recreate prompt)
-            ctx->pc = ctx->lr;
-            return 1;
+            return 0; // Run the guest's own save-data check
         }
 
         // fn_803B8270 (FinishAsync / set v340=0)
@@ -5210,9 +5307,13 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             /* Mode 1 -> 2 is gated by two things (0x80534264..0x805342A4):
              *   1. caller action 4, which the action map sends to real bit 11
              *      (classic-controller A, 0x0010) - see tools/decode_input_maps.py
-             *   2. a float compare between *(*(task+72)+160) and *(*(task+72)+256)
-             * When a press arrives and the mode still does not move, one of those two
-             * is the reason; print both so it stops being a guess. TLS_TITLE_GATE=1. */
+             *   2. a float compare between *(*(task+72)+160) (150.0, the fade target)
+             *      and *(*(task+72)+256) (0.0 until the first accepted press, which
+             *      stores 150.0 there). The DOL's `cror eq,gt,eq` turns that into
+             *      CR0[EQ] = (f256 >= f160), `mfcr r0` copies CR, `extrwi. r0,r0,1,2`
+             *      extracts CR0[EQ], and `beq` takes the "not armed yet" branch when it
+             *      is 0. So the gate opens on the press *after* the one that arms it -
+             *      print both values so the state is never a guess. TLS_TITLE_GATE=1. */
             {
                 static int s_gate = -1;
                 if (s_gate < 0) s_gate = getenv("TLS_TITLE_GATE") ? 1 : 0;
@@ -5231,8 +5332,8 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                         memcpy(&b, &f256, 4);
                     }
                     printf("[TLS TitleGate] frame=%d mode=1 realbit11(A)=%d trigger=0x%08X "
-                           "f160=%.4f f256=%.4f pass=%d hold=0x%04X\n",
-                           g_runner_current_frame, (trig >> 11) & 1, trig, a, b, (b <= a),
+                           "f160=%.4f f256=%.4f gate_open=%d hold=0x%04X\n",
+                           g_runner_current_frame, (trig >> 11) & 1, trig, a, b, (b >= a),
                            s_ctrl_state.core_hold);
                     fflush(stdout);
                 }
