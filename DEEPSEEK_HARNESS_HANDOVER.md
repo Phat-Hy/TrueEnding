@@ -1,6 +1,6 @@
 # DeepSeek Harness Handover Dossier: Project The Maybe(Not) Last Story
 
-> ## READ THIS FIRST (state at commit `a12ec93`)
+> ## READ THIS FIRST (state at commit `549f482`)
 >
 > **Sections 3–5b are historical.** They contain claims that were later disproven (the CMPR luma
 > fallback, the "task vtable zeroed" theory, the `+0x2AC` state machine, the anime-track clamps).
@@ -43,14 +43,17 @@
 > 1. Make the menu choose NEW GAME. `TLS_INPUT_SCRIPT="500-512:A"` moves the title's mode machine, but
 >    mode 1→2 (`SetMode(2)`) is gated by a bit-extract at `0x80534294` whose tested bit is still
 >    unexplained — §5c.10 ends with the single measurement that settles it.
-> 2. Visual parity of the title: the lake/water surface shows large black regions and a pink sky
->    reflection (`10-title-hero-cave-frame2200.png`).
+> 2. Water/reflection and the guest framebuffers. §5c.11: EFB copies were not emulated at all and now are
+>    (`0x49/0x4A/0x4B/0x52` decoded, viewport-scaled readback of the completed frame, write into guest memory
+>    verified with `TLS_EFB_SAMPLE`). The open detail is the destination encoding: 4x4-tiled RGBA8 for the
+>    reflection textures, 16-bit RGB565 rows for the two VI scanout buffers (which are 614400 B each - that
+>    arithmetic is what proved the old 32-bit write overran them).
 > 3. The two boot-time non-code dispatches (`0x005F2A10`, `0x005F2A90`, both `lr=0x805F2F18/48` at
 >    frame 0) are still handled by the generic safeguard and deserve a name.
 >
 > **First commands.**
 > ```powershell
-> git log --oneline -8                                  # f52de56..a12ec93 are the current session
+> git log --oneline -14                                 # f52de56..549f482 are the current session
 > python tools/recomp_harness.py build-runner           # chunks are already lifted; ~1 s
 > $env:TLS_INPUT_SCRIPT="500-512:A,700-712:A"
 > build\recomp\tls_runner.exe --window --frames 2100 --fps 60 --no-audio
