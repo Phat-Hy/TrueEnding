@@ -933,6 +933,14 @@ cleared, so only edge pixels land on sampled positions. Next check: print the sa
 known-bright coordinates (the logo text) at the frame being copied, and compare with the same coordinates in
 `d3d11_screenshot_<frame>.ppm`; if the screenshot is bright there and the sample is black, the copy is
 reading the wrong buffer (snapshot capture order) rather than the wrong layout.
+
+**Answer: the source is the drawn frame.** `TLS_EFB_SAMPLE=1` (gated to frames >= 1100) scans the mapped
+source on a 16-pixel grid and reports its brightness range: `src=snapshot 1280x720 avg=5.8 max=765` - i.e.
+the snapshot the copy reads contains the drawn frame (pure white pixels present, average brightness matching
+a mostly-black logo screen). The earlier all-black samples were the run's *first* copies, taken while the
+boot screen is genuinely black. So the data flow is verified end to end: guest copy registers -> viewport-
+scaled readback of a completed frame -> write into guest memory. What is left is purely the destination
+encoding (the tiled/RGB565 details above), not the source.
 `TLS_FB_RGBA8` off (the dump must then decode the XFB as RGB565, which is what its original YUV422 code
 should be replaced with, not supplemented).
 

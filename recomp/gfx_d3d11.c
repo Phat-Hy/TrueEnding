@@ -1213,6 +1213,34 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
         D3D11_MAPPED_SUBRESOURCE mapped;
         if (SUCCEEDED(ID3D11DeviceContext_Map(s_d3d11.context, (ID3D11Resource*)staging, 0, D3D11_MAP_READ, 0, &mapped))) {
             const uint8_t* src = (const uint8_t*)mapped.pData;
+            /* Is the source we are about to sample actually the drawn frame? Scan a
+             * coarse grid of the mapped backbuffer and report its brightness range.
+             * TLS_EFB_SAMPLE=1. */
+            {
+                static int s_sample = -1;
+                if (s_sample < 0) s_sample = getenv("TLS_EFB_SAMPLE") ? 1 : 0;
+                if (s_sample) {
+                    static int s_samples = 0;
+                    extern int g_runner_current_frame;
+                    if (g_runner_current_frame >= 1100 && s_samples < 4) {
+                        s_samples++;
+                        unsigned maxlum = 0; unsigned long sum = 0, n = 0;
+                        for (UINT yy = 0; yy < desc.Height; yy += 16) {
+                            const uint8_t* r2 = src + (size_t)yy * mapped.RowPitch;
+                            for (UINT xx = 0; xx < desc.Width; xx += 16) {
+                                const uint8_t* p2 = r2 + (size_t)xx * 4;
+                                unsigned lum = p2[0] + p2[1] + p2[2];
+                                if (lum > maxlum) maxlum = lum;
+                                sum += lum; n++;
+                            }
+                        }
+                        printf("[EfbSample] src=%s %ux%u avg=%.1f max=%u (of 765)\n",
+                               have_backbuffer ? "backbuffer" : "snapshot", desc.Width, desc.Height,
+                               (double)sum / (double)n, maxlum);
+                        fflush(stdout);
+                    }
+                }
+            }
             float sx = (s_d3d11.vp_w > 0.0f) ? (s_d3d11.vp_w / 640.0f) : (float)desc.Width / 640.0f;
             float sy = (s_d3d11.vp_h > 0.0f) ? (s_d3d11.vp_h / 480.0f) : (float)desc.Height / 480.0f;
             uint32_t tiles_x = (w + 3) / 4;
