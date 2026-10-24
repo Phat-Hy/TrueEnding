@@ -951,6 +951,12 @@ a mostly-black logo screen). The earlier all-black samples were the run's *first
 boot screen is genuinely black. So the data flow is verified end to end: guest copy registers -> viewport-
 scaled readback of a completed frame -> write into guest memory. What is left is purely the destination
 encoding (the tiled/RGB565 details above), not the source.
+
+**Ground truth for the encoding work.** The Dolphin reference texture dump is present and complete:
+`%APPDATA%\Dolphin Emulator\Dump\Textures\SLSEXJ` holds **355 PNGs**. When the destination encoding of the
+copy is finished, the check is not only "does the lake look right" but "do the sampled textures match those
+dumps" - in particular the reflection target that receives the 160x112 copy, which is the one the water
+surface samples. Compare against the matching `tex1_*` files rather than eyeballing the lake.
 `TLS_FB_RGBA8` off (the dump must then decode the XFB as RGB565, which is what its original YUV422 code
 should be replaced with, not supplemented).
 
