@@ -1225,13 +1225,23 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                     if (px >= desc.Width) px = desc.Width - 1;
                     const uint8_t* p = row + (size_t)px * 4;
                     uint8_t b = p[0], g = p[1], r = p[2], a = p[3];
-                    uint32_t tile = (gy / 4) * tiles_x + (gx / 4);
-                    uint32_t within = (gy % 4) * 4 + (gx % 4);
-                    uint8_t* tile_base = guest + (size_t)tile * 64;
-                    tile_base[within * 2 + 0] = a;
-                    tile_base[within * 2 + 1] = r;
-                    tile_base[32 + within * 2 + 0] = g;
-                    tile_base[32 + within * 2 + 1] = b;
+                    /* A/B: display copies may want a row-linear scanout buffer rather
+                     * than the 4x4-tiled texture layout. TLS_EFB_LINEAR=1 writes rows
+                     * linearly (R,G,B,A) so the two can be compared on one frame. */
+                    static int s_linear = -1;
+                    if (s_linear < 0) s_linear = getenv("TLS_EFB_LINEAR") ? 1 : 0;
+                    if (s_linear) {
+                        uint8_t* px = guest + ((size_t)gy * w + gx) * 4;
+                        px[0] = r; px[1] = g; px[2] = b; px[3] = a;
+                    } else {
+                        uint32_t tile = (gy / 4) * tiles_x + (gx / 4);
+                        uint32_t within = (gy % 4) * 4 + (gx % 4);
+                        uint8_t* tile_base = guest + (size_t)tile * 64;
+                        tile_base[within * 2 + 0] = a;
+                        tile_base[within * 2 + 1] = r;
+                        tile_base[32 + within * 2 + 0] = g;
+                        tile_base[32 + within * 2 + 1] = b;
+                    }
                 }
             }
             ID3D11DeviceContext_Unmap(s_d3d11.context, (ID3D11Resource*)staging, 0);
