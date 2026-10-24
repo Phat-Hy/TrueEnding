@@ -915,6 +915,14 @@ So the two copy classes need different encodings and one code path cannot serve 
 The BP 0x4B format field reads 0 for both classes, so the distinction has to come from tracking
 `GXSetDispCopyFmt`/`GXSetDispCopyYScale` state or from the destination range - implement the display path
 as RGB565 linear first, keep the tiled path for the reflection textures, and check the lake reflection with
+
+**Display path first result (RGB565 written, frame 2340).** With display copies going out as RGB565 rows and
+`TLS_FB_RGB565=1` decoding the VI buffer, the dump drops from a scrambled frame to **32 unique colours** -
+the write now stays inside its own 614400-byte buffer instead of overrunning into the next one, which was
+the doubled image. What the dump shows is a black frame with faint blue curved outlines, i.e. the geometry
+silhouette rather than the picture, so the channel order or the source sampling is still off - check
+R/B order (RGB565 is BGR-ordered on the Wii) and whether the copy should sample the *object* pass before
+the EFB is cleared. The buffer-boundary problem itself is fixed and measured.
 `TLS_FB_RGBA8` off (the dump must then decode the XFB as RGB565, which is what its original YUV422 code
 should be replaced with, not supplemented).
 
