@@ -585,6 +585,7 @@ static void tls_input_script_apply(int frame, u32* core, u32* cl) {
 static int s_accept_modes[TLS_AUTO_ACCEPT_MAX];
 static int s_accept_mode_count = -1;
 static int s_accept_press_frames = 0;
+static int s_accept_press_delay = 0;
 
 static int tls_auto_accept_configured(void) {
     if (s_accept_mode_count >= 0) return s_accept_mode_count;
@@ -599,7 +600,7 @@ static int tls_auto_accept_configured(void) {
     }
     printf("[Input] auto-accept on title mode(s):");
     for (int i = 0; i < s_accept_mode_count; i++) printf(" %d", s_accept_modes[i]);
-    printf("\\n");
+    printf("\n");
     fflush(stdout);
     return s_accept_mode_count;
 }
@@ -609,21 +610,39 @@ static void tls_auto_accept_on_mode(int mode) {
     if (tls_auto_accept_configured() == 0) return;
     for (int i = 0; i < s_accept_mode_count; i++) {
         if (s_accept_modes[i] == mode) {
-            s_accept_press_frames = 12;
+            /* Start the press on the *next* frame: the pad manager's per-frame update
+             * may already have run for the frame in which the mode changed, so a press
+             * that begins immediately can be seen only as a partial edge (measured:
+             * frame 357 of mode 1 produced action bit 12 from the classic Y alias but
+             * not bit 11 from A). */
+            s_accept_press_delay = 1;
+            s_accept_press_frames = 20;
             return;
         }
     }
 }
 
 static void tls_auto_accept_apply(u32* core, u32* cl) {
-    if (s_accept_press_frames <= 0) return;
-    s_accept_press_frames--;
+    if (s_accept_press_delay > 0 || s_accept_press_frames <= 0) return;
     *core |= WPAD_BUTTON_A | WPAD_BUTTON_2;
     *cl |= WPAD_CL_BUTTON_A | WPAD_CL_BUTTON_Y;
 }
 
+/* Counted once per frame in tls_input_new_frame(): tls_service_controller_input()
+ * runs several times per frame (main loop plus one call per KPADRead channel), so
+ * decrementing there burned the whole press inside a single frame and the pad
+ * manager never observed a held button. */
+static void tls_auto_accept_tick(void) {
+    if (s_accept_press_delay > 0) {
+        s_accept_press_delay--;
+        return;
+    }
+    if (s_accept_press_frames > 0) s_accept_press_frames--;
+}
+
 
 void tls_input_new_frame(void) {
+    tls_auto_accept_tick();
     s_latched_core_trig = 0;
     s_latched_cl_trig = 0;
     s_latched_core_release = 0;

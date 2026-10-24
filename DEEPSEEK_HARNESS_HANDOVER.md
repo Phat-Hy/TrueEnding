@@ -751,7 +751,33 @@ difference is whether `f256` is still 0 when the press arrives, which is the gat
 architectural one. Converting at that boundary (`guest = bitreverse32(cr)`, and the same on the way in)
 was implemented and built — 479 `mfcr` sites picked it up — but it changed nothing for *this* gate (the
 reversal maps bit 28 ↔ bit 3, and this instruction needs neither) and was reverted rather than left
-unverified. The remaining question is therefore narrower: which bit does the *retail* machine's
+unverified. **The measurement (taken this round, instrumentation since re-lifted).** A one-line probe inserted at
+`label_80534294` (see the technique below) printed, on the frame the press finally arrived:
+
+```
+[GateExtract] cr=0x88000888 mfcr=0x88000888 b28=0 b29=0 b30=0 cr0=0x8 xer=0x00000000 f0=0.0 f9=150.0
+```
+
+* `f0 = 0 < f9 = 150` → CR0 = LT only (`cr0=0x8`), so `cror eq,gt,eq` leaves CR0[EQ] = 0 (bit 29 = 0).
+* The extracted bit is **bit 28 = 0**, which sets CR0[EQ] via `rlwinm.`, so `beq .L_805342D0` is taken.
+* Under this emulator's layout that bit is `XER[SO]` (`xer=0` here). That is why the mode machine only
+  ever advanced in runs where XER[SO] happened to be set earlier - i.e. by accident.
+
+**Requirement this pins down:** `SetMode(2)` runs when the extracted bit is **1**. The only CR bit that
+carries "the press is accepted now" is `CR0[EQ]` (`f0 >= f9`), so on the retail machine bit 28 of the
+`mfcr` word must *be* CR0[EQ]. This emulator stores CR0 in bits 28-31 with the nibble mirrored
+(`compare<<28`, LT = 0x8 → bit 31, EQ = 0x2 → bit 29), so bit 28 is SO. Making bit 28 land on CR0[EQ]
+is therefore a condition-register layout fix in `tools/DolRecomp` (`cr_field_shift`, `emit_compare_*`,
+`ppc_fcmp`, and the `cror`/`bc` bit numbering must move together), and it is the next concrete change to
+make - verify by pressing **after** the title's fade completes (`f256 = f160 = 150`) and seeing `SetMode(2)`.
+
+**Input-path bug found and fixed while measuring:** `TLS_AUTO_ACCEPT` consumed its press inside a single
+frame because `tls_service_controller_input()` runs several times per frame (main loop plus one call per
+`KPADRead` channel) and the press counter was decremented there. Counted per frame now
+(`tls_auto_accept_tick`), with a one-frame delay so the press begins on a frame boundary; the pad manager
+then reports `trigger=0x00004800` (action bit 11) exactly once, as it does for a real press.
+
+The remaining question is therefore narrower: which bit does the *retail* machine's
 `extrwi. r0,r0,1,2` read, and what does `0x80534294` need to test for `SetMode(2)` to run. Instrument
 `ctx->cr` at `0x80534288`–`0x80534298` and compare with `f0/f9` — that single measurement settles it.
 The cheapest way to get it: the generated chunk assigns `ctx->pc = 0x80534288u;` before every instruction,
