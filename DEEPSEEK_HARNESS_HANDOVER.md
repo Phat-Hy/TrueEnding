@@ -923,6 +923,16 @@ the doubled image. What the dump shows is a black frame with faint blue curved o
 silhouette rather than the picture, so the channel order or the source sampling is still off - check
 R/B order (RGB565 is BGR-ordered on the Wii) and whether the copy should sample the *object* pass before
 the EFB is cleared. The buffer-boundary problem itself is fixed and measured.
+
+**Channel order tested, content is sparse.** Swapping R and B in that dump turns the blue outlines red and
+changes nothing else, so the stored order is a pure R/B swap (RGB565 vs BGR565) and *not* the reason the
+image is nearly empty. What the copy captures is a handful of thin curves - the silhouette edges of the
+backdrop geometry - which points at the **source sampling**, not the encoding: the copy samples the
+backbuffer with `x*sx, y*sy` from a stale viewport rect or from a frame in which the fill was already
+cleared, so only edge pixels land on sampled positions. Next check: print the sampled pixel for a few
+known-bright coordinates (the logo text) at the frame being copied, and compare with the same coordinates in
+`d3d11_screenshot_<frame>.ppm`; if the screenshot is bright there and the sample is black, the copy is
+reading the wrong buffer (snapshot capture order) rather than the wrong layout.
 `TLS_FB_RGBA8` off (the dump must then decode the XFB as RGB565, which is what its original YUV422 code
 should be replaced with, not supplemented).
 
