@@ -1235,6 +1235,31 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                 }
             }
             ID3D11DeviceContext_Unmap(s_d3d11.context, (ID3D11Resource*)staging, 0);
+            /* Proof that the copy delivered content: count distinct byte values in the
+             * first 4 KB of the destination. A destination that is still uninitialised
+             * reads as one or two values; a real picture has many. TLS_EFB_CHECK=1. */
+            static int s_check = -1, s_check_from = 0;
+            if (s_check < 0) {
+                s_check = getenv("TLS_EFB_CHECK") ? 1 : 0;
+                const char* cf = getenv("TLS_EFB_CHECK_FRAME");
+                s_check_from = cf ? atoi(cf) : 0;
+            }
+            if (s_check) {
+                static int s_checks = 0;
+                extern int g_runner_current_frame;
+                if (g_runner_current_frame >= s_check_from && s_checks < 4) {
+                    s_checks++;
+                    unsigned seen[256] = {0};
+                    int distinct = 0;
+                    for (int i = 0; i < 4096; i++) {
+                        unsigned b = guest[i];
+                        if (!seen[b]) { seen[b] = 1; distinct++; }
+                    }
+                    printf("[EfbCheck] dst=0x%08X %ux%u: %d distinct byte values in first 4KB\n",
+                           dst_guest, w, h, distinct);
+                    fflush(stdout);
+                }
+            }
         }
         ID3D11Texture2D_Release(staging);
     }

@@ -860,7 +860,12 @@ completed frame instead of the mid-frame clear. Diagnostics confirm the ordering
 What the framebuffer dump still cannot show is the *picture*: the guest copies into a **4x4-tiled RGBA8**
 texture, while the runner's `framebuffer_*.ppm` writer reads the VI buffer linearly, so a correct copy looks
 like scrambled green blocks in the dump (1073/633 unique colours instead of 1 uniform one - the buffer is
-demonstrably being written). Next steps, in order: (a) teach the dump to decode the VI buffer with the
+demonstrably being written). `TLS_EFB_CHECK=1` (with `TLS_EFB_CHECK_FRAME=<n>`) counts the distinct byte
+values in the first 4 KB of every copy destination: the first copies of a run report 1-2 values, which is
+correct for them - they happen while the screen is still black. A check gated at frame 1450 produced **no
+output at all**, i.e. the guest issued no EFB copy in that frame window, so the lake frame that needs
+checking is a different one; gate the check on a frame where `TLS_EFB_COPY_PROBE` shows copies happening
+(e.g. 2340). Next steps, in order: (a) teach the dump to decode the VI buffer with the
 format the guest actually configured (or decode the tiled RGBA8), then (b) look at the lake at a frame where
 the water is on screen to confirm the reflection, and (c) check that the staging readback (up to 5 copies
 per frame, each a GPU->CPU sync) does not cost too much frame time.
