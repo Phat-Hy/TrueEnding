@@ -1119,9 +1119,16 @@ int tls_service_message_queues(CPUState* ctx) {
     return 0;
 }
 
-/* Ring buffer of the most recent dispatched guest functions, for stall diagnosis. */
+/* Ring buffer of the most recent dispatched guest functions, for stall diagnosis.
+ * Each entry carries the caller-visible state at dispatch time: a bare PC list
+ * says where the guest was but not why it got there, while (lr, sp, r3, r12)
+ * together name the call site and the receiver of a virtual call. */
 #define TLS_RECENT_MAX 64
 static u32 s_recent_calls[TLS_RECENT_MAX];
+static u32 s_recent_lr[TLS_RECENT_MAX];
+static u32 s_recent_sp[TLS_RECENT_MAX];
+static u32 s_recent_r3[TLS_RECENT_MAX];
+static u32 s_recent_r12[TLS_RECENT_MAX];
 static int s_recent_frames[TLS_RECENT_MAX];
 static u32 s_recent_count = 0;
 static u32 s_recent_pos = 0;
@@ -1130,12 +1137,16 @@ int tls_is_idle_address(u32 address) {
     return (address >= 0x805F50B0u && address <= 0x805F50BCu);
 }
 
-void tls_record_recent_call(u32 address) {
+void tls_record_recent_call(CPUState* ctx, u32 address) {
     if (tls_is_idle_address(address)) {
         return;
     }
     extern int g_runner_current_frame;
     s_recent_calls[s_recent_pos] = address;
+    s_recent_lr[s_recent_pos] = ctx->lr;
+    s_recent_sp[s_recent_pos] = ctx->gpr[1];
+    s_recent_r3[s_recent_pos] = ctx->gpr[3];
+    s_recent_r12[s_recent_pos] = ctx->gpr[12];
     s_recent_frames[s_recent_pos] = g_runner_current_frame;
     s_recent_pos = (s_recent_pos + 1) % TLS_RECENT_MAX;
     if (s_recent_count < TLS_RECENT_MAX) {
@@ -1147,8 +1158,11 @@ void tls_dump_recent_calls(void) {
     printf("\n[Runner] Last %u non-idle guest functions (oldest first):\n", s_recent_count);
     for (u32 i = 0; i < s_recent_count; i++) {
         u32 idx = (s_recent_pos + TLS_RECENT_MAX - s_recent_count + i) % TLS_RECENT_MAX;
-        printf("         0x%08X  frame=%d\n", s_recent_calls[idx], s_recent_frames[idx]);
+        printf("         0x%08X  frame=%d  lr=0x%08X sp=0x%08X r3=0x%08X r12=0x%08X\n",
+               s_recent_calls[idx], s_recent_frames[idx], s_recent_lr[idx],
+               s_recent_sp[idx], s_recent_r3[idx], s_recent_r12[idx]);
     }
+    fflush(stdout);
 }
 
 u32 g_count_c1c8 = 0;
@@ -1486,8 +1500,79 @@ void tls_dump_watched_object(CPUState* ctx) {
  * DolRecomp and the in-chunk copies of these clamps were gone. They are removed for
  * good; TLS_MEMCPY_PROBE / TLS_WATCH_CURRENT_THREAD still watch for their return. */
 
+/* Fixed-size ring of the last TLS_TAIL_N dispatches with the whole argument set.
+ * The 64-entry tls_dump_recent_calls ring is too coarse to follow one deep call
+ * chain into a bad return, and streaming every dispatch from a frame boundary
+ * would overflow before the defect. Keeping a 256-dispatch tail in memory and
+ * dumping it at the moment the guest leaves code shows the exact call chain.
+ * Inert unless TLS_TAIL_RING=1. */
+#define TLS_TAIL_N 256
+typedef struct {
+    u32 pc, lr, sp, r3, r4, r5, r6, r7, ctr;
+    int frame;
+    int cb;
+} TlsTailEntry;
+static TlsTailEntry s_tailbuf[TLS_TAIL_N];
+static u32 s_tailpos = 0, s_tailcount = 0;
+
+static int tls_tail_enabled(void) {
+    static int s_on = -1;
+    if (s_on < 0) s_on = getenv("TLS_TAIL_RING") ? 1 : 0;
+    return s_on;
+}
+
+static void tls_tail_push(CPUState* ctx, u32 pc) {
+    if (!tls_tail_enabled()) return;
+    extern int g_runner_current_frame;
+    TlsTailEntry* e = &s_tailbuf[s_tailpos];
+    e->pc = pc; e->lr = ctx->lr; e->sp = ctx->gpr[1];
+    e->r3 = ctx->gpr[3]; e->r4 = ctx->gpr[4]; e->r5 = ctx->gpr[5];
+    e->r6 = ctx->gpr[6]; e->r7 = ctx->gpr[7]; e->ctr = ctx->ctr;
+    e->frame = g_runner_current_frame; e->cb = g_host_callback_depth;
+    s_tailpos = (s_tailpos + 1) % TLS_TAIL_N;
+    if (s_tailcount < TLS_TAIL_N) s_tailcount++;
+}
+
+static void tls_tail_dump(const char* why) {
+    if (!tls_tail_enabled() || s_tailcount == 0) return;
+    printf("\n[TLS TailRing] %s - last %u dispatches (oldest first):\n", why, s_tailcount);
+    for (u32 i = 0; i < s_tailcount; i++) {
+        u32 idx = (s_tailpos + TLS_TAIL_N - s_tailcount + i) % TLS_TAIL_N;
+        TlsTailEntry* e = &s_tailbuf[idx];
+        printf("   f=%d cb=%d pc=0x%08X lr=0x%08X sp=0x%08X r3=0x%08X r4=0x%08X r5=0x%08X "
+               "r6=0x%08X r7=0x%08X ctr=0x%08X\n",
+               e->frame, e->cb, e->pc, e->lr, e->sp, e->r3, e->r4, e->r5, e->r6, e->r7, e->ctr);
+    }
+    fflush(stdout);
+}
+
 int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
-    tls_record_recent_call(address);
+    tls_record_recent_call(ctx, address);
+    tls_tail_push(ctx, address);
+
+    /* Instruction-level dispatch trace from a given frame onward. The recent-call
+     * ring only keeps 64 entries, which is not enough to follow one deep call
+     * chain into a bad return; this prints every dispatch with the registers a
+     * call site actually passes. TLS_TRACE_FROM=<frame> (cap: TLS_TRACE_MAX,
+     * default 400). Inert unless set. */
+    {
+        extern int g_runner_current_frame;
+        static int s_trace_from = -2, s_trace_cap = 400, s_trace_n = 0;
+        if (s_trace_from == -2) {
+            const char* e = getenv("TLS_TRACE_FROM");
+            const char* c = getenv("TLS_TRACE_MAX");
+            s_trace_from = e ? atoi(e) : -1;
+            if (c) s_trace_cap = atoi(c);
+        }
+        if (s_trace_from >= 0 && g_runner_current_frame >= s_trace_from && s_trace_n < s_trace_cap) {
+            s_trace_n++;
+            printf("[TRACE] f=%d pc=0x%08X lr=0x%08X sp=0x%08X r3=0x%08X r4=0x%08X r5=0x%08X "
+                   "r6=0x%08X r7=0x%08X ctr=0x%08X cb=%d\n",
+                   g_runner_current_frame, address, ctx->lr, ctx->gpr[1], ctx->gpr[3], ctx->gpr[4],
+                   ctx->gpr[5], ctx->gpr[6], ctx->gpr[7], ctx->ctr, g_host_callback_depth);
+            fflush(stdout);
+        }
+    }
 
     /* memcpy watch for writes into the OS low page. A byte-copy through
      * memcpy (0x800062F8, whose tail loop is 0x80006460) with a NULL destination
@@ -1551,6 +1636,15 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             fflush(stdout);
         }
         s_sentinel_hits++;
+        {
+            static int s_tail2 = -1;
+            if (s_tail2 < 0) s_tail2 = getenv("TLS_TAIL_PROBE") ? 1 : 0;
+            if (s_tail2 && s_sentinel_hits == 1) {
+                printf("[TLS TailProbe] stray sentinel reached; dispatch tail follows\n");
+                tls_dump_recent_calls();
+                tls_tail_dump("stray host sentinel");
+            }
+        }
         /* Parking at the idle PC used to be the recovery, and it is unrecoverable:
          * tls_is_system_idle() then reports idle for every following frame, no block
          * is ever executed again, and the run ends at a healthy 60 FPS over a black
@@ -1601,6 +1695,28 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         }
 
         static u32 s_invalid_addr_count = 0;
+        /* The FIRST non-code address of a run is the defect; the recoveries that
+         * follow are consequences of it (each one resumes somewhere arbitrary).
+         * Dump the dispatch tail here so the calls that led into it are named.
+         * Inert unless TLS_TAIL_PROBE=1. */
+        {
+            static int s_tail = -1;
+            static int s_tail_dumps = 0;
+            if (s_tail < 0) s_tail = getenv("TLS_TAIL_PROBE") ? 1 : 0;
+            if (s_tail && s_invalid_addr_count == 0) {
+                if (s_tail_dumps == 0) {
+                    printf("[TLS TailProbe] first non-code address 0x%08X (lr=0x%08X)\n",
+                           address, ctx->lr);
+                    tls_dump_recent_calls();
+                }
+                if (s_tail_dumps < 3) {
+                    char why[64];
+                    s_tail_dumps++;
+                    snprintf(why, sizeof(why), "non-code address 0x%08X #%d", address, s_tail_dumps);
+                    tls_tail_dump(why);
+                }
+            }
+        }
         if (++s_invalid_addr_count <= 30) {
             printf("[TLS Safeguard] Bypassed invalid jump to 0x%08X (LR=0x%08X, SP=0x%08X, r3=0x%08X, r12=0x%08X)\n",
                    address, ctx->lr, ctx->gpr[1], ctx->gpr[3], ctx->gpr[12]);

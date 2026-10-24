@@ -162,6 +162,11 @@ static bool update_display_window(const u8* yuyv_fb) {
 #endif
 
 
+/* End of the DOL's .bss. The OS places the main thread stack immediately above
+ * it, so this is the one fact the host needs to compute the same memory map the
+ * application's linker script defines (see init_wii_low_memory). */
+static u32 s_guest_static_end = 0;
+
 static bool load_dol_into_cpu(CPUState* cpu, const char* path) {
     DOLFile dol;
     if (!dol_load(&dol, path)) {
@@ -195,6 +200,7 @@ static bool load_dol_into_cpu(CPUState* cpu, const char* path) {
             printf("         BSS:     0x%08X - 0x%08X (%u bytes zeroed)\n",
                    dol.header.bss_address, dol.header.bss_address + dol.header.bss_size, dol.header.bss_size);
         }
+        s_guest_static_end = dol.header.bss_address + dol.header.bss_size;
     }
 
     // Load data sections
@@ -219,10 +225,48 @@ static bool load_dol_into_cpu(CPUState* cpu, const char* path) {
 }
 
 static void init_wii_low_memory(CPUState* cpu) {
+    /* The MEM1 arena low is not a free choice: the guest's OSInit takes it from
+     * BI2 (0x8000310C) when that field is non-zero and skips its own computation,
+     * and the very first thing the engine does with it is carve a 1 MB heap at
+     * OSGetMEM1ArenaLo(). The application's linker script defines the map this
+     * value has to respect (asm/ldscript.lcf):
+     *
+     *     _stack_end   = end of .bss
+     *     _stack_addr  = _stack_end + 0x10000        (main thread stack, 64 KB)
+     *     _db_stack_addr = _stack_addr + 0x2000      (debugger stack, 8 KB)
+     *     __ArenaLo    = (_db_stack_addr + 31) & ~31
+     *
+     * Both halves were verified in the run: BSS ends at 0x808893B0 and the boot
+     * thread reports stackBase=0x808993B0 / stackEnd=0x808893B0.
+     *
+     * The previous hardcoded 0x8088A000 was 0xC50 bytes above .bss - i.e. inside
+     * the main thread's own stack, not above it. Consequences observed, not
+     * inferred: the engine's 1 MB heap (arena+8) grew upward through unwritten
+     * stack, and at frame 830 an allocation returned 0x80898D60, a live stack
+     * address. The caller (fn_800838B8, the game's allocate-through-vtable
+     * helper) stored it and then returned through its own clobbered save slot:
+     * `lwz r0,0x34(r1); mtlr r0; blr` with r0 = 0xAA, dispatching pc 0xA8. The
+     * boot thread then executed string data ("...el/textures/...") as code and
+     * never re-entered the frame loop. TLS_WATCH_ADDR on 0x8087E768 showed
+     * OSSetMEM1ArenaLo(0x8088A000) at frame 0 from lr=0x805EB7EC, i.e. through
+     * the BI2 field written below, which is why this is the fix. */
+    const u32 app_stack_size = 0x10000u;  /* _stack_addr - _stack_end */
+    const u32 db_stack_size  = 0x2000u;   /* _db_stack_addr - _stack_addr */
+    u32 static_end = s_guest_static_end ? s_guest_static_end : 0x808893B0u;
+    u32 arena_lo = (static_end + app_stack_size + db_stack_size + 31u) & ~31u;
+    /* TLS_ARENALO=<hex> overrides for A/B experiments only. */
+    {
+        const char* e = getenv("TLS_ARENALO");
+        if (e) {
+            arena_lo = (u32)strtoul(e, NULL, 0);
+            printf("[Runner] MEM1 arena low overridden to 0x%08X (TLS_ARENALO)\n", arena_lo);
+        }
+    }
+
     // Standard Wii low memory configuration (OS hardware/arena pointers)
     mem_write32(cpu, 0x80000028, 0x04000000); // MEM1 size: 64 MB
     mem_write32(cpu, 0x8000002C, 0x00000002); // Console type: Wii
-    mem_write32(cpu, 0x80000030, 0x8088A000); // ArenaLo
+    mem_write32(cpu, 0x80000030, arena_lo);   // OSBootInfo ArenaLo
     mem_write32(cpu, 0x80000034, 0x83FE0000); // ArenaHi
 
     mem_write32(cpu, 0x800000E4, 0);          // __OSCurrentThread = NULL
@@ -238,7 +282,7 @@ static void init_wii_low_memory(CPUState* cpu) {
     mem_write32(cpu, 0x800030E8, 0x93FE0000); // MEM2 ArenaHi
 
     // OS BI2 table
-    mem_write32(cpu, 0x8000310C, 0x8088A000); // BI2 MEM1 ArenaLo
+    mem_write32(cpu, 0x8000310C, arena_lo);   // BI2 MEM1 ArenaLo (OSInit consumes this)
     mem_write32(cpu, 0x80003110, 0x83FE0000); // BI2 MEM1 ArenaHi
     mem_write32(cpu, 0x80003124, 0x90002000); // BI2 MEM2 ArenaLo
     mem_write32(cpu, 0x80003128, 0x93FE0000); // BI2 MEM2 ArenaHi
@@ -552,6 +596,32 @@ static void host_wakeup_thread_queue(CPUState* cpu, u32 queue_addr) {
     }
 }
 
+/* A host callback runs guest code inside the interrupted thread's register set
+ * with TLS_HOST_CALLBACK_SENTINEL in LR. If that guest code lets the scheduler
+ * run (OSSleepThread / __OSReschedule), the guest saves the *current* context
+ * into the interrupted thread's OSThread, so the sentinel can end up as that
+ * thread's saved return address; when the thread is resumed it "returns" to
+ * 0xFFFFFFFC. No run has been observed doing this (TLS_HOSTCALLBACK_PROBE would
+ * say so), and the stray-sentinel report that used to fire once per run turned
+ * out to be a *symptom* of stack corruption, not of this path (see §5c.9 of the
+ * handover). The leak is silent and unrecoverable when it does happen, so repair
+ * it against the host's own saved interrupted state instead of leaving it to the
+ * generic invalid-address safeguard. Inert in practice. */
+static void host_repair_sentinel_in_thread(CPUState* cpu, u32 thread, const CPUState* interrupted) {
+    if (!thread || thread < 0x80000000u || thread >= 0x94000000u) return;
+    u32 lr = mem_read32(cpu, thread + 0x84);        /* OSContext.lr   */
+    if (lr != TLS_HOST_CALLBACK_SENTINEL && lr != 0xFFFFFFFFu && lr != 0xFFFFFFFDu) return;
+    mem_write32(cpu, thread + 0x84, interrupted->lr);   /* OSContext.lr   */
+    mem_write32(cpu, thread + 0x198, interrupted->pc);  /* OSContext.srr0 */
+    static int s_reports = 0;
+    if (s_reports++ < 4) {
+        printf("[Runner] Repaired host sentinel leaked into thread 0x%08X context "
+               "(lr 0x%08X -> 0x%08X) - the callback ran scheduler code\n",
+               thread, lr, interrupted->lr);
+        fflush(stdout);
+    }
+}
+
 /* Run one guest function as a host-invoked "interrupt" and restore the CPU
  * registers afterwards. Memory effects persist, which is what a scheduler call
  * needs: OSWakeupThread moves a thread from a wait queue to a run queue by
@@ -561,6 +631,7 @@ static void host_wakeup_thread_queue(CPUState* cpu, u32 queue_addr) {
 static bool host_call_guest(CPUState* cpu, u32 fn, u32 arg) {
     if (!fn) return false;
     CPUState saved = *cpu;
+    u32 thread_before = mem_read32(cpu, 0x800000E4);
     cpu->gpr[3] = arg;
     cpu->gpr[4] = cpu->gpr[1];   /* OSContext*: handlers take (interrupt type, context) */
     cpu->lr = TLS_HOST_CALLBACK_SENTINEL;
@@ -570,6 +641,16 @@ static bool host_call_guest(CPUState* cpu, u32 fn, u32 arg) {
     tls_run_blocks(cpu, 4000);
     g_host_callback_depth--;
     u32 ended_at = cpu->pc;
+    /* Naming the callback and whether it rescheduled turns "the sentinel leaked
+     * somewhere" into a producer. TLS_HOSTCALLBACK_PROBE=1. */
+    static int s_probe = -1;
+    if (s_probe < 0) s_probe = getenv("TLS_HOSTCALLBACK_PROBE") ? 1 : 0;
+    if (s_probe) {
+        printf("[Runner] host callback 0x%08X frame=%d ended_at=0x%08X thread 0x%08X -> 0x%08X\n",
+               fn, g_runner_current_frame, ended_at, thread_before, mem_read32(cpu, 0x800000E4));
+        fflush(stdout);
+    }
+    host_repair_sentinel_in_thread(cpu, thread_before, &saved);
     saved.timebase = cpu->timebase;
     *cpu = saved;
     cpu->exception = 0;
@@ -671,8 +752,9 @@ static void host_service_alarms(CPUState* cpu) {
 
         // A handler that runs scheduler code with the sentinel still in LR can
         // push that sentinel into a thread context, which later surfaces as a
-        // jump to 0xFFFFFFFC in the middle of frame execution. Report it once
-        // that is observed rather than letting it hide in the frame loop.
+        // jump to 0xFFFFFFFC in the middle of frame execution. Report it and
+        // repair it (see host_repair_sentinel_in_thread) rather than letting it
+        // hide in the frame loop.
         u32 final_cur_thread = mem_read32(cpu, 0x800000E4);
         if (final_cur_thread != initial_cur_thread) {
             static u32 s_alarm_switch_reports = 0;
@@ -684,6 +766,7 @@ static void host_service_alarms(CPUState* cpu) {
                 fflush(stdout);
             }
         }
+        host_repair_sentinel_in_thread(cpu, initial_cur_thread, &saved_state);
 
         // In RVL-SDK, OSAlarm callbacks are interrupt handlers that run on the interrupt stack.
         // Once the alarm callback finishes, the CPU state must ALWAYS be restored to the interrupted state.
@@ -1194,6 +1277,13 @@ int main(int argc, char** argv) {
                bt, (unsigned)mem_read16(&cpu, bt + 0x2C8), (int)mem_read32(&cpu, bt + 0x2CC),
                mem_read32(&cpu, bt + 0x2D0), mem_read32(&cpu, bt + 0x2DC),
                mem_read32(&cpu, 0x800000E4), mem_read32(&cpu, 0x8087FC60));
+        /* stackBase (+0x304) / stackEnd (+0x308) name the memory the OS handed this
+         * thread. The heap must never allocate inside that window; the frame-830
+         * failure is an allocation that lands there, so print the window. */
+        printf("         stackBase=0x%08X stackEnd=0x%08X (SP=0x%08X, in-window=%s)\n",
+               mem_read32(&cpu, bt + 0x304), mem_read32(&cpu, bt + 0x308), cpu.gpr[1],
+               (cpu.gpr[1] >= mem_read32(&cpu, bt + 0x308) &&
+                cpu.gpr[1] <= mem_read32(&cpu, bt + 0x304)) ? "yes" : "no");
     }
     tls_dump_sleep_queues(&cpu);
     tls_dump_watched_object(&cpu);

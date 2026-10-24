@@ -99,9 +99,12 @@ Always inspect and report the complete engine state across all 6 layers simultan
          - NEVER treat c0 == 0 as transparent, and NEVER clamp near-black RGB to transparent black.
       7. **Fullscreen Quad Skipping Integrity**: NEVER skip fullscreen quads solely based on RAM address ranges (0x90380000..0x90600000). Only skip if the texture is verified all-zero (tex_zero == true). Valid non-zero textures are rendered background passes!
 
-   - **Animation & System Clock Track Binding Bounds (fn_801FFA04)**:
-     - fn_801FFA04 binds animation tracks across all scene objects during level transitions.
-     - Inner track search loops (0x80200D7C checking 316(r29), 0x80200D00 checking 300(r26)) MUST be bounded (count > 256 -> clamp). If unaligned or corrupted track counts exceed reasonable limits, the inner linear search (fn_801F3E20) burns millions of cycles and freezes GameLoadTask, creating a permanent black screen hang when transitioning to Chapter 1.
+   - **Animation Track Binding (fn_801FFA04) — DISPROVEN GUIDANCE**:
+     - Earlier revisions of this skill told you to clamp the "track counts" at `316(r29)` / `300(r26)`. **Do not do that.** Those instructions load *pointers* (`lwz r4,304(r26)`, `lwz r0,312(r29)`), not counts, so the clamps rewrote memory the loop never reads. One of them zeroed `gpr[24]` before `fn_801FFA04` sized a staging buffer, so the engine `memcpy`'d animation data to address 0 and destroyed the OS low page including `__OSCurrentThread` (`0x800000E4`), wedging the run. See `DEEPSEEK_HARNESS_HANDOVER.md` §5c.1.
+     - If that code region ever looks slow or loop-bound again, measure it (`TLS_WAIT_PROBE`, `TLS_TRACE_FROM`, `TLS_TAIL_RING`) and name the caller instead of clamping guest registers or words.
+   - **Memory map / heap vs stack (the frame-830 stall, §5c.9)**:
+     - The MEM1 arena low is decided by `OSInit` (`0x805EB7E8`) from the BI2 field at `0x8000310C`; the engine then carves its heaps from `OSGetMEM1ArenaLo()`/`OSGetMEM1ArenaHi()`. The arena must start **above** the application stacks: `_stack_end` = end of `.bss`, then 64 KB main-thread stack, then 8 KB debugger stack (`asm/ldscript.lcf`). A host guess that puts the arena low inside that window makes a 1 MB engine heap grow through live stack, and the first symptom is a function returning to a clobbered address.
+     - When a guest function returns somewhere impossible, check `OSThread.stackBase/stackEnd` (`+0x304`/`+0x308`, printed at shutdown) and whether any allocation or buffer intersects that window before blaming the engine.
 
 5. **Threading & Synchronization Layer**:
    - Active threads: `OSThread` list, states (`1=READY`, `2=RUNNING`, `4=WAITING`), priority, and `RunQueueBits`.

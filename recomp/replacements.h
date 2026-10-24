@@ -42,7 +42,7 @@ void tls_input_new_frame(void);
 u64 tls_guest_system_time(CPUState* ctx);
 
 // Stall diagnostics: ring buffer of the most recent non-idle dispatched functions.
-void tls_record_recent_call(u32 address);
+void tls_record_recent_call(CPUState* ctx, u32 address);
 void tls_dump_recent_calls(void);
 int tls_is_idle_address(u32 address);
 
