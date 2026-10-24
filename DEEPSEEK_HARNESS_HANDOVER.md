@@ -4,6 +4,13 @@
 >
 > **Sections 3–5b are historical.** They contain claims that were later disproven (the CMPR luma
 > fallback, the "task vtable zeroed" theory, the `+0x2AC` state machine, the anime-track clamps).
+> **Session boundary.** This handover was written across one long autonomous session that ended because
+> its context ran out, not because the work was finished. Two tasks are open and each is specified in full:
+> the water/reflection destination encoding (end of §5c.11) and the condition-register layout change that
+> unblocks the title->Chapter 1 handoff (end of §5c.10). Everything else the session set out to do is
+> finished and measured: the GX vertex cap, the boot-time non-code dispatches, the input pipeline, the log
+> throttling, the build's header dependencies. Pick up from those two sections.
+
 > **§5c supersedes all of them** — read §5c.9 (the frame-829 stall) and §5c.10 (input), which
 > describe the current state.
 >
