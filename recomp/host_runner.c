@@ -452,9 +452,59 @@ static void host_watch_addrs(CPUState* ctx, u32 block_pc) {
     }
 }
 
+/* PC histogram for a slice that burned its entire block budget while producing no
+ * geometry. The per-frame PC sample names only where the guest happened to stop, so
+ * it cannot tell "parked in an allocator" from "grinding through a loop"; counting
+ * every 32nd dispatched block does. TLS_PC_HIST=1. */
+#define TLS_PC_HIST_MAX 512
+static u32 s_pch_pc[TLS_PC_HIST_MAX];
+static u32 s_pch_cnt[TLS_PC_HIST_MAX];
+static u32 s_pch_n;
+static u32 s_pch_samples;
+
+static int host_pc_hist_enabled(void) {
+    static int s_on = -1;
+    if (s_on < 0) s_on = getenv("TLS_PC_HIST") ? 1 : 0;
+    return s_on;
+}
+
+static inline void host_pc_hist_sample(u32 pc) {
+    if (!s_pch_n && s_pch_n >= TLS_PC_HIST_MAX) return;
+    s_pch_samples++;
+    for (u32 i = 0; i < s_pch_n; i++) {
+        if (s_pch_pc[i] == pc) { s_pch_cnt[i]++; return; }
+    }
+    if (s_pch_n < TLS_PC_HIST_MAX) {
+        s_pch_pc[s_pch_n] = pc;
+        s_pch_cnt[s_pch_n] = 1;
+        s_pch_n++;
+    }
+}
+
+static void host_pc_hist_reset(void) {
+    s_pch_n = 0;
+    s_pch_samples = 0;
+}
+
+static void host_pc_hist_report(int frame, u32 frame_blocks) {
+    printf("[Runner] Frame %d used %u blocks with no output; top dispatched PCs "
+           "(%u samples):\n", frame, frame_blocks, s_pch_samples);
+    for (int rank = 0; rank < 8; rank++) {
+        u32 best = 0;
+        for (u32 i = 1; i < s_pch_n; i++) if (s_pch_cnt[i] > s_pch_cnt[best]) best = i;
+        if (!s_pch_n || !s_pch_cnt[best]) break;
+        printf("          0x%08X  %6u samples (%5.1f%%)\n", s_pch_pc[best], s_pch_cnt[best],
+               100.0 * (double)s_pch_cnt[best] / (double)(s_pch_samples ? s_pch_samples : 1));
+        s_pch_cnt[best] = 0;
+    }
+    fflush(stdout);
+}
+
 static inline int tls_run_blocks(CPUState* ctx, u32 max_blocks) {
     u32 blocks = 0;
     s_slice_sample_count = 0;
+    static int s_pch_enabled_cached = -1;
+    if (s_pch_enabled_cached < 0) s_pch_enabled_cached = host_pc_hist_enabled();
     while (max_blocks == 0u || blocks < max_blocks) {
         if (tls_is_system_idle(ctx)) {
             break;
@@ -468,6 +518,9 @@ static inline int tls_run_blocks(CPUState* ctx, u32 max_blocks) {
 
         if ((blocks & 1023u) == 0u && s_slice_sample_count < 64) {
             s_slice_samples[s_slice_sample_count++] = ctx->pc;
+        }
+        if ((blocks & 31u) == 0u && s_pch_enabled_cached) {
+            host_pc_hist_sample(ctx->pc);
         }
         if ((blocks & 7u) == 0u) {
             host_watch_task_vtables(ctx, pc_before);
@@ -1171,6 +1224,20 @@ int main(int argc, char** argv) {
             }
         }
         QueryPerformanceCounter(&t2);
+
+        if (host_pc_hist_enabled() && frame_blocks >= 300000) {
+            static int s_hist_reports = 0;
+            static int s_hist_from = -1;
+            if (s_hist_from < 0) {
+                const char* f = getenv("TLS_PC_HIST_FROM");
+                s_hist_from = f ? atoi(f) : 0;
+            }
+            if (frame >= s_hist_from && s_hist_reports < 3) {
+                s_hist_reports++;
+                host_pc_hist_report(frame, (u32)frame_blocks);
+            }
+        }
+        host_pc_hist_reset();
 
         if (enable_audio) {
             audio_player_update();
