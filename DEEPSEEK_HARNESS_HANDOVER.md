@@ -738,6 +738,12 @@ which frame the title actually reaches mode 1 in that run (asset streaming timin
 repeatedly makes it *worse*, not better: the first press locks the gate and every later press re-enters
 the dead branch. That nondeterminism belongs to the gate, not to the input script.
 
+To drive the gate deterministically, `TLS_AUTO_ACCEPT="1"` presses A for 12 frames **when the title task
+enters** one of the listed modes (it is a real button press, triggered by guest state instead of a guessed
+frame). One run walked `1→2→3→4→5→9→11→10→3→4` with it, another did not leave mode 1 at all - the
+difference is whether `f256` is still 0 when the press arrives, which is the gate's own state, so
+`SetMode(2)` remains first-press-only until `0x80534294` is understood.
+
 **Next experiment (prepared, not yet landed).** `mfcr` is emitted as a raw `ctx->gpr[rd] = ctx->cr` and
 `mtcrf` as a raw masked copy, so the guest sees the emulator's reversed CR image instead of the
 architectural one. Converting at that boundary (`guest = bitreverse32(cr)`, and the same on the way in)

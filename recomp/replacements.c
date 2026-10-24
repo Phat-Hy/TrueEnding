@@ -570,6 +570,58 @@ static void tls_input_script_apply(int frame, u32* core, u32* cl) {
     }
 }
 
+/* ---------------------------------------------------------------------------
+ * State-triggered accept press.
+ *
+ * A frame-indexed script cannot press at the right moment when the frame at which
+ * the title reaches a mode varies between runs (it does - streaming timing), and
+ * the title's press-start gate is first-press-only (see handover 5c.10). So allow
+ * a press *triggered by the guest's own state*: when the title task enters one of
+ * the modes named in TLS_AUTO_ACCEPT ("1" by default), press A for a short hold.
+ * This is still just a button press - nothing is written to guest state except the
+ * same controller data the keyboard writes.
+ * ------------------------------------------------------------------------- */
+#define TLS_AUTO_ACCEPT_MAX 16
+static int s_accept_modes[TLS_AUTO_ACCEPT_MAX];
+static int s_accept_mode_count = -1;
+static int s_accept_press_frames = 0;
+
+static int tls_auto_accept_configured(void) {
+    if (s_accept_mode_count >= 0) return s_accept_mode_count;
+    s_accept_mode_count = 0;
+    const char* spec = getenv("TLS_AUTO_ACCEPT");
+    if (!spec || !*spec) return 0;
+    char buf[128];
+    strncpy(buf, spec, sizeof(buf) - 1);
+    buf[sizeof(buf) - 1] = '\0';
+    for (char* tok = strtok(buf, ","); tok && s_accept_mode_count < TLS_AUTO_ACCEPT_MAX; tok = strtok(NULL, ",")) {
+        s_accept_modes[s_accept_mode_count++] = atoi(tok);
+    }
+    printf("[Input] auto-accept on title mode(s):");
+    for (int i = 0; i < s_accept_mode_count; i++) printf(" %d", s_accept_modes[i]);
+    printf("\\n");
+    fflush(stdout);
+    return s_accept_mode_count;
+}
+
+/* Called from the title update hook when the mode changes. */
+static void tls_auto_accept_on_mode(int mode) {
+    if (tls_auto_accept_configured() == 0) return;
+    for (int i = 0; i < s_accept_mode_count; i++) {
+        if (s_accept_modes[i] == mode) {
+            s_accept_press_frames = 12;
+            return;
+        }
+    }
+}
+
+static void tls_auto_accept_apply(u32* core, u32* cl) {
+    if (s_accept_press_frames <= 0) return;
+    s_accept_press_frames--;
+    *core |= WPAD_BUTTON_A | WPAD_BUTTON_2;
+    *cl |= WPAD_CL_BUTTON_A | WPAD_CL_BUTTON_Y;
+}
+
 
 void tls_input_new_frame(void) {
     s_latched_core_trig = 0;
@@ -798,6 +850,7 @@ int tls_service_controller_input(CPUState* ctx) {
      * action evaluator sees ordinary edges. Replaces the old hardcoded "press A at
      * frames 250/460/800" schedule, which produced presses the engine never asked for. */
     tls_input_script_apply(g_runner_current_frame, &cur_core, &cur_cl);
+    tls_auto_accept_apply(&cur_core, &cur_cl);
 #endif
 
     u32 new_core_trig = cur_core & ~s_last_core_hold;
@@ -5082,8 +5135,12 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 // The title advances 1->2->4->5->9 but never draws a menu layout, so the
                 // question is which guest functions run at the transition. Dump the recent
                 // dispatch ring right at the flip instead of at end of run.
-                printf("[TLS NewTitleTask] MODE TRANSITION %u -> %u (task=0x%08X)\n",
-                       s_last_mode, mode, task);
+                {
+                    extern int g_runner_current_frame;
+                    printf("[TLS NewTitleTask] MODE TRANSITION %u -> %u (frame %d, task=0x%08X)\n",
+                           s_last_mode, mode, g_runner_current_frame, task);
+                }
+                tls_auto_accept_on_mode((int)mode);
                 if (mode >= 2) {
                     tls_dump_recent_calls();
                 }
