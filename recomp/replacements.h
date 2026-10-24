@@ -50,6 +50,8 @@ int tls_is_idle_address(u32 address);
 void tls_dump_sleep_queues(CPUState* ctx);
 void tls_dump_watched_object(CPUState* ctx);
 void tls_dump_wake_queues(CPUState* ctx);
+void tls_dump_taps(void);
+void tls_dump_sleep_tail(void);
 
 // Return address the host plants in LR before entering a guest callback
 // (OSAlarm handler, DVD/IPC completion routine) so the callback's `blr` lands

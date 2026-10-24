@@ -1046,6 +1046,8 @@ int main(int argc, char** argv) {
     tls_dump_sleep_queues(&cpu);
     tls_dump_watched_object(&cpu);
     tls_dump_wake_queues(&cpu);
+    tls_dump_taps();
+    tls_dump_sleep_tail();
     printf("         Final PC: 0x805F50B0? Actual PC: 0x%08X, LR: 0x%08X, SP: 0x%08X\n", cpu.pc, cpu.lr, cpu.gpr[1]);
     printf("         Exception: 0x%08X, ProgramExc: 0x%08X\n", cpu.exception, cpu.program_exception);
     printf("         SRR0 (Faulting CIA): 0x%08X, SRR1: 0x%08X\n", cpu.srr0, cpu.srr1);

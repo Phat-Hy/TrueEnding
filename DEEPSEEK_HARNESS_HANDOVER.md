@@ -413,6 +413,42 @@ Previous rounds left two useful side facts for that work: the two created engine
 (not stuck), and `StreamManager::Update` keeps running to the end with an idle queue, so the
 streaming layer is not what stalls the boot thread.
 
+### 5c.7 The stop is the boot thread's own loop ending at frame 829
+
+Two new probes pin the transition exactly. `tls_dump_taps()` records call count and first/last frame
+for the four GameTask methods plus the sequence manager:
+
+```
+GameTask::Init            calls=31     first=658   last=829
+SequenceManager::Update   calls=472    first=167   last=829
+(GameTask::IsReady / Update / Draw: 0 calls on this path)
+```
+
+`TLS_SLEEP_TAIL=1` keeps the last 32 `OSSleepThread` calls. **Every one of them is thread
+`0x807CB658` sleeping on `0x807C6F60` from `lr=0x80071D08`** — the GX-fifo drain loop — and the last
+one is at **frame 828**. There is no sleep after it, so the boot thread does not block at the end; it
+stops looping.
+
+The last 64 non-idle dispatches end like this:
+
+```
+0x800C3720   SequenceManager::Update
+0x800D28FC   task update dispatch
+0x80534074   <-- last dispatch; nothing after it
+```
+
+`0x80534074` is a method of the title/sequence task class (slot 4 of vtable `0x80793A20`); the code
+around it stores draw-command fields into `*(r31+712)`. After that call the boot thread never returns
+to its loop: `RunQueueBits` is 0, no queue holds it, and the OS idles.
+
+So the remaining defect is now a single question about the boot thread's main loop: **what makes it
+exit (or stop re-entering `SequenceManager::Update`) right after the frame-829 dispatch?** The likely
+candidates are a loop-termination flag set through the sequence unit, or a yield path that leaves the
+thread unrunnable without enqueueing it. The probes to answer it are already in place: `TLS_SLEEP_TAIL`
+for the sleep side, `TLS_WATCH_ADDR` on the loop's state words, and `tls_dump_taps()` for which
+method stops first.
+
+
 
 
 

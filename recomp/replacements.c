@@ -1366,6 +1366,76 @@ void tls_dump_wake_queues(CPUState* ctx) {
     fflush(stdout);
 }
 
+/* Method activity taps. When the Chapter-1 task stops progressing it is not
+ * obvious which of the four sequence-unit methods (IsReady / Init / Update /
+ * Draw) stopped being called first, and "no Update" looks the same whether the
+ * driver stopped or the task refused to advance. Record count + first/last frame
+ * per method and print them at shutdown. */
+#define TLS_TAPS 8
+static const char* s_tap_name[TLS_TAPS];
+static u32 s_tap_count[TLS_TAPS];
+static int s_tap_first[TLS_TAPS];
+static int s_tap_last[TLS_TAPS];
+
+static void tls_tap(int id, const char* name, int frame) {
+    if (id < 0 || id >= TLS_TAPS) return;
+    if (s_tap_count[id] == 0) {
+        s_tap_name[id] = name;
+        s_tap_first[id] = frame;
+    }
+    s_tap_count[id]++;
+    s_tap_last[id] = frame;
+}
+
+void tls_dump_taps(void) {
+    printf("\n[Runner] Method activity (first/last frame each was dispatched):\n");
+    for (int i = 0; i < TLS_TAPS; i++) {
+        if (s_tap_count[i] == 0) continue;
+        printf("         %-24s calls=%-6u first=%-5d last=%-5d\n",
+               s_tap_name[i] ? s_tap_name[i] : "?", s_tap_count[i],
+               s_tap_first[i], s_tap_last[i]);
+    }
+    fflush(stdout);
+}
+
+/* Tail ring of OSSleepThread calls. First-sleep-per-queue (TLS_WAIT_PROBE=all)
+ * lists the queues in use but not which sleep came last: when the whole engine
+ * loop stops at one particular frame, the final sleeps identify the thread that
+ * never came back. TLS_SLEEP_TAIL=1 keeps the last 32 and prints them at
+ * shutdown with the queue, the caller and the sleeping thread. */
+#define TLS_SLEEP_TAIL_N 32
+static u32 s_sleep_tail_q[TLS_SLEEP_TAIL_N];
+static u32 s_sleep_tail_lr[TLS_SLEEP_TAIL_N];
+static u32 s_sleep_tail_thr[TLS_SLEEP_TAIL_N];
+static int s_sleep_tail_frame[TLS_SLEEP_TAIL_N];
+static u32 s_sleep_tail_n = 0;
+static u32 s_sleep_tail_pos = 0;
+static int s_sleep_tail_on = -1;
+
+static void tls_note_sleep_tail(CPUState* ctx, u32 queue_addr) {
+    extern int g_runner_current_frame;
+    if (s_sleep_tail_on < 0) s_sleep_tail_on = getenv("TLS_SLEEP_TAIL") ? 1 : 0;
+    if (!s_sleep_tail_on) return;
+    s_sleep_tail_q[s_sleep_tail_pos] = queue_addr;
+    s_sleep_tail_lr[s_sleep_tail_pos] = ctx->lr;
+    s_sleep_tail_thr[s_sleep_tail_pos] = mem_read32(ctx, 0x800000E4);
+    s_sleep_tail_frame[s_sleep_tail_pos] = g_runner_current_frame;
+    s_sleep_tail_pos = (s_sleep_tail_pos + 1) % TLS_SLEEP_TAIL_N;
+    if (s_sleep_tail_n < TLS_SLEEP_TAIL_N) s_sleep_tail_n++;
+}
+
+void tls_dump_sleep_tail(void) {
+    if (s_sleep_tail_n == 0) return;
+    printf("\n[Runner] Last %u OSSleepThread calls (oldest first):\n", s_sleep_tail_n);
+    for (u32 i = 0; i < s_sleep_tail_n; i++) {
+        u32 idx = (s_sleep_tail_pos + TLS_SLEEP_TAIL_N - s_sleep_tail_n + i) % TLS_SLEEP_TAIL_N;
+        printf("         frame=%-5d thread=0x%08X queue=0x%08X lr=0x%08X\n",
+               s_sleep_tail_frame[idx], s_sleep_tail_thr[idx],
+               s_sleep_tail_q[idx], s_sleep_tail_lr[idx]);
+    }
+    fflush(stdout);
+}
+
 void tls_dump_watched_object(CPUState* ctx) {
     const char* env = getenv("TLS_DUMP_OBJ");
     if (!env) return;
@@ -1715,6 +1785,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 queue_addr = ctx->gpr[3];
             tls_wait_probe(ctx, queue_addr);
             tls_note_sleep_queue(queue_addr, ctx->lr);
+            tls_note_sleep_tail(ctx, queue_addr);
             /* Lost-wakeup test for the Chapter-1 stall. The engine's worker at
              * 0x8071D950 sleeps while *(r30+0x24) != 0; queue r30+0x2C is the one it
              * blocks on. If it ever enqueues while that field is already 0, the
@@ -3221,6 +3292,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
         // SequenceManager::Update (0x800C3720)
         case 0x800C3720: {
+            { extern int g_runner_current_frame; tls_tap(4, "SequenceManager::Update", g_runner_current_frame); }
             static int s_seq_updates = 0;
             static u32 s_last_active = 0;
             u32 mgr = ctx->gpr[3];
@@ -3295,6 +3367,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
         // GameTask::IsReady (0x80366454)
         case 0x80366454: {
+            { extern int g_runner_current_frame; tls_tap(0, "GameTask::IsReady", g_runner_current_frame); }
             static int s_game_ready_calls = 0;
             s_game_ready_calls++;
             u32 task = ctx->gpr[3];
@@ -3371,6 +3444,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
         // GameTask::Init (0x80366E54)
         case 0x80366E54: {
+            { extern int g_runner_current_frame; tls_tap(1, "GameTask::Init", g_runner_current_frame); }
             u32 task = ctx->gpr[3];
             u32 state = task ? mem_read32(ctx, task + 0x10DC) : 0;
             static int s_gt_init_calls = 0;
@@ -3464,6 +3538,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
         // GameTask::Update (0x80368280)
         case 0x80368280: {
+            { extern int g_runner_current_frame; tls_tap(2, "GameTask::Update", g_runner_current_frame); }
             static int s_game_updates = 0;
             u32 task = ctx->gpr[3];
             u32 state = task ? mem_read32(ctx, task + 0x54e4) : 0;
@@ -3479,6 +3554,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
         // GameTask::Draw (0x8036B7F4)
         case 0x8036B7F4: {
+            { extern int g_runner_current_frame; tls_tap(3, "GameTask::Draw", g_runner_current_frame); }
             static int s_game_draws = 0;
             u32 task = ctx->gpr[3];
             u32 state = task ? mem_read32(ctx, task + 0x54e4) : 0;
