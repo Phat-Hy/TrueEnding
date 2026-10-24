@@ -1,15 +1,22 @@
 # DeepSeek Harness Handover Dossier: Project The Maybe(Not) Last Story
 
-> ## READ THIS FIRST (state at commit `549f482`)
+> ## READ THIS FIRST (state at commit `559254a`)
 >
 > **Sections 3–5b are historical.** They contain claims that were later disproven (the CMPR luma
 > fallback, the "task vtable zeroed" theory, the `+0x2AC` state machine, the anime-track clamps).
-> **Session boundary.** This handover was written across one long autonomous session that ended because
-> its context ran out, not because the work was finished. Two tasks are open and each is specified in full:
-> the water/reflection destination encoding (end of §5c.11) and the condition-register layout change that
-> unblocks the title->Chapter 1 handoff (end of §5c.10). Everything else the session set out to do is
-> finished and measured: the GX vertex cap, the boot-time non-code dispatches, the input pipeline, the log
-> throttling, the build's header dependencies. Pick up from those two sections.
+> **Session boundary (previous session).** That handover was written across one long autonomous session
+> that ended because its context ran out. It left two open tasks: the water/reflection destination encoding
+> (§5c.11) and a condition-register layout change it believed was needed for the title->Chapter 1 handoff.
+> **§5c.12 is the current state and supersedes that expectation**: the condition-register change was
+> neither needed nor made (the emitter is already architecturally correct; see the table in §5c.12), and the
+> real defect was a `strtok` bug that made `TLS_INPUT_SCRIPT` load only its first entry, so the second press
+> the title's fade gate needs never arrived. With that fixed, the title menu works, NEW GAME writes a real
+> save file, and the title **hands off to the Game sequence** (`SetNextSequence('Game')`, `CreateGameTask`,
+> `GameTask::Init` streaming ~300 files). Playback stalls after that handoff with the frame budget fully
+> consumed and no draws — that is the current break point and §5c.12 has the measurements.
+> The EFB copy destination encoding is still open, and it is visible on screen: the title/MENU background is
+> a flat cyan field instead of the cave/lake.
+
 
 > **§5c supersedes all of them** — read §5c.9 (the frame-829 stall) and §5c.10 (input), which
 > describe the current state.
@@ -33,41 +40,47 @@
 >   sentinel), so the fix is A/B verifiable.
 >
 > **What the scene is, precisely.** The cave/lake vista is the *title screen's* 3D backdrop, not Chapter 1
-> (the series' title screen is a cave with a lake and sky through the opening). The engine is running the
-> title sequence end to end: `GameTask` is its frame host, and the taps `GameTask::Init` →
-> `Update`/`Draw` are that sequence running. **Chapter 1 has not been reached yet** — leaving the title
-> requires the menu's own state machine to accept a real button press, and the synthetic `sim_press`
-> in `0x800A555C` does not do that (it walks the title between modes 1→25 and submenus such as
-> "NEW TUTORIAL" without ever handing off). Reaching gameplay needs a frame-indexed deterministic input
-> script feeding the same host input state the keyboard feeds (§5c.3), not another guest-state poke.
+> (the series' title screen is a cave with a lake and sky through the opening). The engine runs the title
+> sequence end to end: `GameTask` is its frame host, and the taps `GameTask::Init` → `Update`/`Draw` are
+> that sequence running. **The title now does hand off** (§5c.12): with a real multi-press input script the
+> menu appears, the save dialog is answered, NEW GAME is selected, and mode 25 issues
+> `SetNextSequence('Game')` → `CreateGameTask` → `GameTask::Init`, which streams ~300 files before the run
+> stalls (see item 1 below). Chapter 1's own scene has therefore not been reached yet, but the title's own
+> state machine - not a synthetic press - is what gets the engine to the Game sequence.
+
 >
 > **Also corrected:** §5c.8's "single next target" (the host-callback sentinel leak) was a *symptom* of
 > that stack corruption, not a cause. The leak itself has never been observed; it is now repaired if it
 > ever happens (`host_repair_sentinel_in_thread`, `TLS_HOSTCALLBACK_PROBE`).
 >
-> **Where the work stands / next targets.** The engine runs the title sequence, draws it correctly, and
-> now accepts real input (§5c.10). Open items, in the order they are worth attacking:
-> 1. Make the menu choose NEW GAME. `TLS_INPUT_SCRIPT="500-512:A"` moves the title's mode machine, but
->    mode 1→2 (`SetMode(2)`) is gated by a bit-extract at `0x80534294` whose tested bit is still
->    unexplained — §5c.10 ends with the single measurement that settles it.
+> **Where the work stands / next targets.** The title sequence runs end to end, accepts real input, shows
+> its menu, creates a save file and hands off to the Game sequence (§5c.12). Open items, in the order they
+> are worth attacking:
+> 1. **The post-handoff stall (§5c.12).** After `GameTask::Init` streams ~300 files the engine stops
+>    dispatching the game task, issues no more DVD reads (one request stuck at `status=1`) and draws
+>    nothing, yet still burns every frame's whole block budget. Measured *not* to be the allocator, not a
+>    single hot loop and not a lost wakeup. Next: resolve the `TLS_PC_HIST` top PCs and tap
+>    `StreamManager::Update` (`0x8046DD60`) after frame 1882.
 > 2. Water/reflection and the guest framebuffers. §5c.11: EFB copies were not emulated at all and now are
 >    (`0x49/0x4A/0x4B/0x52` decoded, viewport-scaled readback of the completed frame, write into guest memory
 >    verified with `TLS_EFB_SAMPLE`). The open detail is the destination encoding: 4x4-tiled RGBA8 for the
 >    reflection textures, 16-bit RGB565 rows for the two VI scanout buffers (which are 614400 B each - that
->    arithmetic is what proved the old 32-bit write overran them).
+>    arithmetic is what proved the old 32-bit write overran them). Visible symptom now on screen: the
+>    title/MENU background renders as a flat cyan field.
 > 3. The two boot-time non-code dispatches (`0x005F2A10`, `0x005F2A90`, both `lr=0x805F2F18/48` at
 >    frame 0) are still handled by the generic safeguard and deserve a name.
 >
 > **First commands.**
 > ```powershell
-> git log --oneline -14                                 # f52de56..549f482 are the current session
+> git log --oneline -14                                 # 0e788e3..559254a are the current session
 > python tools/recomp_harness.py build-runner           # chunks are already lifted; ~1 s
-> $env:TLS_INPUT_SCRIPT="500-512:A,700-712:A"
-> build\recomp\tls_runner.exe --window --frames 2100 --fps 60 --no-audio
+> $env:TLS_INPUT_SCRIPT="600-612:A,900-912:A,1200-1212:A,1300-1312:UP,1350-1362:A,1500-1512:A"
+> build\recomp\tls_runner.exe --window --frames 2400 --fps 60 --no-audio
 > ```
-> Passes frame 830, draws the title, and drives its mode machine with the script. Screenshots are written
-> automatically at frames 100…1800 (`TLS_SHOT_FRAMES=<n,...>` adds more). If `build-recomp` writes are
-> denied, the workspace sandbox needs full file access for this session (see §5c.4 note).
+> Walks the title's whole state machine (menu on screen at frame ~1434), answers the save dialog with Yes,
+> selects NEW GAME and hands off to the Game sequence at frame ~1539. Screenshots are written automatically
+> at frames 100…1800 (`TLS_SHOT_FRAMES=<n,...>` adds more). If `build-recomp` writes are denied, the
+> workspace sandbox needs full file access for this session (see §5c.4 note).
 >
 > **Rules that have already cost time.** Never hand-edit `build/recomp/generated/chunks` — re-lift.
 > Never mutate guest state to "make progress" — the probes in §5c.4 and §5c.9 exist so measurement
@@ -781,6 +794,15 @@ is therefore a condition-register layout fix in `tools/DolRecomp` (`cr_field_shi
 `ppc_fcmp`, and the `cror`/`bc` bit numbering must move together), and it is the next concrete change to
 make - verify by pressing **after** the title's fade completes (`f256 = f160 = 150`) and seeing `SetMode(2)`.
 
+> **CORRECTED in §5c.12 — no condition-register change is needed and none was made.** The excerpt above
+> dropped the `mfcr r0` at `0x80534290`, and the extract reads **bit 29**, not bit 28: `extrwi r0,r0,1,2`
+> is `rlwinm r0,r0,3,31,31`, i.e. `rotl32(mfcr,3) & 1` = source bit 29 = `0x20000000` = CR0[EQ] in exactly
+> the layout this emitter already produces. The gate simply opens on the press *after* the one that arms
+> it, and the reason a second press never arrived was a `strtok` bug in the input script loader, not CR
+> numbering. Verified in the generated chunk (`bc 12,2` testing `0x20000000`) and in the run: with a
+> multi-entry script the title walks 1→2→3→4→5→6→7→8→9→11→12→16→17→18→19→20→22→25 and hands off to the
+> Game sequence. See §5c.12.
+
 **Input-path bug found and fixed while measuring:** `TLS_AUTO_ACCEPT` consumed its press inside a single
 frame because `tls_service_controller_input()` runs several times per frame (main loop plus one call per
 `KPADRead` channel) and the press counter was decremented there. Counted per frame now
@@ -796,6 +818,14 @@ once, then immediately `python tools/recomp_harness.py lift` to restore the gene
 as a *fix* is forbidden (handover 5c.1); using it as a temporary instrument and re-lifting is not. Toolchain note: the
 recompiler's sources are excluded from git (`tools/DolRecomp/` in `.gitignore`); rebuild them with
 `ninja -C tools/DolRecomp/build` and re-lift (`python tools/recomp_harness.py lift`).
+
+> **Resolved in §5c.12: the bit is CR0[EQ] (bit 29) and the gate never needed a fix.** The source listing
+> in `src/game_net_spectate_cam.c` has the missing `mfcr r0` at `0x80534290` (line 686 of that file:
+> `cror eq, gt, eq` / `mfcr r0` / `extrwi. r0, r0, 1, 2` / `beq`), and the generated chunk emits
+> `rotl32(ctx->gpr[0], 3u) & 1u` followed by `bc 12, 2` testing `0x20000000` — i.e. CR0[EQ], the value
+> `cror` just produced. Both are architecturally correct. What actually stopped the mode machine was that
+> `TLS_INPUT_SCRIPT` only ever loaded its **first** entry, so the second press that the gate needs never
+> reached the pad. Fixed; the title now reaches the game sequence.
 
 
 
@@ -1043,8 +1073,121 @@ method stops first.
 | `TLS_DUMP_OBJ=0x…` | hex-dumps that guest address at shutdown plus every heap pointer it finds in it, with inline file names |
 | `TLS_NO_FRAMEQUEUE_HACK=1` | stops the runner from rewriting `0x807C6FBA` / force-waking `0x807C6F60` every vblank |
 | `TLS_DUMP_EVERY=<n>` | (existing) dense frame capture |
+| `TLS_SAVE_PROBE=1` | reports each `fn_800A472C` save-data status check (now runs the guest's own code) |
+| `TLS_ALLOC_PROBE=1` | per-frame allocator (`fn_8022A054`) call counts; `=2` also walks all 32 free-list roots and reports a cycle |
+| `TLS_PC_HIST=1` | counts every 32nd dispatched block and prints the top 8 PCs for any frame that burns its full budget |
+| `TLS_PC_HIST_FROM=<n>` | gates that histogram to frames >= n (use the stalled window, e.g. 1900) |
 | shutdown | `tls_dump_sleep_queues()` always prints occupied `OSThreadQueue`s with each waiter's stack |
 
 **Build/run note:** `build/` is git-ignored, so the re-lift is not in git history —
 run `python tools/recomp_harness.py lift` after checking out.
+
+---
+
+### 5c.12 The title hands off to the Game sequence: three fabricated answers removed, and the stall that follows
+
+State at commit `559254a`. The two tasks the previous session left open were "make the menu choose NEW
+GAME" and "the EFB copy destination encoding". The first one is now done, but not by the change the
+handover expected: **the condition-register layout change was unnecessary** and the real defect was in
+the host's input script loader. The EFB encoding item is still open, with the evidence below.
+
+#### What was actually wrong: `TLS_INPUT_SCRIPT` loaded only its first entry
+
+`tls_input_script_load()` in `recomp/replacements.c` split the spec with `strtok(buf, ",")` and then split
+the button list with `strtok(buttons, "+")`. `strtok` keeps one global cursor, so the inner call destroyed
+the outer iteration: `TLS_INPUT_SCRIPT="600-612:A,900-912:A,1200-1212:A"` logged exactly one loaded entry
+(`frames 600-612 -> core=0x00000800`). Every press after the first never reached the pad. The parser now
+splits by hand, and the parse log lists all entries.
+
+That single bug explains the previous session's "nondeterministic, first-press-only gate": the fade gate at
+`0x80534264..0x805342A4` (see §5c.10) needs **two** presses - the first stores `150.0` into
+`*(*(task+0x48)+0x100)` (the `.L_805342A4` path), the second observes `f256 >= f160` and calls `SetMode(2)` -
+and only one press was ever delivered.
+
+The condition-register hypothesis is disproven by inspection of the same code:
+
+| Address | Instruction | Generated code |
+|---|---|---|
+| `0x80534288` | `fcmpo cr0, f0, f9` | `ppc_fcmp(ctx, 0, ...)` |
+| `0x8053428C` | `cror 2, 1, 2` | mask `0x20000000`, `value = a \| b` over bits 30 and 29 |
+| `0x80534290` | `mfcr r0` | `ctx->gpr[0] = ctx->cr` (this line was missing from §5c.10's excerpt) |
+| `0x80534294` | `extrwi. r0, r0, 1, 2` | `rotl32(gpr[0], 3u) & 1u` = source bit 29 = CR0[EQ] |
+| `0x80534298` | `beq .L_805342D0` | `cr_ok = ((ctx->cr & 0x20000000) != 0) == true` |
+
+Bit 29 is `0x20000000` = CR0[EQ] in the emitter's own layout (`cr_field_shift(0) = 28`, `EQ = 0x2 << 28`),
+so `tools/DolRecomp` needs no change and was not touched.
+
+#### Two more fabricated answers, in the save-data path
+
+| Where | What it did | Now |
+|---|---|---|
+| `fn_800A472C` (save-data status) | returned `gpr[3]=1` plus a made-up length of 1348992 bytes | runs the guest's own four-instruction body (probe the NAND status, map the error with `fn_800A4494`, return 1 only on success). `TLS_SAVE_PROBE=1` |
+| `IOS_Open` / `IOS_OpenAsync` on the save file | zero-filled a 1348992-byte `savedata.dat` whenever none existed, so **every** first boot looked like "the save data is corrupted" | `ios_open_savedata()` creates only when the guest passes the create flag and otherwise reports `IPC_RESULT_NOEXISTS` (-6). The guest then writes a real save itself |
+
+Measured consequence (windowed, `--frames 2400`): mode 5 → 6 now shows the real dialog
+`"The save data cannot be used because the data is corrupted. Recreate save data?"` with Yes/No, the cursor
+starts on **No** (the selection is `*(ui+64)`, 0 = Yes), and **Up then A** takes the Yes path: mode
+6 → 7 → 8 → 9 → 11, and mode 7/8 writes `SaveData/savedata.dat` for real.
+
+#### The chain that now runs
+
+```
+frame 357  mode 1   (press any button)
+601/900    press 1 arms the fade gate, press 2 -> SetMode(2) at lr=0x805342A8
+962        mode 2 -> 3 -> 4 (menu build, one frame apart)
+1200       press -> mode 5 (save check) -> mode 6 (save dialog)
+1300 Up    move the dialog cursor to Yes
+1350 A     mode 6 -> 7 -> 8 -> 9 (save written)
+1434       mode 9 -> 11  <- the MENU screen, cursor on NEW GAME
+1501 A     mode 11 -> 12
+1531..1539 mode 12 -> 16 -> 17 -> 18 -> 19 -> 20 -> 22 -> 25
+0x80535D04 SetNextSequence('Game'); CreateGameTask; GameTask::Init (81 calls, frame 1640..1882)
+```
+
+The MENU screen draws correctly (`MENU`, `CONTINUE`, `NEW GAME`, `MULTIPLAYER` with Japanese sublabels, the
+selection mark on NEW GAME); **its background is a flat cyan field** instead of the cave/lake, which is the
+§5c.11 EFB-copy item showing up on screen. ~300 `pack/filesystem.pk` reads stream in during `GameTask::Init`
+(`data/material/*.material`, `data/model/pc_ga_m_a00.model`, ...).
+
+#### The new stall: after the handoff the frame budget is consumed with no output
+
+At frame 1882 `GameTask::Init` and `SequenceManager::Update` stop being dispatched, GX drops to 0 vertices,
+no further DVD reads are issued, and the last streaming request (`data/material/pc_ga_m_a00.material`)
+stays at status 1 (queued, never dispatched). Every frame still burns its **whole** block budget
+(321000 blocks, ~14 ms), so the machine is not idle.
+
+What it is *not*, measured this session:
+
+- **not the allocator spinning.** The single per-frame PC sample (`0x8022A204`, inside the TLSF allocator
+  `fn_8022A054`) suggested that, but `TLS_ALLOC_PROBE=1` shows the allocator is called only a handful of
+  times per frame before the stall and **not at all** after it, and `TLS_ALLOC_PROBE=2` walks all 32
+  free-list roots (through `+0x10`) and finds no cycle.
+- **not a single hot loop.** `TLS_PC_HIST=1 TLS_PC_HIST_FROM=1900` counts every 32nd dispatched block: at
+  frame 1900 the most frequent PC has 1.5% of the samples and the rest is spread across hundreds of
+  addresses (`0x805F93C0`, `0x800761A8`, `0x8006D680`, `0x8067E23C`, `0x805ED2C0`, `0x80074EC8+0x524`, ...).
+  That is a broad, expensive workload, not a trap.
+- The two threads still waiting at shutdown sleep on queues `0x8087D610` (worker at `0x8071D984`, inside
+  `fn_8071D950`) and `0x80879538` (from `0x805F27F8`); `TLS_LOSTWAKE_PROBE=1` reports no lost wakeup during
+  the stall window (its only hits are frames 170/337).
+
+So the next question is what the engine is *doing* for 300k blocks per frame with no DVD traffic and no
+draws, and which subsystem owns the pending `status=1` request. The instruments for that are now in place
+(`TLS_PC_HIST`, `TLS_PC_HIST_FROM`, `TLS_ALLOC_PROBE`, `TLS_SAVE_PROBE`, `TLS_TAIL_RING`,
+`TLS_WAIT_PROBE`); the next step worth taking is to resolve the top histogram PCs to functions and tap the
+`StreamManager::Update` path (`0x8046DD60`, already probed) to see whether the loader's dispatch loop ever
+runs again after frame 1882.
+
+#### Run recipe for this state
+
+```powershell
+python tools/recomp_harness.py build-runner
+$env:TLS_INPUT_SCRIPT="600-612:A,900-912:A,1200-1212:A,1300-1312:UP,1350-1362:A,1500-1512:A"
+build\recomp\tls_runner.exe --window --frames 2400 --fps 60 --no-audio
+```
+
+Notes: with a save file already present the mode chain differs (mode 5 → 6 loops 6→4 on each press until
+the dialog is answered), so a clean first-boot measurement wants `SaveData/savedata.dat` removed first; the
+dialog always starts on **No**, so the `UP` press is what reaches the Yes path; screenshots are written to
+`build/recomp/d3d11_screenshot_<frame>.ppm` on every windowed run.
+
 
