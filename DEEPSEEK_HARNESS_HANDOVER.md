@@ -1,10 +1,11 @@
 # DeepSeek Harness Handover Dossier: Project The Maybe(Not) Last Story
 
-> ## READ THIS FIRST (state at commit `9b552d9`)
+> ## READ THIS FIRST (state at commit `a12ec93`)
 >
 > **Sections 3–5b are historical.** They contain claims that were later disproven (the CMPR luma
 > fallback, the "task vtable zeroed" theory, the `+0x2AC` state machine, the anime-track clamps).
-> **§5c supersedes all of them** — read §5c and §5c.9, which is the current state.
+> **§5c supersedes all of them** — read §5c.9 (the frame-829 stall) and §5c.10 (input), which
+> describe the current state.
 >
 > **The frame-829 stall is fixed.** Its cause was neither the scheduler nor a lost wakeup: the host
 > hardcoded the MEM1 arena low to `0x8088A000`, which is inside the boot thread's own stack, so the
@@ -37,26 +38,26 @@
 > that stack corruption, not a cause. The leak itself has never been observed; it is now repaired if it
 > ever happens (`host_repair_sentinel_in_thread`, `TLS_HOSTCALLBACK_PROBE`).
 >
-> **Where the work stands / next targets.** The engine runs the title sequence and draws it correctly.
-> Open items, in the order they are worth attacking:
-> 1. Drive the title menu to NEW GAME with real input (deterministic script), then confirm the handoff
->    into Chapter 1. Until that works there is no gameplay to debug.
-> 2. Visual parity of the title: the backdrop's water/lake surface shows large black regions and a pink
->    sky reflection (see `10-title-hero-cave-frame2200.png`), and the "NEW TUTORIAL" submenu at frame
->    2400 draws its plate over black.
+> **Where the work stands / next targets.** The engine runs the title sequence, draws it correctly, and
+> now accepts real input (§5c.10). Open items, in the order they are worth attacking:
+> 1. Make the menu choose NEW GAME. `TLS_INPUT_SCRIPT="500-512:A"` moves the title's mode machine, but
+>    mode 1→2 (`SetMode(2)`) is gated by a bit-extract at `0x80534294` whose tested bit is still
+>    unexplained — §5c.10 ends with the single measurement that settles it.
+> 2. Visual parity of the title: the lake/water surface shows large black regions and a pink sky
+>    reflection (`10-title-hero-cave-frame2200.png`).
 > 3. The two boot-time non-code dispatches (`0x005F2A10`, `0x005F2A90`, both `lr=0x805F2F18/48` at
 >    frame 0) are still handled by the generic safeguard and deserve a name.
 >
 > **First commands.**
 > ```powershell
-> git log --oneline -8                                  # f52de56..9b552d9 are the current session
+> git log --oneline -8                                  # f52de56..a12ec93 are the current session
 > python tools/recomp_harness.py build-runner           # chunks are already lifted; ~1 s
-> $env:TLS_VBLANK_PROBE="820"
-> build\recomp\tls_runner.exe --window --frames 2400 --fps 60 --no-audio
+> $env:TLS_INPUT_SCRIPT="500-512:A,700-712:A"
+> build\recomp\tls_runner.exe --window --frames 2100 --fps 60 --no-audio
 > ```
-> Passes frame 830 and keeps drawing; `build/recomp/d3d11_screenshot_*.ppm` is written automatically at
-> frames 100…1800. If `build-recomp` writes are denied, the workspace sandbox needs full file access for
-> this session (see §5c.4 note).
+> Passes frame 830, draws the title, and drives its mode machine with the script. Screenshots are written
+> automatically at frames 100…1800 (`TLS_SHOT_FRAMES=<n,...>` adds more). If `build-recomp` writes are
+> denied, the workspace sandbox needs full file access for this session (see §5c.4 note).
 >
 > **Rules that have already cost time.** Never hand-edit `build/recomp/generated/chunks` — re-lift.
 > Never mutate guest state to "make progress" — the probes in §5c.4 and §5c.9 exist so measurement
@@ -648,10 +649,10 @@ A/B with `TLS_ARENALO=0x8088A000` restores the old signature byte for byte — `
 
 **What is still open after this fix** (observed, not guessed):
 
-- **Chapter 1 is not reached.** The scene on screen is the title screen's own 3D backdrop; the men
-  state machine never accepts the synthetic press and never hands the sequence over. This is now the top
-  item: feed a deterministic, frame-indexed input script into the same host input state the keyboard
-  fills (§5c.3) and drive NEW GAME.
+- **Chapter 1 is not reached.** The scene on screen is the title screen's own 3D backdrop. Input now
+  reaches the engine (§5c.10), and the title's own mode machine walks 1→2→…→25 under scripted presses,
+  but no sequence change is ever requested (`SequenceManager` `next` stays 0 and the active task stays
+  the title task `0x810FB4C0`). Selecting NEW GAME is the next step.
 - The lake/water surface draws with large black regions and a pink sky reflection
   (`10-title-hero-cave-frame2200.png`), and the "NEW TUTORIAL" plate at frame 2400 sits over black.
 - The GX vertex buffer used to cap at `0x3FFFF` (262143) and silently drop the rest; that was a *host*
@@ -661,6 +662,84 @@ A/B with `TLS_ARENALO=0x8088A000` restores the old signature byte for byte — `
 - Two non-code dispatches remain, both at frame 0 (`0x005F2A10`/`0x005F2A90`, `lr=0x805F2F18/0x805F2F48`,
   `0x805F2E90` → `OSMemory.c` region). They are handled by the generic safeguard and the run continues;
   they deserve a name before the safeguard is ever tightened.
+
+### 5c.10 Input: the engine's action pipeline, and what the title actually waits for
+
+**The runner could not accept input at all.** Two shortcuts had been standing in for it and both
+fabricated the *answer* instead of the *input*, so the engine's own evaluator never ran:
+
+| Removed | What it did |
+|---|---|
+| `sim_press` in `0x800A555C` action 4 | returned "pressed" on call counts 10/50/130/190 whenever the runner was headless |
+| bypass in `0x800DEEDC` | returned "pressed" for actions 11/3 as soon as any trigger bit was set, skipping the evaluator's latch bookkeeping |
+
+Both are gone. `TLS_INPUT_SCRIPT="500-512:A,700-712:DOWN"` now presses real buttons on a frame schedule
+(`+` joins buttons, `0xHEX` presses a raw mask) inside the same host controller state the keyboard fills,
+so `KPADRead`/PadManager and the evaluator see ordinary edges. **Verified:** with the script the title
+walks its mode machine `1→2→3→4→5→9→11→12→16→17→18→19→20→22→25` under real presses; without it, mode 1
+stays put. That chain is the same one the old `sim_press` produced, which is what "input works" now
+means. Reaching *gameplay* needs the menu to actually choose NEW GAME, not just move.
+
+**How the action pipeline works** (decoded from the DOL; `tools/decode_action_table.py`,
+`tools/decode_input_maps.py`):
+
+```
+fn_800A555C(chan, action)                 # the API every menu calls
+  800A5578  dev  = chan_map[chan]         # 0x80732898, identity for 0..3
+  800A557C  real = action_map[action]     # 0x807328A8
+  800A5580  b fn_800DEEDC(mgr, dev, real)
+fn_800DEEDC                               # the evaluator
+  mask = *(u32*)(mgr + 0x3C28 + dev*4)    # per-device TRIGGER mask
+  return (mask >> real) & 1
+fn_800DDD18(mgr)                          # PadManager update, once per frame
+  for chan in 0..3: KPADRead(chan, mgr + chan*0xF00, 16)
+  memset(mgr+0x3C28, 0, 16); memset(mgr+0x3C38, 0, 16); memset(mgr+0x3C48, 0, 16)
+  ... builds trigger bits from button bits via the dispatch table at 0x80779950
+```
+
+Caller action ids therefore are **not** the tested bits: action 4 → bit 11 (classic A), action 5 → bit 10
+(classic B), action 7 → bit 4 (X), 12 → bit 9 (MINUS), 13 → bit 8 (PLUS), 16/17 → bit 15 (HOME).
+`TLS_PAD_PROBE=1` prints the mask and the queried action once per frame; `TLS_ACTION_PROBE=1` /
+`TLS_ACTION_TRACE="<from>-<to>"` print the wrapper calls (with the remapped bit) so "did my press reach
+the game" is never a guess again.
+
+**Where the title stops, precisely.** Title mode 1 → 2 is this code (`fn_80534074`):
+
+```
+80534264  r3 = mgr ; r4 = 0 ; r5 = 4
+80534270  bl fn_800A555C            ; caller action 4 -> real bit 11 -> classic A
+80534278  beq .L_80534308           ; not pressed
+8053427C  r3  = *(task+0x48)
+80534280  f9  = *(f32*)(r3+0xA0)    ; 150.0 in every observed run
+80534284  f0  = *(f32*)(r3+0x100)   ; 0.0 until the first accepted press, then 150.0
+80534288  fcmpo cr0, f0, f9
+8053428C  cror eq, gt, eq           ; EQ = (f0 >= f9)
+80534294  rlwinm r0, r0, 3, 31, 31  ; the DOL bytes here are 0x54001FFF
+80534298  beq .L_805342D0           ; -> "commit fade" path (which is what runs today)
+805342A4  bl fn_80533BE0            ; SetMode(2)  <- never reached
+```
+
+Both visible conditions were satisfied in-run at frame 400 (trigger `0x00004800` → bit 11 set, and
+`f0 = 0 <= f9 = 150`), yet the branch went to `.L_805342D0` every time, so `SetMode(2)` is never called.
+The cause is the bit-extract at `0x80534294`. The asm listing renders the same bytes as
+`extrwi. r0, r0, 1, 2`, and `extrwi nb,sh` encodes as `rlwinm` with `SH = sh + nb` (verified against
+`extrwi r0,r0,1,25` = `0x5400D7FE`), i.e. `rlwinm ..., 3, 31, 31` — rotate 3, keep bit 31, which reads
+**bit 28** of the CR word. Under this emulator's CR layout (`cr_field_shift = 4*(7-crf)` in
+`tools/DolRecomp/src/backend/emitter.c`, i.e. CR0 in bits 28–31 with the nibble mirrored) bit 28 is
+CR0[SO]; under the architectural layout it is CR7[LT]. Neither is the CR0[EQ] that `fcmpo`+`cror`
+produced, so the gate cannot pass.
+
+**Next experiment (prepared, not yet landed).** `mfcr` is emitted as a raw `ctx->gpr[rd] = ctx->cr` and
+`mtcrf` as a raw masked copy, so the guest sees the emulator's reversed CR image instead of the
+architectural one. Converting at that boundary (`guest = bitreverse32(cr)`, and the same on the way in)
+was implemented and built — 479 `mfcr` sites picked it up — but it changed nothing for *this* gate (the
+reversal maps bit 28 ↔ bit 3, and this instruction needs neither) and was reverted rather than left
+unverified. The remaining question is therefore narrower: which bit does the *retail* machine's
+`extrwi. r0,r0,1,2` read, and what does `0x80534294` need to test for `SetMode(2)` to run. Instrument
+`ctx->cr` at `0x80534288`–`0x80534298` (e.g. by hooking a nearby dispatch point or by adding a temporary
+`label_` probe) and compare with `f0/f9` — that single measurement settles it. Toolchain note: the
+recompiler's sources are excluded from git (`tools/DolRecomp/` in `.gitignore`); rebuild them with
+`ninja -C tools/DolRecomp/build` and re-lift (`python tools/recomp_harness.py lift`).
 
 
 
