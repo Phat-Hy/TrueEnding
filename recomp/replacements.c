@@ -1122,6 +1122,7 @@ int tls_service_message_queues(CPUState* ctx) {
 /* Ring buffer of the most recent dispatched guest functions, for stall diagnosis. */
 #define TLS_RECENT_MAX 64
 static u32 s_recent_calls[TLS_RECENT_MAX];
+static int s_recent_frames[TLS_RECENT_MAX];
 static u32 s_recent_count = 0;
 static u32 s_recent_pos = 0;
 
@@ -1133,7 +1134,9 @@ void tls_record_recent_call(u32 address) {
     if (tls_is_idle_address(address)) {
         return;
     }
+    extern int g_runner_current_frame;
     s_recent_calls[s_recent_pos] = address;
+    s_recent_frames[s_recent_pos] = g_runner_current_frame;
     s_recent_pos = (s_recent_pos + 1) % TLS_RECENT_MAX;
     if (s_recent_count < TLS_RECENT_MAX) {
         s_recent_count++;
@@ -1144,7 +1147,7 @@ void tls_dump_recent_calls(void) {
     printf("\n[Runner] Last %u non-idle guest functions (oldest first):\n", s_recent_count);
     for (u32 i = 0; i < s_recent_count; i++) {
         u32 idx = (s_recent_pos + TLS_RECENT_MAX - s_recent_count + i) % TLS_RECENT_MAX;
-        printf("         0x%08X\n", s_recent_calls[idx]);
+        printf("         0x%08X  frame=%d\n", s_recent_calls[idx], s_recent_frames[idx]);
     }
 }
 
@@ -1548,6 +1551,28 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             fflush(stdout);
         }
         s_sentinel_hits++;
+        /* Parking at the idle PC used to be the recovery, and it is unrecoverable:
+         * tls_is_system_idle() then reports idle for every following frame, no block
+         * is ever executed again, and the run ends at a healthy 60 FPS over a black
+         * screen. That is exactly how this run died (one stray sentinel, then 370
+         * silent frames). Resume the current thread from its own saved OSContext
+         * instead: the sentinel only leaked into LR, the context still holds the
+         * thread's real return address. Only if that is not a valid code address
+         * fall back to the idle park. TLS_SENTINEL_PARK=1 restores the old path. */
+        {
+            static int s_park = -1;
+            if (s_park < 0) s_park = getenv("TLS_SENTINEL_PARK") ? 1 : 0;
+            u32 cur = mem_read32(ctx, 0x800000E4);
+            bool ctx_ok = (cur >= 0x80000000u && cur < 0x94000000u && (cur & 3u) == 0u);
+            u32 saved_lr = ctx_ok ? mem_read32(ctx, cur + 0x84) : 0;
+            u32 saved_pc = ctx_ok ? mem_read32(ctx, cur + 0x198) : 0;
+            u32 resume = (saved_lr >= 0x80003000u && saved_lr < 0x80730000u) ? saved_lr : saved_pc;
+            if (!s_park && resume >= 0x80003000u && resume < 0x80730000u) {
+                ctx->lr = resume;
+                ctx->pc = resume;
+                return 1;
+            }
+        }
         ctx->pc = TLS_DVD_IDLE_PC;
         ctx->lr = TLS_DVD_IDLE_PC;
         return 1;
@@ -1778,6 +1803,28 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             fflush(stdout);
             ctx->pc = ctx->lr;
             return 1;
+        }
+
+        /* __OSSetInterruptHandler(type, handler) - log every registration once.
+         * The engine parks in the OS idle loop waiting for an interrupt, and the
+         * host simulates vblank by poking memory instead of delivering one, so the
+         * VI handler's address is what would let the host raise a real retrace. */
+        case 0x805F1EF0: {
+            static int s_irq_cap = 0;
+            static u32 s_seen_type[16];
+            static int s_seen_n = 0;
+            u32 type = ctx->gpr[3], handler = ctx->gpr[4];
+            int known = 0;
+            for (int i = 0; i < s_seen_n; i++) if (s_seen_type[i] == type) known = 1;
+            if (!known && s_seen_n < 16) {
+                s_seen_type[s_seen_n++] = type;
+                if (s_irq_cap++ < 16) {
+                    printf("[TLS IRQ] __OSSetInterruptHandler type=%u handler=0x%08X lr=0x%08X\n",
+                           type, handler, ctx->lr);
+                    fflush(stdout);
+                }
+            }
+            return 0;
         }
 
         // OSSleepThread probe & queue sanity check

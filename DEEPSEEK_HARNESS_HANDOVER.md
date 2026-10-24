@@ -413,6 +413,69 @@ Previous rounds left two useful side facts for that work: the two created engine
 (not stuck), and `StreamManager::Update` keeps running to the end with an idle queue, so the
 streaming layer is not what stalls the boot thread.
 
+### 5c.8 The quiet idle is a *real* idle: the boot thread's frame loop ends at 829
+
+Earlier rounds described the end state as "parked at the OS idle loop". Two further measurements
+sharpen that, and three plausible host-side causes were tested and disproved.
+
+**What the end state actually is.** `tls_dump_recent_calls()` now carries frame numbers, and
+`TLS_VBLANK_PROBE=<n>` prints fifo counters, queue head, run bits, current thread, PC and LR at every
+vblank. Frames 826–831:
+
+```
+826  pc=0x8008367C lr=0x800833D4  cur=0x807CB658 runbits=0
+827  pc=0x80695344 lr=0x800DC6D4  cur=0x807CB658 runbits=0
+828  pc=0x8046E8F4 lr=0x8046EBA8  cur=0x807CB658 runbits=0
+829  pc=0x805F50B0 lr=0x805F50AC  cur=0x00000000 qhead=0x807CB658 (state 4) runbits=0
+830  pc=0x80478230 lr=0x80478230  cur=0x807CB658 runbits=0
+831+ pc=0x805F50B0 lr=0x805F50AC  cur=0x807CB658 runbits=0   (for the rest of the run)
+```
+
+`0x805F50B0` is `while (*(0x8087F840) == 0) {}` — the SDK idle routine. The thread that ends up there
+is the boot/main thread, and its saved context LR (`0x805F50AC`) is *inside that routine*, so it is
+genuinely idling, not jumping to a corrupted address. Since `RunQueueBits == 0` and the only two other
+threads are asleep with no work, **the guest has no runnable work left**: the main frame loop stopped
+re-entering `SequenceManager::Update` after frame 829.
+
+**Tested and disproved (do not re-run these):**
+
+| Hypothesis | Test | Result |
+|---|---|---|
+| The host's hand-edited queue surgery loses the thread | `TLS_FRAMEQUEUE_WAKE=guest` calls the guest's own `OSWakeupThread` (0x805F5D60) via a new `host_call_guest()` instead | identical taps — Init 31 calls ending 829, SequenceManager 472 ending 829 |
+| The wake is lost because the guest is mid-`__OSReschedule` | defer the wake while `__OSCurrentThread` is 0/invalid | **much worse**: the guest starves (SequenceManager runs once, frame 167) — the wake is load-bearing, guard reverted |
+| Calling the registered VI handler each vblank delivers a retrace | `TLS_VIRETRACE=0x80602ED0` (handler for interrupt 24, found with the new `__OSSetInterruptHandler` probe) | wedges earlier: the handler needs the interrupt-entry context, so a direct call corrupts guest state |
+
+**Two real host-side bugs found while testing, both fixed (env-gated):**
+
+1. `host_wakeup_thread_queue()` moved threads to a run queue but never raised the "reschedule needed"
+   word at `0x8087F840` that the guest's own `OSWakeupThread` sets (0x805F5E0C). `TLS_WAKE_NO_RESCHED=1`
+   restores the incomplete behaviour.
+2. `tls_is_system_idle()` tested only `PC == idle && RunQueueBits == 0`, which is true *while the guest
+   sits in its idle loop with pending work* — so the runner refused to execute any block and the guest
+   could never observe the pending-work word. It now also requires `*(0x8087F840) == 0`
+   (`TLS_IDLE_IGNORE_PENDING=1` restores the old predicate).
+3. The stray-host-sentinel recovery used to force `pc = lr = 0x805F50B0` permanently, which is
+   unrecoverable (the run then reports 60 FPS executing nothing). It now resumes the current thread
+   from its saved `OSContext` (`+0x84` LR, then `+0x198` SRR0) when that is a valid code address, and
+   only parks as a last resort (`TLS_SENTINEL_PARK=1` restores the old path). The sentinel does leak in
+   practice — `[TLS HostCallback] Stray host sentinel ... lr=0xFFFFFFFF` fires once per run — so the
+   leak itself is still an open defect in the host-callback design (host invokes handlers with
+   `lr = 0xFFFFFFFC`, and a handler that runs the scheduler saves it into a thread context).
+
+**Where to go next, in priority order:**
+
+1. Stop the sentinel leak: `host_call_guest()`/`host_service_alarms()` should not let a guest context
+   switch capture `lr = 0xFFFFFFFC`; the safe shape is to save the interrupted thread's registers into
+   its `OSThread` context and let the switch stand, instead of restoring the whole `CPUState` after the
+   callback.
+2. Then re-answer the frame-829 question with the tools already built: the loop exit condition is
+   whatever stops the boot thread re-entering `0x800C3720` after the `0x80534074` dispatch. Watch the
+   loop's state words with `TLS_WATCH_ADDR`, and use the taps to confirm which method goes silent first.
+3. Only then revisit interrupt delivery. The OS registers interrupt 24 → `0x80602ED0` at boot, and
+   `__OSInterruptTable` is at `*(0x8087F810)`; a faithful retrace needs the OS's own exception-entry
+   path, not a direct handler call.
+
+
 ### 5c.7 The stop is the boot thread's own loop ending at frame 829
 
 Two new probes pin the transition exactly. `tls_dump_taps()` records call count and first/last frame

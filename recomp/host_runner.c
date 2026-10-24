@@ -255,8 +255,20 @@ static void init_wii_low_memory(CPUState* cpu) {
 }
 
 static inline bool tls_is_system_idle(CPUState* ctx) {
-    return tls_is_idle_address(ctx->pc) &&
-           mem_read32(ctx, 0x8087FC60) == 0;
+    /* "Idle" may only skip execution when the guest has no pending work. Testing
+     * only PC + RunQueueBits is not enough: when the guest sits in the OS idle loop
+     * (`while (!*(0x8087F840)) {}` at 0x805F50B0) with no thread in a run queue,
+     * that test reports idle forever - so the runner never executes a block, the
+     * guest never observes the reschedule word the host raises each vblank, and the
+     * whole engine appears to hang at a healthy 60 FPS. Including the pending-work
+     * word lets the guest exit its own idle loop and reschedule.
+     * TLS_IDLE_IGNORE_PENDING=1 restores the old predicate for A/B. */
+    static int s_use_pending = -1;
+    if (s_use_pending < 0) s_use_pending = getenv("TLS_IDLE_IGNORE_PENDING") ? 0 : 1;
+    if (!tls_is_idle_address(ctx->pc)) return false;
+    if (mem_read32(ctx, 0x8087FC60) != 0) return false;
+    if (s_use_pending && mem_read32(ctx, 0x8087F840) != 0) return false;
+    return true;
 }
 
 /* Task-vtable watchpoint. The Chapter 1 handoff dies because the task scheduler
@@ -520,6 +532,20 @@ static void host_wakeup_thread_queue(CPUState* cpu, u32 queue_addr) {
                 bits |= (1u << (31 - prio));
                 mem_write32(cpu, 0x8087FC60, bits);
                 mem_write32(cpu, 0x8087FC5C, 1);        // RunQueueHint = TRUE
+
+                /* OSWakeupThread also raises the "reschedule needed" word at
+                 * 0x8087F840 (its own code ORs into it at 0x805F5E0C). The OS idle
+                 * loop at 0x805F50B0 is literally `while (*(0x8087F840) == 0) {}`,
+                 * so a wake delivered by hand _without_ this word leaves the guest
+                 * spinning in the idle loop forever - which is the state the run dies
+                 * in. Set it exactly like the guest would. TLS_WAKE_NO_RESCHED=1
+                 * restores the incomplete behaviour for A/B. */
+                static int s_resched = -1;
+                if (s_resched < 0) s_resched = getenv("TLS_WAKE_NO_RESCHED") ? 0 : 1;
+                if (s_resched) {
+                    u32 need = mem_read32(cpu, 0x8087F840);
+                    mem_write32(cpu, 0x8087F840, need | 1u);
+                }
             }
         }
         cur = next;
@@ -536,6 +562,7 @@ static bool host_call_guest(CPUState* cpu, u32 fn, u32 arg) {
     if (!fn) return false;
     CPUState saved = *cpu;
     cpu->gpr[3] = arg;
+    cpu->gpr[4] = cpu->gpr[1];   /* OSContext*: handlers take (interrupt type, context) */
     cpu->lr = TLS_HOST_CALLBACK_SENTINEL;
     cpu->pc = fn;
     cpu->downcount = 10000;
@@ -702,12 +729,13 @@ static void host_simulate_vblank(CPUState* cpu, int frame_num) {
         }
         if (s_vb_from >= 0 && g_runner_current_frame >= s_vb_from) {
             u32 head = mem_read32(cpu, 0x807C6F60);
-            printf("[VBLANK] frame=%d W=%u R=%u qhead=0x%08X runbits=0x%08X cur=0x%08X headstate=%u\n",
+            printf("[VBLANK] frame=%d W=%u R=%u qhead=0x%08X runbits=0x%08X cur=0x%08X headstate=%u pc=0x%08X lr=0x%08X\n",
                    g_runner_current_frame,
                    (unsigned)mem_read16(cpu, 0x807C6FB8),
                    (unsigned)mem_read16(cpu, 0x807C6FBA),
                    head, mem_read32(cpu, 0x8087FC60), mem_read32(cpu, 0x800000E4),
-                   (head >= 0x80000000u && head < 0x94000000u) ? (unsigned)mem_read16(cpu, head + 0x2C8) : 0);
+                   (head >= 0x80000000u && head < 0x94000000u) ? (unsigned)mem_read16(cpu, head + 0x2C8) : 0,
+                   cpu->pc, cpu->lr);
             fflush(stdout);
         }
     }
@@ -720,7 +748,56 @@ static void host_simulate_vblank(CPUState* cpu, int frame_num) {
     // 3. Advance simulated timebase (~1/60 sec at 60MHz bus clock = 1,000,000 ticks)
     cpu->timebase += 1000000;
 
+    /* Deliver a real retrace interrupt. The engine parks in the OS idle loop
+     * waiting for one; poking memory cannot wake a spinning idle context, and that
+     * is exactly the state the run dies in (PC 0x805F50B0, RunQueueBits 0). The OS
+     * registered its handler for interrupt 24 at boot (0x80602ED0, seen via
+     * __OSSetInterruptHandler), so call it at the vblank boundary and let the guest
+     * wake whatever it is supposed to wake. TLS_VIRETRACE=<hex handler> enables it
+     * so the effect stays measurable rather than assumed. */
+    {
+        static int s_virq_init = -1;
+        static u32 s_virq = 0;
+        if (s_virq_init < 0) {
+            s_virq_init = 1;
+            const char* e = getenv("TLS_VIRETRACE");
+            if (e) {
+                s_virq = (u32)strtoul(e, NULL, 0);
+                printf("[Runner] VI retrace handler: 0x%08X\n", s_virq);
+                fflush(stdout);
+            }
+        }
+        if (s_virq) {
+            host_call_guest(cpu, s_virq, 24u);
+        }
+    }
+
     // 4. Wake whoever waits on the graphics frame queue. Two ways:
+    /* Raise the OS "reschedule needed" word, which is what a VI retrace interrupt
+     * leaves behind. 0x8087F840 is written by the guest's own OSWakeupThread
+     * (0x805F5E0C) and the OS idle loop at 0x805F50B0 is `while (!*(0x8087F840)) {}`,
+     * so the host must raise it once per retrace or the idle context never gets a
+     * chance to reschedule - which is exactly how the engine ends up parked at
+     * 0x805F50B0 with RunQueueBits 0. Unlike calling the VI handler directly (which
+     * corrupts the guest because the interrupt-entry context is missing), this is
+     * only the flag the handler would set; the guest schedules itself.
+     * TLS_RETRACE_FLAG=0 disables it for A/B. */
+    {
+        static int s_flag_init = -1;
+        static int s_flag = 1;
+        if (s_flag_init < 0) {
+            s_flag_init = 1;
+            const char* e = getenv("TLS_RETRACE_FLAG");
+            if (e) s_flag = atoi(e) != 0;
+            printf("[Runner] Retrace reschedule flag: %s\n", s_flag ? "raised each vblank" : "off");
+            fflush(stdout);
+        }
+        if (s_flag) {
+            u32 need = mem_read32(cpu, 0x8087F840);
+            mem_write32(cpu, 0x8087F840, need | 1u);
+        }
+    }
+
     //    legacy - hand-edit the guest thread queue (races __OSReschedule),
     //    guest  - call the guest's own OSWakeupThread so its accounting is used.
     if (s_hack) {
