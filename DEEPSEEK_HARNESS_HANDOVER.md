@@ -385,22 +385,33 @@ the OS idle path. The two created threads are both legitimately idle. **Nothing 
 wakeup is missing at the end: the guest simply has no runnable work**, which is why run lengths past
 frame ~840 are a quiet idle loop reporting 60 FPS for free.
 
-That moves the question one step upstream again, and pins it to the sequence layer. The sequence
-manager is *not* stalled before Chapter 1, which §5b could not tell: it switches into sequence
-`0x0C` and the active object is the GameTask (vtable `0x8078A3D0`, slots `0x80366454` IsReady /
-`0x80366E54` Init / `0x80368280` Update / `0x8036B7F4` Draw):
+That moves the question one step upstream again, and it is now measured rather than guessed. The
+state-0 gate in `GameTask::Init` (`0x80366E54`) is:
 
 ```
-Update #442 ... active=0x00000000 next=0x0000000C
-Update #443 ... active=0x81116720 ('<null>' vt=0x8078A3D0) next=0x00000000
-Update #450 ... active=0x81116720 ('<null>' vt=0x8078A3D0) next=0x00000000
-[GameTask] Init #9 ENTER task=0x81116720 state=0 (last=0)
+0x80366EAC  bl 0x800D3FA4(task)          -> must be non-zero (child at task+0x18 with flag bit 0x2 at +0x38)
+0x80366EBC  bl 0x8044386C(*(r13-25040))  -> must return 0        (r13 = 0x808852A0 -> 0x8087EED0)
+0x80366ED0  if (*(r13-25168) != 0) return                        (-> 0x8087E1F0)
+0x80366EE4  task+0x10DC = state + 1      -> advances to state 1
 ```
 
-So Chapter 1's task *is* the active sequence, but `Init` is re-entered every frame with `state = 0`
-and never advances, so Update/Draw never run and the two engine threads stay idle. The next defect to
-explain is therefore inside `GameTask::Init`'s state-0 gate (`f4f0=` / `f470=` in the Init log), not
-in the sequence handoff.
+On the faithful build those gates **pass** and the state machine advances normally:
+
+```
+[GameTask] Init #17..#20  state=0
+[GameTask] Init #26       state=1
+[GameTask] Init #27       state=2
+[GameTask] Init #28       state=3
+```
+
+and then `Init` is never dispatched again — no state 4 is ever observed — GX output drops to 0, and
+the boot thread ends in the OS idle path. So the defect is not the state-0 gate and not the sequence
+handoff (the manager does activate the GameTask, vtable `0x8078A3D0`, `next=0`): it is that
+**dispatch of the GameTask stops after `Init` reaches state 3**, which is the next thing to explain.
+
+Previous rounds left two useful side facts for that work: the two created engine threads are idle
+(not stuck), and `StreamManager::Update` keeps running to the end with an idle queue, so the
+streaming layer is not what stalls the boot thread.
 
 
 

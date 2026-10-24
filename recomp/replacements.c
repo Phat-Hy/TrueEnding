@@ -3391,7 +3391,19 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                     }
                     u32 f4f0 = mem_read32(ctx, 0x8087F4F0);
                     u32 f470 = mem_read32(ctx, 0x8087F470);
-                    printf("     State 0 check: f4f0=0x%08X f470=0x%08X\n", f4f0, f470);
+                    /* The state-0 gate in GameTask::Init is:
+                     *   0x80366EAC  bl 0x800D3FA4(task)      -> must be non-zero
+                     *   0x80366EBC  bl 0x8044386C(*(r13-25040))-> must return 0
+                     *   0x80366ED0  if (*(r13-25168) != 0) return
+                     * r13 is 0x808852A0, so the two globals are at 0x8087EED0 and
+                     * 0x8087E1F0. Print them so the failing gate is visible instead
+                     * of inferred; f4f0/f470 are unrelated globals kept for history. */
+                    u32 g2p = mem_read32(ctx, 0x8087EED0);
+                    u32 g2v = (g2p && resolve_guest_pointer(ctx, g2p)) ? mem_read32(ctx, g2p) : 0;
+                    u32 g3 = mem_read32(ctx, 0x8087E1F0);
+                    printf("     State 0 gates: child=0x%08X g2arg=0x%08X g2arg[0]=0x%08X g3(r13-25168)=0x%08X | f4f0=0x%08X f470=0x%08X\n",
+                           task ? mem_read32(ctx, task + 24) : 0,
+                           g2p, g2v, g3, f4f0, f470);
                     if (state == 2) {
                         u32 f8a0 = mem_read32(ctx, 0x8087F8A0);
                         u32 t48 = f8a0 ? mem_read32(ctx, f8a0 + 0x48) : 0;
