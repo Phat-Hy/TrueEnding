@@ -183,9 +183,42 @@ def build_runner(jobs: int = 12):
         "-I", str(GENERATED_DIR),
     ]
 
+    # Header dependencies. The incremental check below used to compare only against
+    # the .c file's mtime, so editing a header silently left stale objects behind.
+    # That is not a cosmetic problem: raising GX_MAX_BATCH_VERTICES in gx_pipeline.h
+    # rebuilt gx_pipeline.o (which emits the vertices) but not gfx_d3d11.o (which
+    # sizes the D3D11 vertex buffer from the same macro), and the next frame
+    # memcpy'd 40 MB into a 10 MB buffer - SIGSEGV inside d3d11_present().
+    # Source files under recomp/ only see recomp/ headers; the generated chunks also
+    # include tools/DolRecomp/src headers, so those two scopes are tracked separately.
+    def newest_mtime(roots):
+        newest = 0.0
+        newest_path = None
+        for root in roots:
+            if not root.exists():
+                continue
+            for pattern in ("*.h", "*.hpp"):
+                for header in root.rglob(pattern):
+                    mtime = header.stat().st_mtime
+                    if mtime > newest:
+                        newest = mtime
+                        newest_path = header
+        return newest, newest_path
+
+    recomp_header_mtime, recomp_header = newest_mtime([ROOT_DIR / "recomp"])
+    framework_header_mtime, framework_header = newest_mtime(
+        [ROOT_DIR / "include", ROOT_DIR / "tools" / "DolRecomp" / "src"]
+    )
+
     for src, obj in support_files:
-        if not obj.exists() or obj.stat().st_mtime < src.stat().st_mtime:
-            print(f"Compiling {src.name} -> {obj.name}...")
+        needs = not obj.exists() or obj.stat().st_mtime < src.stat().st_mtime
+        if not needs and recomp_header_mtime > obj.stat().st_mtime:
+            needs = True
+        if needs:
+            if recomp_header is not None and recomp_header_mtime > obj.stat().st_mtime:
+                print(f"Compiling {src.name} -> {obj.name}... (header {recomp_header.relative_to(ROOT_DIR)})")
+            else:
+                print(f"Compiling {src.name} -> {obj.name}...")
             cmd = [str(GCC_BIN), "-c", str(src), "-o", str(obj)] + includes + ["-O2"]
             res = subprocess.run(cmd)
             if res.returncode != 0:
@@ -198,7 +231,10 @@ def build_runner(jobs: int = 12):
     for c_file in chunk_files:
         o_file = obj_dir / (c_file.stem + ".o")
         all_objs.append(str(o_file.resolve()))
-        if not o_file.exists() or o_file.stat().st_mtime < c_file.stat().st_mtime:
+        needs = not o_file.exists() or o_file.stat().st_mtime < c_file.stat().st_mtime
+        if not needs and framework_header_mtime > o_file.stat().st_mtime:
+            needs = True
+        if needs:
             to_compile.append((c_file, o_file))
 
     print(f"Total chunks: {len(chunk_files)} ({len(to_compile)} to compile, {len(chunk_files) - len(to_compile)} cached)")

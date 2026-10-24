@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdlib.h>
 
+#include "gx_pipeline.h"
+
 // Use the real CPUState. This file used to declare its own reduced copy that was
 // missing ps1[32], which shifted every field after fpr[] by 256 bytes - so the
 // telemetry heartbeat reported "PC: 0x00000000" for every frame of every run and
@@ -217,8 +219,18 @@ void tls_debug_frame(CPUState* cpu, int frame, uint32_t gx_vtx_count, uint32_t b
         // skips its fade/advance math entirely unless *(PadManager + 0x284) is non-zero.
         uint32_t pad_mgr = mem_read32(cpu, 0x8087F0A8);
         uint32_t pad_flag = (pad_mgr && resolve_guest_pointer(cpu, pad_mgr)) ? mem_read32(cpu, pad_mgr + 0x284) : 0;
-        printf("[TLS Frame %4d] Seq: %-12s | Tasks: %u | GX: %u vtx (%u batches) | PC: 0x%08X | pad284=0x%08X\n",
-               frame, seq_name, task_cnt, gx_vtx_count, batch_count, cpu->pc, pad_flag);
+        /* "dropped" is geometry the guest submitted that did not fit the host vertex
+         * buffer (gx_pipeline_get_dropped_vertices). Any non-zero value means part of
+         * the frame is missing from the picture, so it is reported, not hidden. */
+        uint32_t dropped = gx_pipeline_get_dropped_vertices();
+        char dropped_note[32];
+        if (dropped) {
+            snprintf(dropped_note, sizeof(dropped_note), ", dropped %u", dropped);
+        } else {
+            dropped_note[0] = '\0';
+        }
+        printf("[TLS Frame %4d] Seq: %-12s | Tasks: %u | GX: %u vtx (%u batches%s) | PC: 0x%08X | pad284=0x%08X\n",
+               frame, seq_name, task_cnt, gx_vtx_count, batch_count, dropped_note, cpu->pc, pad_flag);
         fflush(stdout);
     }
 }

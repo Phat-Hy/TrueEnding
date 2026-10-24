@@ -47,8 +47,13 @@ typedef struct {
 #define GX_COMP_S16                 3
 #define GX_COMP_F32                 4
 
-// Maximum buffered vertices per draw call / batch
-#define GX_MAX_BATCH_VERTICES       262144
+// Maximum buffered vertices per frame. This is a *host* buffer, not a guest limit:
+// 262144 (0x40000) used to be the ceiling and Chapter 1's cave+water pass saturates
+// it (frames 2160/2220/2280 reported exactly 262143 vertices), so geometry past the
+// cap was silently dropped - visible as missing chunks of the scene. 1 M vertices =
+// 40 MB of GxVertex, which a PC runner can afford; the overflow counter below makes
+// any future saturation loud instead of silent.
+#define GX_MAX_BATCH_VERTICES       (1u << 20)
 
 // Guest pointer resolution callback
 typedef const void* (*GxResolvePtrFunc)(uint32_t addr);
@@ -84,6 +89,9 @@ void gx_pipeline_set_array(uint32_t attr, const void* base_ptr, uint8_t stride);
 
 // Get current decoded vertex stream
 const GxVertex* gx_pipeline_get_vertices(uint32_t* out_count);
+// Vertices the guest submitted that did not fit the host vertex buffer this frame.
+// Non-zero means visible geometry was dropped; report it, never hide it.
+uint32_t gx_pipeline_get_dropped_vertices(void);
 
 // Active texture state
 typedef struct {

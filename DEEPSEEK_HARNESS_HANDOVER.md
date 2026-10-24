@@ -13,27 +13,37 @@
 > string data as code (§5c.9). The arena low is now derived from the DOL (`0x8089B3C0`, the layout
 > `asm/ldscript.lcf` defines). After the fix:
 > - a 2400-frame run keeps `SequenceManager::Update` to frame 2398, `GameTask::Init` ends at 1032 and
->   `GameTask::Update`/`Draw` run to 2398, with 200k–262k GX vertices per frame;
-> - the Chapter 1 (Gurgan Cave) scene renders: water, rock walls, sky, moving camera — and the title menu
->   before it. Evidence frames: `docs/evidence/08-title-menu-frame500.png`,
-> `09-chapter1-cave-frame1200.png`, `10-chapter1-cave-frame1500.png` (the runner also writes
-> `build/recomp/d3d11_screenshot_*.ppm` at frames 100…1800 on every windowed run);
+>   `GameTask::Update`/`Draw` run to 2398, with 200k–300k GX vertices per frame;
+> - **the title screen runs continuously and completely**: 3D cave-and-lake backdrop, the hero standing
+>   in front of it, the sword/ring emblem, glowing particles, and the MENU / CONTINUE / NEW GAME /
+>   MULTIPLAYER layout with its Japanese sublabels. Evidence: `docs/evidence/08-title-menu-frame500.png`,
+>   `09-title-backdrop-frame1200.png`, `10-title-hero-cave-frame2200.png`,
+>   `11-title-backdrop-frame1500.png` (the runner also writes `build/recomp/d3d11_screenshot_*.ppm` at
+>   frames 100…1800 on every windowed run, and `TLS_SHOT_FRAMES=<n,...>` adds more);
 > - no stray sentinel, no non-code dispatch after the two known boot-time ones, no exception.
 > - `TLS_ARENALO=0x8088A000` restores the old behaviour exactly (`Init` 31 calls, last 829, stray
 >   sentinel), so the fix is A/B verifiable.
+>
+> **What the scene is, precisely.** The cave/lake vista is the *title screen's* 3D backdrop, not Chapter 1
+> (the series' title screen is a cave with a lake and sky through the opening). The engine is running the
+> title sequence end to end: `GameTask` is its frame host, and the taps `GameTask::Init` →
+> `Update`/`Draw` are that sequence running. **Chapter 1 has not been reached yet** — leaving the title
+> requires the menu's own state machine to accept a real button press, and the synthetic `sim_press`
+> in `0x800A555C` does not do that (it walks the title between modes 1→25 and submenus such as
+> "NEW TUTORIAL" without ever handing off). Reaching gameplay needs a frame-indexed deterministic input
+> script feeding the same host input state the keyboard feeds (§5c.3), not another guest-state poke.
 >
 > **Also corrected:** §5c.8's "single next target" (the host-callback sentinel leak) was a *symptom* of
 > that stack corruption, not a cause. The leak itself has never been observed; it is now repaired if it
 > ever happens (`host_repair_sentinel_in_thread`, `TLS_HOSTCALLBACK_PROBE`).
 >
-> **Where the work stands / next targets.** The engine now loads and draws Chapter 1 continuously. Open
-> items, in the order they are worth attacking:
-> 1. Visual parity: the cave draws, but the water/reflection pass is visibly wrong (black cut-outs,
->    pink sky reflections in the water) and GX vertex counts saturate at `0x3FFFF` (262143) on heavy
->    frames — check whether that is a real guest cap or a pipeline buffer limit.
-> 2. Gameplay: the camera moves but no player character/HUD has been confirmed on screen yet; the
->    remaining Chapter-1 load steps (`CharaTask` state, `SceneReady`, streaming queue) should be
->    followed with the taps and `Streaming Queue` line.
+> **Where the work stands / next targets.** The engine runs the title sequence and draws it correctly.
+> Open items, in the order they are worth attacking:
+> 1. Drive the title menu to NEW GAME with real input (deterministic script), then confirm the handoff
+>    into Chapter 1. Until that works there is no gameplay to debug.
+> 2. Visual parity of the title: the backdrop's water/lake surface shows large black regions and a pink
+>    sky reflection (see `10-title-hero-cave-frame2200.png`), and the "NEW TUTORIAL" submenu at frame
+>    2400 draws its plate over black.
 > 3. The two boot-time non-code dispatches (`0x005F2A10`, `0x005F2A90`, both `lr=0x805F2F18/48` at
 >    frame 0) are still handled by the generic safeguard and deserve a name.
 >
@@ -612,14 +622,15 @@ GameTask::Init           calls=149    first=658    last=1032
 GameTask::Update         calls=678    first=1033   last=2398
 GameTask::Draw           calls=678    first=1034   last=2398
 SequenceManager::Update  calls=1267   first=167    last=2398
-frame 1500: GX 99774 vtx (91 batches) | frame 2160: GX 262143 vtx (62 batches)
+frame 1500: GX 99774 vtx (91 batches) | frame 2160: GX 290544 vtx (67 batches, 0 dropped)
 ```
 
 No stray sentinel, no non-code dispatch after the two known boot-time ones, no CPU exception, and the
-title menu and the Gurgan Cave scene are on screen: `docs/evidence/08-title-menu-frame500.png` (MENU /
-CONTINUE / NEW GAME / MULTIPLAYER over the cave), `09-chapter1-cave-frame1200.png` and
-`10-chapter1-cave-frame1500.png` (rock walls, water with a sky reflection, a moving camera). A/B with
-`TLS_ARENALO=0x8088A000` restores the old signature byte for byte — `Init calls=31 last=829`,
+title screen is on screen end to end: `docs/evidence/08-title-menu-frame500.png` (MENU / CONTINUE /
+NEW GAME / MULTIPLAYER over the backdrop), `09-title-backdrop-frame1200.png` and
+`11-title-backdrop-frame1500.png` (cave walls, lake surface, sky, moving camera),
+`10-title-hero-cave-frame2200.png` (the hero standing in front of the menu with the sword/ring emblem).
+A/B with `TLS_ARENALO=0x8088A000` restores the old signature byte for byte — `Init calls=31 last=829`,
 `SequenceManager calls=472 last=829`, stray sentinel — so the causal link is measured, not argued.
 `--headless --frames 900` also passes frame 830 (`GameTask::Init` still running at 898).
 
@@ -637,11 +648,16 @@ CONTINUE / NEW GAME / MULTIPLAYER over the cave), `09-chapter1-cave-frame1200.pn
 
 **What is still open after this fix** (observed, not guessed):
 
-- The water/reflection pass renders with black cut-outs and a pink sky reflection (see the screenshots);
-  GX vertex counts hit exactly `0x3FFFF` (262143) on heavy frames, which may be a pipeline buffer cap
-  rather than the guest's own limit.
-- No player character or HUD has been confirmed yet; the camera moves through the cave while
-  `Streaming Queue: active="data/texture/pc_hand_paint_a.texture"` shows character assets arriving.
+- **Chapter 1 is not reached.** The scene on screen is the title screen's own 3D backdrop; the men
+  state machine never accepts the synthetic press and never hands the sequence over. This is now the top
+  item: feed a deterministic, frame-indexed input script into the same host input state the keyboard
+  fills (§5c.3) and drive NEW GAME.
+- The lake/water surface draws with large black regions and a pink sky reflection
+  (`10-title-hero-cave-frame2200.png`), and the "NEW TUTORIAL" plate at frame 2400 sits over black.
+- The GX vertex buffer used to cap at `0x3FFFF` (262143) and silently drop the rest; that was a *host*
+  limit (`GX_MAX_BATCH_VERTICES`), not the guest's. Raised to 1 M with a `dropped` counter in the frame
+  telemetry (`gx_pipeline_get_dropped_vertices`); heavy title frames now report 290k–306k vertices with
+  zero drops.
 - Two non-code dispatches remain, both at frame 0 (`0x005F2A10`/`0x005F2A90`, `lr=0x805F2F18/0x805F2F48`,
   `0x805F2E90` → `OSMemory.c` region). They are handled by the generic safeguard and the run continues;
   they deserve a name before the safeguard is ever tightened.

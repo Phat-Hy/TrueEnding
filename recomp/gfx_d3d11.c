@@ -1254,6 +1254,31 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
             }
         }
     }
+    /* Explicit capture points: TLS_SHOT_FRAMES=1920,2160,2400. The list above is a
+     * legacy fixed set; this lets a run grab exactly the frames being investigated
+     * instead of editing hardcoded numbers. */
+    {
+        static char s_shot_list[256];
+        static int s_shot_loaded = 0;
+        if (!s_shot_loaded) {
+            s_shot_loaded = 1;
+            const char* frames = getenv("TLS_SHOT_FRAMES");
+            if (frames) {
+                strncpy(s_shot_list, frames, sizeof(s_shot_list) - 1);
+            }
+        }
+        if (s_shot_list[0]) {
+            char buf[256];
+            strncpy(buf, s_shot_list, sizeof(buf) - 1);
+            buf[sizeof(buf) - 1] = '\0';
+            for (char* tok = strtok(buf, ","); tok; tok = strtok(NULL, ",")) {
+                if (atoi(tok) == s_d3d11_dump_count) {
+                    take_shot = true;
+                    break;
+                }
+            }
+        }
+    }
 
     // Do not stomp cleared backbuffer with empty XFB quad on native GX hardware titles
     #if 0

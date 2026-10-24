@@ -36,6 +36,16 @@ static uint8_t s_default_pnm_idx = 0;
 static GxVertex s_vertex_batch[GX_MAX_BATCH_VERTICES];
 static uint32_t s_vertex_count = 0;
 static uint32_t s_primitive_count = 0;
+/* Vertices submitted this frame that did not fit the host buffer. Silently returning
+ * them (the old behaviour) loses geometry with no trace; count them so the frame
+ * telemetry can say so. */
+static uint32_t s_dropped_vertices = 0;
+
+static inline bool reserve_vertices(uint32_t n) {
+    if (s_vertex_count + n <= GX_MAX_BATCH_VERTICES) return true;
+    s_dropped_vertices += n;
+    return false;
+}
 
 static GxDrawBatch s_draw_batches[GX_MAX_DRAW_BATCHES];
 static uint32_t s_draw_batch_count = 0;
@@ -278,6 +288,7 @@ void gx_pipeline_init(void) {
     }
 
     s_vertex_count = 0;
+    s_dropped_vertices = 0;
     s_primitive_count = 0;
     s_draw_batch_count = 0;
     s_parser_state = GX_STATE_IDLE;
@@ -293,9 +304,25 @@ void gx_pipeline_init(void) {
 
 static uint32_t s_gx_frame_idx = 0;
 
+/* Per-BP-register and per-batch dump that used to be hardcoded to frame 900 in two
+ * places (thousands of synchronous prints, a frame-rate killer and a hardcoded
+ * investigation leftover). TLS_F900_PROBE=1 enables it, TLS_F900_FRAME=<n> moves it. */
+static bool gx_f900_probe_active(void) {
+    static int s_on = -1;
+    static uint32_t s_frame = 900;
+    if (s_on < 0) {
+        const char* e = getenv("TLS_F900_PROBE");
+        const char* f = getenv("TLS_F900_FRAME");
+        s_on = e ? 1 : 0;
+        if (f) s_frame = (uint32_t)strtoul(f, NULL, 0);
+    }
+    return s_on && s_gx_frame_idx == s_frame;
+}
+
 void gx_pipeline_begin_frame(void) {
     s_gx_frame_idx++;
     s_vertex_count = 0;
+    s_dropped_vertices = 0;
     s_primitive_count = 0;
     s_draw_batch_count = 0;
     s_parser_state = GX_STATE_IDLE;
@@ -343,6 +370,10 @@ void gx_pipeline_load_pos_matrix(uint32_t id, const float mtx[3][4]) {
     if (id < 64) {
         memcpy(s_pos_matrices[id], mtx, sizeof(s_pos_matrices[id]));
     }
+}
+
+uint32_t gx_pipeline_get_dropped_vertices(void) {
+    return s_dropped_vertices;
 }
 
 const GxVertex* gx_pipeline_get_vertices(uint32_t* out_count) {
@@ -446,7 +477,7 @@ static inline void clip_and_emit_triangle(GxVertex v0, GxVertex v1, GxVertex v2)
     }
 
     if (!s_proj_is_perspective) {
-        if (s_vertex_count + 3 <= GX_MAX_BATCH_VERTICES) {
+        if (reserve_vertices(3)) {
             s_vertex_batch[s_vertex_count++] = v0;
             s_vertex_batch[s_vertex_count++] = v1;
             s_vertex_batch[s_vertex_count++] = v2;
@@ -461,7 +492,7 @@ static inline void clip_and_emit_triangle(GxVertex v0, GxVertex v1, GxVertex v2)
     int in_count = (in0 ? 1 : 0) + (in1 ? 1 : 0) + (in2 ? 1 : 0);
 
     if (in_count == 3) {
-        if (s_vertex_count + 3 <= GX_MAX_BATCH_VERTICES) {
+        if (reserve_vertices(3)) {
             s_vertex_batch[s_vertex_count++] = v0;
             s_vertex_batch[s_vertex_count++] = v1;
             s_vertex_batch[s_vertex_count++] = v2;
@@ -479,7 +510,7 @@ static inline void clip_and_emit_triangle(GxVertex v0, GxVertex v1, GxVertex v2)
         if (t1 < 0.0f || t1 > 1.0f || t2 < 0.0f || t2 > 1.0f) return;
         GxVertex p1 = lerp_vertex(&vi, &vo1, t1);
         GxVertex p2 = lerp_vertex(&vi, &vo2, t2);
-        if (s_vertex_count + 3 <= GX_MAX_BATCH_VERTICES) {
+        if (reserve_vertices(3)) {
             s_vertex_batch[s_vertex_count++] = vi;
             s_vertex_batch[s_vertex_count++] = p1;
             s_vertex_batch[s_vertex_count++] = p2;
@@ -497,7 +528,7 @@ static inline void clip_and_emit_triangle(GxVertex v0, GxVertex v1, GxVertex v2)
         if (t1 < 0.0f || t1 > 1.0f || t2 < 0.0f || t2 > 1.0f) return;
         GxVertex p1 = lerp_vertex(&vi1, &vo, t1);
         GxVertex p2 = lerp_vertex(&vi2, &vo, t2);
-        if (s_vertex_count + 6 <= GX_MAX_BATCH_VERTICES) {
+        if (reserve_vertices(6)) {
             s_vertex_batch[s_vertex_count++] = vi1;
             s_vertex_batch[s_vertex_count++] = vi2;
             s_vertex_batch[s_vertex_count++] = p2;
@@ -571,7 +602,10 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
                        (s_tex_units[tex_unit].width > 0) &&
                        (s_tex_units[tex_unit].height > 0);
 
-        if (s_gx_frame_idx == 900) {
+        /* Frame-900 dump from an earlier investigation. It prints once per emitted
+         * batch (thousands of lines per run) and is keyed on a hardcoded frame, so
+         * it is gated: TLS_F900_PROBE=1. TLS_F900_FRAME=<n> moves the window. */
+        if (gx_f900_probe_active()) {
             printf("[F900 Batch Emit] emitted=%u has_tex=%d tex_en=%d num_stages=%u texmap=%u texcoord=%u unit=%u addr=0x%08X\n",
                    vtx_emitted, has_tex, s_tev_tex_enable, s_num_tev_stages, s_active_tex_map, s_active_tex_coord, tex_unit, s_tex_units[tex_unit].guest_addr);
             for (int st = 0; st < s_num_tev_stages && st < 4; st++) {
@@ -641,7 +675,7 @@ void gx_pipeline_set_z_mode(bool test_enable, uint8_t func, bool write_enable) {
 }
 
 static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
-    if (s_gx_frame_idx == 900) {
+    if (gx_f900_probe_active()) {
         printf("[F900 BP] reg=0x%02X val=0x%06X\n", reg, val);
         fflush(stdout);
     }
