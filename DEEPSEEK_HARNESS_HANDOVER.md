@@ -659,9 +659,11 @@ A/B with `TLS_ARENALO=0x8088A000` restores the old signature byte for byte — `
   limit (`GX_MAX_BATCH_VERTICES`), not the guest's. Raised to 1 M with a `dropped` counter in the frame
   telemetry (`gx_pipeline_get_dropped_vertices`); heavy title frames now report 290k–306k vertices with
   zero drops.
-- Two non-code dispatches remain, both at frame 0 (`0x005F2A10`/`0x005F2A90`, `lr=0x805F2F18/0x805F2F48`,
-  `0x805F2E90` → `OSMemory.c` region). They are handled by the generic safeguard and the run continues;
-  they deserve a name before the safeguard is ever tightened.
+- The two "non-code dispatches" at frame 0 are **named and fixed**: `fn_805F2E90` is the OS
+  exception-return helper (`clrlwi r3,r3,2; mtsrr0 r3; mfmsr; mtsrr1; rfi`), which hands `rfi` a MEM1
+  *physical* address because the exception context runs untranslated. `0x005F2A10`/`0x005F2A90` are the
+  cached code at `0x805F2A10`/`0x805F2A90`; the HLE layer now translates (and reports) them instead of
+  running the crash-recovery path, so the generic safeguard no longer fires in a normal run at all.
 
 ### 5c.10 Input: the engine's action pipeline, and what the title actually waits for
 

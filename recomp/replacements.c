@@ -1873,6 +1873,32 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         return 1;
     }
 
+    /* MEM1 physical addressing. The OS's exception-return helper (0x805F2E90:
+     * `mtsrr0 r3; mfmsr; mtsrr1; rfi`) hands `rfi` a *physical* address because the
+     * exception context runs with translation off, and the Wii maps MEM1 physical 0
+     * to cached 0x80000000. The emulator keeps a flat mapping, so a jump to e.g.
+     * 0x005F2A10 is really "resume at 0x805F2A10". Translate instead of treating it
+     * as corruption: that removes the last two boot-time non-code dispatches without
+     * weakening the safeguard (only addresses that land inside the DOL text are
+     * translated, and each is reported once). */
+    if (address < 0x80000000u && address >= 0x00003000u) {
+        u32 cached = address + 0x80000000u;
+        if (cached >= 0x80003000u && cached < 0x80730000u) {
+            static u32 s_seen[8];
+            static int s_seen_n = 0;
+            bool known = false;
+            for (int i = 0; i < s_seen_n; i++) if (s_seen[i] == address) known = true;
+            if (!known) {
+                if (s_seen_n < 8) s_seen[s_seen_n++] = address;
+                printf("[TLS PhysMap] physical 0x%08X -> cached 0x%08X (lr=0x%08X) - exception-context "
+                       "return translated to the MEM1 cached alias\n", address, cached, ctx->lr);
+                fflush(stdout);
+            }
+            ctx->pc = cached;
+            return 1;
+        }
+    }
+
     // Generic non-code address safeguard (null pointer / corrupt indirect calls / heap calls)
     // Guest executable DOL code strictly exists between 0x80003100 and 0x80730000.
     if (address < 0x80003000 || address >= 0x80730000) {
