@@ -3007,3 +3007,30 @@ identity for this batch (`TLS_XF_PROBE` already prints the whole XF file).
 * **The host's save-data dialog is what blocks Chapter 1**, not the renderer: removing
   the fabricated save file changes nothing (byte-identical frame), so the guest's
   "corrupt" verdict comes from the NAND/ISFS layer's answers, not the file.
+
+#### 10. End-of-session state (reproducible)
+
+```
+git: 4 commits this session, tree clean, `python tools/recomp_harness.py build-runner`
+     links in ~0.9 s.
+default (no TLS_* flags), input 600-612:A,900-912:A,1200-1212:A, present 1448:
+     mean (102,188,205), p10 69, p50 203, p90 203  -- measured on three separate runs,
+     byte-identical. This is the *re-baselined* default after promoting TLS_EFB_COPY_FMT;
+     it replaces the (124,235,255) that 5c.22 recorded.
+new/changed flags: TLS_EFB_COPY_FMT (now default-on; =0 restores), TLS_EFB_ALPHA (opt-in),
+     TLS_SAVE_PRECREATE (opt-in, restores the fabricated save file).
+new tool: tools/cmp_ref.py <image> [more images] - mean, p10/50/75/90/99/99.7 and a 4x6
+     grid of block means for a host PPM or a reference PNG.
+```
+
+Two traps worth restating, because they cost runs this session:
+
+1. **The frame at a given present index is not your frame.** The host's picture at 1448 on
+   the three-A input plan is the save-data dialog; run3's `framedump_1448` is the title
+   plate; run2's `framedump_1440` is the dark cave MENU. Check *which screen* is being
+   compared (render it) before comparing numbers, and remember run-to-run the MENU's
+   particle/animation phase differs (batch counts 60..67 across runs), so per-batch
+   indices are only meaningful within one run.
+2. **Read the probes' field order from the code, not from the label.** The K-register
+   line printed `(r, a, b, g)` and an opaque black K0 read as "green"; that single
+   misreading sent me looking for the wrong thing for a whole run.

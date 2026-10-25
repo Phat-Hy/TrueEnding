@@ -1751,10 +1751,12 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                             t16[0] = (uint8_t)(v >> 8);
                             t16[1] = (uint8_t)(v & 0xFF);
                         } else if (s_copy_fmt && (format == 3 || format == 9)) {
-                            /* RA8 / IA8: 32-byte 4x4 tile of (alpha, intensity) pairs */
+                            /* RA8 (9) = (alpha, red) pairs; IA8 (3) = (alpha, intensity).
+                             * Same 32-byte 4x4 tile, different second channel. */
                             uint8_t* t8 = guest + (size_t)tile * 32 + within * 2;
                             t8[0] = a;
-                            t8[1] = (uint8_t)((r * 77 + g * 150 + b * 29) >> 8);
+                            t8[1] = (format == 9) ? r
+                                                  : (uint8_t)((r * 77 + g * 150 + b * 29) >> 8);
                         } else if (s_copy_fmt && format == 7) {
                             /* A8: 32-byte 4x4 tile of alpha */
                             guest[(size_t)tile * 32 + within] = a;
