@@ -4187,6 +4187,10 @@ purely because its virtual entries are ordinary function entries.**
    bloom chain uses R8, so promoting it moves the 1448 invariant.
 
 4. **Fill `0x81858DE0` record slot 1** (see §8b) - still the state-machine-side blocker.
+   **Verified unchanged after the texture-hash fix**: phase 13 still reaches `o88=3` at frame 3602,
+   falls back to `o88=1` with the slot counter at 1 at 3604, and stays there through 4524 with
+   `rec[1] = (w0=1, w10=0)`. So the rendering fix and the intro stall are independent defects -
+   do not expect one to move the other.
    **New datum**: DVD activity stops long before phase 13 (the last `[TLS DVD] read` in a
    4200-frame run is around request #500, well before frame 2363), so slot 1's resource is not a
    disc load - it is either something already in memory or a request that was never issued.
