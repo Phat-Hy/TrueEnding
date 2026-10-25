@@ -4077,6 +4077,25 @@ purely because its virtual entries are ordinary function entries.**
    render-to-texture then composite cycle; hardware would display only the finished one. So the fix
    must make the host display the finished frame and skip the intermediate one - there is no way to
    "draw both halves into one buffer" without suppressing a clear the guest genuinely issues.
+   **The title alternates as well, and the 1448 invariant is only one of the two halves.** Direct
+   measurement of consecutive title presents (one run, `TLS_SHOT_FRAMES=1444..1448`):
+
+   ```
+   1444 (102.3,188.1,204.9) cebaa0ca      1446 (102.3,188.0,204.9) df0d0508
+   1445 (201.9,188.1,105.4) 4d4a8edd      1447 (201.9,188.0,105.4) 173b5c6d
+   1448 (102.3,188.0,204.9) 4a8e66f1      <- the invariant's (102,188,205)
+   ```
+
+   Blue-ish and yellow-ish images alternate, and each parity still animates (three different hashes
+   within the blue parity). So the two-half defect is **not Chapter-1-specific** - the title has it
+   too, and a single still would never show it. Two consequences:
+   * the documented invariant `mean (102,188,205) p10 69 p50 203 p90 203 p99 206` is **one half of
+     the title screen**, not the title screen. It is a regression guard, not a correctness target;
+   * any present-gating fix changes *which* half lands on present 1448, so the invariant must be
+     re-derived (record BOTH halves) when that change lands, not compared.
+   The title's per-frame profile also explains why a *global* present gate is unsafe: the title is
+   single-pass (frames 300+ show `batches` 14..23 with `blended` 6..14 in the SAME frame) while
+   Chapter-1 is two-pass, so a gate must be conditional on the guest using the two-pass protocol.
    Already **eliminated**: R8 tiling (`TLS_R8_TILE_8X4=1` - evens still identical), copy source
    (`TLS_EFB_SRC_CURRENT=1` - identical to default), snapshot placement (captured at
    `gfx_d3d11.c:2897`, *before* `Present` at 2898), vertex truncation (`1<<20` capacity), and
