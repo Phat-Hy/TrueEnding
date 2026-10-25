@@ -4914,6 +4914,23 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                     printf("\n");
                     fflush(stdout);
                 }
+                /* One-shot full dump of records 0 and 1 once the counter has settled at 1:
+                 * slot 0 got its resource and slot 1 did not, so whatever distinguishes them
+                 * is inside these 76 bytes. 76 = 19 words. */
+                {
+                    static int s_full = 0;
+                    if (!s_full && ok && o5b0 == 1 && o88 == 1) {
+                        int rec, wd;
+                        s_full = 1;
+                        for (rec = 0; rec < 2; rec++) {
+                            u32 base = ok + 0x474u + (u32)rec * 76u;
+                            printf("[TLS SceneSM] f=%d REC%d 0x%08X:", g_runner_current_frame, rec, base);
+                            for (wd = 0; wd < 19; wd++) printf(" %08X", mem_read32(ctx, base + (u32)wd * 4));
+                            printf("\n");
+                        }
+                        fflush(stdout);
+                    }
+                }
             }
             return 0;
         }
@@ -4929,6 +4946,44 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                            g_runner_current_frame, ok, ok ? mem_read32(ctx, ok + 0x88) : 0,
                            ok ? mem_read32(ctx, ok + 0x484) : 0, s_n);
                     fflush(stdout);
+                }
+            }
+            return 0;
+        }
+
+        case 0x80476664: {
+            /* vtable 0x8078FE50 entry 3 - the per-slot payload object's virtual. Both
+             * Chapter-1 waiter slots spawn one of this class (slot 0 -> 0x8186DF60,
+             * slot 1 -> 0x81863F60) but only slot 0 ever produces its resource, so the
+             * question is whether slot 1's payload is ticked at all. Count calls per
+             * `this` and report periodically. */
+            if (tls_scene_sm_probe_on()) {
+                extern int g_runner_current_frame;
+                static u32 seen[8];
+                static long counts[8];
+                static int seen_n = 0;
+                static int last_f = -1;
+                u32 th = ctx->gpr[3];
+                int i, found = -1;
+                for (i = 0; i < seen_n; i++) if (seen[i] == th) { found = i; break; }
+                if (found < 0 && seen_n < 8) {
+                    found = seen_n;
+                    seen[seen_n] = th;
+                    counts[seen_n] = 0;
+                    seen_n++;
+                    printf("[TLS SceneSM] f=%d VT76664 NEW this=0x%08X\n",
+                           g_runner_current_frame, th);
+                    fflush(stdout);
+                }
+                if (found >= 0) counts[found]++;
+                if (g_runner_current_frame != last_f) {
+                    last_f = g_runner_current_frame;
+                    if ((g_runner_current_frame % 300) == 0) {
+                        printf("[TLS SceneSM] f=%d VT76664 calls:", g_runner_current_frame);
+                        for (i = 0; i < seen_n; i++) printf(" 0x%08X=%ld", seen[i], counts[i]);
+                        printf("\n");
+                        fflush(stdout);
+                    }
                 }
             }
             return 0;

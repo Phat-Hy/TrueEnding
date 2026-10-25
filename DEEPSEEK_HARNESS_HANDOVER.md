@@ -4186,14 +4186,30 @@ purely because its virtual entries are ordinary function entries.**
    `efb_dst_decode_texel`. It stays off: no reference for a correct R8 destination, and the title's
    bloom chain uses R8, so promoting it moves the 1448 invariant.
 
-4. **Fill `0x81858DE0` record slot 1** (see §8b) - still the state-machine-side blocker.
-   **Verified unchanged after the texture-hash fix**: phase 13 still reaches `o88=3` at frame 3602,
-   falls back to `o88=1` with the slot counter at 1 at 3604, and stays there through 4524 with
-   `rec[1] = (w0=1, w10=0)`. So the rendering fix and the intro stall are independent defects -
-   do not expect one to move the other.
-   **New datum**: DVD activity stops long before phase 13 (the last `[TLS DVD] read` in a
-   4200-frame run is around request #500, well before frame 2363), so slot 1's resource is not a
-   disc load - it is either something already in memory or a request that was never issued.
+4. **Fill `0x81858DE0` record slot 1** - still the state-machine-side blocker, and now much
+   narrower. Dumped both 76-byte records in full (19 words each) at frame 3604, where the counter is
+   stuck at 1:
+
+   ```
+   REC0 0x81859254: 00000001 8186DF60 8078FE50 815A8880 92549410 41800000 C194A3D7 ...
+   REC1 0x818592A0: 00000001 81863F60 8078FE50 00000000 00000000 00000000 C194A3D7 ...
+   ```
+
+   Both slots have `w0 = 1` and a payload object (`w1`), and both payloads share type pointer
+   `w2 = 0x8078FE50`. What slot 1 lacks is `w3`, `w4` (the resource pointer) and `w5` (`0x41800000`
+   = 16.0f). So **the slot's payload object exists** - the request was issued - and it is the payload
+   that never delivers a resource.
+   **And the payloads are `LayoutTask`s, one of which never runs.** `0x8186DF60` (slot 0) appears in
+   `[TLS LayoutTask::Draw] obj=0x8186DF60` four times; `0x81863F60` (slot 1) appears **zero times** in
+   the whole log. So slot 1's LayoutTask is allocated but never drawn/updated - the same failure
+   shape as "no player/scene task is ever created": an object that exists and is never registered.
+   Next: find how a `LayoutTask` gets registered for drawing (compare an object that works with one
+   that does not - both are already identified by address) and why 0x81863F60 misses it.
+   **Verified unchanged after the texture-hash fix**: phase 13 still reaches `o88=3` at 3602, falls
+   back to `o88=1` with the counter at 1 at 3604, and stays there through 4524. The rendering fix and
+   the intro stall are independent.
+   **DVD ruled out**: the last `[TLS DVD] read` in a 4200-frame run is around request #500, well
+   before frame 2363, so slot 1's resource is not a disc load.
 
 5. **`fn_803E4478`** makes the phase-0 gate one-shot: it zeroes `g2+0xD8C` itself. Whatever re-arms
    it is a later phase, not a retry.
