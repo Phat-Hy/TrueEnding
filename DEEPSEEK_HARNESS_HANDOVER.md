@@ -3215,3 +3215,66 @@ is why the mode-5 chain above is quoted from the binary rather than guessed.
   `{length, offset}` of the backing file instead of success-with-the-buffer-untouched.
 * `TLS_SAVE_PRECREATE=1` now fabricates a **1 414 528**-byte file (the guest's own expected
   size, `0x159580`), not 1 348 992.
+
+#### 9. The dialog is not a wall: answering it advances the game (measured)
+
+The dialog's default selection is **No**. `TLS_INPUT_SCRIPT` = `600-612:A,900-912:A,
+1200-1212:A,1440-1452:UP,1500-1512:A` (move to Yes, press A) drives
+
+```
+6 -> 7 -> 8 -> 9 -> 11 -> 12 -> 16 -> 17 -> 18 -> 19 -> 20 -> 22 -> 25
+frames 1501, 1501, .., 1632, 1635, 1636, 1637, 1638, 1639
+```
+
+i.e. the save-data *creation* path runs to completion as far as the title is concerned,
+and then the title task sits in mode 25 forever (frame 3204 telemetry: `GameLoadTask`
+still active, `Sequence: 'UnknownSeq'`, streaming queue idle - no handover).
+
+What the frame shows during that stretch (TLS_TEV=1 TLS_DEFER_EFB_COPY=1):
+
+* 1550: the **MENU plate renders** - the gold "MENU" letters on the left - but a huge white
+  radial bloom washes out everything right of them (the known additive-chain defect, 5c.23
+  §1/§8: the passes run at `src.a = 1`).
+* 1700/2000: black.
+* 2400/2800: the **cave geometry** (the title's 3D backdrop) with heavy striping.
+* 3200: white.
+
+So "there is no MENU" is not accurate: the menu mode and its plate are reached, and the
+bloom is what hides them. The title *does* need the save data created to move on, and it
+tries to create it through the ISFS host-file calls this HLE still swallows.
+
+#### 10. The ISFS command map, measured from the guest wrappers
+
+The save path's file operations go through the *path*-based ISFS calls, which are ioctl/
+ioctlv on `/dev/fs` (`__fsFd`, opened at boot as fd 3). Extracted from the guest's own
+wrappers (`0x8061A880..0x8061B5D0`) plus the `TLS_NAND_PROBE` trace of a real run:
+
+| cmd | call | in | out | operation |
+|----|------|----|-----|-----------|
+| 4  | `IOS_Ioctlv` / `IoctlvAsync` | vec0 = 64-byte path buffer | vec1 = 4 bytes | **CreateFile** (wrapper 0x8061AA80; result copied to the caller) |
+| 6  | `IOS_Ioctl` / `IoctlAsync` | 64-byte path | 76 bytes: `[0]`=u32 ownerID, `[4]`=u16 groupID, `[70..73]`=4 byte fields (attr/…, read by 0x8061AD30) | **GetAttr** |
+| 8  | `IOS_Ioctl` / `IoctlAsync` | 64-byte path | 128 bytes | **Delete** (wrapper 0x8061B180) |
+| 11 | `IOS_Ioctl` on an open fd | none | 8 bytes `{u32 length; u32 offset}` | **get-file-stats** (what NANDGetLength reads) |
+| 12 | `IOS_IoctlvAsync` | 64-byte path | 2 out vectors | unknown op, wrapper 0x8061B3A0, called from the NAND layer (0x80622260) and retried ~10x while mode 25 waits |
+
+The vector convention: each `IOSIoVector` is `{void* data; u32 size;}` at `vecs + 8*i`, the
+first `num_in` are inputs, the rest are outputs; the guest copies the `num_in`-th vector's
+first word back as the operation's result (`*out = *(u32*)vecs[num_in].data`).
+
+**Next session's clean target:** implement commands 4, 6, 8 and 12 against the host file
+that `IOS_Open`'s HLE already tracks (`s_ios_files[]`, path-keyed), then re-run the
+`UP`+`A` plan above and watch for a mode-25 exit / a `SequenceManager` handover instead of
+untouched buffers. Do not fabricate the answers: the game compares `GetAttr`'s size and the
+written file's own header, so a wrong length loops back into the same dialog (measured:
+pre-creating a correctly-sized 1 414 528-byte zero file still gives mode 6, because the
+length is compared against the length the save image *declares*, not a constant).
+
+#### 11. Correction to 5c.24 §4/§5
+
+§4's conclusion stands (the title's texgen is Tex0/AB11 with identity tex and post
+matrices, so the XF texcoord pipeline cannot change the title frame). §5's suspicion that
+the effective `K0.a` is what makes the corners black is still open - but note the batch's
+stage decode is `st0` sampling **map1** and `st1` sampling **map0** (the mask), and the
+`[tex] mapN` probe lines are indexed by BP texmap while the batch header line's `tex=`/
+`tex1=` fields come from `batch->tex`/`tex1`, which are in the opposite order. Read the
+code, not the labels (again).
