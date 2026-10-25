@@ -4224,6 +4224,13 @@ purely because its virtual entries are ordinary function entries.**
    * `w11`: `0x3E828284` (0.2549f) vs `1`;
    * `w14`: `0x26` (38) vs `6`.
    Next: find who writes `LayoutTask+4` (the list node) and why it stays `2` for slot 1's payload.
+   **Partial answer already**: a scan of the class's own method range (`0x801F4000..0x801F4800`,
+   which holds the vtable's functions `0x801F4230`, `0x801F42A8`, `0x801F43E8`, `0x801F4514` Draw)
+   finds **no** `stw ..., 4(rX)` at all - so `+4` is written by an *external manager* that links
+   LayoutTasks into a draw list, not by the task itself. That matches the symptom exactly: slot 1's
+   payload was never handed to that manager.
+   Class addresses for the next session: vtable `0x80782C08`; functions `0x801F4230`, `0x801F42A8`,
+   `0x801F43E8`, `0x801F4514` (Draw, already instrumented).
    **Verified unchanged after the texture-hash fix**: phase 13 still reaches `o88=3` at 3602, falls
    back to `o88=1` with the counter at 1 at 3604, and stays there through 4524. The rendering fix and
    the intro stall are independent.
