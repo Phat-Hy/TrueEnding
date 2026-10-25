@@ -1932,3 +1932,11 @@ hardware does with these exact commands, so the next step is a **Dolphin referen
 same moment - `Run_TheLastStory_In_Dolphin.bat` exists, and `%APPDATA%\Dolphin Emulator\Logs\
 dolphin.log` already holds a reference run. Compare the same attract/MENU moment before changing any
 default; everything else here has now been measured.
+
+#### 11. The reference capture is one run away
+
+`Run_TheLastStory_In_Dolphin.bat` launches `G:\Program\Dolphin-x64\Dolphin.exe -e roms\TheLastStory.iso`
+(that directory exists). No reference frames exist yet: `%APPDATA%\Dolphin Emulator\ScreenShots`,
+`Dump\Frames` and `StateSaves` are all empty, `Logs\dolphin.log` is the only artefact from the
+earlier reference run. Capturing the attract/MENU moment there - Dolphin's *Dump -> Frames* and
+*Save Screenshot* both land in `ScreenShots\` - is what §10 needs before any default is changed.
