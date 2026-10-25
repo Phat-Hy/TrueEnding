@@ -1387,7 +1387,7 @@ static void efb_dst_decode_texel(const uint8_t* guest, uint32_t format, uint32_t
     uint32_t tile = (gy / 4) * tiles_x + (gx / 4);
     uint32_t within = (gy % 4) * 4 + (gx % 4);
     switch (format) {
-        case 4: {   /* GX_TF_RGB565: 32-byte 4x4 tile of big-endian u16 */
+        case 4: case 10: {   /* RGB565: 32-byte 4x4 tile of big-endian u16 */
             const uint8_t* t = guest + (size_t)tile * 32 + within * 2;
             uint16_t v = (uint16_t)((t[0] << 8) | t[1]);
             *r = (uint8_t)(((v >> 11) & 0x1F) << 3);
@@ -1396,7 +1396,7 @@ static void efb_dst_decode_texel(const uint8_t* guest, uint32_t format, uint32_t
             *a = 255;   /* RGB565 destinations have no alpha: GX samples a = 1 */
             break;
         }
-        case 5: {   /* GX_TF_RGB5A3: bit 15 set = 1-bit alpha + RGB555 */
+        case 5: case 11: {   /* RGB5A3: bit 15 set = 1-bit alpha + RGB555 */
             const uint8_t* t = guest + (size_t)tile * 32 + within * 2;
             uint16_t v = (uint16_t)((t[0] << 8) | t[1]);
             *a = (v & 0x8000) ? 255 : 0;
@@ -1405,10 +1405,21 @@ static void efb_dst_decode_texel(const uint8_t* guest, uint32_t format, uint32_t
             *b = (uint8_t)((v & 0x1F) << 3);
             break;
         }
-        case 3: {   /* GX_TF_IA8: 32-byte 4x4 tile of (alpha, intensity) pairs */
+        case 3: case 9: {   /* RA8 / IA8: 32-byte 4x4 tile of (alpha, intensity) pairs */
             const uint8_t* t = guest + (size_t)tile * 32 + within * 2;
             *a = t[0];
             *r = *g = *b = t[1];
+            break;
+        }
+        case 7: {           /* A8: 32-byte 4x4 tile of alpha */
+            *a = guest[(size_t)tile * 32 + within];
+            *r = *g = *b = 0;
+            break;
+        }
+        case 8: {           /* R8: 32-byte 4x4 tile of red */
+            *r = guest[(size_t)tile * 32 + within];
+            *g = *b = *r;
+            *a = 255;
             break;
         }
         default: {  /* GX_TF_RGBA8: 32B of A/R pairs then 32B of G/B pairs */
@@ -1446,9 +1457,19 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
      * derives the destination width from the pitch and the format's bytes per pixel
      * (tile row = pitch*32 bytes = dst_w*4*bpp, so dst_w = pitch*8/bpp), which
      * reproduces the guest's own pitch/dstw pairs (`pitch=80 -> 320` for RGB565,
-     * `pitch=160 -> 320` for RGBA8) instead of the old source/half rule. */
+     * `pitch=160 -> 320` for RGBA8) instead of the old source/half rule.
+     *
+     * PROMOTED to the default (handover 5c.23): verified on the attract/title screen,
+     * where it fixes the *sizes* of the bloom chain's destinations - the title's
+     * 160x112 R8 luminance chain used to be written as 40x28 RGBA8, and its 640x448
+     * RA8 copies as 320x224 - and every destination then reproduces the size Dolphin's
+     * own per-copy dumps name (`160x112_1`, `80x56_6`, `320x224_4`, `640x448_3`).
+     * `TLS_EFB_COPY_FMT=0` restores the old write for A/B. */
     static int s_copy_fmt = -1;
-    if (s_copy_fmt < 0) s_copy_fmt = getenv("TLS_EFB_COPY_FMT") ? 1 : 0;
+    if (s_copy_fmt < 0) {
+        const char* cf = getenv("TLS_EFB_COPY_FMT");
+        s_copy_fmt = cf ? (atoi(cf) != 0) : 1;
+    }
     int is_xfb_copy = (int)((exec >> 14) & 1u);
     uint32_t bpp = 4;
     int dst_supported = 1;
@@ -1456,11 +1477,26 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
         if (is_xfb_copy) {
             bpp = 2;                  /* 16bpp linear scanout buffer, see below */
         } else {
+            /* UPE_Copy::tp_realFormat() values (Dolphin's EFBCopyFormat), and the bytes
+             * per pixel each one occupies in its 4x4 tile:
+             *   0 R4 .5 | 1 R8 1 | 2 RA4 .5 | 3 RA8 2 | 4 RGB565 2 | 5 RGB5A3 2
+             *   6 RGBA8 4 | 7 A8 1 | 8 R8 1 | 9 RA8 2 | 10 RGB565 2 | 11 RGB5A3 2
+             *   12 RGBA8 4 | 13..15 Z8/Z16/Z24
+             * Formats 8 (R8) and 11 (RGB5A3) were the ones the title screen's bloom chain
+             * uses, and treating them as "unimplemented -> write RGBA8" also halved or
+             * quartered the destination *width* (dst_w = pitch*8/bpp), so the guest
+             * sampled a 160x112 R8 luminance chain as a 40x28 RGBA8 texture - measured:
+             * `[EfbChain] copy=5 dst=0x9038D1C0 40x28 fmt=8` while the copy source is
+             * 160x112, and the final `SRCALPHA/INVSRCALPHA` pass then drags the title
+             * screen from a flat 220 plate to the black-cornered radial glow
+             * (handover 5c.23). */
             switch (format) {
-                case 6: bpp = 4; break;   /* GX_TF_RGBA8: 4x4 tiles, 32B A/R + 32B G/B */
-                case 4: bpp = 2; break;   /* GX_TF_RGB565: 4x4 tiles, 32B of u16 */
-                case 5: bpp = 2; break;   /* GX_TF_RGB5A3: 4x4 tiles, 32B of u16 */
-                case 3: bpp = 2; break;   /* GX_TF_IA8: 4x4 tiles, 16 (A,I) pairs */
+                case 6: case 12: bpp = 4; break;  /* RGBA8: 8B A/R + 8B G/B per 4x4 tile */
+                case 4: case 10: bpp = 2; break;  /* RGB565: 32B of big-endian u16 */
+                case 5: case 11: bpp = 2; break;  /* RGB5A3: 32B of big-endian u16 */
+                case 3: case 9:  bpp = 2; break;  /* RA8: 32B of (alpha, red) pairs */
+                case 7: bpp = 1; break;           /* A8: 32B of alpha */
+                case 8: bpp = 1; break;           /* R8: 32B of red (intensity) */
                 default:
                     /* Keep the old behaviour for the formats that are not implemented
                      * (an RGBA8 write) rather than dropping the copy: a skipped copy
@@ -1470,13 +1506,6 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                     break;
             }
         }
-    } else if (format != 0 && s_copy_fmt) {
-        static int s_fmt_reported = 0;
-        if (s_fmt_reported++ < 4) {
-            printf("[EfbCopy] format %u not implemented (only RGBA8); copy skipped\n", format);
-            fflush(stdout);
-        }
-        return;
     }
     if (!dst_supported) {
         static uint32_t s_unsup = 0;
@@ -1706,14 +1735,14 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                     } else if (!is_display_copy) {
                         uint32_t tile = (gy / 4) * tiles_x + (gx / 4);
                         uint32_t within = (gy % 4) * 4 + (gx % 4);
-                        if (s_copy_fmt && format == 4) {
-                            /* GX_TF_RGB565: 32-byte 4x4 tile of big-endian u16 */
+                        if (s_copy_fmt && (format == 4 || format == 10)) {
+                            /* RGB565: 32-byte 4x4 tile of big-endian u16 */
                             uint16_t v = (uint16_t)(((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3));
                             uint8_t* t16 = guest + (size_t)tile * 32 + within * 2;
                             t16[0] = (uint8_t)(v >> 8);
                             t16[1] = (uint8_t)(v & 0xFF);
-                        } else if (s_copy_fmt && format == 5) {
-                            /* GX_TF_RGB5A3: 16-bit, alpha bit 15 clear => 1 bit alpha */
+                        } else if (s_copy_fmt && (format == 5 || format == 11)) {
+                            /* RGB5A3: 16-bit, alpha bit 15 clear => 1 bit alpha */
                             uint16_t v = (uint16_t)(((a >> 7) << 15) |
                                                     (((r * 31) / 255) << 10) |
                                                     (((g * 31) / 255) << 5) |
@@ -1721,11 +1750,20 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                             uint8_t* t16 = guest + (size_t)tile * 32 + within * 2;
                             t16[0] = (uint8_t)(v >> 8);
                             t16[1] = (uint8_t)(v & 0xFF);
-                        } else if (s_copy_fmt && format == 3) {
-                            /* GX_TF_IA8: 32-byte 4x4 tile of (alpha, intensity) pairs */
+                        } else if (s_copy_fmt && (format == 3 || format == 9)) {
+                            /* RA8 / IA8: 32-byte 4x4 tile of (alpha, intensity) pairs */
                             uint8_t* t8 = guest + (size_t)tile * 32 + within * 2;
                             t8[0] = a;
                             t8[1] = (uint8_t)((r * 77 + g * 150 + b * 29) >> 8);
+                        } else if (s_copy_fmt && format == 7) {
+                            /* A8: 32-byte 4x4 tile of alpha */
+                            guest[(size_t)tile * 32 + within] = a;
+                        } else if (s_copy_fmt && format == 8) {
+                            /* R8: 32-byte 4x4 tile of red. The bloom chain copies the
+                             * frame here to get a one-byte luminance image; writing
+                             * RGBA8 instead both mis-sized the destination and put the
+                             * intensity in the wrong byte. */
+                            guest[(size_t)tile * 32 + within] = r;
                         } else {
                             uint8_t* tile_base = guest + (size_t)tile * 64;
                             tile_base[within * 2 + 0] = a;

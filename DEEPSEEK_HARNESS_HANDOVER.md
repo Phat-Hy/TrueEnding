@@ -2847,3 +2847,70 @@ sha256) - so the guest's "corrupt" verdict is not decided by that file's content
 all. It comes from what the NAND/ISFS/NANDCheck answers say, or from a check that fails
 before any file is read. That is the next thread for whoever picks this up; it is what
 keeps the MENU (and everything after it) off the screen.
+
+#### 5. Every EFB copy destination format is now written in its real layout (promoted)
+
+`TLS_EFB_COPY_FMT` only knew RGBA8/RGB565/RGB5A3/IA8; everything else fell back to an
+RGBA8 write *at the wrong width*, because the width is derived from the pitch and the
+format's bytes per pixel (`dst_w = pitch*8/bpp`). The title screen's bloom chain uses two
+of the missing ones:
+
+```
+before: [EfbChain] copy=5 dst=0x9038D1C0 40x28  fmt=8  src=(0,0)-(319,223)   <- R8 chain
+after : [EfbChain] copy=5 dst=0x9038D1C0 160x112 fmt=8  src=(0,0)-(319,223)
+before: copy=1 dst=0x90536FE0 320x224 fmt=11                                 <- RGB5A3
+after : copy=1 dst=0x90536FE0 640x448 fmt=11
+```
+
+Implemented (UPE `tp_realFormat` -> bytes/pixel in its 4x4 tile): `1 R8` (32B of red),
+`7 A8` (32B of alpha), `8 R8`, `9 RA8` (= `3`), `10 RGB565` (= `4`), `11 RGB5A3` (= `5`),
+`12 RGBA8` (= `6`). R4/RA4 and the Z formats still fall back to an RGBA8 write - never
+drop a copy, per the earlier session's rule. The destination sizes now reproduce exactly
+the size/format pairs Dolphin's own per-copy dumps use, counted over the whole corpus in
+`%APPDATA%\Dolphin Emulator\Dump\Textures`: `80x56_6` x7898, `320x224_6` x6314,
+`320x224_4` x4661, `640x448_3` x3401, `640x448_6` x2795, `160x112_6` x2351, `640x479_15`
+x2015, **`160x112_1` x714**, `640x448_4` x276, plus a few `64x64_0/1/6`. `dstavg ==
+srcavg` on every copy after the change, i.e. write and decode agree.
+
+**Promoted to the default** in the same commit (`TLS_EFB_COPY_FMT=0` restores the old
+write); `TLS_DEFER_EFB_COPY`, `TLS_EFB_ALPHA` and `TLS_TEV` stay opt-in.
+
+#### 6. The title screen: the vignette *is* implemented, its strength is the question
+
+The title screen (input plan `600-612:A` only, so the game sits on it) is the cleanest
+test case in the whole project: it is static, it is the same every run, and the reference
+is `dolphin-ref/run2/framedump_900.png` (mean 205, corners 174-176, centre 218-220).
+
+Host, `TLS_TEV=1 TLS_DEFER_EFB_COPY=1 TLS_EFB_ALPHA=1` (copy formats now default): mean
+90, corners **1**, centre 241. Rendered it is a white radial glow with black corners.
+
+Batch trace (`TLS_BATCH_PROBE=1448`) says the plate is drawn correctly and early - `b0`
+covers the whole screen at `avg=(219,219,219)`, `bright=3597/3600` - and the *final*
+composite pass, **b18** (6 vertices, fullscreen, `s=4 d=5` = SRCALPHA/INVSRCALPHA), is
+what turns it into the glow. `TLS_TEV_PROBE` at b18:
+
+```
+map0 = 0x9051E1A0  64x64 fmt=3 avg=(90,90,90) a=90      <- the radial mask
+map1 = 0x9038D1C0  80x56 fmt=6 avg=(255,255,255) a=0     <- the frame copy
+st0 rgb  : ZERO tex.rgb konst.rgb ZERO      kc=K0  (K0 = opaque BLACK, see below)
+st0 alpha: ZERO tex ras ZERO
+st1 rgb  : ZERO ZERO ZERO prev.rgb
+st1 alpha: konst ZERO tex ZERO
+```
+
+So b18 draws **black** with `alpha = K0.a * (1 - mask.a)`: `dst = dst * (1 - alpha)`.
+The host's corners go to 0 because the mask's alpha is 0 there (1-0 = 1). The host is
+implementing the printed stages; what differs from hardware is the *value* of that
+alpha, i.e. either the mask's alpha channel or `konst`.
+
+**Correction that costs a run to find:** the TEV probe printed the K registers in
+`(r, a, b, g)` order and labelled them r,g,b,a, so `K0 = (0.0000 1.0000 0.0000 0.0000)`
+reads as "green" when it is **r=0 g=0 b=0 a=1** - opaque black. Fixed in this commit;
+the print is now r,g,b,a.
+
+Next tests for this screen, in order: (a) `TLS_TEX_DUMP=0x9051E1A0` and check whether the
+mask is an IA8 radial image (alpha tracking the intensity) or an **I8** image that the
+host is decoding as IA8 - the host's `fmt=3` comes from the guest, but an I8 read as IA8
+puts the intensity in the alpha byte and would make exactly this mistake; (b)
+`TLS_TEV_TEXCOORD=1`, because b18 supplies `texcoord_mask=0x01` while its two stages name
+texcoords 1 and 0, so on hardware stage 0 samples the *corner texel* of map1, not uv0.

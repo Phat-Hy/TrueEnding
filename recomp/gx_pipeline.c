@@ -737,8 +737,8 @@ void gx_pipeline_print_tev_state(uint16_t index) {
            st->alpha_comp1, st->alpha_ref1, st->alpha_logic, s_tev_compare_stages);
     for (int i = 0; i < 4; i++) {
         printf("   [tev] K%d = (%9.4f %9.4f %9.4f %9.4f) raw ra=0x%06X bg=0x%06X\n", i,
-               tev_reg_component(st->kreg_ra[i]), tev_reg_component(st->kreg_ra[i] >> 12),
-               tev_reg_component(st->kreg_bg[i]), tev_reg_component(st->kreg_bg[i] >> 12),
+               tev_reg_component(st->kreg_ra[i]), tev_reg_component(st->kreg_bg[i] >> 12),
+               tev_reg_component(st->kreg_bg[i]), tev_reg_component(st->kreg_ra[i] >> 12),
                st->kreg_ra[i], st->kreg_bg[i]);
     }
     for (int i = 0; i < (int)st->num_stages && i < 8; i++) {
