@@ -80,7 +80,7 @@ typedef struct {
 } D3D11Backend;
 
 /* EFB -> texture copy (implemented below, registered by d3d11_init). */
-static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1, uint32_t format);
+static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1, uint32_t format, int half_scale);
 
 static D3D11Backend s_d3d11 = {0};
 
@@ -1167,7 +1167,7 @@ static void d3d11_capture_efb_snapshot(void) {
  * the guest's own VI framebuffers - none of which existed while the copy was ignored
  * (handover 5c.11). */
 static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0,
-                                    uint32_t x1, uint32_t y1, uint32_t format) {
+                                    uint32_t x1, uint32_t y1, uint32_t format, int half_scale) {
     if (!s_d3d11.device || !s_d3d11.context || !s_d3d11.swap_chain) return;
     if (format != 0) {
         static int s_fmt_reported = 0;
@@ -1182,6 +1182,15 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
     uint32_t w = x1 - x0 + 1;
     uint32_t h = y1 - y0 + 1;
     if (w > 1024 || h > 1024) return;
+
+    /* Half-scale copies (see GxPendingEfbCopy.half_scale and handover 5c.15): the
+     * destination holds w/2 x h/2 pixels, so the source rectangle is downsampled and the
+     * 4x4 tile grid is dst_w/4 tiles wide, not w/4. Writing at the source size is what
+     * produced the 4-pixel horizontal stripes the composite quads show. */
+    uint32_t dst_w = half_scale ? ((w + 1) / 2) : w;
+    uint32_t dst_h = half_scale ? ((h + 1) / 2) : h;
+    if (dst_w == 0) dst_w = 1;
+    if (dst_h == 0) dst_h = 1;
 
     uint8_t* guest = (uint8_t*)host_resolve_gx_guest_addr(dst_guest);
     if (!guest) {
@@ -1304,13 +1313,13 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
             }
             float sx = (s_d3d11.vp_w > 0.0f) ? (s_d3d11.vp_w / 640.0f) : (float)desc.Width / 640.0f;
             float sy = (s_d3d11.vp_h > 0.0f) ? (s_d3d11.vp_h / 480.0f) : (float)desc.Height / 480.0f;
-            uint32_t tiles_x = (w + 3) / 4;
-            for (uint32_t gy = 0; gy < h; gy++) {
-                uint32_t py = (uint32_t)(s_d3d11.vp_y + ((float)(y0 + gy) + 0.5f) * sy);
+            uint32_t tiles_x = (dst_w + 3) / 4;
+            for (uint32_t gy = 0; gy < dst_h; gy++) {
+                uint32_t py = (uint32_t)(s_d3d11.vp_y + ((float)(y0 + (half_scale ? gy * 2 : gy)) + 0.5f) * sy);
                 if (py >= desc.Height) py = desc.Height - 1;
                 const uint8_t* row = src + (size_t)py * mapped.RowPitch;
-                for (uint32_t gx = 0; gx < w; gx++) {
-                    uint32_t px = (uint32_t)(s_d3d11.vp_x + ((float)(x0 + gx) + 0.5f) * sx);
+                for (uint32_t gx = 0; gx < dst_w; gx++) {
+                    uint32_t px = (uint32_t)(s_d3d11.vp_x + ((float)(x0 + (half_scale ? gx * 2 : gx)) + 0.5f) * sx);
                     if (px >= desc.Width) px = desc.Width - 1;
                     const uint8_t* p = row + (size_t)px * 4;
                     uint8_t b = p[0], g = p[1], r = p[2], a = p[3];
@@ -1442,7 +1451,7 @@ static void d3d11_service_pending_copies(uint32_t* cursor, uint32_t up_to_vertex
             fflush(stdout);
         }
         ID3D11DeviceContext_OMSetRenderTargets(s_d3d11.context, 0, NULL, NULL);
-        d3d11_efb_copy_to_guest(c->dst_guest, c->x0, c->y0, c->x1, c->y1, c->format);
+        d3d11_efb_copy_to_guest(c->dst_guest, c->x0, c->y0, c->x1, c->y1, c->format, c->half_scale);
         ID3D11DeviceContext_OMSetRenderTargets(s_d3d11.context, 1, &s_d3d11.rtv, s_d3d11.dsv);
         (*cursor)++;
     }

@@ -824,6 +824,14 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
             pc->y1 = s_efb_copy_y1;
             pc->format = s_efb_copy_format;
             pc->pitch = s_efb_copy_pitch;
+            pc->exec = val;
+            /* Half-scale decode (hypothesis under test, see handover 5c.15): of the 23
+             * copies frame 1450 issues, exactly the two whose destination is sampled at
+             * half the source rect carry BP 0x52 bit 9 set with bit 11 clear. That rule
+             * is derived from the bits GXSetTexCopyDst/GXCopyTex write (src/GXFrameBuf.c),
+             * not from a magic constant, and it is falsifiable: if it is wrong the tiled
+             * striping in the composite moves rather than disappears. */
+            pc->half_scale = ((val & 0x200u) != 0 && (val & 0x800u) == 0) ? 1 : 0;
             pc->vertex_mark = s_vertex_count;
             /* Only the deferred replay needs the barrier; splitting batches in the
              * default path would change what the inline copies read. */
@@ -836,7 +844,8 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
          * replay the queue in stream order. */
         if (!s_efb_copy_deferred && s_efb_copy_hook) {
             s_efb_copy_hook(s_efb_copy_dst_guest, s_efb_copy_x0, s_efb_copy_y0,
-                            s_efb_copy_x1, s_efb_copy_y1, s_efb_copy_format);
+                            s_efb_copy_x1, s_efb_copy_y1, s_efb_copy_format,
+                            (val & 0x200u) != 0 && (val & 0x800u) == 0);
         }
         if (s_copy_probe && s_copy_reports < 40) {
             extern int g_runner_current_frame;

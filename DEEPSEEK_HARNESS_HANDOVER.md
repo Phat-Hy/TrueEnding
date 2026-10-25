@@ -1505,6 +1505,44 @@ size, so those two are the A/B needed to settle it.
    "cut=39 looks like cut=30 with bloom on top", not stripes.
 4. Only then consider making `TLS_DEFER_EFB_COPY` the default, and re-baseline the attract screen.
 
+#### 7b. Half-scale implemented from the `0x52` bits - the stripes are gone, the chain is still black
+
+Steps 1-2 above were carried out before this handover was finished, so read this before redoing them.
+
+**Rule implemented** (`GxPendingEfbCopy.half_scale`, `gx_pipeline.c`): *BP 0x52 bit 9 (`0x200`) set **and**
+bit 11 (`0x800`) clear* means the destination is half the source rect in each axis. Of the 23 copies frame
+1450 issues, that selects exactly `0x010263` - the two copies whose destination is confirmed to be sampled at
+320x224 - and it excludes `0x010A43`/`0x010A63` (which have both bits). It is derived from the fields
+`GXSetTexCopyDst`/`GXCopyTex` write, and it is falsifiable.
+
+`d3d11_efb_copy_to_guest()` now writes `dst_w = w/2`, `dst_h = h/2`, samples every second source pixel and
+tiles with `tiles_x = dst_w/4`.
+
+**Measured effect** (`TLS_DEFER_EFB_COPY=1`, frame 1450, `TLS_BATCH_CUTOFF` sweep):
+
+| cutoff | before half-scale | after half-scale |
+|---|---|---|
+| 30 (scene only) | 104973 colours, cave | 104973 colours, cave |
+| 33 | – | 258 colours, uniform black |
+| 34 | dark, faint blurred glows | – |
+| 35 | – | 1 colour, black |
+| 39 | **83467 colours, white with 4-pixel horizontal stripes** | **260 colours, uniform black - no stripes** |
+| 42 | white with stripes | – |
+| 44+ | flat white | flat white |
+
+So the 4-pixel striping is **gone**, which confirms the tiling-width diagnosis. The chain now writes black
+instead of garbage, i.e. the *next* defect is in what the composite quads are blending (or in the fact that
+the copy that feeds them captures an EFB that has already been destroyed by an earlier pass of the same
+chain) - not in the tiling.
+
+**The default path is unchanged** by this: with `TLS_DEFER_EFB_COPY` unset, MENU frame 1450 is still
+`(119,234,255)`.
+
+Next after this: with `TLS_DEFER_EFB_COPY=1 TLS_EFB_SAMPLE_FRAME=<f>` walk the cutoff from 30 to 44 and find
+the *first* batch at which the EFB stops containing the scene. `b30` is the prime suspect because it is the
+first replace-quad and it samples a destination written earlier in the same frame; `TLS_DRAW_ORDER=1` plus
+`b30`'s texture address (`0x90395DC0`, now a half-scale copy) names exactly which pass fed it.
+
 #### 8. Run recipes used this session
 
 ```powershell
