@@ -2993,13 +2993,18 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
      *   - the Chapter-1 loop does one only on the composite half (xfbs=1 on 4002/4004/
      *     4006, xfbs=0 on 4001/4003/4005), so the opaque geometry half - a frame the guest
      *     never displays - stops being put on screen.
-     * Default OFF: a screen that legitimately produces no XFB copy for a long stretch would
-     * freeze the window, and the boot/strap screens have not been measured. The 1448
-     * invariant is a back-buffer capture and is unaffected either way, so it cannot validate
-     * this - it has to be judged on the window. */
+     * Default ON (set TLS_PRESENT_ON_XFB=0 to restore one present per emulated frame).
+     * Measured before flipping: the ONLY stretch with no XFB copy is the initial black
+     * boot (frames 2..~300 render `batches=0` anyway), while the title, the save dialog
+     * and the Chapter-1 composite frames all have `xfbs=1` - so nothing that has content
+     * stops being shown. In Chapter-1 this removes the opaque geometry half from the
+     * screen, which the guest never displays. */
     {
         static int s_on_xfb = -1;
-        if (s_on_xfb < 0) s_on_xfb = getenv("TLS_PRESENT_ON_XFB") ? 1 : 0;
+        if (s_on_xfb < 0) {
+            const char* e = getenv("TLS_PRESENT_ON_XFB");
+            s_on_xfb = (e && atoi(e) == 0) ? 0 : 1;
+        }
         if (!s_on_xfb || s_xfbs_this_frame > 0)
             IDXGISwapChain_Present(s_d3d11.swap_chain, s_d3d11.vsync ? 1 : 0, 0);
     }
