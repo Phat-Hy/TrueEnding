@@ -2228,6 +2228,31 @@ Consequences for the next session, in order:
 3. Re-test the ink-matte / baseline-subtraction hacks (AGENTS.md §4.1) only after (2): they are
    compensating for a too-bright scene, which is now measured rather than suspected.
 
+#### 9. Concrete plan for the next session (scene brightness)
+
+Everything below follows from §7: the chain is a *stable* loop on hardware (dark cave + gold text)
+and a stable loop on the host too (flat level ~90) - only the fixed point differs, and it differs
+because every copy the chain consumes is ~3x too bright. Start from the scene, not the chain.
+
+1. **Get a scene-only reference.** Capture Dolphin frames at the MENU with the composite tail not
+   yet drawn - the reference run already gives the *composited* frame (`(23,25,18)`), and the cave
+   looks essentially unbloomed there, so `(23,25,18)` is a good proxy. Compare against
+   `TLS_TEV=1 TLS_BATCH_CUTOFF=30` (`(76,70,62)`): **factor ~3.3**.
+2. **Test the one candidate that explains a factor of exactly 3.3: a gamma difference.** The host's
+   swap chain is `DXGI_FORMAT_R8G8B8A8_UNORM` (checked), so it is not an sRGB surface - but the
+   *ratio* fits `v_host = v_ref^(1/2.2)` (`23/255 = 0.09 -> 0.09^(1/2.2) = 0.34`, host `0.30`).
+   One run with a `TLS_GAMMA_TEST` output transform decides it in seconds; if the host is writing
+   gamma-encoded values into a surface the reference treats as linear, every 3D material will look
+   washed out exactly like this.
+3. **If it is not gamma, texcoord generation is the next-biggest 3D gap** (5c.16 §5.3): BP
+   `0x30..0x3F` texcoord info + the XF texture matrices, needed because no batch supplies
+   `TEX1..TEX7` (5c.16 §8) so stages naming texcoord > 0 get the generator's output. `GxVertex`
+   needs to carry the generator's result, not extra UVs.
+4. Only then re-measure the composite chain, and only then consider any `TLS_*` flag becoming the
+   default. `TLS_DEFER_EFB_COPY` should **not** become the default at all (§7), and
+   `TLS_EFB_COPY_GEOM` should be re-measured once the scene is right, since the destination-size
+   error it fixes is real but was being masked by the brightness error.
+
 Where the reference data lives (nothing here needs re-capturing):
 
 | path (`build/`, git-ignored) | contents |
