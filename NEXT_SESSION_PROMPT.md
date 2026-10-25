@@ -60,7 +60,10 @@ Past frame ~3500 the picture settles into an animation loop with a PERIOD OF 600
 still loops at 12000. Measured by 500/600-step sampling: 5401 == 6001 == 6601 (f90e93d2),
 6201 == 5001 (46265b45), 7001 == 4001 (ea706980); 1000-frame strides never match.
 
-It is NOT "gameplay waiting for the player":
+It is NOT that the scene is waiting for a *direction* or START — but it IS waiting for input:
+5c.27 measured that an **A press at frame 3400** opens the phase-0 gate and moves the machine to
+phase 13 (see §2's ">>> DONE" block). What was measured in the bullet list below is that the
+*picture* never changes, which is a different statement from "no input reaches a handler".
   * A every 100 frames, 1900..6900: no change.
   * START/PLUS at 5000/6000: no change.
   * HOLDING UP for 1000 frames (4000..5000): 4501/5001 come back byte-identical to the no-input run.
@@ -81,15 +84,24 @@ task+0x2AC this session: a rate-limited dump on change, gated by a TLS_* flag, i
 decoded from the jump table first. `python tools/dol_xref.py dis <addr> [count]` reads any of these
 addresses; that tool is how this session's gates were quoted from the binary instead of guessed.
 
->>> DONE in 5c.26 — read that section BEFORE redoing any of this. The instrument exists
-(`TLS_SCENE_SM_PROBE=1`) and it already answered the question: the machine is in outer state 0 and
-sub-phase 0, and exactly one operand of one gate is closed —
-`fn_801231D0(*(r13-26136) + 0x48C, 0) == 0`, forever. Two corrections to what follows:
+>>> DONE — read 5c.26 AND 5c.27 BEFORE redoing any of this, and note that 5c.27 supersedes two
+things below. The instrument exists (`TLS_SCENE_SM_PROBE=1`) and the thread has moved:
   * the outer table is 0x8078A268, not 0x8079A268 (see below);
-  * there is a SECOND table at 0x8078A22C dispatching on +0x54E4 (0..14) which is what
-    actually drives the Chapter-1 intro (phase 8 -> 0 at frame 3369).
-The live question is now: what is supposed to set that predicate, and which subsystem owns
-0x80C96D80 (`*(r13-26136)`) or 0x81103720 (`*(r13-25136)`)?
+  * there is a SECOND table at 0x8078A22C dispatching on +0x54E4 (0..14), which is what actually
+    drives the Chapter-1 intro: PHASE 8 -> 0 at frame ~3380;
+  * **the gate is an A-BUTTON EDGE, not an event flag.** `fn_800A555C` bit-tests the pad trigger
+    word at `*(r13-26280)+0x3C28`; code 4 -> bit 11 = A. Measured: an A press at frame 3400 opens
+    it, `fn_803E4478` runs, and **PHASE 0 -> 13** with +0x54F0 going 2 -> 0 (that +1 is the outer
+    state Init installs). 5c.25 §4a's "input does nothing" is refuted — the PICTURE stays the same,
+    which is a different statement.
+  * where it stops now: phase 13's waiter object `0x81858DE0` (created by `fn_805B9F54`) holds
+    `+0x88 == 1`, and phase 13's only two exits need `+0x88 == 0` or `+0x88 == 4`. Its shared tail
+    cannot help: `fn_8036E170` returns 0 unless the phase is 0, 3 or 14.
+The live question: **what moves `0x81858DE0 + 0x88` from 1 to 4** — and is phase 13 even the right
+successor, given `fn_8036E170` only accepts 0/3/14? Script ids 167 (`0x80376524`) and 319
+(`0x80376540`) are the search keys.
+Also: cmd-16 style gates are **one-update edges** — press, release, press again; a held button
+cannot retry.
 
 =====================================================================
 3. THREE DEFECTS ALREADY QUANTIFIED (independent of §2)
