@@ -3461,6 +3461,94 @@ the near-identical frame means are a static camera, not a frozen guest. The unto
 rendering defects are the same ones already on the list (the additive bloom washing out the
 plate at 2251, and the 2D overlay band at 3251), not a new failure.
 
+#### 4a. But it never becomes gameplay: the intro settles into a 10-second loop
+
+Past frame ~3500 the picture stops advancing through the scene and settles into an
+**animation loop with a period of 600 frames (10 s)**. Measured by sampling at 500- and
+600-frame strides windowed with no further input:
+
+```
+4001 ea706980   4501 c1bf3388   5001 46265b45   5501 cdb6484f   6001 f90e93d2
+6201 46265b45 (= 5001)          6501 4a8683d6   7001 ea706980 (= 4001)
+5401 f90e93d2 (= 6001)          6601 f90e93d2 (= 6001)
+```
+
+600 apart always matches, 1000 apart does not, so the period is 600 and not 3000. It still
+looped at frame 12000 (14+ cycles), so waiting does not end it. The task list stays at
+**one game task** for all of it:
+
+```
+Active Tasks (3 registered in TaskManager 0x809ADCF0):
+  [0] GameLoadTask  task=0x80AEDCF0 up=0x80570CFC +1c=(frames*0.85) +34=1
+  [1] vt=0x00000000 task=0x80B8DD10 up=0x80363DBC
+  [2] vt=0x00000000 task=0x80B8DD10 up=0x803646C4
+Sequence: 'UnknownSeq'   Streaming Queue: idle
+```
+
+There is no player task, no scene task, no battle task - `GameLoadTask` never hands off. So
+the next thread is **`GameLoadTask`'s update at `0x80570CFC`**, exactly like mode 25 was this
+session's thread: find the condition it is testing and whether it ever becomes true. The
+`+0x1C` counter (2580 at 3 s, 4232 at 6 s, 10232 at 12 s: ~0.85 per frame) is the only thing
+visibly moving.
+
+Neutral inputs do not break it: A every 100 frames from 1900 to 6900 and START/PLUS at
+5000/6000 both leave the 600-frame loop untouched (identical hashes at 5401/6001/6601).
+
+#### 4b. One of every two presented frames is a stale framebuffer (measured)
+
+Dumping *consecutive* frames exposes a parity defect that the 500-frame stride hides. No
+input past 1812, windowed, frames 4001..4103:
+
+```
+4001 (51.8,48.5,44.3) ea706980    4002 (40.0,43.9,49.3) 28089bce
+4003 (51.8,48.5,44.3) a9628239    4004 (40.0,43.9,49.3) 28089bce
+4051 (51.8,48.5,44.2) 2539003d    4052 (40.0,43.9,49.3) 28089bce
+4101 (51.8,48.5,44.3) 4a8683d6    4102 (40.0,43.9,49.3) 28089bce
+```
+
+Odd frames animate; **every even frame is byte-identical** (`28089bce`) for thousands of
+frames. Its content is a *different, older scene* (the purple crystal + creature, saved as
+`docs/evidence/parity_nopress_4002.png`), i.e. whatever was last written into that buffer
+before the Chapter-1 transition. With input pressed the parity swaps (odd frozen, even live)
+but the frozen content is the same picture.
+
+So the present path alternates between a live buffer and a stale one; on real hardware both
+would be refreshed. `VISetNextFrameBuffer` (`g_last_vi_framebuffer`) is **never called** in
+these runs (zero `[TLS VI]` lines), so the YUYV fallback always decodes the same fixed
+address `0x900997E0`, while the GX path draws into the swap chain - the stale image is a
+guest-memory frame whose copy stopped. `TLS_PRESENT_PROBE=1` prints the present count, guest
+frame and `gx_vtx` count per present, which is the instrument to start from.
+
+#### 4c. `[EfbCopy] destination format 0 / 1 not implemented` in the Chapter-1 chain
+
+The Chapter-1 composite chain hits the unimplemented fallback, which writes RGBA8 at the
+*wrong size* (`dst_w = pitch*8/bpp` with `bpp = 4` instead of 1):
+
+```
+[EfbCopy] destination format 1 not implemented, writing RGBA8 (dst=0x91FF73A0)
+[EfbCopy] destination format 1 not implemented, writing RGBA8 (dst=0x91FFF3A0)
+[EfbCopy] destination format 0 not implemented, writing RGBA8 (dst=0x92001BC0)
+... (8 lines are printed, then the message is capped)
+```
+
+Per the format table in `d3d11_efb_copy_to_guest`, `1` is **R8** (the same format that is
+implemented as `8`) and `0` is **R4**; the writer's dispatch only names `8` (and `4/10`,
+`5/11`, `3/9`, `7`). So format 1 copies get four times the destination width they should.
+Not fixed this session - there is no Chapter-1 reference frame to validate against, and the
+change would move the title frame - but it is a one-line-class fix behind the existing
+`TLS_EFB_COPY_FMT` flag with `efb_dst_decode_texel` already able to decode the result.
+
+#### 4d. The title input flow has a timing race (1 run in 8)
+
+Eight windowed runs of the same input plan produced `6 -> 7` (Yes, create) at frame 1501
+seven times and `6 -> 4` (No, cancel) at frame 1282 once - with no press in the script at
+1282. When it happens, every later A press cancels the re-raised dialog (`6 -> 4`), the game
+never creates the save and never reaches Chapter 1, and the frames from 1300 on differ
+(a full white bloom instead of the flat plate). That is the input-injection/frame-accounting
+race the debugging skill warns about (the guest polls the pad several times per frame while
+the script is indexed by host frame): any future "the flow changed" observation must first
+rule it out by repeating the run.
+
 #### 5. Why 5c.24 §13 concluded "dead end" - and what to distrust about it
 
 The handler is input-independent and thread-independent, exactly as §13 says; what it is
@@ -3506,12 +3594,15 @@ TLS_MODE25_PROBE=1 TLS_DUMP_EVERY_G=500 \
 
 #### 9. Work order, revised
 
-1. **Chapter 1 gameplay** - the chain now reaches it unattended; the next question is whether
-   input takes control of the character after the opening cinematic, and what the first real
-   stall is (watch `GameLoadTask`, the allocator in 5c.22 §3, and the streaming queue).
-2. **Rendering** (unchanged, and now visible in-context): the additive bloom runs every pass at
-   `src.a = 1` and washes out the Chapter-1 card at 2251 exactly as it washed out the MENU; the
-   3251 frame shows a black upper band (2D overlay/viewport) over the 3D scene.
-3. **The allocator cycle** (5c.22 §3) - still untouched, still needs a visited-node ring inside
+1. **`GameLoadTask` handoff (0x80570CFC, task 0x80AEDCF0)** - the live thread. The Game
+   sequence loads, shows the Chapter-1 card, plays a 600-frame looping intro and never creates
+   a player/scene task. Find the condition the load task tests and whether the guest can ever
+   satisfy it (it is the same shape of question that mode 25 turned out to be).
+2. **The alternate-frame stale buffer** (§4b) - every second presented frame is an old guest
+   framebuffer image. This is a *presentation* defect and it makes any single-frame comparison
+   a coin flip; it is worth fixing before more visual work, because it corrupts measurements.
+3. **EFB copy formats 0/1** (§4c) - R8/R4 destinations in the Chapter-1 composite chain.
+4. **The input timing race** (§4d) - before trusting any "the flow is different now" claim.
+5. **The allocator cycle** (5c.22 §3) - still untouched, still needs a visited-node ring inside
    `label_8022A204`.
-4. The save/ISFS models (commands 4/6/8/12) are now *optional*, not blocking.
+6. The save/ISFS models (commands 4/6/8/12) are now *optional*, not blocking.
