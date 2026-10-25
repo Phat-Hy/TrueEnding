@@ -2181,4 +2181,13 @@ emulator), and a *second* Dolphin instance cannot open `Wii/title/00000001/00000
 and shows a modal "File could not be opened" - both look exactly like "the game hangs after
 `NW4R SND`".
 
+#### 6. Default path verified unchanged
+
+After every change in this session, MENU frame 1448 with **no** `TLS_*` flags set still measures
+`(124,235,255)` - byte-identical to the 0d4699f behaviour recorded in 5c.16. The new code is inert
+unless `TLS_TEV`, `TLS_DEFER_EFB_COPY` or `TLS_EFB_COPY_GEOM` is set.
+
+Dolphin's frame dumping also needs `DumpEFBTarget = True` in `GFX.ini [Settings]` to write the
+`efb1_*` per-copy dumps; `DumpTextures` alone only dumps the game's own textures.
+
 
