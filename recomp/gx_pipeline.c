@@ -1067,6 +1067,17 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
              * Bit 11 is NOT part of it: 0x010A43/0x010A63 have it set and are half-scale.
              * (handover 5c.15) */
             pc->half_scale = ((val & 0x200u) != 0) ? 1 : 0;
+            /* BP 0x52 field decode (Dolphin BPMemory.h UPE_Copy). target_pixel_format is
+             * bits 3..6 and the real copy format is fmt/2 + (fmt&1)*8; bit 14 marks a
+             * copy into the 16bpp linear XFB/scanout buffer rather than a tiled texture.
+             * Note the destination *size* is not encoded here - it is in the pitch
+             * register, see GxPendingEfbCopy (handover 5c.17). */
+            {
+                uint32_t tpf = (val >> 3) & 0xFu;
+                pc->real_format = tpf / 2u + (tpf & 1u) * 8u;
+                pc->copy_to_xfb = (int)((val >> 14) & 1u);
+                pc->intensity_fmt = (int)((val >> 15) & 1u);
+            }
             pc->vertex_mark = s_vertex_count;
             /* Only the deferred replay needs the barrier; splitting batches in the
              * default path would change what the inline copies read. */
@@ -1082,16 +1093,30 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
          * chain is still unfixed, so it is deliberately left off there. */
         if (!s_efb_copy_deferred && s_efb_copy_hook) {
             s_efb_copy_hook(s_efb_copy_dst_guest, s_efb_copy_x0, s_efb_copy_y0,
-                            s_efb_copy_x1, s_efb_copy_y1, s_efb_copy_format, 0);
+                            s_efb_copy_x1, s_efb_copy_y1, s_efb_copy_format, 0,
+                            s_efb_copy_pitch, val);
         }
         if (s_copy_probe && s_copy_reports < 40) {
             extern int g_runner_current_frame;
             if (g_runner_current_frame >= s_copy_from) {
                 s_copy_reports++;
-                printf("[EfbCopy] frame=%d #%u src=(%u,%u)-(%u,%u) dst=0x%08X fmt=%u pitch=%u vmark=%u/batches=%u (raw exec=0x%06X)\n",
+                /* dstw is what the pitch register says the destination width is
+                 * (pitch*2 for a tiled copy, pitch*16 for a 16bpp linear XFB copy);
+                 * geodst is the width the host's old source/half rule assumed. They
+                 * differ whenever the guest asked for a 4:1 or 8:1 shrink. */
+                uint32_t tpf = (val >> 3) & 0xFu;
+                int xfb = (int)((val >> 14) & 1u);
+                unsigned dstw = xfb ? (unsigned)(s_efb_copy_pitch * 16u)
+                                    : (unsigned)(s_efb_copy_pitch * 2u);
+                unsigned geodst = (unsigned)((s_efb_copy_x1 - s_efb_copy_x0 + 1) /
+                                             (((val & 0x200u) != 0) ? 2 : 1));
+                printf("[EfbCopy] frame=%d #%u src=(%u,%u)-(%u,%u) dst=0x%08X fmt=%u pitch=%u "
+                       "dstw=%u geodst=%u tpf=%u realfmt=%u xfb=%d vmark=%u/batches=%u (raw exec=0x%06X)\n",
                        g_runner_current_frame,
                        s_efb_copy_count, s_efb_copy_x0, s_efb_copy_y0, s_efb_copy_x1, s_efb_copy_y1,
-                       s_efb_copy_dst_guest, s_efb_copy_format, s_efb_copy_pitch, s_vertex_count, s_draw_batch_count, val);
+                       s_efb_copy_dst_guest, s_efb_copy_format, s_efb_copy_pitch, dstw, geodst,
+                       tpf, tpf / 2u + (tpf & 1u) * 8u, xfb,
+                       s_vertex_count, s_draw_batch_count, val);
                 fflush(stdout);
             }
         }

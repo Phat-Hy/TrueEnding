@@ -94,11 +94,14 @@ const GxVertex* gx_pipeline_get_vertices(uint32_t* out_count);
 uint32_t gx_pipeline_get_dropped_vertices(void);
 
 // Performs an EFB -> texture copy for the guest (called on TEXCOPYEXEC, BP 0x52).
-// (dst_guest, x0, y0, x1, y1, format) with format 0 = RGBA8, 1 = RGB565.
+// (dst_guest, x0, y0, x1, y1, format, half_scale, pitch, exec) with format 0 = RGBA8,
+// 1 = RGB565. pitch is BP 0x4D (see GxPendingEfbCopy) and exec is the raw BP 0x52 word,
+// both needed to derive the *destination* size (handover 5c.17).
 // Implemented by the active graphics backend; when unset the copy is recorded and
 // reported but not performed (see handover 5c.11).
 typedef void (*GxEfbCopyFunc)(uint32_t dst_guest, uint32_t x0, uint32_t y0,
-                              uint32_t x1, uint32_t y1, uint32_t format, int half_scale);
+                              uint32_t x1, uint32_t y1, uint32_t format, int half_scale,
+                              uint32_t pitch, uint32_t exec);
 void gx_pipeline_set_efb_copy_hook(GxEfbCopyFunc func);
 
 /* Off (default): the hook is invoked at the copy command, so it reads the last completed
@@ -123,6 +126,13 @@ typedef struct {
     uint32_t exec;          /* raw BP 0x52, for field decoding */
     int half_scale;         /* destination is half the source rect in each axis */
     uint32_t vertex_mark;   /* gx_pipeline vertex count at the copy command */
+    /* Decoded BP 0x52 fields (Dolphin's BPMemory.h UPE_Copy). The destination size is
+     * NOT source/2 - it comes from the pitch register: for a tiled copy the tile row is
+     * (width/4)*64 = width*16 bytes and pitch*32 == that, so dst_w = pitch*2. Verified
+     * against every copy of MENU frame 1448 (handover 5c.17). */
+    uint32_t real_format;   /* UPE_Copy::tp_realFormat(): fmt/2 + (fmt&1)*8 */
+    int copy_to_xfb;        /* bit 14: 16bpp linear scanout buffer, not a tiled texture */
+    int intensity_fmt;      /* bit 15 */
 } GxPendingEfbCopy;
 
 #define GX_MAX_PENDING_COPIES 256

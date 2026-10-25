@@ -1940,3 +1940,159 @@ default; everything else here has now been measured.
 `Dump\Frames` and `StateSaves` are all empty, `Logs\dolphin.log` is the only artefact from the
 earlier reference run. Capturing the attract/MENU moment there - Dolphin's *Dump -> Frames* and
 *Save Screenshot* both land in `ScreenShots\` - is what §10 needs before any default is changed.
+
+---
+
+### 5c.17 The Dolphin reference: mechanical findings (session-in-progress)
+
+Session start: `80c52b7`, tree clean. The DSH sandbox was **danger-full-access** for this session, so
+the Low-integrity problem of 5c.16 §0 did not apply - `Set-Content build\recomp\_t.txt` succeeded on
+the first try and `tools/recomp_harness.py build-runner` linked in 1 s (459/459 chunks cached).
+Everything below is measured; nothing under `src/` was touched.
+
+#### 1. Launching Dolphin from a script has one trap, and it looks like a Dolphin bug
+
+`Start-Process -ArgumentList @('-e', 'G:\...\Project The Maybe(Not) Last Story\roms\...iso')` does
+**not** quote the path, so Dolphin receives `-e G:\Program\Project` and shows a modal *Warning*
+("The specified file "G:/Progr…") with a fully booted but stalled emulator behind it (CPU 0.3 s,
+window title `Warning`). The modal is a Qt window with **no child Win32 windows**, so the text is not
+readable with `EnumChildWindows`; capture it with `PrintWindow(hwnd, hdc, 2)` (the
+`CopyFromScreen` route returned a black bitmap because the dialog was positioned at x=2610, i.e.
+off the visible desktop). Quote the argument:
+`Start-Process $exe -ArgumentList "-b -e `"$iso`""`.
+
+#### 2. Frame dumping is configured in *Dolphin.ini*, not GFX.ini
+
+`VideoCommon/FrameDumper.cpp` reads
+
+| key | file | meaning |
+|---|---|---|
+| `DumpFrames` | `Dolphin.ini` **`[Movie]`** | `MAIN_MOVIE_DUMP_FRAMES` - the on/off switch |
+| `DumpFramesSilent` | `Dolphin.ini` **`[Movie]`** | skip the overwrite prompt |
+| `DumpFramesAsImages` | `GFX.ini` `[Settings]` | `GFX_DUMP_FRAMES_AS_IMAGES` - PNG per frame instead of FFmpeg |
+| `DumpTextures` | `GFX.ini` `[Settings]` | unrelated (game textures) |
+
+Setting `DumpFrames` in `GFX.ini` is silently inert - that mistake cost several 40-90 s runs. Frames
+land in `%APPDATA%\Dolphin Emulator\Dump\Frames\framedump_<n>.png` (`fmt::format("{}framedump_{}.png")`,
+counter starting at 1, so `framedump_1.png` …).
+
+`tools/dolphin_capture.py` is the new driver: launches the emulator, finds its Qt window, posts
+`SendInput` key events (the Wiimote1 mapping is `DInput/0/Keyboard Mouse`, so the device polls the
+global key state - `PostMessage` is *not* enough) or Win32 messages, and kills the process after a
+plan of `wait:KEY` steps. `--input send` is the working mode for gamepad input; screenshots via the
+F9 hotkey need window focus and did not work headless, which is why frame dumping is the right
+channel.
+
+#### 3. Real-hardware copy order for one frame, straight out of the existing dumps
+
+The earlier reference run left **1312 EFB-copy dumps** in `%APPDATA%\Dolphin Emulator\Dump\Textures\`
+(not in `SLSEXJ\`), named `efb1_n<counter>_<W>x<H>_<fmt>.png`. They are written in **execution
+order**, so they are a per-frame fingerprint of the guest's copy stream. For every frame of the
+safety-screen phase the set and order are identical:
+
+```
+ 1. 640x479_15   <- the *display* copy (present); it opens the next group, i.e. it is last in its frame
+ 2. 320x224_4
+ 3. 640x448_3
+ 4. 320x224_4
+ 5. 640x448_3
+ 6. 160x112_6
+ 7. 320x224_6
+ 8. 80x56_6
+ 9. 80x56_6
+10. 80x56_6
+11. 80x56_6
+12. 640x448_6
+13. 320x224_6
+14. 320x224_6
+15. 320x224_6
+```
+
+i.e. **15 copies per frame**, of which one is the display copy. The `_15` files are the only ones
+with real image content (97 kB vs ~800 B for the rest); `efb1_n000649_640x479_15.png` is the *Wii
+Remote safety screen* rendered by Dolphin, so these are genuine reference frames for the boot phase,
+one per frame, already on disk.
+
+Two consequences worth stating before the next experiment:
+
+* the host currently only implements copy format 0 (RGBA8) and logs `[EfbCopy] format N not
+  implemented` for the rest; the reference stream uses **four** formats (`_3`, `_4`, `_6`, `_15`), so
+  most of the guest's copies are still dropped on the host side;
+* "16 copies per frame" in 5c.15/§7 was a MENU-frame count under the host's own bookkeeping and does
+  not line up with this 15-copy hardware stream - the copy *sequence* is a much sharper parity
+  instrument than the frame average, and it can be produced from a still frame.
+
+#### 4. What is still open
+
+The b37/b38 verdict (§10) needs a Dolphin frame in the same attract/MENU phase. The remaining
+blocker is *time*: this machine boots the title to `NW4R SND` in ~33 s of wall clock and runs the
+early attract at ~7 fps with texture dumping on, so a MENU-phase reference needs roughly 4-10
+minutes of wall clock plus scripted input. `%APPDATA%\Dolphin Emulator\Logs\dolphin.log` timestamps
+(`mm:ss:ms` since emulation start) are the cheapest progress meter.
+
+---
+
+### 5c.18 THE VERDICT: hardware does NOT reach 1.0 - the composite chain is a host defect
+
+The reference run succeeded. `docs/evidence/27-dolphin-menu-frame1440.png` is Dolphin's frame 1440
+with the same input script the host uses (`A@600`, `A@900`, `A@1200`, `UP@1300`, `A@1350`,
+`A@1500`), captured by `tools/dolphin_capture.py --frame-plan` at 828x480 (Dolphin's present size):
+
+* a **dark cave-and-lake scene** (frame average `(23,25,18)`),
+* `MENU` in gold at the left, `NEW GAME` highlighted in gold in the centre,
+* a **small warm glow** around the one lamp in the middle of the cave (~20 px across) and a
+  handful of bokeh particles,
+* **no full-screen white ellipse anywhere in the frame.**
+
+So the answer to the §10 gate is **no**: hardware does not saturate. `b34` squaring the frame to 0,
+`b37` restoring an un-squared copy and `b38` doubling it into ~90, then the additive passes reaching
+255, is **not** what the guest's command stream produces on hardware. Per §10 that makes the
+**EFB-copy servicing model** the suspect, and the deferred mode (`TLS_DEFER_EFB_COPY=1`) is
+measurably *not* the hardware behaviour even though it services copies in stream order.
+
+Two independent facts sharpen it:
+
+* **The default (inline) path is not the answer either.** MENU frame 1448 default is
+  `(124,235,255)` - a flat cyan field - and `TLS_TEV=1` alone does not change it (5c.16 §7).
+  So the host has no mode that reproduces `(23,25,18)` + gold text + cave.
+* **The bare scene is right.** With `TLS_TEV=1 TLS_DEFER_EFB_COPY=1 TLS_BATCH_CUTOFF=30` the host
+  draws the complete cave vista over the logo plate (`docs/evidence/22-cave-batch-cutoff30-frame1450.png`).
+  What destroys it is the ~20-quad composite tail, exactly as 5c.15 said.
+
+#### 1. Destination geometry from the pitch register (new, `TLS_EFB_COPY_GEOM=1`)
+
+The writer used `dst_w = source_w/2 if bit 9 of BP 0x52`, i.e. it could only ever produce a 2:1
+shrink. The guest asks for 4:1 and 8:1 as well. The hardware encodes the destination size in two
+places and the pitch is the one that carries the width:
+
+| register | meaning | derivation |
+|---|---|---|
+| BP 0x4D `copyDestStride` | `pitch` | bytes per tile row (`pitch*32`) |
+| BP 0x52 bit 14 `copy_to_xfb` | copy goes to the 16bpp **linear** scanout buffer | `dst_w = pitch*32/2 = pitch*16`, `dst_h = src_h` |
+| otherwise | 4x4-tiled texture: tile row = `(w/4)*64 = w*16` bytes | `dst_w = pitch*2`, `dst_h = src_h * dst_w / src_w` |
+
+Verified copy by copy on MENU frame 1448 (`TLS_EFB_COPY_PROBE=1 TLS_EFB_COPY_FROM=1448`): the probe
+now prints `dstw` (from the pitch) next to `geodst` (the old source/half rule) and they disagree on
+most copies - e.g. `#22834 src 640x448 pitch=80 dstw=160 geodst=320`, `#22835 src 640x448 pitch=160
+dstw=320 geodst=640`, `#22838 src 640x448 pitch=160 dstw=320 geodst=640`. Dolphin's own copy dumps
+contain `160x112` and `80x56` destinations, so the guest really does ask for 4:1 and 8:1.
+
+**Measured effect: small.** MENU 1448 with `TLS_TEV=1 TLS_DEFER_EFB_COPY=1 TLS_EFB_COPY_GEOM=1`
+still shows the white ellipse (`docs/evidence/28-host-menu-1448-geom.png`, average `(93,93,92)` vs
+`(93,93,93)` before). It sharpens the UI texture behind the glow - `CONTINUE` becomes legible and
+small colour speckles appear - so the geometry fix is *correct* and stays, but it is **not** the
+bloom. The flag stays opt-in until the composite chain is right.
+
+The BP 0x52 decode is now complete in `GxPendingEfbCopy`: `real_format = tpf/2 + (tpf&1)*8` from
+bits 3..6, `copy_to_xfb` (bit 14), `intensity_fmt` (bit 15). Note the writer still assumes RGBA8
+tiled for every texture copy - the `format` field it uses comes from BP **0x4B**, which is only the
+destination address, so it is always 0. That is a separate, still-open gap.
+
+#### 2. Where to look next
+
+The reference run also produced `framedump_2000` … `framedump_6000` at frame average `(29,33,26)` -
+a dark olive cave, i.e. **the attract loop or Chapter 1** - so the same archive now has material for
+Task 2/3 as well. For the composite chain the next measurement is batch-by-batch: `TLS_BATCH_PROBE`
+against the reference's `(23,25,18)`, looking for the first pass whose output leaves the reference's
+range, rather than arguing about the last one.
+

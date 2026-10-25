@@ -140,7 +140,9 @@ typedef struct {
 } D3D11Backend;
 
 /* EFB -> texture copy (implemented below, registered by d3d11_init). */
-static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0, uint32_t x1, uint32_t y1, uint32_t format, int half_scale);
+static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0,
+                                    uint32_t x1, uint32_t y1, uint32_t format, int half_scale,
+                                    uint32_t pitch, uint32_t exec);
 
 static D3D11Backend s_d3d11 = {0};
 
@@ -1300,7 +1302,8 @@ static void d3d11_capture_efb_snapshot(void) {
  * the guest's own VI framebuffers - none of which existed while the copy was ignored
  * (handover 5c.11). */
 static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0,
-                                    uint32_t x1, uint32_t y1, uint32_t format, int half_scale) {
+                                    uint32_t x1, uint32_t y1, uint32_t format, int half_scale,
+                                    uint32_t pitch, uint32_t exec) {
     if (!s_d3d11.device || !s_d3d11.context || !s_d3d11.swap_chain) return;
     if (format != 0) {
         static int s_fmt_reported = 0;
@@ -1322,8 +1325,37 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
      * produced the 4-pixel horizontal stripes the composite quads show. */
     uint32_t dst_w = half_scale ? ((w + 1) / 2) : w;
     uint32_t dst_h = half_scale ? ((h + 1) / 2) : h;
+    uint32_t step = half_scale ? 2 : 1;
+    /* TLS_EFB_COPY_GEOM=1 derives the destination size from the hardware registers
+     * instead: BP 0x52 bit 14 says the copy goes into the 16bpp *linear* scanout buffer
+     * (stride = pitch*32 bytes, so width = pitch*16), otherwise the destination is a 4x4
+     * tiled texture whose tile row is (width/4)*64 = width*16 bytes == pitch*32, so
+     * width = pitch*2. Heights follow from a uniform shrink factor source_w/dst_w.
+     * The old rule above only ever produced a 2:1 shrink, so every 4:1 and 8:1 copy the
+     * guest asks for (160x112 and 80x56 destinations, which the Dolphin reference dumps
+     * show) was written 2-4x too large, straddling the next buffer - measured copy by
+     * copy on MENU frame 1448 in handover 5c.17. */
+    static int s_geom = -1;
+    if (s_geom < 0) s_geom = getenv("TLS_EFB_COPY_GEOM") ? 1 : 0;
+    int is_xfb_copy = (int)((exec >> 14) & 1u);
+    if (s_geom) {
+        if (is_xfb_copy) {
+            uint32_t ww = (pitch * 32u) / 2u;
+            if (ww) dst_w = ww;
+            dst_h = h;
+            step = 1;
+        } else if (pitch) {
+            uint32_t ww = pitch * 2u;
+            if (ww > w) ww = w;
+            if (ww) dst_w = ww;
+            step = (dst_w && (w % dst_w) == 0) ? (w / dst_w) : 1;
+            if (step == 0) step = 1;
+            dst_h = h / step;
+        }
+    }
     if (dst_w == 0) dst_w = 1;
     if (dst_h == 0) dst_h = 1;
+    if (step == 0) step = 1;
 
     uint8_t* guest = (uint8_t*)host_resolve_gx_guest_addr(dst_guest);
     if (!guest) {
@@ -1448,11 +1480,11 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
             float sy = (s_d3d11.vp_h > 0.0f) ? (s_d3d11.vp_h / 480.0f) : (float)desc.Height / 480.0f;
             uint32_t tiles_x = (dst_w + 3) / 4;
             for (uint32_t gy = 0; gy < dst_h; gy++) {
-                uint32_t py = (uint32_t)(s_d3d11.vp_y + ((float)(y0 + (half_scale ? gy * 2 : gy)) + 0.5f) * sy);
+                uint32_t py = (uint32_t)(s_d3d11.vp_y + ((float)(y0 + gy * step) + 0.5f) * sy);
                 if (py >= desc.Height) py = desc.Height - 1;
                 const uint8_t* row = src + (size_t)py * mapped.RowPitch;
                 for (uint32_t gx = 0; gx < dst_w; gx++) {
-                    uint32_t px = (uint32_t)(s_d3d11.vp_x + ((float)(x0 + (half_scale ? gx * 2 : gx)) + 0.5f) * sx);
+                    uint32_t px = (uint32_t)(s_d3d11.vp_x + ((float)(x0 + gx * step) + 0.5f) * sx);
                     if (px >= desc.Width) px = desc.Width - 1;
                     const uint8_t* p = row + (size_t)px * 4;
                     uint8_t b = p[0], g = p[1], r = p[2], a = p[3];
@@ -1468,7 +1500,8 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                      * linear-RGBA write for A/B. */
                     static int s_linear = -1;
                     if (s_linear < 0) s_linear = getenv("TLS_EFB_LINEAR") ? 1 : 0;
-                    bool is_display_copy = (dst_guest == 0x900997E0u || dst_guest == 0x900037C0u);
+                    bool is_display_copy = s_geom ? (is_xfb_copy != 0)
+                                                  : (dst_guest == 0x900997E0u || dst_guest == 0x900037C0u);
                     if (is_display_copy && !s_linear) {
                         uint16_t* out = (uint16_t*)guest;
                         uint32_t row = (y0 + gy) * 640u + (x0 + gx);
@@ -1619,7 +1652,8 @@ static void d3d11_service_pending_copies(uint32_t* cursor, uint32_t up_to_vertex
             fflush(stdout);
         }
         ID3D11DeviceContext_OMSetRenderTargets(s_d3d11.context, 0, NULL, NULL);
-        d3d11_efb_copy_to_guest(c->dst_guest, c->x0, c->y0, c->x1, c->y1, c->format, c->half_scale);
+        d3d11_efb_copy_to_guest(c->dst_guest, c->x0, c->y0, c->x1, c->y1, c->format,
+                                c->half_scale, c->pitch, c->exec);
         ID3D11DeviceContext_OMSetRenderTargets(s_d3d11.context, 1, &s_d3d11.rtv, s_d3d11.dsv);
         (*cursor)++;
     }
