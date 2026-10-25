@@ -1192,4 +1192,69 @@ the dialog is answered), so a clean first-boot measurement wants `SaveData/saved
 dialog always starts on **No**, so the `UP` press is what reaches the Yes path; screenshots are written to
 `build/recomp/d3d11_screenshot_<frame>.ppm` on every windowed run.
 
+---
+
+### 5c.13 EFB copies: both encodings verified correct, so the remaining defect is the destination *size*
+
+§5c.11 left the impression that the copy destination encoding was wrong (the dumps looked sparse and
+scrambled). Measured this round at a frame where the picture is actually bright (title attract, frame 2200,
+`TLS_EFB_COPY_PROBE=1 TLS_EFB_DUMP=2200 TLS_FB_RGB565=1`), both classes decode to the real frame:
+
+| Destination | Encoding written | Dump | Evidence |
+|---|---|---|---|
+| `0x900997E0` / `0x900037C0` (VI scanout, 614400 B) | 16-bit RGB565 rows | 640x480, 32 unique colours, "THE LAST STORY" + PUSH in the right place | `docs/evidence/16-efb-display-copy-vi-buffer.png` |
+| `0x9038D1C0` / `0x90536FE0` (texture copies) | 4x4-tiled RGBA8 | 640x448, 47 unique colours, same picture, no doubling | `docs/evidence/17-efb-texture-copy-9038D1C0.png` |
+
+So the earlier "black frame with faint blue outlines" was a *dark frame* being copied (the title's fade
+screens are genuinely black apart from the logo), not a broken encoding. The buffer-overrun fix from §5c.11
+(16 bpp rows for the VI buffers) is confirmed by the clean 640x480 decode.
+
+**What is still wrong: the copy writer always uses the source rectangle's size.** `GXSetTexCopyDst` can
+halve the destination (the copy command has a half-scale field), and the engine uses that to build mip
+levels - `640x448 → 320x224`, `160x112 → 80x56`. The writer in `d3d11_efb_copy_to_guest()` ignores that and
+writes `srcW × srcH` every time, i.e. **four times** the bytes the destination was allocated for on a
+half-scale copy.
+
+Evidence that some of these copies are half-scale:
+
+- the same destination address is sampled at different sizes later (`0x9038D1C0` as an 80x56 RGBA8 texture
+  in one batch and as a 160x112 I8 texture in another - the arena slot is reused, so the address alone
+  cannot name the destination's size);
+- `0x903917C0`, which the menu draws as its own 320x224 fullscreen texture, is exactly
+  `0x9038D1C0 + 0x4600` - one 80x56 RGBA8 image past the copy destination, i.e. inside the range a 640x448
+  write covers;
+- the copy command register (`0x52`) differs by class in a way that tracks scale:
+  display copies read `0x004C03`, texture copies `0x010A43 / 0x01003B / 0x010063 / 0x010263 / 0x010A63`.
+  Bit 16 is clear only for the two VI copies (`copy_to_xfb`), so the scale/half-scale fields are in the low
+  bits and are currently decoded as nothing at all.
+
+**Visible consequence: the title MENU background is a flat `(119, 234, 255)` field** at frames 1450-1750
+(stable over frames, uniform across ~100% of the screen), while the same frame *does* submit 40k vertices
+of depth-tested 3D geometry (`b0..b11` are perspective CMPR batches) - so the scene is rendered and then
+covered by one of the fullscreen composite quads the frame ends with:
+
+```
+b10 tex=0x9044CC20 320x224 fmt=4(RGB565)  blend=s4/d1 (additive)  col=0xFF444444
+b11 tex=0x90429C00 320x224 fmt=4          blend=s4/d1 (additive)  col=0xFF2D2D2D
+b12 tex=0x903917C0 320x224 fmt=6(RGBA8)   blend=0  (s1/d0: REPLACES)  col=0xFFFFFFFF   <- prime suspect
+b13 tex=0x9038D1C0  80x56  fmt=6          blend=0                      <- a mip of the copy destination
+b14 tex=0x903D77C0 160x112 fmt=6          blend=0
+b15 tex=0x9038D1C0  80x56  fmt=6          blend=s4/d5 (alpha)
+b16 tex=0x00000000 untextured             blend=s4/d5  col=0xF6000000  (fade overlay)
+```
+
+`b12` replaces the framebuffer with a texture whose memory our oversized copy has been writing through -
+the most economical explanation for a uniform, static, wrong colour over a correctly rendered scene.
+
+**Next step, in order.**
+1. Decode the `0x52` copy-command fields by A/B: find one frame that contains both a full-scale and a
+   half-scale copy (the 640x448-sourced set does both) and diff the two values. `0x004C03` (display) vs the
+   texture-class values give the `copy_to_xfb` boundary; the scale bits are what is left.
+2. Compute `dst_w = src_w >> half_scale`, `dst_h = src_h >> scale_vertical` in
+   `d3d11_efb_copy_to_guest()` and tile for the destination size, not the source size.
+3. Re-check the MENU background at frame 1450 (expect the cave/lake instead of flat cyan) and re-run the
+   post-handoff stall (§5c.12) - a 1 MB overrun per half-scale copy into MEM2 is also a credible cause of the
+   streaming request that never gets dispatched, so these two items may share a root cause.
+
+
 
