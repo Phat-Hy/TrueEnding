@@ -3742,7 +3742,10 @@ counter advances 0.5 per frame.
   words 0..2 = 0, word 3 = `0xBFE17944`, word 4 = `0xFFFFFFFF`, the rest 0. It is not a table,
   so `fn_80122C70` is not doing a lookup that could fail - it is deriving something from a
   near-empty struct.
-* **The predicate is an event-flag test, and the flag is `4`.** Followed to the leaf:
+* **The predicate is a bit test on the pad trigger word, and the index is `4`.**
+  **(5c.27 §1 corrects the "event flag" reading: `code 4` maps through `tableB[4] = 11`, and bit 11
+  of the trigger word is **A** - the gate is "A was pressed this frame", not an event flag.)**
+  Followed to the leaf:
   `fn_801231D0(obj, 0)` -> `fn_80122C70(obj, 0)` (reads the byte at `obj+20+cmd`; it is 0, so it
   falls through to the 54-entry table at `0x8078A228`) -> `fn_80121F08(code, 1)`, whose tail
   (0x80121FA4..0x80121FBC) is `return fn_800A555C(*(r13-26448), 0, code) & 1`. Measured at
@@ -3838,13 +3841,157 @@ writes; nothing touches the title path.
 
 #### 10. Work order, revised
 
-1. **Set (or find who should set) event flag 4.** The Chapter-1 scene machine is in outer state 0,
-   phase 0, and its only closed operand is `fn_800A555C(*(r13-26448), 0, 4) == 0` - i.e. "flag 4 is
-   not set" (measured, §4). Find the flag-setter alongside `fn_800A555C` and the phase-8 script
-   (`0x8036AAB8`) that should call it. That is the whole of the blocker now.
+1. **Press A after the gate arms** - see 5c.27. The 5c.26 reading ("waiting for event flag 4") is
+   superseded: the operand is an **A-button edge**, an A press at frame 3400 opens the gate and
+   moves the machine to phase 13, two steps beyond anything recorded before. 5c.27 §7 is the
+   current work order.
 2. **The alternate-frame parity** - now known *not* to be the YUYV fallback; it correlates with
    the vertex count and needs the batch-list/back-buffer dump of §5.
 3. **EFB copy format 0 (R4)** - only with the chain-probe validation described in §6.
 4. **The title input race** - still the reason one run in eight is wasted, and still capable of
    making the invariant check itself report the wrong picture.
 5. The allocator cycle (5c.22 §3), and the optional save/ISFS models - both unchanged.
+
+---
+
+### 5c.27 Correction to 5c.26: the gate is an **A-button edge**, input DOES advance the machine, and phase 13 is where it lands
+
+**State at the start of this session:** `9defcdc`, tree clean, build green. 5c.26 ended with "the one
+closed operand is `fn_801231D0(*(r13-26136)+0x48C, 0)`, and the flag is 4". Two things in that
+sentence are now corrected, and the Chapter-1 machine turns out to be two presses further along than
+any previous session got - it is **not** input-proof.
+
+#### 1. It is not an event flag. It is a bit in the pad trigger word.
+
+`fn_801231D0(obj, cmd)` does **not** return a constant. `fn_80122C70(obj, cmd)` is a 54-entry
+handler dispatcher (`cmplwi r4, 0x35`, table at **`0x8077A228`** - not `0x8078A228`, which is the
+`+0x54E4` phase table, four bytes of arithmetic apart and easy to confuse). The handler's return is
+a `code`, and the leaf finally resolves it as:
+
+```
+fn_80121F08(code, 1)  ->  return fn_800A555C(*(r13-26448), 0, code) & 1;
+fn_800A555C(mgr, op, code):        /* note: it IGNORES its first argument */
+    mgr = *(r13 - 26280)                       /* 0x800A5574 reloads r3 */
+    return (*(mgr + op*4 + 0x3C28) >> bit) & 1     /* bit = tableB[code] */
+tableB @ 0x807328A8 = 3,2,0,1,11,10,14,4,12,13,16,17,...
+```
+
+`mgr + 0x3C28` = `mgr + 15400` is the **pad trigger word** - the same word the title gate probe has
+been reading as `realbit11(A)`. For the phase-0 gate `code = 4`, so `bit = tableB[4] = 11`, and
+**bit 11 is A**. So:
+
+> the phase-0 gate is `if (A was pressed this frame)`, not "if event flag 4 is set".
+
+That also explains why 5c.26's 41 samples were all zero: after the intro ends at frame ~3380 the
+scripted A presses had already stopped (the plan ended at 1812), so no frame in the sampled window
+had an A edge.
+
+#### 2. 5c.25 §4a is REFUTED: one A press moves the machine two steps
+
+`5c.25 §4a` concluded "no input reaches a handler - holding UP for 1000 frames changes nothing, A
+every 100 frames changes nothing". The A half is wrong. With the gate armed (`g2+0xD8C` flips at
+3369/3380) and A pressed at frame 3400:
+
+```
+f=3380  PHASE 8 -> 0      (+0x54F0 = 2)
+f=3400  GATE0 predicate=0x00000001 (OPEN)
+f=3400  fn_803E4478(obj=0x81103720) called        (the success path, first and only time)
+f=3402  PHASE 0 -> 13     and +0x54F0 goes 2 -> 0
+```
+
+and `+0x54F0 + 1` is exactly the outer state `GameTask::Init` (`0x8036F5D8`) installs - so the A
+press sets up the re-initialisation into outer state 1. What §4a actually measured is that the
+*picture* does not change, which is true: phase 13 then has no successor (§3). The picture is not
+evidence about the state machine.
+
+**Reproduce the furthest-yet chain** (needs A presses *after* the gate arms, not before):
+
+```
+TLS_INPUT_SCRIPT='600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A,
+                   3400-3412:A,3500-3512:A,...,5700-5712:A'
+TLS_SCENE_SM_PROBE=1 tls_runner.exe --frames 5000
+```
+
+#### 3. Phase 13 (`0x8036B134`) cannot leave through the shared tail - measured
+
+Phase 13's body reads `obj = *(task+0x56EC)` and does one of two things, otherwise nothing:
+
+```
+if ((obj->[0x38] & 2) == 2 && obj->[0x88] == 0)  fn_805BA358(*(r13-25232) + 608);
+else if (obj->[0x88] == 4)                        fn_80376568(task);
+```
+
+and then falls into the **shared tail** at `0x8036B198` (the same tail phases 2, 3 and 4 use):
+
+```
+0x8036B198  if (fn_801231D0(sub, 16))  {
+0x8036B1B4      if (fn_8036E170(task)) { obj[120]=18; fn_8006A900(obj);
+                                         task[0x5684]=1; task[0x5688]=0; task[0x568C]=0; }
+            }
+```
+
+`fn_8036E170` (`0x8036E170`) opens with a switch on the phase:
+
+```
+r0 = *(task + 0x54E4);
+if (r0 == 0)  goto body;
+if (r0 == 14) goto body;
+if (r0 == 3)  goto body;
+return 0;                       /* 0x8036E1A4 */
+```
+
+**With phase == 13 it returns 0 unconditionally**, so phase 13's tail is structurally dead. Measured
+on the two frames where the cmd-16 edge actually opened:
+
+```
+f=3860  PHASE13 cmd16=1 (OPEN)
+f=3860  PHASE13 fn_8036E170=0x00000000 (false)
+f=4100  PHASE13 cmd16=1 (OPEN)
+f=4100  PHASE13 fn_8036E170=0x00000000 (false)
+```
+
+So the only exits from phase 13 are inside its own body, through `*(task+0x56EC)`.
+
+#### 4. cmd 16 is an edge, and it can be produced - but only once per press
+
+The input script supports raw masks (`0xHEX`, both devices). Sweeping single bits 0..22 after the A
+press that opens the phase-0 gate, exactly two masks open cmd 16, and each for exactly **one
+update** although the mask is held for 12 frames:
+
+```
+raw bit 6  (window 3860..3872) -> cmd16 = 1 at f=3860, back to 0 at f=3862
+raw bit 10 (window 4100..4112) -> cmd16 = 1 at f=4100, back to 0 at f=4102
+```
+
+An edge that lasts one update means a held button cannot retry: every attempt needs a fresh press.
+That is a real constraint on any future input plan (and a candidate explanation for other
+"pressing X does nothing" observations in this file).
+
+#### 5. New / changed instruments
+
+* `TLS_SCENE_SM_PROBE=1` now also prints, on change, `PHASE13 cmd16=` (the return at `0x8036B1A8`)
+  and `PHASE13 fn_8036E170=` (the return at `0x8036B1B8`), and it always prints a **non-zero**
+  `GATE0 predicate` so a one-frame opening cannot be missed.
+* A `BTNQ cmd= code= bit=` probe exists at `0x80121FB4`, but it is **noisy**: `fn_80121F08` has many
+  callers, so `last-cmd` is often stale (everything came back as the unrelated `cmd=39`). Prefer
+  targeted return-point probes over "remember the last argument".
+* Reminder that generalises the above: `dolrecomp_dispatch_replacement` only runs at **call
+  boundaries**, so a probe on a `bl`-return address works and a probe on a mid-function branch target
+  silently never fires.
+
+#### 6. Invariant
+
+3-A plan at present 1448 = `mean (102,188,205) p10 69 p50 203 p90 203 p99 206`, re-verified as the
+last action of this session. Nothing here touches the title path.
+
+#### 7. Work order, revised
+
+1. **`*(task+0x56EC)`, fields `+0x38` and `+0x88`** - the only exits from phase 13. Dump them: if
+   `obj->[0x88]` should reach 4 the body calls `fn_80376568(task)`; if `(obj->[0x38] & 2) == 2` and
+   `+0x88 == 0` it calls `fn_805BA358(next+608)`. One of those is the successor.
+2. **Decide whether phase 13 is the right successor at all.** `fn_8036E170` only accepts phases
+   0, 3 and 14, which suggests the authored sequence is 0 -> 3/14 -> ..., and phase 13 may be a
+   branch the A press selected rather than the main line. Cross-check `fn_803E4478` (what it sets).
+3. Input plans from now on must respect the **one-update edge**: press, release, press again.
+4. Unchanged: the alternate-frame parity (5c.26 §5 - not the YUYV fallback), EFB format 0/R4,
+   the title input race, the allocator cycle.

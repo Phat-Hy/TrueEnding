@@ -2063,6 +2063,7 @@ static long g_ssm_entries = 0;
 static int g_ssm_call_1231 = 0;
 static int g_ssm_call_3e44 = 0;
 static int g_ssm_g0_call = 0;
+static u32 g_ssm_last_cmd = 0xFFFFFFFFu;
 static u32 g_ssm_g2w = 0xFFFFFFFFu;
 
 /* Chapter-1 sub-phase machine (a SECOND jump table, not the +0x5538 one).
@@ -4718,7 +4719,10 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 u32 g2   = mem_read32(ctx, ctx->gpr[13] - 25136u);
                 u32 g2ok = (g2 >= 0x80000000u && g2 < 0x83000000u) ? g2 : 0;
                 s_n++;
-                if (s_n <= 40 || s_n % 120 == 0) {
+                /* Always print a non-zero predicate: the gate's operand is a
+                 * per-frame button-edge test, so the whole point is to catch the
+                 * frame on which it goes 1, and a stride would miss it. */
+                if (s_n <= 40 || s_n % 120 == 0 || ctx->gpr[3] != 0) {
                     printf("[TLS SceneSM] f=%d GATE0 predicate=0x%08X (%s) g2_3468=%u  #%d\n",
                            g_runner_current_frame, ctx->gpr[3], ctx->gpr[3] ? "OPEN" : "closed",
                            g2ok ? mem_read32(ctx, g2ok + 3468) : 0, s_n);
@@ -4734,6 +4738,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         case 0x801231D0: {
             if (tls_scene_sm_probe_on()) {
                 g_ssm_call_1231++;
+                g_ssm_last_cmd = ctx->gpr[4];
                 g_ssm_g0_call = (ctx->lr == 0x8036A574u);
                 if (g_ssm_g0_call) {
                     extern int g_runner_current_frame;
@@ -4816,14 +4821,69 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             }
             return 0;
         }
+        case 0x8036B1A8: {
+            /* Phase 13 (0x8036B134..0x8036B1AC) is
+             *     if (fn_801231D0(*(r13-26136)+0x48C, 16)) {
+             *         if (fn_8036E170(task)) { obj[120]=18; fn_8006A900(obj);
+             *             task[0x5684]=1; task[0x5688]=0; task[0x568C]=0; }
+             *     }
+             * so 0x8036B1A8 is the return point and r3 is the cmd-16 answer.
+             * Report it on change: this is the only thing between the phase-0
+             * gate (which an A press opens) and the next phase. */
+            if (tls_scene_sm_probe_on()) {
+                extern int g_runner_current_frame;
+                static u32 s_last = 0xFFFFFFFFu;
+                static int s_n = 0;
+                u32 v = ctx->gpr[3];
+                s_n++;
+                if (v != s_last || s_n <= 3) {
+                    printf("[TLS SceneSM] f=%d PHASE13 cmd16=%u (%s) #%d\n",
+                           g_runner_current_frame, v, v ? "OPEN" : "closed", s_n);
+                    fflush(stdout);
+                    s_last = v;
+                }
+            }
+            return 0;
+        }
+
+        case 0x8036B1B8: {
+            /* Same tail: 0x8036B1B4 is `bl 0x8036E170`, 0x8036B1B8 is
+             * `cmpwi r3, 0`. The phase-13 advance needs cmd16 AND this, on the
+             * SAME frame - and cmd16 is an edge, so a held button cannot retry. */
+            if (tls_scene_sm_probe_on()) {
+                extern int g_runner_current_frame;
+                static u32 s_last = 0xFFFFFFFFu;
+                static int s_n = 0;
+                u32 v = ctx->gpr[3];
+                s_n++;
+                if (v != s_last || s_n <= 3) {
+                    printf("[TLS SceneSM] f=%d PHASE13 fn_8036E170=0x%08X (%s) #%d\n",
+                           g_runner_current_frame, v, v ? "TRUE" : "false", s_n);
+                    fflush(stdout);
+                    s_last = v;
+                }
+            }
+            return 0;
+        }
+
         case 0x80121FB4: {
-            if (tls_scene_sm_probe_on() && g_ssm_g0_call) {
+            if (tls_scene_sm_probe_on()) {
                 extern int g_runner_current_frame;
                 static int s_n = 0;
-                if (++s_n <= 6)
-                    printf("[TLS SceneSM] f=%d FLAGQ code=%u (r31=0x%08X) set?=%u #%d\n",
-                           g_runner_current_frame, ctx->gpr[31], ctx->gpr[31],
-                           ctx->gpr[3] & 1u, s_n);
+                /* fn_801231D0(obj, cmd) dispatches through the 54-entry handler
+                 * table at 0x8077A228; the handler returns a `code`, and
+                 * fn_800A555C(mgr, 0, code) tests bit tableB[code] of the pad
+                 * trigger word at mgr+0x3C28 (tableB at 0x807328A8: 0->3, 1->2,
+                 * 2->0, 3->1, 4->11, 5->10, 6->14, 7->4, 8->12, 9->13, 10->16,
+                 * 11->17). So code 4 == bit 11 == A, which is exactly the
+                 * phase-0 gate that opened at frame 3400 on an A press. */
+                static const unsigned char c_bit[12] = {3,2,0,1,11,10,14,4,12,13,16,17};
+                u32 code = ctx->gpr[31];
+                if (++s_n <= 60)
+                    printf("[TLS SceneSM] f=%d BTNQ cmd=%u code=%u bit=%u set?=%u\n",
+                           g_runner_current_frame, g_ssm_last_cmd, code,
+                           (code < 12u) ? (u32)c_bit[code] : 0xFFu,
+                           ctx->gpr[3] & 1u);
                 fflush(stdout);
             }
             return 0;
