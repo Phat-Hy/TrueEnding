@@ -2483,4 +2483,144 @@ additive pass strength, (b) TEV `RASA`/alpha in the stages that write `dest=c2`,
 3. Re-check `TLS_EFB_COPY_GEOM` on the copies the chain actually consumes (b32..b41), whose
    destinations are 320x224 / 160x112 / 80x56 while the source rect is 640x448.
 
+---
+
+### 5c.22 The whole host picture is one defect: the bloom chain is *quadratic* in the scene level
+
+#### 0. Session setup: the workspace was not writable, and it was not the DACL
+
+Every *existing* file under the workspace refused `open-for-write` with `Access is denied` while
+creating new files worked, and the DACL looked perfect (`Users: ReadAndExecute`,
+`Authenticated Users: Modify`). The cause is **mandatory integrity level**, not permissions: the
+harness token runs at **Low** integrity (`whoami /groups` -> `Mandatory Label Low Mandatory Level`)
+and the files had been created by an earlier, higher-integrity process, so Windows' no-write-up rule
+denied the open. Two files with byte-identical DACLs behaved differently, which is the tell.
+Fix (once, from a full-access session): `icacls <workspace> /setintegritylevel (OI)(CI)L /T /C /Q`
+- 73 800 files relabelled, 825 refused (`tools/w64devkit/src/*` submodule working copies, which are
+not needed for the build). Do not spend time on ACL repair for this symptom.
+
+#### 1. The Dolphin corpus lives in `Dump\Textures`, not `Dump\Textures\SLSEXJ`
+
+`%APPDATA%\Dolphin Emulator\Dump\Textures\` holds 30 623 `efb1_*` dumps + 2 015 frame presents
+(2 015 emulated frames, of which **589 are MENU-phase**); the `SLSEXJ` subdirectory only has the 405
+`tex1_*` texture dumps. `tools/copy_chain.py` (new) parses either - set
+`TLS_COPY_DUMP_DIR` - and prints one frame's copies **in execution order** with size, format,
+average and peak. The present frame is the `640x479` copy, so **its average *is* the frame average**
+and can be compared with the host's screenshot without any framing argument:
+
+```
+frame 1101 (21 copies, in order):
+  320x224 f4 =0      640x448 f3 =255   320x224 f4 =0      320x224 f4 =5
+  640x448 f3 =251    160x112 f6 =12    320x224 f6 =15     80x56 f6 =15/16/16 pk381
+  80x56   f6 =0 pk47 80x56   f6 =0 pk29 80x56  f6 =0 pk18
+  640x448 f6 =16     320x224 f6 =15     320x224 f6 =15    320x224 f6 =15
+  640x448 f6 =16     160x112 f6 =25/30/22   320x224 f6 =32/36/28
+  80x56   f6 =31/36/28   80x56 f6 =31/36/28
+  -> present 640x479 fmt15 = (31,34,28)
+```
+
+Three things this settles: (a) the four trailing copies carry the **composited** frame (25-36), the
+rest carry the **scene** (12-16); (b) the bloom's source peak is only 338-381 of 765, i.e. the glow
+is a *localised* highlight, not a full-screen field; (c) hardware's composite lift is
+`15/16 -> 31/34`, about **x2**.
+
+#### 2. The host's deferred chain lifts by the same x2 - with a full-screen white blob
+
+`TLS_TEV=1 TLS_DEFER_EFB_COPY=1` at frame 1448 (measured this session, `d3d11_screenshot_1448.ppm`,
+mean `(86,89,86)`): the menu text is right and there **is** scene content, but a saturating white
+ellipse covers the middle of the frame. Luminance percentiles:
+
+| image | p10 | p50 | p75 | p90 | p99 | max |
+|---|---|---|---|---|---|---|
+| host, deferred, 1448 | 0 | 45 | 172 | 243 | 255 | 255 |
+| reference `27-dolphin-menu-frame1440.png` | 4 | 15 | 26 | 42 | 142 | 255 |
+
+Grid means (4x6) show the shape: host `0.9 25 71 75 29 1.5 / 26 142 236 242 168 30 / ...`,
+reference `5.5 11 12 15 16 4.8 / 22 29 47 36 28 8.8 / ...`. The host's centre is 235-242 where the
+reference is 47-51. **The composite chain's amplification is comparable (x2.3 vs x2.0); what is
+wrong is the level it starts from and therefore the quadratic passes**: a squaring pass maps
+`v -> (v/255)^2`, so the host's scene level of 38 gives 5.6 where hardware's 15 gives 0.9, a 6x
+difference in the bloom source, and the additive passes then saturate the middle of the screen.
+
+So the ordering in §5c.19/§5c.20 ("fix the copy model first, then the pass strength") is still
+right, but the *prize* is the base scene level: **everything else in the chain is downstream of a
+scene that is 2.4x too bright**, and the quadratic passes turn 2.4x into saturation.
+
+#### 3. The copy model is now proven correct, in order, batch by batch
+
+New probe `TLS_EFB_CHAIN=<present>` prints **every copy of one present in stream order** with the
+batch it is attached to, the source rectangle, the average of the pixels it just read, and the
+average of the destination decoded back out of guest memory. Frame 1448, `TLS_TEV=1
+TLS_DEFER_EFB_COPY=1` (present counter, guest frame 1447):
+
+```
+copy=0  batch=-1  320x224 <-640x448 srcavg=(0,0,0)        # before the clear+draws
+copy=4  batch=32  640x448 srcavg=(35,32,31)               # the scene, as drawn
+copy=6  batch=32  320x224 srcavg=(35,32,31)
+copy=7  batch=33  80x56   srcavg=(21,22,21)               # downsample of the scene
+copy=8  batch=35  80x56   srcavg=(0,0,0)                  # blur chain collapses to 0
+copy=9  batch=36  80x56   srcavg=(0,0,0)
+copy=10 batch=37  80x56   srcavg=(0,0,0)
+copy=11 batch=39  640x448 srcavg=(21,23,22)
+copy=12 batch=39  320x224 srcavg=(21,23,22)
+copy=13 batch=40  320x224 srcavg=(29,32,29)
+copy=14 batch=41  320x224 srcavg=(60,64,60)
+copy=15 batch=42  640x448 srcavg=(131,139,131)
+copy=16 batch=43  320x224 srcavg=(112,121,113)
+copy=17 batch=47  640x448 srcavg=(129,141,134)
+copy=18 batch=48  160x112 srcavg=(221,235,223)
+copy=19 batch=48  320x224 srcavg=(241,248,242)
+copy=20 batch=49  80x56   srcavg=(222,234,219)
+copy=21 batch=50  80x56   srcavg=(255,255,255)
+copy=22 batch=-1  640x448 xfb srcavg=(91,95,92)           # the present copy
+```
+
+`dstavg == srcavg` on every copy, so the write, the tile layout and the decode are all consistent;
+the deferred model really does service each copy at the right point of the draw stream, and the
+first copies of a frame are black (the clear) exactly like hardware. **The copy-servicing question
+is answered: `TLS_DEFER_EFB_COPY=1` is the model, and the two things left are (a) the level of the
+scene and (b) the levels of the composite passes, both visible above.**
+
+The host's copy *sizes* also line up with Dolphin's when the two are aligned by size, so the
+destination geometry (half-scale bit + pitch) is right where it matters:
+
+| copy | host size | host avg | Dolphin (frame 1101) | Dolphin avg |
+|---|---|---|---|---|
+| 5 | 160x112 | 22 | 160x112 | 12 |
+| 6 | 320x224 | 35 | 320x224 | 15 |
+| 7 | 80x56 | 21 | 80x56 | 15 |
+| 8-10 | 80x56 | 0 | 80x56 | 0 (peak 47/29/18) |
+| 11 | 640x448 | 21 | 640x448 | 16 |
+| 13 | 320x224 | 29 | 320x224 | 15 |
+| 14 | 320x224 | 60 | 320x224 | 25 |
+| 15 | 640x448 | 131 | 640x448 | 32 |
+| 18 | 160x112 | 221 | 160x112 | 25 |
+
+#### 4. The composite passes: hardware asks for a 4-tap blur and gets *one* tap
+
+`TLS_TEV_PROBE` at the additive passes (b39, texture `0x9038D1C0`) shows **five TEV stages, one
+texmap, and texcoords 0/1/2/3 with the K registers all 0.2**:
+
+```
+st0 rgb: ZERO tex.rgb konst.rgb ZERO  kc=K0.r (0.2)   texcoord=0
+st1 rgb: ZERO tex.rgb konst.rgb prev  kc=K0.g (0.2)   texcoord=1
+st2 rgb: ZERO tex.rgb konst.rgb prev  kc=K0.b (0.2)   texcoord=2
+st3 rgb: ZERO tex.rgb konst.rgb prev  kc=K0.a (0.2)   texcoord=3
+    alpha: ZERO tex ras ZERO  (alpha = tex.a * ras.a)
+```
+
+so the pass is a 4-tap box blur of the *same* texture with weights 0.2 - but the batch supplies
+`texcoord_mask=0x01`, i.e. **TEX0 only**. Dolphin's `VertexShaderGen.cpp` initialises every
+ungenerated coord to `vec4(0,0,0,0)` and only overwrites it from an attribute that exists
+(`if (texGenInfo[texnum].texcoord_elem_count != 0) coord = vec4(rawtex.x, rawtex.y, 1, 1)`), so on
+hardware taps 1..3 sample the **corner texel**, not a second/third/fourth UV. That is why hardware's
+additive passes are weak (the measured +4 per pass) while the host's add the full texture:
+`b39 21->43 (+22 on a 21-valued texture)`, `b40 43->73`, `b41 73->131`, i.e. ~100 % per pass.
+
+The fix is therefore not a fudge factor: `TLS_TEV_TEXCOORD=1` (already implemented in 5c.20, opt-in)
+is the hardware rule, and it was measured *worse* only because it was measured on the 3D scene at
+b16 where the batch **does** supply TEX1 (`texcoord_mask=0x03`) - a different question from the
+composite, where the mask is 0x01 and three of four taps must collapse to the corner texel.
+
+
 

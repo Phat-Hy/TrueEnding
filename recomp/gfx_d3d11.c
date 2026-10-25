@@ -1520,6 +1520,109 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                     }
                 }
             }
+            /* Per-copy chain probe. Hardware's `DumpEFBTarget` writes every EFB copy
+             * destination in execution order, so the only honest comparison is the same
+             * thing on the host: every copy of one frame in stream order, at the
+             * destination's real size, printing (a) the average of the source rectangle
+             * that was just read out of the frame and (b) the average of the destination
+             * decoded back out of guest memory, i.e. what the guest will sample.
+             * A copy whose (a) is the scene and whose (b) is black is a write/decode bug;
+             * a copy whose (a) is also black is a servicing-model bug. TLS_EFB_CHAIN=<frame>,
+             * TLS_EFB_CHAIN_DUMP=1 additionally writes each destination as a PPM. */
+            {
+                static int s_chain_frame = -2, s_chain_dump = 0, s_chain_idx = 0, s_chain_frame_seen = -1;
+                if (s_chain_frame == -2) {
+                    const char* f = getenv("TLS_EFB_CHAIN");
+                    s_chain_frame = f ? atoi(f) : -1;
+                    s_chain_dump = getenv("TLS_EFB_CHAIN_DUMP") ? 1 : 0;
+                }
+                extern int g_runner_current_frame;
+                /* Keyed on the present counter, not the guest frame counter: the two are
+                 * offset by one (present N renders guest frame N-1), so gating on the frame
+                 * counter silently compared a batch dump of one frame with the copies of
+                 * the next one. */
+                extern int s_efb_copy_batch_ctx;
+                if (s_chain_frame >= 0 && (int)s_d3d11.frame_counter == s_chain_frame && s_chain_idx < 40) {
+                    if (s_chain_frame_seen != s_chain_frame) { s_chain_frame_seen = s_chain_frame; s_chain_idx = 0; }
+                    float qx = (s_d3d11.vp_w > 0.0f) ? (s_d3d11.vp_w / 640.0f) : (float)desc.Width / 640.0f;
+                    float qy = (s_d3d11.vp_h > 0.0f) ? (s_d3d11.vp_h / 480.0f) : (float)desc.Height / 480.0f;
+                    unsigned long sr2 = 0, sg2 = 0, sb2 = 0, ns = 0;
+                    for (uint32_t gy = 0; gy < dst_h; gy += 4) {
+                        uint32_t py = (uint32_t)(s_d3d11.vp_y + ((float)(y0 + gy * step) + 0.5f) * qy);
+                        if (py >= desc.Height) py = desc.Height - 1;
+                        const uint8_t* row2 = src + (size_t)py * mapped.RowPitch;
+                        for (uint32_t gx = 0; gx < dst_w; gx += 4) {
+                            uint32_t px = (uint32_t)(s_d3d11.vp_x + ((float)(x0 + gx * step) + 0.5f) * qx);
+                            if (px >= desc.Width) px = desc.Width - 1;
+                            const uint8_t* p2 = row2 + (size_t)px * 4;
+                            sr2 += p2[2]; sg2 += p2[1]; sb2 += p2[0]; ns++;
+                        }
+                    }
+                    if (ns == 0) ns = 1;
+                    /* Destination content, in the layout that was just written. */
+                    static int s_chain_linear = -1;
+                    if (s_chain_linear < 0) s_chain_linear = getenv("TLS_EFB_LINEAR") ? 1 : 0;
+                    bool chain_disp = s_chain_linear ? false
+                                      : (s_geom ? (is_xfb_copy != 0)
+                                                : (dst_guest == 0x900997E0u || dst_guest == 0x900037C0u));
+                    bool chain_lin = (s_chain_linear != 0);
+                    unsigned long dr = 0, dg = 0, db = 0, nd = 0, dpeak = 0;
+                    uint32_t dtx = (dst_w + 3) / 4;
+                    for (uint32_t gy = 0; gy < dst_h; gy++) {
+                        for (uint32_t gx = 0; gx < dst_w; gx++) {
+                            uint8_t r8, g8, b8;
+                            if (chain_disp) {
+                                uint32_t row = (y0 + gy) * 640u + (x0 + gx);
+                                uint16_t v = ((const uint16_t*)guest)[row];
+                                r8 = (uint8_t)(((v >> 11) & 0x1F) << 3);
+                                g8 = (uint8_t)(((v >> 5) & 0x3F) << 2);
+                                b8 = (uint8_t)((v & 0x1F) << 3);
+                            } else if (chain_lin) {
+                                const uint8_t* px2 = guest + ((size_t)gy * dst_w + gx) * 4;
+                                r8 = px2[0]; g8 = px2[1]; b8 = px2[2];
+                            } else {
+                                uint32_t tile = (gy / 4) * dtx + (gx / 4);
+                                uint32_t within = (gy % 4) * 4 + (gx % 4);
+                                const uint8_t* t = guest + (size_t)tile * 64;
+                                r8 = t[within * 2 + 1];
+                                g8 = t[32 + within * 2 + 0];
+                                b8 = t[32 + within * 2 + 1];
+                            }
+                            unsigned lum = (unsigned)r8 + g8 + b8;
+                            if (lum > dpeak) dpeak = lum;
+                            dr += r8; dg += g8; db += b8; nd++;
+                        }
+                    }
+                    if (nd == 0) nd = 1;
+                    printf("[EfbChain] present=%d frame=%d copy=%d batch=%d dst=0x%08X %ux%u src=(%u,%u)-(%u,%u) xfb=%d fmt=%u "
+                           "srcavg=(%lu,%lu,%lu) dstavg=(%lu,%lu,%lu) dstpeak=%lu\n",
+                           s_d3d11.frame_counter, g_runner_current_frame, s_chain_idx, s_efb_copy_batch_ctx,
+                           dst_guest, dst_w, dst_h, x0, y0, x1, y1,
+                           is_xfb_copy, format, sr2 / ns, sg2 / ns, sb2 / ns, dr / nd, dg / nd, db / nd, dpeak);
+                    fflush(stdout);
+                    if (s_chain_dump) {
+                        char path[128];
+                        snprintf(path, sizeof(path), "build/recomp/efbchain_%d_%02d_%08X_%ux%u.ppm",
+                                 g_runner_current_frame, s_chain_idx, dst_guest, dst_w, dst_h);
+                        FILE* df = fopen(path, "wb");
+                        if (df) {
+                            fprintf(df, "P6\n%u %u\n255\n", dst_w, dst_h);
+                            for (uint32_t yy = 0; yy < dst_h; yy++) {
+                                for (uint32_t xx = 0; xx < dst_w; xx++) {
+                                    uint32_t tile = (yy / 4) * dtx + (xx / 4);
+                                    uint32_t within = (yy % 4) * 4 + (xx % 4);
+                                    const uint8_t* t = guest + (size_t)tile * 64;
+                                    fputc(t[within * 2 + 1], df);
+                                    fputc(t[32 + within * 2 + 0], df);
+                                    fputc(t[32 + within * 2 + 1], df);
+                                }
+                            }
+                            fclose(df);
+                        }
+                    }
+                    s_chain_idx++;
+                }
+            }
             ID3D11DeviceContext_Unmap(s_d3d11.context, (ID3D11Resource*)staging, 0);
             /* Dump a copy destination as a PPM, decoded with the same tile layout, so the
              * picture the guest will sample can be compared with the Dolphin reference
@@ -1632,7 +1735,13 @@ static void probe_backbuffer_avg(unsigned* out_r, unsigned* out_g, unsigned* out
  * that turned the title MENU background into a flat colour (handover 5c.14/5c.15).
  * The render target must be unbound around the read; re-binding it afterwards does not
  * disturb the pixels already rendered into it. */
+/* Which batch the copy being serviced is attached to (-1 = before any batch, 9999 = after
+ * the last one). Only used by the TLS_EFB_CHAIN probe, so a copy can be placed in the
+ * frame's draw stream instead of being printed in an unattributable block. */
+int s_efb_copy_batch_ctx = -1;
+
 static void d3d11_service_pending_copies(uint32_t* cursor, uint32_t up_to_vertex, int at_batch) {
+    s_efb_copy_batch_ctx = at_batch;
     if (!cursor) return;
     /* Inline mode already performed every copy at its command, so just retire the queue. */
     if (!gx_pipeline_efb_copy_is_deferred()) {
