@@ -32,6 +32,10 @@ static bool s_proj_is_perspective = true;
 static float s_pos_matrices[64][3][4];
 static uint8_t s_current_pnm_idx = 0;
 static uint8_t s_default_pnm_idx = 0;
+/* The 6-bit PosNormalMtxIdx as the guest wrote it (= 3 * matrix index). The normal-matrix
+ * fetch uses the raw field: XF normalMatrices[3 * (field & 31)] (Dolphin XFMemory). */
+static uint8_t s_current_pnm_raw = 0;
+static uint8_t s_default_pnm_raw = 0;
 
 static GxVertex s_vertex_batch[GX_MAX_BATCH_VERTICES];
 static uint32_t s_vertex_count = 0;
@@ -255,6 +259,73 @@ static uint16_t s_xf_target_addr = 0;
 static uint8_t  s_xf_buf[1024];
 static uint32_t s_xf_buf_pos = 0;
 
+/* ---------------------------------------------------------------------------
+ * XF transform unit state: lighting, normal matrices, texture matrices.
+ *
+ * The XF is the half of the GX pipeline between the FIFO and the TEV stage, and the
+ * host used to implement only the position matrix and the projection matrix. That
+ * meant every vertex reached the TEV stage carrying the *raw* CLR0 attribute (or
+ * white when the batch supplies no colour, which is the normal case for lit 3D
+ * geometry), so the TEV's RASC input was unlit. On hardware the two vertex colours
+ * are the output of the per-channel lighting equation below, so the host rendered
+ * every lit material at full brightness - handover 5c.19 measures the scene at
+ * (76,70,62) against the reference's (23,25,18).
+ *
+ * Register layout and semantics are Dolphin's (VideoCommon/XFMemory.h,
+ * VideoCommon/LightingShaderGen.cpp); the arithmetic is 8-bit fixed point exactly
+ * as the hardware does it, including the `mat * (lacc + (lacc >> 7)) >> 8` rounding.
+ * ------------------------------------------------------------------------- */
+
+#define XF_MAX_LIGHTS 8
+
+static uint32_t s_gx_frame_idx; /* defined below; needed by the frame-gated probes */
+
+typedef struct {
+    uint32_t color;           /* XF 0x600+16i+3, RGBA8 with R in bits 24..31 */
+    float cosatt[3];          /* +4..+6 */
+    float distatt[3];         /* +7..+9 */
+    float pos[3];             /* +10..+12 (dpos) */
+    float dir[3];             /* +13..+15 (ddir), normalised on use */
+} XfLight;
+
+static XfLight s_xf_lights[XF_MAX_LIGHTS];
+static float s_xf_nrm_mtx[96];              /* XF 0x400..0x45f, 9 floats per matrix */
+static uint32_t s_xf_amb_color[2];          /* XF 0x100a / 0x100b, RGBA8 */
+static uint32_t s_xf_mat_color[2];          /* XF 0x100c / 0x100d */
+static uint32_t s_xf_color_ctrl[2];         /* XF 0x100e / 0x100f, LitChannel */
+static uint32_t s_xf_alpha_ctrl[2];         /* XF 0x1010 / 0x1011 */
+static uint32_t s_xf_num_chan = 1;          /* XF 0x1009 */
+static uint32_t s_xf_texmtx_info[8];        /* XF 0x1040..0x1047, TexMtxInfo */
+static uint32_t s_xf_postmtx_info[8];       /* XF 0x1050..0x1057, PostMtxInfo */
+static uint32_t s_xf_num_texgens = 0;       /* XF 0x103f */
+static uint32_t s_xf_dualtex = 0;           /* XF 0x1012 */
+static float s_xf_viewport[6];              /* XF 0x101a..0x101f, wd ht zRange x y farZ */
+static uint8_t s_cp_tex_mtx[8];             /* CP 0x30/0x40, 6-bit tex matrix indices */
+
+/* TLS_XF_LIGHTING=1 enables the emulated lighting stage (default off until measured).
+ * TLS_XF_NO_LIGHTING=1 forces it off for A/B runs on the same binary. */
+static bool xf_lighting_enabled(void) {
+    static int s_on = -1;
+    if (s_on < 0) {
+        const char* e = getenv("TLS_XF_LIGHTING");
+        s_on = (e && *e && *e != '0') ? 1 : 0;
+        if (getenv("TLS_XF_NO_LIGHTING")) s_on = 0;
+    }
+    return s_on != 0;
+}
+
+/* TLS_XF_PROBE=<frame> dumps the lighting/texture-matrix file for one frame. */
+static bool xf_probe_active(void) {
+    static int s_on = -1;
+    static uint32_t s_frame = 0;
+    if (s_on < 0) {
+        const char* e = getenv("TLS_XF_PROBE");
+        s_on = e ? 1 : 0;
+        if (e) s_frame = (uint32_t)strtoul(e, NULL, 0);
+    }
+    return s_on && s_gx_frame_idx == s_frame;
+}
+
 // CP load buffer
 static uint8_t  s_cp_buf[5];
 static uint32_t s_cp_buf_pos = 0;
@@ -424,6 +495,28 @@ void gx_pipeline_init(void) {
     s_parser_state = GX_STATE_IDLE;
     s_current_pnm_idx = 0;
     s_default_pnm_idx = 0;
+    s_current_pnm_raw = 0;
+    s_default_pnm_raw = 0;
+    /* Identity normal matrices: a batch that never received 0x400 writes must not light
+     * against a zero matrix (which would make every normal Z and the scene black). */
+    memset(s_xf_nrm_mtx, 0, sizeof(s_xf_nrm_mtx));
+    for (int i = 0; i + 8 < 96; i += 9) {
+        s_xf_nrm_mtx[i + 0] = 1.0f;
+        s_xf_nrm_mtx[i + 4] = 1.0f;
+        s_xf_nrm_mtx[i + 8] = 1.0f;
+    }
+    memset(s_xf_lights, 0, sizeof(s_xf_lights));
+    s_xf_amb_color[0] = s_xf_amb_color[1] = 0xFFFFFFFFu;
+    s_xf_mat_color[0] = s_xf_mat_color[1] = 0xFFFFFFFFu;
+    s_xf_color_ctrl[0] = s_xf_color_ctrl[1] = 0;
+    s_xf_alpha_ctrl[0] = s_xf_alpha_ctrl[1] = 0;
+    s_xf_num_chan = 1;
+    s_xf_num_texgens = 0;
+    s_xf_dualtex = 0;
+    memset(s_cp_tex_mtx, 0, sizeof(s_cp_tex_mtx));
+    for (int i = 0; i < 8; i++) {
+        s_xf_lights[i].color = 0xFFFFFFFFu;
+    }
     s_active_tex_map = 0;
     s_active_tex_coord = 0;
     s_tev_tex_enable = true;
@@ -483,8 +576,65 @@ void gx_pipeline_begin_frame(void) {
     s_tev_compare_stages = 0;
 }
 
+static void xf_probe_dump(void) {
+    printf("[XF PROBE frame %u] numChan=%u numTexGens=%u dualTex=%u\n",
+           s_gx_frame_idx, s_xf_num_chan, s_xf_num_texgens, s_xf_dualtex);
+    for (int c = 0; c < 2; c++) {
+        uint32_t cc = s_xf_color_ctrl[c], ac = s_xf_alpha_ctrl[c];
+        printf("  chan%d colour ctrl=0x%08X lit=%u matsrc=%u ambsrc=%u mask=0x%02X diff=%u attn=%u\n",
+               c, cc, (cc >> 1) & 1, cc & 1, (cc >> 6) & 1,
+               (unsigned)(((cc >> 2) & 0xF) | (((cc >> 11) & 0xF) << 4)),
+               (unsigned)((cc >> 7) & 3), (unsigned)((cc >> 9) & 3));
+        printf("  chan%d alpha  ctrl=0x%08X lit=%u matsrc=%u ambsrc=%u mask=0x%02X diff=%u attn=%u\n",
+               c, ac, (ac >> 1) & 1, ac & 1, (ac >> 6) & 1,
+               (unsigned)(((ac >> 2) & 0xF) | (((ac >> 11) & 0xF) << 4)),
+               (unsigned)((ac >> 7) & 3), (unsigned)((ac >> 9) & 3));
+        printf("  chan%d amb=0x%08X mat=0x%08X\n", c, s_xf_amb_color[c], s_xf_mat_color[c]);
+    }
+    for (int i = 0; i < XF_MAX_LIGHTS; i++) {
+        const XfLight* L = &s_xf_lights[i];
+        printf("  light%d col=0x%08X cosatt=(%.3f,%.3f,%.3f) distatt=(%.3f,%.3f,%.3f)"
+               " pos=(%.2f,%.2f,%.2f) dir=(%.3f,%.3f,%.3f)\n",
+               i, L->color, L->cosatt[0], L->cosatt[1], L->cosatt[2],
+               L->distatt[0], L->distatt[1], L->distatt[2],
+               L->pos[0], L->pos[1], L->pos[2], L->dir[0], L->dir[1], L->dir[2]);
+    }
+    for (int i = 0; i < 8; i++) {
+        printf("  texgen%d info=0x%08X post=0x%08X mtxidx=%u\n",
+               i, s_xf_texmtx_info[i], s_xf_postmtx_info[i], s_cp_tex_mtx[i]);
+    }
+    const float* nm = &s_xf_nrm_mtx[3 * (s_default_pnm_raw & 31)];
+    printf("  nrmmtx[%u] = (%.3f,%.3f,%.3f)(%.3f,%.3f,%.3f)(%.3f,%.3f,%.3f)\n",
+           s_default_pnm_raw, nm[0], nm[1], nm[2], nm[3], nm[4], nm[5], nm[6], nm[7], nm[8]);
+    printf("  viewport wd=%.3f ht=%.3f zRange=%.3f x=%.3f y=%.3f farZ=%.3f\n",
+           s_xf_viewport[0], s_xf_viewport[1], s_xf_viewport[2],
+           s_xf_viewport[3], s_xf_viewport[4], s_xf_viewport[5]);
+    /* Batch-level picture: which batches are lit, and which texcoords they can supply.
+     * This is what decides whether a lighting stage can change the frame at all. */
+    uint32_t lit_batches = 0, lit_vertices = 0, total_vertices = 0, no_uv0 = 0;
+    for (uint32_t i = 0; i < s_draw_batch_count; i++) {
+        const GxDrawBatch* b = &s_draw_batches[i];
+        total_vertices += b->vertex_count;
+        if ((b->xf_ctrl0 >> 1) & 1) {
+            lit_batches++;
+            lit_vertices += b->vertex_count;
+        }
+        if (!(b->texcoord_mask & 1)) no_uv0++;
+    }
+    printf("  batches=%u vertices=%u lit_batches=%u lit_vertices=%u batches_without_uv0=%u\n",
+           s_draw_batch_count, total_vertices, lit_batches, lit_vertices, no_uv0);
+    for (uint32_t i = 0; i < s_draw_batch_count && i < 64; i++) {
+        const GxDrawBatch* b = &s_draw_batches[i];
+        printf("  b%u: vtx=%u..%u tex=%d coord_mask=0x%02X ctrl0=0x%08X lit=%u ntexgen=%u\n",
+               i, b->vertex_offset, b->vertex_offset + b->vertex_count - 1,
+               b->has_texture ? 1 : 0, b->texcoord_mask, b->xf_ctrl0,
+               (unsigned)((b->xf_ctrl0 >> 1) & 1), b->xf_num_texgens);
+    }
+    fflush(stdout);
+}
+
 void gx_pipeline_end_frame(void) {
-    // Frame complete
+    if (xf_probe_active()) xf_probe_dump();
 }
 
 void gx_pipeline_set_vtx_desc(uint32_t attr, uint32_t type) {
@@ -606,10 +756,187 @@ void gx_pipeline_clear_texture_dirty(uint32_t unit) {
     if (unit < 8) s_tex_units[unit].dirty = false;
 }
 
+/* --- XF lighting ---------------------------------------------------------- *
+ * Dolphin's GenerateLightShader / GenerateLightingShaderHeader, ported to scalar C.
+ * Everything is 8-bit fixed point: materials and ambient colours are RGBA8 registers,
+ * the accumulator is int4 clamped to 0..255, and the result is the hardware's
+ * `mat * (lacc + (lacc >> 7)) >> 8` (i.e. mat * lacc / 255 with rounding). */
+
+static inline float xf_dot3(const float* a, const float* b) {
+    return a[0] * b[0] + a[1] * b[1] + a[2] * b[2];
+}
+
+static inline void xf_normalize3(float* v) {
+    float len2 = v[0] * v[0] + v[1] * v[1] + v[2] * v[2];
+    if (len2 <= 0.0f || isnan(len2)) return;
+    float inv = 1.0f / sqrtf(len2);
+    v[0] *= inv; v[1] *= inv; v[2] *= inv;
+}
+
+static inline float xf_roundf(float v) {
+    return (v >= 0.0f) ? floorf(v + 0.5f) : ceilf(v - 0.5f);
+}
+
+static inline int xf_clampi(int v, int lo, int hi) {
+    return v < lo ? lo : (v > hi ? hi : v);
+}
+
+/* Decode an RGBA8 XF colour word (R in bits 24..31). */
+static inline void xf_unpack_rgba8(uint32_t w, float out[4]) {
+    out[0] = (float)((w >> 24) & 0xFF);
+    out[1] = (float)((w >> 16) & 0xFF);
+    out[2] = (float)((w >> 8) & 0xFF);
+    out[3] = (float)(w & 0xFF);
+}
+
+/* One light's contribution, from GenerateLightShader(). Adds into lacc[]. */
+static void xf_light_accumulate(int index, int diffusefunc, int attnfunc,
+                               const float pos[3], const float nrm[3],
+                               int lacc[4], bool alpha_only) {
+    const XfLight* L = &s_xf_lights[index];
+    float ldir[3] = { L->pos[0] - pos[0], L->pos[1] - pos[1], L->pos[2] - pos[2] };
+    float attn = 1.0f;
+    float dist = 0.0f;
+
+    switch (attnfunc) {
+    case 0: /* None */
+    case 2: /* Dir */
+        xf_normalize3(ldir);
+        attn = 1.0f;
+        break;
+    case 1: { /* Spec: point light attenuation */
+        xf_normalize3(ldir);
+        float ndl = xf_dot3(nrm, ldir);
+        float dir[3] = { L->dir[0], L->dir[1], L->dir[2] };
+        xf_normalize3(dir);
+        attn = (ndl >= 0.0f) ? fmaxf(0.0f, xf_dot3(nrm, dir)) : 0.0f;
+        float cosatt[3] = { L->cosatt[0], L->cosatt[1], L->cosatt[2] };
+        float distatt[3] = { L->distatt[0], L->distatt[1], L->distatt[2] };
+        if (diffusefunc != 0) xf_normalize3(distatt);
+        float v[3] = { 1.0f, attn, attn * attn };
+        float num = xf_dot3(cosatt, v);
+        float den = xf_dot3(distatt, v);
+        attn = fmaxf(0.0f, num) / den;
+        break;
+    }
+    case 3: { /* Spot */
+        float dist2 = xf_dot3(ldir, ldir);
+        dist = sqrtf(dist2);
+        if (dist > 0.0f) { ldir[0] /= dist; ldir[1] /= dist; ldir[2] /= dist; }
+        float dir[3] = { L->dir[0], L->dir[1], L->dir[2] };
+        xf_normalize3(dir);
+        attn = fmaxf(0.0f, xf_dot3(ldir, dir));
+        float num = fmaxf(0.0f, L->cosatt[0] + L->cosatt[1] * attn + L->cosatt[2] * attn * attn);
+        float den = L->distatt[0] + L->distatt[1] * dist + L->distatt[2] * dist2;
+        attn = num / den;
+        break;
+    }
+    default:
+        break;
+    }
+
+    float col[4];
+    xf_unpack_rgba8(L->color, col);
+
+    if (diffusefunc == 0) { /* None: no normal term */
+        if (alpha_only) {
+            lacc[3] += (int)xf_roundf(attn * col[3]);
+        } else {
+            for (int c = 0; c < 3; c++) lacc[c] += (int)xf_roundf(attn * col[c]);
+        }
+    } else {
+        float ndl = xf_dot3(ldir, nrm);
+        float k = (diffusefunc == 2) ? fmaxf(0.0f, ndl) : ndl; /* Clamp vs Sign */
+        float s = attn * k;
+        if (alpha_only) {
+            lacc[3] += (int)xf_roundf(s * col[3]);
+        } else {
+            for (int c = 0; c < 3; c++) lacc[c] += (int)xf_roundf(s * col[c]);
+        }
+    }
+}
+
+/* Channel `chan` (0/1). Returns the lit colour in 0..1 floats. */
+static void xf_light_channel(int chan, const float base[4], const float pos[3],
+                             const float nrm[3], float out[4]) {
+    const uint32_t cctl = s_xf_color_ctrl[chan];
+    const uint32_t actl = s_xf_alpha_ctrl[chan];
+    const int mat_src_c = (int)(cctl & 1);            /* bit 0 */
+    const int lit_c = (int)((cctl >> 1) & 1);         /* bit 1 */
+    const int mask_c = (int)(((cctl >> 2) & 0xF) | (((cctl >> 11) & 0xF) << 4));
+    const int amb_src_c = (int)((cctl >> 6) & 1);     /* bit 6 */
+    const int diff_c = (int)((cctl >> 7) & 3);
+    const int attn_c = (int)((cctl >> 9) & 3);
+    const int mat_src_a = (int)(actl & 1);
+    const int lit_a = (int)((actl >> 1) & 1);
+    const int mask_a = (int)(((actl >> 2) & 0xF) | (((actl >> 11) & 0xF) << 4));
+    const int amb_src_a = (int)((actl >> 6) & 1);
+    const int diff_a = (int)((actl >> 7) & 3);
+    const int attn_a = (int)((actl >> 9) & 3);
+
+    float amb_reg[4], mat_reg[4];
+    xf_unpack_rgba8(s_xf_amb_color[chan], amb_reg);
+    xf_unpack_rgba8(s_xf_mat_color[chan], mat_reg);
+
+    int mat[4], lacc[4];
+    for (int c = 0; c < 4; c++) mat[c] = mat_src_c ? (int)xf_roundf(base[c] * 255.0f) : (int)mat_reg[c];
+    if (lit_c) {
+        for (int c = 0; c < 3; c++)
+            lacc[c] = amb_src_c ? (int)xf_roundf(base[c] * 255.0f) : (int)amb_reg[c];
+    } else {
+        lacc[0] = lacc[1] = lacc[2] = 255;
+    }
+    if (mat_src_a != mat_src_c) mat[3] = mat_src_a ? (int)xf_roundf(base[3] * 255.0f) : (int)mat_reg[3];
+    if (lit_a) lacc[3] = amb_src_a ? (int)xf_roundf(base[3] * 255.0f) : (int)amb_reg[3];
+    else lacc[3] = 255;
+
+    if (lit_c) {
+        for (int i = 0; i < XF_MAX_LIGHTS; i++)
+            if (mask_c & (1 << i)) xf_light_accumulate(i, diff_c, attn_c, pos, nrm, lacc, false);
+    }
+    if (lit_a) {
+        for (int i = 0; i < XF_MAX_LIGHTS; i++)
+            if (mask_a & (1 << i)) xf_light_accumulate(i, diff_a, attn_a, pos, nrm, lacc, true);
+    }
+    for (int c = 0; c < 4; c++) lacc[c] = xf_clampi(lacc[c], 0, 255);
+
+    for (int c = 0; c < 4; c++) {
+        int v = (mat[c] * (lacc[c] + (lacc[c] >> 7))) >> 8;
+        out[c] = (float)v / 255.0f;
+    }
+}
+
+/* Replace the vertex colour with the XF's channel-0 result (Dolphin: WriteVertexBody). */
+static void xf_lighting_compute(GxVertex* v, float px, float py, float pz) {
+    float base[4] = {
+        (float)(v->color & 0xFF) / 255.0f,
+        (float)((v->color >> 8) & 0xFF) / 255.0f,
+        (float)((v->color >> 16) & 0xFF) / 255.0f,
+        (float)((v->color >> 24) & 0xFF) / 255.0f,
+    };
+    float nrm[3] = { v->nx, v->ny, v->nz };
+    /* Normal matrix: XF 0x400 + 3 * (PosNormalMtxIdx & 31), 3 rows of 3 floats. */
+    const float* nm = &s_xf_nrm_mtx[3 * (s_current_pnm_raw & 31)];
+    float tn[3] = {
+        nm[0] * nrm[0] + nm[3] * nrm[1] + nm[6] * nrm[2],
+        nm[1] * nrm[0] + nm[4] * nrm[1] + nm[7] * nrm[2],
+        nm[2] * nrm[0] + nm[5] * nrm[1] + nm[8] * nrm[2],
+    };
+    xf_normalize3(tn);
+    const float pos[3] = { px, py, pz };
+    float lit[4];
+    xf_light_channel(0, base, pos, tn, lit);
+    if (s_xf_num_chan == 0) lit[0] = lit[1] = lit[2] = lit[3] = 0.0f; /* TEV sees zero */
+    uint32_t a = (uint32_t)(lit[3] * 255.0f + 0.5f);
+    uint32_t b = (uint32_t)(lit[2] * 255.0f + 0.5f);
+    uint32_t g = (uint32_t)(lit[1] * 255.0f + 0.5f);
+    uint32_t r = (uint32_t)(lit[0] * 255.0f + 0.5f);
+    v->color = (a << 24) | (b << 16) | (g << 8) | r;
+}
+
 static inline GxVertex transform_vertex(const GxVertex* in) {
     GxVertex out = *in;
     float vx = in->x, vy = in->y, vz = in->z;
-
     // Apply active position matrix
     float px = s_pos_matrices[s_current_pnm_idx][0][0] * vx + s_pos_matrices[s_current_pnm_idx][0][1] * vy + s_pos_matrices[s_current_pnm_idx][0][2] * vz + s_pos_matrices[s_current_pnm_idx][0][3];
     float py = s_pos_matrices[s_current_pnm_idx][1][0] * vx + s_pos_matrices[s_current_pnm_idx][1][1] * vy + s_pos_matrices[s_current_pnm_idx][1][2] * vz + s_pos_matrices[s_current_pnm_idx][1][3];
@@ -644,6 +971,11 @@ static inline GxVertex transform_vertex(const GxVertex* in) {
         out.y = py;
         out.z = pz;
         out.w = 1.0f;
+    }
+
+    /* The TEV stage's RASC input is the XF's lit channel colour, not the FIFO's CLR0. */
+    if (xf_lighting_enabled()) {
+        xf_lighting_compute(&out, px, py, pz);
     }
     return out;
 }
@@ -932,6 +1264,8 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
             b->tev_state = s_cur_tev_state;
             b->tev_texmap_mask = texmap_mask;
             b->texcoord_mask = texcoord_mask;
+            b->xf_ctrl0 = s_xf_color_ctrl[0];
+            b->xf_num_texgens = (uint8_t)s_xf_num_texgens;
             for (int m = 0; m < 8; m++) {
                 if (texmap_mask & (1u << m)) b->tev_texmap[m] = s_tex_units[m];
                 else memset(&b->tev_texmap[m], 0, sizeof(b->tev_texmap[m]));
@@ -1293,8 +1627,10 @@ static inline void decode_single_vertex(const uint8_t* attr_data, uint8_t fmt, G
 
     // Parse Position Matrix Index
     if (s_vtx_desc[0].type != GX_ATTR_NONE) {
+        s_current_pnm_raw = attr_data[0];
         s_current_pnm_idx = attr_data[offset++] / 3;
     } else {
+        s_current_pnm_raw = s_default_pnm_raw;
         s_current_pnm_idx = s_default_pnm_idx;
     }
 
@@ -1723,9 +2059,72 @@ static void gx_pipeline_process_xf(uint16_t target_addr, uint16_t word_count, co
                 memcpy(s_pos_matrices[mtx_id], mtx, sizeof(mtx));
             }
         }
-    } else if (target_addr == 0x1018 && word_count >= 1) { // MatrixIndex0
+    } else if (target_addr == 0x1018 && word_count >= 1) { // MatrixIndex0 (A)
         uint32_t val = read_u32_be(&payload[0]);
+        s_default_pnm_raw = (uint8_t)(val & 0x3F);
         s_default_pnm_idx = (uint8_t)((val & 0x3F) / 3);
+        for (int i = 0; i < 4; i++) s_cp_tex_mtx[i] = (uint8_t)((val >> (6 + 6 * i)) & 0x3F);
+    } else if (target_addr == 0x1019 && word_count >= 1) { // MatrixIndex1 (B)
+        uint32_t val = read_u32_be(&payload[0]);
+        for (int i = 0; i < 4; i++) s_cp_tex_mtx[4 + i] = (uint8_t)((val >> (6 * i)) & 0x3F);
+    } else if (target_addr >= 0x0400 && target_addr < 0x0460) {
+        /* Normal matrices: 9 floats per matrix at 3*(PosNormalMtxIdx & 31). */
+        for (uint16_t w = 0; w < word_count; w++) {
+            uint32_t a = (uint32_t)target_addr + w - 0x400;
+            if (a < sizeof(s_xf_nrm_mtx) / sizeof(s_xf_nrm_mtx[0]))
+                s_xf_nrm_mtx[a] = read_f32_be(&payload[w * 4]);
+        }
+    } else if (target_addr >= 0x0600 && target_addr < 0x0680) {
+        /* Lights: 16 words each - colour at +3, cosatt +4..+6, distatt +7..+9,
+         * position +10..+12, direction +13..+15 (Dolphin VideoCommon/XFMemory.h). */
+        for (uint16_t w = 0; w < word_count; w++) {
+            uint32_t a = (uint32_t)target_addr + w - 0x600;
+            uint32_t idx = a / 16, off = a % 16;
+            if (idx >= XF_MAX_LIGHTS) continue;
+            uint32_t word = read_u32_be(&payload[w * 4]);
+            if (off == 3) s_xf_lights[idx].color = word;
+            else if (off >= 4 && off <= 6) s_xf_lights[idx].cosatt[off - 4] = read_f32_be(&payload[w * 4]);
+            else if (off >= 7 && off <= 9) s_xf_lights[idx].distatt[off - 7] = read_f32_be(&payload[w * 4]);
+            else if (off >= 10 && off <= 12) s_xf_lights[idx].pos[off - 10] = read_f32_be(&payload[w * 4]);
+            else if (off >= 13 && off <= 15) s_xf_lights[idx].dir[off - 13] = read_f32_be(&payload[w * 4]);
+        }
+    } else if (target_addr >= 0x100a && target_addr <= 0x1011) {
+        for (uint16_t w = 0; w < word_count; w++) {
+            uint32_t a = (uint32_t)target_addr + w;
+            uint32_t val = read_u32_be(&payload[w * 4]);
+            switch (a) {
+                case 0x100a: s_xf_amb_color[0] = val; break;
+                case 0x100b: s_xf_amb_color[1] = val; break;
+                case 0x100c: s_xf_mat_color[0] = val; break;
+                case 0x100d: s_xf_mat_color[1] = val; break;
+                case 0x100e: s_xf_color_ctrl[0] = val; break;
+                case 0x100f: s_xf_color_ctrl[1] = val; break;
+                case 0x1010: s_xf_alpha_ctrl[0] = val; break;
+                case 0x1011: s_xf_alpha_ctrl[1] = val; break;
+                default: break;
+            }
+        }
+    } else if (target_addr == 0x1009 && word_count >= 1) {
+        s_xf_num_chan = read_u32_be(&payload[0]) & 3;
+    } else if (target_addr == 0x1012 && word_count >= 1) {
+        s_xf_dualtex = read_u32_be(&payload[0]) & 1;
+    } else if (target_addr >= 0x101a && target_addr < 0x1020) {
+        for (uint16_t w = 0; w < word_count; w++) {
+            uint32_t a = (uint32_t)target_addr + w - 0x101a;
+            if (a < 6) s_xf_viewport[a] = read_f32_be(&payload[w * 4]);
+        }
+    } else if (target_addr == 0x103f && word_count >= 1) {
+        s_xf_num_texgens = read_u32_be(&payload[0]) & 0xF;
+    } else if (target_addr >= 0x1040 && target_addr < 0x1048) {
+        for (uint16_t w = 0; w < word_count; w++) {
+            uint32_t a = (uint32_t)target_addr + w - 0x1040;
+            if (a < 8) s_xf_texmtx_info[a] = read_u32_be(&payload[w * 4]);
+        }
+    } else if (target_addr >= 0x1050 && target_addr < 0x1058) {
+        for (uint16_t w = 0; w < word_count; w++) {
+            uint32_t a = (uint32_t)target_addr + w - 0x1050;
+            if (a < 8) s_xf_postmtx_info[a] = read_u32_be(&payload[w * 4]);
+        }
     } else if (target_addr == 0x1020 && word_count >= 6) { // Projection
         uint32_t proj_type = (word_count >= 7) ? read_u32_be(&payload[24]) : 0;
         s_proj_is_perspective = (proj_type == 0);

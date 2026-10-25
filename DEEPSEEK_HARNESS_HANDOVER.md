@@ -2276,4 +2276,104 @@ unless `TLS_TEV`, `TLS_DEFER_EFB_COPY` or `TLS_EFB_COPY_GEOM` is set.
 Dolphin's frame dumping also needs `DumpEFBTarget = True` in `GFX.ini [Settings]` to write the
 `efb1_*` per-copy dumps; `DumpTextures` alone only dumps the game's own textures.
 
+---
+
+### 5c.20 Gamma is refuted, the XF stage is implemented, and the chain *erases the scene*
+
+Three measurements, one implementation. The first one kills the plan §5c.19 §9 opened with.
+
+#### 1. The gamma hypothesis is REFUTED, by a content-matched measurement
+
+§5c.19 §9 proposed `TLS_GAMMA_TEST` first because `v_host = v_ref^(1/2.2)` explains the *ratio* of
+two **frame averages**. Frame averages of two different framings are weak evidence, but there is a
+content-matched comparison that needs no run at all: the **gold MENU text** is the same artwork in
+both pictures, drawn by the same UI passes, so a global transfer-function difference has to show up
+there. Measured with `tools/img_stats.py` + a percentile scan (`numpy`):
+
+| image | top 0.3 % brightest pixels | p99 luminance | p50 luminance |
+|---|---|---|---|
+| host, `TLS_TEV=1`, frame 1448 | `(255,255,220)` | 155 | **0** |
+| Dolphin, `27-dolphin-menu-frame1440.png` | `(247,242,200)` | 142 | **15** |
+
+The brightest content matches within 5 % and p99 within 9 %. A 2.2-power transform would move
+those by 4-8x, not 5 %. **The host's transfer function is already the reference's.** What differs is
+`p50`: the host's *background* is pure black where the reference has the dark cave. So the defect is
+not "the scene is 3x too bright" - it is "the scene is not on screen at all". No `TLS_GAMMA_TEST`
+was added; do not add one.
+
+#### 2. `TLS_TEV=1` already draws the MENU the way the reference does - minus the background
+
+The same run (`TLS_TEV=1`, **no** `TLS_DEFER_EFB_COPY`) produces
+`build/recomp/d3d11_screenshot_1448.ppm` = a dark frame with the gold `MENU` plate and
+`CONTINUE / NEW GAME / MULTIPLAYER` with their Japanese sublabels, frame average `(7,6,4)`.
+That is structurally the reference frame; the cave behind it is missing. The old note that
+"`TLS_TEV=1` alone does not change `(124,235,255)`" (5c.16 §7) does **not** reproduce in this tree -
+the cyan field is the *no-TEV* shader's output. Re-measure that claim before trusting it again.
+
+#### 3. Per-pass map of the chain: b32 erases the scene with a copy that guest memory says is black
+
+`TLS_TEV=1 TLS_BATCH_PROBE=1448 TLS_TEV_PROBE=1448 TLS_TEV_PROBE_FROM=28`, batch averages measured
+through `probe_backbuffer_avg()` (`build/recomp/run_tev_1448.log`):
+
+| batch | what it draws | blend | frame after |
+|---|---|---|---|
+| b0..b16 | the 3D scene (40 060 of the frame's 40 188 vertices) | replace | `(7,8,8)` -> `(38,35,34)` |
+| b17..b31 | UI/particles over the scene | alpha/add | `(35,33,32)` |
+| **b32** | `0x90395DC0` 320x224 copy of the frame, s=1 d=0 | replace | **`(0,0,0)`** |
+| b33..b39 | 160x112 / 320x224 / 80x56 copies, add | replace/add | `(0,0,0)` |
+| b40 | `0x903D31C0` 320x224 (texture avg `(1,2,2)`) | s=4 d=1 | `(6,6,6)` |
+| b41 | `0x905C3000` 640x448 (texture avg `(3,6,7)`) | s=4 d=1 | `(11,12,12)` |
+| b42..b66 | UI text/logo passes | | the menu picture above |
+
+So the whole frame is *rebuilt* from EFB copies, and every copy the chain consumes reads
+`(0,0,0)`..`(3,6,7)` in guest memory. `probe_texture_avg()` decodes the guest texture, not the host
+render, so this is the destination *content*, not a sampling artefact. Two candidate causes, and
+they are separable:
+
+* the **inline copy model** reads `efb_snapshot`, i.e. the *previous* frame's finished picture - and
+  the previous frame's finished picture is this same text-over-black frame, so the loop has a black
+  fixed point. `[EfbCopySrc] reading previous-frame snapshot` is printed per copy for exactly this
+  reason.
+* the **destination geometry** (`TLS_EFB_COPY_GEOM`) makes an 80x56/160x112 destination receive a
+  640x448-sized write, so even a correct source could be decoded back as black.
+
+The 3D scene itself is `(38,35,34)` at the end of b16 against the reference's composited
+`(23,25,18)` - a factor of **1.6**, not the 3.3 that §5c.19 §9 derived from a scene-only frame
+compared against a *composited* reference. The scene is close; the chain is what destroys it.
+
+#### 4. The XF stage: lighting is off at the MENU, but the texture matrices are a real gap
+
+New probe `TLS_XF_PROBE=<frame>` dumps the whole XF file (channels, materials, lights, normal
+matrices, tex matrices, viewport) and a per-batch table. Measured at frame 1448:
+
+* `numChan=1`; channel 0 colour control `0x705` on the 3D batches = **lighting disabled**,
+  `matsource=vertex`, `ambsource=vertex`; only 2 of 67 batches / 216 of 40 188 vertices are lit at
+  all. So an unlit-vertex-colour bug is **not** the MENU's problem (it may well matter in Chapter 1).
+* `numTexGens` really varies per batch (1, 2, 3, 4, 5, 6) while the vertex descriptor supplies only
+  `TEX0`/`TEX1` (`texcoord_mask=0x03`). Every texgen is **regular** (`TexMtxInfo=0x280+0x80*i`,
+  source row `Tex(i)`), `dualTexTrans` is on and `PostMtxInfo=0x3D`. The host implements **none** of
+  that: it samples every stage with the single raw `uv0`, where hardware transforms `(u,v,1,1)` by
+  the tex matrix, then by the post matrix, and gives texcoords `>= numTexGens` the constant value
+  `vec3(0,0,0)` (Dolphin `VertexShaderGen.cpp`). This is a genuine, measured 3D gap and the next
+  thing to implement after the chain (it is what 5c.16 §8 was really seeing).
+
+**Implemented this session** (`recomp/gx_pipeline.c`, opt-in): the full XF register file plus the
+lighting equation of Dolphin's `LightingShaderGen.cpp` in 8-bit fixed point - `TLS_XF_LIGHTING=1`
+enables it, `TLS_XF_NO_LIGHTING=1` forces it off, and **the default path is unchanged** (no flag was
+promoted; the MENU does not need lighting, so there is nothing to gain from promoting it yet).
+`GxDrawBatch` now also records `xf_ctrl0` and `xf_num_texgens` so a per-batch lighting/texgen
+decision is possible without re-reading globals.
+
+#### 5. Next step for the chain (ordered)
+
+1. Capture a **MENU-phase** Dolphin corpus with `DumpEFBTarget=True` (this session started exactly
+   that run: `--frame-plan "600-612:A,900-912:A,1200-1212:A"`, i.e. stop before the save dialog, so
+   the animated MENU is dumped) and compare **per copy**, host destination vs Dolphin's dump of the
+   same `WxH` - same size, same content, no framing mismatch.
+2. Decide inline-vs-deferred with that data, not with a static-frame average: the host's inline
+   model is provably stale (`[EfbCopySrc] previous-frame snapshot`), and the deferred model has
+   never been checked against a *MENU* copy.
+3. Re-check `TLS_EFB_COPY_GEOM` on the copies the chain actually consumes (b32..b41), whose
+   destinations are 320x224 / 160x112 / 80x56 while the source rect is 640x448.
+
 

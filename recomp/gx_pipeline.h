@@ -242,6 +242,14 @@ typedef struct {
     bool depth_test_enable;
     uint8_t alpha_comp0;
     uint8_t alpha_ref0;
+    /* XF state that decides the vertex colours of this batch (diagnostics + the lighting
+     * stage). xf_ctrl0 is the raw XF 0x100e channel-0 colour control word: bit 1 is
+     * "lighting enabled", bit 0 picks the material source, bits 2..5 / 11..14 the light
+     * mask. xf_num_texgens is XF 0x103f; only texcoords below it exist on hardware and
+     * every other texcoord reads (0,0) - Dolphin writes texture_coord_i = vec3(0) for
+     * i >= numTexGens. */
+    uint32_t xf_ctrl0;
+    uint8_t xf_num_texgens;
 } GxDrawBatch;
 
 /* The TEV state snapshot attached to a batch (NULL when the index is out of range). */
