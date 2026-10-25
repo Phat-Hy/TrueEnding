@@ -4076,24 +4076,29 @@ purely because its virtual entries are ordinary function entries.**
    explains the systematic **blue/purple** hue of the frozen frame versus the red live one.
    Next: dump `TLS_BATCH_DUMP` for both 4001 and 4002 and diff the sampled `(addr, w, h, fmt)`
    sets against `TLS_EFB_CHAIN`'s writes for the same present.
-   **Both parities dumped: the batch *count* is identical and the vertex count is not.**
+   **Both parities dumped: the batch *count* matches, the batches do not.** (Corrected - an
+   intermediate reading of this said "the same 76 draw calls carry 6x fewer vertices", which the
+   per-batch dump below refutes.)
 
    ```
-   present 4001: batches=76 vtx=276471
-   present 4002: batches=76 vtx=44319     (ratio 6.24)
+   present 4001: batches=76 vtx=276471   b0..b3  untextured (addr=0x0, 0x0, fmt=0)
+   present 4002: batches=76 vtx=44319    b0..b3  textured 256x256/512x256 fmt=14 (CMPR)
    ```
 
-   The same 76 draw calls on both, with ~6x fewer vertices on the even one, so this is not an
-   omitted pass and not a truncated buffer. Ruled out on the way: `gx_pipeline_begin_frame()` is
-   called exactly **once per runner frame** (`host_runner.c:1183`, top of the frame loop) and
-   `d3d11_present` once at `:1297`, so the accumulation window is the same for both; and the
-   vertex buffer is `GX_MAX_BATCH_VERTICES = 1<<20`, far above 276k, so nothing is being dropped for
-   capacity. So the *guest* is genuinely issuing the same 76 draws with far fewer primitives on
-   even frames - which is either a real LOD/visibility difference in the game or the guest replaying
-   a display list whose transform data was only loaded on the odd frame. Next: compare a single
-   batch's vertex bounds between 4001 and 4002 (the `TLS_BATCH_DUMP` `ndc=[...]` field already
-   carries them) - if a batch's vertex count collapses but its bounds stay the same, the guest is
-   re-submitting a coarser version of the same geometry.
+   The same *count*, but different textures, different vertex counts and different bounds - so the
+   two parities are running **different command streams**, not the same stream at a different
+   amplitude. `b1` alone is 2994 vertices on 4001 and 19155 on 4002, and the odd frame's leading
+   batches carry **no texture at all** while the even frame's are all CMPR-textured.
+   Ruled out on the way: `gx_pipeline_begin_frame()` runs exactly **once per runner frame**
+   (`host_runner.c:1183`, top of the loop) and `d3d11_present` once at `:1297`, so the accumulation
+   window is identical; and the vertex buffer is `GX_MAX_BATCH_VERTICES = 1<<20`, far above 276k, so
+   nothing is dropped for capacity.
+   So either the game genuinely renders two different ways on alternate frames (a compositing or
+   double-buffer scheme the host is exposing rather than hiding), or one parity is submitting a
+   display list the host is executing against stale state. Next: dump a *whole* frame's batch list
+   for both parities side by side (raise `TLS_BATCH_DUMP_MAX`) and look for a pair of batches that
+   are the same geometry - the untextured leading batches on odd frames are the most unusual datum
+   in the whole dump and deserve naming.
    Still worth chasing from round 2's data: the last copy of an odd frame is the guest's own
    **scanout**, `copy=9 dst=0x900997E0 640x448 xfb=1 fmt=0` - `0x900997E0` is the hardcoded VI
    fallback address in `host_runner.c:1294` and `fmt=0` is **R4**. It prints no "not implemented"
