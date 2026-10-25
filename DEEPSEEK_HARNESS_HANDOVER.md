@@ -3311,3 +3311,25 @@ TLS_INPUT_SCRIPT='600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A' \
 TLS_TEV=1 TLS_DEFER_EFB_COPY=1 TLS_NAND_PROBE=1  tls_runner.exe --frames 2804
 # B: same with TLS_ISFS_SERVICE=1
 ```
+
+#### 13. Where the save-create flow actually stops (measured, three runs)
+
+* **Mode 11 is input-gated.** With `UP`+`A` at 1440/1500 only, the trace stops at
+  `9 -> 11` (frame 1584) and stays. Adding A presses at 1600/1700/1800 advances
+  `11 -> 12 -> 16 -> 17 -> 18 -> 19 -> 20 -> 22 -> 25` (frames 1601..1639). So mode 11 is a
+  prompt waiting for a button, not a hang.
+* **Mode 25 is not input-gated and not blocked on a thread.** With A presses every 100
+  frames through frame 2400 the trace is identical (mode 25 from 1639, still 25 at 3004).
+  `TLS_SLEEP_TAIL=1` shows the only sleeps after that point are the ordinary VI-retrace
+  waits (`thread=0x807CB658 queue=0x807C6F60 lr=0x80071D08`, one per frame 2372..2400+).
+  So the title task is looping normally, drawing the cave backdrop, with its load/game
+  handoff never signalled - a logic dead end in the title's own state machine, not a
+  missing wakeup and not an ISFS answer.
+* `TLS_ISFS_SERVICE=1` does not change this (section 12): both settings reach the same
+  place, one via mode 11 directly sampled and one via 25.
+
+Consequence for the next session: the "save-data verdict" thread is *finished* as a
+diagnosis - the dialog is the game's ordinary first-boot confirm, answering Yes runs the
+whole create path, and the remaining stop is the title's post-create handoff (mode 25).
+Instrument **mode 25's handler** (find who reads `task+0x2AC == 25` and what it waits for)
+rather than the NAND layer.
