@@ -1582,6 +1582,46 @@ Both are cheap to test now that `TLS_BATCH_PROBE` exists: change one thing, run 
   (the same binary passes), but it is unexplained and it looks like the §5c.9 family of failures. Worth a
   `TLS_ALLOC_PROBE=1` + `TLS_TAIL_RING` run if it reproduces.
 
+#### 7d. The tail quads have a WHITE vertex colour, so the additive passes add at full strength
+
+`TLS_BATCH_PROBE` now prints `col0` (the first vertex colour) as well. Frame 1450, deferred mode:
+
+```
+b33 0x90395DC0 replace s=1 d=0 col=0xFFFFFFFF     (62,59,53)
+b34 0x9038D1C0 replace s=1 d=0 col=0xFFFFFFFF     (36,41,42)
+b35 0x9038D1C0 blend  s=2 d=0 col=0xFFFFFFFF      (0,1,1)       <-- squaring, blackens
+b36 0x903917C0 add    s=4 d=1 col=0xFFFFFFFF      (0,1,1)
+b37 0x9038D1C0 add    s=4 d=1 col=0xFFFFFFFF      (0,1,1)
+b38 0x903DBDC0 replace s=1 d=0 col=0xFFFFFFFF     (44,43,37)
+b40 0x9038D1C0 add    s=4 d=1 col=0xFFFFFFFF      (80,84,80)    +36
+b41 0x903D31C0 add    s=4 d=1 col=0xFFFFFFFF      (132,140,132) +52
+b42 0x905C3000 add    s=4 d=1 col=0xFFFFFFFF      (160,170,164) +28
+b48 0x905C3000 add    s=4 d=1 col=0xFFFFFFFF      (230,235,230) +69
+b50 0x9038D1C0 add    s=4 d=1 col=0xFFFFFFFF      (254,254,254)
+b52 0x9038D1C0 blend  s=4 d=5 col=0xFFFFFFFF      (255,255,255) saturated
+```
+
+Every composite quad except the last few logos carries `col0 = 0xFFFFFFFF`, so
+`texColor.rgb * input.color.rgb` is no modulation at all and `src=SRCALPHA/dst=ONE` adds the
+**full** texture. The additions (+36, +52, +28, +69) are therefore exactly the source textures'
+average brightness, which is why five additive passes drive 0.17 -> 1.0.
+
+`b35`'s `s=2 d=0` (`SRCCLR/ZERO`, i.e. `dst = src*src`) is very likely a legitimate cheap GX
+bright-pass - squaring crushes the darks and keeps the brights - so it is probably *not* the bug.
+What makes the chain saturate is that the additions run at full strength.
+
+**Conclusion: what is missing is the TEV alpha/colour stage.** `gx_ps_alpha` computes
+`alpha = texColor.a * va`; both `va` and the EFB alpha are ~1 for the 3D pass, so every additive
+composite quad contributes 100%. Real GX runs those quads through a TEV stage that scales RGB and
+alpha before the blend, which is exactly the machinery AGENTS.md already notes as absent (the "ink
+matte" workaround for the logo plate is a local patch over the same gap). Implementing the TEV
+colour/alpha combiners is therefore the next real milestone for the MENU background, not another
+EFB-copy tweak.
+
+Note also that the original (inline, previous-frame) copy source produced a *cyan* field, and cyan
+appears nowhere in the squaring/additive arithmetic above - so it comes from a texture, not from the
+chain maths. That is a second, separate reason the two modes differ.
+
 #### 8. Run recipes used this session
 
 ```powershell

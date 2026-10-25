@@ -1967,10 +1967,10 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                         if (s_probe_frame >= 0 && (int)s_d3d11_dump_count == s_probe_frame) {
                             unsigned pr, pg, pb;
                             probe_backbuffer_avg(&pr, &pg, &pb);
-                            printf("[BatchProbe] frame=%d after b%u (voff=%u vcnt=%u tex=0x%08X blend=%d s=%u d=%u): avg=(%u,%u,%u)\n",
+                            printf("[BatchProbe] frame=%d after b%u (voff=%u vcnt=%u tex=0x%08X blend=%d s=%u d=%u col0=0x%08X): avg=(%u,%u,%u)\n",
                                    s_d3d11_dump_count, b, batch->vertex_offset, batch->vertex_count,
                                    batch->tex.guest_addr, batch->blend_enable, batch->src_factor,
-                                   batch->dst_factor, pr, pg, pb);
+                                   batch->dst_factor, gx_vtx[batch->vertex_offset].color, pr, pg, pb);
                             fflush(stdout);
                         }
                     }
