@@ -6422,6 +6422,15 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             memcpy(&f_100, &u100, 4); memcpy(&f_104, &u104, 4); memcpy(&f_a0, &ua0, 4);
             static int s_layout_draws = 0;
             s_layout_draws++;
+            /* Test the 5c.27 s9.4 lead's foundation: do DRAWN LayoutTasks generally carry a
+             * self-pointer at +4, or is +4 just uninitialised residue? If drawn tasks show a
+             * variety of +4 values (including 2), then +4 is not the discriminator and the
+             * whole "slot 1's +4 == 2 means unlinked" reading should be dropped. */
+            if (tls_scene_sm_probe_on() && s_layout_draws <= 24) {
+                printf("[TLS SceneSM] DRAW obj=0x%08X p4=0x%08X (self-8=0x%08X) p0=0x%08X\n",
+                       obj, obj ? mem_read32(ctx, obj + 4) : 0, obj - 8u, obj ? mem_read32(ctx, obj) : 0);
+                fflush(stdout);
+            }
             if (obj == 0x8114EAE0 || s_layout_draws <= 5 || s_layout_draws % 60 == 0) {
                 printf("[TLS LayoutTask::Draw] #%d obj=0x%08X fc=0x%08X (b1=%u,b4=%u) f38=0x%08X f100=%.2f f104=%.2f fa0=%.2f cnt48=%u\n",
                        s_layout_draws, obj, f_fc, (f_fc >> 30) & 1, (f_fc >> 27) & 1, f_38, f_100, f_104, f_a0, cnt48);

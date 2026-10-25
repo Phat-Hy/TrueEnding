@@ -4307,7 +4307,23 @@ purely because its virtual entries are ordinary function entries.**
    pattern scan in this project with a relaxed window before believing a negative.
    **Next**: find the activation step - the one that writes `payload+4` - and compare its behaviour
    for `0x8186DF60` against `0x81863F60`. That should name the missing call.
-   **The window is now a dozen frames wide.** Sampling `payload+4` on every change of the machine:
+   **THE `+4` LEAD IS DEAD - verified this round, drop it.** Every reading above assumed that
+   `payload+4 != 2` means "linked/parented" and therefore drawn. That is false. Printing `+4` for
+   every drawn `LayoutTask` shows the one actually being rendered in the Chapter-1 window has
+
+   ```
+   DRAW obj=0x8108E040  p4=0x00000000  (self-8=0x8108E038)  p0=0x80782C08
+   ```
+
+   `+4 == 0`, not a self-pointer. So a task with `+4 == 0` draws fine, and slot 1's `2` therefore has
+   **no causal bearing on whether it is drawn**. Rounds 13-18 built a chain of inference on this
+   field; all of it is void, including the `addi -8`/`stw 4` searches and the "activation step"
+   hypothesis. Do not spend another round on `LayoutTask+4`.
+   What survives from those rounds, and is worth keeping: the payload factory (`0x801F3FF8`, alloc
+   272/align 8, ctor `0x801F407C`), the fact that the ctor does not initialise `+4` (so it is
+   uninitialised/residue, which is exactly why it differs), and the **`w7` chain**: `PAY0.w7 ->
+   PAY1 -> 0x81858540`, i.e. the payloads form a linked list that something walks. If `PAY0` is
+   drawn and `PAY1` is not, the question is where that walk stops, not what `+4` says.
 
    ```
    f=3414  p0=0x8186DF60 (pay0.p4=0x8186DF58)   p1=0x81863F60 (pay1.p4=0x00000002)
