@@ -2171,6 +2171,20 @@ static void tls_scene_sm_enter(CPUState* ctx, u32 task) {
                 for (i = 0; i < 10; i++) printf(" %08X", mem_read32(ctx, sub + i * 4));
                 printf("\n");
             }
+            /* Phase 13's only exits (0x8036B134..0x8036B174):
+             *   obj = *(task+0x56EC)
+             *   if ((obj->[0x38] & 2) == 2 && obj->[0x88] == 0)  fn_805BA358(next+608)
+             *   else if (obj->[0x88] == 4)                        fn_80376568(task)
+             * so these two words are the whole decision. */
+            {
+                u32 o56ec = mem_read32(ctx, task + 0x56EC);
+                u32 ok    = (o56ec >= 0x80000000u && o56ec < 0x83000000u) ? o56ec : 0;
+                u32 o38   = ok ? mem_read32(ctx, ok + 0x38) : 0;
+                u32 o88   = ok ? mem_read32(ctx, ok + 0x88) : 0;
+                printf("[TLS SceneSM] f=%d PH13OBJ obj=0x%08X o38=0x%08X (bit1=%u) o88=%u (%s)\n",
+                       g_runner_current_frame, ok, o38, (o38 >> 1) & 1u, o88,
+                       (o88 == 0) ? "zero" : (o88 == 4 ? "FOUR" : "other"));
+            }
         }
         printf("[TLS SceneSM] f=%d GATES state=%u ctr=%u/21600 f54e4=%u f54e8=%u f54ec=%u | "
                "gA=0x%08X gA404=%u | gB=0x%08X gB72=0x%08X b12a4=0x%08X bC48=0x%08X | "

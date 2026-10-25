@@ -3986,12 +3986,19 @@ last action of this session. Nothing here touches the title path.
 
 #### 7. Work order, revised
 
-1. **`*(task+0x56EC)`, fields `+0x38` and `+0x88`** - the only exits from phase 13. Dump them: if
-   `obj->[0x88]` should reach 4 the body calls `fn_80376568(task)`; if `(obj->[0x38] & 2) == 2` and
-   `+0x88 == 0` it calls `fn_805BA358(next+608)`. One of those is the successor.
-2. **Decide whether phase 13 is the right successor at all.** `fn_8036E170` only accepts phases
+1. **`*(task+0x56EC)`, fields `+0x38` and `+0x88`** - the only exits from phase 13. **Measured:**
+   the object is 0 until phase 13, then `obj = 0x81858DE0` with `o38 = 0x00000022` (bit 1 set, so
+   the first half of the condition is already satisfied) and **`o88 = 1`**, and it is still 1 at
+   every later sample (3564, 3804, 4044). Neither branch can run: the first needs `o88 == 0`, the
+   second needs `o88 == 4`. So the next question is exactly "what moves `0x81858DE0 + 0x88` from 1
+   to 4", and naming that object names the subsystem.
+2. **`fn_803E4478` is the acknowledge/commit step, and it is what makes the gate one-shot.** It
+   zeroes `g2+0xD8C` (`0x803E4488 stw r0, 3468(r3)` - the same word the phase-0 gate tests) plus
+   `0xD80/0xD84/0xD88/0xD78`, and ORs `0x4` into `*(g2+0xD70)+0x38` and `*(g2+0xD74)+0x38`. So the
+   gate cannot re-arm: whatever re-arms it has to be a later phase, not a retry.
+3. **Decide whether phase 13 is the right successor at all.** `fn_8036E170` only accepts phases
    0, 3 and 14, which suggests the authored sequence is 0 -> 3/14 -> ..., and phase 13 may be a
-   branch the A press selected rather than the main line. Cross-check `fn_803E4478` (what it sets).
-3. Input plans from now on must respect the **one-update edge**: press, release, press again.
-4. Unchanged: the alternate-frame parity (5c.26 §5 - not the YUYV fallback), EFB format 0/R4,
+   branch the A press selected rather than the main line.
+4. Input plans from now on must respect the **one-update edge**: press, release, press again.
+5. Unchanged: the alternate-frame parity (5c.26 §5 - not the YUYV fallback), EFB format 0/R4,
    the title input race, the allocator cycle.
