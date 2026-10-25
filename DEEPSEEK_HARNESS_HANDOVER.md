@@ -4251,13 +4251,21 @@ purely because its virtual entries are ordinary function entries.**
    Scanning for a `lis 0x8078` + `addi +0x2C08` pair that materialises `0x80782C08` finds **nothing** -
    so the vtable is copied out of a data table rather than built inline, and that search route is a
    dead end.
-   **Caveat before chasing this further**: "slot 1's LayoutTask is never drawn" has two very
-   different explanations and they have not been separated yet - (a) a host-side bug that fails to
-   link an object the guest did queue, or (b) the guest deliberately keeping that layout inactive
-   until some *other* condition is met, in which case the LayoutTask is a **red herring** and the real
-   gate is that other condition. Distinguish them before doing more work here: if the guest never
-   queued the link, no amount of host fixing will help, and the two payloads being created
-   back-to-back with sequential ids (`0x0A93`/`0x0A94`) is equally consistent with both.
+   **The (a)/(b) caveat is now resolved in favour of (a) - by data already on hand.** The earlier
+   worry was that the guest might be deliberately parking slot 1's layout, making the LayoutTask a red
+   herring. But **slot 0's payload *is* linked and *is* drawn** (`+4 = 0x8186DF58`, i.e. a valid
+   parent/base pointer, and `LayoutTask::Draw` runs on it every sampled frame). That proves the linking
+   mechanism works normally for objects created by the same code, in the same frame, from the same
+   sequential id range. So slot 1's `+4 = 2` is an **asymmetry**, not a policy - one of a matched pair
+   was linked and the other was not. That is a host-side or state-machine-side bug, not the guest
+   parking it.
+   **Refined reading of the field**: `+4` is not a ring node pointing at itself - slot 0's value is
+   `PAY0 - 8`, which reads as a **parent/owner pointer to a base at `this-8`**, not a list node.
+   Slot 1's `2` is then "parent never set". That is the field to chase: find who assigns
+   `LayoutTask+4` a parent and why slot 1's is unset. It will not be found by an
+   `addi rX, rA, -8` + `stw rX, 4(rA)` pattern (scanned: no hits) and it is not a global list
+   (scanned: no external references), so look for `stw rX, 4(rY)` where `rX` came from a call result
+   or a register holding another object.
    **Verified unchanged after the texture-hash fix**: phase 13 still reaches `o88=3` at 3602, falls
    back to `o88=1` with the counter at 1 at 3604, and stays there through 4524. The rendering fix and
    the intro stall are independent.
@@ -4271,3 +4279,51 @@ purely because its virtual entries are ordinary function entries.**
 
 7. Unchanged: the title input race (and its effect on the invariant check), the allocator cycle
    (5c.22 s3).
+
+
+---
+
+### 5c.28 Chapter-1 thread: consolidated status after rounds 1-13
+
+Written because this thread now spans many sessions and the useful facts are scattered through
+5c.25-5c.27. Read this first, then the section it cites.
+
+**FIXED and verified**
+* **EFB copy destination format 1 (R8)** - 5c.26 §6. The eight
+  `destination format 1 not implemented` lines are gone.
+* **EFB copy destination format 0 (R4)** - 5c.27 §9 item 2. Written as the exact inverse of this
+  file's own `decode_gx_texture` `case 0`. Format warnings are now zero in the Chapter-1 chain.
+  Measured to change nothing visually in the loop (the R4 destinations are not on its path).
+* **The stale/byte-identical alternate frame** - 5c.27 §9 item 1. Root cause was a texture-cache
+  content hash sized as `width*height/8` *words* (0.5 bytes/texel for every format), so an RGBA8
+  destination had only its first 1/8 hashed and EFB rewrites past that were invisible. Fixed in
+  `gfx_d3d11.c` (`TLS_TEX_HASH_FULL`, default on). Presents 4002/4004/4006 now all differ.
+* **The 3-A present-1448 invariant**: `mean (102,188,205) p10 69 p50 203 p90 203 p99 206`,
+  re-verified after every change. Caveat from 5c.27 §9: the title *also* alternates between two
+  halves, and 1448 lands on one of them - so this is a regression guard, not a correctness target.
+
+**OPEN**
+1. **The intro still never leaves phase 13** (the objective's headline question, 5c.27 §8b/§9.4).
+   Chain of facts, all measured: outer state 0 -> an A press at frame 3400 opens the phase-0 gate ->
+   `PHASE 0 -> 13` at 3402 with `+0x54F0` cleared (the value `GameTask::Init` turns into outer state
+   1) -> phase 13 waits for `waiter+0x88 == 4` -> `+0x88` needs the 4-slot list at `waiter+0x474` to
+   advance -> the counter sticks at 1 because slot 1's `w10` never arrives -> slot 1's payload is a
+   **LayoutTask that is allocated and never linked** (`+4 == 2` instead of a parent pointer).
+   Slot 0's payload, created in the same frame from a sequential id, links and draws normally, so
+   this is an asymmetry, not guest policy. **Next: find who assigns `LayoutTask+4` and why slot 1's
+   is unset.**
+2. **The two halves are still presented separately.** The host presents once per emulated frame;
+   Chapter-1 is two-pass (odd = opaque geometry, even = blended composite, both clearing to black,
+   `xfbs=1` only on the even/composite frame). `TLS_PRESENT_ON_XFB=1` implements the faithful gate
+   and is safe for the title (which has `xfbs=1` on every frame) but is default **OFF** because
+   boot/strap screens are unmeasured and the 1448 invariant cannot validate a present-only change.
+3. **R8 tiling is still 4x4 while R8 is an 8x4 format** (5c.27 §9.3), behind `TLS_R8_TILE_8X4`,
+   default off. Unvalidated: no reference, and the title's bloom chain uses R8.
+
+**Instruments that exist now** (all TLS-gated, inert by default)
+`TLS_SCENE_SM_PROBE` (scene machine, phases, gates, waiter records + payload dumps + one-shot
+reference scan), `TLS_PRESENT_PROBE` + `TLS_PRESENT_WINDOW` (per-frame batches/blended/clears/xfbs),
+`TLS_PRESENT_ON_XFB`, `TLS_TEX_HASH_FULL`, `TLS_R8_TILE_8X4`, `TLS_EFB_SRC_CURRENT`,
+`TLS_EFB_CHAIN`, `TLS_BATCH_DUMP`, `TLS_MODE25_PROBE`, and `tools/chain_run.ps1` (retries the chain
+until `SetNextSequence('Game')` appears - **use it for every Chapter-1 measurement**, because a run
+that died on the title input race prints no probe output at all and looks like a broken probe).
