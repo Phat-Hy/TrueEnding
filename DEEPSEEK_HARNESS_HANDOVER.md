@@ -4230,11 +4230,22 @@ purely because its virtual entries are ordinary function entries.**
    * `w11`: `0x3E828284` (0.2549f) vs `1`;
    * `w14`: `0x26` (38) vs `6`.
    Next: find who writes `LayoutTask+4` (the list node) and why it stays `2` for slot 1's payload.
-   **Partial answer already**: a scan of the class's own method range (`0x801F4000..0x801F4800`,
-   which holds the vtable's functions `0x801F4230`, `0x801F42A8`, `0x801F43E8`, `0x801F4514` Draw)
-   finds **no** `stw ..., 4(rX)` at all - so `+4` is written by an *external manager* that links
-   LayoutTasks into a draw list, not by the task itself. That matches the symptom exactly: slot 1's
-   payload was never handed to that manager.
+   **Scan result: neither payload is held by any global or manager list.** One-shot memory scan at
+   frame 3604 over `0x80B00000..0x80E00000` (globals) and `0x81000000..0x81A00000` (the heap these
+   objects live in):
+
+   ```
+   SCAN 0x8186DF60 (slot 0) refs: 0x81858DF8 0x81859258            total=2
+   SCAN 0x81863F60 (slot 1) refs: 0x818592A4 0x8186DF7C            total=2
+   ```
+
+   `0x81859258` / `0x818592A4` are the records' own `w1` fields, `0x81858DF8` is waiter`+0x18`, and
+   `0x8186DF7C` is slot 0's payload `w7` - i.e. slot 0 points at slot 1. **Nothing else references
+   either payload.** So the round-10 phrase "an external manager that received it and failed to link
+   it" is wrong as stated: no list anywhere holds these pointers. The `+4` field is an **intrusive
+   ring node** (linked = pointer to self-minus-8, unlinked = `2`), and the draw path must reach the
+   payload through the record chain from the waiter, not through a global list. Search accordingly -
+   do not go looking for a manager that stores `0x81863F60`.
    Class addresses for the next session: vtable `0x80782C08`; functions `0x801F4230`, `0x801F42A8`,
    `0x801F43E8`, `0x801F4514` (Draw, already instrumented).
    Scanning for a `lis 0x8078` + `addi +0x2C08` pair that materialises `0x80782C08` finds **nothing** -

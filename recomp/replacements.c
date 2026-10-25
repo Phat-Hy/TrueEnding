@@ -4938,6 +4938,34 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                             }
                         }
                         fflush(stdout);
+                        /* Settle the (a)/(b) ambiguity: did the GUEST keep a reference to slot 1's
+                         * payload anywhere? A manager that received it and failed to link it leaves
+                         * references behind; a layout the guest deliberately parked leaves few or
+                         * none. One-shot scan over the globals region and the heap where these
+                         * objects live (0x8186xxxx), so the cost stays bounded. */
+                        {
+                            u32 tgt[2];
+                            int t;
+                            tgt[0] = mem_read32(ctx, ok + 0x474u + 4u);
+                            tgt[1] = mem_read32(ctx, ok + 0x474u + 76u + 4u);
+                            for (t = 0; t < 2; t++) {
+                                u32 lo[2] = { 0x80B00000u, 0x81000000u };
+                                u32 hi[2] = { 0x80E00000u, 0x81A00000u };
+                                int r, cnt = 0;
+                                printf("[TLS SceneSM] f=%d SCAN 0x%08X refs:", g_runner_current_frame, tgt[t]);
+                                for (r = 0; r < 2; r++) {
+                                    u32 a;
+                                    for (a = lo[r]; a < hi[r]; a += 4u) {
+                                        if (mem_read32(ctx, a) == tgt[t]) {
+                                            if (cnt < 12) printf(" 0x%08X", a);
+                                            cnt++;
+                                        }
+                                    }
+                                }
+                                printf("  total=%d\n", cnt);
+                                fflush(stdout);
+                            }
+                        }
                     }
                 }
             }
