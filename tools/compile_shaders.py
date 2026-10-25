@@ -251,6 +251,23 @@ float TevAlphaArg(uint idx, float4 prev, float4 c0, float4 c1, float4 c2,
     return 0.0f;
 }
 
+/* The compare stages need the four alpha sources as float4 because GR16/BGR24 compare
+ * the *colour* channels of an alpha-combiner argument; only the alpha channel matters
+ * for A8, so the colour triple is carried through unchanged. */
+float4 TevAlphaArg4(uint idx, float4 prev, float4 c0, float4 c1, float4 c2,
+                    float4 tex, float4 ras, float4 konst)
+{
+    float a = TevAlphaArg(idx, prev, c0, c1, c2, tex, ras, konst);
+    float4 src = prev;
+    if (idx == 1) src = c0;
+    else if (idx == 2) src = c1;
+    else if (idx == 3) src = c2;
+    else if (idx == 4) src = tex;
+    else if (idx == 5) src = ras;
+    else if (idx == 6) src = konst;
+    return float4(src.rgb, a);
+}
+
 /* GX TEV "regular" stage: (d (op) lerp(a,b,c) + bias) * scale, then clamp.
  * The hardware's lerp works in 8-bit fixed point with c pre-scaled by 256/255,
  * which is a sub-1/255 difference; the structure is what matters here. */
@@ -282,11 +299,66 @@ float TevRegular1(float a, float b, float c, float d,
     return r;
 }
 
-/* TEV compare stages (bias == 3) pack fixed-point comparisons of the rasterised
- * source into the destination register. They are rare; instead of guessing, this
- * host reports every batch that needs one (TLS_TEV_PROBE) and treats the stage as
- * a pass-through so the rest of the chain stays intact. */
-bool TevCompareNeeded() { return false; }
+/* TEV compare stages (bias == 3). Dolphin VideoCommon/PixelShaderGen.cpp:1473-1536:
+ *     out = clamp(d + cmp)        GT: (a > b) ? c : 0      EQ: (a == b) ? c : 0
+ * and the comparison is done in 8-bit fixed point in one of four modes taken from bits
+ * 20..21 (which hold `scale` in a regular stage):
+ *     0 = R8     (a.r vs b.r)
+ *     1 = GR16   (a.r + a.g*256)
+ *     2 = BGR24  (a.r + a.g*256 + a.b*65536)
+ *     3 = RGB8   per channel: GT -> max(sign(a-b),0)*c, EQ -> (1-sign(|a-b|))*c
+ * The alpha combiner uses the same packing with A8 in place of RGB8. There is no
+ * scale multiply in a compare stage (Dolphin writes only the clamp). */
+float3 TevCompare3(uint mode, uint eq, float3 a, float3 b, float3 c, float3 d, uint clampv)
+{
+    int3 ia = (int3)round(a * 255.0f);
+    int3 ib = (int3)round(b * 255.0f);
+    float3 r = float3(0.0f, 0.0f, 0.0f);
+    if (mode == 0u) {
+        bool t = (eq != 0u) ? (ia.x == ib.x) : (ia.x > ib.x);
+        r = t ? c : float3(0.0f, 0.0f, 0.0f);
+    } else if (mode == 1u) {
+        int va = ia.x + ia.y * 256, vb = ib.x + ib.y * 256;
+        bool t = (eq != 0u) ? (va == vb) : (va > vb);
+        r = t ? c : float3(0.0f, 0.0f, 0.0f);
+    } else if (mode == 2u) {
+        int va = ia.x + ia.y * 256 + ia.z * 65536, vb = ib.x + ib.y * 256 + ib.z * 65536;
+        bool t = (eq != 0u) ? (va == vb) : (va > vb);
+        r = t ? c : float3(0.0f, 0.0f, 0.0f);
+    } else {
+        if (eq != 0u) r = (float3(1.0f, 1.0f, 1.0f) - (float3)sign(abs(ia - ib))) * c;
+        else          r = (float3)max(sign(ia - ib), int3(0, 0, 0)) * c;
+    }
+    float3 o = d + r;
+    if (clampv) o = saturate(o);
+    return o;
+}
+
+float TevCompare1(uint mode, uint eq, float4 a, float4 b, float4 c, float d, uint clampv)
+{
+    int3 ia = (int3)round(a.rgb * 255.0f);
+    int3 ib = (int3)round(b.rgb * 255.0f);
+    int aa = (int)round(a.a * 255.0f), ab2 = (int)round(b.a * 255.0f);
+    float r = 0.0f;
+    if (mode == 0u) {
+        bool t = (eq != 0u) ? (ia.x == ib.x) : (ia.x > ib.x);
+        r = t ? c.a : 0.0f;
+    } else if (mode == 1u) {
+        int va = ia.x + ia.y * 256, vb = ib.x + ib.y * 256;
+        bool t = (eq != 0u) ? (va == vb) : (va > vb);
+        r = t ? c.a : 0.0f;
+    } else if (mode == 2u) {
+        int va = ia.x + ia.y * 256 + ia.z * 65536, vb = ib.x + ib.y * 256 + ib.z * 65536;
+        bool t = (eq != 0u) ? (va == vb) : (va > vb);
+        r = t ? c.a : 0.0f;
+    } else {
+        bool t = (eq != 0u) ? (aa == ab2) : (aa > ab2);
+        r = t ? c.a : 0.0f;
+    }
+    float o = d + r;
+    if (clampv) o = saturate(o);
+    return o;
+}
 
 bool TevAlphaTest(float alpha, uint packed)
 {
@@ -358,8 +430,13 @@ float4 PSTev(PSInput input) : SV_Target
 
         float3 rgb;
         if (cbias == 3) {
-            // compare stage: not evaluated (reported), pass the previous colour through
-            rgb = prev.rgb;
+            // compare stage: bits 20..21 are compare_mode, bit 18 is GT/EQ
+            rgb = TevCompare3(cscale, cop,
+                              TevColorArg(carg.x, prev, r0, r1, r2, texel, ras, konst_c),
+                              TevColorArg(carg.y, prev, r0, r1, r2, texel, ras, konst_c),
+                              TevColorArg(carg.z, prev, r0, r1, r2, texel, ras, konst_c),
+                              TevColorArg(cd,    prev, r0, r1, r2, texel, ras, konst_c),
+                              cclamp);
         } else {
             rgb = TevRegular3(TevColorArg(carg.x, prev, r0, r1, r2, texel, ras, konst_c),
                               TevColorArg(carg.y, prev, r0, r1, r2, texel, ras, konst_c),
@@ -380,7 +457,13 @@ float4 PSTev(PSInput input) : SV_Target
 
         float alpha;
         if (abias == 3) {
-            alpha = prev.a;
+            // compare stage: alpha mode A8 == RGB8 (3), same compare packing
+            alpha = TevCompare1(ascale, aop,
+                                TevAlphaArg4(aarg, prev, r0, r1, r2, texel, ras, konst_c),
+                                TevAlphaArg4(ab,   prev, r0, r1, r2, texel, ras, konst_c),
+                                TevAlphaArg4(ac2,  prev, r0, r1, r2, texel, ras, konst_c),
+                                TevAlphaArg(ad,    prev, r0, r1, r2, texel, ras, konst_c),
+                                aclamp);
         } else {
             alpha = TevRegular1(TevAlphaArg(aarg, prev, r0, r1, r2, texel, ras, konst_c),
                                 TevAlphaArg(ab,   prev, r0, r1, r2, texel, ras, konst_c),
