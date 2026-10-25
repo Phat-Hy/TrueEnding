@@ -3492,7 +3492,18 @@ session's thread: find the condition it is testing and whether it ever becomes t
 visibly moving.
 
 Neutral inputs do not break it: A every 100 frames from 1900 to 6900 and START/PLUS at
-5000/6000 both leave the 600-frame loop untouched (identical hashes at 5401/6001/6601).
+5000/6000 both leave the 600-frame loop untouched (identical hashes at 5401/6001/6601), and
+**holding UP for 1000 frames (4000..5000) changes nothing either** - frames 4501/5001 come back
+byte-identical to the no-input run (`c1bf3388`, `46265b45`). So this is not "gameplay waiting
+for the player": no direction, no A, no START reaches a handler.
+
+`TLS_TRACE_FROM=4000` shows what *is* running each frame: the sequence manager
+(`0x80BB5CC0`), one task object `0x81127AE0` (vt `0x8078A3D0`) calling `0x80368280` - a large
+scene state machine that advances a counter at `+0x5744` and dispatches on a state word at
+`+0x5538` through the table at `0x8079A268` (states 0..9). So the scene loop is a *scene state
+machine* sitting in one state, not a load wait: the next instrument belongs on `+0x5538` and on
+what that state's handler is waiting for, the same way this session's instrument belonged on
+`task+0x2AC`.
 
 #### 4b. One of every two presented frames is a stale framebuffer (measured)
 
