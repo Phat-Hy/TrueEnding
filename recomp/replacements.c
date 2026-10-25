@@ -1993,6 +1993,34 @@ static void tls_tail_dump(const char* why) {
     fflush(stdout);
 }
 
+/* ---- Mode-25 handover probe (handover 5c.25) ------------------------------
+ * Mode 25 is the title's LAST mode (jump table 0x807939B8[25] -> 0x80535B14) and
+ * it is the one that actually hands the game over: its state-0 path ends in
+ * `fn_80572B70(..., "Game")` (0x80535D00), which stores a name->id lookup of the
+ * sequence "Game" into g_seqmgr->[80]. Everything else is gating:
+ *
+ *   0x80535B34  r3 = *(u32*)(task + 0x2C8);        // object made by fn_8006A250
+ *   0x80535B38  r0 = *(u32*)(r3 + 76);
+ *   0x80535B3C  if (r0 < 60) return;               // gate A: counter must reach 60
+ *   0x80535B44  if (fn_800CB538(task + 0x284) != 0) return;   // gate B: handle idle
+ *   0x80535B6C  switch (*(u32*)(task + 0x2B4)) { 0: build req; 1/2: log only }
+ *
+ * fn_800CB538(slot) is `slot[0] ? progressOf(slot[0][4]) : 0` and progressOf is
+ * fn_8070ABE0's ratio of fields +108/+112, reduced to "is it non-zero" - so gate B
+ * opens when the handle's object reports zero progress (either not started or
+ * finished; the difference is what this probe measures).
+ *
+ * TLS_MODE25_PROBE=1 dumps gate A's counter and gate B's handle whenever either
+ * changes, plus a periodic line while stuck. Inert unless set. */
+static int tls_mode25_probe_on(void) {
+    static int s = -1;
+    if (s < 0) s = getenv("TLS_MODE25_PROBE") ? 1 : 0;
+    return s;
+}
+static u32 g_m25_task = 0;        /* task pointer seen in mode 25 (for gate B) */
+static u32 g_m25_cb_n = 0;        /* fn_800CB538 calls seen for that handle */
+static int g_m25_seen = 0;
+
 int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
     tls_record_recent_call(ctx, address);
     tls_tail_push(ctx, address);
@@ -5061,9 +5089,15 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
         // SequenceManager::SetNextSequence (0x80572B70)
         case 0x80572B70: {
+            /* The guest function ignores its r3: it reads the manager from r13-26368 and
+             * stores a name->id lookup into manager->[80]. Print that manager (not the
+             * caller's r3) plus the guest frame, so a handover can be placed on the
+             * timeline - title mode 25 asks for 'Game' here at frame 1728 (5c.25). */
             const char* name = (const char*)resolve_guest_pointer(ctx, ctx->gpr[4]);
-            printf("[TLS Sequence] SetNextSequence('%s') mgr=0x%08X (lr=0x%08X)\n",
-                   name ? name : "<null>", ctx->gpr[3], ctx->lr);
+            extern int g_runner_current_frame;
+            u32 mgr = mem_read32(ctx, ctx->gpr[13] - 26368u);
+            printf("[TLS Sequence] SetNextSequence('%s') mgr=0x%08X frame=%d (lr=0x%08X)\n",
+                   name ? name : "<null>", mgr, g_runner_current_frame, ctx->lr);
             fflush(stdout);
             return 0; // Run original code
         }
@@ -5606,6 +5640,32 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0; // Run original code
         }
 
+        // fn_800CB538 (handle-busy predicate, gate B of title mode 25)
+        case 0x800CB538: {
+            if (tls_mode25_probe_on() && g_m25_task && ctx->gpr[3] == g_m25_task + 0x284u) {
+                u32 slot  = ctx->gpr[3];
+                u32 tgt   = mem_read32(ctx, slot);
+                u32 inner = (tgt >= 0x80000000u && tgt < 0x83000000u) ? mem_read32(ctx, tgt + 4) : 0;
+                u32 i108  = (inner >= 0x80000000u && inner < 0x83000000u) ? mem_read32(ctx, inner + 108) : 0;
+                u32 i112  = (inner >= 0x80000000u && inner < 0x83000000u) ? mem_read32(ctx, inner + 112) : 0;
+                u32 key[3] = { tgt, i108, i112 };
+                static u32 s_key[3] = { 0xFFFFFFFFu, 0, 0 };
+                g_m25_cb_n++;
+                if (key[0] != s_key[0] || key[1] != s_key[1] || key[2] != s_key[2]) {
+                    extern int g_runner_current_frame;
+                    printf("[TLS Mode25] gateB fn_800CB538 #%u frame=%d slot=0x%08X tgt=0x%08X "
+                           "inner=0x%08X i108=0x%08X i112=0x%08X\n",
+                           g_m25_cb_n, g_runner_current_frame, slot, tgt, inner, i108, i112);
+                    fflush(stdout);
+                    memcpy(s_key, key, sizeof(s_key));
+                }
+            }
+            return 0; // run the guest's own predicate
+        }
+
+        // fn_80572B70 is hooked above as SequenceManager::SetNextSequence; the
+        // mode-25 handover shows up there as SetNextSequence('Game').
+
         // fn_80533BE0 (TitleTask::SetMode)
         case 0x80533BE0: {
             u32 old_mode = mem_read32(ctx, ctx->gpr[3] + 0x2AC);
@@ -5689,6 +5749,51 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                            s_ctrl_state.core_hold);
                     fflush(stdout);
                 }
+            }
+            /* Mode-25 gate dump (TLS_MODE25_PROBE=1): the two operands that decide
+             * whether the title ever requests the "Game" sequence are
+             *   gate A  *(task+0x2C8) != 0 && *(*(task+0x2C8)+76) >= 60
+             *   gate B  fn_800CB538(task+0x284) == 0
+             * Print both sides verbatim (and the objects' own progress fields) so
+             * "waiting for 60" is a measurement instead of a reading of the branch. */
+            if (tls_mode25_probe_on() && task && mode == 25) {
+                extern int g_runner_current_frame;
+                g_m25_task = task;
+                u32 obj   = mem_read32(ctx, task + 0x2C8);
+                u32 valid = (obj >= 0x80000000u && obj < 0x83000000u) ? 1u : 0u;
+                u32 ctr   = valid ? mem_read32(ctx, obj + 76) : 0xDEADBEEFu;
+                u32 o84   = valid ? mem_read32(ctx, obj + 84) : 0;
+                u32 o92   = valid ? mem_read32(ctx, obj + 92) : 0;
+                u32 o108  = valid ? mem_read32(ctx, obj + 108) : 0;
+                u32 o112  = valid ? mem_read32(ctx, obj + 112) : 0;
+                u32 o116  = valid ? mem_read32(ctx, obj + 116) : 0;
+                u32 h284  = mem_read32(ctx, task + 0x284);
+                u32 inner = (h284 >= 0x80000000u && h284 < 0x83000000u) ? mem_read32(ctx, h284 + 4) : 0;
+                u32 i108  = (inner >= 0x80000000u && inner < 0x83000000u) ? mem_read32(ctx, inner + 108) : 0;
+                u32 i112  = (inner >= 0x80000000u && inner < 0x83000000u) ? mem_read32(ctx, inner + 112) : 0;
+                u32 h270  = mem_read32(ctx, task + 0x270);
+                u32 f2b4  = mem_read32(ctx, task + 0x2B4);
+                u32 f2c0  = mem_read32(ctx, task + 0x2C0);
+                u32 f2c4  = mem_read32(ctx, task + 0x2C4);
+                u32 key[5] = { obj, ctr, h284, inner, f2b4 };
+                static u32 s_key[5] = { 0xFFFFFFFFu, 0, 0, 0, 0 };
+                static int s_n = 0;
+                int changed = (key[0] != s_key[0] || key[1] != s_key[1] ||
+                               key[2] != s_key[2] || key[3] != s_key[3] || key[4] != s_key[4]);
+                s_n++;
+                if (changed || (s_n % 120) == 0 || !g_m25_seen) {
+                    printf("[TLS Mode25] frame=%d #%d gateA obj=0x%08X valid=%u ctr76=%u(>=60:%d) "
+                           "o84=%u o92=0x%08X o108=0x%08X o112=0x%08X o116=0x%08X | "
+                           "gateB slot=0x%08X inner=0x%08X i108=0x%08X i112=0x%08X cb_calls=%u | "
+                           "f2b4=%u f2c0=0x%08X f2c4=0x%08X h270=0x%08X\n",
+                           g_runner_current_frame, s_n, obj, valid, ctr, (ctr >= 60),
+                           o84, o92, o108, o112, o116,
+                           h284, inner, i108, i112, g_m25_cb_n,
+                           f2b4, f2c0, f2c4, h270);
+                    fflush(stdout);
+                    memcpy(s_key, key, sizeof(s_key));
+                }
+                g_m25_seen = 1;
             }
             return 0; // Run original code naturally!
         }

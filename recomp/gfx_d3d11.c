@@ -2235,22 +2235,37 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     if (s_d3d11_dump_count == 100 || s_d3d11_dump_count == 200 || s_d3d11_dump_count == 350 || s_d3d11_dump_count == 360 || s_d3d11_dump_count == 400 || s_d3d11_dump_count == 450 || s_d3d11_dump_count == 500 || s_d3d11_dump_count == 550 || s_d3d11_dump_count == 600 || s_d3d11_dump_count == 650 || s_d3d11_dump_count == 700 || s_d3d11_dump_count == 900 || s_d3d11_dump_count == 1100 || s_d3d11_dump_count == 1200 || s_d3d11_dump_count == 1300 || s_d3d11_dump_count == 1400 || s_d3d11_dump_count == 1500 || s_d3d11_dump_count == 1600 || s_d3d11_dump_count == 1700 || s_d3d11_dump_count == 1800) {
         take_shot = true;
     }
-    // Dense capture for menu-state diagnosis: TLS_DUMP_EVERY=<n> dumps every n frames.
+    /* Dense capture for menu-state diagnosis: TLS_DUMP_EVERY=<n> dumps every n presents.
+     * TLS_DUMP_EVERY_G=<n> is the same cadence in *guest frames*, which is what a
+     * `TLS_INPUT_SCRIPT` frame number means - the two counters diverge sharply once the
+     * title hands over to the game sequence (measured: ~2800 presents in 6000 frames),
+     * so a present-count capture point silently misses the state it was aimed at. */
     {
         const char* dump_every = getenv("TLS_DUMP_EVERY");
+        const char* dump_every_g = getenv("TLS_DUMP_EVERY_G");
+        extern int g_runner_current_frame;
         if (dump_every) {
             int every = atoi(dump_every);
             if (every > 0 && (s_d3d11_dump_count % every) == 0) {
                 take_shot = true;
             }
         }
+        if (dump_every_g) {
+            int every = atoi(dump_every_g);
+            if (every > 0 && g_runner_current_frame > 0 &&
+                (g_runner_current_frame % every) == 0) {
+                take_shot = true;
+            }
+        }
     }
     /* Explicit capture points: TLS_SHOT_FRAMES=1920,2160,2400. The list above is a
      * legacy fixed set; this lets a run grab exactly the frames being investigated
-     * instead of editing hardcoded numbers. */
+     * instead of editing hardcoded numbers. A value matches the present count *or*
+     * the guest frame, so "dump frame 1700 of the input script" is unambiguous. */
     {
         static char s_shot_list[256];
         static int s_shot_loaded = 0;
+        extern int g_runner_current_frame;
         if (!s_shot_loaded) {
             s_shot_loaded = 1;
             const char* frames = getenv("TLS_SHOT_FRAMES");
@@ -2263,7 +2278,8 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
             strncpy(buf, s_shot_list, sizeof(buf) - 1);
             buf[sizeof(buf) - 1] = '\0';
             for (char* tok = strtok(buf, ","); tok; tok = strtok(NULL, ",")) {
-                if (atoi(tok) == s_d3d11_dump_count) {
+                int want = atoi(tok);
+                if (want == s_d3d11_dump_count || want == g_runner_current_frame) {
                     take_shot = true;
                     break;
                 }
@@ -2703,6 +2719,20 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     /* Frames with no drawable geometry still issue copies (VI scanout, screen captures);
      * service everything that is left so no copy command is silently dropped. */
     d3d11_service_pending_copies(&efb_copy_cursor, 0xFFFFFFFFu, 9999);
+
+    /* Capture plumbing is otherwise silent, which makes "no file appeared" ambiguous
+     * between "the capture point was never reached" and "the write failed". Print the
+     * present counter, the take_shot decision and the write result when
+     * TLS_PRESENT_PROBE=1, and make a failed write loud instead of falling back. */
+    {
+        static int s_pp = -1;
+        if (s_pp < 0) s_pp = getenv("TLS_PRESENT_PROBE") ? 1 : 0;
+        if (s_pp && ((s_d3d11_dump_count % 100) == 0 || take_shot)) {
+            printf("[TLS Present] count=%d frame_counter=%d gx_vtx=%u take_shot=%d\n",
+                   s_d3d11_dump_count, s_d3d11.frame_counter, gx_vtx_count, (int)take_shot);
+            fflush(stdout);
+        }
+    }
 
     if (take_shot) {
         ID3D11Texture2D* back_buffer = NULL;

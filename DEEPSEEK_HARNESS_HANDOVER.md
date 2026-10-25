@@ -3333,3 +3333,185 @@ diagnosis - the dialog is the game's ordinary first-boot confirm, answering Yes 
 whole create path, and the remaining stop is the title's post-create handoff (mode 25).
 Instrument **mode 25's handler** (find who reads `task+0x2AC == 25` and what it waits for)
 rather than the NAND layer.
+
+---
+
+### 5c.25 Mode 25 is not a dead end: it hands over to `'Game'`, the title ends, and the run reaches Chapter 1
+
+**State at the start of this session:** `80a10a8`, tree clean, build green. The work order
+was item 1, "instrument the mode-25 handler". That was done, and the handler turns out to
+*complete*: the title leaves mode 25, the sequence manager is asked for `'Game'`, the title
+task is unregistered, `GameLoadTask` runs, and the game plays its Chapter 1 opening. The
+"logic dead end" in 5c.24 §13 is **not reproducible** - see §7 for the three runs.
+
+#### 0. Two corrections to the reproduction recipe (these cost the session its first hour)
+
+* **A headless run renders nothing and can never produce a screenshot.** `--headless` clears
+  `enable_window`, and `init_display_window()` is the only caller of `gfx_backend_init()`
+  (`host_runner.c:1163`), so in headless mode there is no device, `d3d11_present()` is never
+  called, and `TLS_SHOT_FRAMES` / `TLS_DUMP_EVERY` silently do nothing. Every frame number in
+  this handover was measured from a **`--window`** run.
+* **The invariant frame is the 3-A plan, not an idle boot.** `mean (102,188,205) p10 69 p50
+  203 p90 203 p99 206` at present 1448 is the *save-data dialog* (p50 203 is its flat plate).
+  Reproduced byte-for-byte this session with
+
+```
+TLS_INPUT_SCRIPT='600-612:A,900-912:A,1200-1212:A' TLS_SHOT_FRAMES=1448 \
+  tls_runner.exe --window --frames 1452
+```
+
+  An idle boot at the same frame is `mean (2,2,2)` (the cave backdrop before the logo pass),
+  so "I measured 1448 and it did not match" does not mean the tree regressed - it means the
+  input plan was missing.
+
+#### 1. The handler, from the jump table
+
+`NewTitleTask::Update` dispatches on `task+0x2AC` through the table at `0x807939B8`. The
+entries are
+
+```
+0 -> 80535D34 (tail)   5 -> 80534C28 (save check, 5c.24 §1)   11 -> 805351F0
+1 -> 80534264          6 -> 80534D48                          12 -> 8053538C
+2 -> 805343E0          7 -> 80534E9C                          13 -> 80535D34 (tail)
+3 -> 80534A8C          8 -> 80534F20                          14 -> 80535494
+4 -> 80534AEC          9 -> 80534FCC                          16..22 -> 805355C4..805358F4
+                       10 -> 805350E0                         23 -> 80535990, 24 -> 80535A30
+                                                              25 -> 80535B14   <- last mode
+```
+
+`cmpwi r0, 25` before the dispatch means 25 is the highest valid mode. Mode 25
+(`0x80535B14..0x80535D34`) decoded:
+
+```
+0x80535B14  if (g[r13-23840]) g->[36] = 0;              // same global the modes 20/22/23 clear
+0x80535B34  obj = *(u32*)(task + 0x2C8);                // object made by fn_8006A250 (0x805324C0)
+0x80535B38  ctr = *(u32*)(obj + 76);
+0x80535B3C  if (ctr < 60) return;                       // GATE A: 60 frames after entering 25
+0x80535B44  if (fn_800CB538(task + 0x284) != 0) return;  // GATE B: preload handle must be idle
+0x80535B54  fn_800CB480(task + 0x270); fn_800CB480(task + 0x284);   // release both handles
+0x80535B64  fn_800D2338(task);
+0x80535B6C  switch (*(u32*)(task + 0x2B4)) {
+              case 0:  build a request block on the stack, publish it at 0x807D8458,
+                       fn_80572B70(mgr, "Game");        // 0x80535D00, lr = 0x80535D04
+              case 1:  fn_80572B70(mgr, "Game");
+              case 2:  fn_80572B70(mgr, "Multiplayer"); // "Game"/"Multiplayer" are adjacent
+              default: return;                          //   strings at 0x8075D7CA / 0x8075D7CF
+            }
+0x80535D34  tail: re-arm the two task handles and return
+```
+
+`fn_80572B70` is `SequenceManager::SetNextSequence`: it ignores its first argument, loads
+`g[r13-26368]`, and stores `fn_800C37FC(g->[76], name)` - a name -> sequence-id lookup - into
+`g->[80]`. `fn_800CB538(&slot)` is the handle predicate: `slot[0] ? ratio(slot[0][4]) : 0`,
+reduced to a boolean.
+
+#### 2. Measured: both gates open, and the handover fires at frame 1728
+
+`TLS_MODE25_PROBE=1` (new, see §8) on the `UP`+`A` plan, one line per change:
+
+```
+frame 1639  MODE TRANSITION 22 -> 25   ctr76 = 1
+frame 1698  ctr76 = 60                 <- GATE A opens; fn_800CB538 is called for the 1st time
+                                       slot=0x80E9EED0 tgt=0x80E9EED0 inner=0x907C5114  -> gate B closed
+frame 1728  inner = 0x00000000         <- GATE B opens
+frame 1728  SetNextSequence('Game')  lr=0x80535D04   <- the mode-25 case-0 call site
+```
+
+So mode 25 needs **90 frames** in total: 60 for its own counter, then another 30 for the
+preload handle at `task+0x284` to be released. Gate B's operand was non-zero for that whole
+window (`inner = 0x907C5114`, and its own +108/+112 fields were 0/0) and became 0 exactly when
+the pointer was cleared - i.e. the practical rule is *gate B blocks while
+`*(*(slot)+4) != 0`*.
+
+Reproduced in three runs (`--frames 2000`, `--frames 6000`, and a windowed 6000-frame run):
+`SetNextSequence('Game')` at 1728, every time.
+
+#### 3. What follows the request
+
+```
+[TLS Sequence] SetNextSequence('Game') mgr=0x809EDDA0 (lr=0x80535D04)
+[TLS SequenceManager] UnregisterTask mgr=0x80BB5CC0 task=0x810FB4C0 (lr=0x800D240C)
+[TLS NewTitleTask] Init! task=0x810FB4C0
+[TLS CreateGameTask] Called! factory=0x80BB5CC0 mgr=0x8089925C (lr=0x80574EC4)
+[TLS DVD] convert: "preload/game_start_dg.pk" -> id=31
+[TLS DVD] read #168 preload/game_start_dg.pk off=0 len=6466528 -> 6466516 bytes
+[TLS MSL __construct_new_array] elem_sz=440 count=1152 ; elem_sz=20 count=18432
+[TLS CXDecompressFast] ENTER ... (30+ calls)
+```
+
+The title task is gone; `GameLoadTask` (`task=0x80AEDCF0 up=0x80570CFC`) takes over and
+streams `database/cosedit/*.csv` afterwards. At frame 6000 the streaming queue is idle and
+the task is still updating normally.
+
+#### 4. Chapter 1 is reached - screenshots, not inference
+
+Windowed run, `TLS_DUMP_EVERY_G=250`, same input plan (`docs/evidence/handover_*.png`):
+
+| frame | picture | mean |
+|---|---|---|
+| 1700-1800 | black (handover + load) | (0,0,0) |
+| 2251 | **"Chapter 1 / Reptids' Cave"** card over the cave plate | (178,187,187) |
+| 2501 / 2751 | cave + title card fading | (156,165,166) / (135,139,141) |
+| 3001 | dark cave interior | (15,14,13) |
+| 3251 | cave fly-through, sky, birds, floating rock | (50,53,51) |
+| 4001-5751 | cave interior, pool, sword on the rock, red effect | (52,49,44) |
+
+Every captured frame from 4001 to 5751 hashes differently, so the cinematic is *advancing*;
+the near-identical frame means are a static camera, not a frozen guest. The untouched
+rendering defects are the same ones already on the list (the additive bloom washing out the
+plate at 2251, and the 2D overlay band at 3251), not a new failure.
+
+#### 5. Why 5c.24 §13 concluded "dead end" - and what to distrust about it
+
+The handler is input-independent and thread-independent, exactly as §13 says; what it is
+*not* is fast. It needs 90 frames after entering mode 25, and mode 25 is only entered at 1639
+because mode 11 is input-gated. A run whose last button press is at 1812 and which samples
+mode 25 at frame 2400 is inside the window where the gates are *about to* open. Also, once
+the handover fires the title task is unregistered, so `task+0x2AC` keeps its last value (25)
+forever - reading that field after the handover looks like "still 25" even though the title
+is gone. Any future statement of the form "it is still in mode N" should be paired with the
+frame number and with whether the task is still registered.
+
+#### 6. What this does *not* change
+
+* The invariant is intact: 3-A plan at present 1448 is still
+  `mean (102,188,205) p10 69 p50 203 p90 203 p99 206` after this session's changes
+  (the changes are probes and capture plumbing only).
+* `TLS_ISFS_SERVICE=1` still stops at mode 11 (5c.24 §12). The unmodelled ISFS commands are
+  still unmodelled; the difference is that the *default* path no longer needs them to reach
+  the game.
+* The mode-5 dialog is still the ordinary first-boot confirm.
+
+#### 7. Reproduce the whole chain
+
+```
+TLS_INPUT_SCRIPT='600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A' \
+TLS_MODE25_PROBE=1 TLS_DUMP_EVERY_G=500 \
+  tls_runner.exe --window --frames 12000
+```
+
+(`--window` is mandatory for captures. `TLS_MODE25_PROBE` is inert without it.)
+
+#### 8. New instruments this session
+
+* `TLS_MODE25_PROBE=1` - mode-25 gate dump: `task+0x2C8`, `*(+76)`, the `+0x284` handle chain
+  and the `+0x2B4` state word, printed on change plus every 120th update; also logs every
+  `fn_800CB538` call for that handle.
+* `TLS_PRESENT_PROBE=1` - present counter, guest frame, `gx_vtx` count and the `take_shot`
+  decision every 100 presents (this is what proved headless never presents).
+* `TLS_DUMP_EVERY_G=<n>` - capture cadence in **guest frames** (the old `TLS_DUMP_EVERY` is
+  in presents; the two diverge once the game sequence starts).
+* `TLS_SHOT_FRAMES` now matches a value against the present count **or** the guest frame,
+  so "dump frame 1728 of the input script" means the frame the input script is indexed by.
+
+#### 9. Work order, revised
+
+1. **Chapter 1 gameplay** - the chain now reaches it unattended; the next question is whether
+   input takes control of the character after the opening cinematic, and what the first real
+   stall is (watch `GameLoadTask`, the allocator in 5c.22 §3, and the streaming queue).
+2. **Rendering** (unchanged, and now visible in-context): the additive bloom runs every pass at
+   `src.a = 1` and washes out the Chapter-1 card at 2251 exactly as it washed out the MENU; the
+   3251 frame shows a black upper band (2D overlay/viewport) over the 3D scene.
+3. **The allocator cycle** (5c.22 §3) - still untouched, still needs a visited-node ring inside
+   `label_8022A204`.
+4. The save/ISFS models (commands 4/6/8/12) are now *optional*, not blocking.
