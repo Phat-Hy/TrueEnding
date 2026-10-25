@@ -4924,6 +4924,17 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                     s_key = key;
                     printf("[TLS SceneSM] f=%d WAITER this=0x%08X o88=%u o5b0=%u rec[i]=(w0,w10):",
                            g_runner_current_frame, ok, o88, o5b0);
+                    {
+                        /* payload +4 (the field the ctor does NOT set) for slots 0 and 1,
+                         * sampled whenever the machine changes, so we can see WHEN it is
+                         * written rather than only what it holds at frame 3604. */
+                        u32 p0 = ok ? mem_read32(ctx, ok + 0x474u + 4u) : 0;
+                        u32 p1 = ok ? mem_read32(ctx, ok + 0x474u + 76u + 4u) : 0;
+                        u32 n0 = (p0 >= 0x80000000u && p0 < 0x94000000u) ? mem_read32(ctx, p0 + 4u) : 0;
+                        u32 n1 = (p1 >= 0x80000000u && p1 < 0x94000000u) ? mem_read32(ctx, p1 + 4u) : 0;
+                        printf("[TLS SceneSM] f=%d P4 p0=0x%08X(pay0.p4=0x%08X) p1=0x%08X(pay1.p4=0x%08X)\n",
+                               g_runner_current_frame, p0, n0, p1, n1);
+                    }
                     for (i = 0; i < 4; i++) {
                         u32 base = ok + 0x474u + (u32)i * 76u;
                         printf(" (%u,%u)", ok ? mem_read32(ctx, base) : 0,

@@ -4307,6 +4307,23 @@ purely because its virtual entries are ordinary function entries.**
    pattern scan in this project with a relaxed window before believing a negative.
    **Next**: find the activation step - the one that writes `payload+4` - and compare its behaviour
    for `0x8186DF60` against `0x81863F60`. That should name the missing call.
+   **The window is now a dozen frames wide.** Sampling `payload+4` on every change of the machine:
+
+   ```
+   f=3414  p0=0x8186DF60 (pay0.p4=0x8186DF58)   p1=0x81863F60 (pay1.p4=0x00000002)
+   f=3416  same                                  same
+   f=3602  same                                  same
+   f=3604  same                                  same
+   ```
+
+   The split is **already present at the first sample**, and it never changes afterwards. The
+   allocator log puts the two allocations at **frame 3402**, so whatever sets `+4` runs between frame
+   3402 and frame 3414 - a 12-frame window, in the same call chain as the factory at `0x801F3FF8`.
+   So this is not a late, conditional activation: the two payloads are constructed differently, or
+   linked differently, immediately. Instrument that window (not frame 3604) next.
+   Also note `+4` is *not* written by the constructor, so if it is not a leftover from the previous
+   owner of that memory then it is written by the caller of the factory right after it returns -
+   which is one frame's worth of dispatch to search.
    **Verified unchanged after the texture-hash fix**: phase 13 still reaches `o88=3` at 3602, falls
    back to `o88=1` with the counter at 1 at 3604, and stays there through 4524. The rendering fix and
    the intro stall are independent.
