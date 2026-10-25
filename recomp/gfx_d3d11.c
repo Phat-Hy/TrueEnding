@@ -1424,6 +1424,41 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
     if (have_backbuffer) ID3D11Texture2D_Release(source);
 }
 
+/* Average colour of the swap-chain buffer, sampled on a coarse grid. Used by
+ * TLS_BATCH_PROBE to watch the framebuffer change batch by batch within one frame,
+ * which is the only way to name the pass that destroys the picture. */
+static void probe_backbuffer_avg(unsigned* out_r, unsigned* out_g, unsigned* out_b) {
+    *out_r = *out_g = *out_b = 0;
+    ID3D11Texture2D* bb = NULL;
+    if (FAILED(IDXGISwapChain_GetBuffer(s_d3d11.swap_chain, 0, &IID_ID3D11Texture2D, (void**)&bb))) return;
+    D3D11_TEXTURE2D_DESC desc;
+    ID3D11Texture2D_GetDesc(bb, &desc);
+    desc.Usage = D3D11_USAGE_STAGING;
+    desc.BindFlags = 0;
+    desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+    desc.MiscFlags = 0;
+    ID3D11Texture2D* staging = NULL;
+    if (SUCCEEDED(ID3D11Device_CreateTexture2D(s_d3d11.device, &desc, NULL, &staging))) {
+        ID3D11DeviceContext_CopyResource(s_d3d11.context, (ID3D11Resource*)staging, (ID3D11Resource*)bb);
+        D3D11_MAPPED_SUBRESOURCE mapped;
+        if (SUCCEEDED(ID3D11DeviceContext_Map(s_d3d11.context, (ID3D11Resource*)staging, 0, D3D11_MAP_READ, 0, &mapped))) {
+            unsigned long sr = 0, sg = 0, sb = 0, n = 0;
+            for (UINT y = 0; y < desc.Height; y += 40) {
+                const uint8_t* row = (const uint8_t*)mapped.pData + (size_t)y * mapped.RowPitch;
+                for (UINT x = 0; x < desc.Width; x += 40) {
+                    const uint8_t* p = row + (size_t)x * 4;
+                    sb += p[0]; sg += p[1]; sr += p[2]; n++;
+                }
+            }
+            if (n == 0) n = 1;
+            *out_r = (unsigned)(sr / n); *out_g = (unsigned)(sg / n); *out_b = (unsigned)(sb / n);
+            ID3D11DeviceContext_Unmap(s_d3d11.context, (ID3D11Resource*)staging, 0);
+        }
+        ID3D11Texture2D_Release(staging);
+    }
+    ID3D11Texture2D_Release(bb);
+}
+
 /* Replay the frame's queued GXCopyTex commands whose vertex mark is <= up_to_vertex.
  * Called from inside the batch loop of d3d11_present(), so each copy reads the frame as
  * the guest had drawn it at that point in its display list - which is what the hardware
@@ -1564,7 +1599,18 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
             clear_color[0], clear_color[1], clear_color[2], clear_color[3],
             s_force_black ? " (forced black)" : " (guest BP clear)"); fflush(stdout); }
     }
-    ID3D11DeviceContext_ClearRenderTargetView(s_d3d11.context, s_d3d11.rtv, clear_color);
+    /* The GX EFB is *not* cleared between frames: it keeps whatever the last frame left
+     * in it unless the guest clears it itself (there is no "clear EFB" command in GX -
+     * GXCopyTex's clear bit, the BP clear colour and fullscreen quads are how games do
+     * it). Clearing every present therefore throws away content the guest may read: the
+     * first three GXCopyTex commands of a titled MENU frame are issued at vertex mark 0,
+     * i.e. before any drawing, and are a deliberate capture of the previous frame.
+     * TLS_NO_FRAME_CLEAR=1 skips the colour clear (depth is always cleared) to A/B it. */
+    static int s_no_clear = -1;
+    if (s_no_clear < 0) s_no_clear = getenv("TLS_NO_FRAME_CLEAR") ? 1 : 0;
+    if (!s_no_clear) {
+        ID3D11DeviceContext_ClearRenderTargetView(s_d3d11.context, s_d3d11.rtv, clear_color);
+    }
     if (s_d3d11.dsv) {
         ID3D11DeviceContext_ClearDepthStencilView(s_d3d11.context, s_d3d11.dsv, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
     }
@@ -1911,6 +1957,23 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                     ID3D11DeviceContext_PSSetShader(s_d3d11.context, ps, NULL, 0);
                     ID3D11DeviceContext_PSSetShaderResources(s_d3d11.context, 0, 1, &srv);
                     ID3D11DeviceContext_Draw(s_d3d11.context, batch->vertex_count, batch->vertex_offset);
+                    /* Watch the framebuffer change pass by pass. TLS_BATCH_PROBE=<frame>. */
+                    {
+                        static int s_probe_frame = -2;
+                        if (s_probe_frame == -2) {
+                            const char* f = getenv("TLS_BATCH_PROBE");
+                            s_probe_frame = f ? atoi(f) : -1;
+                        }
+                        if (s_probe_frame >= 0 && (int)s_d3d11_dump_count == s_probe_frame) {
+                            unsigned pr, pg, pb;
+                            probe_backbuffer_avg(&pr, &pg, &pb);
+                            printf("[BatchProbe] frame=%d after b%u (voff=%u vcnt=%u tex=0x%08X blend=%d s=%u d=%u): avg=(%u,%u,%u)\n",
+                                   s_d3d11_dump_count, b, batch->vertex_offset, batch->vertex_count,
+                                   batch->tex.guest_addr, batch->blend_enable, batch->src_factor,
+                                   batch->dst_factor, pr, pg, pb);
+                            fflush(stdout);
+                        }
+                    }
                     if (take_shot && (s_d3d11_dump_count == 900 || s_d3d11_dump_count == 1500)) {                        char bpath[128];
                         snprintf(bpath, sizeof(bpath), "build/recomp/batch_%u_f%d.bmp", b, s_d3d11_dump_count);
                         save_backbuffer_bmp(bpath);

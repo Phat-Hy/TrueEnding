@@ -825,13 +825,16 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
             pc->format = s_efb_copy_format;
             pc->pitch = s_efb_copy_pitch;
             pc->exec = val;
-            /* Half-scale decode (hypothesis under test, see handover 5c.15): of the 23
-             * copies frame 1450 issues, exactly the two whose destination is sampled at
-             * half the source rect carry BP 0x52 bit 9 set with bit 11 clear. That rule
-             * is derived from the bits GXSetTexCopyDst/GXCopyTex write (src/GXFrameBuf.c),
-             * not from a magic constant, and it is falsifiable: if it is wrong the tiled
-             * striping in the composite moves rather than disappears. */
-            pc->half_scale = ((val & 0x200u) != 0 && (val & 0x800u) == 0) ? 1 : 0;
+            /* Half-scale decode: BP 0x52 bit 9 (0x200) is the copy's half-scale flag.
+             * Verified against every copy of MENU frame 1450 by cross-checking the
+             * destination size each batch declares when it samples it:
+             *   0x010263 -> 0x90395DC0 written 640x448, sampled 320x224   (half)
+             *   0x010A63 -> 0x9038D1C0 written 160x112, sampled  80x56    (half)
+             *   0x010A43 -> 0x9038D1C0 written 640x448, sampled 320x224   (half)
+             *   0x010063/0x010843/0x01003B/0x010863/0x004C03             (1:1)
+             * Bit 11 is NOT part of it: 0x010A43/0x010A63 have it set and are half-scale.
+             * (handover 5c.15) */
+            pc->half_scale = ((val & 0x200u) != 0) ? 1 : 0;
             pc->vertex_mark = s_vertex_count;
             /* Only the deferred replay needs the barrier; splitting batches in the
              * default path would change what the inline copies read. */
@@ -841,11 +844,13 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
         }
         /* Default (5c.15): perform the copy right here, exactly as before - it can only
          * read the last completed frame. TLS_DEFER_EFB_COPY=1 instead lets the backend
-         * replay the queue in stream order. */
+         * replay the queue in stream order, which is also the only mode that receives
+         * the half-scale flag: applying it to the inline path changes the default
+         * picture (MENU background (119,234,255) -> (255,234,119)) while the composite
+         * chain is still unfixed, so it is deliberately left off there. */
         if (!s_efb_copy_deferred && s_efb_copy_hook) {
             s_efb_copy_hook(s_efb_copy_dst_guest, s_efb_copy_x0, s_efb_copy_y0,
-                            s_efb_copy_x1, s_efb_copy_y1, s_efb_copy_format,
-                            (val & 0x200u) != 0 && (val & 0x800u) == 0);
+                            s_efb_copy_x1, s_efb_copy_y1, s_efb_copy_format, 0);
         }
         if (s_copy_probe && s_copy_reports < 40) {
             extern int g_runner_current_frame;

@@ -1486,6 +1486,7 @@ size, so those two are the A/B needed to settle it.
 | variable | effect |
 |---|---|
 | `TLS_BATCH_CUTOFF=<n>` | draw only the first `n` batches of every frame. The fastest way to separate a scene problem from a composite problem. |
+| `TLS_BATCH_PROBE=<frame>` | print the average framebuffer colour after **every** batch of that frame. One run maps the whole post chain; this is how `b33` was found. |
 | `TLS_DRAW_ORDER=1` | one line per copy with the batch index it is serviced before, plus `vmark`, interleaved with the per-batch dump. This is what produced the draw/copy ordering above. |
 | `TLS_EFB_SAMPLE_FRAME=<n>` | one `[EfbSampleCopy]` line per copy of guest frame `n`: destination, source rect, **and the average RGB the copy captured**. The single most useful new probe. |
 | `TLS_DEFER_EFB_COPY=1` | replay copies in stream order (current-frame source) instead of inline (previous-frame source). |
@@ -1505,43 +1506,68 @@ size, so those two are the A/B needed to settle it.
    "cut=39 looks like cut=30 with bloom on top", not stripes.
 4. Only then consider making `TLS_DEFER_EFB_COPY` the default, and re-baseline the attract screen.
 
-#### 7b. Half-scale implemented from the `0x52` bits - the stripes are gone, the chain is still black
+#### 7b. Half-scale implemented from BP 0x52 bit 9 - stripes gone, and the frame-by-frame map of the chain
 
 Steps 1-2 above were carried out before this handover was finished, so read this before redoing them.
 
-**Rule implemented** (`GxPendingEfbCopy.half_scale`, `gx_pipeline.c`): *BP 0x52 bit 9 (`0x200`) set **and**
-bit 11 (`0x800`) clear* means the destination is half the source rect in each axis. Of the 23 copies frame
-1450 issues, that selects exactly `0x010263` - the two copies whose destination is confirmed to be sampled at
-320x224 - and it excludes `0x010A43`/`0x010A63` (which have both bits). It is derived from the fields
-`GXSetTexCopyDst`/`GXCopyTex` write, and it is falsifiable.
+**The rule, now settled: `half_scale = (BP 0x52 & 0x200) != 0`.** Verified by cross-checking every copy of
+MENU frame 1450 against the size the *sampling* batch declares for the same address:
 
-`d3d11_efb_copy_to_guest()` now writes `dst_w = w/2`, `dst_h = h/2`, samples every second source pixel and
-tiles with `tiles_x = dst_w/4`.
+| BP 0x52 | destination | written from | sampled as | |
+|---|---|---|---|---|
+| `0x010263` | `0x90395DC0` | 640x448 | 320x224 | half |
+| `0x010A63` | `0x9038D1C0` | 160x112 | 80x56 | half |
+| `0x010A43` | `0x9038D1C0` | 640x448 | 320x224 | half |
+| `0x010063` / `0x010843` / `0x01003B` / `0x010863` / `0x004C03` | | | | 1:1 |
 
-**Measured effect** (`TLS_DEFER_EFB_COPY=1`, frame 1450, `TLS_BATCH_CUTOFF` sweep):
+Bit 11 (`0x800`) is **not** part of the scale - `0x010A43`/`0x010A63` have it set and are half-scale. The
+first version of this rule required bit 11 clear and therefore missed those two; the per-batch probe below
+caught that within one run.
 
-| cutoff | before half-scale | after half-scale |
-|---|---|---|
-| 30 (scene only) | 104973 colours, cave | 104973 colours, cave |
-| 33 | – | 258 colours, uniform black |
-| 34 | dark, faint blurred glows | – |
-| 35 | – | 1 colour, black |
-| 39 | **83467 colours, white with 4-pixel horizontal stripes** | **260 colours, uniform black - no stripes** |
-| 42 | white with stripes | – |
-| 44+ | flat white | flat white |
+`d3d11_efb_copy_to_guest()` writes `dst_w = w/2`, `dst_h = h/2`, samples every second source pixel and tiles
+with `tiles_x = dst_w/4`. **It is applied only in the deferred path** - applying it to the inline path changes
+the default picture (`(119,234,255)` -> `(255,234,119)`) while the chain is still unfixed, so
+`TLS_DEFER_EFB_COPY` unset keeps the 510426d behaviour exactly.
 
-So the 4-pixel striping is **gone**, which confirms the tiling-width diagnosis. The chain now writes black
-instead of garbage, i.e. the *next* defect is in what the composite quads are blending (or in the fact that
-the copy that feeds them captures an EFB that has already been destroyed by an earlier pass of the same
-chain) - not in the tiling.
+**`TLS_BATCH_PROBE=<frame>`** (new) prints the average framebuffer colour after *every* batch. It is the
+instrument that maps the chain in one run. With `TLS_DEFER_EFB_COPY=1`, frame 1450:
 
-**The default path is unchanged** by this: with `TLS_DEFER_EFB_COPY` unset, MENU frame 1450 is still
-`(119,234,255)`.
+```
+b0..b30   the 3D scene builds up                        (7,8,8) -> (62,70,76)   <- the cave
+b31 0x90395DC0  replace s=1 d=0                          (75,68,61)   the scene copy, half-scale
+b32 0x9038D1C0  replace s=1 d=0                          (39,45,46)   darker than the scene
+b33 0x9038D1C0  blend s=2 d=0  (SRCCLR / ZERO)           (0,1,1)      <-- DESTROYS THE FRAME
+b34 0x903917C0  additive s=4 d=1                         (3,3,2)
+b35 0x9038D1C0  additive s=4 d=1                         (7,8,7)
+b36 0x903DBDC0  replace s=1 d=0                          (47,46,39)   the chain restarts from a small copy
+b37 0x9038D1C0  blend  s=1 d=1                           (57,58,50)
+b38 0x9038D1C0  additive                                 (106,115,106)
+b39 0x903D31C0  additive                                 (204,215,204)
+b40 0x905C3000  additive                                 (224,233,225)
+b41 0x905C3000  additive                                 (252,253,252)
+b42 0x903917C0  replace                                  (252,253,252)
+b43 0x9038D1C0  additive                                 (255,255,255)  <- saturated
+b44 0x903D77C0  replace                                  (251,253,251)
+b45..  UI text / logos, all additive                      (199..251)     white-on-white, invisible
+```
 
-Next after this: with `TLS_DEFER_EFB_COPY=1 TLS_EFB_SAMPLE_FRAME=<f>` walk the cutoff from 30 to 44 and find
-the *first* batch at which the EFB stops containing the scene. `b30` is the prime suspect because it is the
-first replace-quad and it samples a destination written earlier in the same frame; `TLS_DRAW_ORDER=1` plus
-`b30`'s texture address (`0x90395DC0`, now a half-scale copy) names exactly which pass fed it.
+So: **`b33` is the pass that blackens the frame** (`s=2` = GX_BL_SRCCLR, `d=0` = GX_BL_ZERO gives
+`dst = src*src`, i.e. squaring a 0.15 image to ~0), and **`b38..b43` then additively re-brighten whatever
+`b36` put back** until the frame saturates to white. Two things are therefore still wrong and they are
+independent:
+
+1. `b33`'s blend reads as a self-multiply that discards the destination. That is what the CMODE0 field
+   decode produces (`src=(val>>8)&7`, `dst=(val>>5)&7`, `subtract=(val>>11)&1`, which is correct for the
+   ordinary alpha batches - `0x00F4B9` decodes to `SRCALPHA/INVSRCALPHA`), so either this batch legitimately
+   is `SRCCLR/ZERO` and the *destination* it expects is different, or the `dst = dst*src` form the chain
+   clearly wants means the two factor fields need re-deriving from `src/GXFrameBuf.c`
+   (`fn_80615400`/`fn_80615420` write CMODE0). **Next concrete step: log the raw CMODE0 value alongside the
+   decoded factors for `b31..b45` on one frame** - a one-line change to the existing batch dump.
+2. `b36` restarts the chain from `0x903DBDC0` (a 160x112 copy) with `replace`, which throws away the scene
+   (already at `(62,70,76)`); the chain only ever gets back to ~`(47,46,39)`. If `b36` is meant to composite
+   over the scene, its blend/depth state is wrong.
+
+Both are cheap to test now that `TLS_BATCH_PROBE` exists: change one thing, run one frame, read the trace.
 
 #### 8. Run recipes used this session
 
