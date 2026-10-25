@@ -3984,21 +3984,51 @@ That is a real constraint on any future input plan (and a candidate explanation 
 3-A plan at present 1448 = `mean (102,188,205) p10 69 p50 203 p90 203 p99 206`, re-verified as the
 last action of this session. Nothing here touches the title path.
 
-#### 7. Work order, revised
+#### 8. Where phase 13 comes from, and the three writers of `task+0x56EC`
 
-1. **`*(task+0x56EC)`, fields `+0x38` and `+0x88`** - the only exits from phase 13. **Measured:**
-   the object is 0 until phase 13, then `obj = 0x81858DE0` with `o38 = 0x00000022` (bit 1 set, so
-   the first half of the condition is already satisfied) and **`o88 = 1`**, and it is still 1 at
-   every later sample (3564, 3804, 4044). Neither branch can run: the first needs `o88 == 0`, the
-   second needs `o88 == 4`. So the next question is exactly "what moves `0x81858DE0 + 0x88` from 1
-   to 4", and naming that object names the subsystem.
-2. **`fn_803E4478` is the acknowledge/commit step, and it is what makes the gate one-shot.** It
+A whole-DOL scan for `stw ..., 22252(rX)` finds exactly three writers, and one of them *is* the
+phase-13 transition:
+
+```
+0x80376508  li  r0, 13
+0x8037650C  stw r0, 21732(r30)      ; task+0x54E4 = 13      <- this is the 0 -> 13 transition
+0x80376510  mr  r3, r30
+0x80376518  lwz r5, -24096(r13); lwz r5, 72(r5)     ; the gB object's +0x48
+0x80376520  bl  0x805B9F54          ; -> creates the phase-13 object
+0x80376524  cmpwi r31, 167          ; an id, compared after the call
+0x80376528  stw r3, 22252(r30)      ; task+0x56EC = the new object
+```
+
+The other two are the teardown at `0x80376634` (`phase = 0`, `fn_800D2338(old object)`,
+`task+0x56EC = 0`) and `GameTask::Init` at `0x80365C10` (`task+0x56EC = 0`).
+
+So phase 13 is a **scripted wait created by an engine call** (`fn_805B9F54`), not a stall in the
+state machine's own logic - the machine got where it was told to go and is waiting for that object
+to report completion through `+0x88`. The nearby `li r4, 319` (`0x80376540`) and the `cmpwi r31,
+167` are script/message ids, which is the vocabulary to chase next (`fn_805B9F54`, `fn_805BA358`)
+rather than more state-machine archaeology.
+
+Still measured, still true: `0x81858DE0 + 0x88 == 1` at frames 3564, 3804, 4044 - it never becomes
+0 or 4 in a 4200-frame run, so the wait never completes.
+
+#### 9. Work order, revised
+
+1. **`fn_805B9F54(task, id, gB->[72])` and the object it returns** - that call is what creates the
+   phase-13 waiter (`0x81858DE0`) and where `+0x88 == 1` comes from. Find what sets `+0x88` to 4
+   (or to 0) and which subsystem owns it; the script ids `167` (`0x80376524`) and `319`
+   (`0x80376540`) are in the same neighbourhood and are good search keys.
+2. **`*(task+0x56EC)` fields `+0x38` / `+0x88`** - the only exits from phase 13. **Measured:** the
+   object is 0 until phase 13, then `obj = 0x81858DE0` with `o38 = 0x00000022` (bit 1 set, so the
+   first half of the condition is already satisfied) and **`o88 = 1`**, still 1 at every later
+   sample (3564, 3804, 4044). Neither branch can run: the first needs `o88 == 0`, the second
+   `o88 == 4`.
+3. **`fn_803E4478` is the acknowledge/commit step, and it is what makes the gate one-shot.** It
    zeroes `g2+0xD8C` (`0x803E4488 stw r0, 3468(r3)` - the same word the phase-0 gate tests) plus
    `0xD80/0xD84/0xD88/0xD78`, and ORs `0x4` into `*(g2+0xD70)+0x38` and `*(g2+0xD74)+0x38`. So the
    gate cannot re-arm: whatever re-arms it has to be a later phase, not a retry.
-3. **Decide whether phase 13 is the right successor at all.** `fn_8036E170` only accepts phases
+4. **Decide whether phase 13 is the right successor at all.** `fn_8036E170` only accepts phases
    0, 3 and 14, which suggests the authored sequence is 0 -> 3/14 -> ..., and phase 13 may be a
    branch the A press selected rather than the main line.
-4. Input plans from now on must respect the **one-update edge**: press, release, press again.
-5. Unchanged: the alternate-frame parity (5c.26 §5 - not the YUYV fallback), EFB format 0/R4,
+5. Input plans from now on must respect the **one-update edge**: press, release, press again.
+6. Unchanged: the alternate-frame parity (5c.26 §5 - not the YUYV fallback), EFB format 0/R4,
    the title input race, the allocator cycle.
