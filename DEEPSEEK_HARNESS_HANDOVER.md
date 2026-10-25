@@ -2096,3 +2096,89 @@ Task 2/3 as well. For the composite chain the next measurement is batch-by-batch
 against the reference's `(23,25,18)`, looking for the first pass whose output leaves the reference's
 range, rather than arguing about the last one.
 
+---
+
+### 5c.19 The chain feeds itself on hardware too - the host's *base* is 3x too bright
+
+`TLS_BATCH_PROBE=1448` with `TLS_TEV=1 TLS_DEFER_EFB_COPY=1` (measured this session):
+
+| pass | GX blend | host frame after | what it samples |
+|---|---|---|---|
+| b31 | last 3D batch | `(43,42,42)` | the cave scene |
+| b32/b33 | replace | `(42,43,44)` -> `(32,36,37)` | 640x448 and 160x112 copies taken at vmark 39942 |
+| b34 | `s=2 d=0` | **`(0,0,0)`** | the 320x224 copy - the bright pass |
+| b35/b36 | add, no blend state | `(0,0,0)` | blur of the black frame |
+| b37 | replace | **`(38,37,33)`** | `0x903DBDC0`, a 160x112 copy written at vmark 39942, i.e. **before b34** |
+| b38 | `s=1 d=1` | `(38,37,33)` | no change at this frame (it did double in 5c.16's run) |
+| b39 | add | `(71,74,71)` | `0x9038D1C0` written at vmark **39948** - right after b33, so the *pre-square* frame |
+| b40 | add | `(121,127,121)` | `0x903D31C0` written at vmark **40002**, i.e. when b40 itself draws |
+| b41 | add | `(202,208,202)` | `0x905C3000` written at vmark **40014**, i.e. inside b41 |
+| b47 | add | `(254,254,254)` | `0x905C3000` written at vmark 40044 |
+| b51 | `s=4 d=5` | `(90,90,90)` | drags the whole screen back down |
+
+So the copy -> pass mapping is exactly the "the chain reads copies of the frame it is currently
+building" model, and the additive passes really do consume their own output one pass later.
+
+**Does hardware do the same? Yes - but starting from a much darker frame.**
+`tools/analyze_dolphin_copies.py` reconstructs per-frame copy sequences from Dolphin's
+`efb1_n<counter>_<W>x<H>_<fmt>.png` dumps (1288 frames of the boot/attract phase, one frame = the
+run of copies between two `640x479` display copies) and prints each copy's average in execution
+order. Measured:
+
+```
+frame 750: 640x479=0 320x224f4=0 640x448f3=255 320x224f4=0 320x224f4=5 640x448f6=15
+           640x448f3=247 160x112f6=13 320x224f6=15 80x56f6=15 80x56f6=0 ... 640x448f6=15
+           320x224f4=15 640x448f6=15 160x112f6=24 320x224f6=31 80x56f6=30 80x56f6=30
+frame 1000: (every copy 0..-15, one 640x448f3=255)
+frame 1250: ... 160x112f6=7 320x224f6=14 80x56f6=14 ... 640x448f4=24
+```
+
+Hardware's copies rise inside a frame too (`15 -> 24 -> 31`), so the in-frame feedback is real and
+the host's *ordering* is not the defect. What differs is the scale: hardware's copies sit at 0-31
+while the host's sit at 32-38 and are added three times per frame. And behind that:
+
+| measurement | host | Dolphin reference |
+|---|---|---|
+| frame average at the MENU | `(93,93,93)` (deferred) / `(124,235,255)` (default) | `(23,25,18)` |
+| scene before the composite tail (`TLS_BATCH_CUTOFF=30`) | `(76,70,62)` | `(23,25,18)` at the same phase |
+| the copies the additive passes consume | 32-38 | 0-15 |
+
+**So the chain is not primarily an ordering problem: the host's rendered scene is ~3x brighter than
+hardware's, and every additive pass multiplies that excess.** Fixing 3D brightness is therefore the
+path to fixing the bloom, exactly as the escalation table implies (the bloom is `base * ~5`).
+
+#### 3. TEV compare stages are now evaluated (`bc02c21`)
+
+`bias == 3` used to be a pass-through. It is now Dolphin's exact semantics
+(`VideoCommon/PixelShaderGen.cpp:1473-1536`): `out = clamp(d + cmp)` with `GT: (a>b)?c:0` and
+`EQ: (a==b)?c:0`, compared in 8-bit fixed point in mode `bits 20..21` = R8 / GR16 (`r+g*256`) /
+BGR24 (`r+g*256+b*65536`) / RGB8-A8 (per channel `max(sign(a-b),0)*c`). There is no scale multiply in
+a compare stage. `TevCompare3` / `TevCompare1` / `TevAlphaArg4` in `tools/compile_shaders.py`.
+MENU frame 1448 is unchanged by it (`(93,93,92)`), so the compare stages are not the brightness
+control - they are simply correct now instead of skipped.
+
+#### 4. The reference run also reached Chapter 1 (Task 2/Task 3 material)
+
+The 800 s frame-indexed run walked the title, the save dialog, `NEW GAME` and into gameplay:
+`docs/evidence/30-dolphin-scene-3000.png` is **Chapter 1 - Gurgan Cave** with the hero, the sword,
+water, the cave walls and the HUD (`DAGRAN LV 5`, `SYRENNE LV 4`), and
+`docs/evidence/29-dolphin-after-menu-2000.png` is the first playable scene. `build/recomp/dolphin-ref/`
+now holds 8297 reference frames from that run plus the boot-phase copy dumps, so both Task 2 (does
+the host's stall happen inside code the guest runs normally? obviously not - the same input script
+gets hardware through it) and Task 3 (Chapter 1 parity) have reference material.
+
+#### 5. Instruments added this session
+
+| file | what it does |
+|---|---|
+| `tools/dolphin_capture.py` | launches Dolphin, kills stray instances, dismisses modal dialogs, sends `SendInput` keys on a **frame-indexed** plan (`--frame-plan "600-612:A,1300-1312:UP"`, same syntax as `TLS_INPUT_SCRIPT`, indexed by dumped frames), reports progress |
+| `tools/analyze_dolphin_copies.py` | rebuilds per-frame EFB-copy sequences from the Dolphin dumps and prints each copy's average in execution order |
+| `TLS_EFB_COPY_GEOM=1` | destination size from BP 0x4D pitch / BP 0x52 bit 14 instead of source/2 |
+
+Two Dolphin traps worth remembering: `Start-Process -ArgumentList @('-e', $path)` does not quote a
+path with spaces (the emulator then shows a modal "The specified file" warning over a stalled
+emulator), and a *second* Dolphin instance cannot open `Wii/title/00000001/00000002/data/play_rec.dat`
+and shows a modal "File could not be opened" - both look exactly like "the game hangs after
+`NW4R SND`".
+
+

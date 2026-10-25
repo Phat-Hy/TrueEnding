@@ -218,6 +218,12 @@ def main():
     # while dumping, so a wall-clock plan would land nowhere near the host's frame
     # numbers; counting Dump/Frames files makes the two runs comparable frame for frame.
     if args.frame_plan:
+        # Frames already in the dump directory belong to earlier runs, so index from the
+        # count at launch - otherwise a stale directory makes every span look "already
+        # passed" and no key is ever sent.
+        frame_base = len(os.listdir(args.frames_dir))
+        if frame_base:
+            print(f"frame base offset {frame_base} (stale dumps present)", flush=True)
         spans = []
         for item in args.frame_plan.split(","):
             item = item.strip()
@@ -238,7 +244,7 @@ def main():
         held = {}          # key -> end frame
         last_report = -1
         while time.time() - t0 < args.run:
-            frames = len(os.listdir(args.frames_dir))
+            frames = len(os.listdir(args.frames_dir)) - frame_base
             for a, b, key in spans:
                 if frames >= b and key not in held:
                     held[key] = b
