@@ -4231,6 +4231,16 @@ purely because its virtual entries are ordinary function entries.**
    payload was never handed to that manager.
    Class addresses for the next session: vtable `0x80782C08`; functions `0x801F4230`, `0x801F42A8`,
    `0x801F43E8`, `0x801F4514` (Draw, already instrumented).
+   Scanning for a `lis 0x8078` + `addi +0x2C08` pair that materialises `0x80782C08` finds **nothing** -
+   so the vtable is copied out of a data table rather than built inline, and that search route is a
+   dead end.
+   **Caveat before chasing this further**: "slot 1's LayoutTask is never drawn" has two very
+   different explanations and they have not been separated yet - (a) a host-side bug that fails to
+   link an object the guest did queue, or (b) the guest deliberately keeping that layout inactive
+   until some *other* condition is met, in which case the LayoutTask is a **red herring** and the real
+   gate is that other condition. Distinguish them before doing more work here: if the guest never
+   queued the link, no amount of host fixing will help, and the two payloads being created
+   back-to-back with sequential ids (`0x0A93`/`0x0A94`) is equally consistent with both.
    **Verified unchanged after the texture-hash fix**: phase 13 still reaches `o88=3` at 3602, falls
    back to `o88=1` with the counter at 1 at 3604, and stays there through 4524. The rendering fix and
    the intro stall are independent.
