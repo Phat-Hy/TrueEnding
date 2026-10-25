@@ -4064,14 +4064,18 @@ purely because its virtual entries are ordinary function entries.**
    * **snapshot placement**: `d3d11_capture_efb_snapshot()` is called at `gfx_d3d11.c:2897`,
      immediately *before* `IDXGISwapChain_Present` at 2898 - so it is not sampling a DISCARDed
      buffer, as it first looked.
-   What is left, and it is now a sharper question: even frames submit only ~44.3k vertices while
-   odd frames submit ~276.5k, and the two parities write **different copy destinations**
-   (odd: 0x905C3000/640x448, 0x90536FE0/640x448, 0x90395DC0/320x224, 80x56 pairs; even: three
-   RGB565 320x224 to 0x9038D1C0 and 0x9036A1A0, two of them to the same address). So even frames
-   are composite-only, and the composite reads destinations the guest only rewrites on odd frames.
-   Next: log, per present, which destination each composite *batch* samples, and check it against
-   what the guest wrote that frame. `TLS_EFB_CHAIN` already dumps the writes in order; the missing
-   half is the reads.
+   What is left, and it is now a sharper question. `TLS_BATCH_DUMP=4002` shows the even frame is
+   **not** composite-only: it draws **76 batches / 44,319 vertices** (odd frames submit ~276,471),
+   so roughly a fifth of the geometry. So the even frame is a *subset* render, and whatever it
+   omits is what animates.
+   The copy **read/write descriptor mismatch** is the concrete lead: at present 4002 the batches
+   sample `0x9038D1C0` as **80x56 fmt=6 (RGBA8)** four times, while that same frame's copies wrote
+   `0x9038D1C0` as **320x224 fmt=4 (RGB565)**. The guest re-uses that address as a scratch for
+   different purposes on the two parities, and whoever samples it on the even frame is reading a
+   descriptor that does not match what was just written. A format mismatch of that kind also
+   explains the systematic **blue/purple** hue of the frozen frame versus the red live one.
+   Next: dump `TLS_BATCH_DUMP` for both 4001 and 4002 and diff the sampled `(addr, w, h, fmt)`
+   sets against `TLS_EFB_CHAIN`'s writes for the same present.
    Still worth chasing from round 2's data: the last copy of an odd frame is the guest's own
    **scanout**, `copy=9 dst=0x900997E0 640x448 xfb=1 fmt=0` - `0x900997E0` is the hardcoded VI
    fallback address in `host_runner.c:1294` and `fmt=0` is **R4**. It prints no "not implemented"
