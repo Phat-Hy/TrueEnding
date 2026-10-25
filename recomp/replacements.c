@@ -2064,6 +2064,7 @@ static int g_ssm_call_1231 = 0;
 static int g_ssm_call_3e44 = 0;
 static int g_ssm_g0_call = 0;
 static u32 g_ssm_last_cmd = 0xFFFFFFFFu;
+static int g_ph13_update_calls = 0;
 static u32 g_ssm_g2w = 0xFFFFFFFFu;
 
 /* Chapter-1 sub-phase machine (a SECOND jump table, not the +0x5538 one).
@@ -4875,6 +4876,59 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                            g_runner_current_frame, v, v ? "TRUE" : "false", s_n);
                     fflush(stdout);
                     s_last = v;
+                }
+            }
+            return 0;
+        }
+
+        /* The phase-13 waiter is a 1480-byte polymorphic object (ctor 0x805B9FC8,
+         * vtable 0x807979B0 -> function table from 0x807979B8: dtor 0x805BD3B0,
+         * 0x805BA16C, 0x805BAC18, 0x805BB5A0). Its +0x88 lifecycle is
+         *      ctor -> (the id arg)  1
+         *      0x805BBEBC -> 2   (only when *(this+0x484) != 0)
+         *      0x805BB42C -> 3   (from fn_80244CAC)
+         *      0x805BC134 -> 4   (`li r0,4` then `stw r0,136(r31)`)
+         * and phase 13 exits when it reads 4 (or 0). It is stuck at 1, so the
+         * question is whether this object is ever ticked at all - which is the
+         * same shape as "no player/scene task is ever created". */
+        case 0x805BAC18: {
+            if (tls_scene_sm_probe_on()) {
+                extern int g_runner_current_frame;
+                static u32 s_key = 0xFFFFFFFFu;
+                u32 o = ctx->gpr[3];
+                u32 ok = (o >= 0x80000000u && o < 0x83000000u) ? o : 0;
+                u32 o88 = ok ? mem_read32(ctx, ok + 0x88) : 0;
+                u32 o5b0 = ok ? mem_read32(ctx, ok + 0x5B0) : 0;
+                u32 key = (o88 << 8) ^ (o5b0 & 0xFFu);
+                g_ph13_update_calls++;
+                if (key != s_key || g_ph13_update_calls <= 2) {
+                    int i;
+                    s_key = key;
+                    printf("[TLS SceneSM] f=%d WAITER this=0x%08X o88=%u o5b0=%u rec[i]=(w0,w10):",
+                           g_runner_current_frame, ok, o88, o5b0);
+                    for (i = 0; i < 4; i++) {
+                        u32 base = ok + 0x474u + (u32)i * 76u;
+                        printf(" (%u,%u)", ok ? mem_read32(ctx, base) : 0,
+                               ok ? mem_read32(ctx, base + 0x10) : 0);
+                    }
+                    printf("\n");
+                    fflush(stdout);
+                }
+            }
+            return 0;
+        }
+        case 0x805BB5A0: {
+            if (tls_scene_sm_probe_on()) {
+                extern int g_runner_current_frame;
+                static int s_n = 0;
+                g_ph13_update_calls++;
+                if (++s_n <= 5) {
+                    u32 o = ctx->gpr[3];
+                    u32 ok = (o >= 0x80000000u && o < 0x83000000u) ? o : 0;
+                    printf("[TLS SceneSM] f=%d WAITER vfn[3](this=0x%08X) o88=%u o484=%u #%d\n",
+                           g_runner_current_frame, ok, ok ? mem_read32(ctx, ok + 0x88) : 0,
+                           ok ? mem_read32(ctx, ok + 0x484) : 0, s_n);
+                    fflush(stdout);
                 }
             }
             return 0;

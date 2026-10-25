@@ -4011,17 +4011,55 @@ rather than more state-machine archaeology.
 Still measured, still true: `0x81858DE0 + 0x88 == 1` at frames 3564, 3804, 4044 - it never becomes
 0 or 4 in a 4200-frame run, so the wait never completes.
 
+#### 8b. The waiter is NOT orphaned - it is ticked every frame, and it is a 4-slot resource list
+
+This closes 5c.27's open question ("is the object ever ticked at all?"). It is:
+
+```
+case 0x805BAC18 (= vtable function-table[2]) and 0x805BB5A0 both run with this=0x81858DE0
+from frame 3414 onward, every frame.
+```
+
+and its `+0x88` lifecycle is real, not frozen - measured on change:
+
+```
+f=3414  o88=0  o5b0=0
+f=3416  o88=1  o5b0=0
+f=3602  o88=3  o5b0=0      (0x805BB42C: `li r0,3` after fn_80244CAC)
+f=3604  o88=1  o5b0=1      <- and it never changes again
+```
+
+The 1 -> 2 / 4 step at `0x805BBE70..0x805BBEC0` walks a **4-entry record array at
+`this+0x474+i*76`**: it advances `this+0x5B0` while `rec[i].w0 == 0`, then
+
+```
+if (counter >= 4)             +0x88 = 4;                      /* done */
+else if (rec[counter].w10 != 0) +0x88 = 2;                     /* in progress */
+/* else: stay at 1 */
+```
+
+Measured values: `rec[i] = (w0,w10)` = `(1, 2455016464) (1, 0) (0,0) (0,0)`, counter stuck at 1.
+So slot 1 is **occupied but its `w10` resource never arrives**, which is why `+0x88` can never
+become 4 and phase 13 can never finish. The object is a resource/preload list of four slots and the
+chapter-1 intro is waiting on slot 1.
+
+**Headline for a future session: `dolrecomp_dispatch_replacement` runs at call boundaries only, so
+a probe on `bl`-return addresses and on function entries works; the object here was resolvable
+purely because its virtual entries are ordinary function entries.**
+
 #### 9. Work order, revised
 
-1. **`fn_805B9F54(task, id, gB->[72])` and the object it returns** - that call is what creates the
-   phase-13 waiter (`0x81858DE0`) and where `+0x88 == 1` comes from. Find what sets `+0x88` to 4
-   (or to 0) and which subsystem owns it; the script ids `167` (`0x80376524`) and `319`
-   (`0x80376540`) are in the same neighbourhood and are good search keys.
+1. **Fill `0x81858DE0` record slot 1** - the object is a 4-slot resource/preload list
+   (`this+0x474+i*76`, counter at `this+0x5B0`). Slot 0 is complete (`w10` = a MEM2 pointer), slot 1
+   is occupied (`w0 == 1`) but its `w10` never becomes non-zero, and the state machine needs either
+   `rec[counter].w10 != 0` (-> `+0x88` = 2) or `counter >= 4` (-> `+0x88` = 4) before phase 13 can
+   finish. Find what issues the four slots and why the second never starts - that is a *streaming*
+   question, one layer below the state machine, not an input one.
 2. **`*(task+0x56EC)` fields `+0x38` / `+0x88`** - the only exits from phase 13. **Measured:** the
    object is 0 until phase 13, then `obj = 0x81858DE0` with `o38 = 0x00000022` (bit 1 set, so the
-   first half of the condition is already satisfied) and **`o88 = 1`**, still 1 at every later
-   sample (3564, 3804, 4044). Neither branch can run: the first needs `o88 == 0`, the second
-   `o88 == 4`.
+   first half of the condition is already satisfied) and `o88` cycles 0 -> 1 -> 3 -> 1 and then
+   freezes at 1 with the slot counter at 1. Neither phase-13 branch can run: the first needs
+   `o88 == 0`, the second `o88 == 4`.
 3. **`fn_803E4478` is the acknowledge/commit step, and it is what makes the gate one-shot.** It
    zeroes `g2+0xD8C` (`0x803E4488 stw r0, 3468(r3)` - the same word the phase-0 gate tests) plus
    `0xD80/0xD84/0xD88/0xD78`, and ORs `0x4` into `*(g2+0xD70)+0x38` and `*(g2+0xD74)+0x38`. So the
