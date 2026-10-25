@@ -4205,6 +4205,25 @@ purely because its virtual entries are ordinary function entries.**
    shape as "no player/scene task is ever created": an object that exists and is never registered.
    Next: find how a `LayoutTask` gets registered for drawing (compare an object that works with one
    that does not - both are already identified by address) and why 0x81863F60 misses it.
+   **The two payloads diffed** (20 words each, same frame):
+
+   ```
+   PAY0 0x8186DF60: 80782C08 8186DF58 58544153 4B544147 00000000 00000A93 00000000 81863F60
+                    81858DE0 80B8DCC0 00000000 3E828284 00000000 00000000 00000026 ... 80782A80 00000008
+   PAY1 0x81863F60: 80782C08 00000002 58544153 4B544147 00000000 00000A94 00000000 81858540
+                    81858DE0 80B8DCC0 00000000 00000001 00000000 00000000 00000006 ... 80782A80 00000008
+   ```
+
+   Same vtable (`0x80782C08`), same type words `w2/w3`, and both point back at the waiter
+   (`w8 = 0x81858DE0`) and at `0x80B8DCC0` (`w9`). The differences are the candidates:
+   * `w1`: PAY0 = `0x8186DF58` (**a self-pointer, PAY0-8**) vs PAY1 = **`2`** - the classic
+     "intrusive list node linked vs unlinked/never-initialised" shape, and the most likely reason one
+     is drawn and the other is not;
+   * `w5`: sequential ids `0x0A93` vs `0x0A94`;
+   * `w7`: PAY0 -> `0x81863F60` (the *other* payload) vs PAY1 -> `0x81858540`;
+   * `w11`: `0x3E828284` (0.2549f) vs `1`;
+   * `w14`: `0x26` (38) vs `6`.
+   Next: find who writes `LayoutTask+4` (the list node) and why it stays `2` for slot 1's payload.
    **Verified unchanged after the texture-hash fix**: phase 13 still reaches `o88=3` at 3602, falls
    back to `o88=1` with the counter at 1 at 3604, and stays there through 4524. The rendering fix and
    the intro stall are independent.

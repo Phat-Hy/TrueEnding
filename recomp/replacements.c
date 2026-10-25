@@ -4924,9 +4924,18 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                         s_full = 1;
                         for (rec = 0; rec < 2; rec++) {
                             u32 base = ok + 0x474u + (u32)rec * 76u;
+                            u32 pay  = mem_read32(ctx, base + 4);
                             printf("[TLS SceneSM] f=%d REC%d 0x%08X:", g_runner_current_frame, rec, base);
                             for (wd = 0; wd < 19; wd++) printf(" %08X", mem_read32(ctx, base + (u32)wd * 4));
                             printf("\n");
+                            /* The payloads are LayoutTasks and slot 1's is never drawn.
+                             * Diff the two objects' leading words: whatever marks "registered
+                             * for draw" should show up here as a field only slot 0 has. */
+                            if (pay >= 0x80000000u && pay < 0x83000000u) {
+                                printf("[TLS SceneSM] f=%d PAY%d 0x%08X:", g_runner_current_frame, rec, pay);
+                                for (wd = 0; wd < 20; wd++) printf(" %08X", mem_read32(ctx, pay + (u32)wd * 4));
+                                printf("\n");
+                            }
                         }
                         fflush(stdout);
                     }
