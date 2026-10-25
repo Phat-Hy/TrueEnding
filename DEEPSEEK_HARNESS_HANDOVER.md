@@ -3034,3 +3034,184 @@ Two traps worth restating, because they cost runs this session:
 2. **Read the probes' field order from the code, not from the label.** The K-register
    line printed `(r, a, b, g)` and an opaque black K0 read as "green"; that single
    misreading sent me looking for the wrong thing for a whole run.
+
+### 5c.24 The save-data verdict, traced end to end - and the two things it is *not*
+
+**State at the start of this session:** `423f2cc` (one doc commit after it), tree clean,
+build green. Default path at present 1448 re-verified first thing: mean `(102,188,205)`,
+p10 69, p50 203 - identical to the number 5c.23 left, so the baseline is intact.
+
+#### 0. The write denial this time was a *missing integrity label*, not the DACL
+
+`python tools/recomp_harness.py build-runner` died on
+
+```
+PermissionError: [Errno 13] Permission denied: 'build\recomp\objects.rsp'
+```
+
+while *editing* `recomp/replacements.c` worked and *creating* new files in the same
+directory worked. The tell is the integrity label, not the ACL:
+
+```
+build\recomp\objects.rsp        (no "Mandatory Label" line at all)   -> Medium
+build\recomp\_wtest.txt         Mandatory Label\Low Mandatory Level  -> Low
+build\recomp                    Mandatory Label\Low ...(OI)(CI)(NW)  -> children inherit Low
+```
+
+The session token is Low; an object with no label is Medium, so a Low process cannot
+write it however the DACL reads. Exactly two pre-existing files in `build/` were
+unlabelled (`objects.rsp`, `gx_shaders_d3d11.inl`); every other artifact was created by a
+Low session and carries the Low label. `icacls <file> /setintegritylevel L` from the
+confined token fails with `Access is denied` (it needs WRITE_OWNER, which the inherited
+`Authenticated Users:(M)` ACE does not include) - so this is the one repair that has to
+come from outside the sandbox, or from a session whose file policy is full access. With
+the policy at full access both files were writable again and the build relinked in 0.9 s.
+
+#### 1. The whole save-data check, from the disassembly
+
+The title's mode 5 handler is `0x80534C28..0x80534D04` (inside `NewTitleTask::Update`,
+`0x80534074`). Decoded:
+
+```
+NewTitleTask mode 5:
+  if (fn_800A4228(g_mgr, &state) != 0) return;              // 0x800A4228: 8-instruction
+                                                            //   "read two words, one out" fn
+  if (state != 0) goto D04 -> (state==5||state==14) ? SetMode(6) : SetMode(9);
+  ok = fn_800A472C(g_mgr, &len, &err);                      // == NANDGetLength
+  if (ok) {
+      fn_803B854C(&hdr, &expect);                           // expected length
+      if (len == expect) SetMode(9);                        // 0x80534CF4
+      else               SetMode(6);                        // 0x80534CD0  <- the dialog
+  } else {
+      SetMode(6);                                           // 0x80534C84
+  }
+```
+
+and the pieces:
+
+* `fn_800A472C` = `*out_err=0; if (NANDGetLength(mgr+0x234, out_len)==0) return 1;
+  *out_err = nandErrorToMsg(err); return 0;`  (`mgr+0x234` is the `NANDFileInfo`).
+* `fn_8061EF90` = `NANDGetLength(info, u32* len)`: `err = fn_8061B860(*(u32*)info, stats8)`,
+  `*len = stats8[0]`, then `nandConvertErrorCode(err)`.  **It reads the *fd* out of the
+  info struct**, so a file that was never opened is queried as fd 0.
+* `fn_8061B860` = ISFS get-file-stats: `IOS_Ioctl(fd, cmd=11, NULL, 0, out, 8)`.
+* `fn_803B854C` = "what length do we expect": when no save image is loaded it falls through
+  to `*out = 0x00159580`  = **1 414 528 bytes**.  (The `1 348 992` that the old fabricated
+  save file used is a number a *fabricated stub* produced - it could never match.)
+
+So the dialog appears because the guest asked the HLE how long the save file is, the HLE
+answered "0", and 0 != 1 414 528.
+
+#### 2. Two fabricated stubs removed (they were answering for the guest)
+
+`replacements.c` had replaced the NAND open and the NAND status with invented successes:
+
+```
+case 0x80620220 / 0x80620250:   *(u32*)gpr[6] = 0; enqueue(gpr[8], result 0); return 0;
+case 0x80620BD0:                *(u32*)gpr[4] = 1346432; *(u32*)(gpr[4]+4) = 0; success;
+```
+
+`0x80620220`/`0x80620250` is **NANDPrivateOpen** (10 args; its body resolves the path and
+calls `ISFS_OpenAsync` -> our `IOS_OpenAsync`, i.e. it is SDK code the HLE already answers
+honestly one layer down - it was telling the save loader "opened successfully" when nothing
+had been opened). `0x80620BD0` is **NANDGetStatus**, which builds a command block and
+issues an ISFS ioctl. Both now run the guest's own code (`return 0` in the dispatcher).
+
+Measured after the change: **the frame at 1448 is byte-identical** (mean `(102,188,205)`,
+same p10/p50/p90) to before. So neither stub is what produces the dialog. They stay
+removed because they were fabricating state, not because they changed the picture.
+
+#### 3. The reference frame this has been compared against is a *different state*
+
+`run2/framedump_1440` (== `docs/evidence/27-dolphin-menu-frame1440.png`) is the MENU with
+the **NEW GAME** item highlighted, i.e. the third A press *selected* an item and nothing
+more. The host, on the same three presses, is one step further: its menu became interactive
+at frame 962 (`1 -> 2` at 901, `2 -> 3` at 961, `3 -> 4` at 962 - modes 2 and 3 take one
+frame each), so the press at 1200 *executed* NEW GAME and the save check ran at 1201.
+
+Host mode timeline on `600-612:A,900-912:A,1200-1212:A`:
+
+```
+1 -> 2  frame 901      4 -> 5  frame 1201   (NEW GAME confirmed)
+2 -> 3  frame 961      5 -> 6  frame 1202   (save check -> dialog)
+3 -> 4  frame 962
+```
+
+So a frame-indexed comparison at 1440/1448 is comparing "menu" against "save prompt".
+The dialog itself is an ordinary confirm: default selection is **No**, and pressing A at
+1460 takes mode `6 -> 4` (`SetMode(4)`, lr=0x80534E10) and creates nothing.
+
+#### 4. What the XF texcoord pipeline actually is for the title - measured, and it is identity
+
+`TLS_XF_PROBE=900` on the title-only plan (`600-612:A`):
+
+```
+numChan=1 numTexGens=2 dualTex=1
+texgen0 info=0x00000280   -> texgentype=0 (Regular), sourcerow=5 (Tex0), inputform=0 (AB11),
+                             projection=0 (ST)
+texgen1 info=0x00000300   -> Regular / Tex1 / AB11 / ST
+texmtx[0]  = identity              (CP Tex0MtxIdx = 60 -> XF pos matrix for that index)
+postmtx[61] (normalize=0) = identity
+```
+
+So for the title frame, Dolphin's pipeline has nothing to do: regular Tex0 texgen with an
+identity tex matrix and an identity post matrix means the sampler coordinate **is** the raw
+uv. Implementing `TEXMATRICES`/`POSTTRANSFORMMATRICES` would not move a single texel of the
+title screen. (It may still matter for scene geometry; that is a separate measurement.)
+
+#### 5. Then why are the corners black? The vignette pass, measured
+
+Batch 18 of the title frame is the fullscreen vignette pass (`6` vertices, NDC
+`(-1,-1)..(1,1)`, `blend=1 s=4 d=5` = SRCALPHA/INVSRCALPHA):
+
+```
+map0 = 0x9051E1A0  64x64 IA8 (fmt 3)  avg 90, alpha 90   <- the mask
+map1 = 0x9038D1C0  80x56               avg white
+stage1 alpha: konst K0.a * (1 - tex.a)          (K0.a = 1.0; raw ra=0x8FF000 -> a field 0xFF)
+stage1 rgb  : prev.rgb * K0.rgb  = black
+```
+
+Dolphin's own dump of that mask
+(`Dump\Textures\SLSEXJ\tex1_64x64_e6053facb03e8a53_3.png`) measures alpha **255 at the
+centre, 0 at the corners** (row 32, every 4th texel: `2 26 80 152 215 246 254 255 255 255
+253 242 205 136 66 18`). With the coordinate equal to the raw uv, `1 - mask.a` is 1 at the
+screen corners, so the pass paints the corners black - which is exactly what the host does
+(corner 0, centre 255, mean 90). The reference is mean 205 with corners 174-176 and centre
+218-220, i.e. an effective alpha of ~0.3 at the corners and ~0.15 at the centre: a *weak*
+vignette, not a full black-out.
+
+Since the coordinate is provably the raw uv (identity matrices), the remaining candidates
+are (a) `K0.a` for this stage, (b) the pass writing EFB alpha that a later composite uses
+(5c.23 §1), or (c) this batch not being what produces hardware's plate at all. The texcoord
+is now *excluded by measurement*, which is the useful part.
+
+#### 6. Reference corpus: `dolphin-ref/` is gone, and `Dump\Frames` is a different run
+
+* `dolphin-ref/run2`, `run3` **do not exist in the workspace** any more. The only run2
+  frames left are the ones in `docs/evidence/` (27/27b/29/30/31).
+* `%APPDATA%\Dolphin Emulator\Dump\Frames` has 2007 frames, but they are **not** run2:
+  frame 900/1000 there are the bright title plate (mean 209/208) like run2, while frame 1440
+  is `LOADING...` on black, not the MENU. Do not frame-index against that directory.
+* The host's title plate is the *right* picture, 100x too dark: measured on the title-only
+  plan, host mean 90 / corner 0 / centre 255 vs reference mean 205 / corner 175 / centre 219.
+
+#### 7. New tool: `tools/dol_xref.py`
+
+`dis <addr> [count]` - plain PPC listing (enough to read control flow and constants) for any
+guest address; `strings <substr>` / `addr <0x...>` - find the data address of a string and
+the code sites that materialise it via `lis`+`addi`/`ori`/`lwz`. This is what turned
+`"The save data cannot be used..."` into `0x8074BC68` and then into a message table, and it
+is why the mode-5 chain above is quoted from the binary rather than guessed.
+
+#### 8. New instruments/flags this session
+
+* `TLS_NAND_PROBE=1` - one line per NAND/ISFS/IOS-file request and answer (open path + fd,
+  `IOS_Ioctl` fd+cmd+lengths+first out word, read fd+len+actual, `NANDPrivateOpen` args,
+  `NANDGetLength` info+fd, `NANDGetStatus` args). Count-capped at 200 lines, inert by
+  default.
+* `IOS_Read`/`IOS_ReadAsync` now return the bytes **actually read** instead of always `len`.
+  Claiming `len` fabricated data past EOF; no picture change measured, but it was lying.
+* `IOS_Ioctl`/`IOS_IoctlAsync` now answer ISFS command 11 (file stats) with
+  `{length, offset}` of the backing file instead of success-with-the-buffer-untouched.
+* `TLS_SAVE_PRECREATE=1` now fabricates a **1 414 528**-byte file (the guest's own expected
+  size, `0x159580`), not 1 348 992.

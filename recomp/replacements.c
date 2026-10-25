@@ -1473,11 +1473,11 @@ static bool ios_open_savedata(uint32_t mode, FILE** out_fp) {
             fp = fopen(path, "w+b");
             if (fp) {
                 static const uint8_t zero_block[4096] = {0};
-                for (uint32_t i = 0; i < 1348992 / 4096; i++) fwrite(zero_block, 1, 4096, fp);
-                if (1348992 % 4096 > 0) fwrite(zero_block, 1, 1348992 % 4096, fp);
+                for (uint32_t i = 0; i < 0x159580 / 4096; i++) fwrite(zero_block, 1, 4096, fp);
+                if (0x159580 % 4096 > 0) fwrite(zero_block, 1, 0x159580 % 4096, fp);
                 fflush(fp);
                 fseek(fp, 0, SEEK_SET);
-                printf("[TLS NAND] created savedata/savedata.dat (1348992 bytes)\n");
+                printf("[TLS NAND] created savedata/savedata.dat (%u bytes)\n", 0x159580);
                 fflush(stdout);
             }
         }
@@ -1510,6 +1510,55 @@ static void ios_close_fd(int fd) {
         }
         s_ios_files[fd].in_use = false;
     }
+}
+
+/* ---------------------------------------------------------------------------
+ * NAND / ISFS / IOS-file probe -- TLS_NAND_PROBE=1, inert by default.
+ *
+ * The title's save-data check (mode 5) is guest code: fn_800A472C calls
+ * NANDGetLength(info, out_len) and, on a nonzero error, maps that error to a
+ * dialog with fn_800A4494 and takes the "save data cannot be used" branch. The
+ * length itself comes from the *open fd's* stats through
+ *   fn_8061B860(fd, out8) -> IOS_Ioctl(fd, cmd=11, NULL, 0, out8, 8)
+ * and the ISFS/NAND open above it is an async callback chain
+ *   fn_80620220(path, info, mode, ..., cb, arg) -> cb(result)
+ * So every fact that decides "corrupt" is one of the HLE answers below. Print
+ * the question and the answer at each layer instead of guessing which one the
+ * guest is reading. Rate-limited by a global cap; a boot makes ~10 NAND calls.
+ * ------------------------------------------------------------------------- */
+static int tls_nand_probe_on(void) {
+    static int v = -1;
+    if (v < 0) v = getenv("TLS_NAND_PROBE") ? 1 : 0;
+    return v;
+}
+
+static int tls_nand_probe_slot(const char* what) {
+    static int s_count = 0;
+    if (s_count >= 200) return 0;
+    s_count++;
+    printf("[TLS NAND] #%d %s\n", s_count, what);
+    fflush(stdout);
+    return 1;
+}
+
+/* Host FILE* behind an HLE fd, or NULL for the device fds (/dev/fs, ...). */
+static FILE* ios_fd_file(u32 fd) {
+    return (fd >= 1 && fd < 16 && s_ios_files[fd].in_use) ? s_ios_files[fd].fp : NULL;
+}
+
+static const char* ios_fd_path(u32 fd) {
+    return (fd >= 1 && fd < 16 && s_ios_files[fd].in_use) ? s_ios_files[fd].path : "";
+}
+
+/* Length currently visible through an HLE fd (0 when there is no backing file). */
+static u32 ios_fd_length(u32 fd) {
+    FILE* fp = ios_fd_file(fd);
+    if (!fp) return 0;
+    long here = ftell(fp);
+    fseek(fp, 0, SEEK_END);
+    long size = ftell(fp);
+    fseek(fp, here, SEEK_SET);
+    return (size > 0) ? (u32)size : 0u;
 }
 
 /* Wait-loop probe. The Chapter 1 handoff wedges with the guest parked inside
@@ -2723,6 +2772,23 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         }
 
         // IOS / Starlet IPC services
+        //
+        // NAND / ISFS probe (TLS_NAND_PROBE=1, inert by default).
+        //
+        // The save-data verdict is decided *above* the host file: the title's mode 5
+        // runs fn_800A472C, which is
+        //     *out_err = 0;
+        //     err = NANDGetLength(mgr + 0x234, out_len);   // fn_8061EF90
+        //     if (err == 0) return 1;
+        //     *out_err = nandErrorToMsg(err);              // fn_800A4494
+        //     return 0;
+        // and the caller (0x80534C7C..0x80534CFC) turns that into mode 6 (error /
+        // save confirm) or mode 9 (the "corrupted" dialog). NANDGetLength asks
+        // ISFS for the *open fd's* stats: fn_8061B860 -> fn_8061D080(fd, cmd=11,
+        // in=NULL, in_len=0, out, out_len=8) and takes the first word of the reply
+        // as the file length. Every one of those answers is produced by the HLE
+        // below, so this probe prints the question and the answer at each layer.
+        // Count-capped: a boot makes only a handful of NAND calls.
         case 0x8061C590:
         case 0x8061C650: { // IOS_OpenAsync
             u32 path_addr = ctx->gpr[3];
@@ -2755,6 +2821,12 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             }
 
             int fd = ios_alloc_fd(path, mode, fp);
+            if (tls_nand_probe_on()) {
+                char msg[256];
+                snprintf(msg, sizeof(msg), "IOS_OpenAsync '%s' mode=%u -> fd=%d fp=%s",
+                         path ? path : "(null)", mode, fd, fp ? "host-file" : "none");
+                tls_nand_probe_slot(msg);
+            }
             tls_ipc_enqueue_callback(cb, fd, usrdata); // Return fd
             ctx->gpr[3] = 0; // IPC_ERR_NONE
             ctx->pc = ctx->lr;
@@ -2786,6 +2858,12 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 }
             }
             int fd = ios_alloc_fd(path, mode, fp);
+            if (tls_nand_probe_on()) {
+                char msg[256];
+                snprintf(msg, sizeof(msg), "IOS_Open '%s' mode=%u -> fd=%d fp=%s",
+                         path ? path : "(null)", mode, fd, fp ? "host-file" : "none");
+                tls_nand_probe_slot(msg);
+            }
             ctx->gpr[3] = (u32)fd;
             ctx->pc = ctx->lr;
             return 1;
@@ -2812,16 +2890,26 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 buf_addr = ctx->gpr[4];
             u32 len = ctx->gpr[5];
             void* buf = resolve_guest_pointer(ctx, buf_addr);
+            u32 got = 0;
             if (buf && len > 0) {
-                FILE* fp = (fd >= 1 && fd < 16 && s_ios_files[fd].in_use) ? s_ios_files[fd].fp : NULL;
+                FILE* fp = ios_fd_file(fd);
                 if (fp) {
-                    size_t n = fread(buf, 1, len, fp);
-                    if (n < len) memset((uint8_t*)buf + n, 0, len - n);
+                    /* Report what was actually read. Claiming `len` unconditionally
+                     * fabricates data past EOF, and the guest's save-header checksum
+                     * then fails on bytes that were never in any file. */
+                    got = (u32)fread(buf, 1, len, fp);
+                    if (got < len) memset((uint8_t*)buf + got, 0, len - got);
                 } else {
                     memset(buf, 0, len);
                 }
             }
-            ctx->gpr[3] = len; // Return bytes read = len (Success)
+            if (tls_nand_probe_on()) {
+                char msg[256];
+                snprintf(msg, sizeof(msg), "IOS_Read fd=%u '%s' len=%u -> %u",
+                         fd, ios_fd_path(fd), len, got);
+                tls_nand_probe_slot(msg);
+            }
+            ctx->gpr[3] = (u32)got; // bytes actually read
             ctx->pc = ctx->lr;
             return 1;
         }
@@ -2832,16 +2920,23 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 cb = ctx->gpr[6];
             u32 usrdata = ctx->gpr[7];
             void* buf = resolve_guest_pointer(ctx, buf_addr);
+            u32 got = 0;
             if (buf && len > 0) {
-                FILE* fp = (fd >= 1 && fd < 16 && s_ios_files[fd].in_use) ? s_ios_files[fd].fp : NULL;
+                FILE* fp = ios_fd_file(fd);
                 if (fp) {
-                    size_t n = fread(buf, 1, len, fp);
-                    if (n < len) memset((uint8_t*)buf + n, 0, len - n);
+                    got = (u32)fread(buf, 1, len, fp);
+                    if (got < len) memset((uint8_t*)buf + got, 0, len - got);
                 } else {
                     memset(buf, 0, len);
                 }
             }
-            tls_ipc_enqueue_callback(cb, (s32)len, usrdata);
+            if (tls_nand_probe_on()) {
+                char msg[256];
+                snprintf(msg, sizeof(msg), "IOS_ReadAsync fd=%u '%s' len=%u -> %u",
+                         fd, ios_fd_path(fd), len, got);
+                tls_nand_probe_slot(msg);
+            }
+            tls_ipc_enqueue_callback(cb, (s32)got, usrdata);
             ctx->gpr[3] = 0;
             ctx->pc = ctx->lr;
             return 1;
@@ -2921,6 +3016,36 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         }
         case 0x8061CE50:
         case 0x8061D080: { // IOS_Ioctl
+            u32 fd = ctx->gpr[3];
+            u32 cmd = ctx->gpr[4];
+            u32 in_buf = ctx->gpr[5];
+            u32 in_len = ctx->gpr[6];
+            u32 out_buf = ctx->gpr[7];
+            u32 out_len = ctx->gpr[8];
+            u32 first_out = 0xDEADBEEFu;
+            void* dst = (out_buf && out_len > 0) ? resolve_guest_pointer(ctx, out_buf) : NULL;
+            /* ISFS command 11 is the file-stats query on an open fd: an 8-byte
+             * reply {u32 length; u32 offset}, and NANDGetLength (fn_8061EF90)
+             * takes the first word as the save file's length. Answering "success"
+             * with the buffer untouched leaves whatever the IOS heap happens to
+             * contain in there, which is not a length of anything. */
+            if (dst) {
+                if (cmd == 11 && out_len >= 8) {
+                    mem_write32(ctx, out_buf + 0, ios_fd_length(fd));
+                    FILE* fp = ios_fd_file(fd);
+                    mem_write32(ctx, out_buf + 4, fp ? (u32)ftell(fp) : 0u);
+                } else {
+                    memset(dst, 0, out_len);
+                }
+                first_out = mem_read32(ctx, out_buf);
+            }
+            if (tls_nand_probe_on()) {
+                char msg[256];
+                snprintf(msg, sizeof(msg),
+                         "IOS_Ioctl fd=%u '%s' cmd=%u in=0x%08X/%u out=0x%08X/%u -> out0=%u",
+                         fd, ios_fd_path(fd), cmd, in_buf, in_len, out_buf, out_len, first_out);
+                tls_nand_probe_slot(msg);
+            }
             ctx->gpr[3] = 0; // Success
             ctx->pc = ctx->lr;
             return 1;
@@ -2928,6 +3053,10 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         case 0x8061CF40:
         case 0x8061CF80:
         case 0x8061D1B0: { // IOS_IoctlAsync
+            u32 fd = ctx->gpr[3];
+            u32 cmd = ctx->gpr[4];
+            u32 in_buf = ctx->gpr[5];
+            u32 in_len = ctx->gpr[6];
             u32 out_buf = ctx->gpr[7];
             u32 out_len = ctx->gpr[8];
             u32 cb = ctx->gpr[9];
@@ -2935,28 +3064,100 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             if (out_buf && out_len > 0) {
                 void* dst = resolve_guest_pointer(ctx, out_buf);
                 if (dst) {
-                    memset(dst, 0, out_len);
+                    if (cmd == 11 && out_len >= 8) {
+                        mem_write32(ctx, out_buf + 0, ios_fd_length(fd));
+                        FILE* fp = ios_fd_file(fd);
+                        mem_write32(ctx, out_buf + 4, fp ? (u32)ftell(fp) : 0u);
+                    } else {
+                        memset(dst, 0, out_len);
+                    }
                 }
             }
-            printf("[TLS IOS_IoctlAsync] cb=0x%08X usrdata=0x%08X (lr=0x%08X)\n", cb, usrdata, ctx->lr);
-            fflush(stdout);
+            if (tls_nand_probe_on()) {
+                char msg[256];
+                snprintf(msg, sizeof(msg),
+                         "IOS_IoctlAsync fd=%u '%s' cmd=%u in=0x%08X/%u out=0x%08X/%u cb=0x%08X",
+                         fd, ios_fd_path(fd), cmd, in_buf, in_len, out_buf, out_len, cb);
+                tls_nand_probe_slot(msg);
+            }
             tls_ipc_enqueue_callback(cb, 0, usrdata);
             ctx->gpr[3] = 0;
             ctx->pc = ctx->lr;
             return 1;
         }
         case 0x8061D2F0: { // IOS_IoctlvAsync
+            u32 fd = ctx->gpr[3];
+            u32 cmd = ctx->gpr[4];
+            u32 num_in = ctx->gpr[5];
+            u32 num_io = ctx->gpr[6];
+            u32 vecs = ctx->gpr[7];
             u32 cb = ctx->gpr[8];
             u32 usrdata = ctx->gpr[9];
+            if (tls_nand_probe_on()) {
+                char msg[256];
+                snprintf(msg, sizeof(msg),
+                         "IOS_IoctlvAsync fd=%u '%s' cmd=%u nin=%u nio=%u vecs=0x%08X cb=0x%08X",
+                         fd, ios_fd_path(fd), cmd, num_in, num_io, vecs, cb);
+                tls_nand_probe_slot(msg);
+            }
             tls_ipc_enqueue_callback(cb, 0, usrdata);
             ctx->gpr[3] = 0;
             ctx->pc = ctx->lr;
             return 1;
         }
         case 0x8061D3E0: { // IOS_Ioctlv
+            u32 fd = ctx->gpr[3];
+            u32 cmd = ctx->gpr[4];
+            u32 num_in = ctx->gpr[5];
+            u32 num_io = ctx->gpr[6];
+            u32 vecs = ctx->gpr[7];
+            if (tls_nand_probe_on()) {
+                char msg[512];
+                int n = snprintf(msg, sizeof(msg), "IOS_Ioctlv fd=%u '%s' cmd=%u nin=%u nio=%u vecs=0x%08X",
+                                 fd, ios_fd_path(fd), cmd, num_in, num_io, vecs);
+                /* Each IOSIoVector is {void* data; u32 size;}: print data+size and
+                 * the first word of each, enough to recognise the ISFS request. */
+                for (u32 i = 0; i < num_in + num_io && i < 6 && n > 0 && n < (int)sizeof(msg) - 40; i++) {
+                    u32 vp = vecs + i * 8;
+                    u32 d = mem_read32(ctx, vp);
+                    u32 s = mem_read32(ctx, vp + 4);
+                    u32 w0 = (d && resolve_guest_pointer(ctx, d)) ? mem_read32(ctx, d) : 0;
+                    n += snprintf(msg + n, sizeof(msg) - n, " v%u[0x%08X/%u w0=0x%08X]", i, d, s, w0);
+                }
+                tls_nand_probe_slot(msg);
+            }
             ctx->gpr[3] = 0; // Success
             ctx->pc = ctx->lr;
             return 1;
+        }
+
+        // ISFS / NAND entry points. Probe only: every one of these is guest SDK
+        // code whose real work lands on the HLE'd IOS_* calls above, so run it.
+        case 0x8061B6D0:   // ISFS_Open(path, mode)
+        case 0x8061B7A0:   // ISFS_OpenAsync(path, mode, cb, arg)
+        case 0x8061B860:   // ISFS get-file-stats on an open fd (cmd 11)
+        case 0x8061EF90:   // NANDGetLength(info, u32* length)
+        {
+            if (tls_nand_probe_on()) {
+                char msg[256];
+                if (address == 0x8061EF90u) {
+                    u32 info = ctx->gpr[3];
+                    u32 fd = (info >= 0x80000000u && info < 0x94000000u) ? mem_read32(ctx, info) : 0;
+                    snprintf(msg, sizeof(msg), "NANDGetLength info=0x%08X fd=%u out_len=0x%08X lr=0x%08X",
+                             info, fd, ctx->gpr[4], ctx->lr);
+                } else if (address == 0x8061B860u) {
+                    u32 fd = ctx->gpr[3];
+                    snprintf(msg, sizeof(msg), "ISFS_GetFileStats fd=%u out=0x%08X lr=0x%08X",
+                             fd, ctx->gpr[4], ctx->lr);
+                } else {
+                    const char* p = (const char*)resolve_guest_pointer(ctx, ctx->gpr[3]);
+                    snprintf(msg, sizeof(msg), "%s path='%s' mode=%u lr=0x%08X",
+                             (address == 0x8061B6D0u) ? "ISFS_Open" : "ISFS_OpenAsync",
+                             p ? p : "(null)", ctx->gpr[4], ctx->lr);
+                }
+                tls_nand_probe_slot(msg);
+            }
+            return 0; // Run the guest's own implementation
         }
 
         // SC (System Config) services
@@ -5182,38 +5383,57 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0; // Run original code
         }
 
-        // fn_80620220 (NANDCheckAsync)
+        // fn_80620220 (NANDPrivateOpen async wrapper) / fn_80620250 (its body)
+        //
+        // These used to answer for the guest: write 0 to gpr[6], enqueue gpr[8]
+        // with result 0. That is fabricated *state*: it told the save loader that
+        // the save file was opened successfully when nothing had been opened, so
+        // the loader went on to read a file that does not exist and the title
+        // ended up declaring the (absent) save data corrupt. The real body is not
+        // an IOS call at all - it is SDK code that resolves the path and then
+        // calls ISFS_OpenAsync/CreateFile, which land on our HLE'd IOS_* entries
+        // further down this switch, where the honest answer already exists
+        // ("no such file" for a fresh console). Run it.
         case 0x80620220:
         case 0x80620250: {
-            u32 out_answer = ctx->gpr[6];
-            u32 cb = ctx->gpr[8];
-            u32 block = ctx->gpr[9];
-            if (out_answer && out_answer >= 0x80000000 && out_answer < 0x94000000) {
-                mem_write32(ctx, out_answer, 0); // 0 = NAND_CHECK_OK
+            if (tls_nand_probe_on()) {
+                char msg[320];
+                int n = snprintf(msg, sizeof(msg),
+                                 "NANDPrivateOpen%s r3=0x%08X r4=0x%08X r5=%u r6=0x%08X r7=0x%08X r8=0x%08X r9=0x%08X",
+                                 (address == 0x80620220u) ? "Async" : " (body)",
+                                 ctx->gpr[3], ctx->gpr[4], ctx->gpr[5], ctx->gpr[6],
+                                 ctx->gpr[7], ctx->gpr[8], ctx->gpr[9]);
+                if (n > 0 && n < (int)sizeof(msg) - 8 && ctx->gpr[3] >= 0x80000000u &&
+                    ctx->gpr[3] < 0x94000000u && resolve_guest_pointer(ctx, ctx->gpr[3])) {
+                    char path[64];
+                    u32 pa = ctx->gpr[3];
+                    for (int i = 0; i < 63; i++) {
+                        u8 c = mem_read8(ctx, pa + (u32)i);
+                        path[i] = (char)c;
+                        if (!c) break;
+                    }
+                    path[63] = 0;
+                    snprintf(msg + n, sizeof(msg) - n, " path4='%s'", path);
+                }
+                tls_nand_probe_slot(msg);
             }
-            if (cb) {
-                tls_ipc_enqueue_callback(cb, 0, block);
-            }
-            ctx->gpr[3] = 0; // NAND_RESULT_OK
-            ctx->pc = ctx->lr;
-            return 1;
+            return 0; // Run the guest's own NAND implementation
         }
 
-        // fn_80620BD0 (NANDGetStatusAsync)
+        // fn_80620BD0 (NANDGetStatus, async)
+        //
+        // Same story: it used to write a fabricated 1346432-byte length into the
+        // caller's status buffer and report success. The real function builds a
+        // command block and issues an ISFS ioctl, which our IOS_* HLE answers.
         case 0x80620BD0: {
-            u32 status_ptr = ctx->gpr[4];
-            u32 cb = ctx->gpr[5];
-            u32 block = ctx->gpr[6];
-            if (status_ptr && status_ptr >= 0x80000000 && status_ptr < 0x94000000) {
-                mem_write32(ctx, status_ptr + 0x00, 1346432); // length = 1346432 bytes
-                mem_write32(ctx, status_ptr + 0x04, 0);
+            if (tls_nand_probe_on()) {
+                char msg[256];
+                snprintf(msg, sizeof(msg),
+                         "NANDGetStatus r3=0x%08X r4=0x%08X r5=0x%08X r6=0x%08X r7=0x%08X lr=0x%08X",
+                         ctx->gpr[3], ctx->gpr[4], ctx->gpr[5], ctx->gpr[6], ctx->gpr[7], ctx->lr);
+                tls_nand_probe_slot(msg);
             }
-            if (cb) {
-                tls_ipc_enqueue_callback(cb, 0, block);
-            }
-            ctx->gpr[3] = 0;
-            ctx->pc = ctx->lr;
-            return 1;
+            return 0; // Run the guest's own implementation
         }
 
         // fn_800A4228 (Check pending count at mgr+348 / +0x15C)
