@@ -4049,12 +4049,51 @@ purely because its virtual entries are ordinary function entries.**
 
 #### 9. Work order, revised
 
-1. **The parity: leading explanation is that the host presents twice per guest frame.** Evidence,
-   all measured:
-   * the two parities are the two halves of ONE frame - present 4001 is 76 batches with
-     `blend=1, additive=0, untextured=5` (opaque geometry), present 4002 is 76 batches with
-     `blend=49, additive=1, untextured=0` (the blended composite/post-process);
-   * **the guest's display frame is the EVEN one, not the odd one** - corrected this session with
+1. **FIXED: the "stale alternate frame" was a texture-cache hash that covered only 1/8 of a
+   texture.** The renderer keeps decoded textures in `s_d3d11.tex_cache` and re-decodes only when a
+   content hash changes. That hash was computed over
+
+   ```
+   approx_words = (width * height) / 8        /* 0.5 bytes per pixel, whatever the format */
+   step        = approx_words / 64            /* ~64 sampled words */
+   ```
+
+   so for an **RGBA8** destination it hashed only the first **1/8** of the texture (4 bytes/texel,
+   but the size estimate assumed 0.5). An EFB copy that rewrote anything past that window left the
+   hash unchanged, the host kept serving the stale decoded texture, and the frame came out
+   byte-identical for thousands of frames - exactly the reported symptom. The Chapter-1 composite
+   half is a 320x224 RGBA8 destination, which is why it was the half that froze.
+
+   **Fix** (`gfx_d3d11.c`, `TLS_TEX_HASH_FULL`, now ON by default; set it to `0` for the old
+   behaviour): size the hash from the format's real bytes per texel (I4/CI4 0.5, I8/IA4/CI8/CMPR 1,
+   IA8/RGB565/RGB5A3 2, RGBA8 4) and sample 256 words instead of 64.
+
+   **Measured:**
+   * Chapter-1 presents 4002/4004/4006 were byte-identical (`688b6a83`); they are now
+     `0b19a9ef` / `d34f5bb9` / `ae02a4d9`, i.e. they advance. Odd frames still advance
+     (`ff5095be` / `88d43fee` / `725a1f03`). **The staleness is gone.**
+   * The 1448 invariant is **unchanged**: `mean (102,188,205) p10 69 p50 203 p90 203 p99 206`,
+     verified twice with the new default. The title is unaffected because its textures are redrawn
+     or genuinely static.
+   * `docs/evidence/parity_even_4002_before_hashfix.png` vs `..._after_hashfix.png`: the even half
+     used to be a frozen composite with a creature head; it is now the current cave frame.
+2. **What the fix does NOT do: the two halves still differ.** The host still presents both halves,
+   so the screen still alternates between the opaque geometry pass and the composite pass (now both
+   advancing). `TLS_PRESENT_ON_XFB=1` exists for that: it flips the window only on frames where the
+   guest did an XFB copy. Measured rates - **Chapter-1 `xfbs=1` on the even frames only** (4002/4004/
+   4006), **title `xfbs=1` on every frame** (1444..1448) - so the flag is safe for the title and would
+   drop only Chapter-1's geometry half. It stays default **OFF**: a screen with a long XFB-free
+   stretch would freeze the window and the boot/strap screens are unmeasured, and the 1448 invariant
+   is a *back-buffer* capture so it cannot validate a present-only change either way.
+   Note this also **corrects 5c.27 §9 item 1**, which claimed the guest displays on odd frames: the
+   authoritative per-frame counter says the **even/composite** frame is the displayed one. The old
+   reading came from `chain4001.log`, whose `present=` label does not pin which frame a copy belongs
+   to.
+
+   *Supporting measurements for the two-half structure (all taken before the hash fix; the split
+   itself is unchanged by it):*
+
+   * the guest's display frame is the EVEN one, not the odd one - corrected this session with
      the per-frame probe. The authoritative counts are `xfbs=1` on 4002/4004/4006 and `xfbs=0` on
      4001/4003/4005. Round 4 read an XFB copy out of `chain4001.log` and concluded the guest displays
      on odd frames; that reading was wrong - the chain dump's `present=` label does not pin the frame

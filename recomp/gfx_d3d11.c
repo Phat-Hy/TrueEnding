@@ -840,9 +840,40 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
     }
 
     const uint32_t* p_words = (const uint32_t*)guest_tex_data;
-    uint32_t approx_words = (tu->width * tu->height) / 8; // minimum 0.5 bpp -> words
+    /* Content hash, used below to decide "the cached decode of this texture is still
+     * valid".
+     *
+     * The old size estimate was `width*height/8` words - i.e. 0.5 bytes per pixel whatever
+     * the format - and only ~64 words spread across THAT range were hashed. For an RGBA8
+     * destination (4 bytes/texel) that covers just the first 1/8 of the texture, so an EFB
+     * copy that rewrites anything past it leaves the hash unchanged and the host keeps
+     * serving a stale decoded texture. That is exactly what a byte-identical "frozen"
+     * frame looks like, and the Chapter-1 composite half is a 320x224 RGBA8 destination.
+     * TLS_TEX_HASH_FULL (now ON by default; set it to 0 to get the old behaviour) hashes
+     * across the format's real byte size with a denser sample. */
+    static int s_hash_full = -1;
+    if (s_hash_full < 0) {
+        const char* e = getenv("TLS_TEX_HASH_FULL");
+        s_hash_full = (e && atoi(e) == 0) ? 0 : 1;
+    }
+    uint32_t approx_words;
+    uint32_t hash_samples = 64;
+    if (s_hash_full) {
+        uint32_t num = 4, den = 1;                 /* default: RGBA8, 4 bytes per texel */
+        switch (tu->format) {
+            case 0: case 8:                num = 1; den = 2; break;  /* I4 / CI4 (4bpp) */
+            case 1: case 2: case 9: case 14: num = 1; den = 1; break; /* I8 IA4 CI8 CMPR */
+            case 3: case 4: case 5:        num = 2; den = 1; break;  /* IA8 RGB565 RGB5A3 */
+            default:                       num = 4; den = 1; break;  /* RGBA8 / default */
+        }
+        uint32_t tex_bytes = (uint32_t)(((uint64_t)tu->width * tu->height * num) / den);
+        approx_words = tex_bytes / 4u;
+        hash_samples = 256;
+    } else {
+        approx_words = (tu->width * tu->height) / 8; // minimum 0.5 bpp -> words
+    }
     if (approx_words == 0) approx_words = 1;
-    uint32_t step = (approx_words > 64) ? (approx_words / 64) : 1;
+    uint32_t step = (approx_words > hash_samples) ? (approx_words / hash_samples) : 1;
     uint32_t quick_hash = 0x811c9dc5;
     for (uint32_t wi = 0; wi < approx_words; wi += step) {
         quick_hash ^= p_words[wi];
