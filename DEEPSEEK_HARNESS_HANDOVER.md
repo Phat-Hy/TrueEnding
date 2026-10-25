@@ -4266,6 +4266,21 @@ purely because its virtual entries are ordinary function entries.**
    `addi rX, rA, -8` + `stw rX, 4(rA)` pattern (scanned: no hits) and it is not a global list
    (scanned: no external references), so look for `stw rX, 4(rY)` where `rX` came from a call result
    or a register holding another object.
+   **That "-8 is a parent pointer" reading is NOT supported** - checked what is actually at
+   `payload-8`:
+
+   ```
+   PAY0 0x8186DF60  [pay-16..pay-4]: 3F7AE148 3F800000 80D7CA50 0000011B
+   PAY1 0x81863F60  [pay-16..pay-4]: 8186DE28 817D1448 00000010 0000011A
+   ```
+
+   The two preceding regions are not the same kind of data (floats + a pointer + 0x11B vs two
+   pointers + 0x10 + 0x11A), so `payload-8` is not a symmetric "owner subobject" for both. `w1` is
+   therefore *not* a simple parent pointer and this interpretation should be dropped rather than
+   built on. **Five rounds have now gone into this one object with two of my readings corrected**;
+   the more productive next move is to stop analysing the object and instead find the code that
+   *creates* the payloads (they carry sequential ids `0x0A93`/`0x0A94`, so one factory makes both)
+   and read the parenting step there, rather than inferring it from object memory.
    **Verified unchanged after the texture-hash fix**: phase 13 still reaches `o88=3` at 3602, falls
    back to `o88=1` with the counter at 1 at 3604, and stays there through 4524. The rendering fix and
    the intro stall are independent.

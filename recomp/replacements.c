@@ -4953,6 +4953,11 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                                 printf("[TLS SceneSM] f=%d PAY%d 0x%08X:", g_runner_current_frame, rec, pay);
                                 for (wd = 0; wd < 20; wd++) printf(" %08X", mem_read32(ctx, pay + (u32)wd * 4));
                                 printf("\n");
+                                /* w1 of slot 0 is PAY0-8, which round 13 read as a parent/base
+                                 * pointer. Test that reading: what is actually at payload-8? */
+                                printf("[TLS SceneSM] f=%d PRE%d [pay-16..pay-4]:", g_runner_current_frame, rec);
+                                for (wd = 0; wd < 4; wd++) printf(" %08X", mem_read32(ctx, pay - 16u + (u32)wd * 4));
+                                printf("\n");
                             }
                         }
                         fflush(stdout);
