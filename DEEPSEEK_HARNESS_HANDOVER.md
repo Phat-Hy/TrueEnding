@@ -3278,3 +3278,36 @@ stage decode is `st0` sampling **map1** and `st1` sampling **map0** (the mask), 
 `[tex] mapN` probe lines are indexed by BP texmap while the batch header line's `tex=`/
 `tex1=` fields come from `batch->tex`/`tex1`, which are in the opposite order. Read the
 code, not the labels (again).
+
+#### 12. `TLS_ISFS_SERVICE=1` (opt-in, default OFF): a partial /dev/fs model, and both measurements
+
+Added `tls_isfs_ioctlv_service()` in `replacements.c`: for an `IOSIoctlv`/
+`IOSIoctlvAsync` on `/dev/fs` it writes the operation's result word into the first
+output vector (the SDK wrapper *always* reads it back from there - leaving it
+untouched hands the guest `iosAllocAligned` scratch content), honours
+`cmd 4` CreateFile by creating a real host file under `savedata/`, `cmd 8`
+Delete by removing it, and `cmd 6` by zeroing its 76-byte reply. Unmodelled
+commands (12) only get the result word.
+
+Measured effect on the `UP`+`A` plan, everything else equal:
+
+| result word | mode trace |
+|---|---|
+| untouched (previous behaviour) | `6->7->8->9->11->12->16->17->18->19->20->22->25` (frames 1501..1639), then stalls in 25 |
+| `0` = ISFS_OK (`TLS_ISFS_SERVICE=1`) | `6->7->8->9->11` (frames 1501..1584), then stalls in 11 |
+
+So the earlier "progress" was the guest consuming garbage as its ISFS result, and it
+happens to walk further. **Neither is correct**: commands 4/6/8/12 need real models
+(path -> host file, 76-byte GetAttr layout, and whatever 12 is - the NAND layer at
+0x80622260 retries it ~10x). The service stays opt-in so the default path is
+bit-identical to the baseline: re-measured after all of this session's changes,
+default (no TLS_* flags) 3-A plan at present 1448 is mean `(102,188,205)`, p10 69,
+p50 203, p90 203 - unchanged.
+
+Both traces are reproducible:
+```
+# A: dialog -> Yes, unmodelled result word
+TLS_INPUT_SCRIPT='600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A' \
+TLS_TEV=1 TLS_DEFER_EFB_COPY=1 TLS_NAND_PROBE=1  tls_runner.exe --frames 2804
+# B: same with TLS_ISFS_SERVICE=1
+```

@@ -1561,6 +1561,113 @@ static u32 ios_fd_length(u32 fd) {
     return (size > 0) ? (u32)size : 0u;
 }
 
+/* Map a guest ISFS path ("/savedata.dat") onto one flat host directory. */
+static void fs_path_to_host(const char* guest_path, char* out, size_t outsz) {
+    const char* p = guest_path;
+    while (p && *p == '/') p++;
+    if (!p || !*p) p = "unnamed.dat";
+    char leaf[96];
+    snprintf(leaf, sizeof(leaf), "%s", p);
+    for (char* q = leaf; *q; q++) {
+        if (*q == '/' || *q == '\\' || *q == ':') *q = '_';
+    }
+    snprintf(out, outsz, "savedata/%s", leaf);
+}
+
+static int tls_isfs_service_on(void) {
+    static int v = -1;
+    if (v < 0) v = getenv("TLS_ISFS_SERVICE") ? 1 : 0;
+    return v;
+}
+
+/* Service an IOSIoVector operation on /dev/fs.
+ *
+ * The SDK wrapper always reads the operation's result back out of the FIRST
+ * output vector, so a handler that leaves the vectors untouched gives the guest
+ * whatever the IOS scratch heap contained (the wrappers allocate these with
+ * iosAllocAligned). Write the result, and make CreateFile actually create.
+ *
+ * Commands measured from the guest wrappers (handover 5c.24 section 10):
+ *   4  CreateFile(path)                 in vec0 = 64-byte path, out vec1 = result
+ *   6  GetAttr(path)                    Ioctl form, 76-byte reply
+ *   8  Delete(path)                     Ioctl form
+ *   12 unknown, retried by the NAND layer while the title waits
+ */
+static void tls_isfs_ioctlv_service(CPUState* ctx, u32 fd, u32 cmd, u32 num_in, u32 num_io,
+                                    u32 vecs) {
+    u32 out0_ptr = 0, out0_len = 0;
+    if (num_in < 8) {
+        out0_ptr = mem_read32(ctx, vecs + num_in * 8);
+        out0_len = mem_read32(ctx, vecs + num_in * 8 + 4);
+    }
+
+    /* CreateFile: give the guest a real (empty) host file. */
+    char made_path[160] = {0};
+    if (cmd == 4 && num_in >= 1) {
+        u32 in_ptr = mem_read32(ctx, vecs);
+        char guest_path[80];
+        int n = 0;
+        if (in_ptr) {
+            for (; n < (int)sizeof(guest_path) - 1; n++) {
+                u8 c = mem_read8(ctx, in_ptr + (u32)n);
+                guest_path[n] = (char)c;
+                if (!c) break;
+            }
+        }
+        guest_path[sizeof(guest_path) - 1] = '\0';
+        if (n > 0) {
+            char host_path[128];
+            fs_path_to_host(guest_path, host_path, sizeof(host_path));
+#ifdef _WIN32
+            CreateDirectoryA("savedata", NULL);
+#endif
+            FILE* f = fopen(host_path, "ab");
+            if (f) fclose(f);
+            snprintf(made_path, sizeof(made_path), "%s -> %s", guest_path, host_path);
+        }
+    } else if (cmd == 8 && num_in >= 1) {
+        /* Delete(path): remove the host file if we made one. */
+        u32 in_ptr = mem_read32(ctx, vecs);
+        char guest_path[80];
+        int n = 0;
+        if (in_ptr) {
+            for (; n < (int)sizeof(guest_path) - 1; n++) {
+                u8 c = mem_read8(ctx, in_ptr + (u32)n);
+                guest_path[n] = (char)c;
+                if (!c) break;
+            }
+        }
+        guest_path[sizeof(guest_path) - 1] = '\0';
+        if (n > 0) {
+            char host_path[128];
+            fs_path_to_host(guest_path, host_path, sizeof(host_path));
+            remove(host_path);
+        }
+    }
+
+    /* Only the modelled commands get their whole reply written. For an
+     * unmodelled command (cmd 12 is one) leaving the payload alone keeps the
+     * earlier behaviour instead of inventing statistics; the result word above
+     * is the only thing every ISFS wrapper actually requires. */
+    if (cmd == 4 || cmd == 6 || cmd == 8) {
+        for (u32 i = num_in; i < num_in + num_io && i < 8; i++) {
+            u32 p = mem_read32(ctx, vecs + i * 8);
+            u32 len = mem_read32(ctx, vecs + i * 8 + 4);
+            if (!p || !len) continue;
+            void* dst = resolve_guest_pointer(ctx, p);
+            if (dst) memset(dst, 0, len > 256 ? 256 : len);
+        }
+    }
+
+    if (tls_nand_probe_on()) {
+        char msg[320];
+        snprintf(msg, sizeof(msg), "ISFS cmd=%u fd=%u nin=%u nio=%u%s%s",
+                 cmd, fd, num_in, num_io, made_path[0] ? " create " : "",
+                 made_path[0] ? made_path : "");
+        tls_nand_probe_slot(msg);
+    }
+}
+
 /* Wait-loop probe. The Chapter 1 handoff wedges with the guest parked inside
  * OSSleepThread on the queue at 0x807C6F60, called from the drain loop at
  * 0x80071CFC..0x80071D44, ~175 times per frame. That loop reads two halfwords
@@ -3100,6 +3207,17 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                          fd, ios_fd_path(fd), cmd, num_in, num_io, vecs, cb);
                 tls_nand_probe_slot(msg);
             }
+            /* ISFS: an operation on /dev/fs. The SDK wrapper reads the result back
+             * out of the FIRST output vector, so leaving it untouched hands the
+             * guest whatever the IOS heap happened to contain (these buffers are
+             * iosAllocAligned scratch). Write the result, and honour CreateFile so
+             * that a create really creates something on the host.
+             * Only for /dev/fs: an "io" vector is bidirectional (it carries input
+             * bytes too), so touching the /dev/es vectors would corrupt those
+             * calls' inputs. */
+            if (num_io > 0 && strcmp(ios_fd_path(fd), "/dev/fs") == 0 && tls_isfs_service_on()) {
+                tls_isfs_ioctlv_service(ctx, fd, cmd, num_in, num_io, vecs);
+            }
             tls_ipc_enqueue_callback(cb, 0, usrdata);
             ctx->gpr[3] = 0;
             ctx->pc = ctx->lr;
@@ -3125,6 +3243,9 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                     n += snprintf(msg + n, sizeof(msg) - n, " v%u[0x%08X/%u w0=0x%08X]", i, d, s, w0);
                 }
                 tls_nand_probe_slot(msg);
+            }
+            if (num_io > 0 && strcmp(ios_fd_path(fd), "/dev/fs") == 0 && tls_isfs_service_on()) {
+                tls_isfs_ioctlv_service(ctx, fd, cmd, num_in, num_io, vecs);
             }
             ctx->gpr[3] = 0; // Success
             ctx->pc = ctx->lr;
