@@ -1422,6 +1422,12 @@ static void efb_dst_decode_texel(const uint8_t* guest, uint32_t format, uint32_t
             *a = 255;
             break;
         }
+        case 1: {           /* R8 again: id 1 is the same memory layout as id 8 */
+            *r = guest[(size_t)tile * 32 + within];
+            *g = *b = *r;
+            *a = 255;
+            break;
+        }
         default: {  /* GX_TF_RGBA8: 32B of A/R pairs then 32B of G/B pairs */
             const uint8_t* t = guest + (size_t)tile * 64;
             *a = t[within * 2 + 0];
@@ -1497,6 +1503,11 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                 case 3: case 9:  bpp = 2; break;  /* RA8: 32B of (alpha, red) pairs */
                 case 7: bpp = 1; break;           /* A8: 32B of alpha */
                 case 8: bpp = 1; break;           /* R8: 32B of red (intensity) */
+                case 1: bpp = 1; break;           /* R8 again - the id the Chapter-1
+                                                   * composite chain uses (5c.25 §4c).
+                                                   * Same 32B 4x4 tile as 8; leaving it
+                                                   * on the RGBA8 fallback quadrupled
+                                                   * dst_w (pitch*8/4 instead of *8/1). */
                 default:
                     /* Keep the old behaviour for the formats that are not implemented
                      * (an RGBA8 write) rather than dropping the copy: a skipped copy
@@ -1760,11 +1771,12 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                         } else if (s_copy_fmt && format == 7) {
                             /* A8: 32-byte 4x4 tile of alpha */
                             guest[(size_t)tile * 32 + within] = a;
-                        } else if (s_copy_fmt && format == 8) {
+                        } else if (s_copy_fmt && (format == 8 || format == 1)) {
                             /* R8: 32-byte 4x4 tile of red. The bloom chain copies the
                              * frame here to get a one-byte luminance image; writing
                              * RGBA8 instead both mis-sized the destination and put the
-                             * intensity in the wrong byte. */
+                             * intensity in the wrong byte. Format 1 is the same layout
+                             * (the Chapter-1 chain's id for it, 5c.25 §4c). */
                             guest[(size_t)tile * 32 + within] = r;
                         } else {
                             uint8_t* tile_base = guest + (size_t)tile * 64;
@@ -2727,7 +2739,25 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     {
         static int s_pp = -1;
         if (s_pp < 0) s_pp = getenv("TLS_PRESENT_PROBE") ? 1 : 0;
-        if (s_pp && ((s_d3d11_dump_count % 100) == 0 || take_shot)) {
+        /* TLS_PRESENT_WINDOW=<start>,<count> prints EVERY present in that window.
+         * The 100-present cadence below cannot show the alternate-frame staleness
+         * (5c.25 §4b): the defect is exactly a parity, so it only appears when two
+         * adjacent presents are compared. */
+        static int s_pw_start = -1, s_pw_count = 0;
+        if (s_pw_start == -1) {
+            const char* pw = getenv("TLS_PRESENT_WINDOW");
+            s_pw_start = -2;
+            if (pw && *pw) {
+                int a = -1, b = 0;
+                if (sscanf(pw, "%d,%d", &a, &b) == 2 && a >= 0 && b > 0) {
+                    s_pw_start = a;
+                    s_pw_count = b;
+                }
+            }
+        }
+        int in_window = (s_pw_start >= 0 && s_d3d11_dump_count >= s_pw_start &&
+                         s_d3d11_dump_count < s_pw_start + s_pw_count);
+        if (s_pp && (in_window || (s_d3d11_dump_count % 100) == 0 || take_shot)) {
             printf("[TLS Present] count=%d frame_counter=%d gx_vtx=%u take_shot=%d\n",
                    s_d3d11_dump_count, s_d3d11.frame_counter, gx_vtx_count, (int)take_shot);
             fflush(stdout);
