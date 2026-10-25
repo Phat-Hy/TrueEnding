@@ -1378,6 +1378,9 @@ static void d3d11_capture_efb_snapshot(void) {
  * Both the writer and efb_dst_decode_texel read this, so the chain probe stays
  * honest - a probe that decodes with a different rule than the writer is worse
  * than no probe. */
+static int s_clears_this_frame = 0;
+static float s_last_clear[4] = {0,0,0,0};
+
 static int efb_r8_tile_8x4(void) {
     static int s = -1;
     if (s < 0) s = getenv("TLS_R8_TILE_8X4") ? 1 : 0;
@@ -2258,6 +2261,9 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
              * TLS_EFB_ALPHA=1 honours the guest value. */
             if (!s_efb_alpha) clear_color[3] = 1.0f;
         }
+        s_clears_this_frame++;
+        s_last_clear[0]=clear_color[0]; s_last_clear[1]=clear_color[1];
+        s_last_clear[2]=clear_color[2]; s_last_clear[3]=clear_color[3];
         static int s_cc = 0;
         if (s_cc < 2) { s_cc++; printf("[EfbClear] clear = %.2f %.2f %.2f %.2f%s\n",
             clear_color[0], clear_color[1], clear_color[2], clear_color[3],
@@ -2836,11 +2842,24 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
         int in_window = (s_pw_start >= 0 && s_d3d11_dump_count >= s_pw_start &&
                          s_d3d11_dump_count < s_pw_start + s_pw_count);
         if (s_pp && (in_window || (s_d3d11_dump_count % 100) == 0 || take_shot)) {
-            printf("[TLS Present] count=%d frame_counter=%d gx_vtx=%u take_shot=%d\n",
-                   s_d3d11_dump_count, s_d3d11.frame_counter, gx_vtx_count, (int)take_shot);
+            /* Per-frame characterisation, which the two halves of a multi-pass guest
+             * frame need: how many batches, how many of them blend, and whether this
+             * frame cleared the EFB (and to what). The [EfbClear] print above is
+             * capped at two occurrences for the whole run, so it cannot answer
+             * "did THIS frame clear" - which is exactly the question the parity
+             * defect turns on. */
+            uint32_t bc = 0, blended = 0;
+            const GxDrawBatch* bd = gx_pipeline_get_draw_batches(&bc);
+            for (uint32_t i = 0; i < bc; i++) if (bd[i].blend_enable) blended++;
+            printf("[TLS Present] count=%d frame_counter=%d gx_vtx=%u batches=%u blended=%u "
+                   "clears=%d clear=(%.2f,%.2f,%.2f) take_shot=%d\n",
+                   s_d3d11_dump_count, s_d3d11.frame_counter, gx_vtx_count, bc, blended,
+                   s_clears_this_frame, s_last_clear[0], s_last_clear[1], s_last_clear[2],
+                   (int)take_shot);
             fflush(stdout);
         }
     }
+    s_clears_this_frame = 0;
 
     if (take_shot) {
         ID3D11Texture2D* back_buffer = NULL;

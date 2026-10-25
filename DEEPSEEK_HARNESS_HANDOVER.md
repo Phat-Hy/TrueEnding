@@ -4061,9 +4061,26 @@ purely because its virtual entries are ordinary function entries.**
      half. Hardware only ever displays the finished XFB.
    Rendered both parities: `docs/evidence/parity_odd_4001.png` (cave, pool, sword, red effect) and
    `docs/evidence/parity_even_4002_frozen.png` (same cave, blue/purple, creature head in the pool).
+   **Per-frame profile** (extended `TLS_PRESENT_PROBE`, new this session):
+
+   ```
+   count=4001 gx_vtx=276471 batches=76 blended=1  clears=1 clear=(0,0,0)
+   count=4002 gx_vtx=44319  batches=76 blended=49 clears=1 clear=(0,0,0)
+   count=4003 gx_vtx=275922 batches=76 blended=1  clears=1 clear=(0,0,0)
+   count=4004 gx_vtx=44868  batches=76 blended=49 clears=1 clear=(0,0,0)
+   ```
+
+   **Both halves clear the EFB to black every frame**, so neither survives into the other - they are
+   two independent renders, not an accumulate-then-composite pair. Odd = opaque geometry. Even = a
+   heavily blended pass drawn over a freshly cleared black target, which is exactly why it looks
+   blue/purple and why the red-lit geometry is missing from it. The guest is running a legitimate
+   render-to-texture then composite cycle; hardware would display only the finished one. So the fix
+   must make the host display the finished frame and skip the intermediate one - there is no way to
+   "draw both halves into one buffer" without suppressing a clear the guest genuinely issues.
    Already **eliminated**: R8 tiling (`TLS_R8_TILE_8X4=1` - evens still identical), copy source
    (`TLS_EFB_SRC_CURRENT=1` - identical to default), snapshot placement (captured at
-   `gfx_d3d11.c:2897`, *before* `Present` at 2898), vertex truncation (`1<<20` capacity).
+   `gfx_d3d11.c:2897`, *before* `Present` at 2898), vertex truncation (`1<<20` capacity), and
+   EFB format 0/R4 (implemented; presents 4001-4003 hash byte-identically before and after).
    **Blocker for the fix**: gating `Present` on XFB copies would freeze the title, which emits very
    few `GXCopyDisp` events (36 in a 2400-frame run) and reaches the screen another way. Establish
    what displays the title before touching the present gate; the 1448 invariant is measured on the
