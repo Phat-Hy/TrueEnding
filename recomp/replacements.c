@@ -1276,6 +1276,17 @@ int tls_dvd_service_callback(CPUState* ctx) {
             u32 target = fi_addr ? mem_read32(ctx, fi_addr + 0x2C) : 0;
             if (target != 0x807C6F60 && target != 0x800000E4 && resolve_guest_pointer(ctx, target)) {
                 mem_write32(ctx, target, 2);
+            } else {
+                /* The completion is dropped for this target, so whatever waits on it spins
+                 * forever. Make that visible instead of silent (handover 5c.21). */
+                static u32 s_drop_reports = 0;
+                if (s_drop_reports++ < 16 || (s_drop_reports % 500) == 0) {
+                    printf("[TLS DVD] stream completion DROPPED #%u fi=0x%08X target=0x%08X "
+                           "res=%d resolved=%d\n",
+                           s_drop_reports, fi_addr, target, pending->result,
+                           resolve_guest_pointer(ctx, target) ? 1 : 0);
+                    fflush(stdout);
+                }
             }
             s_dvd_callbacks_run++;
             s_dvd_pending_head = (s_dvd_pending_head + 1) % TLS_DVD_MAX_PENDING;

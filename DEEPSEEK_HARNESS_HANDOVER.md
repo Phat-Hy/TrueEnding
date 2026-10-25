@@ -2278,6 +2278,59 @@ Dolphin's frame dumping also needs `DumpEFBTarget = True` in `GFX.ini [Settings]
 
 ---
 
+### 5c.21 The post-handoff stall: one PC, and it does **not** always happen
+
+Measured this session on the state at `1ad412a`/`4c2f8a6` (input plan
+`600-612:A,900-912:A,1200-1212:A,1300-1312:UP,1350-1362:A,1500-1512:A`):
+
+* **Where it burns the budget.** `TLS_PC_HIST=1 TLS_PC_HIST_FROM=1900` reports, for frames
+  1900/1901/1902, **100.0 % of all 10 031 samples at `0x8022A204`** - one address, every block.
+  The tap summary is the known one: `GameTask::Init` 81 calls (last 1882),
+  `SequenceManager::Update` 1504 calls (last 1882), streaming queue
+  `active="data/material/pc_ga_m_a00.material" status=1`.
+* **What that address is.** `0x8022A204 = fn_8022A054+0x1B0`. The generated chunk
+  (`build/recomp/generated/chunks/chunk_0137_text1_8022C...c`, label `label_8022A204`) shows the
+  loop, reading the recompiled code directly - no disassembler needed:
+
+  ```
+  r0 = mem_read32(r7 + 4)
+  r0 &= ~3
+  r0 -= r4
+  cmp(r0, r30)  ; loop while r0 < r30
+  ```
+
+  i.e. a spin on the word at `[r7+4]`, which never advances. Register state when wedged:
+  `LR=0x8022B048` (`fn_8022ADD4+0x274`, the caller), `r3=0x90002008` (a MEM2 pointer),
+  `r12=0x80084F30`. Naming `fn_8022A054` / `fn_8022ADD4` is the next cheap step: they are
+  unnamed in `config/symbols.txt`, so match them against the decomp in `src/` by their call
+  sites (`GameLoadTask` at `0x80570CFC` is one of the two task callbacks registered by
+  `TaskManager 0x809ADCF0`).
+* **It is not deterministic - and that is the most important finding.** The *identical* input
+  plan, run twice in a row, behaved differently:
+
+  | run | flags | result |
+  |---|---|---|
+  | A, B | `TLS_DRAW_TRACE=1` (+ `TLS_SHOT_FRAMES`) | stalled: `Update` last=1882, 100 % at `0x8022A204`, 18 ms/frame |
+  | C | no `TLS_DRAW_TRACE` | **did not stall**: `SequenceManager::Update` 1754 calls, last=1959, `TLS Frame 1920` reports **50 247 vtx / 54 batches**, PC at the idle loop `0x805F50B0`, 134-158 ms/frame |
+
+  So the host *can* pass the handoff and render the Game sequence, and a stall report is only
+  meaningful over several runs (the same run-to-run variance §5c.15 §7c documented). Any fix must
+  be A/B'd on 3+ runs, and "the stall is gone" from a single run is not evidence.
+* **What was ruled out this session.** The stream-completion path drops a `0x8046BBE0` callback
+  silently when its target is `0x807C6F60`, `0x800000E4` or does not resolve
+  (`tls_dvd_service_callback`); that path is now instrumented and prints
+  `[TLS DVD] stream completion DROPPED ...`. It **did not fire** in either kind of run, so dropped
+  completions are not the cause here.
+
+Next steps for Task 2, in order: (1) name `fn_8022A054` and `fn_8022ADD4` (call sites:
+`GameLoadTask` `0x80570CFC`, the two `vt=0` task entries `0x80363DBC` / `0x803646C4`); (2) find
+what writes `[r7+4]` (the value the loop spins on) and whether the host ever updates it - with
+`r3=0x90002008` it looks like a MEM2 work-area flag, i.e. a file/DVD worker the host never
+advances; (3) only then touch anything, and validate over 3 runs.
+
+
+---
+
 ### 5c.20 Gamma is refuted, the XF stage is implemented, and the chain *erases the scene*
 
 Three measurements, one implementation. The first one kills the plan §5c.19 §9 opened with.
