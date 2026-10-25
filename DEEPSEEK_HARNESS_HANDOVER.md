@@ -1308,8 +1308,12 @@ called. The pipeline records the guest's BP clear colour (`0x4F`/`0x50`) but `d3
 clears to hardcoded black, so the guest's own clear is invisible to rendering.
 
 **Next steps.**
-1. Use the BP clear colour for the backend's clear (correctness fix on its own; also removes black-vs-sky
-   differences that make the feedback loop's fixed point hard to reason about).
+1. ~~Use the BP clear colour for the backend's clear~~ **DONE (commit `c676356`).** `d3d11_present()` clears
+   with `gx_pipeline_get_clear_color()`; `TLS_EFB_CLEAR_BLACK=1` restores the old behaviour for A/B. The
+   pipeline also stopped suppressing a legitimate clear-to-black (it used to skip publishing when all
+   components were zero, which kept the previous colour alive). Measured: the boot clear is now the guest's
+   `(0.25, 0.25, 0.25)` instead of a forced `(0,0,0)`, and a 1300-frame title run still completes with no
+   exception. This does **not** change the MENU background - that frame's guest clear is not cyan.
 2. Find the frame where the uniform colour *first* appears - it is the origin, everything after is the loop.
    `TLS_SHOT_FRAMES` frame-by-frame around the mode transition (mode 5/6 at 1201-1202) plus `TLS_BATCH_DUMP`
    on that frame; the earlier dump at 1205 already shows the same self-referential tail, so the origin is at
@@ -1322,6 +1326,11 @@ clears to hardcoded black, so the guest's own clear is invisible to rendering.
 4. Re-test the post-handoff stall (§5c.12) afterwards - the stall's "one request stuck at status=1" is not
    explained by this, but both live in the same frame pipeline and the composition loop currently consumes the
    frame budget's worth of fullscreen work.
+
+**New instruments added by §5c.13/§5c.14** (all inert unless set): `TLS_EFB_COPY_FROM=<frame>` adds the frame
+to each `TLS_EFB_COPY_PROBE` line (and raises the cap to 40); `TLS_TEX_PPM="0xADDR,W,H;..."` dumps arbitrary
+guest textures at shutdown decoded as 4x4-tiled RGBA8; `TLS_EFB_CLEAR_BLACK=1` restores the hardcoded clear.
+
 
 
 
