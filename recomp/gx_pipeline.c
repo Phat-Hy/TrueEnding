@@ -1448,8 +1448,14 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
          * picture (MENU background (119,234,255) -> (255,234,119)) while the composite
          * chain is still unfixed, so it is deliberately left off there. */
         if (!s_efb_copy_deferred && s_efb_copy_hook) {
+            /* Pass the real destination format (BP 0x52 bits 3..6, `fmt/2 + (fmt&1)*8`)
+             * rather than the raw BP 0x4B byte, which is only the destination address and
+             * is therefore always 0. The backend still treats "flag off" as RGBA8, so this
+             * cannot change the default picture; with TLS_EFB_COPY_FMT=1 it writes RGB565
+             * and IA8 destinations in their own tile layout (handover 5c.22). */
+            uint32_t tpf_rt = (val >> 3) & 0xFu;
             s_efb_copy_hook(s_efb_copy_dst_guest, s_efb_copy_x0, s_efb_copy_y0,
-                            s_efb_copy_x1, s_efb_copy_y1, s_efb_copy_format, 0,
+                            s_efb_copy_x1, s_efb_copy_y1, tpf_rt / 2u + (tpf_rt & 1u) * 8u, 0,
                             s_efb_copy_pitch, val);
         }
         if (s_copy_probe && s_copy_reports < 40) {

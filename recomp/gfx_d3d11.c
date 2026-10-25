@@ -943,6 +943,43 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
         }
         decode_gx_texture((const uint8_t*)guest_tex_data, tu->width, tu->height, tu->format, s_d3d11.gx_staging_rgba, tu->tlut_addr, tu->tlut_format);
 
+        /* Decoded-texture dump: the picture the shader will actually sample, so a
+         * "this surface renders the wrong colour" report can be split into "the decode
+         * is wrong" vs "the TEV stage is wrong" without another frame of guessing.
+         * TLS_TEX_DUMP=0x90CDCBE0[,addr...] writes build/recomp/tex_<addr>_<WxH>_f<fmt>.ppm */
+        {
+            static uint32_t s_dump_addrs[8];
+            static int s_dump_count = -1;
+            if (s_dump_count < 0) {
+                s_dump_count = 0;
+                const char* e = getenv("TLS_TEX_DUMP");
+                while (e && *e && s_dump_count < 8) {
+                    while (*e == ',' || *e == ' ') e++;
+                    if (!*e) break;
+                    s_dump_addrs[s_dump_count++] = (uint32_t)strtoul(e, (char**)&e, 0);
+                }
+            }
+            for (int di = 0; di < s_dump_count; di++) {
+                if (s_dump_addrs[di] != tu->guest_addr) continue;
+                char path[128];
+                snprintf(path, sizeof(path), "build/recomp/tex_%08X_%ux%u_f%u.ppm",
+                         tu->guest_addr, tu->width, tu->height, tu->format);
+                FILE* df = fopen(path, "wb");
+                if (df) {
+                    fprintf(df, "P6\n%u %u\n255\n", tu->width, tu->height);
+                    for (uint32_t pi = 0; pi < tu->width * tu->height; pi++) {
+                        uint32_t px = s_d3d11.gx_staging_rgba[pi];
+                        fputc((int)(px & 0xFF), df);
+                        fputc((int)((px >> 8) & 0xFF), df);
+                        fputc((int)((px >> 16) & 0xFF), df);
+                    }
+                    fclose(df);
+                    printf("[TexDump] %s\n", path);
+                    fflush(stdout);
+                }
+            }
+        }
+
         uint32_t total_px = tu->width * tu->height;
         uint32_t nonzero_cnt = 0;
         uint32_t transparent_cnt = 0;
@@ -1305,13 +1342,60 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                                     uint32_t x1, uint32_t y1, uint32_t format, int half_scale,
                                     uint32_t pitch, uint32_t exec) {
     if (!s_d3d11.device || !s_d3d11.context || !s_d3d11.swap_chain) return;
-    if (format != 0) {
+    /* Destination pixel format. Until now every copy was written as a 4-byte RGBA8 tile,
+     * which is only right for the copies whose destination the guest samples as RGBA8
+     * (GX_TF_RGBA8 = 6). The MENU's composite chain copies into **RGB565** destinations
+     * as well - Dolphin's own per-copy dumps name them `..._320x224_4.png` - and the
+     * guest samples those with GX_TF_RGB565, i.e. 2 bytes per pixel in 32-byte 4x4
+     * tiles. Writing 64-byte RGBA8 tiles there puts every texel in the wrong place and
+     * hands the 3D passes a garbage "previous frame" texture: measured at MENU frame
+     * 1448, batch b13's TEV stage 3 samples `0x9038D1C0 320x224 fmt=4 avg=(127,112,0)`
+     * and *adds* it, which is exactly the saturated red the foreground rock shows.
+     *
+     * TLS_EFB_COPY_FMT=1 writes the destination in the format's real tile layout and
+     * derives the destination width from the pitch and the format's bytes per pixel
+     * (tile row = pitch*32 bytes = dst_w*4*bpp, so dst_w = pitch*8/bpp), which
+     * reproduces the guest's own pitch/dstw pairs (`pitch=80 -> 320` for RGB565,
+     * `pitch=160 -> 320` for RGBA8) instead of the old source/half rule. */
+    static int s_copy_fmt = -1;
+    if (s_copy_fmt < 0) s_copy_fmt = getenv("TLS_EFB_COPY_FMT") ? 1 : 0;
+    int is_xfb_copy = (int)((exec >> 14) & 1u);
+    uint32_t bpp = 4;
+    int dst_supported = 1;
+    if (s_copy_fmt) {
+        if (is_xfb_copy) {
+            bpp = 2;                  /* 16bpp linear scanout buffer, see below */
+        } else {
+            switch (format) {
+                case 6: bpp = 4; break;   /* GX_TF_RGBA8: 4x4 tiles, 32B A/R + 32B G/B */
+                case 4: bpp = 2; break;   /* GX_TF_RGB565: 4x4 tiles, 32B of u16 */
+                case 5: bpp = 2; break;   /* GX_TF_RGB5A3: 4x4 tiles, 32B of u16 */
+                case 3: bpp = 2; break;   /* GX_TF_IA8: 4x4 tiles, 16 (A,I) pairs */
+                default:
+                    /* Keep the old behaviour for the formats that are not implemented
+                     * (an RGBA8 write) rather than dropping the copy: a skipped copy
+                     * leaves guest memory stale, which is worse than a wrong layout. */
+                    bpp = 4;
+                    dst_supported = 0;
+                    break;
+            }
+        }
+    } else if (format != 0 && s_copy_fmt) {
         static int s_fmt_reported = 0;
         if (s_fmt_reported++ < 4) {
             printf("[EfbCopy] format %u not implemented (only RGBA8); copy skipped\n", format);
             fflush(stdout);
         }
         return;
+    }
+    if (!dst_supported) {
+        static uint32_t s_unsup = 0;
+        if (s_unsup < 8) {
+            printf("[EfbCopy] destination format %u not implemented, writing RGBA8 (dst=0x%08X)\n",
+                   format, dst_guest);
+            fflush(stdout);
+            s_unsup++;
+        }
     }
     if (x1 < x0 || y1 < y0) return;
 
@@ -1337,8 +1421,24 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
      * copy on MENU frame 1448 in handover 5c.17. */
     static int s_geom = -1;
     if (s_geom < 0) s_geom = getenv("TLS_EFB_COPY_GEOM") ? 1 : 0;
-    int is_xfb_copy = (int)((exec >> 14) & 1u);
-    if (s_geom) {
+    if (s_copy_fmt) {
+        /* Format-aware version of the same derivation: a 4x4-tiled destination's tile
+         * row is dst_w*4*bpp bytes and equals pitch*32, so dst_w = pitch*8/bpp. */
+        if (is_xfb_copy) {
+            uint32_t ww = (pitch * 32u) / 2u;   /* 16bpp linear scanout buffer */
+            if (ww) dst_w = ww;
+            dst_h = h;
+            step = 1;
+        } else if (pitch) {
+            uint32_t ww = (pitch * 8u) / bpp;
+            if (ww && ww <= w) {
+                dst_w = ww;
+                step = (w % dst_w) == 0 ? (w / dst_w) : 1;
+                if (step == 0) step = 1;
+                dst_h = h / step;
+            }
+        }
+    } else if (s_geom) {
         if (is_xfb_copy) {
             uint32_t ww = (pitch * 32u) / 2u;
             if (ww) dst_w = ww;
@@ -1512,11 +1612,33 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                     } else if (!is_display_copy) {
                         uint32_t tile = (gy / 4) * tiles_x + (gx / 4);
                         uint32_t within = (gy % 4) * 4 + (gx % 4);
-                        uint8_t* tile_base = guest + (size_t)tile * 64;
-                        tile_base[within * 2 + 0] = a;
-                        tile_base[within * 2 + 1] = r;
-                        tile_base[32 + within * 2 + 0] = g;
-                        tile_base[32 + within * 2 + 1] = b;
+                        if (s_copy_fmt && format == 4) {
+                            /* GX_TF_RGB565: 32-byte 4x4 tile of big-endian u16 */
+                            uint16_t v = (uint16_t)(((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3));
+                            uint8_t* t16 = guest + (size_t)tile * 32 + within * 2;
+                            t16[0] = (uint8_t)(v >> 8);
+                            t16[1] = (uint8_t)(v & 0xFF);
+                        } else if (s_copy_fmt && format == 5) {
+                            /* GX_TF_RGB5A3: 16-bit, alpha bit 15 clear => 1 bit alpha */
+                            uint16_t v = (uint16_t)(((a >> 7) << 15) |
+                                                    (((r * 31) / 255) << 10) |
+                                                    (((g * 31) / 255) << 5) |
+                                                    ((b * 31) / 255));
+                            uint8_t* t16 = guest + (size_t)tile * 32 + within * 2;
+                            t16[0] = (uint8_t)(v >> 8);
+                            t16[1] = (uint8_t)(v & 0xFF);
+                        } else if (s_copy_fmt && format == 3) {
+                            /* GX_TF_IA8: 32-byte 4x4 tile of (alpha, intensity) pairs */
+                            uint8_t* t8 = guest + (size_t)tile * 32 + within * 2;
+                            t8[0] = a;
+                            t8[1] = (uint8_t)((r * 77 + g * 150 + b * 29) >> 8);
+                        } else {
+                            uint8_t* tile_base = guest + (size_t)tile * 64;
+                            tile_base[within * 2 + 0] = a;
+                            tile_base[within * 2 + 1] = r;
+                            tile_base[32 + within * 2 + 0] = g;
+                            tile_base[32 + within * 2 + 1] = b;
+                        }
                     }
                 }
             }
@@ -1693,9 +1815,52 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
     if (have_backbuffer) ID3D11Texture2D_Release(source);
 }
 
-/* Average colour of the swap-chain buffer, sampled on a coarse grid. Used by
- * TLS_BATCH_PROBE to watch the framebuffer change batch by batch within one frame,
- * which is the only way to name the pass that destroys the picture. */
+/* Same readback, plus the two statistics that name a *local* defect instead of a
+ * frame average: the brightest sample (a saturated glow raises it without moving the
+ * average much) and the number of red-dominant samples (a channel-swapped or
+ * mis-decoded texture shows up as red-dominant rock, which an average hides).
+ * Used by TLS_BATCH_PROBE. */
+static void probe_backbuffer_stats(unsigned* out_r, unsigned* out_g, unsigned* out_b,
+                                   unsigned* out_max, unsigned* out_red, unsigned* out_bright,
+                                   unsigned* out_n) {
+    *out_r = *out_g = *out_b = *out_max = *out_red = *out_bright = *out_n = 0;
+    ID3D11Texture2D* bb = NULL;
+    if (FAILED(IDXGISwapChain_GetBuffer(s_d3d11.swap_chain, 0, &IID_ID3D11Texture2D, (void**)&bb))) return;
+    D3D11_TEXTURE2D_DESC desc;
+    ID3D11Texture2D_GetDesc(bb, &desc);
+    desc.Usage = D3D11_USAGE_STAGING;
+    desc.BindFlags = 0;
+    desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+    desc.MiscFlags = 0;
+    ID3D11Texture2D* staging = NULL;
+    if (SUCCEEDED(ID3D11Device_CreateTexture2D(s_d3d11.device, &desc, NULL, &staging))) {
+        ID3D11DeviceContext_CopyResource(s_d3d11.context, (ID3D11Resource*)staging, (ID3D11Resource*)bb);
+        D3D11_MAPPED_SUBRESOURCE mapped;
+        if (SUCCEEDED(ID3D11DeviceContext_Map(s_d3d11.context, (ID3D11Resource*)staging, 0, D3D11_MAP_READ, 0, &mapped))) {
+            unsigned long sr = 0, sg = 0, sb = 0, n = 0;
+            unsigned maxlum = 0, red = 0, bright = 0;
+            for (UINT y = 0; y < desc.Height; y += 16) {
+                const uint8_t* row = (const uint8_t*)mapped.pData + (size_t)y * mapped.RowPitch;
+                for (UINT x = 0; x < desc.Width; x += 16) {
+                    const uint8_t* p = row + (size_t)x * 4;
+                    unsigned b8 = p[0], g8 = p[1], r8 = p[2];
+                    sb += b8; sg += g8; sr += r8; n++;
+                    unsigned lum = r8 + g8 + b8;
+                    if (lum > maxlum) maxlum = lum;
+                    if (lum > 600) bright++;
+                    if (r8 > g8 + 30 && r8 > b8 + 30) red++;
+                }
+            }
+            if (n == 0) n = 1;
+            *out_r = (unsigned)(sr / n); *out_g = (unsigned)(sg / n); *out_b = (unsigned)(sb / n);
+            *out_max = maxlum; *out_red = red; *out_bright = bright; *out_n = (unsigned)n;
+            ID3D11DeviceContext_Unmap(s_d3d11.context, (ID3D11Resource*)staging, 0);
+        }
+        ID3D11Texture2D_Release(staging);
+    }
+    ID3D11Texture2D_Release(bb);
+}
+
 static void probe_backbuffer_avg(unsigned* out_r, unsigned* out_g, unsigned* out_b) {
     *out_r = *out_g = *out_b = 0;
     ID3D11Texture2D* bb = NULL;
@@ -1761,7 +1926,7 @@ static void d3d11_service_pending_copies(uint32_t* cursor, uint32_t up_to_vertex
             fflush(stdout);
         }
         ID3D11DeviceContext_OMSetRenderTargets(s_d3d11.context, 0, NULL, NULL);
-        d3d11_efb_copy_to_guest(c->dst_guest, c->x0, c->y0, c->x1, c->y1, c->format,
+        d3d11_efb_copy_to_guest(c->dst_guest, c->x0, c->y0, c->x1, c->y1, c->real_format,
                                 c->half_scale, c->pitch, c->exec);
         ID3D11DeviceContext_OMSetRenderTargets(s_d3d11.context, 1, &s_d3d11.rtv, s_d3d11.dsv);
         (*cursor)++;
@@ -2047,21 +2212,24 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                             const GxDrawBatch* bd = &batches[b];
                             if (bd->vertex_count == 0) continue;
                             float minx = 1e9f, maxx = -1e9f, miny = 1e9f, maxy = -1e9f;
+                            float minz = 1e9f, maxz = -1e9f;
                             for (uint32_t vi = 0; vi < bd->vertex_count; vi++) {
                                 const GxVertex* v = &gx_vtx[bd->vertex_offset + vi];
                                 if (v->x < minx) minx = v->x;
                                 if (v->x > maxx) maxx = v->x;
                                 if (v->y < miny) miny = v->y;
                                 if (v->y > maxy) maxy = v->y;
+                                if (v->z < minz) minz = v->z;
+                                if (v->z > maxz) maxz = v->z;
                             }
                             printf("  b%u vtx=%u tex=%d addr=0x%08X %ux%u fmt=%u tlut=0x%08X "
                                    "blend=%d src=%u dst=%u sub=%d persp=%d zwrite=%d ztest=%d "
-                                   "ndc=[%.2f..%.2f, %.2f..%.2f]\n",
+                                   "ndc=[%.2f..%.2f, %.2f..%.2f] z=[%.4f..%.4f]\n",
                                    b, bd->vertex_count, bd->has_texture, bd->tex.guest_addr,
                                    bd->tex.width, bd->tex.height, bd->tex.format, bd->tex.tlut_addr,
                                    bd->blend_enable, bd->src_factor, bd->dst_factor, bd->subtract,
                                    bd->is_perspective, bd->depth_write_enable, bd->depth_test_enable,
-                                   minx, maxx, miny, maxy);
+                                   minx, maxx, miny, maxy, minz, maxz);
                             shown++;
                         }
                         fflush(stdout);
@@ -2150,12 +2318,22 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                             ID3D11DeviceContext_OMSetDepthStencilState(s_d3d11.context, s_d3d11.ds_state_3d_opaque, 0);
                         }
                     } else {
-                        /* 2D UI: always disable depth test so UI renders cleanly on top of 3D scene.
-                         * NB: honouring the guest's own z-mode here (the EFB-copy composite
-                         * quads do declare ztest=1) was tried in 5c.15 and measurably
-                         * changed the attract screen wrongly, so this stays as-is until
-                         * the copy/composite ordering question is settled. */
-                        ID3D11DeviceContext_OMSetDepthStencilState(s_d3d11.context, s_d3d11.ds_state_ui, 0);
+                        /* 2D UI: normally depth test off so UI renders cleanly on top of the
+                         * 3D scene. The EFB-copy composite quads, however, declare ztest=1
+                         * themselves, and on hardware they really are depth tested against
+                         * the scene that was drawn before them - which is one candidate for
+                         * why hardware's additive passes add only a few units while the
+                         * host's add the whole copied frame (handover 5c.22). Honouring the
+                         * guest z-mode here was tried in 5c.15 while the copy model was
+                         * still stale, so the result then said nothing; TLS_COMPOSITE_ZTEST=1
+                         * re-tests it now that copies are in stream order. */
+                        static int s_comp_ztest = -1;
+                        if (s_comp_ztest < 0) s_comp_ztest = getenv("TLS_COMPOSITE_ZTEST") ? 1 : 0;
+                        if (s_comp_ztest && batch->depth_test_enable) {
+                            ID3D11DeviceContext_OMSetDepthStencilState(s_d3d11.context, s_d3d11.ds_state_3d_alpha, 0);
+                        } else {
+                            ID3D11DeviceContext_OMSetDepthStencilState(s_d3d11.context, s_d3d11.ds_state_ui, 0);
+                        }
                     }
 
                     ID3D11ShaderResourceView* srv = s_d3d11.gx_tex_white_srv;
@@ -2292,12 +2470,13 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                             s_probe_frame = f ? atoi(f) : -1;
                         }
                         if (s_probe_frame >= 0 && (int)s_d3d11_dump_count == s_probe_frame) {
-                            unsigned pr, pg, pb;
-                            probe_backbuffer_avg(&pr, &pg, &pb);
-                            printf("[BatchProbe] frame=%d after b%u (voff=%u vcnt=%u tex=0x%08X blend=%d s=%u d=%u col0=0x%08X): avg=(%u,%u,%u)\n",
+                            unsigned pr, pg, pb, pmax, pred, pbright, pn;
+                            probe_backbuffer_stats(&pr, &pg, &pb, &pmax, &pred, &pbright, &pn);
+                            printf("[BatchProbe] frame=%d after b%u (voff=%u vcnt=%u tex=0x%08X blend=%d s=%u d=%u col0=0x%08X): avg=(%u,%u,%u) max=%u red=%u/%u bright=%u\n",
                                    s_d3d11_dump_count, b, batch->vertex_offset, batch->vertex_count,
                                    batch->tex.guest_addr, batch->blend_enable, batch->src_factor,
-                                   batch->dst_factor, gx_vtx[batch->vertex_offset].color, pr, pg, pb);
+                                   batch->dst_factor, gx_vtx[batch->vertex_offset].color, pr, pg, pb,
+                                   pmax, pred, pn, pbright);
                             fflush(stdout);
                         }
                     }

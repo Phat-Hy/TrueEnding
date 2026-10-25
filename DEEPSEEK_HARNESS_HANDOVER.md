@@ -2621,6 +2621,100 @@ The fix is therefore not a fudge factor: `TLS_TEV_TEXCOORD=1` (already implement
 is the hardware rule, and it was measured *worse* only because it was measured on the 3D scene at
 b16 where the batch **does** supply TEX1 (`texcoord_mask=0x03`) - a different question from the
 composite, where the mask is 0x01 and three of four taps must collapse to the corner texel.
+Measured with it on: the additive passes drop from ~100-143 % of the sampled copy to 41-81 % of it
+(b39 `44->62`, b40 `62->99`, b41 `99->166`), i.e. the per-pass *structure* gets much closer to
+hardware (56 %/44 %), while the frame average stays high only because the scene entering the chain
+is already 2.4x too bright.
+
+#### 5. What the host's own 320x224 scene copy looks like against hardware's
+
+`TLS_EFB_CHAIN_DUMP=1` writes each copy destination, so the scene copy can be compared with
+Dolphin's `efb1_n014594_320x224_6.png` pixel for pixel - same size, same view, no framing excuse:
+
+| | host copy 6 | Dolphin copy |
+|---|---|---|
+| average | `(35.3, 32.3, 31.4)` | `(15.3, 16.0, 16.3)` |
+| ratio | R 2.31, G 2.02, B 1.93 | |
+| abs diff mean | 26.6 | |
+
+Two *local* defects are visible in the pictures that the average cannot express, and per-batch
+statistics (new: `TLS_BATCH_PROBE` now prints `max=`, `red=<samples>/<n>`, `bright=`) attribute
+them to exact batches at frame 1448:
+
+* **the foreground stone renders saturated red with dark stripes** in the host and blue-grey in the
+  reference. `red` jumps `32 -> 49` at **b10** (`tex 0x90CDCBE0` 256x256 CMPR), then `49 -> 332` at
+  **b13** (`0x912E8340` 512x256) and stays at 263 through b16. So it is the 3D terrain batches, and
+  the host's scene is red-dominant `(35,32,31)` where hardware's is blue-dominant `(15,16,16)`.
+* **the saturated white blob in the middle of the screen** is added by **b30** (`0x90D175E0` 128x128
+  CMPR, 18 vtx, `s=4 d=1` additive): `max` jumps `556 -> 765` and `bright` `0 -> 12` there, and
+  b31 (`0x907FCBA0` 64x64, 228 vtx) takes it to 14. Everything before b30 has `max<=556`. So the
+  blob is a *particle/glow* batch, not the composite and not the EFB copy.
+
+Both are additive/blend-level defects in the 3D pass, which is why "the scene is 2.4x too bright"
+could not be explained by the copy model, gamma, lighting or texcoords: those were all correct.
+
+#### 6. FOUND AND FIXED (opt-in): the copy destination *format* was ignored - that was the red rock
+
+`probe_texture_avg` at b13 showed the culprit: TEV stage 3 of the terrain batch *adds*
+`map2 = 0x9038D1C0 320x224 fmt=4 avg=(127,112,0)` - a yellow-red layer. `fmt=4` is **GX_TF_RGB565**,
+i.e. the guest samples that EFB copy destination as 2 bytes per pixel in 32-byte 4x4 tiles, while
+the host wrote every destination as a 4-byte RGBA8 64-byte tile. Dolphin's own per-copy dumps name
+the same destinations `..._320x224_4.png` / `..._320x224_6.png`, i.e. hardware really does copy into
+both RGB565 and RGBA8 destinations in one frame. Every RGB565 destination therefore held a
+mis-laid-out image, and the 3D passes sampled it and added it - which is exactly the saturated red.
+
+The decoded *source* texture is fine: `TLS_TEX_DUMP=0x912E8340` writes the decoded atlas and it is
+grey rock (`mean (63,63,56)`), so this was never a texture decode problem.
+
+`TLS_EFB_COPY_FMT=1` (implemented in `recomp/gfx_d3d11.c`, passed through from
+`recomp/gx_pipeline.c`) writes the destination in the format's real layout - RGBA8 (4 B/px, 64 B
+tile), RGB565 (2 B/px, 32 B tile of big-endian u16), RGB5A3, IA8 - and derives the destination width
+from the pitch *and* the format: a 4x4-tiled tile row is `dst_w*4*bpp` bytes and equals `pitch*32`,
+so `dst_w = pitch*8/bpp`. That reproduces the guest's own pitch/dstw pairs (`pitch=80 -> 320` for
+RGB565, `pitch=160 -> 320` for RGBA8 - the old rule said 160 for both) and it is the principled
+version of `TLS_EFB_COPY_GEOM`. Formats that are not implemented keep the old RGBA8 write instead of
+dropping the copy, and `copy_to_xfb` bypasses the check (its 16bpp linear scanout write is separate).
+
+Measured at frame 1448 (`TLS_TEV=1 TLS_DEFER_EFB_COPY=1 TLS_EFB_COPY_FMT=1`), the new
+`red=<samples>/3600` statistic goes **263 -> 0** through the whole 3D pass (b10 49, b13 332,
+b14..b16 263 before), the scene's hue moves from red-dominant `(38,35,34)` to the reference's
+blue-dominant `(38,40,40)` direction, and the frame average goes `(86,89,86) -> (82,87,82)`.
+The flag stays opt-in only because it shifts the whole chain; **it is the most clearly correct change
+of the session and should be promoted once the composite chain below is fixed.**
+
+#### 7. Refuted by measurement: honest z-testing is not the composite's problem
+
+`TLS_COMPOSITE_ZTEST=1` makes non-perspective batches honour the guest's z-mode (the composite quads
+declare `ztest=1`, `zwrite=0`). Measured: **frame (86,89,86) - byte-identical, no effect**, and the
+reason is now printed: every composite quad has `z=[0.0000..0.0000]`, i.e. exactly the near plane, so
+`LESS_EQUAL` passes them everywhere. Hardware does the same, so this hypothesis is dead - the flag
+stays as a documented no-op and `TLS_BATCH_DUMP` now prints `z=[..]` per batch.
+
+#### 8. The one remaining defect: the additive composite chain, quantified
+
+Copy levels after the square pass, same present, four runs:
+
+| | square | +add1 | +add2 | +add3 | ... | present |
+|---|---|---|---|---|---|---|
+| hardware (Dolphin frame 1101) | ~1 | 16 | 25 | 32 | 31 | (31,34,28) |
+| host default flags | 0 | 22 | 29 | 60 | 131 -> 255 | (86,89,86) |
+| host `TLS_TEV_TEXCOORD=1` | 0 | 44 | 46 | 83 | 166 -> 255 | (93,93,93) |
+| host all four flags | 0 | ~44 | ~46 | ~83 | ~166 -> 255 | (93,93,93) |
+
+Per-pass gain over the sampled copy: host 100-143 % (texcoord off) or 41-81 % (texcoord on);
+hardware 44-56 %. So the per-pass structure is *closer* with the texcoord rule on, yet the frame
+still saturates because the frame entering the chain is 2.4x too bright and the passes compound.
+Neither the copy model, the format fix, the texcoord rule nor honest z-testing removes the white
+ellipse; everything else in the chain has been measured as faithful.
+
+The next measurement that will settle it needs Dolphin, not the host: the four additive passes are
+`SRC_ALPHA, ONE`, and their source alpha comes from the **alpha channel of an EFB copy**, which the
+host always writes as 255 (`[tex] ... a=255`). A hardware capture of the EFB copy *with alpha*
+(`DumpEFBTarget` writes RGB PNGs, so this needs a dolphin.log/`TextureDump` run with
+`DumpTextures` + EFB copy alpha, or a `-d` framebuffer readback) would show whether hardware's copied
+alpha is ~0.5, which is the only remaining term that can halve every pass. Everything else - ordering,
+sizes, formats, destination content, the TEV stage table, the K registers - has been measured and
+matches.
 
 
 
