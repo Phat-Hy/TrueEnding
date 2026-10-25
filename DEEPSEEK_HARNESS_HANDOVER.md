@@ -1,22 +1,47 @@
 # DeepSeek Harness Handover Dossier: Project The Maybe(Not) Last Story
 
-> ## READ THIS FIRST (state at commit `559254a`)
+> ## READ THIS FIRST
 >
-> **Sections 3–5b are historical.** They contain claims that were later disproven (the CMPR luma
-> fallback, the "task vtable zeroed" theory, the `+0x2AC` state machine, the anime-track clamps).
-> **Session boundary (previous session).** That handover was written across one long autonomous session
-> that ended because its context ran out. It left two open tasks: the water/reflection destination encoding
-> (§5c.11) and a condition-register layout change it believed was needed for the title->Chapter 1 handoff.
-> **§5c.12 is the current state and supersedes that expectation**: the condition-register change was
-> neither needed nor made (the emitter is already architecturally correct; see the table in §5c.12), and the
-> real defect was a `strtok` bug that made `TLS_INPUT_SCRIPT` load only its first entry, so the second press
-> the title's fade gate needs never arrived. With that fixed, the title menu works, NEW GAME writes a real
-> save file, and the title **hands off to the Game sequence** (`SetNextSequence('Game')`, `CreateGameTask`,
-> `GameTask::Init` streaming ~300 files). Playback stalls after that handoff with the frame budget fully
-> consumed and no draws — that is the current break point and §5c.12 has the measurements.
-> The EFB copy destination encoding is still open, and it is visible on screen: the title/MENU background is
-> a flat cyan field instead of the cave/lake.
+> **Read §5c.15 first - it is the current state.** Everything from §3 to §5c.14 is history and several of its
+> conclusions are now disproven. The short version:
+>
+> * **The 3D renderer is fine.** At the title MENU frame 1450, drawing only the first 30 draw batches gives a
+>   complete, correct cave-and-lake vista (`docs/evidence/18-...`). `TLS_BATCH_CUTOFF=<n>` is the new
+>   instrument that shows this in one run.
+> * **The flat MENU background is the game's own post-processing chain**, batches `b30..b49` (~20 fullscreen
+>   quads that sample EFB-copy destinations and replace the framebuffer). §5c.14's "closed feedback loop with
+>   an arbitrary fixed point" is wrong: the chain is what covers the scene, and it is what is still broken.
+> * **EFB copies now genuinely can see the frame as drawn so far** (`TLS_DEFER_EFB_COPY=1`): the pipeline
+>   records every `GXCopyTex` with the vertex index current at that command and the backend replays the queue
+>   inside its batch loop. Measured per copy: clear `(0,0,0)` -> cave `(52,59,61)` -> `(69)` -> `(117)` ->
+>   `(219)` -> `(244)` -> `(255,255,255)` for the VI scanout copy. So the chain saturates the framebuffer to
+>   white within one frame. That mode is **not the default** because the title attract screen also breaks
+>   under it (flat white), which means the composite tail has a second defect still to find. The default is
+>   byte-for-byte the 510426d behaviour.
+> * **Two EFB copies really are half-scale** (`0x90395DC0` and `0x903917C0` are written from a 640x448 source
+>   rect but sampled as 320x224), which refutes §5c.14's "all copies are 1:1". Cutting the batch list at 39
+>   shows the signature: 4-pixel horizontal stripes, i.e. a 4x4-tiled image read with half the tiles-per-row
+>   (`docs/evidence/19-...`). `src/GXFrameBuf.c` decodes the register set for us: BP 0x4B = destination
+>   address>>5, **BP 0x4D = the only destination-geometry value the hardware sees**, BP 0x52 = fmt/mipmap/
+>   clamp/clear. BP 0x4D is now decoded and printed as `pitch=`; it does not on its own decide the scale, and
+>   pinning that down is the single next step (§5c.15 item 7).
+> * **The post-handoff stall (§5c.12) is unchanged**: `GameTask::Init` 81 calls, last at frame 1882, one
+>   streaming request stuck at `status=1`, whole block budget burned, no draws. Still the gateway to Chapter 1.
+>
+> **First commands.**
+> ```powershell
+> git log --oneline -6
+> python tools/recomp_harness.py build-runner           # chunks are already lifted; ~1 s
+> Remove-Item SaveData\savedata.dat -ErrorAction SilentlyContinue
+> $env:TLS_INPUT_SCRIPT="600-612:A,900-912:A,1200-1212:A,1300-1312:UP,1350-1362:A,1500-1512:A"
+> $env:TLS_SHOT_FRAMES="1450"
+> build\recomp\tls_runner.exe --window --frames 1460 --fps 60 --no-audio
+> $env:TLS_BATCH_CUTOFF="30"                            # the scene without the post chain
+> ```
+> This session needs **full file access**; under workspace-write, writes to `build/`, `recomp/`, `tools/`
+> and `docs/` fail with Win32 error 5 even though the Windows permissions are fine.
 
+---
 
 > **§5c supersedes all of them** — read §5c.9 (the frame-829 stall) and §5c.10 (input), which
 > describe the current state.
@@ -1330,6 +1355,177 @@ clears to hardcoded black, so the guest's own clear is invisible to rendering.
 **New instruments added by §5c.13/§5c.14** (all inert unless set): `TLS_EFB_COPY_FROM=<frame>` adds the frame
 to each `TLS_EFB_COPY_PROBE` line (and raises the cap to 40); `TLS_TEX_PPM="0xADDR,W,H;..."` dumps arbitrary
 guest textures at shutdown decoded as 4x4-tiled RGBA8; `TLS_EFB_CLEAR_BLACK=1` restores the hardcoded clear.
+
+---
+
+### 5c.15 The copy really is one frame stale - and fixing that reveals that the *scene* is fine and the post chain is not
+
+State at the start of this session: `510426d`, tree clean. **The 5c.14 conclusion is only half right.** The
+copy does read the previous frame, and making it read the current frame is now implemented and measured - but
+the flat MENU background is *not* a closed fixed-point loop. It is the game's own post-processing chain
+(batches `b30..b49`) drawing ~20 fullscreen quads that sample EFB-copy destinations over the 3D scene. That is
+the part that is broken, and it is still broken after the copy fix.
+
+#### 1. The 3D scene is correct - nothing is wrong with the renderer
+
+`TLS_BATCH_CUTOFF=<n>` (new) draws only the first `n` batches of each frame. At the MENU frame 1450,
+`TLS_BATCH_CUTOFF=30` (i.e. only `b0..b29`) gives a **complete, correct cave-and-lake title vista**
+(`docs/evidence/18-title-scene-post-chain-cutoff-frame1450.png`): ~40k vertices of depth-tested CMPR geometry,
+no missing chunks, no colour corruption. So:
+
+* the pipeline, the projection, the texture decode and the depth states for the 3D pass are all fine;
+* everything that goes wrong at the MENU happens in the composite tail `b30..b49`;
+* `TLS_BATCH_CUTOFF` is the fastest way to see "what would this frame look like without the post chain".
+
+#### 2. Copies are now replayed in stream order (`TLS_DEFER_EFB_COPY=1`)
+
+`gx_pipeline_process_bp` records every `GXCopyTex` (BP 0x52) in a queue (`GxPendingEfbCopy`) carrying the host
+vertex index that was current at the command; a copy also becomes a batch barrier so no draw batch straddles it.
+`d3d11_present()` replays the queue inside its batch loop (`d3d11_service_pending_copies`), unbinding the render
+target around each read (D3D11 cannot read a resource that is bound as an output) and rebinding it afterwards.
+
+Measured with `TLS_DEFER_EFB_COPY=1 TLS_EFB_SAMPLE_FRAME=1450`, which prints the average RGB each copy captures:
+
+```
+#0  src 640x448 dst=0x9038D1C0 pitch=80  vmark=0     avg (0,0,0)       <- the guest clear
+#1  src 640x448 dst=0x90536FE0 pitch=160 vmark=0     avg (0,0,0)
+#2  src 640x448 dst=0x9038D1C0 pitch=80  vmark=0     avg (0,0,0)
+#3  src 320x224 dst=0x9036A1A0 pitch=80  vmark=14049 avg (0,0,0)
+#4  src 640x448 dst=0x90536FE0 pitch=160 vmark=39900 avg (52,59,61)   <- the cave, after 27 batches
+#5  src 160x112 dst=0x903DBDC0 pitch=80  vmark=39900 avg (37,43,44)
+#6  src 640x448 dst=0x90395DC0 pitch=160 vmark=39900 avg (52,59,61)
+...
+#14 src 320x224 dst=0x9038D1C0 pitch=160 vmark=39966 avg (219,225,218)
+#15 src 640x448 dst=0x905C3000 pitch=320 vmark=39972 avg (244,247,245)
+#16 src 160x112 dst=0x903D77C0 pitch=80  vmark=40008 avg (255,255,255)
+...
+#22 src 640x448 dst=0x900997E0 pitch=40  vmark=40146 avg (255,255,255)  <- the VI scanout copy
+```
+
+Read that table carefully - it is the whole story:
+
+* every copy of one frame now captures a **different** state of that frame, in the order the guest issued them
+  (clear -> cave -> progressively brighter). Before the change every copy captured the same previous frame.
+* the frame's own post chain therefore drives the EFB from `(52,59,61)` up to `(255,255,255)`: by the time the
+  VI scanout copy runs, the framebuffer is **saturated white**, and the displayed frame is white.
+* the tail of the batch list replaces the framebuffer with those destinations (`b30`, `b31`, `b35`, `b40`,
+  `b46`, `b48` are `dst=0 src=1/ONE dst=0/ZERO` = replace), so the visible result is the post chain's output,
+  not the scene. Cyan (before) and white (now) are both post-chain outputs.
+
+`docs/evidence/21-deferred-copy-menu-white-frame1450.png` is that result.
+
+**Why it is not the default yet.** With the deferred replay enabled the title attract screen also breaks
+(black + gold logo -> flat white), so the composite tail has a *second*, still-unfound defect. The deferred
+path therefore sits behind `TLS_DEFER_EFB_COPY=1` and the default is byte-for-byte the 510426d behaviour
+(verified: attract 2200 = black/loga, MENU 1450 = `(119,234,255)`). Do not switch the default until the
+post chain is understood.
+
+#### 3. A 2-batch bisect of the tail, and what the failure looks like
+
+`TLS_BATCH_CUTOFF` on frame 1450: `30` = perfect cave; `35/36/37` = near-black with a faint blurred glow;
+`39` = **horizontal 4-pixel stripes** with the cave's colours smeared across them
+(`docs/evidence/19-composite-tile-stripes-frame1450.png`); `42` = the same stripes blown out to white;
+`44+` = flat white. Those stripes are the signature of sampling a 4x4-tiled RFU8 image with the wrong
+**tiles-per-row**: exactly what happens when an EFB copy writes `W` pixels per row and the texture is declared
+`W/2`.
+
+#### 4. So some copies *are* downscales - and the destination geometry is in BP 0x4D, which we now decode
+
+Matching every copy of frame 1450 against the batch that samples its destination:
+
+| dst | copy src rect | declaration when sampled | verdict |
+|---|---|---|---|
+| `0x90536FE0` | 640x448 | 640x448 | 1:1 |
+| `0x903DBDC0` | 160x112 | 160x112 | 1:1 |
+| `0x903D77C0` | 160x112 | 160x112 | 1:1 |
+| `0x905C3000` | 640x448 | 640x448 | 1:1 |
+| `0x903D31C0` | 320x224 | 320x224 | 1:1 |
+| `0x903917C0` | 80x56 (copy #8) | 80x56 (b33) | 1:1 |
+| **`0x90395DC0`** | **640x448** | **320x224** (b30) | **half** |
+| **`0x903917C0`** | **640x448** (copy #19) | **320x224** (b46) | **half** |
+
+Both half-scale copies come from `lr=0x800AA0C4` (inside `fn_800A9E64`, `src/game_texture.c`) and both carry
+raw exec `0x010263`. So the §5c.14 claim "no destination is smaller than its source" is **wrong for exactly
+these two**.
+
+`src/GXFrameBuf.c` decodes the register set for us (it is the real GX API, in asm):
+
+* `fn_80614CC0` = `GXSetTexCopySrc(left,top,w,h)` -> BP 0x49 / 0x4A (left/top, right/bottom). Our decode is right.
+* `fn_80614D30` = `GXSetTexCopyDst(w,h,fmt,mipmap)`. It writes **BP 0x4D** = `(out1*out3) & 0x3FF` where the
+  outputs come from `fn_80615F30(fmt,w,h,...)`, and ORs fmt/mipmap/clamp into the BP **0x52** accumulator.
+* `fn_80615560` = `GXCopyTex(dest,clear)` -> BP 0x49, 0x4A, 0x4D, then **BP 0x4B = dest>>5**, then BP 0x52.
+
+So **the destination address really is BP 0x4B (our decode is correct) and the only destination-geometry
+number the hardware ever sees is BP 0x4D**. That register was not decoded at all before; it now is
+(`s_efb_copy_pitch`, printed as `pitch=` in the `TLS_EFB_COPY_PROBE` line).
+
+Observed `(pitch, src_w)` pairs for frame 1450:
+
+```
+(80,640) (160,640) (80,320) (80,160) (160,640) (40,160) (40,80)
+(320,640) (160,640) (160,320) (160,320) (80,320) (160,640) (40,160) (40,80)
+```
+
+The two confirmed half-scale copies are `(160,640)`, but `0x90536FE0` and `0x9038D1C0` are also `(160,640)`
+and are 1:1. **So pitch alone does not decide the scale** - whatever distinguishes them must be read together
+with the fmt/`exec` bits, and that mapping is the next thing to pin down. Candidate: the exec values that
+carry a `320x224` destination are `0x010063`/`0x010843`, the two half-scale ones are `0x010263`, and
+`0x010863`/`0x010A43`/`0x010A63`/`0x01003B` are 1:1 - i.e. **bit 9 (0x200) of BP 0x52 is present on the
+half-scale copies but also on `0x010A43`/`0x010A63`**, whose destinations are never sampled at a conflicting
+size, so those two are the A/B needed to settle it.
+
+#### 5. Things that were tried and measured *not* to help
+
+| change | result |
+|---|---|
+| make 2D batches honour the guest's own PE z-mode (the tail quads declare `ztest=1/zwrite=0`, the UI text `ztest=0`) | changes the attract screen to a flat cyan field and the MENU to a pale yellow background - reverted, because it alters the picture without any evidence it is closer to hardware |
+| force the D3D11 clear to black (`TLS_EFB_CLEAR_BLACK=1`) while the deferred copy is on | MENU frame 1450 is still pure white, so the guest's BP clear (`0x4F=0x00FF00`, `0x50=0`) is not the source of the white |
+
+#### 6. Instruments added this session (all inert unless set)
+
+| variable | effect |
+|---|---|
+| `TLS_BATCH_CUTOFF=<n>` | draw only the first `n` batches of every frame. The fastest way to separate a scene problem from a composite problem. |
+| `TLS_DRAW_ORDER=1` | one line per copy with the batch index it is serviced before, plus `vmark`, interleaved with the per-batch dump. This is what produced the draw/copy ordering above. |
+| `TLS_EFB_SAMPLE_FRAME=<n>` | one `[EfbSampleCopy]` line per copy of guest frame `n`: destination, source rect, **and the average RGB the copy captured**. The single most useful new probe. |
+| `TLS_DEFER_EFB_COPY=1` | replay copies in stream order (current-frame source) instead of inline (previous-frame source). |
+| `TLS_EFB_PREV_FRAME=1` | force the previous-frame source even in deferred mode. |
+| `TLS_EFB_COPY_PROBE` (extended) | the copy line now also prints `pitch=` (BP 0x4D), `vmark=` and `batches=` (how many draw batches already exist when the copy is issued). |
+| `TLS_F900_PROBE` (extended) | every BP line now prints `pc=` and `lr=`, which is how the copy call sites were found (`lr=0x800B8EDC/0x800B8FD0/0x800B9028` -> `fn_800B8964`/`fn_800B8F40`, `0x800B6ABC` -> `fn_800B6A00`, `0x800C05F0` -> `fn_800C0590`, `0x800AA090/0x800AA0C4/0x800AA194` -> `fn_800A9E64`). `config/symbols.txt` resolves these; `build/resolve.py` (written this session) does it in one command. |
+
+#### 7. Next step, in order
+
+1. Decode the **half-scale discriminator**. Add BP 0x4D to the per-copy log together with the exec value and
+   A/B the `(pitch, exec)` pairs across a frame that contains both a known half-scale and a known 1:1 copy of
+   the same pitch (frame 1450 already does: `0x90395DC0` half vs `0x90536FE0` 1:1, both pitch 160).
+2. Then `dst_w = tile_pitch_from_0x4D`, `dst_h = dst_w * src_h / src_w` and write the destination tiled with
+   `tiles_x = dst_w / 4` (and downsample the source when they differ). The stripes in evidence 19 say the
+   tiling width is the visible symptom.
+3. Re-check `TLS_BATCH_CUTOFF` frame by frame at 30..49 with the deferred copy on: the target is
+   "cut=39 looks like cut=30 with bloom on top", not stripes.
+4. Only then consider making `TLS_DEFER_EFB_COPY` the default, and re-baseline the attract screen.
+
+#### 8. Run recipes used this session
+
+```powershell
+python tools/recomp_harness.py build-runner
+# clean first boot + walk the title to the MENU (measured: no exception, handoff at ~1539,
+# and the post-handoff stall of 5c.12 unchanged: GameTask::Init 81 calls, last 1882)
+Remove-Item SaveData\savedata.dat -ErrorAction SilentlyContinue
+$env:TLS_INPUT_SCRIPT="600-612:A,900-912:A,1200-1212:A,1300-1312:UP,1350-1362:A,1500-1512:A"
+$env:TLS_SHOT_FRAMES="1450"
+build\recomp\tls_runner.exe --window --frames 1460 --fps 60 --no-audio
+
+# the scene behind the post chain
+$env:TLS_BATCH_CUTOFF="30"     # -> docs/evidence/18
+
+# what each copy actually captures
+$env:TLS_DEFER_EFB_COPY="1"; $env:TLS_EFB_SAMPLE_FRAME="1450"
+```
+
+The canonical 2400-frame run still completes with CPU exception `0x00000000`, still hands off
+(`SetNextSequence('Game')` at `lr=0x80535D04`), still stalls exactly where §5c.12 describes, and the
+attract-mode title screen is unchanged from `510426d`.
 
 
 

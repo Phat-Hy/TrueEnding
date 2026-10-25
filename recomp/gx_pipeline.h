@@ -101,6 +101,33 @@ typedef void (*GxEfbCopyFunc)(uint32_t dst_guest, uint32_t x0, uint32_t y0,
                               uint32_t x1, uint32_t y1, uint32_t format);
 void gx_pipeline_set_efb_copy_hook(GxEfbCopyFunc func);
 
+/* Off (default): the hook is invoked at the copy command, so it reads the last completed
+ * frame - the pre-5c.15 behaviour. On: the hook is NOT invoked inline; the backend must
+ * replay gx_pipeline_get_pending_copy() from inside its batch loop, in stream order, so
+ * each copy observes the frame as drawn up to that point (what the hardware does). */
+void gx_pipeline_set_efb_copy_deferred(int on);
+int gx_pipeline_efb_copy_is_deferred(void);
+
+/* A GXCopyTex command recorded in stream order (BP 0x52). The hardware copy reads the
+ * EFB as drawn *up to the point the guest issued it*; the host used to run every copy
+ * during guest execution, i.e. before any of the frame was drawn, so each copy read the
+ * previous frame's finished picture. That closed a feedback loop (handover 5c.14/5c.15).
+ * Each entry therefore carries the host vertex index that was current when the copy was
+ * issued, and the backend renders the batch list up to that index before performing it.
+ * A copy also acts as a batch barrier so no draw batch can straddle a copy command. */
+typedef struct {
+    uint32_t dst_guest;
+    uint32_t x0, y0, x1, y1;
+    uint32_t format;        /* 0 = RGBA8, 1 = RGB565 (as decoded from BP 0x4B) */
+    uint32_t pitch;         /* BP 0x4D: destination pitch from GXSetTexCopyDst */
+    uint32_t vertex_mark;   /* gx_pipeline vertex count at the copy command */
+} GxPendingEfbCopy;
+
+#define GX_MAX_PENDING_COPIES 256
+
+uint32_t gx_pipeline_get_pending_copy_count(void);
+const GxPendingEfbCopy* gx_pipeline_get_pending_copy(uint32_t index);
+
 // Active texture state
 typedef struct {
     uint32_t width;

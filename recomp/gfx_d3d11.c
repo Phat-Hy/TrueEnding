@@ -334,7 +334,12 @@ bool d3d11_init(HWND hwnd, const GfxConfig* config) {
 
     printf("[D3D11] Initialized Direct3D 11 Hardware Graphics Pipeline (%dx%d, VSync: %s)\n",
            s_d3d11.win_width, s_d3d11.win_height, s_d3d11.vsync ? "ON" : "OFF");
+    /* EFB copies run inline (reading the last completed frame) unless
+     * TLS_DEFER_EFB_COPY=1, which asks this backend to replay the pipeline's copy queue
+     * from inside the batch loop instead. See handover 5c.15 for why the deferred mode,
+     * although it is what the hardware does, is not the default yet. */
     gx_pipeline_set_efb_copy_hook(d3d11_efb_copy_to_guest);
+    gx_pipeline_set_efb_copy_deferred(getenv("TLS_DEFER_EFB_COPY") ? 1 : 0);
     return true;
 }
 
@@ -1188,14 +1193,37 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
         return;
     }
 
+    /* The two ways to source an EFB copy, and why neither is the default yet: see
+     * handover 5c.15. The pipeline records every GXCopyTex in stream order with the
+     * vertex index that was current when the guest issued it, and this backend can
+     * replay the queue from inside its batch loop so a copy reads the frame as drawn
+     * so far (TLS_DEFER_EFB_COPY=1). That is what the hardware does, and it is
+     * measurable: the copies of one frame then capture distinct states of the same
+     * frame (black clear -> cave -> progressively brighter) instead of all capturing
+     * the previous frame.
+     *
+     * It is NOT the default because it makes both the title attract screen and the
+     * MENU background wrong in a different way (white instead of the previous
+     * behaviour), i.e. the composite chain that consumes these copies has a second
+     * defect that has not been found yet. Keeping the old source as the default keeps
+     * the tree visually identical to 510426d while the new path stays available.
+     *
+     * TLS_EFB_PREV_FRAME=1 forces the old "last completed frame" source in either mode. */
+    static int s_defer = -1;
+    static int s_prev_frame = -1;
+    if (s_defer < 0) s_defer = getenv("TLS_DEFER_EFB_COPY") ? 1 : 0;
+    if (s_prev_frame < 0) s_prev_frame = getenv("TLS_EFB_PREV_FRAME") ? 1 : 0;
     {
         static int s_src = 0;
-        if (s_src < 3) { s_src++; printf("[EfbCopySrc] %s snapshot=%p\n",
-            s_d3d11.efb_snapshot ? "snapshot" : "backbuffer", (void*)s_d3d11.efb_snapshot); fflush(stdout); }
+        if (s_src < 3) { s_src++; printf("[EfbCopySrc] reading %s (deferred=%d)\n",
+            (s_prev_frame || (!s_defer && s_d3d11.efb_snapshot)) ? "previous-frame snapshot" : "current backbuffer",
+            s_defer); fflush(stdout); }
     }
-    ID3D11Texture2D* source = s_d3d11.efb_snapshot;
+    ID3D11Texture2D* source = NULL;
     bool have_backbuffer = false;
-    if (!source) {
+    if (s_prev_frame || (!s_defer && s_d3d11.efb_snapshot)) {
+        source = s_d3d11.efb_snapshot;
+    } else {
         if (FAILED(IDXGISwapChain_GetBuffer(s_d3d11.swap_chain, 0, &IID_ID3D11Texture2D, (void**)&source)))
             return;
         have_backbuffer = true;
@@ -1239,6 +1267,39 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                                (double)sum / (double)n, maxlum);
                         fflush(stdout);
                     }
+                }
+            }
+            /* What did each copy of one guest frame actually capture? Samples the same
+             * grid the copy is about to read and prints the average colour of the source
+             * rectangle, so a destination holding the wrong picture can be traced to the
+             * pixels it was written from. TLS_EFB_SAMPLE_FRAME=<guest frame>. */
+            {
+                static int s_sf = -2;
+                if (s_sf == -2) {
+                    const char* f = getenv("TLS_EFB_SAMPLE_FRAME");
+                    s_sf = f ? atoi(f) : -1;
+                }
+                extern int g_runner_current_frame;
+                if (s_sf >= 0 && g_runner_current_frame == s_sf) {
+                    float sx0 = (s_d3d11.vp_w > 0.0f) ? (s_d3d11.vp_w / 640.0f) : (float)desc.Width / 640.0f;
+                    float sy0 = (s_d3d11.vp_h > 0.0f) ? (s_d3d11.vp_h / 480.0f) : (float)desc.Height / 480.0f;
+                    unsigned long sr = 0, sg = 0, sb = 0, n = 0;
+                    for (uint32_t gy = 0; gy < h; gy += 8) {
+                        uint32_t py = (uint32_t)(s_d3d11.vp_y + ((float)(y0 + gy) + 0.5f) * sy0);
+                        if (py >= desc.Height) py = desc.Height - 1;
+                        const uint8_t* row = src + (size_t)py * mapped.RowPitch;
+                        for (uint32_t gx = 0; gx < w; gx += 8) {
+                            uint32_t px = (uint32_t)(s_d3d11.vp_x + ((float)(x0 + gx) + 0.5f) * sx0);
+                            if (px >= desc.Width) px = desc.Width - 1;
+                            const uint8_t* p = row + (size_t)px * 4;
+                            sr += p[2]; sg += p[1]; sb += p[0]; n++;
+                        }
+                    }
+                    if (n == 0) n = 1;
+                    printf("[EfbSampleCopy] frame=%d dst=0x%08X %ux%u src=(%u,%u)-(%u,%u) avg=(%lu,%lu,%lu)\n",
+                           g_runner_current_frame, dst_guest, w, h, x0, y0, x1, y1,
+                           sr / n, sg / n, sb / n);
+                    fflush(stdout);
                 }
             }
             float sx = (s_d3d11.vp_w > 0.0f) ? (s_d3d11.vp_w / 640.0f) : (float)desc.Width / 640.0f;
@@ -1352,6 +1413,39 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
         ID3D11Texture2D_Release(staging);
     }
     if (have_backbuffer) ID3D11Texture2D_Release(source);
+}
+
+/* Replay the frame's queued GXCopyTex commands whose vertex mark is <= up_to_vertex.
+ * Called from inside the batch loop of d3d11_present(), so each copy reads the frame as
+ * the guest had drawn it at that point in its display list - which is what the hardware
+ * does and what breaks the "copy the previous frame into the framebuffer" feedback loop
+ * that turned the title MENU background into a flat colour (handover 5c.14/5c.15).
+ * The render target must be unbound around the read; re-binding it afterwards does not
+ * disturb the pixels already rendered into it. */
+static void d3d11_service_pending_copies(uint32_t* cursor, uint32_t up_to_vertex, int at_batch) {
+    if (!cursor) return;
+    /* Inline mode already performed every copy at its command, so just retire the queue. */
+    if (!gx_pipeline_efb_copy_is_deferred()) {
+        *cursor = gx_pipeline_get_pending_copy_count();
+        return;
+    }
+    static int s_order = -1;
+    if (s_order < 0) s_order = getenv("TLS_DRAW_ORDER") ? 1 : 0;
+    uint32_t count = gx_pipeline_get_pending_copy_count();
+    while (*cursor < count) {
+        const GxPendingEfbCopy* c = gx_pipeline_get_pending_copy(*cursor);
+        if (!c || c->vertex_mark > up_to_vertex) break;
+        if (s_order) {
+            printf("[CopyOrder] before batch=%d: copy #%u dst=0x%08X %ux%u src=(%u,%u)-(%u,%u) vmark=%u\n",
+                   at_batch, *cursor, c->dst_guest, c->x1 - c->x0 + 1, c->y1 - c->y0 + 1,
+                   c->x0, c->y0, c->x1, c->y1, c->vertex_mark);
+            fflush(stdout);
+        }
+        ID3D11DeviceContext_OMSetRenderTargets(s_d3d11.context, 0, NULL, NULL);
+        d3d11_efb_copy_to_guest(c->dst_guest, c->x0, c->y0, c->x1, c->y1, c->format);
+        ID3D11DeviceContext_OMSetRenderTargets(s_d3d11.context, 1, &s_d3d11.rtv, s_d3d11.dsv);
+        (*cursor)++;
+    }
 }
 
 bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
@@ -1560,6 +1654,12 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     }
     #endif
 
+    /* Copies are replayed in stream order as the batch list is drawn (see
+     * d3d11_service_pending_copies). Frame-start copies (vertex_mark 0) and anything the
+     * guest issued before its first draw are serviced here, i.e. against the clear. */
+    uint32_t efb_copy_cursor = 0;
+    d3d11_service_pending_copies(&efb_copy_cursor, 0, -1);
+
     // Draw GX decoded primitives if present
     if (gx_vtx && gx_vtx_count > 0 && s_d3d11.gx_vbo && s_d3d11.gx_vs && s_d3d11.gx_ps) {
         D3D11_MAPPED_SUBRESOURCE mapped_vbo;
@@ -1640,6 +1740,22 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                     const GxDrawBatch* batch = &batches[b];
                     if (batch->vertex_count == 0) continue;
 
+                    /* Every copy the guest issued before this batch's first vertex must
+                     * see the frame without this batch: flush it now. */
+                    d3d11_service_pending_copies(&efb_copy_cursor, batch->vertex_offset, (int)b);
+
+                    /* Diagnostic bisect: TLS_BATCH_CUTOFF=<n> draws only the first n
+                     * batches of a frame, so the contribution of the tail composite
+                     * quads can be seen instead of argued about. */
+                    {
+                        static int s_cutoff = -2;
+                        if (s_cutoff == -2) {
+                            const char* c = getenv("TLS_BATCH_CUTOFF");
+                            s_cutoff = c ? atoi(c) : -1;
+                        }
+                        if (s_cutoff >= 0 && (int)b >= s_cutoff) break;
+                    }
+
 
 
                     if (take_shot || s_d3d11.frame_counter == 150 || s_d3d11.frame_counter == 200 || s_d3d11.frame_counter == 300) {
@@ -1703,7 +1819,11 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                             ID3D11DeviceContext_OMSetDepthStencilState(s_d3d11.context, s_d3d11.ds_state_3d_opaque, 0);
                         }
                     } else {
-                        // 2D UI: always disable depth test so UI renders cleanly on top of 3D scene
+                        /* 2D UI: always disable depth test so UI renders cleanly on top of 3D scene.
+                         * NB: honouring the guest's own z-mode here (the EFB-copy composite
+                         * quads do declare ztest=1) was tried in 5c.15 and measurably
+                         * changed the attract screen wrongly, so this stays as-is until
+                         * the copy/composite ordering question is settled. */
                         ID3D11DeviceContext_OMSetDepthStencilState(s_d3d11.context, s_d3d11.ds_state_ui, 0);
                     }
 
@@ -1782,8 +1902,7 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                     ID3D11DeviceContext_PSSetShader(s_d3d11.context, ps, NULL, 0);
                     ID3D11DeviceContext_PSSetShaderResources(s_d3d11.context, 0, 1, &srv);
                     ID3D11DeviceContext_Draw(s_d3d11.context, batch->vertex_count, batch->vertex_offset);
-                    if (take_shot && (s_d3d11_dump_count == 900 || s_d3d11_dump_count == 1500)) {
-                        char bpath[128];
+                    if (take_shot && (s_d3d11_dump_count == 900 || s_d3d11_dump_count == 1500)) {                        char bpath[128];
                         snprintf(bpath, sizeof(bpath), "build/recomp/batch_%u_f%d.bmp", b, s_d3d11_dump_count);
                         save_backbuffer_bmp(bpath);
                         if (b == 0 || b == 1 || b == 2) {
@@ -1808,12 +1927,18 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                 ID3D11DeviceContext_PSSetShaderResources(s_d3d11.context, 0, 1, &srv);
                 ID3D11DeviceContext_Draw(s_d3d11.context, gx_vtx_count, 0);
             }
+            /* Copies issued after the last draw read the finished frame. */
+            d3d11_service_pending_copies(&efb_copy_cursor, 0xFFFFFFFFu, 9999);
 
             // Restore default blend and depth state
             ID3D11DeviceContext_OMSetBlendState(s_d3d11.context, NULL, NULL, 0xFFFFFFFF);
             ID3D11DeviceContext_OMSetDepthStencilState(s_d3d11.context, NULL, 0);
         }
     }
+    /* Frames with no drawable geometry still issue copies (VI scanout, screen captures);
+     * service everything that is left so no copy command is silently dropped. */
+    d3d11_service_pending_copies(&efb_copy_cursor, 0xFFFFFFFFu, 9999);
+
     if (take_shot) {
         ID3D11Texture2D* back_buffer = NULL;
         if (SUCCEEDED(IDXGISwapChain_GetBuffer(s_d3d11.swap_chain, 0, &IID_ID3D11Texture2D, (void**)&back_buffer))) {

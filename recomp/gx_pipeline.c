@@ -68,8 +68,30 @@ static uint32_t s_efb_copy_x0 = 0, s_efb_copy_y0 = 0;
 static uint32_t s_efb_copy_x1 = 639, s_efb_copy_y1 = 479;
 static uint32_t s_efb_copy_dst_guest = 0;
 static uint32_t s_efb_copy_format = 0;
+/* BP 0x4D: the destination pitch GXSetTexCopyDst() derives from the *destination*
+ * width/height (src/GXFrameBuf.c fn_80614D30 stores fn_80615F30(fmt,w,h) outputs
+ * multiplied together there). It is the only destination-geometry number the hardware
+ * ever sees, so it is the key to deciding whether a copy is 1:1 or downscaled. */
+static uint32_t s_efb_copy_pitch = 0;
 static uint32_t s_efb_copy_count = 0;
 static GxEfbCopyFunc s_efb_copy_hook = NULL;
+
+/* Copies queued for the current frame, in stream order (see GxPendingEfbCopy in the
+ * header). s_batch_barrier forces the next emitted draw into a fresh batch so a batch
+ * can never straddle a copy command - otherwise flushing "copies up to batch vertex
+ * offset" would draw geometry that the guest submitted after the copy. */
+static GxPendingEfbCopy s_pending_copies[GX_MAX_PENDING_COPIES];
+static uint32_t s_pending_copy_count = 0;
+static uint32_t s_pending_copy_overflow = 0;
+static bool s_batch_barrier = false;
+static bool s_efb_copy_deferred = false;
+
+uint32_t gx_pipeline_get_pending_copy_count(void) { return s_pending_copy_count; }
+
+const GxPendingEfbCopy* gx_pipeline_get_pending_copy(uint32_t index) {
+    if (index >= s_pending_copy_count) return NULL;
+    return &s_pending_copies[index];
+}
 
 void gx_pipeline_set_clear_color(float r, float g, float b, float a) {
     s_clear_color[0] = r;
@@ -266,6 +288,13 @@ void gx_pipeline_set_efb_copy_hook(GxEfbCopyFunc func) {
     s_efb_copy_hook = func;
 }
 
+void gx_pipeline_set_efb_copy_deferred(int on) {
+    s_efb_copy_deferred = (on != 0);
+    s_pending_copy_count = 0;
+}
+
+int gx_pipeline_efb_copy_is_deferred(void) { return s_efb_copy_deferred ? 1 : 0; }
+
 void gx_pipeline_set_pointer_resolver(GxResolvePtrFunc func) {
     s_resolve_ptr = func;
 }
@@ -311,6 +340,8 @@ void gx_pipeline_init(void) {
     s_dropped_vertices = 0;
     s_primitive_count = 0;
     s_draw_batch_count = 0;
+    s_pending_copy_count = 0;
+    s_batch_barrier = false;
     s_parser_state = GX_STATE_IDLE;
     s_current_pnm_idx = 0;
     s_default_pnm_idx = 0;
@@ -345,6 +376,14 @@ void gx_pipeline_begin_frame(void) {
     s_dropped_vertices = 0;
     s_primitive_count = 0;
     s_draw_batch_count = 0;
+    if (s_pending_copy_overflow) {
+        printf("[EfbCopy] frame %u dropped %u copies (queue is %d entries)\n",
+               s_gx_frame_idx, s_pending_copy_overflow, GX_MAX_PENDING_COPIES);
+        fflush(stdout);
+        s_pending_copy_overflow = 0;
+    }
+    s_pending_copy_count = 0;
+    s_batch_barrier = false;
     s_parser_state = GX_STATE_IDLE;
     s_active_tex_map = 0;
     s_active_tex_coord = 0;
@@ -635,7 +674,7 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
         }
 
         bool merged = false;
-        if (s_draw_batch_count > 0) {
+        if (s_draw_batch_count > 0 && !s_batch_barrier) {
             GxDrawBatch* last = &s_draw_batches[s_draw_batch_count - 1];
             if (last->has_texture == has_tex &&
                 last->blend_enable == s_blend_enable &&
@@ -658,6 +697,7 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
 
         if (!merged && s_draw_batch_count < GX_MAX_DRAW_BATCHES) {
             GxDrawBatch* b = &s_draw_batches[s_draw_batch_count++];
+            s_batch_barrier = false;
             b->vertex_offset = vtx_start;
             b->vertex_count = vtx_emitted;
             b->has_texture = has_tex;
@@ -696,7 +736,7 @@ void gx_pipeline_set_z_mode(bool test_enable, uint8_t func, bool write_enable) {
 
 static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
     if (gx_f900_probe_active()) {
-        printf("[F900 BP] reg=0x%02X val=0x%06X\n", reg, val);
+        printf("[F900 BP] reg=0x%02X val=0x%06X pc=0x%08X lr=0x%08X\n", reg, val, s_debug_pc, s_debug_lr);
         fflush(stdout);
     }
     if (reg == 0x00) { // BPMEM_GENMODE (active TEV stages and texgens)
@@ -755,6 +795,10 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
         s_efb_copy_format = (val >> 24) & 0x7;
         return;
     }
+    if (reg == 0x4D) { // TEXCOPYDST pitch, computed by GXSetTexCopyDst (see src/GXFrameBuf.c)
+        s_efb_copy_pitch = val & 0x3FF;
+        return;
+    }
     if (reg == 0x52) { // TEXCOPYEXEC
         static int s_copy_probe = -1;
         static int s_copy_reports = 0;
@@ -765,7 +809,32 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
             s_copy_from = f ? atoi(f) : 0;
         }
         s_efb_copy_count++;
-        if (s_efb_copy_hook) {
+        /* The copy is queued, never performed here: doing it during guest execution can
+         * only read the *previous* completed frame, which produced the flat-cyan MENU
+         * background feedback loop (handover 5c.14). The backend replays the queue inside
+         * its batch loop, at the matching vertex mark. If the queue is full the copy is
+         * dropped loudly (counted, reported at the next frame start) rather than silently
+         * diverted to the old path. */
+        if (s_pending_copy_count < GX_MAX_PENDING_COPIES) {
+            GxPendingEfbCopy* pc = &s_pending_copies[s_pending_copy_count++];
+            pc->dst_guest = s_efb_copy_dst_guest;
+            pc->x0 = s_efb_copy_x0;
+            pc->y0 = s_efb_copy_y0;
+            pc->x1 = s_efb_copy_x1;
+            pc->y1 = s_efb_copy_y1;
+            pc->format = s_efb_copy_format;
+            pc->pitch = s_efb_copy_pitch;
+            pc->vertex_mark = s_vertex_count;
+            /* Only the deferred replay needs the barrier; splitting batches in the
+             * default path would change what the inline copies read. */
+            if (s_efb_copy_deferred) s_batch_barrier = true;
+        } else {
+            s_pending_copy_overflow++;
+        }
+        /* Default (5c.15): perform the copy right here, exactly as before - it can only
+         * read the last completed frame. TLS_DEFER_EFB_COPY=1 instead lets the backend
+         * replay the queue in stream order. */
+        if (!s_efb_copy_deferred && s_efb_copy_hook) {
             s_efb_copy_hook(s_efb_copy_dst_guest, s_efb_copy_x0, s_efb_copy_y0,
                             s_efb_copy_x1, s_efb_copy_y1, s_efb_copy_format);
         }
@@ -773,10 +842,10 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
             extern int g_runner_current_frame;
             if (g_runner_current_frame >= s_copy_from) {
                 s_copy_reports++;
-                printf("[EfbCopy] frame=%d #%u src=(%u,%u)-(%u,%u) dst=0x%08X fmt=%u (raw exec=0x%06X)\n",
+                printf("[EfbCopy] frame=%d #%u src=(%u,%u)-(%u,%u) dst=0x%08X fmt=%u pitch=%u vmark=%u/batches=%u (raw exec=0x%06X)\n",
                        g_runner_current_frame,
                        s_efb_copy_count, s_efb_copy_x0, s_efb_copy_y0, s_efb_copy_x1, s_efb_copy_y1,
-                       s_efb_copy_dst_guest, s_efb_copy_format, val);
+                       s_efb_copy_dst_guest, s_efb_copy_format, s_efb_copy_pitch, s_vertex_count, s_draw_batch_count, val);
                 fflush(stdout);
             }
         }
@@ -1758,3 +1827,4 @@ void gx_pipeline_process_display_list(const uint8_t* data, uint32_t size) {
     s_parser_state = prev_state;
     s_dl_recursion_depth--;
 }
+
