@@ -1569,6 +1569,19 @@ independent:
 
 Both are cheap to test now that `TLS_BATCH_PROBE` exists: change one thing, run one frame, read the trace.
 
+#### 7c. Two run-to-run facts to know before trusting frame numbers
+
+* **Frame numbers shift between runs.** The title sequence is wall-clock paced, so the same input script
+  reaches the handoff at different frames: `GameTask::Init calls=81 first=1640 last=1882` on one run and
+  `first=1490 last=1732` on the next, with the same binary and same script. Treat "frame 1450" as
+  "somewhere in the MENU", and always re-measure a probe frame in the run that produced it.
+* **There is a rare, pre-existing heap corruption.** One 2400-frame run died with exit `0xC0000374`
+  (`STATUS_HEAP_CORRUPTION`) at about frame 840, before the second scripted press, with the title still in
+  mode 1 and the pad edge seen only once. The immediately following run of the identical command completed
+  2400 frames with `CPU Exception: 0x00000000`. It is not caused by anything in this session's changes
+  (the same binary passes), but it is unexplained and it looks like the §5c.9 family of failures. Worth a
+  `TLS_ALLOC_PROBE=1` + `TLS_TAIL_RING` run if it reproduces.
+
 #### 8. Run recipes used this session
 
 ```powershell
