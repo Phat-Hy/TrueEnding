@@ -63,10 +63,12 @@
 >    `StreamManager::Update` (`0x8046DD60`) after frame 1882.
 > 2. Water/reflection and the guest framebuffers. §5c.11: EFB copies were not emulated at all and now are
 >    (`0x49/0x4A/0x4B/0x52` decoded, viewport-scaled readback of the completed frame, write into guest memory
->    verified with `TLS_EFB_SAMPLE`). The open detail is the destination encoding: 4x4-tiled RGBA8 for the
->    reflection textures, 16-bit RGB565 rows for the two VI scanout buffers (which are 614400 B each - that
->    arithmetic is what proved the old 32-bit write overran them). Visible symptom now on screen: the
->    title/MENU background renders as a flat cyan field.
+>    verified with `TLS_EFB_SAMPLE`). **§5c.13 closes the encoding question**: at a bright frame both classes
+>    decode to the real picture (16-bit RGB565 rows for the two 614400 B VI buffers, 4x4-tiled RGBA8 for the
+>    texture copies), and what remains is the destination *size* - `GXSetTexCopyDst` half-scaling, which the
+>    writer ignores, so mip copies write 4x the bytes their destination was allocated for. That is the likely
+>    cause of both the flat cyan MENU background (a fullscreen quad replacing the rendered scene) and possibly
+>    item 1's stall, since every half-scale copy overruns MEM2.
 > 3. The two boot-time non-code dispatches (`0x005F2A10`, `0x005F2A90`, both `lr=0x805F2F18/48` at
 >    frame 0) are still handled by the generic safeguard and deserve a name.
 >
