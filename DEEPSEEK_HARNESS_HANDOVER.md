@@ -34,6 +34,18 @@
 >   so the old `tex*vertexColour` shader was wrong everywhere. With `TLS_TEV=1 TLS_DEFER_EFB_COPY=1` the
 >   MENU now draws its gold text over a bloom (`docs/evidence/22-...`) instead of a flat cyan field - but
 >   the bloom is ~10x too bright, so the composite chain is still open (5c.16 item 4).
+> * **§5c.18 THE VERDICT on the b37/b38 gate: hardware does NOT reach 1.0.**
+>   `docs/evidence/27-dolphin-menu-frame1440.png` is Dolphin at the same MENU moment (same input
+>   script): a dark cave scene, gold `MENU`/`NEW GAME`, one small lamp glow, frame average
+>   `(23,25,18)`. **No white ellipse anywhere.** And `§5c.19 §7` settles *why*: on a bright static
+>   frame (base 204) every copy in the frame reads 220, so hardware's EFB copies **do not
+>   accumulate** - a frame's copies all read one snapshot, and `TLS_DEFER_EFB_COPY=1` (which replays
+>   them in stream order) is the defect, not the fix. What remains is that the host's *scene* is ~3x
+>   too bright (`(76,70,62)` vs `(23,25,18)`), and the additive passes multiply that excess.
+>   `TLS_EFB_COPY_GEOM=1` (destination size from the BP 0x4D pitch) is correct but does not fix the
+>   bloom; TEV compare stages are now evaluated instead of skipped (`bc02c21`). The default path
+>   still measures `(124,235,255)` at MENU 1448, unchanged.
+>
 > * **§5c.15**: see below for the copy-ordering work and the batch bisect instruments.
 >> **First commands.**
 > ```powershell
@@ -2181,7 +2193,42 @@ emulator), and a *second* Dolphin instance cannot open `Wii/title/00000001/00000
 and shows a modal "File could not be opened" - both look exactly like "the game hangs after
 `NW4R SND`".
 
-#### 6. Default path verified unchanged
+#### 7. The servicing model is settled: hardware's copies do **not** accumulate
+
+The decisive case is a **bright static screen**, because any in-frame feedback would clip there and
+be obvious. Dolphin's copy dumps for the MENU-adjacent static phase (frames 1530-1620, all
+identical) read, in execution order:
+
+```
+640x479f15=204   320x224f4=220   640x448f3=255   320x224f4=0   640x448f3=255
+160x112f6=220    320x224f6=220   80x56f6=220     80x56f6=220   ...
+```
+
+Base frame **204**, and **every** copy in the frame - including the last, smallest ones that the
+additive passes consume - sits at **220**, i.e. at the base level. If each additive pass saw the
+previous pass's output (the host's deferred model) the later copies would be 400+ and clip at 255.
+They do not. The same corpus at a dark phase (frame 750) shows `15 -> 24 -> 31`, a 2x rise that the
+bright case proves is scene content, not accumulation.
+
+**So the hardware behaviour is the opposite of `TLS_DEFER_EFB_COPY=1`:** a frame's copies all read
+one consistent EFB snapshot (the frame as of the last flush / the previous frame), and draws issued
+after a copy are *not* visible to later copies in the same frame. That is exactly the shape of the
+default inline path (`efb_snapshot`), which is why the default's picture was closer to the reference
+than the "more correct" deferred one - the deferred replay is the defect, not the fix.
+
+Consequences for the next session, in order:
+
+1. `TLS_DEFER_EFB_COPY=1` should not be promoted; the honest model is "copies read the frame as of
+   the guest's last flush", which the *inline* path already approximates one frame late. Making it
+   exact means tracking the guest's flush points (`GXFlush`, `GXDrawDone`, `GXSetDrawSync`) and
+   snapshotting the EFB there.
+2. The remaining brightness error is in the *scene*, not the chain (`(76,70,62)` vs `(23,25,18)` at
+   the same phase), so 3D materials - texcoord generation (BP 0x30..0x3F + XF texture matrices) and
+   the K0..K3 constants - are the next engineering target.
+3. Re-test the ink-matte / baseline-subtraction hacks (AGENTS.md §4.1) only after (2): they are
+   compensating for a too-bright scene, which is now measured rather than suspected.
+
+#### 8. Default path verified unchanged
 
 After every change in this session, MENU frame 1448 with **no** `TLS_*` flags set still measures
 `(124,235,255)` - byte-identical to the 0d4699f behaviour recorded in 5c.16. The new code is inert
