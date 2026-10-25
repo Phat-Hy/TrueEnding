@@ -4049,138 +4049,59 @@ purely because its virtual entries are ordinary function entries.**
 
 #### 9. Work order, revised
 
-1. **The parity: leading explanation found - the host presents twice per guest frame.** Counted
-   from the two batch dumps already on disk:
+1. **The parity: leading explanation is that the host presents twice per guest frame.** Evidence,
+   all measured:
+   * the two parities are the two halves of ONE frame - present 4001 is 76 batches with
+     `blend=1, additive=0, untextured=5` (opaque geometry), present 4002 is 76 batches with
+     `blend=49, additive=1, untextured=0` (the blended composite/post-process);
+   * the guest only finishes a frame on the odd one: present 4001's last copy is the **XFB
+     scanout** (`xfb=1` -> `0x900997E0`), while present 4002's three copies are all `xfb=0`;
+   * `d3d11_present` runs once per *emulated* frame (`host_runner.c:1297`) and
+     `gx_pipeline_begin_frame` once (`:1183`), so the host manufactures a display frame for each
+     half. Hardware only ever displays the finished XFB.
+   Rendered both parities: `docs/evidence/parity_odd_4001.png` (cave, pool, sword, red effect) and
+   `docs/evidence/parity_even_4002_frozen.png` (same cave, blue/purple, creature head in the pool).
+   Already **eliminated**: R8 tiling (`TLS_R8_TILE_8X4=1` - evens still identical), copy source
+   (`TLS_EFB_SRC_CURRENT=1` - identical to default), snapshot placement (captured at
+   `gfx_d3d11.c:2897`, *before* `Present` at 2898), vertex truncation (`1<<20` capacity).
+   **Blocker for the fix**: gating `Present` on XFB copies would freeze the title, which emits very
+   few `GXCopyDisp` events (36 in a 2400-frame run) and reaches the screen another way. Establish
+   what displays the title before touching the present gate; the 1448 invariant is measured on the
+   present counter and will move.
 
-   ```
-   4001 (odd,  live,   red cave):  76 batches, blend=1,  additive=0, untextured=5
-   4002 (even, frozen, purple):    76 batches, blend=49, additive=1, untextured=0
-   ```
+2. **EFB destination formats 0 and 1 are both implemented now.**
+   * 1 = R8 (5c.26 s6): three sites - `bpp`, the tile writer, `efb_dst_decode_texel`.
+   * 0 = **R4** (this session), taken as the exact inverse of this file's own `decode_gx_texture`
+     `case 0` - 8x8 tiles, 32 bytes, row-major 4 bytes per row of 8 texels, **high nibble = even
+     texel**:
+     `tiles_x8 = (dst_w+7)/8; tile8 = (gy/8)*tiles_x8 + gx/8; byte_i = (gy%8)*4 + (gx%8)/2`.
+     `bpp = 1` is correct for R4 in the existing `dst_w = pitch*8/bpp` derivation, because an
+     8-wide tile makes a tile row `dst_w*4` bytes = `pitch*32`, i.e. `dst_w = pitch*8` regardless
+     of bpp.
+     **Measured**: `[EfbCopy] destination format 0 not implemented` is gone (0 occurrences in a
+     Chapter-1 chain run) and the 1448 invariant is unchanged - the title never used format 0, so
+     this cannot move it. What is validated is that the writer is the exact inverse of the decoder
+     the guest samples with, and that the 4x-too-wide RGBA8 write is gone. There is still no
+     Chapter-1 reference for what these destinations should *look* like.
 
-   The odd frame is the **opaque geometry half** and the even frame is the **blended composite /
-   post-process half** of one guest frame. `d3d11_present` runs once per *emulated* frame
-   (`host_runner.c:1297`) and `gx_pipeline_begin_frame` once per emulated frame (`:1183`), so the
-   host manufactures a display frame for each half. Hardware only ever displays the finished XFB -
-   which is also why `VISetNextFrameBuffer` never firing matters here after all, not as the copy
-   source (that was refuted) but as the missing "the guest says this frame is done" signal.
-   **Direct evidence that the odd frame is the displayed one**: the copy lists already recorded for
-   both parities show the guest performing an XFB copy (`xfb=1`) only on odd frames -
-   present 4001's last copy is `xfb=1` to `0x900997E0`, while present 4002's three copies are all
-   `xfb=0`. So the guest finishes and displays on odd frames, and the even frames are intermediate
-   post-process work that hardware would never put on screen.
-   **Candidate fix, and why it is not applied yet**: skip `IDXGISwapChain_Present` on frames with no
-   XFB copy, so the window holds the last completed image (with `SWAP_EFFECT_DISCARD` the window
-   simply keeps showing it). That is a 3-line change and it is the faithful behaviour - but the
-   title produces very few `GXCopyDisp` events (36 in a 2400-frame title run) and appears to reach
-   the screen through a different path, so gating the present on XFB copies would likely freeze the
-   title. Establish what displays the title *before* touching the present gate; the 1448 invariant is
-   measured on the present counter and would move.
+3. **The R8 write path is tiled 4x4 but R8 is an 8x4 format.** `decode_gx_texture` has
+   `case 1: // GX_TF_I8 (8x4 tiles, 32 bytes)` while `case 8` there is **CI4 (8x8)** - the texture
+   numbering and the EFB-copy numbering are different spaces, and on the EFB-copy side 8/1 is R8,
+   i.e. **8 texels wide x 4 tall**. Correct writer: `tile = (gy/4)*(dst_w/8) + gx/8`,
+   `within = (gy%4)*8 + (gx%8)`; the current 4x4 rule touches only the low 16 bytes of each
+   32-byte tile. Implemented as `TLS_R8_TILE_8X4`, default **off**, in both the writer and
+   `efb_dst_decode_texel`. It stays off: no reference for a correct R8 destination, and the title's
+   bloom chain uses R8, so promoting it moves the 1448 invariant.
 
-   Rendered both parities rather than reasoning about means
-   (`docs/evidence/parity_odd_4001.png`, `docs/evidence/parity_even_4002_frozen.png`):
-   * odd (4001): the cave, pool, sword on the rock, **red-lit** effect upper right - live.
-   * even (4002): the **same cave**, blue/purple rock, a blue creature head in the pool, slightly
-     different camera - one frozen state of the same cutscene, not "an older scene".
-   Already eliminated by measurement (each with a default-off flag where one was needed):
-   * **R8 tiling** (`TLS_R8_TILE_8X4=1`): evens stay byte-identical (`28089bce` with 8x4,
-     `688b6a83` with 4x4) - tiling changes *which* frozen image appears, not the freezing.
-   * **copy source** (`TLS_EFB_SRC_CURRENT=1`, current back buffer instead of the previous-frame
-     snapshot): byte-identical to the default.
-   * **snapshot placement**: `d3d11_capture_efb_snapshot()` is at `gfx_d3d11.c:2897`, immediately
-     *before* `Present` at 2898 - not sampling a DISCARDed buffer.
-   * **vertex truncation**: `GX_MAX_BATCH_VERTICES = 1<<20`, far above 276k.
-2. **The R8 write path is tiled 4x4 but R8 is an 8x4 format - check this before R4.** The
-   *texture* decoder in this same file settles it: `decode_gx_texture` has
-   `case 1: // GX_TF_I8 (8x4 tiles, 32 bytes)`, and `case 8` there is **CI4 (8x8)**, i.e. the
-   texture numbering and the EFB-copy numbering are different spaces. On the EFB-copy side format
-   8/1 is R8, and R8 is **8 texels wide x 4 tall, 32 bytes** - so a correct writer needs
-   `tile = (gy/4)*(dst_w/8) + gx/8` and `within = (gy%4)*8 + (gx%8)`. Implemented as
-   `TLS_R8_TILE_8X4`, default **off**, applied in both the writer and `efb_dst_decode_texel`
-   (a probe that decodes with a different rule than the writer is worse than no probe).
-   The *width* formula is fine: for any 8-wide tile `dst_w = pitch*8` regardless of bpp, which is
-   exactly what `bpp = 1` yields.
-   **Still unvalidated**: there is no reference for a correct R8 destination, and the title's
-   bloom chain uses R8, so promoting it will move the 1448 invariant. Needs its own reference first.
-3. **Fill `0x81858DE0` record slot 1** (see §8b) - still the state-machine-side blocker.
-   What is left, and it is now a sharper question. `TLS_BATCH_DUMP=4002` shows the even frame is
-   **not** composite-only: it draws **76 batches / 44,319 vertices** (odd frames submit ~276,471),
-   so roughly a fifth of the geometry. So the even frame is a *subset* render, and whatever it
-   omits is what animates.
-   The copy **read/write descriptor mismatch** is the concrete lead: at present 4002 the batches
-   sample `0x9038D1C0` as **80x56 fmt=6 (RGBA8)** four times, while that same frame's copies wrote
-   `0x9038D1C0` as **320x224 fmt=4 (RGB565)**. The guest re-uses that address as a scratch for
-   different purposes on the two parities, and whoever samples it on the even frame is reading a
-   descriptor that does not match what was just written. A format mismatch of that kind also
-   explains the systematic **blue/purple** hue of the frozen frame versus the red live one.
-   Next: dump `TLS_BATCH_DUMP` for both 4001 and 4002 and diff the sampled `(addr, w, h, fmt)`
-   sets against `TLS_EFB_CHAIN`'s writes for the same present.
-   **Both parities dumped: the batch *count* matches, the batches do not.** (Corrected - an
-   intermediate reading of this said "the same 76 draw calls carry 6x fewer vertices", which the
-   per-batch dump below refutes.)
+4. **Fill `0x81858DE0` record slot 1** (see §8b) - still the state-machine-side blocker.
+   **New datum**: DVD activity stops long before phase 13 (the last `[TLS DVD] read` in a
+   4200-frame run is around request #500, well before frame 2363), so slot 1's resource is not a
+   disc load - it is either something already in memory or a request that was never issued.
 
-   ```
-   present 4001: batches=76 vtx=276471   b0..b3  untextured (addr=0x0, 0x0, fmt=0)
-   present 4002: batches=76 vtx=44319    b0..b3  textured 256x256/512x256 fmt=14 (CMPR)
-   ```
+5. **`fn_803E4478`** makes the phase-0 gate one-shot: it zeroes `g2+0xD8C` itself. Whatever re-arms
+   it is a later phase, not a retry.
 
-   The same *count*, but different textures, different vertex counts and different bounds - so the
-   two parities are running **different command streams**, not the same stream at a different
-   amplitude. `b1` alone is 2994 vertices on 4001 and 19155 on 4002, and the odd frame's leading
-   batches carry **no texture at all** while the even frame's are all CMPR-textured.
-   Ruled out on the way: `gx_pipeline_begin_frame()` runs exactly **once per runner frame**
-   (`host_runner.c:1183`, top of the loop) and `d3d11_present` once at `:1297`, so the accumulation
-   window is identical; and the vertex buffer is `GX_MAX_BATCH_VERTICES = 1<<20`, far above 276k, so
-   nothing is dropped for capacity.
-   So either the game genuinely renders two different ways on alternate frames (a compositing or
-   double-buffer scheme the host is exposing rather than hiding), or one parity is submitting a
-   display list the host is executing against stale state.
+6. Input plans must respect the **one-update edge**: press, release, press again.
 
-   **The two parities are the two halves of one frame, and this is measurable in the batch list:**
-
-   ```
-   present 4001 (odd,  "live", red cave):  76 batches, blend=1,  additive=0,  untextured=5
-   present 4002 (even, "frozen", purple):  76 batches, blend=49, additive=1,  untextured=0
-   ```
-
-   The odd frame carries the **opaque geometry** (one blended batch, five untextured); the even
-   frame carries the **blended composite/post-process** (49 of 76 batches blend, one additive, every
-   batch textured). That is a normal double-buffered pipeline split - geometry for frame N, then the
-   post-process that consumes frame N's EFB copies - and it explains why the batch *count* matches
-   while nothing else does.
-
-   So the leading explanation for the whole parity defect is: **the host presents once per emulated
-   frame, so it shows the geometry half and the composite half as two separate pictures, whereas
-   hardware only ever displays the finished XFB.** That is consistent with every measurement here:
-   odd frames look like raw scene geometry, even frames look like a post-processed image, and the
-   even image is stable because the composite reads a fixed copy.
-   `VISetNextFrameBuffer` never firing is the same gap seen from the other side: the host has no
-   notion of "the guest says a frame is finished", so it manufactures one per emulated frame.
-   This is stated as the leading hypothesis, not as proven - the cheap test is to present only when
-   the guest's own frame/flip completes and see whether the two halves collapse into one picture.
-   Next: dump a *whole* frame's batch list for both parities side by side (raise
-   `TLS_BATCH_DUMP_MAX`) - the untextured leading batches on odd frames are the most unusual single
-   datum and deserve naming.
-   Still worth chasing from round 2's data: the last copy of an odd frame is the guest's own
-   **scanout**, `copy=9 dst=0x900997E0 640x448 xfb=1 fmt=0` - `0x900997E0` is the hardcoded VI
-   fallback address in `host_runner.c:1294` and `fmt=0` is **R4**. It prints no "not implemented"
-   warning because `is_xfb_copy` forces `bpp = 2` before the format switch, so it goes out as 16bpp
-   linear. The eight `format 0 not implemented` lines are the **non-XFB** R4 destinations
-   (`0x92001BC0`, `0x92005BC0`, `0x92006BC0`, `0x927BD440`, `0x927C1440`, `0x927C2440`,
-   `0x92887860`, `0x9288F860`), which are still written as RGBA8 at 4x the destination width.
-2. **The R8 write path is tiled 4x4 but R8 is an 8x4 format - check this before R4.** The
-   *texture* decoder in this same file settles it: `decode_gx_texture` has
-   `case 1: // GX_TF_I8 (8x4 tiles, 32 bytes)`, and `case 8` there is **CI4 (8x8)**, i.e. the
-   texture numbering and the EFB-copy numbering are different spaces. On the EFB-copy side format
-   8/1 is R8, and R8 is **8 texels wide x 4 tall, 32 bytes** - so a correct writer needs
-   `tile = (gy/4)*(dst_w/8) + gx/8` and `within = (gy%4)*8 + (gx%8)`. Implemented as
-   `TLS_R8_TILE_8X4`, default **off**, applied in both the writer and `efb_dst_decode_texel`
-   (a probe that decodes with a different rule than the writer is worse than no probe).
-   The *width* formula is fine: for any 8-wide tile `dst_w = pitch*8` regardless of bpp, which is
-   exactly what `bpp = 1` yields.
-   **Still unvalidated**: there is no reference for a correct R8 destination, and the title's
-   bloom chain uses R8, so promoting it will move the 1448 invariant. Needs its own reference first.
-3. **Fill `0x81858DE0` record slot 1** (see §8b) - still the state-machine-side blocker.
-4. **`fn_803E4478`** makes the phase-0 gate one-shot; whatever re-arms it is a later phase.
-5. Input plans must respect the **one-update edge**: press, release, press again.
-6. Unchanged: EFB format 1 done / 0 open, the title input race, the allocator cycle.
-
+7. Unchanged: the title input race (and its effect on the invariant check), the allocator cycle
+   (5c.22 s3).

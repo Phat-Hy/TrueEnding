@@ -1420,6 +1420,16 @@ static void efb_dst_decode_texel(const uint8_t* guest, uint32_t format, uint32_t
         within = (gy % 4) * 8 + (gx % 8);
     }
     switch (format) {
+        case 0: {           /* R4: 8x8 tiles, 32 bytes, high nibble = even texel */
+            uint32_t tiles_x8 = (dst_w + 7) / 8;
+            uint32_t tile8  = (gy / 8) * tiles_x8 + (gx / 8);
+            uint32_t byte_i = (gy % 8) * 4 + (gx % 8) / 2;
+            uint8_t  bv     = guest[(size_t)tile8 * 32 + byte_i];
+            uint8_t  nib    = ((gx & 1u) == 0) ? (uint8_t)(bv >> 4) : (uint8_t)(bv & 0x0F);
+            *r = *g = *b = (uint8_t)(nib * 17);
+            *a = 255;
+            break;
+        }
         case 4: case 10: {   /* RGB565: 32-byte 4x4 tile of big-endian u16 */
             const uint8_t* t = guest + (size_t)tile * 32 + within * 2;
             uint16_t v = (uint16_t)((t[0] << 8) | t[1]);
@@ -1536,6 +1546,10 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                 case 3: case 9:  bpp = 2; break;  /* RA8: 32B of (alpha, red) pairs */
                 case 7: bpp = 1; break;           /* A8: 32B of alpha */
                 case 8: bpp = 1; break;           /* R8: 32B of red (intensity) */
+                case 0: bpp = 1; break;           /* R4: 8x8 tiles, 4 bits per texel. A tile
+                                                   * row is (dst_w/8)*32 = dst_w*4 bytes and
+                                                   * equals pitch*32, so dst_w = pitch*8 -
+                                                   * which is what bpp = 1 yields here. */
                 case 1: bpp = 1; break;           /* R8 again - the id the Chapter-1
                                                    * composite chain uses (5c.25 §4c).
                                                    * Same 32B 4x4 tile as 8; leaving it
@@ -1827,6 +1841,21 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                              * intensity in the wrong byte. Format 1 is the same layout
                              * (the Chapter-1 chain's id for it, 5c.25 §4c). */
                             guest[(size_t)tile * 32 + within] = r;
+                        } else if (s_copy_fmt && format == 0) {
+                            /* R4 (format id 0): 8x8 tiles, 32 bytes per tile, 4 bits per texel.
+                             * This is the exact inverse of decode_gx_texture()'s `case 0`, which
+                             * is what the guest will use to sample it: inside a tile the bytes are
+                             * row-major, 4 bytes per row of 8 texels, and the HIGH nibble is the
+                             * even texel. Both halves must stay in step or the destination decodes
+                             * as a scrambled image that still has the right average - which is why
+                             * the old RGBA8 fallback looked plausible and measured wrong. */
+                            uint32_t tiles_x8 = (dst_w + 7) / 8;
+                            uint32_t tile8  = (gy / 8) * tiles_x8 + (gx / 8);
+                            uint32_t byte_i = (gy % 8) * 4 + (gx % 8) / 2;
+                            uint8_t  nib    = (uint8_t)((r >> 4) & 0x0F);
+                            uint8_t* t4     = guest + (size_t)tile8 * 32 + byte_i;
+                            if ((gx & 1u) == 0) *t4 = (uint8_t)((*t4 & 0x0Fu) | (uint8_t)(nib << 4));
+                            else                *t4 = (uint8_t)((*t4 & 0xF0u) | nib);
                         } else {
                             uint8_t* tile_base = guest + (size_t)tile * 64;
                             tile_base[within * 2 + 0] = a;
