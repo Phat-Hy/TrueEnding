@@ -1379,6 +1379,7 @@ static void d3d11_capture_efb_snapshot(void) {
  * honest - a probe that decodes with a different rule than the writer is worse
  * than no probe. */
 static int s_clears_this_frame = 0;
+static int s_xfbs_this_frame = 0;
 static float s_last_clear[4] = {0,0,0,0};
 
 static int efb_r8_tile_8x4(void) {
@@ -1523,6 +1524,7 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
         s_copy_fmt = cf ? (atoi(cf) != 0) : 1;
     }
     int is_xfb_copy = (int)((exec >> 14) & 1u);
+    if (is_xfb_copy) s_xfbs_this_frame++;
     uint32_t bpp = 4;
     int dst_supported = 1;
     if (s_copy_fmt) {
@@ -2852,14 +2854,15 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
             const GxDrawBatch* bd = gx_pipeline_get_draw_batches(&bc);
             for (uint32_t i = 0; i < bc; i++) if (bd[i].blend_enable) blended++;
             printf("[TLS Present] count=%d frame_counter=%d gx_vtx=%u batches=%u blended=%u "
-                   "clears=%d clear=(%.2f,%.2f,%.2f) take_shot=%d\n",
+                   "clears=%d xfbs=%d clear=(%.2f,%.2f,%.2f) take_shot=%d\n",
                    s_d3d11_dump_count, s_d3d11.frame_counter, gx_vtx_count, bc, blended,
-                   s_clears_this_frame, s_last_clear[0], s_last_clear[1], s_last_clear[2],
+                   s_clears_this_frame, s_xfbs_this_frame, s_last_clear[0], s_last_clear[1], s_last_clear[2],
                    (int)take_shot);
             fflush(stdout);
         }
     }
     s_clears_this_frame = 0;
+    s_xfbs_this_frame = 0;
 
     if (take_shot) {
         ID3D11Texture2D* back_buffer = NULL;
@@ -2951,7 +2954,24 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
 
     // Present with V-Sync
     d3d11_capture_efb_snapshot();
-    IDXGISwapChain_Present(s_d3d11.swap_chain, s_d3d11.vsync ? 1 : 0, 0);
+    /* TLS_PRESENT_ON_XFB=1 flips the window only on frames where the guest performed an
+     * XFB (scanout) copy, i.e. only on frames the guest itself considers finished.
+     * Measured with the per-frame probe:
+     *   - the TITLE does an XFB copy on EVERY frame (xfbs=1 at 1444..1448), so it is
+     *     unaffected and keeps its cadence;
+     *   - the Chapter-1 loop does one only on the composite half (xfbs=1 on 4002/4004/
+     *     4006, xfbs=0 on 4001/4003/4005), so the opaque geometry half - a frame the guest
+     *     never displays - stops being put on screen.
+     * Default OFF: a screen that legitimately produces no XFB copy for a long stretch would
+     * freeze the window, and the boot/strap screens have not been measured. The 1448
+     * invariant is a back-buffer capture and is unaffected either way, so it cannot validate
+     * this - it has to be judged on the window. */
+    {
+        static int s_on_xfb = -1;
+        if (s_on_xfb < 0) s_on_xfb = getenv("TLS_PRESENT_ON_XFB") ? 1 : 0;
+        if (!s_on_xfb || s_xfbs_this_frame > 0)
+            IDXGISwapChain_Present(s_d3d11.swap_chain, s_d3d11.vsync ? 1 : 0, 0);
+    }
     gx_pipeline_end_frame();
     return true;
 }

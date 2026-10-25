@@ -4054,8 +4054,15 @@ purely because its virtual entries are ordinary function entries.**
    * the two parities are the two halves of ONE frame - present 4001 is 76 batches with
      `blend=1, additive=0, untextured=5` (opaque geometry), present 4002 is 76 batches with
      `blend=49, additive=1, untextured=0` (the blended composite/post-process);
-   * the guest only finishes a frame on the odd one: present 4001's last copy is the **XFB
-     scanout** (`xfb=1` -> `0x900997E0`), while present 4002's three copies are all `xfb=0`;
+   * **the guest's display frame is the EVEN one, not the odd one** - corrected this session with
+     the per-frame probe. The authoritative counts are `xfbs=1` on 4002/4004/4006 and `xfbs=0` on
+     4001/4003/4005. Round 4 read an XFB copy out of `chain4001.log` and concluded the guest displays
+     on odd frames; that reading was wrong - the chain dump's `present=` label does not pin the frame
+     the copy belongs to, and the per-frame counter does. So the **even (composite) frame is the one
+     the guest considers finished and displays**, which is also the half the 1448-style captures and
+     the frozen purple image come from;
+   * the title does an XFB copy on **every** frame (`xfbs=1` at 1444..1448), so a gate on XFB copies
+     leaves the title completely unaffected;
    * `d3d11_present` runs once per *emulated* frame (`host_runner.c:1297`) and
      `gx_pipeline_begin_frame` once (`:1183`), so the host manufactures a display frame for each
      half. Hardware only ever displays the finished XFB.
@@ -4096,6 +4103,12 @@ purely because its virtual entries are ordinary function entries.**
    The title's per-frame profile also explains why a *global* present gate is unsafe: the title is
    single-pass (frames 300+ show `batches` 14..23 with `blended` 6..14 in the SAME frame) while
    Chapter-1 is two-pass, so a gate must be conditional on the guest using the two-pass protocol.
+   **The gate now exists**: `TLS_PRESENT_ON_XFB=1` flips the window only when
+   `s_xfbs_this_frame > 0`, i.e. only on frames the guest finished. Default **OFF** - a screen with a
+   long XFB-free stretch would freeze the window and the boot/strap screens are unmeasured. It also
+   cannot be validated by the 1448 invariant, because that is a *back-buffer* capture and the gate
+   only skips `IDXGISwapChain_Present`; the back buffer is drawn every frame either way. It has to be
+   judged on the window (or by capturing the *front* buffer, which nothing does yet).
    Already **eliminated**: R8 tiling (`TLS_R8_TILE_8X4=1` - evens still identical), copy source
    (`TLS_EFB_SRC_CURRENT=1` - identical to default), snapshot placement (captured at
    `gfx_d3d11.c:2897`, *before* `Present` at 2898), vertex truncation (`1<<20` capacity), and
