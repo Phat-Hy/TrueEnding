@@ -1159,8 +1159,16 @@ static D3D11_BLEND map_gx_src_blend_factor(uint8_t factor) {
     switch (factor) {
         case 0: return D3D11_BLEND_ZERO;
         case 1: return D3D11_BLEND_ONE;
-        case 2: return D3D11_BLEND_DEST_COLOR;
-        case 3: return D3D11_BLEND_INV_DEST_COLOR;
+        /* GX CMODE0 names the *operand*, not the slot: 2 = SRCCLR (the source colour),
+         * 3 = INVSRCCLR, 6 = DSTALPHA, 7 = INVDSTALPHA - identically for the source and
+         * the destination factor (Dolphin's BlendMode::BlendFactor enum is in exactly
+         * this order). The host had 2/3 mapped to DEST_COLOR/INV_DEST_COLOR in the
+         * *source* slot, which is a different operation as soon as source and
+         * destination differ - and the brightest composite pass of the MENU tail is
+         * `s=2 d=0` (GX: dst = src*src, the "bright pass"), so this was measurable
+         * (handover 5c.23). */
+        case 2: return D3D11_BLEND_SRC_COLOR;
+        case 3: return D3D11_BLEND_INV_SRC_COLOR;
         case 4: return D3D11_BLEND_SRC_ALPHA;
         case 5: return D3D11_BLEND_INV_SRC_ALPHA;
         case 6: return D3D11_BLEND_DEST_ALPHA;

@@ -2725,3 +2725,125 @@ matches.
 
 
 
+
+---
+
+### 5c.23 The EFB alpha is pinned at 1.0 - the composite tail has been running every additive pass at full strength
+
+**State at the start of this session:** `6e65998`, tree clear, build green.
+
+#### 0. The write denials were the *sandbox package SID*, not the integrity label
+
+`recomp/`, `tools/` and `config/` refused every write - existing files *and* new
+files - while `build/` and the workspace root were writable. The tell is the DACL, not
+the integrity label that 5c.22 §0 fixed:
+
+```
+.                         S-1-4-272833741-438872707:(OI)(CI)(W,D,DC)   <- present
+build\recomp              S-1-4-272833741-438872707:(OI)(CI)(W,D,DC)   <- present
+recomp                    (no S-1-4-* entry at all)                    <- denied
+```
+
+The DSH sandbox runs this session in an AppContainer whose package SID is
+`S-1-4-272833741-438872707`; access to a path needs that SID or the signed-in user's
+SID in the DACL, and `recomp/` inherited neither. Fix, once, from a full-access
+session: `icacls`-free - run the bundled ACL skill script unconfined with
+`-AllowRoot <workspace>` and it adds a full-control ACE for the signed-in user
+(`tools/dsh` skill `diagnose-windows-sandbox-acl`, report in `.acl-repair-4/`). Note
+that a *confined* run of that script cannot help (it reports the sandbox's own
+restriction as a missing right).
+
+#### 1. The EFB alpha is 1.0 after every single batch - measured, not argued
+
+New instrument: `TLS_BATCH_PROBE` now also prints `a=` (the framebuffer alpha average,
+sampled on the same 16px grid as `avg=`). MENU present 1448, `TLS_TEV=1
+TLS_DEFER_EFB_COPY=1 TLS_EFB_COPY_FMT=1`:
+
+```
+after b0  col0=0xFF808080 avg=(9,10,11)   a=255
+after b13 col0=0x00FFFFFF avg=(30,30,28) a=255      <- vertex alpha 0!
+after b19 col0=0xFFFFFFFF avg=(43,46,48) a=255
+after b35 col0=0xFFFFFFFF avg=(47,45,43) a=255      <- the scene copy, replace
+after b37 (s=2 d=0, squares the frame)   a=255
+present                                   a=255
+```
+
+Three separate reasons, all of them the host's and none of them GX's:
+
+1. `d3d11_present` cleared the EFB with **alpha = 1.0** (`clear_color[3] = 1.0f; // the
+   guest clear alpha is not used`), so the frame starts opaque.
+2. every blended batch used `SrcBlendAlpha=ONE, DestBlendAlpha=INV_SRC_ALPHA` - the
+   "over" operator - whatever the guest's CMODE0 said, so alpha can only ever climb.
+3. the host *forces* colour blending on for batches whose guest blend is disabled
+   (`dst_factor == 1/5/7`), so even the opaque 3D terrain went through a blend instead
+   of GX's replace.
+
+Consequence: every EFB copy the composite tail samples carries `a=255` (`[EfbChain]
+dstalpha=255` on all 21 copies), and the four additive passes are `SRCALPHA/ONE`, whose
+strength is `src.rgb * src.a`. Hardware's own per-pass gain is 44-56 % of the sampled
+copy; the host's is 100-143 %. **This is the last unexplained term in the chain, and it
+is a host defect, not a property of the game.**
+
+#### 2. `TLS_EFB_ALPHA=1`: the faithful version, in one flag
+
+* clear alpha from BP 0x4F (the guest's `GXSetCopyClear` alpha) instead of 1.0;
+* alpha *replace* (`ONE/ZERO`) whenever the guest had blending disabled - GX's
+  `dst.a = src.a`, expressed in D3D11 terms;
+* alpha follows the guest's CMODE0 factors when it had blending enabled
+  (`TLS_GX_ALPHA_BLEND`'s behaviour, now implied).
+
+`get_or_create_blend_state` takes the *guest's* blend-enable separately from the
+host's (possibly forced) one, and both are in the state cache key.
+
+#### 3. The stall loop is a structure walk, not a flag spin
+
+`0x8022A204` is inside `fn_8022A054` (`src/game_res_texture.c`, size 0x5C4 - the game's
+resource allocator), and the generated code shows what it really is:
+
+```
+8022A204: r0 = [r7+4] & ~3 ; r0 -= r4 ; if (r0 >= r30) { r30 = r0; r31 = r7; }
+          r7 = [r7+16] ? [r7+16] : [r7+20]        ; child/next pointers
+8022A238: if (r7) goto 8022A204                   ; walk the whole structure
+```
+
+i.e. a traversal that keeps the **maximum** of `([node+4] & ~3) - r4`, entered at
+`[r5+300]`. It is called from `fn_8022ADD4+0x270` and **retried while it returns 0**
+(`8022B040..8022B04C`), with `r4 = r30`. 100 % of every sample at one address therefore
+means the walk never terminates - a **cycle (or a self-referential reuse) in the
+allocator's tree**, not a flag the host fails to advance. Naming: `fn_8022A054` =
+resource-block finder, `fn_8022ADD4` = the caller that retries it forever.
+
+#### 4. What the frame at present 1448 actually *is* - and the reference to use
+
+Every previous session compared "MENU frame 1448" against the reference. It is not the
+MENU on this input plan. Rendered to PNG it is:
+
+```
+The save data cannot be used because the data is corrupted.  Recreate save data?
+                                     Yes / No
+```
+
+over a **dark screen with a huge white radial glow and black corners**, plus two solid
+grey/blue button rectangles. So:
+
+* the host reaches the *save-data check* by present 1448 with the plan
+  `600-612:A,900-912:A,1200-1212:A` (three A presses: title -> MENU -> NEW GAME ->
+  save check), and the dialog covers whatever is behind it;
+* `docs/evidence/27-dolphin-menu-frame1440.png` **is** `dolphin-ref/run2/framedump_1440.png`
+  (mean `(23,25,18)`, p50 15, p90 42, p99 142, 4x6 grid `5 9 14 5 / 13 21 24 11 / 29 49 41 12 / ...`),
+  i.e. run2 is the frame-aligned reference corpus for this input plan;
+* `dolphin-ref/run3/framedump_1448.png` is a *different* screen (the flat light title
+  plate, mean 204, uniform) - run3's input timing differs, so run3 must not be used for
+  frame-indexed comparison. Use `run2/` for the MENU and the `efb1_*` corpora only for
+  per-copy content.
+
+**The fabricated zero save file did not cause it.** `host_runner.c` used to write a
+zero-filled 1 348 992-byte `savedata/savedata.dat` at startup, while the NAND stand-in in
+`replacements.c` deliberately answers "no such file" for a fresh console so the guest can
+tell "no save data yet" from "corrupt". The startup pre-creation defeated that; it is now
+behind `TLS_SAVE_PRECREATE=1` and **off by default**, and the file was deleted. Measured
+after the change: the picture at 1448 is *byte-identical* (mean `(60,61,63)`, same
+sha256) - so the guest's "corrupt" verdict is not decided by that file's contents at
+all. It comes from what the NAND/ISFS/NANDCheck answers say, or from a check that fails
+before any file is read. That is the next thread for whoever picks this up; it is what
+keeps the MENU (and everything after it) off the screen.

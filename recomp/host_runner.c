@@ -1070,26 +1070,42 @@ int main(int argc, char** argv) {
     CreateDirectoryA("savedata", NULL);
 #endif
 
-    // Ensure savedata.dat exists with proper size (0x149580 = 1348992 bytes)
-    FILE* sf = fopen("savedata/savedata.dat", "rb");
-    long sf_size = 0;
-    if (sf) {
-        fseek(sf, 0, SEEK_END);
-        sf_size = ftell(sf);
-        fclose(sf);
-    }
-    if (sf_size < 1348992) {
-        sf = fopen("savedata/savedata.dat", "wb");
+    /* Do NOT fabricate a zero-filled save file here. `ios_open_savedata()` in
+     * replacements.c creates the file only when the guest asks to create one and
+     * answers "no such file" otherwise, precisely because the save-data check tells
+     * "no save data yet" from "the data is corrupt" by what the NAND layer returns.
+     * Pre-creating a zeroed 1348992-byte file (which this used to do) meant every
+     * first boot took the corrupt path: the title screen shows
+     *   "The save data cannot be used because the data is corrupted. Recreate save data?"
+     * over the MENU and never offers NEW GAME - measured at present 1448 on the
+     * 600/900/1200-A input plan, where the reference shows the MENU plate
+     * (handover 5c.23). TLS_SAVE_PRECREATE=1 restores the old behaviour for A/B. */
+    {
+        static int s_precreate = -1;
+        if (s_precreate < 0) s_precreate = getenv("TLS_SAVE_PRECREATE") ? 1 : 0;
+        FILE* sf = fopen("savedata/savedata.dat", "rb");
+        long sf_size = 0;
         if (sf) {
-            static const uint8_t zero_block[4096] = {0};
-            for (uint32_t i = 0; i < 1348992 / 4096; i++) {
-                fwrite(zero_block, 1, 4096, sf);
-            }
-            if (1348992 % 4096 > 0) {
-                fwrite(zero_block, 1, 1348992 % 4096, sf);
-            }
+            fseek(sf, 0, SEEK_END);
+            sf_size = ftell(sf);
             fclose(sf);
-            printf("[Runner] Initialized empty savedata/savedata.dat (%u bytes)\n", 1348992);
+        }
+        if (s_precreate && sf_size < 1348992) {
+            sf = fopen("savedata/savedata.dat", "wb");
+            if (sf) {
+                static const uint8_t zero_block[4096] = {0};
+                for (uint32_t i = 0; i < 1348992 / 4096; i++) {
+                    fwrite(zero_block, 1, 4096, sf);
+                }
+                if (1348992 % 4096 > 0) {
+                    fwrite(zero_block, 1, 1348992 % 4096, sf);
+                }
+                fclose(sf);
+                printf("[Runner] Initialized empty savedata/savedata.dat (%u bytes)\n", 1348992);
+            }
+        } else if (!s_precreate) {
+            printf("[Runner] save data: %s (%ld bytes), not fabricating one\n",
+                   sf_size ? "present" : "absent", sf_size);
         }
     }
 
