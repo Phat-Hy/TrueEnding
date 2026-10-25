@@ -15,7 +15,10 @@ from collections import defaultdict
 
 from PIL import Image
 
-D = os.path.join(os.environ['APPDATA'], 'Dolphin Emulator', 'Dump', 'Textures')
+# TLS_COPY_DUMP_DIR lets the archived corpora under build/recomp/dolphin-ref/run4 be
+# analysed without moving Dolphin's dump path.
+D = (os.environ.get('TLS_COPY_DUMP_DIR')
+     or os.path.join(os.environ['APPDATA'], 'Dolphin Emulator', 'Dump', 'Textures'))
 
 
 def load():

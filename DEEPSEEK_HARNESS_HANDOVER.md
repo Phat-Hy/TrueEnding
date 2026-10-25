@@ -2228,6 +2228,20 @@ Consequences for the next session, in order:
 3. Re-test the ink-matte / baseline-subtraction hacks (AGENTS.md §4.1) only after (2): they are
    compensating for a too-bright scene, which is now measured rather than suspected.
 
+Where the reference data lives (nothing here needs re-capturing):
+
+| path (`build/`, git-ignored) | contents |
+|---|---|
+| `build/recomp/dolphin-ref/boot` | 1281 frames, boot + safety screen |
+| `build/recomp/dolphin-ref/run2` | 10 frames exported as evidence (MENU 1420/1440, Chapter 1 2000/3000) |
+| `build/recomp/dolphin-ref/run3` | 8297 frames from the full title -> save dialog -> NEW GAME -> Chapter 1 run |
+| `build/recomp/dolphin-ref/run4` | 2435 frames **plus 26656 `efb1_*` per-copy dumps**, essentially one static bright screen (base 204) reached after the MENU - this is the corpus behind §7 and the reason that verdict is trustworthy. Re-analyse with `TLS_COPY_DUMP_DIR=build/recomp/dolphin-ref/run4 python tools/analyze_dolphin_copies.py <step>` |
+
+Caveat on §7's corpus: run4 spends ~2400 frames on one static screen rather than the animated
+MENU, so it proves "no accumulation on a bright frame" but does not exercise the MENU's own
+animation. A corpus of the *animated* MENU would need the run to stop before the save dialog; the
+input plan currently walks straight through it.
+
 #### 8. Default path verified unchanged
 
 After every change in this session, MENU frame 1448 with **no** `TLS_*` flags set still measures

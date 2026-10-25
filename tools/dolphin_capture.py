@@ -267,7 +267,11 @@ def main():
             dismiss_dialogs(proc.pid)
             time.sleep(0.2)
 
-    for step in args.plan.split("/"):
+    # A frame plan owns the whole run; falling through to the wall-clock --plan afterwards
+    # would dribble extra presses into whatever screen the game reached (measured: three
+    # stray "A" presses ~20 s after an 800 s plan ended).
+    wall_plan = "" if args.frame_plan else args.plan
+    for step in wall_plan.split("/"):
         step = step.strip()
         if not step:
             continue
