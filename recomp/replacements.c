@@ -4086,6 +4086,15 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // fn_800A6BD4 / fn_800A6BDC: Animation curve / spline evaluator
         case 0x800A6BD4:
         case 0x800A6BDC: {
+            /* This override can SKIP THE GUEST'S SCRIPT EXECUTOR: if the heuristic
+             * bytecode walk below decides the stream is invalid it returns to the caller
+             * without running the original function at all, so the script that was
+             * supposed to run simply never does. A wrong opcode table therefore looks
+             * like "the intro stopped". TLS_NO_SCRIPT_FILTER=1 disables the override so
+             * the guest's own code decides. */
+            static int s_nofilter = -1;
+            if (s_nofilter < 0) s_nofilter = getenv("TLS_NO_SCRIPT_FILTER") ? 1 : 0;
+            if (s_nofilter) return 0;   /* run the original */
             if (address == 0x800A6BD4) {
                 u32 ea = ctx->gpr[13] + (u32)(s32)(-26432);
                 union { float f; u32 u; } conv;
@@ -4141,6 +4150,15 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
         // 0x80360A2C: Fade Coordinator
         case 0x80360A2C: {
+            /* This is a FABRICATED RESULT: it returns 0 ("fade complete") unconditionally
+             * and skips the guest's fade coordinator, with the comment below admitting it
+             * exists "so GameTask::Init advances to State 2". That is exactly the kind of
+             * invented answer that desynchronises a state machine, and the state machine
+             * this project is chasing is the one that calls it. TLS_NO_FAKE_FADE=1 runs the
+             * guest's own coordinator instead. */
+            static int s_nofake = -1;
+            if (s_nofake < 0) s_nofake = getenv("TLS_NO_FAKE_FADE") ? 1 : 0;
+            if (s_nofake) return 0;     /* run the original */
             static int s_fade_log_count = 0;
             u32 r3_obj = ctx->gpr[3];
             u32 val_408 = (r3_obj >= 0x80000000 && r3_obj < 0x94000000) ? mem_read32(ctx, r3_obj + 408) : 0xFFFFFFFF;

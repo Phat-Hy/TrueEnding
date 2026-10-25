@@ -4271,6 +4271,19 @@ purely because its virtual entries are ordinary function entries.**
    the intro stall are independent.
    **DVD ruled out**: the last `[TLS DVD] read` in a 4200-frame run is around request #500, well
    before frame 2363, so slot 1's resource is not a disc load.
+   **Fabricated HLE ruled out as the cause** (both are now bypassable). Two overrides in
+   `replacements.c` invent their answers and both sit on this path:
+   * `case 0x800A6BDC` walks a heuristic bytecode validator and, if it decides the stream is
+     invalid, **returns to the caller without running the guest's script executor at all** - a wrong
+     opcode table there is indistinguishable from "the intro stopped";
+   * `case 0x80360A2C` is a hardcoded `return 0` for the fade coordinator, with the source comment
+     admitting it exists "so GameTask::Init advances to State 2".
+   New `TLS_NO_SCRIPT_FILTER=1` and `TLS_NO_FAKE_FADE=1` make both run the guest's own code.
+   **Measured with both bypassed**: `PHASE 8 -> 0` moves 34 frames earlier (3380 -> 3346) and phase 13
+   is entered at 3401 rather than 3402 - so they do perturb timing - **but phase 13 still stalls at
+   `o88 = 1`** (through frame 4506, on a differently allocated waiter, `0x81862540`). So the stall is
+   not an artefact of these stubs and survives with the guest's own logic running. Both are still
+   worth retiring on principle (they fabricate state), but they are not the blocker.
 
 5. **`fn_803E4478`** makes the phase-0 gate one-shot: it zeroes `g2+0xD8C` itself. Whatever re-arms
    it is a later phase, not a retry.
