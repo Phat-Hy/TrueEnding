@@ -4203,6 +4203,12 @@ purely because its virtual entries are ordinary function entries.**
    `[TLS LayoutTask::Draw] obj=0x8186DF60` four times; `0x81863F60` (slot 1) appears **zero times** in
    the whole log. So slot 1's LayoutTask is allocated but never drawn/updated - the same failure
    shape as "no player/scene task is ever created": an object that exists and is never registered.
+   **Correction**: round 9 described `0x80476664` as "the payload's virtual". It is not - it belongs
+   to the class described by the record's `w2 = 0x8078FE50` (a type descriptor), while the payload
+   object's own vtable is `0x80782C08`. The per-`this` counter added on `0x80476664` therefore does
+   not measure the LayoutTask and that instrument is not the one to trust here; the LayoutTask's own
+   functions are `0x801F4230`, `0x801F42A8`, `0x801F43E8` and `0x801F4514` (Draw, already
+   instrumented and already logging `obj`).
    Next: find how a `LayoutTask` gets registered for drawing (compare an object that works with one
    that does not - both are already identified by address) and why 0x81863F60 misses it.
    **The two payloads diffed** (20 words each, same frame):
