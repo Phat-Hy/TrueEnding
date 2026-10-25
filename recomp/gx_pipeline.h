@@ -151,12 +151,74 @@ void gx_pipeline_load_pos_matrix(uint32_t id, const float mtx[3][4]);
 const GxTextureUnit* gx_pipeline_get_texture(uint32_t unit);
 void gx_pipeline_clear_texture_dirty(uint32_t unit);
 
-// Draw batch representing a contiguous range of vertices with consistent texture state
+/* ---------------------------------------------------------------------------
+ * GX TEV (texture environment) state.
+ *
+ * The GX pixel pipeline is not a fixed function "texture * vertex colour" stage:
+ * every pixel runs through 1..16 * TEV stages*, each of which combines up to four
+ * sources (previous stage result, one of three colour registers, the texture, the
+ * rasteriser/vertex colour, or a constant) with an arbitrary lerp, bias, scale,
+ * clamp and destination register, separately for RGB and A.  Until now the host
+ * shaders implemented a single hardcoded `texColor.rgb * vertexColor.rgb,
+ * texColor.a * vertexColor.a` expression, which is only correct for the one
+ * configuration that happens to be `prev = tex * ras`.
+ *
+ * The composite tail of the title/MENU frames is exactly where that gap bites:
+ * its fullscreen quads carry `col0 = 0xFFFFFFFF` (so `tex*ras` is no modulation at
+ * all) and `src=SRCALPHA dst=ONE`, so every additive pass adds the full source
+ * texture.  Real hardware scales those passes through the TEV alpha/colour
+ * combiner first.  See handover 5c.15 item 7d.
+ *
+ * The register layouts below are Dolphin's (VideoCommon/BPMemory.h):
+ *   BP 0xC0+2i  colour combiner   d:0-3 c:4-7 b:8-11 a:12-15 bias:16-17
+ *                                 op:18 clamp:19 scale:20-21 dest:22-23
+ *   BP 0xC1+2i  alpha combiner    d:4-6 c:7-9 b:10-12 a:13-15, rest as above
+ *   BP 0xE0+2i / 0xE1+2i  colour register i, RA / BG half (11-bit signed + type bit)
+ *   BP 0xF6+j   konst selectors: swap_rb:0-1 swap_ga:2-3 kcsel_even:4-8
+ *                                kasel_even:9-13 kcsel_odd:14-18 kasel_odd:19-23
+ *   BP 0xF3     alpha test: ref0:0-7 ref1:8-15 comp0:16-18 comp1:19-21 logic:22-23
+ * ------------------------------------------------------------------------- */
+
+#define GX_MAX_TEV_STAGES 16
+#define GX_MAX_TEV_STATES 512
+
+typedef struct {
+    uint8_t  num_stages;
+    uint8_t  alpha_comp0;      /* BP 0xF3 bits 16..18 (GXCompare) */
+    uint8_t  alpha_comp1;      /* BP 0xF3 bits 19..21 */
+    uint8_t  alpha_logic;      /* BP 0xF3 bits 22..23 */
+    uint8_t  alpha_ref0;
+    uint8_t  alpha_ref1;
+    uint8_t  tex_enable[GX_MAX_TEV_STAGES];
+    uint8_t  texmap[GX_MAX_TEV_STAGES];
+    uint8_t  texcoord[GX_MAX_TEV_STAGES];
+    uint8_t  kcsel[GX_MAX_TEV_STAGES];   /* KonstSel, colour */
+    uint8_t  kasel[GX_MAX_TEV_STAGES];   /* KonstSel, alpha */
+    uint32_t combiner_color[GX_MAX_TEV_STAGES];  /* BP 0xC0+2i */
+    uint32_t combiner_alpha[GX_MAX_TEV_STAGES];  /* BP 0xC1+2i */
+    uint32_t kreg_ra[4];                 /* BP 0xE0+2i, type bit still set */
+    uint32_t kreg_bg[4];                 /* BP 0xE1+2i */
+    uint32_t ksel[8];                    /* BP 0xF6+j raw */
+    uint32_t _hash;                      /* dedup only; not part of the state */
+} GxTevState;
+
+/* Draw batch representing a contiguous range of vertices with consistent texture state */
 typedef struct {
     uint32_t vertex_offset;
     uint32_t vertex_count;
     GxTextureUnit tex;
+    /* Second texture unit referenced by the TEV stages (stage texmaps 0 and 1 are
+     * the only ones the game uses; a batch whose stages name a third map is
+     * reported by TLS_TEV_PROBE as unsupported rather than silently mis-sampled). */
+    GxTextureUnit tex1;
     bool has_texture;
+    bool has_texture1;
+    /* Every texmap the TEV stages sample during this batch (bit m = texmap m,
+     * i.e. the texture the guest bound to GX_TEXMAP0+m). The TEV pixel shader
+     * binds these to t0..t7 and samples them by stage texmap. */
+    uint8_t tev_texmap_mask;
+    GxTextureUnit tev_texmap[8];
+    uint16_t tev_state;        /* index into gx_pipeline_get_tev_state()'s table */
     bool blend_enable;
     uint8_t src_factor;
     uint8_t dst_factor;
@@ -167,6 +229,13 @@ typedef struct {
     uint8_t alpha_comp0;
     uint8_t alpha_ref0;
 } GxDrawBatch;
+
+/* The TEV state snapshot attached to a batch (NULL when the index is out of range). */
+const GxTevState* gx_pipeline_get_tev_state(uint16_t index);
+/* Number of distinct TEV states recorded this frame (diagnostics only). */
+uint32_t gx_pipeline_get_tev_state_count(void);
+/* Human-readable dump of one TEV state (used by TLS_TEV_PROBE). */
+void gx_pipeline_print_tev_state(uint16_t index);
 
 #define GX_MAX_DRAW_BATCHES 4096
 

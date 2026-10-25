@@ -110,15 +110,317 @@ float4 PSAlpha(PSInput input) : SV_Target {
     if (alpha <= 0.005f) discard;
     return float4(texColor.rgb * input.color.rgb, alpha);
 }
+
+/* ==========================================================================
+ * TEV pixel shader  (TLS_TEV=1)
+ *
+ * GX does not have a fixed "texture * vertex colour" stage: every pixel runs
+ * through 1..16 TEV stages, each combining four sources - the previous stage's
+ * result, one of three colour registers, the stage's texture, and the rasteriser
+ * (vertex) colour, or a constant - as
+ *
+ *     dest = (d (op) lerp(a, b, c) + bias) * scale
+ *
+ * separately for RGB and A, each stage writing to prev / c0 / c1 / c2. The
+ * registers are decoded in recomp/gx_pipeline.h (layout from Dolphin's
+ * VideoCommon/BPMemory.h) and uploaded per draw batch into b0.
+ *
+ * The command stream in this game really does use this: the title MENU's 3D
+ * batches run 3..9 stages and the composite tail's fullscreen quads run 1..5,
+ * with per-stage konstant tints and channel isolation. Handover 5c.16.
+ * ========================================================================== */
+
+Texture2D  tev_tex0 : register(t0);
+Texture2D  tev_tex1 : register(t1);
+Texture2D  tev_tex2 : register(t2);
+Texture2D  tev_tex3 : register(t3);
+Texture2D  tev_tex4 : register(t4);
+Texture2D  tev_tex5 : register(t5);
+Texture2D  tev_tex6 : register(t6);
+Texture2D  tev_tex7 : register(t7);
+SamplerState tev_samp : register(s0);
+
+// Sample the texture bound to GX texmap `map`. Written as an if-chain over eight
+// distinct Texture2D objects rather than an indexed array: array-of-texture
+// dynamic indexing forces the surrounding TEV stage loop to unroll, and
+// D3DCompile refuses to unroll a loop of that size.
+float4 SampleTevTex(uint map, float2 uv)
+{
+    if (map == 0u) return tev_tex0.Sample(tev_samp, uv);
+    if (map == 1u) return tev_tex1.Sample(tev_samp, uv);
+    if (map == 2u) return tev_tex2.Sample(tev_samp, uv);
+    if (map == 3u) return tev_tex3.Sample(tev_samp, uv);
+    if (map == 4u) return tev_tex4.Sample(tev_samp, uv);
+    if (map == 5u) return tev_tex5.Sample(tev_samp, uv);
+    if (map == 6u) return tev_tex6.Sample(tev_samp, uv);
+    return tev_tex7.Sample(tev_samp, uv);
+}
+
+cbuffer GxTev : register(b0)
+{
+    float4 tev_kreg[4];      // K0..K3 constant colour registers
+    float4 tev_kprev[4];     // K0..K3 "previous" colour registers
+    uint4  tev_color[16];    // x = rgb combiner (24 bit), y = alpha combiner (24 bit)
+    uint4  tev_ksel[16];     // x = colour KonstSel, y = alpha KonstSel
+    uint4  tev_order[16];    // x = texmap, y = texcoord, z = enable texture
+    uint   tev_num_stages;
+    uint   tev_alpha_test;   // comp0 | comp1<<3 | logic<<6 | ref0<<8 | ref1<<16
+    uint   tev_pad0, tev_pad1;
+};
+
+// GX V-constants shared by the colour and alpha KonstSel tables. Written as a
+// branch chain rather than an indexed array: a dynamically indexed array inside
+// the TEV stage loop forces an unroll, and D3DCompile cannot unroll a loop that
+// also performs dynamically indexed texture sampling.
+float TevVConst(uint i)
+{
+    // Dolphin's table (VideoCommon/PixelShaderGen.cpp tev_ksel_table_c): the GX
+    // "fraction" constants are exact 8-bit values, not powers of two over 8.
+    if (i == 0) return 255.0f/255.0f;
+    if (i == 1) return 223.0f/255.0f;
+    if (i == 2) return 191.0f/255.0f;
+    if (i == 3) return 159.0f/255.0f;
+    if (i == 4) return 128.0f/255.0f;
+    if (i == 5) return  96.0f/255.0f;
+    if (i == 6) return  64.0f/255.0f;
+    return 32.0f/255.0f;
+}
+
+float TevKonstChannel(uint sel, uint comp)
+{
+    // 0..7 V constants, 8..15 zero, 16..31 = K0..K3 channel (r,g,b,a)
+    if (sel < 8) return TevVConst(sel);
+    if (sel < 16) return 0.0f;
+    uint k = (sel - 16) & 3;       // K register
+    uint ch = (sel - 16) >> 2;     // 0=r 1=g 2=b 3=a
+    float4 v = tev_kreg[k];
+    // A float4 component cannot be indexed dynamically, so branch instead.
+    if (ch == 0) return v.x;
+    if (ch == 1) return v.y;
+    if (ch == 2) return v.z;
+    return v.w;
+}
+
+float4 TevKonstColor(uint sel)
+{
+    if (sel < 8) { float v = TevVConst(sel); return float4(v, v, v, 1.0f); }
+    if (sel < 12) return float4(0.0f, 0.0f, 0.0f, 0.0f);
+    // 12..15 = K0..K3 rgb; 16..31 = one channel of K0..K3 replicated over rgb
+    uint k = (sel < 16) ? (sel - 12) : ((sel - 16) & 3);
+    uint ch = (sel < 16) ? 4u : ((sel - 16) >> 2);
+    float4 v = tev_kreg[k];
+    if (ch == 4) return float4(v.rgb, 1.0f);
+    float c = v.x;
+    if (ch == 1) c = v.y;
+    else if (ch == 2) c = v.z;
+    else if (ch == 3) c = v.w;
+    return float4(c, c, c, 1.0f);
+}
+
+float3 TevColorArg(uint idx, float4 prev, float4 c0, float4 c1, float4 c2,
+                   float4 tex, float4 ras, float4 konst)
+{
+    if (idx == 0)  return prev.rgb;
+    if (idx == 1)  return prev.aaa;
+    if (idx == 2)  return c0.rgb;
+    if (idx == 3)  return c0.aaa;
+    if (idx == 4)  return c1.rgb;
+    if (idx == 5)  return c1.aaa;
+    if (idx == 6)  return c2.rgb;
+    if (idx == 7)  return c2.aaa;
+    if (idx == 8)  return tex.rgb;
+    if (idx == 9)  return tex.aaa;
+    if (idx == 10) return ras.rgb;
+    if (idx == 11) return ras.aaa;
+    if (idx == 12) return float3(1.0f, 1.0f, 1.0f);
+    if (idx == 13) return float3(0.5f, 0.5f, 0.5f);
+    if (idx == 14) return konst.rgb;
+    return float3(0.0f, 0.0f, 0.0f);
+}
+
+float TevAlphaArg(uint idx, float4 prev, float4 c0, float4 c1, float4 c2,
+                  float4 tex, float4 ras, float4 konst)
+{
+    if (idx == 0) return prev.a;
+    if (idx == 1) return c0.a;
+    if (idx == 2) return c1.a;
+    if (idx == 3) return c2.a;
+    if (idx == 4) return tex.a;
+    if (idx == 5) return ras.a;
+    if (idx == 6) return konst.a;
+    return 0.0f;
+}
+
+/* GX TEV "regular" stage: (d (op) lerp(a,b,c) + bias) * scale, then clamp.
+ * The hardware's lerp works in 8-bit fixed point with c pre-scaled by 256/255,
+ * which is a sub-1/255 difference; the structure is what matters here. */
+float3 TevRegular3(float3 a, float3 b, float3 c, float3 d,
+                   uint bias, uint op, uint scale, uint clampv)
+{
+    float3 lerp = a * (1.0f - c) + b * c;
+    float3 r = (op == 1) ? (d - lerp) : (d + lerp);
+    if (bias == 1) r += 0.5f;
+    else if (bias == 2) r -= 0.5f;
+    if (scale == 1) r *= 2.0f;
+    else if (scale == 2) r *= 4.0f;
+    else if (scale == 3) r *= 0.5f;
+    if (clampv) r = saturate(r);
+    return r;
+}
+
+float TevRegular1(float a, float b, float c, float d,
+                  uint bias, uint op, uint scale, uint clampv)
+{
+    float lerp = a * (1.0f - c) + b * c;
+    float r = (op == 1) ? (d - lerp) : (d + lerp);
+    if (bias == 1) r += 0.5f;
+    else if (bias == 2) r -= 0.5f;
+    if (scale == 1) r *= 2.0f;
+    else if (scale == 2) r *= 4.0f;
+    else if (scale == 3) r *= 0.5f;
+    if (clampv) r = saturate(r);
+    return r;
+}
+
+/* TEV compare stages (bias == 3) pack fixed-point comparisons of the rasterised
+ * source into the destination register. They are rare; instead of guessing, this
+ * host reports every batch that needs one (TLS_TEV_PROBE) and treats the stage as
+ * a pass-through so the rest of the chain stays intact. */
+bool TevCompareNeeded() { return false; }
+
+bool TevAlphaTest(float alpha, uint packed)
+{
+    uint comp0 = packed & 7u;
+    uint comp1 = (packed >> 3) & 7u;
+    uint logic = (packed >> 6) & 3u;
+    float ref0 = (float)((packed >> 8) & 0xFFu) / 255.0f;
+    float ref1 = (float)((packed >> 16) & 0xFFu) / 255.0f;
+
+    bool r0;
+    if (comp0 == 0) r0 = false;
+    else if (comp0 == 1) r0 = alpha < ref0;
+    else if (comp0 == 2) r0 = abs(alpha - ref0) < (0.5f / 255.0f);
+    else if (comp0 == 3) r0 = alpha <= ref0;
+    else if (comp0 == 4) r0 = alpha > ref0;
+    else if (comp0 == 5) r0 = abs(alpha - ref0) >= (0.5f / 255.0f);
+    else if (comp0 == 6) r0 = alpha >= ref0;
+    else r0 = true;
+
+    bool r1;
+    if (comp1 == 0) r1 = false;
+    else if (comp1 == 1) r1 = alpha < ref1;
+    else if (comp1 == 2) r1 = abs(alpha - ref1) < (0.5f / 255.0f);
+    else if (comp1 == 3) r1 = alpha <= ref1;
+    else if (comp1 == 4) r1 = alpha > ref1;
+    else if (comp1 == 5) r1 = abs(alpha - ref1) >= (0.5f / 255.0f);
+    else if (comp1 == 6) r1 = alpha >= ref1;
+    else r1 = true;
+
+    if (logic == 0) return r0 && r1;
+    if (logic == 1) return r0 || r1;
+    if (logic == 2) return r0 != r1;
+    return r0 == r1;
+}
+
+float4 PSTev(PSInput input) : SV_Target
+{
+    float4 ras = input.color;
+    float4 prev = float4(0.0f, 0.0f, 0.0f, 0.0f);
+    float4 r0 = float4(0.0f, 0.0f, 0.0f, 0.0f);
+    float4 r1 = float4(0.0f, 0.0f, 0.0f, 0.0f);
+    float4 r2 = float4(0.0f, 0.0f, 0.0f, 0.0f);
+
+    uint stages = min(tev_num_stages, 16u);
+    [loop] for (uint s = 0; s < stages; s++) {
+        uint4 cc = tev_color[s];
+        uint4 ac = tev_color[s];
+        uint cbits = cc.x;
+        uint abits = ac.y;
+        uint4 ks = tev_ksel[s];
+        uint4 ord = tev_order[s];
+
+        float4 texel = float4(1.0f, 1.0f, 1.0f, 1.0f);
+        if (ord.z != 0u) {
+            uint map = ord.x & 7u;
+            texel = SampleTevTex(map, input.uv);
+        }
+
+        float4 konst_c = TevKonstColor(ks.x & 0x1Fu);
+        float konst_a = TevKonstChannel(ks.y & 0x1Fu, 3u);
+
+        uint3 carg = uint3((cbits >> 12) & 0xF, (cbits >> 8) & 0xF, (cbits >> 4) & 0xF);
+        uint  cd    = cbits & 0xF;
+        uint  cbias = (cbits >> 16) & 3;
+        uint  cop   = (cbits >> 18) & 1;
+        uint  cclamp= (cbits >> 19) & 1;
+        uint  cscale= (cbits >> 20) & 3;
+        uint  cdest = (cbits >> 22) & 3;
+
+        float3 rgb;
+        if (cbias == 3) {
+            // compare stage: not evaluated (reported), pass the previous colour through
+            rgb = prev.rgb;
+        } else {
+            rgb = TevRegular3(TevColorArg(carg.x, prev, r0, r1, r2, texel, ras, konst_c),
+                              TevColorArg(carg.y, prev, r0, r1, r2, texel, ras, konst_c),
+                              TevColorArg(carg.z, prev, r0, r1, r2, texel, ras, konst_c),
+                              TevColorArg(cd,    prev, r0, r1, r2, texel, ras, konst_c),
+                              cbias, cop, cscale, cclamp);
+        }
+
+        uint aarg = (abits >> 13) & 7;
+        uint ab   = (abits >> 10) & 7;
+        uint ac2  = (abits >> 7) & 7;
+        uint ad   = (abits >> 4) & 7;
+        uint abias= (abits >> 16) & 3;
+        uint aop  = (abits >> 18) & 1;
+        uint aclamp=(abits >> 19) & 1;
+        uint ascale=(abits >> 20) & 3;
+        uint adest= (abits >> 22) & 3;
+
+        float alpha;
+        if (abias == 3) {
+            alpha = prev.a;
+        } else {
+            alpha = TevRegular1(TevAlphaArg(aarg, prev, r0, r1, r2, texel, ras, konst_c),
+                                TevAlphaArg(ab,   prev, r0, r1, r2, texel, ras, konst_c),
+                                TevAlphaArg(ac2,  prev, r0, r1, r2, texel, ras, konst_c),
+                                TevAlphaArg(ad,   prev, r0, r1, r2, texel, ras, konst_c),
+                                abias, aop, ascale, aclamp);
+        }
+
+        float4 result = float4(rgb, alpha);
+        if (cdest == 0) prev = result;
+        else if (cdest == 1) r0 = result;
+        else if (cdest == 2) r1 = result;
+        else r2 = result;
+        // The alpha stage's destination is independent in GX, but every stage in
+        // this game's command stream uses the same destination for both halves.
+        if (adest != cdest) {
+            float4 alpha_only = float4(prev.rgb, alpha);
+            if (adest == 0) prev.a = alpha;
+            else if (adest == 1) r0.a = alpha;
+            else if (adest == 2) r1.a = alpha;
+            else r2.a = alpha;
+        }
+    }
+
+    float4 outColor = float4(prev.rgb, prev.a);
+    // The final stage's alpha is the pixel alpha the blend unit sees.
+    if (!TevAlphaTest(outColor.a, tev_alpha_test)) discard;
+    return outColor;
+}
 """
 
 vs_bytecode = compile_hlsl(hlsl_source, "VSMain", "vs_4_0")
 ps_opaque_bytecode = compile_hlsl(hlsl_source, "PSOpaque", "ps_4_0")
 ps_alpha_bytecode = compile_hlsl(hlsl_source, "PSAlpha", "ps_4_0")
+ps_tev_bytecode = compile_hlsl(hlsl_source, "PSTev", "ps_5_0")
 
 print(f"Compiled VS: {len(vs_bytecode)} bytes")
 print(f"Compiled PSOpaque: {len(ps_opaque_bytecode)} bytes")
 print(f"Compiled PSAlpha: {len(ps_alpha_bytecode)} bytes")
+print(f"Compiled PSTev: {len(ps_tev_bytecode)} bytes")
 
 def to_c_array(name: str, data: bytes) -> str:
     lines = [f"static const uint8_t {name}[{len(data)}] = {{"]
@@ -135,6 +437,8 @@ out_text = f"""// Auto-generated GX 3D shaders with 4D Clip-space Position and H
 {to_c_array('s_gx_ps_opaque_bytecode', ps_opaque_bytecode)}
 
 {to_c_array('s_gx_ps_alpha_bytecode', ps_alpha_bytecode)}
+
+{to_c_array('s_gx_ps_tev_bytecode', ps_tev_bytecode)}
 
 // Backward compatibility alias
 #define s_gx_ps_bytecode s_gx_ps_alpha_bytecode

@@ -170,6 +170,85 @@ typedef struct {
 } GxTevOrder;
 static GxTevOrder s_tev_orders[16];
 
+/* ---- TEV register file ---------------------------------------------------
+ * Everything the pixel shader needs to evaluate the TEV stages lives here. The
+ * registers themselves are written by the guest (BP 0xC0..0xDF combiners,
+ * 0xE0..0xE7 colour registers, 0xF6..0xFD konst selectors, 0xF3 alpha test);
+ * s_cur_tev_state is the deduplicated snapshot index handed to each draw batch.
+ * See the layout notes in gx_pipeline.h - they are Dolphin's BPMemory.h. */
+static uint32_t s_tev_comb_color[16];
+static uint32_t s_tev_comb_alpha[16];
+static uint32_t s_tev_kreg_ra[4];
+static uint32_t s_tev_kreg_bg[4];
+static uint32_t s_tev_ksel[8];
+static uint8_t  s_alpha_comp1 = 7;
+static uint8_t  s_alpha_ref1 = 0;
+static uint8_t  s_alpha_logic = 0;
+static GxTevState s_tev_states[GX_MAX_TEV_STATES];
+static uint16_t   s_tev_state_count = 0;
+static uint16_t   s_cur_tev_state = 0;
+static bool       s_tev_state_dirty = true;
+/* Counters for TEV features this host does not evaluate, so a probe can say so
+ * instead of the picture being silently wrong. */
+static uint32_t s_tev_compare_stages = 0;   /* bias == 3 (compare mode) */
+
+static float tev_reg_component(uint32_t raw) {
+    /* 11-bit signed fixed point, 255 == 1.0 (GXSetTevColor / GXSetTevColorS10). */
+    int32_t v = (int32_t)(raw & 0x7FF);
+    if (v & 0x400) v -= 0x800;
+    return (float)v / 255.0f;
+}
+
+static uint32_t tev_state_hash(const GxTevState* st) {
+    const uint8_t* p = (const uint8_t*)st;
+    uint32_t h = 2166136261u;
+    for (size_t i = 0; i < sizeof(*st); i++) { h ^= p[i]; h *= 16777619u; }
+    return h;
+}
+
+static void tev_state_recompute(void) {
+    GxTevState st;
+    memset(&st, 0, sizeof(st));
+    st.num_stages = s_num_tev_stages;
+    st.alpha_comp0 = s_alpha_comp0;
+    st.alpha_comp1 = s_alpha_comp1;
+    st.alpha_logic = s_alpha_logic;
+    st.alpha_ref0 = s_alpha_ref0;
+    st.alpha_ref1 = s_alpha_ref1;
+    for (int i = 0; i < GX_MAX_TEV_STAGES; i++) {
+        st.tex_enable[i] = s_tev_orders[i].enable ? 1 : 0;
+        st.texmap[i] = s_tev_orders[i].texmap;
+        st.texcoord[i] = s_tev_orders[i].texcoord;
+        st.combiner_color[i] = s_tev_comb_color[i];
+        st.combiner_alpha[i] = s_tev_comb_alpha[i];
+        st.kcsel[i] = (uint8_t)(((s_tev_ksel[i >> 1] >> ((i & 1) ? 14 : 4)) & 0x1F));
+        st.kasel[i] = (uint8_t)(((s_tev_ksel[i >> 1] >> ((i & 1) ? 19 : 9)) & 0x1F));
+    }
+    for (int i = 0; i < 4; i++) {
+        st.kreg_ra[i] = s_tev_kreg_ra[i];
+        st.kreg_bg[i] = s_tev_kreg_bg[i];
+    }
+    for (int i = 0; i < 8; i++) st.ksel[i] = s_tev_ksel[i];
+
+    uint32_t h = tev_state_hash(&st);
+    st._hash = h;
+    for (uint32_t i = 0; i < s_tev_state_count; i++) {
+        if (s_tev_states[i]._hash == h && memcmp(&s_tev_states[i], &st, sizeof(st)) == 0) {
+            s_cur_tev_state = (uint16_t)i;
+            s_tev_state_dirty = false;
+            return;
+        }
+    }
+    if (s_tev_state_count < GX_MAX_TEV_STATES) {
+        s_tev_states[s_tev_state_count] = st;
+        s_cur_tev_state = s_tev_state_count++;
+    } else {
+        /* Table full: reuse the last slot rather than pretending the state is new. */
+        s_cur_tev_state = (uint16_t)(GX_MAX_TEV_STATES - 1);
+    }
+    s_tev_state_dirty = false;
+}
+
 // XF load buffer
 static uint16_t s_xf_word_count = 0;
 static uint16_t s_xf_target_addr = 0;
@@ -351,6 +430,11 @@ void gx_pipeline_init(void) {
     s_num_tev_stages = 1;
     memset(s_tev_orders, 0, sizeof(s_tev_orders));
     s_tev_orders[0].enable = true;
+    /* TEV snapshots are indexed per frame: batches never outlive their frame, and
+     * bounding the table to one frame's worth of states keeps it from saturating. */
+    s_tev_state_count = 0;
+    s_cur_tev_state = 0;
+    s_tev_state_dirty = true;
 }
 
 static uint32_t s_gx_frame_idx = 0;
@@ -393,6 +477,10 @@ void gx_pipeline_begin_frame(void) {
     s_default_pnm_idx = 0;
     memset(s_tev_orders, 0, sizeof(s_tev_orders));
     s_tev_orders[0].enable = true;
+    s_tev_state_count = 0;
+    s_cur_tev_state = 0;
+    s_tev_state_dirty = true;
+    s_tev_compare_stages = 0;
 }
 
 void gx_pipeline_end_frame(void) {
@@ -443,6 +531,62 @@ const GxVertex* gx_pipeline_get_vertices(uint32_t* out_count) {
 const GxDrawBatch* gx_pipeline_get_draw_batches(uint32_t* out_count) {
     if (out_count) *out_count = s_draw_batch_count;
     return s_draw_batches;
+}
+
+const GxTevState* gx_pipeline_get_tev_state(uint16_t index) {
+    if (index >= s_tev_state_count) return s_tev_state_count ? &s_tev_states[0] : NULL;
+    return &s_tev_states[index];
+}
+
+uint32_t gx_pipeline_get_tev_state_count(void) {
+    return s_tev_state_count;
+}
+
+/* Diagnostic decode of one TEV state (TLS_TEV_PROBE). Names are Dolphin's. */
+static const char* const k_color_arg_names[16] = {
+    "prev.rgb", "prev.aaa", "c0.rgb",  "c0.aaa",  "c1.rgb", "c1.aaa", "c2.rgb",    "c2.aaa",
+    "tex.rgb",  "tex.aaa",  "ras.rgb", "ras.aaa", "ONE",    "HALF",   "konst.rgb", "ZERO",
+};
+static const char* const k_alpha_arg_names[8] = {
+    "prev", "c0", "c1", "c2", "tex", "ras", "konst", "ZERO",
+};
+static const char* const k_scale_names[4] = { "1", "2", "4", "0.5" };
+static const char* const k_dest_names[4] = { "prev", "c0", "c1", "c2" };
+static const char* const k_konst_names[32] = {
+    "1", "7/8", "3/4", "5/8", "1/2", "3/8", "1/4", "1/8",
+    "?", "?", "?", "?", "K0", "K1", "K2", "K3",
+    "K0.r", "K1.r", "K2.r", "K3.r", "K0.g", "K1.g", "K2.g", "K3.g",
+    "K0.b", "K1.b", "K2.b", "K3.b", "K0.a", "K1.a", "K2.a", "K3.a",
+};
+
+void gx_pipeline_print_tev_state(uint16_t index) {
+    const GxTevState* st = gx_pipeline_get_tev_state(index);
+    if (!st) { printf("   [tev] <none>\n"); return; }
+    printf("   [tev #%u] stages=%u alphaTest=(%u,%u,%u,%u,log=%u) compareStages=%u\n",
+           index, st->num_stages, st->alpha_comp0, st->alpha_ref0,
+           st->alpha_comp1, st->alpha_ref1, st->alpha_logic, s_tev_compare_stages);
+    for (int i = 0; i < 4; i++) {
+        printf("   [tev] K%d = (%9.4f %9.4f %9.4f %9.4f) raw ra=0x%06X bg=0x%06X\n", i,
+               tev_reg_component(st->kreg_ra[i]), tev_reg_component(st->kreg_ra[i] >> 12),
+               tev_reg_component(st->kreg_bg[i]), tev_reg_component(st->kreg_bg[i] >> 12),
+               st->kreg_ra[i], st->kreg_bg[i]);
+    }
+    for (int i = 0; i < (int)st->num_stages && i < 8; i++) {
+        uint32_t c = st->combiner_color[i], a = st->combiner_alpha[i];
+        printf("   [tev] st%d tex=%d map=%u coord=%u | rgb: %s %s %s %s bias=%u op=%u clamp=%u scale=%s dest=%s kc=%s\n",
+               i, st->tex_enable[i], st->texmap[i], st->texcoord[i],
+               k_color_arg_names[(c >> 12) & 0xF], k_color_arg_names[(c >> 8) & 0xF],
+               k_color_arg_names[(c >> 4) & 0xF], k_color_arg_names[c & 0xF],
+               (c >> 16) & 3, (c >> 18) & 1, (c >> 19) & 1,
+               k_scale_names[(c >> 20) & 3], k_dest_names[(c >> 22) & 3],
+               k_konst_names[st->kcsel[i] & 0x1F]);
+        printf("   [tev]     alpha : %s %s %s %s bias=%u op=%u clamp=%u scale=%s dest=%s ka=%s\n",
+               k_alpha_arg_names[(a >> 13) & 7], k_alpha_arg_names[(a >> 10) & 7],
+               k_alpha_arg_names[(a >> 7) & 7], k_alpha_arg_names[(a >> 4) & 7],
+               (a >> 16) & 3, (a >> 18) & 1, (a >> 19) & 1,
+               k_scale_names[(a >> 20) & 3], k_dest_names[(a >> 22) & 3],
+               k_konst_names[st->kasel[i] & 0x1F]);
+    }
 }
 
 uint32_t gx_pipeline_get_primitive_count(void) {
@@ -637,6 +781,7 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
     }
 
     uint32_t vtx_emitted = s_vertex_count - vtx_start;
+    if (s_tev_state_dirty) tev_state_recompute();
     if (vtx_emitted > 0) {
         uint8_t tex_unit = s_active_tex_map < 8 ? s_active_tex_map : 0;
 
@@ -661,6 +806,38 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
                        (s_tex_units[tex_unit].width > 0) &&
                        (s_tex_units[tex_unit].height > 0);
 
+        /* Second texture unit for the TEV shader: the distinct texmaps named by the
+         * active stages. texmap n selects the texture bound to texcoord n, so a batch
+         * whose stages use maps 0 and 1 samples two different textures. */
+        uint8_t tex_unit1 = 0xFF;
+        {
+            int primary = -1;
+            for (int st = 0; st < (int)s_num_tev_stages; st++) {
+                if (!s_tev_orders[st].enable) continue;
+                int m = s_tev_orders[st].texmap & 7;
+                if (primary < 0) { primary = m; }
+                else if (m != primary) { tex_unit1 = (uint8_t)m; break; }
+            }
+            if (primary >= 0 && tex_unit1 == 0xFF) {
+                /* keep tex_unit1 empty: one texture is enough */
+            }
+        }
+        /* Texmaps sampled by the TEV stages: the shader binds one SRV per map. */
+        uint8_t texmap_mask = 0;
+        {
+            for (int st = 0; st < (int)s_num_tev_stages; st++) {
+                if (!s_tev_orders[st].enable) continue;
+                texmap_mask |= (uint8_t)(1u << (s_tev_orders[st].texmap & 7));
+            }
+            if (texmap_mask == 0) texmap_mask = (uint8_t)(1u << (tex_unit & 7));
+        }
+        bool has_tex1 = (tex_unit1 < 8) &&
+                        (s_tex_units[tex_unit1].guest_addr != 0) &&
+                        (s_tex_units[tex_unit1].width > 0) &&
+                        (s_tex_units[tex_unit1].height > 0) &&
+                        (tex_unit1 != tex_unit);
+        if (!has_tex1) tex_unit1 = 0xFF;
+
         /* Frame-900 dump from an earlier investigation. It prints once per emitted
          * batch (thousands of lines per run) and is keyed on a hardcoded frame, so
          * it is gated: TLS_F900_PROBE=1. TLS_F900_FRAME=<n> moves the window. */
@@ -684,6 +861,45 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
                 last->is_perspective == s_proj_is_perspective &&
                 last->depth_write_enable == s_depth_write_enable &&
                 last->depth_test_enable == s_depth_test_enable &&
+                last->tev_state == s_cur_tev_state &&
+                last->tev_texmap_mask == texmap_mask &&
+                (!(texmap_mask & 0x01) || (last->tev_texmap[0].guest_addr == s_tex_units[0].guest_addr &&
+                                           last->tev_texmap[0].width == s_tex_units[0].width &&
+                                           last->tev_texmap[0].height == s_tex_units[0].height &&
+                                           last->tev_texmap[0].format == s_tex_units[0].format)) &&
+                (!(texmap_mask & 0x02) || (last->tev_texmap[1].guest_addr == s_tex_units[1].guest_addr &&
+                                           last->tev_texmap[1].width == s_tex_units[1].width &&
+                                           last->tev_texmap[1].height == s_tex_units[1].height &&
+                                           last->tev_texmap[1].format == s_tex_units[1].format)) &&
+                (!(texmap_mask & 0x04) || (last->tev_texmap[2].guest_addr == s_tex_units[2].guest_addr &&
+                                           last->tev_texmap[2].width == s_tex_units[2].width &&
+                                           last->tev_texmap[2].height == s_tex_units[2].height &&
+                                           last->tev_texmap[2].format == s_tex_units[2].format)) &&
+                (!(texmap_mask & 0x08) || (last->tev_texmap[3].guest_addr == s_tex_units[3].guest_addr &&
+                                           last->tev_texmap[3].width == s_tex_units[3].width &&
+                                           last->tev_texmap[3].height == s_tex_units[3].height &&
+                                           last->tev_texmap[3].format == s_tex_units[3].format)) &&
+                (!(texmap_mask & 0x10) || (last->tev_texmap[4].guest_addr == s_tex_units[4].guest_addr &&
+                                           last->tev_texmap[4].width == s_tex_units[4].width &&
+                                           last->tev_texmap[4].height == s_tex_units[4].height &&
+                                           last->tev_texmap[4].format == s_tex_units[4].format)) &&
+                (!(texmap_mask & 0x20) || (last->tev_texmap[5].guest_addr == s_tex_units[5].guest_addr &&
+                                           last->tev_texmap[5].width == s_tex_units[5].width &&
+                                           last->tev_texmap[5].height == s_tex_units[5].height &&
+                                           last->tev_texmap[5].format == s_tex_units[5].format)) &&
+                (!(texmap_mask & 0x40) || (last->tev_texmap[6].guest_addr == s_tex_units[6].guest_addr &&
+                                           last->tev_texmap[6].width == s_tex_units[6].width &&
+                                           last->tev_texmap[6].height == s_tex_units[6].height &&
+                                           last->tev_texmap[6].format == s_tex_units[6].format)) &&
+                (!(texmap_mask & 0x80) || (last->tev_texmap[7].guest_addr == s_tex_units[7].guest_addr &&
+                                           last->tev_texmap[7].width == s_tex_units[7].width &&
+                                           last->tev_texmap[7].height == s_tex_units[7].height &&
+                                           last->tev_texmap[7].format == s_tex_units[7].format)) &&
+                last->has_texture1 == has_tex1 &&
+                (!has_tex1 || (last->tex1.guest_addr == s_tex_units[tex_unit1].guest_addr &&
+                               last->tex1.width == s_tex_units[tex_unit1].width &&
+                               last->tex1.height == s_tex_units[tex_unit1].height &&
+                               last->tex1.format == s_tex_units[tex_unit1].format)) &&
                 (!has_tex || (last->tex.guest_addr == s_tex_units[tex_unit].guest_addr &&
                               last->tex.width == s_tex_units[tex_unit].width &&
                               last->tex.height == s_tex_units[tex_unit].height &&
@@ -710,6 +926,18 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
             b->depth_test_enable = s_depth_test_enable;
             b->alpha_comp0 = s_alpha_comp0;
             b->alpha_ref0 = s_alpha_ref0;
+            b->tev_state = s_cur_tev_state;
+            b->tev_texmap_mask = texmap_mask;
+            for (int m = 0; m < 8; m++) {
+                if (texmap_mask & (1u << m)) b->tev_texmap[m] = s_tex_units[m];
+                else memset(&b->tev_texmap[m], 0, sizeof(b->tev_texmap[m]));
+            }
+            b->has_texture1 = has_tex1;
+            if (has_tex1) {
+                b->tex1 = s_tex_units[tex_unit1];
+            } else {
+                memset(&b->tex1, 0, sizeof(b->tex1));
+            }
             if (has_tex) {
                 b->tex = s_tex_units[tex_unit];
             } else {
@@ -881,7 +1109,41 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
 
     if (reg == 0xF3) { // PE_ALPHA_COMPARE
         s_alpha_ref0 = (uint8_t)(val & 0xFF);
+        s_alpha_ref1 = (uint8_t)((val >> 8) & 0xFF);
         s_alpha_comp0 = (uint8_t)((val >> 16) & 7);
+        s_alpha_comp1 = (uint8_t)((val >> 19) & 7);
+        s_alpha_logic = (uint8_t)((val >> 22) & 3);
+        s_tev_state_dirty = true;
+        return;
+    }
+    /* TEV colour/alpha combiners, BP 0xC0..0xDF: stage i uses 0xC0+2i (colour)
+     * and 0xC1+2i (alpha). Field layout: see the note in gx_pipeline.h. */
+    if (reg >= 0xC0 && reg <= 0xDF) {
+        uint32_t stage = (uint32_t)((reg - 0xC0) >> 1);
+        if (((reg - 0xC0) & 1) == 0) {
+            s_tev_comb_color[stage] = val & 0x00FFFFFF;
+            if (((val >> 16) & 3) == 3) s_tev_compare_stages++;
+        } else {
+            s_tev_comb_alpha[stage] = val & 0x00FFFFFF;
+            if (((val >> 16) & 3) == 3) s_tev_compare_stages++;
+        }
+        s_tev_state_dirty = true;
+        return;
+    }
+    /* TEV colour registers, BP 0xE0..0xE7: register i takes RA in 0xE0+2i and BG in
+     * 0xE1+2i. Bit 23 is the TevRegType (0 = 8-bit colour, 1 = signed 10-bit). */
+    if (reg >= 0xE0 && reg <= 0xE7) {
+        uint32_t i = (uint32_t)((reg - 0xE0) >> 1);
+        if (((reg - 0xE0) & 1) == 0) s_tev_kreg_ra[i] = val & 0x00FFFFFF;
+        else                          s_tev_kreg_bg[i] = val & 0x00FFFFFF;
+        s_tev_state_dirty = true;
+        return;
+    }
+    /* TEV konst selectors, BP 0xF6..0xFD (four 5-bit selectors plus swap fields per
+     * register; stage i uses 0xF6+(i>>1), even stages in the low half). */
+    if (reg >= 0xF6 && reg <= 0xFD) {
+        s_tev_ksel[reg - 0xF6] = val & 0x00FFFFFF;
+        s_tev_state_dirty = true;
         return;
     }
     if (reg >= 0x28 && reg <= 0x2F) { // TEV_ORDER (stages 0..15)
@@ -904,6 +1166,7 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
                 break;
             }
         }
+        s_tev_state_dirty = true;
         return;
     }
 

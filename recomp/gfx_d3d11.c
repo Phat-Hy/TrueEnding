@@ -13,6 +13,61 @@
 
 const void* host_resolve_gx_guest_addr(uint32_t addr);
 
+/* Byte-for-byte mirror of `cbuffer GxTev` in tools/compile_shaders.py. */
+typedef struct {
+    float    kreg[4][4];      /* K0..K3 constant colour registers (rgba) */
+    float    kprev[4][4];     /* K0..K3 previous colour registers */
+    uint32_t color[16][4];    /* x = rgb combiner bits, y = alpha combiner bits */
+    uint32_t ksel[16][4];     /* x = colour KonstSel, y = alpha KonstSel */
+    uint32_t order[16][4];    /* x = texmap, y = texcoord, z = enable texture */
+    uint32_t num_stages;
+    uint32_t alpha_test;
+    uint32_t pad0, pad1;
+} GxTevConstants;
+
+static float gx_tev_reg_component(uint32_t raw) {
+    int32_t v = (int32_t)(raw & 0x7FF);
+    if (v & 0x400) v -= 0x800;
+    return (float)v / 255.0f;
+}
+
+static void gx_tev_fill_constants(GxTevConstants* c, const GxTevState* st, bool* need_compare) {
+    memset(c, 0, sizeof(*c));
+    if (!st) { c->num_stages = 0; return; }
+    for (int i = 0; i < 4; i++) {
+        /* BP 0xE0+2i holds red (bits 0..10) and alpha (12..22);
+         * BP 0xE1+2i holds blue (0..10) and green (12..22). */
+        c->kreg[i][0] = gx_tev_reg_component(st->kreg_ra[i]);
+        c->kreg[i][1] = gx_tev_reg_component(st->kreg_bg[i] >> 12);
+        c->kreg[i][2] = gx_tev_reg_component(st->kreg_bg[i]);
+        c->kreg[i][3] = gx_tev_reg_component(st->kreg_ra[i] >> 12);
+        c->kprev[i][0] = c->kreg[i][0];
+        c->kprev[i][1] = c->kreg[i][1];
+        c->kprev[i][2] = c->kreg[i][2];
+        c->kprev[i][3] = c->kreg[i][3];
+    }
+    c->num_stages = st->num_stages ? st->num_stages : 1;
+    for (int i = 0; i < 16; i++) {
+        c->color[i][0] = st->combiner_color[i];
+        c->color[i][1] = st->combiner_alpha[i];
+        c->ksel[i][0] = st->kcsel[i];
+        c->ksel[i][1] = st->kasel[i];
+        c->order[i][0] = st->texmap[i];
+        c->order[i][1] = st->texcoord[i];
+        c->order[i][2] = st->tex_enable[i];
+        if (i < c->num_stages && (((st->combiner_color[i] >> 16) & 3) == 3 ||
+                                  ((st->combiner_alpha[i] >> 16) & 3) == 3)) {
+            if (need_compare) *need_compare = true;
+        }
+    }
+    c->alpha_test = (uint32_t)st->alpha_comp0 |
+                    ((uint32_t)st->alpha_comp1 << 3) |
+                    ((uint32_t)st->alpha_logic << 6) |
+                    ((uint32_t)st->alpha_ref0 << 8) |
+                    ((uint32_t)st->alpha_ref1 << 16);
+}
+
+
 // Forward declaration of backend state
 typedef struct {
     HWND hwnd;
@@ -40,6 +95,11 @@ typedef struct {
     ID3D11PixelShader* gx_ps;
     ID3D11PixelShader* gx_ps_opaque;
     ID3D11PixelShader* gx_ps_alpha;
+    /* TEV pixel pipeline (TLS_TEV=1): the GX texture environment, driven by the
+     * per-batch state in GxDrawBatch::tev_state. Off by default until measured. */
+    ID3D11PixelShader* gx_ps_tev;
+    ID3D11Buffer* gx_tev_cb;
+    bool tev_enabled;
     ID3D11BlendState* blend_state_alpha;
     ID3D11RasterizerState* rs_cull_none;
     ID3D11Texture2D* gx_tex_white;
@@ -218,6 +278,29 @@ bool d3d11_init(HWND hwnd, const GfxConfig* config) {
     if (FAILED(hr)) {
         printf("[D3D11] Failed to create GX alpha pixel shader: 0x%08X\n", (unsigned int)hr);
     }
+    hr = ID3D11Device_CreatePixelShader(s_d3d11.device, s_gx_ps_tev_bytecode, sizeof(s_gx_ps_tev_bytecode), NULL, &s_d3d11.gx_ps_tev);
+    if (FAILED(hr)) {
+        fprintf(stderr, "[GFX] Failed to create TEV pixel shader hr=0x%08lX\n", (unsigned long)hr);
+        return false;
+    }
+
+    /* Per-batch TEV state: 4 K registers + 4 previous + 16 combiners + 16 konst
+     * selectors + 16 orders + 4 scalars. Must match the GxTevConstants mirror of
+     * tools/compile_shaders.py's `cbuffer GxTev`. */
+    {
+        D3D11_BUFFER_DESC cb_desc;
+        memset(&cb_desc, 0, sizeof(cb_desc));
+        cb_desc.ByteWidth = sizeof(GxTevConstants) + ((16 - (sizeof(GxTevConstants) % 16)) % 16);
+        cb_desc.Usage = D3D11_USAGE_DYNAMIC;
+        cb_desc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+        cb_desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+        hr = ID3D11Device_CreateBuffer(s_d3d11.device, &cb_desc, NULL, &s_d3d11.gx_tev_cb);
+        if (FAILED(hr)) {
+            fprintf(stderr, "[GFX] Failed to create TEV constant buffer hr=0x%08lX\n", (unsigned long)hr);
+            return false;
+        }
+    }
+    s_d3d11.tev_enabled = getenv("TLS_TEV") != NULL;
     s_d3d11.gx_ps = s_d3d11.gx_ps_alpha;
 
     D3D11_INPUT_ELEMENT_DESC gx_elements[] = {
@@ -1954,8 +2037,40 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                     }
 
                     ID3D11PixelShader* ps = blend_enable ? s_d3d11.gx_ps_alpha : s_d3d11.gx_ps_opaque;
-                    ID3D11DeviceContext_PSSetShader(s_d3d11.context, ps, NULL, 0);
-                    ID3D11DeviceContext_PSSetShaderResources(s_d3d11.context, 0, 1, &srv);
+                    if (s_d3d11.tev_enabled && s_d3d11.gx_ps_tev) {
+                        /* GX TEV: evaluate the batch's real combiner stages. All eight
+                         * texmap slots are bound (white where the batch does not use
+                         * them) because the stages pick the texture, not the batch. */
+                        const GxTevState* tev_st = gx_pipeline_get_tev_state(batch->tev_state);
+                        bool need_compare = false;
+                        GxTevConstants* cst = NULL;
+                        D3D11_MAPPED_SUBRESOURCE mapped_cb;
+                        if (SUCCEEDED(ID3D11DeviceContext_Map(s_d3d11.context,
+                                (ID3D11Resource*)s_d3d11.gx_tev_cb, 0, D3D11_MAP_WRITE_DISCARD,
+                                0, &mapped_cb))) {
+                            cst = (GxTevConstants*)mapped_cb.pData;
+                            gx_tev_fill_constants(cst, tev_st, &need_compare);
+                        }
+                        ID3D11ShaderResourceView* srvs[8];
+                        for (int m = 0; m < 8; m++) {
+                            srvs[m] = s_d3d11.gx_tex_white_srv;
+                            if (batch->tev_texmap_mask & (1u << m)) {
+                                ID3D11ShaderResourceView* m_srv = get_or_upload_gx_texture(&batch->tev_texmap[m]);
+                                if (m_srv) srvs[m] = m_srv;
+                            }
+                        }
+                        if (cst) {
+                            ID3D11DeviceContext_Unmap(s_d3d11.context,
+                                (ID3D11Resource*)s_d3d11.gx_tev_cb, 0);
+                        }
+                        ID3D11DeviceContext_PSSetConstantBuffers(s_d3d11.context, 0, 1, &s_d3d11.gx_tev_cb);
+                        ID3D11DeviceContext_PSSetShader(s_d3d11.context, s_d3d11.gx_ps_tev, NULL, 0);
+                        ID3D11DeviceContext_PSSetShaderResources(s_d3d11.context, 0, 8, srvs);
+                        ID3D11DeviceContext_PSSetSamplers(s_d3d11.context, 0, 1, &s_d3d11.sampler_linear);
+                    } else {
+                        ID3D11DeviceContext_PSSetShader(s_d3d11.context, ps, NULL, 0);
+                        ID3D11DeviceContext_PSSetShaderResources(s_d3d11.context, 0, 1, &srv);
+                    }
                     ID3D11DeviceContext_Draw(s_d3d11.context, batch->vertex_count, batch->vertex_offset);
                     /* Watch the framebuffer change pass by pass. TLS_BATCH_PROBE=<frame>. */
                     {
@@ -1971,6 +2086,28 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                                    s_d3d11_dump_count, b, batch->vertex_offset, batch->vertex_count,
                                    batch->tex.guest_addr, batch->blend_enable, batch->src_factor,
                                    batch->dst_factor, gx_vtx[batch->vertex_offset].color, pr, pg, pb);
+                            fflush(stdout);
+                        }
+                    }
+                    /* TEV state of every batch (TLS_TEV_PROBE=<frame>): the decode of
+                     * BP 0xC0..0xDF / 0xE0..0xE7 / 0xF6..0xFD that the shader evaluates. */
+                    {
+                        static int s_tev_probe_frame = -2;
+                        static int s_tev_probe_from = 0;
+                        if (s_tev_probe_frame == -2) {
+                            const char* f = getenv("TLS_TEV_PROBE");
+                            s_tev_probe_frame = f ? atoi(f) : -1;
+                            const char* fb = getenv("TLS_TEV_PROBE_FROM");
+                            s_tev_probe_from = fb ? atoi(fb) : 0;
+                        }
+                        if (s_tev_probe_frame >= 0 && (int)s_d3d11_dump_count == s_tev_probe_frame &&
+                            (int)b >= s_tev_probe_from) {
+                            printf("[TevProbe] frame=%d b%u vcnt=%u tex=0x%08X tex1=0x%08X blend=%d s=%u d=%u\n",
+                                   s_d3d11_dump_count, b, batch->vertex_count,
+                                   batch->tex.guest_addr,
+                                   batch->has_texture1 ? batch->tex1.guest_addr : 0u,
+                                   batch->blend_enable, batch->src_factor, batch->dst_factor);
+                            gx_pipeline_print_tev_state(batch->tev_state);
                             fflush(stdout);
                         }
                     }
