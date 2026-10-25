@@ -4400,9 +4400,12 @@ Written because this thread now spans many sessions and the useful facts are sca
    1) -> phase 13 waits for `waiter+0x88 == 4` -> `+0x88` needs the 4-slot list at `waiter+0x474` to
    advance -> the counter sticks at 1 because slot 1's `w10` never arrives -> slot 1's payload is a
    **LayoutTask that is allocated and never linked** (`+4 == 2` instead of a parent pointer).
-   Slot 0's payload, created in the same frame from a sequential id, links and draws normally, so
-   this is an asymmetry, not guest policy. **Next: find who assigns `LayoutTask+4` and why slot 1's
-   is unset.**
+   Slot 0's payload, created in the same frame from a sequential id, is drawn; slot 1's is not.
+   **The `LayoutTask+4` reading was WRONG and is retracted (5c.27 §9.4): the drawn task
+   `0x8108E040` has `+4 == 0`, so `+4` has no bearing on being drawn.** What survives: the payload
+   factory (`0x801F3FF8`, alloc 272/align 8, ctor `0x801F407C`, which does not initialise `+4`), and
+   the `w7` chain `PAY0 -> PAY1 -> 0x81858540` - the payloads form a linked list that something
+   walks, so the next question is where that walk stops.
 2. **The two halves are still presented separately.** The host presents once per emulated frame;
    Chapter-1 is two-pass (odd = opaque geometry, even = blended composite, both clearing to black,
    `xfbs=1` only on the even/composite frame). `TLS_PRESENT_ON_XFB=1` implements the faithful gate
