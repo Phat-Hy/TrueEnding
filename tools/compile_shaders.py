@@ -68,18 +68,21 @@ struct VSInput {
     float3 normal : NORMAL;
     float2 uv     : TEXCOORD0;
     float4 color  : COLOR0;
+    float2 uv1    : TEXCOORD1;
 };
 
 struct PSInput {
     float4 pos   : SV_Position;
     float2 uv    : TEXCOORD0;
     float4 color : COLOR0;
+    float2 uv1   : TEXCOORD1;
 };
 
 PSInput VSMain(VSInput input) {
     PSInput output;
     output.pos = input.pos;
     output.uv = input.uv;
+    output.uv1 = input.uv1;
     output.color = input.color;
     return output;
 }
@@ -154,6 +157,20 @@ float4 SampleTevTex(uint map, float2 uv)
     if (map == 5u) return tev_tex5.Sample(tev_samp, uv);
     if (map == 6u) return tev_tex6.Sample(tev_samp, uv);
     return tev_tex7.Sample(tev_samp, uv);
+}
+
+// GX stages name the texcoord they sample (BP 0xC0 bits 4..7 for the colour combiner's
+// texture input). The host used to feed every stage uv0, which is only correct for a
+// single-texcoord batch. Measured at MENU frame 1448 the scene batches supply TEX0 and
+// TEX1 (texcoord_mask=0x03) while their stages name texcoords 0..3; hardware starts every
+// generated coord at (0,0) and only overwrites it from an attribute that exists, so a
+// stage naming a texcoord the batch does not supply samples the constant (0,0).
+// tev_order[].w carries the renderer's decision: 0 = uv0, 1 = uv1, 2 = constant (0,0).
+float2 TevSelectUv(uint sel, float2 uv0, float2 uv1)
+{
+    if (sel == 0u) return uv0;
+    if (sel == 1u) return uv1;
+    return float2(0.0f, 0.0f);
 }
 
 cbuffer GxTev : register(b0)
@@ -414,7 +431,7 @@ float4 PSTev(PSInput input) : SV_Target
         float4 texel = float4(1.0f, 1.0f, 1.0f, 1.0f);
         if (ord.z != 0u) {
             uint map = ord.x & 7u;
-            texel = SampleTevTex(map, input.uv);
+            texel = SampleTevTex(map, TevSelectUv(ord.w, input.uv, input.uv1));
         }
 
         float4 konst_c = TevKonstColor(ks.x & 0x1Fu);

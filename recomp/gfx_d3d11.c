@@ -33,8 +33,7 @@ static float gx_tev_reg_component(uint32_t raw) {
 
 static void gx_tev_fill_constants(GxTevConstants* c, const GxTevState* st, bool* need_compare) {
     memset(c, 0, sizeof(*c));
-    if (!st) { c->num_stages = 0; return; }
-    for (int i = 0; i < 4; i++) {
+    if (!st) { c->num_stages = 0; return; }    for (int i = 0; i < 4; i++) {
         /* BP 0xE0+2i holds red (bits 0..10) and alpha (12..22);
          * BP 0xE1+2i holds blue (0..10) and green (12..22). */
         c->kreg[i][0] = gx_tev_reg_component(st->kreg_ra[i]);
@@ -310,8 +309,9 @@ bool d3d11_init(HWND hwnd, const GfxConfig* config) {
         {"NORMAL",   0, DXGI_FORMAT_R32G32B32_FLOAT,    0, 16, D3D11_INPUT_PER_VERTEX_DATA, 0},
         {"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT,       0, 28, D3D11_INPUT_PER_VERTEX_DATA, 0},
         {"COLOR",    0, DXGI_FORMAT_R8G8B8A8_UNORM,     0, 36, D3D11_INPUT_PER_VERTEX_DATA, 0},
+        {"TEXCOORD", 1, DXGI_FORMAT_R32G32_FLOAT,       0, 40, D3D11_INPUT_PER_VERTEX_DATA, 0},
     };
-    hr = ID3D11Device_CreateInputLayout(s_d3d11.device, gx_elements, 4, s_gx_vs_bytecode, sizeof(s_gx_vs_bytecode), &s_d3d11.gx_input_layout);
+    hr = ID3D11Device_CreateInputLayout(s_d3d11.device, gx_elements, 5, s_gx_vs_bytecode, sizeof(s_gx_vs_bytecode), &s_d3d11.gx_input_layout);
     if (FAILED(hr)) {
         printf("[D3D11] Failed to create GX input layout: 0x%08X\n", (unsigned int)hr);
     }
@@ -2134,6 +2134,25 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                                 0, &mapped_cb))) {
                             cst = (GxTevConstants*)mapped_cb.pData;
                             gx_tev_fill_constants(cst, tev_st, &need_compare);
+                            /* Which UV each stage samples (handover 5c.20): uv0/uv1 when the
+                             * batch supplies that texcoord attribute and the texgen exists,
+                             * otherwise the constant (0,0) that hardware leaves in an
+                             * ungenerated coord. Faithful, but measured to make the MENU
+                             * scene *brighter* (b16 (38,35,34) -> (49,43,44)) instead of
+                             * closer to the reference, so it stays opt-in:
+                             * TLS_TEV_TEXCOORD=1. */
+                            if (tev_st) {
+                                static int s_texcoord_sel = -1;
+                                if (s_texcoord_sel < 0)
+                                    s_texcoord_sel = getenv("TLS_TEV_TEXCOORD") ? 1 : 0;
+                                for (int i = 0; i < 16; i++) {
+                                    uint32_t tc = tev_st->texcoord[i];
+                                    bool have = (tc < (uint32_t)batch->xf_num_texgens) &&
+                                                (tc < 2u) &&
+                                                ((batch->texcoord_mask >> tc) & 1u);
+                                    cst->order[i][3] = s_texcoord_sel ? (have ? tc : 2u) : 0u;
+                                }
+                            }
                         }
                         ID3D11ShaderResourceView* srvs[8];
                         for (int m = 0; m < 8; m++) {

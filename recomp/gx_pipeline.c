@@ -300,6 +300,7 @@ static uint32_t s_xf_postmtx_info[8];       /* XF 0x1050..0x1057, PostMtxInfo */
 static uint32_t s_xf_num_texgens = 0;       /* XF 0x103f */
 static uint32_t s_xf_dualtex = 0;           /* XF 0x1012 */
 static float s_xf_viewport[6];              /* XF 0x101a..0x101f, wd ht zRange x y farZ */
+static float s_xf_post_mtx[256];             /* XF 0x500..0x5ff, 64 rows of float4 */
 static uint8_t s_cp_tex_mtx[8];             /* CP 0x30/0x40, 6-bit tex matrix indices */
 
 /* TLS_XF_LIGHTING=1 enables the emulated lighting stage (default off until measured).
@@ -602,6 +603,25 @@ static void xf_probe_dump(void) {
     for (int i = 0; i < 8; i++) {
         printf("  texgen%d info=0x%08X post=0x%08X mtxidx=%u\n",
                i, s_xf_texmtx_info[i], s_xf_postmtx_info[i], s_cp_tex_mtx[i]);
+    }
+    /* The matrices the texgen would use. If these are identity the missing texcoord
+     * transform cannot change any sample, which decides whether implementing it is
+     * the next useful step (handover 5c.20). */
+    for (int i = 0; i < 2; i++) {
+        int mi = s_cp_tex_mtx[i] / 3;
+        printf("  texmtx[%d] (pos matrix %d): [%.4f %.4f %.4f %.4f] [%.4f %.4f %.4f %.4f] [%.4f %.4f %.4f %.4f]\n",
+               i, mi,
+               s_pos_matrices[mi][0][0], s_pos_matrices[mi][0][1], s_pos_matrices[mi][0][2], s_pos_matrices[mi][0][3],
+               s_pos_matrices[mi][1][0], s_pos_matrices[mi][1][1], s_pos_matrices[mi][1][2], s_pos_matrices[mi][1][3],
+               s_pos_matrices[mi][2][0], s_pos_matrices[mi][2][1], s_pos_matrices[mi][2][2], s_pos_matrices[mi][2][3]);
+    }
+    {
+        int pi = (int)(s_xf_postmtx_info[0] & 0x3F);
+        printf("  postmtx[%d] (normalize=%d): [%.4f %.4f %.4f %.4f] [%.4f %.4f %.4f %.4f] [%.4f %.4f %.4f %.4f]\n",
+               pi, (int)((s_xf_postmtx_info[0] >> 8) & 1),
+               s_xf_post_mtx[pi * 4 + 0], s_xf_post_mtx[pi * 4 + 1], s_xf_post_mtx[pi * 4 + 2], s_xf_post_mtx[pi * 4 + 3],
+               s_xf_post_mtx[(pi + 1) * 4 + 0], s_xf_post_mtx[(pi + 1) * 4 + 1], s_xf_post_mtx[(pi + 1) * 4 + 2], s_xf_post_mtx[(pi + 1) * 4 + 3],
+               s_xf_post_mtx[(pi + 2) * 4 + 0], s_xf_post_mtx[(pi + 2) * 4 + 1], s_xf_post_mtx[(pi + 2) * 4 + 2], s_xf_post_mtx[(pi + 2) * 4 + 3]);
     }
     const float* nm = &s_xf_nrm_mtx[3 * (s_default_pnm_raw & 31)];
     printf("  nrmmtx[%u] = (%.3f,%.3f,%.3f)(%.3f,%.3f,%.3f)(%.3f,%.3f,%.3f)\n",
@@ -991,6 +1011,8 @@ static inline GxVertex lerp_vertex(const GxVertex* a, const GxVertex* b, float t
     r.nz = a->nz + t * (b->nz - a->nz);
     r.u = a->u + t * (b->u - a->u);
     r.v = a->v + t * (b->v - a->v);
+    r.u1 = a->u1 + t * (b->u1 - a->u1);
+    r.v1 = a->v1 + t * (b->v1 - a->v1);
     uint32_t a_a = (a->color >> 24) & 0xFF, b_a = (b->color >> 24) & 0xFF;
     uint32_t a_b = (a->color >> 16) & 0xFF, b_b = (b->color >> 16) & 0xFF;
     uint32_t a_g = (a->color >> 8) & 0xFF,  b_g = (b->color >> 8) & 0xFF;
@@ -1825,6 +1847,7 @@ static inline void decode_single_vertex(const uint8_t* attr_data, uint8_t fmt, G
             float tu = parse_comp_value(&attr_data[offset], c_type, frac, &adv); offset += adv;
             float tv = (c_cnt == 0) ? 0.0f : parse_comp_value(&attr_data[offset], c_type, frac, &adv);
             if (c_cnt != 0) offset += adv;
+            if (t == 1) { v->u1 = tu; v->v1 = tv; }
             if (s_active_tex_coord == t || (s_vtx_desc[GX_VA_TEX0].type == GX_ATTR_NONE && s_active_tex_coord == 0 && t == 1)) {
                 v->u = tu;
                 v->v = tv;
@@ -1841,6 +1864,7 @@ static inline void decode_single_vertex(const uint8_t* attr_data, uint8_t fmt, G
                 uint32_t aoff = 0;
                 float tu = parse_comp_value(p + aoff, c_type, frac, &adv); aoff += adv;
                 float tv = (c_cnt == 0) ? 0.0f : parse_comp_value(p + aoff, c_type, frac, &adv);
+                if (t == 1) { v->u1 = tu; v->v1 = tv; }
                 if (s_active_tex_coord == t || (s_vtx_desc[GX_VA_TEX0].type == GX_ATTR_NONE && s_active_tex_coord == 0 && t == 1)) {
                     v->u = tu;
                     v->v = tv;
@@ -1857,6 +1881,7 @@ static inline void decode_single_vertex(const uint8_t* attr_data, uint8_t fmt, G
                 uint32_t aoff = 0;
                 float tu = parse_comp_value(p + aoff, c_type, frac, &adv); aoff += adv;
                 float tv = (c_cnt == 0) ? 0.0f : parse_comp_value(p + aoff, c_type, frac, &adv);
+                if (t == 1) { v->u1 = tu; v->v1 = tv; }
                 if (s_active_tex_coord == t || (s_vtx_desc[GX_VA_TEX0].type == GX_ATTR_NONE && s_active_tex_coord == 0 && t == 1)) {
                     v->u = tu;
                     v->v = tv;
@@ -2073,6 +2098,12 @@ static void gx_pipeline_process_xf(uint16_t target_addr, uint16_t word_count, co
             uint32_t a = (uint32_t)target_addr + w - 0x400;
             if (a < sizeof(s_xf_nrm_mtx) / sizeof(s_xf_nrm_mtx[0]))
                 s_xf_nrm_mtx[a] = read_f32_be(&payload[w * 4]);
+        }
+    } else if (target_addr >= 0x0500 && target_addr < 0x0600) {
+        /* Post-transform matrices: 64 rows of float4 (XF 0x500..0x5ff). */
+        for (uint16_t w = 0; w < word_count; w++) {
+            uint32_t a = (uint32_t)target_addr + w - 0x500;
+            if (a < 256) s_xf_post_mtx[a] = read_f32_be(&payload[w * 4]);
         }
     } else if (target_addr >= 0x0600 && target_addr < 0x0680) {
         /* Lights: 16 words each - colour at +3, cosatt +4..+6, distatt +7..+9,

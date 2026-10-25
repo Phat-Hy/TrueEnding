@@ -2364,8 +2364,56 @@ promoted; the MENU does not need lighting, so there is nothing to gain from prom
 `GxDrawBatch` now also records `xf_ctrl0` and `xf_num_texgens` so a per-batch lighting/texgen
 decision is possible without re-reading globals.
 
-#### 5. Next step for the chain (ordered)
+#### 5. The per-stage texcoord gap is real, implemented, measured - and *not* the brightness bug
 
+The TEV pixel shader sampled **every** stage with the batch's single `uv0`:
+`texel = SampleTevTex(map, input.uv)` in `tools/compile_shaders.py`. Hardware lets each stage
+name its texcoord, and starts a coord at `(0,0)` unless the batch supplies that attribute
+(Dolphin `VertexShaderGen.cpp`), so for the MENU's 3D batches - which supply `TEX0`/`TEX1` only
+while their stages name texcoords 0..3 - stages 2 and 3 must read the corner texel, not `uv0`.
+
+Implemented end to end, opt-in via **`TLS_TEV_TEXCOORD=1`**: `GxVertex` carries `u1/v1`
+(`TEXCOORD1`, offset 40, appended so no existing offset moved), the TEV constant buffer's
+`tev_order[].w` carries the renderer's per-stage choice (0 = uv0, 1 = uv1, 2 = constant), and
+`TevSelectUv()` picks it. **Measured: the scene at b16 goes `(38,35,34)` -> `(49,43,44)`**, i.e.
+*brighter* and further from the reference's `(23,25,18)`. So the corner-texel rule is not the
+brightness defect and it stays off by default. The default path was re-verified after the
+struct/layout/shader changes: MENU frame 1448 with no `TLS_*` flags still measures
+`(124,235,255)`, byte-identical.
+
+#### 6. Hardware's MENU copy sequence (new corpus this session)
+
+A MENU-phase corpus with `DumpEFBTarget=True` was captured this session (2007 framedumps +
+30 623 `efb1_*` per-copy dumps, 250 s of wall clock, plan `600-612:A,900-912:A,1200-1212:A`).
+Dolphin's copy of the title cave is a **320x224 RGBA8 image of the current scene**
+(`efb1_n013500_320x224_6.png`, average `(15,16,16)`), and the within-frame copy sequence reads
+
+```
+0    5    12   15   15   0 0 0   16   15 15   16   16   17/20   21/24   21/24
+```
+
+i.e. the copies carry the **current** frame's scene at 15-16 and the chain lifts it to 21-24
+(+40 %). The host's equivalent copy destination (`0x90395DC0`, 320x224) holds `(0,0,0)` and the
+host's chain lifts 32-38 to 254. Two independent errors, both now quantified:
+
+| quantity | host | hardware |
+|---|---|---|
+| scene level entering the chain | `(38,35,34)` | `(15,16,16)` |
+| what the chain's copies contain | `(0,0,0)` (stale inline snapshot) | the current scene |
+| chain lift over the scene | x6.7 | x1.4 |
+
+So the inline copy model is **provably** wrong (a copy must contain the scene that was drawn
+before it), and the additive passes are ~4x too strong. Fix the copy model first; the pass
+strength is then measurable one pass at a time against the `21/24` target.
+
+Eliminated by measurement for the 2.5x scene brightness, so far: gamma (bright content matches
+the reference within 5 %), XF lighting (disabled on these batches - 2 of 67), tex/post matrices
+(identity), per-stage texcoord selection (above), and "the scene is drawn wrong" (it is drawn
+correctly before b32 - the chain erases it). Remaining suspects, in order: (a) the chain's
+additive pass strength, (b) TEV `RASA`/alpha in the stages that write `dest=c2`,
+(c) the RGB565 EFB quantisation the reference goes through and the host does not.
+
+#### 7. Next step for the chain (ordered)
 1. Capture a **MENU-phase** Dolphin corpus with `DumpEFBTarget=True` (this session started exactly
    that run: `--frame-plan "600-612:A,900-912:A,1200-1212:A"`, i.e. stop before the save dialog, so
    the animated MENU is dumped) and compare **per copy**, host destination vs Dolphin's dump of the

@@ -14,6 +14,14 @@ typedef struct {
     float nx, ny, nz;
     float u, v;
     uint32_t color; // 0xAABBGGRR / RGBA
+    /* TEX1, i.e. the second texcoord attribute (GX_VA_TEX1). GX stages name the texcoord
+     * they sample, and the game's 3D materials really do use two: measured at MENU
+     * frame 1448, every scene batch has texcoord_mask=0x03 and TEV stages naming
+     * texcoord 0 and 1. A stage naming a texcoord the batch does not supply must sample
+     * the constant coordinate (0,0) - Dolphin VertexShaderGen starts every coord at
+     * vec4(0,0,1,1) and only overwrites it from an attribute that exists - so the
+     * renderer selects per stage between uv0, uv1 and (0,0). */
+    float u1, v1;
 } GxVertex;
 
 // GX Primitive types
