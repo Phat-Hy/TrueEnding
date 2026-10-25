@@ -28,7 +28,14 @@
 > * **The post-handoff stall (§5c.12) is unchanged**: `GameTask::Init` 81 calls, last at frame 1882, one
 >   streaming request stuck at `status=1`, whole block budget burned, no draws. Still the gateway to Chapter 1.
 >
-> **First commands.**
+> * **§5c.16 (current)**: the GX **TEV stage is implemented** (`TLS_TEV=1`, opt-in). BP `0xC0..0xDF` /
+>   `0xE0..0xE7` / `0xF6..0xFD` / `0xF3` are decoded and evaluated per pixel; probe with
+>   `TLS_TEV_PROBE=<frame>`. Measured: the 3D batches really run **3..9 TEV stages over up to 6 texmaps**,
+>   so the old `tex*vertexColour` shader was wrong everywhere. With `TLS_TEV=1 TLS_DEFER_EFB_COPY=1` the
+>   MENU now draws its gold text over a bloom (`docs/evidence/22-...`) instead of a flat cyan field - but
+>   the bloom is ~10x too bright, so the composite chain is still open (5c.16 item 4).
+> * **§5c.15**: see below for the copy-ordering work and the batch bisect instruments.
+>> **First commands.**
 > ```powershell
 > git log --oneline -6
 > python tools/recomp_harness.py build-runner           # chunks are already lifted; ~1 s
@@ -1648,3 +1655,133 @@ attract-mode title screen is unchanged from `510426d`.
 
 
 
+
+
+### 5c.16 The TEV stage is now implemented: the MENU renders its own text over a bloom
+
+State at the start of this session: `0d4699f`, tree clean. Session-setup note first, because it cost
+time: **under `workspace-write` this workspace is unwritable**. The shell token is Low integrity, the
+workspace root is labelled Low, but every directory created before ~Oct 2 still carries the Mid
+integrity label it inherited from `G:\Program`, so `Set-Content build\recomp\_t.txt` fails with
+"Access is denied" even though the DACL grants `PHATS\hypha:(F)`. Proven by `icacls build
+/setintegritylevel` failing from inside the sandbox and a freshly created directory under the root
+being writable. One unconfined `icacls "<root>" /setintegritylevel "(OI)(CI)low" /T /C` fixed the
+whole tree (34872 files; 818 under `tools/w64devkit` stayed denied, which is harmless).
+
+#### 1. The TEV register file is captured (gx_pipeline)
+
+`gx_pipeline_process_bp` now decodes, with Dolphin's field layout
+(`VideoCommon/BPMemory.h`, vendored to `build/ref/BPMemory.h`):
+
+| BP | meaning |
+|---|---|
+| `0xC0+2i` | stage i colour combiner: `d:0-3 c:4-7 b:8-11 a:12-15 bias:16-17 op:18 clamp:19 scale:20-21 dest:22-23` |
+| `0xC1+2i` | stage i alpha combiner: `d:4-6 c:7-9 b:10-12 a:13-15`, same tail |
+| `0xE0+2i` / `0xE1+2i` | colour register i, RA half (red 0-10, alpha 12-22) / BG half (blue 0-10, green 12-22), 11-bit signed, `255 == 1.0` |
+| `0xF6+j` | konst selectors: `swap_rb:0-1 swap_ga:2-3 kcsel_even:4-8 kasel_even:9-13 kcsel_odd:14-18 kasel_odd:19-23` |
+| `0xF3` | alpha test: `ref0:0-7 ref1:8-15 comp0:16-18 comp1:19-21 logic:22-23` |
+
+The combination is deduplicated into a per-frame snapshot table (`GX_MAX_TEV_STATES`, reset in
+`gx_pipeline_begin_frame`), and each `GxDrawBatch` pins the snapshot index - so a batch can only merge
+with another batch of the *same* TEV state. `GxDrawBatch` also carries `tev_texmap_mask` plus eight
+`GxTextureUnit`s, because the **stage** picks the texture (texmap n = the object bound to
+`GX_TEXMAPn` = `s_tex_units[n]`), not the batch.
+
+`TLS_TEV_PROBE=<frame>` (with `TLS_TEV_PROBE_FROM=<batch>` to cut the noise) prints the decode:
+stage count, alpha test, K0..K3 and every stage's rgb/alpha equation.
+
+#### 2. What the game actually uses (MENU frame 1450, measured)
+
+The 3D batches run **3, 4, 5, 7 and 9 TEV stages**, and several name **six distinct texmaps**
+(st2 map=2, st3 map=1, st4 map=3, st5 map=4, st6 map=5). The old single-texture
+`tex * vertexColour` shader was therefore wrong for essentially all 3D geometry, not just for the
+composite tail - it just happened to look plausible.
+
+The composite tail is simpler and is what the previous handover called the blocker:
+
+```
+b32 0x90395DC0 1 stage   rgb: ZERO ZERO ZERO tex.rgb      -> tex
+b33 0x9038D1C0 1 stage   same                            -> tex
+b34 0x9038D1C0 1 stage   rgb: ZERO tex.rgb konst.rgb      K0=(1,1,1,1) -> tex
+b35/b36 0x903917C0 5 stages  (ZERO tex.rgb konst.rgb prev.rgb) x5
+                            kc = K0.r, K0.g, K0.b, K0.a, K1.r   <- 5-tap blur, weights sum to ~1
+b39/b40 0x9038D1C0 5 stages  same shape, K0 = (0.2,0.2,0.2,0.2, K1.r=0.2)
+b41 0x905C3000 3 stages   prev=tex(map0), c0=tex(map3), prev=lerp(prev, tex(map2), c0)
+b47 0x905C3000 4 stages   tex * (K0 + K1 + 2*K2) then -0.5 bias  <- real colour tint
+b51 0x9038D1C0 1 stage    rgb = tex(map1).rgb * K0,  K0 = (0,1,0,0)
+```
+
+So the "5 additive passes add at full strength" diagnosis in 5c.15 item 7d was **half right**: the
+TEV stages of `b39..b47` do scale, but they scale by ~1.0 (a normalised 5-tap blur), not by something
+that would stop the chain saturating. TEV alone does not close the MENU background.
+
+#### 3. The shader (`PSTev`, ps_5_0) and the result
+
+`tools/compile_shaders.py` now emits `s_gx_ps_tev_bytecode` evaluated from a `cbuffer GxTev`
+(4 K registers + 4 previous + 16 combiners + 16 konst selectors + 16 orders + 4 scalars, mirrored by
+`GxTevConstants` in `recomp/gfx_d3d11.c`). It implements the regular stage
+`(d (op) lerp(a,b,c) + bias) * scale`, both combiners, all 32 KonstSel values with Dolphin's exact
+8-bit constants (255/223/191/159/128/96/64/32 over 255), the K channel replication
+(`konst = K0.rrr`), the independent alpha destination, and the BP 0xF3 alpha test.
+Compare-mode stages (`bias == 3`) are **not** evaluated - they pass `prev` through and are counted
+(`compareStages` in the probe; 14 writes carry `bias=3` in a MENU frame, so this is a real gap).
+
+Two HLSL constraints worth remembering: an array of `Texture2D` indexed dynamically inside the stage
+loop makes D3DCompile fail with *X3511 forced to unroll*, and marking the loop `[loop]` then makes it
+fail with *X3531 can't unroll loops marked with loop attribute*. Both go away with eight separate
+`Texture2D tev_tex0..7` and an if-chain sampler helper (`SampleTevTex`).
+
+`TLS_TEV=1` selects it; unset, `PSAlpha`/`PSOpaque` are used and the picture is the 0d4699f one
+(measured default MENU frame 1448 average `(124,235,255)`, i.e. still the flat cyan field).
+
+With `TLS_TEV=1 TLS_DEFER_EFB_COPY=1` the frame now reads, per batch (`TLS_BATCH_PROBE=1448`):
+
+```
+b0..b31   3D scene, ends (43,42,42)
+b32 (42,43,44)  b33 (32,36,37)  b34 (0,0,0)   <- the SRCCLR/ZERO squaring pass, unchanged
+b37 (38,37,33)  b38 (38,37,33)  b39 (71,74,71)  b40 (121,127,121)  b41 (202,208,202)
+b42 (201,207,201) b44..b46 (~192..198)  b47 (254,254,254)  b49 (255,255,255)
+b51 (90,90,90)   <- the SRCALPHA/INVSRCALPHA pass that drags it back
+b52.. UI text/logo, additive, (91,91,91)
+```
+
+`docs/evidence/22-tev-menu-frame1448.png`: the MENU / CONTINUE / NEW GAME / MULTIPLAYER layout with
+its Japanese sublabels now renders **gold and readable** over a large white radial glow. Before this it
+was a flat cyan field and the text was invisible.
+
+#### 4. What is still wrong, precisely
+
+The bloom is ~10x too bright: `b39..b41` add +33/+50/+81 and saturate the centre of the screen, where
+the real screen is a dark cave with a modest glow. Two candidate causes, both cheap to measure:
+
+1. **The blur levels add instead of averaging.** `b39/b40` are 5-stage accumulations whose konstant
+   weights sum to 1.0, but they are drawn with `s=4 d=1` (SRCALPHA/ONE) — *additive* - so each level
+   is added on top of the previous one. If the GX alpha of those stages were < 1 the sum would be
+   tamed; the TEV alpha half of `b39/b40` is `ZERO ZERO ZERO tex / prev` = `tex.a`, so it is 1.0
+   wherever the blur texture is opaque. Worth checking against hardware whether the *destination*
+   these passes expect is the 160x112 copy rather than the full scene.
+2. **The copies those passes sample are too bright.** `b40` samples `0x903D31C0` (320x224) and `b41`
+   samples `0x905C3000` (640x448); both addresses are written more than once per frame (5c.15 item 2:
+   copy #15 captures `(244,247,245)`). If the copy the batch samples is one issued *after* earlier
+   passes raised the EFB, the blur input is already blown out. `TLS_EFB_SAMPLE_FRAME` +
+   `TLS_DRAW_ORDER=1` answer this in one run: match each b39..b41 to the *last* copy of its address
+   before its vertex mark.
+
+#### 5. Next steps, in order
+
+1. Resolve the composite brightness (item 4.2 first: it is a pure ordering/measurement question).
+2. Implement TEV compare stages (`bias == 3`) - `b14` and friends depend on them.
+3. Supply real texcoords for texmap > 1. The 3D batches name texcoords up to 5 but the host decodes
+   only `TEX0` into a single `uv`, so every stage currently samples with `uv0`. That is the largest
+   remaining source of 3D inaccuracy: `GxVertex` needs `u1,v1` (and the input layout / `VSMain` /
+   `PSTev` need the matching `texcoord` select).
+4. Only then think about making `TLS_TEV` the default. It is measurably closer to hardware (the MENU
+   text exists at all) but the default must not change until the bloom is right.
+
+#### 6. New instruments
+
+| variable | effect |
+|---|---|
+| `TLS_TEV=1` | evaluate the captured TEV stages instead of `PSAlpha`/`PSOpaque` |
+| `TLS_TEV_PROBE=<frame>` | print the decoded TEV state of every batch of that frame |
+| `TLS_TEV_PROBE_FROM=<n>` | only batches `>= n` (the composite tail is far less noisy) |
