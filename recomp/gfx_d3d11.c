@@ -1366,6 +1366,24 @@ static void d3d11_capture_efb_snapshot(void) {
  * measures a copy must decode with the *same* rule the write used: reading an RGB565
  * destination as RGBA8 tiles reports dstavg != srcavg for a write that is correct, and
  * that would make the chain probe lie exactly when TLS_EFB_COPY_FMT is on. */
+/* R8 (EFB-copy ids 8 and 1) is the GX_TF_I8 geometry: 8 texels wide by 4 tall,
+ * 32 bytes per tile - not the 4x4 tile the other 32-byte formats use. The
+ * texture decoder in this file says so explicitly ("case 1: GX_TF_I8 (8x4
+ * tiles, 32 bytes)"), and a destination the guest samples has to be written in
+ * the layout that decoder will read.
+ *
+ * Opt-in via TLS_R8_TILE_8X4 because the title's bloom chain also uses R8 and
+ * the 1448 invariant is the only verified reference this project has: flipping
+ * the default would move it with nothing to check the new value against.
+ * Both the writer and efb_dst_decode_texel read this, so the chain probe stays
+ * honest - a probe that decodes with a different rule than the writer is worse
+ * than no probe. */
+static int efb_r8_tile_8x4(void) {
+    static int s = -1;
+    if (s < 0) s = getenv("TLS_R8_TILE_8X4") ? 1 : 0;
+    return s;
+}
+
 static void efb_dst_decode_texel(const uint8_t* guest, uint32_t format, uint32_t dst_w,
                                  uint32_t gx, uint32_t gy, int disp, int linear4,
                                  uint8_t* r, uint8_t* g, uint8_t* b, uint8_t* a) {
@@ -1386,6 +1404,21 @@ static void efb_dst_decode_texel(const uint8_t* guest, uint32_t format, uint32_t
     uint32_t tiles_x = (dst_w + 3) / 4;
     uint32_t tile = (gy / 4) * tiles_x + (gx / 4);
     uint32_t within = (gy % 4) * 4 + (gx % 4);
+    /* R8 (EFB-copy ids 8 and 1) is the GX_TF_I8 geometry: 8 texels wide by 4 tall,
+     * 32 bytes per tile - not the 4x4 tile the other 32-byte formats use. The
+     * texture decoder in this file says so explicitly ("case 1: GX_TF_I8 (8x4
+     * tiles, 32 bytes)"), and a destination the guest samples has to be written
+     * in the layout that decoder will read. Opt-in via TLS_R8_TILE_8X4 because
+     * the title's bloom chain also uses R8 and the 1448 invariant is the only
+     * verified reference we have. */
+    /* R8 uses the 8x4 GX_TF_I8 tile; see efb_r8_tile_8x4(). Must agree with
+     * the writer or the chain probe lies. */
+    const bool r8 = (format == 8 || format == 1);
+    if (efb_r8_tile_8x4() && r8) {
+        tiles_x = (dst_w + 7) / 8;
+        tile = (gy / 4) * tiles_x + (gx / 8);
+        within = (gy % 4) * 8 + (gx % 8);
+    }
     switch (format) {
         case 4: case 10: {   /* RGB565: 32-byte 4x4 tile of big-endian u16 */
             const uint8_t* t = guest + (size_t)tile * 32 + within * 2;
@@ -1617,6 +1650,14 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
     static int s_prev_frame = -1;
     if (s_defer < 0) s_defer = getenv("TLS_DEFER_EFB_COPY") ? 1 : 0;
     if (s_prev_frame < 0) s_prev_frame = getenv("TLS_EFB_PREV_FRAME") ? 1 : 0;
+    /* TLS_EFB_SRC_CURRENT=1 forces the copy to read the CURRENT back buffer even
+     * though the snapshot exists. The default path reads the previous-frame
+     * snapshot, and the alternate-frame staleness (5c.27 §9) makes every even
+     * present byte-identical - which is what a composite of a composite would
+     * converge to. This flag is how to tell a feedback loop from a stale write:
+     * it changes only the copy *source*, nothing else. */
+    static int s_src_current = -1;
+    if (s_src_current < 0) s_src_current = getenv("TLS_EFB_SRC_CURRENT") ? 1 : 0;
     {
         static int s_src = 0;
         if (s_src < 3) { s_src++; printf("[EfbCopySrc] reading %s (deferred=%d)\n",
@@ -1625,7 +1666,7 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
     }
     ID3D11Texture2D* source = NULL;
     bool have_backbuffer = false;
-    if (s_prev_frame || (!s_defer && s_d3d11.efb_snapshot)) {
+    if (!s_src_current && (s_prev_frame || (!s_defer && s_d3d11.efb_snapshot))) {
         source = s_d3d11.efb_snapshot;
     } else {
         if (FAILED(IDXGISwapChain_GetBuffer(s_d3d11.swap_chain, 0, &IID_ID3D11Texture2D, (void**)&source)))
@@ -1746,6 +1787,14 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                     } else if (!is_display_copy) {
                         uint32_t tile = (gy / 4) * tiles_x + (gx / 4);
                         uint32_t within = (gy % 4) * 4 + (gx % 4);
+                        /* R8 is the 8x4 GX_TF_I8 tile, not 4x4 - see
+                         * efb_r8_tile_8x4(). Opt-in so the title's R8 bloom
+                         * chain keeps the invariant it was measured with. */
+                        if (efb_r8_tile_8x4() && (format == 8 || format == 1)) {
+                            tiles_x = (dst_w + 7) / 8;
+                            tile = (gy / 4) * tiles_x + (gx / 8);
+                            within = (gy % 4) * 8 + (gx % 8);
+                        }
                         if (s_copy_fmt && (format == 4 || format == 10)) {
                             /* RGB565: 32-byte 4x4 tile of big-endian u16 */
                             uint16_t v = (uint16_t)(((r >> 3) << 11) | ((g >> 2) << 5) | (b >> 3));

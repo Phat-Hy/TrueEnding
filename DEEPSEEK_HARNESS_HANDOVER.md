@@ -4049,40 +4049,48 @@ purely because its virtual entries are ordinary function entries.**
 
 #### 9. Work order, revised
 
-1. **The parity defect is in the copy chain, and the R4/XFB copies are the suspects** (new
-   evidence this session, all on the current build):
-   * The parity **still reproduces**: presents 4002/4004/4006 are byte-identical (`688b6a83`,
-     mean 39.9,43.8,49.2) while 4001/4003/4005/4007 all differ (mean 51.8,48.5,44.3). Note the
-     stale hash is **no longer `28089bce`** - it changed when format 1 (R8) was fixed, so the
-     stale image is produced *through* the R8 chain.
-   * The two parities run **different copy lists**. Odd (4001): 10 copies, formats 6 and 11,
-     including `640x448 -> 0x905C3000` and the XFB scanout. Even (4002): only 3 copies, all
-     `fmt=4` (RGB565) `320x224`, two of them to the **same** destination.
-   * The last copy of an odd frame is the **XFB scanout**:
-     `copy=9 dst=0x900997E0 640x448 xfb=1 fmt=0 srcavg=(43,47,50) dstavg=(40,46,48)`.
-     `0x900997E0` is the hardcoded VI fallback address in `host_runner.c:1294`, and `fmt=0` is
-     **R4** - so the guest's own final scanout copy is the format that is still unimplemented.
-     (It does not go through the `dst_supported = 0` path because `is_xfb_copy` forces `bpp = 2`
-     before the format switch, so it is written as 16bpp linear and prints no warning.)
-   * The eight `[EfbCopy] destination format 0 not implemented` lines are the **non-XFB** R4
-     destinations (`0x92001BC0`, `0x92005BC0`, `0x92006BC0`, `0x927BD440`, `0x927C1440`,
-     `0x927C2440`, `0x92887860`, `0x9288F860`). If the composite samples one of those, writing
-     RGBA8 into it leaves the sampled region stale - which is exactly what a *constant* wrong
-     image would look like.
+1. **The parity: three suspects eliminated this session, and the symptom is now described correctly.**
+   Rendered both parities instead of reasoning about means
+   (`docs/evidence/parity_odd_4001.png`, `docs/evidence/parity_even_4002_frozen.png`):
+   * odd (4001): the cave, pool, sword on the rock, **red-lit** effect upper right - live.
+   * even (4002): the **same cave**, blue/purple rock, a blue creature head in the pool, slightly
+     different camera - i.e. **one frozen state of the same cutscene**, not "an older scene".
+   Eliminated by measurement, each with a default-off flag where one was needed:
+   * **R8 tiling** (`TLS_R8_TILE_8X4=1`): even frames stay byte-identical (`28089bce` with 8x4,
+     `688b6a83` with 4x4). Tiling changes *which* frozen image appears, not the freezing.
+   * **copy source** (`TLS_EFB_SRC_CURRENT=1`, forces the current back buffer instead of the
+     previous-frame snapshot): byte-identical result to the default, so the snapshot-vs-backbuffer
+     choice is not it either.
+   * **snapshot placement**: `d3d11_capture_efb_snapshot()` is called at `gfx_d3d11.c:2897`,
+     immediately *before* `IDXGISwapChain_Present` at 2898 - so it is not sampling a DISCARDed
+     buffer, as it first looked.
+   What is left, and it is now a sharper question: even frames submit only ~44.3k vertices while
+   odd frames submit ~276.5k, and the two parities write **different copy destinations**
+   (odd: 0x905C3000/640x448, 0x90536FE0/640x448, 0x90395DC0/320x224, 80x56 pairs; even: three
+   RGB565 320x224 to 0x9038D1C0 and 0x9036A1A0, two of them to the same address). So even frames
+   are composite-only, and the composite reads destinations the guest only rewrites on odd frames.
+   Next: log, per present, which destination each composite *batch* samples, and check it against
+   what the guest wrote that frame. `TLS_EFB_CHAIN` already dumps the writes in order; the missing
+   half is the reads.
+   Still worth chasing from round 2's data: the last copy of an odd frame is the guest's own
+   **scanout**, `copy=9 dst=0x900997E0 640x448 xfb=1 fmt=0` - `0x900997E0` is the hardcoded VI
+   fallback address in `host_runner.c:1294` and `fmt=0` is **R4**. It prints no "not implemented"
+   warning because `is_xfb_copy` forces `bpp = 2` before the format switch, so it goes out as 16bpp
+   linear. The eight `format 0 not implemented` lines are the **non-XFB** R4 destinations
+   (`0x92001BC0`, `0x92005BC0`, `0x92006BC0`, `0x927BD440`, `0x927C1440`, `0x927C2440`,
+   `0x92887860`, `0x9288F860`), which are still written as RGBA8 at 4x the destination width.
 2. **The R8 write path is tiled 4x4 but R8 is an 8x4 format - check this before R4.** The
    *texture* decoder in this same file settles it: `decode_gx_texture` has
    `case 1: // GX_TF_I8 (8x4 tiles, 32 bytes)`, and `case 8` there is **CI4 (8x8)**, i.e. the
    texture numbering and the EFB-copy numbering are different spaces. On the EFB-copy side format
    8/1 is R8, and R8 is **8 texels wide x 4 tall, 32 bytes** - so a correct writer needs
-   `tile = (gy/4)*(dst_w/8) + gx/8` and `within = (gy%4)*8 + (gx%8)`. The current writer uses the
-   4x4 rule (`tile = (gy/4)*tiles_x + gx/4`, `within = (gy%4)*4 + gx%4`), which touches only the
-   low 16 bytes of each 32-byte tile. The *width* formula is fine: for any 8-wide tile
-   `dst_w = pitch*8` regardless of bpp, which is exactly what `bpp = 1` yields - that resolves the
-   apparent inconsistency flagged in the previous revision of this item.
-   **Do not change R8 tiling casually**: the title chain uses the R8 bloom destinations and the
-   1448 invariant currently matches the verified reference, so a tiling change will move it.
-   Reproduced-width note: with pitch 160 the chain reports 640/320/160/80-wide destinations, which
-   is consistent with `dst_w = pitch*8/bpp` for bpp = 2/4 and `pitch*8` for the 8-wide formats.
+   `tile = (gy/4)*(dst_w/8) + gx/8` and `within = (gy%4)*8 + (gx%8)`. Implemented as
+   `TLS_R8_TILE_8X4`, default **off**, applied in both the writer and `efb_dst_decode_texel`
+   (a probe that decodes with a different rule than the writer is worse than no probe).
+   The *width* formula is fine: for any 8-wide tile `dst_w = pitch*8` regardless of bpp, which is
+   exactly what `bpp = 1` yields.
+   **Still unvalidated**: there is no reference for a correct R8 destination, and the title's
+   bloom chain uses R8, so promoting it will move the 1448 invariant. Needs its own reference first.
 3. **Fill `0x81858DE0` record slot 1** (see §8b) - still the state-machine-side blocker.
 4. **`fn_803E4478`** makes the phase-0 gate one-shot; whatever re-arms it is a later phase.
 5. Input plans must respect the **one-update edge**: press, release, press again.
