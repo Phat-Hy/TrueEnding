@@ -1548,6 +1548,46 @@ int main(int argc, char** argv) {
         }
     }
 
+    /* Dump an arbitrary guest texture, decoded with the 4x4-tiled RGBA8 layout the
+     * GX sampler uses, so a wrong-coloured batch can be traced to the bytes it
+     * samples instead of guessed at from the draw call.
+     * TLS_TEX_PPM="0xADDR,W,H" (repeatable up to 4 specs, ';' separated). */
+    {
+        const char* spec = getenv("TLS_TEX_PPM");
+        if (spec) {
+            const char* p = spec;
+            for (int n = 0; n < 4 && p && *p; n++) {
+                unsigned addr = 0, w = 0, h = 0;
+                if (sscanf(p, "%x,%u,%u", &addr, &w, &h) != 3) break;
+                const char* semi = strchr(p, ';');
+                p = semi ? semi + 1 : NULL;
+                const u8* base = (const u8*)resolve_guest_pointer(&cpu, addr);
+                if (!base || !w || !h || w > 2048 || h > 2048) {
+                    printf("[TexPpm] 0x%08X %ux%u: unmapped or bad size\n", addr, w, h);
+                    continue;
+                }
+                char path[96];
+                snprintf(path, sizeof(path), "build/recomp/tex_%08X_%ux%u.ppm", addr, w, h);
+                FILE* tf = fopen(path, "wb");
+                if (!tf) continue;
+                fprintf(tf, "P6\n%u %u\n255\n", w, h);
+                u32 tiles_x = (w + 3) / 4;
+                for (u32 y = 0; y < h; y++) {
+                    for (u32 x = 0; x < w; x++) {
+                        u32 tile = (y / 4) * tiles_x + (x / 4);
+                        u32 within = (y % 4) * 4 + (x % 4);
+                        const u8* t = base + (size_t)tile * 64;
+                        fputc(t[within * 2 + 1], tf);
+                        fputc(t[32 + within * 2 + 0], tf);
+                        fputc(t[32 + within * 2 + 1], tf);
+                    }
+                }
+                fclose(tf);
+                printf("[TexPpm] 0x%08X %ux%u -> %s\n", addr, w, h, path);
+            }
+        }
+    }
+
     tls_debug_dump_full(&cpu, frame, "Runner Execution Completed");
 
 #ifdef _WIN32

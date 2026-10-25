@@ -1258,5 +1258,71 @@ the most economical explanation for a uniform, static, wrong colour over a corre
    post-handoff stall (§5c.12) - a 1 MB overrun per half-scale copy into MEM2 is also a credible cause of the
    streaming request that never gets dispatched, so these two items may share a root cause.
 
+> **SUPERSEDED BY §5c.14 — the half-scale theory above is wrong.** Frame-numbered copy logs
+> (`TLS_EFB_COPY_PROBE=1 TLS_EFB_COPY_FROM=1440`) show every copy is 1:1: source `(0,0)-(79,55)` goes to
+> `0x903917C0` which is sampled as 80x56, `(0,0)-(319,223)` to `0x90429C00` which is sampled as 320x224,
+> `(0,0)-(639,447)` to `0x905C3000` which is sampled as 640x448. No destination is smaller than its source,
+> so nothing overruns and no scale handling is needed. The cyan MENU background has a different cause.
+
+---
+
+### 5c.14 The cyan MENU background: the copies are faithful, the *composition* is a feedback loop
+
+Read this instead of §5c.13's conclusion. Two measurements settle it.
+
+**1. All EFB copies are 1:1 and their destinations decode to a real picture** (see §5c.13's table and
+`docs/evidence/16…/17…`). The half-scale hypothesis is dead - see the block above.
+
+**2. At the menu frames the copy destinations are a *uniform* colour, byte for byte.** Dumping the
+destinations straight out of guest memory at the end of a menu run
+(`TLS_TEX_PPM="0x903917C0,320,224;0x905C3000,640,448;0x9038D1C0,160,112"`, decoded as 4x4-tiled RGBA8):
+
+| Guest texture | Size | Content |
+|---|---|---|
+| `0x903917C0` | 320x224 | **1 unique colour: `(119,234,255)`** in all 256 sampled texels |
+| `0x9038D1C0` | 160x112 | **1 unique colour: `(119,234,255)`** |
+| `0x905C3000` | 640x448 | 27 colours, dominant `(119,234,255)` |
+
+So the copy is doing exactly what it was asked: the EFB it reads really is a flat sky-blue field. The
+on-screen colour is `(119,234,255)` too, **perfectly static across frames 1450-1750**, and the same frame
+submits 40k vertices of depth-tested 3D geometry (`b0..b11`, perspective CMPR batches) that never becomes
+visible.
+
+**3. The composition feeds the copy back into the framebuffer.** The tail of every one of these frames is:
+
+```
+b17 tex=0x903917C0 320x224 RGBA8  blend=0 (s1/d0 = REPLACES the framebuffer)  X,Y = [-1,1]
+b11 tex=0x905C3000 640x448 RGBA8  blend=0 (s4/d1)
+b12 tex=0x905C3000 640x448 RGBA8  blend=0 (s1/d0 = REPLACES again)
+b13 tex=0x905C3000 640x448 RGBA8  blend=1 (s4/d0)
+```
+
+`0x905C3000` and `0x903917C0` are both *EFB copy destinations* (they receive a 640x448 and an 80x56 copy
+every frame, per the `frame=1440` log). The frame therefore ends by replacing the framebuffer with last
+frame's copy of itself. Combined with the fact that `d3d11_efb_copy_to_guest()` reads the **last completed
+frame** (`efb_snapshot`, captured in `d3d11_present()`), that is a closed feedback loop: whatever colour the
+loop starts in, it is a fixed point, and the 3D scene drawn at the start of every frame is thrown away.
+
+**4. A second, independent defect in the same area:** `gx_pipeline_get_clear_color()` is defined and never
+called. The pipeline records the guest's BP clear colour (`0x4F`/`0x50`) but `d3d11_present()` always
+clears to hardcoded black, so the guest's own clear is invisible to rendering.
+
+**Next steps.**
+1. Use the BP clear colour for the backend's clear (correctness fix on its own; also removes black-vs-sky
+   differences that make the feedback loop's fixed point hard to reason about).
+2. Find the frame where the uniform colour *first* appears - it is the origin, everything after is the loop.
+   `TLS_SHOT_FRAMES` frame-by-frame around the mode transition (mode 5/6 at 1201-1202) plus `TLS_BATCH_DUMP`
+   on that frame; the earlier dump at 1205 already shows the same self-referential tail, so the origin is at
+   or before frame 1202.
+3. Make the copy see the frame *as drawn so far*, not the previous frame. The batches are currently rendered
+   in one pass inside `d3d11_present()`, so a mid-frame copy has nothing of the current frame to read; the
+   honest fix is to render batches incrementally (or snapshot at the copy's position in the batch stream) so
+   `GXCopyTex` captures the scene pass of the same frame, as the hardware does. That also removes the
+   feedback path entirely.
+4. Re-test the post-handoff stall (§5c.12) afterwards - the stall's "one request stuck at status=1" is not
+   explained by this, but both live in the same frame pipeline and the composition loop currently consumes the
+   frame budget's worth of fullscreen work.
+
+
 
 

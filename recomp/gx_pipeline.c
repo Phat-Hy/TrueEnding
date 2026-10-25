@@ -758,18 +758,27 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
     if (reg == 0x52) { // TEXCOPYEXEC
         static int s_copy_probe = -1;
         static int s_copy_reports = 0;
-        if (s_copy_probe < 0) s_copy_probe = getenv("TLS_EFB_COPY_PROBE") ? 1 : 0;
+        static int s_copy_from = -1;
+        if (s_copy_probe < 0) {
+            s_copy_probe = getenv("TLS_EFB_COPY_PROBE") ? 1 : 0;
+            const char* f = getenv("TLS_EFB_COPY_FROM");
+            s_copy_from = f ? atoi(f) : 0;
+        }
         s_efb_copy_count++;
         if (s_efb_copy_hook) {
             s_efb_copy_hook(s_efb_copy_dst_guest, s_efb_copy_x0, s_efb_copy_y0,
                             s_efb_copy_x1, s_efb_copy_y1, s_efb_copy_format);
         }
-        if (s_copy_probe && s_copy_reports < 12) {
-            s_copy_reports++;
-            printf("[EfbCopy] #%u src=(%u,%u)-(%u,%u) dst=0x%08X fmt=%u (raw exec=0x%06X)\n",
-                   s_efb_copy_count, s_efb_copy_x0, s_efb_copy_y0, s_efb_copy_x1, s_efb_copy_y1,
-                   s_efb_copy_dst_guest, s_efb_copy_format, val);
-            fflush(stdout);
+        if (s_copy_probe && s_copy_reports < 40) {
+            extern int g_runner_current_frame;
+            if (g_runner_current_frame >= s_copy_from) {
+                s_copy_reports++;
+                printf("[EfbCopy] frame=%d #%u src=(%u,%u)-(%u,%u) dst=0x%08X fmt=%u (raw exec=0x%06X)\n",
+                       g_runner_current_frame,
+                       s_efb_copy_count, s_efb_copy_x0, s_efb_copy_y0, s_efb_copy_x1, s_efb_copy_y1,
+                       s_efb_copy_dst_guest, s_efb_copy_format, val);
+                fflush(stdout);
+            }
         }
         return;
     }
