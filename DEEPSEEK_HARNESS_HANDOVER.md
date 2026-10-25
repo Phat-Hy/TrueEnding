@@ -4082,9 +4082,11 @@ purely because its virtual entries are ordinary function entries.**
    advancing). `TLS_PRESENT_ON_XFB=1` exists for that: it flips the window only on frames where the
    guest did an XFB copy. Measured rates - **Chapter-1 `xfbs=1` on the even frames only** (4002/4004/
    4006), **title `xfbs=1` on every frame** (1444..1448) - so the flag is safe for the title and would
-   drop only Chapter-1's geometry half. It stays default **OFF**: a screen with a long XFB-free
-   stretch would freeze the window and the boot/strap screens are unmeasured, and the 1448 invariant
-   is a *back-buffer* capture so it cannot validate a present-only change either way.
+   drop only Chapter-1's geometry half. **It is now default ON** (5c.29): the boot was measured and
+   frames 2..~300 render `batches=0` (black) with `xfbs=0`, while every content-bearing screen has
+   `xfbs=1` - so nothing with content stops being shown. The 1448 invariant is a *back-buffer* capture
+   and is unchanged with the gate on, so it still cannot validate the gate; the boot run and the
+   per-frame profile are the evidence instead.
    Note this also **corrects 5c.27 §9 item 1**, which claimed the guest displays on odd frames: the
    authoritative per-frame counter says the **even/composite** frame is the displayed one. The old
    reading came from `chain4001.log`, whose `present=` label does not pin which frame a copy belongs
@@ -4347,8 +4349,9 @@ Written because this thread now spans many sessions and the useful facts are sca
 2. **The two halves are still presented separately.** The host presents once per emulated frame;
    Chapter-1 is two-pass (odd = opaque geometry, even = blended composite, both clearing to black,
    `xfbs=1` only on the even/composite frame). `TLS_PRESENT_ON_XFB=1` implements the faithful gate
-   and is safe for the title (which has `xfbs=1` on every frame) but is default **OFF** because
-   boot/strap screens are unmeasured and the 1448 invariant cannot validate a present-only change.
+   and is safe for the title (which has `xfbs=1` on every frame). **Now default ON** (5c.29): the boot
+   was measured - it renders nothing until ~frame 300 - and the 1448 invariant is unchanged with the
+   gate on. `TLS_PRESENT_ON_XFB=0` restores one present per emulated frame.
 3. **R8 tiling is still 4x4 while R8 is an 8x4 format** (5c.27 §9.3), behind `TLS_R8_TILE_8X4`,
    default off. Unvalidated: no reference, and the title's bloom chain uses R8.
 4. **Two fabricated HLE overrides still ship, default-on** (5c.27 §9.4): `0x800A6BDC` can skip the
@@ -4364,3 +4367,29 @@ reference scan), `TLS_PRESENT_PROBE` + `TLS_PRESENT_WINDOW` (per-frame batches/b
 `TLS_EFB_CHAIN`, `TLS_BATCH_DUMP`, `TLS_MODE25_PROBE`, and `tools/chain_run.ps1` (retries the chain
 until `SetNextSequence('Game')` appears - **use it for every Chapter-1 measurement**, because a run
 that died on the title input race prints no probe output at all and looks like a broken probe).
+
+
+### 5c.29 The two-half present gate is now default ON
+
+The host used to put **every emulated frame** on screen, so a two-pass guest saw the opaque geometry
+half and the composite half as two alternating pictures. `TLS_PRESENT_ON_XFB` (added in 5c.27 §9)
+flips the window only on frames where the guest performed an XFB copy - i.e. only on frames the guest
+itself finished. It was left OFF then because the boot screens were unmeasured; they are now measured:
+
+```
+frames 2..~300   batches=0  xfbs=0    <- the boot renders nothing (black)
+frame 1          xfbs=1
+frame 300+       xfbs=1 on every sampled frame (title, save dialog, Chapter-1 composite)
+```
+
+So nothing that has content stops being shown, and in the Chapter-1 loop the gate drops the
+geometry-only half (`xfbs=1` only on 4002/4004/4006).
+
+Verified: the 1448 invariant is **unchanged** with the gate on (`mean (102,188,205) p10 69 p50 203`,
+two consecutive runs - expected, it is a back-buffer capture and the gate only skips
+`IDXGISwapChain_Present`), and a 620-frame boot run exits 0, reaches title mode 1 at frame 357 and
+completes normally. `TLS_PRESENT_ON_XFB=0` restores the old behaviour.
+
+**Note for anyone tempted to "validate" this with the invariant**: you cannot. The invariant reads the
+back buffer, which is drawn identically either way; the evidence for the gate is the per-frame
+`xfbs` profile plus the boot run, not a pixel comparison.
