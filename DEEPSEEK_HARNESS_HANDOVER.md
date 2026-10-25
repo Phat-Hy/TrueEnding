@@ -4081,8 +4081,13 @@ purely because its virtual entries are ordinary function entries.**
      **Measured**: `[EfbCopy] destination format 0 not implemented` is gone (0 occurrences in a
      Chapter-1 chain run) and the 1448 invariant is unchanged - the title never used format 0, so
      this cannot move it. What is validated is that the writer is the exact inverse of the decoder
-     the guest samples with, and that the 4x-too-wide RGBA8 write is gone. There is still no
-     Chapter-1 reference for what these destinations should *look* like.
+     the guest samples with, and that the 4x-too-wide RGBA8 write is gone.
+     **And it changes nothing in the Chapter-1 loop**: presents 4001/4002/4003 hash *byte-identically*
+     before and after (`ea706980` / `688b6a83` / `a9628239`). So the R4 destinations are not on the
+     loop's composite path - the eight warnings seen in earlier runs must come from the load/early
+     intro, not the steady state. **Do not expect R4 to fix the parity**; recorded so the next
+     session does not spend a round re-deriving it. There is still no Chapter-1 reference for what
+     these destinations should *look* like.
 
 3. **The R8 write path is tiled 4x4 but R8 is an 8x4 format.** `decode_gx_texture` has
    `case 1: // GX_TF_I8 (8x4 tiles, 32 bytes)` while `case 8` there is **CI4 (8x8)** - the texture
