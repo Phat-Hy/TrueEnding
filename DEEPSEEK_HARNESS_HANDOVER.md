@@ -4049,24 +4049,35 @@ purely because its virtual entries are ordinary function entries.**
 
 #### 9. Work order, revised
 
-1. **Fill `0x81858DE0` record slot 1** - the object is a 4-slot resource/preload list
-   (`this+0x474+i*76`, counter at `this+0x5B0`). Slot 0 is complete (`w10` = a MEM2 pointer), slot 1
-   is occupied (`w0 == 1`) but its `w10` never becomes non-zero, and the state machine needs either
-   `rec[counter].w10 != 0` (-> `+0x88` = 2) or `counter >= 4` (-> `+0x88` = 4) before phase 13 can
-   finish. Find what issues the four slots and why the second never starts - that is a *streaming*
-   question, one layer below the state machine, not an input one.
-2. **`*(task+0x56EC)` fields `+0x38` / `+0x88`** - the only exits from phase 13. **Measured:** the
-   object is 0 until phase 13, then `obj = 0x81858DE0` with `o38 = 0x00000022` (bit 1 set, so the
-   first half of the condition is already satisfied) and `o88` cycles 0 -> 1 -> 3 -> 1 and then
-   freezes at 1 with the slot counter at 1. Neither phase-13 branch can run: the first needs
-   `o88 == 0`, the second `o88 == 4`.
-3. **`fn_803E4478` is the acknowledge/commit step, and it is what makes the gate one-shot.** It
-   zeroes `g2+0xD8C` (`0x803E4488 stw r0, 3468(r3)` - the same word the phase-0 gate tests) plus
-   `0xD80/0xD84/0xD88/0xD78`, and ORs `0x4` into `*(g2+0xD70)+0x38` and `*(g2+0xD74)+0x38`. So the
-   gate cannot re-arm: whatever re-arms it has to be a later phase, not a retry.
-4. **Decide whether phase 13 is the right successor at all.** `fn_8036E170` only accepts phases
-   0, 3 and 14, which suggests the authored sequence is 0 -> 3/14 -> ..., and phase 13 may be a
-   branch the A press selected rather than the main line.
-5. Input plans from now on must respect the **one-update edge**: press, release, press again.
-6. Unchanged: the alternate-frame parity (5c.26 §5 - not the YUYV fallback), EFB format 0/R4,
-   the title input race, the allocator cycle.
+1. **The parity defect is in the copy chain, and the R4/XFB copies are the suspects** (new
+   evidence this session, all on the current build):
+   * The parity **still reproduces**: presents 4002/4004/4006 are byte-identical (`688b6a83`,
+     mean 39.9,43.8,49.2) while 4001/4003/4005/4007 all differ (mean 51.8,48.5,44.3). Note the
+     stale hash is **no longer `28089bce`** - it changed when format 1 (R8) was fixed, so the
+     stale image is produced *through* the R8 chain.
+   * The two parities run **different copy lists**. Odd (4001): 10 copies, formats 6 and 11,
+     including `640x448 -> 0x905C3000` and the XFB scanout. Even (4002): only 3 copies, all
+     `fmt=4` (RGB565) `320x224`, two of them to the **same** destination.
+   * The last copy of an odd frame is the **XFB scanout**:
+     `copy=9 dst=0x900997E0 640x448 xfb=1 fmt=0 srcavg=(43,47,50) dstavg=(40,46,48)`.
+     `0x900997E0` is the hardcoded VI fallback address in `host_runner.c:1294`, and `fmt=0` is
+     **R4** - so the guest's own final scanout copy is the format that is still unimplemented.
+     (It does not go through the `dst_supported = 0` path because `is_xfb_copy` forces `bpp = 2`
+     before the format switch, so it is written as 16bpp linear and prints no warning.)
+   * The eight `[EfbCopy] destination format 0 not implemented` lines are the **non-XFB** R4
+     destinations (`0x92001BC0`, `0x92005BC0`, `0x92006BC0`, `0x927BD440`, `0x927C1440`,
+     `0x927C2440`, `0x92887860`, `0x9288F860`). If the composite samples one of those, writing
+     RGBA8 into it leaves the sampled region stale - which is exactly what a *constant* wrong
+     image would look like.
+2. **Implement R4 (format 0) only as the exact inverse of our own decoder**, and be careful with
+   the width: `decode_gx_texture`'s `case 0` is 8x8 tiles, 32 bytes, high nibble = even texel, so
+   `byte_i = (gy%8)*4 + (gx%8)/2` inside `tile8 = (gy/8)*(dst_w/8) + gx/8`. **Do not** reuse the
+   existing `dst_w = pitch*8/bpp` line without checking it: that formula assumes a 4x4 tile row of
+   `dst_w*4*bpp` bytes, which is right for RGBA8 (`dst_w*16` = tiles*64) but gives `dst_w*4` for
+   `bpp = 1` where the real 4x4 R8 tile row is `dst_w*8`. Resolve that inconsistency *before*
+   touching R4 - the geometry is where a silent 2x error would live.
+3. **Fill `0x81858DE0` record slot 1** (see §8b) - still the state-machine-side blocker.
+4. **`fn_803E4478`** makes the phase-0 gate one-shot; whatever re-arms it is a later phase.
+5. Input plans must respect the **one-update edge**: press, release, press again.
+6. Unchanged: EFB format 1 done / 0 open, the title input race, the allocator cycle.
+
