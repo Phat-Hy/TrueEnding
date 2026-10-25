@@ -2487,6 +2487,13 @@ additive pass strength, (b) TEV `RASA`/alpha in the stages that write `dest=c2`,
 
 ### 5c.22 The whole host picture is one defect: the bloom chain is *quadratic* in the scene level
 
+**State at the end of this session:** `ad69293`, tree clean, build green, default with no `TLS_*`
+flags re-measured at MENU frame 1448 = `(124,235,255)` (unchanged). New flags this session:
+`TLS_EFB_CHAIN=<present>` (+ `TLS_EFB_CHAIN_DUMP=1`), `TLS_EFB_COPY_FMT=1`,
+`TLS_COMPOSITE_ZTEST=1` (refuted, no-op), `TLS_TEX_DUMP=0xADDR[,0xADDR]`, and `TLS_BATCH_PROBE`
+now also prints `max=`, `red=`, `bright=`. A run to frame 1452 takes ~140 s with
+`--frames 1452 --window --novsync` and exits by itself, so no taskkill is needed.
+
 #### 0. Session setup: the workspace was not writable, and it was not the DACL
 
 Every *existing* file under the workspace refused `open-for-write` with `Access is denied` while
