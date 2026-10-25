@@ -68,7 +68,7 @@ No direction, no A, no START reaches a handler. Find out why, or what the scene 
 
 What runs each frame: TLS_TRACE_FROM=4000 shows the sequence manager (0x80BB5CC0) and one task object
 0x81127AE0 (vt 0x8078A3D0) calling 0x80368280 — a large SCENE STATE MACHINE that advances a counter at
-+0x5744 and dispatches on a state word at +0x5538 through the jump table at 0x8079A268 (states 0..9).
++0x5744 and dispatches on a state word at +0x5538 through the jump table at **0x8078A268** (states 0..9).
 The task list stays at ONE game task for the whole loop, so no player/scene/battle task is ever created:
 
     [0] GameLoadTask  task=0x80AEDCF0 up=0x80570CFC +1c=(~0.85/frame) +34=1
@@ -81,6 +81,16 @@ task+0x2AC this session: a rate-limited dump on change, gated by a TLS_* flag, i
 decoded from the jump table first. `python tools/dol_xref.py dis <addr> [count]` reads any of these
 addresses; that tool is how this session's gates were quoted from the binary instead of guessed.
 
+>>> DONE in 5c.26 — read that section BEFORE redoing any of this. The instrument exists
+(`TLS_SCENE_SM_PROBE=1`) and it already answered the question: the machine is in outer state 0 and
+sub-phase 0, and exactly one operand of one gate is closed —
+`fn_801231D0(*(r13-26136) + 0x48C, 0) == 0`, forever. Two corrections to what follows:
+  * the outer table is 0x8078A268, not 0x8079A268 (see below);
+  * there is a SECOND table at 0x8078A22C dispatching on +0x54E4 (0..14) which is what
+    actually drives the Chapter-1 intro (phase 8 -> 0 at frame 3369).
+The live question is now: what is supposed to set that predicate, and which subsystem owns
+0x80C96D80 (`*(r13-26136)`) or 0x81103720 (`*(r13-25136)`)?
+
 =====================================================================
 3. THREE DEFECTS ALREADY QUANTIFIED (independent of §2)
 =====================================================================
@@ -92,19 +102,22 @@ addresses; that tool is how this session's gates were quoted from the binary ins
     The stale image is an older scene (purple crystal + creature): docs/evidence/parity_nopress_4002.png.
     With input pressed the parity swaps (odd frozen, even live) but the frozen content is the same
     picture. VISetNextFrameBuffer is NEVER called (zero [TLS VI] lines), so g_last_vi_framebuffer stays
-    0, the YUYV fallback keeps decoding the fixed 0x900997E0, and the GX path draws into the swap chain.
-    Fix this before more visual comparison work — it makes every single-frame judgement a coin flip.
-    Start from TLS_PRESENT_PROBE=1 (present count, guest frame, gx_vtx, take_shot per present).
+    0 and the YUYV fallback decodes the fixed 0x900997E0. **However — 5c.26 §5 refutes the second half
+    of that: gx_vtx is never 0 in the Chapter-1 loop (~44.3k on even presents, ~276k on odd), and
+    d3d11_present only decodes the guest XFB when gx_vtx_count == 0, so the software fallback is never
+    taken. The stale frame comes out of the GX path.** Start from TLS_PRESENT_PROBE=1 plus
+    TLS_PRESENT_WINDOW=<start>,<count> (prints every present — a 100-present cadence cannot show a
+    parity), and dump the drawn batch list / which back buffer is flipped, not the VI framebuffer.
 
 (b) [EfbCopy] destination format 0 / 1 not implemented, writing RGBA8 — the Chapter-1 chain hits it
-    (dst 0x91FF73A0, 0x91FFF3A0, 0x92001BC0, ...). The previous prompt claimed format 1 (R8) was
-    implemented; the runtime says otherwise, and the code agrees: the `bpp` switch in
-    d3d11_efb_copy_to_guest (recomp/gfx_d3d11.c, "case 6: case 12", "case 7", "case 8") has NO
-    `case 1`, and the writer's R8 branch is `format == 8` only. Format 1 == the same R8 as format 8,
-    so the fix is `case 1:` beside `case 8:` plus `(format == 8 || format == 1)` in the writer — and
-    format 0 is R4 (4bpp), which is genuinely a new layout. Validate with TLS_EFB_CHAIN (source avg vs
-    destination avg); there is no Chapter-1 reference frame, so judge against the copy's own source
-    rectangle, not against taste.
+    (dst 0x91FF73A0, 0x91FFF3A0, 0x92001BC0, ...). **FIXED for format 1 in 5c.26 §6** — format 1 is
+    R8, i.e. the same 32-byte 4x4 tile already implemented as 8, so `case 1: bpp = 1` plus
+    `(format == 8 || format == 1)` in the writer plus a `case 1` in `efb_dst_decode_texel`. Measured:
+    those eight lines are gone from the Chapter-1 log. Format 0 is R4 (8x8 tiles — a genuinely
+    different layout) and is deliberately still on the fallback, because there is no reference to
+    validate a nibble order against. Implement it only with a TLS_EFB_CHAIN check that decodes the
+    destination back (source avg vs destination avg; judge against the copy's own source rectangle,
+    not against taste).
 
 (c) THE TITLE INPUT FLOW HAS A RACE. The same plan produced 6->7 (Yes) at frame 1501 in 7 of 8 runs and
     6->4 (No) at 1282 in 1, with NO press at 1282; when it happens every later A cancels the re-raised
@@ -140,12 +153,22 @@ Mode 11 (0x805351F0) is input-gated: the A presses at 1600/1700/1800 are what wa
   * TLS_MODE25_PROBE=1 — mode-25 gate dump (task+0x2C8, *(obj+76), the +0x284 handle chain, +0x2B4),
     on change + every 120th update, plus every fn_800CB538 call for that handle.
   * TLS_PRESENT_PROBE=1 — per-present count / guest frame / gx_vtx / take_shot (100-frame cadence).
+  * TLS_SCENE_SM_PROBE=1 (5c.26) — the Chapter-1 scene machine: +0x5538 (outer state) and +0x54E4
+    (phase) on change, +0x5744/+0x5748/+0x4424, per-handler hit counters, and the two operands of the
+    phase-0 gate. This is the instrument §2 asked for; it is already written.
+  * TLS_PRESENT_WINDOW=<start>,<count> (5c.26) — print EVERY present in a window. A 100-present
+    cadence cannot show a parity defect; this can.
+  * tools/chain_run.ps1 (5c.26) — runs the chain and retries until `SetNextSequence('Game')` actually
+    appears. **Use it for every Chapter-1 measurement**: a run that died on the input race prints no
+    probe output at all and reads exactly like "the probe is broken".
   * TLS_DUMP_EVERY_G=<n> — capture cadence in GUEST FRAMES (TLS_DUMP_EVERY stays in presents; they
     diverge after the handover: ~2800 presents in 6000 frames).
   * TLS_SHOT_FRAMES matches a value against the present count OR the guest frame.
   * tools/shot_stats.py — mean/p50/hash per capture on one line. Use the HASH, not the mean: two
     different scenes can share a mean, which is exactly how the parity defect stayed hidden.
   * tools/dol_xref.py (existing) — dis / strings / addr. Use it instead of guessing at constants.
+    `dis` decodes `addi rD, rA, imm`; note `addi rD, 0, imm` is `li rD, imm` (a literal, NOT a copy
+    of r0) — reading that as a register copy sent this session down the wrong switch arm for a run.
 
 =====================================================================
 6. DO NOT RE-TEST (refuted, finished, or now optional)
@@ -166,6 +189,15 @@ Mode 11 (0x805351F0) is input-gated: the A presses at 1600/1700/1800 are what wa
 =====================================================================
 
   * Render the frame you are about to measure, and say which screen it is.
+  * Validate the RUN before interpreting the probe: check the log for `SetNextSequence('Game')`
+    (or use tools/chain_run.ps1). The title input race makes ~1 run in 8 stop at the dialog, and
+    such a run prints no Chapter-1 probe lines at all — which looks exactly like a broken probe.
+    It also makes the 1448 invariant check itself report the white bloom
+    (mean 120,234,255 instead of 102,188,205) about one run in four. Re-run before believing a
+    mismatch on either.
+  * Build fails with PermissionError on objects.rsp? Check `whoami /groups` for
+    "Mandatory Label\Low". It is the session TOKEN, not the file ACL, and it cannot be repaired
+    from inside a Low session — the shell has to run at Medium (5c.26 §0).
   * Dump CONSECUTIVE frames, not only strided ones — the parity defect above only shows at n, n+1.
   * Read a probe's field order from the CODE, not from its label (5c.24 §11 got the TEV map order
     backwards that way).

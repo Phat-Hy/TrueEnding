@@ -3617,3 +3617,216 @@ TLS_MODE25_PROBE=1 TLS_DUMP_EVERY_G=500 \
 5. **The allocator cycle** (5c.22 §3) - still untouched, still needs a visited-node ring inside
    `label_8022A204`.
 6. The save/ISFS models (commands 4/6/8/12) are now *optional*, not blocking.
+
+---
+
+### 5c.26 The Chapter-1 scene machine is state 0 / phase 0, and exactly one predicate is closed
+
+**State at the start of this session:** `c2788bd`, tree clean, build green, `src/` untouched. The
+work order was item 1, "put the instrument on `+0x5538`", with the table decoded from the DOL
+first. That was done, and it produced a single closed operand rather than a new mystery. Two
+things 5c.25 asserted turn out to be wrong and are corrected here (§1 and §5).
+
+#### 0. Two operational traps, both of which cost runs
+
+* **The build failure is the *token*, not the DACL.** `build-runner` died with
+  `PermissionError: objects.rsp` and 5c.24 §0's repair (`icacls /setintegritylevel L`) failed
+  with `Access is denied` *even with the DSH file policy at full access*, because the session
+  token itself was `Mandatory Label\Low Mandatory Level` and relabelling needs WRITE_OWNER the
+  Low token does not have. Raising the policy re-launched the shell at **Medium** and both files
+  became writable with no relabel at all. So the check is `whoami /groups | findstr "Mandatory
+  Label"`, and the fix is the token the session runs under - not the file's ACL. The two
+  unlabelled artifacts (`objects.rsp`, `gx_shaders_d3d11.inl`) are still unlabelled; they are
+  harmless at Medium and still a trap for any future Low-token session.
+* **Every Chapter-1 run must be validated before its probe output means anything.** The title
+  input race (5c.25 §4d) makes roughly one run in eight die at the save dialog, and the failure
+  signature is *indistinguishable* from "the new probe never fired": no `[TLS SceneSM]` lines at
+  all, because the game never leaves the title. Two runs were discarded this way before the log
+  was checked for `SetNextSequence('Game')`. **`tools/chain_run.ps1` exists for this**: it runs
+  the chain and loops until that line appears, then hands back the log. Use it for every
+  Chapter-1 measurement.
+  The same race makes the **1448 invariant check itself** flaky: one run in roughly four returns
+  `mean (120,234,255)` - the full white bloom of §4d - instead of `(102,188,205)`. Re-run before
+  believing a mismatch.
+
+#### 1. The outer jump table in 5c.25 is at the wrong address
+
+5c.25 records it as `0x8079A268`. The words there are float data (`0x3CADB61C`, `0x3C4A7935`,
+...) and disassemble as `lis r5, 0xB61C` nonsense. The DOL actually builds the table as
+
+```
+0x80368314  lis  r4, 0x8079
+0x8036831C  addi r4, r4, -23960      -> 0x8078A268
+0x80368320  lwzx r4, r4, r0
+0x80368324  mtlr r4
+```
+
+Decoded entries (`cmplwi r0, 9` at `0x8036830C` means states 0..9, anything else to `0x8036B420`):
+
+| state | target | | state | target |
+|---|---|---|---|---|
+| 0 | `0x8036A10C` (= `b 0x8036B420`) | | 5 | `0x80368DB8` |
+| 1 | `0x8036832C` | | 6 | `0x803690EC` |
+| 2 | `0x8036881C` | | 7 | `0x8036919C` |
+| 3 | `0x80368864` | | 8 | `0x803691EC` |
+| 4 | `0x80368B94` | | 9 | `0x80369454` |
+
+**State 0 never goes through the table.** `0x803682F0 cmpwi r5, 0` / `0x80368304 beq 0x8036A110`
+takes it directly, so its real body starts at `0x8036A110` and `table[0]` is a dead stub. That
+matters because it is why "instrumenting the handler entries" alone sees nothing while the game
+sits in state 0.
+
+#### 2. There is a *second* jump table, and it is the one that drives the Chapter-1 intro
+
+State 0's own common tail dispatches on `+0x54E4`, not `+0x5538`:
+
+```
+0x8036A444  lwz r0, 21732(r28)              ; +0x54E4
+0x8036A448  cmplwi r0, 0x000E               ; 0..14
+0x8036A450  lis r3, 0x8079
+0x8036A458  addi r3, r3, -24020             -> 0x8078A22C
+0x8036A45C  lwzx; mtlr; blr
+```
+
+| phase | target | | phase | target |
+|---|---|---|---|---|
+| 0 | `0x8036A554` | | 7 | `0x8036A940` |
+| 1 | `0x8036A468` | | 8 | `0x8036AAB8` |
+| 2,3,4 | `0x8036B198` (tail) | | 9 | `0x8036B01C` |
+| 5 | `0x8036A484` | | 10,11 | `0x8036B058` |
+| 6 | `0x8036A8E8` | | 12 | `0x8036B110` |
+| | | | 13 | `0x8036B134` |
+| | | | 14 | `0x8036AA44` |
+
+Phase 1 (`0x8036A468`) is the bridge out: it clears `+0x54F0`, and **`GameTask::Init`
+(`0x8036F5D8`) sets the outer state to `*(task+0x54F0) + 1`**. So "outer state 0 -> playable" is
+reached through *phase 1 re-initialising the task*, not by a direct store to `+0x5538`. A
+whole-DOL scan for `stw ..., 21816(rX)` finds ten writers, all inside states 1..9, plus Init -
+none inside state 0. That is consistent, and it means looking for a missing `+0x5538` store is
+looking in the wrong place.
+
+#### 3. Measured on a validated 4200-frame run
+
+```
+f=2115  GameTask::Update first entered, obj=0x81127AE0, outer state=0, phase=0, +0x54F0=2
+f=2118  PHASE 0 -> 8                          <- the Chapter-1 intro starts
+f=3369  g2+0xD8C (g2 = *(r13-25136) = 0x81103720) flips 0 -> 1
+f=3369  PHASE 8 -> 0                          <- the intro ends and hands back to phase 0
+f=3369+ the gate is evaluated on every GameTask::Update (every 2nd frame) and
+        the predicate is 0x00000000 every single time (41 samples, 3369..3607)
+```
+
+The outer state stays **0** for the whole run; at frame 5964 the counter is 1919 and the state is
+still 0. `GameTask::Update` runs once per *two* frames in this stretch, which is also why the
+counter advances 0.5 per frame.
+
+#### 4. The gate, and which operand is closed
+
+```
+0x8036A554  g2 = *(r13 - 25136)
+0x8036A558  if (g2->[3468] != 1)              goto 0x8036A5C8   ; skips the whole success path
+0x8036A564  if (fn_801231D0(*(r13-26136) + 0x48C, 0) == 0) goto 0x8036A5C8
+0x8036A5BC  fn_803E4478(g2);  -> tail
+```
+
+* `g2->[3468]` **is 1** from frame 3369 onwards. This half of the gate is satisfied.
+* `fn_801231D0(singleton+0x48C, 0)` **returns 0 forever**. This is the one closed operand.
+* `fn_803E4478` is **never called** in any run - the success path is never entered.
+* **`addi r4, r0, 0` at `0x8036A568` is `li r4, 0`, not a register copy.** The command argument
+  is **0**, not 1. Reading it as 1 sends the next reader to the wrong arm of the dispatcher below
+  (and did, this session, until the call was instrumented).
+* `fn_801231D0` is a 44-command dispatcher: `addi r0, r30, -4; cmplwi r0, 0x2B` with the table
+  at `0x8078A300`, so args 4..47 dispatch and everything else (including 0) falls to
+  `0x801237A0`, which is `fn_80121F08(fn_80122C70(obj, 0), 1)`.
+* The queried sub-object `*(r13-26136) + 0x48C` = **`0x80C9720C`** is almost entirely zero:
+  words 0..2 = 0, word 3 = `0xBFE17944`, word 4 = `0xFFFFFFFF`, the rest 0. It is not a table,
+  so `fn_80122C70` is not doing a lookup that could fail - it is deriving something from a
+  near-empty struct.
+* The two singletons for the next session: `*(r13-26136)` is a **0x1144-byte** object created
+  lazily by the getter at `0x80185AD4` (ctor `0x80185B2C`, allocation at `0x80185B08`);
+  `*(r13-25136)` is a **0x28B0-byte** object (getter `0x803CE930`, allocation `0x803CE950`,
+  ctor `0x803CE980`). Neither has a vtable - both are plain data.
+* Not a timeout: state 0 also tests `ctr >= 0x5460` (21600 entries), which at 0.5 entries per
+  frame is ~43200 frames. That is a safety net, not the intended path.
+
+**So the next question is a single, specific one**: what is supposed to make
+`fn_80121F08(fn_80122C70(0x80C9720C, 0), 1)` become non-zero, and which subsystem owns
+`0x80C96D80`? Naming either singleton answers it. Do not try to satisfy the gate by writing the
+predicate.
+
+#### 5. The alternate-frame staleness is **not** the YUYV fallback (correction to 5c.25 §4b)
+
+5c.25 §4b attributes the stale even frames to "`VISetNextFrameBuffer` is never called, so the
+YUYV fallback always decodes `0x900997E0`". The second half is refuted:
+
+```
+TLS_PRESENT_PROBE=1 TLS_PRESENT_WINDOW=4000,16 on a validated chain run
+count=4000 gx_vtx=44313    count=4001 gx_vtx=276471
+count=4002 gx_vtx=44319    count=4003 gx_vtx=275922
+count=4004 gx_vtx=44868    count=4005 gx_vtx=276471   ... (even ~44.3k, odd ~276k)
+```
+
+`gx_vtx` is **never 0**, and `d3d11_present` only decodes the guest XFB in the
+`gx_vtx_count == 0` branch, so that branch is never taken in the Chapter-1 loop. The stale image
+is produced **by the GX path**, not by the software fallback. `VISetNextFrameBuffer` still being
+absent is a separate (real) gap, but it is not what puts an old picture on screen.
+
+What is now known, and what is not: the parity correlates with the vertex count (even ~44.3k,
+odd ~276k, and the odd count is nearly constant while the even one varies), and there is exactly
+one `gfx_backend_present` call per runner frame (`host_runner.c:1297`, one per loop iteration).
+The next instrument is a consecutive-present dump of the drawn batch list plus which back buffer
+is flipped - not the VI framebuffer.
+
+#### 6. EFB copy destination format 1 is fixed (5c.25 §4c)
+
+Format 1 **is R8** - the same 32-byte 4x4 tile that was already implemented as format 8. Three
+sites now name it: the `bpp` switch (`case 1: bpp = 1`), the tile writer
+(`format == 8 || format == 1`), and `efb_dst_decode_texel` (the chain probe decodes the
+destination back, so it has to agree or the probe lies). Measured: the eight
+`[EfbCopy] destination format 1 not implemented, writing RGBA8` lines in the Chapter-1 chain are
+gone.
+
+Format **0** (R4) is deliberately left on the documented fallback. R4 uses 8x8 tiles, there is
+still no Chapter-1 reference to validate a nibble order against, and a wrong-but-plausible
+packing is exactly the silent error this file keeps warning about. Implement it only together
+with a `TLS_EFB_CHAIN` check that decodes the destination back and compares it with the copy's
+own source rectangle.
+
+#### 7. Invariant
+
+3-A plan (`600-612:A,900-912:A,1200-1212:A`) at present 1448 is
+`mean (102,188,205) p10 69 p50 203 p90 203 p99 206`, verified three times this session,
+including as the last action after the EFB change. All the changes are probes or EFB-format
+writes; nothing touches the title path.
+
+#### 8. New instruments this session
+
+* `TLS_SCENE_SM_PROBE=1` - the Chapter-1 scene machine: `+0x5538` on change (outer state),
+  `+0x54E4` on change (phase), `+0x5744`/`+0x5748`/`+0x4424`, the per-handler hit counters, the
+  two gate operands, and the `fn_801231D0` call/return points. One line per change plus a
+  heartbeat; inert unless set.
+* `TLS_PRESENT_WINDOW=<start>,<count>` - print **every** present in a window. The existing
+  100-present cadence cannot show a parity defect; this can.
+* `tools/chain_run.ps1` - run the chain, retry until `SetNextSequence('Game')` appears, report
+  the dialog outcome. Use it instead of trusting a single run.
+
+#### 9. What this does *not* change
+
+* The chain still runs end to end (title -> save dialog -> Yes -> create -> mode 25 -> `'Game'`
+  -> `GameLoadTask` -> Chapter-1 card -> the intro loop).
+* The intro still loops with period 600 frames and still never creates a player/scene task. What
+  is new is *where* it stops: outer state 0, phase 0, one closed predicate - not "some state
+  machine with an unidentified condition".
+* Mode 25, the save dialog, and the HLE stubs remain settled; nothing here revisits them.
+
+#### 10. Work order, revised
+
+1. **Name the two singletons** (`0x80C96D80` / `*(r13-26136)`, `0x81103720` / `*(r13-25136)`) and
+   find what is supposed to make `fn_80121F08(fn_80122C70(0x80C9720C, 0), 1)` non-zero. That is
+   the whole of the Chapter-1 blocker now.
+2. **The alternate-frame parity** - now known *not* to be the YUYV fallback; it correlates with
+   the vertex count and needs the batch-list/back-buffer dump of §5.
+3. **EFB copy format 0 (R4)** - only with the chain-probe validation described in §6.
+4. **The title input race** - still the reason one run in eight is wasted, and still capable of
+   making the invariant check itself report the wrong picture.
+5. The allocator cycle (5c.22 §3), and the optional save/ISFS models - both unchanged.
