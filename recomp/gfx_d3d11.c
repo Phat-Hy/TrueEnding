@@ -774,8 +774,8 @@ static bool s_last_tex_all_zero = false;
  * already blown out?", which is the open question in handover 5c.16 item 4.2. */
 static uint32_t* s_probe_tex_buf = NULL;
 static uint32_t s_probe_tex_cap = 0;
-static bool probe_texture_avg(const GxTextureUnit* tu, unsigned* out_r, unsigned* out_g, unsigned* out_b) {
-    *out_r = *out_g = *out_b = 0;
+static bool probe_texture_avg(const GxTextureUnit* tu, unsigned* out_r, unsigned* out_g, unsigned* out_b, unsigned* out_a) {
+    *out_r = *out_g = *out_b = *out_a = 0;
     if (!tu || tu->guest_addr == 0 || tu->width == 0 || tu->height == 0) return false;
     const void* data = host_resolve_gx_guest_addr(tu->guest_addr);
     if (!data) return false;
@@ -789,15 +789,17 @@ static bool probe_texture_avg(const GxTextureUnit* tu, unsigned* out_r, unsigned
     }
     decode_gx_texture((const uint8_t*)data, tu->width, tu->height, tu->format,
                       s_probe_tex_buf, tu->tlut_addr, tu->tlut_format);
-    uint64_t sr = 0, sg = 0, sb = 0;
+    uint64_t sr = 0, sg = 0, sb = 0, sa = 0;
     uint32_t n = tu->width * tu->height;
     for (uint32_t i = 0; i < n; i++) {
         uint32_t p = s_probe_tex_buf[i];
         sr += p & 0xFF; sg += (p >> 8) & 0xFF; sb += (p >> 16) & 0xFF;
+        sa += (p >> 24) & 0xFF;
     }
     *out_r = (unsigned)(sr / n);
     *out_g = (unsigned)(sg / n);
     *out_b = (unsigned)(sb / n);
+    *out_a = (unsigned)(sa / n);
     return true;
 }
 
@@ -1165,9 +1167,25 @@ static ID3D11BlendState* get_or_create_blend_state(bool blend_enable, uint8_t sr
     desc.RenderTarget[0].SrcBlend = map_gx_src_blend_factor(src_factor);
     desc.RenderTarget[0].DestBlend = map_gx_dst_blend_factor(dst_factor);
     desc.RenderTarget[0].BlendOp = subtract ? D3D11_BLEND_OP_REV_SUBTRACT : D3D11_BLEND_OP_ADD;
-    desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
-    desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
-    desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+    /* GX applies the *same* CMODE0 factors to the alpha channel as to RGB - there is
+     * no separate alpha blend in the GameCube/Wii pixel pipeline. The host has always
+     * hardcoded ONE / INV_SRC_ALPHA here, which keeps the EFB alpha pinned at 1 for
+     * every blended batch. That matters far beyond the alpha channel: the composite
+     * tail's additive passes are SRCALPHA/ONE, so their strength is `src.rgb * src.a`,
+     * and src.a is the EFB alpha carried through the EFB copies. TLS_GX_ALPHA_BLEND=1
+     * makes the alpha channel follow the guest's factors so the difference can be
+     * measured instead of argued (handover 5c.16 item 8). */
+    static int s_gx_alpha_blend = -1;
+    if (s_gx_alpha_blend < 0) s_gx_alpha_blend = getenv("TLS_GX_ALPHA_BLEND") ? 1 : 0;
+    if (s_gx_alpha_blend) {
+        desc.RenderTarget[0].SrcBlendAlpha = map_gx_src_blend_factor(src_factor);
+        desc.RenderTarget[0].DestBlendAlpha = map_gx_dst_blend_factor(dst_factor);
+        desc.RenderTarget[0].BlendOpAlpha = subtract ? D3D11_BLEND_OP_REV_SUBTRACT : D3D11_BLEND_OP_ADD;
+    } else {
+        desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+        desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
+        desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+    }
     desc.RenderTarget[0].RenderTargetWriteMask = D3D11_COLOR_WRITE_ENABLE_ALL;
 
     ID3D11BlendState* state = NULL;
@@ -2140,14 +2158,29 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                                    batch->has_texture1 ? batch->tex1.guest_addr : 0u,
                                    batch->blend_enable, batch->src_factor, batch->dst_factor,
                                    batch->texcoord_mask);
+                            {
+                                /* Screen-space extent of the batch (NDC). The composite tail
+                                 * is supposed to be a handful of *small* blur quads; if one of
+                                 * them covers the screen, the glow's size is a geometry bug,
+                                 * not a blend bug (handover 5c.16). */
+                                float mnx2 = 1e9f, mxx2 = -1e9f, mny2 = 1e9f, mxy2 = -1e9f;
+                                uint32_t vo2 = batch->vertex_offset;
+                                for (uint32_t vi = 0; vi < batch->vertex_count; vi++) {
+                                    float x = gx_vtx[vo2 + vi].x, y = gx_vtx[vo2 + vi].y;
+                                    if (x < mnx2) mnx2 = x; if (x > mxx2) mxx2 = x;
+                                    if (y < mny2) mny2 = y; if (y > mxy2) mxy2 = y;
+                                }
+                                printf("   [bounds] ndc=(%.2f,%.2f)-(%.2f,%.2f) persp=%d\n",
+                                       mnx2, mny2, mxx2, mxy2, batch->is_perspective);
+                            }
                             for (int m = 0; m < 8; m++) {
                                 if (!(batch->tev_texmap_mask & (1u << m))) continue;
-                                unsigned tr, tg, tb;
-                                if (probe_texture_avg(&batch->tev_texmap[m], &tr, &tg, &tb)) {
-                                    printf("   [tex] map%d = 0x%08X %ux%u fmt=%u avg=(%u,%u,%u)\n",
+                                unsigned tr, tg, tb, ta;
+                                if (probe_texture_avg(&batch->tev_texmap[m], &tr, &tg, &tb, &ta)) {
+                                    printf("   [tex] map%d = 0x%08X %ux%u fmt=%u avg=(%u,%u,%u) a=%u\n",
                                            m, batch->tev_texmap[m].guest_addr,
                                            batch->tev_texmap[m].width, batch->tev_texmap[m].height,
-                                           batch->tev_texmap[m].format, tr, tg, tb);
+                                           batch->tev_texmap[m].format, tr, tg, tb, ta);
                                 } else {
                                     printf("   [tex] map%d = 0x%08X <unavailable>\n", m,
                                            batch->tev_texmap[m].guest_addr);

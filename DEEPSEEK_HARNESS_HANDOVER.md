@@ -1877,3 +1877,58 @@ colour, and a wrong alpha factor there would pin it at 255).
 blend-factor work". **That is wrong** (§8). The correct order is: (a) report the alpha of every
 sampled texture and of the EFB copies, (b) check the blend state's alpha factors, (c) only then
 look at texcoord generation.
+
+#### 10. EFB alpha, GX alpha blending, texcoord aliasing and quad geometry: all eliminated
+
+Four more hypotheses measured and killed. The chain's escalation is now fully accounted for by three
+specific passes, and what is left is a *reference* question, not a host bug that can be found from
+inside the pipeline.
+
+**(a) Every texture the tail samples is alpha = 255.** `probe_texture_avg()` now reports alpha:
+`[tex] map0 = 0x9038D1C0 320x224 fmt=6 avg=(106,107,102) a=255`, and likewise for every EFB-copy
+destination, the 256x256 I8 mask (`a=238`) and the UI atlases. So the additive passes
+(`s=4 d=1` = SRCALPHA/ONE, strength `src.rgb * src.a`) run at full strength because `src.a` really
+is 1.0 - not because the host loses the alpha.
+
+**(b) The hardcoded alpha blend is wrong but is not the cause.** `get_or_create_blend_state` set
+`SrcBlendAlpha = ONE, DestBlendAlpha = INV_SRC_ALPHA` for every state, while GX applies the *same*
+CMODE0 factors to alpha as to RGB. New `TLS_GX_ALPHA_BLEND=1` makes alpha follow the guest's
+factors. Measured on MENU 1448: `(93,93,93)` with it, `(90,90,90)` without - no difference, because
+the alpha saturates at 255 under both. The flag stays (it is the more correct behaviour and costs
+nothing), but it is **not** the bloom.
+
+**(c) No batch supplies `TEX1..TEX7`** - see §8. Texcoord aliasing is therefore a no-op for these
+passes (all five taps of a 5-stage blur read the same texel and their konstant weights sum to 1.0).
+
+**(d) The tail quads are genuinely fullscreen.** `TLS_TEV_PROBE` now prints each batch's NDC extent:
+`b32..b51 all ndc=(-1.00,-1.00)-(1.00,1.00) persp=0`. So the ellipse is not a small quad blown up.
+
+**So here is the whole escalation, with the passes that cause it named:**
+
+| batch | GX blend | what it does | frame after |
+|---|---|---|---|
+| b32/b33 | replace | put the scene copy back | 42 |
+| b34 | `SRCCLR/ZERO` -> `dst = src*src` | the bright pass: squares the frame, darks -> 0 | **0** |
+| b35/b36 | `SRCALPHA/ONE` add | add the squared (black) frame's blur | 0 |
+| b37 | **replace** | **throw the squared frame away** and put back a *160x112 copy taken before b34* (avg 34) | 34 |
+| b38 | `ONE/ONE` -> `dst = src + dst` | **exactly doubles the frame** | 68 |
+| b39 | add 320x224 (avg 106) | | 106+ |
+| b40 | add 320x224 (avg 178) | | 178+ |
+| b41 | add lerp(640x448, 320x224, 256x256 white mask) | the mask is `a=238`/rgb 238, so ~93% of the 320x224 level is blended in | 202 |
+| b47 | add 640x448 (255) | | 254 |
+| b51 | `SRCALPHA/INVSRCALPHA` | drags the whole screen back to a flat level | ~90 |
+
+`b37` restoring an un-squared copy and `b38` doubling it is what puts the chain back into the bright
+regime that `b34` had just crushed; every additive pass after that is adding a copy of a frame that
+is already at 1.0.
+
+**Why this cannot be settled from inside the pipeline.** If the guest really issues b37's `replace`
+and b38's `ONE/ONE` at those vertex marks, then GX hardware reaches the same 1.0 and the displayed
+frame really is this white ellipse - which would mean the host is faithful and the *attract phase*
+we are comparing against is simply a bright flash. If it does not, the copy/draw interleaving is
+still wrong in a way that the vertex-mark replay cannot express (e.g. GX services an EFB copy at the
+*end* of the current display list, not at the command). Those two readings differ only in what
+hardware does with these exact commands, so the next step is a **Dolphin reference frame** for the
+same moment - `Run_TheLastStory_In_Dolphin.bat` exists, and `%APPDATA%\Dolphin Emulator\Logs\
+dolphin.log` already holds a reference run. Compare the same attract/MENU moment before changing any
+default; everything else here has now been measured.
