@@ -3742,17 +3742,34 @@ counter advances 0.5 per frame.
   words 0..2 = 0, word 3 = `0xBFE17944`, word 4 = `0xFFFFFFFF`, the rest 0. It is not a table,
   so `fn_80122C70` is not doing a lookup that could fail - it is deriving something from a
   near-empty struct.
+* **The predicate is an event-flag test, and the flag is `4`.** Followed to the leaf:
+  `fn_801231D0(obj, 0)` -> `fn_80122C70(obj, 0)` (reads the byte at `obj+20+cmd`; it is 0, so it
+  falls through to the 54-entry table at `0x8078A228`) -> `fn_80121F08(code, 1)`, whose tail
+  (0x80121FA4..0x80121FBC) is `return fn_800A555C(*(r13-26448), 0, code) & 1`. Measured at
+  `0x80121FB4` on a validated run: **`code = 4`, `set? = 0`**, on every sample from frame 3380 on.
+  So the Chapter-1 blocker in one sentence: *the scene is waiting for event flag 4, and nothing
+  sets it.* (The earlier branches of `fn_80121F08` also test `gC->[0x54E4]`, `gD->[2672]` and
+  `gB->[72]` - the same phase word of another object - but on this run they do not short-circuit;
+  the answer comes from the flag query.)
 * The two singletons for the next session: `*(r13-26136)` is a **0x1144-byte** object created
-  lazily by the getter at `0x80185AD4` (ctor `0x80185B2C`, allocation at `0x80185B08`);
-  `*(r13-25136)` is a **0x28B0-byte** object (getter `0x803CE930`, allocation `0x803CE950`,
-  ctor `0x803CE980`). Neither has a vtable - both are plain data.
+  lazily by the getter at `0x80185AD4` (ctor `0x80185B2C`, allocation `0x80185B08`, only caller
+  `0x8047AA24` inside an engine startup chain, and the filename pool next to the allocation tag
+  at `0x807482A8` reads `07.efp`); `*(r13-25136)` is a **0x28B0-byte** object (getter
+  `0x803CE930`, allocation `0x803CE950`, ctor `0x803CE980`). Neither has a vtable - both are
+  plain data.
 * Not a timeout: state 0 also tests `ctr >= 0x5460` (21600 entries), which at 0.5 entries per
   frame is ~43200 frames. That is a safety net, not the intended path.
+* **Instrumentation caveat learned the hard way**: `dolrecomp_dispatch_replacement` is only
+  reached at *call* boundaries (a `bl`/`blr` return or a cross-chunk pc). A mid-function label
+  reached by a direct branch or fall-through is **never** dispatched, so adding a `case` for it
+  silently does nothing. That is why `0x801237AC` and `0x80121FA4` never printed while
+  `0x801237B4` and `0x80121FB4` did (both are `bl` return points). Put probes on return
+  addresses, on jump-table targets (reached by `blr`), or on function entries.
 
-**So the next question is a single, specific one**: what is supposed to make
-`fn_80121F08(fn_80122C70(0x80C9720C, 0), 1)` become non-zero, and which subsystem owns
-`0x80C96D80`? Naming either singleton answers it. Do not try to satisfy the gate by writing the
-predicate.
+**So the next question is a single, specific one**: what is supposed to set **event flag 4**, and
+why does it never get set? The counterpart of `fn_800A555C(*(r13-26448), 0, id)` is where to look
+(same table, a "set" operation), and the intro script - phase 8, `0x8036AAB8` - is the obvious
+producer. Do not satisfy the gate by writing the predicate or the flag.
 
 #### 5. The alternate-frame staleness is **not** the YUYV fallback (correction to 5c.25 §4b)
 
@@ -3821,9 +3838,10 @@ writes; nothing touches the title path.
 
 #### 10. Work order, revised
 
-1. **Name the two singletons** (`0x80C96D80` / `*(r13-26136)`, `0x81103720` / `*(r13-25136)`) and
-   find what is supposed to make `fn_80121F08(fn_80122C70(0x80C9720C, 0), 1)` non-zero. That is
-   the whole of the Chapter-1 blocker now.
+1. **Set (or find who should set) event flag 4.** The Chapter-1 scene machine is in outer state 0,
+   phase 0, and its only closed operand is `fn_800A555C(*(r13-26448), 0, 4) == 0` - i.e. "flag 4 is
+   not set" (measured, §4). Find the flag-setter alongside `fn_800A555C` and the phase-8 script
+   (`0x8036AAB8`) that should call it. That is the whole of the blocker now.
 2. **The alternate-frame parity** - now known *not* to be the YUYV fallback; it correlates with
    the vertex count and needs the batch-list/back-buffer dump of §5.
 3. **EFB copy format 0 (R4)** - only with the chain-probe validation described in §6.

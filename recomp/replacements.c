@@ -4790,6 +4790,44 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             }
             return 0;
         }
+        /* fn_80121F08(code, 1) is the leaf that answers the phase-0 gate. Its
+         * structure (0x80121F08..0x80121FC8):
+         *   if (code == 33)            return 0;
+         *   if (arg2 == 0)             goto ALLOW;
+         *   gC = *(r13-25232); if (!gC || gC->[0x54E4] != 0) goto ZERO;
+         *   gD = *(r13-23752); if (!gD || gD->[2672] != 0)   goto ZERO;
+         *   gB = *(r13-24096); r3 = gB ? gB->[72] : 0; if (!r3) goto ZERO;
+         *   r0 = (fn_8017C974(r3) == 1);
+         *   if (r0) return 0;                       (0x80121F9C)
+         * ZERO: r0 = 0;
+         * ALLOW: r3 = fn_800A555C(*(r13-26448), 0, code);   (0x80121FB0)
+         *        return r3 & 1;
+         * so in practice the answer is "is flag `code` set in *(r13-26448)", and
+         * `code` comes from fn_80122C70(singleton+0x48C, 0). Print both. */
+        case 0x80121FA4: {
+            if (tls_scene_sm_probe_on() && g_ssm_g0_call) {
+                extern int g_runner_current_frame;
+                static int s_n = 0;
+                u32 tab = mem_read32(ctx, ctx->gpr[13] - 26448u);
+                if (++s_n <= 6)
+                    printf("[TLS SceneSM] f=%d FLAGQ code=%u (r31=0x%08X) table=0x%08X #%d\n",
+                           g_runner_current_frame, ctx->gpr[31], ctx->gpr[31], tab, s_n);
+                fflush(stdout);
+            }
+            return 0;
+        }
+        case 0x80121FB4: {
+            if (tls_scene_sm_probe_on() && g_ssm_g0_call) {
+                extern int g_runner_current_frame;
+                static int s_n = 0;
+                if (++s_n <= 6)
+                    printf("[TLS SceneSM] f=%d FLAGQ code=%u (r31=0x%08X) set?=%u #%d\n",
+                           g_runner_current_frame, ctx->gpr[31], ctx->gpr[31],
+                           ctx->gpr[3] & 1u, s_n);
+                fflush(stdout);
+            }
+            return 0;
+        }
         case 0x803E4478: {
             if (tls_scene_sm_probe_on()) {
                 g_ssm_call_3e44++;
