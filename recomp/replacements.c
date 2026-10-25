@@ -2021,6 +2021,168 @@ static u32 g_m25_task = 0;        /* task pointer seen in mode 25 (for gate B) *
 static u32 g_m25_cb_n = 0;        /* fn_800CB538 calls seen for that handle */
 static int g_m25_seen = 0;
 
+/* ---- Chapter-1 scene state machine probe (handover 5c.26) -------------------
+ * `GameTask::Update` (0x80368280) is entered with r3 = the game task object.
+ * Its state word is +0x5538 (21816): compared against 9 at 0x8036830C and
+ * dispatched through a jump table built as
+ *
+ *     0x80368314  lis  r4, 0x8079
+ *     0x8036831C  addi r4, r4, -23960      -> 0x8078A268
+ *
+ * NOTE: 5c.25 recorded that table as 0x8079A268; the words at 0x8079A268 are
+ * float data (0x3CADB61C, ...) and decode as nonsense instructions. The real
+ * table entries, read from the DOL, are
+ *
+ *   0 -> 0x8036A10C (just `b 0x8036B420`; state 0 itself is taken by the
+ *                    `beq` at 0x80368304, which lands on 0x8036A110)
+ *   1 -> 0x8036832C   2 -> 0x8036881C   3 -> 0x80368864   4 -> 0x80368B94
+ *   5 -> 0x80368DB8   6 -> 0x803690EC   7 -> 0x8036919C   8 -> 0x803691EC
+ *   9 -> 0x80369454   >9 -> 0x8036B420 (the shared tail)
+ *
+ * +0x5744 is the frame counter the function increments first, +0x5748 a
+ * countdown it decrements, and +0x4424 a 15-frame clock derived from +0x5744
+ * by the two `mulhw` steps at 0x803682EC..0x803682FC.
+ *
+ * `blr` leaves the chunk through dolrecomp_call, so every jump-table entry is
+ * seen by this dispatcher exactly once per dispatch - which is what the hit
+ * counters below count.
+ *
+ * TLS_SCENE_SM_PROBE=1 logs the state word on every change (with the operands
+ * the state's own handler will test) and a heartbeat every 120 entries. Inert
+ * unless set. */
+static int tls_scene_sm_probe_on(void) {
+    static int s = -1;
+    if (s < 0) s = getenv("TLS_SCENE_SM_PROBE") ? 1 : 0;
+    return s;
+}
+static u32 g_ssm_task = 0;
+static u32 g_ssm_state = 0xFFFFFFFFu;
+static u32 g_ssm_phase = 0xFFFFFFFFu;
+static u32 g_ssm_hits[10];
+static long g_ssm_entries = 0;
+static int g_ssm_call_1231 = 0;
+static int g_ssm_call_3e44 = 0;
+static int g_ssm_g0_call = 0;
+static u32 g_ssm_g2w = 0xFFFFFFFFu;
+
+/* Chapter-1 sub-phase machine (a SECOND jump table, not the +0x5538 one).
+ * State 0's common tail at 0x8036A444 dispatches on +0x54E4:
+ *     0x8036A450  lis r3, 0x8079
+ *     0x8036A458  addi r3, r3, -24020        -> 0x8078A22C
+ *     0x8036A45C  lwzx; mtlr; blr
+ * decode (0..14): 0->8036A554 1->8036A468 2,3,4->8036B198(tail) 5->8036A484
+ * 6->8036A8E8 7->8036A940 8->8036AAB8 9->8036B01C 10,11->8036B058
+ * 12->8036B110 13->8036B134 14->8036AA44
+ * Phase 1 (0x8036A468) is the one that clears +0x54F0, and GameTask::Init
+ * (0x8036F5D8) sets the OUTER state to *(task+0x54F0)+1 - so phase 1 is the
+ * bridge from "outer state 0, no game" to the playable states. */
+static const u32 g_ssm_phase_entry[15] = {
+    0x8036A554u, 0x8036A468u, 0x8036B198u, 0x8036B198u, 0x8036B198u,
+    0x8036A484u, 0x8036A8E8u, 0x8036A940u, 0x8036AAB8u, 0x8036B01Cu,
+    0x8036B058u, 0x8036B058u, 0x8036B110u, 0x8036B134u, 0x8036AA44u
+};
+
+static void tls_scene_sm_hit(int idx) {
+    if (!tls_scene_sm_probe_on()) return;
+    if (idx >= 0 && idx < 10) g_ssm_hits[idx]++;
+}
+
+static void tls_scene_sm_enter(CPUState* ctx, u32 task) {
+    extern int g_runner_current_frame;
+    u32 st  = mem_read32(ctx, task + 0x5538);
+    u32 ctr = mem_read32(ctx, task + 0x5744);
+    u32 cd  = mem_read32(ctx, task + 0x5748);
+    u32 clk = mem_read32(ctx, task + 0x4424);
+    int changed = (st != g_ssm_state || task != g_ssm_task);
+    u32 ph = mem_read32(ctx, task + 0x54E4);
+    u32 g2v = mem_read32(ctx, ctx->gpr[13] - 25136u);
+    u32 g2ok_v = (g2v >= 0x80000000u && g2v < 0x83000000u) ? g2v : 0;
+    u32 g2_3468 = g2ok_v ? mem_read32(ctx, g2ok_v + 3468) : 0;
+    g_ssm_entries++;
+    if (g2_3468 != g_ssm_g2w) {
+        printf("[TLS SceneSM] f=%d g2_3468 %u -> %u (phase=%u state=%u)\n",
+               g_runner_current_frame, g_ssm_g2w, g2_3468, ph, st);
+        fflush(stdout);
+        g_ssm_g2w = g2_3468;
+    }
+    if (ph != g_ssm_phase) {
+        printf("[TLS SceneSM] f=%d PHASE %d -> %u (outer state=%u ctr=%u f54e8=%u f54ec=%u f54f0=0x%08X)\n",
+               g_runner_current_frame, (int)g_ssm_phase, ph, st, ctr,
+               mem_read32(ctx, task + 0x54E8), mem_read32(ctx, task + 0x54EC),
+               mem_read32(ctx, task + 0x54F0));
+        fflush(stdout);
+        g_ssm_phase = ph;
+    }
+    if (changed) {
+        int i;
+        printf("[TLS SceneSM] f=%d ENTER obj=0x%08X state=%u (was %d) ctr=%u cd=%u clk=%u prev_hits=",
+               g_runner_current_frame, task, st, (int)g_ssm_state, ctr, cd, clk);
+        for (i = 0; i < 10; i++) printf("%s%u", i ? "," : "", g_ssm_hits[i]);
+        printf("\n");
+        fflush(stdout);
+        memset(g_ssm_hits, 0, sizeof(g_ssm_hits));
+        g_ssm_state = st;
+        g_ssm_task  = task;
+    }
+    if (changed || (g_ssm_entries % 120) == 0) {
+        /* State-0's own gate chain, read at its offsets (0x8036A110..):
+         *   0x8036A1C8  g = *(r13 - 26136); if (*(g + 404) == 0) -> tail
+         *   0x8036A1D8  f54e4 = *(task + 0x54E4); if == 8 -> ctr--
+         *   0x8036A1F0  if (ctr < 0x5460) -> tail
+         *   0x8036A1FC  if (f54e4 == 6) { handle = *(task+0x575C); ... }
+         *   0x8036A224  if (*(task+0x575C) == 0) -> create the object via fn_8006A250
+         * so print all of them verbatim rather than reading the branches. */
+        u32 gA   = mem_read32(ctx, ctx->gpr[13] - 26136u);
+        u32 gAok = (gA >= 0x80000000u && gA < 0x83000000u) ? gA : 0;
+        u32 a404 = gAok ? mem_read32(ctx, gAok + 404) : 0;
+        u32 gB   = mem_read32(ctx, ctx->gpr[13] - 24096u);
+        u32 gBok = (gB >= 0x80000000u && gB < 0x83000000u) ? gB : 0;
+        u32 b72  = gBok ? mem_read32(ctx, gBok + 72) : 0;
+        u32 bOk2 = (b72 >= 0x80000000u && b72 < 0x83000000u) ? b72 : 0;
+        u32 f54e4 = mem_read32(ctx, task + 0x54E4);
+        u32 f54e8 = mem_read32(ctx, task + 0x54E8);
+        u32 f54ec = mem_read32(ctx, task + 0x54EC);
+        u32 f566c = mem_read32(ctx, task + 0x566C);
+        u32 f5674 = mem_read32(ctx, task + 0x5674);
+        u32 f575c = mem_read32(ctx, task + 0x575C);
+        u32 f5624 = mem_read32(ctx, task + 0x5624);
+        u32 f56ec = mem_read32(ctx, task + 0x56EC);
+        u32 f10d8 = mem_read32(ctx, task + 0x10D8);
+        /* Phase 0's success gate (0x8036A554..0x8036A5C0):
+         *   g2 = *(r13 - 25136)
+         *   if (g2->[3468] == 1 && fn_801231D0(singleton + 0x48C, 1)) {
+         *       fn_803E4478(g2);        <- the only path out of phase 0 that
+         *       return tail;               does any work
+         *   }
+         * so print g2 and its +3468 word, and count the two calls. */
+        {
+            u32 g2   = mem_read32(ctx, ctx->gpr[13] - 25136u);
+            u32 g2ok = (g2 >= 0x80000000u && g2 < 0x83000000u) ? g2 : 0;
+            u32 sub  = gAok ? gAok + 0x48C : 0;
+            printf("[TLS SceneSM] f=%d GATES2 phase=%u g2=0x%08X g2_3468=%u | "
+                   "call801231D0=%d call803E4478=%d\n",
+                   g_runner_current_frame, ph, g2ok,
+                   g2ok ? mem_read32(ctx, g2ok + 3468) : 0,
+                   g_ssm_call_1231, g_ssm_call_3e44);
+            if (sub) {
+                int i;
+                printf("[TLS SceneSM] f=%d SUB48C 0x%08X:", g_runner_current_frame, sub);
+                for (i = 0; i < 10; i++) printf(" %08X", mem_read32(ctx, sub + i * 4));
+                printf("\n");
+            }
+        }
+        printf("[TLS SceneSM] f=%d GATES state=%u ctr=%u/21600 f54e4=%u f54e8=%u f54ec=%u | "
+               "gA=0x%08X gA404=%u | gB=0x%08X gB72=0x%08X b12a4=0x%08X bC48=0x%08X | "
+               "f566c=%u f5674=%u f575c=0x%08X f5624=0x%08X f56ec=0x%08X f10d8=0x%08X\n",
+               g_runner_current_frame, st, ctr, f54e4, f54e8, f54ec,
+               gAok, a404, gBok, b72,
+               bOk2 ? mem_read32(ctx, bOk2 + 0x12A4) : 0,
+               bOk2 ? mem_read32(ctx, bOk2 + 0xC48) : 0,
+               f566c, f5674, f575c, f5624, f56ec, f10d8);
+        fflush(stdout);
+    }
+}
+
 int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
     tls_record_recent_call(ctx, address);
     tls_tail_push(ctx, address);
@@ -4516,12 +4678,129 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 state = task ? mem_read32(ctx, task + 0x54e4) : 0;
             u32 prev = task ? mem_read32(ctx, task + 0x54e8) : 0;
             u32 timer = task ? mem_read32(ctx, task + 0x54ec) : 0;
+            /* Chapter-1 scene state machine: state word is +0x5538, not +0x54E4
+             * (+0x54E4 is what state 0's handler at 0x8036A110 tests). */
+            if (tls_scene_sm_probe_on() && task) tls_scene_sm_enter(ctx, task);
             if (tls_draw_trace_enabled() && (++s_game_updates <= 10 || s_game_updates % 60 == 0)) {
                 printf("[TLS GameTask] Update #%d task=0x%08X state=%u prev=%u timer=%u (lr=0x%08X)\n",
                        s_game_updates, task, state, prev, timer, ctx->lr);
                 fflush(stdout);
             }
             return 0; // Run original code naturally
+        }
+
+        /* Jump-table handler entries of the Chapter-1 scene state machine
+         * (0x80368280 dispatch -> table 0x8078A268). `blr` leaves the chunk
+         * through dolrecomp_call, so each entry is observed here exactly once
+         * per dispatch and the counters show which state body actually ran.
+         * Inert unless TLS_SCENE_SM_PROBE=1. */
+        case 0x8036A110: tls_scene_sm_hit(0); return 0;
+        case 0x8036832C: tls_scene_sm_hit(1); return 0;
+        case 0x8036881C: tls_scene_sm_hit(2); return 0;
+        case 0x80368864: tls_scene_sm_hit(3); return 0;
+        case 0x80368B94: tls_scene_sm_hit(4); return 0;
+        case 0x80368DB8: tls_scene_sm_hit(5); return 0;
+        case 0x803690EC: tls_scene_sm_hit(6); return 0;
+        case 0x8036919C: tls_scene_sm_hit(7); return 0;
+        case 0x803691EC: tls_scene_sm_hit(8); return 0;
+        case 0x80369454: tls_scene_sm_hit(9); return 0;
+
+        /* The phase-0 success gate, read at its return point. 0x8036A570 is
+         * `bl 0x801231D0` and 0x8036A574 is `cmpwi r3, 0`, so when the callee
+         * blr's back into 0x8036A574 this dispatcher sees r3 = the predicate
+         * result. Print it next to g2+3468 so the two halves of
+         *      if (g2->[3468] == 1 && fn_801231D0(singleton + 0x48C, 1))
+         * are measured rather than inferred. */
+        case 0x8036A574: {
+            if (tls_scene_sm_probe_on()) {
+                extern int g_runner_current_frame;
+                static int s_n = 0;
+                u32 g2   = mem_read32(ctx, ctx->gpr[13] - 25136u);
+                u32 g2ok = (g2 >= 0x80000000u && g2 < 0x83000000u) ? g2 : 0;
+                s_n++;
+                if (s_n <= 40 || s_n % 120 == 0) {
+                    printf("[TLS SceneSM] f=%d GATE0 predicate=0x%08X (%s) g2_3468=%u  #%d\n",
+                           g_runner_current_frame, ctx->gpr[3], ctx->gpr[3] ? "OPEN" : "closed",
+                           g2ok ? mem_read32(ctx, g2ok + 3468) : 0, s_n);
+                    fflush(stdout);
+                }
+            }
+            return 0;
+        }
+
+        /* Phase-0's success gate (see the SceneSM probe comment): the predicate
+         * that has to answer 1, and the function that runs when it does.
+         * Counting them says whether the branch is even reachable. */
+        case 0x801231D0: {
+            if (tls_scene_sm_probe_on()) {
+                g_ssm_call_1231++;
+                g_ssm_g0_call = (ctx->lr == 0x8036A574u);
+                if (g_ssm_g0_call) {
+                    extern int g_runner_current_frame;
+                    static int s_g0 = 0;
+                    if (++s_g0 <= 5)
+                        printf("[TLS SceneSM] f=%d fn_801231D0 GATE CALL obj=0x%08X arg=%u lr=0x%08X #%d\n",
+                               g_runner_current_frame, ctx->gpr[3], ctx->gpr[4], ctx->lr, s_g0);
+                    fflush(stdout);
+                }
+                if (g_ssm_call_1231 <= 6 || g_ssm_call_1231 % 300 == 0) {
+                    extern int g_runner_current_frame;
+                    printf("[TLS SceneSM] f=%d fn_801231D0(obj=0x%08X, arg=%u) lr=0x%08X #%d\n",
+                           g_runner_current_frame, ctx->gpr[3], ctx->gpr[4], ctx->lr, g_ssm_call_1231);
+                    fflush(stdout);
+                }
+            }
+            return 0;
+        }
+        /* Inside fn_801231D0's arg<=3 path (0x801237A0):
+         *   0x801237A8  bl 0x80122C70        ; -> index
+         *   0x801237AC  r4 = r0 + 1
+         *   0x801237B0  bl 0x80121F08        ; tail call with (r3=index, r4=index+1)
+         *   0x801237B4  b epilogue           ; r3 = the value the gate sees
+         * The gate calls it as fn_801231D0(singleton + 0x48C, 1), so these two
+         * return points expose the index and the value it resolves to. */
+        case 0x801237A0: {
+            if (tls_scene_sm_probe_on()) {
+                extern int g_runner_current_frame;
+                static int s_a = 0;
+                if (++s_a <= 5)
+                    printf("[TLS SceneSM] f=%d fn_801231D0 DEFAULT-PATH obj=0x%08X arg=%u lr=0x%08X\n",
+                           g_runner_current_frame, ctx->gpr[3], ctx->gpr[4], ctx->lr);
+                fflush(stdout);
+            }
+            return 0;
+        }
+        case 0x801237AC: {
+            if (tls_scene_sm_probe_on() && g_ssm_g0_call) {
+                extern int g_runner_current_frame;
+                printf("[TLS SceneSM] f=%d GATE0 index=0x%08X obj=0x%08X words:",
+                       g_runner_current_frame, ctx->gpr[3], ctx->gpr[29]);
+                for (int i = 0; i < 12; i++) printf(" %08X", mem_read32(ctx, ctx->gpr[29] + i * 4));
+                printf("\n");
+                fflush(stdout);
+            }
+            return 0;
+        }
+        case 0x801237B4: {
+            if (tls_scene_sm_probe_on() && g_ssm_g0_call) {
+                extern int g_runner_current_frame;
+                printf("[TLS SceneSM] f=%d GATE0 result=0x%08X\n", g_runner_current_frame, ctx->gpr[3]);
+                fflush(stdout);
+                g_ssm_g0_call = 0;
+            }
+            return 0;
+        }
+        case 0x803E4478: {
+            if (tls_scene_sm_probe_on()) {
+                g_ssm_call_3e44++;
+                if (g_ssm_call_3e44 <= 6 || g_ssm_call_3e44 % 120 == 0) {
+                    extern int g_runner_current_frame;
+                    printf("[TLS SceneSM] f=%d fn_803E4478(obj=0x%08X) lr=0x%08X #%d\n",
+                           g_runner_current_frame, ctx->gpr[3], ctx->lr, g_ssm_call_3e44);
+                    fflush(stdout);
+                }
+            }
+            return 0;
         }
 
         // GameTask::Draw (0x8036B7F4)
