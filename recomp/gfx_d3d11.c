@@ -769,6 +769,38 @@ static void decode_gx_texture(const uint8_t* src, uint32_t width, uint32_t heigh
 
 static bool s_last_tex_all_zero = false;
 
+/* Diagnostic: decode a GX texture from guest memory and report its average colour.
+ * Used by TLS_TEV_PROBE to answer "is the texture this composite pass samples
+ * already blown out?", which is the open question in handover 5c.16 item 4.2. */
+static uint32_t* s_probe_tex_buf = NULL;
+static uint32_t s_probe_tex_cap = 0;
+static bool probe_texture_avg(const GxTextureUnit* tu, unsigned* out_r, unsigned* out_g, unsigned* out_b) {
+    *out_r = *out_g = *out_b = 0;
+    if (!tu || tu->guest_addr == 0 || tu->width == 0 || tu->height == 0) return false;
+    const void* data = host_resolve_gx_guest_addr(tu->guest_addr);
+    if (!data) return false;
+    uint32_t need = tu->width * tu->height;
+    if (need == 0 || need > (4u << 20)) return false;
+    if (need > s_probe_tex_cap) {
+        uint32_t* nb = (uint32_t*)realloc(s_probe_tex_buf, (size_t)need * 4);
+        if (!nb) return false;
+        s_probe_tex_buf = nb;
+        s_probe_tex_cap = need;
+    }
+    decode_gx_texture((const uint8_t*)data, tu->width, tu->height, tu->format,
+                      s_probe_tex_buf, tu->tlut_addr, tu->tlut_format);
+    uint64_t sr = 0, sg = 0, sb = 0;
+    uint32_t n = tu->width * tu->height;
+    for (uint32_t i = 0; i < n; i++) {
+        uint32_t p = s_probe_tex_buf[i];
+        sr += p & 0xFF; sg += (p >> 8) & 0xFF; sb += (p >> 16) & 0xFF;
+    }
+    *out_r = (unsigned)(sr / n);
+    *out_g = (unsigned)(sg / n);
+    *out_b = (unsigned)(sb / n);
+    return true;
+}
+
 static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* tu) {
     if (!tu || tu->guest_addr == 0 || tu->width == 0 || tu->height == 0) {
         s_last_tex_all_zero = true;
@@ -2107,6 +2139,19 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                                    batch->tex.guest_addr,
                                    batch->has_texture1 ? batch->tex1.guest_addr : 0u,
                                    batch->blend_enable, batch->src_factor, batch->dst_factor);
+                            for (int m = 0; m < 8; m++) {
+                                if (!(batch->tev_texmap_mask & (1u << m))) continue;
+                                unsigned tr, tg, tb;
+                                if (probe_texture_avg(&batch->tev_texmap[m], &tr, &tg, &tb)) {
+                                    printf("   [tex] map%d = 0x%08X %ux%u fmt=%u avg=(%u,%u,%u)\n",
+                                           m, batch->tev_texmap[m].guest_addr,
+                                           batch->tev_texmap[m].width, batch->tev_texmap[m].height,
+                                           batch->tev_texmap[m].format, tr, tg, tb);
+                                } else {
+                                    printf("   [tex] map%d = 0x%08X <unavailable>\n", m,
+                                           batch->tev_texmap[m].guest_addr);
+                                }
+                            }
                             gx_pipeline_print_tev_state(batch->tev_state);
                             fflush(stdout);
                         }

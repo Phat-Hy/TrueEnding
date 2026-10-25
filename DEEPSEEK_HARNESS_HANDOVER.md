@@ -1785,3 +1785,58 @@ the real screen is a dark cave with a modest glow. Two candidate causes, both ch
 | `TLS_TEV=1` | evaluate the captured TEV stages instead of `PSAlpha`/`PSOpaque` |
 | `TLS_TEV_PROBE=<frame>` | print the decoded TEV state of every batch of that frame |
 | `TLS_TEV_PROBE_FROM=<n>` | only batches `>= n` (the composite tail is far less noisy) |
+
+#### 7. Follow-up measurements (same session)
+
+**The copy -> batch mapping, and what each blur pass actually samples.** With
+`TLS_TEV_PROBE=1448 TLS_TEV_PROBE_FROM=30 TLS_EFB_SAMPLE_FRAME=1448 TLS_TEV=1
+TLS_DEFER_EFB_COPY=1` in one run, the probe now also decodes the average of every texmap a
+batch samples (`[tex] map<n> = addr WxH fmt avg=`). Read together with the per-copy averages
+that is the whole composite chain:
+
+| batch | blend | textures (map: addr, avg) | EFB after |
+|---|---|---|---|
+| b39 | add | 0: `0x9038D1C0` 320x224 **38** | 71 |
+| b40 | add | 0: `0x903D31C0` 320x224 **51** | 121 |
+| b41 | add | 0: `0x905C3000` **38**, 2: `0x9038D1C0` 320x224 **103**, 3: `0x90419BE0` 256x256 I8 **238** | 202 |
+| b44..b46 | add | 0: `0x9046FC40`/`0x9044CC20`/`0x90429C00`, all 320x224 fmt=4 avg **226,212,171** | ~198 |
+| b47 | add | 0: `0x905C3000` **198** | 254 |
+| b51 | blend s4 d5 | 0: `0x9051E1A0` 64x64 IA8 **90**, 1: `0x9038D1C0` 80x56 **255** | 90 |
+
+Copies of frame 1448 in replay order (deferred mode) show where the brightness enters:
+clear `(0,0,0)` x4 -> scene `(42,41,41)` -> `160x112 (33,37,38)` -> `80x56 (0,0,0)` x3 ->
+`640x448 (38,37,33)` -> `320x224 (50,53,50)` -> `320x224 (103,109,103)` -> `640x448
+(201,208,202)` -> `320x224 (181,188,181)` -> `640x448 (198,207,202)` -> `160x112 (253,...)`
+-> `640x448 (254,...)` -> VI scanout `(98,99,99)`.
+
+So the chain is internally consistent: the passes that add ~2x the scene's brightness really do
+sample copies taken *after* the earlier passes brightened the EFB. `b41`'s lerp mask is a nearly
+white 256x256 I8 texture, so it blends most of the 103-level blur into the frame.
+
+**Cross-frame accumulation is ruled out.** Brightness does not grow with frame number: with
+`TLS_TEV=1 TLS_DEFER_EFB_COPY=1` and no input, screenshots at frames 300/500/700/900/1100
+average `(1,1,1)/(0,0,0)/(2,2,2)/(2,2,2)/(1,1,1)`. An earlier run's frame-1000 measurement of
+`(90,90,90)` was a *different attract phase* - the same run-to-run drift warning as 5c.15 item
+7c, now confirmed to change the attract sequence's own content, not just the frame index.
+
+**TEV alone does not change the picture.** Attract frame 1000: default `(1,1,1)`, `TLS_TEV=1`
+`(1,1,1)` - identical, because without deferred copies the chain reads the previous frame.
+So `TLS_TEV` is a pure superset: it only changes frames where the copies are replayed.
+
+**The attract screen is the honest reference for the bloom.** Frame 1000, default:
+`docs/evidence/24-attract-1000-a.png` - black field with the white `THE LAST STORY` logo, which
+is correct. The same frame with `TLS_TEV=1 TLS_DEFER_EFB_COPY=1`:
+`docs/evidence/24-attract-1000-c.png` - a large white radial glow swamping the logo. Two
+readings, and they need one more measurement to separate:
+
+* either the chain genuinely blooms the logo that hard and the *composite* is right while the
+  bloom's spatial extent is wrong (the blur copies are single-source, so a 640x448 blur of a
+  600-pixel-wide logo should stay a thin band, not a full-screen ellipse - the ellipse suggests
+  the 160x112/320x224 copies were sampled with the wrong UVs, i.e. a *texcoord* problem, not a
+  blend problem), or
+* the passes are being applied where the guest intended a masked/thresholded region.
+
+Given item 5.3 (the host has exactly one UV, so every TEV stage samples with `uv0`), a
+blur pass whose texcoord is not `uv0` would smear across the whole quad - which is exactly the
+shape of the artefact. **Supplying real per-texcoord UVs is therefore the next concrete step,
+ahead of any blend-factor work.**
