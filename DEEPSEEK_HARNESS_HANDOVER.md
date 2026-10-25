@@ -2311,22 +2311,28 @@ Measured this session on the state at `1ad412a`/`4c2f8a6` (input plan
   | run | flags | result |
   |---|---|---|
   | A, B | `TLS_DRAW_TRACE=1` (+ `TLS_SHOT_FRAMES`) | stalled: `Update` last=1882, 100 % at `0x8022A204`, 18 ms/frame |
-  | C | no `TLS_DRAW_TRACE` | **did not stall**: `SequenceManager::Update` 1754 calls, last=1959, `TLS Frame 1920` reports **50 247 vtx / 54 batches**, PC at the idle loop `0x805F50B0`, 134-158 ms/frame |
+  | C | `TLS_PC_HIST=1` only | **did not stall**: `SequenceManager::Update` 1754 calls, last=1959, `TLS Frame 1920` reports **50 247 vtx / 54 batches**, PC at the idle loop `0x805F50B0`, 134-158 ms/frame |
+  | D | `TLS_SHOT_FRAMES` only (default path) | stalled: `Update` last=1882, frame 1920 measures `(0,0,0)` |
 
-  So the host *can* pass the handoff and render the Game sequence, and a stall report is only
-  meaningful over several runs (the same run-to-run variance §5c.15 §7c documented). Any fix must
-  be A/B'd on 3+ runs, and "the stall is gone" from a single run is not evidence.
+  The one flag that separates them is the one that *slows the run down*: `TLS_PC_HIST` samples
+  every 32nd dispatch, and run C is the only run that got through. That is the signature of a
+  **host-side race**, not a guest-state deadlock: whatever the streaming handshake needs is lost
+  when the host runs at full speed and recovered when it is slowed. So a stall report is only
+  meaningful over several runs (the run-to-run variance §5c.15 §7c documented), and any fix must
+  be A/B'd on 3+ runs with and without the instrumentation.
 * **What was ruled out this session.** The stream-completion path drops a `0x8046BBE0` callback
   silently when its target is `0x807C6F60`, `0x800000E4` or does not resolve
   (`tls_dvd_service_callback`); that path is now instrumented and prints
   `[TLS DVD] stream completion DROPPED ...`. It **did not fire** in either kind of run, so dropped
   completions are not the cause here.
 
-Next steps for Task 2, in order: (1) name `fn_8022A054` and `fn_8022ADD4` (call sites:
-`GameLoadTask` `0x80570CFC`, the two `vt=0` task entries `0x80363DBC` / `0x803646C4`); (2) find
-what writes `[r7+4]` (the value the loop spins on) and whether the host ever updates it - with
-`r3=0x90002008` it looks like a MEM2 work-area flag, i.e. a file/DVD worker the host never
-advances; (3) only then touch anything, and validate over 3 runs.
+Next steps for Task 2, in order: (1) find the race - candidates are the DVD callback delivery
+gated on "guest PC is at an idle address" (`tls_dvd_service_callback`), the alarm/interrupt
+delivery in the frame loop, and any host-side queue drained once per frame; (2) name
+`fn_8022A054` / `fn_8022ADD4` (call sites: `GameLoadTask` `0x80570CFC`, the two `vt=0` task
+entries `0x80363DBC` / `0x803646C4`) and find what writes the word at `[r7+4]` the loop spins on
+(`r3=0x90002008` is a MEM2 pointer, so it looks like a worker flag the host never advances);
+(3) validate over 3+ runs both with and without instrumentation.
 
 
 ---
