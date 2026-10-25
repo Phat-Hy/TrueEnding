@@ -4283,6 +4283,30 @@ purely because its virtual entries are ordinary function entries.**
    the more productive next move is to stop analysing the object and instead find the code that
    *creates* the payloads (they carry sequential ids `0x0A93`/`0x0A94`, so one factory makes both)
    and read the parenting step there, rather than inferring it from object memory.
+   **The factory is found.** Logging every allocation in the window where the payloads appear
+   (`TLS_ALLOC_WINDOW`, default 3380..3430) gives:
+
+   ```
+   f=3400 ALLOC size=1480 lr=0x805B9F94   <- the waiter itself (0x5C8)
+   f=3402 ALLOC size=272  lr=0x801F4040   <- the LayoutTask payloads, three in that frame
+   ```
+
+   `0x801F4040` is the return point inside the payload factory (`0x801F3FF8`): it calls the engine
+   allocator `0x80084320` with **size 272, align 8**, then `bl 0x801F407C` - the constructor - with
+   three arguments. **The constructor never writes `+4`.** It stores the vtable `0x80782C08` at `+0`
+   (`0x801F40AC`) and initialises `+0x48`, `+0xF0`, `+0xF8 = 1`, `+0xFC` (bit 0 = the sign of arg3,
+   via `rlwimi`), `+0x100/+0x104` (floats) and `+0x108 = 18`. So the field that differs between the
+   two payloads is set by a **later activation/parenting step, not by construction** - consistent with
+   one payload being activated and the other not.
+   **Methodological correction, and it invalidates two earlier conclusions.** Both scans that "found
+   nothing" required the two instructions of a pattern to be *adjacent*. They are not always: the
+   vtable materialisation is `lis r4, 0x8078` / `addi r3, r31, 72` / `addi r4, r4, 0x2C08` - split by
+   an unrelated instruction. Re-running with a 4-instruction window finds exactly one site,
+   `0x801F40A0`. So 5c.27's "the vtable is copied from a data table, that search route is a dead end"
+   is **wrong**, and so is the "no `addi rX, rA, -8` + `stw rX, 4(rA)` pair exists" result. Re-run any
+   pattern scan in this project with a relaxed window before believing a negative.
+   **Next**: find the activation step - the one that writes `payload+4` - and compare its behaviour
+   for `0x8186DF60` against `0x81863F60`. That should name the missing call.
    **Verified unchanged after the texture-hash fix**: phase 13 still reaches `o88=3` at 3602, falls
    back to `o88=1` with the counter at 1 at 3604, and stays there through 4524. The rendering fix and
    the intro stall are independent.

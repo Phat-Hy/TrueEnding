@@ -5049,6 +5049,32 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0;
         }
 
+        case 0x80084320: {
+            /* The engine allocator: r3 = size, r4 = align, r5/r6 = name, r7 = 0, result in r3.
+             * The two Chapter-1 waiter payloads (LayoutTasks 0x8186DF60 / 0x81863F60, ids
+             * 0x0A93/0x0A94) are created back-to-back around frame 3414, so logging every
+             * allocation in a frame window names the factory by its return address - which is
+             * how to read the parenting step instead of inferring it from object memory.
+             * TLS_ALLOC_WINDOW=<lo>,<hi> selects the window (default 3380..3430). */
+            if (tls_scene_sm_probe_on()) {
+                extern int g_runner_current_frame;
+                static int s_lo = -2, s_hi = 0, s_n = 0;
+                if (s_lo == -2) {
+                    const char* w = getenv("TLS_ALLOC_WINDOW");
+                    int a = 3380, b = 3430;
+                    if (w) sscanf(w, "%d,%d", &a, &b);
+                    s_lo = a; s_hi = b;
+                }
+                if (g_runner_current_frame >= s_lo && g_runner_current_frame <= s_hi && s_n < 240) {
+                    s_n++;
+                    printf("[TLS SceneSM] f=%d ALLOC size=%u lr=0x%08X #%d\n",
+                           g_runner_current_frame, ctx->gpr[3], ctx->lr, s_n);
+                    fflush(stdout);
+                }
+            }
+            return 0;   /* run the original allocator */
+        }
+
         case 0x80121FB4: {
             if (tls_scene_sm_probe_on()) {
                 extern int g_runner_current_frame;
