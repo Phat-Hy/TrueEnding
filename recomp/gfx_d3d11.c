@@ -1190,8 +1190,14 @@ static struct {
 } s_blend_cache[GX_MAX_CACHED_BLEND_STATES];
 static uint32_t s_blend_cache_count = 0;
 
-static ID3D11BlendState* get_or_create_blend_state(bool blend_enable, uint8_t src_factor, uint8_t dst_factor, bool subtract) {
-    uint32_t key = (blend_enable ? 1 : 0) | ((uint32_t)src_factor << 1) | ((uint32_t)dst_factor << 4) | (subtract ? (1 << 7) : 0);
+static ID3D11BlendState* get_or_create_blend_state(bool blend_enable, uint8_t src_factor, uint8_t dst_factor, bool subtract, bool guest_blend_enable) {
+    static int s_gx_alpha_blend = -1;
+    static int s_efb_alpha = -1;
+    if (s_gx_alpha_blend < 0) s_gx_alpha_blend = getenv("TLS_GX_ALPHA_BLEND") ? 1 : 0;
+    if (s_efb_alpha < 0) s_efb_alpha = getenv("TLS_EFB_ALPHA") ? 1 : 0;
+    uint32_t key = (blend_enable ? 1u : 0u) | ((uint32_t)src_factor << 1) | ((uint32_t)dst_factor << 4) | (subtract ? (1u << 7) : 0u) |
+                   (guest_blend_enable ? (1u << 8) : 0u) | (s_gx_alpha_blend ? (1u << 9) : 0u) |
+                   (s_efb_alpha ? (1u << 10) : 0u);
     for (uint32_t i = 0; i < s_blend_cache_count; i++) {
         if (s_blend_cache[i].key == key) {
             return s_blend_cache[i].state;
@@ -1213,13 +1219,27 @@ static ID3D11BlendState* get_or_create_blend_state(bool blend_enable, uint8_t sr
      * tail's additive passes are SRCALPHA/ONE, so their strength is `src.rgb * src.a`,
      * and src.a is the EFB alpha carried through the EFB copies. TLS_GX_ALPHA_BLEND=1
      * makes the alpha channel follow the guest's factors so the difference can be
-     * measured instead of argued (handover 5c.16 item 8). */
-    static int s_gx_alpha_blend = -1;
-    if (s_gx_alpha_blend < 0) s_gx_alpha_blend = getenv("TLS_GX_ALPHA_BLEND") ? 1 : 0;
-    if (s_gx_alpha_blend) {
-        desc.RenderTarget[0].SrcBlendAlpha = map_gx_src_blend_factor(src_factor);
-        desc.RenderTarget[0].DestBlendAlpha = map_gx_dst_blend_factor(dst_factor);
-        desc.RenderTarget[0].BlendOpAlpha = subtract ? D3D11_BLEND_OP_REV_SUBTRACT : D3D11_BLEND_OP_ADD;
+     * measured instead of argued (handover 5c.16 item 8).
+     *
+     * Measured in 5c.23: with alpha hardcoded to ONE/INV_SRC_ALPHA *and* the EFB cleared
+     * to alpha 1.0, the framebuffer alpha is 255 after **every** batch of the MENU frame
+     * (TLS_BATCH_PROBE), so every EFB copy the composite tail samples carries a=255 and
+     * every `SRCALPHA/ONE` pass runs at full strength. GX *replaces* the alpha when
+     * blending is disabled (`dst.a = src.a`), which D3D11 expresses as ONE/ZERO.
+     * TLS_EFB_ALPHA=1 enables both halves of the faithful behaviour: the guest's factors
+     * for alpha when the guest blends, and alpha *replace* whenever the guest had
+     * blending disabled (the host forces colour blending on for some 2D icon/text
+     * batches below, so the two can disagree). */
+    if (s_efb_alpha || s_gx_alpha_blend) {
+        if (s_efb_alpha && !guest_blend_enable) {
+            desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
+            desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_ZERO;
+            desc.RenderTarget[0].BlendOpAlpha = D3D11_BLEND_OP_ADD;
+        } else {
+            desc.RenderTarget[0].SrcBlendAlpha = map_gx_src_blend_factor(src_factor);
+            desc.RenderTarget[0].DestBlendAlpha = map_gx_dst_blend_factor(dst_factor);
+            desc.RenderTarget[0].BlendOpAlpha = subtract ? D3D11_BLEND_OP_REV_SUBTRACT : D3D11_BLEND_OP_ADD;
+        }
     } else {
         desc.RenderTarget[0].SrcBlendAlpha = D3D11_BLEND_ONE;
         desc.RenderTarget[0].DestBlendAlpha = D3D11_BLEND_INV_SRC_ALPHA;
@@ -1330,6 +1350,68 @@ static void d3d11_capture_efb_snapshot(void) {
     ID3D11DeviceContext_CopyResource(s_d3d11.context, (ID3D11Resource*)s_d3d11.efb_snapshot,
                                      (ID3D11Resource*)back_buffer);
     ID3D11Texture2D_Release(back_buffer);
+}
+
+/* Decode one destination texel of an EFB copy in the layout the writer below produced.
+ * `format` is the copy destination format (GX_TF_*), `disp` the 16bpp linear scanout
+ * buffer, `linear4` the TLS_EFB_LINEAR debug layout. This exists because the probe that
+ * measures a copy must decode with the *same* rule the write used: reading an RGB565
+ * destination as RGBA8 tiles reports dstavg != srcavg for a write that is correct, and
+ * that would make the chain probe lie exactly when TLS_EFB_COPY_FMT is on. */
+static void efb_dst_decode_texel(const uint8_t* guest, uint32_t format, uint32_t dst_w,
+                                 uint32_t gx, uint32_t gy, int disp, int linear4,
+                                 uint8_t* r, uint8_t* g, uint8_t* b, uint8_t* a) {
+    *r = *g = *b = 0; *a = 255;
+    if (disp) {
+        uint16_t v = ((const uint16_t*)guest)[(size_t)gy * 640u + gx];
+        *r = (uint8_t)(((v >> 11) & 0x1F) << 3);
+        *g = (uint8_t)(((v >> 5) & 0x3F) << 2);
+        *b = (uint8_t)((v & 0x1F) << 3);
+        *a = 255;
+        return;
+    }
+    if (linear4) {
+        const uint8_t* p = guest + ((size_t)gy * dst_w + gx) * 4;
+        *r = p[0]; *g = p[1]; *b = p[2]; *a = p[3];
+        return;
+    }
+    uint32_t tiles_x = (dst_w + 3) / 4;
+    uint32_t tile = (gy / 4) * tiles_x + (gx / 4);
+    uint32_t within = (gy % 4) * 4 + (gx % 4);
+    switch (format) {
+        case 4: {   /* GX_TF_RGB565: 32-byte 4x4 tile of big-endian u16 */
+            const uint8_t* t = guest + (size_t)tile * 32 + within * 2;
+            uint16_t v = (uint16_t)((t[0] << 8) | t[1]);
+            *r = (uint8_t)(((v >> 11) & 0x1F) << 3);
+            *g = (uint8_t)(((v >> 5) & 0x3F) << 2);
+            *b = (uint8_t)((v & 0x1F) << 3);
+            *a = 255;   /* RGB565 destinations have no alpha: GX samples a = 1 */
+            break;
+        }
+        case 5: {   /* GX_TF_RGB5A3: bit 15 set = 1-bit alpha + RGB555 */
+            const uint8_t* t = guest + (size_t)tile * 32 + within * 2;
+            uint16_t v = (uint16_t)((t[0] << 8) | t[1]);
+            *a = (v & 0x8000) ? 255 : 0;
+            *r = (uint8_t)(((v >> 10) & 0x1F) << 3);
+            *g = (uint8_t)(((v >> 5) & 0x1F) << 3);
+            *b = (uint8_t)((v & 0x1F) << 3);
+            break;
+        }
+        case 3: {   /* GX_TF_IA8: 32-byte 4x4 tile of (alpha, intensity) pairs */
+            const uint8_t* t = guest + (size_t)tile * 32 + within * 2;
+            *a = t[0];
+            *r = *g = *b = t[1];
+            break;
+        }
+        default: {  /* GX_TF_RGBA8: 32B of A/R pairs then 32B of G/B pairs */
+            const uint8_t* t = guest + (size_t)tile * 64;
+            *a = t[within * 2 + 0];
+            *r = t[within * 2 + 1];
+            *g = t[32 + within * 2 + 0];
+            *b = t[32 + within * 2 + 1];
+            break;
+        }
+    }
 }
 
 /* GX EFB -> texture copy (BP 0x52). Reads the requested GX-space rectangle out of the
@@ -1579,6 +1661,24 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
             float sx = (s_d3d11.vp_w > 0.0f) ? (s_d3d11.vp_w / 640.0f) : (float)desc.Width / 640.0f;
             float sy = (s_d3d11.vp_h > 0.0f) ? (s_d3d11.vp_h / 480.0f) : (float)desc.Height / 480.0f;
             uint32_t tiles_x = (dst_w + 3) / 4;
+            /* A/B: display copies may want a row-linear scanout buffer rather than the
+             * 4x4-tiled texture layout. TLS_EFB_LINEAR=1 writes rows linearly (R,G,B,A)
+             * so the two can be compared on one frame. The two VI scanout buffers are
+             * 16bpp linear (614400 B each: the gap between 0x900037C0 and 0x900997E0 is
+             * 614432). Writing 32-bit pixels into them overran into the next buffer - that
+             * was the doubled image in the guest framebuffer dump (handover 5c.11).
+             * Display copies therefore go out as RGB565 rows; texture copies keep the
+             * format's own tile layout.
+             *
+             * Hoisted out of the pixel loop (it was per-pixel before) because the probes
+             * below must decode guest memory with exactly this rule - see
+             * efb_dst_decode_texel. */
+            static int s_linear = -1;
+            if (s_linear < 0) s_linear = getenv("TLS_EFB_LINEAR") ? 1 : 0;
+            const bool is_display_copy =
+                s_copy_fmt ? (is_xfb_copy != 0)
+                           : (s_geom ? (is_xfb_copy != 0)
+                                     : (dst_guest == 0x900997E0u || dst_guest == 0x900037C0u));
             for (uint32_t gy = 0; gy < dst_h; gy++) {
                 uint32_t py = (uint32_t)(s_d3d11.vp_y + ((float)(y0 + gy * step) + 0.5f) * sy);
                 if (py >= desc.Height) py = desc.Height - 1;
@@ -1588,20 +1688,6 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                     if (px >= desc.Width) px = desc.Width - 1;
                     const uint8_t* p = row + (size_t)px * 4;
                     uint8_t b = p[0], g = p[1], r = p[2], a = p[3];
-                    /* A/B: display copies may want a row-linear scanout buffer rather
-                     * than the 4x4-tiled texture layout. TLS_EFB_LINEAR=1 writes rows
-                     * linearly (R,G,B,A) so the two can be compared on one frame. */
-                    /* The two VI scanout buffers are 16bpp linear (614400 B each: the
-                     * gap between 0x900037C0 and 0x900997E0 is 614432). Writing 32-bit
-                     * pixels into them overran into the next buffer - that was the
-                     * doubled image in the guest framebuffer dump (handover 5c.11).
-                     * Display copies therefore go out as RGB565 rows; texture copies
-                     * keep the 4x4-tiled RGBA8 layout. TLS_EFB_LINEAR=1 forces the old
-                     * linear-RGBA write for A/B. */
-                    static int s_linear = -1;
-                    if (s_linear < 0) s_linear = getenv("TLS_EFB_LINEAR") ? 1 : 0;
-                    bool is_display_copy = s_geom ? (is_xfb_copy != 0)
-                                                  : (dst_guest == 0x900997E0u || dst_guest == 0x900037C0u);
                     if (is_display_copy && !s_linear) {
                         uint16_t* out = (uint16_t*)guest;
                         uint32_t row = (y0 + gy) * 640u + (x0 + gx);
@@ -1668,7 +1754,7 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                     if (s_chain_frame_seen != s_chain_frame) { s_chain_frame_seen = s_chain_frame; s_chain_idx = 0; }
                     float qx = (s_d3d11.vp_w > 0.0f) ? (s_d3d11.vp_w / 640.0f) : (float)desc.Width / 640.0f;
                     float qy = (s_d3d11.vp_h > 0.0f) ? (s_d3d11.vp_h / 480.0f) : (float)desc.Height / 480.0f;
-                    unsigned long sr2 = 0, sg2 = 0, sb2 = 0, ns = 0;
+                    unsigned long sr2 = 0, sg2 = 0, sb2 = 0, sa2 = 0, ns = 0;
                     for (uint32_t gy = 0; gy < dst_h; gy += 4) {
                         uint32_t py = (uint32_t)(s_d3d11.vp_y + ((float)(y0 + gy * step) + 0.5f) * qy);
                         if (py >= desc.Height) py = desc.Height - 1;
@@ -1677,50 +1763,34 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                             uint32_t px = (uint32_t)(s_d3d11.vp_x + ((float)(x0 + gx * step) + 0.5f) * qx);
                             if (px >= desc.Width) px = desc.Width - 1;
                             const uint8_t* p2 = row2 + (size_t)px * 4;
-                            sr2 += p2[2]; sg2 += p2[1]; sb2 += p2[0]; ns++;
+                            sr2 += p2[2]; sg2 += p2[1]; sb2 += p2[0]; sa2 += p2[3]; ns++;
                         }
                     }
                     if (ns == 0) ns = 1;
-                    /* Destination content, in the layout that was just written. */
-                    static int s_chain_linear = -1;
-                    if (s_chain_linear < 0) s_chain_linear = getenv("TLS_EFB_LINEAR") ? 1 : 0;
-                    bool chain_disp = s_chain_linear ? false
-                                      : (s_geom ? (is_xfb_copy != 0)
-                                                : (dst_guest == 0x900997E0u || dst_guest == 0x900037C0u));
-                    bool chain_lin = (s_chain_linear != 0);
-                    unsigned long dr = 0, dg = 0, db = 0, nd = 0, dpeak = 0;
-                    uint32_t dtx = (dst_w + 3) / 4;
+                    /* Destination content, in the layout the writer just used. The alpha
+                     * average is the term that decides how strong a `SRCALPHA/ONE`
+                     * additive pass is: the composite tail's passes read these copies, so
+                     * `dstalpha` is the EFB alpha the guest will sample (handover 5c.23). */
+                    unsigned long dr = 0, dg = 0, db = 0, da = 0, nd = 0, dpeak = 0;
+                    const bool chain_disp = is_display_copy && !s_linear;
+                    const bool chain_lin = (s_linear != 0);
                     for (uint32_t gy = 0; gy < dst_h; gy++) {
                         for (uint32_t gx = 0; gx < dst_w; gx++) {
-                            uint8_t r8, g8, b8;
-                            if (chain_disp) {
-                                uint32_t row = (y0 + gy) * 640u + (x0 + gx);
-                                uint16_t v = ((const uint16_t*)guest)[row];
-                                r8 = (uint8_t)(((v >> 11) & 0x1F) << 3);
-                                g8 = (uint8_t)(((v >> 5) & 0x3F) << 2);
-                                b8 = (uint8_t)((v & 0x1F) << 3);
-                            } else if (chain_lin) {
-                                const uint8_t* px2 = guest + ((size_t)gy * dst_w + gx) * 4;
-                                r8 = px2[0]; g8 = px2[1]; b8 = px2[2];
-                            } else {
-                                uint32_t tile = (gy / 4) * dtx + (gx / 4);
-                                uint32_t within = (gy % 4) * 4 + (gx % 4);
-                                const uint8_t* t = guest + (size_t)tile * 64;
-                                r8 = t[within * 2 + 1];
-                                g8 = t[32 + within * 2 + 0];
-                                b8 = t[32 + within * 2 + 1];
-                            }
+                            uint8_t r8, g8, b8, a8;
+                            efb_dst_decode_texel(guest, format, dst_w, gx, gy,
+                                                 chain_disp, chain_lin, &r8, &g8, &b8, &a8);
                             unsigned lum = (unsigned)r8 + g8 + b8;
                             if (lum > dpeak) dpeak = lum;
-                            dr += r8; dg += g8; db += b8; nd++;
+                            dr += r8; dg += g8; db += b8; da += a8; nd++;
                         }
                     }
                     if (nd == 0) nd = 1;
                     printf("[EfbChain] present=%d frame=%d copy=%d batch=%d dst=0x%08X %ux%u src=(%u,%u)-(%u,%u) xfb=%d fmt=%u "
-                           "srcavg=(%lu,%lu,%lu) dstavg=(%lu,%lu,%lu) dstpeak=%lu\n",
+                           "srcavg=(%lu,%lu,%lu) srca=%lu dstavg=(%lu,%lu,%lu) dstalpha=%lu dstpeak=%lu\n",
                            s_d3d11.frame_counter, g_runner_current_frame, s_chain_idx, s_efb_copy_batch_ctx,
                            dst_guest, dst_w, dst_h, x0, y0, x1, y1,
-                           is_xfb_copy, format, sr2 / ns, sg2 / ns, sb2 / ns, dr / nd, dg / nd, db / nd, dpeak);
+                           is_xfb_copy, format, sr2 / ns, sg2 / ns, sb2 / ns, sa2 / ns,
+                           dr / nd, dg / nd, db / nd, da / nd, dpeak);
                     fflush(stdout);
                     if (s_chain_dump) {
                         char path[128];
@@ -1731,12 +1801,12 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                             fprintf(df, "P6\n%u %u\n255\n", dst_w, dst_h);
                             for (uint32_t yy = 0; yy < dst_h; yy++) {
                                 for (uint32_t xx = 0; xx < dst_w; xx++) {
-                                    uint32_t tile = (yy / 4) * dtx + (xx / 4);
-                                    uint32_t within = (yy % 4) * 4 + (xx % 4);
-                                    const uint8_t* t = guest + (size_t)tile * 64;
-                                    fputc(t[within * 2 + 1], df);
-                                    fputc(t[32 + within * 2 + 0], df);
-                                    fputc(t[32 + within * 2 + 1], df);
+                                    uint8_t r8, g8, b8, a8;
+                                    efb_dst_decode_texel(guest, format, dst_w, xx, yy,
+                                                         chain_disp, chain_lin, &r8, &g8, &b8, &a8);
+                                    fputc(r8, df);
+                                    fputc(g8, df);
+                                    fputc(b8, df);
                                 }
                             }
                             fclose(df);
@@ -1822,8 +1892,9 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
  * Used by TLS_BATCH_PROBE. */
 static void probe_backbuffer_stats(unsigned* out_r, unsigned* out_g, unsigned* out_b,
                                    unsigned* out_max, unsigned* out_red, unsigned* out_bright,
-                                   unsigned* out_n) {
+                                   unsigned* out_n, unsigned* out_a) {
     *out_r = *out_g = *out_b = *out_max = *out_red = *out_bright = *out_n = 0;
+    if (out_a) *out_a = 0;
     ID3D11Texture2D* bb = NULL;
     if (FAILED(IDXGISwapChain_GetBuffer(s_d3d11.swap_chain, 0, &IID_ID3D11Texture2D, (void**)&bb))) return;
     D3D11_TEXTURE2D_DESC desc;
@@ -1837,14 +1908,14 @@ static void probe_backbuffer_stats(unsigned* out_r, unsigned* out_g, unsigned* o
         ID3D11DeviceContext_CopyResource(s_d3d11.context, (ID3D11Resource*)staging, (ID3D11Resource*)bb);
         D3D11_MAPPED_SUBRESOURCE mapped;
         if (SUCCEEDED(ID3D11DeviceContext_Map(s_d3d11.context, (ID3D11Resource*)staging, 0, D3D11_MAP_READ, 0, &mapped))) {
-            unsigned long sr = 0, sg = 0, sb = 0, n = 0;
+            unsigned long sr = 0, sg = 0, sb = 0, sa = 0, n = 0;
             unsigned maxlum = 0, red = 0, bright = 0;
             for (UINT y = 0; y < desc.Height; y += 16) {
                 const uint8_t* row = (const uint8_t*)mapped.pData + (size_t)y * mapped.RowPitch;
                 for (UINT x = 0; x < desc.Width; x += 16) {
                     const uint8_t* p = row + (size_t)x * 4;
                     unsigned b8 = p[0], g8 = p[1], r8 = p[2];
-                    sb += b8; sg += g8; sr += r8; n++;
+                    sb += b8; sg += g8; sr += r8; sa += p[3]; n++;
                     unsigned lum = r8 + g8 + b8;
                     if (lum > maxlum) maxlum = lum;
                     if (lum > 600) bright++;
@@ -1854,6 +1925,11 @@ static void probe_backbuffer_stats(unsigned* out_r, unsigned* out_g, unsigned* o
             if (n == 0) n = 1;
             *out_r = (unsigned)(sr / n); *out_g = (unsigned)(sg / n); *out_b = (unsigned)(sb / n);
             *out_max = maxlum; *out_red = red; *out_bright = bright; *out_n = (unsigned)n;
+            /* The EFB alpha channel is the term that decides how strong a
+             * `SRCALPHA/ONE` additive pass is, and it travels into every EFB copy the
+             * composite tail samples. GX writes it from the TEV alpha stage; the host
+             * wrote 1.0 at every clear and never looked (handover 5c.23). */
+            if (out_a) *out_a = (unsigned)(sa / n);
             ID3D11DeviceContext_Unmap(s_d3d11.context, (ID3D11Resource*)staging, 0);
         }
         ID3D11Texture2D_Release(staging);
@@ -2030,10 +2106,19 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     FLOAT clear_color[4] = {0.0f, 0.0f, 0.0f, 1.0f};
     {
         static int s_force_black = -1;
+        static int s_efb_alpha = -1;
         if (s_force_black < 0) s_force_black = getenv("TLS_EFB_CLEAR_BLACK") ? 1 : 0;
+        if (s_efb_alpha < 0) s_efb_alpha = getenv("TLS_EFB_ALPHA") ? 1 : 0;
         if (!s_force_black) {
             gx_pipeline_get_clear_color(clear_color);
-            clear_color[3] = 1.0f; // depth/stencil clear alpha; the guest clear alpha is not used
+            /* The clear *alpha* was hardcoded to 1.0 ("depth/stencil clear alpha; the
+             * guest clear alpha is not used"), which pins the EFB alpha at 1.0 for the
+             * whole frame: every blended batch keeps it there (ONE/INV_SRCALPHA) and
+             * every EFB copy the composite tail samples then carries a=255, so all four
+             * `SRCALPHA/ONE` additive passes run at full strength (handover 5c.23).
+             * GX clears the EFB alpha to the alpha in the BP 0x4F clear colour.
+             * TLS_EFB_ALPHA=1 honours the guest value. */
+            if (!s_efb_alpha) clear_color[3] = 1.0f;
         }
         static int s_cc = 0;
         if (s_cc < 2) { s_cc++; printf("[EfbClear] clear = %.2f %.2f %.2f %.2f%s\n",
@@ -2302,7 +2387,8 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                         }
                     }
 
-                    ID3D11BlendState* bs = get_or_create_blend_state(blend_enable, src_factor, dst_factor, batch->subtract);
+                    ID3D11BlendState* bs = get_or_create_blend_state(blend_enable, src_factor, dst_factor,
+                                                                     batch->subtract, batch->blend_enable);
                     if (bs) {
                         ID3D11DeviceContext_OMSetBlendState(s_d3d11.context, bs, NULL, 0xFFFFFFFF);
                     }
@@ -2470,13 +2556,13 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                             s_probe_frame = f ? atoi(f) : -1;
                         }
                         if (s_probe_frame >= 0 && (int)s_d3d11_dump_count == s_probe_frame) {
-                            unsigned pr, pg, pb, pmax, pred, pbright, pn;
-                            probe_backbuffer_stats(&pr, &pg, &pb, &pmax, &pred, &pbright, &pn);
-                            printf("[BatchProbe] frame=%d after b%u (voff=%u vcnt=%u tex=0x%08X blend=%d s=%u d=%u col0=0x%08X): avg=(%u,%u,%u) max=%u red=%u/%u bright=%u\n",
+                            unsigned pr, pg, pb, pmax, pred, pbright, pn, pa;
+                            probe_backbuffer_stats(&pr, &pg, &pb, &pmax, &pred, &pbright, &pn, &pa);
+                            printf("[BatchProbe] frame=%d after b%u (voff=%u vcnt=%u tex=0x%08X blend=%d s=%u d=%u col0=0x%08X): avg=(%u,%u,%u) a=%u max=%u red=%u/%u bright=%u\n",
                                    s_d3d11_dump_count, b, batch->vertex_offset, batch->vertex_count,
                                    batch->tex.guest_addr, batch->blend_enable, batch->src_factor,
                                    batch->dst_factor, gx_vtx[batch->vertex_offset].color, pr, pg, pb,
-                                   pmax, pred, pn, pbright);
+                                   pa, pmax, pred, pn, pbright);
                             fflush(stdout);
                         }
                     }
