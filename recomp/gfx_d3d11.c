@@ -1443,12 +1443,23 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     // Set Render Target and Hardware Depth-Stencil Buffer
     ID3D11DeviceContext_OMSetRenderTargets(s_d3d11.context, 1, &s_d3d11.rtv, s_d3d11.dsv);
 
-    // Clear backbuffer to solid black
+    /* Clear the EFB to the colour the guest programmed (BP 0x4F/0x50 through
+     * GXSetCopyClear), not to a hardcoded black: the pipeline already tracks it
+     * (gx_pipeline_get_clear_color) and til now nothing consumed it, so any frame
+     * whose guest clear was not black lost its background.
+     * TLS_EFB_CLEAR_BLACK=1 restores the old behaviour for A/B. */
     FLOAT clear_color[4] = {0.0f, 0.0f, 0.0f, 1.0f};
     {
+        static int s_force_black = -1;
+        if (s_force_black < 0) s_force_black = getenv("TLS_EFB_CLEAR_BLACK") ? 1 : 0;
+        if (!s_force_black) {
+            gx_pipeline_get_clear_color(clear_color);
+            clear_color[3] = 1.0f; // depth/stencil clear alpha; the guest clear alpha is not used
+        }
         static int s_cc = 0;
-        if (s_cc < 2) { s_cc++; printf("[EfbClear] clear = %.2f %.2f %.2f %.2f\n",
-            clear_color[0], clear_color[1], clear_color[2], clear_color[3]); fflush(stdout); }
+        if (s_cc < 2) { s_cc++; printf("[EfbClear] clear = %.2f %.2f %.2f %.2f%s\n",
+            clear_color[0], clear_color[1], clear_color[2], clear_color[3],
+            s_force_black ? " (forced black)" : " (guest BP clear)"); fflush(stdout); }
     }
     ID3D11DeviceContext_ClearRenderTargetView(s_d3d11.context, s_d3d11.rtv, clear_color);
     if (s_d3d11.dsv) {

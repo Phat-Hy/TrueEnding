@@ -790,9 +790,9 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
     if (reg == 0x50) { // BP_CLEAR_GB
         s_clear_b = (uint8_t)(val & 0xFF);
         s_clear_g = (uint8_t)((val >> 8) & 0xFF);
-        if (s_clear_r != 0 || s_clear_g != 0 || s_clear_b != 0) {
-            gx_pipeline_set_clear_color(s_clear_r / 255.0f, s_clear_g / 255.0f, s_clear_b / 255.0f, s_clear_a / 255.0f);
-        }
+        /* Publish unconditionally: the guest may legitimately clear to black, and a
+         * "skip when all zero" guard would then leave the previous colour in effect. */
+        gx_pipeline_set_clear_color(s_clear_r / 255.0f, s_clear_g / 255.0f, s_clear_b / 255.0f, s_clear_a / 255.0f);
         return;
     }
 
