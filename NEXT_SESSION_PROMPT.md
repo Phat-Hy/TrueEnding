@@ -1,207 +1,185 @@
 MISSION CONTINUATION — Project The Maybe(Not) Last Story (G:\Program\Project The Maybe(Not) Last Story, native PC recompilation of The Last Story / Wii SLSEXJ)
 
-Work autonomously and do not stop to report. Measure instead of guessing, commit as you go, keep the build green, and keep going until your context is nearly exhausted. Write findings into DEEPSEEK_HARNESS_HANDOVER.md immediately as you make them, not at the end. Finish only with a short summary of what changed and what is next.
+Work autonomously and do not stop to report. Measure instead of guessing, commit as you go,
+keep the build green, and keep going until your context is nearly exhausted. Write findings into
+DEEPSEEK_HARNESS_HANDOVER.md as you make them, not at the end. 0 changes to src/.
 
 =====================================================================
-0. SESSION SETUP — DO THIS FIRST, IT COSTS ~20 MINUTES IF YOU DON'T
+0. SESSION SETUP — the write denials are a *path-scoped sandbox* problem
 =====================================================================
 
-This workspace is writable ONLY if the file sandbox is not in workspace-write mode.
-Under workspace-write the shell runs at Low integrity while every directory created
-before ~Oct 2 still carries the Mid integrity label, so writes to build/, recomp/,
-tools/, docs/, src/ fail with "Access is denied" even though the DACL grants
-PHATS\hypha:(F). This is NOT a permissions problem you can fix from inside the sandbox.
+Two different mechanisms produce "Access is denied" here. Both are real; check which one it is.
 
-Verify:
-    Set-Content build\recomp\_t.txt x ; Remove-Item build\recomp\_t.txt
+  (a) Integrity label (5c.22 §0): every file created before a certain date carries Mid IL while
+      the shell runs at Low. Fix, from a full-access session:
+          icacls "<root>" /setintegritylevel (OI)(CI)L /T /C /Q
+  (b) Sandbox package SID (5c.23 §0, what actually happened this session): the DSH sandbox token
+      is an AppContainer whose package SID is S-1-4-272833741-438872707. The root and build/
+      carry an explicit ACE for it; recomp/, tools/, config/ do NOT, so *both* creating and
+      editing files there is denied while build/ works fine. CHECK WHICH:
+          icacls recomp          -> is there an S-1-4-* line?
+          icacls build\recomp    -> it has one
+      Fix: load the skill `diagnose-windows-sandbox-acl` and run its script ONCE, unconfined,
+      with  -Path '<root>\recomp'  -AllowRoot '<root>'  -Out '<root>\.acl-repair-N'. It adds a
+      full-control ACE for the signed-in user and that is what unblocks the AppContainer check.
+      A confined run of that script is useless (it reports the sandbox's own restriction).
+      Repeat for tools/ and config/ if they are also denied (one path per invocation).
 
-If that fails:
-  - Either get the session switched to full access, or
-  - run once OUTSIDE the sandbox:
-        icacls "G:\Program\Project The Maybe(Not) Last Story" /setintegritylevel "(OI)(CI)low" /T /C /Q
-    (measured: 34872 files fixed, 818 under tools/w64devkit stay denied, which is harmless)
+Then:
+    python tools/recomp_harness.py build-runner      # ~1 s, chunks already lifted
+    python tools/compile_shaders.py                  # only when you touch HLSL
 
-Then confirm the build:
-    python tools/recomp_harness.py build-runner          # ~1 s, chunks already lifted
-    python tools/compile_shaders.py                      # only if you touch HLSL
-
-PowerShell: env vars DO NOT persist between tool calls (fresh process each time). Set them in
-the SAME call as the run, and clear stale ones when switching scenarios — a leftover
-TLS_TEV / TLS_DEFER_EFB_COPY / TLS_INPUT_SCRIPT silently changes the whole run. Use
+Env vars do NOT persist between shell calls (fresh process). Set them in the SAME call as the
+run, and clear stale ones (a leftover TLS_TEV / TLS_DEFER_EFB_COPY / TLS_INPUT_SCRIPT silently
+changes the whole run):
     Get-ChildItem env: | Where-Object { $_.Name -like 'TLS_*' } | ForEach-Object { Remove-Item "env:$($_.Name)" }
 
-For screenshots, the system python has no PIL. Use the bundled one:
+The system python has NO Pillow. Use the bundled one:
     $py = "C:\Users\hypha\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe"
 
 =====================================================================
-1. READ FIRST, IN THIS ORDER
+1. READ FIRST
 =====================================================================
 
-  a. DEEPSEEK_HARNESS_HANDOVER.md — the "READ THIS FIRST" block at the top, then §5c.16 in
-     full (subsections 1–11). §5c.16 is the current state. Everything before §5c.12 is history
-     and contains disproven claims.
-  b. AGENTS.md — the CMPR alpha contract, and the note that the TEV stage is no longer absent
-     (it is implemented and opt-in; see 5c.16).
-  c. build/ref/BPMemory.h — vendored Dolphin reference. It is the authority for every GX BP
-     register field layout. Also build/ref/PixelShaderGen.cpp for the TEV/konst semantics.
+  a. DEEPSEEK_HARNESS_HANDOVER.md §5c.23 in full. That is the current state. §5c.22 and §5c.21
+     next. Everything before §5c.18 is history and contains disproven claims.
+  b. AGENTS.md §4 (CMPR alpha contract).
+  c. Dolphin sources, fetched — NOT guessed. The two that have already settled arguments:
+     VideoCommon/BPMemory.h (every BP field layout, UPE_Copy::tp_realFormat, TCInfo) and
+     VideoCommon/VertexShaderGen.cpp (the whole texcoord pipeline: source row, input form,
+     XF tex matrix, post matrix, the q==0 case, and the fact that TCInfo is IGNORED).
 
 =====================================================================
 2. STATE AT SESSION START
 =====================================================================
 
-commit 2dcdc13, tree clean, build green, shaders rebuilt.
-Six commits landed in the previous session (0d4699f..2dcdc13).
+commit 423f2cc, tree clean, build green.
 
-The DEFAULT PATH IS UNCHANGED and must stay that way. All new behaviour is behind env flags:
-    TLS_TEV=1                  evaluate the GX TEV combiners (new pixel shader, ps_5_0)
-    TLS_GX_ALPHA_BLEND=1       alpha channel follows the guest's CMODE0 factors (no measurable
-                               effect yet; more correct, costs nothing)
-    TLS_DEFER_EFB_COPY=1       replay EFB copies in stream order instead of inline
-    TLS_TEV_PROBE=<frame>      print the decoded TEV state + sampled texture averages + NDC
-                               bounds of every batch of that frame
-    TLS_TEV_PROBE_FROM=<n>     only batches >= n (the composite tail is far less noisy)
+DEFAULT (no TLS_* flags), input 600-612:A,900-912:A,1200-1212:A, present 1448:
+    mean (102,188,205), p10 69, p50 203, p90 203 — reproduced byte-identically on 3 runs.
+That is the re-baselined default (TLS_EFB_COPY_FMT is now ON by default); the old
+(124,235,255) from 5c.22 no longer applies. Re-verify it after any change.
 
-What was accomplished: the GX TEV stage exists. BP 0xC0..0xDF / 0xE0..0xE7 / 0xF6..0xFD / 0xF3 are
-decoded and evaluated per pixel, driven by a per-batch state snapshot. Measured: the 3D batches
-really run 3..9 TEV stages over up to 6 texmaps, so the old single-stage `tex*vertexColour` shader
-was wrong for nearly all geometry. With TLS_TEV=1 TLS_DEFER_EFB_COPY=1 the MENU now renders its
-gold MENU / CONTINUE / NEW GAME / MULTIPLAYER text over a bloom (docs/evidence/22-…) instead of a
-flat cyan field; TEV alone changes nothing (identical attract average), so it is a pure superset.
+Flags:
+    TLS_EFB_COPY_FMT=0         restore the old RGBA8-for-everything copy write (A/B only)
+    TLS_TEV=1                  evaluate the GX TEV combiners
+    TLS_DEFER_EFB_COPY=1       replay EFB copies in stream order (proven correct, 5c.22 §3)
+    TLS_EFB_ALPHA=1            guest clear alpha + alpha replace when guest blend off + guest
+                               CMODE0 factors for alpha (correct, measured picture-neutral)
+    TLS_TEV_TEXCOORD=1         per-stage texcoord rule (opt-in, measured *worse* on the scene)
+    TLS_TEV_PROBE=<present>[,TLS_TEV_PROBE_FROM=<batch>]   now also prints tc0/tc1 (BP 0x30..0x3F)
+    TLS_BATCH_PROBE=<present>  now also prints a= (framebuffer alpha average)
+    TLS_EFB_CHAIN=<present>[,TLS_EFB_CHAIN_DUMP=1]         now prints srca= and dstalpha=
+    TLS_SAVE_PRECREATE=1       restore the fabricated zero save file (A/B only)
+    TLS_COMPOSITE_ZTEST=1      refuted, documented no-op
+    TLS_TEX_DUMP=0xADDR[,0xADDR], TLS_XF_*, TLS_PC_HIST, TLS_SHOT_FRAMES, TLS_EFB_CLEAR_BLACK
 
-=====================================================================
-3. THE OPEN QUESTION — THIS IS THE GATE
-=====================================================================
-
-The MENU and attract backgrounds are still a large white radial glow where the real game shows a
-dark cave with a modest glow (docs/evidence/24-attract-1000-c.png vs 24-attract-1000-a.png).
-
-The escalation is now FULLY ACCOUNTED FOR by three passes (5c.16 §10 table):
-
-    b32/b33  replace                 put the scene copy back                       frame 42
-    b34      SRCCLR/ZERO  dst=src*src  the bright pass: squares the frame, darks->0   frame 0
-    b35/b36  SRCALPHA/ONE add        add the squared (black) frame's blur           frame 0
-    b37      REPLACE                 THROWS THE SQUARED FRAME AWAY, puts back a
-                                     160x112 copy taken BEFORE b34 (avg 34)          frame 34
-    b38      ONE/ONE  dst = src+dst  EXACTLY DOUBLES THE FRAME                        frame 68
-    b39..b47 additive                each adds ~a copy of an already-saturated frame  -> 255
-    b51      SRCALPHA/INVSRCALPHA    drags the whole screen back to a flat level     ~90
-
-Already ELIMINATED by measurement — do not re-test these:
-    * TEV stage evaluation          (implemented, correct, not the bloom)
-    * texcoord aliasing             every batch reports texcoord_mask=0x01; the guest supplies
-                                    NO TEX1..TEX7 at all, so a wider GxVertex would be pointless
-    * EFB / texture alpha           every sampled texture is a=255 (probe reports alpha)
-    * GX alpha blending             TLS_GX_ALPHA_BLEND=1 changes 90 -> 93, alpha saturates anyway
-    * quad geometry                 all tail batches are genuinely fullscreen, ndc=(-1,-1)-(1,1)
-    * cross-frame accumulation      brightness does NOT grow with frame number
-
-So the remaining question is a REFERENCE question, not something findable from inside the pipeline:
-does GX hardware reach 1.0 the same way when the guest issues b37's replace and b38's ONE/ONE at
-those vertex marks?
-
-  If YES  -> the host is faithful, the attract phase really is a bright flash, and the work moves
-             to texcoord GENERATION (BP 0x30..0x3F + XF texture matrices — the host has none, and
-             it is the biggest 3D inaccuracy left) and to TEV compare stages (bias==3, 14 writes
-             per MENU frame, currently pass-through).
-  If NO   -> the EFB-copy SERVICING POINT is the suspect: GX may service a copy at the end of the
-             display list rather than at the command, which the vertex-mark replay cannot express.
+Runs (~140 s, exits by itself):
+    TLS_INPUT_SCRIPT='...' TLS_TEV=1 TLS_DEFER_EFB_COPY=1 TLS_SHOT_FRAMES=1448 `
+      .\build\recomp\tls_runner.exe --dol orig\main.dol --frames 1452 --window --novsync *> log
+Stats:  & $py tools\cmp_ref.py build\recomp\d3d11_screenshot_1448.ppm <ref.png>
 
 =====================================================================
-4. TASK 1 (do this first): capture a Dolphin reference frame
+3. THE TWO SCREENS THAT MATTER — get this right before comparing anything
 =====================================================================
 
-Everything needed exists:
-    G:\Program\Dolphin-x64\Dolphin.exe          (exists)
-    Run_TheLastStory_In_Dolphin.bat             (launches it on roms\TheLastStory.iso)
-    %APPDATA%\Dolphin Emulator\ScreenShots\     (exists, EMPTY — no reference yet)
-    %APPDATA%\Dolphin Emulator\Dump\Frames\     (exists, EMPTY)
-    %APPDATA%\Dolphin Emulator\Logs\dolphin.log (the only artefact from the earlier reference run)
+  title screen (attract): input plan `600-612:A` ONLY. Static, identical every run.
+      host mean 90, corners 1, centre 241  |  reference: dolphin-ref/run2/framedump_900.png
+      (mean 205, corners 174-176, centre 218-220). THIS IS THE BEST TEST CASE IN THE PROJECT.
+  "MENU 1448" (3 A presses): the host's picture is the *save-data corruption dialog*, not the
+      MENU. Reference for that screen: dolphin-ref/run2/framedump_1440.png (== docs/evidence/27).
+      dolphin-ref/run3 is NOT frame-aligned for this plan (its 1448 is the flat title plate).
 
-Capture the attract/MENU moment with Dolphin's Save Screenshot / Dump->Frames, then compare the
-same phase against our runner. This is the gate for all further composite work — do not flip any
-default before it. If Dolphin cannot be driven non-interactively, say so explicitly in the
-handover and fall back to task 2 rather than guessing.
-
-Useful our-side recipe while you are at it:
-    Remove-Item SaveData\savedata.dat -ErrorAction SilentlyContinue
-    $env:TLS_INPUT_SCRIPT="600-612:A,900-912:A,1200-1212:A,1300-1312:UP,1350-1362:A,1500-1512:A"
-    $env:TLS_TEV="1"; $env:TLS_DEFER_EFB_COPY="1"; $env:TLS_SHOT_FRAMES="1448"
-    build\recomp\tls_runner.exe --window --frames 1452 --fps 60 --no-audio
-Frame numbers drift ±150 between runs (the title sequence is wall-clock paced) — ALWAYS re-measure
-a probe frame in the run that produced it, and never trust a hardcoded frame from the handover.
+RUN-TO-RUN VARIANCE IS REAL: the title/MENU particle phase differs between runs (batch counts
+60..67, vertex offsets shift by 18). Per-batch indices are only comparable *within* one run.
+Probes that accompany a batch dump key on the present counter (s_d3d11.frame_counter), never
+g_runner_current_frame (present N renders guest frame N-1).
 
 =====================================================================
-5. TASK 2: the post-handoff stall (§5c.12) — the gateway to Chapter 1
+4. SETTLED — DO NOT RE-TEST
 =====================================================================
 
-Unchanged all session. After GameTask::Init (81 calls, last ~frame 1882) the engine stops
-dispatching the game task, issues no more DVD reads (one request stuck at status=1), draws
-nothing, yet burns the whole 321k-block budget every frame.
-Already ruled out by measurement: the TLSF allocator, a single hot loop, a lost wakeup.
-Next: resolve the top TLS_PC_HIST PCs to functions with build/resolve.py (resolves an address via
-config/symbols.txt), and tap StreamManager::Update (0x8046DD60) after frame 1882.
+* Copy servicing: TLS_DEFER_EFB_COPY=1 is right; dstavg == srcavg on every copy of a frame.
+* Every EFB copy destination format is now written in its real 4x4 tile layout, and the
+  destination width is pitch*8/bpp. Sizes match Dolphin's own per-copy dumps. Formats 1(R8),
+  7(A8), 8(R8), 9(RA8), 10(RGB565), 11(RGB5A3), 12(RGBA8) implemented; R4/RA4/Z fall back to an
+  RGBA8 write and must NEVER drop the copy. copy_to_xfb bypasses the format check (16bpp linear).
+* The EFB alpha was pinned at 1.0 (clear alpha 1.0 + ONE/INV_SRCALPHA + forced colour blending);
+  TLS_EFB_ALPHA un-pins it but does not change the final picture. Not the bloom by itself.
+* GX source blend factors: 2/3 = SRC_COLOR/INV_SRC_COLOR (was DEST_*). Fixed.
+* REFUTED by measurement: gamma; z-testing (all composite z = 0, near plane); the fabricated
+  zero save file as the cause of the corruption dialog (removing it changes nothing, byte
+  identical); composite z-test flag; and BP 0x30..0x3F TCInfo as the vignette's UV remap
+  (Dolphin's VertexShaderGen applies no TCInfo at all and still matches hardware — the
+  registers read 0x0001003F / 0x0001007F with range_bias SET, and it is still not it).
+* The stall: 0x8022A204 is NOT a flag spin. It is a max-tracking walk of a linked structure
+  inside fn_8022A054 (src/game_res_texture.c, 0x5C4 bytes — the game's resource allocator),
+  called from fn_8022ADD4+0x270 and retried while it returns 0. 100 % of samples at one
+  address therefore means the walk never terminates.
+* The white blob (tex 0x90D175E0, 18 vtx, s=4 d=1): its *size* is right (~0.2 % of the frame,
+  same order as the reference's lamp flare). It saturates because it is an additive pass whose
+  source alpha is 1.0. Do not chase its geometry.
 
 =====================================================================
-6. TASK 3: Chapter 1 rendering and visual parity
+5. TASKS, IN ORDER
 =====================================================================
 
-355 Dolphin texture dumps in %APPDATA%\Dolphin Emulator\Dump\Textures\SLSEXJ. Compare DECODED
-textures, not eyeballed screenshots. The two boot-time non-code dispatches (0x005F2A10 / 0x005F2A90,
-lr=0x805F2F18/48) still deserve a name — cheap win.
+1. THE SAVE-DATA VERDICT — highest value, blocks everything after it.
+   The guest decides "The save data cannot be used because the data is corrupted" from what
+   the NAND/ISFS layer answers, above the file: host_runner.c no longer fabricates a zero
+   file (TLS_SAVE_PRECREATE=1 restores it) and the frame is byte-identical either way.
+   Instrument the ISFS path in recomp/replacements.c (ISFS_Open/Read/GetAttr/GetStats and the
+   NANDCheck/NANDGetStatus stubs at 0x80620220 / 0x80620BD0) and print what the guest asks for
+   and what it gets. Only the *answers* can produce this dialog. Fixing it is what lets the
+   MENU (and Chapter 1) be compared at all.
+
+2. THE XF TEX + POST-TRANSFORM MATRIX — the last texcoord term.
+   Dolphin's pipeline per regular texgen: raw attr -> coord.z=1 (AB11) -> XF tex matrix ->
+   optional normalize -> POSTTRANSFORMMATRICES[postmtx_index..+2] (+w) -> q==0 special case.
+   The host feeds the raw uv straight to the sampler. dualTexTrans is ON with PostMtxInfo=0x3D
+   for these batches. This applies to *every* batch, not just the composite.
+   Target: the title screen's final fullscreen SRCALPHA/INVSRCALPHA pass (b18 in that run).
+   It draws K0 (opaque black) with alpha = K0.a*(1 - mask.a); the mask is a 64x64 IA8 radial
+   texture at 0x9051E1A0 whose decode is PROVEN correct (it measures identically to
+   Dump\Textures\SLSEXJ\tex1_64x64_e6053facb03e8a53_3.png: alpha mean 91, corner 0, centre 255).
+   So the host draws the right texture with the right alpha over the *whole* screen, and
+   hardware clearly does not. If the post matrix turns out to be identity for this batch, the
+   next suspect is konst/K0 alpha, and after that the possibility that this pass is not what
+   produces hardware's final plate at all (bisect with TLS_BATCH_CUTOFF).
+
+3. THE ALLOCATOR CYCLE (the post-handoff stall).
+   Add a visited-node ring *inside the generated loop* at label_8022A204
+   (build/recomp/generated/chunks/chunk_0137_text1_802281C0.c) — it is the only place that can
+   see the node addresses — and print the first repeated node. PC histograms, register dumps and
+   frame counters cannot answer this. Then find who links the node into the tree twice. Validate
+   over 3+ runs with and without instrumentation (the stall is not deterministic).
+
+4. CHAPTER 1 PARITY — only after (1). The reference corpus already exists
+   (dolphin-ref/run2/framedump_2000, 3000, 5000).
 
 =====================================================================
-7. INSTRUMENTS (all inert unless set — prefer these over new code)
+6. RULES THAT COST TIME THIS SESSION
 =====================================================================
 
-TLS_TEV_PROBE=<frame> [+_FROM=<n>]  decoded TEV state, sampled texture average RGB+A, NDC bounds
-TLS_BATCH_PROBE=<frame>             avg framebuffer colour + col0 after every batch (the workhorse)
-TLS_BATCH_CUTOFF=<n>                draw only the first n batches: scene problems vs composite ones
-TLS_EFB_SAMPLE_FRAME=<frame>        what each EFB copy actually captured
-TLS_DRAW_ORDER=1                    copy/draw interleaving
-TLS_DEFER_EFB_COPY=1                replay copies in stream order
-TLS_EFB_PREV_FRAME=1 / TLS_EFB_COPY_PROBE (+_FROM) / TLS_EFB_DUMP
-TLS_GX_ALPHA_BLEND=1                alpha follows the guest's CMODE0 factors
-TLS_TEX_PPM="0xADDR,W,H;..."        dump a decoded texture
-TLS_F900_PROBE (+_FRAME)            BP dump with pc=/lr=  (this is how call sites are identified)
-TLS_PC_HIST (+_FROM) / TLS_ALLOC_PROBE / TLS_SAVE_PROBE / TLS_WAIT_PROBE / TLS_LOSTWAKE_PROBE
-TLS_TAIL_RING / TLS_MEMCPY_PROBE / TLS_NO_FRAME_CLEAR / TLS_EFB_CLEAR_BLACK / TLS_FB_RGB565
-
-=====================================================================
-8. RULES THAT HAVE ALREADY COST TIME
-=====================================================================
-
-* 0 changes to src/ (decompiled ground truth — but READ it: src/GXFrameBuf.c is the real GX copy
-  API in asm, src/GXTev.c is the real TEV setter API).
-* Never hand-edit build/recomp/generated/chunks as a fix. A throwaway printf instrument is allowed
-  if you immediately re-lift.
-* Never mutate guest state to "make progress", and never fabricate an answer the guest asks for.
-* Never guess a low-memory constant — derive it from asm/ldscript.lcf and check against
-  OSThread.stackBase/stackEnd.
-* Never flip a default on a guess. The default must stay visually identical to 2dcdc13 (and
-  0d4699f/510426d) until a probe proves the new path is closer to hardware. A previous session
-  twice reverted changes that "looked more correct" but measurably regressed the attract screen.
+* Read a probe's field order from the CODE, not from its label. The TEV K-register line printed
+  (r, a, b, g) while the label read r,g,b,a, so an opaque black K0 ("0 1 0 0") looked green and a
+  whole run went into the wrong theory. Fixed in 423f2cc — do not reintroduce it.
+* Render the frame you are about to measure. Numbers are only comparable when the two pictures
+  are the same screen; three different "MENU 1448" pictures exist in this repo.
+* A probe that measures a copy must decode with the SAME layout the writer used — there is now
+  one decoder, efb_dst_decode_texel(), and both the probe and the PPM dump go through it.
 * Rate-limit any probe inside per-frame or per-vertex code: gate it with an env var and a count
-  cap, inert by default.
-* Commit per logical change in the repo style (feat/fix/debug/docs(5c.N)): what was measured, what
-  changed, what the numbers were. Keep the tree clean.
+  cap, inert by default. Commit per logical change with the numbers in the message.
 * HLSL gotcha: an array of Texture2D indexed dynamically inside the TEV stage loop makes
   D3DCompile fail with X3511 (forced to unroll); marking the loop [loop] then fails with X3531.
   The working form is eight separate Texture2D tev_tex0..7 plus an if-chain sampler helper.
 * KNOWN LANDMINE: a rare, unexplained STATUS_HEAP_CORRUPTION (0xC0000374) around frame 840 in the
   title sequence. One run died, the identical command right after passed all 2400 frames. If it
   reproduces, run TLS_ALLOC_PROBE=1 + TLS_TAIL_RING; it has the shape of the §5c.9 failures.
-
-=====================================================================
-9. SUGGESTED ORDER
-=====================================================================
-
-  1. Fix the sandbox (§0). Confirm build green.
-  2. Task 1: Dolphin reference frame, compare, and settle the b37/b38 question. Write the verdict
-     into §5c.17 the moment you have it.
-  3. Whichever branch §3 sends you down (composite servicing point, or texcoord generation +
-     TEV compare stages).
-  4. Re-test the "ink matte" and "baseline subtraction" hacks in recomp/gfx_d3d11.c — they are
-     local patches over the TEV gap and may now be removable.
-  5. Task 2 (Chapter 1 gateway), then Task 3.
+* Open question, cosmetic: Dolphin's per-copy dump suffix may be the raw tpf rather than
+  tp_realFormat (a 160x112 destination is written `_1` while the host computes real_format 8).
+  Both map to 1 byte/pixel so the copy is correct either way; settle it only if a 2-byte format
+  (RA8 3/9, RGB5A3 5/11) looks wrong, using the evidence already in the handover (pitch=160 with
+  a 320-wide `_6` destination implies 4 bytes/px).
 
 GO. Do not stop to ask; commit per change; keep the handover current.
