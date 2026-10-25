@@ -2914,3 +2914,96 @@ host is decoding as IA8 - the host's `fmt=3` comes from the guest, but an I8 rea
 puts the intensity in the alpha byte and would make exactly this mistake; (b)
 `TLS_TEV_TEXCOORD=1`, because b18 supplies `texcoord_mask=0x01` while its two stages name
 texcoords 1 and 0, so on hardware stage 0 samples the *corner texel* of map1, not uv0.
+
+#### 7. The mask is decoded correctly - so the vignette's *texcoord* is the gap
+
+The host's decoded mask at b18 (`0x9051E1A0`, 64x64, `fmt=3`) has `avg 90, alpha 90,
+alpha 0 at the corners, 255 in the centre`. Dolphin's own dump of a 64x64 IA8 texture
+from this game, `%APPDATA%\Dolphin Emulator\Dump\Textures\SLSEXJ\tex1_64x64_e6053facb03e8a53_3.png`,
+measures **exactly the same**: `alpha mean 91, min 0, max 255, corner 0, centre 255, rgb
+mean 91`. So the texture decode is not the problem, and neither is the stage table: with
+`alpha = K0.a * (1 - mask.a)` the pass *should* blacken the corners **if the quad samples
+the whole mask**, which is what the host does.
+
+Hardware's frame is a nearly uniform plate (corners 175, centre 220), which is what you
+get when the same pass samples only the *middle* of the mask. The quad is fullscreen on
+both (`ndc = (-1,-1)-(1,1)`), so what differs is how the vertex UV becomes a texture
+coordinate - i.e. **GX texcoord generation**, which the host does not implement at all:
+BP `0x30..0x3F` (`TCInfo`: `scale_minus_1`, `range_bias`, `cylindric_wrap`) plus the XF
+texture matrix. Every texgen in this game is *regular* with `dualTexTrans` on and
+`PostMtxInfo=0x3D` (5c.20 §4), and the host feeds the raw `uv0` straight to the sampler.
+That is now the single highest-value gap: it explains a fullscreen quads' worth of wrong
+texture coordinates over exactly the passes that build the final picture, and it is the
+same mechanism for `range_bias` (the `uv*0.5+0.5` remap) that a 2D screen quad would need.
+
+Implementation order for it: XF tex matrices -> `TCInfo.scale_minus_1` (a power-of-two
+scale, `uv * 2^scale_minus_1` before the matrix) -> `range_bias` -> post matrix. Compare
+against Dolphin's `VertexShaderGen.cpp` (`WriteTexCoord` / `TCInfo` handling), which is
+the same reference the earlier sessions used for the corner-texel rule.
+
+#### 8. Where the session left the tree
+
+* `TLS_EFB_COPY_FMT` is now the **default** (all destination formats' real layouts,
+  size derived from pitch and bytes-per-pixel).
+* New default baseline, MENU present 1448 with **no** `TLS_*` flags: mean
+  `(102,188,205)` (was `(124,235,255)`).
+* `TLS_EFB_ALPHA=1` (opt-in): guest clear alpha, alpha *replace* when the guest's blend
+  is off, guest CMODE0 factors for alpha when it is on. Measured effect on the two
+  screens available: the framebuffer alpha stops being pinned at 255 (231/209/195...)
+  but the final picture is unchanged, so it is not promoted.
+* `TLS_BATCH_PROBE` now prints `a=` (framebuffer alpha average); `TLS_EFB_CHAIN` prints
+  `srca=`/`dstalpha=` and decodes destinations with the writer's own layout.
+* Tools: `tools/cmp_ref.py <host.ppm|png> <ref.png ...>` prints mean, p10/50/75/90/99
+  and a 4x6 grid of block means - the same shape the handover quotes - so a host frame
+  and a reference frame can be compared without a framing argument. Use the bundled
+  Python (`C:\Users\hypha\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe`),
+  the system one has no Pillow.
+
+#### 7b. REFUTED within the same session: the vignette is *not* the texcoord scale
+
+I added `gx_pipeline_get_tc_info()` (BP 0x30..0x3F, `TCInfo`) and printed it per batch. Every
+batch of the title screen reports `tc0 = 0x0001003F`, `tc1 = 0x0001007F`, i.e.
+`scale_minus_1 = 63/127` with **`range_bias` set** - which looked like exactly the UV
+remap needed to sample only the middle of a mask.
+
+It is not. Dolphin's `VideoCommon/VertexShaderGen.cpp` (fetched, not guessed) applies, per
+texgen: the raw attribute -> `coord.z = 1` for AB11 -> optional per-vertex tex-matrix
+index -> the **XF tex matrix** -> **`normalize`** if requested -> the **post-transform
+matrix** (`POSTTRANSFORMMATRICES[postmtx_index..+2]`) -> a `q == 0` special case. There is
+**no `TCInfo` term anywhere in it**, and Dolphin still reproduces the reference frame - so
+ignoring BP 0x30..0x3F is correct and cannot explain the vignette. The probe stays (it is
+cheap and the register values are now on record), but the conclusion is "not this".
+
+What Dolphin *does* apply and the host does **not** is the second half of that list:
+`dualTexTrans` is ON for these batches with `PostMtxInfo = 0x3D`, and the host feeds the
+raw uv straight to the sampler. That - the post-transform matrix at index 0x3D, and the
+tex matrix - is the remaining texcoord candidate, and it applies to *every* 3D and 2D
+batch, not just this one.
+
+So the title screen's vignette question is still open, with these facts pinned down:
+mask texture decoded correctly (matches Dolphin's own 64x64 IA8 dump exactly), stage
+table read correctly (K0 = opaque black), and the pass is a fullscreen `SRCALPHA/
+INVSRCALPHA` quad whose alpha is `K0.a * (1 - mask.a)`. Next: apply the XF tex + post
+matrix to the sampler UV and see whether the mask lands over a smaller part of the
+screen; if it does not, dump `POSTTRANSFORMMATRICES[0x3D..0x3F]` and check whether it is
+identity for this batch (`TLS_XF_PROBE` already prints the whole XF file).
+
+#### 9. Mission items measured this session that did not need a run
+
+* **The white blob is a particle pass and its *size* is about right** - what is wrong is
+  that it is fully saturated. `TLS_BATCH_PROBE` on the dialog screen: the batch with
+  `tex=0x90D175E0` (18 vertices, `s=4 d=1`) is the only one that takes `max` from 665 to
+  **765** (pure white) and adds 4-6 "bright" samples of the 3600-grid, i.e. ~0.2 % of the
+  frame - the same order as the reference's lamp flare (~0.1-0.3 %). It is not the
+  composite chain and it is not oversized; it saturates because it is an additive pass
+  whose source alpha is 1.0 (see §1), which is the same defect as the chain.
+* **The stall loop is a structure walk, not a flag spin** (§3): `0x8022A204` is the body
+  of a max-tracking traversal of a linked structure inside `fn_8022A054`
+  (`src/game_res_texture.c`, 0x5C4 bytes - the game's resource allocator), retried while
+  it returns 0 from `fn_8022ADD4+0x270`. 100 % of samples at one address therefore means
+  the walk does not terminate. The next instrument to add is a *visited-node* ring in the
+  generated chunk loop (the only place that can see the node addresses), not another
+  sample histogram.
+* **The host's save-data dialog is what blocks Chapter 1**, not the renderer: removing
+  the fabricated save file changes nothing (byte-identical frame), so the guest's
+  "corrupt" verdict comes from the NAND/ISFS layer's answers, not the file.

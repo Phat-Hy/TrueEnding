@@ -2625,12 +2625,14 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                         }
                         if (s_tev_probe_frame >= 0 && (int)s_d3d11_dump_count == s_tev_probe_frame &&
                             (int)b >= s_tev_probe_from) {
-                            printf("[TevProbe] frame=%d b%u vcnt=%u tex=0x%08X tex1=0x%08X blend=%d s=%u d=%u texcoord_mask=0x%02X\n",
+                            printf("[TevProbe] frame=%d b%u vcnt=%u tex=0x%08X tex1=0x%08X blend=%d s=%u d=%u texcoord_mask=0x%02X tc0=%08X/%08X tc1=%08X/%08X\n",
                                    s_d3d11_dump_count, b, batch->vertex_count,
                                    batch->tex.guest_addr,
                                    batch->has_texture1 ? batch->tex1.guest_addr : 0u,
                                    batch->blend_enable, batch->src_factor, batch->dst_factor,
-                                   batch->texcoord_mask);
+                                   batch->texcoord_mask,
+                                   gx_pipeline_get_tc_info(0, 0), gx_pipeline_get_tc_info(0, 1),
+                                   gx_pipeline_get_tc_info(1, 0), gx_pipeline_get_tc_info(1, 1));
                             {
                                 /* Screen-space extent of the batch (NDC). The composite tail
                                  * is supposed to be a handful of *small* blur quads; if one of

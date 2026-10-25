@@ -66,6 +66,21 @@ static uint8_t s_alpha_ref0 = 0;
 
 static float s_clear_color[4] = {0.0f, 0.0f, 0.0f, 1.0f};
 
+/* BP 0x30..0x3F: TCoordInfo, one S/T pair per texcoord (SU_SSIZE / SU_TSIZE).
+ * `scale_minus_1` (bits 0..15) is the power-of-two scale the GX texcoord generator
+ * applies and `range_bias` (bit 16) is its uv*0.5+0.5 remap. The host feeds the raw
+ * vertex UV to the sampler, so these registers are recorded here and reported per
+ * batch - a fullscreen 2D quad that samples a mask only over the mask's *middle*
+ * would look exactly like the host's title-screen vignette being too strong
+ * (handover 5c.23 §7). */
+#define GX_TC_INFO_MAX 8
+static uint32_t s_tc_info[GX_TC_INFO_MAX][2];
+
+uint32_t gx_pipeline_get_tc_info(int coord, int is_t) {
+    if (coord < 0 || coord >= GX_TC_INFO_MAX) return 0;
+    return s_tc_info[coord][is_t ? 1 : 0];
+}
+
 /* EFB -> texture copy state (see the 0x49/0x4A/0x4B/0x52 handling in
  * gx_pipeline_process_bp). Decoded with tools/decode_bp_copy.py. */
 static uint32_t s_efb_copy_x0 = 0, s_efb_copy_y0 = 0;
@@ -1482,6 +1497,12 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
                 fflush(stdout);
             }
         }
+        return;
+    }
+    if (reg >= 0x30 && reg <= 0x3F) { // BP_SU_SSIZE / BP_SU_TSIZE: TCoordInfo
+        int idx = (int)(reg - 0x30) >> 1;
+        int is_t = (int)(reg - 0x30) & 1;
+        s_tc_info[idx][is_t] = val & 0x7FFFFu;
         return;
     }
     if (reg == 0x4F) { // BP_CLEAR_AR

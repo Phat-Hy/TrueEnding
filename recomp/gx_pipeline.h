@@ -267,6 +267,12 @@ uint32_t gx_pipeline_get_tev_state_count(void);
 /* Human-readable dump of one TEV state (used by TLS_TEV_PROBE). */
 void gx_pipeline_print_tev_state(uint16_t index);
 
+/* BP 0x30..0x3F TCoordInfo for one texcoord: `is_t` selects the T half. Bits 0..15
+ * are `scale_minus_1`, bit 16 `range_bias`, bit 17 `cylindric_wrap`. The host does not
+ * apply any of it to the sampler's UV yet; reported per batch so that can be decided
+ * from data (handover 5c.23). */
+uint32_t gx_pipeline_get_tc_info(int coord, int is_t);
+
 #define GX_MAX_DRAW_BATCHES 4096
 
 // Retrieve draw batches for the current frame
