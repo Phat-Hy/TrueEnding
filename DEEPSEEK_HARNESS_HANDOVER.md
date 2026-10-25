@@ -4332,6 +4332,11 @@ Written because this thread now spans many sessions and the useful facts are sca
    boot/strap screens are unmeasured and the 1448 invariant cannot validate a present-only change.
 3. **R8 tiling is still 4x4 while R8 is an 8x4 format** (5c.27 §9.3), behind `TLS_R8_TILE_8X4`,
    default off. Unvalidated: no reference, and the title's bloom chain uses R8.
+4. **Two fabricated HLE overrides still ship, default-on** (5c.27 §9.4): `0x800A6BDC` can skip the
+   guest's script executor on a heuristic, and `0x80360A2C` hardcodes "fade complete". Measured:
+   bypassing both with `TLS_NO_SCRIPT_FILTER=1 TLS_NO_FAKE_FADE=1` shifts intro timing by ~34 frames
+   but does **not** unblock phase 13. They are not the blocker, but they fabricate state and should
+   be retired deliberately rather than left as the default.
 
 **Instruments that exist now** (all TLS-gated, inert by default)
 `TLS_SCENE_SM_PROBE` (scene machine, phases, gates, waiter records + payload dumps + one-shot
