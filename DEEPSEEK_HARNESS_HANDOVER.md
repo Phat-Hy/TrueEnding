@@ -4069,13 +4069,20 @@ purely because its virtual entries are ordinary function entries.**
      `0x927C2440`, `0x92887860`, `0x9288F860`). If the composite samples one of those, writing
      RGBA8 into it leaves the sampled region stale - which is exactly what a *constant* wrong
      image would look like.
-2. **Implement R4 (format 0) only as the exact inverse of our own decoder**, and be careful with
-   the width: `decode_gx_texture`'s `case 0` is 8x8 tiles, 32 bytes, high nibble = even texel, so
-   `byte_i = (gy%8)*4 + (gx%8)/2` inside `tile8 = (gy/8)*(dst_w/8) + gx/8`. **Do not** reuse the
-   existing `dst_w = pitch*8/bpp` line without checking it: that formula assumes a 4x4 tile row of
-   `dst_w*4*bpp` bytes, which is right for RGBA8 (`dst_w*16` = tiles*64) but gives `dst_w*4` for
-   `bpp = 1` where the real 4x4 R8 tile row is `dst_w*8`. Resolve that inconsistency *before*
-   touching R4 - the geometry is where a silent 2x error would live.
+2. **The R8 write path is tiled 4x4 but R8 is an 8x4 format - check this before R4.** The
+   *texture* decoder in this same file settles it: `decode_gx_texture` has
+   `case 1: // GX_TF_I8 (8x4 tiles, 32 bytes)`, and `case 8` there is **CI4 (8x8)**, i.e. the
+   texture numbering and the EFB-copy numbering are different spaces. On the EFB-copy side format
+   8/1 is R8, and R8 is **8 texels wide x 4 tall, 32 bytes** - so a correct writer needs
+   `tile = (gy/4)*(dst_w/8) + gx/8` and `within = (gy%4)*8 + (gx%8)`. The current writer uses the
+   4x4 rule (`tile = (gy/4)*tiles_x + gx/4`, `within = (gy%4)*4 + gx%4`), which touches only the
+   low 16 bytes of each 32-byte tile. The *width* formula is fine: for any 8-wide tile
+   `dst_w = pitch*8` regardless of bpp, which is exactly what `bpp = 1` yields - that resolves the
+   apparent inconsistency flagged in the previous revision of this item.
+   **Do not change R8 tiling casually**: the title chain uses the R8 bloom destinations and the
+   1448 invariant currently matches the verified reference, so a tiling change will move it.
+   Reproduced-width note: with pitch 160 the chain reports 640/320/160/80-wide destinations, which
+   is consistent with `dst_w = pitch*8/bpp` for bpp = 2/4 and `pitch*8` for the 8-wide formats.
 3. **Fill `0x81858DE0` record slot 1** (see §8b) - still the state-machine-side blocker.
 4. **`fn_803E4478`** makes the phase-0 gate one-shot; whatever re-arms it is a later phase.
 5. Input plans must respect the **one-update edge**: press, release, press again.
