@@ -218,6 +218,10 @@ typedef struct {
      * binds these to t0..t7 and samples them by stage texmap. */
     uint8_t tev_texmap_mask;
     GxTextureUnit tev_texmap[8];
+    /* Which GX texcoord attributes the guest supplied for this batch (bit t set =
+     * vertex attribute 13+t present). The TEV stages select texcoord per stage, so
+     * this says whether the host could feed them uv1..uv7 at all. */
+    uint8_t texcoord_mask;
     uint16_t tev_state;        /* index into gx_pipeline_get_tev_state()'s table */
     bool blend_enable;
     uint8_t src_factor;

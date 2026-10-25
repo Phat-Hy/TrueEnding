@@ -2134,11 +2134,12 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                         }
                         if (s_tev_probe_frame >= 0 && (int)s_d3d11_dump_count == s_tev_probe_frame &&
                             (int)b >= s_tev_probe_from) {
-                            printf("[TevProbe] frame=%d b%u vcnt=%u tex=0x%08X tex1=0x%08X blend=%d s=%u d=%u\n",
+                            printf("[TevProbe] frame=%d b%u vcnt=%u tex=0x%08X tex1=0x%08X blend=%d s=%u d=%u texcoord_mask=0x%02X\n",
                                    s_d3d11_dump_count, b, batch->vertex_count,
                                    batch->tex.guest_addr,
                                    batch->has_texture1 ? batch->tex1.guest_addr : 0u,
-                                   batch->blend_enable, batch->src_factor, batch->dst_factor);
+                                   batch->blend_enable, batch->src_factor, batch->dst_factor,
+                                   batch->texcoord_mask);
                             for (int m = 0; m < 8; m++) {
                                 if (!(batch->tev_texmap_mask & (1u << m))) continue;
                                 unsigned tr, tg, tb;

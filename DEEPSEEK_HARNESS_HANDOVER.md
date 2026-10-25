@@ -1840,3 +1840,40 @@ Given item 5.3 (the host has exactly one UV, so every TEV stage samples with `uv
 blur pass whose texcoord is not `uv0` would smear across the whole quad - which is exactly the
 shape of the artefact. **Supplying real per-texcoord UVs is therefore the next concrete step,
 ahead of any blend-factor work.**
+
+#### 8. The "one UV" hypothesis is disproved: no batch supplies TEX1..TEX7 at all
+
+Item 5.3 / §7 above guessed that the blur passes smear across the quad because every TEV stage
+samples `uv0` instead of its own texcoord. `GxDrawBatch::texcoord_mask` (new, printed by
+`TLS_TEV_PROBE`) settles it: **every batch of MENU frame 1448 reports `texcoord_mask=0x01`** -
+`b0..b66`, including the 3D batches that name texcoords up to 5 and the 5-stage blur quads that
+name texcoords 0..4. The vertex decoder already walks `TEX1..TEX7` (`s_vtx_desc[13+t]`), but the
+guest never marks those attributes present, so there is nothing to widen: a 96-byte `GxVertex`
+carrying eight UV sets would feed seven copies of nothing.
+
+Two consequences, both useful:
+
+* The 5-stage composite passes (`b35/b36/b39/b40`, konstant weights 0.4/0.2/0.098/0.2/0.098 for
+  `b35`, 0.2 x5 for `b39`) are **all sampling the same texel** and summing to ~1.0, so the host's
+  output for them is already right (`tex * 1.0`). Their contribution to the bloom is not a bug.
+* A GX stage naming texcoord `n` when the vertex has no `TEXn` gets the **texcoord generator's**
+  output for `n` - the position transformed through the XF texture matrix for that coordinate
+  (BP `0x30..0x3F` texcoord info plus the XF matrix). The host implements no texcoord generator
+  at all, so the real gap is *texcoord generation*, and it only matters for stages whose texcoord
+  differs from 0 **and** whose source data would differ - i.e. it is not the bloom's cause either.
+
+That leaves the bloom's brightness, and one measurement is still outstanding: the **EFB alpha**
+the additive passes multiply by. All of `b39..b47` are `s=4 d=1` (SRCALPHA/ONE), so their strength
+is `src.rgb * src.a`; `src.a` comes from the TEV alpha chain, which for those batches is
+`tex.a * ras.a`. If the blur textures' alpha channel is 1.0 everywhere, every add is full
+strength. `probe_texture_avg()` currently reports RGB only - **next step: report alpha too**, and
+if the EFB copies' alpha is saturated, check `get_or_create_blend_state`'s separate
+`SrcBlendAlpha`/`DestBlendAlpha` (the EFB alpha is accumulated through the same blend state as the
+colour, and a wrong alpha factor there would pin it at 255).
+
+#### 9. Correction to §7's conclusion
+
+§7 ended with "supplying real per-texcoord UVs is therefore the next concrete step, ahead of any
+blend-factor work". **That is wrong** (§8). The correct order is: (a) report the alpha of every
+sampled texture and of the EFB copies, (b) check the blend state's alpha factors, (c) only then
+look at texcoord generation.

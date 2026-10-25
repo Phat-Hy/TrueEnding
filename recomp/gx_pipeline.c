@@ -831,6 +831,9 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
             }
             if (texmap_mask == 0) texmap_mask = (uint8_t)(1u << (tex_unit & 7));
         }
+        uint8_t texcoord_mask = 0;
+        for (int t = 0; t < 8; t++)
+            if (s_vtx_desc[13 + t].type != GX_ATTR_NONE) texcoord_mask |= (uint8_t)(1u << t);
         bool has_tex1 = (tex_unit1 < 8) &&
                         (s_tex_units[tex_unit1].guest_addr != 0) &&
                         (s_tex_units[tex_unit1].width > 0) &&
@@ -862,7 +865,7 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
                 last->depth_write_enable == s_depth_write_enable &&
                 last->depth_test_enable == s_depth_test_enable &&
                 last->tev_state == s_cur_tev_state &&
-                last->tev_texmap_mask == texmap_mask &&
+                last->texcoord_mask == texcoord_mask &&
                 (!(texmap_mask & 0x01) || (last->tev_texmap[0].guest_addr == s_tex_units[0].guest_addr &&
                                            last->tev_texmap[0].width == s_tex_units[0].width &&
                                            last->tev_texmap[0].height == s_tex_units[0].height &&
@@ -928,6 +931,7 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
             b->alpha_ref0 = s_alpha_ref0;
             b->tev_state = s_cur_tev_state;
             b->tev_texmap_mask = texmap_mask;
+            b->texcoord_mask = texcoord_mask;
             for (int m = 0; m < 8; m++) {
                 if (texmap_mask & (1u << m)) b->tev_texmap[m] = s_tex_units[m];
                 else memset(&b->tev_texmap[m], 0, sizeof(b->tev_texmap[m]));
