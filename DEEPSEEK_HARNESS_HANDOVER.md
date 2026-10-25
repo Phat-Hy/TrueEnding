@@ -4297,8 +4297,12 @@ purely because its virtual entries are ordinary function entries.**
    **Measured with both bypassed**: `PHASE 8 -> 0` moves 34 frames earlier (3380 -> 3346) and phase 13
    is entered at 3401 rather than 3402 - so they do perturb timing - **but phase 13 still stalls at
    `o88 = 1`** (through frame 4506, on a differently allocated waiter, `0x81862540`). So the stall is
-   not an artefact of these stubs and survives with the guest's own logic running. Both are still
-   worth retiring on principle (they fabricate state), but they are not the blocker.
+   not an artefact of these stubs and survives with the guest's own logic running.
+   **But they are LOAD-BEARING - do not remove them naively.** With both bypassed the 1448 invariant
+   moves from `mean (102,188,205) p50 203` to `mean (77,151,205) p50 174`: the save dialog's plate
+   darkens. So whatever the guest's own code does there is not yet equivalent, and flipping the
+   defaults would regress the title. They stay default-ON; the flags exist to A/B them, not to retire
+   them, until the underlying gap they paper over is found.
 
 5. **`fn_803E4478`** makes the phase-0 gate one-shot: it zeroes `g2+0xD8C` itself. Whatever re-arms
    it is a later phase, not a retry.
