@@ -4552,7 +4552,27 @@ is not the thing to work on; **"what should fire that trigger"** is.
 This is also the cleanest single statement of the objective's second symptom: it is not that a task is
 created and lost - it is that none is ever created, and now that is measured rather than inferred.
 
-#### 5c.30b Operational hazard: a shell heredoc truncated replacements.c to zero bytes
+#### 5c.30b Phase 13 is NOT inert: its first exit fires exactly once
+
+5c.30 described phase 13 as sitting in an idle wait, and I had been treating both of its exits as
+dead. That was half wrong. Probed both:
+
+```
+PH13-EXIT-A fn_805BA358(r3=0x81858DE0)   calls: 1   (frame 3416)
+PH13-EXIT-B fn_80376568(task=...)        calls: 0
+```
+
+* **Exit A runs exactly once, at frame 3416** - the same frame `waiter+0x88` goes 0 -> 1. `r3` is the
+  waiter itself (`0x81858DE0`), so `*(r13-25232) + 608` resolves to the waiter rather than to some
+  other manager. Phase 13 does take its "begin" action once, then waits.
+* **Exit B (`+0x88 == 4`) never runs** - that is the completion path, and it is the one never
+  reached.
+
+So the shape is: **begin once, then wait forever for a completion that never comes.** That is a
+cleaner and more actionable statement than "inert", and it narrows the question to what
+`fn_805BA358(waiter)` starts and why only slot 0 ever finishes.
+
+#### 5c.30c Operational hazard: a shell heredoc truncated replacements.c to zero bytes
 
 While patching `recomp/replacements.c` from a `pwsh` heredoc, this line
 

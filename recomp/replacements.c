@@ -5114,6 +5114,37 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0;   /* run the original allocator */
         }
 
+        /* Phase 13's two exits (0x8036B134..0x8036B174). Neither has ever been observed
+         * to run; test it rather than assume:
+         *   (obj->[0x38] & 2) == 2 && obj->[0x88] == 0   -> fn_805BA358(next + 608)
+         *   obj->[0x88] == 4                              -> fn_80376568(task)
+         * If BOTH counts stay zero for a whole run, phase 13 is genuinely inert and the
+         * stall is entirely in the slot list - which is what the rest of the thread assumes. */
+        case 0x805BA358: {
+            if (tls_scene_sm_probe_on()) {
+                extern int g_runner_current_frame;
+                static int s_n = 0;
+                if (++s_n <= 6 || s_n % 120 == 0) {
+                    printf("[TLS SceneSM] f=%d PH13-EXIT-A fn_805BA358(r3=0x%08X) #%d\n",
+                           g_runner_current_frame, ctx->gpr[3], s_n);
+                    fflush(stdout);
+                }
+            }
+            return 0;
+        }
+        case 0x80376568: {
+            if (tls_scene_sm_probe_on()) {
+                extern int g_runner_current_frame;
+                static int s_n = 0;
+                if (++s_n <= 6 || s_n % 120 == 0) {
+                    printf("[TLS SceneSM] f=%d PH13-EXIT-B fn_80376568(task=0x%08X) #%d\n",
+                           g_runner_current_frame, ctx->gpr[3], s_n);
+                    fflush(stdout);
+                }
+            }
+            return 0;
+        }
+
         case 0x80121FB4: {
             if (tls_scene_sm_probe_on()) {
                 extern int g_runner_current_frame;
