@@ -5,8 +5,10 @@
 **Tree state.** Clean at the commit that added this block (check `git log --oneline -4`). Build green
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `A00272DF30BEDB5FB9D06E60DBDC365A9B47328ACCED1A496D999FD34949432E`). **0 changes
-to `src/`.** Current state lives in §5c.40; §5c.39 and everything earlier is history.
+to `src/`.** Current state lives in §5c.41; §5c.40 and everything earlier is history.
 
+> **§5c.41 locates the create gate.** `fn_800A2DE0` (+0x1A0) decides create-vs-skip: it calls `fn_80622050 -> fn_80621D70 -> ISFS_ReadDir(count-only)` and takes the create (`state 4`, `NANDCreateAsync`) unless that status probe succeeds and reports `1` (which needs ReadDir to answer `-101`). **Measured: that block never executes** - the state handler that reaches it is never entered, so the create is gated upstream in the state machine, not in `/dev/fs`. Read §5c.41 before anything else.
+>
 > **§5c.40 CHANGES WHERE THE SAVE DEFECT STARTS.** The host NAND is now a real device model (six
 > fabrications retired, measured behaviour-identical: the frame-3500 hash did not move). What that
 > measurement establishes is that **no device answer gates the create any more: the guest never asks
@@ -5900,3 +5902,91 @@ not mean "not found", it means "the device reported corruption".
   `fn_80620C60` has cases for 1, 2, 3 and none for 0 - that asymmetry is the bug report.
 * A bare `bl` search over `build/recomp/generated/chunks` is a cheap, reliable call-graph query. It is
   how `fn_805FFF70` was shown to have no caller (dispatch-table only).
+
+### 5c.41 The create gate is located, and two of 5c.40's conclusions are corrected
+
+Round 1 of this section measured only; no behaviour changed. Build green, `tools/invariant.ps1`
+PASS, frame 3500 = `A00272DF...` unchanged, `savedata/` empty, 0 changes to `src/`.
+
+Session input script (same prefix the invariant uses):
+
+```
+TLS_INPUT_SCRIPT="600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A,3620-3632:A,3700-3712:A,3800-3812:A,3900-3912:A"
+```
+
+#### A. THE CREATE GATE, decoded (this is what to act on)
+
+Inside `fn_800A2DE0` (the save manager's `Update`; `+0x1A0`) the lifted code is:
+
+```
+r3 = fn_80622050(path, &status)        ; -> fn_80621D70 -> ISFS_ReadDir (count-only)
+if (r3 == 0)         r0 = (status == 1)
+else if (r3 == -12)  r0 = 0
+else { mgr+344 = fn_800A4494(r3); r0 = 0 }
+if (r0 == 0) { mgr+348 = 4; NANDCreateAsync(path, 52, 0, 0x800A29B4, ...) }  ; <- THE CREATE
+else         { mgr+348 = 8; ... }                                            ; no create
+```
+
+and the status byte comes from `fn_80621D70`, whose tail is decisive:
+
+```
+r3 = ISFS_ReadDir(absPath, NULL, &count)
+if (r3 == 0 || r3 == -0x66) *(u8*)out = 2;      ; success, or -102
+else if (r3 == -0x65)       *(u8*)out = 1;      ; -101 EINVAL "not a directory"
+return r3;
+```
+
+So: **the create is taken unless the status probe succeeds *and* reports 1**, i.e. unless ReadDir
+returns `-101`. `-101` is the "already there, do not recreate" answer; every other outcome (an error
+such as our `-106`, or a success with status 2) leads to state 4 and `NANDCreateAsync`.
+
+The three NAND-create call sites in the manager are `0x800A3038` and `0x800A3198` (both in
+`fn_800A2DE0`) and `0x800A53D4`.
+
+#### B. MEASURED: that block never executes
+
+A new inert probe (`TLS_NAND_PROBE=1`, `SAVECREATE` lines on `0x800A2FC0`, `0x800A300C`,
+`0x800A2FC8`, `0x800A2FB4`) printed **nothing** in a 3520-frame run. `fn_800A2DE0` itself does run
+(`[TLS 800A2DE0] Update ... state=+348=22`), so the missing piece is **upstream**: the state handler
+that reaches `+0x1A0` is never entered, so the decision is never asked. That is the next step, and it
+is a state-machine question (what sets `mgr+348` to the value whose case contains `+0x1A0`), not a
+`/dev/fs` question.
+
+#### C. Two 5c.40 conclusions corrected
+
+* **`fn_805FFF70` is not unreferenced.** `0x8060005C` (inside `fn_80600010`) passes it as the
+  completion callback of a NAND ReadDir, and the chain is
+  `fn_80600120 -> fn_806000A0 -> fn_80600010 -> NAND ReadDir -> fn_805FFF70 -> NANDCreateAsync`.
+  5c.40 searched for `bl 0x805FFF70` and for a pointer word; the reference is a `lis`/`addi` pair,
+  which needs `tools/find_xref.py`. The *practical* conclusion survives: that module never runs.
+* **Retiring the `0x80600120` replacement is a measured no-op.** It is labelled "__DVDCheckDevice"
+  and returns 1; it has 46 `bl` call sites, all inside the same `0x805FExxx..0x806001xx` module, and
+  the stub **never fires** in any of this session's runs. It looked like the obvious culprit and is
+  not one. Leave it alone until that module is reached by something else.
+
+#### D. The `fn_800A4228` fabrication is no longer load-bearing for progression
+
+New inert flag `TLS_NO_4228_FABRICATION=1` runs the guest's own three instructions
+(`*out = mgr+0x168`, `return mgr+0x15C != 0`) instead of the fabricated "idle, no error". 5c.39
+measured that this left the run stuck in `Titl`; **with the truthful NAND of 5c.40 it reaches `Game`**
+(`Boot -> Stra -> Titl -> Game`, 2000 frames, `1300-1312:UP,1350-1362:A` added to press NEW GAME).
+It stays as the default anyway: while no save is ever written, a save dialog at mode 6 is what the
+reference shows, so retiring it would make us less faithful, not more. Retire it with the create.
+
+#### E. Tools added (both used above)
+
+* `tools/find_xref.py` - reconstructs `lis rX,hi` + `addi rX,rX,lo` pairs over the lifted chunks and
+  reports where a full address is formed. A plain grep for the 32-bit value misses all of them.
+  `python tools/find_xref.py 0x80600120` / `--addr-range 0x80600000 0x80600100`.
+* `tools/dol_peek.py` now reads **`build/SLSEXJ/main.elf`**. The DOL in this tree has a non-standard
+  header (`textSize[0]` reads `0x8086E140`), so lookups landed in the wrong "section" and returned
+  plausible garbage; from the ELF the save-file strings are at `0x8073DA80` / `0x8073DE50` (i.e. 0x20
+  lower than 5c.40 recorded from the DOL - use the ELF figures).
+
+#### F. Next step
+
+Walk `fn_800A2DE0`'s state dispatch: find the case whose body reaches `+0x1A0`, find every writer of
+`mgr+348` that could select it, and compare with the op sequence actually measured
+(`op=11 res=-12 x17`, `op=7 res=-12 x3`, `op=23 res=-12 x2`, `op=3 res=0 x2`, `op=21 res=0 x1`).
+`fn_800A500C` stores `op` into `mgr+0x15C`, so the state value *is* the last completed op - which
+means the create's state 4 must be preceded by an op-4 dispatch, and no op 4 is ever completed.
