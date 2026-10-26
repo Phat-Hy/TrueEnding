@@ -2160,6 +2160,39 @@ static void tls_scene_sm_enter(CPUState* ctx, u32 task) {
                     printf(" | +4:%s | +8:%s\n",
                            (s1 && s1[0] >= 0x20 && s1[0] <= 0x7E) ? s1 : "-",
                            (s2 && s2[0] >= 0x20 && s2[0] <= 0x7E) ? s2 : "-");
+                    /* One-shot deeper dump: if the 'Game' sequence carries a step/progress
+                     * field, it should be somewhere in here - and a stuck counter would name
+                     * the thing that never advances. */
+                    {
+                        static int s_deep = 0;
+                        if (!s_deep) {
+                            s_deep = 1;
+                            printf("[TLS SceneSM] f=%d SEQOBJ24 0x%08X:", g_runner_current_frame, f88);
+                            for (i = 0; i < 24; i++)
+                                printf(" %08X", mem_read32(ctx, f88 + (u32)i * 4));
+                            printf("\n");
+                        }
+                    }
+                    /* The words at +0x48..+0x5C are small integers (measured 0,2,4,1 at
+                     * frame 2115) - the shape of a step/index set. Watch them: a counter
+                     * that should advance but never does names the stuck step. */
+                    {
+                        static u32 s_ck = 0xFFFFFFFFu;
+                        u32 w48 = mem_read32(ctx, f88 + 0x48);
+                        u32 w4c = mem_read32(ctx, f88 + 0x4C);
+                        u32 w50 = mem_read32(ctx, f88 + 0x50);
+                        u32 w54 = mem_read32(ctx, f88 + 0x54);
+                        u32 w58 = mem_read32(ctx, f88 + 0x58);
+                        u32 ck = (w48 & 0xFFu) | ((w4c & 0xFFu) << 8) |
+                                 ((w50 & 0xFFu) << 16) | ((w54 & 0xFFu) << 24);
+                        (void)w58;
+                        if (ck != s_ck) {
+                            s_ck = ck;
+                            printf("[TLS SceneSM] f=%d SEQSTEP +48=%u +4C=%u +50=%u +54=%u +58=%u\n",
+                                   g_runner_current_frame, w48, w4c, w50, w54, w58);
+                            fflush(stdout);
+                        }
+                    }
                 }
                 fflush(stdout);
             }
