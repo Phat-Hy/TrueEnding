@@ -4884,3 +4884,31 @@ This reframes the Chapter-1 work again, and this time with a reference to measur
 
 **This is now the most actionable Chapter-1 lead in the file**: a specific, reproducible rendering
 defect with a reference image to compare against, independent of the phase-13 state-machine question.
+
+#### 5c.31c The reference is LETTERBOXED - black bars are legitimate, and the Chapter-1 card IS in the corpus
+
+Two corrections to 5c.31b, both from looking at `run2/framedump_2000.png`:
+
+* **`run2` f=2000 is the "Chapter 1 / Reptids' Cave" card** over the underground pool - so the corpus
+  *does* contain the card (5c.31a said `run2` went straight from the cave shot to gameplay at 3000
+  without mentioning it, and 5c.31 said `run3` had no card; both readings were incomplete). Saved as
+  `docs/evidence/dolphin_ref_run2_f2000_chapter1_card.png`.
+* **The reference is letterboxed.** Measured on that frame: a **48-pixel top bar = 10.0% of the
+  height** and no bottom bar. So black bars are *legitimate* in this game's cinematics.
+
+**Therefore 5c.31b's "large black regions are rendering defects" needs qualifying.** Black is not
+automatically a defect here - the reference has it too. What is still suspicious is the *size*: the
+host's f=3251 band is ~41% of the frame height, roughly four times the reference's 10% letterbox, and
+it sits directly above floating rocks and sky rather than framing an underground shot. That is
+consistent with missing sky over a black clear, but it is **not proven**, and comparing bar heights
+across *different shots* proves nothing either.
+
+**What is now solid**: the host's Chapter-1 card at f=2251 (mean 183.9) aligns with the reference's
+f=2000 card - both are the "Chapter 1 / Reptids' Cave" card. That is the first **confident**
+host-to-reference alignment in this project, and it is the anchor to build on: everything after the
+card can be compared shot by shot.
+
+**Next step, corrected**: compare the host and reference at the *same shot* after the card, and
+separate three possibilities per shot - (a) legitimate letterbox, (b) missing geometry over a black
+clear, (c) a wrong-colour pass. Measuring the bar height per shot against the reference's 10% is the
+cheap discriminator for (a) vs (b).
