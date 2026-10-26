@@ -1930,7 +1930,13 @@ static s32 tls_isfs_ioctl_service(CPUState* ctx, u32 cmd, u32 in_buf, u32 in_len
         break;
     case 8: { /* Rename(old, new): two 0x40-byte paths in one buffer */
         char new_path[80];
-        u32 off = plen + 1;
+        /* 5c.42 J: the second path starts at the fixed offset 0x40, not after the
+         * first path's NUL. fn_8061B290 copies the old path to +0 (up to 0x40) and
+         * the new path to +0x40, and sends the pair as one 0x80-byte request. Using
+         * plen+1 read inside the first slot and produced "a.dat" from
+         * "/tmp/savedata.dat" - measured, and it renamed the finished save to the
+         * wrong name. */
+        u32 off = 0x40u;
         u32 n = isfs_read_guest_path(ctx, in_buf + off, in_len > off ? in_len - off : 0,
                                      new_path, sizeof(new_path));
         if (!exists) {
@@ -3752,9 +3758,21 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             ctx->pc = ctx->lr;
             return 1;
         }
-        case 0x8061C7E0: { // IOS_Close
+        case 0x8061C7E0: { // IOS_CloseAsync
             u32 fd = ctx->gpr[3];
+            u32 cb = ctx->gpr[4];
+            u32 usrdata = ctx->gpr[5];
             ios_close_fd(fd);
+            /* 5c.42 I: this used to be handled as *synchronous* IOS_Close, so the
+             * completion callback was dropped and any async close left the guest
+             * waiting forever. The SDK settles it: src/isfs.c fn_8061BB80 is an async
+             * wrapper (it allocates a context and passes _isfsFuncCb), and its only
+             * jump target is this function with (fd, cb, usrdata). Measured symptom:
+             * the save manager parks at state 18 after opening /tmp/savedata.dat for
+             * write, with no further NAND traffic. */
+            if (cb >= 0x80003000u && cb < 0x80800000u && (cb & 3u) == 0) {
+                tls_ipc_enqueue_callback(cb, 0, usrdata);
+            }
             ctx->gpr[3] = 0; // Success
             ctx->pc = ctx->lr;
             return 1;
@@ -7349,55 +7367,27 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // save dialog -> NEW GAME -> Chapter 1), so the fabricated answer's *visible*
         // effect coincides with hardware while its mechanism is a lie. Retire it only
         // together with the create/write half of the NAND (handover 5c.39 F).
+        /* 5c.42 K: THE fn_800A4228 FABRICATION IS RETIRED.
+         *
+         * It used to answer for the guest - *out = 0 and mgr->state = 0, i.e. "the
+         * save manager is idle and has no error" - regardless of what the manager
+         * actually held. With the create path working (5c.42 G-J) the guest's own
+         * three instructions are enough, and they are what runs now:
+         *     *out = mgr+0x168 (status);  return (mgr+0x15C (state) != 0)
+         * so the title waits for the real manager instead of a fabricated "idle".
+         * Probe only, then let the guest code execute. */
         case 0x800A4228: {
-            u32 mgr = ctx->gpr[3];
-            u32 out_addr = ctx->gpr[4];
-            static int s_4228_probe = -1, s_4228_n = 0;
-            if (s_4228_probe < 0) s_4228_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;
-            if (s_4228_probe && s_4228_n < 60 && mgr) {
-                s_4228_n++;
-                printf("[TLS SaveCheck] 800A4228(mgr=0x%08X) state=%u status=%u lr=0x%08X\n",
-                       mgr, mem_read32(ctx, mgr + 0x15C), mem_read32(ctx, mgr + 0x168), ctx->lr);
+            static int s_probe = -1, s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;
+            if (s_probe && s_n < 80) {
+                u32 mgr = ctx->gpr[3];
+                s_n++;
+                printf("[TLS SaveCheck] 800A4228 state=%u status=%u lr=0x%08X (guest answer)\n",
+                       mgr ? mem_read32(ctx, mgr + 0x15C) : 0,
+                       mgr ? mem_read32(ctx, mgr + 0x168) : 0, ctx->lr);
                 fflush(stdout);
             }
-            /* 5c.42 G: skip the fabricated writes when measuring the guest's own
-             * answer, so the TLS_NO_4228_FABRICATION block below sees the real state
-             * instead of a zeroed one. Before this, the flag was evaluated after the
-             * writes and therefore never retired anything. */
-            if (!tls_no_4228_fabrication()) {
-                if (out_addr) {
-                    mem_write32(ctx, out_addr, 0); // *out = 0 (no error)
-                }
-                if (mgr) {
-                    mem_write32(ctx, mgr + 0x15C, 0); // mgr->state = 0 (idle)
-                }
-            }
-            static int s_4228_calls = 0;
-            if (tls_draw_trace_enabled() && (++s_4228_calls <= 5 || s_4228_calls % 60 == 0)) {
-                printf("[TLS 800A4228] #%d mgr=0x%08X -> returning 0 (idle, lr=0x%08X)\n",
-                       s_4228_calls, mgr, ctx->lr);
-                fflush(stdout);
-            }
-            /* TLS_NO_4228_FABRICATION=1 runs the guest's own three instructions
-             * instead (flag = mgr+0x15C != 0, *out = mgr+0x168). 5c.39 measured that
-             * with the *lying* NAND the title then reached mode 9 with no message and
-             * never left Titl; the NAND answers have changed since, so this flag
-             * re-measures that path without making it the default. */
-            {
-                static int s_no_fab = -1;
-                if (s_no_fab < 0) s_no_fab = getenv("TLS_NO_4228_FABRICATION") ? 1 : 0;
-                if (s_no_fab) {
-                    u32 state = mgr ? mem_read32(ctx, mgr + 0x15C) : 0;
-                    u32 status = mgr ? mem_read32(ctx, mgr + 0x168) : 0;
-                    if (out_addr) mem_write32(ctx, out_addr, status);
-                    ctx->gpr[3] = (state != 0) ? 1u : 0u;
-                    ctx->pc = ctx->lr;
-                    return 1;
-                }
-            }
-            ctx->gpr[3] = 0; // return 0 (idle / ready)
-            ctx->pc = ctx->lr;
-            return 1;
+            return 0; // run the guest's own three instructions
         }
 
         /* fn_800A500C(mgr, result, op) is the save manager's single completion
