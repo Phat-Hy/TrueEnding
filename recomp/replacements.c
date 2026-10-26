@@ -4067,6 +4067,38 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 1;
         }
 
+        /* 5c.41: the save manager's create-vs-skip decision, read out of the lifted
+         * code at 0x800A2F80..0x800A3010:
+         *
+         *   r3 = fn_80622050(path, &status)      ; fn_80621D70 -> ISFS_ReadDir(count-only)
+         *   if (r3 == 0)            r0 = (status == 1)
+         *   else if (r3 == -12)     r0 = 0
+         *   else { mgr+344 = fn_800A4494(r3); r0 = 0 }
+         *   if (r0 == 0)  -> state 4, NANDCreateAsync   <- the create
+         *   else          -> state 8, no create
+         *
+         * and fn_80621D70 sets status = 1 only when ReadDir answered -101 (EINVAL,
+         * "not a directory"); success or -102 give status 2. So the create is taken
+         * unless the status probe succeeds *and* reports 1. Inert probe. */
+        case 0x800A2FC0: case 0x800A300C: case 0x800A2FC8: case 0x800A2FB4: {
+            if (tls_nand_probe_on()) {
+                static u32 s_dec_n = 0;
+                if (s_dec_n < 30) {
+                    s_dec_n++;
+                    char msg[224];
+                    snprintf(msg, sizeof(msg),
+                             "SAVECREATE pc=0x%08X r0=%u r3=0x%08X r31=0x%08X mgr344=%u mgr348=%u "
+                             "b56=%u lr=0x%08X",
+                             ctx->pc, ctx->gpr[0], ctx->gpr[3], ctx->gpr[31],
+                             ctx->gpr[31] ? mem_read32(ctx, ctx->gpr[31] + 344) : 0,
+                             ctx->gpr[31] ? mem_read32(ctx, ctx->gpr[31] + 348) : 0,
+                             mem_read8(ctx, ctx->gpr[1] + 56), ctx->lr);
+                    tls_nand_probe_slot(msg);
+                }
+            }
+            return 0; // run the guest's own code
+        }
+
         /* NAND save-layer tracer (5c.40). Inert: prints the entry and lets the guest
          * code run (return 0). These are the guest's own NAND API wrappers and the
          * save layer that names "savedata.dat"/"banner.bin" (0x8073DAA0 /
@@ -4075,7 +4107,15 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
          * Cap: these fire a few dozen times at most. */
         case 0x8061E270: case 0x8061E2F0: case 0x8061E370: case 0x8061E3F0:
         case 0x805FFF70: case 0x805FF7A0: case 0x8061FBE0: case 0x8061FA70:
-        case 0x8061E8C0: case 0x8061E9E0: case 0x8061E7D0: {
+        case 0x8061E8C0: case 0x8061E9E0: case 0x8061E7D0:
+        /* The save module's async chain (5c.40): the driver fn_80600010 wires
+         * fn_805FFF70 (the NAND-create step) as a callback, and the steps below
+         * chain into each other. Probing them all says *which* step the game
+         * actually reaches - the create is the question. */
+        case 0x80600010: case 0x806000A0:
+        case 0x805FF770: case 0x805FF800: case 0x805FF900: case 0x805FFA60:
+        case 0x805FFB20: case 0x805FFC10: case 0x805FFCB0: case 0x805FFDB0:
+        case 0x805FFED0: {
             if (tls_nand_probe_on()) {
                 static u32 s_nandlayer_n = 0;
                 if (s_nandlayer_n < 60) {
@@ -6959,6 +6999,23 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 printf("[TLS 800A4228] #%d mgr=0x%08X -> returning 0 (idle, lr=0x%08X)\n",
                        s_4228_calls, mgr, ctx->lr);
                 fflush(stdout);
+            }
+            /* TLS_NO_4228_FABRICATION=1 runs the guest's own three instructions
+             * instead (flag = mgr+0x15C != 0, *out = mgr+0x168). 5c.39 measured that
+             * with the *lying* NAND the title then reached mode 9 with no message and
+             * never left Titl; the NAND answers have changed since, so this flag
+             * re-measures that path without making it the default. */
+            {
+                static int s_no_fab = -1;
+                if (s_no_fab < 0) s_no_fab = getenv("TLS_NO_4228_FABRICATION") ? 1 : 0;
+                if (s_no_fab) {
+                    u32 state = mgr ? mem_read32(ctx, mgr + 0x15C) : 0;
+                    u32 status = mgr ? mem_read32(ctx, mgr + 0x168) : 0;
+                    if (out_addr) mem_write32(ctx, out_addr, status);
+                    ctx->gpr[3] = (state != 0) ? 1u : 0u;
+                    ctx->pc = ctx->lr;
+                    return 1;
+                }
             }
             ctx->gpr[3] = 0; // return 0 (idle / ready)
             ctx->pc = ctx->lr;

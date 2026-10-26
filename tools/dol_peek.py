@@ -1,60 +1,64 @@
-"""Read words/strings out of the guest DOL by virtual address.
+"""Read words/strings/pointers out of the guest image by virtual address.
 
-The NAND layer's ISFS->NAND error table, the 20-entry GetUsage path table and the
-home-dir string are static data in build/SLSEXJ/main.dol, so read them from the
-image instead of guessing from a run. Usage:
+The NAND layer's error maps, the save-layer dispatch tables and the save-file name
+strings are all static data in the guest image, so read them from the image instead
+of guessing from a run.
 
-    python tools/dol_peek.py <hexaddr> <count> [--str]
+`build/SLSEXJ/main.elf` is used, not `main.dol`: the DOL in this tree has a
+non-standard section header (textSize[0] reads as 0x8086E140), so an address can
+land in the wrong "section" and return plausible-looking garbage. The ELF's
+PT_LOAD program headers are unambiguous (ELF32, big-endian, PowerPC).
 
---str prints each word's target interpreted as a C string.
+Usage:
+    python tools/dol_peek.py <hexaddr> <count> [--str|--ptr]
+    python tools/dol_peek.py --find <hexword>       # where is this 32-bit word?
+    python tools/dol_peek.py --strfind <text>       # where is this C string?
 """
 import struct
 import sys
 
-DOL = "build/SLSEXJ/main.dol"
+ELF = "build/SLSEXJ/main.elf"
 
 
-def load_sections(path=DOL):
-    """DOL header: 7 text + 11 data sections, each {offset, address, size}."""
+def load_segments(path=ELF):
+    """[(vaddr, size, file_offset)] from the PT_LOAD program headers."""
     data = open(path, "rb").read()
-    text_off = struct.unpack_from(">7I", data, 0x00)
-    data_off = struct.unpack_from(">11I", data, 0x1C)
-    text_addr = struct.unpack_from(">7I", data, 0x48)
-    data_addr = struct.unpack_from(">11I", data, 0x64)
-    text_size = struct.unpack_from(">7I", data, 0x80)
-    data_size = struct.unpack_from(">11I", data, 0x9C)
-    secs = []
-    for i in range(7):
-        if text_size[i]:
-            secs.append((text_addr[i], text_size[i], text_off[i]))
-    for i in range(11):
-        if data_size[i]:
-            secs.append((data_addr[i], data_size[i], data_off[i]))
-    return data, secs
+    if data[:4] != b"\x7fELF":
+        raise SystemExit("%s is not an ELF" % path)
+    if data[4] != 1 or data[5] != 2:
+        raise SystemExit("expected ELF32 big-endian")
+    e_phoff, = struct.unpack_from(">I", data, 0x1C)
+    e_phentsize, e_phnum = struct.unpack_from(">HH", data, 0x2A)
+    segs = []
+    for i in range(e_phnum):
+        off = e_phoff + i * e_phentsize
+        p_type, p_offset, p_vaddr, p_paddr, p_filesz, p_memsz = struct.unpack_from(">6I", data, off)
+        if p_type == 1 and p_filesz:  # PT_LOAD
+            segs.append((p_vaddr, p_filesz, p_offset))
+    return data, segs
 
 
-def read(addr, n, data=None, secs=None):
-    """Read n bytes, crossing section boundaries (the DOL splits .text/.data)."""
+def read(addr, n, data=None, segs=None):
     out = bytearray()
     a = addr
     while len(out) < n:
-        for saddr, size, off in secs:
-            if saddr <= a < saddr + size:
-                take = min(n - len(out), saddr + size - a)
-                out += data[off + (a - saddr): off + (a - saddr) + take]
+        for vaddr, size, off in segs:
+            if vaddr <= a < vaddr + size:
+                take = min(n - len(out), vaddr + size - a)
+                out += data[off + (a - vaddr): off + (a - vaddr) + take]
                 a += take
                 break
         else:
-            raise SystemExit("address 0x%08X not inside any DOL section" % a)
+            raise SystemExit("address 0x%08X not inside any loaded segment" % a)
     return bytes(out)
 
 
-def cstr(addr, data, secs, limit=256):
+def cstr(addr, data, segs, limit=256):
     out = b""
     a = addr
     while len(out) < limit:
         try:
-            out += read(a, 1, data, secs)
+            out += read(a, 1, data, segs)
         except SystemExit:
             break
         if out.endswith(b"\x00"):
@@ -64,22 +68,47 @@ def cstr(addr, data, secs, limit=256):
 
 
 def main():
+    if len(sys.argv) >= 3 and sys.argv[1] == "--find":
+        want = struct.pack(">I", int(sys.argv[2], 16))
+        data, segs = load_segments()
+        for i in range(len(data) - 3):
+            if data[i:i + 4] == want:
+                for vaddr, size, off in segs:
+                    if off <= i < off + size:
+                        print("0x%08X" % (vaddr + (i - off)))
+        return
+    if len(sys.argv) >= 3 and sys.argv[1] == "--strfind":
+        needle = sys.argv[2].encode()
+        data, segs = load_segments()
+        i = 0
+        while True:
+            i = data.find(needle, i)
+            if i < 0:
+                return
+            for vaddr, size, off in segs:
+                if off <= i < off + size:
+                    print("%r at 0x%08X" % (sys.argv[2], vaddr + (i - off)))
+            i += 1
+
     addr = int(sys.argv[1], 16)
     count = int(sys.argv[2])
-    as_str = "--str" in sys.argv
-    data, secs = load_sections()
-    if as_str:
-        words = struct.unpack(">%dI" % count, read(addr, count * 4, data, secs))
-        for i, w in enumerate(words):
+    data, segs = load_segments()
+    for i in range(count):
+        w = struct.unpack_from(">I", read(addr + i * 4, 4, data, segs))[0]
+        s = struct.unpack(">i", struct.pack(">I", w))[0]
+        extra = ""
+        if "--str" in sys.argv:
             try:
-                print("%08X +%02X: %08X %r" % (addr + i * 4, i * 4, w, cstr(w, data, secs)))
+                extra = " %r" % cstr(w, data, segs)
             except SystemExit:
-                print("%08X +%02X: %08X <unmapped>" % (addr + i * 4, i * 4, w))
-    else:
-        for i in range(count):
-            w = struct.unpack(">I", read(addr + i * 4, 4, data, secs))[0]
-            s = struct.unpack(">i", struct.pack(">I", w))[0]
-            print("%08X +%02X: %08X  (s32 %d)" % (addr + i * 4, i * 4, w, s))
+                extra = " <unmapped>"
+        elif "--ptr" in sys.argv:
+            try:
+                read(w, 4, data, segs)
+                extra = " <loaded>"
+            except SystemExit:
+                extra = " <not-loaded>"
+        print("%08X +%02X: %08X  (s32 %d)%s" % (addr + i * 4, i * 4, w, s, extra))
 
 
 if __name__ == "__main__":
