@@ -6203,3 +6203,33 @@ fix, not the create; but it removes the "the guest is operating on nonsense path
 Cumulative status of defect 2 is unchanged in one respect and better in another: the create still never
 happens, but the device layer (`/dev/fs` and now `/dev/es`), the path space and the host tree are all
 faithful, so the remaining gap is purely the guest's own manager state machine (5c.41 D/E/F).
+
+#### 5c.41 H. The host NAND now holds the directory skeleton an installed title has
+
+With `/dev/es` answered (5c.41 G) the guest asks about its real paths, and a console that has this title
+installed already holds the directories the NAND keeps for it - above all
+`/title/00010000/534c5345/data`, the title's own data directory. The host tree was empty, so
+`GetAttr`/`GetUsage`/`ReadDir` on that directory answered **"missing"**, which is not what a console says.
+
+`tls_nand_host_init()` now creates the skeleton once (`savedata`, `meta`, `ticket`, `shared2/sys`,
+`title/00010000/534c5345/data`). This is device state, not guest state: no file content is invented, only
+directories. (`CreateDirectoryA` does not create intermediates, so each level is listed - that bit me
+once and is worth remembering.)
+
+Measured:
+
+```
+before:  cmd=12 GetUsage '/title/00010000/534c5345/data' -> -106 (missing)
+after :  cmd=12 GetUsage '/title/00010000/534c5345/data' -> 0 blocks, 0 entries
+```
+
+Sequence still `Boot -> Stra -> Titl -> Game`, frame 3500 **unchanged**, `savedata/` stays empty - the
+guest still issues no `CreateFile`. Fidelity only, not the create.
+
+#### I. Where the host NAND lives now (read this before seeding anything)
+
+* Guest path `/title/00010000/534c5345/data/savedata.dat`
+  maps to host `savedata/title/00010000/534c5345/data/savedata.dat`
+  (on Windows `savedata` and `SaveData` are the same directory, and the runner creates both names).
+* So a Dolphin save must be seeded at **`SaveData/title/00010000/534c5345/data/`**, not at
+  `savedata/savedata.dat` as 5c.39 did. The old flat convention no longer matches any guest path.
