@@ -6168,3 +6168,38 @@ Next step: read `0x800062F8` (what it submits to, and whether the consumer is th
 * The create branch needs state 3 dispatched with kind 0, which needs the title's submitted kind-0
   request to be completed before the driver overwrites kind. That is where the bug is.
 * Nothing fabricated has been added; `savedata.dat` still does not appear.
+
+#### 5c.41 G. `/dev/es` was the reason the save paths were wrong - now answered, and the host NAND mirrors the real tree
+
+`/dev/es` had never been modelled. The game issues:
+
+* **cmd=32**, one 8-byte **output** vector - `ES_GetTitleId`;
+* **cmd=29**, one 8-byte input and one **30-byte output** vector - the title's data directory.
+
+Both reply buffers were left zeroed, so the guest read back **title id 0** and an **empty home
+directory**, and every ISFS path it built was root-relative. Measured before/after:
+
+```
+before:  ISFS ioctl cmd=6 path='/savedata.dat'                                  -> -106
+after :  ISFS ioctl cmd=6 path='/title/00010000/534c5345/data/savedata.dat'      -> -106
+```
+
+which is exactly the layout Dolphin's NAND has. 30 bytes is precisely
+`"/title/00010000/534c5345/data"` plus its NUL - that is why the reply vector is that size - and both
+answers come from the game's own title (SLSEXJ -> `0x00010000534C5345`), not from invention.
+
+The host NAND now **mirrors the guest tree** (`savedata/<guest path>`) instead of flattening every path
+into one directory: `ReadDir`/`GetUsage`/`GetAttr` operate on real directories (a directory lists, a
+file answers `-101` "not a directory", a missing path `-106`), and `CreateFile`/`CreateDir` create their
+parent directories. **A real save therefore lands at
+`savedata/title/00010000/534c5345/data/savedata.dat`** - note this supersedes the 5c.39 seeding
+convention (`savedata/savedata.dat` no longer matches the guest path).
+
+Measured: sequence still `Boot -> Stra -> Titl -> Game`, frame 3500 **unchanged**
+(`A00272DF...`), `savedata/` still empty - the guest still issues no `CreateFile`. This is a fidelity
+fix, not the create; but it removes the "the guest is operating on nonsense paths" possibility that
+5c.40/5c.41 could not rule out, and it means any future create lands where a real NAND keeps it.
+
+Cumulative status of defect 2 is unchanged in one respect and better in another: the create still never
+happens, but the device layer (`/dev/fs` and now `/dev/es`), the path space and the host tree are all
+faithful, so the remaining gap is purely the guest's own manager state machine (5c.41 D/E/F).
