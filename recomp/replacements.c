@@ -1453,40 +1453,33 @@ typedef struct {
 
 static IosFile s_ios_files[16] = {0};
 
-/* Open the host stand-in for the NAND save file.
+static void fs_path_to_host(const char* guest_path, char* out, size_t outsz);
+
+/* Open the host stand-in for a NAND file.
  *
  * The guest's save-data check distinguishes "no save data yet" (a fresh console)
  * from "the data is corrupt" purely by what the NAND layer answers, so fabricating
- * a zero-filled file when there is none makes every first boot take the corrupt
- * path - measured: the title asks "The save data cannot be used because the data
- * is corrupted. Recreate save data?" instead of offering a new game. So: create
- * only when the guest asked to create, and report "no such file" otherwise. */
-static bool ios_open_savedata(uint32_t mode, FILE** out_fp) {
-#ifdef _WIN32
-    CreateDirectoryA("savedata", NULL);
-#endif
-    const char* path = "savedata/savedata.dat";
-    FILE* fp = NULL;
-    if (mode & 2u) { // create
-        fp = fopen(path, "r+b");
-        if (!fp) {
-            fp = fopen(path, "w+b");
-            if (fp) {
-                static const uint8_t zero_block[4096] = {0};
-                for (uint32_t i = 0; i < 0x159580 / 4096; i++) fwrite(zero_block, 1, 4096, fp);
-                if (0x159580 % 4096 > 0) fwrite(zero_block, 1, 0x159580 % 4096, fp);
-                fflush(fp);
-                fseek(fp, 0, SEEK_SET);
-                printf("[TLS NAND] created savedata/savedata.dat (%u bytes)\n", 0x159580);
-                fflush(stdout);
-            }
-        }
-    } else {
-        fp = fopen(path, "rb");
-    }
+ * a file when there is none makes every first boot take the corrupt path -
+ * measured: the title asks "The save data cannot be used because the data is
+ * corrupted. Recreate save data?" instead of offering a new game.
+ *
+ * 5c.40 retires the last fabrication in here: this used to answer `mode & 2` by
+ * *creating* the file and filling it with 0x159580 zero bytes. ISFS_Open does not
+ * create (the guest must issue CreateFile, command 9, first), and writing a
+ * guessed 1 414 528 zeroes invented the save's contents. The file is opened only
+ * when the host really holds it; the guest's own create+write path fills it. */
+static bool ios_open_nand_file(const char* guest_path, uint32_t mode, FILE** out_fp) {
+    char host[160];
+    fs_path_to_host(guest_path, host, sizeof(host));
+    FILE* fp = fopen(host, (mode & 2u) ? "r+b" : "rb");
     if (!fp) return false;
     *out_fp = fp;
     return true;
+}
+
+/* Is this an ISFS path (a file on the NAND) rather than an IOS device node? */
+static int isfs_is_nand_file_path(const char* path) {
+    return path && path[0] == '/' && strncmp(path, "/dev/", 5) != 0;
 }
 
 static int ios_alloc_fd(const char* path, uint32_t mode, FILE* fp) {
@@ -1603,8 +1596,15 @@ static int isfs_host_file_size(const char* guest_path, u32* size_out) {
 }
 
 static int tls_isfs_service_on(void) {
+    /* ON by default since 5c.40: it is now a device model, not a stub. With the
+     * service off the guest gets "success" for commands that were never executed,
+     * which is exactly the fabrication 5c.39/5c.40 removed. TLS_ISFS_SERVICE=0
+     * restores the old stub for A/B comparison. */
     static int v = -1;
-    if (v < 0) v = getenv("TLS_ISFS_SERVICE") ? 1 : 0;
+    if (v < 0) {
+        const char* env = getenv("TLS_ISFS_SERVICE");
+        v = (env && env[0] == '0') ? 0 : 1;
+    }
     return v;
 }
 
@@ -1624,86 +1624,306 @@ static u32 isfs_path_of_vec(CPUState* ctx, u32 vecs, u32 index, char* out, size_
     return n;
 }
 
-/* Service an IOSIoVector operation on /dev/fs (ISFS).
+/* ---- /dev/fs (ISFS) device model, from the guest's own SDK wrappers ----------
  *
- * Command numbers are the guest's own, read from the SDK wrappers in src/isfs.c
- * instead of guessed from the payload:
+ * Command numbers, payload sizes and reply layouts are read from src/isfs.c, not
+ * guessed. Every wrapper below is named by the SDK symbol it belongs to:
  *
- *   3  CreateDir(path, owner, group, attr)   ioctl,    0x4c-byte request
- *   4  ReadDir(path, *count, [entries])      ioctlv,   count*13-byte entry vector
+ *   3  CreateDir(path, owner, group, attr)   ioctl,   0x4c-byte request
+ *   4  ReadDir(path, *count, [entries])      ioctlv,  count-only or count*13 bytes
  *   6  GetAttr(path) -> 0x4c reply           ioctl
  *   7  Delete(path)                          ioctl
- *   8  Rename(old, new)                      ioctl,    two 0x40-byte paths
- *   9  CreateFile(path, owner, group, attr)  ioctl,    0x4c-byte request
- *  11  GetFileStats(fd) -> {len, offset}     ioctl on the *open file* fd
- *  12  GetUsage(path) -> two words           ioctlv,   the create path's space probe
+ *   8  Rename(old, new)                      ioctl,   two 0x40-byte paths
+ *   9  CreateFile(path, owner, group, attr)  ioctl,   0x4c-byte request
+ *  12  GetUsage(path) -> two words           ioctlv,  the create path's space probe
  *
- * 5c.39 retired a fabricated side effect here: this used to treat command 4 as
- * CreateFile, so a plain *ReadDir* created a host file (measured: the guest asks
- * ReadDir about "/savedata.dat" and "/banner.bin" from NANDGetStatus, and the
- * serviced handler made empty files for both). CreateFile is command 9. Only
- * 7/8/9 change the host; 4/6 only answer. Command 12 is still unmodelled - its
- * two-word reply layout is not established - so it answers a zeroed payload,
- * which is why the guest's create path never places the file (5c.39 F).
- */
-static void tls_isfs_ioctlv_service(CPUState* ctx, u32 fd, u32 cmd, u32 num_in, u32 num_io,
-                                    u32 vecs) {
+ * Request layout for 3/9 (fn_8061A880 / fn_8061B4D0): the NUL-terminated path,
+ * then owner at +0x49, group at +0x46, attr at +0x47 and +0x48.
+ * Reply layout for 6 (fn_8061AD30): u32 length at +0, u16 mode at +4, and the
+ * same three attribute bytes at +0x49/+0x46/+0x47/+0x48.
+ * ReadDir 13-byte entry records: type byte first, then up to 12 name bytes.
+ *
+ * 5c.39 retired a fabrication here: command 4 used to create a host file, so a
+ * plain *ReadDir* made empty files for "/savedata.dat" and "/banner.bin".
+ *
+ * 5c.40 retires two more, both measured:
+ *
+ *  A) ioctl commands were never serviced at all. The handler was gated on
+ *     `num_io > 0`, and 3/6/7/8/9 are plain ioctls (num_io == 0), so Delete,
+ *     CreateFile and CreateDir were dropped on the floor. The guest was told
+ *     "success" for a delete that removed nothing.
+ *  B) Missing paths answered "success" with zeroed payloads. The guest's own
+ *     NAND layer treats exactly -106 (ENOENT, fn_80622310 tests `cmpwi r3,-0x6a`)
+ *     as "this path does not exist", and its ReadDir callback (fn_80620C60) has
+ *     no case for "success, zero entries" - it calls no continuation at all. So
+ *     answering success/count=0 did not say "empty directory": it said nothing,
+ *     and the create path never continued to CreateFile.
+ *
+ * The host NAND is a flat file set under savedata/, and the guest's own paths are
+ * root-relative ("/savedata.dat"), so "" and "/" are the root directory listing.
+ * ------------------------------------------------------------------------- */
+#define TLS_ISFS_ENOENT (-106) /* ISFS/IPC "no such file", the code the guest maps */
+#define TLS_ISFS_EEXIST (-105)
+
+/* Is this guest path the NAND root? ("", "/", "//" ...) */
+static int isfs_is_root_path(const char* p) {
+    if (!p) return 1;
+    for (; *p; p++) if (*p != '/') return 0;
+    return 1;
+}
+
+/* Host directory that backs the NAND root. */
+#define TLS_NAND_DIR "savedata"
+
+/* Number of entries in the host NAND directory (the root directory listing). */
+static u32 isfs_host_root_count(void) {
+    u32 n = 0;
+#ifdef _WIN32
+    WIN32_FIND_DATAA fd;
+    HANDLE h = FindFirstFileA(TLS_NAND_DIR "\\*", &fd);
+    if (h == INVALID_HANDLE_VALUE) return 0;
+    do {
+        if (strcmp(fd.cFileName, ".") == 0 || strcmp(fd.cFileName, "..") == 0) continue;
+        n++;
+    } while (FindNextFileA(h, &fd));
+    FindClose(h);
+#else
+    DIR* d = opendir(TLS_NAND_DIR);
+    if (!d) return 0;
+    struct dirent* e;
+    while ((e = readdir(d))) {
+        if (strcmp(e->d_name, ".") == 0 || strcmp(e->d_name, "..") == 0) continue;
+        n++;
+    }
+    closedir(d);
+#endif
+    return n;
+}
+
+/* Copy up to `max` root entries as 13-byte ReadDir records (type byte + name).
+ * Returns how many were written. A save file is a plain file, type 0. */
+static u32 isfs_host_root_entries(CPUState* ctx, u32 buf, u32 max) {
+    u32 written = 0;
+#ifdef _WIN32
+    WIN32_FIND_DATAA fd;
+    HANDLE h = FindFirstFileA(TLS_NAND_DIR "\\*", &fd);
+    if (h == INVALID_HANDLE_VALUE) return 0;
+    do {
+        if (strcmp(fd.cFileName, ".") == 0 || strcmp(fd.cFileName, "..") == 0) continue;
+        if (written >= max) break;
+        u32 rec = buf + written * 13;
+        if (!resolve_guest_pointer(ctx, rec)) break;
+        mem_write8(ctx, rec + 0, (fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY) ? 1u : 0u);
+        for (u32 i = 1; i < 13; i++) {
+            char c = fd.cFileName[i - 1];
+            mem_write8(ctx, rec + i, (u8)c);
+            if (!c) break;
+        }
+        written++;
+    } while (FindNextFileA(h, &fd));
+    FindClose(h);
+#else
+    (void)ctx; (void)buf; (void)max;
+#endif
+    return written;
+}
+
+/* Blocks a file of this size occupies, in the unit the guest's own limits use:
+ * fn_80622310 allows 0x400 (1024) of them per save and 0x4400 (17408) of them
+ * for the whole NAND, i.e. 8 KiB NAND blocks. */
+static u32 isfs_blocks_for_size(u32 size) { return (size + 0x1FFF) / 0x2000; }
+
+/* Service an ISFS *ioctl* (commands 3, 6, 7, 8, 9): the request/reply travel as
+ * plain in/out buffers, not as io vectors. Returns the ISFS result code. */
+static s32 tls_isfs_ioctl_service(CPUState* ctx, u32 cmd, u32 in_buf, u32 in_len, u32 out_buf,
+                                  u32 out_len) {
     char guest_path[80];
     char host_path[160];
     char made_path[200] = {0};
     guest_path[0] = '\0';
-    isfs_path_of_vec(ctx, vecs, 0, guest_path, sizeof(guest_path));
+    u32 plen = isfs_read_guest_path(ctx, in_buf, in_len, guest_path, sizeof(guest_path));
+    s32 result = 0;
 
-    if (cmd == 7 && guest_path[0]) {
-        /* Delete(path): the only way a host file disappears. */
-        fs_path_to_host(guest_path, host_path, sizeof(host_path));
-        remove(host_path);
-        snprintf(made_path, sizeof(made_path), "delete %s", guest_path);
-    } else if (cmd == 8 && guest_path[0]) {
-        /* Rename(old, new): vec0 = old path, vec1 = new path. */
-        char new_path[80];
-        isfs_path_of_vec(ctx, vecs, 1, new_path, sizeof(new_path));
-        if (new_path[0]) {
-            char host_new[160];
-            fs_path_to_host(guest_path, host_path, sizeof(host_path));
-            fs_path_to_host(new_path, host_new, sizeof(host_new));
-            remove(host_new);
-            rename(host_path, host_new);
-            snprintf(made_path, sizeof(made_path), "rename %s -> %s", guest_path, new_path);
-        }
-    } else if (cmd == 9 && guest_path[0]) {
-        /* CreateFile: give the guest a real (empty) host file; IOS_Write fills it. */
-        fs_path_to_host(guest_path, host_path, sizeof(host_path));
-#ifdef _WIN32
-        CreateDirectoryA("savedata", NULL);
-#endif
-        FILE* f = fopen(host_path, "ab");
-        if (f) fclose(f);
-        snprintf(made_path, sizeof(made_path), "create %s -> %s", guest_path, host_path);
+    if (!plen) {
+        if (tls_nand_probe_on()) tls_nand_probe_slot("ISFS ioctl with no path -> -101 (EINVAL)");
+        return -101;
     }
 
-    /* Reading commands get a zeroed reply: ReadDir's entry count is 0 because the
-     * host NAND is modelled as a flat file set with no directories, and GetUsage
-     * stays unmodelled. Leaving an unmodelled payload untouched would hand the
-     * guest whatever the IOS scratch heap held (these buffers are iosAllocAligned
-     * scratch), which is worse than an explicit zero. */
-    if (cmd == 4 || cmd == 6 || cmd == 12) {
-        for (u32 i = num_in; i < num_in + num_io && i < 8; i++) {
-            u32 p = mem_read32(ctx, vecs + i * 8);
-            u32 len = mem_read32(ctx, vecs + i * 8 + 4);
-            if (!p || !len) continue;
-            void* dst = resolve_guest_pointer(ctx, p);
-            if (dst) memset(dst, 0, len > 256 ? 256 : len);
+    u32 size = 0;
+    int exists = isfs_host_file_size(guest_path, &size);
+    fs_path_to_host(guest_path, host_path, sizeof(host_path));
+
+    switch (cmd) {
+    case 3: /* CreateDir */
+        if (exists) {
+            result = TLS_ISFS_EEXIST;
+        } else {
+#ifdef _WIN32
+            CreateDirectoryA(host_path, NULL);
+#endif
+            result = 0;
+            snprintf(made_path, sizeof(made_path), "mkdir %s", guest_path);
         }
+        break;
+    case 6: { /* GetAttr -> 0x4c reply in the layout fn_8061AD30 reads */
+        if (!exists) {
+            result = TLS_ISFS_ENOENT;
+            break;
+        }
+        if (out_buf && out_len >= 0x4c) {
+            memset(resolve_guest_pointer(ctx, out_buf), 0, out_len);
+            mem_write32(ctx, out_buf + 0x00, size); /* +0: length   */
+            mem_write16(ctx, out_buf + 0x04, 0);    /* +4: mode     */
+            mem_write8(ctx, out_buf + 0x46, 0);     /* +0x46: group  */
+            mem_write8(ctx, out_buf + 0x47, 0);     /* +0x47: attr   */
+            mem_write8(ctx, out_buf + 0x48, 0);     /* +0x48: attr2  */
+            mem_write8(ctx, out_buf + 0x49, 0);     /* +0x49: owner  */
+        }
+        break;
+    }
+    case 7: /* Delete */
+        if (!exists) {
+            result = TLS_ISFS_ENOENT;
+            break;
+        }
+        if (remove(host_path) == 0) {
+            snprintf(made_path, sizeof(made_path), "delete %s", guest_path);
+        } else {
+            result = TLS_ISFS_ENOENT;
+        }
+        break;
+    case 8: { /* Rename(old, new): two 0x40-byte paths in one buffer */
+        char new_path[80];
+        u32 off = plen + 1;
+        u32 n = isfs_read_guest_path(ctx, in_buf + off, in_len > off ? in_len - off : 0,
+                                     new_path, sizeof(new_path));
+        if (!exists) {
+            result = TLS_ISFS_ENOENT;
+        } else if (!n) {
+            result = -101;
+        } else {
+            char host_new[160];
+            fs_path_to_host(new_path, host_new, sizeof(host_new));
+            remove(host_new);
+            if (rename(host_path, host_new) == 0) {
+                snprintf(made_path, sizeof(made_path), "rename %s -> %s", guest_path, new_path);
+            } else {
+                result = TLS_ISFS_ENOENT;
+            }
+        }
+        break;
+    }
+    case 9: /* CreateFile: the guest writes the contents through IOS_Write */
+        if (exists) {
+            result = TLS_ISFS_EEXIST;
+        } else {
+#ifdef _WIN32
+            CreateDirectoryA(TLS_NAND_DIR, NULL);
+#endif
+            FILE* f = fopen(host_path, "wb");
+            if (!f) {
+                result = -102; /* ISFS_EIO */
+            } else {
+                fclose(f);
+                snprintf(made_path, sizeof(made_path), "create %s -> %s", guest_path, host_path);
+                printf("[TLS ISFS] CreateFile '%s' -> %s\n", guest_path, host_path);
+                fflush(stdout);
+            }
+        }
+        break;
+    default:
+        /* Not a plain ioctl command: leave the buffer alone rather than inventing
+         * a reply. The caller reports 0 like the hardware does for unknown cmds. */
+        break;
     }
 
     if (tls_nand_probe_on()) {
         char msg[400];
-        snprintf(msg, sizeof(msg), "ISFS cmd=%u fd=%u nin=%u nio=%u path='%s'%s%s",
-                 cmd, fd, num_in, num_io, guest_path,
-                 made_path[0] ? " -> " : "", made_path[0] ? made_path : "");
+        snprintf(msg, sizeof(msg), "ISFS ioctl cmd=%u path='%s' -> %d%s%s", cmd, guest_path,
+                 result, made_path[0] ? " " : "", made_path[0] ? made_path : "");
         tls_nand_probe_slot(msg);
     }
+    return result;
+}
+
+/* Service an ISFS *ioctlv* (commands 4 ReadDir, 12 GetUsage). Returns the ISFS
+ * result code, which the SDK's callback (_isfsFuncCb) only passes its payload
+ * copy through when it is >= 0 - so an error code here is what makes the guest's
+ * completion handler run at all. */
+static s32 tls_isfs_ioctlv_service(CPUState* ctx, u32 fd, u32 cmd, u32 num_in, u32 num_io,
+                                   u32 vecs) {
+    char guest_path[80];
+    char made_path[200] = {0};
+    guest_path[0] = '\0';
+    isfs_path_of_vec(ctx, vecs, 0, guest_path, sizeof(guest_path));
+    s32 result = 0;
+
+    /* Vector data/length accessors: vecs is an array of {void* data; u32 size;}. */
+    #define ISFS_VEC_DATA(i) mem_read32(ctx, vecs + (i) * 8)
+    #define ISFS_VEC_LEN(i)  mem_read32(ctx, vecs + (i) * 8 + 4)
+
+    if (cmd == 4) {
+        /* fn_8061AA80 / fn_8061ABE0: with an entries buffer the vectors are
+         *   in  = {path, requested count}          io = {entries, returned count}
+         * and with entries == NULL (count only)
+         *   in  = {path}                           io = {returned count}. */
+        u32 count_out = (num_in >= 2) ? ISFS_VEC_DATA(num_in + 1) : ISFS_VEC_DATA(1);
+        u32 entries = (num_in >= 2) ? ISFS_VEC_DATA(num_in) : 0;
+        u32 max_entries = (num_in >= 2) ? (ISFS_VEC_LEN(num_in) / 13) : 0;
+
+        if (isfs_is_root_path(guest_path)) {
+            u32 count = isfs_host_root_count();
+            if (entries && count_out) {
+                u32 want = max_entries ? max_entries : count;
+                u32 written = isfs_host_root_entries(ctx, entries, want);
+                if (count_out) mem_write32(ctx, count_out, written);
+                snprintf(made_path, sizeof(made_path), "root listing %u/%u", written, count);
+            } else if (count_out) {
+                mem_write32(ctx, count_out, count);
+                snprintf(made_path, sizeof(made_path), "root count %u", count);
+            }
+        } else {
+            /* A save file is not a directory. The guest's ReadDir callback has no
+             * "success, zero entries" case, so a truthful "not a directory" error
+             * is what lets the NAND layer continue instead of going quiet. */
+            u32 size = 0;
+            result = isfs_host_file_size(guest_path, &size) ? -101 /* EINVAL: not a dir */
+                                                            : TLS_ISFS_ENOENT;
+            if (count_out) mem_write32(ctx, count_out, 0);
+        }
+    } else if (cmd == 12) {
+        /* fn_8061B3A0: {path} in, {u32 used, u32 used} out. fn_80622310 walks a
+         * 20-entry path table accumulating both words; it tests for -0x6a and
+         * keeps going, so "missing" must be an error, not a zero. */
+        u32 out0 = (num_io >= 1) ? ISFS_VEC_DATA(num_in) : 0;
+        u32 out1 = (num_io >= 2) ? ISFS_VEC_DATA(num_in + 1) : 0;
+        u32 size = 0;
+        if (isfs_host_file_size(guest_path, &size)) {
+            if (out0) mem_write32(ctx, out0, isfs_blocks_for_size(size));
+            if (out1) mem_write32(ctx, out1, 1); /* one file */
+            snprintf(made_path, sizeof(made_path), "%u blocks, 1 file of %u bytes",
+                     isfs_blocks_for_size(size), size);
+        } else if (isfs_is_root_path(guest_path)) {
+            u32 n = isfs_host_root_count();
+            if (out0) mem_write32(ctx, out0, 0);
+            if (out1) mem_write32(ctx, out1, n);
+            snprintf(made_path, sizeof(made_path), "0 blocks, %u files in root", n);
+        } else {
+            result = TLS_ISFS_ENOENT;
+        }
+    }
+
+    #undef ISFS_VEC_DATA
+    #undef ISFS_VEC_LEN
+
+    if (tls_nand_probe_on()) {
+        char msg[400];
+        snprintf(msg, sizeof(msg), "ISFS cmd=%u fd=%u nin=%u nio=%u path='%s' -> %d%s%s",
+                 cmd, fd, num_in, num_io, guest_path, result,
+                 made_path[0] ? " " : "", made_path[0] ? made_path : "");
+        tls_nand_probe_slot(msg);
+    }
+    return result;
 }
 
 /* Wait-loop probe. The Chapter 1 handoff wedges with the guest parked inside
@@ -3266,10 +3486,19 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 return 1;
             }
 
+            /* Every non-/dev path is a file on the NAND, so it must be opened from
+             * the host file set rather than handed a fabricated fd with no backing
+             * file. 5c.40: this used to special-case only names containing
+             * "savedata", so IOS_OpenAsync("/banner.bin") *succeeded* with
+             * fp=none and the following 29 344-byte read returned 0 - a lie that
+             * let the guest believe an absent banner had been read.
+             * /shared2/sys/SYSCONF is the one exception: we hold no SYSCONF image
+             * (a separate defect - it carries boot settings, not save data), so it
+             * keeps answering an empty configuration for now. */
             FILE* fp = NULL;
-            if (path && strstr(path, "savedata")) {
-                if (!ios_open_savedata(mode, &fp)) {
-                    printf("[TLS IOS_OpenAsync] %s -> no such file (-6), NAND has no save data\n", path);
+            if (isfs_is_nand_file_path(path) && strcmp(path, "/shared2/sys/SYSCONF") != 0) {
+                if (!ios_open_nand_file(path, mode, &fp)) {
+                    printf("[TLS IOS_OpenAsync] %s -> no such file (-6), NAND has no such file\n", path);
                     fflush(stdout);
                     tls_ipc_enqueue_callback(cb, -6, usrdata); // IPC_RESULT_NOEXISTS
                     ctx->gpr[3] = 0; // IPC_ERR_NONE
@@ -3305,10 +3534,12 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 return 1;
             }
 
+            /* Same rule as IOS_OpenAsync: a NAND path with no host file does not
+             * open. /shared2/sys/SYSCONF stays the documented exception. */
             FILE* fp = NULL;
-            if (path && strstr(path, "savedata")) {
-                if (!ios_open_savedata(mode, &fp)) {
-                    printf("[TLS IOS_Open] %s -> no such file (-6), NAND has no save data\n", path);
+            if (isfs_is_nand_file_path(path) && strcmp(path, "/shared2/sys/SYSCONF") != 0) {
+                if (!ios_open_nand_file(path, mode, &fp)) {
+                    printf("[TLS IOS_Open] %s -> no such file (-6), NAND has no such file\n", path);
                     fflush(stdout);
                     ctx->gpr[3] = (u32)-6; // IPC_RESULT_NOEXISTS
                     ctx->pc = ctx->lr;
@@ -3349,6 +3580,21 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 len = ctx->gpr[5];
             void* buf = resolve_guest_pointer(ctx, buf_addr);
             u32 got = 0;
+            /* 5c.40: an fd that was never opened is an error, not a successful
+             * zero-filled read. The save manager keeps operating on fd 0 after its
+             * open of /savedata.dat fails (10 000-frame trace: 17 NANDSeek calls at
+             * lr=0x800A4DA8 walking slot offsets 0x20, 0x13580, 0x26AE0 ... with no
+             * open fd behind them), because every fd-0 read/seek answered "fine". */
+            if (!(fd >= 1 && fd < 16 && s_ios_files[fd].in_use)) {
+                if (tls_nand_probe_on()) {
+                    char msg[192];
+                    snprintf(msg, sizeof(msg), "IOS_Read fd=%u NOT OPEN -> -6", fd);
+                    tls_nand_probe_slot(msg);
+                }
+                ctx->gpr[3] = (u32)-6;
+                ctx->pc = ctx->lr;
+                return 1;
+            }
             if (buf && len > 0) {
                 FILE* fp = ios_fd_file(fd);
                 if (fp) {
@@ -3379,6 +3625,17 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 usrdata = ctx->gpr[7];
             void* buf = resolve_guest_pointer(ctx, buf_addr);
             u32 got = 0;
+            if (!(fd >= 1 && fd < 16 && s_ios_files[fd].in_use)) {
+                if (tls_nand_probe_on()) {
+                    char msg[192];
+                    snprintf(msg, sizeof(msg), "IOS_ReadAsync fd=%u NOT OPEN -> -6", fd);
+                    tls_nand_probe_slot(msg);
+                }
+                tls_ipc_enqueue_callback(cb, -6, usrdata);
+                ctx->gpr[3] = 0;
+                ctx->pc = ctx->lr;
+                return 1;
+            }
             if (buf && len > 0) {
                 FILE* fp = ios_fd_file(fd);
                 if (fp) {
@@ -3405,8 +3662,18 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 buf_addr = ctx->gpr[4];
             u32 len = ctx->gpr[5];
             void* buf = resolve_guest_pointer(ctx, buf_addr);
+            if (!(fd >= 1 && fd < 16 && s_ios_files[fd].in_use)) {
+                if (tls_nand_probe_on()) {
+                    char msg[192];
+                    snprintf(msg, sizeof(msg), "IOS_Write fd=%u NOT OPEN -> -6", fd);
+                    tls_nand_probe_slot(msg);
+                }
+                ctx->gpr[3] = (u32)-6;
+                ctx->pc = ctx->lr;
+                return 1;
+            }
             if (buf && len > 0) {
-                FILE* fp = (fd >= 1 && fd < 16 && s_ios_files[fd].in_use) ? s_ios_files[fd].fp : NULL;
+                FILE* fp = s_ios_files[fd].fp;
                 if (fp) {
                     fwrite(buf, 1, len, fp);
                     fflush(fp);
@@ -3423,8 +3690,19 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 cb = ctx->gpr[6];
             u32 usrdata = ctx->gpr[7];
             void* buf = resolve_guest_pointer(ctx, buf_addr);
+            if (!(fd >= 1 && fd < 16 && s_ios_files[fd].in_use)) {
+                if (tls_nand_probe_on()) {
+                    char msg[192];
+                    snprintf(msg, sizeof(msg), "IOS_WriteAsync fd=%u NOT OPEN -> -6", fd);
+                    tls_nand_probe_slot(msg);
+                }
+                tls_ipc_enqueue_callback(cb, -6, usrdata);
+                ctx->gpr[3] = 0;
+                ctx->pc = ctx->lr;
+                return 1;
+            }
             if (buf && len > 0) {
-                FILE* fp = (fd >= 1 && fd < 16 && s_ios_files[fd].in_use) ? s_ios_files[fd].fp : NULL;
+                FILE* fp = s_ios_files[fd].fp;
                 if (fp) {
                     fwrite(buf, 1, len, fp);
                     fflush(fp);
@@ -3443,7 +3721,17 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             if (origin == 1) whence = SEEK_CUR;
             else if (origin == 2) whence = SEEK_END;
             long cur_pos = 0;
-            FILE* fp = (fd >= 1 && fd < 16 && s_ios_files[fd].in_use) ? s_ios_files[fd].fp : NULL;
+            if (!(fd >= 1 && fd < 16 && s_ios_files[fd].in_use)) {
+                if (tls_nand_probe_on()) {
+                    char msg[192];
+                    snprintf(msg, sizeof(msg), "IOS_Seek fd=%u NOT OPEN off=0x%X -> -6", fd, offset);
+                    tls_nand_probe_slot(msg);
+                }
+                ctx->gpr[3] = (u32)-6;
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            FILE* fp = s_ios_files[fd].fp;
             if (fp) {
                 fseek(fp, offset, whence);
                 cur_pos = ftell(fp);
@@ -3462,7 +3750,18 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             if (origin == 1) whence = SEEK_CUR;
             else if (origin == 2) whence = SEEK_END;
             long cur_pos = 0;
-            FILE* fp = (fd >= 1 && fd < 16 && s_ios_files[fd].in_use) ? s_ios_files[fd].fp : NULL;
+            if (!(fd >= 1 && fd < 16 && s_ios_files[fd].in_use)) {
+                if (tls_nand_probe_on()) {
+                    char msg[192];
+                    snprintf(msg, sizeof(msg), "IOS_SeekAsync fd=%u NOT OPEN off=0x%X -> -6", fd, offset);
+                    tls_nand_probe_slot(msg);
+                }
+                tls_ipc_enqueue_callback(cb, -6, usrdata);
+                ctx->gpr[3] = 0;
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            FILE* fp = s_ios_files[fd].fp;
             if (fp) {
                 fseek(fp, offset, whence);
                 cur_pos = ftell(fp);
@@ -3498,6 +3797,16 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                     tls_nand_probe_slot(msg);
                 }
                 ctx->gpr[3] = (u32)-6; // IPC_RESULT_NOEXISTS
+                ctx->pc = ctx->lr;
+                return 1;
+            }
+            /* /dev/fs is a device with ioctl commands of its own (3 CreateDir,
+             * 6 GetAttr, 7 Delete, 8 Rename, 9 CreateFile). 5c.40: they used to be
+             * dropped because the servicer was gated on `num_io > 0`. Service them
+             * here, as ioctls, and let the result stand in for the reply. */
+            if (strcmp(ios_fd_path(fd), "/dev/fs") == 0 && tls_isfs_service_on()) {
+                s32 r = tls_isfs_ioctl_service(ctx, cmd, in_buf, in_len, out_buf, out_len);
+                ctx->gpr[3] = (u32)r;
                 ctx->pc = ctx->lr;
                 return 1;
             }
@@ -3603,6 +3912,16 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 ctx->pc = ctx->lr;
                 return 1;
             }
+            /* Same rule as the synchronous ioctl: /dev/fs ioctl commands are
+             * serviced as a device (5c.40). The result goes into the callback, which
+             * is where the SDK's async wrappers read it from. */
+            if (strcmp(ios_fd_path(fd), "/dev/fs") == 0 && tls_isfs_service_on()) {
+                s32 r = tls_isfs_ioctl_service(ctx, cmd, in_buf, in_len, out_buf, out_len);
+                tls_ipc_enqueue_callback(cb, r, usrdata);
+                ctx->gpr[3] = 0;
+                ctx->pc = ctx->lr;
+                return 1;
+            }
             /* Same GetAttr rule as the synchronous ioctl (see there): a path the host
              * NAND does not hold answers ENOENT instead of "exists, 0 bytes". */
             u32 isfs_size = 0;
@@ -3666,18 +3985,18 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                          fd, ios_fd_path(fd), cmd, num_in, num_io, vecs, cb);
                 tls_nand_probe_slot(msg);
             }
-            /* ISFS: an operation on /dev/fs. The SDK wrapper reads the result back
-             * out of the FIRST output vector, so leaving it untouched hands the
-             * guest whatever the IOS heap happened to contain (these buffers are
-             * iosAllocAligned scratch). Write the result, and honour CreateFile so
-             * that a create really creates something on the host.
+            /* ISFS: an operation on /dev/fs. The SDK's callback (_isfsFuncCb) copies
+             * the reply payload only when the result is >= 0, so the result code is
+             * part of the answer: a truthful error is what makes the guest's NAND
+             * layer continue (see tls_isfs_ioctlv_service).
              * Only for /dev/fs: an "io" vector is bidirectional (it carries input
              * bytes too), so touching the /dev/es vectors would corrupt those
              * calls' inputs. */
+            s32 isfs_result = 0;
             if (num_io > 0 && strcmp(ios_fd_path(fd), "/dev/fs") == 0 && tls_isfs_service_on()) {
-                tls_isfs_ioctlv_service(ctx, fd, cmd, num_in, num_io, vecs);
+                isfs_result = tls_isfs_ioctlv_service(ctx, fd, cmd, num_in, num_io, vecs);
             }
-            tls_ipc_enqueue_callback(cb, 0, usrdata);
+            tls_ipc_enqueue_callback(cb, isfs_result, usrdata);
             ctx->gpr[3] = 0;
             ctx->pc = ctx->lr;
             return 1;
@@ -3703,10 +4022,11 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 }
                 tls_nand_probe_slot(msg);
             }
+            s32 isfs_result = 0;
             if (num_io > 0 && strcmp(ios_fd_path(fd), "/dev/fs") == 0 && tls_isfs_service_on()) {
-                tls_isfs_ioctlv_service(ctx, fd, cmd, num_in, num_io, vecs);
+                isfs_result = tls_isfs_ioctlv_service(ctx, fd, cmd, num_in, num_io, vecs);
             }
-            ctx->gpr[3] = 0; // Success
+            ctx->gpr[3] = (u32)isfs_result; // ISFS result, 0 = success
             ctx->pc = ctx->lr;
             return 1;
         }
@@ -3745,6 +4065,29 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             ctx->gpr[3] = 0; // SC_STATUS_READY (0 = ready, 1 = busy)
             ctx->pc = ctx->lr;
             return 1;
+        }
+
+        /* NAND save-layer tracer (5c.40). Inert: prints the entry and lets the guest
+         * code run (return 0). These are the guest's own NAND API wrappers and the
+         * save layer that names "savedata.dat"/"banner.bin" (0x8073DAA0 /
+         * 0x8073DE80), so this says *whether the create/write half is ever entered*
+         * - measured with a 10 000-frame run, the title never gets there.
+         * Cap: these fire a few dozen times at most. */
+        case 0x8061E270: case 0x8061E2F0: case 0x8061E370: case 0x8061E3F0:
+        case 0x805FFF70: case 0x805FF7A0: case 0x8061FBE0: case 0x8061FA70:
+        case 0x8061E8C0: case 0x8061E9E0: case 0x8061E7D0: {
+            if (tls_nand_probe_on()) {
+                static u32 s_nandlayer_n = 0;
+                if (s_nandlayer_n < 60) {
+                    s_nandlayer_n++;
+                    char msg[224];
+                    snprintf(msg, sizeof(msg),
+                             "NAND-LAYER pc=0x%08X r3=0x%08X r4=0x%08X r5=0x%08X r6=0x%08X lr=0x%08X",
+                             ctx->pc, ctx->gpr[3], ctx->gpr[4], ctx->gpr[5], ctx->gpr[6], ctx->lr);
+                    tls_nand_probe_slot(msg);
+                }
+            }
+            return 0; // run the guest's own code
         }
 
         // NAND error handlers
