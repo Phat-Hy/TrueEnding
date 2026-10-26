@@ -7158,8 +7158,51 @@ file is then re-issued at frame 1884 and finishes at 1893, and the request objec
 supposed to copy it into the texture the model samples".** The addresses to watch are the request object's
 `sub0+8` destination field across the 1884 re-issue - it is the field that changed at frame 1880.
 
-**State**: only the `TLS_MEM_DUMP` instrument is new; no rendering change. Build green, invariant PASS,
-0 changes to `src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
+#### G. The texture-install copy is a paired-single copy, and the GQR layout is suspect
+
+**G1. What the stamping block is.** Extending `TLS_WATCH_ADDR` to print its argument registers named the
+call that destroys the texture:
+
+```
+frame 1905  pc=0x800D6CF0  r3=0x92C05720  r4=0x903CD1C0  r5=0x92C05720  r6=0
+            0x64617461 -> 0xFFFFFFFF at 0x92C05724
+```
+
+`r3`/`r5` are the texture destination (the request's buffer) and `r4` is the decompressed-asset arena - so
+this is the **texture-install copy** (`psq_l` from `0x903CD1C0`, `psq_st` to the texture buffer), and its
+stores land the free-list pattern instead of texels. Every streamed character texture shows it
+(`0x92C05720`, `0x92AF0340` and `0x92AEAEC0` all measured), the copy runs 11-16 frames after each load, and
+the same block stamps them all.
+
+**G2. The GQR (quantization) layout in this port does not match the hardware.** `tools/DolRecomp/src/cpu/cpu.c`
+reads the load type from bits 16..18 and the store type from bits 0..2, while Gekko documents
+`bits 0..5 store scale | 6..8 store type | 9..14 load scale | 15..17 load type`. Switching to the documented
+layout is measurable and decisive:
+
+```
+standard layout:  run ends at frame 396, CPU Exception 0x00000004, and NO psq type trap fires
+                  (a diagnostic on the invalid-type path stayed silent), i.e. the guest took a
+                  different path and reached an unimplemented instruction
+shipped layout:   run completes, and every streamed character texture lands as the 0/-1 pattern
+```
+
+**G3. It is opt-in, and that is deliberate.** `TLS_PSQ_GQR_STANDARD=1` selects the documented layout; the
+default is the shipped one, so the invariant still PASSes with the frame-3500 hash unchanged. Flipping it
+changes the meaning of *every* quantized load/store in the game, which is why it cannot be shipped on its own
+- it is the same "correct in isolation, breaks the run" shape as the TEV alpha layout (5c.43 H1).
+
+**G4. `tools/DolRecomp/` is git-ignored** (`.gitignore:28`), so that flag and the whole CPU core are
+**working-tree only** - `git ls-files tools/DolRecomp` is empty, nothing there is in any commit. Any change
+to the CPU core has to be re-applied by hand on a fresh checkout, and this is the reason the flag above is
+documented here rather than in a commit message.
+
+**So the page's biggest defect now has a precise shape**: the character textures are loaded, decompressed to
+`0x903CD1C0`, and then copied into the texture buffer by a `psq_l`/`psq_st` loop whose GQR decode is
+inconsistent with the hardware; the destination keeps its free-list content. Fixing it means making the psq
+path (quantization types, and whatever unimplemented instruction the corrected layout then reaches)
+coherent, which is a CPU-core job, not a renderer one.
+
+**State**: handover only plus the working-tree flag. Build green, invariant PASS, 0 changes to `src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
 frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
 created at 1 348 992 / 29 344 - so both new instruments are inert by default and no default-path pixel moved.
 0 changes to `src/`. New instruments, both default-off: `TLS_TEX_DUMP_FRAME` (per-frame, ordered texture

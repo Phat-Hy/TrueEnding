@@ -459,8 +459,10 @@ static void host_watch_addrs(CPUState* ctx, u32 block_pc) {
         u32 old = s_prev[i];
         s_prev[i] = v;
         if (s_reports++ >= 300) continue;
-        printf("[Runner] WATCH 0x%08X: 0x%08X -> 0x%08X by block pc=0x%08X lr=0x%08X (frame %d)\n",
-               s_addr[i], old, v, block_pc, ctx->lr, g_runner_current_frame);
+        printf("[Runner] WATCH 0x%08X: 0x%08X -> 0x%08X by block pc=0x%08X lr=0x%08X "
+               "(frame %d) r3=0x%08X r4=0x%08X r5=0x%08X r6=0x%08X\n",
+               s_addr[i], old, v, block_pc, ctx->lr, g_runner_current_frame,
+               ctx->gpr[3], ctx->gpr[4], ctx->gpr[5], ctx->gpr[6]);
         fflush(stdout);
     }
 }
