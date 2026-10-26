@@ -188,10 +188,17 @@ def main():
     t0 = time.time()
 
     hwnds = []
-    while time.time() - t0 < 30:
+    # Wait for a Qt window that is actually VISIBLE and TITLED. Breaking as soon as any Qt
+    # window exists picks up Dolphin's hidden helper widgets (measured: it locked onto
+    # 'Qt683ScreenChangeObserverWindow', visible False, title '', posted every key to it and
+    # captured 0 screenshots while the game ran fine on the render window).
+    deadline = t0 + 45
+    while time.time() < deadline:
         time.sleep(0.5)
-        hwnds = [h for h in windows_of_pid(proc.pid) if "Qt" in h[2]]
-        if hwnds:
+        all_qt = [h for h in windows_of_pid(proc.pid) if "Qt" in h[2]]
+        good = [h for h in all_qt if h[3] and h[1].strip()]
+        if good:
+            hwnds = all_qt
             break
     if not hwnds:
         print("no Dolphin window found", file=sys.stderr)

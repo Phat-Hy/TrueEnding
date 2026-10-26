@@ -4550,6 +4550,24 @@ seconds, is the 600-frame loop the intro animation or the stall. Without one, fu
 guesswork against an unknown target, and the honest recommendation is to spend the round obtaining a
 reference rather than another probe.
 
+**Progress on that route (this session).** Dolphin is installed at
+`G:\Program\Dolphin-x64\Dolphin.exe` and `tools/dolphin_capture.py` drives it with synthetic key
+messages. Two concrete results:
+
+* **Fixed a real bug in the tool.** Its window picker broke the moment *any* Qt window existed, so it
+  locked onto Dolphin's hidden helper (`'Qt683ScreenChangeObserverWindow'`, `visible False`, title
+  `''`) and posted every key there while the game ran fine - hence "new screenshots: 0" with no error.
+  It now waits for a **visible, titled** Qt window. After the fix it correctly reports
+  `window: 2557136 'Dolphin 2609' Qt683QWindowIcon visible True`, and the key presses go to the render
+  window.
+* **F9 still produces no screenshots.** With keys now reaching the right window, `F9` at t=97 s and
+  t=122 s still yielded 0 new files in `%APPDATA%\Dolphin Emulator\ScreenShots`. The likely causes are
+  that Dolphin's screenshot hotkey needs real input focus (not a posted message) or that this build
+  binds it elsewhere. **Next step on this route**: either use `--input send` with the window focused,
+  or enable Dolphin's *Dump Frames* and use the tool's `--frame-plan` mode, which counts frames from
+  `Dump/Frames` and does not depend on any hotkey. Frame dumping costs ~1-2 MB per frame, so scope the
+  run.
+
 
 
 #### 5c.30a The guest never even *attempts* to register a Chapter-1 scene task
