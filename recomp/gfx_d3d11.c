@@ -2613,7 +2613,14 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                                batch->tex.width, batch->tex.height, batch->tex.format,
                                batch->blend_enable, batch->src_factor, batch->dst_factor,
                                min_x, max_x, min_y, max_y, gx_vtx[vo].color);
-                        if ((b == 0 || b == 1 || b == 2 || b == 7 || b == 17 || batch->tex.guest_addr == 0x904E5EE0 || batch->tex.guest_addr == 0x907427C0 || batch->tex.guest_addr == 0x81A1A1A0) && batch->vertex_count >= 6) {
+                        /* 5c.43 C: the Chapter-1 tutorial page's own textures are dumped in
+                         * full on a shot frame. The page submits its parchment sheet
+                         * (0x921DEA60) TWICE around the illustration plate (0x90D19B80) and the
+                         * font atlas (0x90703AA0), and `col0` cannot distinguish the two sheet
+                         * draws - the per-vertex colours and UVs can. */
+                        if ((b == 0 || b == 1 || b == 2 || b == 7 || b == 17 || batch->tex.guest_addr == 0x904E5EE0 || batch->tex.guest_addr == 0x907427C0 || batch->tex.guest_addr == 0x81A1A1A0 ||
+                             batch->tex.guest_addr == 0x921DEA60u || batch->tex.guest_addr == 0x90D19B80u ||
+                             batch->tex.guest_addr == 0x90703AA0u) && batch->vertex_count >= 6) {
                             for (uint32_t vi = 0; vi < 6 && vi < batch->vertex_count; vi++) {
                                 uint32_t vidx = vo + vi;
                                 printf("      b%u v[%u]: pos=(%.3f, %.3f, %.3f) uv=(%.3f, %.3f) col=0x%08X\n",

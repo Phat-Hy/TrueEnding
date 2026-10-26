@@ -15,14 +15,14 @@ state is **§5c.43**; §5c.42 and everything before it is history.
 > 1 348 992 **zero** bytes, so frame 4000 is **byte-identical** to a fresh boot. Telling CONTINUE from NEW
 > GAME needs an in-game save, i.e. gameplay past the tutorial page.
 >
-> **§5c.43 also settles what is wrong with the frame-4000 page: our own ink matte.** The page's art is all
-> in the command stream (sky `0x91F3FFE0`, parchment sheet `0x921DEA60`, illustration plate `0x90D19B80`,
-> font atlas `0x90703AA0`), and the ink-plate reconstruction in `recomp/gfx_d3d11.c` deletes the parchment
-> (its plate becomes transparent), which leaves the page with no background at all. `TLS_NO_INK_MATTE=1`
-> proves it in one run: the sheet renders (`docs/evidence/host_f4000_no_ink_matte_5c43.png`). Two things
-> stay open on that frame: the sheet is drawn **twice** (b26 before the plate/text, b30 after, so with the
-> sheet restored the second draw covers them), and the additive tail still saturates the sky to 249 before
-> the page draws. Read §5c.43 C before touching the renderer.
+> **§5c.43 also settles what is wrong with the frame-4000 page: two-texture TEV stages we never bind.** The
+> page's art is all in the command stream (sky `0x91F3FFE0`, parchment sheet `0x921DEA60`, font atlas
+> `0x90703AA0`) and the missing pieces are the **second** textures of two batches: b27's crowned crest
+> (`0x921FEAE0`, the illustration) and b30's gradient ramp (`0x90305600`, the wipe). `gfx_d3d11.c` binds
+> only `texmap0` unless `TLS_TEV=1`, so b27 renders as a flat dark plate (the "black box" - its pixels are
+> exactly the batch's own `(30,0,0)` vertex colour) and b30 draws the sheet twice. The ink matte is a
+> symptom-level stand-in for the same gap. Read §5c.43 C and **D** before touching the renderer, and do not
+> extend the matte.
 
 **Check the confinement first.** A shell at Windows **Low** mandatory integrity cannot verify anything: the
 build dies with `PermissionError: build/recomp/objects.rsp`, `git hash-object -w` says "insufficient
@@ -45,13 +45,12 @@ the capture is unaffected by minimization (identical frame-3500 hash).
 
 **The next three steps, in order of value.**
 
-1. *Make the ink matte per-batch instead of per-texture.* It is applied at texture **upload** time
-   (`get_or_upload_gx_texture`), cached per guest address, and its rule `base_luma - min_luma > 60 &&
-   max_delta <= 10` cannot tell a logo's cream plate (must disappear) from a page's parchment (is the
-   background). The page proves both cases are in the same frame. Measured effect today:
-   `TLS_NO_INK_MATTE=1` turns the page into a parchment sheet. The next measurement is **all** vertex
-   colours/UVs of b26 vs b30, because the frame draws the same opaque sheet twice and the second draw
-   covers b27/b28 - so at least one of those two draws must carry something `col0` does not show.
+1. *Take the TEV route, not the ink matte.* §5c.43 D shows the page's missing art is b27's and b30's
+   **second TEV texture** (a crowned crest `0x921FEAE0`, and a gradient ramp `0x90305600`), which the
+   default build never binds - `gfx_d3d11.c` selects the single-texture shader unless `TLS_TEV=1`. The ink
+   matte is a symptom-level stand-in for that gap and should not be extended. Acceptance pair: b27 must show
+   the crest over the plate and b30 must wipe with the ramp; the SKIP label (b34, texture `0x9076E5E0`) is
+   what the TEV path currently drops, so fix that first - it is one batch and one alpha test.
 2. *A reference frame for the tutorial page.* The corpus still has none (`run3` 4370-8297 and all of
    `run4` were checked in 5c.39). A new Dolphin capture means driving Dolphin's window;
    `tools/dolphin_capture.py` does it by posting Win32 key messages, which the no-foreground-automation
@@ -6670,6 +6669,52 @@ disagree (one run of this section reported 80 batches at 4000 for exactly that r
 **C6. `TLS_TEV=1` is not the answer.** With the TEV stage enabled the page is still saturated (mean 228 vs
 239) and the SKIP *label* disappears (`docs/evidence/host_f4000_tev_5c43.png`), so the TEV path is a
 different subject, not a fix for this frame.
+
+#### D. Decisive: the page's missing art lives in TWO-TEXTURE TEV stages, which are off by default
+
+`TLS_TEV_PROBE=4000` prints the TEV state per batch and separates the two sheet draws for the first time
+(`TLS_TEV_PROBE` also got the vertex-colour/UV dump extended to the page's own textures):
+
+```
+b26 tex=0x921DEA60 tex1=0x00000000 ...     ; the sheet, single texture
+b27 tex=0x90D19B80 tex1=0x921FEAE0 ...     ; the plate + THE ILLUSTRATION
+b28 tex=0x90703AA0 tex1=0x00000000 ...     ; the font atlas
+b30 tex=0x921DEA60 tex1=0x90305600 ...     ; the sheet again + a gradient ramp
+```
+
+The two second textures, dumped through the TEV path:
+
+* `0x921FEAE0` 128x128 CMPR = a **crowned crest emblem** -
+  `docs/evidence/tex_921FEAE0_128x128_f14_5c43.png`;
+* `0x90305600` 64x32 CMPR = a **white -> black horizontal ramp** -
+  `docs/evidence/tex_90305600_64x32_f14_5c43.png`, i.e. the wipe/fade the second sheet draw applies.
+
+**They are invisible to the shipped path.** `TLS_TEX_DUMP=0x921FEAE0,0x90305600` writes **no file at all**
+unless `TLS_TEV=1` is also set: `gfx_d3d11.c` binds only `texmap0` unless the TEV shader is selected
+(`s_tev_enabled`). So with the default build every two-texture batch renders as its first texture only:
+
+* b27 = white plate x vertex colour `(30,0,0)` = **the solid black box** (C2);
+* b30 = the sheet again, identical to b26 (C3's vertex dump proves the geometry and colour are identical),
+  so one of the two must lose: with the ink matte on, both are erased; with it off, both draw and the
+  second covers b27/b28.
+
+That explains the whole page - no emblem, no wipe, a flat dark illustration plate - and it reframes the ink
+matte as a *symptom-level* fix for the title-logo case of the same gap.
+
+Measured combinations at frame 4000 (every switch below is non-default):
+
+| flags | what the page looks like |
+|---|---|
+| default | white field, black box, title glyphs, SKIP label |
+| `TLS_NO_INK_MATTE=1` | parchment sheet + border, SKIP button frame, **no emblem, no glyphs, no SKIP label** |
+| `TLS_TEV=1` | white field, black box, glyphs, **no SKIP label** |
+| `TLS_TEV=1 TLS_NO_INK_MATTE=1` | parchment sheet + border, **no emblem, no glyphs, no SKIP label** |
+
+So neither switch is the answer on its own. The TEV path is the right *route* - it is the only thing that
+binds tex1 at all - and it is not ready: even with it on the emblem does not appear and the SKIP label is
+lost. Those are two concrete sub-defects with named test batches: `0x921FEAE0`'s stage (b27) and
+`0x9076E5E0`'s alpha test (b34, col0=0xC8323232). **Do not extend the ink matte further**; take the TEV
+route with b27 (crest over plate) and b30 (wipe with the ramp) as the acceptance pair.
 
 **Verification:** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
 frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
