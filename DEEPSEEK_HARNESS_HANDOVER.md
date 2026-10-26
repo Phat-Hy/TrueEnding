@@ -4835,3 +4835,20 @@ use `run2` for the intro and `run3`/`run2` for gameplay appearance only.
 `run2/framedump_1500.png` - same scene, same camera? If the host's intro camera matches, the host is
 stalled *inside* the intro and the remaining question is only why it never advances. If it does not
 match, the host never even reached this shot and the stall is earlier.
+
+**First-pass comparison from means already recorded in this file** (no new run needed):
+
+| | reference `run2` | host (5c.25 §4) |
+|---|---|---|
+| dark cave | f=1500, mean 21.2 | f=3001, mean (15,14,13) ~ 14 |
+| next shot | f=2000, mean 25.1 (still dark cave) | f=3251, mean (50,53,51) ~ 51 - *"cave fly-through, sky, birds, floating rock"* |
+
+Both are in a dark cave at the corresponding point (~14 vs ~21), then **diverge**: the reference stays
+dark (~25) while the host brightens to ~51 with sky and birds. That is consistent with the host
+following the intro's opening shot and then taking a *different* shot - i.e. diverging partway through
+rather than stalling inside a shot the reference also shows. It is a hypothesis, not a conclusion: the
+runs are not frame-aligned and `run2` samples only 1500 -> 2000 -> 3000, so a 500-frame window is
+unsampled.
+
+**The decisive step** is to compare *pictures*, not means: capture the host at 3001 and 3251 and put
+them beside `run2/framedump_1500.png` and `framedump_2000.png`. One windowed run plus two image opens.
