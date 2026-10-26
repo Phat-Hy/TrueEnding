@@ -4799,3 +4799,39 @@ before it (mean ~204 from at least frame 3200) is a *menu*, and there is no ligh
 
 This also retro-justifies a caution already in this file: verify a claim like "there is no reference"
 before building on it - this one was repeated for many sessions.
+
+#### 5c.31a Which reference run is which - and `run2` is the intro reference
+
+Having found the reference corpus (5c.31), the next thing is to know what each run actually contains.
+Sampled every run by full-image mean and by eye:
+
+| run | frames | content |
+|---|---|---|
+| `run2` | 10 (sampled: 300, 600, 900, 1420, 1440, 1460, 1500, 2000, 3000, 5000) | **the intro path** |
+| `run3` | 8297 | title (long) -> **gameplay**, no menus captured |
+| `run4` | 29091 | mixed: `framedump_*` **and** `efb1_n*_WxH_fmt.png` EFB-target dumps - not all screen frames |
+| `boot` | 1281 | boot only (means 0..25) |
+
+**`run2` is the run that matters for the stall.** Its frames are sparse but decisive:
+
+```
+f=1500  the cave interior, light shaft and floating motes, NO HUD  -> the Chapter-1 intro
+f=3000  Zael with the sword, party HUD DAGRAN lv 5 / SYRENNE lv 4   -> gameplay
+```
+
+Saved as `docs/evidence/dolphin_ref_run2_f1500_intro.png` and
+`docs/evidence/dolphin_ref_run2_f3000_gameplay.png`.
+
+So the reference **goes intro -> gameplay in under ~1500 frames** of Chapter-1 time, while the host is
+still in its intro loop at frame 12000. That is now a directly comparable, quantified gap:
+**the host should be in gameplay roughly 1500 frames after the intro starts, and it never is.**
+
+**Correction to the previous sub-section**: `run3` is *not* an intro reference. Frame 4000 there is
+still the title screen ("PUSH START"), and gameplay appears by frame 4370 - i.e. that run went from the
+title straight into gameplay (a continue/save path), with no menu, dialog or card frames captured. So
+use `run2` for the intro and `run3`/`run2` for gameplay appearance only.
+
+**Next step, now cheap and concrete**: compare the host's Chapter-1 intro frames against
+`run2/framedump_1500.png` - same scene, same camera? If the host's intro camera matches, the host is
+stalled *inside* the intro and the remaining question is only why it never advances. If it does not
+match, the host never even reached this shot and the stall is earlier.
