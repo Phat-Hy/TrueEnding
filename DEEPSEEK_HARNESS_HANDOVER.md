@@ -5258,3 +5258,42 @@ unless the input script that produced it is stated alongside it.
 **Next step**: re-run the phase/task probes with the 9-press script (not the A-spam variants) to see what
 the scene machine and task list actually do in a run that reaches gameplay. Everything measured with the
 press schedules in 5c.25-5c.32d needs re-checking under this script.
+
+### 5c.36 Re-derivation under the working input script: THERE IS NO STALL, and the game is interactive
+
+Ran the scene probe with the 9-press script (the one that reaches gameplay) instead of the A-spam
+variants used in 5c.25-5c.32d. Everything the earlier rounds attributed to a stall is absent:
+
+```
+sequence : Boot -> Stra -> Titl -> GAME   (reached)
+phase    : f=2101 -1 -> 0 ; f=2104 0 -> 8 ; f=3346 8 -> 0 (ctr=617)
+tasks    : 3, from f=2101, NEVER changes
+frame 3500: gameplay (mean 28,31,35)
+```
+
+So, in a run that reaches Chapter-1 gameplay:
+
+1. **There is no phase-13 stall.** The machine never enters phase 13 at all under this input schedule -
+   so the "`PHASE 0 -> 13` then pinned" behaviour is a property of the A-spam schedules, not of the game.
+2. **The task count staying at 3 is NOT a defect.** It is 3 during live gameplay, so the game runs
+   Chapter 1 inside the existing Game task (`up=0x80363DBC`) rather than registering a new player/scene
+   task. The objective's "never creates a player/scene task" premise was false.
+3. **The machine's `0 -> 8 -> 0` cycle (ctr=617) coexists with gameplay.** It is not a hang.
+
+**The game is interactive during gameplay.** Adding four more A presses after frame 3600 advances the
+tutorial:
+
+* frame 3500: the cave with a character and the "NEW TUTORIAL." prompt;
+* frame 4000: a **"Movement and Camera"** tutorial page with a **SKIP** button
+  (`docs/evidence/host_f4000_tutorial_movement_camera.png`, mean (239,241,242)).
+
+So input reaches and drives gameplay. Chapter 1 is reachable and playable.
+
+**NEW DEFECT found by this** (the real remaining work): the tutorial page's *background* renders as white
+noise with coloured speckle instead of the cave. That is a visual-parity bug, not a progression one, and
+it is the most visible remaining issue - far more visible than the earlier "loop". A second, separate one
+remains from 5c.34: the save-data dialog reports the save as corrupt.
+
+**Rules this section locks in**: state the input script with every measurement; do not conclude a stall
+from a run whose inputs did not reach gameplay; and treat "task count did not change" as neutral until
+proven otherwise.
