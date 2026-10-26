@@ -2470,7 +2470,23 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
             buf[sizeof(buf) - 1] = '\0';
             for (char* tok = strtok(buf, ","); tok; tok = strtok(NULL, ",")) {
                 int want = atoi(tok);
-                if (want == s_d3d11_dump_count || want == g_runner_current_frame) {
+                /* TLS_SHOT_GUEST=1 keys the capture on the GUEST frame only.
+                 *
+                 * The default matches either counter, which is fine when the two agree -
+                 * but a diagnostic that changes what is rendered also changes the present
+                 * count for a given guest frame, so a bisect at a fixed frame number can
+                 * silently land on a different moment. Measured (handover 5c.43 F): a
+                 * TLS_BATCH_CUTOFF run and a shader-bypass run both captured a frame whose
+                 * SKIP-button box averaged 84.1 with 68.6% dark pixels, while the page
+                 * itself averages 221.7 there - i.e. neither shot was the page at all.
+                 * Every bisect after that used this flag. */
+                static int s_shot_guest_only = -1;
+                if (s_shot_guest_only < 0)
+                    s_shot_guest_only = getenv("TLS_SHOT_GUEST") ? 1 : 0;
+                bool hit = s_shot_guest_only
+                               ? (want == g_runner_current_frame)
+                               : (want == s_d3d11_dump_count || want == g_runner_current_frame);
+                if (hit) {
                     take_shot = true;
                     break;
                 }

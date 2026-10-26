@@ -73,9 +73,13 @@ the capture is unaffected by minimization (identical frame-3500 hash).
   `TLS_PRESENT_PROBE` for per-frame batch/vtx counts.
 * A texture that is not re-uploaded inside a frame produces no `TLS_TEX_DUMP_FRAME` output - that is a
   measurement ("the cached texture is what both draws sampled"), not a failure of the instrument.
-* One screenshot per run (`TLS_SHOT_FRAMES=<n>`). **Do not compare the runner's built-in fixed schedule
-  (frames 100..1800): it does not dump the presented frame** - at 1300 it averages 3.2 while a real capture
-  of frame 1300 averages 144.3 (§5c.43 D).
+* One screenshot per run (`TLS_SHOT_FRAMES=<n>`, plus **`TLS_SHOT_GUEST=1`** when the run changes what is
+  drawn - otherwise a changed present count moves the capture, §5c.43 F). **Do not compare the runner's
+  built-in fixed schedule (frames 100..1800): it does not dump the presented frame** - at 1300 it averages
+  3.2 while a real capture of frame 1300 averages 144.3 (§5c.43 D).
+* **`TLS_BATCH_CUTOFF` changes the frame's inputs, not only its tail** on frames whose EFB copies are issued
+  after the last batch: they never get serviced, so the composite reads the previous half's content
+  (§5c.43 F).
 * A probe only fires at a dispatch point - a branch target or a `bl` return address - never mid-block.
 * Never hand-edit `build/recomp/generated/chunks` and never mutate guest state to make progress.
 * `src/` is read-only. Edits go in `recomp/`, `tools/`, `docs/`; `build/` is git-ignored.
@@ -6779,7 +6783,40 @@ the colour, so no alpha change can put glyphs on screen. Evidence:
 frame ~2144 with `Tasks: 0`, `Sequence: (none)`, `fb0=0x7FC00000` (NaN), so the per-batch back-buffer bisect
 cannot be used under TEV. Use `TLS_TEV_PROBE` (state) plus `TLS_SHOT_FRAMES` (one frame per run) instead.
 
-**Verification (5c.43 C, D and E):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
+#### F. Two instrument limits measured on this frame, and a capture key that fixes one of them
+
+Trying to identify which batch draws the page's SKIP label turned up two traps worth more than the answer
+would have been.
+
+**1. `TLS_BATCH_CUTOFF` cannot bisect this frame.** At frame 4000 the guest issues its EFB copies *after the
+last batch* (every copy in `TLS_EFB_CHAIN=4000` has `batch=9999`), and the renderer services copies at batch
+boundaries. Truncating the draw loop therefore leaves those copies unserviced, so the page composites from the
+**previous (odd-frame) content** instead of its own. Measured: with `TLS_BATCH_CUTOFF=34` the page still shows
+"Movement and Camera" and the dark plate, but its background is a dark dotted grid with the parchment ornament
+in the top-right (`docs/evidence/host_f4000_cut34_guest_5c43.png`) instead of the white field. The cutoff
+changes the frame's *inputs*, not just its tail - never read a cutoff result as "the last batches removed".
+
+**2. `TLS_SHOT_FRAMES` used to match either counter, so a render change moved the capture.** Runs that alter
+what is drawn also alter the present count for a given guest frame; two bisect runs (cutoff=34 and a
+temporary shader bypass for `0x9076E5E0`) both captured the same *wrong* moment - their SKIP-button box
+averaged 84.1 with 68.6% dark pixels, while the page itself averages 221.7 there. New **`TLS_SHOT_GUEST=1`**
+keys the capture on the guest frame only; with it the cutoff run did capture the page (the grid image above),
+so the flag works and the remaining difference is effect (1). Default behaviour is unchanged, so the invariant
+hash cannot move (verified: PASS, `EAB33141..`).
+
+**The SKIP label's batch is still not identified by measurement.** b34 remains the candidate - it is the only
+text-shaped batch in the button region (120 vertices = 20 quads, a 256x256 IA4 atlas, bounds px 1081-1152 /
+615-658) - but that is inference from its state, not a measured attribution, and the two instruments that
+would have settled it are the two above. What *is* measured: the label is legible in the default path
+(`docs/evidence/crop_skip_default_5c43.png`) and absent under `TLS_TEV=1`
+(`docs/evidence/crop_skip_tev_5c43.png`), at 5.94% vs 1.74% dark pixels in that box.
+
+**Next instrument, stated so it does not get re-derived**: a probe that reports the pixels a *single batch*
+wrote - a scissored readback of the batch's NDC bounds - instead of the whole-screen average
+`TLS_BATCH_PROBE` computes. That needs no cutoff, so it leaves the end-of-frame copies (and therefore the
+frame's inputs) intact.
+
+**Verification (5c.43 C-F):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
 frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
 created at 1 348 992 / 29 344 - so both new instruments are inert by default and no default-path pixel moved.
 0 changes to `src/`. New instruments, both default-off: `TLS_TEX_DUMP_FRAME` (per-frame, ordered texture
