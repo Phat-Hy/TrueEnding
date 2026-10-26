@@ -1585,17 +1585,41 @@ static u32 ios_fd_length(u32 fd) {
     return (size > 0) ? (u32)size : 0u;
 }
 
-/* Map a guest ISFS path ("/savedata.dat") onto one flat host directory. */
+/* Map a guest ISFS path onto the host NAND tree under savedata/.
+ *
+ * 5c.41 G: before /dev/es answered the title-id and home-dir queries, every guest
+ * path was root-relative ("/savedata.dat") and a flat file set was enough. With the
+ * title directory answered, the paths are the real ones, e.g.
+ *   /title/00010000/534c5345/data/savedata.dat
+ * so the host mirrors that tree: a file the guest creates lands where a real NAND
+ * would keep it, and ReadDir/GetAttr/GetUsage operate on real directories. */
 static void fs_path_to_host(const char* guest_path, char* out, size_t outsz) {
     const char* p = guest_path;
     while (p && *p == '/') p++;
     if (!p || !*p) p = "unnamed.dat";
-    char leaf[96];
-    snprintf(leaf, sizeof(leaf), "%s", p);
-    for (char* q = leaf; *q; q++) {
-        if (*q == '/' || *q == '\\' || *q == ':') *q = '_';
+    size_t n = (size_t)snprintf(out, outsz, "savedata/");
+    for (; *p && n + 1 < outsz; p++) {
+        char c = *p;
+        if (c == '\\' || c == ':') c = '_';
+        if (c == '/' && (n == 0 || out[n - 1] == '/')) continue; /* collapse // */
+        out[n++] = c;
     }
-    snprintf(out, outsz, "savedata/%s", leaf);
+    out[n] = '\0';
+}
+
+/* Create every parent directory of a host path (savedata/a/b/c.dat -> a, then b). */
+static void fs_make_parents(char* host_path) {
+#ifdef _WIN32
+    for (char* q = host_path; *q; q++) {
+        if (*q != '/') continue;
+        char save = *q;
+        *q = '\0';
+        if (*host_path) CreateDirectoryA(host_path, NULL);
+        *q = save;
+    }
+#else
+    (void)host_path;
+#endif
 }
 
 /* Read the NUL-terminated guest path an ISFS request carries in its input buffer. */
@@ -1706,12 +1730,15 @@ static int isfs_is_root_path(const char* p) {
 /* Host directory that backs the NAND root. */
 #define TLS_NAND_DIR "savedata"
 
-/* Number of entries in the host NAND directory (the root directory listing). */
-static u32 isfs_host_root_count(void) {
+/* Number of entries in a host NAND directory (a directory listing). */
+static u32 isfs_host_dir_count(const char* host_dir) {
     u32 n = 0;
+#undef TLS_NAND_DIR_PATHSPEC
 #ifdef _WIN32
+    char spec[192];
+    snprintf(spec, sizeof(spec), "%s\\*", host_dir);
     WIN32_FIND_DATAA fd;
-    HANDLE h = FindFirstFileA(TLS_NAND_DIR "\\*", &fd);
+    HANDLE h = FindFirstFileA(spec, &fd);
     if (h == INVALID_HANDLE_VALUE) return 0;
     do {
         if (strcmp(fd.cFileName, ".") == 0 || strcmp(fd.cFileName, "..") == 0) continue;
@@ -1719,7 +1746,7 @@ static u32 isfs_host_root_count(void) {
     } while (FindNextFileA(h, &fd));
     FindClose(h);
 #else
-    DIR* d = opendir(TLS_NAND_DIR);
+    DIR* d = opendir(host_dir);
     if (!d) return 0;
     struct dirent* e;
     while ((e = readdir(d))) {
@@ -1731,13 +1758,15 @@ static u32 isfs_host_root_count(void) {
     return n;
 }
 
-/* Copy up to `max` root entries as 13-byte ReadDir records (type byte + name).
- * Returns how many were written. A save file is a plain file, type 0. */
-static u32 isfs_host_root_entries(CPUState* ctx, u32 buf, u32 max) {
+/* Copy up to `max` entries of a host directory as 13-byte ReadDir records
+ * (type byte + name). A directory entry is type 1, a plain file type 0. */
+static u32 isfs_host_dir_entries(CPUState* ctx, u32 buf, u32 max, const char* host_dir) {
     u32 written = 0;
 #ifdef _WIN32
+    char spec[192];
+    snprintf(spec, sizeof(spec), "%s\\*", host_dir);
     WIN32_FIND_DATAA fd;
-    HANDLE h = FindFirstFileA(TLS_NAND_DIR "\\*", &fd);
+    HANDLE h = FindFirstFileA(spec, &fd);
     if (h == INVALID_HANDLE_VALUE) return 0;
     do {
         if (strcmp(fd.cFileName, ".") == 0 || strcmp(fd.cFileName, "..") == 0) continue;
@@ -1754,9 +1783,20 @@ static u32 isfs_host_root_entries(CPUState* ctx, u32 buf, u32 max) {
     } while (FindNextFileA(h, &fd));
     FindClose(h);
 #else
-    (void)ctx; (void)buf; (void)max;
+    (void)ctx; (void)buf; (void)max; (void)host_dir;
 #endif
     return written;
+}
+
+/* Is the host path a directory? */
+static int fs_host_is_dir(const char* host_path) {
+#ifdef _WIN32
+    DWORD a = GetFileAttributesA(host_path);
+    return (a != INVALID_FILE_ATTRIBUTES) && (a & FILE_ATTRIBUTE_DIRECTORY);
+#else
+    (void)host_path;
+    return 0;
+#endif
 }
 
 /* Blocks a file of this size occupies, in the unit the guest's own limits use:
@@ -1789,6 +1829,7 @@ static s32 tls_isfs_ioctl_service(CPUState* ctx, u32 cmd, u32 in_buf, u32 in_len
         if (exists) {
             result = TLS_ISFS_EEXIST;
         } else {
+            fs_make_parents(host_path);
 #ifdef _WIN32
             CreateDirectoryA(host_path, NULL);
 #endif
@@ -1851,6 +1892,7 @@ static s32 tls_isfs_ioctl_service(CPUState* ctx, u32 cmd, u32 in_buf, u32 in_len
 #ifdef _WIN32
             CreateDirectoryA(TLS_NAND_DIR, NULL);
 #endif
+            fs_make_parents(host_path);
             FILE* f = fopen(host_path, "wb");
             if (!f) {
                 result = -102; /* ISFS_EIO */
@@ -1875,6 +1917,55 @@ static s32 tls_isfs_ioctl_service(CPUState* ctx, u32 cmd, u32 in_buf, u32 in_len
         tls_nand_probe_slot(msg);
     }
     return result;
+}
+
+/* ---------------------------------------------------------------------------
+ * /dev/es device model (5c.41 G).
+ *
+ * Measured: the game issues ES ioctlv cmd=32 with one 8-byte OUTPUT vector, and
+ * cmd=29 with one 8-byte input plus one 30-byte OUTPUT vector. Nothing answered
+ * them, so both replies stayed zero: the title id read back as 0 and the "home
+ * directory" string came back empty. That is why every ISFS path this game builds
+ * is root-relative ("/savedata.dat") instead of living under /title/<tid>/data as
+ * Dolphin's NAND has it.
+ *
+ * The title is SLSEXJ, so title id = 0x00010000534C5345, and 30 bytes is exactly
+ * "/title/00010000/534c5345/data" plus its NUL (29 characters) - the shape the
+ * 30-byte vector asks for. Both answers come from the game's own title id.
+ * ------------------------------------------------------------------------- */
+#define TLS_TITLE_ID_HI 0x00010000u
+#define TLS_TITLE_ID_LO 0x534C5345u
+#define TLS_TITLE_DATA_DIR "/title/00010000/534c5345/data"
+
+static s32 tls_es_ioctlv_service(CPUState* ctx, u32 cmd, u32 num_in, u32 num_io, u32 vecs) {
+#define ES_VEC_DATA(i) mem_read32(ctx, vecs + (i) * 8)
+#define ES_VEC_LEN(i) mem_read32(ctx, vecs + (i) * 8 + 4)
+    if (cmd == 32 && num_io >= 1) {
+        /* ES_GetTitleId -> u64 title id */
+        u32 p = ES_VEC_DATA(num_in), len = ES_VEC_LEN(num_in);
+        if (p && len >= 8 && resolve_guest_pointer(ctx, p)) {
+            mem_write32(ctx, p + 0, TLS_TITLE_ID_HI);
+            mem_write32(ctx, p + 4, TLS_TITLE_ID_LO);
+            if (tls_nand_probe_on()) tls_nand_probe_slot("ES GetTitleId -> 0x00010000534C5345");
+        }
+    } else if (cmd == 29 && num_io >= 1) {
+        /* the reply vector carries the title's data directory as a C string */
+        u32 p = ES_VEC_DATA(num_in), len = ES_VEC_LEN(num_in);
+        if (p && len >= 2 && resolve_guest_pointer(ctx, p)) {
+            u32 maxn = (u32)(sizeof(TLS_TITLE_DATA_DIR) - 1);
+            u32 n = (len - 1 < maxn) ? len - 1 : maxn;
+            for (u32 i = 0; i < n; i++) mem_write8(ctx, p + i, (u8)TLS_TITLE_DATA_DIR[i]);
+            mem_write8(ctx, p + n, 0);
+            if (tls_nand_probe_on()) {
+                char m[96];
+                snprintf(m, sizeof(m), "ES cmd29 -> home dir '%s'", TLS_TITLE_DATA_DIR);
+                tls_nand_probe_slot(m);
+            }
+        }
+    }
+#undef ES_VEC_DATA
+#undef ES_VEC_LEN
+    return 0;
 }
 
 /* Service an ISFS *ioctlv* (commands 4 ReadDir, 12 GetUsage). Returns the ISFS
@@ -1902,16 +1993,22 @@ static s32 tls_isfs_ioctlv_service(CPUState* ctx, u32 fd, u32 cmd, u32 num_in, u
         u32 entries = (num_in >= 2) ? ISFS_VEC_DATA(num_in) : 0;
         u32 max_entries = (num_in >= 2) ? (ISFS_VEC_LEN(num_in) / 13) : 0;
 
-        if (isfs_is_root_path(guest_path)) {
-            u32 count = isfs_host_root_count();
+        /* 5c.41 G: with /dev/es answering the home dir, the guest asks about real
+         * paths ("/title/00010000/534c5345/data/savedata.dat"), so ReadDir is a
+         * directory query on the mirrored host tree: a real directory lists, a file
+         * answers -101 (EINVAL, "not a directory"), a missing path -106. */
+        char host_dir[192];
+        fs_path_to_host(guest_path, host_dir, sizeof(host_dir));
+        if (fs_host_is_dir(host_dir)) {
+            u32 count = isfs_host_dir_count(host_dir);
             if (entries && count_out) {
                 u32 want = max_entries ? max_entries : count;
-                u32 written = isfs_host_root_entries(ctx, entries, want);
-                if (count_out) mem_write32(ctx, count_out, written);
-                snprintf(made_path, sizeof(made_path), "root listing %u/%u", written, count);
+                u32 written = isfs_host_dir_entries(ctx, entries, want, host_dir);
+                mem_write32(ctx, count_out, written);
+                snprintf(made_path, sizeof(made_path), "listing %u/%u", written, count);
             } else if (count_out) {
                 mem_write32(ctx, count_out, count);
-                snprintf(made_path, sizeof(made_path), "root count %u", count);
+                snprintf(made_path, sizeof(made_path), "count %u", count);
             }
         } else {
             /* A save file is not a directory. The guest's ReadDir callback has no
@@ -1929,16 +2026,18 @@ static s32 tls_isfs_ioctlv_service(CPUState* ctx, u32 fd, u32 cmd, u32 num_in, u
         u32 out0 = (num_io >= 1) ? ISFS_VEC_DATA(num_in) : 0;
         u32 out1 = (num_io >= 2) ? ISFS_VEC_DATA(num_in + 1) : 0;
         u32 size = 0;
+        char host_dir12[192];
+        fs_path_to_host(guest_path, host_dir12, sizeof(host_dir12));
         if (isfs_host_file_size(guest_path, &size)) {
             if (out0) mem_write32(ctx, out0, isfs_blocks_for_size(size));
             if (out1) mem_write32(ctx, out1, 1); /* one file */
             snprintf(made_path, sizeof(made_path), "%u blocks, 1 file of %u bytes",
                      isfs_blocks_for_size(size), size);
-        } else if (isfs_is_root_path(guest_path)) {
-            u32 n = isfs_host_root_count();
+        } else if (fs_host_is_dir(host_dir12)) {
+            u32 n = isfs_host_dir_count(host_dir12);
             if (out0) mem_write32(ctx, out0, 0);
             if (out1) mem_write32(ctx, out1, n);
-            snprintf(made_path, sizeof(made_path), "0 blocks, %u files in root", n);
+            snprintf(made_path, sizeof(made_path), "0 blocks, %u entries", n);
         } else {
             result = TLS_ISFS_ENOENT;
         }
@@ -4024,6 +4123,11 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
              * bytes too), so touching the /dev/es vectors would corrupt those
              * calls' inputs. */
             s32 isfs_result = 0;
+            /* /dev/es: answer the title id and home-directory queries instead of
+             * handing back zeroed buffers (5c.41 G). */
+            if (strcmp(ios_fd_path(fd), "/dev/es") == 0) {
+                tls_es_ioctlv_service(ctx, cmd, num_in, num_io, vecs);
+            }
             if (num_io > 0 && strcmp(ios_fd_path(fd), "/dev/fs") == 0 && tls_isfs_service_on()) {
                 isfs_result = tls_isfs_ioctlv_service(ctx, fd, cmd, num_in, num_io, vecs);
             }
@@ -4054,6 +4158,11 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 tls_nand_probe_slot(msg);
             }
             s32 isfs_result = 0;
+            /* /dev/es: answer the title id and home-directory queries instead of
+             * handing back zeroed buffers (5c.41 G). */
+            if (strcmp(ios_fd_path(fd), "/dev/es") == 0) {
+                tls_es_ioctlv_service(ctx, cmd, num_in, num_io, vecs);
+            }
             if (num_io > 0 && strcmp(ios_fd_path(fd), "/dev/fs") == 0 && tls_isfs_service_on()) {
                 isfs_result = tls_isfs_ioctlv_service(ctx, fd, cmd, num_in, num_io, vecs);
             }
