@@ -4694,3 +4694,31 @@ leaving `recomp/replacements.c` at **0 bytes**. The link then failed on symbols 
 Recovered with `git checkout -- recomp/replacements.c` (the per-change commit discipline is what made
 this a 10-second fix rather than a lost session). **Use the `edit` tool for source edits, not heredoc'd
 scripted rewrites**; if a script must write, pass `newline=""` and verify the file size afterwards.
+
+#### 5c.30e `Sequence: 'UnknownSeq'` was a telemetry bug - and the 'Game' sequence does get set
+
+Every engine telemetry dump in this project has printed `Sequence: 'UnknownSeq'`, including while
+Chapter 1 was playing, and it was never questioned. It was a **bug in the telemetry helper**, not a
+fact about the game.
+
+`tls_debug_get_sequence_name` read `[0x8087EE90]` (which holds `0x80E9DB00`). The real sequence
+manager is **`*(r13-26368)`** - the object `SequenceManager::SetNextSequence` (`0x80572B70`) itself
+uses, measured `0x80BB5CC0`. The wrong object's `+0x48`/`+0x50` are always zero, so the helper fell
+through to its `"UnknownSeq"` default. Fixed in `recomp/tls_debug.c`: it now uses `r13-26368` and
+prints the manager's raw fields when no name resolves (`Sequence: 'mgr=0x80BB5CC0 pending=0 at84=0
+at88=0x80C98D68'`).
+
+With the correct manager the sequence request is confirmed to work, which **eliminates "the sequence
+was never set" as a cause of the Chapter-1 stall**:
+
+```
+f=1728  SetNextSequence('Game') -> manager+80 = 0x0000000C   (pending id 12)
+f=2115  manager+80 = 0                                        (consumed: it transitioned)
+```
+
+So the name lookup succeeds (`'Game'` -> 12), the request is honoured, and the manager is not the
+blocker. Two cautions recorded from this: (1) a field that has always read the same suspicious value
+in this project is worth auditing rather than trusting - this one misled every session since 5c.10;
+(2) I briefly produced a false "all sequence fields are zero" reading myself by probing
+`[0x8087EE90]` before checking which object `SetNextSequence` actually uses. Verify the *object*, not
+just the offset.
