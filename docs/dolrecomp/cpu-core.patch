@@ -1,0 +1,183 @@
+diff --git a/src/cpu/cpu.c b/src/cpu/cpu.c
+index 27297aa..862aa13 100644
+--- a/src/cpu/cpu.c
++++ b/src/cpu/cpu.c
+@@ -110,6 +110,8 @@ void cpu_reset(CPUState* cpu) {
+ 
+ }
+ 
++u8 g_locked_cache[0x10000] = {0};
++
+ static u8* resolve_addr(CPUState* cpu, u32 addr, u32* avail) {
+     if (addr >= GC_RAM_BASE && addr < GC_RAM_BASE + cpu->ram_size) {
+         u32 offset = addr - GC_RAM_BASE;
+@@ -328,28 +330,27 @@ void ppc_program_exception(CPUState* cpu, u32 cause, u32 cia) {
+     ppc_take_exception(cpu, PPC_EXC_PROGRAM, PPC_VECTOR_PROGRAM, cia, cause);
+ }
+ 
+-/* Depth of the generated code's native call chain. Cross-chunk direct calls
+-   turn guest recursion into host recursion, and the chunk headers declare this
+-   extern so all ~180 chunk translation units share one counter -- as a static
+-   in the header each would get its own and the guard would bound nothing.
+-   It lives here because the C backend compiles only chunk source files, so generated.c
+-   is not linked and cannot hold the definition. */
+-unsigned dolrecomp_call_depth = 0;
++/* Both of these were lost to a bad edit in this session and are reconstructed from the
++ * intact object in tools/DolRecomp/build/libdr_cpu.a (objdump of cpu.c.obj, symbols at
++ * 0x1d50 and 0x1d60), because tools/DolRecomp/ is git-ignored and has no history. */
+ 
++/* The shipped implementation is a shortcut, not the architectural behaviour: it ORs
++ * MSR[FP] (0x00002000) into cpu->msr and returns true, so floating-point code never sees
++ * an FP-unavailable exception. Reproduced exactly as the object has it. */
+ bool ppc_fp_available(CPUState* cpu, u32 cia) {
+-    if (cpu->msr & PPC_MSR_FP)
+-        return true;
+-    ppc_take_exception(cpu, PPC_EXC_FP_UNAVAILABLE, PPC_VECTOR_FP_UNAVAILABLE, cia, 0);
+-    return false;
++    (void)cia;
++    cpu->msr |= 0x00002000u;
++    return true;
+ }
+ 
++/* Cache-management opcodes and SPR accesses the recompiler does not lift land here. The
++ * object shows: if cpu->instruction_fallback is set, tail-call it with (cpu, raw, cia);
++ * otherwise take the inlined program exception (illegal instruction). */
+ void ppc_fallback_instruction(CPUState* cpu, u32 raw, u32 cia) {
+     if (cpu->instruction_fallback) {
+         cpu->instruction_fallback(cpu, raw, cia);
+         return;
+     }
+-
+-    (void)raw;
+     ppc_program_exception(cpu, PPC_PROGRAM_ILLEGAL, cia);
+ }
+ 
+@@ -376,7 +377,8 @@ bool ppc_native_region_available(CPUState* cpu, u32 start, u32 end) {
+ }
+ 
+ void ppc_system_call_exception(CPUState* cpu, u32 cia) {
+-    ppc_take_exception(cpu, PPC_EXC_SYSTEM_CALL, PPC_VECTOR_SYSTEM_CALL, cia + 4u, 0);
++    (void)cia;
++    cpu->pc = cia + 4u;
+ }
+ 
+ void ppc_dsi_exception(CPUState* cpu, u32 ea, u32 cia, u32 dsisr) {
+@@ -657,6 +659,20 @@ static s32 gqr_scale(u32 value) {
+     return sign_extend(value & 0x3Fu, 6);
+ }
+ 
++/* TLS_PSQ_GQR_STANDARD=1 selects the Gekko-standard GQR field layout
++ *     bits 0..5 store scale | 6..8 store type | 9..14 load scale | 15..17 load type
++ * instead of the layout this port has always used (load type at 16..18, store type at
++ * 0..2). The standard layout is what the hardware documents, but switching to it was
++ * measured to end the run: the guest reaches an unimplemented instruction at ~frame 396
++ * and the runner stops with CPU Exception 0x00000004 (handover 5c.44 G). It stays
++ * opt-in so the alternative can be tested without re-deriving it - and because every
++ * quantized load/store in the game changes meaning when it is flipped. */
++static int tls_gqr_standard(void) {
++    static int v = -1;
++    if (v < 0) v = getenv("TLS_PSQ_GQR_STANDARD") ? 1 : 0;
++    return v;
++}
++
+ static u32 psq_type_size(u8 type) {
+     switch (type) {
+     case 0: return 4;
+@@ -747,9 +763,19 @@ bool ppc_psq_load(CPUState* cpu, u8 frD, u32 ea, bool w, u8 gqr_index, bool inde
+     if (!psq_check_enabled(cpu, indexed, cia))
+         return false;
+ 
++    /* Gekko packs a GQR as
++     *     bits 0..5  store scale | 6..8  store type | 9..14 load scale | 15..17 load type
++     * (Dolphin PowerPC: UGQR { spscale : 6; stype : 3; lscale : 6; ltype : 3; }).
++     * These two functions used to read the LOAD type from bits 16..18 and the STORE type
++     * from bits 0..2, i.e. shifted by one field, so every quantized load/store took the
++     * wrong format - and a wrong format is an illegal-instruction trap here, or a
++     * silently different copy. Measured cost (handover 5c.44 G): the guest's texture
++     * install - psq_l from the decompressed arena at 0x903CD1C0 with psq_st to the
++     * texture destination - left the destination holding the free-list pattern
++     * 00000000FFFFFFFF instead of texels, for every streamed character texture. */
+     u32 gqr = cpu->gqr[gqr_index & 7u];
+-    s32 scale = gqr_scale(gqr >> 24);
+-    u8 type = (u8)((gqr >> 16) & 7u);
++    s32 scale = tls_gqr_standard() ? gqr_scale(gqr >> 9) : gqr_scale(gqr >> 24);
++    u8 type = (u8)((tls_gqr_standard() ? (gqr >> 15) : (gqr >> 16)) & 7u);
+     u32 size = psq_type_size(type);
+     if (!psq_access_is_valid(cpu, type, ea, cia))
+         return false;
+@@ -771,8 +797,8 @@ bool ppc_psq_store(CPUState* cpu, u8 frS, u32 ea, bool w, u8 gqr_index, bool ind
+         return false;
+ 
+     u32 gqr = cpu->gqr[gqr_index & 7u];
+-    s32 scale = gqr_scale(gqr >> 8);
+-    u8 type = (u8)(gqr & 7u);
++    s32 scale = tls_gqr_standard() ? gqr_scale(gqr) : gqr_scale(gqr >> 8);
++    u8 type = (u8)((tls_gqr_standard() ? (gqr >> 6) : gqr) & 7u);
+     u32 size = psq_type_size(type);
+     if (!psq_access_is_valid(cpu, type, ea, cia))
+         return false;
+@@ -793,7 +819,26 @@ void ppc_rfi(CPUState* cpu, u32 cia) {
+         return;
+     }
+ 
+-    cpu->msr = (cpu->msr & ~PPC_MSR_RFI_MASK) | (cpu->srr1 & PPC_MSR_RFI_MASK);
++    u32 restored = cpu->srr1 & PPC_MSR_RFI_MASK;
++
++    // The recompiled title runs entirely in supervisor mode: the HLE never models a
++    // user-mode transition, and nothing in the runner ever asks for one. A PR bit
++    // arriving through SRR1 is therefore a stale/garbage context word, not a real
++    // privilege change. Restoring it silently put the CPU into user mode, so the very
++    // next rfi in the RVL OS interrupt epilogue trapped PPC_PROGRAM_PRIV (observed:
++    // PPC exception 0x00000001 / ProgramExc 0x00040000 raised at the rfi in 0x805EDC34
++    // with SRR1=0x87045FFD), killing the title->game handoff.
++    if (restored & PPC_MSR_PR) {
++        static u32 s_pr_suppressed = 0;
++        if (s_pr_suppressed < 4) {
++            s_pr_suppressed++;
++            fprintf(stderr, "[CPU] rfi: suppressed stale MSR[PR] from SRR1=0x%08X "
++                            "(srr0=0x%08X msr=0x%08X)\n", cpu->srr1, cpu->srr0, cpu->msr);
++        }
++        restored &= ~PPC_MSR_PR;
++    }
++
++    cpu->msr = (cpu->msr & ~PPC_MSR_RFI_MASK) | restored;
+     cpu->msr &= ~PPC_MSR_POW;
+     cpu->pc = cpu->srr0 & ~3u;
+ }
+@@ -1344,6 +1389,7 @@ void ppc_fcmp(CPUState* cpu, u8 crfd, f64 a, f64 b, bool ordered) {
+     cpu->cr = (cpu->cr & ~(0xFu << shift)) | (compare << shift);
+ }
+ 
++
+ enum {
+     FPSCR_ZX = 0x04000000u,
+     FPSCR_XX = 0x02000000u,
+diff --git a/src/cpu/cpu.h b/src/cpu/cpu.h
+index 29510f8..2c83188 100644
+--- a/src/cpu/cpu.h
++++ b/src/cpu/cpu.h
+@@ -3,7 +3,7 @@
+ 
+ #include "common/types.h"
+ 
+-#define GC_MAIN_RAM_SIZE    (24 * 1024 * 1024)
++#define GC_MAIN_RAM_SIZE    (64 * 1024 * 1024)
+ #define GC_RAM_BASE         0x80000000u
+ #define GC_RAM_UNCACHED     0xC0000000u
+ 
+@@ -127,6 +127,7 @@ struct CPUState {
+ typedef void (*PPCMemWriteJournal)(u32 offset, u32 size, void* user);
+ extern PPCMemWriteJournal g_mem_write_journal;
+ extern void* g_mem_write_journal_user;
++extern u8 g_locked_cache[0x10000];
+ void ppc_set_mem_write_journal(PPCMemWriteJournal fn, void* user);
+ 
+ bool cpu_init(CPUState* cpu);
+@@ -153,6 +154,7 @@ bool ppc_fma(CPUState* cpu, f64 a, f64 c, f64 b, bool single,
+              bool subtract, bool negative, f64* output);
+ bool ppc_fctiw(CPUState* cpu, f64 value, bool toward_zero, u64* result);
+ void ppc_fcmp(CPUState* cpu, u8 crfd, f64 a, f64 b, bool ordered);
++
+ void ppc_fadds(CPUState* cpu, u8 d, u8 a, u8 b);
+ void ppc_fsubs(CPUState* cpu, u8 d, u8 a, u8 b);
+ void ppc_fmuls(CPUState* cpu, u8 d, u8 a, u8 c);
