@@ -6965,7 +6965,71 @@ tail. With `TLS_TEV=1` the page still averages 231.7 and still shows the white f
 this page is blocked on one external input - a Dolphin capture of the moment - and no further
 renderer change can be judged without it.
 
-**Verification (5c.43 C-I):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
+### 5c.44 THE REFERENCE ARRIVES - and it settles three open questions at once
+
+The corpus gap that blocked 5c.43 is closed: a human-driven Dolphin capture of the page is now in the tree.
+
+```
+docs/evidence/ref_dolphin_tutorial_5c44.png   2560x1440, Dolphin 2609 JIT64 SC | Direct3D 11 | HLE
+docs/evidence/title.png  title 2.png  menu.png  chapter 1.png     further captures of the same run
+```
+
+Geometry: the game frame is 2560x1440 at the window's top-left, but the window is clipped, so only the
+**top 912 rows (63%)** of the frame are visible. Compare at 1280x720 scale with the top 456 rows of any host
+shot; `docs/evidence/cmp_tutorial_ref_vs_host_5c43.png` is a three-panel stack (reference / host
+`TLS_TEV=1 TLS_NO_INK_MATTE=1` / host default) built that way.
+
+#### A. What the page actually is
+
+| element | reference | host |
+|---|---|---|
+| parchment sheet + engraved border | **is the page background** | erased by the ink matte (default), or visible and *empty* (`TLS_NO_INK_MATTE=1`) |
+| big ink illustration of the character (left half) | present, large | absent - no batch draws it |
+| crowned crest above the title | present | absent (b27's plate is drawn flat `(30,0,0)`) |
+| "Movement and Camera" | present, right of centre | present (default path only) |
+| body text + button icons ("Use <stick> to move", "Press <Z> ...") | present | absent |
+
+So: **the parchment sheet must be visible** (the ink matte is wrong for this page, exactly as 5c.43 C
+measured), and **the page's content is not drawn at all** - the illustration, crest and body text are all
+missing, and with the sheet restored (matte off) the page is a blank sheet because b30's second sheet draw
+covers everything drawn before it.
+
+#### B. The illustration is not a texture we sample - it is most likely b0..b5
+
+Every texture the page frame references has now been dumped and named: sky (`0x91F3FFE0`), a second cloud
+texture (`0x90309D80`), the parchment (`0x921DEA60`), the plate (`0x90D19B80`), the font atlas
+(`0x90703AA0`), the label atlas (`0x9076E5E0`), the crest (`0x921FEAE0`), the ramp (`0x90305600`), a circle
+ring (`0x91B3D5E0`), a glow (`0x9050E260`), a light streak (`0x91AAC860`), rock (`0x91EEEDE0`), an I4 strip
+(`0x81A1A1A0`), black I8 (`0x904B5C80`), a 64x64 RGBA chip (`0x920CA4A0`). None of them is the character
+art (`docs/evidence/page_tex_sheet_5c44.png`).
+
+The only geometry left that could be it is **b0..b5** - 15 150 / 19 155 / 3 600-vertex meshes whose NDC
+**z is 13.3..22.9**, i.e. entirely outside the clip volume, so per-triangle clipping drops them. Two of
+their textures (`0x92AEAEC0`, `0x92C05720`) dump as **pure black** (identical bytes). So those batches are
+clipped *and* black; 5c.38 called their emptiness "legitimate", and with the reference in hand that reading
+is wrong - the page has a large illustration and this is the only candidate for it.
+
+#### C. The three questions the reference answers, and the two it re-opens
+
+* **Answered - parchment**: must be visible. The ink matte (`gfx_d3d11.c`, the `base_luma - min_luma > 60`
+  rule) must eventually go, but it is still load-bearing for the title logo, so it needs to become
+  per-batch. The reference does *not* say what the logo should look like; `docs/evidence/title.png` does,
+  and that is the next comparison to make.
+* **Answered - crest**: the crest is real, visible ink art on the page. Our b27 draws a flat `(30,0,0)`
+  plate in *both* paths because the guest's TEV state reaches the crest only through alpha and the crest
+  texture decodes fully opaque. That is now a **texture-decode** question (CMPR transparency), not a TEV
+  question - if the crest's background is transparent in the source, the plate would be a crest instead of
+  a box.
+* **Answered - label**: the reference crop does not include the SKIP button (only the top 63% of the frame
+  is visible), so this stays open; it needs a capture of the lower part of the page.
+* **Re-opened - b30's double sheet draw**: the reference shows the content *on* the sheet, so on hardware
+  b30's second full-screen sheet must be effectively transparent there. That is the TEV stage again, and
+  the corrected alpha layout aborts the guest at ~2144 (5c.43 H1), so it cannot be fixed in isolation.
+* **Re-opened - b0..b5**: clipped and black. Whether the fix is the projection (z 13..22) or the textures
+  (black) or both is unresolved, and it is the largest visual delta measured so far.
+
+**State**: no code change in this section; it is the reference and its reading. Build green, invariant PASS,
+0 changes to `src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
 frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
 created at 1 348 992 / 29 344 - so both new instruments are inert by default and no default-path pixel moved.
 0 changes to `src/`. New instruments, both default-off: `TLS_TEX_DUMP_FRAME` (per-frame, ordered texture
