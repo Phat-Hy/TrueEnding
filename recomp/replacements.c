@@ -1608,76 +1608,86 @@ static int tls_isfs_service_on(void) {
     return v;
 }
 
-/* Service an IOSIoVector operation on /dev/fs.
+/* Copy the NUL-terminated guest path a /dev/fs vector carries, or "" if none. */
+static u32 isfs_path_of_vec(CPUState* ctx, u32 vecs, u32 index, char* out, size_t outsz) {
+    if (!outsz) return 0;
+    out[0] = '\0';
+    u32 in_ptr = mem_read32(ctx, vecs + index * 8);
+    if (!in_ptr) return 0;
+    u32 n = 0;
+    for (; n + 1 < outsz; n++) {
+        u8 c = mem_read8(ctx, in_ptr + n);
+        out[n] = (char)c;
+        if (!c) return n;
+    }
+    out[outsz - 1] = '\0';
+    return n;
+}
+
+/* Service an IOSIoVector operation on /dev/fs (ISFS).
  *
- * The SDK wrapper always reads the operation's result back out of the FIRST
- * output vector, so a handler that leaves the vectors untouched gives the guest
- * whatever the IOS scratch heap contained (the wrappers allocate these with
- * iosAllocAligned). Write the result, and make CreateFile actually create.
+ * Command numbers are the guest's own, read from the SDK wrappers in src/isfs.c
+ * instead of guessed from the payload:
  *
- * Commands measured from the guest wrappers (handover 5c.24 section 10):
- *   4  CreateFile(path)                 in vec0 = 64-byte path, out vec1 = result
- *   6  GetAttr(path)                    Ioctl form, 76-byte reply
- *   8  Delete(path)                     Ioctl form
- *   12 unknown, retried by the NAND layer while the title waits
+ *   3  CreateDir(path, owner, group, attr)   ioctl,    0x4c-byte request
+ *   4  ReadDir(path, *count, [entries])      ioctlv,   count*13-byte entry vector
+ *   6  GetAttr(path) -> 0x4c reply           ioctl
+ *   7  Delete(path)                          ioctl
+ *   8  Rename(old, new)                      ioctl,    two 0x40-byte paths
+ *   9  CreateFile(path, owner, group, attr)  ioctl,    0x4c-byte request
+ *  11  GetFileStats(fd) -> {len, offset}     ioctl on the *open file* fd
+ *  12  GetUsage(path) -> two words           ioctlv,   the create path's space probe
+ *
+ * 5c.39 retired a fabricated side effect here: this used to treat command 4 as
+ * CreateFile, so a plain *ReadDir* created a host file (measured: the guest asks
+ * ReadDir about "/savedata.dat" and "/banner.bin" from NANDGetStatus, and the
+ * serviced handler made empty files for both). CreateFile is command 9. Only
+ * 7/8/9 change the host; 4/6 only answer. Command 12 is still unmodelled - its
+ * two-word reply layout is not established - so it answers a zeroed payload,
+ * which is why the guest's create path never places the file (5c.39 F).
  */
 static void tls_isfs_ioctlv_service(CPUState* ctx, u32 fd, u32 cmd, u32 num_in, u32 num_io,
                                     u32 vecs) {
-    u32 out0_ptr = 0, out0_len = 0;
-    if (num_in < 8) {
-        out0_ptr = mem_read32(ctx, vecs + num_in * 8);
-        out0_len = mem_read32(ctx, vecs + num_in * 8 + 4);
-    }
+    char guest_path[80];
+    char host_path[160];
+    char made_path[200] = {0};
+    guest_path[0] = '\0';
+    isfs_path_of_vec(ctx, vecs, 0, guest_path, sizeof(guest_path));
 
-    /* CreateFile: give the guest a real (empty) host file. */
-    char made_path[160] = {0};
-    if (cmd == 4 && num_in >= 1) {
-        u32 in_ptr = mem_read32(ctx, vecs);
-        char guest_path[80];
-        int n = 0;
-        if (in_ptr) {
-            for (; n < (int)sizeof(guest_path) - 1; n++) {
-                u8 c = mem_read8(ctx, in_ptr + (u32)n);
-                guest_path[n] = (char)c;
-                if (!c) break;
-            }
-        }
-        guest_path[sizeof(guest_path) - 1] = '\0';
-        if (n > 0) {
-            char host_path[128];
+    if (cmd == 7 && guest_path[0]) {
+        /* Delete(path): the only way a host file disappears. */
+        fs_path_to_host(guest_path, host_path, sizeof(host_path));
+        remove(host_path);
+        snprintf(made_path, sizeof(made_path), "delete %s", guest_path);
+    } else if (cmd == 8 && guest_path[0]) {
+        /* Rename(old, new): vec0 = old path, vec1 = new path. */
+        char new_path[80];
+        isfs_path_of_vec(ctx, vecs, 1, new_path, sizeof(new_path));
+        if (new_path[0]) {
+            char host_new[160];
             fs_path_to_host(guest_path, host_path, sizeof(host_path));
+            fs_path_to_host(new_path, host_new, sizeof(host_new));
+            remove(host_new);
+            rename(host_path, host_new);
+            snprintf(made_path, sizeof(made_path), "rename %s -> %s", guest_path, new_path);
+        }
+    } else if (cmd == 9 && guest_path[0]) {
+        /* CreateFile: give the guest a real (empty) host file; IOS_Write fills it. */
+        fs_path_to_host(guest_path, host_path, sizeof(host_path));
 #ifdef _WIN32
-            CreateDirectoryA("savedata", NULL);
+        CreateDirectoryA("savedata", NULL);
 #endif
-            FILE* f = fopen(host_path, "ab");
-            if (f) fclose(f);
-            snprintf(made_path, sizeof(made_path), "%s -> %s", guest_path, host_path);
-        }
-    } else if (cmd == 8 && num_in >= 1) {
-        /* Delete(path): remove the host file if we made one. */
-        u32 in_ptr = mem_read32(ctx, vecs);
-        char guest_path[80];
-        int n = 0;
-        if (in_ptr) {
-            for (; n < (int)sizeof(guest_path) - 1; n++) {
-                u8 c = mem_read8(ctx, in_ptr + (u32)n);
-                guest_path[n] = (char)c;
-                if (!c) break;
-            }
-        }
-        guest_path[sizeof(guest_path) - 1] = '\0';
-        if (n > 0) {
-            char host_path[128];
-            fs_path_to_host(guest_path, host_path, sizeof(host_path));
-            remove(host_path);
-        }
+        FILE* f = fopen(host_path, "ab");
+        if (f) fclose(f);
+        snprintf(made_path, sizeof(made_path), "create %s -> %s", guest_path, host_path);
     }
 
-    /* Only the modelled commands get their whole reply written. For an
-     * unmodelled command (cmd 12 is one) leaving the payload alone keeps the
-     * earlier behaviour instead of inventing statistics; the result word above
-     * is the only thing every ISFS wrapper actually requires. */
-    if (cmd == 4 || cmd == 6 || cmd == 8) {
+    /* Reading commands get a zeroed reply: ReadDir's entry count is 0 because the
+     * host NAND is modelled as a flat file set with no directories, and GetUsage
+     * stays unmodelled. Leaving an unmodelled payload untouched would hand the
+     * guest whatever the IOS scratch heap held (these buffers are iosAllocAligned
+     * scratch), which is worse than an explicit zero. */
+    if (cmd == 4 || cmd == 6 || cmd == 12) {
         for (u32 i = num_in; i < num_in + num_io && i < 8; i++) {
             u32 p = mem_read32(ctx, vecs + i * 8);
             u32 len = mem_read32(ctx, vecs + i * 8 + 4);
@@ -1688,10 +1698,10 @@ static void tls_isfs_ioctlv_service(CPUState* ctx, u32 fd, u32 cmd, u32 num_in, 
     }
 
     if (tls_nand_probe_on()) {
-        char msg[320];
-        snprintf(msg, sizeof(msg), "ISFS cmd=%u fd=%u nin=%u nio=%u%s%s",
-                 cmd, fd, num_in, num_io, made_path[0] ? " create " : "",
-                 made_path[0] ? made_path : "");
+        char msg[400];
+        snprintf(msg, sizeof(msg), "ISFS cmd=%u fd=%u nin=%u nio=%u path='%s'%s%s",
+                 cmd, fd, num_in, num_io, guest_path,
+                 made_path[0] ? " -> " : "", made_path[0] ? made_path : "");
         tls_nand_probe_slot(msg);
     }
 }
@@ -6559,10 +6569,42 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0; // Run the guest's own implementation
         }
 
-        // fn_800A4228 (Check pending count at mgr+348 / +0x15C)
+        // fn_800A4228(mgr, &status): the save manager's "is it finished?" query.
+        //
+        // The guest's own function is three instructions (handover 5c.38 D):
+        //
+        //     800A4228  lwz  r5, 0x15C(r3)   ; state
+        //               lwz  r3, 0x168(r3)   ; status
+        //               neg/or/srwi          ; return (state != 0)
+        //               stw  r3, 0(r4)       ; *out = status
+        //
+        // This replacement answers it for the guest and *writes* 0 into mgr+0x15C.
+        // That is a fabrication, and 5c.39 measured exactly what it hides: at the
+        // title's query (lr=0x80534C58) the manager is genuinely BUSY - state 7,
+        // status 0 - and its own run continues to status 11 (the open of the missing
+        // /savedata.dat fails with NAND error -12 -> fn_800A4494 -> 11) before it
+        // finishes. Forcing state 0 truncates that machine and sends the title down
+        // fn_800A472C's length check instead, which is why message 12 is set.
+        //
+        // It was kept after measuring the alternative: with the guest's own function
+        // the title waits, finishes with status 11, takes mode 9 and shows the MENU
+        // with no dialog - and then NEW GAME fades to black and never reaches Game,
+        // because the save *create* path needs a NAND the runner does not model yet.
+        // Hardware does show this dialog on a fresh NAND (Dolphin run3: title ->
+        // save dialog -> NEW GAME -> Chapter 1), so the fabricated answer's *visible*
+        // effect coincides with hardware while its mechanism is a lie. Retire it only
+        // together with the create/write half of the NAND (handover 5c.39 F).
         case 0x800A4228: {
             u32 mgr = ctx->gpr[3];
             u32 out_addr = ctx->gpr[4];
+            static int s_4228_probe = -1, s_4228_n = 0;
+            if (s_4228_probe < 0) s_4228_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;
+            if (s_4228_probe && s_4228_n < 60 && mgr) {
+                s_4228_n++;
+                printf("[TLS SaveCheck] 800A4228(mgr=0x%08X) state=%u status=%u lr=0x%08X\n",
+                       mgr, mem_read32(ctx, mgr + 0x15C), mem_read32(ctx, mgr + 0x168), ctx->lr);
+                fflush(stdout);
+            }
             if (out_addr) {
                 mem_write32(ctx, out_addr, 0); // *out = 0 (no error)
             }
@@ -6578,6 +6620,25 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             ctx->gpr[3] = 0; // return 0 (idle / ready)
             ctx->pc = ctx->lr;
             return 1;
+        }
+
+        /* fn_800A500C(mgr, result, op) is the save manager's single completion
+         * handler: it stores `op` into mgr+0x15C (the state the title polls) and
+         * `result` decides what goes into mgr+0x168 (0 -> "no error", otherwise
+         * fn_800A4494(result)). Printing both arguments at every completion shows
+         * what the manager actually learned from the NAND layer - in particular
+         * whether the -6 our IOS_OpenAsync hands back for a missing file ever
+         * reaches it (handover 5c.39). */
+        case 0x800A500C: {
+            static int s_500c_probe = -1, s_500c_n = 0;
+            if (s_500c_probe < 0) s_500c_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;
+            if (s_500c_probe && s_500c_n < 60) {
+                s_500c_n++;
+                printf("[TLS SaveCheck] 800A500C(mgr=0x%08X result=%d op=%u) lr=0x%08X\n",
+                       ctx->gpr[3], (s32)ctx->gpr[4], ctx->gpr[5], ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run the guest's own state machine
         }
 
         // fn_800A472C (Save data status check)
