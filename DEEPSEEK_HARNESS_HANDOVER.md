@@ -4571,6 +4571,11 @@ PH13-EXIT-B fn_80376568(task=...)        calls: 0
 So the shape is: **begin once, then wait forever for a completion that never comes.** That is a
 cleaner and more actionable statement than "inert", and it narrows the question to what
 `fn_805BA358(waiter)` starts and why only slot 0 ever finishes.
+**Structural bonus from the argument**: `r3 = 0x81858DE0` and the call site passes
+`*(r13-25232) + 608`, so `*(r13-25232) = 0x81858B80` and **the waiter is embedded at `+0x260` of that
+manager**. So the 4-slot list at `waiter+0x474` is really `manager+0x6D4`, and the owning manager is
+`0x81858B80` (`*(r13-25232)`) - a concrete object to inspect next, and the same global `fn_80121F08`
+tests (`gC` in 5c.26 §4).
 
 #### 5c.30c Operational hazard: a shell heredoc truncated replacements.c to zero bytes
 
