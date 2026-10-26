@@ -5297,3 +5297,119 @@ remains from 5c.34: the save-data dialog reports the save as corrupt.
 **Rules this section locks in**: state the input script with every measurement; do not conclude a stall
 from a run whose inputs did not reach gameplay; and treat "task count did not change" as neutral until
 proven otherwise.
+
+### 5c.37 Minimized launches, three wasted runs, and the tutorial-page frame measured batch by batch
+
+Session input script, unless stated otherwise (the 9-press title walk plus four tutorial presses):
+
+```
+TLS_INPUT_SCRIPT="600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A,3620-3632:A,3700-3712:A,3800-3812:A,3900-3912:A"
+```
+
+#### A. `--minimized` now exists, and every launch should use it
+
+`tls_runner.exe --minimized` creates the window hidden, then shows it with `SW_SHOWMINNOACTIVE` and never
+calls `SetForegroundWindow`/`SetFocus` (`recomp/host_runner.c`, commit `689faee`). `WM_SIZE` already
+ignored `SIZE_MINIMIZED`, so the swap chain keeps its size. **Verified:** `tools/invariant.ps1` now runs
+the runner with `--window --minimized` and frame 3500 still hashes to `A00272DF...` - i.e. the
+capture-before-Present screenshot is byte-identical with the window minimized.
+
+#### B. NEW RULE (cost three runs, ~21 min): environment variables do not survive between shell invocations
+
+Each agent shell call is a fresh process. `TLS_INPUT_SCRIPT` set in call N is **absent** in call N+1, so
+those runs sat on the title while every other probe flag was fine. Three consecutive "diagnostics" were
+therefore measuring the title screen's composite chain, one of them a `PUSH START` frame that looked like a
+brand-new defect. The earlier rule "state the input script with every measurement" is not enough: **every
+run invocation must set the script in the same command**, and the log's `Seq:` line must be checked before
+believing anything the probes printed. Reading `[TLS Present] count=N frame_counter=N ... xfbs=1` at the
+frame of interest is the cheap confirmation.
+
+#### C. The per-batch probes silently targeted the wrong frame
+
+`TLS_BATCH_DUMP` / `TLS_BATCH_PROBE` / `TLS_TEV_PROBE` matched only the *present counter*, while
+`TLS_SHOT_FRAMES` matched present counter **or** guest frame. The two counters diverge (5c.16 measured
+~2800 presents per 6000 frames), so a probe "at frame 4000" could land one frame off the shot at 4000.
+All three now go through `probe_frame_hits(want, present_count)` (`recomp/gfx_d3d11.c`), which matches
+either counter exactly like `TLS_SHOT_FRAMES`, so one frame number means one moment everywhere.
+
+#### D. Frame 4000 measured: what the tutorial page actually submits
+
+`TLS_PRESENT_PROBE=1 TLS_SHOT_FRAMES=4000 TLS_BATCH_DUMP=4000`: frame 4000 is **37 batches / 9774 vtx**,
+frame 4001 is **54 batches / 63732 vtx** (the cave gameplay seen at 3500). So 4000 is not the gameplay
+frame - it is the tutorial-page frame, and its draw list is short.
+
+`TLS_BATCH_PROBE=4000` on that frame, per batch (back-buffer average):
+
+| batches | what happens |
+|---|---|
+| b0..b8 | **nothing at all** - average stays `(0,0,0)`; these are the 3D scene batches (CMPR 256x256 / 128x128 textures) and they contribute zero pixels |
+| b9 (0x91F3FFE0, 1024x512 CMPR, NDC [-3226..4687, -1256..3609]) | first paint: `(119,123,117)` |
+| b12..b14 | composite passes bring it back down to `(22,22,19)` |
+| b15, b16, b18, b20, b21, b22, b23, b24 (all full-screen `blend s=4 d=1`, i.e. SRCALPHA/ONE additive) | `66 -> 110 -> 133 -> 172 -> 192 -> 224 -> 242 -> 249` |
+
+So the white is **additive saturation** by the composite tail, not a texture decode error, and the scene
+batches contribute nothing before it starts.
+
+`TLS_EFB_CHAIN=4000 TLS_EFB_CHAIN_DUMP=1` confirms the order of causation: the copies are already white -
+`dst=0x9038D1C0 320x224 fmt=4 srcavg=(242,242,240) dstavg=(235,238,233)` - so the chain's input is white
+and the chain cannot be blamed for the colour alone.
+
+**The speckle is not a tile-layout error.** Structuring the deviation from white (1280x720) shows no
+4x4/8x8 blockiness - within-block variance grows with block size (block2 299, block4 1121, block8 2516),
+i.e. the noise is finer than 2 px. The 5c.15 "4-pixel stripe" signature is absent.
+
+**Correction to 5c.36's premise**: the page's title text renders **black**, and TLS draws dark ink on light
+plates elsewhere (the title logo), so a *light* page is by design - the defect is the speckle and the
+missing scene, not the whiteness. Before this is called "should be the cave", it needs a reference for
+*this* frame; the corpus has none (`run2` stops at 3000/5000, `run3` is a flat `(203.8,204,203.5)` screen
+through 3700-4300, `run4` stops at 2435).
+
+**A real geometry mismatch measured here**: a copy writes `320x224` into `0x9038D1C0`, while the very same
+address is sampled by b13/b14 as **80x56 fmt=6 (RGBA8)** - 4x per axis, so the copy writes **8x** the bytes
+that texture occupies (143360 vs 17920) and destroys whatever else lives there. This is the same class as
+5c.13's "the writer ignores GXSetTexCopyDst half-scaling"; here the destination size the writer derives
+from the source rect disagrees with the size the guest's own texture object declares by 4x.
+
+#### E. Save-data "corrupted" dialog: the decision is at 0x80534CC8, and the verdict is set earlier
+
+The check is guest code, read from the DOL (all three addresses below are block entries, so they are
+probeable replacements):
+
+```
+80534C78  bl 0x800A472C          ; save status check; returns 1 = ok, 0 = error
+80534C7C  cmpwi r3,0
+80534C80  bc 4,2,0x80534CA8      ; r3 != 0 -> compare lengths
+             (r3 == 0) -> mode 6
+80534CA8  bl 0x800A4E08 / 0x803B854C   ; expected length from the manager
+80534CC0/CC4  out_len vs expected
+80534CC8  cmplw r3,r0
+80534CCC  bc 12,2,0x80534CF4     ; EQUAL -> mode 9
+```
+
+**Measured before any change** (`TLS_NAND_PROBE=1`): with no save file the open fails, the SDK's NAND
+handle stays `fd=0`, and `NANDGetLength -> ISFS_GetFileStats(0) -> IOS_Ioctl(fd=0, cmd=11)` was answered
+**success with length 0** for a descriptor that was never opened. The manager's cached length is also 0, so
+the two are EQUAL -> mode 9, "the data is corrupted".
+
+**Change made** (`recomp/replacements.c`): `IOS_Ioctl` / `IOS_IoctlAsync` on an fd that is not an open HLE
+file now return `-6` (IPC_RESULT_NOEXISTS) instead of a fabricated success. That is faithful on its own
+terms - a stats query on an unopened fd is an error on hardware.
+
+**Measured after the change**: `fn_800A472C` now returns 0, so the mode-5 check takes the error path
+(mode 6) instead of the length compare, and the dialog's default selection moved from `No` to `Yes`
+(frame 1448: mean `(76,151,206)`, p50 `(84,183,255)`). **But the message text is still "The save data
+cannot be used because the data is corrupted."** - so the *message id* comes from the manager's earlier
+save-status answer (`fn_800A4494` reads it out of the manager, not out of this comparison), not from
+`0x80534CC8`. That is the next thing to probe: the manager's stored message/status word before the dialog
+is built, and what `NANDGetStatus` answers on a console with no `/savedata.dat`.
+
+`TLS_SAVE_PROBE=1` prints both decision points (`80534C7C`, `80534CC0`) so the two can no longer be
+confused; note the `80534C7C` line prints the *function's* return (1 = ok), not NANDGetLength's error.
+
+#### F. Where the tutorial page stands
+
+* The white is the composite tail adding eight full-screen SRCALPHA/ONE passes over a page whose scene
+  batches render nothing. Fixing it needs the frame's reference and the reason the b0..b8 draws are empty.
+* The 4x destination-size mismatch (`320x224` written vs `80x56` sampled at `0x9038D1C0`) is a concrete,
+  checkable defect and a plausible cause of the speckle *and* of nearby memory damage.
+* Both are cheaper to attack with one reference frame of this page than with more bisecting.

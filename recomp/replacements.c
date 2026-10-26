@@ -3443,6 +3443,26 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 out_buf = ctx->gpr[7];
             u32 out_len = ctx->gpr[8];
             u32 first_out = 0xDEADBEEFu;
+            /* An fd that was never opened must not answer "success". The title's
+             * save check opens /savedata.dat, and when that open fails the SDK's
+             * NAND handle keeps fd 0, so NANDGetLength -> ISFS_GetFileStats(fd=0)
+             * -> this ioctl (cmd 11) landed here. Answering success with the
+             * length of a non-existent FILE* (0) made the guest see "the save
+             * exists and is 0 bytes", which the mode-5 comparison at 0x80534CC8
+             * reads as "lengths equal" -> mode 9, the "data is corrupted" dialog.
+             * A stats query on an unopened fd is an error on hardware too. */
+            if (!(fd >= 1 && fd < 16 && s_ios_files[fd].in_use)) {
+                if (tls_nand_probe_on()) {
+                    char msg[192];
+                    snprintf(msg, sizeof(msg),
+                             "IOS_Ioctl fd=%u NOT OPEN cmd=%u -> -6 (IPC_NOEXISTS)",
+                             fd, cmd);
+                    tls_nand_probe_slot(msg);
+                }
+                ctx->gpr[3] = (u32)-6; // IPC_RESULT_NOEXISTS
+                ctx->pc = ctx->lr;
+                return 1;
+            }
             void* dst = (out_buf && out_len > 0) ? resolve_guest_pointer(ctx, out_buf) : NULL;
             /* ISFS command 11 is the file-stats query on an open fd: an 8-byte
              * reply {u32 length; u32 offset}, and NANDGetLength (fn_8061EF90)
@@ -3481,6 +3501,21 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             u32 out_len = ctx->gpr[8];
             u32 cb = ctx->gpr[9];
             u32 usrdata = ctx->gpr[10];
+            /* Same rule as the synchronous ioctl: an fd that was never opened is an
+             * error, not a successful stats query returning 0. */
+            if (!(fd >= 1 && fd < 16 && s_ios_files[fd].in_use)) {
+                if (tls_nand_probe_on()) {
+                    char msg[192];
+                    snprintf(msg, sizeof(msg),
+                             "IOS_IoctlAsync fd=%u NOT OPEN cmd=%u -> -6 (IPC_NOEXISTS)",
+                             fd, cmd);
+                    tls_nand_probe_slot(msg);
+                }
+                tls_ipc_enqueue_callback(cb, -6, usrdata);
+                ctx->gpr[3] = 0;
+                ctx->pc = ctx->lr;
+                return 1;
+            }
             if (out_buf && out_len > 0) {
                 void* dst = resolve_guest_pointer(ctx, out_buf);
                 if (dst) {
@@ -6462,6 +6497,54 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 fflush(stdout);
             }
             return 0; // Run the guest's own save-data check
+        }
+
+        // The two instructions that decide "no save data (offer to create)" vs
+        // "the data is corrupted" in the title's mode-5 save check (handover 5c.34
+        // item 2). Read from the DOL, both are *block entries* (a `bl` return address
+        // and a branch target), which is what makes them probeable as replacements:
+        //
+        //   80534C78  bl  0x800A472C            ; save status check
+        //   80534C7C  cmpwi r3, 0               ; <- probe A: 0 = "check passed"
+        //   80534C80  bc  4,2, 0x80534CA8       ; nonzero -> mode 6 (error/create)
+        //   80534CA8  ... bl 0x800A4E08 / 0x803B854C ; expected length
+        //   80534CC0  lwz  r3, 120(r1)          ; <- probe B: out_len
+        //   80534CC4  lwz  r0, 116(r1)          ;            expected
+        //   80534CC8  cmplw r3, r0
+        //   80534CCC  bc  12,2, 0x80534CF4      ; EQUAL -> mode 9 ("data is corrupted")
+        //   80534CF4  mode 9 ;  80534CD0.. mode 6
+        //
+        // So the guest shows the corrupted dialog exactly when the two lengths are
+        // EQUAL. With no save file at all our NAND layer answered success with length
+        // 0 for a fd that was never opened, and the manager's cached status length is
+        // also 0 - equal, hence "corrupted". The probe prints both values so the
+        // decision is measured rather than argued about.
+        case 0x80534C7C: {
+            static int s_probe = -1;
+            if (s_probe < 0) s_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;
+            if (s_probe) {
+                /* r3 here is fn_800A472C's *return*: 1 = the check passed (the caller then
+                 * compares lengths), 0 = it failed (the caller takes mode 6). */
+                printf("[TLS SaveCheck] 80534C7C fn_800A472C -> %d (%s)\n",
+                       (s32)ctx->gpr[3],
+                       ((s32)ctx->gpr[3] != 0) ? "check PASSED, compare lengths"
+                                               : "check FAILED -> mode 6");
+                fflush(stdout);
+            }
+            return 0;
+        }
+        case 0x80534CC0: {
+            static int s_probe = -1;
+            if (s_probe < 0) s_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;
+            if (s_probe) {
+                u32 sp = ctx->gpr[1];
+                u32 len = mem_read32(ctx, sp + 120);
+                u32 want = mem_read32(ctx, sp + 116);
+                printf("[TLS SaveCheck] 80534CC0 out_len=%u expected=%u -> %s\n", len, want,
+                       (len == want) ? "MODE 9 (\"data is corrupted\")" : "MODE 6 (error/create)");
+                fflush(stdout);
+            }
+            return 0;
         }
 
         // fn_803B8270 (FinishAsync / set v340=0)

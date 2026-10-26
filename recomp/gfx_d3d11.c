@@ -2059,6 +2059,17 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
     if (have_backbuffer) ID3D11Texture2D_Release(source);
 }
 
+/* Frame matcher for the per-batch probes (TLS_BATCH_DUMP / TLS_BATCH_PROBE /
+ * TLS_TEV_PROBE). The present counter and the guest frame diverge (~2800 presents per
+ * 6000 frames), so a probe keyed only to the present counter silently lands on a
+ * different moment than the TLS_INPUT_SCRIPT frame number it was aimed at - that
+ * ambiguity cost three full runs. Match either counter, exactly as TLS_SHOT_FRAMES
+ * already does, and the same frame number means the same moment everywhere. */
+static bool probe_frame_hits(int want, int present_count) {
+    extern int g_runner_current_frame;
+    return want == present_count || want == g_runner_current_frame;
+}
+
 /* Same readback, plus the two statistics that name a *local* defect instead of a
  * frame average: the brightest sample (a saturated glow raises it without moving the
  * average much) and the number of red-dominant samples (a channel-swapped or
@@ -2482,7 +2493,7 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                         s_dump_frame = f ? atoi(f) : -1;
                         if (m) s_dump_max = atoi(m);
                     }
-                    if (s_dump_frame >= 0 && (int)s_d3d11_dump_count == s_dump_frame) {
+                    if (s_dump_frame >= 0 && probe_frame_hits(s_dump_frame, (int)s_d3d11_dump_count)) {
                         printf("[BatchDump] frame=%d batches=%u vtx=%u\n",
                                s_d3d11_dump_count, batch_count, gx_vtx_count);
                         uint32_t shown = 0;
@@ -2748,7 +2759,7 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                             const char* f = getenv("TLS_BATCH_PROBE");
                             s_probe_frame = f ? atoi(f) : -1;
                         }
-                        if (s_probe_frame >= 0 && (int)s_d3d11_dump_count == s_probe_frame) {
+                        if (s_probe_frame >= 0 && probe_frame_hits(s_probe_frame, (int)s_d3d11_dump_count)) {
                             unsigned pr, pg, pb, pmax, pred, pbright, pn, pa;
                             probe_backbuffer_stats(&pr, &pg, &pb, &pmax, &pred, &pbright, &pn, &pa);
                             printf("[BatchProbe] frame=%d after b%u (voff=%u vcnt=%u tex=0x%08X blend=%d s=%u d=%u col0=0x%08X): avg=(%u,%u,%u) a=%u max=%u red=%u/%u bright=%u\n",
@@ -2770,7 +2781,8 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                             const char* fb = getenv("TLS_TEV_PROBE_FROM");
                             s_tev_probe_from = fb ? atoi(fb) : 0;
                         }
-                        if (s_tev_probe_frame >= 0 && (int)s_d3d11_dump_count == s_tev_probe_frame &&
+                        if (s_tev_probe_frame >= 0 &&
+                            probe_frame_hits(s_tev_probe_frame, (int)s_d3d11_dump_count) &&
                             (int)b >= s_tev_probe_from) {
                             printf("[TevProbe] frame=%d b%u vcnt=%u tex=0x%08X tex1=0x%08X blend=%d s=%u d=%u texcoord_mask=0x%02X tc0=%08X/%08X tc1=%08X/%08X\n",
                                    s_d3d11_dump_count, b, batch->vertex_count,
