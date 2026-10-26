@@ -52,7 +52,8 @@ static LRESULT CALLBACK window_proc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM l
     return DefWindowProcA(hwnd, msg, wParam, lParam);
 }
 
-static bool init_display_window(int width, int height, GfxBackendType backend_type, bool vsync, int target_fps) {
+static bool init_display_window(int width, int height, GfxBackendType backend_type, bool vsync, int target_fps,
+                                bool start_minimized) {
     WNDCLASSA wc = {0};
     wc.lpfnWndProc = window_proc;
     wc.hInstance = GetModuleHandle(NULL);
@@ -64,10 +65,16 @@ static bool init_display_window(int width, int height, GfxBackendType backend_ty
     RECT r = {0, 0, width, height};
     AdjustWindowRect(&r, WS_OVERLAPPEDWINDOW, FALSE);
 
+    /* A minimised start is not a cosmetic option: activating a window mid-run steals
+     * focus from whatever the user is doing (that cost this project a whole session
+     * of Dolphin debugging). Create it hidden in that case and only ever show it
+     * minimised without activation, so it never takes the foreground. WM_SIZE ignores
+     * SIZE_MINIMIZED, so the swap chain keeps the size it was created with and the
+     * back-buffer capture before Present is unaffected. */
     s_hwnd = CreateWindowA(
         "TLS_Runner_Class",
         "Project The Maybe(Not) Last Story - Native PC Port [Hardware Accelerated]",
-        WS_OVERLAPPEDWINDOW | WS_VISIBLE,
+        WS_OVERLAPPEDWINDOW | (start_minimized ? 0 : WS_VISIBLE),
         CW_USEDEFAULT, CW_USEDEFAULT,
         r.right - r.left, r.bottom - r.top,
         NULL, NULL, GetModuleHandle(NULL), NULL
@@ -89,10 +96,15 @@ static bool init_display_window(int width, int height, GfxBackendType backend_ty
         return false;
     }
 
-    ShowWindow(s_hwnd, SW_SHOWNORMAL);
-    UpdateWindow(s_hwnd);
-    SetForegroundWindow(s_hwnd);
-    SetFocus(s_hwnd);
+    if (start_minimized) {
+        /* SW_SHOWMINNOACTIVE: minimised, and explicitly NOT activated. */
+        ShowWindow(s_hwnd, SW_SHOWMINNOACTIVE);
+    } else {
+        ShowWindow(s_hwnd, SW_SHOWNORMAL);
+        UpdateWindow(s_hwnd);
+        SetForegroundWindow(s_hwnd);
+        SetFocus(s_hwnd);
+    }
 
     char title[256];
     snprintf(title, sizeof(title),
@@ -101,8 +113,9 @@ static bool init_display_window(int width, int height, GfxBackendType backend_ty
     SetWindowTextA(s_hwnd, title);
 
     timeBeginPeriod(1);
-    printf("[Runner] Display window initialized (%dx%d) using %s\n",
-           width, height, gfx_backend_get_name());
+    printf("[Runner] Display window initialized (%dx%d) using %s%s\n",
+           width, height, gfx_backend_get_name(),
+           start_minimized ? " [minimized, no focus steal]" : "");
     return true;
 }
 
@@ -964,6 +977,7 @@ int main(int argc, char** argv) {
     int max_frames = 10;
     bool frames_specified = false;
     bool enable_window = true;
+    bool start_minimized = false;
     int win_width = 1280;
     int win_height = 720;
     int target_fps = 60; // Default 60 FPS (0 = uncapped)
@@ -982,6 +996,7 @@ int main(int argc, char** argv) {
             printf("  --blocks <N>      Max blocks per slice (default: 500000)\n");
             printf("  --frames <N>      Simulated frames to run (0=unlimited, default: 0 in windowed, 10 in headless)\n");
             printf("  --window, -w      Enable interactive display window (default)\n");
+            printf("  --minimized       Start the display window minimised, without taking focus\n");
             printf("  --headless        Run in headless console mode without display window\n");
             printf("  --width <pixels>  Display window width (default: 1280)\n");
             printf("  --height <pixels> Display window height (default: 720)\n");
@@ -1012,6 +1027,9 @@ int main(int argc, char** argv) {
         } else if (strcmp(argv[i], "--headless") == 0) {
             enable_window = false;
         } else if (strcmp(argv[i], "--window") == 0 || strcmp(argv[i], "-w") == 0) {
+            enable_window = true;
+        } else if (strcmp(argv[i], "--minimized") == 0) {
+            start_minimized = true;
             enable_window = true;
         } else if (strcmp(argv[i], "--width") == 0 && i + 1 < argc) {
             win_width = atoi(argv[++i]);
@@ -1161,7 +1179,7 @@ int main(int argc, char** argv) {
 
 #ifdef _WIN32
     if (enable_window) {
-        init_display_window(win_width, win_height, backend_type, vsync, target_fps);
+        init_display_window(win_width, win_height, backend_type, vsync, target_fps, start_minimized);
     }
 #endif
 

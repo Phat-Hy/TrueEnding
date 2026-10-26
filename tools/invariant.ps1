@@ -43,7 +43,11 @@ Remove-Item $ppm -ErrorAction SilentlyContinue
 $log = Join-Path $root 'logs\invariant.log'
 New-Item -ItemType Directory -Force -Path (Split-Path $log) | Out-Null
 
-& $exe --window --frames 3520 *> $log
+# --minimized: every runner launch in this project starts the window minimised and
+# without activation (host_runner.c), so a verification run can never steal focus.
+# The screenshot is captured from the back buffer BEFORE Present, so a minimised
+# window does not change it - this script is itself the check that it does not.
+& $exe --window --minimized --frames 3520 *> $log
 if (-not (Test-Path $ppm)) { Write-Host 'FAIL: no screenshot produced' -ForegroundColor Red; exit 1 }
 
 # 1. structural: the sequence must reach Game
