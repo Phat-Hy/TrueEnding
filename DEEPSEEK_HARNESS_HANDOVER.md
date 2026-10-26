@@ -4587,6 +4587,30 @@ back via the `-m`/movie option, which needs no window focus at all. Everything e
 already working: the window is found, frames are dumped, and the frame counter the tool's
 `--frame-plan` mode needs is being produced.
 
+**Third attempt: the bindings are fine, so it is FOCUS.** Sending `RETURN` instead of `A` made no
+difference - the last dumped frame (2283) is still "PUSH START". The reason is not the key:
+`Config/WiimoteNew.ini` already binds
+
+```
+[Wiimote1]
+Device = DInput/0/Keyboard Mouse
+Buttons/A = `Click 0` | SPACE | RETURN
+Buttons/2 = `2` | SPACE | RETURN
+```
+
+(an earlier note said "no button bindings" - that was my own bad grep: the ini key is `Buttons/A`,
+not `Button A`, and the same mistake would make `GCPadNew.ini` look empty too). Dolphin reads the
+keyboard through **DInput**, which needs the render window to genuinely have foreground focus, and
+`SetForegroundWindow` from a background process is routinely refused by Windows. So the reference
+route is blocked on *forcing focus*, and the fixes are, in order of robustness:
+
+1. play back a **Dolphin movie (`.dtm`)** - no focus needed at all;
+2. force focus properly: `ShowWindow` + `AttachThreadInput` to the foreground thread before
+   `SetForegroundWindow`, or post an ALT key tap first (the standard Windows unlock);
+3. run the game in a session where the window is interactively focused and drive it by hand.
+
+**Do not** conclude "Dolphin input does not work" from this - it is one of the three above.
+
 
 
 #### 5c.30a The guest never even *attempts* to register a Chapter-1 scene task
