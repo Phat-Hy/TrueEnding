@@ -6091,3 +6091,34 @@ space check is faithful, and the create is never requested.
   class of answer 5c.39/5c.40 spent two sessions retiring, and it would hide the real defect.
 
 The goal stays active: `savedata.dat` still does not appear.
+
+#### 5c.41 E. The IPC completion timing gates the manager, but is not sufficient
+
+New flag `TLS_IPC_DELAY=<frames>` (inert; default 0) holds a queued IOS completion until that many runner
+frames have passed instead of delivering it at the first idle point of the same frame. Rationale: on
+hardware a `/dev/fs` request completes asynchronously and the guest's task loops tick in between.
+
+Measured, and this **corrects 5c.41 C**:
+
+* **State 1 IS reachable.** `fn_800A48B8` - the only manager API entry that stores `1` into `+348` - is
+  called **exactly once**, from `0x803B8FD0`, and the title observes it (`SaveCheck 800A4228 state=1
+  status=0 lr=0x803B8D74`). So the state-1 handler is not dead code.
+* `fn_800A500C` bounds-checks `op` (`addi r0,r5,-3; cmplwi r0,0x16` -> op must be 3..25), so a
+  completion can never produce states 1 or 2. States 1/2 are set only by direct stores.
+* The driver sets state 1 and then tears the request down **in the same frame** (`803B8270 FinishAsync`),
+  so no `Update` tick ever dispatches the state-1 handler. That is why the create never happens even
+  though the state is set.
+* With `TLS_IPC_DELAY=1` the manager instead dispatches **state 3 for 217 ticks** - the handler really
+  runs - but `obj+72` (kind) is **3**, which that handler treats as "nothing to do", so it livelocks
+  there and still never reaches either `NANDCreateAsync`.
+
+So completion timing is a genuine factor in this bug (same-frame completion lets the driver finish a
+chain before its own per-frame `Update`), but it is **not sufficient**: the `kind` in the request
+descriptor decides whether the handler does anything, and the driver requests kind 3.
+
+Next step: find what writes `obj+72` (kind) - the driver's request descriptor at `0x803B8xxx` - and
+which of its operations use kind 0 (the branch that holds `NANDCreateAsync` at `0x800A3198`).
+
+Probes added this round: `SAVEAPI` (`0x800A48B8`), `STATE1` (`0x800A2E24`, `0x800A2EA4`), `SAVEDRV`
+(the four `fn_800A48B8` call return addresses), and `SAVECREATE3` extended to the handler entry
+`0x800A3084`.
