@@ -4102,19 +4102,24 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
          * and fn_80621D70 sets status = 1 only when ReadDir answered -101 (EINVAL,
          * "not a directory"); success or -102 give status 2. So the create is taken
          * unless the status probe succeeds *and* reports 1. Inert probe. */
-        case 0x800A2FC0: case 0x800A300C: case 0x800A2FC8: case 0x800A2FB4: {
+        case 0x800A2FC0: case 0x800A300C: case 0x800A2FC8: case 0x800A2FB4:
+        /* The state-3 handler (fn_800A2DE0 +0x2A4) dispatches on a *kind* field at
+         * obj+72: 0 -> 0x800A30B0 (this branch holds the second NANDCreateAsync, at
+         * 0x800A3198), 1 -> 0x800A31E0, 10 -> 0x800A3254. op=3 completes in every
+         * run, so these four branch targets fire and say which kind is live. */
+        case 0x800A30B0: case 0x800A31E0: case 0x800A3254: case 0x800A3260: {
             if (tls_nand_probe_on()) {
                 static u32 s_dec_n = 0;
-                if (s_dec_n < 30) {
+                if (s_dec_n < 40) {
                     s_dec_n++;
+                    u32 obj = ctx->gpr[3];
                     char msg[224];
                     snprintf(msg, sizeof(msg),
-                             "SAVECREATE pc=0x%08X r0=%u r3=0x%08X r31=0x%08X mgr344=%u mgr348=%u "
-                             "b56=%u lr=0x%08X",
-                             ctx->pc, ctx->gpr[0], ctx->gpr[3], ctx->gpr[31],
-                             ctx->gpr[31] ? mem_read32(ctx, ctx->gpr[31] + 344) : 0,
-                             ctx->gpr[31] ? mem_read32(ctx, ctx->gpr[31] + 348) : 0,
-                             mem_read8(ctx, ctx->gpr[1] + 56), ctx->lr);
+                             "SAVECREATE3 pc=0x%08X obj=0x%08X kind(+72)=%u result(+344)=%u state=%u lr=0x%08X",
+                             ctx->pc, obj,
+                             obj ? mem_read32(ctx, obj + 72) : 0,
+                             obj ? mem_read32(ctx, obj + 344) : 0,
+                             obj ? mem_read32(ctx, obj + 348) : 0, ctx->lr);
                     tls_nand_probe_slot(msg);
                 }
             }
