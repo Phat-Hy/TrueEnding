@@ -470,15 +470,15 @@ float4 PSTev(PSInput input) : SV_Target
          * SKIP label (b34, raw alpha word 0x0008F2F4) evaluates as A0*A2 + KONST + TEXA
          * under the real layout (texture alpha shapes the glyphs) and as a flat
          * "ZERO tex ras ZERO" -> raster alpha only under the shifted one (no glyphs). */
-        uint aarg = (abits >> 9) & 7;
-        uint ab   = (abits >> 6) & 7;
-        uint ac2  = (abits >> 3) & 7;
-        uint ad   = abits & 7;
-        uint abias= (abits >> 12) & 3;
-        uint aop  = (abits >> 14) & 1;
-        uint aclamp=(abits >> 15) & 1;
-        uint ascale=(abits >> 16) & 3;
-        uint adest= (abits >> 18) & 3;
+        uint aarg = (abits >> 13) & 7;
+        uint ab   = (abits >> 10) & 7;
+        uint ac2  = (abits >> 7) & 7;
+        uint ad   = (abits >> 4) & 7;
+        uint abias= (abits >> 16) & 3;
+        uint aop  = (abits >> 18) & 1;
+        uint aclamp=(abits >> 19) & 1;
+        uint ascale=(abits >> 20) & 3;
+        uint adest= (abits >> 22) & 3;
 
         float alpha;
         if (abias == 3) {

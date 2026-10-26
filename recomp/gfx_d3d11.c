@@ -2835,6 +2835,39 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                                 0, &mapped_cb))) {
                             cst = (GxTevConstants*)mapped_cb.pData;
                             gx_tev_fill_constants(cst, tev_st, &need_compare);
+                            /* TLS_TEV_DUMP_BATCH=<batch index>[,<present frame>]: print exactly
+                             * what the TEV shader is handed for that batch, so its arithmetic can
+                             * be evaluated offline instead of inferred from its output. Added for
+                             * 5c.43 G: b28 (I4 atlas) renders glyphs under TEV and b34 (IA4 atlas)
+                             * draws nothing, with identical combiner words. */
+                            {
+                                static int s_dump_b = -2, s_dump_f = -1;
+                                if (s_dump_b == -2) {
+                                    const char* e = getenv("TLS_TEV_DUMP_BATCH");
+                                    s_dump_b = -1;
+                                    if (e && *e) {
+                                        s_dump_b = atoi(e);
+                                        const char* comma = strchr(e, ',');
+                                        if (comma) s_dump_f = atoi(comma + 1);
+                                    }
+                                }
+                                if (s_dump_b >= 0 && (int)b == s_dump_b &&
+                                    (s_dump_f < 0 || s_dump_f == (int)s_d3d11_dump_count)) {
+                                    uint32_t col = tev_st ? tev_st->combiner_color[0] : 0;
+                                    uint32_t alp = tev_st ? tev_st->combiner_alpha[0] : 0;
+                                    printf("[TevBatch] frame=%d b%u tex=0x%08X fmt=%u %ux%u "
+                                           "stages=%u col0=0x%08X alp0=0x%08X alphaTest=0x%08X "
+                                           "texenable=%u map=%u coord=%u ras=0x%08X\n",
+                                           s_d3d11_dump_count, b, batch->tex.guest_addr,
+                                           batch->tex.format, batch->tex.width, batch->tex.height,
+                                           tev_st ? tev_st->num_stages : 0, col, alp,
+                                           cst->alpha_test, tev_st ? tev_st->tex_enable[0] : 0,
+                                           tev_st ? tev_st->texmap[0] : 0,
+                                           tev_st ? tev_st->texcoord[0] : 0,
+                                           gx_vtx[batch->vertex_offset].color);
+                                    fflush(stdout);
+                                }
+                            }
                             /* Which UV each stage samples (handover 5c.20): uv0/uv1 when the
                              * batch supplies that texcoord attribute and the texgen exists,
                              * otherwise the constant (0,0) that hardware leaves in an

@@ -73,6 +73,10 @@ the capture is unaffected by minimization (identical frame-3500 hash).
   `TLS_PRESENT_PROBE` for per-frame batch/vtx counts.
 * A texture that is not re-uploaded inside a frame produces no `TLS_TEX_DUMP_FRAME` output - that is a
   measurement ("the cached texture is what both draws sampled"), not a failure of the instrument.
+* **Delete the target `d3d11_screenshot_<n>.ppm` before every run you intend to compare.** A run that dies
+  early leaves the *previous* run's file in place, and reading it produces a confident, wrong conclusion -
+  exactly how 5c.43 E came to report "no visual effect" for a change that actually aborts the guest
+  (5c.43 H). `tools/invariant.ps1` already does this; manual runs must too.
 * One screenshot per run (`TLS_SHOT_FRAMES=<n>`, plus **`TLS_SHOT_GUEST=1`** when the run changes what is
   drawn - otherwise a changed present count moves the capture, §5c.43 F). **Do not compare the runner's
   built-in fixed schedule (frames 100..1800): it does not dump the presented frame** - at 1300 it averages
@@ -6755,11 +6759,27 @@ new bits -> a,b,c,d = A0,   A2,   KONST, TEXA  bias=3  (COMPARE stage, mode 0, o
 So every alpha stage was evaluated with the wrong arguments, and compare stages were run as regular stages.
 Both are fixed, and the probe now prints the raw words so this cannot silently drift again.
 
-**Measured effect on the page: none.** With the corrected shader forced into the binary, frame 4000 is
-byte-identical to before (`docs/evidence/host_f4000_tev_alphafix_5c43.png`, sha256 `8ac65b3d..`). Worth
-recording why: the old `0*TEXA + RASA` and the new combine both reduce to texture alpha when the raster alpha
-is 1, and these batches saturate or discard anyway. It is a correctness fix on the TEV path and must not be
-sold as a fix for the page.
+**Measured effect on the page: it aborts the run.** Corrected, then reverted, and the correction is now a
+*lead* rather than a fix. The experiment that settles it (each run's target PPM deleted first, so no stale
+file can stand in):
+
+```
+old bits (shipped):  TLS_TEV=1 + TLS_SHOT_FRAMES=4000 -> reaches TLS Frame 3960, shot sha 6FE45CD5..
+new bits (GX layout): TLS_TEV=1 + TLS_SHOT_FRAMES=4000 -> guest ends at frame ~2144, Sequence '(none)',
+                      Tasks 0, fb0=NaN, NO SHOT AT ALL
+```
+
+So the alpha layout in the registers is 9/6/3/0 as derived, **but decoding it that way makes the guest abort
+at ~2144**. The only sane reading is that the rest of the TEV path is still inconsistent with it (colour
+stage, compare stages, K constants), so fixing alpha alone lands the pipeline in a state the game aborts
+from. The shader keeps the old bits for now *because they let the run finish*; the corrected block is
+recorded in this section and in `git show 024fa6b`, and it must go back in with the rest of the TEV work.
+
+**Correction to what 5c.43 E first said.** It claimed the corrected bits had "no visual effect" and cited a
+byte-identical screenshot. That evidence was invalid: the run behind it
+(`logs/page4000_tevfix2.log`) had died at frame 2100, so the PPM it compared was **left over from the
+previous run** and had never been written by it. Two of the numbers in E came from that same mistake. The
+rule that would have caught it is now in the rules list: delete the target PPM before every run.
 
 **The SKIP label's absence under TEV is a COLOUR-combine problem.** b34's colour word `0x0008FCAF` decodes
 (4-bit colour layout) to `ZERO ONE ras.rgb ZERO` = a **flat raster colour**: the texture's RGB never enters
