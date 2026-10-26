@@ -6437,3 +6437,49 @@ So the driver decides the manager's state, and the state-1 window survives only 
 call. Whoever wants to catch `kind 0` in the state-3 handler has to catch it between `fn_800A4AD4`
 (which sets kind 0 / state 2) and the driver's next state write - which is the same ordering problem
 5c.41 F described, now with a concrete writer to instrument rather than a guess.
+
+#### 5c.42 G/H. THE SAVE CREATE FINALLY EXECUTES - two bugs were hiding it
+
+Eleven rounds of device work never saw a create for two reasons, both now fixed and both previously
+mis-recorded:
+
+**G. `TLS_NO_4228_FABRICATION` never retired anything.** The check sat *after* the fabricated writes in
+`case 0x800A4228`, so the manager's state was zeroed first and every "retired" run was really the
+fabricated one. That is why its frame-3500 hash never moved, and why 5c.40 concluded the fabrication was
+"no longer load-bearing for progression" - **that conclusion was wrong**. With the flag actually applied
+(`tls_no_4228_fabrication()` now guards the writes) 5c.39 B reproduces exactly:
+
+```
+TLS_NO_4228_FABRICATION=1: frame 3500 = E91721779C075D4B64F70BB824437AF532E5BD85C31F7EAB7F1D8C4B7EF68C85
+                           sequence stops at Titl, manager sees honest status 11
+```
+
+**H. The ISFS ioctl request layout is command-dependent.** `fn_8061A880` (CreateDir) and `fn_8061B4D0`
+(CreateFile) build their 0x4c request with the path at **+6** (`addi r3, r3, 0x6; bl memcpy`), then
+owner at +0x49, group at +0x46, attr at +0x47/+0x48. `fn_8061AD30` (GetAttr) puts the path at **+0**.
+The servicer read +0 for every command, so create saw a garbage path:
+
+```
+before: cmd=9 path='\x91\x89!\xA0...' -> -105     (garbage, failed)
+after : cmd=9 path='/tmp/savedata.dat' -> 0       create /tmp/savedata.dat
+```
+
+**With both fixed and the fabrication retired, the create path runs:**
+
+```
+ISFS ioctl cmd=9 path='/tmp/savedata.dat' -> 0     ; CreateFile succeeded
+ISFS_OpenAsync  path='/tmp/savedata.dat' mode=2    ; opened for WRITE
+SaveCheck ... state=18 status=0                    ; manager waiting for the op-9 completion
+```
+
+So the guest *does* create the save: it stages it at `/tmp/savedata.dat`, opens it for writing, and the
+manager advances to **state 18**, i.e. waiting for op 9 to complete. The file is not finished (the run
+still ends in `Titl`) but the create is now actually executing instead of never being requested - which
+was the whole premise of the objective.
+
+Next: op 9 is the completion site at `0x800A2A50`, so what remains is to find why it does not complete
+after the write open. The write itself is the obvious candidate (the reference file is 1 348 992 zero
+bytes, so ~1.35 MB of `IOS_Write` should follow the open).
+
+Default path unchanged by all of this: build green, invariant PASS, frame 3500 `A00272DF...`, 0 changes to
+`src/`.
