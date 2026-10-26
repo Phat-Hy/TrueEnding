@@ -7229,9 +7229,45 @@ from `tools/DolRecomp/build/libdr_cpu.a` (and that archive only holds whatever w
 edits surgical, never restart a whole file from a generated diff, and re-run `tools/invariant.ps1` after
 every touch - which is exactly how the reconstruction was proven correct.
 
-**Verification after the reconstruction**: build green, invariant **PASS**, frame 3500 =
-`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes
-to `src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
+### 5c.45 The GQR layout is NOT wrong, and the texture destroyer is not a psq copy
+
+Two corrections to 5c.44 G, both from instrumenting `ppc_psq_load` / `ppc_psq_store` with the guest's
+*actual* GQR values.
+
+#### A. The port's GQR layout is the one the game's data agrees with
+
+Printed the first psq accesses where the two candidate layouts disagree at all:
+
+```
+[PSQDBG] LD gqr6=0x00040004 port_type=4 std_type=0 ea=0x80898710 cia=0x8009C300
+[PSQDBG] ST gqr6=0x00040004 port_type=4 std_type=0 ea=0x80898710 cia=0x8009C348
+[PSQDBG] ST gqr6=0x00040004 port_type=4 std_type=0 ea=0x80898712 cia=0x8009C34C   (2-byte stride)
+```
+
+`GQR6 = 0x00040004` at a 2-byte stride is a **byte copy**. Under the port's layout both halves read type 4
+(GX u8), which is exactly right for it; under the "documented" layout they read type 0 = float at 2-byte
+alignment, which is nonsense - and that is precisely why flipping the layout produced
+`CPU Exception 0x00000004` = **PPC_EXC_ALIGNMENT** at ~frame 396 (the alignment check in
+`psq_access_is_valid` fires for type 0 on an unaligned EA). The `TLS_PSQ_GQR_STANDARD` flag is therefore
+**removed**, not shipped: 5c.44 G's "the layout does not match the hardware" is wrong, and the guest's own
+values are the evidence.
+
+The general lesson: a candidate register layout has to be checked against the values the guest actually
+writes and the strides it uses, not only against a reference implementation's bitfield declaration.
+
+#### B. The texture-destroying block is not a psq copy
+
+A second diagnostic keyed on the writer's address range (`0x800D6C00..0x800D6E00`, the block was
+`pc=0x800D6CF0`) printed **no psq accesses at all**. So `fn_800D6BE0+0x110` - which stamps
+`00000000FFFFFFFF` over every streamed character texture with `r3=dst, r4=0x903CD1C0, r5=dst` - uses
+ordinary stores, not paired singles. The next step on that thread is to identify `fn_800D6BE0` itself (its
+callers, or the store width via `TLS_WATCH_ADDR` on neighbouring bytes), which is guest-code analysis rather
+than a CPU-core fix.
+
+**State**: `tools/DolRecomp/src/cpu/cpu.c` is back to the shipped psq code plus the two functions
+reconstructed in 5c.44 H, `docs/dolrecomp/cpu-core.patch` regenerated (6 459 bytes, cpu.c + cpu.h), build
+green, invariant **PASS** with frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
 frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
 created at 1 348 992 / 29 344 - so both new instruments are inert by default and no default-path pixel moved.
 0 changes to `src/`. New instruments, both default-off: `TLS_TEX_DUMP_FRAME` (per-frame, ordered texture
