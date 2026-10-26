@@ -5085,3 +5085,48 @@ value that only changes a few frames of timing was enough to produce an entirely
 **Next step**: find what actually consumes the A trig bit in the phase-0 handler. Do not start from
 `fn_800A555C` - it is not called. Instead watch the guest word that holds the trig (`*(r13-26280)+0x3C28`
 per §5c.27) and find the first instruction that reads it after the press.
+
+### 5c.33 THE UNIFYING ROOT CAUSE: the guest's SCRIPT EXECUTOR is broken, and the fabricated filter hides it
+
+The last remaining fabricated override (`case 0x800A6BDC`, `TLS_NO_SCRIPT_FILTER`) is the load-bearing
+one. Read plainly, it does something drastic: it walks the bytecode with a heuristic opcode table and,
+if it does not like what it sees, **returns to the caller without running the guest's script executor at
+all** - the script that was supposed to run simply never does. Its own comment admits a wrong opcode
+table "looks like 'the intro stopped'".
+
+That is exactly the objective's symptom. And the measurements now line up into one story:
+
+| script filter | fade | title invariant f=1448 |
+|---|---|---|
+| ON (default) | faithful (current) | mean=(102,188,205) **p50=203** - title fine |
+| ON (default) | fabricated | mean=(102,188,205) p50=203 - title fine |
+| OFF | fabricated | mean=(77,151,205) **p50=174** - this is the old "regression" |
+| OFF | faithful (current) | mean=(2,2,2) **p50=0** - title BLACK |
+
+So the previously recorded "bypassing the overrides regresses the title (p50 203 -> 174)" is reproduced
+exactly by *script filter off + fake fade on*, and with today's faithful fade the same experiment gives a
+**black screen**. In other words: **when the guest's own script executor is allowed to run, the title
+stops rendering.** The filter exists to stop it running, and stopping it run is what keeps the title
+alive.
+
+**The consequence is the whole Chapter-1 stall.** With the filter ON, scripts are skipped whenever the
+heuristic dislikes a stream; scripts are what create tasks and drive sequences; the task list therefore
+never grows beyond 3, no player/scene task is ever registered, the state machine idles in phase 0, and
+the intro never advances. Every downstream symptom measured in 5c.25-5c.32d is consistent with
+"the scripts are not running".
+
+**So the two symptoms are one defect, and it is not in the scene state machine at all.** It is in the
+guest script evaluator at `0x800A6BD4`/`0x800A6BDC`, which the host cannot execute correctly.
+
+**Next step, and it is the highest-value item in this file**: make the guest's own script evaluator run
+without breaking rendering. Concretely:
+1. `TLS_NO_SCRIPT_FILTER=1` with the faithful fade gives a black title - find *why* the title renders
+   black once the evaluator runs. That is a well-scoped bug: the evaluator runs, the screen goes black,
+   so something it does (a fade, a draw-state change, or a bad write) suppresses output;
+2. instrument the evaluator's entry (`0x800A6BD4`/`0x800A6BDC`) for its first N calls after the title
+   loads and see what it does that coincides with black;
+3. only then retire the filter.
+
+Do not simply delete the filter: as measured, that currently produces a black title. The evaluator has to
+work first. But every round spent on the scene machine before this is now suspect - the machine was being
+starved of the scripts that drive it.
