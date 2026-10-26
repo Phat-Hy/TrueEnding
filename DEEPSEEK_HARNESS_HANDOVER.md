@@ -7134,6 +7134,30 @@ address, one known source file (`pc_ga_g_a01.texture`, 19 462 bytes), and a know
 best-posed problem the page has produced so far. The z-clip (13.3..22.9) is the second half and is not
 touched by any of this.
 
+#### F. The block that overwrites the texture, and its frame
+
+Watching the words that actually *carry* the pattern (`+0x04`, `+0x14`; the earlier watch had picked `+0`
+and `+0x10`, which are zero before and after - which is why it reported "nothing happened"):
+
+```
+frame 1872  pc=0x80625650 lr=0x8046BC54   0x00000000 -> 0x64617461   "+0x04 = 'data'"
+frame 1883  pc=0x800D6CF0 lr=0x800D7168   0x64617461 -> 0xFFFFFFFF   <- the pattern, over the 'data' text
+frame 1883  pc=0x800D6CF0 lr=0x800D7168   0x00000000 -> 0xFFFFFFFF   <- and at +0x14
+```
+
+So between frame 1872 (when the loader formats `chnk`/`text`/`data` into this buffer and the decompress is
+called with it as the destination) and frame 1883, block **`fn_800D6BE0+0x110`** stamps the
+`00000000/FFFFFFFF` pattern over it, and nothing after that writes the address again.
+
+That is the shape of a **buffer release**: the padded/interleaved 0/-1 words look like a freed-block header
+plus poison, written by `fn_800D6BE0` through `fn_800D6E48`, i.e. the guest's own allocator/streaming layer
+letting the temporary go, while the character's texture object still points at it. The request for the same
+file is then re-issued at frame 1884 and finishes at 1893, and the request object itself is freed at 1935.
+
+**So the question is no longer "does the texture load" but "where does the *second* load land, and who is
+supposed to copy it into the texture the model samples".** The addresses to watch are the request object's
+`sub0+8` destination field across the 1884 re-issue - it is the field that changed at frame 1880.
+
 **State**: only the `TLS_MEM_DUMP` instrument is new; no rendering change. Build green, invariant PASS,
 0 changes to `src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
 frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
