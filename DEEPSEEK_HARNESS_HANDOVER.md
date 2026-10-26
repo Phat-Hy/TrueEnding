@@ -6706,11 +6706,14 @@ was first written:
 
 * **measured**: b30's second layer is the ramp, so the duplicate sheet draw is a wipe pass - and with the
   ink matte off it is drawn as a plain opaque sheet, which is why it covers b27/b28 (C3).
-* **measured**: b27's stage arithmetic does **not** put the crest into the colour. With GX's
-  `out = a*b + c + d` and the printed arguments, stage 0 is `0*tex0.rgb + ras.rgb + 0` = the vertex colour
-  `(30,0,0)`, and stage 1 is `0*prev.rgb + 1 + 0` = **white**, with alpha `0*prev.a + tex1.a + 0` = the
-  crest's alpha. The crest can therefore only act as an **alpha mask**, and our decode of it is *fully
-  opaque* (`[tex] map1 ... a=255`), so it cannot shape anything in either path.
+* **measured**: b27's stage arithmetic does **not** put the crest into the colour. With
+  `out = d + (a*(1-c) + b*c)` and the printed arguments, stage 0 is `0*tex0.rgb + ras.rgb*anything` = the
+  vertex colour `(30,0,0)`, and stage 1 is `a=ZERO, b=prev.rgb, c=ONE` -> `prev.rgb` (**an identity, not
+  white** - c multiplies, it does not add; 5c.43 I3 corrects an earlier misreading here), with alpha
+  `0*prev.a + tex1.a*...` = the crest's alpha. The crest can therefore only act as an **alpha mask**, and
+  our decode of it is *fully opaque* (`[tex] map1 ... a=255`), so alpha is 1 everywhere and it cannot shape
+  anything in either path - confirmed by measurement: the plate is **pixel-identical** in the default and
+  TEV renders (`(30,0,0)` with std 2.6 in both).
 * **correction**: the earlier claim in this section - "the black box is the plate and the crest is the
   missing illustration" - is a **lead, not a conclusion**. It needs a reference frame to decide, not more
   probing. C2's two solid facts stand (the box's pixels are exactly the batch's `(30,0,0)` colour; the
@@ -6944,6 +6947,19 @@ so **the faithful TEV path cannot draw those letters, and our default path draws
 multiplies the texture RGB**. Which of the two the console actually shows is no longer an engineering
 question: it is a reference question, and it is the same reference the page's parchment, crest and wipe all
 need.
+
+**I3. The illustration plate is pixel-identical in both paths - the crest clause is a non-defect.** Measured
+on the same-build pair, box (60,110)-(215,235): default `mean (30.2,0.2,0.2) std 2.6`, TEV
+`mean (30.2,0.2,0.2) std 2.6`. b27's TEV state makes it a flat `(30,0,0)` plate whose alpha comes from the
+crest, and the crest decodes fully opaque, so alpha is 1 everywhere and nothing can shape it. **The TEV path
+does not draw the crest for the same reason the default path does not: the guest's own state makes that plate
+a flat dark box.** 5c.43 D's arithmetic in this one place was wrong (stage 1 is an identity, `c` multiplies);
+corrected there.
+
+**What the page's visible defect actually is, now that the two-texture clause is retired**: the composite
+tail. With `TLS_TEV=1` the page still averages 231.7 and still shows the white field, because b12..b24's eight
+`SRCALPHA/ONE` passes sum the EFB copies to saturation *before* any of the page's own art is drawn - that is
+5c.14/5c.15's old suspect, and it is not a TEV-stage problem at all.
 
 **Round state after this test**: build green, invariant PASS, 0 changes to `src/`. The remaining work on
 this page is blocked on one external input - a Dolphin capture of the moment - and no further
