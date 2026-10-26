@@ -970,6 +970,47 @@ static void host_simulate_vblank(CPUState* cpu, int frame_num) {
     }
 }
 
+/* TLS_MEM_DUMP=0xADDR,LEN[,FRAME] dumps raw guest bytes (hex + ASCII): at the end of the
+ * run, or - with FRAME - once, as soon as that guest frame has been executed.
+ *
+ * The frame form exists because this game REUSES its texture arena: measured, 0x91EEEDE0
+ * held the ASCII text "r_ch"/"a#ra" at frame 1734 and different bytes at 1793, so an
+ * end-of-run dump of such an address says nothing about what a texture held when it was
+ * sampled (handover 5c.45 D). Frame the dump or it is not evidence. */
+static void host_dump_mem_spec(CPUState* cpu) {
+    const char* spec = getenv("TLS_MEM_DUMP");
+    if (!spec) return;
+    unsigned addr = 0, len = 0;
+    if (sscanf(spec, "%x,%u", &addr, &len) != 2 || len == 0 || len > 4096) return;
+    const u8* base = (const u8*)resolve_guest_pointer(cpu, addr);
+    if (!base) { printf("[MemDump] 0x%08X: unmapped\n", addr); fflush(stdout); return; }
+    printf("[MemDump] 0x%08X len=%u frame=%d\n", addr, len, g_runner_current_frame);
+    for (unsigned off = 0; off < len; off += 32) {
+        unsigned n = (len - off < 32) ? (len - off) : 32;
+        char hex[3 * 32 + 1];
+        char asc[33];
+        unsigned h = 0;
+        for (unsigned i = 0; i < n; i++) {
+            h += (unsigned)sprintf(hex + h, "%02X", base[off + i]);
+            unsigned char c = base[off + i];
+            asc[i] = (c >= 32 && c < 127) ? (char)c : '.';
+        }
+        asc[n] = 0;
+        printf("  +%04X %-64s %s\n", off, hex, asc);
+    }
+    fflush(stdout);
+}
+
+/* Optional third field of TLS_MEM_DUMP: the guest frame to dump at, or -1. */
+static int host_mem_dump_frame(void) {
+    const char* spec = getenv("TLS_MEM_DUMP");
+    if (!spec) return -1;
+    const char* comma = strchr(spec, ',');
+    if (!comma) return -1;
+    comma = strchr(comma + 1, ',');
+    return comma ? atoi(comma + 1) : -1;
+}
+
 int main(int argc, char** argv) {
 #ifdef _WIN32
     timeBeginPeriod(1);
@@ -1214,6 +1255,17 @@ int main(int argc, char** argv) {
         host_service_alarms(&cpu);
         LARGE_INTEGER t1, t2, t4;
         QueryPerformanceCounter(&t1);
+
+        /* Frame-gated dump: once, at the requested frame, while the guest state that
+         * wrote those bytes is still current. */
+        {
+            static int s_dump_at = -2, s_done = 0;
+            if (s_dump_at == -2) s_dump_at = host_mem_dump_frame();
+            if (!s_done && s_dump_at >= 0 && frame >= s_dump_at) {
+                s_done = 1;
+                host_dump_mem_spec(&cpu);
+            }
+        }
 
         // 2. Poll host input and update controller structures
         tls_input_new_frame();
@@ -1630,38 +1682,7 @@ int main(int argc, char** argv) {
         }
     }
 
-    /* TLS_MEM_DUMP=0xADDR,LEN dumps raw guest bytes at the end of the run (hex + ASCII).
-     * Added for handover 5c.44 D3: the player-character texture streamed to 0x92AEAEC0
-     * decodes as all-transparent CMPR while the word at +0 reads as zero, and a *decode*
-     * cannot tell "decompressed garbage" from "never written" - the bytes can. */
-    {
-        const char* spec = getenv("TLS_MEM_DUMP");
-        if (spec) {
-            unsigned addr = 0, len = 0;
-            if (sscanf(spec, "%x,%u", &addr, &len) == 2 && len > 0 && len <= 4096) {
-                const u8* base = (const u8*)resolve_guest_pointer(&cpu, addr);
-                if (!base) {
-                    printf("[MemDump] 0x%08X: unmapped\n", addr);
-                } else {
-                    printf("[MemDump] 0x%08X len=%u\n", addr, len);
-                    for (unsigned off = 0; off < len; off += 32) {
-                        unsigned n = (len - off < 32) ? (len - off) : 32;
-                        char hex[3 * 32 + 1];
-                        char asc[33];
-                        unsigned h = 0;
-                        for (unsigned i = 0; i < n; i++) {
-                            h += (unsigned)sprintf(hex + h, "%02X", base[off + i]);
-                            unsigned char c = base[off + i];
-                            asc[i] = (c >= 32 && c < 127) ? (char)c : '.';
-                        }
-                        asc[n] = 0;
-                        printf("  +%04X %-64s %s\n", off, hex, asc);
-                    }
-                }
-                fflush(stdout);
-            }
-        }
-    }
+    host_dump_mem_spec(&cpu);
 
     tls_debug_dump_full(&cpu, frame, "Runner Execution Completed");
 

@@ -7290,10 +7290,46 @@ this byte decoder into the texture arena, and the result is a pattern *derived f
 open question is therefore whether the decoder's input is the *right* region and length - i.e. whether the
 decompressor's output matches what the decoder expects - which is guest data-flow, not CPU emulation.
 
-**Verification after cleanup**: `cpu.c` holds only the shipped psq code plus the two reconstructed functions,
-`docs/dolrecomp/cpu-core.patch` regenerated (6 459 bytes), build green, invariant **PASS** with
-`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
-`src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
+#### D. Why the last two rounds of pointer-chasing were partly wrong, and the instrument that fixes it
+
+**D1. End-of-run memory dumps are worthless in reused arenas.** New `TLS_MEM_DUMP=0xADDR,LEN[,FRAME]` dumps
+at a frame as well as at exit, and framed dumps immediately disagree with unframed ones:
+
+```
+frame 1889  [MemDump] 0x903CD1C0  FF00FF00FF00FF00...   (then zeros)
+frame 1999  [MemDump] 0x903CD1C0  FF97FF69FF41FF5C...   (varied data)
+```
+
+Same address, 110 frames apart, completely different content - and the game also writes ASCII into texture
+addresses (`0x91EEEDE0` held `r_ch`/`a#ra` at frame 1734 and different bytes at 1793). **Frame the dump or it
+is not evidence.** Every unframed dump quoted in 5c.44 C-G should be treated as "what was there at exit", no
+more.
+
+**D2. `TLS_WATCH_ADDR` reports the BLOCK start, not the store.** Its `pc=` is the dispatching block, and one
+block can be hundreds of instructions with many inlined loops, so `r3..r6` at that moment belong to whatever
+the block was doing, not necessarily to the store that changed the word. That is how `r4=0x903CD1C0` came to
+be read as "the install copy's source".
+
+**D3. The address that inference produced is an EFB-copy destination, not a texture staging buffer.** Watching
+`0x903CD1C0` from frame 169 shows it rewritten every few frames by `pc=0x80615560` with lr
+`0x800AA0C4`/`0x800AC82C`/`0x800A9E24` - the GX/EFB path. It sits in the same `0x903xxxxx` region as the
+copies 5c.43 C4 measured, so "the install reads the decompressed texture from 0x903CD1C0" was an artefact of
+D2. Likewise `CXDecompressFast` for `pc_wa_g_a01.texture` writes **straight into the texture buffer**
+(`dst=0x92C05720`), not into that staging address.
+
+**What that leaves standing** (measured, framed, reproducible): the texture stream completes, the decompressor
+is called with the right destination, and every streamed character texture still ends up as a
+`00000000FFFFFFFF` pattern produced by a byte-wise decoder (`stb` at offsets 0-7, chunk
+`chunk_0052_text1_800D41C0.c`). What is *not* established is which buffer that decoder actually reads, because
+block-level instrumentation cannot tell.
+
+**Instrument this thread needs next**: a watchpoint at **instruction** granularity - record the store's own
+`cia` and effective address (the emitter already knows both) rather than the block pc - so "which instruction
+wrote this word, from which source register" is a fact instead of a guess.
+
+**Verification**: `TLS_MEM_DUMP`'s optional frame field added in `recomp/host_runner.c` only; build green,
+invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save
+1 348 992 / 29 344, 0 changes to `src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
 frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
 created at 1 348 992 / 29 344 - so both new instruments are inert by default and no default-path pixel moved.
 0 changes to `src/`. New instruments, both default-off: `TLS_TEX_DUMP_FRAME` (per-frame, ordered texture
