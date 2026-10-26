@@ -758,19 +758,23 @@ void gx_pipeline_print_tev_state(uint16_t index) {
     }
     for (int i = 0; i < (int)st->num_stages && i < 8; i++) {
         uint32_t c = st->combiner_color[i], a = st->combiner_alpha[i];
-        printf("   [tev] st%d tex=%d map=%u coord=%u | rgb: %s %s %s %s bias=%u op=%u clamp=%u scale=%s dest=%s kc=%s\n",
+        printf("   [tev] st%d tex=%d map=%u coord=%u | rgb: %s %s %s %s bias=%u op=%u clamp=%u scale=%s dest=%s kc=%s raw=0x%08X\n",
                i, st->tex_enable[i], st->texmap[i], st->texcoord[i],
                k_color_arg_names[(c >> 12) & 0xF], k_color_arg_names[(c >> 8) & 0xF],
                k_color_arg_names[(c >> 4) & 0xF], k_color_arg_names[c & 0xF],
                (c >> 16) & 3, (c >> 18) & 1, (c >> 19) & 1,
                k_scale_names[(c >> 20) & 3], k_dest_names[(c >> 22) & 3],
-               k_konst_names[st->kcsel[i] & 0x1F]);
-        printf("   [tev]     alpha : %s %s %s %s bias=%u op=%u clamp=%u scale=%s dest=%s ka=%s\n",
-               k_alpha_arg_names[(a >> 13) & 7], k_alpha_arg_names[(a >> 10) & 7],
-               k_alpha_arg_names[(a >> 7) & 7], k_alpha_arg_names[(a >> 4) & 7],
-               (a >> 16) & 3, (a >> 18) & 1, (a >> 19) & 1,
-               k_scale_names[(a >> 20) & 3], k_dest_names[(a >> 22) & 3],
-               k_konst_names[st->kasel[i] & 0x1F]);
+               k_konst_names[st->kcsel[i] & 0x1F], c);
+        /* BP 0xC1 packs 3-bit args at d:0-2 c:3-5 b:6-8 a:9-11 and the control bits at
+         * bias:12-13 op:14 clamp:15 scale:16-17 dest:18-19. Reading them at 13/10/7/4 with
+         * the colour combiner's control positions printed the wrong arguments for every
+         * alpha stage (handover 5c.43 E). */
+        printf("   [tev]     alpha : %s %s %s %s bias=%u op=%u clamp=%u scale=%s dest=%s ka=%s raw=0x%08X\n",
+               k_alpha_arg_names[(a >> 9) & 7], k_alpha_arg_names[(a >> 6) & 7],
+               k_alpha_arg_names[(a >> 3) & 7], k_alpha_arg_names[a & 7],
+               (a >> 12) & 3, (a >> 14) & 1, (a >> 15) & 1,
+               k_scale_names[(a >> 16) & 3], k_dest_names[(a >> 18) & 3],
+               k_konst_names[st->kasel[i] & 0x1F], a);
     }
 }
 

@@ -214,8 +214,19 @@ def build_runner(jobs: int = 12):
         needs = not obj.exists() or obj.stat().st_mtime < src.stat().st_mtime
         if not needs and recomp_header_mtime > obj.stat().st_mtime:
             needs = True
+        # gfx_d3d11.c #includes build/recomp/gx_shaders_d3d11.inl, which
+        # tools/compile_shaders.py regenerates. That file lives under build/, so
+        # newest_mtime() never sees it and editing a shader used to leave the OLD
+        # bytecode linked in - measured in 5c.43 E: a corrected TEV alpha stage rebuilt
+        # "successfully" and changed not one pixel because gfx_d3d11.o was stale.
+        if not needs and obj.name == "gfx_d3d11.o":
+            shader_inl = RECOMP_DIR / "gx_shaders_d3d11.inl"
+            if shader_inl.exists() and shader_inl.stat().st_mtime > obj.stat().st_mtime:
+                needs = True
         if needs:
-            if recomp_header is not None and recomp_header_mtime > obj.stat().st_mtime:
+            # obj may not exist yet (first build, or an object deleted by hand) - stat()ing it
+            # unguarded raised FileNotFoundError instead of compiling it.
+            if recomp_header is not None and obj.exists() and recomp_header_mtime > obj.stat().st_mtime:
                 print(f"Compiling {src.name} -> {obj.name}... (header {recomp_header.relative_to(ROOT_DIR)})")
             else:
                 print(f"Compiling {src.name} -> {obj.name}...")

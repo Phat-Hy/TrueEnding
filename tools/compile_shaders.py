@@ -462,15 +462,23 @@ float4 PSTev(PSInput input) : SV_Target
                               cbias, cop, cscale, cclamp);
         }
 
-        uint aarg = (abits >> 13) & 7;
-        uint ab   = (abits >> 10) & 7;
-        uint ac2  = (abits >> 7) & 7;
-        uint ad   = (abits >> 4) & 7;
-        uint abias= (abits >> 16) & 3;
-        uint aop  = (abits >> 18) & 1;
-        uint aclamp=(abits >> 19) & 1;
-        uint ascale=(abits >> 20) & 3;
-        uint adest= (abits >> 22) & 3;
+        /* GX BP 0xC1 (alpha combiner) packs 3-bit args at d:0-2 c:3-5 b:6-8 a:9-11, then
+         * bias:12-13 op:14 clamp:15 scale:16-17 dest:18-19. These used to be read at
+         * 13/10/7/4 with the *colour* combiner's control-bit positions (16/18/19/20/22),
+         * i.e. shifted by one nibble - which silently replaced every alpha stage's
+         * arguments with the wrong fields. Measured cost (handover 5c.43 E): the page's
+         * SKIP label (b34, raw alpha word 0x0008F2F4) evaluates as A0*A2 + KONST + TEXA
+         * under the real layout (texture alpha shapes the glyphs) and as a flat
+         * "ZERO tex ras ZERO" -> raster alpha only under the shifted one (no glyphs). */
+        uint aarg = (abits >> 9) & 7;
+        uint ab   = (abits >> 6) & 7;
+        uint ac2  = (abits >> 3) & 7;
+        uint ad   = abits & 7;
+        uint abias= (abits >> 12) & 3;
+        uint aop  = (abits >> 14) & 1;
+        uint aclamp=(abits >> 15) & 1;
+        uint ascale=(abits >> 16) & 3;
+        uint adest= (abits >> 18) & 3;
 
         float alpha;
         if (abias == 3) {

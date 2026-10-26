@@ -45,12 +45,12 @@ the capture is unaffected by minimization (identical frame-3500 hash).
 
 **The next three steps, in order of value.**
 
-1. *Take the TEV route, not the ink matte.* §5c.43 D shows the page's two-texture stages are never bound by
-   the default build (`gfx_d3d11.c` selects the single-texture shader unless `TLS_TEV=1`), and that TEV is
-   load bearing *only* on this page (the rest of the fixed schedule is pixel-identical with it on). The ink
-   matte is a symptom-level stand-in for the same gap and should not be extended. Acceptance pair: b34's
-   SKIP label (`0x9076E5E0`) must survive the TEV path, then b30 must wipe with the ramp; b27's crest is a
-   lead until a reference frame says what that plate should look like.
+1. *Fix the TEV path's colour stage for 2D text, then re-judge the page.* §5c.43 E fixed the alpha
+   combiner's bit layout (it was read at the colour combiner's positions) and measured **no** visual effect;
+   the SKIP label's absence under TEV is a **colour**-combine problem - b34's colour word decodes to a flat
+   `ras.rgb` with no texture term. That, not the alpha stage, is the next TEV question. The page's own
+   acceptance still needs a reference frame (§5c.43 D: b27's crest only reaches alpha, and the crest decodes
+   fully opaque, so what that plate should look like is unknown). **Do not extend the ink matte.**
 2. *A reference frame for the tutorial page.* The corpus still has none (`run3` 4370-8297 and all of
    `run4` were checked in 5c.39). A new Dolphin capture means driving Dolphin's window;
    `tools/dolphin_capture.py` does it by posting Win32 key messages, which the no-foreground-automation
@@ -6736,7 +6736,50 @@ with b34 (label must survive) and b30 (wipe with the ramp) as the acceptance pai
 same frame captured with `TLS_SHOT_FRAMES=1300` averages 144.3 (`docs/evidence/host_f1300_menu_...`). Use
 `TLS_SHOT_FRAMES` for anything you intend to compare; the schedule is only good for "did something draw".
 
-**Verification:** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
+#### E. The TEV alpha combiner was decoded at the wrong bits - fixed, and it is not the page's problem
+
+Checking b34's "flat alpha" against its register found a real decode bug in two places. GX BP 0xC1 packs the
+alpha combiner as `d:0-2 c:3-5 b:6-8 a:9-11 | bias:12-13 op:14 clamp:15 scale:16-17 dest:18-19`; both the
+shader (`tools/compile_shaders.py`) and the probe (`recomp/gx_pipeline.c`) read it at **13/10/7/4** with
+BP 0xC0's control positions (16/18/19/20/22), i.e. shifted by one nibble. b34's raw alpha word `0x0008F2F4`:
+
+```
+old bits -> a,b,c,d = ZERO, TEXA, RASA, ZERO   bias=0  (regular stage: out = 0*tex + ras)
+new bits -> a,b,c,d = A0,   A2,   KONST, TEXA  bias=3  (COMPARE stage, mode 0, op=1, clamp=1)
+```
+
+So every alpha stage was evaluated with the wrong arguments, and compare stages were run as regular stages.
+Both are fixed, and the probe now prints the raw words so this cannot silently drift again.
+
+**Measured effect on the page: none.** With the corrected shader forced into the binary, frame 4000 is
+byte-identical to before (`docs/evidence/host_f4000_tev_alphafix_5c43.png`, sha256 `8ac65b3d..`). Worth
+recording why: the old `0*TEXA + RASA` and the new combine both reduce to texture alpha when the raster alpha
+is 1, and these batches saturate or discard anyway. It is a correctness fix on the TEV path and must not be
+sold as a fix for the page.
+
+**The SKIP label's absence under TEV is a COLOUR-combine problem.** b34's colour word `0x0008FCAF` decodes
+(4-bit colour layout) to `ZERO ONE ras.rgb ZERO` = a **flat raster colour**: the texture's RGB never enters
+the colour, so no alpha change can put glyphs on screen. Evidence:
+`docs/evidence/crop_skip_tev_5c43.png` (button frame only) against
+`docs/evidence/crop_skip_default_5c43.png` (`SKIP` legible). The TEV path's next question is therefore its
+*colour* stage for 2D text - and, like everything else on this page, it needs the reference frame.
+
+**Two harness defects fell out of this**, both real, both fixed in `tools/recomp_harness.py`:
+
+* **A shader edit never rebuilt `gfx_d3d11.o`.** `tools/compile_shaders.py` writes
+  `build/recomp/gx_shaders_d3d11.inl`, `gfx_d3d11.c` includes it, but `newest_mtime()` scans only `recomp/`
+  and `include/` - so the **old bytecode stayed linked in**. The first run of the alpha fix "succeeded",
+  compiled nothing, and changed not one pixel; that is what exposed it. The harness now treats the `.inl` as
+  a dependency of `gfx_d3d11.o`, verified by editing the shader (recompiles) and rebuilding again (does not).
+  **Anyone who edits shaders should re-verify this first.**
+* A missing support object crashed the build with `FileNotFoundError` (the header-mtime print called
+  `obj.stat()` on a file it had just decided was absent) instead of compiling it.
+
+**And a TEV probe limitation:** `TLS_TEV=1 TLS_BATCH_PROBE=4000` ends the run early - the runner completes at
+frame ~2144 with `Tasks: 0`, `Sequence: (none)`, `fb0=0x7FC00000` (NaN), so the per-batch back-buffer bisect
+cannot be used under TEV. Use `TLS_TEV_PROBE` (state) plus `TLS_SHOT_FRAMES` (one frame per run) instead.
+
+**Verification (5c.43 C, D and E):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
 frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
 created at 1 348 992 / 29 344 - so both new instruments are inert by default and no default-path pixel moved.
 0 changes to `src/`. New instruments, both default-off: `TLS_TEX_DUMP_FRAME` (per-frame, ordered texture
