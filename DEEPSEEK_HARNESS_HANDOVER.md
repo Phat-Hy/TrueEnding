@@ -6483,3 +6483,58 @@ bytes, so ~1.35 MB of `IOS_Write` should follow the open).
 
 Default path unchanged by all of this: build green, invariant PASS, frame 3500 `A00272DF...`, 0 changes to
 `src/`.
+
+#### 5c.42 K. THE SAVE-CREATE PATH WORKS - the game writes savedata.dat and banner.bin itself
+
+This is the state the whole 5c.39 objective was aiming at. With four defects fixed - three of them in the
+HLE - the guest creates its own save, at the real NAND path, and the result is **byte-identical to
+Dolphin's**:
+
+```
+SaveData/title/00010000/534c5345/data/savedata.dat   1 348 992 bytes   sha256 55BDC647BFDDDEA0...
+SaveData/title/00010000/534c5345/data/banner.bin        29 344 bytes   sha256 10D3DBD3B2E019E9...
+```
+
+The game's own sequence, from `TLS_NAND_PROBE=1`:
+
+```
+cmd=9 CreateFile '/tmp/savedata.dat'   -> savedata/tmp/savedata.dat
+IOS_OpenAsync  '/tmp/savedata.dat' mode=2          ; opened for write
+read 0x149580 bytes, close (async)
+cmd=8 Rename   '/tmp/savedata.dat' -> /title/00010000/534c5345/data/savedata.dat
+cmd=9 CreateFile '/tmp/banner.bin'  ... same path for banner.bin
+```
+
+The four defects, in the order they were found:
+
+* **G (diagnostic, mine).** `TLS_NO_4228_FABRICATION` was checked *after* the fabricated writes, so it
+  never retired anything: every "retired" run was really the fabricated one. That is why its hash never
+  moved and why 5c.40 wrongly recorded the fabrication as "no longer load-bearing". **5c.39 B was right**:
+  with the flag genuinely applied the title sees honest status 11 and stays in `Titl`.
+* **H (HLE).** `CreateDir`/`CreateFile` put the path at **+6** in their 0x4c request
+  (`addi r3, r3, 0x6; bl memcpy`), `GetAttr`/`Delete` at +0. The servicer read +0 for everything, so
+  every create saw a garbage path and returned `-105`.
+* **I (HLE).** `0x8061C7E0` was handled as *synchronous* `IOS_Close` and dropped the completion callback.
+  `src/isfs.c fn_8061BB80` is an async wrapper whose only jump target is that function with
+  `(fd, cb, usrdata)`. Dropping the callback parked the manager at **state 18** forever right after the
+  write-open - the "stall" that had been read as a missing create.
+* **J (HLE).** `Rename`'s second path sits at the fixed offset **0x40**, not after the first path's NUL;
+  `plen+1` renamed the finished save to `a.dat`.
+
+**Step (4) of the objective is done too**: the `fn_800A4228` fabrication is retired. `case 0x800A4228` is
+now a probe that returns 0, so the guest's own three instructions run and the title waits on the real
+manager.
+
+Verification, all re-derived in this change:
+
+* sequence `Boot -> Stra -> Titl -> Game`;
+* frame 3500 changed to `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` - an
+  **intentional visual change** (the corrupt-save dialog is gone because the save now really is created),
+  so it is re-recorded;
+* `tools/invariant.ps1` now deletes the save before each run (a fresh-console boot, which is what makes
+  the run deterministic) and **fails unless the run creates `savedata.dat` = 1 348 992 and `banner.bin`
+  = 29 344**. Two consecutive runs PASS, and both files match Dolphin's NAND byte for byte.
+
+Note for anyone re-running by hand: the save now persists at
+`SaveData/title/00010000/534c5345/data/`. Delete it (or run `tools/invariant.ps1`, which does) to
+reproduce the create.
