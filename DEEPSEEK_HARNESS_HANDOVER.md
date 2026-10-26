@@ -6921,7 +6921,35 @@ which b34's TEV state does not use. **That makes "the TEV path loses the SKIP la
 batch's own declared state, not about our shader** - and it is exactly the kind of question only a reference
 frame can settle. Verified: build green, invariant PASS (`EAB33141..`), save 1348992/29344.
 
-**Verification (5c.43 C-H):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
+#### I. The two remaining TEV explanations, both tested and both negative
+
+**I1. Stage-1 texcoords are not the label's problem.** b35 is a two-stage batch whose stage 1 alpha is
+`prev * tex1.a`, and stage 1 names texcoord **1** while the host forces every stage to uv0 unless
+`TLS_TEV_TEXCOORD=1`. But with the flag on the label box does not change:
+
+```
+default            label box mean 221.7  std 61.8  min  0  dark 5.94%
+TLS_TEV=1          label box mean 230.5  std 37.7  min 59  dark 1.74%
+TLS_TEV=1 + TLS_TEV_TEXCOORD=1   mean 234.2  std 36.0  min 59  dark 1.74%
+```
+
+**I2. b35's second texture is not a glyph mask.** `TLS_TEX_DUMP=0x91B3D5E0,0x91B41EE0` through the TEV path
+gives a **circle ring** (64x64) and a similar 128x128 sprite - button highlights, not letters. Evidence:
+`docs/evidence/tex_91B3D5E0_64x64_f14_5c43.png`. b36's second texture is in the same family.
+
+**Where the label now stands, stated plainly.** The only batch in the button area that can produce glyph
+shapes from the data it is handed is b34, and it can only do so through the *texture RGB* (its IA4 atlas is
+fully opaque, H4). The guest's own TEV state for b34 says `ZERO ONE ras.rgb ZERO` - a flat raster colour -
+so **the faithful TEV path cannot draw those letters, and our default path draws them because `PSAlpha`
+multiplies the texture RGB**. Which of the two the console actually shows is no longer an engineering
+question: it is a reference question, and it is the same reference the page's parchment, crest and wipe all
+need.
+
+**Round state after this test**: build green, invariant PASS, 0 changes to `src/`. The remaining work on
+this page is blocked on one external input - a Dolphin capture of the moment - and no further
+renderer change can be judged without it.
+
+**Verification (5c.43 C-I):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
 frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
 created at 1 348 992 / 29 344 - so both new instruments are inert by default and no default-path pixel moved.
 0 changes to `src/`. New instruments, both default-off: `TLS_TEX_DUMP_FRAME` (per-frame, ordered texture
