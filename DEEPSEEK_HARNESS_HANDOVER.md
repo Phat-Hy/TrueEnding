@@ -5208,3 +5208,53 @@ was the fix.
 
 **Do not re-enable the skip.** If a script stream ever looks wrong, the fix belongs in the evaluator or in
 the stream, not in refusing to run it.
+
+### 5c.35 The new invariant, AND a correction: 5c.34 overclaimed the cause
+
+#### The new guard: `tools/invariant.ps1`
+
+The old 3-A present-1448 guard is **superseded** - it pinned `mean=(102,188,205) p50=203` at frame 1448,
+which was the game sitting frozen on the title. The new flow is **deterministic**: two identical runs gave
+a pixel-identical screenshot hash. So the guard is now two checks:
+
+1. the sequence progression must reach `Game` (`Boot -> Stra -> Titl -> Game`), and
+2. frame 3500 must be pixel-identical to the recorded reference
+   `A00272DF30BEDB5FB9D06E60DBDC365A9B47328ACCED1A496D999FD34949432E`
+   (`mean=(28,31,35) p10=0 p50=17 p75=57 p90=85 p99=132`).
+
+Run `pwsh tools/invariant.ps1` (exit 0 = pass). It removes the probe flags with `Remove-Item Env:` rather
+than assigning empty strings, per 5c.33a. **Negative control**: with `TLS_SCRIPT_FILTER=1` the frame-3500
+hash changes to `103B87F8...`, so the guard does catch a regression.
+
+#### CORRECTION: 5c.34's causal claim was too strong
+
+5c.34 says the fabricated script filter "was the root cause of the whole Chapter-1 stall" and that "the
+same run never left Title". **The second half is false, and the first half does not follow.** Measured
+with the *same* 9-press input script and only one flag varied:
+
+| configuration | sequence reached | frame 3500 |
+|---|---|---|
+| both faithful (default) | `Boot -> Stra -> Titl -> Game` | sha `A00272DF...`, mean (28,31,35) |
+| `TLS_SCRIPT_FILTER=1` (skip restored) | `Boot -> Stra -> Titl -> Game` | sha `103B87F8...` |
+| `TLS_FAKE_FADE=1` (fabricated fade restored) | `Boot -> Stra -> Titl -> Game` | mean (42,40,37) |
+
+**All three reach `Game` and render Chapter-1 gameplay.** So neither fabricated override blocks
+progression; they change *what is rendered*, not whether the game advances. The default looks closest to
+the reference gameplay mean (~29 from `run3/framedump_5000`), which is why the faithful defaults are still
+the right defaults - but that is a visual argument, not a progression one.
+
+**Why the earlier rounds saw a stall**: the runs that showed `Seq: Titl` frozen and 600-frame loops used
+*different input scripts* - fewer presses, and the long A-spam variants - not different engine behaviour.
+The `Boot -> Titl -> Game` progression needs the menu presses to actually land. So a large part of the
+"Chapter-1 stall" that consumed rounds 9-33 may have been an **input-script artefact of the test harness**,
+not an engine defect. That is the single most important thing to re-examine next, and it retro-justifies
+suspicion of every earlier conclusion that was drawn with a different press schedule.
+
+**What is still true and worth keeping**: the fabricated overrides did distort rendering (7x over-bright
+cinematics, and a different gameplay image), so retiring them was right. The task count staying at 3 is
+still unexplained but is clearly not blocking gameplay. And no conclusion in this file should be trusted
+unless the input script that produced it is stated alongside it.
+
+**Next step**: re-run the phase/task probes with the 9-press script (not the A-spam variants) to see what
+the scene machine and task list actually do in a run that reaches gameplay. Everything measured with the
+press schedules in 5c.25-5c.32d needs re-checking under this script.
