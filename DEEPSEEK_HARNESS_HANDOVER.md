@@ -2,11 +2,10 @@
 
 ## NEXT SESSION — START HERE
 
-**Tree state.** Clean at the commit that added this block (check `git log --oneline -4`; the session
-ended on the `rule: minimized game-window launches are mandatory` commit). Build green
+**Tree state.** Clean at the commit that added this block (check `git log --oneline -4`). Build green
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `A00272DF30BEDB5FB9D06E60DBDC365A9B47328ACCED1A496D999FD34949432E`). **0 changes
-to `src/`.** Current state lives in §5c.37; §5c.36 and everything earlier is history.
+to `src/`.** Current state lives in §5c.38; §5c.37 and everything earlier is history.
 
 **MANDATORY, before any other command:** every runner launch opens the game window **minimized**:
 
@@ -22,25 +21,30 @@ Dolphin debugging, and the capture is unaffected by minimization (verified: iden
 
 **The two open defects, and exactly where to start.**
 
-1. *Tutorial page at frame 4000* — white background with fine coloured speckle where the cave should
-   plausibly be. Measured (§5c.37 D): the page submits 37 batches / 9774 vtx; **batches b0..b8 (the 3D
-   scene) draw nothing at all**, then eight full-screen `SRCALPHA/ONE` additive passes ramp the frame
-   `(22,22,19) -> 249`; the EFB copies are already white before the chain runs. The page's text renders
-   **black**, so a light page may be by design — 5c.36's "should be the cave" is *unverified* and needs a
-   reference for this exact frame, which the in-repo corpus does not contain (`run2` stops at 3000/5000,
-   `run3` is a flat `(203.8,204,203.5)` screen through 3700-4300, `run4` stops at 2435). **Concrete
-   measured defect to chase first:** a copy writes `320x224` to `0x9038D1C0` while the same address is
-   sampled as `80x56 fmt=6` — 4x per axis, 8x the bytes that texture occupies (same class as 5c.13's
-   ignored half-scale). The copy-destination size resolution is in `recomp/gx_pipeline.c`
-   (`s_efb_copy_pitch` / BP 0x4D, `pc->half_scale` from BP 0x52) and the writer is
-   `d3d11_efb_copy_to_guest` in `recomp/gfx_d3d11.c`.
-2. *Save dialog says "the data is corrupted"* — non-blocking (pressing through reaches gameplay). The
-   decision is guest code at `0x80534CC8` (equal lengths -> mode 9). Fixed this session: `IOS_Ioctl` on an
-   fd that was never opened no longer answers success-with-length-0. Measured effect: the check now takes
-   the mode-6 error path and the dialog default moved `No -> Yes`, **but the text is unchanged** — so the
-   message id comes from the manager's *earlier* save-status answer (`fn_800A4494` reads it from the
-   manager), not from the length compare. **Start there** (`TLS_SAVE_PROBE=1` prints both decision points;
-   `TLS_NAND_PROBE=1` prints every NAND/ISFS/IOS question and answer).
+1. *Tutorial page at frame 4000* — white field of coloured clumps instead of art, plus a solid black box
+   where the page's illustration belongs; the page's *text* ("Movement and Camera") and its SKIP button
+   render cleanly (`docs/evidence/host_f4000_tutorial_page_5c38.png`). **§5c.38 retired the 5c.37 lead**:
+   the guest itself declares every frame-4000 copy destination as `320x224 fmt=4` (`TLS_COPYDST_PROBE`),
+   so the writer that produces `320x224` is faithful and must not be "fixed"; the `80x56 fmt=6` /
+   `160x112 fmt=1` samples of the same address are the guest's own aliasing of one scratch buffer.
+   Measured structure: b0..b8 (the 3D scene) have NDC z in `[13.3..22.9]`, i.e. outside the clip volume,
+   so they legitimately draw nothing; the white comes from eight full-screen additive passes that read
+   EFB-copy destinations *this frame does not write* (leftovers from earlier frames); b27 (64x64 CMPR at
+   `0x90D19B80`) is the black box. **Start here:** the page's art is missing, not mis-scaled — find where
+   that page's textures are supposed to come from (b27's texture and the additive chain's sources), and
+   compare against a Dolphin capture of this exact moment, which the corpus still lacks.
+2. *Save dialog says "the data is corrupted"* — **§5c.38 measured the whole chain** (all probes gated by
+   `TLS_SAVE_PROBE=1`): `mgr+348` is a *state* (4/6/8 = in progress, 0 = finished) and `mgr+360` is the
+   result; `fn_800A4228` returns `(mgr+348 != 0)`, so the title's `flag=0` means "finished", not "failed".
+   Our manager finishes with **status 0**, the title therefore runs `fn_800A472C` (NANDGetLength), that
+   reaches `fd=0` because `/savedata.dat` was never opened, and the failure path calls
+   `0x80364E7C(..., 12)` — message id **12** is the corrupted text (`docs/evidence/host_f1448_save_dialog.png`).
+   Fixed and measured this session: ISFS **GetAttr** (cmd 6 on `/dev/fs`) used to answer "success, 0 bytes"
+   for every path; it now answers `-6` for a path the host NAND does not hold. That removed the lie but
+   **did not change the dialog**. **Start here:** the save file is never created or written — cmd 4
+   (CreateFile) is only serviced with `TLS_ISFS_SERVICE=1` (off by default), cmd 12 (file I/O) is not
+   modelled, and `IOS_Open` on a path with no host file still hands out a working fd whose reads are zeros
+   (`/banner.bin`, `/shared2/sys/SYSCONF`). `TLS_NAND_PROBE=1` prints every question and answer.
 
 **Rules that decide whether a round is wasted** (all learned the hard way; details in §5c.37 / 5c.33a):
 
@@ -5474,3 +5478,131 @@ confused; note the `80534C7C` line prints the *function's* return (1 = ok), not 
 * The 4x destination-size mismatch (`320x224` written vs `80x56` sampled at `0x9038D1C0`) is a concrete,
   checkable defect and a plausible cause of the speckle *and* of nearby memory damage.
 * Both are cheaper to attack with one reference frame of this page than with more bisecting.
+
+### 5c.38 The frame-4000 copy lead is retired, the page is measured, and the save verdict becomes a chain
+
+Session input script (identical to 5c.37, set in the same shell command as every run):
+
+```
+TLS_INPUT_SCRIPT="600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A,3620-3632:A,3700-3712:A,3800-3812:A,3900-3912:A"
+```
+
+#### A. New instrument: `TLS_COPYDST_PROBE=<from_frame>`
+
+`recomp/replacements.c`, case `0x80614D30` = **GXSetTexCopyDst(dstW, dstH, fmt, mipmap)**. It prints the
+guest's *own* declaration of every EFB-copy destination (width, height, format id, the `0x20` half-scale
+flag, mipmap, caller `lr`) from the given frame, capped at 200 lines. Inert without the variable. It is the
+independent half of any "the writer wrote the wrong size" claim: the writer derives the destination size
+from BP 0x4D, which this function computes into `GXData+0x238`.
+
+#### B. RETIRED: "the copy writes 8x the bytes its texture occupies" (5c.37 D)
+
+Frame 4000 declares **three** copies, and every one of them is `320x224 fmt=0x04` (RGB565, half=0):
+
+```
+[TLS CopyDst] frame=4000 declared=320x224 fmt=0x04 (id=4 half=0) mip=1 lr=0x800B8ED0
+[TLS CopyDst] frame=4000 declared=320x224 fmt=0x04 (id=4 half=0) mip=1 lr=0x800B901C
+[TLS CopyDst] frame=4000 declared=320x224 fmt=0x04 (id=4 half=0) mip=0 lr=0x800B6AB0
+[EfbChain] present=4000 frame=4000 copy=0 dst=0x9038D1C0 320x224 src=(0,0)-(639,447) fmt=4 srcavg=(242,242,240)
+[EfbChain] present=4000 frame=4000 copy=1 dst=0x9038D1C0 320x224 src=(0,0)-(639,447) fmt=4 srcavg=(242,242,240)
+[EfbChain] present=4000 frame=4000 copy=2 dst=0x9036A1A0 320x224 src=(0,0)-(319,223)  fmt=4 srcavg=(225,225,227)
+```
+
+So the guest asked for a 320x224 RGB565 destination, BP 0x4D agreed (pitch 80 = 320 texels x 2 B / 8), and
+`d3d11_efb_copy_to_guest` writes exactly that. The `80x56 fmt=6` sample is a **different interpretation of
+the same address by the guest**, in the same frame (b13/b14/b16/b18: 80x56 RGBA8; b20/b21/b22: 160x112 R8;
+the copies: 320x224 RGB565). A host writer cannot be "wrong" relative to a declaration it reproduces bit
+for bit, and hardware handed the same stream would alias identically - so **do not change the destination
+size derivation**: that would make the writer disagree with the guest.
+
+Cross-check that the sampler's size decode is in pixels, not tiles: Dolphin's dump corpus contains
+`270x836`, `56x56`, `24x24`, `96x328` dumps, and batch b25 of this frame declares exactly `270x836` - the
+decoder is `IMAGE0+1`, and 270x836 is a real pixel size.
+
+#### C. What frame 4000 actually is (draw list + picture)
+
+* b0..b8 are the 3D scene (CMPR 256x256/128x128), and their NDC z is `[13.3..22.9]` - far outside the
+  clip volume, so they legitimately contribute **zero pixels**. This is not a dropped or empty batch:
+  the neighbouring frame 4001 draws 54 batches / 63732 vtx.
+* b9 paints `(119,123,117)` from a 1024x512 CMPR quad.
+* b27 samples a 64x64 CMPR texture at `0x90D19B80` into NDC `[-0.92..-0.66, 0.34..0.71]` (left, upper
+  area): that is the **solid black box** on the page.
+* b12..b24 are full-screen composite passes; the eight `SRCALPHA/ONE` additive ones read EFB-copy
+  destinations that this frame does **not** write (`0x90395DC0`, `0x903917C0`, `0x903DBDC0`,
+  `0x905C3000`), i.e. leftovers from earlier frames, and sum to white.
+* Evidence: `docs/evidence/host_f4000_tutorial_page_5c38.png`. Clean black "Movement and Camera" title,
+  legible SKIP button, white field full of coloured clumps, black rectangle where the illustration goes.
+  **Text rendering on this page is correct; the page's art is missing or garbage.**
+
+Not resolved: what the page should look like. The corpus still has no reference for this moment, so the
+next step is a Dolphin capture with this script at this frame, plus a hunt for where b27's texture
+(`0x90D19B80`) and the additive chain's sources are supposed to be produced.
+
+#### D. The save verdict, measured as a chain
+
+New probes, all inert without `TLS_SAVE_PROBE=1`:
+
+| PC | what it prints |
+|---|---|
+| `0x80534C58` | `fn_800A4228(mgr,&status)` return = `(mgr+348 != 0)` |
+| `0x80534D04` | the manager's result status `mgr+360` (5 -> msg 12, 14 -> msg 21, else mode 9) |
+| `0x80364E7C` | the message id the dialog setter is asked for |
+| `0x800A4494` | the raw NAND error code being mapped to a status |
+
+Measured at frame ~1400:
+
+```
+[TLS SaveCheck] 80534C58 fn_800A4228 -> flag=0                     ; manager state machine finished
+[TLS SaveCheck] err->status(0) call#1..3 lr=0x800A4A80/4CA0/4DB4   ; no error was mapped
+[TLS SaveCheck] 80534C7C fn_800A472C -> 0                          ; the length check failed
+[TLS SaveCheck] SetMessage id=12 lr=0x80534CA4                     ; id 12 = the corrupted dialog
+```
+
+**Correction to 5c.37 E**: `mgr+348` is a *state* - the manager stores 4, 6 and 8 into it while a save
+operation is in flight and 0 when it has finished, and `mgr+360` holds the result. `fn_800A4228` returns
+`(mgr+348 != 0)`, so the title's `flag=0` means "finished", not "failed". The title's four-way decision at
+`0x80534C5C`/`0x80534C68` is: busy -> no dialog; status 0 -> run `fn_800A472C`, the NAND length check;
+status 5 -> mode 6 with message 12; status 14 -> mode 6 with message 21; anything else -> mode 9.
+
+Our manager finishes with **status 0**, so the title runs the length check; the check asks
+`NANDGetLength(mgr+0x234)` whose handle is `fd=0` (the open of `/savedata.dat` failed), the HLE answers
+`-6`, and the failure path sets message **12** - which is exactly the text on screen
+(`docs/evidence/host_f1448_save_dialog.png`: "The save data cannot be used because the data is corrupted.
+Recreate save data?", Yes selected).
+
+#### E. Change: ISFS GetAttr answers about the path it was asked about
+
+ISFS command 6 on `/dev/fs` carries the NUL-terminated guest path in its input buffer. It used to be
+answered "success" with a zeroed 76-byte reply for **every** path, i.e. "/savedata.dat exists, mode 0,
+length 0". It now answers `-6` (IPC_NOEXISTS) when the host NAND does not hold that path and reports the
+real length when it does, in both the synchronous and the asynchronous ioctl (`recomp/replacements.c`).
+
+Measured effect: the lie disappears (`ISFS GetAttr '/savedata.dat' -> -6 (IPC_NOEXISTS: not on this NAND)`)
+and one `err->status` mapping call disappears with it - **but message 12 is unchanged**. GetAttr was not
+the cause. Invariant: **PASS**, frame 3500 = `A00272DF...` unchanged, so this is a faithfulness fix with no
+visual change.
+
+#### F. What the save defect is now known to be, and the next step
+
+The save path still contains three fabricated answers, in the order they matter:
+
+1. **CreateFile is a no-op by default.** ISFS command 4 (`Ioctlv` on `/dev/fs`, 64-byte path + result word)
+   is only serviced when `TLS_ISFS_SERVICE=1`; by default it answers success and creates nothing. The log
+   shows the guest issuing it after the dialog with path `/savedata.dat`.
+2. **File I/O is not modelled at all.** Command 12 (the one the guest retries in a loop) has no handler, so
+   no byte of a save file is ever written.
+3. **Open still lies for other paths.** `IOS_Open` on a path we hold no host file for (`/banner.bin`,
+   `/shared2/sys/SYSCONF`) hands out a real fd whose reads return zeros; the guest then parses a zeroed
+   banner / SYSCONF.
+
+Consequence: `/savedata.dat` is never created or written, every open answers `-6`, `NANDGetLength` is
+reached with `fd=0`, and the title's length check can only fail. **Next: model the save file end to end**
+(CreateFile -> write -> length), or at minimum default the `/dev/fs` service on and implement command 12's
+read/write/seek. Prediction to test: with a real, correctly sized save file the manager's status stops
+being 0-with-a-failed-check, the dialog disappears or becomes the "no save data" one, and frame 3500's hash
+changes **intentionally** - the script's presses at 1440/1500 currently answer that dialog, so the script
+and the invariant hash must be re-derived together in the same change.
+
+**Rules this section adds**: print the guest's own declaration (`TLS_COPYDST_PROBE`) before blaming a host
+writer; a manager field that is tested with `!= 0` is a *state*, not a boolean; and a probe placed at a
+call's return address measures what the caller sees, while a probe at a mid-block instruction never fires.
