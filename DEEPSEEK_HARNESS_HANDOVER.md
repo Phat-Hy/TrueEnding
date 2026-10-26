@@ -4717,8 +4717,29 @@ f=2115  manager+80 = 0                                        (consumed: it tran
 ```
 
 So the name lookup succeeds (`'Game'` -> 12), the request is honoured, and the manager is not the
-blocker. Two cautions recorded from this: (1) a field that has always read the same suspicious value
-in this project is worth auditing rather than trusting - this one misled every session since 5c.10;
-(2) I briefly produced a false "all sequence fields are zero" reading myself by probing
-`[0x8087EE90]` before checking which object `SetNextSequence` actually uses. Verify the *object*, not
-just the offset.
+blocker. **And the current sequence really is 'Game'**: the sequence object at `manager+88`
+(`0x80C98D68`) carries its name **inline at `+0`** -
+
+```
+SEQOBJ 0x80C98D68: 47616D65 00000000 80000000 BF800000 ... | +4:- | +8:-
+                  ^ "Game"
+```
+
+`0x47616D65` is ASCII `G a m e`. The old helper looked for a *pointer* at `+4`, which is why it could
+never name anything even once the manager was right. `recomp/tls_debug.c` now reads the first word as
+four ASCII characters first, and the dump reports:
+
+```
+Sequence: 'Game'
+```
+
+Verified on a 2400-frame run - the first time in this project's records that the field has said
+anything other than `UnknownSeq`.
+
+So the sequence layer is **fully eliminated**: requested (`'Game'`), resolved (id 12), consumed, and the
+current sequence is `Game`. Whatever stalls the intro is downstream of a correctly-running sequence.
+Three cautions recorded from this: (1) a field that has always read the same suspicious value in this
+project is worth auditing rather than trusting - this one misled every session since 5c.10; (2) I
+briefly produced a false "all sequence fields are zero" reading myself by probing `[0x8087EE90]` before
+checking which object `SetNextSequence` actually uses - verify the *object*, not just the offset; and
+(3) verify the *layout* too, because the name was inline at `+0` and not a pointer at `+4`.

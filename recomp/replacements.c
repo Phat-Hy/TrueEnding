@@ -2144,6 +2144,23 @@ static void tls_scene_sm_enter(CPUState* ctx, u32 task) {
                 s_key = key;
                 printf("[TLS SceneSM] f=%d SEQ mgr=0x%08X at76=0x%08X at80=0x%08X at84=0x%08X at88=0x%08X\n",
                        g_runner_current_frame, mgr, f76, f80, f84, f88);
+                /* at88 looks like the current-sequence object; +4 is what the telemetry
+                 * helper treats as a name pointer. Dump the leading words and any
+                 * resolvable strings so the sequence can be NAMED, not just numbered. */
+                if (f88 >= 0x80000000u && f88 < 0x83000000u) {
+                    int i;
+                    u32 sp  = mem_read32(ctx, f88 + 4);
+                    u32 sp2 = mem_read32(ctx, f88 + 8);
+                    const char* s1 = (sp  >= 0x80000000u && sp  < 0x83000000u) ?
+                                     (const char*)resolve_guest_pointer(ctx, sp) : 0;
+                    const char* s2 = (sp2 >= 0x80000000u && sp2 < 0x83000000u) ?
+                                     (const char*)resolve_guest_pointer(ctx, sp2) : 0;
+                    printf("[TLS SceneSM] f=%d SEQOBJ 0x%08X:", g_runner_current_frame, f88);
+                    for (i = 0; i < 8; i++) printf(" %08X", mem_read32(ctx, f88 + (u32)i * 4));
+                    printf(" | +4:%s | +8:%s\n",
+                           (s1 && s1[0] >= 0x20 && s1[0] <= 0x7E) ? s1 : "-",
+                           (s2 && s2[0] >= 0x20 && s2[0] <= 0x7E) ? s2 : "-");
+                }
                 fflush(stdout);
             }
         }

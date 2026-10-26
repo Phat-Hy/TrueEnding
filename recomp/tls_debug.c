@@ -82,8 +82,23 @@ const char* tls_debug_get_sequence_name(CPUState* cpu) {
     uint32_t f80 = mem_read32(cpu, mgr + 80);   /* pending id */
     uint32_t f84 = mem_read32(cpu, mgr + 84);
     uint32_t f88 = mem_read32(cpu, mgr + 88);
-    /* Best effort: if +88 looks like a live object, try its +4 as a string pointer. */
+    /* The current sequence object carries its NAME INLINE at +0. Measured on the Chapter-1
+     * run: SEQOBJ 0x80C98D68 = 47 61 6D 65 ... = "Game". So read the first word as four
+     * ASCII characters before falling back to a pointer at +4 (which is what the old code
+     * tried, and which is why it could never name anything). */
     if (f88 && resolve_guest_pointer(cpu, f88)) {
+        uint32_t w0 = mem_read32(cpu, f88);
+        char nm[5];
+        nm[0] = (char)((w0 >> 24) & 0xFF);
+        nm[1] = (char)((w0 >> 16) & 0xFF);
+        nm[2] = (char)((w0 >> 8) & 0xFF);
+        nm[3] = (char)(w0 & 0xFF);
+        nm[4] = '\0';
+        if (nm[0] >= 0x20 && nm[0] <= 0x7E && nm[1] >= 0x20 && nm[1] <= 0x7E &&
+            nm[2] >= 0x20 && nm[2] <= 0x7E && nm[3] >= 0x20 && nm[3] <= 0x7E) {
+            snprintf(s_buf, sizeof(s_buf), "%s", nm);
+            return s_buf;
+        }
         uint32_t str_ptr = mem_read32(cpu, f88 + 4);
         if (str_ptr && resolve_guest_pointer(cpu, str_ptr)) {
             const char* s = (const char*)resolve_guest_pointer(cpu, str_ptr);
