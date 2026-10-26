@@ -2,7 +2,7 @@
 
 ## NEXT SESSION — START HERE
 
-**Tree state.** `HEAD 7951335` + this commit. Build green
+**Tree state.** `HEAD d5d7344`. Build green
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `A00272DF30BEDB5FB9D06E60DBDC365A9B47328ACCED1A496D999FD34949432E`). **0 changes
 to `src/`.** Current state lives in §5c.37; §5c.36 and everything earlier is history.
