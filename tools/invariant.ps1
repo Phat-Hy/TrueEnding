@@ -28,7 +28,8 @@ $INPUT        = '600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1
 # string as set, which silently keeps a flag enabled (handover 5c.33a).
 foreach ($v in 'TLS_SCRIPT_FILTER','TLS_NO_SCRIPT_FILTER','TLS_FAKE_FADE','TLS_NO_FAKE_FADE',
                'TLS_EFB_ALPHA','TLS_SCENE_SM_PROBE','TLS_FADE_RET','TLS_PRESENT_PROBE',
-               'TLS_TEX_HASH_FULL','TLS_R8_TILE_8X4','TLS_ACTION_PROBE','TLS_SHOT_FRAMES') {
+               'TLS_TEX_HASH_FULL','TLS_R8_TILE_8X4','TLS_ACTION_PROBE','TLS_SHOT_FRAMES',
+               'TLS_SAVE_PROBE','TLS_NAND_PROBE','TLS_ISFS_SERVICE','TLS_SAVE_PRECREATE') {
     Remove-Item "Env:\$v" -ErrorAction SilentlyContinue
 }
 

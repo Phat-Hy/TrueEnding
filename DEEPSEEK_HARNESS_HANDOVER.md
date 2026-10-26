@@ -5,7 +5,7 @@
 **Tree state.** Clean at the commit that added this block (check `git log --oneline -4`). Build green
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `A00272DF30BEDB5FB9D06E60DBDC365A9B47328ACCED1A496D999FD34949432E`). **0 changes
-to `src/`.** Current state lives in §5c.38; §5c.37 and everything earlier is history.
+to `src/`.** Current state lives in §5c.39; §5c.38 and everything earlier is history.
 
 **MANDATORY, before any other command:** every runner launch opens the game window **minimized**:
 
@@ -33,18 +33,22 @@ Dolphin debugging, and the capture is unaffected by minimization (verified: iden
    `0x90D19B80`) is the black box. **Start here:** the page's art is missing, not mis-scaled — find where
    that page's textures are supposed to come from (b27's texture and the additive chain's sources), and
    compare against a Dolphin capture of this exact moment, which the corpus still lacks.
-2. *Save dialog says "the data is corrupted"* — **§5c.38 measured the whole chain** (all probes gated by
-   `TLS_SAVE_PROBE=1`): `mgr+348` is a *state* (4/6/8 = in progress, 0 = finished) and `mgr+360` is the
-   result; `fn_800A4228` returns `(mgr+348 != 0)`, so the title's `flag=0` means "finished", not "failed".
-   Our manager finishes with **status 0**, the title therefore runs `fn_800A472C` (NANDGetLength), that
-   reaches `fd=0` because `/savedata.dat` was never opened, and the failure path calls
-   `0x80364E7C(..., 12)` — message id **12** is the corrupted text (`docs/evidence/host_f1448_save_dialog.png`).
-   Fixed and measured this session: ISFS **GetAttr** (cmd 6 on `/dev/fs`) used to answer "success, 0 bytes"
-   for every path; it now answers `-6` for a path the host NAND does not hold. That removed the lie but
-   **did not change the dialog**. **Start here:** the save file is never created or written — cmd 4
-   (CreateFile) is only serviced with `TLS_ISFS_SERVICE=1` (off by default), cmd 12 (file I/O) is not
-   modelled, and `IOS_Open` on a path with no host file still hands out a working fd whose reads are zeros
-   (`/banner.bin`, `/shared2/sys/SYSCONF`). `TLS_NAND_PROBE=1` prints every question and answer.
+2. *Save dialog says "the data is corrupted"* — **§5c.39 moved the start of the chain up one layer and
+   corrected 5c.38**: `fn_800A4228` is not guest code, it is a replacement that *writes* `0` into the
+   manager's state, and at the title's decision point (`lr=0x80534C58`) the manager is genuinely busy
+   (`state=7 status=0`) and finishes honestly with **status 11**, which takes the title to mode 9 with **no
+   dialog at all**. Retiring that fabrication was measured and reverted: with it the MENU renders but NEW
+   GAME fades to black and never reaches Game (the create half of the save is missing). A dialog at this
+   moment is **faithful** - Dolphin's run3 goes title -> save dialog -> NEW GAME -> Chapter 1, and Dolphin's
+   NAND holds the save the game wrote (`savedata.dat` **1 348 992** bytes, `banner.bin` **29 344**). Seeding
+   those two files into `savedata/` proved the host side works (GetAttr reports 1348992, open succeeds, the
+   32-byte header is read, no dialog) and exposed the next defect: the run then stalls at manager `state=16`
+   waiting on the texture stream `data/texture/ef_hkr02n_c.texture` (`status=3`). **Start here:** `/dev/fs`
+   command **12 is GetUsage** (the create path's space probe, still unmodelled - this is what stops the file
+   from ever being created) and command **4 is ReadDir**, not CreateFile (corrected this session; create is
+   command 9). `/dev/fs` handlers are still off by default (`TLS_ISFS_SERVICE=1` to service them).
+   `TLS_NAND_PROBE=1` prints every question and answer, `TLS_SAVE_PROBE=1` now also prints the manager's
+   `state`/`status` at `0x800A4228` and every `fn_800A500C(mgr, result, op)` completion.
 
 **Rules that decide whether a round is wasted** (all learned the hard way; details in §5c.37 / 5c.33a):
 
@@ -5606,3 +5610,126 @@ and the invariant hash must be re-derived together in the same change.
 **Rules this section adds**: print the guest's own declaration (`TLS_COPYDST_PROBE`) before blaming a host
 writer; a manager field that is tested with `!= 0` is a *state*, not a boolean; and a probe placed at a
 call's return address measures what the caller sees, while a probe at a mid-block instruction never fires.
+
+---
+
+### 5c.39 The manager speaks for itself, and Dolphin says the save dialog is faithful
+
+Session input script (unchanged from 5c.38, set in the same shell command as every run):
+
+```
+TLS_INPUT_SCRIPT="600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A,3620-3632:A,3700-3712:A,3800-3812:A,3900-3912:A"
+```
+
+#### A. The chain does not start at the NAND: it starts at a replacement that writes guest state
+
+`fn_800A4228(mgr, &status)` is **not** guest code here - `recomp/replacements.c` answers it, and the answer
+*writes* into the manager. The guest's own function is three instructions:
+
+```
+800A4228  lwz  r5, 0x15C(r3)   ; state
+          lwz  r3, 0x168(r3)   ; status
+          neg / or / srwi      ; return (state != 0)
+          stw  r3, 0(r4)       ; *out = status
+```
+
+The replacement returns 0 and stores 0 into `mgr+0x15C`. New probe (`TLS_SAVE_PROBE=1`) prints both words
+*before* it overwrites them; measured at the title's decision point:
+
+```
+[TLS SaveCheck] 800A4228(mgr=0x80EA4240) state=7 status=0 lr=0x80534C58   ; the title asks: manager is BUSY
+[TLS SaveCheck] 80534C58 fn_800A4228 -> flag=0                            ; we answer: finished, no error
+```
+
+Second new probe, `0x800A500C` = `fn_800A500C(mgr, result, op)`, the manager's *single* completion handler
+(it stores `op` into `mgr+0x15C` and maps `result` through `fn_800A4494` into `mgr+0x168`):
+
+```
+800A500C(mgr=0x80EA4240 result=-12 op=7)  lr=0x800A2A18   ; open of /savedata.dat failed; NAND maps -6 -> -12
+800A500C(mgr=0x80EA4240 result=0   op=21) lr=0x800A2BBC
+... state=21 status=11  ->  state=0 status=11
+```
+
+So the honest end state of this check is **status 11** (`fn_800A4494(-12) = 11`), not 0 - and 11 is neither 5
+(msg 12) nor 14 (msg 21), so the title would take **mode 9**, the branch that sets no message at all.
+
+#### B. What retiring the fabrication does (measured, then reverted)
+
+`case 0x800A4228:` was changed to `return 0` (run the guest's own three instructions) and rebuilt:
+
+* the title sees `flag=1` while the manager is busy, waits, then sees `state=0 status=11`;
+* **no `SetMessage` runs at all** - the "corrupted" dialog is gone;
+* the MENU renders (`docs/evidence/host_f1300_menu_no_fabrication_5c39.png`: gold `MENU`, `NEW GAME`);
+* pressing NEW GAME (`1300-1312:UP`, `1350-1362:A`) fades to black by frame 1400 and the run never leaves
+  `Seq: Titl` - the 3600-frame run ends on `GX: 78 vtx (11 batches)` and the invariant would fail.
+
+The reason is measured in the same run: the *create* half of the save never completes. The manager enters
+`state=6 -> 7 -> 13 -> 20`, `NANDGetStatus` returns into `fn_800A4494` with `-5`, and the machine parks at
+`state=20 status=5` while its caller (`lr=0x803B927C`) polls forever. That path is the unmodelled NAND, not
+the manager. So the replacement is **load-bearing**: retire it only together with F.
+
+#### C. Dolphin says a dialog here is *faithful*
+
+`build/recomp/dolphin-ref/run3` is the reference "full title -> save dialog -> NEW GAME -> Chapter 1" run
+(5c.20), and Dolphin's NAND now holds what the game wrote:
+
+| file | size |
+|---|---|
+| `%APPDATA%\Dolphin Emulator\Wii\title\00010000\534c5345\data\savedata.dat` | **1 348 992** |
+| `...\data\banner.bin` | **29 344** |
+
+A save dialog at this moment is what hardware does, so the fabricated answer's *visible* effect coincides
+with the reference while its mechanism is a lie. **The defect is not the dialog: it is that our save is
+never created, so the dialog repeats on every boot** (handover 5c.38 F).
+
+#### D. The host NAND can already serve a real save (experiment, files removed)
+
+Copied Dolphin's two files into `savedata/` (git-ignored) and ran 1000 frames with both probes:
+
+```
+ISFS GetAttr '/savedata.dat' out=0x93FE21C0/76 -> out0=1348992     ; the 5c.38 GetAttr fix reports the real length
+IOS_OpenAsync '/savedata.dat' mode=1 -> fd=5 fp=host-file          ; no "no such file" any more
+IOS_ReadAsync fd=5 '/savedata.dat' len=32 -> 32                    ; the save header is read
+800A4228 ... state=16 status=0                                     ; ...and then state 16 forever
+```
+
+With a real save there is **no dialog**: the title takes the CONTINUE path, `GameLoadTask` starts, and the run
+stalls at manager `state=16` while the streaming queue waits on `active="data/texture/ef_hkr02n_c.texture"
+status=3`. That is a *separate* defect on the save-**load** path (5c.12's stall was `status=1`), and it is the
+next instrument's target - it is also the first time a real save reached our loader at all.
+
+#### E. Two corrections to the serviced ISFS handler (landed, inert by default)
+
+* **Command 4 is ReadDir, not CreateFile.** The guest's own wrapper (`src/isfs.c`, `fn_8061AA80` /
+  `fn_8061ABE0`) sends `{path, *count, [count*13 entry bytes]}` and reads the count back - that is a directory
+  listing. The old serviced handler created a host file on it, so a plain *ReadDir* of `/savedata.dat` and
+  `/banner.bin` (which `NANDGetStatus`, `fn_80620BD0`, issues) silently made empty files. **Command 9** is
+  CreateFile (`{path, owner, group, attr}` -> `fn_8061B4D0`). The handler now: 7 delete, 8 rename,
+  9 create, and 4/6/12 answer a zeroed payload.
+* **Command 12 is GetUsage, not file I/O.** `fn_8061B3A0` sends `{path, u32 out, u32 out}` and
+  `fn_80622260 -> fn_80622310` walks a 20-entry path table accumulating those two words against the
+  0x400 / 0x21 / 0x4400 block limits - it is the **space probe of the create path**. It is still unmodelled.
+
+Both changes are behind `TLS_ISFS_SERVICE` (off) so the default path is untouched: invariant **PASS**,
+frame 3500 = `A00272DF...` unchanged.
+
+#### F. Next step (defect 2), in this order
+
+1. **Command 12 (GetUsage)**: answer the two words per path so the placement loop terminates; with zeros the
+   loop cannot place the file (measured: 11-iteration batches, then `state=20 status=5`).
+2. **Command 4 (ReadDir)** truthfully, and **command 6's 0x4c reply** in the layout the guest itself reads
+   (`fn_8061AD30`: `u32 len@0`, `u16 mode@4`, owner `@0x49`, group `@0x46`, attr `@0x47`, `@0x48`).
+3. Then the create path should reach `CreateFile` (cmd 9) + `IOS_Open(create)` + `IOS_Write` and
+   `savedata/savedata.dat` should exist on the host - the dialog then stops repeating. Re-derive the input
+   script and the frame-3500 hash **in the same change** (5c.38 predicted this).
+4. Only then retire the `0x800A4228` fabrication, which needs 1-3 to keep the game moving (B).
+
+#### G. Rules this section adds
+
+* A replacement that **writes** guest memory is a fabrication even when its return value looks harmless;
+  measure the words it overwrites before trusting a "finished" flag.
+* A `SetMessage` id 12 from mode 6 is not by itself a defect: check the reference run's flow first. Dolphin
+  shows a save dialog at the same moment.
+* The guest's own SDK sources in `src/` (`isfs.c`, `nand.c`, `NANDCore.c`, `NANDCheck.c`) are the authority
+  on `/dev/fs` command numbers - the wrapper naming and payload sizes settle in one read what a log trace
+  cannot.
