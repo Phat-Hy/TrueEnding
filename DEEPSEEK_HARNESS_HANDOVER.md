@@ -5990,3 +5990,55 @@ Walk `fn_800A2DE0`'s state dispatch: find the case whose body reaches `+0x1A0`, 
 (`op=11 res=-12 x17`, `op=7 res=-12 x3`, `op=23 res=-12 x2`, `op=3 res=0 x2`, `op=21 res=0 x1`).
 `fn_800A500C` stores `op` into `mgr+0x15C`, so the state value *is* the last completed op - which
 means the create's state 4 must be preceded by an op-4 dispatch, and no op 4 is ever completed.
+
+#### 5c.41 B. The state table, decoded at run time: only ODD states have handlers
+
+`fn_800A2DE0` dispatches on `mgr+348` through a 26-entry pointer table at `0x807789D8`
+(`lwzx` + `bctr`). The **static image has only entry 1 non-zero**, so the table is filled at run
+time and no static read can say which state owns a case - which is why §5c.41 A could not settle it.
+The dump has to be taken from the `Update` entry: `0x800A2E18` is *mid-block*, and a hook only fires
+at a branch target or a `bl` return address, so a probe there is silently dead (a rule this section
+re-learned the hard way).
+
+```
+state  0 -> 0x800A41CC      state 13 -> 0x800A3DEC       state 24 -> 0x800A41CC
+state  1 -> 0x800A2E24      state 14 -> 0x800A41CC       state 25 -> 0x800A4190
+state  2 -> 0x800A41CC      state 15 -> 0x800A3C08
+state  3 -> 0x800A3084      state 16 -> 0x800A41CC
+state  4 -> 0x800A41CC      state 17 -> 0x800A3EDC
+state  5 -> 0x800A3288      state 18 -> 0x800A41CC
+state  6 -> 0x800A41CC      state 19 -> 0x800A3EDC
+state  7 -> 0x800A3564      state 20 -> 0x800A41CC
+state  8 -> 0x800A41CC      state 21 -> 0x800A4110
+state  9 -> 0x800A3564      state 22 -> 0x800A41CC
+state 10 -> 0x800A41CC      state 23 -> 0x800A4150
+state 11 -> 0x800A3A38
+state 12 -> 0x800A41CC
+```
+
+**Every even state maps to `0x800A41CC`, the no-op early-out; only odd states have a handler.** So
+`mgr+348` alternates a start phase (even, nothing to do) and a finish phase (odd, do the next step),
+and the create block at `0x800A2F40` (+0x1A0) belongs to the **state-1 handler** (`0x800A2E24`).
+
+Measured states in a 1700-frame run: `0` (28x), `10` (17x), `2`, `6`, `22`, and `7` (once) - almost
+all **even**, i.e. the manager spends its life in states whose handler is the no-op. That is the real
+shape of "the manager does nothing", and it is a state-machine problem, not a `/dev/fs` one.
+
+Also established this round:
+
+* All four `fn_8061E270/E2F0/E370/E3F0` wrappers are NAND **create** variants (each calls
+  `fn_8061E130`, which calls the ISFS CreateFile wrappers `fn_8061B4D0`/`fn_8061B5D0`). The manager's
+  create call sites `0x800A3038`, `0x800A3198`, `0x800A53D4` are therefore real creates.
+* The save-file names live in a **pointer table at `0x80873818`**: `savedata.dat` (`0x8073DE50`),
+  `banner.bin` (`0x8073DE60`), and `/savebanner/savebanner_xx.u16` (`0x8073DEF8`) nearby. No static
+  reference to that table exists, so the save-file create path resolves its name at run time - it does
+  **not** use a literal, which is why `find_xref` on the strings returns nothing.
+* Caveat on §5c.41 A, found by reading the strings it formats: the buffer the `0x800A2F40` block hands
+  to `NANDCreateAsync` is built from `"M202_008"` / `"E_DG001_014"` (`0x807327B4` / `0x807327D1`),
+  i.e. **scene/event names, not save-file names**. So that block may be the create gate of the same
+  manager for *data* files rather than for `savedata.dat`. Confirm which before acting on it: check
+  whether the state-1 handler ever loads `0x80873818`.
+
+Next step: drive `mgr+348` into `1` and see the state-1 handler choose create, or find the even->odd
+transition for op 0. A probe on `0x800A41CC` (the even-state no-op, a real branch target) showing the
+state each time it is entered would say exactly which even states the manager sits in.
