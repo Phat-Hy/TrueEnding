@@ -4978,3 +4978,35 @@ also compared a 3-`A` title run against a 5-`A`+`UP` intro run, which are differ
 **Still open on this defect**: at f=2251 the host is ~2.2x the reference's mean, and the residual
 differences in 5c.32 stand (no letterbox bar, no card text at that frame, black patches). The fade was
 the 7x component; the remaining 2.2x is a separate, smaller question.
+
+#### 5c.32b CONSEQUENCE: retiring the fake fade changed the state machine's path - the phase-13 analysis was measuring a fabricated machine
+
+Re-ran the Chapter-1 probe after 5c.32a (faithful fade by default). The phase trajectory is **different**:
+
+| | with the fabricated fade (all earlier rounds) | faithful fade (now) |
+|---|---|---|
+| first entry | f=2115 `-1 -> 0` | f=2102 `-1 -> 0` |
+| next | f=3401/3402 `PHASE 0 -> 13` after the A press, **then stuck forever** | f=2105 `PHASE 0 -> 8`, and f=3347 `PHASE 8 -> 0` (`ctr=617`, `f54e8=8`, `f54ec=615`) |
+
+So the machine now runs `0 -> 8 -> 0` on a ~617-frame cycle and **the A press at ~3400 no longer takes
+it to phase 13**. The task census is unchanged in both cases: count stays at 3, no player/scene task is
+ever registered.
+
+**This is a serious caveat on a large part of this file.** Everything in 5c.25 through 5c.31 about the
+"phase-13 stall" - the two exits, `fn_8036E170` returning 0 for phase 13, the waiter's slot list, exit A
+firing once at frame 3416 - was measured **with the fabricated fade override active**. The fabricated
+answer was fed into the very state machine being analysed, so those findings describe the behaviour of
+*the machine as mis-driven by the stub*, not the guest's real machine. They are not necessarily wrong
+about what was observed, but they must not be assumed to describe the real stall.
+
+**What is still solid**: the input path and the A-edge gate (§5c.27 §2), the jump tables and phase
+numbering, the waiter/manager structure, and the fact that **no task is ever registered in either
+configuration**. The phase-13-specific causal chain needs re-deriving against the faithful fade.
+
+**Next steps, in order**:
+1. Re-run the probe with the faithful fade for longer (>=12000 frames) and record the full phase
+   trajectory, including what the A press does now and whether `0 -> 8 -> 0` ever breaks out;
+2. find what phase 8 does (it is the phase the real machine actually spends time in) - it was never
+   examined because the fabricated fade never let the machine reach it in earlier runs;
+3. re-check the waiter's `+0x88` and slot list under the faithful fade, since the `0 -> 8 -> 0` cycle
+   suggests the machine is now reacting to completion signals rather than being pinned.
