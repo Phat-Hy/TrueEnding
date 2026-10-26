@@ -208,10 +208,26 @@ def main():
     # The render widget is the widest Qt window; post to all of them, harmless.
     targets = [h[0] for h in hwnds]
     if args.visible:
+        # Dolphin reads the keyboard through DInput, which only sees keys when its
+        # render window genuinely holds foreground focus - and SetForegroundWindow from
+        # a background process is routinely refused by Windows. That refusal is why
+        # every plan so far ran while the title stayed on "PUSH START" (measured: last
+        # dumped frame 2283, past all the presses). Try the documented unlock: a
+        # synthetic ALT tap is allowed to change the foreground window, so do that and
+        # retry, then report whether it actually took.
         for hwnd in targets:
             user32.ShowWindow(hwnd, 9)          # SW_RESTORE
+        alt = VK.get("MENU", 0x12)
+        for hwnd in targets:
             user32.SetForegroundWindow(hwnd)
+            if user32.GetForegroundWindow() != hwnd:
+                user32.keybd_event(alt, 0, 0, 0)
+                user32.keybd_event(alt, 0, 2, 0)
+                time.sleep(0.05)
+                user32.SetForegroundWindow(hwnd)
             user32.SetFocus(hwnd)
+        fg = user32.GetForegroundWindow()
+        print("foreground:", fg, "target hit:", fg in targets, flush=True)
 
     def broadcast(key, mode="send"):
         for hwnd in targets:

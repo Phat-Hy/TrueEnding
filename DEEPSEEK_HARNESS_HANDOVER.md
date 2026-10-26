@@ -4611,6 +4611,22 @@ route is blocked on *forcing focus*, and the fixes are, in order of robustness:
 
 **Do not** conclude "Dolphin input does not work" from this - it is one of the three above.
 
+**Option 2 measured and REFUSED.** Implemented the focus forcing in
+`tools/dolphin_capture.py` (`ShowWindow` + `SetForegroundWindow`, an ALT tap to unlock, retry, then
+report `GetForegroundWindow`). Result:
+
+```
+foreground: 5899866 target hit: False
+```
+
+Windows kept another window in the foreground even after the ALT-tap unlock, and the presses still
+did nothing. So in this environment key injection into Dolphin is **not achievable**, and the
+remaining route is option 1: a **Dolphin movie (`.dtm`)** played back, which needs no focus at all.
+That is a self-contained piece of work (record one interactively, or synthesise the file format) and
+it is the only path on this list that does not depend on window focus. Note the tool now *reports*
+whether focus was obtained, so a future run cannot silently measure a frozen title again - that silent
+failure is what cost rounds 24-26.
+
 
 
 #### 5c.30a The guest never even *attempts* to register a Chapter-1 scene task
