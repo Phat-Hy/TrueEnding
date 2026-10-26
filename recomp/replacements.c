@@ -2119,6 +2119,35 @@ static void tls_task_census(CPUState* ctx) {
 static void tls_scene_sm_enter(CPUState* ctx, u32 task) {
     extern int g_runner_current_frame;
     tls_task_census(ctx);
+    /* Sequence manager census. The telemetry dump has said `Sequence: 'UnknownSeq'` for
+     * the WHOLE Chapter-1 run, which was never questioned. If the manager never actually
+     * switched to the 'Game' sequence, then everything the sequence's own setup does -
+     * including creating the player/scene task - never runs, and the phase-13 stall is a
+     * symptom of that. SetNextSequence only stores a pending id (g->[80]); the transition
+     * itself has to move it into the current-sequence fields. Print them on change. */
+    {
+        static u32 s_key = 0xFFFFFFFFu;
+        /* The REAL sequence manager is *(r13-26368) - the object SetNextSequence uses
+         * (measured 0x80BB5CC0). [0x8087EE90] (0x80E9DB00) is a DIFFERENT object whose
+         * +0x48/+0x50/+0x80 are all zero; reading it produced a false "the sequence was
+         * never set" reading. SetNextSequence('Game') does succeed: it stores id 12 into
+         * manager+80 (measured at frame 1728). So watch +80 (pending) and the surrounding
+         * fields for the transition being consumed. */
+        u32 mgr = mem_read32(ctx, ctx->gpr[13] - 26368u);
+        if (mgr) {
+            u32 f76 = mem_read32(ctx, mgr + 76);
+            u32 f80 = mem_read32(ctx, mgr + 80);
+            u32 f84 = mem_read32(ctx, mgr + 84);
+            u32 f88 = mem_read32(ctx, mgr + 88);
+            u32 key = (f80 & 0xFFu) | ((f84 & 0xFFu) << 8) | ((f88 & 0xFFu) << 16);
+            if (key != s_key) {
+                s_key = key;
+                printf("[TLS SceneSM] f=%d SEQ mgr=0x%08X at76=0x%08X at80=0x%08X at84=0x%08X at88=0x%08X\n",
+                       g_runner_current_frame, mgr, f76, f80, f84, f88);
+                fflush(stdout);
+            }
+        }
+    }
     u32 st  = mem_read32(ctx, task + 0x5538);
     u32 ctr = mem_read32(ctx, task + 0x5744);
     u32 cd  = mem_read32(ctx, task + 0x5748);
@@ -5141,6 +5170,25 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                            g_runner_current_frame, ctx->gpr[3], s_n);
                     fflush(stdout);
                 }
+            }
+            return 0;
+        }
+
+        /* The mode-25 call site's return address (lr = 0x80535D04) is a dispatch point, so
+         * the sequence manager's pending/current fields can be read AFTER SetNextSequence
+         * has computed them - the existing 0x80572B70 hook can only show the arguments.
+         * The manager is *(r13-26368) (= 0x80BB5CC0), NOT the object at [0x8087EE90]:
+         * those are different objects and reading the wrong one showed all-zero fields,
+         * which would have been a false "the sequence was never set" conclusion. */
+        case 0x80535D04: {
+            if (tls_scene_sm_probe_on()) {
+                extern int g_runner_current_frame;
+                u32 mgr = mem_read32(ctx, ctx->gpr[13] - 26368u);
+                printf("[TLS SceneSM] f=%d SetNextSequence RETURN mgr=0x%08X at76=0x%08X at80=0x%08X\n",
+                       g_runner_current_frame, mgr,
+                       mgr ? mem_read32(ctx, mgr + 76) : 0,
+                       mgr ? mem_read32(ctx, mgr + 80) : 0);
+                fflush(stdout);
             }
             return 0;
         }

@@ -64,21 +64,35 @@ const char* tls_debug_get_class_name(uint32_t vtable_addr) {
 }
 
 const char* tls_debug_get_sequence_name(CPUState* cpu) {
-    uint32_t seq_mgr = mem_read32(cpu, 0x8087EE90);
-    if (!seq_mgr || !resolve_guest_pointer(cpu, seq_mgr)) {
+    /* The sequence manager is *(r13 - 26368) - the object SequenceManager::SetNextSequence
+     * (0x80572B70) itself uses, measured at 0x80BB5CC0. The previous version read
+     * [0x8087EE90] (= 0x80E9DB00), a DIFFERENT object whose +0x48/+0x50 are always zero,
+     * which is why every telemetry dump in this project has said "UnknownSeq" even while
+     * Chapter 1 was playing. Measured with the correct manager:
+     *     f=1728  SetNextSequence('Game') -> manager+80 = 12   (pending id)
+     *     f=2115  manager+80 = 0                                (consumed: it transitioned)
+     * so the sequence subsystem works and the old reading was a false alarm. Report the
+     * manager's raw fields rather than inventing a name when none resolves. */
+    extern char* g_tls_seq_name_buf;
+    static char s_buf[96];
+    uint32_t mgr = cpu->gpr[13] ? mem_read32(cpu, cpu->gpr[13] - 26368u) : 0;
+    if (!mgr || !resolve_guest_pointer(cpu, mgr)) {
         return "(none)";
     }
-    // Look at current sequence pointer at seq_mgr + 0x48 or + 0x50
-    uint32_t cur_seq = mem_read32(cpu, seq_mgr + 0x48);
-    if (!cur_seq) cur_seq = mem_read32(cpu, seq_mgr + 0x50);
-    if (cur_seq && resolve_guest_pointer(cpu, cur_seq)) {
-        uint32_t str_ptr = mem_read32(cpu, cur_seq + 4);
+    uint32_t f80 = mem_read32(cpu, mgr + 80);   /* pending id */
+    uint32_t f84 = mem_read32(cpu, mgr + 84);
+    uint32_t f88 = mem_read32(cpu, mgr + 88);
+    /* Best effort: if +88 looks like a live object, try its +4 as a string pointer. */
+    if (f88 && resolve_guest_pointer(cpu, f88)) {
+        uint32_t str_ptr = mem_read32(cpu, f88 + 4);
         if (str_ptr && resolve_guest_pointer(cpu, str_ptr)) {
             const char* s = (const char*)resolve_guest_pointer(cpu, str_ptr);
             if (s && s[0] >= 0x20 && s[0] <= 0x7E) return s;
         }
     }
-    return "UnknownSeq";
+    snprintf(s_buf, sizeof(s_buf), "mgr=0x%08X pending=%u at84=%u at88=0x%08X",
+             mgr, f80, f84, f88);
+    return s_buf;
 }
 
 void tls_debug_init(void) {
