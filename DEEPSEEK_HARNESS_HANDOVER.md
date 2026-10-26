@@ -4568,6 +4568,25 @@ messages. Two concrete results:
   `Dump/Frames` and does not depend on any hotkey. Frame dumping costs ~1-2 MB per frame, so scope the
   run.
 
+**Follow-up: frame dumping works, input does not.** `DumpFrames = True` is already set in
+`Config/Dolphin.ini`, so F9 was never needed - the frames were being dumped all along. After two runs
+today `%APPDATA%\Dolphin Emulator\Dump\Frames` holds **2569 frames** (`framedump_1.png` ..
+`framedump_2569.png`, 828x480, 182 MB total). Two hard facts from them:
+
+* **Dumping throttles Dolphin hard.** 2569 frames was everything 145 s of wall time produced (~18 fps
+  while dumping), i.e. only ~43 s of *game* time. Reaching the Chapter-1 loop (~frame 4300) needs
+  ~240 s+ of wall time and ~300 MB.
+* **The input plan did not register.** The last dumped frame (2569, which is past the t=31 s `A` press)
+  is still the title screen showing "PUSH START". So the posted `WM_KEYDOWN` messages are **not
+  reaching the game**, which also explains the earlier empty ScreenShots directory. The reference route
+  is therefore blocked on *input*, not on capture.
+
+**Concrete next step for the reference**: get input that Dolphin actually honours - `--input send`
+with the render window focused, or (more robustly) a Dolphin **movie (`.dtm`) input recording** played
+back via the `-m`/movie option, which needs no window focus at all. Everything else on this route is
+already working: the window is found, frames are dumped, and the frame counter the tool's
+`--frame-plan` mode needs is being produced.
+
 
 
 #### 5c.30a The guest never even *attempts* to register a Chapter-1 scene task
