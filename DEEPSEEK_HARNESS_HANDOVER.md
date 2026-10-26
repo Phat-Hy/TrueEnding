@@ -4743,3 +4743,45 @@ project is worth auditing rather than trusting - this one misled every session s
 briefly produced a false "all sequence fields are zero" reading myself by probing `[0x8087EE90]` before
 checking which object `SetNextSequence` actually uses - verify the *object*, not just the offset; and
 (3) verify the *layout* too, because the name was inline at `+0` and not a pointer at `+4`.
+
+### 5c.31 CORRECTION: the project HAS a Chapter-1 reference - `build/recomp/dolphin-ref/run3`
+
+Several sections of this file state that there is **no Chapter-1 reference** (5c.26 §6, 5c.27,
+5c.30), and that claim shaped a great deal of work: it is why Chapter-1 rendering could not be
+validated and why the stall could not be classified as "bug" versus "intended". **It is wrong.** A
+Dolphin reference of Chapter 1 has been sitting in the repo the whole time:
+
+```
+build/recomp/dolphin-ref/run3  8297 frames, framedump_1 .. framedump_8746
+build/recomp/dolphin-ref/run4  2435 frames
+build/recomp/dolphin-ref/boot  1281 frames
+build/recomp/dolphin-ref/run2    10 frames
+```
+
+`run3` reaches **playable Chapter 1**, not just the intro. Frame timeline (means of the full image):
+
+```
+f=3200 .. f=4200   mean 203.9  (title / menus: light plate)
+f=4400 onwards     mean  29.0  (the cave)
+f=5000             Zael with the sword, party HUD "DAGRAN lv 5" and "SYRENNE lv 4",
+                   the cave pool and a torch - i.e. GAMEPLAY with characters on screen
+```
+
+Saved as `docs/evidence/dolphin_ref_run3_f5000_gameplay.png`.
+
+**What this settles immediately**: the reference *does* leave the intro and reach gameplay with
+characters and a HUD on screen. So the host's phase-13 stall is **confirmed a defect**, not intended
+behaviour - the question "should this intro advance on its own?" is answered: **yes**.
+
+**What it enables**: for the first time there is something to diff against. Frame numbers are not
+directly comparable (different input plans and timings; the reference is dark by 4400, the host reaches
+its Chapter-1 loop by ~4000), so the comparison has to be made by *screen* rather than by frame
+number - find the reference frame where the Chapter-1 card appears, align on that, and diff forward.
+
+**Action for the next session**: before any more probing of `0x81858B80` or the waiter, extract the
+reference's Chapter-1 card frame and its first gameplay frame, align them against the host's, and see
+exactly which host frame corresponds to the reference's first gameplay frame. That single comparison
+tells you whether the host is stuck at the same point or somewhere earlier.
+
+This also retro-justifies a caution already in this file: verify a claim like "there is no reference"
+before building on it - this one was repeated for many sessions.
