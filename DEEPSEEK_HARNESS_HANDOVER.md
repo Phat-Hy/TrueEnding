@@ -4495,6 +4495,23 @@ frame 3402 by the factory `0x801F3FF8` / ctor `0x801F407C`) is never drawn, whil
 field-difference have all been read; the missing thing is **the walk that reaches `PAY0` but not
 `PAY1`**.
 
+**Two more eliminations, and a synthesis (5c.30, later round)**
+* **The guest is genuinely IDLE in phase 13, not spinning in a script.** `TLS_TRACE_FROM=3790` shows the
+  OS scheduler idle loop (`pc=0xFFFFFFFC`, `0x80711530`, `0x80609D50`, `0x805F50B0`, `0x805F1E80`) plus
+  72 dispatches in `0x800F*`, with only 5 in `0x8036*` (the scene SM, which ticks every other frame)
+  and 2 in `0x800A*` (the script helpers). So this is a real **wait state**: nothing is streaming,
+  nothing is loading, and the machine has nothing to do until something triggers it.
+* **No callbacks are being lost.** In a 4200-frame Chapter-1 run `DROPPED` is 0 and the request
+  accounting balances exactly (`ReqDoneCb` == `SetReqStatus` == 80). So slot 1's `w10` is not the
+  victim of a dropped completion.
+
+**Synthesis worth testing.** The objective has two symptoms - "the intro loops" and "no player/scene
+task is ever created" - and the evidence now suggests they are **the same defect seen from two ends**:
+the task list stays at one game task, so whatever subsystem would *create or activate* the layout that
+phase 13 waits for is never running; and phase 13 sits in an idle wait on that layout. If that holds,
+the thing to find is not how slot 1 gets filled but **which task should exist and why it is never
+registered** - i.e. work the "never creates a player/scene task" end of the objective, not this one.
+
 **Recommended next steps, cheapest first**
 1. Confirm the guest's *script interpreter* is still running at all after phase 13 - if scripts stop
    being ticked, everything downstream is a symptom. (Hook the script update and count per frame;
