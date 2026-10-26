@@ -32,7 +32,10 @@ Dolphin debugging, and the capture is unaffected by minimization (verified: iden
    EFB-copy destinations *this frame does not write* (leftovers from earlier frames); b27 (64x64 CMPR at
    `0x90D19B80`) is the black box. **Start here:** the page's art is missing, not mis-scaled — find where
    that page's textures are supposed to come from (b27's texture and the additive chain's sources), and
-   compare against a Dolphin capture of this exact moment, which the corpus still lacks.
+   compare against a Dolphin capture of this exact moment, which the corpus still lacks. **§5c.39 checked
+   the corpus for it and it is not there**: `dolphin-ref/run3` frames 4370-8297 (its whole Chapter-1
+   stretch) contain no page brighter than mean 170, and `run4`'s 2435 frames are the title splash plus a
+   boot screen. A tutorial-page reference needs a new Dolphin run that keeps playing past the save dialog.
 2. *Save dialog says "the data is corrupted"* — **§5c.39 moved the start of the chain up one layer and
    corrected 5c.38**: `fn_800A4228` is not guest code, it is a replacement that *writes* `0` into the
    manager's state, and at the title's decision point (`lr=0x80534C58`) the manager is genuinely busy
