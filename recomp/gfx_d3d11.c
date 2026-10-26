@@ -1079,20 +1079,39 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
 
         // Decoded-alpha probe: distinguishes "the texture really is opaque" from
         // "the transparent background was lost in the decode / never streamed".
-        if (getenv("TLS_TEX_ALPHA_PROBE")) {
-            static uint32_t s_probe = 0;
-            if (s_probe < 30) {
-                s_probe++;
-                uint32_t opaque_cnt = 0, clear_cnt = 0;
-                for (uint32_t pi = 0; pi < total_px; pi++) {
-                    uint32_t pa = s_d3d11.gx_staging_rgba[pi] >> 24;
-                    if (pa >= 128) opaque_cnt++; else if (pa < 8) clear_cnt++;
+        // TLS_TEX_ALPHA_ADDR=0xA,0xB narrows it to those guest addresses and ignores the
+        // 30-line cap, because the page's own atlases (0x9076E5E0 IA4, 0x90703AA0 I4) are
+        // uploaded long after the EFB-copy churn has used the 30 lines up (5c.43 H).
+        {
+            static uint32_t s_alpha_addrs[8];
+            static int s_alpha_addr_count = -1;
+            if (s_alpha_addr_count < 0) {
+                s_alpha_addr_count = 0;
+                const char* e = getenv("TLS_TEX_ALPHA_ADDR");
+                while (e && *e && s_alpha_addr_count < 8) {
+                    while (*e == ',' || *e == ' ') e++;
+                    if (!*e) break;
+                    s_alpha_addrs[s_alpha_addr_count++] = (uint32_t)strtoul(e, (char**)&e, 0);
                 }
-                printf("[TEXPROBE] addr=0x%08X %ux%u fmt=%u opaque=%u clear=%u corner=0x%08X center=0x%08X\n",
-                       tu->guest_addr, tu->width, tu->height, tu->format,
-                       opaque_cnt, clear_cnt, s_d3d11.gx_staging_rgba[0],
-                       s_d3d11.gx_staging_rgba[(tu->height / 2) * tu->width + tu->width / 2]);
-                fflush(stdout);
+            }
+            bool want_this = false;
+            for (int i = 0; i < s_alpha_addr_count; i++)
+                if (s_alpha_addrs[i] == tu->guest_addr) want_this = true;
+            if (want_this || getenv("TLS_TEX_ALPHA_PROBE")) {
+                static uint32_t s_probe = 0;
+                if (want_this || s_probe < 30) {
+                    if (!want_this) s_probe++;
+                    uint32_t opaque_cnt = 0, clear_cnt = 0, mid_cnt = 0;
+                    for (uint32_t pi = 0; pi < total_px; pi++) {
+                        uint32_t pa = s_d3d11.gx_staging_rgba[pi] >> 24;
+                        if (pa >= 128) opaque_cnt++; else if (pa < 8) clear_cnt++; else mid_cnt++;
+                    }
+                    printf("[TEXPROBE] addr=0x%08X %ux%u fmt=%u opaque=%u clear=%u mid=%u corner=0x%08X center=0x%08X\n",
+                           tu->guest_addr, tu->width, tu->height, tu->format,
+                           opaque_cnt, clear_cnt, mid_cnt, s_d3d11.gx_staging_rgba[0],
+                           s_d3d11.gx_staging_rgba[(tu->height / 2) * tu->width + tu->width / 2]);
+                    fflush(stdout);
+                }
             }
         }
 

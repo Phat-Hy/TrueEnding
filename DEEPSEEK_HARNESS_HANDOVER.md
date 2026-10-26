@@ -6872,7 +6872,56 @@ not the combiner. `TLS_TEX_ALPHA_PROBE` cannot answer it: its cap is 30 uploads,
 destinations exhaust long before frame 4000. A per-address alpha probe (or raising the cap past the copy
 churn) is the next instrument.
 
-**Verification (5c.43 C-G):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
+#### H. 5c.43 E was wrong: the alpha fix aborts the guest, and the label's letters are not alpha
+
+Two corrections and two measurements, all from re-running with the *same build* and a deleted target PPM
+each time (the discipline E lacked).
+
+**H1. The corrected alpha layout is not a free fix - it aborts the run.**
+
+```
+old bits (shipped):   TLS_TEV=1 + TLS_SHOT_FRAMES=4000 -> reaches TLS Frame 3960, shot sha 6FE45CD5..
+new bits (GX layout): TLS_TEV=1 + TLS_SHOT_FRAMES=4000 -> guest ends at ~frame 2144, Sequence '(none)',
+                       Tasks 0, fb0=NaN, and NO screenshot is produced at all
+```
+
+So the layout derived in E is right, but decoding it that way makes the guest abort ~2144. The rest of the
+TEV path (colour stage, compare stages, K constants) is still inconsistent with the hardware layout, and
+fixing alpha alone lands it in a state the game aborts from. The shader therefore keeps the old bits **so
+the run finishes**; the corrected block stays in `git show 024fa6b` and must go back with the rest of the
+TEV work.
+
+**H2. `page4000_tevfix2.log` died at frame 2100**, so the "byte-identical screenshot" E quoted was a
+**leftover PPM from the previous run** - it had never been written by that run. E's conclusion, and the two
+numbers that depended on it, were invalid. Rule added to the list above: delete the target PPM before every
+run you intend to compare.
+
+**H3. Same-build control pair at frame 4000** (both runs reaching 3960, both writing their own PPM):
+
+```
+default            full-frame mean 240.5   label box (1060,570)-(1200,670): mean 221.7  dark 5.94%
+TLS_TEV=1          full-frame mean 231.7   same box:                     mean 230.5  dark 1.74%
+36.1% of pixels differ by more than 8 between the two.
+```
+
+**H4. b34's atlas has no glyph-shaped alpha at all.** New `TLS_TEX_ALPHA_ADDR=<addr,...>` narrows the
+decoded-alpha probe to chosen addresses and ignores its 30-line cap (which the EFB-copy churn always used
+up before frame 4000):
+
+```
+0x9076E5E0 (IA4, b34's label atlas)  opaque=65536 clear=0     -> fully opaque
+0x90703AA0 (I4,  b28's title atlas)  opaque=18076 clear=105094 mid=7902  -> glyph-shaped
+0x921DEA60 (CMPR 512x512, parchment) opaque=262144 clear=0    -> fully opaque
+```
+
+So the SKIP letters cannot be alpha at all - the atlas is opaque everywhere, and b34's declared colour
+combine is `ZERO ONE ras.rgb ZERO` = a **flat raster colour**. Under TEV that is a flat dark rectangle, which
+is what the frame shows; the default path paints letters only because `PSAlpha` multiplies the *texture RGB*,
+which b34's TEV state does not use. **That makes "the TEV path loses the SKIP label" a statement about the
+batch's own declared state, not about our shader** - and it is exactly the kind of question only a reference
+frame can settle. Verified: build green, invariant PASS (`EAB33141..`), save 1348992/29344.
+
+**Verification (5c.43 C-H):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
 frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
 created at 1 348 992 / 29 344 - so both new instruments are inert by default and no default-path pixel moved.
 0 changes to `src/`. New instruments, both default-off: `TLS_TEX_DUMP_FRAME` (per-frame, ordered texture
