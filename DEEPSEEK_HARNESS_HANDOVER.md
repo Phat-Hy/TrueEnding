@@ -4453,3 +4453,58 @@ completes normally. `TLS_PRESENT_ON_XFB=0` restores the old behaviour.
 **Note for anyone tempted to "validate" this with the invariant**: you cannot. The invariant reads the
 back buffer, which is drawn identically either way; the evidence for the gate is the per-frame
 `xfbs` profile plus the boot run, not a pixel comparison.
+
+
+### 5c.30 Chapter-1 intro stall: the ruled-out ledger
+
+Twelve rounds (5c.25 §4a through 5c.29) have gone into why the Chapter-1 intro never leaves phase
+13. Nothing has been fixed, and several of my own readings were wrong. This section exists so the
+next session does not re-walk any of it. Each line is a *measurement*, not an opinion.
+
+**The one-sentence statement of the stall.** Outer state 0 -> an A press at ~frame 3400 opens the
+phase-0 gate -> `PHASE 0 -> 13` at 3402 with `+0x54F0` cleared (the value `GameTask::Init` turns into
+outer state 1) -> phase 13's shared tail needs `fn_801231D0(sub,16)` **and** `fn_8036E170(task)`, and
+`fn_8036E170` returns 0 unconditionally for phase 13 -> so the only exits are phase 13's own body,
+which needs `waiter+0x88 == 0` or `== 4`, and `+0x88` needs the 4-slot list at `waiter+0x474` to
+advance -> it sticks at slot 1.
+
+**Ruled out, with the measurement that ruled it out**
+* **Input** - an A press *does* advance the machine (5c.27 §2). 5c.25 §4a's "no input reaches a
+  handler" was measuring the picture, not the state machine.
+* **DVD / streaming** - the last `[TLS DVD] read` is around request #500, long before frame 2363
+  (5c.27 §9.4).
+* **Missing files** - only one `ARCOpen` failure in a 4200-frame run, `wt\HomeButtonSe.wt`
+  (Home Button SE), which is not a scene resource (5c.30, this round).
+* **The two fabricated HLE overrides** - bypassing both (`TLS_NO_SCRIPT_FILTER=1
+  TLS_NO_FAKE_FADE=1`) shifts intro timing by 34 frames but phase 13 still stalls (5c.27 §9.4).
+  They are also load-bearing for the title, so they cannot simply be removed.
+* **The phase-0 gate itself** - it opens correctly on an A edge; `fn_803E4478` runs and clears
+  `g2+0xD8C`, which is why it can never re-arm.
+* **`LayoutTask+4`** - the whole "self-pointer = linked, 2 = unlinked, therefore drawn" chain is
+  **dead**: the drawn task `0x8108E040` has `+4 == 0` (5c.27 §9.4 retraction).
+* **The rendering path** - EFB formats 0/1 fixed, the texture-cache hash fixed, the two-half
+  present gate defaulted on; none of them moves the stall (verified each time).
+* **`VISetNextFrameBuffer`** - the hook exists (`0x80607120`) but the guest never reaches it, and
+  the software fallback only applies when `gx_vtx == 0`, so wiring the VI MMIO register would not
+  affect Chapter-1 anyway.
+
+**What is still unexplained, stated narrowly.** Slot 1's payload (`LayoutTask 0x81863F60`, created at
+frame 3402 by the factory `0x801F3FF8` / ctor `0x801F407C`) is never drawn, while slot 0's
+(`0x8186DF60`) is. Both are referenced only from their own record and from each other
+(`PAY0.w7 -> PAY1 -> 0x81858540`), so nothing global holds either one. The factory, the ctor and the
+field-difference have all been read; the missing thing is **the walk that reaches `PAY0` but not
+`PAY1`**.
+
+**Recommended next steps, cheapest first**
+1. Confirm the guest's *script interpreter* is still running at all after phase 13 - if scripts stop
+   being ticked, everything downstream is a symptom. (Hook the script update and count per frame;
+   the script stream helpers are `0x800A6BDC` / `0x800A6E8C`, and `TLS_NO_SCRIPT_FILTER=1` already
+   exists to compare against the unfiltered path.)
+2. Find the walk over the `w7` chain. `+0x1C` is far too common to scan statically (122 readers in
+   `0x801E0000..0x80200000` alone); narrow to the four LayoutTask methods
+   (`0x801F4230`, `0x801F42A8`, `0x801F43E8`, `0x801F4514`) or to whatever holds `0x81858540`.
+3. Only after 1-2: ask whether the game *intends* this layout to be inactive (the red-herring case,
+   5c.27 §9.4).
+
+**Do not** re-derive: the jump tables, the phase numbering, the A-edge gate, the slot-record layout,
+the payload factory/ctor, or any of the rendering work above. All are recorded with measurements.
