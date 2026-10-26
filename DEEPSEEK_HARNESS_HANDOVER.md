@@ -6233,3 +6233,49 @@ guest still issues no `CreateFile`. Fidelity only, not the create.
   (on Windows `savedata` and `SaveData` are the same directory, and the runner creates both names).
 * So a Dolphin save must be seeded at **`SaveData/title/00010000/534c5345/data/`**, not at
   `savedata/savedata.dat` as 5c.39 did. The old flat convention no longer matches any guest path.
+
+#### 5c.41 J. The other save module is entered, but never reaches its create chain
+
+The module at `0x805FExxx..0x806001xx` is the only code that references the save-file name table at
+`0x80873818` (`savedata.dat` / `banner.bin`), and its create chain
+`fn_80600120 -> fn_806000A0 -> fn_80600010 -> NAND ReadDir -> fn_805FFF70` is where `NANDCreateAsync`
+would actually be issued for the save. Probes on its public entry points (`0x805FF240`, `0x805FF4B0`,
+`0x805FF4F0`, `0x805FF530`, `0x805FF5A0`, `0x805FF640`, `0x805FF6A0`, `0x805FF710`, `0x805FFEF0`)
+measured in a 2600-frame run:
+
+```
+SAVEMOD entry pc=0x805FF4F0 lr=0x805FA974      <- exactly one entry, from inside the module
+create lines: 0
+```
+
+So the module is **entered** (one call) but never reaches the chain that creates files: the chain steps
+`0x805FF770`, `0x805FF7A0`, `0x805FF800` ... `0x805FFF70` and the driver `0x80600010` all stay silent.
+Note `0x805FF120` could not be probed - it is already a replacement case ("DVDCheckDisk", returns 1), and
+that stub never fires either.
+
+#### K. State of the objective after eight rounds - read this before continuing
+
+Everything outside the guest's own save logic is now faithful, and that is measured, not assumed:
+
+* `/dev/fs` is a device model (5c.40): all eight commands, truthful errors, real directory semantics.
+* `/dev/es` answers the title id and home dir (5c.41 G), so the guest's ISFS paths are the real ones
+  (`/title/00010000/534c5345/data/...`), matching Dolphin's NAND layout exactly.
+* The host NAND mirrors that tree and holds the directory skeleton an installed title has (5c.41 H).
+* The save manager's state machine is mapped: 26-entry dispatch table with handlers only for odd states,
+  op set 3..25, the `kind` field, and the one API entry that sets kind 0 (the title's recreate request).
+
+What is **not** achieved - and has resisted eight rounds - is the create itself. Measured facts:
+
+* the guest never issues `CreateFile` (cmd 9) or any `IOS_Write` in **any** flow reachable from the
+  title, including a 9000-frame run with 50 in-game `A` presses past the tutorial page;
+* the title's kind-0 recreate request is submitted once (`fn_800A4AD4` at `0x80535674`) but is
+  overwritten before its completion is dispatched, so the state-3 handler only ever sees kind 3, which
+  routes to a no-op (`0x800A30AC: b 0x800A41CC`);
+* `TLS_IPC_DELAY` 1/2/3 does not change that ordering outcome;
+* the second save module is entered once and never reaches its create chain.
+
+The next honest step is **not** more tracing of these same paths. It is to establish what the reference
+actually does: `build/recomp/dolphin-ref/run3` reaches Chapter 1 *and* Dolphin's NAND holds
+`savedata.dat`, so something in that run creates it. Determining whether the file appears at the title
+(recreate accepted) or during gameplay (an in-game save) decides whether the remaining work is a guest
+state-machine bug worth more rounds, or a gameplay action this harness has simply never scripted.

@@ -4342,6 +4342,26 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0;
         }
 
+        /* 5c.41 J: the OTHER save module. 0x805FExxx..0x806001xx never runs (its chain
+         * steps 0x805FF770.. are silent), and it is the only code that references the
+         * save-file name table at 0x80873818 ("savedata.dat"/"banner.bin"). Probe its
+         * public entry points - the ones called from outside the module - to settle
+         * whether this whole create path is dead in our flow. */
+        case 0x805FF240: case 0x805FF4B0: case 0x805FF4F0:
+        case 0x805FF530: case 0x805FF5A0: case 0x805FF640: case 0x805FF6A0:
+        case 0x805FF710: case 0x805FFEF0: {
+            if (tls_nand_probe_on()) {
+                static u32 s_mod_n = 0;
+                if (s_mod_n < 20) {
+                    s_mod_n++;
+                    char msg[160];
+                    snprintf(msg, sizeof(msg), "SAVEMOD entry pc=0x%08X lr=0x%08X", ctx->pc, ctx->lr);
+                    tls_nand_probe_slot(msg);
+                }
+            }
+            return 0;
+        }
+
         /* 5c.41 D: fn_800A48B8 is the ONE manager API entry that stores 1 into
          * +348 (state 1, whose handler holds NANDCreateAsync at 0x800A3038). Its
          * only callers are 0x803B81E4, 0x803B8E10, 0x803B8F2C and 0x803B8FD0 - the
