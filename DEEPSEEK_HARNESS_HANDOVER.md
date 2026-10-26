@@ -5130,3 +5130,34 @@ without breaking rendering. Concretely:
 Do not simply delete the filter: as measured, that currently produces a black title. The evaluator has to
 work first. But every round spent on the scene machine before this is now suspect - the machine was being
 starved of the scripts that drive it.
+
+#### 5c.33a METHODOLOGY BUG: `$env:X=''` does not unset a variable, and `getenv()` treats it as set
+
+Every "clear the flag" line in this session used PowerShell `$env:TLS_X=''`. That **sets** the variable
+to an empty string - it does not remove it - and the C side tests with `getenv("TLS_X")`, which returns a
+non-NULL pointer for `""`. So **an empty value is truthy**: the flag stayed ENABLED.
+
+Consequence, caught by a verification run that returned the wrong number: a run meant to be
+"default" came back `mean=(77,151,205) p50=174` - exactly the `filter-off + fake-fade` result - because
+`TLS_NO_SCRIPT_FILTER=''` and `TLS_FAKE_FADE=''` were both still set. The correct incantation is
+`Remove-Item Env:\TLS_X`.
+
+Re-verified with a genuinely clean environment (`Test-Path Env:\TLS_NO_SCRIPT_FILTER` -> False):
+
+```
+default (clean)              mean=(102,188,205) p10=69 p50=203 p75=203 p90=203 p99=206 p99.7=233
+```
+
+which confirms the 5c.33 table is right and the invariant is intact at **p50=203**. The table's four
+rows were each measured with the flags actually intended, so its conclusions stand; only that one
+verification run was contaminated, and it was contaminated in the direction of hiding a false claim.
+
+**Audit of earlier measurements for this bug**: the ones that mattered are unaffected in sign. 5c.32a's
+`TLS_EFB_ALPHA=''` + `TLS_NO_FAKE_FADE=1` meant BOTH flags were on, so the 54.7 figure was measured with
+faithful EFB alpha as well; the later clean single-shot run gave (58,56,50), so the fade conclusion is
+unaffected. The "NO_SCRIPT_FILTER alone" row did have the faithful fade on, which is exactly what that
+row claims.
+
+**Rule for this project**: to clear a probe flag, use `Remove-Item Env:\NAME`, never `$env:NAME=''`.
+And if a verification run returns a number that looks like another configuration's number, suspect the
+environment before the code - that is exactly how this was caught.
