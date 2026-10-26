@@ -18,5 +18,10 @@ echo     Fullscreen:      Alt + Enter
 echo     Screenshot:      F12
 echo ========================================================
 echo.
+echo NOTE: the game window opens MINIMIZED on purpose (project rule).
+echo       Restore it from the taskbar to play. Launching it in the
+echo       foreground steals focus, which has cost this project real
+echo       debugging time - do not remove --minimized.
+echo.
 
-start "" "%~dp0build\recomp\tls_runner.exe" --window --fps 60 %*
+start "" "%~dp0build\recomp\tls_runner.exe" --window --minimized --fps 60 %*

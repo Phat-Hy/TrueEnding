@@ -1,6 +1,66 @@
 # DeepSeek Harness Handover Dossier: Project The Maybe(Not) Last Story
 
-> ## READ THIS FIRST
+## NEXT SESSION — START HERE
+
+**Tree state.** `HEAD 7951335` + this commit. Build green
+(`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
+-> Game`, frame 3500 = `A00272DF30BEDB5FB9D06E60DBDC365A9B47328ACCED1A496D999FD34949432E`). **0 changes
+to `src/`.** Current state lives in §5c.37; §5c.36 and everything earlier is history.
+
+**MANDATORY, before any other command:** every runner launch opens the game window **minimized**:
+
+```powershell
+build\recomp\tls_runner.exe --window --minimized --frames <N> --fps 60
+```
+
+`--minimized` exists (added this session, `recomp/host_runner.c`): the window is created hidden, shown with
+`SW_SHOWMINNOACTIVE`, and `SetForegroundWindow`/`SetFocus` are never called. `Play_TheLastStory.bat` and
+`tools/invariant.ps1` already pass it. Do not launch the runner windowed-in-foreground and do not automate
+input against a foreground game window — focus stealing has already cost this project a full session of
+Dolphin debugging, and the capture is unaffected by minimization (verified: identical frame-3500 hash).
+
+**The two open defects, and exactly where to start.**
+
+1. *Tutorial page at frame 4000* — white background with fine coloured speckle where the cave should
+   plausibly be. Measured (§5c.37 D): the page submits 37 batches / 9774 vtx; **batches b0..b8 (the 3D
+   scene) draw nothing at all**, then eight full-screen `SRCALPHA/ONE` additive passes ramp the frame
+   `(22,22,19) -> 249`; the EFB copies are already white before the chain runs. The page's text renders
+   **black**, so a light page may be by design — 5c.36's "should be the cave" is *unverified* and needs a
+   reference for this exact frame, which the in-repo corpus does not contain (`run2` stops at 3000/5000,
+   `run3` is a flat `(203.8,204,203.5)` screen through 3700-4300, `run4` stops at 2435). **Concrete
+   measured defect to chase first:** a copy writes `320x224` to `0x9038D1C0` while the same address is
+   sampled as `80x56 fmt=6` — 4x per axis, 8x the bytes that texture occupies (same class as 5c.13's
+   ignored half-scale). The copy-destination size resolution is in `recomp/gx_pipeline.c`
+   (`s_efb_copy_pitch` / BP 0x4D, `pc->half_scale` from BP 0x52) and the writer is
+   `d3d11_efb_copy_to_guest` in `recomp/gfx_d3d11.c`.
+2. *Save dialog says "the data is corrupted"* — non-blocking (pressing through reaches gameplay). The
+   decision is guest code at `0x80534CC8` (equal lengths -> mode 9). Fixed this session: `IOS_Ioctl` on an
+   fd that was never opened no longer answers success-with-length-0. Measured effect: the check now takes
+   the mode-6 error path and the dialog default moved `No -> Yes`, **but the text is unchanged** — so the
+   message id comes from the manager's *earlier* save-status answer (`fn_800A4494` reads it from the
+   manager), not from the length compare. **Start there** (`TLS_SAVE_PROBE=1` prints both decision points;
+   `TLS_NAND_PROBE=1` prints every NAND/ISFS/IOS question and answer).
+
+**Rules that decide whether a round is wasted** (all learned the hard way; details in §5c.37 / 5c.33a):
+
+* **Environment variables do not survive between shell invocations.** Set `TLS_INPUT_SCRIPT` *in the same
+  command* as the run, and check the log's `Seq:` line before believing any probe output. Three runs
+  (~21 min) were spent measuring the title screen because of this.
+* State the input script with every measurement; conclusions do not transfer between press schedules.
+* Unset flags with `Remove-Item Env:\NAME` — assigning `''` leaves `getenv()` non-NULL (§5c.33a).
+* One back-buffer screenshot per run; probes that read the back buffer (`TLS_BATCH_PROBE`) are for
+  per-batch bisects only.
+* Never hand-edit `build/recomp/generated/chunks` (re-lift) and never mutate guest state to make progress.
+* Prefer retiring a fabricated answer over adding a new one — every real fix so far came from one.
+* `src/` is read-only. Edits go in `recomp/`, `tools/`, `docs/`, and `build/` is git-ignored.
+
+**Verification is not optional:** `python tools/recomp_harness.py build-runner`, then
+`pwsh tools/invariant.ps1` (exit 0). If a change intentionally alters frame 3500, re-record the hash and
+say so in the handover. Commit per change.
+
+---
+
+> ## READ THIS FIRST (historical note — superseded by the block above)
 >
 > **Read §5c.15 first - it is the current state.** Everything from §3 to §5c.14 is history and several of its
 > conclusions are now disproven. The short version:

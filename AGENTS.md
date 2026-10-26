@@ -6,8 +6,20 @@ This file provides system context, specialized role personas, and skill capabili
 
 ## 1. Project Directives
 - **Strict Scope Constraint**: **0 changes to `src/`!** All decompiled C files in `src/` must remain completely untouched. All modifications belong in `recomp/`, `tools/`, and generated chunks.
+- **MANDATORY — every game-window launch starts MINIMIZED.** All runner launches (manual, scripted, `tools/invariant.ps1`, any test harness) MUST pass `--minimized`:
+  ```powershell
+  build\recomp\tls_runner.exe --window --minimized --frames <N> --fps 60
+  ```
+  Rationale: an activating window steals focus, and focus-stealing has already cost this project a full
+  session of Dolphin debugging. The windowed path is still required (batch/headless hides the window),
+  so minimization — not hiding — is the rule. `--minimized` creates the window hidden, shows it with
+  `SW_SHOWMINNOACTIVE`, and never calls `SetForegroundWindow`/`SetFocus`
+  (`recomp/host_runner.c`); `WM_SIZE` ignores `SIZE_MINIMIZED`, so the swap chain keeps its size and the
+  capture-before-Present screenshot is byte-identical (verified: the frame-3500 invariant hash is
+  unchanged with the window minimized). Launching a runner window non-minimized is a defect, not a
+  preference; automating keyboard/mouse against a foreground game window is likewise forbidden.
 - **Goal**: Full visual and functional parity with Dolphin reference emulation (`roms/TheLastStory.iso`), with clean particle transparency, working Title Menu ("New Game", "Load Game"), and smooth progression into Chapter 1 (Gurgan Cave).
-- **Primary Handover Dossier**: Read [`DEEPSEEK_HARNESS_HANDOVER.md`](./DEEPSEEK_HARNESS_HANDOVER.md) for full architectural telemetry and ground truth findings from Dolphin texture dumps.
+- **Primary Handover Dossier**: Read [`DEEPSEEK_HARNESS_HANDOVER.md`](./DEEPSEEK_HARNESS_HANDOVER.md) for full architectural telemetry and ground truth findings from Dolphin texture dumps. Start with its `NEXT SESSION — START HERE` block and then §5c.37 (current state); everything before §5c is history and several of its conclusions are disproven.
 
 ---
 
