@@ -6042,3 +6042,52 @@ Also established this round:
 Next step: drive `mgr+348` into `1` and see the state-1 handler choose create, or find the even->odd
 transition for op 0. A probe on `0x800A41CC` (the even-state no-op, a real branch target) showing the
 state each time it is entered would say exactly which even states the manager sits in.
+
+#### 5c.41 C. MEASURED: the manager's create path is unreachable from the title flow
+
+This is the result the objective was waiting for, and it is negative. With `/dev/fs` fully truthful
+(5c.40) the guest still never asks for a create, and the reason is inside the manager, not the device.
+
+1. **There is no op 1.** Every `fn_800A500C(mgr, result, op)` call site passes an **odd** op:
+   `3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25` - twelve sites, all enumerated from the lifted code.
+   Combined with 5c.41 B (only odd states have handlers), the scheme is `state = 2k` while an
+   operation is in flight and `2k+1` when it completes, so state 1 would need an op-1 completion that
+   does not exist in this build.
+2. **Nothing in `fn_800A2DE0` ever writes state 1.** The direct writers of `+348` in that function
+   store `0, 4, 6, 8, 10, 12, 14, 16, 18, 20, 24`. So the **state-1 handler - which holds the
+   `NANDCreateAsync` at `0x800A3038` - cannot be entered.** (The other two create sites are
+   `0x800A3198`, in the state-3 handler, and `0x800A53D4`, outside `Update`.)
+3. **The state-3 handler's kind dispatch is never taken either.** It switches on `obj+72`
+   (0 -> `0x800A30B0`, 1 -> `0x800A31E0`, 10 -> `0x800A3254`); probes on all three targets plus the
+   error path `0x800A3260` stay silent, even though `op=3` completes twice per run. And state 3 never
+   appears in the `Update` entry probe at all, so the completed op is overwritten before the next
+   `Update` runs.
+4. **Second correction to 5c.41 A**: the `rlwinm. r0,r0,1,31,31` tests at `0x800A3118` / `0x800A315C`
+   are `std::string` destructor cleanup (the MSL short-string flag), not a create decision. 5c.41 A
+   read them as the gate; they are not.
+5. **Not an in-game timing issue either.** A 9000-frame run with 50 extra `A` presses past the
+   tutorial page (`3620-3632` then every 120 frames from `4100` to `8600`) produces no NAND traffic
+   after frame 1638 and no files.
+
+So the 5c.39 premise - "the create half is missing, and it will run once the NAND answers honestly" -
+is **disproven by measurement**. What remains true is that the *device* is now faithful; what is false
+is that the guest would then create the save. The dialog is faithful, the deletes are faithful, the
+space check is faithful, and the create is never requested.
+
+#### D. Where that leaves the objective, and the honest options
+
+* **Option 1 (keep reverse-engineering).** Find what is supposed to make the manager enter state 1 or
+  reach the kind-0 branch. A probe on `0x800A41CC` (the even-state no-op, a real branch target)
+  printing the state each time, plus a probe on what resets `+348` to 0 right after a completion, would
+  localise it in two runs. This is honest work but open-ended.
+* **Option 2 (accept the finding and re-scope).** The evidence says the save is written by a flow this
+  game only runs when something else has happened first (an in-game save, or a manager state that a
+  truthful device alone cannot produce). Before spending more rounds, compare against the reference:
+  `build/recomp/dolphin-ref/run3` reaches Chapter 1 *and* Dolphin's NAND holds the save, so something
+  in that run creates it. Finding the frame in run3 where `savedata.dat` first appears would say
+  whether it is written at the title or in gameplay - and the answer decides which option is worth
+  another round.
+* **Do not** fabricate the create (e.g. writing the file from the HLE on a title dialog). That is the
+  class of answer 5c.39/5c.40 spent two sessions retiring, and it would hide the real defect.
+
+The goal stays active: `savedata.dat` still does not appear.
