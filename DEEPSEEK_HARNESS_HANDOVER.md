@@ -6122,3 +6122,49 @@ which of its operations use kind 0 (the branch that holds `NANDCreateAsync` at `
 Probes added this round: `SAVEAPI` (`0x800A48B8`), `STATE1` (`0x800A2E24`, `0x800A2EA4`), `SAVEDRV`
 (the four `fn_800A48B8` call return addresses), and `SAVECREATE3` extended to the handler entry
 `0x800A3084`.
+
+#### 5c.41 F. The `kind` field is mapped, and the title's "recreate" request is found
+
+`obj+72` (**kind**) decides what a state handler does. Mapped from the manager API entries:
+
+| writer | kind | state | caller |
+|---|---|---|---|
+| `fn_800A4AD4` (`0x800A4B10` / `0x800A4B54`) | **0** | 2 | **the title task**, `0x80535674` |
+| `fn_800A48B8` (`0x800A4948` / `0x800A4954`) | 2 or 3 | 1 | the save driver, `0x803B8FD0` (+3 more sites) |
+| `0x800A4A00`-region entries | 4, 5, 6, 7, 9 | - | various |
+
+and the state-3 handler routes:
+
+```
+kind  0 -> 0x800A30B0   ; the branch that holds NANDCreateAsync at 0x800A3198
+kind  1 -> 0x800A31E0
+kind 10 -> 0x800A3254
+anything else -> 0x800A30AC: b 0x800A41CC      ; nothing at all
+```
+
+**Measured:** the title calls `fn_800A4AD4` **exactly once**, at `0x80535674`, with the manager carrying
+`result=11` - the "corrupt save data" status - so this *is* the "recreate save data" request, and it is
+the only writer of kind 0. But the state-3 handler is only ever dispatched with **kind 3** (the value the
+save driver's `fn_800A48B8` writes), which the table above sends to `b 0x800A41CC`. The create branch
+therefore never executes.
+
+`TLS_IPC_DELAY` does not rescue it: at 1 the handler runs 217 ticks with kind 3 and livelocks; at 2 and 3
+it never reaches a non-kind-3 dispatch at all. So 5c.41 E's completion-ordering hypothesis is real but
+**insufficient on its own**.
+
+`fn_800A4AD4` starts no NAND call - it formats the name, calls `0x800062F8` (submit) and `0x8061F460`,
+then sets kind 0 / state 2 and returns. So the **state-2 operation's completion** is the missing link:
+something must consume the submitted request and drive it to an `fn_800A500C(..., 3)` completion while
+kind is still 0.
+
+Next step: read `0x800062F8` (what it submits to, and whether the consumer is the save task at
+`0x803B8xxx`), then find what the consumer does with a kind-0 request before it overwrites kind.
+
+#### G. Cumulative state of defect 2 after five rounds
+
+* `/dev/fs` is a truthful device model (5c.40); no device answer gates the create.
+* The manager's state machine is mapped: 26-entry dispatch table (odd states only), op set 3..25, and
+  the kind field (this section). Everything is reached except the create branch.
+* The create branch needs state 3 dispatched with kind 0, which needs the title's submitted kind-0
+  request to be completed before the driver overwrites kind. That is where the bug is.
+* Nothing fabricated has been added; `savedata.dat` still does not appear.
