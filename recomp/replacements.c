@@ -1696,6 +1696,15 @@ static int isfs_host_file_size(const char* guest_path, u32* size_out) {
     return 1;
 }
 
+/* 5c.42 G: the fn_800A4228 fabrication can be retired for measurement. It must be
+ * checked BEFORE the fabricated writes, otherwise the state is zeroed first and the
+ * "retired" run is really the fabricated one (which is what 5c.40 measured). */
+static int tls_no_4228_fabrication(void) {
+    static int v = -1;
+    if (v < 0) v = getenv("TLS_NO_4228_FABRICATION") ? 1 : 0;
+    return v;
+}
+
 static int tls_isfs_service_on(void) {
     /* ON by default since 5c.40: it is now a device model, not a stub. With the
      * service off the guest gets "success" for commands that were never executed,
@@ -1858,7 +1867,16 @@ static s32 tls_isfs_ioctl_service(CPUState* ctx, u32 cmd, u32 in_buf, u32 in_len
     char host_path[160];
     char made_path[200] = {0};
     guest_path[0] = '\0';
-    u32 plen = isfs_read_guest_path(ctx, in_buf, in_len, guest_path, sizeof(guest_path));
+    /* 5c.42 H: the request layout depends on the command. fn_8061A880 (CreateDir)
+     * and fn_8061B4D0 (CreateFile) build their 0x4c request with the path at **+6**
+     * (`addi r3, r3, 0x6; bl memcpy`), followed by owner at +0x49, group at +0x46
+     * and attr at +0x47/+0x48. fn_8061AD30 (GetAttr) and fn_8061AFD0 (Delete) put
+     * the path at +0. Reading +0 for create produced a garbage path and a failed
+     * create - measured: `cmd=9 path='\xNN\xNN!\xNN' -> -105`. */
+    u32 path_off = (cmd == 3 || cmd == 9) ? 6u : 0u;
+    u32 plen = isfs_read_guest_path(ctx, in_buf + path_off,
+                                    in_len > path_off ? in_len - path_off : 0,
+                                    guest_path, sizeof(guest_path));
     s32 result = 0;
 
     if (!plen) {
@@ -7342,11 +7360,17 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                        mgr, mem_read32(ctx, mgr + 0x15C), mem_read32(ctx, mgr + 0x168), ctx->lr);
                 fflush(stdout);
             }
-            if (out_addr) {
-                mem_write32(ctx, out_addr, 0); // *out = 0 (no error)
-            }
-            if (mgr) {
-                mem_write32(ctx, mgr + 0x15C, 0); // mgr->state = 0 (idle)
+            /* 5c.42 G: skip the fabricated writes when measuring the guest's own
+             * answer, so the TLS_NO_4228_FABRICATION block below sees the real state
+             * instead of a zeroed one. Before this, the flag was evaluated after the
+             * writes and therefore never retired anything. */
+            if (!tls_no_4228_fabrication()) {
+                if (out_addr) {
+                    mem_write32(ctx, out_addr, 0); // *out = 0 (no error)
+                }
+                if (mgr) {
+                    mem_write32(ctx, mgr + 0x15C, 0); // mgr->state = 0 (idle)
+                }
             }
             static int s_4228_calls = 0;
             if (tls_draw_trace_enabled() && (++s_4228_calls <= 5 || s_4228_calls % 60 == 0)) {
