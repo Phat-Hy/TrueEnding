@@ -15,14 +15,14 @@ state is **§5c.43**; §5c.42 and everything before it is history.
 > 1 348 992 **zero** bytes, so frame 4000 is **byte-identical** to a fresh boot. Telling CONTINUE from NEW
 > GAME needs an in-game save, i.e. gameplay past the tutorial page.
 >
-> **§5c.43 also settles what is wrong with the frame-4000 page: two-texture TEV stages we never bind.** The
-> page's art is all in the command stream (sky `0x91F3FFE0`, parchment sheet `0x921DEA60`, font atlas
-> `0x90703AA0`) and the missing pieces are the **second** textures of two batches: b27's crowned crest
-> (`0x921FEAE0`, the illustration) and b30's gradient ramp (`0x90305600`, the wipe). `gfx_d3d11.c` binds
-> only `texmap0` unless `TLS_TEV=1`, so b27 renders as a flat dark plate (the "black box" - its pixels are
-> exactly the batch's own `(30,0,0)` vertex colour) and b30 draws the sheet twice. The ink matte is a
-> symptom-level stand-in for the same gap. Read §5c.43 C and **D** before touching the renderer, and do not
-> extend the matte.
+> **§5c.43 also settles where the frame-4000 page's problem starts: two-texture TEV stages we never bind.**
+> The page's art is all in the command stream (sky `0x91F3FFE0`, parchment sheet `0x921DEA60`, font atlas
+> `0x90703AA0`) and two batches carry a **second** TEV texture: b27 (`0x921FEAE0`, a crowned crest) and b30
+> (`0x90305600`, a white->black ramp - the wipe). `gfx_d3d11.c` binds only `texmap0` unless `TLS_TEV=1`, so
+> b27 renders as a flat dark plate (its pixels are exactly the batch's own `(30,0,0)` vertex colour) and b30
+> draws the sheet twice. The ink matte is a symptom-level stand-in for the same gap. Read §5c.43 C and **D**
+> first - D also corrects its own first reading (b27's stage arithmetic puts the crest in *alpha* only, and
+> we decode the crest fully opaque, so "the crest is the missing illustration" is a lead, not a fact).
 
 **Check the confinement first.** A shell at Windows **Low** mandatory integrity cannot verify anything: the
 build dies with `PermissionError: build/recomp/objects.rsp`, `git hash-object -w` says "insufficient
@@ -45,12 +45,12 @@ the capture is unaffected by minimization (identical frame-3500 hash).
 
 **The next three steps, in order of value.**
 
-1. *Take the TEV route, not the ink matte.* §5c.43 D shows the page's missing art is b27's and b30's
-   **second TEV texture** (a crowned crest `0x921FEAE0`, and a gradient ramp `0x90305600`), which the
-   default build never binds - `gfx_d3d11.c` selects the single-texture shader unless `TLS_TEV=1`. The ink
-   matte is a symptom-level stand-in for that gap and should not be extended. Acceptance pair: b27 must show
-   the crest over the plate and b30 must wipe with the ramp; the SKIP label (b34, texture `0x9076E5E0`) is
-   what the TEV path currently drops, so fix that first - it is one batch and one alpha test.
+1. *Take the TEV route, not the ink matte.* §5c.43 D shows the page's two-texture stages are never bound by
+   the default build (`gfx_d3d11.c` selects the single-texture shader unless `TLS_TEV=1`), and that TEV is
+   load bearing *only* on this page (the rest of the fixed schedule is pixel-identical with it on). The ink
+   matte is a symptom-level stand-in for the same gap and should not be extended. Acceptance pair: b34's
+   SKIP label (`0x9076E5E0`) must survive the TEV path, then b30 must wipe with the ramp; b27's crest is a
+   lead until a reference frame says what that plate should look like.
 2. *A reference frame for the tutorial page.* The corpus still has none (`run3` 4370-8297 and all of
    `run4` were checked in 5c.39). A new Dolphin capture means driving Dolphin's window;
    `tools/dolphin_capture.py` does it by posting Win32 key messages, which the no-foreground-automation
@@ -73,7 +73,9 @@ the capture is unaffected by minimization (identical frame-3500 hash).
   `TLS_PRESENT_PROBE` for per-frame batch/vtx counts.
 * A texture that is not re-uploaded inside a frame produces no `TLS_TEX_DUMP_FRAME` output - that is a
   measurement ("the cached texture is what both draws sampled"), not a failure of the instrument.
-* One screenshot per run (`TLS_SHOT_FRAMES=<n>`); the runner also dumps a fixed schedule up to frame 1800.
+* One screenshot per run (`TLS_SHOT_FRAMES=<n>`). **Do not compare the runner's built-in fixed schedule
+  (frames 100..1800): it does not dump the presented frame** - at 1300 it averages 3.2 while a real capture
+  of frame 1300 averages 144.3 (§5c.43 D).
 * A probe only fires at a dispatch point - a branch target or a `bl` return address - never mid-block.
 * Never hand-edit `build/recomp/generated/chunks` and never mutate guest state to make progress.
 * `src/` is read-only. Edits go in `recomp/`, `tools/`, `docs/`; `build/` is git-ignored.
@@ -6691,15 +6693,20 @@ The two second textures, dumped through the TEV path:
 
 **They are invisible to the shipped path.** `TLS_TEX_DUMP=0x921FEAE0,0x90305600` writes **no file at all**
 unless `TLS_TEV=1` is also set: `gfx_d3d11.c` binds only `texmap0` unless the TEV shader is selected
-(`s_tev_enabled`). So with the default build every two-texture batch renders as its first texture only:
+(`s_tev_enabled`). What that costs is measured; what it *means* is corrected here, in the same session it
+was first written:
 
-* b27 = white plate x vertex colour `(30,0,0)` = **the solid black box** (C2);
-* b30 = the sheet again, identical to b26 (C3's vertex dump proves the geometry and colour are identical),
-  so one of the two must lose: with the ink matte on, both are erased; with it off, both draw and the
-  second covers b27/b28.
-
-That explains the whole page - no emblem, no wipe, a flat dark illustration plate - and it reframes the ink
-matte as a *symptom-level* fix for the title-logo case of the same gap.
+* **measured**: b30's second layer is the ramp, so the duplicate sheet draw is a wipe pass - and with the
+  ink matte off it is drawn as a plain opaque sheet, which is why it covers b27/b28 (C3).
+* **measured**: b27's stage arithmetic does **not** put the crest into the colour. With GX's
+  `out = a*b + c + d` and the printed arguments, stage 0 is `0*tex0.rgb + ras.rgb + 0` = the vertex colour
+  `(30,0,0)`, and stage 1 is `0*prev.rgb + 1 + 0` = **white**, with alpha `0*prev.a + tex1.a + 0` = the
+  crest's alpha. The crest can therefore only act as an **alpha mask**, and our decode of it is *fully
+  opaque* (`[tex] map1 ... a=255`), so it cannot shape anything in either path.
+* **correction**: the earlier claim in this section - "the black box is the plate and the crest is the
+  missing illustration" - is a **lead, not a conclusion**. It needs a reference frame to decide, not more
+  probing. C2's two solid facts stand (the box's pixels are exactly the batch's `(30,0,0)` colour; the
+  second texture is never bound); the interpretation does not.
 
 Measured combinations at frame 4000 (every switch below is non-default):
 
@@ -6711,10 +6718,23 @@ Measured combinations at frame 4000 (every switch below is non-default):
 | `TLS_TEV=1 TLS_NO_INK_MATTE=1` | parchment sheet + border, **no emblem, no glyphs, no SKIP label** |
 
 So neither switch is the answer on its own. The TEV path is the right *route* - it is the only thing that
-binds tex1 at all - and it is not ready: even with it on the emblem does not appear and the SKIP label is
-lost. Those are two concrete sub-defects with named test batches: `0x921FEAE0`'s stage (b27) and
-`0x9076E5E0`'s alpha test (b34, col0=0xC8323232). **Do not extend the ink matte further**; take the TEV
-route with b27 (crest over plate) and b30 (wipe with the ramp) as the acceptance pair.
+binds tex1 at all - and it is not ready: even with it on the emblem does not appear (and per the arithmetic
+above it may not be supposed to at this instant) and the SKIP label is lost.
+
+**TEV is not a switch to flip.** Measured across the whole fixed schedule with `TLS_TEV=1` against the
+default build, frames 100, 200, 400, 1300, 1700 and 1800 are pixel-identical or within noise (mean |diff|
+0.00), and only 350/700 differ at all (0.3% / 0.1% of pixels by more than 8) - so the TEV stage is load
+bearing **only** where two-texture stages exist, i.e. on this page, and there it currently makes things
+worse. Two concrete sub-defects with named test batches: `0x921FEAE0`'s stage (b27) and `0x9076E5E0`'s alpha
+test (b34, col0=0xC8323232, whose TEV state is `stages=1`, `rgb: ZERO ONE ras.rgb ZERO`, i.e. flat raster
+colour with alpha `tex.a * ras.a` - the default path shows the glyphs only because it multiplies by the
+texture's RGB, which that combiner does not). **Do not extend the ink matte further**; fix the TEV path
+with b34 (label must survive) and b30 (wipe with the ramp) as the acceptance pair.
+
+**Instrument trap found while making that comparison:** the runner's built-in fixed schedule (frames
+100..1800) does **not** dump the presented frame - at frame 1300 the schedule's PPM averages 3.2 while the
+same frame captured with `TLS_SHOT_FRAMES=1300` averages 144.3 (`docs/evidence/host_f1300_menu_...`). Use
+`TLS_SHOT_FRAMES` for anything you intend to compare; the schedule is only good for "did something draw".
 
 **Verification:** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
 frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
