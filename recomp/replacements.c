@@ -4067,6 +4067,28 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 1;
         }
 
+        /* 5c.41 B: fn_800A2DE0 dispatches on mgr+348 through a 26-entry pointer
+         * table at 0x807789D8 read with `lwzx`/`bctr`. In the static image only
+         * entry 1 (0x803A41C4) is non-zero, so the table is filled at run time and
+         * no static read can say which state owns a case. Dump it once per run. */
+        case 0x800A2E18: {
+            if (tls_nand_probe_on()) {
+                static u32 s_tab_n = 0;
+                if (s_tab_n < 1) {
+                    s_tab_n++;
+                    u32 mgr = ctx->gpr[3];
+                    printf("[TLS StateTab] mgr=0x%08X state=%u table@0x807789D8:\n", mgr,
+                           mgr ? mem_read32(ctx, mgr + 348) : 0);
+                    for (u32 st = 0; st < 26; st++) {
+                        u32 h = mem_read32(ctx, 0x807789D8 + st * 4);
+                        if (h) printf("  state %2u -> 0x%08X\n", st, h);
+                    }
+                    fflush(stdout);
+                }
+            }
+            return 0;
+        }
+
         /* 5c.41: the save manager's create-vs-skip decision, read out of the lifted
          * code at 0x800A2F80..0x800A3010:
          *
@@ -6895,6 +6917,26 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 printf("[TLS 800A2DE0] Update #%d obj=0x%08X state=+348=%u (lr=0x%08X)\n",
                        s_2de0_calls, obj, state, ctx->lr);
                 fflush(stdout);
+            }
+            /* 5c.41: fn_800A2DE0 dispatches on mgr+348 through a 26-entry pointer
+             * table at 0x807789D8 (`lwzx` then `bctr`). Only entry 1 is non-zero in
+             * the static image, so the table is filled at run time - and 0x800A2E18
+             * is mid-block, where a hook never fires (a probe only fires at a branch
+             * target or a bl return address). Read the entry here instead, where the
+             * state is already loaded and the dispatch is certain to follow. */
+            if (tls_nand_probe_on()) {
+                static u32 s_tab_dumped = 0;
+                if (!s_tab_dumped && obj) {
+                    s_tab_dumped = 1;
+                    printf("[TLS StateTab] table@0x807789D8 (non-zero entries):\n");
+                    for (u32 st = 0; st < 26; st++) {
+                        u32 h = mem_read32(ctx, 0x807789D8 + st * 4);
+                        if (h) printf("  state %2u -> 0x%08X\n", st, h);
+                    }
+                    printf("[TLS StateTab] current state=%u -> handler=0x%08X\n", state,
+                           mem_read32(ctx, 0x807789D8 + (state < 26 ? state : 0) * 4));
+                    fflush(stdout);
+                }
             }
             return 0; // Run original code
         }
