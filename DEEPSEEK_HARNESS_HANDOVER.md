@@ -5048,3 +5048,40 @@ does not open the gate that §5c.27 §2 decoded (`fn_800A555C` bit-testing the p
 measured working *under the fabricated fade*, so it too must be re-checked now. This is the single
 highest-value thing to re-derive: **does the A edge still reach `fn_800A555C` under the faithful fade,
 and if so which side of the gate is failing?**
+
+#### 5c.32d Three clean measurements under the faithful fade: input arrives, the gate is never reached, the fade finishes
+
+Chased 5c.32c's question ("does the A edge reach `fn_800A555C`, and if not why") to the end with three
+instruments. All three are unambiguous:
+
+1. **Input DOES arrive at the guest.** `[TLS KPADRead] PRESS ... hold=0x0800 trig=0x0800` on all four
+   channels - bit 11 = `0x0800` = the A button, exactly as §5c.27 §2 decoded. So the press is not lost
+   on the way in.
+2. **`fn_800A555C` is never called at all.** Zero matches for it in a 3520-frame log with
+   `TLS_ACTION_PROBE=1` and `TLS_ACTION_TRACE=3390-3410`, while the log itself is live (5531 TLS lines).
+   So the function this file has been calling "the phase-0 gate" is **not on the path** under the
+   faithful fade. Whatever consumed the A press under the fabricated fade, it was not this function in
+   this state - the §5c.27 §2 attribution needs re-checking.
+3. **The fade is NOT suppressing input.** Added a probe on the coordinator's return point
+   (`lr = 0x803673E4`, a dispatch point, so the guest's real return value is visible on the faithful
+   path). It is called exactly **three times**, ever:
+
+   ```
+   f=1841  r3=0x00000001   (still fading)
+   f=1848  r3=0x00000001   (still fading)
+   f=1852  r3=0x00000000   (COMPLETE - and never called again)
+   ```
+
+   So the fade completes at frame 1852 and the A press at ~3400 is 1500 frames later. The hypothesis
+   that the real coordinator "reports still-fading forever and suppresses input" is **dead**.
+
+**What this narrows it to**: with the faithful fade the machine enters phase 8 at f=2105 and returns to
+phase 0 at f=3347, then the A press at ~3400 is delivered to KPAD and consumed by nobody. The difference
+between the two configurations is subtle and early: the fabricated fade returned "complete" on the
+*first* call (~f=1841), the faithful one on the *third* (f=1852) - an 11-frame shift that cascades into a
+different phase trajectory later. That is fragile in itself and worth remembering: a fabricated return
+value that only changes a few frames of timing was enough to produce an entirely different state path.
+
+**Next step**: find what actually consumes the A trig bit in the phase-0 handler. Do not start from
+`fn_800A555C` - it is not called. Instead watch the guest word that holds the trig (`*(r13-26280)+0x3C28`
+per §5c.27) and find the first instruction that reads it after the press.

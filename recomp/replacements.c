@@ -4281,7 +4281,33 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 s_fake = getenv("TLS_FAKE_FADE") ? 1 : 0;
                 if (getenv("TLS_NO_FAKE_FADE")) s_fake = 0;   /* honoured, now a no-op */
             }
-            if (!s_fake) return 0;     /* run the guest's own coordinator */
+            if (!s_fake) {
+                /* Watched because of 5c.32c: with the guest's own coordinator the A press
+                 * reaches KPAD (hold=0x0800 trig=0x0800, bit 11 = A) but NOTHING consumes it
+                 * and fn_800A555C is never called, while with the fabricated fade the same
+                 * press advanced phase 0 -> 13 within two frames. Hypothesis: the real
+                 * coordinator reports "still fading" indefinitely, and the game suppresses
+                 * input while a fade is active. Rate-limited so this cannot throttle the
+                 * run - only on change of any watched field. */
+                extern int g_runner_current_frame;
+                static u32 s_prev = 0xFFFFFFFFu;
+                u32 o3   = ctx->gpr[3];
+                u32 v408 = (o3 >= 0x80000000u && o3 < 0x94000000u) ? mem_read32(ctx, o3 + 408) : 0xFFFFFFFFu;
+                u32 sm   = ctx->gpr[13] ? mem_read32(ctx, ctx->gpr[13] - 26672) : 0;
+                u32 v1028 = (sm >= 0x80000000u && sm < 0x94000000u) ? mem_read32(ctx, sm + 1028) : 0xFFFFFFFFu;
+                u32 v984  = (sm >= 0x80000000u && sm < 0x94000000u) ? mem_read32(ctx, sm + 984) : 0xFFFFFFFFu;
+                u32 key = (v408 & 0xFFu) | ((v1028 & 0xFFu) << 8) | ((v984 & 0xFFu) << 16);
+                static int s_n = 0;
+                if (key != s_prev) {
+                    s_prev = key;
+                    if (s_n++ < 40) {
+                        printf("[TLS FADE] f=%d obj=0x%08X 408=%u sm=0x%08X 1028=%u 984=%u lr=0x%08X\n",
+                               g_runner_current_frame, o3, v408, sm, v1028, v984, ctx->lr);
+                        fflush(stdout);
+                    }
+                }
+                return 0;
+            }
             static int s_fade_log_count = 0;
             u32 r3_obj = ctx->gpr[3];
             u32 val_408 = (r3_obj >= 0x80000000 && r3_obj < 0x94000000) ? mem_read32(ctx, r3_obj + 408) : 0xFFFFFFFF;
@@ -5255,6 +5281,29 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                        mgr ? mem_read32(ctx, mgr + 76) : 0,
                        mgr ? mem_read32(ctx, mgr + 80) : 0);
                 fflush(stdout);
+            }
+            return 0;
+        }
+
+        /* Return point of the fade coordinator call at 0x80360A2C (its caller's lr). A
+         * dispatch point, so the guest's actual return value can be read here even on the
+         * faithful path. This is the measurement that decides 5c.32c's hypothesis: if the
+         * coordinator keeps returning non-zero ("still fading"), the game plausibly
+         * suppresses input; if it returns 0, the fade is complete and is NOT the reason the
+         * A press at ~3400 goes unconsumed. */
+        case 0x803673E4: {
+            if (tls_scene_sm_probe_on() || getenv("TLS_FADE_RET")) {
+                extern int g_runner_current_frame;
+                static u32 s_prev = 0xFFFFFFFFu;
+                static int s_n = 0;
+                u32 r = ctx->gpr[3];
+                if (r != s_prev || s_n < 5) {
+                    s_prev = r;
+                    if (s_n++ < 60) {
+                        printf("[TLS FADERET] f=%d r3=0x%08X\n", g_runner_current_frame, r);
+                        fflush(stdout);
+                    }
+                }
             }
             return 0;
         }
