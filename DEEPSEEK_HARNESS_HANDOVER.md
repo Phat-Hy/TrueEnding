@@ -6279,3 +6279,36 @@ actually does: `build/recomp/dolphin-ref/run3` reaches Chapter 1 *and* Dolphin's
 `savedata.dat`, so something in that run creates it. Determining whether the file appears at the title
 (recreate accepted) or during gameplay (an in-game save) decides whether the remaining work is a guest
 state-machine bug worth more rounds, or a gameplay action this harness has simply never scripted.
+
+#### 5c.41 L. THE REFERENCE SAVE IS A BLANK, ZERO-FILLED FILE - the create is a TITLE-TIME event
+
+5c.41 K said the decisive datum was whether the reference creates the save at the title or in gameplay.
+It is now measured, from the reference NAND itself:
+
+```
+savedata.dat  1 348 992 bytes  -> 100.0% zero bytes (every byte)
+banner.bin       29 344 bytes  -> "WIBN" (Wii banner), version 1, then UTF-16 "THE LAST STORY"
+both files created 10/24/2026 9:21:42-43 PM, i.e. within the same second
+```
+
+Three conclusions follow, and they change what the next round should do:
+
+1. **The create is a title-time event.** Two files written in the same second, one of them a
+   well-formed banner, is a single "create the save" operation - not an in-game save (which would carry
+   play time and would not be 100% zeros).
+2. **The save the game creates is a blank allocation.** `savedata.dat` is *all* zeros, so the create
+   writes a zeroed buffer of 1 348 992 bytes (0x149700) plus a generated 29 344-byte banner. Note this
+   size is **not** 0x159580 (1 414 528) - the constant the 5c.24/5c.39 note assumed the length check
+   compares against. The zero-filled file 5c.40 retired as a fabrication had the right *shape* and the
+   wrong size.
+3. **The create therefore writes ~1.35 MB of zeros through IOS_Write**, and our runs show *zero*
+   `IOS_Write` calls. So the operation genuinely never starts - consistent with everything in 5c.41 D-J.
+
+The banner is **not** embedded in the game image: `--strfind` over `main.elf` finds neither `WIBN` nor
+the UTF-16 title text, so the banner is generated at run time or read from a disc archive
+(`pack/filesystem.pk` / a `.pk`). That is the next lead: whatever produces the banner data is called by
+the same routine that creates the save, so locating the banner *source* identifies the create's caller
+chain - the one thing eight rounds of tracing the manager state machine did not give us.
+
+Measured with the same input script as every other run in this section; no code changed this round,
+build green, invariant PASS, frame 3500 unchanged, `savedata/` empty.
