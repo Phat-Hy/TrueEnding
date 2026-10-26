@@ -6419,3 +6419,21 @@ Two honest paths remain, and neither is a device change:
    is a bounded RE task, but six rounds of tracing around it have not found it.
 
 Until one of those lands, `savedata.dat` will not appear, and I will not fabricate it.
+
+#### 5c.42 F. Last observation this section: the *driver* writes the manager's state field directly
+
+`mgr+348` is not only written by the manager API and by `fn_800A500C`. The save driver at `0x803B8xxx`
+sets it directly, which is how the state-1 window is destroyed after `fn_800A48B8` (5c.41 D) sets it:
+
+```
+0x803B8E40: li r0, -1
+0x803B8E44: stw r0, 348(r30)          ; a helper sets state = -1 (out of range -> Update no-ops)
+0x803B8E60: stwu r1, -288(r1)         ; another helper...
+0x803B8E70: or  r31, r5, r5           ;   ...whose 3rd argument is the new state...
+0x803B8EB4: stw r31, 348(r28)         ;   ...which it stores into the manager
+```
+
+So the driver decides the manager's state, and the state-1 window survives only until the driver's next
+call. Whoever wants to catch `kind 0` in the state-3 handler has to catch it between `fn_800A4AD4`
+(which sets kind 0 / state 2) and the driver's next state write - which is the same ordering problem
+5c.41 F described, now with a concrete writer to instrument rather than a guess.
