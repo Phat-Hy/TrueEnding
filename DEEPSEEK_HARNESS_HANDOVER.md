@@ -7202,7 +7202,36 @@ inconsistent with the hardware; the destination keeps its free-list content. Fix
 path (quantization types, and whatever unimplemented instruction the corrected layout then reaches)
 coherent, which is a CPU-core job, not a renderer one.
 
-**State**: handover only plus the working-tree flag. Build green, invariant PASS, 0 changes to `src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
+#### H. Reconstruction of two lost core functions, and the rule it teaches
+
+While removing a temporary diagnostic from `tools/DolRecomp/src/cpu/cpu.c` this session, a bad anchor
+deleted two functions instead of one: `ppc_fp_available` and `ppc_fallback_instruction`. There is no history
+to restore from - `tools/DolRecomp/` is git-ignored - so they were **reconstructed by disassembling the
+intact object** in `tools/DolRecomp/build/libdr_cpu.a` (`objdump -d cpu.c.obj`, symbols `0x1d50` and
+`0x1d60`), and the reconstruction is verified by the invariant reproducing the exact reference hash.
+
+What the object shows, worth knowing in its own right:
+
+```c
+/* not the architectural behaviour: it ORs MSR[FP] in and returns true, so floating-point
+   code never sees an FP-unavailable exception */
+bool ppc_fp_available(CPUState* cpu, u32 cia) { (void)cia; cpu->msr |= 0x2000u; return true; }
+
+/* cache ops and unlifted SPR accesses land here */
+void ppc_fallback_instruction(CPUState* cpu, u32 raw, u32 cia) {
+    if (cpu->instruction_fallback) { cpu->instruction_fallback(cpu, raw, cia); return; }
+    ppc_program_exception(cpu, PPC_PROGRAM_ILLEGAL, cia);
+}
+```
+
+**Rule this adds:** `tools/DolRecomp/` is not under version control, so an edit there is unrecoverable except
+from `tools/DolRecomp/build/libdr_cpu.a` (and that archive only holds whatever was last built). Keep those
+edits surgical, never restart a whole file from a generated diff, and re-run `tools/invariant.ps1` after
+every touch - which is exactly how the reconstruction was proven correct.
+
+**Verification after the reconstruction**: build green, invariant **PASS**, frame 3500 =
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes
+to `src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
 frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
 created at 1 348 992 / 29 344 - so both new instruments are inert by default and no default-path pixel moved.
 0 changes to `src/`. New instruments, both default-off: `TLS_TEX_DUMP_FRAME` (per-frame, ordered texture
