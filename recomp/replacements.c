@@ -1585,6 +1585,42 @@ static u32 ios_fd_length(u32 fd) {
     return (size > 0) ? (u32)size : 0u;
 }
 
+#define TLS_NAND_DIR "savedata"
+#define TLS_TITLE_DATA_DIR_HOST TLS_NAND_DIR "/title/00010000/534c5345/data"
+
+/* ---------------------------------------------------------------------------
+ * Host NAND root initialisation (5c.41 H).
+ *
+ * With /dev/es answered (5c.41 G) the guest asks about its real paths, and a real
+ * console that has this title installed already holds the directories the NAND
+ * keeps for it - most importantly /title/00010000/534c5345/data, the title's own
+ * data directory. Our host tree was empty, so GetAttr/GetUsage/ReadDir on that
+ * directory answered "missing", which is not what a console says. These are
+ * device facts, not guest state: no file content is invented, only the directory
+ * skeleton an installed title has.
+ * ------------------------------------------------------------------------- */
+static void tls_nand_host_init(void) {
+    static int done = 0;
+    if (done) return;
+    done = 1;
+#ifdef _WIN32
+    static const char* dirs[] = {
+        TLS_NAND_DIR,
+        TLS_NAND_DIR "/title",
+        TLS_NAND_DIR "/title/00010000",
+        TLS_NAND_DIR "/title/00010000/534c5345",
+        TLS_TITLE_DATA_DIR_HOST,
+        TLS_NAND_DIR "/meta",
+        TLS_NAND_DIR "/ticket",
+        TLS_NAND_DIR "/shared2",
+        TLS_NAND_DIR "/shared2/sys",
+    };
+    for (unsigned i = 0; i < sizeof(dirs) / sizeof(dirs[0]); i++) {
+        CreateDirectoryA(dirs[i], NULL);
+    }
+#endif
+}
+
 /* Map a guest ISFS path onto the host NAND tree under savedata/.
  *
  * 5c.41 G: before /dev/es answered the title-id and home-dir queries, every guest
@@ -1728,7 +1764,6 @@ static int isfs_is_root_path(const char* p) {
 }
 
 /* Host directory that backs the NAND root. */
-#define TLS_NAND_DIR "savedata"
 
 /* Number of entries in a host NAND directory (a directory listing). */
 static u32 isfs_host_dir_count(const char* host_dir) {
@@ -1808,6 +1843,7 @@ static u32 isfs_blocks_for_size(u32 size) { return (size + 0x1FFF) / 0x2000; }
  * plain in/out buffers, not as io vectors. Returns the ISFS result code. */
 static s32 tls_isfs_ioctl_service(CPUState* ctx, u32 cmd, u32 in_buf, u32 in_len, u32 out_buf,
                                   u32 out_len) {
+    tls_nand_host_init();
     char guest_path[80];
     char host_path[160];
     char made_path[200] = {0};
@@ -1974,6 +2010,7 @@ static s32 tls_es_ioctlv_service(CPUState* ctx, u32 cmd, u32 num_in, u32 num_io,
  * completion handler run at all. */
 static s32 tls_isfs_ioctlv_service(CPUState* ctx, u32 fd, u32 cmd, u32 num_in, u32 num_io,
                                    u32 vecs) {
+    tls_nand_host_init();
     char guest_path[80];
     char made_path[200] = {0};
     guest_path[0] = '\0';
