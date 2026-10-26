@@ -4852,3 +4852,35 @@ unsampled.
 
 **The decisive step** is to compare *pictures*, not means: capture the host at 3001 and 3251 and put
 them beside `run2/framedump_1500.png` and `framedump_2000.png`. One windowed run plus two image opens.
+
+#### 5c.31b The host's Chapter-1 intro is not merely looping - it renders large BLACK regions
+
+Captured the host's own intro frames (`TLS_SHOT_FRAMES=2251,3001,3251`, 3-A plan plus the tail presses)
+and looked at them next to the reference. Two things fall out:
+
+* **f=3001 (mean 14.0) is mostly BLACK.** The image is a large black polygon covering most of the
+  frame, with cave texture and a pink/red foliage-like effect only at the right edge and water at the
+  bottom. The reference's corresponding moment (`run2/framedump_1500.png`, mean 21.2) is a *readable*
+  dark cave with a light shaft and floating motes. Saved as
+  `docs/evidence/host_ch1_f3001_black_intro.png`.
+* **f=3251 (mean 51.3) has a hard BLACK BAND across the top half**, cut off at about y=185 of 450, above
+  the floating rocks, sky and birds. Saved as `docs/evidence/host_ch1_f3251_black_band.png`.
+
+A hard horizontal black boundary and a huge black polygon are **not** "the intro is looping" - they are
+rendering defects, and they mean the host is not even showing the reference's shot correctly. So the
+earlier hypothesis (5c.31a: "the host diverges to a different shot") is at least partly wrong: at
+f=3001 the host may well be *in* the reference's cave shot and drawing it mostly black.
+
+This reframes the Chapter-1 work again, and this time with a reference to measure against:
+
+1. the black regions are the first thing to explain - a full-frame black polygon plus a hard horizontal
+   cut is the signature of a missing/incorrect clear, a depth-test reversal, or a pass drawn without
+   its texture (the same family as the "white blob" in 5c.22-5c.23);
+2. compare `host_ch1_f3001_black_intro.png` against `dolphin_ref_run2_f1500_intro.png` directly - same
+   cave, same light shaft? The reference is legible and the host is not, so pixel comparisons of the
+   *intro* will be confounded by this defect until it is fixed;
+3. do not conclude "the intro diverges" from means alone again - at f=3001 the host's mean (~14) and
+   the reference's (~21) are close *because* both are dark, not because the pictures match.
+
+**This is now the most actionable Chapter-1 lead in the file**: a specific, reproducible rendering
+defect with a reference image to compare against, independent of the phase-13 state-machine question.
