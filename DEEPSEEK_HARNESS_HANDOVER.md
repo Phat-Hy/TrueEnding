@@ -7264,10 +7264,36 @@ ordinary stores, not paired singles. The next step on that thread is to identify
 callers, or the store width via `TLS_WATCH_ADDR` on neighbouring bytes), which is guest-code analysis rather
 than a CPU-core fix.
 
-**State**: `tools/DolRecomp/src/cpu/cpu.c` is back to the shipped psq code plus the two functions
-reconstructed in 5c.44 H, `docs/dolrecomp/cpu-core.patch` regenerated (6 459 bytes, cpu.c + cpu.h), build
-green, invariant **PASS** with frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
-save 1 348 992 / 29 344, 0 changes to `src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
+#### C. The stamping block is a byte-wise texture DECODER, and the source is full
+
+Read from the recompiler's own output (`build/recomp/generated/chunks/chunk_0052_text1_800D41C0.c`, which
+carries a per-instruction comment - the cheapest disassembler in this repo):
+
+```
+800D6D34: lbz     r11, 4(r10)        ; source byte, header skipped by 4
+800D6DD8: stb     r16, 1(r5)
+800D6DE8: stbx    r17, r3, r0        ; the offset-0 byte
+800D6DF8: stb     r18, 3(r5)
+800D6E08: stb     r6,  2(r5)
+800D6E0C..800D6E18: stb r12/r11/r10/r0, 4..7(r5)
+```
+
+So the routine writes **eight bytes per iteration at offsets 0..7** - a texture decode/swizzle, not a copy
+that fails - and the `00000000FFFFFFFF` result is what it produced *from its input*. That input is not the
+request buffer: `TLS_MEM_DUMP` of the source it reads (`0x903CD1C0`) shows real data
+(`FF97 FF69 FF41 FF5C FF38 FF28 …`), so the texture is being decoded from something with content.
+A `psq` store probe over the whole texture arena (`0x92A00000..0x92D00000`) fired **zero times**, which is
+the same conclusion from the other side: nothing about this path is paired-single.
+
+**Where that leaves the character art**: the chain is load → `CXDecompressFast` into the request buffer →
+this byte decoder into the texture arena, and the result is a pattern *derived from* real input bytes. The
+open question is therefore whether the decoder's input is the *right* region and length - i.e. whether the
+decompressor's output matches what the decoder expects - which is guest data-flow, not CPU emulation.
+
+**Verification after cleanup**: `cpu.c` holds only the shipped psq code plus the two reconstructed functions,
+`docs/dolrecomp/cpu-core.patch` regenerated (6 459 bytes), build green, invariant **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
+`src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
 frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
 created at 1 348 992 / 29 344 - so both new instruments are inert by default and no default-path pixel moved.
 0 changes to `src/`. New instruments, both default-off: `TLS_TEX_DUMP_FRAME` (per-frame, ordered texture
