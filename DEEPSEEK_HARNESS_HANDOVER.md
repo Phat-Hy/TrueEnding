@@ -6312,3 +6312,50 @@ chain - the one thing eight rounds of tracing the manager state machine did not 
 
 Measured with the same input script as every other run in this section; no code changed this round,
 build green, invariant PASS, frame 3500 unchanged, `savedata/` empty.
+
+#### 5c.42 A. The seeded-save path is verified at the corrected location, and op=11 is a READ
+
+The host-path change in 5c.41 G/H moved the seeding location, so it needed re-verifying. Seeding
+Dolphin's files at **`SaveData/title/00010000/534c5345/data/`** works:
+
+```
+ISFS ioctl cmd=6 '/title/00010000/534c5345/data/savedata.dat' -> 0        ; GetAttr sees it
+IOS_OpenAsync   '/title/00010000/534c5345/data/savedata.dat' mode=1 -> fd=5 fp=host-file
+```
+
+With that save present the manager's completions change character completely, and they identify an
+operation the section had only guessed at:
+
+```
+op=11 result = 32, 79232, 158432, 237632, 316832, ... 1267232      17 completions
+               ^^ header read, then every step is +79200 = +0x13560
+op=7  result = 0 (x3)                                                opens succeeded
+```
+
+So **op=11 is a read**, the save layout is a 32-byte header followed by 17 slots of `0x13560`, and
+`0x13560 * 17 + 32 = 1 346 432`, which sits inside the 1 348 992-byte file. `0x13560` is also the
+constant the save driver at `0x803B8xxx` computes with (17 references in `chunk_0237`) - the same code
+that calls `fn_800A48B8`.
+
+**And a blank save is accepted as valid**: with it present the run reaches `Game` with no dialog, no
+`Delete`, no `CreateFile` and no `IOS_Write`; the file's mtime does not change. So a fresh console is one
+where the file is *absent*, and the file is meant to be produced by the title's recreate flow - which in
+our emulation deletes and space-checks but never creates (§5c.41 D-J).
+
+#### 5c.42 B. The remaining question, stated precisely
+
+The reference creates a **blank zero-filled save** at the title (5c.41 L). Our guest's recreate flow
+reaches the point of deleting both files and running the space check twice, then goes to title mode 22
+and into gameplay without issuing `CreateFile`. The device now answers everything a console would, so the
+gap is one of these two, and nothing else:
+
+1. the recreate flow's create is gated on a manager state/kind we cannot reach (the `kind 0` window is
+   overwritten before dispatch - 5c.41 F), or
+2. the flow expects an event/answer we still do not produce (the space check's per-pool `GetUsage`
+   results are the last un-modelled input: our NAND reports every root pool as missing).
+
+Item 2 is the cheaper next test: make the root pools (`/meta`, `/ticket`, `/title/00010000`,
+`/shared2/title`, ...) *exist* as directories, so `GetUsage` reports real (zero-usage) pools instead of
+`-106` for all of them. `tls_nand_host_init()` already creates `meta`, `ticket`, `shared2/sys` and the
+title tree, but the numeric pool directories `/title/00010001`..`/title/00010007` are still missing, and
+every one of them is queried in each space-check sweep.
