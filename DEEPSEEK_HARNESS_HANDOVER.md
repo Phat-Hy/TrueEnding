@@ -4525,3 +4525,45 @@ registered** - i.e. work the "never creates a player/scene task" end of the obje
 
 **Do not** re-derive: the jump tables, the phase numbering, the A-edge gate, the slot-record layout,
 the payload factory/ctor, or any of the rendering work above. All are recorded with measurements.
+
+
+#### 5c.30a The guest never even *attempts* to register a Chapter-1 scene task
+
+Added a task-manager census to the scene probe (`[0x8087EE94]`, count at `+0`, array at `+8`, 20
+bytes per slot: `+12` update fn, `+16` task) that prints on **every** change - so a transient
+registration cannot hide between the periodic telemetry dumps. Over a 4200-frame Chapter-1 run there
+is exactly **one** census line:
+
+```
+f=2115 TASKS count=3 arr=0x80C96CB0:
+  [0 up=0x80570CFC task=0x80AEDCF0]  [1 up=0x80363DBC task=0x80B8DD10]  [2 up=0x803646C4 task=0x80B8DD10]
+```
+
+The count is 3 at frame 2115 and **never changes again** - not up, not down, not transiently. So:
+
+* the host is not dropping or failing task registrations;
+* the guest **never reaches the code that would create the Chapter-1 player/scene task**.
+
+Combined with 5c.30's other finding - the guest is *idle* in phase 13 (scheduler idle loop, only the
+scene SM ticking) - the picture is: the game is waiting for a trigger that would start the next scene
+setup, and that trigger never arrives. Task creation is downstream of it, so "get the task registered"
+is not the thing to work on; **"what should fire that trigger"** is.
+
+This is also the cleanest single statement of the objective's second symptom: it is not that a task is
+created and lost - it is that none is ever created, and now that is measured rather than inferred.
+
+#### 5c.30b Operational hazard: a shell heredoc truncated replacements.c to zero bytes
+
+While patching `recomp/replacements.c` from a `pwsh` heredoc, this line
+
+```python
+open(p, "w", newline="\n")
+```
+
+raised `ValueError: illegal newline value` **after** `open(..., "w")` had already truncated the file,
+leaving `recomp/replacements.c` at **0 bytes**. The link then failed on symbols that no longer existed
+(`g_tls_guest_callback_depth`, `g_tls_stage_override`), which is what surfaced it.
+
+Recovered with `git checkout -- recomp/replacements.c` (the per-change commit discipline is what made
+this a 10-second fix rather than a lost session). **Use the `edit` tool for source edits, not heredoc'd
+scripted rewrites**; if a script must write, pass `newline=""` and verify the file size afterwards.

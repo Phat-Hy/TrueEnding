@@ -2089,8 +2089,36 @@ static void tls_scene_sm_hit(int idx) {
     if (idx >= 0 && idx < 10) g_ssm_hits[idx]++;
 }
 
+/* Task-manager census (handover 5c.30 synthesis): the Chapter-1 stall and "no
+ * player/scene task is ever created" may be the same defect seen from two ends.
+ * [0x8087EE94] is the task manager; +0 is the count, +8 the array, 20 bytes per
+ * slot (+12 update fn, +16 task). Print on EVERY change so a transient
+ * registration cannot hide between the periodic telemetry dumps. */
+static void tls_task_census(CPUState* ctx) {
+    extern int g_runner_current_frame;
+    static u32 s_cnt = 0xFFFFFFFFu;
+    u32 mgr = mem_read32(ctx, 0x8087EE94u);
+    if (!mgr) return;
+    u32 cnt = mem_read32(ctx, mgr);
+    if (cnt == s_cnt) return;
+    s_cnt = cnt;
+    {
+        u32 arr = mem_read32(ctx, mgr + 8);
+        u32 i;
+        printf("[TLS SceneSM] f=%d TASKS count=%u arr=0x%08X:", g_runner_current_frame, cnt, arr);
+        for (i = 0; i < cnt && i < 8; i++) {
+            u32 slot = arr + i * 20u;
+            printf(" [%u up=0x%08X task=0x%08X]", i, mem_read32(ctx, slot + 12),
+                   mem_read32(ctx, slot + 16));
+        }
+        printf("\n");
+        fflush(stdout);
+    }
+}
+
 static void tls_scene_sm_enter(CPUState* ctx, u32 task) {
     extern int g_runner_current_frame;
+    tls_task_census(ctx);
     u32 st  = mem_read32(ctx, task + 0x5538);
     u32 ctr = mem_read32(ctx, task + 0x5744);
     u32 cd  = mem_read32(ctx, task + 0x5748);
