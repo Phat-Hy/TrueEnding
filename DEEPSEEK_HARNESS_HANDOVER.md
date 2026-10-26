@@ -6371,3 +6371,51 @@ So the "delete the seeds afterwards" rule of 5c.39 D now applies to
 `SaveData/title/00010000/534c5345/data/`, not to `savedata/savedata.dat`; a stale seed there changes the
 title flow (CONTINUE instead of the dialog) and the frame-3500 hash with it. If a run of the invariant
 fails with no source change, check that directory first.
+
+#### 5c.42 D. The space-check pools exist now, and the create still does not happen
+
+The last un-modelled device input was the space check's per-pool `GetUsage`. On a console the numeric
+title pools exist (they are the per-title-type block accounts); our NAND reported every one as missing,
+so each sweep accumulated `-106`. `tls_nand_host_init()` now creates `/meta`, `/ticket`,
+`/title/00010001`, `/title/00010003`..`/title/00010007` and `/shared2/title` as well, and the sweep
+answers truthfully:
+
+```
+cmd=12 '/title/00010000/534c5345/data' -> 0 blocks, 0 entries
+cmd=12 '/meta'                         -> 0 blocks, 0 entries
+cmd=12 '/ticket'                       -> 0 blocks, 0 entries
+cmd=12 '/title/00010000'               -> 0 blocks, 1 entries
+cmd=12 '/title/00010001' .. '00010007' -> 0 blocks, 0 entries
+cmd=12 '/shared2/title'                -> 0 blocks, 0 entries
+```
+
+**Still no `CreateFile`, no `IOS_Write`, no file.** So the space check is not the gate either.
+
+That completes the device-side hypothesis space. Everything a console answers, we now answer, and
+measured one at a time: `/dev/fs` commands, `/dev/es` title id and home dir, the real path space, the
+directory skeleton, the pool accounts, and the completion timing (via `TLS_IPC_DELAY`). None of them
+produces a create request. Frame 3500 stays `A00272DF...` and the sequence stays
+`Boot -> Stra -> Titl -> Game`.
+
+#### 5c.42 E. Where this stands, and the only two paths forward
+
+Eleven rounds of measurement have established, with evidence, that **the guest never asks the device to
+create the save in any flow reachable from the title** - not at the dialog, not after it, not during
+9000 frames of gameplay, not with a blank save present, not with any completion timing tested, and not
+with any device answer we can still improve. The device layer is now as faithful as this harness can make
+it; the remaining gap is inside the guest's own save manager (the `kind 0` window being overwritten
+before dispatch - 5c.41 F).
+
+Two honest paths remain, and neither is a device change:
+
+1. **Instrument the reference.** `dolphin-ref/run3` creates the file and Dolphin's NAND proves it
+   (5c.41 L). Finding *which frame* of run3 the file appears in, and whether the title's recreate dialog
+   is on screen at that moment, would say whether our title flow is missing an input (a dialog
+   confirmation we answer differently) rather than a state transition. That is the cheapest decisive
+   experiment left, and it needs Dolphin, not this harness.
+2. **Keep reverse-engineering the manager.** The open question is exactly one: what makes the state-3
+   handler dispatch while `obj+72` (kind) is still 0. `fn_800A4AD4` sets kind 0 / state 2 and returns
+   without starting an operation, so *something else* must drive the completion. Finding that producer
+   is a bounded RE task, but six rounds of tracing around it have not found it.
+
+Until one of those lands, `savedata.dat` will not appear, and I will not fabricate it.

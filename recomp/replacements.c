@@ -1614,6 +1614,16 @@ static void tls_nand_host_init(void) {
         TLS_NAND_DIR "/ticket",
         TLS_NAND_DIR "/shared2",
         TLS_NAND_DIR "/shared2/sys",
+        /* 5c.42 D: the space check sweeps these numeric title pools, one GetUsage
+         * each; a console has them (they are the per-title-type block accounts), so
+         * they must exist or every sweep accumulates -106 instead of a real pool. */
+        TLS_NAND_DIR "/title/00010001",
+        TLS_NAND_DIR "/title/00010003",
+        TLS_NAND_DIR "/title/00010004",
+        TLS_NAND_DIR "/title/00010005",
+        TLS_NAND_DIR "/title/00010006",
+        TLS_NAND_DIR "/title/00010007",
+        TLS_NAND_DIR "/shared2/title",
     };
     for (unsigned i = 0; i < sizeof(dirs) / sizeof(dirs[0]); i++) {
         CreateDirectoryA(dirs[i], NULL);
