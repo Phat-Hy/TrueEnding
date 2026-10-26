@@ -1628,6 +1628,39 @@ int main(int argc, char** argv) {
         }
     }
 
+    /* TLS_MEM_DUMP=0xADDR,LEN dumps raw guest bytes at the end of the run (hex + ASCII).
+     * Added for handover 5c.44 D3: the player-character texture streamed to 0x92AEAEC0
+     * decodes as all-transparent CMPR while the word at +0 reads as zero, and a *decode*
+     * cannot tell "decompressed garbage" from "never written" - the bytes can. */
+    {
+        const char* spec = getenv("TLS_MEM_DUMP");
+        if (spec) {
+            unsigned addr = 0, len = 0;
+            if (sscanf(spec, "%x,%u", &addr, &len) == 2 && len > 0 && len <= 4096) {
+                const u8* base = (const u8*)resolve_guest_pointer(&cpu, addr);
+                if (!base) {
+                    printf("[MemDump] 0x%08X: unmapped\n", addr);
+                } else {
+                    printf("[MemDump] 0x%08X len=%u\n", addr, len);
+                    for (unsigned off = 0; off < len; off += 32) {
+                        unsigned n = (len - off < 32) ? (len - off) : 32;
+                        char hex[3 * 32 + 1];
+                        char asc[33];
+                        unsigned h = 0;
+                        for (unsigned i = 0; i < n; i++) {
+                            h += (unsigned)sprintf(hex + h, "%02X", base[off + i]);
+                            unsigned char c = base[off + i];
+                            asc[i] = (c >= 32 && c < 127) ? (char)c : '.';
+                        }
+                        asc[n] = 0;
+                        printf("  +%04X %-64s %s\n", off, hex, asc);
+                    }
+                }
+                fflush(stdout);
+            }
+        }
+    }
+
     tls_debug_dump_full(&cpu, frame, "Runner Execution Completed");
 
 #ifdef _WIN32

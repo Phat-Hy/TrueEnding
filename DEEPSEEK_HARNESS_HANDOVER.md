@@ -7040,12 +7040,32 @@ width, title to its right. So the illustration *slot* is there and is the wrong 
 64x64 white CMPR drawn with vertex colour `(30,0,0)`) is not the illustration - it is a small decorative
 plate in the same corner.
 
-**D3. b0..b5 are the illustration, and their texture is empty.** `TLS_TEX_ALPHA_ADDR=0x92AEAEC0` (b0/b1's
-texture) reports **opaque=0, clear=65536** - every texel decodes transparent, i.e. the CMPR blocks are
-`0xFF`-filled, which is what an address that was never streamed looks like. That plus their NDC z of
-13.3..22.9 (whole-mesh clipped) is why the largest element of the page is missing. Compare the textures that
-*do* load: rock `0x91EEEDE0` opaque=65536; crest `0x921FEAE0` opaque=16384 with corner `0xFF000000` and
-centre `0xFFF6F6F6` (a black-on-white plate, i.e. an opaque image - see D4).
+**D3. b0..b5 are the illustration, and their texture address is FREED SCRATCH MEMORY.** `TLS_WATCH_ADDR`
+on the address b0/b1 name (`0x92AEAEC0`, 256x256, fmt=14) says what lives there and when:
+
+```
+frame 1872  pc=0x80625640/0x80625650  lr=0x8046BC54   0x00000000 -> .. -> 0x63686E6B   "chnk"
+frame 1872  pc=0x80625640/0x80625650  lr=0x8046BC54   0x00000000 -> .. -> 0x74657874   "text"
+frame 1872  pc=0x804715B4             lr=0x804780FC   0x63686E6B -> 0x66697864
+frame 1883  pc=0x800D6CF0             lr=0x800D7168   -> 0x00000000 (freed / cleared)
+   ...and nothing writes it again up to frame 4100.
+```
+
+So it is a **string scratch buffer** ("text"/"chnk" are being formatted there), freed at 1883; at frame 4000 the
+word is `0x00000000` and the 15 150-vertex batch that names it samples zeroed memory.
+
+**Correction to D3 as first written**: it read `opaque=0, clear=65536` from `TLS_TEX_ALPHA_ADDR` as "the
+texture is 0xFF-filled and never streamed". That print was the upload at **frame 1872**, when the address held
+those ASCII bytes (decoded as CMPR that is all code-3 = transparent) - not the page frame. `TLS_TEX_ALPHA_ADDR`
+prints on upload, and that address is uploaded once, 2000 frames before the page. The honest statement is the
+watch's: **b0..b5 sample freed scratch memory**, which means either the batch's texture binding is stale in our
+pipeline or the texture they want was never loaded - and the two are distinguishable by dumping the texture
+units the guest actually bound at that moment (`TLS_TEV_PROBE` prints the per-batch texmap addresses).
+
+**D3b. The textures that do load look normal**, and that contrast is what makes D3 worth chasing: rock
+`0x91EEEDE0` opaque=65536; crest `0x921FEAE0` opaque=16384, corner `0xFF000000`, centre `0xFFF6F6F6` (a
+black-on-white plate - see D4); the parchment/sky scratch `0x921DEA60` holds sky colours at one moment
+(`corner 0xFF477FB1`, `centre 0xFF83D2EE`) and parchment at another, i.e. it too is reused scratch.
 
 **D4. The crest decodes as an opaque black-on-white plate.** With `TLS_TEV=1` (the only path that uploads
 texmap1) `0x921FEAE0` reads opaque=16384, clear=0, corner `0xFF000000`, centre `0xFFF6F6F6`. In the
@@ -7058,7 +7078,63 @@ never be the ink-on-parchment crest without either a transparent source or the T
 `data/texture/ef_hkr02n_c.texture` stream. Find what fills `0x92AEAEC0`, whether that request completed, and
 the illustration should appear; the projection (z 13..22) is the second half of the same defect.
 
-**State**: no code change in this section; it is the reference and its reading. Build green, invariant PASS,
+#### E. The character textures are streamed, decoded, decompressed - and land as a PATTERN
+
+Following D3's address (`0x92AEAEC0`) through the loader found the whole chain intact except the last step.
+
+**E1. The address is a real texture destination.** Request #262 names the file and the buffer:
+
+```
+[TLS 8046BBF0] #262 ... st=1 (4=21568, 8=0x92AEAEC0, 32=19462) name='data/texture/pc_ga_g_a01.texture'
+```
+
+and the run loads a whole character set into that arena: `pc_ga_g_a01`, `pc_wa_g_a01(_cl01..03)`,
+`pc_up_g_b01(_cl01..02)`, `pc_lo_g_a01`, `pc_lo_g_b01`. So **b0..b5 are the player character** - which is
+what the reference's big illustration is - and the data path reaches the right address.
+
+**E2. The request completes, retries, and is freed - it does not stay stuck.** `TLS_WATCH_ADDR` on the
+request's status word:
+
+```
+frame 1870  created, st=1, name written
+frame 1872  st 1 -> 2 -> 3            (accepted -> finished)
+frame 1884  st 3 -> 1 -> 2 -> 3       (re-requested, finished again)
+frame 1935  request freed/zeroed
+```
+
+**E3. All DVD reads return their full length** (238 reads, 0 short), so the pack side is fine.
+
+**E4. The decompress is called with the right destination** -
+`[TLS CXDecompressFast] ENTER src=0x80CE2040 dst=0x92AEAEC0 (lr=0x8046BC54)` - and the host's
+`CXDecompressFast` replacement is a probe only (`return 0`), so the guest's own routine runs.
+
+**E5. What actually lands there is a repeating pattern, not a texture.** New `TLS_MEM_DUMP=0xADDR,LEN`
+(raw guest bytes at end of run):
+
+```
+[MemDump] 0x92AEAEC0 len=128
+  +0000 00000000FFFFFFFF00000000FFFFFFFF00000000FFFFFFFF00000000FFFFFFFF
+  +0020 00000000FFFFFFFF00000000FFFFFFFF00000000FFFFFFFF00000000FFFFFFFF
+  ...
+```
+
+As CMPR each 8-byte block is `c0=0x0000 c1=0x0000 bits=0xFFFFFFFF` -> `c0 <= c1` and every index is 3,
+i.e. **fully transparent** - which is exactly what the decoded-alpha probe reported (`opaque=0
+clear=65536`). So the illustration's textures never become texels: the destination holds a repeating
+`0x00000000 / 0xFFFFFFFF` pattern.
+
+**E6. Correction to D3.** D3 first read that probe value as "0xFF-filled, never streamed". The upload it
+printed was at frame 1872, *before* the decompress - so neither reading was right: the data does arrive and
+the decompress does run, and the result is the pattern above. The watch's "no change" at `+0` was also
+consistent with this, because `+0` is `0x00000000` both before and after.
+
+**What this means for the page**: the largest missing element is the player character, and its textures are
+delivered to the right place and then replaced by a pattern. That is one concrete defect with a known
+address, one known source file (`pc_ga_g_a01.texture`, 19 462 bytes), and a known landing pattern - the
+best-posed problem the page has produced so far. The z-clip (13.3..22.9) is the second half and is not
+touched by any of this.
+
+**State**: only the `TLS_MEM_DUMP` instrument is new; no rendering change. Build green, invariant PASS,
 0 changes to `src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
 frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
 created at 1 348 992 / 29 344 - so both new instruments are inert by default and no default-path pixel moved.
