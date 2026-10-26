@@ -4945,3 +4945,36 @@ the host frame is full-height (no 10% letterbox bar, whereas the reference has o
 absent at this frame, the image is still brighter and more contrasty than the reference, and black
 patches remain at the top-left and top-centre. Those are separate and each is now measurable against
 the reference.
+
+#### 5c.32a The fabricated fade is RETIRED (faithful by default), with both ends measured
+
+`case 0x80360A2C` no longer fabricates "fade complete" by default. The guest's own coordinator runs,
+and the fabricated result is opt-in via `TLS_FAKE_FADE=1` for comparison only. `TLS_NO_FAKE_FADE` is
+still honoured as a no-op so old scripts keep working.
+
+**The old claim that this stub was load-bearing was mis-attributed.** "Bypassing the overrides regresses
+the title (p50 203 -> 174)" conflated two different overrides. Measured in isolation with the standard
+3-A script and `TLS_SHOT_FRAMES=1448`:
+
+| configuration | title invariant at f=1448 |
+|---|---|
+| default (fabricated fade) | mean=(102,188,205) p50=203 |
+| `TLS_NO_FAKE_FADE=1` alone | mean=(102,188,205) p50=202 - **intact** |
+| `TLS_NO_SCRIPT_FILTER=1` alone | mean=(2,2,2) p50=0 - **title never renders** |
+| faithful default (this change) | mean=(102,188,205) p50=203 - **unchanged** |
+
+So the **script filter** is the load-bearing override; the fade stub never was. Retiring the fade costs
+the title nothing and fixes the cinematics:
+
+* Chapter-1 card frame `f=2251`: **183.9 -> 54.7** (reference `run2/framedump_2000` = 25.1);
+* title invariant `f=1448`: **203 -> 203** (identical, mean identical).
+
+**Methodology lesson (cost me a wrong measurement this round)**: do **not** take several screenshots in
+one run and compare across them. A run with `TLS_SHOT_FRAMES='1448,2251,3251'` reported f=2251 as
+(164,173,174) while a single-shot run with identical input reported (58,56,50). Take **one screenshot
+per run**, and keep the input script identical between the runs being compared - the first attempt here
+also compared a 3-`A` title run against a 5-`A`+`UP` intro run, which are different screens entirely.
+
+**Still open on this defect**: at f=2251 the host is ~2.2x the reference's mean, and the residual
+differences in 5c.32 stand (no letterbox bar, no card text at that frame, black patches). The fade was
+the 7x component; the remaining 2.2x is a separate, smaller question.

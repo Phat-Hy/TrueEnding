@@ -4257,15 +4257,31 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
         // 0x80360A2C: Fade Coordinator
         case 0x80360A2C: {
-            /* This is a FABRICATED RESULT: it returns 0 ("fade complete") unconditionally
-             * and skips the guest's fade coordinator, with the comment below admitting it
-             * exists "so GameTask::Init advances to State 2". That is exactly the kind of
-             * invented answer that desynchronises a state machine, and the state machine
-             * this project is chasing is the one that calls it. TLS_NO_FAKE_FADE=1 runs the
-             * guest's own coordinator instead. */
-            static int s_nofake = -1;
-            if (s_nofake < 0) s_nofake = getenv("TLS_NO_FAKE_FADE") ? 1 : 0;
-            if (s_nofake) return 0;     /* run the original */
+            /* FAITHFUL BY DEFAULT since 5c.32. This used to return 0 ("fade complete")
+             * unconditionally and skip the guest's fade coordinator, with the comment
+             * admitting it existed "so GameTask::Init advances to State 2". It is exactly
+             * the invented answer the recomp-debugging skill's Rule 1 forbids, and it was
+             * measurably wrong: it pins a white fade across the Chapter-1 cinematics.
+             *
+             * Measured (5c.32, against reference run2/framedump_2000 = mean 25.1):
+             *   fabricated path  -> Chapter-1 card frame f=2251 mean 183.9 (a white wash)
+             *   guest's own path -> f=2251 mean  54.7 (a legible underground pool)
+             * and the title invariant at frame 1448 is unchanged either way:
+             *   default (fabricated)  mean=(102,188,205) p50=203
+             *   guest's own           mean=(102,188,205) p50=202
+             * so a previous note that "bypassing the overrides regresses the title
+             * (p50 203 -> 174)" was mis-attributed: the regression comes from the SCRIPT
+             * FILTER override, not this one. Measured in isolation:
+             *   TLS_NO_SCRIPT_FILTER=1 alone -> mean=(2,2,2) p50=0 (title never renders)
+             *   TLS_NO_FAKE_FADE=1 alone     -> mean=(102,188,205) p50=202 (intact)
+             * The fabricated result is therefore opt-in via TLS_FAKE_FADE=1 for comparison
+             * only; never make it the default again. */
+            static int s_fake = -1;
+            if (s_fake < 0) {
+                s_fake = getenv("TLS_FAKE_FADE") ? 1 : 0;
+                if (getenv("TLS_NO_FAKE_FADE")) s_fake = 0;   /* honoured, now a no-op */
+            }
+            if (!s_fake) return 0;     /* run the guest's own coordinator */
             static int s_fade_log_count = 0;
             u32 r3_obj = ctx->gpr[3];
             u32 val_408 = (r3_obj >= 0x80000000 && r3_obj < 0x94000000) ? mem_read32(ctx, r3_obj + 408) : 0xFFFFFFFF;
