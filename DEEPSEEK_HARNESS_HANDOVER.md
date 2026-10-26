@@ -2,27 +2,34 @@
 
 ## NEXT SESSION — START HERE
 
-**Tree state.** Clean at the commit that added this block (check `git log --oneline -4`). Build green
+**Tree state.** Clean at the commit that added this block (`git log --oneline -4`). Build green
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
--> Game`, frame 3500 = `A00272DF30BEDB5FB9D06E60DBDC365A9B47328ACCED1A496D999FD34949432E`). **0 changes
-to `src/`.** Current state lives in §5c.41; §5c.40 and everything earlier is history.
+-> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
+creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
+state is **§5c.43**; §5c.42 and everything before it is history.
 
-> **§5c.41 locates the create gate.** `fn_800A2DE0` (+0x1A0) decides create-vs-skip: it calls `fn_80622050 -> fn_80621D70 -> ISFS_ReadDir(count-only)` and takes the create (`state 4`, `NANDCreateAsync`) unless that status probe succeeds and reports `1` (which needs ReadDir to answer `-101`). **Measured: that block never executes** - the state handler that reaches it is never entered, so the create is gated upstream in the state machine, not in `/dev/fs`. Read §5c.41 before anything else.
+> **§5c.43 CLOSES THE CONTINUE QUESTION, and the answer is a boundary.** With the save from 5c.42 K left in
+> place (not deleted) the title opens it for *read*, reads all 1 348 992 bytes with no NAND error, passes
+> its own length check (`out_len == expected == 1348992`) and takes mode 9 into `Game` at frame 1680 - the
+> 5c.39 manager-state-16 stall does not reproduce. It cannot show a *restored* game: the save's payload is
+> 1 348 992 **zero** bytes, so frame 4000 is **byte-identical** to a fresh boot. Telling CONTINUE from NEW
+> GAME needs an in-game save, i.e. gameplay past the tutorial page.
 >
-> **§5c.40 CHANGES WHERE THE SAVE DEFECT STARTS.** The host NAND is now a real device model (six
-> fabrications retired, measured behaviour-identical: the frame-3500 hash did not move). What that
-> measurement establishes is that **no device answer gates the create any more: the guest never asks
-> for it.** The whole NAND conversation of a 10 000-frame run is 81 lines and ends at frame 1638 with
-> `ReadDir("/banner.bin") -> -106`; after that the game plays Chapter 1 for 8 400 frames without
-> touching the NAND. Read §5c.40 E before spending another round on `/dev/fs`.
->
-> **Check the confinement before anything else.** This session began at Windows Low mandatory
-> integrity (`whoami /groups` -> `Mandatory Label\Low Mandatory Level`) and in that state *nothing*
-> verifies: the build dies with `PermissionError: build/recomp/objects.rsp`, `git hash-object -w` says
-> "insufficient permission for adding an object to repository database", and `tools/invariant.ps1`
-> says "Access to the path 'logs\invariant.log' is denied". ACL repair cannot fix it (it is not an ACL
-> problem); the session has to run at full access. One `danger-full-access` escalation proved it, and
-> after the policy was switched to `danger-full-access` / medium integrity every write worked.
+> **§5c.43 also settles what is wrong with the frame-4000 page: our own ink matte.** The page's art is all
+> in the command stream (sky `0x91F3FFE0`, parchment sheet `0x921DEA60`, illustration plate `0x90D19B80`,
+> font atlas `0x90703AA0`), and the ink-plate reconstruction in `recomp/gfx_d3d11.c` deletes the parchment
+> (its plate becomes transparent), which leaves the page with no background at all. `TLS_NO_INK_MATTE=1`
+> proves it in one run: the sheet renders (`docs/evidence/host_f4000_no_ink_matte_5c43.png`). Two things
+> stay open on that frame: the sheet is drawn **twice** (b26 before the plate/text, b30 after, so with the
+> sheet restored the second draw covers them), and the additive tail still saturates the sky to 249 before
+> the page draws. Read §5c.43 C before touching the renderer.
+
+**Check the confinement first.** A shell at Windows **Low** mandatory integrity cannot verify anything: the
+build dies with `PermissionError: build/recomp/objects.rsp`, `git hash-object -w` says "insufficient
+permission for adding an object to repository database", and `tools/invariant.ps1` says "Access to the path
+'logs\invariant.log' is denied". It is not an ACL problem; the session must run at full access (this
+session: `danger-full-access` / medium integrity). `whoami /groups | Select-String 'Mandatory Label'`
+answers it in one command.
 
 **MANDATORY, before any other command:** every runner launch opens the game window **minimized**:
 
@@ -30,62 +37,53 @@ to `src/`.** Current state lives in §5c.41; §5c.40 and everything earlier is h
 build\recomp\tls_runner.exe --window --minimized --frames <N> --fps 60
 ```
 
-`--minimized` exists (added this session, `recomp/host_runner.c`): the window is created hidden, shown with
+`--minimized` exists (`recomp/host_runner.c`): the window is created hidden, shown with
 `SW_SHOWMINNOACTIVE`, and `SetForegroundWindow`/`SetFocus` are never called. `Play_TheLastStory.bat` and
 `tools/invariant.ps1` already pass it. Do not launch the runner windowed-in-foreground and do not automate
-input against a foreground game window — focus stealing has already cost this project a full session of
-Dolphin debugging, and the capture is unaffected by minimization (verified: identical frame-3500 hash).
+input against a foreground game window - focus stealing has already cost this project a full session, and
+the capture is unaffected by minimization (identical frame-3500 hash).
 
-**The two open defects, and exactly where to start.**
+**The next three steps, in order of value.**
 
-1. *Tutorial page at frame 4000* — white field of coloured clumps instead of art, plus a solid black box
-   where the page's illustration belongs; the page's *text* ("Movement and Camera") and its SKIP button
-   render cleanly (`docs/evidence/host_f4000_tutorial_page_5c38.png`). **§5c.38 retired the 5c.37 lead**:
-   the guest itself declares every frame-4000 copy destination as `320x224 fmt=4` (`TLS_COPYDST_PROBE`),
-   so the writer that produces `320x224` is faithful and must not be "fixed"; the `80x56 fmt=6` /
-   `160x112 fmt=1` samples of the same address are the guest's own aliasing of one scratch buffer.
-   Measured structure: b0..b8 (the 3D scene) have NDC z in `[13.3..22.9]`, i.e. outside the clip volume,
-   so they legitimately draw nothing; the white comes from eight full-screen additive passes that read
-   EFB-copy destinations *this frame does not write* (leftovers from earlier frames); b27 (64x64 CMPR at
-   `0x90D19B80`) is the black box. **Start here:** the page's art is missing, not mis-scaled — find where
-   that page's textures are supposed to come from (b27's texture and the additive chain's sources), and
-   compare against a Dolphin capture of this exact moment, which the corpus still lacks. **§5c.39 checked
-   the corpus for it and it is not there**: `dolphin-ref/run3` frames 4370-8297 (its whole Chapter-1
-   stretch) contain no page brighter than mean 170, and `run4`'s 2435 frames are the title splash plus a
-   boot screen. A tutorial-page reference needs a new Dolphin run that keeps playing past the save dialog.
-2. *Save dialog says "the data is corrupted"* — **§5c.39 moved the start of the chain up one layer and
-   corrected 5c.38**: `fn_800A4228` is not guest code, it is a replacement that *writes* `0` into the
-   manager's state, and at the title's decision point (`lr=0x80534C58`) the manager is genuinely busy
-   (`state=7 status=0`) and finishes honestly with **status 11**, which takes the title to mode 9 with **no
-   dialog at all**. Retiring that fabrication was measured and reverted: with it the MENU renders but NEW
-   GAME fades to black and never reaches Game (the create half of the save is missing). A dialog at this
-   moment is **faithful** - Dolphin's run3 goes title -> save dialog -> NEW GAME -> Chapter 1, and Dolphin's
-   NAND holds the save the game wrote (`savedata.dat` **1 348 992** bytes, `banner.bin` **29 344**). Seeding
-   those two files into `savedata/` proved the host side works (GetAttr reports 1348992, open succeeds, the
-   32-byte header is read, no dialog) and exposed the next defect: the run then stalls at manager `state=16`
-   waiting on the texture stream `data/texture/ef_hkr02n_c.texture` (`status=3`). **Start here:** `/dev/fs`
-   command **12 is GetUsage** (the create path's space probe, still unmodelled - this is what stops the file
-   from ever being created) and command **4 is ReadDir**, not CreateFile (corrected this session; create is
-   command 9). `/dev/fs` handlers are still off by default (`TLS_ISFS_SERVICE=1` to service them).
-   `TLS_NAND_PROBE=1` prints every question and answer, `TLS_SAVE_PROBE=1` now also prints the manager's
-   `state`/`status` at `0x800A4228` and every `fn_800A500C(mgr, result, op)` completion.
+1. *Make the ink matte per-batch instead of per-texture.* It is applied at texture **upload** time
+   (`get_or_upload_gx_texture`), cached per guest address, and its rule `base_luma - min_luma > 60 &&
+   max_delta <= 10` cannot tell a logo's cream plate (must disappear) from a page's parchment (is the
+   background). The page proves both cases are in the same frame. Measured effect today:
+   `TLS_NO_INK_MATTE=1` turns the page into a parchment sheet. The next measurement is **all** vertex
+   colours/UVs of b26 vs b30, because the frame draws the same opaque sheet twice and the second draw
+   covers b27/b28 - so at least one of those two draws must carry something `col0` does not show.
+2. *A reference frame for the tutorial page.* The corpus still has none (`run3` 4370-8297 and all of
+   `run4` were checked in 5c.39). A new Dolphin capture means driving Dolphin's window;
+   `tools/dolphin_capture.py` does it by posting Win32 key messages, which the no-foreground-automation
+   rule above puts out of scope for an agent session, so this has to be a human-driven capture.
+3. *Prune the inert diagnostics* if the file should be leaner: the `TLS_NAND_PROBE` set (NAND-LAYER,
+   SAVEMOD, SAVEAPI, SAVEKIND0, STATE1, SAVECREATE, SAVECREATE3, SAVEDRV, StateTab) and `TLS_IPC_DELAY`.
+   `TLS_NO_4228_FABRICATION` no longer exists - the fabrication is gone.
 
-**Rules that decide whether a round is wasted** (all learned the hard way; details in §5c.37 / 5c.33a):
+**Rules that decide whether a round is wasted** (all learned the hard way; details in §5c.37 / 5c.42 / 5c.43):
 
 * **Environment variables do not survive between shell invocations.** Set `TLS_INPUT_SCRIPT` *in the same
-  command* as the run, and check the log's `Seq:` line before believing any probe output. Three runs
-  (~21 min) were spent measuring the title screen because of this.
-* State the input script with every measurement; conclusions do not transfer between press schedules.
-* Unset flags with `Remove-Item Env:\NAME` — assigning `''` leaves `getenv()` non-NULL (§5c.33a).
-* One back-buffer screenshot per run; probes that read the back buffer (`TLS_BATCH_PROBE`) are for
-  per-batch bisects only.
-* Never hand-edit `build/recomp/generated/chunks` (re-lift) and never mutate guest state to make progress.
-* Prefer retiring a fabricated answer over adding a new one — every real fix so far came from one.
-* `src/` is read-only. Edits go in `recomp/`, `tools/`, `docs/`, and `build/` is git-ignored.
+  command* as the run, and check the log's `Seq:` line before believing any probe output.
+* Unset flags with `Remove-Item Env:\NAME` - assigning `''` leaves `getenv()` non-NULL (§5c.33a).
+* **Never compare frame N with N+1 on the Chapter-1 page.** The engine alternates a page half (37 batches,
+  xfbs=1) with a gameplay half (54 batches, xfbs=0) every other frame; `TLS_PRESENT_WINDOW=a,2` shows the
+  parity in two lines. `TLS_PRESENT_ON_XFB` is ON by default and already skips the non-XFB half.
+* `TLS_EFB_CHAIN` is a **single** frame, and the copy destinations the page samples are written by the
+  *other* half of the cycle - probe the odd frame (e.g. 3961) to see them.
+* `Seq:`'s `GX: <n> vtx` is the state at print time, not the frame's final batch list; use
+  `TLS_PRESENT_PROBE` for per-frame batch/vtx counts.
+* A texture that is not re-uploaded inside a frame produces no `TLS_TEX_DUMP_FRAME` output - that is a
+  measurement ("the cached texture is what both draws sampled"), not a failure of the instrument.
+* One screenshot per run (`TLS_SHOT_FRAMES=<n>`); the runner also dumps a fixed schedule up to frame 1800.
+* A probe only fires at a dispatch point - a branch target or a `bl` return address - never mid-block.
+* Never hand-edit `build/recomp/generated/chunks` and never mutate guest state to make progress.
+* `src/` is read-only. Edits go in `recomp/`, `tools/`, `docs/`; `build/` is git-ignored.
+* Prefer retiring a fabricated answer over adding one, and measure what a replacement writes, not just what
+  it returns. A bare grep for a 32-bit address misses every `lis`/`addi` pair (`python tools/find_xref.py`).
 
 **Verification is not optional:** `python tools/recomp_harness.py build-runner`, then
-`pwsh tools/invariant.ps1` (exit 0). If a change intentionally alters frame 3500, re-record the hash and
-say so in the handover. Commit per change.
+`pwsh tools/invariant.ps1` (exit 0). Re-record the frame-3500 hash only for an intentional visual change,
+and say so. Commit per change. Update this block when you land something.
 
 ---
 
@@ -6538,3 +6536,144 @@ Verification, all re-derived in this change:
 Note for anyone re-running by hand: the save now persists at
 `SaveData/title/00010000/534c5345/data/`. Delete it (or run `tools/invariant.ps1`, which does) to
 reproduce the create.
+
+### 5c.43 The CONTINUE path is real but blank, and the frame-4000 page is our own ink matte
+
+Session input script (the 5c.37/5c.38 schedule, set in the same command as every run):
+
+```
+TLS_INPUT_SCRIPT="600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A,3620-3632:A,3700-3712:A,3800-3812:A,3900-3912:A"
+```
+
+Unless stated otherwise, the save the game created at the end of 5c.42 K was **left in place** on purpose
+(`SaveData/title/00010000/534c5345/data/`, pre-run sha256 `55BDC647..`) - this section measures the continue
+path. `tools/invariant.ps1` still deletes it, because that guard is a fresh-console boot.
+
+#### A. The title takes the save the game wrote, and the 5c.39 state-16 stall is gone
+
+`TLS_NAND_PROBE=1 TLS_SAVE_PROBE=1`, 4200 frames, save present:
+
+```
+#25 ISFS ioctl cmd=6 path='/title/00010000/534c5345/data/savedata.dat' -> 0    ; GetAttr, the real length
+#27 ISFS_OpenAsync  mode=1 (READ) -> fd=5 fp=host-file
+#30 IOS_ReadAsync   len=32 -> 32                                              ; the 32-byte header
+#36.. IOS_ReadAsync len=192 -> 192 at 0x13580-byte strides                     ; header of every 79232-byte block
+op=11 completions 32, 192, 79232, 158432, ... 1267232                         ; every one a positive length
+op=13 result=192 (per block) ; op=17 close -> 0
+err->status(0) x21                                                            ; no NAND error reached the mapper
+```
+
+Then the title's own verdict - same shape as 5c.38 D, opposite inputs:
+
+```
+80534C58 fn_800A4228 -> flag=0     (manager finished, status 0)
+         status == 0               -> run the length check
+80534C7C fn_800A472C -> 1          (check PASSED)
+80534CC0 out_len=1348992 expected=1348992 -> MODE 9
+SetMode: new_mode=9 (old=5) lr=0x80534D00
+Seq: Titl at 1620, Game at 1680
+```
+
+No `SetMessage` call happens at all, so the "The save data cannot be used because the data is corrupted"
+dialog of 5c.38/5c.39 does not appear on this path, and the run leaves the file byte-identical (sha256
+before == after: loading does not rewrite the save).
+
+**Correction to the mode-9 label.** 5c.38/5c.39 called mode 9 "the corrupted dialog". `0x80534CCC` branches
+to `0x80534CF4` -> mode 9 when the two lengths are **EQUAL**, which is exactly the case with a real save. It
+is the "this save is the right one, use it" branch. The dialog is the *other* branch (check failed -> mode 6
++ message 12), which is what a console with no save file takes.
+
+#### B. It cannot be told apart from a new game, and the reason is measured: the save is blank
+
+* `savedata.dat` is 1 348 992 bytes and **every byte is zero**; `banner.bin` does carry a real `WIBN`
+  header (28 540 of 29 344 bytes non-zero).
+* The frame-4000 screenshot of this save-present boot is **byte-identical** to 5c.38's fresh-boot page shot
+  (sha256 `4E9CA41B7E23B8D110CA7C9FAEE5EF70FD015661DC12E51637908DF03BC2217C` for both,
+  `docs/evidence/host_f4000_continue_save_5c43.png`).
+
+So the load path runs end to end but there is no saved *state* to restore: CONTINUE vs NEW GAME needs an
+in-game save, i.e. gameplay past the tutorial page. Record the boundary; do not claim a restored game.
+
+#### C. The frame-4000 page: the art is all submitted, and our own ink matte deletes the background
+
+**C1. What the frame submits.** `TLS_BATCH_DUMP=4000` gives 37 batches / 9 771 vtx and the present line at
+count 4000 agrees. Dumping the textures behind those batches (`TLS_TEX_DUMP`) names the page for the first
+time:
+
+| batch | texture | what it is |
+|---|---|---|
+| b0..b5 | CMPR 256x256 / 128x128 / 128x256 | the 3D scene; NDC z 13.3..22.9, legitimately outside the clip volume |
+| b9 | `0x91F3FFE0` 1024x512 CMPR | **the sky** (clouds), drawn full-screen -> (119,123,117) |
+| b12..b24 | EFB-copy destinations | the composite tail; b15..b24 are SRCALPHA/ONE and sum 66->110->133->172->192->224->242->249 |
+| b26, b30 | `0x921DEA60` 512x512 CMPR | **the parchment sheet** (aged paper + engraved border), full-screen |
+| b27 | `0x90D19B80` 64x64 CMPR | the illustration plate, NDC [-0.92..-0.66, 0.34..0.71] |
+| b28 | `0x90703AA0` 512x256 I4 | **the font atlas** -> "Movement and Camera" |
+| b31..b36 | `0x90D19B80`, `0x904E5EE0`, `0x9076E5E0` | the SKIP button |
+
+Evidence: `docs/evidence/tex_921DEA60_512x512_f14_5c43.png` (parchment),
+`docs/evidence/tex_91F3FFE0_1024x512_f14_5c43.png` (sky),
+`docs/evidence/tex_90703AA0_512x256_f0_5c43.png` (font atlas),
+`docs/evidence/tex_90D19B80_64x64_f14_5c43.png` (the plate).
+
+**C2. The black box is drawn exactly as the guest asked - our decode is not at fault.** The box's pixels are
+*uniformly* `(30,0,0)`, which is the batch's own vertex colour `col0=0xFF00001E` decoded as R=0x1E, G=0,
+B=0, A=0xFF; with a white plate texture and SRCALPHA/INVSRCALPHA that is the correct result.
+**Retired: "the black box is a texture decode or a lost alpha".** The new `TLS_TEX_DUMP_FRAME` form
+(`tex_<addr>_<WxH>_f<fmt>_p<frame>_s<ordinal>.ppm`) also explains why the earlier dump misled: the buffer is
+**not re-uploaded inside frame 4000**, so the plate and the SKIP button both sample the one cached white
+texture, and the unconditional dump could only ever show the run's last state.
+
+**C3. The parchment is erased by the ink matte in `recomp/gfx_d3d11.c`.** The per-batch back-buffer probe
+shows b26 and b30 move the average by *nothing* (`249,249,246` before and after each): two full-screen opaque
+draws are being thrown away. The cause is the "dark ink on a light plate" reconstruction: the parchment has
+light corners and a dark engraved border, so `base_luma - min_luma > 60` holds, `is_ink_art` is true, and
+every plate texel is rewritten to alpha 0 while the ink survives. The rule was written for the title logo /
+menu text / button prompts, where the plate must disappear; on a page whose plate **is** the background it
+deletes the page.
+
+Measured proof, with the new inert diagnostic `TLS_NO_INK_MATTE=1`:
+
+```
+ink matte ON  (default)          box (30,0,0) uniform, glyphs present, background (242,248,249)
+ink matte OFF (TLS_NO_INK_MATTE=1)  the parchment sheet renders - and the box and the glyphs are gone,
+                                    because b30 draws the same opaque full-screen sheet AGAIN after them
+```
+
+`docs/evidence/host_f4000_no_ink_matte_5c43.png` is the flag-off frame: a clean parchment page with its
+engraved border and the SKIP button, no white field, no black box, no title text.
+
+So two facts stand: the page's background art is submitted and our preprocessing deletes it; and the frame
+submits the sheet **twice** (b26 before the plate and text, b30 after them), so with the sheet restored the
+second draw covers the page's own illustration and title. What alpha, or what draw order, those two draws are
+supposed to carry is the open question, and `col0` alone cannot answer it: the next instrument is a per-batch
+dump of *all* vertex colours and UVs.
+
+**C4. Retired: "the additive chain reads stale leftovers"** (5c.38 C). `TLS_EFB_CHAIN=3961` - an odd
+(gameplay-half) frame - shows **16** copies, and they include every address the page's tail samples:
+
+```
+0x90536FE0 640x448 · 0x903DBDC0 160x112 · 0x90395DC0 320x224 · 0x9038D1C0 80x56 (x3) / 160x112 (x5)
+0x903917C0 80x56 / 160x112 · 0x905C3000 640x448 (x2) · 0x900997E0 640x448 (xfb=1)
+```
+
+with `srcavg` = the cave at `(50,56,57)`. The page is a **two-frame composite**: the odd frame renders the
+scene and copies it into those destinations, the even frame composites them (b12..b24) and then draws the
+page. The tail's inputs are not stale, they are the previous frame's real render - and the tail still
+saturates them to 249 before anything of the page is drawn.
+
+**C5. Parity: never compare frame N with N+1 on this page.** `TLS_PRESENT_WINDOW=3996,10` shows every even
+present is the page (37 batches, 9 771 vtx, **xfbs=1**) and every odd one the cave (54 batches, 63 732 vtx,
+**xfbs=0**). `TLS_PRESENT_ON_XFB` is ON by default and already skips the odd half, so a screenshot is a frame
+the console would scan out - but a batch dump taken "at 4000" can land on the other half if the counters
+disagree (one run of this section reported 80 batches at 4000 for exactly that reason).
+
+**C6. `TLS_TEV=1` is not the answer.** With the TEV stage enabled the page is still saturated (mean 228 vs
+239) and the SKIP *label* disappears (`docs/evidence/host_f4000_tev_5c43.png`), so the TEV path is a
+different subject, not a fix for this frame.
+
+**Verification:** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
+frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
+created at 1 348 992 / 29 344 - so both new instruments are inert by default and no default-path pixel moved.
+0 changes to `src/`. New instruments, both default-off: `TLS_TEX_DUMP_FRAME` (per-frame, ordered texture
+uploads) and `TLS_NO_INK_MATTE` (disables the ink-plate reconstruction).
+
