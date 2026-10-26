@@ -2173,6 +2173,56 @@ static void probe_backbuffer_stats(unsigned* out_r, unsigned* out_g, unsigned* o
     ID3D11Texture2D_Release(bb);
 }
 
+/* Region readback for per-batch attribution (TLS_BATCH_RECT): the batch's own NDC
+ * rectangle only, so a 70x43-pixel UI element is measurable and no draw list is cut.
+ * NDC -> pixel uses the same mapping the renderer's viewport does: x = (ndc+1)/2*W,
+ * y = (1-ndc)/2*H (the projection already carries the flip that was measured earlier). */
+static void probe_backbuffer_rect(float mnx, float mny, float mxx, float mxy,
+                                  unsigned* out_r, unsigned* out_g, unsigned* out_b,
+                                  unsigned* out_dark, unsigned* out_n) {
+    *out_r = *out_g = *out_b = *out_dark = *out_n = 0;
+    ID3D11Texture2D* bb = NULL;
+    if (FAILED(IDXGISwapChain_GetBuffer(s_d3d11.swap_chain, 0, &IID_ID3D11Texture2D, (void**)&bb))) return;
+    D3D11_TEXTURE2D_DESC desc;
+    ID3D11Texture2D_GetDesc(bb, &desc);
+    int x0 = (int)((mnx + 1.0f) * 0.5f * (float)desc.Width);
+    int x1 = (int)((mxx + 1.0f) * 0.5f * (float)desc.Width);
+    int y0 = (int)((1.0f - mxy) * 0.5f * (float)desc.Height);
+    int y1 = (int)((1.0f - mny) * 0.5f * (float)desc.Height);
+    if (x0 < 0) x0 = 0;
+    if (y0 < 0) y0 = 0;
+    if (x1 > (int)desc.Width) x1 = (int)desc.Width;
+    if (y1 > (int)desc.Height) y1 = (int)desc.Height;
+    if (x1 <= x0 || y1 <= y0) { ID3D11Texture2D_Release(bb); return; }
+    desc.Usage = D3D11_USAGE_STAGING;
+    desc.BindFlags = 0;
+    desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+    desc.MiscFlags = 0;
+    ID3D11Texture2D* staging = NULL;
+    if (SUCCEEDED(ID3D11Device_CreateTexture2D(s_d3d11.device, &desc, NULL, &staging))) {
+        ID3D11DeviceContext_CopyResource(s_d3d11.context, (ID3D11Resource*)staging, (ID3D11Resource*)bb);
+        D3D11_MAPPED_SUBRESOURCE mapped;
+        if (SUCCEEDED(ID3D11DeviceContext_Map(s_d3d11.context, (ID3D11Resource*)staging, 0, D3D11_MAP_READ, 0, &mapped))) {
+            unsigned long sr = 0, sg = 0, sb = 0, n = 0, dark = 0;
+            for (int y = y0; y < y1; y++) {
+                const uint8_t* row = (const uint8_t*)mapped.pData + (size_t)y * mapped.RowPitch;
+                for (int x = x0; x < x1; x++) {
+                    const uint8_t* p = row + (size_t)x * 4;
+                    unsigned b8 = p[0], g8 = p[1], r8 = p[2];
+                    sb += b8; sg += g8; sr += r8; n++;
+                    if (r8 + g8 + b8 < 300) dark++;
+                }
+            }
+            if (n == 0) n = 1;
+            *out_r = (unsigned)(sr / n); *out_g = (unsigned)(sg / n); *out_b = (unsigned)(sb / n);
+            *out_dark = (unsigned)dark; *out_n = (unsigned)n;
+            ID3D11DeviceContext_Unmap(s_d3d11.context, (ID3D11Resource*)staging, 0);
+        }
+        ID3D11Texture2D_Release(staging);
+    }
+    ID3D11Texture2D_Release(bb);
+}
+
 static void probe_backbuffer_avg(unsigned* out_r, unsigned* out_g, unsigned* out_b) {
     *out_r = *out_g = *out_b = 0;
     ID3D11Texture2D* bb = NULL;
@@ -2841,6 +2891,44 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                                    batch->tex.guest_addr, batch->blend_enable, batch->src_factor,
                                    batch->dst_factor, gx_vtx[batch->vertex_offset].color, pr, pg, pb,
                                    pa, pmax, pred, pn, pbright);
+                            fflush(stdout);
+                        }
+                    }
+                    /* Per-batch REGION attribution (TLS_BATCH_RECT=<guest frame>).
+                     *
+                     * TLS_BATCH_PROBE above reads the whole back buffer, so a 70x43-pixel UI
+                     * element - the page's SKIP label - is invisible in its average, and
+                     * TLS_BATCH_CUTOFF cannot be used instead because cutting the loop leaves
+                     * the guest's end-of-frame EFB copies unserviced (handover 5c.43 F). This
+                     * reads back only the batch's own NDC rectangle, so it changes nothing
+                     * about the frame's inputs.
+                     *
+                     * Keyed on the PRESENT counter, like TLS_BATCH_DUMP and TLS_SHOT_FRAMES, because
+                     * g_runner_current_frame is one behind while the draw loop runs: measured
+                     * TLS_BATCH_RECT=4000 with the guest key listed a completely different scene
+                     * (19 batches, textures 0x91EBC460..) while 3999 listed the page, and 3999's
+                     * page is the frame the shot at 4000 captures (handover 5c.43 G). */
+                    {
+                        static int s_rect_frame = -2;
+                        if (s_rect_frame == -2) {
+                            const char* f = getenv("TLS_BATCH_RECT");
+                            s_rect_frame = f ? atoi(f) : -1;
+                        }
+                        if (s_rect_frame >= 0 && s_rect_frame == (int)s_d3d11_dump_count) {
+                            uint32_t vo3 = batch->vertex_offset;
+                            float mnx = 1e9f, mxx = -1e9f, mny = 1e9f, mxy = -1e9f;
+                            for (uint32_t vi = 0; vi < batch->vertex_count; vi++) {
+                                float x = gx_vtx[vo3 + vi].x, y = gx_vtx[vo3 + vi].y;
+                                if (x < mnx) mnx = x; if (x > mxx) mxx = x;
+                                if (y < mny) mny = y; if (y > mxy) mxy = y;
+                            }
+                            unsigned rr, rg, rb, rdark, rn;
+                            probe_backbuffer_rect(mnx, mny, mxx, mxy, &rr, &rg, &rb, &rdark, &rn);
+                            printf("[BatchRect] frame=%d after b%u tex=0x%08X blend=%d s=%u d=%u "
+                                   "ndc=(%.2f,%.2f)-(%.2f,%.2f) avg=(%u,%u,%u) dark=%u/%u\n",
+                                   s_d3d11_dump_count, b, batch->tex.guest_addr,
+                                   batch->blend_enable, batch->src_factor, batch->dst_factor,
+                                   mnx, mny, mxx, mxy, rr, rg, rb, rdark, rn);
                             fflush(stdout);
                         }
                     }

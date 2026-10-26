@@ -6811,12 +6811,48 @@ would have settled it are the two above. What *is* measured: the label is legibl
 (`docs/evidence/crop_skip_default_5c43.png`) and absent under `TLS_TEV=1`
 (`docs/evidence/crop_skip_tev_5c43.png`), at 5.94% vs 1.74% dark pixels in that box.
 
-**Next instrument, stated so it does not get re-derived**: a probe that reports the pixels a *single batch*
-wrote - a scissored readback of the batch's NDC bounds - instead of the whole-screen average
-`TLS_BATCH_PROBE` computes. That needs no cutoff, so it leaves the end-of-frame copies (and therefore the
-frame's inputs) intact.
+**Next instrument, stated so it does not get re-derived**: a per-address alpha/composition probe that can
+reach the page's own textures (the existing `TLS_TEX_ALPHA_PROBE` caps at 30 uploads and the EFB-copy churn
+exhausts it long before frame 4000). The per-batch *pixel* attribution now exists - `TLS_BATCH_RECT`
+(§5c.43 G) - and it is what measured b34 as the label batch.
 
-**Verification (5c.43 C-F):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
+#### G. The SKIP label's batch is now measured, and the instrument that did it
+
+New instrument: **`TLS_BATCH_RECT=<present frame>`** - a scissored readback of each batch's own NDC
+rectangle (mean RGB + dark-pixel count over that rectangle only), so a 70x43 UI element becomes measurable
+without cutting the draw list. At the page frame, default path:
+
+```
+b26 0x921DEA60 (-1.00,-1.00)-(1.00,1.00)  avg=(248,248,245) dark=   347/921600   the sheet
+b27 0x90D19B80 (-0.92, 0.34)-(-0.66,0.71) avg=(  7,  7, 36) dark= 20701/ 21484   the plate (dark)
+b28 0x90703AA0 (-0.61, 0.48)-( 0.28,0.59) avg=(198,198,202) dark=  4051/ 21660   the page title
+b32 0x90D19B80 ( 0.71,-0.83)-( 0.79,-0.70) avg=( 46, 46, 45) dark=  2430/  2520   button plate
+b34 0x9076E5E0 ( 0.69,-0.71)-( 0.80,-0.64) avg=( 64, 64, 63) dark=  1301/  1750   <- THE SKIP LABEL
+```
+
+**b34 is the SKIP label, measured rather than inferred** (74% of its own rectangle goes dark when it draws).
+That makes the TEV acceptance a number instead of a picture: under `TLS_TEV=1` that rectangle must also go
+dark.
+
+**Instrument gotchas, both measured:**
+
+* the probe must key on the **present** counter, not `g_runner_current_frame`: the draw loop runs one frame
+  *before* the guest counter advances. `TLS_BATCH_RECT=4000` with the guest key listed a completely
+  different scene (19 batches, textures `0x91EBC460..`); `3999` listed the page - and 3999's page is the
+  frame the shot at 4000 captures. The probe now uses the present counter, the same one `TLS_BATCH_DUMP`
+  and `TLS_SHOT_FRAMES` use.
+* **under `TLS_TEV=1` any back-buffer readback ends the run before frame 4000** (no `[BatchRect]` lines at
+  all, and the same early exit as `TLS_TEV`+`TLS_BATCH_PROBE` in E). TEV work therefore has to be judged by
+  shots and crops, not by per-batch readbacks.
+
+**The TEV label question is now sharp**: b28 (I4 atlas, renders under TEV) and b34 (IA4 atlas, vanishes
+under TEV) carry **identical** combiner words (`rgb 0x0008FCAF`, `alpha 0x0008F2F4`), so the difference is
+entirely in how the texture format's alpha reaches the stage - i.e. the IA4 decode or the TEV's use of it,
+not the combiner. `TLS_TEX_ALPHA_PROBE` cannot answer it: its cap is 30 uploads, which the page's EFB-copy
+destinations exhaust long before frame 4000. A per-address alpha probe (or raising the cap past the copy
+churn) is the next instrument.
+
+**Verification (5c.43 C-G):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
 frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
 created at 1 348 992 / 29 344 - so both new instruments are inert by default and no default-path pixel moved.
 0 changes to `src/`. New instruments, both default-off: `TLS_TEX_DUMP_FRAME` (per-frame, ordered texture
