@@ -4526,6 +4526,31 @@ registered** - i.e. work the "never creates a player/scene task" end of the obje
 **Do not** re-derive: the jump tables, the phase numbering, the A-edge gate, the slot-record layout,
 the payload factory/ctor, or any of the rendering work above. All are recorded with measurements.
 
+#### 5c.30d Two more false leads, and a strategic recommendation
+
+**Scanner refinement #2**: when scanning for `stw`/`lwz` by immediate, exclude `ra == 1` as well as
+`ra == 0`. Stack stores are everywhere and their offsets collide with object offsets. The
+`mgr+0x6E4` / `mgr+0x730` slot-resource fields looked like they had a filler at
+`0x80474F80`/`0x80474FBC`; both turned out to be `stw r0, 1764(r1)` / `stw r0, 1840(r1)` - plain
+stack slots. With `ra != 1` applied the list changes completely.
+
+**Scanner refinement #3**: a fixed offset does *not* identify a structure, because every class in a
+module reuses the same small offsets. `0x805758D8` (GameLoadTask module) writes `r29+0x6E4`, which is
+exactly `manager+0x6E4` - but reading it shows a table init with a **40-byte stride**
+(`0x6BC, 0x6E4, 0x70C`), while our records have a **76-byte stride** (`waiter+0x474 + i*76`). Same
+offset, different object. Match the *stride* and the surrounding pattern before believing an
+offset match.
+
+**Strategic recommendation, after ~17 rounds on this stall.** Every cheap instrument has been spent
+and the remaining question - "should this intro advance on its own?" - cannot be answered from the
+binary alone without knowing what the sequence is *supposed* to do. The single highest-value thing a
+future session can obtain is **a Dolphin capture of Chapter 1**. With one, the questions become
+falsifiable: does the reference also sit in this layout-loop, does it advance on its own after N
+seconds, is the 600-frame loop the intro animation or the stall. Without one, further rounds here are
+guesswork against an unknown target, and the honest recommendation is to spend the round obtaining a
+reference rather than another probe.
+
+
 
 #### 5c.30a The guest never even *attempts* to register a Chapter-1 scene task
 
