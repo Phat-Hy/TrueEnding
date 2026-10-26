@@ -1324,7 +1324,30 @@ typedef struct {
     u32 callback;
     s32 result;
     u32 usrdata;
+    int frame; /* runner frame the completion was produced on */
 } PendingIpcCallback;
+
+extern int g_runner_current_frame;
+
+/* How many frames an IOS completion must wait before it is delivered.
+ *
+ * On hardware a /dev/fs request completes asynchronously, and the guest's task
+ * loops tick once per frame in between: measured, the save manager's driver calls
+ * fn_800A48B8 (which stores state 1 into the manager) and then tears the request
+ * down in the SAME frame, so the state-1 handler - the one that decides whether to
+ * NANDCreateAsync - is never dispatched by an Update tick. TLS_IPC_DELAY makes the
+ * completion land on a later frame, as a device round trip would. 0 keeps the old
+ * same-frame behaviour. */
+static int tls_ipc_delay_frames(void) {
+    static int v = -1;
+    if (v < 0) {
+        const char* env = getenv("TLS_IPC_DELAY");
+        v = env ? atoi(env) : 0;
+        if (v < 0) v = 0;
+        if (v > 8) v = 8;
+    }
+    return v;
+}
 
 static PendingIpcCallback s_ipc_pending[TLS_IPC_MAX_PENDING];
 static u32 s_ipc_pending_head = 0;
@@ -1337,6 +1360,7 @@ static void tls_ipc_enqueue_callback(u32 callback, s32 result, u32 usrdata) {
     s_ipc_pending[s_ipc_pending_tail].callback = callback;
     s_ipc_pending[s_ipc_pending_tail].result = result;
     s_ipc_pending[s_ipc_pending_tail].usrdata = usrdata;
+    s_ipc_pending[s_ipc_pending_tail].frame = g_runner_current_frame;
     s_ipc_pending_tail = next;
 }
 
@@ -1346,6 +1370,13 @@ int tls_ipc_service_callback(CPUState* ctx) {
     }
     if (!tls_is_idle_address(ctx->pc)) {
         return 0;
+    }
+    {
+        int delay = tls_ipc_delay_frames();
+        int ready = s_ipc_pending[s_ipc_pending_head].frame + delay;
+        if (delay > 0 && g_runner_current_frame < ready) {
+            return 0; /* not yet: let the guest's own per-frame ticks run first */
+        }
     }
     PendingIpcCallback pending = s_ipc_pending[s_ipc_pending_head];
     s_ipc_pending_head = (s_ipc_pending_head + 1) % TLS_IPC_MAX_PENDING;
@@ -4089,6 +4120,75 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0;
         }
 
+        /* 5c.41 D: the save driver's four fn_800A48B8 calls, at their RETURN
+         * addresses (a bl return address is a dispatch point, so these fire). The
+         * API entry stores 1 into +348, but no Update ever then sees state 1, so
+         * print the state immediately after each call returns to see who clears it. */
+        case 0x803B81E8: case 0x803B8E14: case 0x803B8F30: case 0x803B8FD4: {
+            if (tls_nand_probe_on()) {
+                static u32 s_ret = 0;
+                if (s_ret < 30) {
+                    s_ret++;
+                    u32 obj = ctx->gpr[31];
+                    char msg[224];
+                    snprintf(msg, sizeof(msg),
+                             "SAVEDRV ret=0x%08X r3=0x%08X obj(r31)=0x%08X state(+348)=%u "
+                             "kind(+72)=%u wait(+368)=%d",
+                             ctx->pc, ctx->gpr[3], obj,
+                             obj ? mem_read32(ctx, obj + 348) : 0,
+                             obj ? mem_read32(ctx, obj + 72) : 0,
+                             obj ? (s32)mem_read32(ctx, obj + 368) : 0);
+                    tls_nand_probe_slot(msg);
+                }
+            }
+            return 0;
+        }
+
+        /* 5c.41 D: the state-1 handler's opening guards, 0x800A2E24..0x800A2E50:
+         *   r4 = obj+368; if (r4 < 0) { obj+368 = r4-1; return; }   ; a wait counter
+         *   kind = obj+72; if (kind in {2,3}) return;               ; nothing to do
+         *   if (kind != 2) goto 0x800A2EA4                          ; the real work
+         * The entry is a dispatch target, so probing it says whether the handler runs
+         * at all and with which (counter, kind) - the driver calls fn_800A48B8 once. */
+        case 0x800A2E24: case 0x800A2EA4: {
+            if (tls_nand_probe_on()) {
+                static u32 s_e24 = 0;
+                if (s_e24 < 30) {
+                    s_e24++;
+                    u32 obj = ctx->gpr[3];
+                    char msg[224];
+                    snprintf(msg, sizeof(msg),
+                             "STATE1 pc=0x%08X obj=0x%08X kind(+72)=%u wait(+368)=%d "
+                             "state=%u result(+344)=%u lr=0x%08X",
+                             ctx->pc, obj,
+                             obj ? mem_read32(ctx, obj + 72) : 0,
+                             obj ? (s32)mem_read32(ctx, obj + 368) : 0,
+                             obj ? mem_read32(ctx, obj + 348) : 0,
+                             obj ? mem_read32(ctx, obj + 344) : 0, ctx->lr);
+                    tls_nand_probe_slot(msg);
+                }
+            }
+            return 0;
+        }
+
+        /* 5c.41 D: fn_800A48B8 is the ONE manager API entry that stores 1 into
+         * +348 (state 1, whose handler holds NANDCreateAsync at 0x800A3038). Its
+         * only callers are 0x803B81E4, 0x803B8E10, 0x803B8F2C and 0x803B8FD0 - the
+         * game's save-task driver. Inert probe: does the driver ever call it? */
+        case 0x800A48B8: {
+            if (tls_nand_probe_on()) {
+                static u32 s_48b8 = 0;
+                if (s_48b8 < 20) {
+                    s_48b8++;
+                    char msg[192];
+                    snprintf(msg, sizeof(msg), "SAVEAPI 800A48B8(mgr=0x%08X) lr=0x%08X",
+                             ctx->gpr[3], ctx->lr);
+                    tls_nand_probe_slot(msg);
+                }
+            }
+            return 0;
+        }
+
         /* 5c.41: the save manager's create-vs-skip decision, read out of the lifted
          * code at 0x800A2F80..0x800A3010:
          *
@@ -4107,7 +4207,8 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
          * obj+72: 0 -> 0x800A30B0 (this branch holds the second NANDCreateAsync, at
          * 0x800A3198), 1 -> 0x800A31E0, 10 -> 0x800A3254. op=3 completes in every
          * run, so these four branch targets fire and say which kind is live. */
-        case 0x800A30B0: case 0x800A31E0: case 0x800A3254: case 0x800A3260: {
+        case 0x800A30B0: case 0x800A31E0: case 0x800A3254: case 0x800A3260:
+        case 0x800A3084: {
             if (tls_nand_probe_on()) {
                 static u32 s_dec_n = 0;
                 if (s_dec_n < 40) {
