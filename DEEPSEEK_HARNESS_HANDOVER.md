@@ -5010,3 +5010,41 @@ configuration**. The phase-13-specific causal chain needs re-deriving against th
    examined because the fabricated fade never let the machine reach it in earlier runs;
 3. re-check the waiter's `+0x88` and slot list under the faithful fade, since the `0 -> 8 -> 0` cycle
    suggests the machine is now reacting to completion signals rather than being pinned.
+
+#### 5c.32c Full trajectory with the faithful fade: the machine stops in phase 0 and the A press no longer advances
+
+Ran 8000 frames with `TLS_SCENE_SM_PROBE=1` and an A press every 200 frames from 3400 to 7600. The
+complete trajectory is **three transitions and then nothing**:
+
+```
+f=2102  -1 -> 0   (outer state=0 ctr=0 f54e8=15 f54ec=0 f54f0=2)
+f=2105   0 -> 8   (ctr=1)
+f=3347   8 -> 0   (ctr=617 f54e8=8 f54ec=615)
+        ... then no transition for the remaining 4653 frames
+```
+
+The A press no longer opens the phase-0 gate. With the fabricated fade it produced `PHASE 0 -> 13` at
+frame 3401/3402 almost immediately; with the guest's own coordinator the gate does not open at all, and
+the machine sits in phase 0 indefinitely. Task count stays at 3 throughout - still no player/scene task.
+
+**So neither configuration reaches gameplay, and they stall differently:**
+
+| | fake fade | faithful fade |
+|---|---|---|
+| visuals | Chapter-1 cinematic washed out 7x too bright | legible (54.7 vs reference 25.1) |
+| title invariant | p50 203 | p50 203 (identical) |
+| phase path | `0 -> 13`, pinned | `0 -> 8 -> 0`, then pinned in 0 |
+| A press | advances to 13 | does nothing |
+| task created | never | never |
+
+**Recommendation: keep the faithful fade.** It is the faithful path (it runs the guest's own code), it
+is visually correct, and it is invariant-neutral. The lost A-advance is not a regression to hide - it is
+the *real* behaviour, and it means the earlier `0 -> 13` was an artefact of the stub driving the machine
+into a phase the real machine does not enter at that point.
+
+**The real stall, restated**: with the guest's own fade, the machine settles in phase 0 and an A press
+does not open the gate that §5c.27 §2 decoded (`fn_800A555C` bit-testing the pad trig word at
+`*(r13-26280)+0x3C28` against `tableB[code]` at `0x807328A8`, code 4 = A, bit 11). That gate was
+measured working *under the fabricated fade*, so it too must be re-checked now. This is the single
+highest-value thing to re-derive: **does the A edge still reach `fn_800A555C` under the faithful fade,
+and if so which side of the gate is failing?**
