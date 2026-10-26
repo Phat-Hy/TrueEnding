@@ -7028,6 +7028,36 @@ is wrong - the page has a large illustration and this is the only candidate for 
 * **Re-opened - b0..b5**: clipped and black. Whether the fix is the projection (z 13..22) or the textures
   (black) or both is unresolved, and it is the largest visual delta measured so far.
 
+#### D. It is not a transition frame, and the illustration slot is b0..b5 whose texture is EMPTY
+
+**D1. Frame 4400 is the same page as 4000.** `TLS_SHOT_FRAMES=4400` (default path, fresh PPM) gives mean
+240.5 and the same layout - title in the same place, same dark plate - as frame 4000. So the reference is
+not "the settled state of our transition": the page does not converge to it. (`docs/evidence/cmp_f4400_vs_ref_5c44.png`.)
+
+**D2. The layout *structure* matches; the art inside it does not.** Reference: big ink illustration on the
+left ~45% of the width, crest above a right-hand text column. Host: a small dark plate at 4-17% of the
+width, title to its right. So the illustration *slot* is there and is the wrong thing: our plate (b27, a
+64x64 white CMPR drawn with vertex colour `(30,0,0)`) is not the illustration - it is a small decorative
+plate in the same corner.
+
+**D3. b0..b5 are the illustration, and their texture is empty.** `TLS_TEX_ALPHA_ADDR=0x92AEAEC0` (b0/b1's
+texture) reports **opaque=0, clear=65536** - every texel decodes transparent, i.e. the CMPR blocks are
+`0xFF`-filled, which is what an address that was never streamed looks like. That plus their NDC z of
+13.3..22.9 (whole-mesh clipped) is why the largest element of the page is missing. Compare the textures that
+*do* load: rock `0x91EEEDE0` opaque=65536; crest `0x921FEAE0` opaque=16384 with corner `0xFF000000` and
+centre `0xFFF6F6F6` (a black-on-white plate, i.e. an opaque image - see D4).
+
+**D4. The crest decodes as an opaque black-on-white plate.** With `TLS_TEV=1` (the only path that uploads
+texmap1) `0x921FEAE0` reads opaque=16384, clear=0, corner `0xFF000000`, centre `0xFFF6F6F6`. In the
+reference the crest sits on the parchment with no obvious white box around it - against a light parchment a
+white plate is nearly invisible, so this is consistent rather than contradictory, but it means b27 will
+never be the ink-on-parchment crest without either a transparent source or the TEV alpha that would cut it.
+
+**D5. The concrete next step is the loader, not the renderer.** b0/b1's texture address is filled with
+`0xFF`, which is the signature of a texture that never arrived - the same class as 5c.39 D's unfinished
+`data/texture/ef_hkr02n_c.texture` stream. Find what fills `0x92AEAEC0`, whether that request completed, and
+the illustration should appear; the projection (z 13..22) is the second half of the same defect.
+
 **State**: no code change in this section; it is the reference and its reading. Build green, invariant PASS,
 0 changes to `src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
 frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` (unchanged), save still
