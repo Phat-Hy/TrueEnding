@@ -5,7 +5,22 @@
 **Tree state.** Clean at the commit that added this block (check `git log --oneline -4`). Build green
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `A00272DF30BEDB5FB9D06E60DBDC365A9B47328ACCED1A496D999FD34949432E`). **0 changes
-to `src/`.** Current state lives in §5c.39; §5c.38 and everything earlier is history.
+to `src/`.** Current state lives in §5c.40; §5c.39 and everything earlier is history.
+
+> **§5c.40 CHANGES WHERE THE SAVE DEFECT STARTS.** The host NAND is now a real device model (six
+> fabrications retired, measured behaviour-identical: the frame-3500 hash did not move). What that
+> measurement establishes is that **no device answer gates the create any more: the guest never asks
+> for it.** The whole NAND conversation of a 10 000-frame run is 81 lines and ends at frame 1638 with
+> `ReadDir("/banner.bin") -> -106`; after that the game plays Chapter 1 for 8 400 frames without
+> touching the NAND. Read §5c.40 E before spending another round on `/dev/fs`.
+>
+> **Check the confinement before anything else.** This session began at Windows Low mandatory
+> integrity (`whoami /groups` -> `Mandatory Label\Low Mandatory Level`) and in that state *nothing*
+> verifies: the build dies with `PermissionError: build/recomp/objects.rsp`, `git hash-object -w` says
+> "insufficient permission for adding an object to repository database", and `tools/invariant.ps1`
+> says "Access to the path 'logs\invariant.log' is denied". ACL repair cannot fix it (it is not an ACL
+> problem); the session has to run at full access. One `danger-full-access` escalation proved it, and
+> after the policy was switched to `danger-full-access` / medium integrity every write worked.
 
 **MANDATORY, before any other command:** every runner launch opens the game window **minimized**:
 
@@ -5736,3 +5751,152 @@ frame 3500 = `A00272DF...` unchanged.
 * The guest's own SDK sources in `src/` (`isfs.c`, `nand.c`, `NANDCore.c`, `NANDCheck.c`) are the authority
   on `/dev/fs` command numbers - the wrapper naming and payload sizes settle in one read what a log trace
   cannot.
+
+### 5c.40 The host NAND becomes a device model, and the save defect moves: the guest never asks to create
+
+Session input script (unchanged; set in the same command as every run):
+
+```
+TLS_INPUT_SCRIPT="600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A,3620-3632:A,3700-3712:A,3800-3812:A,3900-3912:A"
+```
+
+The same 8-press prefix is what `tools/invariant.ps1` uses (and what the frame-3500 hash belongs to).
+
+#### A. Confinement first: Low mandatory integrity silently blocks every verification
+
+This session opened at `Mandatory Label\Low Mandatory Level`. New files could be written, but every
+*overwrite* of a file the user's session owned was denied, and so were git object writes:
+
+```
+Add-Content logs\invariant.log      -> Access to the path '...\logs\invariant.log' is denied.
+git hash-object -w <tmp>            -> insufficient permission for adding an object to repository database .git/objects
+```
+
+That is the no-write-up rule, not an ACL fault, so it cannot be repaired from inside. One
+`danger-full-access` escalation ran the exact same two operations successfully, and once the session
+policy was switched to full access (`whoami /groups` -> `Medium Mandatory Level`) everything worked.
+**Check this before diagnosing any "failure"**: a build that dies on `objects.rsp`, a commit that
+cannot write an object, and `invariant.ps1` failing on `logs\invariant.log` are all this, not the code.
+
+#### B. The `/dev/fs` protocol, as the guest's own SDK sources define it
+
+Read from `src/isfs.c` / `src/nand.c` / `src/NANDCore.c` / `src/NANDCheck.c`, not guessed. Every
+wrapper is named, and the payload sizes settle in one read what a log trace cannot.
+
+| cmd | wrapper | transport | request | reply |
+|---|---|---|---|---|
+| 3 | `fn_8061A880` / `fn_8061A980` | ioctl | `path` at +0, owner +0x49, group +0x46, attr +0x47/+0x48, len 0x4c | result only |
+| 4 | `fn_8061AA80` / `fn_8061ABE0` | ioctlv | `{path(0x40)}` + `{u32 count(4)}` when `entries==NULL`; else in `{path, requested count}`, io `{entries, returned count}` | `count` = directory entries, `entries` = count*13-byte records |
+| 6 | `fn_8061AD30` / `fn_8061AE90` | ioctl | `path`, len 0x40 | 0x4c reply: `u32 len@0`, `u16 mode@4`, owner `@0x49`, group `@0x46`, attr `@0x47`, `@0x48` |
+| 7 | `fn_8061AFD0` | ioctl | `path`, len 0x40 | result only |
+| 8 | `fn_8061B290` | ioctl | two 0x40-byte paths, len 0x80 | result only |
+| 9 | `fn_8061B4D0` / `fn_8061B5D0` | ioctl | `path` + owner/group/attr, len 0x4c | result only |
+| 11 | `fn_8061B860` | ioctl on the **open file fd** | none | `{u32 len, u32 offset}` |
+| 12 | `fn_8061B3A0` | ioctlv | `{path(0x40)}` | `{u32, u32}` |
+
+Two facts that decide the whole save path:
+
+* **The result code is part of the answer.** `_isfsFuncCb(result, ctx)` copies the reply payload only
+  when `result >= 0`, but an error still calls the user's continuation with that error. So "success
+  with a zeroed payload" and "error" are *completely different answers* to the guest.
+* **`-106` (ENOENT) is the guest's "this path does not exist".** `fn_80622310` tests `cmpwi r3,-0x6a`
+  and skips that path's contribution, and `fn_80620C60` (the `NANDGetStatus` continuation) has **no
+  case for "success, zero entries"** - it calls *no* continuation at all. Answering `success/count=0`
+  for a missing path therefore did not say "empty directory": it said nothing, and the chain stopped.
+
+#### C. Six fabrications retired (measured behaviour-identical)
+
+`recomp/replacements.c`, commit 34e6f37:
+
+1. **ISFS ioctl commands were never serviced.** The servicer was gated on `num_io > 0`, and 3/6/7/8/9
+   are plain ioctls (`num_io == 0`). The guest was told "success" for a `Delete` that ran nothing.
+2. **ReadDir / GetUsage answered success-with-zeros.** Now: root (`""`, `"/"`) lists `savedata/`,
+   anything else is `-106`; GetUsage reports the file's own block and file count, `-106` if absent.
+3. **`IOS_Open` of any NAND path not named "savedata" returned a fabricated fd.** Measured:
+   `IOS_OpenAsync("/banner.bin") -> fd=5 fp=none`, then a 29 344-byte read returned 0 - an absent
+   banner "read" successfully. A NAND path now opens only if the host holds it.
+   `/shared2/sys/SYSCONF` is the documented exception (no SYSCONF image exists; separate defect).
+4. **`ios_open`'s `mode & 2` branch created the save and zero-filled 0x159580 bytes** - a guessed size
+   and invented contents. ISFS_Open does not create; the guest's CreateFile+Write must fill it.
+5/6. **Read/Write/Seek on an unopened fd answered "fine".** Measured: the manager issues 17
+   `NANDSeek(info, off, 0)` calls on **fd 0** (offsets 0x20, 0x13580, 0x26AE0 ... step 0x13560,
+   `lr=0x800A4DA8`) after its open of `/savedata.dat` failed, because a bad fd looked usable.
+
+`TLS_ISFS_SERVICE` now defaults **ON** (`=0` restores the old stub for A/B). `TLS_NAND_PROBE=1` prints
+the ISFS answers and a new inert `NAND-LAYER` tracer over the SDK wrappers the save layer calls
+(`0x8061E270/E2F0/E370/E3F0` create, `0x8061FA70` open, `0x8061E7D0` read, `0x8061FBE0` write,
+`0x8061E9E0` seek, plus the game wrappers `0x805FFF70`, `0x805FF7A0`).
+
+**Verified:** build green; `pwsh tools/invariant.ps1` PASS, frame 3500 =
+`A00272DF30BEDB5FB9D06E60DBDC365A9B47328ACCED1A496D999FD34949432E` **unchanged** (these were device
+answers, not rendering); sequence `Boot -> Stra -> Titl -> Game`; `savedata/` stays empty.
+
+#### D. The decisive measurement: the NAND conversation ends at frame 1638
+
+A 10 000-frame run with `TLS_NAND_PROBE=1` produces **81** NAND lines in total. In chronological order
+(the probe's `#n` is dispatch order, the file order is the truth):
+
+```
+#20  ioctl cmd=6 GetAttr '/savedata.dat'        -> -106
+#25  ioctl cmd=7 Delete '/savedata.dat'         -> -106      ; title mode 6 -> 7 (the dialog was answered)
+#26  ioctl cmd=7 Delete '/banner.bin'           -> -106      ; title mode 7 -> 8
+#28  cmd=4 ReadDir '/savedata.dat'              -> -106      ; title mode 12 -> 16 (frame 1631)
+     OpenAsync '/banner.bin'                    -> -6
+#33  cmd=4 ReadDir '/'                          -> 0 entries  ; the root listing
+#34  cmd=12 GetUsage ''                         -> 0 blocks, 0 files
+#36..#54  cmd=12 GetUsage '/meta','/ticket','/title/0001000x','/shared2/title' -> -106 (x10)
+#56  cmd=4 ReadDir '/savedata.dat'              -> -106
+#58..#78  cmd=12 GetUsage (same 11 paths)
+#80  cmd=4 ReadDir '/banner.bin'                -> -106      ; title mode 20 -> 22 (frame 1637)
+--- nothing for the next 8 400 frames ---
+```
+
+So the title's "recreate save data" flow is: delete both files -> space check (`GetUsage` sweep, twice)
+-> mode 22 -> Chapter 1. **`CreateFile` (cmd 9) is never issued, and neither is any `IOS_Write`.** The
+dialog at mode 6 is faithful (Dolphin shows one at the same moment, §5c.39 C); what is missing is that
+nothing ever writes a save, so the dialog repeats on every boot. That part of 5c.39 stands - but the
+cause is not a device answer any more.
+
+#### E. Where the create actually lives (start here next)
+
+* The **game's** save layer is `0x805FD8D0` / `0x805FF7A0`..`0x805FFF70` and it is the code that names
+  the files: `"savedata.dat"` at `0x8073DAA0` (and at `0x8073DE70`, in a two-entry table with
+  `"banner.bin"` at `0x8073DE80`).
+* Its create entry is `fn_805FFF70`, which calls the NAND create `0x8061E3F0` -> `fn_8061E130` ->
+  `ISFS_CreateFile` (`src/isfs.c fn_8061B4D0`, cmd 9). Its write entry is `fn_805FF7A0` ->
+  `fn_8061FBE0` (NAND write on an already-open fd; it requires `info->0x8a == 1`).
+* **`fn_805FFF70` has no direct `bl` caller anywhere in the lifted chunks.** It is reached only through
+  a dispatch table, which is exactly why the create never fires: the *index* that selects it is never
+  chosen. Next step: find the table holding the pointers `0x805FFF70` / `0x805FF7A0` (search the data
+  for those words, or `lis`/`addi` halves `0x805F` + low 16 bits), find what sets the index, and read
+  the caller that the title's mode 20 -> 22 path drives.
+* The save image is 18 slots of `0x13560` bytes: `0x159580` = 1 414 528 total, which is the constant
+  `fn_803B854C` compares the file length against. Dolphin's NAND file is 1 348 992 - that difference
+  is *not* yet explained and does not block, because the length check is only reached with status 0.
+
+#### F. The NAND error -> manager status map (authoritative, read out of `fn_800A4494`)
+
+`fn_800A4494(nand_err)` is a comparison tree, not a table. Decoded from the lifted code:
+
+```
+status = -err          for err in -6..-1        (1..6)
+status = -err - 1      for err in -16..-8       (7..15)
+status = 9  for err == -10      status = 16 for err == -7, -64, or anything unmapped
+status = 17 for err == -128     status = 0  for err == 0
+```
+
+So `-10` (NAND `NOEXISTS`) is **status 9**, `-12` is **status 11** (matches 5c.39's measurement), and
+the "the data is corrupted" dialog is **status 5, i.e. NAND `-5` (ECC_CRIT)**. When chasing this
+defect, convert every NAND return through this map before deciding which branch ran - "status 5" does
+not mean "not found", it means "the device reported corruption".
+
+#### G. Rules this section adds
+
+* A device answer has three parts: buffered payload, length, **and result code**. Modelling the first
+  two and answering 0 for the third is a fabrication that can hang a guest continuation.
+* Before modelling a protocol from a log, read the guest's own SDK wrapper: `isfs.c` gave the command
+  numbers, payload sizes and reply offsets for all eight commands in one sitting.
+* When a guest callback "does nothing", check whether it has a case for the answer you gave it.
+  `fn_80620C60` has cases for 1, 2, 3 and none for 0 - that asymmetry is the bug report.
+* A bare `bl` search over `build/recomp/generated/chunks` is a cheap, reliable call-graph query. It is
+  how `fn_805FFF70` was shown to have no caller (dispatch-table only).
