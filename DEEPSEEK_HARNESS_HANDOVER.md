@@ -4783,5 +4783,19 @@ reference's Chapter-1 card frame and its first gameplay frame, align them agains
 exactly which host frame corresponds to the reference's first gameplay frame. That single comparison
 tells you whether the host is stuck at the same point or somewhere earlier.
 
+**Partially done already**: scanning 4200..4440 at 20-frame steps, the image mean drops from ~204 to
+~29 between **frame 4360 and frame 4380**, and **frame 4380 is already gameplay** - Zael standing with
+the sword and the full party HUD, not the "Chapter 1 / Reptids' Cave" card. So the long light stretch
+before it (mean ~204 from at least frame 3200) is a *menu*, and there is no light card frame at
+20-frame sampling. Consequences:
+
+* the reference's Chapter-1 entry is at or before frame 4380, and its first gameplay frame is <=4380;
+* the host's Chapter-1 card (mean 178,187,187 at frame 2251) has **no counterpart** in this reference
+  at the sampled step, so a card-to-card alignment will not work - align on *gameplay* content (a
+  frame of Zael in the cave), which does exist in both;
+* sample the reference at 1-frame steps around 4360..4380 next time; the card may be inside that gap,
+  or this run may have skipped it.
+
+
 This also retro-justifies a caution already in this file: verify a claim like "there is no reference"
 before building on it - this one was repeated for many sessions.
