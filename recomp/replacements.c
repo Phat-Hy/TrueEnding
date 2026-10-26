@@ -1574,6 +1574,34 @@ static void fs_path_to_host(const char* guest_path, char* out, size_t outsz) {
     snprintf(out, outsz, "savedata/%s", leaf);
 }
 
+/* Read the NUL-terminated guest path an ISFS request carries in its input buffer. */
+static u32 isfs_read_guest_path(CPUState* ctx, u32 buf, u32 len, char* out, size_t outsz) {
+    if (!outsz) return 0;
+    out[0] = '\0';
+    if (!buf || !len) return 0;
+    u32 n = 0;
+    for (; n + 1 < outsz && n < len; n++) {
+        u8 c = mem_read8(ctx, buf + n);
+        out[n] = (char)c;
+        if (!c) return n;
+    }
+    out[outsz - 1] = '\0';
+    return n;
+}
+
+/* Does the host NAND hold this guest path, and what length does it have? */
+static int isfs_host_file_size(const char* guest_path, u32* size_out) {
+    char host[160];
+    fs_path_to_host(guest_path, host, sizeof(host));
+    FILE* f = fopen(host, "rb");
+    if (!f) return 0;
+    fseek(f, 0, SEEK_END);
+    long sz = ftell(f);
+    fclose(f);
+    if (size_out) *size_out = (sz > 0) ? (u32)sz : 0u;
+    return 1;
+}
+
 static int tls_isfs_service_on(void) {
     static int v = -1;
     if (v < 0) v = getenv("TLS_ISFS_SERVICE") ? 1 : 0;
@@ -3463,6 +3491,35 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 ctx->pc = ctx->lr;
                 return 1;
             }
+            /* ISFS GetAttr (cmd 6 on /dev/fs). The SDK sends the NUL-terminated guest
+             * path in the input buffer and expects a 76-byte attribute reply. Until now
+             * every path was answered "success" with a zeroed reply, i.e. "the file
+             * exists, permissions 0, length 0" - and /savedata.dat is exactly the path
+             * the save manager asks about first. On a console with no save file that lie
+             * makes the manager open a file that was never there, fail, and report the
+             * save as corrupted (handover 5c.38). The host NAND is the only filesystem
+             * this player has: a path it does not hold does not exist, and the faithful
+             * answer is IPC_NOEXISTS (-6), which the guest's own NAND layer already maps
+             * like a missing file. A path that does exist is reported with its real
+             * length instead of a fabricated zero. */
+            int isfs_getattr = (strcmp(ios_fd_path(fd), "/dev/fs") == 0 && cmd == 6);
+            u32 isfs_size = 0;
+            if (isfs_getattr) {
+                char gp[80];
+                u32 plen = isfs_read_guest_path(ctx, in_buf, in_len, gp, sizeof(gp));
+                if (!(plen > 0 && isfs_host_file_size(gp, &isfs_size))) {
+                    if (tls_nand_probe_on()) {
+                        char msg[224];
+                        snprintf(msg, sizeof(msg),
+                                 "ISFS GetAttr '%s' -> -6 (IPC_NOEXISTS: not on this NAND)",
+                                 gp);
+                        tls_nand_probe_slot(msg);
+                    }
+                    ctx->gpr[3] = (u32)-6;
+                    ctx->pc = ctx->lr;
+                    return 1;
+                }
+            }
             void* dst = (out_buf && out_len > 0) ? resolve_guest_pointer(ctx, out_buf) : NULL;
             /* ISFS command 11 is the file-stats query on an open fd: an 8-byte
              * reply {u32 length; u32 offset}, and NANDGetLength (fn_8061EF90)
@@ -3470,7 +3527,10 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
              * with the buffer untouched leaves whatever the IOS heap happens to
              * contain in there, which is not a length of anything. */
             if (dst) {
-                if (cmd == 11 && out_len >= 8) {
+                if (isfs_getattr) {
+                    memset(dst, 0, out_len);
+                    if (out_len >= 4) mem_write32(ctx, out_buf + 0, isfs_size);
+                } else if (cmd == 11 && out_len >= 8) {
                     mem_write32(ctx, out_buf + 0, ios_fd_length(fd));
                     FILE* fp = ios_fd_file(fd);
                     mem_write32(ctx, out_buf + 4, fp ? (u32)ftell(fp) : 0u);
@@ -3481,9 +3541,26 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             }
             if (tls_nand_probe_on()) {
                 char msg[256];
-                snprintf(msg, sizeof(msg),
-                         "IOS_Ioctl fd=%u '%s' cmd=%u in=0x%08X/%u out=0x%08X/%u -> out0=%u",
-                         fd, ios_fd_path(fd), cmd, in_buf, in_len, out_buf, out_len, first_out);
+                if (strcmp(ios_fd_path(fd), "/dev/fs") == 0 && (cmd == 4 || cmd == 6 || cmd == 8) && in_buf) {
+                    /* /dev/fs carries the NUL-terminated guest path in the input buffer;
+                     * print it, because "cmd=6 -> success" is meaningless without knowing
+                     * which file it was asked about (handover 5c.38). */
+                    char gp[80];
+                    u32 n = 0;
+                    for (; n + 1 < sizeof(gp) && n < in_len; n++) {
+                        u8 c = mem_read8(ctx, in_buf + n);
+                        gp[n] = (char)c;
+                        if (!c) break;
+                    }
+                    gp[sizeof(gp) - 1] = '\0';
+                    snprintf(msg, sizeof(msg),
+                             "IOS_Ioctl fd=%u '/dev/fs' cmd=%u path='%s' out=0x%08X/%u -> out0=%u",
+                             fd, cmd, gp, out_buf, out_len, first_out);
+                } else {
+                    snprintf(msg, sizeof(msg),
+                             "IOS_Ioctl fd=%u '%s' cmd=%u in=0x%08X/%u out=0x%08X/%u -> out0=%u",
+                             fd, ios_fd_path(fd), cmd, in_buf, in_len, out_buf, out_len, first_out);
+                }
                 tls_nand_probe_slot(msg);
             }
             ctx->gpr[3] = 0; // Success
@@ -3516,10 +3593,34 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 ctx->pc = ctx->lr;
                 return 1;
             }
+            /* Same GetAttr rule as the synchronous ioctl (see there): a path the host
+             * NAND does not hold answers ENOENT instead of "exists, 0 bytes". */
+            u32 isfs_size = 0;
+            int isfs_getattr = (strcmp(ios_fd_path(fd), "/dev/fs") == 0 && cmd == 6);
+            if (isfs_getattr) {
+                char gp[80];
+                u32 plen = isfs_read_guest_path(ctx, in_buf, in_len, gp, sizeof(gp));
+                if (!(plen > 0 && isfs_host_file_size(gp, &isfs_size))) {
+                    if (tls_nand_probe_on()) {
+                        char msg[224];
+                        snprintf(msg, sizeof(msg),
+                                 "ISFS GetAttrAsync '%s' -> -6 (IPC_NOEXISTS: not on this NAND)",
+                                 gp);
+                        tls_nand_probe_slot(msg);
+                    }
+                    tls_ipc_enqueue_callback(cb, -6, usrdata);
+                    ctx->gpr[3] = 0;
+                    ctx->pc = ctx->lr;
+                    return 1;
+                }
+            }
             if (out_buf && out_len > 0) {
                 void* dst = resolve_guest_pointer(ctx, out_buf);
                 if (dst) {
-                    if (cmd == 11 && out_len >= 8) {
+                    if (isfs_getattr) {
+                        memset(dst, 0, out_len);
+                        if (out_len >= 4) mem_write32(ctx, out_buf + 0, isfs_size);
+                    } else if (cmd == 11 && out_len >= 8) {
                         mem_write32(ctx, out_buf + 0, ios_fd_length(fd));
                         FILE* fp = ios_fd_file(fd);
                         mem_write32(ctx, out_buf + 4, fp ? (u32)ftell(fp) : 0u);
@@ -6533,6 +6634,79 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             }
             return 0;
         }
+        /* The save-verdict chain, measured instead of argued (handover 5c.38).
+         *
+         * The title's mode-5 handler is a four-way decision and both old probes sat
+         * *below* it, so "mode 6" was visible while the reason was not:
+         *
+         *   80534C54  bl   0x800A4228(mgr, &status)   ; flag = (mgr+348 != 0), status = mgr+360
+         *   80534C58  <- probe A: flag.  NaN -> title does nothing at all
+         *   80534C5C  bc   4,2, done                  ; flag != 0 -> no dialog
+         *   80534C68  bc   4,2, 0x80534D04           ; status != 0 -> decide below
+         *   (status == 0) -> 80534C78 fn_800A472C length check -> mode 6 / mode 9
+         *   80534D04  <- probe B: status.  5 -> msg 12, 14 -> msg 21, other -> mode 9
+         *   80534D34  bl   0x80364E7C(..., status+7) ; <- probe C sees the message id
+         *   80534C9C  bl   0x80364E7C(..., 12)       ; the "check failed" message
+         *
+         * fn_800A4228 is three instructions: *out = mgr+360; return mgr+348 != 0, so a
+         * console with no save file reaches the dialog only if the manager stored a
+         * failure status - the question is which status, and which layer produced it. */
+        case 0x80534C58: {
+            static int s_probe = -1;
+            if (s_probe < 0) s_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;
+            if (s_probe) {
+                printf("[TLS SaveCheck] 80534C58 fn_800A4228 -> flag=%d (%s)\n",
+                       (s32)ctx->gpr[3],
+                       ((s32)ctx->gpr[3] != 0) ? "mgr says OK -> no dialog at all"
+                                               : "mgr says not-OK -> status decides");
+                fflush(stdout);
+            }
+            return 0;
+        }
+        case 0x80534D04: {
+            static int s_probe = -1;
+            if (s_probe < 0) s_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;
+            if (s_probe) {
+                s32 st = (s32)ctx->gpr[0];
+                printf("[TLS SaveCheck] 80534D04 mgr status=%d -> %s\n", st,
+                       (st == 5)  ? "mode 6, msg 12" :
+                       (st == 14) ? "mode 6, msg 21" : "mode 9");
+                fflush(stdout);
+            }
+            return 0;
+        }
+        /* fn_80364E7C(owner, id): the message setter the save dialogs go through.
+         * Prints the id it is asked for, so "which text is on screen" stops being a
+         * guess: 12 is the id both failure paths above use. */
+        case 0x80364E7C: {
+            static int s_probe = -1, s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;
+            if (s_probe && s_n < 24) {
+                s_n++;
+                printf("[TLS SaveCheck] SetMessage id=%d owner=0x%08X lr=0x%08X\n",
+                       (s32)ctx->gpr[4], ctx->gpr[3], ctx->lr);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
+        /* fn_800A4494(err) is the NAND-error -> status/message-index mapper: 0 means
+         * "no error" and everything else becomes one of the statuses the title turns
+         * into a dialog (5 -> msg 12, 14 -> msg 21, other -> mode 9). Printing the code
+         * it is handed names the layer that failed instead of leaving "the save is
+         * corrupted" as the only visible fact (handover 5c.38). */
+        case 0x800A4494: {
+            static int s_probe = -1, s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;
+            if (s_probe && s_n < 40) {
+                s_n++;
+                printf("[TLS SaveCheck] err->status(%d) call#%d lr=0x%08X\n",
+                       (s32)ctx->gpr[4], s_n, ctx->lr);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
         case 0x80534CC0: {
             static int s_probe = -1;
             if (s_probe < 0) s_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;
@@ -6890,6 +7064,32 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 gx_pipeline_set_clear_color(r / 255.0f, g / 255.0f, b / 255.0f, a / 255.0f);
             }
             return 0; // Run original code
+        }
+
+        // GXSetTexCopyDst (0x80614D30) -- the guest's OWN declaration of an EFB-copy
+        // destination. The writer derives the destination size from BP 0x4D (the pitch
+        // this function computes into 0x238(GXData)), so the two can only be compared if
+        // the declaration is printed next to the copy. This is the independent half of
+        // the 320x224-written / 80x56-sampled mismatch measured at frame 4000
+        // (handover 5c.37 D): if this prints 320x224 as well, the writer is faithful to
+        // the guest and the 80x56 sampler is a different resource at the same address;
+        // if it prints 80x56, the pitch decode is what is wrong.
+        case 0x80614D30: {
+            extern int g_runner_current_frame;
+            static int s_from = -1, s_lines = 0;
+            if (s_from < 0) {
+                const char* f = getenv("TLS_COPYDST_PROBE");
+                s_from = f ? atoi(f) : -1;
+            }
+            if (s_from >= 0 && g_runner_current_frame >= s_from && s_lines < 200) {
+                u32 w = ctx->gpr[3] & 0xFFFFu, h = ctx->gpr[4] & 0xFFFFu;
+                u32 fmt = ctx->gpr[5] & 0xFFu, mip = ctx->gpr[6] & 0xFFu;
+                s_lines++;
+                printf("[TLS CopyDst] frame=%d declared=%ux%u fmt=0x%02X (id=%u half=%u) mip=%u lr=0x%08X\n",
+                       g_runner_current_frame, w, h, fmt, fmt & 0x0Fu, (fmt >> 5) & 1u, mip, ctx->lr);
+                fflush(stdout);
+            }
+            return 0; // Run the guest's own GXSetTexCopyDst
         }
 
         // NewTitleTask::Draw (0x805363F8)
