@@ -54,7 +54,7 @@
 > Remove-Item SaveData\savedata.dat -ErrorAction SilentlyContinue
 > $env:TLS_INPUT_SCRIPT="600-612:A,900-912:A,1200-1212:A,1300-1312:UP,1350-1362:A,1500-1512:A"
 > $env:TLS_SHOT_FRAMES="1450"
-> build\recomp\tls_runner.exe --window --frames 1460 --fps 60 --no-audio
+> build\recomp\tls_runner.exe --window --minimized --frames 1460 --fps 60 --no-audio
 > $env:TLS_BATCH_CUTOFF="30"                            # the scene without the post chain
 > ```
 > This session needs **full file access**; under workspace-write, writes to `build/`, `recomp/`, `tools/`
@@ -121,7 +121,7 @@
 > git log --oneline -14                                 # 0e788e3..559254a are the current session
 > python tools/recomp_harness.py build-runner           # chunks are already lifted; ~1 s
 > $env:TLS_INPUT_SCRIPT="600-612:A,900-912:A,1200-1212:A,1300-1312:UP,1350-1362:A,1500-1512:A"
-> build\recomp\tls_runner.exe --window --frames 2400 --fps 60 --no-audio
+> build\recomp\tls_runner.exe --window --minimized --frames 2400 --fps 60 --no-audio
 > ```
 > Walks the title's whole state machine (menu on screen at frame ~1434), answers the save dialog with Yes,
 > selects NEW GAME and hands off to the Game sequence at frame ~1539. Screenshots are written automatically
