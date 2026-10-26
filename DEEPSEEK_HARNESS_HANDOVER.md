@@ -4912,3 +4912,36 @@ card can be compared shot by shot.
 separate three possibilities per shot - (a) legitimate letterbox, (b) missing geometry over a black
 clear, (c) a wrong-colour pass. Measuring the bar height per shot against the reference's 10% is the
 cheap discriminator for (a) vs (b).
+
+### 5c.32 ROOT CAUSE FOUND for the washed-out Chapter-1 cinematics: the fabricated fade stub
+
+With the reference card frame as a same-shot target (`run2/framedump_2000.png`, mean **25.1**), three
+measurements on the host's own card frame (`f=2251`) isolate the cause:
+
+| configuration | host f=2251 mean | vs reference 25.1 |
+|---|---|---|
+| default | **183.9** | 7.3x too bright |
+| `TLS_EFB_ALPHA=1` (faithful guest factors) | 170.0 | still 6.8x - **eliminated** |
+| `TLS_NO_FAKE_FADE=1` (fabricated fade override bypassed) | **54.7** | 2.2x - **the cause** |
+
+Bypassing the fabricated fade takes the frame from a white wash to a **legible** underground pool:
+rocks, water with mirror reflections, red foliage, in the same composition as the reference. Saved as
+`docs/evidence/host_ch1_f2251_nofakefade_legible.png`; compare with
+`docs/evidence/dolphin_ref_run2_f2000_chapter1_card.png`.
+
+So the **fabricated `fn_80360A2C` fade override** - which forces the fade coordinator to report
+"fade complete" - is what blows the Chapter-1 cinematics out to near-white. It is exactly the class of
+speculative band-aid the recomp-debugging skill's Rule 1 forbids: it was introduced to unstick
+something in the title, and it silently pins a white fade across every cinematic afterwards.
+
+**The tension, stated honestly.** 5c.27 §9.4 measured that bypassing both fabricated overrides moves
+the title invariant (`p50 203` -> `174`), i.e. this stub is *load-bearing for the title*. So the correct
+action is **not** to simply delete it: it is to implement the fade coordinator faithfully so both the
+title and the cinematics are right. That is now a well-posed, evidence-backed task with a measurable
+target (host f=2251 within a small factor of 25.1, title invariant back at p50 203).
+
+**Residual differences at f=2251 with the fade bypassed** (do not mistake these for the same defect):
+the host frame is full-height (no 10% letterbox bar, whereas the reference has one), the card text is
+absent at this frame, the image is still brighter and more contrasty than the reference, and black
+patches remain at the top-left and top-centre. Those are separate and each is now measurable against
+the reference.
