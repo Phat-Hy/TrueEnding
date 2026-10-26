@@ -5161,3 +5161,50 @@ row claims.
 **Rule for this project**: to clear a probe flag, use `Remove-Item Env:\NAME`, never `$env:NAME=''`.
 And if a verification run returns a number that looks like another configuration's number, suspect the
 environment before the code - that is exactly how this was caught.
+
+### 5c.34 THE FABRICATED SCRIPT FILTER WAS THE ROOT CAUSE - retired, and the game now reaches Chapter-1 gameplay
+
+Acting on 5c.33: the fabricated override at `case 0x800A6BDC` is now **off by default** - the guest's own
+script evaluator runs. The fabricated skip is opt-in via `TLS_SCRIPT_FILTER=1`; `TLS_NO_SCRIPT_FILTER` is
+still honoured as a no-op.
+
+**Measured with the evaluator running (no probe flags set), 3520-frame run:**
+
+```
+sequence progression:  Boot x1  ->  Titl x24  ->  GAME x30
+frame 3500: mean=(28,31,35), 231141 vtx in 43-60 batches
+```
+
+and `frame 3500` is **Chapter-1 gameplay** - the cave pool with reflections, a character standing on the
+rocks, and the "NEW TUTORIAL." prompt on screen. Saved as
+`docs/evidence/host_filteroff_f3500_game_seq.png`.
+
+Before this change the same run never left `Title`, submitted 55k vertices of title geometry forever, and
+the task list never grew past 3. **The fabricated filter was the root cause of the whole Chapter-1
+stall**: it skipped the guest's script executor whenever its heuristic disliked a stream, and scripts are
+what drive menu input, sequence transitions and task creation. The scene state machine was never the
+problem - it was starved, which is why 20 rounds of archaeology on it found nothing.
+
+**The old title invariant is SUPERSEDED, and it encoded the bug.** `mean=(102,188,205) p50=203` at frame
+1448 was "still sitting on the title screen at frame 1448", i.e. exactly the frozen behaviour. With the
+evaluator running, frame 1448 is now
+
+```
+mean=(77,151,205) p10=66 p50=174 p75=174 p90=174 p99=206 p99.7=231 max=255
+```
+
+which is **the save-data dialog** - "The save data cannot be used because the data is corrupted. Recreate
+save data?" with Yes/No and "No" selected. That is input-responsive, progressing behaviour, and it is the
+figure previously dismissed in this file as a "regression (p50 203 -> 174)". It was not a regression; it
+was the fix.
+
+**Two follow-ups this creates:**
+1. the **invariant must be re-derived** - frame 1448 is no longer the title. A good guard would capture a
+   frame that is stable in the new flow (e.g. the dialog at 1448, or gameplay at 3500) plus a check that
+   the sequence reaches `Game`;
+2. **the save data is reported corrupt.** The game offers "Recreate save data?" and pressing through it
+   does reach gameplay, so it is not blocking, but it is a real defect worth fixing separately (our NAND
+   save handling).
+
+**Do not re-enable the skip.** If a script stream ever looks wrong, the fix belongs in the evaluator or in
+the stream, not in refusing to run it.

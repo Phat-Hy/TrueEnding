@@ -4193,15 +4193,28 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // fn_800A6BD4 / fn_800A6BDC: Animation curve / spline evaluator
         case 0x800A6BD4:
         case 0x800A6BDC: {
-            /* This override can SKIP THE GUEST'S SCRIPT EXECUTOR: if the heuristic
-             * bytecode walk below decides the stream is invalid it returns to the caller
-             * without running the original function at all, so the script that was
-             * supposed to run simply never does. A wrong opcode table therefore looks
-             * like "the intro stopped". TLS_NO_SCRIPT_FILTER=1 disables the override so
-             * the guest's own code decides. */
-            static int s_nofilter = -1;
-            if (s_nofilter < 0) s_nofilter = getenv("TLS_NO_SCRIPT_FILTER") ? 1 : 0;
-            if (s_nofilter) return 0;   /* run the original */
+            /* SKIPPING THE GUEST'S SCRIPT EXECUTOR WAS THE ROOT CAUSE OF THE CHAPTER-1 STALL.
+             * This override walked the bytecode with a heuristic opcode table and, when it
+             * disliked a stream, returned to the caller WITHOUT running the guest evaluator
+             * at all - so the script that was supposed to run simply never did.
+             *
+             * Measured (5c.34): with the skip enabled the sequence stayed on 'Title' forever,
+             * the task list never grew past 3 and the intro never advanced. With the guest's
+             * own evaluator running, the sequence progresses Boot -> Titl -> GAME, the Game
+             * sequence submits ~231000 vertices per frame, and frame 3500 shows Chapter-1
+             * gameplay (the cave pool, a character, and the "NEW TUTORIAL." prompt). The
+             * "black title" that once justified the skip is simply the game having already
+             * moved past the title by frame 1448 - a transition, not a failure.
+             *
+             * So the guest's evaluator now runs BY DEFAULT. The fabricated skip is opt-in via
+             * TLS_SCRIPT_FILTER=1 for comparison only; TLS_NO_SCRIPT_FILTER is still honoured
+             * as a no-op. Never make the skip the default again. */
+            static int s_skip = -1;
+            if (s_skip < 0) {
+                s_skip = getenv("TLS_SCRIPT_FILTER") ? 1 : 0;
+                if (getenv("TLS_NO_SCRIPT_FILTER")) s_skip = 0;   /* honoured, now a no-op */
+            }
+            if (!s_skip) return 0;   /* run the guest's own evaluator */
             if (address == 0x800A6BD4) {
                 u32 ea = ctx->gpr[13] + (u32)(s32)(-26432);
                 union { float f; u32 u; } conv;
