@@ -805,6 +805,28 @@ static bool probe_texture_avg(const GxTextureUnit* tu, unsigned* out_r, unsigned
     return true;
 }
 
+/* TLS_NO_INK_MATTE=1 turns OFF the "dark ink on a light plate" reconstruction below.
+ *
+ * That heuristic exists because the title logo, the menu text and the button prompts are
+ * authored as dark lettering on an opaque cream plate, and the GX TEV alpha stage - which
+ * we do not emulate by default - is what removes the plate on hardware. The heuristic
+ * removes it for us: every texel within reach of the plate luminance becomes transparent
+ * and only the ink survives.
+ *
+ * It also fires on artwork where the plate IS the artwork. Measured on the Chapter-1
+ * tutorial page (handover 5c.43 C): the parchment sheet (0x921DEA60, 512x512 CMPR,
+ * full-screen at b26/b30) has light corners and a dark decorative border, so
+ * `base_luma - min_luma > 60` holds and the ink matte erases the whole sheet - the
+ * batch then draws nothing (the per-batch back-buffer average does not move at all
+ * across b26) and the page has no background. This flag is the one-run proof of that
+ * diagnosis and is inert by default; the fix has to be a rule that distinguishes the
+ * two cases (per-batch, not per-texture), not a global switch. */
+static int tls_ink_matte_allowed(void) {
+    static int v = -1;
+    if (v < 0) v = getenv("TLS_NO_INK_MATTE") ? 0 : 1;
+    return v;
+}
+
 static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* tu) {
     if (!tu || tu->guest_addr == 0 || tu->width == 0 || tu->height == 0) {
         s_last_tex_all_zero = true;
@@ -977,10 +999,22 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
         /* Decoded-texture dump: the picture the shader will actually sample, so a
          * "this surface renders the wrong colour" report can be split into "the decode
          * is wrong" vs "the TEV stage is wrong" without another frame of guessing.
-         * TLS_TEX_DUMP=0x90CDCBE0[,addr...] writes build/recomp/tex_<addr>_<WxH>_f<fmt>.ppm */
+         * TLS_TEX_DUMP=0x90CDCBE0[,addr...] writes build/recomp/tex_<addr>_<WxH>_f<fmt>.ppm
+         *
+         * TLS_TEX_DUMP_FRAME=<guest frame> narrows the dump to ONE frame and keeps every
+         * upload, appending `_p<frame>_s<ordinal>` to the name. The unconditional form
+         * above overwrites one file per address, so it can only show the buffer's LAST
+         * state in the run - which is why a scratch texture reused inside a single frame
+         * (the tutorial page's 64x64 CMPR at 0x90D19B80 is drawn as the black
+         * illustration box and again as the SKIP plate) could not be told apart from the
+         * state its first draw actually sampled (handover 5c.43 C). The per-frame form
+         * keeps the uploads in draw order. */
         {
             static uint32_t s_dump_addrs[8];
             static int s_dump_count = -1;
+            static int s_dump_frame = -2;
+            static int s_dump_ord[8];
+            extern int g_runner_current_frame;
             if (s_dump_count < 0) {
                 s_dump_count = 0;
                 const char* e = getenv("TLS_TEX_DUMP");
@@ -990,11 +1024,28 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
                     s_dump_addrs[s_dump_count++] = (uint32_t)strtoul(e, (char**)&e, 0);
                 }
             }
+            if (s_dump_frame == -2) {
+                const char* f = getenv("TLS_TEX_DUMP_FRAME");
+                s_dump_frame = f ? atoi(f) : -1;
+            }
             for (int di = 0; di < s_dump_count; di++) {
                 if (s_dump_addrs[di] != tu->guest_addr) continue;
-                char path[128];
-                snprintf(path, sizeof(path), "build/recomp/tex_%08X_%ux%u_f%u.ppm",
-                         tu->guest_addr, tu->width, tu->height, tu->format);
+                int ord = -1;
+                if (s_dump_frame >= 0) {
+                    if (s_dump_frame != g_runner_current_frame) continue;
+                    ord = s_dump_ord[di];
+                    if (ord >= 64) continue;   /* plenty for one frame, and bounded */
+                    s_dump_ord[di] = ord + 1;
+                }
+                char path[160];
+                if (ord >= 0) {
+                    snprintf(path, sizeof(path), "build/recomp/tex_%08X_%ux%u_f%u_p%d_s%d.ppm",
+                             tu->guest_addr, tu->width, tu->height, tu->format,
+                             g_runner_current_frame, ord);
+                } else {
+                    snprintf(path, sizeof(path), "build/recomp/tex_%08X_%ux%u_f%u.ppm",
+                             tu->guest_addr, tu->width, tu->height, tu->format);
+                }
                 FILE* df = fopen(path, "wb");
                 if (df) {
                     fprintf(df, "P6\n%u %u\n255\n", tu->width, tu->height);
@@ -1139,7 +1190,7 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
                             s_d3d11.gx_staging_rgba[pi] = (uint32_t)(out_r | (out_g << 8) | (out_b << 16) | (out_a << 24));
                         }
                     }
-                } else if (is_ink_art) {
+                } else if (is_ink_art && tls_ink_matte_allowed()) {
                     // Ink matte: dark artwork on a uniform light plate - the title logo
                     // (0x90782DE0: black lettering on cream) and the button-prompt icons are
                     // authored this way. Wii GX removes the plate in the TEV alpha stage,
