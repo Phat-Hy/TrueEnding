@@ -6359,3 +6359,15 @@ Item 2 is the cheaper next test: make the root pools (`/meta`, `/ticket`, `/titl
 `-106` for all of them. `tls_nand_host_init()` already creates `meta`, `ticket`, `shared2/sys` and the
 title tree, but the numeric pool directories `/title/00010001`..`/title/00010007` are still missing, and
 every one of them is queried in each space-check sweep.
+
+#### 5c.42 C. Trap, measured: a leftover seeded save fails the invariant at the NEW path
+
+`tools/invariant.ps1` failed on this round with `FAIL: frame 3500 differs from the recorded
+reference` purely because Dolphin's files were still seeded - at the *new* location
+`SaveData/title/00010000/534c5345/data/`. Removing `savedata.dat` and `banner.bin` from there restored
+PASS with the hash unchanged (`A00272DF...`).
+
+So the "delete the seeds afterwards" rule of 5c.39 D now applies to
+`SaveData/title/00010000/534c5345/data/`, not to `savedata/savedata.dat`; a stale seed there changes the
+title flow (CONTINUE instead of the dialog) and the frame-3500 hash with it. If a run of the invariant
+fails with no source change, check that directory first.
