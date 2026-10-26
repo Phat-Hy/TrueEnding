@@ -4120,6 +4120,31 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0;
         }
 
+        /* 5c.41 F: fn_800A4AD4 is the manager entry that sets kind=0 (the branch that
+         * holds NANDCreateAsync at 0x800A3198) and state=2. Its only caller is the
+         * TITLE task, at 0x80535674 - inside the mode-12/16/20 stretch that answers
+         * the save dialog. fn_800A48B8 (kind 2/3, state 1) is what the save driver
+         * calls instead. Inert probe: is the kind-0 request ever made? */
+        case 0x800A4AD4: case 0x80535678: {
+            if (tls_nand_probe_on()) {
+                static u32 s_4ad4 = 0;
+                if (s_4ad4 < 20) {
+                    s_4ad4++;
+                    u32 obj = ctx->gpr[3];
+                    char msg[224];
+                    snprintf(msg, sizeof(msg),
+                             "SAVEKIND0 pc=0x%08X obj=0x%08X kind(+72)=%u state=%u "
+                             "result(+344)=%u lr=0x%08X",
+                             ctx->pc, obj,
+                             obj ? mem_read32(ctx, obj + 72) : 0,
+                             obj ? mem_read32(ctx, obj + 348) : 0,
+                             obj ? mem_read32(ctx, obj + 344) : 0, ctx->lr);
+                    tls_nand_probe_slot(msg);
+                }
+            }
+            return 0;
+        }
+
         /* 5c.41 D: the save driver's four fn_800A48B8 calls, at their RETURN
          * addresses (a bl return address is a dispatch point, so these fire). The
          * API entry stores 1 into +348, but no Update ever then sees state 1, so
@@ -4212,6 +4237,11 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             if (tls_nand_probe_on()) {
                 static u32 s_dec_n = 0;
                 if (s_dec_n < 40) {
+                    u32 obj0 = ctx->gpr[3];
+                    u32 kind0 = obj0 ? mem_read32(ctx, obj0 + 72) : 0;
+                    /* kind 3 is the no-op path (0x800A30AC: b 0x800A41CC); only a
+                     * different kind can reach the create, so skip the noise. */
+                    if (kind0 == 3) return 0;
                     s_dec_n++;
                     u32 obj = ctx->gpr[3];
                     char msg[224];
