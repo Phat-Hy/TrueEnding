@@ -6,30 +6,48 @@
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
 creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.43**; §5c.42 and everything before it is history.
+state is **§5c.45 J**; §5c.44 and everything before it is history, and several of its conclusions are
+corrected below.
 
-> **§5c.43 CLOSES THE CONTINUE QUESTION, and the answer is a boundary.** With the save from 5c.42 K left in
-> place (not deleted) the title opens it for *read*, reads all 1 348 992 bytes with no NAND error, passes
-> its own length check (`out_len == expected == 1348992`) and takes mode 9 into `Game` at frame 1680 - the
-> 5c.39 manager-state-16 stall does not reproduce. It cannot show a *restored* game: the save's payload is
-> 1 348 992 **zero** bytes, so frame 4000 is **byte-identical** to a fresh boot. Telling CONTINUE from NEW
-> GAME needs an in-game save, i.e. gameplay past the tutorial page.
+> **WHERE THE PAGE STANDS NOW (read §5c.45 I and J before anything else).** The tutorial page's missing
+> character is fully explained and **one question is left**:
 >
-> **§5c.43 also settles where the frame-4000 page's problem starts: two-texture TEV stages we never bind.**
-> The page's art is all in the command stream (sky `0x91F3FFE0`, parchment sheet `0x921DEA60`, font atlas
-> `0x90703AA0`) and two batches carry a **second** TEV texture: b27 (`0x921FEAE0`, a crowned crest) and b30
-> (`0x90305600`, a white->black ramp - the wipe). `gfx_d3d11.c` binds only `texmap0` unless `TLS_TEV=1`, so
-> b27 renders as a flat dark plate (its pixels are exactly the batch's own `(30,0,0)` vertex colour) and b30
-> draws the sheet twice. The ink matte is a symptom-level stand-in for the same gap. Read §5c.43 C and **D**
-> first - D also corrects its own first reading (b27's stage arithmetic puts the crest in *alpha* only, and
-> we decode the crest fully opaque, so "the crest is the missing illustration" is a lead, not a fact).
+> 1. `b0..b5` (the player character, textures `pc_ga_g_a01` / `pc_wa_g_a01` ...) are **not clipped** -
+>    measured with w-divided NDC: 0 vertices outside the clip volume on all six batches
+>    (`outside=0/1044 ... 0/216`). The old "NDC z 13.3..22.9, so they draw nothing" claim was a misread of
+>    **clip-space** z; retracted in 5c.45 I.
+> 2. They **do** render, but their CMPR texture is **all-transparent at the page frame** -
+>    `0x92AEAEC0` reads `00000000FFFFFFFF 00000000FFFFFFFF ...` at frames 4000 *and* 4001, i.e.
+>    `c0=c1=0`, every index 3, alpha 0 everywhere (5c.45 J3). Drawn over the sky the model is simply absent
+>    (`docs/evidence/host_f4000_cut12_5c45.png`).
+> 3. That texture is the `0/-1` pattern the guest's own decoder **`fn_800D6BE0(dst, src, w, h)`** produced
+>    from an `FF00FF00...` input (5c.45 D, F).
+> 4. The input is a **staging slot in the `0x903xxxxx` arena** (family `0x9038F1C0`, `0x903911C0`,
+>    `0x903951C0`, `0x9039D1C0`, `0x903AD1C0`, `0x903CD1C0`, ...). **No lifted store writes it** (the new
+>    instruction-granularity store watch recorded zero stores, 5c.45 H), it is **not** one of that frame's
+>    `GfxCopyTex` destinations, and it is **not** an asset-loader destination - so some other host path
+>    writes it and **that path is the single open question**.
+> 5. The page's illustration is built from an EFB copy of that render, so it inherits the emptiness; the
+>    composite tail then saturates to white and the ink matte erases the parchment.
+
+> **CONTINUE question is closed** (§5c.43 A/B): with the game's own save present the title reads all
+> 1 348 992 bytes, no NAND error, passes its length check, mode 9 into `Game` at frame 1680. It cannot
+> restore a game because the save payload is **zero** bytes. Mode 9 is the length-*equal* branch, not the
+> corrupted dialog.
+
+> **The reference now exists** (`screenshot/tutorial.png` by the user, copied to
+> `docs/evidence/ref_dolphin_tutorial_5c44.png`, plus `title.png`, `menu.png`, `chapter 1.png`): the
+> parchment sheet *is* the page background, the illustration is the player character, and the crest is real
+> ink art above the title. Geometry: game frame 2560x1440, only the **top 912 rows (63%)** are visible, so
+> compare with the top 456 rows of a 1280x720 host shot
+> (`docs/evidence/cmp_tutorial_ref_vs_host_5c43.png`). The **SKIP button is outside that crop**, so the
+> label clause still needs a capture of the page's lower part.
 
 **Check the confinement first.** A shell at Windows **Low** mandatory integrity cannot verify anything: the
 build dies with `PermissionError: build/recomp/objects.rsp`, `git hash-object -w` says "insufficient
-permission for adding an object to repository database", and `tools/invariant.ps1` says "Access to the path
-'logs\invariant.log' is denied". It is not an ACL problem; the session must run at full access (this
-session: `danger-full-access` / medium integrity). `whoami /groups | Select-String 'Mandatory Label'`
-answers it in one command.
+permission", and `tools/invariant.ps1` says "Access to the path 'logs\invariant.log' is denied". It is not an
+ACL problem; the session must run at full access. `whoami /groups | Select-String 'Mandatory Label'` answers
+it in one command.
 
 **MANDATORY, before any other command:** every runner launch opens the game window **minimized**:
 
@@ -37,62 +55,84 @@ answers it in one command.
 build\recomp\tls_runner.exe --window --minimized --frames <N> --fps 60
 ```
 
-`--minimized` exists (`recomp/host_runner.c`): the window is created hidden, shown with
-`SW_SHOWMINNOACTIVE`, and `SetForegroundWindow`/`SetFocus` are never called. `Play_TheLastStory.bat` and
-`tools/invariant.ps1` already pass it. Do not launch the runner windowed-in-foreground and do not automate
-input against a foreground game window - focus stealing has already cost this project a full session, and
-the capture is unaffected by minimization (identical frame-3500 hash).
+`--minimized` creates the window hidden, shows it with `SW_SHOWMINNOACTIVE`, and never calls
+`SetForegroundWindow`/`SetFocus`. Do not launch the runner foregrounded and do not automate input against a
+foreground game window; focus stealing has cost this project a full session and the capture is unaffected
+(identical frame-3500 hash).
 
-**The next three steps, in order of value.**
+**The next four steps, in order of value.**
 
-1. *Fix the TEV path's colour stage for 2D text, then re-judge the page.* §5c.43 E fixed the alpha
-   combiner's bit layout (it was read at the colour combiner's positions) and measured **no** visual effect;
-   the SKIP label's absence under TEV is a **colour**-combine problem - b34's colour word decodes to a flat
-   `ras.rgb` with no texture term. That, not the alpha stage, is the next TEV question. The page's own
-   acceptance still needs a reference frame (§5c.43 D: b27's crest only reaches alpha, and the crest decodes
-   fully opaque, so what that plate should look like is unknown). **Do not extend the ink matte.**
-2. *A reference frame for the tutorial page.* The corpus still has none (`run3` 4370-8297 and all of
-   `run4` were checked in 5c.39). A new Dolphin capture means driving Dolphin's window;
-   `tools/dolphin_capture.py` does it by posting Win32 key messages, which the no-foreground-automation
-   rule above puts out of scope for an agent session, so this has to be a human-driven capture.
-3. *Prune the inert diagnostics* if the file should be leaner: the `TLS_NAND_PROBE` set (NAND-LAYER,
-   SAVEMOD, SAVEAPI, SAVEKIND0, STATE1, SAVECREATE, SAVECREATE3, SAVEDRV, StateTab) and `TLS_IPC_DELAY`.
-   `TLS_NO_4228_FABRICATION` no longer exists - the fabrication is gone.
+1. *Name the writer of the `0x903xxxxx` staging slots.* Everything else about the missing character is
+   measured. Start from the host side: `d3d11_efb_copy_to_guest` (`recomp/gfx_d3d11.c:1596`, writes through
+   `host_resolve_gx_guest_addr`) and the `resolve_guest_pointer` write sites in `recomp/replacements.c`.
+   The store watch (5c.45 H) and the chain probe already exonerate lifted stores and that frame's copies,
+   so the writer is either a deferred/queued copy path or a replacement writing a texture-sized buffer.
+2. *Then the page's compositing*: the ink matte erases the parchment (5c.43 C - it is still load-bearing for
+   the title logo, which `title.png` can now check), and the composite tail (b12..b24, eight `SRCALPHA/ONE`
+   passes) saturates before the page draws (5c.44). Both are independent of the character question.
+3. *A capture of the page's lower part* would settle the SKIP label, which under the guest's own TEV state
+   is a flat raster-colour quad - our default path only shows letters because `PSAlpha` multiplies the
+   texture RGB (5c.43 D/G). Which is faithful needs that capture; do not "fix" it blind.
+4. *Prune the inert diagnostics* if the file should be leaner: the `TLS_NAND_PROBE` set and `TLS_IPC_DELAY`.
 
-**Rules that decide whether a round is wasted** (all learned the hard way; details in §5c.37 / 5c.42 / 5c.43):
+**Rules that decide whether a round is wasted** (each one cost a run or a wrong conclusion):
 
-* **Environment variables do not survive between shell invocations.** Set `TLS_INPUT_SCRIPT` *in the same
-  command* as the run, and check the log's `Seq:` line before believing any probe output.
-* Unset flags with `Remove-Item Env:\NAME` - assigning `''` leaves `getenv()` non-NULL (§5c.33a).
-* **Never compare frame N with N+1 on the Chapter-1 page.** The engine alternates a page half (37 batches,
-  xfbs=1) with a gameplay half (54 batches, xfbs=0) every other frame; `TLS_PRESENT_WINDOW=a,2` shows the
-  parity in two lines. `TLS_PRESENT_ON_XFB` is ON by default and already skips the non-XFB half.
-* `TLS_EFB_CHAIN` is a **single** frame, and the copy destinations the page samples are written by the
-  *other* half of the cycle - probe the odd frame (e.g. 3961) to see them.
-* `Seq:`'s `GX: <n> vtx` is the state at print time, not the frame's final batch list; use
-  `TLS_PRESENT_PROBE` for per-frame batch/vtx counts.
-* A texture that is not re-uploaded inside a frame produces no `TLS_TEX_DUMP_FRAME` output - that is a
-  measurement ("the cached texture is what both draws sampled"), not a failure of the instrument.
+* **Set env vars in the same command as the run** and check the log's `Seq:` line before believing a probe.
+  Unset with `Remove-Item Env:\NAME` - `''` leaves `getenv()` non-NULL.
 * **Delete the target `d3d11_screenshot_<n>.ppm` before every run you intend to compare.** A run that dies
-  early leaves the *previous* run's file in place, and reading it produces a confident, wrong conclusion -
-  exactly how 5c.43 E came to report "no visual effect" for a change that actually aborts the guest
-  (5c.43 H). `tools/invariant.ps1` already does this; manual runs must too.
-* One screenshot per run (`TLS_SHOT_FRAMES=<n>`, plus **`TLS_SHOT_GUEST=1`** when the run changes what is
-  drawn - otherwise a changed present count moves the capture, §5c.43 F). **Do not compare the runner's
-  built-in fixed schedule (frames 100..1800): it does not dump the presented frame** - at 1300 it averages
-  3.2 while a real capture of frame 1300 averages 144.3 (§5c.43 D).
-* **`TLS_BATCH_CUTOFF` changes the frame's inputs, not only its tail** on frames whose EFB copies are issued
-  after the last batch: they never get serviced, so the composite reads the previous half's content
-  (§5c.43 F).
+  early leaves the previous run's file, which produced a confidently wrong "no visual effect" verdict once
+  (5c.43 E -> corrected in H). `tools/invariant.ps1` does this; manual runs must too.
+* **Frame every memory dump**: `TLS_MEM_DUMP=0xADDR,LEN[,FRAME]`. This game **reuses** texture addresses
+  (`0x91EEEDE0` held ASCII `r_ch`/`a#ra` at frame 1734), so an end-of-run dump says nothing about a texture's
+  content when it was sampled (5c.45 D1).
+* **Prefer `TLS_BATCH_RECT`/`TLS_STORE_WATCH` over `TLS_WATCH_ADDR`** for attribution: the block-level watch
+  samples once per dispatched block, so the block it names is the one *after* the writer (5c.45 G).
+* **Do not instrument `mem_read8`/`mem_write8`**: a frame-gated print in `mem_read8` corrupted the heap
+  (`STATUS_HEAP_CORRUPTION`, 5c.45 E1). Record into a ring and print at end of frame instead.
+* **Clip-space z is not NDC z**: for perspective batches `transform_vertex` leaves `z = c22*pz + c23 + w`,
+  `w = w`; divide before judging clipping. `TLS_BATCH_DUMP` now prints `wNDC=[..] outside=n/total`.
+* **Never compare frame N with N+1 on the Chapter-1 page**: the engine alternates a page half (37 batches,
+  xfbs=1) with a gameplay half (54 batches, xfbs=0). `TLS_PRESENT_ON_XFB` (ON by default) skips the odd half.
+* **`TLS_BATCH_CUTOFF` changes the frame's inputs**, not only its tail, when the guest issues EFB copies
+  after the last batch: they are never serviced and the composite reads the previous half (5c.43 F).
+* **The runner's built-in fixed schedule (frames 100..1800) does not dump the presented frame** - at 1300 it
+  averages 3.2 against 144.3 for a real capture. Use `TLS_SHOT_FRAMES` (+ `TLS_SHOT_GUEST=1` when the run
+  changes what is drawn).
+* `Seq:`'s `GX: <n> vtx` is the state at print time, not the frame's final batch list; use
+  `TLS_PRESENT_PROBE`. `TLS_EFB_CHAIN` is a single frame.
 * A probe only fires at a dispatch point - a branch target or a `bl` return address - never mid-block.
 * Never hand-edit `build/recomp/generated/chunks` and never mutate guest state to make progress.
 * `src/` is read-only. Edits go in `recomp/`, `tools/`, `docs/`; `build/` is git-ignored.
-* Prefer retiring a fabricated answer over adding one, and measure what a replacement writes, not just what
-  it returns. A bare grep for a 32-bit address misses every `lis`/`addi` pair (`python tools/find_xref.py`).
+* Prefer retiring a fabricated answer over adding one, and measure what a replacement *writes*, not just what
+  it returns. A bare grep for a 32-bit address misses every `lis`/`addi` pair (`tools/find_xref.py`).
+
+**CPU-core / recompiler work has its own rules** (`tools/DolRecomp/` is a *nested git clone*, and the outer
+repo's `.gitignore` hides it, so our delta lives in **`docs/dolrecomp/cpu-core.patch`** - regenerate it
+after every edit there, or the change is unrecoverable):
+
+* Rebuild chain: `ninja -C tools/DolRecomp/build dolrecomp.exe` -> **copy to `tools/dolrecomp.exe`** ->
+  `python tools/recomp_harness.py lift` -> `build-runner`. The lift uses the *copy*; skipping it silently
+  re-lifts with the old emitter (measured).
+* Emissions live in `tools/DolRecomp/src/backend/emitter.c`; the runtime side is
+  `tools/DolRecomp/src/cpu/cpu.c` + `cpu.h`. Edit surgically - a bad anchor once deleted two core functions,
+  which had to be reconstructed from `tools/DolRecomp/build/libdr_cpu.a` (5c.44 H).
+* `python tools/recomp_harness.py lift` regenerates **all 459 chunks**; always re-run
+  `pwsh tools/invariant.ps1` afterwards - it is what proves the lift is faithful (it reproduced
+  `EAB33141...` after the store hook was added).
+* The GQR/paired-single layout in `cpu.c` is **correct as shipped**: `GQR6=0x00040004` at a 2-byte stride is
+  a byte copy (type 4 = u8) under the port's decode, and the "documented" layout reads it as float and traps
+  with an alignment exception at ~frame 396 (5c.45 A). Do not re-open that.
+
+**Useful instruments added this session** (all inert by default): `TLS_MEM_DUMP=addr,len[,frame]` (raw bytes,
+frame-gated), `TLS_STORE_WATCH=lo,hi` + `TLS_STORE_WATCH_FRAME=n` (instruction-granularity store ring),
+`TLS_TEXDECODE_PROBE` (`fn_800D6BE0` arguments), `TLS_BATCH_RECT=<frame>` (per-batch region readback),
+`TLS_SHOT_GUEST=1`, `TLS_TEX_DUMP_FRAME`, `TLS_TEX_ALPHA_ADDR=addr,...`, `TLS_NO_INK_MATTE`,
+`TLS_PROJ_LOG=1` (frame-stamped projection changes), `TLS_TEV_DUMP_BATCH=<b>[,<frame>]`, and the `wNDC`/
+`outside` fields in `TLS_BATCH_DUMP`.
 
 **Verification is not optional:** `python tools/recomp_harness.py build-runner`, then
-`pwsh tools/invariant.ps1` (exit 0). Re-record the frame-3500 hash only for an intentional visual change,
-and say so. Commit per change. Update this block when you land something.
+`pwsh tools/invariant.ps1` (exit 0). Re-record the frame-3500 hash only for an intentional visual change, and
+say so. Commit per change. Update this block when you land something.
 
 ---
 
