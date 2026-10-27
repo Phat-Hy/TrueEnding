@@ -6,7 +6,7 @@
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
 creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.46 E**; §5c.45 and everything before it is history, and several of its conclusions are
+state is **§5c.46 I**; §5c.45 and everything before it is history, and several of its conclusions are
 corrected below.
 
 > **THE PAGE'S WHITE FIELD IS FIXED (§5c.46 D).** The tutorial page at frame 4000 now renders the reference's
@@ -17,6 +17,15 @@ corrected below.
 > **Frame 3500 is unchanged** - the fix costs the reference frame nothing. Evidence:
 > `docs/evidence/host_f4000_matte_gate_5c46.png` and the reference comparison
 > `docs/evidence/cmp_f4000_plate_glow_5c46.png`.
+
+> **THE PAGE IS FROZEN AND ONLY 1 OF ITS 5 ELEMENTS RENDERS (§5c.46 H, I).** Viewed whole, the reference
+> page has five things: the parchment + printed border (we match these), the player-character illustration
+> filling the left half, a fan/rake burst behind him, the crowned crest, and the title "Movement and Camera"
+> in large dark type at the right-centre plus body text under it. Ours has only the first. And the page is
+> **pixel-identical from frame 4000 to 4800** (0 changed pixels over 800 frames) - it never animates, scrolls
+> or fades, which is the likely reason its layout also differs from the reference (border at ~14% vs ~33% of
+> the visible band, title up-and-left vs right-centre). **The highest-value item on the page is now the
+> missing animation/timeline**, not any texture.
 
 > **What is still wrong on the page, in order of tractability (§5c.46 E, §5c.45 T/I):**
 > 1. **The title text is drawn and then covered.** It renders in the right colour (measured mean RGB
