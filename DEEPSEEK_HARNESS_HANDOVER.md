@@ -7508,6 +7508,38 @@ the left half, ours covers +-0.3 NDC) rather than of clipping.
 invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save
 1 348 992 / 29 344, 0 changes to `src/`.
 
+#### J. The character is drawn and TRANSPARENT - the whole chain, closed
+
+Two experiments finish the picture that I/J opened.
+
+**J1. Nothing else drawn (`TLS_BATCH_CUTOFF=6`, shot at 4000):** the frame is **pure black, min and max
+`(0,0,0)`** - b0..b5 alone produce no visible pixel. But the EFB clear is black, so that alone cannot tell
+"no pixels" from "black pixels".
+
+**J2. Drawn over the sky (`TLS_BATCH_CUTOFF=12`, which keeps the full-screen sky at b9):** the frame is the
+cloud sky (mean 118.8); the region where b2..b5 project (NDC x -0.42..0.19, y -0.74..0.04 -> px ~375..762,
+~266..454) is plain cloud with **no model** (`docs/evidence/host_f4000_cut12_5c45.png`). The only dark thing
+in the frame is a two-pixel speck elsewhere.
+
+**J3. Why: the model's texture is fully transparent at the page frame.** Framed `TLS_MEM_DUMP`:
+`0x92AEAEC0` at frames **4000 and 4001** both read `00000000FFFFFFFF 00000000FFFFFFFF ...`. As CMPR each
+8-byte block is `c0=0x0000, c1=0x0000, bits=0xFFFFFFFF` -> `c0 <= c1` and every index is 3 -> **alpha 0 in
+every texel**. A model drawn with an all-transparent texture contributes nothing, which is exactly J1/J2.
+
+**So the chain is closed, in order:**
+
+1. b0..b5 are **not clipped** (I: 0/1044, 0/3990, 0/1782, 0/519, 0/60, 0/216 vertices outside);
+2. they render, but their CMPR texture is **all-transparent at the page frame** (J3);
+3. that texture is the `0/-1` pattern the guest's own decoder (`fn_800D6BE0(dst,src,w,h)`, F) produced from
+   an `FF00FF00...` input (framed dump at 1889, D);
+4. that input is a **staging slot in the `0x903xxxxx` arena** that no lifted store writes (H) and no
+   `GfxCopyTex` of that frame writes (H) - i.e. host code, writer still unnamed;
+5. the tutorial page's illustration is built from an EFB copy of this render, so it inherits the emptiness,
+   and the composite tail then saturates what remains to white.
+
+**The one open question is now (4)**: what fills the `0x903xxxxx` staging slots with `FF00` before the
+decoder runs. Everything else about the missing character is measured and accounted for.
+
 **Verification**: build green; invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`
 on the re-lifted chunks; save 1 348 992 / 29 344; 0 changes to `src/`; `docs/dolrecomp/cpu-core.patch`
 regenerated (9 670 bytes, now including the store hook).
