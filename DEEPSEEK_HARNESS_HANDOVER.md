@@ -9758,3 +9758,49 @@ take the same path.
 **Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
 `src/`; measurement only.
+
+### AK. The "show" is the layout task's INIT virtual (slot 0x0C), gated by flags in +0x38
+
+Reading `fn_800D2868` at the exact instruction that produces `lr=0x800D28C0` settles what the show is:
+
+```
+800D2888  lwz   r4, 0x38(r29)        ; task state flags
+800D288C  andis. r3, r4, 0xdead      ; test bits 16..31 against 0xdead
+800D2890  addis r0, r3, 0x2153
+800D2894  cmplwi r0, 0x0
+800D2898  beq   <next task>          ; not a live task -> skip
+800D289C  rlwinm. r0, r4, 0, 29, 29
+800D28A0  bne   <next task>          ; bit 29 (0x4) -> skip
+800D28A4  rlwinm. r0, r4, 0, 30, 30
+800D28A8  bne   <init already blocked> ; bit 30 -> skip the init call
+800D28AC  lwz   r12, 0x0(r29)        ; vtable
+800D28B0  mr    r3, r29
+800D28B4  lwz   r12, 0xC(r12)        ; SLOT 0x0C = the layout's init/bind
+800D28B8  mtctr r12
+800D28BC  bctrl                      ; <- return address 0x800D28C0, exactly what the probe saw
+800D28C0  cmpwi r3, 0x0
+800D28C4  beq   <skip>
+800D28C8  lwz   r0, 0x38(r29)
+800D28CC  ori   r0, r0, 0x2
+800D28D0  stw   r0, 0x38(r29)        ; "initialised"
+```
+
+So `fn_801F42A8` is the LayoutTask's **vtable slot 0x0C**, i.e. its init/bind virtual - not a "show" API - and the
+execute loop calls it only while `[task+0x38]` bit 30 is clear, then records success in bit 1 (`0x2`). That is why
+the probe sees so few calls and why the content node was "shown" exactly once (frame 1696): **its init ran, and the
+init is what sets the visibility bit.**
+
+The interesting asymmetry is now in `+0x38`, not in `+0xFC`:
+
+* the content node's `+0x38` is **`0x00000022`** (bit 1 set = initialised, bit 5 set);
+* the six layouts that draw have their own values, and `0x81861F60` is re-initialised at 3648-3654 (its init runs
+  again, which is what re-shows it).
+
+**Next step, precise**: log `+0x38` and `+0xFC` together for the content node and for `0x81861F60` across frames
+1600-3700 (one default-off probe, print on change). The question becomes concrete: what clears `+0x38` bit 1 (or
+bit 30) on `0x81861F60` so that its init runs again at 3648, and why does that never happen to `0x81359B80`? That
+is the same "re-activation" from AJ, now with both flag words in view.
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
+`src/`; measurement only.
