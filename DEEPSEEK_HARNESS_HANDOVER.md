@@ -7971,3 +7971,44 @@ work is the *draw* side of that pass: what the guest submits before each of thes
 **Verification**: build green, invariant **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
 `src/`; both texture probes are default-off, `TLS_TEXPROBE_FROM` is new.
+
+## 5c.46 The draw side: what the texture chain copies is a LOADING screen
+
+### A. Both of the model's texture sources are zeroed by the same decoder
+
+`b0`/`b1` sample `0x92AEAEC0` (the capture-derived texture) and `b2`-`b5` sample file textures
+(`0x92C05720`, `0x92C0FF40`, `0x92C1D8A0`). Watching the file texture with the ring cleared late in the run:
+
+```
+TLS_STORE_WATCH=0x92C05720,0x92C05760  TLS_STORE_WATCH_FRAME=1900
+[StoreWatch] frame=1905 cia=0x800D6DD8 ea=0x92C05721 value=0x00000000
+[StoreWatch] frame=1905 cia=0x800D6DE8 ea=0x92C05720 value=0x00000000
+[StoreWatch] frame=1905 cia=0x800D6DF8 ea=0x92C05723 value=0x00000000
+[StoreWatch] frame=1905 cia=0x800D6E08 ea=0x92C05722 value=0x00000000
+```
+
+Those are the decoder's own byte stores (`fn_800D6BE0`, the same routine as frame 1883) - so the file texture is
+overwritten with zeros at 1905 exactly as the capture-derived one is at 1883. **Every texture the model samples
+is zeroed by the decoder**, and always because the staging buffer it reads was empty.
+
+### B. And what the chain copies is the LOADING screen
+
+`TLS_SHOT_FRAMES=1882` captures the frame being converted:
+
+![frame 1882](docs/evidence/host_f1882_5c46.png)
+
+**A black screen with a "LOADING" indicator** (mean 0.15, max 255 on the text). So at frame 1882 the game is on
+its loading screen, the EFB copy takes that screen into `0x90536FE0`, the convert pass turns it into the staging
+buffer, and the decode turns *that* into the model's texture. Everything downstream is faithfully empty because
+the screen was.
+
+**That reframes the remaining question in a way that can actually be answered**: either the game legitimately
+captures a loading screen here (and the page's illustration is meant to come from somewhere else), or the
+capture is supposed to happen at a moment when the screen shows content - which is a *timing/ordering* question
+about our run, not a rendering one. The two are distinguishable by watching when `0x90536FE0` holds something
+non-uniform, i.e. by sampling that buffer across frames 1700-1900 and finding the frames where the chain has
+real input.
+
+**Verification**: build green, invariant **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
+`src/`; the capture is `docs/evidence/host_f1882_5c46.png`.
