@@ -3221,8 +3221,13 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                     u32 pending = (base && resolve_guest_pointer(ctx, base))
                                       ? mem_read32(ctx, base + 36) : 0;
                     s_lw_reports++;
-                    printf("[TLS LOSTWAKE] frame=%d base=0x%08X queue=0x%08X pending(+0x24)=0x%08X %s\n",
-                           g_runner_current_frame, base, queue_addr, pending,
+                    /* queue head/tail before the enqueue: if both are null the thread is going
+                     * onto an EMPTY queue while its condition is already clear, i.e. the wakeup
+                     * that should have found it has already happened and been consumed. */
+                    u32 qh = mem_read32(ctx, queue_addr);
+                    u32 qt = mem_read32(ctx, queue_addr + 4);
+                    printf("[TLS LOSTWAKE] frame=%d base=0x%08X queue=0x%08X head=0x%08X tail=0x%08X pending(+0x24)=0x%08X %s\n",
+                           g_runner_current_frame, base, queue_addr, qh, qt, pending,
                            pending == 0 ? "<-- sleeping with the condition ALREADY satisfied" : "");
                     fflush(stdout);
                 }

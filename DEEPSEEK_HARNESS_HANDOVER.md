@@ -8826,10 +8826,27 @@ replacement for `0x805F5C70` deliberately lets the SDK's own code run, so the di
 *scheduler* interleaves here - the thread switches only at the points the guest's scheduler chooses, and the
 wakeup was delivered at one of those points in between the condition check and the enqueue.
 
-**Next step, precise**: instrument one iteration of that worker around `lr=0x8071D984` (its `OSSleepThread` call
-site) to print (a) the condition value it tested, (b) the queue head before enqueue, and (c) whether the queue was
-signalled between the test and the enqueue. `TLS_WAIT_PROBE=all` plus the sleep-tail ring already record (b) and
-(c) - the missing piece is the test value, which the probe above now supplies.
+**Measured (b): the queue is EMPTY when the worker parks.** The probe now also prints head/tail:
+
+```
+[TLS LOSTWAKE] frame=170 base=0x8087D5E4 queue=0x8087D610 head=0x00000000 tail=0x00000000
+               pending(+0x24)=0x00000000 <-- sleeping with the condition ALREADY satisfied
+[TLS LOSTWAKE] frame=376 ... head=0x00000000 tail=0x00000000 pending(+0x24)=0x00000000
+```
+
+so the worker enqueues onto an empty queue (nothing to wake with it) while its condition is already clear: the
+wakeup that should have released it has already happened and found an empty queue.
+
+**And no primitive is stubbed**: `OSSleepThread` (`0x805F5C70`) and `OSLockMutex`/`OSTryLockMutex`
+(`0x805F3130`/`0x805F3350`) are all probe-only and `return 0` so the SDK's own code runs. This is therefore not a
+missing lock or a faked sleep - it is a **timing/ordering difference**: our run reaches the enqueue after the
+signal where hardware reaches it before. Our reads complete instantly and the scheduler switches exactly where the
+guest asks, so the interleaving differs from the console's.
+
+**Next step, precise**: either (a) trace one worker iteration across the `lr=0x8071D984` sleep site and the
+`lr=0x8071D448` signal site *in one timeline* to name the exact ordering that lets the signal precede the enqueue
+(both are already instrumented), or (b) accept that the protocol is timing-sensitive here and nudge the workers
+once per frame so the page can advance - documenting it as an emulation allowance rather than a fix.
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`.
