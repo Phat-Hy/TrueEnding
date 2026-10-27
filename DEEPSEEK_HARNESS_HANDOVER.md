@@ -8164,5 +8164,6 @@ texmap1 (behind `TLS_TEV=1`) is the route, and it is the same gap that makes b27
 ~frame 2144 (5c.43 H), so changing bit positions is off-limits; binding the second texture without moving any
 bit positions is the safe half of that work.
 
-**Verification**: build green, invariant **PASS** with `98F0FD10141D20E6E2D42203DA4CBF1317D8994ED2D4D91CD1EF924C7FE44D06`,
-save 1 348 992 / 29 344, 0 changes to `src/`.
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`
+(the original value - the restructured rule does not disturb this frame), save 1 348 992 / 29 344, 0 changes
+to `src/`.
