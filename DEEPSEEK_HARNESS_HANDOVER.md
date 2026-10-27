@@ -9588,3 +9588,43 @@ question instead of an open-ended rendering hunt.
 **Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
 `src/`; `TLS_LAYOUT_CREATE_PROBE` (which now also covers the four return sites) is default-off.
+
+### AG. CORRECTION: the visibility bit IS written - my watch had the wrong address - and the camp UI hides it
+
+AC and AE both said "nothing writes `[task+0xFC]`". **That conclusion was wrong, and for a stupid reason**: the field
+of the hidden task is at `0x81359B80 + 0xFC = 0x81359C7C`, and the watch had been armed on `0x81359BFC` (a +0x7C
+slip). Armed on the right address, the field has a complete, readable write history:
+
+```
+f=1542 cia=0x8000660C ea=0x81359C7C value=0x00000000   boot memset
+f=1656 cia=0x801F40FC ea=0x81359C7C value=0x70000000   constructor fn_801F407C
+f=1656 cia=0x801F41D4 ea=0x81359C7C value=0x74000000   constructor, bit 30 ON
+f=1656 cia=0x803D0574 ea=0x81359C7C value=0x34000000   camp UI, bit 30 OFF
+f=1696 cia=0x801F4334 ea=0x81359C7C value=0x3C000000   fn_801F42A8, bit 30 ON
+f=2020 cia=0x803D1998 ea=0x81359C7C value=0x2C000000   fn_803D164C, bit 30 OFF - last write of the run
+```
+
+So the mechanism is not a missing setter at all:
+
+* `0x801F4334`, inside **`fn_801F42A8`**, is the "show this layout" call (it ORs the bit), and the same address
+  pattern (`lwz r0,0xfc(rX) / oris r0,r0,0x4000 / stw r0,0xfc(rX)`) appears all over `fn_803D164C`;
+* **`fn_803D164C`** is the camp/town UI setup, and it deliberately **clears** bit 30 on a large batch of layouts -
+  including the page's content node - at frames 1656 and 2020. The value it writes (`0x2C000000`) is the last
+  write in the whole run, which is why the page's content is hidden from frame 2020 onward.
+
+The page's content is therefore **shown once at frame 1696 and hidden again at frame 2020**, by scene code that is
+doing exactly what it is told. What is missing is the *later* `fn_801F42A8` call that should show it when the
+tutorial page actually starts - the page's script-side step that 5c.46 Z was already circling.
+
+**Next step, precise**: probe `fn_801F42A8` (the show call) for the whole run and log `(frame, layout, caller)`.
+Every hide/show of every camp layout then has a name and a caller, and the missing one is the argument that never
+appears: the call that shows `0x81359B80` after frame 2020. That is a much smaller search than "find the setter" -
+it is now "find the caller that should exist".
+
+**Lesson for the next session** (this cost two rounds): when a store watch says "nothing writes X", recompute the
+address from the object and the field offset by hand and print it. `0x81359B80 + 0xFC` is `0x81359C7C`, not
+`0x81359BFC`.
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
+`src/`; no new knobs (this section is measurement only).

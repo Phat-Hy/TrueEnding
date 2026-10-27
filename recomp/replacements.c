@@ -8424,7 +8424,22 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             static int s_probe = -1;
             static u32 s_n = 0;
             if (s_probe < 0) s_probe = getenv("TLS_LAYOUT_CREATE_PROBE") ? 1 : 0;
-            if (s_probe && s_n < 90) {
+            /* Log the CONSTRUCTOR only when TLS_LAYOUT_CTOR_ONLY is set: the factory is called far
+             * too often to leave room for the one line that names a new object (r3 at the
+             * constructor IS the object, so this is how 0x81359B80 gets a parent and a name). */
+            static int s_ctor_only = -1;
+            if (s_ctor_only < 0) s_ctor_only = getenv("TLS_LAYOUT_CTOR_ONLY") ? 1 : 0;
+            /* TLS_LAYOUT_CREATE_FROM=<frame>: the factory is called hundreds of times before the
+             * page exists, so a start frame is the only way to see the call that builds the page's
+             * hidden layout (store watch: 0x81359B80 is constructed at frame 1656 by 0x801F40AC). */
+            static int s_from = -1;
+            if (s_from < 0) {
+                const char* e = getenv("TLS_LAYOUT_CREATE_FROM");
+                s_from = e ? atoi(e) : 0;
+                if (s_from < 0) s_from = 0;
+            }
+            if (s_probe && s_n < 90 && !(s_ctor_only && address != 0x801F407Cu) &&
+                g_runner_current_frame >= s_from) {
                 extern int g_runner_current_frame;
                 char s4[72], s5[72];
                 for (int slot = 0; slot < 2; slot++) {
@@ -8459,7 +8474,12 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         case 0x80363E10:
         case 0x80363E38:
         case 0x80363E54:
-        case 0x80363E70: {
+        case 0x80363E70:
+        /* The HUD/UI loader's single return site (lr 0x801F65DC): it builds a whole batch of
+         * layouts in one frame, including the page's hidden content node (vptr store for
+         * 0x81359B80 lands at frame 1656), so logging r3 here lists the objects in creation
+         * order and lets that node be matched to the name the factory logged beside it. */
+        case 0x801F65DC: {
             static int s_probe = -1;
             static u32 s_n = 0;
             if (s_probe < 0) s_probe = getenv("TLS_LAYOUT_CREATE_PROBE") ? 1 : 0;
