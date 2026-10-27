@@ -7498,6 +7498,35 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0;
         }
 
+        /* fn_800D6E48 is the game's software CMPR encoder: it asks 0x80615E00 for an RGBA8
+         * (format 6) and a CMPR (format 14) texture of the same size, then converts one into
+         * the other. The model's texture comes out fully transparent, so the question is
+         * whether the RGBA8 source is empty or the encoder mistranslates it. These two probes
+         * sit on the CALLER's bl-return addresses, where r3 is the returned texture pointer
+         * (handover 5c.45 M). Probe only. */
+        case 0x800D6E80: {
+            static int s_probe = -1;
+            if (s_probe < 0) s_probe = getenv("TLS_CMPR_PROBE") ? 1 : 0;
+            if (s_probe) {
+                extern int g_runner_current_frame;
+                printf("[TLS Cmpr] frame=%d rgba8_tex=0x%08X (w=%u h=%u)\n",
+                       g_runner_current_frame, ctx->gpr[3], ctx->gpr[26], ctx->gpr[27]);
+                fflush(stdout);
+            }
+            return 0;
+        }
+        case 0x800D6E9C: {
+            static int s_probe = -1;
+            if (s_probe < 0) s_probe = getenv("TLS_CMPR_PROBE") ? 1 : 0;
+            if (s_probe) {
+                extern int g_runner_current_frame;
+                printf("[TLS Cmpr] frame=%d cmpr_tex=0x%08X dst=0x%08X src=0x%08X\n",
+                       g_runner_current_frame, ctx->gpr[3], ctx->gpr[24], ctx->gpr[25]);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
         case 0x80534C58: {
             static int s_probe = -1;
             if (s_probe < 0) s_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;

@@ -7717,3 +7717,46 @@ encoder's output is `c0=c1=0` with every index 3. Two candidates remain, and bot
 both pointers, then frame-dump the RGBA8 buffer at the encode frame and compare its content with the CMPR
 output. That distinguishes (1) from (2) in one run.
 
+#### N. `0x92AEAEC0` - the texture the model samples - receives a `"chnk"` STRING, not texels
+
+Did the probe above (`TLS_CMPR_PROBE`, two replacement cases on the caller's bl-return addresses) and found
+that `0x80615E00(w, h, fmt)` returns a **byte size**, not a pointer (`0x40000` = 256x256x4 RGBA8, `0x8000` =
+CMPR 256x256). The real pair for one call is `src=0x92025B20`, `dst=0x90536FE0`, and the CMPR output there is
+**uniform grey** (`8000 8000 8000 8000` -> `c0=c1=0x8000`), not transparent - so that encoder is **not** what
+makes the model's texture.
+
+Asked the precise question instead - who writes the address the model samples (`TLS_STORE_WATCH` over
+`0x92AEAEC0..0x92AEAEE0`, 4004 frames):
+
+```
+[StoreWatch] hook calls=3835515592 armed=1 in-range=64
+  cia=0x80625660 ea=0x92AEAEC0 value=0x00000063      'c'
+  cia=0x80625660 ea=0x92AEAEC1 value=0x00000068      'h'
+  cia=0x80625660 ea=0x92AEAEC2 value=0x0000006E      'n'
+  cia=0x80625660 ea=0x92AEAEC3 value=0x0000006B      'k'
+```
+
+and the writer at `0x80625660` (`chunk_0392_text1_806241C0.c`) is a **string copy loop**:
+
+```
+80625660: stb   r3, 0(r4)
+80625664: addi  r4, r4, 1
+80625668: addi  r9, r9, -1
+8062566C: b     0x80625710
+```
+
+So the address the model samples as a texture is being filled with the ASCII string `"chnk"` - a chunk
+descriptor. That changes the shape of the problem: `0x92AEAEC0` behaves like a **texture object/descriptor**
+(magic header first, pixel data behind a pointer - which is exactly what the dump of `0x92025B20` showed:
+self-pointer, `0x9000218C`, dims), not like a raw pixel buffer. Sampling it as pixels would then produce
+exactly the kind of garbage we see.
+
+**Next step**: dump `0x92AEAEC0` around the frame the string is written, follow the pointer fields to the real
+pixel data, and check what the renderer resolves for `tex.guest_addr` when the guest passes that object. If we
+are handing GX the object instead of its pixel pointer, the fix is in the texture-address handling, not in any
+of the paths chased above.
+
+**Verification**: build green, invariant **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
+`src/`.
+
