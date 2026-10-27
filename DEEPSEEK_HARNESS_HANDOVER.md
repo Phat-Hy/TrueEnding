@@ -7457,12 +7457,26 @@ TLS_STORE_WATCH=0x90380000,0x903D0000 TLS_STORE_WATCH_FRAME=1885  ->  armed, 0 s
 TLS_STORE_WATCH=0x903CD000,0x903CE000 TLS_STORE_WATCH_FRAME=150   ->  armed, 0 stores recorded
 ```
 
-So **no lifted store writes that arena at all**. Combined with G (the block-level attribution was stale) and
-with the address not appearing in any EFB-chain log line, the writer of `0x903CD1C0` is **host-side code** -
-either an HLE replacement in `recomp/replacements.c` that writes guest memory, or a renderer path that is not
-this frame's `GfxCopyTex`. That is a much smaller search space than guest code: grep `recomp/` for the writes
-into `0x903xxxxx` and check which of them can reach a 256x256 staging slot with packed 16-bit values
-(`FF00FF00`, `FF04FF10`).
+So **no lifted store writes that arena at all**. With G's stale-attribution correction, the writer of
+`0x903CD1C0` is not guest code. The EFB-copy path was the obvious host candidate, and it was checked with the
+probe *armed at that frame* rather than against an old log:
+
+```
+TLS_EFB_CHAIN=1889 -> 11 copies, destinations 0x9038D1C0, 0x90536FE0, 0x903DBDC0, 0x90395DC0,
+                      0x903917C0, 0x905C3000, ...  (0 mentions of 0x903CD1C0)
+                      and every one reports srcavg=(0,0,0), i.e. the EFB was BLACK that frame
+```
+
+So neither guest stores nor this frame's `GfxCopyTex` writes it. Remaining host candidates, in order worth
+checking: an HLE replacement in `recomp/replacements.c` that writes guest memory; a renderer write that is not
+routed through the copy queue (e.g. `TLS_DEFER_EFB_COPY`-style deferred paths, or the VI/XFB upload); or a
+second GX context whose copies are not in the chain probe's frame filter.
+
+**And a second finding that matters more than the writer**: at frame 1889 the EFB is **black**
+(`srcavg=(0,0,0)` on all eleven copies). Frames whose render is empty produce degenerate EFB copies, and the
+tutorial page's illustration is one of the things built from such a copy - so the empty render and the
+degenerate texture are the same story seen twice, and the empty render is the one to chase: it is the same
+shape as b0..b5's clipped geometry (NDC z 13.3..22.9, §5c.44 D3).
 
 **Verification**: build green; invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`
 on the re-lifted chunks; save 1 348 992 / 29 344; 0 changes to `src/`; `docs/dolrecomp/cpu-core.patch`
