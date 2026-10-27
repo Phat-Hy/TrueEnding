@@ -8752,3 +8752,45 @@ scheduler never selecting them again.
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_THREAD_PROBE` is default-off.
+
+### R. Correction to Q: thread switching WORKS - the workers are simply never scheduled again after ~frame 203
+
+Q said "`__OSCurrentThread` never changes for the entire run". **That is wrong.** It was based on the runner's
+switch log printing nothing, and that log is **opt-in** (`TLS_WATCH_CURRENT_THREAD=1`) - I had not enabled it.
+Enabled, it shows real switching:
+
+```
+[Runner] __OSCurrentThread 0x00000000 -> 0x807CB658 by block pc=0x805F49E4 lr=0x805F49EC (frame 0)
+[Runner] __OSCurrentThread 0x807CB658 -> 0x00000000 by block pc=0x805F4920 lr=0x805F50A8 (frame 169)
+[Runner] __OSCurrentThread 0x00000000 -> 0x807CB658 by block pc=0x805F4920 lr=0x805F5168 (frame 170)
+[Runner] __OSCurrentThread 0x807CB658 -> 0x808638F0 by block pc=0x805F4920 lr=0x805F5168 (frame 170)   <- worker A
+[Runner] __OSCurrentThread 0x808638F0 -> 0x807CB658 by block pc=0x805F4920 lr=0x805F5168 (frame 170)
+[Runner] __OSCurrentThread 0x807CB658 -> 0x80879210 by block pc=0x805F4920 lr=0x805F5168 (frame 170)   <- worker B
+```
+
+(6 reports is the instrument's cap, not the number of switches.)
+
+and watching the pointer itself shows switching **every frame** afterwards:
+
+```
+TLS_STORE_WATCH=0x800000E4  (ring cleared at frame 200)
+frame=201  -> 0x00000000
+frame=202  -> 0x807CB658
+frame=202  -> 0x00000000
+frame=203  -> 0x807CB658
+frame=203  -> 0x00000000
+...
+```
+
+So the guest scheduler is alive and switching continuously. **What is true, and is the real finding, is that after
+the frame-170 burst the pointer only ever alternates between the main thread (`0x807CB658`) and zero** - neither
+worker (`0x808638F0`, `0x80879210`) appears again in ~2 000 frames. The workers are therefore **blocked and never
+woken**, not unscheduled in general.
+
+**That rewrites the end of the chain**: the page waits on a BSS flag whose setter is one of these two blocked
+workers, and the question becomes *which queue each worker sleeps on and who should wake it* - a narrower,
+better-instrumented question than "the scheduler never switches", and one this project has machinery for
+(`TLS_WAIT_PROBE`, the sleep-tail ring, `OSWakeupThread` counts per queue, `TLS_LOSTWAKE_PROBE`).
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`.
