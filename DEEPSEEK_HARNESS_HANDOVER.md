@@ -7682,3 +7682,38 @@ calls` is reported at end of run, and a non-zero count with `in-range=0` is now 
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
 `src/`; `docs/dolrecomp/cpu-core.patch` regenerated (12 996 bytes).
 
+#### M. The writer is the game's own software CMPR ENCODER (`fn_800D6E48`)
+
+The caller of the byte-wise assembler is at `0x800D6E48`, and its first instructions say what the routine is:
+
+```
+800D6E48: stwu  r1, -80(r1)      ; prologue
+800D6E5C: or    r24, r3, r3      ; r24 = dst   (the CMPR target)
+800D6E60: or    r25, r4, r4      ; r25 = src
+800D6E64: or    r26, r5, r5      ; r26 = width
+800D6E6C: or    r27, r6, r6      ; r27 = height
+800D6E74: li    r5, 6
+800D6E7C: bl    0x80615E00       ; fn(w, h, format=6,  0)  -> r31   (RGBA8)
+800D6E8C: li    r5, 14
+800D6E98: bl    0x80615E00       ; fn(w, h, format=14, 0)  -> r30   (CMPR)
+800D6EAC: stw   r0, 84(r4)       ; clears a field in the texture object
+...      : (the byte assembly at 800D6F98 feeds r30 from r31)
+```
+
+So it is **a software CMPR encoder**: it asks the engine for an RGBA8 (format 6) and a CMPR (format 14)
+texture of the same size, then converts the RGBA8 source into CMPR byte by byte. Nothing here is host-side -
+the `FF00` bytes and the all-transparent result are produced by the game's own code, from an RGBA8 source
+buffer that is either empty or wrongly indexed.
+
+**Where the investigation now stands, precisely**: the model's texture comes out fully transparent because this
+encoder's output is `c0=c1=0` with every index 3. Two candidates remain, and both are cheap to separate:
+
+1. the RGBA8 source buffer (`r31`) is itself empty/transparent when the encoder runs - i.e. whatever should
+   have rendered or loaded into it did not, or
+2. the encoder's source indexing is off in a way our emulation provokes (it reads the source through
+   `0x80615E00`'s texture object and writes through the tiled layout we also decode elsewhere).
+
+**Next step**: probe the *return* of `0x80615E00` (a dispatch point, so a replacement can catch it) to capture
+both pointers, then frame-dump the RGBA8 buffer at the encode frame and compare its content with the CMPR
+output. That distinguishes (1) from (2) in one run.
+
