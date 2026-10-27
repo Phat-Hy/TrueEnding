@@ -7858,6 +7858,33 @@ they are distinguishable only by looking at the *guest routine's* intent rather 
 `src=0x903CD1C0` and why) rather than continuing to look for a writer. That is a pure reverse-engineering step
 over the generated C, needs no runs, and it is where the remaining ambiguity actually lives.
 
+#### R. The routine's shape: pixel copy -> decode -> CLEAR THE SOURCE
+
+Read the caller (`chunk_0052_text1_800D41C0.c`, around label 800D70C0 and the decode return at 800D7168):
+
+```
+800D7080..800D70E4:  lbz/stb x4 loops          ; 4-byte pixel copy/convert between r24 and r29
+800D70E8: bc  16, 0, 0x800D6F70                ; loop back
+800D7164: bl  0x800D6BE0                       ; decode(src=staging -> dst=texture)
+800D7168: or  r3, r28, r28                     ; return address of that bl
+800D716C: or  r5, r30, r30                     ; size
+800D7170: li  r4, 0                            ; value 0
+800D7174: bl  0x80006648                       ; memset(r28, 0, r30)  <- CLEARS THE SOURCE
+```
+
+So one pass over a texture is: **copy/convert its pixels inside the staging buffer, decode the staging buffer
+into the texture, then `memset` the staging buffer to zero**. The clear is *by design* - it is the routine's
+own cleanup, and the frame-1882 clear captured in P is that `memset` firing for a *previous* texture.
+
+**That makes the P observation precise**: the decode that runs at frame 1883 for `0x92AEAEC0` reads a staging
+buffer that the *previous* pass had just zeroed, which means the **copy/convert step did not run, or ran into a
+different buffer, before this decode**. The instrument to point at is the loop at `800D7080..800D70E4`: its
+source base (`r24`) and destination (`r29`) for that pass say whether the pixels were copied at all.
+
+**Verification**: build green, invariant **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
+`src/`.
+
 **Verification**: build green, invariant **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
 `src/`.
