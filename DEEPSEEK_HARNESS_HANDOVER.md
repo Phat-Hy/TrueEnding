@@ -8566,10 +8566,27 @@ submits the crest and the body text, and never re-drives the page's transform - 
 frozen and why its content stops after the SKIP button (5c.46 M). The renderer is faithfully drawing everything
 this task hands it.
 
-**Next step**: find who is supposed to set `+0x24` / `+0x14` / `+0x20` on this task. Those are set by a producer
-(another task, a completion callback, or an I/O completion) that in our run never runs or never fires. Reading
-`0x80570CFC`'s other branches (the ones it *would* take if the gates were set) names the values it expects, and
-`TLS_LOADTASK_PROBE` shows live whether they ever arrive.
+**ANSWERED - nothing ever writes the gates.** `TLS_STORE_WATCH=0x80AEDD04,0x80AEDD1C` covers exactly the gate
+fields (+0x14 .. +0x2b of the task at `0x80AEDCF0`) for the whole run, and the only stores recorded are 16-bit
+writes into `+0x18..+0x1f` (the counter) at frame 0:
+
+```
+[StoreWatch] frame=0 cia=0x80695044 ea=0x80AEDD08 value=0x0000000E
+[StoreWatch] frame=0 cia=0x8069504C ea=0x80AEDD0A value=0x0000001F
+[StoreWatch] frame=0 cia=0x80695054 ea=0x80AEDD0C value=0x00000000
+[StoreWatch] frame=0 cia=0x80695058 ea=0x80AEDD0E value=0x00000004
+```
+
+**No store ever targets `+0x14`, `+0x20` or `+0x24`, at any frame.** So nothing primes the task - the producer
+(either another task, a completion callback, or an I/O completion) never fires in this run. That is the end of the
+chain: the page stops after its furniture because its own load task is never started, and the task is never
+started because nothing writes its gates.
+
+**Next step**: find the producer. `0x80570CFC`'s *other* branches (the ones it would take with the gates set) name
+the work it expects to do, and the callers of whatever should set `+0x24` are reachable from the task manager's
+registration path. Concretely: find writes to `0x80AEDCF0+0x24` by *any* means - the store watch says there are
+none, so the field must be set by an initialiser that never runs, i.e. the task is registered but its start
+routine is never invoked, which is a task-manager bug rather than a game-logic one.
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_LOADTASK_PROBE` is default-off.
