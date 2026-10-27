@@ -7480,6 +7480,24 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
          * fn_800A4228 is three instructions: *out = mgr+360; return mgr+348 != 0, so a
          * console with no save file reaches the dialog only if the manager stored a
          * failure status - the question is which status, and which layer produced it. */
+        /* fn_800D6BE0 is the routine whose inner block (0x800D6CF0) stamps
+         * 00000000FFFFFFFF over the character-texture buffers. The block watch reported the
+         * mid-function label, where r3..r6 are whatever the branch left; this is the real
+         * ENTRY, so these are the arguments the routine was called with (handover 5c.45 E).
+         * Probe only - the guest's own code still runs. */
+        case 0x800D6BE0: {
+            static int s_probe = -1, s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_TEXDECODE_PROBE") ? 1 : 0;
+            if (s_probe && s_n < 40) {
+                s_n++;
+                printf("[TLS TexDecode] entry r3=0x%08X r4=0x%08X r5=0x%08X r6=0x%08X r7=0x%08X lr=0x%08X sp=0x%08X\n",
+                       ctx->gpr[3], ctx->gpr[4], ctx->gpr[5], ctx->gpr[6], ctx->gpr[7],
+                       ctx->lr, ctx->gpr[1]);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
         case 0x80534C58: {
             static int s_probe = -1;
             if (s_probe < 0) s_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;

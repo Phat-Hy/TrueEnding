@@ -7362,6 +7362,42 @@ function's *entry* argument is read at its real entry point (`fn_800D6BE0`, not 
 **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344,
 0 changes to `src/`.
 
+#### F. The decoder's real signature: `fn_800D6BE0(dst, src, width, height)`
+
+A proper dispatch-point probe (`recomp/replacements.c`, `case 0x800D6BE0`, `TLS_TEXDECODE_PROBE=1`, probe
+only - the guest code still runs) reads the arguments at the routine's **entry** and settles what the last
+three rounds could not:
+
+```
+[TLS TexDecode] entry r3=0x92025B20 r4=0x903CD1C0 r5=0x00000100 r6=0x00000100 lr=0x800D7168
+[TLS TexDecode] entry r3=0x9202DB20 r4=0x9039D1C0 r5=0x00000080 r6=0x00000080 lr=0x800D7168
+[TLS TexDecode] entry r3=0x9202FB20 r4=0x903911C0 r5=0x00000040 r6=0x00000040 lr=0x800D7168
+[TLS TexDecode] entry r3=0x9120DA20 r4=0x903AD1C0 r5=0x00000100 r6=0x00000080 lr=0x800D7168
+[TLS TexDecode] entry r3=0x91211A20 r4=0x903951C0 r5=0x00000080 r6=0x00000040 lr=0x800D7168
+[TLS TexDecode] entry r3=0x91212A20 r4=0x9038F1C0 r5=0x00000040 r6=0x00000020 lr=0x800D7168
+```
+
+So it is **decode(src, dst, w, h)**: `r3` = destination in the sampled texture arena (`0x91xxxxxx` /
+`0x92xxxxxx`), `r4` = source, `r5`/`r6` = width/height in powers of two, always called from `lr=0x800D7168`.
+The sources are a family of **per-texture staging slots** 0x800 (and 0x400) apart - `0x9038F1C0`,
+`0x903911C0`, `0x903951C0`, `0x9039D1C0`, `0x903AD1C0`, `0x903CD1C0`, ... - which is exactly what E2's
+"written by something else, 16-bit packed values" address was: a staging slot, not an EFB copy and not a
+framebuffer.
+
+**So the chain is confirmed as**: pack file → `CXDecompressFast` → staging slot (`0x903xxxxx`) → this decoder
+→ texture arena (`0x91/0x92xxxxxx`) → sampled by the model. The open question is now precise and narrow:
+**is the staging slot holding the decompressed texture at the moment the decoder runs?** At frame 1889 the
+slot measured `FF00FF00FF00...` (uniform 16-bit), which for a character texture is implausible.
+
+**Next step**: watch one staging slot (`0x903CD1C0`) across the frames around a decode call and read it
+*framed* (`TLS_MEM_DUMP=0x903CD1C0,64,FRAME`), then compare with the CPU-side duration of
+`CXDecompressFast` for that texture - i.e. determine whether the decompressor writes the slot at all, or
+whether the decoder is racing ahead of it. Both instruments already exist; no new code needed.
+
+**Verification**: build green, invariant **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
+`src/`; the new probe is behind `TLS_TEXDECODE_PROBE` and inert by default.
+
 **Verification**: `TLS_MEM_DUMP`'s optional frame field added in `recomp/host_runner.c` only; build green,
 invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save
 1 348 992 / 29 344, 0 changes to `src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
