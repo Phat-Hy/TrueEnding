@@ -7618,8 +7618,18 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                             if (mh) { f348 = *(u32*)(mh + 348); f360 = *(u32*)(mh + 360); }
                         }
                     }
-                    printf("[LoadTask] frame=%d f00=0x%08X f1c=0x%08X f24=0x%08X mgr=0x%08X mgr348=%u mgr360=0x%08X\n",
-                           g_runner_current_frame, f[0], f[3], f[5], mgr, f348, f360);
+                    /* r13-23336 gates 0x805EC060 (status 64 while zero) and so gates the whole
+                     * load state machine; r13-26456 is the save manager. */
+                    u32 flag_addr = ctx->gpr[13] + (u32)(s32)(-23336);
+                    u32 flag = 0, status = 0;
+                    {
+                        u8* fh = (u8*)resolve_guest_pointer(ctx, flag_addr);
+                        if (fh) flag = *(u32*)fh;
+                        u8* sh = (u8*)resolve_guest_pointer(ctx, 0x80003174u);
+                        if (sh) status = *(u8*)sh;
+                    }
+                    printf("[LoadTask] frame=%d r13=0x%08X flag(0x%08X)=0x%08X status174=%u mgr348=%u\n",
+                           g_runner_current_frame, ctx->gpr[13], flag_addr, flag, status, f348);
                     fflush(stdout);
                 }
             }

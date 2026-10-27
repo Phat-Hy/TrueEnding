@@ -8641,3 +8641,48 @@ simply idling while the page holds a static state. The discriminator is the pump
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_LOADTASK_PROBE` now prints the real manager fields and is
 default-off.
+
+### P. The flag that gates the whole load state machine is READ 16 times and WRITTEN NEVER
+
+Following O's pump into `0x805EC060` gives a four-instruction status getter:
+
+```
+805EC060: lwz   r0, -23336(r13)     ; a global flag (measured address 0x8087FB98)
+805EC064: cmpwi r0, 0
+805EC068: bc    12,2, 0x805EC074    ; if != 0 -> read the real status
+805EC06C: li    r3, 64              ; else return 64
+805EC070: blr
+805EC074: lis   r3, -32768
+805EC078: lbz   r3, 12676(r3)       ; return *(u8*)0x80003174
+```
+
+and the flag is **0**, so every call returns the constant 64 and the loader's state machine never leaves its
+"not ready" branch. Probed live (`TLS_LOADTASK_PROBE`, task entry): `r13 = 0x808856C0`, flag address
+`0x8087FB98`, `flag = 0x00000000`, `status174 = 0`, `mgr348 = 0` - from frame 6 through 4200, unchanged.
+
+**Its write history is a single store for the whole run:**
+
+```
+TLS_STORE_WATCH=0x8087FB98,0x8087FB9C
+[StoreWatch] frame=0 cia=0x80006608 ea=0x8087FB98 value=0x00000000     <- one store, value 0
+```
+
+and `0x80006608` is a **memset loop** (`stw r7,28(r3)` / `stwu r7,32(r3)` with r7 = 0), i.e. boot clearing a
+region rather than code setting a meaningful value.
+
+**And nothing in the game writes it.** All 459 chunks were searched for the small-data access
+`gpr[13] + (s32)(-23336)`: **16 hits, every one an `lwz` (a read)** - `805E8CF4`, `805EB8E0`, `805EB978`,
+`805EBB14`, `805EBB54`, `805EBB70`, `805EBFD0`, `805EC060`, `805ECEB0`, `805F79F4`, `805FA904`, `805FCAFC`,
+`805FED64`, `80669864`, `8066C198`, `80670564`. There is no `stw`/`stb` to it anywhere.
+
+**Conclusion**: the flag cannot be set by the game's own code. Its nonzero value must come from either the DOL's
+initialised data at load time, or from an SDK/OS step that we handle in HLE. That is now the page's single
+blocking question - and it is a *data-initialisation* question, not a rendering or task-scheduling one.
+
+**How to answer it next**: the recompiler's own DOL loader knows this file's real section table (a hand parse of
+`orig/main.dol` does not match the standard header layout - its address array reads back as file offsets, so the
+file has been repacked); use it to report the initialised word at `0x8087FB98`. If the image says 0, then the
+flag is set by a runtime step we never perform, and the SDK/HLE surface is where to look.
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`.
