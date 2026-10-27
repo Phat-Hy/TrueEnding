@@ -8455,8 +8455,12 @@ batch on the page half, in draw order, with what it is and why it does or does n
 4. **crest** - no batch here samples `0x921FEAE0` (5c.43's crest address) any more; b27/b31/b32/b35/b36 use
    `0x90D19B80` 64x64. Arena reuse has moved it, so the crest's batch must be re-identified from the texture dump
    rather than from an old address.
-5. **body text** - not identifiable in this list. b28's 114 vertices are exactly the 19 glyphs of the title, and
-   no other batch has the vertex count of the two body-text lines.
+5. **body text** - **partly identified by vertex count**. Six vertices per glyph, so `vtx/6` is the string
+   length: b28 = 114/6 = **19** = "Movement and Camera", and **b34 = 120/6 = 20 = "Use [button] to move."**
+   exactly - that batch samples `0x9076E5E0` 256x256 fmt 2, the label atlas 5c.43 G analysed. The long line
+   (73 characters) is not present as a batch. So the body text's first line IS drawn, and per 5c.43 G its colour
+   combine (`ZERO ONE ras.rgb ZERO`) makes the letters appear only through `PSAlpha` - the same flat-raster
+   problem as the title.
 
 **So of the five, exactly one (the parchment) is solved**, the illustration is blocked on its texture, and the
 fan/crest/body text need batch identification from the texture side - which is why the next step is a texture
