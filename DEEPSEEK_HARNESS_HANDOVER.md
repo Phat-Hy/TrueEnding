@@ -8530,3 +8530,46 @@ in the renderer - the renderer is faithfully drawing everything the guest submit
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`; the atlas dump is `docs/evidence/tex_9076E5E0_256x256_f2_5c46.png`.
+
+### N. The page belongs to `GameLoadTask`, which never finishes - its gate fields are all zero
+
+The engine telemetry names the owner of the page: task `[0]` is **`GameLoadTask`**, `task=0x80AEDCF0`,
+`up=0x80570CFC`, and it is **still registered at frame 4804** with `+34=1`. Its `+1c` field is not a progress
+value - it fluctuates (0, 79, 92, 276, 631, 112, 41, 110, 306, 102), i.e. a counter, not a percentage:
+
+```
+frame    0  up=0x80570CFC +1c=   0
+frame  167  up=0x80570CFC +1c=  79
+frame  296  up=0x80570CFC +1c= 276
+frame  476  up=0x80570CFC +1c= 631
+frame 1992  up=0x80570CFC +1c= 306
+frame 4804  up=0x80570CFC +1c= 102
+```
+
+Its update function (`chunk_0347_text1_805701C0.c`, label 80570CFC) is a gate chain, and a new probe
+(`TLS_LOADTASK_PROBE=1`, on the task's entry) shows **every gate field is zero** while only a float counter at
+`+0x1c` advances:
+
+```
+[LoadTask] frame=167 f00=0 f14=0 f18=0 f1c=0x4B000000 f20=0 f24=0 f28=0 f2c=0
+[LoadTask] frame=169 f00=0 f14=0 f18=0 f1c=0x50000000 f20=0 f24=0 f28=0 f2c=0
+```
+
+`f1c` stepping by `0x01000000` per call is `8388608.0f + 1.0f` - a float counter, not a state.
+
+The code path is consistent with that: `lwz r0,36(r3)` (`+0x24`, zero) branches to `0x80570E04`; there
+`lwz r0,20(r31)` (`+0x14`, zero) branches to `0x80570E48`; there `lwz r0,32(r31)` (`+0x20`, zero) branches on
+again. So the task runs its "nothing ready" path **every frame, forever**.
+
+**That is the page's root cause, and it subsumes the rest**: the load task never advances to the stage that
+submits the crest and the body text, and never re-drives the page's transform - which is exactly why the page is
+frozen and why its content stops after the SKIP button (5c.46 M). The renderer is faithfully drawing everything
+this task hands it.
+
+**Next step**: find who is supposed to set `+0x24` / `+0x14` / `+0x20` on this task. Those are set by a producer
+(another task, a completion callback, or an I/O completion) that in our run never runs or never fires. Reading
+`0x80570CFC`'s other branches (the ones it *would* take if the gates were set) names the values it expects, and
+`TLS_LOADTASK_PROBE` shows live whether they ever arrive.
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_LOADTASK_PROBE` is default-off.

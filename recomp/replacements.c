@@ -7584,6 +7584,37 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0;
         }
 
+        /* 0x80570CFC is the GameLoadTask update - the task that owns the tutorial/loading
+         * page and never finishes (handover 5c.46 M/N). Its own code returns early when
+         * [task+0x00] == 0 while [task+0x14] != 0, so print the fields that gate it. */
+        case 0x80570CFC: {
+            static int s_probe = -1, s_n = 0;
+            static u32 l_f[8] = {0,0,0,0,0,0,0,0};
+            if (s_probe < 0) s_probe = getenv("TLS_LOADTASK_PROBE") ? 1 : 0;
+            if (s_probe) {
+                extern int g_runner_current_frame;
+                /* the offsets the function itself tests: 0x00, 0x14, 0x18, 0x1c, 0x20,
+                 * 0x24 (= the 36(r3) the code branches on), 0x28 (= 40(r3)), 0x2c */
+                static const u32 offs[8] = {0x00,0x14,0x18,0x1c,0x20,0x24,0x28,0x2c};
+                u32 f[8];
+                for (int i = 0; i < 8; i++) {
+                    u32 a = ctx->gpr[3] + offs[i];
+                    u8* h = (u8*)resolve_guest_pointer(ctx, a);
+                    f[i] = h ? *(u32*)h : 0xDEADBEEFu;
+                }
+                int changed = 0;
+                for (int i = 0; i < 8; i++) if (f[i] != l_f[i]) changed = 1;
+                if (changed && s_n < 80) {
+                    for (int i = 0; i < 8; i++) l_f[i] = f[i];
+                    s_n++;
+                    printf("[LoadTask] frame=%d f00=0x%08X f14=0x%08X f18=0x%08X f1c=0x%08X f20=0x%08X f24=0x%08X f28=0x%08X f2c=0x%08X\n",
+                           g_runner_current_frame, f[0],f[1],f[2],f[3],f[4],f[5],f[6],f[7]);
+                    fflush(stdout);
+                }
+            }
+            return 0;
+        }
+
         case 0x80534C58: {
             static int s_probe = -1;
             if (s_probe < 0) s_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;
