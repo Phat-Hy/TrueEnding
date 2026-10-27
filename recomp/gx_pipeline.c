@@ -1012,6 +1012,31 @@ static inline GxVertex transform_vertex(const GxVertex* in) {
         out.w = 1.0f;
     }
 
+    /* TLS_XF_CLIP_PROBE=1: report vertices whose transform lands far outside the clip
+     * volume, with the inputs that produced it (PN matrix index, eye-space z, w). The
+     * tutorial page's 3D batches (b9, b11) come out with |ndc| in the thousands and clip
+     * away entirely - this names the matrix index and z that did it (handover 5c.46 J). */
+    {
+        static int s_clip = -1, s_n = 0;
+        if (s_clip < 0) s_clip = getenv("TLS_XF_CLIP_PROBE") ? 1 : 0;
+        static int s_from = -2;
+        if (s_from == -2) {
+            const char* f = getenv("TLS_XF_CLIP_FROM");
+            s_from = f ? atoi(f) : 0;
+        }
+        extern int g_runner_current_frame;
+        if (s_clip && s_n < 24 && g_runner_current_frame >= s_from) {
+            float w = (out.w != 0.0f) ? out.w : 1.0f;
+            float nx = out.x / w, ny = out.y / w, nz = out.z / w;
+            if (fabsf(nx) > 10.0f || fabsf(ny) > 10.0f || fabsf(nz) > 10.0f) {
+                s_n++;
+                printf("[XfClip] pnm=%u persp=%d eye=(%.3f %.3f %.3f) ndc=(%.1f %.1f %.1f) w=%.4f\n",
+                       s_current_pnm_idx, (int)s_proj_is_perspective, px, py, pz, nx, ny, nz, w);
+                fflush(stdout);
+            }
+        }
+    }
+
     /* The TEV stage's RASC input is the XF's lit channel colour, not the FIFO's CLR0. */
     if (xf_lighting_enabled()) {
         xf_lighting_compute(&out, px, py, pz);

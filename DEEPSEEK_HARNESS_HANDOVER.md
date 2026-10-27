@@ -8356,3 +8356,45 @@ never arriving.
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`; the capture is `docs/evidence/host_f4800_5c46.png`.
+
+### J. The page's 3D batches are CLIPPED AWAY - not texture-less - and the transform probe narrows why
+
+The batch dump's new `outside=n/total` field (5c.45 I) shows the page's 3D content is being clipped, not drawn
+transparently:
+
+```
+b9  366 vtx persp=1  wNDC=[x -64536..93876  y -0.41..72171]  outside=273/366
+b11 606 vtx persp=1  wNDC=[x -3239..-1.04   y -0.62..5363 ]  outside=606/606
+```
+
+and `b11` is the **fan/rake burst** from the reference - `addr=0x91AAC860 128x128 fmt=14`, whose dumped texture
+(`docs/evidence/page_tex_sheet_5c44.png`) is unmistakably the fan. So two of the page's five missing elements
+(the fan burst, and very likely the illustration's background) are *transformed out of the frustum*, which is a
+different defect from 5c.45 T's empty texture and needs a different fix.
+
+**New probe** `TLS_XF_CLIP_PROBE=1` (+ `TLS_XF_CLIP_FROM=<frame>`) reports any vertex whose transform lands
+outside, with its inputs. At the page frame:
+
+```
+[XfClip] pnm=0 persp=1 eye=(-97.093 -209.073   6.924) ndc=(14.7  39.4 1.1) w=-6.9240
+[XfClip] pnm=0 persp=1 eye=(-76.131 -207.952   8.841) ndc=( 9.0  30.7 1.1) w=-8.8412
+[XfClip] pnm=0 persp=1 eye=(-75.110 -171.416  -0.875) ndc=(-89.9 -255.3 -0.1) w=0.8751
+[XfClip] pnm=0 persp=1 eye=(-55.991 -177.075 -11.303) ndc=(-5.2 -20.4 0.9) w=11.3028
+```
+
+So the geometry lands at **eye positions hundreds of units below and left of the camera** (`y ~ -200`), and `w`
+(`= -eye_z`) swings through tiny values (`0.875`, `1.37`, and negative), which is what blows the NDC up. Every
+sample reports **`pnm=0`**.
+
+**What is and is not established.** Established: these batches are clipped (measured), and the vertices come from
+eye-space positions far outside a sane view volume (measured). Not established: *which* transform is at fault -
+a wrong PN-matrix index cannot be ruled out from `pnm=0` alone because the probe does not yet pair a vertex with
+the batch that owns it, and `pnm=0` may also be what the *visible* character batches use.
+
+**Next step, precise**: print the PN index and the PN matrix itself *per batch* (the batch dump already has the
+batch loop; add `pnm` and the matrix's translation column), then compare a batch known to be visible (`b0`, which
+reports `outside=0/1044`) with `b11`. If they share an index but b11's matrix translation is ~(-50, -200, 0), the
+bug is in which matrix is loaded for that geometry; if they differ in index, the index capture is the bug.
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_XF_CLIP_PROBE` is default-off.
