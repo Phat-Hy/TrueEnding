@@ -8918,3 +8918,52 @@ producer and the work-item structure, and the question becomes why it stops post
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_WAKE_TIMELINE` is default-off.
+
+### V. The production gap is measured: no work is submitted to the streaming manager after frame 376
+
+Watching the worker manager's pending pointer (`0x8087D5E4 + 0x24 = 0x8087D608`) shows exactly when work is posted:
+
+```
+TLS_STORE_WATCH=0x8087D608,0x8087D60C   (ring cleared at frame 0)
+frame=   0  cia=0x800065F8  value=0x00000000      boot clear
+frame= 170  cia=0x8071D2A8  value=0x00000000      still idle
+frame= 376  cia=0x8071D714  value=0x907C5378      WORK ITEM posted (0x907Cxxxx = heap)
+frame= 376  cia=0x8071D730  value=0x00000000      consumed
+frame= 376  cia=0x8071D714  value=0x907C59F4      another work item
+...
+```
+
+and with the ring cleared at frame 400:
+
+```
+[StoreWatch] hook calls=1017662447 armed=1 in-range=0
+```
+
+**Zero writes to the pending pointer for the remaining 1 100 frames.** So the pipeline submits a handful of work
+items at frame 376 - and then never again. The worker is not being starved by a lost signal (U); **no work is
+being produced at all.**
+
+**That closes the loop into a deadlock that is specific to our run:**
+
+```
+the loader's state machine is gated on 0x8087FB98 (P)
+    -> work is submitted by that same loader pipeline (frame 376 only)
+    -> the worker that would set 0x8087FB98 waits for work
+    -> no work is produced after frame 376
+    -> the flag is never set, the loader never advances, the page keeps only its furniture
+```
+
+On hardware something breaks that cycle. The most likely candidate is the **asynchronous streaming/DVD
+completion path**: the pending objects are heap pointers (`0x907C5378`, `0x907C59F4`) and the manager pumps
+operations through `0x805F38A0`; if our DVD/ISFS layer completes reads *synchronously* (all 238 reads in this run
+do return full length) then the completion callback that would re-arm the pipeline may never be invoked the way
+the guest expects.
+
+**Next step, precise**: instrument the streaming manager's submit path (`cia=0x8071D714`, the function containing
+it) to see what it is asked to queue and by whom, then compare that against the DVD/ISFS callback plumbing in
+`recomp/replacements.c` (search `TLS DVD`, `pending.callback`, `TLS_DVD_IDLE_PC`). If the guest's submit is
+conditional on an async completion we deliver synchronously, the fix is to deliver the completion through the
+same path the guest expects rather than inline.
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`.
