@@ -9688,3 +9688,51 @@ those three and the child link never gets made** (`cnt48 = 4` on it, so it does 
 **Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
 `src/`; `TLS_LAYOUT_SHOW_PROBE` / `_FROM` are default-off.
+
+### AI. The page-start function is `fn_805BB658`, and it creates layouts per mode
+
+The creation probe with `TLS_LAYOUT_CREATE_FROM=3600` shows what the page start builds at frame 3648 - three
+layouts, both from one function:
+
+```
+[LayoutCreate] f=3648 r4=0x80898BDC'' r6=0x0000002C lr=0x805BB778
+[LayoutCreate] f=3648 r4=0x80898BDC'' r6=0x0000002C lr=0x805BB778
+[LayoutCreate] f=3648 r4=0x809B2C50'' r6=0x0012A792 lr=0x805BBCF8
+```
+
+Both return sites are inside **`fn_805BB658`** (0x805BB658, size 0x728, in the `game_drv_audio_reverb.c` chunk). It
+is a mode-driven page setup:
+
+```
+bl fn_80684600            ; a mode/id getter
+subi r0, r3, 1
+cmplwi r0, 0x3
+bgt  <skip>               ; only modes 1..4 create this layout
+mulli r0, r0, 0x4C        ; one 0x4C-byte slot per mode
+add r26, r15, r0
+bl fn_8005B3CC            ; name for the mode
+mr r4, r3
+bl fn_801F3FF8            ; create the layout
+stw r3, 0x478(r26)        ; and keep it
+```
+
+so the page's own layouts are created **per mode**, and the three seen at 3648 are that function's output. The
+content node (`0x81359B80`) is *not* created there - it was built once at frame 1656, during the camp scene's own
+`.d2a` load, and hidden at 2020.
+
+**That is the last measured fact and the handoff point.** The next session has two candidate explanations, and
+`fn_805BB658` distinguishes them in one read:
+
+1. the page-start step is supposed to also *show* the scene-created content layout (a call it makes for its own
+   three layouts), and our mode branch takes the wrong arm because `fn_80684600` returns a different value under
+   emulation; or
+2. the camp UI's hide pass (`fn_803D164C`, frame 2020) is a "reset everything" that a later step should undo for
+   this page, and that step is missing.
+
+Read `fn_805BB658` from the `fn_80684600` branch through its stores (`+0x474/+0x478/+0x4b4`) with
+`TLS_LOADTASK_PROBE`-style change printing on the struct it writes into, and log the mode value `fn_80684600`
+returns on that frame. If the mode is right and the page still never shows its content, the answer is (2).
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
+`src/`; no new knobs (measurement only).
