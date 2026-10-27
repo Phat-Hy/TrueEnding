@@ -1204,7 +1204,11 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
                     const char* e = getenv("TLS_INK_PLATE_MIN");
                     s_plate_min = e ? (float)atof(e) : 0.55f;
                 }
-                bool is_ink_art = ((base_luma - min_luma) > 60) && (plate_frac >= s_plate_min);
+                /* Classification stays as it was - it also keeps photographs out of the glow
+                 * path below, which is what makes the parchment render untouched. Only the
+                 * MATTE is gated by plate fraction (see matte_allowed). */
+                bool is_ink_art = (base_luma - min_luma) > 60;
+                bool matte_allowed = is_ink_art && (plate_frac >= s_plate_min);
                 {
                     static int s_stats = -1;
                     if (s_stats < 0) s_stats = getenv("TLS_INK_STATS") ? 1 : 0;
@@ -1222,10 +1226,7 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
                  * the whole page out and speckles its edges - measured on the parchment
                  * (0x921DEA60) in 5c.46 D, where restricting it to small textures is what
                  * keeps the sheet photographic. */
-                static int s_glow_all = -1;
-                if (s_glow_all < 0) s_glow_all = getenv("TLS_GLOW_ALL") ? 1 : 0;
-                bool is_glow_candidate = s_glow_all || (tu->width <= 64 && tu->height <= 64);
-                if (is_glow_candidate && max_delta > 10 && !is_ink_art) {
+                if (max_delta > 10 && !is_ink_art) {
                     for (uint32_t pi = 0; pi < total_px; pi++) {
                         uint32_t px = s_d3d11.gx_staging_rgba[pi];
                         int r = (int)(uint8_t)px;
@@ -1248,7 +1249,7 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
                             s_d3d11.gx_staging_rgba[pi] = (uint32_t)(out_r | (out_g << 8) | (out_b << 16) | (out_a << 24));
                         }
                     }
-                } else if (is_ink_art && tls_ink_matte_allowed()) {
+                } else if (matte_allowed && tls_ink_matte_allowed()) {
                     // Ink matte: dark artwork on a uniform light plate - the title logo
                     // (0x90782DE0: black lettering on cream) and the button-prompt icons are
                     // authored this way. Wii GX removes the plate in the TEV alpha stage,

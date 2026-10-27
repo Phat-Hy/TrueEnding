@@ -8123,3 +8123,41 @@ unaffected.
 (1 348 992 / 29 344), so this is a picture change only.
 
 **Verification**: build green, invariant **PASS** with the new hash, save created, 0 changes to `src/`.
+
+### E. The page's title text IS drawn - and b30 paints over it
+
+With the parchment fixed, the title lettering still looked absent. It is not:
+
+**1. The font-atlas batch draws it.** Diffing the frame with and without batch 28 (`TLS_BATCH_CUTOFF`,
+`0x90703AA0` 512x256 fmt=0, the font atlas) isolates exactly the text line:
+
+```
+changed pixels: 7303      bbox y 154..181, x 248..817
+text pixels    mean RGB (106, 82, 56)      <- dark ink, correct
+background     mean RGB (239, 216, 146)    <- the parchment
+```
+
+So the text is rendered in the right colour and then covered.
+
+**2. The coverer is b30** - the *second* full-screen parchment draw that 5c.44 already flagged. Bisected with
+`TLS_BATCH_CUTOFF` (cutoff N draws batches 0..N-1):
+
+```
+cutoff 28 -> dark px   0        (font atlas not yet drawn)
+cutoff 29 -> dark px 4433        (text present)
+cutoff 30 -> dark px 4433        (b29 is neutral)
+cutoff 31 -> dark px    0        (b30 has painted over it)
+cutoff 33/34/36 -> dark px 0
+```
+
+**So the page loses its own title to a redundant opaque sheet draw**, and the fix is the one 5c.43 D described:
+b30 carries a **second TEV texture** (`0x90305600`, the white->black ramp) that our default path does not bind,
+so a batch that is a *wipe* in the guest's TEV state renders as an opaque copy of the parchment. Binding
+texmap1 (behind `TLS_TEV=1`) is the route, and it is the same gap that makes b27's crest a flat plate.
+
+**Note for whoever takes it**: the earlier attempt to fix the TEV *alpha combiner bit layout* aborted the guest at
+~frame 2144 (5c.43 H), so changing bit positions is off-limits; binding the second texture without moving any
+bit positions is the safe half of that work.
+
+**Verification**: build green, invariant **PASS** with `98F0FD10141D20E6E2D42203DA4CBF1317D8994ED2D4D91CD1EF924C7FE44D06`,
+save 1 348 992 / 29 344, 0 changes to `src/`.
