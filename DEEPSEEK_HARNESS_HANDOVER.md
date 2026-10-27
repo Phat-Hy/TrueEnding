@@ -6,10 +6,30 @@
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
 creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.45 T**; §5c.44 and everything before it is history, and several of its conclusions are
+state is **§5c.46 E**; §5c.45 and everything before it is history, and several of its conclusions are
 corrected below.
 
-> **READ §5c.45 T FIRST - it closes the character-texture thread.** The page's model is drawn correctly
+> **THE PAGE'S WHITE FIELD IS FIXED (§5c.46 D).** The tutorial page at frame 4000 now renders the reference's
+> parchment with its printed border and ornate corners, instead of a white field with a black box. Two rule
+> changes in `recomp/gfx_d3d11.c`: the "dark ink on a light plate" reconstruction is applied only to textures
+> that actually have a flat plate (`plate_frac >= 0.55`; the parchment measures 0.022, the title logo the matte
+> exists for 0.737), and the classification itself is left alone so photographs keep taking their old path.
+> **Frame 3500 is unchanged** - the fix costs the reference frame nothing. Evidence:
+> `docs/evidence/host_f4000_matte_gate_5c46.png` and the reference comparison
+> `docs/evidence/cmp_f4000_plate_glow_5c46.png`.
+
+> **What is still wrong on the page, in order of tractability (§5c.46 E, §5c.45 T/I):**
+> 1. **The title text is drawn and then covered.** It renders in the right colour (measured mean RGB
+>    `106,82,56` on the parchment) and **batch 30 - a second full-screen parchment draw - paints over it**
+>    (bisected with `TLS_BATCH_CUTOFF`: 29 shows 4433 dark px, 31 shows 0). b30 carries a second TEV texture
+>    (`0x90305600`, the white->black ramp) that we do not bind; `TLS_TEV=1` alone does **not** fix it (tested).
+>    Do not move alpha-combiner bit positions - that aborted the guest at ~frame 2144 (5c.43 H).
+> 2. **The illustration's texture is empty** because it is a render-to-texture of an empty frame (5c.45 T):
+>    the EFB copy it converts from holds a uniform clear, and at frame 1882 the game is on its LOADING screen.
+> 3. **The crowned crest** is alpha-only in b27 and decodes fully opaque, so its plate is flat (5c.43 D).
+> Texture/psq/copy questions are answered - do not re-open them.
+
+> **READ §5c.45 T for the character-texture thread (CLOSED).** The page's model is drawn correctly
 > (0 vertices outside the clip volume, §5c.45 I) and its texture is a **render-to-texture of an empty frame**:
 > render -> EFB copy into `0x90536FE0` -> convert (frame 1882, staging `0x903CD1C0`) -> decode (frame 1883) ->
 > the model's texture `0x92AEAEC0`. The copied frame's content is a uniform clear (`8000 8000 ...`), so every
