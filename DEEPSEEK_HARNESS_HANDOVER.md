@@ -8494,3 +8494,39 @@ atlases are.
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`.
+
+### M. The crest and the body text are NOT in the page's command stream at all
+
+Dumped the page's unexplained textures and checked their batches' geometry:
+
+* **`0x9076E5E0` 256x256 fmt 2 is a FONT ATLAS** - white glyphs on transparent, full ASCII plus accented
+  characters (`docs/evidence/tex_9076E5E0_256x256_f2_5c46.png`). My 5c.46 K guess that b34's 20 glyphs were
+  "Use [button] to move." was wrong.
+* **`0x90D19B80` 64x64 is a near-white plate** (mean 254.5) - the SKIP button's body.
+
+and the batches that use them are all in **one corner**:
+
+```
+b33 48 vtx 0x904E5EE0   ndc=[0.73..0.77, -0.79..-0.72]   the button's inner box
+b34 120 vtx 0x9076E5E0  ndc=[0.69..0.80, -0.71..-0.64]   its label
+b35 12 vtx 0x90D19B80   ndc=[0.69..0.81, -0.84..-0.68]   its plate
+```
+
+NDC `x 0.69..0.81, y -0.84..-0.71` is the bottom-right 6% of the frame - **the SKIP button**. So b34 is the
+SKIP label, not the body text.
+
+**Therefore neither the crowned crest nor the two body-text lines are submitted at all** in the page half. The
+page draws only its furniture: the sheet (b26), the border, the title (b28), and the SKIP button (b33-b36). The
+illustration's batches exist but their textures are empty; the fan's batch is clipped.
+
+**That unifies the page's remaining problems into one hypothesis**: the page's draw task stops part way through -
+furniture first, content never - which is also exactly why the page is **frozen** (5c.46 I, 0 changed pixels over
+800 frames). This project has seen this failure mode before (the 5c.39 manager-state-16 stall), and it explains
+why three independent-looking defects (missing crest, missing body text, never-animating page) appear together.
+
+**Next step**: find the task/state that stalls after the SKIP button is drawn. The right instruments are the
+existing task telemetry (`Tasks:` in the frame line, the task-manager and sequence traces) rather than anything
+in the renderer - the renderer is faithfully drawing everything the guest submits.
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`; the atlas dump is `docs/evidence/tex_9076E5E0_256x256_f2_5c46.png`.
