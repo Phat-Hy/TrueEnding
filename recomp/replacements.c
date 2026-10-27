@@ -7607,9 +7607,46 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 if (changed && s_n < 80) {
                     for (int i = 0; i < 8; i++) l_f[i] = f[i];
                     s_n++;
-                    printf("[LoadTask] frame=%d f00=0x%08X f14=0x%08X f18=0x%08X f1c=0x%08X f20=0x%08X f24=0x%08X f28=0x%08X f2c=0x%08X\n",
-                           g_runner_current_frame, f[0],f[1],f[2],f[3],f[4],f[5],f[6],f[7]);
+                    /* the manager this task consults for the save check (r13-26456) and the
+                     * two fields fn_800A4228 reads: +360 stored out, +348 returned */
+                    u32 mgr = 0, f348 = 0, f360 = 0;
+                    {
+                        u8* gh = (u8*)resolve_guest_pointer(ctx, ctx->gpr[13] + (u32)(s32)(-26456));
+                        if (gh) {
+                            mgr = *(u32*)gh;
+                            u8* mh = (u8*)resolve_guest_pointer(ctx, mgr);
+                            if (mh) { f348 = *(u32*)(mh + 348); f360 = *(u32*)(mh + 360); }
+                        }
+                    }
+                    printf("[LoadTask] frame=%d f00=0x%08X f1c=0x%08X f24=0x%08X mgr=0x%08X mgr348=%u mgr360=0x%08X\n",
+                           g_runner_current_frame, f[0], f[3], f[5], mgr, f348, f360);
                     fflush(stdout);
+                }
+            }
+            return 0;
+        }
+
+        /* 0x80570E28 is where GameLoadTask calls fn_800A4228 (the save check) every frame;
+         * a nonzero return sends it straight back to its idle path, which is what keeps the
+         * tutorial/loading page from ever advancing (handover 5c.46 O). Print the manager and
+         * the two fields that function reads: mgr+360 (the status it stores) and mgr+348 (the
+         * flag it returns). */
+        case 0x80570E28: {
+            static int s_probe = -1, s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_LOADTASK_PROBE") ? 1 : 0;
+            if (s_probe && s_n < 30) {
+                extern int g_runner_current_frame;
+                u32 mgr = ctx->gpr[3];
+                u8* h = (u8*)resolve_guest_pointer(ctx, mgr);
+                if (h) {
+                    u32 f348 = *(u32*)(h + 348);
+                    u32 f360 = *(u32*)(h + 360);
+                    if (s_n < 12 || (g_runner_current_frame % 600) == 0) {
+                        printf("[LoadSaveCheck] frame=%d mgr=0x%08X mgr+348=%u mgr+360=0x%08X\n",
+                               g_runner_current_frame, mgr, f348, f360);
+                        fflush(stdout);
+                    }
+                    s_n++;
                 }
             }
             return 0;

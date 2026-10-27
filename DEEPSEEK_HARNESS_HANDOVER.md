@@ -8590,3 +8590,54 @@ routine is never invoked, which is a task-manager bug rather than a game-logic o
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_LOADTASK_PROBE` is default-off.
+
+### O. Correction to N, and what the load task actually does every frame
+
+N said the task "runs its nothing-ready path every frame, forever". Re-reading the branch condition and probing
+the real object shows that is **wrong in two ways**.
+
+**1. The object I probed was not the task.** `TLS_LOADTASK_PROBE` at `0x80570CFC` read `[r3+0x1c]` as
+`0x4B000000`, while the telemetry reads the same field of the real task (`0x80AEDCF0`) as a small integer. A
+frame-gated dump of the real object settles it:
+
+```
+0x80AEDCF0 at frame 4203:
+  +0000 .. +001b  all zero
+  +001c           0000012E        (302 - the fluctuating counter the telemetry prints as +1c)
+  +0030           807790B0        (the vtable - so this IS the GameLoadTask object)
+  +0034           00000001        (+34 = 1)
+  +0038           80732E48
+  +003c           FFFFFFFF
+```
+
+so `r3` at the update entry is *not* the task object, and every "gate field is zero" reading in N was taken from
+the wrong memory.
+
+**2. Zero does not mean idle.** Decoding the branch at `0x80570E04` properly (`bc 12,2` = branch if NOT equal),
+a zero field falls *through* into real work, not out of the function. What the task does each frame is:
+
+```
+80570E28: lwz  r3, -26456(r13)     ; the save manager (measured: 0x4042EA80)
+80570E30: bl   0x800A4228          ; the SAVE CHECK the CONTINUE work analysed
+80570E34: cmpwi r3, 0
+80570E38: bc   4,2, 0x805714C8     ; nonzero -> return (idle)
+80570E3C: li   r3, 0
+80570E40: bl   0x805F38A0          ; otherwise: pump 0x805F38A0 -> 0x805EC060
+80570E44: b    0x805714C8          ; return
+```
+
+and the manager fields that function reads are **348 = 0, 360 = 0**, so the check returns *zero* and the task
+takes the **pump** branch every frame rather than the idle one.
+
+**What that means**: the task loops forever calling `0x805F38A0` → `0x805EC060`, and never unregisters. That is
+consistent with a **loading daemon that is meant to live for the whole scene**, so "the task never finishes" is
+probably *not* a defect by itself - N overstated it. What is certainly true, and measured, is that the page's
+content stops after the SKIP button and the page is pixel-identical frame to frame.
+
+**Remaining unknown, stated plainly**: whether the pump is stuck (waiting on something that never completes) or
+simply idling while the page holds a static state. The discriminator is the pump's own request/response state in
+`0x805EC060`, not the task's gate fields.
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_LOADTASK_PROBE` now prints the real manager fields and is
+default-off.
