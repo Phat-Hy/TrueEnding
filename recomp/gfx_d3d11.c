@@ -2638,6 +2638,13 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                             if (bd->vertex_count == 0) continue;
                             float minx = 1e9f, maxx = -1e9f, miny = 1e9f, maxy = -1e9f;
                             float minz = 1e9f, maxz = -1e9f;
+                            /* v->z is CLIP-space z for perspective batches (transform_vertex leaves
+                             * z = c22*z + c23 + w and w = -pz), so it must be divided by w before it
+                             * is compared with the clip volume. Printing it raw once made "NDC z
+                             * 13.3..22.9" look like a clip failure when it was not (5c.45 I). */
+                            float nminx = 1e9f, nmaxx = -1e9f, nminy = 1e9f, nmaxy = -1e9f;
+                            float nminz = 1e9f, nmaxz = -1e9f;
+                            uint32_t outside = 0;
                             for (uint32_t vi = 0; vi < bd->vertex_count; vi++) {
                                 const GxVertex* v = &gx_vtx[bd->vertex_offset + vi];
                                 if (v->x < minx) minx = v->x;
@@ -2646,15 +2653,27 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                                 if (v->y > maxy) maxy = v->y;
                                 if (v->z < minz) minz = v->z;
                                 if (v->z > maxz) maxz = v->z;
+                                float w = (v->w != 0.0f) ? v->w : 1.0f;
+                                float nx = v->x / w, ny = v->y / w, nz = v->z / w;
+                                if (nx < nminx) nminx = nx;
+                                if (nx > nmaxx) nmaxx = nx;
+                                if (ny < nminy) nminy = ny;
+                                if (ny > nmaxy) nmaxy = ny;
+                                if (nz < nminz) nminz = nz;
+                                if (nz > nmaxz) nmaxz = nz;
+                                if (nx < -1.0f || nx > 1.0f || ny < -1.0f || ny > 1.0f || nz < -1.0f || nz > 1.0f)
+                                    outside++;
                             }
                             printf("  b%u vtx=%u tex=%d addr=0x%08X %ux%u fmt=%u tlut=0x%08X "
                                    "blend=%d src=%u dst=%u sub=%d persp=%d zwrite=%d ztest=%d "
-                                   "ndc=[%.2f..%.2f, %.2f..%.2f] z=[%.4f..%.4f]\n",
+                                   "ndc=[%.2f..%.2f, %.2f..%.2f] z=[%.4f..%.4f] "
+                                   "wNDC=[x %.2f..%.2f y %.2f..%.2f z %.2f..%.2f] outside=%u/%u\n",
                                    b, bd->vertex_count, bd->has_texture, bd->tex.guest_addr,
                                    bd->tex.width, bd->tex.height, bd->tex.format, bd->tex.tlut_addr,
                                    bd->blend_enable, bd->src_factor, bd->dst_factor, bd->subtract,
                                    bd->is_perspective, bd->depth_write_enable, bd->depth_test_enable,
-                                   minx, maxx, miny, maxy, minz, maxz);
+                                   minx, maxx, miny, maxy, minz, maxz,
+                                   nminx, nmaxx, nminy, nmaxy, nminz, nmaxz, outside, bd->vertex_count);
                             shown++;
                         }
                         fflush(stdout);

@@ -7478,6 +7478,36 @@ tutorial page's illustration is one of the things built from such a copy - so th
 degenerate texture are the same story seen twice, and the empty render is the one to chase: it is the same
 shape as b0..b5's clipped geometry (NDC z 13.3..22.9, §5c.44 D3).
 
+#### I. `b0..b5` ARE NOT CLIPPED - and that retires a claim from 5c.38
+
+`transform_vertex` leaves **clip-space** z in the vertex for perspective batches
+(`out.z = c22*pz + c23 + w`, `out.w = w`), but `TLS_BATCH_DUMP` printed that z as if it were NDC. The
+"NDC z is 13.3..22.9, so the batches legitimately draw nothing" reading - carried from 5c.38 through
+5c.44 D3 and repeated in this session - came from that mistake.
+
+The dump now divides by w and counts vertices outside the clip volume (`wNDC=[...] outside=n/total`):
+
+```
+b0 vtx=1044 persp=1  ndc=[0.29..5.69]  z=[16.99..20.31]  wNDC=[x 0.01..0.29  y -0.02..0.28  z 0.94..0.95]  outside=0/1044
+b1 vtx=3990 persp=1  ndc=[-0.55..5.50] z=[13.33..22.88] wNDC=[x -0.04..0.27 y -0.20..0.30  z 0.93..0.96]  outside=0/3990
+b2 vtx=1782 persp=1  ...                                wNDC=[x -0.42..0.19 y -0.74..0.04  z 0.94..0.95]  outside=0/1782
+b3 vtx=519  persp=1  ...                                outside=0/519
+b4 vtx=60, b5 vtx=216                                   outside=0/60, 0/216
+```
+
+**Every vertex of all six character batches is inside the clip volume**, at NDC z 0.93-0.96 and inside
+x,y within roughly +-0.3 to +-0.8. So the model **is drawn**, near the centre and at the far end of the depth
+range - it is not clipped, and the long-standing "these batches legitimately contribute zero pixels" is wrong.
+
+That reframes the page again: the character is rendered (small, central, far), and what hides it is downstream
+- the composite tail saturating to white (5c.44) and the ink matte erasing the parchment (5c.43 C). The
+open question for the *illustration* becomes one of **size/placement** (the reference's drawing spans most of
+the left half, ours covers +-0.3 NDC) rather than of clipping.
+
+**Verification**: `recomp/gfx_d3d11.c` change is dump-only (the `wNDC`/`outside` fields); build green,
+invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save
+1 348 992 / 29 344, 0 changes to `src/`.
+
 **Verification**: build green; invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`
 on the re-lifted chunks; save 1 348 992 / 29 344; 0 changes to `src/`; `docs/dolrecomp/cpu-core.patch`
 regenerated (9 670 bytes, now including the store hook).

@@ -2209,6 +2209,31 @@ static void gx_pipeline_process_xf(uint16_t target_addr, uint16_t word_count, co
             s_proj_matrix[2][3] = read_f32_be(&payload[20]);
             s_proj_matrix[3][3] = 1.0f;
         }
+        /* TLS_PROJ_LOG=1: one frame-stamped line per projection CHANGE, so the matrix in force
+         * at an arbitrary frame is visible (the capped log below cannot show it). Needed for the
+         * tutorial page, whose 3D batches land at NDC z 13.3..22.9 (handover 5c.44 D3). */
+        {
+            static int s_proj_all = -1;
+            static uint32_t s_proj_sig = 0;
+            if (s_proj_all < 0) s_proj_all = getenv("TLS_PROJ_LOG") ? 1 : 0;
+            if (s_proj_all) {
+                extern int g_runner_current_frame;
+                uint32_t sig = (uint32_t)(s_proj_matrix[0][0] * 1e6f)
+                             ^ (uint32_t)(s_proj_matrix[1][1] * 1e6f)
+                             ^ (uint32_t)(s_proj_matrix[2][2] * 1e6f)
+                             ^ (uint32_t)(s_proj_matrix[2][3] * 1e6f)
+                             ^ (uint32_t)s_proj_is_perspective;
+                if (sig != s_proj_sig) {
+                    s_proj_sig = sig;
+                    printf("[ProjSet] frame=%d persp=%d a00=%.6f a11=%.6f a03=%.6f b13=%.6f c22=%.6f c23=%.6f\n",
+                           g_runner_current_frame, s_proj_is_perspective,
+                           s_proj_matrix[0][0], s_proj_matrix[1][1], s_proj_matrix[0][3],
+                           s_proj_matrix[1][3], s_proj_matrix[2][2], s_proj_matrix[2][3]);
+                    fflush(stdout);
+                }
+            }
+        }
+
         static uint32_t s_proj_log_count = 0;
         if (++s_proj_log_count <= 20 || (s_proj_log_count % 300 == 0)) {
             printf("[GX XF Projection #%u] is_persp=%d mtx:\n"
