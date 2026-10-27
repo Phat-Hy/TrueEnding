@@ -9804,3 +9804,40 @@ is the same "re-activation" from AJ, now with both flag words in view.
 **Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
 `src/`; measurement only.
+
+### AL. The content task is DEACTIVATED at frame 2020 - and that is why its init never runs again
+
+The content node's `+0x38` write history (store watch on `0x81359B80+0x38 = 0x81359BB8`) completes the AK picture:
+
+```
+f=1542 cia=0x80006608  0   boot memset
+f=1656 cia=0x800D1DC0  0   constructor
+f=1656 cia=0x800D247C  1   ACTIVATE (bit 0)          <- fn_800D246C(task, 1)
+f=1730 cia=0x800D28D0  3   init succeeded (bit 1)    <- the 0x800D28C0 call in fn_800D2868
+f=2020 cia=0x800D248C  2   DEACTIVATE (bit 0 cleared) <- fn_800D246C(task, 0)
+```
+
+**The camp UI does not just hide the layout at frame 2020 - it deactivates the task.** A deactivated task is not
+executed, so the execute loop never reaches the init virtual again, so the visibility bit is never re-set. That is
+the mechanism end to end, and it explains every observation since AC: the page's content was alive for 74 frames
+(1656-1730 show window) and has been off since 2020.
+
+`fn_800D246C(task, flag)` is that verb (1273 call sites image-wide). It is **not dispatched by the runner** - like
+`fn_801F407C`, calls to it are intra-chunk and the recompiler folds them - so probes on it never fire; the store
+watch is the only way to watch it, which is why the two "probe never fired" rounds above are recorded here rather
+than retried.
+
+And the page-start side does exactly one of these calls: **`fn_805BB658` has exactly one `bl fn_800D246C`**, right
+after it creates the mode-selected layout (`stw r3, 0x478(r26)` then `bl fn_800D246C`). So the page start creates
+**one** layout for the current mode and activates it; it never re-activates the scene-created content task.
+
+**The hypothesis this leaves, stated so it can be tested in one run**: the mode value `fn_80684600` returns selects
+the branch of `fn_805BB658` (`subi r0,r3,1; cmplwi r0,3; bgt skip` = modes 1..4), and under emulation that mode may
+differ from hardware's, so the page start builds a different layout than the one holding the tutorial content. To
+test: probe `0x80684600` and log its `lr` (one line), then probe that return address and log `r3` - the mode - on
+the page-start frame. If the mode is out of 1..4 the branch is skipped entirely; if it is inside, compare the layout
+it builds with `0x81359B80`.
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
+`src/`; the dead probe was removed, so nothing new is left behind.
