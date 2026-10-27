@@ -3257,6 +3257,16 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                     }
                 }
             }
+            {
+                static int s_tl = -1;
+                if (s_tl < 0) s_tl = getenv("TLS_WAKE_TIMELINE") ? 1 : 0;
+                extern int g_runner_current_frame;
+                if (s_tl && g_runner_current_frame >= 150 && g_runner_current_frame <= 400) {
+                    printf("[WakeTL] frame=%d SLEEP queue=0x%08X lr=0x%08X head=0x%08X\n",
+                           g_runner_current_frame, queue_addr, ctx->lr, mem_read32(ctx, queue_addr));
+                    fflush(stdout);
+                }
+            }
             static u32 count_sleep = 0;
             if (++count_sleep <= 50 || count_sleep % 100 == 0) {
                 printf("[TLS OSSleepThread] #%u queue=0x%08X lr=0x%08X\n",
@@ -3281,6 +3291,19 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // OSWakeupThread probe
         case 0x805F5D60: {
             static u32 count_wakeup = 0;
+            /* TLS_WAKE_TIMELINE=1: one line per sleep/wakeup inside the window where the
+             * workers actually run, so the signal and the enqueue can be ordered on ONE
+             * timeline (handover 5c.46 U). */
+            {
+                static int s_tl = -1;
+                if (s_tl < 0) s_tl = getenv("TLS_WAKE_TIMELINE") ? 1 : 0;
+                extern int g_runner_current_frame;
+                if (s_tl && g_runner_current_frame >= 150 && g_runner_current_frame <= 400) {
+                    printf("[WakeTL] frame=%d WAKE queue=0x%08X lr=0x%08X head=0x%08X\n",
+                           g_runner_current_frame, ctx->gpr[3], ctx->lr, mem_read32(ctx, ctx->gpr[3]));
+                    fflush(stdout);
+                }
+            }
             tls_note_wake(ctx->gpr[3], ctx->lr);
             if (++count_wakeup <= 50) {
                 printf("[TLS OSWakeupThread] #%u queue=0x%08X lr=0x%08X\n", count_wakeup, ctx->gpr[3], ctx->lr);

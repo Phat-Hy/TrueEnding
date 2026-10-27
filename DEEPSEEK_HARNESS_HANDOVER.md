@@ -8881,3 +8881,40 @@ frames 170 and 376 with an empty queue.
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_NUDGE_SLEEP` is default-off.
+
+### U. The sleep/wake timeline: the wakeup WORKS - and then the worker parks again waiting for work
+
+Added `TLS_WAKE_TIMELINE=1` (one line per sleep/wakeup inside frames 150..400) so the two sites can be ordered.
+The whole history of queue `0x8087D610` across those frames:
+
+```
+frame=170 SLEEP queue=0x8087D610 lr=0x8071D984 head=0x00000000          <- worker parks (queue empty)
+frame=376 WAKE  queue=0x8087D610 lr=0x8071D448 head=0x808638F0          <- wakeup finds a thread and pops it
+frame=376 WAKE  queue=0x8087D610 lr=0x8071D448 head=0x00000000   x9     <- the rest find it empty
+frame=376 SLEEP queue=0x8087D610 lr=0x8071D984 head=0x00000000          <- parks again, empty
+```
+
+**So S needs a refinement, and it is an important one**: the wakeup machinery is *working*. At frame 376 the
+producer's `OSWakeupThread` (from `lr=0x8071D448`) found the worker on the queue (`head=0x808638F0`) and released
+it. The "lost wakeup" flag in S is therefore not a lost wakeup in the classic sense - it is the worker sleeping
+**again immediately afterwards** with an empty queue.
+
+**That changes what the worker's park means.** A worker that sleeps on an empty queue with its pending pointer
+clear is very likely waiting for its *next work item* - which is normal daemon behaviour - and the defect is that
+**no further work ever arrives**. The page's remaining content is not blocked by a lost signal; it is blocked
+because the pipeline stops producing work for these workers after frame 376.
+
+**So the chain's end is now a production question, not a synchronisation one:**
+
+```
+page draws only furniture -> GameLoadTask pumps 0x805F38A0 -> 0x805EC060 returns 64 because the BSS flag
+0x8087FB98 is zero -> the flag has no writer in the game's code -> the worker that would set it (0x8087D5E4)
+is woken at frame 376, finds nothing to do, and parks waiting for work that never arrives
+```
+
+**Next step**: find who feeds that worker. `lr=0x8071D448` is the producer's `OSWakeupThread` call site, so the
+*posting* side is the code that calls into it; walking that function (`~0x8071D3xx-0x8071D45x`) names the queue
+producer and the work-item structure, and the question becomes why it stops posting after frame 376.
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_WAKE_TIMELINE` is default-off.
