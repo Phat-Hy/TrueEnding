@@ -8282,3 +8282,39 @@ wrong there also affects the crest (item 3) and the cave's six-stage batches.
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`.
+
+### H. THE REAL PAGE INVENTORY (read the reference at full size before judging anything)
+
+Every earlier "missing X" claim was made without the full reference in view. Viewed whole
+(`docs/evidence/ref_dolphin_tutorial_5c44.png`), the page contains **five** things:
+
+1. the parchment sheet **and its printed border with ornate corners** - we now render these
+   (`docs/evidence/cmp_page_inventory_5c46.png`, bottom vs top);
+2. the **player-character illustration** (Zael, crouched with his weapon) filling the left half;
+3. a **fan/rake burst** behind him (spokes radiating from a point);
+4. the **crowned crest** (dark ink, spiked halo) up and right of centre;
+5. the **title "Movement and Camera"** in large dark serif type at the right-centre, with **body text**
+   under it ("Use [button] to move." / "Press [Z] to reset the camera to a position behind the player
+   character.").
+
+**Ours today: 1 of 5.** The parchment and border match closely; 2, 3, 4 and 5 are all absent.
+
+Two consequences for how the remaining work should be judged:
+
+* **The title text IS in the reference** - large, right-centre - so losing it to b30 (5c.46 E) is a real
+  regression, not a fidelity win. But note the geometry: the reference's title occupies roughly
+  `x 1297..2369, y ~500..560` of a 2560x1440 frame, while our b28 draws its 19 glyphs at
+  `x 124..410, y 92..116` **in the same 640-wide authoring space** (projection `a00 = 2/640`). Both are
+  15px-per-glyph in that space, so the *string and size* agree, but the *placement* does not - and the
+  border sits at ~14% of the visible band for us against ~33% for the reference. **The page's element
+  transform/scroll state differs**, which is a separate defect from the missing textures and would
+  misplace the illustration too if it ever appears.
+* **The body text and the crest were never in any earlier inventory**, and the body text is drawn by
+  batches we have not identified. Anything that makes the page "look complete" must account for them.
+
+**Do not judge the page by its centre any more** - the reference's own layout puts most of its content in
+the lower half of a 912-row visible band, while our frame is a full 720-row view with the content
+compressed into the top.
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`; the comparison is `docs/evidence/cmp_page_inventory_5c46.png`.
