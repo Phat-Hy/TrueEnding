@@ -6,8 +6,21 @@
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
 creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.46 AC**; §5c.45 and everything before it is history, and several of its conclusions are
+state is **§5c.46 AH**; §5c.45 and everything before it is history, and several of its conclusions are
 corrected below.
+
+> **THE PAGE RENDERS - THE ONLY GATE IS A LAYOUT VISIBILITY BIT THAT IS CLEARED AND NEVER SET AGAIN
+> (§5c.46 AC-AH).** With `TLS_FORCE_LAYOUT_BIT=1` the tutorial page draws **completely**: illustration, title
+> "Movement and Camera", both body lines, the stick/Z icons, SKIP, parchment and border -
+> `docs/evidence/host_page_full_5c46ad.png`, timeline `docs/evidence/host_page_timeline_5c46ad.png`. The bit's whole
+> write history is measured: shown at frame 1696, **hidden at frame 2020 by `fn_803D164C` (the camp UI setup)**, and
+> never shown again. Every layout *show* comes from the task manager (`lr=0x800D28C0`), and at frames 3648-3654 -
+> when the tutorial page starts - it registers and shows `0x81861F60`, `0x8186CB60`, `0x81865AA0` but **not** the
+> content node. So the page's furniture and its content are registered by two different steps and only the first
+> runs. **Next: probe the caller of the 3648 registrations** (the `bl` return is a dispatch point), read the
+> page-start function, and see whether the content layout is missing from a list or its child link is never made.
+> (Corrected in AG: an earlier "nothing writes the bit" was a wrong watch address - the field is
+> `0x81359B80+0xFC = 0x81359C7C`.)
 
 > **THE PAGE'S MISSING CONTENT IS HIDDEN, NOT MISSING (§5c.46 AC).** One `LayoutTask` (`0x81359B80`) holds the
 > page's content as four panes and is switched off by **one bit**: `[task+0xFC]` bit 30 (`0x40000000`) is set on
@@ -9628,3 +9641,49 @@ address from the object and the field offset by hand and print it. `0x81359B80 +
 **Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
 `src/`; no new knobs (this section is measurement only).
+
+### AH. The show calls are all task registration, and the content node is never re-shown
+
+`TLS_LAYOUT_SHOW_PROBE=1` logs every call to the show API (`fn_801F42A8`, the function whose `0x801F4334` slot ORs
+the bit). Two runs: the whole run, and `TLS_LAYOUT_SHOW_FROM=2021` for the window after the camp UI hides the
+content node.
+
+**Every show call comes from `lr=0x800D28C0`** - the task manager's registration path - so a LayoutTask is shown
+when it is registered, not by page-specific code. The content node `0x81359B80` was shown that way at frame 1696
+(the write history in AG), hidden at 2020 by `fn_803D164C`, and **never shown again**:
+
+```
+shows after frame 2020: 19
+[LayoutShow] f=2025 layout=0x818616C0 r4=1 fc=0x74D7EE90 lr=0x800D28C0
+[LayoutShow] f=2030 layout=0x818616C0 r4=1 fc=0x7CD7EE90 lr=0x800D28C0
+[LayoutShow] f=3648 layout=0x81861F60 r4=1 fc=0x64000000 lr=0x800D28C0
+[LayoutShow] f=3648 layout=0x8186CB60 r4=1 fc=0x64000000 lr=0x800D28C0
+[LayoutShow] f=3648 layout=0x81865AA0 r4=1 fc=0x65861708 lr=0x800D28C0
+[LayoutShow] f=3652 layout=0x81861F60 r4=1 fc=0x6C000000 lr=0x800D28C0
+...
+layout=0x81359B80 occurrences: 0
+```
+
+Two things follow.
+
+1. **The page's own layouts are registered and shown at frames 3648-3654** - `0x81861F60` (one of the seven that
+   draw), `0x8186CB60`, `0x81865AA0` - which is the tutorial page starting.
+2. **The content node is not in that batch.** It was registered once at frame 1696 (scene start) and never
+   re-registered, so it keeps the hidden value the camp UI gave it at 2020.
+
+So the page's furniture and the page's content are registered by two different steps, and only the first one runs
+when the page starts. That is the defect in its smallest form: **either the content layout should be registered
+together with `0x81861F60` at 3648 and the call that would do it is missing, or it is meant to be a child of one of
+those three and the child link never gets made** (`cnt48 = 4` on it, so it does have panes of its own).
+
+**What the next session should do, in order**:
+1. Probe `0x800D28C0`'s caller chain for the frame-3648 registrations (a `bl` return is a dispatch point, so the
+   caller of the task manager there is one probe away) - that names the page-start code.
+2. Read that function and see what it registers: if it walks a list of layouts, the content layout is missing from
+   that list; if it registers three fixed objects, the fourth is what has to be found.
+3. Only then decide whether the fix is "the page-start step must register the content layout too" - which would be
+   a real behavioural fix, not a state mutation.
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
+`src/`; `TLS_LAYOUT_SHOW_PROBE` / `_FROM` are default-off.

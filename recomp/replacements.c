@@ -8496,6 +8496,36 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0;
         }
 
+        /* fn_801F42A8 is the layout SHOW call (its 0x801F4334 slot ORs bit 30 of [layout+0xFC];
+         * the write history of the page's content node shows it being shown at frame 1696 and
+         * hidden again at 2020 by the camp UI, then never shown). Logging every call with its
+         * layout and caller turns "what should show 0x81359B80" into "which caller never fires"
+         * - the smallest form of the question (5c.46 AG). */
+        case 0x801F42A8: {
+            static int s_probe = -1;
+            static u32 s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_LAYOUT_SHOW_PROBE") ? 1 : 0;
+            /* TLS_LAYOUT_SHOW_FROM=<frame>: registration-time shows flood the log in the first
+             * 200 frames, so a start frame is the only way to see the per-page shows that happen
+             * after the camp UI hides the content node (frame 2020). */
+            static int s_from = -1;
+            if (s_from < 0) {
+                const char* e = getenv("TLS_LAYOUT_SHOW_FROM");
+                s_from = e ? atoi(e) : 0;
+                if (s_from < 0) s_from = 0;
+            }
+            if (s_probe && s_n < 400 && g_runner_current_frame >= s_from) {
+                extern int g_runner_current_frame;
+                u32 lay = ctx->gpr[3];
+                s_n++;
+                printf("[LayoutShow] f=%d layout=0x%08X r4=%u fc=0x%08X lr=0x%08X\n",
+                       g_runner_current_frame, lay, ctx->gpr[4],
+                       lay ? mem_read32(ctx, lay + 0xFC) : 0, ctx->lr);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
         // fn_8005E3E4 (2D UI quad submission)
         case 0x8005E3E4:
         case 0x8005E40C: {
