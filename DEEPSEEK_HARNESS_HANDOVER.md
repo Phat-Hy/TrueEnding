@@ -6,22 +6,34 @@
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
 creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.46 AO**; §5c.45 and everything before it is history, and several of its conclusions are
+state is **§5c.46 AP**; §5c.45 and everything before it is history, and several of its conclusions are
 corrected below.
 
-> **THE PAGE'S CONTENT IS NOT MISSING - IT RENDERS. THE ONE OPEN DEFECT IS A PAGE-TABLE READ CURSOR
-> (§5c.46 AC-AO).** With `TLS_FORCE_LAYOUT_BIT=1` the tutorial page draws **completely**: illustration, title
-> "Movement and Camera", both body lines, the stick/Z icons, SKIP, parchment and border -
-> `docs/evidence/host_page_full_5c46ad.png`, timeline `docs/evidence/host_page_timeline_5c46ad.png`. The whole
-> causal chain from the empty screen down to its top is measured (AC-AN):
-> `page-table read cursor at EOF -> empty page name -> atoi = 0 -> the "modes 1..4" branch in fn_805BB658 is
-> SKIPPED -> no layout created/activated at page start -> the content task 0x81359B80 stays DEACTIVATED
-> ([task+0x38] = 2 since frame 2020) -> its init virtual (vtable slot 0x0C) never runs again -> the visibility bit
-> [0x81359B80+0xFC] stays clear -> the page draws only furniture`.
-> **THE FIRST ACTION OF THE NEXT SESSION IS `§5c.46 AO`**: re-run the page-table store watch on an **idle host**
-> and check the `Game@1647` line before believing the count (the run that produced "0 writes" had diverged at
-> `Game@1042`, so that result is recorded as UNVERIFIED). Then read `fn_8005B6E8(struct, &lbl_8087D708)` to decide
-> between "the table was consumed and should be rewound" and "no row matched, so the lookup is failing".
+> **THE PAGE-TABLE CURSOR THEORY IS DEAD - THE PAGE START DOES READ THE TABLE, TAKE THE MODES 1..4 BRANCH,
+> AND BUILD AND SHOW ITS LAYOUTS (§5c.46 AP).** AM/AN/AO are **wrong on all three counts** and AP measures
+> why:
+> 1. the AO store-watch runs (`Game@1042`, `Game@727`) were **diverged**: another game (`fifa15.exe`) held
+>    248% CPU. On an idle host the same command hands over at **1647** in 174-350 s (Z's wall-clock warning,
+>    now with a named culprit: check top CPU for a running game *before* any page measurement);
+> 2. `lbl_8087D708` **is not the page table**: `fn_8005B6E8(reader, str)` copies a NUL-terminated string into
+>    `reader+0x610`, which `fn_8005B3CC` uses as a character-**strip set** gated on `reader+0x630` - and the
+>    caller zeroes `+0x630`, so it is inert. Watching it was a dead end;
+> 3. the reader is attached with **cursor 0** (`+4=0x9028C440, +8=352, +0xC=0` read at `0x805BB6EC`, the
+>    instruction after the virtual call), and the **real** mode check is `0x805BB748`, not
+>    `0x805BBC50`/`0x805BBC54` (those are a *column* read 0x500 bytes later, inside the row branch - reaching
+>    them at all proves the branch was taken). On the right address f=3648 reads `'#Page'`(0), `'1'`(1),
+>    `'2'`(2), so the branch is **TAKEN for both data rows**.
+> The page start is now measured end to end: it parses the 352-byte table, calls
+> `fn_801F3FF8(class,'tt001_10.d2a',0)` -> layout **0x81861F60** and `(…'tt001_mv01.d2a'…)` -> **0x8186CB60**,
+> stores them at `class+0x478`/`+0x4c4`, activates each with `fn_800D246C(layout,1)` and clears bit 28 of
+> `layout+0xFC`. Those are exactly the layouts AJ saw shown at 3648 - the reason is that they are **brand
+> new**, not re-activated.
+> **So the missing crest/illustration/body text is still the deactivated content node `0x81359B80`**, whose
+> flags nothing touches after frame 2020 (`TLS_WATCH_ADDR` over the whole run, AP). The open question is no
+> longer "is the table read" but **"what shows `0x81359B80` when `tt001_10.d2a` is built"**. The next
+> measurement AP names: at frame 3700 walk the layout tree and print every `LayoutTask`'s `+0x38`, `+0xFC`
+> and pane count, then diff that set against `TLS_FORCE_LAYOUT_BIT=1`'s 47/47 - the task that is missing from
+> the normal set but whose subtree holds texture `0x922731E0` is the one the page start fails to show.
 
 > **THE PAGE'S MISSING CONTENT IS HIDDEN, NOT MISSING (§5c.46 AC).** One `LayoutTask` (`0x81359B80`) holds the
 > page's content as four panes and is switched off by **one bit**: `[task+0xFC]` bit 30 (`0x40000000`) is set on
@@ -9958,3 +9970,117 @@ retry). Per 5c.46 Z the invariant-style measurements are only trustworthy on an 
 **Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
 `src/`; no code changed in this round beyond the probe print added in AN.
+
+### AP. The page start DOES read the table, take the modes 1..4 branch and build + show its layouts
+
+Every conclusion in AM, AN and AO rests on two probes and on runs that had diverged. Both are corrected
+here, with the measurements that replace them. **AM/AN/AO are superseded: do not act on them.**
+
+**A. The AO runs were diverged runs, not a store-watch effect.** During them another game (`fifa15.exe`) was
+holding **248% CPU** on a 16-core host (`Get-Process | Select Name,CPU` sampled twice 2 s apart). On an idle
+host the identical command (`TLS_STORE_WATCH=0x8087D708,0x8087D730`;
+`pwsh tools/page_run.ps1 -Frames 3700 -Log logs\pagetable.log -PressShift 27 -RequireGame 1647 -Attempts 3`)
+hands over at **Game@1647** and finishes 3700 frames in 174-350 s; the two recorded runs took ~560 s and
+handed over at 727 and 1042. `content_f38.log`, `page_fcwatch2.log`, `page_camp1656.log`, `page_vptrwatch.log`
+all show that store watches and 1647 are compatible. **Rule: before any page measurement, sample top CPU and
+close a running game.** This is the concrete cause behind Z's "wall-clock sensitive on a loaded host".
+
+**B. `lbl_8087D708` is not the page table - it is the reader's strip list.** `fn_8005B6E8(reader, str)`
+(`src/game_talk.c`, 0x28 bytes) copies a NUL-terminated string from r4 into `reader+0x610`.
+`fn_8005B3CC` (`src/game_talk.c`) uses `reader+0x610` as a **character-strip set**, gated on `reader+0x630`
+(the caller zeroes `+0x630` at 0x805BB6B8, so the filter is inert). The AO question - "the table global is
+never written" - is therefore about a strip list and is dropped, not answered.
+
+**C. The page table is the file behind the page class's stream.** `class+0x5a4` is a stream object;
+`*(class+0x5a4+4)` is its file object; `*(file+0x54)` is the text pointer and `*(file+0x50)` the length
+(`fn_80470580`/`fn_8047059C` return exactly those two fields). The reader's virtual call at 0x805BB6E8
+attaches them, and read at 0x805BB6EC - the very next instruction - the reader holds
+`+4=0x9028C440, +8=352, +0xC=0`. **The cursor arrives at 0; the parse loop advances it.** Measured with
+`TLS_PAGE_VT_PROBE=1`.
+
+**D. The real mode check is 0x805BB748, not 0x805BBC50/0x805BBC54.** The sequence
+`subi r0,r3,1 ; cmplwi r0,3 ; bgt tail` sits immediately after `bl fn_80684600` at 0x805BB744, so at
+0x805BB748 r3 is the mode. `0x805BBC50`/`0x805BBC54` are **0x500 bytes further into the same function, inside
+the row branch** (`bl fn_8005B3CC ; bl fn_80684600 ; stw r3,0x4bc(r26)`), i.e. a *column* read: reaching them
+at all proves the branch was taken, and the "(layout branch SKIPPED)" line they printed was a mislabel of one
+column being 0. This - not the table - is what AM/AN/AO were reading.
+
+With `TLS_PAGE_MODE_PROBE=1` on the correct address (f=3648, page start):
+
+```
+[PageLine] f=3648 mode=0 token='#Page' cursor=32  limit=352 slot48=0x00000000 layout478=0x00000000
+[PageLine] f=3648 mode=1 token='1'     cursor=186 limit=352 slot48=0x81862360 layout478=0x00000000
+[PageLine] f=3648 mode=2 token='2'     cursor=272 limit=352 slot48=0x818623AC layout478=0x00000000
+```
+
+and with the new `TLS_PAGE_ROW_PROBE=1` (0x805BB768 / 0x805BB778):
+
+```
+[PageRowBuild] f=3648 name ptr=0x80898BDC 'tt001_10.d2a'  slot=0x81862360 modeIdx=1
+[PageRowBuild] f=3648 factory returned 0x81861F60
+[PageRowBuild] f=3648 name ptr=0x80898BDC 'tt001_mv01.d2a' slot=0x818623AC modeIdx=2
+[PageRowBuild] f=3648 factory returned 0x8186CB60
+```
+
+so the page start parses both data rows, calls `fn_801F3FF8(class, name, 0)`, stores the layout at
+`class+0x474+(mode-1)*0x4C+4`, activates it with `fn_800D246C(layout, 1)` (0x805BB780) and clears bit 28 of
+`layout+0xFC` (0x805BB790 `rlwinm r0,r0,0,4,2`). AJ's `[LayoutShow] f=3648 layout=0x81861F60` / `0x8186CB60`
+rows are the same events seen from the show side - the reason is that these layouts are **brand new objects**
+created here, not re-activated ones. (`TLS_LAYOUT_CREATE_PROBE`'s own name column prints `''` for the
+stack token buffer even when the string is there - `bytes=74743030` = `'tt00'` in the row probe - so do not
+trust that column; it is a probe artifact, not an empty name.)
+
+**E. The page table, recorded verbatim (352 bytes).** From the reader buffer dump at f=3648:
+
+```
+#...{....,,,,,,,,,,,,,,,                                   <- 24 junk bytes (loader header), then CRLF
+#Page,d2a,SubPage,SubPageFrame,Motion,MotionFrame,CamPos x,CamPos y,CamPos z,
+CamTarget x,CamTarget y,CamTarget z,AngleOfView,Movie,MovieTitle,MovieTitleBack
+1,tt001_10.d2a,0,-1,na000_rss00_00.motion,16,-18.58,4.62,5.31,-0.06,10.65,0.21,75,,,
+2,tt001_mv01.d2a,0,-1,,0,-18.58,4.62,5.31,-0.06,10.65,0.21,75,tt001.thp,8000010,
+```
+
+Line offsets: junk 0..23, header 26..181, row 1 at 184 (84 bytes), row 2 at 270 (80 bytes), CRLF at 350.
+The loop skips the junk line with its initial `b tail`, the header's first column is `#Page` (atoi 0, skipped
+by the `1..4` test), and rows 1 and 2 are the page's two halves: `tt001_10.d2a` (the static page layout,
+8 panes) and `tt001_mv01.d2a` (the movie half, `tt001.thp`, MovieTitle `8000010`).
+
+**F. Where the missing content still is.** With the branch taken, the page's furniture layout is fresh,
+activated and visible - and the content node `0x81359B80` is untouched. `TLS_WATCH_ADDR` on both nodes'
+flag words for the whole run (idle host, Game@1647):
+
+```
+0x81359BB8 (+0x38) f=1656 0 -> 1        activate (fn_800D246C, lr=0x803D0558)
+0x81359C7C (+0xfc) f=1656 0 -> 0x70000000 -> 0x74000000 -> 0x34000000 (0x801F40C0 / 0x801F41C8 / 0x803D0558)
+0x81359C7C (+0xfc) f=1696 0x34000000 -> 0x3C000000    SHOW (0x801F4320)
+0x81359BB8 (+0x38) f=1730 1 -> 3        init ok (0x800D28C0)
+0x81359BB8 (+0x38) f=2020 3 -> 2        DEACTIVATE (fn_800D246C, r4=0, lr=0x803D1984)
+0x81359C7C (+0xfc) f=2020 0x3C000000 -> 0x2C000000
+0x81359BB8 (+0x38) f=2020 2 -> 0x22
+```
+
+Nothing writes either word after frame 2020. The `0x81861F60` rows in the same log are **noise before 3648**:
+that address is freed with `0xDEAD0022` at frame 3263 and reallocated at 3265, so its earlier history belongs
+to other objects - when watching a layout address across a run, expect the address to be recycled.
+
+**Next step, precise.** The question is now "what shows `0x81359B80` when `tt001_10.d2a` is built". The
+cheapest discriminator is pane-level, not flag-level: at frame 3700 (page up) walk the layout tree and print
+every `LayoutTask`'s `+0x38`, `+0xFC` and drawn-pane count, then diff that set against the 47/47 that
+`TLS_FORCE_LAYOUT_BIT=1` produces (AC). The task that is missing from the normal set but whose subtree draws
+texture `0x922731E0` (AC's illustration) is the one the page start fails to show - and *that* names the
+missing call, instead of a second round of table speculation.
+
+**Instruments added in AP** (all default-off, all in `recomp/replacements.c`):
+`TLS_PAGE_MODE_PROBE` now prints at the real mode check 0x805BB748 as `[PageLine]` and its old row/column
+prints as `[PageRow]`; new `TLS_PAGE_ROW_PROBE` (`[PageRowBuild]`, the d2a name and the factory's return),
+`TLS_PAGE_VT_PROBE` (`[PageVt]`, the reader's state and the vtable words at 0x807772D0 immediately after the
+attach call) and `TLS_PAGE_STREAM_PROBE` (`[PageStream]`, the page class's stream/file/`+0x5ac` on change).
+One negative worth keeping: the **runtime** vtable at `0x807772D0` does not match the image on disk
+(runtime `807772E0 00000000 800420F4 00000000 80730C84 …` vs the DOL's `803433E4 8034340C 800E77E0 …`), and
+the attach call resolved to **0x800420F4** - so do not reverse-engineer that table from `main.dol`; read it
+from guest memory.
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
+`src/`; only default-off probes were added, and the on-page runs themselves (`-PressShift 27 -RequireGame
+1647`) are the ones recorded above.

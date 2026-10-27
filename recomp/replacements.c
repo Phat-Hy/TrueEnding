@@ -8497,13 +8497,44 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         }
 
         /* The mode value that selects the page-start branch. fn_805BB658 does
-         *   bl fn_80684600 ; subi r0,r3,1 ; cmplwi r0,3 ; bgt skip
-         * so the instruction right after the bl (0x805BBC54) receives the mode in r3. If the mode
-         * falls outside 1..4 the whole layout-creation branch is skipped, which would explain why
-         * the tutorial page's content layout is never built or re-activated (5c.46 AL). Print on
-         * change, so one line per distinct mode for the whole run. */
-        case 0x805BBC50:   /* return of fn_8005B3CC: r3 = the page-name string that gets parsed */
-        case 0x805BBC54: { /* return of fn_80684600: r3 = the parsed mode */
+         *   bl fn_8005B3CC ; bl fn_80684600 ; subi r0,r3,1 ; cmplwi r0,3 ; bgt tail
+         * The mode check is at 0x805BB748 (the `subi` right after the bl) and that is the only
+         * place a per-line mode is visible. 0x805BBC50/0x805BBC54 - the addresses earlier rounds
+         * probed - sit 0x500 bytes further into the function, inside the row branch, and read one
+         * COLUMN, not the mode; their "returned 0 (branch SKIPPED)" text was a mislabel, because
+         * reaching them at all proves the branch was taken (5c.46 AP). */
+        case 0x805BB748: {
+            static int s_probe = -1;
+            static u32 s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_PAGE_MODE_PROBE") ? 1 : 0;
+            if (s_probe) {
+                extern int g_runner_current_frame;
+                u32 obj = ctx->gpr[1] + 0xB4u;
+                u32 cls = ctx->gpr[15];
+                s32 mode = (s32)ctx->gpr[3];
+                u32 limit = mem_read32(ctx, obj + 0x8);
+                u32 cursor = mem_read32(ctx, obj + 0xC);
+                const char* t = (const char*)resolve_guest_pointer(ctx, obj + 0x10);
+                char clean[80]; int k = 0;
+                if (t) for (; k < 79 && t[k]; k++) { unsigned char ch = (unsigned char)t[k];
+                         clean[k] = (ch >= 32 && ch < 127) ? (char)ch : '.'; }
+                clean[k] = 0;
+                u32 slot = 0, layout = 0;
+                if (mode >= 1 && mode <= 4 && cls) {
+                    slot = cls + (u32)(mode - 1) * 0x4Cu;
+                    layout = mem_read32(ctx, slot + 0x478);
+                }
+                if (s_n < 80) { s_n++;
+                    printf("[PageLine] f=%d mode=%d token='%s' cursor=%u limit=%u slot48=0x%08X layout478=0x%08X\n",
+                           g_runner_current_frame, mode, clean, cursor, limit, slot, layout);
+                    fflush(stdout);
+                }
+            }
+            return 0;
+        }
+
+        case 0x805BBC50:   /* a column read inside the row branch: r3 = the column's token */
+        case 0x805BBC54: { /* the same column parsed by fn_80684600 */
             static int s_probe = -1;
             static s32 s_last = -12345;
             static u32 s_n = 0;
@@ -8522,26 +8553,155 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                      * into obj+0x10. An empty token therefore means either the TEXT is empty (a load
                      * defect) or it has no quoted token (a parse/data defect). Print both. */
                     u32 obj = ctx->gpr[1] + 0xB4u;
-                    u32 textp = obj ? mem_read32(ctx, obj + 4) : 0;
-                    u32 textn = obj ? mem_read32(ctx, obj + 0xC) : 0;
+                    u32 textp = mem_read32(ctx, obj + 4);
+                    u32 limit = mem_read32(ctx, obj + 0x8);   /* fn_8005B3CC compares the cursor against this */
+                    u32 textn = mem_read32(ctx, obj + 0xC);   /* the cursor itself */
                     char head[64]; int hk = 0;
-                    const char* tb = (textp && textn) ? (const char*)resolve_guest_pointer(ctx, textp) : NULL;
-                    if (tb) for (; hk < 63 && hk < (int)textn && tb[hk]; hk++) {
+                    const char* tb = (textp && limit) ? (const char*)resolve_guest_pointer(ctx, textp) : NULL;
+                    if (tb) for (; hk < 63 && hk < (int)limit && tb[hk]; hk++) {
                         unsigned char ch = (unsigned char)tb[hk];
                         head[hk] = (ch >= 32 && ch < 127) ? (char)ch : '.';
                     }
                     head[hk] = 0;
+                    /* The reader's buffer comes from the page stream at class+0x5a4: the virtual
+                     * at [class+0x5a4] slot 0x8 is handed *(file+0x54) and *(file+0x50). Print the
+                     * stream's file object and those two fields, so "cursor already at the end"
+                     * can be told apart from "size == cursor at construction" without guessing
+                     * (5c.46 AO/AP). */
+                    u32 stream = ctx->gpr[15] ? ctx->gpr[15] + 0x5A4u : 0;
+                    u32 fileobj = stream ? mem_read32(ctx, stream + 4) : 0;
                     if (s_n < 20) { s_n++;
-                        printf("[PageMode] f=%d page-name string at 0x%08X = '%s'\n",
+                        printf("[PageRow] f=%d column token at 0x%08X = '%s'\n",
                                g_runner_current_frame, ctx->gpr[3], s ? clean : "(null)");
-                        printf("[PageMode] f=%d   script text ptr=0x%08X len=%u head='%s'\n",
-                               g_runner_current_frame, textp, textn, tb ? head : "(unmapped)");
+                        printf("[PageRow] f=%d   reader text=0x%08X limit=%u cursor=%u head='%s'\n",
+                               g_runner_current_frame, textp, limit, textn, tb ? head : "(unmapped)");
+                        if (fileobj) {
+                            printf("[PageRow] f=%d   stream=0x%08X file=0x%08X state=%u size48=%u f50=%u f54=0x%08X\n",
+                                   g_runner_current_frame, stream, fileobj,
+                                   mem_read8(ctx, fileobj + 4), mem_read32(ctx, fileobj + 0x48),
+                                   mem_read32(ctx, fileobj + 0x50), mem_read32(ctx, fileobj + 0x54));
+                        } else {
+                            printf("[PageRow] f=%d   stream=0x%08X file=0 (no page stream)\n",
+                                   g_runner_current_frame, stream);
+                        }
+                        /* The whole reader buffer, so the page table's own format (header row,
+                         * quoted page names, CR/LF) is recorded instead of guessed from 63 bytes. */
+                        if (tb) {
+                            u32 total = limit < 360u ? limit : 360u;
+                            u32 off = 0;
+                            while (off < total) {
+                                char row[128]; int rn = 0;
+                                u32 off0 = off;
+                                u32 end = off + 110u; if (end > total) end = total;
+                                for (; off < end; off++) {
+                                    unsigned char ch = (unsigned char)tb[off];
+                                    row[rn++] = (ch == 0x0D) ? '|' : (ch == 0x0A) ? '/' :
+                                                ((ch >= 32 && ch < 127) ? (char)ch : '.');
+                                }
+                                row[rn] = 0;
+                                printf("[PageRow] f=%d   buf[%3u] '%s'\n",
+                                       g_runner_current_frame, off0, row);
+                            }
+                        }
                         fflush(stdout); }
                 } else if (mode != s_last) {
                     s_last = mode;
-                    printf("[PageMode] f=%d fn_80684600 returned %d (layout branch %s)\n",
-                           g_runner_current_frame, mode,
-                           (mode >= 1 && mode <= 4) ? "TAKEN" : "SKIPPED");
+                    printf("[PageRow] f=%d column atoi = %d\n", g_runner_current_frame, mode);
+                    fflush(stdout);
+                }
+            }
+            return 0;
+        }
+
+        /* The page start's per-row layout creation: 0x805BB764 `bl fn_8005B3CC` returns the
+         * "d2a" column in r3, so the block at 0x805BB768 (`mr r4,r3`) is the last moment the
+         * name is still a plain pointer. Printing it here, together with the row slot and the
+         * layout the factory returned at 0x805BB778, is the whole per-mode build in one line. */
+        case 0x805BB768:
+        case 0x805BB778: {
+            static int s_probe = -1;
+            static u32 s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_PAGE_ROW_PROBE") ? 1 : 0;
+            if (s_probe) {
+                extern int g_runner_current_frame;
+                u32 obj = ctx->gpr[1] + 0xB4u;
+                u32 tok = mem_read32(ctx, obj + 0x10);
+                u32 slot = ctx->gpr[26];
+                if (s_n < 40) { s_n++;
+                    if (address == 0x805BB768u) {
+                        printf("[PageRowBuild] f=%d name ptr=0x%08X bytes=%08X '%s' slot=0x%08X modeIdx=%d\n",
+                               g_runner_current_frame, ctx->gpr[3],
+                               mem_read32(ctx, ctx->gpr[3]), (const char*)resolve_guest_pointer(ctx, ctx->gpr[3]),
+                               slot, slot && ctx->gpr[15] ? (s32)((slot - ctx->gpr[15]) / 0x4C) + 1 : 0);
+                    } else {
+                        u32 layout = slot ? mem_read32(ctx, slot + 0x478) : 0;
+                        printf("[PageRowBuild] f=%d factory returned 0x%08X slot478=0x%08X fc=0x%08X vptr=0x%08X\n",
+                               g_runner_current_frame, ctx->gpr[3], layout,
+                               layout ? mem_read32(ctx, layout + 0xFC) : 0,
+                               layout ? mem_read32(ctx, layout) : 0);
+                    }
+                    fflush(stdout);
+                }
+            }
+            return 0;
+        }
+
+        /* The instruction right after the page reader's virtual "attach text" call
+         * (0x805BB6E8 bctrl -> 0x805BB6EC). Two things are open here: what the object looks
+         * like the instant the call returns, and whether the vtable slot the call went through
+         * holds a real function at all. Both are printed once, with the caller's ctr, so a
+         * "the reader was handed an already-positioned cursor" finding cannot be an artifact of
+         * something else scribbling on the stack object later (5c.46 AP). */
+        case 0x805BB6EC: {
+            static int s_probe = -1;
+            if (s_probe < 0) s_probe = getenv("TLS_PAGE_VT_PROBE") ? 1 : 0;
+            if (s_probe) {
+                extern int g_runner_current_frame;
+                u32 obj = ctx->gpr[1] + 0xB4u;
+                u32 c = ctx->ctr;
+                printf("[PageVt] f=%d target=0x%08X  obj+4=0x%08X obj+8=%u obj+0xC=%u\n",
+                       g_runner_current_frame, c,
+                       mem_read32(ctx, obj + 4), mem_read32(ctx, obj + 8), mem_read32(ctx, obj + 0xC));
+                printf("[PageVt] f=%d vtable 0x807772D0[0..7] = %08X %08X %08X %08X %08X %08X %08X %08X\n",
+                       g_runner_current_frame,
+                       mem_read32(ctx, 0x807772D0), mem_read32(ctx, 0x807772D4),
+                       mem_read32(ctx, 0x807772D8), mem_read32(ctx, 0x807772DC),
+                       mem_read32(ctx, 0x807772E0), mem_read32(ctx, 0x807772E4),
+                       mem_read32(ctx, 0x807772E8), mem_read32(ctx, 0x807772EC));
+                printf("[PageVt] f=%d vtable 0x807772B0[0..7] = %08X %08X %08X %08X %08X %08X %08X %08X\n",
+                       g_runner_current_frame,
+                       mem_read32(ctx, 0x807772B0), mem_read32(ctx, 0x807772B4),
+                       mem_read32(ctx, 0x807772B8), mem_read32(ctx, 0x807772BC),
+                       mem_read32(ctx, 0x807772C0), mem_read32(ctx, 0x807772C4),
+                       mem_read32(ctx, 0x807772C8), mem_read32(ctx, 0x807772CC));
+                fflush(stdout);
+            }
+            return 0;
+        }
+
+        /* The tutorial page's per-frame update (the only caller of the page start fn_805BB658).
+         * Tracing the page stream's file object here, printing only on change, answers "when was
+         * the page table consumed" WITHOUT the global store watch, whose per-store hook shifts
+         * the title hand-over frame and so invalidates the run (5c.46 AO/AP: both store-watch
+         * runs handed over at 1042 and 727 instead of 1647). */
+        case 0x805BA16C: {
+            static int s_probe = -1;
+            static u32 s_file = 0xFFFFFFFFu, s_c48 = 0, s_c50 = 0, s_c54 = 0, s_req = 0xFFFFFFFFu;
+            if (s_probe < 0) s_probe = getenv("TLS_PAGE_STREAM_PROBE") ? 1 : 0;
+            if (s_probe) {
+                extern int g_runner_current_frame;
+                u32 cls = ctx->gpr[3];
+                u32 stream = cls ? cls + 0x5A4u : 0;
+                u32 file = stream ? mem_read32(ctx, stream + 4) : 0;
+                u32 req = cls ? mem_read32(ctx, cls + 0x5ACu) : 0;
+                u32 c48 = file ? mem_read32(ctx, file + 0x48) : 0;
+                u32 c50 = file ? mem_read32(ctx, file + 0x50) : 0;
+                u32 c54 = file ? mem_read32(ctx, file + 0x54) : 0;
+                u32 state = file ? mem_read8(ctx, file + 4) : 0;
+                if (file != s_file || c48 != s_c48 || c50 != s_c50 || c54 != s_c54 || req != s_req) {
+                    s_file = file; s_c48 = c48; s_c50 = c50; s_c54 = c54; s_req = req;
+                    printf("[PageStream] f=%d cls=0x%08X req=%u file=0x%08X state=%u size48=%u f50=%u f54=0x%08X\n",
+                           g_runner_current_frame, cls, req, file, state, c48, c50, c54);
                     fflush(stdout);
                 }
             }
