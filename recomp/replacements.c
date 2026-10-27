@@ -1231,7 +1231,11 @@ static void dvd_fill_file_info(CPUState* ctx, u32 fi_addr, u32 id, const HostAss
  * We queue (callback, fileInfo) and let the runner's frame loop drain
  * the queue, mirroring how the retail DVD thread completes transfers.
  * ------------------------------------------------------------------ */
-#define TLS_DVD_MAX_PENDING 32
+/* The deferred-completion ring has to hold a whole frame's burst of reads once
+ * TLS_ASYNC_IO_COMPLETE routes the streaming loader through it: the loader submits up to
+ * two slots per file handle and many handles per frame, and a dropped entry is a slot
+ * that never completes. */
+#define TLS_DVD_MAX_PENDING 512
 #define TLS_DVD_IDLE_PC 0x805F50B0u /* OS scheduler idle loop used by the runner */
 
 /* TLS_HOST_CALLBACK_SENTINEL (0xFFFFFFFC) is declared in replacements.h because
@@ -1266,7 +1270,16 @@ static void dvd_queue_callback(u32 callback, u32 file_info, s32 result) {
     }
     u32 next = (s_dvd_pending_tail + 1) % TLS_DVD_MAX_PENDING;
     if (next == s_dvd_pending_head) {
-        return; // queue full: drop rather than corrupt
+        /* Queue full: dropping a completion leaves the guest polling a slot that will
+         * never say "done", so a silent drop turns into a stall. Report it: with
+         * TLS_ASYNC_IO_COMPLETE the whole streaming pipeline goes through this queue. */
+        static u32 s_full_reports = 0;
+        if (s_full_reports++ < 16 || (s_full_reports % 1000) == 0) {
+            printf("[TLS DVD] completion queue FULL #%u (dropping cb=0x%08X fi=0x%08X)\n",
+                   s_full_reports, callback, file_info);
+            fflush(stdout);
+        }
+        return;
     }
     s_dvd_pending[s_dvd_pending_tail].callback = callback;
     s_dvd_pending[s_dvd_pending_tail].file_info = file_info;
@@ -2775,6 +2788,30 @@ static void tls_scene_sm_enter(CPUState* ctx, u32 task) {
                f566c, f5674, f575c, f5624, f56ec, f10d8);
         fflush(stdout);
     }
+}
+
+/* Earliest frame the async-pool probe reports from (TLS_ASYNC_PROBE_FROM). The pool's
+ * one known burst is at frame 376; a later start makes a long run answer "is anything
+ * ever posted again" instead of spending the whole report on that burst. */
+static int tls_async_probe_from(void) {
+    static int v = -2;
+    if (v == -2) {
+        const char* e = getenv("TLS_ASYNC_PROBE_FROM");
+        v = e ? atoi(e) : 0;
+        if (v < 0) v = 0;
+    }
+    return v;
+}
+
+/* TLS_ASYNC_IO_COMPLETE=1: deliver streaming (0x8046BBE0) read completions through the
+ * guest's own async route - queued and dispatched at the guest's idle point by
+ * tls_dvd_service_callback - instead of finishing them inside DVDReadAsyncPrio.
+ * Default off: every streaming read in the engine (title, menu, Chapter 1) goes through
+ * that one call, so this is an experiment to be judged on the invariant hash, not a fix. */
+static int tls_async_io_complete(void) {
+    static int v = -1;
+    if (v < 0) v = getenv("TLS_ASYNC_IO_COMPLETE") ? 1 : 0;
+    return v;
 }
 
 int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
@@ -4736,8 +4773,13 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             if (ok) {
                 s_dvd_read_ok++;
                 if (s_dvd_read_ok <= 256 || s_dvd_read_ok % 50 == 0) {
-                    printf("[TLS DVD] read #%u %s off=%d len=%d -> %u bytes lr=%08X cb=%08X\n", s_dvd_read_ok,
-                           asset ? asset->path : "?", offset, length, transferred, ctx->lr, callback);
+                    /* The frame is part of the record: the streaming loader's reads
+                     * happen in bursts and the question "did the read that completes
+                     * the job arrive at frame N" cannot be answered without it. */
+                    extern int g_runner_current_frame;
+                    printf("[TLS DVD] read #%u f=%d %s off=%d len=%d -> %u bytes lr=%08X cb=%08X\n",
+                           s_dvd_read_ok, g_runner_current_frame, asset ? asset->path : "?", offset,
+                           length, transferred, ctx->lr, callback);
                     fflush(stdout);
                 }
             } else {
@@ -4755,13 +4797,18 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 mem_write32(ctx, fi_addr + 0x0C, 0); // DVD_STATE_END
             }
             if (ok) {
-                if (callback == 0x8046BBE0) {
+                if (callback == 0x8046BBE0 && !tls_async_io_complete()) {
                     u32 target = fi_addr ? mem_read32(ctx, fi_addr + 0x2C) : 0;
                     if (target != 0x807C6F60 && target != 0x800000E4 && resolve_guest_pointer(ctx, target)) {
                         mem_write32(ctx, target, 2);
                     }
                     s_dvd_callbacks_run++;
                 } else {
+                    /* TLS_ASYNC_IO_COMPLETE=1 sends the stream completion through the
+                     * guest's own async route instead of finishing it inside the
+                     * DVDReadAsyncPrio call: the runner's frame loop then delivers it at
+                     * the guest's idle point, which is where the retail DVD thread's
+                     * callback would run (5c.46 X). */
                     dvd_queue_callback(callback, fi_addr, (s32)transferred); // drained by the runner frame loop
                 }
             }
@@ -7745,6 +7792,156 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 printf("[Submit] frame=%d mgr=0x%08X lr=0x%08X\n",
                        g_runner_current_frame, ctx->gpr[3], ctx->lr);
                 fflush(stdout);
+            }
+            return 0;
+        }
+
+        /* The job pool behind that submit (handover 5c.46 V/W). 0x8071D470 allocates an
+         * operation object from one of three free lists (mgr+0x0, mgr+0xC, mgr+0x18),
+         * 0x8071D714 publishes it at mgr+0x24 and invokes its virtual start, and
+         * 0x8071D3F0 is the *completion* that returns a finished object to a free list
+         * (mgr + idx*0xC + 4) and wakes the worker on mgr+0x2C. TLS_ASYNC_PROBE=1 names
+         * the objects, their vtable and their start slot, so "no work after frame 376"
+         * can be attributed to a producer instead of to the worker.
+         * TLS_ASYNC_PROBE_FROM=<frame> suppresses the start-up burst, so a long run can
+         * answer "does anything get posted later". */
+        case 0x8071D3F0: { /* post a completed operation object back into the pool */
+            static int s_probe = -1, s_n = 0;
+            static u32 s_seen_vt[8] = {0};
+            static int s_seen_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_ASYNC_PROBE") ? 1 : 0;
+            if (s_probe && s_n < 64 && g_runner_current_frame >= tls_async_probe_from()) {
+                extern int g_runner_current_frame;
+                u32 mgr = ctx->gpr[3], obj = ctx->gpr[4], idx = ctx->gpr[5];
+                u32 vt = obj ? mem_read32(ctx, obj) : 0;
+                s_n++;
+                printf("[AsyncPool] f=%d POST mgr=0x%08X obj=0x%08X idx=%u vptr=0x%08X "
+                       "f10=0x%08X f14=0x%08X f18=0x%08X f1c=0x%08X f20=0x%08X f24=0x%08X "
+                       "f28=0x%08X\n",
+                       g_runner_current_frame, mgr, obj, idx, vt,
+                       obj ? mem_read32(ctx, obj + 0x10) : 0,
+                       obj ? mem_read32(ctx, obj + 0x14) : 0,
+                       obj ? mem_read32(ctx, obj + 0x18) : 0,
+                       obj ? mem_read32(ctx, obj + 0x1C) : 0,
+                       obj ? mem_read32(ctx, obj + 0x20) : 0,
+                       obj ? mem_read32(ctx, obj + 0x24) : 0,
+                       obj ? mem_read32(ctx, obj + 0x28) : 0);
+                int known = 0;
+                for (int i = 0; i < s_seen_n; i++) if (s_seen_vt[i] == vt) known = 1;
+                if (!known && vt && s_seen_n < 8) {
+                    s_seen_vt[s_seen_n++] = vt;
+                    printf("[AsyncPool]   vtable 0x%08X slots:", vt);
+                    for (int i = 0; i < 8; i++) printf(" %02X=0x%08X", i * 4, mem_read32(ctx, vt + i * 4));
+                    printf("\n");
+                }
+                fflush(stdout);
+            }
+            return 0;
+        }
+        case 0x8071D714: { /* submit: the allocated operation is now at mgr+0x24 (r29=mgr, r3=obj) */
+            static int s_probe = -1, s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_ASYNC_PROBE") ? 1 : 0;
+            if (s_probe && s_n < 64 && g_runner_current_frame >= tls_async_probe_from()) {
+                extern int g_runner_current_frame;
+                u32 mgr = ctx->gpr[29], obj = ctx->gpr[3];
+                u32 vt = obj ? mem_read32(ctx, obj) : 0;
+                s_n++;
+                printf("[AsyncPool] f=%d SUBMIT mgr=0x%08X obj=0x%08X vptr=0x%08X "
+                       "slot3=0x%08X slot4=0x%08X f10=0x%08X f14=0x%08X f18=0x%08X f1c=0x%08X "
+                       "f20=0x%08X f24=0x%08X\n",
+                       g_runner_current_frame, mgr, obj, vt,
+                       vt ? mem_read32(ctx, vt + 0x0C) : 0,
+                       vt ? mem_read32(ctx, vt + 0x10) : 0,
+                       obj ? mem_read32(ctx, obj + 0x10) : 0,
+                       obj ? mem_read32(ctx, obj + 0x14) : 0,
+                       obj ? mem_read32(ctx, obj + 0x18) : 0,
+                       obj ? mem_read32(ctx, obj + 0x1C) : 0,
+                       obj ? mem_read32(ctx, obj + 0x20) : 0,
+                       obj ? mem_read32(ctx, obj + 0x24) : 0);
+                fflush(stdout);
+            }
+            return 0;
+        }
+        case 0x8071D5D0: { /* the wait's "is an object available?" peek, plus pool occupancy */
+            static int s_probe = -1, s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_ASYNC_PROBE") ? 1 : 0;
+            if (s_probe && s_n < 64 && g_runner_current_frame >= tls_async_probe_from()) {
+                extern int g_runner_current_frame;
+                u32 mgr = ctx->gpr[3];
+                s_n++;
+                printf("[AsyncPool] f=%d PEEK mgr=0x%08X heads=0x%08X/0x%08X/0x%08X sig=%u\n",
+                       g_runner_current_frame, mgr,
+                       mem_read32(ctx, mgr), mem_read32(ctx, mgr + 0x0C),
+                       mem_read32(ctx, mgr + 0x18),
+                       mem_read8(ctx, mgr + 0x28));
+                fflush(stdout);
+            }
+            return 0;
+        }
+
+        /* 0x805F38A0 is the SDK's reset/return-to-menu path (OSReboot.c chunk: it calls
+         * __OSStopPlayRecord, __OSUnRegisterStateEvent, __OSShutdownDevices, __OSHotReset
+         * and ends in OSPanic). 5c.46 O claims GameLoadTask pumps it every frame when the
+         * save check returns zero; this probe answers that directly, and any call would
+         * also leave [TLS OSPanic] output behind. */
+        case 0x805F38A0: {
+            static int s_probe = -1;
+            static u32 s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_RESET_PROBE") ? 1 : 0;
+            if (s_probe) {
+                extern int g_runner_current_frame;
+                s_n++;
+                if (s_n <= 8 || (s_n % 60) == 0) {
+                    printf("[ResetProbe] f=%d #%u fn_805F38A0(r3=%u) lr=0x%08X\n",
+                           g_runner_current_frame, s_n, ctx->gpr[3], ctx->lr);
+                    fflush(stdout);
+                }
+            }
+            return 0;
+        }
+
+        /* 0x80363DBC is the update half of the only task pair in the frame-4020 dump besides
+         * GameLoadTask (same object 0x80B8DD10, drawn by 0x803646C4, which formats four
+         * strings and draws four quads). Its first pass creates four event actions
+         * (fn_801F3FF8) and stores them at +0x24..+0x30; the next pass only proceeds when
+         * the actions report `(*(u32*)(h+0x38) & 2) == 2`, then sets +0x34 = 1. Measured
+         * (5c.46 Z): handles 0/1/2 are ready from frame 201 and +0x34 = 1 from frame 202,
+         * so this task is NOT what the frozen page waits on - the probe is kept because it
+         * is the cheapest way to re-check that claim on a different frame. Print on change. */
+        case 0x80363DBC: {
+            static int s_probe = -1;
+            static u32 s_last[12];
+            static int s_have = 0, s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_PAGETASK_PROBE") ? 1 : 0;
+            if (s_probe) {
+                extern int g_runner_current_frame;
+                u32 p = ctx->gpr[3];
+                u32 v[12];
+                v[0] = mem_read32(ctx, p + 0x00);
+                v[1] = mem_read32(ctx, p + 0x18);
+                v[2] = mem_read32(ctx, p + 0x1C);
+                v[3] = mem_read32(ctx, p + 0x20);
+                v[4] = mem_read32(ctx, p + 0x34);
+                v[5] = mem_read32(ctx, p + 0x44);
+                for (int i = 0; i < 4; i++) {
+                    u32 h = mem_read32(ctx, p + 0x24 + (u32)i * 4);
+                    v[6 + i] = h;
+                    v[8 + i] = (h >= 0x80000000u && h < 0x82000000u)
+                                   ? mem_read32(ctx, h + 0x38) : 0xDEADBEEFu;
+                }
+                int changed = !s_have;
+                for (int i = 0; i < 12; i++) if (v[i] != s_last[i]) changed = 1;
+                if ((changed && s_n < 120) || (g_runner_current_frame % 600) == 0) {
+                    for (int i = 0; i < 12; i++) s_last[i] = v[i];
+                    s_have = 1;
+                    s_n++;
+                    printf("[PageTask] f=%d p=0x%08X f0=%u f18=%u f1c=%u f20=%u f34=%u f44=0x%08X "
+                           "h=%08X/%08X/%08X/%08X st=x%X,x%X,x%X,x%X (ready012=%d)\n",
+                           g_runner_current_frame, p, v[0], v[1], v[2], v[3], v[4], v[5],
+                           v[6], v[7], v[8], v[9], v[8], v[9], v[10], v[11],
+                           (((v[8] & 2) == 2) + ((v[9] & 2) == 2) + ((v[10] & 2) == 2)));
+                    fflush(stdout);
+                }
             }
             return 0;
         }

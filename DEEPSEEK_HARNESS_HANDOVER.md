@@ -6,8 +6,24 @@
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
 creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.46 V**; §5c.45 and everything before it is history, and several of its conclusions are
+state is **§5c.46 Z**; §5c.45 and everything before it is history, and several of its conclusions are
 corrected below.
+
+> **THE CHAIN IN THE BLOCK BELOW IS WITHDRAWN FROM LINK 4 ON (§5c.46 Z).** Read Z before acting on it. The
+> measured corrections: the `0x8087D5E4` worker pool is the **BGM read-ahead daemon** (its job start
+> `0x8071C630 -> 0x8071ADF0` fills the 0x4000-byte buffer `lbl_808795C0` from a *synchronous* stream read), not
+> the asset loader; the pool **does** receive work after frame 376 (bursts at 1993/1994 and 2721, measured over
+> 4 020 frames - V's "no work after 376" was a 1 500-frame window); `0x8087FB98` is **`__OSInIPL`**, whose zero is
+> *normal* for a game, so `0x805EC060` returning 64 is expected; `0x805F38A0` (the SDK reset/return-to-menu path)
+> is **never called** (`TLS_RESET_PROBE` = 0, no `OSPanic`); and the other live task (`0x80B8DD10`, update
+> `0x80363DBC`) has its setup flag set from frame 202 and never cleared.
+> **`TLS_ASYNC_IO_COMPLETE=1` is implemented and REJECTED** - it replaces the `EAB33141…` reference frame with a
+> different wrong hash on every run, puts the cave instead of the page on screen at frame 4000 (with `Game` at
+> 1620 in both) and is 1.5x slower even on an idle host.
+> **One more warning**: the runner is wall-clock sensitive on a loaded host - with an unrelated CPU hog running,
+> two identical *default* runs gave `A1B3A723…`/`03BE4BAE…` instead of `EAB33141…` and the title hand-over moved
+> from frame 1620 to 886..1920. Close CPU hogs before running `tools/invariant.ps1`; on an idle host it reproduces
+> exactly (5c.46 Z).
 
 > **THE PAGE'S WHITE FIELD IS FIXED (§5c.46 D).** The tutorial page at frame 4000 now renders the reference's
 > parchment with its printed border and ornate corners, instead of a white field with a black box. Two rule
@@ -18,40 +34,38 @@ corrected below.
 > `docs/evidence/host_f4000_matte_gate_5c46.png` and the reference comparison
 > `docs/evidence/cmp_f4000_plate_glow_5c46.png`.
 
-> **THE PAGE'S ROOT CAUSE IS NOW A SINGLE CHAIN (§5c.46 M-Q) - read it before anything else.** Seven measured
-> links, each with its own evidence:
+> **THE PAGE'S ROOT CAUSE WAS A CHAIN (§5c.46 M-Q) - links 1-3 stand, links 4-6b are WITHDRAWN in Z.**
+> Seven claimed links; the first three are measured facts, the rest are struck through with the measurement that
+> killed them:
 >
 > 1. the page draws only its furniture - sheet, border, title, SKIP button; the crowned crest and both body-text
 >    lines are **never submitted** (M);
 > 2. the page is **pixel-identical from frame 4000 to 4800** - it never animates or scrolls (I);
 > 3. its owner is **`GameLoadTask`** (task `0x80AEDCF0`, vtable `0x807790B0`, update `0x80570CFC`), still
 >    registered at frame 4804 (N);
-> 4. that task pumps `0x805F38A0` -> `0x805EC060` every frame because the save check returns 0 (O);
-> 5. `0x805EC060` is a status getter gated on the **BSS flag `0x8087FB98`**; while it is zero the loader gets the
->    constant **64** and never leaves its "not ready" branch (P);
-> 6. **nothing writes that flag** - one store in the whole run (a boot `memset` of 0); all 16 direct
->    small-data accesses in the 459 chunks are `lwz` reads; and the ELF confirms it is BSS, i.e. zero even on
->    hardware (P);
-> 6b. **the pipeline that would set it stops producing work at frame 376**: the worker manager's pending pointer
->    (`0x8087D608`) is written a handful of times at frame 376 (`0x907C5378`, `0x907C59F4`) and **never again** -
->    with the store ring cleared at frame 400 the count is `in-range=0` for 1 100 frames. The wakeup machinery is
->    fine (the producer's `OSWakeupThread` at `0x8071D444` does find and release the worker at frame 376); there is
->    simply nothing left to hand it. A submit is `allocate (0x8071D470) -> publish at manager+0x24 -> invoke
->    virtual start`, so the missing piece is *who asks* (V).
+> 4. ~~that task pumps `0x805F38A0` -> `0x805EC060` every frame because the save check returns 0 (O);~~
+>    **WITHDRAWN in Z**: the call sits inside `if ([task+0x14] != 0)`, the post-check branch is `bne` (return),
+>    and `0x805F38A0` is called **0 times** in a 4 020-frame run (`TLS_RESET_PROBE`, no `OSPanic`);
+> 5. ~~`0x805EC060` is a status getter gated on the BSS flag `0x8087FB98`; while it is zero the loader gets the
+>    constant 64 and never leaves its "not ready" branch (P);~~ **WITHDRAWN in Z**: `0x8087FB98` is
+>    **`__OSInIPL`**, so 0 - and the status 64 - is what a game launched normally sees;
+> 6. as a consequence "nothing writes that flag" is true but irrelevant: it is an OS boot-mode flag, not a
+>    load-state gate (Z);
+> 6b. ~~the pipeline that would set it stops producing work at frame 376~~ (V). **WITHDRAWN in Z**: with
+>    `TLS_ASYNC_PROBE` over 4 020 frames the same pool receives bursts at frames **1993/1994** (10 + 15 jobs) and
+>    **2721** (5 jobs) - V's window ended at ~frame 1 500. The pool is the **BGM read-ahead daemon**
+>    (`0x8071C630 -> 0x8071ADF0` fills `lbl_808795C0` from a *synchronous* stream read), so it neither loads the
+>    page nor writes `__OSInIPL`;
 >
-> 7. the two worker threads that plausibly would set it (`OSCreateThread` entries `0x8071DBE0` and `0x80718C40`,
->    created at frame 170) are **scheduled around frame 170 and then never again** - corrected in R: the guest
->    scheduler itself is alive and switches **every frame** (`__OSCurrentThread` alternates main thread and zero;
->    the runner's switch log only looked empty because it is opt-in, `TLS_WATCH_CURRENT_THREAD=1`). Their queues
->    are woken only ~20 times each (`0x8087D610` x20, `0x8087D618` x20, `0x8087D5C0` x20, `0x8087D678` x22)
->    against **x6481** for the main thread's queue `0x80879564`, so the workers **block early and are never
->    woken** (R).
+> 7. the two worker threads (`OSCreateThread` entries `0x8071DBE0` and `0x80718C40`, created at frame 170) are
+>    scheduled around frame 170 and then park between read-aheads - R's correction stands: the guest scheduler
+>    switches every frame (opt-in log, `TLS_WATCH_CURRENT_THREAD=1`). `0x8071DBE0` is the BGM worker; it is
+>    **idle by design**, not starved.
 >
-> **So the page is blocked on thread scheduling, not on rendering.** Thread switching is guest code here (the OS
-> scheduler is in the game binary and the runner follows `0x800000E4`), so the next question is why the guest's
-> own scheduler never selects a different thread - the sleep/wake primitives are handled as probes that let the
-> SDK code run (`OSSleepThread` at `0x805F5C70` ends with "let original SDK OSSleepThread run"), so something in
-> that path never completes.
+> **So the chain's end is not a scheduler or I/O stall.** The only other live task pair (`0x80B8DD10`, update
+> `0x80363DBC` / draw `0x803646C4`) is past its own gates - setup flag `+0x34` = 1 from frame 202, never cleared
+> (Z) - so the missing crest/body text has to be explained by *who submits those quads*, which is M's question
+> again.
 
 > **THE PAGE IS FROZEN AND ONLY 1 OF ITS 5 ELEMENTS RENDERS (§5c.46 H, I).** Viewed whole, the reference
 > page has five things: the parchment + printed border (we match these), the player-character illustration
@@ -9096,3 +9110,114 @@ longer.
 
 **Verification**: build green, invariant **PASS** with EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F,
 save 1 348 992 / 29 344, 0 changes to src/; capture at docs/evidence/host_f9000_5c46.png.
+
+### Z. The async-completion experiment, measured and REJECTED - and with it the chain's last links are withdrawn
+
+X's proposal (deliver streaming completions through the guest's own async route) is now implemented as
+`TLS_ASYNC_IO_COMPLETE=1` in `recomp/replacements.c`, `DVDReadAsyncPrio` (case `0x805FA4E0`): a `0x8046BBE0`
+stream completion is queued with `dvd_queue_callback` and delivered at the guest's idle point by
+`tls_dvd_service_callback`, instead of being applied inside the read call. **It is default-off and rejected on
+measurement:**
+
+| measurement | default | `TLS_ASYNC_IO_COMPLETE=1` |
+|---|---|---|
+| invariant frame 3500 | `EAB33141…` **PASS** on an idle host, reproduced on every idle run | **FAIL**, and not reproducible: `D3094708…` (first build), `3F02960B…`, `0B4D882B2C9CCDB064682DC5B585F90E1DC81170A8BCF64C5A09D25138AE06C9` (idle host) |
+| page at frame 4000 **with `Game` at frame 1620** | parchment + border + SKIP, `B89F3650…`, **0/921600 pixels** differ from `docs/evidence/host_f4000_matte_gate_5c46.png` (3 of 3 runs) | **the cave**, `A455E6BF…`, mean (54,53,47), 921599/921600 differ - `docs/evidence/host_f4000_async_on_5c46z.png`, diff `cmp_f4000_async_on_5c46z.png` (2 of 2 runs) |
+| GX at frame 3960 | 63 732 vtx / 54 batches (host-load dependent, not a decider) | 18 849 vtx / 54 batches |
+| sequence / save | reaches `Game`, 1 348 992 / 29 344 | same, same |
+| wall time, 4 020 frames | 207 s idle | 304 s idle (1.5x), 470-603 s when the host was also loaded |
+
+The decisive row is the first: the default reproduces `EAB33141…` exactly while **every** run under the flag lands
+somewhere else, with a different hash each time. No crest, no body text: the page is not reached at all at frame
+4000 under the flag. It changes the engine's behaviour without delivering the stimulus X hoped for, so it stays
+behind the flag as a measured rejection.
+
+**A real defect found while measuring it.** The deferred-completion ring was **32** entries and dropped silently
+when full; with the flag on, the streaming loader's per-frame burst overflows it, and a dropped completion is a
+loader slot that never reports done. Measured: with 32 entries the audio read-ahead burst below moves from frame
+376 to **2003** and the run takes 603 s; with **512** (`TLS_DVD_MAX_PENDING`, now with a
+`[TLS DVD] completion queue FULL` report instead of a silent drop) the same burst lands at 399. The bigger ring is
+inert on the default path (the deferred queue holds a handful of entries there) and is kept.
+
+**Correction 1 - the `0x8087D5E4` pool is the AUDIO stream worker, not the asset loader.** The new
+`TLS_ASYNC_PROBE` names every object at the pool's post (`0x8071D3F0`), peek (`0x8071D5D0`) and submit-publish
+(`0x8071D714`) points. The 20 jobs at frame 376 are two families (owners `0x907C5224`, `0x907C4170`) of one header
+job plus nine `0x4000`-byte chunks each, vtable `0x807C63C8`, whose slot `0x0C` is `0x8071C630`:
+
+```
+8071C630 -> fn_8071ADF0(owner, stream 0x907C5FC8, off, len=0x4000, 0x2000, chunk#, flag)
+   DCInvalidateRange(lbl_808795C0, 0x4000)                  ; the buffer, symbol size 0x4000
+   stream->slot44(offset, 0); stream->slot14(buf, len)      ; = fn_807260C0 -> DVDReadPrio (SYNCHRONOUS)
+   memcpy(obj + 0x818 + i*0x34, buf + i*len, len)           ; per channel, then DCFlushRange
+```
+
+and `[TLS DVD] sync read #138 sound/stream/BGM_EVNT001_2_Theme.brstm off=928 len=16384 -> 16384 bytes lr=80726114`
+is one of those reads. So the worker is the **BGM read-ahead daemon**: it cannot write `__OSInIPL` and it is not
+what loads the page's crest or body text. Q's "one of them is what should set the flag" is withdrawn, and W's
+"the worker submits its own work" becomes "a BGM stream refill loop".
+
+**Correction 2 - there is no production gap.** `TLS_ASYNC_PROBE=1 TLS_ASYNC_PROBE_FROM=400` over 4 020 frames on
+the **default** build posts further bursts at frames **1993/1994** (10 + 15 jobs) and **2721** (5 jobs):
+
+```
+[AsyncPool] f=1993 POST ... f18=0x00004000 f1c=0x00000260 f20=0x00002000 f24=0x00000000 f28=0x01000000
+[AsyncPool] f=1994 POST ... x15
+[AsyncPool] f=2721 POST ... x5
+```
+
+V's "zero writes to the pending pointer for the remaining 1 100 frames" was a window that ends at ~frame 1 500
+(ring cleared at 400); the next burst is at 1993. The worker is a healthy daemon that parks between read-aheads -
+U's reading was right, and X/Y were built on a window artefact. **This is the project's own rule biting again:
+watch the window length.**
+
+**Correction 3 - `0x8087FB98` is `__OSInIPL`; zero is normal, and `0x805F38A0` is NEVER CALLED.**
+`build/symbols.map`: `8087FB98 00000004 __OSInIPL`. It means "the OS is running IPL/Wii-menu firmware", so a game
+launched normally has it 0 and `0x805EC060` returning **64 is the expected value**, not a stuck gate. And
+`0x805F38A0` - the function P/O built the chain on - is the SDK reset/return-to-menu path (the `src/OSReboot.c`
+chunk: `__OSStopPlayRecord`, `__OSUnRegisterStateEvent`, `__OSShutdownDevices`, `__OSHotReset`, then `OSPanic`):
+it is called **0 times** in a 4 020-frame page run (`TLS_RESET_PROBE`; there is also no `[TLS OSPanic]` in that
+log). O's "the task pumps `0x805F38A0` every frame" is a misread of two branches - the call sits inside
+`if ([task+0x14] != 0)`, and the branch after the save check at `0x80570E38` is `bne` (return) when the check is
+nonzero. So P's "flag that gates the whole load state machine" gates nothing the page waits on.
+
+**Correction 4 - the other live task is not gated either (new, measured).** The frame-4020 task dump lists
+`[0] GameLoadTask 0x80AEDCF0` and `[1]/[2] task 0x80B8DD10` with updates `0x80363DBC` and `0x803646C4` (the
+latter formats four strings and draws four quads, so the pair is an update+draw registration; both are alive at
+frame 4020). `TLS_PAGETASK_PROBE` on `0x80363DBC` shows its state machine past every gate it has: the four
+objects it creates at `+0x24..+0x30` (`0x80D22B20`, `0x80D22C60`, `0x80D22D80`, `0x80D22EC0`) are stable for the
+whole run, and its setup flag **`+0x34` = 1 from frame 202** and still 1 at frame 3960. (Careful with `+0x38`
+of those four: it is a state word `6` on the last two and a *heap pointer* on the first two, so "all four ready"
+is not a claim this probe supports - the flag is the reliable part.)
+
+**So the page's missing crest/body text is not a stuck load gate, not a starved worker, and not `__OSInIPL`.** What
+is left is M's question in its original form: *which producer submits the page's missing quads at all* - and the
+page's own script (the four `ActionNotify` / `ActionCheck` / `ActionAnimationPlay` actions, names in the string
+table at `0x8074D8C0`) is ready and idle, so whatever it is supposed to notify never happens.
+
+**Correction 3b - the page at frame 4000 is only reproducible together with the hand-over frame.** The frame at
+which `SetNextSequence('Game')` fires is not stable: today it landed at **1620, 1647, 1848** (idle host) and at
+886 / 1047 / 1130 / 1241 / 1920 (while a CPU hog was running), with identical inputs and an identical save
+precondition. Everything drawn after the hand-over shifts with it, so a fixed guest frame is not a stable page
+reference - **three runs with `Game` at 1620 gave `B89F3650…` byte-for-byte, and every run at a different
+hand-over frame gave a different picture**. Rule: before comparing a page frame, match the
+`SetNextSequence('Game') frame=` line first (or key the capture off `TLS_PRESENT_PROBE`'s present counter). The
+frame-3500 invariant is immune because that frame is static cave geometry.
+
+**Correction 3c - the runner is not deterministic on a loaded host, and the invariant is only a gate when idle.**
+While an unrelated heavyweight process was running (`Client-Win64-Shipping`, ~3 cores), two **identical
+default-build** runs produced `A1B3A723…` and `03BE4BAE…` instead of `EAB33141…`. With that process closed, the
+same binary reproduced `EAB33141…` on every run, while the flag still failed with a *new* hash each time
+(`D3094708…`, `3F02960B…`, `0B4D882B…`). So check for a CPU hog before believing any frame-numbered comparison;
+`tools/page_run.ps1` also deletes the save first now, for the same fresh-console reason `tools/invariant.ps1`
+does.
+
+**Next step, precise**: pick the page half with `TLS_PRESENT_PROBE`, dump its batch list with `TLS_BATCH_DUMP=4000`,
+map the 37 batches to the reference's five elements, and name the draw call that produces the parchment; the
+missing elements' producer is the code that has to exist next to it. (Do not re-open texture/psq/copy questions -
+they are answered in 5c.43-5c.45.)
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
+`src/`. New knobs, all default-off: `TLS_ASYNC_IO_COMPLETE`, `TLS_ASYNC_PROBE`, `TLS_ASYNC_PROBE_FROM`,
+`TLS_RESET_PROBE`, `TLS_PAGETASK_PROBE`. New tools: `tools/page_run.ps1` (one-command page measurement) and
+`tools/frame_diff.py` (pixel-exact same-size frame diff, which is how "0/921600" above was measured).
