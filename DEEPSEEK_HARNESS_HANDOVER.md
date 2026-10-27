@@ -6,7 +6,7 @@
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
 creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.46 I**; §5c.45 and everything before it is history, and several of its conclusions are
+state is **§5c.46 Q**; §5c.45 and everything before it is history, and several of its conclusions are
 corrected below.
 
 > **THE PAGE'S WHITE FIELD IS FIXED (§5c.46 D).** The tutorial page at frame 4000 now renders the reference's
@@ -17,6 +17,30 @@ corrected below.
 > **Frame 3500 is unchanged** - the fix costs the reference frame nothing. Evidence:
 > `docs/evidence/host_f4000_matte_gate_5c46.png` and the reference comparison
 > `docs/evidence/cmp_f4000_plate_glow_5c46.png`.
+
+> **THE PAGE'S ROOT CAUSE IS NOW A SINGLE CHAIN (§5c.46 M-Q) - read it before anything else.** Seven measured
+> links, each with its own evidence:
+>
+> 1. the page draws only its furniture - sheet, border, title, SKIP button; the crowned crest and both body-text
+>    lines are **never submitted** (M);
+> 2. the page is **pixel-identical from frame 4000 to 4800** - it never animates or scrolls (I);
+> 3. its owner is **`GameLoadTask`** (task `0x80AEDCF0`, vtable `0x807790B0`, update `0x80570CFC`), still
+>    registered at frame 4804 (N);
+> 4. that task pumps `0x805F38A0` -> `0x805EC060` every frame because the save check returns 0 (O);
+> 5. `0x805EC060` is a status getter gated on the **BSS flag `0x8087FB98`**; while it is zero the loader gets the
+>    constant **64** and never leaves its "not ready" branch (P);
+> 6. **nothing writes that flag** - one store in the whole run (a boot `memset` of 0); all 16 direct
+>    small-data accesses in the 459 chunks are `lwz` reads; and the ELF confirms it is BSS, i.e. zero even on
+>    hardware (P);
+> 7. the two worker threads that plausibly would set it (`OSCreateThread` entries `0x8071DBE0` and `0x80718C40`,
+>    created at frame 170) run their entry **exactly once and never again**, and **`__OSCurrentThread`
+>    (`0x800000E4) never changes for the entire run** - the guest scheduler never switches threads (Q).
+>
+> **So the page is blocked on thread scheduling, not on rendering.** Thread switching is guest code here (the OS
+> scheduler is in the game binary and the runner follows `0x800000E4`), so the next question is why the guest's
+> own scheduler never selects a different thread - the sleep/wake primitives are handled as probes that let the
+> SDK code run (`OSSleepThread` at `0x805F5C70` ends with "let original SDK OSSleepThread run"), so something in
+> that path never completes.
 
 > **THE PAGE IS FROZEN AND ONLY 1 OF ITS 5 ELEMENTS RENDERS (§5c.46 H, I).** Viewed whole, the reference
 > page has five things: the parchment + printed border (we match these), the player-character illustration
