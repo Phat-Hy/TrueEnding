@@ -8959,6 +8959,22 @@ operations through `0x805F38A0`; if our DVD/ISFS layer completes reads *synchron
 do return full length) then the completion callback that would re-arm the pipeline may never be invoked the way
 the guest expects.
 
+**The submit path itself, read from the generated C** (`0x8071D6E0`, whose `0x8071D714` is the store above):
+
+```
+8071D6FC: bl 0x8071D470          ; obtain an operation object
+8071D700: cmpwi r3, 0 / bc 4,2, 0x8071D714
+8071D714: stw r3, 36(r29)        ; manager+0x24 = pending = the object   <- the observed write
+8071D71C: stb r31, 12(r3)        ; clear a byte
+8071D720: lwz r12, 0(r3)         ; vtable
+8071D724: lwz r12, 12(r12)       ; slot 3
+8071D728: mtctr r12 / bctrl      ; start the operation
+```
+
+So a submit is: allocate one operation object, publish it as `manager+0x24`, then invoke its virtual `start`. The
+factory is `0x8071D470`. Nothing after frame 376 asks it for an object, so the pipeline has no work - a
+*motivation* question (who asks) rather than a plumbing one (how it is delivered).
+
 **Next step, precise**: instrument the streaming manager's submit path (`cia=0x8071D714`, the function containing
 it) to see what it is asked to queue and by whom, then compare that against the DVD/ISFS callback plumbing in
 `recomp/replacements.c` (search `TLS DVD`, `pending.callback`, `TLS_DVD_IDLE_PC`). If the guest's submit is
