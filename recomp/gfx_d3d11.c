@@ -3029,6 +3029,28 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                                 (ID3D11Resource*)s_d3d11.gx_tev_cb, 0);
                         }
                         ID3D11DeviceContext_PSSetConstantBuffers(s_d3d11.context, 0, 1, &s_d3d11.gx_tev_cb);
+                        {
+                            /* TLS_TEV_PATH=<batch>[,<frame>]: say which pixel shader this draw
+                             * uses. Settles whether a multi-stage batch (the page's b30) is drawn
+                             * through the TEV shader at all or through the PSAlpha fallback, which
+                             * needs no TEV arithmetic (handover 5c.46 G). */
+                            static int s_pb = -2, s_pf = -1;
+                            if (s_pb == -2) {
+                                const char* e = getenv("TLS_TEV_PATH");
+                                s_pb = -1;
+                                if (e && *e) {
+                                    s_pb = atoi(e);
+                                    const char* c = strchr(e, ',');
+                                    if (c) s_pf = atoi(c + 1);
+                                }
+                            }
+                            if (s_pb >= 0 && (int)b == s_pb &&
+                                (s_pf < 0 || s_pf == (int)s_d3d11_dump_count)) {
+                                printf("[TevPath] frame=%d b%u shader=TEV stages=%u\n",
+                                       s_d3d11_dump_count, b, cst ? 0u : 0u);
+                                fflush(stdout);
+                            }
+                        }
                         ID3D11DeviceContext_PSSetShader(s_d3d11.context, s_d3d11.gx_ps_tev, NULL, 0);
                         ID3D11DeviceContext_PSSetShaderResources(s_d3d11.context, 0, 8, srvs);
                         ID3D11DeviceContext_PSSetSamplers(s_d3d11.context, 0, 1, &s_d3d11.sampler_linear);
