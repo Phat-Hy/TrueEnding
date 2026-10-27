@@ -9077,3 +9077,22 @@ work with its own budget - not as the tail end of a very long one.
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_DVD_TRACE` is default-off.
+
+### Y. The stall is PERMANENT, not slow progress (frame-9000 soak)
+
+Ran 9 000 frames (2.5 minutes of game time, with input at 3 900 / 4 700 / 5 600 / 6 600 / 7 600 / 8 600 /
+9 600) and measured the same three things as before:
+
+`
+[TLS Frame 9000] Seq: Game | Tasks: 3 | GX: 63732 vtx (54 batches) | PC: 0x8009BB64
+[MemDump] 0x8087FB98 at frame 9003:  00000000        <- the gating flag is STILL zero
+f4000 mean 182.0   f9000 mean 182.0   changed 0      <- the page is pixel-identical
+`
+
+So the page does not creep forward: after 5 000 extra frames it is byte-identical and the flag is untouched. The
+stall is **permanent within the emulated run**, which closes the "maybe it just needs more time / more input"
+question and means the remaining fix must change behaviour (the completion/state-machine route in X), not wait
+longer.
+
+**Verification**: build green, invariant **PASS** with EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F,
+save 1 348 992 / 29 344, 0 changes to src/; capture at docs/evidence/host_f9000_5c46.png.
