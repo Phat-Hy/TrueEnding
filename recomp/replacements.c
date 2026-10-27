@@ -16,6 +16,18 @@ void host_set_active_cpu(CPUState* cpu) {
     s_current_active_cpu = cpu;
 }
 
+/* TLS_TEXPROBE_FROM=<frame>: suppress the texture probes before this frame, so the report
+ * cap is spent on the window of interest instead of on the first 60 passes of the boot. */
+static int tls_texprobe_from(void) {
+    static int v = -2;
+    if (v == -2) {
+        const char* e = getenv("TLS_TEXPROBE_FROM");
+        v = e ? atoi(e) : 0;
+    }
+    return v;
+}
+
+int tls_replacements_anchor(void) { return 0; }
 const void* host_resolve_gx_guest_addr(uint32_t addr) {
     if (!s_current_active_cpu) return NULL;
     void* p = resolve_guest_pointer(s_current_active_cpu, addr);
@@ -7490,6 +7502,7 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             if (s_probe < 0) s_probe = getenv("TLS_TEXDECODE_PROBE") ? 1 : 0;
             if (s_probe && s_n < 200) {
                 extern int g_runner_current_frame;
+                if (g_runner_current_frame < tls_texprobe_from()) return 0;
                 s_n++;
                 printf("[TLS TexDecode] frame=%d dst=0x%08X src=0x%08X w=%u h=%u r7=0x%08X lr=0x%08X\n",
                        g_runner_current_frame, ctx->gpr[3], ctx->gpr[4],
@@ -7535,8 +7548,15 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         case 0x800D6F70: {
             static int s_probe = -1, s_n2 = 0;
             if (s_probe < 0) s_probe = getenv("TLS_TEXPREP_PROBE") ? 1 : 0;
-            if (s_probe && s_n2 < 60) {
+            if (s_probe && s_n2 < 400) {
                 extern int g_runner_current_frame;
+                if (g_runner_current_frame < tls_texprobe_from()) return 0;
+                /* one line per distinct pass: this block is a loop body */
+                static u32 l_src = 0, l_dst = 0, l_stg = 0, l_sz = 0;
+                if (ctx->gpr[24] == l_src && ctx->gpr[29] == l_dst &&
+                    ctx->gpr[28] == l_stg && ctx->gpr[30] == l_sz) return 0;
+                l_src = ctx->gpr[24]; l_dst = ctx->gpr[29];
+                l_stg = ctx->gpr[28]; l_sz = ctx->gpr[30];
                 s_n2++;
                 printf("[TLS TexPrep] frame=%d src=0x%08X dst=0x%08X staging=0x%08X size=0x%08X\n",
                        g_runner_current_frame, ctx->gpr[24], ctx->gpr[29],

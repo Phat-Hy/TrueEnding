@@ -7924,3 +7924,42 @@ four instruments armed around frames 1872-1883. The open question is narrow and 
 this texture did not run, or it ran with different buffers than the pass at 1809 used.
 `TLS_TEXPREP_PROBE` distinguishes those in one run - it shows whether a pass appears between 1877 and 1883 and
 what its buffers are.
+
+#### T. The thread resolves: the model's texture is a RENDER-TO-TEXTURE of an EMPTY frame
+
+Armed both texture probes with a start frame (`TLS_TEXPROBE_FROM`, also new) around the window that matters.
+The pass sequence is now explicit:
+
+```
+[TLS TexPrep]   frame=1878 src=0x90536FE0 dst=0x9038D1C0 staging=0x903AD1C0 size=0x4000
+[TLS TexDecode] frame=1879 dst=0x92B4D4E0 src=0x903AD1C0 w=128 h=256
+[TLS TexPrep]   frame=1879 src=0x90556FE0 dst=0x9038D1C0 staging=0x903951C0 size=0x1000
+[TLS TexDecode] frame=1879 dst=0x92B514E0 src=0x903951C0 w=64  h=128
+[TLS TexPrep]   frame=1882 src=0x90536FE0 dst=0x9038D1C0 staging=0x903CD1C0 size=0x8000
+[TLS TexDecode] frame=1883 dst=0x92AEAEC0 src=0x903CD1C0 w=256 h=256      <- the model's texture
+[TLS TexPrep]   frame=1883 src=0x90576FE0 dst=0x9038D1C0 staging=0x9039D1C0 size=0x2000
+[TLS TexDecode] frame=1883 dst=0x92AF2EC0 src=0x9039D1C0 w=128 h=128
+```
+
+So the copy/convert pass **does** run for the model's texture (frame 1882, staging `0x903CD1C0`), and the decode
+that follows reads the buffer that pass just filled - the ordering is correct. What is wrong is the pass's
+**source**: `0x90536FE0`, which is an **EFB copy destination** (5c.43 C4's list, and the issued-copy census in
+Q), and its content at that stage is
+
+```
+frame 1811  0x90536FE0:  8000 8000 8000 8000 ...      uniform mid-grey (RGB555 0x8000)
+```
+
+A uniform-clear frame. So the chain is **render -> EFB copy -> convert -> decode -> the model's texture**, and
+the texture is empty because *the frame that was copied was empty*. That also matches the independent
+measurement in H: at frame 1889 every EFB copy reported `srcavg=(0,0,0)`.
+
+**So the "character texture" thread ends where the renderer's content does**: the model is drawn correctly
+(I: 0 vertices outside the clip volume), and its texture is a render-to-texture of a pass that draws nothing.
+Chasing the texture pipeline further cannot help - the pixels were never in those buffers - and the remaining
+work is the *draw* side of that pass: what the guest submits before each of these copies (frames 1809 / 1878 /
+1882) and why our frame is a uniform clear.
+
+**Verification**: build green, invariant **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
+`src/`; both texture probes are default-off, `TLS_TEXPROBE_FROM` is new.
