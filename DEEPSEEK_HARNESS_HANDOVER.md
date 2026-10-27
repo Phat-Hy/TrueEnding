@@ -9461,3 +9461,51 @@ those frames; once they do, the remaining work is naming the step that sets bit 
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344 (measured before
 this section's probe-only edits; `TLS_FORCE_LAYOUT_BIT` and the new dumps are all default-off and env-gated);
 0 changes to `src/`.
+
+### AD. The page renders - the whole reference layout, on a timeline, once the hidden subtree is on
+
+AC proved the content subtree could draw. This section maps it over the page's life and shows what the page
+actually is.
+
+**`TLS_PAGE_CAPTURE_ALL=<start>,<count>[,<step>]`** (gfx_d3d11.c) takes one screenshot every `<step>`-th guest
+frame inside the window, but only on frames that bind the parchment texture - i.e. only on the page half of the
+alternating pair. With `TLS_FORCE_LAYOUT_BIT=1` and `3300,760,20` one run maps the page (15 captures):
+
+```
+[PageTL] guest 3720  present 3721  48 batches   <- content appears
+[PageTL] guest 3760  present 3761  53 batches
+[PageTL] guest 3780  present 3781  54 batches   <- full page
+[PageTL] guest 3800  present 3801  54 batches
+[PageTL] guest 3820  present 3821  54 batches
+[PageTL] guest 3840  present 3841  25 batches   <- content gone, bare parchment
+[PageTL] guest 3940..4000          36-38 batches <- bare parchment to the end of the run
+```
+
+**What those frames contain** (`docs/evidence/host_page_full_5c46ad.png`, montage
+`docs/evidence/host_page_timeline_5c46ad.png`): the reference page. The character illustration on the left, the
+title **"Movement and Camera"**, both body lines - *"Use (stick) to move." / "Press Z to reset the camera to a
+position behind the player character."* - with the stick and Z button icons, the SKIP button, the parchment and its
+ornate border. 5c.46 E's "the title is painted over" was an artefact of looking at the bare-parchment tail of this
+sequence.
+
+**Two content defects are all that is left in the page's own art:**
+
+1. **The crest is a black rectangle**, exactly where the reference's crowned crest sits (upper right). Its quad
+   samples `0x90D19B80`, the 64x64 scratch that the SKIP frame also uses, and that buffer is black at this point -
+   the same texture 5c.43 D called "alpha-only in b27, decodes fully opaque, plate is flat". So the crest is now a
+   *texture-upload* question with a known address, not a "missing element" question.
+2. A **dark vertical band** behind the text column (x ~ 665..730 at 1280 wide) that the reference does not have -
+   probably the same black-texture family (an untextured panel), worth checking with `TLS_TEX_DUMP` on that frame.
+
+**And the one thing that still gates all of it**: the visibility bit. No setter was found by searching the image for
+the `lwz rX,0xfc(rY) / ori(s) rX,0x4000 / stw rX,0xfc(rY)` idiom (0 hits), so `[task+0xFC]` is written wholesale -
+most likely copied from the layout data at load, which is also why the store watch sees nothing. The next question
+is therefore about **creation**, not mutation: find who builds task `0x81359B80` and why its `+0xFC` arrives as
+`0x2C000000` while the six sibling layouts arrive with bit 30 set (their values are `0x6C…`, `0x6F…`, `0x6E…`,
+`0xEC…`). A capture with `TLS_STORE_WATCH` on `0x81359BF0..0x81359C00` *armed at frame 0* already shows the address
+holding another object until ~frame 1696, so the page's layout is created around or before then - watch the range
+around that window rather than the whole run.
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
+`src/`; `TLS_PAGE_CAPTURE_ALL` and `TLS_FORCE_LAYOUT_BIT` are both default-off.

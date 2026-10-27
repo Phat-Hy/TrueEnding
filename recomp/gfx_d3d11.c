@@ -2685,6 +2685,48 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
             }
         }
     }
+    /* TLS_PAGE_CAPTURE_ALL=<start>,<count>[,<step>]: one screenshot every <step>-th GUEST frame
+     * (default 20) inside the window, but only on frames that actually bind the page's parchment
+     * texture - i.e. on the page half of the alternating pair. This is what maps the content
+     * subtree's timeline: with TLS_FORCE_LAYOUT_BIT set, the hidden elements come and go over the
+     * page's life, and a single first-match capture cannot show that (5c.46 AC next step). */
+    {
+        static int s_pa_start = -2, s_pa_count = 0, s_pa_step = 20;
+        extern int g_runner_current_frame;
+        if (s_pa_start == -2) {
+            const char* e = getenv("TLS_PAGE_CAPTURE_ALL");
+            s_pa_start = -1;
+            if (e) {
+                int a = -1, b = 0, c = 20;
+                if (sscanf(e, "%d,%d,%d", &a, &b, &c) >= 2 && a >= 0 && b > 0) {
+                    s_pa_start = a;
+                    s_pa_count = b;
+                    s_pa_step = (c > 0) ? c : 20;
+                } else {
+                    printf("[PageTL] TLS_PAGE_CAPTURE_ALL='%s' not understood "
+                           "(want <startframe>,<count>[,<step>])\n", e);
+                    fflush(stdout);
+                }
+            }
+        }
+        if (s_pa_start >= 0 && g_runner_current_frame >= s_pa_start &&
+            g_runner_current_frame < s_pa_start + s_pa_count &&
+            ((g_runner_current_frame - s_pa_start) % s_pa_step) == 0) {
+            uint32_t tl_count = 0;
+            const GxDrawBatch* tl_batches = gx_pipeline_get_draw_batches(&tl_count);
+            int has_page = 0;
+            for (uint32_t i = 0; i < tl_count && !has_page; i++) {
+                if (tl_batches[i].has_texture && tl_batches[i].vertex_count &&
+                    tl_batches[i].tex.guest_addr == 0x921DEA60u) has_page = 1;
+            }
+            if (has_page) {
+                take_shot = true;
+                printf("[PageTL] firing at guest frame %d (present %d, %u batches)\n",
+                       g_runner_current_frame, s_d3d11_dump_count, tl_count);
+                fflush(stdout);
+            }
+        }
+    }
     /* Explicit capture points: TLS_SHOT_FRAMES=1920,2160,2400. The list above is a
      * legacy fixed set; this lets a run grab exactly the frames being investigated
      * instead of editing hardcoded numbers. A value matches the present count *or*
