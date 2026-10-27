@@ -8187,3 +8187,43 @@ bit positions is the safe half of that work.
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`
 (the original value - the restructured rule does not disturb this frame), save 1 348 992 / 29 344, 0 changes
 to `src/`.
+
+### F. Why b30 covers the title: it is a TWO-STAGE TEV wipe and we evaluate one stage
+
+Dumped the TEV state of both full-screen sheet draws at the page frame (`TLS_TEV_DUMP_BATCH`, now printing
+every stage, with `TLS_TEV=1`):
+
+```
+[TevBatch] frame=4002 b30 tex=0x921DEA60 fmt=14 512x512 stages=2 col0=0x0008F8AF alp0=0x0008F2F0 ...
+[TevStage]  b30 stage=0 col=0x0008F8AF alp=0x0008F2F0 texenable=1 texmap=0 texcoord=0
+[TevStage]  b30 stage=1 col=0x0008F0CF alp=0x0008E274 texenable=1 texmap=1 texcoord=1
+
+[TevBatch] frame=4004 b26 tex=0x921DEA60 fmt=14 512x512 stages=1 col0=0x0008F8AF alp0=0x0008F2F0 ...
+```
+
+**b26 and b30 are identical in every batch field** - same texture `0x921DEA60` 512x512, same full-screen quad,
+same blend (`1`, SRCALPHA/INVSRCALPHA), same alpha test, and the **same stage-0 combiner words**. They differ in
+exactly one thing: **b26 has one TEV stage and b30 has two**, and stage 1 is textured from **`texmap=1` /
+`texcoord=1`** - the second texture, i.e. the white->black ramp `0x90305600` that 5c.43 D identified. That second
+stage is what turns b30 from a second copy of the sheet into a *wipe*.
+
+Our renderer evaluates stage 0 only, so b30 is drawn as another opaque parchment quad **on top of the text**,
+and the page loses its own title. `TLS_TEV=1` binds texmap1 but does not evaluate stage 1, which is why it does
+not reveal the text either (tested).
+
+**This is the whole of item 1 in the start block, and it is a feature to build, not a bug to patch:**
+
+* the data is already collected - `GxBatch` carries `GxTextureUnit tex1` and `bool has_texture1`
+  (`gx_pipeline.h:231`), and `TLS_TEV_PROBE` already prints `tex1=0x%08X`;
+* the words to evaluate are recorded above, for both stages;
+* the draw path needs a second sampler bound from `tex1` and a pixel-shader variant that evaluates stage 1;
+  `tools/compile_shaders.py` is the generator;
+* **do not move combiner bit positions** while doing it - that is what aborted the guest at ~frame 2144
+  (5c.43 H). Adding a stage is orthogonal to the bit layout, which is why this is the safe half.
+
+**Also recorded**: re-running with `TLS_TEV=1` reaches frame 3960 and writes its screenshot normally, so the
+two-texture path itself does not destabilise the run at this frame.
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`; the per-stage dump is inside `TLS_TEV_DUMP_BATCH` and inert by
+default.

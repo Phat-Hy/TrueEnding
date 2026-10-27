@@ -2972,6 +2972,20 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                                            tev_st ? tev_st->texmap[0] : 0,
                                            tev_st ? tev_st->texcoord[0] : 0,
                                            gx_vtx[batch->vertex_offset].color);
+                                    /* Every stage, not just 0: the page's b30 differs from b26 ONLY
+                                     * in having a second stage (both share stage-0 words), and that
+                                     * stage is what makes it a wipe instead of a covering sheet
+                                     * (handover 5c.46 F). */
+                                    if (tev_st) {
+                                        for (uint32_t st = 0; st < tev_st->num_stages && st < 16; st++) {
+                                            printf("[TevStage]  b%u stage=%u col=0x%08X alp=0x%08X "
+                                                   "texenable=%u texmap=%u texcoord=%u\n",
+                                                   b, st, tev_st->combiner_color[st],
+                                                   tev_st->combiner_alpha[st], tev_st->tex_enable[st],
+                                                   tev_st->texmap[st], tev_st->texcoord[st]);
+                                        }
+                                        fflush(stdout);
+                                    }
                                     fflush(stdout);
                                 }
                             }
