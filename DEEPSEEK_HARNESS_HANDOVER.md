@@ -6,7 +6,7 @@
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
 creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.46 Q**; §5c.45 and everything before it is history, and several of its conclusions are
+state is **§5c.46 R**; §5c.45 and everything before it is history, and several of its conclusions are
 corrected below.
 
 > **THE PAGE'S WHITE FIELD IS FIXED (§5c.46 D).** The tutorial page at frame 4000 now renders the reference's
@@ -33,8 +33,12 @@ corrected below.
 >    small-data accesses in the 459 chunks are `lwz` reads; and the ELF confirms it is BSS, i.e. zero even on
 >    hardware (P);
 > 7. the two worker threads that plausibly would set it (`OSCreateThread` entries `0x8071DBE0` and `0x80718C40`,
->    created at frame 170) run their entry **exactly once and never again**, and **`__OSCurrentThread`
->    (`0x800000E4) never changes for the entire run** - the guest scheduler never switches threads (Q).
+>    created at frame 170) are **scheduled around frame 170 and then never again** - corrected in R: the guest
+>    scheduler itself is alive and switches **every frame** (`__OSCurrentThread` alternates main thread and zero;
+>    the runner's switch log only looked empty because it is opt-in, `TLS_WATCH_CURRENT_THREAD=1`). Their queues
+>    are woken only ~20 times each (`0x8087D610` x20, `0x8087D618` x20, `0x8087D5C0` x20, `0x8087D678` x22)
+>    against **x6481** for the main thread's queue `0x80879564`, so the workers **block early and are never
+>    woken** (R).
 >
 > **So the page is blocked on thread scheduling, not on rendering.** Thread switching is guest code here (the OS
 > scheduler is in the game binary and the runner follows `0x800000E4`), so the next question is why the guest's
