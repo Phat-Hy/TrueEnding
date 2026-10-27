@@ -2814,6 +2814,25 @@ static int tls_async_io_complete(void) {
     return v;
 }
 
+/* Dump a dispatch/type table ONCE, as it exists in the RUNNING image. The on-disk ELF cannot
+ * be used for this: the game constructs these tables at runtime, so `build/SLSEXJ/main.elf`
+ * shows data addresses where the live table holds code (measured: the layout container's
+ * vptr 0x80782A80 has 0x80782A70/+0x10 0x8074C788 on disk and 0x801EF894/0x801EF944 live).
+ * Slots that land in the text range are marked so a probe target is picked from evidence. */
+static void tls_dump_live_table(CPUState* ctx, u32 tv, u32* seen, int* n, const char* what) {
+    if (!tv) return;
+    for (int k = 0; k < *n; k++) if (seen[k] == tv) return;
+    if (*n >= 12) return;
+    seen[(*n)++] = tv;
+    printf("[PageTree]  %s 0x%08X live words:\n", what, tv);
+    for (int w = 0; w < 16; w++) {
+        u32 v = mem_read32(ctx, tv + (u32)w * 4);
+        printf("[PageTree]    +%02X = 0x%08X%s\n", w * 4, v,
+               (v >= 0x80000000u && v <= 0x8071B2F8u) ? "  <TEXT>" : "");
+    }
+    fflush(stdout);
+}
+
 int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
     tls_record_recent_call(ctx, address);
     tls_tail_push(ctx, address);
@@ -8198,6 +8217,28 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         case 0x801F4514: {
             u32 obj = ctx->gpr[3];
             u32 f_fc = obj ? mem_read32(ctx, obj + 0xFC) : 0;
+            /* EXPERIMENT, not a fix: `+0xFC` bit 30 is set on all six layout tasks whose
+             * subtrees draw at the page frame and clear on the one whose four panes never
+             * submit (0x81359B80, values 0x6C.../0x6F.../0x6E.../0xEC... vs 0x2C000000). Setting
+             * it here answers the one question that matters - do those four panes draw when the
+             * bit is on, i.e. are the page's missing crest/body-text elements sitting behind it -
+             * or do they merely draw nothing? Default off; it mutates guest state by design and
+             * must never ship as anything but a diagnostic (5c.46 AB). */
+            {
+                static int s_force = -1;
+                if (s_force < 0) s_force = getenv("TLS_FORCE_LAYOUT_BIT") ? 1 : 0;
+                if (s_force && obj && !(f_fc & 0x40000000u)) {
+                    extern int g_runner_current_frame;
+                    mem_write32(ctx, obj + 0xFC, f_fc | 0x40000000u);
+                    static int s_force_reports = 0;
+                    if (s_force_reports++ < 32) {
+                        printf("[ForceLayoutBit] f=%d obj=0x%08X 0x%08X -> 0x%08X\n",
+                               g_runner_current_frame, obj, f_fc, f_fc | 0x40000000u);
+                        fflush(stdout);
+                    }
+                    f_fc |= 0x40000000u;
+                }
+            }
             u32 f_38 = obj ? mem_read32(ctx, obj + 0x38) : 0;
             u32 vt48 = obj ? mem_read32(ctx, obj + 0x48) : 0;
             u32 cnt48 = obj ? mem_read32(ctx, obj + 0x48 + 4) : 0;
@@ -8257,6 +8298,35 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                            obj ? mem_read32(ctx, obj + 0x48) : 0,
                            obj ? mem_read32(ctx, obj + 0x4C) : 0,
                            obj ? mem_read32(ctx, obj + 0x50) : 0);
+                    /* The dispatch words, read LIVE (see tls_dump_live_table): the container's
+                     * vptr first, then every distinct pane type table in this tree. */
+                    {
+                        static u32 s_pcd_tables[12];
+                        static int s_pcd_ntables = 0;
+                        tls_dump_live_table(ctx, obj ? mem_read32(ctx, obj + 0x48) : 0,
+                                            s_pcd_tables, &s_pcd_ntables, "container");
+                        if (arr48 && cnt48 > 0 && cnt48 < 128) {
+                            for (u32 i = 0; i < cnt48; i++) {
+                                u32 ch = mem_read32(ctx, arr48 + i * 4);
+                                tls_dump_live_table(ctx, ch ? mem_read32(ctx, ch) : 0,
+                                                    s_pcd_tables, &s_pcd_ntables, "pane");
+                            }
+                        }
+                    }
+                    /* Raw head of the task around +0xF0..+0x11F. `+0xFC` is what fn_801F4514
+                     * bit-tests before it draws the subtree, and for the six tasks that DO
+                     * draw it reads as printable ASCII ("l922", "o060") while the one that is
+                     * skipped reads 0x2C000000 - which cannot both be a flag word. One hexdump
+                     * decides whether that field is a flag or a label buffer. */
+                    if (obj) {
+                        for (u32 off = 0xF0; off < 0x120; off += 16) {
+                            printf("[PageTree]    obj+%03X %08X %08X %08X %08X\n", off,
+                                   mem_read32(ctx, obj + off + 0),
+                                   mem_read32(ctx, obj + off + 4),
+                                   mem_read32(ctx, obj + off + 8),
+                                   mem_read32(ctx, obj + off + 12));
+                        }
+                    }
                     if (arr48 && cnt48 > 0 && cnt48 < 128) {
                         for (u32 i = 0; i < cnt48; i++) {
                             u32 ch = mem_read32(ctx, arr48 + i * 4);
@@ -8288,6 +8358,60 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             }
 
             return 0; // Run naturally
+        }
+
+        /* Which panes DRAW. fn_801EF894 (the layout container's draw) walks the child array it
+         * holds at +0x0C and calls each child's slot +0x14:
+         *
+         *   lwz r3,0xc(r28); lwzx r3,r3,r31; lwz r12,0(r3); lwz r12,0x14(r12); bctrl
+         *
+         * The slot targets come from the LIVE type tables (tls_dump_live_table), not the ELF:
+         *   type table 0x80782B68 (image panes) +0x14 -> 0x801F2A88
+         *   type table 0x80782D80 (type-0 panes)  +0x14 -> 0x801F9E6C
+         *   type tables 0x80782BD0 / 0x80782AA0 / 0x80782DB8 share the base 0x801ED90C
+         * Logging r3 here lists the panes that actually submit. Set-difference against the
+         * [PageTree] pane addresses: what never appears is a pane whose draw is skipped - which
+         * is the state the page's missing crest / body text would be in (5c.46 AB). */
+        case 0x801F2A88:
+        case 0x801F9E6C:
+        case 0x801ED90C: {
+            extern int g_tls_page_capture_frame;
+            extern int g_runner_current_frame;
+            static int s_pd_n = 0;
+            if (g_tls_page_capture_frame >= 0 &&
+                g_runner_current_frame >= g_tls_page_capture_frame &&
+                g_runner_current_frame <= g_tls_page_capture_frame + 4 &&
+                s_pd_n < 600) {
+                s_pd_n++;
+                printf("[PaneDraw] f=%d slot=0x%08X pane=0x%08X\n",
+                       g_runner_current_frame, address, ctx->gpr[3]);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
+        /* The container's two draw entry points, from the LIVE container table
+         * (vptr 0x80782A80: +0x0C = 0x801EF894, +0x10 = 0x801EF944). fn_801F4514 calls these
+         * only when the task's own bit test on +0xFC passes, so a container that never appears
+         * here is a task whose whole subtree is skipped - which is what the page's four
+         * non-drawing panes (task 0x81359B80) need in order to be explained (5c.46 AB). */
+        case 0x801EF894:
+        case 0x801EF944: {
+            extern int g_tls_page_capture_frame;
+            extern int g_runner_current_frame;
+            static int s_cd_n = 0;
+            if (g_tls_page_capture_frame >= 0 &&
+                g_runner_current_frame >= g_tls_page_capture_frame &&
+                g_runner_current_frame <= g_tls_page_capture_frame + 4 &&
+                s_cd_n < 200) {
+                s_cd_n++;
+                printf("[ContainerDraw] f=%d entry=0x%08X container=0x%08X n=%u arr=0x%08X\n",
+                       g_runner_current_frame, address, ctx->gpr[3],
+                       ctx->gpr[3] ? mem_read32(ctx, ctx->gpr[3] + 4) : 0,
+                       ctx->gpr[3] ? mem_read32(ctx, ctx->gpr[3] + 0x0C) : 0);
+                fflush(stdout);
+            }
+            return 0;
         }
 
         // fn_8005E3E4 (2D UI quad submission)

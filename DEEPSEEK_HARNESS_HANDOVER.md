@@ -6,8 +6,19 @@
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
 creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.46 AB**; §5c.45 and everything before it is history, and several of its conclusions are
+state is **§5c.46 AC**; §5c.45 and everything before it is history, and several of its conclusions are
 corrected below.
+
+> **THE PAGE'S MISSING CONTENT IS HIDDEN, NOT MISSING (§5c.46 AC).** One `LayoutTask` (`0x81359B80`) holds the
+> page's content as four panes and is switched off by **one bit**: `[task+0xFC]` bit 30 (`0x40000000`) is set on
+> all six layout tasks whose subtrees draw and clear on this one, and `fn_801F4514` bit-tests it before drawing.
+> `TLS_FORCE_LAYOUT_BIT=1` (a diagnostic, default-off, mutates guest state by design) sets it and then **47/47
+> panes draw and the reference's character illustration appears** on the parchment: a single quad,
+> texture **`0x922731E0`**, drawn after the parchment - `docs/evidence/host_page_illustration_5c46ac.png`. So the
+> crest and both body-text lines are almost certainly in that same subtree, and the remaining work is **naming the
+> step that sets bit 30** (nothing writes `[0x81359B80+0xFC]` during the run; the value comes from the layout data),
+> not fixing rendering. This also corrects 5c.45: the empty `0x92AEAEC0` is the *3D model's* texture, while the
+> page's illustration is the 2D quad above.
 
 > **THE PAGE IS REACHABLE AGAIN, BUT ONLY THROUGH `TLS_PAGE_CAPTURE` (§5c.46 AB).** The title hands over at
 > frame 1647 now, so the four tutorial presses need `-PressShift 27`; with it the page half is captured at guest
@@ -9387,3 +9398,66 @@ actually in `0x80000000..0x8071B2F8` (the text range). Reading the ELF here woul
 **Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
 `src/`; the added `[PageTree]` hexdump is inert unless `TLS_PAGE_CAPTURE` fires.
+
+### AC. THE PAGE'S CONTENT IS A HIDDEN LAYOUT SUBTREE - and one bit reveals the reference's illustration
+
+AB ended with 43 of 47 panes drawing and one `LayoutTask` (`0x81359B80`) whose four panes never
+submitted. That task is the page's content, and it is hidden by a single bit.
+
+**How the subtree is skipped.** `fn_801F4514` bit-tests `[task+0xFC]` before it calls the container's
+draw (`*(task+0x48)+0x0C` / `+0x10`). Measured at the page frame:
+
+| task | `[+0xFC]` | container draw called? | panes drawn |
+|---|---|---|---|
+| `0x81133660` | `0x6C393232` | yes | 6/6 |
+| `0x811337A0` | `0x6F303630` | yes | 6/6 |
+| `0x811338C0` | `0x6E4F5F45` | yes | 6/6 |
+| `0x81133A00` | `0xEC2C0D0A` | yes | 11/11 |
+| `0x81135660` | `0xEC0D0A56` | yes | 6/6 |
+| `0x81861F60` | `0x6C000000` | yes | 8/8 |
+| **`0x81359B80`** | **`0x2C000000`** | **NO** (`0x81359BC8` never appears) | **0/4** |
+
+Bit 30 (`0x40000000`) is set on every task whose subtree draws and clear on the one that does not. Its four
+panes are `0x814329C0`, `0x81432B0C`, `0x81432C58` (image panes, ids 7, 8, 9) and `0x81432DA4` (group, id 0xA),
+all on layer `+0x18 = 40`.
+
+**The experiment (default-off, `TLS_FORCE_LAYOUT_BIT=1`)**: OR that bit in at `fn_801F4514` entry.
+One line fires - `[ForceLayoutBit] f=2021 obj=0x81359B80 0x2C000000 -> 0x6C000000` - and then:
+
+* **47/47 panes draw** (was 43/47), the container `0x81359BC8` appears, and the page half gains a batch;
+* the frame at guest 3708 now contains **the reference's character illustration** - the ink drawing of the
+  swordsman, on the parchment panel over the cave - `docs/evidence/host_page_illustration_5c46ac.png`;
+* it is a **single 2D quad**: `b35 vtx=6 tex=1 addr=0x922731E0 256x256 fmt=14 ndc=[-0.69..0.44, -1.10..0.53]`,
+  drawn **after** the parchment (`b34`).
+
+**So the page's missing content is not missing - it is hidden, and it renders correctly once shown.** Two
+consequences:
+
+1. **5c.45's "the illustration is a render-to-texture of an empty frame" is only half true.** The empty
+   `0x92AEAEC0` belongs to the *3D character model* (b0/b1, which stays transparent on the page); the page's
+   illustration is the 2D quad above, texture **`0x922731E0`**, and it was never sampled because its layout task
+   was switched off. That texture is the thing to compare against the reference from now on.
+2. **The texture is the reference art itself**: `0x922731E0` decoded is the swordsman ink drawing, i.e. the character in `ref_dolphin_tutorial_5c44.png` - `docs/evidence/tex_922731E0_illustration_5c46ac.png`. The page's elements live in **one** subtree, so the crest and the two body-text lines are almost certainly in
+   it too - the same bit would reveal them.
+
+**What is still open**: nothing in the run writes `[0x81359B80+0xFC]` after its construction (the store watch over
+`0x81359BFC..0x81359C00` records 20 stores, all at frames 1542-1696, with small values - i.e. the address was
+another object before the page existed). So the `0x2C000000` comes from the layout **data**, and whatever should
+set bit 30 - a "show this page's content" step in the page's script - does not happen. The page is therefore
+waiting, not broken: it holds a fully-formed content layout that is never switched on.
+
+**The page is also not as frozen as 5c.46 I concluded.** With the bit forced, the illustration is present at guest
+3708 and *gone* at 3900 (`docs/evidence/host_page_settled_5c46ac.png` is the settled page: parchment only, 29
+batches). So the content subtree's elements come and go over the page's life; what has been "pixel-identical from
+4000 to 9000" is the *parchment with all its content switched off*. That also explains the frozen page without
+needing a stall: the timeline runs, but everything it animates is inside the hidden subtree.
+
+**Next step, precise**: map the content subtree's timeline. Run with `TLS_FORCE_LAYOUT_BIT=1` and
+`TLS_PAGE_CAPTURE` at several minima (3300 / 3500 / 3700 / 3900) - or better, add a capture-every-N-presents mode -
+and record which of the three image panes is on screen when. The crest and the body text should appear in some of
+those frames; once they do, the remaining work is naming the step that sets bit 30, not fixing rendering.
+
+**Verification**: build green, invariant **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344 (measured before
+this section's probe-only edits; `TLS_FORCE_LAYOUT_BIT` and the new dumps are all default-off and env-gated);
+0 changes to `src/`.
