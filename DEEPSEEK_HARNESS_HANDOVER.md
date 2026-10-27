@@ -8012,3 +8012,38 @@ real input.
 **Verification**: build green, invariant **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
 `src/`; the capture is `docs/evidence/host_f1882_5c46.png`.
+
+### B. The chain's input is a uniform fill in BOTH copy-source modes - and a uniform GREY input comes out TRANSPARENT
+
+Sampled the convert pass's source (`0x90536FE0`) with frame-gated dumps across the window:
+
+```
+frame 1700 : 80008000 80008000 ...     uniform
+frame 1760 : BD87BD87 BD87BD87 ...     uniform (a different fill)
+frame 1800 : 80008000 80008000 ...     uniform
+frame 1850 : 80008000 80008000 ...     uniform
+frame 1882 : 80008000 80008000 ...     uniform
+```
+
+and again at frame 1884 with `TLS_EFB_SRC_CURRENT=1` - **still uniform `0x8000`**. So the copy's source
+selection is not what makes this buffer flat: the frame being copied really is a flat fill at every frame in
+this window, while the *presented* frame at 1882 is black with a "LOADING" indicator (5c.46 A). Two different
+things, and that difference is itself unexplained.
+
+**The sharper finding is one step downstream.** `0x8000` as CMPR is `c0 = c1 = 0x8000` with index 0 in every
+texel - i.e. **a uniform grey texture, which would be plainly visible**. Yet the texture the model samples
+(`0x92AEAEC0`) is `00000000FFFFFFFF ...`, i.e. `c0 = c1 = 0`, every index 3 - **fully transparent**. A decode
+cannot turn uniform grey into fully transparent by any sane CMPR rule, so either
+
+1. the buffer the model samples is not the one that pass produced (address reuse again - the ring has caught
+   this title reusing buffers in three separate rounds), or
+2. the decode path itself mangles a uniform input.
+
+**Next step, small and self-contained**: take the single uniform-grey input (`0x90536FE0` = `8000 8000 ...`),
+run the decode by hand against `fn_800D6BE0`'s generated C, and compare with what lands in `0x92AEAEC0` at
+frame 4000. One input, one output, no timing involved - that is the cheapest remaining test of (2), and (1) is
+excluded or confirmed by watching `0x92AEAEC0` between frames 1900 and 4000.
+
+**Verification**: build green, invariant **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
+`src/`.
