@@ -7488,11 +7488,12 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         case 0x800D6BE0: {
             static int s_probe = -1, s_n = 0;
             if (s_probe < 0) s_probe = getenv("TLS_TEXDECODE_PROBE") ? 1 : 0;
-            if (s_probe && s_n < 40) {
+            if (s_probe && s_n < 200) {
+                extern int g_runner_current_frame;
                 s_n++;
-                printf("[TLS TexDecode] entry r3=0x%08X r4=0x%08X r5=0x%08X r6=0x%08X r7=0x%08X lr=0x%08X sp=0x%08X\n",
-                       ctx->gpr[3], ctx->gpr[4], ctx->gpr[5], ctx->gpr[6], ctx->gpr[7],
-                       ctx->lr, ctx->gpr[1]);
+                printf("[TLS TexDecode] frame=%d dst=0x%08X src=0x%08X w=%u h=%u r7=0x%08X lr=0x%08X\n",
+                       g_runner_current_frame, ctx->gpr[3], ctx->gpr[4],
+                       ctx->gpr[5], ctx->gpr[6], ctx->gpr[7], ctx->lr);
                 fflush(stdout);
             }
             return 0;

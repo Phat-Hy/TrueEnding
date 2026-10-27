@@ -7784,6 +7784,54 @@ compare it with the same file's bytes as the loader read them. If the two disagr
 suspect; if they agree, the guest's parser is misreading a header field - most likely a format id or a size,
 which would explain a decode that yields `c0=c1=0` with all indices 3.
 
+#### P. THE DEFECT, PINNED: the staging buffer is CLEARED and then decoded from
+
+Three frame-stamped measurements, each with the store ring cleared after the previous event so the ring could
+not be filled by an earlier loop (this is what hid the answer for four rounds):
+
+**1. The file arrives correctly.** `TLS_MEM_DUMP=0x92AEAEC0,128,1873`:
+
+```
++0000  66697864 64617461 00000000 77696920 74657874 00000000 00000000 00000010   "fixddata ... wii text ..."
++0020  0000000E 00000080 00000100 00000003 92AEAEF8 92AEAF00 00CCCCCC CCCCCCCC   format 0x0E = CMPR, 128/256
++0040  18A20821 757E5F65 10610021 ...                                            real compressed texels
+```
+
+**2. The staging slot is then zeroed.** `TLS_STORE_WATCH=0x903CD1C0,0x903CD1E0`, ring cleared at frame 1810:
+
+```
+[StoreWatch] frame=1882 cia=0x80069258 ea=0x903CD1C0 value=0x00000000
+[StoreWatch] frame=1882 cia=0x80069260 ea=0x903CD1C1 value=0x00000000
+[StoreWatch] frame=1882 cia=0x80069264 ea=0x903CD1C2 value=0x00000000
+[StoreWatch] frame=1882 cia=0x80069268 ea=0x903CD1C3 value=0x00000000
+```
+
+A bulk clear of the whole staging area, 0x40000 bytes' worth, at frame 1882.
+
+**3. The decoder then decodes FROM that cleared slot INTO the file's own buffer.**
+
+```
+[TLS CXDecompressFast] ENTER src=0x80CE2040 dst=0x92AEAEC0           (file lands)
+[TLS TexDecode] frame=1883 dst=0x92AEAEC0 src=0x903CD1C0 w=256 h=256
+```
+
+And the destroyer writes are the decoder's own byte stores (`cia=0x800D6DD8/0x800D6DE8/0x800D6DF8`, zero
+values, frame 1883) - so the good data at `0x92AEAEC0` is overwritten with a decode of an empty buffer, and
+the model's texture ends up all-transparent.
+
+**So the guest clears its staging buffer, expects something to fill it, and decodes it anyway.** On hardware
+something must fill `0x903CD1C0` between the clear (1882) and the decode (1883) - most plausibly a copy the
+guest issues and **our renderer never services**, since `0x903CD1C0` sits in the same arena family as the EFB
+copy destinations (H/M) and no `GfxCopyTex` to that address ever appears in the serviced list.
+
+**Next instrument**: log the copies the guest *issues* from the command stream, not just the ones serviced -
+if a `GXCopyTex` to `0x903CD1C0` is issued and dropped, the missing fill is found, and it would explain the
+cave's other 0x903xxxxx buffers in the same stroke.
+
+**Verification**: build green, invariant **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
+`src/`.
+
 **Verification**: build green, invariant **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
 `src/`.
