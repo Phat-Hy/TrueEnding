@@ -9552,3 +9552,39 @@ now meet at the same object.
 **Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
 `src/`; `TLS_LAYOUT_CREATE_PROBE` is default-off.
+
+### AF. The script's layouts carry bit 30; the hidden node is a different object and does not
+
+AE's remaining question narrows again with one more probe. The four layouts the page's script creates at frame 0
+are visible at the **`bl` return sites** (`0x80363E10/38/54/70`, which the dispatcher reaches with the new object in
+`r3`):
+
+```
+[LayoutRet] f=0 caller=0x80363E10 obj=0x80D22B20 fc=0x74000000 cnt48=0
+[LayoutRet] f=0 caller=0x80363E38 obj=0x80D22C60 fc=0x74000000 cnt48=0
+[LayoutRet] f=0 caller=0x80363E54 obj=0x80D22D80 fc=0x74000000 cnt48=0
+[LayoutRet] f=0 caller=0x80363E70 obj=0x80D22EC0 fc=0x74000000 cnt48=0
+```
+
+Three facts fall out:
+
+1. These are exactly the four handles the page's script task waits on (5c.46 Z: `0x80D22B20`, `0x80D22C60`,
+   `0x80D22D80`, `0x80D22EC0`), so they are `camp_info4.d2a` / `camp_info7.d2a` / `camp_cursor.d2a` roots.
+2. **They arrive with bit 30 SET** (`0x74000000`) and **zero children** - the panes are added later by the `.d2a`
+   loader.
+3. The drawn, hidden task `0x81359B80` is **not one of them**. It is a different object, created by a path that is
+   not the script's four `fn_801F3FF8` calls, and it arrives with **`+0xFC = 0x2C000000`** - bit 30 clear.
+
+So the bit is not simply "what the script sets at creation": the script's own layouts get it and the loader's node
+does not. That points at the loader (the code that fills a `.d2a` tree into children) as the thing that decides it,
+which is consistent with AE's finding that no code in the image writes that word - it is copied in with the node.
+
+**Next step, precise**: instrument the `.d2a` loader that adds children to `0x80D22B20`/`0x80D22C60` (the calls that
+grow `cnt48` from 0), log each node it creates with its own `+0xFC` and its parent, and find the one that becomes
+`0x81359B80`. If that node is copied from the file with bit 30 clear while its siblings get it set, the discriminator
+is a byte in `camp_info4.d2a` and the question becomes what the page's script does to it - a two-file, one-flag
+question instead of an open-ended rendering hunt.
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
+`src/`; `TLS_LAYOUT_CREATE_PROBE` (which now also covers the four return sites) is default-off.

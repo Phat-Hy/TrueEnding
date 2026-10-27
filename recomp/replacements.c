@@ -8450,6 +8450,32 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0;
         }
 
+        /* The call sites that receive a layout back from fn_801F3FF8 (taken from the
+         * TLS_LAYOUT_CREATE_PROBE lr column: the page's script task creates four layouts at
+         * frame 0 from lr 0x80363E10/38/54/70). A `bl` RETURN is a dispatch point, so r3 here
+         * is the freshly built LayoutTask - which is how the four .d2a files can be matched to
+         * the seven tasks that draw, and how the hidden node (0x81359B80, never seen at the
+         * factory) can be placed in that tree. */
+        case 0x80363E10:
+        case 0x80363E38:
+        case 0x80363E54:
+        case 0x80363E70: {
+            static int s_probe = -1;
+            static u32 s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_LAYOUT_CREATE_PROBE") ? 1 : 0;
+            if (s_probe && s_n < 60) {
+                extern int g_runner_current_frame;
+                u32 obj = ctx->gpr[3];
+                s_n++;
+                printf("[LayoutRet] f=%d caller=0x%08X obj=0x%08X fc=0x%08X cnt48=%u\n",
+                       g_runner_current_frame, address, obj,
+                       obj ? mem_read32(ctx, obj + 0xFC) : 0,
+                       obj ? mem_read32(ctx, obj + 0x4C) : 0);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
         // fn_8005E3E4 (2D UI quad submission)
         case 0x8005E3E4:
         case 0x8005E40C: {
