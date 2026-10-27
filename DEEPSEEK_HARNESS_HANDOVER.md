@@ -6,21 +6,22 @@
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
 creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.46 AH**; §5c.45 and everything before it is history, and several of its conclusions are
+state is **§5c.46 AO**; §5c.45 and everything before it is history, and several of its conclusions are
 corrected below.
 
-> **THE PAGE RENDERS - THE ONLY GATE IS A LAYOUT VISIBILITY BIT THAT IS CLEARED AND NEVER SET AGAIN
-> (§5c.46 AC-AH).** With `TLS_FORCE_LAYOUT_BIT=1` the tutorial page draws **completely**: illustration, title
+> **THE PAGE'S CONTENT IS NOT MISSING - IT RENDERS. THE ONE OPEN DEFECT IS A PAGE-TABLE READ CURSOR
+> (§5c.46 AC-AO).** With `TLS_FORCE_LAYOUT_BIT=1` the tutorial page draws **completely**: illustration, title
 > "Movement and Camera", both body lines, the stick/Z icons, SKIP, parchment and border -
-> `docs/evidence/host_page_full_5c46ad.png`, timeline `docs/evidence/host_page_timeline_5c46ad.png`. The bit's whole
-> write history is measured: shown at frame 1696, **hidden at frame 2020 by `fn_803D164C` (the camp UI setup)**, and
-> never shown again. Every layout *show* comes from the task manager (`lr=0x800D28C0`), and at frames 3648-3654 -
-> when the tutorial page starts - it registers and shows `0x81861F60`, `0x8186CB60`, `0x81865AA0` but **not** the
-> content node. So the page's furniture and its content are registered by two different steps and only the first
-> runs. **Next: probe the caller of the 3648 registrations** (the `bl` return is a dispatch point), read the
-> page-start function, and see whether the content layout is missing from a list or its child link is never made.
-> (Corrected in AG: an earlier "nothing writes the bit" was a wrong watch address - the field is
-> `0x81359B80+0xFC = 0x81359C7C`.)
+> `docs/evidence/host_page_full_5c46ad.png`, timeline `docs/evidence/host_page_timeline_5c46ad.png`. The whole
+> causal chain from the empty screen down to its top is measured (AC-AN):
+> `page-table read cursor at EOF -> empty page name -> atoi = 0 -> the "modes 1..4" branch in fn_805BB658 is
+> SKIPPED -> no layout created/activated at page start -> the content task 0x81359B80 stays DEACTIVATED
+> ([task+0x38] = 2 since frame 2020) -> its init virtual (vtable slot 0x0C) never runs again -> the visibility bit
+> [0x81359B80+0xFC] stays clear -> the page draws only furniture`.
+> **THE FIRST ACTION OF THE NEXT SESSION IS `§5c.46 AO`**: re-run the page-table store watch on an **idle host**
+> and check the `Game@1647` line before believing the count (the run that produced "0 writes" had diverged at
+> `Game@1042`, so that result is recorded as UNVERIFIED). Then read `fn_8005B6E8(struct, &lbl_8087D708)` to decide
+> between "the table was consumed and should be rewound" and "no row matched, so the lookup is failing".
 
 > **THE PAGE'S MISSING CONTENT IS HIDDEN, NOT MISSING (§5c.46 AC).** One `LayoutTask` (`0x81359B80`) holds the
 > page's content as four panes and is switched off by **one bit**: `[task+0xFC]` bit 30 (`0x40000000`) is set on
