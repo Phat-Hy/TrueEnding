@@ -23,15 +23,24 @@ param(
     [string]$Shot = '4000',
     [int]$Attempts = 4,
     # Expected SetNextSequence('Game') frame; 0 = accept any (and report it).
-    [int]$RequireGame = 1620
+    [int]$RequireGame = 1620,
+    # Shift the four tutorial presses by this many frames. They are tuned to a 1620 hand-over;
+    # when the title hands over at 1647 they land early and the page never appears (5c.46 AA),
+    # so -PressShift 27 is the run for a 1647 hand-over.
+    [int]$PressShift = 0
 )
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
 Set-Location $root
 
 # The 9-press title walk plus the four tutorial presses (5c.37 session script).
-$env:TLS_INPUT_SCRIPT = '600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A,3620-3632:A,3700-3712:A,3800-3812:A,3900-3912:A'
+$titleWalk = '600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A'
+$presses = foreach ($start in 3620, 3700, 3800, 3900) {
+    '{0}-{1}:A' -f ($start + $PressShift), ($start + $PressShift + 12)
+}
+$env:TLS_INPUT_SCRIPT = $titleWalk + ',' + ($presses -join ',')
 $env:TLS_SHOT_FRAMES = $Shot
+Write-Host ("input: presses shifted {0:+#;-#;0}" -f $PressShift)
 
 $ppm = "build\recomp\d3d11_screenshot_$Shot.ppm"
 $exe = Join-Path $root 'build\recomp\tls_runner.exe'
