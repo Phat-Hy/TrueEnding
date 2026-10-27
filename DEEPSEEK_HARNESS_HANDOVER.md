@@ -8318,3 +8318,32 @@ compressed into the top.
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`; the comparison is `docs/evidence/cmp_page_inventory_5c46.png`.
+
+### I. The page is FROZEN - pixel-identical from frame 4000 to 4800
+
+Captured frame 4800 and compared it with 4000:
+
+```
+4000 mean 182.0   4800 mean 182.0   changed pixels vs f4000: 0
+[TLS Frame 4800] Seq: Game | Tasks: 3 | GX: 63732 vtx (54 batches) | PC: 0x8009BB64
+```
+
+**Zero changed pixels across 800 frames (13 seconds).** The tutorial page does not animate, scroll, fade or
+even re-flow in our run - the engine keeps submitting batches (54 of them at 4800, 63 732 vertices, i.e. the
+gameplay half of the alternation) and the picture never moves.
+
+That is the most likely explanation for the layout mismatch recorded in H: the reference's page has its border at
+~33% of the visible band and its title at right-centre, while ours has the border at ~14% and the title up and
+left. A page that is *animated in* (slide + scale + fade) would show exactly that difference if its animation
+driver never advances - and a frozen page is also consistent with the illustration, the crest and the body text
+never arriving.
+
+**So the page's problems reduce to two, in this order:**
+
+1. **the page never animates** - find the timeline/float that should drive its transform and fade. Everything
+   else about the layout follows from it, so this is now the highest-value item on the page;
+2. **the illustration's texture is empty** (5c.45 T) - a render-to-texture of a frame that draws nothing;
+3. and the crest/body text, which are drawn-but-invisible or not drawn at all (5c.43 D, 5c.46 H).
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`; the capture is `docs/evidence/host_f4800_5c46.png`.
