@@ -8414,6 +8414,42 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0;
         }
 
+        /* LayoutTask construction: fn_801F3FF8(owner, name, arg) allocates 0x110 bytes and calls
+         * the real constructor fn_801F407C(obj, owner, name, arg), which sets the task vptr and
+         * initialises the container at +0x48. Logging the new object with its owner and name is
+         * how the page's hidden content layout (0x81359B80, [task+0xFC] bit 30 clear) can be
+         * traced to whoever creates it - the one question 5c.46 AD leaves open. */
+        case 0x801F3FF8:
+        case 0x801F407C: {
+            static int s_probe = -1;
+            static u32 s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_LAYOUT_CREATE_PROBE") ? 1 : 0;
+            if (s_probe && s_n < 90) {
+                extern int g_runner_current_frame;
+                char s4[72], s5[72];
+                for (int slot = 0; slot < 2; slot++) {
+                    u32 p = (slot == 0) ? ctx->gpr[4] : ctx->gpr[5];
+                    char* out = (slot == 0) ? s4 : s5;
+                    int k = 0;
+                    const char* sp = (p >= 0x80600000u && p < 0x80800000u)
+                                         ? (const char*)resolve_guest_pointer(ctx, p) : NULL;
+                    if (sp) {
+                        for (; k < 71 && sp[k]; k++) {
+                            unsigned char ch = (unsigned char)sp[k];
+                            out[k] = (ch >= 32 && ch < 127) ? (char)ch : '.';
+                        }
+                    }
+                    out[k] = 0;
+                }
+                s_n++;
+                printf("[LayoutCreate] f=%d pc=0x%08X r3=0x%08X r4=0x%08X'%s' r5=0x%08X'%s' r6=0x%08X lr=0x%08X\n",
+                       g_runner_current_frame, address, ctx->gpr[3], ctx->gpr[4], s4,
+                       ctx->gpr[5], s5, ctx->gpr[6], ctx->lr);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
         // fn_8005E3E4 (2D UI quad submission)
         case 0x8005E3E4:
         case 0x8005E40C: {

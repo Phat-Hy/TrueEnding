@@ -9509,3 +9509,46 @@ around that window rather than the whole run.
 **Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
 `src/`; `TLS_PAGE_CAPTURE_ALL` and `TLS_FORCE_LAYOUT_BIT` are both default-off.
+
+### AE. The content layout is a node inside a loaded `.d2a` file, not something the script builds
+
+AD left one question: who builds `0x81359B80`, and why does its `+0xFC` arrive with bit 30 clear while the six
+sibling layouts have it set. The creation path answers it.
+
+**Layouts are data files.** `fn_801F3FF8(manager, name, arg)` allocates 0x110 bytes and calls the constructor
+`fn_801F407C(obj, manager, name, arg)`, which sets the task vptr and initialises the container at `+0x48`. A new
+default-off probe (`TLS_LAYOUT_CREATE_PROBE=1`) on both addresses prints the name string, and every call is a
+`.d2a`/`.d2b` layout under `/data/d2anime/`:
+
+```
+[LayoutCreate] f=0   pc=0x801F3FF8 r3=0x80B8DCC0 r4=0x8074D8C1 '/data/d2anime/camp_info4.d2a'    lr=0x80363E10
+[LayoutCreate] f=0   pc=0x801F3FF8 r3=0x80B8DCC0 r4=0x8074D8C1 '/data/d2anime/camp_info4.d2a'    lr=0x80363E38
+[LayoutCreate] f=0   pc=0x801F3FF8 r3=0x80B8DCC0 r4=0x8074D8DE '/data/d2anime/camp_info7.d2a'    lr=0x80363E54
+[LayoutCreate] f=0   pc=0x801F3FF8 r3=0x80B8DCC0 r4=0x8074D8FB '/data/d2anime/camp_cursor.d2a'   lr=0x80363E70
+[LayoutCreate] f=4   pc=0x801F3FF8 r3=0x80EA4240 r4=0x807327B5 '/data/d2anime/ui_saving.d2a'      lr=0x800A2CEC
+[LayoutCreate] f=170 pc=0x801F3FF8 r3=0x80C9DE00 r4=0x8075578B 'data/d2anime/ui_loading.d2a'     lr=0x8046ECB0
+[LayoutCreate] f=296 pc=0x801F3FF8 r3=0x810FB4C0 r4=0x8075D5E4 '/data/d2anime/title_logo_laststory.d2a' ...
+```
+
+The first four are the page's own script task (`0x80363DBC`, lr `0x80363E10..0x80363E70`): **`camp_info4.d2a`,
+`camp_info7.d2a`, `camp_cursor.d2a`** - the camp/tutorial page's layouts, loaded at frame 0 (which is why the
+`+0xFC` field never shows a store after that: it arrives with the file).
+
+**And the hidden node is NOT created by that factory.** `0x81359B80` never appears in a `[LayoutCreate]` line, so it
+is a **node inside one of those loaded layout trees**, allocated by the loader - which is exactly why its
+`+0xFC = 0x2C000000` is *file data* and why no setter exists in the image (AE's search for the
+`lwz rX,0xfc / ori(s) 0x4000 / stw rX,0xfc` idiom found 0 hits).
+
+**So the remaining question is now a data/loader question, not a scripting one**: `camp_info4.d2a` (or `camp_info7.d2a`)
+carries the page's content element with its visibility bit clear, and something must turn it on - either the file
+has a second variant, or one of the layout's own actions (the four `ActionNotify` / `ActionCheck` /
+`ActionAnimationPlay` objects the same script task waits on, 5c.46 Z) is supposed to set it when the page starts.
+
+**Next step, precise**: (a) dump `0x81359B80`'s parent/owner chain to land on the `.d2a` node that owns it (its
+`+0x00` class table is `0x80782C08`-derived; the loader that fills those nodes is the one to instrument), and
+(b) run the same run with the four page actions' state logged, to see whether one of them stalls - the two threads
+now meet at the same object.
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
+`src/`; `TLS_LAYOUT_CREATE_PROBE` is default-off.
