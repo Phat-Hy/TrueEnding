@@ -8047,3 +8047,37 @@ excluded or confirmed by watching `0x92AEAEC0` between frames 1900 and 4000.
 **Verification**: build green, invariant **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
 `src/`.
+
+### C. The pass order is CORRECT - the defect is a FORMAT disagreement
+
+Added `TLS TexClear`, a probe on the `memset`'s return address (`0x800D7178`), which orders the three stages
+*within* a frame - something frame-granular probes cannot do. For every staging buffer the order is right:
+
+```
+[TLS TexPrep]  frame=1882 src=0x90536FE0 dst=0x9038D1C0 staging=0x903CD1C0 size=0x00008000
+[TLS TexDecode] frame=1883 dst=0x92AEAEC0 src=0x903CD1C0 w=256 h=256
+[TLS TexClear]  frame=1883 staging=0x903CD1C0 size=0x00008000
+[TLS TexPrep]  frame=1883 src=0x90576FE0 dst=0x9038D1C0 staging=0x9039D1C0 size=0x00002000
+[TLS TexDecode] frame=1883 dst=0x92AF2EC0 src=0x9039D1C0 w=128 h=128
+[TLS TexClear]  frame=1883 staging=0x9039D1C0 size=0x00002000
+```
+
+So no stage interferes with another, and the "cleared before decode" reading of P is **withdrawn**: the clear
+that the ring caught at frame 1882 belongs to the *previous* texture's pass, as R predicted. Good - that removes
+the last suspicion from the texture pipeline's ordering.
+
+**What the bytes then show is a format disagreement.** The convert pass's source `0x90536FE0` is
+**16-bit periodic** (`8000 8000 8000 ...`), and the staging buffer it produces is also **16-bit periodic**
+(`FF00 FF00 ...`) - i.e. the pass copies the periodicity straight through. The emitted code for that loop is
+correct (`ea = r3 + r29; mem_write8(ea, r0); r3 = ea;` - store-then-update, verified in the generated C), so the
+pass is faithfully copying what it sees; what is wrong is that it reads a **16-bit-per-texel** buffer as if it
+were **4-byte RGBA8**, and the encoder downstream then encodes that garbage.
+
+Which 16-bit 0x8000 means depends on the copy's declared format, and that is exactly what to check next: the
+copy that fills `0x90536FE0` (640x448, `fmt=0` in the issued-copy log) versus the format the prep assumes.
+`s_copy_fmt` / `TLS_EFB_COPY_FMT` and the BP 0x52 `tpf` field decide it, and the answer is one grep away in
+`d3d11_efb_copy_to_guest`.
+
+**Verification**: build green, invariant **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
+`src/`; `TLS TexClear` is part of the `TLS_TEXPREP_PROBE` set and default-off.

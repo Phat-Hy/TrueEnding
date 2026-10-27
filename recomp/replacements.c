@@ -7566,6 +7566,24 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0;
         }
 
+        /* 0x800D7178 is the return address of the memset that ends one texture pass
+         * (copy -> decode -> memset(source), handover 5c.45 R). Logging it with the staging
+         * pointer orders the memset against the prep and decode probes *within* a frame, which
+         * frame-granular instruments cannot do. */
+        case 0x800D7178: {
+            static int s_probe = -1, s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_TEXPREP_PROBE") ? 1 : 0;
+            if (s_probe && s_n < 400) {
+                extern int g_runner_current_frame;
+                if (g_runner_current_frame < tls_texprobe_from()) return 0;
+                s_n++;
+                printf("[TLS TexClear] frame=%d staging=0x%08X size=0x%08X\n",
+                       g_runner_current_frame, ctx->gpr[28], ctx->gpr[30]);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
         case 0x80534C58: {
             static int s_probe = -1;
             if (s_probe < 0) s_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;
