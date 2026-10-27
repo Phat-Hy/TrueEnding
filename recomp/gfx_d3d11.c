@@ -94,6 +94,7 @@ typedef struct {
     ID3D11PixelShader* gx_ps;
     ID3D11PixelShader* gx_ps_opaque;
     ID3D11PixelShader* gx_ps_alpha;
+    ID3D11PixelShader* gx_ps_alpha_flat;   /* raster-colour RGB + texture alpha */
     /* TEV pixel pipeline (TLS_TEV=1): the GX texture environment, driven by the
      * per-batch state in GxDrawBatch::tev_state. Off by default until measured. */
     ID3D11PixelShader* gx_ps_tev;
@@ -276,6 +277,7 @@ bool d3d11_init(HWND hwnd, const GfxConfig* config) {
         printf("[D3D11] Failed to create GX opaque pixel shader: 0x%08X\n", (unsigned int)hr);
     }
     hr = ID3D11Device_CreatePixelShader(s_d3d11.device, s_gx_ps_alpha_bytecode, sizeof(s_gx_ps_alpha_bytecode), NULL, &s_d3d11.gx_ps_alpha);
+    hr = ID3D11Device_CreatePixelShader(s_d3d11.device, s_gx_ps_alpha_flat_bytecode, sizeof(s_gx_ps_alpha_flat_bytecode), NULL, &s_d3d11.gx_ps_alpha_flat);
     if (FAILED(hr)) {
         printf("[D3D11] Failed to create GX alpha pixel shader: 0x%08X\n", (unsigned int)hr);
     }
@@ -2928,7 +2930,30 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                         }
                     }
 
-                    ID3D11PixelShader* ps = blend_enable ? s_d3d11.gx_ps_alpha : s_d3d11.gx_ps_opaque;
+                    /* GX colour-combiner argument 4 is TEXC. A stage that names TEXC in no argument outputs the
+     * rasteriser colour unchanged, with the texture contributing only through the alpha
+     * combiner - that is how the game's glyph atlases are drawn (`ZERO ONE ras.rgb ZERO`,
+     * 5c.43 D). Multiplying such a batch by the texture's RGB hides the glyphs, which is what
+     * made the page's title and body text invisible (5c.46 K), so those batches use the
+     * dedicced shader. */
+    bool flat_raster = false;
+    if (blend_enable) {
+        static int s_flat = -1;
+        /* OFF by default: measured to REMOVE the SKIP button's letters (it draws from the same
+         * 0x9076E5E0 atlas and its glyphs come from the texture RGB, not the raster colour), so
+         * the flat-raster theory is wrong for this atlas. Kept behind TLS_FLAT_GLYPHS=1 so the
+         * experiment is reproducible (handover 5c.46 L). */
+        if (s_flat < 0) s_flat = getenv("TLS_FLAT_GLYPHS") ? 1 : 0;
+        /* Restrict to the TWO glyph atlases measured on the page: 0x90703AA0 draws the title
+         * (b28, 19 glyphs) and 0x9076E5E0 the body text (b34, 20 glyphs) - see 5c.46 K. A general
+         * "colour combiner names no TEXC" rule was tried first and caught the parchment sheet
+         * too, turning the whole page white, so the condition is the measured one. */
+        uint32_t tex_addr = batch->tex.guest_addr;
+        flat_raster = (s_flat != 0) &&
+                      (tex_addr == 0x90703AA0u || tex_addr == 0x9076E5E0u);
+    }
+    ID3D11PixelShader* ps = flat_raster ? s_d3d11.gx_ps_alpha_flat
+                                        : (blend_enable ? s_d3d11.gx_ps_alpha : s_d3d11.gx_ps_opaque);
                     if (s_d3d11.tev_enabled && s_d3d11.gx_ps_tev) {
                         /* GX TEV: evaluate the batch's real combiner stages. All eight
                          * texmap slots are bound (white where the batch does not use
@@ -3393,6 +3418,7 @@ void d3d11_shutdown(void) {
     if (s_d3d11.gx_vs) ID3D11VertexShader_Release(s_d3d11.gx_vs);
     if (s_d3d11.gx_ps_opaque) ID3D11PixelShader_Release(s_d3d11.gx_ps_opaque);
     if (s_d3d11.gx_ps_alpha) ID3D11PixelShader_Release(s_d3d11.gx_ps_alpha);
+    if (s_d3d11.gx_ps_alpha_flat) ID3D11PixelShader_Release(s_d3d11.gx_ps_alpha_flat);
     if (s_d3d11.sampler_linear) ID3D11SamplerState_Release(s_d3d11.sampler_linear);
     if (s_d3d11.fb_srv) ID3D11ShaderResourceView_Release(s_d3d11.fb_srv);
     if (s_d3d11.fb_texture) ID3D11Texture2D_Release(s_d3d11.fb_texture);

@@ -98,6 +98,22 @@ float4 PSOpaque(PSInput input) : SV_Target {
     return float4(texColor.rgb * input.color.rgb, 1.0f);
 }
 
+/* Flat-raster glyph batches. GX colour combiners that do NOT reference the texture
+ * colour (arg TEXC) output the rasteriser colour unchanged and take only the ALPHA
+ * from the texture - e.g. the page's label/title atlases, whose colour word decodes
+ * to `ZERO ONE ras.rgb ZERO` (handover 5c.43 D). Multiplying by the texture's RGB
+ * therefore darkens or whitens the glyphs against their own plate: the page's title
+ * and body text were drawn and invisible for exactly that reason (5c.46 K). This
+ * shader keeps the alpha chain and uses the vertex colour for RGB, which is what the
+ * declared combiner says to do. */
+float4 PSAlphaFlat(PSInput input) : SV_Target {
+    float4 texColor = tex0.Sample(samLinear, input.uv);
+    float va = (input.color.a > 0.001f) ? input.color.a : 1.0f;
+    float alpha = texColor.a * va;
+    if (alpha <= 0.005f) discard;
+    return float4(input.color.rgb, alpha);
+}
+
 float4 PSAlpha(PSInput input) : SV_Target {
     float4 texColor = tex0.Sample(samLinear, input.uv);
     // GX convention: when vertex alpha is zero the TEV alpha stage is driven by the
@@ -523,11 +539,13 @@ float4 PSTev(PSInput input) : SV_Target
 vs_bytecode = compile_hlsl(hlsl_source, "VSMain", "vs_4_0")
 ps_opaque_bytecode = compile_hlsl(hlsl_source, "PSOpaque", "ps_4_0")
 ps_alpha_bytecode = compile_hlsl(hlsl_source, "PSAlpha", "ps_4_0")
+ps_alpha_flat_bytecode = compile_hlsl(hlsl_source, "PSAlphaFlat", "ps_4_0")
 ps_tev_bytecode = compile_hlsl(hlsl_source, "PSTev", "ps_5_0")
 
 print(f"Compiled VS: {len(vs_bytecode)} bytes")
 print(f"Compiled PSOpaque: {len(ps_opaque_bytecode)} bytes")
 print(f"Compiled PSAlpha: {len(ps_alpha_bytecode)} bytes")
+print(f"Compiled PSAlphaFlat: {len(ps_alpha_flat_bytecode)} bytes")
 print(f"Compiled PSTev: {len(ps_tev_bytecode)} bytes")
 
 def to_c_array(name: str, data: bytes) -> str:
@@ -545,6 +563,8 @@ out_text = f"""// Auto-generated GX 3D shaders with 4D Clip-space Position and H
 {to_c_array('s_gx_ps_opaque_bytecode', ps_opaque_bytecode)}
 
 {to_c_array('s_gx_ps_alpha_bytecode', ps_alpha_bytecode)}
+
+{to_c_array('s_gx_ps_alpha_flat_bytecode', ps_alpha_flat_bytecode)}
 
 {to_c_array('s_gx_ps_tev_bytecode', ps_tev_bytecode)}
 

@@ -8468,3 +8468,29 @@ dump at the page frame rather than more transform probing.
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`.
+
+### L. Tried and rejected: a flat-raster pixel shader for the glyph atlases
+
+Acting on 5c.43 D's reading (glyph batches declare `ZERO ONE ras.rgb ZERO`, so they output the raster colour
+with the texture contributing only alpha), I added a fourth pixel shader `PSAlphaFlat`
+(`float4(input.color.rgb, texColor.a * va)`) to `tools/compile_shaders.py`, created it in `gfx_d3d11.c`, and
+selected it for batches whose colour combiner names no `TEXC` argument.
+
+**That general rule caught the parchment sheet** (its combiner decodes with no `TEXC` under our layout either) and
+turned the whole page **white** (mean 254.8). Narrowed to the two measured glyph atlases (`0x90703AA0` for the
+title, `0x9076E5E0` for the body text) the page came back (mean 182.2) - but the **SKIP button lost its letters**:
+that button draws from `0x9076E5E0` too, and its glyphs demonstrably come from the texture's RGB, not from the
+raster colour. So the flat-raster theory is **wrong for that atlas**, and the rule is now **off by default**
+(`TLS_FLAT_GLYPHS=1` enables it for experiments).
+
+**Verified no regression**: with the rule off, frame 4000 is **pixel-identical** to the previous best page
+(mean 182.0, zero differing pixels) and `tools/invariant.ps1` still **PASSES** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`.
+
+**What this rules out**: the page's title and body text do not need a raster-colour substitution; whatever hides
+them is upstream (b30's wipe for the title) or in the atlas's own alpha (body text). The `PSAlphaFlat` shader is
+kept because it is the correct behaviour for a batch that genuinely names no `TEXC` - it just is not what these
+atlases are.
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`.
