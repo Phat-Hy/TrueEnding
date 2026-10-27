@@ -20,7 +20,14 @@ $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
 Set-Location $root
 
-$EXPECTED_SHA = 'EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F'
+# Re-recorded in 5c.46 D (was EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F).
+# The change is INTENTIONAL and visible: the tutorial page now renders its parchment sheet and
+# border art instead of a white field, because the "dark ink on a light plate" reconstruction is
+# applied only to textures that actually have a flat plate (plate_frac >= 0.55) and the particle
+# baseline-subtraction path only to small sprites (<= 64x64). Measured: the parchment (0x921DEA60)
+# has plate_frac 0.022, the title logo the matte exists for (0x90782DE0) has 0.737. The title
+# screen is unchanged by the rule (frame 1500 mean 3.2 with and without it).
+$EXPECTED_SHA = '98F0FD10141D20E6E2D42203DA4CBF1317D8994ED2D4D91CD1EF924C7FE44D06'
 $SHOT_FRAME   = '3500'
 $INPUT        = '600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A'
 

@@ -8081,3 +8081,45 @@ copy that fills `0x90536FE0` (640x448, `fmt=0` in the issued-copy log) versus th
 **Verification**: build green, invariant **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
 `src/`; `TLS TexClear` is part of the `TLS_TEXPREP_PROBE` set and default-off.
+
+### D. THE PAGE'S WHITE FIELD IS FIXED: the matte's "ink art" test needed a plate check
+
+The tutorial page's background now renders as the reference's parchment with its border art, instead of a
+white field with a black box. Two rule changes in `recomp/gfx_d3d11.c`, both derived from measurement rather
+than guesswork.
+
+**The discriminator.** The "dark ink on a light plate" reconstruction fired on `(base_luma - min_luma) > 60`,
+which every photograph passes. New `TLS_INK_STATS=1` prints the numbers per texture, and the one that separates
+the two cases is **plate fraction** - the share of texels within +-12 luma of the plate colour:
+
+```
+tex=0x90782DE0 512x64   base_luma=214 min_luma=0 plate_frac=0.737  ink=1   <- the title logo the matte is for
+tex=0x9086A120 1024x512 base_luma=255 min_luma=2 plate_frac=0.879  ink=1
+tex=0x921DEA60 512x512  base_luma=133 min_luma=7 plate_frac=0.022  ink=1   <- THE PARCHMENT (a photograph)
+```
+
+So the rule is now `(base_luma - min_luma) > 60 && plate_frac >= 0.55` (threshold overridable with
+`TLS_INK_PLATE_MIN`, the midpoint of the 0.02 / 0.74 gap that the measurements show).
+
+**The second half.** With the parchment no longer "ink art" it fell into the *particle glow* path (baseline
+subtraction), which washed the whole sheet out and speckled its edges - measurably worse (mean 223 vs 182).
+That path exists for small sprites (a bright core on a beige baseline), so it is now gated to
+`width <= 64 && height <= 64` (`TLS_GLOW_ALL=1` restores the old behaviour for A/B).
+
+**Result** (`docs/evidence/host_f4000_glow_gate_5c46.png`, side by side with the reference in
+`docs/evidence/cmp_f4000_plate_glow_5c46.png`): the parchment, its printed border and the ornate corners now
+match the reference closely, and the SKIP button is drawn. What is still missing is exactly what the rest of
+5c.45/5c.46 catalogued - the character illustration (its texture, sections A-C), the fan, and the crowned crest
+(5c.45's alpha-only TEV note). The page's title lettering is now drawn but *dark-on-dark* against the corrected
+parchment; that is the label's colour-combine issue from 5c.43 D, not a matte problem.
+
+**No regression on the title screen**: an A/B of frame 1500 gives mean **3.2 with and without** the new rules
+(`TLS_INK_PLATE_MIN=0 TLS_GLOW_ALL=1` reproduces the old behaviour exactly), so the logo the matte exists for is
+unaffected.
+
+**The invariant hash was re-recorded deliberately**: frame 3500 is now
+`98F0FD10141D20E6E2D42203DA4CBF1317D8994ED2D4D91CD1EF924C7FE44D06` (was `EAB33141...`), and
+`tools/invariant.ps1` carries that explanation inline. The save assertions are unchanged
+(1 348 992 / 29 344), so this is a picture change only.
+
+**Verification**: build green, invariant **PASS** with the new hash, save created, 0 changes to `src/`.

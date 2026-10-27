@@ -1169,12 +1169,20 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
                 int max_delta = 1;
                 int min_luma = 255;
                 uint32_t total_px = tu->width * tu->height;
+                /* "Ink art" is dark lettering on a FLAT plate: most texels sit on the plate.
+                 * A photograph (the tutorial page's parchment, 0x921DEA60) also has dark
+                 * detail but its luminance is spread out, so a bare
+                 * `base_luma - min_luma > 60` test calls it ink art and the matte erases the
+                 * whole sheet (5c.46 D). Count the plate instead. */
+                int base_luma_pre = (base_r * 3 + base_g * 6 + base_b) / 10;
+                uint32_t plate_px = 0;
                 for (uint32_t pi = 0; pi < total_px; pi++) {
                     uint32_t px = s_d3d11.gx_staging_rgba[pi];
                     int r = (int)(uint8_t)px;
                     int g = (int)(uint8_t)(px >> 8);
                     int b = (int)(uint8_t)(px >> 16);
                     int lum = (r * 3 + g * 6 + b) / 10;
+                    if (lum > base_luma_pre - 12 && lum < base_luma_pre + 12) plate_px++;
                     if (lum < min_luma) min_luma = lum;
                     int dr = r > base_r ? (r - base_r) : 0;
                     int dg = g > base_g ? (g - base_g) : 0;
@@ -1184,9 +1192,40 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
                 }
 
                 int base_luma = (base_r * 3 + base_g * 6 + base_b) / 10;
-                bool is_ink_art = (base_luma - min_luma) > 60;
+                float plate_frac = total_px ? (float)plate_px / (float)total_px : 0.0f;
+                /* Ink art needs BOTH a big drop to the darkest texel AND a flat plate. The
+                 * second half is what the old test lacked: the tutorial page's parchment
+                 * (0x921DEA60, 512x512) has base_luma 133 / min 7 - so it passed - but its
+                 * plate_frac is 0.022 because it is a photograph, and the matte erased the
+                 * whole sheet. The title logo (0x90782DE0), which the matte exists for, is
+                 * 0.737. Measured in 5c.46 D; threshold is the midpoint of that gap. */
+                static float s_plate_min = -1.0f;
+                if (s_plate_min < 0.0f) {
+                    const char* e = getenv("TLS_INK_PLATE_MIN");
+                    s_plate_min = e ? (float)atof(e) : 0.55f;
+                }
+                bool is_ink_art = ((base_luma - min_luma) > 60) && (plate_frac >= s_plate_min);
+                {
+                    static int s_stats = -1;
+                    if (s_stats < 0) s_stats = getenv("TLS_INK_STATS") ? 1 : 0;
+                    if (s_stats) {
+                        printf("[InkStats] tex=0x%08X %ux%u fmt=%u base_luma=%d min_luma=%d "
+                               "plate_frac=%.3f ink=%d max_delta=%d\n",
+                               tu->guest_addr, tu->width, tu->height, tu->format, base_luma,
+                               min_luma, plate_frac, (int)is_ink_art, max_delta);
+                        fflush(stdout);
+                    }
+                }
 
-                if (max_delta > 10 && !is_ink_art) {
+                /* The glow path (baseline subtraction) exists for small particle sprites: a
+                 * bright core on a beige baseline. Applying it to a full-bleed texture washes
+                 * the whole page out and speckles its edges - measured on the parchment
+                 * (0x921DEA60) in 5c.46 D, where restricting it to small textures is what
+                 * keeps the sheet photographic. */
+                static int s_glow_all = -1;
+                if (s_glow_all < 0) s_glow_all = getenv("TLS_GLOW_ALL") ? 1 : 0;
+                bool is_glow_candidate = s_glow_all || (tu->width <= 64 && tu->height <= 64);
+                if (is_glow_candidate && max_delta > 10 && !is_ink_art) {
                     for (uint32_t pi = 0; pi < total_px; pi++) {
                         uint32_t px = s_d3d11.gx_staging_rgba[pi];
                         int r = (int)(uint8_t)px;
