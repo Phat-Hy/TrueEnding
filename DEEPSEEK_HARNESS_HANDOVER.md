@@ -9932,3 +9932,28 @@ should the consumer have left it alone". That is a code fix in the page-table la
 **Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
 `src/`; `TLS_PAGE_MODE_PROBE` is default-off and now prints the parse input too.
+
+### AO. UNVERIFIED: the page-table global shows no writes - but the run that measured it diverged
+
+Armed on the page-table global (`lbl_8087D708`, range `0x8087D708..0x8087D730`) for a whole run, the store watch
+recorded **zero writes** (`in-range=0`). Read naively that would say the global's cursor is never advanced and must
+arrive exhausted from its initialiser.
+
+**It is recorded here as unverified, not as a finding**, because the run that produced it handed over at frame
+1042 instead of 1647 - the run diverged and the page never appeared, so nothing may have read the table at all. The
+retry was killed: the host was loaded, each attempt was taking ~560 s and diverging again (frame 638 on the first
+retry). Per 5c.46 Z the invariant-style measurements are only trustworthy on an idle host.
+
+**So the next session should start here, on an idle host**:
+
+1. `$env:TLS_STORE_WATCH='0x8087D708,0x8087D730'; pwsh tools/page_run.ps1 -Frames 3700 -Log logs\pagetable.log
+   -PressShift 27 -RequireGame 1647 -Attempts 3` and **check the `Game@1647` line before believing the count**;
+2. if the count is still 0, read `fn_8005B6E8(struct, &lbl_8087D708)` - the bind call - and see whether it copies a
+   cursor out of the global or scans for a matching row; an "exhausted" cursor at first use means *no row matched*,
+   i.e. the page-table lookup is failing rather than the table being consumed;
+3. if the count is non-zero, the writes name the consumer and the question becomes whether the page start should
+   rewind the cursor.
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
+`src/`; no code changed in this round beyond the probe print added in AN.
