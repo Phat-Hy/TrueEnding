@@ -7327,6 +7327,41 @@ block-level instrumentation cannot tell.
 `cia` and effective address (the emitter already knows both) rather than the block pc - so "which instruction
 wrote this word, from which source register" is a fact instead of a guess.
 
+#### E. `mem_read8` must not be instrumented, and the "install source" may not be a texture at all
+
+**E1. A probe inside `mem_read8` corrupts the heap.** Adding a frame-gated `[RD8]` print for reads returning
+`0xFF` produced, without ever printing a line:
+
+```
+probe build : exit -1073740940 (0xC0000374 STATUS_HEAP_CORRUPTION), last frame 840
+clean build : "Completed 2000 of 2000 requested frames (CPU Exception: 0x00000000)", same script
+```
+
+`mem_read8` is on the hottest path in the interpreter and the generated code recurses through chunks on the
+host stack, so adding a frame (locals plus a `printf`) there is not free. **Do not instrument
+`mem_read8`/`mem_write8` on this title**; sample at block level or at end of frame instead.
+
+**E2. The address the decoder reads is not one of the known copy destinations.** `0x903CD1C0` is rewritten
+every few frames from frame 169 by `pc=0x80615560` (lr `0x800AA0C4` / `0x800AC82C` / `0x800A9E24`) with packed
+16-bit patterns (`FF00FF00`, `FF04FF10`, `FF0AFF02`, ...). It is **not** in 5c.43 C4's list of EFB-copy
+destinations (`0x9038D1C0`, `0x903917C0`, `0x90395DC0`, `0x903DBDC0`, `0x9036A1A0`, `0x903D31C0`, `0x905C3000`,
+`0x90536FE0`) and not one of the VI framebuffers either (`fb0=0x900037C0`, `fb1=0x900997E0` in the telemetry
+header). So it sits in the same arena family as the copies but something else writes it, with 16-bit
+colour-looking values.
+
+**That makes the "texture install" reading doubtful**: a routine that reads `lbz 4(r10)` with
+`r10 = r4 + 8*idx` from a 16-bit packed surface and writes eight bytes per iteration into the texture the
+model samples looks at least as much like an EFB-derived effect as like a texture upload. Until that
+function's *entry* argument is read at its real entry point (`fn_800D6BE0`, not the mid-function label
+`0x800D6CF0` that the block watch reports), the source is unknown.
+
+**Next step, concretely**: `TLS_WATCH_ADDR` already reports `r3..r6` at block entry - point it at
+`0x800D6BE0` itself and at its caller, and read the argument there. No new instrument, nothing on the hot path.
+
+**Verification**: the probe was removed, so no code change survives this round; build green, invariant
+**PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344,
+0 changes to `src/`.
+
 **Verification**: `TLS_MEM_DUMP`'s optional frame field added in `recomp/host_runner.c` only; build green,
 invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save
 1 348 992 / 29 344, 0 changes to `src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
