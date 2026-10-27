@@ -7592,3 +7592,50 @@ created at 1 348 992 / 29 344 - so both new instruments are inert by default and
 0 changes to `src/`. New instruments, both default-off: `TLS_TEX_DUMP_FRAME` (per-frame, ordered texture
 uploads) and `TLS_NO_INK_MATTE` (disables the ink-plate reconstruction).
 
+#### K. The store watch works - and 5c.45 H's "zero stores" came from a report that never ran
+
+`5c.45 H` reported "no lifted store writes that arena" twice. That conclusion is **wrong**, and the cause is
+my own instrument: the `[StoreWatch]` report had been spliced into the **frame-gated dump block inside the
+frame loop**, so it printed only when a `TLS_MEM_DUMP` frame happened to be set. The watch was armed and
+recording; the report never ran.
+
+Moving it to end of run, with a total call counter (the counter is what caught it):
+
+```
+[StoreWatch] armed 0x80890000..0x808A0000
+[StoreWatch] hook calls=281320672 armed=1 in-range=64      <- sanity range: the guest stack
+[StoreWatch] cia=0x800042A0 ea=0x80899390 value=0x808993B0
+...
+```
+
+The hook fires ~2.8e8 times per run and records real `cia`/`ea`/`value` triples. **This is the first
+trustworthy store-watch data of the session**; H's two zero-store results are retracted.
+
+**What it says about the arena** (`0x90380000..0x903D0000`, 1000 frames, ring cleared at frame 0):
+
+```
+[StoreWatch] hook calls=344348948 armed=1 in-range=18
+  cia=0x8022B0E8 ea=0x9038D1BC value=0x03C52E21
+  cia=0x8022AA58 ea=0x9038D1BC value=0x03C52E21
+  cia=0x8022AAC4 ea=0x9038D1A4 value=0x0000001B
+  ...   all 18 are 0x9038D1A4..0x9038D1BC, the 0x30 bytes just BELOW the copy destination 0x9038D1C0
+```
+
+Only **18** stores land in that whole range in 1000 frames, all from one function region
+(`0x8022Axxx`/`0x8022Bxxx`), writing small integers and pointers into a header - not texels. **Nothing writes
+`0x903CD1C0` or the staging family at all.**
+
+Combined with the destination census (`0x9038D1C0`, `0x903917C0`, `0x90395DC0`, `0x903DBDC0`, `0x903D31C0`,
+`0x903D77C0` - the staging family is never among them), the `FF00` at `0x903CD1C0` can only come from a
+writer that **overruns its nominal destination**. The strong candidate is the EFB copy path walking rows with
+a pitch/geometry that does not match its declaration - a 640-pitch walk over a 320-wide destination runs past
+the buffer exactly like this (and would also mis-place the copy's own contents).
+
+**Lesson, worth more than the finding**: an instrument that records but never reports is worse than none - it
+produces confident negatives. Re-read every "no X" claim in this dossier that rests on a watch/probe with that
+in mind.
+
+**Verification**: build green, invariant **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
+`src/`.
+

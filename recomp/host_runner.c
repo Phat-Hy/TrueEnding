@@ -1263,21 +1263,7 @@ int main(int argc, char** argv) {
             if (s_dump_at == -2) s_dump_at = host_mem_dump_frame();
             if (!s_done && s_dump_at >= 0 && frame >= s_dump_at) {
                 s_done = 1;
-                /* Report whatever the instruction-granularity store watch recorded. */
-    {
-        extern int tls_store_ring_n;
-        extern u32 tls_store_ring_cia[64], tls_store_ring_ea[64], tls_store_ring_val[64];
-        if (tls_store_ring_n > 0) {
-            printf("[StoreWatch] %d store(s) in range:\n", tls_store_ring_n);
-            for (int i = 0; i < tls_store_ring_n; i++) {
-                printf("  [StoreWatch] cia=0x%08X ea=0x%08X value=0x%08X\n",
-                       tls_store_ring_cia[i], tls_store_ring_ea[i], tls_store_ring_val[i]);
-            }
-            fflush(stdout);
-        }
-    }
-
-    host_dump_mem_spec(&cpu);
+                host_dump_mem_spec(&cpu);
             }
         }
 
@@ -1727,6 +1713,24 @@ int main(int argc, char** argv) {
                 printf("[TexPpm] 0x%08X %ux%u -> %s\n", addr, w, h, path);
             }
         }
+    }
+
+    /* Report the instruction-granularity store watch at END OF RUN. This used to sit inside
+     * the frame-gated dump block in the loop, so it printed only when a TLS_MEM_DUMP frame was
+     * set - and every "the watch recorded nothing" reading before 5c.45 K was taken from a
+     * report that never ran. */
+    {
+        extern int tls_store_ring_n;
+        extern unsigned long tls_store_note_calls;
+        extern int tls_store_watch_on;
+        extern u32 tls_store_ring_cia[64], tls_store_ring_ea[64], tls_store_ring_val[64];
+        printf("[StoreWatch] hook calls=%lu armed=%d in-range=%d\n",
+               tls_store_note_calls, tls_store_watch_on, tls_store_ring_n);
+        for (int i = 0; i < tls_store_ring_n && i < 64; i++) {
+            printf("  [StoreWatch] cia=0x%08X ea=0x%08X value=0x%08X\n",
+                   tls_store_ring_cia[i], tls_store_ring_ea[i], tls_store_ring_val[i]);
+        }
+        fflush(stdout);
     }
 
     host_dump_mem_spec(&cpu);
