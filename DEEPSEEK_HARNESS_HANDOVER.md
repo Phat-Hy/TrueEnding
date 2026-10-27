@@ -8211,7 +8211,22 @@ Our renderer evaluates stage 0 only, so b30 is drawn as another opaque parchment
 and the page loses its own title. `TLS_TEV=1` binds texmap1 but does not evaluate stage 1, which is why it does
 not reveal the text either (tested).
 
-**This is the whole of item 1 in the start block, and it is a feature to build, not a bug to patch:**
+**CORRECTION (same round, after measuring further)**: the pipeline is further along than the paragraph below
+assumes. With \TLS_TEV=1\ the renderer already binds the ramp and the shader already evaluates both stages:
+
+`
+[TevTexmap] b30 mask=0x03 t0=0x921DEA60 t1=0x90305600 has1=1 tex1=0x90305600
+[TevProbe]  frame=4000 b30 tex=0x921DEA60 tex1=0x90305600 blend=1 s=4 d=5
+                      texcoord_mask=0x03 tc0=0001003F/... tc1=0001007F/...
+`
+
+So every input exists - both textures bound (\mask=0x03\), both texcoords supplied (\	excoord_mask=0x03\),
+both stage words present - and the result is still opaque. **The defect is therefore in the stage-1 combiner
+ARITHMETIC, not in missing data**, and that is the part of the TEV the dossier has repeatedly found dangerous
+(5c.43 H: moving alpha-combiner bit positions aborted the guest at ~frame 2144). Treat the following as the
+description of a feature whose data plumbing is already done.
+
+**Original note (superseded in one respect, still correct about the shape):**
 
 * the data is already collected - `GxBatch` carries `GxTextureUnit tex1` and `bool has_texture1`
   (`gx_pipeline.h:231`), and `TLS_TEV_PROBE` already prints `tex1=0x%08X`;

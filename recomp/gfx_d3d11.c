@@ -2972,6 +2972,13 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                                            tev_st ? tev_st->texmap[0] : 0,
                                            tev_st ? tev_st->texcoord[0] : 0,
                                            gx_vtx[batch->vertex_offset].color);
+                                    printf("[TevTexmap] b%u mask=0x%02X t0=0x%08X t1=0x%08X t2=0x%08X has1=%d tex1=0x%08X\n",
+                                           b, batch->tev_texmap_mask,
+                                           batch->tev_texmap[0].guest_addr, batch->tev_texmap[1].guest_addr,
+                                           batch->tev_texmap[2].guest_addr,
+                                           (int)batch->has_texture1,
+                                           batch->has_texture1 ? batch->tex1.guest_addr : 0u);
+                                    fflush(stdout);
                                     /* Every stage, not just 0: the page's b30 differs from b26 ONLY
                                      * in having a second stage (both share stage-0 words), and that
                                      * stage is what makes it a wipe instead of a covering sheet
