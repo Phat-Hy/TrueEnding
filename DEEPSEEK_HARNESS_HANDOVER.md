@@ -8798,3 +8798,38 @@ better-instrumented question than "the scheduler never switches", and one this p
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`.
+
+### S. The last link: a LOST WAKEUP - the worker sleeps with its condition already satisfied
+
+The project already had a probe aimed at exactly this failure mode (`TLS_LOSTWAKE_PROBE`, written for the
+Chapter-1 stall). Run against the page's run it fires:
+
+```
+[TLS LOSTWAKE] frame=170 base=0x8087D5E4 queue=0x8087D610 pending(+0x24)=0x00000000
+               <-- sleeping with the condition ALREADY satisfied
+[TLS LOSTWAKE] frame=376 base=0x8087D5E4 queue=0x8087D610 pending(+0x24)=0x00000000
+[TLS LOSTWAKE] frame=376 base=0x8087D5E4 queue=0x8087D610 pending(+0x24)=0x00000000
+```
+
+So the worker object `0x8087D5E4` blocks on queue `0x8087D610` while the very condition it believes it is
+waiting for (`+0x24`) is **already 0**. The producer signalled the queue (the wakeup table attributes 20 calls to
+`0x8087D610`, first from `lr=0x8071D448`, i.e. the other worker) but the signal was **consumed before this sleep**,
+so the thread parks forever.
+
+This is a *lost wakeup*, and it is the terminal link of the chain: the worker never resumes, never sets the BSS
+flag `0x8087FB98`, so `0x805EC060` keeps returning 64, the load state machine never advances, and the tutorial
+page keeps showing only its furniture.
+
+**Why it matters**: on hardware the identical code cannot lose the wakeup, because `OSSleepThread` is called
+inside an interrupt-disabled critical section and the caller re-checks its condition after every wake. Our
+replacement for `0x805F5C70` deliberately lets the SDK's own code run, so the difference must be in how the
+*scheduler* interleaves here - the thread switches only at the points the guest's scheduler chooses, and the
+wakeup was delivered at one of those points in between the condition check and the enqueue.
+
+**Next step, precise**: instrument one iteration of that worker around `lr=0x8071D984` (its `OSSleepThread` call
+site) to print (a) the condition value it tested, (b) the queue head before enqueue, and (c) whether the queue was
+signalled between the test and the enqueue. `TLS_WAIT_PROBE=all` plus the sleep-tail ring already record (b) and
+(c) - the missing piece is the test value, which the probe above now supplies.
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`.
