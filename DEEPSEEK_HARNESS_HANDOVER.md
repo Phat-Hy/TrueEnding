@@ -7756,6 +7756,34 @@ pixel data, and check what the renderer resolves for `tex.guest_addr` when the g
 are handing GX the object instead of its pixel pointer, the fix is in the texture-address handling, not in any
 of the paths chased above.
 
+#### O. The `.texture` file lands in the model's buffer at frame 1872, `"chnk"` header and all
+
+The store ring now carries the **frame** of every recorded write (three rounds of mine concluded "nobody
+writes this" purely because the write fell outside the window they watched):
+
+```
+[StoreWatch] frame=1872 cia=0x80625660 ea=0x92AEAEC0 value=0x00000063   'c'
+[StoreWatch] frame=1872 cia=0x80625660 ea=0x92AEAEC1 value=0x00000068   'h'
+[StoreWatch] frame=1872 cia=0x80625660 ea=0x92AEAEC2 value=0x0000006E   'n'
+```
+
+Frame 1872 is exactly when texture request #262 (`data/texture/pc_ga_g_a01.texture`) completes - the same
+frame `CXDecompressFast` writes its output there. So the *decompressed texture file* is copied into the very
+buffer the model later samples, starting with its `"chnk"` chunk magic. That is normal for this engine's
+texture format: the buffer's first bytes are a file header by design, and the guest then parses the chunks and
+decodes in place.
+
+**So the question is no longer "who writes this texture" but "does the guest's in-place parse/decode of that
+file produce the right pixels"** - and the measured answer is no: by frame 4000 the same buffer reads
+`00000000FFFFFFFF` (alpha 0 everywhere). The frame-stamped facts needed to chase it are now on the table: which
+frame the file arrives (1872), which routine parses it (`fn_800D6BE0(dst,src,w,h)` and the byte assembler at
+`0x800D6F98`), and which buffer each stage reads.
+
+**Next step**: dump the buffer at frame **1872** (immediately after the file lands, before any decode) and
+compare it with the same file's bytes as the loader read them. If the two disagree, the decompressor is the
+suspect; if they agree, the guest's parser is misreading a header field - most likely a format id or a size,
+which would explain a decode that yields `c0=c1=0` with all indices 3.
+
 **Verification**: build green, invariant **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
 `src/`.

@@ -1724,11 +1724,13 @@ int main(int argc, char** argv) {
         extern unsigned long tls_store_note_calls;
         extern int tls_store_watch_on;
         extern u32 tls_store_ring_cia[64], tls_store_ring_ea[64], tls_store_ring_val[64];
+        extern u32 tls_store_ring_frame[64];
         printf("[StoreWatch] hook calls=%lu armed=%d in-range=%d\n",
                tls_store_note_calls, tls_store_watch_on, tls_store_ring_n);
         for (int i = 0; i < tls_store_ring_n && i < 64; i++) {
-            printf("  [StoreWatch] cia=0x%08X ea=0x%08X value=0x%08X\n",
-                   tls_store_ring_cia[i], tls_store_ring_ea[i], tls_store_ring_val[i]);
+            printf("  [StoreWatch] frame=%u cia=0x%08X ea=0x%08X value=0x%08X\n",
+                   tls_store_ring_frame[i], tls_store_ring_cia[i],
+                   tls_store_ring_ea[i], tls_store_ring_val[i]);
         }
         fflush(stdout);
     }
