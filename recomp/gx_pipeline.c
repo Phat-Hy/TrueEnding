@@ -1477,7 +1477,7 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
                             s_efb_copy_x1, s_efb_copy_y1, tpf_rt / 2u + (tpf_rt & 1u) * 8u, 0,
                             s_efb_copy_pitch, val);
         }
-        if (s_copy_probe && s_copy_reports < 40) {
+        if (s_copy_probe && s_copy_reports < 2000) {
             extern int g_runner_current_frame;
             if (g_runner_current_frame >= s_copy_from) {
                 s_copy_reports++;

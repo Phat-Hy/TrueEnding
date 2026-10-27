@@ -7828,6 +7828,40 @@ copy destinations (H/M) and no `GfxCopyTex` to that address ever appears in the 
 if a `GXCopyTex` to `0x903CD1C0` is issued and dropped, the missing fill is found, and it would explain the
 cave's other 0x903xxxxx buffers in the same stroke.
 
+#### Q. The fill is NOT a `GXCopyTex` - the issued-copy census is negative (and now trustworthy)
+
+Did that, with the report cap raised from 40 to 2000 (`TLS_EFB_COPY_PROBE=1 TLS_EFB_COPY_FROM=1870`, 1900
+frames): **322 issued copies, 37 distinct destinations** -
+
+```
+0x9038D1C0 0x90536FE0 0x903DBDC0 0x90395DC0 0x903917C0 0x905C3000 0x900037C0 0x900997E0
+0x92B52900 0x92B5A900 0x92B5C900 0x92B5D120 0x92B61120 0x92B62120 0x90556FE0 0x9055EFE0
+0x92B62540 0x92B72540 0x92B76540 0x92AF56E0 0x92AFD6E0 0x92AFF6E0 0x90576FE0 0x90586FE0
+0x92C22CC0 0x92C2ACC0 0x92C2CCC0 0x92C2D4E0 0x92C314E0 0x92C324E0 0x92C35320 0x92C39320
+0x92C3A320 0x92C3A740 0x92C3C740 0x92C3CF40 0x90546FE0 0x9054AFE0
+```
+
+- and **none is `0x903CD1C0`**. So the staging slot is not filled by a GX copy the guest issues, and that
+hypothesis is dead too.
+
+**Where that leaves it**: at frame 1882 the guest `memset`s the staging slot (guest code at
+`0x80069258`, 0x40000 bytes of zeros) and at 1883 it decodes that slot into `0x92AEAEC0`, producing the
+all-transparent texture the model samples. No copy and no load fills it in between. Two readings remain, and
+they are distinguishable only by looking at the *guest routine's* intent rather than at the data flow:
+
+1. the slot is *meant* to be cleared and the decoder is *meant* to read it (i.e. this texture is legitimately
+   blank at this point, and the model should be sampling something else), or
+2. some step between 1882 and 1883 is missing in our run - a step that is neither a store, nor a GX copy, nor
+   a loader write, which is why every instrument above came back empty.
+
+**Recommended next step**: read `fn_800D6BE0`'s caller chain from the *guest* side (who calls it with
+`src=0x903CD1C0` and why) rather than continuing to look for a writer. That is a pure reverse-engineering step
+over the generated C, needs no runs, and it is where the remaining ambiguity actually lives.
+
+**Verification**: build green, invariant **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
+`src/`.
+
 **Verification**: build green, invariant **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
 `src/`.
