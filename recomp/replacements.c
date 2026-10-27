@@ -3232,6 +3232,31 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                     fflush(stdout);
                 }
             }
+            /* TLS_NUDGE_SLEEP=1: when the worker at lr=0x8071D984 is about to sleep on
+             * queue r30+0x2C while its condition (r30+0x24) is ALREADY clear, the wakeup it
+             * is waiting for has already been consumed (5c.46 S). Skipping that sleep lets the
+             * worker make progress instead of parking forever. This is an emulation allowance,
+             * NOT a fix: it papers over a timing difference between this runner and the
+             * console, so it stays opt-in and must be evaluated on what the page gains. */
+            {
+                static int s_nudge = -1;
+                if (s_nudge < 0) s_nudge = getenv("TLS_NUDGE_SLEEP") ? 1 : 0;
+                if (s_nudge && ctx->lr == 0x8071D984u) {
+                    u32 nb = ctx->gpr[30];
+                    u32 npending = (nb && resolve_guest_pointer(ctx, nb))
+                                       ? mem_read32(ctx, nb + 36) : 1;
+                    if (npending == 0) {
+                        static int s_skips = 0;
+                        if (s_skips++ < 20) {
+                            extern int g_runner_current_frame;
+                            printf("[TLS NUDGE] frame=%d skipped a spurious sleep on 0x%08X (condition already clear)\n",
+                                   g_runner_current_frame, queue_addr);
+                            fflush(stdout);
+                        }
+                        return 1;   /* handled: do not block */
+                    }
+                }
+            }
             static u32 count_sleep = 0;
             if (++count_sleep <= 50 || count_sleep % 100 == 0) {
                 printf("[TLS OSSleepThread] #%u queue=0x%08X lr=0x%08X\n",

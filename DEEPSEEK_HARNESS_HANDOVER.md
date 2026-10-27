@@ -8850,3 +8850,34 @@ once per frame so the page can advance - documenting it as an emulation allowanc
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`.
+
+### T. Tried and rejected: nudging the spurious sleep makes the screen black
+
+Acting on S's option (b), `TLS_NUDGE_SLEEP=1` makes `OSSleepThread` (case `0x805F5C70`) skip the sleep when
+`lr == 0x8071D984` and the worker's condition (`r30+0x24`) is already clear - i.e. when the wakeup it waits for has
+already been consumed:
+
+```c
+if (s_nudge && ctx->lr == 0x8071D984u && npending == 0) return 1;   /* handled: do not block */
+```
+
+**Measured: it fires (20 reported skips) and the frame-4000 screen becomes pure black (mean 0.0).** Skipping the
+sleep does not let the worker make progress in a healthy way - it unblocks it into a state the rest of the engine
+is not prepared for, and the frame stops being drawn at all. So the worker's park is not merely a lost wakeup to
+paper over: letting it run on without the signal produces a worse state than leaving it blocked.
+
+**Kept behind the flag, default off** (like the other rejected experiments, `TLS_FLAT_GLYPHS`), so the experiment is
+reproducible and the default picture is untouched:
+
+```
+default: invariant PASS, frame 3500 = EAB33141..., save 1 348 992 / 29 344
+```
+
+**What that leaves**: S's option (a) - trace the ordering across the sleep site (`lr=0x8071D984`) and the signal
+site (`lr=0x8071D448`) in one timeline - is the remaining route, because both blind attempts to bypass the park
+(forcing progress) and the flag theories have now been measured and rejected. The evidence for where to look is
+complete: queue `0x8087D610`, worker object `0x8087D5E4`, condition `+0x24`, signal from `lr=0x8071D448`, sleeps at
+frames 170 and 376 with an empty queue.
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_NUDGE_SLEEP` is default-off.
