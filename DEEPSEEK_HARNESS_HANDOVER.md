@@ -9736,3 +9736,25 @@ returns on that frame. If the mode is right and the page still never shows its c
 **Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
 `src/`; no new knobs (measurement only).
+
+### AJ. The show is a VIRTUAL call inside the layout task's own execute - so xrefs cannot find it
+
+Two xref facts that change how the next session should look:
+
+* **`bl fn_801F42A8` has 0 callers in the whole lifted image**, yet the runtime probe sees dozens of show calls
+  (`[LayoutShow] ... lr=0x800D28C0`). So the show is **virtual**: called through the layout's interface table, not
+  by name. Do not look for its callers with `tools/find_xref.py` - use `TLS_LAYOUT_SHOW_PROBE`.
+* `lr=0x800D28C0` is inside **`fn_800D2868`**, i.e. the layout task shows *itself* while executing. Combined with the
+  write history (shown at frame 1696, hidden at 2020, never again) that means the show fires on **activation /
+  first execution**, not on every frame - and the content node was activated once at 1696 and never re-activated,
+  while `0x81861F60`/`0x8186CB60`/`0x81865AA0` are (re)activated at 3648-3654 and therefore shown.
+
+So the thing to find is **not a show call** but the **activation** of the content layout at page start: whatever
+puts a layout into the task manager's active set (the same step that happens for the three page layouts at 3648).
+`fn_805BB658` (5c.46 AI) is the code that runs there; the next session should log its three `+0x478/+0x4b4` stores
+and the task-manager call that follows them, then check what would have to happen for the fourth (content) layout to
+take the same path.
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
+`src/`; measurement only.
