@@ -7639,3 +7639,46 @@ in mind.
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
 `src/`.
 
+#### L. The staging slot's writer found: guest code at `0x800D6F98+`, writing only after frame ~1000
+
+With the watch now covering **every** store form (lifted `stb/stw/stfs/stfd/stswi` via emitter notes, and
+`mem_write8/16/32/64` so interpreted and HLE writes are seen too), and after three wrong turns, the writer is:
+
+```
+[StoreWatch] armed 0x903C0000..0x903D0000, 2000 frames
+[StoreWatch] hook calls=1375515074 armed=1 in-range=64
+  cia=0x800D6F98 ea=0x903C0000 value=0x00000000
+  cia=0x800D6FA8 ea=0x903C0001 value=0x00000000
+  cia=0x800D6FB8 ea=0x903C0002 value=0x00000000
+  cia=0x800D6FC8 ea=0x903C0003 value=0x00000000
+```
+
+From the generated C (`chunk_0052_text1_800D41C0.c`, label 800D6F98):
+
+```
+800D6F98: stbx r3, r29, r19        ; byte 0
+800D6FA8: stb  r10, 1(r8)          ; byte 1
+800D6FB8: stb  r11, 2(r8)          ; byte 2
+800D6FC8: ...                      ; byte 3
+```
+
+so it is **RGBA8 texel assembly, byte-wise, from registers**, i.e. a guest routine that *builds* a texture in
+`0x903Cxxxx` and then hands it to the decoder. **It is not host code after all** - the H/A/G hypotheses were
+all wrong, for one reason: every watch before this one ran for **1000 frames or less, or with a ring reset at
+a late frame, while the write happens after frame ~1000**. The three "nobody writes it" results were windows,
+not facts.
+
+**Where that leaves the character texture**: the guest assembles `FF00`-style bytes into its own staging slot
+and then decodes that slot into an all-transparent texture. The next question is the one that matters: what do
+the four source registers at `0x800D6F98` hold, and where is *that* read from - i.e. which upstream buffer or
+texture feeds the assembler. Reading `0x800D6E20..0x800D6F98` answers it without a run.
+
+**Instrument coverage, final state** (all default-inert): lifted `st*` of every width plus `stfs/stfd/stswi`
+carry a `tls_store_note(cia, ea, value)`; `mem_write8/16/32/64` call the same sink with `cia=0`, so
+interpreted and HLE writes are visible (they appear as duplicate entries with `cia=0x00000000`). `hook
+calls` is reported at end of run, and a non-zero count with `in-range=0` is now a *meaningful* negative.
+
+**Verification**: build green, invariant **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
+`src/`; `docs/dolrecomp/cpu-core.patch` regenerated (12 996 bytes).
+

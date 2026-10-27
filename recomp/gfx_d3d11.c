@@ -1888,6 +1888,35 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                 s_copy_fmt ? (is_xfb_copy != 0)
                            : (s_geom ? (is_xfb_copy != 0)
                                      : (dst_guest == 0x900997E0u || dst_guest == 0x900037C0u));
+                    /* TLS_EFB_COPY_LOG=1: report the byte RANGE each copy writes, computed from the
+             * branch that will actually be taken. Several rounds chased "who writes
+             * 0x903CD1C0" through lifted stores, the copy chain and the loader, and all three
+             * said no - so make the copy path state its own extent (handover 5c.45 K). */
+            {
+                static int s_log = -1;
+                static int s_n = 0;
+                if (s_log < 0) s_log = getenv("TLS_EFB_COPY_LOG") ? 1 : 0;
+                if (s_log && s_n < 400) {
+                    s_n++;
+                    size_t bytes;
+                    const char* mode;
+                    if (is_display_copy && !s_linear) {
+                        mode = "xfb640";
+                        bytes = (size_t)((y0 + dst_h) * 640u + (x0 + dst_w)) * 2u;
+                    } else if (s_linear) {
+                        mode = "linear";
+                        bytes = (size_t)dst_w * dst_h * 4u;
+                    } else {
+                        mode = "tiled";
+                        bytes = (size_t)((dst_h + 3) / 4) * ((dst_w + 3) / 4) * 32u;
+                    }
+                    printf("[EfbCopyRange] dst=0x%08X %ux%u step=%u mode=%s bytes=%zu end=0x%08X\n",
+                           dst_guest, dst_w, dst_h, step, mode, bytes,
+                           (unsigned)(dst_guest + bytes));
+                    fflush(stdout);
+                }
+            }
+
             for (uint32_t gy = 0; gy < dst_h; gy++) {
                 uint32_t py = (uint32_t)(s_d3d11.vp_y + ((float)(y0 + gy * step) + 0.5f) * sy);
                 if (py >= desc.Height) py = desc.Height - 1;

@@ -1,5 +1,5 @@
 diff --git a/src/backend/emitter.c b/src/backend/emitter.c
-index 45c3286..3f3073b 100644
+index 45c3286..e8e43c6 100644
 --- a/src/backend/emitter.c
 +++ b/src/backend/emitter.c
 @@ -139,6 +139,8 @@ static void emit_store(FILE* out, const PPCInst* inst, const char* write_func,
@@ -20,8 +20,44 @@ index 45c3286..3f3073b 100644
      if (update) {
          fprintf(out, "        ctx->gpr[%u] = ea;\n", inst->rA);
      }
+@@ -208,9 +212,13 @@ static void emit_fstore(FILE* out, const PPCInst* inst, bool single,
+     if (single) {
+         fprintf(out, "        mem_write32(ctx, ea, dolrecomp_f32_to_bits(ctx->fpr[%u]));\n",
+                 inst->rS);
++        fprintf(out, "        tls_store_note(0x%08Xu, ea, dolrecomp_f32_to_bits(ctx->fpr[%u]));\n",
++                inst->address, inst->rS);
+     } else {
+         fprintf(out, "        mem_write64(ctx, ea, dolrecomp_f64_to_bits(ctx->fpr[%u]));\n",
+                 inst->rS);
++        fprintf(out, "        tls_store_note(0x%08Xu, ea, (u32)dolrecomp_f64_to_bits(ctx->fpr[%u]));\n",
++                inst->address, inst->rS);
+     }
+     if (update) {
+         fprintf(out, "        ctx->gpr[%u] = ea;\n", inst->rA);
+@@ -227,9 +235,13 @@ static void emit_fstorex(FILE* out, const PPCInst* inst, bool single,
+     if (single) {
+         fprintf(out, "        mem_write32(ctx, ea, dolrecomp_f32_to_bits(ctx->fpr[%u]));\n",
+                 inst->rS);
++        fprintf(out, "        tls_store_note(0x%08Xu, ea, dolrecomp_f32_to_bits(ctx->fpr[%u]));\n",
++                inst->address, inst->rS);
+     } else {
+         fprintf(out, "        mem_write64(ctx, ea, dolrecomp_f64_to_bits(ctx->fpr[%u]));\n",
+                 inst->rS);
++        fprintf(out, "        tls_store_note(0x%08Xu, ea, (u32)dolrecomp_f64_to_bits(ctx->fpr[%u]));\n",
++                inst->address, inst->rS);
+     }
+     if (update) {
+         fprintf(out, "        ctx->gpr[%u] = ea;\n", inst->rA);
+@@ -1566,6 +1578,7 @@ static void emit_instruction_with_range(FILE* out, const PPCInst* inst,
+         fprintf(out, "            u32 reg = (%uu + n / 4u) & 31u;\n", inst->rS);
+         fprintf(out, "            u8 value = (u8)(ctx->gpr[reg] >> (24u - 8u * (n & 3u)));\n");
+         fprintf(out, "            mem_write8(ctx, ea + n, value);\n");
++        fprintf(out, "            tls_store_note(0x%08Xu, ea + n, value);\n", inst->address);
+         fprintf(out, "        }\n");
+         fprintf(out, "    }\n");
+         break;
 diff --git a/src/cpu/cpu.c b/src/cpu/cpu.c
-index 27297aa..276e398 100644
+index 27297aa..685ef8c 100644
 --- a/src/cpu/cpu.c
 +++ b/src/cpu/cpu.c
 @@ -110,6 +110,8 @@ void cpu_reset(CPUState* cpu) {
@@ -33,7 +69,32 @@ index 27297aa..276e398 100644
  static u8* resolve_addr(CPUState* cpu, u32 addr, u32* avail) {
      if (addr >= GC_RAM_BASE && addr < GC_RAM_BASE + cpu->ram_size) {
          u32 offset = addr - GC_RAM_BASE;
-@@ -287,6 +289,41 @@ u8 mem_read8(CPUState* cpu, u32 addr) {
+@@ -201,6 +203,8 @@ u64 mem_read64(CPUState* cpu, u32 addr) {
+ }
+ 
+ void mem_write64(CPUState* cpu, u32 addr, u64 value) {
++    tls_store_note(0, addr, (u32)value);
++    tls_store_note(0, addr + 4, (u32)(value >> 32));
+     u32 avail;
+     u8* host = resolve_addr(cpu, addr, &avail);
+     if (!host || avail < 8) {
+@@ -230,6 +234,7 @@ u32 mem_read32(CPUState* cpu, u32 addr) {
+ }
+ 
+ void mem_write32(CPUState* cpu, u32 addr, u32 value) {
++    tls_store_note(0, addr, (u32)value);
+     u32 avail;
+     u8* host = resolve_addr(cpu, addr, &avail);
+     if (!host || avail < 4) {
+@@ -259,6 +264,7 @@ u16 mem_read16(CPUState* cpu, u32 addr) {
+ }
+ 
+ void mem_write16(CPUState* cpu, u32 addr, u16 value) {
++    tls_store_note(0, addr, (u32)value);
+     u32 avail;
+     u8* host = resolve_addr(cpu, addr, &avail);
+     if (!host || avail < 2) {
+@@ -287,7 +293,46 @@ u8 mem_read8(CPUState* cpu, u32 addr) {
      return *host;
  }
  
@@ -52,6 +113,9 @@ index 27297aa..276e398 100644
 +u32 tls_store_ring_val[64];
 +int tls_store_ring_n;
 +
++/* Record a guest write into the watched range. Called from mem_write8/16/32/64 so the watch
++ * also sees INTERPRETED guest code and HLE writes - the emitter hook only covers lifted stores,
++ * which is why 0x903CD1C0 looked unwritten while its content changed (handover 5c.45 K). */
 +void tls_store_watch_init(u32 lo, u32 hi) {
 +    tls_store_watch_lo = lo;
 +    tls_store_watch_hi = hi;
@@ -73,9 +137,11 @@ index 27297aa..276e398 100644
 +}
 +
  void mem_write8(CPUState* cpu, u32 addr, u8 value) {
++    tls_store_note(0, addr, (u32)value);
      u32 avail;
      u8* host = resolve_addr(cpu, addr, &avail);
-@@ -328,28 +365,27 @@ void ppc_program_exception(CPUState* cpu, u32 cause, u32 cia) {
+     if (!host) {
+@@ -328,28 +373,27 @@ void ppc_program_exception(CPUState* cpu, u32 cause, u32 cia) {
      ppc_take_exception(cpu, PPC_EXC_PROGRAM, PPC_VECTOR_PROGRAM, cia, cause);
  }
  
@@ -116,7 +182,7 @@ index 27297aa..276e398 100644
      ppc_program_exception(cpu, PPC_PROGRAM_ILLEGAL, cia);
  }
  
-@@ -376,7 +412,8 @@ bool ppc_native_region_available(CPUState* cpu, u32 start, u32 end) {
+@@ -376,7 +420,8 @@ bool ppc_native_region_available(CPUState* cpu, u32 start, u32 end) {
  }
  
  void ppc_system_call_exception(CPUState* cpu, u32 cia) {
@@ -126,7 +192,7 @@ index 27297aa..276e398 100644
  }
  
  void ppc_dsi_exception(CPUState* cpu, u32 ea, u32 cia, u32 dsisr) {
-@@ -747,6 +784,16 @@ bool ppc_psq_load(CPUState* cpu, u8 frD, u32 ea, bool w, u8 gqr_index, bool inde
+@@ -747,6 +792,16 @@ bool ppc_psq_load(CPUState* cpu, u8 frD, u32 ea, bool w, u8 gqr_index, bool inde
      if (!psq_check_enabled(cpu, indexed, cia))
          return false;
  
@@ -143,7 +209,7 @@ index 27297aa..276e398 100644
      u32 gqr = cpu->gqr[gqr_index & 7u];
      s32 scale = gqr_scale(gqr >> 24);
      u8 type = (u8)((gqr >> 16) & 7u);
-@@ -793,7 +840,26 @@ void ppc_rfi(CPUState* cpu, u32 cia) {
+@@ -793,7 +848,26 @@ void ppc_rfi(CPUState* cpu, u32 cia) {
          return;
      }
  
@@ -171,7 +237,7 @@ index 27297aa..276e398 100644
      cpu->msr &= ~PPC_MSR_POW;
      cpu->pc = cpu->srr0 & ~3u;
  }
-@@ -1344,6 +1410,7 @@ void ppc_fcmp(CPUState* cpu, u8 crfd, f64 a, f64 b, bool ordered) {
+@@ -1344,6 +1418,7 @@ void ppc_fcmp(CPUState* cpu, u8 crfd, f64 a, f64 b, bool ordered) {
      cpu->cr = (cpu->cr & ~(0xFu << shift)) | (compare << shift);
  }
  
