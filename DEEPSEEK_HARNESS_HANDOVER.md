@@ -8391,6 +8391,22 @@ eye-space positions far outside a sane view volume (measured). Not established: 
 a wrong PN-matrix index cannot be ruled out from `pnm=0` alone because the probe does not yet pair a vertex with
 the batch that owns it, and `pnm=0` may also be what the *visible* character batches use.
 
+**CORRECTION after measuring the matrix**: it is **not** a missing modelview. Logging the matrix in use gives a
+real, correctly loaded camera transform at index 0:
+
+```
+pos_mtx[0]: [0.3184, 0.0000, 0.9480, -42.3016][0.0163, 0.9999, -0.0055, -20.2108][-0.9478, 0.0172, 0.3183, -31.4636]
+```
+
+so position matrices are loaded and applied (the first XF load path at `gx_pipeline.c:2089` never fires; the
+second at 2140 does the work). What the batch dump actually shows is subtler: `b0`/`b1` use **pnm 1 and 5** and
+are inside the volume, while `b9`/`b11` use **pnm 0** (the camera/world matrix) and land far outside it. That is
+consistent with `b9`/`b11` being **world geometry that is legitimately off-screen** during this frame - possibly
+the cave seen by the gameplay camera - rather than the page's fan.
+
+**So which batch draws the reference's fan is UNRESOLVED.** `b11` samples the fan texture (`0x91AAC860`) and is
+fully clipped, but that does not make it the page's fan; the texture may simply be shared between scenes.
+
 **Next step, precise**: print the PN index and the PN matrix itself *per batch* (the batch dump already has the
 batch loop; add `pnm` and the matrix's translation column), then compare a batch known to be visible (`b0`, which
 reports `outside=0/1044`) with `b11`. If they share an index but b11's matrix translation is ~(-50, -200, 0), the
