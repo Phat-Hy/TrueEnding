@@ -6,10 +6,18 @@
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
 creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.45 J**; §5c.44 and everything before it is history, and several of its conclusions are
+state is **§5c.45 T**; §5c.44 and everything before it is history, and several of its conclusions are
 corrected below.
 
-> **WHERE THE PAGE STANDS NOW (read §5c.45 I and J before anything else).** The tutorial page's missing
+> **READ §5c.45 T FIRST - it closes the character-texture thread.** The page's model is drawn correctly
+> (0 vertices outside the clip volume, §5c.45 I) and its texture is a **render-to-texture of an empty frame**:
+> render -> EFB copy into `0x90536FE0` -> convert (frame 1882, staging `0x903CD1C0`) -> decode (frame 1883) ->
+> the model's texture `0x92AEAEC0`. The copied frame's content is a uniform clear (`8000 8000 ...`), so every
+> stage downstream is faithfully empty. **What is left is the DRAW side of that pass**, not the texture
+> pipeline: at frame 1882 the guest submits 33 full-screen post-processing quads and our frame comes out as a
+> uniform clear. Do not spend another round on texture/psq/copy questions - they are all answered in P/Q/R/S/T.
+
+> **WHERE THE PAGE STANDS NOW (read §5c.45 I, J and T before anything else).** The tutorial page's missing
 > character is fully explained and **one question is left**:
 >
 > 1. `b0..b5` (the player character, textures `pc_ga_g_a01` / `pc_wa_g_a01` ...) are **not clipped** -
