@@ -9841,3 +9841,53 @@ it builds with `0x81359B80`.
 **Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
 `src/`; the dead probe was removed, so nothing new is left behind.
+
+### AM. The chain's top: the page's script text is EMPTY, so the page-start branch is skipped
+
+AL left "why does the page start never build or re-activate the content layout". One probe answers it.
+
+`fn_805BB658` does:
+
+```
+addi r3, r1, 0xb4
+bl fn_8005B3CC        ; parse a quoted token out of a text buffer into r1+0xb4, return its address
+bl fn_80684600        ; atoi() of that string (msl fn_80684600 -> fn_80683BB0 with base 10)
+subi r0, r3, 1
+cmplwi r0, 0x3
+bgt  <skip>           ; modes 1..4 only
+```
+
+The new `TLS_PAGE_MODE_PROBE=1` logs both halves at their return addresses (`0x805BBC50` = the string,
+`0x805BBC54` = the parsed mode), and at frame 3648:
+
+```
+[PageMode] f=3648 page-name string at 0x80898BDC = ''
+[PageMode] f=3648 fn_80684600 returned 0 (layout branch SKIPPED)
+```
+
+**The string is empty, so `atoi` yields 0, so the whole layout-creation/activation branch is skipped.** That is the
+top of the chain that has been unwound since AC:
+
+```
+the page's script text buffer is empty                       <- measured here
+  -> fn_8005B3CC parses no quoted token, page name = ""       <- fn_8005B3CC clears obj+0x10 and scans obj+4 for '"' pairs
+  -> atoi("") = 0, branch `1..4` skipped                      <- fn_80684600
+  -> no layout is created or activated at page start          <- the only `bl fn_800D246C` in fn_805BB658 is inside that branch
+  -> the content task stays deactivated (+0x38 = 2 since 2020) <- AL
+  -> its init virtual never runs again                         <- AK
+  -> the visibility bit stays clear                            <- AG
+  -> the page draws only its furniture                         <- the original symptom
+```
+
+`fn_8005B3CC(obj)` is a small tokeniser: it `memset`s 0x600 bytes at `obj+0x10`, then walks the text at `obj+4`
+(length `obj+0xC`) copying the token between `0x22` (`"`) pairs. An empty result means that text is empty or has no
+quoted token - i.e. **the page's script/name resource did not arrive**.
+
+**Next step, precise** (one probe, one run): log `*(u32*)(obj+4)`, `*(u32*)(obj+0xC)` and the first bytes of that
+buffer at the frame-3648 call. `obj` is `r1+0xb4-0x10` at the call site, so the buffer pointer and length are two
+reads away. If the length is 0 the resource was never filled; if it is non-zero but has no `"`, the parser or the
+data is wrong. That distinguishes a *load* defect from a *parse* defect, which is the last split left.
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
+`src/`; `TLS_PAGE_MODE_PROBE` is default-off.

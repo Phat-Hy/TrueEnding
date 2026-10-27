@@ -8496,6 +8496,42 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0;
         }
 
+        /* The mode value that selects the page-start branch. fn_805BB658 does
+         *   bl fn_80684600 ; subi r0,r3,1 ; cmplwi r0,3 ; bgt skip
+         * so the instruction right after the bl (0x805BBC54) receives the mode in r3. If the mode
+         * falls outside 1..4 the whole layout-creation branch is skipped, which would explain why
+         * the tutorial page's content layout is never built or re-activated (5c.46 AL). Print on
+         * change, so one line per distinct mode for the whole run. */
+        case 0x805BBC50:   /* return of fn_8005B3CC: r3 = the page-name string that gets parsed */
+        case 0x805BBC54: { /* return of fn_80684600: r3 = the parsed mode */
+            static int s_probe = -1;
+            static s32 s_last = -12345;
+            static u32 s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_PAGE_MODE_PROBE") ? 1 : 0;
+            if (s_probe) {
+                extern int g_runner_current_frame;
+                s32 mode = (s32)ctx->gpr[3];
+                if (address == 0x805BBC50u) {
+                    const char* s = ctx->gpr[3] ? (const char*)resolve_guest_pointer(ctx, ctx->gpr[3]) : NULL;
+                    char clean[64]; int k = 0;
+                    if (s) for (; k < 63 && s[k]; k++) { unsigned char ch = (unsigned char)s[k];
+                             clean[k] = (ch >= 32 && ch < 127) ? (char)ch : '.'; }
+                    clean[k] = 0;
+                    if (s_n < 20) { s_n++;
+                        printf("[PageMode] f=%d page-name string at 0x%08X = '%s'\n",
+                               g_runner_current_frame, ctx->gpr[3], s ? clean : "(null)");
+                        fflush(stdout); }
+                } else if (mode != s_last) {
+                    s_last = mode;
+                    printf("[PageMode] f=%d fn_80684600 returned %d (layout branch %s)\n",
+                           g_runner_current_frame, mode,
+                           (mode >= 1 && mode <= 4) ? "TAKEN" : "SKIPPED");
+                    fflush(stdout);
+                }
+            }
+            return 0;
+        }
+
         /* fn_801F42A8 is the layout SHOW call (its 0x801F4334 slot ORs bit 30 of [layout+0xFC];
          * the write history of the page's content node shows it being shown at frame 1696 and
          * hidden again at 2020 by the camp UI, then never shown). Logging every call with its
