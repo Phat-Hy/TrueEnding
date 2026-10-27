@@ -9648,9 +9648,10 @@ address from the object and the field offset by hand and print it. `0x81359B80 +
 the bit). Two runs: the whole run, and `TLS_LAYOUT_SHOW_FROM=2021` for the window after the camp UI hides the
 content node.
 
-**Every show call comes from `lr=0x800D28C0`** - the task manager's registration path - so a LayoutTask is shown
-when it is registered, not by page-specific code. The content node `0x81359B80` was shown that way at frame 1696
-(the write history in AG), hidden at 2020 by `fn_803D164C`, and **never shown again**:
+**Every show call comes from `lr=0x800D28C0`** - inside **`fn_800D2868`** (the task execute/register loop), so a
+LayoutTask is shown when it is **first executed**, not by page-specific code and not once per frame. The content
+node `0x81359B80` was shown that way at frame 1696 (the write history in AG), hidden at 2020 by `fn_803D164C`, and
+**never shown again**:
 
 ```
 shows after frame 2020: 19
