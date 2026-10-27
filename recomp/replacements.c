@@ -8517,9 +8517,25 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                     if (s) for (; k < 63 && s[k]; k++) { unsigned char ch = (unsigned char)s[k];
                              clean[k] = (ch >= 32 && ch < 127) ? (char)ch : '.'; }
                     clean[k] = 0;
+                    /* The parse split: fn_8005B3CC(obj) takes a stack struct at r1+0xb4, reads the
+                     * text at *(obj+4) with length *(obj+0xC) and copies the token between '"' pairs
+                     * into obj+0x10. An empty token therefore means either the TEXT is empty (a load
+                     * defect) or it has no quoted token (a parse/data defect). Print both. */
+                    u32 obj = ctx->gpr[1] + 0xB4u;
+                    u32 textp = obj ? mem_read32(ctx, obj + 4) : 0;
+                    u32 textn = obj ? mem_read32(ctx, obj + 0xC) : 0;
+                    char head[64]; int hk = 0;
+                    const char* tb = (textp && textn) ? (const char*)resolve_guest_pointer(ctx, textp) : NULL;
+                    if (tb) for (; hk < 63 && hk < (int)textn && tb[hk]; hk++) {
+                        unsigned char ch = (unsigned char)tb[hk];
+                        head[hk] = (ch >= 32 && ch < 127) ? (char)ch : '.';
+                    }
+                    head[hk] = 0;
                     if (s_n < 20) { s_n++;
                         printf("[PageMode] f=%d page-name string at 0x%08X = '%s'\n",
                                g_runner_current_frame, ctx->gpr[3], s ? clean : "(null)");
+                        printf("[PageMode] f=%d   script text ptr=0x%08X len=%u head='%s'\n",
+                               g_runner_current_frame, textp, textn, tb ? head : "(unmapped)");
                         fflush(stdout); }
                 } else if (mode != s_last) {
                     s_last = mode;

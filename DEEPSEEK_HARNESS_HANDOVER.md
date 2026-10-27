@@ -9891,3 +9891,44 @@ data is wrong. That distinguishes a *load* defect from a *parse* defect, which i
 **Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
 `src/`; `TLS_PAGE_MODE_PROBE` is default-off.
+
+### AN. Load vs parse: the text IS there - but the reader's cursor is already at EOF
+
+The `TLS_PAGE_MODE_PROBE` now also prints the parse input (`obj = r1+0xb4`, text at `*(obj+4)`, cursor at
+`*(obj+0xC)`), and at the first page-start call:
+
+```
+[PageMode] f=3023  script text ptr=0x9028C440 len=350 cursor=350 head='#...{....,,,,,,,,,,,,,,,..#Page,d2a,SubPage,SubPageFrame,Motion'
+[PageMode] f=3023  page-name string = ''
+[PageMode] f=3023  fn_80684600 returned 0 (layout branch SKIPPED)
+```
+
+So it is **neither a load defect nor a quoting defect**: the page table is loaded (350 bytes, and its header reads
+`#Page,d2a,SubPage,SubPageFrame,Motion...`) but the reader's **cursor is already at 350 - the end** - when
+`fn_805BB658` first calls it. `fn_8005B3CC(obj)` is a *cursor iterator* (`*(obj+0xC)` is the offset, not a length),
+so an exhausted cursor yields an empty token, `atoi("") = 0`, and the mode branch is skipped.
+
+And the iterator is set up once, from a **global**:
+
+```
+lwz r12,0x8(r12); mtctr r12; bctrl      ; (a virtual call just before)
+lis r4, lbl_807772B0 ; stw r4,0xb4(r1)  ; struct type
+la  r4, lbl_8087D708                    ; GLOBAL page-table object
+bl  fn_8005B6E8                         ; (struct, global) -> bind the iterator
+lbl_..._00000E18:                       ; loop head
+addi r3,r1,0xb4 ; bl fn_8005B3CC        ; next token
+bl fn_80684600                          ; atoi
+subi r0,r3,1 ; cmplwi r0,3 ; bgt skip   ; modes 1..4
+```
+
+**So the page-start loop reads a table that is already exhausted**, most likely because the same global was walked
+during scene setup (frames 1650-2020, where the camp UI built and then hid the page layouts) and never rewound.
+
+**Next step, precise**: store-watch `lbl_8087D708` and its cursor field across frames 1600-3100. Two reads of the
+global's layout (bind `fn_8005B6E8` copies the pointer and offset out of it) tell which field is the cursor; the
+writes to that field name the code that consumed it, and the question becomes "should the page start rewind it, or
+should the consumer have left it alone". That is a code fix in the page-table layer, not a rendering one.
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
+`src/`; `TLS_PAGE_MODE_PROBE` is default-off and now prints the parse input too.
