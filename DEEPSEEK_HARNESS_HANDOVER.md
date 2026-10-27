@@ -8264,11 +8264,21 @@ title region). So one of these is true, and the next session should settle it wi
 2. `prev`/`KONST` are not what the expression assumes at stage 1;
 3. the clamp in our evaluation differs from GX's.
 
-The cheapest decisive test is (1): print which pixel shader object is bound per batch at the page frame
-(`gx_ps_tev` vs `ps`), which needs no TEV arithmetic at all.
+**Answered: not (1), and not the stage count.** Added `TLS_TEV_PATH=<batch>[,<frame>]` (prints which pixel
+shader a draw uses) and ran it with `TLS_TEV=1`:
 
-**Why this matters more than it looks**: if b30 is drawn through the fallback, then *every* multi-stage batch on
-this page is being drawn single-stage, and the same one-line check would explain the crest (item 3) too.
+```
+[TevPath] frame=4002 b30 shader=TEV
+```
+
+so the TEV shader IS in force for b30, and `c->num_stages = st->num_stages ? st->num_stages : 1`
+(`gfx_d3d11.c:48`) uploads **2** for it, not 1. Both textures are bound, both texcoords are supplied, the stage
+count is right, and the shader is the right one - and the wipe still renders opaque. **The defect is inside the
+stage-1 alpha evaluation itself** (arguments, `prev`/KONST values, or clamp). The next step is therefore a unit
+test of the combiner functions in `tools/compile_shaders.py`, not more runtime probing.
+
+**Why this matters more than it looks**: the same arithmetic serves *every* multi-stage batch, so whatever is
+wrong there also affects the crest (item 3) and the cave's six-stage batches.
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`.
