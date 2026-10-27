@@ -9040,3 +9040,40 @@ is out of scope per the standing rule).
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_SUBMIT_PROBE` is default-off.
+
+### X. The missing stimulus has a concrete candidate: completions are delivered inline, not through the guest's queue
+
+W hinted that the worker's loop needs an external stimulus. The obvious candidate is the DVD/streaming completion
+path, so it was measured: `TLS_DVD_TRACE=1` over 1 500 frames reports **only four** completion callbacks in the
+whole run:
+
+```
+[TLS DVD] callback #54 -> 80046398 fileInfo=80E9DC54 res=64
+[TLS DVD] callback #55 -> 80046398 fileInfo=80E9DC54 res=1998304
+[TLS DVD] callback #64 -> 80047DBC fileInfo=80E9DC9C res=135232
+[TLS DVD] callback #67 -> 80047DBC fileInfo=80E9DC9C res=1371712
+```
+
+Yet the streaming loader demonstrably reads **238** files, all full length (they are logged by the
+`[TLS 8046BBF0]` probe). So the two paths are separated: the loader replacement fills guest buffers **inline**,
+and the guest's own *asynchronous* completion route (`TLS_DVD_IDLE_PC` / `pending.callback`, the one that would
+feed a queue) delivers almost nothing.
+
+**That is consistent with everything measured since U**: the worker at `0x8071DBE0` submits 20 operations and then
+parks in `0x8071D950` waiting for a completion that our inline read never posts back through the guest's queue. On
+hardware that completion arrives as an interrupt-driven callback; here it is consumed synchronously and the worker
+is left waiting for a signal that never materialises.
+
+**The fix this implies** (not attempted - it is an architectural change to the I/O path, not a probe): after a
+synchronous fill, deliver the completion through the guest's own async route - post the callback the guest
+registered (`pending.callback` with the `TLS_DVD_IDLE_PC` return convention already implemented for the deferred
+path in `recomp/replacements.c`) - so the worker's queue receives the stimulus it waits for. The machinery exists;
+what is missing is that the *synchronous* path does not use it.
+
+**Why this is where the session stops**: implementing that means changing how every streaming read completes,
+which affects the whole engine (title, menu, Chapter 1). It has to be done with the same before/after discipline as
+the page fix (invariant hash recorded, save assertions checked, both screens compared), i.e. as its own unit of
+work with its own budget - not as the tail end of a very long one.
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_DVD_TRACE` is default-off.
