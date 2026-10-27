@@ -10084,3 +10084,25 @@ from guest memory.
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
 `src/`; only default-off probes were added, and the on-page runs themselves (`-PressShift 27 -RequireGame
 1647`) are the ones recorded above.
+
+**G. What the factory returns (added at the end of AP, one run).** `TLS_PAGE_ROW_PROBE` at the two blocks around
+the slot store gives the created layout's own state:
+
+```
+[PageRowBuild] f=3648 name ... 'tt001_10.d2a'  slot=0x81862360 modeIdx=1
+[PageRowBuild] f=3648 pc=0x805BB778 layout=0x81861F60 slot478=0x00000000 fc=0x74000000 vptr=0x80782C08 cnt48=0 arr48=0x00000000
+[PageRowBuild] f=3648   children cnt=0 arr=0x00000000 content0x81359B80=no
+[PageRowBuild] f=3648 name ... 'tt001_mv01.d2a' slot=0x818623AC modeIdx=2
+[PageRowBuild] f=3648 pc=0x805BB778 layout=0x8186CB60 slot478=0x00000000 fc=0x74000000 vptr=0x80782C08 cnt48=0 arr48=0x00000000
+```
+
+So a freshly created page layout is `vptr=0x80782C08`, `+0xFC = 0x74000000` (**bit 30 already set** - it is
+visible from birth) with an **empty child container** (`cnt=0` at `+0x4C`, array `0` at `+0x54`). Two things
+follow, both worth knowing before the next probe round:
+
+* `0x805BB778` runs **before** the `stw r3,0x478(r26)` that follows it, so a probe there must read `gpr[3]`,
+  not the slot - the slot still reads 0 (this cost one run);
+* `0x81359B80` is **not** a child of the page layout at creation, and the layout is not hidden, so the page's
+  missing elements are not explained by the fresh layout's own subtree. Whatever attaches the content to the
+  page happens after this point (or the content node belongs to a different parent entirely), which is what
+  the frame-3700 tree walk in AP's "next step" has to establish.

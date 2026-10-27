@@ -8618,7 +8618,8 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
          * name is still a plain pointer. Printing it here, together with the row slot and the
          * layout the factory returned at 0x805BB778, is the whole per-mode build in one line. */
         case 0x805BB768:
-        case 0x805BB778: {
+        case 0x805BB778:
+        case 0x805BB780: {
             static int s_probe = -1;
             static u32 s_n = 0;
             if (s_probe < 0) s_probe = getenv("TLS_PAGE_ROW_PROBE") ? 1 : 0;
@@ -8634,11 +8635,28 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                                mem_read32(ctx, ctx->gpr[3]), (const char*)resolve_guest_pointer(ctx, ctx->gpr[3]),
                                slot, slot && ctx->gpr[15] ? (s32)((slot - ctx->gpr[15]) / 0x4C) + 1 : 0);
                     } else {
-                        u32 layout = slot ? mem_read32(ctx, slot + 0x478) : 0;
-                        printf("[PageRowBuild] f=%d factory returned 0x%08X slot478=0x%08X fc=0x%08X vptr=0x%08X\n",
-                               g_runner_current_frame, ctx->gpr[3], layout,
+                        /* 0x805BB778 runs before the `stw r3,0x478(r26)` that follows it, so the
+                         * slot still reads 0 there; 0x805BB780 runs after the store and is the one
+                         * that sees the real layout. Use gpr[3] (the factory's return) for the
+                         * fields either way. */
+                        u32 layout = ctx->gpr[3];
+                        u32 cnt = layout ? mem_read32(ctx, layout + 0x4C) : 0;
+                        u32 arr = layout ? mem_read32(ctx, layout + 0x54) : 0;
+                        printf("[PageRowBuild] f=%d pc=0x%08X layout=0x%08X slot478=0x%08X fc=0x%08X vptr=0x%08X cnt48=%u arr48=0x%08X\n",
+                               g_runner_current_frame, address, layout,
+                               slot ? mem_read32(ctx, slot + 0x478) : 0,
                                layout ? mem_read32(ctx, layout + 0xFC) : 0,
-                               layout ? mem_read32(ctx, layout) : 0);
+                               layout ? mem_read32(ctx, layout) : 0, cnt, arr);
+                        /* layout+0x48 is a container object: +4 is its count and +0xC its array
+                         * (the same shape the draw probe reads). Scan it for the content node. */
+                        if (layout) {
+                            u32 found = 0, i = 0;
+                            for (; i < cnt && i < 24u; i++) {
+                                if (mem_read32(ctx, arr + i * 4u) == 0x81359B80u) { found = 1; break; }
+                            }
+                            printf("[PageRowBuild] f=%d   children cnt=%u arr=0x%08X content0x81359B80=%s\n",
+                                   g_runner_current_frame, cnt, arr, found ? "YES" : "no");
+                        }
                     }
                     fflush(stdout);
                 }
