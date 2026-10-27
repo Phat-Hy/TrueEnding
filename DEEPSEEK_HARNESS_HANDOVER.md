@@ -8242,3 +8242,33 @@ two-texture path itself does not destabilise the run at this frame.
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`; the per-stage dump is inside `TLS_TEV_DUMP_BATCH` and inert by
 default.
+
+### G. b30's stage-1 alpha, decoded both ways - and a prediction the last test contradicts
+
+The stage-1 alpha word is `alp=0x0008E274`. Decoding it against the two candidate field layouts:
+
+```
+documented 9/6/3/0 : a=A0     b=A0      c=KONST  d=TEXA   bias=2  scale=0
+shipped   13/10/7/4: a=ZERO   b=APREV   c=TEXA   d=ZERO   bias=0  scale=0
+```
+
+Under the **shipped** layout the stage-1 alpha evaluates to `(ZERO - APREV) * TEXA + ZERO`, i.e. `-APREV*TEXA`,
+which clamps to **0** for any previous alpha > 0 - a fully transparent wipe, which is exactly the behaviour that
+would reveal the page's title text.
+
+**But `TLS_TEV=1` does not reveal it** (measured: frame 3960 reached, screenshot written, 0 dark pixels in the
+title region). So one of these is true, and the next session should settle it with one line of instrumentation:
+
+1. the TEV pixel shader is not actually the one bound for b30 (the draw may take the `PSAlpha` fallback - which
+   would explain everything, since that path draws the sheet at texture alpha 1);
+2. `prev`/`KONST` are not what the expression assumes at stage 1;
+3. the clamp in our evaluation differs from GX's.
+
+The cheapest decisive test is (1): print which pixel shader object is bound per batch at the page frame
+(`gx_ps_tev` vs `ps`), which needs no TEV arithmetic at all.
+
+**Why this matters more than it looks**: if b30 is drawn through the fallback, then *every* multi-stage batch on
+this page is being drawn single-stage, and the same one-line check would explain the crest (item 3) too.
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`.
