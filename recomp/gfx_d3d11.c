@@ -2734,13 +2734,13 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                                     outside++;
                             }
                             printf("  b%u vtx=%u tex=%d addr=0x%08X %ux%u fmt=%u tlut=0x%08X "
-                                   "blend=%d src=%u dst=%u sub=%d persp=%d zwrite=%d ztest=%d "
+                                   "blend=%d src=%u dst=%u sub=%d persp=%d pnm=%u zwrite=%d ztest=%d "
                                    "ndc=[%.2f..%.2f, %.2f..%.2f] z=[%.4f..%.4f] "
                                    "wNDC=[x %.2f..%.2f y %.2f..%.2f z %.2f..%.2f] outside=%u/%u\n",
                                    b, bd->vertex_count, bd->has_texture, bd->tex.guest_addr,
                                    bd->tex.width, bd->tex.height, bd->tex.format, bd->tex.tlut_addr,
                                    bd->blend_enable, bd->src_factor, bd->dst_factor, bd->subtract,
-                                   bd->is_perspective, bd->depth_write_enable, bd->depth_test_enable,
+                                   bd->is_perspective, bd->pnm_idx, bd->depth_write_enable, bd->depth_test_enable,
                                    minx, maxx, miny, maxy, minz, maxz,
                                    nminx, nmaxx, nminy, nmaxy, nminz, nmaxz, outside, bd->vertex_count);
                             shown++;

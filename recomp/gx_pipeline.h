@@ -258,6 +258,10 @@ typedef struct {
      * i >= numTexGens. */
     uint32_t xf_ctrl0;
     uint8_t xf_num_texgens;
+    /* The XF position-matrix index in force when this batch was opened. Vertices are
+     * transformed at emit time with whatever PN matrix was current, so this is the only
+     * record of which matrix produced this batch's positions (handover 5c.46 J). */
+    uint32_t pnm_idx;
 } GxDrawBatch;
 
 /* The TEV state snapshot attached to a batch (NULL when the index is out of range). */

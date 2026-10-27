@@ -1032,6 +1032,14 @@ static inline GxVertex transform_vertex(const GxVertex* in) {
                 s_n++;
                 printf("[XfClip] pnm=%u persp=%d eye=(%.3f %.3f %.3f) ndc=(%.1f %.1f %.1f) w=%.4f\n",
                        s_current_pnm_idx, (int)s_proj_is_perspective, px, py, pz, nx, ny, nz, w);
+                printf("         mtx[%u] row0=(%.3f %.3f %.3f %.3f) row1=(%.3f %.3f %.3f %.3f) row2=(%.3f %.3f %.3f %.3f)\n",
+                       s_current_pnm_idx,
+                       s_pos_matrices[s_current_pnm_idx][0][0], s_pos_matrices[s_current_pnm_idx][0][1],
+                       s_pos_matrices[s_current_pnm_idx][0][2], s_pos_matrices[s_current_pnm_idx][0][3],
+                       s_pos_matrices[s_current_pnm_idx][1][0], s_pos_matrices[s_current_pnm_idx][1][1],
+                       s_pos_matrices[s_current_pnm_idx][1][2], s_pos_matrices[s_current_pnm_idx][1][3],
+                       s_pos_matrices[s_current_pnm_idx][2][0], s_pos_matrices[s_current_pnm_idx][2][1],
+                       s_pos_matrices[s_current_pnm_idx][2][2], s_pos_matrices[s_current_pnm_idx][2][3]);
                 fflush(stdout);
             }
         }
@@ -1323,6 +1331,7 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
             b->dst_factor = s_dst_factor;
             b->subtract = s_blend_subtract;
             b->is_perspective = s_proj_is_perspective;
+    b->pnm_idx = (uint32_t)s_current_pnm_idx;
             b->depth_write_enable = s_depth_write_enable;
             b->depth_test_enable = s_depth_test_enable;
             b->alpha_comp0 = s_alpha_comp0;
@@ -2092,6 +2101,19 @@ static void gx_pipeline_process_indexed_load(uint8_t cmd, uint32_t val) {
                 for (int r = 0; r < 3; r++) {
                     for (int c = 0; c < 4; c++) {
                         mtx[r][c] = read_f32_be(&src[(r * 4 + c) * 4]);
+                    }
+                }
+                {
+                    static int s_mtx_log = -1, s_mtx_n = 0;
+                    if (s_mtx_log < 0) s_mtx_log = getenv("TLS_XF_MTX_LOG") ? 1 : 0;
+                    if (s_mtx_log && s_mtx_n < 40) {
+                        s_mtx_n++;
+                        printf("[XfMtx] id=%u valid=%d size=%u [%.3f %.3f %.3f %.3f][%.3f %.3f %.3f %.3f][%.3f %.3f %.3f %.3f]\n",
+                               mtx_id, (int)is_valid_matrix(mtx), size,
+                               mtx[0][0], mtx[0][1], mtx[0][2], mtx[0][3],
+                               mtx[1][0], mtx[1][1], mtx[1][2], mtx[1][3],
+                               mtx[2][0], mtx[2][1], mtx[2][2], mtx[2][3]);
+                        fflush(stdout);
                     }
                 }
                 if (is_valid_matrix(mtx)) {
