@@ -9377,6 +9377,13 @@ and, inside them, the per-pane call - log `r3` (the pane address) at the page ca
 those addresses against the 47 panes above. Panes that never appear are the skipped elements; a pane positioned
 where the crest belongs names the missing draw without touching the shader.
 
+**Caution before that probe is written**: the container's vptr is `0x80782A80` (all seven tasks share it), but in
+`build/SLSEXJ/main.elf` its slots `+0x0C`/`+0x10` hold `0x80782A70`/`0x8074C788` - **data addresses, not code**
+(`fn_801F4514` calls them with `bctrl`). The same is true of the pane type tables (`0x80782B68` etc. put their code
+pointers at `+0x18`/`+0x1C`). So do **not** trust the ELF for these tables: dump the live words at
+`vptr+0x00..+0x3F` from the page capture first (one extra line in `[PageTree]`), then probe the addresses that are
+actually in `0x80000000..0x8071B2F8` (the text range). Reading the ELF here would send the probe into data.
+
 **Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
 `src/`; the added `[PageTree]` hexdump is inert unless `TLS_PAGE_CAPTURE` fires.
