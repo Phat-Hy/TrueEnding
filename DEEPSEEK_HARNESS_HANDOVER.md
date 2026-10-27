@@ -8990,3 +8990,53 @@ same path the guest expects rather than inline.
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`.
+
+### W. Who asks for the work: the worker asks for itself - and parks inside its own loop
+
+`0x8071D6E0` has no direct xref anywhere in the image (not in code, not as a data word), so a probe on its entry
+supplies the caller instead:
+
+```
+[Submit] frame=376 mgr=0x8087D5E4 lr=0x8071DC14      (20 submits, all at frame 376)
+```
+
+and `0x8071DC14` is inside the worker's own entry function `0x8071DBE0`:
+
+```
+8071DBF4: b   0x8071DC14
+8071DBF8: bl  0x8071D260         ; prepare
+8071DBFC: bl  0x8071D950         ; WAIT (this is the 0x8071D984 sleep site's caller)
+8071DC00: lbz r0, 796(r31)       ; +0x31C: leave-the-loop flag
+8071DC04: cmpwi r0, 0
+8071DC08: bc  4,2, 0x8071DC20    ; != 0 -> exit the loop
+8071DC0C: bl  0x8071D260
+8071DC10: bl  0x8071D6E0         ; submit (lr = 0x8071DC14)
+```
+
+So **the worker submits its own work items** - no external asker exists at all. It prepares, waits, checks a
+flag, and submits.
+
+**And it does not exit**: the flag it tests (`r31+0x31C`, with `r31` = the thread param `0x808638F0`, i.e.
+`0x80863C0C`) is written **only at frame 0, with value 0** (10 writes, all frame 0), so the loop never takes its
+exit branch. The worker therefore stops submitting because it is **parked inside `0x8071D950`** - the very sleep
+that U's timeline shows being woken at frame 376 and re-entered immediately.
+
+**So the deadlock is closed, in the emulation's terms:**
+
+```
+worker loop: prepare -> wait -> check flag (always 0) -> submit x20 (frame 376) -> wait -> parks
+loader:      waits on 0x8087FB98, which the worker would set while processing
+nobody:      produces more work, because the only producer is the worker itself
+```
+
+On hardware the same loop is driven by *external* stimuli (streaming completions delivered asynchronously), which
+is exactly why the guest's own producer being the worker is not a design flaw - and why our run, with no such
+stimulus arriving after frame 376, deadlocks.
+
+**This is the end of what static analysis and this runner's own instrumentation can establish.** Going further
+needs a reference execution of the same frames from Dolphin (to see what stimulus arrives at ~frame 376 on
+hardware) - which this project does not have and which cannot be captured by an agent (driving Dolphin's window
+is out of scope per the standing rule).
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_SUBMIT_PROBE` is default-off.

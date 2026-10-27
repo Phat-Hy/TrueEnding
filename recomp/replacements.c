@@ -7733,6 +7733,22 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0;
         }
 
+        /* 0x8071D6E0 is the streaming manager's submit: allocate an operation, publish it as
+         * manager+0x24, invoke its virtual start (5c.46 V). It has no direct xref, so the
+         * caller is found here instead: print lr, i.e. who asks for the operation. */
+        case 0x8071D6E0: {
+            static int s_probe = -1, s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_SUBMIT_PROBE") ? 1 : 0;
+            if (s_probe && s_n < 24) {
+                extern int g_runner_current_frame;
+                s_n++;
+                printf("[Submit] frame=%d mgr=0x%08X lr=0x%08X\n",
+                       g_runner_current_frame, ctx->gpr[3], ctx->lr);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
         case 0x80534C58: {
             static int s_probe = -1;
             if (s_probe < 0) s_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;
