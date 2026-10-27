@@ -6,8 +6,18 @@
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
 creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.46 AA**; §5c.45 and everything before it is history, and several of its conclusions are
+state is **§5c.46 AB**; §5c.45 and everything before it is history, and several of its conclusions are
 corrected below.
+
+> **THE PAGE IS REACHABLE AGAIN, BUT ONLY THROUGH `TLS_PAGE_CAPTURE` (§5c.46 AB).** The title hands over at
+> frame 1647 now, so the four tutorial presses need `-PressShift 27`; with it the page half is captured at guest
+> frame **3708 (35 batches / 10 407 vtx)**. Frame 4000 itself lands on the cave half of the page/gameplay pair,
+> which is why `TLS_SHOT_FRAMES=4000` kept showing the cave. **Do not judge the page by a fixed frame any more.**
+> The layout system behind the page is measured too: seven `LayoutTask`s draw, **47 panes between them**, and only
+> ~11 2D quads are submitted - so **most panes draw nothing**, which is the state the crest and body text would be
+> in. The next probe is "which panes draw": see AB for the container slot and the set-difference recipe. Also
+> recorded there: none of the 405 Dolphin-dumped textures is the crest as standalone art, so do not go looking for
+> it in `%APPDATA%\Dolphin Emulator\Dump\Textures\SLSEXJ`.
 
 > **CAPTURE THE PAGE BY CONTENT, NOT BY FRAME (§5c.46 AA).** The page half is now capturable reliably:
 > `$env:TLS_PAGE_CAPTURE='tex:921DEA60,3000'` takes one screenshot, a full per-batch dump and a `[PageTree]`
@@ -9317,3 +9327,56 @@ Alternatively, retune the four press frames for a 1647 hand-over (they only need
 the 27-frame offset (static cave geometry) while the page's presses are not. 0 changes to `src/`; all new knobs
 default-off (`TLS_PAGE_CAPTURE`, `TLS_BATCH_DUMP_GUEST`); the default path is untouched (every new branch is
 env-gated, and the only always-on addition is reading `g_tls_page_capture_frame`, which stays -1).
+
+### AB. The page is reachable in the 1647 timeline - and the layout tree behind its quads is now readable
+
+AA left the page unreachable at frame 4000. Two things fix that, and the layout system's structure fell out of the
+same run.
+
+**The page IS reachable in the 1647 timeline; only the frame-4000 screenshot is not.** With `-PressShift 27`
+(presses at 3647/3727/3827/3927) the run hands over at 1647 and the page half is present - the content-keyed
+capture found it at guest frame **3708 (35 batches / 10 407 vtx)**, and at 3960 the frame line shows
+`GX: 9786 vtx (37 batches)`. Frame 4000 itself lands on the cave half of the pair, which is why the screenshot kept
+showing the cave. **Use `TLS_PAGE_CAPTURE`, not `TLS_SHOT_FRAMES=4000`, for this page from now on.**
+
+**The layout system, measured.** At the page frame exactly **seven LayoutTasks draw, with 47 panes between them**,
+while the frame submits only ~11 2D quads:
+
+```
+obj 0x81359B80  4 panes   fc=0x2C000000
+obj 0x81133660  6 panes   fc="l922"        <- +0xFC holds TEXT (a 4-char window of the task's name/label)
+obj 0x811337A0  6 panes   fc="o060"
+obj 0x811338C0  6 panes   fc="nO_E"
+obj 0x81133A00 11 panes   fc=0xEC2C0D0A
+obj 0x81135660  6 panes   fc=0xEC0D0A56
+obj 0x81861F60  8 panes   fc="l000"
+```
+
+Each pane is a small object whose `+0x00` is a type table (`0x80782B68`, `0x80782D80`, `0x80782BD0`, `0x80782AA0`,
+`0x80782DB8`), `+0x08` packs `(type << 16) | id` (`0x00050001` = type 5, id 1; `0x00010003` = type 1, id 3;
+`0x00030055` = type 3, id 0x55), `+0x18` is a layer/depth float (40 / 6 / 15 / 30), `+0x48`/`+0x4C` are a size (two
+panes measure `320 x 224` - the full 2D canvas; 630x60 and 0.5x0.18 look like scale pairs), and `+0x58` is a depth
+bias (-10, -12, -100). The dump form is `[PageTree]` in `recomp/replacements.c` (`TLS_PAGE_CAPTURE` plus
+`+0x00..+0x7F` per pane, four words per line), so the tree can be re-read on any later build.
+
+**The load-bearing observation**: 47 panes are in the tree and only ~11 quads are submitted, so **most panes draw
+nothing** - which is exactly the state the crest and body text would be in if they are panes whose draw is skipped
+(null image handle / zero alpha) rather than panes that do not exist. That is the discriminator to settle next, and
+it is now one probe away.
+
+**A reference-side negative worth not repeating**: none of the **405** textures Dolphin dumped
+(`%APPDATA%\Dolphin Emulator\Dump\Textures\SLSEXJ`) is the crowned crest or the body text as standalone art. The
+dump is menu/UI material - fonts, button plates, glows, flourish sprite sheets, two 1024x512 instruction plates with
+a hand diagram and blue text, and cave scenery. So the crest is not a dumped standalone texture: it is either a
+sub-rect of a bigger plate or geometry, and the Dolphin dump cannot name it. (The 256x256 flourish sheet
+`tex1_256x256_m_00adbd8037b89e0b_14` and the small emblems near it are menu ornaments, not the page's crest.)
+
+**Next step, precise**: log *which panes draw*. The container's draw is called from `fn_801F4514`
+(`lwz r12,0x48(r30); lwz r12,0xC(r12); bctrl`, then the same with `+0x10`), so probe the container's slot functions
+and, inside them, the per-pane call - log `r3` (the pane address) at the page capture frame, then set-difference
+those addresses against the 47 panes above. Panes that never appear are the skipped elements; a pane positioned
+where the crest belongs names the missing draw without touching the shader.
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344; 0 changes to
+`src/`; the added `[PageTree]` hexdump is inert unless `TLS_PAGE_CAPTURE` fires.

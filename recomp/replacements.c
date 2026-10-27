@@ -8269,6 +8269,18 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                                    ch ? mem_read32(ctx, ch + 0x1C) : 0,
                                    ch ? mem_read32(ctx, ch + 0x184) : 0,
                                    ch ? mem_read32(ctx, ch + 0x20) : 0);
+                            /* Raw head of the pane, so the class layout can be read off the
+                             * object instead of guessed from one field at a time. Four words
+                             * per line, +0x00..+0x7F. */
+                            if (ch) {
+                                for (u32 off = 0; off < 0x80; off += 16) {
+                                    printf("[PageTree]      +%02X %08X %08X %08X %08X\n", off,
+                                           mem_read32(ctx, ch + off + 0),
+                                           mem_read32(ctx, ch + off + 4),
+                                           mem_read32(ctx, ch + off + 8),
+                                           mem_read32(ctx, ch + off + 12));
+                                }
+                            }
                         }
                     }
                     fflush(stdout);
