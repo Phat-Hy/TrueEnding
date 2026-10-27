@@ -6,7 +6,7 @@
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
 creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.46 R**; §5c.45 and everything before it is history, and several of its conclusions are
+state is **§5c.46 V**; §5c.45 and everything before it is history, and several of its conclusions are
 corrected below.
 
 > **THE PAGE'S WHITE FIELD IS FIXED (§5c.46 D).** The tutorial page at frame 4000 now renders the reference's
@@ -32,6 +32,13 @@ corrected below.
 > 6. **nothing writes that flag** - one store in the whole run (a boot `memset` of 0); all 16 direct
 >    small-data accesses in the 459 chunks are `lwz` reads; and the ELF confirms it is BSS, i.e. zero even on
 >    hardware (P);
+> 6b. **the pipeline that would set it stops producing work at frame 376**: the worker manager's pending pointer
+>    (`0x8087D608`) is written a handful of times at frame 376 (`0x907C5378`, `0x907C59F4`) and **never again** -
+>    with the store ring cleared at frame 400 the count is `in-range=0` for 1 100 frames. The wakeup machinery is
+>    fine (the producer's `OSWakeupThread` at `0x8071D444` does find and release the worker at frame 376); there is
+>    simply nothing left to hand it. A submit is `allocate (0x8071D470) -> publish at manager+0x24 -> invoke
+>    virtual start`, so the missing piece is *who asks* (V).
+>
 > 7. the two worker threads that plausibly would set it (`OSCreateThread` entries `0x8071DBE0` and `0x80718C40`,
 >    created at frame 170) are **scheduled around frame 170 and then never again** - corrected in R: the guest
 >    scheduler itself is alive and switches **every frame** (`__OSCurrentThread` alternates main thread and zero;
