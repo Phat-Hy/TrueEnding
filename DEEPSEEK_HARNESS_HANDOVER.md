@@ -8414,3 +8414,53 @@ bug is in which matrix is loaded for that geometry; if they differ in index, the
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_XF_CLIP_PROBE` is default-off.
+
+### K. The page half's 37 batches, mapped to the reference's five elements
+
+Full inventory at the page frame (`TLS_BATCH_DUMP=4000`, with the new `pnm=` and `outside=` fields). Every
+batch on the page half, in draw order, with what it is and why it does or does not appear:
+
+| batch | vtx | texture | fmt | blend | persp | pnm | outside | reading |
+|---|---|---|---|---|---|---|---|---|
+| **b0** | 1044 | `0x92AEAEC0` 256x256 | 14 | 0 | 1 | 1 | 0 | **illustration** - inside the volume, texture empty |
+| **b1** | 3990 | `0x92AEAEC0` 256x256 | 14 | 0 | 1 | 5 | 0 | **illustration** - same |
+| **b2** | 1782 | `0x92C05720` 256x256 | 14 | 0 | 1 | 5 | 0 | **illustration** - file texture, zeroed at 1905 |
+| **b3** | 519 | `0x92C0FF40` 128x128 | 14 | 0 | 1 | 9 | 0 | **illustration** |
+| b4 | 60 | `0x92C0FF40` | 14 | 0 | 1 | 6 | 0 | illustration detail |
+| b5 | 216 | `0x92C1D8A0` 128x256 | 14 | 0 | 1 | 2 | 0 | illustration detail |
+| b6 | 114 | `0x90309D80` 256x256 | 14 | 1 | 1 | 0 | 95/114 | 3D cluster, **clipped**, world matrix |
+| b7 | 216 | `0x9050E260` 128x128 | 1 | 1 | 1 | 0 | 216/216 | 3D cluster, **fully clipped** |
+| b8 | 198 | `0x9025FCE0` 16x16 | 14 | 1 | 1 | 0 | 198/198 | 3D cluster, **fully clipped** |
+| b9 | 366 | `0x91F3FFE0` 1024x512 | 14 | 1 | 1 | 0 | 273/366 | 3D cluster (sky), **clipped** |
+| b10 | 216 | `0x920CA4A0` 64x64 | 5 | 1 | 1 | 0 | 0/216 | 3D cluster, **inside** |
+| **b11** | 606 | `0x91AAC860` 128x128 | 14 | 1 | 1 | 0 | 606/606 | **the fan texture**, **fully clipped** |
+| b12-b24 | 6-18 | `0x9038D1C0`/`0x90395DC0`/`0x905C3000` ... | 6/1 | 0/1 | 0 | 0 | 0 | the composite/copy quads |
+| b25 | 6 | `0x81A1A1A0` 270x836 | 0 | 1 | 0 | 0 | 6/6 | clipped UI quad |
+| **b26** | 6 | `0x921DEA60` 512x512 | 14 | 1 | 0 | 0 | 0 | **parchment sheet - renders** |
+| b27 | 6 | `0x90D19B80` 64x64 | 14 | 1 | 0 | 0 | 0 | small overlay |
+| **b28** | 114 | `0x90703AA0` 512x256 | 0 | 1 | 0 | 0 | 0 | **the title text (19 glyphs) - drawn, covered by b30** |
+| b29 | 6 | `0x80000000` 1024x1024 | 1 | 0 | 0 | 0 | 0 | no effect on the page (measured in 5c.46 E) |
+| **b30** | 6 | `0x921DEA60` 512x512 | 14 | 1 | 0 | 0 | 0 | **second sheet draw, 2 TEV stages - covers b28** |
+| b31-b36 | 6-120 | `0x90D19B80`, `0x904E5EE0` 4x4, `0x9076E5E0` | 14/2 | 1 | 0 | 0 | 0 | SKIP button + labels |
+
+**Reading of that table against the reference's five elements:**
+
+1. **parchment + border** - b26 (+b30), renders correctly. Done.
+2. **illustration** - b0-b5, correctly inside the view volume, **invisible because their textures are empty**
+   (5c.45 T/J). This is the single biggest missing element and it is a *texture* problem, not a transform one.
+3. **fan burst** - the only batch that samples the fan texture is **b11**, and it is **606/606 clipped** while
+   every other 3D batch that shares its profile (pnm 0, blend 1, persp 1) is likewise clipped except b10. So
+   either the fan is clipped away with the rest of that cluster (a transform problem), or the fan the reference
+   shows is inside the *illustration texture itself* and never a separate batch.
+4. **crest** - no batch here samples `0x921FEAE0` (5c.43's crest address) any more; b27/b31/b32/b35/b36 use
+   `0x90D19B80` 64x64. Arena reuse has moved it, so the crest's batch must be re-identified from the texture dump
+   rather than from an old address.
+5. **body text** - not identifiable in this list. b28's 114 vertices are exactly the 19 glyphs of the title, and
+   no other batch has the vertex count of the two body-text lines.
+
+**So of the five, exactly one (the parchment) is solved**, the illustration is blocked on its texture, and the
+fan/crest/body text need batch identification from the texture side - which is why the next step is a texture
+dump at the page frame rather than more transform probing.
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`.
