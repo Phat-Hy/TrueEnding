@@ -7427,6 +7427,47 @@ knows each store's `cia` and EA), *placed so it cannot disturb the interpreter* 
 `mem_read8` corrupted the heap (E1), so it must live in the generated store path or in a per-store helper, not
 in a hot inline function.
 
+#### H. Instruction-granularity store watch: built, verified inert, and it says the writer is HOST code
+
+Built exactly as G asked for. `tools/DolRecomp/src/backend/emitter.c` now emits, beside both store forms,
+
+```c
+tls_store_note(0x800D6C2Cu, ea, (u32)ctx->gpr[0]);      /* the store's own guest cia */
+```
+
+and `tools/DolRecomp/src/cpu/cpu.c` implements it as a record-only helper: when armed
+(`TLS_STORE_WATCH=lo,hi`, optional `TLS_STORE_WATCH_FRAME=n` to clear the ring at a frame) it pushes
+`(cia, ea, value)` into a 64-entry ring; the runner prints the ring at end of run. Nothing prints on the hot
+path (E1's lesson).
+
+Rebuild chain, for the next session: `ninja -C tools/DolRecomp/build dolrecomp.exe` →
+copy to `tools/dolrecomp.exe` → `python tools/recomp_harness.py lift` → `build-runner`. **The lift uses the
+prebuilt `tools/dolrecomp.exe`, not `tools/DolRecomp/build/dolrecomp.exe`**; forgetting the copy silently
+re-lifts with the old emitter (measured: the first lift after the emitter change contained no
+`tls_store_note`).
+
+**Verified inert**: after the re-lift, `tools/invariant.ps1` reproduces frame 3500 =
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` exactly, with the save assertions - so 459
+regenerated chunks with the hook behave identically to the old ones when the watch is unarmed.
+
+**What it found - the negative that matters:**
+
+```
+TLS_STORE_WATCH=0x90380000,0x903D0000 TLS_STORE_WATCH_FRAME=1885  ->  armed, 0 stores recorded
+TLS_STORE_WATCH=0x903CD000,0x903CE000 TLS_STORE_WATCH_FRAME=150   ->  armed, 0 stores recorded
+```
+
+So **no lifted store writes that arena at all**. Combined with G (the block-level attribution was stale) and
+with the address not appearing in any EFB-chain log line, the writer of `0x903CD1C0` is **host-side code** -
+either an HLE replacement in `recomp/replacements.c` that writes guest memory, or a renderer path that is not
+this frame's `GfxCopyTex`. That is a much smaller search space than guest code: grep `recomp/` for the writes
+into `0x903xxxxx` and check which of them can reach a 256x256 staging slot with packed 16-bit values
+(`FF00FF00`, `FF04FF10`).
+
+**Verification**: build green; invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`
+on the re-lifted chunks; save 1 348 992 / 29 344; 0 changes to `src/`; `docs/dolrecomp/cpu-core.patch`
+regenerated (9 670 bytes, now including the store hook).
+
 **Verification**: `TLS_MEM_DUMP`'s optional frame field added in `recomp/host_runner.c` only; build green,
 invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save
 1 348 992 / 29 344, 0 changes to `src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,

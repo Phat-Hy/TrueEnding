@@ -1263,8 +1263,55 @@ int main(int argc, char** argv) {
             if (s_dump_at == -2) s_dump_at = host_mem_dump_frame();
             if (!s_done && s_dump_at >= 0 && frame >= s_dump_at) {
                 s_done = 1;
-                host_dump_mem_spec(&cpu);
+                /* Report whatever the instruction-granularity store watch recorded. */
+    {
+        extern int tls_store_ring_n;
+        extern u32 tls_store_ring_cia[64], tls_store_ring_ea[64], tls_store_ring_val[64];
+        if (tls_store_ring_n > 0) {
+            printf("[StoreWatch] %d store(s) in range:\n", tls_store_ring_n);
+            for (int i = 0; i < tls_store_ring_n; i++) {
+                printf("  [StoreWatch] cia=0x%08X ea=0x%08X value=0x%08X\n",
+                       tls_store_ring_cia[i], tls_store_ring_ea[i], tls_store_ring_val[i]);
             }
+            fflush(stdout);
+        }
+    }
+
+    host_dump_mem_spec(&cpu);
+            }
+        }
+
+        /* TLS_STORE_WATCH=lo,hi: record instruction-granularity stores into that range and
+         * print them at end of frame (handover 5c.45 H). */
+        {
+            extern int tls_store_watch_on;
+            static int s_armed = -1;
+            if (s_armed < 0) {
+                s_armed = 0;
+                const char* spec = getenv("TLS_STORE_WATCH");
+                if (spec) {
+                    unsigned lo = 0, hi = 0;
+                    if (sscanf(spec, "%x,%x", &lo, &hi) == 2 && hi > lo) {
+                        tls_store_watch_init(lo, hi);
+                        s_armed = 1;
+                        printf("[StoreWatch] armed 0x%08X..0x%08X\n", lo, hi);
+                        fflush(stdout);
+                    }
+                }
+            }
+            (void)s_armed;
+        }
+
+        /* TLS_STORE_WATCH_FRAME=<n>: clear the store-watch ring here, so it captures the
+         * writers at the frame that matters instead of the earliest ones in the run. */
+        {
+            static int sf = -2;
+            extern int tls_store_ring_n;
+            if (sf == -2) {
+                const char* e = getenv("TLS_STORE_WATCH_FRAME");
+                sf = e ? atoi(e) : -1;
+            }
+            if (sf >= 0 && frame == sf) tls_store_ring_n = 0;
         }
 
         // 2. Poll host input and update controller structures
