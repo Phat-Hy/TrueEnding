@@ -8117,12 +8117,17 @@ parchment; that is the label's colour-combine issue from 5c.43 D, not a matte pr
 (`TLS_INK_PLATE_MIN=0 TLS_GLOW_ALL=1` reproduces the old behaviour exactly), so the logo the matte exists for is
 unaffected.
 
-**The invariant hash was re-recorded deliberately**: frame 3500 is now
-`98F0FD10141D20E6E2D42203DA4CBF1317D8994ED2D4D91CD1EF924C7FE44D06` (was `EAB33141...`), and
-`tools/invariant.ps1` carries that explanation inline. The save assertions are unchanged
-(1 348 992 / 29 344), so this is a picture change only.
+**SUPERSEDED - the hash did NOT change in the end.** This first version of the rule (a plate check inside the
+ink *classification*, plus a size gate on the glow path) fixed frame 4000 but moved frame 3500 to
+`98F0FD10...`. 5c.46 E restructured it: the classification is untouched and only the **matte** is gated by
+plate fraction. That restores frame 3500 to
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` exactly - the parchment then takes the path
+it always did (`is_ink_art`, hence neither matte nor glow) and renders untouched - while frame 4000 keeps its
+corrected parchment. **So the visible improvement costs the reference frame nothing.** `tools/invariant.ps1`
+carries that history inline, and the save assertions never changed (1 348 992 / 29 344).
 
-**Verification**: build green, invariant **PASS** with the new hash, save created, 0 changes to `src/`.
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save created, 0 changes to `src/`.
 
 ### E. The page's title text IS drawn - and b30 paints over it
 
