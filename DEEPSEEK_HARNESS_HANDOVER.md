@@ -7398,6 +7398,35 @@ whether the decoder is racing ahead of it. Both instruments already exist; no ne
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
 `src/`; the new probe is behind `TLS_TEXDECODE_PROBE` and inert by default.
 
+#### G. `TLS_WATCH_ADDR`'s writer attribution is one block late - do not trust it
+
+Chasing the staging slot's writer with `TLS_WATCH_ADDR` reported `pc=0x80615560`, and reading that block in
+the generated C shows what it is:
+
+```
+80615560: cmpwi r4, 0
+8061556C: lis   r5, -13311      ; 0xCC010000 - the GX FIFO
+80615570: li    r0, 97          ; 0x61 = GX_LOAD_BP_REG
+80615578: stb   r0, -32768(r5)  ; stb to 0xCC008000
+```
+
+That is a **GX BP-register writer**; it cannot be storing into `0x903CD1C0`. The watch samples once per
+*dispatched block*, so the block it names is the one during which the change was first *noticed* - normally the
+block *after* the one that made it. Every "block X wrote address Y" attribution in 5c.44/5c.45 has to be read
+as "the change became visible while block X was running", and the writer is up to one block earlier.
+
+**What survives, and what does not**
+
+* survives: the chain shape (pack → `CXDecompressFast` → staging slot → `fn_800D6BE0(dst,src,w,h)` → texture
+  arena), the decoder's signature, the frames, and the framed contents (`FF00FF00…` at frame 1889);
+* does not survive: any claim of the form "block P writes buffer Q" made with `TLS_WATCH_ADDR` alone. For the
+  staging slot that means its true writer is still unknown.
+
+**The instrument that would settle it** is a write-side watchpoint at instruction granularity (the emitter
+knows each store's `cia` and EA), *placed so it cannot disturb the interpreter* - the read-side probe inside
+`mem_read8` corrupted the heap (E1), so it must live in the generated store path or in a per-store helper, not
+in a hot inline function.
+
 **Verification**: `TLS_MEM_DUMP`'s optional frame field added in `recomp/host_runner.c` only; build green,
 invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save
 1 348 992 / 29 344, 0 changes to `src/`. **Verification (5c.43 C-I, 5c.44 A-C):** `python tools/recomp_harness.py build-runner` green; `pwsh tools/invariant.ps1` **PASS**,
