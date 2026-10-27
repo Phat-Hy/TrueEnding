@@ -2385,6 +2385,39 @@ static void d3d11_service_pending_copies(uint32_t* cursor, uint32_t up_to_vertex
     }
 }
 
+/* TLS_BATCH_DUMP_GUEST=<start>,<count>: dump the draw list for <count> consecutive GUEST
+ * frames starting at <start>. The page half and the gameplay half alternate, and the frame
+ * the sequence hands over on moves by tens of frames between runs, so a single frame number
+ * cannot be trusted to land on the half being studied (handover 5c.46 Z). A short window
+ * contains both halves and the page half is then picked out of the log by its own content
+ * (the parchment draw / the batch and vertex counts), not by its position. */
+static bool batch_dump_guest_hit(void) {
+    static int s_from = -2, s_count = 0;
+    extern int g_runner_current_frame;
+    if (s_from == -2) {
+        const char* e = getenv("TLS_BATCH_DUMP_GUEST");
+        s_from = -1;
+        if (e) {
+            int a = -1, b = 0;
+            if (sscanf(e, "%d,%d", &a, &b) >= 2 && a >= 0 && b > 0) {
+                s_from = a;
+                s_count = b;
+            } else {
+                printf("[BatchDump] TLS_BATCH_DUMP_GUEST='%s' not understood "
+                       "(want <startframe>,<count>)\n", e);
+                fflush(stdout);
+            }
+        }
+    }
+    if (s_from < 0) return false;
+    return g_runner_current_frame >= s_from && g_runner_current_frame < s_from + s_count;
+}
+
+/* Guest frame on which TLS_PAGE_CAPTURE fired (-1 = never). replacements.c uses it to
+ * dump the layout objects drawn around that frame at full detail, which is how the page's
+ * element tree can be read without guessing a frame number (handover 5c.46 AA). */
+int g_tls_page_capture_frame = -1;
+
 bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     if (!s_d3d11.device || !s_d3d11.swap_chain) return false;
 
@@ -2558,6 +2591,15 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     static DWORD s_last_f12_tick = 0;
     DWORD now_tick = GetTickCount();
     bool take_shot = false;
+    /* Content-keyed capture: TLS_PAGE_CAPTURE=<nbatches>[,<minframe>] takes one screenshot
+     * AND a full per-batch dump on the FIRST present whose draw list has exactly that many
+     * batches, provided the guest frame is at least <minframe>. Frame-numbered captures are
+     * unreliable here: the frame at which SetNextSequence('Game') fires moves by tens of
+     * frames between runs (measured 1620/1647/1848 on an idle host, 886..1920 under load),
+     * and everything the page draws shifts with it - so a fixed frame number is not a stable
+     * reference (handover 5c.46 Z). Batch count is a property of the page half itself
+     * (37 batches vs 54 for the gameplay half, 5c.37 D). */
+    bool page_capture = false;
     s_d3d11_dump_count++;
     if ((GetAsyncKeyState(VK_F12) & 0x8000) && (now_tick - s_last_f12_tick > 500)) {
         s_last_f12_tick = now_tick;
@@ -2586,6 +2628,60 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
             if (every > 0 && g_runner_current_frame > 0 &&
                 (g_runner_current_frame % every) == 0) {
                 take_shot = true;
+            }
+        }
+    }
+    /* Content-keyed capture: TLS_PAGE_CAPTURE=<nbatches>[,<minframe>]. Fires once, on the
+     * first present whose draw list has exactly <nbatches> batches at guest frame
+     * >= <minframe>, and forces both the screenshot and the full per-batch dump below. */
+    {
+        static int s_pc_kind = -2, s_pc_batches = -1, s_pc_tex = 0, s_pc_min = 0, s_pc_done = 0;
+        extern int g_runner_current_frame;
+        if (s_pc_kind == -2) {
+            const char* e = getenv("TLS_PAGE_CAPTURE");
+            s_pc_kind = 0;
+            if (e) {
+                unsigned tex = 0;
+                int minframe = 0;
+                if (sscanf(e, "tex:%x,%d", &tex, &minframe) >= 1 && tex != 0) {
+                    s_pc_kind = 2;   /* capture the first present that BINDS this texture */
+                    s_pc_tex = (int)tex;
+                    s_pc_min = minframe;
+                } else {
+                    int a = -1, b = 0;
+                    if (sscanf(e, "%d,%d", &a, &b) >= 1 && a >= 0) {
+                        s_pc_kind = 1;   /* capture the first present with this many batches */
+                        s_pc_batches = a;
+                        s_pc_min = b;
+                    } else {
+                        printf("[PageCapture] TLS_PAGE_CAPTURE='%s' not understood "
+                               "(want tex:0xADDR[,<minframe>] or <nbatches>[,<minframe>])\n", e);
+                        fflush(stdout);
+                    }
+                }
+            }
+        }
+        if (s_pc_kind > 0 && !s_pc_done && g_runner_current_frame >= s_pc_min) {
+            uint32_t pc_count = 0;
+            const GxDrawBatch* pc_batches = gx_pipeline_get_draw_batches(&pc_count);
+            int fire = 0;
+            if (s_pc_kind == 1) {
+                fire = ((int)pc_count == s_pc_batches);
+            } else {
+                for (uint32_t i = 0; i < pc_count && !fire; i++) {
+                    if (pc_batches[i].has_texture && pc_batches[i].vertex_count &&
+                        (int)pc_batches[i].tex.guest_addr == s_pc_tex) fire = 1;
+                }
+            }
+            if (fire) {
+                s_pc_done = 1;
+                page_capture = true;
+                take_shot = true;
+                g_tls_page_capture_frame = g_runner_current_frame;
+                printf("[PageCapture] firing (%s) at guest frame %d (present %d, %u batches)\n",
+                       s_pc_kind == 1 ? "batch count" : "texture", g_runner_current_frame,
+                       s_d3d11_dump_count, pc_count);
+                fflush(stdout);
             }
         }
     }
@@ -2700,7 +2796,8 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                         s_dump_frame = f ? atoi(f) : -1;
                         if (m) s_dump_max = atoi(m);
                     }
-                    if (s_dump_frame >= 0 && probe_frame_hits(s_dump_frame, (int)s_d3d11_dump_count)) {
+                    if ((s_dump_frame >= 0 && probe_frame_hits(s_dump_frame, (int)s_d3d11_dump_count)) ||
+                        page_capture || batch_dump_guest_hit()) {
                         printf("[BatchDump] frame=%d batches=%u vtx=%u\n",
                                s_d3d11_dump_count, batch_count, gx_vtx_count);
                         uint32_t shown = 0;

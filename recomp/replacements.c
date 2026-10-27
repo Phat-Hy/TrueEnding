@@ -8235,6 +8235,45 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 }
                 fflush(stdout);
             }
+            /* TLS_PAGE_CAPTURE window: the page half is only ~1 frame in 2, so dump the
+             * layout tree for a few frames after the capture fired and pick the page one.
+             * This is what answers "are the missing elements absent from the tree, or
+             * present and skipped": a pane that exists here but never submits a quad is a
+             * draw-side skip; no pane at all means the page's script never created it. */
+            {
+                extern int g_tls_page_capture_frame;
+                extern int g_runner_current_frame;
+                static int s_pcd_draws = 0;
+                if (g_tls_page_capture_frame >= 0 &&
+                    g_runner_current_frame >= g_tls_page_capture_frame &&
+                    g_runner_current_frame <= g_tls_page_capture_frame + 4 &&
+                    s_pcd_draws < 400) {
+                    s_pcd_draws++;
+                    printf("[PageTree] f=%d #%d obj=0x%08X fc=0x%08X f38=0x%08X cnt48=%u arr48=0x%08X "
+                           "f40=0x%08X f44=0x%08X f48=0x%08X f4c=0x%08X f50=0x%08X\n",
+                           g_runner_current_frame, s_pcd_draws, obj, f_fc, f_38, cnt48, arr48,
+                           obj ? mem_read32(ctx, obj + 0x40) : 0,
+                           obj ? mem_read32(ctx, obj + 0x44) : 0,
+                           obj ? mem_read32(ctx, obj + 0x48) : 0,
+                           obj ? mem_read32(ctx, obj + 0x4C) : 0,
+                           obj ? mem_read32(ctx, obj + 0x50) : 0);
+                    if (arr48 && cnt48 > 0 && cnt48 < 128) {
+                        for (u32 i = 0; i < cnt48; i++) {
+                            u32 ch = mem_read32(ctx, arr48 + i * 4);
+                            printf("[PageTree]    ch[%u]=0x%08X vt=0x%08X vis=0x%08X tex=0x%08X "
+                                   "f10=0x%08X f18=0x%08X f184=0x%08X f1c=0x%08X\n",
+                                   i, ch, ch ? mem_read32(ctx, ch) : 0,
+                                   ch ? mem_read32(ctx, ch + 0x10) : 0,
+                                   ch ? mem_read32(ctx, ch + 0x14) : 0,
+                                   ch ? mem_read32(ctx, ch + 0x18) : 0,
+                                   ch ? mem_read32(ctx, ch + 0x1C) : 0,
+                                   ch ? mem_read32(ctx, ch + 0x184) : 0,
+                                   ch ? mem_read32(ctx, ch + 0x20) : 0);
+                        }
+                    }
+                    fflush(stdout);
+                }
+            }
 
             return 0; // Run naturally
         }

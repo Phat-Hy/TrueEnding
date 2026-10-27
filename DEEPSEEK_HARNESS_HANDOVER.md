@@ -6,8 +6,24 @@
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
 creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.46 Z**; §5c.45 and everything before it is history, and several of its conclusions are
+state is **§5c.46 AA**; §5c.45 and everything before it is history, and several of its conclusions are
 corrected below.
+
+> **CAPTURE THE PAGE BY CONTENT, NOT BY FRAME (§5c.46 AA).** The page half is now capturable reliably:
+> `$env:TLS_PAGE_CAPTURE='tex:921DEA60,3000'` takes one screenshot, a full per-batch dump and a `[PageTree]`
+> layout dump on the first present that binds the parchment texture after that frame; `TLS_BATCH_DUMP_GUEST=
+> <start>,<count>` dumps a window of guest frames so the page half and the gameplay half can be told apart.
+> Two negatives to save a day: the parchment texture `0x921DEA60` is **also the loading screen's plate** (so a
+> texture key needs a `minframe`), and the page's fully-clipped 3D batches are **the cave environment** (sky
+> `0x91F3FFE0`, light shaft `0x91AAC860`, glow `0x9050E260`), not missing page elements. The page's own draw
+> list is 37 batches: model (black/empty textures), parchment x2, **one text line drawn before the second
+> parchment and painted over by it**, SKIP x6, composite tail - and **no batch at all** for the crest or the
+> body text.
+
+> **THE TITLE HANDS OVER AT FRAME 1647 NOW, NOT 1620 (§5c.46 AA).** That moves everything after it and makes
+> the page's four press frames (`3620/3700/3800/3900`) miss the page entirely. `tools/page_run.ps1` now prints
+> `Game@<frame>`, validates the run and re-runs (`-Attempts`, `-RequireGame`), so a page verdict can no longer
+> come from a run that was never on the page.
 
 > **THE CHAIN IN THE BLOCK BELOW IS WITHDRAWN FROM LINK 4 ON (§5c.46 Z).** Read Z before acting on it. The
 > measured corrections: the `0x8087D5E4` worker pool is the **BGM read-ahead daemon** (its job start
@@ -9221,3 +9237,83 @@ they are answered in 5c.43-5c.45.)
 `src/`. New knobs, all default-off: `TLS_ASYNC_IO_COMPLETE`, `TLS_ASYNC_PROBE`, `TLS_ASYNC_PROBE_FROM`,
 `TLS_RESET_PROBE`, `TLS_PAGETASK_PROBE`. New tools: `tools/page_run.ps1` (one-command page measurement) and
 `tools/frame_diff.py` (pixel-exact same-size frame diff, which is how "0/921600" above was measured).
+
+### AA. The page half is now capturable by content - and its draw list says the missing elements are not there at all
+
+Z left one question: *who submits the page's missing quads*. Before that can be answered the page has to be
+captured reliably, and the frame number cannot do it. Two new default-off instruments fix that, and the first
+reliable inventory of the page half follows from them.
+
+**`TLS_PAGE_CAPTURE=<nbatches>|tex:0xADDR[,<minframe>]`** (gfx_d3d11.c) fires **once**, on the first present whose
+draw list matches, and forces all three things that are normally set separately: a screenshot
+(`build/recomp/d3d11_screenshot_<present>.ppm`), the full per-batch dump, and - for the four guest frames that
+follow - the layout-tree dump in `replacements.c` (`[PageTree]`, keyed off the new global
+`g_tls_page_capture_frame`). Verified working in both modes:
+
+```
+[PageCapture] firing (batch count) at guest frame 3354 (present 3355, 37 batches)   <- a 3D cave frame: counts alone are not a page key
+[PageCapture] firing (texture)     at guest frame 2027 (present 2028, 23 batches)   <- the LOADING screen
+[PageCapture] firing (texture)     at guest frame 2000 (present 2001, 37 batches)   <- the page half
+```
+
+**`TLS_BATCH_DUMP_GUEST=<start>,<count>`** dumps the draw list for a window of *guest* frames, which is what the
+alternating halves need: the page half and the gameplay half differ by ~17 batches and ~10x the vertex count, so a
+window contains both and the page one is picked out by its content.
+
+**Two negative results, both worth knowing before the next session repeats them.**
+
+1. **`0x921DEA60` (the parchment sheet) is not a page-only texture** - it is also what the *loading screen* paints
+   with (23 batches, 162 vtx, full-screen quads at 0x921DEA60 / 0x921E92E0 / 0x921F1360). A texture-keyed capture
+   therefore needs a `minframe` floor, or a second discriminator.
+2. **The pages' fully-clipped 3D batches are the CAVE, not page elements.** The page half submits b6..b11 with
+   `outside=n/n` (b7 216/216, b8 198/198, b11 627/627), which looks like missing content and is not: their textures
+   are the gameplay environment - `0x91F3FFE0` 1024x512 = **sky/clouds**, `0x91AAC860` 128x128 = a **light shaft**,
+   `0x9050E260` 128x128 I8 = a **radial glow**. Evidence: `docs/evidence/page_3d_textures_5c46aa.png`. Do not chase
+   them; they are the previous half's scene drawn with the page's projection and clipped out.
+
+**The page half's real inventory** (37 batches / 9 750 vtx, captured by texture at guest frame 2000,
+`docs/evidence/host_page_half_5c46aa.png`), in draw order:
+
+| batches | content |
+|---|---|
+| b0,b1 (996+3990 vtx) | the character model, texture `0x92AEAEC0` - **black / empty** (5c.45 J3, re-confirmed) |
+| b2..b5 | more model parts, textures `0x92C05720`, `0x92C0FF40`, `0x92C1D8A0` - **all black** |
+| b6..b11 | the cave environment, fully clipped (the negative result above) |
+| b12..b24 | the 13-pass full-screen composite tail (`0x903xxxxx`) |
+| b25 | `0x81A1A1A0` 270x836, degenerate/off-screen - a bogus binding worth a look one day |
+| b26, b30 | the parchment sheet `0x921DEA60`, full screen, **twice** |
+| b27 | `0x90D19B80` 64x64 at ndc x[-0.92..-0.66] y[0.34..0.71] (the "black illustration box" texture) |
+| b28 | the font atlas `0x90703AA0`, 114 glyph vtx, ndc x[-0.61..0.28] y[0.48..0.59] - **one text line, drawn before b30** |
+| b29 | `0x80000000` (null) 1024x1024, zero-area - a draw with no texture |
+| b31..b36 | the SKIP button (frames + `0x9076E5E0` label + the 4x4 `0x904E5EE0` plate), ndc x[0.69..0.80] y[-0.83..-0.64] |
+
+So the page **does** submit a second text-bearing draw (b28) and it is **painted over by the second parchment draw
+(b30)** - 5c.46 E's finding reproduced from the draw order rather than from a cutoff bisect - and the crest and the
+two body-text lines have **no batch at all**. Their screen regions (crest around ndc x[+0.5..+0.75] y[+0.2..+0.55],
+body text x[+0.3..+0.9] y[-0.45..-0.15]) are covered by nothing but the sheet. There is no clipped batch in those
+regions either, so this is not a transform accident.
+
+**A new determinism finding, and it bites the page specifically.** As of this round the title hands over at guest
+frame **1647** in every run (four consecutive attempts), where earlier it was **1620** - and the page's four
+presses (`3620-3632`, `3700-3712`, `3800-3812`, `3900-3912`) are tuned to 1620. At 1647 the presses miss and the
+page never appears (frame 4000 becomes cave gameplay - `AAB03355…`, `C5A4D608…`, `7BBE83DF…`, `53F4A2E5…`,
+`E7BD0E29…` across this round's runs, never `B89F3650…`).
+`tools/page_run.ps1` now validates the run and re-runs (`-Attempts`, `-RequireGame 1620`) instead of reporting a
+page verdict from a run that was never on the page, and prints `Game@<frame>` on every attempt. The **invariant is
+not affected** by the offset: it passes with frame 3500 = `EAB33141…` at both 1620 and 1647 (that frame is static
+cave geometry), which is why the guard never caught this.
+
+**Next step, precise**: with the host idle and an accepted hand-over frame, run
+`$env:TLS_PAGE_CAPTURE='tex:921DEA60,3000'; pwsh tools/page_run.ps1 -Log logs\page_tree.log -RequireGame 0` and read
+the `[PageTree]` lines for the page's LayoutTask: list every pane (`ch[i]`, its vtable among `0x80782B68`,
+`0x80782D80`, `0x80782BD0`, `0x80782AA0`, `0x80782DB8`) and compare that tree with the 11 2D batches above. A pane
+that exists in the tree but submits no quad is a draw-side skip; no pane at all means the page's script never
+created the crest/body-text elements, which points at the four event actions from 5c.46 Z rather than at rendering.
+Alternatively, retune the four press frames for a 1647 hand-over (they only need to bracket the page's start).
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344 - measured on a
+**loaded** host with the hand-over at **1647**, which is the useful detail: the invariant's frame is insensitive to
+the 27-frame offset (static cave geometry) while the page's presses are not. 0 changes to `src/`; all new knobs
+default-off (`TLS_PAGE_CAPTURE`, `TLS_BATCH_DUMP_GUEST`); the default path is untouched (every new branch is
+env-gated, and the only always-on addition is reading `g_tls_page_capture_frame`, which stays -1).
