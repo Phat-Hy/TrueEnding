@@ -7528,6 +7528,24 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0;
         }
 
+        /* 0x800D6F70 is the branch target of the pixel copy/convert loop inside the texture
+         * preparation routine (copy -> decode -> memset(source), handover 5c.45 R). Its
+         * registers name the buffers of the pass that is running, which decides whether the
+         * copy step ran before the decode that reads the cleared staging buffer. */
+        case 0x800D6F70: {
+            static int s_probe = -1, s_n2 = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_TEXPREP_PROBE") ? 1 : 0;
+            if (s_probe && s_n2 < 60) {
+                extern int g_runner_current_frame;
+                s_n2++;
+                printf("[TLS TexPrep] frame=%d src=0x%08X dst=0x%08X staging=0x%08X size=0x%08X\n",
+                       g_runner_current_frame, ctx->gpr[24], ctx->gpr[29],
+                       ctx->gpr[28], ctx->gpr[30]);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
         case 0x80534C58: {
             static int s_probe = -1;
             if (s_probe < 0) s_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;

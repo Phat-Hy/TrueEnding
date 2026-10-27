@@ -7897,3 +7897,30 @@ source base (`r24`) and destination (`r29`) for that pass say whether the pixels
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, save 1 348 992 / 29 344, 0 changes to
 `src/`.
 
+#### S. The four probes that now describe one texture pass, and where to start next
+
+`TLS_TEXPREP_PROBE` (new, on the copy loop's branch target `0x800D6F70`) reports each pass's buffers:
+
+```
+[TLS TexPrep] frame=1809 src=0x90536FE0 dst=0x9038D1C0 staging=0x903CD1C0 size=0x00008000
+```
+
+so the pass is: `src` = the prepared texture (`0x90536FE0`, the CMPR buffer that measured uniform grey in N),
+`dst` = `0x9038D1C0`, `staging` = `0x903CD1C0` (the buffer the decode reads and that the pass memsets), `size`
+= `0x8000` = 32768 = CMPR 256x256.
+
+**A single texture pass can now be followed end to end with four instruments**, all default-off:
+
+| instrument | answers |
+|---|---|
+| `TLS_TEXDECODE_PROBE` | `fn_800D6BE0(dst, src, w, h)` - every decode, with its frame |
+| `TLS_TEXPREP_PROBE` | the copy/convert pass's `src`, `dst`, `staging`, `size`, with its frame |
+| `TLS_EFB_COPY_PROBE=1 TLS_EFB_COPY_FROM=<n>` | every copy the guest *issues* (report cap now 2000) |
+| `TLS_STORE_WATCH=lo,hi` + `TLS_STORE_WATCH_FRAME=n` | who writes an address, with frame and `cia` |
+
+**Where to start next session, concretely**: take the model's texture (`0x92AEAEC0`) and walk one pass with all
+four instruments armed around frames 1872-1883. The open question is narrow and stated in P/Q/R: the decode at
+1883 reads a staging buffer that a *previous* pass's `memset` had zeroed, so either the copy/convert pass for
+this texture did not run, or it ran with different buffers than the pass at 1809 used.
+`TLS_TEXPREP_PROBE` distinguishes those in one run - it shows whether a pass appears between 1877 and 1883 and
+what its buffers are.
