@@ -7662,6 +7662,24 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0;
         }
 
+        /* The two threads the game creates at frame 170 (OSCreateThread: 0x808638F0 entry
+         * 0x8071DBE0, 0x80879210 entry 0x80718C40). If their entries never fire, the game's
+         * worker threads are never scheduled - which would explain a BSS flag that stays zero
+         * forever (handover 5c.46 P/Q). */
+        case 0x8071DBE0:
+        case 0x80718C40: {
+            static int s_probe = -1, s_hits = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_THREAD_PROBE") ? 1 : 0;
+            if (s_probe && s_hits < 12) {
+                extern int g_runner_current_frame;
+                s_hits++;
+                printf("[ThreadEntry] frame=%d pc=0x%08X r3=0x%08X\n",
+                       g_runner_current_frame, address, ctx->gpr[3]);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
         case 0x80534C58: {
             static int s_probe = -1;
             if (s_probe < 0) s_probe = getenv("TLS_SAVE_PROBE") ? 1 : 0;

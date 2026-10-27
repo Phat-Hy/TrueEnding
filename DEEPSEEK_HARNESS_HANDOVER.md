@@ -8686,3 +8686,45 @@ flag is set by a runtime step we never perform, and the SDK/HLE surface is where
 
 **Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
 save 1 348 992 / 29 344, 0 changes to `src/`.
+
+### Q. The worker threads run their entry ONCE and never resume - and one of them is what should set the flag
+
+The flag in P lives in **BSS**, so it is zero even on hardware (verified: the ELF has no section covering
+`0x8087FB98`), which means something sets it at runtime. The candidates are the game's worker threads:
+
+```
+[TLS OSCreateThread] frame=170 thread=0x808638F0 entry=0x8071DBE0 param=0x808638F0 stack=0x80867C20 prio=3
+[TLS OSCreateThread] frame=170 thread=0x80879210 entry=0x80718C40 param=0x80879210 stack=0x8086BC20 prio=4
+```
+
+and a probe on both entry points (`TLS_THREAD_PROBE`) shows they *do* start - **once each, at frame 170, and
+never again**:
+
+```
+[ThreadEntry] frame=170 pc=0x8071DBE0 r3=0x808638F0
+[ThreadEntry] frame=170 pc=0x80718C40 r3=0x80879210
+```
+
+So the two worker threads begin and are never resumed for the remaining ~4 000 frames of the run.
+
+**Important nuance**: thread *switching* is guest code here - the OS scheduler is in the game binary and the
+runner follows `__OSCurrentThread` (`0x800000E4`, observed in `host_runner.c:396`). So this is not a missing
+host scheduler; it is either (a) the workers blocking on a queue that the guest never signals, or (b) the guest
+scheduler never selecting them again.
+
+**Where that leaves the page, as one chain:**
+
+1. the page draws only its furniture (sheet, border, title, SKIP button);
+2. the crest and body text are never submitted (5c.46 M);
+3. the page never changes (5c.46 I);
+4. its owner `GameLoadTask` pumps `0x805F38A0` -> `0x805EC060` every frame (5c.46 O);
+5. that status getter returns the constant 64 because the BSS flag `0x8087FB98` is zero (5c.46 P);
+6. nothing writes that flag during the run, and the worker threads that plausibly would run their entry once
+   and then never resume (this section).
+
+**Next step**: determine why the two workers are not resumed. Their thread objects are `0x808638F0` and
+`0x80879210`; the guest scheduler's ready/sleep queues are reachable from `__OSCurrentThread`'s thread struct.
+`TLS_HOST_CALLBACK_SENTINEL` machinery in `host_runner.c` already tracks switches, so the instrumentation exists.
+
+**Verification**: build green, invariant **PASS** with `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`,
+save 1 348 992 / 29 344, 0 changes to `src/`; `TLS_THREAD_PROBE` is default-off.
