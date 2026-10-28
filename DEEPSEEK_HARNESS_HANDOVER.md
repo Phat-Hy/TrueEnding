@@ -2,11 +2,13 @@
 
 ## NEXT SESSION — START HERE
 
-**Tree state.** Clean at `bd877ed` (the 3D widening; `654cb14` is the indirect-texturing commit below it, and the
-dossier update you are reading is the commit on top - `git log --oneline -5` to see all four). Only the untracked
-scratch `logs_ap/` is dirty. Build green (`python tools/recomp_harness.py build-runner`; the generated
-`build/recomp/gx_shaders_d3d11.inl` needs `python tools/compile_shaders.py` after any `tools/compile_shaders.py`
-edit). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl -> Game`, frame 3500 =
+**Tree state.** Clean at `850ba86` (the last **code** change: probe pinning + the AP-O number corrections). The
+history this session added is `654cb14` indirect texturing, `bd877ed` the 3D widening, `6a57a92` the dossier, and
+`850ba86`; the dossier state line you are reading is the one commit on top of those, and `git log --oneline -6`
+shows them all. Only the untracked scratch `logs_ap/` is dirty. Build green
+(`python tools/recomp_harness.py build-runner`; the generated `build/recomp/gx_shaders_d3d11.inl` needs
+`python tools/compile_shaders.py` after any `tools/compile_shaders.py` edit). `pwsh tools/invariant.ps1` **PASS**
+(`Boot -> Stra -> Titl -> Game`, frame 3500 =
 `D3329E3565DF4E1087785D618114ABE44E555B2465338336853363E7209AB27E` - **re-recorded this session, see §5c.46 AP-O
 item 5**, and the run creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to
 `src/`.** Current state is **§5c.46 AP-O** (at the end of this file); §5c.46 AP-N and earlier is history, and the
