@@ -10378,3 +10378,19 @@ test is therefore about the *destination address / texture bind* rather than abo
 `0x90D19360..0x90D1B360` at the page frame (`TLS_MEM_DUMP`) and compare with the decoded crest art, and log the
 `dst` of every `CXDecompressFast` in frames 3700-3800 to see whether the crest's own decompress is missing,
 short, or pointed one buffer off.
+
+**AP-L addendum 3 (the crest's writer is a decompress into the same arena).** A run to 3780 logs every
+`CXDecompressFast` destination in frames 3700-3800 and one of them lands **0xE0 bytes below the crest scratch**:
+
+```
+[TLS CXDecompressFast] ENTER src=0x92490100 dst=0x90D19AA0 (lr=0x8046C380)
+[TLS CXDecompressFast] ENTER src=0x91268020 dst=0x90D196A0
+[TLS CXDecompressFast] ENTER src=0x91034940 dst=0x90D19720
+```
+
+so the memory the crest quad samples *is* a decompress destination in the same arena (0x90D19AA0 + a 64x64
+CMPR payload covers 0x90D19B80). Yet the buffer reads as opaque black at the draw, and `TLS_TEX_DUMP` sees no
+GX upload there. **Next action (one run):** `TLS_MEM_DUMP=0x90D19360,0x1000` at frame 3780 (or the same range
+from a guest dump) and compare those bytes with the decoded crest art; then instrument `CXDecompressFast`
+(`0x8046C380`'s callee) to print `(src, dst, out_len)` for the `dst=0x90D19AA0` call - a short write, a wrong
+destination, or a decompressor that returns zeros splits the remaining work three ways in one measurement.
