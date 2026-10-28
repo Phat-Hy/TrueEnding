@@ -10219,3 +10219,34 @@ by whatever the scene loader used at frame 1656 (`lr=0x803D0558` for its creatio
    start.
 3. Only then decide between "the page start should adopt/show the pre-created node" and "the frame-1656 clear
    at `lr=0x803D0558` is the defect".
+
+**K. `0x81359B80` is a RECYCLED address - its frame-1656 history is not its identity (§5c.46 AP, end).**
+`TLS_LAYOUT_CREATE_PROBE=1 TLS_LAYOUT_CREATE_FROM=1655` logs every creation with its name at frames 1655-1658,
+and the frame-1656 batch is ~90 layouts across three roots (`0x80B8DCC0` via `lr=0x801F65DC`, `0x81161760`
+via `lr=0x803D05xx`, plus `ui_*` HUD pieces). Two rows matter:
+
+```
+[LayoutCreate] f=1656 r3=0x81161760 r4=0x80750B2C '/data/d2anime/ui_hp.d2a'      lr=0x803D05D0
+[LayoutCreate] f=1656 r3=0x81161760 r4=0x80750B0F '/data/d2anime/ui_hp_heal.d2a' lr=0x803D054C
+```
+
+and AP F's first `0x81359C7C` writes (f=1656) came from `pc=0x801F41C8` and `pc=0x803D0558 lr=0x803D0584`
+with `r4=0x80750B2C` - i.e. **the `ui_hp.d2a` / `ui_hp_heal.d2a` family**. So at frame 1656 the word at
+`0x81359B80+0xFC` belonged to a *HUD layout*, not to the page-content node: ~90 layouts are created in frames
+1648-1658 and several are freed immediately, so **the address `0x81359B80` is recycled inside that window**
+(the same thing AP H caught for `0x81861F60`, freed with `0xDEAD0022` at f=3263 and reallocated at f=3265).
+
+Consequences, both of which correct the earlier text:
+
+* AP F's "the content node was created at f=1656 by the scene loader and hidden the same frame" is **not
+  established** - only its `+0xFC` writes **from f=1696 on** can be attributed to the final occupant (the 2020
+  rows print `r3=0x81359B80` explicitly, so those are its own);
+* the content node therefore has **no known d2a name yet**, and the name is what names the missing caller.
+
+**Next step, precise.** One run, one new probe: log `fn_801F3FF8`'s return pointer together with its `r4` name
+at a *generic* return site instead of the per-caller cases - i.e. in the `TLS_LAYOUT_CREATE_PROBE` block, capture
+`ctx->gpr[3]` on the block **after** each factory call. The practical form that needs no per-caller work: arm
+`TLS_STORE_WATCH=0x81359B80,0x81359BA0` with `TLS_STORE_WATCH_FRAME=1600` to get the exact frame at which the
+range is first written *as a new object*, then read the create log for that frame and pick the name whose
+creation is immediately followed by that store. That yields the content node's .d2a in one pass, and with the
+name the `grep` for the string constant names the caller that should show it at page start.
