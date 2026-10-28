@@ -10793,19 +10793,23 @@ the cave's rock textures is **REPEAT**, so every texture coordinate outside [0,1
 the surface. With a per-map wrap sampler the artifact disappears, the big wall batches render *identically* to the
 legacy path, and the widening is a net improvement on the frame's water geometry.
 
-**1. What was missing, re-measured per batch (no new assumption).** `TLS_TEV_PROBE=3500` + `TLS_TEV_WORD_PROBE=3500`
-(3 520-frame run, invariant still PASSes with them on) enumerates **102 batches** at present 3500 and decodes the
-indirect state of each. Of those, **38 carry an ACTIVE `TevStageIndirect`** word and **28 have GEN_MODE
-`numindstages` > 0** - the other ten name an offset matrix while GEN_MODE says no indirect stage exists, which is
-inert on hardware and is treated as inert here. Only two distinct words are ever active in the frame:
+**1. What was missing, re-measured per batch (no new assumption).** `TLS_TEV_PROBE=3500` with
+`TLS_PROBE_PRESENT_ONLY=1` (new, see item 9) plus `TLS_XF_PROBE=3500`, in a 3 520-frame run that still PASSes the
+invariant, gives **one clean frame**: present 3500 is **56 batches / 230 148 vertices** with stage counts
+`1:5 2:5 3:31 4:2 5:8 6:4 8:1`. (AP-N item 11's "101 batches" is the *guest-frame* counter's frame - see item 10;
+both are real frames about one present apart.)
+
+Indirect state on that frame: **8 batches carry an ACTIVE `TevStageIndirect` word** and **2 of them have GEN_MODE
+`numindstages` > 0**, so two batches genuinely run an indirect stage here; the other six name an offset matrix
+while GEN_MODE says no indirect stage exists, which is inert on hardware and is treated as inert here. Only one
+word is ever active in the frame:
 
 ```
 BP 0x10+i = 0x000270   bt=0  fmt=ITF_8  bias=STU  bs=0  mtx=Matrix0  mtxid=Indirect  sw=0 tw=0  addprev=0
-BP 0x10+i = 0x000471   bt=1  fmt=ITF_8  bias=STU  bs=0  mtx=Matrix1  mtxid=Indirect  sw=0 tw=0  addprev=0
 ```
 
 with `RAS1_IREF` = `0x0096CA` / `0x0096D2` / `0x0096ED` (so indirect stage `bt` samples e.g. texmap 2, texcoord 2)
-and `RAS1_SS0/SS1` = 0 (no coordinate shift). The offset matrices at that frame are **pure scales**:
+and `RAS1_SS0/SS1` = 0 (no coordinate shift). The offset matrices on this frame are **pure scales**:
 
 ```
 matrix 0: row0=(409,0,0) row1=(0,409,0) shift=0   (s=17, so 2^0 - no dynamic shift)
@@ -10852,6 +10856,9 @@ the TEV path bound `sampler_linear` (CLAMP) unconditionally. Same scene, same sh
 | before: one CLAMP sampler for all eight maps | mean abs diff **12.22**, 35.9 % of pixels differ by >8 |
 | after: per-map wrap sampler from the guest's wrap mode | mean abs diff **5.00**, 18.5 % differ by >8 |
 
+The sampler accounts for essentially all of it: the intermediate build with indirect already in and the sampler
+still clamped measures **12.21 / 35.9 %**, i.e. indirect texturing moves this comparison by 0.01.
+
 `docs/evidence/cmp_f3500_smear_5c46apo.png` is the wall crop that names it: left is the clamp sampler (smeared
 bands, flat olive blobs where a border texel is stretched over a whole rock), right is the wrap sampler (the same
 rock texture the legacy path draws). **This is the artifact AP-N item 7 attributed to PSTev being unable to
@@ -10859,32 +10866,33 @@ express 3D**, and it is why the 2D-only gate looked necessary.
 
 **4. The widening, as its own commit.** `&& !batch->is_perspective` is removed from `use_tev_path`
 (`recomp/gfx_d3d11.c`), so every batch with a second texture bound and a stage that samples a map other than 0 now
-goes through `PSTev` - **65 of the frame's 102 batches**. What actually changes, measured per batch with
-`TLS_BATCH_PROBE=3500` against the legacy run:
+goes through `PSTev` - **46 of present 3500's 56 batches (222 717 of its 230 148 vertices)**. What actually
+changes, measured per batch with `TLS_BATCH_PROBE=3500` against the legacy run:
 
 * the big wall batches (`b4..b46`, up to 46 770 vertices) come out **identical**. Their chain is
   `st0: C1 = ras`, `st1: prev = tex*C1`, i.e. exactly the legacy expression - and now the TEV path computes it
   from the guest's own words instead of from a hardcoded one;
 * the first batch that differs at all is **b50** (2 157 vertices, `tex=0x91EA7B60`), and it differs because it has
-  **eight** TEV stages of which the legacy path could evaluate **two**:
+  **eight** TEV stages of which the legacy path could evaluate **two**. Every stage below executes - a stage's
+  `tex_enable` flag only suppresses its texture *sample* (the texel becomes white), the combiner still runs:
 
 ```
-st0  C1   = ras
-st1  prev = tex(map0) * C1                       <- the only thing the legacy path computes
+st0  C1   = ras                                   (tex_enable=0: no sample, combiner runs)
+st1  prev = tex(map0) * C1                        <- the only thing the legacy path computes
 st2  C2   = tex(map1) * C1
-st3  prev = lerp(C2, prev, prev.a)               <- second texture blended in by prev's alpha
-st4  prev = (prev * tex(map2)) * 2               <- map2 is 0x91E87AE0, avg (37,40,47): a ~0.29x darkening
-st5  C0   = tex(map3)                            <- map3 is 0x9038D1C0, an EFB copy (the water reflection)
-st6  C0   = tex(map4) * C0                       <- map4 is 0x906DB020, a 256x1 gradient ramp
-st7  prev = prev + C0                            <- ADD the ramp
+st3  prev = lerp(C2, prev, prev.a)                <- second texture blended in by prev's alpha (tex_enable=0)
+st4  prev = (prev * tex(map2)) * 2                <- map2 is 0x91E87AE0, avg (37,40,47): a ~0.29x darkening
+st5  C0   = tex(map3)                             <- map3 is 0x9038D1C0, an EFB copy (the water reflection)
+st6  C0   = tex(map4) * C0                        <- map4 is 0x906DB020, a 256x1 gradient ramp
+st7  prev = prev + C0                             <- ADD the ramp (tex_enable=0)
 ```
 
 **The visible result is the water.** Region x 300..700 y 400..460: the legacy path draws a blown-out pale sheet
 with a hard bright streak (mean **(62.9, 62.4, 53.9)**); the widened path draws a dark reflective surface
 (mean **(24.4, 25.0, 24.5)**). Dolphin's own render of this scene
 (`docs/evidence/dolphin_ref_run3_f5000_gameplay.png`) has dark green-grey water (mean ~(49, 56, 48) to
-(56, 64, 57) in its pool), not a white sheet - so the two extra stages the legacy path was dropping are exactly
-the ones the reference shows. `docs/evidence/cmp_f3500_widen_5c46apo.png` is legacy | widened | 4x difference:
+(56, 64, 57) in its pool), not a white sheet - so the six stages the legacy path was dropping are the ones that
+turn a bright sheet into water. `docs/evidence/cmp_f3500_widen_5c46apo.png` is legacy | widened | 4x difference:
 the difference is concentrated **on the water and the reflection**, and the rock walls are dark in the difference
 image because they are unchanged. `host_f3500_tev3d_5c46apo.png` is the widened frame on its own.
 
@@ -10909,21 +10917,25 @@ the one field not evaluated (bump alpha, which perturbs the *raster* alpha rathe
 nothing here.
 
 **7. What still blocks full 3D parity - measured, not guessed.** The question AP-N item 11 left open was "do these
-batches need generated coordinates or only the indirect offset on an existing one". The answer, from
-`TLS_TEV_PROBE` + `TLS_XF_PROBE=3500`:
+batches need generated coordinates or only the indirect offset on an existing one". The answer, from the pinned
+`TLS_TEV_PROBE=3500` table plus `TLS_XF_PROBE=3500`:
 
-* **91 of 102 batches need no texgen at all**: every stage names a texcoord the batch supplies
-  (`texcoord_mask` 0x03 or 0x07) and the map/coord pairs are `0/0 1/1 2/2 3/3`.
-* **11 batches do** (b14, b15, b17, b22, b25, b28, b33, b34, b42, b46 - ~41 500 of the frame's 230 148 vertices,
-  b25 alone 33 015): their 5- and 6-stage chains name texcoords **2 and 3**, which the host does not feed. The XF
-  dump for that frame shows the texgens behind them are `TexGenType::Regular` with **non-identity texture
-  matrices** (`texmtx[0]` = 0.788/-0.062/0.789 ...) and `texgen1` even has the **STQ projection** bit, so
-  generating them needs the XF texture-matrix path (`I_TEXMATRICES`, the post matrices, the STQ divide) - which
-  this host does not implement at all. That is the next thread, and it is **the** remaining reason those batches
-  are approximated.
-* `TEVORDER`'s **colorchan** (channel 1, bump alpha, zero) is now recorded per stage and printed, but not
-  evaluated: the vertex format carries one colour. Measured at frame 3500 every stage of every batch names
-  channel 0, so nothing is lost on this frame either - but it is a real gap for other scenes.
+* **41 of the 56 batches need no texgen at all**: every enabled stage names a texcoord the batch supplies
+  (`texcoord_mask` 0x03 / 0x07) and the (map, coord) pairs are `0/0 1/1 2/2 3/3`.
+* **15 batches do** - b14, b15, b17, b22, b25, b28, b33, b34, b42, b46, b50, b52, b53, b54, b55, i.e. **56 664
+  vertices = 24.6 % of the frame** - because an ENABLED stage names texcoord **2 or higher** (up to 6) and the host
+  feeds only TEX0/TEX1. The XF dump for that frame shows the texgens behind them are `TexGenType::Regular` with
+  **non-identity texture matrices** (`texmtx[0]` = 0.788 / -0.062 / 0.789 ...) and `texgen1` even carries the
+  **STQ projection** bit, so generating them needs the XF texture-matrix path (`I_TEXMATRICES`, the post matrices,
+  the STQ divide) - which this host does not implement at all. That is the next thread, and it is **the** remaining
+  reason those batches are approximated. Note how the same 15 batches keep appearing: they are the water/effect
+  material set.
+* `TEVORDER`'s **colorchan** is recorded per stage and printed, but not evaluated - the vertex format carries one
+  colour. Measured: of the frame's 127 enabled stages, 118 name channel **7 (zero)** and 9 name channel **1**;
+  **all 9 stages that actually reference RASC/RASA are among those channel-1 ones** (b14, b15, b17, b22, b25, b28,
+  b42, b54, b55 - the same water/effect set), so for exactly those stages the host's raster input is the wrong
+  colour and the TEV path substitutes COLOR0 for XF colour channel 1. Everything else names channel 0 or does not
+  read the raster colour at all, so this gap is narrow but real.
 
 **8. Gates, both run with the widening in place.**
 * `pwsh tools/invariant.ps1` - **PASS**, frame 3500 = `D3329E35...`, `savedata.dat` 1 348 992, `banner.bin` 29 344,
@@ -10943,6 +10955,7 @@ batches need generated coordinates or only the indirect offset on an existing on
 | variable | effect |
 |---|---|
 | `TLS_TEV_NO_IND=1` | force the unperturbed coordinate: the A/B for what indirect texturing contributes |
+| `TLS_PROBE_PRESENT_ONLY=1` | pin every frame-gated probe (`TLS_TEV_PROBE`, `TLS_BATCH_PROBE`, `TLS_BATCH_RECT`) to the **present** counter instead of either counter, so a per-batch table is one frame |
 | `TLS_TEX_FAIL_PROBE=1` | now also reports a TEV map that falls back to the white SRV (an un-uploadable map paints a flat tinted polygon) |
 
 `python tools/rect_stats.py <ppm> --rect crest:845,108,1005,241 --rect band:672,150,728,690` is the page
@@ -10950,12 +10963,18 @@ measurement; `logs_ap/analyze_ind.py`, `logs_ap/widen_scope.py` and `logs_ap/cmp
 analyses behind items 1, 4 and 6 (scratch, not committed).
 
 **10. Process facts worth keeping.**
-* A frame-gated *draw* probe can print the same batch twice (`TLS_TEV_PROBE`/`TLS_BATCH_PROBE` fire on either the
-  present counter or the guest frame counter, and those two agree at some frames), so batch counts read 158 events
-  for 102 batches. Deduplicate by batch index before drawing conclusions.
+* **A frame-gated *draw* probe fires TWICE for the same batch index, and the two events carry different state.**
+  `TLS_TEV_PROBE`/`TLS_BATCH_PROBE` matched *either* the present counter or the guest-frame counter, so
+  `TLS_TEV_PROBE=3500` emitted 158 events over 102 batch indices - two frames, about one present apart, whose stage
+  counts differ (b6 is 3 stages in one and 6 in the other). A per-batch table read off such a log mixes the two
+  frames, which is how this session first mis-counted "10 batches need texgen" and "65 newly routed" before
+  `TLS_PROBE_PRESENT_ONLY=1` pinned it. **Always pin the counter before drawing a per-batch conclusion**, and
+  reconcile the batch count with the frame line the runner prints.
 * `TLS_TEV=1` (the whole pipeline through PSTev) is **not** the widened configuration: it also routes the 1- and
   2-stage batches that the widening leaves alone. Use the default build for a widening verdict and `TLS_TEV=1`
   only for PSTev-versus-legacy comparisons of a single class.
 * `logs/` and `docs/` are still denied to child processes while the harness's own file tools are not; `git`
   needs full access. The evidence images were composed into `logs_ap/` by `logs_ap/make_evidence.py` and copied in.
+* The page verdict is a `rect_stats.py` measurement, not a hash: the page PPM hash moves for a 20-pixel 1-LSB
+  difference while every region number is unchanged to the tenth, so compare the numbers.
 

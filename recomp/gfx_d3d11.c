@@ -2372,6 +2372,15 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
  * already does, and the same frame number means the same moment everywhere. */
 static bool probe_frame_hits(int want, int present_count) {
     extern int g_runner_current_frame;
+    /* The two counters agree only on some frames: when the present counter reaches N the
+     * guest frame may already be N+1. Matching either one (which is what the probes used
+     * to do) therefore makes a frame-gated probe fire TWICE for the same batch index - and
+     * the two events carry DIFFERENT state, so a per-batch table read off the log mixes two
+     * frames. TLS_PROBE_PRESENT_ONLY=1 pins the probes to the present counter, so a
+     * per-batch table is one frame (handover 5c.46 AP-O items 1 and 10). */
+    static int s_present_only = -1;
+    if (s_present_only < 0) s_present_only = getenv("TLS_PROBE_PRESENT_ONLY") ? 1 : 0;
+    if (s_present_only) return want == present_count;
     return want == present_count || want == g_runner_current_frame;
 }
 
