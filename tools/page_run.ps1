@@ -7,6 +7,18 @@
 #   .\tools\page_run.ps1 -Frames 4020 -Log logs\page_base.log            # baseline page
 #   $env:TLS_ASYNC_IO_COMPLETE='1'; .\tools\page_run.ps1 -Frames 4020    # flag on
 #
+# PREFER THE CONTENT-KEYED CAPTURE. A frame number is not a stable page selector: the
+# page and the cave/gameplay half alternate between PRESENTS, the page's own window moves
+# with the hand-over frame, and on the current build present 3780 is the CAVE while 3781
+# is the page (handover 5c.46 AP-N). -CaptureTex therefore captures the first present that
+# BINDS that texture at or after -CaptureAfter and reports the present it used:
+#
+#   .\tools\page_run.ps1 -Frames 3800 -PressShift 27 -RequireGame 1647 `
+#                        -CaptureTex 921DEA60 -CaptureAfter 3730 -Log logs\page_crest.log
+#
+# (921DEA60 is the tutorial parchment. The first matching present after 3700 is mid-fade,
+# so 3730 is the settled page. -Shot <n> remains for A/B runs and for other screens.)
+#
 # The page's four presses are tuned to the title walk handing over at a specific frame, and
 # that frame MOVES between runs (5c.46 Z: 1620 on a clean idle host, 1620..1848 and worse
 # when the host is loaded or the input walk races). A run that hands over elsewhere does not
@@ -27,7 +39,12 @@ param(
     # Shift the four tutorial presses by this many frames. They are tuned to a 1620 hand-over;
     # when the title hands over at 1647 they land early and the page never appears (5c.46 AA),
     # so -PressShift 27 is the run for a 1647 hand-over.
-    [int]$PressShift = 0
+    [int]$PressShift = 0,
+    # Content-keyed capture (recommended): hex texture address, e.g. 921DEA60 for the page's
+    # parchment. Sets TLS_PAGE_CAPTURE=tex:<addr>,<CaptureAfter> and reports the present the
+    # capture actually landed on; -Shot is then ignored.
+    [string]$CaptureTex = '',
+    [int]$CaptureAfter = 0
 )
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent $PSScriptRoot
@@ -39,8 +56,16 @@ $presses = foreach ($start in 3620, 3700, 3800, 3900) {
     '{0}-{1}:A' -f ($start + $PressShift), ($start + $PressShift + 12)
 }
 $env:TLS_INPUT_SCRIPT = $titleWalk + ',' + ($presses -join ',')
-$env:TLS_SHOT_FRAMES = $Shot
+if ($CaptureTex) {
+    # Content-keyed capture: the screenshot lands on the first present that binds the texture,
+    # so the shot frame is whatever the page's own timeline says it is.
+    $env:TLS_PAGE_CAPTURE = "tex:$CaptureTex,$CaptureAfter"
+    Remove-Item Env:\TLS_SHOT_FRAMES -ErrorAction SilentlyContinue
+} else {
+    $env:TLS_SHOT_FRAMES = $Shot
+}
 Write-Host ("input: presses shifted {0:+#;-#;0}" -f $PressShift)
+if ($CaptureTex) { Write-Host ("capture: first present binding tex 0x{0} at or after frame {1}" -f $CaptureTex, $CaptureAfter) }
 
 $ppm = "build\recomp\d3d11_screenshot_$Shot.ppm"
 $exe = Join-Path $root 'build\recomp\tls_runner.exe'
@@ -57,6 +82,7 @@ for ($attempt = 1; $attempt -le $Attempts; $attempt++) {
     Remove-Item (Join-Path $saveDir 'savedata.dat'), (Join-Path $saveDir 'banner.bin') -Force -ErrorAction SilentlyContinue
 
     $sw = [System.Diagnostics.Stopwatch]::StartNew()
+    $runStart = Get-Date
     & $exe --window --minimized --frames $Frames *> $logPath
     $sw.Stop()
 
@@ -69,14 +95,29 @@ for ($attempt = 1; $attempt -le $Attempts; $attempt++) {
     Write-Host ("attempt {0}: frames={1} shot={2} elapsed={3:N0}s Game@{4} sequences: {5}" -f
                 $attempt, $Frames, $Shot, $sw.Elapsed.TotalSeconds, $gameFrame, $seqs)
 
+    # Content-keyed runs: find the present the capture landed on and report that file. A file
+    # from an earlier run cannot be mistaken for this one (timestamp vs run start).
+    if ($CaptureTex) {
+        $cap = Select-String -Path $logPath -Pattern '\[PageCapture\] firing' | Select-Object -First 1
+        if (-not $cap) {
+            Write-Host ("capture: TLS_PAGE_CAPTURE did not fire (no present bound tex 0x{0} after frame {1})" -f $CaptureTex, $CaptureAfter) -ForegroundColor Red
+        } else {
+            Write-Host ("capture: " + $cap.Line)
+            if ($cap.Line -match 'present (\d+)') {
+                $Shot = $Matches[1]
+                $ppm  = "build\recomp\d3d11_screenshot_$Shot.ppm"
+            }
+        }
+    }
+
     if ($RequireGame -le 0 -or $gameFrame -eq $RequireGame) {
         $frameLines = Select-String -Path $logPath -Pattern '\[TLS Frame (\d+)\]'
         if ($frameLines) { Write-Host ("last frame line: " + $frameLines[-1].Line) }
-        if (Test-Path $ppm) {
+        if ((Test-Path $ppm) -and ((Get-Item $ppm).LastWriteTime -ge $runStart)) {
             $h = (Get-FileHash $ppm -Algorithm SHA256).Hash
             Write-Host ("shot {0}: {1} bytes sha256={2}" -f $Shot, (Get-Item $ppm).Length, $h)
         } else {
-            Write-Host "shot ${Shot}: MISSING (the run did not reach the frame)" -ForegroundColor Red
+            Write-Host "shot ${Shot}: MISSING or stale (not written by this run)" -ForegroundColor Red
         }
         return
     }
