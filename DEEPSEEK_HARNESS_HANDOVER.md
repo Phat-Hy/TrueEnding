@@ -25,7 +25,11 @@ below.
 > the consistency check that the formula is right, since that scene is already validated. It stays off because
 > promoting it changes the whole 3D picture and this host has no Dolphin reference framed like the cave shot; the
 > promotion recipe is AP-P item 4. **Do not re-derive the texgen decode**: AP-P item 1 has the guest's six
-> configurations and the evidence that `SourceRow` is Dolphin's.
+> configurations and the evidence that `SourceRow` is Dolphin's. **TEVORDER colorchan is implemented too**
+> (`TLS_TEV_RASCHAN=1`, default off): the 9 stages that read RASC/RASA all name XF colour channel 1, and with the
+> switch on the frame moves by only 0.09/255 - near equivalence, so it stays off until the XF light decode behind
+> channel 1 is trustworthy (frame 3500's `light1` decodes with a position of ~4.7e17). AP-P item 7 records the
+> cbuffer-mirror trap that cost a run, with three `_Static_assert`s now guarding it.
 
 > **INDIRECT TEXTURING IS IMPLEMENTED AND THE TEV PATH NOW RUNS 3D BATCHES (§5c.46 AP-O).** The 2D-only gate is
 > gone. GX's indirect stages are tracked (BP 0x06..0x0F, 0x10..0x1F, 0x25..0x27 - every one of those writes used
@@ -11064,16 +11068,50 @@ generated coordinate.
 **5. What is still missing after this.**
 * `TexGenType::EmbossMap` and `Color0`/`Color1` texgens are not generated (the frame uses only `Regular`).
 * `SourceRow::Colors`, `BinormalT`, `BinormalB` sources are not generated (the frame uses Geom, Normal and Tex0).
-* `TEVORDER`'s **colorchan** is still recorded but not evaluated. Measured: of present 3500's 127 enabled stages,
-  118 name channel 7 (zero) and 9 name channel 1, and **all 9 stages that reference RASC/RASA are among those
-  channel-1 ones** (b14/15/17/22/25/28/42/54/55 - the water/effect set). The host's vertex format carries one
-  colour, so evaluating channel 1 needs a second XF colour channel through the lighting stage
-  (`xf_light_channel(1, ...)`, which the pipeline already has the inputs for) plus a `CLR1` interpolant.
+* `TEVORDER`'s colorchan is implemented (item 6) but off by default, and **the XF light registers are not
+  trustworthy**: frame 3500's `light1` decodes with a position of ~4.7e17, and channel 1's colour is
+  `mat(0x665944FF) * (ambient + light1)` with `lit=1`, so a wrong light is a wrong channel-1 colour. Validating the
+  XF light decode (`TLS_XF_LIGHTING` is off for the same reason) is the step that would let colorchan be promoted.
 * Timing on this host is too noisy to quote (the same `TLS_XF_TEXGEN=0` invariant measured 753 s in one job and
   503 s in another, so load dominates); do not attribute a speed change to this work without a quiet host.
 
-**6. Instruments.** `TLS_XF_TEXGEN=1` is the only new switch (default off). The per-batch texgen dump lives in
-`TLS_TEV_PROBE` (each `[texgen]` line prints type/src/proj/inputform/matrix/post plus the rows), and
+**6. TEVORDER colorchan is implemented too, and measured (off by default).** The stage's raster input is
+`tev_ras_table[colorchan]` in Dolphin: channel 0/1 = XF colour channel 0/1, 5/6 = bump alpha, 7 = zero. The host
+always fed channel 0. Implementation: `GxVertex` gained `color1` (appended, stride 60 -> 64), computed
+unconditionally by `xf_channel_colour(1, ...)` - the same XF lighting function that produces channel 0, factored out
+of `xf_lighting_compute` so channel 0 keeps whichever path it had - and the shader picks the source per stage from
+`tev_raschan[s].x` (`TLS_TEV_RASCHAN=1` enables; 5/6 read as zero because `bs`/bump alpha is not evaluated, 2..4 are
+invalid on hardware).
+
+Measured: with `TLS_TEV_RASCHAN=0` frame 3500 is `D3329E35...` **exactly** (the plumbing is inert), and with it on
+it is `F9B5FB268B328D3F86B21452294052070E31DC9E48B6525972D85DDC6F4F0F9B` - a **0.09/255 mean absolute difference,
+0.3 % of pixels**, i.e. near equivalence. That is why it is off: switching it on would re-record the invariant for a
+change that is not demonstrably better, while its value depends on the XF light decode above. The A/B image is
+`docs/evidence/cmp_f3500_raschan_5c46app.png`.
+
+**7. A cbuffer-mirror trap worth remembering (it cost a run).** `GxTevConstants` must mirror `cbuffer GxTev`
+byte-for-byte, and **HLSL 16-byte-aligns an array of `uint4`/`float4` and inserts padding**, so a `uint` inserted in
+front of such an array shifts every field after it while *both sides still compile*. Adding `raschan` in front of
+`tgneed` did exactly that: the shader read `colorchan` 12 bytes off, took a nonzero channel for stages that name
+zero, and moved frame 3500 to `D3326D77...` **even with the switch forced off**. The fix is to keep arrays before
+scalars, and three `_Static_assert`s in `gfx_d3d11.c` now pin the size and the alignment landmarks so the next
+insertion fails the build instead of the picture.
+
+**8. Instruments.** Two new switches, both default off: `TLS_XF_TEXGEN=1` (generate texture coordinates 0..7 through
+the XF texture matrices) and `TLS_TEV_RASCHAN=1` (evaluate TEVORDER's colorchan). The per-batch texgen dump lives in
+`TLS_TEV_PROBE` (each `[texgen]` line prints type/src/inputform/matrix/post plus the rows), and
 `TLS_PROBE_PRESENT_ONLY=1` pins it to one frame.
+
+**9. One run in this session is NOT evidence: `fifa15` was running.** Late in the session the title hand-over moved
+from **1647** to **~670-726** and stayed there across six attempts and both runners, so `tools/invariant.ps1` failed
+(frame 3500 = `51839496...`) and `tools/page_run.ps1` rejected every attempt with "hand-over at frame 716, expected
+1647". The same binary had passed with `D3329E35...` and `Game@1647` minutes earlier, and the cause was found with two
+CPU samples 5 s apart: **`fifa15` was consuming 12.1 CPU-seconds per 5 wall-seconds (~240 %)**, exactly the culprit
+§5c.46 AP names. So: the hand-over frame is a host-speed sensor, nothing in this section moved it, and **any log in
+`logs_ap/` whose `SetNextSequence('Game')` frame is not 1647 is not a measurement**. Valid runs from this session (all
+with `Game@1647`): `AP_P_final_inv.log` (default, `D3329E35...` PASS), `texgen_on_inv.log` / `texgen3_on_inv.log`
+(`EAC9E3DD...`), `raschan2_off_inv.log` (`D3329E35...` - the control that proved the colorchan plumbing inert),
+`raschan2_on_inv.log` (`F9B5FB26...`), and `texgen_page.log` (page numbers exact, 49 batches).
+
 
 

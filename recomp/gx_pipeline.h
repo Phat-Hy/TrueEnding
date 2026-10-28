@@ -30,6 +30,13 @@ typedef struct {
      * existing fields so every earlier offset in the D3D11 input layout stays valid
      * (handover 5c.46 AP-P). */
     float ox, oy, oz;
+    /* XF colour channel 1, packed 0xAABBGGRR like `color`. TEVORDER's colorchan field
+     * picks which XF channel - or zero, or the bump alpha - feeds a stage's RASC/RASA
+     * input (Dolphin PixelShaderGen's tev_ras_table). Measured at present 3500: of 127
+     * enabled stages, 118 name channel 7 (zero) and 9 name channel 1, and ALL 9 stages
+     * that actually reference RASC/RASA are among the channel-1 ones, so this is the
+     * colour the water/effect materials are shaded with (handover 5c.46 AP-P item 5). */
+    uint32_t color1;
 } GxVertex;
 
 // GX Primitive types

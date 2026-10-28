@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <stdint.h>
 #include <math.h>
+#include <stddef.h>
 #include "gfx_backend.h"
 #include "gx_pipeline.h"
 
@@ -43,6 +44,10 @@ typedef struct {
     int32_t  tginfo[8][4];
     float    tgmtx[24][4];
     float    tgpost[24][4];
+    /* 16-byte aligned on BOTH sides: HLSL aligns a uint4 array to 16 bytes and would
+     * insert padding if a scalar preceded it, so the scalars live after the arrays (the
+     * mirror silently desynchronised the first time this was written). */
+    uint32_t raschan[16][4];  /* per TEV stage: x = TEVORDER colorchan (raster source) */
     uint32_t tgneed;          /* bit g set = coordinate g has to be generated */
     uint32_t tgpad0, tgpad1, tgpad2;
     uint32_t ind_num;         /* GEN_MODE bits 16..18 */
@@ -50,6 +55,17 @@ typedef struct {
     uint32_t num_stages;
     uint32_t alpha_test;
 } GxTevConstants;
+
+/* Landmarks of the cbuffer mirror. If one of these fires, `cbuffer GxTev` in
+ * tools/compile_shaders.py no longer matches this struct - and the failure mode is
+ * silent: HLSL 16-byte-aligns an array of uint4/float4 and inserts padding, so a scalar
+ * inserted in front of one shifts every field after it while both sides still compile
+ * (that is exactly how the colorchan field first desynchronised the layout). */
+_Static_assert(sizeof(GxTevConstants) == 3360,
+               "GxTevConstants changed size: update the `cbuffer GxTev` mirror");
+_Static_assert(offsetof(GxTevConstants, raschan) % 16 == 0,
+               "raschan must start 16-byte aligned, as HLSL aligns uint4 arrays");
+_Static_assert(offsetof(GxTevConstants, num_stages) % 4 == 0, "scalar block misaligned");
 
 /* XF texture coordinate generation (Dolphin VertexShaderGen WriteTexCoordTransforms) and
  * the stage/indirect coordinate selections that consume it.
@@ -150,6 +166,22 @@ static void gx_tev_fill_texgen(GxTevConstants* c, const GxDrawBatch* b, const Gx
         }
     }
     c->tgneed = need;
+
+    /* TEVORDER colorchan: which XF colour - or zero - feeds this stage's raster input.
+     * OFF by default (`TLS_TEV_RASCHAN=1` enables): the register the guest names is
+     * channel 1 for exactly the 9 stages that read RASC/RASA, but its *value* comes out
+     * of the XF channel-1 lighting path, and the XF light registers are not trustworthy
+     * yet (frame 3500's light 1 decodes with a position of ~4.7e17). Measured with the
+     * switch on: mean absolute difference 0.09/255, 0.3 % of pixels - i.e. near
+     * equivalence, not a demonstrated improvement, so the recorded frame stays. */
+    static int s_raschan = -1;
+    if (s_raschan < 0) {
+        const char* e = getenv("TLS_TEV_RASCHAN");
+        s_raschan = (e && *e && *e != '0') ? 1 : 0;
+    }
+    for (int i = 0; i < 16; i++) {
+        c->raschan[i][0] = (s_raschan && st) ? (uint32_t)st->colorchan[i] : 0u;
+    }
 }
 
 static float gx_tev_reg_component(uint32_t raw) {    int32_t v = (int32_t)(raw & 0x7FF);
@@ -588,8 +620,11 @@ bool d3d11_init(HWND hwnd, const GfxConfig* config) {
         /* Object-space position, appended so the offsets above are unchanged; the XF
          * texgen needs it (SourceRow::Geom) - handover 5c.46 AP-P. */
         {"TEXCOORD", 2, DXGI_FORMAT_R32G32B32_FLOAT,    0, 48, D3D11_INPUT_PER_VERTEX_DATA, 0},
+        /* XF colour channel 1, which TEVORDER's colorchan can select as the raster
+         * colour (5c.46 AP-P). Appended, so the offsets above are untouched. */
+        {"COLOR",    1, DXGI_FORMAT_R8G8B8A8_UNORM,     0, 60, D3D11_INPUT_PER_VERTEX_DATA, 0},
     };
-    hr = ID3D11Device_CreateInputLayout(s_d3d11.device, gx_elements, 6, s_gx_vs_bytecode, sizeof(s_gx_vs_bytecode), &s_d3d11.gx_input_layout);
+    hr = ID3D11Device_CreateInputLayout(s_d3d11.device, gx_elements, 7, s_gx_vs_bytecode, sizeof(s_gx_vs_bytecode), &s_d3d11.gx_input_layout);
     if (FAILED(hr)) {
         printf("[D3D11] Failed to create GX input layout: 0x%08X\n", (unsigned int)hr);
     }

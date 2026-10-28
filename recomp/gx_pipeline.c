@@ -1103,8 +1103,11 @@ static void xf_light_channel(int chan, const float base[4], const float pos[3],
     }
 }
 
-/* Replace the vertex colour with the XF's channel-0 result (Dolphin: WriteVertexBody). */
-static void xf_lighting_compute(GxVertex* v, float px, float py, float pz) {
+/* The XF's colour for one channel (Dolphin: WriteVertexBody -> dolphin_calculate_lighting_chnN).
+ * Refactored out of xf_lighting_compute so channel 1 can be produced even while channel 0
+ * keeps whichever path it had: the host's channel 0 is the raw CLR0 unless TLS_XF_LIGHTING
+ * is set, and changing that is a separate, picture-wide decision. */
+static uint32_t xf_channel_colour(int chan, const GxVertex* v, float px, float py, float pz) {
     float base[4] = {
         (float)(v->color & 0xFF) / 255.0f,
         (float)((v->color >> 8) & 0xFF) / 255.0f,
@@ -1122,13 +1125,21 @@ static void xf_lighting_compute(GxVertex* v, float px, float py, float pz) {
     xf_normalize3(tn);
     const float pos[3] = { px, py, pz };
     float lit[4];
-    xf_light_channel(0, base, pos, tn, lit);
-    if (s_xf_num_chan == 0) lit[0] = lit[1] = lit[2] = lit[3] = 0.0f; /* TEV sees zero */
+    xf_light_channel(chan, base, pos, tn, lit);
+    if (s_xf_num_chan == 0) lit[0] = lit[1] = lit[2] = lit[3] = 0.0f;   /* TEV sees zero */
+    /* Dolphin WriteVertexBody: with fewer than two colour channels the TEV still gets
+     * the second one, as zero. */
+    if (s_xf_num_chan <= 1 && chan == 1) return 0u;
     uint32_t a = (uint32_t)(lit[3] * 255.0f + 0.5f);
     uint32_t b = (uint32_t)(lit[2] * 255.0f + 0.5f);
     uint32_t g = (uint32_t)(lit[1] * 255.0f + 0.5f);
     uint32_t r = (uint32_t)(lit[0] * 255.0f + 0.5f);
-    v->color = (a << 24) | (b << 16) | (g << 8) | r;
+    return (a << 24) | (b << 16) | (g << 8) | r;
+}
+
+/* Replace the vertex colour with the XF's channel-0 result (Dolphin: WriteVertexBody). */
+static void xf_lighting_compute(GxVertex* v, float px, float py, float pz) {
+    v->color = xf_channel_colour(0, v, px, py, pz);
 }
 
 static inline GxVertex transform_vertex(const GxVertex* in) {
@@ -1210,6 +1221,10 @@ static inline GxVertex transform_vertex(const GxVertex* in) {
     if (xf_lighting_enabled()) {
         xf_lighting_compute(&out, px, py, pz);
     }
+    /* XF colour channel 1, which TEVORDER's colorchan can select instead of channel 0
+     * (Dolphin tev_ras_table). Unconditional: it is a new input, so nothing that renders
+     * today changes, and the water/effect materials are the stages that read it. */
+    out.color1 = xf_channel_colour(1, in, px, py, pz);
     return out;
 }
 
@@ -1229,6 +1244,16 @@ static inline GxVertex lerp_vertex(const GxVertex* a, const GxVertex* b, float t
     r.ox = a->ox + t * (b->ox - a->ox);
     r.oy = a->oy + t * (b->oy - a->oy);
     r.oz = a->oz + t * (b->oz - a->oz);
+    {
+        uint32_t a_a = (a->color1 >> 24) & 0xFF, b_a = (b->color1 >> 24) & 0xFF;
+        uint32_t a_b = (a->color1 >> 16) & 0xFF, b_b = (b->color1 >> 16) & 0xFF;
+        uint32_t a_g = (a->color1 >> 8) & 0xFF,  b_g = (b->color1 >> 8) & 0xFF;
+        uint32_t a_r = a->color1 & 0xFF,         b_r = b->color1 & 0xFF;
+        r.color1 = (((uint32_t)(a_a + t * ((float)b_a - (float)a_a))) << 24) |
+                   (((uint32_t)(a_b + t * ((float)b_b - (float)a_b))) << 16) |
+                   (((uint32_t)(a_g + t * ((float)b_g - (float)a_g))) << 8) |
+                    ((uint32_t)(a_r + t * ((float)b_r - (float)a_r)));
+    }
     uint32_t a_a = (a->color >> 24) & 0xFF, b_a = (b->color >> 24) & 0xFF;
     uint32_t a_b = (a->color >> 16) & 0xFF, b_b = (b->color >> 16) & 0xFF;
     uint32_t a_g = (a->color >> 8) & 0xFF,  b_g = (b->color >> 8) & 0xFF;

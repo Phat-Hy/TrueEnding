@@ -70,6 +70,7 @@ struct VSInput {
     float4 color  : COLOR0;
     float2 uv1    : TEXCOORD1;
     float3 objpos : TEXCOORD2;
+    float4 color1 : COLOR1;
 };
 
 struct PSInput {
@@ -79,6 +80,7 @@ struct PSInput {
     float2 uv1   : TEXCOORD1;
     float3 objpos : TEXCOORD2;
     float3 nrm    : TEXCOORD3;
+    float4 color1 : COLOR1;
 };
 
 PSInput VSMain(VSInput input) {
@@ -89,6 +91,7 @@ PSInput VSMain(VSInput input) {
     output.color = input.color;
     output.objpos = input.objpos;
     output.nrm = input.normal;
+    output.color1 = input.color1;
     return output;
 }
 
@@ -304,6 +307,10 @@ cbuffer GxTev : register(b0)
     int4   tev_tginfo[8];
     float4 tev_tgmtx[24];    // three rows of the texture matrix, per texgen
     float4 tev_tgpost[24];   // three rows of the post matrix, per texgen
+    // Keep the uint4 array first and the scalars after it: HLSL 16-byte-aligns an array
+    // of uint4 and inserts padding, so a scalar in front of it desynchronises the C
+    // mirror of this cbuffer.
+    uint4  tev_raschan[16];  // per TEV stage: x = TEVORDER colorchan (raster source)
     uint   tev_tgneed;       // bit g set = coordinate g has to be generated
     uint   tev_tgpad0, tev_tgpad1, tev_tgpad2;
     uint   tev_ind_num;      // GEN_MODE bits 16..18
@@ -764,7 +771,18 @@ float4 PSTev(PSInput input) : SV_Target
                 texel = SampleTevTex(map, float2(tevcoord) / dim, tev_wrap[map].x);
                 texel = TevSwap(texel, tev_tswap[s]);
             }
-        }        float4 rasv = TevSwap(ras, tev_rswap[s]);
+        }        /* GX TEVORDER's colorchan picks the stage's RASC/RASA source (Dolphin
+         * PixelShaderGen tev_ras_table): 0/1 = XF colour channel 0/1, 5/6 = bump alpha,
+         * 7 = zero. Channels 2..4 are invalid and the bump-alpha forms need the indirect
+         * stage's `bs` field, which is not evaluated - both read as zero rather than
+         * silently substituting channel 0. Measured at present 3500: 118 of 127 enabled
+         * stages name 7 and the 9 that name 1 are exactly the ones that read RASC/RASA,
+         * so this is the water/effect materials' shading input (handover 5c.46 AP-P). */
+        uint rasch = tev_raschan[s].x;
+        float4 rawras = float4(0.0f, 0.0f, 0.0f, 0.0f);
+        if (rasch == 0u) rawras = input.color;
+        else if (rasch == 1u) rawras = input.color1;
+        float4 rasv = TevSwap(rawras, tev_rswap[s]);
 
         float4 konst_c = TevKonstColor(ks.x & 0x1Fu);
         float konst_a = TevKonstChannel(ks.y & 0x1Fu, 3u);
