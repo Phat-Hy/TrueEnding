@@ -18,8 +18,15 @@ corrected below (`AP-L` shows the page's content and supersedes AP K's "identity
 > 3659, so a show at the page start is undone ten frames later (measured). With the fix the page's batch
 > count follows the forced run's timeline exactly (38/50/54/25 at 3710/3720/3780/3840) and the capture is the
 > reference page - `docs/evidence/host_page_content_5c46apl_3781.png`. Invariant PASS, same hash. Two art
-> defects remain and are texture-side: the crest is a black rectangle (`0x90D19B80` sampled black) and there
-> is a dark band behind the text column.
+> defects remain and are **two-texture "ink plates", not missing crest art**: read **§5c.46 AP-M** at the end of
+> this file before touching them. Measured there: `0x90D19B80` is `data/texture/ui_base_white.texture` (the page's
+> white plate, loaded at frame 168, written by nothing afterwards), batches b37/b38 draw that plate with a
+> dark-red raster colour (`0xFF00001E`) plus a SECOND texture that can only supply alpha -
+> `tutorial_dc01.texture` (the crown crest, 128x128) for b37 and `tt001_10_ch02.texture` (a moon/wave motif) for
+> b38 - so what is left is the alpha stage itself: GX's alpha-combiner bit layout and the C0/C1/C2 colour
+> registers it needs are both unimplemented. AP-L's addenda ("the crest's writer is a decompress into
+> `0x90D19AA0`", "the crest scratch reads black") are **withdrawn** in AP-M, with the frame numbers that
+> disprove them.
 
 > **THE PAGE-TABLE CURSOR THEORY IS DEAD - THE PAGE START DOES READ THE TABLE, TAKE THE MODES 1..4 BRANCH,
 > AND BUILD AND SHOW ITS LAYOUTS (§5c.46 AP).** AM/AN/AO are **wrong on all three counts** and AP measures
@@ -10394,3 +10401,166 @@ GX upload there. **Next action (one run):** `TLS_MEM_DUMP=0x90D19360,0x1000` at 
 from a guest dump) and compare those bytes with the decoded crest art; then instrument `CXDecompressFast`
 (`0x8046C380`'s callee) to print `(src, dst, out_len)` for the `dst=0x90D19AA0` call - a short write, a wrong
 destination, or a decompressor that returns zeros splits the remaining work three ways in one measurement.
+
+### AP-M. THE TWO ART DEFECTS ARE TWO-TEXTURE "INK PLATES", NOT A MISSING CREST - and the AP-L addenda's premise is withdrawn
+
+This session answered the AP-L question ("who writes 0x90D19B80 / where is the crest art") by measurement, and
+the answer is that **0x90D19B80 is not a crest slot at all**. Everything below is a measurement from a page run
+(`tools/page_run.ps1 -Frames 3800 -PressShift 27 -RequireGame 1647`), and every instrument added is default-off.
+
+**1. `0x90D19B80` is `data/texture/ui_base_white.texture` - the page's WHITE PLATE.** The resource-load probe
+(`TLS_RES_LOAD_PROBE=1`, `TLS_RES_LOAD_FROM=0`) lists every `.texture` with its buffer:
+
+```
+[ResLoad] f=168  ptr=0x90D19B40 size=0x840  name='data/texture/ui_base_white.texture'   OVERLAPS:crest64x64@+0x40
+[ResLoad] f=168  ptr=0x90D1A3C0 size=0x240  name='data/texture/ui_shine.texture'
+[ResLoad] f=168  ptr=0x90D1A640 size=0x2040 name='data/texture/ui_shop_deco.texture'
+[ResLoad] f=168  ptr=0x90D1C6C0 size=0x240  name='data/texture/icon_skull.texture'
+[ResLoad] f=168  ptr=0x90D1C940 size=0x840  name='data/texture/icon_upitem.texture'
+[ResLoad] f=169  ptr=0x90D1D1C0 size=0x8040 name='data/texture/icon_tutorial_c.texture'
+```
+
+It is loaded at frame **168** with the boot UI set; the texel data sits at `ptr+0x40` (measured for every
+`.texture`: `tutorial_bg01` -> `0x921DEA20+0x40 = 0x921DEA60`, the batch's parchment address). A store watch
+(`TLS_STORE_WATCH=0x90D19B80,0x90D1A380` armed from 3400) reports **`in-range=0`**: nothing writes that slot at
+the page, and no resource load touches it again. The AP-L addenda's "the crest is decompressed into this arena"
+is therefore **withdrawn**: the three `0x90D19xxx` decompress destinations were attributed to frames 3700-3800
+without the hook printing a frame (it printed none). With the frame field added
+(`[TLS CXDecompressFast] f=... ENTER src=... dst=...`) the same destinations are:
+
+```
+f=1651 dst=0x90D19720   data/d2anime/shop_text_noitem.d2b
+f=1765 dst=0x90D196A0   data/motion/fc_pc101_lip00_u.motion
+f=1817 dst=0x90D19AA0   data/building/dg004_corner06.building
+```
+
+i.e. three unrelated *earlier* loads in the same MEM2 arena, none of them at the page and none of them art.
+
+**2. The defects are batches b37 and b38, and each is a TWO-TEXTURE pane.** `TLS_BATCH_COLOR_PROBE=<present>`
+prints one line per batch with texture, blend, TEV stage-0 words, raster colour, UVs and the texmap set:
+
+```
+[BatchCol] b37 tex=0x90D19B80 64x64 fmt=14 blend=1 src=4 dst=5 ras=0xFF00001E
+           uv=[0.000..1.000, 0.000..1.000] texmapmask=0x03 t0=0x90D19B80 t1=0x921FEAE0 has1=1
+           st=2 st0en=1 st0map=0 st0coord=0 st1en=1 st1map=1 st1coord=1 tex1fmt=14 tex1wh=128x128
+[BatchCol] b38 tex=0x90D19B80 64x64 fmt=14 blend=1 src=4 dst=5 ras=0xFF00001E
+           texmapmask=0x03 t0=0x90D19B80 t1=0x9226B160 has1=1 tex1fmt=14 tex1wh=256x256
+[BatchCol] b39 tex=0x922731E0 256x256 fmt=14 blend=1 src=4 dst=5 ras=0xFFE1E1FF
+           texmapmask=0x03 t0=0x922731E0 t1=0x92F44500 has1=1
+```
+
+with the rects from `TLS_BATCH_DUMP=<present>`:
+
+```
+b37  tex=0x90D19B80 64x64  ndc=[0.32..0.57, 0.33..0.70]     <- the black square (screen x 845..1005, y 108..241)
+b38  tex=0x90D19B80 64x64  ndc=[-1.02..0.16, -1.07..0.62]   <- the dark band behind the text column
+```
+
+and the page's own load burst (frames 3647-3656) supplies the second textures by name:
+
+```
+f=3647 tutorial140.csv | f=3648 tt001_10.d2b, tt001_mv01.d2b | f=3650 mv_tt001.d2b, tutorial_bg01.texture
+f=3652 ef_cha04k_c.texture, tt001_10_ch01c.texture (-> 0x922731E0, the character illustration)
+f=3654 tt001_10_ch01.texture (-> 0x92F44500), tt001_10_ch02.texture (-> 0x9226B160)
+f=3656 tutorial_dc01.texture (-> 0x921FEAE0)
+```
+
+**So b37's second texture is `tutorial_dc01.texture` - the crown/crest medallion, 128x128 CMPR** (decoded from
+memory and from the host's own upload; `docs`-quality art, the same medallion the reference page shows) - and
+b38's is `tt001_10_ch02.texture`, an ornate moon/wave motif (256x256). The plate's raster colour is a dark red
+(`0xFF00001E`, ABGR-packed for GX, i.e. RGB (30,0,0)): **the ink colour of the reference's crest.**
+
+**3. The guest's TEV says the second texture contributes only its ALPHA.** Both batches have two stages
+(identical words for every 2-map batch on the page), measured with `TLS_TEV_DUMP_BATCH=37,<present>`:
+
+```
+[TevStage] b37 stage=0 col=0x0008F8AF alp=0x0008F2F0 texenable=1 texmap=0 texcoord=0
+[TevStage] b37 stage=1 col=0x0008F0CF alp=0x0008E274 texenable=1 texmap=1 texcoord=1
+```
+
+Reading them with the shader's own (colour-shaped) packing: stage 0 is `rgb = tex0.rgb * ras.rgb`,
+`a = tex0.a * ras.a`; stage 1 is a colour passthrough and `a = prev.a * tex1.a`. So the render is
+*plate colour x raster colour*, masked by **tex1's alpha** - and with the plate and the crown both CMPR (alpha
+1 almost everywhere: measured 1.7% transparent texels in dc01) the mask is 1 and the result is the opaque dark
+red rectangle we see. `PSAlpha`/`PSOpaque` never sample tex1 at all, so the default path cannot express these
+batches at all - `TLS_TEV_MULTI=1` sends any `has_texture1` batch through the TEV shader for exactly this reason.
+
+**4. The first real lever found: the alpha combiner's BIT LAYOUT.** GX packs BP 0xC1 as
+`d:0-2 c:3-5 b:6-8 a:9-11, bias:12-13, op:14, clamp:15, shift:16-17, dest:18-19`; the pixel shader reads a
+colour-shaped layout (`>>4/7/10/13`, bias 16-17, op 18, clamp 19, scale 20-21), one nibble higher. `gx_pipeline.c`
+now repacks to the GX layout behind `TLS_TEV_ALPHA_GX=1`. With `TLS_TEV_MULTI=1 TLS_TEV_ALPHA_GX=1` the two
+defects measurably change for the first time in this thread:
+
+| region | default | GX alpha layout |
+|---|---|---|
+| crest rect x 855..995 y 120..230 | mean (30,0,0), 100% dark | mean (135,108,73), 0% dark |
+| band x 672..728 y 150..690 | mean (33,3,2), 93% dark | mean (128,99,63), 2.3% dark |
+
+The plates stop being opaque black, but they render as a **uniform translucent plate**, not as the crown: the
+compare stage that could turn a texture's RGB into alpha is not producing texture-shaped alpha yet. Two measured
+gaps stand between here and the reference: (a) GX's C0/C1/C2 colour registers (`BP 0xE8..0xED`) are **not
+decoded at all** (only K0..K3 at `0xE0..0xE7`), and the shader passes `r0/r1/r2 = 0`, so every compare stage
+compares zeros; (b) a compare stage is the only GX-expressible way to get a luma matte out of a CMPR texture, so
+that is the mechanism to finish.
+
+**5. The GEN_MODE TEV stage count is decoded from the wrong bits.** `BP 0x00` packs
+`numtex:0-3, numcol:4-6, numtev:7-10` (Dolphin BPMemory.h); the pipeline reads `(val>>10)&0xF`, i.e. numtev's top
+bit plus cullmode/numind. `TLS_GENMODE_PROBE=1` prints both readings, and the page's two-map batches report
+`val=0x000822`: **numtex=2, numcol=2, numtev=0 -> 1 stage by GX's packing, 3 stages by the current read.** So the
+stage count (and therefore every stage the shader evaluates) is currently whatever unrelated fields happen to say.
+Not switched yet: it changes the whole pipeline's TEV evaluation, so it needs its own invariant run.
+
+**6. The page's texture buffers are TRANSIENT, and the host's upload cache hides it.** At frames 3700..3780 the
+memory at `0x921FEAE0` (dc01) and at `0x922731E0` (ch01c, the character illustration) both decode as *noise* -
+byte-identical across eight sampled frames - while the header written by the same decompression is intact and
+correct. The illustration still renders correctly because `get_or_upload_gx_texture` caches by
+`(guest_addr, format, dims)` and the first upload happened while the buffer was still valid. Two consequences for
+anyone measuring here: **the memory dump is not what the shader samples** (dump the host's upload instead with
+`TLS_TEX_DUMP`), and a *bad* first upload would be permanent.
+
+The `.texture` container, read off `0x921FEAA0` and `0x922731A0` (identical structure):
+
+```
+"fixddata" "wii text"   16-byte magic          0x00002030 / 0x00008030  file size - 16
+0x0000000E              format = 14 (CMPR)     0x00000080 / 0x00000100  width  (128 / 256)
+0x00000080 / 0x00000100 height                 0x00000001              (mips/layers)
+0x921FEAD8 / 0x922731D8  patched pointer        0x921FEAE0 / 0x922731E0 texel data (= ptr+0x40)
+```
+
+**7. Instruments added this session (all default off, all committed).**
+
+| variable | effect |
+|---|---|
+| `TLS_RES_LOAD_PROBE=1` | one line per resource that reaches "loaded": `(frame, req, ptr, size, name)`, plus which known slot it overlaps |
+| `TLS_RES_LOAD_FROM=<n>` | suppress those lines before frame n (a whole run loads ~2900 resources) |
+| `TLS_RES_LOAD_DUMP=<lo>,<hi>` | also write the loaded blob to `build/recomp/resload_f<frame>_<ptr>.bin` when it intersects the window |
+| `TLS_MEM_DUMP_BIN=<addr>,<len>[,f1:f2..][;<range>..]` | binary, up to 64 KB, 4 ranges and 8 frames per run, `build/recomp/memdump_f<frame>_<addr>_<len>.bin` |
+| `TLS_BATCH_COLOR_PROBE=<present>` | one line per batch: texture, blend, TEV stage-0/1 words, texmaps, raster colour, UVs |
+| `TLS_TEV_MULTI=1` | draw `has_texture1` batches through the TEV shader while `TLS_TEV` stays off |
+| `TLS_TEV_ALPHA_GX=1` | repack the alpha combiner word into GX's own bit layout |
+| `TLS_GENMODE_PROBE=1` | print `BP 0x00` writes with both stage-count readings |
+
+The `CXDecompressFast` hook now prints its frame, because its missing frame field is what produced the wrong
+frame attribution in AP-L addendum 3.
+
+**8. Two process facts that cost this session time.**
+
+* **Heavy instrumentation moves the page.** With the 48 KB arena dump plus the store watch plus ~2900 probe lines
+  armed, frame 3780 presented **105 batches** instead of 54 and a different screenshot hash, while the page still
+  looked the same. The canonical page frame is **54 batches at 3780**, shot
+  `sha256=F12867DC19CDFC641C501B185F95830F33477E25E757ED136305AEEF19154128`; reproduce that before comparing
+  anything.
+* **Frame-gated draw probes fire twice.** `probe_frame_hits(want, present)` matches `want == present_count ||
+  want == g_runner_current_frame`, and the guest frame is one behind the present during the draw loop, so a
+  `...[BatchCol]`/`[TevPath]` probe keyed on 3781 prints for two presents. Harmless, but it doubles a log.
+* `logs/` was denied to confined writes for part of this session; the bundled ACL diagnostic returned
+  `NOT_THIS_CLASS` (the folder's ACLs are sound - the denial was the harness's own file policy, which later
+  became full access). `logs_ap/` was used meanwhile and is still untracked scratch.
+
+**9. Where the crest stands.** The plate, its ink colour, its rect, and the art it means to stamp are all named
+now. What is left is one mechanism, not a hunt: make the alpha stage read the *mask texture's own channels*
+(compare stages, which needs C0/C1/C2 and the GX bit layout), or, if that stalls, fix the stage count and re-read
+the combiners the guest actually meant. Verify each attempt against the reference crest
+(`docs/evidence/ref_tutorial_top_5c43.png`, cropped in `docs/evidence/`-style at
+`logs_ap/ref_crest_zoom.png` during this session) and against the invariant, which **PASSes** with every
+instrument in this section present and default-off.

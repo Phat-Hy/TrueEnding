@@ -1212,6 +1212,38 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
                        (s_tex_units[tex_unit].width > 0) &&
                        (s_tex_units[tex_unit].height > 0);
 
+        /* TLS_TEV_PRIMARY_MAP=<0|1>: pick the batch's sampled texture from the TEV's own
+         * stage list instead of from the last GXLoadTexObj the guest issued.
+         *
+         * Why this exists (handover 5c.46 AP-M/N): the tutorial page's two dark plates and
+         * the reference's missing emblem are the SAME two batches, b37/b38. Both set TWO
+         * texmaps - texmap0 = `data/texture/ui_base_white.texture` (a white plate) and
+         * texmap1 = the actual art (`tutorial_dc01.texture`, the crown crest, for b37;
+         * `tt001_10_ch02.texture`, the paper insert, for b38). The old heuristic took
+         * s_active_tex_map, i.e. whichever map was loaded last, so the plate was sampled,
+         * multiplied by the batch's near-black raster colour (ras=0xFF00001E) and drawn as
+         * an opaque dark rectangle exactly where the crest belongs. The TEV stages name the
+         * map they sample (`s_tev_orders[st].texmap`); that is the measured source of truth,
+         * and `primary` below already computed it and then threw it away. */
+        {
+            static int s_prim = -1;
+            if (s_prim < 0) {
+                const char* e = getenv("TLS_TEV_PRIMARY_MAP");
+                s_prim = (e && *e && *e != '0') ? 1 : 0;
+            }
+            if (s_prim) {
+                for (int st = 0; st < (int)s_num_tev_stages; st++) {
+                    if (!s_tev_orders[st].enable) continue;
+                    int m = s_tev_orders[st].texmap & 7;
+                    if (s_tex_units[m].guest_addr != 0 && s_tex_units[m].width > 0 &&
+                        s_tex_units[m].height > 0) {
+                        tex_unit = (uint8_t)m;
+                    }
+                    break;
+                }
+            }
+        }
+
         /* Second texture unit for the TEV shader: the distinct texmaps named by the
          * active stages. texmap n selects the texture bound to texcoord n, so a batch
          * whose stages use maps 0 and 1 samples two different textures. */
@@ -1381,6 +1413,26 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
         fflush(stdout);
     }
     if (reg == 0x00) { // BPMEM_GENMODE (active TEV stages and texgens)
+        /* GEN_MODE packs numtex:0-3, numcol:4-6, numtev:7-10 (Dolphin BPMemory.h), and
+         * the stage COUNT is numtev+1. This read (val>>10)&0xF, i.e. numtev's top bit plus
+         * cullmode/numind - so a batch's stage count was whatever those unrelated fields
+         * happened to say. TLS_GENMODE_PROBE=1 prints both decodings so the difference is
+         * measured, not argued (handover 5c.46 AP-N: the page's crest/motif panes report
+         * two stages whose second stage is a pure passthrough, which is what a MISSED
+         * stage looks like). */
+        {
+            static int s_probe = -1;
+            if (s_probe < 0) s_probe = getenv("TLS_GENMODE_PROBE") ? 1 : 0;
+            if (s_probe) {
+                extern int g_runner_current_frame;
+                printf("[GenMode] f=%d val=0x%06X numtex=%u numcol=%u numtev=%u stages_gx=%u "
+                       "stages_old=%u\n",
+                       g_runner_current_frame, val, val & 0xF, (val >> 4) & 7,
+                       (val >> 7) & 0xF, (uint32_t)(((val >> 7) & 0xF) + 1),
+                       (uint32_t)(((val >> 10) & 0xF) + 1));
+                fflush(stdout);
+            }
+        }
         s_num_tev_stages = (uint8_t)(((val >> 10) & 0x0F) + 1);
         // Recompute primary active texture map and texcoord strictly within active stage count
         s_tev_tex_enable = false;
@@ -1574,8 +1626,30 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
             s_tev_comb_color[stage] = val & 0x00FFFFFF;
             if (((val >> 16) & 3) == 3) s_tev_compare_stages++;
         } else {
-            s_tev_comb_alpha[stage] = val & 0x00FFFFFF;
-            if (((val >> 16) & 3) == 3) s_tev_compare_stages++;
+            /* GX BP 0xC1 packs the ALPHA combiner as d:0-2 c:3-5 b:6-8 a:9-11, bias:12-13,
+             * op:14, clamp:15, shift:16-17, dest:18-19 (Dolphin BPMemory.h), i.e. one nibble
+             * lower than the colour combiner. The pixel shader reads a colour-shaped packing
+             * (args at 4/7/10/13, bias 16-17, op 18, clamp 19, scale 20-21), so the raw word
+             * must be repacked or every alpha stage is evaluated with the wrong fields.
+             * TLS_TEV_ALPHA_GX=1 selects the GX layout. It matters because a compare alpha
+             * stage (bias 3) compares the COLOUR channels of its arguments, which is the only
+             * way GX can derive alpha from a texture's RGB - the mechanism the tutorial
+             * page's crest mask needs (handover 5c.46 AP-N). */
+            uint32_t raw = val & 0x00FFFFFF;
+            static int s_gx_layout = -1;
+            if (s_gx_layout < 0) s_gx_layout = getenv("TLS_TEV_ALPHA_GX") ? 1 : 0;
+            if (s_gx_layout) {
+                raw = (((raw >> 9) & 7) << 13) |   /* a */
+                      (((raw >> 6) & 7) << 10) |   /* b */
+                      (((raw >> 3) & 7) << 7)  |   /* c */
+                      ((raw & 7) << 4)         |   /* d */
+                      (((raw >> 12) & 3) << 16) |  /* bias */
+                      (((raw >> 14) & 1) << 18) |  /* op */
+                      (((raw >> 15) & 1) << 19) |  /* clamp */
+                      (((raw >> 16) & 3) << 20);   /* scale */
+            }
+            s_tev_comb_alpha[stage] = raw;
+            if (((raw >> 16) & 3) == 3) s_tev_compare_stages++;
         }
         s_tev_state_dirty = true;
         return;

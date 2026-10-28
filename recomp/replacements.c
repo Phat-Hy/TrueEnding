@@ -2902,6 +2902,89 @@ static void tls_dump_live_table(CPUState* ctx, u32 tv, u32* seen, int* n, const 
     fflush(stdout);
 }
 
+/* Resource-load probe (handover 5c.46 AP-L addendum 3).
+ *
+ * The two remaining page-art defects are batches 37/38 sampling 0x90D19B80 (a 64x64 CMPR
+ * slot in the 0x90D19xxx MEM2 arena) and reading opaque black, while a `CXDecompressFast`
+ * lands 0xE0 bytes below it (`dst=0x90D19AA0`). The loader `fn_8046C2D4` is what fills these
+ * buffers: it allocates `(size+0x20)&~31` bytes, decompresses into it (or memcpy's), then
+ * publishes the pair on the request node as `+0x54 = data, +0x50 = size` and calls
+ * `fn_80473104(req, 2)`. Reading that pair at the state-2 call is the *measured* byte extent
+ * of every resource loaded at the page, so "did the crest's buffer get written, and how much
+ * of it" stops being an inference from a dst address alone.
+ *
+ * TLS_RES_LOAD_PROBE=1            print (frame, req, ptr, size, name) for every state-2 load
+ * TLS_RES_LOAD_DUMP=<lo>,<hi>     also write build/recomp/resload_f<frame>_<ptr>.bin for
+ *                                 every load whose [ptr,ptr+size) intersects [lo,hi)
+ * TLS_RES_LOAD_FROM=<frame>       suppress both before this frame (a whole run loads
+ *                                 thousands of resources; the page window is the subject)
+ * Both default off; nothing is printed or written unless set. */
+static void tls_res_load_probe(CPUState* ctx) {
+    extern int g_runner_current_frame;
+    static int s_on = -1, s_from = 0;
+    static u32 s_lo = 0, s_hi = 0;
+    if (s_on < 0) {
+        const char* e = getenv("TLS_RES_LOAD_PROBE");
+        s_on = (e && *e && *e != '0') ? 1 : 0;
+        const char* f = getenv("TLS_RES_LOAD_FROM");
+        if (f) s_from = atoi(f);
+        const char* d = getenv("TLS_RES_LOAD_DUMP");
+        if (d) {
+            unsigned lo = 0, hi = 0;
+            if (sscanf(d, "%x,%x", &lo, &hi) == 2 && hi > lo) { s_lo = lo; s_hi = hi; s_on = 1; }
+        }
+    }
+    if (!s_on) return;
+    if (ctx->gpr[4] != 2) return;             /* only the "loaded" transition */
+    if (g_runner_current_frame < s_from) return;
+    u32 req = ctx->gpr[3];
+    if (req < 0x80000000u || !resolve_guest_pointer(ctx, req)) return;
+    u32 ptr = mem_read32(ctx, req + 0x54);
+    u32 size = mem_read32(ctx, req + 0x50);
+    char name[72];
+    int n = 0;
+    for (; n < 63; n++) {
+        u8 c = mem_read8(ctx, req + 6 + (u32)n);
+        if (!c) break;
+        name[n] = (c >= 32 && c < 127) ? (char)c : '.';
+    }
+    name[n] = 0;
+    /* Which arena slot the load touches, so a log line answers "is this the crest?" directly. */
+    char hits[160];
+    hits[0] = 0;
+    if (ptr && size) {
+        struct { u32 addr; const char* what; u32 len; } slots[] = {
+            { 0x90D19B80u, "crest64x64", 2048u },   /* batches 37/38 sample this */
+            { 0x90D1A400u, "next32x32",   512u },
+        };
+        for (unsigned k = 0; k < sizeof(slots) / sizeof(slots[0]); k++) {
+            if (ptr < slots[k].addr + slots[k].len && slots[k].addr < ptr + size) {
+                char one[64];
+                sprintf(one, " OVERLAPS:%s@+0x%X", slots[k].what, (unsigned)(slots[k].addr - ptr));
+                strncat(hits, one, sizeof(hits) - strlen(hits) - 1);
+            }
+        }
+    }
+    printf("[ResLoad] f=%d req=0x%08X ptr=0x%08X size=0x%X name='%s'%s\n",
+           g_runner_current_frame, req, ptr, size, name, hits);
+    fflush(stdout);
+    if (s_lo && size && ptr && ptr < s_hi && s_lo < ptr + size) {
+        const u8* base = (const u8*)resolve_guest_pointer(ctx, ptr);
+        u32 want = size > (1u << 20) ? (1u << 20) : size;
+        if (base) {
+            char path[160];
+            sprintf(path, "build/recomp/resload_f%d_%08X.bin", g_runner_current_frame, ptr);
+            FILE* f = fopen(path, "wb");
+            if (f) {
+                fwrite(base, 1, want, f);
+                fclose(f);
+                printf("[ResLoad]   wrote %s (%u of 0x%X bytes)\n", path, want, size);
+                fflush(stdout);
+            }
+        }
+    }
+}
+
 int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
     tls_record_recent_call(ctx, address);
     tls_tail_push(ctx, address);
@@ -3656,8 +3739,14 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0; // continue to original code
         }
         case 0x806254D0: {
-            printf("[TLS CXDecompressFast] ENTER src=0x%08X dst=0x%08X (lr=0x%08X)\n",
-                   ctx->gpr[3], ctx->gpr[4], ctx->lr);
+            /* The frame is part of the evidence: these lines carry no frame and a previous
+             * round read three of them as "frames 3700-3800" when the hook never said so
+             * (handover 5c.46 AP-L addendum 3 / AP-M). */
+            {
+                extern int g_runner_current_frame;
+                printf("[TLS CXDecompressFast] f=%d ENTER src=0x%08X dst=0x%08X (lr=0x%08X)\n",
+                       g_runner_current_frame, ctx->gpr[3], ctx->gpr[4], ctx->lr);
+            }
             fflush(stdout);
             return 0;
         }
@@ -3696,6 +3785,9 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                        count_3104, req, new_st, ctx->lr);
                 fflush(stdout);
             }
+            /* TLS_RES_LOAD_PROBE / TLS_RES_LOAD_DUMP: the loaded (data,size) pair every
+             * resource publishes here (see tls_res_load_probe). Inert unless set. */
+            tls_res_load_probe(ctx);
             return 0;
         }
         case 0x80473184: {

@@ -3069,6 +3069,67 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                         }
                     }
 
+                    /* TLS_BATCH_COLOR_PROBE=<present frame>: one compact line per batch with
+                     * everything that decides whether a quad is visible - texture, blend
+                     * factors, TEV stage-0 words, alpha test, the raster (vertex) colour and
+                     * the UV range. Added for 5c.46 AP-M: the page's b37/b38 sample the SAME
+                     * 64x64 ui_base_white texture as the SKIP plate (b48+) yet render opaque
+                     * black while the plate renders white, so the difference is one of these
+                     * fields and printing all of them for every batch makes it a diff. */
+                    {
+                        static int s_col_probe_f = -2;
+                        if (s_col_probe_f == -2) {
+                            const char* e = getenv("TLS_BATCH_COLOR_PROBE");
+                            s_col_probe_f = e ? atoi(e) : -1;
+                        }
+                        if (s_col_probe_f >= 0 && probe_frame_hits(s_col_probe_f, (int)s_d3d11_dump_count)) {
+                            const GxTevState* cst_st = gx_pipeline_get_tev_state(batch->tev_state);
+                            uint32_t vo = batch->vertex_offset;
+                            float umin = 1e9f, umax = -1e9f, vmin = 1e9f, vmax = -1e9f;
+                            uint32_t c0 = 0, c1 = 0;
+                            for (uint32_t vi = 0; vi < batch->vertex_count; vi++) {
+                                const GxVertex* v = &gx_vtx[vo + vi];
+                                if (v->u < umin) umin = v->u;
+                                if (v->u > umax) umax = v->u;
+                                if (v->v < vmin) vmin = v->v;
+                                if (v->v > vmax) vmax = v->v;
+                                if (vi == 0) c0 = v->color;
+                                else if (v->color != c0 && !c1) c1 = v->color;
+                            }
+                            printf("[BatchCol] b%u tex=0x%08X %ux%u fmt=%u blend=%d src=%u dst=%u sub=%d "
+                                   "at=0x%08X st=%u tev0col=0x%08X tev0alp=0x%08X "
+                                   "ras=0x%08X ras2=0x%08X uv=[%.3f..%.3f, %.3f..%.3f] verts=%u "
+                                   "texmapmask=0x%02X t0=0x%08X t1=0x%08X t2=0x%08X has1=%d tex1=0x%08X "
+                                   "st0en=%u st0map=%u st0coord=%u st1en=%u st1map=%u st1coord=%u "
+                                   "st1col=0x%08X st1alp=0x%08X tex1fmt=%u tex1wh=%ux%u\n",
+                                   b, batch->tex.guest_addr, batch->tex.width, batch->tex.height,
+                                   batch->tex.format, batch->blend_enable, batch->src_factor,
+                                   batch->dst_factor, batch->subtract, batch->alpha_ref0,
+                                   cst_st ? cst_st->num_stages : 0,
+                                   cst_st ? cst_st->combiner_color[0] : 0,
+                                   cst_st ? cst_st->combiner_alpha[0] : 0,
+                                   c0, c1, umin, umax, vmin, vmax, batch->vertex_count,
+                                   batch->tev_texmap_mask,
+                                   batch->tev_texmap[0].guest_addr,
+                                   batch->tev_texmap[1].guest_addr,
+                                   batch->tev_texmap[2].guest_addr,
+                                   (int)batch->has_texture1,
+                                   batch->has_texture1 ? batch->tex1.guest_addr : 0u,
+                                   cst_st ? cst_st->tex_enable[0] : 0,
+                                   cst_st ? cst_st->texmap[0] : 0,
+                                   cst_st ? cst_st->texcoord[0] : 0,
+                                   cst_st ? cst_st->tex_enable[1] : 0,
+                                   cst_st ? cst_st->texmap[1] : 0,
+                                   cst_st ? cst_st->texcoord[1] : 0,
+                                   cst_st ? cst_st->combiner_color[1] : 0,
+                                   cst_st ? cst_st->combiner_alpha[1] : 0,
+                                   batch->has_texture1 ? batch->tex1.format : 0u,
+                                   batch->has_texture1 ? batch->tex1.width : 0u,
+                                   batch->has_texture1 ? batch->tex1.height : 0u);
+                            fflush(stdout);
+                        }
+                    }
+
                     /* GX colour-combiner argument 4 is TEXC. A stage that names TEXC in no argument outputs the
      * rasteriser colour unchanged, with the texture contributing only through the alpha
      * combiner - that is how the game's glyph atlases are drawn (`ZERO ONE ras.rgb ZERO`,
@@ -3093,7 +3154,25 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     }
     ID3D11PixelShader* ps = flat_raster ? s_d3d11.gx_ps_alpha_flat
                                         : (blend_enable ? s_d3d11.gx_ps_alpha : s_d3d11.gx_ps_opaque);
-                    if (s_d3d11.tev_enabled && s_d3d11.gx_ps_tev) {
+                    bool use_tev_path = s_d3d11.tev_enabled;
+                    /* TLS_TEV_MULTI=1: draw a batch that names a SECOND texture map through the
+                     * TEV shader even when TLS_TEV is off.
+                     *
+                     * Measured (5c.46 AP-N): the page's two remaining art defects are batches
+                     * b37/b38, which set texmap0 = ui_base_white (a white plate) and texmap1 =
+                     * the actual art - tutorial_dc01.texture (the crown crest) for b37 and
+                     * tt001_10_ch02.texture for b38 - with two TEV stages (st0 map 0, st1 map 1).
+                     * PSAlpha/PSOpaque can only sample ONE texture, so they paint the white
+                     * plate tinted by the batch's near-black raster colour (ras=0xFF00001E):
+                     * an opaque dark rectangle exactly where the reference draws the crest.
+                     * A single-texture shader cannot express these batches at all, so they are
+                     * the one class that must take the TEV path. */
+                    if (!use_tev_path && s_d3d11.gx_ps_tev) {
+                        static int s_multi = -1;
+                        if (s_multi < 0) s_multi = getenv("TLS_TEV_MULTI") ? 1 : 0;
+                        use_tev_path = (s_multi != 0) && batch->has_texture1;
+                    }
+                    if (use_tev_path && s_d3d11.gx_ps_tev) {
                         /* GX TEV: evaluate the batch's real combiner stages. All eight
                          * texmap slots are bound (white where the batch does not use
                          * them) because the stages pick the texture, not the batch. */

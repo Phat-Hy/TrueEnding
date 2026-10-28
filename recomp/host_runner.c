@@ -1011,6 +1011,78 @@ static int host_mem_dump_frame(void) {
     return comma ? atoi(comma + 1) : -1;
 }
 
+/* TLS_MEM_DUMP_BIN=0xADDR,LEN[,F1:F2:F3][;0xADDR2,LEN2[,F...]] - the same frame gating as
+ * TLS_MEM_DUMP, but the bytes go to build/recomp/memdump_f<frame>_<addr>.bin instead of hex to
+ * stdout, the window may be up to 64 KB, and up to four ranges can be taken in ONE run.
+ * Comparing an arena region against decoded art is a byte-level job (a 64x64 CMPR sheet is
+ * 2 KB of packed blocks); the hex form both truncates at 4 KB and turns the comparison into
+ * hand-transcription. Multiple ranges matter because the page's textures are scattered
+ * (0x921FEAE0 crest mask, 0x922731E0 illustration, 0x90D19B80 plate) and one run per address
+ * was the expensive way to learn that. Default off. */
+#define HOST_MEM_DUMP_BIN_MAX_RANGES 4
+#define HOST_MEM_DUMP_BIN_MAX_FRAMES 8
+typedef struct {
+    unsigned addr, len;
+    int wanted[HOST_MEM_DUMP_BIN_MAX_FRAMES], n;
+    int done[HOST_MEM_DUMP_BIN_MAX_FRAMES];
+} HostMemDumpBinRange;
+static void host_dump_mem_bin(CPUState* cpu, int frame) {
+    static int s_init = 0;
+    static HostMemDumpBinRange r[HOST_MEM_DUMP_BIN_MAX_RANGES];
+    static int s_ranges = 0;
+    if (!s_init) {
+        s_init = 1;
+        const char* spec = getenv("TLS_MEM_DUMP_BIN");
+        if (!spec) return;
+        char buf[512];
+        snprintf(buf, sizeof(buf), "%s", spec);
+        /* Split on ';' by hand: strtok's global state would be destroyed by the nested
+         * frame-list tokenising below (which silently dropped ranges 2..4 on the first
+         * attempt - the log showed only range 1 armed). */
+        char* seg = buf;
+        while (seg && *seg && s_ranges < HOST_MEM_DUMP_BIN_MAX_RANGES) {
+            char* semi = strchr(seg, ';');
+            if (semi) *semi = 0;
+            unsigned addr = 0, len = 0;
+            char frames[128] = {0};
+            if (sscanf(seg, "%x,%x,%127s", &addr, &len, frames) >= 2 && len && len <= 65536) {
+                HostMemDumpBinRange* e = &r[s_ranges++];
+                e->addr = addr;
+                e->len = len;
+                char* tok = strtok(frames, ":");
+                while (tok && e->n < HOST_MEM_DUMP_BIN_MAX_FRAMES) {
+                    e->wanted[e->n++] = atoi(tok);
+                    tok = strtok(NULL, ":");
+                }
+                printf("[MemDumpBin] armed 0x%08X len=%u frames=", e->addr, e->len);
+                for (int i = 0; i < e->n; i++) printf("%s%d", i ? ":" : "", e->wanted[i]);
+                printf("\n");
+            } else {
+                printf("[MemDumpBin] bad range '%s'\n", seg);
+            }
+            seg = semi ? semi + 1 : NULL;
+        }
+        fflush(stdout);
+    }
+    for (int k = 0; k < s_ranges; k++) {
+        HostMemDumpBinRange* e = &r[k];
+        for (int i = 0; i < e->n; i++) {
+            if (e->done[i] || frame < e->wanted[i]) continue;
+            e->done[i] = 1;
+            const u8* base = (const u8*)resolve_guest_pointer(cpu, e->addr);
+            if (!base) { printf("[MemDumpBin] 0x%08X: unmapped\n", e->addr); fflush(stdout); continue; }
+            char path[160];
+            snprintf(path, sizeof(path), "build/recomp/memdump_f%d_%08X_%X.bin", frame, e->addr, e->len);
+            FILE* f = fopen(path, "wb");
+            if (!f) { printf("[MemDumpBin] cannot write %s\n", path); fflush(stdout); continue; }
+            fwrite(base, 1, e->len, f);
+            fclose(f);
+            printf("[MemDumpBin] wrote %s (%u bytes, frame %d)\n", path, e->len, frame);
+            fflush(stdout);
+        }
+    }
+}
+
 int main(int argc, char** argv) {
 #ifdef _WIN32
     timeBeginPeriod(1);
@@ -1266,6 +1338,8 @@ int main(int argc, char** argv) {
                 host_dump_mem_spec(&cpu);
             }
         }
+        /* TLS_MEM_DUMP_BIN: the binary/wider-window form of the same dump, armed per frame. */
+        host_dump_mem_bin(&cpu, frame);
 
         /* TLS_STORE_WATCH=lo,hi: record instruction-granularity stores into that range and
          * print them at end of frame (handover 5c.45 H). */
