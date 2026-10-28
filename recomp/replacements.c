@@ -82,6 +82,75 @@ void* resolve_guest_pointer(CPUState* ctx, u32 addr) {
     return NULL;
 }
 
+/* ---------------------------------------------------------------------------------------------
+ * THE TUTORIAL PAGE'S CONTENT LAYOUT (5c.46 AP-L).
+ *
+ * Measured chain:
+ *   - fn_803D022C (the camp/tutorial UI manager's setup, called from 0x803660C8 with
+ *     r3 = *(0x8087F490)) creates a LayoutTask from '/data/d2anime/ui_hp_heal.d2a' at frame 1656,
+ *     stores it at manager+0x3EC, activates it (fn_800D246C) and immediately clears bits 1 and 0
+ *     of [layout+0xFC] - i.e. it hides it (0x74xxxxxx -> 0x34xxxxxx).
+ *   - Its init virtual runs at 1696 (task-execute, lr=0x800D28C0) and builds its container
+ *     (fn_801FFA04) - 4 panes, `cnt48=4`; fn_803D164C then hides it again at 2020.
+ *   - Nothing ever sets bit 30 (0x40000000) of [node+0xFC] again. fn_801F4514 gates the whole
+ *     subtree on that bit, so the node's four panes are dropped on every later frame even though
+ *     the draw traversal still visits it (it has a [PageTree] line at the page frame).
+ *   - TLS_FORCE_LAYOUT_BIT=1 sets exactly that bit and the reference page appears: illustration,
+ *     "Movement and Camera", both body lines, i.e. the page's whole content is that subtree
+ *     (docs/evidence/host_page_full_5c46ad.png).
+ *   - The manager's +0x3EC is still read every second frame during the page by fn_803D2A6C
+ *     ([HudUpd] f=3501 mgr=0x81161760 node0x3ec=0x81359B80 fc=0x2C000000 cnt=4), so the node is
+ *     live and reachable - the page start just never shows it.
+ *
+ * So the page's own verbs get the show/hide the reference must be doing:
+ *   - fn_805BB658 (the page start) builds a layout per page-table row; when it builds MODE 1 the
+ *     page's content becomes due, and the content node's draw bit is set there;
+ *   - fn_805BA16C's per-mode hide pass (`.L_805BA2D4`, which deactivates each mode layout and
+ *     clears [layout+0xFC] bit 3) is the same page's "hide everything" step, so the content bit is
+ *     cleared there again.
+ * Both hooks touch ONE bit of ONE layout, they look the layout up through the manager the game
+ * itself stores it in, and they verify the object is still a LayoutTask (vptr 0x80782C08) before
+ * writing, because 0x80000000-range layout addresses are recycled.
+ * ------------------------------------------------------------------------------------------- */
+#define TLS_LAYOUT_VPTR 0x80782C08u
+#define TLS_UI_MANAGER_GLOBAL 0x8087F490u
+#define TLS_UI_MANAGER_CONTENT 0x3ECu
+#define TLS_LAYOUT_FC_DRAW 0x40000000u
+
+static u32 tls_page_content_node(CPUState* ctx) {
+    u32 mgr = mem_read32(ctx, TLS_UI_MANAGER_GLOBAL);
+    if (!mgr) return 0;
+    u32 node = mem_read32(ctx, mgr + TLS_UI_MANAGER_CONTENT);
+    if (node < 0x80000000u || node >= 0x81800000u || (node & 3u)) return 0;
+    if (!resolve_guest_pointer(ctx, node)) return 0;
+    if (mem_read32(ctx, node) != TLS_LAYOUT_VPTR) return 0;   /* recycled address: not a layout */
+    if (!mem_read32(ctx, node + 0x48)) return 0;              /* container not built yet */
+    return node;
+}
+
+/* Returns 1 when the bit actually changed. */
+static int tls_page_content_set(CPUState* ctx, int show, const char* why) {
+    u32 node = tls_page_content_node(ctx);
+    if (!node) return 0;
+    u32 fc = mem_read32(ctx, node + 0xFC);
+    int on = (fc & TLS_LAYOUT_FC_DRAW) != 0;
+    if (on == (show ? 1 : 0)) return 0;
+    mem_write32(ctx, node + 0xFC, show ? (fc | TLS_LAYOUT_FC_DRAW)
+                                       : (fc & ~TLS_LAYOUT_FC_DRAW));
+    {
+        static int s_rep = 0;
+        extern int g_runner_current_frame;
+        if (s_rep < 24) {
+            s_rep++;
+            printf("[PageContentShow] f=%d %s node=0x%08X 0x%08X -> 0x%08X (%s)\n",
+                   g_runner_current_frame, show ? "SHOW" : "HIDE", node, fc,
+                   show ? (fc | TLS_LAYOUT_FC_DRAW) : (fc & ~TLS_LAYOUT_FC_DRAW), why);
+            fflush(stdout);
+        }
+    }
+    return 1;
+}
+
 void handle_instruction_fallback(CPUState* cpu, u32 raw, u32 cia) {
     u32 primary = (raw >> 26) & 0x3F;
     u32 xo = (raw >> 1) & 0x3FF;
@@ -6307,6 +6376,23 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                                lay ? mem_read32(ctx, lay + 0xFC) : 0);
                     }
                     printf("\n");
+                    /* Every layout field one mode slot carries, not just the d2a one (5c.46 AP-L).
+                     * fn_805BA16C (the page's "hide all modes" verb) touches slot+0x40, and the
+                     * page start fills slot+0x478 / +0x4B0 / +0x4B4, so a content layout attached
+                     * to the page class would be sitting in one of those four. */
+                    for (u32 i = 0; i < 4u && cls; i++) {
+                        u32 slot = cls + 0x474u + i * 0x4Cu;
+                        printf("[PageSlot] f=%d mode=%u slot=0x%08X", g_runner_current_frame, i + 1, slot);
+                        static const u32 offs[4] = { 0x40u, 0x478u, 0x4B0u, 0x4B4u };
+                        for (u32 k = 0; k < 4u; k++) {
+                            u32 lay = mem_read32(ctx, slot + offs[k]);
+                            printf(" +%03X=0x%08X(38=0x%08X fc=0x%08X cnt=%u)", offs[k], lay,
+                                   lay ? mem_read32(ctx, lay + 0x38) : 0,
+                                   lay ? mem_read32(ctx, lay + 0xFC) : 0,
+                                   lay ? mem_read32(ctx, lay + 0x4C) : 0);
+                        }
+                        printf("\n");
+                    }
                     fflush(stdout);
                 }
             }
@@ -6319,6 +6405,14 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                     fflush(stdout);
                 }
             }
+            /* 5c.46 AP-L: this is the page's ENTER verb - it is where the page declares that
+             * its layouts are on screen ([layout+0x38] |= 4 for every non-empty mode slot), and
+             * it fires once, at f=3659, eleven frames after the page start built the layouts and
+             * one frame after the per-mode hide pass. Showing the page's content node here is the
+             * only missing step in the measured chain: the node is fully built (4 panes), its
+             * manager still holds it at +0x3EC, and fn_801F4514 drops its entire subtree purely
+             * on [node+0xFC] bit 30, which nothing has set since frame 1696. */
+            tls_page_content_set(ctx, 1, "page enter");
             return 0;
         }
         case 0x80376568: {
@@ -8521,6 +8615,90 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             return 0;
         }
 
+        /* fn_805BB658's THIRD per-mode layout, at lr=0x805BBCF8 (5c.46 AP-L). One page-table row
+         * builds TWO layouts at 0x805BB774 (the row's `col 2` d2a, e.g. tt001_10.d2a) and a THIRD
+         * at 0x805BBCF4 whose name is assembled at runtime from the strings at 0x80763F39
+         * (`database/tutorial/%s`) - that one is stored at class+(mode-1)*0x4C+0x4B4 and its
+         * `fc` bit 3 is cleared immediately, the same "hidden until shown" idiom fn_803D164C uses.
+         * The pane builder is fn_801FFA04(text,len,container,...), fed from this layout's stream
+         * (+0xF0 -> +0xF4 file -> file+0x50 len / file+0x54 text), so printing the stream and its
+         * text answers the only question left for the page's content: is the script there at
+         * creation, and does a later activation ever build panes from it? */
+        case 0x805BBCF8: {
+            static int s_probe = -1;
+            static u32 s_n = 0;
+            if (s_probe < 0) s_probe = getenv("TLS_PAGE_CONTENT_PROBE") ? 1 : 0;
+            if (s_probe && s_n < 12) {
+                extern int g_runner_current_frame;
+                u32 obj = ctx->gpr[3];
+                u32 cls = ctx->gpr[15];
+                u32 slot = ctx->gpr[26];
+                u32 st = obj + 0xF0;
+                u32 file = obj ? mem_read32(ctx, st + 4) : 0;
+                u32 len = file ? mem_read32(ctx, file + 0x50) : 0;
+                u32 text = file ? mem_read32(ctx, file + 0x54) : 0;
+                s_n++;
+                printf("[PageContent] f=%d obj=0x%08X fc=0x%08X f38=0x%08X cnt48=%u arr48=0x%08X "
+                       "class=0x%08X slot=0x%08X\n",
+                       g_runner_current_frame, obj,
+                       obj ? mem_read32(ctx, obj + 0xFC) : 0,
+                       obj ? mem_read32(ctx, obj + 0x38) : 0,
+                       obj ? mem_read32(ctx, obj + 0x4C) : 0,
+                       obj ? mem_read32(ctx, obj + 0x54) : 0, cls, slot);
+                printf("[PageContent] f=%d stream=0x%08X vt=0x%08X file=0x%08X len=%u text=0x%08X "
+                       "slot4b0=0x%08X slot4b4=0x%08X slot478=0x%08X fc478=0x%08X\n",
+                       g_runner_current_frame, st, mem_read32(ctx, st), file, len, text,
+                       slot ? mem_read32(ctx, slot + 0x4B0) : 0,
+                       slot ? mem_read32(ctx, slot + 0x4B4) : 0,
+                       slot ? mem_read32(ctx, slot + 0x478) : 0,
+                       (slot && mem_read32(ctx, slot + 0x478))
+                           ? mem_read32(ctx, mem_read32(ctx, slot + 0x478) + 0xFC) : 0);
+                if (text && len && len < 0x8000) {
+                    const char* p = (const char*)resolve_guest_pointer(ctx, text);
+                    if (p) {
+                        char buf[513];
+                        u32 k;
+                        for (k = 0; k < 512 && k < len; k++) {
+                            unsigned char ch = (unsigned char)p[k];
+                            buf[k] = (ch == '\n' || ch == '\r' || (ch >= 32 && ch < 127))
+                                         ? (char)ch : '.';
+                        }
+                        buf[k] = 0;
+                        printf("[PageContent] script: %s\n", buf);
+                    }
+                }
+                fflush(stdout);
+            }
+            return 0;
+        }
+
+        /* The HUD updater fn_803D2A6C (5c.46 AP-L): this is the method that reads the manager's
+         * +0x3EC layout every frame and sets panes by name (`base_point`, `damage`, `damageSub`
+         * live at 0x80751742/0x80751821/0x80751828 in the ORIGINAL DOL). If it runs while the
+         * tutorial page is up and its +0x3EC is the page's content node, the node is a live HUD
+         * widget and the page's content is somewhere else; if it never runs there, +0x3EC is only
+         * touched at creation and the page's content is the better reading. */
+        case 0x803D2A6C: {
+            static int s_hud = -1;
+            static int s_hud_from = -1;
+            static u32 s_hud_n = 0;
+            extern int g_runner_current_frame;
+            if (s_hud < 0) s_hud = getenv("TLS_HUDUPD_PROBE") ? 1 : 0;
+            if (s_hud_from < 0) { const char* e = getenv("TLS_HUDUPD_FROM"); s_hud_from = e ? atoi(e) : 0; }
+            if (s_hud && s_hud_n < 12 && g_runner_current_frame >= s_hud_from) {
+                u32 mgr = ctx->gpr[3];
+                u32 node = mgr ? mem_read32(ctx, mgr + 0x3EC) : 0;
+                s_hud_n++;
+                printf("[HudUpd] f=%d mgr=0x%08X node0x3ec=0x%08X(38=0x%08X fc=0x%08X cnt=%u)\n",
+                       g_runner_current_frame, mgr, node,
+                       node ? mem_read32(ctx, node + 0x38) : 0,
+                       node ? mem_read32(ctx, node + 0xFC) : 0,
+                       node ? mem_read32(ctx, node + 0x4C) : 0);
+                fflush(stdout);
+            }
+            return 0;
+        }
+
         /* The mode value that selects the page-start branch. fn_805BB658 does
          *   bl fn_8005B3CC ; bl fn_80684600 ; subi r0,r3,1 ; cmplwi r0,3 ; bgt tail
          * The mode check is at 0x805BB748 (the `subi` right after the bl) and that is the only
@@ -8686,6 +8864,10 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                     fflush(stdout);
                 }
             }
+            /* 5c.46 AP-L: the page start's mode-row build is NOT the show point - measured, the
+             * per-mode hide pass (.L_805BA2D4) runs 10 frames later (f=3658) and would undo it.
+             * The show belongs to the page ENTER verb fn_805BA358 (f=3659), which is where the
+             * page says "these layouts are now on screen". */
             return 0;
         }
 
@@ -8748,6 +8930,15 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                     fflush(stdout);
                 }
             }
+            return 0;
+        }
+
+        /* .L_805BA2D4, inside fn_805BA16C (the page's own update): this is the per-mode hide pass
+         * that deactivates each mode layout (fn_800D246C(layout,0)), sets [layout+0x38] |= 4 and
+         * clears [layout+0xFC] bit 3. That is the page saying "nothing of mine is showing", so the
+         * content node's draw bit that the page start set is taken back down here (5c.46 AP-L). */
+        case 0x805BA2D4: {
+            tls_page_content_set(ctx, 0, "page hide pass");
             return 0;
         }
 

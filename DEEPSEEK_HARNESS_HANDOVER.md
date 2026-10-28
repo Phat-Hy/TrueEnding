@@ -6,8 +6,20 @@
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
 creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.46 AP**; §5c.45 and everything before it is history, and several of its conclusions are
-corrected below.
+state is **§5c.46 AP-L**; §5c.46 AP and earlier is history, and several of its conclusions are
+corrected below (`AP-L` shows the page's content and supersedes AP K's "identity unknown").
+
+> **THE TUTORIAL PAGE NOW DRAWS ITS FULL REFERENCE LAYOUT - NO DIAGNOSTIC FLAG (§5c.46 AP-L).** The page's
+> content is the hidden LayoutTask the camp/tutorial UI manager creates at frame 1656 from
+> `/data/d2anime/ui_hp_heal.d2a` (name measured, not inferred) and keeps at `manager+0x3EC`; it is fully
+> built (4 panes) but `fn_801F4514` gates its whole subtree on bit 30 of `[node+0xFC]`, which nothing sets.
+> The page's own verbs are where it belongs: **show on the page ENTER verb `fn_805BA358` (f=3659)**, clear on
+> the per-mode hide pass `.L_805BA2D4` (f=3658). Measured order: page start 3648 -> hide pass 3658 -> enter
+> 3659, so a show at the page start is undone ten frames later (measured). With the fix the page's batch
+> count follows the forced run's timeline exactly (38/50/54/25 at 3710/3720/3780/3840) and the capture is the
+> reference page - `docs/evidence/host_page_content_5c46apl_3781.png`. Invariant PASS, same hash. Two art
+> defects remain and are texture-side: the crest is a black rectangle (`0x90D19B80` sampled black) and there
+> is a dark band behind the text column.
 
 > **THE PAGE-TABLE CURSOR THEORY IS DEAD - THE PAGE START DOES READ THE TABLE, TAKE THE MODES 1..4 BRANCH,
 > AND BUILD AND SHOW ITS LAYOUTS (§5c.46 AP).** AM/AN/AO are **wrong on all three counts** and AP measures
@@ -10250,3 +10262,84 @@ at a *generic* return site instead of the per-caller cases - i.e. in the `TLS_LA
 range is first written *as a new object*, then read the create log for that frame and pick the name whose
 creation is immediately followed by that store. That yields the content node's .d2a in one pass, and with the
 name the `grep` for the string constant names the caller that should show it at page start.
+
+### AP-L. THE PAGE'S CONTENT IS SHOWN - the reference page now renders on its own (no force flag)
+
+AP K's store watch settled the node's identity and, with one more probe on the page's own verbs, the whole chain
+closed. **The tutorial page now draws its complete reference layout with no diagnostic flag set**, and the
+Chapter-1 invariant is unchanged.
+
+**1. The store watch (one run, `TLS_STORE_WATCH=0x81359B80,0x81359BA0`, `TLS_STORE_WATCH_FRAME=1600`).** All 20
+in-range stores are at frame 1656 and the LAST of them is the LayoutTask vptr:
+
+```
+[StoreWatch] frame=1656 cia=0x800D5624 ea=0x81359B80 value=0x807796F0   <- a TAG object before it
+[StoreWatch] frame=1656 cia=0x800D1D6C ea=0x81359B80 value=0x807796D0
+[StoreWatch] frame=1656 cia=0x801F40AC ea=0x81359B80 value=0x80782C08   <- LayoutTask constructor
+```
+
+and `in-range=20` (the 64-entry ring never filled), so **nothing writes the object's header after frame 1656**.
+The page-time LayoutTask at `0x81359B80` is the one built at 1656 - no later re-allocation, so AP K's "recycled
+within 1656, identity unknown" is superseded: the address was recycled *before* the layout (TAG object -> layout
+in the same frame), not after it.
+
+**2. Its name, measured (not inferred): `'/data/d2anime/ui_hp_heal.d2a'`,** created by `fn_803D022C`'s block
+`0x803D0534..0x803D0554` (`r20 = lbl_807506A0`, `r4 = r20 + 0x46F`; the ORIGINAL DOL has that path at
+`0x80750B0F` - read `orig/main.dol`, **not** `build/SLSEXJ/main.dol`, whose data sections are relocated and whose
+bytes at that address are an NW4R assertion string). The manager is `r19 = *(0x8087F490)` = `0x81161760`, the
+layout is stored at `manager+0x3EC`, activated with `fn_800D246C(node,1)` and then hidden by clearing bits 1
+and 0 of `[node+0xFC]` (`0x74xxxxxx -> 0x34xxxxxx`, block `0x803D0558`).
+
+**3. False lead, recorded so it is not re-run: the page start does NOT build a content layout.** `fn_805BB658`
+has three factory calls in it; the third (`lr=0x805BBCF8`) was probed with `TLS_PAGE_CONTENT_PROBE` and is the
+**movie** half: its name is assembled from `database/tutorial/%s` (0x80763F39) / `mv_` / `d2b` and its stream
+holds a 1280-byte `69.30.000000.; TotalData.FPS` table, stored at slot `+0x4B4` for a row whose Movie column is
+non-empty. `[PageSlot]` also shows the page class's per-mode fields are `+0x478` (d2a layout), `+0x4B0` (a
+`fn_800DCA70` label object), `+0x4B4` (movie layout) - **no content layout anywhere on the page class**, so the
+page genuinely depends on the pre-created node.
+
+**4. The node is live during the page.** A probe on `fn_803D2A6C` (the manager's update, whose pane-name setters
+use `base_point`/`damage`/`damageSub` at 0x80751742/0x80751821/0x80751828) shows it called every second frame
+with the same object:
+
+```
+[HudUpd] f=3501..3523 mgr=0x81161760 node0x3ec=0x81359B80(38=0x00000022 fc=0x2C000000 cnt=4)
+```
+
+so the node is reachable through the manager the game itself stores it in - and its 4 panes are built
+(`cnt=4`), its `+0x38` says "inited", its `fc` says "not drawn".
+
+**5. The defect is one missing verb in the page's own lifecycle.** Measured order at the page:
+
+```
+f=3648  fn_805BB658 builds the two mode layouts (tt001_10.d2a -> 0x81861F60, tt001_mv01.d2a -> 0x8186CB60)
+f=3658  .L_805BA2D4 (the page's per-mode hide pass) deactivates each mode layout and clears fc bit 3
+f=3659  fn_805BA358 (the page ENTER verb) walks the mode slots and does [layout+0x38] |= 4
+```
+
+and no verb anywhere shows the content node. Putting the show at the page *start* (f=3648) is measurably wrong:
+the hide pass at 3658 undoes it (`[PageContentShow] f=3648 SHOW ... f=3658 HIDE`). Putting it at the page
+**enter** (f=3659, the verb that declares the page's layouts on screen) is the right place.
+
+**The fix** (`recomp/replacements.c`, first non-probe change in this thread):
+`tls_page_content_node()` resolves the node as `*(0x8087F490)+0x3EC`, verifies it is still a LayoutTask
+(`vptr == 0x80782C08`) with a built container (the address range is recycled, so the check is mandatory) and
+`tls_page_content_set()` flips exactly bit 30 (`0x40000000`) of `[node+0xFC]` - set on the `fn_805BA358` page
+enter, cleared on the `0x805BA2D4` hide pass. One bit of one layout, looked up the way the game looks it up.
+
+**Result, no flag set** (`TLS_PAGE_CAPTURE_ALL=3680,225,10`, `Game@1647`): the page's batch count now follows
+AD's forced timeline exactly - 38 at 3710, 50 at 3720, 54 at 3780-3820, 25 at 3840 - and the captured page is the
+reference page: illustration, "Movement and Camera", both body lines with the stick/Z icons, SKIP, parchment and
+border. `docs/evidence/host_page_content_5c46apl_3781.png` (full page), `…_3761.png`, `…_3841.png` (the page's own
+fade-out), `…_3709.png` (first present after the page enters: the illustration alone, the same frame AC's forced
+run showed). The only log line the fix emits is
+`[PageContentShow] f=3659 SHOW node=0x81359B80 0x2C000000 -> 0x6C000000 (page enter)`.
+
+**What is left in the page's own art** (unchanged by this fix, and now visible on every page frame): the crest
+is a black rectangle and there is a dark vertical band behind the text column - both texture-side questions with
+known addresses (`0x90D19B80` is sampled black for the crest), not layout questions.
+
+**Verification**: build green, `pwsh tools/invariant.ps1` **PASS** with
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344 measured with
+the fix in place; 0 changes to `src/`; the two extra probes (`TLS_PAGE_CONTENT_PROBE`, `TLS_HUDUPD_PROBE`) are
+default-off, and `TLS_PAGE_ENTER_PROBE` now also prints the `[PageSlot]` rows.
