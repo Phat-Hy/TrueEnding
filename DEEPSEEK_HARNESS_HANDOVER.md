@@ -2,17 +2,30 @@
 
 ## NEXT SESSION — START HERE
 
-**Tree state.** Clean at `850ba86` (the last **code** change: probe pinning + the AP-O number corrections). The
-history this session added is `654cb14` indirect texturing, `bd877ed` the 3D widening, `6a57a92` the dossier, and
-`850ba86`; the dossier state line you are reading is the one commit on top of those, and `git log --oneline -6`
-shows them all. Only the untracked scratch `logs_ap/` is dirty. Build green
+**Tree state.** Clean at the commit on top of `850ba86` (the AP-P work: the XF texture-matrix path, default off).
+The history this session added is `654cb14` indirect texturing, `bd877ed` the 3D widening, `6a57a92` the AP-O
+dossier, `850ba86` probe pinning + AP-O number corrections, and the AP-P commit; `git log --oneline -7` shows them
+all. Only the untracked scratch `logs_ap/` is dirty. Build green
 (`python tools/recomp_harness.py build-runner`; the generated `build/recomp/gx_shaders_d3d11.inl` needs
 `python tools/compile_shaders.py` after any `tools/compile_shaders.py` edit). `pwsh tools/invariant.ps1` **PASS**
 (`Boot -> Stra -> Titl -> Game`, frame 3500 =
-`D3329E3565DF4E1087785D618114ABE44E555B2465338336853363E7209AB27E` - **re-recorded this session, see §5c.46 AP-O
-item 5**, and the run creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to
-`src/`.** Current state is **§5c.46 AP-O** (at the end of this file); §5c.46 AP-N and earlier is history, and the
-one conclusion of AP-N's item 7 that changed is noted below.
+`D3329E3565DF4E1087785D618114ABE44E555B2465338336853363E7209AB27E` - **re-recorded in §5c.46 AP-O item 5**, and the
+run creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current state is
+**§5c.46 AP-P** (at the end of this file); §5c.46 AP-O and earlier is history, and what changed since AP-O is noted
+below.
+
+> **THE XF TEXTURE-MATRIX PATH IS IMPLEMENTED AND OFF BY DEFAULT (§5c.46 AP-P).** `TLS_XF_TEXGEN=1` generates GX
+> texture coordinates 2..7 (and, if promoted, 0 and 1) from the XF texture matrices, the STQ projection and the
+> post matrices, following Dolphin's `WriteTexCoordTransforms`. Two facts decide how to use it: the cave's
+> texgens transform **even coordinate 0** (its matrix is a 0.788/1.053 scale-shear with a 0.79 offset, so the raw
+> TEX0 attribute the host has always used is not what hardware samples - the wall textures tile, which hid it), and
+> **15 of present 3500's 56 batches name a coordinate >= 2 (24.6 % of the frame's vertices)**, which the host does
+> not feed at all without this path. Measured: default `D3329E35...` unchanged (the refactor is inert), switch on
+> gives `EAC9E3DD...` with 14.1 % of pixels moved, and the **page gate keeps every region number to the tenth** -
+> the consistency check that the formula is right, since that scene is already validated. It stays off because
+> promoting it changes the whole 3D picture and this host has no Dolphin reference framed like the cave shot; the
+> promotion recipe is AP-P item 4. **Do not re-derive the texgen decode**: AP-P item 1 has the guest's six
+> configurations and the evidence that `SourceRow` is Dolphin's.
 
 > **INDIRECT TEXTURING IS IMPLEMENTED AND THE TEV PATH NOW RUNS 3D BATCHES (§5c.46 AP-O).** The 2D-only gate is
 > gone. GX's indirect stages are tracked (BP 0x06..0x0F, 0x10..0x1F, 0x25..0x27 - every one of those writes used
@@ -23,9 +36,8 @@ one conclusion of AP-N's item 7 that changed is noted below.
 > the wall batches render identically to the legacy path, and the frame's water geometry improves (the legacy path
 > evaluated 2 of its 8 TEV stages and drew a blown-out pale sheet; the widened path draws dark reflective water,
 > as the reference does). Frame 3500 therefore moved to `D3329E35...` and was re-recorded, with the reasoning in
-> `tools/invariant.ps1`'s comment. **Read §5c.46 AP-O before touching the TEV path again** - in particular item 7,
-> which measures what is still missing for the 11 batches that need texture coordinates 2..7 (the XF texture-matrix
-> path) and item 10's two instrument traps.
+> `tools/invariant.ps1`'s comment. **Read §5c.46 AP-O before touching the TEV path again** - in particular item 10's
+> two instrument traps.
 
 > **THE PAGE IS THE REFERENCE PAGE - BOTH ART DEFECTS ARE FIXED, NO DIAGNOSTIC FLAG (§5c.46 AP-N).** The crest
 > is dark ink on parchment and the band is gone (the page gate is unchanged by AP-O: same region numbers, page
@@ -10979,4 +10991,89 @@ analyses behind items 1, 4 and 6 (scratch, not committed).
   needs full access. The evidence images were composed into `logs_ap/` by `logs_ap/make_evidence.py` and copied in.
 * The page verdict is a `rect_stats.py` measurement, not a hash: the page PPM hash moves for a 20-pixel 1-LSB
   difference while every region number is unchanged to the tenth, so compare the numbers.
+
+### AP-P. THE XF TEXTURE-MATRIX PATH IS IMPLEMENTED (default off) - and the cave transforms EVEN coordinates 0 and 1
+
+**AP-O item 7 measured that 15 of present 3500's 56 batches name a texcoord of 2 or higher and left the XF texgen
+as the next thread. It is now implemented, measured and left `TLS_XF_TEXGEN`-gated**, because the same path also
+transforms coordinates 0 and 1 - which is a picture-wide change that cannot be promoted without a Dolphin reference
+framed like ours.
+
+**1. The guest's own texgen words, per batch (the measurement that made this implementable).** Every texgen in the
+frame is `TexGenType::Regular`, and there are exactly six distinct configurations:
+
+```
+tg0  type=Regular src=Tex0(5)   proj=ST  in=AB11 mtx=30 post=61/0  x51 batches
+tg1  type=Regular src=Normal(1) proj=STQ in=ABC1 mtx=33 post=0/1   x46
+tg2  type=Regular src=Tex0(5)   proj=ST  in=AB11 mtx=36 post=61/0  x15
+tg3  type=Regular src=Tex0(5)   proj=ST  in=AB11 mtx=39 post=61/0  x12
+tg4  type=Regular src=Normal(1) proj=STQ in=ABC1 mtx=42 post=3/1   x3
+tg5  type=Regular src=Geom(0)   proj=STQ in=ABC1 mtx=0  post=15/0  x2
+```
+
+`xf_num_texgens` is 6 and `dualTex` is **1** on that frame, so the post matrices are live. Two things follow, and
+both are new:
+
+* **the coordinates the host already fed are also transformed.** `tg0`'s matrix is
+  `[0.788 -0.062 0.789 0] [-0.085 1.053 0.218 0] [-0.836 -0.207 0.762 0]`, i.e. a scale/shear with an offset of
+  ~0.79 in s - so the raw TEX0 attribute the host has always used is *not* the coordinate hardware samples, even
+  for texcoord 0. The wall textures tile, which is why that never looked wrong;
+* the `tg1`/`tg4` pair is a normal-based environment projection (`src=Normal`, STQ, orthonormal rows, and a post
+  matrix `[0.5,0,0,0.5] [0,-0.5,0,0.5] [0,0,0,1]` that remaps [-1,1] to [0,1] with the y flip), which is exactly
+  the shaping the water/effect materials need.
+
+`SourceRow` is Dolphin's (`XFMemory.h`: Geom 0, Normal 1, Colors 2, BinormalT 3, BinormalB 4, Tex0 5 .. Tex7 12);
+the `src=Normal` + STQ + orthonormal-row evidence is what confirms the encoding, since a texture-row source could
+not produce that matrix.
+
+**2. The implementation.**
+* `recomp/gx_pipeline.h` / `.c` - `GxVertex` gained `ox, oy, oz` (**appended**, so every existing D3D11 input
+  offset stays valid; `transform_vertex` fills them with the object-space position it already has, and
+  `lerp_vertex` interpolates them so the clipper stays exact). `GxTexGenInfo`,
+  `gx_pipeline_get_texgen`, `gx_pipeline_get_tex_matrix`, `gx_pipeline_get_post_matrix` and
+  `gx_pipeline_xf_dualtex` expose the XF state that was already tracked but unreadable.
+* `recomp/gfx_d3d11.c` - the input layout grew `TEXCOORD2` (object position, offset 48) and `TEXCOORD3` (the same
+  normal, offset 16); `GxTevConstants` grew `tginfo[8][4]`, `tgmtx[24][4]`, `tgpost[24][4]`, `tgneed`;
+  `gx_tev_fill_texgen` fills them **and decides both coordinate selections in one place** (`order[i][3]` for each
+  TEV stage, `indref[i][3]` for each indirect stage: `0..7` = a coordinate, `8` = sample (0,0)).
+* `tools/compile_shaders.py` - `PSInput` now carries `objpos`/`nrm`; `TevTexCoord` is Dolphin's
+  `WriteTexCoordTransforms` (source row, AB11 forcing the third input to 1, the three texture-matrix rows, STQ's
+  `q`, `normalize`, then the post matrix when the dual transform is enabled), and `TevSelectCoord` resolves a
+  stage's coordinate with the `q` divide. Coordinates 2..7 are built only when `tgneed` says some stage demands
+  one - and a coordinate another one reads as its source row is demanded too - so a batch that names only
+  coordinates 0/1 pays nothing.
+
+**3. Measured.** With `TLS_XF_TEXGEN=0` (the default) frame 3500 is **byte-identical** to AP-O's recorded
+`D3329E35...`, so the whole refactor is inert until switched on. With `TLS_XF_TEXGEN=1` it becomes
+**`EAC9E3DDA86E7924D4C0E74A4E38B2CC05476AADA8DC417310A960C78E89C292`**: 14.1 % of the frame's pixels move by more
+than 8/255 (mean absolute 2.75), concentrated on the ground/water textures and the wall detail - the expected
+signature of applying the real texture matrix instead of the raw attribute. The tutorial-page gate, run with the
+switch on, keeps **every region number to the tenth** (page mean luma 150.33, crest (204.9,180.9,121.1) 11.2 %
+dark, band (229.8,200.6,127.3) 2.3 % dark) and moves 2 275 pixels (0.25 %) at most 149 - the page's fully-clipped
+3D background. That the *known-good* 2D page is untouched is the consistency check: the implementation does not
+perturb a scene whose rendering is already validated.
+
+**4. Why it is NOT on by default, and what would promote it.** The switch changes coordinates 0 and 1 as well, so
+it alters the whole 3D picture, and this host has no Dolphin reference framed like the Chapter-1 cave shot -
+"different and faithful by construction" is not the same as "shown better". Promoting it needs one same-camera
+Dolphin capture (or a scene whose reference we do have, e.g. the title MENU at 1440/1450, where
+`docs/evidence/27-dolphin-menu-frame1440.png` exists). Everything else is in place: the page gate is unaffected,
+the default path is byte-identical, and the demand mask means the cost is paid only by batches that ask for a
+generated coordinate.
+
+**5. What is still missing after this.**
+* `TexGenType::EmbossMap` and `Color0`/`Color1` texgens are not generated (the frame uses only `Regular`).
+* `SourceRow::Colors`, `BinormalT`, `BinormalB` sources are not generated (the frame uses Geom, Normal and Tex0).
+* `TEVORDER`'s **colorchan** is still recorded but not evaluated. Measured: of present 3500's 127 enabled stages,
+  118 name channel 7 (zero) and 9 name channel 1, and **all 9 stages that reference RASC/RASA are among those
+  channel-1 ones** (b14/15/17/22/25/28/42/54/55 - the water/effect set). The host's vertex format carries one
+  colour, so evaluating channel 1 needs a second XF colour channel through the lighting stage
+  (`xf_light_channel(1, ...)`, which the pipeline already has the inputs for) plus a `CLR1` interpolant.
+* Timing on this host is too noisy to quote (the same `TLS_XF_TEXGEN=0` invariant measured 753 s in one job and
+  503 s in another, so load dominates); do not attribute a speed change to this work without a quiet host.
+
+**6. Instruments.** `TLS_XF_TEXGEN=1` is the only new switch (default off). The per-batch texgen dump lives in
+`TLS_TEV_PROBE` (each `[texgen]` line prints type/src/proj/inputform/matrix/post plus the rows), and
+`TLS_PROBE_PRESENT_ONLY=1` pins it to one frame.
+
 

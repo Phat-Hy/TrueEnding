@@ -22,6 +22,14 @@ typedef struct {
      * vec4(0,0,1,1) and only overwrites it from an attribute that exists - so the
      * renderer selects per stage between uv0, uv1 and (0,0). */
     float u1, v1;
+    /* Object-space position, kept so the XF texture coordinate generator can run on
+     * the host: a GX texgen with SourceRow::Geom transforms the vertex position, and
+     * SourceRow::Normal the normal. Both are linear in the interpolated attributes, so
+     * evaluating them per pixel from the interpolated position gives exactly what the
+     * hardware gets by interpolating the generated coordinate. Appended after the
+     * existing fields so every earlier offset in the D3D11 input layout stays valid
+     * (handover 5c.46 AP-P). */
+    float ox, oy, oz;
 } GxVertex;
 
 // GX Primitive types
@@ -389,6 +397,39 @@ void gx_pipeline_print_tev_state(uint16_t index);
  * apply any of it to the sampler's UV yet; reported per batch so that can be decided
  * from data (handover 5c.23). */
 uint32_t gx_pipeline_get_tc_info(int coord, int is_t);
+
+/* --- XF texture coordinate generation (Dolphin XFMemory.h TexMtxInfo) ------------
+ * The host feeds the TEX0/TEX1 vertex attributes and nothing else, so a TEV stage
+ * that names texcoord 2..7 samples the wrong texture region. Measured at present 3500,
+ * 15 of 56 batches do (24.6 % of the frame's vertices - handover 5c.46 AP-O item 7).
+ * Generating those coordinates needs, per texgen i:
+ *   XF 0x1040+i  TexMtxInfo: projection:1 (0 = ST, 1 = STQ), inputform:2 (0 = AB11,
+ *                1 = ABC1), texgentype:4-6 (0 = Regular), sourcerow:7-11
+ *                (0 PosNorm, 1 Colors, 2 BinormalT, 3 BinormalB, 4..11 Tex0..Tex7)
+ *   CP 0x30/0x40  6-bit texture-matrix index (= 3 * matrix in the XF matrix file)
+ *   XF 0x1050+i  PostMtxInfo: index:0-5, normalize:8
+ *   XF 0x500..    the post matrices, 3 rows of float4
+ * The texture matrices themselves live in the same 64-matrix file as the position
+ * matrices (s_pos_matrices), which is why the XF probe prints them as "pos matrix N". */
+typedef struct {
+    uint32_t info;            /* XF 0x1040+i raw */
+    uint32_t post_info;       /* XF 0x1050+i raw */
+    uint8_t  mtx_index;       /* CP 0x30/0x40, 6-bit: 3 * matrix number */
+    uint8_t  projection;      /* 0 = ST, 1 = STQ */
+    uint8_t  inputform;       /* 0 = AB11, 1 = ABC1 */
+    uint8_t  texgentype;      /* 0 = Regular, 1 = Emboss, 2 = Color0, 3 = Color1 */
+    uint8_t  sourcerow;       /* see the comment above */
+    uint8_t  post_index;
+    int      post_normalize;
+} GxTexGenInfo;
+
+void gx_pipeline_get_texgen(int i, GxTexGenInfo* out);
+/* The three rows of texture matrix `mtx_index / 3` (12 floats, row-major 3x4). */
+void gx_pipeline_get_tex_matrix(int mtx_index, float out[3][4]);
+/* The three rows of post matrix `index` (12 floats, row-major 3x4) plus their w. */
+void gx_pipeline_get_post_matrix(int index, float out[3][4]);
+/* XF 0x1012 bit 0: the dual texture transform (post matrices) is enabled. */
+int gx_pipeline_xf_dualtex(void);
 
 #define GX_MAX_DRAW_BATCHES 4096
 

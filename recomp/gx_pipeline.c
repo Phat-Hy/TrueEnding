@@ -353,6 +353,45 @@ static float s_xf_viewport[6];              /* XF 0x101a..0x101f, wd ht zRange x
 static float s_xf_post_mtx[256];             /* XF 0x500..0x5ff, 64 rows of float4 */
 static uint8_t s_cp_tex_mtx[8];             /* CP 0x30/0x40, 6-bit tex matrix indices */
 
+/* XF texture coordinate generation state, for the TEV stages that name texcoord 2..7.
+ * The field layout is Dolphin's (VideoCommon/XFMemory.h TexMtxInfo); these accessors are
+ * plain reads of XF state the pipeline already tracks, so nothing is duplicated. */
+void gx_pipeline_get_texgen(int i, GxTexGenInfo* out) {
+    if (!out) return;
+    memset(out, 0, sizeof(*out));
+    if (i < 0 || i > 7) return;
+    uint32_t info = s_xf_texmtx_info[i], post = s_xf_postmtx_info[i];
+    out->info = info;
+    out->post_info = post;
+    /* projection:1 (0 = ST, 1 = STQ), inputform:2 (0 = AB11, 1 = ABC1),
+     * texgentype:4-6 (0 = Regular), sourcerow:7-11 (0 PosNorm, 1 Colors,
+     * 2 BinormalT, 3 BinormalB, 4..11 Tex0..Tex7). */
+    out->projection = (uint8_t)((info >> 1) & 1);
+    out->inputform = (uint8_t)((info >> 2) & 1);
+    out->texgentype = (uint8_t)((info >> 4) & 7);
+    out->sourcerow = (uint8_t)((info >> 7) & 0x1F);
+    out->mtx_index = s_cp_tex_mtx[i];
+    out->post_index = (uint8_t)(post & 0x3F);
+    out->post_normalize = (int)((post >> 8) & 1);
+}
+
+void gx_pipeline_get_tex_matrix(int mtx_index, float out[3][4]) {
+    int m = (mtx_index / 3) & 63;
+    memcpy(out, s_pos_matrices[m], sizeof(float) * 12);
+}
+
+void gx_pipeline_get_post_matrix(int index, float out[3][4]) {
+    index &= 63;
+    for (int r = 0; r < 3; r++)
+        for (int c = 0; c < 4; c++)
+            out[r][c] = s_xf_post_mtx[(index + r) * 4 + c];
+}
+
+/* XF 0x1012 bit 0: the dual texture transform (the post matrices) is enabled. */
+int gx_pipeline_xf_dualtex(void) {
+    return (int)(s_xf_dualtex & 1u);
+}
+
 /* TLS_XF_LIGHTING=1 enables the emulated lighting stage (default off until measured).
  * TLS_XF_NO_LIGHTING=1 forces it off for A/B runs on the same binary. */
 static bool xf_lighting_enabled(void) {
@@ -1095,6 +1134,9 @@ static void xf_lighting_compute(GxVertex* v, float px, float py, float pz) {
 static inline GxVertex transform_vertex(const GxVertex* in) {
     GxVertex out = *in;
     float vx = in->x, vy = in->y, vz = in->z;
+    /* Keep the object-space position for the XF texgen (SourceRow::Geom transforms it);
+     * the clip-space result overwrites x..w below. */
+    out.ox = vx; out.oy = vy; out.oz = vz;
     // Apply active position matrix
     float px = s_pos_matrices[s_current_pnm_idx][0][0] * vx + s_pos_matrices[s_current_pnm_idx][0][1] * vy + s_pos_matrices[s_current_pnm_idx][0][2] * vz + s_pos_matrices[s_current_pnm_idx][0][3];
     float py = s_pos_matrices[s_current_pnm_idx][1][0] * vx + s_pos_matrices[s_current_pnm_idx][1][1] * vy + s_pos_matrices[s_current_pnm_idx][1][2] * vz + s_pos_matrices[s_current_pnm_idx][1][3];
@@ -1184,6 +1226,9 @@ static inline GxVertex lerp_vertex(const GxVertex* a, const GxVertex* b, float t
     r.v = a->v + t * (b->v - a->v);
     r.u1 = a->u1 + t * (b->u1 - a->u1);
     r.v1 = a->v1 + t * (b->v1 - a->v1);
+    r.ox = a->ox + t * (b->ox - a->ox);
+    r.oy = a->oy + t * (b->oy - a->oy);
+    r.oz = a->oz + t * (b->oz - a->oz);
     uint32_t a_a = (a->color >> 24) & 0xFF, b_a = (b->color >> 24) & 0xFF;
     uint32_t a_b = (a->color >> 16) & 0xFF, b_b = (b->color >> 16) & 0xFF;
     uint32_t a_g = (a->color >> 8) & 0xFF,  b_g = (b->color >> 8) & 0xFF;

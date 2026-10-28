@@ -37,11 +37,120 @@ typedef struct {
     uint32_t indscale[2][4];  /* BP 0x25/0x26: x=ss0 y=ts0 z=ss1 w=ts1 */
     uint32_t indword[16][4];  /* per TEV stage: x = raw TevStageIndirect (BP 0x10+i) */
     uint32_t wrap[8][4];      /* per texmap: x = 1 when that map's GX wrap mode is repeat */
+    /* XF texture coordinate generation: x = TexMtxInfo raw, y = texture matrix index,
+     * z = post index | normalize<<8, w = 1 when the texcoord exists | 2 when the dual
+     * texture transform is enabled. tgmtx/tgpost are three rows per texgen. */
+    int32_t  tginfo[8][4];
+    float    tgmtx[24][4];
+    float    tgpost[24][4];
+    uint32_t tgneed;          /* bit g set = coordinate g has to be generated */
+    uint32_t tgpad0, tgpad1, tgpad2;
     uint32_t ind_num;         /* GEN_MODE bits 16..18 */
     uint32_t ind_used;        /* 1 = some active stage really perturbs its coordinate */
     uint32_t num_stages;
     uint32_t alpha_test;
 } GxTevConstants;
+
+/* XF texture coordinate generation (Dolphin VertexShaderGen WriteTexCoordTransforms) and
+ * the stage/indirect coordinate selections that consume it.
+ *
+ * The host has always fed the TEX0/TEX1 attributes and nothing else, so a TEV stage that
+ * names texcoord 2..7 sampled the wrong texture region - measured at present 3500, 15 of
+ * 56 batches have an enabled stage naming texcoord >= 2 (24.6 % of the frame's vertices,
+ * handover 5c.46 AP-O item 7). The cave's texgens are all TexGenType::Regular, so the
+ * coordinate is a texture-matrix transform of a source row, optionally STQ-projected and
+ * post-transformed; `TLS_XF_TEXGEN=1` generates them (default off until measured, because
+ * the same path also transforms coordinates 0 and 1 and that is a picture-wide change).
+ *
+ * When the switch is off every coordinate selection keeps exactly the value it had
+ * before this existed, which is what keeps the recorded invariant reproducible. */
+static void gx_tev_fill_texgen(GxTevConstants* c, const GxDrawBatch* b, const GxTevState* st) {
+    static int s_texgen = -1;
+    if (s_texgen < 0) s_texgen = getenv("TLS_XF_TEXGEN") ? 1 : 0;
+    static int s_texcoord_sel = -1;
+    if (s_texcoord_sel < 0) s_texcoord_sel = getenv("TLS_TEV_TEXCOORD") ? 1 : 0;
+
+    uint32_t numtex = b->xf_num_texgens;
+    for (int g = 0; g < 8; g++) {
+        GxTexGenInfo ti;
+        gx_pipeline_get_texgen(g, &ti);
+        float tm[3][4], pm[3][4];
+        gx_pipeline_get_tex_matrix(ti.mtx_index, tm);
+        gx_pipeline_get_post_matrix(ti.post_index, pm);
+        bool exists = (uint32_t)g < numtex;
+        c->tginfo[g][0] = (int32_t)ti.info;
+        c->tginfo[g][1] = (int32_t)ti.mtx_index;
+        c->tginfo[g][2] = (int32_t)(ti.post_index | (ti.post_normalize << 8));
+        c->tginfo[g][3] = (exists ? 1 : 0) | (gx_pipeline_xf_dualtex() ? 2 : 0);
+        for (int r = 0; r < 3; r++) {
+            for (int ch = 0; ch < 4; ch++) {
+                c->tgmtx[g * 3 + r][ch] = tm[r][ch];
+                c->tgpost[g * 3 + r][ch] = pm[r][ch];
+            }
+        }
+    }
+
+    /* Which coordinate each TEV stage samples (order[i][3]) and which one each indirect
+     * stage reads (indref[i][3]): 0..7 = a coordinate, 8 = sample (0,0). */
+    for (int i = 0; i < 16; i++) {
+        uint32_t tc = st ? (uint32_t)st->texcoord[i] : 0u;
+        if (s_texgen) {
+            c->order[i][3] = (tc < numtex) ? tc : 8u;
+        } else if (s_texcoord_sel) {
+            bool have = (tc < numtex) && (tc < 2u) &&
+                        (((b->texcoord_mask >> tc) & 1u) != 0u);
+            c->order[i][3] = have ? tc : 8u;
+        } else {
+            c->order[i][3] = 0u;
+        }
+    }
+    for (int i = 0; i < 4; i++) {
+        uint32_t tc = c->indref[i][1];
+        if (s_texgen) c->indref[i][3] = (tc < numtex) ? tc : 8u;
+        else c->indref[i][3] = (tc == 1u) ? 1u : 0u;   /* the pre-texgen rule */
+    }
+
+    /* Which generated coordinates are actually demanded. Generating all six costs a
+     * 65 % slower frame (measured: 320 s -> 528 s for the same 3 800-frame run) and
+     * almost every batch only names coordinates 0 and 1, so the shader is told exactly
+     * which ones to build - and a coordinate another one reads as its source row is
+     * demanded too. With the switch off the mask is 0 and the shader skips the whole
+     * block, which is why the recorded frame is unaffected by it. */
+    uint32_t need = 0;
+    if (s_texgen && st) {
+        for (uint32_t i = 0; i < st->num_stages && i < 16u; i++) {
+            uint32_t tc = st->texcoord[i];
+            uint32_t raw = st->ind_stage[i];
+            /* A stage demands its coordinate if it samples a texture, or if it has
+             * indirect work of its own (wrap / add-to-previous / an offset matrix),
+             * because in that case its coordinate feeds tevcoord - which fb_addprev can
+             * carry into the next stage even when this one samples nothing. */
+            bool uses = st->tex_enable[i] != 0 ||
+                        ((raw >> 13) & 7) || ((raw >> 16) & 7) || ((raw >> 20) & 1) ||
+                        gx_ind_is_active(raw);
+            if (uses && tc >= 2u && tc < numtex) need |= 1u << tc;
+        }
+        for (int i = 0; i < 4; i++) {
+            uint32_t tc = c->indref[i][1];
+            if (c->indref[i][2] && tc >= 2u && tc < numtex) need |= 1u << tc;
+        }
+        /* A needed coordinate reads another one through SourceRow::TexN. */
+        for (int pass = 0; pass < 8; pass++) {
+            uint32_t before = need;
+            for (int g = 2; g < 8; g++) {
+                if (!(need & (1u << g))) continue;
+                GxTexGenInfo ti;
+                gx_pipeline_get_texgen(g, &ti);
+                if (ti.sourcerow >= 5u) {
+                    uint32_t src = ti.sourcerow - 5u;
+                    if (src >= 2u && src < numtex) need |= 1u << src;
+                }
+            }
+            if (need == before) break;
+        }
+    }
+    c->tgneed = need;
+}
 
 static float gx_tev_reg_component(uint32_t raw) {    int32_t v = (int32_t)(raw & 0x7FF);
     if (v & 0x400) v -= 0x800;
@@ -476,8 +585,11 @@ bool d3d11_init(HWND hwnd, const GfxConfig* config) {
         {"TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT,       0, 28, D3D11_INPUT_PER_VERTEX_DATA, 0},
         {"COLOR",    0, DXGI_FORMAT_R8G8B8A8_UNORM,     0, 36, D3D11_INPUT_PER_VERTEX_DATA, 0},
         {"TEXCOORD", 1, DXGI_FORMAT_R32G32_FLOAT,       0, 40, D3D11_INPUT_PER_VERTEX_DATA, 0},
+        /* Object-space position, appended so the offsets above are unchanged; the XF
+         * texgen needs it (SourceRow::Geom) - handover 5c.46 AP-P. */
+        {"TEXCOORD", 2, DXGI_FORMAT_R32G32B32_FLOAT,    0, 48, D3D11_INPUT_PER_VERTEX_DATA, 0},
     };
-    hr = ID3D11Device_CreateInputLayout(s_d3d11.device, gx_elements, 5, s_gx_vs_bytecode, sizeof(s_gx_vs_bytecode), &s_d3d11.gx_input_layout);
+    hr = ID3D11Device_CreateInputLayout(s_d3d11.device, gx_elements, 6, s_gx_vs_bytecode, sizeof(s_gx_vs_bytecode), &s_d3d11.gx_input_layout);
     if (FAILED(hr)) {
         printf("[D3D11] Failed to create GX input layout: 0x%08X\n", (unsigned int)hr);
     }
@@ -3453,25 +3565,11 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                                     fflush(stdout);
                                 }
                             }
-                            /* Which UV each stage samples (handover 5c.20): uv0/uv1 when the
-                             * batch supplies that texcoord attribute and the texgen exists,
-                             * otherwise the constant (0,0) that hardware leaves in an
-                             * ungenerated coord. Faithful, but measured to make the MENU
-                             * scene *brighter* (b16 (38,35,34) -> (49,43,44)) instead of
-                             * closer to the reference, so it stays opt-in:
-                             * TLS_TEV_TEXCOORD=1. */
-                            if (tev_st) {
-                                static int s_texcoord_sel = -1;
-                                if (s_texcoord_sel < 0)
-                                    s_texcoord_sel = getenv("TLS_TEV_TEXCOORD") ? 1 : 0;
-                                for (int i = 0; i < 16; i++) {
-                                    uint32_t tc = tev_st->texcoord[i];
-                                    bool have = (tc < (uint32_t)batch->xf_num_texgens) &&
-                                                (tc < 2u) &&
-                                                ((batch->texcoord_mask >> tc) & 1u);
-                                    cst->order[i][3] = s_texcoord_sel ? (have ? tc : 2u) : 0u;
-                                }
-                            }
+                            /* Which UV each stage samples (handover 5c.20) and, with
+                             * TLS_XF_TEXGEN=1, the generated coordinates 2..7. Both live
+                             * in gx_tev_fill_texgen so the stage and indirect selections
+                             * are decided in one place (5c.46 AP-P). */
+                            gx_tev_fill_texgen(cst, batch, tev_st);
                         }
                         ID3D11ShaderResourceView* srvs[8];
                         for (int m = 0; m < 8; m++) {
@@ -3635,6 +3733,32 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                                 }
                                 printf("   [bounds] ndc=(%.2f,%.2f)-(%.2f,%.2f) persp=%d\n",
                                        mnx2, mny2, mxx2, mxy2, batch->is_perspective);
+                            }
+                            /* XF texture-coordinate generation, per texgen: this is what
+                             * a TEV stage naming texcoord 2..7 asks for and the host does
+                             * not feed (handover 5c.46 AP-O item 7). Printed with the
+                             * matrix rows so the coordinate can be evaluated offline
+                             * instead of inferred. */
+                            for (int g = 0; g < (int)batch->xf_num_texgens && g < 8; g++) {
+                                GxTexGenInfo ti;
+                                float tm[3][4], pm[3][4];
+                                gx_pipeline_get_texgen(g, &ti);
+                                gx_pipeline_get_tex_matrix(ti.mtx_index, tm);
+                                gx_pipeline_get_post_matrix(ti.post_index, pm);
+                                printf("   [texgen] tg%d type=%u src=%u proj=%u in=%u mtx=%u post=%u/%d "
+                                       "raw=0x%08X postraw=0x%08X\n",
+                                       g, ti.texgentype, ti.sourcerow, ti.projection, ti.inputform,
+                                       ti.mtx_index, ti.post_index, ti.post_normalize,
+                                       ti.info, ti.post_info);
+                                printf("   [texgen]     tm=[%.4f %.4f %.4f %.4f][%.4f %.4f %.4f %.4f][%.4f %.4f %.4f %.4f]\n",
+                                       tm[0][0], tm[0][1], tm[0][2], tm[0][3],
+                                       tm[1][0], tm[1][1], tm[1][2], tm[1][3],
+                                       tm[2][0], tm[2][1], tm[2][2], tm[2][3]);
+                                if (ti.post_index || ti.post_normalize)
+                                    printf("   [texgen]     pm=[%.4f %.4f %.4f %.4f][%.4f %.4f %.4f %.4f][%.4f %.4f %.4f %.4f]\n",
+                                           pm[0][0], pm[0][1], pm[0][2], pm[0][3],
+                                           pm[1][0], pm[1][1], pm[1][2], pm[1][3],
+                                           pm[2][0], pm[2][1], pm[2][2], pm[2][3]);
                             }
                             for (int m = 0; m < 8; m++) {
                                 if (!(batch->tev_texmap_mask & (1u << m))) continue;
