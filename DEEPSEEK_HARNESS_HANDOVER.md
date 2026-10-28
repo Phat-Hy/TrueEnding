@@ -10186,3 +10186,36 @@ and (b) the scene loader that created it, which would have to be re-invoked. **I
 entry (frame, class, and the four slot layout pointers) across 3600-3700 first**: if it fires at 3648 with the
 two new layouts, the content node is a *foreign* child of the page and the fix belongs in the page's own
 build path; if it never fires, the missing call is one level up and the page-enter opcode is the next target.
+
+**J. The page-enter path fires - and it only ever sees the two fresh layouts (§5c.46 AP, end).**
+`TLS_PAGE_ENTER_PROBE=1 TLS_PAGE_ENTER_FROM=3600` on `fn_805BA358` (the page-enter verb that walks
+`class+0x474 + i*0x4C` and does `[layout+0x38] |= 4`):
+
+```
+[PageEnter] f=3659 class=0x81862360 r4=0x81167420 slots:
+   [0]=0x81861F60(38=0x00000006,fc=0x6C000000)
+   [1]=0x8186CB60(38=0x00000006,fc=0x6C000000)
+   [2]=0x00000000  [3]=0x00000000
+```
+
+So the answer to AP I's split: **the page-enter path DOES run** (once, at frame 3659, eleven frames after the
+page start, with the fade struct at r4=0x81167420) and it sees exactly the two layouts `fn_805BB658` built -
+slots 2 and 3 are null. The pre-created content node `0x81359B80` is therefore **not a mode layout of this
+page class**: it is a root task owned by whatever created it at frame 1656, and neither the page start
+(`fn_805BB658`) nor the page enter (`fn_805BA358`) has any way to reach it by slot.
+
+That closes the "is it skipped" line of inquiry completely. The page's own path is measured and correct; what
+is missing is the *link* from the page class to the pre-created content node - and the node is reachable only
+by whatever the scene loader used at frame 1656 (`lr=0x803D0558` for its creation-time flag writes,
+`lr=0x803D1984` for its frame-2020 deactivation), or by name.
+
+**Next step, precise (unchanged in size, now better aimed).** Three measurements, cheapest first:
+1. **Name of `0x81359B80`.** Run `TLS_LAYOUT_CREATE_PROBE=1 TLS_LAYOUT_CREATE_FROM=1645` and read the
+   `[LayoutCreate]` lines for frames 1649-1660: whichever name belongs to the object returned around that
+   frame is the .d2a the content came from. (`[LayoutRet]` is capped at 60 lines and stops at frame 1652, so
+   it cannot answer this - the create side can, because it prints the name at the call.)
+2. **Who shows it by name.** With the name known, `grep` the image for that string's address and for the
+   `fn_800DCA70`/`fn_801F3FF8`-style lookups that take it; that names the caller that should fire at page
+   start.
+3. Only then decide between "the page start should adopt/show the pre-created node" and "the frame-1656 clear
+   at `lr=0x803D0558` is the defect".

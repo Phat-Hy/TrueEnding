@@ -6285,6 +6285,31 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
          * If BOTH counts stay zero for a whole run, phase 13 is genuinely inert and the
          * stall is entirely in the slot list - which is what the rest of the thread assumes. */
         case 0x805BA358: {
+            /* Also the page-enter path (5c.46 AP): it walks class+0x474 + i*0x4C and, for every non-empty
+             * mode slot, does [layout+0x38] |= 4. If this fires at the page start, the pre-created content
+             * node 0x81359B80 is a foreign child of the page and the missing activation belongs elsewhere;
+             * if it never fires, the missing call is one level up (the page-enter opcode). */
+            {
+                static int s_pe = -1, s_pe_from = -1;
+                static u32 s_pe_n = 0;
+                extern int g_runner_current_frame;
+                if (s_pe < 0) s_pe = getenv("TLS_PAGE_ENTER_PROBE") ? 1 : 0;
+                if (s_pe_from < 0) { const char* e = getenv("TLS_PAGE_ENTER_FROM"); s_pe_from = e ? atoi(e) : 0; }
+                if (s_pe && s_pe_n < 40 && g_runner_current_frame >= s_pe_from) {
+                    u32 cls = ctx->gpr[3];
+                    s_pe_n++;
+                    printf("[PageEnter] f=%d class=0x%08X r4=0x%08X slots:", g_runner_current_frame, cls, ctx->gpr[4]);
+                    for (u32 i = 0; i < 4u && cls; i++) {
+                        u32 slot = cls + 0x474u + i * 0x4Cu;
+                        u32 lay = mem_read32(ctx, slot + 4);
+                        printf(" [%u]=0x%08X(38=0x%08X,fc=0x%08X)", i, lay,
+                               lay ? mem_read32(ctx, lay + 0x38) : 0,
+                               lay ? mem_read32(ctx, lay + 0xFC) : 0);
+                    }
+                    printf("\n");
+                    fflush(stdout);
+                }
+            }
             if (tls_scene_sm_probe_on()) {
                 extern int g_runner_current_frame;
                 static int s_n = 0;
