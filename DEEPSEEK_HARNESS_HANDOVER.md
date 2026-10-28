@@ -29,11 +29,17 @@ corrected below.
 > `layout+0xFC`. Those are exactly the layouts AJ saw shown at 3648 - the reason is that they are **brand
 > new**, not re-activated.
 > **So the missing crest/illustration/body text is still the deactivated content node `0x81359B80`**, whose
-> flags nothing touches after frame 2020 (`TLS_WATCH_ADDR` over the whole run, AP). The open question is no
-> longer "is the table read" but **"what shows `0x81359B80` when `tt001_10.d2a` is built"**. The next
-> measurement AP names: at frame 3700 walk the layout tree and print every `LayoutTask`'s `+0x38`, `+0xFC`
-> and pane count, then diff that set against `TLS_FORCE_LAYOUT_BIT=1`'s 47/47 - the task that is missing from
-> the normal set but whose subtree holds texture `0x922731E0` is the one the page start fails to show.
+> flags nothing touches after frame 2020 (`TLS_WATCH_ADDR` over the whole run, AP). **The whole difference
+> between the furniture-only page and the complete reference page is a measured set-difference of one word:**
+> the `[PageTree]` dumps of the normal and the forced run list the *same seven* draw tasks, with the same
+> child counts and the same `+0x38`, and differ only in `0x81359B80+0xFC` (`0x2C000000` normal, `0x6C000000`
+> forced - bit 30). The draw visits that node even in the broken case (`case 0x801F4514` dumps it), so the
+> defect is exactly "**nobody sets bit 30 on `0x81359B80` when the page is shown**": the bit is set at creation
+> (f=1656), cleared the same frame by `lr=0x803D0558`, and the f=1696 "show" only adds **bit 27** (a different
+> verb from the one the draw tests).
+> **Next step: find the bit-30 show verb and the caller that never fires** - per AB it is the `0x801F4334`
+> slot of `fn_801F42A8` (it ORs `0x40000000`); log `(frame, layout, lr)` for every call through that slot and
+> through `0x801F4320` in frames 3600-3700 and name the caller missing for `0x81359B80`.
 
 > **THE PAGE'S MISSING CONTENT IS HIDDEN, NOT MISSING (§5c.46 AC).** One `LayoutTask` (`0x81359B80`) holds the
 > page's content as four panes and is switched off by **one bit**: `[task+0xFC]` bit 30 (`0x40000000`) is set on
@@ -10106,3 +10112,43 @@ follow, both worth knowing before the next probe round:
   missing elements are not explained by the fresh layout's own subtree. Whatever attaches the content to the
   page happens after this point (or the content node belongs to a different parent entirely), which is what
   the frame-3700 tree walk in AP's "next step" has to establish.
+
+**H. The whole page difference is ONE WORD - measured by set-difference, no new run needed (§5c.46 AP, end).**
+The `[PageTree]` dumps that `TLS_PAGE_CAPTURE` already produces at the draw entry (`case 0x801F4514`) exist
+for both the normal page (`logs/page_tree6.log`) and the forced one (`logs/page_forcebit.log`). Diffing them
+at frames 3709/3711:
+
+```
+obj          normal fc   forced fc   other fields
+0x81359B80   0x2C000000  0x6C000000  identical (f38=0x22 cnt48=4 arr48=0x809B2880)
+0x81133660   0x6C393232  0x6C393232  identical
+0x811337A0   0x6F303630  0x6F303630  identical
+0x811338C0   0x6E4F5F45  0x6E4F5F45  identical
+0x81133A00   0xEC2C0D0A  0xEC2C0D0A  identical   (11 panes)
+0x81135660   0xEC0D0A56  0xEC0D0A56  identical
+0x81861F60   0x6C000000  0x6C000000  identical   (the page-start layout, 8 panes)
+```
+
+**Same seven tasks in both runs, same child counts, same arrays, same +0x38 - the only difference is bit 30 of
+`0x81359B80+0xFC`.** So the complete reference page and the furniture-only page are separated by exactly
+`fc |= 0x40000000` on one node. Two conclusions that supersede AL/AK's model:
+
+* `0x81359B80` **is visited by the draw traversal in the normal run** (it has a `[PageTree]` line in the
+  unforced log, and that dump is made inside `fn_801F4514` - `case 0x801F4514` in `recomp/replacements.c`,
+  line ~8279). So "the task is deactivated, therefore its init never runs, therefore nothing draws" is not the
+  rendering mechanism: the parent still walks into it, its `+0x38 = 0x22` (deactivated|deactivated-bit) and
+  its `cnt48 = 4` children are all there, and its four panes are dropped purely at the bit-30 test.
+* Therefore the defect is exactly **"nobody sets bit 30 on `0x81359B80` when the page is shown"** - and its
+  write history (AP F) says the bit was **set at creation** (`+0xFC 0 -> 0x70000000` at f=1656), **cleared at
+  f=1656** by the caller `lr=0x803D0558` (0x74000000 -> 0x34000000), and never set again. The `0x3C000000`
+  written at f=1696 by `0x801F4320` adds **bit 27**, not bit 30, so that "show" is a different verb from the
+  one `fn_801F4514` tests.
+
+**Next step, precise (and now small).** Find the *bit-30 show verb* and who calls it: per AB it is the
+`0x801F4334` slot of `fn_801F42A8`, which ORs `0x40000000` into `[layout+0xFC]`. Instrument that slot (and
+`0x801F4320` for contrast) to print `(frame, layout, lr)` for every show call in frames 3600-3700, then ask
+which caller is missing for layout `0x81359B80` - the same call the frame-1696 show made, but through the
+bit-30 variant. Two ways to confirm a fix without guessing: (a) if a caller exists whose argument is a *lookup
+by name* (e.g. `fn_800DCA70`/`fn_801F3FF8`-style), the page start should look up the content node by name and
+show it after building `tt001_10.d2a`; (b) if no such caller exists at all, the frame-1656 clear at
+`lr=0x803D0558` is the wrong event and the bug is in what that caller does at scene setup.
