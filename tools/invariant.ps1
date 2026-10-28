@@ -13,8 +13,17 @@
 #   1. the sequence progression reaches 'Game' (the structural claim), and
 #   2. frame 3500 is pixel-identical to the recorded reference (the visual claim).
 #
-# Usage:  pwsh tools/invariant.ps1
+# Usage:  pwsh tools/invariant.ps1 [-Log logs_ap\invariant.log]
 # Exit code 0 = pass, 1 = fail.
+#
+# -Log exists because this sandbox sometimes denies writes INSIDE logs/ while allowing
+# them everywhere else in the workspace (the directory's inherited grant is
+# inherit-only, so the confined token cannot add files to it - measured, handover
+# 5c.46 AP-N). logs_ap/ is the scratch directory the project already uses for exactly
+# this; the default stays logs/invariant.log.
+param(
+    [string]$Log = ''
+)
 
 $ErrorActionPreference = 'Stop'
 $root = Split-Path -Parent (Split-Path -Parent $MyInvocation.MyCommand.Path)
@@ -58,7 +67,7 @@ if (-not (Test-Path $exe)) { Write-Host "FAIL: $exe not built" -ForegroundColor 
 
 $ppm = Join-Path $root "build\recomp\d3d11_screenshot_$SHOT_FRAME.ppm"
 Remove-Item $ppm -ErrorAction SilentlyContinue
-$log = Join-Path $root 'logs\invariant.log'
+$log = if ($Log) { Join-Path $root $Log } else { Join-Path $root 'logs\invariant.log' }
 New-Item -ItemType Directory -Force -Path (Split-Path $log) | Out-Null
 
 # --minimized: every runner launch in this project starts the window minimised and

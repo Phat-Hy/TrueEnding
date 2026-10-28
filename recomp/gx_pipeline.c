@@ -4,6 +4,9 @@
 #include <string.h>
 #include <math.h>
 
+/* The runner's guest frame counter, for the frame-gated probes below. */
+extern int g_runner_current_frame;
+
 // Attribute descriptor
 typedef struct {
     uint8_t type; // NONE=0, DIRECT=1, INDEX8=2, INDEX16=3
@@ -199,6 +202,11 @@ static uint32_t s_tev_comb_color[16];
 static uint32_t s_tev_comb_alpha[16];
 static uint32_t s_tev_kreg_ra[4];
 static uint32_t s_tev_kreg_bg[4];
+/* TEV colour registers C0..C2 (+ the fourth, which Dolphin uses as the initial value
+ * of `prev`). Written through the same BP 0xE0..0xE7 registers as the konst
+ * registers; TevReg::type (bit 23) decides which file the write belongs to. */
+static uint32_t s_tev_creg_ra[4];
+static uint32_t s_tev_creg_bg[4];
 static uint32_t s_tev_ksel[8];
 static uint8_t  s_alpha_comp1 = 7;
 static uint8_t  s_alpha_ref1 = 0;
@@ -246,6 +254,8 @@ static void tev_state_recompute(void) {
     for (int i = 0; i < 4; i++) {
         st.kreg_ra[i] = s_tev_kreg_ra[i];
         st.kreg_bg[i] = s_tev_kreg_bg[i];
+        st.creg_ra[i] = s_tev_creg_ra[i];
+        st.creg_bg[i] = s_tev_creg_bg[i];
     }
     for (int i = 0; i < 8; i++) st.ksel[i] = s_tev_ksel[i];
 
@@ -563,6 +573,37 @@ static bool gx_f900_probe_active(void) {
     return s_on && s_gx_frame_idx == s_frame;
 }
 
+/* TLS_TEV_WORD_PROBE=<f0>[:<f1>] - the guest's OWN words, in order.
+ *
+ * Every other TEV instrument in this project reads the pipeline's *decoded snapshot*
+ * of the combiners, so a decode bug and a guest that really programmed those words
+ * look identical. This probe prints the raw BP writes in the TEV register range
+ * (GEN_MODE, TEVORDER, the combiners, the colour/konst registers, alpha test and the
+ * konst/swap words 0xF6..0xFD) as they arrive, interleaved with a marker for each draw
+ * batch that is opened, so the words a draw actually ran with can be read off the
+ * stream instead of inferred. Narrow by construction: one line per state write plus one
+ * per batch, in a frame window the caller chooses.
+ * This is what found the crest mask (BP 0xF8/0xF9 = 0x018060 immediately before the
+ * crest draw - handover 5c.46 AP-N). */
+static uint32_t s_tev_word_seq = 0;
+static bool gx_tev_word_probe_active(void) {
+    static int s_on = -1;
+    static uint32_t s_f0 = 0, s_f1 = 0;
+    if (s_on < 0) {
+        const char* e = getenv("TLS_TEV_WORD_PROBE");
+        s_on = e ? 1 : 0;
+        if (e) {
+            unsigned a = 0, b = 0;
+            int n = sscanf(e, "%u:%u", &a, &b);
+            s_f0 = a;
+            s_f1 = (n == 2) ? b : a;
+        }
+    }
+    if (!s_on) return false;
+    uint32_t f = (uint32_t)(g_runner_current_frame < 0 ? 0 : g_runner_current_frame);
+    return f >= s_f0 && f <= s_f1;
+}
+
 void gx_pipeline_begin_frame(void) {
     s_gx_frame_idx++;
     s_vertex_count = 0;
@@ -756,8 +797,22 @@ void gx_pipeline_print_tev_state(uint16_t index) {
                tev_reg_component(st->kreg_bg[i]), tev_reg_component(st->kreg_ra[i] >> 12),
                st->kreg_ra[i], st->kreg_bg[i]);
     }
+    for (int i = 0; i < 4; i++) {
+        printf("   [tev] C%d = (%9.4f %9.4f %9.4f %9.4f) raw ra=0x%06X bg=0x%06X\n", i,
+               tev_reg_component(st->creg_ra[i]), tev_reg_component(st->creg_bg[i] >> 12),
+               tev_reg_component(st->creg_bg[i]), tev_reg_component(st->creg_ra[i] >> 12),
+               st->creg_ra[i], st->creg_bg[i]);
+    }
     for (int i = 0; i < (int)st->num_stages && i < 8; i++) {
         uint32_t c = st->combiner_color[i], a = st->combiner_alpha[i];
+        /* Swap tables: BP 0xF6..0xFD, two TevKSel words per table (R/G then B/A), and
+         * the ALPHA combiner's tswap:2-3 / rswap:0-1 pick one for the texture sample
+         * and the raster colour. Printed because a two-texture "ink plate" is only
+         * explicable through them: alpha 255 textures become masks by mapping A onto
+         * the texture's red channel (handover 5c.46 AP-N). */
+        uint32_t tsid = (a >> 2) & 3, rsid = a & 3;
+        uint32_t trg = st->ksel[tsid * 2], tba = st->ksel[tsid * 2 + 1];
+        uint32_t rrg = st->ksel[rsid * 2], rba = st->ksel[rsid * 2 + 1];
         printf("   [tev] st%d tex=%d map=%u coord=%u | rgb: %s %s %s %s bias=%u op=%u clamp=%u scale=%s dest=%s kc=%s raw=0x%08X\n",
                i, st->tex_enable[i], st->texmap[i], st->texcoord[i],
                k_color_arg_names[(c >> 12) & 0xF], k_color_arg_names[(c >> 8) & 0xF],
@@ -775,6 +830,10 @@ void gx_pipeline_print_tev_state(uint16_t index) {
                (a >> 12) & 3, (a >> 14) & 1, (a >> 15) & 1,
                k_scale_names[(a >> 16) & 3], k_dest_names[(a >> 18) & 3],
                k_konst_names[st->kasel[i] & 0x1F], a);
+        printf("   [tev]     swap : tex table %u [R<-ch%u G<-ch%u B<-ch%u A<-ch%u] "
+               "ras table %u [R<-ch%u G<-ch%u B<-ch%u A<-ch%u]\n",
+               tsid, trg & 3, (trg >> 2) & 3, tba & 3, (tba >> 2) & 3,
+               rsid, rrg & 3, (rrg >> 2) & 3, rba & 3, (rba >> 2) & 3);
     }
 }
 
@@ -1388,6 +1447,15 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
             } else {
                 memset(&b->tex, 0, sizeof(b->tex));
             }
+            if (gx_tev_word_probe_active()) {
+                printf("[TevWord] #%u f=%d DRAW b=%u vtx=%u tex=0x%08X tex1=0x%08X stages=%u "
+                       "state=%u\n",
+                       ++s_tev_word_seq, (int)g_runner_current_frame, s_draw_batch_count - 1,
+                       vtx_emitted, has_tex ? s_tex_units[tex_unit].guest_addr : 0u,
+                       has_tex1 ? s_tex_units[tex_unit1].guest_addr : 0u,
+                       (unsigned)s_num_tev_stages, (unsigned)s_cur_tev_state);
+                fflush(stdout);
+            }
         }
     }
 
@@ -1412,24 +1480,36 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
         printf("[F900 BP] reg=0x%02X val=0x%06X pc=0x%08X lr=0x%08X\n", reg, val, s_debug_pc, s_debug_lr);
         fflush(stdout);
     }
+    if (gx_tev_word_probe_active() &&
+        (reg == 0x00 || (reg >= 0x28 && reg <= 0x2B) || (reg >= 0xC0 && reg <= 0xC7) ||
+         (reg >= 0xE0 && reg <= 0xE7) || (reg >= 0xF3 && reg <= 0xFD))) {
+        printf("[TevWord] #%u f=%d BP 0x%02X = 0x%06X\n", ++s_tev_word_seq,
+               (int)g_runner_current_frame, reg, val & 0x00FFFFFFu);
+        fflush(stdout);
+    }
     if (reg == 0x00) { // BPMEM_GENMODE (active TEV stages and texgens)
-        /* GEN_MODE packs numtex:0-3, numcol:4-6, numtev:7-10 (Dolphin BPMemory.h), and
-         * the stage COUNT is numtev+1. This read (val>>10)&0xF, i.e. numtev's top bit plus
-         * cullmode/numind - so a batch's stage count was whatever those unrelated fields
-         * happened to say. TLS_GENMODE_PROBE=1 prints both decodings so the difference is
-         * measured, not argued (handover 5c.46 AP-N: the page's crest/motif panes report
-         * two stages whose second stage is a pure passthrough, which is what a MISSED
-         * stage looks like). */
+        /* GEN_MODE is Dolphin GenMode (VideoCommon/BPMemory.h):
+         *   numtexgens 0-3, numcolchans 4-6, bit 7 unused, flat_shading 8,
+         *   multisampling 9, numtevstages 10-13 (value = stages-1), cull_mode 14-15,
+         *   numindstages 16-18, zfreeze 19.
+         * The stage count therefore comes from bits 10-13 exactly as this reads it.
+         * Handover 5c.46 AP-M item 5 claimed the packing was `numtex:0-3 numcol:4-6
+         * numtev:7-10` and that this read was one field off - that is DISPROVEN by
+         * Dolphin's own bitfield, and by the page's crest draw: the guest sets
+         * 0x000412 there (numtevstages = 1 -> 2 stages) and writes exactly two
+         * combiners, 0xC0..0xC3, for the two texture maps it binds. Reading bits 7-10
+         * would give 9 stages, which is not a state the guest ever programs.
+         * TLS_GENMODE_PROBE=1 prints the full decode. */
         {
             static int s_probe = -1;
             if (s_probe < 0) s_probe = getenv("TLS_GENMODE_PROBE") ? 1 : 0;
             if (s_probe) {
                 extern int g_runner_current_frame;
-                printf("[GenMode] f=%d val=0x%06X numtex=%u numcol=%u numtev=%u stages_gx=%u "
-                       "stages_old=%u\n",
-                       g_runner_current_frame, val, val & 0xF, (val >> 4) & 7,
-                       (val >> 7) & 0xF, (uint32_t)(((val >> 7) & 0xF) + 1),
-                       (uint32_t)(((val >> 10) & 0xF) + 1));
+                printf("[GenMode] f=%d val=0x%06X numtex=%u numcol=%u unused=%u flat=%u ms=%u "
+                       "numtev=%u stages=%u cull=%u numind=%u\n",
+                       g_runner_current_frame, val, val & 0xF, (val >> 4) & 7, (val >> 7) & 1,
+                       (val >> 8) & 1, (val >> 9) & 1, (val >> 10) & 0xF,
+                       (uint32_t)(((val >> 10) & 0xF) + 1), (val >> 14) & 3, (val >> 16) & 7);
                 fflush(stdout);
             }
         }
@@ -1626,40 +1706,42 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
             s_tev_comb_color[stage] = val & 0x00FFFFFF;
             if (((val >> 16) & 3) == 3) s_tev_compare_stages++;
         } else {
-            /* GX BP 0xC1 packs the ALPHA combiner as d:0-2 c:3-5 b:6-8 a:9-11, bias:12-13,
-             * op:14, clamp:15, shift:16-17, dest:18-19 (Dolphin BPMemory.h), i.e. one nibble
-             * lower than the colour combiner. The pixel shader reads a colour-shaped packing
-             * (args at 4/7/10/13, bias 16-17, op 18, clamp 19, scale 20-21), so the raw word
-             * must be repacked or every alpha stage is evaluated with the wrong fields.
-             * TLS_TEV_ALPHA_GX=1 selects the GX layout. It matters because a compare alpha
-             * stage (bias 3) compares the COLOUR channels of its arguments, which is the only
-             * way GX can derive alpha from a texture's RGB - the mechanism the tutorial
-             * page's crest mask needs (handover 5c.46 AP-N). */
-            uint32_t raw = val & 0x00FFFFFF;
-            static int s_gx_layout = -1;
-            if (s_gx_layout < 0) s_gx_layout = getenv("TLS_TEV_ALPHA_GX") ? 1 : 0;
-            if (s_gx_layout) {
-                raw = (((raw >> 9) & 7) << 13) |   /* a */
-                      (((raw >> 6) & 7) << 10) |   /* b */
-                      (((raw >> 3) & 7) << 7)  |   /* c */
-                      ((raw & 7) << 4)         |   /* d */
-                      (((raw >> 12) & 3) << 16) |  /* bias */
-                      (((raw >> 14) & 1) << 18) |  /* op */
-                      (((raw >> 15) & 1) << 19) |  /* clamp */
-                      (((raw >> 16) & 3) << 20);   /* scale */
-            }
-            s_tev_comb_alpha[stage] = raw;
-            if (((raw >> 16) & 3) == 3) s_tev_compare_stages++;
+            /* BP 0xC1 is Dolphin TevStageCombiner::AlphaCombiner:
+             *   rswap:0-1 tswap:2-3 d:4-6 c:7-9 b:10-12 a:13-15,
+             *   bias:16-17 op:18 clamp:19 compare_mode:20-21 dest:22-23
+             * and the pixel shader reads exactly that packing, so the raw word is
+             * passed through unchanged.
+             *
+             * Handover 5c.46 AP-M item 4 added a `TLS_TEV_ALPHA_GX` repack that shifted
+             * these fields down to `d:0-2 c:3-5 b:6-8 a:9-11, bias:12-13`. That repack
+             * is a decode of the WRONG register: applied to the page's crest words it
+             * turns stage 0's alpha into a compare stage whose dest is r1 instead of
+             * prev, so `prev.a` stays 0 and the batch is simply not drawn - which is
+             * why it "removed the black plates" in that session's table. With the real
+             * layout the words decode as `a = tex.a * ras.a` (stage 0) and
+             * `a = prev.a * tex.a` (stage 1), and the missing mask turned out to be the
+             * SWAP TABLES (tex.a reading the texture's red channel), not this. */
+            s_tev_comb_alpha[stage] = val & 0x00FFFFFF;
+            if (((val >> 16) & 3) == 3) s_tev_compare_stages++;
         }
         s_tev_state_dirty = true;
         return;
     }
-    /* TEV colour registers, BP 0xE0..0xE7: register i takes RA in 0xE0+2i and BG in
-     * 0xE1+2i. Bit 23 is the TevRegType (0 = 8-bit colour, 1 = signed 10-bit). */
+    /* TEV colour / konst registers, BP 0xE0..0xE7: register i takes RA in 0xE0+2i and
+     * BG in 0xE1+2i. Bit 23 is TevReg::type and selects WHICH register file the write
+     * belongs to - 0 = TEV colour register (the shader's c0/c1/c2 and the pre-loaded
+     * value of prev), 1 = konst register (K0..K3). Dolphin's BPStructs.cpp routes on
+     * exactly this bit; the host used to send every write to the konst file, so the
+     * colour registers stayed zero for the whole run (handover 5c.46 AP-M). */
     if (reg >= 0xE0 && reg <= 0xE7) {
         uint32_t i = (uint32_t)((reg - 0xE0) >> 1);
-        if (((reg - 0xE0) & 1) == 0) s_tev_kreg_ra[i] = val & 0x00FFFFFF;
-        else                          s_tev_kreg_bg[i] = val & 0x00FFFFFF;
+        uint32_t raw = val & 0x00FFFFFF;
+        bool konst = (raw & 0x00800000) != 0;
+        if (((reg - 0xE0) & 1) == 0) {
+            if (konst) s_tev_kreg_ra[i] = raw; else s_tev_creg_ra[i] = raw;
+        } else {
+            if (konst) s_tev_kreg_bg[i] = raw; else s_tev_creg_bg[i] = raw;
+        }
         s_tev_state_dirty = true;
         return;
     }

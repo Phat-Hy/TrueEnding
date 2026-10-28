@@ -6,27 +6,38 @@
 (`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
 -> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
 creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.46 AP-L**; §5c.46 AP and earlier is history, and several of its conclusions are
-corrected below (`AP-L` shows the page's content and supersedes AP K's "identity unknown").
+state is **§5c.46 AP-N** (at the end of this file); §5c.46 AP-M and earlier is history, and several of its
+conclusions are corrected below.
 
-> **THE TUTORIAL PAGE NOW DRAWS ITS FULL REFERENCE LAYOUT - NO DIAGNOSTIC FLAG (§5c.46 AP-L).** The page's
-> content is the hidden LayoutTask the camp/tutorial UI manager creates at frame 1656 from
-> `/data/d2anime/ui_hp_heal.d2a` (name measured, not inferred) and keeps at `manager+0x3EC`; it is fully
-> built (4 panes) but `fn_801F4514` gates its whole subtree on bit 30 of `[node+0xFC]`, which nothing sets.
-> The page's own verbs are where it belongs: **show on the page ENTER verb `fn_805BA358` (f=3659)**, clear on
-> the per-mode hide pass `.L_805BA2D4` (f=3658). Measured order: page start 3648 -> hide pass 3658 -> enter
-> 3659, so a show at the page start is undone ten frames later (measured). With the fix the page's batch
-> count follows the forced run's timeline exactly (38/50/54/25 at 3710/3720/3780/3840) and the capture is the
-> reference page - `docs/evidence/host_page_content_5c46apl_3781.png`. Invariant PASS, same hash. Two art
-> defects remain and are **two-texture "ink plates", not missing crest art**: read **§5c.46 AP-M** at the end of
-> this file before touching them. Measured there: `0x90D19B80` is `data/texture/ui_base_white.texture` (the page's
-> white plate, loaded at frame 168, written by nothing afterwards), batches b37/b38 draw that plate with a
-> dark-red raster colour (`0xFF00001E`) plus a SECOND texture that can only supply alpha -
-> `tutorial_dc01.texture` (the crown crest, 128x128) for b37 and `tt001_10_ch02.texture` (a moon/wave motif) for
-> b38 - so what is left is the alpha stage itself: GX's alpha-combiner bit layout and the C0/C1/C2 colour
-> registers it needs are both unimplemented. AP-L's addenda ("the crest's writer is a decompress into
-> `0x90D19AA0`", "the crest scratch reads black") are **withdrawn** in AP-M, with the frame numbers that
-> disprove them.
+> **THE PAGE IS THE REFERENCE PAGE - BOTH ART DEFECTS ARE FIXED, NO DIAGNOSTIC FLAG (§5c.46 AP-N).** The crest
+> is dark ink on parchment and the band is gone; the invariant still reproduces `EAB33141...`. The missing
+> mechanism was **GX's TEV swap tables (BP 0xF6..0xFD)**, which this host never implemented - not the alpha bit
+> layout, not the stage count, and not C0/C1/C2. The guest writes `BP 0xF8 = BP 0xF9 = 0x018060` immediately
+> before the crest draw (every channel reads RED) and stage 1's alpha combiner names `tswap = 1`, so
+> `alpha = prev.a * dc01.RED`: the bright crown art becomes the mask. `tutorial_dc01.texture`,
+> `tt001_10_ch02.texture` and `tt001_10_ch01c.texture` have **alpha 255 on every texel** (ground truth, decoded
+> from the loaded `.texture` blobs), so no other GX mechanism can be the answer. **AP-M items 4 and 5 are
+> withdrawn** (Dolphin's `AlphaCombiner` packing and `GenMode` bit 10-13 `numtevstages` were right all along; the
+> `TLS_TEV_ALPHA_GX` repack and a mid-session `TLS_GENMODE_GX` are removed). Read **§5c.46 AP-N** before touching
+> the TEV path again - it also records why the TEV pixel shader is now used by default **only for orthographic
+> two-map batches** (widening it moves frame 3500 to `22C32C4E...` and visibly regresses the cave).
+> Evidence shots are in `logs_ap/` (`page_default_3731.png`, `cmp_crest_swap.png`) because this session's
+> sandbox denies writes inside `docs/evidence/`.
+
+> **THE PAGE'S CONTENT IS SHOWN BY ONE BIT (§5c.46 AP-L, still current).** The page's content is the hidden
+> LayoutTask the camp/tutorial UI manager creates at frame 1656 from `/data/d2anime/ui_hp_heal.d2a` (name
+> measured, not inferred) and keeps at `manager+0x3EC`; it is fully built (4 panes) but `fn_801F4514` gates its
+> whole subtree on bit 30 of `[node+0xFC]`, which nothing sets. The fix puts the show where the page's own
+> verbs are: **set on the page ENTER verb `fn_805BA358` (f=3659)**, clear on the per-mode hide pass
+> `.L_805BA2D4` (f=3658). Measured order: page start 3648 -> hide pass 3658 -> enter 3659, so a show at the page
+> start is undone ten frames later. With it the page draws its full reference layout. AP-L's two addenda ("the
+> crest's writer is a decompress into `0x90D19AA0`", "the crest scratch reads black") are **withdrawn** in AP-M,
+> with the frame numbers that disprove them.
+
+> **THE TUTORIAL PAGE'S ART IS FIXED - see the AP-N block above and §5c.46 AP-N at the end of this file.** The
+> superseded AP-M reading ("the second texture can only supply alpha, so the alpha combiner's bit layout and the
+> C0/C1/C2 registers are what is left") is history; the mask comes from the TEV swap table, and the two
+> `TLS_TEV_ALPHA_GX`/stage-count conclusions below it are withdrawn.
 
 > **THE PAGE-TABLE CURSOR THEORY IS DEAD - THE PAGE START DOES READ THE TABLE, TAKE THE MODES 1..4 BRANCH,
 > AND BUILD AND SHOW ITS LAYOUTS (§5c.46 AP).** AM/AN/AO are **wrong on all three counts** and AP measures
@@ -10404,6 +10415,12 @@ destination, or a decompressor that returns zeros splits the remaining work thre
 
 ### AP-M. THE TWO ART DEFECTS ARE TWO-TEXTURE "INK PLATES", NOT A MISSING CREST - and the AP-L addenda's premise is withdrawn
 
+> **SUPERSEDED IN PART BY §5c.46 AP-N.** Items 1-3 and 6-9 below stand (the plate's identity, the two-texture
+> batches, the transient buffers, the instruments). **Item 4 (the alpha-combiner bit layout and
+> `TLS_TEV_ALPHA_GX`) and item 5 (the GEN_MODE stage count) are WITHDRAWN**: the shader's alpha packing and the
+> bits 10-13 stage count were already Dolphin's, and the repack only made the crest batch invisible. The mask is
+> GX's **swap table** (BP 0xF6..0xFD), which AP-N implements - the textures' alpha is 255 on every texel.
+
 This session answered the AP-L question ("who writes 0x90D19B80 / where is the crest art") by measurement, and
 the answer is that **0x90D19B80 is not a crest slot at all**. Everything below is a measurement from a page run
 (`tools/page_run.ps1 -Frames 3800 -PressShift 27 -RequireGame 1647`), and every instrument added is default-off.
@@ -10564,3 +10581,153 @@ the combiners the guest actually meant. Verify each attempt against the referenc
 (`docs/evidence/ref_tutorial_top_5c43.png`, cropped in `docs/evidence/`-style at
 `logs_ap/ref_crest_zoom.png` during this session) and against the invariant, which **PASSes** with every
 instrument in this section present and default-off.
+
+### AP-N. THE PAGE IS THE REFERENCE PAGE - the mask is GX's SWAP TABLE, and AP-M's items 4 and 5 are withdrawn
+
+**Both art defects are fixed, with no diagnostic flag, and the Chapter-1 invariant still reproduces its golden
+frame.** The missing mechanism was **GX's TEV swap tables** (BP 0xF6..0xFD), which this host had never
+implemented. Everything AP-M pointed at was either already correct or wrong: the alpha-combiner bit layout is
+Dolphin's and was already right, the GEN_MODE stage count was already right, and C0/C1/C2 - although genuinely
+unimplemented - are **not referenced by the page's crest combiner at all**.
+
+**1. The guest's own words, in order, settle it (one new probe).** `TLS_TEV_WORD_PROBE=<f0>[:<f1>]` prints the
+raw BP writes in the TEV register range (0x00, 0x28-0x2B, 0xC0-0xC7, 0xE0-0xE7, 0xF3-0xFD) with one sequence
+counter, interleaved with a `DRAW` marker for every batch that is opened - so the words a draw ran with are read
+off the stream instead of inferred from a decoded snapshot. At guest frame 3734 (the page, 49 batches) the crest
+draw is `b38 tex=0x90D19B80 tex1=0x921FEAE0`, and the words written immediately before it are:
+
+```
+[TevWord] #3865 BP 0xF8 = 0x018060          <- SWAP TABLE 1, both halves
+[TevWord] #3866 BP 0xF9 = 0x018060
+[TevWord] #3867 BP 0xC3 = 0x08E274          <- stage 1 alpha: tswap = (0xE274>>2)&3 = 1
+[TevWord] #3869 BP 0x28 = 0x3C9040          <- TEVORDER: st0 map 0 coord 0, st1 map 1 coord 1, both enabled
+[TevWord] #3870 BP 0xC0 = 0x08F8AF          <- stage 0 colour
+[TevWord] #3871 BP 0xC1 = 0x08F2F0          <- stage 0 alpha
+[TevWord] #3874 BP 0xC2 = 0x08F0CF          <- stage 1 colour
+[TevWord] #3875 BP 0xC3 = 0x08E274          <- stage 1 alpha
+[TevWord] #3878 BP 0x00 = 0x000412          <- GENMODE: numtex=2 numcol=1 numtevstages=1 -> 2 stages
+[TevWord] #3879 DRAW b=38 vtx=6 tex=0x90D19B80 tex1=0x921FEAE0 stages=2 state=50
+```
+
+`0x018060` as a TevKSel has `swap_rb = 0` and `swap_ga = 0`, i.e. **every channel reads input channel 0**, the
+texture's RED. Stage 1's alpha combiner is `a=ZERO, b=PREV, c=TEXA, d=ZERO` (bias 0, add, clamp, dest prev) with
+`tswap = 1`, so `alpha = prev.a * tex1.<table1.a>` = `prev.a * dc01.RED` - **the bright crown art becomes the
+alpha mask**. This is the whole defect; the trailing `0xC3 = 0x08E270` after the draw restores tswap 0.
+
+**2. `0x018060` is not a coincidence - the texture's alpha channel is 255 everywhere (ground truth).** The
+`.texture` containers were dumped at load time (`TLS_RES_LOAD_PROBE=1 TLS_RES_LOAD_FROM=3600
+TLS_RES_LOAD_DUMP=921F0000,92280000`) and decoded offline (`build/recomp/resload_f3656_921FEAA0.bin` dc01,
+`resload_f3654_9226B120.bin` ch02, `resload_f3652_922731A0.bin` ch01c): all three are `chnkdata/wii text`,
+format 14 (CMPR), texel data at `ptr+0x40`, and **every texel of all three has alpha 255** (`frac(a<128) = 0`).
+So there is no punch-through block anywhere, and no reachable GX mechanism can produce a mask except a swap
+table (a compare stage could, but the guest programs none here - see item 3). This also settles AP-M's open
+worry about the transient texture buffers: the *loaded* blobs and the host's upload agree (`luma mean 42.4` for
+dc01 either way), so no upload race is involved.
+
+**3. AP-M item 4 (the alpha bit layout) is WITHDRAWN; the `TLS_TEV_ALPHA_GX` repack is removed.** The pixel
+shader's read (`a:13-15 b:10-12 c:7-9 d:4-6`, `bias:16-17 op:18 clamp:19 compare_mode:20-21 dest:22-23`) is
+exactly Dolphin's `TevStageCombiner::AlphaCombiner`, so the raw word was always correct. Decoding the crest words
+with Dolphin's packing gives `a = tex0.a * ras.a` (stage 0) and `a = prev.a * tex1.a` (stage 1) - a regular
+two-stage UI combiner, no compare stage. The repack AP-M added shifts those fields into a *different* register's
+layout and turns stage 0 into a compare stage whose dest becomes `r1`, so `prev.a` stays 0 and the batch is
+simply not drawn: that is why its table showed "the plates stop being opaque black" (crest rect mean
+`(135,108,73)`, 0 % dark = the parchment showing through, not ink). The repack and its env var are gone; the
+comment at the BP 0xC1 decode records why.
+
+**4. AP-M item 5 (the GEN_MODE stage count) is WITHDRAWN - bits 10-13 ARE `numtevstages`.** Dolphin's
+`GenMode` bitfield is `numtexgens 0-3, numcolchans 4-6, bit 7 unused, flat_shading 8, multisampling 9,
+numtevstages 10-13 (value = stages-1), cull_mode 14-15, numindstages 16-18, zfreeze 19`, i.e. the existing
+`(val>>10)&0xF` read. The page's crest draw writes `0x000412` -> **2 stages**, and the guest writes exactly two
+combiners (0xC0..0xC3) for the two maps it binds; reading bits 7-10 would give 9 stages, a state the guest never
+programs. The `TLS_GENMODE_GX` switch added mid-session was removed again; `TLS_GENMODE_PROBE=1` now prints the
+full Dolphin decode, and the comment at the decode records the disproof.
+
+**5. C0/C1/C2 are implemented anyway - they were a real gap, just not this gap.** BP 0xE0..0xE7 carries the TEV
+colour registers C0..C2 *and* the konst registers K0..K3, and `TevReg::type` (**bit 23**: 0 = colour, 1 = konst)
+selects which file a write lands in (Dolphin `BPStructs.cpp`: `SetTevColor` / `SetTevKonstColor`). The host had
+been sending every one of those writes into the konst file, so `r0/r1/r2` and the pre-loaded `prev` were zero for
+every draw and a compare stage always compared zeros. Now: `GxTevState::creg_ra/bg[4]`, routing on bit 23,
+`GxTevConstants::creg[4][4]`, and the shader pre-loads `prev = creg[0], r0 = creg[1], r1 = creg[2],
+r2 = creg[3]` (Dolphin `PixelShaderGen.cpp`). The guest does write these (`0xE2 = 0x8FF0FF`, `0xE3 = 0x8FF0FF`,
+`0xE4 = 0x8FF041` at frame 3734, all konst type), so the split is live. **Frame 3500 is unchanged by it** -
+measured, see item 7.
+
+**6. The fix, in two files plus the shader.**
+
+* `gx_pipeline.c` / `gx_pipeline.h` - the colour/konst split above, `creg_*` in the snapshot and in
+  `gx_pipeline_print_tev_state` (which now prints C0..C3 and, per stage, the resolved swap table), and the new
+  `TLS_TEV_WORD_PROBE`. `GxTevState` grew `creg_ra/creg_bg[4]`; the dedup hash covers them, so the state table
+  stays honest.
+* `gfx_d3d11.c` - `gx_tev_fill_constants` derives the four swap tables from `BP 0xF6..0xFD`
+  (`swap_rb/swap_ga` of the even/odd TevKSel of each pair -> R,G,B,A) and, per stage, resolves the alpha
+  combiner's `tswap:2-3` (texture) and `rswap:0-1` (raster) into `GxTevConstants::tswap/rswap[16][4]`. A
+  completely zeroed ksel file (all eight words zero) keeps the identity permutation instead of GX's literal
+  all-red, because that register file is never zero in a real draw.
+* `tools/compile_shaders.py` - `TevSwap()`/`TevSwapPick()` and the two new `uint4 tev_tswap/rswap[16]` cbuffer
+  arrays; the stage loop samples the texture and the raster colour through them.
+* `TLS_TEV_MULTI` is now **default-on** for batches that (a) are orthographic, (b) have a second texture bound and
+  (c) have a stage that samples a texmap other than 0. `TLS_TEV_MULTI=0` restores the old single-texture path for
+  A/B runs. See item 7 for why the gate is that narrow.
+
+**7. Why the TEV path is restricted to 2D batches (measured, and it is what keeps the invariant).** Routing
+*every* batch with a second texture bound through `PSTev` moves frame 3500 to
+`22C32C4E27B03245E8458436E8961E88CBAD621ABD26B63925A9447C368E8DD1` - and the change is a regression: the cave's
+rock walls become smeared stripes and the hero model loses its shading (`logs_ap/cmp_f3500.png`, old top-left,
+new top-right, 4x difference bottom-left; 349 198 of 921 600 pixels differ). Narrowing to "a stage samples texmap
+!= 0" did not help - the cave's own 3D batches do sample a second map - so the gate adds "orthographic". 2D UI
+is exactly the class `PSAlpha` cannot express at all, and it is where the fix is needed. Making `PSTev` good
+enough for 3D is a separate, self-contained thread: **do not** widen this gate without re-measuring frame 3500.
+
+| frame 3500 | hash |
+|---|---|
+| default (TEV path restricted to 2D) | `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` **PASS** |
+| `TLS_TEV_MULTI=1` for every `has_texture1` batch | `22C32C4E27B03245E8458436E8961E88CBAD621ABD26B63925A9447C368E8DD1` |
+| `TLS_TEV_MULTI=0` (old path everywhere) | `EAB33141...` **PASS** (so the colour-register and swap-table work costs this frame nothing) |
+
+**8. The result, measured against the reference.** Default flags, content-keyed capture
+(`TLS_PAGE_CAPTURE='tex:921DEA60,3730'` -> guest frame 3730 / present 3731, 49 batches, `Game@1647`):
+
+| region | before | after | reference |
+|---|---|---|---|
+| crest rect x 845..1005 y 108..241 | mean (30,0,0), 100 % dark | mean (204.4,180.4,120.8), **11.4 % dark** | mean (207.8,184.0,123.3), 7.8 % dark |
+| band x 672..728 y 150..690 | mean (33,3,2), 93 % dark | mean (228.1,202.6,130.1), **4.1 % dark** | mean (225.8,199.7,128.2), 4.7 % dark |
+| body-text block x 640..1240 y 440..600 | - | mean (236.5,208.9,135.4) | mean (235.5,205.6,132.9), mean abs diff **6.1** |
+
+The crest is the crowned medallion in dark ink with its ray burst, and the band is the moon/wave motif instead of
+a dark rectangle. Evidence (paths are `logs_ap/` because this session's sandbox denies writes inside
+`docs/evidence/`; promote them when that is writable): `logs_ap/page_default_3731.png` (full page, default
+flags), `logs_ap/cmp_crest_swap.png` (host vs reference, crest rect), `logs_ap/tl_3781.png`, and the per-frame
+timeline `logs_ap/tl_*.png`.
+
+**9. Instruments added this session (all default-off except the narrowed TEV default).**
+
+| variable | effect |
+|---|---|
+| `TLS_TEV_WORD_PROBE=<f0>[:<f1>]` | the guest's raw BP writes for the TEV registers plus a `DRAW` marker per batch, in order, with one sequence counter |
+| `TLS_TEV_MULTI=0` | (new meaning) force the old single-texture path; it is otherwise **on** for 2D two-map batches |
+| `TLS_GENMODE_PROBE=1` | now prints the full Dolphin GEN_MODE decode |
+| `TLS_RES_LOAD_DUMP` | unchanged, but this is how the ground-truth `.texture` blobs were obtained |
+
+Removed: `TLS_TEV_ALPHA_GX` (item 3) and the short-lived `TLS_GENMODE_GX` (item 4).
+
+**10. Two process facts worth keeping.**
+
+* **The page's present window moves, and the batch counts in AP-L's table are not reproducible in this build.**
+  On this host the page presents from guest frame ~3708 to ~3825 and is settled from ~3721; present 3780/3782 is
+  the **cave** half (`53 batches`, 18 831 vtx) - so `-Shot 3780` captures the cave, and `-Shot` must be an *odd*
+  present. Use the content-keyed capture: `TLS_PAGE_CAPTURE='tex:921DEA60,<minframe>'` fired at 3708 (mid-fade)
+  and at 3731 (settled) exactly as asked. The invariant is unaffected by all of this (frame 3500 is static).
+* **The confined sandbox denies writes to `logs/`, `docs/`, and `tools/` from child processes** while allowing
+  `build/`, `logs_ap/` and the workspace root (a `.ps1`/`python` write is denied; the harness's own file tools
+  are not). `tools/invariant.ps1` therefore grew `-Log <path>` (default unchanged, `logs\invariant.log`) so the
+  gate can run with `-Log logs_ap\invariant.log`. Do not spend time on the ACL diagnostic: the denial is the
+  harness's file policy, and `logs_ap/` exists for exactly this.
+
+**11. What is still visibly different from the reference (next art item, not this one).** With the crest and the
+band fixed, the page now differs from the reference in exactly one visible way: **the button glyphs in the body
+text render as Latin letters**. The reference reads `Use (white orb) to move.` / `Press (Z) to reset the camera
+to a` / `position behind the player character.`; the host reads `Use (L) ...` / `Press (ZL) ...`. It is
+pre-existing (the AP-L capture shows the same) and it is a *glyph* question in the label atlas
+`0x9076E5E0` (256x256 fmt 2, 5c.46 M) or in the string's codepoints, not a TEV question - `logs_ap/cmp_band_swap.png`
+shows the two side by side. The crest ink is also marginally bolder than the reference (11.4 % vs 7.8 % dark in
+the crest rect), which is a texel-LOD/threshold question, not a mask question.

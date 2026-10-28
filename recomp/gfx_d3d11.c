@@ -17,9 +17,12 @@ const void* host_resolve_gx_guest_addr(uint32_t addr);
 typedef struct {
     float    kreg[4][4];      /* K0..K3 constant colour registers (rgba) */
     float    kprev[4][4];     /* K0..K3 previous colour registers */
+    float    creg[4][4];      /* C0..C3 TEV colour registers (rgba); creg[0] pre-loads prev */
     uint32_t color[16][4];    /* x = rgb combiner bits, y = alpha combiner bits */
     uint32_t ksel[16][4];     /* x = colour KonstSel, y = alpha KonstSel */
     uint32_t order[16][4];    /* x = texmap, y = texcoord, z = enable texture */
+    uint32_t tswap[16][4];    /* per stage: texture channel permutation (out ch -> in ch) */
+    uint32_t rswap[16][4];    /* per stage: raster colour permutation (out ch -> in ch) */
     uint32_t num_stages;
     uint32_t alpha_test;
     uint32_t pad0, pad1;
@@ -44,8 +47,46 @@ static void gx_tev_fill_constants(GxTevConstants* c, const GxTevState* st, bool*
         c->kprev[i][1] = c->kreg[i][1];
         c->kprev[i][2] = c->kreg[i][2];
         c->kprev[i][3] = c->kreg[i][3];
+        /* The TEV colour registers are the values r0/r1/r2 and prev start a draw with
+         * (Dolphin PixelShaderGen.cpp: `prev = colors[0], c0 = colors[1] ...`). They
+         * used to be hardcoded 0, so no compare stage could ever see a real operand. */
+        c->creg[i][0] = gx_tev_reg_component(st->creg_ra[i]);
+        c->creg[i][1] = gx_tev_reg_component(st->creg_bg[i] >> 12);
+        c->creg[i][2] = gx_tev_reg_component(st->creg_bg[i]);
+        c->creg[i][3] = gx_tev_reg_component(st->creg_ra[i] >> 12);
     }
     c->num_stages = st->num_stages ? st->num_stages : 1;
+    /* GX swap tables (BP 0xF6..0xFD). Each pair of TevKSel registers defines one
+     * channel permutation: the low pair maps output R/G from input channels, the high
+     * pair maps B/A (Dolphin AllTevKSels::GetSwapTable). The ALPHA combiner's
+     * tswap/rswap fields (bits 2-3 and 0-1) choose which table applies to the texture
+     * sample and to the raster colour of that stage. This is the mechanism that turns
+     * a texture with alpha 255 everywhere into a mask: the tutorial page's crest stage
+     * names table 1 so that `tex.a` reads the texture's RED channel (handover 5c.46
+     * AP-N). A completely zeroed register file is not a valid GX state - the game
+     * always sets these, and all-zero would make every channel read red - so an
+     * all-zero file keeps the identity permutation. */
+    {
+        uint32_t swap[4][4];
+        bool any_ksel = false;
+        for (int i = 0; i < 8; i++) if (st->ksel[i]) any_ksel = true;
+        for (int id = 0; id < 4; id++) {
+            if (!any_ksel) { swap[id][0] = 0; swap[id][1] = 1; swap[id][2] = 2; swap[id][3] = 3; continue; }
+            uint32_t rg = st->ksel[id * 2], ba = st->ksel[id * 2 + 1];
+            swap[id][0] = rg & 3;         /* R <- swap_rb of the even ksel */
+            swap[id][1] = (rg >> 2) & 3;  /* G <- swap_ga */
+            swap[id][2] = ba & 3;         /* B <- swap_rb of the odd ksel */
+            swap[id][3] = (ba >> 2) & 3;  /* A <- swap_ga */
+        }
+        for (int i = 0; i < 16; i++) {
+            uint32_t ts = (st->combiner_alpha[i] >> 2) & 3;
+            uint32_t rs = st->combiner_alpha[i] & 3;
+            for (int ch = 0; ch < 4; ch++) {
+                c->tswap[i][ch] = swap[ts][ch];
+                c->rswap[i][ch] = swap[rs][ch];
+            }
+        }
+    }
     for (int i = 0; i < 16; i++) {
         c->color[i][0] = st->combiner_color[i];
         c->color[i][1] = st->combiner_alpha[i];
@@ -3155,22 +3196,49 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     ID3D11PixelShader* ps = flat_raster ? s_d3d11.gx_ps_alpha_flat
                                         : (blend_enable ? s_d3d11.gx_ps_alpha : s_d3d11.gx_ps_opaque);
                     bool use_tev_path = s_d3d11.tev_enabled;
-                    /* TLS_TEV_MULTI=1: draw a batch that names a SECOND texture map through the
-                     * TEV shader even when TLS_TEV is off.
+                    /* Two-texture batches whose STAGES SAMPLE THE SECOND MAP go through the
+                     * TEV shader by default.
                      *
                      * Measured (5c.46 AP-N): the page's two remaining art defects are batches
-                     * b37/b38, which set texmap0 = ui_base_white (a white plate) and texmap1 =
-                     * the actual art - tutorial_dc01.texture (the crown crest) for b37 and
-                     * tt001_10_ch02.texture for b38 - with two TEV stages (st0 map 0, st1 map 1).
-                     * PSAlpha/PSOpaque can only sample ONE texture, so they paint the white
-                     * plate tinted by the batch's near-black raster colour (ras=0xFF00001E):
-                     * an opaque dark rectangle exactly where the reference draws the crest.
-                     * A single-texture shader cannot express these batches at all, so they are
-                     * the one class that must take the TEV path. */
+                     * that set texmap0 = ui_base_white (a white plate) and texmap1 = the actual
+                     * art - tutorial_dc01.texture (the crown crest) and tt001_10_ch02.texture
+                     * (moon/wave motif) - with two TEV stages (st0 map 0, st1 map 1). PSAlpha
+                     * can only sample ONE texture, so it painted the white plate tinted by the
+                     * batch's near-black raster colour (ras=0xFF00001E): an opaque dark
+                     * rectangle exactly where the reference draws the crest. A single-texture
+                     * shader cannot express these batches at all, so they are the one class that
+                     * must take the TEV path. With the swap tables implemented (tex.a reading
+                     * the mask texture's red channel) they now render as the reference does:
+                     * dark ink on parchment, and the motif instead of the band.
+                     *
+                     * The test is "a stage names a texmap other than 0", not merely
+                     * `has_texture1`: the handler binds a second unit whenever the guest leaves
+                     * one configured, and routing those batches through the TEV shader moved the
+                     * Chapter-1 invariant frame (5c.46 AP-N: frame 3500 became 22C32C4E... with
+                     * every has_texture1 batch on the TEV path).
+                     *
+                     * It is further restricted to ORTHOGRAPHIC (2D/UI) batches. Measured: the
+                     * cave's own second-map 3D batches render WORSE through PSTev than through the
+                     * established single-texture path (frame 3500 with them on it: rock walls
+                     * become smeared stripes, `22C32C4E...`, docs-quality comparison in
+                     * logs_ap/cmp_f3500.png), so they stay where they are until PSTev's 3D
+                     * handling is validated in its own thread. 2D UI is exactly where PSAlpha
+                     * cannot express the combiner at all, and that is the class this fixes.
+                     * TLS_TEV_MULTI=0 restores the old single-texture path for A/B runs. */
                     if (!use_tev_path && s_d3d11.gx_ps_tev) {
                         static int s_multi = -1;
-                        if (s_multi < 0) s_multi = getenv("TLS_TEV_MULTI") ? 1 : 0;
-                        use_tev_path = (s_multi != 0) && batch->has_texture1;
+                        if (s_multi < 0) {
+                            const char* e = getenv("TLS_TEV_MULTI");
+                            s_multi = (e && e[0] == '0' && e[1] == '\0') ? 0 : 1;
+                        }
+                        bool second_map = false;
+                        if (s_multi != 0 && batch->has_texture1 && !batch->is_perspective) {
+                            const GxTevState* st = gx_pipeline_get_tev_state(batch->tev_state);
+                            for (uint32_t s = 0; st && s < st->num_stages && s < 16; s++) {
+                                if (st->tex_enable[s] && (st->texmap[s] & 7) != 0) second_map = true;
+                            }
+                        }
+                        use_tev_path = second_map;
                     }
                     if (use_tev_path && s_d3d11.gx_ps_tev) {
                         /* GX TEV: evaluate the batch's real combiner stages. All eight

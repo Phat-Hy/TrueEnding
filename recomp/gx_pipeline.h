@@ -191,7 +191,8 @@ void gx_pipeline_clear_texture_dirty(uint32_t unit);
  *   BP 0xC0+2i  colour combiner   d:0-3 c:4-7 b:8-11 a:12-15 bias:16-17
  *                                 op:18 clamp:19 scale:20-21 dest:22-23
  *   BP 0xC1+2i  alpha combiner    d:4-6 c:7-9 b:10-12 a:13-15, rest as above
- *   BP 0xE0+2i / 0xE1+2i  colour register i, RA / BG half (11-bit signed + type bit)
+ *   BP 0xE0+2i / 0xE1+2i  colour/konst register i, RA / BG half (11-bit signed +
+ *                                type bit 23: 0 = colour register, 1 = konst)
  *   BP 0xF6+j   konst selectors: swap_rb:0-1 swap_ga:2-3 kcsel_even:4-8
  *                                kasel_even:9-13 kcsel_odd:14-18 kasel_odd:19-23
  *   BP 0xF3     alpha test: ref0:0-7 ref1:8-15 comp0:16-18 comp1:19-21 logic:22-23
@@ -216,6 +217,14 @@ typedef struct {
     uint32_t combiner_alpha[GX_MAX_TEV_STAGES];  /* BP 0xC1+2i */
     uint32_t kreg_ra[4];                 /* BP 0xE0+2i, type bit still set */
     uint32_t kreg_bg[4];                 /* BP 0xE1+2i */
+    /* The SAME four BP registers also carry the TEV COLOUR registers C0..C2 (and the
+     * fourth one, which pre-loads `prev`): TevReg::type (bit 23) selects which file a
+     * write lands in - 0 = colour register, 1 = konst register (Dolphin
+     * BPStructs.cpp: SetTevColor / SetTevKonstColor). The pipeline used to put every
+     * 0xE0..0xE7 write into `kreg_*`, so the shader's r0/r1/r2 started at zero for
+     * every draw and every compare stage compared zeros (handover 5c.46 AP-M). */
+    uint32_t creg_ra[4];                 /* TevReg type 0, RA half */
+    uint32_t creg_bg[4];                 /* TevReg type 0, BG half */
     uint32_t ksel[8];                    /* BP 0xF6+j raw */
     uint32_t _hash;                      /* dedup only; not part of the state */
 } GxTevState;

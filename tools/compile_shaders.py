@@ -189,13 +189,36 @@ float2 TevSelectUv(uint sel, float2 uv0, float2 uv1)
     return float2(0.0f, 0.0f);
 }
 
+// GX swap tables (BP 0xF6..0xFD). Before the combiners see them, the sampled texture
+// and the raster colour are permuted through a table chosen per stage by the alpha
+// combiner's tswap/rswap fields. This is how a texture whose alpha is 255 everywhere
+// can still supply an alpha mask: the page's crest stage names a table that maps A
+// onto the texture's RED channel (handover 5c.46 AP-N). A float4 component cannot be
+// indexed dynamically, so the permutation is a branch chain.
+float TevSwapPick(float4 v, uint ch)
+{
+    if (ch == 0u) return v.r;
+    if (ch == 1u) return v.g;
+    if (ch == 2u) return v.b;
+    return v.a;
+}
+
+float4 TevSwap(float4 v, uint4 sw)
+{
+    return float4(TevSwapPick(v, sw.x), TevSwapPick(v, sw.y),
+                  TevSwapPick(v, sw.z), TevSwapPick(v, sw.w));
+}
+
 cbuffer GxTev : register(b0)
 {
     float4 tev_kreg[4];      // K0..K3 constant colour registers
     float4 tev_kprev[4];     // K0..K3 "previous" colour registers
+    float4 tev_creg[4];      // C0..C3 TEV colour registers (C0 pre-loads prev)
     uint4  tev_color[16];    // x = rgb combiner (24 bit), y = alpha combiner (24 bit)
     uint4  tev_ksel[16];     // x = colour KonstSel, y = alpha KonstSel
     uint4  tev_order[16];    // x = texmap, y = texcoord, z = enable texture
+    uint4  tev_tswap[16];    // per stage: texture channel permutation (out ch -> in ch)
+    uint4  tev_rswap[16];    // per stage: raster colour permutation (out ch -> in ch)
     uint   tev_num_stages;
     uint   tev_alpha_test;   // comp0 | comp1<<3 | logic<<6 | ref0<<8 | ref1<<16
     uint   tev_pad0, tev_pad1;
@@ -430,10 +453,16 @@ bool TevAlphaTest(float alpha, uint packed)
 float4 PSTev(PSInput input) : SV_Target
 {
     float4 ras = input.color;
-    float4 prev = float4(0.0f, 0.0f, 0.0f, 0.0f);
-    float4 r0 = float4(0.0f, 0.0f, 0.0f, 0.0f);
-    float4 r1 = float4(0.0f, 0.0f, 0.0f, 0.0f);
-    float4 r2 = float4(0.0f, 0.0f, 0.0f, 0.0f);
+    // GX pre-loads the TEV register file from the colour registers C0..C3 before the
+    // first stage: prev <- C0, r0 <- C1, r1 <- C2, r2 <- C3 (Dolphin
+    // PixelShaderGen.cpp: `prev = colors[0], c0 = colors[1], c1 = colors[2],
+    // c2 = colors[3]`). These used to be zero, so a compare stage - the only GX
+    // mechanism that derives alpha from a texture's RGB - always compared zeros and
+    // could never produce a mask (handover 5c.46 AP-M).
+    float4 prev = tev_creg[0];
+    float4 r0 = tev_creg[1];
+    float4 r1 = tev_creg[2];
+    float4 r2 = tev_creg[3];
 
     uint stages = min(tev_num_stages, 16u);
     [loop] for (uint s = 0; s < stages; s++) {
@@ -448,7 +477,9 @@ float4 PSTev(PSInput input) : SV_Target
         if (ord.z != 0u) {
             uint map = ord.x & 7u;
             texel = SampleTevTex(map, TevSelectUv(ord.w, input.uv, input.uv1));
+            texel = TevSwap(texel, tev_tswap[s]);
         }
+        float4 rasv = TevSwap(ras, tev_rswap[s]);
 
         float4 konst_c = TevKonstColor(ks.x & 0x1Fu);
         float konst_a = TevKonstChannel(ks.y & 0x1Fu, 3u);
@@ -465,16 +496,16 @@ float4 PSTev(PSInput input) : SV_Target
         if (cbias == 3) {
             // compare stage: bits 20..21 are compare_mode, bit 18 is GT/EQ
             rgb = TevCompare3(cscale, cop,
-                              TevColorArg(carg.x, prev, r0, r1, r2, texel, ras, konst_c),
-                              TevColorArg(carg.y, prev, r0, r1, r2, texel, ras, konst_c),
-                              TevColorArg(carg.z, prev, r0, r1, r2, texel, ras, konst_c),
-                              TevColorArg(cd,    prev, r0, r1, r2, texel, ras, konst_c),
+                              TevColorArg(carg.x, prev, r0, r1, r2, texel, rasv, konst_c),
+                              TevColorArg(carg.y, prev, r0, r1, r2, texel, rasv, konst_c),
+                              TevColorArg(carg.z, prev, r0, r1, r2, texel, rasv, konst_c),
+                              TevColorArg(cd,    prev, r0, r1, r2, texel, rasv, konst_c),
                               cclamp);
         } else {
-            rgb = TevRegular3(TevColorArg(carg.x, prev, r0, r1, r2, texel, ras, konst_c),
-                              TevColorArg(carg.y, prev, r0, r1, r2, texel, ras, konst_c),
-                              TevColorArg(carg.z, prev, r0, r1, r2, texel, ras, konst_c),
-                              TevColorArg(cd,    prev, r0, r1, r2, texel, ras, konst_c),
+            rgb = TevRegular3(TevColorArg(carg.x, prev, r0, r1, r2, texel, rasv, konst_c),
+                              TevColorArg(carg.y, prev, r0, r1, r2, texel, rasv, konst_c),
+                              TevColorArg(carg.z, prev, r0, r1, r2, texel, rasv, konst_c),
+                              TevColorArg(cd,    prev, r0, r1, r2, texel, rasv, konst_c),
                               cbias, cop, cscale, cclamp);
         }
 
@@ -500,16 +531,16 @@ float4 PSTev(PSInput input) : SV_Target
         if (abias == 3) {
             // compare stage: alpha mode A8 == RGB8 (3), same compare packing
             alpha = TevCompare1(ascale, aop,
-                                TevAlphaArg4(aarg, prev, r0, r1, r2, texel, ras, konst_c),
-                                TevAlphaArg4(ab,   prev, r0, r1, r2, texel, ras, konst_c),
-                                TevAlphaArg4(ac2,  prev, r0, r1, r2, texel, ras, konst_c),
-                                TevAlphaArg(ad,    prev, r0, r1, r2, texel, ras, konst_c),
+                                TevAlphaArg4(aarg, prev, r0, r1, r2, texel, rasv, konst_c),
+                                TevAlphaArg4(ab,   prev, r0, r1, r2, texel, rasv, konst_c),
+                                TevAlphaArg4(ac2,  prev, r0, r1, r2, texel, rasv, konst_c),
+                                TevAlphaArg(ad,    prev, r0, r1, r2, texel, rasv, konst_c),
                                 aclamp);
         } else {
-            alpha = TevRegular1(TevAlphaArg(aarg, prev, r0, r1, r2, texel, ras, konst_c),
-                                TevAlphaArg(ab,   prev, r0, r1, r2, texel, ras, konst_c),
-                                TevAlphaArg(ac2,  prev, r0, r1, r2, texel, ras, konst_c),
-                                TevAlphaArg(ad,   prev, r0, r1, r2, texel, ras, konst_c),
+            alpha = TevRegular1(TevAlphaArg(aarg, prev, r0, r1, r2, texel, rasv, konst_c),
+                                TevAlphaArg(ab,   prev, r0, r1, r2, texel, rasv, konst_c),
+                                TevAlphaArg(ac2,  prev, r0, r1, r2, texel, rasv, konst_c),
+                                TevAlphaArg(ad,   prev, r0, r1, r2, texel, rasv, konst_c),
                                 abias, aop, ascale, aclamp);
         }
 
