@@ -3340,17 +3340,26 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                      * Chapter-1 invariant frame (5c.46 AP-N: frame 3500 became 22C32C4E... with
                      * every has_texture1 batch on the TEV path).
                      *
-                     * WIDENED TO 3D IS THE NEXT COMMIT, NOT THIS ONE. This still requires
-                     * `!batch->is_perspective` so the default picture is unchanged; the
-                     * separate widening commit removes it, having measured why the 2D-only
-                     * gate existed and that its cause is fixed. The cause was NOT a PSTev
-                     * limitation: the TEV path bound the CLAMP sampler for every stage while
-                     * GX's wrap mode for the cave's rock textures is REPEAT, so every
-                     * coordinate outside [0,1) stretched a border texel across the surface -
-                     * that is the "smeared stripes". gx_tev_fill_dims + SampleTevTex now bind
-                     * a WRAP sampler per map from the guest's own wrap mode; with that fixed,
-                     * frame 3500 on PSTev differs from the legacy path by 5.0/255 mean
-                     * absolute error with the same scene structure and no artifacts.
+                     * WIDENED TO 3D (handover 5c.46 AP-O). This used to require
+                     * `!batch->is_perspective`, i.e. 2D/UI batches only, because putting the
+                     * cave's 3D batches on PSTev turned its rock walls into smeared stripes.
+                     * Measured, that was ONE defect in this host and not a PSTev limitation:
+                     * the TEV path bound the CLAMP sampler for every stage while GX's wrap
+                     * mode for those rock textures is REPEAT, so every coordinate outside
+                     * [0,1) stretched a border texel across the surface. With the per-map
+                     * wrap sampler in place the artifact is gone (docs/evidence/
+                     * cmp_f3500_smear_5c46apo.png: clamp left, wrap right).
+                     *
+                     * What the widening changes, measured at frame 3500: the big wall
+                     * batches have two-stage chains (ras, then tex*ras) and come out
+                     * identical; the water/glow batches have up to EIGHT stages, of which the
+                     * legacy path could only evaluate the first two - the dropped stages
+                     * blend in a second texture by prev.a, multiply by a dark 512x512 map at
+                     * scale 2 and ADD a 256x1 gradient ramp times an EFB copy. That is why
+                     * the legacy water is a blown-out pale sheet (region mean (63,62,54)) and
+                     * the widened one is a dark reflective surface (24,25,24) - the reference
+                     * (dolphin_ref_run3_f5000_gameplay.png) is dark water, not a white sheet.
+                     * Frame 3500 therefore moves to a re-recorded hash; see the dossier.
                      * TLS_TEV_MULTI=0 restores the old single-texture path for A/B runs. */
                     if (!use_tev_path && s_d3d11.gx_ps_tev) {
                         static int s_multi = -1;
@@ -3359,7 +3368,7 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                             s_multi = (e && e[0] == '0' && e[1] == '\0') ? 0 : 1;
                         }
                         bool second_map = false;
-                        if (s_multi != 0 && batch->has_texture1 && !batch->is_perspective) {
+                        if (s_multi != 0 && batch->has_texture1) {
                             const GxTevState* st = gx_pipeline_get_tev_state(batch->tev_state);
                             for (uint32_t s = 0; st && s < st->num_stages && s < 16; s++) {
                                 if (st->tex_enable[s] && (st->texmap[s] & 7) != 0) second_map = true;

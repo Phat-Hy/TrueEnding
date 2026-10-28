@@ -36,7 +36,27 @@ Set-Location $root
 # 5c.46 E restructured it so the CLASSIFICATION is unchanged and only the MATTE is gated by
 # plate fraction - which restores this frame exactly, because the parchment then takes the
 # same path it always did (is_ink_art, so neither matte nor glow) and renders untouched.
-$EXPECTED_SHA = 'EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F'
+#
+# RE-RECORDED IN 5c.46 AP-O (intended change). The TEV pixel shader was widened from 2D-only
+# to every two-map batch, so the Chapter-1 water/glow geometry now goes through the guest's
+# real TEV combiners instead of the legacy `tex * vertex-colour` expression. The old value was
+# EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F.
+#
+# Why this frame and not the old one: at frame 3500 the wall batches have two-stage chains
+# (ras, then tex*ras) and render IDENTICALLY under both paths, while the water/glow batches
+# have eight stages, of which the legacy path could evaluate only the first two. The dropped
+# stages blend in a second texture weighted by prev.a, multiply by a dark 512x512 map at scale
+# 2, and ADD a 256x1 gradient ramp times an EFB copy - which is why the legacy water was a
+# blown-out pale sheet (region mean (62.9,62.4,53.9)) and the widened one is a dark reflective
+# surface (24.4,25.0,24.5). Dolphin's own render of this scene
+# (docs/evidence/dolphin_ref_run3_f5000_gameplay.png) is dark water, not a white sheet.
+# Evidence: docs/evidence/cmp_f3500_widen_5c46apo.png (legacy | widened | 4x difference),
+# cmp_f3500_smear_5c46apo.png (the clamp-vs-wrap sampler defect that had been keeping 3D
+# batches off the TEV path) and host_f3500_tev3d_5c46apo.png.
+#
+# It reproduces exactly: two independent runs of the widened build both give D3329E35..., and
+# the tutorial-page gate is untouched by it (page mean luma 150.33, crest 11.2 % dark).
+$EXPECTED_SHA = 'D3329E3565DF4E1087785D618114ABE44E555B2465338336853363E7209AB27E'
 $SHOT_FRAME   = '3500'
 $INPUT        = '600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A'
 
