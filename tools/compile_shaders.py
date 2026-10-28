@@ -158,21 +158,37 @@ Texture2D  tev_tex5 : register(t5);
 Texture2D  tev_tex6 : register(t6);
 Texture2D  tev_tex7 : register(t7);
 SamplerState tev_samp : register(s0);
+// GX wrap mode 1 (REPEAT) needs a second sampler: the cave's wall/floor textures tile
+// far outside [0,1), and the CLAMP sampler stretched their border texels across the
+// whole surface. Measured: that, not the missing indirect stage, is what made the 3D
+// batches "smeared stripes" on the TEV path (handover 5c.46 AP-O).
+SamplerState tev_sampw : register(s1);
 
 // Sample the texture bound to GX texmap `map`. Written as an if-chain over eight
 // distinct Texture2D objects rather than an indexed array: array-of-texture
 // dynamic indexing forces the surrounding TEV stage loop to unroll, and
-// D3DCompile refuses to unroll a loop of that size.
-float4 SampleTevTex(uint map, float2 uv)
+// D3DCompile refuses to unroll a loop of that size. `wrap` selects the REPEAT
+// sampler for this map and is uniform per draw.
+float4 SampleTevTex(uint map, float2 uv, uint wrap)
 {
-    if (map == 0u) return tev_tex0.Sample(tev_samp, uv);
-    if (map == 1u) return tev_tex1.Sample(tev_samp, uv);
-    if (map == 2u) return tev_tex2.Sample(tev_samp, uv);
-    if (map == 3u) return tev_tex3.Sample(tev_samp, uv);
-    if (map == 4u) return tev_tex4.Sample(tev_samp, uv);
-    if (map == 5u) return tev_tex5.Sample(tev_samp, uv);
-    if (map == 6u) return tev_tex6.Sample(tev_samp, uv);
-    return tev_tex7.Sample(tev_samp, uv);
+    if (wrap == 0u) {
+        if (map == 0u) return tev_tex0.Sample(tev_samp, uv);
+        if (map == 1u) return tev_tex1.Sample(tev_samp, uv);
+        if (map == 2u) return tev_tex2.Sample(tev_samp, uv);
+        if (map == 3u) return tev_tex3.Sample(tev_samp, uv);
+        if (map == 4u) return tev_tex4.Sample(tev_samp, uv);
+        if (map == 5u) return tev_tex5.Sample(tev_samp, uv);
+        if (map == 6u) return tev_tex6.Sample(tev_samp, uv);
+        return tev_tex7.Sample(tev_samp, uv);
+    }
+    if (map == 0u) return tev_tex0.Sample(tev_sampw, uv);
+    if (map == 1u) return tev_tex1.Sample(tev_sampw, uv);
+    if (map == 2u) return tev_tex2.Sample(tev_sampw, uv);
+    if (map == 3u) return tev_tex3.Sample(tev_sampw, uv);
+    if (map == 4u) return tev_tex4.Sample(tev_sampw, uv);
+    if (map == 5u) return tev_tex5.Sample(tev_sampw, uv);
+    if (map == 6u) return tev_tex6.Sample(tev_sampw, uv);
+    return tev_tex7.Sample(tev_sampw, uv);
 }
 
 // GX stages name the texcoord they sample (BP 0xC0 bits 4..7 for the colour combiner's
@@ -209,6 +225,56 @@ float4 TevSwap(float4 v, uint4 sw)
                   TevSwapPick(v, sw.z), TevSwapPick(v, sw.w));
 }
 
+/* GX INDIRECT TEXTURING helpers. The offsets are integers: Dolphin's
+ * PixelShaderGen.cpp::WriteStage turns an indirect texture sample into a fixpoint
+ * coordinate offset with explicit shifts, and the hardware's arithmetic really is
+ * integer (it overflows), so this mirrors it rather than cleaning it up.
+ *
+ * Fixpoint coordinate: 128 units per texel, i.e. `uv * dim * 128`. An offset of N
+ * units is N/128 texels, and the wrap masks below are texel counts, which is what
+ * makes ITW_256 wrap at 256 texels. */
+int TevIdot3(int3 x, int3 y)
+{
+    int3 t = x * y;
+    return t.x + t.y + t.z;
+}
+
+/* IndirectTexFormat -> the shift that keeps the significant bits of the sampled
+ * byte: ITF_8 uses all 8, ITF_5 keeps 5, ITF_4 keeps 4, ITF_3 keeps 3. */
+int TevIndFmtShift(uint f)
+{
+    if (f == 0u) return 0;
+    if (f == 1u) return 3;
+    if (f == 2u) return 4;
+    return 5;
+}
+
+/* IndTexWrap: 0 = off (pass through), 1..5 = mask to 256/128/64/32/16 texels,
+ * 6 = force 0. 7 is invalid on hardware and behaves as 6. */
+int TevIndWrapPick(int v, uint w)
+{
+    if (w == 0u) return v;
+    if (w == 1u) return v & 32767;
+    if (w == 2u) return v & 16383;
+    if (w == 3u) return v & 8191;
+    if (w == 4u) return v & 4095;
+    if (w == 5u) return v & 2047;
+    return 0;
+}
+
+/* The offset matrix's dynamic scale: shift right by `w` (a negative w shifts left,
+ * i.e. 2^-(17-s) with s > 17). The count is clamped because a shift of 32 or more
+ * is undefined in both HLSL and the assembly behind it; the result is truncated to
+ * 24 bits a few lines later anyway, so a clamped count only loses bits the hardware
+ * also discards. Dolphin does not clamp; the clamp is this host's, not the spec's. */
+int2 TevIndShift(int2 v, int w)
+{
+    if (w < -16) w = -16;
+    if (w > 24) w = 24;
+    if (w >= 0) return v >> w;
+    return v << (-w);
+}
+
 cbuffer GxTev : register(b0)
 {
     float4 tev_kreg[4];      // K0..K3 constant colour registers
@@ -216,12 +282,21 @@ cbuffer GxTev : register(b0)
     float4 tev_creg[4];      // C0..C3 TEV colour registers (C0 pre-loads prev)
     uint4  tev_color[16];    // x = rgb combiner (24 bit), y = alpha combiner (24 bit)
     uint4  tev_ksel[16];     // x = colour KonstSel, y = alpha KonstSel
-    uint4  tev_order[16];    // x = texmap, y = texcoord, z = enable texture
+    uint4  tev_order[16];    // x = texmap, y = texcoord, z = enable texture, w = uv source
     uint4  tev_tswap[16];    // per stage: texture channel permutation (out ch -> in ch)
     uint4  tev_rswap[16];    // per stage: raster colour permutation (out ch -> in ch)
+    // GX indirect texturing (BP 0x06..0x0F, 0x10..0x1F, 0x25..0x27). Integer because
+    // the hardware's offset arithmetic is integer with explicit shifts.
+    int4   tev_indmtx[6];    // 2 rows per offset matrix: xyz = 11-bit signed, w = 17-s
+    int4   tev_dim[8];       // per texmap x = width, y = height; per texcoord z/w = S/T scale
+    uint4  tev_indref[4];    // per indirect stage: x = texmap, y = texcoord, z = used
+    uint4  tev_indscale[2];  // BP 0x25/0x26: x = ss0, y = ts0, z = ss1, w = ts1
+    uint4  tev_indword[16];  // per TEV stage: x = raw TevStageIndirect (BP 0x10+i)
+    uint4  tev_wrap[8];      // per texmap: x = 1 when that map's GX wrap mode is repeat
+    uint   tev_ind_num;      // GEN_MODE bits 16..18
+    uint   tev_ind_used;     // 0 = no stage perturbs its coordinate: take the old path
     uint   tev_num_stages;
     uint   tev_alpha_test;   // comp0 | comp1<<3 | logic<<6 | ref0<<8 | ref1<<16
-    uint   tev_pad0, tev_pad1;
 };
 
 // GX V-constants shared by the colour and alpha KonstSel tables. Written as a
@@ -465,6 +540,10 @@ float4 PSTev(PSInput input) : SV_Target
     float4 r2 = tev_creg[3];
 
     uint stages = min(tev_num_stages, 16u);
+    // tevcoord accumulates across stages exactly as it does on hardware: every stage
+    // recomputes it from its own texcoord, the indirect wrap and the stage's offset.
+    int2 tevcoord = int2(0, 0);
+
     [loop] for (uint s = 0; s < stages; s++) {
         uint4 cc = tev_color[s];
         uint4 ac = tev_color[s];
@@ -473,13 +552,119 @@ float4 PSTev(PSInput input) : SV_Target
         uint4 ks = tev_ksel[s];
         uint4 ord = tev_order[s];
 
+        // This stage's own texcoord (GX TEVORDER's texcoord field, resolved by the
+        // renderer to uv0 / uv1 / constant-zero).
+        float2 sel_uv;
+        if (ord.w == 0u) sel_uv = input.uv;
+        else if (ord.w == 1u) sel_uv = input.uv1;
+        else sel_uv = float2(0.0f, 0.0f);
+
         float4 texel = float4(1.0f, 1.0f, 1.0f, 1.0f);
-        if (ord.z != 0u) {
-            uint map = ord.x & 7u;
-            texel = SampleTevTex(map, TevSelectUv(ord.w, input.uv, input.uv1));
-            texel = TevSwap(texel, tev_tswap[s]);
-        }
-        float4 rasv = TevSwap(ras, tev_rswap[s]);
+        if (tev_ind_used == 0u) {
+            if (ord.z != 0u) {
+                uint map = ord.x & 7u;
+                texel = SampleTevTex(map, sel_uv, tev_wrap[map].x);
+                texel = TevSwap(texel, tev_tswap[s]);
+            }
+        } else {
+            /* ---- GX indirect texturing (Dolphin PixelShaderGen.cpp WriteStage) ----
+             * BP 0x10+s is this TEV stage's TevStageIndirect word. If it names one of
+             * the active indirect stages (bt < numindstages) and an offset matrix, the
+             * stage samples the map RAS1_IREF gives that indirect stage through the
+             * *texel* it finds there: that texel's alpha/blue/green channels become a
+             * 3-component input vector, one of the three 2x3 matrices turns it into an
+             * (s,t) offset, and the offset is added to this stage's texture coordinate.
+             * This is the mechanism the cave's rock walls use, and the reason a
+             * single-texture shader turned them into smeared stripes.
+             *
+             * Units: the coordinate is generated from the TEXCOORD's scale (Dolphin
+             * I_TEXDIMS[i].zw, i.e. BP 0x30..0x3F + 1) and divided by the SAMPLED
+             * map's dimensions, exactly as Dolphin's sampleTexture does, so the fixpoint
+             * unit is one texel of whichever map the value is finally divided by (128
+             * units per texel). Frame 3500 programs scale 256 for both texcoords, equal
+             * to the 256x256 wall atlas, so the wall coordinate round-trips and an
+             * offset of N units is N/128 texels of it. */
+            uint smap = ord.x & 7u;
+            int2 tcsc = int2(1, 1);
+            if (ord.w == 0u) tcsc = tev_dim[0].zw;
+            else if (ord.w == 1u) tcsc = tev_dim[1].zw;
+            int2 sel_fp = int2(sel_uv * (float2(tcsc) * 128.0f));
+            uint raw   = tev_indword[s].x;
+            uint ibt   = raw & 3u;
+            uint ifmt  = (raw >> 2) & 3u;
+            uint ibias = (raw >> 4) & 7u;
+            uint imtx  = (raw >> 9) & 3u;
+            uint imtxid= (raw >> 11) & 3u;
+            uint isw   = (raw >> 13) & 7u;
+            uint itw   = (raw >> 16) & 7u;
+            bool iadd  = ((raw >> 20) & 1u) != 0u;
+
+            int2 indtevtrans = int2(0, 0);
+            if (ibt < tev_ind_num && imtx != 0u) {
+                uint imap = tev_indref[ibt].x & 7u;
+                uint icoord = tev_indref[ibt].y;
+                float2 ind_uv = (icoord == 1u) ? input.uv1 : input.uv;
+                int2 itcsc = (icoord == 1u) ? tev_dim[1].zw : tev_dim[0].zw;
+                uint4 sc = tev_indscale[ibt >> 1];
+                // RAS1_SS0/SS1: a separate right shift for s and t, 4 bits each.
+                uint sh_s = (ibt & 1u) ? sc.z : sc.x;
+                uint sh_t = (ibt & 1u) ? sc.w : sc.y;
+                int2 ind_fp = int2(ind_uv * (float2(itcsc) * 128.0f));
+                // The lookup happens at the (shifted) coordinate, divided by the
+                // indirect map's own dimensions.
+                float2 ind_dim = float2(tev_dim[imap].xy * 128);
+                float2 ind_lookup = float2((float)(ind_fp.x >> sh_s) / ind_dim.x,
+                                           (float)(ind_fp.y >> sh_t) / ind_dim.y);
+                float4 indsample = SampleTevTex(imap, ind_lookup, tev_wrap[imap].x);
+                // Dolphin samples `.abg`: x = alpha, y = blue, z = green, each 0..255.
+                int3 iindtex = int3((int)round(indsample.a * 255.0f),
+                                    (int)round(indsample.b * 255.0f),
+                                    (int)round(indsample.g * 255.0f));
+                // ITF_8 keeps all 8 bits and is centred with -128; the smaller
+                // formats keep 5/4/3 bits and are rounded with +1.
+                int3 crd = iindtex >> TevIndFmtShift(ifmt);
+                int badd = (ifmt == 0u) ? -128 : 1;
+                if (ibias == 1u) crd.x += badd;
+                else if (ibias == 2u) crd.y += badd;
+                else if (ibias == 3u) { crd.x += badd; crd.y += badd; }
+                else if (ibias == 4u) crd.z += badd;
+                else if (ibias == 5u) { crd.x += badd; crd.z += badd; }
+                else if (ibias == 6u) { crd.y += badd; crd.z += badd; }
+                else if (ibias == 7u) { crd.x += badd; crd.y += badd; crd.z += badd; }
+
+                uint mi = 2u * (imtx - 1u);
+                int4 r0 = tev_indmtx[mi];
+                int4 r1 = tev_indmtx[mi + 1u];
+                if (imtxid == 0u) {
+                    int t0 = TevIdot3(r0.xyz, crd) >> 3;
+                    int t1 = TevIdot3(r1.xyz, crd) >> 3;
+                    indtevtrans = TevIndShift(int2(t0, t1), r0.w);
+                } else if (imtxid == 1u) {
+                    // S-type: scale the coordinate by the sampled S component.
+                    int t0 = (sel_fp.x * crd.x) >> 8;
+                    int t1 = (sel_fp.y * crd.x) >> 8;
+                    indtevtrans = TevIndShift(int2(t0, t1), r0.w);
+                } else {
+                    // T-type: scale the coordinate by the sampled T component.
+                    int t0 = (sel_fp.x * crd.y) >> 8;
+                    int t1 = (sel_fp.y * crd.y) >> 8;
+                    indtevtrans = TevIndShift(int2(t0, t1), r0.w);
+                }
+            }
+
+            int2 wrapped = int2(TevIndWrapPick(sel_fp.x, isw), TevIndWrapPick(sel_fp.y, itw));
+            if (iadd) tevcoord = tevcoord + wrapped + indtevtrans;
+            else      tevcoord = wrapped + indtevtrans;
+            // Hardware keeps 24 signed bits of the coordinate.
+            tevcoord = (tevcoord << 8) >> 8;
+
+            if (ord.z != 0u) {
+                uint map = ord.x & 7u;
+                float2 dim = float2(tev_dim[map].xy * 128);
+                texel = SampleTevTex(map, float2(tevcoord) / dim, tev_wrap[map].x);
+                texel = TevSwap(texel, tev_tswap[s]);
+            }
+        }        float4 rasv = TevSwap(ras, tev_rswap[s]);
 
         float4 konst_c = TevKonstColor(ks.x & 0x1Fu);
         float konst_a = TevKonstChannel(ks.y & 0x1Fu, 3u);

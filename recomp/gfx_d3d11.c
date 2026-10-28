@@ -20,16 +20,30 @@ typedef struct {
     float    creg[4][4];      /* C0..C3 TEV colour registers (rgba); creg[0] pre-loads prev */
     uint32_t color[16][4];    /* x = rgb combiner bits, y = alpha combiner bits */
     uint32_t ksel[16][4];     /* x = colour KonstSel, y = alpha KonstSel */
-    uint32_t order[16][4];    /* x = texmap, y = texcoord, z = enable texture */
+    uint32_t order[16][4];    /* x = texmap, y = texcoord, z = enable texture, w = uv source */
     uint32_t tswap[16][4];    /* per stage: texture channel permutation (out ch -> in ch) */
     uint32_t rswap[16][4];    /* per stage: raster colour permutation (out ch -> in ch) */
+    /* --- GX indirect texturing (BP 0x06..0x0F, 0x10..0x1F, 0x25..0x27) ---------
+     * The pixel shader evaluates Dolphin's PixelShaderGen::WriteStage indirect block
+     * out of these: it turns a texel of the map named by RAS1_IREF into an integer
+     * offset through one of three 2x3 matrices and adds it to the fixpoint texture
+     * coordinate the stage samples. Integer (not float) because the hardware's
+     * arithmetic is integer with explicit shifts. */
+    int32_t  ind_mtx[6][4];   /* 2 rows per matrix: xyz = 11-bit signed elements,
+                               * w = 17 - scale (Dolphin SetIndMatrixChanged) */
+    int32_t  dim[8][4];       /* per texmap x = width, y = height; per texCOORD
+                               * z = S scale, w = T scale (BP 0x30..0x3F + 1) */
+    uint32_t indref[4][4];    /* per indirect stage: x = texmap, y = texcoord, z = 1 if used */
+    uint32_t indscale[2][4];  /* BP 0x25/0x26: x=ss0 y=ts0 z=ss1 w=ts1 */
+    uint32_t indword[16][4];  /* per TEV stage: x = raw TevStageIndirect (BP 0x10+i) */
+    uint32_t wrap[8][4];      /* per texmap: x = 1 when that map's GX wrap mode is repeat */
+    uint32_t ind_num;         /* GEN_MODE bits 16..18 */
+    uint32_t ind_used;        /* 1 = some active stage really perturbs its coordinate */
     uint32_t num_stages;
     uint32_t alpha_test;
-    uint32_t pad0, pad1;
 } GxTevConstants;
 
-static float gx_tev_reg_component(uint32_t raw) {
-    int32_t v = (int32_t)(raw & 0x7FF);
+static float gx_tev_reg_component(uint32_t raw) {    int32_t v = (int32_t)(raw & 0x7FF);
     if (v & 0x400) v -= 0x800;
     return (float)v / 255.0f;
 }
@@ -105,6 +119,113 @@ static void gx_tev_fill_constants(GxTevConstants* c, const GxTevState* st, bool*
                     ((uint32_t)st->alpha_logic << 6) |
                     ((uint32_t)st->alpha_ref0 << 8) |
                     ((uint32_t)st->alpha_ref1 << 16);
+
+    /* ---------------------------------------------------------------------
+     * GX indirect texturing. Dolphin PixelShaderGen.cpp / PixelShaderManager:
+     * each of the three offset matrices is uploaded as two rows of 11-bit signed
+     * elements plus w = 17 - scale, and the shader shifts the dot product right by
+     * that count (a negative w shifts left). The per-indirect-stage texmap and
+     * texcoord come from RAS1_IREF, and only the indirect stages a TEV stage
+     * actually consumes are marked used - `ind_used` is the shader's "the fast
+     * path is not taken" flag, so a batch with no indirect work samples exactly
+     * where it did before this was implemented.
+     * ------------------------------------------------------------------- */
+    c->ind_num = st->num_ind_stages;
+    c->indscale[0][0] = st->ind_texscale[0] & 0xF;
+    c->indscale[0][1] = (st->ind_texscale[0] >> 4) & 0xF;
+    c->indscale[0][2] = (st->ind_texscale[0] >> 8) & 0xF;
+    c->indscale[0][3] = (st->ind_texscale[0] >> 12) & 0xF;
+    c->indscale[1][0] = st->ind_texscale[1] & 0xF;
+    c->indscale[1][1] = (st->ind_texscale[1] >> 4) & 0xF;
+    c->indscale[1][2] = (st->ind_texscale[1] >> 8) & 0xF;
+    c->indscale[1][3] = (st->ind_texscale[1] >> 12) & 0xF;
+    for (int m = 0; m < 3; m++) {
+        int row[2][3], shift = 0;
+        gx_ind_matrix(st->ind_mtx, m, row, &shift);
+        for (int ch = 0; ch < 3; ch++) {
+            c->ind_mtx[m * 2][ch] = row[0][ch];
+            c->ind_mtx[m * 2 + 1][ch] = row[1][ch];
+        }
+        c->ind_mtx[m * 2][3] = shift;
+        c->ind_mtx[m * 2 + 1][3] = shift;
+    }
+    {
+        bool used = false;
+        for (int i = 0; i < 16; i++) {
+            uint32_t raw = st->ind_stage[i];
+            c->indword[i][0] = raw;
+            if (i >= c->num_stages) continue;
+            /* Only what actually MOVES the coordinate counts: an offset matrix on an
+             * indirect stage GEN_MODE says does not exist is inert (measured: frame 3500
+             * has batches whose TevStageIndirect names matrix 0 while numindstages is
+             * 0), and a wrap or add-to-previous perturbs it on its own. Anything else -
+             * in particular the bare `bs` bump-alpha field - must not divert the batch
+             * away from the unchanged sampling path. */
+            bool moves = false;
+            if (((raw >> 9) & 3) != 0 && (raw & 3u) < st->num_ind_stages) moves = true;
+            if (((raw >> 13) & 7) || ((raw >> 16) & 7) || ((raw >> 20) & 1)) moves = true;
+            if (moves) used = true;
+        }
+        c->ind_used = used ? 1u : 0u;
+        /* TLS_TEV_NO_IND=1 forces the unperturbed coordinate, which is the A/B that
+         * isolates what indirect texturing contributes to a frame (handover 5c.46
+         * AP-O). */
+        {
+            static int s_no_ind = -1;
+            if (s_no_ind < 0) s_no_ind = getenv("TLS_TEV_NO_IND") ? 1 : 0;
+            if (s_no_ind) c->ind_used = 0u;
+        }
+    }
+    for (int i = 0; i < 4; i++) {
+        c->indref[i][0] = gx_ind_iref_map(st->ind_iref, i);
+        c->indref[i][1] = gx_ind_iref_coord(st->ind_iref, i);
+        c->indref[i][2] = ((uint32_t)i < st->num_ind_stages) ? 1u : 0u;
+    }
+}
+
+/* Texture dimensions per texmap, which the indirect path needs to convert between
+ * normalized UV and GX's fixpoint coordinate. Dolphin keeps this in I_TEXDIMS and
+ * generates the fixpoint coordinate as `uv * (dims * 128)`, then divides the
+ * (possibly perturbed) coordinate by the same `dims * 128` before sampling - so the
+ * unperturbed case round-trips to the same UV, and an indirect offset of N fixpoint
+ * units is N/128 texels. That is why taking the fast path in the shader when
+ * ind_used == 0 keeps a batch bit-identical to the pre-indirect behaviour. */
+static void gx_tev_fill_dims(GxTevConstants* c, const GxDrawBatch* b) {
+    for (int m = 0; m < 8; m++) {
+        uint32_t w = 0, h = 0;
+        if (b->tev_texmap_mask & (1u << m)) {
+            w = b->tev_texmap[m].width;
+            h = b->tev_texmap[m].height;
+            /* GX wrap mode 1 is REPEAT. The TEV path used to bind the CLAMP sampler
+             * for every stage, so any batch whose coordinate leaves [0,1) - which the
+             * cave's tiling rock textures do everywhere - had its border texels
+             * stretched across the surface: the smeared bands that made the 3D
+             * widening look broken (handover 5c.46 AP-O). The legacy path already
+             * honoured this per batch; here it is per MAP, because the stages of one
+             * batch can sample maps with different wrap modes. */
+            if (b->tev_texmap[m].wrap_s == 1 || b->tev_texmap[m].wrap_t == 1)
+                c->wrap[m][0] = 1;
+        }
+        if ((w == 0 || h == 0) && b->has_texture) { w = b->tex.width; h = b->tex.height; }
+        if (w == 0 || h == 0) { w = 1; h = 1; }
+        c->dim[m][0] = (int32_t)w;
+        c->dim[m][1] = (int32_t)h;
+    }
+    /* The fixpoint coordinate is generated from a TEXCOORD's scale, not from the
+     * sampled map's size (Dolphin I_TEXDIMS[i].zw = TCoordInfo.scale_minus_1 + 1, and
+     * its sampleTexture divides by I_TEXDIMS[texmap].xy * 128). Measured at frame 3500
+     * the guest sets BP 0x30 = 0x000100FF / 0x000000FF, i.e. scale 256 for both
+     * texcoords - equal to the 256x256 wall atlas, so the wall coordinate round-trips
+     * exactly, while the 4x4 dither map the third stage multiplies in is sampled at
+     * 64x its own resolution, which is what produces the fine dither the reference
+     * has. Using the sampled map's size for generation instead (this host's first
+     * attempt) turned that dither into broad bands. */
+    for (int t = 0; t < 8; t++) {
+        uint32_t s_raw = gx_pipeline_get_tc_info(t, 0);
+        uint32_t t_raw = gx_pipeline_get_tc_info(t, 1);
+        c->dim[t][2] = (int32_t)((s_raw & 0xFFFF) + 1);
+        c->dim[t][3] = (int32_t)((t_raw & 0xFFFF) + 1);
+    }
 }
 
 
@@ -328,8 +449,10 @@ bool d3d11_init(HWND hwnd, const GfxConfig* config) {
         return false;
     }
 
-    /* Per-batch TEV state: 4 K registers + 4 previous + 16 combiners + 16 konst
-     * selectors + 16 orders + 4 scalars. Must match the GxTevConstants mirror of
+    /* Per-batch TEV state: 4 K registers + 4 previous + 4 colour + 16 combiners + 16
+     * konst selectors + 16 orders + 16 texture swap tables + 16 raster swap tables +
+     * 6 indirect-matrix rows + 8 texture dims + 4 indirect orders + 2 texscales + 16
+     * indirect words + 4 scalars. Must match the GxTevConstants mirror of
      * tools/compile_shaders.py's `cbuffer GxTev`. */
     {
         D3D11_BUFFER_DESC cb_desc;
@@ -3217,13 +3340,17 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                      * Chapter-1 invariant frame (5c.46 AP-N: frame 3500 became 22C32C4E... with
                      * every has_texture1 batch on the TEV path).
                      *
-                     * It is further restricted to ORTHOGRAPHIC (2D/UI) batches. Measured: the
-                     * cave's own second-map 3D batches render WORSE through PSTev than through the
-                     * established single-texture path (frame 3500 with them on it: rock walls
-                     * become smeared stripes, `22C32C4E...`, docs-quality comparison in
-                     * logs_ap/cmp_f3500.png), so they stay where they are until PSTev's 3D
-                     * handling is validated in its own thread. 2D UI is exactly where PSAlpha
-                     * cannot express the combiner at all, and that is the class this fixes.
+                     * WIDENED TO 3D IS THE NEXT COMMIT, NOT THIS ONE. This still requires
+                     * `!batch->is_perspective` so the default picture is unchanged; the
+                     * separate widening commit removes it, having measured why the 2D-only
+                     * gate existed and that its cause is fixed. The cause was NOT a PSTev
+                     * limitation: the TEV path bound the CLAMP sampler for every stage while
+                     * GX's wrap mode for the cave's rock textures is REPEAT, so every
+                     * coordinate outside [0,1) stretched a border texel across the surface -
+                     * that is the "smeared stripes". gx_tev_fill_dims + SampleTevTex now bind
+                     * a WRAP sampler per map from the guest's own wrap mode; with that fixed,
+                     * frame 3500 on PSTev differs from the legacy path by 5.0/255 mean
+                     * absolute error with the same scene structure and no artifacts.
                      * TLS_TEV_MULTI=0 restores the old single-texture path for A/B runs. */
                     if (!use_tev_path && s_d3d11.gx_ps_tev) {
                         static int s_multi = -1;
@@ -3253,6 +3380,7 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                                 0, &mapped_cb))) {
                             cst = (GxTevConstants*)mapped_cb.pData;
                             gx_tev_fill_constants(cst, tev_st, &need_compare);
+                            gx_tev_fill_dims(cst, batch);
                             /* TLS_TEV_DUMP_BATCH=<batch index>[,<present frame>]: print exactly
                              * what the TEV shader is handed for that batch, so its arithmetic can
                              * be evaluated offline instead of inferred from its output. Added for
@@ -3333,6 +3461,25 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                             if (batch->tev_texmap_mask & (1u << m)) {
                                 ID3D11ShaderResourceView* m_srv = get_or_upload_gx_texture(&batch->tev_texmap[m]);
                                 if (m_srv) srvs[m] = m_srv;
+                                else if (getenv("TLS_TEX_FAIL_PROBE")) {
+                                    /* A TEV stage that samples an un-uploadable map reads
+                                     * the white fallback, which paints a flat tinted
+                                     * polygon - the "olive blob" symptom on the cave walls
+                                     * (handover 5c.46 AP-O). Report each address once. */
+                                    static uint32_t s_fail[32];
+                                    static int s_fail_n = 0;
+                                    uint32_t a = batch->tev_texmap[m].guest_addr;
+                                    int seen = 0;
+                                    for (int i = 0; i < s_fail_n; i++) if (s_fail[i] == a) seen = 1;
+                                    if (!seen && s_fail_n < 32) {
+                                        s_fail[s_fail_n++] = a;
+                                        printf("[GFX] TEV white fallback: batch %u map %d tex=0x%08X "
+                                               "%ux%u fmt=%u\n", b, m, a,
+                                               batch->tev_texmap[m].width, batch->tev_texmap[m].height,
+                                               batch->tev_texmap[m].format);
+                                        fflush(stdout);
+                                    }
+                                }
                             }
                         }
                         if (cst) {
@@ -3364,7 +3511,15 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                         }
                         ID3D11DeviceContext_PSSetShader(s_d3d11.context, s_d3d11.gx_ps_tev, NULL, 0);
                         ID3D11DeviceContext_PSSetShaderResources(s_d3d11.context, 0, 8, srvs);
-                        ID3D11DeviceContext_PSSetSamplers(s_d3d11.context, 0, 1, &s_d3d11.sampler_linear);
+                        /* Two samplers: s0 = CLAMP, s1 = WRAP. The shader picks per
+                         * texmap from cst->wrap[], which gx_tev_fill_dims fills from the
+                         * guest's GX wrap mode. Binding only the clamp sampler is what
+                         * stretched the cave's tiling rock textures (5c.46 AP-O). */
+                        {
+                            ID3D11SamplerState* samps[2] = { s_d3d11.sampler_linear,
+                                                             s_d3d11.sampler_wrap };
+                            ID3D11DeviceContext_PSSetSamplers(s_d3d11.context, 0, 2, samps);
+                        }
                     } else {
                         ID3D11DeviceContext_PSSetShader(s_d3d11.context, ps, NULL, 0);
                         ID3D11DeviceContext_PSSetShaderResources(s_d3d11.context, 0, 1, &srv);
@@ -3440,12 +3595,12 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                         if (s_tev_probe_frame >= 0 &&
                             probe_frame_hits(s_tev_probe_frame, (int)s_d3d11_dump_count) &&
                             (int)b >= s_tev_probe_from) {
-                            printf("[TevProbe] frame=%d b%u vcnt=%u tex=0x%08X tex1=0x%08X blend=%d s=%u d=%u texcoord_mask=0x%02X tc0=%08X/%08X tc1=%08X/%08X\n",
+                            printf("[TevProbe] frame=%d b%u vcnt=%u tex=0x%08X tex1=0x%08X blend=%d s=%u d=%u texcoord_mask=0x%02X ntexgen=%u tc0=%08X/%08X tc1=%08X/%08X\n",
                                    s_d3d11_dump_count, b, batch->vertex_count,
                                    batch->tex.guest_addr,
                                    batch->has_texture1 ? batch->tex1.guest_addr : 0u,
                                    batch->blend_enable, batch->src_factor, batch->dst_factor,
-                                   batch->texcoord_mask,
+                                   batch->texcoord_mask, batch->xf_num_texgens,
                                    gx_pipeline_get_tc_info(0, 0), gx_pipeline_get_tc_info(0, 1),
                                    gx_pipeline_get_tc_info(1, 0), gx_pipeline_get_tc_info(1, 1));
                             {

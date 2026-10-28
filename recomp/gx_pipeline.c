@@ -189,6 +189,13 @@ typedef struct {
     uint8_t texmap;
     uint8_t texcoord;
     bool enable;
+    /* TEVORDER's colorchan field (bits 7-9 even stage / 19-21 odd stage, Dolphin
+     * TwoTevStageOrders::colorchan). It picks which XF vertex colour - or the bump
+     * alpha, or zero - feeds the stage's RASC/RASA input. The host always feeds the
+     * one vertex colour it carries, so a batch that names Color1, AlphaBump or Zero
+     * gets the wrong raster colour; recorded and printed so that is a measurement
+     * rather than a guess (handover 5c.46 AP-O). */
+    uint8_t colorchan;
 } GxTevOrder;
 static GxTevOrder s_tev_orders[16];
 
@@ -208,6 +215,15 @@ static uint32_t s_tev_kreg_bg[4];
 static uint32_t s_tev_creg_ra[4];
 static uint32_t s_tev_creg_bg[4];
 static uint32_t s_tev_ksel[8];
+/* GX indirect texturing state (BP 0x06..0x0F, 0x10..0x1F, 0x25..0x27). Persists
+ * across frames like the combiners, because it is BP (GPU) state: the guest
+ * reprograms it, but a draw that does not is still drawn with the last values. */
+static uint32_t s_ind_stage[GX_MAX_TEV_STAGES];
+static uint32_t s_ind_iref;
+static uint32_t s_ind_texscale[2];
+static uint32_t s_ind_imask;
+static uint32_t s_ind_mtx[9];
+static uint8_t  s_num_ind_stages = 0;
 static uint8_t  s_alpha_comp1 = 7;
 static uint8_t  s_alpha_ref1 = 0;
 static uint8_t  s_alpha_logic = 0;
@@ -246,6 +262,7 @@ static void tev_state_recompute(void) {
         st.tex_enable[i] = s_tev_orders[i].enable ? 1 : 0;
         st.texmap[i] = s_tev_orders[i].texmap;
         st.texcoord[i] = s_tev_orders[i].texcoord;
+        st.colorchan[i] = s_tev_orders[i].colorchan;
         st.combiner_color[i] = s_tev_comb_color[i];
         st.combiner_alpha[i] = s_tev_comb_alpha[i];
         st.kcsel[i] = (uint8_t)(((s_tev_ksel[i >> 1] >> ((i & 1) ? 14 : 4)) & 0x1F));
@@ -258,6 +275,14 @@ static void tev_state_recompute(void) {
         st.creg_bg[i] = s_tev_creg_bg[i];
     }
     for (int i = 0; i < 8; i++) st.ksel[i] = s_tev_ksel[i];
+
+    st.num_ind_stages = s_num_ind_stages;
+    for (int i = 0; i < GX_MAX_TEV_STAGES; i++) st.ind_stage[i] = s_ind_stage[i];
+    st.ind_iref = s_ind_iref;
+    st.ind_texscale[0] = s_ind_texscale[0];
+    st.ind_texscale[1] = s_ind_texscale[1];
+    st.ind_imask = s_ind_imask;
+    for (int i = 0; i < 9; i++) st.ind_mtx[i] = s_ind_mtx[i];
 
     uint32_t h = tev_state_hash(&st);
     st._hash = h;
@@ -623,6 +648,12 @@ void gx_pipeline_begin_frame(void) {
     s_active_tex_coord = 0;
     s_tev_tex_enable = true;
     s_num_tev_stages = 1;
+    /* GEN_MODE re-states the indirect-stage count every frame; resetting it here is
+     * the same convention as the stage count above (a frame that programs no indirect
+     * stages must not inherit the previous frame's). The raw indirect words, the
+     * IREF/texscale registers and the offset matrices are NOT reset - they are
+     * ordinary BP state that persists until the guest rewrites them. */
+    s_num_ind_stages = 0;
     s_current_pnm_idx = 0;
     s_default_pnm_idx = 0;
     memset(s_tev_orders, 0, sizeof(s_tev_orders));
@@ -813,8 +844,8 @@ void gx_pipeline_print_tev_state(uint16_t index) {
         uint32_t tsid = (a >> 2) & 3, rsid = a & 3;
         uint32_t trg = st->ksel[tsid * 2], tba = st->ksel[tsid * 2 + 1];
         uint32_t rrg = st->ksel[rsid * 2], rba = st->ksel[rsid * 2 + 1];
-        printf("   [tev] st%d tex=%d map=%u coord=%u | rgb: %s %s %s %s bias=%u op=%u clamp=%u scale=%s dest=%s kc=%s raw=0x%08X\n",
-               i, st->tex_enable[i], st->texmap[i], st->texcoord[i],
+        printf("   [tev] st%d tex=%d map=%u coord=%u chan=%u | rgb: %s %s %s %s bias=%u op=%u clamp=%u scale=%s dest=%s kc=%s raw=0x%08X\n",
+               i, st->tex_enable[i], st->texmap[i], st->texcoord[i], st->colorchan[i],
                k_color_arg_names[(c >> 12) & 0xF], k_color_arg_names[(c >> 8) & 0xF],
                k_color_arg_names[(c >> 4) & 0xF], k_color_arg_names[c & 0xF],
                (c >> 16) & 3, (c >> 18) & 1, (c >> 19) & 1,
@@ -834,6 +865,35 @@ void gx_pipeline_print_tev_state(uint16_t index) {
                "ras table %u [R<-ch%u G<-ch%u B<-ch%u A<-ch%u]\n",
                tsid, trg & 3, (trg >> 2) & 3, tba & 3, (tba >> 2) & 3,
                rsid, rrg & 3, (rrg >> 2) & 3, rba & 3, (rba >> 2) & 3);
+    }
+    /* Indirect texturing: the whole reason a 3D batch cannot be drawn at its
+     * unperturbed coordinate (handover 5c.46 AP-O). Printed unconditionally because
+     * "this batch has no indirect stage" is itself the measurement. */
+    printf("   [ind] numindstages=%u (GEN_MODE 16..18) iref=0x%06X imask=0x%06X "
+           "ss0=0x%06X ss1=0x%06X\n",
+           st->num_ind_stages, st->ind_iref, st->ind_imask,
+           st->ind_texscale[0], st->ind_texscale[1]);
+    for (int s = 0; s < 4; s++) {
+        uint32_t raw = st->ind_stage[s];
+        GxIndStage d = gx_ind_decode(raw);
+        /* The indirect stage a TEV stage consumes is `bt`, and THAT is the index into
+         * RAS1_IREF - printing IREF[s] is wrong whenever bt != s. */
+        printf("   [ind] st%d texind=0x%06X %s bt=%u->%s isactive=%d map=%u coord=%u "
+               "fmt=%u bias=%u bs=%u mtxidx=%u mtxid=%u sw=%u tw=%u utclod=%d addprev=%d\n",
+               s, raw, st->num_ind_stages > (uint8_t)s ? "on " : "off",
+               d.bt, d.bt < 4 ? "indstage" : "?", (int)gx_ind_is_active(raw),
+               gx_ind_iref_map(st->ind_iref, d.bt & 3), gx_ind_iref_coord(st->ind_iref, d.bt & 3),
+               d.fmt, d.bias, d.bs, d.matrix_index, d.matrix_id, d.sw, d.tw,
+               (int)d.lb_utclod, (int)d.fb_addprev);
+    }
+    for (int m = 0; m < 3; m++) {
+        int row[2][3], shift = 0;
+        gx_ind_matrix(st->ind_mtx, m, row, &shift);
+        printf("   [ind] mtx%d raw=0x%06X/0x%06X/0x%06X row0=(%d %d %d) row1=(%d %d %d) "
+               "shift=%d (2^-(17-s), s=%d)\n",
+               m, st->ind_mtx[m * 3], st->ind_mtx[m * 3 + 1], st->ind_mtx[m * 3 + 2],
+               row[0][0], row[0][1], row[0][2], row[1][0], row[1][1], row[1][2],
+               shift, 17 - shift);
     }
 }
 
@@ -1328,6 +1388,21 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
             }
             if (texmap_mask == 0) texmap_mask = (uint8_t)(1u << (tex_unit & 7));
         }
+        /* Texmaps an ACTIVE indirect stage samples. Kept separate from texmap_mask so
+         * that the batch-merge test below - which is keyed on texmap_mask - splits
+         * batches exactly as it did before indirect texturing existed. The two are
+         * unioned into GxDrawBatch::tev_texmap_mask, which is what the renderer binds:
+         * an indirect map is frequently NOT one a TEV stage names, and leaving it
+         * unbound made the shader read white and apply a constant offset (handover
+         * 5c.46 AP-O). */
+        uint8_t ind_texmap_mask = 0;
+        for (int st = 0; st < (int)s_num_tev_stages && st < 16; st++) {
+            uint32_t raw = s_ind_stage[st];
+            if (!gx_ind_is_active(raw)) continue;
+            uint32_t bt = raw & 3u;
+            if (bt >= (uint32_t)s_num_ind_stages) continue;
+            ind_texmap_mask |= (uint8_t)(1u << (gx_ind_iref_map(s_ind_iref, (int)bt) & 7));
+        }
         uint8_t texcoord_mask = 0;
         for (int t = 0; t < 8; t++)
             if (s_vtx_desc[13 + t].type != GX_ATTR_NONE) texcoord_mask |= (uint8_t)(1u << t);
@@ -1428,12 +1503,12 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
             b->alpha_comp0 = s_alpha_comp0;
             b->alpha_ref0 = s_alpha_ref0;
             b->tev_state = s_cur_tev_state;
-            b->tev_texmap_mask = texmap_mask;
+            b->tev_texmap_mask = (uint8_t)(texmap_mask | ind_texmap_mask);
             b->texcoord_mask = texcoord_mask;
             b->xf_ctrl0 = s_xf_color_ctrl[0];
             b->xf_num_texgens = (uint8_t)s_xf_num_texgens;
             for (int m = 0; m < 8; m++) {
-                if (texmap_mask & (1u << m)) b->tev_texmap[m] = s_tex_units[m];
+                if ((texmap_mask | ind_texmap_mask) & (1u << m)) b->tev_texmap[m] = s_tex_units[m];
                 else memset(&b->tev_texmap[m], 0, sizeof(b->tev_texmap[m]));
             }
             b->has_texture1 = has_tex1;
@@ -1514,6 +1589,7 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
             }
         }
         s_num_tev_stages = (uint8_t)(((val >> 10) & 0x0F) + 1);
+        s_num_ind_stages = (uint8_t)((val >> 16) & 7);
         // Recompute primary active texture map and texcoord strictly within active stage count
         s_tev_tex_enable = false;
         for (int i = 0; i < s_num_tev_stages; i++) {
@@ -1669,6 +1745,44 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
         }
         return;
     }
+    /* GX INDIRECT TEXTURING registers. None of these were tracked before: the host
+     * dropped every one of these writes on the floor, so a 3D batch that perturbs its
+     * texture coordinates through an indirect map was sampled at the unperturbed
+     * coordinate. Frame 3500 alone writes BP 0x10..0x1F 249 times and 0x0F/0x25/0x26/
+     * 0x27 58 times, with at least one ACTIVE stage (handover 5c.46 AP-N item 11).
+     *
+     *   BP 0x06..0x0E  the three 2x3 offset matrices (IND_MTXA/B/C per matrix)
+     *   BP 0x0F        IND_IMASK (the hardware applies it to the sampled texel; the
+     *                  game as configured does not rely on it - recorded, not applied)
+     *   BP 0x10..0x1F  one TevStageIndirect word per TEV stage
+     *   BP 0x25/0x26   RAS1_SS0/SS1, the indirect texcoord right-shifts
+     *   BP 0x27        RAS1_IREF, the texmap and texcoord each indirect stage samples
+     * Field layouts are Dolphin's; the decoders are in gx_pipeline.h. */
+    if (reg >= 0x06 && reg <= 0x0E) {
+        s_ind_mtx[reg - 0x06] = val & 0x00FFFFFF;
+        s_tev_state_dirty = true;
+        return;
+    }
+    if (reg == 0x0F) {
+        s_ind_imask = val & 0x00FFFFFF;
+        s_tev_state_dirty = true;
+        return;
+    }
+    if (reg >= 0x10 && reg <= 0x1F) {
+        s_ind_stage[reg - 0x10] = val & 0x00FFFFFF;
+        s_tev_state_dirty = true;
+        return;
+    }
+    if (reg == 0x25 || reg == 0x26) {
+        s_ind_texscale[reg - 0x25] = val & 0x00FFFFFF;
+        s_tev_state_dirty = true;
+        return;
+    }
+    if (reg == 0x27) {
+        s_ind_iref = val & 0x00FFFFFF;
+        s_tev_state_dirty = true;
+        return;
+    }
     if (reg >= 0x30 && reg <= 0x3F) { // BP_SU_SSIZE / BP_SU_TSIZE: TCoordInfo
         int idx = (int)(reg - 0x30) >> 1;
         int is_t = (int)(reg - 0x30) & 1;
@@ -1757,10 +1871,12 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
         s_tev_orders[stage_base + 0].texmap = (uint8_t)(val & 7);
         s_tev_orders[stage_base + 0].texcoord = (uint8_t)((val >> 3) & 7);
         s_tev_orders[stage_base + 0].enable = ((val >> 6) & 1) != 0;
+        s_tev_orders[stage_base + 0].colorchan = (uint8_t)((val >> 7) & 7);
 
         s_tev_orders[stage_base + 1].texmap = (uint8_t)((val >> 12) & 7);
         s_tev_orders[stage_base + 1].texcoord = (uint8_t)((val >> 15) & 7);
         s_tev_orders[stage_base + 1].enable = ((val >> 18) & 1) != 0;
+        s_tev_orders[stage_base + 1].colorchan = (uint8_t)((val >> 19) & 7);
 
         // Recompute primary active texture map and texcoord strictly from first active stage within s_num_tev_stages
         s_tev_tex_enable = false;

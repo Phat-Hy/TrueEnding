@@ -198,6 +198,87 @@ void gx_pipeline_clear_texture_dirty(uint32_t unit);
  *   BP 0xF3     alpha test: ref0:0-7 ref1:8-15 comp0:16-18 comp1:19-21 logic:22-23
  * ------------------------------------------------------------------------- */
 
+/* ---------------------------------------------------------------------------
+ * Indirect-texture decoding (BP 0x06..0x0E, 0x10..0x1F, 0x25..0x27).
+ * Kept in the header because both the pipeline's probe and the D3D11 constant
+ * upload need the same field split; the layouts are Dolphin's
+ * (VideoCommon/BPMemory.h, TevStageIndirect / IND_MTXA-C / RAS1_IREF).
+ * ------------------------------------------------------------------------- */
+typedef struct {
+    uint8_t bt;            /* 0-1: indirect stage this TEV stage consumes */
+    uint8_t fmt;           /* 2-3: 0 ITF_8, 1 ITF_5, 2 ITF_4, 3 ITF_3 */
+    uint8_t bias;          /* 4-6: IndTexBias, 0 none .. 7 STU */
+    uint8_t bs;            /* 7-8: bump-alpha source, 0 off */
+    uint8_t matrix_index;  /* 9-10: 0 off, 1..3 = matrix 0..2 */
+    uint8_t matrix_id;     /* 11-12: 0 indirect, 1 S, 2 T */
+    uint8_t sw;            /* 13-15: wrap S (0 off, 1 256, .. 6 0) */
+    uint8_t tw;            /* 16-18: wrap T */
+    bool lb_utclod;        /* 19 */
+    bool fb_addprev;       /* 20 */
+} GxIndStage;
+
+static inline GxIndStage gx_ind_decode(uint32_t raw) {
+    GxIndStage d;
+    d.bt = (uint8_t)(raw & 3);
+    d.fmt = (uint8_t)((raw >> 2) & 3);
+    d.bias = (uint8_t)((raw >> 4) & 7);
+    d.bs = (uint8_t)((raw >> 7) & 3);
+    d.matrix_index = (uint8_t)((raw >> 9) & 3);
+    d.matrix_id = (uint8_t)((raw >> 11) & 3);
+    d.sw = (uint8_t)((raw >> 13) & 7);
+    d.tw = (uint8_t)((raw >> 16) & 7);
+    d.lb_utclod = ((raw >> 19) & 1) != 0;
+    d.fb_addprev = ((raw >> 20) & 1) != 0;
+    return d;
+}
+
+/* Dolphin TevStageIndirect::IsActive(): with both bs and matrix_index zero the
+ * stage's result does not depend on the sampled texel, so no sample is needed. */
+static inline bool gx_ind_is_active(uint32_t raw) {
+    return ((raw >> 7) & 3) != 0 || ((raw >> 9) & 3) != 0;
+}
+
+/* One of the three BP 0x06..0x0E matrices: rows of 11-bit signed elements and the
+ * dynamic scale exponent `17 - s` the shader shifts by (Dolphin
+ * PixelShaderManager::SetIndMatrixChanged). Column i lives in word 3*idx+i:
+ * word 0 holds (ma, mb), word 1 (mc, md), word 2 (me, mf), and the scale's 2-bit
+ * pieces sit at bit 22 of each word (only bit 22 of the third word is used). */
+static inline void gx_ind_matrix(const uint32_t words[9], int idx,
+                                 int row[2][3], int* shift) {
+    const uint32_t* w = &words[idx * 3];
+    int e[6];
+    for (int c = 0; c < 3; c++) {
+        int32_t lo = (int32_t)(w[c] & 0x7FF);
+        int32_t hi = (int32_t)((w[c] >> 11) & 0x7FF);
+        if (lo & 0x400) lo -= 0x800;
+        if (hi & 0x400) hi -= 0x800;
+        e[c] = (int)lo;         /* ma, mc, me = row 0 */
+        e[c + 3] = (int)hi;     /* mb, md, mf = row 1 */
+    }
+    for (int c = 0; c < 3; c++) { row[0][c] = e[c]; row[1][c] = e[c + 3]; }
+    int s = (int)((w[0] >> 22) & 3) | (int)(((w[1] >> 22) & 3) << 2) |
+            (int)(((w[2] >> 22) & 1) << 4);
+    *shift = 17 - s;
+}
+
+/* BP 0x27 RAS1_IREF: per indirect stage, the texmap (bits 6i..6i+2) and the
+ * texcoord (bits 6i+3..6i+5) that stage samples. */
+static inline uint32_t gx_ind_iref_map(uint32_t iref, int stage) {
+    return (iref >> (6 * stage)) & 7;
+}
+static inline uint32_t gx_ind_iref_coord(uint32_t iref, int stage) {
+    return (iref >> (6 * stage + 3)) & 7;
+}
+
+/* BP 0x25/0x26 RAS1_SS0/SS1: 4-bit right-shift applied to the fixpoint coordinate
+ * before the indirect sample. Stages 0/1 use word 0, 2/3 use word 1; the even
+ * stage uses the low half (ss0, ts0) and the odd one the high half (ss1, ts1). */
+static inline uint32_t gx_ind_texscale_shift(const uint32_t scale[2], int stage, int is_t) {
+    int hi = (stage >> 1) & 1;
+    int half = (stage & 1) * 8 + (is_t ? 4 : 0);
+    return (scale[hi] >> half) & 0xF;
+}
+
 #define GX_MAX_TEV_STAGES 16
 #define GX_MAX_TEV_STATES 512
 
@@ -211,6 +292,10 @@ typedef struct {
     uint8_t  tex_enable[GX_MAX_TEV_STAGES];
     uint8_t  texmap[GX_MAX_TEV_STAGES];
     uint8_t  texcoord[GX_MAX_TEV_STAGES];
+    /* TEVORDER colorchan: 0/1 = XF colour channel 0/1, 5/6 = bump alpha, 7 = zero.
+     * Recorded (not yet evaluated - the host carries one vertex colour) so that a 3D
+     * batch whose stages name channel 1 or zero is visible as such. */
+    uint8_t  colorchan[GX_MAX_TEV_STAGES];
     uint8_t  kcsel[GX_MAX_TEV_STAGES];   /* KonstSel, colour */
     uint8_t  kasel[GX_MAX_TEV_STAGES];   /* KonstSel, alpha */
     uint32_t combiner_color[GX_MAX_TEV_STAGES];  /* BP 0xC0+2i */
@@ -226,6 +311,25 @@ typedef struct {
     uint32_t creg_ra[4];                 /* TevReg type 0, RA half */
     uint32_t creg_bg[4];                 /* TevReg type 0, BG half */
     uint32_t ksel[8];                    /* BP 0xF6+j raw */
+    /* --- GX INDIRECT TEXTURING (Dolphin VideoCommon/BPMemory.h) --------------
+     * An indirect stage samples a texture *through another texture*: it reads a
+     * texel from the map named by BP 0x27 (RAS1_IREF), turns that texel into a
+     * two-component offset through one of the three 2x3 matrices in BP 0x06..0x0E,
+     * scales it by 2^-(17-s) and adds it to the texture coordinate a TEV stage
+     * samples. BP 0x10+i is TEV stage i's TevStageIndirect word:
+     *   bt:0-1  the indirect stage this TEV stage consumes
+     *   fmt:2-3 0 = ITF_8, 1 = ITF_5, 2 = ITF_4, 3 = ITF_3
+     *   bias:4-6, bs:7-8, matrix_index:9-10, matrix_id:11-12,
+     *   sw:13-15 wrap S, tw:16-18 wrap T, lb_utclod:19, fb_addprev:20
+     * IsActive() = bs != 0 || matrix_index != 0. The pipeline used to discard every
+     * one of these writes, which is why the 3D batches could not be expressed by
+     * the TEV shader at all (handover 5c.46 AP-N item 11 / AP-O). */
+    uint8_t  num_ind_stages;             /* GEN_MODE bits 16..18 */
+    uint32_t ind_stage[GX_MAX_TEV_STAGES]; /* BP 0x10+i raw TevStageIndirect */
+    uint32_t ind_iref;                   /* BP 0x27 RAS1_IREF: (texmap,texcoord) per ind stage */
+    uint32_t ind_texscale[2];            /* BP 0x25/0x26 RAS1_SS0/SS1: ss0,ts0,ss1,ts1 */
+    uint32_t ind_imask;                  /* BP 0x0F IND_IMASK (applied by hardware, not by us) */
+    uint32_t ind_mtx[9];                 /* BP 0x06..0x0E: 3 x (IND_MTXA, IND_MTXB, IND_MTXC) */
     uint32_t _hash;                      /* dedup only; not part of the state */
 } GxTevState;
 
