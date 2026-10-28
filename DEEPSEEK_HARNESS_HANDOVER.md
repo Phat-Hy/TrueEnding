@@ -10364,3 +10364,17 @@ dump (`build/recomp/dump_tex_90D19B80_64x64_fmt14.ppm`) is a single flat colour.
 `recomp/gfx_d3d11.c`, with the known `TLS_DEFER_EFB_COPY` / `TLS_EFB_COPY_FMT` / `TLS_EFB_COPY_GEOM` A/B
 switches) and a CPU-side copy out of the loaded page texture; `TLS_EFB_COPY_LOG=1` reports the byte range each
 copy writes, so one run tells whether this address is ever a copy destination.
+
+**Measured, that run:** `TLS_EFB_COPY_LOG=1` shows **no EFB copy targets `0x90D19B80`** (the copy destinations are
+`0x900997E0` 640x448, `0x9038D1C0` 320x224, …), so the crest is not an EFB-to-texture result. What the same log
+does show is asset decompression landing immediately *below* it in MEM2:
+
+```
+[TLS CXDecompressFast] ENTER src=0x9024BEC0 dst=0x90D19360 (lr=0x8046C380)   <- 0x820 bytes below the crest scratch
+```
+
+so the crest art is decompressed into the `0x90D19xxx` MEM2 arena and the quad samples `0x90D19B80`. The next
+test is therefore about the *destination address / texture bind* rather than about GX copies: dump
+`0x90D19360..0x90D1B360` at the page frame (`TLS_MEM_DUMP`) and compare with the decoded crest art, and log the
+`dst` of every `CXDecompressFast` in frames 3700-3800 to see whether the crest's own decompress is missing,
+short, or pointed one buffer off.
