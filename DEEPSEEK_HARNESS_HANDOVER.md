@@ -2,17 +2,18 @@
 
 ## NEXT SESSION — START HERE
 
-**Tree state.** Clean at the commit on top of `850ba86` (the AP-P work: the XF texture-matrix path, default off).
-The history this session added is `654cb14` indirect texturing, `bd877ed` the 3D widening, `6a57a92` the AP-O
-dossier, `850ba86` probe pinning + AP-O number corrections, and the AP-P commit; `git log --oneline -7` shows them
-all. Only the untracked scratch `logs_ap/` is dirty. Build green
+**Tree state.** Clean at the commit on top of `7553fa3`. The history this session added is `654cb14` indirect
+texturing, `bd877ed` the 3D widening, `6a57a92` the AP-O dossier, `850ba86` probe pinning + AP-O number
+corrections, `26b7780` the tree-state line, `9f20ebf` the XF texture-matrix path (AP-P) and `7553fa3` the
+colorchan work; `git log --oneline -9` shows them all. Only the untracked scratch `logs_ap/` is dirty. Build green
 (`python tools/recomp_harness.py build-runner`; the generated `build/recomp/gx_shaders_d3d11.inl` needs
 `python tools/compile_shaders.py` after any `tools/compile_shaders.py` edit). `pwsh tools/invariant.ps1` **PASS**
 (`Boot -> Stra -> Titl -> Game`, frame 3500 =
 `D3329E3565DF4E1087785D618114ABE44E555B2465338336853363E7209AB27E` - **re-recorded in §5c.46 AP-O item 5**, and the
 run creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current state is
 **§5c.46 AP-P** (at the end of this file); §5c.46 AP-O and earlier is history, and what changed since AP-O is noted
-below.
+below. **Check for `fifa15` before measuring** - it was running at ~240 % CPU late in this session and moved the
+title hand-over from 1647 to ~700, which invalidates every run (see AP-P item 9).
 
 > **THE XF TEXTURE-MATRIX PATH IS IMPLEMENTED AND OFF BY DEFAULT (§5c.46 AP-P).** `TLS_XF_TEXGEN=1` generates GX
 > texture coordinates 2..7 (and, if promoted, 0 and 1) from the XF texture matrices, the STQ projection and the
