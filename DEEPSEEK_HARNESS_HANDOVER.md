@@ -10152,3 +10152,37 @@ bit-30 variant. Two ways to confirm a fix without guessing: (a) if a caller exis
 by name* (e.g. `fn_800DCA70`/`fn_801F3FF8`-style), the page start should look up the content node by name and
 show it after building `tt001_10.d2a`; (b) if no such caller exists at all, the frame-1656 clear at
 `lr=0x803D0558` is the wrong event and the bug is in what that caller does at scene setup.
+
+**I. The content node is never shown - all shows come from the layouts' own init virtual (§5c.46 AP, end).**
+`TLS_LAYOUT_SHOW_PROBE=1 TLS_LAYOUT_SHOW_FROM=3600` over the page window logs every `fn_801F42A8` entry:
+
+```
+[LayoutShow] f=3648 layout=0x81861F60 r4=1 fc=0x64000000 lr=0x800D28C0
+[LayoutShow] f=3648 layout=0x8186CB60 r4=1 fc=0x64000000 lr=0x800D28C0
+[LayoutShow] f=3648 layout=0x81865AA0 r4=1 fc=0x65861708 lr=0x800D28C0
+... (repeat each frame through f=3657, fc reaching 0x6C000000)
+```
+
+Three facts from that list:
+
+* **`0x81359B80` is never shown in the page window** - not once between 3600 and 3700;
+* every show has the **same caller, `lr=0x800D28C0`**, which is the task-execute path (`fn_800D2868` ->
+  the layout's init virtual at vtable slot 0x0C). So a layout shows itself from its own init, and the page
+  start never issues a show for anything;
+* the page start's fresh layouts reach `fc=0x6C000000` (bit 30 **set**) by f=3652 on their own, while
+  `0x81359B80` sits at `0x2C000000` - its init has not run since frame 1730.
+
+That reconciles AL/AK with AP H instead of contradicting them: the **show** comes from the init virtual,
+which requires the task to be *active* (`+0x38` bit 0 - cleared at f=2020 and never set again), while the
+**draw** comes from the parent's traversal and is gated only by bit 30 of `+0xFC`. `0x81359B80` fails both.
+
+**So the remaining question is now one verb, in one place:** which code is supposed to *activate* the
+pre-created content node `0x81359B80` (call `fn_800D246C(node, 1)` / set `+0x38` bit 0) when the tutorial page
+starts. Its own creation at f=1656 came from the scene loader (`lr=0x803D0558`), its deactivation at f=2020
+from `lr=0x803D1984`; neither of those is the page start. The two candidate owners are (a) the page class's
+enter path `fn_805BA358`, which walks `class+0x474 + i*0x4C` and does `[layout+0x38] |= 4` for every non-empty
+mode slot - i.e. it can only wake layouts that are *in the slots*, and the content node is not one of them -
+and (b) the scene loader that created it, which would have to be re-invoked. **Instrument `fn_805BA358`'s
+entry (frame, class, and the four slot layout pointers) across 3600-3700 first**: if it fires at 3648 with the
+two new layouts, the content node is a *foreign* child of the page and the fix belongs in the page's own
+build path; if it never fires, the missing call is one level up and the page-enter opcode is the next target.
