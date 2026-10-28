@@ -1481,8 +1481,8 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
         fflush(stdout);
     }
     if (gx_tev_word_probe_active() &&
-        (reg == 0x00 || (reg >= 0x28 && reg <= 0x2B) || (reg >= 0xC0 && reg <= 0xC7) ||
-         (reg >= 0xE0 && reg <= 0xE7) || (reg >= 0xF3 && reg <= 0xFD))) {
+        (reg == 0x00 || (reg >= 0x10 && reg <= 0x1F) || (reg >= 0x25 && reg <= 0x2B) ||
+         (reg >= 0xC0 && reg <= 0xC7) || (reg >= 0xE0 && reg <= 0xE7) || (reg >= 0xF3 && reg <= 0xFD))) {
         printf("[TevWord] #%u f=%d BP 0x%02X = 0x%06X\n", ++s_tev_word_seq,
                (int)g_runner_current_frame, reg, val & 0x00FFFFFFu);
         fflush(stdout);

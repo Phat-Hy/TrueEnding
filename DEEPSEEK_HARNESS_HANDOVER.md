@@ -2,12 +2,13 @@
 
 ## NEXT SESSION — START HERE
 
-**Tree state.** Clean at the commit that added this block (`git log --oneline -4`). Build green
-(`python tools/recomp_harness.py build-runner`). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl
--> Game`, frame 3500 = `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run
-creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current
-state is **§5c.46 AP-N** (at the end of this file); §5c.46 AP-M and earlier is history, and several of its
-conclusions are corrected below.
+**Tree state.** Clean at `81a06c5` (`git log --oneline -4`; only the untracked scratch `logs_ap/` is dirty).
+Build green (`python tools/recomp_harness.py build-runner`; the generated `build/recomp/gx_shaders_d3d11.inl`
+needs `python tools/compile_shaders.py` after any `tools/compile_shaders.py` edit). `pwsh tools/invariant.ps1`
+**PASS** (`Boot -> Stra -> Titl -> Game`, frame 3500 =
+`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run creates `savedata.dat` =
+1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current state is **§5c.46 AP-N** (at the
+end of this file); §5c.46 AP-M and earlier is history, and several of its conclusions are corrected below.
 
 > **THE PAGE IS THE REFERENCE PAGE - BOTH ART DEFECTS ARE FIXED, NO DIAGNOSTIC FLAG (§5c.46 AP-N).** The crest
 > is dark ink on parchment and the band is gone; the invariant still reproduces `EAB33141...`. The missing
@@ -10694,10 +10695,11 @@ enough for 3D is a separate, self-contained thread: **do not** widen this gate w
 | body-text block x 640..1240 y 440..600 | - | mean (236.5,208.9,135.4) | mean (235.5,205.6,132.9), mean abs diff **6.1** |
 
 The crest is the crowned medallion in dark ink with its ray burst, and the band is the moon/wave motif instead of
-a dark rectangle. Evidence (paths are `logs_ap/` because this session's sandbox denies writes inside
-`docs/evidence/`; promote them when that is writable): `logs_ap/page_default_3731.png` (full page, default
-flags), `logs_ap/cmp_crest_swap.png` (host vs reference, crest rect), `logs_ap/tl_3781.png`, and the per-frame
-timeline `logs_ap/tl_*.png`.
+a dark rectangle. **Reproduced on a second, independent run at a different present** (default flags, `-Shot
+3761`): page mean 149.4, crest (204.4,180.4,120.8) 11.3 % dark, band 3.3 % dark - the same numbers to the tenth.
+Evidence: `docs/evidence/host_page_crest_fixed_5c46apn_3731.png` (full page, default flags), `…_3781.png` (the
+same page one second later), `cmp_crest_5c46apn.png` (host vs reference, crest rect), `cmp_band_5c46apn.png`
+(host vs reference, the band column, which is also where the button-glyph difference of item 12 shows).
 
 **9. Instruments added this session (all default-off except the narrowed TEV default).**
 
@@ -10717,17 +10719,33 @@ Removed: `TLS_TEV_ALPHA_GX` (item 3) and the short-lived `TLS_GENMODE_GX` (item 
   the **cave** half (`53 batches`, 18 831 vtx) - so `-Shot 3780` captures the cave, and `-Shot` must be an *odd*
   present. Use the content-keyed capture: `TLS_PAGE_CAPTURE='tex:921DEA60,<minframe>'` fired at 3708 (mid-fade)
   and at 3731 (settled) exactly as asked. The invariant is unaffected by all of this (frame 3500 is static).
-* **The confined sandbox denies writes to `logs/`, `docs/`, and `tools/` from child processes** while allowing
-  `build/`, `logs_ap/` and the workspace root (a `.ps1`/`python` write is denied; the harness's own file tools
-  are not). `tools/invariant.ps1` therefore grew `-Log <path>` (default unchanged, `logs\invariant.log`) so the
-  gate can run with `-Log logs_ap\invariant.log`. Do not spend time on the ACL diagnostic: the denial is the
-  harness's file policy, and `logs_ap/` exists for exactly this.
+* **The confined sandbox denies writes to `logs/`, `docs/`, `tools/` and `.git` from child processes** while
+  allowing `build/`, `logs_ap/` and the workspace root (a `.ps1`/`python` write is denied; the harness's own file
+  tools are not). `tools/invariant.ps1` therefore grew `-Log <path>` (default unchanged,
+  `logs\invariant.log`) so the gate can run with `-Log logs_ap\invariant.log`, and `git add`/`git commit` need
+  full access (the index lock cannot be created). The policy was widened to full access part-way through this
+  session; if the denials come back, do not spend time on the ACL diagnostic - it is the harness's file policy,
+  not the folder ACLs, and `logs_ap/` exists for exactly this.
 
-**11. What is still visibly different from the reference (next art item, not this one).** With the crest and the
-band fixed, the page now differs from the reference in exactly one visible way: **the button glyphs in the body
-text render as Latin letters**. The reference reads `Use (white orb) to move.` / `Press (Z) to reset the camera
-to a` / `position behind the player character.`; the host reads `Use (L) ...` / `Press (ZL) ...`. It is
-pre-existing (the AP-L capture shows the same) and it is a *glyph* question in the label atlas
-`0x9076E5E0` (256x256 fmt 2, 5c.46 M) or in the string's codepoints, not a TEV question - `logs_ap/cmp_band_swap.png`
-shows the two side by side. The crest ink is also marginally bolder than the reference (11.4 % vs 7.8 % dark in
-the crest rect), which is a texel-LOD/threshold question, not a mask question.
+**11. Measured, for whoever widens the TEV path to 3D next: the cave uses INDIRECT texturing.** A run with
+`TLS_TEV_WORD_PROBE=3500:3500` (and the standard input script) leaves the invariant **PASSing** - so the probe
+does not move frame 3500 - and its log says, for that one frame: **101 batches**, stage counts `1:32, 2:24, 3:9,
+4:2, 5:10, 6:24`, **249 writes to the indirect-stage registers `BP 0x10..0x1F`** and **58 to `0x0F/0x25/0x26/0x27`**
+(`IND_IMASK`, the indirect texcoord scales and `IREF`), with at least one *active* indirect stage
+(`BP 0x13 = 0x000270` -> `matrix_index = Matrix0`, `bias = STU`). `PSTev` implements no indirect texturing at
+all, so 5/6-stage 3D batches are drawn with unperturbed texture coordinates - which is what the smeared stripes
+in `docs/evidence/cmp_f3500_tevpath_5c46apn.png` are. **The next thread for the TEV path is indirect texturing**
+(`BP 0x10..0x1F` + `0x25/0x26/0x27` + the XF texgen that feeds it), after which the 3D gate can be re-measured;
+until then keep the gate at 2D.
+
+**12. What is still visibly different on the page - and it is NOT a rendering defect.** With the crest and the
+band fixed, the only visible difference left on the page is the **button glyphs in the body text**: the reference
+reads `Use (nunchuk stick) to move.` / `Press (Z) to reset the camera to a` / `position behind the player
+character.`, while the host reads `Use (L) ...` / `Press (ZL) ...`. Those are the **Classic Controller** glyphs,
+and the host reports a Classic Controller by design: `WPADGetDevType` (0x80663610) and `WPADProbe` (0x80660CF0)
+both answer `2 = WPAD_DEV_CLASSIC` for channel 0 (`recomp/replacements.c`, HLE), and the game picks its icon set
+from the device type. The reference run used a Wii Remote + Nunchuk (stick + Z). So this is the input-device
+model, not the TEV: changing it means reporting `WPAD_DEV_FREESTYLE` *and* mapping that device's buttons, which is
+an input thread of its own. The crest ink is also marginally bolder than the reference (11.4 % vs 7.8 % dark in
+the crest rect) - a texel-LOD/threshold question, not a mask question.
+`docs/evidence/cmp_band_5c46apn.png` shows the glyph pair side by side.
