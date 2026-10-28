@@ -10343,3 +10343,24 @@ known addresses (`0x90D19B80` is sampled black for the crest), not layout questi
 `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` and save 1 348 992 / 29 344 measured with
 the fix in place; 0 changes to `src/`; the two extra probes (`TLS_PAGE_CONTENT_PROBE`, `TLS_HUDUPD_PROBE`) are
 default-off, and `TLS_PAGE_ENTER_PROBE` now also prints the `[PageSlot]` rows.
+
+**AP-L addendum: the two remaining page-art defects are ONE batch-level fact.** A batch dump at the page frame
+(54 batches, `TLS_PAGE_CAPTURE='tex:921DEA60,3770'`) puts both artifacts on the same 64x64 scratch texture:
+
+```
+b35 tex=0x81A1A1A0 270x836 fmt=0   X:[-1.00..1.00]  Y:[-1.48..-1.03]
+b36 tex=0x921DEA60 512x512 fmt=14  X:[-1.00..1.00]  Y:[-1.00..1.00]   parchment
+b37 tex=0x90D19B80  64x64 fmt=14   X:[ 0.32..0.57]  Y:[ 0.33..0.70]   <- the black CREST rectangle
+b38 tex=0x90D19B80  64x64 fmt=14   X:[-1.02..0.16]  Y:[-1.07..0.62]   <- the dark BAND behind the text column
+b39 tex=0x922731E0 256x256 fmt=14  X:[-1.10..0.04]  Y:[-1.00..0.63]   illustration (covers b38's left part)
+```
+
+So the crest is `b37` and the band is the part of `b38` the illustration does not cover (x 0.04..0.16): **both
+sample `0x90D19B80`, and that buffer is opaque black at the page frame** (the SKIP plate, b48-b53, samples the
+same address later in the frame and renders correctly). The buffer is never filled by a *GX texture upload* in a
+run - `TLS_TEX_DUMP=0x90D19B80` + `TLS_TEX_DUMP_FRAME=3780` produces **no dump file at all**, and the last-state
+dump (`build/recomp/dump_tex_90D19B80_64x64_fmt14.ppm`) is a single flat colour. Next step: find the writer of
+`0x90D19B80` - the plausible families are an EFB-to-texture copy (`d3d11_efb_copy_to_guest` in
+`recomp/gfx_d3d11.c`, with the known `TLS_DEFER_EFB_COPY` / `TLS_EFB_COPY_FMT` / `TLS_EFB_COPY_GEOM` A/B
+switches) and a CPU-side copy out of the loaded page texture; `TLS_EFB_COPY_LOG=1` reports the byte range each
+copy writes, so one run tells whether this address is ever a copy destination.
