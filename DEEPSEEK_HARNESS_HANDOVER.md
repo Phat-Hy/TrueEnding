@@ -2,16 +2,32 @@
 
 ## NEXT SESSION — START HERE
 
-**Tree state.** Clean at `3da4864` (`git log --oneline -4`; only the untracked scratch `logs_ap/` is dirty).
-Build green (`python tools/recomp_harness.py build-runner`; the generated `build/recomp/gx_shaders_d3d11.inl`
-needs `python tools/compile_shaders.py` after any `tools/compile_shaders.py` edit). `pwsh tools/invariant.ps1`
-**PASS** (`Boot -> Stra -> Titl -> Game`, frame 3500 =
-`EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F`, and the run creates `savedata.dat` =
-1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current state is **§5c.46 AP-N** (at the
-end of this file); §5c.46 AP-M and earlier is history, and several of its conclusions are corrected below.
+**Tree state.** Clean at `bd877ed` (the 3D widening; `654cb14` is the indirect-texturing commit below it, and the
+dossier update you are reading is the commit on top - `git log --oneline -5` to see all four). Only the untracked
+scratch `logs_ap/` is dirty. Build green (`python tools/recomp_harness.py build-runner`; the generated
+`build/recomp/gx_shaders_d3d11.inl` needs `python tools/compile_shaders.py` after any `tools/compile_shaders.py`
+edit). `pwsh tools/invariant.ps1` **PASS** (`Boot -> Stra -> Titl -> Game`, frame 3500 =
+`D3329E3565DF4E1087785D618114ABE44E555B2465338336853363E7209AB27E` - **re-recorded this session, see §5c.46 AP-O
+item 5**, and the run creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to
+`src/`.** Current state is **§5c.46 AP-O** (at the end of this file); §5c.46 AP-N and earlier is history, and the
+one conclusion of AP-N's item 7 that changed is noted below.
+
+> **INDIRECT TEXTURING IS IMPLEMENTED AND THE TEV PATH NOW RUNS 3D BATCHES (§5c.46 AP-O).** The 2D-only gate is
+> gone. GX's indirect stages are tracked (BP 0x06..0x0F, 0x10..0x1F, 0x25..0x27 - every one of those writes used
+> to be dropped) and evaluated in `PSTev` out of Dolphin's `WriteStage`, with an A/B switch `TLS_TEV_NO_IND=1`.
+> **AP-N item 7's "PSTev cannot express 3D" is WITHDRAWN**: the smeared stripes were this host binding the CLAMP
+> sampler for every TEV stage while GX's wrap mode for the cave's rock textures is REPEAT, so every coordinate
+> outside [0,1) stretched a border texel across the surface. With a per-map wrap sampler the artifact is gone,
+> the wall batches render identically to the legacy path, and the frame's water geometry improves (the legacy path
+> evaluated 2 of its 8 TEV stages and drew a blown-out pale sheet; the widened path draws dark reflective water,
+> as the reference does). Frame 3500 therefore moved to `D3329E35...` and was re-recorded, with the reasoning in
+> `tools/invariant.ps1`'s comment. **Read §5c.46 AP-O before touching the TEV path again** - in particular item 7,
+> which measures what is still missing for the 11 batches that need texture coordinates 2..7 (the XF texture-matrix
+> path) and item 10's two instrument traps.
 
 > **THE PAGE IS THE REFERENCE PAGE - BOTH ART DEFECTS ARE FIXED, NO DIAGNOSTIC FLAG (§5c.46 AP-N).** The crest
-> is dark ink on parchment and the band is gone; the invariant still reproduces `EAB33141...`. The missing
+> is dark ink on parchment and the band is gone (the page gate is unchanged by AP-O: same region numbers, page
+> mean luma 150.33, crest 11.2 % dark, band 2.3 % dark). The missing
 > mechanism was **GX's TEV swap tables (BP 0xF6..0xFD)**, which this host never implemented - not the alpha bit
 > layout, not the stage count, and not C0/C1/C2. The guest writes `BP 0xF8 = BP 0xF9 = 0x018060` immediately
 > before the crest draw (every channel reads RED) and stage 1's alpha combiner names `tswap = 1`, so
@@ -19,11 +35,10 @@ end of this file); §5c.46 AP-M and earlier is history, and several of its concl
 > `tt001_10_ch02.texture` and `tt001_10_ch01c.texture` have **alpha 255 on every texel** (ground truth, decoded
 > from the loaded `.texture` blobs), so no other GX mechanism can be the answer. **AP-M items 4 and 5 are
 > withdrawn** (Dolphin's `AlphaCombiner` packing and `GenMode` bit 10-13 `numtevstages` were right all along; the
-> `TLS_TEV_ALPHA_GX` repack and a mid-session `TLS_GENMODE_GX` are removed). Read **§5c.46 AP-N** before touching
-> the TEV path again - it also records why the TEV pixel shader is now used by default **only for orthographic
-> two-map batches** (widening it moves frame 3500 to `22C32C4E...` and visibly regresses the cave).
-> Evidence shots are in `logs_ap/` (`page_default_3731.png`, `cmp_crest_swap.png`) because this session's
-> sandbox denies writes inside `docs/evidence/`.
+> `TLS_TEV_ALPHA_GX` repack and a mid-session `TLS_GENMODE_GX` are removed). **AP-N's item 7 ("the TEV shader is
+> used only for orthographic two-map batches, because widening it regresses the cave") is WITHDRAWN in §5c.46
+> AP-O**: that regression was a clamp-sampler defect in the TEV path, the gate is removed, and frame 3500 is
+> re-recorded to `D3329E35...` with the evidence for why the new frame is the better one.
 
 > **THE PAGE'S CONTENT IS SHOWN BY ONE BIT (§5c.46 AP-L, still current).** The page's content is the hidden
 > LayoutTask the camp/tutorial UI manager creates at frame 1656 from `/data/d2anime/ui_hp_heal.d2a` (name
@@ -10585,6 +10600,14 @@ instrument in this section present and default-off.
 
 ### AP-N. THE PAGE IS THE REFERENCE PAGE - the mask is GX's SWAP TABLE, and AP-M's items 4 and 5 are withdrawn
 
+> **SUPERSEDED IN PART BY §5c.46 AP-O.** Items 1-6 and 8-12 below stand (the crest's swap-table mask, the
+> ground-truth `.texture` decodes, the C0/C1/C2 implementation, the page numbers and the instruments).
+> **Item 7 is WITHDRAWN**: "the TEV path must stay 2D-only because 3D batches render worse" was measured in AP-O
+> to be a clamp-sampler defect in this host, not a PSTev limitation. The gate is removed, 3D batches run through
+> `PSTev`, and frame 3500 is re-recorded to `D3329E35...` with the reasoning and the evidence in AP-O.
+> **Item 11's question is answered**: the cave needs indirect texturing (now implemented) and, for 11 of its 102
+> batches, texture coordinates 2..7 from the XF texture-matrix path (still missing).
+
 **Both art defects are fixed, with no diagnostic flag, and the Chapter-1 invariant still reproduces its golden
 frame.** The missing mechanism was **GX's TEV swap tables** (BP 0xF6..0xFD), which this host had never
 implemented. Everything AP-M pointed at was either already correct or wrong: the alpha-combiner bit layout is
@@ -10759,3 +10782,180 @@ model, not the TEV: changing it means reporting `WPAD_DEV_FREESTYLE` *and* mappi
 an input thread of its own. The crest ink is also marginally bolder than the reference (11.4 % vs 7.8 % dark in
 the crest rect) - a texel-LOD/threshold question, not a mask question.
 `docs/evidence/cmp_band_5c46apn.png` shows the glyph pair side by side.
+
+### AP-O. INDIRECT TEXTURING IS IMPLEMENTED, AND THE 2D-ONLY GATE WAS A CLAMP SAMPLER - 3D BATCHES ARE ON THE TEV PATH
+
+**The one thing AP-N item 11 named as blocking parity for the cave geometry is done, and the reason the gate
+existed was not what it said.** GX's indirect stages are now tracked, decoded and evaluated in `PSTev`; and the
+"smeared stripes" that AP-N measured when 3D batches went through `PSTev` were **a sampler defect in this host**,
+not a limitation of the TEV shader: the TEV path bound the CLAMP sampler for every stage while GX's wrap mode for
+the cave's rock textures is **REPEAT**, so every texture coordinate outside [0,1) stretched one border texel across
+the surface. With a per-map wrap sampler the artifact disappears, the big wall batches render *identically* to the
+legacy path, and the widening is a net improvement on the frame's water geometry.
+
+**1. What was missing, re-measured per batch (no new assumption).** `TLS_TEV_PROBE=3500` + `TLS_TEV_WORD_PROBE=3500`
+(3 520-frame run, invariant still PASSes with them on) enumerates **102 batches** at present 3500 and decodes the
+indirect state of each. Of those, **38 carry an ACTIVE `TevStageIndirect`** word and **28 have GEN_MODE
+`numindstages` > 0** - the other ten name an offset matrix while GEN_MODE says no indirect stage exists, which is
+inert on hardware and is treated as inert here. Only two distinct words are ever active in the frame:
+
+```
+BP 0x10+i = 0x000270   bt=0  fmt=ITF_8  bias=STU  bs=0  mtx=Matrix0  mtxid=Indirect  sw=0 tw=0  addprev=0
+BP 0x10+i = 0x000471   bt=1  fmt=ITF_8  bias=STU  bs=0  mtx=Matrix1  mtxid=Indirect  sw=0 tw=0  addprev=0
+```
+
+with `RAS1_IREF` = `0x0096CA` / `0x0096D2` / `0x0096ED` (so indirect stage `bt` samples e.g. texmap 2, texcoord 2)
+and `RAS1_SS0/SS1` = 0 (no coordinate shift). The offset matrices at that frame are **pure scales**:
+
+```
+matrix 0: row0=(409,0,0) row1=(0,409,0) shift=0   (s=17, so 2^0 - no dynamic shift)
+matrix 1: row0=(921,0,0) row1=(0,921,0) or (430,0,0)/(0,430,0)
+```
+
+409/1024 = 0.4, and with bias STU the input vector is `(a,b,g)*255 - 128`, so the offset is
+`(409*crd) >> 3 = 51.1*crd` fixpoint units, i.e. **up to ±50 texels on a 256-texel map (±20 % of the texture)**.
+That is a real distortion, not boilerplate - it is the cave's bump/warp pass.
+
+**2. The implementation, file and line by file.**
+
+* `recomp/gx_pipeline.h` - `GxIndStage` and the BP decoders (`gx_ind_decode`, `gx_ind_is_active`,
+  `gx_ind_matrix`, `gx_ind_iref_map/coord`, `gx_ind_texscale_shift`) using Dolphin's field splits
+  (`bt:0-1 fmt:2-3 bias:4-6 bs:7-8 matrix_index:9-10 matrix_id:11-12 sw:13-15 tw:16-18 lb_utclod:19
+  fb_addprev:20`, `IND_MTXA/B/C` as two 11-bit signed elements plus two scale bits at bit 22,
+  `RAS1_IREF` as (texmap,texcoord) pairs). `GxTevState` grew `num_ind_stages`, `ind_stage[16]`, `ind_iref`,
+  `ind_texscale[2]`, `ind_imask`, `ind_mtx[9]` - all inside the state hash, so the dedup table stays honest -
+  and `colorchan[16]` (TEVORDER bits 7-9 / 19-21, recorded; see item 7).
+* `recomp/gx_pipeline.c` - the BP handlers for `0x06..0x0E`, `0x0F`, `0x10..0x1F`, `0x25/0x26`, `0x27` (they were
+  being dropped); `GEN_MODE` bits 16-18 for the indirect stage count; an active indirect stage's texmap is unioned
+  into `GxDrawBatch::tev_texmap_mask` (kept out of the batch-merge test, so batching is unchanged) - without it the
+  perturbation texture was never uploaded and the shader read white; `gx_pipeline_print_tev_state` prints the
+  whole indirect decode, including the IREF entry indexed by **`bt`** rather than by the TEV stage (the first
+  version printed `IREF[stage]`, which is wrong whenever `bt != stage`).
+* `recomp/gfx_d3d11.c` - `GxTevConstants` gained `ind_mtx[6][4]` (two rows per matrix, xyz = elements,
+  w = 17-s), `dim[8][4]` (x/y = texmap size, z/w = that **texcoord's** scale), `indref[4][4]`, `indscale[2][4]`,
+  `indword[16][4]`, `wrap[8][4]`, `ind_num`, `ind_used`; `gx_tev_fill_constants` fills them and `gx_tev_fill_dims`
+  fills the sizes and wrap flags; the TEV draw path binds **two** samplers (s0 clamp, s1 wrap).
+* `tools/compile_shaders.py` - `SampleTevTex(map, uv, wrap)` picks the sampler per map; `TevIdot3`,
+  `TevIndFmtShift`, `TevIndWrapPick`, `TevIndShift`; and the stage block in `PSTev` that follows Dolphin's
+  `PixelShaderGen.cpp::WriteStage`: sample the IREF map at the shifted fixpoint coordinate, take **`.abg`**, apply
+  the format bias (`-128` for ITF_8, `+1` otherwise), multiply by the matrix rows (`>>3`), apply the dynamic
+  `17-s` shift, wrap S/T to 256/128/64/32/16 texels or 0, add the previous coordinate when `fb_addprev`, truncate
+  to 24 signed bits, then sample. A batch whose `ind_used` is 0 takes the **unchanged** pre-indirect sampling
+  path, which is why frame 3500 is byte-identical in AP-N's configuration.
+
+**3. THE DEFECT THAT KEPT 3D OFF THE TEV PATH WAS THE SAMPLER, AND IT IS MEASURED BOTH WAYS.** The legacy path
+picks `sampler_wrap` when the batch's GX wrap mode is repeat (`gfx_d3d11.c`, the `batch->tex.wrap_s == 1` test);
+the TEV path bound `sampler_linear` (CLAMP) unconditionally. Same scene, same shader, only the sampler changed:
+
+| frame 3500, `TLS_TEV=1` | vs the legacy frame |
+|---|---|
+| before: one CLAMP sampler for all eight maps | mean abs diff **12.22**, 35.9 % of pixels differ by >8 |
+| after: per-map wrap sampler from the guest's wrap mode | mean abs diff **5.00**, 18.5 % differ by >8 |
+
+`docs/evidence/cmp_f3500_smear_5c46apo.png` is the wall crop that names it: left is the clamp sampler (smeared
+bands, flat olive blobs where a border texel is stretched over a whole rock), right is the wrap sampler (the same
+rock texture the legacy path draws). **This is the artifact AP-N item 7 attributed to PSTev being unable to
+express 3D**, and it is why the 2D-only gate looked necessary.
+
+**4. The widening, as its own commit.** `&& !batch->is_perspective` is removed from `use_tev_path`
+(`recomp/gfx_d3d11.c`), so every batch with a second texture bound and a stage that samples a map other than 0 now
+goes through `PSTev` - **65 of the frame's 102 batches**. What actually changes, measured per batch with
+`TLS_BATCH_PROBE=3500` against the legacy run:
+
+* the big wall batches (`b4..b46`, up to 46 770 vertices) come out **identical**. Their chain is
+  `st0: C1 = ras`, `st1: prev = tex*C1`, i.e. exactly the legacy expression - and now the TEV path computes it
+  from the guest's own words instead of from a hardcoded one;
+* the first batch that differs at all is **b50** (2 157 vertices, `tex=0x91EA7B60`), and it differs because it has
+  **eight** TEV stages of which the legacy path could evaluate **two**:
+
+```
+st0  C1   = ras
+st1  prev = tex(map0) * C1                       <- the only thing the legacy path computes
+st2  C2   = tex(map1) * C1
+st3  prev = lerp(C2, prev, prev.a)               <- second texture blended in by prev's alpha
+st4  prev = (prev * tex(map2)) * 2               <- map2 is 0x91E87AE0, avg (37,40,47): a ~0.29x darkening
+st5  C0   = tex(map3)                            <- map3 is 0x9038D1C0, an EFB copy (the water reflection)
+st6  C0   = tex(map4) * C0                       <- map4 is 0x906DB020, a 256x1 gradient ramp
+st7  prev = prev + C0                            <- ADD the ramp
+```
+
+**The visible result is the water.** Region x 300..700 y 400..460: the legacy path draws a blown-out pale sheet
+with a hard bright streak (mean **(62.9, 62.4, 53.9)**); the widened path draws a dark reflective surface
+(mean **(24.4, 25.0, 24.5)**). Dolphin's own render of this scene
+(`docs/evidence/dolphin_ref_run3_f5000_gameplay.png`) has dark green-grey water (mean ~(49, 56, 48) to
+(56, 64, 57) in its pool), not a white sheet - so the two extra stages the legacy path was dropping are exactly
+the ones the reference shows. `docs/evidence/cmp_f3500_widen_5c46apo.png` is legacy | widened | 4x difference:
+the difference is concentrated **on the water and the reflection**, and the rock walls are dark in the difference
+image because they are unchanged. `host_f3500_tev3d_5c46apo.png` is the widened frame on its own.
+
+**5. Frame 3500 moves, and the invariant is re-recorded (intended change).**
+
+| | frame 3500 |
+|---|---|
+| before this section (AP-N, TEV path 2D-only) | `EAB33141824F9CF919F0A083E538C7F8BE121783A24C6E97C654253B71E1412F` |
+| after the widening, indirect ON | **`D3329E3565DF4E1087785D618114ABE44E555B2465338336853363E7209AB27E`** |
+| after the widening, `TLS_TEV_NO_IND=1` | `9410017E8AFCBF1048A6C269CC6256142577769DEBD94E0CBF716321E8BEA3BF` |
+
+`tools/invariant.ps1`'s `$EXPECTED_SHA` is re-recorded to the first line, with the reasoning and the evidence
+paths in the comment above it. Two independent runs of the widened build give the same hash, and the run is no
+slower (320-334 s per 3 800-frame run before and after).
+
+**6. Indirect texturing's own contribution at this frame, isolated.** `TLS_TEV_NO_IND=1` forces the unperturbed
+coordinate (the new A/B switch). On the widened build that changes the hash (`9410017E...` vs `D3329E35...`) and
+**600 pixels by more than 4/255, max 128**, along the water/horizon band - i.e. the cave's bump pass is
+implemented, exercised and visible, but it is a local effect and not the reason the frame moved.
+`docs/evidence/cmp_f3500_ind_5c46apo.png` is that A/B. Every active indirect word in this frame has `bs = 0`, so
+the one field not evaluated (bump alpha, which perturbs the *raster* alpha rather than a coordinate) costs
+nothing here.
+
+**7. What still blocks full 3D parity - measured, not guessed.** The question AP-N item 11 left open was "do these
+batches need generated coordinates or only the indirect offset on an existing one". The answer, from
+`TLS_TEV_PROBE` + `TLS_XF_PROBE=3500`:
+
+* **91 of 102 batches need no texgen at all**: every stage names a texcoord the batch supplies
+  (`texcoord_mask` 0x03 or 0x07) and the map/coord pairs are `0/0 1/1 2/2 3/3`.
+* **11 batches do** (b14, b15, b17, b22, b25, b28, b33, b34, b42, b46 - ~41 500 of the frame's 230 148 vertices,
+  b25 alone 33 015): their 5- and 6-stage chains name texcoords **2 and 3**, which the host does not feed. The XF
+  dump for that frame shows the texgens behind them are `TexGenType::Regular` with **non-identity texture
+  matrices** (`texmtx[0]` = 0.788/-0.062/0.789 ...) and `texgen1` even has the **STQ projection** bit, so
+  generating them needs the XF texture-matrix path (`I_TEXMATRICES`, the post matrices, the STQ divide) - which
+  this host does not implement at all. That is the next thread, and it is **the** remaining reason those batches
+  are approximated.
+* `TEVORDER`'s **colorchan** (channel 1, bump alpha, zero) is now recorded per stage and printed, but not
+  evaluated: the vertex format carries one colour. Measured at frame 3500 every stage of every batch names
+  channel 0, so nothing is lost on this frame either - but it is a real gap for other scenes.
+
+**8. Gates, both run with the widening in place.**
+* `pwsh tools/invariant.ps1` - **PASS**, frame 3500 = `D3329E35...`, `savedata.dat` 1 348 992, `banner.bin` 29 344,
+  sequence `Boot -> Stra -> Titl -> Game`.
+* `pwsh tools/page_run.ps1 -Frames 3800 -PressShift 27 -RequireGame 1647 -CaptureTex 921DEA60 -CaptureAfter 3730`
+  - capture at guest frame 3730 / present 3731 / 49 batches, `Game@1647`, and the page numbers are **unchanged to
+  the tenth**: page mean luma **150.33** (191,159,101), crest (845..1005,108..241) mean **(204.9,180.9,121.1)
+  11.2 % dark**, band (672..728,150..690) mean **(229.8,200.6,127.3) 2.3 % dark**, body block
+  (234.7,202.6,129.8). The page *PPM hash* does move (from `EAA0469F...` to `B44D91C0...` after the wrap sampler,
+  and to `1B3A8AEF...` after the widening) but the pixels barely do: 20 pixels differ by at most 3/255 after the
+  wrap fix, and after the widening 819 pixels in the **rightmost two columns** differ by at most 10 - the page's
+  own fully-clipped 3D background geometry, which the widening now draws through `PSTev`. `tools/rect_stats.py`
+  (new) prints these region numbers, and its docstring records the dark threshold calibration.
+
+**9. Instruments added (all default-off).**
+
+| variable | effect |
+|---|---|
+| `TLS_TEV_NO_IND=1` | force the unperturbed coordinate: the A/B for what indirect texturing contributes |
+| `TLS_TEX_FAIL_PROBE=1` | now also reports a TEV map that falls back to the white SRV (an un-uploadable map paints a flat tinted polygon) |
+
+`python tools/rect_stats.py <ppm> --rect crest:845,108,1005,241 --rect band:672,150,728,690` is the page
+measurement; `logs_ap/analyze_ind.py`, `logs_ap/widen_scope.py` and `logs_ap/cmp_batchprobe.py` are the throwaway
+analyses behind items 1, 4 and 6 (scratch, not committed).
+
+**10. Process facts worth keeping.**
+* A frame-gated *draw* probe can print the same batch twice (`TLS_TEV_PROBE`/`TLS_BATCH_PROBE` fire on either the
+  present counter or the guest frame counter, and those two agree at some frames), so batch counts read 158 events
+  for 102 batches. Deduplicate by batch index before drawing conclusions.
+* `TLS_TEV=1` (the whole pipeline through PSTev) is **not** the widened configuration: it also routes the 1- and
+  2-stage batches that the widening leaves alone. Use the default build for a widening verdict and `TLS_TEV=1`
+  only for PSTev-versus-legacy comparisons of a single class.
+* `logs/` and `docs/` are still denied to child processes while the harness's own file tools are not; `git`
+  needs full access. The evidence images were composed into `logs_ap/` by `logs_ap/make_evidence.py` and copied in.
+
