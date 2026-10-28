@@ -2,7 +2,7 @@
 
 ## NEXT SESSION — START HERE
 
-**Tree state.** Clean at `81a06c5` (`git log --oneline -4`; only the untracked scratch `logs_ap/` is dirty).
+**Tree state.** Clean at `3da4864` (`git log --oneline -4`; only the untracked scratch `logs_ap/` is dirty).
 Build green (`python tools/recomp_harness.py build-runner`; the generated `build/recomp/gx_shaders_d3d11.inl`
 needs `python tools/compile_shaders.py` after any `tools/compile_shaders.py` edit). `pwsh tools/invariant.ps1`
 **PASS** (`Boot -> Stra -> Titl -> Game`, frame 3500 =
@@ -10717,8 +10717,18 @@ Removed: `TLS_TEV_ALPHA_GX` (item 3) and the short-lived `TLS_GENMODE_GX` (item 
 * **The page's present window moves, and the batch counts in AP-L's table are not reproducible in this build.**
   On this host the page presents from guest frame ~3708 to ~3825 and is settled from ~3721; present 3780/3782 is
   the **cave** half (`53 batches`, 18 831 vtx) - so `-Shot 3780` captures the cave, and `-Shot` must be an *odd*
-  present. Use the content-keyed capture: `TLS_PAGE_CAPTURE='tex:921DEA60,<minframe>'` fired at 3708 (mid-fade)
-  and at 3731 (settled) exactly as asked. The invariant is unaffected by all of this (frame 3500 is static).
+  present. **`tools/page_run.ps1` now takes the capture by content**, which is the one-command form to use from
+  now on:
+
+  ```
+  pwsh tools/page_run.ps1 -Frames 3800 -PressShift 27 -RequireGame 1647 `
+       -CaptureTex 921DEA60 -CaptureAfter 3730 -Log logs\page_crest.log
+  ```
+
+  -CaptureTex sets `TLS_PAGE_CAPTURE=tex:<addr>,<frame>`, prints the guest frame and **present** the capture
+  landed on, and hashes that file (a stale `.ppm` is rejected by timestamp). `TLS_PAGE_CAPTURE='tex:921DEA60,3700'`
+  fires at 3708, which is the page *mid-fade* (illustration over the cave) - 3730 is the first settled frame.
+  The invariant is unaffected by all of this (frame 3500 is static).
 * **The confined sandbox denies writes to `logs/`, `docs/`, `tools/` and `.git` from child processes** while
   allowing `build/`, `logs_ap/` and the workspace root (a `.ps1`/`python` write is denied; the harness's own file
   tools are not). `tools/invariant.ps1` therefore grew `-Log <path>` (default unchanged,
