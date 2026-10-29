@@ -12149,3 +12149,37 @@ proven, and the honest statement is: **no writer of the Chapter-1 task's state w
 **Next session: find the caller that is supposed to start the field** - the entry that sets state 1 - rather than
 reading state 0's body further (its body completes every frame and does not touch the state). The watch on
 `0x8116C6F8` is the instrument: it names the block pc and lr of any future writer, and today it names none.
+
+---
+
+### AP-AD. THE REAL BLOCKER: `GameLoadTask` NEVER COMPLETES - the Chapter-1 load stalls before the field can start
+
+**1. The guest's own task dump says it.** `tls_debug_dump_full` runs at end of every run ("Runner Execution
+Completed"), so the task list of a gameplay run was already sitting in a log:
+
+```
+[ENGINE TELEMETRY DUMP] Frame 6300 | Reason: Runner Execution Completed
+  Sequence: 'Game'
+  Active Tasks (3 registered in TaskManager 0x809ADCF0):
+    [0] GameLoadTask             task=0x80AEDCF0 up=0x80570CFC +1c=4630 +34=1
+    [1] vt=0x00000000            task=0x80B8DD10 up=0x80363DBC
+    [2] vt=0x00000000            task=0x80B8DD10 up=0x803646C4
+```
+
+**`GameLoadTask` is still registered and still updating at frame 6300**, i.e. the Chapter-1 scene load has not
+finished 4 600 frames after the hand-over. The same three-task set is present in the *title* dump at frame 476, so
+the task set never grows: the field/scene tasks that a running Chapter-1 would need are never registered.
+This is the single upstream cause of everything AP-AC/AP-AB recorded:
+* the field task (`0x811671C0`) stays in state 0 because the load it is waiting on never completes (AP-AC7);
+* the party/field/player-status modules are never entered (AP-AC);
+* no HUD geometry exists, and input cannot move anything (AP-AC4/5).
+
+**2. Where to dig next.** The load task's update is `fn_80570CFC`
+(`src/game_wii_home_menu_sound.c:112`) - a small state machine on `+0x24` / `+0x28` / `+0x2C` that, on one branch,
+activates `lbl_8087EFC0` through `fn_800D246C` and clears fields on `lbl_8087F4E8`; the dump's `+34=1` is its
+progress word. The next session should dump the load task object `0x80AEDCF0` (`+0x24`, `+0x28`, `+0x2C`, `+0x34`,
+`+0x1C`) across frames and see which field stops moving, then follow that field's producer - with the strong prior
+that it is an **asset/DVD/IPC completion** that the host never delivers for this load, since the same run logs show
+no dropped completions and the streaming queue idle. Note also `[ENGINE TELEMETRY DUMP] ... STALL WARNING: No State
+Change in 3+ seconds` firing at frames 476/656/1839: the *guest itself* was already reporting the stall, and the
+host had been treating those dumps as noise.
