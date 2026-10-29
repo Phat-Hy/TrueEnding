@@ -11548,13 +11548,20 @@ encoder turns zero (black, alpha 0) into the transparent block `00000000 FFFFFFF
 into `0x92AEAEC0` - so the character's five model textures are transparent, and the same chain is what the HUD
 would be built from.
 
-**4. What to decide next round - the question is now narrow.** Either the guest is *legitimately* clearing a
-buffer it is about to re-fill (so the host's copy is landing one present too early and the conversion one present
-too late, i.e. a **present/frame phase** problem), or `0x800065EC` is clearing memory the guest **freed and
-reused** and our host is writing into a freed allocation. The discriminator is cheap and needs no new code:
-`TLS_EFB_CHAIN_GUEST` on two consecutive frames plus `TLS_DUMP_AT_PC=800D6E48:r3:...` shows whether *any*
-conversion ever reads non-zero staging; if none does, the copy→convert pair is never adjacent on this host and
-the present/frame phase is the defect, which is fixable inside `host_runner.c`'s frame loop (when the present is
-emitted relative to the guest's frame work) rather than in the copy path.
+**4. What to decide next round - the question is now narrow.** 38 of the 39 conversions in a run read all-zero
+staging and exactly **one** reads real art (`0x90586FE0`, `sum=246615 nonzero=5265`, frame ~1957), so the
+pipeline *can* carry data and the blocker is the ordering, not the arithmetic. Either the guest is *legitimately*
+clearing a buffer it is about to re-fill (i.e. the host's copy lands one present too early and the conversion one
+present too late - a **present/frame phase** problem, fixable inside `host_runner.c`'s frame loop), or the copy is
+being serviced by the **replay queue** rather than inline and the conversion runs in between. Those two are
+distinguishable with no guessing: print in `d3d11_efb_copy_to_guest` whether the call came from the inline hook or
+from `d3d11_service_pending_copies` (a one-line flag, since `s_replaying_copy` already exists) together with a
+running copy sequence number, and print the same sequence number at the conversion's entry. If the copy's number
+is greater than the conversion's, the copy really did run first and the memory question is an alias; if it is
+smaller, the conversion runs before its own input and the phase is the defect. **Note `[EfbChain] batch=9999` is
+NOT evidence of a queued copy** - `s_efb_copy_batch_ctx` is a stale global that the inline path never resets, so
+it keeps the value from the previous present's final drain; that misreading is what made the present-timing
+question look settled when it is not.
+
 
 
