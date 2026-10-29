@@ -2231,6 +2231,7 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                     float sx0 = (s_d3d11.vp_w > 0.0f) ? (s_d3d11.vp_w / 640.0f) : (float)desc.Width / 640.0f;
                     float sy0 = (s_d3d11.vp_h > 0.0f) ? (s_d3d11.vp_h / 480.0f) : (float)desc.Height / 480.0f;
                     unsigned long sr = 0, sg = 0, sb = 0, n = 0;
+                    unsigned long sa = 0, na = 0, a0 = 0, a255 = 0;
                     for (uint32_t gy = 0; gy < h; gy += 8) {
                         uint32_t py = (uint32_t)(s_d3d11.vp_y + ((float)(y0 + gy) + 0.5f) * sy0);
                         if (py >= desc.Height) py = desc.Height - 1;
@@ -2240,12 +2241,20 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                             if (px >= desc.Width) px = desc.Width - 1;
                             const uint8_t* p = row + (size_t)px * 4;
                             sr += p[2]; sg += p[1]; sb += p[0]; n++;
+                            /* The copy writes `a = p[3]` straight through, so the SOURCE's
+                             * alpha channel is what every texture derived from a copy ends
+                             * up with (handover 5c.46 AP-R). A D3D11 back buffer's alpha is
+                             * not maintained unless the app writes it, so this number is the
+                             * difference between "the art is dark" and "the art is invisible". */
+                            sa += p[3]; na++;
+                            if (p[3] == 0) a0++; else if (p[3] == 255) a255++;
                         }
                     }
                     if (n == 0) n = 1;
-                    printf("[EfbSampleCopy] frame=%d dst=0x%08X %ux%u src=(%u,%u)-(%u,%u) avg=(%lu,%lu,%lu)\n",
+                    printf("[EfbSampleCopy] frame=%d dst=0x%08X %ux%u src=(%u,%u)-(%u,%u) avg=(%lu,%lu,%lu) "
+                           "alpha avg=%lu a0=%lu/%lu a255=%lu\n",
                            g_runner_current_frame, dst_guest, w, h, x0, y0, x1, y1,
-                           sr / n, sg / n, sb / n);
+                           sr / n, sg / n, sb / n, na ? sa / na : 0, a0, na, a255);
                     fflush(stdout);
                 }
             }

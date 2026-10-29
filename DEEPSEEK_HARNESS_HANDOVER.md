@@ -11380,3 +11380,63 @@ Cheapest next probes, in order:
 3. `TLS_EFB_COPY_FMT=1` exists for writing RGB565/IA8 destinations in their own tile layout - if the copy that
    matters is not RGBA8, that switch is the A/B.
 Do **not** re-run global defer: item 2 makes its results unreadable.
+
+---
+
+### AP-S. The hero's texture chain, named - and ALPHA IS NOT THE DEFECT
+
+**1. The 1910 "bake" is a mip-chain SWIZZLE, and its three calls are now named.** `TLS_DUMP_AT_PC=800D6BE0:...`
+prints the arguments of the converter `fn_800D6BE0(dst, src, w, h)`. At frame 1910 it runs three times, and the
+chain is a 256x256 base plus two mip levels, each swizzled from its own staging buffer:
+
+| call | destination (model texture) | source (staging) | w x h |
+|---|---|---|---|
+| 1 | `0x92AEAEC0` | `0x903CD1C0` | 256 x 256 |
+| 2 | `0x92AF2EC0` | `0x9039D1C0` | 128 x 128 |
+| 3 | `0x92AF4EC0` | `0x903911C0` | 64 x 64 |
+
+`fn_800D6BE0` itself is a block converter, not a render: it swaps byte pairs and rotates bits inside each 8-byte
+group (`srawi r0,r5,2` / `addze` derive the 4x4 tile count from w,h), i.e. it re-lays a CMPR sheet into the
+texture layout. **So the art has to be present in the staging buffer before this call** - the swizzle cannot
+create it and cannot lose it except by converting what it is given.
+
+**2. The staging buffer is produced by a CMPR ENCODER, one frame earlier.** `TLS_STORE_WATCH=903CD1C0,903D51C0`
+with `TLS_STORE_WATCH_FRAME=1899` reports every store into that region with its instruction:
+`cia=0x80069258..0x80069270` (inside `fn_80069060`, +0x1F8) writing `00000000 FFFFFFFF` per 8 bytes - the
+**fully transparent CMPR block**. `fn_80069060` is the block encoder (its decompiled body reads two RGB
+triples from `r5`/`r6`, halves and averages them for the endpoints, then emits indices), reached from the
+image-level encoder `fn_80069288`. Neither is a dispatch boundary, so `TLS_DUMP_AT_PC` cannot see them - the
+store watch is the instrument that names them.
+
+**3. ALPHA IS ELIMINATED - measured, not assumed.** The copy path writes `a = p[3]` straight from the source, so
+alpha-0 staging would explain everything; it does not happen. At the real bake frame (with the input script, see
+item 5), every copy of frame 1910 samples **alpha avg 255, a0=0/4480, a255=4480/4480** and RGB avg
+`(47,62,76)`:
+
+```
+[EfbSampleCopy] frame=1910 dst=0x9038D1C0 640x448 src=(0,0)-(639,447) avg=(47,62,76) alpha avg=255 a0=0/4480 a255=4480
+```
+
+So the copies carry opaque, real content. The transparent CMPR does **not** come from a zero alpha channel, and
+any fix aimed at the copy's alpha would be aimed at a defect that is not there. (`[EfbSampleCopy]` now prints the
+alpha statistics - that is the A/B for this class.)
+
+**4. What the elimination leaves.** The encoder turns an RGBA image into all-transparent blocks while its inputs
+measure opaque, so the open question is now *which* buffer the encoder reads and what that buffer holds **at
+frame 1909**, one frame after the copies that feed it. The copies of frame 1910 land in `0x9038D1C0`,
+`0x90395DC0`, `0x90536FE0`, `0x905C3000`, `0x903917C0`, `0x903DBDC0` (all with opaque, non-black content),
+while the encode at 1909 wrote into `0x903CD1C0` - a buffer the copy path never writes. So either the encoder
+reads a staging slot that is genuinely blank at 1908/1909, or it reads `0x903CD1C0`-style scratch that nothing
+fills. The cheapest next probe: dump the candidate staging slots **at frame 1909**
+(`TLS_MEM_DUMP_BIN=9038D1C0,8000,1909;90395DC0,8000,1909;...`, remember `len` is HEX) and find which one the
+encoder saw as blank.
+
+**5. Two method traps this round, both mine.**
+* **Env vars do not survive a shell call.** One run here silently measured the *title screen* because the
+  `TLS_INPUT_SCRIPT` line was missing from that invocation; the give-away was the absence of
+  `SetNextSequence('Game')` in its log. **Check for `Game@1647` in every log before reading a frame-numbered
+  probe** - this is the same class of error as AP-Q item 2 and it cost a run here.
+* `TLS_EFB_COPY_LOG` prints only the **first 400** copies of a run, so `[EfbCopyRange]` describes early frames
+  only. A whole-run inventory needs `TLS_EFB_COPY_PROBE=1 TLS_EFB_COPY_MAX=<n>`, and the *extent* of each copy
+  then has to be recomputed from its `dstw/geodst/pitch/realfmt` fields - which is how the "no copy covers
+  `0x903CD1C0`" result in item 3 of AP-R was double-checked (it holds: 29 169 copies, none covers it).

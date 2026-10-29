@@ -3015,6 +3015,10 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         }
         if (s_pc && address == s_pc && s_n < s_max) {
             const u8* base = (const u8*)host_resolve_gx_guest_addr(s_addr);
+            printf("[DumpAtPc] pc=0x%08X frame=%d r3=0x%08X r4=0x%08X r5=0x%08X r6=0x%08X "
+                   "r7=0x%08X r8=0x%08X r9=0x%08X lr=0x%08X\n",
+                   s_pc, g_runner_current_frame, ctx->gpr[3], ctx->gpr[4], ctx->gpr[5],
+                   ctx->gpr[6], ctx->gpr[7], ctx->gpr[8], ctx->gpr[9], ctx->lr);
             if (base) {
                 char path[160];
                 snprintf(path, sizeof(path), "build/recomp/atpc_%08X_%d_%08X.bin", s_pc, s_n, s_addr);
@@ -3022,13 +3026,12 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                 if (f) {
                     fwrite(base, 1, s_len, f);
                     fclose(f);
-                    printf("[DumpAtPc] wrote %s (%u bytes, frame %d)\n", path, s_len, g_runner_current_frame);
-                    fflush(stdout);
+                    printf("[DumpAtPc] wrote %s (%u bytes)\n", path, s_len);
                 }
             } else {
-                printf("[DumpAtPc] 0x%08X unmapped at pc 0x%08X\n", s_addr, s_pc);
-                fflush(stdout);
+                printf("[DumpAtPc] 0x%08X unmapped\n", s_addr);
             }
+            fflush(stdout);
             s_n++;
         }
     }
