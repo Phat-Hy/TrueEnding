@@ -12092,3 +12092,22 @@ the guest frame only) produced **no files at 5500/5520**, so it cannot settle it
 is why the field logic stops rather than how the HUD draws. Pair it with a run whose input script *presses
 directions during gameplay* - if the character does not move, "playable" is blocked by the frozen field, not by
 the HUD.
+
+**5. SETTLED: CHAPTER-1 GAMEPLAY IS A FROZEN FRAME.** Frames **5500 and 6200** - 700 frames (11+ seconds) apart -
+are **pixel-identical** (`4201F485304639239B1FEA65AEC997B9`), and a run that **presses UP and A during gameplay**
+(`...1800-1812:A,4300-4400:UP,4600-4700:A`) produces the *same* image: input has no effect. Meanwhile the guest
+keeps re-submitting geometry every frame (`[TLS Frame] 6180: 58047 vtx/77 batches`, `6240: 58098/81`), i.e. the
+same pose is being redrawn, so this is a stopped **animation/field clock**, not a stopped renderer.
+That is consistent with AP-AC's measurement (party/field/player-status modules never entered, Chapter-1 state
+machine dispatched once) and it reframes the whole objective:
+* **"the five model textures bake real art"** - done and verified (AP-Z/AP-AB);
+* **"a HUD renders"** and **"playable"** - *both blocked by the same thing*: the field is not updating, so the
+  party panel has no members and no input can move the character. Fixing the HUD in the draw path would not make
+  the game playable while this holds.
+**Next session starts here:** find why the field update stops after it is entered once. The instruments for a
+stalled task are already in the tree and are named in §5c.46 Z: `TLS_THREAD_PROBE`, `TLS_WAIT_PROBE`,
+`TLS_WAKE_PROBE`, `TLS_WAKE_TIMELINE`, `TLS_LOSTWAKE_PROBE`, `TLS_FRAMEQUEUE_WAKE`, and the runner's own shutdown
+dump (`tls_dump_sleep_queues`, `tls_dump_wake_queues`, boot-thread state). The Chapter-1 task object is `r3` at
+`0x80368280` - capture it from the single dispatch that does happen, then watch its update entry, its state word
+`+0x5538` and its frame counters `+0x5744`/`+0x5748` over the following frames: if the counters stop advancing, the
+task is off the run queue and the question is which queue it is parked on.
