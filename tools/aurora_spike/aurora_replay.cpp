@@ -152,6 +152,9 @@ uint64_t g_fifoBytes = 0, g_draws = 0, g_vertices = 0;
 uint32_t g_frames = 0, g_maxVcnt = 0, g_arrayBases = 0;
 uint64_t g_invalVtx = 0;      /* CP 0x48: aurora drops every cached array range */
 uint64_t g_arrayBytes = 0;    /* what the adapter asks aurora to upload per invalidation */
+uint64_t g_scissorWrites = 0; /* BP 0x20/0x21/0x59 translated through the +342 view bias */
+uint64_t g_texObjs = 0;       /* GX_AURORA_LOAD_TEXOBJ commands synthesised from BP image0/image3 */
+int g_scissorDumps = 0;
 int g_maxCmds = -1;
 
 struct CmdTrace {
@@ -335,9 +338,58 @@ void append_u64(std::vector<uint8_t>& o, uint64_t v) {
  * ----------------------------------------------------------------------------------------- */
 constexpr uint8_t GX_AURORA_OPCODE = 0x50; /* include/dolphin/gx/GXCommandList.h */
 constexpr uint16_t AURORA_LOAD_ARRAYBASE = 0x0010;
+constexpr uint16_t AURORA_LOAD_TEXOBJ = 0x0030;
 constexpr uint16_t AURORA_LOAD_COPY_SRC = 0x0035;
 constexpr uint16_t AURORA_LOAD_COPY_DST = 0x0036;
 constexpr uint16_t AURORA_LOAD_COPY_DEST = 0x0037;
+
+/* THE FOURTH REGISTER CLASS: the texture object.
+ *
+ * aurora's raw BP path (lib/gx/regs.cpp bp_tex) decodes mode0/mode1/image0/image3 into the shadow
+ * GXTexObj_, but it never sets `data` - the host pointer. That only arrives through
+ * GX_AURORA_LOAD_TEXOBJ, which aurora's own GXLoadTexObj emits. A captured hardware stream carries
+ * the texture address in BP image3 as (physical >> 5), so a replay that forwards BP 0x80-0x97
+ * gives aurora a texture with has_data() == false: resolve_sampled_textures() then binds no handle
+ * and every textured TEV stage samples 0 - the frame renders, and renders black. (Measured:
+ * 5c.46 AP-AN, with the scissor and viewport bias already translated.)
+ *
+ * image3 decoding is the same one recomp/gfx_d3d11.c uses: phys = (val & 0xFFFFFF) << 5, MEM1 for
+ * phys < 0x10000000, MEM2 above, expressed through the cached aliases the harness maps. */
+struct TexState {
+  uint32_t image0 = 0xFFFFFFFFu;
+  uint32_t image3 = 0;
+  uint32_t mode0 = 0;
+  bool have = false;
+  bool dirty = false;
+};
+
+uint32_t guest_addr_for_image3(uint32_t image3) {
+  const uint32_t phys = (image3 & 0xFFFFFFu) << 5;
+  if (phys >= 0x10000000u) return 0x90000000u | (phys & 0x0FFFFFFFu);
+  return 0x80000000u | (phys & 0x0FFFFFFFu);
+}
+
+void emit_texobj(std::vector<uint8_t>& out, uint32_t mapId, const TexState& t) {
+  const uint32_t width = (t.image0 & 0x3FFu) + 1;
+  const uint32_t height = ((t.image0 >> 10) & 0x3FFu) + 1;
+  const uint32_t format = (t.image0 >> 20) & 0xFu;
+  append_u8(out, GX_AURORA_OPCODE);
+  append_u16(out, AURORA_LOAD_TEXOBJ);
+  append_u8(out, static_cast<uint8_t>(mapId));
+  append_u64(out, static_cast<uint64_t>(guest_addr_for_image3(t.image3)));
+  append_u32(out, width);
+  append_u32(out, height);
+  append_u32(out, format);
+  append_u32(out, 0); /* tlut slot: this game loads no TLUTs in the captured window */
+  append_u8(out, 0);  /* no mips/no-cache flag */
+  append_u32(out, 0); /* texObjId */
+  append_u32(out, 0); /* texDataVersion */
+  ++g_texObjs;
+  if (g_texObjs <= 6) {
+    std::printf("[replay] texobj map %u -> 0x%08X %ux%u fmt %u\n", mapId, guest_addr_for_image3(t.image3), width,
+                height, format);
+  }
+}
 
 struct CopyRegs {
   uint32_t srcX0 = 0, srcY0 = 0, srcX1 = 0, srcY1 = 0;
@@ -436,6 +488,7 @@ struct StreamState {
   uint32_t base[21] = {};
   bool baseKnown[21] = {};
   CopyRegs copy;
+  TexState tex[8];
 
   void apply_cp(uint8_t reg, uint32_t val) {
     if (reg == 0x50) {
@@ -601,10 +654,47 @@ bool rewrite_frame(const uint8_t* in, uint32_t size, uint32_t begin, uint32_t li
     } else if (cmd == 0x10) { /* XF register write */
       if (i + 5 > size) { err = "truncated XF header"; return false; }
       const uint32_t words = ((uint32_t(in[i + 1]) << 8) | in[i + 2]) + 1;
+      const uint32_t base = ((uint32_t(in[i + 3]) << 8) | in[i + 4]);
       const uint32_t total = 5 + words * 4;
       if (i + total > size) { err = "truncated XF payload"; return false; }
-      out.insert(out.end(), in + i, in + i + total);
-      i += total;
+      /* THE SECOND HALF OF THE VIEW BIAS: the SDK writes the viewport origin as
+       * `ox = 342 + left + width/2`, whereas aurora's own GXSetViewportJitter writes
+       * `340 + left + width/2` and xf_load_viewport() subtracts 340. Feeding the hardware value
+       * straight through lands the viewport at (2,2,640,448) on a 640x480 target, i.e.
+       * x + width = 642 > 640: an INVALID viewport, which wgpu rejects and which silently kills
+       * every draw in the pass. Subtracting 2 from ox/oy reproduces the guest's viewport exactly.
+       * (Measured: 5c.46 AP-AN.) */
+      const uint8_t* src = in + i;
+      if (base <= 0x101Eu && base + words > 0x101Du) {
+        out.insert(out.end(), in + i, in + i + 5);
+        for (uint32_t w = 0; w < words; ++w) {
+          const uint32_t reg = base + w;
+          uint32_t word;
+          std::memcpy(&word, in + i + 5 + w * 4, 4);
+          if (reg == 0x101Du || reg == 0x101Eu) {
+            const uint32_t bits = ((word & 0xFFu) << 24) | ((word & 0xFF00u) << 8) |
+                                  ((word >> 8) & 0xFF00u) | ((word >> 24) & 0xFFu);
+            float value;
+            std::memcpy(&value, &bits, 4);
+            value -= 2.0f;
+            uint32_t newBits;
+            std::memcpy(&newBits, &value, 4);
+            const uint32_t swapped = ((newBits & 0xFFu) << 24) | ((newBits & 0xFF00u) << 8) |
+                                     ((newBits >> 8) & 0xFF00u) | ((newBits >> 24) & 0xFFu);
+            if (g_scissorDumps < 4) {
+              std::printf("[replay] viewport XF 0x%04X %.3f -> %.3f\n", reg, value + 2.0f, value);
+              ++g_scissorDumps;
+            }
+            word = swapped;
+          }
+          out.insert(out.end(), reinterpret_cast<const uint8_t*>(&word),
+                     reinterpret_cast<const uint8_t*>(&word) + 4);
+        }
+        i += total;
+      } else {
+        out.insert(out.end(), src, src + total);
+        i += total;
+      }
     } else if (cmd == 0x20 || cmd == 0x28 || cmd == 0x30 || cmd == 0x38) { /* indexed XF load */
       if (i + 5 > size) { err = "truncated indexed XF load"; return false; }
       out.insert(out.end(), in + i, in + i + 5);
@@ -623,13 +713,81 @@ bool rewrite_frame(const uint8_t* in, uint32_t size, uint32_t begin, uint32_t li
       const uint8_t reg = static_cast<uint8_t>(word >> 24);
       const uint32_t val = word & 0xFFFFFF;
       switch (reg) {
+      case 0x20:
+      case 0x21:
+      case 0x59:
+        /* THE THIRD REGISTER CLASS: the GX view bias (+342, kViewOffset).
+         *
+         * The SDK writes a scissor coordinate as `left + 342` into BP 0x20/0x21 and the scissor box
+         * offset as `(offset + 342) >> 1` into BP 0x59. aurora's bp_scissor() adds the box offset
+         * back as `2 * field` and never subtracts the 342, so a raw hardware stream lands at
+         * `left + 684`: for this game's (0,0)-(639,447) scissor that is x=684 on a 640-wide target.
+         * apply_scissor() (lib/gfx/encoding.cpp) then clamps it to (640, 480, 0, 0) - a ZERO-AREA
+         * scissor - and every draw in the frame is discarded with no error and no log line. That is
+         * what made every replayed frame's EFB black (5c.46 AP-AN).
+         *
+         * aurora's own GXSetScissor writes the registers pre-subtracted (left - 342) and
+         * GXSetScissorBoxOffset(0,0) writes 171, so its own API round-trips to `left`. A recompiler
+         * feeding hardware bytes must do the same: emit the true coordinate and a zero box offset.
+         * A non-zero box offset (scissor scrolling) is dropped here; this game writes (1024,0) and
+         * every scissor rect it declares is the full 640x448 viewport, so the drop is inert - and
+         * it is stated as a limitation rather than guessed away. */
+        {
+          uint32_t outVal = 0;
+          if (reg != 0x59) {
+            constexpr uint32_t kViewOffset = 342;
+            const uint32_t f0 = val & 0x7FFu;         /* top / bottom, biased */
+            const uint32_t f1 = (val >> 12) & 0x7FFu; /* left / right, biased */
+            const uint32_t c0 = f0 > kViewOffset ? f0 - kViewOffset : 0;
+            const uint32_t c1 = f1 > kViewOffset ? f1 - kViewOffset : 0;
+            outVal = (c1 << 12) | c0;
+            if (g_scissorDumps < 4) {
+              std::printf("[replay] scissor BP 0x%02X 0x%06X -> 0x%06X (fields %u,%u -> %u,%u)\n", reg, val,
+                          outVal, f0, f1, c0, c1);
+              ++g_scissorDumps;
+            }
+          }
+          out.push_back(0x61);
+          append_u32(out, (uint32_t(reg) << 24) | (outVal & 0xFFFFFFu));
+          ++g_scissorWrites;
+          i += 5;
+          continue;
+        }
+      /* Texture object registers (see THE FOURTH REGISTER CLASS above): remember image0/image3/
+       * mode0 per map, forward the write unchanged (aurora's BP shadow wants it too), and let the
+       * draw path emit GX_AURORA_LOAD_TEXOBJ for whichever maps changed. */
+      case 0x80: case 0x81: case 0x82: case 0x83:
+      case 0x84: case 0x85: case 0x86: case 0x87:
+      case 0x88: case 0x89: case 0x8A: case 0x8B:
+      case 0x94: case 0x95: case 0x96: case 0x97:
+      case 0xA0: case 0xA1: case 0xA2: case 0xA3:
+      case 0xA4: case 0xA5: case 0xA6: case 0xA7:
+      case 0xA8: case 0xA9: case 0xAA: case 0xAB:
+      case 0xB4: case 0xB5: case 0xB6: case 0xB7: {
+        const bool high = reg >= 0xA0;
+        const uint8_t low = high ? static_cast<uint8_t>(reg - 0xA0) : static_cast<uint8_t>(reg - 0x80);
+        const uint8_t mapId = static_cast<uint8_t>((low & 3) + (high ? 4 : 0));
+        const uint8_t kind = static_cast<uint8_t>(low >> 2);
+        if (kind == 0) {
+          st.tex[mapId].mode0 = val;
+        } else if (kind == 2) {
+          st.tex[mapId].image0 = val;
+          st.tex[mapId].dirty = true;
+        } else if (kind == 5) {
+          st.tex[mapId].image3 = val;
+          st.tex[mapId].dirty = true;
+          st.tex[mapId].have = true;
+        }
+        out.insert(out.end(), in + i, in + i + 5);
+        i += 5;
+        continue;
+      }
       case 0x49:
         st.copy.srcX0 = val & 0x3FF;
         st.copy.srcY0 = (val >> 10) & 0x3FF;
         st.copy.haveSrc = true;
         i += 5;
-        continue;
-      case 0x4A:
+        continue;      case 0x4A:
         st.copy.srcX1 = val & 0x3FF;
         st.copy.srcY1 = (val >> 10) & 0x3FF;
         st.copy.haveSrc = true;
@@ -669,6 +827,14 @@ bool rewrite_frame(const uint8_t* in, uint32_t size, uint32_t begin, uint32_t li
        * frame's array traffic a few megabytes. */
       if (i + 3 + uint64_t(vcnt) * vtxSize <= size) {
         emit_draw_array_bases(out, st, fmt, vcnt, in + i + 3);
+      }
+      /* Any texture whose image0/image3 changed since the last draw gets its host pointer handed
+       * to aurora now (see THE FOURTH REGISTER CLASS). */
+      for (int m = 0; m < 8; ++m) {
+        if (st.tex[m].dirty && st.tex[m].have && st.tex[m].image0 != 0xFFFFFFFFu) {
+          emit_texobj(out, static_cast<uint32_t>(m), st.tex[m]);
+          st.tex[m].dirty = false;
+        }
       }
       const uint64_t total = 3ull + uint64_t(vcnt) * vtxSize;
       if (vtxSize == 0 || i + total > size) {
@@ -1189,8 +1355,10 @@ int main(int argc, char** argv) {
       if (verbose) std::printf("[replay] frame %u done in %u chunk(s)\n", frame.frame, chunks);
     }
   }
-  std::printf("[replay] replayed %u frame(s), adapter translated %u EFB copy command(s)%s\n", replayed,
-              rewrittenCopies, rawStream ? " (raw stream: no translation)" : "");
+  std::printf("[replay] replayed %u frame(s), adapter translated %u EFB copy command(s), %llu scissor write(s), "
+              "%llu texobj(s)%s\n",
+              replayed, rewrittenCopies, (unsigned long long)g_scissorWrites,
+              (unsigned long long)g_texObjs, rawStream ? " (raw stream: no translation)" : "");
   std::printf("[replay] stream parse: %llu draw(s), %llu vertices\n", (unsigned long long)g_draws,
               (unsigned long long)g_vertices);
 

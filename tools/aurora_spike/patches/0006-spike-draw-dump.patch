@@ -1,0 +1,260 @@
+diff --git a/lib/gx/command_processor.cpp b/lib/gx/command_processor.cpp
+index be59752..1f2fad3 100644
+--- a/lib/gx/command_processor.cpp
++++ b/lib/gx/command_processor.cpp
+@@ -16,6 +16,8 @@
+ #include <algorithm>
+ #include <cmath>
+ #include <cstdint>
++#include <cstdio>
++#include <cstdlib>
+ #include <span>
+ #include <vector>
+ 
+@@ -208,6 +210,162 @@ u8 line_mode_for_prim(GXPrimitive prim) noexcept {
+     return 0;
+   }
+ }
++
++/* AURORA-SPIKE (handover 5c.46 AP-AN): dump the state aurora holds for ONE draw so it can be
++ * compared register for register with the hand-rolled layer's decode of the same stream bytes.
++ * Everything below is what aurora decoded - none of it is recomputed here - because the question
++ * is whether the two implementations read the same register file the same way.
++ * Gated on TLS_AURORA_DUMP_DRAW=<n> (n = draw index in the fed stream); inert otherwise. */
++void spike_maybe_dump_draw(GXPrimitive prim, GXVtxFmt fmt, u16 vtxCount, const u8* vtxData, u32 vtxSize,
++                           size_t streamOffset) noexcept {
++  static int sWant = -2;
++  static u32 sDraw = 0;
++  if (sWant == -2) {
++    const char* e = std::getenv("TLS_AURORA_DUMP_DRAW");
++    sWant = e != nullptr ? std::atoi(e) : -1;
++    if (sWant >= 0) {
++      std::fprintf(stderr, "[drawdump] armed for draw %d\n", sWant);
++      std::fflush(stderr);
++    }
++  }
++  const u32 index = sDraw++;
++  if (sWant < 0 || static_cast<int>(index) != sWant) {
++    return;
++  }
++  auto& st = g_gxState;
++  const auto& p = st.proj;
++  std::fprintf(stderr,
++               "\n[drawdump] draw=%u offset=%zu prim=0x%02X fmt=%u vcnt=%u vtxSize=%u projType=%u\n",
++               index, streamOffset, static_cast<unsigned>(prim), static_cast<unsigned>(fmt), vtxCount,
++               vtxSize, static_cast<unsigned>(st.projType));
++  std::fprintf(stderr, "[drawdump] proj m0=(%.6f %.6f %.6f %.6f)\n", p[0][0], p[0][1], p[0][2], p[0][3]);
++  std::fprintf(stderr, "[drawdump] proj m1=(%.6f %.6f %.6f %.6f)\n", p[1][0], p[1][1], p[1][2], p[1][3]);
++  std::fprintf(stderr, "[drawdump] proj m2=(%.6f %.6f %.6f %.6f)\n", p[2][0], p[2][1], p[2][2], p[2][3]);
++  std::fprintf(stderr, "[drawdump] proj m3=(%.6f %.6f %.6f %.6f)\n", p[3][0], p[3][1], p[3][2], p[3][3]);
++  std::fprintf(stderr, "[drawdump] viewport logical=(%.3f %.3f %.3f %.3f %.4f %.4f)\n",
++               st.logicalViewport.left, st.logicalViewport.top, st.logicalViewport.width,
++               st.logicalViewport.height, st.logicalViewport.znear, st.logicalViewport.zfar);
++  std::fprintf(stderr, "[drawdump] viewport render =(%.3f %.3f %.3f %.3f %.4f %.4f)\n",
++               st.renderViewport.left, st.renderViewport.top, st.renderViewport.width,
++               st.renderViewport.height, st.renderViewport.znear, st.renderViewport.zfar);
++  std::fprintf(stderr, "[drawdump] scissor  logical=(%d %d %d %d) render=(%d %d %d %d)\n",
++               st.logicalScissor.x, st.logicalScissor.y, st.logicalScissor.width, st.logicalScissor.height,
++               st.renderScissor.x, st.renderScissor.y, st.renderScissor.width, st.renderScissor.height);
++  const auto& pos = st.pnMtx[st.currentPnMtx].pos;
++  std::fprintf(stderr, "[drawdump] pnMtx=%u pos row0=(%.4f %.4f %.4f %.4f) row1=(%.4f %.4f %.4f %.4f) "
++                       "row2=(%.4f %.4f %.4f %.4f)\n",
++               st.currentPnMtx, pos.m0[0], pos.m0[1], pos.m0[2], pos.m0[3], pos.m1[0], pos.m1[1], pos.m1[2],
++               pos.m1[3], pos.m2[0], pos.m2[1], pos.m2[2], pos.m2[3]);
++  std::fprintf(stderr,
++               "[drawdump] tevStages=%u texGens=%u chans=%u colorUpdate=%d alphaUpdate=%d blend=%d src=%d "
++               "dst=%d op=%d cull=%d\n",
++               st.numTevStages, st.numTexGens, st.numChans, st.colorUpdate ? 1 : 0, st.alphaUpdate ? 1 : 0,
++               static_cast<int>(st.blendMode), static_cast<int>(st.blendFacSrc),
++               static_cast<int>(st.blendFacDst), static_cast<int>(st.blendOp), static_cast<int>(st.cullMode));
++  std::fprintf(stderr, "[drawdump] depthTest=%d depthUpdate=%d depthFunc=%d zFmt=%d pixelFmt=%d "
++                       "alphaCompare=(%d %u %d %d %u) dstAlpha=0x%08X\n",
++               st.depthCompare ? 1 : 0, st.depthUpdate ? 1 : 0, static_cast<int>(st.depthFunc),
++               static_cast<int>(st.zFmt), static_cast<int>(st.pixelFmt),
++               static_cast<int>(st.alphaCompare.comp0), st.alphaCompare.ref0,
++               static_cast<int>(st.alphaCompare.op), static_cast<int>(st.alphaCompare.comp1),
++               st.alphaCompare.ref1, st.dstAlpha);
++  std::fprintf(stderr, "[drawdump] vtxDesc=");
++  for (int a = 0; a < MaxVtxAttr; ++a) {
++    std::fprintf(stderr, " %d", static_cast<int>(st.vtxDesc[a]));
++  }
++  std::fprintf(stderr, "\n");
++  for (u32 t = 0; t < st.numTevStages && t < MaxTevStages; ++t) {
++    const auto& s = st.tevStages[t];
++    std::fprintf(stderr,
++                 "[drawdump] tev%u color(a=%d b=%d c=%d d=%d op=%d bias=%d scale=%d out=%d clamp=%d) "
++                 "alpha(a=%d b=%d c=%d d=%d) texcoord=%d texmap=%d chan=%d kc=%d ka=%d\n",
++                 t, static_cast<int>(s.colorPass.a), static_cast<int>(s.colorPass.b),
++                 static_cast<int>(s.colorPass.c), static_cast<int>(s.colorPass.d),
++                 static_cast<int>(s.colorOp.op), static_cast<int>(s.colorOp.bias),
++                 static_cast<int>(s.colorOp.scale), static_cast<int>(s.colorOp.outReg),
++                 s.colorOp.clamp ? 1 : 0, static_cast<int>(s.alphaPass.a),
++                 static_cast<int>(s.alphaPass.b), static_cast<int>(s.alphaPass.c),
++                 static_cast<int>(s.alphaPass.d), static_cast<int>(s.texCoordId),
++                 static_cast<int>(s.texMapId), static_cast<int>(s.channelId),
++                 static_cast<int>(s.kcSel), static_cast<int>(s.kaSel));
++  }
++  for (u32 c = 0; c < st.numChans && c < MaxColorChannels; ++c) {
++    const auto& cfg = st.colorChannelConfig[c];
++    const auto& cs = st.colorChannelState[c];
++    std::fprintf(stderr, "[drawdump] chan%u matRgba=(%.3f %.3f %.3f %.3f) ambRgba=(%.3f %.3f %.3f %.3f) "
++                         "matSrc=%d ambSrc=%d lighting=%d diffFn=%u attnFn=%u\n",
++                 c, cs.matColor.x(), cs.matColor.y(), cs.matColor.z(), cs.matColor.w(),
++                 cs.ambColor.x(), cs.ambColor.y(), cs.ambColor.z(), cs.ambColor.w(),
++                 static_cast<int>(cfg.matSrc), static_cast<int>(cfg.ambSrc), cfg.lightingEnabled ? 1 : 0,
++                 static_cast<unsigned>(cfg.diffFn), static_cast<unsigned>(cfg.attnFn));
++  }
++  std::fprintf(stderr, "\n[drawdump] attrFmt[%u] pos=(cnt %d type %d frac %u) nrm=(cnt %d type %d frac %u) "
++                       "clr0=(cnt %d type %d frac %u) tex0=(cnt %d type %d frac %u)\n",
++               static_cast<unsigned>(fmt), static_cast<int>(st.vtxFmts[fmt].attrs[GX_VA_POS].cnt),
++               static_cast<int>(st.vtxFmts[fmt].attrs[GX_VA_POS].type),
++               st.vtxFmts[fmt].attrs[GX_VA_POS].frac,
++               static_cast<int>(st.vtxFmts[fmt].attrs[GX_VA_NRM].cnt),
++               static_cast<int>(st.vtxFmts[fmt].attrs[GX_VA_NRM].type),
++               st.vtxFmts[fmt].attrs[GX_VA_NRM].frac,
++               static_cast<int>(st.vtxFmts[fmt].attrs[GX_VA_CLR0].cnt),
++               static_cast<int>(st.vtxFmts[fmt].attrs[GX_VA_CLR0].type),
++               st.vtxFmts[fmt].attrs[GX_VA_CLR0].frac,
++               static_cast<int>(st.vtxFmts[fmt].attrs[GX_VA_TEX0].cnt),
++               static_cast<int>(st.vtxFmts[fmt].attrs[GX_VA_TEX0].type),
++               st.vtxFmts[fmt].attrs[GX_VA_TEX0].frac);
++  std::fprintf(stderr, "[drawdump] arrays:");
++  for (int a = GX_VA_POS; a <= GX_VA_TEX7; ++a) {
++    if (st.vtxDesc[a] != GX_INDEX8 && st.vtxDesc[a] != GX_INDEX16) {
++      continue;
++    }
++    const auto& arr = st.arrays[a];
++    std::fprintf(stderr, " [%d]%p/%u/stride%d%s", a, arr.data, arr.size, static_cast<int>(arr.stride),
++                 arr.le ? "/LE" : "/BE");
++  }
++  /* The POS attribute as the shader would fetch it: record offset from the enabled attrs before
++   * it, then (for an indexed attr) the array element the first vertex's index selects. This is
++   * the "one draw, both sides" datum: it is aurora's own array pointer, stride and bytes. */
++  u32 posRecordOffset = 0;
++  for (int a = GX_VA_PNMTXIDX; a < GX_VA_POS; ++a) {
++    if (st.vtxDesc[a] != GX_NONE) {
++      ++posRecordOffset;
++    }
++  }
++  std::fprintf(stderr, "[drawdump] POS record offset=%u desc=%d\n", posRecordOffset,
++               static_cast<int>(st.vtxDesc[GX_VA_POS]));
++  if (vtxData != nullptr && posRecordOffset < vtxSize) {
++    constexpr u32 kPosElement = 6; /* 3 x s16 at this draw's VAT, see attrFmt below */
++    const auto& arr = st.arrays[GX_VA_POS];
++    const u32 stride = arr.stride != 0 ? arr.stride : kPosElement;
++    if (st.vtxDesc[GX_VA_POS] == GX_INDEX8 || st.vtxDesc[GX_VA_POS] == GX_INDEX16) {
++      const u32 idx = st.vtxDesc[GX_VA_POS] == GX_INDEX8
++                          ? vtxData[posRecordOffset]
++                          : (static_cast<u32>(vtxData[posRecordOffset]) << 8) | vtxData[posRecordOffset + 1];
++      const u32 byteOffset = idx * stride;
++      const auto* base = static_cast<const u8*>(arr.data);
++      std::fprintf(stderr, "[drawdump] POS idx8=%u stride=%u -> array+%u (array=%p size=%u strideReg=%d le=%d)\n",
++                   idx, stride, byteOffset, arr.data, arr.size, static_cast<int>(arr.stride), arr.le ? 1 : 0);
++      if (base != nullptr && byteOffset + kPosElement <= arr.size) {
++        const u8* p = base + byteOffset;
++        const auto s16 = [](const u8* q) {
++          return static_cast<int16_t>((static_cast<uint16_t>(q[0]) << 8) | q[1]);
++        };
++        std::fprintf(stderr, "[drawdump] POS bytes=%02X %02X %02X %02X %02X %02X -> (%.4f %.4f %.4f) /2048\n",
++                     p[0], p[1], p[2], p[3], p[4], p[5], s16(p) / 2048.0f, s16(p + 2) / 2048.0f,
++                     s16(p + 4) / 2048.0f);
++      } else {
++        std::fprintf(stderr, "[drawdump] POS array read OUT OF RANGE (%u + %u > %u)\n", byteOffset, kPosElement,
++                     arr.size);
++      }
++    }
++  }
++  std::fprintf(stderr, "[drawdump] firstVertex:");
++  for (u32 b = 0; b < vtxSize && b < 32 && vtxData != nullptr; ++b) {
++    std::fprintf(stderr, " %02X", vtxData[b]);
++  }
++  std::fprintf(stderr, "\n");
++  std::fflush(stderr);
++}
+ } // namespace
+ 
+ static void handle_draw(u8 cmd, ByteReader& reader) noexcept;
+@@ -493,6 +651,48 @@ static void handle_draw_unmerged(GXPrimitive prim, GXVtxFmt fmt, u16 vtxCount, g
+ 
+ static void draw_prim(GXPrimitive prim, GXVtxFmt fmt, u16 vtxCount, ByteReader& reader) noexcept {
+   ZoneScoped;
++  /* AURORA-SPIKE (5c.46 AP-AN): does the frame rasterize at all, or does it rasterize black?
++   * Two independent switches, applied once per draw (they do not re-dirty the pipeline every draw):
++   *   TLS_AURORA_TEST_NO_DEPTH  - depth compare off
++   *   TLS_AURORA_TEST_WHITE_TEV - stage 0 outputs a constant white
++   * Inert unless set. */
++  static int sNoDepth = -1, sWhiteTev = -1;
++  if (sNoDepth == -1) {
++    sNoDepth = std::getenv("TLS_AURORA_TEST_NO_DEPTH") != nullptr ? 1 : 0;
++    sWhiteTev = std::getenv("TLS_AURORA_TEST_WHITE_TEV") != nullptr ? 1 : 0;
++  }
++  if (sNoDepth != 0 && g_gxState.depthCompare) {
++    g_gxState.depthCompare = false;
++    g_gxState.dirty |= DirtyPipeline;
++  }
++  if (sWhiteTev != 0) {
++    g_gxState.numTevStages = 1;
++    auto& s = g_gxState.tevStages[0];
++    s.colorPass = {GX_CC_ZERO, GX_CC_ZERO, GX_CC_ZERO, GX_CC_ONE};
++    s.colorOp = {GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_TEVPREV, true};
++    s.alphaPass = {GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO, GX_CA_ZERO};
++    s.alphaOp = {GX_TEV_ADD, GX_TB_ZERO, GX_CS_SCALE_1, GX_TEVPREV, true};
++    g_gxState.blendMode = GX_BM_NONE;
++    if (g_gxState.alphaCompare.comp0 != GX_ALWAYS) {
++      g_gxState.alphaCompare = {};
++      g_gxState.dirty |= DirtyPipeline;
++    }
++  }
++  /* TLS_AURORA_TEST_MAT_WHITE: same shape of question for the RASC input - if the frame renders
++   * when the material colour is forced to white, the colour channel measured non-zero above is
++   * not what the shader receives. Inert unless set. */
++  {
++    static int sMatWhite = -1;
++    if (sMatWhite == -1) {
++      sMatWhite = std::getenv("TLS_AURORA_TEST_MAT_WHITE") != nullptr ? 1 : 0;
++    }
++    if (sMatWhite != 0) {
++      for (auto& st : g_gxState.colorChannelState) {
++        st.matColor = {1.f, 1.f, 1.f, 1.f};
++        st.ambColor = {1.f, 1.f, 1.f, 1.f};
++      }
++    }
++  }
+   u32 vtxSize;
+   if (g_gxState.lastVtxFmt == fmt)
+     LIKELY { vtxSize = g_gxState.lastVtxSize; }
+@@ -510,6 +710,8 @@ static void draw_prim(GXPrimitive prim, GXVtxFmt fmt, u16 vtxCount, ByteReader&
+ 
+   // Push raw vertex data to buffer. Merged draws must remain contiguous with the previous range.
+   const auto vertexData = reader.take(totalVtxBytes);
++  spike_maybe_dump_draw(prim, fmt, vtxCount, vertexData.data(), vtxSize,
++                        reader.offset() - totalVtxBytes - 3);
+   gfx::Range vertRange = gfx::push_verts(vertexData.data(), vertexData.size(), canMerge ? 0 : 4);
+ 
+   // Try to merge with previous draw call
+
+-- 
+AP-AN also added a z-convention probe to lib/gx/regs.cpp (xf_load_projection). It is inert unless
+TLS_AURORA_Z_REMAP is set, and it is recorded here as a hand-written hunk because 0004 already owns
+the rest of that file's diff:
+
+diff --git a/lib/gx/regs.cpp b/lib/gx/regs.cpp
+--- a/lib/gx/regs.cpp
++++ b/lib/gx/regs.cpp
+@@ -955,6 +955,17 @@ void xf_load_projection(const u8* data) noexcept {
+     proj.m1[2] = p3;
+     proj.m3[2] = -1.0f;
+   }
++  /* AURORA-SPIKE (handover 5c.46 AP-AN): probe the z convention. GX's NDC z range and wgpu's
++   * clip-space z range are not the same thing, and this probe exists to measure which remap (if
++   * any) a replayed hardware stream needs. TLS_AURORA_Z_REMAP: 0 = 0.5*(z+w), 1 = 0.5*(w-z),
++   * 2 = (w-z). Inert unless set. */
++  if (const char* zr = std::getenv("TLS_AURORA_Z_REMAP")) {
++    const int mode = std::atoi(zr);
++    for (int i = 0; i < 4; ++i) {
++      const float z = proj[i][2], w = proj[i][3];
++      proj[i][2] = mode == 1 ? 0.5f * (w - z) : (mode == 2 ? (w - z) : 0.5f * (z + w));
++    }
++  }
+   g_gxState.dirty |= DirtyUniform;
+ }

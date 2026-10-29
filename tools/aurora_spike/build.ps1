@@ -12,6 +12,7 @@ param(
     [string]$Root = 'G:\Program\aurora-spike',
     [string]$AuroraRef = '505b5eb',
     [switch]$Tests,
+    [switch]$ReplayStaging,
     [string]$Replay = '',
     [string]$Out = 'aurora_frame.ppm',
     [string]$ExtraArgs = ''
@@ -37,8 +38,14 @@ try {
     & git fetch --depth 1 origin $AuroraRef 2>$null
     & git checkout --quiet $AuroraRef
     if ($LASTEXITCODE -ne 0) { Write-Host "warning: could not check out $AuroraRef; using $(git rev-parse --short HEAD)" }
-    # 2. Apply the MinGW patches (idempotent: --check first).
+    # 2. Apply the MinGW patches (idempotent: --check first). 0005 raises the staging planes to
+    #    sizes a heavy replay needs and breaks aurora's own null-backend tests, so it is applied
+    #    only with -ReplayStaging (handover 5c.46 AP-AM 6b).
     Get-ChildItem (Join-Path $spikeDir 'patches') -Filter *.patch | Sort-Object Name | ForEach-Object {
+        if ($_.Name -like '0005*' -and -not $ReplayStaging) {
+            Write-Host "skipped $($_.Name) (replay-only; pass -ReplayStaging to apply)"
+            return
+        }
         & git apply --check $_.FullName 2>$null
         if ($LASTEXITCODE -eq 0) {
             & git apply $_.FullName
