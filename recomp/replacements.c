@@ -2611,6 +2611,39 @@ static int tls_scene_sm_probe_on(void) {
     if (s < 0) s = getenv("TLS_SCENE_SM_PROBE") ? 1 : 0;
     return s;
 }
+
+/* CHAPTER-1 ENTRY CHAIN (5c.46 AP-AH). The outer state word +0x5538 can become 1
+ * in exactly ONE place in the whole image: 0x8036F5D8, inside fn_8036F268, as
+ *     0x8036F5C8  lwz     r0, 0x54F0(r31)   ; requested state
+ *     0x8036F5CC  li/addic r3, r0 + 1
+ *     0x8036F5D8  stw     r3, 0x5538(r31)   ; outer state = request + 1
+ * so request 0 -> state 1 (start the scene), request 1 -> state 2 (loading),
+ * request 2 -> state 3. The other ten stores to +0x5538 are the state machine's
+ * own transitions (0x80368458..0x80369A2C), and none of them stores 1.
+ * The request word is written by two leaf helpers - fn_80370B78 (request 1) and
+ * fn_80370BD0 (request 2) - and zeroed by the constructor at 0x80365970.
+ * This probe reports the chain instead of inferring it: the consumer's entry (with
+ * the request it will consume), both request setters (with their caller's lr), the
+ * four callers of the consumer, and the global the two direct call sites pass as
+ * `this` (`*(r13-25232)` = 0x8087F010). Inert unless TLS_ENTRY_PROBE=1. */
+static int tls_entry_probe_on(void) {
+    static int s = -1;
+    if (s < 0) s = getenv("TLS_ENTRY_PROBE") ? 1 : 0;
+    return s;
+}
+
+static void tls_entry_line(CPUState* ctx, const char* what, u32 obj, u32 a, u32 b) {
+    extern int g_runner_current_frame;
+    u32 req = 0xFFFFFFFFu, st = 0xFFFFFFFFu, ph = 0xFFFFFFFFu;
+    if (obj >= 0x80000000u && obj < 0x83000000u && resolve_guest_pointer(ctx, obj)) {
+        req = mem_read32(ctx, obj + 0x54F0);
+        st  = mem_read32(ctx, obj + 0x5538);
+        ph  = mem_read32(ctx, obj + 0x54E4);
+    }
+    printf("[TLS Entry] f=%d %-20s obj=0x%08X req(54F0)=0x%08X state(5538)=0x%08X ph(54E4)=0x%08X a=0x%08X b=0x%08X lr=0x%08X\n",
+           g_runner_current_frame, what, obj, req, st, ph, a, b, ctx->lr);
+    fflush(stdout);
+}
 static u32 g_ssm_task = 0;
 static u32 g_ssm_state = 0xFFFFFFFFu;
 static u32 g_ssm_phase = 0xFFFFFFFFu;
@@ -6217,7 +6250,35 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
          * through dolrecomp_call, so each entry is observed here exactly once
          * per dispatch and the counters show which state body actually ran.
          * Inert unless TLS_SCENE_SM_PROBE=1. */
-        case 0x8036A110: tls_scene_sm_hit(0); return 0;
+        case 0x8036A110: {
+            tls_scene_sm_hit(0);
+            if (tls_entry_probe_on()) {
+                /* The two direct callers of the consumer (0x803710F4, 0x805201B8)
+                 * pass `*(r13-25232)` as `this`, i.e. the global at 0x8087F010. If
+                 * that global is null or holds a different object, the consumer
+                 * either faults or writes the outer state on something that is not
+                 * this task - which looks exactly like "never called" to a watch on
+                 * the state word. Print it here on every change, together with the
+                 * pending request, so attribution and value come from one line. */
+                extern int g_runner_current_frame;
+                static u32 s_key = 0xFFFFFFFFu;
+                u32 obj = ctx->gpr[3];
+                u32 g   = mem_read32(ctx, ctx->gpr[13] - 25232u);
+                u32 req = obj ? mem_read32(ctx, obj + 0x54F0) : 0xFFFFFFFFu;
+                u32 st  = obj ? mem_read32(ctx, obj + 0x5538) : 0xFFFFFFFFu;
+                u32 key = req * 131u + st * 7919u +
+                          (g == obj ? 0x40000000u : 0u) + (g ? 0x20000000u : 0u);
+                if (key != s_key) {
+                    s_key = key;
+                    printf("[TLS Entry] f=%d STATE0 task=0x%08X req(54F0)=0x%08X state(5538)=0x%08X global(8087F010)=0x%08X %s\n",
+                           g_runner_current_frame, obj, req, st, g,
+                           (g == obj) ? "GLOBAL==TASK"
+                                      : (g ? "GLOBAL!=TASK" : "GLOBAL=0"));
+                    fflush(stdout);
+                }
+            }
+            return 0;
+        }
         case 0x8036832C: tls_scene_sm_hit(1); return 0;
         case 0x8036881C: tls_scene_sm_hit(2); return 0;
         case 0x80368864: tls_scene_sm_hit(3); return 0;
@@ -6227,6 +6288,44 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         case 0x8036919C: tls_scene_sm_hit(7); return 0;
         case 0x803691EC: tls_scene_sm_hit(8); return 0;
         case 0x80369454: tls_scene_sm_hit(9); return 0;
+
+        /* ---- Chapter-1 ENTRY chain, see tls_entry_line() above. TLS_ENTRY_PROBE=1. ---- */
+        case 0x8036F268: {   /* the ONLY writer that can produce state 1: state = request + 1 */
+            if (tls_entry_probe_on()) {
+                static int s_n = 0;
+                if (++s_n <= 40)
+                    tls_entry_line(ctx, "CONSUMER", ctx->gpr[3], ctx->gpr[8], ctx->gpr[10]);
+            }
+            return 0;
+        }
+        case 0x80370B78: {   /* request helper: +0x54F0 = 1  (lr names the requester) */
+            if (tls_entry_probe_on()) {
+                static int s_n = 0;
+                if (++s_n <= 40) tls_entry_line(ctx, "REQUEST=1", ctx->gpr[3], ctx->gpr[4], 0);
+            }
+            return 0;
+        }
+        case 0x80370BD0: {   /* request helper: +0x54F0 = 2 */
+            if (tls_entry_probe_on()) {
+                static int s_n = 0;
+                if (++s_n <= 40) tls_entry_line(ctx, "REQUEST=2", ctx->gpr[3], ctx->gpr[4], 0);
+            }
+            return 0;
+        }
+        /* The four functions that call the consumer at all (0x803710F4/0x80371128 in
+         * fn_80370F8C, 0x803712A0 in fn_80371164, 0x8039D974 in fn_8039D930,
+         * 0x805201B8 in fn_8052009C). If none of these runs, the consumer is
+         * unreachable no matter what the request says. */
+        case 0x80370F8C:
+        case 0x80371164:
+        case 0x8039D930:
+        case 0x8052009C: {
+            if (tls_entry_probe_on()) {
+                static int s_n = 0;
+                if (++s_n <= 20) tls_entry_line(ctx, "CALLER", ctx->gpr[3], ctx->gpr[4], 0);
+            }
+            return 0;
+        }
 
         /* The phase-0 success gate, read at its return point. 0x8036A570 is
          * `bl 0x801231D0` and 0x8036A574 is `cmpwi r3, 0`, so when the callee

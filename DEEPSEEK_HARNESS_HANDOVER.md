@@ -20,6 +20,15 @@ runner was launching, after several back-to-back 10-minute runs with per-batch f
 
 ### WHERE THIS STANDS (written at the end of the AP-AE round - read this before anything below)
 
+> **NEWER THAN THIS BLOCK: §5c.46 AP-AH (at the very end of the file).** The writer of outer state 1 is found and
+> enumerated (`0x8036F5D8`, `state = *(task+0x54F0) + 1`, the only site in the image that can store 1) and measured
+> to be **never called** in a whole Chapter-1 run — together with all four of its callers, which are named menu /
+> game-over tasks (GameOverTask, NewCampPartsTop, NewCampPartsMapSelect, +2 unnamed). The run that proves it also
+> shows the field carrying a *pending* request of 2 for state 3 with the inner phase at 8 and the invariant scene's
+> exact vertex counts, so **state 0 may be the correct resting state of a loaded field**, not a stall. AP-AH also
+> records that `0x8036A110` (state 0's handler) is not dispatchable, so the SceneSM `hits[0]` counter reads 0 by
+> construction. Read AP-AH before spending a run on the state word.
+
 **Done and verified, on the current binary:**
 * **The hero's five model textures bake real art.** `TLS_EFB_ORDER=staging` is the DEFAULT (`recomp/gx_pipeline.c`)
   and `GXDrawDone` (0x806140C0) now flushes queued EFB copies (`gfx_flush_gx_now()` in `recomp/gfx_d3d11.c`).
@@ -12326,3 +12335,77 @@ capture artifact: the same instrument shows change as soon as the game actually 
 **Remaining question, now narrow: who is supposed to write state 1, and why does it not happen?**
 The candidates are the sequencer/event path that owns the Game sequence, and the pad-manager readiness flag that
 state 1 itself tests - both of which the next session can probe without another round of archaeology.
+
+---
+
+### AP-AH. THE STATE-1 WRITER IS FOUND, AND IT HAS NO LIVE OWNER IN CHAPTER 1
+
+**1. The writer, by enumeration rather than by grep.** Scanning the whole image for every `stw ...,0x5538(reg)`
+gives exactly 11 sites. Ten are the state machine's own transitions (`0x80368458`, `0x803687D8`, `0x8036885C`,
+`0x80368B7C`, `0x80368DB0`, `0x803690D8`, `0x80369188`, `0x803691E4`, `0x80369448`, `0x80369A2C`) and **none of
+them can store 1**: `0x80368B7C` stores `+0x54E4 + 4`, `0x80369448` stores `+0x5534 + 9`, the rest store literals
+2/3/4/5/… or the `r4` argument of the exit path. The only site that can produce 1 is `0x8036F5D8` in
+`fn_8036F268`:
+
+```
+0x8036F5C8  lwz     r0, 0x54F0(r31)    ; requested state
+0x8036F5CC  addic.  r3, r0, 1
+0x8036F5D8  stw     r3, 0x5538(r31)    ; OUTER STATE = request + 1
+```
+
+so request 0 → state 1, request 1 → state 2, request 2 → state 3. The request word itself has eight writers: the
+constructor (`0x80365970` = 0), two leaf helpers — `fn_80370B78` (`0x80370B80` = 1) and `fn_80370BD0`
+(`0x80370BE4` = 2) — the phase machine (`0x8036A47C`, `0x8036A7A4`, `0x8036B12C` = 0), `0x803676E8` and
+`0x80369AF0`. **That is the answer to "who is supposed to write state 1": `fn_8036F268` at 0x8036F5D8, and nobody
+else.**
+
+**2. Measured: `fn_8036F268` is never called.** One 2 600-frame run with `TLS_ENTRY_PROBE=1` (input script set,
+`SetNextSequence('Game') @1647` confirmed, frame-2280 telemetry identical to the invariant run's: `223818 vtx`,
+`51 batches`, `PC 0x800917FC`) printed **zero** hits for the consumer `0x8036F268`, for its two request helpers
+`0x80370B78`/`0x80370BD0`, and for **all four** of its callers `0x80370F8C` (sites `0x803710F4`, `0x80371128`),
+`0x80371164` (`0x803712A0`), `0x8039D930` (`0x8039D974`), `0x8052009C` (`0x805201B8`). The same run's positive
+controls were live (SceneSM probe 125 lines, `TLS_NAND_PROBE` 87 lines), and the dispatch path is proven to see both
+`bl` and `bctr` targets (the generated code sets `ctx->pc` and returns; `dolrecomp_run_blocks` then calls
+`dolrecomp_call`). So this is not "gated off" — **the entry is never reached.**
+
+**3. Every owner is a menu / game-over path.** The four callers are reached only from table-dispatched task
+methods, and reading the descriptors names them (name pointer at descriptor start + 0x28):
+
+| caller | called only by | descriptor | name |
+|---|---|---|---|
+| `fn_80370F8C` | `fn_803775DC` (+ `fn_80529C74`) | `0x8078A4C0` / `0x8079376C` | **GameOverTask** / **NewCampPartsTop** |
+| `fn_8052009C` | `fn_8051F7D4` | `0x80793534` | **NewCampPartsMapSelect** |
+| `fn_80371164` | `fn_803AB328` | `0x8074F5E0` | (unnamed) |
+| `fn_8039D930` | — (table `0x8074F0E8`, beside `SE_CGCS1_014_1`) | — | SE/event table |
+
+**There is no Chapter-1-start owner among them.** The state-1 entry is not waiting on a condition; it has no live
+caller in this scenario at all.
+
+**4. The reframe this forces (read before acting on AP-AG).** In the same run the task (`obj=0x811671C0`) already
+carries **request `+0x54F0 = 2`** — a pending request that would put it in **state 3, not 1** — while the *inner*
+phase machine (`+0x54E4`) sits at **8** and the scene draws the invariant run's exact per-frame vertex counts. That
+is the shape of a **loaded, idling field**, not of a field that never started. So probe the opposite hypothesis
+next: that **outer state 0 is the correct resting state for a loaded Chapter-1 field**, and that AP-AG's "force
+state 1" moved a loaded scene *back out* of the field (which is exactly why it ended on the loading screen with
+`684 vtx`). Under that reading the missing player/HUD is upstream of this state word, not behind it, and the four
+named owners above are restoration paths (return-from-menu / game-over restart) rather than the start path.
+
+**5. Instrument hazard (cost a run this session).** `0x8036A110` — the state-0 handler — is **not dispatchable**.
+The only control transfer to it is the conditional branch `0x80368304 bc bo=12 bi=2 -> 0x8036A110` (a local `beq`
+at the top of `fn_80368280`), which the recompiler emits as an internal goto, so `dolrecomp_dispatch_replacement`
+never sees that pc. Consequently a replacement `case 0x8036A110:` is dead code **and the SceneSM probe's `hits[0]`
+counter can never be non-zero** (`prev_hits=0,0,...` in every log, by construction, not by evidence of a stall).
+Measure state 0 at `0x80368280` (the update entry, which *is* dispatched — `bl`/`bctr` targets are) instead.
+
+**6. New tool + probe.** `tools/dol_callers.py <addr> ... [--funcs]` lists direct `bl`/`b` call sites and any
+lis+addi / lis+ori materialisation of an address; it is what turned "five callers" into the named owners above
+(`dol_xref.py` only resolves *data* references, so `bl` targets were invisible to it). `TLS_ENTRY_PROBE=1`
+(`recomp/replacements.c`) prints the consumer's entry (with the request it will consume), both request setters, the
+four callers, and — at `0x80368280` — the task's (request, state) on change. Inert unless set: `tools/invariant.ps1`
+**PASS** at `C5447108…`, attempt 1, save created (`1 348 992` / `29 344`), 0 changes to `src/`.
+
+**7. The next question, one run.** Hook the five owners' entries (`0x803775DC`, `0x80529C74`, `0x8051F7D4`,
+`0x803AB328`, `0x8039D930`) and `0x80368280`: if none of them runs while the field idles at state 0 with request 2,
+then the outer state machine is a *scene-transition* machine that Chapter-1 gameplay does not use, and the search
+must leave `+0x5538` altogether — start from "the field is loaded and idling; what event should the player's pad
+input drive?" rather than from the state word.
