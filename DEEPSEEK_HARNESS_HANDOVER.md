@@ -12128,3 +12128,24 @@ after the first call. **The stall is therefore a state-machine transition that n
 thread - and state 0 is exactly the state the dossier already documents (`0x80368304`'s `beq` lands on
 `0x8036A110`, handover 5c.26). The next session should read what state 0 waits on before it moves to state 1:
 the countdown at `+0x5748` being permanently 0 is the first thing to explain.
+**7. WHY NOTHING IS PLAYABLE: the field state word is written ONCE and never again.** `TLS_WATCH_ADDR=0x8116C6F8`
+- the Chapter-1 task's state word (`0x811671C0 + 0x5538`) - reports **exactly two writes in a whole 4 400-frame
+run**:
+
+```
+WATCH 0x8116C6F8: 0x00000000 -> 0x385F3035 by block pc=0x80006368 lr=0x8046DCF0 (frame 145)  <- arena init, not yet the task
+WATCH 0x8116C6F8: 0x385F3035 -> 0x00000000 by block pc=0x803659A0 lr=0x80365A00 (frame 1648)  <- the Game hand-over zeroes it
+```
+
+and then **nothing**, for the rest of the run. So the state machine is never *entered*: it is not that state 0
+loops forever by its own logic, it is that no code ever writes a non-zero state into it.
+**Where the transition must come from.** In the code, `+0x5538` is written by the task's own later handlers
+(`src/game_system_wpad_motor.c`, states 2 and 3, which is how 2 -> 3 works) and once from the pad module
+(`src/game_system_kpad_read.c:1021`, which sets it to 1 at label `...0C9C`). I tested that pad function,
+`fn_8036F268`, with a control in the same run: **0 dispatches** against the control's 60, so it does not run
+either. But its two call sites (`game_net_rank_board.c:1618`, `game_system_kpad_calib.c:1119`) both pass
+`r10=0x12` and a global, so it may be setting a *different* object's `+0x5538` - the object identity is not
+proven, and the honest statement is: **no writer of the Chapter-1 task's state word runs after frame 1648.**
+**Next session: find the caller that is supposed to start the field** - the entry that sets state 1 - rather than
+reading state 0's body further (its body completes every frame and does not touch the state). The watch on
+`0x8116C6F8` is the instrument: it names the block pc and lr of any future writer, and today it names none.
