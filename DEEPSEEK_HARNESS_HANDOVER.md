@@ -18,6 +18,37 @@ every run (see AP-P item 9). **Check free RAM before a run too**: this machine c
 runner was launching, after several back-to-back 10-minute runs with per-batch framebuffer readbacks (a probe-free
 1 960-frame run now takes 55 s - use probes only on the frame you need).
 
+### WHERE THIS STANDS (written at the end of the AP-AE round - read this before anything below)
+
+**Done and verified, on the current binary:**
+* **The hero's five model textures bake real art.** `TLS_EFB_ORDER=staging` is the DEFAULT (`recomp/gx_pipeline.c`)
+  and `GXDrawDone` (0x806140C0) now flushes queued EFB copies (`gfx_flush_gx_now()` in `recomp/gfx_d3d11.c`).
+  With a clean environment the 1915 bake of `0x92AEAEC0` is varied CMPR art (`00004ACB/3A2B4CAB/428B4ACC`)
+  instead of `00000000 FFFFFFFF`, and `docs/evidence/host_5500_hero_visible_apZ.png` shows the character rendered
+  in the cave where it used to be absent. Zero `exit(0)` calls in a 5 600-frame run.
+* **`tools/invariant.ps1` PASS** at `C5447108...` (re-recorded when the hero became visible; frame 3500 is the NEW
+  TUTORIAL menu now, and the old `D3329E35...`, the reason and the `TLS_EFB_ORDER=none` escape hatch are all in the
+  script's comment).
+* **The page gate is exact**: `rect_stats.py` on the page capture gives crest `(204.9,180.9,121.1) 11.2 % dark` and
+  band `(229.8,200.6,127.3) 2.3 % dark`, and the capture's own sha is `DEED3E37...` - identical to the capture
+  taken before the copy-order change.
+* 0 changes to `src/` throughout.
+
+**NOT done: the HUD, and "playable".** Both are blocked by one measured fact: **the Chapter-1 field never starts.**
+The evidence chain, all in this dossier's later sections:
+1. the field task `0x811671C0` sits in **state 0**, its `+0x5744` counter climbing but `+0x5538` never written
+   after frame 1648 (AP-AC6/7);
+2. frames 5500 and 6200 are **pixel-identical** and gameplay input changes nothing (AP-AC4/5);
+3. the party/field/player-status modules are **never entered**; only the compass/marker HUD runs (AP-AC);
+4. the guest spends **~79 % of each frame in the OS idle loop** with "321000 blocks with no output" (AP-AE) -
+   so it is *waiting*, not working;
+5. the on-disk code path that should set the state to 1 is not running, and the one external `+0x5538` writer
+   in the tree belongs to a different object (AP-AD/AC7).
+
+**The next session starts at the wake, not the draw:** which event should move the field out of state 0, and does
+the host deliver it? Read the runner's own `tls_dump_sleep_queues`/`tls_dump_wake_queues` shutdown dumps first
+(they are in every log), then AP-AE's probe list. Do not look for a HUD draw bug until the field advances - a HUD
+cannot appear while the field task never leaves state 0.
 ### NEXT SESSION - READ THIS FIRST (written at the end of the AP-Q session)
 
 > **AP-R CORRECTS ITEMS 2, 4 AND 5 BELOW - read §5c.46 AP-R before acting on them.** In one line: the
