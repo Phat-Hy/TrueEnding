@@ -13258,12 +13258,58 @@ it is still non-deterministic with nothing else running, the invariant has to be
 (the frame *relative to* the `Game` handover, or a frame where the guest's own state is pinned) instead of an
 absolute frame number; (3) `tools/page_run.ps1` was **not** run this session and is likewise unverified.
 
-**13. Definition of done, stated honestly.** Option (a) is **not** met: aurora does not yet render the cave frame
-correctly (68 % of one copy's texels are still zero, the end-of-frame readback is unreliable, and the migration
-plan is written but the gate has not been re-recorded). Option (b) **is** met, and better than AP-AM's version
-of it: the blocker is no longer "aurora renders nothing", it is three named adapter translations - the +342
-view bias (scissor and viewport) and texture objects - with the frame already drawing, plus one instrument
-limit (end-of-frame EFB readback above ~70 k commands) and one measurement still owed (the 68 % empty texels).
+**12b. The colour capture was lying; the frame renders. Criterion 2 is CLEARED through a copy probe.** The
+end-of-frame EFB readback (`AuroraReadbackCaptureColor`) is not trustworthy for a frame this size: the in-frame
+job (key 3) usually never delivers, the harness then falls back to a capture requested on the *next* (empty)
+frame, and the same command budget measured **39.07 once and 0.00 the next run** - which is why item 8's "the
+frame ends black" could not be believed, and why a bisect between 61 250 and 61 500 commands first looked like a
+hard transition and then reproduced as 39.07 on both sides. The fix is to read the EFB through the path the
+guest uses: `--probe-copy` appends one real EFB copy (full 640x448, RGBA8, clear bit off) to the end of the last
+replayed chunk and reads it with `capture_copies`/`get` - the mechanism criterion 3 already verified byte for
+byte. Result for `window.tlscap` frame 3400:
+
+| measurement | value |
+|---|---|
+| probe copy payload | 1 146 880 bytes, mean byte **94.61** |
+| de-tiled 640x448 image mean RGB | **(41.98, 41.94, 39.52)** |
+| non-black pixels | **98.0 %** (near-black < 8: 4.4 %) |
+| what the image shows | **Gurgan Cave**: rock walls, water, and the hero mid-swing with the sword drawn (`logs_ap/an_probe40.png`) |
+
+So **criterion 2 is cleared**: aurora renders the cave frame from the captured GX stream, with real content, at
+the full 640x448 size. The image is not pixel-identical to this layer's - nor should it be, the layer carries
+three compensation hacks - but it is the scene, correctly textured, with the character visible.
+
+**12c. A fifth adapter class, found by replaying a second capture.** A fresh run captured frames 2600-2601
+(`build/recomp/gxcap/cave2600/gxfifo.tlscap`, 2 frames, 2 417 569 FIFO bytes, 2 copies) together with the
+layer's same-frame screenshot, so a comparison can be made from ONE run instead of two. That capture immediately
+hit a real aurora FATAL: **`[aurora FATAL aurora::gfx] invalid wrap mode 3`**. The guest writes 3 in
+`GX_TEXMODE0` (BP 0x80) - reserved on hardware, which defines only CLAMP/REPEAT/MIRROR - and aurora is strict
+about it, which kills the whole replay. The adapter maps the reserved value to MIRROR and counts it
+(`1 reserved-wrap fix` in frame 2600, 0 in frame 3400).
+
+**12d. Two things the same-frame comparison showed, both worth recording.**
+
+* **aurora resolves an EFB copy at pass end, not at the copy's stream position.** At vmark 61 548 of frame 2600
+  the *same* guest copy (640x448 RGB565, dst 0x917A9AA0) holds the cave in the layer (mean byte 52.76, 32.3 %
+  zero bytes) and a white-out in aurora (mean byte 72.23, 41.9 % zero; 14.14 % of bytes identical, 16 565 of
+  17 920 tiles different). The frame's *end* is a white flash in both - the layer's own screenshot of that frame
+  is pure white 255 - so the layer serviced the copy at its stream position while aurora serviced it after the
+  flash. A copy readback is therefore **not time-aligned** between the two implementations, and every mid-frame
+  copy comparison has to say so.
+* **A fresh run's frame 2600 is a white flash and its frame 3400 is the NEW TUTORIAL page**, while the *captured*
+  frame 3400 (recorded by an earlier run) is the cave. The sequence timeline moves between runs - the drift AP-P
+  measured when host load moved the title hand-over from 1647 to ~700 - so a same-frame comparison has to
+  capture and screenshot inside one run, which is what `cave2600` now does.
+
+**13. Definition of done, stated honestly.** Option (a) is **half met, and the half that mattered is done**:
+aurora renders the cave frame (item 12b - 640x448, mean RGB 41.98, 98 % non-black, the scene recognisable) and
+the migration plan is written with **five** measured register classes. What is still missing from (a): a
+*same-run* layer/aurora frame pair to put a `compare.py` number on (12d's drift is why), the copy readback is not
+time-aligned between the implementations (12d), and the invariant/page gate has not been re-recorded - item 12
+says it is currently failing *and* non-deterministic on an untouched binary, so it cannot record anything until
+that is fixed first. Option (b) **is** met and then some: the blocker was never "aurora renders nothing"; it was
+four adapter translations plus a fifth (the reserved wrap mode) and one instrument that lied (the colour
+capture).
 The fallback stays as AP-AM stated it: the hand-rolled layer keeps rendering, and the per-bug order is unchanged
 (composite tail, then CMPR alpha, then XF texgen 2..7) - but the migration is now *live* rather than speculative:
 the same capture draws a picture in aurora, and every remaining difference is a state translation a recompiler

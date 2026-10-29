@@ -154,6 +154,7 @@ uint64_t g_invalVtx = 0;      /* CP 0x48: aurora drops every cached array range 
 uint64_t g_arrayBytes = 0;    /* what the adapter asks aurora to upload per invalidation */
 uint64_t g_scissorWrites = 0; /* BP 0x20/0x21/0x59 translated through the +342 view bias */
 uint64_t g_texObjs = 0;       /* GX_AURORA_LOAD_TEXOBJ commands synthesised from BP image0/image3 */
+uint64_t g_wrapFix = 0;       /* reserved GX wrap mode 3 mapped to MIRROR (aurora FATALs on 3) */
 int g_scissorDumps = 0;
 int g_maxCmds = -1;
 
@@ -474,6 +475,34 @@ void emit_copy_state(std::vector<uint8_t>& out, const CopyRegs& regs, uint32_t e
   append_u64(out, static_cast<uint64_t>(regs.dstAddr));
 }
 
+/* The EFB-copy payload is the hardware's 4x4 tile layout: per 64-byte tile, 32 bytes of (A,R)
+ * pairs then 32 bytes of (G,B) pairs, tiles in row-major order - the same layout copycmp.py and the
+ * synthetic verifier check. De-tile to a PPM so the picture can be looked at. */
+void write_probe_ppm(const char* path, const uint8_t* bytes, uint32_t w, uint32_t h) {
+  FILE* f = std::fopen(path, "wb");
+  if (!f) {
+    std::fprintf(stderr, "[replay] cannot write %s\n", path);
+    return;
+  }
+  std::fprintf(f, "P6\n%u %u\n255\n", w, h);
+  const uint32_t tilesX = w / 4;
+  for (uint32_t y = 0; y < h; ++y) {
+    for (uint32_t x = 0; x < w; ++x) {
+      const size_t tile = static_cast<size_t>(y / 4) * tilesX + (x / 4);
+      const uint8_t* t = bytes + tile * 64;
+      const uint32_t idx = ((y % 4) * 4 + (x % 4)) * 2;
+      const uint8_t r = t[idx + 1];
+      const uint8_t g = t[32 + idx + 0];
+      const uint8_t b = t[32 + idx + 1];
+      std::fputc(r, f);
+      std::fputc(g, f);
+      std::fputc(b, f);
+    }
+  }
+  std::fclose(f);
+  std::printf("[replay] wrote %s (%ux%u, de-tiled from the EFB copy payload)\n", path, w, h);
+}
+
 /* Vertex-format mirror so the adapter can walk to the next command. The layout is ported from the
  * logic the hand-rolled layer already validated (recomp/gx_pipeline.c get_vtx_attr_size) and
  * cross-checked against aurora's own decode (lib/gx/regs.cpp cp_vat_a/b/c). Attribute indices:
@@ -769,6 +798,32 @@ bool rewrite_frame(const uint8_t* in, uint32_t size, uint32_t begin, uint32_t li
         const uint8_t mapId = static_cast<uint8_t>((low & 3) + (high ? 4 : 0));
         const uint8_t kind = static_cast<uint8_t>(low >> 2);
         if (kind == 0) {
+          /* THE FIFTH REGISTER CLASS (small): wrap mode 3 is reserved on hardware - the GX has
+           * CLAMP (0), REPEAT (1) and MIRROR (2) only - but this game writes 3 in GX_TEXMODE0 for
+           * some maps. aurora is strict and FATALs on it ("invalid wrap mode 3"), which kills the
+           * whole replay; the picture is what matters, so map the reserved value to MIRROR (its
+           * closest defined neighbour) and count it. Measured: 5c.46 AP-AN, frames 2600-2601. */
+          uint32_t mode0 = val;
+          bool fixed = false;
+          if ((mode0 & 3u) == 3u) {
+            mode0 = (mode0 & ~3u) | 2u;
+            fixed = true;
+          }
+          if (((mode0 >> 2) & 3u) == 3u) {
+            mode0 = (mode0 & ~0xCu) | 0x8u;
+            fixed = true;
+          }
+          if (fixed) {
+            if (g_wrapFix++ < 4) {
+              std::printf("[replay] wrap mode 3 (reserved) in BP 0x%02X 0x%06X -> 0x%06X (mapped to MIRROR)\n", reg, val,
+                          mode0);
+            }
+            out.push_back(0x61);
+            append_u32(out, (uint32_t(reg) << 24) | (mode0 & 0xFFFFFFu));
+            st.tex[mapId].mode0 = mode0;
+            i += 5;
+            continue;
+          }
           st.tex[mapId].mode0 = val;
         } else if (kind == 2) {
           st.tex[mapId].image0 = val;
@@ -1126,6 +1181,8 @@ int main(int argc, char** argv) {
   uint32_t copyDst = 0, copyW = 80, copyH = 56, copyFmt = 6, copySize = 0;
   const char* copyOut = nullptr;
   bool rawStream = false, verbose = false, parseOnly = false, syntheticCopy = false;
+  bool probeCopy = false;
+  const char* probePpm = nullptr;
   for (int i = 3; i < argc; ++i) {
     const char* a = argv[i];
     if (std::strcmp(a, "--fb") == 0 && i + 1 < argc) {
@@ -1160,6 +1217,11 @@ int main(int argc, char** argv) {
       syntheticCopy = true;
     } else if (std::strcmp(a, "--max-cmds") == 0 && i + 1 < argc) {
       g_maxCmds = std::atoi(argv[++i]);
+    } else if (std::strcmp(a, "--probe-copy") == 0) {
+      probeCopy = true;
+    } else if (std::strcmp(a, "--probe-ppm") == 0 && i + 1 < argc) {
+      probePpm = argv[++i];
+      probeCopy = true;
     } else if (std::strcmp(a, "--verbose") == 0) {
       verbose = true;
     } else if (std::strcmp(a, "--raw") == 0) {
@@ -1219,6 +1281,37 @@ int main(int argc, char** argv) {
       std::printf("[replay] wrote %s (%u bytes: the host layer's bytes for this copy)\n", hostPath.c_str(),
                   rec.size);
     }
+  }
+
+  /* AP-AN: an EFB probe copy issued at the END of the last replayed frame. The colour capture
+   * (`AuroraReadbackCaptureColor`) is not reliable for a heavy frame - the in-frame job often does
+   * not deliver and the harness falls back to reading the NEXT frame's EFB, which is how the same
+   * command budget measured 39.07 once and 0.00 the next time. A copy is the path the guest itself
+   * uses and it has been byte-verified (criterion 3), so the final picture is read through a copy
+   * into a scratch readback key instead. */
+  constexpr uint32_t PROBE_COPY_DST = 0x90001000;
+  constexpr uint32_t PROBE_COPY_W = 640, PROBE_COPY_H = 448;
+  std::vector<uint8_t> probeCopyCmd;
+  if (probeCopy) {
+    CopyRegs regs{};
+    regs.srcX0 = 0;
+    regs.srcY0 = 0;
+    regs.srcX1 = PROBE_COPY_W - 1;
+    regs.srcY1 = PROBE_COPY_H - 1;
+    regs.dstAddr = PROBE_COPY_DST;
+    regs.pitch = (PROBE_COPY_W * 4u) / 8u;
+    regs.haveSrc = true;
+    const uint32_t exec = 12u << 3; /* tpf 12 = format 6 (RGBA8), clear bit off */
+    emit_copy_state(probeCopyCmd, regs, exec);
+    probeCopyCmd.push_back(0x61);
+    append_u32(probeCopyCmd, (uint32_t(0x52) << 24) | (exec & 0xFFFFFFu));
+    copyDst = PROBE_COPY_DST;
+    copyW = PROBE_COPY_W;
+    copyH = PROBE_COPY_H;
+    copyFmt = 6;
+    copySize = PROBE_COPY_W * PROBE_COPY_H * 4u;
+    if (!copyOut) copyOut = "aurora_probe_copy.bin";
+    std::printf("[replay] probe copy armed: full EFB 640x448 RGBA8 -> readback key 0x%08X\n", PROBE_COPY_DST);
   }
 
   if (parseOnly) {
@@ -1349,6 +1442,13 @@ int main(int argc, char** argv) {
           std::printf("[replay] in-frame colour capture: %s (%ux%u)\n",
                       colorRequestedInFrame ? "yes" : "NO", captureW, captureH);
         }
+        if (isLast && probeCopy && !copyRequested) {
+          aurora::gx::fifo::write_data_grow(probeCopyCmd.data(), static_cast<uint32_t>(probeCopyCmd.size()));
+          const AuroraReadbackCopySrc src{2, reinterpret_cast<const void*>(static_cast<uintptr_t>(copyDst))};
+          copyRequested = AuroraReadbackCaptureCopies(copyStream, &src, 1) == GX_TRUE;
+          std::printf("[replay] probe copy issued at the end of the last chunk: capture %s (%u bytes expected)\n",
+                      copyRequested ? "accepted" : "REJECTED", static_cast<uint32_t>(copyPayload.size()));
+        }
         aurora_end_frame();
       }
       ++replayed;
@@ -1356,9 +1456,10 @@ int main(int argc, char** argv) {
     }
   }
   std::printf("[replay] replayed %u frame(s), adapter translated %u EFB copy command(s), %llu scissor write(s), "
-              "%llu texobj(s)%s\n",
+              "%llu texobj(s), %llu reserved-wrap fix(es)%s\n",
               replayed, rewrittenCopies, (unsigned long long)g_scissorWrites,
-              (unsigned long long)g_texObjs, rawStream ? " (raw stream: no translation)" : "");
+              (unsigned long long)g_texObjs, (unsigned long long)g_wrapFix,
+              rawStream ? " (raw stream: no translation)" : "");
   std::printf("[replay] stream parse: %llu draw(s), %llu vertices\n", (unsigned long long)g_draws,
               (unsigned long long)g_vertices);
 
@@ -1369,7 +1470,7 @@ int main(int argc, char** argv) {
       colorRequested = AuroraReadbackCaptureColor(colorStream, 1, &captureW, &captureH) == GX_TRUE;
       std::printf("[replay] colour capture requested (frame after the replay): %s (%ux%u)\n",
                   colorRequested ? "yes" : "NO", captureW, captureH);
-      if (copyDst != 0) {
+      if (copyDst != 0 && !copyRequested) {
         const AuroraReadbackCopySrc src{2, reinterpret_cast<const void*>(static_cast<uintptr_t>(copyDst))};
         copyRequested = AuroraReadbackCaptureCopies(copyStream, &src, 1) == GX_TRUE;
         std::printf("[replay] copy capture 0x%08X requested: %s (%u bytes expected)\n", copyDst,
@@ -1434,6 +1535,9 @@ int main(int argc, char** argv) {
           std::fclose(f);
           std::printf("[replay] wrote %s (aurora's bytes for this copy)\n", copyOut);
         }
+      }
+      if (probePpm && copyPayload.size() >= size_t(PROBE_COPY_W) * PROBE_COPY_H * 4) {
+        write_probe_ppm(probePpm, copyPayload.data(), PROBE_COPY_W, PROBE_COPY_H);
       }
     } else {
       std::printf("[replay] no copy readback delivered for 0x%08X\n", copyDst);

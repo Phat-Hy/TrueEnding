@@ -190,6 +190,8 @@ def main():
     ap.add_argument('--frame', type=int, default=None, help='frame index into the file (default 0)')
     ap.add_argument('--draw', type=int, default=None, help='print draw N of that frame in full')
     ap.add_argument('--draws', type=int, default=0, help='print the first N draws')
+    ap.add_argument('--cmd-from', type=int, default=-1, help='print commands from this index')
+    ap.add_argument('--cmd-to', type=int, default=-1, help='... up to this index')
     ap.add_argument('--scis', action='store_true', help='print BP 0x20/0x21/0x59 writes with the 342 bias removed')
     ap.add_argument('--max-draws', type=int, default=0, help='stop after N draws (walk cost)')
     args = ap.parse_args()
@@ -204,13 +206,16 @@ def main():
     st = Stream()
     i = 0
     draws = []
+    cmds = 0
     regs_seen = {}       # 'CP 0x50' -> count
     xf_seen = {}         # 'XF 0x1020' -> (count, last value)
     bp_seen = {}
     xf_base = {}         # base address of the last XF load
     errors = []
     while i < len(stream):
+        cmds += 1
         cmd = stream[i]
+        show = args.cmd_from >= 0 and args.cmd_from <= cmds <= args.cmd_to
         if cmd == 0x00:
             i += 1
         elif cmd == 0x08:
@@ -272,7 +277,7 @@ def main():
             errors.append(f'unknown opcode 0x{cmd:02X} at {i}')
             break
 
-    print(f'walked {i}/{len(stream)} bytes, {len(draws)} draw(s), '
+    print(f'walked {i}/{len(stream)} bytes in {cmds} command(s), {len(draws)} draw(s), '
           f'{sum(d[3] for d in draws)} vertices, {len(errors)} error(s)')
     for e in errors[:10]:
         print('  ERROR', e)
