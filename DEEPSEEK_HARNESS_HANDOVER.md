@@ -11836,3 +11836,39 @@ the same rule `tools/page_run.ps1` already applies to the page. AP-V item 7's "s
 difference" is still true for the case it described (that run *did* reach Game, at present 3501 with 73
 batches/265 695 vtx), but this one is the more dangerous variant: **an unrelated leftover file can make the tree
 look broken.** If a FAIL says "never reached Game", check `SaveData\tmp\` before anything else.
+
+---
+
+### AP-Y. THE BLACK SCREENS START FROM EMPTY 128x256 CMPR TEXTURES - and address-based evidence must stay inside one run
+
+**1. The load screens are built from the character's own art textures, and they render near-black.**
+`TLS_BATCH_DUMP_GUEST=1904,8` shows frame 1906 (present 1906, 53 batches) drawing **full-screen quads**
+(`ndc=[-1.00..1.00, ...]`) that sample `128x256 fmt=14` (CMPR) textures in the `0x92AExxxx` arena:
+`0x92AEAF00` x9, `0x92AF4400` x9, `0x92AF8480` x9, `0x92AFC500` x6, `0x92AF0380` x9, `0x92B00580` x2 - plus
+`0x9038D1C0`/`0x90395DC0`/`0x903DBDC0` staging textures. `TLS_SHOT_FRAMES=1906` gives a **near-black frame with
+faint grey triangles**: those art textures are drawing black. So the "black loading plate" that the hero's bake
+captures is itself the *symptom*, one level further up than AP-W could see.
+
+**2. Those textures measure ZERO in guest memory.** A 8 KB dump of `0x92AEAF00` at frames 1900/1905/1910/1915 is
+`nonZero=0, distinct=1` (all zero) - and `TLS_WATCH_ADDR=92AEAF00,92AF0380,92AF4400,92AF8480` over a whole run
+reports **zero writes to any of them**. No `CXDecompressFast` in the run targets that range either. So the game
+samples CMPR art that this host never fills.
+
+**3. The caveat that makes item 2 weaker than it looks, and the rule it implies.** The `.texture` arena's base
+MOVES between runs (AP-R item 2 measured the same texture loading at `0x92AEAEC0` and `0x92ADB500`), so an address
+read from one run's batch dump and a memory dump taken in *another* run are not the same object. Item 2's watch
+and dump were separate runs from the batch dump, so the correct phrasing is: **in the run where the batch dump
+named those addresses, the game samples 128x256 CMPR art; in other runs the same logical textures may sit
+elsewhere.** The instruments that keep both facts in one run already exist and are the ones to use from here:
+`TLS_TEV_PROBE` prints each sampled texture's **address together with its average**, and `TLS_PROBE_PRESENT_ONLY=1`
+pins it to one counter, so "which address, how bright" is never assembled across runs again.
+**Rule for the rest of this dossier: any claim of the form "address X is empty / is written / is sampled" must
+come from a single log that shows both sides**, because the arena relocates.
+
+**4. What that reframes.** The chain the objective needs is
+`decompress (.texture) -> 128x256 CMPR art in the 0x92AExxxx arena -> drawn full-screen -> EFB copy -> staging ->
+CMPR encode -> swizzle -> model texture`. AP-W/AP-U proved the *last four* links are correct and only mistimed.
+This section shows the **first link produces black**: the art the whole chain is built from is not arriving in the
+arena. That makes the next probe a decode question, not a copy question: run `TLS_TEV_PROBE` with
+`TLS_PROBE_PRESENT_ONLY=1` at the load frames and at 5500, and compare the *address+avg* pairs the model and the
+full-screen quads report against the `.texture` loader's destination list in the SAME log.
