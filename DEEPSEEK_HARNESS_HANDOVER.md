@@ -12166,9 +12166,8 @@ Completed"), so the task list of a gameplay run was already sitting in a log:
     [2] vt=0x00000000            task=0x80B8DD10 up=0x803646C4
 ```
 
-**`GameLoadTask` is still registered and still updating at frame 6300**, i.e. the Chapter-1 scene load has not
-finished 4 600 frames after the hand-over. The same three-task set is present in the *title* dump at frame 476, so
-the task set never grows: the field/scene tasks that a running Chapter-1 would need are never registered.
+**`GameLoadTask` is still registered at frame 6300 - but READ ITEM 3 FIRST: it is an IDLE service task, not a
+stuck one.** The same three-task set is present in the *title* dump at frame 476, so the task set never grows.
 This is the single upstream cause of everything AP-AC/AP-AB recorded:
 * the field task (`0x811671C0`) stays in state 0 because the load it is waiting on never completes (AP-AC7);
 * the party/field/player-status modules are never entered (AP-AC);
@@ -12183,3 +12182,27 @@ that it is an **asset/DVD/IPC completion** that the host never delivers for this
 no dropped completions and the streaming queue idle. Note also `[ENGINE TELEMETRY DUMP] ... STALL WARNING: No State
 Change in 3+ seconds` firing at frames 476/656/1839: the *guest itself* was already reporting the stall, and the
 host had been treating those dumps as noise.
+**3. Withdrawal: "the load never completes" is WRONG.** The load task's own fields, dumped at frames 2000/3000/4000/5000:
+
+| frame | `+0x1C` | `+0x24` | `+0x28` | `+0x2C` | `+0x34` |
+|---|---|---|---|---|---|
+| 2000 | 0x164 (356) | 0 | 0 | 0 | 1 |
+| 3000 | 0x532 (1330) | 0 | 0 | 0 | 1 |
+| 4000 | 0x91A (2330) | 0 | 0 | 0 | 1 |
+| 5000 | 0xD02 (3330) | 0 | 0 | 0 | 1 |
+
+`+0x1C` climbs **exactly one per guest frame**, and `+0x24`/`+0x28`/`+0x2C` - the fields the update
+`fn_80570CFC` branches on - are **all zero**, which in that code takes the `beq` at `+0x28 == 0` straight to the
+shared tail: the task does nothing. So `GameLoadTask` is the streaming service task sitting **idle**, and its
+presence in the task list is normal, not a stall. AP-AD's headline is withdrawn; what survives is the useful part:
+the task manager always holds the same three tasks (title and gameplay alike), and the field/scene task a running
+Chapter-1 would need is not among them - but that may also be normal, since the field task `0x811671C0` is updated
+as a sub-object of task `0x80B8DD10` (`up=0x80363DBC`), which is registered.
+
+**4. So the open question is back to the field task's state-0 wait, and it is now precise.** The field task is
+updated (its `+0x5744` counter climbs), sits in state 0, and nothing writes its state word after frame 1648. The
+load-task hypothesis is dead; the next thing to test is whether state 0 is **supposed** to be the resting state
+while the *scene* is not yet the field - i.e. compare against a Dolphin reference where the field HUD is up: if
+Dolphin's Chapter-1 field task also sits at state 0 with a still camera at the equivalent moment, then this host's
+"frozen" picture may be a legitimate cutscene that simply never ends because a *sequencer* trigger is missing, and
+the sequencer (not the field state machine) is where to look.
