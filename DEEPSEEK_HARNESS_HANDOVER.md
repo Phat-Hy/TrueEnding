@@ -11995,3 +11995,12 @@ rectangle (`psq_l f1,0x0(r27)` -> `+0x30..+0x3c`), so the per-element HUD setup 
 gate, and the next probe should follow what `fn_8009E1E4`'s struct feeds - most likely a 2D draw that tests a
 visibility/alpha field of the struct, or a layout object that is created but never activated (the page's story
 again, but through a different object).
+**4. First step down the draw-side chain.** The callers of `fn_8009E1E4` include `fn_8008E818`
+(`src/game_marker.c:429`) at `+0x4FC` - `bl fn_8009E1E4` with `r3 = r1+0xE8` (a **stack** buffer) and up to nine
+more arguments built from `r26/r29/r30` fields. So the HUD module is a *per-element setup* called from the marker
+module with a stack-resident element struct, and the dumped `r3=0x80898A70` (24 hits at frame 4000) comes from a
+different call site that passes a global. The next step is to read what consumes those elements: search for the
+function that iterates them and emits the 2D draw, and check the visibility field the setup leaves at `+0x28`
+(initialised to 0 by the constructor) and `+0x40` (`-1`). Note `tools\dol_xref.py` finds **no static reference**
+to `0x80898A70` and `tools\find_xref.py` returns nothing for it either, so that pointer is formed at runtime and
+the caller's `lr` is the way in.
