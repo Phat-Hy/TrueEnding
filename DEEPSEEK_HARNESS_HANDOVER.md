@@ -12079,3 +12079,16 @@ the field logic that would populate and draw it is not ticking.
 actually *running* - as opposed to displaying a frozen scene - is to compare two nearby gameplay frames: if
 `TLS_SHOT_FRAMES=5500` and `TLS_SHOT_FRAMES=5520` produce the same hash, the field is frozen and nothing about the
 HUD can be fixed before that; if they differ, the field is animating and the party data path is the target.
+**4. The scene may be STATIC in gameplay - measured, with the alternative explanation stated.** Two captures 20
+guest frames apart (`TLS_SHOT_FRAMES=5500,5520`) are **pixel-identical**
+(`4201F485304639239B1FEA65AEC997B9`), while the guest's own per-frame geometry keeps changing
+(`[TLS Frame] 5460: 57654 vtx/68 batches`, `5520: 57126/67`; presents vary 58044/58029/55581/57126). Two readings
+fit: (a) the scene is a **static cutscene frame** - consistent with AP-AC's "field/party/player-status modules never
+run, state machine ticks once" - or (b) the two captures landed on the same present, because `TLS_SHOT_FRAMES`
+matches *either* the present or the guest counter and those two counters diverge. `TLS_SHOT_GUEST=1` (which keys on
+the guest frame only) produced **no files at 5500/5520**, so it cannot settle it as written.
+**The test that settles it, and that should be run first next session:** capture 5500 and a much later frame (e.g.
+6200) in one run and compare; if they are identical the field is static and no HUD can appear, and the next thread
+is why the field logic stops rather than how the HUD draws. Pair it with a run whose input script *presses
+directions during gameplay* - if the character does not move, "playable" is blocked by the frozen field, not by
+the HUD.
