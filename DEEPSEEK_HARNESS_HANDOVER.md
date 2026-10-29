@@ -12111,3 +12111,20 @@ dump (`tls_dump_sleep_queues`, `tls_dump_wake_queues`, boot-thread state). The C
 `0x80368280` - capture it from the single dispatch that does happen, then watch its update entry, its state word
 `+0x5538` and its frame counters `+0x5744`/`+0x5748` over the following frames: if the counters stop advancing, the
 task is off the run queue and the question is which queue it is parked on.
+**6. The field task is ALIVE but parked in state 0 - so "frozen" is a state-machine stall, not a dead task.** The
+Chapter-1 task object captured from the single dispatch of `0x80368280` is **`0x811671C0`** (frame 4001). Its
+fields, dumped at three gameplay frames (base `0x8116C6F8` = object `+0x5538`):
+
+| guest frame | `+0x5538` (state) | `+0x5744` (frame counter) | `+0x5748` (countdown) |
+|---|---|---|---|
+| 4100 | **0** | 0x40B (1035) | **0** |
+| 4400 | **0** | 0x4A1 (1185) | **0** |
+| 5000 | **0** | 0x5CD (1485) | **0** |
+
+So the task **does** keep running - its frame counter climbs 150 counts per 300 guest frames - and it sits in
+**state 0** with the countdown at 0. That reconciles AP-AC's "dispatched once" with a live task: the counter is
+advanced by the task's own update, which is entered from inside a chunk rather than through a dispatch boundary
+after the first call. **The stall is therefore a state-machine transition that never happens**, not a parked
+thread - and state 0 is exactly the state the dossier already documents (`0x80368304`'s `beq` lands on
+`0x8036A110`, handover 5c.26). The next session should read what state 0 waits on before it moves to state 1:
+the countdown at `+0x5748` being permanently 0 is the first thing to explain.
