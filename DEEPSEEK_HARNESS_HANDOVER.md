@@ -11563,5 +11563,51 @@ NOT evidence of a queued copy** - `s_efb_copy_batch_ctx` is a stale global that 
 it keeps the value from the previous present's final drain; that misreading is what made the present-timing
 question look settled when it is not.
 
+---
+
+### AP-V. THE ORDERING QUESTION IS SETTLED - the copies are inline and run FIRST; the bake reads a BLACK EFB
+
+**1. The discriminator answered it.** `g_efb_copy_seq` (incremented in `d3d11_efb_copy_to_guest`) and
+`g_efb_copy_last_replay` are now printed at the conversion's entry by `TLS_DUMP_AT_PC`:
+
+```
+[DumpAtPc] copiesseq=28723 lastreplay=0      <- conversion at frame 1905/1906
+[EfbChain] present=1909 ... copy=6 dst=0x90536FE0 ... srcavg=(0,0,0) srca=255 dstavg=(0,0,0) dstalpha=255
+[DumpAtPc] copiesseq=28765 lastreplay=0      <- conversion at frame 1909
+```
+
+`lastreplay=0` **proves the copies are the inline path**, not the replay queue, and `28765 > 28723` proves the
+copies into the staging buffers ran **before** the conversion that reads them. So the write is in stream order
+and the conversion is not reading early: **the copy really did write, and what it wrote is black.** The
+`[EfbChain]` line says so twice - `srcavg=(0,0,0) srca=255` (the EFB it sampled is black) and
+`dstavg=(0,0,0) dstalpha=255` (what landed in guest memory is black-with-alpha).
+
+**2. So the memset is a red herring, and it is worth saying why.** A black-opaque staging image and an all-zero
+staging image both encode to a texture the character cannot be seen through (the black case gives a black CMPR,
+the zero case the transparent `00000000 FFFFFFFF` we measure). Chasing `__fill_mem`'s caller cannot fix the hero:
+**the art is simply not in the EFB when the character's texture is baked.** The settling measurement is that the
+copy's own *source* average is 0 at frame 1909, and that the same copies one frame later sample `(47,62,76)`.
+
+**3. Two A/B switches measured and REJECTED this round (both existing, both one run each).**
+* `TLS_EFB_SRC_CURRENT=1` - forces the inline copy to read the live back buffer instead of the previous-frame
+  snapshot. The 1915 bake is **still** `00000000 FFFFFFFF`: at inline-copy time this host has submitted none of
+  the current frame's draws, so the back buffer holds the same black content as the snapshot. Not the fix.
+* `TLS_NO_FRAME_CLEAR=1` - the renderer clears the EFB every present, and the tree's own comment warns that this
+  discards content the guest may read. It is **not a usable A/B**: with it the run never leaves the title
+  (`Seq: Titl` at frame 1920, no `SetNextSequence('Game')`), so any hero measurement under it is meaningless.
+  Recorded so the next session does not spend two runs rediscovering it.
+
+**4. What the next session should do, and why it is now an outside-reference question.** Every host-side knob
+around the copy is now measured: inline (not replayed), correct destination address, correct layout, opaque
+alpha, and the conversion reading it after the fact. What remains is that **the EFB has no art in it at frame
+1909** while it has `(47,62,76)` one frame later. That is a claim about what the *game* is drawing at that
+moment, and the only honest way to settle it is the Dolphin reference: find the Dolphin frame corresponding to
+this load step (the same black-plate loading sequence) and check whether the character art is on screen there.
+If it is, the defect is a draw our host is dropping (compare the batch list for that frame against Dolphin's);
+if it is not, then the game bakes a placeholder here and the character's real texture is built somewhere this
+host never reaches - which would make the *next* thread "which pipeline should have produced
+`0x92AEAEC0`", not "why is the copy wrong".
+
+
 
 

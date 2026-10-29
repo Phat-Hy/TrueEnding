@@ -455,6 +455,11 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
  * staging`) still read the snapshot and still baked a transparent hero. */
 static int s_replaying_copy = 0;
 
+/* Copy sequence number and the path the last copy took, readable from the guest-side
+ * probes in replacements.c (see d3d11_efb_copy_to_guest). */
+unsigned g_efb_copy_seq = 0;
+int g_efb_copy_last_replay = 0;
+
 static D3D11Backend s_d3d11 = {0};
 
 // Precompiled bytecode for fullscreen triangle vertex shader
@@ -1958,6 +1963,16 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                                     uint32_t x1, uint32_t y1, uint32_t format, int half_scale,
                                     uint32_t pitch, uint32_t exec) {
     if (!s_d3d11.device || !s_d3d11.context || !s_d3d11.swap_chain) return;
+    /* Copy sequence number, read by the guest-side probes (TLS_DUMP_AT_PC prints it).
+     * It answers the one question that decides whether the hero's defect is a write/alias
+     * problem or a present-phase problem: when the conversion runs, has the copy that
+     * feeds it already happened? If the conversion's `seq` is >= the copy's, the copy ran
+     * first and the zeroed staging is a memory question; if it is smaller, the conversion
+     * runs before its own input (handover 5c.46 AP-U4). */
+    extern unsigned g_efb_copy_seq;
+    extern int g_efb_copy_last_replay;
+    g_efb_copy_seq++;
+    g_efb_copy_last_replay = s_replaying_copy;
     /* Destination pixel format. Until now every copy was written as a 4-byte RGBA8 tile,
      * which is only right for the copies whose destination the guest samples as RGBA8
      * (GX_TF_RGBA8 = 6). The MENU's composite chain copies into **RGB565** destinations
