@@ -64,7 +64,7 @@ was tried and disproven). All inert unless set.
 `0005-replay-staging-sizes` is **optional and not applied by `build.ps1` unless `-ReplayStaging` is passed**: it raises uniforms and
 storage to 96 MiB, which one heavy replay needs (AP-AM 6d) and which breaks aurora's own
 null-backend tests (`Out of memory` while creating "Staging Buffer 1"). Apply it for a replay run,
-not for the suite; the default tree stays at upstream sizes and passes 424/425.
+not for the suite; the default tree stays at upstream sizes and passes 425/425 serially (26 s; at -j 8 three ReadbackGpuTest.* cases OOM on parallel device creation and pass 3/3 serially).
 
 ## The adapter: three register classes, measured
 

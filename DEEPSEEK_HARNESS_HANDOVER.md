@@ -13199,6 +13199,17 @@ storage plane, not a single-buffer budget. The invariant/page gate still has to 
 Dolphin references (AP-AL's one-time cost, unchanged) and was **not** re-run this session - the host was quiet
 but the session's run budget went to the replays.
 
+**10b. The aurora suite, re-verified at upstream staging sizes with patch 0006 in place.** With `0005` reverted
+(the tree back at the upstream 24/5/2/8/24 MiB planes) and the new probes compiled in:
+
+* `ctest` **serial: 425/425 passed in 26.2 s** - one better than AP-AM's 424/425, whose
+  `GfxRecordingTest.ReplacementRetainsCopiedPassesAndDiscardsContinuations` failure does not reproduce here.
+* `ctest -j 8` reports three failures, all **`ReadbackGpuTest.*` and all out-of-memory**
+  (`ID3D12Device::CreateCommittedResource` on "Shared Storage Buffer" / "Staging Buffer 0..4", ~66 MB each):
+  eight parallel test processes each create their own D3D12 device. Serially the same three pass **3/3 in
+  3.7 s**. The suite is green serially; the parallel OOM is a harness limit, not a regression - worth knowing
+  before anyone reads a `-j 8` result as a code failure.
+
 **11. Run log (this session, one runner-free replay at a time; no runner launch was needed at all).**
 
 | # | what | result |
