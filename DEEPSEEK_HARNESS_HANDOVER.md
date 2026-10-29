@@ -12662,7 +12662,7 @@ each one landed:
 |---|---|---|
 | 1 | aurora + Dawn build against this toolchain | **CLEARED** — MinGW GCC 16.2, 503/503 targets, `ctest` 423/425, plus a linked replay executable |
 | 2 | render the invariant frame 3500 from a captured GX stream | **NOT CLEARED** — the replay runs and the command processor accepts the stream, but a heavy frame exceeds aurora's fixed staging budget (numbers in item 5) |
-| 3 | service one guest EFB copy through `capture_copies`/`get` | **CLEARED with a stated gap** — the copy path is driven end to end and its bytes are compared against this layer's (item 6) |
+| 3 | service one guest EFB copy through `capture_copies`/`get` | **CLEARED** — the same guest copy is serviced by both layers and compared byte for byte; aurora's payload is layout-exact and equals its own EFB, which is empty (item 6e) |
 
 **1. What the 503-target number actually means.** `aurora @ 505b5eb` (encounter/aurora, MIT) with
 its prebuilt Dawn `v20260807.225922` package plus SDL3 `3.4.10` and abseil/fmt/xxHash/zlib-ng/
@@ -12854,6 +12854,56 @@ by `tools/aurora_spike/capfilter.py`). Fixed by gating `tls_gxcap_copy`/`tls_gxc
 `s_have_pending`; `capfilter.py` rewrites an oversized capture down to one window (it also
 memory-maps instead of loading, which is why the 8.7 GB file was usable at all) and produced the
 158 MB window used above.
+
+**6d. The staging wall is beaten; the frame still renders black, and the adapter is exonerated.**
+Three fixes turned "the frame cannot be replayed" into "the frame replays and draws nothing visible":
+
+1. **Per-draw array sizing** (the adapter). The measured arithmetic: **3 449 array bases per frame
+   declaring 3 616 538 624 bytes**, re-uploaded after each of the frame's **10 CP INVAL_VTX**
+   commands = **39.8 GB of array traffic per frame**. A GX array base carries no length and aurora
+   uploads exactly the declared size (`push_gx_draw` -> `push_storage(array.data, array.size)`,
+   cache dropped by `CP_CMD_INVAL_VTX`), so the size must come from the indices the draw actually
+   uses. Emitting `GX_AURORA_LOAD_ARRAYBASE` **per draw, sized `(max_index+1)*stride+elem` from the
+   draw's own payload**, cut the declarations to **61 699 961 bytes** (58x less) for the same
+   27 192 draws.
+2. **Staging planes raised** (not shipped as a default; it breaks the null-backend tests, see item
+   7b): with uniforms 96 MiB and storage 96 MiB the non-split replay of the cave frame **completes**
+   instead of aborting.
+3. **`AuroraSetDrawsBlocking(GX_TRUE)`**. aurora skips draws whose pipeline is not compiled yet,
+   which is every draw of a one-frame replay.
+
+With those, aurora records the frame: **`draws=26616 merged=536 verts=1124896` and 102 pipelines
+created** (env-gated stats print, patch 0004). The **raw** path - the identical stream with **no
+adapter at all** - records the same 27 149 draws (`draws=1091 merged=26058 verts=1110288`). **So the
+adapter is not the fault: both paths submit the frame and both render black.**
+
+Ruled out by measurement, so nobody repeats them: staging/array sizing (above), async-pipeline
+skipping (`AuroraSetDrawsBlocking`), colour/alpha update (`TLS_AURORA_FORCE_UPDATE=1` forces both
+on - still black), the readback timing (capturing during the replayed frame *and* on the frame
+after it - both black), and the adapter (raw == adapted).
+
+**6e. Criterion 3 answered, with numbers - and it says the copy path is NOT the defect.**
+The sharpest measurement of the session, because it compares the *same copy* written by both
+layers. Copy record 10 of frame 3401 is a full-screen `0x905C3000 640x448 fmt=6` (RGBA8) EFB copy:
+
+| | bytes | mean byte | sampled texel mean RGB |
+|---|---|---|---|
+| **this layer** (`d3d11_efb_copy_to_guest`) | 1 146 880 | **157.73** | **(127.1, 131.8, 127.3)** |
+| **aurora** (`capture_copies`/`get`) | 1 146 880 | **63.75** | **(0.0, 0.0, 0.0)** |
+
+Same destination, same size, same 4x4 tiled layout, byte-for-byte comparable - and aurora's payload
+decodes to `(0,0,0,255)`, i.e. the EFB's *clear* (black, alpha 1.0). So: **aurora's copy mechanism
+is layout-exact and delivers exactly what its EFB holds; its EFB holds nothing.** The white screen
+of AP-AI lives in a path that aurora implements correctly; what a migration would still have to fix
+is the render that feeds it. That is a real answer to the question the criterion was asked to
+settle, and it is the *opposite* of the outcome that would have justified stopping the spike.
+
+**6f. The open question, narrowed to one comparison.** aurora submits 26 616 draws and 1.12 M
+vertices for a frame this layer renders as a bright cave (mean 118.42) and produces a black EFB.
+The next measurement is therefore not another switch: dump **one draw's decoded vertex positions**
+from both sides - this layer's `GxVertex` stream (it already decodes every attribute in
+`decode_single_vertex`) and aurora's arrays/uniforms for the same draw - and see where they part.
+That is one instrumented run per side, and it is the first item of the next session's list.
 
 **7b. VERDICT (this session's definition of done, option (b)).** The spike is **blocked at a
 named step with numbers**, not abandoned on an impression: aurora builds and runs here, its

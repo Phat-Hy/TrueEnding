@@ -150,6 +150,8 @@ struct Capture {
 std::vector<uint8_t> g_file;
 uint64_t g_fifoBytes = 0, g_draws = 0, g_vertices = 0;
 uint32_t g_frames = 0, g_maxVcnt = 0, g_arrayBases = 0;
+uint64_t g_invalVtx = 0;      /* CP 0x48: aurora drops every cached array range */
+uint64_t g_arrayBytes = 0;    /* what the adapter asks aurora to upload per invalidation */
 int g_maxCmds = -1;
 
 struct CmdTrace {
@@ -431,6 +433,8 @@ struct StreamState {
   };
   AttrFmt vtxFmt[8][21] = {};
   uint8_t strides[21] = {};
+  uint32_t base[21] = {};
+  bool baseKnown[21] = {};
   CopyRegs copy;
 
   void apply_cp(uint8_t reg, uint32_t val) {
@@ -513,6 +517,52 @@ struct StreamState {
  * per-frame staging budget, so the replay can feed it in command-aligned slices, one aurora frame
  * each (the EFB itself persists - gfx::efb::prepare_frame only resizes it - so the picture still
  * accumulates). `consumed` returns where the slice stopped, always on a command boundary. */
+/* Attribute byte offsets inside one vertex, in hardware order (attr 0..20). */
+void attr_offsets(const StreamState& st, uint8_t fmt, uint32_t out[21]) {
+  uint32_t off = 0;
+  for (uint8_t a = 0; a <= 20; ++a) {
+    out[a] = off;
+    off += st.attr_size(fmt, a);
+  }
+}
+
+/* Emit GX_AURORA_LOAD_ARRAYBASE for every indexed attribute this draw uses, with a size derived
+ * from the largest index in the draw's payload instead of a guess about the array. */
+void emit_draw_array_bases(std::vector<uint8_t>& out, StreamState& st, uint8_t fmt, uint32_t vcnt,
+                           const uint8_t* payload) {
+  uint32_t offs[21];
+  attr_offsets(st, fmt, offs);
+  for (uint8_t attr = 9; attr <= 20; ++attr) {
+    const uint8_t type = st.vtxDesc[attr];
+    if (type != 2 && type != 3) continue; /* only INDEX8 / INDEX16 read an array */
+    if (!st.baseKnown[attr]) continue;
+    const uint32_t width = type == 2 ? 1u : 2u;
+    uint32_t maxIndex = 0;
+    bool any = false;
+    const uint8_t* p = payload + offs[attr];
+    const uint32_t stride = st.vertex_size(fmt);
+    for (uint32_t v = 0; v < vcnt; ++v, p += stride) {
+      const uint32_t idx = width == 1 ? p[0] : static_cast<uint32_t>((p[0] << 8) | p[1]);
+      if (!any || idx > maxIndex) maxIndex = idx;
+      any = true;
+    }
+    if (!any) continue;
+    const uint32_t elem = st.attr_size(fmt, attr); /* bytes one element occupies */
+    uint32_t strideBytes = st.strides[attr];
+    if (strideBytes == 0) strideBytes = elem;
+    uint32_t need = (maxIndex + 1) * strideBytes + elem;
+    const uint32_t avail = array_size_for(st.base[attr], 0); /* region clamp only */
+    if (need > avail) need = avail;
+    append_u8(out, GX_AURORA_OPCODE);
+    append_u16(out, static_cast<uint16_t>(AURORA_LOAD_ARRAYBASE + (attr - 9)));
+    append_u64(out, static_cast<uint64_t>(st.base[attr]));
+    append_u32(out, need);
+    append_u8(out, 0); /* the guest's data is big-endian */
+    g_arrayBytes += need;
+    ++g_arrayBases;
+  }
+}
+
 bool rewrite_frame(const uint8_t* in, uint32_t size, uint32_t begin, uint32_t limit, StreamState& st,
                    std::vector<uint8_t>& out, uint32_t& copies, uint32_t& consumed, std::string& err) {
   out.clear();
@@ -539,13 +589,10 @@ bool rewrite_frame(const uint8_t* in, uint32_t size, uint32_t begin, uint32_t li
       const uint32_t val = (uint32_t(in[i + 2]) << 24) | (uint32_t(in[i + 3]) << 16) |
                            (uint32_t(in[i + 4]) << 8) | uint32_t(in[i + 5]);
       st.apply_cp(reg, val);
-      if (reg >= 0xA0 && reg <= 0xAF) { /* array base -> GX_AURORA_LOAD_ARRAYBASE */
-        append_u8(out, GX_AURORA_OPCODE);
-        append_u16(out, static_cast<uint16_t>(AURORA_LOAD_ARRAYBASE + (reg - 0xA0)));
-        append_u64(out, static_cast<uint64_t>(val));
-        append_u32(out, array_size_for(val, st.strides[9 + (reg - 0xA0)]));
-        append_u8(out, 0); /* the guest's data is big-endian */
-        ++g_arrayBases;
+      if (reg >= 0xA0 && reg <= 0xAF) { /* array base: remembered, emitted per draw (see below) */
+        const uint8_t attr = static_cast<uint8_t>(9 + (reg - 0xA0));
+        st.base[attr] = val;
+        st.baseKnown[attr] = true;
         i += 6;
         continue; /* the hardware register itself must not reach aurora (it errors on it) */
       }
@@ -566,6 +613,7 @@ bool rewrite_frame(const uint8_t* in, uint32_t size, uint32_t begin, uint32_t li
       err = "CALL_DL present - the recorder inlines display lists";
       return false;
     } else if (cmd == 0x44 || cmd == 0x48) { /* invalidate vertex cache / perf metrics */
+      if (cmd == 0x48) ++g_invalVtx;
       out.push_back(cmd);
       ++i;
     } else if (cmd == 0x61) { /* BP register write */
@@ -612,6 +660,16 @@ bool rewrite_frame(const uint8_t* in, uint32_t size, uint32_t begin, uint32_t li
       const uint8_t fmt = cmd & 7;
       const uint32_t vcnt = (uint32_t(in[i + 1]) << 8) | in[i + 2];
       const uint32_t vtxSize = st.vertex_size(fmt);
+      /* Emit the array bases this draw actually addresses, sized from the indices in its own
+       * payload. WHY per draw and not per CP write (measured, 5c.46 AP-AM): a GX array base
+       * carries no length, aurora uploads exactly the declared size on first use, and
+       * CP INVAL_VTX drops every cached range - so declaring "the rest of MEM" cost
+       * 3 616 538 624 bytes of array declarations per frame (3 449 bases x ~1 MiB, re-uploaded
+       * after each of the frame's 10 invalidations). Sizing from the real indices makes the same
+       * frame's array traffic a few megabytes. */
+      if (i + 3 + uint64_t(vcnt) * vtxSize <= size) {
+        emit_draw_array_bases(out, st, fmt, vcnt, in + i + 3);
+      }
       const uint64_t total = 3ull + uint64_t(vcnt) * vtxSize;
       if (vtxSize == 0 || i + total > size) {
         err = "draw with unknown vertex size at offset " + std::to_string(i) + " (fmt " +
@@ -782,6 +840,12 @@ int run_synthetic_copy(uint32_t fbWidth, uint32_t fbHeight, AuroraBackend backen
   std::printf("[synth] aurora backend=%d fb %ux%u\n", static_cast<int>(info.backend), info.windowSize.fb_width,
               info.windowSize.fb_height);
   AuroraSetViewportPolicy(AURORA_VIEWPORT_NATIVE);
+  /* aurora compiles pipelines asynchronously and SKIPS draws whose pipeline is not ready yet
+   * ("GX draws are skipped if their pipeline is not yet compiled" is the documented default). A
+   * one-frame replay therefore renders nothing at all: every draw is dropped while its pipeline
+   * is still compiling and the EFB readback comes back black. That, not a GX-state mismatch, is
+   * what "aurora renders a black frame" was in this spike. */
+  AuroraSetDrawsBlocking(GX_TRUE);
 
   /* Separate streams per consumer: a stream holds only its most recent capture, and both
    * captures use the same key otherwise. */
@@ -1004,6 +1068,10 @@ int main(int argc, char** argv) {
     }
     std::printf("total: %llu draws, %llu vertices, largest draw %u, %u array base(s) translated\n",
                 (unsigned long long)g_draws, (unsigned long long)g_vertices, g_maxVcnt, g_arrayBases);
+    std::printf("storage arithmetic: %llu CP INVAL_VTX, %llu array-base bytes declared "
+                "(re-uploaded after every invalidation), %llu bytes/frame\n",
+                (unsigned long long)g_invalVtx, (unsigned long long)g_arrayBytes,
+                (unsigned long long)(g_arrayBytes * (g_invalVtx + 1)));
     return 0;
   }
 
@@ -1030,8 +1098,18 @@ int main(int argc, char** argv) {
   /* Native viewport: GXSetViewport/GXSetScissor pixels go straight to the EFB with no aspect-fit
    * scaling, so the readback is the raw EFB the guest described. */
   AuroraSetViewportPolicy(AURORA_VIEWPORT_NATIVE);
+  /* aurora compiles pipelines asynchronously and SKIPS draws whose pipeline is not ready yet
+   * ("GX draws are skipped if their pipeline is not yet compiled" is the documented default). A
+   * one-frame replay therefore renders nothing at all: every draw is dropped while its pipeline
+   * is still compiling and the EFB readback comes back black. That, not a GX-state mismatch, is
+   * what "aurora renders a black frame" was in this spike. */
+  AuroraSetDrawsBlocking(GX_TRUE);
 
-  AuroraReadbackStream stream = AuroraReadbackCreateStream();
+  /* Separate streams: a stream holds only its most recent capture, so a colour capture and a copy
+   * capture sharing a key replace each other (measured: the colour get then reported "key 0x0 has
+   * a 71680-byte result, not 1228800"). */
+  AuroraReadbackStream colorStream = AuroraReadbackCreateStream();
+  AuroraReadbackStream copyStream = AuroraReadbackCreateStream();
   std::vector<uint8_t> rgb(fbWidth * fbHeight * 4);
   uint32_t captureW = 0, captureH = 0;
   bool colorRequested = false, copyRequested = false;
@@ -1052,7 +1130,7 @@ int main(int argc, char** argv) {
     if (rawStream) {
       for (const auto& [data, len] : frame.chunks) aurora::gx::fifo::write_data_grow(data, len);
       if (isLast && !colorRequested) {
-        colorRequested = AuroraReadbackCaptureColor(stream, 0, &captureW, &captureH) == GX_TRUE;
+        colorRequested = AuroraReadbackCaptureColor(colorStream, 1, &captureW, &captureH) == GX_TRUE;
         std::printf("[replay] colour capture requested: %s (%ux%u)\n", colorRequested ? "yes" : "NO", captureW,
                     captureH);
       }
@@ -1086,18 +1164,7 @@ int main(int argc, char** argv) {
                       frame.frame, chunks, off, total, rewritten.size(), copies);
           std::fflush(stdout);
         }
-        const bool finalChunk = isLast && off >= total;
-        if (finalChunk && !colorRequested) {
-          colorRequested = AuroraReadbackCaptureColor(stream, 0, &captureW, &captureH) == GX_TRUE;
-          std::printf("[replay] colour capture requested: %s (%ux%u)\n", colorRequested ? "yes" : "NO",
-                      captureW, captureH);
-          if (copyDst != 0) {
-            const AuroraReadbackCopySrc src{0, reinterpret_cast<const void*>(static_cast<uintptr_t>(copyDst))};
-            copyRequested = AuroraReadbackCaptureCopies(stream, &src, 1) == GX_TRUE;
-            std::printf("[replay] copy capture 0x%08X requested: %s (%u bytes expected)\n", copyDst,
-                        copyRequested ? "yes" : "NO", static_cast<uint32_t>(copyPayload.size()));
-          }
-        }
+        (void)isLast;
         aurora_end_frame();
       }
       ++replayed;
@@ -1112,17 +1179,28 @@ int main(int argc, char** argv) {
   bool haveColor = false, haveCopy = false;
   for (int i = 0; i < extraFrames && !(haveColor && (copyDst == 0 || haveCopy)); ++i) {
     if (!aurora_begin_frame()) break;
+    if (i == 0 && !colorRequested) {
+      colorRequested = AuroraReadbackCaptureColor(colorStream, 1, &captureW, &captureH) == GX_TRUE;
+      std::printf("[replay] colour capture requested (frame after the replay): %s (%ux%u)\n",
+                  colorRequested ? "yes" : "NO", captureW, captureH);
+      if (copyDst != 0) {
+        const AuroraReadbackCopySrc src{2, reinterpret_cast<const void*>(static_cast<uintptr_t>(copyDst))};
+        copyRequested = AuroraReadbackCaptureCopies(copyStream, &src, 1) == GX_TRUE;
+        std::printf("[replay] copy capture 0x%08X requested: %s (%u bytes expected)\n", copyDst,
+                    copyRequested ? "yes" : "NO", static_cast<uint32_t>(copyPayload.size()));
+      }
+    }
     aurora_end_frame();
     if (colorRequested && !haveColor && captureW && captureH) {
-      AuroraReadbackDest dest{0, rgb.data(), captureW * captureH * 4, GX_FALSE};
-      if (AuroraReadbackGet(stream, &dest, 1) == GX_TRUE && dest.found == GX_TRUE) {
+      AuroraReadbackDest dest{1, rgb.data(), captureW * captureH * 4, GX_FALSE};
+      if (AuroraReadbackGet(colorStream, &dest, 1) == GX_TRUE && dest.found == GX_TRUE) {
         haveColor = true;
         std::printf("[replay] colour readback complete after %d extra frame(s)\n", i + 1);
       }
     }
     if (copyRequested && !haveCopy) {
-      AuroraReadbackDest dest{0, copyPayload.data(), static_cast<uint32_t>(copyPayload.size()), GX_FALSE};
-      if (AuroraReadbackGet(stream, &dest, 1) == GX_TRUE && dest.found == GX_TRUE) {
+      AuroraReadbackDest dest{2, copyPayload.data(), static_cast<uint32_t>(copyPayload.size()), GX_FALSE};
+      if (AuroraReadbackGet(copyStream, &dest, 1) == GX_TRUE && dest.found == GX_TRUE) {
         haveCopy = true;
         std::printf("[replay] copy readback complete after %d extra frame(s)\n", i + 1);
       }
@@ -1164,7 +1242,8 @@ int main(int argc, char** argv) {
     }
   }
 
-  AuroraReadbackDestroyStream(stream);
+  AuroraReadbackDestroyStream(colorStream);
+  AuroraReadbackDestroyStream(copyStream);
   aurora_shutdown();
   return rc;
 }

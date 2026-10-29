@@ -1,0 +1,61 @@
+diff --git a/lib/aurora.cpp b/lib/aurora.cpp
+index a0dcabb..89f9537 100644
+--- a/lib/aurora.cpp
++++ b/lib/aurora.cpp
+@@ -337,6 +337,14 @@ void end_frame() noexcept {
+     TracyPlotConfig("aurora: lastTextureUploadSize", tracy::PlotFormatType::Memory, false, true, 0);
+ 
+     const auto& stats = gfx::detail::resources().stats;
++    /* AURORA-SPIKE: how many draws actually reached the command encoder this frame. Without this
++     * the harness could only see "the readback is black", which cannot distinguish "nothing was
++     * recorded" from "the readback reads the wrong target". */
++    if (getenv("TLS_AURORA_STATS") != nullptr) {
++      fprintf(stderr, "[aurora stats] draws=%u merged=%u pipelines(queued=%u created=%u) verts=%llu uniforms=%llu\n",
++              stats.drawCallCount, stats.mergedDrawCallCount, stats.queuedPipelines, stats.createdPipelines,
++              (unsigned long long)stats.lastVertSize, (unsigned long long)stats.lastUniformSize);
++    }
+     TracyPlot("aurora: queuedPipelines", static_cast<int64_t>(stats.queuedPipelines));
+     TracyPlot("aurora: createdPipelines", static_cast<int64_t>(stats.createdPipelines));
+     TracyPlot("aurora: drawCallCount", static_cast<int64_t>(stats.drawCallCount));
+diff --git a/lib/gx/regs.cpp b/lib/gx/regs.cpp
+index a059918..f74790b 100644
+--- a/lib/gx/regs.cpp
++++ b/lib/gx/regs.cpp
+@@ -1,3 +1,4 @@
++#include <cstdlib>
+ #include "regs.hpp"
+ 
+ #include "gx_fmt.hpp"
+@@ -228,8 +229,16 @@ void bp_z_mode(u8, u32 value) noexcept {
+ void bp_cmode0(u8, u32 value) noexcept {
+   bool blendEn = reg_get(value, 1, 0) != 0;
+   bool logicEn = reg_get(value, 1, 1) != 0;
+-  g_gxState.colorUpdate = reg_get(value, 1, 3) != 0;
+-  g_gxState.alphaUpdate = reg_get(value, 1, 4) != 0;
++  /* AURORA-SPIKE probe: the guest sets colour/alpha update through the PE register (a non-FIFO
++   * MMIO write, GXSetColorUpdate/GXSetAlphaUpdate), so a raw-FIFO recompiler may never see it and
++   * every draw would write nothing. TLS_AURORA_FORCE_UPDATE=1 keeps both on. */
++  if (getenv("TLS_AURORA_FORCE_UPDATE") != nullptr) {
++    g_gxState.colorUpdate = true;
++    g_gxState.alphaUpdate = true;
++  } else {
++    g_gxState.colorUpdate = reg_get(value, 1, 3) != 0;
++    g_gxState.alphaUpdate = reg_get(value, 1, 4) != 0;
++  }
+   g_gxState.blendFacDst = static_cast<GXBlendFactor>(reg_get(value, 3, 5));
+   g_gxState.blendFacSrc = static_cast<GXBlendFactor>(reg_get(value, 3, 8));
+   bool subtract = reg_get(value, 1, 11) != 0;
+@@ -276,6 +285,13 @@ void bp_clear_depth(u8, u32 value) noexcept { g_gxState.clearDepth = reg_get(val
+ 
+ // EFB copy trigger (0x52)
+ void bp_efb_copy(u8, u32 value) noexcept {
++  /* AURORA-SPIKE probe: with a raw (unsaturated) stream the copy destination geometry is not in
++   * the FIFO, so the copy would create a 0x0 texture and abort. Skipping the copy lets the same
++   * stream be replayed with and without the adapter, which is how adapter bugs and aurora bugs are
++   * told apart. */
++  if (getenv("TLS_AURORA_NO_COPY") != nullptr) {
++    return;
++  }
+   const bool clear = reg_get(value, 1, 11) != 0;
+   if (reg_get(value, 1, 14) != 0) {
+     Log.warn("STUB: display copy is not implemented");

@@ -51,9 +51,16 @@ Toolchain actually used (measured, not assumed):
    because `aurora_core` and `aurora_gx` reference each other.
 3. `0003` — the fixed-size staging buffers abort **silently** in a release build when they
    overflow (the abort does not go through the log callback). One `fprintf` before the abort.
+`0004-spike-probes` is the diagnostic set the measurements in AP-AM name: an env-gated draw-stats
+print (`TLS_AURORA_STATS`), a copy bypass (`TLS_AURORA_NO_COPY`, so the same stream can be replayed
+with and without the adapter) and a colour/alpha-update override (`TLS_AURORA_FORCE_UPDATE`, which
+was tried and disproven). All inert unless set.
+
 The staging buffer sizes were raised during the spike to probe the per-frame budget and then
-**reverted**: with them raised, aurora's own null-backend tests fail (`Out of memory` while
-creating "Staging Buffer 1"), and raising them does not clear the wall anyway (see AP-AM item 6b).
+**reverted**: with them raised aurora's own null-backend tests fail (`Out of memory` while creating
+"Staging Buffer 1"). They are needed for one heavy *replay* (AP-AM item 6d: uniforms 96 MiB and
+storage 96 MiB let the cave frame complete), so raise them only for a replay run, never for the
+suite.
 
 ## What was measured
 
