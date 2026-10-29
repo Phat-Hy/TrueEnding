@@ -14,6 +14,8 @@ Nothing here is on the shipping path. It is a measuring instrument:
 | `build.ps1` | clone → patch → configure → build → optional replay. Reproduces the whole thing. |
 | `patches/` | the four changes aurora needed on MinGW GCC; each is documented in its own file. |
 | `capinfo.py` | prints a capture's frame window, per-frame FIFO byte counts, MEM planes and copy records. |
+| `capfilter.py` | rewrites an oversized capture down to one frame window (memory-mapped, so a multi-GB file is usable). |
+| `copycmp.py` | byte-compares one EFB copy: aurora's `capture_copies`/`get` payload vs this layer's bytes for the same destination. |
 | `compare.py` | pixel diff of the aurora frame against the hand-rolled layer's capture (`tools/frame_diff.py`-equivalent for two different sizes). |
 
 The capture itself comes from the **runner**, not from here: `TLS_GX_CAPTURE=<dir>` (see

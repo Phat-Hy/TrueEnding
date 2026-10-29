@@ -15,6 +15,8 @@
  *   --extra N           empty frames after the last replayed one (default 8)
  *   --start-at N        first recorded frame to replay (default 0)
  *   --stop-after N      stop after recorded frame N (bisecting)
+ *   --split N           feed each recorded frame as N command-aligned aurora frames, so a frame
+ *                       bigger than aurora's per-frame staging budget can still be replayed
  *   --raw               feed the stream without the adapter (measures what the adapter adds)
  *   --verbose           per-frame accounting
  *   --max-cmds N        stop rewriting a frame after N commands (bisecting a crash)
@@ -43,6 +45,7 @@ void write_data_grow(const void* data, uint32_t length);
 #include <windows.h>
 #include <dbghelp.h>
 
+#include <algorithm>
 #include <csignal>
 #include <cinttypes>
 #include <cstdint>
@@ -350,10 +353,31 @@ uint32_t bytes_per_pixel(uint32_t fmt, bool xfb) {
   }
 }
 
-uint32_t array_size_for(uint32_t addr) {
-  if (addr >= 0x80000000u && addr < 0x84000000u) return 0x84000000u - addr;
-  if (addr >= 0x90000000u && addr < 0x94000000u) return 0x94000000u - addr;
-  return 0x1000000u;
+/* GX_AURORA_LOAD_ARRAYBASE carries a SIZE, and aurora pushes exactly that many bytes of the array
+ * into its storage buffer on first use (lib/gx/command_processor.cpp: `push_storage(array.data,
+ * array.size)`). The first version of this adapter passed "the rest of the MEM region" - up to
+ * 64 MiB per array - and that, not aurora, is what made a frame need > 144 MiB of storage and
+ * looked like an aurora ceiling. The truth is per-array: an array is addressed by 8- or 16-bit
+ * indices, so the bytes any draw can reach are `index_limit * stride`. The cap matters far more
+ * than it looks: a CP INVAL_VTX command clears aurora's cached array ranges, so the NEXT draw
+ * re-uploads every indexed array at the declared size - 12 arrays x 1 MiB per invalidation, times
+ * ~15 invalidations a frame, is the 193 MiB the measurements below show. 128 KiB per array keeps
+ * a frame's array traffic around 10 MiB while still covering `index * stride` for this game's
+ * 498-vertex-maximum draws. */
+constexpr uint32_t ARRAY_UPLOAD_CAP = 128u << 10;
+
+uint32_t array_size_for(uint32_t addr, uint8_t stride) {
+  uint32_t region_end = 0;
+  if (addr >= 0x80000000u && addr < 0x84000000u) region_end = 0x84000000u;
+  else if (addr >= 0x90000000u && addr < 0x94000000u) region_end = 0x94000000u;
+  else return 1u << 20;
+  const uint32_t avail = region_end - addr;
+  /* 65536 covers a 16-bit index at any stride; the 1 MiB cap is the per-array budget. */
+  uint32_t want = stride != 0 ? 65536u * stride : ARRAY_UPLOAD_CAP;
+  if (want > ARRAY_UPLOAD_CAP) want = ARRAY_UPLOAD_CAP;
+  uint32_t size = want < avail ? want : avail;
+  if (size == 0) size = 1;
+  return size;
 }
 
 void emit_copy_state(std::vector<uint8_t>& out, const CopyRegs& regs, uint32_t exec) {
@@ -406,6 +430,7 @@ struct StreamState {
     uint8_t cnt = 0, type = 0, frac = 0;
   };
   AttrFmt vtxFmt[8][21] = {};
+  uint8_t strides[21] = {};
   CopyRegs copy;
 
   void apply_cp(uint8_t reg, uint32_t val) {
@@ -436,6 +461,9 @@ struct StreamState {
                      static_cast<uint8_t>((val >> (b + 4)) & 0x1F)};
       }
       f[17] = {static_cast<uint8_t>((val >> 27) & 1), static_cast<uint8_t>((val >> 28) & 7), 0};
+    } else if (reg >= 0xB0 && reg <= 0xBF) { /* array strides: attr = 9 + (reg - 0xB0) */
+      const uint8_t attr = static_cast<uint8_t>(9 + (reg - 0xB0));
+      if (attr <= 20) strides[attr] = static_cast<uint8_t>(val);
     } else if (reg >= 0x90 && reg <= 0x97) { /* VAT C: TEX4 frac, TEX5..TEX7 */
       auto& f = vtxFmt[reg - 0x90];
       f[17].frac = static_cast<uint8_t>(val & 0x1F);
@@ -481,14 +509,20 @@ struct StreamState {
   }
 };
 
-bool rewrite_frame(const uint8_t* in, uint32_t size, StreamState& st, std::vector<uint8_t>& out,
-                   uint32_t& copies, std::string& err) {
+/* `begin`..`limit` is the slice of the frame to rewrite: a heavy frame exceeds aurora's
+ * per-frame staging budget, so the replay can feed it in command-aligned slices, one aurora frame
+ * each (the EFB itself persists - gfx::efb::prepare_frame only resizes it - so the picture still
+ * accumulates). `consumed` returns where the slice stopped, always on a command boundary. */
+bool rewrite_frame(const uint8_t* in, uint32_t size, uint32_t begin, uint32_t limit, StreamState& st,
+                   std::vector<uint8_t>& out, uint32_t& copies, uint32_t& consumed, std::string& err) {
   out.clear();
   out.reserve(size + 256);
-  uint32_t i = 0;
+  uint32_t i = begin;
   int cmds = 0;
   g_traceCount = 0;
   while (i < size) {
+    if (i >= limit) break;
+    consumed = i;
     if (g_maxCmds >= 0 && cmds >= g_maxCmds) {
       dump_trace();
       break;
@@ -509,7 +543,7 @@ bool rewrite_frame(const uint8_t* in, uint32_t size, StreamState& st, std::vecto
         append_u8(out, GX_AURORA_OPCODE);
         append_u16(out, static_cast<uint16_t>(AURORA_LOAD_ARRAYBASE + (reg - 0xA0)));
         append_u64(out, static_cast<uint64_t>(val));
-        append_u32(out, array_size_for(val));
+        append_u32(out, array_size_for(val, st.strides[9 + (reg - 0xA0)]));
         append_u8(out, 0); /* the guest's data is big-endian */
         ++g_arrayBases;
         i += 6;
@@ -614,6 +648,7 @@ bool rewrite_frame(const uint8_t* in, uint32_t size, StreamState& st, std::vecto
       err = buf;
       return false;
     }
+    consumed = i;
   }
   return true;
 }
@@ -850,7 +885,7 @@ int main(int argc, char** argv) {
   const char* outPath = argv[2];
   uint32_t fbWidth = 640, fbHeight = 480;
   AuroraBackend backend = BACKEND_AUTO;
-  int extraFrames = 8, stopAfter = -1, startAt = 0, copyRecord = -1;
+  int extraFrames = 8, stopAfter = -1, startAt = 0, copyRecord = -1, split = 1;
   uint32_t copyDst = 0, copyW = 80, copyH = 56, copyFmt = 6, copySize = 0;
   const char* copyOut = nullptr;
   bool rawStream = false, verbose = false, parseOnly = false, syntheticCopy = false;
@@ -868,6 +903,8 @@ int main(int argc, char** argv) {
       extraFrames = std::atoi(argv[++i]);
     } else if (std::strcmp(a, "--stop-after") == 0 && i + 1 < argc) {
       stopAfter = std::atoi(argv[++i]);
+    } else if (std::strcmp(a, "--split") == 0 && i + 1 < argc) {
+      split = std::max(1, std::atoi(argv[++i]));
     } else if (std::strcmp(a, "--start-at") == 0 && i + 1 < argc) {
       startAt = std::atoi(argv[++i]);
     } else if (std::strcmp(a, "--copy-record") == 0 && i + 1 < argc) {
@@ -953,9 +990,10 @@ int main(int argc, char** argv) {
     for (const auto& frame : cap.frames) {
       frameBytes.clear();
       for (const auto& [data, len] : frame.chunks) frameBytes.insert(frameBytes.end(), data, data + len);
-      uint32_t copies = 0;
+      uint32_t copies = 0, consumed = 0;
       const uint64_t v0 = g_vertices, d0 = g_draws;
-      if (!rewrite_frame(frameBytes.data(), static_cast<uint32_t>(frameBytes.size()), s, out, copies, err)) {
+      if (!rewrite_frame(frameBytes.data(), static_cast<uint32_t>(frameBytes.size()), 0,
+                         static_cast<uint32_t>(frameBytes.size()), s, out, copies, consumed, err)) {
         std::fprintf(stderr, "[replay] frame %u: adapter failed: %s\n", frame.frame, err.c_str());
         dump_trace();
         return 1;
@@ -1009,41 +1047,62 @@ int main(int argc, char** argv) {
       std::fprintf(stderr, "[replay] aurora_begin_frame failed at recorded frame %u\n", frame.frame);
       return 1;
     }
+    const bool isLast =
+        (fi + 1 == cap.frames.size()) || (stopAfter >= 0 && static_cast<int>(fi) + 1 >= stopAfter);
     if (rawStream) {
       for (const auto& [data, len] : frame.chunks) aurora::gx::fifo::write_data_grow(data, len);
+      if (isLast && !colorRequested) {
+        colorRequested = AuroraReadbackCaptureColor(stream, 0, &captureW, &captureH) == GX_TRUE;
+        std::printf("[replay] colour capture requested: %s (%ux%u)\n", colorRequested ? "yes" : "NO", captureW,
+                    captureH);
+      }
+      aurora_end_frame();
+      ++replayed;
     } else {
       frameBytes.clear();
       for (const auto& [data, len] : frame.chunks) frameBytes.insert(frameBytes.end(), data, data + len);
-      uint32_t copies = 0;
-      if (!rewrite_frame(frameBytes.data(), static_cast<uint32_t>(frameBytes.size()), streamState, rewritten,
-                         copies, err)) {
-        std::fprintf(stderr, "[replay] frame %u: adapter failed: %s\n", frame.frame, err.c_str());
-        dump_trace();
-        return 1;
+      const uint32_t total = static_cast<uint32_t>(frameBytes.size());
+      const uint32_t budget = split > 1 ? (total + static_cast<uint32_t>(split) - 1) / static_cast<uint32_t>(split)
+                                        : total;
+      uint32_t off = 0, chunks = 0;
+      while (off < total) {
+        if (chunks > 0) {
+          if (!aurora_begin_frame()) break;
+        }
+        const uint32_t limit = split > 1 ? std::min(total, off + budget) : total;
+        uint32_t copies = 0, consumed = off;
+        if (!rewrite_frame(frameBytes.data(), total, off, limit, streamState, rewritten, copies, consumed, err)) {
+          std::fprintf(stderr, "[replay] frame %u: adapter failed: %s\n", frame.frame, err.c_str());
+          dump_trace();
+          return 1;
+        }
+        if (consumed <= off) break; /* no progress: the slice is smaller than one command */
+        rewrittenCopies += copies;
+        aurora::gx::fifo::write_data_grow(rewritten.data(), static_cast<uint32_t>(rewritten.size()));
+        off = consumed;
+        ++chunks;
+        if (verbose) {
+          std::printf("[replay] frame %u chunk %u: off %u/%u, %zu rewritten bytes, %u copy cmd(s)\n",
+                      frame.frame, chunks, off, total, rewritten.size(), copies);
+          std::fflush(stdout);
+        }
+        const bool finalChunk = isLast && off >= total;
+        if (finalChunk && !colorRequested) {
+          colorRequested = AuroraReadbackCaptureColor(stream, 0, &captureW, &captureH) == GX_TRUE;
+          std::printf("[replay] colour capture requested: %s (%ux%u)\n", colorRequested ? "yes" : "NO",
+                      captureW, captureH);
+          if (copyDst != 0) {
+            const AuroraReadbackCopySrc src{0, reinterpret_cast<const void*>(static_cast<uintptr_t>(copyDst))};
+            copyRequested = AuroraReadbackCaptureCopies(stream, &src, 1) == GX_TRUE;
+            std::printf("[replay] copy capture 0x%08X requested: %s (%u bytes expected)\n", copyDst,
+                        copyRequested ? "yes" : "NO", static_cast<uint32_t>(copyPayload.size()));
+          }
+        }
+        aurora_end_frame();
       }
-      rewrittenCopies += copies;
-      if (verbose) {
-        std::printf("[replay] frame %u: %zu -> %zu bytes, %u copy cmd(s)\n", frame.frame, frameBytes.size(),
-                    rewritten.size(), copies);
-        std::fflush(stdout);
-      }
-      aurora::gx::fifo::write_data_grow(rewritten.data(), static_cast<uint32_t>(rewritten.size()));
+      ++replayed;
+      if (verbose) std::printf("[replay] frame %u done in %u chunk(s)\n", frame.frame, chunks);
     }
-    ++replayed;
-    const bool isLast =
-        (fi + 1 == cap.frames.size()) || (stopAfter >= 0 && static_cast<int>(fi) + 1 >= stopAfter);
-    if (isLast && !colorRequested) {
-      colorRequested = AuroraReadbackCaptureColor(stream, 0, &captureW, &captureH) == GX_TRUE;
-      std::printf("[replay] colour capture requested: %s (%ux%u)\n", colorRequested ? "yes" : "NO", captureW,
-                  captureH);
-      if (copyDst != 0) {
-        const AuroraReadbackCopySrc src{0, reinterpret_cast<const void*>(static_cast<uintptr_t>(copyDst))};
-        copyRequested = AuroraReadbackCaptureCopies(stream, &src, 1) == GX_TRUE;
-        std::printf("[replay] copy capture 0x%08X requested: %s (%u bytes expected)\n", copyDst,
-                    copyRequested ? "yes" : "NO", static_cast<uint32_t>(copyPayload.size()));
-      }
-    }
-    aurora_end_frame();
   }
   std::printf("[replay] replayed %u frame(s), adapter translated %u EFB copy command(s)%s\n", replayed,
               rewrittenCopies, rawStream ? " (raw stream: no translation)" : "");

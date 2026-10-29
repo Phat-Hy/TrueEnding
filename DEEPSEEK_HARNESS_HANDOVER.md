@@ -12813,6 +12813,44 @@ correctly — one frame has not been rendered. The blocker is a buffer-sizing po
 (`lib/gfx/resources.hpp` + `frame.cpp`'s single mapped staging buffer), not a semantics gap, and it
 is the first thing a migration would have to solve.
 
+**6b. Follow-up measurements (same session, after the first write-up) - the staging blocker is
+sharper than item 5 first said.** Three cheap experiments, all of them negative in an informative
+way:
+
+1. **The light frame is not self-contained.** Replaying frame 3401 alone fails immediately:
+   `draw with unknown vertex size at offset 9 (fmt 0, vcnt 4, vtxsize 0)` - the alternating
+   heavy/light frames share one CP vertex-descriptor state, so 3401 only parses with 3400 in front
+   of it. A capture window therefore has to start on a heavy frame, and a replay has to include it.
+2. **`--split` does not rescue the heavy frame.** Feeding a frame as N command-aligned aurora
+   frames (the EFB persists across frames - `gfx::efb::prepare_frame` only resizes it) still hits
+   the same wall, and the number scales with the configured capacity: 128 MiB -> `need 129 MiB`,
+   176 MiB -> `need 177 MiB`, 192 MiB -> `need 193 MiB`. That "+1 MiB, whatever the size" is the
+   signature of "the buffer filled up and the next push did not fit", i.e. **one heavy frame needs
+   more than 193 MiB** in the storage plane, and a single WebGPU buffer caps at 256 MiB for all
+   five planes (236 MiB is the most the planes can be given while leaving the others useful).
+3. **It is not the array uploads, though they were a real bug first.** `push_gx_draw` uploads a
+   vertex array with `push_storage(array.data, array.size)` and `CP_CMD_INVAL_VTX` clears the
+   cache, so the arrays are re-uploaded after every invalidation - and my adapter was declaring
+   "the rest of the MEM region" (up to 64 MiB per array). Fixing that (size from `index * stride`,
+   capped) took the requirement from an unbounded blow-up to a stable ~193 MiB, and capping the
+   arrays at 128 KiB then changed *nothing* - so the remaining ~190 MiB is **per-draw staging**:
+   31 056 unmerged draws at ~6.4 KiB each. That is the shape of the blocker: aurora's per-draw
+   staging cost times this game's draw count, which is a draw-merging question, not a constant.
+
+Artefacts of those runs, for the next session: `logs_ap/replay_final3.log` (the 193 MiB line),
+`build/recomp/gxcap/window.tlscap` (the filtered 2-frame window: 158 MB, 2 frames, 46 FIFO records,
+1 765 579 FIFO bytes, 2 MEM planes, **95 copy records**), and `aurora_copy.bin.host.bin`
+(71 680 bytes = this layer's bytes for copy record 4, `0x903DBDC0 160x112 fmt=6`, ready to
+byte-compare the moment a replay of the heavy frame succeeds).
+
+**6c. The capture instrument had a window bug, found by using it.** The recorder armed for the run,
+not for the window: with `TLS_EFB_ORDER=none` every one of the run's EFB copies was written, and a
+2-frame window produced an **8 747 977 944-byte** capture (31 630 stray records, 8.59 GB, measured
+by `tools/aurora_spike/capfilter.py`). Fixed by gating `tls_gxcap_copy`/`tls_gxcap_note` on
+`s_have_pending`; `capfilter.py` rewrites an oversized capture down to one window (it also
+memory-maps instead of loading, which is why the 8.7 GB file was usable at all) and produced the
+158 MB window used above.
+
 **7b. VERDICT (this session's definition of done, option (b)).** The spike is **blocked at a
 named step with numbers**, not abandoned on an impression: aurora builds and runs here, its
 command processor accepts this project's real GX stream, and the only thing standing between the

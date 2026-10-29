@@ -146,7 +146,7 @@ void tls_gxcap_frame_end(uint32_t frame) {
 }
 
 void tls_gxcap_note(const char* text) {
-    if (!tls_gxcap_on || !text) return;
+    if (!tls_gxcap_on || !s_have_pending || !text) return;
     cap_flush_chunk();
     cap_record(TLS_GXCAP_TAG_NOTE, text, (uint32_t)strlen(text));
 }
@@ -161,6 +161,8 @@ int tls_gxcap_ram_wanted(uint32_t frame) {
 
 void tls_gxcap_ram(uint32_t guest_base, const void* data, uint32_t size) {
     if (!tls_gxcap_on || !s_file || !data || size == 0) return;
+    /* Deliberately NOT gated on s_have_pending: the RAM plane is taken one frame after the
+     * recorded window closes (TLS_GX_CAPTURE_TO + 1). See tls_gxcap_ram_wanted(). */
     cap_flush_chunk();
     uint8_t hdr[8];
     memcpy(hdr, &guest_base, 4);
@@ -183,7 +185,10 @@ void tls_gxcap_ram_done(uint32_t frame) {
 
 void tls_gxcap_copy(uint32_t dst_guest, uint32_t w, uint32_t h, uint32_t fmt,
                     uint32_t vertex_mark, const void* bytes, uint32_t size) {
-    if (!tls_gxcap_on || !s_file || !bytes || size == 0) return;
+    /* Only inside the recorded window. Measured the hard way: without this test a 2-frame window
+     * produced an 8 747 977 944-byte file, because every one of the run's ~31 000 EFB copies was
+     * recorded (the plugin is armed for the whole run, not only for the window). */
+    if (!tls_gxcap_on || !s_have_pending || !s_file || !bytes || size == 0) return;
     cap_flush_chunk();
     uint32_t hdr[6];
     hdr[0] = dst_guest;
