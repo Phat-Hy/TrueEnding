@@ -12478,11 +12478,13 @@ a cutscene line. The defect to chase is the **composite tail**: either the guest
 loses a scale factor that hardware applies (TEV KONST / rasterised alpha / the copy's own alpha), so a bloom-like
 pass on an already-bright sky saturates instead of adding a small glow.
 
-**Next session, concretely (one run + one comparison):** dump the TEV state and the copy contents of b64/b65 in the
-same log (`TLS_BATCH_DUMP=4500` already prints blend factors; the dumps need the TEV stage registers and the copy's
-alpha channel, and `TLS_BATCH_PROBE`'s `a=` field at b62/b64/b65 says whether the copies keep alpha), then decide
-between "the guest asks for white" and "we drop the scale" — the second is testable by clamping that one batch's
-contribution. Do **not** re-derive the cave or the cutscene: they render.
+**Next session, concretely.** The shader/TEV question is answered (item 8): forcing PSTev everywhere does not change
+the white, so go at the **EFB copy** instead. The sharpest single check is to give every copy in a frame an identity
+and its own bytes: service them into distinct buffers and print `(vertex_mark, dst_guest, w x h, mean RGB)` for all
+nine — if two copies into the same `dst_guest` at different `vertex_mark`s return different content, the tail is
+feeding on its own output and the fix is in `gx_pipeline.c`'s servicing order, not in the shader. `TLS_BATCH_PROBE`
+at 4500 (`logs_ap/apAH_batchprobe.log`) is the reference for what each of the nine quads contributes; keep it as the
+before/after baseline. Do **not** re-derive the cave or the cutscene: they render.
 
 **Also measured, so nobody re-argues it: the guest is alive behind the white.** Through 3840..5000 the draw
 list keeps changing every 60 frames (`58128 / 58053 / 56559 / 57087 / 58065 / 58044 / 57639 / 57648 / 58044 / 58101 /
@@ -12490,3 +12492,20 @@ list keeps changing every 60 frames (`58128 / 58053 / 56559 / 57087 / 58065 / 58
 So the scene is animating, the vertex pipeline is fed, and the only broken thing is what the composite tail writes
 to the back buffer. Combine that with `TLS_BATCH_CUTOFF=61` (correct 3D scene) and the defect is a nine-batch
 full-screen 2D composite, not the game's logic and not the field state machine.
+
+**8. The shader path is NOT the cause — measured, negative, one switch.** I expected the tail to be losing a TEV
+scale (the documented "the dropped stages carry the SCALE" failure that made the water a pale sheet), so I added
+`TLS_TEV_FORCE_STAGES=<n>` (`recomp/gfx_d3d11.c`, inert unless set): route a batch through `PSTev` when its TEV
+chain has at least `n` stages even if every stage names texmap 0. Two runs at 4600 frames, shot at 4500, both with
+`SetNextSequence('Game') @1647`:
+
+* `TLS_TEV_FORCE_STAGES=3` → frame 4500 `mean=255.00 std=0.00` (unchanged);
+* `TLS_TEV_FORCE_STAGES=1` (every batch on PSTev) → `mean=255.00 std=0.00` (still unchanged).
+
+So the white survives a full TEV re-route: the guest's combiners are being evaluated and the result still saturates.
+The operands, not the combiner, are wrong. The remaining suspect is the **EFB-copy buffer's lifetime inside the
+frame**: b62 and b65/b67 sample the *same* address `0x9038D1C0` (80x56) and get different content — b62 yields an
+avg of about 161, b65/b67 yield 255. Under stream-order servicing a copy issued later in the frame captures whatever
+the earlier composite draws have already written, so the tail feeds on its own output and saturates. That is a
+`gx_pipeline.c` copy-order/lifetime question (AP-Z's staging path), **not** a TEV question — do not spend another run
+on shaders.

@@ -3628,6 +3628,33 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                             }
                         }
                         use_tev_path = second_map;
+                        /* TLS_TEV_FORCE_STAGES=<n>: route a batch through PSTev when its TEV
+                         * chain has at least <n> stages, even if every stage names texmap 0.
+                         *
+                         * The test above only catches "a second texture is named", so a chain
+                         * that stays on one texture but does its work through konst/prev/scale
+                         * - the shape of a bloom or fade composite - is still handed to the
+                         * legacy single-texture shader, which can express only the first two
+                         * stages. That is the documented cause of the blown-out pale water
+                         * ("the dropped stages carry the SCALE", comment above). The Chapter-1
+                         * white screen (5c.46 AP-AI) is nine full-screen EFB-copy quads whose
+                         * additive blend saturates, so this switch tests the same hypothesis on
+                         * them: if forcing PSTev turns the white into a picture, the tail's
+                         * scaling lives in stages the legacy path drops. Inert unless set, and
+                         * never a default: it re-routes every 3+ stage batch in the game and so
+                         * moves the invariant frame. */
+                        if (!use_tev_path) {
+                            static int s_force_stages = -2;
+                            if (s_force_stages == -2) {
+                                const char* e = getenv("TLS_TEV_FORCE_STAGES");
+                                s_force_stages = e ? atoi(e) : 0;
+                            }
+                            if (s_force_stages > 0 && s_multi != 0) {
+                                const GxTevState* st = gx_pipeline_get_tev_state(batch->tev_state);
+                                if (st && (int)st->num_stages >= s_force_stages)
+                                    use_tev_path = true;
+                            }
+                        }
                     }
                     if (use_tev_path && s_d3d11.gx_ps_tev) {
                         /* GX TEV: evaluate the batch's real combiner stages. All eight
