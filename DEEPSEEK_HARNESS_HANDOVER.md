@@ -12206,3 +12206,33 @@ while the *scene* is not yet the field - i.e. compare against a Dolphin referenc
 Dolphin's Chapter-1 field task also sits at state 0 with a still camera at the equivalent moment, then this host's
 "frozen" picture may be a legitimate cutscene that simply never ends because a *sequencer* trigger is missing, and
 the sequencer (not the field state machine) is where to look.
+
+---
+
+### AP-AE. THE FROZEN FIELD IS A WAIT WITH NO WAKE: the guest idles ~79 % of every gameplay frame
+
+**1. The profile is unambiguous.** `TLS_PC_HIST=1 TLS_PC_HIST_FROM=5000` reports, per gameplay frame:
+
+```
+[Runner] Frame 5000 used 321000 blocks with no output; top dispatched PCs (10031 samples):
+          0x805F50B0    7915 samples ( 78.9%)
+          0x800761D8      82 samples (  0.8%)
+          ...
+```
+
+`0x805F50B0` is the **OS idle loop** (`tls_is_idle_address` covers `0x805F50B0..0x805F50BC`, and the frame line's
+`PC: 0x805F50B0` agrees). So the guest is not busy doing work that fails to render - it is **parked, waiting**,
+burning its 321 000-block budget in the idle loop. That is why frames 5500 and 6200 are pixel-identical (AP-AC5):
+there is nothing to animate because nothing is being driven.
+
+**2. The task list at that moment is unchanged and the VI retrace queue head is NULL.** The shutdown dump of the
+same run reads `VI Queues: RetraceQueueHead=0x00000000`, where the title-era dump (frame 476) had
+`0x807CB658`. A null retrace-queue head with the field task parked at state 0 is exactly the shape of a **wake that
+is never delivered**: the field cannot advance if the retrace/event path does not reach it. This is a lead, not a
+conclusion - the queue being empty at shutdown could also be normal.
+**So the next session's question is a wake question, not a rendering one:** which event is the field task supposed
+to receive to leave state 0, and does the host deliver it? The instruments named in §5c.46 Z are the right ones
+(`TLS_WAIT_PROBE`, `TLS_WAKE_PROBE`, `TLS_WAKE_TIMELINE`, `TLS_LOSTWAKE_PROBE`, `TLS_VBLANK_PROBE`,
+`TLS_RETRACE_FLAG`, `TLS_FRAMEQUEUE_WAKE`), and the runner's own `tls_dump_sleep_queues`/`tls_dump_wake_queues`
+already print at shutdown - read those two dumps FIRST next time, they were in every log this session and were
+never looked at.
