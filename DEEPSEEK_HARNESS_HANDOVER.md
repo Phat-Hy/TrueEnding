@@ -12267,3 +12267,18 @@ to receive to leave state 0, and does the host deliver it? The instruments named
 `TLS_RETRACE_FLAG`, `TLS_FRAMEQUEUE_WAKE`), and the runner's own `tls_dump_sleep_queues`/`tls_dump_wake_queues`
 already print at shutdown - read those two dumps FIRST next time, they were in every log this session and were
 never looked at.
+
+---
+
+### AP-AF. A HAZARD FOR THE NEXT SESSION: the file name of the field-task module is MISLEADING
+
+`fn_80368280` - the function this dossier calls "the Chapter-1 scene state machine" since 5c.26 - lives in
+**`src/game_system_wpad_motor.c`**, i.e. dtk put it in the Wiimote-motor module. That is almost certainly just where
+the linker happened to place it (999 decompiled files, one module per address range), and the body supports the
+dossier's reading rather than a motor reading: it calls **`fn_801240B4` from `src/game_player_status.c`** in its
+state-0 path, it reads manager globals (`lbl_8087F8A0`, `lbl_8087EFB4`, `lbl_8087F0A8`) 46 times, and it dispatches
+a 10-state table of which the states set 2 and 3 for themselves. But the name is a trap: a next session that greps
+for a file called `game_field.c` or `game_scene.c` will not find it, and one that trusts `wpad_motor` will look for
+rumble logic. **Search by address, not by module name.** For reference, the addresses that matter for this thread
+are `0x80368280` (update), `0x8036A110` (state-0 handler), `0x811671C0` (the task object), `0x8116C6F8` (its state
+word), `0x803659A0` (the block that created it at frame 1648) and `0x80570CFC` (the load task's update).
