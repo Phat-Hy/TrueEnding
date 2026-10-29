@@ -1639,6 +1639,21 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
 }
 
 static D3D11_BLEND map_gx_src_blend_factor(uint8_t factor) {
+    /* The SOURCE and DESTINATION slots do NOT decode identically, which is what Dolphin's
+     * two enums (SrcBlendFactor / DstBlendFactor) encode and what one shared table cannot
+     * express:
+     *   SrcBlendFactor: 0 Zero 1 One 2 DstClr 3 InvDstClr 4 SrcAlpha 5 InvSrcAlpha
+     *                   6 DstAlpha 7 InvDstAlpha
+     *   DstBlendFactor: 0 Zero 1 One 2 SrcClr 3 InvSrcClr 4 SrcAlpha 5 InvSrcAlpha
+     *                   6 DstAlpha 7 InvDstAlpha
+     * This table was written for the DESTINATION slot and is reused for the source, so source
+     * factors 2 and 3 were evaluated as SrcClr/InvSrcClr instead of DstClr/InvDstClr - a
+     * different operation as soon as source and destination differ. Factors 4..7 are identical
+     * in both enums, so alpha blending was never affected; only the 2/3 "bright pass" shape is.
+     * TLS_BLEND_SLOT_FIX=1 evaluates the corrected source-slot mapping; the default is left
+     * alone because the page gate was recorded against it (see the comment below). */
+    static int s_slot_fix = -1;
+    if (s_slot_fix < 0) s_slot_fix = getenv("TLS_BLEND_SLOT_FIX") ? 1 : 0;
     switch (factor) {
         case 0: return D3D11_BLEND_ZERO;
         case 1: return D3D11_BLEND_ONE;
@@ -1650,8 +1665,8 @@ static D3D11_BLEND map_gx_src_blend_factor(uint8_t factor) {
          * destination differ - and the brightest composite pass of the MENU tail is
          * `s=2 d=0` (GX: dst = src*src, the "bright pass"), so this was measurable
          * (handover 5c.23). */
-        case 2: return D3D11_BLEND_SRC_COLOR;
-        case 3: return D3D11_BLEND_INV_SRC_COLOR;
+        case 2: return s_slot_fix ? D3D11_BLEND_DEST_COLOR : D3D11_BLEND_SRC_COLOR;
+        case 3: return s_slot_fix ? D3D11_BLEND_INV_DEST_COLOR : D3D11_BLEND_INV_SRC_COLOR;
         case 4: return D3D11_BLEND_SRC_ALPHA;
         case 5: return D3D11_BLEND_INV_SRC_ALPHA;
         case 6: return D3D11_BLEND_DEST_ALPHA;
@@ -2795,6 +2810,38 @@ static void d3d11_service_pending_copies(uint32_t* cursor, uint32_t up_to_vertex
                                 c->half_scale, c->pitch, c->exec);
         s_replaying_copy--;
         ID3D11DeviceContext_OMSetRenderTargets(s_d3d11.context, 1, &s_d3d11.rtv, s_d3d11.dsv);
+        /* TLS_COPY_PROBE=<frame>: for ONE frame, give every serviced copy an identity and its
+         * own bytes, so "the same destination is written twice with different content" and
+         * "the tail samples a copy of its own output" are measured instead of inferred
+         * (5c.46 AP-AI: the composite tail pins the screen to white). The fingerprint is the
+         * mean of up to 4096 bytes read back from the destination in GUEST memory after the
+         * copy runs, so destination and content come from one line. Gated on the present
+         * counter like the other per-batch probes; inertia unless set. */
+        {
+            extern int g_runner_current_frame;
+            static int s_cp_frame = -2;
+            if (s_cp_frame == -2) {
+                const char* e = getenv("TLS_COPY_PROBE");
+                s_cp_frame = e ? atoi(e) : -1;
+            }
+            if (s_cp_frame >= 0 && s_cp_frame == g_runner_current_frame) {
+                uint32_t w = c->x1 - c->x0 + 1, h = c->y1 - c->y0 + 1;
+                uint32_t bytes = w * h * 4u;
+                double sum = 0.0; uint32_t n = 0;
+                {
+                    const uint8_t* q = (const uint8_t*)host_resolve_gx_guest_addr(c->dst_guest);
+                    if (q) {
+                        uint32_t step = bytes > 4096u ? bytes / 4096u : 1u;
+                        if (step < 1u) step = 1u;
+                        for (uint32_t i = 0; i < bytes; i += step) { sum += q[i]; n++; }
+                    }
+                }
+                printf("[CopyProbe] frame=%d at batch=%d copy#%u dst=0x%08X %ux%u fmt=%u vmark=%u bytes=%u mean=%.2f n=%u\n",
+                       g_runner_current_frame, at_batch, *cursor, c->dst_guest, w, h,
+                       c->real_format, c->vertex_mark, bytes, n ? (sum / (double)n) : -1.0, n);
+                fflush(stdout);
+            }
+        }
         (*cursor)++;
     }
 }

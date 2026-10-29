@@ -12509,3 +12509,49 @@ avg of about 161, b65/b67 yield 255. Under stream-order servicing a copy issued 
 the earlier composite draws have already written, so the tail feeds on its own output and saturates. That is a
 `gx_pipeline.c` copy-order/lifetime question (AP-Z's staging path), **not** a TEV question — do not spend another run
 on shaders.
+
+---
+
+### AP-AJ. THE WHITE SCREEN IS OUR DEFECT — the project's own Dolphin reference at the same moment IS gameplay
+
+A reference capture already in the tree settles guest-intent vs host-bug, so nobody has to argue it:
+**`docs/evidence/dolphin_ref_run3_f5000_gameplay.png`** is Dolphin at frame 5000 and it shows *gameplay* — Dagran
+(LV 5) and Syrenne (LV 4) with HP bars in the top-left, a lit cave, a water pool, the character standing in it. Our
+host at frame 4500/5000 is a uniform `255,255,255`. Side by side:
+**`docs/evidence/cmp_f5000_white_vs_dolphin_apAJ.png`**.
+
+Consequences, in order of usefulness:
+
+1. **The white screen is a renderer defect, not a game state.** The guest is drawing (57-58 k verts/frame, batch
+   count oscillating) and Dolphin shows the result. So the fix target is the composite tail, and "the field never
+   starts" / "no HUD" are *downstream of this one bug*: a screen that is white cannot show a HUD either. This should
+   now be the project's top item — ahead of the state word (AP-AH) and ahead of any HUD work.
+2. **The scene at that moment is the cave, not an outdoor sky.** Our `TLS_BATCH_CUTOFF=61` capture (an
+   outdoor sky with a sun flare) is what *our* 3D pass is producing at 4500, while the reference at the same time
+   has the cave interior with a water pool. So the cut-off capture is *not* "the correct scene underneath" — it is
+   the correct *3D pipeline* with a scene that does not match the reference. Do not read that capture as "the 3D
+   pass matches Dolphin"; read it as "the 3D pass draws something coherent, the tail whitens it, and the scene
+   content itself still needs a same-moment comparison." The AP-Z cave capture at frame 2600
+   (`host_2600_cave_apAI.png`) is the one that does correspond to the reference's cave.
+3. **Two mapping/route hypotheses are now excluded, by measurement rather than argument:** `TLS_TEV_FORCE_STAGES=1`
+   (every batch through `PSTev`) leaves the frame at `255.00/0.00`, and `TLS_BLEND_SLOT_FIX=1` (corrected source-slot
+   GX blend enums, below) gives `2600 = 63.90/50.72`, `3500 = 253.54/18.39`, `4500 = 255.00/0.00` — i.e. bit-for-bit
+   the default at all three frames. So neither the TEV combiner nor the 2/3 source blend factor is the whitening.
+4. **One real spec mismatch found and gated, worth keeping.** Dolphin's `BPMemory.h` has *two* enums —
+   `SrcBlendFactor` (`2 = DstClr, 3 = InvDstClr, 4 = SrcAlpha …`) and `DstBlendFactor`
+   (`2 = SrcClr, 3 = InvSrcClr, 4 = SrcAlpha …`) — so one shared table cannot serve both slots. This host's
+   `map_gx_src_blend_factor()` reuses the destination table for the source slot, which mis-decodes source factors
+   **2 and 3 only** (4..7 are identical in both enums, so alpha blending was never affected).
+   `TLS_BLEND_SLOT_FIX=1` selects the corrected mapping; default unchanged because the page gate was recorded
+   against the old one, and the measurement above shows it does not move these three frames anyway. Cite:
+   [Dolphin BPMemory.h](https://raw.githubusercontent.com/dolphin-emu/dolphin/master/Source/Core/VideoCommon/BPMemory.h).
+5. **A new instrument for the copy chain, and what it showed.** `TLS_COPY_PROBE=<frame>` prints, for one frame,
+   every serviced copy with `dst / w x h / fmt / vertex_mark / mean byte value`, destination and content in one
+   line. At frame 4500 the same 80x56 destination `0x9038D1C0` is written three times as
+   `139.85 → 219.10 → 255.00`, and the final full-res copy into `0x905C3000` is already `255.00` — the tail is
+   copying a screen that its own earlier passes have already whitened, and because the white is re-created every
+   frame the state persists indefinitely.
+6. **Crash observed once, unrelated to the above.** One run died with `exit=-1073740940` (`0xC0000374`,
+   STATUS_HEAP_CORRUPTION) at guest frame ~1998, during the Chapter-1 scene load (`CharaTask Init`, `CXDecompressFast`
+   entries). The identical command re-run completed to 4560 frames, so it is intermittent. If a next session sees
+   that exit code, it is not the change it just made — verify by re-running before bisecting.
