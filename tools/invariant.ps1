@@ -56,7 +56,20 @@ Set-Location $root
 #
 # It reproduces exactly: two independent runs of the widened build both give D3329E35..., and
 # the tutorial-page gate is untouched by it (page mean luma 150.33, crest 11.2 % dark).
-$EXPECTED_SHA = 'D3329E3565DF4E1087785D618114ABE44E555B2465338336853363E7209AB27E'
+#
+# RE-RECORDED IN 5c.46 AP-Z (intended change, user-approved). The hero is visible now:
+# stream-order staging EFB copies (the default, see recomp/gx_pipeline.c) plus the GXDrawDone
+# flush make the character's 256x256 base texture bake real CMPR art instead of the
+# all-transparent pattern - docs/evidence/host_5500_hero_visible_apZ.png shows the character
+# rendered in the cave where it used to be absent entirely.
+#
+# The cost, stated plainly: that change MOVES THE SEQUENCE, so frame 3500 is no longer the
+# cave but the "NEW TUTORIAL" menu (docs/evidence/host_3500_tutorial_menu_apZ.png), and the
+# recorded hash moved from D3329E35... to C5447108.... This is a change in WHAT THE GATE
+# MEASURES, so it was re-recorded deliberately rather than silently: the old reference and
+# its reasoning are kept above, and the new frame is a stable, fully-drawn scene.
+# TLS_EFB_ORDER=none restores the old inline copy behaviour if the old reference is needed.
+$EXPECTED_SHA = 'C544710896788BD3475E30509640E8F608438A056F3828B3AD750D309D24CCB4'
 $SHOT_FRAME   = '3500'
 $INPUT        = '600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A'
 

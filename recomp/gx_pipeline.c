@@ -1760,28 +1760,28 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
             static int s_order_set = -1;
             if (s_order_set < 0) {
                 const char* e = getenv("TLS_EFB_ORDER");
-                /* STAGING ORDER IS OPT-IN (5c.46 AP-Z), and the reason is NOT the hero.
+                /* STAGING ORDER IS THE DEFAULT (5c.46 AP-Z, user-approved promotion).
                  *
-                 * With the AP-R source rule and the AP-Z GXDrawDone flush it does fix the
-                 * character: the 256x256 base texture at 0x92AEAEC0 bakes varied CMPR blocks
-                 * (00004ACB/3A2B4ACB/428B4ACC/42AB4AAC) instead of the all-transparent
-                 * pattern, and docs/evidence/host_5500_hero_visible_apZ.png shows the
-                 * character's head rendered in the cave next to the sword.
+                 * Three pieces had to be right before this could be on:
+                 *   - AP-R: a replayed copy must read the LIVE back buffer, not the
+                 *     previous-frame snapshot (the source used to be chosen from the GLOBAL
+                 *     defer flag, which is why the earlier "narrowing does not work"
+                 *     measurement was invalid);
+                 *   - AP-Z: GXDrawDone (0x806140C0) must service the queue, because
+                 *     fn_800D7278 issues the copy, calls GXDrawDone, and only then reads it;
+                 *   - AP-Q: the class itself is safe - `staging` was measured surviving
+                 *     2 760 frames with zero exit(0), unlike the global switch.
+                 * With all three the character's 256x256 base texture at 0x92AEAEC0 bakes
+                 * varied CMPR blocks instead of the all-transparent pattern, and
+                 * docs/evidence/host_5500_hero_visible_apZ.png shows the character rendered
+                 * in the cave where it used to be absent.
                  *
-                 * But making it the default MOVES THE SEQUENCE: tools/invariant.ps1's frame
-                 * 3500 becomes the "NEW TUTORIAL" menu (sha C5447108...) instead of the cave
-                 * (D3329E35...), i.e. the run reaches a different screen by that frame. That
-                 * is a change to what the regression gate measures, not a visual fix inside
-                 * one frame, so it must not be folded in silently - the recorded frame-3500
-                 * reference is the project's only whole-scene guard and re-recording it would
-                 * hide exactly the kind of sequencing perturbation that AP-Q's global-defer
-                 * experiment turned out to be.
-                 *
-                 * So: `TLS_EFB_ORDER=staging` gives the visible hero today; promoting it to the
-                 * default needs the frame-3500 reference re-recorded deliberately, with the
-                 * new scene as the stated reason, plus a re-check of the page gate.
-                 * `none`/`xfb`/`all` remain available for A/B. */
-                s_order_set = 0;
+                 * COST, accepted knowingly: this moves the sequence, so frame 3500 is now
+                 * the "NEW TUTORIAL" menu (sha C5447108...) instead of the cave, and
+                 * tools/invariant.ps1's EXPECTED_SHA was re-recorded with that scene named as
+                 * the reason (docs/evidence/host_3500_tutorial_menu_apZ.png). `TLS_EFB_ORDER=none`
+                 * restores the old inline behaviour for A/B; xfb/all still select the others. */
+                s_order_set = (e == NULL) ? 1 : 0;
                 if (e) {
                     if (strstr(e, "staging")) s_order_set |= 1;
                     if (strstr(e, "xfb")) s_order_set |= 2;

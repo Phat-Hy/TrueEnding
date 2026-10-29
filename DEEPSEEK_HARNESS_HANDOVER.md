@@ -11947,3 +11947,23 @@ class of sequencing perturbation that AP-Q's global-defer experiment turned out 
 reference re-recorded with the new scene as the stated reason, page gate re-checked), or keep it behind
 `TLS_EFB_ORDER=staging` while the sequencing difference is understood. Both are one-line changes; the second keeps
 the project's only whole-scene guard honest in the meantime.
+
+**6. PROMOTED (user-approved): staging order is the default, and the objective''s texture criterion now holds with
+no switches at all.** With a completely clean environment (`TLS_EFB_ORDER` unset, only the input script), a
+1 960-frame run gives:
+
+```
+[MemDump] 0x92AEAEC0 len=192 frame=1915
+  +0000 00004ACBFFFFFFFF00004ACBFFFFFFFF00004ACBFFFFFFFF3A2B4ACBFFFFFFFF
+  +0040 00004ACBFFFFFFFF00004AABFFFFFFFF428B4ACCFFFFFFFF42AB4AACFFFFFFFF
+```
+
+- **`TLS_EFB_ORDER=staging` is the default** (see `recomp/gx_pipeline.c`); `none` restores the old inline path.
+- **`tools/invariant.ps1` PASS at the re-recorded `C5447108...`** (frame 3500 = the NEW TUTORIAL menu), with the
+  previous reference, the reason and the A/B switch kept in the script''s comment.
+- **The page gate is intact to the tenth**: `rect_stats.py` on the page capture (present 3794, guest frame 3730,
+  the same capture point as before) gives crest `(204.9,180.9,121.1) 11.2 % dark` and band
+  `(229.8,200.6,127.3) 2.3 % dark` - **exactly** the recorded numbers. The known-good page is untouched by the
+  copy-order change, which is the consistency check the dossier asks for.
+- **Zero `exit(0)` calls** in a 5 600-frame run, and the run still hands over at `Game@1647`.
+- **The character is visible**: `docs/evidence/host_5500_hero_visible_apZ.png`.
