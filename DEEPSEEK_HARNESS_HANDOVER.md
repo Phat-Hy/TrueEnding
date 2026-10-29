@@ -11807,3 +11807,13 @@ tutorial page's manager is finished and **the gameplay HUD is a different task t
 `LayoutTask`/manager the way AP-L found the page's (`TLS_LAYOUT_CREATE_PROBE` / `TLS_PAGETASK_PROBE` /
 `TLS_LAYOUT_SHOW_PROBE` exist for exactly this, and AP-L's recipe - find the manager slot, then the create and
 show verbs - is the template), rather than looking for it among the drawn batches.
+
+**5. Settled gameplay looks RIGHT except for the two missing things.** `TLS_SHOT_FRAMES=5500` gives
+`docs/evidence/host_5500_gameplay_apX.png`: the Chapter-1 cave with rock walls, water, the red-lit growth, and
+**the sword in the foreground**, all rendered - and, exactly as the objective says, **no character body and no
+HUD**. The loading plate seen at 1909 (`docs/evidence/host_1909_loading_apW.png`) is gone by 5500, so the plate in
+the frame-4300 batch list was a *transition*, and 5500 is the frame to measure "playable" against. The black wedge
+at the top centre is a geometry gap, not the character silhouette.
+**This also confirms the HUD verdict below is not a transition artefact**: at 5500 the run is in settled gameplay
+and still draws no HUD quads. The sword being visible while the body is not is the same asymmetry AP-Q started
+from - the sword's texture is a normal one, the body's five are the baked-transparent ones.
