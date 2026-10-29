@@ -11718,6 +11718,31 @@ Two concrete candidate mechanisms, both cheap to test next round:
   version is a *targeted* clear (skip the clear only for a frame whose guest issues a copy into the staging arena);
 * the guest's copy carries `BP 0x52` bit 11, which the pipeline explicitly does not decode (see AP-W item 3).
 
+**7. THE MECHANISM IS FOUND - the inline copy mistimes, the replayed copy is correct.** `TLS_EFB_ORDER=staging`
+(which queues the staging copies and replays them inside the batch loop) together with the AP-R per-copy source
+rule makes those same copies capture **real content instead of black**:
+
+```
+inline (default):   [EfbChain] present=1909 ... dst=0x90536FE0 srcavg=(0,0,0)    srca=255 dstavg=(0,0,0)
+stream-order:       [EfbChain] present=1910 frame=1909 copy=6 batch=8 dst=0x90536FE0 256x256 \
+                      srcavg=(59,78,100) srca=255 dstavg=(60,80,101) dstalpha=255 dstpeak=581
+```
+
+`srcavg=(59,78,100)` with `dstpeak=581` is the drawn frame, not a clear. So **the copy is being performed at the
+wrong point on the host timeline, and moving it to its stream position fixes its content.** What remains is that
+the replay happens at the *end* of the frame (`batch=8` of present 1910 for guest frame 1909), i.e. **after** the
+guest's own read: the guest converts at frame 1909, then the replay fills the buffer, then the `__fill_mem` clear
+at frame 1910 wipes it. On hardware the guest's `GXDrawDone` is the sync point that makes the copy complete
+*before* it reads.
+**So the fix is the one this dossier has been circling: `GXDrawDone` (0x806140C0) is a no-op stub that only
+stores a byte at 0x808800A8, and it must instead flush the frame.** Concretely: extract the batch-draw body of
+`d3d11_present` into a callable helper (`d3d11_draw_batches_upto(vertex_count)`), and have a new
+`gfx_flush_gx_now()` draw everything accumulated so far and then call
+`d3d11_service_pending_copies(&cursor, 0xFFFFFFFF, 9999)` - so the copy lands where the guest expects it, before
+the read that depends on it. This is the highest-value change available and it is now backed by the measurement
+above rather than by inference.
+
+
 
 
 
