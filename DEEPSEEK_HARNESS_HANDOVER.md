@@ -11932,3 +11932,18 @@ re-verify the two gates that a visible hero necessarily moves:
 **4. Instrument note.** `[EfbChain] ... batch=8` versus `batch=9999` is the fingerprint of the flush working:
 `9999` is the end-of-present service (too late for the guest's read), `8` is a per-batch service inside
 `d3d11_present`'s batch loop, which is where the flush places the copy.
+**5. THE HERO IS VISIBLE - but promoting the fix moves the sequence, so it is OPT-IN until that is decided.**
+`TLS_EFB_ORDER=staging` now gives a rendered character: `docs/evidence/host_5500_hero_visible_apZ.png` shows the
+character's head in the cave above the water, next to the sword, where the same frame previously had **no body at
+all** (`docs/evidence/host_5500_gameplay_apX.png`). Zero `exit(0)` calls in the run.
+
+Making it the *default* was tried and **reverted**, for a concrete reason: the frame-3500 regression frame stops
+being the cave and becomes the **"NEW TUTORIAL" menu** (`sha C5447108...`, `docs/evidence/host_3500_tutorial_menu_apZ.png`),
+i.e. the run reaches a different screen by frame 3500. That is a change in *what the gate measures* - the same
+class of sequencing perturbation that AP-Q's global-defer experiment turned out to be - and re-recording
+`EXPECTED_SHA` would hide it. With the default reverted, `tools/invariant.ps1` is **PASS at `D3329E35...`** again
+(verified after the revert).
+**So the decision this leaves for the user:** promote staging order to the default (visible hero, frame-3500
+reference re-recorded with the new scene as the stated reason, page gate re-checked), or keep it behind
+`TLS_EFB_ORDER=staging` while the sequencing difference is understood. Both are one-line changes; the second keeps
+the project's only whole-scene guard honest in the meantime.
