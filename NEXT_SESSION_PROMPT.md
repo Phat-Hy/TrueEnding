@@ -5,104 +5,141 @@ Work autonomously. Measure instead of guessing. Commit per logical change with t
 Keep the build green. Write findings into DEEPSEEK_HARNESS_HANDOVER.md as you make them. **0 changes to `src/`.**
 Every runner launch is `--window --minimized`, one at a time.
 
+THIS SESSION HAS ONE QUESTION. The ones already answered below are closed — do not re-open them.
+
 =====================================================================
 0. READ THESE, IN THIS ORDER
 =====================================================================
 
-  a. AGENTS.md §1 — **Renderer strategy: Aurora-first**. That is this session's mission; the rest of §1 and §4
-     still apply (0 changes to src/, minimized launches, CMPR alpha contract).
-  b. DEEPSEEK_HARNESS_HANDOVER.md, in this order: the `WHERE THIS STANDS` block at the top, then §5c.46 **AP-AL**
-     (why Aurora), **AP-AK** (the copy-ordering hypothesis, disproven — do not re-test it), **AP-AJ** + **AP-AI**
-     (the white screen and what the Dolphin reference does and does not prove), and **AP-AH** (the state-1 writer
-     that is never called). Everything before §5c is history; several of its conclusions are disproven.
-  c. `.agents/skills/recomp-debugging.md` before spending any run.
-
-Do not re-derive any of these — they are measured:
-  * the "frozen gameplay frame" is a **pure-white screen** (255.00, std 0.00), not an idling field;
-  * our copy servicing is already at exact batch boundaries (`s_batch_barrier`), so copy ordering is **not** the bug;
-  * `TLS_TEV_FORCE_STAGES=1` (every batch on PSTev) and `TLS_BLEND_SLOT_FIX=1` both leave the white frame unchanged;
-  * the field state machine's only writer of state 1 (`0x8036F5D8`) is never called, and every caller of it is a
-    menu / game-over task — the state word is not the way to get the picture back.
+  a. AGENTS.md §1 — Renderer strategy: Aurora-first. Still this project's mission; the rest of §1 and §4
+     (0 changes to `src/`, minimized launches, CMPR alpha contract) still apply.
+  b. DEEPSEEK_HARNESS_HANDOVER.md — the "NEXT SESSION — START HERE" block at the top (the spike's state in one
+     paragraph), then §5c.46 **AP-AM** in full. Items **6d, 6e, 6f, 6g, 6h** are this session's starting point.
+     Everything before AP-AM is history and several of its conclusions are disproven.
+  c. tools/aurora_spike/README.md — how the spike builds and what each script does.
+  d. .agents/skills/recomp-debugging.md before spending any run.
 
 =====================================================================
-1. THE MISSION — a bounded Aurora spike, three exit criteria
+1. WHERE THE SPIKE STANDS (measured — do not re-derive)
 =====================================================================
 
-Hypothesis to test, not a migration to start: the fidelity work this project keeps paying for (TEV stages, blend
-enums, XF texgen, EFB copy/readback, texture decode) is already solved in
-[Aurora](https://github.com/encounter/aurora) (MIT, WebGPU/Dawn, D3D12/Vulkan/Metal), which is what the shipped
-community Wii ports use — including [WiiCompiled](https://github.com/patchzyy/Wiicompiled), whose **static
-recompilation of a retail DOL/REL** is this project's exact analogue. None of them writes a rasteriser.
+  * Criterion 1 — **CLEARED, without MSVC**: aurora @ 505b5eb + prebuilt Dawn v20260807.225922 + SDL3 3.4.10
+    build entirely with **MinGW GCC 16.2** (tools/w64devkit's cmake 4.4.3 + ninja 1.13.2): 503 targets,
+    `ctest` **424/425**, including `ReadbackGpuTest.*` (real Dawn device, real WGSL compute). The aurora
+    checkout lives at **G:\Program\aurora-spike** (`aurora/`, `build2/`, `stublibs/`).
+  * Criterion 3 — **CLEARED, with content**: with `GXInit(nullptr, 0)` in the harness, `capture_copies`/`get`
+    delivers a 64x64 RGBA8 copy whose **every one of its 4096 texels is exactly the rendered colour**
+    `(192,128,64,255)`, in the hardware's 4x4 tile layout. That is `--synthetic-copy` and it must keep
+    printing PASS. aurora's copy path is therefore **not** the white-screen defect (AP-AM 6e compares the same
+    guest copy from both layers: aurora's payload is layout-exact and equals its own EFB).
+  * Criterion 2 — **OPEN**. aurora *records* the cave frame (**26 616 draws, 1.12 M vertices, 102 pipelines
+    created**; the raw stream with no adapter records the same 27 149 draws) and its EFB is **black** — even
+    for a copy taken after **210 597** drawn vertices (`0x9036A1A0`, 320x224 RGB565: this layer's mean byte
+    **148.29**, aurora's **0.00**). With the control case passing, the harness is exonerated; what remains is
+    **the game's draw state as aurora interprets it**.
 
-Read first, in the Aurora tree (browse it in this order — it is MIT, so read the code, do not infer):
-  * `README.md`, `docs/building.md` — dependencies (CMake, Dawn), platforms, CMake integration.
-  * `lib/gx/command_processor.cpp`, `lib/gx/fifo.cpp`, `lib/gx/regs.cpp` — the **FIFO-level** entry point a
-    recompiler can drive (this is the layer we need; `lib/dolphin/gx/GX*.cpp` is the source-level API for decomp
-    projects and is *not* our integration point).
-  * `lib/gx/readback.{hpp,cpp}` and `lib/dolphin/gx/GXAurora.h` — `capture_peeks` / `capture_copies` / `get`,
-    bounded by `MaxCaptureItems = 4096` and `MaxPayloadBytes = 32 MiB`. Compare with our
-    `d3d11_service_pending_copies()` + `d3d11_efb_copy_to_guest()`.
-  * `tests/gx_fifo_test.cpp`, `tests/gx_readback_test.cpp`, `tests/gx_texture_cache_test.cpp` — note that these
-    need no game image. That practice is the second thing to steal.
-
-**Exit criteria — clear all three or report the blocker with numbers:**
-
-  1. **Build.** aurora + Dawn compile against this toolchain. An MSVC-built DLL behind a C ABI is an acceptable
-     answer (our runner stays MinGW/C); a MinGW GCC C++ build is better if it works. Nothing else is worth doing
-     if this fails — say so and stop.
-  2. **One frame.** Drive aurora's command processor from a captured GX stream and render exactly one frame: the
-     invariant frame 3500. Compare it pixel-wise (`tools/frame_diff.py`-equivalent; system python has no PIL, the
-     bundled one does) to the current capture in `build/recomp/d3d11_screenshot_3500.ppm`.
-  3. **One EFB copy.** Service one guest EFB copy through `capture_copies`/`get` and prove the guest samples the
-     same bytes it samples today. The white screen lives in this path, so this criterion is the one that decides
-     whether a migration would actually fix it.
-
-**Standing rule until these resolve:** no *new* GX-semantics feature work in `recomp/gfx_d3d11.c` /
-`recomp/gx_pipeline.c`. A bug fix is allowed only when it is cheaper than the spike and verifiable in one run
-against a Dolphin reference. Keep the layer building and keep the invariant green.
+  RULED OUT by measurement — no run on any of these:
+    staging/array sizing (fixed: per-draw array sizing cut 3.6 GB/frame of array declarations to 62 MB);
+    async-pipeline skipping (`AuroraSetDrawsBlocking(GX_TRUE)` is in the harness);
+    colour/alpha update (`TLS_AURORA_FORCE_UPDATE=1` forces both on — still black);
+    readback timing (in-frame **and** next-frame captures both deliver black);
+    the adapter itself (`--raw` submits the same draws);
+    and the missing `GXInit` (that was the black-frame cause for the *control* case only, and it is fixed).
 
 =====================================================================
-2. INSTRUMENTS THAT ALREADY EXIST (do not rebuild them)
+2. THE QUESTION
 =====================================================================
 
-    TLS_INPUT_SCRIPT      '600-612:A,900-912:A,...'   set it in the SAME shell call as the run; confirm
-                                                     SetNextSequence('Game') @1647 in the log before reading
-                                                     any frame-numbered probe.
-    TLS_SHOT_FRAMES       2600,3500,4500             captures written to build/recomp/d3d11_screenshot_<f>.ppm
-    TLS_BATCH_DUMP        <frame> [ _MAX ]           draw list: texture, blend, NDC bounds, outside count
-    TLS_BATCH_PROBE       <frame>                    per-batch back-buffer readback (avg/max/bright), expensive
-    TLS_BATCH_CUTOFF      <n>                        draw only the first n batches (bisect the composite tail)
-    TLS_COPY_PROBE        <frame> | <start>-<end>    every EFB copy: dst, size, fmt, vertex_mark, mean bytes
-    TLS_TEV_PROBE, TLS_BATCH_RECT, TLS_PROBE_PRESENT_ONLY, TLS_SCENE_SM_PROBE, TLS_ENTRY_PROBE, TLS_DRAW_ORDER
-    TLS_TEV_FORCE_STAGES, TLS_BLEND_SLOT_FIX         (A/B switches, inert by default)
-    tools/dol_callers.py <addr> --funcs              bl/b callers + pointer materialisations (dol_xref cannot)
-    tools/invariant.ps1                              PASS at C5447108..., attempt 1, save 1348992/29344
+Why does aurora's EFB stay black for a real game frame when its own control case renders? Two steps, in this
+order, both instrumented comparisons rather than switches:
 
-Bundled python (has Pillow): C:\Users\hypha\.dsh\dsh-runtimes\dsh-primary-runtime\dependencies\python\python.exe
-Reference captures: docs/evidence/ (dolphin_ref_run3_f5000_gameplay.png is **gameplay with a HUD** — but its frame
-number is NOT comparable to ours; see AP-AJ).
+  STEP 1 — one draw, both sides. Take the *first* draw of the cave frame that this layer renders visibly.
+    * This layer: `decode_single_vertex` already decodes every attribute and `TLS_BATCH_DUMP=<frame>` prints
+      per-batch NDC bounds. One runner run gives you that batch's vertex stream and its NDC box.
+    * aurora: after `fifo::drain()` its `g_gxState` holds the arrays, uniforms and shader config for the same
+      draw. Add a `--dump-draw N` that prints the first vertex of draw N (positions + w), the projection in
+      force, the viewport/scissor rect and the vertex size.
+    * The first divergence names the defect. Do not skip to the next step until you have it.
+
+  STEP 2 — bisect the *state*, not the frame. The title's 2D pass and the cave's 3D pass differ exactly where
+    the two layers differ: projection, texgen, TEV stages, textures. Capture the cheapest frame this layer
+    renders *bright* that also fits the staging budget, replay it, and see whether it is black too. If a 2D/UI
+    frame renders in aurora, the defect is 3D-specific and step 1 will have pointed at it.
+
+  Budget: **one session**. If no frame renders by the end of it, that is the mission's kill criterion — report
+  the blocker with numbers (migration blocked on aurora's interpretation of this game's draw state, not on
+  build integration) and fall back to the per-bug path in the dossier's order: composite tail first, then CMPR
+  alpha, then XF texgen 2..7 / light decode.
 
 =====================================================================
-3. RULES THAT COST REAL RUNS
+3. INSTRUMENTS THAT EXIST — USE THEM, DO NOT REBUILD THEM
 =====================================================================
 
-  * One run per question; read static evidence (`src/`, `tools/dol_callers.py`, `tools/dol_xref.py`) first.
-  * Env vars do not survive between shell calls — set them with the run, and clear stale `TLS_*` first.
-  * Check foreign CPU load and free RAM before a run. One run at a time. `--minimized`, always.
-  * A `.texture`/arena address that moves between runs invalidates any claim built from two logs — a
-    destination-and-content claim must come from one line of one log.
-  * Module file names lie: the field task lives in `src/game_system_wpad_motor.c`. Search by address.
-  * One `exit=-1073740940` (`STATUS_HEAP_CORRUPTION`) was seen once at guest frame ~1998; the identical re-run
-    completed. If you see it, re-run before bisecting your own change.
+  Build / run (checkout at G:\Program\aurora-spike):
+    pwsh tools/aurora_spike/build.ps1                          clone -> patch -> configure -> build
+    G:\Program\aurora-spike\build2\tls_gx_replay.exe <capture> <out.ppm> [options]
+      --extra N            empty frames after the replay (default 8)
+      --split N            feed a frame as N command-aligned aurora frames (the EFB persists across frames)
+      --parse-only         parse/adapt every frame, print totals, no GPU
+      --copy-record N      copy record N's geometry + this layer's bytes (writes <out>.host.bin)
+      --copy-out FILE      aurora's bytes for that copy
+      --synthetic-copy     the control case; must print PASS with every texel exact
+      --raw / --verbose / --max-cmds N / --start-at N / --stop-after N
+    Env: TLS_AURORA_STATS=1 (per-frame draws/verts/pipelines), TLS_AURORA_NO_COPY=1,
+         TLS_AURORA_FORCE_UPDATE=1
+
+  Analysis:
+    python tools/aurora_spike/capinfo.py <capture>                    frames, bytes, MEM planes, copies
+    python tools/aurora_spike/capfilter.py <in> <out> --from F --to F  window an oversized capture
+    python tools/aurora_spike/compare.py <aurora.ppm> <host.ppm> [--out cmp.png]
+    python tools/aurora_spike/copycmp.py <aurora.bin> <aurora.bin.host.bin> --w W --h H --bpp B
+
+  Captures on disk (build/recomp/gxcap/):
+    window.tlscap 158 MB — the 2-frame cave window (3400 heavy + 3401 light), 95 copy records, MEM1+MEM2.
+        **This is the failing case. Start here.**
+    gxfifo.tlscap 143 MB — a title window (frames 300-301). Nearly black in this layer's own capture (a fade),
+        so a poor picture reference but a cheap *state* probe.
+    A fresh capture is one runner run: `TLS_GX_CAPTURE=<dir>`, `TLS_GX_CAPTURE_FROM/TO`, `TLS_EFB_ORDER=none`
+    (inline copies, so the recorder sees them), and `TLS_SHOT_FRAMES=<frame>` for the same-run reference shot.
+
+  aurora's own tests are a no-game-image harness worth using: 232 `gx_fifo_tests`, and
+  `tests/gfx_readback_test.cpp` is the reference for "how a frame is set up" — it calls **GXInit** and drives
+  `gfx::begin_frame`/`end_frame` directly. Read it before changing the harness again.
+
+=====================================================================
+4. RULES THAT COST REAL RUNS
+=====================================================================
+
+  * **Never start a capture run you may not be able to finish**, and keep the previous capture until the new
+    one is closed — an abandoned run destroyed a 235 MB capture last session.
+  * Check **fifa15** and free RAM before a run. With it running the runner sits at 7-10 FPS; quiet, a run to
+    frame 3400 is ~5 minutes and a run to frame 310 is ~12 seconds.
+  * The recorder is window-gated now, but **some copies land after their frame's `FRAME_END`** (AP-AM 6h) and
+    are tagged `frame 0`, so a filtered window can lose a frame's tail copies. Check the copy count against
+    `capinfo.py` before trusting a filtered file, and look at `d3d11_present()`'s `s_flush_only` early return.
+  * The light frames are **not self-contained** (replaying 3401 alone dies at offset 9 with `vtxsize 0`): a
+    capture window must start on a heavy frame and a replay must include it.
+  * A heavy frame needs **more than 96 MiB** in the uniform *and* storage planes: apply
+    `patches/0005-replay-staging-sizes.patch` for a replay run only. With those sizes aurora's own
+    null-backend tests fail (`Out of memory` on "Staging Buffer 1"), so revert before running the suite.
+  * `patches/0004-spike-probes.patch` is the diagnostics set (env-gated, inert). Apply 0001-0004 always;
+    0005 never for the suite.
+  * The invariant and page gate were **not re-run** last session (host load). The capture instrument is inert
+    by construction (`tls_gxcap_on == 0` when `TLS_GX_CAPTURE` is unset, verified by a 220-frame smoke run),
+    but re-verify both gates once the host is quiet.
   * Do not record a new invariant hash without saying so explicitly and why — it is the project's page gate.
 
 =====================================================================
-4. DEFINITION OF DONE FOR THIS SESSION
+5. DEFINITION OF DONE
 =====================================================================
 
-Either (a) the three criteria clear and there is a written migration plan with the C-ABI boundary, the build
-integration, and the re-recording plan for the invariant/page gate — or (b) the spike is blocked at a named step,
-the blocker is measured (not "it seems hard"), and the fallback is stated: continue per-bug fixes on the
-hand-rolled layer, in the priority order the dossier already ranks them.
+Either (a) aurora renders the cave frame — a PPM plus `compare.py` numbers against this layer's same-run
+capture, and AP-AM 6e's copy comparison re-run on that frame (aurora's bytes should then carry real content) —
+and the migration plan is written: the C-ABI boundary (the two register classes plus address canonicalization),
+the build integration (five patches, of which two are diagnostics/optional), the staging policy this game needs
+(27 k largely-unmerged draws at ~2.5 KB each against a 256 MiB per-buffer cap), and the one-time re-recording of
+the invariant/page gate; or
+(b) the blocker is named and measured, and the fallback is stated: per-bug fixes on the hand-rolled layer in the
+dossier's existing priority order.
 
-Write the result into DEEPSEEK_HARNESS_HANDOVER.md as §5c.46 **AP-AM** with the numbers, and commit it.
+Write the result into DEEPSEEK_HARNESS_HANDOVER.md as §5c.46 **AP-AN** with the numbers, and commit it.
