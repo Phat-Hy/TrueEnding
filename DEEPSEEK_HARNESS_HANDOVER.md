@@ -12036,3 +12036,13 @@ writes in the whole file); `game_marker.c` and `game_compass.c` are the marker/c
 (DAGRAN/SYRENNE with HP bars) must be drawn by whatever consumes the party members' state, and the next probe is
 to find the module that walks the party - the cheapest route is to search `src/` for the modules that reference
 the member structs the panel displays (names, level, HP) rather than for more address-level evidence.
+**4. The party manager is never entered - the panel may have no data to draw.** `TLS_DUMP_AT_PC` now accepts
+several comma-separated PCs sharing one addr/len/max/minframe, which makes "does this module ever run" a one-run
+question. Six entry points of `src/game_party_mgr.c` - `0x8015E4B0`, `0x8015E7A0`, `0x8015EB2C`, `0x8015ECC4`,
+`0x8015EF00`, `0x8015F100` - are dispatched **zero times** in a 4 400-frame run from frame 4000 on (and
+`0x8015E4B0` is also zero over the whole run, ungated). Caveat: a function only shows up if it is a dispatch
+boundary, so the statement is "none of these six is ever entered", not "no party code runs".
+**If the party really is never initialised, the reference's panel cannot draw for a much simpler reason than a
+render gate** - there are no members. That is now the leading hypothesis for the missing HUD, and the next probe is
+to find the party count/state in memory (the panel reads member name/level/HP) and confirm it is empty, before
+looking for a draw gate at all.

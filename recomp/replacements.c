@@ -2999,22 +2999,27 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
      * Inert unless set. */
     {
         static int s_init = 0;
-        static u32 s_pc = 0, s_addr = 0, s_len = 0;
+        static u32 s_pc[8] = {0};
+        static int s_npc = 0;
+        static u32 s_addr = 0, s_len = 0;
         static int s_max = 0, s_n = 0, s_minframe = -1;
         static int s_reg = -1;   /* addr field given as r3..r9 instead of a literal */
         if (!s_init) {
             s_init = 1;
             const char* e = getenv("TLS_DUMP_AT_PC");
             if (e) {
+                char pctok[128] = {0};
                 char addrtok[16] = {0};
                 unsigned pc = 0, len = 0;
                 int mx = 1, mf = -1;
-                /* <pc>:<addr|rN>:<len>:<max>[:<minframe>]. The trailing minframe exists because
-                 * a hot function (memset, __fill_mem) spends the whole dump budget long before
-                 * the frame of interest - measured: 4 000 captures of __fill_mem covered only
-                 * frames 0..300 (handover 5c.46 AP-V). */
-                if (sscanf(e, "%x:%15[^:]:%x:%d:%d", &pc, addrtok, &len, &mx, &mf) >= 3 && len && len <= 65536) {
-                    s_pc = pc; s_len = len;
+                /* <pc>[:<pc2>...]:<addr|rN>:<len>:<max>[:<minframe>]. Several comma-separated
+                 * PCs share one addr/len/max, which is what answers "does this MODULE ever
+                 * run in gameplay": one run instead of one run per function (handover 5c.46
+                 * AP-AB - the party manager's entry turned out never to be dispatched, and
+                 * proving that for a whole module needs this). */
+                if (sscanf(e, "%127[^:]:%15[^:]:%x:%d:%d", pctok, addrtok, &len, &mx, &mf) >= 3 &&
+                    len && len <= 65536) {
+                    s_len = len;
                     s_max = (mx > 0) ? mx : 1;
                     s_minframe = mf;
                     if (addrtok[0] == 'r' && addrtok[1] >= '3' && addrtok[1] <= '9' && !addrtok[2]) {
@@ -3022,10 +3027,18 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                     } else {
                         s_addr = (u32)strtoul(addrtok, NULL, 16);
                     }
+                    char* p = pctok;
+                    while (*p && s_npc < 8) {
+                        pc = (unsigned)strtoul(p, &p, 16);
+                        if (pc) s_pc[s_npc++] = pc;
+                        while (*p == ',' || *p == ' ') p++;
+                    }
                 }
             }
         }
-        if (s_pc && address == s_pc && s_n < s_max && (s_minframe < 0 || g_runner_current_frame >= s_minframe)) {
+        int hit_pc = 0;
+        for (int i = 0; i < s_npc; i++) { if (s_pc[i] == address) { hit_pc = 1; break; } }
+        if (hit_pc && s_n < s_max && (s_minframe < 0 || g_runner_current_frame >= s_minframe)) {
             if (s_reg >= 0) s_addr = ctx->gpr[3 + s_reg];
             { extern unsigned g_efb_copy_seq; extern int g_efb_copy_last_replay;
               printf("[DumpAtPc] copiesseq=%u lastreplay=%d\n", g_efb_copy_seq, g_efb_copy_last_replay); }
