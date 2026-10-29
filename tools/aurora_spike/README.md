@@ -78,7 +78,28 @@ AP-AN found that a captured hardware FIFO needs more translation than AP-AM's tw
 4. **texture objects** (BP image0/image3 -> `GX_AURORA_LOAD_TEXOBJ` with a host pointer) - without it
    `GXTexObj_::data` is null and every textured TEV stage samples zero.
 
+## Reading the frame back: use the copy probe, not the colour capture
+
+`AuroraReadbackCaptureColor` is not trustworthy for a frame this size - its in-frame job often never delivers
+and the harness falls back to a capture taken on the *next* (empty) frame, which is how the same command budget
+measured 39.07 one run and 0.00 the next. `--probe-copy` appends one real EFB copy (full 640x448, RGBA8, clear
+bit off) to the end of the last replayed chunk and reads it with `capture_copies`/`get`, the path criterion 3
+verified byte for byte. `--probe-ppm FILE` de-tiles that payload into a viewable image.
+
+```powershell
+tls_gx_replay build\recomp\gxcap\window.tlscap out.ppm --stop-after 1 `
+    --probe-copy --probe-ppm frame.ppm --copy-out frame.bin --extra 10
+```
+
+`window.tlscap` frame 3400 through that probe: 1 146 880 bytes, mean byte 94.61, de-tiled mean RGB
+(41.98, 41.94, 39.52), 98.0 % non-black - Gurgan Cave, with the hero mid-swing
+(`logs_ap/an_probe40.png`). That is criterion 2.
+
+`tools/aurora_spike/cmdlist.py <capture> --frame 0 --from A --to B` turns a `--max-cmds` bisect into the
+command that changed the picture; `tile2png.py` de-tiles any copy payload (RGBA8 or RGB565) for inspection.
+
 ## What was measured
 
-See `DEEPSEEK_HARNESS_HANDOVER.md` §5c.46 **AP-AM** for the full write-up and the numbers.
+See `DEEPSEEK_HARNESS_HANDOVER.md` §5c.46 **AP-AN** (current) and **AP-AM** (history) for the write-ups and
+numbers.
 

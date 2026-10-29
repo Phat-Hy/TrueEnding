@@ -1,5 +1,5 @@
 diff --git a/lib/gfx/resources.hpp b/lib/gfx/resources.hpp
-index 3fdc0ee..2610434 100644
+index 3fdc0ee..0f16d02 100644
 --- a/lib/gfx/resources.hpp
 +++ b/lib/gfx/resources.hpp
 @@ -4,10 +4,10 @@
@@ -7,11 +7,18 @@ index 3fdc0ee..2610434 100644
  namespace aurora::gfx {
  inline constexpr bool UseTextureBuffer = true;
 -inline constexpr uint64_t UniformBufferSize = 25165824; // 24 MiB
-+inline constexpr uint64_t UniformBufferSize = 100663296; // 96 MiB (AURORA-SPIKE: replay only)
- inline constexpr uint64_t VertexBufferSize = 5242880;   // 5 MiB
- inline constexpr uint64_t IndexBufferSize = 2097152;    // 2 MiB
+-inline constexpr uint64_t VertexBufferSize = 5242880;   // 5 MiB
+-inline constexpr uint64_t IndexBufferSize = 2097152;    // 2 MiB
 -inline constexpr uint64_t StorageBufferSize = 8388608;  // 8 MiB
++inline constexpr uint64_t UniformBufferSize = 100663296; // 96 MiB (AURORA-SPIKE: replay only)
++inline constexpr uint64_t VertexBufferSize = 33554432;  // 32 MiB (AURORA-SPIKE replay only)
++inline constexpr uint64_t IndexBufferSize = 8388608;   // 8 MiB (AURORA-SPIKE replay only)
 +inline constexpr uint64_t StorageBufferSize = 100663296; // 96 MiB (AURORA-SPIKE: replay only)
  inline constexpr uint64_t TextureUploadSize = 25165824; // 24 MiB
  
  namespace detail {
+@@ -27,3 +27,4 @@ struct Resources {
+ Resources& resources() noexcept;
+ } // namespace detail
+ } // namespace aurora::gfx
++

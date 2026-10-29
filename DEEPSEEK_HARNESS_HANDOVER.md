@@ -17,8 +17,10 @@
 > tail. Instruments: `--dump-draw N` + `TLS_AURORA_DUMP_DRAW=N` (patch `0006`), `tools/aurora_spike/streamwalk.py`,
 > `TLS_AURORA_TEST_{NO_DEPTH,WHITE_TEV,MAT_WHITE}`, `copycmp.py`, `apam6h.py`; checkout at
 > **`G:\Program\aurora-spike`** (`build.ps1 -ReplayStaging` applies the replay-only staging patch).
-> **Also: the Chapter-1 gate FAILED 3/3 with three different hashes on the untouched runner binary (AP-AN item
-> 12) - make that instrument deterministic before trusting any PASS, and do not re-record a reference from it yet.**
+> **Also: criterion 2 is CLEARED - aurora renders Gurgan Cave from the captured stream (AP-AN 12b, mean RGB
+> (41.98, 41.94, 39.52), 98 % non-black, 640x448, image at logs_ap/an_probe40.png). Read the EFB through
+> --probe-copy, never the colour capture. And the Chapter-1 gate FAILED 3/3 with three different hashes on the
+> untouched runner binary (AP-AN item 12) - fix that instrument before trusting any PASS.**
 
 **Tree state.** Clean at the commit on top of the AP-Q copy-ordering work. The history this session added is
 `654cb14` indirect texturing, `bd877ed` the 3D widening, `6a57a92` the AP-O dossier, `850ba86` probe pinning + AP-O
@@ -13300,6 +13302,43 @@ about it, which kills the whole replay. The adapter maps the reserved value to M
   frame 3400 (recorded by an earlier run) is the cave. The sequence timeline moves between runs - the drift AP-P
   measured when host load moved the title hand-over from 1647 to ~700 - so a same-frame comparison has to
   capture and screenshot inside one run, which is what `cave2600` now does.
+
+**12e. A same-run cave pair, and what it says.** To get a layer reference for the *same* frame, a run captured
+frames 3294-3300 **and** screenshotted frame 3300 with `TLS_SHOT_GUEST=1` (pinning the shot to the guest counter
+instead of "guest or present", which is what the matcher does by default):
+
+| | aurora (probe copy of frame 3300) | this layer (same-run screenshot) |
+|---|---|---|
+| mean RGB | (29.17, 30.33, 29.98) | (41.99, 42.89, 40.05) |
+| `compare.py` | pixels changed > 8: **200 153 / 286 720 (69.81 %)**, mean abs diff 42.51, max 255 | |
+| bands (mean abs diff) | top 22.16, upper 47.67, lower 51.18, bottom 49.01 | |
+
+Both images are Gurgan Cave - the same rock and water textures - but from **different viewpoints**: aurora's
+frame looks past a foreground pillar into a dark pool, the layer's looks along the ribbed cave wall with a pale
+sky band and floating white specks. Three things were ruled out for that difference:
+
+* **not missing state inside the window**: replaying 7 frames (3294-3300) instead of only 3300 gives a
+  **byte-identical probe payload** (mean byte 86.12 both times), so whatever sets this camera is either present
+  in every frame or absent from all of them;
+* **not the capture**: two independent runs of frame 3300 produced byte-identical captures (136 655 442 bytes
+  both), so the stream is deterministic;
+* **not (only) the swap chain's 16:9 stretch**: `compare.py` resizes the 1280x720 host image back to 640x448 with
+  BOX, and the layer's own presentation of this frame has letterbox bars, so a residual aspect error is possible
+  but cannot explain a different camera position.
+
+What is left, and is the next session's first measurement: the **camera path**. Either the capture and the
+screenshot are keyed on different counters (the capture uses the runner's loop counter, the shot matches "guest
+or present" unless `TLS_SHOT_GUEST=1`, and the guest frame counter can be one ahead), or the projection/pos-matrix
+composition differs between the two implementations for this scene. The instrument for it already exists:
+`streamwalk.py --draw 0` prints the pos matrix, the projection and the resulting NDC for a given draw from the
+capture, and `TLS_BATCH_DUMP=<frame>` prints the same from the layer - one run each, then the first divergence.
+
+Not cracked: the guest's final **XFB copy** (`dst 0x900997E0 640x448`, 573 440 bytes, recorded `fmt 0`) is
+16 bpp with 4x4 tiles by its size, but neither the 4x4-tile decode nor a linear 16 bpp decode produces the
+picture, so the XFB copy's exact format/layout is still unknown and the capture's `fmt` field is not a texel
+format for XFB copies. `--copy-record` on a *multi-frame* window also delivered nothing for a copy that happened
+in an earlier replayed frame (`no copy readback delivered for 0x900997E0`), so the copy-capture request only
+covers copies serviced after it is made - worth fixing before the next copy comparison.
 
 **13. Definition of done, stated honestly.** Option (a) is **half met, and the half that mattered is done**:
 aurora renders the cave frame (item 12b - 640x448, mean RGB 41.98, 98 % non-black, the scene recognisable) and
