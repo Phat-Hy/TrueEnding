@@ -11849,10 +11849,11 @@ look broken.** If a FAIL says "never reached Game", check `SaveData\tmp\` before
 faint grey triangles**: those art textures are drawing black. So the "black loading plate" that the hero's bake
 captures is itself the *symptom*, one level further up than AP-W could see.
 
-**2. Those textures measure ZERO in guest memory.** A 8 KB dump of `0x92AEAF00` at frames 1900/1905/1910/1915 is
-`nonZero=0, distinct=1` (all zero) - and `TLS_WATCH_ADDR=92AEAF00,92AF0380,92AF4400,92AF8480` over a whole run
-reports **zero writes to any of them**. No `CXDecompressFast` in the run targets that range either. So the game
-samples CMPR art that this host never fills.
+**2. [WITHDRAWN - see item 5.] "Those textures measure ZERO in guest memory" is WRONG.** A dump of `0x92AEAF00`
+in one run was all zero and a whole-run watch in another run saw no writes - but the arena base moves between
+runs (item 3), so those were not the same object. The single-log measurement in item 5 shows the texture
+rendering fine. Kept here so the failure mode is on record: **this is exactly what the item-3 rule exists to
+prevent.**
 
 **3. The caveat that makes item 2 weaker than it looks, and the rule it implies.** The `.texture` arena's base
 MOVES between runs (AP-R item 2 measured the same texture loading at `0x92AEAEC0` and `0x92ADB500`), so an address
@@ -11872,3 +11873,21 @@ This section shows the **first link produces black**: the art the whole chain is
 arena. That makes the next probe a decode question, not a copy question: run `TLS_TEV_PROBE` with
 `TLS_PROBE_PRESENT_ONLY=1` at the load frames and at 5500, and compare the *address+avg* pairs the model and the
 full-screen quads report against the `.texture` loader's destination list in the SAME log.
+**5. The one-log measurement, and what it proves.** `TLS_BATCH_PROBE=1906` with `TLS_PROBE_PRESENT_ONLY=1`
+prints, per batch, the sampled texture address **and** the average of what that batch painted - address and
+content in the same log, which is the rule item 3 demands:
+
+```
+[BatchProbe] frame=1906 after b0 (... tex=0x92AEAF00 blend=0 s=4 d=5 col0=0xFFFFFFFF): avg=(27,28,33) a=255 max=584 red=61/3600 bright=0
+[BatchProbe] frame=1906 after b3 (... tex=0x92AF0380 blend=1 ...):                     avg=(22,23,27) a=255 max=528
+[BatchProbe] frame=1906 after b6 (... tex=0x92AF4400 blend=1 ...):                     avg=(14,14,17) a=255 max=447
+```
+
+`max=584` of 765 means **bright texels exist**: the character art is being decoded and drawn, it is just *dark*
+(a dark portrait on a dark plate), and each successive composite pass darkens it further
+(`27 -> 22 -> 14`). So the art-texture link is **not** the defect, the 1906 screen being near-black is the art
+actually being dark, and AP-Y item 2 is withdrawn. What the hero's bake then captures (`srcavg=(0,0,0)` at frame
+1909) is one more pass of that same darkening plus the copy's timing.
+**So `TLS_BATCH_PROBE` is the instrument for this class of question** - it is the only one that reports the
+address and the pixels together. Use it on the single present you care about (it does per-batch readbacks, so
+never across a long run).
