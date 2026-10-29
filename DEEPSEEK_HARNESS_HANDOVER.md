@@ -11967,3 +11967,31 @@ no switches at all.** With a completely clean environment (`TLS_EFB_ORDER` unset
   copy-order change, which is the consistency check the dossier asks for.
 - **Zero `exit(0)` calls** in a 5 600-frame run, and the run still hands over at `Game@1647`.
 - **The character is visible**: `docs/evidence/host_5500_hero_visible_apZ.png`.
+
+---
+
+### AP-AA. THE HUD THREAD: the module RUNS during gameplay, the geometry never reaches the draw list
+
+**1. The reference's HUD is a party panel.** `docs/evidence/dolphin_ref_run3_f5000_gameplay.png` - the same
+Chapter-1 cave shot the objective is measured against - shows, top-left: **DAGRAN Lv 5** with a green HP bar and
+`235`, and **SYRENNE Lv 4** with a green bar, i.e. a two-member party status panel. It also shows the character's
+**full body** from behind (dark vest, arms, legs, sword), where this host renders only the head
+(`docs/evidence/host_5500_hero_visible_apZ.png`). Both gaps are real and both are in the same frame.
+
+**2. The HUD is not a d2a layout, and no layout is shown during gameplay.** `TLS_LAYOUT_CREATE_PROBE=1` +
+`TLS_LAYOUT_SHOW_PROBE=1` from frame 1600 gives **490 events**: every layout is created at **1648-1649**
+(`ui_combo`, `ui_seek`, `ui_seek_arow`, `ui_hp_up`, `ui_c_black_mask`, `ui_event_start_flash`, `ev_gradation`,
+`ui_result_*`, `status_select`, `camp_info`, `ui_command_select`, ... - menus and effects, no party panel) and every
+`[LayoutShow]` fires between **1659 and 1710** (`fc` values `0xB4/0x34/0x74`). After 1710 **nothing is created or
+shown for the rest of the run**, so the party panel is not one of the d2a layouts and the page's bit-30 recipe has
+nothing to attach to here.
+
+**3. The HUD code itself IS running in gameplay.** `TLS_DUMP_AT_PC=8009E1E4:80004000:4:24:4000` (the min-frame
+field of AP-T) shows `fn_8009E1E4`, the entry of the HUD module `src/game_hud.c`, dispatched **at least 24 times
+in frame 4000 alone** with a stable argument set (`r3=0x80898A70 r4=0x81162724 r5=0x811625C8 ...`), against 24
+hits at frame 357 only when ungated. Its body initialises a struct from ~10 parameters including a 4-float
+rectangle (`psq_l f1,0x0(r27)` -> `+0x30..+0x3c`), so the per-element HUD setup is executing.
+**So the gap is downstream of the HUD module: elements are set up, and no batch appears.** That is a draw-side
+gate, and the next probe should follow what `fn_8009E1E4`'s struct feeds - most likely a 2D draw that tests a
+visibility/alpha field of the struct, or a layout object that is created but never activated (the page's story
+again, but through a different object).
