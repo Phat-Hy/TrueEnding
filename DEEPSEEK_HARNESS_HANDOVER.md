@@ -20,14 +20,23 @@ runner was launching, after several back-to-back 10-minute runs with per-batch f
 
 ### WHERE THIS STANDS (written at the end of the AP-AE round - read this before anything below)
 
-> **NEWER THAN THIS BLOCK: §5c.46 AP-AH (at the very end of the file).** The writer of outer state 1 is found and
-> enumerated (`0x8036F5D8`, `state = *(task+0x54F0) + 1`, the only site in the image that can store 1) and measured
+> **NEWEST: §5c.46 AP-AI (two sections from the end) re-writes the problem statement.** The "frozen gameplay
+> frame" that AP-AC4/5 measured is a **pure-white screen** (255.00, std 0.00, byte-identical from ~3800 to 5000),
+> not an idling field: in the same run the game draws the Chapter-1 cave at 2600, a scripted line
+> ("Dagran, move it! Over here!") at 3200, and the NEW TUTORIAL popup at 3500, then goes white and stays white, and
+> A presses do not clear it. `TLS_BATCH_CUTOFF=61` shows a correct 3D scene under it, and `TLS_BATCH_PROBE=4500`
+> shows the white is produced by nine full-screen additive EFB-copy quads at the end of the draw list (saturates at
+> b65, `col0=0xFFFFFFFF` on all of them). Chasing `+0x5538` does not bring the picture back; the composite tail does.
+> Evidence: `docs/evidence/host_2600_cave_apAI.png`, `host_3200_cutscene_apAI.png`, `host_4500_white_apAI.png`,
+> `host_4500_cutoff61_apAI.png`.
+
+> **ALSO NEW: §5c.46 AP-AH (the last section).** The writer of outer state 1 is found and enumerated
+> (`0x8036F5D8`, `state = *(task+0x54F0) + 1`, the only site in the image that can store 1) and measured
 > to be **never called** in a whole Chapter-1 run — together with all four of its callers, which are named menu /
 > game-over tasks (GameOverTask, NewCampPartsTop, NewCampPartsMapSelect, +2 unnamed). The run that proves it also
-> shows the field carrying a *pending* request of 2 for state 3 with the inner phase at 8 and the invariant scene's
-> exact vertex counts, so **state 0 may be the correct resting state of a loaded field**, not a stall. AP-AH also
-> records that `0x8036A110` (state 0's handler) is not dispatchable, so the SceneSM `hits[0]` counter reads 0 by
-> construction. Read AP-AH before spending a run on the state word.
+> shows the field carrying a *pending* request of 2 for state 3 with the inner phase at 8, so **state 0 may be the
+> correct resting state of a loaded field**, not a stall. AP-AH also records that `0x8036A110` (state 0's handler)
+> is not dispatchable, so the SceneSM `hits[0]` counter reads 0 by construction.
 
 **Done and verified, on the current binary:**
 * **The hero's five model textures bake real art.** `TLS_EFB_ORDER=staging` is the DEFAULT (`recomp/gx_pipeline.c`)
@@ -12409,3 +12418,75 @@ four callers, and — at `0x80368280` — the task's (request, state) on change.
 then the outer state machine is a *scene-transition* machine that Chapter-1 gameplay does not use, and the search
 must leave `+0x5538` altogether — start from "the field is loaded and idling; what event should the player's pad
 input drive?" rather than from the state word.
+
+---
+
+### AP-AI. THE "FROZEN GAMEPLAY FRAME" IS A PURE-WHITE SCREEN, AND THE GAME IS NOT FROZEN — IT IS DRAWING
+
+**This section supersedes AP-AC4/5 ("frames 5500 and 6200 are pixel-identical, gameplay input changes nothing").**
+Those two captures were two *white* frames. Measured this round with `TLS_SHOT_FRAMES` at eight points in one
+5 200-frame run (baseline invariant input script, `SetNextSequence('Game') @1647`, save produced):
+
+| frame | mean | std | what it is |
+|---|---|---|---|
+| 2600 | 63.90 | 50.72 | **the Chapter-1 cave**, 3D, 48 batches / 219 600 vtx — `docs/evidence/host_2600_cave_apAI.png` |
+| 2900 | 38.19 | 36.69 | cave, camera moved, a black uncomposited region bottom-right |
+| 3200 | 202.96 | 102.20 | **a scripted Chapter-1 line**: "Dagran, move it! Over here!", letterboxed — `host_3200_cutscene_apAI.png` |
+| 3500 | 253.54 | 18.39 | the **NEW TUTORIAL** popup on its white plate, with a (B) prompt (this is the invariant's frame) |
+| 3564, 3700 | 253.56 | 18.28 | popup still up, static |
+| 3800 | **255.00** | **0.00** | **pure white** |
+| 3864, 4200, 4600, 5000, 5064 | 255.00 | 0.00 | pure white, **byte-identical** (pairwise `differ>2 = 0.00 %`, `max=0`) |
+
+So the game reaches the cave, plays a cutscene line, shows the tutorial popup, and *then* the picture becomes a
+uniform 255. The screen is not frozen at the cave — it is white. (`host_4500_white_apAI.png` is the 1280x720
+capture: every pixel 255.)
+
+**Input does not resolve it.** A second run with extra `A` presses at 3600/3800/4000/4300/4600 left 3900, 4100,
+4500 and 5000 at exactly `mean=255.00 std=0.00`. So the white screen is not a "press A to continue" state.
+
+**The guest is still drawing, and the 3D pass is correct.** At frame 4500 the guest submits **70 batches /
+58 047 vtx** into a white frame. Two measurements localise it:
+
+1. `TLS_BATCH_CUTOFF=61` at the same frame renders a **correct 3D scene** — sky with clouds, a sun flare, dark
+   water with reflections, rock walls (`mean 81.18 std 75.70`, `host_4500_cutoff61_apAI.png`). The 3D pass is fine.
+2. `TLS_BATCH_PROBE=4500` (pinned with `TLS_PROBE_PRESENT_ONLY=1`) reads the back buffer after every batch:
+
+| after | tex | size | blend / factors | avg RGB |
+|---|---|---|---|---|
+| b60 | 0x905C3000 | 640x448 | 1 / s=4 d=5 | (83,86,80) ← a normal, dark frame |
+| b61 | 0x90395DC0 | 320x224 | 0 / s=1 d=0 (replace) | (85,90,88) |
+| b62 | 0x9038D1C0 | 80x56 | 0 / replace | (161,167,159) |
+| b63 | 0x9038D1C0 | 80x56 | 1 / s=2 d=0 | (103,110,101) |
+| b64 | 0x903917C0 | 80x56 | 0 / **s=4 d=1** (add) | (188,200,187) |
+| **b65** | 0x9038D1C0 | 80x56 | 0 / **s=4 d=1** (add) | **(255,255,255)** |
+| b66 | 0x903DBDC0 | 160x112 | 0 / replace | (160,168,163) |
+| b67 | 0x9038D1C0 | 80x56 | 1 / s=1 d=1 | (255,255,255) |
+| b68 | 0x905C3000 | 640x448 | 0 / s=4 d=1 | (255,255,255) |
+| b69 | 0x90D19B80 | 64x64 fmt=14 | 1 / s=4 d=5 col0=0x961E1E1E | (255,255,255) |
+
+**The whole white is nine full-screen 2D quads at the end of the draw list, all sampling EFB copies (`fmt=6`) at
+640x448 / 320x224 / 160x112 / 80x56 — a downscale-then-additive-composite tail — and it saturates at b65.** Every
+one of those quads carries `col0=0xFFFFFFFF` (b69 excepted), so there is no vertex-alpha scale that would keep the
+sum below 255: 188 + 161 clamps to 255. Note the tail is **not present in every frame**: frame 2600 is 48 batches
+with no full-screen EFB-copy quad at all, i.e. the effect chain is switched on for some scenes/ moments and off in
+others.
+
+**What this means for the queue.** The state-word thread (AP-AG/AP-AH) was being read off a white screen. Nothing
+about `+0x5538` needs to be revisited to make the screen show the game again: the game already reaches the cave and
+a cutscene line. The defect to chase is the **composite tail**: either the guest really is flashing white for
+1 400+ frames (implausible, and it never comes back), or this host's treatment of those additive EFB-copy quads
+loses a scale factor that hardware applies (TEV KONST / rasterised alpha / the copy's own alpha), so a bloom-like
+pass on an already-bright sky saturates instead of adding a small glow.
+
+**Next session, concretely (one run + one comparison):** dump the TEV state and the copy contents of b64/b65 in the
+same log (`TLS_BATCH_DUMP=4500` already prints blend factors; the dumps need the TEV stage registers and the copy's
+alpha channel, and `TLS_BATCH_PROBE`'s `a=` field at b62/b64/b65 says whether the copies keep alpha), then decide
+between "the guest asks for white" and "we drop the scale" — the second is testable by clamping that one batch's
+contribution. Do **not** re-derive the cave or the cutscene: they render.
+
+**Also measured, so nobody re-argues it: the guest is alive behind the white.** Through 3840..5000 the draw
+list keeps changing every 60 frames (`58128 / 58053 / 56559 / 57087 / 58065 / 58044 / 57639 / 57648 / 58044 / 58101 /
+58047 / 57627 / 57681 / 58110` vtx, batch count oscillating 61..82) while the *picture* is byte-identical white.
+So the scene is animating, the vertex pipeline is fed, and the only broken thing is what the composite tail writes
+to the back buffer. Combine that with `TLS_BATCH_CUTOFF=61` (correct 3D scene) and the defect is a nine-batch
+full-screen 2D composite, not the game's logic and not the field state machine.
