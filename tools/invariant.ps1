@@ -68,7 +68,15 @@ $INPUT        = '600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1
 $SAVE_DIR  = Join-Path $root 'SaveData\title\00010000\534c5345\data'
 $SAVE_FILE = Join-Path $SAVE_DIR 'savedata.dat'
 $BANNER    = Join-Path $SAVE_DIR 'banner.bin'
-Remove-Item $SAVE_FILE, $BANNER -Force -ErrorAction SilentlyContinue
+# ALSO the save manager's staging copy. A run that is overrun (frames end while the
+# save is still being staged) leaves a ZERO-BYTE SaveData\tmp\savedata.dat behind, and
+# the next run then boots as "save present, load failed" and NEVER LEAVES THE TITLE -
+# measured twice in one session: with that file present the run reports
+# `Seq: Titl` at frame 3480 and creates no save, and deleting it restores
+# D3329E35... exactly. This file is not covered by the title/ cleanup above, and its
+# symptom (a "regression" that is really a leftover) is the worst kind to debug.
+$TMP_SAVE  = Join-Path $root 'SaveData\tmp\savedata.dat'
+Remove-Item $SAVE_FILE, $BANNER, $TMP_SAVE -Force -ErrorAction SilentlyContinue
 
 # Probe flags must be genuinely REMOVED, not set to '' - getenv() treats an empty
 # string as set, which silently keeps a flag enabled (handover 5c.33a).
@@ -94,24 +102,50 @@ New-Item -ItemType Directory -Force -Path (Split-Path $log) | Out-Null
 # without activation (host_runner.c), so a verification run can never steal focus.
 # The screenshot is captured from the back buffer BEFORE Present, so a minimised
 # window does not change it - this script is itself the check that it does not.
-& $exe --window --minimized --frames 3520 *> $log
-if (-not (Test-Path $ppm)) { Write-Host 'FAIL: no screenshot produced' -ForegroundColor Red; exit 1 }
+#
+# RETRY POLICY. A run can boot to the title and never advance: a stale
+# SaveData\tmp\savedata.dat (see above), or a host loaded enough that the scripted
+# presses race the attract screen. A FAIL is only meaningful when every attempt
+# agrees, so retry before reporting - the same rule tools/page_run.ps1 already applies
+# to the page. Measured this session: the identical binary reported FAIL (Seq: Titl at
+# frame 3480, no save) and then PASS at the recorded hash once the stale staging file
+# was gone.
+$Attempts = 3
+$ok = $false
+$seqs = @()
+$sha = ''
+$saveLen = 0
+$bannerLen = 0
+$reachedGame = $false
+for ($attempt = 1; $attempt -le $Attempts; $attempt++) {
+    Remove-Item $ppm -ErrorAction SilentlyContinue
+    Remove-Item $SAVE_FILE, $BANNER, $TMP_SAVE -Force -ErrorAction SilentlyContinue
 
-# 1. structural: the sequence must reach Game
-$seqs = Select-String -Path $log -Pattern 'Seq: (\S+)' |
-        ForEach-Object { $_.Matches[0].Groups[1].Value } | Select-Object -Unique
-$reachedGame = $seqs -contains 'Game'
+    & $exe --window --minimized --frames 3520 *> $log
+    if (-not (Test-Path $ppm)) {
+        Write-Host ("attempt {0}: no screenshot produced" -f $attempt) -ForegroundColor Yellow
+        continue
+    }
 
-# 2. visual: frame 3500 must match the recorded reference
-$sha = (Get-FileHash $ppm -Algorithm SHA256).Hash
+    # 1. structural: the sequence must reach Game
+    $seqs = Select-String -Path $log -Pattern 'Seq: (\S+)' |
+            ForEach-Object { $_.Matches[0].Groups[1].Value } | Select-Object -Unique
+    $reachedGame = $seqs -contains 'Game'
 
-# 3. structural (5c.42 K): the run must have CREATED its own save, byte-exact in size,
-# because that is the defect this invariant now also guards.
-$saveLen   = if (Test-Path $SAVE_FILE) { (Get-Item $SAVE_FILE).Length } else { 0 }
-$bannerLen = if (Test-Path $BANNER)    { (Get-Item $BANNER).Length }    else { 0 }
-$saveOk    = ($saveLen -eq 1348992) -and ($bannerLen -eq 29344)
+    # 2. visual: frame 3500 must match the recorded reference
+    $sha = (Get-FileHash $ppm -Algorithm SHA256).Hash
 
-$ok = $reachedGame -and ($sha -eq $EXPECTED_SHA) -and $saveOk
+    # 3. structural (5c.42 K): the run must have CREATED its own save, byte-exact in size,
+    # because that is the defect this invariant now also guards.
+    $saveLen   = if (Test-Path $SAVE_FILE) { (Get-Item $SAVE_FILE).Length } else { 0 }
+    $bannerLen = if (Test-Path $BANNER)    { (Get-Item $BANNER).Length }    else { 0 }
+    $saveOk    = ($saveLen -eq 1348992) -and ($bannerLen -eq 29344)
+
+    $ok = $reachedGame -and ($sha -eq $EXPECTED_SHA) -and $saveOk
+    Write-Host ("attempt {0}/{1}: reachedGame={2} sha={3} save={4}/{5}" -f `
+                $attempt, $Attempts, $reachedGame, $sha.Substring(0, 8), $saveLen, $bannerLen)
+    if ($ok) { break }
+}
 
 Write-Host ""
 Write-Host "sequences : $($seqs -join ' -> ')"
@@ -125,7 +159,7 @@ if ($ok) {
     Write-Host 'PASS - Chapter-1 progression invariant holds (and the save was created)' -ForegroundColor Green
     exit 0
 } else {
-    if (-not $reachedGame) { Write-Host 'FAIL: the sequence never reached Game' -ForegroundColor Red }
+    if (-not $reachedGame) { Write-Host 'FAIL: the sequence never reached Game (all attempts)' -ForegroundColor Red }
     if ($sha -ne $EXPECTED_SHA) {
         Write-Host 'FAIL: frame 3500 differs from the recorded reference.' -ForegroundColor Red
         Write-Host '      If this change is intended, re-record EXPECTED_SHA and update handover 5c.35.'

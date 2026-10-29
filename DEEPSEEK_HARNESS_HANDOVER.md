@@ -11820,3 +11820,19 @@ from - the sword's texture is a normal one, the body's five are the baked-transp
 
 **6. Timing knobs are not usable oracles either.** The idea that our I/O completes earlier than hardware and therefore makes the guest bake during the loading plate is testable with the existing `TLS_IPC_DELAY` (frames, 0..8), and it fails the same way `TLS_NO_FRAME_CLEAR` did: with `TLS_IPC_DELAY=3` the run **never reaches Game** (no `SetNextSequence('Game')` line at all) and `0x92AEAEC0` is *all-zero* at frames 1915/2000/2050 (`nonZero=0`), i.e. worse, not better. So the delay knob cannot be used to move the bake, and the "our load is too fast" idea has no lever to test with. Keep it as a hypothesis, not a plan.
 **Rule this session keeps re-learning:** any A/B that changes the load/UI timing (global copy defer, `TLS_NO_FRAME_CLEAR`, `TLS_IPC_DELAY`) must be *proved to reach `Game@1647`* before its hero measurement means anything - check for the `SetNextSequence('Game')` line first, every time.
+
+**7. The "spurious invariant FAIL" has a ROOT CAUSE, and it is a leftover file.** A `tools/invariant.ps1` run
+reported `FAIL: the sequence never reached Game` **twice in a row** on an unchanged binary, with the log showing
+`Seq: Titl` at frame 3480 and no save created - while the same binary had passed at `D3329E35...` a few runs
+earlier. The cause is a **zero-byte `SaveData\tmp\savedata.dat`**: the save manager's staging copy, left behind
+when a run is overrun while the save is mid-write (my 4400/5600-frame HUD runs did exactly that). The next run
+then boots as *save present, load failed* and never leaves the title. Nothing in the invariant's cleanup touched
+that path. Deleting the file restored an exact PASS.
+
+So the invariant was reporting a real, reproducible, and completely misleading failure. `tools/invariant.ps1` now
+(1) deletes `SaveData\tmp\savedata.dat` with the other save files, and (2) retries up to 3 times, printing
+`attempt n/N: reachedGame=... sha=... save=...` per attempt and only reporting FAIL when every attempt agrees -
+the same rule `tools/page_run.ps1` already applies to the page. AP-V item 7's "spurious FAIL is a guest-progress
+difference" is still true for the case it described (that run *did* reach Game, at present 3501 with 73
+batches/265 695 vtx), but this one is the more dangerous variant: **an unrelated leftover file can make the tree
+look broken.** If a FAIL says "never reached Game", check `SaveData\tmp\` before anything else.
