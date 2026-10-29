@@ -2819,12 +2819,32 @@ static void d3d11_service_pending_copies(uint32_t* cursor, uint32_t up_to_vertex
          * counter like the other per-batch probes; inertia unless set. */
         {
             extern int g_runner_current_frame;
-            static int s_cp_frame = -2;
-            if (s_cp_frame == -2) {
+            /* TLS_COPY_PROBE=<frame> | <start>-<end>. The range form exists because the white
+             * screen (5c.46 AP-AI) is a *steady state*: a single frame shows the tail copying a
+             * screen that is already white, which is circular. The first frame of the transition
+             * is what names the cause, and it cannot be guessed - 3700 is still a normal frame
+             * (mean 253.56, std 18.28) and 3800 is exactly 255.00/0.00. */
+            static int s_cp_from = -2, s_cp_to = -2;
+            if (s_cp_from == -2) {
                 const char* e = getenv("TLS_COPY_PROBE");
-                s_cp_frame = e ? atoi(e) : -1;
+                s_cp_from = s_cp_to = -1;
+                if (e) {
+                    int a = -1, b = -1;
+                    if (sscanf(e, "%d-%d", &a, &b) >= 2 && a >= 0 && b >= a) {
+                        s_cp_from = a; s_cp_to = b;
+                    } else {
+                        s_cp_from = s_cp_to = atoi(e);
+                    }
+                }
             }
-            if (s_cp_frame >= 0 && s_cp_frame == g_runner_current_frame) {
+            bool cp_hit = false;
+            if (s_cp_from >= 0) {
+                if (s_cp_to > s_cp_from)
+                    cp_hit = g_runner_current_frame >= s_cp_from && g_runner_current_frame <= s_cp_to;
+                else
+                    cp_hit = g_runner_current_frame == s_cp_from;
+            }
+            if (cp_hit) {
                 uint32_t w = c->x1 - c->x0 + 1, h = c->y1 - c->y0 + 1;
                 uint32_t bytes = w * h * 4u;
                 double sum = 0.0; uint32_t n = 0;

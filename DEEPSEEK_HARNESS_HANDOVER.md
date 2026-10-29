@@ -12512,46 +12512,113 @@ on shaders.
 
 ---
 
-### AP-AJ. THE WHITE SCREEN IS OUR DEFECT — the project's own Dolphin reference at the same moment IS gameplay
+### AP-AJ. THE WHITE SCREEN — what the Dolphin reference does and does not prove
 
-A reference capture already in the tree settles guest-intent vs host-bug, so nobody has to argue it:
-**`docs/evidence/dolphin_ref_run3_f5000_gameplay.png`** is Dolphin at frame 5000 and it shows *gameplay* — Dagran
-(LV 5) and Syrenne (LV 4) with HP bars in the top-left, a lit cave, a water pool, the character standing in it. Our
-host at frame 4500/5000 is a uniform `255,255,255`. Side by side:
+A reference capture already in the tree is **`docs/evidence/dolphin_ref_run3_f5000_gameplay.png`**: Dolphin at frame
+5000, showing *gameplay* — Dagran (LV 5) and Syrenne (LV 4) with HP bars, a lit cave, a water pool, the character
+standing in it. Side by side with our white frame:
 **`docs/evidence/cmp_f5000_white_vs_dolphin_apAJ.png`**.
 
-Consequences, in order of usefulness:
+**It proves the game has gameplay at that point; it does NOT prove our white frame is wrong at that instant, and an
+earlier revision of this section claimed that too strongly.** The two runs are not at the same place in the game:
+our frame 4500 with the composite cut off is an **outdoor sky with a sun flare**, while the reference is the cave
+interior. Frame numbers from different runs (different boot timing, different input scripts) are not comparable, so
+the reference cannot be used as a same-moment oracle until a Dolphin capture is taken at the same game position.
+What is measured and safe to say:
 
-1. **The white screen is a renderer defect, not a game state.** The guest is drawing (57-58 k verts/frame, batch
-   count oscillating) and Dolphin shows the result. So the fix target is the composite tail, and "the field never
-   starts" / "no HUD" are *downstream of this one bug*: a screen that is white cannot show a HUD either. This should
-   now be the project's top item — ahead of the state word (AP-AH) and ahead of any HUD work.
-2. **The scene at that moment is the cave, not an outdoor sky.** Our `TLS_BATCH_CUTOFF=61` capture (an
-   outdoor sky with a sun flare) is what *our* 3D pass is producing at 4500, while the reference at the same time
-   has the cave interior with a water pool. So the cut-off capture is *not* "the correct scene underneath" — it is
-   the correct *3D pipeline* with a scene that does not match the reference. Do not read that capture as "the 3D
-   pass matches Dolphin"; read it as "the 3D pass draws something coherent, the tail whitens it, and the scene
-   content itself still needs a same-moment comparison." The AP-Z cave capture at frame 2600
-   (`host_2600_cave_apAI.png`) is the one that does correspond to the reference's cave.
-3. **Two mapping/route hypotheses are now excluded, by measurement rather than argument:** `TLS_TEV_FORCE_STAGES=1`
-   (every batch through `PSTev`) leaves the frame at `255.00/0.00`, and `TLS_BLEND_SLOT_FIX=1` (corrected source-slot
-   GX blend enums, below) gives `2600 = 63.90/50.72`, `3500 = 253.54/18.39`, `4500 = 255.00/0.00` — i.e. bit-for-bit
-   the default at all three frames. So neither the TEV combiner nor the 2/3 source blend factor is the whitening.
-4. **One real spec mismatch found and gated, worth keeping.** Dolphin's `BPMemory.h` has *two* enums —
-   `SrcBlendFactor` (`2 = DstClr, 3 = InvDstClr, 4 = SrcAlpha …`) and `DstBlendFactor`
-   (`2 = SrcClr, 3 = InvSrcClr, 4 = SrcAlpha …`) — so one shared table cannot serve both slots. This host's
-   `map_gx_src_blend_factor()` reuses the destination table for the source slot, which mis-decodes source factors
-   **2 and 3 only** (4..7 are identical in both enums, so alpha blending was never affected).
-   `TLS_BLEND_SLOT_FIX=1` selects the corrected mapping; default unchanged because the page gate was recorded
-   against the old one, and the measurement above shows it does not move these three frames anyway. Cite:
+1. The white is uniform (`255.00`, std `0.00`), sustained (byte-identical 3800 → 5000), and immune to A presses.
+2. It is produced by opaque full-screen EFB-copy quads at the end of the draw list, whose copied content has already
+   saturated (AP-AI item 7).
+3. Underneath, the 3D pass draws a coherent scene and the guest keeps submitting 57-58 k verts/frame.
+4. Whether the guest *asked* for that white is **still open**. Do not assert either way until a same-position
+   Dolphin capture exists.
+5. Two hypotheses are excluded by measurement, so they need not be re-run: `TLS_TEV_FORCE_STAGES=1` (every batch on
+   `PSTev`) leaves `255.00/0.00`, and `TLS_BLEND_SLOT_FIX=1` gives `2600 = 63.90/50.72`, `3500 = 253.54/18.39`,
+   `4500 = 255.00/0.00` — bit-identical to the default at all three frames.
+6. One real spec mismatch found and gated: Dolphin's `BPMemory.h` has two enums, `SrcBlendFactor`
+   (`2 = DstClr, 3 = InvDstClr, 4 = SrcAlpha …`) and `DstBlendFactor` (`2 = SrcClr, 3 = InvSrcClr, 4 = SrcAlpha …`),
+   so one shared table cannot serve both slots. `map_gx_src_blend_factor()` reused the destination table for the
+   source slot, mis-decoding source factors **2 and 3 only** (4..7 are identical in both). `TLS_BLEND_SLOT_FIX=1`
+   selects the corrected mapping; the default is unchanged because the page gate was recorded against it and it does
+   not move these frames. Cite:
    [Dolphin BPMemory.h](https://raw.githubusercontent.com/dolphin-emu/dolphin/master/Source/Core/VideoCommon/BPMemory.h).
-5. **A new instrument for the copy chain, and what it showed.** `TLS_COPY_PROBE=<frame>` prints, for one frame,
-   every serviced copy with `dst / w x h / fmt / vertex_mark / mean byte value`, destination and content in one
-   line. At frame 4500 the same 80x56 destination `0x9038D1C0` is written three times as
-   `139.85 → 219.10 → 255.00`, and the final full-res copy into `0x905C3000` is already `255.00` — the tail is
-   copying a screen that its own earlier passes have already whitened, and because the white is re-created every
-   frame the state persists indefinitely.
-6. **Crash observed once, unrelated to the above.** One run died with `exit=-1073740940` (`0xC0000374`,
-   STATUS_HEAP_CORRUPTION) at guest frame ~1998, during the Chapter-1 scene load (`CharaTask Init`, `CXDecompressFast`
-   entries). The identical command re-run completed to 4560 frames, so it is intermittent. If a next session sees
-   that exit code, it is not the change it just made — verify by re-running before bisecting.
+7. `TLS_COPY_PROBE=<frame>` (or `<start>-<end>`) prints every serviced copy with
+   `dst / w x h / fmt / vertex_mark / mean byte value`, destination and content in one line.
+8. **Crash observed once**: `exit=-1073740940` (`0xC0000374`, STATUS_HEAP_CORRUPTION) at guest frame ~1998 during
+   the Chapter-1 scene load; the identical command re-run to 4560. Not caused by the change in flight.
+
+---
+
+### AP-AK. THE COPY-ORDERING HYPOTHESIS IS DISPROVEN — the copies are already at exact batch boundaries
+
+Path B from the Aurora study ("port Aurora's staged-readback model") rested on one assumption: that our deferred
+copies capture draws issued *after* the copy, because `d3d11_service_pending_copies()` only fires when
+`vertex_mark <= up_to_vertex`. **That assumption is wrong, and the code already had the guard**:
+`gx_pipeline.c` sets `s_batch_barrier = true` when a copy is queued (line ~1837), and the batch builder refuses to
+merge across a barrier (`if (s_draw_batch_count > 0 && !s_batch_barrier)`), so every queued copy lands on a batch
+boundary and is serviced before the draw that follows it. Measured, with `TLS_COPY_PROBE=3740-3810` on one run:
+
+```
+frame=3740  copy#3 0x9038D1C0 160x112 vmark=57918 mean=139.85
+frame=3740  copy#5 0x9038D1C0  80x56  vmark=57948 mean=219.10
+frame=3740  copy#6 0x9038D1C0  80x56  vmark=57954 mean=255.00
+frame=3742  copy#3 0x9038D1C0 160x112 vmark=56016 mean=139.85
+...
+```
+
+Two facts kill the hypothesis: each copy is serviced **before** the batch whose first vertex is at or after its
+`vertex_mark` (i.e. stream order is honoured), and the three means are **identical to two decimals on every frame of
+the range** — a steady state, not a race. So do not rewrite the copy path on the ordering theory; it would be work
+against a defect that is not there.
+
+What the range probe did add: the same guest address `0x9038D1C0` is used at three different sizes in one frame
+(`640x448` `fmt=4` at `vmark=0`, then `160x112` `fmt=6`, then `80x56` `fmt=6` twice) and two copies are serviced at
+`batch=-1` (before any batch) with `vmark=0`, i.e. they capture whatever the render target holds at frame start. If
+the white is a host artefact, that frame-start capture is the remaining place to look — not the batch ordering.
+
+---
+
+### AP-AL. WHAT THE SHIPPED COMMUNITY PORTS DO DIFFERENTLY — none of them hand-rolls GX
+
+Three Wii ports that the community reports as running well were read (READMEs + source tree) at the point where this
+project is stuck on renderer fidelity. What they are:
+
+| project | game | game logic | GX rendering |
+|---|---|---|---|
+| [Nebula](https://github.com/keepvaibin/nebula) | Super Mario Galaxy | decomp (Petari), compiled natively | **Aurora** (D3D12/Vulkan) |
+| [Recharged](https://github.com/previouslevelgames/recharged) | Mario Strikers Charged | decomp (mscharged-decomp) | **Aurora** via Dawn/WebGPU |
+| [WiiCompiled](https://github.com/patchzyy/Wiicompiled) | Mario Kart Wii | **static recompilation** of a retail DOL/REL | **Aurora** |
+
+**WiiCompiled is this project's exact analogue** — bare PowerPC static recompilation, no decompilation available,
+a translator that emits C++ against a runtime. Its README states the same division of labour we arrived at: *"The
+translator itself handles DOLs and RELs generically… the catch is that a playable port also needs a runtime: audio,
+input, GX, everything the game touches."*
+
+**The one structural lesson: all three delegate GX to [Aurora](https://github.com/encounter/aurora) (MIT) instead of
+writing a rasteriser.** Aurora provides D3D12/Vulkan/Metal, a "highly accurate and performant GX implementation",
+a pipeline cache, Dolphin texture-pack support — and, importantly for a recompiler, a **FIFO command-processor
+level** (`lib/gx/command_processor.cpp`, `fifo.cpp`, `readback.cpp`) that does not require the source-level GX API
+(`lib/dolphin/gx/GX*.cpp`). Its EFB readback is *staged*, not synchronous: `capture_peeks` / `capture_copies` /
+`get`, bounded by `MaxCaptureItems = 4096` and `MaxPayloadBytes = 32 MiB`. That is the mature version of what this
+project hand-rolled as `d3d11_efb_copy_to_guest()` + `s_pending_copies`, i.e. the exact area where the white screen
+(AP-AI/AP-AJ/AP-AK) lives.
+
+Practices worth adopting independently of any renderer decision:
+
+1. **Unit tests with no game image.** WiiCompiled's translator suite needs "no binaries and no host C++ compiler";
+   Aurora ships `tests/gx_fifo_test.cpp`, `tests/gx_readback_test.cpp`, `tests/gx_texture_cache_test.cpp`. Our only
+   test is `tools/invariant.ps1` (3 520 frames, minutes). A synthetic-FIFO test asserting the resulting batch list
+   would have caught the blend-enum and TEV questions in seconds instead of in runs.
+2. **Loud failures.** WiiCompiled: *"Errors are deliberately loud instead of quietly swallowed."* This renderer
+   silently substitutes white (`gx_tex_white_srv`) on missing textures, which is how a white screen can be mistaken
+   for a game state for several sessions.
+3. **Reference-driven equivalence, published.** WiiCompiled proves physics equality across Wii/Dolphin/native using
+   in-game ghosts. Our Dolphin references exist but nothing compares them automatically, and frame numbers from
+   different runs are not comparable (AP-AJ).
+4. **Transferable pipeline cache** for fast startup — not urgent here.
+
+**Decision taken (user-selected): Path B first** — port the *semantics* of Aurora's staged readback into the existing
+D3D11 renderer rather than migrating the whole GX layer. Path A (build aurora + Dawn with this MinGW/C toolchain and
+drive its command processor from our FIFO) remains open and is the change most likely to close the remaining
+fidelity gaps (HUD transparency, particles, XF light decode). Note that Path B's first premise was tested and
+**disproven** (AP-AK), so Path B must start from the frame-start capture question, not from batch ordering.
