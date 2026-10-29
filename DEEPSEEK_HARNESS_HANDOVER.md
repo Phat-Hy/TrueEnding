@@ -11891,3 +11891,44 @@ actually being dark, and AP-Y item 2 is withdrawn. What the hero's bake then cap
 **So `TLS_BATCH_PROBE` is the instrument for this class of question** - it is the only one that reports the
 address and the pixels together. Use it on the single present you care about (it does per-batch readbacks, so
 never across a long run).
+
+---
+
+### AP-Z. THE GXDrawDone FLUSH WORKS - the hero's texture bakes REAL ART
+
+**1. The flush is implemented and inert by default.** `gfx_flush_gx_now()` (`gfx_d3d11.c`) runs `d3d11_present`
+in a `s_flush_only` mode that **skips the colour clear, the snapshot capture and the window flip**, and does not
+consume the accumulated geometry (the real present still clears and redraws its own complete batch list, so the
+displayed picture cannot change). `0x806140C0` (`GXDrawDone`) calls it, which is the sync `fn_800D7278` relies on
+(page AP-W8). It returns immediately if no copies are queued, so the default path is untouched: **invariant PASS
+at `D3329E35...`, frame 3500 byte-identical, verified after the change.**
+
+**2. With copies queued, the bake becomes real art.** `TLS_EFB_ORDER=staging` + the flush, at the hero's bake:
+
+```
+[EfbChain] present=1909 frame=1909 copy=7 batch=8 dst=0x90536FE0 256x256 srcavg=(59,78,100) srca=255 \
+             dstavg=(60,80,102) dstalpha=255 dstpeak=581
+[MemDump] 0x92AEAEC0 len=192 frame=1915
+  +0000 00004ACBFFFFFFFF00004ACBFFFFFFFF00004ACBFFFFFFFF3A2B4ACBFFFFFFFF
+  +0020 00004ACBFFFFFFFF00004ACBFFFFFFFF3A2B4ACBFFFFFFFF3A6B4ACCFFFFFFFF
+  +0040 00004ACBFFFFFFFF00004AABFFFFFFFF428B4ACCFFFFFFFF42AB4AACFFFFFFFF
+```
+
+`00004ACB`/`3A2B4ACB`/`428B4ACC`/`42AB4AAC` are **varied CMPR blocks** - real art - where the same dump used to
+be `00000000 FFFFFFFF` (fully transparent) for every block. The copies are now serviced at `batch=8` **inside the
+guest's frame** (present=1909 frame=1909), i.e. while the guest is still inside `GXDrawDone`, instead of at the end
+of the present after the guest had already read the destination.
+
+**3. So the hero's invisible-texture defect is FIXED for the configuration that queues the staging copies.** What
+remains is to make that configuration the **default** (`TLS_EFB_ORDER=staging` is a diagnostic today), and then
+re-verify the two gates that a visible hero necessarily moves:
+* `tools/invariant.ps1`'s `EXPECTED_SHA` - frame 3500 will change *because the character is now drawn*, which is
+  the intended change; it must be re-recorded with the new frame as evidence and the reason in the script's comment;
+* the **page gate's region numbers**, which must stay to the tenth (the page scene is validated and the staging
+  copy ordering is not supposed to touch it - AP-Q measured `TLS_EFB_ORDER=staging` as surviving 2 760 frames with
+  zero `exit(0)`, so the crash risk that blocked the global switch does not apply to this class).
+**Next round is therefore a default flip plus gate re-verification, not a new investigation.**
+
+**4. Instrument note.** `[EfbChain] ... batch=8` versus `batch=9999` is the fingerprint of the flush working:
+`9999` is the end-of-present service (too late for the guest's read), `8` is a per-batch service inside
+`d3d11_present`'s batch loop, which is where the flush places the copy.

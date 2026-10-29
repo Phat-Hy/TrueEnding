@@ -9462,6 +9462,10 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // GXDrawDone (0x806140C0)
         case 0x806140C0: {
             mem_write8(ctx, 0x808800A8, 1);
+            /* The guest uses this as "the GX FIFO has been consumed": fn_800D7278 issues an
+             * EFB copy, calls GXDrawDone, then reads the copied image (handover 5c.46
+             * AP-W8). Servicing the queued copies here is what makes that read valid. */
+            { extern void gfx_flush_gx_now(void); gfx_flush_gx_now(); }
             static int s_drawdone_cnt = 0;
             if (tls_draw_trace_enabled() && (++s_drawdone_cnt <= 20 || s_drawdone_cnt % 60 == 0)) {
                 printf("[TLS GX] GXDrawDone #%d completed (LR=0x%08X)\n", s_drawdone_cnt, ctx->lr);

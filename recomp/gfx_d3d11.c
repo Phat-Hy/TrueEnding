@@ -460,6 +460,22 @@ static int s_replaying_copy = 0;
 unsigned g_efb_copy_seq = 0;
 int g_efb_copy_last_replay = 0;
 
+/* Non-zero while gfx_flush_gx_now() is running the draw phase outside a real present.
+ * GXDrawDone (0x806140C0) is the guest's "the FIFO has been consumed" sync, and the guest
+ * relies on it: fn_800D7278 issues an EFB copy, calls GXDrawDone, and only then reads the
+ * copied image (handover 5c.46 AP-W8). The host threw that away - the copy was performed
+ * either inline (before the frame's draws, so it captured the previous frame) or at the
+ * end of the present (after the guest had already read it).
+ *
+ * A flush replicates exactly what the hardware's EFB looks like at that moment: the
+ * previous frame's content PLUS everything drawn so far this frame, which is why it must
+ * NOT clear (the real present still clears and redraws its own complete batch list, so the
+ * displayed picture does not change) and must NOT consume the accumulated geometry (the
+ * present redraws it from scratch). With copies queued - `TLS_EFB_ORDER=staging` - the
+ * flush's final service call is the first moment a copy can sample the drawn frame while
+ * the guest is still waiting inside GXDrawDone. */
+static int s_flush_only = 0;
+
 static D3D11Backend s_d3d11 = {0};
 
 // Precompiled bytecode for fullscreen triangle vertex shader
@@ -2819,7 +2835,7 @@ int g_tls_page_capture_frame = -1;
 bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     if (!s_d3d11.device || !s_d3d11.swap_chain) return false;
 
-    s_d3d11.frame_counter++;
+    s_d3d11.frame_counter += s_flush_only ? 0 : 1;
 
     // Check if guest resolution changed
     if (fb_width != s_d3d11.fb_width || fb_height != s_d3d11.fb_height) {
@@ -2944,7 +2960,10 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
      * TLS_NO_FRAME_CLEAR=1 skips the colour clear (depth is always cleared) to A/B it. */
     static int s_no_clear = -1;
     if (s_no_clear < 0) s_no_clear = getenv("TLS_NO_FRAME_CLEAR") ? 1 : 0;
-    if (!s_no_clear) {
+    /* A flush must not clear (see s_flush_only): the hardware EFB keeps the previous
+     * frame and adds this frame's draws on top, which is what a mid-frame GXDrawDone
+     * copy has to see. Depth is cleared either way - a flush is not a new frame. */
+    if (!s_no_clear && !s_flush_only) {
         ID3D11DeviceContext_ClearRenderTargetView(s_d3d11.context, s_d3d11.rtv, clear_color);
     }
     if (s_d3d11.dsv) {
@@ -4062,6 +4081,14 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     }
 
     // Present with V-Sync
+    /* A flush is not a present: the snapshot must not be overwritten with a half-drawn
+     * frame (the next real present captures the finished one) and the window must not
+     * flip. Everything above - viewport, batches, per-batch copy service, textures - has
+     * already run, which is the whole point. */
+    if (s_flush_only) {
+        gx_pipeline_end_frame();
+        return true;
+    }
     d3d11_capture_efb_snapshot();
     /* TLS_PRESENT_ON_XFB=1 flips the window only on frames where the guest performed an
      * XFB (scanout) copy, i.e. only on frames the guest itself considers finished.
@@ -4090,8 +4117,24 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     return true;
 }
 
-void d3d11_resize(int new_width, int new_height) {
-    if (!s_d3d11.swap_chain || new_width <= 0 || new_height <= 0) return;
+/* GXDrawDone's real meaning: "the commands the guest has issued have been consumed".
+ * Runs the draw phase without clearing, without capturing the snapshot and without
+ * flipping the window, so any EFB copy still queued is serviced here - against the
+ * previous frame's content plus everything drawn so far - instead of at the end of the
+ * present, after the guest has already read the destination (handover 5c.46 AP-W7/W8).
+ * The accumulated geometry is NOT consumed: the real present redraws its own batch list,
+ * so the displayed picture is unchanged and this cannot regress the invariant. Inert
+ * unless copies are queued, i.e. unless TLS_EFB_ORDER/TLS_DEFER_EFB_COPY is in use. */
+void gfx_flush_gx_now(void) {
+    if (!s_d3d11.device || !s_d3d11.context || !s_d3d11.swap_chain) return;
+    if (s_flush_only) return;              /* not re-entrant */
+    if (gx_pipeline_get_pending_copy_count() == 0) return;   /* nothing to gain */
+    s_flush_only = 1;
+    d3d11_present(NULL, 0, 0);
+    s_flush_only = 0;
+}
+
+void d3d11_resize(int new_width, int new_height) {    if (!s_d3d11.swap_chain || new_width <= 0 || new_height <= 0) return;
     s_d3d11.win_width = new_width;
     s_d3d11.win_height = new_height;
 
