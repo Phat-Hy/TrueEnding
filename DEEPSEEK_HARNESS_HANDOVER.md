@@ -12854,8 +12854,10 @@ branches in `gx_pipeline.c`, one `tls_gxcap_copy` call at the existing copy site
 begin/RAM-dump/shutdown call in `host_runner.c`, and one new object in
 `tools/recomp_harness.py`'s source list. **No GX semantics changed: no TEV, blend, texgen, copy or
 decode behaviour was touched.** The runner builds green (`build-runner` SUCCESS, 107.74 MB) and
-`TLS_GX_CAPTURE` unset means `tls_gxcap_on == 0`, so every new branch is not taken. **The invariant
-and the page gate were NOT re-run this session** - that is a 3520-frame run, and at 7-10 FPS under
+`TLS_GX_CAPTURE` unset means `tls_gxcap_on == 0`, so every new branch is not taken: a 220-frame
+smoke run of the instrumented binary with the variable unset exits 0 in 6 s, boots `Boot -> Stra`
+on schedule and prints **zero** `[GxCap]` lines. **The invariant and the page gate themselves were
+NOT re-run this session** - that is a 3520-frame run, and at 7-10 FPS under
 this host's load it is an hour; the previous session's `C5447108…` PASS therefore stands unverified
 by this session, and verifying it is the first item of next session's list below.
 
