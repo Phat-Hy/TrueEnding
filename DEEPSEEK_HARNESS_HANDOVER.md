@@ -2,25 +2,23 @@
 
 ## NEXT SESSION — START HERE
 
-> **THE AURORA SPIKE RAN — read §5c.46 AP-AM (at the end of this file) before anything else.**
-> In one paragraph: aurora builds and runs on this toolchain with **MinGW GCC**, no MSVC
-> (**criterion 1 CLEARED**: 503 targets, `ctest` 424/425, incl. the real EFB-readback GPU tests);
-> a captured GX stream is driven through aurora's FIFO command processor after an adapter of exactly
-> **two register classes plus address canonicalization** (`BP 0x49/0x4A/0x4B/0x4D` ->
-> `GX_AURORA_LOAD_COPY_SRC/_DST/_DEST`, `CP 0xA0..0xAF` -> `GX_AURORA_LOAD_ARRAYBASE`, and MEM1/MEM2
-> at their cached, uncached and MEM2-physical aliases); **criterion 3 CLEARED** — the same guest EFB
-> copy serviced by both layers is byte-comparable, aurora's payload is layout-exact and equals its
-> own EFB - and with `GXInit` added to the harness the synthetic EFB-copy test passes with **exact**
-> bytes (every texel `(192,128,64,255)`); **criterion 2 is the open one**: aurora *records* the cave
-> frame (**26 616 draws, 1.12 M vertices, 102 pipelines**, and the same 27 149 draws with the adapter
-> bypassed) but its EFB is **black** even for a copy taken after 210 597 drawn vertices (mean byte
-> 0.00 vs this layer's 148.29) - with a working control case and the harness therefore exonerated. Staging, async pipelines, colour/alpha update, readback timing and the adapter itself
-> are all **ruled out by measurement** (AP-AM 6d). The next step is one comparison, not another
-> switch: dump **one draw's decoded vertex positions** from this layer's `decode_single_vertex` and
-> from aurora's arrays/uniforms for the same draw (AP-AM 6f). Instruments and RPC-free recipe:
-> `tools/aurora_spike/` (`README.md`, `build.ps1`, four patches, `capinfo.py`, `capfilter.py`,
-> `copycmp.py`, `compare.py`); the checkout lives at **`G:\Program\aurora-spike`**.
-
+> **THE AURORA SPIKE RAN AGAIN — read §5c.46 AP-AN (at the end of this file) before anything else; AP-AM is
+> now history, with three of its conclusions corrected in AP-AN item 9.** In one paragraph: criteria 1 and 3
+> stay CLEARED; **criterion 2 was never "aurora renders nothing" — it was the adapter.** A raw hardware FIFO
+> carries three state classes that aurora's own GX API translates before it writes the registers: the **+342
+> view bias** in the scissor (BP 0x20/0x21 decoded as `left+684`, which `apply_scissor` clamps into a
+> **zero-area scissor**, so every draw is discarded with no error and no log line), the **340-vs-342 viewport
+> bias** (viewport decoded to (2,2,640,448) on a 640-wide target), and **texture objects** (`bp_tex` never sets
+> `GXTexObj_::data`, so every textured TEV stage sampled zero). With all three translated, frame 3400 **draws**:
+> EFB 39.47 at 60 000 commands (was 0.00), and guest copy record 2 goes from **0.00 to 27.93 mean byte** against
+> this layer's 148.29. The frame is *partially* drawn, not blank — what remains is content (68 % of that copy's
+> texels are still zero) plus one instrument limit (the end-of-frame EFB readback fails above ~70 000
+> commands). Next session: make that readback reliable, bisect the empty texels by command offset, then the
+> tail. Instruments: `--dump-draw N` + `TLS_AURORA_DUMP_DRAW=N` (patch `0006`), `tools/aurora_spike/streamwalk.py`,
+> `TLS_AURORA_TEST_{NO_DEPTH,WHITE_TEV,MAT_WHITE}`, `copycmp.py`, `apam6h.py`; checkout at
+> **`G:\Program\aurora-spike`** (`build.ps1 -ReplayStaging` applies the replay-only staging patch).
+> **Also: the Chapter-1 gate FAILED 3/3 with three different hashes on the untouched runner binary (AP-AN item
+> 12) - make that instrument deterministic before trusting any PASS, and do not re-record a reference from it yet.**
 
 **Tree state.** Clean at the commit on top of the AP-Q copy-ordering work. The history this session added is
 `654cb14` indirect texturing, `bd877ed` the 3D widening, `6a57a92` the AP-O dossier, `850ba86` probe pinning + AP-O
@@ -13032,3 +13030,230 @@ by this session, and verifying it is the first item of next session's list below
    invariant/page gate re-recorded once against the Dolphin references - the same one-time cost
    AP-AL already named.
 
+
+### AP-AN. THE BLACK FRAME WAS THE ADAPTER - three register classes a raw FIFO stream does not carry in aurora's dialect, and the cave frame now draws
+
+This session took AP-AM's open question - *why does aurora record the cave frame and render nothing?* - and
+answered it with the two comparisons AP-AM 6f asked for. The answer is not in aurora's rasteriser. It is in the
+**state a hardware FIFO stream carries that aurora's own GX API translates before it writes the registers**.
+Three such classes were found and measured; after translating them the frame renders (a copy taken inside
+frame 3400 goes from **0.00 to 27.93 mean byte**), and what remains is content, not a black screen. Criterion 2
+is therefore **no longer blocked on "aurora renders nothing"** - it is blocked on a partially-populated frame,
+which is a different and much cheaper problem.
+
+Nothing in `src/` changed. Nothing on the shipping render path changed: the hand-rolled layer is still the only
+renderer. All numbers below are from the same two captures AP-AM left on disk (`window.tlscap`, 158 MB,
+frames 3400-3401; `gxcap_title` window) or from tools added this session.
+
+**1. Instruments (all inert unless enabled).**
+
+| instrument | what it prints |
+|---|---|
+| `--dump-draw N` in `tools/aurora_spike/aurora_replay.cpp` + `TLS_AURORA_DUMP_DRAW=N` in aurora (new patch `0006`) | for draw N: prim/fmt/vcnt/vtxSize, the projection aurora holds, viewport/scissor (logical and render), the pn matrix in force, TEV stage args, channel material/ambient, `vtxDesc`, the POS record offset, the **array pointer/stride/index and the decoded first-vertex position**, and the raw vertex bytes |
+| `tools/aurora_spike/streamwalk.py` | the same frame walked from the capture alone: command/register census, per-draw offsets and vertex sizes, the scissor writes with the 342 bias removed (`--scis`), POS decode from the MEM plane |
+| `tools/aurora_spike/bpstate.py`, `tools/aurora_spike/caprecords.py` | BP state at a stream offset; the capture's record order (frames / FIFO / MEM / COPY) |
+| `TLS_AURORA_TEST_NO_DEPTH`, `TLS_AURORA_TEST_WHITE_TEV`, `TLS_AURORA_TEST_MAT_WHITE`, `TLS_AURORA_Z_REMAP` | the state bisect, each one switch |
+| `tools/aurora_spike/copycmp.py` | byte comparison of one guest EFB copy, both layers |
+
+The whole capture parses with the adapter's own mirror: **27 149 draws / 205 074 vertices for frame 3400, 0
+desyncs** - identical to AP-AM, which re-establishes that the capture and the adapter are unchanged.
+
+**2. One draw, both sides (Step 1).** Draw 0 of frame 3400 - the first draw of the frame - reported by both
+sides from the same bytes:
+
+| | this layer / the stream | aurora |
+|---|---|---|
+| stream offset | 1659 (`streamwalk.py`) | 3123 in the *rewritten* stream (draw index is the only stable key) |
+| prim / fmt / vcnt / vtxsize | `0x98` = TRIANGLE_STRIP, fmt 0, 20 vertices, **5 bytes/vertex** | identical |
+| vertex attributes | all five enabled attributes are **INDEX8** (`vtxDesc[9,10,11,13,14]=2`) | identical |
+| POS fetch | array `0x12739B40`, stride 6, index 49 -> element +294 | same pointer, same stride, `has_data` now true |
+| first vertex POS | bytes `08 38 01 E3 FE E8` = s16/2048 -> **(1.0273, 0.2358, -0.1367)** | identical decode |
+| pos matrix 0 | - | rows (-0.5531 -0.5774 -0.6632 21.0007), (-0.8566 0.4891 0.2979 66.7417), (0.1481 0.6992 -0.7357 -136.4182) |
+| projection | XF 0x1020-0x1026 = 0.007434, 0, 0.006906, 0, -0.005369, -1.0, type 1 = **GX_ORTHOGRAPHIC** | identical |
+| derived clip | eye (20.39, 65.94, -136.00) -> clip (0.1515, 0.4554, -0.2698), w = 1 -> **NDC (0.15, 0.46)** | same, and aurora's upload negates row 2 for reversed Z (`lib/gx/shader_info.cpp:478-483`) so z = +0.27 in [0,1] |
+
+So: the vertex data, the projection, the matrix and the clip position all agree, and the draw is inside the
+frustum. **The first divergence was not in the vertex path at all** - it was in the two state values printed on
+the same lines:
+
+**3. Defect A - the +342 view bias, in the scissor.** aurora held `scissor logical=(684 684 640 448)` at draw 0.
+The stream, with the 342 bias removed, says the guest wants `(0,0)-(639,447)`:
+
+```
+BP 0x20 = 0x156156  fields (342,342)   BP 0x21 = 0x3D5315  fields (789,981)   BP 0x59 = 0x02ACAB (hx 683, hy 171)
+```
+
+The SDK writes `left + 342` into BP 0x20/0x21 (`kViewOffset = -342` in aurora's own `GXCull.cpp`, which
+*subtracts* it before writing) and `(offset + 342) >> 1` into BP 0x59. aurora's `bp_scissor`
+(`lib/gx/regs.cpp:134-150`) adds the box offset back as `2 * field` and never subtracts the 342, so a raw
+hardware stream decodes to **`left + 684`** - x = 684 on a 640-wide target. `apply_scissor`
+(`lib/gfx/encoding.cpp:43-49`) then clamps it to `(640, 480, 0, 0)`: a **zero-area scissor**. Every draw in the
+frame is discarded, with no validation error and no log line. That is the black EFB of AP-AM 6d/6g.
+
+The adapter now emits the true coordinate and a zero box offset, which round-trips through aurora's own
+convention (its `GXSetScissor` writes `left - 342`, `GXSetScissorBoxOffset(0,0)` writes 171, and the decode
+adds 342 back). 39 scissor writes per frame 3400.
+
+**4. Defect B - the same bias, in the viewport, with a different constant.** The SDK writes
+`ox = 342 + left + width/2` (= 662, 566 for this frame's 640x448 viewport at 0,0); aurora's own
+`GXSetViewportJitter` writes `340 + ...` and `xf_load_viewport` subtracts 340, so the replay's viewport came out
+at **(2,2,640,448)** - i.e. `x + width = 642 > 640`, an invalid viewport. After subtracting 2 from ox/oy the
+dump reads `viewport logical=(0.000 0.000 640.000 448.000)` and `x + w = 640` exactly. (Both biases are in the
+adapter, not in aurora: aurora's API is self-consistent, it just speaks a dialect two pixels off from the SDK's.)
+
+**5. Step 2 - bisect the state, not the frame: the geometry was always rasterising, the colour was black.**
+With the scissor and viewport translated, the frame still came back 0.00. Three one-switch runs split it:
+
+| run | EFB mean |
+|---|---|
+| guest TEV, 60 000 commands | **0.00** |
+| depth test off, guest TEV | **0.00** (so the depth test is not the blocker) |
+| **stage 0 forced to a constant white**, 400 / 2 000 / 8 000 / 20 000 / 60 000 commands | 0.02 / 1.33 / 12.37 / 16.25 / **230.67** |
+| material colour forced white, guest TEV, 60 000 commands | 0.20 (only the untextured pixels) |
+
+Two facts fall out: **(a) the frame rasterises** - with a constant-white TEV it covers the screen (230.67 at
+60 000 commands with the depth test also off, 237.70 with the white TEV alone), so vertex fetch, clipping, primitive assembly, scissor,
+viewport and depth were all fine after the translations; **(b) the colour is black and it is the textured
+stages**, because forcing the material colour (which stage 0 of draw 0 uses: `d = RASC`, `a=b=c=ZERO`,
+`alpha d = RASA`, material `(0.506 0.451 0.396 1.0)`) recovers only the handful of untextured pixels.
+
+**6. Defect C - the texture object.** `bp_tex` (`lib/gx/regs.cpp:498-522`) decodes mode0/mode1/image0/image3 into
+the shadow `GXTexObj_` but **never sets `data`** - the host pointer. That only arrives through
+`GX_AURORA_LOAD_TEXOBJ`, which aurora's own `GXLoadTexObj` emits. `GXTexObj_::has_data()` is
+`pointer >= 0x10000` (`lib/gfx/texture.hpp:114`), so on a raw stream every texture fails it and
+`resolve_sampled_textures` (`lib/gx/texture.cpp:824-865`) binds **no handle**: every sampled texture reads as
+zero and a TEV stage built out of TEXC/TEXA multiplies by zero. The adapter now synthesises
+`GX_AURORA_LOAD_TEXOBJ` from BP image0/image3 - address `(image3 & 0xFFFFFF) << 5` through the cached MEM1/MEM2
+alias, width/height/format from image0, no TLUT (this window loads no TLUTs: BP 0x64/0x65 never appear) - and
+emits it for whichever maps changed since the last draw. Frame 3400: **376 texobj commands**, e.g.
+`map 0 -> 0x929174A0 256x256 fmt 14` (CMPR), matching the layer's own texture list for this scene.
+
+**7. What the frame does now.**
+
+| measurement | before this session | now |
+|---|---|---|
+| EFB mean after 60 000 commands of frame 3400 | 0.00 | **(39.47, 39.45, 36.86)** |
+| copy record 2 (`0x9036A1A0`, 320x224 RGB565, frame 3400, vmark 210 597) mean byte | **0.00** (AP-AM 6g) | **27.93**, 68.2 % zero bytes, max 246 |
+| this layer's bytes for the same copy | 148.29 | 148.29 |
+| `copycmp.py` on that copy | 0 identical | **0 / 143 360 identical (0.00 %)**, all 4 480 4x4 tiles differ |
+
+So the copy path now carries *content* from the replayed frame for the first time, and the content is wrong in
+the honest way: aurora's picture is 68 % empty where the layer's is fully painted. That is a partially drawn
+frame, not a blank one - the difference between "the migration cannot work" and "the migration has three more
+things to translate".
+
+**8. What is still not cleared, and the next measurement.** The end-of-frame EFB readback is still 0.00, but the
+readback instrument itself fails above ~70 000 commands ("capture failed: buffer mapping Aborted: Buffer was
+destroyed before mapping was resolved"), so *"the frame ends black"* is not yet a trustworthy number - the
+in-frame capture (key 3) never delivers and the harness falls back to a next-frame capture. The trustworthy
+instrument is the guest copy taken inside the frame, and that one is now non-zero. Next, in order:
+
+1. make the end-of-frame EFB capture reliable (larger `--extra`, or request key 3 per chunk) so "the frame" can
+   be compared with the layer's capture at all;
+2. bisect the copy's 68 % empty texels by command offset against the layer's own EFB, using
+   `--max-cmds` (the mean grows monotonically: 0.02 at 400 commands, 12.37 at 8 000, 230.67 at 60 000), which
+   names the first draw range whose content is missing;
+3. then the tail: the frame's last commands contain 3 EFB copies in frame 3400 (plus 16 in 3401) and the guest
+   clears the EFB for the next frame somewhere in there, so the *final* EFB being black may be correct
+   hardware behaviour - measure it before calling it a defect.
+
+**9. Corrections to AP-AM, from measurement.**
+
+* **6e/6g's "adapter exonerated because raw == adapted" is withdrawn.** The raw path is not a control: it drops
+  the array bases *and* (from this session) the scissor/viewport/texobj translations, so both paths were black
+  for the same adapter reasons. A control has to be a case where only the variable under test changes.
+* **6h's lost copies are not lost - they are mis-tagged.** `tools/aurora_spike/caprecords.py` on `window.tlscap`: 95 copy
+  records; 3 inside frame 3400 (#0 vmark 0, #1 vmark 4 752, #2 vmark 210 597), 16 inside 3401 (#3-#18), and 76
+  (#19-#94) written **after** the MEM planes with no enclosing frame, in four repetitions of one 19-record
+  pattern. So record 21 is the *frame-3400* copy geometry re-recorded later; comparing it is legitimate, but
+  "tagged frame 0" means "recorded outside the window", not "part of the frame".
+* **The staging planes are separate WebGPU buffers, not one 256 MiB buffer.** `lib/gfx/frame.cpp:420-431`
+  creates uniform / vertex / index / storage buffers individually (plus per-slot map-write staging buffers), so
+  AP-AM's "verts 16 + uniforms 48 + indices 8 + storage 144 + texture 24 already exceeds maxBufferSize" is
+  **wrong**: a 96 MiB storage plane is legal and was used all session. What is real is the per-plane abort at
+  the measured +16 MiB steps (`need 8 389 181, capacity 8 388 608` at the default 8 MiB storage).
+* **The z convention needs no adapter work.** aurora converts GX z to reversed-Z at *uniform upload*
+  (`proj.m2 = proj.m2 * (-1,-1,-1,-1)`, `lib/gx/shader_info.cpp:478-483`). All three probe remaps
+  (`0.5(z+w)`, `0.5(w-z)`, `w-z`) changed nothing, and the baseline NDC z for draw 0 (0.27) is already inside
+  [0,1]. The probe stays in patch 0006 as evidence, not as a fix.
+
+**10. The migration plan, updated with what this session measured.** The C-ABI boundary is now **four register
+classes plus address canonicalisation**, not two:
+
+1. **EFB copy setup** - BP 0x49/0x4A/0x4B/0x4D -> `GX_AURORA_LOAD_COPY_SRC/_DST/_DEST` (AP-AM item 3; unchanged).
+2. **Array bases** - CP 0xA0..0xAF -> `GX_AURORA_LOAD_ARRAYBASE`, sized per draw from the draw's own indices
+   (AP-AM 6d.1; unchanged).
+3. **The view bias** - BP 0x20/0x21 minus 342 per field and BP 0x59 forced to 0 (scissor), and XF 0x101D/0x101E
+   minus 2.0 (viewport). **This is what made every replayed frame black.**
+4. **Texture objects** - BP image0/image3/mode0 -> `GX_AURORA_LOAD_TEXOBJ` with a host pointer, because
+   `bp_tex` never sets `GXTexObj_::data`. **This is what made every textured stage black.**
+5. **Address canonicalisation** - MEM1/MEM2 through cached/uncached/MEM2-physical aliases (AP-AM item 3;
+   unchanged, and texture addresses now go through the same function).
+
+Build integration: patches `0001`-`0004` and the new `0006` always (all inert), `0005` (staging sizes) for a
+replay only - `build.ps1` now takes `-ReplayStaging` and skips `0005` otherwise, which is what the README always
+claimed. Staging policy the game needs, measured: the storage plane needs **> 8.4 MB in a heavy frame** (the
+default 8 MiB aborts at `need 8 389 181`), **96 MiB is enough for the non-split replay** of both frames, and the
+planes are independent buffers, so the realistic policy is per-plane sizing plus a cap-and-flush for the
+storage plane, not a single-buffer budget. The invariant/page gate still has to be re-recorded once against the
+Dolphin references (AP-AL's one-time cost, unchanged) and was **not** re-run this session - the host was quiet
+but the session's run budget went to the replays.
+
+**11. Run log (this session, one runner-free replay at a time; no runner launch was needed at all).**
+
+| # | what | result |
+|---|---|---|
+| 1 | replay frame 3400, default 8 MiB staging | aborts at `need 8 389 181, capacity 8 388 608` - reproduces AP-AM 6b |
+| 2 | apply `0005` (96 MiB uniform + storage), rebuild | 503-target tree still builds; replay completes |
+| 3 | `--dump-draw 0` | the draw-0 table in item 2 above |
+| 4 | scissor translation | EFB still 0.00, but the state dump goes from (684,684) to (0,0) |
+| 5 | viewport translation | viewport (0,0,640,448), EFB still 0.00 |
+| 6 | z remaps 0/1/2 | all 0.00 - z is not the blocker |
+| 7 | `TLS_AURORA_TEST_WHITE_TEV` at command cuts | 0.02 / 1.33 / 12.37 / 16.25 / 230.67 - rasterisation proven |
+| 8 | `TLS_AURORA_TEST_NO_DEPTH` | 0.00 - depth is not the blocker |
+| 9 | `TLS_AURORA_TEST_MAT_WHITE` | 0.20 - untextured stages work, textured ones do not |
+| 10 | texobj translation | **39.47 at 60 000 commands; copy record 2 27.93 vs the layer's 148.29** |
+| 11 | `--copy-record 2` + `copycmp.py` | 0/143 360 identical, 4 480/4 480 tiles differ |
+| 12 | readback above 70 000 commands | the capture itself fails - instrument limit, recorded rather than worked around |
+
+**12. The Chapter-1 invariant gate FAILED, and it is not this session's doing - it is not currently a stable
+instrument.** `pwsh tools/invariant.ps1 -Log logs_ap/apAN_invariant.log` on this tree, all three of the script's
+own retries:
+
+```
+attempt 1/3: reachedGame=True sha=3C601DDE save=1348992/29344
+attempt 2/3: reachedGame=True sha=1F9BE875 save=1348992/29344
+attempt 3/3: reachedGame=True sha=4201F485 save=1348992/29344
+FAIL: frame 3500 differs from the recorded reference (expected C5447108...)
+```
+
+Three runs, **three different hashes**, all reaching `Boot -> Stra -> Titl -> Game` and all creating the save
+with the exact expected sizes. What makes this a finding rather than a regression:
+
+* the runner binary was **not rebuilt this session** (`build/recomp/tls_runner.exe`, 30 Oct 01:33:01, 107.74 MB)
+  and **no file in `recomp/` changed** (`git status`: only `DEEPSEEK_HARNESS_HANDOVER.md` and `tools/aurora_spike/`
+  are modified), so the same executable that produced the AP-O/AP-Q reference now produces three different
+  pictures;
+* the script's own comment already records identical-binary flakiness ("the identical binary reported FAIL
+  (Seq: Titl at ...)"), and AP-P item 9 measured that host load moves the title hand-over from frame 1647 to
+  ~700 - i.e. frame 3500 lands at a different point of the tutorial depending on how fast the host is, and this
+  session ran its replays on the same host;
+* the reference has been unverified since AP-AM (that session did not re-run the gate), and AP-R/AP-AI/AP-AJ/
+  AP-AK changed the renderer afterwards, so a re-record is owed anyway.
+
+Consequence for the next session, in this order: (1) re-record `EXPECTED_SHA` only after a run that is
+*deterministic* - run the gate twice on an idle host and require identical hashes before trusting either; (2) if
+it is still non-deterministic with nothing else running, the invariant has to be anchored to something stable
+(the frame *relative to* the `Game` handover, or a frame where the guest's own state is pinned) instead of an
+absolute frame number; (3) `tools/page_run.ps1` was **not** run this session and is likewise unverified.
+
+**13. Definition of done, stated honestly.** Option (a) is **not** met: aurora does not yet render the cave frame
+correctly (68 % of one copy's texels are still zero, the end-of-frame readback is unreliable, and the migration
+plan is written but the gate has not been re-recorded). Option (b) **is** met, and better than AP-AM's version
+of it: the blocker is no longer "aurora renders nothing", it is three named adapter translations - the +342
+view bias (scissor and viewport) and texture objects - with the frame already drawing, plus one instrument
+limit (end-of-frame EFB readback above ~70 k commands) and one measurement still owed (the 68 % empty texels).
+The fallback stays as AP-AM stated it: the hand-rolled layer keeps rendering, and the per-bug order is unchanged
+(composite tail, then CMPR alpha, then XF texgen 2..7) - but the migration is now *live* rather than speculative:
+the same capture draws a picture in aurora, and every remaining difference is a state translation a recompiler
+can carry.
