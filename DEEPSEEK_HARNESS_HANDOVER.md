@@ -11628,6 +11628,17 @@ mapping, and `TLS_DUMP_AT_PC` on the texture-loader entry (`0x8046BBF0`, the fun
 `.texture` and its destination) to see whether a second pass over `pc_ga_g_a01.texture` happens after the
 decompress.
 
+**6. `TLS_WATCH_ADDR` silently mis-parsed bare hex addresses - fixed, and it explains two false negatives.**
+The parser used `strtoul(p, &p, 0)`, so the documented form (`TLS_WATCH_ADDR=92AEAEC0`) stopped at the first hex
+letter and watched address `92`. Any watch on an address containing `A-F` therefore reported **zero changes**,
+which reads exactly like "nothing writes here" - the most dangerous possible failure for a probe that has already
+been used to conclude "no one writes this buffer". It is now base 16 (a `0x` prefix still works). This is also
+why a watch on `0x90536FE0` reports changes only up to frame 297: after that the first word stays put, so the
+copies that the `[EfbChain]` lines report writing that address at present 1909 do **not** change word 0, which is
+worth one direct check next round - print the first four bytes the copy wrote (`[EfbChainSum]` already sums
+16 KB) next to `mem_read32` of the same address in the same log line.
+
+
 
 
 

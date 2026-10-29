@@ -445,7 +445,12 @@ static void host_watch_addrs(CPUState* ctx, u32 block_pc) {
         if (env) {
             const char* p = env;
             while (*p && s_n < 4) {
-                s_addr[s_n] = (u32)strtoul(p, (char**)&p, 0);
+                /* Base 16, not base 0: the documented form is a bare hex address
+                 * (`TLS_WATCH_ADDR=92AEAEC0`), and strtoul(...,0) stops at the first hex
+                 * letter - so the address silently became 92 (or 80536), the watch never
+                 * matched and the run reported zero changes, which reads exactly like
+                 * "nothing writes here" (handover 5c.46 AP-V5). */
+                s_addr[s_n] = (u32)strtoul(p, (char**)&p, 16);
                 s_prev[s_n] = 0xDEADBEEFu;
                 s_n++;
                 while (*p == ',' || *p == ' ') p++;
