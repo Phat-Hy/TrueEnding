@@ -20,6 +20,14 @@ runner was launching, after several back-to-back 10-minute runs with per-batch f
 
 ### WHERE THIS STANDS (written at the end of the AP-AE round - read this before anything below)
 
+> **NEWEST DECISION: the renderer goes Aurora-first — see §5c.46 AP-AL and `AGENTS.md` §1.** The hand-rolled GX layer
+> is 7 000 lines with 82 `TLS_*` switches, 69 archaeology citations and three compensation hacks, and every defect
+> still open is a GX-semantics defect that [Aurora](https://github.com/encounter/aurora) already implements — the same
+> library that three shipped community Wii ports use, including WiiCompiled, whose **static recompilation** is this
+> project's exact analogue. The next session's job is a bounded **spike** with three exit criteria (build aurora +
+> Dawn here; render the invariant frame 3500; service one EFB copy through `capture_copies`/`get`). Until it
+> resolves: no new GX-semantics features in the hand-rolled layer.
+
 > **NEWEST: §5c.46 AP-AI (two sections from the end) re-writes the problem statement.** The "frozen gameplay
 > frame" that AP-AC4/5 measured is a **pure-white screen** (255.00, std 0.00, byte-identical from ~3800 to 5000),
 > not an idling field: in the same run the game draws the Chapter-1 cave at 2600, a scripted line
@@ -12617,8 +12625,26 @@ Practices worth adopting independently of any renderer decision:
    different runs are not comparable (AP-AJ).
 4. **Transferable pipeline cache** for fast startup — not urgent here.
 
-**Decision taken (user-selected): Path B first** — port the *semantics* of Aurora's staged readback into the existing
-D3D11 renderer rather than migrating the whole GX layer. Path A (build aurora + Dawn with this MinGW/C toolchain and
-drive its command processor from our FIFO) remains open and is the change most likely to close the remaining
-fidelity gaps (HUD transparency, particles, XF light decode). Note that Path B's first premise was tested and
-**disproven** (AP-AK), so Path B must start from the frame-start capture question, not from batch ordering.
+**DECISION (2026-10-29, user-approved — this supersedes an earlier draft of this section that said "Path B first":
+Path A, the Aurora spike, is the next session's job.** The reasoning that produced the change: measured against this
+project's own layer (7 000 lines, 82 `TLS_*` switches, 69 archaeology citations, three compensation hacks), the
+"control" a hand-rolled renderer buys is control *to patch around its own missing accuracy*, while every defect still
+open is a GX-semantics defect that a mature implementation already gets right. Path B's first premise was then tested
+and **disproven** (AP-AK), which is the concrete evidence that continuing to fix this layer is the more expensive
+road, not the cheaper one.
+
+The decisions that follow from it, and the canonical statement lives in `AGENTS.md` §1 (Renderer strategy):
+
+- **Spike exit criteria** — all three must clear before any migration starts: (1) aurora + Dawn build against this
+  toolchain (an MSVC-built DLL behind a C ABI is acceptable) and its FIFO command processor accepts our GX stream;
+  (2) exactly **one** frame renders — the invariant frame 3500 — and is compared pixel-wise to the current capture;
+  (3) exactly **one** EFB copy is serviced through `capture_copies`/`get` and the guest samples the identical bytes.
+- **Standing rule until the spike resolves** — no *new* GX-semantics feature work in the hand-rolled layer. A bug
+  fix is allowed only if it is cheaper than the spike and verifiable in one run against a Dolphin reference.
+- **What a migration would and would not replace** — it replaces the middle layer (GX semantics) only: the host
+  (device/swapchain/input), the DolRecomp translator, and every guest-side instrument (state forcing, page-visibility
+  bits, sequence probes) stay as they are. The invariant hash and page gate would need re-recording and re-verifying
+  against the Dolphin references — a one-time, planned cost, not a reason to avoid the move.
+- **Kill criterion** — if the toolchain work stalls, that is one session spent, not the project; record the blocker
+  with numbers and fall back to the per-bug path with the knowledge that the migration is blocked on build
+  integration rather than on merit.

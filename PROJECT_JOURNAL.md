@@ -104,4 +104,22 @@ Each milestone is associated with a Git commit and tag. If you ever need to roll
   - In hardware, vertical blanking triggers `RetraceCallback` (`0x80072E08`) and `DrawDoneCallback` (`0x80072BDC`), which update queue indices (`0x807C6FB8` write index vs `0x807C6FBA` read index) and call `OSWakeupThread(&lbl_807C6F60)`.
   - In the native PC runner (`tls_runner.exe`), simulating vertical blank events upon reaching the scheduler idle loop (`while (RunQueueBits == 0)`) advances the graphics queue read pointer and restores `DefaultThread` to `RunQueue[16]`.
   - This breakthrough enables smooth, continuous 60 FPS frame iteration, advancing execution into Nintendo Wear 4 Revolution sound system (`nw4r::snd`) bootstrap and spawning background audio/DVD worker threads (`Thread 1` at priority 3 and `Thread 2` at priority 4).
+* **ADR-014 (GX Rendering: Aurora-first, hand-rolled D3D11 layer frozen for new semantics)** — *2026-10-29*:
+  - The hand-rolled GX layer reached `gfx_d3d11.c` 4 091 + `gx_pipeline.c` 2 887 lines with **82 `TLS_*` switches**,
+    **69 "handover 5c." archaeology citations**, and three compensation hacks (ink matte, baseline subtraction,
+    white-texture fallback) that reconstruct hardware TEV behaviour from screenshots instead of evaluating the
+    combiner.
+  - Every defect still open is a **GX-semantics** defect — multi-stage TEV / konst / indirect / raster channel,
+    source-vs-destination blend factor enums (Dolphin ships *two* enums), XF texgen 2..7, XF light decode, EFB
+    copy/readback semantics, CMPR alpha — and none of it is game-specific.
+  - All three shipped community Wii ports use [Aurora](https://github.com/encounter/aurora) (MIT, WebGPU/Dawn) for
+    GX: Nebula and Recharged from decompilations, and **WiiCompiled from static recompilation of a retail DOL/REL** —
+    the same technique as Track B here. None of them writes a rasteriser.
+  - **Decision**: run a bounded Aurora spike with three exit criteria (build aurora + Dawn against this toolchain;
+    render the invariant frame 3500; service one EFB copy through `capture_copies`/`get`), and freeze new
+    GX-semantics feature work in the hand-rolled layer until it resolves. Rationale and the excluded alternatives:
+    `DEEPSEEK_HARNESS_HANDOVER.md` §5c.46 AP-AK (copy ordering disproven by measurement) and AP-AL.
+  - A migration would replace the GX-semantics middle layer only; the host, the DolRecomp translator and every
+    guest-side instrument stay. Re-recording the invariant hash and re-verifying the page gate against the Dolphin
+    references is a planned one-time cost.
 

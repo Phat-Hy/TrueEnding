@@ -23,6 +23,13 @@ Directed by **Hironobu Sakaguchi** (creator of *Final Fantasy*) with music by **
 1. **Track A — Byte-Matching Decompilation**: Reconstructing the original C/C++ source code to achieve a **100.00% byte-for-byte binary match** against the retail Wii binary (`SLSEXJ`) using the official Metrowerks CodeWarrior 4.3 compiler (`Wii/1.0`).
 2. **Track B — Native PC Port (Static Recompilation)**: Translating the game's PowerPC bytecode into native C/C++ running directly on modern x86-64 / ARM64 hardware with custom hardware runtime hooks, uncapped frame rates (60+ FPS), high-definition rendering, and modern controller/mouse-keyboard support—**without emulation overhead**.
 
+> **Renderer direction (Track B, decided 2026-10-29): GX is going Aurora-first.** The hand-rolled D3D11 GX layer is
+> frozen for *new* GX-semantics work while a bounded spike decides whether to adopt
+> [Aurora](https://github.com/encounter/aurora) (MIT, WebGPU/Dawn) — the GX implementation behind Nebula, Recharged
+> and WiiCompiled, the last of which is also a static-recompilation port. Rationale, measurements and the spike's
+> three exit criteria: [`AGENTS.md`](AGENTS.md) §1 and [`DEEPSEEK_HARNESS_HANDOVER.md`](DEEPSEEK_HARNESS_HANDOVER.md)
+> §5c.46 AP-AL.
+
 ### Decompilation Methodology: Two-Tier Matching Architecture
 To optimize execution velocity and preserve token budgets, Track A follows a targeted two-tier strategy:
 - **Method B (Batch Assembly-C Pipeline)**: Applied to hardware SDK boilerplate & low-level drivers (Graphics `GX`, Audio `AX`/`AXFX`/`DSP`, Storage `ISFS`/`NAND`, Inter-Process `IPC`, Bluetooth `BTE`/`BTA`/`BTM`, Controller `WPAD`/`KPAD`, Debugger `TRK`, Runtime `MSL C/C++`). Rapidly locks down complete peripheral subsystems with 100.00% byte matches and zero regressions.

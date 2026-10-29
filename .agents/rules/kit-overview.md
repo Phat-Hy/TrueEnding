@@ -15,6 +15,9 @@ Commands are not ported in this pass - Antigravity's workflow file path under `.
 
 ## Working rules
 
+- **Renderer work follows `AGENTS.md` §1 (Renderer strategy: Aurora-first).** No new GX-semantics features in the
+  hand-rolled D3D11 layer while the Aurora spike is open; a fix is allowed only when it is cheaper than the spike and
+  verifiable in one run against a Dolphin reference.
 - Do not write or modify implementation code until a plan exists and has
   been reviewed, or the user has explicitly requested implementation
   directly. A user may say "just code it" to skip planning for a trivial

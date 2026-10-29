@@ -12,6 +12,21 @@ Provide a disciplined, systematic methodology to diagnose, debug, and resolve ru
 
 ## Core Rules & Principles
 
+### 0. Before Debugging Any GX Defect, Check Whether It Is Already Solved
+* The renderer is **slated for replacement** — see `AGENTS.md` §1 (Renderer strategy: Aurora-first) and the dossier's
+  §5c.46 **AP-AL**. Until that spike resolves, do not add a new GX-semantics feature to `recomp/gfx_d3d11.c` or
+  `recomp/gx_pipeline.c`.
+* Before spending a run on TEV stages, blend factors, XF texgen, EFB copy/readback or texture decode, read what
+  [Aurora](https://github.com/encounter/aurora) and Dolphin do at that exact point. Those are *hardware semantics*,
+  and reconstructing them from screenshots is how this layer accumulated **82 `TLS_*` switches** and **69
+  archaeology citations** — plus three compensation hacks (ink matte, baseline subtraction, white-texture fallback)
+  that exist only because the real TEV stage is not evaluated.
+* Measured in one session, each hypothesis killed by a switch rather than by a rewrite: copy ordering was already
+  correct (`s_batch_barrier` sets a batch boundary at every queued copy — see AP-AK), forcing every batch through
+  `PSTev` (`TLS_TEV_FORCE_STAGES=1`) left the frame byte-identical, and the source/destination blend-factor table
+  mismatch (`TLS_BLEND_SLOT_FIX=1`; Dolphin has **two** enums) left the gate frames byte-identical. **Prefer a
+  switch that tests a hypothesis in one run over a code change that assumes it.**
+
 ### 1. Zero "Fake Progress" and Strict Rejection of Speculative Band-Aids
 * **Never mutate game state variables artificially to simulate progress**:
   - **VIOLATION**: Overwriting task state words (`mem_write32(ctx, task + 0x48, 2)` or `ctx->gpr[4] = 2`) to "force" a screen transition. This causes desynchronization between child tasks, resource loaders, and the engine event loop, resulting in a frozen or black screen for the user.

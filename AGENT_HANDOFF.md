@@ -91,6 +91,11 @@ All commands run from root: `G:\Program\Project The Maybe(Not) Last Story`
   - NW4R Sound Engine initialized, 3 threads running stably.
   - `host_wakeup_thread()` awakens `DefaultThread` (`0x807CB658`) out of the scheduler idle loop `while (RunQueueBits == 0)`.
   - `nw4r::snd` sound engine initialized; 3 threads running stably.
+- **Renderer direction (2026-10-29) — Aurora-first.** The hand-rolled D3D11 GX layer is frozen for *new*
+  GX-semantics features while a bounded Aurora spike runs (build aurora + Dawn here; render the invariant frame 3500;
+  service one EFB copy through `capture_copies`/`get`). Canonical rule: `AGENTS.md` §1. Evidence:
+  `DEEPSEEK_HARNESS_HANDOVER.md` §5c.46 AP-AL, with AP-AK recording that the copy-ordering theory was disproven by
+  measurement. Track A (decompilation) is unaffected.
 
 ---
 

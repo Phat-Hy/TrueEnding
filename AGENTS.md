@@ -5,6 +5,27 @@ This file provides system context, specialized role personas, and skill capabili
 ---
 
 ## 1. Project Directives
+- **RENDERER STRATEGY — AURORA-FIRST (decided 2026-10-29, read this before touching `recomp/gfx_d3d11.c`).**
+  Our GX layer is hand-written and the measurements say what it costs: `gfx_d3d11.c` 4 091 + `gx_pipeline.c`
+  2 887 lines, **82 `TLS_*` switches** inside it, **69 "handover 5c." archaeology citations**, and three explicit
+  compensation hacks (ink matte, baseline subtraction, white-texture fallback) whose own comments reconstruct
+  hardware TEV behaviour from screenshots. Every defect still open on the board is a **GX-semantics** defect
+  (multi-stage TEV / konst / indirect / raster channel, source-vs-destination blend enums, XF texgen 2..7, XF light
+  decode, EFB copy/readback semantics, CMPR alpha) — none of it is game-specific. Every one of those is already
+  solved in **[Aurora](https://github.com/encounter/aurora)** (MIT, WebGPU/Dawn, D3D12/Vulkan/Metal), which is what
+  the community's shipped Wii ports use: [Nebula](https://github.com/keepvaibin/nebula) (decomp),
+  [Recharged](https://github.com/previouslevelgames/recharged) (decomp), and
+  [WiiCompiled](https://github.com/patchzyy/Wiicompiled) — **static recompilation of a retail DOL/REL, i.e. this
+  project's exact analogue**. None of them writes a rasteriser.
+  **The standing rule until the spike resolves:** no *new* GX-semantics feature work in the hand-rolled layer. A
+  bug fix is allowed only when it is cheaper than the spike and verifiable in one run against a Dolphin reference.
+  **The spike (next session's job), with its three exit criteria:** (1) build aurora + Dawn against this toolchain
+  (MSVC DLL behind a C ABI is acceptable) and drive its FIFO command processor from our GX stream; (2) render **one**
+  frame — the invariant frame 3500 — and compare it to the current capture; (3) service **one** EFB copy through
+  `capture_copies`/`get` and verify the guest samples the same bytes. Clear all three → migrate. Stall on the
+  toolchain → we have spent one session, not the project, and we say so with numbers.
+  Full evidence and the alternatives that were excluded by measurement: `DEEPSEEK_HARNESS_HANDOVER.md` §5c.46
+  **AP-AK** (copy ordering disproven) and **AP-AL** (the three-port study).
 - **Strict Scope Constraint**: **0 changes to `src/`!** All decompiled C files in `src/` must remain completely untouched. All modifications belong in `recomp/`, `tools/`, and generated chunks.
 - **MANDATORY — every game-window launch starts MINIMIZED.** All runner launches (manual, scripted, `tools/invariant.ps1`, any test harness) MUST pass `--minimized`:
   ```powershell
@@ -34,7 +55,7 @@ DeepSeek Harness has access to the following domain-specific skills located in `
 | **plan** | [plan.md](.agents/skills/plan.md) | Step-by-step decision-complete implementation planning and verification checklists. |
 | **code-review** | [code-review.md](.agents/skills/code-review.md) | Rigorous adversarial code quality, memory safety, and sanity checks. |
 | **build** | [build.md](.agents/skills/build.md) | Parallel compilation with `tools/recomp_harness.py build-runner` (MinGW GCC 16 in `tools/w64devkit/bin/gcc.exe`). |
-| **backend-development**| [backend-development.md](.agents/skills/backend-development.md) | Low-level C systems programming, D3D11 rendering backend, Win32 input, and memory arenas. |
+| **backend-development**| [backend-development.md](.agents/skills/backend-development.md) | **NOT a renderer skill** — it ships generic REST/service backend material. For the GX layer use §1 (Renderer strategy) and [recomp-debugging.md](.agents/skills/recomp-debugging.md). |
 
 ---
 
@@ -72,6 +93,10 @@ DeepSeek Harness has access to the following domain-specific skills located in `
      texel falls below the plate luminance, white RGB so the batch vertex colour tints the glyphs).
      Particle glows use the complementary baseline-subtraction path. **Do not** apply baseline
      subtraction to ink artwork or to small (≤16×16) UI textures.
+   - **These two paths are COMPENSATION, not correctness** (see §1 Renderer strategy). They exist because the
+     hand-rolled TEV path cannot express the real stage; the honest fix is to evaluate the actual combiner. If the
+     Aurora spike succeeds they should be deleted rather than ported, and the batch's real TEV state should decide
+     the alpha. Keep them working for now — but do not extend them to a new texture class.
 2. **Dolphin Reference Run**:
    - 354 dumped textures are ready for comparison in: `%APPDATA%\Dolphin Emulator\Dump\Textures\SLSEXJ\`.
    - Full reference log: `%APPDATA%\Dolphin Emulator\Logs\dolphin.log`.

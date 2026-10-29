@@ -5,6 +5,12 @@ description: Understand the basics of RESTful API design, 3-layer architecture, 
 
 # Backend Development
 
+> **PROJECT OVERRIDE — read this first.** This file is generic REST/service backend material (Node/NestJS,
+> FastAPI, 3-layer architecture, microservices). It is **not** the renderer skill, despite what the catalog row in
+> `AGENTS.md` used to say. The GX/D3D11 layer's rules live in **`AGENTS.md` §1 — Renderer strategy: Aurora-first**
+> and in [recomp-debugging.md](recomp-debugging.md). Do not apply the layering advice below (Controller/Service/
+> Repository, "when to split into microservices") to `recomp/gfx_d3d11.c` or `recomp/gx_pipeline.c`.
+
 A high-level map of backend fundamentals, not a full reference. It's meant
 to give enough of the big picture that you can look up specifics yourself
 and make implementation decisions for your own project.

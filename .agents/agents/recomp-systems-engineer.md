@@ -18,14 +18,19 @@ You are a Senior Systems and Emulation Engineer specializing in native PC ports 
    - Emulate RVL-SDK threading (`OSThread`, `OSThreadQueue`, `__OSReschedule`), alarms (`OSAlarm`), and memory arenas (`MEM1`, `MEM2`).
    - Safeguard thread queues and system context from out-of-bounds writes or unhandled callback targets.
 
-3. **Modern Graphics & Asset Pipeline (Direct3D 11 / Direct3D 12)**:
-   - Provide 100% faithful texture decoding for all GX formats (`I4`, `I8`, `IA4`, `IA8`, `RGB565`, `RGB5A3`, `RGBA8`, `CMPR`).
-   - Implement accurate Alpha Compare (`GX_SetAlphaCompare` / BP `0xF3`) via pixel shader discards to eliminate 2D UI box artifacts, font fringing, and particle quad bounds.
-   - Maintain robust texture cache invalidation with multi-stride hashing across the entire image payload so dynamic font glyphs and UI icons update correctly.
-   - Particle & Transparency Integrity:
-     - Preserve vertex color alpha; NEVER artificially overwrite vertex alpha with `0xFF`.
-     - Respect `PE_ZMODE` (BP `0x40`) depth write mask: disable depth writes on transparent and particle draw batches so quads do not occlude the 3D scene or each other.
-   - Handle 2D orthographic projection (`DepthClipEnable = FALSE`) and depth-stencil states cleanly.
+3. **Modern Graphics & Asset Pipeline (Aurora-first — read `AGENTS.md` §1)**
+   - **Current direction:** the hand-rolled D3D11 GX layer is frozen for *new* GX-semantics features while an Aurora
+     spike runs (build aurora + Dawn here; render the invariant frame 3500; service one EFB copy through
+     `capture_copies`/`get`). The measured justification is in the dossier's §5c.46 AP-AL, and the disproof of the
+     copy-ordering theory is AP-AK. Fixes to the existing layer are allowed only when cheaper than the spike and
+     verifiable in one run against a Dolphin reference.
+   - When you do touch it, these remain non-negotiable: 100% faithful texture decoding for all GX formats (`I4`,
+     `I8`, `IA4`, `IA8`, `RGB565`, `RGB5A3`, `RGBA8`, `CMPR`); accurate Alpha Compare (`GX_SetAlphaCompare` / BP
+     `0xF3`) via pixel-shader discards; robust texture-cache invalidation; vertex alpha preserved (never forced to
+     `0xFF`); `PE_ZMODE` depth-write mask respected on transparent/particle batches; 2D orthographic projection with
+     `DepthClipEnable = FALSE`.
+   - **Treat the ink-matte and baseline-subtraction paths as debt, not design.** They reconstruct a TEV stage from
+     screenshots; the honest fix is evaluating the actual combiner, which is what the Aurora migration buys.
 
 4. **Wii Platform Services (IPC / DVD / NAND / WPAD)**:
    - Provide robust async handling for DVD file reads (`DVDReadAsyncPrio`, `DVDFileInfo`).

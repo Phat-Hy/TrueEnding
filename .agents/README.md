@@ -1,35 +1,30 @@
-# Resource Subsystem Decompilation and Recompilation
+# `.agents/` — skills, personas and rules for agents working on this repo
 
-## Overview
-This folder contains scaffolded source and headers for the missing resource subsystem function `fn_8046C3FC` and related key functions (`fn_8046FBB0`, `fn_80470264`) essential in The Last Story's game loader resource pipeline.
+This folder is the agent-facing kit for **Project The Maybe(Not) Last Story**. Canonical project directives live in
+[`AGENTS.md`](../AGENTS.md) — read that first, in particular **§1: Renderer strategy (Aurora-first)**.
 
-## Files
+## What is actually here
 
-- `resource_subsystem.c`: Decompilation scaffold implementing pseudocode C for the resource functions derived from assembly analysis.
-- `resource_subsystem.h`: Header declarations for the subsystem functions.
-- `resource_wakeup_hooks.c`: Placeholder hooks for waking threads and servicing message queues related to resource loading, addressing the known stall.
+| path | contents |
+|---|---|
+| [`skills/`](skills/) | task procedures: `recomp-debugging`, `decomp-matching`, `plan`, `code-review`, `build`, plus generic ones (`backend-development`, `frontend-development`, `devops`, `brainstorm`, `ship`) that are **not** project-specific |
+| [`agents/`](agents/) | personas: `recomp-systems-engineer`, `reverse-engineer`, `tester`, `fullstack-developer`, `planner`, `researcher`, `code-reviewer` |
+| [`rules/`](rules/) | [`kit-overview.md`](rules/kit-overview.md) — how the kit is wired (hook status, working rules) |
 
-## Next Steps
+## Which skill to load for what
 
-1. Refine decompilation by expanding function bodies as more assembly is mapped.
-2. Implement and test wakeup/message queue hooks integration into the native runner.
-3. Integrate these files into the build pipeline for recompilation.
-4. Incrementally verify and log diffs for correctness.
+- **Renderer / GX / D3D11 / EFB copies / TEV** → `AGENTS.md` §1 (Aurora-first) + [`skills/recomp-debugging.md`](skills/recomp-debugging.md).
+  Do **not** load `skills/backend-development.md` for this: despite a stale catalog description, it is generic REST /
+  microservice material, and it now carries a banner saying so.
+- **Runtime stalls, task/sequence hangs, thread queues** → [`skills/recomp-debugging.md`](skills/recomp-debugging.md).
+- **PowerPC / Gekko matching** → [`skills/decomp-matching.md`](skills/decomp-matching.md).
+- **Building the runner** → [`skills/build.md`](skills/build.md) (`python tools/recomp_harness.py build-runner`).
 
-## Recompilation Instructions
+## Working rules (summary)
 
-Use existing ninja and recomp harness tools as per project conventions:
-- Compile modules with:
-```sh
-.\tools\w64devkit\bin\ninja.exe build/SLSEXJ/src/<Module>.o
-```
-- Compile runner with:
-```sh
-python tools/recomp_harness.py build-runner
-```
-- Use diff helper for analysis:
-```sh
-python tools/diff_helper.py <FuncName> -a
-```
-
-Refer to `docs/AGENT_HANDOFF.md` and `docs/ODYSSEUS_WORKLOG.md` for project protocols and logging details.
+1. **0 changes to `src/`.** All work lands in `recomp/`, `tools/`, and generated chunks.
+2. **Every game-window launch is `--window --minimized`, one run at a time**, after checking load and free RAM.
+3. **Measure, don't guess**: prefer a switch that tests a hypothesis in one run over a code change that assumes it.
+4. **No new GX-semantics features** in the hand-rolled D3D11 layer while the Aurora spike is open (see
+   `AGENTS.md` §1 and `DEEPSEEK_HARNESS_HANDOVER.md` §5c.46 AP-AL).
+5. Never re-record `tools/invariant.ps1`'s expected hash without stating that you did and why.
