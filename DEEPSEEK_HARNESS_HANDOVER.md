@@ -11742,6 +11742,25 @@ stores a byte at 0x808800A8, and it must instead flush the frame.** Concretely: 
 the read that depends on it. This is the highest-value change available and it is now backed by the measurement
 above rather than by inference.
 
+**8. The guest's own code confirms the sync point, in four lines of decompiled assembly.** `TLS_DRAW_TRACE=1`
+reports every `GXDrawDone` with its caller, and the caller is `LR=0x800D74E8` = **`fn_800D7278+0x270`** - the
+mip-chain wrapper itself. `src/game_occ.c` line 555 shows the sequence verbatim:
+
+```
+    bl fn_80615560      <- set up the copy (the wrapper seen with r5=0x4B...... earlier)
+    bl fn_806167B0
+    bl fn_80614190
+    bl fn_80613C60
+    bl fn_806140C0      <- GXDrawDone   *** the sync the host throws away ***
+    ...                 <- then the conversion loop that reads the copied image
+```
+
+So the guest does exactly what the plan assumes: **issue copy -> GXDrawDone -> read**. The host performs the copy
+at the wrong time (inline, before the draws) or at present (after the read), and either way the read gets
+something other than the copy's output. Implementing `gfx_flush_gx_now()` at `0x806140C0` is therefore not a
+guess - it is restoring the one guarantee the guest relies on.
+
+
 
 
 
