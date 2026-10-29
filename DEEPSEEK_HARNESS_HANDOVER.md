@@ -11654,6 +11654,72 @@ So: **a FAIL means "re-run once and compare the batch/vtx line", not "re-record 
 `tools/page_run.ps1` already works this way for the page (it validates `Game@1647` and re-runs); the invariant
 does not yet, and giving it the same validation is a small, worthwhile fix for a later round.
 
+---
+
+### AP-W. THE BAKE HAPPENS ON A REAL "LOADING" SCREEN - so what should the copy be reading?
+
+**1. The frame is visually identified.** `TLS_SHOT_FRAMES=1909` (with the input script - the hand-over is at
+1647) produces `build/recomp/shot1909.png`: a **black screen with the word `LOADING` in the bottom-left**. The
+frame-1909 draw list agrees - 13 batches / 672 vertices, all 2D loading-screen quads sampling staging textures
+(`0x90395DC0`, `0x9038D1C0` 80x56, `0x903DBDC0` 160x112, `0x905C3000` 640x448, `0x90D19B80` 64x64 CMPR,
+`0x9076E5E0` 256x256 IA4, `0x90D1A400` 32x32 CMPR) with **no texture-upload failures** (`TLS_TEX_FAIL_PROBE=1`
+printed nothing, so nothing fell back to the white quad).
+
+**2. So the copy's black source is CORRECT for that frame.** The EFB genuinely holds a `LOADING` plate whose
+average is ~0 - a black cell with a small white caption that an 8-pixel sampling grid mostly misses. That closes
+the "our renderer is dropping the art" hypothesis: **there is no art on screen at 1909 to drop.** The open
+question changes shape: either the bake is *supposed* to capture this black plate (in which case the hero's
+texture is legitimately black on hardware too and the real art is built somewhere we have not found), or the
+guest's copy into `0x90536FE0` is **not an EFB copy at all** but a *clear* - see item 3.
+
+**3. The unexamined bit: `BP 0x52` bit 11.** `gx_pipeline.c` decodes bits 3..6 (format), 9 (`half_scale`) and 14
+(`copy_to_xfb`) of the copy-configure word, and its comment says of bit 11 *"Bit 11 is NOT part of it:
+`0x010A43`/`0x010A63` have it set and are half-scale"*. In Dolphin's `UPE_Copy` the field next to `half_scale`
+is **`clear`** - a copy whose clear bit is set clears the destination instead of sampling the EFB, and the host
+here performs an EFB read for **every** copy regardless. Measured: the copies that feed the hero's staging
+buffers carry `raw exec=0x010863`, `0x010A63`, `0x010063` - **bit 11 set in all of them**, as do most copies in a
+run. Two readings are possible and they are cheap to separate: either bit 11 is part of some other field on this
+game's data (the pipeline's current assumption) or these are clear operations and the host has been writing the
+frame where the guest asked for a clear.
+**Next probe, no code change:** count how many copies in one run have bit 11 set versus clear (`0x010863` has
+both), and dump one frame with the clear bit honoured by hand in a one-line A/B. If honouring it changes the
+hero's `0x92AEAEC0` bake at all, the bit has been mis-decoded since the copy path was written.
+
+**4. The `TLS_BATCH_DUMP_GUEST` window is the way to read any frame's draw list** (`<startframe>,<count>`; a
+count of 1 often shows nothing because the present counter and the guest frame counter differ). With
+`TLS_BATCH_DUMP_MAX=40` it prints `b<n> vtx= tex= addr= WxH fmt= blend= src= dst= ndc=[..]` per batch, which is
+what identified the loading-screen quads above.
+
+**5. The pipeline is a MIP-CHAIN builder, and the Dolphin dump contains its output.** The caller of the
+conversion, `fn_800D7278` (`src/game_occ.c:384`), calls `fn_800D6E48(src, dst, w, h)` in a loop that halves `w`
+and `h` each iteration and advances the destination by a stride (`srawi r20,r20,1` / `srawi r22,r22,1` /
+`add r25,r25,r16`) - i.e. **a base level plus mip levels from ONE source buffer**. That is exactly the shape of
+the Dolphin reference's `tex1_256x256_m_<hash>_14.png` **plus `_mip1` and `_mip2`** families, and measuring those
+dumps (bundled Python + Pillow) shows they are **100 % full of colour and alpha**:
+
+```
+256x256 dumps: 161
+color=100.0% alpha=100.0%  tex1_256x256_m_e38bcf3ecea0109b_14_mip2.png
+color=100.0% alpha=100.0%  tex1_256x256_m_d098051b59c95e1d_14.png (+ _mip1, _mip2)
+```
+
+So the reference hardware *does* run this pipeline to produce real art into a 256x256 CMPR mip chain, and this
+host produces `00000000 FFFFFFFF` from it. The hero's texture is confirmed transparent for the whole run, not just
+at 1915: sampled at frames 2000 / 2500 / 3000 / 3500 it is `nonZero=8192, distinct=2` every time.
+
+**6. What that leaves, stated as one question.** The staging buffer is filled by an EFB copy that, at the moment
+it runs, samples a black `LOADING` plate - and the reference's output proves the source must be real art there.
+So the question is no longer "is the copy/encode/swizzle wrong" (all three are measured correct) but **"what
+should be in the EFB when that copy runs, and why is our renderer showing the loading plate instead of it"**.
+Two concrete candidate mechanisms, both cheap to test next round:
+* the copy is issued **before** the frame's draws in the FIFO, so it captures the previous frame; on hardware the
+  EFB is *not* cleared between frames, and this host clears it every present (`host_driver` clears the RTV at
+  frame start) - the `TLS_NO_FRAME_CLEAR=1` A/B is invalid for progression (it strands the title), so the useful
+  version is a *targeted* clear (skip the clear only for a frame whose guest issues a copy into the staging arena);
+* the guest's copy carries `BP 0x52` bit 11, which the pipeline explicitly does not decode (see AP-W item 3).
+
+
+
 
 
 
