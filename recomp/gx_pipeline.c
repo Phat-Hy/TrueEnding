@@ -1722,10 +1722,17 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
         static int s_copy_probe = -1;
         static int s_copy_reports = 0;
         static int s_copy_from = -1;
+        static int s_copy_max = 2000;
         if (s_copy_probe < 0) {
             s_copy_probe = getenv("TLS_EFB_COPY_PROBE") ? 1 : 0;
             const char* f = getenv("TLS_EFB_COPY_FROM");
             s_copy_from = f ? atoi(f) : 0;
+            /* TLS_EFB_COPY_MAX raises the report cap. The default 2000 is right for
+             * "what does one frame issue", but the interesting question is often the
+             * whole run ("is this destination EVER a copy target?"), and a whole run
+             * issues ~15 000 copies (~8 per frame x 1960) - about 2 MB of log. */
+            const char* m = getenv("TLS_EFB_COPY_MAX");
+            if (m) { int v = atoi(m); if (v > 0) s_copy_max = v; }
         }
         s_efb_copy_count++;
         /* WHICH copies are replayed in stream order (handover 5c.46 AP-Q).
@@ -1827,7 +1834,7 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
                             s_efb_copy_x1, s_efb_copy_y1, tpf_rt / 2u + (tpf_rt & 1u) * 8u, 0,
                             s_efb_copy_pitch, val);
         }
-        if (s_copy_probe && s_copy_reports < 2000) {
+        if (s_copy_probe && s_copy_reports < s_copy_max) {
             extern int g_runner_current_frame;
             if (g_runner_current_frame >= s_copy_from) {
                 s_copy_reports++;

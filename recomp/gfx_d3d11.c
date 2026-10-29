@@ -447,6 +447,14 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                                     uint32_t x1, uint32_t y1, uint32_t format, int half_scale,
                                     uint32_t pitch, uint32_t exec);
 
+/* Non-zero while d3d11_service_pending_copies() is replaying a queued copy. Read by
+ * d3d11_efb_copy_to_guest to decide the copy's SOURCE: a replayed copy must sample the
+ * live back buffer (the frame as drawn up to its vertex mark), an inline copy keeps the
+ * legacy previous-frame snapshot. Before AP-R this was inferred from the GLOBAL
+ * TLS_DEFER_EFB_COPY flag, which is why a deferred-by-class copy (`TLS_EFB_ORDER=
+ * staging`) still read the snapshot and still baked a transparent hero. */
+static int s_replaying_copy = 0;
+
 static D3D11Backend s_d3d11 = {0};
 
 // Precompiled bytecode for fullscreen triangle vertex shader
@@ -2123,6 +2131,21 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
     static int s_prev_frame = -1;
     if (s_defer < 0) s_defer = getenv("TLS_DEFER_EFB_COPY") ? 1 : 0;
     if (s_prev_frame < 0) s_prev_frame = getenv("TLS_EFB_PREV_FRAME") ? 1 : 0;
+    /* Stream-order replay (handover 5c.46 AP-R). This function serves BOTH copy paths -
+     * the inline hook and the batch loop's replay of the queue - and until AP-R the
+     * source was chosen from the GLOBAL TLS_DEFER_EFB_COPY flag instead of from which
+     * path is calling. That is why narrowing the deferral to a copy class appeared not
+     * to work (AP-Q item 4): `TLS_EFB_ORDER=staging` did replay the staging copies in
+     * stream order, but because s_defer was 0 they still read the PREVIOUS-FRAME
+     * SNAPSHOT, i.e. exactly the black loading frame the bake must not read. The
+     * narrowing was never given the source the global switch gets.
+     *
+     * A replayed copy must read the live back buffer (the frame as drawn up to its
+     * vertex mark); an inline copy keeps the legacy previous-frame snapshot so the
+     * default picture - and the title/MENU composite path that depends on it - does not
+     * move. TLS_EFB_PREV_FRAME=1 still forces the legacy source in either path. */
+    int replaying = s_replaying_copy != 0;
+    if (s_prev_frame) replaying = 0;
     /* TLS_EFB_SRC_CURRENT=1 forces the copy to read the CURRENT back buffer even
      * though the snapshot exists. The default path reads the previous-frame
      * snapshot, and the alternate-frame staleness (5c.27 §9) makes every even
@@ -2131,15 +2154,21 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
      * it changes only the copy *source*, nothing else. */
     static int s_src_current = -1;
     if (s_src_current < 0) s_src_current = getenv("TLS_EFB_SRC_CURRENT") ? 1 : 0;
+    /* One rule, one place: the snapshot is read only by an INLINE copy with the legacy
+     * behaviour on. A replayed copy always reads the live back buffer. */
+    bool src_snapshot = (!s_src_current && !replaying && (s_prev_frame || s_d3d11.efb_snapshot));
     {
         static int s_src = 0;
-        if (s_src < 3) { s_src++; printf("[EfbCopySrc] reading %s (deferred=%d)\n",
-            (s_prev_frame || (!s_defer && s_d3d11.efb_snapshot)) ? "previous-frame snapshot" : "current backbuffer",
-            s_defer); fflush(stdout); }
+        if (s_src < 3) {
+            s_src++;
+            printf("[EfbCopySrc] reading %s (deferred=%d replay=%d)\n",
+                   src_snapshot ? "previous-frame snapshot" : "current backbuffer", s_defer, replaying);
+            fflush(stdout);
+        }
     }
     ID3D11Texture2D* source = NULL;
     bool have_backbuffer = false;
-    if (!s_src_current && (s_prev_frame || (!s_defer && s_d3d11.efb_snapshot))) {
+    if (src_snapshot) {
         source = s_d3d11.efb_snapshot;
     } else {
         if (FAILED(IDXGISwapChain_GetBuffer(s_d3d11.swap_chain, 0, &IID_ID3D11Texture2D, (void**)&source)))
@@ -2697,8 +2726,10 @@ static void d3d11_service_pending_copies(uint32_t* cursor, uint32_t up_to_vertex
             fflush(stdout);
         }
         ID3D11DeviceContext_OMSetRenderTargets(s_d3d11.context, 0, NULL, NULL);
+        s_replaying_copy++;
         d3d11_efb_copy_to_guest(c->dst_guest, c->x0, c->y0, c->x1, c->y1, c->real_format,
                                 c->half_scale, c->pitch, c->exec);
+        s_replaying_copy--;
         ID3D11DeviceContext_OMSetRenderTargets(s_d3d11.context, 1, &s_d3d11.rtv, s_d3d11.dsv);
         (*cursor)++;
     }

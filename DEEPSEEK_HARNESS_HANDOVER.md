@@ -20,6 +20,15 @@ runner was launching, after several back-to-back 10-minute runs with per-batch f
 
 ### NEXT SESSION - READ THIS FIRST (written at the end of the AP-Q session)
 
+> **AP-R CORRECTS ITEMS 2, 4 AND 5 BELOW - read §5c.46 AP-R before acting on them.** In one line: the
+> `exit(0)` at ~2700 is **`main()` returning after a host-induced bad-pointer cascade at frame 1961**, and
+> `TLS_DEFER_EFB_COPY=1` **moves the guest's own heap** (`pc_ga_g_a01.texture` loads at `0x92ADB500` instead of
+> `0x92AEAEC0`), so AP-Q's "defer shows real art" compared two different textures and is withdrawn. The bake's
+> source `0x903CD1C0` is **never** an EFB-copy destination in a whole run (29 169 copies, 101 destinations) and
+> holds a uniform `FF00FF00` fill - a blank alpha-0 image, which encodes to exactly the `00000000 FFFFFFFF`
+> the hero's texture shows. Copy ordering is therefore **not** the defect; the open question is why the art never
+> reaches that buffer (or why 13 386 copies into `0x9038D1C0` leave the slot byte-identical to the fill).
+
 **Where the project is.** The host boots, the title hands over by itself at frame 1647, the engine starts a New Game
 and writes its own save, the tutorial page renders and matches the reference on every measured region, and gameplay
 continues into the Chapter-1 cave - but **the player character is invisible and there is no HUD**, so it is not yet
@@ -11271,3 +11280,87 @@ hundreds of EFB copies per second through the D3D11 backend are a risk on this b
 4. If a crash recurs, capture `build\recomp\tls_runner.exe`'s Windows event-log entry (`Get-WinEvent -FilterHashtable
    @{LogName='System'; ProviderName='Microsoft-Windows-WER-SystemErrorReporting'}` or the bugcheck code) before
    rerunning - a bugcheck code would separate a GPU/driver fault from anything in this tree.
+   **Checked in AP-R, on a host that had been up through both crashes: there is NO bugcheck record at all** - no
+   event 1001, no `C:\Windows\Minidump` entry, no `MEMORY.DMP`. A GPU/driver fault that bugchecks writes all
+   three, so the two crashes left no OS-level trace of a driver fault. That does not clear the tree, but it
+   removes "the driver bugchecked" as the explanation, and it means a recurrence must be caught differently (watch
+   for the `System.OutOfMemoryException` on launch, and prefer short runs).
+
+
+### AP-R. THE AP-Q ROOT CAUSE IS WRONG - global defer moves the guest's heap, and the bake reads a blank fill
+
+*(Written at the end of the AP-R session; supersedes AP-Q items 1-4 as the current model. Everything below is
+measured on this build, `tools/invariant.ps1` **PASS** at `D3329E35...`.)*
+
+**1. Who calls `exit(0)` at ~2700 - answered, and it is not a graceful exit.** `LR=0x800041B4` resolves to
+**`__start+0x164`**, the instruction right after `bl main` (`0x800041B0 -> 0x80478208`), and `0x805F2120` is
+`__start`'s post-main path: it walks the `__atexit`/global-destructor table at `0x8071B300` (two entries,
+`0x8068E590` / `0x8068F650`), so the `exit(0)` is the C runtime finishing a **`main()` that returned 0**.
+The new dispatch-ring dump in the `exit()` handler shows *why* main returned: at **frame 1961** the guest's
+control flow goes invalid and every frame after it is a stack unwind into `__start`:
+
+```
+0x800C1630  r3=0x80630048 sp=0x80899178          <- virtual call on an "object" that is inside .text
+0x3F000000  lr=0x3F000000                        <- the call target decodes to the float 0.5f
+15 x [TLS Safeguard] Bypassed invalid jump ... 0x3F000000 / 0x3F800000 / 0xB632275C / 0x00000000
+0x800041B4  ->  0x805F8930  (exit(0))
+```
+`r3=0x80630048` is `fn_8062FE10+0x238`, i.e. **code**, and the words there (`3BA00000 38630018 A38304C6 ...`)
+are `lis/addi/lhz`, which are exactly what a vtable/function-pointer load would misinterpret. So the guest took
+a bad object pointer at 1961 and the `exit(0)` is the *last* thing that happens, ~740 frames after the real
+event. `TLS_SAFEGUARD` events appear **only** under global defer (0 in every default/staging log), so this is
+host-induced, not a guest behaviour the game has on hardware.
+
+**2. `TLS_DEFER_EFB_COPY=1` perturbs GUEST state, so it is not a valid oracle.** The same asset,
+`data/texture/pc_ga_g_a01.texture`, is loaded at **`0x92AEAEC0`** in default/staging mode and at
+**`0x92ADB500`** under global defer (measured from the loader's own `[TLS 8046BBF0]` line, frame 1899 in both;
+the decompress count and last-frame marker are identical - 2714 decompresses, frame 1957 - so this is not the
+guest lagging, it is a different heap layout). Consequences:
+* **AP-Q item 2 is WITHDRAWN.** "With `TLS_DEFER_EFB_COPY=1` the same dump at 1915 is real art" compared a fixed
+  address across two runs in which that address holds **different textures**. The 1915 dump of `0x92AEAEC0` under
+  defer is `11111111...`, which is not the hero's art at all: the hero's texture is not there in that run. The
+  `TLS_EFB_COPY_FROM`/`_MAX` inventory also shows the PC texture family (`pc_ga_g_a01_cl01`, `_cl02`) shifting by
+  the same delta, so the whole texture arena moved.
+* The bad-pointer cascade of item 1 is almost certainly the same heap perturbation showing up as an invalid
+  object pointer. Do not use global defer to judge anything until that is understood.
+
+**3. The bake's source buffer is never an EFB-copy destination, and what it holds is a uniform fill.** A whole
+1 960-frame run with `TLS_EFB_COPY_PROBE=1 TLS_EFB_COPY_MAX=40000` issues **29 169 copies to 101 distinct
+destinations**; `0x903CD1C0` - the source of the 1910 bake (`pc=0x800D6CF0`, `lr=0x800D7168`, dst `0x92AEAEC0`)
+- is **not one of them**. The nearest slots are `0x9038D1C0` (13 386 copies), `0x903D31C0`, `0x903D77C0`,
+`0x903DBDC0`. `0x903CD1C0` is `0x9038D1C0 + 0x40000`, i.e. inside the 320x224 RGBA8 slot that starts at
+`0x9038D1C0`, but its measured content is *not* a downscaled frame:
+
+| address | at frame 1915 | content |
+|---|---|---|
+| `0x9038D1C0` | copy destination, 13 386 copies/run | `FF00FF00` repeated, **2 distinct byte values**, 8 192/32 768 non-zero |
+| `0x903CD1C0` | the bake's source | **byte-identical to the above** |
+| `0x903D31C0` | next slot, 924 copies/run | `FF00FF00` + 45 distinct values |
+
+`FF00FF00` is not a frame: it is a **guest fill**, written by `pc=0x80615560` from `lr=0x800A9E24` /
+`0x800AA0C4` / `0x800ABFC8` / `0x800AC82C` (all in the `0x800A9xxx` - `0x800ACxxx` module) in a fade - the word
+climbs `FF00FF00 -> FF15FF0C` over successive frames. **A blank, alpha-0 image encoded to CMPR is exactly
+`00000000 FFFFFFFF`**, which is what the 1915 dump of the hero texture shows. So the bake is encoding a blank
+fill, and copy ordering is not what puts it there.
+
+**4. What was landed (all inert by default).**
+* `recomp/gfx_d3d11.c`: the EFB copy's SOURCE is now decided per copy instead of from the global flag. A copy
+  replayed by the batch loop (`s_replaying_copy`) reads the live back buffer; an inline copy keeps the legacy
+  previous-frame snapshot; `TLS_EFB_PREV_FRAME=1` still forces the snapshot. This was the real defect behind
+  AP-Q item 4 - `TLS_EFB_ORDER=staging` *did* replay staging copies in stream order, but they still read the
+  snapshot because the decision keyed off `TLS_DEFER_EFB_COPY`. **Measured after the fix: it does not restore the
+  bake** (item 3 explains why), and the picture is unchanged - `[EfbCopySrc]` now prints `replay=1` on replayed
+  copies, and the invariant stays `D3329E35...`.
+* `recomp/replacements.c`: the `exit()` handler dumps the 64-entry dispatch ring and (under `TLS_TAIL_RING=1`)
+  the 256-dispatch tail ring on the first call - this is what named the 1961 cascade in one run.
+* `recomp/gx_pipeline.c`: `TLS_EFB_COPY_MAX` raises the copy-probe cap (default 2 000) so a **whole run's**
+  copy inventory is one 60-second run (~29 000 lines, ~2 MB) instead of a guess.
+
+**5. The next question, precisely.** At frame 1910 the guest encodes a **blank fill** into the hero's texture, so
+either (a) the step that should have drawn the character/dark art into `0x903CD1C0` never ran, or (b) the copies
+that DO target `0x9038D1C0` are writing somewhere the guest does not read - 13 386 copies land in that slot yet
+the slot is byte-identical to the fill, which is a strong hint that **the host's copy destination/layout is not
+where the guest looks** (the guest's own fill knows `0x903CD1C0` exactly). Cheapest next probes:
+`TLS_EFB_DUMP`/`TLS_EFB_SAMPLE_FRAME=1910` to show what one copy thinks it captured, and a `TLS_WATCH_ADDR` on
+`0x9038D1C0` in **both** a copy-enabled and a copies-suppressed run to see whether the copy's write is visible at
+the address the guest later reads. Do **not** re-run global defer: item 2 makes its results unreadable.

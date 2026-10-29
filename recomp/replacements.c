@@ -3401,6 +3401,12 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
              * and the run dies, and this is how the caller gets identified. */
             if (s_exit_reports < 3) {
                 s_exit_reports++;
+                /* The dispatch ring is populated unconditionally (tls_record_recent_call
+                 * runs at the top of every dispatch), so dumping it here names the call
+                 * chain that reached exit() with no extra run cost - the exit stub then
+                 * spins forever at PC=0x800041B4 and every other trace is drowned out. */
+                tls_dump_recent_calls();
+                tls_tail_dump("exit(0) reached");
                 const uint8_t* base = (const uint8_t*)host_resolve_gx_guest_addr(ctx->gpr[1]);
                 if (base) {
                     printf("[TLS EXIT] return-address scan above sp=0x%08X:\n", ctx->gpr[1]);
