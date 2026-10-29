@@ -17,6 +17,7 @@
 #include <mmsystem.h>
 #include "gfx_backend.h"
 #include "audio_player.h"
+#include "gx_fifo_capture.h"
 #include "tls_debug.h"
 
 bool g_interactive_mode = false;
@@ -1373,6 +1374,9 @@ int main(int argc, char** argv) {
 
         // 1. Advance VBlank and timebase at start of frame, then service expired alarms
         g_runner_current_frame = frame;
+        /* TLS_GX_CAPTURE: open the frame's FIFO window NOW, i.e. before any guest step can
+         * write to the write-gather pipe. Closed from gx_pipeline_end_frame() (present). */
+        tls_gxcap_frame_begin((uint32_t)frame);
         host_simulate_vblank(&cpu, frame);
         host_service_alarms(&cpu);
         LARGE_INTEGER t1, t2, t4;
@@ -1390,6 +1394,17 @@ int main(int argc, char** argv) {
         }
         /* TLS_MEM_DUMP_BIN: the binary/wider-window form of the same dump, armed per frame. */
         host_dump_mem_bin(&cpu, frame);
+
+        /* TLS_GX_CAPTURE RAM plane. The replay dereferences the guest's own addresses (texture
+         * objects, vertex arrays, display lists), so it needs MEM1 and MEM2 at their guest
+         * addresses. Taken at the START OF THE FRAME AFTER the last recorded one - that is the
+         * RAM as it stood when the recorded frame's draws ran, including every array element
+         * the guest filled during that frame (a dump at its start would miss them). */
+        if (tls_gxcap_ram_wanted((uint32_t)frame)) {
+            tls_gxcap_ram(0x80000000u, cpu.ram, cpu.ram_size);
+            if (cpu.mem2 && cpu.mem2_size) tls_gxcap_ram(0x90000000u, cpu.mem2, cpu.mem2_size);
+            tls_gxcap_ram_done((uint32_t)frame);
+        }
 
         /* TLS_STORE_WATCH=lo,hi: record instruction-granularity stores into that range and
          * print them at end of frame (handover 5c.45 H). */
@@ -1860,6 +1875,8 @@ int main(int argc, char** argv) {
     }
 
     host_dump_mem_spec(&cpu);
+
+    tls_gxcap_shutdown();
 
     tls_debug_dump_full(&cpu, frame, "Runner Execution Completed");
 

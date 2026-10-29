@@ -1,8 +1,13 @@
 #include "gx_pipeline.h"
+#include "gx_fifo_capture.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+
+/* Set by host_runner.c's frame loop. Used by the GX FIFO recorder (TLS_GX_CAPTURE) so the
+ * captured frame numbers are the same ones every other probe prints. */
+extern int g_runner_current_frame;
 
 /* The runner's guest frame counter, for the frame-gated probes below. */
 extern int g_runner_current_frame;
@@ -781,6 +786,9 @@ static void xf_probe_dump(void) {
 
 void gx_pipeline_end_frame(void) {
     if (xf_probe_active()) xf_probe_dump();
+    /* TLS_GX_CAPTURE closes the frame here: this is the point the backend presents, i.e.
+     * after every GX command the guest issued for the frame has been consumed. */
+    if (tls_gxcap_on) tls_gxcap_frame_end((uint32_t)g_runner_current_frame);
 }
 
 void gx_pipeline_set_vtx_desc(uint32_t attr, uint32_t type) {
@@ -1854,6 +1862,46 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
             s_efb_copy_hook(s_efb_copy_dst_guest, s_efb_copy_x0, s_efb_copy_y0,
                             s_efb_copy_x1, s_efb_copy_y1, tpf_rt / 2u + (tpf_rt & 1u) * 8u, 0,
                             s_efb_copy_pitch, val);
+            /* TLS_GX_CAPTURE copy record: the destination bytes AS THIS LAYER LEFT THEM, with the
+             * geometry the same derivation gives (pitch*8/bpp for a tiled destination,
+             * pitch*16 for a 16bpp linear scanout copy). This is the "today" side of the spike's
+             * EFB-copy criterion: the Aurora replay must deliver the same bytes through
+             * capture_copies/get for the same copy. */
+            if (tls_gxcap_on) {
+                const int xfb_c = (int)((val >> 14) & 1u);
+                const uint32_t fmt_c = tpf_rt / 2u + (tpf_rt & 1u) * 8u;
+                uint32_t bpp = 4;
+                switch (fmt_c) {
+                    case 6: case 12: bpp = 4; break;
+                    case 4: case 10: case 5: case 11: case 3: case 9: bpp = 2; break;
+                    case 7: case 8: case 0: bpp = 1; break;
+                    default: bpp = 4; break;
+                }
+                if (xfb_c) bpp = 2;
+                uint32_t srcw = (s_efb_copy_x1 >= s_efb_copy_x0) ? s_efb_copy_x1 - s_efb_copy_x0 + 1 : 0;
+                uint32_t srch = (s_efb_copy_y1 >= s_efb_copy_y0) ? s_efb_copy_y1 - s_efb_copy_y0 + 1 : 0;
+                uint32_t dw = 0, dh = 0;
+                if (xfb_c) {
+                    dw = s_efb_copy_pitch * 16u;
+                    dh = srch;
+                } else if (s_efb_copy_pitch) {
+                    dw = (s_efb_copy_pitch * 8u) / bpp;
+                    if (dw == 0 || dw > srcw) dw = srcw;
+                    {
+                        uint32_t step = (dw && srcw % dw == 0) ? srcw / dw : 1;
+                        if (step == 0) step = 1;
+                        dh = srch / step;
+                    }
+                } else {
+                    dw = (srcw + 1) / 2;
+                    dh = (srch + 1) / 2;
+                }
+                if (dw && dh && s_resolve_ptr) {
+                    const void* bytes = s_resolve_ptr(s_efb_copy_dst_guest);
+                    if (bytes) tls_gxcap_copy(s_efb_copy_dst_guest, dw, dh, fmt_c, s_vertex_count, bytes,
+                                              dw * dh * bpp);
+                }
+            }
         }
         if (s_copy_probe && s_copy_reports < s_copy_max) {
             extern int g_runner_current_frame;
@@ -2708,6 +2756,10 @@ static void gx_pipeline_process_xf(uint16_t target_addr, uint16_t word_count, co
 
 // Byte-by-byte FIFO stream processor
 void gx_pipeline_feed_byte(uint8_t byte) {
+    /* TLS_GX_CAPTURE: record the byte before it is consumed, so the recorder sees the same
+     * parser state the decoder does (that is how the 9-byte 0x40 display-list call is
+     * recognised and dropped). One global load when the recorder is off. */
+    if (tls_gxcap_on) tls_gxcap_byte(byte, s_parser_state == GX_STATE_IDLE);
     switch (s_parser_state) {
         case GX_STATE_IDLE: {
             if (byte == 0x00) {
@@ -2888,6 +2940,15 @@ void gx_pipeline_feed_byte(uint8_t byte) {
 
 void gx_pipeline_feed_bytes(const uint8_t* data, uint32_t size) {
     if (!data || size == 0) return;
+
+    /* TLS_GX_CAPTURE needs every byte to pass through gx_pipeline_feed_byte(), where the
+     * recorder can see the parser state that decides whether a byte is a display-list call
+     * header. Taking the fast paths below would bypass it, so capture mode runs the slow
+     * (identical) path instead. Only ever set for a capture run. */
+    if (tls_gxcap_on) {
+        for (uint32_t i = 0; i < size; i++) gx_pipeline_feed_byte(data[i]);
+        return;
+    }
 
     uint32_t i = 0;
     while (i < size) {
