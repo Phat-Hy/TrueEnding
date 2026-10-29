@@ -11324,24 +11324,36 @@ guest lagging, it is a different heap layout). Consequences:
 * The bad-pointer cascade of item 1 is almost certainly the same heap perturbation showing up as an invalid
   object pointer. Do not use global defer to judge anything until that is understood.
 
-**3. The bake's source buffer is never an EFB-copy destination, and what it holds is a uniform fill.** A whole
+**3. The bake's source buffer has a TIMELINE, and the art is destroyed inside one frame.** A whole
 1 960-frame run with `TLS_EFB_COPY_PROBE=1 TLS_EFB_COPY_MAX=40000` issues **29 169 copies to 101 distinct
 destinations**; `0x903CD1C0` - the source of the 1910 bake (`pc=0x800D6CF0`, `lr=0x800D7168`, dst `0x92AEAEC0`)
-- is **not one of them**. The nearest slots are `0x9038D1C0` (13 386 copies), `0x903D31C0`, `0x903D77C0`,
-`0x903DBDC0`. `0x903CD1C0` is `0x9038D1C0 + 0x40000`, i.e. inside the 320x224 RGBA8 slot that starts at
-`0x9038D1C0`, but its measured content is *not* a downscaled frame:
+- is **never a DECLARED destination**, but it is inside the footprint of full-size copies to
+`0x9038D1C0`/`0x90395DC0` (a 640x448 RGBA8 copy is `0x118000` bytes, so `0x90395DC0 + 0x118000 = 0x904AD5C0`
+covers it). **A frame-end dump of it is therefore worthless** - it measures the *cleared* state, not what the
+bake reads. Two instruments fix that, both added in this session:
+`TLS_DUMP_AT_PC=<pc>:<addr>:<len>:<max>` dumps guest memory when a chosen function is ENTERED, and
+`TLS_WATCH_FROM`/`_TO` bound `TLS_WATCH_ADDR` in guest frames (an un-gated watch on this address burns its 300
+reports in the first noisy frames and answers nothing). Measured with them, the buffer at the bake:
 
-| address | at frame 1915 | content |
+| frame | what `0x903CD1C0` holds | who |
 |---|---|---|
-| `0x9038D1C0` | copy destination, 13 386 copies/run | `FF00FF00` repeated, **2 distinct byte values**, 8 192/32 768 non-zero |
-| `0x903CD1C0` | the bake's source | **byte-identical to the above** |
-| `0x903D31C0` | next slot, 924 copies/run | `FF00FF00` + 45 distinct values |
+| <= 1906 | **real art** - `FF31FF58 FF79FF78 ...`, **219 distinct byte values**, 11 545/32 768 non-zero | not yet attributed |
+| 1909 | `0x00000000` | `pc=0x800690E8 lr=0x8006942C` - the guest **zeroes** it |
+| 1910 | `0xFF50FF4F` | `pc=0x80615560 lr=0x800AA0C4`, which sets BP 0x4B (dst `0x90395DC0`) and executes a copy |
+| 1910 (bake entry) | `00000000 FFFFFFFF`, then all-zero, all-zero | the bake, i.e. it reads the ZERO, not the art |
 
-`FF00FF00` is not a frame: it is a **guest fill**, written by `pc=0x80615560` from `lr=0x800A9E24` /
-`0x800AA0C4` / `0x800ABFC8` / `0x800AC82C` (all in the `0x800A9xxx` - `0x800ACxxx` module) in a fade - the word
-climbs `FF00FF00 -> FF15FF0C` over successive frames. **A blank, alpha-0 image encoded to CMPR is exactly
-`00000000 FFFFFFFF`**, which is what the 1915 dump of the hero texture shows. So the bake is encoding a blank
-fill, and copy ordering is not what puts it there.
+So the art **exists at 1906 and is gone by the time the bake runs**: the guest zeroes the buffer at 1909 and the
+copy that then writes it carries `0xFF50FF4F` (magenta, alpha 79) rather than the scene that the same frame's
+`[EfbSampleCopy]` reports the 640x448 copies capturing - `avg=(47,62,76)` at frame 1910, i.e. **real content**.
+A blank/zero image encoded to CMPR is exactly `00000000 FFFFFFFF`, which is what the 1915 dump of the hero
+texture shows. Copy ordering is still not what puts the blank there; the open question is now **why the copy's
+own output is `0xFF50FF4F` when its source averages (47,62,76)** - a destination layout/format disagreement
+(`realfmt=6` is RGBA8, and alpha 79 is not an alpha any scene pixel would have) is the first thing to check.
+
+*(Retraction, same session: an earlier revision of this item said "the bake reads a uniform `FF00FF00` fill,
+measured at frame 1915". That measurement was a frame-end dump and is withdrawn - the buffer is rewritten every
+frame, so the frame boundary sees the clear, not the bake's input. The 1906 art and the 1909 zero above are the
+real measurements.)*
 
 **4. What was landed (all inert by default).**
 * `recomp/gfx_d3d11.c`: the EFB copy's SOURCE is now decided per copy instead of from the global flag. A copy
@@ -11356,11 +11368,15 @@ fill, and copy ordering is not what puts it there.
 * `recomp/gx_pipeline.c`: `TLS_EFB_COPY_MAX` raises the copy-probe cap (default 2 000) so a **whole run's**
   copy inventory is one 60-second run (~29 000 lines, ~2 MB) instead of a guess.
 
-**5. The next question, precisely.** At frame 1910 the guest encodes a **blank fill** into the hero's texture, so
-either (a) the step that should have drawn the character/dark art into `0x903CD1C0` never ran, or (b) the copies
-that DO target `0x9038D1C0` are writing somewhere the guest does not read - 13 386 copies land in that slot yet
-the slot is byte-identical to the fill, which is a strong hint that **the host's copy destination/layout is not
-where the guest looks** (the guest's own fill knows `0x903CD1C0` exactly). Cheapest next probes:
-`TLS_EFB_DUMP`/`TLS_EFB_SAMPLE_FRAME=1910` to show what one copy thinks it captured, and a `TLS_WATCH_ADDR` on
-`0x9038D1C0` in **both** a copy-enabled and a copies-suppressed run to see whether the copy's write is visible at
-the address the guest later reads. Do **not** re-run global defer: item 2 makes its results unreadable.
+**5. The next question, precisely.** Follow the 1910 copy: its source averages `(47,62,76)` (real content) but its
+output at the bake's source is `0xFF50FF4F`, so the **destination layout/format** is the suspect - `realfmt=6`
+(RGBA8) with alpha 79, and a full-size 640x448 RGBA8 copy is what makes the copy overlap `0x903CD1C0` at all.
+Cheapest next probes, in order:
+1. `TLS_EFB_COPY_LOG=1` is capped at **400 reports** and therefore only covers early frames - raise that cap (or
+   gate it by frame) before drawing any conclusion from `[EfbCopyRange]`, because the cap is what made an earlier
+   check in this session conclude "no copy covers `0x903CD1C0`" when the full-size copies plainly do.
+2. `TLS_DUMP_AT_PC=<copy wrapper pc>:<addr>:<len>:<n>` on `0x903CD1C0` **around the copy** rather than at the
+   bake, to see whether the copy's byte writes land where the guest later looks.
+3. `TLS_EFB_COPY_FMT=1` exists for writing RGB565/IA8 destinations in their own tile layout - if the copy that
+   matters is not RGBA8, that switch is the A/B.
+Do **not** re-run global defer: item 2 makes its results unreadable.

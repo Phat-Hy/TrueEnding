@@ -438,6 +438,7 @@ static void host_watch_addrs(CPUState* ctx, u32 block_pc) {
     static u32 s_prev[4];
     static int s_n = 0;
     static int s_reports = 0;
+    static int s_from = -1, s_to = -1;
     if (s_init < 0) {
         s_init = 1;
         const char* env = getenv("TLS_WATCH_ADDR");
@@ -450,8 +451,17 @@ static void host_watch_addrs(CPUState* ctx, u32 block_pc) {
                 while (*p == ',' || *p == ' ') p++;
             }
         }
+        /* TLS_WATCH_FROM=<frame> / TLS_WATCH_TO=<frame> bound the watch in GUEST frames.
+         * Needed whenever the address is rewritten every frame: the 300-report cap then
+         * spends itself on the first noisy frames and the window of interest never
+         * reaches the log (handover 5c.46 AP-R - the hero bake's source is rewritten
+         * every frame, so an ungated watch answered nothing). */
+        { const char* f = getenv("TLS_WATCH_FROM"); s_from = f ? atoi(f) : -1; }
+        { const char* t = getenv("TLS_WATCH_TO");   s_to   = t ? atoi(t) : -1; }
     }
     if (s_n == 0) return;
+    if (s_from >= 0 && g_runner_current_frame < s_from) return;
+    if (s_to >= 0 && g_runner_current_frame > s_to) return;
     for (int i = 0; i < s_n; i++) {
         u32 v = mem_read32(ctx, s_addr[i]);
         if (s_prev[i] == 0xDEADBEEFu) { s_prev[i] = v; continue; }

@@ -2989,6 +2989,50 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
     tls_record_recent_call(ctx, address);
     tls_tail_push(ctx, address);
 
+    /* Dump guest memory at the moment a chosen function is ENTERED, not at a frame
+     * boundary (handover 5c.46 AP-R). A frame-end dump of the hero bake's source proved
+     * nothing: the same address measures a uniform FF00FF00 fill at 1915 while the EFB
+     * copies of frame 1910 are capturing real content (avg 47,62,76), i.e. the buffer is
+     * written *during* the frame and cleared (or re-filled) before the frame boundary.
+     * TLS_DUMP_AT_PC=<hex pc>:<hex addr>:<hex len>:<max dumps> writes
+     * build/recomp/atpc_<pc>_<n>_<addr>.bin on the first <max> dispatches of <pc>.
+     * Inert unless set. */
+    {
+        static int s_init = 0;
+        static u32 s_pc = 0, s_addr = 0, s_len = 0;
+        static int s_max = 0, s_n = 0;
+        if (!s_init) {
+            s_init = 1;
+            const char* e = getenv("TLS_DUMP_AT_PC");
+            if (e) {
+                unsigned pc = 0, addr = 0, len = 0;
+                int mx = 1;
+                if (sscanf(e, "%x:%x:%x:%d", &pc, &addr, &len, &mx) >= 3 && len && len <= 65536) {
+                    s_pc = pc; s_addr = addr; s_len = len;
+                    s_max = (mx > 0) ? mx : 1;
+                }
+            }
+        }
+        if (s_pc && address == s_pc && s_n < s_max) {
+            const u8* base = (const u8*)host_resolve_gx_guest_addr(s_addr);
+            if (base) {
+                char path[160];
+                snprintf(path, sizeof(path), "build/recomp/atpc_%08X_%d_%08X.bin", s_pc, s_n, s_addr);
+                FILE* f = fopen(path, "wb");
+                if (f) {
+                    fwrite(base, 1, s_len, f);
+                    fclose(f);
+                    printf("[DumpAtPc] wrote %s (%u bytes, frame %d)\n", path, s_len, g_runner_current_frame);
+                    fflush(stdout);
+                }
+            } else {
+                printf("[DumpAtPc] 0x%08X unmapped at pc 0x%08X\n", s_addr, s_pc);
+                fflush(stdout);
+            }
+            s_n++;
+        }
+    }
+
     /* Instruction-level dispatch trace from a given frame onward. The recent-call
      * ring only keeps 64 entries, which is not enough to follow one deep call
      * chain into a bad return; this prints every dispatch with the registers a
