@@ -56,11 +56,10 @@ print (`TLS_AURORA_STATS`), a copy bypass (`TLS_AURORA_NO_COPY`, so the same str
 with and without the adapter) and a colour/alpha-update override (`TLS_AURORA_FORCE_UPDATE`, which
 was tried and disproven). All inert unless set.
 
-The staging buffer sizes were raised during the spike to probe the per-frame budget and then
-**reverted**: with them raised aurora's own null-backend tests fail (`Out of memory` while creating
-"Staging Buffer 1"). They are needed for one heavy *replay* (AP-AM item 6d: uniforms 96 MiB and
-storage 96 MiB let the cave frame complete), so raise them only for a replay run, never for the
-suite.
+`0005-replay-staging-sizes` is **optional and not applied by `build.ps1`**: it raises uniforms and
+storage to 96 MiB, which one heavy replay needs (AP-AM 6d) and which breaks aurora's own
+null-backend tests (`Out of memory` while creating "Staging Buffer 1"). Apply it for a replay run,
+not for the suite; the default tree stays at upstream sizes and passes 424/425.
 
 ## What was measured
 
