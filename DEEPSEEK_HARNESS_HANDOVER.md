@@ -12742,8 +12742,10 @@ range, which cannot be mapped because it starts at 0); aurora does not, so a mig
 canonicalize addresses or map the aliases.
 
 **4. The replay runs.** On the 101-frame capture (frames 3400-3500, `100 960 770` FIFO bytes, MEM1
-64 MiB + MEM2 64 MiB, 51 816 display-list calls inlined), the adapter parses **every byte of every
-frame with no desync** — 1 591 156 draws, 12 068 902 vertices, largest single draw 498 vertices,
+64 MiB + MEM2 64 MiB, 51 816 display-list calls inlined - that file was later replaced on disk by
+6c's 2-frame window, whose own numbers are frame 3400 = 1 737 241 FIFO bytes / 27 149 draws /
+205 074 vertices, frame 3401 = 28 338 / 43 / 320, and 3 449 array bases translated), the adapter
+parses **every byte of every frame with no desync** — 1 591 156 draws, 12 068 902 vertices, largest single draw 498 vertices,
 vertex sizes 2-28 bytes — and aurora's command processor accepts the whole thing. Two independent
 checks that the parse is honest rather than self-consistent: a draw's byte length is recomputed
 from the CP VCD/VAT registers and the byte that follows it must be a legal opcode (it always is,
@@ -12816,7 +12818,8 @@ is the first thing a migration would have to solve.
 
 **6b. Follow-up measurements (same session, after the first write-up) - the staging blocker is
 sharper than item 5 first said.** Three cheap experiments, all of them negative in an informative
-way:
+way (aurora's own `gx_fifo_tests` - 232 tests, no game image - still pass on the rebuilt tree, which
+is the practice AP-AL item 1 asked for):
 
 1. **The light frame is not self-contained.** Replaying frame 3401 alone fails immediately:
    `draw with unknown vertex size at offset 9 (fmt 0, vcnt 4, vtxsize 0)` - the alternating
