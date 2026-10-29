@@ -3040,6 +3040,13 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
                     fclose(f);
                     printf("[DumpAtPc] wrote %s (%u bytes)\n", path, s_len);
                 }
+                /* Same checksum the EFB copy path prints for its destination, over the same
+                 * window, so the two views of one address can be compared in ONE run. */
+                {
+                    uint32_t sum = 0, nzb = 0, n = (s_len < 0x4000u) ? s_len : 0x4000u;
+                    for (uint32_t i = 0; i < n; i++) { sum += base[i]; if (base[i]) nzb++; }
+                    printf("[DumpAtPcSum] addr=0x%08X sum=%u nonzero=%u/%u\n", s_addr, sum, nzb, n);
+                }
             } else {
                 printf("[DumpAtPc] 0x%08X unmapped\n", s_addr);
             }

@@ -2403,10 +2403,19 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
              * TLS_EFB_CHAIN_DUMP=1 additionally writes each destination as a PPM. */
             {
                 static int s_chain_frame = -2, s_chain_dump = 0, s_chain_idx = 0, s_chain_frame_seen = -1;
+                static int s_chain_guest = -2;
                 if (s_chain_frame == -2) {
                     const char* f = getenv("TLS_EFB_CHAIN");
                     s_chain_frame = f ? atoi(f) : -1;
                     s_chain_dump = getenv("TLS_EFB_CHAIN_DUMP") ? 1 : 0;
+                    /* TLS_EFB_CHAIN_GUEST=<guest frame> gates on the GUEST frame counter
+                     * instead of the present counter. The present index of a guest frame is
+                     * not something you can guess from a log (measured: ~2 800 presents per
+                     * 6 000 guest frames), and every probe aimed at "the frame the hero's
+                     * texture is built" knows the guest frame, e.g. 1909 from TLS_DUMP_AT_PC
+                     * on fn_800D6E48 (handover 5c.46 AP-T). */
+                    const char* g = getenv("TLS_EFB_CHAIN_GUEST");
+                    s_chain_guest = g ? atoi(g) : -1;
                 }
                 extern int g_runner_current_frame;
                 /* Keyed on the present counter, not the guest frame counter: the two are
@@ -2414,7 +2423,10 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                  * counter silently compared a batch dump of one frame with the copies of
                  * the next one. */
                 extern int s_efb_copy_batch_ctx;
-                if (s_chain_frame >= 0 && (int)s_d3d11.frame_counter == s_chain_frame && s_chain_idx < 40) {
+                const bool chain_on =
+                    (s_chain_frame >= 0 && (int)s_d3d11.frame_counter == s_chain_frame) ||
+                    (s_chain_guest >= 0 && g_runner_current_frame == s_chain_guest);
+                if (chain_on && s_chain_idx < 40) {
                     if (s_chain_frame_seen != s_chain_frame) { s_chain_frame_seen = s_chain_frame; s_chain_idx = 0; }
                     float qx = (s_d3d11.vp_w > 0.0f) ? (s_d3d11.vp_w / 640.0f) : (float)desc.Width / 640.0f;
                     float qy = (s_d3d11.vp_h > 0.0f) ? (s_d3d11.vp_h / 480.0f) : (float)desc.Height / 480.0f;
@@ -2449,6 +2461,18 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                         }
                     }
                     if (nd == 0) nd = 1;
+                    /* Raw byte checksum of the destination, independent of the decode above:
+                     * the decode reads back what this function just wrote, so it is
+                     * self-consistent even if the write landed at the wrong offset. Comparing
+                     * this against the same address read from another instrument (e.g.
+                     * TLS_DUMP_AT_PC) in the SAME run is what shows whether the guest and the
+                     * copy path agree about where the bytes are (handover 5c.46 AP-T). */
+                    {
+                        const uint8_t* rb = (const uint8_t*)guest;
+                        uint32_t sum = 0, nzb = 0;
+                        for (uint32_t i = 0; i < 0x4000u; i++) { sum += rb[i]; if (rb[i]) nzb++; }
+                        printf("[EfbChainSum] dst=0x%08X sum=%u nonzero=%u/16384\n", dst_guest, sum, nzb);
+                    }
                     printf("[EfbChain] present=%d frame=%d copy=%d batch=%d dst=0x%08X %ux%u src=(%u,%u)-(%u,%u) xfb=%d fmt=%u "
                            "srcavg=(%lu,%lu,%lu) srca=%lu dstavg=(%lu,%lu,%lu) dstalpha=%lu dstpeak=%lu\n",
                            s_d3d11.frame_counter, g_runner_current_frame, s_chain_idx, s_efb_copy_batch_ctx,

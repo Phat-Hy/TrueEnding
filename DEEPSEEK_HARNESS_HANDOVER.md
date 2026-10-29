@@ -11492,7 +11492,6 @@ exactly two candidate explanations, and they are separable:
 
 **4. The next probe, in one run.** `TLS_MEM_DUMP_BIN=90536FE0,4000,1907:1908:1909:1910` (len is HEX) plus
 `TLS_DUMP_AT_PC=800D6E48:r3:4000:200` separates the two, and it has already been run once:
-
 | sample point | `0x90536FE0` first 16 KB |
 |---|---|
 | frame boundary 1907 / 1908 / 1909 | `nonZero=8192`, **2 distinct byte values** - a flat two-tone pattern, not an image |
@@ -11508,4 +11507,54 @@ instead of `00000000 FFFFFFFF`, and the title hands over at 1646 instead of 1647
 not the A/B to pursue. The next useful probe is the copy wrapper itself
 (`TLS_DUMP_AT_PC=80615560:r3:<len>:<n>` to catch the destination pointer it is handed) compared against what the
 guest's linear read expects.
+
+---
+
+### AP-U. THE COPY AND THE CONVERSION DISAGREE ABOUT ONE ADDRESS, AND A GUEST MEMSET IS WHY
+
+**1. The disagreement is now measured inside a single run, three log lines apart.** `[EfbChainSum]` (the copy
+path's own read-back of its destination) and `[DumpAtPcSum]` (the same address, read at the conversion's entry)
+print a checksum of the same first 16 KB, so no cross-run inference is needed:
+
+```
+[EfbChainSum] dst=0x90536FE0 sum=1044480 nonzero=4096/16384    <- copy finished: alpha 255 in 4096 bytes
+[DumpAtPcSum] addr=0x90536FE0 sum=0     nonzero=0/16384        <- conversion entry, milliseconds later
+```
+
+`sum=1044480` is exactly `255 x 4096`: the copy wrote **black with alpha 255** (the EFB it sampled was black -
+`srcavg=(0,0,0) srca=255`). There is only **one** `CPUState` in the runner (`host_runner.c:1269`, made active at
+1300), so both paths resolve the address to the same `ctx->mem2` - the memory really is different, i.e. something
+zeroes it in between.
+
+**2. The zeroer is a guest memset, and its instruction address is known.**
+`TLS_STORE_WATCH=90536FE0,90538FE0` with `TLS_STORE_WATCH_FRAME=1909` (the range must be `hi > lo`; an earlier
+attempt passed a `hi` *below* `lo` and silently armed nothing - `armed=0` in the end-of-run report is the
+give-away) reports the first in-range stores of frame 1909:
+
+```
+[StoreWatch] armed 0x90536FE0..0x90538FE0
+  [StoreWatch] frame=1909 cia=0x800065EC ea=0x90536FE0 value=0x00000000
+  [StoreWatch] frame=1909 cia=0x800065F4 ea=0x90536FE4 value=0x00000000
+  ...
+```
+
+so guest code at **`0x800065EC`** (an unrolled word-store loop, cia advancing 4-8 bytes per store) zeroes the
+staging buffer from its first byte, **after** the present's copies have filled it and **before** the conversion
+reads it. `TLS_EFB_CHAIN_GUEST=1909` confirms the order: the copies for `0x90536FE0`/`0x90576FE0`/`0x90586FE0`
+(present 1909) are logged, then the conversion for those same three addresses.
+
+**3. Why this is the hero's whole defect, in one sentence.** The conversion reads a **zeroed** image, the CMPR
+encoder turns zero (black, alpha 0) into the transparent block `00000000 FFFFFFFF`, and the swizzle lays that
+into `0x92AEAEC0` - so the character's five model textures are transparent, and the same chain is what the HUD
+would be built from.
+
+**4. What to decide next round - the question is now narrow.** Either the guest is *legitimately* clearing a
+buffer it is about to re-fill (so the host's copy is landing one present too early and the conversion one present
+too late, i.e. a **present/frame phase** problem), or `0x800065EC` is clearing memory the guest **freed and
+reused** and our host is writing into a freed allocation. The discriminator is cheap and needs no new code:
+`TLS_EFB_CHAIN_GUEST` on two consecutive frames plus `TLS_DUMP_AT_PC=800D6E48:r3:...` shows whether *any*
+conversion ever reads non-zero staging; if none does, the copy→convert pair is never adjacent on this host and
+the present/frame phase is the defect, which is fixable inside `host_runner.c`'s frame loop (when the present is
+emitted relative to the guest's frame work) rather than in the copy path.
+
 
