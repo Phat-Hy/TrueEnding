@@ -13303,6 +13303,14 @@ about it, which kills the whole replay. The adapter maps the reserved value to M
   measured when host load moved the title hand-over from 1647 to ~700 - so a same-frame comparison has to
   capture and screenshot inside one run, which is what `cave2600` now does.
 
+**Checkout state at the end of this session.** G:\\Program\\aurora-spike has patches 0001-0004 and 0006
+applied and **0005 applied too** (uniform 96 MiB, storage 96 MiB, vertex 32 MiB, index 8 MiB, texture 24 MiB -
+the last two raised this session for multi-frame replays), with 	ls_gx_replay.exe rebuilt at those sizes, so it
+is replay-ready. Run git apply -R tools/aurora_spike/patches/0005-replay-staging-sizes.patch and rebuild before
+running aurora's ctest (the raised planes break its null-backend tests, AP-AM 6b). The runner binary is
+untouched this session (uild\\recomp\\tls_runner.exe, 30 Oct 01:33:01, 107.74 MB) and the runner build is a
+no-op success (459 chunks cached, 0 to compile).
+
 **12e. A same-run cave pair, and what it says.** To get a layer reference for the *same* frame, a run captured
 frames 3294-3300 **and** screenshotted frame 3300 with `TLS_SHOT_GUEST=1` (pinning the shot to the guest counter
 instead of "guest or present", which is what the matcher does by default):
