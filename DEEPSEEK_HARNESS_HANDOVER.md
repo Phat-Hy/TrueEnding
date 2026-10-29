@@ -10,10 +10,11 @@
 > `GX_AURORA_LOAD_COPY_SRC/_DST/_DEST`, `CP 0xA0..0xAF` -> `GX_AURORA_LOAD_ARRAYBASE`, and MEM1/MEM2
 > at their cached, uncached and MEM2-physical aliases); **criterion 3 CLEARED** — the same guest EFB
 > copy serviced by both layers is byte-comparable, aurora's payload is layout-exact and equals its
-> own EFB; **criterion 2 is the open one**: aurora *records* the cave frame (**26 616 draws,
-> 1.12 M vertices, 102 pipelines**, and the same 27 149 draws with the adapter bypassed) but its EFB
-> readback is **black** while this layer's copy of the same frame is real content (mean byte 157.73
-> vs 63.75). Staging, async pipelines, colour/alpha update, readback timing and the adapter itself
+> own EFB - and with `GXInit` added to the harness the synthetic EFB-copy test passes with **exact**
+> bytes (every texel `(192,128,64,255)`); **criterion 2 is the open one**: aurora *records* the cave
+> frame (**26 616 draws, 1.12 M vertices, 102 pipelines**, and the same 27 149 draws with the adapter
+> bypassed) but its EFB is **black** even for a copy taken after 210 597 drawn vertices (mean byte
+> 0.00 vs this layer's 148.29) - with a working control case and the harness therefore exonerated. Staging, async pipelines, colour/alpha update, readback timing and the adapter itself
 > are all **ruled out by measurement** (AP-AM 6d). The next step is one comparison, not another
 > switch: dump **one draw's decoded vertex positions** from this layer's `decode_single_vertex` and
 > from aurora's arrays/uniforms for the same draw (AP-AM 6f). Instruments and RPC-free recipe:
@@ -12916,6 +12917,45 @@ is layout-exact and delivers exactly what its EFB holds; its EFB holds nothing.*
 of AP-AI lives in a path that aurora implements correctly; what a migration would still have to fix
 is the render that feeds it. That is a real answer to the question the criterion was asked to
 settle, and it is the *opposite* of the outcome that would have justified stopping the spike.
+
+**6f. `GXInit` was the black-frame cause - for the control case, and it clears criterion 3 fully.**
+aurora's own GPU readback test calls **`GXInit(nullptr, 0)`** before drawing; the harness did not.
+Without it `g_gxState` is a zero-initialised `GXState` - zero TEV stages, a zero-sized scissor, no
+projection - so aurora *recorded* every draw and then legitimately wrote nothing. With `GXInit`
+added, the synthetic EFB-copy test **passes with exact bytes**: the 64x64 RGBA8 copy of a quad drawn
+at `0xC08040` decodes to `(192,128,64,255)` in every one of its 4096 texels, 0 wrong, and the EFB
+mean is `(2.56,1.71,0.85)` = exactly the quad's 64x64 area over the 640x480 EFB. So **criterion 3 is
+now cleared with content, not just with a path**: `capture_copies`/`get` delivers the destination's
+bytes, in the hardware's 4x4 tile layout, carrying the colour that was actually rendered.
+
+**6g. But the game stream is still black, and the control case says why that is now a real
+question.** With `GXInit` in place, replaying the cave frame still yields a black EFB - and so does a
+copy taken **late in the frame**, after 210 597 vertices have been drawn:
+
+| copy `0x9036A1A0` 320x224 RGB565, issued at vmark 210 597 | mean byte | sampled RGB565 |
+|---|---|---|
+| this layer | **148.29** | (14.9, 47.9, 27.7) |
+| aurora | **0.00** | (0.0, 0.0, 0.0) |
+
+Same destination, same size, same layout; the same stream; 26 616 draws recorded and 102 pipelines
+created. So it is not the readback, not the timing, not the pipe count and not the harness (the quad
+in 6f proves the harness end to end). It is the **game's draw state as aurora interprets it** -
+projection/viewport/vertex decode/texgen/TEV on real guest data. The next measurement is therefore
+exactly the one 6f named, now with a working control to diff against:
+
+1. dump **one draw's decoded vertex positions** from this layer (`decode_single_vertex` already
+   produces every attribute; `TLS_BATCH_DUMP` prints NDC bounds per batch) and from aurora for the
+   same draw (its arrays/uniforms are all in `g_gxState`), and find the first divergence;
+2. if the vertices agree, bisect the *state*: run the same draw with `--copy-record`-style probes on
+   a frame whose state is known (the title's 2D pass) versus the cave's 3D pass, since the cave is
+   the case that fails.
+
+**6h. One bookkeeping defect found in the capture instrument.** Some copies are recorded **after**
+their frame's `FRAME_END`, so the loader tags them `frame 0` and a window filter drops them (copy
+record 21 above is one: it *is* present in the unfiltered file but tagged 0). `FRAME_END` is emitted
+from `gx_pipeline_end_frame()`, which `d3d11_present()` only reaches after the batch loop, so the
+most likely culprit is the `s_flush_only` early return - worth one look before the next capture run,
+because it silently loses the tail copies of every frame from a filtered window.
 
 **6f. The open question, narrowed to one comparison.** aurora submits 26 616 draws and 1.12 M
 vertices for a frame this layer renders as a bright cave (mean 118.42) and produces a black EFB.

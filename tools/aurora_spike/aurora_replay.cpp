@@ -846,6 +846,13 @@ int run_synthetic_copy(uint32_t fbWidth, uint32_t fbHeight, AuroraBackend backen
    * is still compiling and the EFB readback comes back black. That, not a GX-state mismatch, is
    * what "aurora renders a black frame" was in this spike. */
   AuroraSetDrawsBlocking(GX_TRUE);
+  AuroraSetDrawsBlocking(GX_TRUE);
+  /* GXInit is what gives g_gxState its defaults - number of TEV stages, viewport, scissor, the
+   * projection and matrix stacks. aurora's own GPU readback test calls it before drawing
+   * (tests/gfx_readback_test.cpp: `GXInit(nullptr, 0)`); without it the state starts at
+   * zero-initialised GXState, i.e. zero TEV stages and a zero-sized scissor, and every draw is
+   * recorded and then writes nothing. That is what the black EFB in AP-AM item 6d was. */
+  GXInit(nullptr, 0);
 
   /* Separate streams per consumer: a stream holds only its most recent capture, and both
    * captures use the same key otherwise. */
@@ -1104,6 +1111,13 @@ int main(int argc, char** argv) {
    * is still compiling and the EFB readback comes back black. That, not a GX-state mismatch, is
    * what "aurora renders a black frame" was in this spike. */
   AuroraSetDrawsBlocking(GX_TRUE);
+  AuroraSetDrawsBlocking(GX_TRUE);
+  /* GXInit is what gives g_gxState its defaults - number of TEV stages, viewport, scissor, the
+   * projection and matrix stacks. aurora's own GPU readback test calls it before drawing
+   * (tests/gfx_readback_test.cpp: `GXInit(nullptr, 0)`); without it the state starts at
+   * zero-initialised GXState, i.e. zero TEV stages and a zero-sized scissor, and every draw is
+   * recorded and then writes nothing. That is what the black EFB in AP-AM item 6d was. */
+  GXInit(nullptr, 0);
 
   /* Separate streams: a stream holds only its most recent capture, so a colour capture and a copy
    * capture sharing a key replace each other (measured: the colour get then reported "key 0x0 has
@@ -1112,7 +1126,7 @@ int main(int argc, char** argv) {
   AuroraReadbackStream copyStream = AuroraReadbackCreateStream();
   std::vector<uint8_t> rgb(fbWidth * fbHeight * 4);
   uint32_t captureW = 0, captureH = 0;
-  bool colorRequested = false, copyRequested = false;
+  bool colorRequested = false, copyRequested = false, colorRequestedInFrame = false;
   std::vector<uint8_t> copyPayload(copySize ? copySize : gx_tex_size(copyW, copyH, copyFmt));
 
   uint32_t replayed = 0, rewrittenCopies = 0;
@@ -1164,7 +1178,11 @@ int main(int argc, char** argv) {
                       frame.frame, chunks, off, total, rewritten.size(), copies);
           std::fflush(stdout);
         }
-        (void)isLast;
+        if (isLast && !colorRequestedInFrame) {
+          colorRequestedInFrame = AuroraReadbackCaptureColor(colorStream, 3, &captureW, &captureH) == GX_TRUE;
+          std::printf("[replay] in-frame colour capture: %s (%ux%u)\n",
+                      colorRequestedInFrame ? "yes" : "NO", captureW, captureH);
+        }
         aurora_end_frame();
       }
       ++replayed;
@@ -1192,11 +1210,24 @@ int main(int argc, char** argv) {
     }
     aurora_end_frame();
     if (colorRequested && !haveColor && captureW && captureH) {
-      AuroraReadbackDest dest{1, rgb.data(), captureW * captureH * 4, GX_FALSE};
-      if (AuroraReadbackGet(colorStream, &dest, 1) == GX_TRUE && dest.found == GX_TRUE) {
-        haveColor = true;
-        std::printf("[replay] colour readback complete after %d extra frame(s)\n", i + 1);
+      /* Prefer the in-frame capture: it is the EFB as the replayed frame left it, whereas the
+       * next-frame capture reads the following frame's pass. */
+      bool got = false;
+      if (colorRequestedInFrame) {
+        AuroraReadbackDest dest3{3, rgb.data(), captureW * captureH * 4, GX_FALSE};
+        if (AuroraReadbackGet(colorStream, &dest3, 1) == GX_TRUE && dest3.found == GX_TRUE) {
+          got = true;
+          std::printf("[replay] colour readback complete (in-frame capture) after %d extra frame(s)\n", i + 1);
+        }
       }
+      if (!got) {
+        AuroraReadbackDest dest{1, rgb.data(), captureW * captureH * 4, GX_FALSE};
+        if (AuroraReadbackGet(colorStream, &dest, 1) == GX_TRUE && dest.found == GX_TRUE) {
+          got = true;
+          std::printf("[replay] colour readback complete (next-frame capture) after %d extra frame(s)\n", i + 1);
+        }
+      }
+      if (got) haveColor = true;
     }
     if (copyRequested && !haveCopy) {
       AuroraReadbackDest dest{2, copyPayload.data(), static_cast<uint32_t>(copyPayload.size()), GX_FALSE};
