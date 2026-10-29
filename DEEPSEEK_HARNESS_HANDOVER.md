@@ -11770,3 +11770,40 @@ guess - it is restoring the one guarantee the guest relies on.
 
 
 
+
+---
+
+### AP-X. THE HUD IS NOT HIDDEN - IT IS NEVER SUBMITTED (first measurement of it)
+
+The HUD had never been measured (AP-Q item 7 said so). It is measured now, with the pinned counter
+(`TLS_PROBE_PRESENT_ONLY=1`) and a content-keyed window, at the Chapter-1 gameplay frame:
+
+**1. There is no HUD geometry in the draw stream.** `TLS_BATCH_DUMP_GUEST=4300,2` with
+`TLS_BATCH_DUMP_MAX=120` dumps both present halves of the gameplay frame:
+
+| present | batches | vertices | 2D (persp=0) batches |
+|---|---|---|---|
+| 4301 | 79 | 57 144 | 13 - nine loading/fade quads at `ndc=[-1..1]`, one off-screen `LOADING` label, plus 3D |
+| 4302 | 72 | 262 770 | 4 - all `tex=0` untextured cave geometry (sky/glow), ortho |
+
+Every 2D batch is either a **full-screen fade/plate quad** or the **off-screen** `LOADING` label
+(`ndc=[-1.00..1.00, -1.51..-1.06]`). A HUD is small on-screen quads with UI textures; **there are none**, so the
+HUD is not "invisible because its textures are transparent" (which is the hero's defect) - the guest submits no
+HUD draws at all.
+
+**2. No texture-upload failures** (`TLS_TEX_FAIL_PROBE=1` printed nothing in that run), so this is not a batch
+being dropped for a missing texture either.
+
+**3. `TLS_FORCE_LAYOUT_BIT=1` does NOT reveal it.** The same dump with the page's layout bit forced still shows
+79 batches and no new 2D quads (only the vertex count moves slightly, 57 144 -> 58 029, from the page's own
+subtree). So the HUD is *not* gated by the bit-30 mechanism that hid the tutorial page's content (AP-L/AP-M).
+
+**4. The one UI manager this host tracks stops updating before gameplay.** `TLS_HUDUPD_PROBE=1` reports
+`[HudUpd] f=<frame> mgr=0x81161760 node0x3ec=0x81359B80(38=0x00000022 fc=0x2C000000 cnt=4)` only up to **frame
+4123**, then nothing. That node is the tutorial page's content node (bit 30 clear, as AP-L documents), so the
+tutorial page's manager is finished and **the gameplay HUD is a different task that this probe never sees**.
+
+**So the HUD thread is a UI-task thread, not a renderer thread**: the next step is to find the HUD's own
+`LayoutTask`/manager the way AP-L found the page's (`TLS_LAYOUT_CREATE_PROBE` / `TLS_PAGETASK_PROBE` /
+`TLS_LAYOUT_SHOW_PROBE` exist for exactly this, and AP-L's recipe - find the manager slot, then the create and
+show verbs - is the template), rather than looking for it among the drawn batches.
