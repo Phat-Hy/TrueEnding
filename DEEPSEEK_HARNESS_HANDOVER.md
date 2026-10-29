@@ -12813,6 +12813,23 @@ correctly — one frame has not been rendered. The blocker is a buffer-sizing po
 (`lib/gfx/resources.hpp` + `frame.cpp`'s single mapped staging buffer), not a semantics gap, and it
 is the first thing a migration would have to solve.
 
+**7b. VERDICT (this session's definition of done, option (b)).** The spike is **blocked at a
+named step with numbers**, not abandoned on an impression: aurora builds and runs here, its
+command processor accepts this project's real GX stream, and the only thing standing between the
+project and a rendered frame is aurora's per-frame staging budget, which this game exceeds by a
+measured factor (> 144 MiB needed in one plane, against a 256 MiB per-buffer WebGPU limit for all
+planes together). That is one design decision in aurora's `lib/gfx` - per-plane buffers or a
+mid-frame flush - away from being solvable, and it is *not* a GX-semantics gap, which is the whole
+point of the comparison: the semantics are already there.
+
+**Fallback, stated as the mission asks.** Until that sizing question is answered, the renderer
+stays the hand-rolled layer and the work continues as per-bug fixes in the order the dossier
+already ranks them - the composite tail first (AP-AI: the nine full-screen additive EFB-copy quads
+that saturate at b65), then CMPR alpha, then XF texgen 2..7 / light decode. The Aurora path is
+neither disproven nor adopted; adopting it now would trade a known-defective renderer for an
+unmeasured one, and the next session's items 1-3 (item 9) are cheap enough that guessing instead
+of measuring would be the expensive choice.
+
 **8. Artifacts.** `tools/aurora_spike/` — `README.md` (how to rebuild), `build.ps1` (clone → patch →
 configure → build → replay, all of it reproducible), `patches/` (the four changes), `aurora_replay.cpp`
 (headless replay harness + the adapter), `spike_target.cmake` (builds the harness inside the aurora
