@@ -11628,8 +11628,7 @@ mapping, and `TLS_DUMP_AT_PC` on the texture-loader entry (`0x8046BBF0`, the fun
 `.texture` and its destination) to see whether a second pass over `pc_ga_g_a01.texture` happens after the
 decompress.
 
-**6. `TLS_WATCH_ADDR` silently mis-parsed bare hex addresses - fixed, and it explains two false negatives.**
-The parser used `strtoul(p, &p, 0)`, so the documented form (`TLS_WATCH_ADDR=92AEAEC0`) stopped at the first hex
+**6. `TLS_WATCH_ADDR` silently mis-parsed bare hex addresses - fixed, and it explains two false negatives.**The parser used `strtoul(p, &p, 0)`, so the documented form (`TLS_WATCH_ADDR=92AEAEC0`) stopped at the first hex
 letter and watched address `92`. Any watch on an address containing `A-F` therefore reported **zero changes**,
 which reads exactly like "nothing writes here" - the most dangerous possible failure for a probe that has already
 been used to conclude "no one writes this buffer". It is now base 16 (a `0x` prefix still works). This is also
@@ -11637,6 +11636,24 @@ why a watch on `0x90536FE0` reports changes only up to frame 297: after that the
 copies that the `[EfbChain]` lines report writing that address at present 1909 do **not** change word 0, which is
 worth one direct check next round - print the first four bytes the copy wrote (`[EfbChainSum]` already sums
 16 KB) next to `mem_read32` of the same address in the same log line.
+
+**7. A `tools/invariant.ps1` FAIL can be spurious - confirm it with a re-run before touching the hash.**
+Two runs of the invariant on the *same* binary, back to back on an idle host: the first reported
+`FAIL: frame 3500 differs from the recorded reference`, the second returned the recorded `D3329E35...` exactly.
+The difference is visible in the present's own batch line and is a **guest-progress** difference, not a rendering
+one:
+
+| run | present 3501 |
+|---|---|
+| FAIL | `Total Batches: 73, Total Vtx: 265695` |
+| PASS | `Total Batches: 102, Total Vtx: 92085` |
+
+73 batches with 265 695 vertices is a *loading* frame - the guest had not reached the same point at frame 3500
+in that run, so the invariant's frame-numbered comparison is only meaningful when the sequence has caught up.
+So: **a FAIL means "re-run once and compare the batch/vtx line", not "re-record EXPECTED_SHA"**. The existing
+`tools/page_run.ps1` already works this way for the page (it validates `Game@1647` and re-runs); the invariant
+does not yet, and giving it the same validation is a small, worthwhile fix for a later round.
+
 
 
 
