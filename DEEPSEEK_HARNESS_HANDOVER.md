@@ -12282,3 +12282,47 @@ for a file called `game_field.c` or `game_scene.c` will not find it, and one tha
 rumble logic. **Search by address, not by module name.** For reference, the addresses that matter for this thread
 are `0x80368280` (update), `0x8036A110` (state-0 handler), `0x811671C0` (the task object), `0x8116C6F8` (its state
 word), `0x803659A0` (the block that created it at frame 1648) and `0x80570CFC` (the load task's update).
+
+---
+
+### AP-AG. THE FIELD STATE MACHINE IS FUNCTIONAL - a single nudge runs it 1 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9
+
+**1. New diagnostic: `TLS_FORCE_FIELD_STATE=<state>:<frame>`** (`host_runner.c`) writes `<state>` **once** into the
+Chapter-1 task's state word (`+0x5538`) at that guest frame. The task object is captured from the first dispatch of
+`0x80368280` (`g_field_task_obj`, `replacements.c`), not hardcoded, because its address is heap-allocated.
+It is a state-fabricating diagnostic, never for a measurement run, and it is inert unless the env is set -
+`tools/invariant.ps1` still **PASS** at `C5447108...` with it compiled in.
+
+**2. What it proved.** One write of state 1 at frame 4200 makes the machine advance **by itself**, and
+`TLS_WATCH_ADDR` on the state word records every transition with the storing instruction:
+
+```
+0x00000001 -> 0x00000003  pc=0x80368384 lr=0x80368808  (frame 4201)
+0x00000003 -> 0x00000004  pc=0x80368B70 lr=0x8036B428  (frame 4203)
+0x00000004 -> 0x00000005  pc=0x80368DAC lr=0x8036B428  (frame 4207)
+0x00000005 -> 0x00000006  pc=0x80368E5C lr=0x803690E8  (frame 4209)
+0x00000006 -> 0x00000007  pc=0x80369184 lr=0x80369198  (frame 4211)
+0x00000007 -> 0x00000008  pc=0x803691E0 lr=0x8036B428  (frame 4253)
+0x00000008 -> 0x00000009  pc=0x80369440 lr=0x8036B428  (frame 4254)
+```
+
+so the state machine, its handlers and its transitions are all working. **The object attribution is correct and
+the only missing thing is the entry into state 1.** That is the sharpest statement this thread has reached.
+
+**3. Two forced-entry results, both informative and both NEGATIVE as workarounds.**
+* **nudge at 4200** (late): the machine runs 1 -> 9 within 50 frames, but the game ends up drawing
+  `684 vtx (14 batches)` instead of the cave's ~58 000 - it has left the scene without ever having loaded it, so
+  this is not gameplay;
+* **nudge at 1650** (at the hand-over): state 1's own conditions are not met yet
+  (`lbl_8087F0A8 + 0x28` and `fn_8006AA20(...)`, read from state 1's body), the state does not advance, and by
+  frame 4000 the picture is byte-identical to the long-frozen frame (`4201F485...`) - i.e. no lasting effect.
+  So a forced entry **cannot substitute** for the real trigger: the trigger has to fire at the moment the field is
+  ready, and it carries state the load depends on.
+
+**4. State 2 is "loading".** Forcing 2 (or 1, which advances into it) puts the game back on the LOADING screen
+(`docs/evidence` frame `build/recomp/forcefield_4600.png`, `684 vtx`), and the two captures taken 200 frames apart
+then *differ* - the loading dots animate. That also confirms the frozen cave frame is a genuine stall, not a
+capture artifact: the same instrument shows change as soon as the game actually runs.
+**Remaining question, now narrow: who is supposed to write state 1, and why does it not happen?**
+The candidates are the sequencer/event path that owns the Game sequence, and the pad-manager readiness flag that
+state 1 itself tests - both of which the next session can probe without another round of archaeology.

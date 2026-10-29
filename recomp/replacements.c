@@ -6,6 +6,9 @@
 #include <time.h>
 
 static CPUState* s_current_active_cpu = NULL;
+/* Chapter-1 field task object, captured from the first dispatch of its update
+ * (0x80368280). See TLS_FORCE_FIELD_STATE in host_runner.c. */
+u32 g_field_task_obj = 0;
 u32 g_tls_rbtree_1354_cnt = 0;
 u32 g_tls_rbtree_195c_cnt = 0;
 u32 g_tls_rbtree_19e0_cnt = 0;
@@ -2988,6 +2991,16 @@ static void tls_res_load_probe(CPUState* ctx) {
 int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
     tls_record_recent_call(ctx, address);
     tls_tail_push(ctx, address);
+
+    /* Remember the Chapter-1 field task object (5c.46 AP-AG). `0x811671C0` in the measured
+     * run is one instance; the address is heap-allocated and moves between runs, so the
+     * pointer is captured from the single dispatch of the task's update instead of being
+     * hardcoded. Used by TLS_FORCE_FIELD_STATE (host_runner.c) to test whether this object's
+     * state machine is what holds the game back. Inert unless the env is read. */
+    if (address == 0x80368280u) {
+        extern u32 g_field_task_obj;
+        if (!g_field_task_obj) g_field_task_obj = ctx->gpr[3];
+    }
 
     /* Dump guest memory at the moment a chosen function is ENTERED, not at a frame
      * boundary (handover 5c.46 AP-R). A frame-end dump of the hero bake's source proved

@@ -1336,6 +1336,41 @@ int main(int argc, char** argv) {
             QueryPerformanceCounter(&t_start);
         }
 #endif
+        /* TLS_FORCE_FIELD_STATE=<state>[:<fromframe>]: write <state> into the Chapter-1 field
+         * task's state word (+0x5538) every frame from <fromframe>. DIAGNOSTIC ONLY - it
+         * fabricates guest state, so it must never be on for a measurement run. It exists to
+         * answer one question cheaply (5c.46 AP-AG): is this task object's state machine the
+         * thing holding the game back? The state word is measured to be written exactly once
+         * (zeroed at the Game hand-over) and never again, and state 0's handler contains no
+         * store to it, so if forcing a later state animates the game the missing piece is the
+         * 0 -> N trigger; if it changes nothing, the object is not the live field task and the
+         * whole attribution (dossier 5c.26) needs revisiting. */
+        {
+            static int s_ffs_state = -2, s_ffs_from = 0;
+            extern u32 g_field_task_obj;
+            if (s_ffs_state == -2) {
+                s_ffs_state = 0;
+                const char* e = getenv("TLS_FORCE_FIELD_STATE");
+                if (e) {
+                    int st = -1, from = 0;
+                    if (sscanf(e, "%d:%d", &st, &from) >= 1 && st > 0) {
+                        s_ffs_state = st;
+                        s_ffs_from = from;
+                        printf("[ForceFieldState] will write state %d to the field task from frame %d\n",
+                               st, from);
+                        fflush(stdout);
+                    }
+                }
+            }
+            if (s_ffs_state > 0 && g_field_task_obj && frame == s_ffs_from) {
+                u32 a = g_field_task_obj + 0x5538;
+                mem_write32(&cpu, a, (u32)s_ffs_state);
+                printf("[ForceFieldState] frame %d: task 0x%08X state -> %d (single nudge)\n",
+                       frame, g_field_task_obj, s_ffs_state);
+                fflush(stdout);
+            }
+        }
+
         // 1. Advance VBlank and timebase at start of frame, then service expired alarms
         g_runner_current_frame = frame;
         host_simulate_vblank(&cpu, frame);
