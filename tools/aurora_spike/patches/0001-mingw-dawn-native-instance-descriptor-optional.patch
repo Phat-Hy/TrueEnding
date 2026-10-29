@@ -1,0 +1,26 @@
+diff --git a/lib/webgpu/gpu.cpp b/lib/webgpu/gpu.cpp
+index 97f886f..abb9a4e 100644
+--- a/lib/webgpu/gpu.cpp
++++ b/lib/webgpu/gpu.cpp
+@@ -727,6 +727,13 @@ bool initialize(AuroraBackend auroraBackend, bool allowCpu) {
+         .enabledToggleCount = instanceToggles.size(),
+         .enabledToggles = instanceToggles.data(),
+     }};
++#ifdef AURORA_NO_DAWN_NATIVE_API
++    // The prebuilt Dawn package exports only the WebGPU C ABI, whose C++ class
++    // methods are MSVC-mangled and therefore unlinkable from a MinGW/GCC build.
++    // The Dawn-native instance descriptor is not required: the toggles chained
++    // through it are ordinary WebGPU chained structs and are accepted directly.
++    instanceDescriptor.nextInChain = &instanceTogglesDescriptor;
++#else
+     dawn::native::DawnInstanceDescriptor dawnInstanceDescriptor{};
+     dawnInstanceDescriptor.nextInChain = &instanceTogglesDescriptor;
+ #ifdef AURORA_GFX_DEBUG_GROUPS
+@@ -741,6 +748,7 @@ bool initialize(AuroraBackend auroraBackend, bool allowCpu) {
+     dawnInstanceDescriptor.platform = tracy_dawn_platform();
+ #endif
+     instanceDescriptor.nextInChain = &dawnInstanceDescriptor;
++#endif
+ #endif
+     g_instance = wgpu::CreateInstance(&instanceDescriptor);
+     if (!g_instance) {

@@ -1,0 +1,18 @@
+diff --git a/lib/internal.hpp b/lib/internal.hpp
+index d1adb6c..265df3a 100644
+--- a/lib/internal.hpp
++++ b/lib/internal.hpp
+@@ -334,6 +334,13 @@ private:
+       m_owned = true;
+     } else if (size > m_capacity) {
+       if (!m_owned) {
++        /* AURORA-SPIKE: a fixed-size (non-owned) buffer overflow is the one abort in here that
++         * does not go through the log callback, so a release build aborts silently. Say what
++         * was needed - this is how the spike measured that a 31k-draw frame exceeds aurora's
++         * default staging sizes. */
++        fprintf(stderr, "[aurora] non-owned ByteBuffer grow: need %llu bytes, capacity %llu\n",
++                (unsigned long long)size, (unsigned long long)m_capacity);
++        fflush(stderr);
+         abort();
+       }
+       if (size < m_capacity * 2) {

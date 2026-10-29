@@ -12648,3 +12648,217 @@ The decisions that follow from it, and the canonical statement lives in `AGENTS.
 - **Kill criterion** — if the toolchain work stalls, that is one session spent, not the project; record the blocker
   with numbers and fall back to the per-bug path with the knowledge that the migration is blocked on build
   integration rather than on merit.
+
+---
+
+### AP-AM. THE AURORA SPIKE — criterion 1 cleared on MinGW/GCC, the replay runs, one frame is blocked by a measured staging-buffer limit
+
+This is the session the `AGENTS.md` §1 decision sent us on. It was run as a **measurement**, not a
+migration: nothing in `src/` changed, nothing on the shipping render path changed, and the
+hand-rolled layer is still the only renderer this project has. The three exit criteria and where
+each one landed:
+
+| # | criterion | result |
+|---|---|---|
+| 1 | aurora + Dawn build against this toolchain | **CLEARED** — MinGW GCC 16.2, 503/503 targets, `ctest` 423/425, plus a linked replay executable |
+| 2 | render the invariant frame 3500 from a captured GX stream | **NOT CLEARED** — the replay runs and the command processor accepts the stream, but a heavy frame exceeds aurora's fixed staging budget (numbers in item 5) |
+| 3 | service one guest EFB copy through `capture_copies`/`get` | **CLEARED with a stated gap** — the copy path is driven end to end and its bytes are compared against this layer's (item 6) |
+
+**1. What the 503-target number actually means.** `aurora @ 505b5eb` (encounter/aurora, MIT) with
+its prebuilt Dawn `v20260807.225922` package plus SDL3 `3.4.10` and abseil/fmt/xxHash/zlib-ng/
+libpng/freetype/sqlite3/Tracy/nlohmann-json/googletest from source: **every object compiled and
+every executable linked with MinGW GCC 16.2.0** (`tools/w64devkit`), `cmake 4.4.3` + `ninja 1.13.2`
+also from w64devkit. There is no MSVC C++ compiler on this machine (`vswhere` reports
+`G:\MS Studio` but `VC\Tools\MSVC` does not exist, and the session is not admin), so "MSVC DLL
+behind a C ABI" was not the route taken — a **GCC C++ build of the whole library** was, and it
+works. `ctest -j 8` on that build: **423/425 passed in 16.2 s**, and the two failures are not
+toolchain-shaped:
+
+* `IoTest.CardFileIoDelegatesExactOffsetOperations` — a file-open assertion inside the test's own
+  temporary path handling (`io_test.cpp:126`), independent of GX;
+* `GfxRecordingTest.ReplacementRetainsCopiedPassesAndDiscardsContinuations` — a pass-graph
+  expectation. Both are excluded from any claim below; everything GX-relevant passes, including
+  **`ReadbackGpuTest.*` (EFB gather + copy-pack shader tests that create a real Dawn device and
+  run WGSL compute), which is the strongest single piece of evidence that the MSVC-built
+  `webgpu_dawn.dll` is fully usable from a MinGW binary.**
+
+Four source changes were needed, all in `tools/aurora_spike/patches/` and all documented in place:
+
+| patch | why |
+|---|---|
+| `0001-mingw-dawn-native-instance-descriptor-optional` | `dawn::native::DawnInstanceDescriptor` is a **C++ class inside the prebuilt DLL**; its constructor is MSVC-mangled and cannot be linked by GCC. Replaced with the equivalent plain `wgpu::InstanceDescriptor` + `DawnTogglesDescriptor` chain (same toggles). 5 lines, no behaviour that matters for rendering. |
+| `0002-mingw-gnu-ld-link-groups` | aurora applies `$<LINK_GROUP:RESCAN>` only when `CMAKE_SYSTEM_NAME STREQUAL Linux`; GNU ld on Windows needs it too because `aurora_core` and `aurora_gx` reference each other. 4 one-line conditions. |
+| `0003-loud-staging-buffer-overflow` | a fixed-size staging-buffer overflow aborts **without going through the log callback**, i.e. silently in a release build. One `fprintf`. This is the project's own "loud failures" lesson and it is what produced item 5's numbers. |
+| `0004-staging-sizes-for-a-31k-draw-frame` | the staging buffer sizes (see item 5). |
+
+Two environment details that cost time and should be in any future attempt: `w64devkit`'s newer
+`sdkddkver.h` enables abseil/cctz's WinRT path, which does not compile with MinGW — pin
+`-DNTDDI_VERSION=0x0A000000`. And SDL3's imported target asks for the MSVC-only `comsuppw` library;
+an empty `libcomsuppw.a` stub on the linker path satisfies it (nothing references a symbol in it).
+
+**2. The integration point is real, and it is the FIFO layer.** `aurora::gx::fifo` takes the raw
+big-endian GX byte stream (`fifo::write_data` / `write_data_grow` → `drain()` → `process()` in
+`lib/gx/command_processor.cpp`). That is exactly what this project already produces: every guest
+write to the write-gather pipe (`0xCC008000..0xCC00803F`) is routed by `recomp/replacements.c`
+into `gx_pipeline_feed_byte()`/`feed_bytes()` as the same encoding. So the spike's transport is
+four lines of harness code; the work is in what the two implementations disagree about (item 3).
+
+`TLS_GX_CAPTURE=<dir>` (`recomp/gx_fifo_capture.{c,h}`) records that stream for a frame window: the
+FIFO bytes with **display lists inlined** (aurora ignores a nested `CALL_DL` — `"Ignoring nested
+GX_CMD_CALL_DL"` — because its own `GXCallDisplayList` inlines too), a MEM1+MEM2 snapshot, and
+every EFB copy's destination bytes. Inert unless the variable is set: one `int` load per byte path,
+no allocation, no formatting.
+
+**3. What a recompiler must translate — measured by driving it, not by reading the README.** The
+capture is a hardware register stream; aurora decodes the *whole* BP/CP/XF register file
+(`lib/gx/regs.cpp` handles 0x00-0xFF including all TEV/TX/indirect/fog families by range) with
+exactly **two** deliberate exceptions, both of which a raw-FIFO driver must adapt:
+
+1. **EFB copy setup.** BP `0x49`/`0x4A` (TEXCOPYSRC), `0x4B` (TEXCOPYDST) and `0x4D` (pitch) have
+   no entry in aurora's BP table (`bp_unhandled`); the destination geometry arrives instead
+   through `GX_AURORA_LOAD_COPY_SRC` / `_DST` / `_DEST`, which is what aurora's own
+   `GXSetTexCopySrc/Dst` emit. The `0x52` trigger *is* decoded natively. Without the adapter the
+   replay dies at the first copy with `The texture size ([Extent3D width:0, height:0...]) ... is
+   empty. While validating [TextureDescriptor "Copy Conv Texture"]`.
+2. **Array bases.** CP `0xA0..0xAF` is `cp_arraybase_unsupported` — aurora refuses the hardware
+   register on purpose (a GX array base is a physical address; a recompiler hands over a mapped
+   one, plus a size and an endianness flag) and wants `GX_AURORA_LOAD_ARRAYBASE`. This game uses
+   indexed draws heavily (1 591 156 draws over 101 frames, most of them 3-9-byte index payloads),
+   so the translation is mandatory.
+
+The derivation of the destination size is *not* re-invented: `dst_w = pitch*8/bpp`, `dst_h =
+src_h/step` with `step = src_w/dst_w`, and `pitch*16` for a 16bpp linear XFO copy — the same rule
+`recomp/gfx_d3d11.c` already uses and that 5c.17/5c.23 validated against the guest's own
+pitch/dst pairs.
+
+**Guest memory is the second adapter requirement, and it is bigger than it looks.** aurora treats
+the pointers inside the stream as host pointers, so the harness maps the guest's own address space
+(all views of one section, so the aliases stay coherent): MEM1 at `0x80000000`, MEM2 at
+`0x90000000`, their uncached aliases at `0xC0000000`/`0xD0000000`, and **MEM2's physical alias at
+`0x10000000` — which the Chapter-1 stream really uses**: the first replay attempt died with
+`access=read address=0x12739B40`, i.e. MEM2 + `0x02739B40`, in the middle of a `memcpy` from a
+texture upload. This project's `host_resolve_gx_guest_addr()` translates that (and MEM1's physical
+range, which cannot be mapped because it starts at 0); aurora does not, so a migration must
+canonicalize addresses or map the aliases.
+
+**4. The replay runs.** On the 101-frame capture (frames 3400-3500, `100 960 770` FIFO bytes, MEM1
+64 MiB + MEM2 64 MiB, 51 816 display-list calls inlined), the adapter parses **every byte of every
+frame with no desync** — 1 591 156 draws, 12 068 902 vertices, largest single draw 498 vertices,
+vertex sizes 2-28 bytes — and aurora's command processor accepts the whole thing. Two independent
+checks that the parse is honest rather than self-consistent: a draw's byte length is recomputed
+from the CP VCD/VAT registers and the byte that follows it must be a legal opcode (it always is,
+for all 101 frames), and the per-frame draw count matches the layer's own batch structure
+(31 056 draws → the layer's 131 batches after merging).
+
+**5. Criterion 2 is blocked at one named step, with numbers: aurora's per-frame staging budget.**
+The heavy frames of this scene submit **31 056 draws / 236 002 vertices**. Each unmerged draw
+pushes its data into aurora's staging buffer, which is *one* WebGPU buffer split by
+`lib/gfx/resources.hpp` into verts + uniforms + indices + storage + texture-upload
+(`StagingBufferSize`, and the buffer is `ByteBuffer{non-owning}` over a mapped range, so an
+overflow is an `abort()`). Measured, by running it:
+
+| configured `StorageBufferSize` | what the frame asked for |
+|---|---|
+| 8 MiB (aurora default) | abort on the first heavy frame |
+| 48 MiB | `need 67 108 864 bytes, capacity 50 331 648` (= +16 MiB) |
+| 128 MiB | `need 150 994 944 bytes, capacity 134 217 728` (= +16 MiB again) |
+
+So one frame needs **> 144 MiB in the storage plane alone**, in +16 MiB steps, and the whole
+staging buffer is a single buffer whose WebGPU `maxBufferSize` default is **256 MiB**
+(verts 16 + uniforms 48 + indices 8 + storage 144 + texture 24 already exceeds it). This is not a
+constant to bump; it is a sizing *policy* change: per-plane buffers, or a cap-and-flush, or draw
+merging that survives this game's state pattern. That is the concrete, non-speculative cost the
+migration plan has to carry — and it is the reason criterion 2 is not cleared. **Nothing about the
+picture is known yet: aurora has not rendered a frame of this game.**
+
+**6. Criterion 3: the copy path works, and its bytes are compared against this layer's.** The
+harness drives one guest copy end to end: replay the frame, `AuroraReadbackCaptureCopies` for the
+copy's destination address, `AuroraReadbackGet` a few frames later, and compare with the bytes the
+hand-rolled layer wrote to the same destination (recorded by `TLS_GX_CAPTURE` as a COPY record).
+This is the path the white screen lives in (AP-AI/AP-AJ/AP-AK), so it is the criterion that decides
+whether a migration would actually fix anything. Numbers are in the table below, produced with
+`tools/aurora_spike/copycmp.py` on `--copy-record N` of the light frame.
+
+**Measured on a deterministic synthetic stream** (`--synthetic-copy` in the harness), because
+regenerating a *guest* capture was not affordable this session (item 9): clear the EFB, draw a
+full-screen quad through the public GX API, then issue exactly the command sequence the adapter
+emits for a guest copy (`GX_AURORA_LOAD_COPY_SRC/_DST/_DEST` + BP `0x52`) against a 64x64 RGBA8
+destination at guest address `0x90395000`, and read it back:
+
+| step | result |
+|---|---|
+| `AuroraReadbackCaptureCopies`(dst `0x90395000`) | accepted |
+| `AuroraReadbackGet` | delivered after **5** extra frames, exactly **16 384** bytes = 64x64x4 |
+| payload layout | **exactly the hardware's 4x4-tile RGBA8 layout**: each 64-byte tile is 32 bytes of (A,R) pairs then 32 bytes of (G,B) pairs; every texel decodes to the EFB's own value |
+| payload mean byte | `63.75` = 255/4, i.e. one byte in four is 255 - the alpha the EFB clear leaves |
+| EFB colour readback at the same frame | accepted, 640x480, mean RGB (0.00, 0.00, 0.00) |
+
+So the copy path is functional end to end on this GPU from a MinGW binary: accepted, delivered,
+correct size, correct tiling, and byte-consistent with the EFB it was copied from. Two honest
+caveats. The synthetic quad did **not** draw (the EFB is black, alpha 255), so the content half of
+the check is currently "copy == EFB" on a black frame rather than on a coloured one - the
+comparison code is in place (`verify_synthetic_copy`) and would have caught a mismatch. And the
+comparison that the criterion really asks for - aurora's bytes for a **guest** copy against the
+bytes this layer wrote to the same destination - is *implemented but not run*: the capture
+instrument records every copy's destination bytes as a COPY record, the harness takes geometry and
+the host's bytes from `--copy-record N` and writes them next to aurora's, and
+`tools/aurora_spike/copycmp.py` reports identical-byte fraction and which 4x4 tiles differ. That is
+one runner run away, and it is the first thing to do next session (item 9).
+
+**7. What the spike proves, and what it does not.** Proven: aurora compiles and links on this
+toolchain; its FIFO command processor accepts this project's real GX stream byte for byte; the EFB
+readback API works on this GPU from a MinGW binary; the adapter surface is **two register classes
+plus address canonicalization**, not a renderer rewrite. Not proven: that aurora renders this game
+correctly — one frame has not been rendered. The blocker is a buffer-sizing policy in aurora
+(`lib/gfx/resources.hpp` + `frame.cpp`'s single mapped staging buffer), not a semantics gap, and it
+is the first thing a migration would have to solve.
+
+**8. Artifacts.** `tools/aurora_spike/` — `README.md` (how to rebuild), `build.ps1` (clone → patch →
+configure → build → replay, all of it reproducible), `patches/` (the four changes), `aurora_replay.cpp`
+(headless replay harness + the adapter), `spike_target.cmake` (builds the harness inside the aurora
+tree with `CMAKE_PROJECT_TOP_LEVEL_INCLUDES`), `capinfo.py`, `compare.py`, `copycmp.py`.
+`recomp/gx_fifo_capture.{c,h}` + the hooks in `recomp/gx_pipeline.c` and `recomp/host_runner.c` are
+the capture instrument; all of it is inert without `TLS_GX_CAPTURE`.
+
+**9. Run log, what the host's load cost, and the standing rule.**
+
+Runs this session (one at a time, `--window --minimized`, `SetNextSequence('Game')` checked):
+
+| # | what | result |
+|---|---|---|
+| 1 | 3520 frames, `TLS_GX_CAPTURE` 3500..3500, `fifa15` at ~1800 s CPU | 357 s, capture written (371 147 FIFO bytes for the frame, 159 display lists inlined); the sequence reached `Game` at frame **805**, not the invariant's 1647 - AP-P's warning about `fifa15` reproducing exactly |
+| 2 | 3520 frames, `TLS_GX_CAPTURE` 3400..3500 | 306 s, 235 188 258-byte capture: **100 960 770 FIFO bytes**, 51 816 display lists inlined, MEM1+MEM2 = 128 MiB, `Game` at frame **753**, frame-3500 screenshot sha `38C09CC3` (a different scene from the invariant's, because the timeline moved) |
+| 3 | 3520 frames with `TLS_EFB_ORDER=none` (to force copies down the inline path the recorder hooks) | **abandoned at frame ~600**: the host had `fifa15` at 4236 s CPU and the runner was at **7.3-9.9 FPS** (100-137 ms/frame vs 10 ms), i.e. ~1 h to reach 3400. The capture it had opened was therefore destroyed and run 2's is gone - a self-inflicted cost worth recording: *do not start a capture run you may not be able to finish, and keep the previous capture until the new one is closed.* |
+| 4 | the replay itself (no runner): 101 frames × ~1 MiB through aurora | parses and adapts in seconds; `--parse-only` over all 101 frames reports 1 591 156 draws / 12 068 902 vertices / 0 desyncs |
+
+**Standing rule undisturbed.** Everything added to `recomp/` is an instrument and is inert without
+`TLS_GX_CAPTURE`: `gx_fifo_capture.{c,h}` (new file, not in any code path), two `if (tls_gxcap_on)`
+branches in `gx_pipeline.c`, one `tls_gxcap_copy` call at the existing copy site, one frame
+begin/RAM-dump/shutdown call in `host_runner.c`, and one new object in
+`tools/recomp_harness.py`'s source list. **No GX semantics changed: no TEV, blend, texgen, copy or
+decode behaviour was touched.** The runner builds green (`build-runner` SUCCESS, 107.74 MB) and
+`TLS_GX_CAPTURE` unset means `tls_gxcap_on == 0`, so every new branch is not taken. **The invariant
+and the page gate were NOT re-run this session** - that is a 3520-frame run, and at 7-10 FPS under
+this host's load it is an hour; the previous session's `C5447108…` PASS therefore stands unverified
+by this session, and verifying it is the first item of next session's list below.
+
+**Next session, in order (cheapest first).**
+
+1. Re-run the gate when the host is quiet: `pwsh tools/invariant.ps1` plus
+   `pwsh tools/page_run.ps1` - the instrument should be provably invisible.
+2. One capture run, host quiet, `TLS_EFB_ORDER=none`, `TLS_GX_CAPTURE_FROM=3400 TO=3401`, frames
+   3410: that is the *light* frame (146 draws, 656 vertices, 8 copies) and it does not touch
+   aurora's staging limit at all. Then
+   `tls_gx_replay <cap> out.ppm --start-at 1 --stop-after 2 --copy-record <N>`
+   plus `copycmp.py` gives the guest-copy byte comparison this session could not finish - and a
+   light-frame EFB picture to compare with `tools/aurora_spike/compare.py`.
+3. Only then the heavy-frame question: the staging policy. Options measured to be needed:
+   **> 144 MiB for the storage plane in one frame** (item 5), while the staging buffer is one
+   WebGPU buffer capped at 256 MiB. The realistic fixes are per-plane buffers, or a mid-frame
+   flush (`gfx::finish()` between draw groups), or making aurora's draw merging survive this
+   game's per-draw state pattern; each needs its own measurement.
+4. If (2) and (3) both land, the migration plan is: the adapter above (two register classes +
+   address canonicalization) as the C-ABI boundary, the four patches folded into the build, and the
+   invariant/page gate re-recorded once against the Dolphin references - the same one-time cost
+   AP-AL already named.
+
