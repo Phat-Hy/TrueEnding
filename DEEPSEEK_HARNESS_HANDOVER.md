@@ -11608,6 +11608,27 @@ if it is not, then the game bakes a placeholder here and the character's real te
 host never reaches - which would make the *next* thread "which pipeline should have produced
 `0x92AEAEC0`", not "why is the copy wrong".
 
+**5. The art IS in memory at 1905 - it is destroyed at 1909. This is the most actionable statement in AP-V.**
+A 32 KB dump of `0x92AEAEC0` at frame **1905** is **21 560/32 768 non-zero bytes** and starts with the
+`.texture` container header (`66697864 64617461` = `"fixd","data"`, then `"wii text"`); the same dump at **1915**
+is the transparent CMPR pattern. So the loader's `CXDecompressFast` at frame 1899 really did put the character's
+art into `0x92AEAEC0`, and the frame-1909 conversion is what destroys it - by re-encoding an **unpopulated**
+staging buffer over the top.
+That makes the missing link precise and narrow: **something should expand that container (`0x92AEAEC0`, frame 1905)
+into the RGBA staging buffer (`0x90536FE0`) before it is converted back.** Measured negatives that sharpen it:
+* no `CXDecompressFast` call in the whole run targets `0x90536FE0` (2 714 decompresses logged, none there), so
+  the expansion is not the loader's decompressor;
+* the only writes to `0x90536FE0` in the 1905-1909 window are the EFB copies (black, `srcavg=(0,0,0)`) and the
+  `__fill_mem` memset;
+* so the expansion is a guest-side **container/texel decode** that this host does not perform, and the frame
+  where it should run is 1905-1908.
+**Next probe (cheap, one run):** `TLS_WATCH_ADDR=80536FE0,90536FE0` with `TLS_WATCH_FROM=1904 _TO=1909` - the
+cached alias and the uncached address of the same buffer - to catch any writer that goes through the other
+mapping, and `TLS_DUMP_AT_PC` on the texture-loader entry (`0x8046BBF0`, the function whose log line names each
+`.texture` and its destination) to see whether a second pass over `pc_ga_g_a01.texture` happens after the
+decompress.
+
+
 
 
 
