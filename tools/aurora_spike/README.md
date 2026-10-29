@@ -24,7 +24,7 @@ bytes. It is inert unless the variable is set.
 ## Build
 
 ```powershell
-pwsh tools/aurora_spike/build.ps1            # clones G:\aurora-spike, patches, builds, runs ctest
+pwsh tools/aurora_spike/build.ps1            # clones G:\Program\aurora-spike, patches, builds, runs ctest
 pwsh tools/aurora_spike/build.ps1 -Replay build\recomp\gxcap\gxfifo.tlscap `
      -Out build\recomp\aurora_f3500.ppm
 ```

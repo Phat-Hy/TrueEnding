@@ -9,7 +9,7 @@
 #
 # -Replay needs a capture produced by the runner with TLS_GX_CAPTURE=<dir>.
 param(
-    [string]$Root = 'G:\aurora-spike',
+    [string]$Root = 'G:\Program\aurora-spike',
     [string]$AuroraRef = '505b5eb',
     [switch]$Tests,
     [string]$Replay = '',
