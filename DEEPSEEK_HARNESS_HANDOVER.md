@@ -11817,3 +11817,6 @@ at the top centre is a geometry gap, not the character silhouette.
 **This also confirms the HUD verdict below is not a transition artefact**: at 5500 the run is in settled gameplay
 and still draws no HUD quads. The sword being visible while the body is not is the same asymmetry AP-Q started
 from - the sword's texture is a normal one, the body's five are the baked-transparent ones.
+
+**6. Timing knobs are not usable oracles either.** The idea that our I/O completes earlier than hardware and therefore makes the guest bake during the loading plate is testable with the existing `TLS_IPC_DELAY` (frames, 0..8), and it fails the same way `TLS_NO_FRAME_CLEAR` did: with `TLS_IPC_DELAY=3` the run **never reaches Game** (no `SetNextSequence('Game')` line at all) and `0x92AEAEC0` is *all-zero* at frames 1915/2000/2050 (`nonZero=0`), i.e. worse, not better. So the delay knob cannot be used to move the bake, and the "our load is too fast" idea has no lever to test with. Keep it as a hypothesis, not a plan.
+**Rule this session keeps re-learning:** any A/B that changes the load/UI timing (global copy defer, `TLS_NO_FRAME_CLEAR`, `TLS_IPC_DELAY`) must be *proved to reach `Game@1647`* before its hero measurement means anything - check for the `SetNextSequence('Game')` line first, every time.
