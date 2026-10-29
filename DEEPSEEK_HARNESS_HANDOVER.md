@@ -18,6 +18,55 @@ every run (see AP-P item 9). **Check free RAM before a run too**: this machine c
 runner was launching, after several back-to-back 10-minute runs with per-batch framebuffer readbacks (a probe-free
 1 960-frame run now takes 55 s - use probes only on the frame you need).
 
+### NEXT SESSION - READ THIS FIRST (written at the end of the AP-Q session)
+
+**Where the project is.** The host boots, the title hands over by itself at frame 1647, the engine starts a New Game
+and writes its own save, the tutorial page renders and matches the reference on every measured region, and gameplay
+continues into the Chapter-1 cave - but **the player character is invisible and there is no HUD**, so it is not yet
+"playable" in the sense the last request asked for. `tools/invariant.ps1` is **PASS** at
+`D3329E3565DF4E1087785D618114ABE44E555B2465338336853363E7209AB27E` and the page gate's numbers are intact.
+
+**1. Do not launch the runner blindly - it crashed this machine twice.** Both crashes happened while
+`tls_runner.exe` was in flight (one also threw `System.OutOfMemoryException` when PowerShell launched the exe). Every
+commit survived and the tree was clean both times, but until the cause is known: **check the Windows bugcheck / WER
+entry first** (`Get-WinEvent -FilterHashtable @{LogName='System';
+ProviderName='Microsoft-Windows-WER-SystemErrorReporting'}`), then **one run at a time**, after checking foreign CPU
+load and free RAM. A GPU/driver bugcheck and a bug in this tree look nothing alike, and that is the first fork.
+
+**2. The open thread is one dependency deep.** The character's five model textures (`0x92AEAEC0`, `0x92C05720`,
+`0x92C0FF40`, `0x92C1D8A0`, `0x92B4D4E0`) are **baked once at frame 1910** from a staging buffer in the `0x903xxxxx`
+EFB-copy arena, and our inline copy can only read the *previous* frame - a black loading screen - so the bake
+compresses transparency. With `TLS_DEFER_EFB_COPY=1` the same dump holds real art, but that mode makes the guest call
+`exit(0)` at ~frame 2700 and the run dies. Narrowing the deferral to a copy class does **not** reproduce the fix
+(`TLS_EFB_ORDER=staging`, `=xfb` and `=staging,xfb` all still bake transparency - AP-Q item 4). **The next question
+is: who calls `exit(0)` at ~2700 under correct copy ordering?** The handler now prints `pc`/`sp` and a
+return-address scan of the caller's frame (first three calls), so that is one short run away.
+
+**3. Cheap instruments - this is why the last runs cost minutes instead of hours.**
+* A **1 960-frame probe-free run takes 55 s**. The 8-10 minute runs were slow only because per-batch framebuffer
+  readbacks (`TLS_BATCH_PROBE`, `TLS_BATCH_RECT`) were enabled; put those on the single frame you need, never a whole
+  run.
+* **The bake check is two lines**: `TLS_MEM_DUMP=92AEAEC0,192,1915` with `-Frames 1960` - real art vs
+  `00000000 FFFFFFFF` says immediately whether a change fixed the character.
+* **Pin probes to one counter** with `TLS_PROBE_PRESENT_ONLY=1`, or a per-batch table silently mixes two frames.
+* Switches that matter: `TLS_EFB_ORDER=staging|xfb|all`, `TLS_DEFER_EFB_COPY=1`, `TLS_XF_TEXGEN=1`,
+  `TLS_TEV_RASCHAN=1`, `TLS_TEV_NO_IND=1` - all default off except `TLS_TEV_MULTI`.
+
+**4. Disk hygiene (this session freed 23.7 GB: 43.1 GB -> 19.4 GB).** The bloat was three runaway logs written by
+the stalled `exit(0)` loop: `logs_ap\hero_confirm.log` **11.2 GB**, `exit_trace.log` **7.3 GB**, `hero_defer.log`
+**3.7 GB**. They are gone, with ~1.8 GB of regenerable `build\recomp` dumps and `logs_ap\*.ppm`.
+**`abort()`/`exit()` warnings are now rate-limited** (first 20 calls, then every 10 000th), so that class of log
+cannot fill the disk again. What is large and must stay: `roms\` 7.9 GB (the game image), `orig\` 4.9 GB (extracted
+data), `build\` 4.8 GB (objects + exe), `tools\` 0.7 GB (toolchain), `logs\` 0.5 GB. `logs_ap\` is scratch and
+uncommitted by design - prune it freely, but keep `f1915.log` and `f1915_defer.log` (the AP-Q evidence dumps),
+`probe_present3500.log`, `measure_ind.log` and the `analyse_*.py` / `frame3500_report.py` scripts.
+
+**5. Remaining work, in priority order.** (a) the hero and the HUD - see item 2, and measure the HUD with a pinned
+counter because it has not been measured at all yet; (b) the visual gaps already implemented but default-off:
+`TLS_XF_TEXGEN` (15 of 56 batches name a texture coordinate the host does not generate) and `TLS_TEV_RASCHAN` (9
+stages read XF colour channel 1), both waiting on a same-camera Dolphin reference; (c) the XF light decode, which is
+what makes channel 1 untrustworthy (`light1` decodes with a position of ~4.7e17).
+
 > **THE XF TEXTURE-MATRIX PATH IS IMPLEMENTED AND OFF BY DEFAULT (§5c.46 AP-P).** `TLS_XF_TEXGEN=1` generates GX
 > texture coordinates 2..7 (and, if promoted, 0 and 1) from the XF texture matrices, the STQ projection and the
 > post matrices, following Dolphin's `WriteTexCoordTransforms`. Two facts decide how to use it: the cave's

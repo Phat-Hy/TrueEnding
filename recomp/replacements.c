@@ -3371,7 +3371,14 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
         // abort() / panic() handler (0x80686EA4)
         case 0x80686EA4: {
-            printf("[TLS WARNING] abort() called from LR=0x%08X! Bypassing termination to keep game running.\n", ctx->lr);
+            /* Rate-limited: a guest that loops on abort()/exit() used to write one line per
+             * iteration, which produced an 11 GB log in one run and filled the disk
+             * (handover 5c.46 AP-Q item 8). First 20 calls, then every 10 000th. */
+            static unsigned s_abort_calls = 0;
+            s_abort_calls++;
+            if (s_abort_calls <= 20u || (s_abort_calls % 10000u) == 0u)
+                printf("[TLS WARNING] abort() called from LR=0x%08X! Bypassing termination to keep game running. (call %u)\n",
+                       ctx->lr, s_abort_calls);
             fflush(stdout);
             ctx->pc = ctx->lr;
             return 1;
@@ -3380,8 +3387,11 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         // exit() handler (0x805F8930)
         case 0x805F8930: {
             static int s_exit_reports = 0;
-            printf("[TLS WARNING] exit(%d) called from LR=0x%08X (pc=0x%08X sp=0x%08X)! Bypassing termination to keep game running.\n",
-                   (int)ctx->gpr[3], ctx->lr, ctx->pc, ctx->gpr[1]);
+            static unsigned s_exit_calls = 0;
+            s_exit_calls++;
+            if (s_exit_calls <= 20u || (s_exit_calls % 10000u) == 0u)
+                printf("[TLS WARNING] exit(%d) called from LR=0x%08X (pc=0x%08X sp=0x%08X)! Bypassing termination to keep game running. (call %u)\n",
+                       (int)ctx->gpr[3], ctx->lr, ctx->pc, ctx->gpr[1], s_exit_calls);
             /* WHO called exit? `lr` is already inside the C runtime, so print a
              * return-address scan of the caller's frame: PowerPC does not chain frames,
              * but every function that calls anything stores LR in its own frame, so the
