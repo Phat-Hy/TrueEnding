@@ -2,6 +2,25 @@
 
 ## NEXT SESSION — START HERE
 
+> **THE AURORA SPIKE RAN — read §5c.46 AP-AM (at the end of this file) before anything else.**
+> In one paragraph: aurora builds and runs on this toolchain with **MinGW GCC**, no MSVC
+> (**criterion 1 CLEARED**: 503 targets, `ctest` 424/425, incl. the real EFB-readback GPU tests);
+> a captured GX stream is driven through aurora's FIFO command processor after an adapter of exactly
+> **two register classes plus address canonicalization** (`BP 0x49/0x4A/0x4B/0x4D` ->
+> `GX_AURORA_LOAD_COPY_SRC/_DST/_DEST`, `CP 0xA0..0xAF` -> `GX_AURORA_LOAD_ARRAYBASE`, and MEM1/MEM2
+> at their cached, uncached and MEM2-physical aliases); **criterion 3 CLEARED** — the same guest EFB
+> copy serviced by both layers is byte-comparable, aurora's payload is layout-exact and equals its
+> own EFB; **criterion 2 is the open one**: aurora *records* the cave frame (**26 616 draws,
+> 1.12 M vertices, 102 pipelines**, and the same 27 149 draws with the adapter bypassed) but its EFB
+> readback is **black** while this layer's copy of the same frame is real content (mean byte 157.73
+> vs 63.75). Staging, async pipelines, colour/alpha update, readback timing and the adapter itself
+> are all **ruled out by measurement** (AP-AM 6d). The next step is one comparison, not another
+> switch: dump **one draw's decoded vertex positions** from this layer's `decode_single_vertex` and
+> from aurora's arrays/uniforms for the same draw (AP-AM 6f). Instruments and RPC-free recipe:
+> `tools/aurora_spike/` (`README.md`, `build.ps1`, four patches, `capinfo.py`, `capfilter.py`,
+> `copycmp.py`, `compare.py`); the checkout lives at **`G:\Program\aurora-spike`**.
+
+
 **Tree state.** Clean at the commit on top of the AP-Q copy-ordering work. The history this session added is
 `654cb14` indirect texturing, `bd877ed` the 3D widening, `6a57a92` the AP-O dossier, `850ba86` probe pinning + AP-O
 number corrections, `26b7780` the tree-state line, `9f20ebf` the XF texture-matrix path (AP-P), `7553fa3` the
