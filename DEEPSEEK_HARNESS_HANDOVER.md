@@ -2,18 +2,21 @@
 
 ## NEXT SESSION — START HERE
 
-**Tree state.** Clean at the commit on top of `7553fa3`. The history this session added is `654cb14` indirect
-texturing, `bd877ed` the 3D widening, `6a57a92` the AP-O dossier, `850ba86` probe pinning + AP-O number
-corrections, `26b7780` the tree-state line, `9f20ebf` the XF texture-matrix path (AP-P) and `7553fa3` the
-colorchan work; `git log --oneline -9` shows them all. Only the untracked scratch `logs_ap/` is dirty. Build green
+**Tree state.** Clean at the commit on top of the AP-Q copy-ordering work. The history this session added is
+`654cb14` indirect texturing, `bd877ed` the 3D widening, `6a57a92` the AP-O dossier, `850ba86` probe pinning + AP-O
+number corrections, `26b7780` the tree-state line, `9f20ebf` the XF texture-matrix path (AP-P), `7553fa3` the
+colorchan work and the AP-Q commit; `git log --oneline -10` shows them all. Only the untracked scratch `logs_ap/`
+is dirty. Build green
 (`python tools/recomp_harness.py build-runner`; the generated `build/recomp/gx_shaders_d3d11.inl` needs
 `python tools/compile_shaders.py` after any `tools/compile_shaders.py` edit). `pwsh tools/invariant.ps1` **PASS**
 (`Boot -> Stra -> Titl -> Game`, frame 3500 =
 `D3329E3565DF4E1087785D618114ABE44E555B2465338336853363E7209AB27E` - **re-recorded in §5c.46 AP-O item 5**, and the
 run creates `savedata.dat` = 1 348 992 and `banner.bin` = 29 344 itself). **0 changes to `src/`.** Current state is
-**§5c.46 AP-P** (at the end of this file); §5c.46 AP-O and earlier is history, and what changed since AP-O is noted
-below. **Check for `fifa15` before measuring** - it was running at ~240 % CPU late in this session and moved the
-title hand-over from 1647 to ~700, which invalidates every run (see AP-P item 9).
+**§5c.46 AP-Q** (at the end of this file); everything earlier is history. **Check for `fifa15` before measuring** -
+it was running at ~240 % CPU late in this session and moved the title hand-over from 1647 to ~700, which invalidates
+every run (see AP-P item 9). **Check free RAM before a run too**: this machine crashed once mid-session while the
+runner was launching, after several back-to-back 10-minute runs with per-batch framebuffer readbacks (a probe-free
+1 960-frame run now takes 55 s - use probes only on the frame you need).
 
 > **THE XF TEXTURE-MATRIX PATH IS IMPLEMENTED AND OFF BY DEFAULT (§5c.46 AP-P).** `TLS_XF_TEXGEN=1` generates GX
 > texture coordinates 2..7 (and, if promoted, 0 and 1) from the XF texture matrices, the STQ projection and the
@@ -31,6 +34,16 @@ title hand-over from 1647 to ~700, which invalidates every run (see AP-P item 9)
 > switch on the frame moves by only 0.09/255 - near equivalence, so it stays off until the XF light decode behind
 > channel 1 is trustworthy (frame 3500's `light1` decodes with a position of ~4.7e17). AP-P item 7 records the
 > cbuffer-mirror trap that cost a run, with three `_Static_assert`s now guarding it.
+
+> **THE INVISIBLE HERO IS A COPY-ORDERING DEFECT AND IT IS ONE DEPENDENCY FROM FIXED (§5c.46 AP-Q).** Frame 4300
+> draws the cave and the sword but no character and no HUD. The character's five model textures are **baked** at
+> frame 1910 from a staging buffer, and our inline EFB copy reads the *previous* frame - a black loading screen - so
+> the bake compresses transparency (measured: `00000000 FFFFFFFF` for 32 KB). With stream-order copies
+> (`TLS_DEFER_EFB_COPY=1`) the same dump holds **real art**. But that mode makes the guest call `exit(0)` at frame
+> ~2700, so it cannot be the default yet, and **narrowing it to a copy class does not work**: `TLS_EFB_ORDER=staging`,
+> `=xfb` and `=staging,xfb` all still bake transparency (table in AP-Q item 4). **The next thread is: why does the
+> guest exit at ~2700 under correct copy ordering?** Answer that and the hero, and probably the HUD, follow. Run cost
+> is now 55 s for a 1 960-frame probe-free run - do not put per-batch readback probes on long runs.
 
 > **INDIRECT TEXTURING IS IMPLEMENTED AND THE TEV PATH NOW RUNS 3D BATCHES (§5c.46 AP-O).** The 2D-only gate is
 > gone. GX's indirect stages are tracked (BP 0x06..0x0F, 0x10..0x1F, 0x25..0x27 - every one of those writes used
@@ -11115,4 +11128,76 @@ with `Game@1647`): `AP_P_final_inv.log` (default, `D3329E35...` PASS), `texgen_o
 `raschan2_on_inv.log` (`F9B5FB26...`), and `texgen_page.log` (page numbers exact, 49 batches).
 
 
+
+
+### AP-Q. THE INVISIBLE HERO IS A COPY-ORDERING DEFECT - and the correct ordering still kills the run at frame 2700
+
+**The playable-build investigation reached its root cause and then hit a wall.** Frame 4300 of Chapter-1 gameplay
+renders the cave and the sword but **not the player character** and **no HUD**. The character is invisible because
+its five model textures are baked transparent; the bake is a framebuffer-derived pass; and the correct ordering
+produces real art but makes the guest quit ~800 frames later. Nothing in this section is a behaviour change: the
+copy-ordering infrastructure is per-copy and **off by default** (the invariant still reproduces `D3329E35...`,
+verified after the change).
+
+**1. The hero's textures are baked, once, at frame 1910 - from transparency.** Decoded per batch at frames 3500-4300
+(`TLS_TEV_PROBE`), the model batches `b0..b6` sample five textures that all measure **avg (0,0,0), alpha 0**:
+`0x92B4D4E0`, `0x92AEAEC0`, `0x92C05720`, `0x92C0FF40`, `0x92C1D8A0`. The sword is a different texture and draws,
+which is exactly the picture at frame 4300 (cave + sword, no body). Watching the first word of `0x92AEAEC0` over a
+whole 4 500-frame run (`TLS_WATCH_ADDR`) gives **six** writes, all in frames 1899-1910:
+
+```
+1899  block pc=0x80625640  writes "chnk"/"fixd"   <- the .texture container is loaded there
+1899  block pc=0x804715B4  ...
+1910  block pc=0x800D6CF0  lr=0x800D7168  r3=0x92AEAEC0 (dst)  r4=0x903CD1C0 (src)  -> 0x00000000
+```
+
+and **nothing rewrites it afterwards**. A memory dump at frame 1905 shows the container holding **real CMPR art**
+(`fixd`, `wii text`, format 14, then varied texel blocks); the same dump at frame 1915 shows
+`00000000 FFFFFFFF 00000000 FFFFFFFF ...` for 32 KB - a CMPR-compressed **fully transparent** image, not the loaded
+art. So the 1910 step reads a staging buffer in the `0x903xxxxx` arena and bakes a transparent texture over the
+loaded one.
+
+**2. The staging buffer is fed by EFB copies, and the host copies one frame too early.** With
+`TLS_DEFER_EFB_COPY=1` (replay copies inside the batch loop = hardware's stream order) the *same* dump at 1915 is
+**real image data** (`11111234 11122344 55433333 44333333 ...`, with structure and gradients). Same binary, same
+frame, one variable. That closes the dossier's §5c.45 "single open question": the bake reads a framebuffer capture,
+and the inline path (BP 0x52 -> hook at the command) can only read the *previous* completed frame - which at that
+moment is a black loading screen (frame 1900 measures mean 0.29/255 with ~36 full-screen quads).
+
+**3. The correct ordering is not survivable as a global switch.** With `TLS_DEFER_EFB_COPY=1` the run **stalls at
+frame 2700**: the guest calls `exit(0)` (`[TLS WARNING] exit(0) called from LR=0x800041B4!` repeated forever,
+0 batches, `PC=0x800041B4`), the log stops at frame 2700, and the requested frame-4300 screenshot is never taken. So
+the mode that renders the hero correctly also ends the run - the "composite chain" the 5c.15 note warned about.
+
+**4. Narrowing the deferral to a copy class does NOT reproduce the fix (measured, negative).** At frame 1900 the
+frame issues 11 copies: ten into the `0x903xxxxx`/`0x905xxxxx` render-to-texture arena, one into the linear scanout
+buffer (`dst=0x900037C0`, BP 0x52 bit 14). Deferring:
+
+| scope (`TLS_EFB_ORDER=`) | texture at frame 1915 | run survival |
+|---|---|---|
+| `staging` (arena only) | still transparent (`00000000 FFFFFFFF`) | 2 760 frames, **zero** `exit(0)` |
+| `xfb` (scanout only) | still transparent | (1 960-frame run) |
+| `staging,xfb` (= every copy of that frame) | still transparent | (1 960-frame run) |
+| `TLS_DEFER_EFB_COPY=1` (global, from frame 0) | **real art** | dies at 2 700 |
+
+So the bake depends on the *whole run's* copy ordering, not on a subset of one frame's copies - deferring the same
+set frame 1900 issues is not equivalent to global deferral. That is a real, if unwelcome, result: the surgical fix
+does not exist at the granularity of a copy class.
+
+**5. What was landed anyway (inert by default).** The copy queue now holds **only** the copies that were not
+performed inline, and the D3D11 backend always replays it (before, the queue held every copy and the backend retired
+them all unless the global flag was set). In the default mode nothing is queued and the picture is byte-identical -
+`tools/invariant.ps1` **PASS**, frame 3500 = `D3329E35...`, verified after the change. The per-copy decision reads
+`TLS_EFB_ORDER=staging|xfb|all` (a set) and is documented at `gx_pipeline_process_bp`'s BP 0x52 handler;
+`TLS_DEFER_EFB_COPY=1` is unchanged and still means "everything".
+
+**6. The next step is now precise.** The hero is one dependency away: make stream-order copies the default and find
+why the guest calls `exit(0)` at ~2700 under them. Everything needed to bisect that exists - `TLS_EFB_ORDER` for the
+copy class, `TLS_EFB_COPY_FROM`/`_PROBE` for the copy stream, and frame-gated `TLS_MEM_DUMP=92AEAEC0,192,1915` as a
+two-line check of the bake. Run cost is now small: a 1 960-frame probe-free run takes **55 s** (the 8-10 minute runs
+earlier in this session were slow because per-batch framebuffer readbacks were enabled).
+
+**7. The HUD has NOT been measured yet.** No HUD-shaped batch appears in the frame-4300 inventory, but that
+inventory was taken with the probe firing on both counters (mixed page/cave frames), so it is not evidence either
+way. Re-take it with `TLS_PROBE_PRESENT_ONLY=1` before concluding anything about the HUD.
 

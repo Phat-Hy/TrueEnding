@@ -2680,11 +2680,10 @@ int s_efb_copy_batch_ctx = -1;
 static void d3d11_service_pending_copies(uint32_t* cursor, uint32_t up_to_vertex, int at_batch) {
     s_efb_copy_batch_ctx = at_batch;
     if (!cursor) return;
-    /* Inline mode already performed every copy at its command, so just retire the queue. */
-    if (!gx_pipeline_efb_copy_is_deferred()) {
-        *cursor = gx_pipeline_get_pending_copy_count();
-        return;
-    }
+    /* The queue holds ONLY the copies that were not performed inline (the
+     * `TLS_EFB_ORDER=staging` class, or everything under `TLS_DEFER_EFB_COPY=1`), so it is
+     * always replayed from here. In the default mode nothing is queued and this is a
+     * no-op, which is why the default picture is unchanged (handover 5c.46 AP-Q). */
     static int s_order = -1;
     if (s_order < 0) s_order = getenv("TLS_DRAW_ORDER") ? 1 : 0;
     uint32_t count = gx_pipeline_get_pending_copy_count();

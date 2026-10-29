@@ -1728,13 +1728,51 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
             s_copy_from = f ? atoi(f) : 0;
         }
         s_efb_copy_count++;
+        /* WHICH copies are replayed in stream order (handover 5c.46 AP-Q).
+         *
+         * The hardware performs a GXCopyTex against the framebuffer *as drawn up to that
+         * command*. The host can only do that from inside its batch loop, and switching
+         * the whole pipeline to that mode (`TLS_DEFER_EFB_COPY=1`) is not survivable: it
+         * makes the character-texture bake capture real content (measured - see AP-Q) and
+         * then the guest calls exit(0) around frame 2700, so the run dies.
+         *
+         * `TLS_EFB_ORDER=staging` is the narrow version: only copies whose destination is
+         * one of the render-to-texture staging slots in the 0x90300000..0x90700000 arena
+         * are replayed in stream order, and every other copy keeps the old inline
+         * behaviour. That is the class the character/HUD bakes read back, and it leaves
+         * the title/MENU composite path - the one the global switch breaks - untouched.
+         * Off by default until measured. */
+        bool defer_this = s_efb_copy_deferred;
+        if (!defer_this) {
+            /* TLS_EFB_ORDER is a comma-separated set: `staging` = destinations in the
+             * 0x90300000..0x90700000 render-to-texture arena, `xfb` = copies into the
+             * linear scanout buffer (BP 0x52 bit 14), `all` = everything (same as
+             * TLS_DEFER_EFB_COPY=1). Measured at frame 1900 the bake window issues 10
+             * staging copies and one XFB copy per frame, so the two sets can be tested
+             * separately (handover 5c.46 AP-Q). */
+            static int s_order_set = -1;
+            if (s_order_set < 0) {
+                const char* e = getenv("TLS_EFB_ORDER");
+                s_order_set = 0;
+                if (e) {
+                    if (strstr(e, "staging")) s_order_set |= 1;
+                    if (strstr(e, "xfb")) s_order_set |= 2;
+                    if (strstr(e, "all")) s_order_set |= 3;
+                }
+            }
+            if ((s_order_set & 1) &&
+                s_efb_copy_dst_guest >= 0x90300000u && s_efb_copy_dst_guest < 0x90700000u) {
+                defer_this = true;
+            }
+            if ((s_order_set & 2) && ((val >> 14) & 1u)) defer_this = true;
+        }
         /* The copy is queued, never performed here: doing it during guest execution can
          * only read the *previous* completed frame, which produced the flat-cyan MENU
          * background feedback loop (handover 5c.14). The backend replays the queue inside
          * its batch loop, at the matching vertex mark. If the queue is full the copy is
          * dropped loudly (counted, reported at the next frame start) rather than silently
          * diverted to the old path. */
-        if (s_pending_copy_count < GX_MAX_PENDING_COPIES) {
+        if (defer_this && s_pending_copy_count < GX_MAX_PENDING_COPIES) {
             GxPendingEfbCopy* pc = &s_pending_copies[s_pending_copy_count++];
             pc->dst_guest = s_efb_copy_dst_guest;
             pc->x0 = s_efb_copy_x0;
@@ -1768,8 +1806,8 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
             pc->vertex_mark = s_vertex_count;
             /* Only the deferred replay needs the barrier; splitting batches in the
              * default path would change what the inline copies read. */
-            if (s_efb_copy_deferred) s_batch_barrier = true;
-        } else {
+            if (defer_this) s_batch_barrier = true;
+        } else if (defer_this) {
             s_pending_copy_overflow++;
         }
         /* Default (5c.15): perform the copy right here, exactly as before - it can only
@@ -1778,7 +1816,7 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
          * the half-scale flag: applying it to the inline path changes the default
          * picture (MENU background (119,234,255) -> (255,234,119)) while the composite
          * chain is still unfixed, so it is deliberately left off there. */
-        if (!s_efb_copy_deferred && s_efb_copy_hook) {
+        if (!defer_this && s_efb_copy_hook) {
             /* Pass the real destination format (BP 0x52 bits 3..6, `fmt/2 + (fmt&1)*8`)
              * rather than the raw BP 0x4B byte, which is only the destination address and
              * is therefore always 0. The backend still treats "flag off" as RGBA8, so this
