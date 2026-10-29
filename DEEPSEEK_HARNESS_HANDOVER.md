@@ -12046,3 +12046,36 @@ boundary, so the statement is "none of these six is ever entered", not "no party
 render gate** - there are no members. That is now the leading hypothesis for the missing HUD, and the next probe is
 to find the party count/state in memory (the panel reads member name/level/HP) and confirm it is empty, before
 looking for a draw gate at all.
+
+---
+
+### AP-AC. CORRECTED: in real gameplay the PARTY/ FIELD modules never run, and the field state machine ticks ONCE
+
+**1. Three earlier runs in this round were measured on the TITLE SCREEN and are void.** I set
+`TLS_DUMP_AT_PC` but forgot `TLS_INPUT_SCRIPT` in three consecutive invocations; those runs ended with
+`Seq: Titl` at frame 4320 and produced the "party manager never runs" / "field state machine never runs" numbers.
+The hand-over check (`SetNextSequence('Game')` in the log) is the only thing that caught it. **This is the third
+time this session that a missing input script invalidated a run** - treat `Game@1647` as a precondition of every
+frame-numbered probe, not as a nice-to-have.
+
+**2. The correctly configured measurement** (Game@1647, `Seq: Game` at 4380, cap 120, frames >= 4000):
+
+| PC | module | dispatches |
+|---|---|---|
+| `0x8008E304` | compass/marker HUD driver | **60** |
+| `0x8009E1E4` | HUD element setup (`src/game_hud.c`) | **59** |
+| `0x80368280` | **Chapter-1 field state machine** (`GameTask::Update`) | **1** |
+| `0x8005C594` | `src/game_party.c` | 0 |
+| `0x80084110` | `src/game_field.c` | 0 |
+| `0x80123C7C` | `src/game_player_status.c` | 0 |
+
+So while the cave renders and the character is drawn, **the party, field and player-status modules are never
+entered, and the Chapter-1 state machine is dispatched once rather than once per frame**. The compass/marker
+overlay, by contrast, runs every frame. That asymmetry is the most likely explanation for the missing party panel:
+the field logic that would populate and draw it is not ticking.
+
+**3. Caveat, and the next decisive test.** A function only appears here if it is a dispatch boundary, so
+"dispatched once" may mean the task re-enters it by another route. The test that settles whether the game is
+actually *running* - as opposed to displaying a frozen scene - is to compare two nearby gameplay frames: if
+`TLS_SHOT_FRAMES=5500` and `TLS_SHOT_FRAMES=5520` produce the same hash, the field is frozen and nothing about the
+HUD can be fixed before that; if they differ, the field is animating and the party data path is the target.

@@ -3037,7 +3037,8 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             }
         }
         int hit_pc = 0;
-        for (int i = 0; i < s_npc; i++) { if (s_pc[i] == address) { hit_pc = 1; break; } }
+        u32 hit_pc_val = 0;
+        for (int i = 0; i < s_npc; i++) { if (s_pc[i] == address) { hit_pc = 1; hit_pc_val = s_pc[i]; break; } }
         if (hit_pc && s_n < s_max && (s_minframe < 0 || g_runner_current_frame >= s_minframe)) {
             if (s_reg >= 0) s_addr = ctx->gpr[3 + s_reg];
             { extern unsigned g_efb_copy_seq; extern int g_efb_copy_last_replay;
@@ -3045,11 +3046,11 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
             const u8* base = (const u8*)host_resolve_gx_guest_addr(s_addr);
             printf("[DumpAtPc] pc=0x%08X frame=%d r3=0x%08X r4=0x%08X r5=0x%08X r6=0x%08X "
                    "r7=0x%08X r8=0x%08X r9=0x%08X lr=0x%08X\n",
-                   s_pc, g_runner_current_frame, ctx->gpr[3], ctx->gpr[4], ctx->gpr[5],
+                   hit_pc_val, g_runner_current_frame, ctx->gpr[3], ctx->gpr[4], ctx->gpr[5],
                    ctx->gpr[6], ctx->gpr[7], ctx->gpr[8], ctx->gpr[9], ctx->lr);
             if (base) {
                 char path[160];
-                snprintf(path, sizeof(path), "build/recomp/atpc_%08X_%d_%08X.bin", s_pc, s_n, s_addr);
+                snprintf(path, sizeof(path), "build/recomp/atpc_%08X_%d_%08X.bin", hit_pc_val, s_n, s_addr);
                 FILE* f = fopen(path, "wb");
                 if (f) {
                     fwrite(base, 1, s_len, f);
