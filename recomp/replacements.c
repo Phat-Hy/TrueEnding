@@ -3001,19 +3001,31 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
         static int s_init = 0;
         static u32 s_pc = 0, s_addr = 0, s_len = 0;
         static int s_max = 0, s_n = 0;
+        static int s_reg = -1;   /* addr field given as r3..r9 instead of a literal */
         if (!s_init) {
             s_init = 1;
             const char* e = getenv("TLS_DUMP_AT_PC");
             if (e) {
-                unsigned pc = 0, addr = 0, len = 0;
+                char addrtok[16] = {0};
+                unsigned pc = 0, len = 0;
                 int mx = 1;
-                if (sscanf(e, "%x:%x:%x:%d", &pc, &addr, &len, &mx) >= 3 && len && len <= 65536) {
-                    s_pc = pc; s_addr = addr; s_len = len;
+                /* Accept <pc>:r3:<len>:<max> as well as <pc>:<hexaddr>:<len>:<max> - the
+                 * interesting buffer is usually the callee's argument, and its address is
+                 * only known at call time (handover 5c.46 AP-S: the hero's RGBA source is
+                 * whatever fn_800D6E48 is handed). */
+                if (sscanf(e, "%x:%15[^:]:%x:%d", &pc, addrtok, &len, &mx) >= 3 && len && len <= 65536) {
+                    s_pc = pc; s_len = len;
                     s_max = (mx > 0) ? mx : 1;
+                    if (addrtok[0] == 'r' && addrtok[1] >= '3' && addrtok[1] <= '9' && !addrtok[2]) {
+                        s_reg = addrtok[1] - '3';
+                    } else {
+                        s_addr = (u32)strtoul(addrtok, NULL, 16);
+                    }
                 }
             }
         }
         if (s_pc && address == s_pc && s_n < s_max) {
+            if (s_reg >= 0) s_addr = ctx->gpr[3 + s_reg];
             const u8* base = (const u8*)host_resolve_gx_guest_addr(s_addr);
             printf("[DumpAtPc] pc=0x%08X frame=%d r3=0x%08X r4=0x%08X r5=0x%08X r6=0x%08X "
                    "r7=0x%08X r8=0x%08X r9=0x%08X lr=0x%08X\n",

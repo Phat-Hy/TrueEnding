@@ -11440,3 +11440,72 @@ encoder saw as blank.
   only. A whole-run inventory needs `TLS_EFB_COPY_PROBE=1 TLS_EFB_COPY_MAX=<n>`, and the *extent* of each copy
   then has to be recomputed from its `dstw/geodst/pitch/realfmt` fields - which is how the "no copy covers
   `0x903CD1C0`" result in item 3 of AP-R was double-checked (it holds: 29 169 copies, none covers it).
+
+---
+
+### AP-T. THE HERO'S TEXTURE IS BUILT FROM AN ALL-ZERO STAGING IMAGE - the pipeline is now named end to end
+
+**1. The full chain, with addresses, from one instrument.** `TLS_DUMP_AT_PC` now accepts a register as its
+address field (`<pc>:r3:<len>:<max>`), which is what made this readable in one run. The wrapper is
+`fn_800D6E48(src_rgba, dst_texture, w, h)`; its decompiled body (`src/game_occ.c`) shows it allocating the temp
+and CMPR buffers with `fn_80615E00(w,h,6,0)` and `fn_80615E00(w,h,0xE,0)`, byte-rotating the source
+(`(b0,b1,b2,b3) -> (b1,b2,b3,b0)`), calling `fn_8006945C(src,w,h,dst_cmpr)` - the CMPR encode - and finally
+`fn_800D6BE0(dst_texture, cmpr, w, h)` - the swizzle from AP-S. Measured calls:
+
+| frame | `src_rgba` (r3) | `dst_texture` (r4) | w x h |
+|---|---|---|---|
+| 1909 | `0x90536FE0` | **`0x92AEAEC0`** | 256 x 256 |
+| 1910 | `0x90576FE0` | `0x92AF2EC0` | 128 x 128 |
+| 1910 | `0x90586FE0` | `0x92AF4EC0` | 64 x 64 |
+
+and it **repeats** later in the load (frames 1952-1959) with the same three sources into further destinations
+(`0x92C42580`, `0x92C70740`, `0x92B6D6E0`, ...), i.e. the five model textures are all built by this one pipeline
+from the same three staging buffers.
+
+**2. The staging image is ZERO at every conversion.** Dumping `r3` itself at each call - all 41 conversions of
+the run - gives **`nonZero=0` in the first 16 KB** for 40 of them (the 41st, `0x90586FE0` at frame ~1957, is a
+real image with 181 distinct byte values):
+
+```
+atpc_800D6E48_18_90536FE0.bin   nonZero=0  distinct=1  first16=00000000...
+atpc_800D6E48_35_90586FE0.bin   nonZero=5265 distinct=181
+```
+
+A zero RGBA image is black **with alpha 0**, and this encoder emits exactly the transparent CMPR block
+`00000000 FFFFFFFF` for it - which is the byte pattern the hero's five textures measure at frames 3500-4300.
+**So the invisible hero is one link: the RGBA staging buffer that the CMPR encode reads is all-zero at the moment
+it is read.**
+
+**3. The staging buffer IS a copy destination, so the question is one of ordering or of write address.** The same
+three buffers are written by the EFB copy path: `0x90536FE0` receives **3 041 copies in the run, the first at
+frame 167**, `0x90576FE0`/`0x90586FE0` five each from frame 1835 - and the frame-1910 copies into them sample
+`avg=(47,62,76) alpha 255`, i.e. real opaque content. Yet the conversion at frame 1909 reads zeros from the same
+address, and the two agree on the address (`[EfbCopy] ... dst=0x90536FE0` vs the conversion's `r3`). That leaves
+exactly two candidate explanations, and they are separable:
+* **(a) the write lands but is cleared before the read** - something zeroes the allocation between the copy and
+  the conversion (the wrapper does issue a `memset` of its *temp* buffer, so a similar clear of the staging image
+  is the thing to look for); or
+* **(b) the write lands somewhere else.** The encode reads the buffer **linearly** (`lbz 0x0/0x1/0x2/0x3(r6)`,
+  four consecutive bytes per texel), while the copy path writes it **4x4-tiled** - if those two disagree the
+  guest reads outside the written region, and for a 256x256 destination the tiled extent of a 640x448 copy
+  (`0x23700` bytes) never reaches the end of the `0x40000`-byte image.
+
+**4. The next probe, in one run.** `TLS_MEM_DUMP_BIN=90536FE0,4000,1907:1908:1909:1910` (len is HEX) plus
+`TLS_DUMP_AT_PC=800D6E48:r3:4000:200` separates the two, and it has already been run once:
+
+| sample point | `0x90536FE0` first 16 KB |
+|---|---|
+| frame boundary 1907 / 1908 / 1909 | `nonZero=8192`, **2 distinct byte values** - a flat two-tone pattern, not an image |
+| **the conversion at frame 1909** | `nonZero=0` (all zero) |
+| frame boundary 1910 | `nonZero=0` |
+
+So within frame 1909 the conversion reads **zeros**, and the boundary afterwards shows a two-tone fill: the
+writes that fill this buffer land **after** the conversion, and what they leave is not the `(47,62,76)` image the
+copy sampler reads from the same copy. That is candidate (b) - a write-address or layout disagreement - and it
+means the copy's own output is not visible at the bytes the guest later reads.
+**A negative result to save a run: `TLS_EFB_LINEAR=1` does not fix it** (the 1915 texture is then all-zero
+instead of `00000000 FFFFFFFF`, and the title hands over at 1646 instead of 1647), so forcing linear writes is
+not the A/B to pursue. The next useful probe is the copy wrapper itself
+(`TLS_DUMP_AT_PC=80615560:r3:<len>:<n>` to catch the destination pointer it is handed) compared against what the
+guest's linear read expects.
+
