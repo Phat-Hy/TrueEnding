@@ -12671,25 +12671,25 @@ every executable linked with MinGW GCC 16.2.0** (`tools/w64devkit`), `cmake 4.4.
 also from w64devkit. There is no MSVC C++ compiler on this machine (`vswhere` reports
 `G:\MS Studio` but `VC\Tools\MSVC` does not exist, and the session is not admin), so "MSVC DLL
 behind a C ABI" was not the route taken — a **GCC C++ build of the whole library** was, and it
-works. `ctest -j 8` on that build: **423/425 passed in 16.2 s**, and the two failures are not
-toolchain-shaped:
-
-* `IoTest.CardFileIoDelegatesExactOffsetOperations` — a file-open assertion inside the test's own
-  temporary path handling (`io_test.cpp:126`), independent of GX;
-* `GfxRecordingTest.ReplacementRetainsCopiedPassesAndDiscardsContinuations` — a pass-graph
-  expectation. Both are excluded from any claim below; everything GX-relevant passes, including
+works. `ctest -j 8` on that build: **424/425 passed in 10 s**, with a single failure that is not
+toolchain-shaped — `GfxRecordingTest.ReplacementRetainsCopiedPassesAndDiscardsContinuations`, a
+pass-graph expectation. (An earlier run of the same tree also failed
+`IoTest.CardFileIoDelegatesExactOffsetOperations` on a temporary-path open; it passes from the new
+location, so that one was environment, not code.) The failure is excluded from every claim below;
+everything GX-relevant passes, including
   **`ReadbackGpuTest.*` (EFB gather + copy-pack shader tests that create a real Dawn device and
   run WGSL compute), which is the strongest single piece of evidence that the MSVC-built
   `webgpu_dawn.dll` is fully usable from a MinGW binary.**
 
-Four source changes were needed, all in `tools/aurora_spike/patches/` and all documented in place:
+Three source changes were needed, all in `tools/aurora_spike/patches/` and all documented in place
+(a fourth — the staging sizes — was used to probe item 5's budget and then **reverted**; see 6b):
 
 | patch | why |
 |---|---|
 | `0001-mingw-dawn-native-instance-descriptor-optional` | `dawn::native::DawnInstanceDescriptor` is a **C++ class inside the prebuilt DLL**; its constructor is MSVC-mangled and cannot be linked by GCC. Replaced with the equivalent plain `wgpu::InstanceDescriptor` + `DawnTogglesDescriptor` chain (same toggles). 5 lines, no behaviour that matters for rendering. |
 | `0002-mingw-gnu-ld-link-groups` | aurora applies `$<LINK_GROUP:RESCAN>` only when `CMAKE_SYSTEM_NAME STREQUAL Linux`; GNU ld on Windows needs it too because `aurora_core` and `aurora_gx` reference each other. 4 one-line conditions. |
 | `0003-loud-staging-buffer-overflow` | a fixed-size staging-buffer overflow aborts **without going through the log callback**, i.e. silently in a release build. One `fprintf`. This is the project's own "loud failures" lesson and it is what produced item 5's numbers. |
-| `0004-staging-sizes-for-a-31k-draw-frame` | the staging buffer sizes (see item 5). |
+| ~~`0004-staging-sizes`~~ | **reverted.** Raising the planes let item 5's budget be probed, but with them raised aurora's own null-backend tests fail (`WebGPU error 3: Out of memory ... CreateBuffer("Staging Buffer 1")`), and raising them does not clear the wall anyway (6b: 128 -> 129 MiB, 176 -> 177, 192 -> 193). |
 
 Two environment details that cost time and should be in any future attempt: `w64devkit`'s newer
 `sdkddkver.h` enables abseil/cctz's WinRT path, which does not compile with MinGW — pin
@@ -12762,6 +12762,7 @@ overflow is an `abort()`). Measured, by running it:
 | 8 MiB (aurora default) | abort on the first heavy frame |
 | 48 MiB | `need 67 108 864 bytes, capacity 50 331 648` (= +16 MiB) |
 | 128 MiB | `need 150 994 944 bytes, capacity 134 217 728` (= +16 MiB again) |
+| 192 MiB (planes rebalanced to 236 MiB total) | `need 202 375 168 bytes, capacity 201 326 592` (6b) |
 
 So one frame needs **> 144 MiB in the storage plane alone**, in +16 MiB steps, and the whole
 staging buffer is a single buffer whose WebGPU `maxBufferSize` default is **256 MiB**
