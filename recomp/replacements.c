@@ -3379,8 +3379,32 @@ int dolrecomp_dispatch_replacement(CPUState* ctx, u32 address) {
 
         // exit() handler (0x805F8930)
         case 0x805F8930: {
-            printf("[TLS WARNING] exit(%d) called from LR=0x%08X! Bypassing termination to keep game running.\n",
-                   (int)ctx->gpr[3], ctx->lr);
+            static int s_exit_reports = 0;
+            printf("[TLS WARNING] exit(%d) called from LR=0x%08X (pc=0x%08X sp=0x%08X)! Bypassing termination to keep game running.\n",
+                   (int)ctx->gpr[3], ctx->lr, ctx->pc, ctx->gpr[1]);
+            /* WHO called exit? `lr` is already inside the C runtime, so print a
+             * return-address scan of the caller's frame: PowerPC does not chain frames,
+             * but every function that calls anything stores LR in its own frame, so the
+             * words just above sp are usually a recent call chain. Only words that land in
+             * the code range are printed, which is enough to name the caller. Added for
+             * 5c.46 AP-Q: under stream-order EFB copies the guest calls exit(0) at ~2700
+             * and the run dies, and this is how the caller gets identified. */
+            if (s_exit_reports < 3) {
+                s_exit_reports++;
+                const uint8_t* base = (const uint8_t*)host_resolve_gx_guest_addr(ctx->gpr[1]);
+                if (base) {
+                    printf("[TLS EXIT] return-address scan above sp=0x%08X:\n", ctx->gpr[1]);
+                    for (int i = 0; i < 128; i++) {
+                        const uint8_t* b = base + i * 4;
+                        uint32_t v = ((uint32_t)b[0] << 24) | ((uint32_t)b[1] << 16) |
+                                     ((uint32_t)b[2] << 8) | (uint32_t)b[3];
+                        if (v >= 0x80000000u && v < 0x81800000u) {
+                            printf("[TLS EXIT]   sp+%3d = 0x%08X\n", i * 4, v);
+                        }
+                    }
+                    fflush(stdout);
+                }
+            }
             fflush(stdout);
             ctx->pc = ctx->lr;
             return 1;

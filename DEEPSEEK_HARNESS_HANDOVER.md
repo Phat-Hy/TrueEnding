@@ -11201,3 +11201,24 @@ earlier in this session were slow because per-batch framebuffer readbacks were e
 inventory was taken with the probe firing on both counters (mixed page/cave frames), so it is not evidence either
 way. Re-take it with `TLS_PROBE_PRESENT_ONLY=1` before concluding anything about the HUD.
 
+
+**8. STOP - the runner crashed this machine twice (read this before running it again).** Two full system crashes
+happened in this session, both while `tls_runner.exe` was in flight on a 24 GB machine with 14-16 GB free (the
+first also produced a `System.OutOfMemoryException` when PowerShell launched the exe). No crash happened during a
+build, a probe-free short run, or any `git` operation, and none of them left a damaged file - the repository was
+clean and every commit intact after both. Nothing here proves the runner caused them; nothing here rules it out
+either, and the honest reading is that repeated 8-10 minute windowed runs that stream 60-100 MB vertex buffers and
+hundreds of EFB copies per second through the D3D11 backend are a risk on this box, plausibly at the driver level
+(an OS-level crash, not a guest write, is what a bad draw / oversized buffer / GPU timeout looks like).
+
+**Rules for the next session, in order:**
+1. **One run at a time, and never back-to-back** - check `Get-Process | Sort-Object CPU` for a foreign load, check
+   free RAM (`Get-CimInstance Win32_OperatingSystem`), then run, then read, then stop.
+2. **Prefer short runs.** A 1 960-frame probe-free run takes **55 s**. The 8-10 minute runs earlier in this session
+   were slow only because per-batch framebuffer readback probes (`TLS_BATCH_PROBE`/`TLS_BATCH_RECT`) were enabled -
+   use those on the single frame you need, never for a whole run.
+3. **The bake check needs no long run**: `TLS_MEM_DUMP=92AEAEC0,192,1915` with `-Frames 1960` answers "is the hero's
+   texture real art or transparency" in under a minute.
+4. If a crash recurs, capture `build\recomp\tls_runner.exe`'s Windows event-log entry (`Get-WinEvent -FilterHashtable
+   @{LogName='System'; ProviderName='Microsoft-Windows-WER-SystemErrorReporting'}` or the bugcheck code) before
+   rerunning - a bugcheck code would separate a GPU/driver fault from anything in this tree.
