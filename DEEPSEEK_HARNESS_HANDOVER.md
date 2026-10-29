@@ -12004,3 +12004,35 @@ function that iterates them and emits the 2D draw, and check the visibility fiel
 (initialised to 0 by the constructor) and `+0x40` (`-1`). Note `tools\dol_xref.py` finds **no static reference**
 to `0x80898A70` and `tools\find_xref.py` returns nothing for it either, so that pointer is formed at runtime and
 the caller's `lr` is the way in.
+
+---
+
+### AP-AB. What the hero fix did and did not settle; the HUD chain I traced is the COMPASS, not the party panel
+
+**1. The bake is real at 1915 but the arena is zeroed again soon after, so only the rendered frame is ground truth.**
+Measured in one run (clean environment, the promoted defaults):
+
+| frame | `0x92AEAEC0` 256x256 | `0x92B4D4E0` 128x256 | `0x92C05720` 256x256 | `0x92C0FF40` |
+|---|---|---|---|---|
+| 1915 | `nonZero=7798` **distinct=106** | `nonZero=4429` distinct=16 | (not loaded yet) | - |
+| 1950 | `nonZero=0` | `nonZero=0` | `nonZero=0` | `nonZero=0` |
+
+So the fix does what the objective asks at the bake (`106` distinct CMPR values instead of `2`), and the arena is
+then **cleared and re-populated later in the load** - which also explains why frame-numbered dumps of these
+addresses disagree with each other so easily (AP-R item 2, AP-Y item 3). The honest ground truth for "is the
+character visible" is the rendered frame: `docs/evidence/host_5500_hero_visible_apZ.png` shows the character's head
+in the cave where the pre-fix capture had no body at all.
+
+**2. The HUD chain `fn_8008E304 -> fn_8008E818 -> fn_8009E1E4` is the COMPASS/MARKER HUD.** All three run in
+gameplay (`TLS_DUMP_AT_PC` with the min-frame field: `fn_8008E304` >= 24 dispatches at frame 4000 with
+`r3=0x811625C0 r4=0x80D22FE0 r5=0x80898DC8 ...`), the mode field it gates on (`+0x2F8`) reads 19/40/0 rather than
+the `==10` skip value, and the function it then calls, `fn_80091A90`, is in **`src/game_compass.c`**. So this is
+the compass/marker overlay, **not** the party panel the reference shows. Reading `0x80898A70` (the pointer one
+call site passes to `fn_8009E1E4`) gives the same 242/512 non-zero matrix at frames 4000, 4300 and 5000, i.e. a
+transform, not a per-frame element list.
+
+**3. So the party panel is a third HUD subsystem, still unnamed.** `src/game_hud.c` only *sets up* elements (no GX
+writes in the whole file); `game_marker.c` and `game_compass.c` are the marker/compass consumers. The party panel
+(DAGRAN/SYRENNE with HP bars) must be drawn by whatever consumes the party members' state, and the next probe is
+to find the module that walks the party - the cheapest route is to search `src/` for the modules that reference
+the member structs the panel displays (names, level, HP) rather than for more address-level evidence.
