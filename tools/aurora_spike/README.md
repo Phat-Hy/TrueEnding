@@ -162,19 +162,21 @@ What is then left is the **corner chain's own content**: an 80x56 RGBA8 EFB copy
 **0.1 luma / 95.7 % zero texels** over the 17 263 `80x56_6` dumps in Dolphin's corpus, while the layer's is
 byte-255 - a TEV/combiner-class gap, bounded with its next command in AP-AQ item 8.
 
-## Aurora's own copies do not reach guest memory (AP-AQ item 11) - read this before trusting a replay
+## Aurora keeps EFB copies on the GPU, never in guest RAM (AP-AQ item 11)
 
-The harness passes `mem1Size = mem2Size = 0` to aurora ("our own mapping is authoritative"), but aurora's
-`aurora.h` contract is that those sizes are the guest memory **aurora allocates** (and that it is *not* at
-0x80000000/0x90000000). Consequence, measured with `--ram-out`/`--ram-poison`: after a replay that services the
-game's copy at cmd 50049 (and after the harness's own `--probe-copy`), the destination range is **still 100 %
-0xCD** - nothing was written - while the readback payload for the same copy *is* delivered (116.14). So:
+`copy_tex` (`lib/dolphin/gx/GXFrameBuffer.cpp`) resolves a render texture keyed by the destination pointer
+(`texture::resolve_copy_texture`) and `resolve_sampled_textures` binds it whenever a draw samples a texobj whose
+`data` pointer equals that destination - so the sampling path sees the copy, while RAM never does. Measured with
+`--ram-out`/`--ram-poison`: after a replay that services the game's copy at cmd 50049, 0x905C3000 in RAM is
+**still 100 % 0xCD** (and so is the harness's own `--probe-copy` destination, whose readback payload is meanwhile
+delivered: 116.14); and poisoning 0x9038D1C0 to 0xCD leaves the **picture byte-identical**, so the draws really do
+sample the shadow texture. Consequences:
 
-* a replay's draws that sample an EFB copy sample the **capture's** bytes, which are the **layer's** output;
-* "aurora's copy reads back 1.9x brighter" was a comparison against the layer's copy content, not an aurora
-  copy defect (AP-AP item 6 is thereby dissolved, not answered);
-* criterion 3 holds for the readback API only. Giving aurora the guest memory (or writing each readback payload
-  into the harness mapping) is the top migration item; the poison command is in AP-AQ item 11.
+* aurora's tail numbers are real measurements (its +0.8 % across the eight draws matches the Dolphin corpus,
+  where the guest's 80x56 copy is a dark corner glow);
+* the harness passing `mem1Size = mem2Size = 0` is fine for *rendering* but means any guest code that reads a
+  staging copy as raw memory (CPU readback, DMA, a memcpy uploader) would see stale bytes;
+* AP-AP item 6's "aurora's copy is 1.9x brighter" is still open, but it is a conversion/sampling question now.
 
 The new instrument: `--ram-out <addr>:<size>:<file>` dumps a guest range after the replay, `--ram-poison` fills it
 with `0xCD` before the replay so "written" and "already in the capture" cannot be confused. Do not parse the

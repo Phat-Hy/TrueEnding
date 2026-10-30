@@ -23,16 +23,16 @@
 > content** (the additive pass still adds ~85 mean where hardware's 80x56 copy is a median of 0.1 luma over
 > 17 263 Dolphin dumps) - that is the GX-TEV class of defect Aurora fixes, bounded in AP-AQ item 8.
 >
-> **AP-AQ item 11 is a migration finding and outranks the layer work: aurora's EFB copies never reach guest
-> memory.** The harness sets `mem1Size = mem2Size = 0` ("our own mapping is authoritative") while aurora's own
-> header says those sizes are the guest memory aurora allocates (and that it is *not* at 0x80000000/0x90000000).
-> Measured with a new poison control (`--ram-out <addr>:<size>:<file> --ram-poison`): after a replay that services
-> the game's copy at cmd 50049, 0x905C3000 is **100 % 0xCD** - the same as before the copy - and so is the
-> harness's *own* probe copy's destination 0x90001000, whose readback payload is meanwhile delivered (116.14).
-> So criterion 3 holds for the **readback API** only: a replay's draws that sample an EFB copy sample the
-> **capture's** bytes (the layer's), and "aurora's copy is 1.9x brighter" was never an aurora copy measurement.
-> Giving aurora the guest memory (or adding the writeback into the harness mapping) is the top migration item;
-> the exact next command is in AP-AQ item 11.
+> **AP-AQ item 11 is a migration finding: aurora's EFB copies live as GPU-side shadow textures and never touch
+> guest RAM.** `copy_tex` resolves a render texture keyed by the destination pointer and `resolve_sampled_textures`
+> binds it when a draw samples a texobj with that `data` pointer; `evict_copy_texture` shows the lifetime. Measured
+> both ways with a new poison control (`--ram-out <addr>:<size>:<file> --ram-poison`): after a replay that services
+> the game's copy at cmd 50049, 0x905C3000 in RAM is **100 % 0xCD** (nothing wrote it, the harness's own probe
+> copy included) - and poisoning 0x9038D1C0 to 0xCD leaves the **picture byte-identical** (probe copy 116.14 both
+> ways), so the draws sample aurora's shadow copy, not RAM. So aurora's tail numbers stand as real measurements
+> (its +0.8 % across the eight draws agrees with the Dolphin corpus: the guest's 80x56 copy is a dark corner
+> glow), while the *hazard* is any guest code that reads a staging copy as raw memory. AP-AP item 6's "1.9x" is
+> still open but is now a conversion/sampling question, not a missing copy; the next command is in item 11.
 
 > **READ §5c.46 AP-AP AND ITS ADDENDUM** for the measurements AP-AQ builds on (and, in A1/A2, for the experiment
 > that AP-AQ shows was inert). What still stands from AP-AP: the tail's structure, the copy register decode, the
@@ -14411,7 +14411,8 @@ build\recomp\tls_runner.exe --window --minimized --frames 3400
 | 7 | no-op rebuild | `build\recomp\tls_runner.exe` 107.75 MB, 459 chunks / 470 objects, 1.2 s |
 | 8 | aurora replay to `--max-cmds 50049`, `--ram-out 0x905C3000:1146880` (no poison) | 100 % byte-255 - which is the **capture's** bytes, not aurora's (see row 10) |
 | 9 | same, `--max-cmds 50045` (before the copy) | identical 100 % byte-255: the dump reads the capture, so it cannot answer "did aurora write here" |
-| 10 | rows 8/9 with `--ram-poison` (0xCD), plus the 80x56 destination and the harness's own probe destination | **all four stay 100 % 0xCD** (mean 205.00, 0 bytes 255) while the probe copy's readback payload is 116.14 -> **aurora's copies never write guest memory** (item 11) |
+| 10 | rows 8/9 with `--ram-poison` (0xCD), plus the 80x56 destination and the harness's own probe destination | **all four stay 100 % 0xCD** (mean 205.00, 0 bytes 255) while the probe copy's readback payload is 116.14 -> **aurora's copies never write guest RAM** (item 11) |
+| 11 | same replay, `0x9038D1C0` poisoned to 0xCD, compared with the plain replay | probe copy **116.14 both times** -> the draws sample aurora's **shadow** copy, not RAM: the RAM result above is aurora's model, not a broken copy (corrects row 10's first reading) |
 
 **Two traps, both cost nothing this time because they were written down first:** `TLS_BATCH_PROBE` matches the
 **present** counter *or* the guest frame, so a frame-gated probe can fire twice with different state (the log's
@@ -14423,15 +14424,25 @@ comparison images were first written to `logs_ap/`. The session's policy was wid
 through and the two PNGs were then copied into `docs/evidence/` under the names used above - i.e. the ACL, not the
 directory, was the obstacle, and a session that needs to add evidence there should check the token first.
 
-**11. The Aurora side: its EFB copies never reach guest memory at all - measured with a poison control, and it
-re-scopes AP-AP item 6.** AP-AP could not decode why "aurora's 640x448 EFB copy reads back 1.9x brighter than the
-frame it copied". The answer is that **no aurora copy writes its destination into the memory the guest samples**.
-The harness maps the capture's MEM1/MEM2 planes at the guest's own addresses and tells aurora to allocate
-**nothing** (`config.mem1Size = 0; config.mem2Size = 0; /* our own mapping is authoritative */`), while aurora's
-own contract is the opposite - `aurora.h`: *"The size of the GameCube's main memory... Note that it will not be
-allocated at the exact 0x80000000 address... This can be set to 0 to disable allocating this region"*. With no
-aurora-owned region there is nowhere for `GXCopyTex` to write back to, so the copy exists only as the readback
-payload `capture_copies`/`get` delivers.
+**11. The Aurora side: its EFB copies are GPU-side shadow textures that never touch guest memory - by design, and
+the sampling intercept works (measured under a poison); the real hazard is anything that reads a copy destination
+as raw memory.** Aurora's model is not "copy into RAM": `copy_tex` (lib/dolphin/gx/GXFrameBuffer.cpp) resolves a
+**render texture keyed by the destination pointer** (`texture::resolve_copy_texture`) and draws the EFB region into
+it, and `resolve_sampled_textures` (lib/gx/texture.cpp) then binds that shadow texture whenever a draw samples a
+texobj whose `data` pointer equals a copy destination. Guest memory is never written. Two independent
+measurements confirm both halves of that sentence:
+
+* **RAM is not written.** The harness maps the capture's MEM1/MEM2 at the guest's own addresses and tells aurora to
+  allocate nothing (`config.mem1Size = 0; config.mem2Size = 0; /* our own mapping is authoritative */`); aurora's
+  own header says those sizes are the guest memory *it* allocates and that it is not at 0x80000000/0x90000000, so
+  the copy has nowhere in RAM to land - and `evict_copy_texture` shows the model: copies live in
+  `g_gxState.copyTextures`, evicted per frame.
+* **Sampling is intercepted anyway, so the picture does not depend on RAM.** Same replay, same command budget
+  (`--max-cmds 51345 --probe-copy`), once plain and once with `0x9038D1C0` **poisoned to 0xCD**: the probe copy's
+  payload is **116.14 in both runs, byte for byte the same picture**, while the destination in RAM stays 100 % 0xCD
+  (item 11's first table). A draw that sampled RAM would have gone grey; it did not. The first draft of this item
+  concluded from the RAM result alone that "aurora is not a copy reference" - **that was wrong and this is the
+  correction**: the copy content is real, it is just kept on the GPU instead of in RAM.
 
 Measured with a new instrument, `--ram-out <addr>:<size>:<file>` (+ `--ram-poison`), which dumps a guest range
 after the replay and, with the poison, fills it with `0xCD` first so "written" and "already in the capture" cannot
@@ -14444,35 +14455,33 @@ be confused. One replay per row, `--start-at 1 --stop-after 7`, 10 s each:
 | `--max-cmds 51345`, full frame | 0x9038D1C0, 17 920 B | **mean 205.00, still 100 % 0xCD** |
 | `--max-cmds 51345 --probe-copy` (the harness's OWN probe copy, dst 0x90001000) | 0x90001000, 1 146 880 B | **mean 205.00, still 100 % 0xCD** - while the readback payload of that same copy is **116.14** |
 
-So the poison control separates the two paths cleanly: **the readback API works (payload 116.14 for the probe copy,
-the same 116.14 AP-AP measured for the full frame) and the guest-memory write does not happen for any copy, the
-harness's own probe included.** Two consequences, both of which change how the earlier numbers must be read:
+What follows for the numbers already recorded:
 
-* **AP-AP item 6's "aurora's copy reads back 1.9x brighter" is not an aurora copy defect.** The draw that samples
-  the copy samples the **capture's** bytes for that destination - i.e. the *layer's* output, because the capture
-  is a snapshot of the layer's guest memory. The 1.9x is a comparison between aurora's EFB and the layer's copy
-  content, and the layer's copy content is exactly what AP-AQ items 1-2 show to be saturated. The question
-  "which side gains 1.9x" is therefore **dissolved**, not answered by aurora.
-* **Aurora's "+0.8 % across the eight draws" and its whole tail are not a copy-content reference either**, for the
-  same reason. What survives as a like-for-like aurora measurement is the **pre-tail** frame (before the first
-  copy of the frame) and every frame whose draws sample no EFB-copy destination.
+* **Aurora's "+0.8 % across the eight draws" stands**: its tail samples aurora's own shadow copies, which is the
+  hardware-like behaviour (and it agrees with the Dolphin corpus, item 5: the guest's 80x56 copy is a dark
+  corner glow). It also means AP-AP's "+0.8 %" and the layer's +162 are a genuine divergence, not an artefact.
+* **AP-AP item 6's "aurora's copy reads back 1.9x brighter" is still open, but it is no longer about the copy
+  reaching RAM.** The copy exists (as a shadow texture), so the 1.9x is a *conversion/sampling* question between
+  aurora's EFB at 50045 (49.54, 50.47, 47.19), the copy taken at 50049, and the EFB at 50127
+  (94.30, 101.69, 85.42). `copy_tex` allocates `new_conv_texture` when `needs_conversion(key.format)` and
+  `new_render_texture(..., GX_TF_RGBA8, ...)` otherwise; 50049's real format is RGBA8 (6), so no conversion is
+  requested - which points at the *draw* that samples the shadow (its SRCALPHA/ONE over an EFB that
+  `clear=1` has just cleared to the clear colour) rather than at the copy. That is the next measurement, and it is
+  cheap: `--probe-copy` at 50039 / 50049 / 50127 on the same replay.
+* **The migration hazard is narrower and real: any guest code that reads a copy destination as *raw memory***
+  (a CPU readback, a DMA, an uploader that memcpy's the staging arena) sees stale bytes under aurora, because the
+  data only exists in `g_gxState.copyTextures`. The GX sampling path - which is how this game consumes every
+  staging copy in the frames measured here - is handled.
 
-**This is now the top item for the migration, not for the layer.** Criterion 3 as recorded ("service one EFB copy
-through `capture_copies`/`get` and verify the guest samples the same bytes") is satisfied only for the *readback
-payload*; the guest-visible bytes are never written. The fix is one of two integrations, both small and both
-testable in one replay: give aurora the guest memory (`config.mem1Size = 64 MiB`, `mem2Size = 64 MiB`, seed it
-from the capture, and route the adapter's texture/array reads through aurora's pointers - they are *not* at
-0x80000000/0x90000000, per aurora's own header), or keep the harness mapping and add the writeback step that
-copies each readback payload into the mapped destination. Exact next command, once either is in:
-
-```powershell
-# poison 0x905C3000, replay to the game's copy at 50049, and require bytes that are NOT 0xCD
-G:\Program\aurora-spike\build2\tls_gx_replay.exe build\recomp\gxcap\ao3303\gxfifo.tlscap out.ppm `
-    --start-at 1 --stop-after 7 --max-cmds 50049 `
-    --ram-out 0x905C3000:1146880:copy.bin --ram-poison
-# pass = the dump is no longer 100 % 0xCD, and its de-tiled 640x448 RGBA8 mean matches
-#        --probe-copy's payload for the same command budget
-```
+**What this means for criterion 3 and for the migration.** Criterion 3 as recorded ("service one EFB copy through
+`capture_copies`/`get` and verify the guest samples the same bytes") is satisfied **for the sampling path**, which
+is the one that matters for rendering: the guest's draws see aurora's own copy content (poison test above), and
+the capture API delivers those same bytes to the harness. What is *not* satisfied is the literal reading "the bytes
+are in guest RAM" - they never are, and a migration that assumes RAM round-trips would break on any guest code
+that reads a staging copy from the CPU. The exact next command therefore changes from "make the copy land in RAM"
+to "find out whether this game needs the RAM copy at all", and it is a guest-side question with a cheap instrument:
+watch whether anything reads a staging address through a non-GX path (a `memcpy`/DMA/lifted load in
+`recomp/replacements.c`, or a texture upload that does not come from a GX texobj) while the copy is live.
 
 **Two instrument notes from this measurement** (both cost a run, and the first is a trap worth naming): `%i` in
 `sscanf` **clamps a 32-bit guest address to INT_MAX** - the first version of `--ram-out` parsed `0x905C3000` as
@@ -14495,11 +14504,12 @@ and left (ii) unattributed. This session bounds it with two measurements rather 
    displayed scene depends on what the *previous* frame's EFB copies left in the staging arena. Any "pre-tail
    baseline" therefore contains the previous frame's tail as well, in the layer. Comparing it to aurora's pre-tail
    frame compares two different histories.
-2. **Aurora's side of the comparison is not a copy measurement at all** (item 11): its copies never reach guest
-   memory, so what its pre-tail frame samples in the staging arena is the **capture's** bytes - i.e. the layer's
-   output. On that frame both implementations therefore read the *same* staging bytes, which is what makes a
-   per-batch comparison between them meaningful for the first time: any difference left is the 3D shading/combiner
-   path, not the copy.
+2. **Aurora's side of the comparison is a real rendering of the same stream** (item 11, corrected): its copies
+   live as GPU-side shadow textures and its draws sample those, so its pre-tail frame is aurora's own work on the
+   same FIFO. The consequence is narrower than the first draft of item 11 claimed: it is *not* that aurora cannot
+   be a copy reference - it is that the copy never passes through RAM. So the 1.83x is a genuine shading
+   difference on the same stream, and a per-batch comparison between the two implementations is exactly the
+   measurement to make.
 
 So the honest state of (ii) is: **a real shading difference is present, its magnitude cannot be read off a
 single-frame mean because the pre-tail frame itself moves 1.66x with the same draws, and the like-for-like
