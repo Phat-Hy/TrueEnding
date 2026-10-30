@@ -20,6 +20,7 @@ Nothing here is on the shipping path. It is a measuring instrument:
 | `streamwalk.py` | walks one recorded frame from the capture alone (command/register census, per-draw offsets and vertex sizes, the scissor writes with GX's +342 view bias removed, POS decode from the MEM plane). This is the "layer side" of the one-draw comparison without a runner run. |
 | `caprecords.py` | prints a capture's record order (frame begin/end, FIFO, MEM, COPY) - it is how AP-AN established that 76 of `window.tlscap`'s 95 copy records are written after the window closes. |
 | `bpstate.py` | the BP/CP/XF state at a stream offset of frame 3400: the scissor/viewport/projection registers the guest actually wrote. |
+| `drawstate.py` | per-draw **raster** state from the capture - the capture-side twin of the layer's `TLS_BATCH_DUMP`: `BP 0x00` TEV stages, `BP 0x40` depth, `BP 0x41` decoded exactly as both implementations decode it, the texture object (`BP 0x88+m` image0 -> width/height/format, `BP 0x94+m` image3 -> address), the `BP 0x20/0x21` scissor with GX's +342 view bias removed **and as a percentage of the frame**, the EFB copies issued so far and vertex 0's `CLR0`. `--copies` lists every `BP 0x52` with source rect/destination/pitch/clear/display, `--cmd-counts` prints each frame's command count as a replay walks it (how a frame-relative index becomes a `--max-cmds` value), `--first-frame` re-bases the indices. |
 | `camera.py` | the capture side of ONE draw: pos-matrix rows as aurora reads them, projection, viewport, scissor with the 342 bias removed, `CP 0x30/3`, and the first N vertices' POS -> clip -> NDC. The instrument for "is the camera the same" without a runner run. |
 
 **The rule AP-AO cost a session to learn: a layer/aurora picture pair has to come from ONE run.** The runner's
@@ -128,6 +129,34 @@ the cave (neighbour correlation 0.864 against 0.698 for 4x4-tiled and 0.607 for 
 
 ## What was measured
 
-See `DEEPSEEK_HARNESS_HANDOVER.md` §5c.46 **AP-AN** (current) and **AP-AM** (history) for the write-ups and
-numbers.
+See `DEEPSEEK_HARNESS_HANDOVER.md` §5c.46 **AP-AP** (current), **AP-AO** and **AP-AN** (history) for the
+write-ups and numbers.
+
+## The AP-AP result: the layer's white-out is a missing GX scissor, and how to see it in ten seconds
+
+The tail of guest frame 3300 is a **downscale/blur chain drawn into a corner of the EFB**. Eight of its ten
+draws carry a `BP 0x20/0x21` scissor of **160x112 (6.25 % of the frame)** or **80x56 (1.56 %)**, and each
+rectangle is exactly the source rect of the EFB copy issued next to it; the two full-frame draws that follow
+sample the corner copy. `recomp/gfx_d3d11.c` implements no scissor at all, so the layer draws all ten across the
+whole 640x448 target - and it saturates: with the tail cut off (`TLS_BATCH_CUTOFF=114`) its frame is luma
+**91.59**, with the tail and without the popup (`=122`) **255.00 with 100 % of pixels above luma 250**; aurora
+moves **102.34 -> 103.18 mean byte (+0.8 %)** across the same eight draws because it clips them.
+
+```powershell
+# the guest's own registers for the tail - no GPU, no runner
+python tools\aurora_spike\drawstate.py build\recomp\gxcap\ao3301\gxfifo.tlscap --frame 6 --draws 15513 --to-draw 15522
+# the command indices a --max-cmds bisect needs
+python tools\aurora_spike\drawstate.py <capture> --cmd-counts
+# aurora's side of the chain: the EFB at each truncation point
+G:\Program\aurora-spike\build2\tls_gx_replay.exe <capture> o.ppm --start-at 1 --stop-after 7 `
+    --max-cmds 49562 --probe-copy --probe-ppm pre.ppm --copy-out pre.bin --extra 10
+```
+
+Two traps that each cost a run:
+
+* **`TLS_BATCH_CUTOFF=''` means 0, not unset.** `getenv` returns the empty string and `atoi("")` is 0, so every
+  batch is skipped and the screenshots are `(0,0,0)`. Remove the variable (`Remove-Item Env:\TLS_BATCH_CUTOFF`).
+* **`--max-cmds` is per replayed frame, not cumulative** (`aurora_replay.cpp:653` resets `cmds` per frame), so a
+  cutoff low enough to bisect frame 3300 also truncates frame 3296. The frame-relative index is the unit;
+  `--cmd-counts` converts it.
 
