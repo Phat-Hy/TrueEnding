@@ -2,6 +2,27 @@
 
 ## NEXT SESSION — START HERE
 
+> **READ §5c.46 AP-AO FIRST (the last section of this file).** Three AP-AN items are closed and one is
+> re-scoped. (1) **The camera divergence was the comparison, not the renderer**: the layer screenshot AP-AN used
+> came from a *different run*, because a `TLS_SHOT_FRAMES` entry matches the **present** counter as well as the
+> guest frame and they are 64 apart here. Same-run the pair is **21.48 mean |d| / 52.40 %**, cross-run it is
+> 42.51 / 69.81 %, and a layer-vs-layer control across runs is **38.18 / 60.70 %** - so a cross-run pair cannot
+> measure anything. The camera is also provably **static inside the captured window** (probe payload after a
+> 1-frame and a 7-frame replay is **99.77 % byte-identical**, 2 676 of 1 146 880 bytes). What remains at the same
+> frame is aurora's partially-drawn content (68.2 % zero texels), not a viewpoint. (2) **The XFB display copy
+> decodes**: row-linear little-endian **RGB565 640x448** (573 440 = 640x448x2), neighbour correlation **0.864**
+> vs 0.698 tiled and 0.607 byte-swapped; `tools/aurora_spike/tile2png.py --fmt linear565` reproduces it, and
+> aurora does not implement display copies at all, so it is our presentation contract, not a migration item.
+> (3) **The Chapter-1 gate is deterministic - 4/4 identical hashes** at `C5447108...`, handover 1680, on an idle
+> host, including on a rebuilt binary; AP-AN's 3/3 failure does not reproduce (that session had GPU replays
+> running) and **nothing was re-recorded**. But frame 3500 is a **pure white field with the "NEW TUTORIAL"
+> popup** (mean RGB 253.59/253.56/253.48), so the gate asserts the popup and the save, not the picture - giving
+> it a content-bearing frame and a mean-luma ceiling is the owed change (`AP-AO` item 6). Owning the one thing
+> still *bounded, not measured*: a same-frame NDC triangle needs `TLS_GX_CAPTURE` + `TLS_BATCH_DUMP_GUEST=<f>,<n>`
+> + `TLS_SHOT_GUEST=1` in **one launch** - this session's attempt landed on another moment of the field, and on
+> `[GxCap] cannot open ...` because the recorder did not create its directory (now fixed in
+> `recomp/gx_fifo_capture.c`; a capture is **134 816 346 bytes** for one frame with both MEM planes).
+
 > **THE AURORA SPIKE RAN AGAIN — read §5c.46 AP-AN (at the end of this file) before anything else; AP-AM is
 > now history, with three of its conclusions corrected in AP-AN item 9.** In one paragraph: criteria 1 and 3
 > stay CLEARED; **criterion 2 was never "aurora renders nothing" — it was the adapter.** A raw hardware FIFO
@@ -13361,3 +13382,269 @@ The fallback stays as AP-AM stated it: the hand-rolled layer keeps rendering, an
 (composite tail, then CMPR alpha, then XF texgen 2..7) - but the migration is now *live* rather than speculative:
 the same capture draws a picture in aurora, and every remaining difference is a state translation a recompiler
 can carry.
+
+### AP-AO. THE CAMERA WAS THE COMPARISON — the AP-AN pair crossed two runs, the camera provably does not move inside the window, the XFB display copy decodes as row-linear RGB565, and the Chapter-1 gate is deterministic (and asserts a white screen)
+
+This session took AP-AN's three open items and closed all three by measurement, without touching `src/` and
+without changing the shipping render path. In one paragraph: the "camera divergence" was **the pair, not the
+renderer** - the layer reference AP-AN used came from a *different run*, because a `TLS_SHOT_FRAMES` entry
+matches the **present** counter as well as the guest frame and the two are 64 apart at this point of the
+timeline; the same pair inside one run is **21.48 mean |d| / 52.40 %** instead of AP-AN's **42.51 / 69.81 %**,
+while two *layer* frames at the same frame number from two runs differ by **38.18 / 60.70 %** - a control that
+makes the earlier number uninterpretable. The camera does not move at all inside the captured window: aurora's
+probe payload after a **1-frame** replay and after a **7-frame** replay is **99.77 % byte-identical** (2 676 of
+1 146 880 bytes differ, mean byte 86.12 both), and the layer's own framebuffer at guest 3295 and its presented
+frame at 3300 have identical framing. The **XFB display copy decodes**: it is row-linear little-endian **RGB565,
+640x448** (573 440 = 640x448x2), horizontal neighbour correlation **0.864** against 0.698 for a 4x4-tiled
+decode and 0.607 for a byte-swapped one. The **gate is deterministic** - four invocations, four identical
+hashes at `C5447108...`, handover sampled at frame 1680 every time - but what it records is a **pure white field
+with the "NEW TUTORIAL" popup on it** (mean RGB 253.59/253.56/253.48, the PNG is 13 962 bytes), so it asserts
+the popup and the save, not the scene.
+
+Host state before any run: no `fifa15` process, 13.45 GB free of 23.71 GB. One runner at a time, every launch
+`--window --minimized`, save files deleted before every progression run, `TLS_INPUT_SCRIPT` set.
+
+**1. The camera: the pair crossed two runs. Measured, both directions.**
+
+`build/recomp/gxcap/cave3300w` (7-frame window 3294-3300) was captured with `TLS_SHOT_FRAMES=3300` **and**
+`TLS_SHOT_GUEST=1`, so its same-run screenshot is the present whose guest counter is 3300. The run's own log
+says which file that is (`logs_ap/apAN_cap3300w.log:10235-10236`):
+
+```
+[D3D11] Dumped screenshot to build/recomp/d3d11_screenshot_3364.ppm (1280 x 720)
+[GxCap] frame 3300 recorded: 3301 frame(s) seen, 6645772 FIFO bytes, 3408 display-list call(s) inlined
+```
+
+so the layer reference for **guest frame 3300** in that run is `d3d11_screenshot_3364.ppm` (present 3364), not
+`d3d11_screenshot_3300.ppm`. The latter was written by a **different run** (`logs_ap/apAN_cap3300.log` and
+`apAN_find_cave.log` both contain the line): with `TLS_SHOT_FRAMES=3300` and no `TLS_SHOT_GUEST`, the matcher
+is `want == s_d3d11_dump_count || want == g_runner_current_frame` (`recomp/gfx_d3d11.c:3245-3250`), i.e. the
+**present** counter wins when it comes up first - and the source already records why that is a trap
+(`recomp/gfx_d3d11.c:3096-3099`: "the two counters diverge sharply once the title hands over to the game
+sequence (measured: ~2800 presents in 6000 frames)"). At this point of the timeline the offset is exactly
+**64 presents** in every run of this session, so present 3300 is ~64 frames *earlier* in the field than guest
+3300.
+
+`tools/aurora_spike/compare.py`, three pairs, same two files on the aurora side throughout:
+
+| pair | aurora mean RGB | layer mean RGB | changed > 8 | mean \|d\| | bands top/upper/lower/bottom |
+|---|---|---|---|---|---|
+| AP-AN's: aurora f3300 vs layer **present 3300** (other run) | (29.17, 30.33, 29.98) | (41.99, 42.89, 40.05) | 200 153 / 286 720 (**69.81 %**) | **42.51** | 22.16 / 47.67 / 51.18 / 49.01 |
+| same run: aurora f3300 vs layer **present 3364** | (29.17, 30.33, 29.98) | (31.24, 29.01, 27.19) | 150 243 / 286 720 (**52.40 %**) | **21.48** | 15.74 / 21.25 / 18.13 / 30.81 |
+| control: layer present 3364 vs layer present 3300 (layer vs itself, 1280x720) | (31.02, 28.79, 26.97) | (41.99, 42.89, 40.05) | **60.70 %** | **38.18** | 21.33 / 35.55 / 52.02 / 43.82 |
+
+AP-AN's numbers reproduce **exactly** (69.81 %, 42.51, the four band means) - so the file AP-AN used is
+identified beyond doubt - and the control is the point: **two shots from the same renderer, at the same frame
+number, in two different runs, differ more from each other (38.18) than aurora differs from the layer inside one
+run (21.48)**. A cross-run pair cannot measure a renderer.
+
+Images: `docs/evidence/ao_pair_f3300_crossrun_apAN.png` (AP-AN's pair: aurora | other-run layer | 8x diff) and
+`docs/evidence/ao_pair_f3300_samerun.png` (the same run: aurora | layer present 3364 | 8x diff). Lit-region
+(sky-excluded) mask IoU, for a geometry-flavoured number that does not depend on shading: **0.461** same-run,
+**0.256** cross-run, and **0.511** for the layer's own 3295-vs-3300 pair - the same-run pair is as close as the
+renderer is to itself one frame later, the cross-run pair is not.
+
+**2. The camera does not move inside the window - measured, and it is why AP-AN's "byte-identical payload"
+result meant something other than what it was read as.** AP-AN 12e wrote: "replaying 7 frames (3294-3300)
+instead of only 3300 gives a byte-identical probe payload (mean byte 86.12 both times), so whatever sets this
+camera is either present in every frame or absent from all of them". Re-running that probe with a **1-frame**
+replay (`--stop-after 1`, i.e. only frame 3294) and comparing with the stored 7-frame payload:
+
+| measurement | value |
+|---|---|
+| payload size | 1 146 880 bytes both |
+| identical bytes | **1 144 204 / 1 146 880 (99.77 %)**, 2 676 differ |
+| mean byte | **86.12** both |
+| `compare.py` on the two de-tiled images | **1 pixel > 8 / 286 720**, mean \|d\| **0.01**, max 50 |
+
+Two readings are possible - a stale readback, or a scene that barely moves - and the 2 676-byte difference
+settles it: a buffer that never updated would differ by **0** bytes, so the probe is live and the **scene is
+static to 0.23 %** across the captured window (the 2 676 bytes are ~669 RGBA texels: the water/particle
+animation). The layer confirms the same thing independently: its framebuffer copy at guest **3295**
+(`0x900997E0`, the display copy) and its presented frame at guest **3300** have the *same framing* - plate at
+top-centre, pool band across the middle, the same column positions - and differ only in colour/blend
+(mean |d| 24.17, mask IoU 0.511). So the window carries a static camera, and "the camera is missing from the
+stream" is not a hypothesis that needs testing; what AP-AN's invariance actually measured is that **this
+7-frame window is a still**.
+
+**3. What is left at the same frame, and what it is not.** Inside one run aurora and the layer differ by
+21.48 mean |d| / 52.40 %. It is **not** viewpoint (§1, §2) and **not** the projection or the vertex path, which
+AP-AN item 2 already compared byte for byte. It is content, and the number that names it is AP-AN item 7's:
+**68.2 % of the guest copy's texels are still zero in aurora** where the layer's are all painted. The two
+implementations also read the same registers - `tools/aurora_spike/camera.py` (new) decodes the stream for
+frame 3300 and reports the *world* projection in force at the end of the frame as perspective
+**pa 1.261354, pb 0.0, pc 1.569685, pd 0.0, pe -0.000125, pf -1.000125, type 0**, viewport
+(320, -224, 16777216 | 662, 566, 16777216) and the scissor writes still carrying the +342 bias
+(BP 0x20 = 0x156156 -> (0,0) unbiased, BP 0x21 = 0x3D5315 -> (447,639) unbiased).
+
+Where a same-frame NDC triangle is still owed: **the batch dump and the capture have to come from one run**,
+and the run this session had aimed at it (`TLS_BATCH_DUMP_GUEST=3300,1`) landed on a *different* moment of the
+field - see item 4 - so the layer's NDC boxes and the capture's decoded boxes are from different runs and were
+deliberately not compared. The exact next command is in item 7.
+
+**4. The drift is real and larger than the counter question - and it is not the sequence handover.** Run A
+(`logs_ap/ao_run_A.log`) captured nothing (the recorder's directory did not exist - see item 6) but it did dump
+the guest-3300 draw list, and guest frame 3300 in *that* run is **not the cave**:
+
+| same guest frame 3300 | mean RGB | what it is |
+|---|---|---|
+| cave3300w's run (`d3d11_screenshot_3364.ppm`) | (31.24, 29.01, 27.19) | the cave: pool, ledge, plate |
+| run A (`d3d11_screenshot_3364.ppm` of this session) | **(141.15, 142.54, 143.97)** | the cave **washed out by the additive composite tail** with the "NEW TUTORIAL" popup on it (`logs_ap/ao_runA_3364.png`) |
+
+`compare.py` between those two is **92.48 % changed, mean |d| 124.87** in the same 1280x720 frame with the same
+present count (3364 both runs, so the present offset is stable while the *content* is not). The batch dump that
+goes with it: **131 batches / 163 710 vertices**, and the whole world is behind the camera - `b0 vtx=1020
+wNDC=[x 2.44..4.98] outside=1020/1020` - while the screen is covered by full-screen quads at exactly NDC
+[-1..1] (`b119 vtx=6 tex=0x903DBDC0 160x112 ndc=[-1.00..1.00, -1.00..1.00]`). That is AP-AI's white-out
+(9 full-screen additive EFB-copy quads) measured at frame 3300 instead of 4500.
+
+The telemetry handover frame (`[TLS Frame <n>] Seq: Game`, sampled every 60 frames) is **1680 in every run on
+disk** - `apAN_cap2600`, `apAN_find_cave`, `apAN_cap3300`, `apAN_cap3300w`, `ao_run_A`, `ao_inv_1..4` - so the
+drift lives **inside the field**, not in the sequence start. Consequence for every future comparison: a frame
+number is only a scene anchor *within* a run; `TLS_GX_CAPTURE`, a `TLS_BATCH_DUMP_GUEST` dump and
+`TLS_SHOT_FRAMES` must all be set in the same launch.
+
+**5. The XFB display copy decodes: row-linear little-endian RGB565, 640x448.** The copy AP-AN could not decode
+(copy record 0 of `cave3300w`: dst `0x900997E0`, 640x448, `fmt 0`, vmark 92 208) is a **display** copy, and its
+size is the format: **573 440 = 640 x 448 x 2**, i.e. 16 bpp; the record's `fmt 0` is the guest's GX *texture*
+copy-format id (R4), not a texel format for an XFB copy, which is why it never matched a decode. The layer's
+bytes for it are `logs_ap/an3300x.bin.host.bin` (573 440 B). Decoded four ways and scored by horizontal
+neighbour correlation of the resulting image (the objective form of "does this look like a picture"):
+
+| decode | mean RGB | neighbour corr | verdict |
+|---|---|---|---|
+| **row-linear LE RGB565** | (23.97, 26.52, 28.21) | **0.864** | **the Gurgan Cave** (`docs/evidence/ao_xfb_display_copy_linear565.png`) |
+| 4x4-tiled LE RGB565 (32-byte tile, row-major tiles) | (26.10, 26.24, 26.36) | 0.698 | 4x-replicated garbage |
+| 4x4-tiled BE RGB565 | (58.83, 58.53, 58.65) | 0.543 | garbage |
+| row-linear BE RGB565 (byte-swapped) | (61.88, 56.48, 57.64) | 0.607 | rainbow noise with correct geometry |
+
+For scale: aurora's EFB for frame 3300 scores **0.948** and the layer's same-run shot **0.922**, so 0.864 is a
+picture and 0.698/0.607 are not. `tools/aurora_spike/tile2png.py --fmt linear565` (added) reproduces the
+working decode from the payload, and `compare.py` now accepts PNG inputs and no longer miscounts `--out` (the
+bug the previous session hit).
+
+Two more facts about this copy, both measured:
+
+* **the layer writes exactly that layout**: `recomp/gfx_d3d11.c:2366-2369`
+  `out[(y0+gy)*640 + (x0+gx)] = ((r>>3)<<11)|((g>>2)<<5)|(b>>3)` on a `uint16_t*`, i.e. row-linear RGB565 in
+  native (little-endian) order - the comment there (2310-2317) explains why: the two VI scanout buffers are
+  16 bpp linear (614 400 B each, the gap between `0x900037C0` and `0x900997E0` is 614 432), and writing 32-bit
+  pixels into them overran into the next buffer;
+* **the migration does not need it**: aurora stubs the display copy (`[aurora WARN ...] STUB: display copy is
+  not implemented`, three times for this window) and refuses to read one back (`0x900997e0 is not a texture copy
+  destination`), and aurora presents its own EFB. The decode matters for *our* layer's presentation contract
+  and for byte-comparing it against the guest, not for criterion 2.
+
+Why AP-AN concluded it did not decode: `tile2png.py` only ever implemented the two **4x4-tiled** layouts, and
+the ad-hoc "linear" attempt that session made was **byte-swapped** (`logs_ap/an3300x_host_linear.png` is the
+rainbow-noise image with correct geometry above). Adding the little-endian linear mode is the whole fix.
+
+**6. The Chapter-1 gate: deterministic, four invocations, and it asserts a white screen.** `tools/invariant.ps1`
+was instrumented first, because "three attempts, three hashes" could not be explained after the fact - the loop
+overwrote one log, so only the last attempt survived:
+
+* each attempt now keeps its own log (`<log>.a1`, `.a2`, `.a3`), `$log` is still a copy of the last one;
+* the **Game handover frame** is extracted from the telemetry (first `[TLS Frame <n>] Seq: Game`) and printed;
+* a TSV summary (`<log>.summary.tsv`) records attempt, handover, sha, save sizes and `reachedGame`, so a
+  determinism claim can be checked later without re-running.
+
+Four independent invocations on this session's idle host (the fourth on a **rebuilt** binary, see item 7):
+
+| invocation | attempt | handover | sha256 (first 8) | savedata / banner | reachedGame |
+|---|---|---|---|---|---|
+| `logs_ap/ao_inv_1.log` | 1/3 | 1680 | `C5447108` | 1 348 992 / 29 344 | True |
+| `logs_ap/ao_inv_2.log` | 1/3 | 1680 | `C5447108` | 1 348 992 / 29 344 | True |
+| `logs_ap/ao_inv_3.log` | 1/3 | 1680 | `C5447108` | 1 348 992 / 29 344 | True |
+| `logs_ap/ao_inv_4.log` (rebuilt binary) | 1/3 | 1680 | `C5447108` | 1 348 992 / 29 344 | True |
+
+**4/4 PASS at the recorded reference, first attempt every time, sequences `Boot -> Stra -> Titl -> Game`.** So
+AP-AN's 3/3 failure is **not reproducible** on an idle host: that session had been replaying aurora frames on
+the same GPU, which is exactly the condition the dossier warns about for every measurement. **Nothing was
+re-recorded** - the recorded value is what a quiet host produces, and re-recording it would have hidden that.
+
+The honest limitation, measured this session: **frame 3500 is a white field with the "NEW TUTORIAL" popup on
+it.** `docs/evidence/ao_gate_f3500_white_popup.png` (13 962 bytes, mean RGB **253.59 / 253.56 / 253.48**) is
+byte-identical to the AP-Z evidence `docs/evidence/host_3500_tutorial_menu_apZ.png` (mean |d| **0.00**). The
+gate therefore asserts *the popup and the save*, not the picture: with the entire 3D layer broken to black, or
+to this white-out, it would still PASS. The popup is a *stable UI plateau* - shifting `TLS_INPUT_SCRIPT` by
++40 frames moved the handover out to frame <=1740 and still gave **`C5447108` exactly** (one run,
+`logs_ap/ao_gate_shift40.log`) - which is why the hash is stable, and also why it cannot see geometry.
+
+Recommended next change to the gate (not made here, because it needs a new reference verified twice):
+anchor the screenshot to a **content-bearing** frame and keep the hash, e.g. shoot guest 3300-3400 where the
+cave and the composite tail are both on screen, and add a **mean-luma ceiling** to the structural checks so a
+white-out fails instead of passing. The instrument now records the handover frame, which is what such a change
+must be keyed on.
+
+The Dolphin references make the point quantitatively - this is the comparison the gate cannot make, so it was
+made here instead:
+
+| image | size | mean RGB | mean luma | fraction of pixels with luma > 250 |
+|---|---|---|---|---|
+| `dolphin_ref_run2_f1500_intro.png` | 776x450 | (8.6, 10.0, 7.4) | 9.3 | **0.000** |
+| `dolphin_ref_run2_f2000_chapter1_card.png` | 776x450 | (24.0, 28.4, 22.9) | 26.4 | **0.000** |
+| `dolphin_ref_run2_f3000_gameplay.png` | 776x450 | (28.6, 32.7, 25.7) | 30.7 | **0.000** |
+| `dolphin_ref_run3_f5000_gameplay.png` | 776x450 | (28.6, 32.6, 25.7) | 30.6 | **0.000** |
+| **the gate's frame 3500** | 1280x720 | (253.6, 253.6, 253.5) | **253.6** | **0.993** |
+
+i.e. the frame the invariant records has **99.3 %** of its pixels over luma 250, and not one pixel of any of the
+four Dolphin references is. There is no Dolphin reference *at* frame 3500 or of the tutorial popup to
+re-record against, and the field's drift (§4) makes a fixed-frame Dolphin comparison its own piece of work, so
+**re-recording against Dolphin is deliberately not claimed here** - the honest position is that the gate is a
+deterministic regression hash on a white screen, not a parity check.
+
+**7. Instrument and harness changes this session (all inert unless used, none on the shipping path).**
+
+| change | file | why |
+|---|---|---|
+| `camera.py` (new) | `tools/aurora_spike/camera.py` | the *capture* side of a draw: pos matrix rows as aurora's `copy_xf_data` reads them (10 matrices x 12 words at XF 0x0000), projection 0x1020-0x1026, viewport 0x101A-0x101F, scissor with the 342 bias removed, `CP 0x30 / 3`, and the first N vertices' POS -> clip -> NDC. Fixes the offset bug that `attr_size()` answers with the *index* width for INDEX8/16 attributes: the array element is 6 bytes for `cnt=1 S16 frac=11`, not 1 |
+| `--fmt linear565` / `linear565be` | `tools/aurora_spike/tile2png.py` | row-linear 16 bpp decode; `linear565` is how the XFB display copy decodes (item 5) |
+| `--out` parsing + PNG input | `tools/aurora_spike/compare.py` | option *values* were counted as positionals, so `--out` printed the doc instead of comparing; and a de-tiled copy arrives as PNG |
+| per-attempt logs + handover + TSV | `tools/invariant.ps1` | item 6 |
+| recorder creates its directory | `recomp/gx_fifo_capture.c` | `TLS_GX_CAPTURE=<dir>` printed `[GxCap] cannot open ...` and recorded **nothing** when the directory did not exist - an 8-minute run this session produced a batch dump and a screenshot and no stream. It now `mkdir`s each path component and retries (verified: a 400-frame run at `TLS_GX_CAPTURE_FROM/TO=350` created the directory and wrote **134 816 346 bytes**; 25 079 FIFO bytes for frame 350, both MEM planes). |
+
+Runner rebuild: `python tools/recomp_harness.py build-runner` -> **SUCCESS, 459 chunks (0 to compile, 459
+cached), 470 objects, 4.97 s**, `build/recomp/tls_runner.exe` 107.74 MB. **0 changes to `src/`.**
+
+**8. Run log (one runner at a time, all `--window --minimized`; two aurora replays).**
+
+| # | what | result |
+|---|---|---|
+| 1 | `compare.py` on AP-AN's stored pair | reproduces 69.81 % / 42.51 exactly |
+| 2 | `compare.py` on the same-run pair (present 3364) | **52.40 % / 21.48** |
+| 3 | `compare.py` layer-vs-layer across runs | 60.70 % / 38.18 - the control |
+| 4 | `camera.py` cave3300w frame 6 draw 0 | ortho 2D element, POS (1.02734, 0.23584, -0.13672) -> NDC (0.2058, 0.4824); end-of-frame world projection perspective (item 3) |
+| 5 | runner run A: capture (failed, item 7) + `TLS_BATCH_DUMP_GUEST=3300,1` + guest-keyed shot | 131 batches / 163 710 vtx; frame 3300 = washed cave + popup (item 4) |
+| 6 | aurora replay `--stop-after 1 --probe-copy` on cave3300w | payload 1 146 880 B, mean 86.12, **99.77 % identical** to the 7-frame payload (item 2) |
+| 7 | gate invocations 1-3, idle host | PASS, `C5447108`, handover 1680, 3/3 identical |
+| 8 | gate with `TLS_INPUT_SCRIPT` shifted +40 frames | still `C5447108` (handover <=1740); runner then exited **0xC0000374 (STATUS_HEAP_CORRUPTION)** at shutdown - recorded, not explained; the screenshot and hash were written before it |
+| 9 | `gx_fifo_capture.c` mkdir fix + rebuild + gate invocation 4 | build green (4.97 s), capture dir verified, gate PASS `C5447108` |
+| 10 | `tile2png --fmt linear565` on the XFB payload | the cave; corr 0.864 vs 0.698 tiled / 0.607 swapped |
+
+**9. Definition of done, item by item.**
+
+* **The camera divergence is named, with numbers, and closed** - not a renderer divergence at all: AP-AN's
+  reference came from another run (§1: 42.51 across runs vs 21.48 within one, against a 38.18 layer-vs-layer
+  control), the camera is static inside the window to 0.23 % of the payload (§2), and what is left at the same
+  frame is aurora's partially-drawn content (§3, AP-AN item 7's 68.2 % zero texels). The one thing still
+  *bounded rather than measured* is the same-frame NDC triangle: it needs `TLS_GX_CAPTURE` +
+  `TLS_BATCH_DUMP_GUEST=<from>,<count>` + `TLS_SHOT_GUEST=1` in **one** launch, and this session's attempt
+  landed on a different moment of the field (§4) and on a recorder bug (§7) - both now fixed, so the next
+  session can run it as one command.
+* **The XFB copy decodes** (§5): row-linear little-endian RGB565, 640x448, correlation 0.864, reproducible
+  with `tile2png.py --fmt linear565`, and the layer's writer for it located at `gfx_d3d11.c:2366-2369`.
+  Aurora does not implement display copies at all, so this is our presentation contract, not a migration item.
+* **The gate is deterministic** (§6): 4/4 identical hashes on an idle host including a rebuilt binary, so
+  **no re-record was owed**; AP-AN's failure is attributed to the GPU being busy with replays in that session.
+  What remains owed is a *content* anchor for it, with the evidence in §6 that frame 3500 is a white field.
+* **0 changes to `src/`.** One 36-line `recomp/` change (the recorder's directory), five `tools/` changes.
+  Build green, runner rebuilt once, gate re-verified after it.
+
+The migration plan itself is unchanged from AP-AN item 10: **five** register classes plus address
+canonicalisation (EFB copy setup, array bases, the +342 view bias in the scissor and viewport, texture objects,
+reserved wrap mode 3), patches `0001`-`0004` and `0006` always and `0005` for a replay only. What this session
+adds to it is a warning rather than a class: a captured frame is **self-consistent only within a run**, so any
+future aurora-vs-layer number must come from one launch, and the layer's file name carries the *present*
+counter while the capture carries the *guest* frame - the 64-present offset between them is the difference
+between "aurora renders a different cave" and "aurora renders the same cave 64 frames earlier".
+
