@@ -130,18 +130,34 @@ $sha = ''
 $saveLen = 0
 $bannerLen = 0
 $reachedGame = $false
+# 5c.46 AP-AO: PER-ATTEMPT LOGS AND THE HANDOVER FRAME. This loop used to overwrite ONE log,
+# so "three attempts, three different hashes" could not be explained after the fact - the only
+# surviving evidence was the last attempt. Each attempt now keeps its own log and the summary
+# records the guest frame at which the sequence actually reached 'Game' (the telemetry prints
+# `[TLS Frame <n>] Seq: Game` every 60 frames). That number is the whole question: if it moves
+# between attempts, `TLS_SHOT_FRAMES=3500` is anchored to a drifting event and the hash moves
+# with it - which is what AP-AN measured (3C601DDE / 1F9BE875 / 4201F485).
+$summary = "$log.summary.tsv"
+Remove-Item $summary -ErrorAction SilentlyContinue
+Set-Content $summary "attempt`thandover`tsha`tsave`tbanner`treachedGame"
 for ($attempt = 1; $attempt -le $Attempts; $attempt++) {
+    $attemptLog = "$log.a$attempt"
     Remove-Item $ppm -ErrorAction SilentlyContinue
     Remove-Item $SAVE_FILE, $BANNER, $TMP_SAVE -Force -ErrorAction SilentlyContinue
 
-    & $exe --window --minimized --frames 3520 *> $log
+    & $exe --window --minimized --frames 3520 *> $attemptLog
+    Copy-Item $attemptLog $log -Force
+    $handover = -1
+    $hm = Select-String -Path $attemptLog -Pattern '\[TLS Frame\s+(\d+)\] Seq: Game' | Select-Object -First 1
+    if ($hm) { $handover = [int]$hm.Matches[0].Groups[1].Value }
     if (-not (Test-Path $ppm)) {
-        Write-Host ("attempt {0}: no screenshot produced" -f $attempt) -ForegroundColor Yellow
+        Write-Host ("attempt {0}: no screenshot produced (handover {1})" -f $attempt, $handover) -ForegroundColor Yellow
+        Add-Content $summary ("{0}`t{1}`t`t0`t0`tFalse" -f $attempt, $handover)
         continue
     }
 
     # 1. structural: the sequence must reach Game
-    $seqs = Select-String -Path $log -Pattern 'Seq: (\S+)' |
+    $seqs = Select-String -Path $attemptLog -Pattern 'Seq: (\S+)' |
             ForEach-Object { $_.Matches[0].Groups[1].Value } | Select-Object -Unique
     $reachedGame = $seqs -contains 'Game'
 
@@ -155,17 +171,20 @@ for ($attempt = 1; $attempt -le $Attempts; $attempt++) {
     $saveOk    = ($saveLen -eq 1348992) -and ($bannerLen -eq 29344)
 
     $ok = $reachedGame -and ($sha -eq $EXPECTED_SHA) -and $saveOk
-    Write-Host ("attempt {0}/{1}: reachedGame={2} sha={3} save={4}/{5}" -f `
-                $attempt, $Attempts, $reachedGame, $sha.Substring(0, 8), $saveLen, $bannerLen)
+    Add-Content $summary ("{0}`t{1}`t{2}`t{3}`t{4}`t{5}" -f $attempt, $handover, $sha, $saveLen, $bannerLen, $reachedGame)
+    Write-Host ("attempt {0}/{1}: reachedGame={2} handover={3} sha={4} save={5}/{6}" -f `
+                $attempt, $Attempts, $reachedGame, $handover, $sha.Substring(0, 8), $saveLen, $bannerLen)
     if ($ok) { break }
 }
 
 Write-Host ""
 Write-Host "sequences : $($seqs -join ' -> ')"
 Write-Host "reached Game : $reachedGame"
+Write-Host "handover  : guest frame $handover (--frames 3520, screenshot at $SHOT_FRAME)"
 Write-Host "sha256    : $sha"
 Write-Host "expected  : $EXPECTED_SHA"
 Write-Host "save created : savedata.dat=$saveLen banner.bin=$bannerLen (expect 1348992 / 29344)"
+Write-Host "per-attempt evidence: $summary and $log.a<attempt>"
 Write-Host ""
 
 if ($ok) {
