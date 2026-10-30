@@ -9,8 +9,8 @@
 > RECT of the EFB copy issued next to it), and the two full-frame draws that follow sample the corner copy.
 > `recomp/gfx_d3d11.c` has **no scissor at all** (0 `RSSetScissorRects`; the only one in the tree is
 > `gfx_d3d12.c:654`, and `gx_pipeline.c` never decodes `BP 0x20/0x21`), so the layer draws all ten
-> `ndc=[-1.00..1.00]` over the whole target. Measured, one run each, guest-keyed shot: layer with the tail
-> cut off (batches 0..113) **luma 91.59**, with the tail and without the popup (batches 0..121) **255.00 with
+> `ndc=[-1.00..1.00]` over the whole target. Measured, guest-keyed shot at frame 3300, **each row twice on
+> separate launches and identical to the hundredth**: layer with the tail cut off (batches 0..113) **luma 91.59**, with the tail and without the popup (batches 0..121) **255.00 with
 > 100.00 % of pixels above luma 250**, full frame **142.29**. Aurora on the same stream moves **102.34 ->
 > 103.18 mean byte (+0.8 %)** across the same eight draws. The named range is **in-frame stream commands
 > 49632..50127 = guest draws 15513..15522 = layer batches 114..121**; the tail is a corner chain in the
@@ -13851,8 +13851,8 @@ depth, `BP 0x41` decoded exactly as both implementations decode it (`blendEn`, `
 with GX's **+342 view bias** removed, and the EFB copies issued so far. Frame index 6 (guest 3300) carries
 **15 545 draws and 9 `BP 0x52` copy commands**; the ten draws that consume their destinations are:
 
-| in-frame cmd | draw | texture | bytes/texel | cmode0 | blend actually in force | scissor (bias removed) | share of the frame |
-|---|---|---|---|---|---|---|---|
+| in-frame cmd | draw | texture | cmode0 | blend actually in force | scissor (bias removed) | share of the frame |
+|---|---|---|---|---|---|---|
 | 49632 | 15513 | 0x90395DC0 **320x224** (half-scale copy of the frame) | `0x003118` | OFF, ONE/ZERO | (0,0)..(159,111) | **6.25 %** |
 | 49679 | 15514 | 0x9038D1C0 **80x56** | `0x003118` | OFF, ONE/ZERO | (0,0)..(79,55) | **1.56 %** |
 | 49705 / 49731 / 49757 | 15515-17 | 0x9038D1C0 **80x56** | `0x003219` | ON, **SRCCLR/ZERO** | (0,0)..(79,55) | **1.56 %** |
@@ -13890,10 +13890,13 @@ tool had the fields the other way round and printed `112x160`.
 The middle row is the answer to "which range introduces the wash": **batches 114..121**, which are exactly
 draws 15513..15522, take the frame from luma 91.59 to **pure white**, and the popup's own overlay then brings
 the saturated frame back down to 142.29 (the same direction as in aurora, 94.30 -> 68.82, but from saturation).
-The two control runs keep their credibility: the same 114 run's guest-2800 shot is **(34.94, 33.23, 31.09)
-luma 33.50**, i.e. exactly the gate's recorded content reference, and the full run reproduces
-(141.15, 142.54, 143.97) against AP-AO's (141.31, 142.70, 144.12) from a different session - so the runs are
-faithful and the *tail* is the only variable that moves.
+**Both rows were measured twice on separate launches and agree exactly** (`logs_ap/ap_cut114.log` and
+`ap_cut114_b.log`: (88.20, 93.40, 91.17) luma 91.59 both times; `ap_cut122.log` and `ap_cut122_b.log`:
+(255.00, 255.00, 255.00) with 100.00 % of pixels above 250 both times), which is what makes a 255.00 reading a
+measurement rather than a mistake. The two control runs keep their credibility: the same 114 run's guest-2800
+shot is **(34.94, 33.23, 31.09) luma 33.50**, i.e. exactly the gate's recorded content reference, and the full
+run reproduces (141.15, 142.54, 143.97) against AP-AO's (141.31, 142.70, 144.12) from a different session - so
+the runs are faithful and the *tail* is the only variable that moves.
 
 **4. Aurora, on the same capture, command by command (13 replays, 10 s each, `--start-at 1 --stop-after 7
 --probe-copy`).** The probe reads the EFB at the truncation point, so this walks the chain:
@@ -14013,6 +14016,7 @@ Two traps, each measured with a wasted run:
 | 11 | `compare.py` aurora pre-chain vs aurora full | 93.20 % changed, mean \|d\| 35.89 |
 | 12 | runner 4 600 frames, input extended to 4512, `TLS_ENTRY_PROBE=1`, shots 3300/3800/4400 | all three pure white; **3800 == 4400**; **0** entry-probe lines |
 | 13 | `pwsh tools/invariant.ps1` | **PASS, attempt 1**: `C5535C7D...`, `6465ACEF...`, handover 1680, luma 33.3, save 1348992 / 29344 |
+| 14 | `TLS_BATCH_CUTOFF=114` and `=122` again, separate launches | **identical to the hundredth**: (88.20, 93.40, 91.17) luma 91.59, and (255.00, 255.00, 255.00) with 100.00 % above 250 |
 
 **10. Definition of done, item by item.** *The white-out is named as a specific layer defect, with the command
 range and a same-run pair whose `compare.py` numbers are explained*: **yes** - `recomp/gfx_d3d11.c` implements no
@@ -14026,9 +14030,9 @@ the gap is traced to aurora's own copy (1.9x on a `clear=1` 640x448 copy) with t
 **bounded** - there is no host-side wake event to name, because 25 extra presses change nothing (3800 == 4400
 byte-identical), the entry chain prints 0 lines in 4 600 frames, and no queue holds the field task; the popup
 task that should call it is the next measurement (item 7). *Gate green at both references, build green, 0 changes
-to `src/`*: **yes** - gate PASS on attempt 1, and this session's only source changes are `tools/aurora_spike/`
-(a new `drawstate.py`, three error-message/docstring fixes in `camera.py`-adjacent tooling were **not** made -
-`camera.py` is untouched), the handover and `tools/aurora_spike/README.md`. Evidence:
+to `src/`*: **yes** - gate PASS on attempt 1, the runner builds (no-op 3.78 s, 459 chunks, 470 objects), and this
+session's only source changes are one new tool (`tools/aurora_spike/drawstate.py`), three paragraphs of
+`tools/aurora_spike/README.md` and this section - `recomp/`, `camera.py` and `src/` are untouched. Evidence:
 `docs/evidence/ap_layer_f3300_full.png` (the washed layer frame), `ap_layer_f3300_chainonly_white.png` (the same
 frame with only the tail and no popup - pure white), `ap_aurora_f3300_prechain.png`, `ap_aurora_f3300_full.png`
 and `ap_pair_f3300_samerun.png` (aurora | layer | 8x difference).
