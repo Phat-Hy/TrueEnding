@@ -14481,3 +14481,38 @@ address=0x7fffffff`, which is the AV *address* naming the bug: it is `INT_MAX`, 
 `strtoul`. And a dump **without** the poison reads the capture's own bytes and looks meaningful (it reported
 "100 % byte-255" for both 50045 and 50049 - see item 5's numbers, which are the same bytes); only the poison makes
 the answer "did anything write here" instead of "what is in the capture".
+
+**12. The 1.83x pre-tail baseline (AP-AP item 5's effect (ii)): bounded, and one of its two legs is removed.** AP-AP
+decomposed the same-launch pair (83.23 % changed, mean |d| 78.65) into "the white-copy composite" plus "a 1.83x
+baseline that exists before the tail - layer luma 91.59 against aurora's mean byte 102.34 (RGB 48.32/49.29/46.44)",
+and left (ii) unattributed. This session bounds it with two measurements rather than an opinion:
+
+1. **The pre-tail frame is not a stable reference either, and the reason is the same feedback loop.** Two runs with
+   `TLS_BATCH_PROBE=3300`, one default and one `TLS_NO_FORCE_BLEND=1`, present the **identical** pre-tail draw
+   stream (b113 `voff=162204`, `vcnt=42`, `tex=0x91AAC860`, the same 130-batch list up to b113) and measure
+   **b113 = (93,95,90) in one and (56,58,58) in the other** - a **1.66x** spread with no difference in the draws
+   that produced it. The scene batches at b105/b108/b111 sample `0x90366FE0`, a **staging address**, so the
+   displayed scene depends on what the *previous* frame's EFB copies left in the staging arena. Any "pre-tail
+   baseline" therefore contains the previous frame's tail as well, in the layer. Comparing it to aurora's pre-tail
+   frame compares two different histories.
+2. **Aurora's side of the comparison is not a copy measurement at all** (item 11): its copies never reach guest
+   memory, so what its pre-tail frame samples in the staging arena is the **capture's** bytes - i.e. the layer's
+   output. On that frame both implementations therefore read the *same* staging bytes, which is what makes a
+   per-batch comparison between them meaningful for the first time: any difference left is the 3D shading/combiner
+   path, not the copy.
+
+So the honest state of (ii) is: **a real shading difference is present, its magnitude cannot be read off a
+single-frame mean because the pre-tail frame itself moves 1.66x with the same draws, and the like-for-like
+measurement needs a per-command EFB comparison on the SAME capture bytes.** The exact next command is the pair
+below (10 s each), then `camera.py`/`batchcensus.py` on the layer side and the same command budgets on aurora's:
+
+```powershell
+# aurora: the EFB before the first copy of frame 3300, and 100 commands at a time after it
+G:\Program\aurora-spike\build2\tls_gx_replay.exe build\recomp\gxcap\ao3303\gxfifo.tlscap a.ppm `
+    --start-at 1 --stop-after 7 --max-cmds 49562 --probe-copy --copy-out a.bin
+#   ... repeat with --max-cmds 49632 / 49679 / 49705 / 49763 / 49859 / 49964 / 50012 / 50039 / 50127
+# layer: the same frame's per-batch back buffer, already available from one run
+$env:TLS_BATCH_PROBE='3300'; build\recomp\tls_runner.exe --window --minimized --frames 3400
+# match by batch, not by frame number, and report the ratio per batch: that is the shading gap as a function
+# of the draw stream, which is the form the migration can act on.
+```
