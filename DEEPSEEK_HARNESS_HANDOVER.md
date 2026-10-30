@@ -2,7 +2,44 @@
 
 ## NEXT SESSION — START HERE
 
-> **READ §5c.46 AP-AP (the last section of this file) AND ITS ADDENDUM FIRST.** The white-out is **named**, and
+> **READ §5c.46 AP-AQ (the last section of this file) FIRST, then the §5c.46 AP-AP addendum correction note.**
+> AP-AQ overturns the AP-AP addendum's causal claim, and the reason is an **instrument**: `TLS_SCISSOR=1` could
+> never clip anything, because D3D11 ignores `RSSetScissorRects` unless the bound rasterizer state has
+> `ScissorEnable = TRUE` and the backend's only rasterizer state is `D3D11_RASTERIZER_DESC rdesc = {0}`. With a
+> second state (`rs_scissor`) bound, the *same* guest frame 3300 that AP-AP's addendum measured as
+> "byte-identical" MOVES: the eight corner draws' effect on the back buffer collapses from **+162 / +95 / +107** to
+> **≤ 2 units** and batch b118 goes **(255,255,255) → (95,97,92)** on an identical pre-tail frame (b113 =
+> (93,95,90) in both runs). The second, independent defect is that `gfx_d3d11.c` **promotes `dst_factor == 1/5/7`
+> to "blend on" even when the guest's CMODE0 bit 0 says REPLACE**; three of the tail's ten draws are in that class
+> (b117, b118, b121), and b118 alone takes the frame from (188,200,187) to **(255,255,255)** where a replace would
+> have written the sampled texture's own (174,183,172). **With both corrected** (`TLS_SCISSOR=1
+> TLS_NO_FORCE_BLEND=1`) guest 3300 renders the **Gurgan Cave with the tutorial popup on it**, luma
+> **142.29 → 36.58**, `>250` **0.06 % → 0.00 %** (the gate's own content frame at 2800 is luma 33.3, so the fixed
+> frame is in the correct band); the copies AP-AP's addendum blamed are **downstream** of both defects (copy
+> `49969` runs **6 vertices after** b118 and faithfully copies the 255 the host had just written).
+> **Neither switch is promoted** - both are default-off, so the gate still PASSes at both recorded references
+> (`C5535C7D`, `6465ACEF`, attempt 1 on the rebuilt binary). Promoting them moves *both* gate references and costs
+> two re-records; the exact recipe is AP-AQ item 7. What remains after the fix is the **corner chain's own
+> content** (the additive pass still adds ~85 mean where hardware's 80x56 copy is a median of 0.1 luma over
+> 17 263 Dolphin dumps) - that is the GX-TEV class of defect Aurora fixes, bounded in AP-AQ item 8.
+>
+> **AP-AQ item 11 is a migration finding and outranks the layer work: aurora's EFB copies never reach guest
+> memory.** The harness sets `mem1Size = mem2Size = 0` ("our own mapping is authoritative") while aurora's own
+> header says those sizes are the guest memory aurora allocates (and that it is *not* at 0x80000000/0x90000000).
+> Measured with a new poison control (`--ram-out <addr>:<size>:<file> --ram-poison`): after a replay that services
+> the game's copy at cmd 50049, 0x905C3000 is **100 % 0xCD** - the same as before the copy - and so is the
+> harness's *own* probe copy's destination 0x90001000, whose readback payload is meanwhile delivered (116.14).
+> So criterion 3 holds for the **readback API** only: a replay's draws that sample an EFB copy sample the
+> **capture's** bytes (the layer's), and "aurora's copy is 1.9x brighter" was never an aurora copy measurement.
+> Giving aurora the guest memory (or adding the writeback into the harness mapping) is the top migration item;
+> the exact next command is in AP-AQ item 11.
+
+> **READ §5c.46 AP-AP AND ITS ADDENDUM** for the measurements AP-AQ builds on (and, in A1/A2, for the experiment
+> that AP-AQ shows was inert). What still stands from AP-AP: the tail's structure, the copy register decode, the
+> layer ladder (91.59 / 255.00 / 142.29), aurora's +0.8 % across the eight draws, the 83.23 %/78.65 pair and the
+> field-state bound. What does not stand: "the scissor changes nothing" and "the copy content is the cause".
+> **SUPERSEDED IN PART BY AP-AQ (above) - the AP-AP text that follows is kept because its *measurements* stand,
+> and because the wrong experiment it contains is the lesson.** The white-out is **named**, and
 > the first answer was wrong: it is **not** the layer's missing GX scissor, it is the **layer's EFB copy
 > content**. Guest frame 3300's tail is a downscale/blur chain drawn into a 160x112 or 80x56 corner of the EFB
 > under a scissor (8 of its 10 draws, **6.25 %** and **1.56 %** of the frame, each rectangle equal to the source
@@ -14034,6 +14071,19 @@ is real and now has a working diagnostic, but clipping the chain changes the fra
 paints the white is the layer's **EFB copy content** for the two destinations the last two fullscreen draws
 sample.
 
+> **CORRECTION (added in AP-AQ, same file, later session).** The last two sentences of the paragraph above are
+> wrong, and A2 below is the *reason* but was read the other way round: **the switch could not clip.** `A1`'s
+> "proof of function" only proves the *decode* and the *batch snapshot* - the batch dump prints the rect the
+> pipeline holds, not a rect that was applied. The application path called `RSSetScissorRects` while the only
+> rasterizer state the backend ever creates and binds has `ScissorEnable = FALSE` (`D3D11_RASTERIZER_DESC rdesc =
+> {0};` in `gfx_d3d11.c`), and **D3D11 ignores the scissor rectangles unless that flag is set**. So "and it
+> changes nothing, `mean |d| 0.000`" is the signature of an inert instrument, not evidence about the scissor.
+> With a second rasterizer state (`rs_scissor`, `ScissorEnable = TRUE`) bound under the same switch, the same
+> frame on the same scene moves exactly as the guest's rects imply (the eight corner draws' total effect on the
+> back buffer falls from **+162 / +95 / +107** to **≤ 2** units and b118 goes **(255,255,255) → (95,97,92)**), and
+> the copy destinations A3 measures are then shown to be **downstream** of the saturation rather than its cause.
+> A2's numbers are reproducible as an *inert-switch* measurement, so they are kept. See **AP-AQ**.
+
 **A1. `TLS_SCISSOR=1`: the diagnostic, and its proof of function.** `recomp/gx_pipeline.c` now decodes
 `BP 0x20/0x21` (y in bits 0..11, x in 12..23, minus the 342 bias, clamped to 639/447), snapshots the rect per
 batch (and includes it in the batch-merge predicate, so a scissor change splits a batch), and
@@ -14141,3 +14191,293 @@ and `ap_pair_f3300_samerun.png` (aurora | layer | 8x difference).
 
 
 
+
+---
+
+### AP-AQ. THE WHITE-OUT IS TWO HOST DEFECTS AND THE AP-AP ADDENDUM'S KEY EXPERIMENT WAS INERT — `TLS_SCISSOR=1` could never clip (ScissorEnable = FALSE), and three of the tail's ten draws are executed as `src*srcA + dst` where the guest asked for REPLACE; with both corrected guest 3300 is the cave with the tutorial popup on it (luma 142.29 -> 36.58, `>250` 0.06 % -> 0.00 %) and the copies AP-AP blamed are downstream of both
+
+This session answered the AP-AP addendum's open item ("which copy service writes 255, and from what") and the
+answer is that **no copy service does**: the copies are faithful, and the 255 they copy was written into the EFB
+by two host defects in the draw path. The first is an **instrument bug** in the very switch the addendum used to
+exonerate the scissor, so the addendum's central measurement is void - not wrong about the numbers, wrong about
+what they measured.
+
+Host state before every run: no `fifa15`, no runner, 84.6 GB free disk, ~10 GB free RAM; one runner at a time,
+every launch `--window --minimized`, save files deleted before every progression run, `TLS_INPUT_SCRIPT` set.
+
+**1. `TLS_SCISSOR=1` could not work, and the code says so in one line.** `recomp/gfx_d3d11.c` creates exactly one
+rasterizer state, from `D3D11_RASTERIZER_DESC rdesc = {0};` (FillMode/CullMode/DepthClipEnable set, everything else
+zeroed), and binds it once per present. `D3D11_RASTERIZER_DESC::ScissorEnable` therefore was **FALSE**, and
+**`RSSetScissorRects` is ignored when the bound rasterizer state does not enable scissoring**. AP-AP's addendum
+called `RSSetScissorRects` and measured the frame unchanged: `mean |d| 0.000`, `max |d| 0`, and still 255.00 with
+the popup cut. That result is exactly what an inert switch produces, and it was read as evidence about the
+scissor. Fixed by a second state (`rs_scissor`, identical plus `ScissorEnable = TRUE`), bound only under
+`TLS_SCISSOR=1`, so every gate reference stays valid (measured: gate **PASS**, item 7).
+
+**Proof that the switch now applies - and it is a same-scene comparison, not a cross-run one.** Two runs of
+3 400 frames with `TLS_BATCH_PROBE=3300`, one with `TLS_SCISSOR=1` (log `logs_ap/aq_scissor.log`) and one without
+(`logs_ap/aq_probe3300.log`). The two runs present the **identical** pre-tail frame - b113 = `(93,95,90)` in both,
+`voff=162204`, `vcnt=42`, `tex=0x91AAC860`, the same 130-batch draw list and the same nine copies - so the
+difference is the scissor and nothing else:
+
+| after | default `(r,g,b)` | `TLS_SCISSOR=1` `(r,g,b)` | guest's rect |
+|---|---|---|---|
+| b113 (the scene, no tail yet) | **(93, 95, 90)** | **(93, 95, 90)** | - |
+| b114 0x90395DC0 ONE/ZERO | (94, 100, 97) | (93, 95, 90) | 160x112 |
+| b115 0x9038D1C0 ONE/ZERO | **(161, 167, 159)** | (93, 95, 90) | 80x56 |
+| b116 0x9038D1C0 SRCCLR/ZERO | (103, 110, 101) | (92, 94, 89) | 80x56 |
+| b117 0x903917C0 *guest blend OFF* | **(188, 200, 187)** | (93, 96, 90) | 80x56 |
+| b118 0x9038D1C0 *guest blend OFF* | **(255, 255, 255) 3600/3600 bright** | **(95, 97, 92)** | 80x56 |
+| b119 0x903DBDC0 ONE/ZERO | (160, 168, 163) | (92, 94, 89) | 160x112 |
+| b120 0x9038D1C0 **ONE/ONE (genuine)** | (255, 255, 255) | **(255, 255, 255)** | **full frame** |
+| b121 0x905C3000 *guest blend OFF* | (255, 255, 255) | (255, 255, 255) | full frame |
+
+So the eight corner draws stop moving the frame (their whole effect collapses from **+162 / +95 / +107** to
+**≤ 2** units), which is what a 6.25 %/1.56 %-of-the-frame rectangle must do, and b118 - the first saturation in
+the default run - lands on `(95,97,92)` instead of pure white. The scissor was always the cause of the *coverage*
+half. What it does **not** fix is b120, the one pass that is genuinely full-frame by design, and the reason is
+item 2.
+
+**2. The second defect: the host promotes guest-disabled blends to additive.** `gfx_d3d11.c` (the
+"Standard GX blending rules" block in the batch loop) does
+
+```c
+if (dst_factor == 1 || dst_factor == 5 || dst_factor == 7) blend_enable = true;
+```
+
+**without consulting the guest's blend enable.** GX's `CMODE0` bit 0 *is* the blend enable
+([Dolphin `BPMemory.h`, `union BlendMode`](https://raw.githubusercontent.com/dolphin-emu/dolphin/master/Source/Core/VideoCommon/BPMemory.h):
+`blend_enable` = bit 0, `dst_factor` = bits 5..7, `src_factor` = bits 8..10, `subtract` = bit 11), and when it is
+clear the hardware **replaces** (`dst = src`) whatever the factor fields contain. Three of the tail's ten draws
+are in that class - `cmode0 = 0x003438` = blend **off**, `s=4 d=1` (SRCALPHA/ONE) - so the host executes them as
+`src*srcA + dst` instead of `src`. `TLS_NO_FORCE_BLEND=1` is the one-run A/B, and the effective state is now
+printed by `TLS_BATCH_PROBE` (`eff=1 es=4 ed=1` next to the guest's `blend=0 s=4 d=1`), so the divergence is
+visible in the log rather than inferred:
+
+| batch | guest | default effective | default frame after | `TLS_NO_FORCE_BLEND=1` frame after |
+|---|---|---|---|---|
+| b117 | blend **0**, s=4 d=1 | blend 1, s=4 d=1 (**add**) | (188, 200, 187) | **(1, 1, 1)** (replace: the sampled texture's own content) |
+| b118 | blend **0**, s=4 d=1 | blend 1, s=4 d=1 (**add**) | **(255, 255, 255)** | **(0, 1, 1)** |
+| b121 | blend **0**, s=4 d=1 | blend 1, s=4 d=1 (**add**) | (255, 255, 255) | (57, 65, 68) |
+
+b118 is the frame's first saturation, and it is **six vertices before copy 49969** - the copy the AP-AP addendum
+named as the prime suspect. The additive pass that spreads white over the whole screen,
+b120 (`0x003139`, blend **on**, `s=1 d=1` = real ONE/ONE), is genuine GX, so with the scissor fixed and the
+forced adds still in place the frame still reaches 255 (right-hand column of item 1's table: b120).
+
+**3. The nine copies of frame 3300, decoded against AP-AP item 1's register table.** `UPE_Copy` field positions
+taken from Dolphin's `BPMemory.h`, not from memory: `target_pixel_format` = bits 3..6 (`real = fmt/2 + (fmt&1)*8`),
+`half_scale` = bit 9, `scale_invert` = bit 10, **`clear` = bit 11**, `frame_to_field` = bits 12..13,
+`copy_to_xfb` = bit 14, `intensity_fmt` = bit 15. Destination size is the writer's own rule
+(`dst_w = pitch*8/bpp` for a tiled destination, `pitch*16` for a 16 bpp linear XFB copy; `step = src_w/dst_w`), and
+every derived size equals the size the *sampling* draw's `BP 0x88` image0 declares, so the chain is self-consistent
+inside the stream:
+
+| cmd | source rect | destination | pitch | exec | clear | half | real fmt | derived destination | bytes | sampled by |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 49562 | (0,0)-(639,447) | 0x90536FE0 | 160 | `0x01003B` | 0 | 0 | RGB5A3 (11) | 640x448 | 573 440 | (not sampled in this frame) |
+| 49569 | (0,0)-(159,111) | 0x903DBDC0 | 80 | `0x010063` | 0 | 0 | RGBA8 (6) | 160x112 | 71 680 | b119 |
+| 49574 | (0,0)-(639,447) | 0x90395DC0 | 160 | `0x010263` | 0 | **1** | RGBA8 (6) | 320x224 (step 2) | 286 720 | b114 |
+| 49640 | (0,0)-(159,111) | 0x9038D1C0 | 40 | `0x010A63` | **1** | **1** | RGBA8 (6) | 80x56 (step 2) | 17 920 | b115-b120 |
+| 49763 | (0,0)-(79,55) | 0x903917C0 | 40 | `0x010063` | 0 | 0 | RGBA8 (6) | 80x56 | 17 920 | b117 |
+| 49864 | (0,0)-(79,55) | 0x9038D1C0 | 40 | `0x010063` | 0 | 0 | RGBA8 (6) | 80x56 | 17 920 | b118 |
+| 49969 | (0,0)-(79,55) | 0x9038D1C0 | 40 | `0x010063` | 0 | 0 | RGBA8 (6) | 80x56 | 17 920 | b120 |
+| 50049 | (0,0)-(639,447) | 0x905C3000 | 320 | `0x010863` | **1** | 0 | RGBA8 (6) | 640x448 | 1 146 880 | b121 |
+| 51310 | (0,0)-(639,447) | 0x900037C0 | 40 | `0x004C03` | **1** | 0 | xfb=1, 16 bpp linear | 640x448 RGB565 | 573 440 | presentation |
+
+The guest's copy-clear colour is **black** (`BP 0x4F/0x50 = 0x00FF00/0x000000` = rgba(0,0,0,255)), so `clear=1`
+cannot produce 255 either. And the two destinations AP-AP's addendum measured as 100 % byte-255 are written by
+copies **49640/49864/49969** (0x9038D1C0) and **50049** (0x905C3000) - the same commands, now with their decoded
+sizes and clear bits.
+
+**4. What each copy actually read, and when the frame it read was already white.** One run with the copy probe,
+the source sampler and the copy register print on the same frame (`logs_ap/aq_probe3300.log`): `EfbSampleCopy`
+prints the average of the exact source rectangle read out of the mapped back buffer (i.e. the EFB state at that
+command), `CopyProbe` prints the mean of the destination bytes in guest memory right after the write:
+
+| copy | cmd | destination | source average (EFB at that command) | destination mean after the write |
+|---|---|---|---|---|
+| #0 | 49562 | 0x90536FE0 | (98, 101, 95) | (source-sized span; not exact for a half-scale) |
+| #1 | 49569 | 0x903DBDC0 | (162, 168, 160) | **186.98** (exact: 1:1, 160x112) |
+| #2 | 49574 | 0x90395DC0 | (98, 101, 95) | (source-sized span) |
+| #3 | 49640 | 0x9038D1C0 | (159, 167, 161) | 139.85 (span is 4x the destination) |
+| #4 | 49763 | 0x903917C0 | (86, 90, 85) | **172.70** (exact: 1:1) |
+| #5 | 49864 | 0x9038D1C0 | (174, 183, 172) | **219.10** (exact: 1:1) |
+| #6 | 49969 | 0x9038D1C0 | **(255, 255, 255)** | **255.00** (exact: 1:1) |
+| #7 | 50049 | 0x905C3000 | **(255, 255, 255)** | **255.00** (exact: 1:1, 640x448) |
+
+Read the two right-hand columns together: **the destinations are 255 exactly where the sources are 255**, and the
+source is the EFB. Copy #6's source is the corner *after* b118, which item 2 shows the host had just forced to
+pure white six vertices earlier; copy #7's source is the whole frame after the genuine additive b120. The copy
+service is doing its job; the frame it is handed is wrong. (The `CopyProbe` mean is a flat byte mean over the
+*source-sized* span, which is why the half-scale rows are only indicative - rows #1, #4, #5, #6, #7 are 1:1 and
+exact.)
+
+**5. The hardware reference for the same texture: Dolphin's own EFB-copy dumps.** `%APPDATA%\Dolphin Emulator\
+Dump\Textures` holds **74 500** per-copy dumps from this game, and **17 263** of them are `80x56_6` - the exact
+size/format of `0x9038D1C0`. Sampling every 86th of them (200 images) and measuring mean luma per copy:
+
+| Dolphin dump class | count | median mean-luma | p10 | p90 | median all-zero texels |
+|---|---|---|---|---|---|
+| **80x56_6** (0x9038D1C0's class) | **17 263** | **0.1** | 0.0 | 220.0 | **95.7 %** |
+| 160x112_6 (0x903DBDC0's class) | 6 302 | 27.3 | 0.0 | 220.0 | 0.0 % |
+| 320x224_6 (0x90395DC0's class) | 13 080 | 15.1 | 0.0 | 220.0 | 0.1 % |
+| 640x448_6 (0x905C3000's class) | 6 314 | 15.5 | 0.0 | 99.7 | 0.2 % |
+
+The distribution is bimodal (many frames are black-menu frames), so the median is not a per-frame oracle - but it
+does establish the thing the layer gets wrong: **an 80x56 RGBA8 EFB copy in this game is usually an almost
+entirely black image** (95.7 % of its texels zero), because it samples a corner of the EFB that the chain has
+reduced to a small glow. The layer's 0x9038D1C0 is 100 % byte-255. That is a two-orders-of-magnitude content
+difference *downstream of* items 1-2, and it is what the aurora reference measured as "+0.8 % across the same
+eight draws": aurora's additive pass adds almost nothing because the texture it samples is almost nothing.
+
+**6. The fix, measured in one A/B pair. `TLS_SCISSOR=1 TLS_NO_FORCE_BLEND=1`, guest-keyed shots at guest 2800 and
+3300, two launches (one per configuration, `logs_ap/aq_pair_default.log` / `aq_pair_fixed.log`), 185 s / 175 s:**
+
+| guest frame | default build (recorded references) | `TLS_SCISSOR=1 TLS_NO_FORCE_BLEND=1` |
+|---|---|---|
+| 2800 (content anchor) | (34.94, 33.23, 31.09) luma **33.50**, 0.00 % >250 | (60.07, 45.10, 49.14) luma **50.04**, 0.00 % >250 |
+| 3300 | (141.15, 142.54, 143.97) luma **142.29**, **0.06 %** >250 | (34.62, 36.61, 41.55) luma **36.58**, **0.00 %** >250 |
+| handover / save | 1680 / 1 348 992 B | **1680 / 1 348 992 B** (unchanged) |
+
+Pictures, `docs/evidence/aq_pair_g3300_scissor_blend.png` and `aq_pair_g2800_scissor_blend.png` (default | fixed | 4x amplified difference, from the
+PPMs of those two runs): the default frame is the familiar white wash with the "NEW TUTORIAL" band floating on it;
+the fixed frame is the **Gurgan Cave** - rock walls and ceiling, standing water, the hero in it, the tutorial band
+and its (B) prompt legible on top. Guest 2800 improves the same way: the water surface and its reflection are
+present in the fixed frame and black in the default one. The numbers and the pictures agree on the direction: the
+fixed frame is *darker* than the washed one because the wash is gone, and its luma (36.58) is in the same band as
+the gate's own content frame (33.3) - **not** at AP-AP's 91.59, which was the *layer's* pre-tail reading of the
+same broken pipeline (1.83x brighter than aurora's 48.6 at that point).
+
+**7. Neither switch is promoted, and here is the cost.** Both are default-off, so the recorded gate references are
+untouched and the gate was re-run on the rebuilt binary: **PASS on attempt 1**, popup `C5535C7D...`, content
+`6465ACEF...`, handover 1680, luma 33.3, save 1 348 992 / 29 344. Promoting either switch moves **both** gate
+references (frame 3500 is a white plateau *because* of the tail; with the tail fixed it becomes a cave with a
+popup, which is a different picture, and the content frame's hash moves too because the EFB-copy staging arena
+feeds the scene - the scene batches at b105/b108/b111 sample `0x90366FE0`, a staging address). A promotion
+therefore has to re-record deliberately, twice, and say why. The exact recipe, for a session that wants the fixed
+picture as the default:
+
+```powershell
+# 1. edit recomp/gfx_d3d11.c: default s_scissor_on and s_no_force_blend to 1 (or flip the getenv test)
+# 2. record the two new references from TWO independent runs each, guest-keyed:
+$env:TLS_SHOT_GUEST='1'; $env:TLS_SHOT_FRAMES='2800,3500'
+build\recomp\tls_runner.exe --window --minimized --frames 3520
+# 3. put the two hashes into tools/invariant.ps1 with the reason, then re-run the gate twice
+powershell -File tools/invariant.ps1 -Log logs_ap\aq_gate_promoted.log
+```
+
+**8. What is still open, bounded with numbers and the exact next command.** After both fixes the additive pass
+still adds far too much: in `logs_ap/aq_scissor_blend.log` (same switches, batch probe) b80 - the genuine ONE/ONE
+pass - takes the frame from (56,59,58) to **(141,149,144)**, i.e. the 80x56 texture it samples carries ~85 mean
+where the Dolphin corpus says a median of **0.1** and aurora's frame moves **+0.8 %** (item 11 shows the +0.8 % is
+not evidence about aurora's copy path either - aurora's copies never reach guest memory). That residue is the
+**corner chain's own content** (the eight draws' TEV/blend output over a corner that the *scene* has already
+painted bright - copy #1's source average was (162,168,160)), i.e. exactly the multi-stage-TEV/konst/raster class
+of defect that has no fix in this layer and that Aurora already has. It is the same item AP-AP left as priority
+B, now with a cleaner boundary: the coverage is right, the copy is faithful, and what remains is the combiner.
+The exact next command is a replay of the fixed configuration with the chain's destination bytes captured and
+compared against the Dolphin corpus:
+
+```powershell
+$env:TLS_SCISSOR='1'; $env:TLS_NO_FORCE_BLEND='1'
+$env:TLS_GX_CAPTURE='build/recomp/gxcap/aq3400'; $env:TLS_GX_CAPTURE_FROM='3294'; $env:TLS_GX_CAPTURE_TO='3300'
+$env:TLS_COPY_PROBE='3300'; $env:TLS_EFB_SAMPLE_FRAME='3300'; $env:TLS_SHOT_GUEST='1'; $env:TLS_SHOT_FRAMES='2800,3300'
+build\recomp\tls_runner.exe --window --minimized --frames 3400
+# then, on the capture's 0x90000000 plane: decode 0x9038D1C0 as 80x56 RGBA8 tiles and compare its
+# per-texel distribution with the 17 263 Dolphin 80x56_6 dumps (median 0.1 luma, 95.7 % zero texels)
+```
+
+**9. Instrument and code changes (all `recomp/` + `tools/` + this file; 0 changes to `src/`).**
+
+| change | file | why |
+|---|---|---|
+| `rs_scissor` (`ScissorEnable = TRUE`) + bind it under `TLS_SCISSOR=1` | `recomp/gfx_d3d11.c` | the AP-AP diagnostic could not clip; the switch now measures the scissor |
+| `TLS_NO_FORCE_BLEND=1` gate around the `dst_factor == 1/5/7` promotion | `recomp/gfx_d3d11.c` | the one-run A/B for "guest asked for REPLACE, host adds" |
+| `TLS_BATCH_PROBE` prints the **effective** blend state (`eff= es= ed=`) | `recomp/gfx_d3d11.c` | the divergence is now in the log, not inferred from the picture |
+| `logs_ap/aq_stats.py`, `aq_copytable.py`, `aq_pairpng.py`, `aq_dolphin_copies.py` | `logs_ap/` (scratch, untracked) | frame stats, the copy decode table, the pair images, the Dolphin corpus census |
+| `--ram-out <addr>:<size>:<file>` and `--ram-poison` | `tools/aurora_spike/aurora_replay.cpp` | dump a guest range after a replay, and the poison that separates "aurora wrote it" from "the capture already held it" (item 11). Rebuilt in place: `cmake --build G:\Program\aurora-spike\build2 --target tls_gx_replay` (2/2 targets, ~20 s) |
+
+**10. Run log (one runner at a time, every launch `--window --minimized`, save files deleted before each).**
+
+| # | what | result |
+|---|---|---|
+| 1 | 3 400 frames, default build, `TLS_BATCH_PROBE=3300 TLS_COPY_PROBE=3300 TLS_EFB_SAMPLE_FRAME=3300 TLS_EFB_COPY_PROBE=1 TLS_GX_CAPTURE=aq3305` | reproduces the recorded pair exactly (guest 2800 luma 33.50, guest 3300 luma 142.29); the copy/src table of item 4; the batch ladder of item 1 |
+| 2 | `TLS_SCISSOR=1` + batch probe | **the switch now applies**: corner draws +162/+95/+107 -> ≤2; b118 (255,255,255) -> (95,97,92); b120 still saturates |
+| 3 | `TLS_NO_FORCE_BLEND=1` + batch probe | b117 -> (1,1,1), b118 -> (0,1,1): replace instead of add; the tail no longer saturates |
+| 4 | both switches + batch probe | the tail's additive pass lands at (141,149,144) instead of 255 - no saturation (different scene: tail at b74-b81) |
+| 5 | matched pair, default vs both switches, guest-keyed shots 2800/3300 | **142.29 -> 36.58** and **0.06 % -> 0.00 %** above luma 250 at guest 3300; the cave renders (`docs/evidence/aq_pair_g3300_scissor_blend.png`) |
+| 6 | `pwsh tools/invariant.ps1` on the rebuilt binary | **PASS, attempt 1**, both references unchanged (`C5535C7D`, `6465ACEF`), handover 1680, save 1 348 992 / 29 344 |
+| 7 | no-op rebuild | `build\recomp\tls_runner.exe` 107.75 MB, 459 chunks / 470 objects, 1.2 s |
+| 8 | aurora replay to `--max-cmds 50049`, `--ram-out 0x905C3000:1146880` (no poison) | 100 % byte-255 - which is the **capture's** bytes, not aurora's (see row 10) |
+| 9 | same, `--max-cmds 50045` (before the copy) | identical 100 % byte-255: the dump reads the capture, so it cannot answer "did aurora write here" |
+| 10 | rows 8/9 with `--ram-poison` (0xCD), plus the 80x56 destination and the harness's own probe destination | **all four stay 100 % 0xCD** (mean 205.00, 0 bytes 255) while the probe copy's readback payload is 116.14 -> **aurora's copies never write guest memory** (item 11) |
+
+**Two traps, both cost nothing this time because they were written down first:** `TLS_BATCH_PROBE` matches the
+**present** counter *or* the guest frame, so a frame-gated probe can fire twice with different state (the log's
+`frame=` field is the present counter - the tables above say which counter they are); and `TLS_EFB_SAMPLE_FRAME`
+reads `g_runner_current_frame`, so it is guest-keyed while `TLS_SHOT_FRAMES` is not unless `TLS_SHOT_GUEST=1`.
+One sandbox note, recorded because it cost time: `docs/evidence/` rejected **new** files while this session ran
+under the confined workspace token (`Set-Content` and `mkdir` both denied, exactly as AP-AP found), so the two
+comparison images were first written to `logs_ap/`. The session's policy was widened to full access part-way
+through and the two PNGs were then copied into `docs/evidence/` under the names used above - i.e. the ACL, not the
+directory, was the obstacle, and a session that needs to add evidence there should check the token first.
+
+**11. The Aurora side: its EFB copies never reach guest memory at all - measured with a poison control, and it
+re-scopes AP-AP item 6.** AP-AP could not decode why "aurora's 640x448 EFB copy reads back 1.9x brighter than the
+frame it copied". The answer is that **no aurora copy writes its destination into the memory the guest samples**.
+The harness maps the capture's MEM1/MEM2 planes at the guest's own addresses and tells aurora to allocate
+**nothing** (`config.mem1Size = 0; config.mem2Size = 0; /* our own mapping is authoritative */`), while aurora's
+own contract is the opposite - `aurora.h`: *"The size of the GameCube's main memory... Note that it will not be
+allocated at the exact 0x80000000 address... This can be set to 0 to disable allocating this region"*. With no
+aurora-owned region there is nowhere for `GXCopyTex` to write back to, so the copy exists only as the readback
+payload `capture_copies`/`get` delivers.
+
+Measured with a new instrument, `--ram-out <addr>:<size>:<file>` (+ `--ram-poison`), which dumps a guest range
+after the replay and, with the poison, fills it with `0xCD` first so "written" and "already in the capture" cannot
+be confused. One replay per row, `--start-at 1 --stop-after 7`, 10 s each:
+
+| replay | range dumped | after the replay |
+|---|---|---|
+| `--max-cmds 50045` (before the game's copy at 50049) | 0x905C3000, 1 146 880 B | **mean 205.00 = 100 % 0xCD, 0 bytes 255, 0 bytes 0** |
+| `--max-cmds 50049` (after it) | 0x905C3000, 1 146 880 B | **mean 205.00, still 100 % 0xCD** |
+| `--max-cmds 51345`, full frame | 0x9038D1C0, 17 920 B | **mean 205.00, still 100 % 0xCD** |
+| `--max-cmds 51345 --probe-copy` (the harness's OWN probe copy, dst 0x90001000) | 0x90001000, 1 146 880 B | **mean 205.00, still 100 % 0xCD** - while the readback payload of that same copy is **116.14** |
+
+So the poison control separates the two paths cleanly: **the readback API works (payload 116.14 for the probe copy,
+the same 116.14 AP-AP measured for the full frame) and the guest-memory write does not happen for any copy, the
+harness's own probe included.** Two consequences, both of which change how the earlier numbers must be read:
+
+* **AP-AP item 6's "aurora's copy reads back 1.9x brighter" is not an aurora copy defect.** The draw that samples
+  the copy samples the **capture's** bytes for that destination - i.e. the *layer's* output, because the capture
+  is a snapshot of the layer's guest memory. The 1.9x is a comparison between aurora's EFB and the layer's copy
+  content, and the layer's copy content is exactly what AP-AQ items 1-2 show to be saturated. The question
+  "which side gains 1.9x" is therefore **dissolved**, not answered by aurora.
+* **Aurora's "+0.8 % across the eight draws" and its whole tail are not a copy-content reference either**, for the
+  same reason. What survives as a like-for-like aurora measurement is the **pre-tail** frame (before the first
+  copy of the frame) and every frame whose draws sample no EFB-copy destination.
+
+**This is now the top item for the migration, not for the layer.** Criterion 3 as recorded ("service one EFB copy
+through `capture_copies`/`get` and verify the guest samples the same bytes") is satisfied only for the *readback
+payload*; the guest-visible bytes are never written. The fix is one of two integrations, both small and both
+testable in one replay: give aurora the guest memory (`config.mem1Size = 64 MiB`, `mem2Size = 64 MiB`, seed it
+from the capture, and route the adapter's texture/array reads through aurora's pointers - they are *not* at
+0x80000000/0x90000000, per aurora's own header), or keep the harness mapping and add the writeback step that
+copies each readback payload into the mapped destination. Exact next command, once either is in:
+
+```powershell
+# poison 0x905C3000, replay to the game's copy at 50049, and require bytes that are NOT 0xCD
+G:\Program\aurora-spike\build2\tls_gx_replay.exe build\recomp\gxcap\ao3303\gxfifo.tlscap out.ppm `
+    --start-at 1 --stop-after 7 --max-cmds 50049 `
+    --ram-out 0x905C3000:1146880:copy.bin --ram-poison
+# pass = the dump is no longer 100 % 0xCD, and its de-tiled 640x448 RGBA8 mean matches
+#        --probe-copy's payload for the same command budget
+```
+
+**Two instrument notes from this measurement** (both cost a run, and the first is a trap worth naming): `%i` in
+`sscanf` **clamps a 32-bit guest address to INT_MAX** - the first version of `--ram-out` parsed `0x905C3000` as
+`0x7FFFFFFF` and took an access violation instead of writing the range (`exception 0xC0000005 ... read
+address=0x7fffffff`, which is the AV *address* naming the bug: it is `INT_MAX`, not a guest address). The fix is
+`strtoul`. And a dump **without** the poison reads the capture's own bytes and looks meaningful (it reported
+"100 % byte-255" for both 50045 and 50049 - see item 5's numbers, which are the same bytes); only the poison makes
+the answer "did anything write here" instead of "what is in the capture".

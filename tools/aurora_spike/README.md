@@ -129,10 +129,58 @@ the cave (neighbour correlation 0.864 against 0.698 for 4x4-tiled and 0.607 for 
 
 ## What was measured
 
-See `DEEPSEEK_HARNESS_HANDOVER.md` §5c.46 **AP-AP** (current), **AP-AO** and **AP-AN** (history) for the
-write-ups and numbers.
+See `DEEPSEEK_HARNESS_HANDOVER.md` §5c.46 **AP-AQ** (current), **AP-AP** and its addendum, **AP-AO** and
+**AP-AN** (history) for the write-ups and numbers.
 
-## The AP-AP result: the guest's tail is scissor-limited, and what is actually white is the copy content
+## The AP-AQ result: the tail is scissor-limited AND two of its draws were executed as adds
+
+**Read this instead of the AP-AP paragraph that follows it.** The tail of guest frame 3300 is a
+**downscale/blur chain drawn into a corner of the EFB**: eight of its ten draws carry a `BP 0x20/0x21` scissor of
+**160x112 (6.25 % of the frame)** or **80x56 (1.56 %)**, and each rectangle is exactly the source rect of the EFB
+copy issued next to it. Two host defects turn that into the white wash, and AP-AP's diagnostic could see neither:
+
+1. **`TLS_SCISSOR=1` never clipped anything.** `recomp/gfx_d3d11.c` creates one rasterizer state from
+   `D3D11_RASTERIZER_DESC rdesc = {0}`, so `ScissorEnable` was FALSE, and D3D11 ignores `RSSetScissorRects`
+   unless that flag is set. AP-AP's "applying the scissor changes the frame by nothing, `mean |d| 0.000`" is what
+   an **inert** switch measures. With a second state (`rs_scissor`, `ScissorEnable = TRUE`) bound under the same
+   switch, the eight corner draws' total effect on the back buffer falls from **+162 / +95 / +107** to **≤ 2**
+   units on an identical pre-tail frame (`b113 = (93,95,90)` in both runs), and b118 goes
+   **(255,255,255) → (95,97,92)**.
+2. **Guest-disabled blends were promoted to additive.** `gfx_d3d11.c` sets `blend_enable = true` whenever
+   `dst_factor ∈ {1,5,7}` without consulting CMODE0 bit 0 (the real blend enable). Three tail draws
+   (`cmode0 = 0x003438` = blend **off**, `s=4 d=1`) were therefore run as `src*srcA + dst`; b118 alone took the
+   frame from (188,200,187) to **pure white** six vertices before copy 49969. `TLS_NO_FORCE_BLEND=1` is the A/B.
+
+**The copy content AP-AP's addendum measured is downstream, not causal**: `0x9038D1C0` and `0x905C3000` really
+are 100 % byte-255 in guest memory, but the copies paint what the EFB holds at their own command - copy 49969 runs
+**6 vertices after** b118, and its source reads `(255,255,255)` because the host had just forced that. With
+`TLS_SCISSOR=1 TLS_NO_FORCE_BLEND=1`, guest 3300 renders the **Gurgan Cave with the tutorial popup on it**:
+luma **142.29 → 36.58**, pixels above luma 250 **0.06 % → 0.00 %** (`logs_ap/aq_pair_g3300.png`). Neither switch
+is promoted (both move the gate references); the recipe is AP-AQ item 7.
+
+What is then left is the **corner chain's own content**: an 80x56 RGBA8 EFB copy in this game is a median of
+**0.1 luma / 95.7 % zero texels** over the 17 263 `80x56_6` dumps in Dolphin's corpus, while the layer's is
+byte-255 - a TEV/combiner-class gap, bounded with its next command in AP-AQ item 8.
+
+## Aurora's own copies do not reach guest memory (AP-AQ item 11) - read this before trusting a replay
+
+The harness passes `mem1Size = mem2Size = 0` to aurora ("our own mapping is authoritative"), but aurora's
+`aurora.h` contract is that those sizes are the guest memory **aurora allocates** (and that it is *not* at
+0x80000000/0x90000000). Consequence, measured with `--ram-out`/`--ram-poison`: after a replay that services the
+game's copy at cmd 50049 (and after the harness's own `--probe-copy`), the destination range is **still 100 %
+0xCD** - nothing was written - while the readback payload for the same copy *is* delivered (116.14). So:
+
+* a replay's draws that sample an EFB copy sample the **capture's** bytes, which are the **layer's** output;
+* "aurora's copy reads back 1.9x brighter" was a comparison against the layer's copy content, not an aurora
+  copy defect (AP-AP item 6 is thereby dissolved, not answered);
+* criterion 3 holds for the readback API only. Giving aurora the guest memory (or writing each readback payload
+  into the harness mapping) is the top migration item; the poison command is in AP-AQ item 11.
+
+The new instrument: `--ram-out <addr>:<size>:<file>` dumps a guest range after the replay, `--ram-poison` fills it
+with `0xCD` before the replay so "written" and "already in the capture" cannot be confused. Do not parse the
+address with `%i`/`sscanf` - it clamps to INT_MAX (the first version took an access violation at 0x7fffffff).
+
+## The AP-AP result as originally written (kept: its measurements stand, its causal claim does not)
 
 The tail of guest frame 3300 is a **downscale/blur chain drawn into a corner of the EFB**. Eight of its ten
 draws carry a `BP 0x20/0x21` scissor of **160x112 (6.25 % of the frame)** or **80x56 (1.56 %)**, and each
