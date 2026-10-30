@@ -2,26 +2,32 @@
 
 ## NEXT SESSION — START HERE
 
-> **READ §5c.46 AP-AO FIRST (the last section of this file).** Three AP-AN items are closed and one is
-> re-scoped. (1) **The camera divergence was the comparison, not the renderer**: the layer screenshot AP-AN used
-> came from a *different run*, because a `TLS_SHOT_FRAMES` entry matches the **present** counter as well as the
-> guest frame and they are 64 apart here. Same-run the pair is **21.48 mean |d| / 52.40 %**, cross-run it is
-> 42.51 / 69.81 %, and a layer-vs-layer control across runs is **38.18 / 60.70 %** - so a cross-run pair cannot
-> measure anything. The camera is also provably **static inside the captured window** (probe payload after a
-> 1-frame and a 7-frame replay is **99.77 % byte-identical**, 2 676 of 1 146 880 bytes). What remains at the same
-> frame is aurora's partially-drawn content (68.2 % zero texels), not a viewpoint. (2) **The XFB display copy
+> **READ §5c.46 AP-AO FIRST (the last section of this file) and then its ADDENDUM.** Three AP-AN items are
+> closed and one is re-scoped. (1) **The camera divergence was the comparison, not the renderer**: the layer
+> screenshot AP-AN used came from a *different run*, because a `TLS_SHOT_FRAMES` entry matches the **present**
+> counter as well as the guest frame and they are 64 apart here. Same-run the pair is **21.48 mean |d| / 52.40 %**,
+> cross-run it is 42.51 / 69.81 %, and a layer-vs-layer control across runs is **38.18 / 60.70 %** - so a
+> cross-run pair cannot measure anything. The camera is also provably **static inside the captured window**
+> (probe payload after a 1-frame and a 7-frame replay is **99.77 % byte-identical**, 2 676 of 1 146 880 bytes),
+> and the same-frame NDC census (**addendum A1**) puts the two implementations' transforms in agreement: on
+> guest frame 3300 the union **clip x is identical on both sides, x[-4473.26 .. 5349.33]**. What remains at the
+> same frame is aurora's partially-drawn content (68.2 % zero texels), not a viewpoint. (2) **The XFB display copy
 > decodes**: row-linear little-endian **RGB565 640x448** (573 440 = 640x448x2), neighbour correlation **0.864**
 > vs 0.698 tiled and 0.607 byte-swapped; `tools/aurora_spike/tile2png.py --fmt linear565` reproduces it, and
 > aurora does not implement display copies at all, so it is our presentation contract, not a migration item.
-> (3) **The Chapter-1 gate is deterministic - 4/4 identical hashes** at `C5447108...`, handover 1680, on an idle
-> host, including on a rebuilt binary; AP-AN's 3/3 failure does not reproduce (that session had GPU replays
-> running) and **nothing was re-recorded**. But frame 3500 is a **pure white field with the "NEW TUTORIAL"
-> popup** (mean RGB 253.59/253.56/253.48), so the gate asserts the popup and the save, not the picture - giving
-> it a content-bearing frame and a mean-luma ceiling is the owed change (`AP-AO` item 6). Owning the one thing
-> still *bounded, not measured*: a same-frame NDC triangle needs `TLS_GX_CAPTURE` + `TLS_BATCH_DUMP_GUEST=<f>,<n>`
-> + `TLS_SHOT_GUEST=1` in **one launch** - this session's attempt landed on another moment of the field, and on
-> `[GxCap] cannot open ...` because the recorder did not create its directory (now fixed in
-> `recomp/gx_fifo_capture.c`; a capture is **134 816 346 bytes** for one frame with both MEM planes).
+> (3) **The Chapter-1 gate is deterministic AND now content-anchored** (addendum A3/A4). It was previously
+> shooting the **present** counter, not the guest frame (`TLS_SHOT_FRAMES=3500` = guest ~3436), unnoticed because
+> both frames are the same white plateau. It now sets `TLS_SHOT_GUEST=1`, shoots **guest 2800** (a fully-drawn
+> cave frame) as well as guest 3500, and asserts both hashes plus a luma window (15..120) and a bright-pixel
+> ceiling on the content frame, so a white-out or a lost layer FAILS - which is demonstrated, not assumed
+> (invocation 8 failed on a one-character hex typo, invocation 5 on the present-keyed white plateau).
+> Current references, each measured twice before recording and re-verified by two full invocations: content
+> **`6465ACEF...`** (luma 33.3), popup **`C5535C7D...`** (luma 253.6). The popup hash moved off `C5447108...`
+> because adding the 2800 shot changes what is rendered by 3500 - a gate reference is valid for a fixed
+> **instrument** as well as a fixed build.
+> **Two instrument rules before spending a run:** a capture window is replayable only if its **first** frame
+> walks clean - check with `camera.py <capture> --check-window` (10 s, no GPU, addendum A2) - and a layer/aurora
+> picture pair must come from **one launch**.
 
 > **THE AURORA SPIKE RAN AGAIN — read §5c.46 AP-AN (at the end of this file) before anything else; AP-AM is
 > now history, with three of its conclusions corrected in AP-AN item 9.** In one paragraph: criteria 1 and 3
@@ -13570,11 +13576,12 @@ to this white-out, it would still PASS. The popup is a *stable UI plateau* - shi
 +40 frames moved the handover out to frame <=1740 and still gave **`C5447108` exactly** (one run,
 `logs_ap/ao_gate_shift40.log`) - which is why the hash is stable, and also why it cannot see geometry.
 
-Recommended next change to the gate (not made here, because it needs a new reference verified twice):
-anchor the screenshot to a **content-bearing** frame and keep the hash, e.g. shoot guest 3300-3400 where the
-cave and the composite tail are both on screen, and add a **mean-luma ceiling** to the structural checks so a
-white-out fails instead of passing. The instrument now records the handover frame, which is what such a change
-must be keyed on.
+Recommended next change to the gate (not made *at this point of the session*, because it needs a new reference
+verified twice): anchor the screenshot to a **content-bearing** frame and keep the hash, and add a **mean-luma
+ceiling** to the structural checks so a white-out fails instead of passing. The instrument now records the
+handover frame, which is what such a change must be keyed on. **This was done later in the same session - see
+the AP-AO addendum (A3/A4): guest 2800 is now shot as well and asserted with a luma window, and the gate was
+found to have been present-keyed rather than guest-keyed all along.**
 
 The Dolphin references make the point quantitatively - this is the comparison the gate cannot make, so it was
 made here instead:
@@ -13634,9 +13641,9 @@ cached), 470 objects, 4.97 s**, `build/recomp/tls_runner.exe` 107.74 MB. **0 cha
 * **The XFB copy decodes** (§5): row-linear little-endian RGB565, 640x448, correlation 0.864, reproducible
   with `tile2png.py --fmt linear565`, and the layer's writer for it located at `gfx_d3d11.c:2366-2369`.
   Aurora does not implement display copies at all, so this is our presentation contract, not a migration item.
-* **The gate is deterministic** (§6): 4/4 identical hashes on an idle host including a rebuilt binary, so
-  **no re-record was owed**; AP-AN's failure is attributed to the GPU being busy with replays in that session.
-  What remains owed is a *content* anchor for it, with the evidence in §6 that frame 3500 is a white field.
+* **The gate is deterministic** (§6): 4/4 identical hashes on an idle host including a rebuilt binary.
+  AP-AN's failure is attributed to the GPU being busy with replays in that session. The *content* anchor that
+  §6 said was owed was then implemented in the same session - see the **AP-AO addendum** below.
 * **0 changes to `src/`.** One 36-line `recomp/` change (the recorder's directory), five `tools/` changes.
   Build green, runner rebuilt once, gate re-verified after it.
 
@@ -13647,4 +13654,119 @@ adds to it is a warning rather than a class: a captured frame is **self-consiste
 future aurora-vs-layer number must come from one launch, and the layer's file name carries the *present*
 counter while the capture carries the *guest* frame - the 64-present offset between them is the difference
 between "aurora renders a different cave" and "aurora renders the same cave 64 frames earlier".
+
+### AP-AO addendum (same session, second pass) — the same-frame NDC census, the capture-window rule, and a gate that can finally fail
+
+Four more things were measured after the first write-up, and one of them (A3) corrects a claim the gate has
+carried since AP-O. Everything below is measured on this idle host, one runner at a time, `--window
+--minimized`, `TLS_INPUT_SCRIPT` set, save data deleted before every progression run.
+
+**A1. The same-frame NDC census: both sides, one launch.** Two new tools. `camera.py --ndc` walks the frame
+with a **per-draw snapshot** of the POS descriptor, the projection and the pos matrix (reading those off the
+final GP state is wrong - see A5) and prints each draw's clip box, its w-divided box, its outside count and the
+frame union. `batchcensus.py` folds the layer's own `TLS_BATCH_DUMP` lines into the same statistics. Run B set
+`TLS_GX_CAPTURE=build/recomp/gxcap/ao3301` (3294-3300), `TLS_BATCH_DUMP_GUEST=3294,7` and `TLS_SHOT_GUEST=1`
+in **one** launch:
+
+| guest frame 3300, one run | capture (`camera.py --ndc`) | layer (`batchcensus.py`) |
+|---|---|---|
+| unit | 15 545 draws / 119 284 vertices | 131 batches / 163 710 vertex slots |
+| vertices outside the clip volume | 70 280 (58.9 %) | 83 853 (51.2 %) |
+| fully outside | 8 502 draws | 41 batches |
+| **union clip x** | **[-4473.26 .. 5349.33]** | **[-4473.26 .. 5349.33]** |
+| union clip y | [-571.39 .. 4817.71] | [-266.23 .. 4817.71] |
+
+The **clip-x union is identical to the hundredth** across a 9 823-unit span, computed independently: the layer
+from its own vertex transform of the live stream, `camera.py` from the captured registers plus the MEM plane.
+x is the axis the projection scales with (`pa = 1.261354`), so this is the pos-matrix/projection composition
+agreeing - which is what the camera question was about. What is *not* comparable, stated rather than glossed:
+the vertex totals (the layer's batch list is a triangle list, so strips are expanded and the count is of slots,
+not guest vertices) and the w-divided extrema (`1/w` explodes near the camera: the layer reports wNDC x up to
+102 862, the capture to 8 810 - same phenomenon, different vertex sets after expansion). The unit of comparison
+is the frame union, not batch-vs-draw. This is as close to the "same-frame NDC triangle" as one run can get,
+and it says the transforms agree.
+
+**A2. A capture window is replayable only if its FIRST frame walks clean.** `camera.py <capture>
+--check-window` walks every recorded frame from a **fresh** state - exactly what aurora's adapter does, since it
+starts the window with empty GP state - in about 10 s and no GPU:
+
+| capture | frame | result |
+|---|---|---|
+| `gxcap/ao3301` | **3294** | `unreplayable: draw at 48 fmt 0 vcnt 25 vtxsize 0` |
+| `gxcap/ao3301` | 3295 / 3297 / 3299 | walks clean (40 875 / 45 591 / 41 247 commands) |
+| `gxcap/ao3301` | 3296 / 3298 / 3300 | `unreplayable` (first command is a draw) |
+| `gxcap/cave3300w` | **3294** | walks clean (46 195 commands, 19 108 draws) |
+| `gxcap/cave3300w` | 3299 | `unreplayable` |
+
+and the GPU agrees with the 10-second check: replaying `ao3301` dies with `[replay] frame 3294: adapter failed:
+draw with unknown vertex size at offset 48` and exit 8, while `cave3300w` replays. In each window **one parity
+of guest frames writes the vertex format before its first draw and the other inherits it** - which parity is
+which differs between runs, which is why AP-AN's windows worked and this session's first attempt did not. Rule
+for the next session: run `--check-window` before spending a replay; if frame 0 is unreplayable, move
+`TLS_GX_CAPTURE_FROM` by one frame. (A window is still only a *slice* of a frame's state: even a clean first
+frame starts from whatever the guest wrote inside the window.)
+
+**A3. The gate's "frame 3500" was the PRESENT counter, not the guest frame.** `TLS_SHOT_FRAMES` matches
+`s_d3d11_dump_count` as well as `g_runner_current_frame` (`gfx_d3d11.c:3245-3250`) and the present counter comes
+up first, so a gate that never set `TLS_SHOT_GUEST` was shooting **present 3500 = guest frame ~3436** all
+along. That went unnoticed for four sessions because in this timeline *both* frames are the same white "NEW
+TUTORIAL" plateau and are **byte-identical**: present 2800 and present 3500 both hash `C5447108...` (measured).
+The gate now sets `TLS_SHOT_GUEST=1`, so `2800` means guest 2800 (present 2864) and `3500` means guest 3500
+(present 3564), and it names its two files from the run's own `Dumped screenshot to ...` lines rather than
+guessing them (the first guest-keyed run of the gate failed every attempt at the old fixed path).
+
+**A4. A content anchor: guest 2800, with a luma window - and the gate can now fail.** The gate shoots guest
+2800 as well and asserts, on that frame: its hash; mean luma inside **15..120**; fewer than **10 %** of pixels
+above luma 250; and a swap check (the popup frame must have luma > 200, the content frame < 120) so a changed
+shot-to-file mapping fails loudly instead of silently passing. Guest 2800 is a fully-drawn Gurgan Cave frame -
+`docs/evidence/ao_gate_f2800_content.png`, mean RGB (34.94, 33.23, 31.09), **luma 33.50**, 0.00 % of pixels
+above 250 - against the popup frame's `docs/evidence/ao_gate_f3500_popup.png`, mean RGB (253.6, 253.56,
+253.46), **luma 253.56**, 99.33 % above 250.
+
+Both references were measured **twice on an idle host before recording**, then re-verified by two full gate
+invocations:
+
+| gate evidence | handover | popup f3500 | content f2800 | luma | save |
+|---|---|---|---|---|---|
+| two pin runs (`logs_ap/ao_pin_1.log`, `ao_pin_2.log`) | - | `C5535C7D...` twice | `6465ACEF...` twice | - | - |
+| `logs_ap/ao_inv_9.log` | 1680 | `C5535C7D...` | `6465ACEF...` | 33.3 | 1348992 / 29344 |
+| `logs_ap/ao_inv_10.log` | 1680 | `C5535C7D...` | `6465ACEF...` | 33.3 | 1348992 / 29344 |
+
+**PASS on attempt 1 in both invocations, identical values.** And the gate's failure paths are *demonstrated*,
+not assumed: `logs_ap/ao_inv_8.out.txt` shows the content hash failing on a one-character typo in the recorded
+constant (`6465ACEF...1BA7...` vs `...1B5BA7...`), and `logs_ap/ao_inv_5.out.txt` shows all three content
+checks firing when the shots were still present-keyed and both frames were the white plateau (luma 253.63,
+99.33 % bright, `FAIL: the two shots look swapped`).
+
+**The popup hash had to move, and that is a measurement, not a concession.** Adding the 2800 shot moved the
+popup frame's hash from `C5447108...` (3500 shot alone) to `C5535C7D...` in 2/2 runs. One extra screenshot at
+2800 changes what has been *rendered* by 3500: the field's scene clock is not a pure function of the guest frame
+number. That is the same effect that made AP-AN's three attempts disagree under host load, and it is why a gate
+reference is only valid for a fixed instrument as well as a fixed build - recorded in the script's own comment.
+
+**A5. A tool bug the census found, worth knowing for any future decode.** The first `--ndc` run reported clip
+values of **4.4e38**: the census was decoding vertices with the *final* GP state, and frame 3300 mixes F32 2D
+elements with S16 3D geometry, so the last VAT entry decoded other draws' vertex bytes into nonsense. Fixed by
+snapshotting the POS descriptor, projection and pos matrix **at each draw**; the same fix makes `--draw N` use
+the state that was in force for that draw instead of the end of the frame. Numbers before the fix:
+`union clip x[-4.4e38 .. 4.5e38]`; after: `x[-4473.26 .. 5349.33]`, which is the value A1 compares.
+
+**A6. Run log for the second pass** (one runner at a time; the gate attempts are 3 520 frames each).
+
+| # | what | result |
+|---|---|---|
+| 11 | `camera.py --ndc` on `gxfifo.tlscap` frame 6 after the snapshot fix | 19 081 draws / 147 209 vertices, 71.3 % outside, union clip x[-66.81..1373.86] |
+| 12 | runner run B: capture + `TLS_BATCH_DUMP_GUEST=3294,7` + 9 guest-keyed shots, 1 launch | capture written (`ao3301`, 7 439 609 FIFO bytes); 131 batches / 163 710 vtx at guest 3300; timeline profile guest 2500 luma 46.6, 2600 33.1, 2800 33.5, 3000/3100 204.2, 3200 203.0, 3300 142.3, 3400/3500 253.6 |
+| 13 | aurora replay of `ao3301` | **exit 8**: `adapter failed: draw with unknown vertex size at offset 48` - the window is unreplayable (A2) |
+| 14 | `camera.py --check-window` on both captures | the table in A2 |
+| 15 | two pin runs (`TLS_SHOT_FRAMES=2800,3500`, `TLS_SHOT_GUEST=1`) | `6465ACEF...` and `C5535C7D...` twice |
+| 16 | gate invocations 5, 6, 7 (the two intermediate forms) | FAIL, and each failure named its own bug: present-keyed (swap check), missing files (2 attempts x 3 tries), and the hex typo |
+| 17 | gate invocations 9, 10 (final form) | **PASS attempt 1 twice**, identical values (A4) |
+
+**A7. Files.** `tools/aurora_spike/camera.py` (+`--ndc`, `--ndc-top`, `--check-window`, per-draw snapshots),
+`tools/aurora_spike/batchcensus.py` (new), `tools/invariant.ps1` (two guest-keyed frames, luma window, swap
+check, per-attempt logs, handover, TSV), `tools/aurora_spike/README.md`, and the evidence images
+`docs/evidence/ao_gate_f2800_content.png` and `ao_gate_f3500_popup.png`. **0 changes to `src/`**; no `recomp/`
+change in this pass; the runner binary is the one rebuilt in item 9.
+
 
