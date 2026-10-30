@@ -1163,7 +1163,6 @@ int run_synthetic_copy(uint32_t fbWidth, uint32_t fbHeight, AuroraBackend backen
 }
 
 } // namespace
-
 int main(int argc, char** argv) {
   std::signal(SIGABRT, sigabrt_handler);
   std::set_terminate(terminate_handler);
@@ -1183,6 +1182,22 @@ int main(int argc, char** argv) {
   bool rawStream = false, verbose = false, parseOnly = false, syntheticCopy = false;
   bool probeCopy = false;
   const char* probePpm = nullptr;
+  /* AP-AQ: dump a guest-memory range after the replay. The harness maps MEM1/MEM2 at the guest's
+   * own addresses, so an EFB copy's destination bytes live right there after aurora has serviced
+   * the copy - and nothing in this harness could read them back until now. That is the one
+   * measurement the "aurora's copy reads back 1.9x brighter than the frame it copied" claim
+   * (handover 5c.46 AP-AP item 6) was missing: it needs the copy's own payload in guest memory,
+   * not the EFB probe. Format: --ram-out <addr>:<size>:<file>, e.g.
+   *   --ram-out 0x905C3000:1146880:out.bin */
+  uint32_t ramOutAddr = 0, ramOutSize = 0;
+  const char* ramOutPath = nullptr;
+  /* --ram-poison: fill the --ram-out range with 0xCD before the replay. Without it the dump
+   * cannot tell aurora's copy output from the bytes the CAPTURE already contains: the capture is
+   * a snapshot of the layer's guest memory, so e.g. 0x905C3000 already holds the layer's white
+   * copy result and a dump of it reads 255 either way (measured: identical 100 %-255 dump at
+   * --max-cmds 50045, i.e. before the game's copy, and at 50049, after it). With the poison a
+   * byte still 0xCD after the replay means "this copy never wrote guest memory". */
+  bool ramPoison = false;
   for (int i = 3; i < argc; ++i) {
     const char* a = argv[i];
     if (std::strcmp(a, "--fb") == 0 && i + 1 < argc) {
@@ -1219,8 +1234,34 @@ int main(int argc, char** argv) {
       g_maxCmds = std::atoi(argv[++i]);
     } else if (std::strcmp(a, "--probe-copy") == 0) {
       probeCopy = true;
+    } else if (std::strcmp(a, "--ram-poison") == 0) {
+      ramPoison = true;
     } else if (std::strcmp(a, "--probe-ppm") == 0 && i + 1 < argc) {
       probePpm = argv[++i];
+    } else if (std::strcmp(a, "--ram-out") == 0 && i + 1 < argc) {
+      const char* spec = argv[++i];
+      /* <addr>:<size>:<file>, addr/size in C notation (0x... ok). Deliberately NOT sscanf("%i"):
+       * a 32-bit guest address with the top bit set (e.g. 0x905C3000) overflows int, and the CRT
+       * clamps it to INT_MAX - the first version of this option dumped from 0x7FFFFFFF and took an
+       * access violation instead of writing the range (measured: "exception 0xC0000005 read
+       * address=0x7fffffff"). strtoul does not clamp. */
+      const char* c1 = std::strchr(spec, ':');
+      const char* c2 = c1 ? std::strchr(c1 + 1, ':') : nullptr;
+      if (c1 && c2) {
+        static char s_ramPath[512];
+        const unsigned long a32 = std::strtoul(spec, nullptr, 0);
+        const unsigned long sz = std::strtoul(c1 + 1, nullptr, 0);
+        std::snprintf(s_ramPath, sizeof(s_ramPath), "%s", c2 + 1);
+        if (a32 && sz && s_ramPath[0]) {
+          ramOutAddr = static_cast<uint32_t>(a32);
+          ramOutSize = static_cast<uint32_t>(sz);
+          ramOutPath = s_ramPath;
+        }
+      }
+      if (!ramOutPath) {
+        std::fprintf(stderr, "[replay] --ram-out wants <addr>:<size>:<file>, got '%s'\n", spec);
+        return 2;
+      }
       probeCopy = true;
     } else if (std::strcmp(a, "--verbose") == 0) {
       verbose = true;
@@ -1258,6 +1299,12 @@ int main(int argc, char** argv) {
       std::fprintf(stderr, "[replay] %s\n", err.c_str());
       return 1;
     }
+  }
+
+  if (ramPoison && ramOutPath && ramOutSize) {
+    std::memset(reinterpret_cast<void*>(static_cast<uintptr_t>(ramOutAddr)), 0xCD, ramOutSize);
+    std::printf("[replay] poisoned guest 0x%08X..0x%08X (%u bytes) with 0xCD before the replay\n",
+                ramOutAddr, ramOutAddr + ramOutSize, ramOutSize);
   }
 
   if (copyRecord >= 0) {
@@ -1542,6 +1589,27 @@ int main(int argc, char** argv) {
     } else {
       std::printf("[replay] no copy readback delivered for 0x%08X\n", copyDst);
       rc = 4;
+    }
+  }
+
+  /* AP-AQ: the guest-memory range the caller asked for, as aurora left it. This is how an EFB
+   * copy's DESTINATION bytes are read back from the replay (the guest samples exactly these), so
+   * "the copy is 1.9x brighter than the frame it copied" can be split into "the copy wrote it"
+   * and "the draw that samples it gained it". */
+  if (ramOutPath && ramOutSize) {
+    const void* p = reinterpret_cast<const void*>(static_cast<uintptr_t>(ramOutAddr));
+    if (FILE* rf = std::fopen(ramOutPath, "wb")) {
+      std::fwrite(p, 1, ramOutSize, rf);
+      std::fclose(rf);
+      const uint8_t* b = static_cast<const uint8_t*>(p);
+      uint64_t sum = 0;
+      unsigned n255 = 0, n0 = 0;
+      for (uint32_t k = 0; k < ramOutSize; ++k) { sum += b[k]; if (b[k] == 255) ++n255; if (b[k] == 0) ++n0; }
+      std::printf("[replay] wrote %s (guest 0x%08X, %u bytes): mean byte %.2f, %u x 255, %u x 0\n",
+                  ramOutPath, ramOutAddr, ramOutSize,
+                  static_cast<double>(sum) / static_cast<double>(ramOutSize), n255, n0);
+    } else {
+      std::fprintf(stderr, "[replay] cannot write %s\n", ramOutPath);
     }
   }
 
