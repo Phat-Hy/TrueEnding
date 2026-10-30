@@ -13762,11 +13762,35 @@ the state that was in force for that draw instead of the end of the frame. Numbe
 | 15 | two pin runs (`TLS_SHOT_FRAMES=2800,3500`, `TLS_SHOT_GUEST=1`) | `6465ACEF...` and `C5535C7D...` twice |
 | 16 | gate invocations 5, 6, 7 (the two intermediate forms) | FAIL, and each failure named its own bug: present-keyed (swap check), missing files (2 attempts x 3 tries), and the hex typo |
 | 17 | gate invocations 9, 10 (final form) | **PASS attempt 1 twice**, identical values (A4) |
+| 18 | aurora replay of `ao3301` with `--start-at 1` (frame 3295) | exit 0, 6 frames; probe mean byte 116.14; **the wash is not reproduced** (A8) |
 
 **A7. Files.** `tools/aurora_spike/camera.py` (+`--ndc`, `--ndc-top`, `--check-window`, per-draw snapshots),
 `tools/aurora_spike/batchcensus.py` (new), `tools/invariant.ps1` (two guest-keyed frames, luma window, swap
 check, per-attempt logs, handover, TSV), `tools/aurora_spike/README.md`, and the evidence images
 `docs/evidence/ao_gate_f2800_content.png` and `ao_gate_f3500_popup.png`. **0 changes to `src/`**; no `recomp/`
 change in this pass; the runner binary is the one rebuilt in item 9.
+
+**A8. A second same-run pair, on the WASHED frame - and aurora does not wash it out.** The `ao3301` window is
+unreplayable from its first frame (A2), but frame 3295 walks clean, so the replay can simply start there:
+`--start-at 1 --stop-after 7` replays 3295-3300 with no new runner run (exit 0, 6 frames, 36 EFB copy commands,
+198 scissor writes, 1 421 texobjs, 0 reserved-wrap fixes) and the probe copy at the end of guest 3300 is
+**1 146 880 bytes, mean byte 116.14** (against 86.12 for the clean-cave window and 94.61 for the frame-3400
+probe - a brighter frame, as the timeline says it should be).
+
+| guest 3300, one run (Run B), 640x448 | aurora (`--probe-copy`) | layer (same-run shot, present 3364) |
+|---|---|---|
+| mean RGB | **(68.82, 74.10, 66.66)** | **(141.31, 142.70, 144.12)** |
+| `compare.py` | 83.23 % of pixels differ by > 8, mean \|d\| **78.65**, max 172 | |
+| content | the cave, the hero **visible with the sword**, the NEW TUTORIAL popup, readable | the same scene **blown out to near-white** by the additive composite tail (AP-AI) |
+
+`docs/evidence/ao_pair_f3300_wash_samerun.png`. So on this stream the layer's own white-out is **not**
+reproduced by aurora: aurora renders the same frame at less than half the mean brightness and keeps the
+picture readable. State the caveat with it: aurora **stubs display copies** and resolves EFB copies at pass
+end (AP-AN 12d), so the nine full-screen additive quads of AP-AI may be sampling different content there - this
+is "aurora does not reproduce the wash on this stream", not yet "the layer's composite path is wrong". That
+question is now cheap to settle, because both sides of it come from one launch and the tools are in place:
+compare aurora's frame with `TLS_BATCH_CUTOFF` variants of the same frame (`--max-cmds` on the replay, cutoff in
+the layer) to find the command range that introduces the wash.
+
 
 
