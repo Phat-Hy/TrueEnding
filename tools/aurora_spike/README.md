@@ -20,6 +20,15 @@ Nothing here is on the shipping path. It is a measuring instrument:
 | `streamwalk.py` | walks one recorded frame from the capture alone (command/register census, per-draw offsets and vertex sizes, the scissor writes with GX's +342 view bias removed, POS decode from the MEM plane). This is the "layer side" of the one-draw comparison without a runner run. |
 | `caprecords.py` | prints a capture's record order (frame begin/end, FIFO, MEM, COPY) - it is how AP-AN established that 76 of `window.tlscap`'s 95 copy records are written after the window closes. |
 | `bpstate.py` | the BP/CP/XF state at a stream offset of frame 3400: the scissor/viewport/projection registers the guest actually wrote. |
+| `camera.py` | the capture side of ONE draw: pos-matrix rows as aurora reads them, projection, viewport, scissor with the 342 bias removed, `CP 0x30/3`, and the first N vertices' POS -> clip -> NDC. The instrument for "is the camera the same" without a runner run. |
+
+**The rule AP-AO cost a session to learn: a layer/aurora picture pair has to come from ONE run.** The runner's
+screenshot file name carries the **present** counter (`d3d11_screenshot_<present>.ppm`) while `TLS_GX_CAPTURE`
+records the **guest** frame; at the Chapter-1 cave the two are 64 apart, and a `TLS_SHOT_FRAMES` entry with no
+`TLS_SHOT_GUEST` matches either. The mapping is in the run's own log: the `[D3D11] Dumped screenshot to ...`
+line immediately before `[GxCap] frame <n> recorded` is the same-run screenshot for that guest frame. Also:
+the field's scene at a given guest frame **drifts between runs** (guest 3300 was the cave in one run and a
+white-washed tutorial prompt in another), so a frame number is only a scene anchor inside a single run.
 
 The capture itself comes from the **runner**, not from here: `TLS_GX_CAPTURE=<dir>` (see
 `recomp/gx_fifo_capture.h`) records the guest's real write-gather-pipe byte stream for a frame
@@ -97,6 +106,11 @@ tls_gx_replay build\recomp\gxcap\window.tlscap out.ppm --stop-after 1 `
 
 `tools/aurora_spike/cmdlist.py <capture> --frame 0 --from A --to B` turns a `--max-cmds` bisect into the
 command that changed the picture; `tile2png.py` de-tiles any copy payload (RGBA8 or RGB565) for inspection.
+`tile2png.py --fmt linear565` decodes a **display (XFB) copy**, which is not tiled at all: the guest's bytes at
+`0x900997E0` for frame 3295 (640x448, 573 440 bytes) are row-linear little-endian RGB565, and that decode gives
+the cave (neighbour correlation 0.864 against 0.698 for 4x4-tiled and 0.607 for the byte-swapped read) -
+`docs/evidence/ao_xfb_display_copy_linear565.png`. `compare.py` takes PNGs as well as PPMs and returns
+`--out` a side-by-side (aurora | host | 8x difference); passing `--out` used to print the doc instead.
 
 ## What was measured
 

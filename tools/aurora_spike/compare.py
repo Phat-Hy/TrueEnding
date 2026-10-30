@@ -20,6 +20,11 @@ def load_ppm(path):
     import numpy as np
     with open(path, 'rb') as f:
         data = f.read()
+    if data.startswith(b'\x89PNG'):
+        # PNGs are accepted too: a de-tiled EFB-copy payload (tile2png.py) is exactly the
+        # image a display copy comparison needs, and it arrives as PNG (5c.46 AP-AO).
+        from PIL import Image
+        return np.asarray(Image.open(path).convert('RGB'))
     if not data.startswith(b'P6'):
         raise SystemExit(f'{path}: not a binary PPM')
     fields, pos = [], 2
@@ -48,7 +53,10 @@ def main(argv):
     import numpy as np
     from PIL import Image
 
-    args = [a for a in argv[1:] if not a.startswith('--')]
+    # Option VALUES must not be counted as positionals - this used to strip only the
+    # option flags, so `--out cmp.png` was read as a third positional and the script
+    # printed its own doc instead of comparing (5c.46 AP-AO).
+    args = []
     tol = 8
     out = None
     i = 1
@@ -57,7 +65,9 @@ def main(argv):
             tol = int(argv[i + 1]); i += 2; continue
         if argv[i] == '--out':
             out = argv[i + 1]; i += 2; continue
-        i += 1
+        if argv[i].startswith('--'):
+            i += 1; continue
+        args.append(argv[i]); i += 1
     if len(args) != 2:
         print(__doc__)
         return 1
