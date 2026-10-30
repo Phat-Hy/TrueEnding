@@ -15,10 +15,42 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#ifdef _WIN32
+#include <direct.h>
+#endif
 
 int tls_gxcap_on = 0;
 
 #define TLS_GXCAP_MAX_PATH 512
+
+/* Create the capture directory if it is missing, one component at a time. Without this the
+ * recorder printed `[GxCap] cannot open ...` and silently recorded NOTHING: a whole 8-minute
+ * run produced a batch dump and a screenshot but no stream, because the caller had only ever
+ * created the directory by hand (measured, 5c.46 AP-AO). The recorder is still a dumb byte
+ * sink - this only makes its one failure mode impossible. */
+static void cap_mkdirs(const char* dir) {
+    char tmp[TLS_GXCAP_MAX_PATH];
+    size_t n = strlen(dir);
+    if (n == 0 || n >= sizeof(tmp)) return;
+    memcpy(tmp, dir, n + 1);
+    for (size_t i = 1; i < n; ++i) {
+        const char c = tmp[i];
+        if (c == '/' || c == '\\') {
+            tmp[i] = '\0';
+#ifdef _WIN32
+            _mkdir(tmp);
+#else
+            mkdir(tmp, 0777);
+#endif
+            tmp[i] = c;
+        }
+    }
+#ifdef _WIN32
+    _mkdir(tmp);
+#else
+    mkdir(tmp, 0777);
+#endif
+}
 
 static FILE* s_file = NULL;
 static int s_from = 0;
@@ -77,6 +109,10 @@ static int cap_init(void) {
     char path[TLS_GXCAP_MAX_PATH];
     snprintf(path, sizeof(path), "%s/gxfifo.tlscap", dir);
     s_file = fopen(path, "wb");
+    if (!s_file) {
+        cap_mkdirs(dir);
+        s_file = fopen(path, "wb");
+    }
     if (!s_file) {
         fprintf(stderr, "[GxCap] cannot open %s\n", path);
         return 0;
