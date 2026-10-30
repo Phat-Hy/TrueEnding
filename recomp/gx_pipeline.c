@@ -65,6 +65,11 @@ static uint32_t s_draw_batch_count = 0;
 static bool s_blend_enable = true;
 static uint8_t s_src_factor = 4; // GX_BL_SRCA
 static uint8_t s_dst_factor = 5; // GX_BL_INVSRCA
+/* GX scissor, BP 0x20 (top-left) / BP 0x21 (bottom-right). GX writes both with a +342 bias in
+ * each 12-bit field, which is why BP 0x20 = 0x156156 decodes to (0,0) and not to (342,342).
+ * Snapshot per batch; consumed only by the TLS_SCISSOR=1 diagnostic (handover 5c.46 AP-AP). */
+static uint16_t s_scissor[4] = {0, 0, 639, 447};
+static bool s_scissor_valid = false;
 static bool s_blend_subtract = false;
 static bool s_depth_test_enable = true;
 static bool s_depth_write_enable = true;
@@ -587,6 +592,14 @@ void gx_pipeline_init(void) {
     s_draw_batch_count = 0;
     s_pending_copy_count = 0;
     s_batch_barrier = false;
+    /* Scissor state does NOT persist across frames the way texture/TEV state does in this
+     * pipeline: a frame that never writes BP 0x20/0x21 draws with the full target, which is
+     * the shipping behaviour. Only the TLS_SCISSOR=1 diagnostic reads it (5c.46 AP-AP). */
+    s_scissor[0] = 0;
+    s_scissor[1] = 0;
+    s_scissor[2] = 639;
+    s_scissor[3] = 447;
+    s_scissor_valid = false;
     s_parser_state = GX_STATE_IDLE;
     s_current_pnm_idx = 0;
     s_default_pnm_idx = 0;
@@ -1516,6 +1529,9 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
                 last->depth_test_enable == s_depth_test_enable &&
                 last->tev_state == s_cur_tev_state &&
                 last->texcoord_mask == texcoord_mask &&
+                last->scissor_valid == s_scissor_valid &&
+                last->scissor[0] == s_scissor[0] && last->scissor[1] == s_scissor[1] &&
+                last->scissor[2] == s_scissor[2] && last->scissor[3] == s_scissor[3] &&
                 (!(texmap_mask & 0x01) || (last->tev_texmap[0].guest_addr == s_tex_units[0].guest_addr &&
                                            last->tev_texmap[0].width == s_tex_units[0].width &&
                                            last->tev_texmap[0].height == s_tex_units[0].height &&
@@ -1580,6 +1596,11 @@ static void emit_primitive_triangles(uint8_t prim_type, const GxVertex* verts, u
             b->depth_test_enable = s_depth_test_enable;
             b->alpha_comp0 = s_alpha_comp0;
             b->alpha_ref0 = s_alpha_ref0;
+            b->scissor[0] = s_scissor[0];
+            b->scissor[1] = s_scissor[1];
+            b->scissor[2] = s_scissor[2];
+            b->scissor[3] = s_scissor[3];
+            b->scissor_valid = s_scissor_valid;
             b->tev_state = s_cur_tev_state;
             b->tev_texmap_mask = (uint8_t)(texmap_mask | ind_texmap_mask);
             b->texcoord_mask = texcoord_mask;
@@ -1684,6 +1705,26 @@ static void gx_pipeline_process_bp(uint8_t reg, uint32_t val) {
         s_depth_test_enable = (val & 1) != 0;
         s_depth_func = (uint8_t)((val >> 1) & 7);
         s_depth_write_enable = ((val >> 4) & 1) != 0;
+        return;
+    }
+    if (reg == 0x20 || reg == 0x21) { // SU_SCISSOR: BP 0x20 top-left, BP 0x21 bottom-right
+        const uint16_t y = (uint16_t)(val & 0x7FF);
+        const uint16_t x = (uint16_t)((val >> 12) & 0x7FF);
+        const int o = (reg == 0x20) ? 0 : 2;
+        s_scissor[o + 0] = (uint16_t)((x > 342u) ? (x - 342u) : 0u);
+        s_scissor[o + 1] = (uint16_t)((y > 342u) ? (y - 342u) : 0u);
+        if (s_scissor[2] > 639) s_scissor[2] = 639;
+        if (s_scissor[3] > 447) s_scissor[3] = 447;
+        s_scissor_valid = true;
+        if (getenv("TLS_SCISSOR_LOG")) {
+            static int s_sc_log = 0;
+            if (s_sc_log < 60 && s_gx_frame_idx >= 3290) {
+                printf("[Scissor] f=%u BP 0x%02X = 0x%06X -> (%u,%u)..(%u,%u)\n",
+                       s_gx_frame_idx, reg, val, s_scissor[0], s_scissor[1], s_scissor[2], s_scissor[3]);
+                fflush(stdout);
+                s_sc_log++;
+            }
+        }
         return;
     }
     if (reg == 0x41) { // PE_CMODE0 (blend mode & factors)

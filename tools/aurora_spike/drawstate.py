@@ -104,6 +104,10 @@ def dump_draw(n, d):
     if d['viewport'] is not None:
         print('        viewport XF 0x101A..0x101F = '
               + ' '.join(f'{x:.3f}' for x in d['viewport']))
+    if d.get('clear') is not None:
+        ra, bg, dz = d['clear']
+        print(f'        copy clear BP 0x4F/0x50/0x51 = 0x{ra:06X}/0x{bg:06X}/0x{dz:06X} -> '
+              f'rgba=({(bg >> 8) & 0xFF},{(bg & 0xFF)},{(ra & 0xFF)},{(ra >> 8) & 0xFF}) depth=0x{dz:06X}')
     if d['copies']:
         c = d['copies'][-1]
         print(f'        copies before this draw: {len(d["copies"])}, last = '
@@ -262,6 +266,8 @@ def main():
                     d['img0'] = [bp.get(0x88), bp.get(0x89)]
                     d['img3'] = [bp.get(0x94), bp.get(0x95)]
                     d['scissor'] = (bp[0x20], bp[0x21]) if (0x20 in bp and 0x21 in bp) else None
+                    d['clear'] = ((bp.get(0x4F, 0), bp.get(0x50, 0), bp.get(0x51, 0))
+                                  if (0x4F in bp or 0x50 in bp) else None)
                     d['viewport'] = [f32(xf[a]) if a in xf else float('nan')
                                      for a in range(0x101A, 0x1020)]
                     d['copies'] = list(copies)

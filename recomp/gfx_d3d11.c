@@ -3361,13 +3361,16 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                             printf("  b%u vtx=%u tex=%d addr=0x%08X %ux%u fmt=%u tlut=0x%08X "
                                    "blend=%d src=%u dst=%u sub=%d persp=%d pnm=%u zwrite=%d ztest=%d "
                                    "ndc=[%.2f..%.2f, %.2f..%.2f] z=[%.4f..%.4f] "
-                                   "wNDC=[x %.2f..%.2f y %.2f..%.2f z %.2f..%.2f] outside=%u/%u\n",
+                                   "wNDC=[x %.2f..%.2f y %.2f..%.2f z %.2f..%.2f] outside=%u/%u "
+                                   "scissor=[%u,%u..%u,%u]v%d\n",
                                    b, bd->vertex_count, bd->has_texture, bd->tex.guest_addr,
                                    bd->tex.width, bd->tex.height, bd->tex.format, bd->tex.tlut_addr,
                                    bd->blend_enable, bd->src_factor, bd->dst_factor, bd->subtract,
                                    bd->is_perspective, bd->pnm_idx, bd->depth_write_enable, bd->depth_test_enable,
                                    minx, maxx, miny, maxy, minz, maxz,
-                                   nminx, nmaxx, nminy, nmaxy, nminz, nmaxz, outside, bd->vertex_count);
+                                   nminx, nmaxx, nminy, nmaxy, nminz, nmaxz, outside, bd->vertex_count,
+                                   bd->scissor[0], bd->scissor[1], bd->scissor[2], bd->scissor[3],
+                                   bd->scissor_valid ? 1 : 0);
                             shown++;
                         }
                         fflush(stdout);
@@ -3451,6 +3454,53 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                                                                      batch->subtract, batch->blend_enable);
                     if (bs) {
                         ID3D11DeviceContext_OMSetBlendState(s_d3d11.context, bs, NULL, 0xFFFFFFFF);
+                    }
+
+                    /* GX scissor (BP 0x20/0x21). The shipping path has NEVER applied one, and that is
+                     * the AP-AI/AP-AP white-out: the guest's tail is a downscale/blur chain drawn into
+                     * a 160x112 (6.25 %) or 80x56 (1.56 %) corner of the EFB under a scissor, and this
+                     * backend drew every one of those quads across the whole 640x448 target. Measured
+                     * on guest frame 3300 with the tail cut off (TLS_BATCH_CUTOFF=114) the frame is
+                     * luma 91.59; with the tail and without the popup live (114 -> 122) the same frame
+                     * is 255.00 with 100 % of pixels above luma 250; the full frame is 142.29. Aurora,
+                     * clipping them, moves +0.8 % across the same eight draws.
+                     *
+                     * TLS_SCISSOR=1 applies the guest's rect, scaled from EFB pixels into the
+                     * aspect-preserving viewport, as a D3D11 scissor. It is a DIAGNOSTIC and defaults
+                     * OFF so every gate reference recorded before AP-AP stays valid; switching it on
+                     * changes every frame the guest scissor-limits, so the gate references would have
+                     * to be re-recorded (twice) before it could become the default. */
+                    static int s_scissor_on = -1;
+                    if (s_scissor_on < 0) s_scissor_on = getenv("TLS_SCISSOR") ? 1 : 0;
+                    if (s_scissor_on) {
+                        D3D11_RECT sr;
+                        if (batch->scissor_valid) {
+                            const float sx = s_d3d11.vp_w / 640.0f;
+                            const float sy = s_d3d11.vp_h / 448.0f;
+                            sr.left = (LONG)(s_d3d11.vp_x + (float)batch->scissor[0] * sx + 0.5f);
+                            sr.top = (LONG)(s_d3d11.vp_y + (float)batch->scissor[1] * sy + 0.5f);
+                            sr.right = (LONG)(s_d3d11.vp_x + (float)(batch->scissor[2] + 1) * sx + 0.5f);
+                            sr.bottom = (LONG)(s_d3d11.vp_y + (float)(batch->scissor[3] + 1) * sy + 0.5f);
+                        } else {
+                            sr.left = 0;
+                            sr.top = 0;
+                            sr.right = (LONG)s_d3d11.win_width;
+                            sr.bottom = (LONG)s_d3d11.win_height;
+                        }
+                        ID3D11DeviceContext_RSSetScissorRects(s_d3d11.context, 1, &sr);
+                        if (getenv("TLS_SCISSOR_LOG")) {
+                            static int s_sca_log = 0;
+                            if (s_sca_log < 200 && s_d3d11.frame_counter >= 3299) {
+                                printf("[ScissorApply] f=%u b=%u valid=%d target=%ux%u vp=(%.1f,%.1f,%.1fx%.1f) "
+                                       "rect=(%ld,%ld)-(%ld,%ld)\n",
+                                       s_d3d11.frame_counter, b, (int)batch->scissor_valid,
+                                       s_d3d11.win_width, s_d3d11.win_height,
+                                       s_d3d11.vp_x, s_d3d11.vp_y, s_d3d11.vp_w, s_d3d11.vp_h,
+                                       (long)sr.left, (long)sr.top, (long)sr.right, (long)sr.bottom);
+                                fflush(stdout);
+                                s_sca_log++;
+                            }
+                        }
                     }
 
                     if (batch->is_perspective) {
