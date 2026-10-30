@@ -2,31 +2,33 @@
 
 ## NEXT SESSION — START HERE
 
-> **READ §5c.46 AP-AP (the last section of this file) FIRST.** The white-out is **named**: it is the
-> layer's **missing GX scissor**, not aurora's copy stubbing. Guest frame 3300's tail is a **downscale/blur
-> chain rendered into a 160x112 or 80x56 corner** of the 640x448 EFB - 8 of its 10 draws carry
-> `BP 0x20/0x21` scissors of **6.25 %** and **1.56 %** of the frame (each rectangle identical to the SOURCE
-> RECT of the EFB copy issued next to it), and the two full-frame draws that follow sample the corner copy.
-> `recomp/gfx_d3d11.c` has **no scissor at all** (0 `RSSetScissorRects`; the only one in the tree is
-> `gfx_d3d12.c:654`, and `gx_pipeline.c` never decodes `BP 0x20/0x21`), so the layer draws all ten
-> `ndc=[-1.00..1.00]` over the whole target. Measured, guest-keyed shot at frame 3300, **each row twice on
-> separate launches and identical to the hundredth**: layer with the tail cut off (batches 0..113) **luma 91.59**, with the tail and without the popup (batches 0..121) **255.00 with
-> 100.00 % of pixels above luma 250**, full frame **142.29**. Aurora on the same stream moves **102.34 ->
-> 103.18 mean byte (+0.8 %)** across the same eight draws. The named range is **in-frame stream commands
-> 49632..50127 = guest draws 15513..15522 = layer batches 114..121**; the tail is a corner chain in the
-> guest's stream, and the layer is the only implementation that renders it as a full-screen feedback loop.
-> **Still open, and not this section's claim:** the layer is also **1.83x brighter before the tail**
-> (luma 91.59 vs aurora's 48.6), so the scissor explains the saturation, not the whole divergence - and
-> aurora is not a brightness reference either (its 640x448 EFB copy comes back **1.9x brighter** than the
-> frame it copied: RGB (49.54,50.47,47.19) at cmd 50045 -> (94.30,101.69,85.42) after the blit at 50127).
+> **READ §5c.46 AP-AP (the last section of this file) AND ITS ADDENDUM FIRST.** The white-out is **named**, and
+> the first answer was wrong: it is **not** the layer's missing GX scissor, it is the **layer's EFB copy
+> content**. Guest frame 3300's tail is a downscale/blur chain drawn into a 160x112 or 80x56 corner of the EFB
+> under a scissor (8 of its 10 draws, **6.25 %** and **1.56 %** of the frame, each rectangle equal to the source
+> rect of the copy beside it), and the layer implements no scissor at all - but applying the guest's scissor as
+> a diagnostic (`TLS_SCISSOR=1`, added this session and proven to apply, addendum A1) changes the frame by
+> **nothing**: `mean |d| 0.000`, `max |d| 0`, and with the popup cut it is still **255.00 / 100 % above luma
+> 250**. What is white is the **copy destination**: read straight out of the capture's MEM2 plane,
+> **0x9038D1C0 (80x56) and 0x905C3000 (640x448) are 100 % byte-255**, and those two are sampled by the
+> **additive** fullscreen quad b120 and the **final opaque blit** b121 - while the corner-limited copies
+> (0x90395DC0 mean 136.48, 0x903DBDC0 186.98, 0x903917C0 129.12) are not white. The guest's copy-clear colour
+> is black (`BP 0x4F/0x50 = 0x00FF00/0x000000`), so the copy itself fills those buffers with 255. Next command:
+> `TLS_EFB_COPY_PROBE=1` on a 3 400-frame run, against the four copies that write those two destinations
+> (in-frame cmds **49640, 49864, 49969, 50049**). **Layer ladder** (guest-keyed shot at 3300, **two runs each,
+> identical to the hundredth**): `TLS_BATCH_CUTOFF=114` **luma 91.59**, `=122` **255.00 with 100.00 % of pixels
+> above 250**, full frame **142.29**. Aurora on the same stream moves **102.34 -> 103.18 mean byte (+0.8 %)**
+> across the same eight draws; the same-launch pair is **83.23 % changed, mean |d| 78.65**, decomposed into the
+> white-copy composite plus a **1.83x** baseline that exists before the tail (luma 91.59 vs 48.6).
+> **Still open:** aurora is not a brightness reference either (its 640x448 EFB copy reads back **1.9x brighter**
+> than the frame it copied: (49.54,50.47,47.19) at cmd 50045 -> (94.30,101.69,85.42) at 50127).
 > **The field is bounded, measured:** 25 extra `A` presses through frame 4512 change nothing (guest 3300 /
-> 3800 / 4400 are all pure white 255.00 and **3800 is byte-identical to 4400**, mean |d| 0.000), and
-> `TLS_ENTRY_PROBE=1` printed **0 lines in 4 600 frames** - the Chapter-1 entry chain is never entered, so
-> there is **no missing host-side wake event** to find: nothing the host can deliver is being withheld.
-> Gate **PASS on attempt 1** at both references (`C5535C7D`, `6465ACEF`, handover 1680, luma 33.3, save
-> 1348992 / 29344). Two instrument traps this session cost a run each: `TLS_BATCH_CUTOFF=''` means **0**
-> (every frame draws nothing -> black PPMs), and `--max-cmds` is **per replayed frame**, not cumulative
-> (`aurora_replay.cpp:653/658`).
+> 3800 / 4400 are all pure white and **3800 is byte-identical to 4400**, mean |d| 0.000), and
+> `TLS_ENTRY_PROBE=1` printed **0 lines in 4 600 frames** - so there is **no missing host-side wake event**:
+> the guest never enters the chain that would consume one. Gate **PASS on attempt 1** at both references
+> (`C5535C7D`, `6465ACEF`, handover 1680, luma 33.3, save 1348992 / 29344). Two instrument traps this session
+> cost a run each: `TLS_BATCH_CUTOFF=''` means **0** (nothing drawn -> black PPMs), and `--max-cmds` is **per
+> replayed frame**, not cumulative (`aurora_replay.cpp:653/658`).
 
 > **READ §5c.46 AP-AO FIRST (the last section of this file) and then its ADDENDUM.** Three AP-AN items are
 > closed and one is re-scoped. (1) **The camera divergence was the comparison, not the renderer**: the layer
@@ -13838,6 +13840,12 @@ corner-limited post-process in the guest's stream, the layer is the only impleme
 full-screen feedback loop, and the saturating step is **in-frame commands 49632..50127 = guest draws
 15513..15522 = layer batches 114..121**.
 
+> **The ADDENDUM at the end of this section disproves the causal half of that last sentence - in the same
+> session, with the next measurement.** Applying the guest's scissor as a diagnostic (`TLS_SCISSOR=1`) leaves
+> the frame **byte-identical** (`mean |d| 0.000`, `max |d| 0`) and still 255.00 without the popup, because the
+> two textures the last two fullscreen draws sample are **100 % byte-255 in guest memory**. Read the addendum
+> (A1-A5) before acting on this section: the diagnosis that survives is the **copy content**, not the coverage.
+
 Host state before any run of this session: no `fifa15`, no runner, 85 GB free disk; one runner at a time, every
 launch `--window --minimized`, save files deleted before every progression run, `TLS_INPUT_SCRIPT` set.
 
@@ -14018,12 +14026,106 @@ Two traps, each measured with a wasted run:
 | 13 | `pwsh tools/invariant.ps1` | **PASS, attempt 1**: `C5535C7D...`, `6465ACEF...`, handover 1680, luma 33.3, save 1348992 / 29344 |
 | 14 | `TLS_BATCH_CUTOFF=114` and `=122` again, separate launches | **identical to the hundredth**: (88.20, 93.40, 91.17) luma 91.59, and (255.00, 255.00, 255.00) with 100.00 % above 250 |
 
+### AP-AP addendum (same session, second pass) — the scissor is real but it is NOT the cause: the two textures that paint the frame are 100 % byte-255 in the layer's own guest memory
+
+The AP-AP section above ends with "the saturating step is batches 114..121, which are the eight corner
+draws". **That attribution is wrong, and the same session's next measurement disproves it.** The scissor defect
+is real and now has a working diagnostic, but clipping the chain changes the frame by **nothing at all**; what
+paints the white is the layer's **EFB copy content** for the two destinations the last two fullscreen draws
+sample.
+
+**A1. `TLS_SCISSOR=1`: the diagnostic, and its proof of function.** `recomp/gx_pipeline.c` now decodes
+`BP 0x20/0x21` (y in bits 0..11, x in 12..23, minus the 342 bias, clamped to 639/447), snapshots the rect per
+batch (and includes it in the batch-merge predicate, so a scissor change splits a batch), and
+`recomp/gfx_d3d11.c` applies it as a D3D11 scissor scaled from EFB pixels into the aspect-preserving viewport,
+**only when `TLS_SCISSOR=1`** (default off, so every existing gate reference stays valid). The batch dump now
+carries the rect as well, and one run with `TLS_BATCH_DUMP_GUEST=3300,1` proves the layer holds exactly what the
+capture says:
+
+```
+  b114 ... addr=0x90395DC0 320x224 ... ndc=[-1.00..1.00, -1.00..1.00] scissor=[0,0..159,111]v1
+  b115 ... addr=0x9038D1C0  80x56  ... scissor=[0,0..79,55]v1
+  b116 ... addr=0x9038D1C0  80x56  ... (blend 1 s=2 d=0)   scissor=[0,0..79,55]v1
+  b117 ... addr=0x903917C0  80x56  ... scissor=[0,0..79,55]v1
+  b118 ... addr=0x9038D1C0  80x56  ... scissor=[0,0..79,55]v1
+  b119 ... addr=0x903DBDC0 160x112 ... scissor=[0,0..159,111]v1
+  b120 ... addr=0x9038D1C0  80x56  ... (blend 1 s=1 d=1)   scissor=[0,0..639,447]v1
+  b121 ... addr=0x905C3000 640x448 ... scissor=[0,0..639,447]v1
+```
+
+**A2. And it changes nothing.** With `TLS_SCISSOR=1`, guest frame 3300 is **(141.15, 142.54, 143.97) luma
+142.29** - *byte-identical* to the run without it (`compare` of the two PPMs: `mean |d| 0.000`, `changed > 8` =
+`0.00 %`, `max |d| 0`) - and with the popup cut (`TLS_BATCH_CUTOFF=122`) it is still **255.00 / 100.00 % above
+luma 250**. The nine corner draws clipped to 1.56 %/6.25 % of the frame leave the frame exactly as white as
+before. So the missing scissor is a real, separately measurable defect (`RSSetScissorRects` 0 occurrences in
+`gfx_d3d11.c`) but **it is not what produces the white-out**, and AP-AP's "saturating step" sentence must be
+read as "these are the draws whose *inputs* are wrong", not "these draws cover too much".
+
+**A3. What is actually white: the copy destinations, read out of the capture's own MEM2 plane.** The EFB copies
+write their destinations into guest memory, and the capture dumps MEM2 at the end of the window, so
+`TLS_GX_CAPTURE` already contains the layer's copy results. Extracting each destination from
+`gxcap/ao3303/gxfifo.tlscap`'s `0x90000000` plane, at the size `BP 0x88` gives the draw that samples it:
+
+| copy destination | size | sampled by | bytes | mean | bytes == 0 | **bytes == 255** |
+|---|---|---|---|---|---|---|
+| 0x90395DC0 | 320x224 | b114 (corner, scissor on) | 286 720 | 136.48 | 0.0 % | 25.3 % |
+| 0x903DBDC0 | 160x112 | b119 (corner) | 71 680 | 186.98 | 0.0 % | 25.0 % |
+| 0x903917C0 | 80x56 | b117 (corner) | 17 920 | 129.12 | 0.0 % | 25.0 % |
+| 0x90536FE0 | 320x224 | (not sampled) | 286 720 | 171.58 | 0.0 % | 0.8 % |
+| **0x9038D1C0** | **80x56** | **b120 (ADDITIVE, fullscreen)** | 17 920 | **255.00** | 0.0 % | **100.0 %** |
+| **0x905C3000** | **640x448** | **b121 (OPAQUE, fullscreen)** | 1 146 880 | **255.00** | 0.0 % | **100.0 %** |
+
+**The two textures that paint the whole frame are 100 % byte-255, and the three that are corner-limited are
+not.** b120 adds a pure-white texture over the entire screen and b121 then *replaces* the whole screen with
+another pure-white one - which is exactly the "wash", and it is independent of whether the corner draws were
+clipped, because the corner draws only ever wrote into textures that are *not* the white ones. The guest's own
+copy-clear colour is **not** white (`BP 0x4F/0x50/0x51 = 0x00FF00/0x000000/0xFFFFFF` = rgba(0,0,0,255)), so a
+clear-colour fill does not explain it either; the destination is being filled with 255 by the copy *itself*, or
+the copy is not landing and the buffer holds an earlier all-255 fill.
+
+**A4. The next command, exact.** The copy service already has a probe (`TLS_EFB_COPY_PROBE`,
+`recomp/gx_pipeline.c:1729+`), and the geometry derivation has an A/B (`TLS_EFB_COPY_FMT`, `TLS_EFB_COPY_GEOM`):
+
+```powershell
+$env:TLS_EFB_COPY_PROBE='1'; $env:TLS_SHOT_FRAMES='3300'; $env:TLS_SHOT_GUEST='1'
+build\recomp\tls_runner.exe --window --minimized --frames 3400    # prints every serviced copy
+```
+
+then compare the serviced source rect/destination/format for the four frame-3300 copies that write
+0x9038D1C0 (cmds 49640, 49864, 49969) and 0x905C3000 (cmd 50049) against the register decode in AP-AP item 1.
+The two `clear=1` copies among them are the prime suspects, and `TLS_EFB_COPY_FMT=0` / `TLS_EFB_COPY_LOG=1` are
+the existing switches that separate "wrong geometry" from "wrong write". A second, cheaper discriminator is
+`copycmp.py`: the destination bytes are now known to be 100 % 255, so any copy service that claims to have
+written them can be checked against that number directly.
+
+**A5. Run log for the addendum** (one runner at a time, all `--window --minimized`).
+
+| # | what | result |
+|---|---|---|
+| 15 | runner `TLS_SCISSOR=1`, shot 3300 | **(141.15, 142.54, 143.97)** - `mean |d| 0.000`, `max |d| 0`, i.e. **byte-identical** to the run without the switch |
+| 16 | runner `TLS_SCISSOR=1` + `TLS_BATCH_CUTOFF=122`, shot 3300 | still **(255.00, 255.00, 255.00), 100.00 % above luma 250** |
+| 17 | runner `TLS_BATCH_DUMP_GUEST=3300,1 TLS_BATCH_DUMP_MAX=200` | the dump now prints `scissor=[...]` and shows `[0,0..159,111]` / `[0,0..79,55]` on b114-b119 and full on b120/b121 (A1) |
+| 18 | MEM2 extraction of the six copy destinations from `gxcap/ao3303` | the table in A3: the two sampled by the fullscreen draws are **100 % byte-255** |
+| 19 | `pwsh tools/invariant.ps1` on the **rebuilt** binary (switch default off) | **PASS, attempt 1**, identical references: `C5535C7D...`, `6465ACEF...`, handover 1680, luma 33.3 - so the new decode/switch is inert by default, measured |
+
+**A6. What survives from AP-AP unchanged.** The tail's structure (10 draws, 9 copies, the register values in
+item 1's table), the scissor rectangles and their match to the copy source rects, the layer's total lack of
+scissor support, the layer's luma ladder 91.59 -> 255.00 -> 142.29 under `TLS_BATCH_CUTOFF`, aurora's +0.8 %
+across the same eight draws, the 83.23 %/78.65 same-launch pair and its decomposition, the 1.83x pre-tail
+baseline, the field-state bound in item 7, and the gate PASS. What changes is the **cause**: AP-AI's "nine
+full-screen additive EFB-copy quads" are white because **the textures they sample are white**, not because the
+quads are unclipped. That also makes the fix cheaper and more upstream: repair the copy, and both the additive
+and the final blit get the picture back without touching the compositing at all.
 **10. Definition of done, item by item.** *The white-out is named as a specific layer defect, with the command
-range and a same-run pair whose `compare.py` numbers are explained*: **yes** - `recomp/gfx_d3d11.c` implements no
-GX scissor, the guest's tail is clipped to 1.56 %/6.25 % of the frame (register values in item 1), the layer
-renders it full-frame and saturates at exactly the batch range 114..121 = commands 49632..50127, aurora moves
-+0.8 % across the same draws, and the 83.23 %/78.65 pair is decomposed into that saturation plus a 1.83x
-baseline that exists before the tail. *The first missing draw range for the content gap is named*: **no** - it is
+range and a same-run pair whose `compare.py` numbers are explained*: **yes, but the cause is the one the
+AP-AP ADDENDUM above measures, not the scissor this item first named** - the layer's EFB copies into
+0x9038D1C0 and 0x905C3000 are **100 % byte-255** in guest memory (A3), those two are sampled by the additive
+quad b120 and the final opaque blit b121, and applying the guest's scissor (A1/A2) leaves the frame
+byte-identical and still white. The command range is cmds 49632..50127 for the draws and **49640 / 49864 / 49969
+(cmd, -> 0x9038D1C0) and 50049 (-> 0x905C3000) for the copies**; the 83.23 %/78.65 pair decomposes into that
+white-copy composite plus a 1.83x baseline that exists before the tail. *The layer's missing scissor* is real,
+measured (`RSSetScissorRects` 0 occurrences in `gfx_d3d11.c`, the guest clips to 1.56 %/6.25 %), and now has a
+diagnostic (`TLS_SCISSOR=1`), but it is a *separate* defect that does not cause the white-out. *The first missing draw range for the content gap is named*: **no** - it is
 **bounded** instead: the EFB payloads are 97.6 % painted (2.42 % zero texels), the pre-chain payload 99.84 %, and
 the gap is traced to aurora's own copy (1.9x on a `clear=1` 640x448 copy) with the two-run command in item 6.
 *The field state is either advanced with a measured cause or bounded with the event that should wake it named*:
