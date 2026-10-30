@@ -30,6 +30,20 @@ line immediately before `[GxCap] frame <n> recorded` is the same-run screenshot 
 the field's scene at a given guest frame **drifts between runs** (guest 3300 was the cave in one run and a
 white-washed tutorial prompt in another), so a frame number is only a scene anchor inside a single run.
 
+**Check a capture window before you spend a replay on it.** `camera.py <capture> --check-window` walks every
+recorded frame from a fresh state (which is what aurora's adapter does) in about 10 s and no GPU. A window is
+replayable only if its **first** frame walks clean: the frames alternate between a "full" stream (~1.05 MB,
+45-46 k commands, 19 k draws, 147 k vertices) and a "thin" one (~0.8 MB, 31 k commands, 9.5 k draws) that
+inherits its vertex format from the previous frame, and the adapter starts with empty state, so a thin first
+frame aborts with `adapter failed: draw with unknown vertex size` (measured on `gxcap/ao3301`, frame 3294, at
+offset 48 - the same offset the cheap check names).
+
+**And the NDC census** (`camera.py <capture> --frame N --ndc --ndc-top 8`, plus
+`batchcensus.py <run.log>` for the layer's side) is how the two implementations' transforms are compared on one
+frame: it prints the per-draw clip box, the w-divided box, the outside count and the frame union. On
+`gxcap/ao3301` guest frame 3300 the union **clip x is identical on both sides, x[-4473.26..5349.33]**; the
+vertex totals are not comparable because the layer's batch list is a triangle list (strip expansion).
+
 The capture itself comes from the **runner**, not from here: `TLS_GX_CAPTURE=<dir>` (see
 `recomp/gx_fifo_capture.h`) records the guest's real write-gather-pipe byte stream for a frame
 window, with display lists inlined, plus a MEM1+MEM2 snapshot and every EFB copy's destination
