@@ -2,6 +2,32 @@
 
 ## NEXT SESSION — START HERE
 
+> **READ §5c.46 AP-AP (the last section of this file) FIRST.** The white-out is **named**: it is the
+> layer's **missing GX scissor**, not aurora's copy stubbing. Guest frame 3300's tail is a **downscale/blur
+> chain rendered into a 160x112 or 80x56 corner** of the 640x448 EFB - 8 of its 10 draws carry
+> `BP 0x20/0x21` scissors of **6.25 %** and **1.56 %** of the frame (each rectangle identical to the SOURCE
+> RECT of the EFB copy issued next to it), and the two full-frame draws that follow sample the corner copy.
+> `recomp/gfx_d3d11.c` has **no scissor at all** (0 `RSSetScissorRects`; the only one in the tree is
+> `gfx_d3d12.c:654`, and `gx_pipeline.c` never decodes `BP 0x20/0x21`), so the layer draws all ten
+> `ndc=[-1.00..1.00]` over the whole target. Measured, one run each, guest-keyed shot: layer with the tail
+> cut off (batches 0..113) **luma 91.59**, with the tail and without the popup (batches 0..121) **255.00 with
+> 100.00 % of pixels above luma 250**, full frame **142.29**. Aurora on the same stream moves **102.34 ->
+> 103.18 mean byte (+0.8 %)** across the same eight draws. The named range is **in-frame stream commands
+> 49632..50127 = guest draws 15513..15522 = layer batches 114..121**; the tail is a corner chain in the
+> guest's stream, and the layer is the only implementation that renders it as a full-screen feedback loop.
+> **Still open, and not this section's claim:** the layer is also **1.83x brighter before the tail**
+> (luma 91.59 vs aurora's 48.6), so the scissor explains the saturation, not the whole divergence - and
+> aurora is not a brightness reference either (its 640x448 EFB copy comes back **1.9x brighter** than the
+> frame it copied: RGB (49.54,50.47,47.19) at cmd 50045 -> (94.30,101.69,85.42) after the blit at 50127).
+> **The field is bounded, measured:** 25 extra `A` presses through frame 4512 change nothing (guest 3300 /
+> 3800 / 4400 are all pure white 255.00 and **3800 is byte-identical to 4400**, mean |d| 0.000), and
+> `TLS_ENTRY_PROBE=1` printed **0 lines in 4 600 frames** - the Chapter-1 entry chain is never entered, so
+> there is **no missing host-side wake event** to find: nothing the host can deliver is being withheld.
+> Gate **PASS on attempt 1** at both references (`C5535C7D`, `6465ACEF`, handover 1680, luma 33.3, save
+> 1348992 / 29344). Two instrument traps this session cost a run each: `TLS_BATCH_CUTOFF=''` means **0**
+> (every frame draws nothing -> black PPMs), and `--max-cmds` is **per replayed frame**, not cumulative
+> (`aurora_replay.cpp:653/658`).
+
 > **READ §5c.46 AP-AO FIRST (the last section of this file) and then its ADDENDUM.** Three AP-AN items are
 > closed and one is re-scoped. (1) **The camera divergence was the comparison, not the renderer**: the layer
 > screenshot AP-AN used came from a *different run*, because a `TLS_SHOT_FRAMES` entry matches the **present**
@@ -13791,6 +13817,221 @@ is "aurora does not reproduce the wash on this stream", not yet "the layer's com
 question is now cheap to settle, because both sides of it come from one launch and the tools are in place:
 compare aurora's frame with `TLS_BATCH_CUTOFF` variants of the same frame (`--max-cmds` on the replay, cutoff in
 the layer) to find the command range that introduces the wash.
+
+### AP-AP. THE WHITE-OUT IS THE LAYER'S MISSING GX SCISSOR — the tail is a 1.56 %/6.25 %-corner downscale chain, the layer renders it full-frame and saturates to 255 where aurora moves 0.8 %, and the field state is bounded (input past the plateau changes nothing, the entry chain is never entered)
+
+This session answered AP-AO's open item with the bisect AP-AO asked for, and the answer is not "aurora's copy
+stubbing". In one paragraph: the tail of guest frame 3300 is a **downscale/blur chain drawn into the bottom-left
+corner of the EFB** - 8 of its 10 draws carry a `BP 0x20/0x21` scissor of **160x112 (6.25 %)** or **80x56
+(1.56 %)** of the 640x448 frame, and each rectangle is identical to the **source rect of the EFB copy issued
+next to it**, which is what proves the field order and the intent. The two remaining draws are full-frame by
+design: an **additive ONE/ONE quad** whose source is the 80x56 corner copy, and the **opaque 640x448 blit** of
+the copy taken at command 50049. **The layer has no scissor at all** - `RSSetScissorRects` appears **0 times**
+in `recomp/gfx_d3d11.c` (the only occurrence in the tree is `gfx_d3d12.c:654`) and `gx_pipeline.c` decodes
+`BP 0x00/0x40/0x41/0x49/0x4A/0x4B/0x4D/0x52/0x0F/0x25/0x26/0x27/0x4F/0x50/0xF3/0x64/0x65` - never `0x20/0x21` -
+so its own dump puts all eight corner batches at `ndc=[-1.00..1.00]` on a 640x448 target. Measured
+consequence, one runner run per point with a guest-keyed shot at frame 3300: with the tail cut off the layer's
+frame is **luma 91.59** (RGB 88.20/93.40/91.17); with the tail in and the popup out it is **255.00 with
+100.00 % of pixels above luma 250**; the full frame is **142.29** (141.15/142.54/143.97). Aurora, on the same
+capture, moves **102.34 -> 103.18 mean byte (+0.8 %)** across those same eight draws. So the tail is a
+corner-limited post-process in the guest's stream, the layer is the only implementation that turns it into a
+full-screen feedback loop, and the saturating step is **in-frame commands 49632..50127 = guest draws
+15513..15522 = layer batches 114..121**.
+
+Host state before any run of this session: no `fifa15`, no runner, 85 GB free disk; one runner at a time, every
+launch `--window --minimized`, save files deleted before every progression run, `TLS_INPUT_SCRIPT` set.
+
+**1. The tail, read out of the capture's own registers (new tool: `tools/aurora_spike/drawstate.py`).**
+`camera.py` answers "where does this draw land"; nothing answered "what is this draw made of" from the stream
+side, which is what AP-AO's tail question needed. `drawstate.py` walks the window carrying GP state across
+frames (as the adapter does) and prints, per draw: the command index `--max-cmds` counts, the texture object
+(`BP 0x88+m` image0 -> width/height/format, `BP 0x94+m` image3 -> address), `BP 0x00` TEV stages, `BP 0x40`
+depth, `BP 0x41` decoded exactly as both implementations decode it (`blendEn`, `colorUpdate`, `alphaUpdate`,
+`src=(v>>8)&7`, `dst=(v>>5)&7`, `subtract=(v>>11)&1`), `BP 0x28` texmap enables, the `BP 0x20/0x21` scissor
+with GX's **+342 view bias** removed, and the EFB copies issued so far. Frame index 6 (guest 3300) carries
+**15 545 draws and 9 `BP 0x52` copy commands**; the ten draws that consume their destinations are:
+
+| in-frame cmd | draw | texture | bytes/texel | cmode0 | blend actually in force | scissor (bias removed) | share of the frame |
+|---|---|---|---|---|---|---|---|
+| 49632 | 15513 | 0x90395DC0 **320x224** (half-scale copy of the frame) | `0x003118` | OFF, ONE/ZERO | (0,0)..(159,111) | **6.25 %** |
+| 49679 | 15514 | 0x9038D1C0 **80x56** | `0x003118` | OFF, ONE/ZERO | (0,0)..(79,55) | **1.56 %** |
+| 49705 / 49731 / 49757 | 15515-17 | 0x9038D1C0 **80x56** | `0x003219` | ON, **SRCCLR/ZERO** | (0,0)..(79,55) | **1.56 %** |
+| 49859 | 15518 | 0x903917C0 **80x56** | `0x003438` | OFF, SRCALPHA/ONE | (0,0)..(79,55) | **1.56 %** |
+| 49964 | 15519 | 0x9038D1C0 **80x56** | `0x003438` | OFF, SRCALPHA/ONE | (0,0)..(79,55) | **1.56 %** |
+| 50012 | 15520 | 0x903DBDC0 **160x112** | `0x003118` | OFF, ONE/ZERO | (0,0)..(159,111) | **6.25 %** |
+| 50039 | 15521 | 0x9038D1C0 **80x56** | `0x003139` | ON, **ONE/ONE (additive)** | (0,0)..(639,447) | 100 % |
+| 50127 | 15522 | 0x905C3000 **640x448** (the copy taken at cmd 50049) | `0x003438` | OFF, SRCALPHA/ONE | (0,0)..(639,447) | 100 % |
+
+and the copies that feed them, in the same frame: **49562** -> 0x90536FE0 (pitch 160 = 320x224), **49569** ->
+0x903DBDC0 (160x112), **49574** -> 0x90395DC0 (320x224), **49640** -> 0x9038D1C0 (80x56, `clear=1`), **49763**
+-> 0x903917C0 (80x56), **49864** and **49969** -> 0x9038D1C0, **50049** -> 0x905C3000 (640x448, `clear=1`),
+and the display copy at **51310** -> 0x900037C0 (640x448). Copy destination geometry is derived from `BP 0x4D`
+pitch exactly as `gfx_d3d11.c:2117-2130` derives it (`dst_w = pitch*8/bpp` for a tiled destination,
+`pitch*32/2` for the linear scanout buffer), and every derived size matches the `BP 0x88` image0 fields the
+draws use - so the chain is self-consistent inside the stream and needs nothing from outside the window.
+
+**2. The scissor field order, established by measurement rather than by memory.** `BP 0x20 = 0x156156` and
+`BP 0x21` are, with 342 removed from each 12-bit field, `(0,0)..(159,111)` / `(0,0)..(79,55)` /
+`(0,0)..(639,447)` **if the low 12 bits are y and the high 12 are x**. Read the other way round the first
+rectangle comes out 112x160 - and then it does **not** match the `(0,0)..(159,111)` source rect of copy
+**49640**, which is 160x112. The four rectangles that appear in this frame (160x112, 80x56, 640x448) and the
+three sources all agree under the low-y/high-x reading and all disagree under the other, so that is the
+documented order and `drawstate.py` prints it with the derivation in its docstring. The first version of the
+tool had the fields the other way round and printed `112x160`.
+
+**3. The layer, measured on its own (`TLS_BATCH_CUTOFF`, guest-keyed shot at 3300, one run per row).**
+
+| layer run | shot | mean RGB | mean luma | pixels > luma 250 |
+|---|---|---|---|---|
+| `TLS_BATCH_CUTOFF=114` (batches 0..113: the scene, no tail, no popup) | `logs_ap/ap_cut114.log` -> `d3d11_screenshot_3364.ppm` | (88.20, 93.40, 91.17) | **91.59** | 0.44 % |
+| `TLS_BATCH_CUTOFF=122` (batches 0..121: the tail, no popup UI) | `logs_ap/ap_cut122.log` -> `logs_ap/ap_layer_cut122.ppm` | (255.00, 255.00, 255.00) | **255.00** | **100.00 %** |
+| no cutoff (full frame) | `logs_ap/ap_full_run2.log` -> `logs_ap/ap_layer_full.ppm` | (141.15, 142.54, 143.97) | **142.29** | 0.06 % |
+
+The middle row is the answer to "which range introduces the wash": **batches 114..121**, which are exactly
+draws 15513..15522, take the frame from luma 91.59 to **pure white**, and the popup's own overlay then brings
+the saturated frame back down to 142.29 (the same direction as in aurora, 94.30 -> 68.82, but from saturation).
+The two control runs keep their credibility: the same 114 run's guest-2800 shot is **(34.94, 33.23, 31.09)
+luma 33.50**, i.e. exactly the gate's recorded content reference, and the full run reproduces
+(141.15, 142.54, 143.97) against AP-AO's (141.31, 142.70, 144.12) from a different session - so the runs are
+faithful and the *tail* is the only variable that moves.
+
+**4. Aurora, on the same capture, command by command (13 replays, 10 s each, `--start-at 1 --stop-after 7
+--probe-copy`).** The probe reads the EFB at the truncation point, so this walks the chain:
+
+| `--max-cmds` | mean byte | EFB mean RGB | what was just included |
+|---|---|---|---|
+| 49562 | **102.34** | (48.32, 49.29, 46.44) | the frame with the scene, **no copies, no tail** |
+| 49574 | 102.34 | (48.32, 49.29, 46.44) | + copies 1-3 (a copy does not change the EFB) |
+| 49640 | 99.25 | (44.26, 45.32, 42.96) | + draw 15513 **inside its 160x112 scissor** + copy 49640 |
+| 49679 | 99.85 | (45.01, 46.09, 43.68) | + draw 15514 (80x56) |
+| 49763 | 99.27 | (44.28, 45.34, 42.97) | + draws 15515-17 + copy 49763 |
+| 49864 | 99.27 | (44.28, 45.34, 42.97) | + draw 15518 (80x56) + copy 49864 |
+| 50012 | **102.34** | (48.32, 49.29, 46.44) | + draw 15519, copy 49969, draw 15520 (160x112) |
+| 50045 | 103.18 | (49.54, 50.47, 47.19) | + draw 15521, the **additive ONE/ONE quad** (+0.8 %) |
+| 50049 | 63.75 | (0.00, 0.00, 0.00) | + copy 50049, whose `clear=1` **clears the EFB** |
+| 50127 | 139.13 | (94.30, 101.69, 85.42) | + draw 15522, the opaque 640x448 blit of that copy |
+| 51345 | 116.14 | (68.82, 74.10, 66.66) | the whole frame (popup UI included), = AP-AO A8's number |
+
+Read down the EFB RGB column: **the eight scissor-limited draws move the frame between (44.26,45.32,42.96) and
+(49.54,50.47,47.19) - a +0.8 % excursion - while in the layer the same eight draws take it to 255.00/255.00/255.00.**
+That is the whole finding, and it is a coverage difference, not a shading difference: in aurora a 1.56 % of the
+frame rectangle is written, in the layer 100 % of it is. The last two rows are the chain's *output*, and they
+also show that **aurora's own copy path is not a brightness reference**: the EFB at 50045 is
+(49.54,50.47,47.19) and the opaque blit of the copy taken 4 commands later is (94.30,101.69,85.42) - **1.9x
+brighter than the frame it copied**. That is a second, separate defect, on the aurora side, and it is where
+priority 2's remaining gap lives (see item 6).
+
+**5. The same-launch pair, and what each number in it is.** `TLS_GX_CAPTURE=build/recomp/gxcap/ao3303`
+(3294-3300, **7 439 609 FIFO bytes** - byte-count identical to AP-AO's `ao3301`), `TLS_SHOT_GUEST=1`,
+`TLS_SHOT_FRAMES=2800,3300`, one launch, 168.8 s:
+
+| guest 3300, 640x448, one launch | aurora (`--probe-copy`) | layer (same-run shot, present 3364) |
+|---|---|---|
+| mean RGB | **(68.82, 74.10, 66.66)** | **(141.31, 142.70, 144.12)** |
+| `compare.py` | 238 646 / 286 720 = **83.23 %** changed by > 8, mean \|d\| **78.65**, max 172 | |
+| per band (top/upper/lower/bottom) mean \|d\| | 52.93 / 95.33 / 96.97 / 69.36 | |
+| what produced it | the **corner-clipped** chain, then the copy-clear and the opaque blit of that copy | the **full-frame** chain saturating to 255, then the popup overlay down to 142 |
+
+The numbers reproduce AP-AO A8's pair **exactly** (83.23 %, 78.65, and the four band means) from a *different
+launch*, which is the useful thing about them: the pair is stable, so each number can be attributed. They are
+explained as the sum of two measured effects: (i) the tail, where the layer renders 100 % of a chain the guest
+clips to 1.56 %/6.25 % - measured here as luma 91.59 -> 255.00 in the layer against +0.8 % in aurora; and
+(ii) a **1.83x baseline difference that exists before the tail** (layer luma 91.59 = RGB (88.20,93.40,91.17)
+against aurora's (48.32,49.29,46.44) at mean byte 102.34). **Effect (ii) is not attributed by this section** and
+is priority 2's subject.
+
+**6. What is *not* settled, stated with the numbers that bound it.** The residual 1.83x is present with the
+tail cut on both sides, so it is content/shading, not compositing. AP-AN item 7's "68.2 % zero texels" was a
+measurement of a **copy record** payload, not of the EFB: the EFB probe payloads of this session's full-frame
+replay are **2.42 % all-zero texels (5.0 % alpha-0)** and the pre-chain payload only **0.16 %**, so the
+end-of-frame EFB is 97.6 % painted and the zero-texel gap does not live there. What does bound it is item 4's
+last two rows - aurora's copy of a (49.54,50.47,47.19) frame reads back (94.30,101.69,85.42) - so the next
+measurement target is **aurora's copy/readback path**, and the exact next command is
+`tls_gx_replay build\recomp\gxcap\ao3303\gxfifo.tlscap out.ppm --start-at 1 --stop-after 7 --max-cmds 50045 --probe-copy --copy-out copy8.bin --extra 10`
+compared with `--max-cmds 50049`, i.e. the EFB immediately before and after the `clear=1` copy, plus
+`copycmp.py copy8.bin <the guest's own bytes for 0x905C3000>`; a 1.9x ratio in the copy texture and none in the
+EFB is the aurora-side defect, and it must be separated from the layer's own copy-format path before any of
+item 5's (ii) is blamed on the guest.
+
+**7. The field state: bounded by measurement, and there is no missing wake event.** AP-AH left one question
+("does one missing wake event exist?") and this session answers it with two runs. A 4 600-frame progression run
+with `TLS_INPUT_SCRIPT` extended from 1812 out to **4512** (twenty-five extra `A` presses, i.e. input delivered
+across and past the tutorial plateau):
+
+* guest **3300, 3800 and 4400 are all (255.00, 255.00, 255.00), 100.00 % above luma 250**;
+* **guest 3800 and guest 4400 are byte-identical** (`mean |d| 0.000`, `changed > 8` = `0.000 %`), i.e. a static
+  frame 800 guest frames apart - the same fact AP-AC4/5 measured at 5500 vs 6200, now with input arriving the
+  whole way;
+* `TLS_ENTRY_PROBE=1` printed **0 lines in 4 600 frames**: not one of the hooked entry points (the `+0x54F0`
+  consumer at `0x8036F5C8-0x8036F5D8`, its `REQUEST=1`/`REQUEST=2` writers, their caller) was ever entered;
+* the shutdown thread dump shows **3 threads, 2 of them WAITING** on `0x8087D610` and `0x80879538` with
+  `resumePC=0x805F5060` (the OS idle loop), the alarm queue **empty**, and the boot thread running the frame
+  loop - nothing holds the field task on a queue.
+
+So the honest answer is: **the guest is not waiting for anything the host owes it.** Input delivery demonstrably
+works (this run only reaches `Game` because the scripted presses work), one more input channel of 25 presses
+changes nothing at all, and the guest itself never enters the code path that would consume a state-change
+request. The remaining question is therefore **which menu/tutorial task should call
+`0x8036F5D8`'s chain and does not** - a UI state-machine question, not a wake-event question. The exact next
+command: `--frames 4600` with `TLS_ENTRY_PROBE=1` **plus** the four callers AP-AH named (GameOverTask,
+NewCampPartsTop, NewCampPartsMapSelect and the two unnamed ones) hooked at their own entry, to see whether the
+tutorial popup task ever exits; if it never exits, the field is held by the popup, not by a lost wake.
+
+**8. Instruments and traps (all tools/ only - 0 changes to `src/`, 0 changes to `recomp/` this session).**
+
+| change | file | why |
+|---|---|---|
+| `drawstate.py` (new) | `tools/aurora_spike/drawstate.py` | per-draw raster state from the capture: TEV stages, `BP 0x41` decoded like both implementations decode it, texture object (image0/image3) with address/size/format, the `BP 0x20/0x21` scissor with the 342 bias removed **and as a percentage of the frame**, the copies issued so far, `CLR0` of vertex 0. Also `--copies` (every `BP 0x52` with its source rect, destination, pitch and clear/display bits), `--cmd-counts` (per-frame command counts **as a replay walks them**, which is how a frame-relative index becomes a `--max-cmds` value: frame 3300 = 51 345 commands, the window 3295..3300 = 262 975) and `--first-frame` |
+
+Two traps, each measured with a wasted run:
+
+* **`TLS_BATCH_CUTOFF=''` means 0, not "unset".** `getenv` returns a non-NULL pointer for an empty string and
+  `atoi("")` is 0, so `b >= 0` breaks out of the batch loop for **every** batch and the frame renders nothing:
+  one 3 400-frame run produced two `d3d11_screenshot_*.ppm` files that are (0.00, 0.00, 0.00). `invariant.ps1`
+  already carries this warning for the other probe variables ("Probe flags must be genuinely REMOVED"); it
+  applies to this one too, and the fix is `Remove-Item Env:\TLS_BATCH_CUTOFF`.
+* **`--max-cmds` is per replayed frame, not cumulative** (`aurora_replay.cpp:653` resets `cmds` inside
+  `rewrite_frame`), so `--max-cmds 49562` truncates frame **3296** (51 727 commands) as well as frame 3300.
+  That does not move the result - the untruncated replay and the `51345`-truncated one both report **116.14** -
+  but any bisect that needs earlier frames intact has to say so. The unit in this section's tables is the
+  **frame-relative command index**, and `--cmd-counts` prints the conversion.
+
+**9. Run log (one runner at a time, all `--window --minimized`, fourteen aurora replays at 10 s each).**
+
+| # | what | result |
+|---|---|---|
+| 1 | `drawstate.py --frame 6 --copies` on `gxcap/ao3301` | 9 `BP 0x52` copies named by index, destination, source rect and pitch |
+| 2 | `drawstate.py --draws 15513 --to-draw 15522` | the ten tail draws with blend/scissor/texture; the `--last 14` run also identified the popup UI draws |
+| 3 | `camera.py --draw 15513/15521/15522` | all three quads map to NDC [-1..1] (POS 0..640 / 0..448, ortho `pa 0.003125 pb -1`), i.e. **only the scissor limits them** |
+| 4 | aurora `--parse-only` sanity + 13 `--max-cmds` replays | the table in item 4 (10.2 s each) |
+| 5 | runner `TLS_BATCH_CUTOFF=114` + capture `ao3302` + shots 2800/3300 | **luma 91.59** at 3300, 2800 = (34.94, 33.23, 31.09) = the gate reference |
+| 6 | runner `TLS_BATCH_CUTOFF=122` + shot 3300 | **255.00, 100.00 % above 250** |
+| 7 | runner with `TLS_BATCH_CUTOFF=''` | **both shots (0,0,0)** - the empty-string trap, item 8 |
+| 8 | runner full + capture `ao3303` + shots 2800/3300 | (141.15, 142.54, 143.97) at 3300, 2800 unchanged again |
+| 9 | replay of `ao3303`: full and `--max-cmds 49562` | **116.14** and **102.34** - identical to `ao3301`'s, so the stream is stable across runs |
+| 10 | `compare.py` on the same-launch pair | 83.23 %, mean \|d\| 78.65, bands 52.93/95.33/96.97/69.36 |
+| 11 | `compare.py` aurora pre-chain vs aurora full | 93.20 % changed, mean \|d\| 35.89 |
+| 12 | runner 4 600 frames, input extended to 4512, `TLS_ENTRY_PROBE=1`, shots 3300/3800/4400 | all three pure white; **3800 == 4400**; **0** entry-probe lines |
+| 13 | `pwsh tools/invariant.ps1` | **PASS, attempt 1**: `C5535C7D...`, `6465ACEF...`, handover 1680, luma 33.3, save 1348992 / 29344 |
+
+**10. Definition of done, item by item.** *The white-out is named as a specific layer defect, with the command
+range and a same-run pair whose `compare.py` numbers are explained*: **yes** - `recomp/gfx_d3d11.c` implements no
+GX scissor, the guest's tail is clipped to 1.56 %/6.25 % of the frame (register values in item 1), the layer
+renders it full-frame and saturates at exactly the batch range 114..121 = commands 49632..50127, aurora moves
++0.8 % across the same draws, and the 83.23 %/78.65 pair is decomposed into that saturation plus a 1.83x
+baseline that exists before the tail. *The first missing draw range for the content gap is named*: **no** - it is
+**bounded** instead: the EFB payloads are 97.6 % painted (2.42 % zero texels), the pre-chain payload 99.84 %, and
+the gap is traced to aurora's own copy (1.9x on a `clear=1` 640x448 copy) with the two-run command in item 6.
+*The field state is either advanced with a measured cause or bounded with the event that should wake it named*:
+**bounded** - there is no host-side wake event to name, because 25 extra presses change nothing (3800 == 4400
+byte-identical), the entry chain prints 0 lines in 4 600 frames, and no queue holds the field task; the popup
+task that should call it is the next measurement (item 7). *Gate green at both references, build green, 0 changes
+to `src/`*: **yes** - gate PASS on attempt 1, and this session's only source changes are `tools/aurora_spike/`
+(a new `drawstate.py`, three error-message/docstring fixes in `camera.py`-adjacent tooling were **not** made -
+`camera.py` is untouched), the handover and `tools/aurora_spike/README.md`. Evidence:
+`docs/evidence/ap_layer_f3300_full.png` (the washed layer frame), `ap_layer_f3300_chainonly_white.png` (the same
+frame with only the tail and no popup - pure white), `ap_aurora_f3300_prechain.png`, `ap_aurora_f3300_full.png`
+and `ap_pair_f3300_samerun.png` (aurora | layer | 8x difference).
 
 
 
