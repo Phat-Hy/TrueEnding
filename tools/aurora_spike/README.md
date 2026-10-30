@@ -176,7 +176,11 @@ sample the shadow texture. Consequences:
   where the guest's 80x56 copy is a dark corner glow);
 * the harness passing `mem1Size = mem2Size = 0` is fine for *rendering* but means any guest code that reads a
   staging copy as raw memory (CPU readback, DMA, a memcpy uploader) would see stale bytes;
-* AP-AP item 6's "aurora's copy is 1.9x brighter" is still open, but it is a conversion/sampling question now.
+* AP-AP item 6's "aurora's copy is 1.9x brighter" is **closed**: payload-to-payload the copy is **1.000x**
+  (aurora's EFB probe at cmd 50045 and the game's own copy at 50049 both decode to mean byte 103.18,
+  RGB (53.08, 54.07, 50.56), alpha 255.00). The 1.78x sits in the **draw that samples** the shadow
+  (the blit at 50127 produces (94.30, 101.69, 85.42)); `--copy-dst/--copy-wh-fmt/--copy-size` is how the
+  game's own copy payload was read.
 
 The new instrument: `--ram-out <addr>:<size>:<file>` dumps a guest range after the replay, `--ram-poison` fills it
 with `0xCD` before the replay so "written" and "already in the capture" cannot be confused. Do not parse the

@@ -32,7 +32,9 @@
 > ways), so the draws sample aurora's shadow copy, not RAM. So aurora's tail numbers stand as real measurements
 > (its +0.8 % across the eight draws agrees with the Dolphin corpus: the guest's 80x56 copy is a dark corner
 > glow), while the *hazard* is any guest code that reads a staging copy as raw memory. AP-AP item 6's "1.9x" is
-> still open but is now a conversion/sampling question, not a missing copy; the next command is in item 11.
+> now **closed with the split**: payload-to-payload aurora's copy is **1.000x** (mean byte 103.18, RGB
+> (53.08,54.07,50.56) for both the EFB at 50045 and the game's own copy at 50049) and the **1.78x** is the
+> blit at 50127 that samples it - so the copy is not the defect and the sampling draw is (item 11).
 
 > **READ §5c.46 AP-AP AND ITS ADDENDUM** for the measurements AP-AQ builds on (and, in A1/A2, for the experiment
 > that AP-AQ shows was inert). What still stands from AP-AP: the tail's structure, the copy register decode, the
