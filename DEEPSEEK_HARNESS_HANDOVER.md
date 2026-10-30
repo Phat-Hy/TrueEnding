@@ -14460,18 +14460,27 @@ What follows for the numbers already recorded:
 * **Aurora's "+0.8 % across the eight draws" stands**: its tail samples aurora's own shadow copies, which is the
   hardware-like behaviour (and it agrees with the Dolphin corpus, item 5: the guest's 80x56 copy is a dark
   corner glow). It also means AP-AP's "+0.8 %" and the layer's +162 are a genuine divergence, not an artefact.
-* **AP-AP item 6's "aurora's copy reads back 1.9x brighter" is still open, but it is no longer about the copy
-  reaching RAM.** The copy exists (as a shadow texture), so the 1.9x is a *conversion/sampling* question between
-  aurora's EFB at 50045 (49.54, 50.47, 47.19), the copy taken at 50049, and the EFB at 50127
-  (94.30, 101.69, 85.42). `copy_tex` allocates `new_conv_texture` when `needs_conversion(key.format)` and
-  `new_render_texture(..., GX_TF_RGBA8, ...)` otherwise; 50049's real format is RGBA8 (6), so no conversion is
-  requested - which points at the *draw* that samples the shadow (its SRCALPHA/ONE over an EFB that
-  `clear=1` has just cleared to the clear colour) rather than at the copy. That is the next measurement, and it is
-  cheap: `--probe-copy` at 50039 / 50049 / 50127 on the same replay.
-* **The migration hazard is narrower and real: any guest code that reads a copy destination as *raw memory***
-  (a CPU readback, a DMA, an uploader that memcpy's the staging arena) sees stale bytes under aurora, because the
-  data only exists in `g_gxState.copyTextures`. The GX sampling path - which is how this game consumes every
-  staging copy in the frames measured here - is handled.
+* **AP-AP item 6's "aurora's copy reads back 1.9x brighter" is closed, and the copy is exact: the gain is in the
+  draw that samples it.** Two payloads, decoded the same way (640x448 RGBA8, 4x4 tiles, one replay each):
+
+  | payload | mean byte | RGB mean | alpha |
+  |---|---|---|---|
+  | aurora's EFB probe copy at cmd 50045 | **103.18** | **(53.08, 54.07, 50.56)** | 255.00 |
+  | the game's OWN copy at 50049 (dest 0x905C3000, captured via `--copy-dst/--copy-wh-fmt/--copy-size`) | **103.18** | **(53.08, 54.07, 50.56)** | 255.00 |
+
+  Ratio **R 1.000 / G 1.000 / B 1.000** - the copy carries exactly the frame it was told to copy, so there is no
+  copy-side gain at all. The 1.9x AP-AP saw is between that payload and the **blit at cmd 50127** (EFB
+  (94.30, 101.69, 85.42), i.e. RGB mean ~94.3 against 52.6 = **1.78x**, over an EFB that `clear=1` had just
+  cleared to the clear colour). `copy_tex` only allocates `new_conv_texture` when `needs_conversion(key.format)`
+  and this copy is RGBA8 (6), so no format conversion is involved. The residue is therefore the **shadow
+  texture's sampled colour** in the draw that binds it: the most likely mechanism is a decode mismatch between the
+  shadow (a linear RGBA8 render target) and the texobj the draw declares (GX_TF_RGBA8, tiled), which would fold
+  the payload's 255 alpha bytes into RGB - and 1.78x is the size that predicts. Exact next command: decode the
+  payload and the blit's output image side by side (a constant per-texel ratio names a gain, a ratio that tracks
+  the tile grid names a decode), using `--copy-out` for the payload and the frame PPM for the blit.
+  *Metric note:* the harness's printed "EFB mean RGB" (49.54, 50.47, 47.19) comes from the **colour capture**, a
+  different readback path from the tiled copy payload (53.08, 54.07, 50.56); the 1.000x above compares
+  payload-with-payload, which is the comparison that is sound.
 
 **What this means for criterion 3 and for the migration.** Criterion 3 as recorded ("service one EFB copy through
 `capture_copies`/`get` and verify the guest samples the same bytes") is satisfied **for the sampling path**, which
