@@ -405,6 +405,12 @@ typedef struct {
     bool tev_enabled;
     ID3D11BlendState* blend_state_alpha;
     ID3D11RasterizerState* rs_cull_none;
+    /* The SAME rasterizer state plus ScissorEnable=TRUE. D3D11 IGNORES RSSetScissorRects
+     * unless the bound rasterizer state enables scissoring, and until AP-AQ the only
+     * rasterizer state in the backend had ScissorEnable=FALSE, so the AP-AP diagnostic
+     * `TLS_SCISSOR=1` could not clip anything - which is what its "byte-identical frame"
+     * result actually measured (handover 5c.46 AP-AQ). */
+    ID3D11RasterizerState* rs_scissor;
     ID3D11Texture2D* gx_tex_white;
     ID3D11ShaderResourceView* gx_tex_white_srv;
 
@@ -717,6 +723,11 @@ bool d3d11_init(HWND hwnd, const GfxConfig* config) {
     rdesc.FrontCounterClockwise = FALSE;
     rdesc.DepthClipEnable = FALSE;
     ID3D11Device_CreateRasterizerState(s_d3d11.device, &rdesc, &s_d3d11.rs_cull_none);
+    /* Second instance, identical except that scissoring is enabled: RSSetScissorRects has no
+     * effect without it (D3D11_RASTERIZER_DESC::ScissorEnable). Bound only when TLS_SCISSOR=1
+     * asks for the guest's BP 0x20/0x21 rect. */
+    rdesc.ScissorEnable = TRUE;
+    ID3D11Device_CreateRasterizerState(s_d3d11.device, &rdesc, &s_d3d11.rs_scissor);
 
     // 3D Opaque Depth State: Test enabled (LESS_EQUAL), Depth write enabled
     D3D11_DEPTH_STENCIL_DESC ds_op_desc = {0};
@@ -3440,13 +3451,30 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                     // - Alpha blending (UI, transparent meshes): dst_factor == 5 or 7
                     // - Alpha-bearing 2D text and icons: formats 0 (I4), 1 (I8), 2 (IA4), 3 (IA8), 5 (RGB5A3)
                     // - When dst_factor == 0 and !blend_enable: batch is opaque (2D backgrounds, opaque 3D terrain)
-                    if (dst_factor == 1 || dst_factor == 5 || dst_factor == 7) {
-                        blend_enable = true;
-                    } else if (!batch->is_perspective && batch->has_texture && (batch->tex.format == 0 || batch->tex.format == 1 || batch->tex.format == 2 || batch->tex.format == 3 || batch->tex.format == 5)) {
-                        blend_enable = true;
-                        if (dst_factor == 0) {
-                            src_factor = 4; // GX_BL_SRCA
-                            dst_factor = 5; // GX_BL_INVSRCA
+                    //
+                    // AP-AQ: these rules OVERRIDE the guest. GX's CMODE0 bit 0 is the blend
+                    // enable, and when it is clear the hardware REPLACES (dst = src) whatever
+                    // the factor fields say - Dolphin's BlendMode has `blend_enable` at bit 0
+                    // and applies the factors only when it is set. Promoting `dst_factor == 1`
+                    // to "blend on" therefore turns every guest REPLACE whose factor field
+                    // happens to be ONE into `src*srcA + dst`. Measured on guest frame 3300
+                    // (TLS_BATCH_PROBE, one run): batch b117 (0x003438, guest blend OFF,
+                    // s=4 d=1) takes the frame (103,110,101) -> (188,200,187), and b118 takes
+                    // it to pure (255,255,255) where a replace would have written the sampled
+                    // texture's own (174,183,172). That is the first saturation of the
+                    // composite tail, six vertices before the copies AP-AP's addendum blamed
+                    // (handover 5c.46 AP-AQ). `TLS_NO_FORCE_BLEND=1` is the one-run A/B.
+                    static int s_no_force_blend = -1;
+                    if (s_no_force_blend < 0) s_no_force_blend = getenv("TLS_NO_FORCE_BLEND") ? 1 : 0;
+                    if (!s_no_force_blend) {
+                        if (dst_factor == 1 || dst_factor == 5 || dst_factor == 7) {
+                            blend_enable = true;
+                        } else if (!batch->is_perspective && batch->has_texture && (batch->tex.format == 0 || batch->tex.format == 1 || batch->tex.format == 2 || batch->tex.format == 3 || batch->tex.format == 5)) {
+                            blend_enable = true;
+                            if (dst_factor == 0) {
+                                src_factor = 4; // GX_BL_SRCA
+                                dst_factor = 5; // GX_BL_INVSRCA
+                            }
                         }
                     }
 
@@ -3469,7 +3497,13 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                      * aspect-preserving viewport, as a D3D11 scissor. It is a DIAGNOSTIC and defaults
                      * OFF so every gate reference recorded before AP-AP stays valid; switching it on
                      * changes every frame the guest scissor-limits, so the gate references would have
-                     * to be re-recorded (twice) before it could become the default. */
+                     * to be re-recorded (twice) before it could become the default.
+                     *
+                     * AP-AQ CORRECTION: until AP-AQ this block called RSSetScissorRects while the
+                     * ONLY bound rasterizer state (rs_cull_none) had ScissorEnable = FALSE, and D3D11
+                     * ignores the scissor rectangles in that case - so the AP-AP addendum's
+                     * "the scissor changes nothing, mean |d| 0.000" measured an inert switch, not the
+                     * scissor. rs_scissor (ScissorEnable = TRUE) is bound here; the frame MUST move. */
                     static int s_scissor_on = -1;
                     if (s_scissor_on < 0) s_scissor_on = getenv("TLS_SCISSOR") ? 1 : 0;
                     if (s_scissor_on) {
@@ -3487,6 +3521,7 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                             sr.right = (LONG)s_d3d11.win_width;
                             sr.bottom = (LONG)s_d3d11.win_height;
                         }
+                        ID3D11DeviceContext_RSSetState(s_d3d11.context, s_d3d11.rs_scissor);
                         ID3D11DeviceContext_RSSetScissorRects(s_d3d11.context, 1, &sr);
                         if (getenv("TLS_SCISSOR_LOG")) {
                             static int s_sca_log = 0;
@@ -3927,11 +3962,12 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                         if (s_probe_frame >= 0 && probe_frame_hits(s_probe_frame, (int)s_d3d11_dump_count)) {
                             unsigned pr, pg, pb, pmax, pred, pbright, pn, pa;
                             probe_backbuffer_stats(&pr, &pg, &pb, &pmax, &pred, &pbright, &pn, &pa);
-                            printf("[BatchProbe] frame=%d after b%u (voff=%u vcnt=%u tex=0x%08X blend=%d s=%u d=%u col0=0x%08X): avg=(%u,%u,%u) a=%u max=%u red=%u/%u bright=%u\n",
+                            printf("[BatchProbe] frame=%d after b%u (voff=%u vcnt=%u tex=0x%08X blend=%d s=%u d=%u col0=0x%08X): avg=(%u,%u,%u) a=%u max=%u red=%u/%u bright=%u eff=%d es=%u ed=%u\n",
                                    s_d3d11_dump_count, b, batch->vertex_offset, batch->vertex_count,
                                    batch->tex.guest_addr, batch->blend_enable, batch->src_factor,
                                    batch->dst_factor, gx_vtx[batch->vertex_offset].color, pr, pg, pb,
-                                   pa, pmax, pred, pn, pbright);
+                                   pa, pmax, pred, pn, pbright,
+                                   blend_enable ? 1 : 0, src_factor, dst_factor);
                             fflush(stdout);
                         }
                     }
