@@ -2299,7 +2299,10 @@ static void d3d11_efb_copy_to_guest(uint32_t dst_guest, uint32_t x0, uint32_t y0
                             uint32_t px = (uint32_t)(s_d3d11.vp_x + ((float)(x0 + gx) + 0.5f) * sx0);
                             if (px >= desc.Width) px = desc.Width - 1;
                             const uint8_t* p = row + (size_t)px * 4;
-                            sr += p[2]; sg += p[1]; sb += p[0]; n++;
+                            /* AP-AS: same channel order as the back-buffer probes - the
+                             * surface is R8G8B8A8, so byte 0 is red (this line used to read
+                             * p[2] as red, i.e. it reported (B,G,R)). */
+                            sr += p[0]; sg += p[1]; sb += p[2]; n++;
                             /* The copy writes `a = p[3]` straight through, so the SOURCE's
                              * alpha channel is what every texture derived from a copy ends
                              * up with (handover 5c.46 AP-R). A D3D11 back buffer's alpha is
@@ -2657,6 +2660,20 @@ static bool probe_frame_hits(int want, int present_count) {
  * average much) and the number of red-dominant samples (a channel-swapped or
  * mis-decoded texture shows up as red-dominant rock, which an average hides).
  * Used by TLS_BATCH_PROBE. */
+/* AP-AS: THE BACK-BUFFER PROBES READ R AND B THE WRONG WAY ROUND, and this is measured, not
+ * inferred. The swap chain is `DXGI_FORMAT_R8G8B8A8_UNORM` (the swap-chain desc above), so a
+ * mapped pixel is (R,G,B,A) and byte 0 is RED; both screenshot writers in this file already
+ * assume exactly that (the PPM copies bytes 0,1,2 straight out, the BMP writes 2,1,0 as B,G,R).
+ * These three probes did the opposite - `p[0]` as blue, `p[2]` as red - so every `avg=(r,g,b)`
+ * they printed had R and B exchanged and the `red=` census counted BLUE-dominant pixels.
+ * Measured on guest frame 2800 from ONE launch (shot and probe in the same run, handover 5c.46
+ * AP-AS): the probe's last reading was `avg=(49,45,61)` while the screenshot of that same frame
+ * is (60.07, 45.10, 49.14) and byte-identical to the gate's content reference; exchanging the
+ * probe's R and B gives (61,45,49) - the screenshot, to within its 1/16 sampling. So every
+ * `avg=[...]` in a `[BatchProbe]`/`[BatchRect]` line before AP-AS is **(B,G,R)**, and every
+ * `red=<n>` counted blue. The per-batch DELTAS were still measured on the right surface, so the
+ * batch attributions they support survive as "which batch moved the frame", but the red/blue
+ * NAMES in AP-AI..AP-AP are swapped. */
 static void probe_backbuffer_stats(unsigned* out_r, unsigned* out_g, unsigned* out_b,
                                    unsigned* out_max, unsigned* out_red, unsigned* out_bright,
                                    unsigned* out_n, unsigned* out_a) {
@@ -2681,7 +2698,7 @@ static void probe_backbuffer_stats(unsigned* out_r, unsigned* out_g, unsigned* o
                 const uint8_t* row = (const uint8_t*)mapped.pData + (size_t)y * mapped.RowPitch;
                 for (UINT x = 0; x < desc.Width; x += 16) {
                     const uint8_t* p = row + (size_t)x * 4;
-                    unsigned b8 = p[0], g8 = p[1], r8 = p[2];
+                    unsigned r8 = p[0], g8 = p[1], b8 = p[2];
                     sb += b8; sg += g8; sr += r8; sa += p[3]; n++;
                     unsigned lum = r8 + g8 + b8;
                     if (lum > maxlum) maxlum = lum;
@@ -2739,7 +2756,7 @@ static void probe_backbuffer_rect(float mnx, float mny, float mxx, float mxy,
                 const uint8_t* row = (const uint8_t*)mapped.pData + (size_t)y * mapped.RowPitch;
                 for (int x = x0; x < x1; x++) {
                     const uint8_t* p = row + (size_t)x * 4;
-                    unsigned b8 = p[0], g8 = p[1], r8 = p[2];
+                    unsigned r8 = p[0], g8 = p[1], b8 = p[2];
                     sb += b8; sg += g8; sr += r8; n++;
                     if (r8 + g8 + b8 < 300) dark++;
                 }
@@ -2774,7 +2791,7 @@ static void probe_backbuffer_avg(unsigned* out_r, unsigned* out_g, unsigned* out
                 const uint8_t* row = (const uint8_t*)mapped.pData + (size_t)y * mapped.RowPitch;
                 for (UINT x = 0; x < desc.Width; x += 40) {
                     const uint8_t* p = row + (size_t)x * 4;
-                    sb += p[0]; sg += p[1]; sr += p[2]; n++;
+                    sr += p[0]; sg += p[1]; sb += p[2]; n++;
                 }
             }
             if (n == 0) n = 1;
