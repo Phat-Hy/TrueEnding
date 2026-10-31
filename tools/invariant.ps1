@@ -246,7 +246,13 @@ foreach ($v in 'TLS_SCRIPT_FILTER','TLS_NO_SCRIPT_FILTER','TLS_FAKE_FADE','TLS_N
                'TLS_SAVE_PROBE','TLS_NAND_PROBE','TLS_ISFS_SERVICE','TLS_SAVE_PRECREATE',
                'TLS_SHOT_GUEST','TLS_BATCH_CUTOFF',
                'TLS_SCISSOR','TLS_NO_SCISSOR','TLS_NO_FORCE_BLEND','TLS_FORCE_BLEND',
-               'TLS_GLOW_ALL','TLS_INK_STATS','TLS_TEX_DUMP_FINAL','TLS_TEV_UNIFORM','TLS_TEV_TEXCOORD','TLS_NO_TEV_TEXCOORD') {
+               'TLS_GLOW_ALL','TLS_INK_STATS','TLS_TEX_DUMP_FINAL','TLS_TEV_UNIFORM','TLS_TEV_TEXCOORD','TLS_NO_TEV_TEXCOORD',
+               # 5c.46 AP-AZ: the per-bind texture log and the aurora live range/enable are instruments
+               # too. TLS_TEX_CACHE_LOG cannot change the picture (it only prints, and its mean
+               # reduction is guarded by the same variable), and TLS_AURORA is inert on the default
+               # path - but a gate run must measure the default renderer, so neither may leak in.
+               'TLS_TEX_CACHE_LOG','TLS_AURORA','TLS_AURORA_FROM','TLS_AURORA_TO','TLS_AURORA_FRAME',
+               'TLS_AURORA_TEST_NO_DEPTH','TLS_AURORA_TEST_WHITE_TEV','TLS_AURORA_TEST_MAT_WHITE') {
     Remove-Item "Env:\$v" -ErrorAction SilentlyContinue
 }
 

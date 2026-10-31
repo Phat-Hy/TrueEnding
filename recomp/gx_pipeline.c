@@ -918,15 +918,29 @@ void gx_pipeline_print_tev_state(uint16_t index) {
                (c >> 16) & 3, (c >> 18) & 1, (c >> 19) & 1,
                k_scale_names[(c >> 20) & 3], k_dest_names[(c >> 22) & 3],
                k_konst_names[st->kcsel[i] & 0x1F], c);
-        /* BP 0xC1 packs 3-bit args at d:0-2 c:3-5 b:6-8 a:9-11 and the control bits at
-         * bias:12-13 op:14 clamp:15 scale:16-17 dest:18-19. Reading them at 13/10/7/4 with
-         * the colour combiner's control positions printed the wrong arguments for every
-         * alpha stage (handover 5c.43 E). */
+        /* BP 0xC1 is Dolphin `TevStageCombiner::AlphaCombiner` (VideoCommon/BPMemory.h,
+         * fetched and quoted here because this decoder was wrong for three sessions):
+         *   rswap:0-1 tswap:2-3   d:4-6 c:7-9 b:10-12 a:13-15
+         *   bias:16-17 op:18 clamp:19 scale:20-21 dest:22-23
+         * i.e. the four 3-bit arguments start at bit 4, NOT at bit 0, because the two swap
+         * table indices occupy bits 0..3 - the same positions `tsid`/`rsid` above already
+         * read. The old decode here used 9/6/3/0 with the control bits at 12/14/15/16/18,
+         * which is the layout *without* the swap fields: every printed `[tev] alpha :`
+         * line named the wrong four arguments and the wrong bias/dest (measured on the
+         * title frame's b18, raw 0x0008F2F0: the true decode is
+         * `alpha: ZERO tex ras ZERO bias=0 op=0 clamp=1 scale=1 dest=prev`, the old one
+         * printed `c0 c2 konst prev bias=3 dest=c1`). The PIXEL SHADER
+         * (tools/compile_shaders.py) has always used the correct 13/10/7/4 layout, so this
+         * is an instrument bug only - the picture does not change - but it invalidated
+         * every alpha-stage argument read off this probe, including AP-AV addendum 4's
+         * "the glow chain's alpha dests are c1,c1,c1", which is what a reverted experiment
+         * was built on. Cross-check: `TLS_TEV_UNIFORM` prints the same raw words, and
+         * running both on one frame is what exposes a mismatch. */
         printf("   [tev]     alpha : %s %s %s %s bias=%u op=%u clamp=%u scale=%s dest=%s ka=%s raw=0x%08X\n",
-               k_alpha_arg_names[(a >> 9) & 7], k_alpha_arg_names[(a >> 6) & 7],
-               k_alpha_arg_names[(a >> 3) & 7], k_alpha_arg_names[a & 7],
-               (a >> 12) & 3, (a >> 14) & 1, (a >> 15) & 1,
-               k_scale_names[(a >> 16) & 3], k_dest_names[(a >> 18) & 3],
+               k_alpha_arg_names[(a >> 13) & 7], k_alpha_arg_names[(a >> 10) & 7],
+               k_alpha_arg_names[(a >> 7) & 7], k_alpha_arg_names[(a >> 4) & 7],
+               (a >> 16) & 3, (a >> 18) & 1, (a >> 19) & 1,
+               k_scale_names[(a >> 20) & 3], k_dest_names[(a >> 22) & 3],
                k_konst_names[st->kasel[i] & 0x1F], a);
         printf("   [tev]     swap : tex table %u [R<-ch%u G<-ch%u B<-ch%u A<-ch%u] "
                "ras table %u [R<-ch%u G<-ch%u B<-ch%u A<-ch%u]\n",

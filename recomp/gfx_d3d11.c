@@ -448,6 +448,12 @@ typedef struct {
         uint32_t tlut_format;
         uint32_t last_frame;
         uint32_t hash;
+        /* Mean of the staging buffer AT THE LAST UPLOAD, per channel (0..255). The
+         * staging buffer itself is shared and is overwritten by every later decode, so
+         * "what did the shader sample on a cache HIT" cannot be read back from it - it
+         * has to be remembered here. Used by the TLS_TEX_CACHE_LOG instrument below. */
+        float mean_r, mean_g, mean_b, mean_a;
+        uint32_t upd_frame;   /* frame_counter of the last actual upload */
         ID3D11Texture2D* tex;
         ID3D11ShaderResourceView* srv;
         bool is_all_zero;
@@ -846,6 +852,29 @@ static inline uint32_t decode_tlut_pixel(const uint8_t* tlut_data, uint32_t idx,
             }
         }
     }
+}
+
+/* TLS_TEX_CACHE_LOG=0xA[,0xB...]: is <addr> one of the addresses whose binds are logged?
+ * Parsed once, inert otherwise. This is also the guard on the per-upload staging mean in
+ * decode_gx_texture, so the DEFAULT path pays one comparison per upload and nothing else:
+ * a debug reduction over every texture upload would slow the runner, and a slowed runner
+ * is indistinguishable from a loaded host when the gate's handover frame is read. */
+static bool texlog_wanted(uint32_t addr) {
+    static uint32_t addrs[4];
+    static int n = -1;
+    if (n < 0) {
+        n = 0;
+        const char* e = getenv("TLS_TEX_CACHE_LOG");
+        while (e && *e && n < 4) {
+            while (*e == ',' || *e == ' ') e++;
+            if (!*e) break;
+            addrs[n++] = (uint32_t)strtoul(e, (char**)&e, 0);
+        }
+    }
+    if (n == 0) return false;
+    for (int i = 0; i < n; i++)
+        if (addrs[i] == addr) return true;
+    return false;
 }
 
 static void decode_gx_texture(const uint8_t* src, uint32_t width, uint32_t height, uint32_t format, uint32_t* dst, uint32_t tlut_addr, uint32_t tlut_format) {
@@ -1760,6 +1789,26 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
             }
         }
 
+        /* Remember the uploaded content's mean, so a later CACHE HIT can still report
+         * what the shader is sampling (the staging buffer is shared and overwritten).
+         * GUARDED: the reduction is O(width*height) and must not run on the default path -
+         * an instrument that costs the gate milliseconds is a loaded host by another name. */
+        if (texlog_wanted(tu->guest_addr)) {
+            uint32_t np = tu->width * tu->height;
+            uint64_t ar = 0, ag = 0, ab = 0, aa = 0;
+            for (uint32_t pi = 0; pi < np; pi++) {
+                uint32_t px = s_d3d11.gx_staging_rgba[pi];
+                ar += px & 0xFF; ag += (px >> 8) & 0xFF; ab += (px >> 16) & 0xFF; aa += (px >> 24) & 0xFF;
+            }
+            if (np) {
+                s_d3d11.tex_cache[target_idx].mean_r = (float)((double)ar / np);
+                s_d3d11.tex_cache[target_idx].mean_g = (float)((double)ag / np);
+                s_d3d11.tex_cache[target_idx].mean_b = (float)((double)ab / np);
+                s_d3d11.tex_cache[target_idx].mean_a = (float)((double)aa / np);
+                s_d3d11.tex_cache[target_idx].upd_frame = s_d3d11.frame_counter;
+            }
+        }
+
         D3D11_MAPPED_SUBRESOURCE mapped_tex;
         if (SUCCEEDED(ID3D11DeviceContext_Map(s_d3d11.context, (ID3D11Resource*)s_d3d11.tex_cache[target_idx].tex, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped_tex))) {
             uint8_t* p_dst = (uint8_t*)mapped_tex.pData;
@@ -1771,6 +1820,34 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
                 p_dst += mapped_tex.RowPitch;
             }
             ID3D11DeviceContext_Unmap(s_d3d11.context, (ID3D11Resource*)s_d3d11.tex_cache[target_idx].tex, 0);
+        }
+    }
+
+    /* TLS_TEX_CACHE_LOG=0xA[,0xB...]: per-BIND texture log. Every call to this function is
+     * one bound texture, so this prints what the shader is about to sample AND where it
+     * came from: `upload=1` means the guest bytes changed since the last decode (a fresh
+     * decode of guest memory), `upload=0` means a CACHE HIT - the GPU is sampling the
+     * upload from `upd_frame`, not the bytes that are in guest memory now.
+     *
+     * This exists because the title plate's b18 samples the 80x56 EFB-copy buffer
+     * 0x9038D1C0 and the copy chain says that buffer is FLAT 255 (TLS_EFB_CHAIN_GUEST=900:
+     * copy #15/#16 dstavg=(255,255,255) dstalpha=255), while the frame b18 produces is a
+     * radial vignette (255 centre / 0 corner). A flat opaque source under SRCALPHA/
+     * INVSRCALPHA cannot do that, so either the bind is not the copy destination or the
+     * bind is a stale upload. `[TexBind]` distinguishes the two in one run - which is the
+     * "copy content wrong vs sampling wrong" split of handover 5c.46 AP-AV item 7.
+     * Inert unless set. */
+    {
+        extern int g_runner_current_frame;
+        if (texlog_wanted(tu->guest_addr)) {
+            printf("[TexBind] gframe=%d preset=%u addr=0x%08X %ux%u fmt=%u upload=%d upd_frame=%u "
+                   "hash=%08X mean=(%.1f,%.1f,%.1f,%.1f)\n",
+                   g_runner_current_frame, s_d3d11.frame_counter, tu->guest_addr,
+                   tu->width, tu->height, tu->format, need_upload ? 1 : 0,
+                   s_d3d11.tex_cache[target_idx].upd_frame, quick_hash,
+                   s_d3d11.tex_cache[target_idx].mean_r, s_d3d11.tex_cache[target_idx].mean_g,
+                   s_d3d11.tex_cache[target_idx].mean_b, s_d3d11.tex_cache[target_idx].mean_a);
+            fflush(stdout);
         }
     }
 

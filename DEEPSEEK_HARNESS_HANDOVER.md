@@ -2,6 +2,33 @@
 
 ## NEXT SESSION — START HERE
 
+> **READ §5c.46 AP-AZ (the last section of this file) FIRST. TWO THINGS IT SETTLES, ONE OF WHICH
+> OVERTURNS THE PREVIOUS SESSION'S NAMED SUSPECT.**
+> (1) **Priority B is split, and the answer is neither "copy content" nor "sampling".** The 80x56
+> EFB-copy buffer `0x9038D1C0` that b18 upscales is **flat opaque white** when b18 samples it
+> (`TLS_EFB_CHAIN_GUEST=900`: copies #15/#16 `dstavg=(255,255,255) dstalpha=255`; `TLS_TEX_CACHE_LOG`
+> bind mean `(255,255,255,255)`, a cache hit from frame 410) — and the *other* texture in that
+> two-stage draw, the guest's 64x64 **IA8 mask `0x9051E1A0`**, decodes **bit-exactly** against
+> Dolphin's own dump `tex1_64x64_e6053facb03e8a53_3.png` (layer 90/90/90/a=90 vs Dolphin mean
+> 90.67, same row-32 ramp, radial 255->9). The arithmetic then closes: `st0` multiplies the white
+> copy by `K0.rgb = (0,0,0)` -> black, `st1` alpha = `K0.a*(1-mask.a)` = `1-mask.a`, blend
+> SRCALPHA/INVSRCALPHA over the white plate -> **frame = 255 x mask.a**, predicted 90.68 against a
+> measured **90.43**, centre 255 vs 254.5, corner 9 vs 0. **The title plate IS the guest's mask at
+> full strength**; Dolphin's is 203.98 with a weak vignette, so the remaining defect is the
+> composite's TEV arithmetic (Aurora's class), with an exact model and a per-ring target.
+> (2) **The "black cave" of P1 is the live feed's HALF-FRAME, not depth.** `TLS_AURORA_FROM/TO`
+> gate on the *present* counter and the two-half present gate alternates draw-bearing and
+> **copy-only** presents: 2794 **0 draws**/3 copies, 2795 220, 2796 **0**, 2797 219, 2798 **0**,
+> 2799 207, 2800 **0 draws**/3 copies. Aurora clears per fed frame, so a range ending on a copy-only
+> half reads back black **by construction** — that is the `mean 1.92` the last session recorded.
+> Ending on a draw half gives a real 640x448 picture (`mean (10.37,12.72,7.09)`, 207 draws). The
+> depth hypothesis has no evidence behind it and is withdrawn; the change P1 needs is to feed **one
+> guest frame, both halves, as one aurora frame**. See AP-AZ C for the two runs.
+> **Also fixed, and it invalidates earlier reasoning: the `[tev]` probe's ALPHA decode was wrong by
+> one nibble** (it read bits 9/6/3/0; Dolphin's `TevStageCombiner::AlphaCombiner` puts rswap/tswap
+> at 0-3 so the arguments are at 13/10/7/4, which is what the pixel shader always used). AP-AV
+> addendum 4's "the glow chain's alpha dests are c1,c1,c1" was read off that decoder and is wrong.
+>
 > **READ §5c.46 AP-AT (the last section of this file) FIRST: THE RED ROCK IS FIXED, AND IT WAS
 > NEVER THE TEV CHAIN.** AP-AT ran both discriminators AP-AS named and **falsified both** (the
 > uniform the GPU receives equals the probe's decode field for field; `TevRegular` against
@@ -15801,3 +15828,85 @@ The first two say the cave frame is not a *staging* or *history* problem: 22 553
 2. **Make the live feed cheap enough not to perturb** - which is what the migration itself achieves when aurora *replaces* the layer rather than running beside it. A double-render measurement is therefore a *boundary* test (does the ABI work, does aurora accept our bytes, can we read a picture back: yes, all three, 1.5 % on a boot frame) and never an *equality* test.
 
 **15. Where P1 ends: the boundary is done, the equality test is the wrong test.** What is proven: a C ABI DLL built out of the harness; aurora initialising headless inside a running D3D11 process (ackend=2); the runner's guest memory mapped at the guest's own addresses; the runner's own FIFO (with display lists inlined by the same rule the capture uses) consumed by aurora's command processor; 18 EFB copies and 255/22 553 draws translated; and a 640x448 RGBA8 picture read back through an EFB copy probe that matches the harness's replay of the same capture to **1.5 %** on a frame the guest renders identically twice. What is not proven, and should not be claimed: that the two renderers agree on the *cave*, because the cave renders black live (depth/viewport state, the next thing to look at) and because a double-rendering configuration cannot hold the guest's timeline still.
+
+---
+
+### AP-AZ. PRIORITY B IS SPLIT (the copy content is RIGHT, the guest mask is BIT-EXACT against Dolphin's own dump, and the plate's radial is that mask drawn at full strength: frame = 255 x mask.a, measured 90.43 against a predicted 90.68) — AND THE "BLACK CAVE" OF P1 IS THE LIVE FEED'S HALF-FRAME, NOT DEPTH: the tap hands aurora ONE PRESENT at a time, every other present carries 0 draws and 3 copies, and the range the last session measured ended on one of those, so aurora's per-fed-frame clear produced black by construction
+
+Two jobs, one session, an idle host, and the gate re-verified **PASS attempt 1 at handover 1680** before any measurement (`logs_ap/gate.log`: content `B4646917…`, popup `22B1CE31…`, save 1 348 992 / 29 344). Both conclusions below are measurements, not plans, and one of them overturns the named suspect of the previous session.
+
+**A. PRIORITY B: THE SPLIT THE DOSSIER ASKED FOR ("copy content wrong vs sampling wrong") HAS AN ANSWER, AND IT IS NEITHER.**
+
+AP-AV item 7 named the next measurement exactly: capture the title window, read `0x9038D1C0` at b18's command, and decide whether the copy content or the sampling is wrong. That is now done, twice, in a way that does not need a capture at all — because **the layer writes every EFB-copy destination into guest memory**, so the buffer can be read straight out of the run that samples it.
+
+**A1. The copy content is RIGHT.** `TLS_EFB_CHAIN_GUEST=900 TLS_EFB_CHAIN_DUMP=1` lists guest frame 900's 17 copies in stream order with the batch each was replayed at, and the two that last write `0x9038D1C0` are:
+
+| copy | batch | dst | size | source rect | srcavg | dstavg | dstalpha | dstpeak |
+|---|---|---|---|---|---|---|---|---|
+| #15 | 16 | 0x9038D1C0 | 80x56 | (0,0)-(159,111) | (255,255,255) | **(255,255,255)** | **255** | 765 |
+| #16 | 17 | 0x9038D1C0 | 80x56 | (0,0)-(79,55) | (255,255,255) | **(255,255,255)** | **255** | 765 |
+
+so b18 (batch 18) samples a **flat, opaque, white** 80x56 buffer. The same frame also writes that address as `320x224 fmt=4` (#2/#4, srcavg 220) and `160x112 fmt=8` (#7/#9/#10/#11/#12, srcavg 220-230) — the multi-resolution blur chain AP-AV item 7 suspected — but the last writes before b18 are the two 80x56 ones, and they are white. **"The copy content is wrong" is falsified.**
+
+**A2. The sampled content, at the bind, is confirmed independently.** New instrument `TLS_TEX_CACHE_LOG=<addr>` prints one line per *bound* texture: the size/format, whether the decode was a fresh upload or a **cache hit**, the frame of the last actual upload, and the mean of the buffer **as uploaded**. At guest 900 b18's bind is
+
+```
+[TexBind] gframe=900 preset=901 addr=0x9038D1C0 80x56 fmt=6 upload=0 upd_frame=410
+          hash=3EA52B5D mean=(255.0,255.0,255.0,255.0)
+```
+
+i.e. a cache hit serving an upload from frame 410 whose content is flat white — consistent with A1, and it also shows the content hash has not changed since 410, so the stale-upload theory is closed too (the buffer really is white every frame). **So the defect is not where it is sampled from, either.**
+
+**A3. The other texture in b18 is the guest's own 64x64 IA8 mask, and its decode is BIT-EXACT against Dolphin's dump of the same texture.** b18 is a **two-stage, two-texture** draw (`TLS_TEV_UNIFORM=18,900`): `st0 map=1` = the 80x56 copy at `coord=1`, `st1 map=0` = **`0x9051E1A0`, 64x64, fmt=3 (IA8)**, `coord=0`. The layer decodes that mask to `avg=(90,90,90) a=90`; Dolphin's own dump of it, `%APPDATA%\Dolphin Emulator\Dump\Textures\SLSEXJ\tex1_64x64_e6053facb03e8a53_3.png` (the file 5c.23 §5 already named), measures **mean RGBA (90.67, 90.67, 90.67, 90.67)**, row 32 = `2 80 215 254 255 253 205 66`, radial 255.0 → 9.2. The layer's number and Dolphin's agree to the unit. **The mask decode is not the problem.**
+
+**A4. The arithmetic, and it predicts the frame to 0.3 %.** b18's stages, decoded with Dolphin's `TevStageCombiner` layout (which the *shader* has always used — see B1):
+
+* `st0` colour: `d=ZERO, a=ZERO, b=tex, c=konst`, `kc = KonstSel 12 = K0 RGB`, and **K0 = (0,0,0,1)** → `prev.rgb = tex.rgb * K0.rgb = 0` (black).
+* `st0` alpha: `d=ZERO, c=ras, b=tex, a=ZERO` → `prev.a = tex.a * ras.a = 1` (white copy × white vertex).
+* `st1` colour: `d=prev, a=b=c=ZERO`, `dest=prev` → `prev.rgb` stays **0**.
+* `st1` alpha: `d=ZERO, c=tex, b=ZERO, a=konst`, `ka = KonstSel 28 = K0 Alpha`, **K0.a = 1.0** → `alpha = K0.a * (1 - tex.a) = 1 - mask.a`.
+* blend `s=4 d=5` (SRCALPHA / INVSRCALPHA) over the white plate the REPLACE quads leave: `out = 0*alpha + 255*(1-alpha) = 255 * mask.a`.
+
+Predicted frame mean = 255 × 0.3556 (the mask's mean alpha fraction) = **90.68**; measured **90.43**. Predicted centre = 255 × mask(centre)=255/255 = **255**, measured **254.5**; predicted corner = 255 × mask(edge)=9/255 = **9**, measured **0.0** in a 20x20 corner (the mask's own corner pixels are 0). **The layer's title plate IS the guest's IA8 mask, drawn at full strength.**
+
+**A5. What that means against the Dolphin frame.** The reference (AP-AV addendum 3, Dolphin `Dump\Frames` 320..1280) is `mean 203.98 / centre 193.7 / corner 127.7`, radial `180.9 206.9 211.1 216.0 219.8 219.5 217.3 213.3 208.9 201.1` — a *light field with a weak vignette*. The layer is the same composition with the mask's **contrast at 1:1** where hardware compresses it to roughly a third. So priority B is **not** a copy, a decode, a texcoord or an EFB-alpha defect: it is the composite's TEV arithmetic, i.e. the multi-stage/multi-pass class `AGENTS.md` §1 assigns to Aurora, now with an exact model and a per-ring target instead of a mean.
+
+**A6. The sampling deviation that IS real, and why it is value-neutral here.** `st0` names `coord=1`; the batch feeds only texcoord 0 (`texcoord_mask=0x01`), so the layer substitutes **texel (0,0)** (`uvsrc=8`, the AP-AU "host gap" case). The guest's own texgen 1 is `type=0` (regular) with identity source and post matrices (`raw=0x00000300 postraw=0x0000003D`), and the substitution's value is therefore a white texel of a white buffer — **zero effect on this frame**, but a real deviation to keep named: it becomes a visible error the moment the guest puts detail in that buffer.
+
+**B. TWO INSTRUMENT DEFECTS FOUND ON THE WAY, ONE FIXED, ONE RECORDED.**
+
+**B1. The `[tev]` probe's ALPHA decode was wrong, and it is fixed.** `gx_pipeline.c` decoded BP 0xC1 at bits `9/6/3/0` with bias/op/clamp at `12/14/15/16/18`. Dolphin's `VideoCommon/BPMemory.h` (fetched this session) defines `TevStageCombiner::AlphaCombiner` as **`rswap:0-1 tswap:2-3 d:4-6 c:7-9 b:10-12 a:13-15 bias:16-17 op:18 clamp:19 scale:20-21 dest:22-23`** — the two swap indices sit at bits 0..3, which is why the arguments start at 4, and it is exactly what `tools/compile_shaders.py` has always read. The file's own comment claimed the opposite, and its `tsid`/`rsid` already read bits 0..3, so the two halves of the same printf disagreed. Measured cost: for b18 `st0 alp=0x0008F2F0` the old decode printed `c0 c2 konst prev bias=3 dest=c1`; the true decode is `ZERO tex ras ZERO bias=0 op=0 clamp=1 scale=1 dest=prev`. **This invalidates every alpha-stage argument read off that probe — including AP-AV addendum 4's "the glow chain's alpha dests are c1,c1,c1, so the glow draws blend with alpha 0", which is what the reverted last-stage-dest experiment was built on.** The fix is print-only: no picture change, gate unchanged. The lesson is AP-AT's, again: `TLS_TEV_UNIFORM` prints the raw words and the probe prints a decode, and running both on one frame is what exposes a disagreement.
+
+**B2. New instrument `TLS_TEX_CACHE_LOG=<addr>[,<addr>…]`** (recomp/gfx_d3d11.c): per-bind `[TexBind]` line with size, format, upload-vs-cache-hit, the frame of the last upload and the uploaded mean. Strictly guarded: the O(width*height) reduction that maintains the mean only runs when the variable lists that address, so the default path pays one comparison per upload. Inert otherwise; not in the gate's scrub list yet because it cannot change the picture (it is added to the list below anyway).
+
+**C. MIGRATION P1'S RESIDUE: THE CAVE FRAME IS NOT BLACK, AND DEPTH IS NOT THE CAUSE.**
+
+The open item at handover was "the cave frame (guest 2800) renders BLACK live (22 553 draws translated, mean 1.92) while the boot frame matches the harness to 1.5 % — depth/viewport state is the suspect". Two runs with `TLS_AURORA=1 TLS_AURORA_FROM=2794 TLS_AURORA_TO=…` (gate script, one at a time, window minimised) answer it:
+
+| # | range | what the tap fed, per fed frame | readback |
+|---|---|---|---|
+| 1 | 2794..2800, `TLS_AURORA_TEST_NO_DEPTH=1` | 2794 **0 draws** / 3 copies, 2795 220, 2796 **0** / 3, 2797 219, 2798 **0** / 3, 2799 207, 2800 **0 draws** / 3 copies | **all zero**, `mean=(0.00,0.00,0.00)` |
+| 2 | 2794..2799 (ends on a draw-bearing frame) | same history, 2799 = 207 draws / 15 copies | **`mean=(10.37,12.72,7.09)`, 640x448**, luma 11.38, 86.09 % of pixels < 20, 99.76 % non-zero |
+
+**C1. The feed alternates.** Every second fed frame in the window carries **zero draw commands and three copy commands**, and the ones between carry 207-220 draws. That is the two-half present gate (5c.29): the runner presents a guest frame in two halves, the aurora tap is called per present, and each call is handed to aurora as a *whole* frame — which starts with a clear. So a range that ends on a copy-only half reads back the clear plus three copies: **black by construction.**
+
+**C2. Why that looked like a depth defect.** The last session's single-frame run reported `1 318 078 B / 22 553 draws / mean 1.92`, and this session's range reports `387 550 B / 0 draws / mean 0.00` for the same nominal frame number. The byte counts differ by 3.4x, so the two runs were **not measuring the same fed stream** — the counter that `TLS_AURORA_FROM/TO` gates on advances per present, the present/guest offset drifts with host load (AP-AY §11), and 22 553 draws is not a cave frame's draw count in any measurement this session made. Stated plainly: the previous session's number was taken on a loaded host, at a different counter, and its conclusion ("depth/viewport state") is **withdrawn rather than inherited**.
+
+**C3. What the picture shows.** `mean=(10.37,12.72,7.09)` is a real frame, not black: a black field with a dialogue subtitle ("Wait, you scaly bastards!") and colourful garbage bands along the top and bottom edges (`logs_ap/bs/aur_live_2799.png`). So aurora is rendering *a* live frame through the boundary; what it is not yet doing is rendering a frame the guest also renders identically in the layer, because (a) it is being fed half-frames and (b) the counter is not anchored to the guest frame the gate uses.
+
+**C4. The measurement that replaces it, and the change it implies.** P1's equality test must feed **one guest frame, both halves, into one aurora frame** — concatenate the two presents' FIFO bodies (the tap already has the bytes; the display-list inlining rule is unchanged) and call `tls_aurora_live_frame` once, so the second half does not clear away the first. Until that is done, every live/harness comparison is comparing a *half-frame* to a *frame*, and the depth hypothesis has no evidence behind it at all. The instruments for the check are already in place: `TLS_AURORA_FROM/TO` (range), `TLS_AURORA_STATS` (draw/copy counts), and the readback mean.
+
+**D. Changes.** `recomp/gx_pipeline.c` (the alpha-combiner decode corrected to Dolphin's layout, with the citation and the measured example in the comment); `recomp/gfx_d3d11.c` (`TLS_TEX_CACHE_LOG` + `texlog_wanted()` + the per-entry upload mean/upd_frame fields, guarded so the default path is unchanged); this file. **0 changes to `src/`.** Build green (459 chunks / 471 objects). `logs_ap/bs/aur_live_2799.png` is the readback picture.
+
+**E. Run log** (one runner at a time; every launch `--window --minimized`; the save files deleted before each; idle host; the aurora runs end in the known exit hang and were ended with `Stop-Process`, which is why their elapsed times end at the kill and not at "exit").
+
+| # | what | result |
+|---|---|---|
+| 0 | `pwsh tools/invariant.ps1` on the idle host | **PASS attempt 1**, handover 1680, content `B4646917…`, popup `22B1CE31…`, save 1 348 992 / 29 344 (344 s) |
+| 1 | 1 000 frames, `TLS_EFB_CHAIN_GUEST=900` + `TLS_BATCH_DUMP_GUEST=900,1` + `TLS_TEV_PROBE=900` + shot 900 | 91 s; the 17-copy chain of A1, the 19-batch draw list (b18 = 6v, `0x9038D1C0` 80x56, s=4 d=5, full-frame scissor), b9..b17 scissored to 160x112 / 80x56 corners |
+| 2 | 1 000 frames, `TLS_TEX_CACHE_LOG=0x9038D1C0,0x905C3000,0x903917C0,0x903D77C0` + `TLS_TEV_UNIFORM=18,900` + `TLS_TEX_DUMP_FINAL=0x9038D1C0` | 100 s; the bind of A2 (flat white, cache hit from 410) and the full two-stage uniform of A3 |
+| 3 | 1 000 frames, `TLS_PROBE_PRESENT_ONLY=1` + `TLS_BATCH_DUMP=901` + `TLS_BATCH_PROBE=901` | 90 s; the per-batch ladder b0..b17 = 220→255 flat, **b18 = (90,90,90)**, i.e. b18 is where the plate becomes the mask |
+| 4 | `TLS_AURORA=1 FROM=2794 TO=2800 TEST_NO_DEPTH=1`, 2 810 frames | fed 0/220/0/219/0/207/**0** draws; readback zero — C1, C2 |
+| 5 | `TLS_AURORA=1 FROM=2794 TO=2799`, 2 810 frames | 207 draws on the last fed frame; readback `mean=(10.37,12.72,7.09)`, 640x448 — C3 |
+
+**F. What this does NOT do.** No renderer behaviour changed, so priority B is *diagnosed and split*, not fixed: the arithmetic model in A4 is the deliverable, and it says the fix belongs in the TEV composite (Aurora). No promotion, no re-record: the gate references are untouched because nothing that draws changed. P2/P3 of 5c.47 are not started here beyond what AP-AY already recorded; the P2 static audit stands (the five staging addresses appear only in comments), and the runtime half (`TLS_WATCH_ADDR`) is still the open leg. And the aurora live path still hangs at exit (AP-AY §10) — every run above was ended with `Stop-Process`.
