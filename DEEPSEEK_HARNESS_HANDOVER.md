@@ -14645,3 +14645,29 @@ down, inside the Game task: hook the four caller *functions* by their entry (not
 same run, then ask which state body the field is in when the popup is on screen and whether any of those bodies can
 reach the chain. `TLS_SCENE_SM_PROBE=1` already prints the state word on change, so this is a matter of reading the
 run that produced this item before adding a switch.
+
+**15a. And the field is not idle either: the Game task cycles phase 8 <-> 0 while a request=2 sits unconsumed.**
+Same run, same probe (`TLS_SCENE_SM_PROBE=1`), the state-word trace condensed:
+
+| frame | what changed |
+|---|---|
+| 2020 | `PHASE -1 -> 0` (`outer state=0 ctr=0 f54e8=15 f54ec=0` **`f54f0=0x00000002`**); `ENTER obj=0x811671C0 state=0`; `PHASE13 cmd16=0 (closed)` |
+| 2023 | `PHASE 0 -> 8` (`f54e8=0 f54ec=0 f54f0=0x00000002`) |
+| 2268 / 2508 / 2748 / 2989 / 3229 | every ~240 frames: `GATES state=0 ctr=119/239/359/479/599 of 21600 f54e4=8 f54e8=8`, `GATES2 phase=8 ... call801231D0=242..1202` |
+| **3265** | `g2_3468 0 -> 1`, `PHASE 8 -> 0` (`ctr=617 f54e8=8 f54ec=615 f54f0=0x00000002`) |
+| **3663** | `g2_3468 1 -> 0` |
+| 3709 .. 4429 | every ~240 frames: `GATES state=0 ctr=715..1199 of 21600 f54e4=0 f54e8=0`, `GATES2 phase=0 ... call801231D0=2547..4347` |
+
+Three things follow, and they replace AP-AP item 7's "the guest is not waiting for anything the host owes it" with
+something sharper:
+
+1. **The field is alive and cycling** - phase 8 -> phase 0 at f=3265, with a word (`g2_3468`, `0x81161760+0x3468`)
+   toggling 0->1->0 at 3265/3663 - so "frozen" was already the renderer (item 13) and the state machine does step.
+2. **The 21600 count is a timeout, not a progress counter**: ctr advances 120 per 240 frames (one per two frames) up
+   to `21600` = 6 minutes at 60 fps, and it never gets there in a 4 600-frame run (1199 at f=4429). A phase that
+   waits on a 6-minute timeout is a *hold*, and the run ends inside it.
+3. **`+0x54F0` stays `0x00000002` for the whole run** - the request is written and *never consumed*, because the
+   consumer (`0x8036F5C8-0x8036F5D8`) is never entered (`TLS_ENTRY_PROBE` 0 lines). So the open question is now
+   specifically: **what is the field waiting for in phase 8, and which writer sets request=2 that the consumer
+   should pick up?** The four callers AP-AH named are the places to look, and they are in tasks that are never
+   registered (15 above) - which is consistent with the request being set by a path that is *not* a menu task.
