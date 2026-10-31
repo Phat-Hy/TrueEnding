@@ -25,12 +25,15 @@
 > 400/900/1200/1600 are all luma 90.43"**: only 900 is (the vignette); 400/1200/1600 measure
 > 39.89 / 16.12 / 1.22 with 0.00 % above 250 - and the sprite compensation is **not** the
 > vignette's cause (`TLS_NO_GLOW=1` leaves frame 900 essentially unchanged - luma 90.43 and
-> 8.28 % above 250 either way, 76 327 vs 76 329 pixels above 250), so B's next step is a bisect
-> of the four full-screen **REPLACE** quads on the EFB staging addresses `0x905C3000` /
-> `0x9038xxxx`, which the `TLS_BATCH_PROBE=900` ladder names - and against the one-frame reference
-> 5c.23 §5 already measured (hardware's plate is **mean 205 / corners 174-176 / centre 218-220**,
-> the layer's is **mean 90 / corners 0 / centre 255**), so B is a *level* defect: the decoded mask
-> alpha is applied at full strength instead of scaled (`docs/evidence/at_menu_frames_400_900_1600.png`).
+> 8.28 % above 250 either way, 76 327 vs 76 329 pixels above 250), and **AP-AV then localised B to
+> a single batch**: `TLS_BATCH_DUMP=900` writes one BMP per batch, and the contact sheet
+> (`docs/evidence/at_title_batch_sheet.png`) shows b0..b13 flat 220, b14..b17 flat 255, and **b18
+> alone** turning the frame into centre 254.5 / corner 0.0 (luma 90.71) with everything after it
+> unchanged. b18 is a 6-vertex full-screen quad on **`0x9038D1C0`, the 80x56 RGBA8 EFB-copy buffer**,
+> `s=4 d=5` - so the plate is that buffer's *content* upscaled, which is why the layer is 255/0
+> where Dolphin is **219/175** (5c.23 §5). B's next step is therefore **not** another batch bisect: it
+> is to decode that buffer at b18's command out of a title capture and split "the copy content is
+> wrong" from "the sampling is wrong" (`docs/evidence/at_menu_frames_400_900_1600.png`).
 
 > **AP-AU (last section of this file) IS THE COORDINATE FIX, AND IT IS PROMOTED.** AP-AT item 11
 > measured the lead - every TEV stage sampled **texcoord 0** (the uniform dump shows `st2` asking
