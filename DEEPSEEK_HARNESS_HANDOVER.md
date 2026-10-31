@@ -15910,3 +15910,35 @@ The open item at handover was "the cave frame (guest 2800) renders BLACK live (2
 | 5 | `TLS_AURORA=1 FROM=2794 TO=2799`, 2 810 frames | 207 draws on the last fed frame; readback `mean=(10.37,12.72,7.09)`, 640x448 — C3 |
 
 **F. What this does NOT do.** No renderer behaviour changed, so priority B is *diagnosed and split*, not fixed: the arithmetic model in A4 is the deliverable, and it says the fix belongs in the TEV composite (Aurora). No promotion, no re-record: the gate references are untouched because nothing that draws changed. P2/P3 of 5c.47 are not started here beyond what AP-AY already recorded; the P2 static audit stands (the five staging addresses appear only in comments), and the runtime half (`TLS_WATCH_ADDR`) is still the open leg. And the aurora live path still hangs at exit (AP-AY §10) — every run above was ended with `Stop-Process`.
+
+---
+
+### AP-BA. MIGRATION P2'S GUEST-SIDE LEG IS ANSWERED: NO GUEST CODE READS ANY OF THE FIVE EFB-COPY DESTINATIONS AS RAW MEMORY (0 distinct readers on two ranges, against 3 274 015 059 watched reads and a positive control that lists 64 arena readers) — so aurora's GPU-side shadow-copy model is usable as-is for them, which is P2's own exit criterion
+
+`5c.47` P2 asks one question with two halves. The **host** half was already closed in AP-AY (the five staging addresses appear only inside comments in `recomp/`). The **guest** half — "whether any lifted or recompiled routine reads a copy destination through a non-GX path" — had no instrument at all: `TLS_WATCH_ADDR` samples a word once per dispatched block, which detects *stores* only. This session adds the read-side twin and runs it.
+
+**1. The instrument: `TLS_READ_WATCH=<lo>,<hi>` (+ `TLS_READ_WATCH_FRAME=<n>` to clear the ring at the window that matters).** A `tls_read_note(cpu->pc, ea)` call sits in `mem_read8/16/32/64` (tools/DolRecomp/src/cpu/cpu.c), guarded at the call site by `if (tls_read_watch_on)` so the default path costs one load and one not-taken branch per guest read. The ring holds **64 entries deduplicated by reader PC**, so it names 64 distinct instructions rather than 64 reads of one, and it prints at end of run beside the store watch. Nothing prints on the hot path (5c.45 E1's lesson).
+
+**2. Coverage, stated exactly.** Every lifted integer load is emitted as `mem_read32(ctx, ea)` / `mem_read8` / `mem_read16` (`emitter.c:1450-1457`, the `L*` and `L*X` forms), the float loads `lfs/lfd` go through `mem_read32`/`mem_read64` too (`emit_fload`), and interpreted guest code calls the same functions. **The one uncovered path is `psq_l`**, which uses `ppc_psq_load_inline`'s own gather. A byte-wise copy reader - which is what reading a copy destination back would look like - is covered.
+
+**3. The measurement (two runs, one range each, gate script, ring cleared at guest frame 2400 so it cannot be spent on boot).**
+
+| watched range | what it covers | distinct guest readers | hook calls |
+|---|---|---|---|
+| `0x905C3000..0x906DA000` | the 640x448 full-frame copy destination (1 146 880 B) | **0** | 3 274 015 059 |
+| `0x9038D1C0..0x903ED5C0` | the 80x56/320x224 buffer `0x9038D1C0`, the 320x224 `0x90395DC0` and `0x903917C0`, the 160x112 `0x903DBDC0` | **0** | 3 274 015 059 |
+| `0x90000000..0x90700000` (**positive control**) | the whole MEM2 staging arena | **64** | 3 274 015 059 |
+
+The control is what makes the zeros evidence rather than a silent no-op: the identical instrument, armed over a wider span, lists 64 distinct readers in the same window (`reader_pc=0x800A0604 first_ea=0x9031FA68`, ... `0x8008CCD4 0x90294120`) - i.e. the guest *does* read its own MEM2 heap, and does **not** read the five staging buffers. That is the distinction the audit needed.
+
+**4. What this settles.** For the five named buffers, the only reader of an EFB-copy destination is the host's TEV/sampler path (which under aurora becomes `resolve_sampled_textures`'s shadow-texture bind, AP-AQ item 11, poison-tested there). **P2's exit criterion - "zero hits → aurora's model is usable as-is" - is met**, and the two remaining P2 items are named rather than open-ended: (a) any *other* address the guest bakes from (the hero's `0x92AEAEC0` is a different case, already known since AP-T/AP-Z and fixed by servicing the queue in `GXDrawDone`), and (b) the `psq_l` hole, which is a one-line emitter hook if a quantised reader ever needs auditing.
+
+**5. Changes.** `tools/DolRecomp/src/cpu/cpu.c` / `cpu.h` (the read watch: flags, ring, `tls_read_watch_init`, `tls_read_note`, and the four guarded call sites), `recomp/host_runner.c` (arm from `TLS_READ_WATCH`, clear from `TLS_READ_WATCH_FRAME`, print the ring at end of run); this file. **0 changes to `src/`.** Build green: the `cpu.h` edit invalidates every chunk, so a full rebuild is **459 chunks in 317 s** plus 471 objects - worth knowing before touching that header for a one-line change.
+
+**6. Run log** (one runner at a time, `--window --minimized`, save files deleted before each, idle host).
+
+| # | what | result |
+|---|---|---|
+| 1 | 2 810 frames, `TLS_READ_WATCH=90000000,90700000`, ring cleared at 2500 | 274 s; **64 distinct readers** - the positive control |
+| 2 | 2 810 frames, `TLS_READ_WATCH=905C3000,906DA000`, cleared at 2400 | 272 s; **0 readers** across 3.27e9 watched reads |
+| 3 | 2 810 frames, `TLS_READ_WATCH=9038D1C0,903ED5C0`, cleared at 2400 | 268 s; **0 readers** |

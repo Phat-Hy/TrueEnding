@@ -1443,6 +1443,44 @@ int main(int argc, char** argv) {
             if (sf >= 0 && frame == sf) tls_store_ring_n = 0;
         }
 
+        /* TLS_READ_WATCH=lo,hi: the read-side twin of the store watch, armed once here and
+         * printed at end of frame. Its purpose is 5c.47 P2's last open leg: the host-side
+         * audit is done (the five staging addresses appear only in comments), but a GUEST
+         * routine that reads an EFB-copy destination as raw memory is a migration blocker
+         * under aurora, whose copies live as GPU-side shadow textures and never touch
+         * guest RAM. TLS_READ_WATCH=90000000,90700000 covers the whole staging arena. */
+        {
+            extern int tls_read_watch_on;
+            static int s_armed_read = -1;
+            if (s_armed_read < 0) {
+                s_armed_read = 0;
+                const char* spec = getenv("TLS_READ_WATCH");
+                if (spec) {
+                    unsigned lo = 0, hi = 0;
+                    if (sscanf(spec, "%x,%x", &lo, &hi) == 2 && hi > lo) {
+                        tls_read_watch_init(lo, hi);
+                        s_armed_read = 1;
+                        printf("[ReadWatch] armed 0x%08X..0x%08X\n", lo, hi);
+                        fflush(stdout);
+                    }
+                }
+            }
+            (void)s_armed_read;
+        }
+
+        /* TLS_READ_WATCH_FRAME=<n>: clear the read-watch ring at that guest frame, so it
+         * captures the readers of the window that matters instead of the boot-time ones.
+         * (The store watch needed the same lever for the same reason - 5c.45 L/M.) */
+        {
+            static int rf = -2;
+            extern u32 tls_read_ring_n;
+            if (rf == -2) {
+                const char* e = getenv("TLS_READ_WATCH_FRAME");
+                rf = e ? atoi(e) : -1;
+            }
+            if (rf >= 0 && frame == rf) tls_read_ring_n = 0;
+        }
+
         // 2. Poll host input and update controller structures
         tls_input_new_frame();
         tls_service_controller_input(&cpu);
@@ -1874,6 +1912,26 @@ int main(int argc, char** argv) {
             printf("  [StoreWatch] frame=%u cia=0x%08X ea=0x%08X value=0x%08X\n",
                    tls_store_ring_frame[i], tls_store_ring_cia[i],
                    tls_store_ring_ea[i], tls_store_ring_val[i]);
+        }
+        fflush(stdout);
+    }
+
+    /* Report the instruction-granularity READ watch at END OF RUN: 64 distinct reader
+     * instructions, deduplicated by PC, with the first address each one touched and the
+     * frame it happened on. Zero lines here is a RESULT, not a missing measurement - it
+     * means no lifted or interpreted guest code read the watched range at all, which for
+     * the staging arena is exactly the answer 5c.47 P2 needs (aurora's shadow-copy model is
+     * then safe for every reader the host does not already know about). */
+    {
+        extern int tls_read_watch_on;
+        extern unsigned long tls_read_note_calls;
+        extern u32 tls_read_ring_pc[64], tls_read_ring_ea[64], tls_read_ring_frame[64];
+        extern u32 tls_read_ring_n;
+        printf("[ReadWatch] hook calls=%lu armed=%d distinct readers=%u\n",
+               tls_read_note_calls, tls_read_watch_on, tls_read_ring_n);
+        for (u32 i = 0; i < tls_read_ring_n && i < 64; i++) {
+            printf("  [ReadWatch] frame=%u reader_pc=0x%08X first_ea=0x%08X\n",
+                   tls_read_ring_frame[i], tls_read_ring_pc[i], tls_read_ring_ea[i]);
         }
         fflush(stdout);
     }
