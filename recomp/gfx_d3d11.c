@@ -1564,6 +1564,21 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
                  * MATTE is gated by plate fraction (see matte_allowed). */
                 bool is_ink_art = (base_luma - min_luma) > 60;
                 bool matte_allowed = is_ink_art && (plate_frac >= s_plate_min);
+                /* The glow rewrite's guard, decided here so the stats line below can report
+                 * what was APPLIED rather than what was classified (two sessions of this
+                 * dossier have been misled by an instrument that reported intent). */
+                static int s_glow_all = -1;
+                if (s_glow_all < 0) s_glow_all = getenv("TLS_GLOW_ALL") ? 1 : 0;
+                /* TLS_NO_GLOW=1 disables the rewrite for EVERY size, which is the A/B that asks
+                 * whether the compensation is right on the class it WAS built for (the menu's
+                 * full-screen radial glow is a 1386-vertex quad on the 64x64 sprite 0x907FC980 -
+                 * measured with TLS_BATCH_PROBE=900, handover 5c.46 AP-AT item 6). Diagnostic
+                 * only: it is never a default, and the gate asserts the default picture. */
+                static int s_no_glow = -1;
+                if (s_no_glow < 0) s_no_glow = getenv("TLS_NO_GLOW") ? 1 : 0;
+                bool glow_size_ok = (tu->width <= 64 && tu->height <= 64);
+                bool glow_applied = (max_delta > 10 && !is_ink_art && !s_no_glow &&
+                                     (glow_size_ok || s_glow_all));
                 {
                     static int s_stats = -1;
                     if (s_stats < 0) s_stats = getenv("TLS_INK_STATS") ? 1 : 0;
@@ -1572,7 +1587,8 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
                          * from, because the numbers alone cannot show whether the upload path
                          * rewrote the texels the shader samples (handover 5c.46 AP-AT). */
                         const char* action = "none";
-                        if (max_delta > 10 && !is_ink_art) action = "glow";
+                        if (glow_applied) action = "glow";
+                        else if (max_delta > 10 && !is_ink_art) action = "glow-blocked";
                         else if (matte_allowed && tls_ink_matte_allowed()) action = "matte";
                         printf("[InkStats] tex=0x%08X %ux%u fmt=%u base_luma=%d min_luma=%d "
                                "plate_frac=%.3f ink=%d max_delta=%d base=(%d,%d,%d) "
@@ -1589,7 +1605,30 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
                  * the whole page out and speckles its edges - measured on the parchment
                  * (0x921DEA60) in 5c.46 D, where restricting it to small textures is what
                  * keeps the sheet photographic. */
-                if (max_delta > 10 && !is_ink_art) {
+                /* 5c.46 AP-AT: THE GLOW REWRITE IS A SPRITE COMPENSATION AND IT WAS FIRING ON
+                 * SCENE ATLASES. It exists for the particle class - a small quad whose whole
+                 * texture is a bright core on a uniform baseline (the documented example
+                 * 0x907FC980 is 64x64 with base (191,176,125)) - and it rewrites the uploaded
+                 * texels with `out_r = 217..255` while G/B ramp from the baseline. So every
+                 * texel it touches becomes red-dominant by construction, and until now nothing
+                 * restricted it to sprites: measured on the field at guest 2800 it fires on the
+                 * cave's 256x256 CMPR rock atlas 0x91EBC460 (base (68,61,52), plate_frac 0.259,
+                 * max_delta 161), turning its grey decode (88.54,85.39,76.40; the pre-rewrite
+                 * `TLS_TEX_DUMP`) into mean (169.76,80.21,75.02) with **75.16 % red-dominant
+                 * texels** (`TLS_TEX_DUMP_FINAL`, TLS_INK_STATS action=glow). That upload is
+                 * the whole "red rock": every TEV input is neutral (AP-AS item 7), the uniform
+                 * equals the probe's decode field for field (AP-AT item 1), and aurora - which
+                 * decodes the real texels - renders the same stream with 0.00 % red. The
+                 * texture dump that "proved" the atlas grey is written *before* this block,
+                 * which is why three sessions of TEV archaeology could not see it.
+                 * The guard keeps the behaviour on the sprite class (<= 64x64, the size the
+                 * hack was built for and the size of the measured baseline sprite) and leaves
+                 * larger atlases as the guest authored them. `TLS_GLOW_ALL=1` restores the old
+                 * behaviour for an A/B: it is the control that reproduces the pre-AP-AT gate
+                 * references. 128x128 textures keep the old behaviour on purpose - they are the
+                 * one size class the field census cannot separate (both 128x128 sprite and
+                 * 128x128 atlas exist), so they are bounded rather than changed. */
+                if (glow_applied) {
                     for (uint32_t pi = 0; pi < total_px; pi++) {
                         uint32_t px = s_d3d11.gx_staging_rgba[pi];
                         int r = (int)(uint8_t)px;

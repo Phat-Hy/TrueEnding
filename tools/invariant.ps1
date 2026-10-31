@@ -97,7 +97,19 @@ Set-Location $root
 # The superseded behaviour is one environment away and was measured after the promotion:
 # TLS_NO_SCISSOR=1 TLS_FORCE_BLEND=1 returns 6465ACEF... and C5535C7D... exactly, so the old
 # references are reproducible rather than lost.
-$EXPECTED_SHA = 'F97A586365100E36814A51C63CA0F701FECBCD1D7650CF4A5CB7E3B6CA806293'
+#
+# RE-RECORDED IN 5c.46 AP-AT (intended change, measured twice on an idle host): the CMPR "glow"
+# compensation in the texture upload path was rewriting the cave's 256x256 rock atlas
+# (0x91EBC460) into a red-dominant one - out_r is forced to 217..255 while G/B ramp from the
+# baseline, so its grey decode (88.54,85.39,76.40) was being uploaded as (169.76,80.21,75.02),
+# 75.16 % red-dominant texels. That upload was the whole "red rock" (layer 18.60 % red-dominant
+# vs aurora 0.00 % on the same capture). The rewrite is now restricted to the sprite size class
+# it was built for (<= 64x64; TLS_GLOW_ALL=1 restores the old behaviour and reproduces the
+# superseded 8938E369... / F97A5863... references). Content frame: 8938E369... -> 5BB1538F...
+# (mean RGB 42.35,46.45,49.53, luma 45.58, >250 0.00 %, red-dominant 18.60 % -> 0.00 %).
+# Popup frame: F97A5863... -> 77BF4AB2... (mean RGB 45.60,49.43,49.11, luma 48.25, >250 2.02 %,
+# red-dominant 0.07 %). Handover 1680 and the save (1 348 992 / 29 344 B) are UNCHANGED.
+$EXPECTED_SHA = '77BF4AB2790091AA80D655200F840182393AD309071A23640A338E2DFD8B4866'
 $SHOT_FRAME   = '3500'
 $INPUT        = '600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A'
 
@@ -141,7 +153,7 @@ $INPUT        = '600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1
 # The values below are recorded for THIS shot list and were each measured twice on an idle host;
 # a 3500-only run still produces C5447108... (kept here so the older reference is not lost).
 $CONTENT_FRAME          = '2800'
-$EXPECTED_SHA_CONTENT   = '8938E36934002EC6B4840B3B9823538521C78D055F23E7C3C8CBAABCA7305DD7'
+$EXPECTED_SHA_CONTENT   = '5BB1538F9C52747B0C35266471698F15433DA9470E2503ED20DB23AD73B9C9AF'
 $CONTENT_LUMA_MIN       = 15.0
 $CONTENT_LUMA_MAX       = 120.0
 $CONTENT_BRIGHT_MAX     = 0.10
@@ -209,12 +221,16 @@ Remove-Item $SAVE_FILE, $BANNER, $TMP_SAVE -Force -ErrorAction SilentlyContinue
 # shell launched it. The gate measures the DEFAULT renderer, which is what its references were
 # recorded on. (TLS_BATCH_CUTOFF is here for the empty-string trap AP-AQ documents: unset is not
 # the same as "".)
+# 5c.46 AP-AT: TLS_GLOW_ALL=1 restores the superseded texture-upload glow rewrite (it reproduces
+# 8938E369... / F97A5863... exactly), and the three new instruments (TLS_INK_STATS,
+# TLS_TEX_DUMP_FINAL, TLS_TEV_UNIFORM) must not leak into a gate run either.
 foreach ($v in 'TLS_SCRIPT_FILTER','TLS_NO_SCRIPT_FILTER','TLS_FAKE_FADE','TLS_NO_FAKE_FADE',
                'TLS_EFB_ALPHA','TLS_SCENE_SM_PROBE','TLS_FADE_RET','TLS_PRESENT_PROBE',
                'TLS_TEX_HASH_FULL','TLS_R8_TILE_8X4','TLS_ACTION_PROBE','TLS_SHOT_FRAMES',
                'TLS_SAVE_PROBE','TLS_NAND_PROBE','TLS_ISFS_SERVICE','TLS_SAVE_PRECREATE',
                'TLS_SHOT_GUEST','TLS_BATCH_CUTOFF',
-               'TLS_SCISSOR','TLS_NO_SCISSOR','TLS_NO_FORCE_BLEND','TLS_FORCE_BLEND') {
+               'TLS_SCISSOR','TLS_NO_SCISSOR','TLS_NO_FORCE_BLEND','TLS_FORCE_BLEND',
+               'TLS_GLOW_ALL','TLS_INK_STATS','TLS_TEX_DUMP_FINAL','TLS_TEV_UNIFORM') {
     Remove-Item "Env:\$v" -ErrorAction SilentlyContinue
 }
 
