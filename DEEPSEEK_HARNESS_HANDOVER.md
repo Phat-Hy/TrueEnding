@@ -14587,3 +14587,22 @@ white-out - the exact regression it caught; (b) new hashes would be recorded on 
 marks for replacement; (c) the title/menu/page frames were not re-validated under the switches. The recipe stays
 in item 7, and a session that promotes should do it with the five points above on the table, twice, and with the
 luma assertions re-derived from the new frames rather than loosened until they pass.
+
+**What priority C starts with, now that the renderer is fixed (one run, no new code).** `tls_task_census`
+(`recomp/replacements.c`, the `[TLS SceneSM] ... TASKS count=…` line) prints the **task-manager list on every
+count change**, and it is gated by `TLS_SCENE_SM_PROBE=1`; the entry chain's own hook is `TLS_ENTRY_PROBE=1`.
+Run both together under the fix and the question "which menu/tutorial task should call `0x8036F5D8`'s chain and
+does the popup task ever exit" becomes a list instead of an inference:
+
+```powershell
+$env:TLS_INPUT_SCRIPT='600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A'
+$env:TLS_SCISSOR='1'; $env:TLS_NO_FORCE_BLEND='1'          # so the field is not a white fixed point (item 13)
+$env:TLS_SCENE_SM_PROBE='1'; $env:TLS_ENTRY_PROBE='1'
+Remove-Item SaveData\title\00010000\534c5345\data\savedata.dat,SaveData\title\00010000\534c5345\data\banner.bin,SaveData\tmp\savedata.dat -ErrorAction SilentlyContinue
+build\recomp\tls_runner.exe --window --minimized --frames 4600 *> logs_ap\c_taskcensus.log
+# then: grep 'TASKS count=' logs_ap\c_taskcensus.log  -> the task list's history up to the plateau
+#       grep 'EntryProbe'                              -> still expected 0 (item 13)
+# and match the task pointers against the four callers AP-AH named (0x803775DC, 0x80529C74, 0x8051F7D4,
+# 0x803AB328, 0x8039D930): a task that is REGISTERED but whose update never runs is the answer; a task that is
+# never registered is a different (upstream) defect.
+```
