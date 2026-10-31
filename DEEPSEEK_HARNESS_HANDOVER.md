@@ -2,6 +2,38 @@
 
 ## NEXT SESSION — START HERE
 
+> **READ §5c.46 AP-AT (the last section of this file) FIRST: THE RED ROCK IS FIXED, AND IT WAS
+> NEVER THE TEV CHAIN.** AP-AT ran both discriminators AP-AS named and **falsified both** (the
+> uniform the GPU receives equals the probe's decode field for field; `TevRegular` against
+> Dolphin's `WriteTevRegular` differs only by fixed-point rounding, per channel, so it cannot make
+> a hue) and then found the actual cause in the one stage nobody had instrumented: the **texture
+> upload path**. The CMPR "glow" baseline compensation rewrites the uploaded texels with
+> `out_r = 217..255` while G/B ramp from the baseline, so every texel it touches is red-dominant by
+> construction - and it was firing on the cave's **256x256 rock atlas `0x91EBC460`**, turning its
+> grey decode (88.54, 85.39, 76.40) into **(169.76, 80.21, 75.02) with 75.16 % red texels**. It is
+> now restricted to the sprite size class it was built for (`<= 64x64`; `TLS_GLOW_ALL=1` restores
+> the old picture exactly): guest 2800 red-dominant **18.60 % -> 0.00 %** against **aurora's
+> 0.00 %** on the same capture (`docs/evidence/at_pair_g2800.png`), mean RGB
+> (60.07,45.10,49.14) -> (42.35,46.45,49.53), luma 50.04 -> 45.58. **Both gate references were
+> re-recorded deliberately on two independent runs each** (guest 2800 `5BB1538F…`, guest 3500
+> `77BF4AB2…`) and the gate **PASSes attempt 1 three times**; handover 1680 and the save
+> (1 348 992 / 29 344 B) are unchanged. Two new instruments matter for everything after this:
+> `TLS_TEX_DUMP_FINAL=<addr>` dumps the staging buffer **after** the compensation (the old
+> `TLS_TEX_DUMP` writes it **before**, which is why three sessions saw a grey atlas and a red
+> render), and `TLS_TEV_UNIFORM=<batch>[,<frame>]` prints the **filled `GxTevConstants`** rather
+> than the snapshot decode. AP-AT also **falsifies AP-AQ item 22 / AP-AR §7's "guest
+> 400/900/1200/1600 are all luma 90.43"**: only 900 is (the vignette); 400/1200/1600 measure
+> 39.89 / 16.12 / 1.22 with 0.00 % above 250 - and the sprite compensation is **not** the
+> vignette's cause (`TLS_NO_GLOW=1` leaves frame 900 byte-identical), so B's next step is a bisect
+> of the four full-screen **REPLACE** quads on the EFB staging addresses `0x905C3000` /
+> `0x9038xxxx`, which the `TLS_BATCH_PROBE=900` ladder names.
+
+> **READ §5c.46 AP-AS (the section before AP-AT)** for the back-buffer channel-order bug it fixed
+> and the same-launch aurora pair that localised the rock to batch b48 - and note that its item 7
+> claim "every input measured neutral, so the divergence is in the fragment evaluation" is the
+> reasoning AP-AT overturns: the inputs *were* neutral, in guest memory and in the uniform; the
+> **uploaded** buffer was not.
+
 > **READ §5c.46 AP-AS (the last section of this file) BEFORE USING ANY `[BatchProbe]` NUMBER FROM AN EARLIER
 > SECTION.** The batch/rect back-buffer probes and the `TLS_EFB_SAMPLE_FRAME` readback had **R and B exchanged** -
 > the swap chain is `R8G8B8A8` and they read byte 0 as blue. Measured from one launch where the shot and the probe are
@@ -15295,3 +15327,96 @@ and 8x8 maps), `presentation.py` (the channel-swap test that first ruled a swap 
 | 6 | rebuild with the channel fix, same command | probe now `avg=(61,45,49)`, `red=725/3600` = 20.1 %; **b48 / 0x91EBC460** is the jump (75 -> 799) |
 | 7 | `texorigin.py` on the capture | 6 788 draws sample the atlas (256x256 CMPR, 3 TEV, blend OFF), 52 611 vtx; the atlas decodes (62.1,63.0,61.4), 0.15 % red |
 | 8 | runner, `TLS_TEX_DUMP=0x91EBC460` + `TLS_TEX_DUMP_FRAME=2800` | **no dump written** (upload happens before 2800) and the host was loaded: 1563 s; shot still `8938E369…` |
+
+---
+
+### AP-AT. THE RED ROCK IS THE TEXTURE UPLOAD PATH, NOT THE TEV CHAIN — the CMPR "glow" compensation was rewriting the cave's 256x256 rock atlas into a red-dominant one (grey decode (88.54,85.39,76.40) uploaded as (169.76,80.21,75.02), 75.16 % red texels), and it is now restricted to the sprite class it was built for: guest 2800 red-dominant 18.60 % -> 0.00 % against aurora's 0.00 %, both gate references re-recorded deliberately on two runs each and PASS attempt 1 three times; priority B measured, and its "all four menu frames are the vignette" claim falsified
+
+Priority A was the red rock, with two cheap discriminators named in AP-AS item 7. Both were run and **both are falsified**, and the third thing they implied - "the inputs are neutral, so the fragment program must be wrong" - was wrong about *which* stage between the guest's bytes and the sampler is the layer's. The cause is a **compensation hack in the texture upload path**, and it has been in `gfx_d3d11.c` since long before AP-AI: the CMPR "glow" baseline subtraction rewrites the uploaded texels with `out_r = 217..255` while G/B ramp from the baseline, so **every texel it touches is red-dominant by construction**. Nothing restricted it to the particle sprites it was written for, and its largest single victim is the cave's rock atlas.
+
+**1. Discriminator 1 - what the GPU actually received. The uniform packet equals the probe's decode, field for field.** New instrument `TLS_TEV_UNIFORM=<batch>[,<frame>]` prints the *filled* `GxTevConstants` (the cbuffer the pixel shader reads) after `gx_tev_fill_constants` + `gx_tev_fill_texgen` and before the `Unmap`, plus the vertex colours of three vertices of the batch and the identity of every bound texmap. This is a different object from `TLS_TEV_PROBE`, which prints the `GxTevState` snapshot: a packing/mirror bug between them is invisible to the probe. For **b48** on the gate's own content frame (present 2864 = guest 2800, 11 892 vertices, `voff=224721`):
+
+| stage | uniform `col` | probe's `raw` | decoded (Dolphin's field positions) |
+|---|---|---|---|
+| st0 | `0x0088FEAF` | `0x0088FEAF` | `d ZERO`, `lerp(a=ZERO, b=K1, c=ras)`, dest `c1` -> `c1 = ras` |
+| st1 | `0x0008F84F` | `0x0008F84F` | `d ZERO`, `lerp(a=ZERO, b=tex, c=c1)`, dest `prev` -> `prev = tex0 * c1` |
+| st2 | `0x0018F80F` | `0x0018F80F` | `d ZERO`, `lerp(a=ZERO, b=tex, c=prev)`, `scale=1` (**x2**), `clamp=1`, dest `prev` -> `prev = 2 * tex1 * prev` |
+
+and `alp` (`0x0088FAF0` / `0x0008F170` / `0x00081FF0`), `map`/`coord`/`en`/`uvsrc` (`0/0/0/0`, `0/0/1/0`, `1/1/1/0`), `raschan=0`, `kc=13/12/12` (K1, K0, K0), `ka=29/28/28`, `tswap=0123`, `rswap=0123` all match the probe's print for `[tev #13]`; `K0=(0,0,0,0)`, `K1=(1,1,1,1)`, `K2=(0.2549,0.2000,0.2314,1.0)`, `K3=0`, `C0=0`, `C1..C3=(1,1,1,0)`, `map0=0x91EBC460 256x256 fmt=14 wrap=1/1`, `map1=0x90782780 4x4 fmt=14 wrap=1/1`, `alpha_test=0x3F` (Always/Always). **So the shader's inputs are exactly what the probe reported - no packing bug, no mirror bug.** Two details this dump settles that the probe's prose did not:
+
+* **The probe prints the SCALE REGISTER, not the multiplier** (`k_scale_names[4] = {"1","2","4","0.5"}` indexed by the raw 2-bit field). `scale=2` in a probe line therefore means **x2** (register value 1), and AP-AS item 7's arithmetic (`prev = prev * tex1 * 2`) is right; reading that line as "x4" is the trap.
+* **The vertex colours are a grey ramp, not white**: `vtx[0]=(255,255,255,255)`, `vtx[5946]=(224,224,224,255)`, `vtx[11891]=(211,211,211,255)` (`ras = 0.83..1.00`). AP-AS item 7 assumed `ras` white because the draws declare no `CLR0`; they do declare one, it is just achromatic. Neutral either way, but the record is now exact.
+* And the one field the guest set that the layer substitutes: `st2` declares `coord=1` and the uniform says `uvsrc=0`, i.e. **every stage samples texcoord 0** unless `TLS_TEV_TEXCOORD`/`TLS_XF_TEXGEN` is set. That is the standing default-off gap AP-P/AP-O recorded, and it is the first candidate for AP-AS's "the water surface is flat in the layer and textured in aurora" - not this session's item, but now attributable from one line of one log.
+
+**2. Discriminator 2 - Dolphin's `WriteTevRegular` against `TevRegular3`/`TevRegular1`. The structures are the same, and neither can make a hue.** Dolphin (current `VideoCommon/PixelShaderGen.cpp`) generates
+
+```
+(((tevin_d.{c}{bias}){<<scale}) {op} ((((((tevin_a.{c}<<8) + (tevin_b.{c}-tevin_a.{c})*(tevin_c.{c}+(tevin_c.{c}>>7))){lerp_bias}){<<scale})>>8)){>>1 if Divide2}
+```
+
+with `lerp_bias = " + 128"` for add and `" + 127"` for subtract (skipped when the scale is Divide2). The layer has `lerp = a*(1-c) + b*c; r = (op==1) ? d - lerp : d + lerp; bias; scale; clamp` - the same operation, with two fixed-point refinements the layer does in float: hardware scales the lerp factor to 0..256 (`c + (c>>7)`, i.e. c*256/255) and adds a rounding bias before the `>>8`. Both are sub-1/255 per stage **and both are per channel**, so the one construction AP-AS flagged - `c = prev.rgb` (a colour as the lerp factor) with a scale - produces `k*tex*prev` independently per channel and cannot turn a neutral triple into a hue. **So neither discriminator yields a fix, and both are recorded as falsified rather than left as "next".**
+
+**3. The stage between the guest's bytes and the sampler that nobody had instrumented: the upload.** `decode_gx_texture` fills `s_d3d11.gx_staging_rgba`, then `TLS_TEX_DUMP` writes it (gfx_d3d11.c:1395-1418), and then - 210 lines later - the compensation block runs on the **same buffer** before it is copied into the D3D11 texture (`gfx_d3d11.c:1628`). So "the atlas decodes grey" was true and irrelevant at the same time: every earlier dump, every `probe_texture_avg` and every TIFF-style decode of the capture read the *pre-rewrite* bytes. That is the fourth instrument trap this dossier has caught in its own past, and it is the same shape as the other three (a probe that measures a different object than the one under test).
+
+New instrument `TLS_TEX_DUMP_FINAL=<addr>` dumps the staging buffer **after** the compensation block and prints its mean, and `TLS_INK_STATS=1` now prints the *decision* (`action=glow|glow-blocked|matte|none`) beside the numbers it is taken from. Measured on the field at guest 2800 (`logs_ap/at/run2.log`):
+
+```
+[InkStats] tex=0x91EBC460 256x256 fmt=14 base_luma=62 min_luma=4 plate_frac=0.259 ink=0
+           max_delta=161 base=(68,61,52) corners=(57,48,41) action=glow
+[TexFinal] tex=0x91EBC460 256x256 fmt=14 mean=(169.76,80.21,75.02) red_dominant=75.16%
+```
+
+against the pre-rewrite decode **(88.54, 85.39, 76.40), 0.00 % red** - and the rendered rock's own pixels, measured in AP-AS, are **(180.6, 82.5, 77.4)**. The rewrite is `out_r = 255*(0.85+0.15t) = 217..255`, `out_g = base_g + (255-base_g)*t`, `out_b = base_b + (255-base_b)*t`, `out_a = t^2(3-2t)*255`, so at small `t` a texel becomes `(217, 65, 52)`-ish red by construction, and the chain only multiplies it by `ras` and `tex1` (grey) and by 2. **The red rock was the uploaded texture, and the TEV chain was faithfully rendering a red texture all along.**
+
+**4. The fix: the compensation is a sprite compensation, so it is now restricted to the sprite size class.** `gfx_d3d11.c`: the glow rewrite fires only when `tu->width <= 64 && tu->height <= 64` (the class the hack was written for - the documented baseline sprite `0x907FC980` is 64x64 with base (191,176,125) - and the class of the two 32x32s in the census), and `TLS_GLOW_ALL=1` restores the old behaviour for an A/B. 128x128 is left alone **on purpose**: the census cannot separate a 128x128 sprite from a 128x128 atlas, so it is bounded rather than changed (state that plainly; it is the remaining residue). Measured effect, one launch each, guest-keyed:
+
+| guest 2800 | before | **after** | aurora (same capture) |
+|---|---|---|---|
+| mean RGB | (60.07, 45.10, 49.14) | **(42.35, 46.45, 49.53)** | (36.10, 37.42, 37.18) |
+| luma | 50.04 | **45.58** | 37.00 |
+| red-dominant (R > G+25, R > B+25, R > 80) | **18.60 %** (mean of those (180.6, 82.5, 77.4)) | **0.00 %** | **0.00 %** |
+| >250 | 0.00 % | 0.00 % | 0.00 % |
+
+and `docs/evidence/at_pair_g2800.png` is the picture (layer before | layer after | aurora | 4x difference): the rock wall is salmon in the first panel, grey stone in the second and third, and the difference panel lights up exactly on that wall - a **one-run verification against a Dolphin-derived reference on the same stream**, which is what `AGENTS.md` §1 asks of a bug fix in this layer. The popup frame barely moves (`(45.57,49.29,49.20)`/48.17 -> `(45.60,49.43,49.11)`/48.25, `>250` 2.02 % both, red 0.07 %), and **progression is untouched: handover 1680, save 1 348 992 / 29 344 B in every run**.
+
+**5. The control: the escape hatch reproduces the superseded picture byte for byte.** One launch with `TLS_GLOW_ALL=1` returns guest 2800 `8938E36934002EC6B4840B3B9823538521C78D055F23E7C3C8CBAABCA7305DD7` and guest 3500 `F97A586365100E36814A51C63CA0F701FECBCD1D7650CF4A5CB7E3B6CA806293` - the AP-AR references **exactly** (162 s). So the guard is the only thing that changed, and the old references stay reachable.
+
+**6. The gate was re-recorded deliberately, twice, and PASSes attempt 1 three times.** Both references move because both frames show the cave. Recorded on two independent runs of the final binary (`logs_ap/at/run4_rec1.log` 156 s, `run5_rec2.log` 156 s, identical hashes):
+
+| guest frame | AP-AR reference | **AP-AT reference** | full-image luma / bright |
+|---|---|---|---|
+| 2800 (content) | `8938E369…` | **`5BB1538F9C52747B0C35266471698F15433DA9470E2503ED20DB23AD73B9C9AF`** | 45.58 / 0.00 % |
+| 3500 (popup) | `F97A5863…` | **`77BF4AB2790091AA80D655200F840182393AD309071A23640A338E2DFD8B4866`** | 48.25 / 2.02 % |
+
+`tools/invariant.ps1` carries the new hashes with the measurement in the comment, and now also scrubs `TLS_GLOW_ALL`, `TLS_INK_STATS`, `TLS_TEX_DUMP_FINAL` and `TLS_TEV_UNIFORM` (the gate measures the default picture). **PASS, attempt 1** at `logs_ap/at/gate1.log`, `gate2.log` and `gate3.log` (the last one on the final binary, after the `TLS_NO_GLOW` diagnostic was added). The assertions were not touched: content luma 46.27 (gate sampling, window 15..120), bright 0, popup luma 48.68 (< 150), bright 2.02 % (window 0.5..10 %), handover 1680, save 1 348 992 / 29 344.
+
+**7. Priority B, measured under the promoted default - and the dossier's own sentence about it is falsified.** AP-AQ item 22 and AP-AR §7 both say "guest 400/900/1200/1600 are all luma 90.43 with 8.28 % above 250". One launch with the gate's own script and the shipped default, guest-keyed shots at all four (`logs_ap/at/run1.log`), measures:
+
+| guest frame | mean luma | >250 | <20 | what it is |
+|---|---|---|---|---|
+| 400 | **39.89** | 0.00 % | 47.80 % | a dark frame, not the vignette |
+| **900** | **90.43** | **8.28 %** | 38.49 % | **the vignette** |
+| 1200 | **16.12** | 0.00 % | 72.63 % | a near-black transition |
+| 1600 | **1.22** | 0.00 % | 100.00 % | black |
+
+So **only guest 900 is the vignette frame**; the other three numbers in the dossier were not measured on those frames. The same run also shows the vignette is unchanged by the promotion (it is the promoted default) and by the AP-AT guard (identical hashes before and after: `949D51EB…` at 900). Its geometry, straight out of the 900 PPM (`logs_ap/at/vignette.py`): a radial gradient centred **exactly** at (641,360) = the image centre, mirror-symmetric in both axes, mean luma **255.00 for r<0.3**, then 242.9 / 226.4 / 186.0 / 129.3 / 72.8 / 31.0 / 7.5 in the next six rings - i.e. a single centred additive glow that saturates a 573x283 disc (76 329 px = 8.28 %, x[355..927] y[244..526]).
+
+**The obvious suspect is falsified too, cheaply.** The `TLS_BATCH_PROBE=900` ladder shows the menu is 27 batches, and after the first batch - a 1 386-vertex full-screen quad on **0x907FC980, the 64x64 golden glow sprite** - the frame is already (220,220,220); four full-screen **`blend=0` (REPLACE)** quads on `0x905C3000` and the `0x9038xxxx` EFB-copy staging addresses (b14..b17, 6 vertices each) take it to (254,254,254), and b18 onwards settles at (90,90,90). So the menu's presentation samples a **staging address**, which is exactly the AP-AQ item 12 feedback class, and the new one-line diagnostic `TLS_NO_GLOW=1` (disable the rewrite for every size) leaves the frame **identical**: 90.43, 8.28 %, 76 327 >250 pixels. **The sprite compensation is not the vignette's cause** (both facts are worth having: it *is* applied to that sprite, and it makes no difference to the menu). Priority B's next step is therefore a `--max-cmds`/batch bisect of the b14..b17 REPLACE quads, not the texture path.
+
+**8. What this does NOT fix, stated so the next session does not re-derive it.** (a) 128x128 glow candidates keep the old rewrite (bounded, above). (b) The 64x64 sprite rewrite itself is still the same approximation - it is a compensation for a TEV stage, and on the menu it demonstrably changes nothing, so it is not an active defect on any frame this session measured. (c) The **water** is still flat where aurora textures it, and the uniform dump now names the mechanism to test: `st2` asks for `coord=1` and receives `uvsrc=0`. (d) The `[tex] map` averages, `TLS_TEX_DUMP` and every pre-AP-AT "the atlas is grey" statement measure the **pre-compensation** buffer - do not cite them as evidence about what the shader samples.
+
+**9. Changes.** `recomp/gfx_d3d11.c` (the glow guard + `TLS_GLOW_ALL`/`TLS_NO_GLOW`, the `TLS_TEX_DUMP_FINAL` dump, the `TLS_TEV_UNIFORM` uniform dump, the `action=` field on `[InkStats]`, comments carrying every number above); `tools/invariant.ps1` (two re-recorded references, four more scrubbed variables, the reason in the comment); this file. Scratch instruments in `logs_ap/at/` (untracked): `redcmp.py`, `vignette.py`, `at_pairpng.py`. **0 changes to `src/`**; build green (`459 chunks / 470 objects`, 1.1-1.7 s per rebuild).
+
+**10. Run log** (one runner at a time, every launch `--window --minimized`, save files deleted before each; host idle, 121-162 s per 2 810-3 520-frame launch, against the 1 563 s AP-AS recorded under `rekordbox` load).
+
+| # | what | result |
+|---|---|---|
+| 1 | 2 810 frames, `TLS_TEV_PROBE=2800` + `TLS_TEV_UNIFORM=48,2800` + `TLS_BATCH_PROBE=2800` + shots 400/900/1200/1600/2800 | 126 s; uniform == probe decode for all three stages; `vtx` greys; shot 2800 still `8938E369…` (the instruments are inert); the menu numbers of item 7 |
+| 2 | 2 810 frames, `TLS_INK_STATS=1` + `TLS_TEX_DUMP_FINAL=0x91EBC460` + shot 2800 | 121 s; the atlas is `action=glow` and its uploaded mean is **(169.76,80.21,75.02), 75.16 % red** - the cause, in one line |
+| 3 | 3 520 frames with the guard, shots 2800/3500 + the four menu frames | 156 s; `5BB1538F…` / `77BF4AB2…`; red-dominant **0.00 %** at 2800; the menu frames byte-identical to the pre-guard run |
+| 4-5 | the same run twice more, gate-shaped, no instruments | 156 s each, **identical hashes** - the two runs the references are recorded from |
+| 6-7 | `pwsh tools/invariant.ps1` twice | **PASS, attempt 1** both times, new references |
+| 8 | `TLS_GLOW_ALL=1`, shots 2800/3500 | 162 s; `8938E369…` / `F97A5863…` **exactly** - the control |
+| 9 | `TLS_BATCH_PROBE=900`, 1 000 frames | 30 s; the 27-batch menu ladder of item 7 |
+| 10 | `TLS_NO_GLOW=1`, shot 900, 1 000 frames | 30 s; **identical** 90.43 / 8.28 % -> the compensation is not the vignette's cause |
+| 11 | `pwsh tools/invariant.ps1` on the final binary | **PASS, attempt 1**, both references unchanged |

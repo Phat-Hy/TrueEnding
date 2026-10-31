@@ -166,6 +166,21 @@ layer's own remaining gap is the corner chain's **content** (an 80x56 RGBA8 EFB 
 95.7 % zero texels over the 17 263 `80x56_6` dumps in Dolphin's corpus, while the layer's is byte-255) - a
 TEV/combiner-class gap, bounded with its next command in AP-AQ item 8.
 
+**AP-AT closed the red rock, and aurora is what decided it.** The layer rendered the cave's rock
+atlases red while aurora rendered the same stream with 0.00 % red-dominant pixels; both AP-AS
+discriminators (the uniform the GPU receives vs the probe's decode, and `TevRegular` vs Dolphin's
+`WriteTevRegular`) came back clean, and the cause was the **texture upload path**: the CMPR "glow"
+baseline compensation rewrote the 256x256 rock atlas `0x91EBC460` from its grey decode
+(88.54, 85.39, 76.40) into (169.76, 80.21, 75.02), 75.16 % red texels. It is now restricted to the
+sprite size class (`<= 64x64`, `TLS_GLOW_ALL=1` to revert): guest 2800 red-dominant **18.60 % ->
+0.00 %** against aurora's 0.00 %, mean RGB (60.07,45.10,49.14) -> (42.35,46.45,49.53)
+(`docs/evidence/at_pair_g2800.png` = layer before | layer after | aurora | 4x difference). The
+practical lesson for this directory: **a Dolphin-derived reference on the same capture is a
+one-run verdict** - it is what turned "the fragment program must be wrong" into a measurement of
+the uploader, and `TLS_TEX_DUMP_FINAL` (dump the staging buffer *after* the compensations) is the
+instrument that made the difference visible. Neither implementation's pictures should be compared
+without checking which buffer each instrument reads.
+
 ## Aurora keeps EFB copies on the GPU, never in guest RAM (AP-AQ item 11)
 
 `copy_tex` (`lib/dolphin/gx/GXFrameBuffer.cpp`) resolves a render texture keyed by the destination pointer
