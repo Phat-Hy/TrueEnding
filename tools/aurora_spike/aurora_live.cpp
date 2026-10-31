@@ -38,6 +38,14 @@ bool g_liveInit = false;
 StreamState g_liveState{};
 std::vector<uint8_t> g_liveRewritten;
 
+/* The copy probe: one real EFB copy (640x448 RGBA8, clear off) appended to the last fed frame, read
+ * back with key = its destination address. PROBE_COPY_DST is inside the mapped MEM2 copy. */
+constexpr uint32_t kProbeCopyDst = 0x90001000u;
+constexpr uint32_t kProbeCopyW = 640, kProbeCopyH = 448;
+std::vector<uint8_t> g_probeCopyCmd;
+std::vector<uint8_t> g_probePayload;
+uint32_t g_probeKey = 2;
+
 }  // namespace
 
 extern "C" {
@@ -165,7 +173,40 @@ TLS_LIVE_EXPORT void tls_aurora_live_frame(const void* fifo, uint32_t len, int l
     }
   }
   if (last && !g_liveRequested) {
-    g_liveRequested = AuroraReadbackCaptureColor(g_liveStream, 3, &g_liveW, &g_liveH) == GX_TRUE;
+    /* Append the probe copy AFTER the frame's own draws, then ask for its payload. */
+    if (g_probeCopyCmd.empty()) {
+      CopyRegs regs{};
+      regs.srcX0 = 0;
+      regs.srcY0 = 0;
+      regs.srcX1 = kProbeCopyW - 1;
+      regs.srcY1 = kProbeCopyH - 1;
+      regs.dstAddr = kProbeCopyDst;
+      regs.pitch = (kProbeCopyW * 4u) / 8u;
+      regs.haveSrc = true;
+      const uint32_t exec = 12u << 3; /* tpf 12 = format 6 (RGBA8), clear bit off */
+      emit_copy_state(g_probeCopyCmd, regs, exec);
+      g_probeCopyCmd.push_back(0x61);
+      append_u32(g_probeCopyCmd, (uint32_t(0x52) << 24) | (exec & 0xFFFFFFu));
+      g_probePayload.assign(static_cast<size_t>(kProbeCopyW) * kProbeCopyH * 4u, 0);
+    }
+    aurora::gx::fifo::write_data_grow(g_probeCopyCmd.data(),
+                                      static_cast<uint32_t>(g_probeCopyCmd.size()));
+    const uint32_t key = kProbeCopyDst;
+    const AuroraReadbackCopySrc src{key, reinterpret_cast<const void*>(static_cast<uintptr_t>(kProbeCopyDst))};
+    g_probeKey = key;
+    g_liveW = kProbeCopyW;
+    g_liveH = kProbeCopyH;
+    g_liveRequested = AuroraReadbackCaptureCopies(g_liveStream, &src, 1) == GX_TRUE;
+    std::printf("[AuroraLive] probe copy armed: %ux%u RGBA8 -> key 0x%08X, capture %s\n", kProbeCopyW,
+                kProbeCopyH, key, g_liveRequested ? "accepted" : "REJECTED");
+    std::fflush(stdout);
+  }
+  if (0) {
+    /* The second argument is the KEY the result is looked up by, not a frame delay:
+     * AuroraReadbackGet matches AuroraReadbackDest.key against it. The two must agree or ound
+     * is never set - which is what "capture accepted, readback 0 bytes" was. Key 1, as the
+     * harness uses on its main path. */
+    g_liveRequested = AuroraReadbackCaptureColor(g_liveStream, 1, &g_liveW, &g_liveH) == GX_TRUE;
     std::printf("[AuroraLive] colour capture requested: %s (%ux%u)\n", g_liveRequested ? "yes" : "NO",
                 g_liveW, g_liveH);
   }
@@ -177,13 +218,33 @@ TLS_LIVE_EXPORT void tls_aurora_live_frame(const void* fifo, uint32_t len, int l
  * bytes written, or 0 if it never arrived. */
 TLS_LIVE_EXPORT int tls_aurora_live_readback(uint8_t* rgba, uint32_t cap, uint32_t* w, uint32_t* h) {
   if (!g_liveInit) return 0;
-  for (int i = 0; i < 16; ++i) {
-    if (g_liveRequested && g_liveW && g_liveH) {
-      AuroraReadbackDest dest{1, rgba, cap, GX_FALSE};
+  const size_t need = static_cast<size_t>(kProbeCopyW) * kProbeCopyH * 4u;
+  if (g_probePayload.size() < need) g_probePayload.assign(need, 0);
+  for (int i = 0; i < 24; ++i) {
+    if (g_liveRequested) {
+      AuroraReadbackDest dest{g_probeKey, g_probePayload.data(),
+                              static_cast<uint32_t>(g_probePayload.size()), GX_FALSE};
       if (AuroraReadbackGet(g_liveStream, &dest, 1) == GX_TRUE && dest.found == GX_TRUE) {
-        if (w) *w = g_liveW;
-        if (h) *h = g_liveH;
-        return static_cast<int>(g_liveW * g_liveH * 4u);
+        /* De-tile with the harness's layout: per 64-byte 4x4 tile, 32 bytes of (A,R) pairs then
+         * 32 bytes of (G,B) pairs, tiles row-major (write_probe_ppm in aurora_replay.cpp). */
+        if (cap < need) return 0;
+        const uint32_t tilesX = kProbeCopyW / 4;
+        const uint8_t* bytes = g_probePayload.data();
+        for (uint32_t y = 0; y < kProbeCopyH; ++y) {
+          for (uint32_t x = 0; x < kProbeCopyW; ++x) {
+            const size_t tile = static_cast<size_t>(y / 4) * tilesX + (x / 4);
+            const uint8_t* t = bytes + tile * 64;
+            const uint32_t idx = ((y % 4) * 4 + (x % 4)) * 2;
+            uint8_t* o = rgba + (static_cast<size_t>(y) * kProbeCopyW + x) * 4u;
+            o[0] = t[idx + 1];
+            o[1] = t[32 + idx + 0];
+            o[2] = t[32 + idx + 1];
+            o[3] = 255;
+          }
+        }
+        if (w) *w = kProbeCopyW;
+        if (h) *h = kProbeCopyH;
+        return static_cast<int>(need);
       }
     }
     if (!aurora_begin_frame()) break;

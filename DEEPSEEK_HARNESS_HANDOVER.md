@@ -15723,3 +15723,24 @@ So aurora's command processor consumed the runner's bytes, the adapter translate
 | 5 | with `map_guest_region` | **frame fed: 9 705 B, 12 draws, 15 copy cmds**, readback 0 |
 | 6 | `pwsh tools/invariant.ps1` | **PASS, attempt 1** - the hooks are inert |
 | 7 | 200 frames default | 4 s, exit 0 - no measurable cost on the default path |
+
+**8. Addendum - the copy probe DELIVERS: the live path renders a real frame.** The colour capture's "accepted but 1 146 880 zero bytes" was the documented fallback (the README: its in-frame job often never delivers and the harness falls back to the *next*, empty frame). Switched the live readback to the **EFB copy probe** - one real `GXCopyTex` of the full 640x448 RGBA8 EFB appended after the frame's own draws, read back with `AuroraReadbackCaptureCopies` and de-tiled with the harness's `write_probe_ppm` layout:
+
+```
+[AuroraLive] probe copy armed: 640x448 RGBA8 -> key 0x90001000, capture accepted
+[AuroraLive] guest frame 396: fed 56262 bytes, 235 draw(s), 18 copy cmd(s), readback 1146880 bytes (640x448)
+[AuroraLive] wrote build/recomp/aurora_live_396.ppm  mean=(80.10,80.12,80.14)
+```
+
+That is a **picture rendered by aurora inside the runner** - 1 146 880 bytes, 640x448, mean 80.1 (the boot/strap plate), not black and not empty. The copy path also gives the *same* draw/copy counts as the harness on the same bytes (235 draws, 18 copies).
+
+**9. The equality half of P1's criterion, measured and NOT met - with the reason.** The same run also captured the same window (`TLS_GX_CAPTURE=at_live396`, frames 390-396), and the harness replayed the last frame from that capture (`--start-at 6 --stop-after 7 --probe-copy`, 1 s, `camera.py --check-window` clean on all 7 frames). Both sides: 235 draws, 18 copy commands, 640x448 de-tiled payload. The pictures differ:
+
+| | live (runner, aurora in-process) | harness (same capture, single frame) |
+|---|---|---|
+| mean RGB | (80.10, 80.12, 80.14) | (93.53, 93.53, 93.52) |
+| **mean &#124;d&#124;** | **13.41**, max 100 | - |
+
+The stream is identical, so this is **state, not bytes**: the harness starts frame 396 from a fresh processor with the capture's MEM snapshot (taken at the end of the window), while the live path feeds the frame into a processor whose `StreamState`/texture cache/EFB are whatever 396 runner frames left them at; neither side carries the *layer's* accumulated GPU state. The next measurement is therefore a **history-matched** pair: feed the live path the whole 390-396 window (`TLS_AURORA_FRAME` currently feeds one frame - a `TLS_AURORA_FROM/TO` range is the one-line change) and replay the same window with `--start-at 0 --stop-after 7`, then compare the last frame of each. Until that is equal, P1's exit criterion is **not** met, and the honest statement is: the boundary works end to end and produces a real frame; the two pictures of one frame are 13.4 units apart for a reason that is named and testable.
+
+**10. Lifecycle, still open and now measured exactly: the process hangs at exit.** After the runner prints its own exit lines the process stays alive (`Get-Process` shows it; a second run's DLL rebuild then fails with `cannot open output file libtls_aurora_live.dll: Permission denied` because the first process still holds it - that is how the hang was noticed). The aurora warnings that follow ("Buffer mapping Aborted", "Device lost: Device was destroyed") show shutdown is *running*, so the hang is after `aurora_shutdown()` returns, most likely in a Dawn/SDL thread join. Every live run in this session was therefore ended with `Stop-Process`; the next session should treat "kill the runner after a TLS_AURORA run" as a rule, and then find the join.
