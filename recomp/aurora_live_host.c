@@ -40,6 +40,10 @@ static size_t s_len, s_cap;
 /* The frame to render, from TLS_AURORA_FRAME. -1 = the first frame with a non-empty stream after
  * init (which is what a smoke test wants); the P1 experiment sets it to the gate's content frame. */
 static long s_want_frame = -2;
+/* A RANGE is what the cave frame needs: a single frame fed into a fresh aurora renders black
+ * (measured: mean 1.92 at guest 2800, 22 553 draws translated), exactly the "thin first frame"
+ * trap AP-AN documented on the harness side, where the fix is to start at a FULL frame. */
+static long s_from = -2, s_to = -2;
 
 /* Display-list call skipping: a 0x40 opcode costs 9 bytes and is NOT forwarded. The parser feeds
  * the list's body back through gx_pipeline_feed_byte, so the body is recorded in place. */
@@ -50,6 +54,12 @@ static void load(void) {
     if (!dll || !*dll) dll = "G:/Program/aurora-spike/build2/libtls_aurora_live.dll";
     const char* f = getenv("TLS_AURORA_FRAME");
     s_want_frame = (f && *f) ? atol(f) : -1;
+    {
+        const char* a = getenv("TLS_AURORA_FROM");
+        const char* b = getenv("TLS_AURORA_TO");
+        s_from = (a && *a) ? atol(a) : (s_want_frame >= 0 ? s_want_frame : -1);
+        s_to   = (b && *b) ? atol(b) : (s_want_frame >= 0 ? s_want_frame : -1);
+    }
     /* The DLL's own dependencies (webgpu_dawn.dll, SDL3.dll, libpng16.dll, libzlib1.dll) sit next
      * to it, and Windows does NOT search a loaded module's own directory - only the app's, PATH
      * and whatever SetDllDirectory added. Without this, LoadLibrary fails with error 126
@@ -87,12 +97,15 @@ static void load(void) {
         return;
     }
     printf("[AuroraLive] init 640x448 ...\n"); fflush(stdout);
-    if (!s_init(640, 448)) {
+    /* 640x480, not 640x448: the harness's own colour capture reports 640x480, i.e. its EFB is
+     * the full NTSC VI size. The cave frame is black at 448 tall (mean 1.92) while the boot plate
+     * renders correctly, and depth/viewport state is what differs between them. */
+    if (!s_init(640, 480)) {
         printf("[AuroraLive] init failed\n");
         fflush(stdout);
         return;
     }
-    printf("[AuroraLive] live path armed (dll=%s, want_frame=%ld)\n", dll, s_want_frame);
+    printf("[AuroraLive] live path armed (dll=%s, frames %ld..%ld)\n", dll, s_from, s_to);
     fflush(stdout);
     tls_aurora_live_on = 1;
 }
@@ -162,23 +175,29 @@ void tls_aurora_frame_end(uint32_t guest_frame) {
         }
         s_mapped = 1;
     }
-    if (s_want_frame >= 0 && (long)guest_frame != s_want_frame) {
-        s_len = 0;
-        return;
-    }
-    if (s_want_frame < 0 && s_len < 4096) {
-        /* The first frames are boot/strap chatter; wait for a real one. */
-        s_len = 0;
-        return;
-    }
+    /* Feed the whole requested range; the picture is taken on its last frame. A range rather than
+     * one frame because a single frame into a fresh processor is missing the GX state its draws
+     * inherit - the harness has the same trap and answers it with a window. */
+    if (s_from >= 0 && (long)guest_frame < s_from) { s_len = 0; return; }
+    if (s_to >= 0 && (long)guest_frame > s_to) { s_len = 0; return; }
+    if (s_from < 0 && s_len < 4096) { s_len = 0; return; }
+    const int is_last = (s_to < 0) ? 1 : ((long)guest_frame == s_to);
     int draws = 0, copies = 0;
-    s_frame(s_buf, (uint32_t)s_len, 1, &draws, &copies);
+    s_frame(s_buf, (uint32_t)s_len, is_last, &draws, &copies);
     static uint8_t* rgba;
     static size_t rgba_cap;
     const size_t need = 640u * 448u * 4u;
     if (rgba_cap < need) {
         rgba = (uint8_t*)realloc(rgba, need);
         rgba_cap = rgba ? need : 0;
+    }
+    if (!is_last) {
+        /* history frame: fed, no picture yet */
+        printf("[AuroraLive] history guest frame %u: fed %zu bytes, %d draw(s), %d copy cmd(s)\n",
+               guest_frame, s_len, draws, copies);
+        fflush(stdout);
+        s_len = 0;
+        return;
     }
     uint32_t w = 0, h = 0;
     int bytes = rgba ? s_readback(rgba, (uint32_t)rgba_cap, &w, &h) : 0;

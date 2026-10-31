@@ -100,6 +100,7 @@ TLS_LIVE_EXPORT int tls_aurora_live_init(uint32_t fb_w, uint32_t fb_h) {
    * state its defaults instead of zero TEV stages and a zero scissor. */
   std::printf("[AuroraLive] -> draws blocking\n"); std::fflush(stdout);
   AuroraSetDrawsBlocking(GX_TRUE);
+  AuroraSetDrawsBlocking(GX_TRUE); /* twice, as the harness does */
   std::printf("[AuroraLive] -> GXInit\n"); std::fflush(stdout);
   GXInit(nullptr, 0);
   std::printf("[AuroraLive] -> readback stream\n"); std::fflush(stdout);
