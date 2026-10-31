@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #include "gx_pipeline.h"
+#include "tls_sym.h"
 
 // Use the real CPUState. This file used to declare its own reduced copy that was
 // missing ps1[32], which shifted every field after fpr[] by 256 bytes - so the
@@ -258,8 +259,15 @@ void tls_debug_frame(CPUState* cpu, int frame, uint32_t gx_vtx_count, uint32_t b
         } else {
             dropped_note[0] = '\0';
         }
-        printf("[TLS Frame %4d] Seq: %-12s | Tasks: %u | GX: %u vtx (%u batches%s) | PC: 0x%08X | pad284=0x%08X\n",
-               frame, seq_name, task_cnt, gx_vtx_count, batch_count, dropped_note, cpu->pc, pad_flag);
+        {
+            /* The guest's current PC, symbolised: this line is printed every 60 frames for the whole
+             * run, so naming it turns a session log into a sequence of routines instead of a wall of
+             * hex. Uses config/symbols.txt through recomp/tls_sym.c; falls back to the bare address. */
+            char sym[80];
+            tls_sym_format(cpu->pc, sym, sizeof(sym));
+            printf("[TLS Frame %4d] Seq: %-12s | Tasks: %u | GX: %u vtx (%u batches%s) | PC: 0x%08X (%s) | pad284=0x%08X\n",
+                   frame, seq_name, task_cnt, gx_vtx_count, batch_count, dropped_note, cpu->pc, sym, pad_flag);
+        }
         fflush(stdout);
     }
 }
