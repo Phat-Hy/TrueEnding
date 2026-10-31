@@ -176,6 +176,9 @@ def build_runner(jobs: int = 12):
         (ROOT_DIR / "recomp" / "gx_fifo_capture.c", RECOMP_DIR / "gx_fifo_capture.o"),
         (ROOT_DIR / "recomp" / "aurora_live_host.c", RECOMP_DIR / "aurora_live_host.o"),
         (ROOT_DIR / "recomp" / "tls_debug.c", RECOMP_DIR / "tls_debug.o"),
+        # Guest address -> "name+0xNN" for every probe that prints a PC (config/symbols.txt,
+        # which Track A maintains). Inert when the file is absent.
+        (ROOT_DIR / "recomp" / "tls_sym.c", RECOMP_DIR / "tls_sym.o"),
         (ROOT_DIR / "recomp" / "host_runner.c", RECOMP_DIR / "host_runner.o"),
     ]
 

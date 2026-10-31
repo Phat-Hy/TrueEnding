@@ -18,6 +18,7 @@
 #include "gfx_backend.h"
 #include "aurora_live_host.h"
 #include "audio_player.h"
+#include "tls_sym.h"
 #include "gx_fifo_capture.h"
 #include "tls_debug.h"
 
@@ -476,10 +477,16 @@ static void host_watch_addrs(CPUState* ctx, u32 block_pc) {
         u32 old = s_prev[i];
         s_prev[i] = v;
         if (s_reports++ >= 300) continue;
-        printf("[Runner] WATCH 0x%08X: 0x%08X -> 0x%08X by block pc=0x%08X lr=0x%08X "
-               "(frame %d) r3=0x%08X r4=0x%08X r5=0x%08X r6=0x%08X\n",
-               s_addr[i], old, v, block_pc, ctx->lr, g_runner_current_frame,
-               ctx->gpr[3], ctx->gpr[4], ctx->gpr[5], ctx->gpr[6]);
+        {
+            /* Symbolised with config/symbols.txt (Track A's map, recomp/tls_sym.c), so a hit is
+             * readable in the log: "by block pc=fn_802189EC+0x3C" instead of bare hex. */
+            char sym[80];
+            tls_sym_format(block_pc, sym, sizeof(sym));
+            printf("[Runner] WATCH 0x%08X: 0x%08X -> 0x%08X by block pc=0x%08X (%s) lr=0x%08X "
+                   "(frame %d) r3=0x%08X r4=0x%08X r5=0x%08X r6=0x%08X\n",
+                   s_addr[i], old, v, block_pc, sym, ctx->lr, g_runner_current_frame,
+                   ctx->gpr[3], ctx->gpr[4], ctx->gpr[5], ctx->gpr[6]);
+        }
         fflush(stdout);
     }
 }
@@ -1494,7 +1501,9 @@ int main(int argc, char** argv) {
             frame_blocks += ran;
             result = ran;
             if (cpu.exception != 0) {
-                printf("\n[Runner] CPU Exception 0x%08X at PC 0x%08X\n", cpu.exception, cpu.pc);
+                char sym[80];
+                tls_sym_format(cpu.pc, sym, sizeof(sym));
+                printf("\n[Runner] CPU Exception 0x%08X at PC 0x%08X (%s)\n", cpu.exception, cpu.pc, sym);
                 break;
             }
         }
@@ -1909,8 +1918,10 @@ int main(int argc, char** argv) {
         printf("[StoreWatch] hook calls=%lu armed=%d in-range=%d\n",
                tls_store_note_calls, tls_store_watch_on, tls_store_ring_n);
         for (int i = 0; i < tls_store_ring_n && i < 64; i++) {
-            printf("  [StoreWatch] frame=%u cia=0x%08X ea=0x%08X value=0x%08X\n",
-                   tls_store_ring_frame[i], tls_store_ring_cia[i],
+            char sym[80];
+            tls_sym_format(tls_store_ring_cia[i], sym, sizeof(sym));
+            printf("  [StoreWatch] frame=%u cia=0x%08X (%s) ea=0x%08X value=0x%08X\n",
+                   tls_store_ring_frame[i], tls_store_ring_cia[i], sym,
                    tls_store_ring_ea[i], tls_store_ring_val[i]);
         }
         fflush(stdout);
@@ -1930,8 +1941,10 @@ int main(int argc, char** argv) {
         printf("[ReadWatch] hook calls=%lu armed=%d distinct readers=%u\n",
                tls_read_note_calls, tls_read_watch_on, tls_read_ring_n);
         for (u32 i = 0; i < tls_read_ring_n && i < 64; i++) {
-            printf("  [ReadWatch] frame=%u reader_pc=0x%08X first_ea=0x%08X\n",
-                   tls_read_ring_frame[i], tls_read_ring_pc[i], tls_read_ring_ea[i]);
+            char sym[80];
+            tls_sym_format(tls_read_ring_pc[i], sym, sizeof(sym));
+            printf("  [ReadWatch] frame=%u reader_pc=0x%08X (%s) first_ea=0x%08X\n",
+                   tls_read_ring_frame[i], tls_read_ring_pc[i], sym, tls_read_ring_ea[i]);
         }
         fflush(stdout);
     }

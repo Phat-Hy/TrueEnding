@@ -15952,3 +15952,30 @@ The control is what makes the zeros evidence rather than a silent no-op: the ide
 | 1 | 2 810 frames, `TLS_READ_WATCH=90000000,90700000`, ring cleared at 2500 | 274 s; **64 distinct readers** - the positive control |
 | 2 | 2 810 frames, `TLS_READ_WATCH=905C3000,906DA000`, cleared at 2400 | 272 s; **0 readers** across 3.27e9 watched reads |
 | 3 | 2 810 frames, `TLS_READ_WATCH=9038D1C0,903ED5C0`, cleared at 2400 | 268 s; **0 readers** |
+
+---
+
+### AP-BB. TRACK B SPENDS TRACK A'S ONE USEFUL OUTPUT: EVERY PROBE NOW PRINTS `name+0xOFFSET` FROM `config/symbols.txt` (measured: 64 raw PCs that were 12 anonymous routines now read `OSSleepThread+0x24`), and P3's "move the five register classes into the runner" is WITHDRAWN AS ALREADY DONE BY CONSTRUCTION — its exit criterion is P1's equality test, not a refactor
+
+Two small things, both measured, both removing work rather than adding it.
+
+**1. `recomp/tls_sym.c` / `.h`: a guest-address symbol lookup the probes were missing.** Every Track B instrument printed raw hex — `[ReadWatch] reader_pc=0x800A0604`, `[StoreWatch] cia=0x80207F80`, `[Runner] CPU Exception ... at PC 0x80091684` — and one audit this session produced **64 such PCs that collapse to 12 routines**, a fact invisible in the log. The map already exists: Track A's `config/symbols.txt` (dtk format) carries extents for **18 103 functions**, of which **411** have human names. The module parses it once, lazily, into a sorted table and answers with a binary search.
+
+* Inert by construction: if `config/symbols.txt` is missing the table stays empty and every address prints exactly as before. `TLS_SYM_FILE` overrides the path for tests.
+* Wired into four sites in `recomp/host_runner.c`: `TLS_READ_WATCH` readers, the `TLS_WATCH_ADDR` writer lines, the `StoreWatch` ring, and the `CPU Exception` line.
+* Parser verified standalone (bundled GCC, no run): `0x800A0604 -> fn_800A05FC+0x8` (fn_800A05FC is 20 bytes, so the PC is inside it), an exact start prints bare (`0x80207F80 -> fn_80207F80`), and an unmapped address stays hex (`0x817FFFF0 -> 0x817FFFF0`). Extents are respected: an address past a function's `size` is never credited to it.
+* Verified in the runner on a **300-frame** launch (`logs_ap/bs/run9_sym.log`, 15 s, not a measurement): 192 449 458 watched reads, 25 distinct readers, and the lines now read
+
+```
+[ReadWatch] frame=169 reader_pc=0x805F5C94 (OSSleepThread+0x24)        first_ea=0x800000E4
+[ReadWatch] frame=169 reader_pc=0x805EDAD4 (OSGetCurrentContext+0x4)   first_ea=0x800000D4
+[ReadWatch] frame=169 reader_pc=0x805A6C08 (fn_805A6BDC+0x2C)          first_ea=0x800000F8
+```
+
+Build green with one more object (**472**, was 471). No gate impact: the change is printf-only and gated by the same env vars as before.
+
+**2. P3 of `5c.47` is already satisfied, and saying so removes a plan item.** `5c.47` P3 reads "the five register classes, live … after the adapter is moved, i.e. the port is a refactor, not a re-derivation". The adapter does not need moving: `tools/aurora_spike/aurora_live.cpp` **#includes `aurora_replay.cpp`** (its line 29) precisely so that the live DLL *is* the harness, and its own header says so — "the spike's adapter — the five register classes AP-AN measured (EFB copy setup, array bases, the +342 view bias, texture objects, address canonicalisation) — is [the harness's code]". So the live path already runs the identical adapter, and **P3's exit criterion ("the runner's aurora frame matches the harness's frame byte for byte on the same capture") is the same measurement as P1's open equality item**, not a separate phase. What is actually left is the change AP-AZ C4 named: feed **one guest frame, both present halves, as one aurora frame**, then compare. Recording this stops a future session from scheduling a refactor that has already been done by construction.
+
+**3. What this says about the two tracks, in one line.** Track A gives Track B **names** (now demonstrably consumed, above) and, for a few functions, readable C; it gives Track B **no runtime behaviour**, because the runner links no `src/` object and executes the same retail instructions (`CONTRIBUTING_TRACKS.md`). The asymmetry is now measured on both sides rather than argued.
+
+**4. Changes.** `recomp/tls_sym.c` / `recomp/tls_sym.h` (new), `recomp/host_runner.c` (four print sites + the include), `tools/recomp_harness.py` (the new object in the support table), this file. **0 changes to `src/`.** Build green (459 chunks / **472** objects), gate untouched (no draw path changed, references not re-recorded).
