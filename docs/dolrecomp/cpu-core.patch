@@ -57,7 +57,7 @@ index 45c3286..e8e43c6 100644
          fprintf(out, "    }\n");
          break;
 diff --git a/src/cpu/cpu.c b/src/cpu/cpu.c
-index 27297aa..398ab18 100644
+index 27297aa..069d56f 100644
 --- a/src/cpu/cpu.c
 +++ b/src/cpu/cpu.c
 @@ -110,6 +110,8 @@ void cpu_reset(CPUState* cpu) {
@@ -69,7 +69,15 @@ index 27297aa..398ab18 100644
  static u8* resolve_addr(CPUState* cpu, u32 addr, u32* avail) {
      if (addr >= GC_RAM_BASE && addr < GC_RAM_BASE + cpu->ram_size) {
          u32 offset = addr - GC_RAM_BASE;
-@@ -201,6 +203,8 @@ u64 mem_read64(CPUState* cpu, u32 addr) {
+@@ -189,6 +191,7 @@ static u32 exception_msr(u32 old_msr, u32 exception) {
+ }
+ 
+ u64 mem_read64(CPUState* cpu, u32 addr) {
++    if (tls_read_watch_on) tls_read_note(cpu->pc, addr);
+     u32 avail;
+     u8* host = resolve_addr(cpu, addr, &avail);
+     if (!host || avail < 8) {
+@@ -201,6 +204,8 @@ u64 mem_read64(CPUState* cpu, u32 addr) {
  }
  
  void mem_write64(CPUState* cpu, u32 addr, u64 value) {
@@ -78,7 +86,15 @@ index 27297aa..398ab18 100644
      u32 avail;
      u8* host = resolve_addr(cpu, addr, &avail);
      if (!host || avail < 8) {
-@@ -230,6 +234,7 @@ u32 mem_read32(CPUState* cpu, u32 addr) {
+@@ -218,6 +223,7 @@ void mem_write64(CPUState* cpu, u32 addr, u64 value) {
+ }
+ 
+ u32 mem_read32(CPUState* cpu, u32 addr) {
++    if (tls_read_watch_on) tls_read_note(cpu->pc, addr);
+     u32 avail;
+     u8* host = resolve_addr(cpu, addr, &avail);
+     if (!host || avail < 4) {
+@@ -230,6 +236,7 @@ u32 mem_read32(CPUState* cpu, u32 addr) {
  }
  
  void mem_write32(CPUState* cpu, u32 addr, u32 value) {
@@ -86,7 +102,15 @@ index 27297aa..398ab18 100644
      u32 avail;
      u8* host = resolve_addr(cpu, addr, &avail);
      if (!host || avail < 4) {
-@@ -259,6 +264,7 @@ u16 mem_read16(CPUState* cpu, u32 addr) {
+@@ -247,6 +254,7 @@ void mem_write32(CPUState* cpu, u32 addr, u32 value) {
+ }
+ 
+ u16 mem_read16(CPUState* cpu, u32 addr) {
++    if (tls_read_watch_on) tls_read_note(cpu->pc, addr);
+     u32 avail;
+     u8* host = resolve_addr(cpu, addr, &avail);
+     if (!host || avail < 2) {
+@@ -259,6 +267,7 @@ u16 mem_read16(CPUState* cpu, u32 addr) {
  }
  
  void mem_write16(CPUState* cpu, u32 addr, u16 value) {
@@ -94,7 +118,15 @@ index 27297aa..398ab18 100644
      u32 avail;
      u8* host = resolve_addr(cpu, addr, &avail);
      if (!host || avail < 2) {
-@@ -287,7 +293,53 @@ u8 mem_read8(CPUState* cpu, u32 addr) {
+@@ -276,6 +285,7 @@ void mem_write16(CPUState* cpu, u32 addr, u16 value) {
+ }
+ 
+ u8 mem_read8(CPUState* cpu, u32 addr) {
++    if (tls_read_watch_on) tls_read_note(cpu->pc, addr);
+     u32 avail;
+     u8* host = resolve_addr(cpu, addr, &avail);
+     if (!host) {
+@@ -287,7 +297,93 @@ u8 mem_read8(CPUState* cpu, u32 addr) {
      return *host;
  }
  
@@ -143,12 +175,52 @@ index 27297aa..398ab18 100644
 +    tls_store_ring_n++;
 +}
 +
++/* Instruction-granularity READ watch (TLS_READ_WATCH=lo,hi). See cpu.h for why this exists;
++ * the short version is that it is the instrument that answers "does GUEST code read an
++ * EFB-copy destination as raw memory", which is the only P2 question left after the host
++ * audit (the five staging addresses appear only in comments in recomp/).
++ *
++ * Cost on the default path: the call site is `if (tls_read_watch_on) tls_read_note(...)`,
++ * i.e. one load and one not-taken branch per guest read. The ring dedupes by reader PC, so
++ * 64 entries name 64 distinct instructions even though a frame issues millions of reads. */
++int tls_read_watch_on;
++u32 tls_read_watch_lo;
++u32 tls_read_watch_hi;
++u32 tls_read_ring_pc[64];
++u32 tls_read_ring_ea[64];
++u32 tls_read_ring_frame[64];
++u32 tls_read_ring_n;
++unsigned long tls_read_note_calls;
++
++void tls_read_watch_init(u32 lo, u32 hi) {
++    tls_read_watch_lo = lo;
++    tls_read_watch_hi = hi;
++    tls_read_watch_on = (hi > lo) ? 1 : 0;
++    tls_read_ring_n = 0;
++}
++
++void tls_read_note(u32 pc, u32 ea) {
++    tls_read_note_calls++;
++    if (!tls_read_watch_on) return;
++    if (ea < tls_read_watch_lo || ea >= tls_read_watch_hi) return;
++    for (u32 i = 0; i < tls_read_ring_n; i++)
++        if (tls_read_ring_pc[i] == pc) return;      /* same instruction: already listed */
++    if (tls_read_ring_n >= 64) return;
++    tls_read_ring_pc[tls_read_ring_n] = pc;
++    tls_read_ring_ea[tls_read_ring_n] = ea;
++    {
++        extern int g_runner_current_frame;
++        tls_read_ring_frame[tls_read_ring_n] = (u32)g_runner_current_frame;
++    }
++    tls_read_ring_n++;
++}
++
  void mem_write8(CPUState* cpu, u32 addr, u8 value) {
 +    tls_store_note(0, addr, (u32)value);
      u32 avail;
      u8* host = resolve_addr(cpu, addr, &avail);
      if (!host) {
-@@ -328,28 +380,27 @@ void ppc_program_exception(CPUState* cpu, u32 cause, u32 cia) {
+@@ -328,28 +424,27 @@ void ppc_program_exception(CPUState* cpu, u32 cause, u32 cia) {
      ppc_take_exception(cpu, PPC_EXC_PROGRAM, PPC_VECTOR_PROGRAM, cia, cause);
  }
  
@@ -189,7 +261,7 @@ index 27297aa..398ab18 100644
      ppc_program_exception(cpu, PPC_PROGRAM_ILLEGAL, cia);
  }
  
-@@ -376,7 +427,8 @@ bool ppc_native_region_available(CPUState* cpu, u32 start, u32 end) {
+@@ -376,7 +471,8 @@ bool ppc_native_region_available(CPUState* cpu, u32 start, u32 end) {
  }
  
  void ppc_system_call_exception(CPUState* cpu, u32 cia) {
@@ -199,7 +271,7 @@ index 27297aa..398ab18 100644
  }
  
  void ppc_dsi_exception(CPUState* cpu, u32 ea, u32 cia, u32 dsisr) {
-@@ -747,6 +799,16 @@ bool ppc_psq_load(CPUState* cpu, u8 frD, u32 ea, bool w, u8 gqr_index, bool inde
+@@ -747,6 +843,16 @@ bool ppc_psq_load(CPUState* cpu, u8 frD, u32 ea, bool w, u8 gqr_index, bool inde
      if (!psq_check_enabled(cpu, indexed, cia))
          return false;
  
@@ -216,7 +288,7 @@ index 27297aa..398ab18 100644
      u32 gqr = cpu->gqr[gqr_index & 7u];
      s32 scale = gqr_scale(gqr >> 24);
      u8 type = (u8)((gqr >> 16) & 7u);
-@@ -793,7 +855,26 @@ void ppc_rfi(CPUState* cpu, u32 cia) {
+@@ -793,7 +899,26 @@ void ppc_rfi(CPUState* cpu, u32 cia) {
          return;
      }
  
@@ -244,7 +316,7 @@ index 27297aa..398ab18 100644
      cpu->msr &= ~PPC_MSR_POW;
      cpu->pc = cpu->srr0 & ~3u;
  }
-@@ -1344,6 +1425,7 @@ void ppc_fcmp(CPUState* cpu, u8 crfd, f64 a, f64 b, bool ordered) {
+@@ -1344,6 +1469,7 @@ void ppc_fcmp(CPUState* cpu, u8 crfd, f64 a, f64 b, bool ordered) {
      cpu->cr = (cpu->cr & ~(0xFu << shift)) | (compare << shift);
  }
  
@@ -253,7 +325,7 @@ index 27297aa..398ab18 100644
      FPSCR_ZX = 0x04000000u,
      FPSCR_XX = 0x02000000u,
 diff --git a/src/cpu/cpu.h b/src/cpu/cpu.h
-index 29510f8..0c62417 100644
+index 29510f8..5728e7c 100644
 --- a/src/cpu/cpu.h
 +++ b/src/cpu/cpu.h
 @@ -3,7 +3,7 @@
@@ -281,7 +353,7 @@ index 29510f8..0c62417 100644
  void ppc_fadds(CPUState* cpu, u8 d, u8 a, u8 b);
  void ppc_fsubs(CPUState* cpu, u8 d, u8 a, u8 b);
  void ppc_fmuls(CPUState* cpu, u8 d, u8 a, u8 c);
-@@ -192,6 +194,15 @@ static inline bool ppc_fp_available_inline(CPUState* cpu, u32 cia) {
+@@ -192,6 +194,33 @@ static inline bool ppc_fp_available_inline(CPUState* cpu, u32 cia) {
      return ppc_fp_available(cpu, cia);
  }
  void ppc_fallback_instruction(CPUState* cpu, u32 raw, u32 cia);
@@ -294,6 +366,24 @@ index 29510f8..0c62417 100644
 +void tls_store_watch_init(u32 lo, u32 hi);
 +void tls_store_note(u32 cia, u32 ea, u32 value);
 +extern unsigned long tls_store_note_calls;
++/* Instruction-granularity READ watch (TLS_READ_WATCH=lo,hi): the read-side twin of the
++ * store watch, and the instrument handover 5c.47 P2 asks for. P2's question is not a host
++ * one (the layer's own readers are already audited: the five staging addresses appear only
++ * in comments) but a GUEST one - does any lifted/recompiled routine read an EFB-copy
++ * destination out of guest RAM as raw memory? Under aurora a copy lives as a GPU-side
++ * shadow texture and guest RAM is never written, so every such reader is a migration
++ * blocker that would need a readback shim, and this ring is the list of them.
++ *
++ * Records into a 64-entry ring (deduplicated by reader PC, so it names 64 distinct
++ * instructions rather than 64 reads of one), prints nothing itself - a printf on the
++ * interpreter's hot path corrupted the heap (5c.45 E1). */
++extern int tls_read_watch_on;
++extern u32 tls_read_watch_lo, tls_read_watch_hi;
++extern u32 tls_read_ring_pc[64], tls_read_ring_ea[64], tls_read_ring_frame[64];
++extern u32 tls_read_ring_n;
++void tls_read_watch_init(u32 lo, u32 hi);
++void tls_read_note(u32 pc, u32 ea);
++extern unsigned long tls_read_note_calls;
  bool ppc_host_call(CPUState* cpu, u32 address);
  bool ppc_native_region_available(CPUState* cpu, u32 start, u32 end);
  void ppc_system_call_exception(CPUState* cpu, u32 cia);
