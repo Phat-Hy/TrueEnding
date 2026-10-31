@@ -1860,64 +1860,56 @@ lbl_fn_80207F34_0000171C:
     blr
 }
 
-asm void fn_80207F80(void)
+void fn_80207F80(void)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    bl fn_80208BE0
-    bl fn_80209960
-    bl fn_80204E54
-    bl fn_80206F44
-    bl fn_8020DF88
-    bl fn_80204958
-    bl fn_8020FDEC
-    bl fn_80217E18
-    bl fn_8021996C
-    bl fn_80210ACC
-    bl fn_8020AFF4
-    bl fn_80216CD0
-    bl fn_8020F130
-    bl fn_8020F248
-    bl fn_80209300
-    bl fn_802196D0
-    bl fn_80207CC0
-    bl fn_80210244
-    bl fn_8020F84C
-    bl fn_802078C4
-    bl fn_8021F47C
-    bl fn_8020A90C
-    bl fn_8021CCC4
-    bl fn_80208144
-    bl fn_8021E0B0
-    bl fn_8021EB04
-    bl fn_8020C028
-    bl fn_8021F100
-    bl fn_80218BD4
-    bl fn_8021414C
-    bl fn_8020B2BC
-    bl fn_8020BB0C
-    bl fn_80207310
-    bl fn_8021CF8C
-    bl fn_8021DBEC
-    bl fn_802179FC
-    bl fn_8021AAB8
-    bl fn_8021ED08
-    bl fn_8020D688
-    bl fn_8020DB58
-    bl fn_8021B060
-    bl fn_8021B2F8
-    bl fn_8021C3F4
-    bl fn_802150F0
-    bl fn_802189EC
-    bl fn_80217778
-    bl fn_802144A8
-    bl fn_802130BC
-    lwz r0, 0x14(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    fn_80208BE0();
+    fn_80209960();
+    fn_80204E54();
+    fn_80206F44();
+    fn_8020DF88();
+    fn_80204958();
+    fn_8020FDEC();
+    fn_80217E18();
+    fn_8021996C();
+    fn_80210ACC();
+    fn_8020AFF4();
+    fn_80216CD0();
+    fn_8020F130();
+    fn_8020F248();
+    fn_80209300();
+    fn_802196D0();
+    fn_80207CC0();
+    fn_80210244();
+    fn_8020F84C();
+    fn_802078C4();
+    fn_8021F47C();
+    fn_8020A90C();
+    fn_8021CCC4();
+    fn_80208144();
+    fn_8021E0B0();
+    fn_8021EB04();
+    fn_8020C028();
+    fn_8021F100();
+    fn_80218BD4();
+    fn_8021414C();
+    fn_8020B2BC();
+    fn_8020BB0C();
+    fn_80207310();
+    fn_8021CF8C();
+    fn_8021DBEC();
+    fn_802179FC();
+    fn_8021AAB8();
+    fn_8021ED08();
+    fn_8020D688();
+    fn_8020DB58();
+    fn_8021B060();
+    fn_8021B2F8();
+    fn_8021C3F4();
+    fn_802150F0();
+    fn_802189EC();
+    fn_80217778();
+    fn_802144A8();
+    fn_802130BC();
 }
 
 asm void fn_8020805C(void)
