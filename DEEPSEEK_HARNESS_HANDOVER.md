@@ -15158,6 +15158,12 @@ hash is the gate's content reference exactly (`8938E369…`, so the capture does
 | **red-dominant** (R > G+25, R > B+25, R > 80) | **18.60 %** (mean RGB of those (181, 82, 77)) | **0.00 %** |
 | pixels < luma 8 | 12.58 % | 10.38 % |
 
+`docs/evidence/as_pair_g2800.png` is the pair (layer | aurora | 4x difference, the layer resized to 640x448 so the
+difference is pixel-aligned; mean |d| 19.81, 71.13 % of pixels changed by > 8). Two things are visible in it that the
+numbers above only imply: **the black area is black in the difference panel** (identical in both pictures, i.e. the
+one region that is *not* a divergence), and **the water surface is flat in the layer and textured in aurora** - the
+same multi-stage-TEV class as the rock, on a different surface, which is worth remembering when the red is fixed.
+
 **4. The black "rectangle" is not a layer defect - it is in both implementations.** The 8x8 black-occupancy maps of
 the two pictures agree cell for cell in the region both the eye and AP-AQ item 14 called "one black rectangle":
 layer 52.4 / 95.5 / 100.0 / 51.5 % in four adjacent cells against aurora 51.7 / 94.5 / 100.0 / 47.6 % in the same
