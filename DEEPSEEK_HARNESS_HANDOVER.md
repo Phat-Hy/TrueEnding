@@ -2,7 +2,25 @@
 
 ## NEXT SESSION — START HERE
 
-> **READ §5c.46 AP-AR (the last section of this file) FIRST - it changes the default build.** The two AP-AQ
+> **READ §5c.46 AP-AS (the last section of this file) BEFORE USING ANY `[BatchProbe]` NUMBER FROM AN EARLIER
+> SECTION.** The batch/rect back-buffer probes and the `TLS_EFB_SAMPLE_FRAME` readback had **R and B exchanged** -
+> the swap chain is `R8G8B8A8` and they read byte 0 as blue. Measured from one launch where the shot and the probe are
+> of the same frame: probe `avg=(49,45,61)` vs a screenshot of (60.07, 45.10, 49.14); exchanging the probe's R and B
+> gives (61,45,49). Fixed in `recomp/gfx_d3d11.c` and **verified**: the same probe now prints `avg=(61,45,49)` and
+> `red=725/3600` = 20.1 % against the picture's 18.60 %. So every `avg=(r,g,b)` in `[BatchProbe]`/`[BatchRect]`
+> before AP-AS is **(B,G,R)** and every `red=` counted **blue**; the per-batch *deltas* (which batch moved the frame,
+> by how much) survive, the red/blue *names* in AP-AI..AP-AR do not. AP-AS also carries the priority-C result: on one
+> launch at guest 2800 the layer is (60.07,45.10,49.14) with 18.60 % red-dominant and aurora is (36.10,37.42,37.18)
+> with **0.00 %** - so the **red rock is layer-only** and starts at batch **b48 / texture `0x91EBC460`** (11 892
+> vertices, red 75 -> 799), whose **atlas decodes neutral grey** (62.1,63.0,61.4; 0.15 % red texels), i.e. the red is
+> the layer's per-fragment shading of a grey texel (CMPR decode or the batch's 3-stage TEV chain). The **black area
+> is in aurora too** (the two 8x8 black maps agree cell for cell), so it is in the stream and is **not** a layer
+> defect - `AP-AR §7` is corrected there. Exact next experiment: `TLS_TEX_DUMP=0x91EBC460` **without**
+> `TLS_TEX_DUMP_FRAME` (the frame-gated form dumps no file at all, because the atlas is cached before 2800).
+> **Then read §5c.46 AP-AR** (done, promoted - its "the switches are default-off" is history) and **AP-AQ** (the
+> cause of the one promotion AP-AR made).
+
+> **READ §5c.46 AP-AR (the section before AP-AS) - it changes the default build.** The two AP-AQ
 > renderer fixes are now the **defaults**: the guest's `BP 0x20/0x21` scissor is applied and guest-disabled blends
 > are no longer promoted to adds (`TLS_NO_SCISSOR=1` / `TLS_FORCE_BLEND=1` restore the old picture). Both gate
 > references were re-recorded deliberately on **two independent runs each** and the gate now PASSes, attempt 1,
@@ -15033,7 +15051,8 @@ caller) or `fn_802189EC` (the constructor)** - checked over every data region - 
 menu frames are untouched by the switches (measured under the same fix in AP-AQ item 22: guest 400/900/1200/1600 all
 luma **90.43** with **8.28 %** above 250 - the pre-existing blown radial vignette of 5c.23), and the field still
 carries the two defects AP-AQ item 14 named as the reason not to record on this renderer: the **red-dominant rock**
-and the **one black rectangle** in the guest-2800 frame, plus the corner chain's own **TEV content** gap (AP-AQ
+(note AP-AS: only this one is the layer's - the black area AP-AQ item 14 also listed is in aurora too, so it is in
+the stream) and the **one black rectangle** in the guest-2800 frame, plus the corner chain's own **TEV content** gap (AP-AQ
 item 8: the additive pass adds ~85 mean where Dolphin's 80x56 corpus has a median of 0.1 luma and 95.7 % zero
 texels). Those are GX-semantics defects, i.e. Aurora's territory per `AGENTS.md` §1, and they are now visible on the
 *default* build instead of hidden behind two environment variables - which is the honest trade the promotion makes.
@@ -15075,3 +15094,141 @@ stated as a leftover, not as a result). *Build green, 0 changes to `src/`, one r
 **What this session did not do, stated plainly:** it did not touch priority C (the menu vignette, the red rock, the
 black rectangle and the corner-chain TEV content are exactly where AP-AQ left them), and it did not start the
 migration (priority D).
+
+---
+
+### AP-AS. THE BACK-BUFFER PROBES READ R AND B THE WRONG WAY ROUND - measured, fixed, verified in one run - and the same-launch aurora pair at guest 2800 corrects priority C: the black "rectangle" is in BOTH implementations, the red rock is layer-only, starts at batch b48 / texture `0x91EBC460`, and that atlas decodes neutral grey
+
+This session started on priority C and the first measurement was an instrument problem, not a renderer one. The
+line of enquiry was: guest frame 2800's red rock and black rectangle are the two defects AP-AQ item 14 left open, so
+attribute them per batch the way AP-AI did. The batch probe refused to see the red at all - its final reading for
+the frame was `avg=(49,45,61)`, `red=1/3600`, while the screenshot of the *same frame* is (60.07, 45.10, 49.14)
+with 18.60 % red-dominant pixels - and the reason is that **the probe had R and B exchanged**.
+
+**1. The bug, and the proof that it is a bug.** The swap chain is created as `DXGI_FORMAT_R8G8B8A8_UNORM`
+(`gfx_d3d11.c`, the swap-chain desc), so a mapped pixel is (R,G,B,A) and **byte 0 is red**. Both screenshot writers
+in the file already assume that (the PPM copies bytes 0,1,2 straight out as R,G,B; the BMP writes 2,1,0 as B,G,R).
+The three back-buffer readbacks did the opposite - `p[0]` as blue, `p[2]` as red:
+
+| function | used by | what it printed |
+|---|---|---|
+| `probe_backbuffer_stats` | `TLS_BATCH_PROBE` (`[BatchProbe]`) | `avg=(r,g,b)` with R and B exchanged, and `red=` counted **blue**-dominant pixels |
+| `probe_backbuffer_rect` | `TLS_BATCH_RECT` (`[BatchRect]`) | same |
+| the source-rect readback inside `d3d11_efb_copy_to_guest` | `TLS_EFB_SAMPLE_FRAME` | same |
+
+The measurement that settles it, from **one launch** where the shot and the probe are of the same frame: probe's
+last reading `avg=(49,45,61)`, the screenshot `(60.07, 45.10, 49.14)`; exchange the probe's R and B and it is
+`(61,45,49)` - the screenshot to within the probe's 1/16 sampling. There is no other candidate: both readers use
+`GetBuffer(0)` of the same swap chain, the render target is that buffer, and no copy intervenes.
+
+**Fix and verification.** All three sites now read `r8 = p[0], g8 = p[1], b8 = p[2]` (and `sr += p[0]` in the
+sampler), with a comment naming this section. Re-measured in one run (`logs_ap/as/probe2800_fixed.log`,
+`TLS_BATCH_PROBE=2800` + `TLS_SHOT_GUEST=1 TLS_SHOT_FRAMES=2800`, 274 s): the probe's last reading for guest 2800 is
+now **`avg=(61,45,49)`, `red=725/3600` = 20.1 %** against the screenshot's (60.07, 45.10, 49.14) and **18.60 %**
+red-dominant - i.e. the instrument now agrees with the picture it is supposed to explain, and the difference between
+20.1 % and 18.6 % is the probe's own threshold (R > G+30, R > B+30, no brightness floor) against this section's
+(R > G+25, R > B+25, R > 80).
+
+**2. What this corrects in the record - stated, because four sections depend on it.** Every `avg=(r,g,b)` in a
+`[BatchProbe]` or `[BatchRect]` line before AP-AS is **(B,G,R)**, and every `red=<n>` counts blue-dominant pixels:
+the AP-AI "red jumps 32 -> 49 at b10 / 263 -> 332 at b13" attribution, AP-AP's `red=`/`bright` usage, AP-AQ item 12's
+pre-tail comparison and AP-AR's §7 sentence all quote that statistic. What **survives** is the part they actually
+argued from - *which batch moved the frame and by how much* - because both readings were on the right surface and a
+swap is a bijection on colour names: the batch boundaries, the magnitudes and the frame averages are unchanged. What
+does **not** survive is the **name**: a rise in that counter was a rise in blue dominance. The frame-1448 story is
+the clean example - AP-AI read the probe's `(38,35,34)` as "red-dominant" when the true order is (34,35,38), i.e.
+**blue**-dominant, which is what hardware was; the copy-format fix that followed was still correct (it removed a
+saturated *layer* and moved the frame to neutral (40,40,38)), but the label it was credited with was inverted.
+This is the third instrument error this dossier has caught in its own past (AP-AQ's inert scissor, AP-AQ's
+"aurora never writes RAM"), and the lesson is the same one: **a probe that reports a colour needs its channel order
+checked against a writer that is known good** - here, the two screenshot writers agree with the swap chain's
+declared format, and the probes did not.
+
+**3. Priority C, measured properly: one launch, a layer/aurora pair at guest 2800.** A capture round the frame
+(`TLS_GX_CAPTURE=as2800`, 2794..2800, 6 994 490 FIFO bytes) and the shot come from the **same** run, and the shot's
+hash is the gate's content reference exactly (`8938E369…`, so the capture does not perturb the frame). Aurora needs
+`--start-at 0` for this window, not `--start-at 1`: frame 2794 is the full stream (1.30 MB) and 2795 is a thin one
+(589 KB) that inherits its vertex format, so starting at 1 aborts with "draw with unknown vertex size at offset 497
+(fmt 0, vcnt 24, vtxsize 0)" - the same class of trap AP-AN documented, in the opposite direction from `ao3301`.
+
+| guest 2800, one launch | layer (shot, 1280x720) | aurora (`--probe-copy`, 640x448) |
+|---|---|---|
+| mean RGB | (60.07, 45.10, 49.14) | (36.10, 37.42, 37.18) |
+| luma | 50.04 | 37.00 |
+| **red-dominant** (R > G+25, R > B+25, R > 80) | **18.60 %** (mean RGB of those (181, 82, 77)) | **0.00 %** |
+| pixels < luma 8 | 12.58 % | 10.38 % |
+
+**4. The black "rectangle" is not a layer defect - it is in both implementations.** The 8x8 black-occupancy maps of
+the two pictures agree cell for cell in the region both the eye and AP-AQ item 14 called "one black rectangle":
+layer 52.4 / 95.5 / 100.0 / 51.5 % in four adjacent cells against aurora 51.7 / 94.5 / 100.0 / 47.6 % in the same
+four. Two independent implementations reproducing the same silhouette means the black is **in the stream** (the
+guest draws it, or neither implements the feature that would colour it); it is not something this layer's D3D11
+path gets wrong, and it must not be counted against the layer or against the migration. **AP-AR §7 is corrected
+here**: it inherited AP-AQ item 14's listing of "the red-dominant rock and one black rectangle" as *the layer's*
+remaining defects; only the red rock is the layer's. Judging the black area needs a Dolphin frame of this exact
+moment, which the project does not have.
+
+**5. Where the red enters, now that the census can see it.** With the corrected probe, guest frame 2800's red count
+jumps in **one batch**: `b47 -> b48` takes `red` from **75 to 799** (of 3600 samples) and the frame average to
+`(42,20,19)`; batch b48 is `tex=0x91EBC460`, **11 892 vertices**, and no other batch in the frame moves the count by
+more than a few. Reading the same texture out of the capture: **6 788 draws** in frame 2800 sample it, all with
+`tex 256x256 fmt 14` (CMPR), `cmode0 = 0xF4B8` (blend **OFF**, s=4 d=5 - i.e. REPLACE), **3 TEV stages**, and
+per-draw `CLR0` values that are not red-dominant; 52 611 vertices total, which the layer merges into b48 and its
+neighbours. Then the texture itself, decoded straight out of the capture's MEM2 plane with the format the stream
+declares: mean RGB **(62.1, 63.0, 61.4)**, red-dominant texels **0.15 %**. **The atlas is grey.** So the red is not
+the texture - it is produced per fragment by the layer from a grey texel: either its CMPR decode of that atlas or
+its evaluation of the batch's 3-stage TEV chain. That is the same class AP-AQ item 8 bounded (the combiner), now
+localised to one batch and one texture instead of "the corner chain".
+
+**6. The batch's TEV registers, read out of the same capture (raw, for the next measurement).** For the draws that
+sample `0x91EBC460` the last-written TEV state is
+
+```
+combiner 0xC0=0x88FEAF 0xC1=0x88FAF0 0xC2=0x08F84F 0xC3=0x08F170 0xC4=0xC8F8AF 0xC5=0x08FF80
+         0xC6=0x08F860 0xC7=0x08FF8C 0xC8=0x18F08F 0xC9=0x08FF80 0xCA=0x18F08F 0xCB=0x08FF80
+         0xCC=0x48F82F 0xCD=0x08FF80 0xCE=0x080F2F 0xCF=0x08FF80   (alpha combiners 0xD1.. all 0x08FF80/0)
+konst    0xE0=0x800000 0xE1=0x800000 0xE2=0x8FF0FF 0xE3=0x8FF0FF 0xE4=0x8FF041 0xE5=0x83303B
+         0xE6=0x800000 0xE7=0x800000
+order    0xF6=0xE37AD4 0xF7=0xE338CE 0xF8=0x01B8C0 0xF9=0x01806C ... 0xFD=0x01806E
+```
+
+The coincidence worth chasing is `0xE5 = 0x83303B`: read as RGB that is **(131, 48, 59), a dark red**, and the batch's
+rendered average is **(42, 20, 19)** with the rock's own pixels at (181, 82, 77) - the same hue, scaled. The
+register's exact field meaning (`0xE0..0xE7` are the TEV register pair for colour and alpha per
+[Dolphin's `BPMemory.h`](https://raw.githubusercontent.com/dolphin-emu/dolphin/master/Source/Core/VideoCommon/BPMemory.h))
+must be checked before calling that a cause, which is why it is recorded raw: the layer's own decode of the same
+registers is one run away (`TLS_TEV_PROBE=2800`, which prints the decode "the shader evaluates"), and Dolphin's
+layout is the reference. If it is a konst leak, the fix is exactly the kind `AGENTS.md` §1 forbids in this layer -
+another reason this is now a migration test rather than a work item.
+
+**7. The exact next experiment, with the trap already recorded.** `TLS_TEX_DUMP=0x91EBC460` **without**
+`TLS_TEX_DUMP_FRAME`: the per-frame form only dumps uploads that happen *inside* the named frame, and this atlas is
+cached before 2800, so a frame-gated dump produces **no file at all** (measured this session - 26 min run, no
+`tex_*91EBC460*` written, because the host was also loaded and the run took 1563 s; the shot was still
+`8938E369…`). The unconditional form dumps on the first upload and answers the only remaining either/or: a **red
+dump** means the layer's CMPR decoder, a **grey dump** means the 3-stage TEV evaluation, and the batch's stage
+parameters are already readable from the capture (`BP 0xC0..0xDF`, `drawstate.py`).
+
+**8. What this changes for the migration.** The red rock is now a **two-way migration test on one capture**: the
+same stream renders red in the layer (18.60 % red-dominant) and neutral in aurora (0.00 %), with both pictures from
+one launch and the layer's frame hash equal to the gate reference. The black area is a **shared** result and must be
+excluded from any "the migration fixed it" claim. And the instrument fix is a precondition for the migration's own
+A/B work: every `TLS_BATCH_PROBE` comparison from here on reports real R, G and B.
+
+**9. Changes.** `recomp/gfx_d3d11.c`: the three readbacks' channel order plus the comment block that carries the
+measurement (0 changes to `src/`). Scratch instruments in `logs_ap/as/` (untracked): `defects.py` (red/black censuses
+and 8x8 maps), `presentation.py` (the channel-swap test that first ruled a swap *out* for the presented image),
+`texorigin.py` (which draws sample a texture, and a CMPR decode of it out of the capture's MEM2 plane).
+
+**10. Run log** (every launch `--window --minimized`, one at a time).
+
+| # | what | result |
+|---|---|---|
+| 1 | runner, `TLS_GX_CAPTURE=as2800` (2794-2800) + shot 2800 | 297 s, `8938E369…`, 144.7 MB capture, 6 994 490 FIFO bytes |
+| 2 | aurora replay `--start-at 1` | **aborts**: frame 2795 is thin, "unknown vertex size at offset 497" |
+| 3 | aurora replay `--start-at 0 --probe-copy` | 7 s, probe copy mean byte 91.43, 640x448 EFB picture (neutral) |
+| 4 | runner, `TLS_BATCH_PROBE=2800` + `TLS_BATCH_DUMP_GUEST=2800` | the **old** probe: last avg (49,45,61), red ≤ 1 |
+| 5 | runner, `TLS_BATCH_PROBE=2800` + shot 2800 (same launch) | shot `8938E369…` (18.60 % red) **and** probe (49,45,61) - the contradiction that found the bug |
+| 6 | rebuild with the channel fix, same command | probe now `avg=(61,45,49)`, `red=725/3600` = 20.1 %; **b48 / 0x91EBC460** is the jump (75 -> 799) |
+| 7 | `texorigin.py` on the capture | 6 788 draws sample the atlas (256x256 CMPR, 3 TEV, blend OFF), 52 611 vtx; the atlas decodes (62.1,63.0,61.4), 0.15 % red |
+| 8 | runner, `TLS_TEX_DUMP=0x91EBC460` + `TLS_TEX_DUMP_FRAME=2800` | **no dump written** (upload happens before 2800) and the host was loaded: 1563 s; shot still `8938E369…` |
