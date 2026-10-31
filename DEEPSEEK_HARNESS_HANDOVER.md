@@ -39,6 +39,14 @@
 > is to decode that buffer at b18's command out of a title capture and split "the copy content is
 > wrong" from "the sampling is wrong" (`docs/evidence/at_menu_frames_400_900_1600.png`).
 
+> **FIRST ACTION OF THE SESSION, BEFORE ANY MEASUREMENT: re-verify the gate on an IDLE host.**
+> `gate11` passed attempt 1 at **handover 1680**; `gate12`/`gate13` failed with the handover frame
+> drifting **660 / 780 / 900 / 960 / 1080** while a 3D game held the GPU (the runner went 20 -> 30 ms
+> per frame). The handover frame is a **host-load fingerprint**: if it is not 1680, the host is
+> loaded and the run is not evidence (`AP-AY` section 11). Then read **AP-AY** (the migration's
+> phase P1: the boundary is proven, the cave frame renders black live, and double-rendering cannot
+> be an equality test) and **5c.47** (P2-P4).
+
 > **AP-AU (last section of this file) IS THE COORDINATE FIX, AND IT IS PROMOTED.** AP-AT item 11
 > measured the lead - every TEV stage sampled **texcoord 0** (the uniform dump shows `st2` asking
 > for `coord=1` and receiving `uvsrc=0`) and enabling the selection **halved** the remaining
