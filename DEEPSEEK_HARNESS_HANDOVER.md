@@ -31,7 +31,11 @@
 > alone** turning the frame into centre 254.5 / corner 0.0 (luma 90.71) with everything after it
 > unchanged. b18 is a 6-vertex full-screen quad on **`0x9038D1C0`, the 80x56 RGBA8 EFB-copy buffer**,
 > `s=4 d=5` - so the plate is that buffer's *content* upscaled, which is why the layer is 255/0
-> where Dolphin is **219/175** (5c.23 §5). B's next step is therefore **not** another batch bisect: it
+> where Dolphin is **219/175** (5c.23 §5) - and AP-AV addendum 3 finds the **Dolphin frame of this exact
+> screen** in Dump\Frames (320..1280 are the settled plate: mean 203.98, centre 193.7, corner 127.7,
+> radial 180.9 -> 219.8 -> 201.1), so the plate and the vignette are the same composition with both
+> strengths wrong, and there is a per-ring target to fix against (docs/evidence/at_title_ref_pair.png).
+> B's next step is therefore **not** another batch bisect: it
 > is to decode that buffer at b18's command out of a title capture and split "the copy content is
 > wrong" from "the sampling is wrong" (`docs/evidence/at_menu_frames_400_900_1600.png`).
 
@@ -15591,3 +15595,19 @@ And that buffer is written several times per title frame at two different sizes 
 | 400 / 1600 | 37.93 / 0.38 | 37.93 / 0.38 (1600 differs only as (0.34,0.43,0.23) instead of neutral - a black frame) |
 
 So the plate does not depend on the EFB alpha rule either, and the remaining candidate is the one the copy list points at: **the content of `0x9038D1C0` when b18 samples it**, i.e. the down/blur copies `#12/#14/#15/#17/#19`. That is now a two-way question with a named experiment (item 7) and three falsified alternatives (sprite compensation, per-stage texcoord, EFB alpha), which is the state priority B was missing when it entered this session.
+
+**9. Addendum 3 - THE PROJECT DOES HAVE A DOLPHIN FRAME OF THIS EXACT SCREEN, and it inverts the diagnosis.** The dossier has treated the title plate as unreferenced since 5c.23 (only aggregate numbers were quoted). `%APPDATA%\Dolphin Emulator\Dump\Frames` holds **2 478** `framedump_<n>.png` files, and frames **320..1280 are the settled title plate** (sampled every 10: 98 frames measure a mean luma of 190..215). Frame 900, the same moment the layer is measured at (`docs/evidence/at_title_ref_pair.png`, Dolphin | layer):
+
+| title plate | **Dolphin frame 900** | layer guest 900 |
+|---|---|---|
+| mean luma | **203.98** | 90.43 |
+| >250 | **0.02 %** | 8.28 % |
+| centre 40x40 | **193.7** | 255.0 |
+| corner 20x20 | **127.7** | **0.0** |
+| radial profile (10 rings, r 0->1) | **180.9 206.9 211.1 216.0 219.8 219.5 217.3 213.3 208.9 201.1** | 255.0 255.0 253.6 242.9 226.4 186.0 129.3 72.8 31.0 7.5 |
+
+Read the two radial profiles together and the defect is not "a vignette exists": **it is the same composition with both of its strengths wrong.** Hardware's plate is a *light* field (mean 204) with a **weak** vignette - brighter at mid-radius (220) than at the very centre (194, where the dark logo sits) and only moderately darker at the corners (128). The layer's is a *saturated* centre (255, clipped) with a **full-strength** vignette (0 at the corners), i.e. plate +25 % and vignette alpha ~3x. That is exactly the "effective alpha ~0.3 at the corners and ~0.15 at the centre" that 5c.23 computed from aggregate numbers, now measured per ring against the real frame. The picture shows the consequence plainly: the layer's logo is white-on-white and only the "PUSH" box and the copyright line (drawn after the vignette) are legible, where Dolphin's is dark lettering on a light plate.
+
+**Timeline caveat, stated because it decides how to use this reference:** Dolphin's frames are **not** aligned to the layer's. Its plate is settled from frame ~320 to ~1280 and fades by 1400 (23.80) and 1600 (14.25); the layer's settles at 90.43 by guest 500 and fades by 1200 (20.76). So compare **by screen** (the settled plate), never by frame number, and take the shot from an interval where each side is stable. `Dump\Textures` also holds **74 500** files (the AP-AQ corpus statistics - 17 263 `80x56_6` dumps - are therefore reproducible; the directory is flat, so glob by name, not by a `*80x56*` filter on the top level).
+
+**What this changes for priority B.** The remaining question is no longer "is the plate too bright" but "**which pass sets the plate to 255 and the vignette alpha to 1**", with the reference giving a per-ring target (180.9 / 206.9 / 211.1 / 216.0 / 219.8 / 219.5 / 217.3 / 213.3 / 208.9 / 201.1) instead of a single mean. The three falsified alternatives (sprite compensation, per-stage texcoord, alpha-blend mapping) plus the localisation to b18 and the 80x56 buffer are in items 3, 7 and 8; the next measurement is unchanged (decode `0x9038D1C0` at b18's command out of a title capture), but it now has a target curve to compare against, and the *plate* half of the question can be attacked independently by looking at which batch sets the 255 that b18 then vignettes (`TLS_BATCH_DUMP` b14..b17, all four flat 255 in the contact sheet).
