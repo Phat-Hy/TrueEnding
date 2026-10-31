@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_14(void);
 extern void _savegpr_26(void);
 extern void fn_8009EE30(void);
-extern void fn_800A08D4(void);
+extern void atn_Anim_getDuration(void);
 extern void fn_800BFAC8(void);
 extern void fn_800D2338(void);
 extern void fn_800DC6B4(void);
@@ -2299,7 +2299,7 @@ lbl_fn_801D19F0_00002040:
     cmpwi r0, 0x0
     beq lbl_fn_801D19F0_0000207C
     mr r3, r14
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x50(r14)
     fcmpo cr0, f0, f1
     bge lbl_fn_801D19F0_0000207C

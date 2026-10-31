@@ -25,8 +25,8 @@ extern void fn_80097180(void);
 extern void fn_800991D0(void);
 extern void fn_800A03E4(void);
 extern void fn_800A0448(void);
-extern void fn_800A05FC(void);
-extern void fn_800A08D4(void);
+extern void atn_Anim_evalNode(void);
+extern void atn_Anim_getDuration(void);
 extern void fn_800A08E0(void);
 extern void fn_800A0A68(void);
 extern void fn_800A1060(void);
@@ -996,7 +996,7 @@ asm void fn_80097D7C(void)
     lwz r3, 0x230(r3)
     cmpwi r3, 0x0
     beq lbl_fn_80097D7C_00000BC0
-    b fn_800A08D4
+    b atn_Anim_getDuration
 lbl_fn_80097D7C_00000BC0:
     lfs f1, lbl_80880BF8
     blr
@@ -1215,7 +1215,7 @@ lbl_fn_80097E80_00000E74:
     mulli r0, r7, 0x12
     add r4, r29, r4
     add r6, r6, r0
-    bl fn_800A05FC
+    bl atn_Anim_evalNode
 lbl_fn_80097E80_00000EB8:
     addi r16, r16, 0x4
     addi r17, r17, 0x1
@@ -1326,7 +1326,7 @@ lbl_fn_80097E80_00001008:
     mulli r0, r0, 0x12
     add r4, r18, r4
     add r6, r6, r0
-    bl fn_800A05FC
+    bl atn_Anim_evalNode
 lbl_fn_80097E80_0000104C:
     addi r16, r16, 0x4
     addi r17, r17, 0x1
@@ -1405,7 +1405,7 @@ lbl_fn_80097E80_00001140:
     b lbl_fn_80097E80_00001170
 lbl_fn_80097E80_0000115C:
     mr r3, r31
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x8(r15)
     fsubs f0, f0, f1
     stfs f0, 0x8(r15)
@@ -1414,7 +1414,7 @@ lbl_fn_80097E80_00001170:
     cmpwi r0, 0x0
     beq lbl_fn_80097E80_000011B8
     mr r3, r31
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x8(r15)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
@@ -1425,7 +1425,7 @@ lbl_fn_80097E80_00001170:
     b lbl_fn_80097E80_000011B8
 lbl_fn_80097E80_000011A4:
     mr r3, r31
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x8(r15)
     fadds f0, f0, f1
     stfs f0, 0x8(r15)
@@ -1688,7 +1688,7 @@ lbl_fn_80098698_00001540:
     cmpwi r0, 0x0
     beq lbl_fn_80098698_00001594
     mr r3, r30
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x8(r31)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
@@ -1697,7 +1697,7 @@ lbl_fn_80098698_00001540:
     fcmpo cr0, f0, f30
     ble lbl_fn_80098698_00001594
     mr r3, r30
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x8(r31)
     fsubs f0, f0, f1
     stfs f0, 0x8(r31)
@@ -1712,7 +1712,7 @@ lbl_fn_80098698_00001594:
     fcmpo cr0, f0, f30
     bge lbl_fn_80098698_000015CC
     mr r3, r30
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x8(r31)
     fadds f0, f0, f1
     stfs f0, 0x8(r31)
@@ -1773,13 +1773,13 @@ lbl_fn_80098698_00001670:
     stfs f0, 0x2c4(r28)
     beq lbl_fn_80098698_000016B8
     mr r3, r31
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x2c4(r28)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
     bne lbl_fn_80098698_000016B8
     mr r3, r31
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x2c4(r28)
     fsubs f0, f0, f1
     stfs f0, 0x2c4(r28)
@@ -1807,13 +1807,13 @@ lbl_fn_80098698_000016EC:
     cmpwi r0, 0x0
     beq lbl_fn_80098698_00001734
     mr r3, r30
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x8(r31)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
     bne lbl_fn_80098698_00001734
     mr r3, r30
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x8(r31)
     fsubs f0, f0, f1
     stfs f0, 0x8(r31)
@@ -2121,7 +2121,7 @@ lbl_fn_80098C90_00001B20:
     lfs f1, 0x8(r28)
     add r4, r7, r4
     add r6, r6, r0
-    bl fn_800A05FC
+    bl atn_Anim_evalNode
     b lbl_fn_80098C90_00001BB0
 lbl_fn_80098C90_00001B74:
     mulli r0, r31, 0x12
@@ -2130,7 +2130,7 @@ lbl_fn_80098C90_00001B74:
     addi r4, r1, 0x8
     lfs f1, 0x8(r28)
     add r6, r6, r0
-    bl fn_800A05FC
+    bl atn_Anim_evalNode
     mulli r0, r31, 0x2c
     lwz r3, 0x220(r24)
     lfs f1, 0x10(r28)
@@ -2309,13 +2309,13 @@ lbl_fn_80098DD8_00001DE4:
     cmpwi r0, 0x0
     beq lbl_fn_80098DD8_00001E1C
     mr r3, r31
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x8(r30)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
     bne lbl_fn_80098DD8_00001E1C
     mr r3, r31
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x8(r30)
     fsubs f0, f0, f1
     stfs f0, 0x8(r30)

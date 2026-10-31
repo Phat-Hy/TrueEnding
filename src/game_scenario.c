@@ -22,7 +22,7 @@ extern void fn_80097CCC(void);
 extern void fn_800D5808(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
-extern void fn_8047202C(void);
+extern void atn_Curve_evaluate(void);
 extern void fn_805F93C0(void);
 extern void fn_805F98D0(void);
 extern void fn_80615700(void);
@@ -332,42 +332,42 @@ asm void fn_80079280(void)
     sth r30, 0x20(r1)
     addi r3, r4, 0x28
     addi r4, r1, 0x20
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     lwz r3, 0x0(r31)
     fmr f26, f1
     fmr f1, f31
     addi r4, r1, 0x1e
     sth r30, 0x1e(r1)
     addi r3, r3, 0x34
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     lwz r3, 0x0(r31)
     fmr f27, f1
     fmr f1, f31
     addi r4, r1, 0x1c
     sth r30, 0x1c(r1)
     addi r3, r3, 0x40
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     lwz r3, 0x0(r31)
     fmr f28, f1
     fmr f1, f31
     addi r4, r1, 0x1a
     sth r30, 0x1a(r1)
     addi r3, r3, 0x4c
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     lwz r3, 0x0(r31)
     fmr f29, f1
     fmr f1, f31
     addi r4, r1, 0x18
     sth r30, 0x18(r1)
     addi r3, r3, 0x58
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     lwz r3, 0x0(r31)
     fmr f30, f1
     fmr f1, f31
     addi r4, r1, 0x16
     sth r30, 0x16(r1)
     addi r3, r3, 0x64
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     frsp f3, f1
     addi r29, r1, 0x4c
     frsp f0, f28
@@ -408,7 +408,7 @@ asm void fn_80079280(void)
     psq_st f1, 0x14(r31), 0, 0
     fmr f1, f31
     sth r30, 0x14(r1)
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     lfs f0, lbl_80880B10
     addi r4, r1, 0x12
     lwz r3, 0x0(r31)
@@ -416,7 +416,7 @@ asm void fn_80079280(void)
     sth r30, 0x12(r1)
     addi r3, r3, 0x7c
     fmr f1, f31
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     lfs f0, lbl_80880B10
     addi r4, r1, 0x10
     lwz r3, 0x0(r31)
@@ -424,7 +424,7 @@ asm void fn_80079280(void)
     sth r30, 0x10(r1)
     addi r3, r3, 0x88
     fmr f1, f31
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     lfs f0, lbl_80880B10
     addi r4, r1, 0xe
     lwz r3, 0x0(r31)
@@ -432,7 +432,7 @@ asm void fn_80079280(void)
     sth r30, 0xe(r1)
     addi r3, r3, 0x94
     fmr f1, f31
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     lfs f0, lbl_80880B10
     lwz r0, 0x4(r31)
     fdivs f0, f1, f0
@@ -451,7 +451,7 @@ asm void fn_80079280(void)
     addi r4, r1, 0xc
     sth r30, 0xc(r1)
     addi r3, r3, 0xd0
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     stfs f1, 0x30(r31)
 lbl_fn_80079280_00000498:
     lwz r0, 0x4(r31)
@@ -468,14 +468,14 @@ lbl_fn_80079280_000004AC:
     addi r3, r3, 0xdc
     sth r30, 0xa(r1)
     addi r4, r1, 0xa
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     stfs f1, 0x28(r31)
     fmr f1, f31
     lwz r3, 0x0(r31)
     addi r4, r1, 0x8
     sth r30, 0x8(r1)
     addi r3, r3, 0xe8
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     stfs f1, 0x2c(r31)
     mr r3, r31
     addi r4, r1, 0x24

@@ -36,7 +36,7 @@ extern void fn_8046D1EC(void);
 extern void fn_8046DD20(void);
 extern void fn_8046F5CC(void);
 extern void fn_8046F834(void);
-extern void fn_80471FD0(void);
+extern void atn_Curve_evalHermite(void);
 extern void fn_80473F88(void);
 extern void fn_805F89F0(void);
 extern void fn_805F8E70(void);
@@ -74,7 +74,7 @@ extern u32 lbl_80886EF4;
 extern u32 lbl_80886EF8;
 
 /* Function declarations */
-void fn_8047202C(void);
+void atn_Curve_evaluate(void);
 void fn_80472340(void);
 void fn_80472344(void);
 void fn_8047239C(void);
@@ -101,7 +101,7 @@ void fn_804738C4(void);
 void fn_804738E0(void);
 void fn_8047392C(void);
 
-asm void fn_8047202C(void)
+asm void atn_Curve_evaluate(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -317,7 +317,7 @@ lbl_fn_8047202C_000002CC:
     fsubs f2, f2, f0
     addi r4, r4, 0x2
     addi r5, r5, lbl_8078FBF0@l
-    bl fn_80471FD0
+    bl atn_Curve_evalHermite
 lbl_fn_8047202C_00000304:
     lwz r0, 0x14(r1)
     mtlr r0

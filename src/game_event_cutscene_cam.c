@@ -34,7 +34,7 @@ extern void fn_8046F5CC(void);
 extern void fn_8046F834(void);
 extern void fn_804714A4(void);
 extern void fn_804714B0(void);
-extern void fn_8047202C(void);
+extern void atn_Curve_evaluate(void);
 extern void fn_80472FAC(void);
 extern void fn_8047304C(void);
 extern void fn_804730D4(void);
@@ -261,19 +261,19 @@ lbl_fn_804778DC_000001A8:
     add r17, r0, r31
     sth r20, 0x24(r1)
     addi r3, r18, 0x20
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     fmr f30, f1
     sth r21, 0x22(r1)
     lfs f1, lbl_80886F08
     addi r3, r18, 0x2c
     addi r4, r1, 0x22
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     fmr f29, f1
     sth r22, 0x20(r1)
     lfs f1, lbl_80886F08
     addi r3, r18, 0x38
     addi r4, r1, 0x20
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     stfs f30, 0x8(r17)
     addi r3, r18, 0x98
     addi r4, r1, 0x1e
@@ -281,20 +281,20 @@ lbl_fn_804778DC_000001A8:
     stfs f1, 0x10(r17)
     lfs f1, lbl_80886F08
     sth r23, 0x1e(r1)
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     stfs f1, 0x54(r17)
     fmr f29, f1
     lfs f1, lbl_80886F08
     addi r3, r18, 0xa4
     sth r24, 0x1c(r1)
     addi r4, r1, 0x1c
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     stfs f1, 0xc8(r17)
     addi r3, r18, 0xb0
     lfs f1, lbl_80886F08
     addi r4, r1, 0x1a
     sth r25, 0x1a(r1)
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     stfs f1, 0xcc(r17)
     lwz r0, 0x14(r18)
     cmpwi r0, 0x1
@@ -303,19 +303,19 @@ lbl_fn_804778DC_000001A8:
     addi r3, r18, 0x44
     lfs f1, lbl_80886F08
     addi r4, r1, 0x18
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     fmr f31, f1
     sth r27, 0x16(r1)
     lfs f1, lbl_80886F08
     addi r3, r18, 0x50
     addi r4, r1, 0x16
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     fmr f30, f1
     sth r28, 0x14(r1)
     lfs f1, lbl_80886F08
     addi r3, r18, 0x5c
     addi r4, r1, 0x14
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     stfs f31, 0x14(r17)
     addi r3, r18, 0x8c
     addi r4, r1, 0x12
@@ -323,7 +323,7 @@ lbl_fn_804778DC_000001A8:
     stfs f1, 0x1c(r17)
     lfs f1, lbl_80886F08
     sth r29, 0x12(r1)
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     stfs f1, 0x38(r17)
     li r0, 0x2
     stw r0, 0x0(r17)
@@ -333,21 +333,21 @@ lbl_fn_804778DC_000002D4:
     addi r3, r18, 0x68
     lfs f1, lbl_80886F08
     addi r4, r1, 0x10
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     fmr f30, f1
     lwz r0, 0x78(r1)
     sth r0, 0xe(r1)
     addi r3, r18, 0x74
     lfs f1, lbl_80886F08
     addi r4, r1, 0xe
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     fmr f31, f1
     lwz r0, 0x7c(r1)
     sth r0, 0xc(r1)
     addi r3, r18, 0x80
     lfs f1, lbl_80886F08
     addi r4, r1, 0xc
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     stfs f30, 0x28(r1)
     addi r3, r1, 0x28
     frsp f2, f1
@@ -367,7 +367,7 @@ lbl_fn_804778DC_00000348:
     sth r0, 0xa(r1)
     addi r4, r1, 0xa
     lfs f1, lbl_80886F08
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     stfs f1, 0x50(r17)
     lwz r0, 0x84(r1)
     stw r0, 0x4(r17)
@@ -378,7 +378,7 @@ lbl_fn_804778DC_0000037C:
     sth r0, 0x8(r1)
     addi r4, r1, 0x8
     lfs f1, lbl_80886F08
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     fneg f3, f1
     stfs f1, 0x3c(r17)
     fmuls f0, f1, f29

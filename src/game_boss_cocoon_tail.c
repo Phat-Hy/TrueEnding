@@ -17,7 +17,7 @@ extern void fn_80063D3C(void);
 extern void fn_80097C08(void);
 extern void fn_80097D40(void);
 extern void fn_80097D7C(void);
-extern void fn_800A08D4(void);
+extern void atn_Anim_getDuration(void);
 extern void fn_800C344C(void);
 extern void fn_800CB3A0(void);
 extern void fn_800F7FD8(void);
@@ -211,7 +211,7 @@ lbl_fn_804628B4_0000011C:
     bl fn_80097D40
     cmpwi r3, 0x0
     beq lbl_fn_804628B4_00000140
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     b lbl_fn_804628B4_00000144
 lbl_fn_804628B4_00000140:
     lfs f1, lbl_80886DB8
@@ -223,7 +223,7 @@ lbl_fn_804628B4_00000144:
     bl fn_80097D40
     cmpwi r3, 0x0
     beq lbl_fn_804628B4_00000168
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     b lbl_fn_804628B4_0000016C
 lbl_fn_804628B4_00000168:
     lfs f1, lbl_80886DB8

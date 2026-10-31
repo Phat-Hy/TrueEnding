@@ -23,7 +23,7 @@ extern void fn_800A03A0(void);
 extern void fn_800A03E4(void);
 extern void fn_800A0448(void);
 extern void fn_800A04A0(void);
-extern void fn_800A08D4(void);
+extern void atn_Anim_getDuration(void);
 extern void fn_800A08E0(void);
 extern void fn_800DC288(void);
 extern void fn_8015495C(void);
@@ -1464,7 +1464,7 @@ lbl_fn_80429F90_0000124C:
     mulli r0, r5, 0xc
     add r3, r3, r0
     addi r3, r3, 0x104
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     stfs f1, 0x100(r31)
     b lbl_fn_80429F90_00001294
 lbl_fn_80429F90_0000128C:
@@ -1549,7 +1549,7 @@ lbl_fn_80429F90_00001368:
     addi r29, r3, 0x104
     stfs f0, 0x100(r31)
     mr r3, r29
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f3, 0x100(r31)
     fcmpo cr0, f1, f3
     cror eq, lt, eq
@@ -1559,14 +1559,14 @@ lbl_fn_80429F90_00001368:
     cmpwi r0, 0x0
     beq lbl_fn_80429F90_000013DC
     mr r3, r29
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x100(r31)
     fsubs f0, f0, f1
     stfs f0, 0x100(r31)
     b lbl_fn_80429F90_000014B0
 lbl_fn_80429F90_000013DC:
     mr r3, r29
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lwz r4, 0x54(r31)
     li r0, 0x0
     stfs f1, 0x100(r31)
@@ -1596,7 +1596,7 @@ lbl_fn_80429F90_00001434:
     cmpwi r0, 0x0
     beq lbl_fn_80429F90_00001468
     mr r3, r29
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x100(r31)
     fadds f0, f0, f1
     stfs f0, 0x100(r31)

@@ -20,7 +20,7 @@ extern void fn_80076A28(void);
 extern void fn_80076BE4(void);
 extern void fn_8007A41C(void);
 extern void fn_80080528(void);
-extern void fn_8009E448(void);
+extern void atn_Model_drawNodes(void);
 extern void fn_800BC438(void);
 extern void fn_800BDB40(void);
 extern void fn_800C06B0(void);
@@ -119,7 +119,7 @@ extern u32 lbl_80880C68;
 
 /* Function declarations */
 void fn_8009B938(void);
-void fn_8009B93C(void);
+void atn_Model_drawSubNodes(void);
 void fn_8009B9E8(void);
 void fn_8009BB9C(void);
 void fn_8009BF3C(void);
@@ -128,7 +128,7 @@ void fn_8009C688(void);
 void fn_8009C84C(void);
 void fn_8009CC28(void);
 void fn_8009D1A4(void);
-void fn_8009D58C(void);
+void atn_Model_drawMeshNode(void);
 void fn_8009DCE0(void);
 void fn_8009DE60(void);
 
@@ -138,7 +138,7 @@ asm void fn_8009B938(void)
     blr
 }
 
-asm void fn_8009B93C(void)
+asm void atn_Model_drawSubNodes(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -171,7 +171,7 @@ asm void fn_8009B93C(void)
     lwz r4, 0xc(r3)
     lwz r4, 0x48(r4)
     lwz r4, 0x0(r4)
-    bl fn_8009E448
+    bl atn_Model_drawNodes
     li r0, 0x0
     stb r0, lbl_8087EF29
 lbl_fn_8009B93C_00000088:
@@ -179,7 +179,7 @@ lbl_fn_8009B93C_00000088:
     mr r3, r31
     lwz r4, 0x48(r4)
     lwz r4, 0x0(r4)
-    bl fn_8009E448
+    bl atn_Model_drawNodes
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     mtlr r0
@@ -2139,7 +2139,7 @@ lbl_fn_8009D1A4_00001BD4:
     blr
 }
 
-asm void fn_8009D58C(void)
+asm void atn_Model_drawMeshNode(void)
 {
     nofralloc
     stwu r1, -0xd0(r1)

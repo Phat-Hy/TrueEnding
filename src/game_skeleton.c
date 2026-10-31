@@ -20,7 +20,7 @@ extern void fn_800D5808(void);
 extern void fn_800D5908(void);
 extern void fn_800D59B8(void);
 extern void fn_800DCA6C(void);
-extern void fn_8047202C(void);
+extern void atn_Curve_evaluate(void);
 extern void fn_80473E74(void);
 extern void fn_80473E8C(void);
 extern void fn_80473EFC(void);
@@ -1334,25 +1334,25 @@ lbl_fn_800C2274_000010D0:
     lfs f1, lbl_808810D0
     sth r31, 0xe(r1)
     addi r3, r28, 0x18
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     fdivs f30, f1, f31
     sth r31, 0xc(r1)
     lfs f1, lbl_808810D0
     addi r3, r28, 0x24
     addi r4, r1, 0xc
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     fdivs f29, f1, f31
     sth r31, 0xa(r1)
     lfs f1, lbl_808810D0
     addi r3, r28, 0x30
     addi r4, r1, 0xa
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     fdivs f28, f1, f31
     sth r31, 0x8(r1)
     lfs f1, lbl_808810D0
     addi r3, r28, 0x3c
     addi r4, r1, 0x8
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     fdivs f4, f1, f31
     lfs f3, 0xc(r27)
     lfs f2, 0x10(r27)

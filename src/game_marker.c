@@ -15,9 +15,9 @@ extern void fn_80070B60(void);
 extern void fn_80070C98(void);
 extern void fn_80076760(void);
 extern void fn_800902C0(void);
-extern void fn_80091684(void);
+extern void atn_Model_updateMatrices(void);
 extern void fn_80091A90(void);
-extern void fn_8009B93C(void);
+extern void atn_Model_drawSubNodes(void);
 extern void fn_8009E1E4(void);
 extern void fn_804761CC(void);
 extern void fn_804761E8(void);
@@ -56,7 +56,7 @@ void fn_8008EECC(void);
 void fn_8008EED4(void);
 void fn_8008EEDC(void);
 void fn_8008F5F8(void);
-void fn_8008FA24(void);
+void atn_Model_draw(void);
 
 asm void fn_8008E2D4(void)
 {
@@ -386,7 +386,7 @@ lbl_fn_8008E304_000004A8:
     mr r3, r29
     mr r5, r27
     addi r4, r30, 0x15c
-    bl fn_80091684
+    bl atn_Model_updateMatrices
 lbl_fn_8008E304_000004B8:
     stw r31, 0x50(r29)
 lbl_fn_8008E304_000004BC:
@@ -843,7 +843,7 @@ lbl_fn_8008E818_00000B50:
     bl fn_80076760
 lbl_fn_8008E818_00000B60:
     addi r3, r1, 0xe8
-    bl fn_8009B93C
+    bl atn_Model_drawSubNodes
     addi r11, r1, 0x1d0
     psq_l f31, 0x2b8(r1), 0, 0
     lfd f31, 0x2b0(r1)
@@ -1634,7 +1634,7 @@ asm void fn_8008F5F8(void)
     blr
 }
 
-asm void fn_8008FA24(void)
+asm void atn_Model_draw(void)
 {
     nofralloc
     stwu r1, -0x340(r1)

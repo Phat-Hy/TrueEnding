@@ -18,8 +18,8 @@ extern void fn_800846FC(void);
 extern void fn_80084C24(void);
 extern void fn_8008A4B0(void);
 extern void fn_8008A4E0(void);
-extern void fn_8008CCC0(void);
-extern void fn_8008CCD4(void);
+extern void atn_AABB_getMax(void);
+extern void atn_AABB_getMin(void);
 extern void fn_8008CCE8(void);
 extern void fn_8008CD1C(void);
 extern void fn_8008CD50(void);
@@ -334,7 +334,7 @@ asm void fn_80095300(void)
     bl fn_8000DD04
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8008CCD4
+    bl atn_AABB_getMin
     mr r3, r27
     addi r4, r1, 0x14
     bl fn_8000D124
@@ -342,7 +342,7 @@ asm void fn_80095300(void)
     bl fn_8000DD04
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8008CCC0
+    bl atn_AABB_getMax
     addi r3, r27, 0xc
     addi r4, r1, 0x8
     bl fn_8000D124

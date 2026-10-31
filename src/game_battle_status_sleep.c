@@ -25,7 +25,7 @@ extern void fn_80097C08(void);
 extern void fn_80097D7C(void);
 extern void fn_8009EE30(void);
 extern void fn_800A04A0(void);
-extern void fn_800A08D4(void);
+extern void atn_Anim_getDuration(void);
 extern void fn_800B2180(void);
 extern void fn_800D246C(void);
 extern void fn_800D3FA4(void);
@@ -512,7 +512,7 @@ lbl_fn_8042AE60_0000050C:
     b lbl_fn_8042AE60_00000644
 lbl_fn_8042AE60_00000558:
     addi r3, r3, 0x104
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     addi r3, r31, 0x104
     addi r4, r31, 0x240
     addi r5, r31, 0x200
@@ -533,7 +533,7 @@ lbl_fn_8042AE60_00000558:
     b lbl_fn_8042AE60_00000644
 lbl_fn_8042AE60_000005A8:
     addi r3, r3, 0x110
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     addi r3, r31, 0x110
     addi r4, r31, 0x240
     addi r5, r31, 0x200
@@ -554,7 +554,7 @@ lbl_fn_8042AE60_000005A8:
     b lbl_fn_8042AE60_00000644
 lbl_fn_8042AE60_000005F8:
     addi r3, r3, 0x134
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     addi r3, r31, 0x134
     addi r4, r31, 0x240
     addi r5, r31, 0x200

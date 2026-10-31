@@ -33,7 +33,7 @@ extern void fn_802376D0(void);
 extern void fn_80237874(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
-extern void fn_8047202C(void);
+extern void atn_Curve_evaluate(void);
 extern void fn_80473E74(void);
 extern void fn_80473F18(void);
 extern void fn_80473F50(void);
@@ -71,9 +71,9 @@ void fn_800A0448(void);
 void fn_800A04A0(void);
 void fn_800A0548(void);
 void fn_800A05AC(void);
-void fn_800A05FC(void);
-void fn_800A0610(void);
-void fn_800A08D4(void);
+void atn_Anim_evalNode(void);
+void atn_Anim_evalNodeTransform(void);
+void atn_Anim_getDuration(void);
 void fn_800A08E0(void);
 void fn_800A091C(void);
 void fn_800A09D0(void);
@@ -428,7 +428,7 @@ lbl_fn_800A04A0_00000490:
     mr r3, r29
     mr r4, r30
     mr r6, r31
-    bl fn_800A0610
+    bl atn_Anim_evalNodeTransform
     li r3, 0x1
     b lbl_fn_800A04A0_000004CC
 lbl_fn_800A04A0_000004C0:
@@ -466,7 +466,7 @@ lbl_fn_800A0548_00000510:
     cmplw r0, r5
     bne lbl_fn_800A0548_00000534
     mr r5, r7
-    bl fn_800A0610
+    bl atn_Anim_evalNodeTransform
     li r3, 0x1
     b lbl_fn_800A0548_00000540
 lbl_fn_800A0548_00000534:
@@ -508,17 +508,17 @@ lbl_fn_800A05AC_00000598:
     blr
 }
 
-asm void fn_800A05FC(void)
+asm void atn_Anim_evalNode(void)
 {
     nofralloc
     lwz r7, 0x8(r3)
     slwi r0, r5, 2
     lwz r5, 0x18(r7)
     lwzx r5, r5, r0
-    b fn_800A0610
+    b atn_Anim_evalNodeTransform
 }
 
-asm void fn_800A0610(void)
+asm void atn_Anim_evalNodeTransform(void)
 {
     nofralloc
     stwu r1, -0x90(r1)
@@ -546,7 +546,7 @@ asm void fn_800A0610(void)
     mr r4, r29
     li r31, 0x1
     add r3, r3, r0
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     mulli r0, r31, 0xc
     stfs f1, 0x20(r27)
     lwz r3, 0x1c(r28)
@@ -554,7 +554,7 @@ asm void fn_800A0610(void)
     addi r4, r29, 0x2
     add r3, r3, r0
     li r31, 0x2
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     mulli r0, r31, 0xc
     stfs f1, 0x24(r27)
     lwz r3, 0x1c(r28)
@@ -563,7 +563,7 @@ asm void fn_800A0610(void)
     add r3, r3, r0
     li r31, 0x3
     li r30, 0x3
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     stfs f1, 0x28(r27)
 lbl_fn_800A0610_00000664:
     lwz r0, 0x18(r28)
@@ -577,7 +577,7 @@ lbl_fn_800A0610_00000664:
     add r3, r5, r3
     addi r31, r31, 0x1
     addi r30, r30, 0x1
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     mulli r3, r31, 0xc
     slwi r0, r30, 1
     stfs f1, 0x30(r1)
@@ -587,7 +587,7 @@ lbl_fn_800A0610_00000664:
     add r3, r5, r3
     addi r31, r31, 0x1
     addi r30, r30, 0x1
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     mulli r3, r31, 0xc
     slwi r0, r30, 1
     stfs f1, 0x34(r1)
@@ -597,7 +597,7 @@ lbl_fn_800A0610_00000664:
     add r3, r5, r3
     addi r31, r31, 0x1
     addi r30, r30, 0x1
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     lfs f4, 0x30(r1)
     frsp f30, f1
     lfs f3, lbl_80880C94
@@ -664,7 +664,7 @@ lbl_fn_800A0610_000007BC:
     add r3, r5, r3
     addi r31, r31, 0x1
     addi r30, r30, 0x1
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     mulli r3, r31, 0xc
     slwi r0, r30, 1
     stfs f1, 0x4(r27)
@@ -674,7 +674,7 @@ lbl_fn_800A0610_000007BC:
     add r3, r5, r3
     addi r31, r31, 0x1
     addi r30, r30, 0x1
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     mulli r3, r31, 0xc
     stfs f1, 0x8(r27)
     lwz r4, 0x1c(r28)
@@ -682,7 +682,7 @@ lbl_fn_800A0610_000007BC:
     slwi r0, r30, 1
     add r3, r4, r3
     add r4, r29, r0
-    bl fn_8047202C
+    bl atn_Curve_evaluate
     stfs f1, 0xc(r27)
 lbl_fn_800A0610_00000838:
     lwz r3, 0x0(r27)
@@ -703,7 +703,7 @@ lbl_fn_800A0610_00000838:
     blr
 }
 
-asm void fn_800A08D4(void)
+asm void atn_Anim_getDuration(void)
 {
     nofralloc
     lwz r3, 0x8(r3)

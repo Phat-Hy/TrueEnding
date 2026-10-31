@@ -52,7 +52,7 @@ void fn_8047123C(void);
 void fn_804714A4(void);
 void fn_804714B0(void);
 void fn_804716B8(void);
-void fn_80471FD0(void);
+void atn_Curve_evalHermite(void);
 
 asm void fn_80470604(void)
 {
@@ -2102,7 +2102,7 @@ lbl_fn_804716B8_000019AC:
     blr
 }
 
-asm void fn_80471FD0(void)
+asm void atn_Curve_evalHermite(void)
 {
     nofralloc
     fres f11, f2

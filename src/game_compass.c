@@ -47,7 +47,7 @@ extern u32 lbl_80880C14;
 
 /* Function declarations */
 void fn_800910D4(void);
-void fn_80091684(void);
+void atn_Model_updateMatrices(void);
 void fn_80091A90(void);
 void fn_80091C00(void);
 void fn_80091C10(void);
@@ -434,7 +434,7 @@ lbl_fn_800910D4_00000520:
     blr
 }
 
-asm void fn_80091684(void)
+asm void atn_Model_updateMatrices(void)
 {
     nofralloc
     stwu r1, -0xf0(r1)
@@ -738,7 +738,7 @@ asm void fn_80091A90(void)
     cmpwi r0, 0x3
     bne lbl_fn_80091A90_00000A14
     lwz r5, 0x1d8(r3)
-    bl fn_80091684
+    bl atn_Model_updateMatrices
     b lbl_fn_80091A90_00000B10
 lbl_fn_80091A90_00000A14:
     lwz r4, 0x50(r3)
@@ -750,7 +750,7 @@ lbl_fn_80091A90_00000A14:
     mr r4, r30
     add r5, r29, r0
     lwz r5, 0x178(r5)
-    bl fn_80091684
+    bl atn_Model_updateMatrices
     b lbl_fn_80091A90_00000B10
 lbl_fn_80091A90_00000A40:
     mr r4, r30

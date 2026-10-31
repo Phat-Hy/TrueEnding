@@ -17,7 +17,7 @@ extern void fn_800838B8(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
 extern void fn_800902C0(void);
-extern void fn_80091684(void);
+extern void atn_Model_updateMatrices(void);
 extern void fn_80095300(void);
 extern void fn_800BDB58(void);
 extern void fn_800C0A50(void);
@@ -54,8 +54,8 @@ extern u32 lbl_80880C0C;
 void fn_8008C828(void);
 void fn_8008C850(void);
 void fn_8008C950(void);
-void fn_8008CCC0(void);
-void fn_8008CCD4(void);
+void atn_AABB_getMax(void);
+void atn_AABB_getMin(void);
 void fn_8008CCE8(void);
 void fn_8008CD1C(void);
 void fn_8008CD50(void);
@@ -395,7 +395,7 @@ lbl_fn_8008C950_0000047C:
     blr
 }
 
-asm void fn_8008CCC0(void)
+asm void atn_AABB_getMax(void)
 {
     nofralloc
     psq_l f1, 0x1c(r4), 0, 0
@@ -405,7 +405,7 @@ asm void fn_8008CCC0(void)
     blr
 }
 
-asm void fn_8008CCD4(void)
+asm void atn_AABB_getMin(void)
 {
     nofralloc
     psq_l f1, 0x10(r4), 0, 0
@@ -1120,7 +1120,7 @@ asm void fn_8008D6C0(void)
     mulli r0, r0, 0x18
     add r5, r29, r0
     lwz r5, 0x178(r5)
-    bl fn_80091684
+    bl atn_Model_updateMatrices
 lbl_fn_8008D6C0_00000EF8:
     lwz r0, 0x20c(r29)
     clrlwi. r0, r0, 31

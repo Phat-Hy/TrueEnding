@@ -10,7 +10,7 @@ extern void fn_80092814(void);
 extern void fn_8009EE30(void);
 extern void fn_800A03E4(void);
 extern void fn_800A0548(void);
-extern void fn_800A08D4(void);
+extern void atn_Anim_getDuration(void);
 extern void fn_800A55AC(void);
 extern void fn_800CB3A0(void);
 extern void fn_800D1D3C(void);
@@ -1665,13 +1665,13 @@ lbl_fn_805109D0_00001490:
     mr r3, r30
     fadds f0, f0, f1
     stfs f0, 0x50(r5)
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     lfs f0, 0x50(r30)
     fcmpo cr0, f0, f1
     cror eq, gt, eq
     bne lbl_fn_805109D0_000014E4
     mr r3, r30
-    bl fn_800A08D4
+    bl atn_Anim_getDuration
     stfs f1, 0x50(r30)
 lbl_fn_805109D0_000014E4:
     lfs f7, 0x50(r30)
