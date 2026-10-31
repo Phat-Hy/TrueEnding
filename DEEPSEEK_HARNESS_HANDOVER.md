@@ -15564,3 +15564,18 @@ i.e. copy the frame down to a 320x224 / 160x112 / 80x56 buffer, then draw those 
 |---|---|---|
 | 1 | 1 000 frames, shots at guest 300/400/500/600/700/900 | 30 s; the growth curve of item 1 (fade, saturation by 500, converged) |
 | 2 | 1 000 frames, `TLS_BATCH_DUMP_GUEST=900` + `TLS_TEV_PROBE=900` | 30 s; the full-screen 6-vertex staging-address composite of item 2 |
+
+**7. ADDENDUM - the vignette is ONE BATCH, and it is an upscale of the 80x56 EFB-copy buffer.** `TLS_BATCH_DUMP=900` already writes one back-buffer BMP per batch at that frame (`build/recomp/batch_<b>_f900.bmp`), so the 27-batch menu frame can be read as a contact sheet instead of inferred from averages (`docs/evidence/at_title_batch_sheet.png`, 30 s, one launch, `logs_ap/at/run18_batchbmp.log`):
+
+| batches | frame after them | centre | corner |
+|---|---|---|---|
+| b0 .. b13 | **flat 220.0-220.7** | 220.0 | 220.0-227.9 |
+| b14 .. b17 | **flat 255.0** | 255.0 | 255.0 |
+| **b18** | **luma 90.71** | **254.5** | **0.0** |
+| b19 .. b26 | 90.62-90.69 (HUD and the SKIP plate only) | 254.5 | 0.0 |
+
+**b18 paints the entire vignette** - a 6-vertex full-screen quad sampling **`0x9038D1C0`, the 80x56 RGBA8 EFB-copy buffer**, with `blend=1 s=4 d=5` (SRCALPHA / INVSRCALPHA). Everything after it is unchanged to within 0.1 luma, and b14..b17 (the full-screen REPLACE quads) have already flattened the frame to 255, so the radial shape the player sees *is* the content of that 80x56 buffer upscaled with its own alpha. That is why the layer's plate is 255 at the centre and 0 at the corners while Dolphin's is 219 / 175: the difference is the **content of the 80x56 copy**, not the composite.
+
+And that buffer is written several times per title frame at two different sizes - `TLS_EFB_COPY_PROBE=1` + `TLS_EFB_SAMPLE_FRAME=900` (30 s, `logs_ap/at/run19_copychain.log`) lists, for the two title frames it prints, copies `#12 dst=0x9038D1C0 pitch=40 dstw=80 geodst=80 realfmt=6`, `#14`/`#15` (80x56 sources), `#17 dstw=320 geodst=320` and `#19` (320-wide), interleaved with the full-frame `#16 dst=0x905C3000 pitch=320` and the XFB copy `#20 dst=0x900997E0 xfb=1`. So the same address is used as an 80x56 *and* a 320x224 target inside one frame - the guest is doing a multi-resolution blur, and which of those writes the layer samples at b18 is the next question.
+
+**The next measurement, exactly:** `TLS_GX_CAPTURE` the title window (frames 894-900), then read `0x9038D1C0`'s bytes out of the capture's MEM2 plane **at b18's command** (the copy probe already prints the `vmark`/`batches` pair that locates it: `vmark=54/batches=7` for `#16`, `vmark=6/batches=1` for `#12`), decode it as 80x56 RGBA8 and compare its radial profile with the layer's own upsample. That is a no-run measurement on a capture, and it decides between "the copy content is wrong" (a copy/filter bug) and "the copy is right and the *sampling* is wrong" (a TEV/blend bug) - the same two-way split AP-AQ used to close priority C's white-out. The Dolphin corpus statistic that already exists for this buffer class is **17 263 `80x56_6` dumps, median mean-luma 0.1, 95.7 % zero texels** (AP-AQ item 5), measured over the whole game rather than the title, so the title's own distribution has to be taken from Dolphin's `Dump\Frames` (5c.23 §6: frames 900/1000 there are the bright title plate, mean 209/208 - a different run, but the *plate* is the right picture).
