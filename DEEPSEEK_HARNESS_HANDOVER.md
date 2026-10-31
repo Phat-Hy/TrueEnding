@@ -14671,3 +14671,40 @@ something sharper:
    specifically: **what is the field waiting for in phase 8, and which writer sets request=2 that the consumer
    should pick up?** The four callers AP-AH named are the places to look, and they are in tasks that are never
    registered (15 above) - which is consistent with the request being set by a path that is *not* a menu task.
+
+**16. Where the Chapter-1 entry chain is actually cut: five virtual methods of task classes that are never
+instantiated - and the state-1 writer is one of them.** The chain is now traced end to end from the loaded image
+(`tools/dol_callers.py` for the call graph, the capture's MEM1 plane for the tables; no run needed for either):
+
+* the **consumer** `fn_8036F268` is the only writer that can produce scene state 1. Its code at `+0x360` is
+  `lwz r0, 0x54F0(r31)` (the request), `li r3, 1`, `stw r22, 0x5530(r31)`, `cmpwi r0, 1`, **`stw r3, 0x5538(r31)`**
+  - i.e. it *writes 1 into the state word +0x5538*, and 0x5538 is exactly the word AP-AG/AP-AH found stuck at 0;
+* it is called from **four** functions (`fn_80370F8C` at `0x803710F4`/`0x80371128`, `fn_80371164` at `0x803712A0`,
+  `fn_8039D930` at `0x8039D974`, `fn_8052009C` at `0x805201B8`);
+* those four are called only from **five** functions - `fn_803775DC` (3 sites: `0x80377680/0x803776C0/0x803776F4`),
+  `fn_80529C74` (`0x80529D3C`), `fn_803AB328` (`0x803AB340`), `fn_8039D930` (**no direct branch at all**),
+  `fn_8051F7D4` (`0x8051F804`) - the five AP-AH named;
+* and **none of the five has a `bl`/`b` caller or a materialised function pointer** (`dol_callers.py` prints "no
+  direct branch" for all five). They exist only as *table slots*: one xref each, in
+  `0x8074F0E8` (lone pointer → `fn_8039D930`), `0x8074F5E0` (lone pointer → `fn_803AB328`),
+  `0x8078A4C0` (6-entry table, **slot 2** → `fn_803775DC`), `0x80793510` (24-entry table, **slot 9** →
+  `fn_8051F7D4`) and `0x80793748` (24-entry table, **slot 9** → `fn_80529C74`; a sibling class - the two tables
+  share the shape `… 80510080 … 80013CAC …`, which is what two closely related menu classes look like).
+
+So the chain is entered **only through virtual dispatch**, and the classes that own it are **not the three objects
+the task manager has registered** (item 15: vtables `0x807790B0` and `0x80D22EC0`, neither of which references any
+of the five). That is the structural answer to priority C's "which task should call `0x8036F5D8`'s chain": a
+menu/parts class whose vtable slot 9 is the call site, and which this run never instantiates. The *next* question is
+therefore upstream of the chain: what is supposed to instantiate that class (the tutorial popup's own task?), and
+why the same event that shows the popup does not create its task. That is a task-creation question, not a
+state-machine one, and it is where a fresh session should start.
+
+**17. Input does reach the guest at the popup - so C is not an input-delivery defect.** One 4 600-frame run with
+`TLS_SCISSOR=1 TLS_NO_FORCE_BLEND=1 TLS_ACTION_PROBE=1` and a press every 200-300 frames shows the guest's own
+action evaluator being asked and answering at exactly the scripted frames, e.g.
+`frame=1900 action=17 mgr=0x8099DCD0 mask0=0x00004800 bit=0 hold=0x0800` and
+`frame=2200 action=4 … hold=0x0800` (`logs_ap/c_actionprobe.log`), i.e. **A is held where the script holds it, past
+the popup's appearance**, and nothing in the field reacts. Combined with items 15/15a/16, the defect is therefore
+localised to *what consumes the action*: the field cycles phase 8 <-> 0 with `request=2` set at `+0x54F0`, the only
+code that could turn that into scene state 1 (`fn_8036F268`) is reachable only through a virtual method of a class
+that is never created, and the action that should trigger that creation is being delivered.
