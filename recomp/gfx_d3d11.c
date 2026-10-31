@@ -1568,10 +1568,18 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
                     static int s_stats = -1;
                     if (s_stats < 0) s_stats = getenv("TLS_INK_STATS") ? 1 : 0;
                     if (s_stats) {
+                        /* `action=` is the decision, printed beside the numbers it is taken
+                         * from, because the numbers alone cannot show whether the upload path
+                         * rewrote the texels the shader samples (handover 5c.46 AP-AT). */
+                        const char* action = "none";
+                        if (max_delta > 10 && !is_ink_art) action = "glow";
+                        else if (matte_allowed && tls_ink_matte_allowed()) action = "matte";
                         printf("[InkStats] tex=0x%08X %ux%u fmt=%u base_luma=%d min_luma=%d "
-                               "plate_frac=%.3f ink=%d max_delta=%d\n",
+                               "plate_frac=%.3f ink=%d max_delta=%d base=(%d,%d,%d) "
+                               "corners=(%d,%d,%d) action=%s\n",
                                tu->guest_addr, tu->width, tu->height, tu->format, base_luma,
-                               min_luma, plate_frac, (int)is_ink_art, max_delta);
+                               min_luma, plate_frac, (int)is_ink_art, max_delta,
+                               base_r, base_g, base_b, r0, g0, b0, action);
                         fflush(stdout);
                     }
                 }
@@ -1632,6 +1640,61 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
         }
 
 
+
+        /* TLS_TEX_DUMP_FINAL=0xA[,0xB]: dump the staging buffer AFTER the compensation
+         * paths above - i.e. the texels the GPU actually samples. `TLS_TEX_DUMP` writes
+         * straight after `decode_gx_texture`, BEFORE the CMPR baseline / ink rewrites, so
+         * "the dump is grey and the render is red" is a state the old instrument cannot
+         * express (handover 5c.46 AP-AT: the rock atlas 0x91EBC460 dumps grey
+         * (88.54,85.39,76.40) and is uploaded with R >= 217). The line printed with the
+         * file is the staging buffer's own mean, so the two paths compare numerically
+         * without parsing a PPM. Inert unless set. */
+        {
+            static uint32_t s_final_addrs[4];
+            static int s_final_count = -1;
+            if (s_final_count < 0) {
+                s_final_count = 0;
+                const char* e = getenv("TLS_TEX_DUMP_FINAL");
+                while (e && *e && s_final_count < 4) {
+                    while (*e == ',' || *e == ' ') e++;
+                    if (!*e) break;
+                    s_final_addrs[s_final_count++] = (uint32_t)strtoul(e, (char**)&e, 0);
+                }
+            }
+            for (int fi = 0; fi < s_final_count; fi++) {
+                if (s_final_addrs[fi] != tu->guest_addr) continue;
+                uint64_t sr = 0, sg = 0, sb = 0;
+                uint32_t red_dom = 0;
+                for (uint32_t pi = 0; pi < total_px; pi++) {
+                    uint32_t px = s_d3d11.gx_staging_rgba[pi];
+                    uint32_t r = px & 0xFF, g = (px >> 8) & 0xFF, b = (px >> 16) & 0xFF;
+                    sr += r; sg += g; sb += b;
+                    if (r > g + 25 && r > b + 25 && r > 80) red_dom++;
+                }
+                char path[160];
+                snprintf(path, sizeof(path), "build/recomp/texfinal_%08X_%ux%u_f%u.ppm",
+                         tu->guest_addr, tu->width, tu->height, tu->format);
+                FILE* ff = fopen(path, "wb");
+                if (ff) {
+                    fprintf(ff, "P6\n%u %u\n255\n", tu->width, tu->height);
+                    for (uint32_t pi = 0; pi < total_px; pi++) {
+                        uint32_t px = s_d3d11.gx_staging_rgba[pi];
+                        fputc((int)(px & 0xFF), ff);
+                        fputc((int)((px >> 8) & 0xFF), ff);
+                        fputc((int)((px >> 16) & 0xFF), ff);
+                    }
+                    fclose(ff);
+                }
+                printf("[TexFinal] tex=0x%08X %ux%u fmt=%u mean=(%.2f,%.2f,%.2f) "
+                       "red_dominant=%.2f%% file=%s\n",
+                       tu->guest_addr, tu->width, tu->height, tu->format,
+                       total_px ? (double)sr / total_px : 0.0,
+                       total_px ? (double)sg / total_px : 0.0,
+                       total_px ? (double)sb / total_px : 0.0,
+                       total_px ? 100.0 * (double)red_dom / (double)total_px : 0.0, path);
+                fflush(stdout);
+            }
+        }
 
         D3D11_MAPPED_SUBRESOURCE mapped_tex;
         if (SUCCEEDED(ID3D11DeviceContext_Map(s_d3d11.context, (ID3D11Resource*)s_d3d11.tex_cache[target_idx].tex, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped_tex))) {
@@ -3919,6 +3982,88 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                              * in gx_tev_fill_texgen so the stage and indirect selections
                              * are decided in one place (5c.46 AP-P). */
                             gx_tev_fill_texgen(cst, batch, tev_st);
+                            /* TLS_TEV_UNIFORM=<batch>[,<frame>]: print the UNIFORM PACKET the
+                             * pixel shader receives - the filled `GxTevConstants` - not the
+                             * snapshot decode `TLS_TEV_PROBE` prints. The two are different
+                             * objects: the probe reads `GxTevState`, the shader reads this
+                             * cbuffer, and a packing/mirror bug between them is invisible to the
+                             * probe (handover 5c.46 AP-AS item 7 named this as the last cheap
+                             * discriminator for the red rock). The vertex colours are printed
+                             * beside it because `ras` is the one shader input no probe has ever
+                             * printed per batch: the batch probes print `col0=` (vertex 0 only)
+                             * and the TEV probe prints the snapshot. Fixed 8.8.8.8 packing
+                             * (`pack_rgba`, gx_pipeline.c:147) so the shader's (r,g,b,a) is
+                             * exactly the printed tuple. */
+                            {
+                                static int s_unif_b = -2, s_unif_f = -1;
+                                if (s_unif_b == -2) {
+                                    const char* e = getenv("TLS_TEV_UNIFORM");
+                                    s_unif_b = -1;
+                                    if (e && *e) {
+                                        s_unif_b = atoi(e);
+                                        const char* comma = strchr(e, ',');
+                                        if (comma) s_unif_f = atoi(comma + 1);
+                                    }
+                                }
+                                if (cst && s_unif_b >= 0 && (int)b == s_unif_b &&
+                                    (s_unif_f < 0 || probe_frame_hits(s_unif_f, (int)s_d3d11_dump_count))) {
+                                    printf("[TevUniform] frame=%d b%u vcnt=%u voff=%u num_stages=%u "
+                                           "ind_num=%u ind_used=%u tgneed=0x%X alpha_test=0x%08X\n",
+                                           s_d3d11_dump_count, b, batch->vertex_count,
+                                           batch->vertex_offset, cst->num_stages, cst->ind_num,
+                                           cst->ind_used, cst->tgneed, cst->alpha_test);
+                                    for (uint32_t ui = 0; ui < cst->num_stages && ui < 16; ui++) {
+                                        printf("[TevUniform]  st%u col=0x%08X alp=0x%08X map=%u "
+                                               "coord=%u en=%u uvsrc=%u raschan=%u kc=%u ka=%u "
+                                               "tswap=%u%u%u%u rswap=%u%u%u%u\n",
+                                               ui, cst->color[ui][0], cst->color[ui][1],
+                                               cst->order[ui][0], cst->order[ui][1],
+                                               cst->order[ui][2], cst->order[ui][3],
+                                               cst->raschan[ui][0], cst->ksel[ui][0] & 0x1Fu,
+                                               cst->ksel[ui][1] & 0x1Fu,
+                                               cst->tswap[ui][0], cst->tswap[ui][1],
+                                               cst->tswap[ui][2], cst->tswap[ui][3],
+                                               cst->rswap[ui][0], cst->rswap[ui][1],
+                                               cst->rswap[ui][2], cst->rswap[ui][3]);
+                                    }
+                                    for (int ui = 0; ui < 4; ui++) {
+                                        printf("[TevUniform]  K%d=(%.4f %.4f %.4f %.4f) "
+                                               "C%d=(%.4f %.4f %.4f %.4f)\n", ui,
+                                               cst->kreg[ui][0], cst->kreg[ui][1],
+                                               cst->kreg[ui][2], cst->kreg[ui][3], ui,
+                                               cst->creg[ui][0], cst->creg[ui][1],
+                                               cst->creg[ui][2], cst->creg[ui][3]);
+                                    }
+                                    {
+                                        uint32_t n = batch->vertex_count;
+                                        uint32_t probes[3] = { batch->vertex_offset,
+                                                               batch->vertex_offset + n / 2,
+                                                               batch->vertex_offset + n - 1 };
+                                        for (int pi = 0; pi < 3; pi++) {
+                                            uint32_t c = gx_vtx[probes[pi]].color;
+                                            printf("[TevUniform]  vtx[%u] color=0x%08X "
+                                                   "rgba=(%u,%u,%u,%u) uv=(%.4f %.4f)\n",
+                                                   probes[pi] - batch->vertex_offset, c,
+                                                   c & 0xFF, (c >> 8) & 0xFF, (c >> 16) & 0xFF,
+                                                   (c >> 24) & 0xFF, gx_vtx[probes[pi]].u,
+                                                   gx_vtx[probes[pi]].v);
+                                        }
+                                    }
+                                    for (int m = 0; m < 8; m++) {
+                                        if (!(batch->tev_texmap_mask & (1u << m))) continue;
+                                        printf("[TevUniform]  map%d=0x%08X %ux%u fmt=%u wrap=%u/%u "
+                                               "uvsrc(dim s,t)=%d,%d\n", m,
+                                               batch->tev_texmap[m].guest_addr,
+                                               batch->tev_texmap[m].width,
+                                               batch->tev_texmap[m].height,
+                                               batch->tev_texmap[m].format,
+                                               batch->tev_texmap[m].wrap_s,
+                                               batch->tev_texmap[m].wrap_t,
+                                               cst->dim[m][2], cst->dim[m][3]);
+                                    }
+                                    fflush(stdout);
+                                }
+                            }
                         }
                         ID3D11ShaderResourceView* srvs[8];
                         for (int m = 0; m < 8; m++) {
