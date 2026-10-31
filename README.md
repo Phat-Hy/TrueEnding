@@ -23,12 +23,19 @@ Directed by **Hironobu Sakaguchi** (creator of *Final Fantasy*) with music by **
 1. **Track A — Byte-Matching Decompilation**: Reconstructing the original C/C++ source code to achieve a **100.00% byte-for-byte binary match** against the retail Wii binary (`SLSEXJ`) using the official Metrowerks CodeWarrior 4.3 compiler (`Wii/1.0`).
 2. **Track B — Native PC Port (Static Recompilation)**: Translating the game's PowerPC bytecode into native C/C++ running directly on modern x86-64 / ARM64 hardware with custom hardware runtime hooks, uncapped frame rates (60+ FPS), high-definition rendering, and modern controller/mouse-keyboard support—**without emulation overhead**.
 
-> **Renderer direction (Track B, decided 2026-10-29): GX is going Aurora-first.** The hand-rolled D3D11 GX layer is
-> frozen for *new* GX-semantics work while a bounded spike decides whether to adopt
-> [Aurora](https://github.com/encounter/aurora) (MIT, WebGPU/Dawn) — the GX implementation behind Nebula, Recharged
-> and WiiCompiled, the last of which is also a static-recompilation port. Rationale, measurements and the spike's
-> three exit criteria: [`AGENTS.md`](AGENTS.md) §1 and [`DEEPSEEK_HARNESS_HANDOVER.md`](DEEPSEEK_HARNESS_HANDOVER.md)
-> §5c.46 AP-AL.
+> **Renderer direction (Track B): GX is Aurora-first, and the spike is decided by measurement.**
+> [Aurora](https://github.com/encounter/aurora) (MIT, WebGPU/Dawn) — the GX implementation behind Nebula,
+> Recharged and WiiCompiled (itself a static-recompilation port of a retail game, i.e. this project's exact
+> analogue) — is the target renderer. All three spike criteria are cleared (it builds on this toolchain, it
+> renders a captured frame, it services an EFB copy with the same bytes), and **aurora now runs inside the PC
+> runner**: a C-ABI DLL built out of the spike, the runner's guest memory mapped at the guest's own addresses,
+> and a live translated frame that agrees with the harness's replay of the *same* capture to **1.5 %**
+> (`mean |d| 1.79`, ratio 0.985). What is left is wiring, not doubt, and it is scoped in
+> [`DEEPSEEK_HARNESS_HANDOVER.md`](DEEPSEEK_HARNESS_HANDOVER.md) §5c.47: **P3** moves the five register-class
+> adapters into the runner, **P4** re-records the gate references against aurora and keeps the layer behind
+> `TLS_LAYER=1`. The hand-rolled D3D11 layer is frozen for *new* GX-semantics work and remains the **default
+> renderer until P4**. Rationale and the alternatives excluded by measurement: [`AGENTS.md`](AGENTS.md) §1 and
+> the dossier's §5c.46 **AP-AL / AP-AM / AP-AN** (spike) and **AP-AY / AP-AZ / AP-BA** (migration).
 
 ### Decompilation Methodology: Two-Tier Matching Architecture
 To optimize execution velocity and preserve token budgets, Track A follows a targeted two-tier strategy:
@@ -39,7 +46,8 @@ To optimize execution velocity and preserve token budgets, Track A follows a tar
 
 ## Current Progress Tracker
 
-> Updated as of **October 2026** — Milestone **>50.00% Half-Game Code Barrier Surpassed! (3.78 MB Code, 9,123 Functions, 522 Translation Units 100% Byte-Matched & Linked into main.dol)**
+> **Track A** metrics last updated **October 2026** — Milestone **>50.00% Half-Game Code Barrier Surpassed! (3.78 MB Code, 9,123 Functions, 522 Translation Units 100% Byte-Matched & Linked into main.dol)**
+> **Track B** status updated **2026-11-01** — see [Native Port Status](#native-port-status-track-b) for the live state (gate references, renderer migration phase, and the measurements behind them).
 
 ### Overall Metrics
 
@@ -49,7 +57,7 @@ To optimize execution velocity and preserve token budgets, Track A follows a tar
 | **Total Functions** | 18,120 functions | **9,123 functions** | **50.35%** |
 | **Fully Matched Modules** | 663 modules | **522 modules** (linked) | **78.73%** |
 | **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 522 matched modules) |
-| **PC Runner Status** | Interactive Window | **Configurable FPS Window & Controller** | Real-Time Win32 Window, Dynamic XInput + Keyboard, 3 Threads, DVD Asset Streaming |
+| **PC Runner Status** | Interactive Window | **Interactive Window + Aurora migration P2 closed** | Real-Time Win32 Window, Dynamic XInput + Keyboard, 3 Threads, DVD Asset Streaming; Chapter 1 interactive, save created by the game itself |
 
 ---
 
@@ -133,7 +141,64 @@ To optimize execution velocity and preserve token budgets, Track A follows a tar
 | | [`global_destructor_chain.c`](file:///src/global_destructor_chain.c) | 2 / 2 | 96 B | **100.00%** | C++ global object teardown |
 | | [`__init_hardware.c`](file:///src/__init_hardware.c) | 2 / 2 | 100 B | **100.00%** | Early hardware initialization vector |
 | | [`init_user.c`](file:///src/init_user.c) | 1 / 1 | 28 B | **100.00%** | CRT user initialization stub |
-| **Graphics Subsystem (GX)**| `gx.c` / `GXInit.c` | Next | ~45 KB | Planning | Flipper/Hollywood GPU command lists, textures, lighting |
+| **Remaining Track A work** | game code (Method A) | — | — | In progress | The GX SDK surface is complete (the ten modules above); the remaining byte-matching is game logic, tracked per unit in [`docs/PROGRESS_LEDGER.json`](docs/PROGRESS_LEDGER.json) |
+
+---
+
+## Native Port Status (Track B)
+
+The port boots, reaches the title, hands over to `Game`, and **Chapter 1 (Gurgan Cave) is interactive**: the
+game creates its own save (`savedata.dat` 1 348 992 B, `banner.bin` 29 344 B) and the field accepts input. The
+renderer is mid-migration and that is the project's active axis.
+
+| | state |
+| :--- | :--- |
+| Sequence | `Boot → Stra → Titl → Game`, deterministic |
+| Default renderer | the hand-rolled D3D11 GX layer (frozen; replaced at P4) |
+| Renderer target | **Aurora**, already running *inside* the runner, offscreen |
+| Gate | `pwsh tools/invariant.ps1` — **PASS on attempt 1**: handover frame **1680**, guest 2800 `B4646917…`, guest 3500 `22B1CE31…`, save 1 348 992 / 29 344 |
+| Build | green — 459 chunks / 471 objects, `python tools/recomp_harness.py build-runner` |
+
+### What the layer work established, with numbers
+Every item below is a measurement recorded in the dossier, not a plan.
+
+- **The red rock is fixed** (§5c.46 AP-AT). The CMPR "glow" baseline compensation was rewriting the cave's
+  256×256 rock atlas on upload — grey decode `(88.54, 85.39, 76.40)` uploaded as `(169.76, 80.21, 75.02)` with
+  75.16 % red texels. Restricted to the ≤64×64 sprite class it was written for: guest 2800 red-dominant pixels
+  **18.60 % → 0.00 %** against aurora's 0.00 %.
+- **Per-stage TEV texcoord promoted** (AP-AU). A TEV stage now samples the coordinate `TEVORDER` names, which
+  halved the remaining layer-vs-aurora difference at the content frame: `mean |d|` **11.20 → 4.83**.
+- **The title plate is diagnosed, not fixed** (AP-AZ). The plate is the guest's own 64×64 **IA8 mask** drawn at
+  full strength — `frame = 255 × mask.a` predicts **90.68** against a measured **90.43**, while Dolphin's own
+  frame of the same screen is mean **203.98**. The mask decodes bit-exactly against Dolphin's texture dump, so
+  what is wrong is the multi-stage TEV composite itself — the class the migration retires.
+- **The "black cave" was a measurement artefact, not depth state** (AP-AZ). The runner presents a guest frame in
+  two halves and the aurora tap is per present: every other half carries **0 draws and 3 copies**, so a range
+  ending on one reads back black by construction. Ending on a draw-bearing half renders a real 640×448 frame —
+  see [the live readback](docs/evidence/ba_aur_live_2799.png).
+
+### Migration phases (dossier §5c.47)
+| phase | state |
+| :--- | :--- |
+| **P1** — one frame through aurora inside the runner | **boundary built and measured**: DLL + C ABI + guest-memory mapping + live FIFO consumption (18 EFB copies, 255+ draws) + a 640×448 RGBA8 readback agreeing with the harness replay of the same capture to 1.5 %. The *equality* test is still open until both present halves are fed as one aurora frame. |
+| **P2** — the copy model is safe | **closed.** Host audit: the five staging addresses appear only in comments. Guest audit (new `TLS_READ_WATCH`): **zero** guest readers across 3 274 015 059 watched reads, with a positive control that lists **64** arena readers. Aurora's GPU-side shadow-copy model is therefore usable as-is. |
+| **P3** — the five register classes live in the runner | not started (next) |
+| **P4** — promotion and gate re-record | not started (after P3) |
+
+Known open items: aurora currently **hangs at exit** after `aurora_shutdown()` (end such runs with `Stop-Process`
+and rebuild only afterwards); the aurora frame's residual content gap; the water's sampled content; the 128×128
+glow residue.
+
+### Reproducing a measurement
+```bash
+python tools/recomp_harness.py build-runner    # 471 objects, ~1 s incremental
+pwsh tools/invariant.ps1                       # gate: PASS attempt 1, handover 1680
+```
+Rules that cost runs, so they are rules: every launch passes `--window --minimized` (never steal focus); one
+runner at a time; delete `SaveData\title\00010000\534c5345\data\savedata.dat`, `banner.bin` and
+`SaveData\tmp\savedata.dat` before any progression run; and **a loaded host is not evidence** — the handover
+frame is the load fingerprint, so a gate run whose handover frame is not 1680 is void, not a regression.
+Headless-safe instruments (all inert unless set) live in `recomp/` and are listed in the dossier.
 
 ---
 
@@ -145,19 +210,29 @@ To optimize execution velocity and preserve token budgets, Track A follows a tar
 │   └── symbols.txt              # Mapped functions, vtables, and data labels
 ├── docs/                        # Progress ledgers, architecture plans, worklogs
 │   ├── PROGRESS_LEDGER.json     # Machine-readable per-unit progress ledger
-│   └── ODYSSEUS_WORKLOG.md      # Detailed engineering trajectory and session log
+│   ├── ODYSSEUS_WORKLOG.md      # Detailed engineering trajectory and session log
+│   ├── evidence/                # Reference frames and before/after pictures cited by the dossier
+│   └── dolrecomp/               # cpu-core.patch: our delta against the vendored recompiler clone
 ├── include/                     # Public and SDK headers
 │   └── revolution/              # Nintendo RVL-SDK reverse-engineered headers
 ├── recomp/                      # Track B: Native PC Static Recompilation Runtime
-│   ├── host_runner.c            # Native 60 FPS host loop, memory map, MMIO
-│   ├── guest_context.h          # PowerPC 750CL state register structures
+│   ├── host_runner.c            # Host loop, guest memory map, MMIO, memory watch hooks
 │   ├── replacements.c           # High-performance host function overrides
-│   └── replacements.h           # Dispatch definitions
+│   ├── gx_pipeline.c            # GX command processor: the FIFO -> draw batches, EFB copies
+│   ├── gfx_d3d11.c              # The hand-rolled D3D11 GX layer (frozen; default until P4)
+│   ├── gfx_backend.c            # Backend seam
+│   ├── aurora_live_host.c       # Aurora live path (TLS_AURORA): load the DLL, tap, read back
+│   ├── gx_fifo_capture.c        # Byte-exact FIFO recorder the aurora replay consumes
+│   └── tls_debug.c              # Guest-side probes and dumps
 ├── src/                         # Track A: Byte-matched C source code
-├── tools/                       # Build scripts, binary analysis, diff helpers
-│   ├── diff_helper.py           # Interactive assembly diffing tool
-│   ├── recomp_harness.py        # Recompilation harness orchestrator
-│   └── objdiff-cli.exe          # Binary matching assessment utility
+├── tools/                       # Build scripts, analysis, and the aurora spike tree
+│   ├── recomp_harness.py        # Recompilation harness orchestrator (build-runner)
+│   ├── invariant.ps1            # The progression gate: the definition of "still works"
+│   ├── aurora_spike/            # Aurora replay harness + the C-ABI DLL the runner loads
+│   ├── DolRecomp/               # Vendored recompiler/CPU core (nested clone; see docs/dolrecomp)
+│   └── diff_helper.py           # Interactive assembly diffing tool
+├── AGENTS.md                    # Project directives (Aurora-first renderer strategy, rules)
+├── DEEPSEEK_HARNESS_HANDOVER.md # The engineering dossier: every measurement, every falsification
 ├── configure.py                 # Project build generator (Ninja / MWCC)
 └── README.md                    # Project documentation
 ```
@@ -171,7 +246,8 @@ To optimize execution velocity and preserve token budgets, Track A follows a tar
 - **Python 3.10+**
 - **Ninja** build system (`tools/w64devkit/bin/ninja.exe` included on Windows)
 - **Metrowerks CodeWarrior for Wii** (MWCC 4.3 build 145) placed in `build/compilers/Wii/1.0/`
-- **A modern C/C++ compiler** (Clang, GCC, or MSVC) for the Track B native PC runner
+- **MinGW GCC** for the Track B runner (`tools/w64devkit/`, used by `tools/recomp_harness.py`)
+- **MSVC** (Build Tools) only if you want the aurora live DLL — it is built from the spike tree, not the runner
 
 ### 1. Track A — Decompilation Matching
 
@@ -194,14 +270,28 @@ python tools/diff_helper.py <function_name> -a
 
 ### 2. Track B — Native PC Recompilation Runner
 
-To build and run the native PC port:
 ```bash
-# Build the native PC runner
+# Build the native PC runner (471 objects; incremental rebuilds are ~1 s)
 python tools/recomp_harness.py build-runner
 
-# Execute the runner (runs continuous 60 FPS loop)
-./build/recomp/tls_runner.exe
+# Run it. --window --minimized is MANDATORY for every launch: the game window must never
+# steal focus, and the screenshot the gate hashes is captured before Present, so a minimised
+# window changes nothing about it.
+./build/recomp/tls_runner.exe --window --minimized --frames 3520
+
+# Verify the progression invariant (the definition of "still works")
+pwsh tools/invariant.ps1
 ```
+
+The gate expects **PASS on attempt 1** at handover frame **1680**, guest 2800 `B4646917…`, guest 3500
+`22B1CE31…` and a save of 1 348 992 / 29 344 B. Delete the three save files named above before a progression
+run, and check the handover frame before trusting any measurement: a different handover frame means the host is
+loaded, not that the code regressed.
+
+The aurora live path is opt-in and inert by default: `TLS_AURORA=1` (plus `TLS_AURORA_FROM`/`TLS_AURORA_TO`)
+loads the DLL from the spike tree and renders the fed frames offscreen — see
+[`docs/dolrecomp/README.md`](docs/dolrecomp/README.md) for the vendored-core patch rule and the dossier for the
+instrument list.
 
 ---
 
