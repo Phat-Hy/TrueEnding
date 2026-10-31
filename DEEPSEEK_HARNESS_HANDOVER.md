@@ -15611,3 +15611,24 @@ Read the two radial profiles together and the defect is not "a vignette exists":
 **Timeline caveat, stated because it decides how to use this reference:** Dolphin's frames are **not** aligned to the layer's. Its plate is settled from frame ~320 to ~1280 and fades by 1400 (23.80) and 1600 (14.25); the layer's settles at 90.43 by guest 500 and fades by 1200 (20.76). So compare **by screen** (the settled plate), never by frame number, and take the shot from an interval where each side is stable. `Dump\Textures` also holds **74 500** files (the AP-AQ corpus statistics - 17 263 `80x56_6` dumps - are therefore reproducible; the directory is flat, so glob by name, not by a `*80x56*` filter on the top level).
 
 **What this changes for priority B.** The remaining question is no longer "is the plate too bright" but "**which pass sets the plate to 255 and the vignette alpha to 1**", with the reference giving a per-ring target (180.9 / 206.9 / 211.1 / 216.0 / 219.8 / 219.5 / 217.3 / 213.3 / 208.9 / 201.1) instead of a single mean. The three falsified alternatives (sprite compensation, per-stage texcoord, alpha-blend mapping) plus the localisation to b18 and the 80x56 buffer are in items 3, 7 and 8; the next measurement is unchanged (decode `0x9038D1C0` at b18's command out of a title capture), but it now has a target curve to compare against, and the *plate* half of the question can be attacked independently by looking at which batch sets the 255 that b18 then vignettes (`TLS_BATCH_DUMP` b14..b17, all four flat 255 in the contact sheet).
+
+**10. Addendum 4 - A HARDWARE RULE THE SHADER IS MISSING, measured, and why applying it ALONE makes the title worse (reverted).** Dolphin's `WriteFragmentBody` ends with
+
+```
+// The results of the last texenv stage are put onto the screen,
+// regardless of the used destination register
+if (last_cc.dest != TevOutput::Prev) prev.rgb = <last colour dest>;
+if (last_ac.dest != TevOutput::Prev) prev.a   = <last alpha dest>;
+```
+
+and the layer's `PSTev` does not do that - it returns `prev` and nothing else, so a chain whose LAST stage writes `c1`/`c2` loses the stage's result and the blend unit reads whatever `prev` holds (the pre-load `C0`). The title plate's glow chain is exactly that shape (`[tev #0]` at guest 900): colour dests `c1, prev, prev`, **alpha dests `c1, c1, c1`**, and `C0.a = 0`. So on this layer the 231 glow quads each blend with **alpha 0** - i.e. they are no-ops - and the plate the player sees comes from the passes *after* them (the full-frame REPLACE quads and b18's vignette), while on hardware they are real lerps. Implemented the rule in `PSTev` (15 lines, `tev_color[stages-1]`'s `dest` fields), recompiled the shaders and measured one run each:
+
+| guest frame | committed build | with the last-stage rule |
+|---|---|---|
+| **900 (title plate)** | 90.43, 8.28 % >250, radial 255 -> 7.5 | **254.67, 99.61 % >250, radial 254.7 flat** |
+| 2800 (content) | 35.63, 0.00 % | **35.63, 0.00 % - identical** |
+| 3500 (popup) | 45.51, 1.98 % | 44.89, 1.98 % |
+
+So the rule is genuinely missing, and applying it **alone makes the title plate a white-out** (the vignette's alpha becomes `tex.a = 255`, so b18 *replaces* the frame with its buffer instead of blending, and the buffer is a copy of the already-white plate). A second run with `TLS_NO_GLOW=1` on top (254.71, 99.63 %) shows the white is **not** the sprite rewrite either. **Reverted**, with the finding recorded rather than the change kept: the layer's current title picture exists *because* the missing rule makes the glow draws no-ops - two defects partly cancelling - and applying the hardware rule correctly requires the *composite* to work as well (the vignette alpha path and the staging feedback), which is the multi-stage-TEV class `AGENTS.md` §1 assigns to Aurora.
+
+Two facts this leaves behind, both measured: (i) the sprite the plate is built from is `0x907FC980` and Dolphin's own dump of it, `tex1_64x64_f3f94f69aec05529_14.png`, has RGB mean **(206.1, 194.4, 154.8) with alpha 255 everywhere** - i.e. the layer's decode (205,194,154 / a=255) matches hardware exactly, so the sprite is not the problem; (ii) the plate is a *feedback* through the 640x448 staging copy (`b14` samples `0x905C3000`, the previous frame's full-frame copy) and the copy probe shows the frame inside one menu frame going **96 -> 220 -> 255** (copies #1/#2 read 96, #3 reads 220, #14 reads 255 with an alpha ramp of 220 - the only copy whose alpha is not 255). That is the chain to attack next, and it is the same class as the field's AP-AQ white-out.
