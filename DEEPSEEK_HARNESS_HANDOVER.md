@@ -14735,3 +14735,32 @@ the only state-1 writer unreachable.
 (20-byte slot: `+0` word 0, `+12` update fn, `+16` task) and prints on slot *or* count change, with `w0=` added to
 each slot in the line. The gate was re-run on the rebuilt binary afterwards: **PASS, attempt 1**, both recorded
 references unchanged.
+
+**19. Where to look next for task creation, and a negative result that narrows it.** The task manager global
+`0x8087EE94` is reached as `-25612(r13)` (r13 = `0x808852A0`, derived from the probes' `r13-25232 = 0x8087F010`),
+and the **whole recompiled image touches it exactly three times, all inside `fn_802189EC`** (+0xA8, +0x10C, +0x1E0
+of a 0x1C8-byte function; `chunk_0133_text1_802181C0.c` lines 9711/9893/10316):
+
+```
+0x80218A84  addi r3, r0, 1708      ; 0x6AC bytes
+0x80218A90  bl   0x800846FC        ; allocate
+0x80218A94  stw  r3, -25612(r13)   ; -> the task manager 0x8087EE94
+0x80218AA0  bl   0x80006648        ; memset(ptr, 0, 0x6AC)
+```
+
+so `fn_802189EC` is the task manager's **constructor**, and it is the only code that names the manager. Every
+registration must therefore go through a copy of that pointer held in some other object (which is consistent with
+the array pointer being re-read from `mgr + 8` by the census rather than kept in a register across frames). The
+next session's first step is therefore the constructor's caller and whatever receives the pointer it hands out -
+that is where "who should create the popup's task" is answered - and it can be done statically
+(`dol_callers.py 0x802189EC`, then follow the `r3` it returns into the object that stores it) before spending a
+run. Worth recording alongside it: the three registered slots are all that ever exist, and two of them are two
+update hooks on the same `GameTask` object, so the popup is drawn by a task that was registered **before** the
+popup appeared (f=2020), not by a task the popup created.
+
+One level further, for whoever picks this up: the constructor's only caller is `fn_80207F80` (+0xBC, a 0xDC-byte
+function), and **`fn_80207F80` has no direct caller either** (`dol_callers.py` prints "no direct branch" for it) -
+it is table-dispatched, like the five chain roots. So the engine's setup and its menu entry points are both
+table-driven, and the productive next step is to resolve those two tables from the image (`config/symbols.txt` +
+a MEM1 scan for pointers to them, the same scan that found `0x80793510`/`0x80793748` for the chain) rather than to
+hook more PCs: the tables name the classes, and the classes name the missing event.
