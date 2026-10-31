@@ -111,3 +111,37 @@ No game, no GPU, no `tls_runner.exe`. If you need to check that a rename is cons
 * Do not touch Track B's paths, its dossier, or its README tables, and do not run its instruments.
 * Do not cite `docs/PROGRESS_LEDGER.json` as current: it is the 2026-10-09 milestone snapshot. The live figure is
   `python configure.py progress`.
+
+## 6. If you are running autonomously (no human in the loop between steps)
+
+You may keep working until you are blocked or out of budget, **but only under these rules** — they exist because
+this repository is shared with a Track B agent whose measurements a busy machine silently invalidates.
+
+**Loop over the queue in §2 in order. Never invent a new workstream.**
+
+**One unit of work = the largest batch that leaves the tree green.** A rename batch of 10–40 functions, or one C
+decompilation. After **every** unit, in this exact order:
+
+1. `ninja build/SLSEXJ/report.json` — clean.
+2. `python configure.py progress` — **no unit may drop** and the total may not go backwards. Record before/after.
+3. Append the unit to `docs/TRACK_A_LOG.md` **before** committing (so token exhaustion leaves an accurate log).
+4. Commit on `track-a`: `track-a: <what> (<n> names|1 fn) progress <before> -> <after>`.
+5. Only then start the next unit.
+
+**If a unit fails verification twice: `git restore .`, record the failure and the reason in the log, and move to
+the next unit.** Never leave a rename half-applied — `config/symbols.txt` and `src/` disagreeing is a broken link,
+which is worse than the unrenamed function.
+
+**Hard stops — stop immediately and write the handoff note instead of continuing:**
+
+* a unit that needs to touch a Track B path (`recomp/`, `build/recomp/`, the dossier, `docs/evidence/`);
+* a change that would move any unit's match below its current value;
+* a request from the human to pause, or a declared Track B measurement window (no builds, then);
+* your budget is nearly spent — prefer stopping cleanly at a committed unit over starting a large one.
+
+**Compaction safety:** at the start of each unit, re-read `CONTRIBUTING_TRACKS.md` and this file. Do not rely on a
+summary of them. If you are unsure whether a path is yours, it is not — ask or skip it.
+
+**When you stop** (budget, blocking condition, or the queue is done), leave the branch pushed and the log current,
+and end with: what landed, the progress numbers, and the next 3–5 candidates ranked by Track B payoff.
+
