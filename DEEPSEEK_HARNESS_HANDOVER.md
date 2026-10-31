@@ -14537,3 +14537,30 @@ $env:TLS_BATCH_PROBE='3300'; build\recomp\tls_runner.exe --window --minimized --
 # match by batch, not by frame number, and report the ratio per batch: that is the shading gap as a function
 # of the draw stream, which is the form the migration can act on.
 ```
+
+**13. The field re-measured under the fixed renderer: the picture is alive, and the entry chain is still never
+entered.** AP-AP's field bound ("guest 3300 / 3800 / 4400 are all pure white and 3800 is byte-identical to 4400")
+was measured **through the white-out**, and white is a fixed point of the broken pipeline - so it could not
+distinguish a frozen field from a frozen *renderer*. Re-ran it with the fix in place: 4 600 frames, `TLS_SCISSOR=1
+TLS_NO_FORCE_BLEND=1 TLS_ENTRY_PROBE=1`, `TLS_SHOT_GUEST=1`, shots at guest 2800/3300/3800/4400, input extended
+past the plateau (26 extra `A` presses from 1900 to 4400 plus one at 4512), 195.7 s, exit 0, `Seq: Boot -> Stra ->
+Titl -> Game`, save 1 348 992 B (so progression and the save are unaffected by the fix):
+
+| guest frame | mean RGB | luma | >250 |
+|---|---|---|---|
+| 2800 | (146.34, 152.71, 146.29) | 150.08 | 13.71 % |
+| 3300 | (145.94, 152.45, 146.30) | 149.81 | 13.73 % |
+| 3800 | (147.21, 153.86, 147.75) | 151.18 | 13.83 % |
+| 4400 | (145.58, 152.81, 147.41) | 150.04 | 12.40 % |
+
+and **3800 vs 4400 is no longer identical**: `changed > 8` on **9.83 %** of pixels, `mean |d| 6.55`, `max 165`
+(3300 vs 3800: 4.71 %). The four frames are the cave with the hero in it, animating
+(`docs/evidence/aq_field_fixed_strip.png`). So the *renderer* was frozen, not necessarily the field.
+
+**What did not change: the entry chain is still never entered.** `TLS_ENTRY_PROBE=1` printed **0 lines in 4 600
+frames** again, under the fixed renderer - so AP-AP's `+0x54F0` / `0x8036F5C8-0x8036F5D8` finding is **not** a
+rendering artifact, and priority C keeps its shape: the question is still *which menu/tutorial task should call
+that chain and does not*. Two caveats, stated so the next session does not over-read the table: the extended input
+moves the scene, so **a guest frame number is still not comparable across runs** (2800 here is a bright scene at
+luma 150, while the gate's 2800 is the dark cave at 33.3), and "the picture animates" is not "input is accepted" -
+the run reaching `Game` and creating the save is the only input evidence in this run.
