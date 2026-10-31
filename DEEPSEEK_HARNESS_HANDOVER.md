@@ -14564,3 +14564,26 @@ that chain and does not*. Two caveats, stated so the next session does not over-
 moves the scene, so **a guest frame number is still not comparable across runs** (2800 here is a bright scene at
 luma 150, while the gate's 2800 is the dark cave at 33.3), and "the picture animates" is not "input is accepted" -
 the run reaching `Game` and creating the save is the only input evidence in this run.
+
+**14. What promoting the fix would cost, measured on the gate's own frames (and why it is still not promoted).** One
+run with the gate's exact input script and `TLS_SHOT_FRAMES='2800,3500'` under `TLS_SCISSOR=1
+TLS_NO_FORCE_BLEND=1` (`logs_ap/aq_gate_fixed_probe.log`, 3 520 frames, exit 0, handover 1680, save 1 348 992 B):
+
+| gate frame | recorded reference (through the white-out) | with the fix |
+|---|---|---|
+| guest 2800 (content) | luma **33.3**, `>250` 0.00 % | luma **50.04**, `>250` 0.00 % |
+| guest 3500 (popup) | luma **253.63** (the white plateau + popup) | luma **48.17**, `>250` **2.02 %** |
+
+The fixed 3500 is the cave interior with the hero and a legible "NEW TUTORIAL" band and (B) prompt
+(`docs/evidence/aq_gate_fixed_pair.png`: 2800 | 3500), i.e. the popup the gate was written to assert is *there*,
+on top of a real scene instead of on top of a wash. So promoting the two switches is **not a re-record, it is a
+redesign of the gate's assertions**: `$POPUP_LUMA_MIN = 200` and `$CONTENT_LUMA_MIN/MAX = 15..120` both encode the
+old plateau, and a hash re-recorded on a frame that also carries the layer's remaining texture defects (the 2800
+frame shows a red-dominant rock and one black rectangle - AP-AI's `red=` census names the former) would cement
+those defects as "expected".
+
+Not promoted, therefore, and the reasons are worth keeping: (a) the gate would stop being able to fail on a
+white-out - the exact regression it caught; (b) new hashes would be recorded on a renderer that AGENTS.md §1
+marks for replacement; (c) the title/menu/page frames were not re-validated under the switches. The recipe stays
+in item 7, and a session that promotes should do it with the five points above on the table, twice, and with the
+luma assertions re-derived from the new frames rather than loosened until they pass.
