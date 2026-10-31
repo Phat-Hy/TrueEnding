@@ -14779,3 +14779,45 @@ it is table-dispatched, like the five chain roots. So the engine's setup and its
 table-driven, and the productive next step is to resolve those two tables from the image (`config/symbols.txt` +
 a MEM1 scan for pointers to them, the same scan that found `0x80793510`/`0x80793748` for the chain) rather than to
 hook more PCs: the tables name the classes, and the classes name the missing event.
+
+**20. THE FIELD IS INTERACTIVE - and every previous session measured it with the wrong button.** The tutorial
+popup's own prompt is **(B)**, and every input script this project has used (`TLS_INPUT_SCRIPT` in the gate, in
+AP-AP's field probe, and in every `page_run`) presses **A only**. Two runs, both under the AP-AQ fix, isolate the
+consequence:
+
+| what | A-only (previous sessions, and item 15a) | with one **B** press at 1900-1912 |
+|---|---|---|
+| `PHASE 8 -> 0` (the popup's own transition) | at f=**3265**, i.e. 1242 frames after entering phase 8 | at f=**2063**, i.e. **340** frames after entering phase 8 |
+| "NEW TUTORIAL" band at guest 3800 | still up | **gone** |
+
+So **B dismisses the tutorial band and completes the phase-8 transition ~900 frames earlier than A ever did**, and
+the field's state machine then rests in phase 0 (the state AP-AG already identified as the correct resting state of
+a loaded field) instead of sitting in phase 8 with `request=2`.
+
+**21. And with the popup dismissed, direction input moves the field.** Same fix, same B press, and one variable
+changed - whether direction buttons are held (LEFT/UP/DOWN/RIGHT, 100-frame holds from 2100 to 4300):
+
+| frame pair (guest) | B only (no directions) | B + direction holds |
+|---|---|---|
+| 3000 -> 3400 | 80.97 % changed > 8 | 97.11 % |
+| 3400 -> 3800 | 98.76 % | 94.46 % |
+| **3800 -> 4200** | **11.15 %** (the picture settles, luma 152.7 -> 150.3) | **94.71 %** (still moving, luma 72.6 -> 47.7) |
+
+`docs/evidence/aq_move_strip.png` shows what that is: a camera moving through the cave with the hero, versus a
+static frame. The late-window comparison is within-run, so the attribution is clean: **the difference between a
+settling picture and a moving one at guest 3800-4200 is the directional input**, and the picture only gets there
+after B has dismissed the popup.
+
+**What this does to the dossier.** It retires "the field is frozen / the field is bounded" as a *defect statement*:
+under the AP-AQ renderer fix plus the button the popup asks for, the field dismisses its popup, leaves phase 8,
+cycles into phase 0 and responds to movement. Three things are still true and should not be confused with it: the
+entry chain (`0x8036F5D8`) is still never entered (items 16-19 - it needs a menu/parts task class that is never
+instantiated), the task graph is still slot-static, and none of the earlier *rendering* regressions are addressed by
+input. But the priority-C question as AP-AP framed it ("which task should call the chain and why the field never
+advances") was measuring a field that had never been asked to dismiss its own popup:
+
+```powershell
+# the script every future field measurement should start from (A through the title, then B for the popup)
+$env:TLS_INPUT_SCRIPT='600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A,1900-1912:B'
+# and for movement: 2100-2200:LEFT,2400-2500:UP,2700-2800:LEFT,3000-3100:DOWN,3300-3400:RIGHT,3600-3700:UP,3900-4000:LEFT,4200-4300:RIGHT
+```
