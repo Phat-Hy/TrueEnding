@@ -29,16 +29,13 @@ echo           with WASD / arrows. Pressing only Confirm never dismisses
 echo           it, which is why earlier builds looked "frozen" here.
 echo.
 
-REM --- AP-AQ renderer fixes, on for INTERACTIVE play only (2026-10-30) ----------
-REM Without these two the Chapter-1 field renders as a white wash: the EFB copy
-REM tail's scissor never applied (D3D11 ScissorEnable was FALSE) and guest-disabled
-REM blends were executed as adds. With them, guest 3300 is the cave with the
-REM tutorial popup on it (luma 142.29 -> 36.58, >250 0.06% -> 0.00%) and the field
-REM responds to movement. They are deliberately NOT the build defaults yet: the
-REM invariant's two recorded hashes were taken without them, so tools/invariant.ps1
-REM removes/sets its own environment and is unaffected by this file. Handover
-REM 5c.46 AP-AQ items 6/7/14/20/21 have the measurements and the promotion cost.
-set TLS_SCISSOR=1
-set TLS_NO_FORCE_BLEND=1
+REM --- AP-AR: the AP-AQ renderer fixes are now the BUILD DEFAULTS -----------------
+REM The guest's GX scissor (BP 0x20/0x21) is applied and guest-disabled blends are
+REM no longer promoted to adds, so nothing has to be set here any more - the two
+REM former switches (TLS_SCISSOR=1, TLS_NO_FORCE_BLEND=1) are no-ops that ask for the
+REM default. The gate references were re-recorded for exactly this default (guest
+REM 2800 luma 50.04, guest 3500 luma 48.17 with >250 2.02 %, two independent runs
+REM each). To see the superseded picture, set TLS_NO_SCISSOR=1 and TLS_FORCE_BLEND=1.
+REM Handover 5c.46 AP-AR has the measurements; items 6/7/14/20/21 of AP-AQ the cause.
 
 start "" "%~dp0build\recomp\tls_runner.exe" --window --minimized --fps 60 %*

@@ -67,7 +67,10 @@ static uint8_t s_src_factor = 4; // GX_BL_SRCA
 static uint8_t s_dst_factor = 5; // GX_BL_INVSRCA
 /* GX scissor, BP 0x20 (top-left) / BP 0x21 (bottom-right). GX writes both with a +342 bias in
  * each 12-bit field, which is why BP 0x20 = 0x156156 decodes to (0,0) and not to (342,342).
- * Snapshot per batch; consumed only by the TLS_SCISSOR=1 diagnostic (handover 5c.46 AP-AP). */
+ * Snapshot per batch and part of the batch-merge predicate, so a scissor change splits a batch.
+ * Since handover 5c.46 AP-AR the backend APPLIES this by default (it was AP-AP's diagnostic
+ * switch, and the AP-AP addendum's "it changes nothing" measurement was an inert-switch bug);
+ * TLS_NO_SCISSOR=1 in recomp/gfx_d3d11.c restores the unclipped behaviour. */
 static uint16_t s_scissor[4] = {0, 0, 639, 447};
 static bool s_scissor_valid = false;
 static bool s_blend_subtract = false;
@@ -594,7 +597,9 @@ void gx_pipeline_init(void) {
     s_batch_barrier = false;
     /* Scissor state does NOT persist across frames the way texture/TEV state does in this
      * pipeline: a frame that never writes BP 0x20/0x21 draws with the full target, which is
-     * the shipping behaviour. Only the TLS_SCISSOR=1 diagnostic reads it (5c.46 AP-AP). */
+     * the shipping behaviour. The backend applies this rect by default since 5c.46 AP-AR
+     * (AP-AP's TLS_SCISSOR=1 diagnostic is what proved the decode; the application is now
+     * unconditional, with TLS_NO_SCISSOR=1 as the escape hatch - see recomp/gfx_d3d11.c). */
     s_scissor[0] = 0;
     s_scissor[1] = 0;
     s_scissor[2] = 639;

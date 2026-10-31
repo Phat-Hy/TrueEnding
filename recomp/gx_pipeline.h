@@ -393,13 +393,14 @@ typedef struct {
     /* GX scissor (BP 0x20/0x21) in force when this batch was opened, in EFB pixels with GX's
      * +342 view bias removed, plus whether the guest wrote a scissor inside the frame.
      *
-     * The shipping path has never applied a scissor (handover 5c.46 AP-AP): the guest's
+     * Before handover 5c.46 AP-AQ the shipping path never applied a scissor: the guest's
      * downscale/blur chain is drawn into a 160x112 or 80x56 corner of the EFB under one, and
-     * the host draws it across the whole 640x448 target, which is the AP-AI/AP-AP white-out.
-     * Only the TLS_SCISSOR=1 diagnostic (recomp/gfx_d3d11.c) consumes these fields, so the
-     * default path is byte-identical to before. Field order measured, not assumed: y in bits
-     * 0..11 and x in bits 12..23, because the other order does not reproduce the copy source
-     * rects the guest issues beside each scissored draw. */
+     * the host drew it across the whole 640x448 target, which is half of the AP-AI/AP-AP
+     * white-out. recomp/gfx_d3d11.c applies these fields by DEFAULT since AP-AR (AP-AP's
+     * TLS_SCISSOR=1 diagnostic is what proved the decode; TLS_NO_SCISSOR=1 is the escape
+     * hatch). Field order measured, not assumed: y in bits 0..11 and x in bits 12..23,
+     * because the other order does not reproduce the copy source rects the guest issues
+     * beside each scissored draw. */
     uint16_t scissor[4];
     bool scissor_valid;
 } GxDrawBatch;

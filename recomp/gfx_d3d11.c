@@ -409,7 +409,8 @@ typedef struct {
      * unless the bound rasterizer state enables scissoring, and until AP-AQ the only
      * rasterizer state in the backend had ScissorEnable=FALSE, so the AP-AP diagnostic
      * `TLS_SCISSOR=1` could not clip anything - which is what its "byte-identical frame"
-     * result actually measured (handover 5c.46 AP-AQ). */
+     * result actually measured (handover 5c.46 AP-AQ). Bound on every batch since AP-AR
+     * promoted the fix; TLS_NO_SCISSOR=1 restores the old single-state path. */
     ID3D11RasterizerState* rs_scissor;
     ID3D11Texture2D* gx_tex_white;
     ID3D11ShaderResourceView* gx_tex_white_srv;
@@ -724,8 +725,9 @@ bool d3d11_init(HWND hwnd, const GfxConfig* config) {
     rdesc.DepthClipEnable = FALSE;
     ID3D11Device_CreateRasterizerState(s_d3d11.device, &rdesc, &s_d3d11.rs_cull_none);
     /* Second instance, identical except that scissoring is enabled: RSSetScissorRects has no
-     * effect without it (D3D11_RASTERIZER_DESC::ScissorEnable). Bound only when TLS_SCISSOR=1
-     * asks for the guest's BP 0x20/0x21 rect. */
+     * effect without it (D3D11_RASTERIZER_DESC::ScissorEnable). Bound whenever the guest's
+     * BP 0x20/0x21 rect is applied, which since handover 5c.46 AP-AR is the DEFAULT; the
+     * pre-AP-AR behaviour is reachable with TLS_NO_SCISSOR=1. */
     rdesc.ScissorEnable = TRUE;
     ID3D11Device_CreateRasterizerState(s_d3d11.device, &rdesc, &s_d3d11.rs_scissor);
 
@@ -3463,10 +3465,22 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                     // it to pure (255,255,255) where a replace would have written the sampled
                     // texture's own (174,183,172). That is the first saturation of the
                     // composite tail, six vertices before the copies AP-AP's addendum blamed
-                    // (handover 5c.46 AP-AQ). `TLS_NO_FORCE_BLEND=1` is the one-run A/B.
-                    static int s_no_force_blend = -1;
-                    if (s_no_force_blend < 0) s_no_force_blend = getenv("TLS_NO_FORCE_BLEND") ? 1 : 0;
-                    if (!s_no_force_blend) {
+                    // (handover 5c.46 AP-AQ). `TLS_NO_FORCE_BLEND=1` was the one-run A/B.
+                    //
+                    // AP-AR: PROMOTED - the guest's blend enable is now obeyed by DEFAULT, because
+                    // forcing it is simply wrong against GX (and against every Dolphin reference
+                    // frame of this scene). `TLS_FORCE_BLEND=1` restores the old promotion for a
+                    // session that needs to re-measure the defect or reproduce a pre-AP-AR gate
+                    // reference. TLS_NO_FORCE_BLEND is consequently a no-op that asks for the
+                    // default. Measured on the gate's own frames (two independent runs each, 5c.46
+                    // AP-AR): guest 2800 luma 33.50 -> 50.04, guest 3500 luma 253.63 -> 48.17 with
+                    // `>250` 99.30 % -> 2.02 %.
+                    static int s_force_blend = -1;
+                    if (s_force_blend < 0) {
+                        const char* fb = getenv("TLS_FORCE_BLEND");
+                        s_force_blend = (fb && atoi(fb) != 0) ? 1 : 0;
+                    }
+                    if (s_force_blend) {
                         if (dst_factor == 1 || dst_factor == 5 || dst_factor == 7) {
                             blend_enable = true;
                         } else if (!batch->is_perspective && batch->has_texture && (batch->tex.format == 0 || batch->tex.format == 1 || batch->tex.format == 2 || batch->tex.format == 3 || batch->tex.format == 5)) {
@@ -3484,29 +3498,36 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
                         ID3D11DeviceContext_OMSetBlendState(s_d3d11.context, bs, NULL, 0xFFFFFFFF);
                     }
 
-                    /* GX scissor (BP 0x20/0x21). The shipping path has NEVER applied one, and that is
-                     * the AP-AI/AP-AP white-out: the guest's tail is a downscale/blur chain drawn into
-                     * a 160x112 (6.25 %) or 80x56 (1.56 %) corner of the EFB under a scissor, and this
-                     * backend drew every one of those quads across the whole 640x448 target. Measured
-                     * on guest frame 3300 with the tail cut off (TLS_BATCH_CUTOFF=114) the frame is
-                     * luma 91.59; with the tail and without the popup live (114 -> 122) the same frame
-                     * is 255.00 with 100 % of pixels above luma 250; the full frame is 142.29. Aurora,
-                     * clipping them, moves +0.8 % across the same eight draws.
-                     *
-                     * TLS_SCISSOR=1 applies the guest's rect, scaled from EFB pixels into the
-                     * aspect-preserving viewport, as a D3D11 scissor. It is a DIAGNOSTIC and defaults
-                     * OFF so every gate reference recorded before AP-AP stays valid; switching it on
-                     * changes every frame the guest scissor-limits, so the gate references would have
-                     * to be re-recorded (twice) before it could become the default.
+                    /* GX scissor (BP 0x20/0x21). Before AP-AQ this shipping path applied NO scissor,
+                     * and that is half of the AP-AI/AP-AP white-out: the guest's tail is a
+                     * downscale/blur chain drawn into a 160x112 (6.25 %) or 80x56 (1.56 %) corner
+                     * of the EFB under a scissor, and this backend drew every one of those quads
+                     * across the whole 640x448 target. Measured on guest frame 3300 with the tail
+                     * cut off (TLS_BATCH_CUTOFF=114) the frame is luma 91.59; with the tail and
+                     * without the popup live (114 -> 122) the same frame is 255.00 with 100 % of
+                     * pixels above luma 250; the full frame is 142.29. Aurora, clipping them,
+                     * moves +0.8 % across the same eight draws.
                      *
                      * AP-AQ CORRECTION: until AP-AQ this block called RSSetScissorRects while the
-                     * ONLY bound rasterizer state (rs_cull_none) had ScissorEnable = FALSE, and D3D11
-                     * ignores the scissor rectangles in that case - so the AP-AP addendum's
-                     * "the scissor changes nothing, mean |d| 0.000" measured an inert switch, not the
-                     * scissor. rs_scissor (ScissorEnable = TRUE) is bound here; the frame MUST move. */
-                    static int s_scissor_on = -1;
-                    if (s_scissor_on < 0) s_scissor_on = getenv("TLS_SCISSOR") ? 1 : 0;
-                    if (s_scissor_on) {
+                     * ONLY bound rasterizer state (rs_cull_none) had ScissorEnable = FALSE, and
+                     * D3D11 ignores the scissor rectangles in that case - so the AP-AP addendum's
+                     * "the scissor changes nothing, mean |d| 0.000" measured an inert switch, not
+                     * the scissor. rs_scissor (ScissorEnable = TRUE) is bound here; the frame
+                     * moves (b118 (255,255,255) -> (95,97,92) on an identical pre-tail frame).
+                     *
+                     * AP-AR: PROMOTED - applying the guest's rect is the DEFAULT. It changes every
+                     * frame the guest scissor-limits, which is why the two gate references were
+                     * re-recorded deliberately, twice, in AP-AR (guest 2800 luma 50.04, guest 3500
+                     * luma 48.17 with `>250` 2.02 %). `TLS_NO_SCISSOR=1` restores the pre-AP-AR
+                     * behaviour; combined with TLS_FORCE_BLEND=1 it reproduces the old build's
+                     * picture, which is how the superseded gate references stay reachable. The
+                     * rect is scaled from EFB pixels into the aspect-preserving viewport. */
+                    static int s_no_scissor = -1;
+                    if (s_no_scissor < 0) {
+                        const char* ns = getenv("TLS_NO_SCISSOR");
+                        s_no_scissor = (ns && atoi(ns) != 0) ? 1 : 0;
+                    }
+                    if (!s_no_scissor) {
                         D3D11_RECT sr;
                         if (batch->scissor_valid) {
                             const float sx = s_d3d11.vp_w / 640.0f;

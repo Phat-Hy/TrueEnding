@@ -154,13 +154,17 @@ copy issued next to it. Two host defects turn that into the white wash, and AP-A
 **The copy content AP-AP's addendum measured is downstream, not causal**: `0x9038D1C0` and `0x905C3000` really
 are 100 % byte-255 in guest memory, but the copies paint what the EFB holds at their own command - copy 49969 runs
 **6 vertices after** b118, and its source reads `(255,255,255)` because the host had just forced that. With
-`TLS_SCISSOR=1 TLS_NO_FORCE_BLEND=1`, guest 3300 renders the **Gurgan Cave with the tutorial popup on it**:
-luma **142.29 → 36.58**, pixels above luma 250 **0.06 % → 0.00 %** (`logs_ap/aq_pair_g3300.png`). Neither switch
-is promoted (both move the gate references); the recipe is AP-AQ item 7.
+both fixes guest 3300 renders the **Gurgan Cave with the tutorial popup on it**:
+luma **142.29 → 36.58**, pixels above luma 250 **0.06 % → 0.00 %** (`logs_ap/aq_pair_g3300.png`).
 
-What is then left is the **corner chain's own content**: an 80x56 RGBA8 EFB copy in this game is a median of
-**0.1 luma / 95.7 % zero texels** over the 17 263 `80x56_6` dumps in Dolphin's corpus, while the layer's is
-byte-255 - a TEV/combiner-class gap, bounded with its next command in AP-AQ item 8.
+**AP-AR promoted both fixes to the build defaults** (they are GX semantics, not options), re-recorded the gate's
+two references deliberately on two independent runs each (guest 2800 `8938E369…`, guest 3500 `F97A5863…`,
+luma 50.04 / 48.17, `>250` 0.00 % / 2.02 %) and replaced the "popup must be bright" assertion with a
+non-saturation + bright-pixel-window check. `TLS_NO_SCISSOR=1` and `TLS_FORCE_BLEND=1` reproduce the superseded
+behaviour exactly (measured: `6465ACEF…` / `C5535C7D…`), which is how the old references stay reachable. The
+layer's own remaining gap is the corner chain's **content** (an 80x56 RGBA8 EFB copy is a median of 0.1 luma /
+95.7 % zero texels over the 17 263 `80x56_6` dumps in Dolphin's corpus, while the layer's is byte-255) - a
+TEV/combiner-class gap, bounded with its next command in AP-AQ item 8.
 
 ## Aurora keeps EFB copies on the GPU, never in guest RAM (AP-AQ item 11)
 
