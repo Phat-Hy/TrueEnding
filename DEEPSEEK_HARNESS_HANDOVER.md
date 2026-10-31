@@ -14831,3 +14831,24 @@ advances") was measuring a field that had never been asked to dismiss its own po
 $env:TLS_INPUT_SCRIPT='600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A,1900-1912:B'
 # and for movement: 2100-2200:LEFT,2400-2500:UP,2700-2800:LEFT,3000-3100:DOWN,3300-3400:RIGHT,3600-3700:UP,3900-4000:LEFT,4200-4300:RIGHT
 ```
+
+**22. The game is playable now, without moving the gate: the AP-AQ fixes are on in `Play_TheLastStory.bat` (interactive
+only).** Wiring them into the interactive path is a different decision from promoting them as build defaults (item
+14), because the invariant's two recorded hashes do not see it: `tools/invariant.ps1` clears/sets its own
+environment, and a `.bat`'s `set` dies with its process tree. What changed:
+
+* `Play_TheLastStory.bat` now sets `TLS_SCISSOR=1` and `TLS_NO_FORCE_BLEND=1` before the `start`, with a comment
+  naming this section, and its banner tells the player that **the Chapter-1 tutorial popup asks for (B)** - pressing
+  only Confirm never dismisses it, which is exactly why earlier builds looked frozen there (items 20/21).
+* **Checked first, because the reason the switches were not promoted was "the title/menu/page frames were not
+  re-validated": the menus are unchanged.** Guest frames 400/900/1200/1600 under the switches are all
+  luma **90.43**, `>250` **8.28 %** (`docs/evidence/aq_menu_fixed_strip.png`) - the same blown radial vignette the
+  dossier already records for this screen in 5c.23 ("mean 90, corners 1, centre 241"), i.e. a pre-existing defect
+  these two switches neither cause nor fix. The part of the run that changes is the field.
+* Smoke test after the edit: `--window --minimized --frames 300` with the same environment boots and exits 0
+  (`logs_ap/c_launcher_smoke.log`), and the gate is still **PASS, attempt 1** at both recorded references (item 18's
+  run), because nothing about the gate's environment changed.
+
+So a user can now boot the port, press B at the popup, and walk the hero around Gurgan Cave, while the automated
+gate keeps guarding the old references until someone promotes the fixes deliberately (item 7) - the two decisions are
+independent, which is the point of putting them in different places.
