@@ -14708,3 +14708,30 @@ the popup's appearance**, and nothing in the field reacts. Combined with items 1
 localised to *what consumes the action*: the field cycles phase 8 <-> 0 with `request=2` set at `+0x54F0`, the only
 code that could turn that into scene state 1 (`fn_8036F268`) is reachable only through a virtual method of a class
 that is never created, and the action that should trigger that creation is being delivered.
+
+**18. The task graph is not only count-static, it is slot-static - nothing is created, destroyed or replaced in
+place for the whole field sequence.** Item 15's census watched only the task-manager **count**, so a task *replaced*
+in place (count stays 3, a slot's update/task pointer changes) would have read as "no change". `tls_task_census` now
+hashes the slot contents as well (`up`, `task` and word 0 of each 20-byte slot) and prints when either the count or
+a slot moves. One 4 600-frame run with everything on (`TLS_SCISSOR=1 TLS_NO_FORCE_BLEND=1 TLS_SCENE_SM_PROBE=1
+TLS_ENTRY_PROBE=1 TLS_ACTION_PROBE=1`, `logs_ap/c_taskslots.log`) printed **exactly one** line again:
+
+```
+[TLS SceneSM] f=2020 TASKS count=3 arr=0x80C96CB0:
+    [0 up=0x80570CFC task=0x80AEDCF0 w0=0x807C8AA8]
+    [1 up=0x80363DBC task=0x80B8DD10 w0=0x807C8AA0]
+    [2 up=0x803646C4 task=0x80B8DD10 w0=0x807C8AA0]
+```
+
+so from frame 2020 (when `GameTask::Init` hands over to `Update`) to frame 4 599 the task manager holds the same
+three slots, byte for byte. **The Chapter-1 field runs entirely inside `GameTask`; no popup task, no menu task and no
+map/parts task is ever registered, and no task is swapped in.** Together with items 15a/16/17 that closes the
+"which task should call the chain" question in the only form this run can answer: the chain's five entry points are
+virtual methods of classes the run never instantiates, the event that should instantiate them is an action the guest
+demonstrably receives, and the field's own `GameTask` state machine cycles phase 8 <-> 0 with `request=2` set and
+the only state-1 writer unreachable.
+
+**Instrument change (recomp/, inert unless `TLS_SCENE_SM_PROBE=1`):** `tls_task_census` now hashes every slot
+(20-byte slot: `+0` word 0, `+12` update fn, `+16` task) and prints on slot *or* count change, with `w0=` added to
+each slot in the line. The gate was re-run on the rebuilt binary afterwards: **PASS, attempt 1**, both recorded
+references unchanged.

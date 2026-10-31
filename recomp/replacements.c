@@ -2686,19 +2686,35 @@ static void tls_scene_sm_hit(int idx) {
 static void tls_task_census(CPUState* ctx) {
     extern int g_runner_current_frame;
     static u32 s_cnt = 0xFFFFFFFFu;
+    static u32 s_slots = 0xFFFFFFFFu;
     u32 mgr = mem_read32(ctx, 0x8087EE94u);
     if (!mgr) return;
     u32 cnt = mem_read32(ctx, mgr);
-    if (cnt == s_cnt) return;
-    s_cnt = cnt;
+    u32 arr = mem_read32(ctx, mgr + 8);
+    /* The COUNT is not the whole story (AP-AQ item 18): a task can be REPLACED in place - the count stays 3
+     * while a slot's update/task pointer changes - and a count-only watch reports that as "no change", which is
+     * exactly how the field's task graph looked static while the popup came and went. Hash the slot contents too
+     * and print whenever either the count or a slot moves. */
+    u32 slots = 0x811c9dc5u;
     {
-        u32 arr = mem_read32(ctx, mgr + 8);
+        u32 i;
+        for (i = 0; i < cnt && i < 8; i++) {
+            u32 slot = arr + i * 20u;
+            slots = (slots ^ mem_read32(ctx, slot + 12)) * 0x01000193u;
+            slots = (slots ^ mem_read32(ctx, slot + 16)) * 0x01000193u;
+            slots = (slots ^ mem_read32(ctx, slot + 0)) * 0x01000193u;
+        }
+    }
+    if (cnt == s_cnt && slots == s_slots) return;
+    s_cnt = cnt;
+    s_slots = slots;
+    {
         u32 i;
         printf("[TLS SceneSM] f=%d TASKS count=%u arr=0x%08X:", g_runner_current_frame, cnt, arr);
         for (i = 0; i < cnt && i < 8; i++) {
             u32 slot = arr + i * 20u;
-            printf(" [%u up=0x%08X task=0x%08X]", i, mem_read32(ctx, slot + 12),
-                   mem_read32(ctx, slot + 16));
+            printf(" [%u up=0x%08X task=0x%08X w0=0x%08X]", i, mem_read32(ctx, slot + 12),
+                   mem_read32(ctx, slot + 16), mem_read32(ctx, slot + 0));
         }
         printf("\n");
         fflush(stdout);
