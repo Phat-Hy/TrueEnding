@@ -1952,17 +1952,52 @@ int main(int argc, char** argv) {
     host_dump_mem_spec(&cpu);
 
     tls_gxcap_shutdown();
-    tls_aurora_shutdown_host();
+    /* Capture the arm state BEFORE shutdown (tls_aurora_shutdown_host clears it): the exit rule
+     * below is only needed on a run that actually loaded the DLL. */
+    {
+        extern int tls_aurora_live_on;
+        int aurora_armed = tls_aurora_live_on;
 
-    tls_debug_dump_full(&cpu, frame, "Runner Execution Completed");
+        tls_debug_dump_full(&cpu, frame, "Runner Execution Completed");
 
 #ifdef _WIN32
-    if (enable_window) {
-        gfx_backend_shutdown();
-    }
-    timeEndPeriod(1);
+        if (enable_window) {
+            gfx_backend_shutdown();
+        }
+        timeEndPeriod(1);
 #endif
 
-    cpu_free(&cpu);
+        cpu_free(&cpu);
+
+        /* THE AURORA EXIT HANG, closed host-side (5c.46 AP-AY §10) - and located by measurement,
+         * not guessed. The first attempt put ExitProcess() AFTER tls_aurora_shutdown_host() and it
+         * changed nothing: the log shows the end-of-run reports ([StoreWatch], [ReadWatch]), then
+         * "Buffer mapping Aborted" / "Device lost: Device was destroyed", and then the process
+         * stayed alive. So the hang is INSIDE aurora_shutdown() - Dawn tearing the device down with
+         * work still in flight - and never returns; everything after it is unreachable.
+         *
+         * There is nothing left to wait for at this point: the buffers are flushed, both dumps are
+         * written, the backend is shut down and the CPU state is released. So the aurora path ends
+         * the process here, before the DLL's own teardown, which is the same thing the two-session
+         * Stop-Process workaround did - except deterministic and without losing the log. The DLL is
+         * released with the process, so the file lock that blocked the next rebuild goes with it.
+         *
+         * Default path unaffected: no DLL, so a normal `return 0` and the exit code
+         * tools/invariant.ps1 reads. */
+        if (aurora_armed) {
+            /* ExitProcess is NOT enough, measured: it runs DllMain(PROCESS_DETACH) for every loaded
+             * module, so aurora's static pipeline-cache writer std::thread is destroyed during detach
+             * and the process dies with 0xC000001D (STATUS_ILLEGAL_INSTRUCTION) instead of exiting 0
+             * - the same SIGILL AP-AY recorded, only deferred to the exit path. TerminateProcess skips
+             * DLL detach and atexit entirely, which is exactly what "the run is over, tear nothing
+             * down" means; stdio is flushed above so no log line is lost. */
+            printf("[Runner] aurora armed: terminating before the DLL teardown (the exit hang)\n");
+            fflush(NULL);
+            TerminateProcess(GetCurrentProcess(), 0);
+        }
+        printf("[Runner] no aurora device; normal exit\n");
+        fflush(stdout);
+        tls_aurora_shutdown_host();
+    }
     return 0;
 }

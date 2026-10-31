@@ -151,7 +151,7 @@ void tls_aurora_set_guest_ram(const void* mem1, uint32_t mem1_size, const void* 
     s_mem2_size = mem2_size;
 }
 
-void tls_aurora_frame_end(uint32_t guest_frame) {
+void tls_aurora_frame_end(uint32_t guest_frame, int at_present) {
 #ifdef _WIN32
     /* ARMED HERE, not in the tap: the parser's tap is gated by the same flag the capture uses
      * (one global test per byte), so the arm decision has to live on the once-per-frame path -
@@ -175,13 +175,30 @@ void tls_aurora_frame_end(uint32_t guest_frame) {
         }
         s_mapped = 1;
     }
-    /* Feed the whole requested range; the picture is taken on its last frame. A range rather than
-     * one frame because a single frame into a fresh processor is missing the GX state its draws
-     * inherit - the harness has the same trap and answers it with a window. */
+    /* Feed the whole requested range; the picture is taken at the first DISPLAY BOUNDARY at or after
+     * `s_to`. A range rather than one frame because a single frame into a fresh processor is missing
+     * the GX state its draws inherit - the harness has the same trap and answers it with a window.
+     *
+     * WHY `at or after` AND NOT `== s_to`: the guest renders a frame in two halves, so the counter
+     * that lands exactly on `s_to` may be the half that issues only EFB copies (measured on the
+     * field: alternate presents fed 0 draws and 3 copies). Taking the picture at the next boundary
+     * that the guest itself displays (an XFB copy) is the frame the layer also presents. */
     if (s_from >= 0 && (long)guest_frame < s_from) { s_len = 0; return; }
-    if (s_to >= 0 && (long)guest_frame > s_to) { s_len = 0; return; }
+    if (s_to >= 0 && (long)guest_frame > s_to + 8) { s_len = 0; return; }
     if (s_from < 0 && s_len < 4096) { s_len = 0; return; }
-    const int is_last = (s_to < 0) ? 1 : ((long)guest_frame == s_to);
+
+    /* A frame that is NOT the guest's own display boundary keeps its bytes: the guest renders a
+     * frame in two halves, so the half that issues only EFB copies must not become an aurora frame
+     * (aurora clears per fed frame, which is what turned the field frame black - 5c.46 AP-AZ C). */
+    if (!at_present) {
+        if (s_len > (8u << 20)) s_len = 0;   /* safety valve: a loop that never presents is broken */
+        return;
+    }
+
+    static int s_done = 0;
+    if (s_done) { s_len = 0; return; }
+    const int is_last = (s_to < 0) ? 1 : ((long)guest_frame >= s_to);
+    if (is_last) s_done = 1;
     int draws = 0, copies = 0;
     s_frame(s_buf, (uint32_t)s_len, is_last, &draws, &copies);
     static uint8_t* rgba;

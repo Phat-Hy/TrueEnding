@@ -4493,6 +4493,10 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
             fflush(stdout);
         }
     }
+    /* Captured BEFORE the reset: the aurora feed must know whether the guest displayed this frame
+     * (an XFB/scanout copy is the guest's own "frame finished" marker). Reading s_xfbs_this_frame at
+     * the end_frame call below would always see 0, because the counter is cleared here. */
+    const int xfb_boundary_this_frame = s_xfbs_this_frame;
     s_clears_this_frame = 0;
     s_xfbs_this_frame = 0;
 
@@ -4590,7 +4594,7 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
      * flip. Everything above - viewport, batches, per-batch copy service, textures - has
      * already run, which is the whole point. */
     if (s_flush_only) {
-        gx_pipeline_end_frame();
+        gx_pipeline_end_frame(0);   /* a flush is not the guest's frame boundary */
         return true;
     }
     d3d11_capture_efb_snapshot();
@@ -4617,7 +4621,7 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
         if (!s_on_xfb || s_xfbs_this_frame > 0)
             IDXGISwapChain_Present(s_d3d11.swap_chain, s_d3d11.vsync ? 1 : 0, 0);
     }
-    gx_pipeline_end_frame();
+    gx_pipeline_end_frame(xfb_boundary_this_frame > 0 ? 1 : 0);   /* the guest's own display boundary */
     return true;
 }
 

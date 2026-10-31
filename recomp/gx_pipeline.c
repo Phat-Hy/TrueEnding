@@ -803,12 +803,15 @@ static void xf_probe_dump(void) {
     fflush(stdout);
 }
 
-void gx_pipeline_end_frame(void) {
+void gx_pipeline_end_frame(int at_present) {
     if (xf_probe_active()) xf_probe_dump();
     /* TLS_GX_CAPTURE closes the frame here: this is the point the backend presents, i.e.
      * after every GX command the guest issued for the frame has been consumed. */
     if (tls_gxcap_on) tls_gxcap_frame_end((uint32_t)g_runner_current_frame);
-    tls_aurora_frame_end((uint32_t)g_runner_current_frame);
+    /* The aurora feed needs the distinction the capture does not: a GXDrawDone flush also lands
+     * here (gfx_d3d11.c's flush-only path), so `at_present` keeps aurora's frame boundary at the
+     * guest's own present and lets the flush bytes accumulate into the same frame. */
+    tls_aurora_frame_end((uint32_t)g_runner_current_frame, at_present);
 }
 
 void gx_pipeline_set_vtx_desc(uint32_t attr, uint32_t type) {

@@ -15979,3 +15979,65 @@ Build green with one more object (**472**, was 471). No gate impact: the change 
 **3. What this says about the two tracks, in one line.** Track A gives Track B **names** (now demonstrably consumed, above) and, for a few functions, readable C; it gives Track B **no runtime behaviour**, because the runner links no `src/` object and executes the same retail instructions (`CONTRIBUTING_TRACKS.md`). The asymmetry is now measured on both sides rather than argued.
 
 **4. Changes.** `recomp/tls_sym.c` / `recomp/tls_sym.h` (new), `recomp/host_runner.c` (four print sites + the include), `tools/recomp_harness.py` (the new object in the support table), this file. **0 changes to `src/`.** Build green (459 chunks / **472** objects), gate untouched (no draw path changed, references not re-recorded).
+
+---
+
+### AP-BC. THE AURORA LIVE PATH FEEDS WHOLE FRAMES AND EXITS BY ITSELF — and its live title plate measures **205.62 / centre 220 / corner 131.1** against Dolphin's own frame **203.98 / 193.7 / 127.7** and the layer's **90.43 / 255 / 0**, so priority B's plate defect is the LAYER's and the migration retires it by construction
+
+Three results, all measured on the current build. Two close items that have been open for two sessions; the third is the first direct evidence that aurora reproduces hardware on the exact screen the layer has failed on since 5c.23.
+
+**1. The exit hang is CLOSED, and the fix is not the one the first attempt tried (measured, twice).** AP-AY §10 recorded that every `TLS_AURORA` run had to be ended with `Stop-Process` and that the DLL then blocked the next rebuild. The first attempt put `ExitProcess(0)` after `tls_aurora_shutdown_host()`; the log showed why that is unreachable — the end-of-run reports print, then `aurora_shutdown()` emits "Buffer mapping Aborted" / "Device lost: Device was destroyed" and **never returns**, so nothing after it runs. The second attempt moved the call *before* the shutdown and printed in the same run:
+
+```
+[Runner] aurora armed: ending the process before the DLL teardown (the exit hang)
+```
+and the process still died with **`0xC000001D` (STATUS_ILLEGAL_INSTRUCTION)** — because `ExitProcess` runs `DllMain(PROCESS_DETACH)` for every loaded module, so aurora's static pipeline-cache writer `std::thread` is destroyed during detach: the same SIGILL AP-AY recorded, merely deferred into the exit path. The call that skips detach and `atexit` entirely is `TerminateProcess(GetCurrentProcess(), 0)`, and with it:
+
+| run | frames | result |
+|---|---|---|
+| title, `FROM=TO` 440..452 | 460 | **exit code 0, 30 s**, no `Stop-Process` |
+| field, `FROM..TO` 2794..2800 | 2 810 | **exit code 0, 255 s**, no `Stop-Process` |
+
+Stdio is flushed before the call, so no log line is lost. The default path is untouched: no DLL, so a normal `return 0` and the exit code `tools/invariant.ps1` reads.
+
+**2. The feed boundary is now the guest's own display marker, and the half-frames are gone.** `gx_pipeline_end_frame()` is called from two places — the GXDrawDone flush path and the present path — and a first attempt distinguished *those* two. It changed nothing (measured: the field feeds were byte-identical before and after), because the alternation is **present against present**, not flush against present: the two-half present gate renders a guest frame across two presents, and the half that issues only EFB copies was being fed to aurora as a whole frame, which aurora then cleared and rendered black.
+
+The correct boundary is the guest's own "this frame is finished" marker, the **XFB/scanout copy** (`s_xfbs_this_frame`, captured *before* the per-frame reset — reading it at the `end_frame` call always sees 0, which is why the first version never armed). Bytes now accumulate across non-display boundaries and the frame is fed once, at the display boundary, as the whole guest frame the layer also renders.
+
+| field window `FROM=2794 TO=2800` | before | **after** |
+|---|---|---|
+| feeds and their draw counts | 0 / 220 / 0 / 219 / 0 / 207 / **0** | **220 / 219 / 207 / 203** |
+| every feed is a whole frame? | no — four of seven carried **0 draws, 3 copies** | **yes** |
+| readback | 640x448, **`mean=(0.00,0.00,0.00)`** (black) | 640x448, **`mean=(10.37,12.72,7.09)`** |
+| process exit | hung | **code 0** |
+
+The title is unchanged by the new rule (every title frame carries an XFB copy): feeds of 106 draws, readback `mean=(205.62,205.62,205.62)`, exit 0 — the same numbers as before the change, which is the control that the boundary rule is not perturbing scenes that already fed correctly.
+
+**3. THE TITLE PLATE: aurora lands on Dolphin's numbers.** The same live readback, at a settled title frame, measured like every other plate reference in this dossier (full-image mean, 40x40 centre, 20x20 corner):
+
+| title plate | mean luma | centre 40x40 | corner 20x20 | >250 |
+|---|---|---|---|---|
+| **Dolphin** (`Dump\Frames`, AP-AV addendum 3) | **203.98** | 193.7 | 127.7 | 0.02 % |
+| **aurora live** (this section, `aurora_live_452.ppm`) | **205.62** | 220.0 | **131.1** | **0.00 %** |
+| **the layer** (AP-AV, guest 900) | **90.43** | 255.0 | 0.0 | 8.28 % |
+
+The corner (131.1 vs 127.7), the mean (205.62 vs 203.98) and the absence of saturation agree; the centre differs by 26 because the 40x40 sample lands on different logo content at a different moment. **This is the first same-number comparison on the screen priority B has been stuck on, and it says the plate is not a GX-semantics defect that a layer fix should chase - it is the layer's composite arithmetic (AP-AZ's `frame = 255 x mask.a`), and aurora already produces hardware's level.** That is the "the migration retires it" claim, measured rather than argued. Recorded honestly as a single-frame, single-run comparison: the aurora frame is at a different counter than the gate's guest 900, so it is a *screen* match, which is what the reference is for.
+
+**4. What is still open, stated.** (a) The aurora field frame is still **dark** — `mean=(10.37,12.72,7.09)` against the layer's cave at luma 36.5 — i.e. the AP-AN content gap (68 % zero texels in the copied payload) survives this fix; the feed was the frame-boundary problem, not the content problem. (b) `TLS_AURORA_FROM/TO` still gate on the **present** counter, which runs ~64 ahead of the guest frame, so a range aimed at "guest 2800" lands on a cutscene rather than the cave (AP-AY §11); the equality test needs a guest-keyed range, which is a one-line change to what `tls_aurora_frame_end` is handed. (c) P1's *equality* criterion is still not met: what is proven now is that the live path feeds whole frames and produces pictures, not that they equal the harness's byte for byte.
+
+**5. Changes.** `recomp/aurora_live_host.c` / `.h` (the display-boundary accumulate, the `at_present` parameter and its rationale, the range taking the first boundary at or after `TO`, the safety valve), `recomp/gx_pipeline.c` / `.h` (`gx_pipeline_end_frame(int at_present)`), `recomp/gfx_d3d11.c` (the flush passes 0, the present passes the captured XFB flag, the capture path untouched), `recomp/host_runner.c` (`TerminateProcess` on the aurora path only, with the two measured failures recorded). **0 changes to `src/`.** Build green (459 chunks / 472 objects).
+
+**6. Gate.** **PASS attempt 1** twice on this build at the unchanged references — handover 1680, content `B4646917…`, popup `22B1CE31…`, save 1 348 992 / 29 344 (`logs_ap/gate_apbc1.log` 304 s, `gate_apbc2.log` 325 s). No reference re-recorded: nothing that draws in the default path changed.
+
+**7. Run log** (one runner at a time; `--window --minimized`; save files deleted before each; the host was idle at 5-12 % for every run quoted).
+
+| # | what | result |
+|---|---|---|
+| 1 | gate, first build of the pair | **PASS attempt 1**, 304 s |
+| 2 | aurora, `FROM..TO` 2794..2800, 2 810 frames, *flush-vs-present* flag only | feeds still 0/220/0/219/0/207/0; readback black; **hung** - the flag was wrong and the exit fix was unreachable |
+| 3 | aurora, 440..452, 460 frames, `ExitProcess` before shutdown | exit **`0xC000001D`** in 30 s - detach destroys the writer thread |
+| 4 | aurora, 440..452, 460 frames, `TerminateProcess` | **exit code 0, 30 s**, readback `mean=205.62` |
+| 5 | aurora, 1700..1712, 1 760 frames | armed and mapped, **no GX traffic in that window** (the field's black/loading stretch) - a window to avoid |
+| 6 | aurora, 440..452, 460 frames, display-boundary accumulate | unchanged control: 106-draw feeds, `mean=205.62`, exit 0 |
+| 7 | aurora, 2794..2800, 2 810 frames, display-boundary accumulate | **whole-frame feeds 220/219/207/203**, readback `mean=(10.37,12.72,7.09)`, exit **code 0** in 255 s |
+| 8 | gate, final build | **PASS attempt 1**, 325 s |

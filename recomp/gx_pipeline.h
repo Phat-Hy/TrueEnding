@@ -96,7 +96,10 @@ void gx_pipeline_get_clear_color(float* rgba);
 
 // Reset per-frame primitive buffers
 void gx_pipeline_begin_frame(void);
-void gx_pipeline_end_frame(void);
+/* `at_present` distinguishes the guest's own frame boundary (1, the present path) from a mid-frame
+ * GXDrawDone flush (0). The GX capture closes on both - that is its recorded format - while the
+ * aurora feed closes only at the present, or it feeds half-frames (5c.46 AP-AZ C). */
+void gx_pipeline_end_frame(int at_present);
 
 // Feed data written to WGPIPE (0xCC008000)
 void gx_pipeline_feed_byte(uint8_t byte);
