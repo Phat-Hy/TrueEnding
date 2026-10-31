@@ -15186,7 +15186,32 @@ the texture - it is produced per fragment by the layer from a grey texel: either
 its evaluation of the batch's 3-stage TEV chain. That is the same class AP-AQ item 8 bounded (the combiner), now
 localised to one batch and one texture instead of "the corner chain".
 
-**6. The batch's TEV registers, read out of the same capture (raw, for the next measurement).** For the draws that
+**6. Three candidate causes then checked and EXCLUDED without a run** (all three were plausible, so this is the part
+that stops the next session re-deriving them):
+
+* **A shifted combiner field decode** (the class 5c.43 E found in the alpha path, and the first thing to suspect in
+  any TEV defect). `gx_pipeline.c` keeps BP `0xC0+2i` colour / `0xC1+2i` alpha and `compile_shaders.py` decodes
+  `a:12-15, b:8-11, c:4-7, d:0-3, bias:16-17, op:18, clamp:19, scale:20-21, dest:22-23` (colour) and
+  `d:4-6, c:7-9, b:10-12, a:13-15, rswap:0-1, tswap:2-3` (alpha). Checked field by field against Dolphin's
+  [`BPMemory.h` `TevStageCombiner`](https://raw.githubusercontent.com/dolphin-emu/dolphin/master/Source/Core/VideoCommon/BPMemory.h)
+  today: **the layer matches Dolphin on every field**, including the `0xC0`/`0xC1` interleave and the `scale`
+  position (20-21, not 22-23). So this is not a decode bug in this build.
+* **A konst leak** (the batch's registers `0xE2..0xE5` are all konst writes). Decoded with Dolphin's `TevReg`
+  layout (signed 11-bit fields, `/255`): K0 = **(255, 255, 255, 255)**, K1 = **(65, 51, 59, 255)** - a dark neutral
+  grey, not a red. The layer's extraction (`gx_tev_reg_component`: `ra` 0..10 = red, 12..22 = alpha, `bg` 0..10 =
+  blue, 12..22 = green, sign-extended, `/255`) matches Dolphin as well. A konst leak would darken the rock, it
+  cannot make it red.
+* **The CMPR decode** of the atlas. `gfx_d3d11.c` case 14 is standard DXT1: big-endian `c0`/`c1` as RGB565,
+  MSB-first 2-bit indices, `c0 <= c1` punch-through, four 4x4 sub-blocks per 8x8 tile, 0.5 B/texel. The atlas's own
+  bytes decode grey under exactly that rule. So the grey texel the shader receives really is grey.
+
+What is left is therefore the **arithmetic of the chain** (`TevRegular3`/`TevCompare3` with these three stages'
+arguments) or something the batch *inherits* (which texture map a stage samples, the raster channel, the swap
+tables) - and both are printable without guessing: `TLS_TEV_PROBE=2800` prints the layer's own decode of the same
+registers, and `TLS_BATCH_DUMP_GUEST=2800,1` prints which map/tex the batch bound.
+
+
+**7. The batch's TEV registers, read out of the same capture (raw, for the next measurement).** For the draws that
 sample `0x91EBC460` the last-written TEV state is
 
 ```
@@ -15207,7 +15232,7 @@ registers is one run away (`TLS_TEV_PROBE=2800`, which prints the decode "the sh
 layout is the reference. If it is a konst leak, the fix is exactly the kind `AGENTS.md` §1 forbids in this layer -
 another reason this is now a migration test rather than a work item.
 
-**7. The exact next experiment, with the trap already recorded.** `TLS_TEX_DUMP=0x91EBC460` **without**
+**8. The exact next experiment, with the trap already recorded.** `TLS_TEX_DUMP=0x91EBC460` **without**
 `TLS_TEX_DUMP_FRAME`: the per-frame form only dumps uploads that happen *inside* the named frame, and this atlas is
 cached before 2800, so a frame-gated dump produces **no file at all** (measured this session - 26 min run, no
 `tex_*91EBC460*` written, because the host was also loaded and the run took 1563 s; the shot was still
@@ -15215,18 +15240,18 @@ cached before 2800, so a frame-gated dump produces **no file at all** (measured 
 dump** means the layer's CMPR decoder, a **grey dump** means the 3-stage TEV evaluation, and the batch's stage
 parameters are already readable from the capture (`BP 0xC0..0xDF`, `drawstate.py`).
 
-**8. What this changes for the migration.** The red rock is now a **two-way migration test on one capture**: the
+**9. What this changes for the migration.** The red rock is now a **two-way migration test on one capture**: the
 same stream renders red in the layer (18.60 % red-dominant) and neutral in aurora (0.00 %), with both pictures from
 one launch and the layer's frame hash equal to the gate reference. The black area is a **shared** result and must be
 excluded from any "the migration fixed it" claim. And the instrument fix is a precondition for the migration's own
 A/B work: every `TLS_BATCH_PROBE` comparison from here on reports real R, G and B.
 
-**9. Changes.** `recomp/gfx_d3d11.c`: the three readbacks' channel order plus the comment block that carries the
+**10. Changes.** `recomp/gfx_d3d11.c`: the three readbacks' channel order plus the comment block that carries the
 measurement (0 changes to `src/`). Scratch instruments in `logs_ap/as/` (untracked): `defects.py` (red/black censuses
 and 8x8 maps), `presentation.py` (the channel-swap test that first ruled a swap *out* for the presented image),
 `texorigin.py` (which draws sample a texture, and a CMPR decode of it out of the capture's MEM2 plane).
 
-**10. Run log** (every launch `--window --minimized`, one at a time).
+**11. Run log** (every launch `--window --minimized`, one at a time).
 
 | # | what | result |
 |---|---|---|
