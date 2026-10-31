@@ -1572,8 +1572,10 @@ static ID3D11ShaderResourceView* get_or_upload_gx_texture(const GxTextureUnit* t
                 /* TLS_NO_GLOW=1 disables the rewrite for EVERY size, which is the A/B that asks
                  * whether the compensation is right on the class it WAS built for (the menu's
                  * full-screen radial glow is a 1386-vertex quad on the 64x64 sprite 0x907FC980 -
-                 * measured with TLS_BATCH_PROBE=900, handover 5c.46 AP-AT item 6). Diagnostic
-                 * only: it is never a default, and the gate asserts the default picture. */
+                 * measured with TLS_BATCH_PROBE=900, handover 5c.46 AP-AT item 7, where it leaves
+                 * the frame byte-identical: the sprite compensation is NOT the menu vignette's
+                 * cause). Diagnostic only: it is never a default, and the gate asserts the
+                 * default picture. */
                 static int s_no_glow = -1;
                 if (s_no_glow < 0) s_no_glow = getenv("TLS_NO_GLOW") ? 1 : 0;
                 bool glow_size_ok = (tu->width <= 64 && tu->height <= 64);
