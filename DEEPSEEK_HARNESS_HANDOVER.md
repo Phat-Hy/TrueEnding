@@ -14852,3 +14852,28 @@ environment, and a `.bat`'s `set` dies with its process tree. What changed:
 So a user can now boot the port, press B at the popup, and walk the hero around Gurgan Cave, while the automated
 gate keeps guarding the old references until someone promotes the fixes deliberately (item 7) - the two decisions are
 independent, which is the point of putting them in different places.
+
+**23. The gate's own frames are insensitive to the B press, which makes the promotion decision simpler.** Ran the
+gate's shape (3 520 frames, gate input script **plus** `1900-1912:B`, `TLS_SCISSOR=1 TLS_NO_FORCE_BLEND=1`,
+guest-keyed shots 2800/3500) and compared with item 14's A-only run in the same configuration:
+
+| guest frame | with the fix, A only (item 14) | with the fix **+ B** | recorded reference (no fix) |
+|---|---|---|---|
+| 2800 | luma **50.04**, `>250` 0.00 % | luma **50.04**, `>250` 0.00 % | luma 33.3 |
+| 3500 | luma **48.17**, `>250` 2.02 % | luma **48.17**, `>250` 2.02 % | luma **253.63** |
+
+Identical in both configurations (`docs/evidence/aq_gateB_pair.png`), and progression/save unchanged (`handover
+1680`, save 1 348 992 B). So the B press is a *field* control (items 20/21) and not something the gate's two frames
+see: **promoting the renderer fix needs a re-record of the two hashes and one re-derived assertion (the "popup must
+be bright" check, `$POPUP_LUMA_MIN = 200`, is false by construction once the popup sits on a real cave at luma
+48.17), and it does not need a change to the gate's input script.** That is the smallest honest form of the
+promotion, and it is still a decision to take deliberately (twice, with the reason), not a side effect of this
+session's work - which is why the fixes are on in `Play_TheLastStory.bat` (item 22) and off in the build.
+
+**Where the session ends, stated for the next one.** The white-out is fixed and measured (items 1-7), aura's copy is
+exact and its tail numbers are usable (items 11 and the correction), the pre-tail baseline is bounded (item 12), the
+field renders, dismisses its popup with **B** and responds to movement (items 13/20/21), the entry chain is localised
+to five table-slot-only virtual methods of never-instantiated menu classes (items 16-19), the task graph is
+slot-static with the census now watching slots (items 15/18), and the two switches are on for interactive play and
+off for the gate, with the promotion cost measured (items 14/22/23). Everything is committed; `src/` is untouched;
+the gate is **PASS, attempt 1** at both recorded references on the current binary.
