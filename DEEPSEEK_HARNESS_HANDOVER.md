@@ -31,6 +31,15 @@
 > the layer's is **mean 90 / corners 0 / centre 255**), so B is a *level* defect: the decoded mask
 > alpha is applied at full strength instead of scaled (`docs/evidence/at_menu_frames_400_900_1600.png`).
 
+> **AND AP-AT ITEM 11 IS THE NEXT SESSION'S CHEAPEST HIGH-VALUE EXPERIMENT**: every TEV stage
+> samples **texcoord 0** unless `TLS_TEV_TEXCOORD=1` (the uniform dump shows `st2` asking for
+> `coord=1` and receiving `uvsrc=0`), and that switch **halves the remaining layer-vs-aurora
+> difference at the gate's content frame** - mean |d| **11.20 -> 4.83**, changed pixels 48.13 % ->
+> 37.26 %, luma 45.58 -> 35.63 (`docs/evidence/at_texcoord_g2800.png`). It is **not promoted**:
+> it changes every batch whose stages name texcoord 1, and the menus, the popup band and a field
+> sequence are unmeasured under it. Measure those three, then re-record twice, deliberately, the
+> way AP-AR did the scissor.
+
 > **READ §5c.46 AP-AS (the section before AP-AT)** for the back-buffer channel-order bug it fixed
 > and the same-launch aurora pair that localised the rock to batch b48 - and note that its item 7
 > claim "every input measured neutral, so the divergence is in the fragment evaluation" is the
@@ -15425,3 +15434,14 @@ So **only guest 900 is the vignette frame**; the other three numbers in the doss
 | 9 | `TLS_BATCH_PROBE=900`, 1 000 frames | 30 s; the 27-batch menu ladder of item 7 |
 | 10 | `TLS_NO_GLOW=1`, shot 900, 1 000 frames | 30 s; **identical** 90.43 / 8.28 % -> the compensation is not the vignette's cause |
 | 11 | `pwsh tools/invariant.ps1` on the final binary | **PASS, attempt 1**, both references unchanged |
+
+**11. Addendum, measured after the fix was committed: the uv-source substitution is more than half of what is left at the gate's content frame.** The `TLS_TEV_UNIFORM` dump showed `st2` asking for `coord=1` and receiving `uvsrc=0`; `TLS_TEV_TEXCOORD=1` (an existing switch, default off "until measured") makes a stage that names texcoord 0/1 and whose batch declares it actually sample that coordinate. One launch, 2 810 frames, 119 s, the gate's script, guest-keyed shot 2800:
+
+| guest 2800 | default (shipped) | `TLS_TEV_TEXCOORD=1` | aurora (same capture) |
+|---|---|---|---|
+| mean RGB | (42.35, 46.45, 49.53) | **(36.63, 35.80, 32.17)** | (36.10, 37.42, 37.18) |
+| luma | 45.58 | **35.63** | 37.00 |
+| red-dominant | 0.00 % | 0.00 % | 0.00 % |
+| **mean &#124;d&#124; vs aurora** | **11.20** (48.13 % of pixels changed by > 8) | **4.83** (37.26 %) | - |
+
+(`docs/evidence/at_texcoord_g2800.png` = default | texcoord | aurora | 4x difference.) For context, the same pair before the AP-AT fix was mean |d| **19.81** / 71.13 %, so the upload guard took it 19.81 -> 11.20 and the coordinate selection takes it to 4.83. **What the picture adds to the numbers:** with the switch on the water drops from a bright flat blue to near-black, which is aurora's *level*, but it is **still not rippled** - so the water's remaining divergence is the sampled *content*, not the coordinate. **Not promoted**, deliberately: this changes every batch whose stages name texcoord 1 (menus, the popup band and the whole field are unmeasured under it), and a global sampling change needs those three measured and then two deliberate re-records - the same bar AP-AR applied to the scissor and the blend. That is the next session's cheapest high-value experiment, and it is one run per configuration.
