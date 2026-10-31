@@ -36,6 +36,21 @@
 > (53.08,54.07,50.56) for both the EFB at 50045 and the game's own copy at 50049) and the **1.78x** is the
 > blit at 50127 that samples it - so the copy is not the defect and the sampling draw is (item 11).
 
+> **PRIORITY C IS NOW LOCALISED - read AP-AQ items 13, 15, 15a, 16, 17, 18 and 19 before touching the field.** The
+> previous session's "the field is frozen" was the **renderer**: under the fix, guest 3800 vs 4400 changes **9.83 %**
+> of pixels, and the game's own state machine **cycles phase 8 -> 0 at frame 3265** (`g2_3468` 0->1->0) while the
+> `+0x5538` scene state stays 0 and `+0x54F0` stays `request=2`. The task graph is **slot-static** - one census line
+> in 4 600 frames (count=3 at f=2020, unchanged to f=4599, slot hashes now watched too) - and `GameTask` runs every
+> frame (1285 updates, first 2020, last 4599). The entry chain is cut at **five functions with no direct caller and
+> no materialised pointer anywhere in the image**: they exist only as table slots (`0x8074F0E8`, `0x8074F5E0`,
+> slot 2 of `0x8078A4C0`, and **slot 9 of the two 24-entry vtables `0x80793510` / `0x80793748`** - two sibling menu
+> classes), and the consumer `fn_8036F268` is the code that writes `+0x5538 = 1` (at `+0x360`), i.e. the only
+> state-1 writer. Input is **not** the defect: the guest's action evaluator receives the scripted presses at the
+> popup (`frame=1900 action=17 hold=0x0800`, `frame=2200 action=4`). So the next question is **task creation** - the
+> task-manager global is touched by exactly three instructions in the whole image, all in its constructor
+> `fn_802189EC` (whose only caller `fn_80207F80` is table-dispatched too). Resolve those two tables first: the
+> tables name the classes, and the classes name the missing event.
+
 > **READ §5c.46 AP-AP AND ITS ADDENDUM** for the measurements AP-AQ builds on (and, in A1/A2, for the experiment
 > that AP-AQ shows was inert). What still stands from AP-AP: the tail's structure, the copy register decode, the
 > layer ladder (91.59 / 255.00 / 142.29), aurora's +0.8 % across the eight draws, the 83.23 %/78.65 pair and the
