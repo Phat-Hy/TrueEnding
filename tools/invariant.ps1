@@ -69,7 +69,35 @@ Set-Location $root
 # MEASURES, so it was re-recorded deliberately rather than silently: the old reference and
 # its reasoning are kept above, and the new frame is a stable, fully-drawn scene.
 # TLS_EFB_ORDER=none restores the old inline copy behaviour if the old reference is needed.
-$EXPECTED_SHA = 'C5535C7D0039A18940A999D333D33301F2B0DBB14FE18E41A61AE9A0471166A5'
+#
+# RE-RECORDED IN 5c.46 AP-AR (intended change, user-approved): the AP-AQ renderer fixes are now
+# the BUILD DEFAULTS. Two host defects were fixed in AP-AQ and left default-off so the references
+# recorded then stayed valid; AP-AR promotes both, because they are plain GX semantics - the
+# guest's BP 0x20/0x21 scissor must clip, and CMODE0 bit 0 must decide whether the blend factors
+# are applied at all:
+#   * recomp/gfx_d3d11.c now applies the guest's scissor (a second rasterizer state, rs_scissor,
+#     with ScissorEnable = TRUE; D3D11 ignores RSSetScissorRects without it, which is why the
+#     AP-AP addendum's "the scissor changes nothing" measured an inert switch);
+#   * it no longer promotes guest-disabled blends (dst_factor == 1/5/7) to adds.
+# Both references moved, exactly as AP-AQ item 14 predicted, and each was re-measured on TWO
+# independent runs of this exact instrument before being recorded (2026-10-30):
+#   guest 2800 (content): 6465ACEF... luma 33.50 ->
+#                         8938E36934002EC6B4840B3B9823538521C78D055F23E7C3C8CBAABCA7305DD7
+#                         (mean RGB (60.07, 45.10, 49.14), luma 50.04, >250 0.00 %, <20 16.94 %);
+#   guest 3500 (popup)  : C5535C7D... luma 253.63 ->
+#                         F97A586365100E36814A51C63CA0F701FECBCD1D7650CF4A5CB7E3B6CA806293
+#                         (mean RGB (45.57, 49.29, 49.20), luma 48.17, >250 2.02 %, <20 31.58 %).
+# Both frames are now the cave; the 3500 frame carries the "NEW TUTORIAL" band and its (B) prompt
+# on top of it (docs/evidence/ar_gate_promoted_pair.png), i.e. what the popup assertion was
+# written to see. That makes "the popup frame must be BRIGHT (luma > 200)" false by construction,
+# so it is REPLACED by a non-saturation bound and a bright-pixel window: the popup frame must not
+# be a white-out (luma < 150, < 10 % of pixels above luma 250) yet must still carry the band's
+# white text (at least 0.5 % above 250; measured 2.02 %). The content frame's measured 0.00 %
+# bright fraction is the other half of the same swap guard.
+# The superseded behaviour is one environment away and was measured after the promotion:
+# TLS_NO_SCISSOR=1 TLS_FORCE_BLEND=1 returns 6465ACEF... and C5535C7D... exactly, so the old
+# references are reproducible rather than lost.
+$EXPECTED_SHA = 'F97A586365100E36814A51C63CA0F701FECBCD1D7650CF4A5CB7E3B6CA806293'
 $SHOT_FRAME   = '3500'
 $INPUT        = '600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A'
 
@@ -91,9 +119,13 @@ $INPUT        = '600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1
 #      screen or a lost render fails instead of passing;
 #   3. fewer than $CONTENT_BRIGHT_MAX of its pixels are above luma 250 (the AP-AI saturation
 #      signature).
-# A fourth check keeps the two files from being swapped: the popup frame must be BRIGHT
-# (luma > 200) and the content frame DARK (luma < 120), which is true by construction and fails
-# loudly if the shot-to-frame mapping ever changes.
+# A fourth check keeps the two files from being swapped. It used to be "the popup frame is BRIGHT
+# (luma > 200) and the content frame DARK (luma < 120)", which was true while frame 3500 sat on the
+# white plateau. Since 5c.46 AP-AR both frames are cave frames (luma 48.17 / 50.04), so the guard
+# is now built from the one thing that still distinguishes them: the popup band's white text.
+# The popup frame must be non-saturated (luma < $POPUP_LUMA_MAX) but must carry bright pixels
+# (>= $POPUP_BRIGHT_MIN, measured 2.02 %), and the content frame must have almost none
+# (< $CONTENT_BRIGHT_MAX, measured 0.00 %). Swapping the two files fails both halves loudly.
 #
 # The two shot files are named by the PRESENT counter (gfx_d3d11.c writes
 # d3d11_screenshot_<present>.ppm), and the present counter runs 64 ahead of the guest frame at
@@ -109,11 +141,16 @@ $INPUT        = '600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1
 # The values below are recorded for THIS shot list and were each measured twice on an idle host;
 # a 3500-only run still produces C5447108... (kept here so the older reference is not lost).
 $CONTENT_FRAME          = '2800'
-$EXPECTED_SHA_CONTENT   = '6465ACEF4664A1861B5BA7B2737B92C9A7838B67F417D7CD26EFEE428F8AA7AD'
+$EXPECTED_SHA_CONTENT   = '8938E36934002EC6B4840B3B9823538521C78D055F23E7C3C8CBAABCA7305DD7'
 $CONTENT_LUMA_MIN       = 15.0
 $CONTENT_LUMA_MAX       = 120.0
 $CONTENT_BRIGHT_MAX     = 0.10
-$POPUP_LUMA_MIN         = 200.0
+# 5c.46 AP-AR: was $POPUP_LUMA_MIN = 200.0, i.e. "the popup frame is the white plateau". That frame
+# is gone (the plateau was the renderer defect), so the assertion is inverted into what it was
+# really guarding: the popup frame must NOT be a white-out, and must still show the band's text.
+$POPUP_LUMA_MAX         = 150.0   # measured 48.17 (full image) / 48.53 (this script's sampling)
+$POPUP_BRIGHT_MIN       = 0.005   # measured 2.02 % above luma 250 (the band and its prompt)
+$POPUP_BRIGHT_MAX       = 0.10    # a wash would be ~100 %; the plateau was 99.30 %
 
 # Mean luma of a binary P6 PPM, sampled every $Step-th pixel. PowerShell-native on purpose: the
 # gate must not depend on python being on PATH, and a 1/64 sample of a 1280x720 frame is within
@@ -167,11 +204,17 @@ Remove-Item $SAVE_FILE, $BANNER, $TMP_SAVE -Force -ErrorAction SilentlyContinue
 
 # Probe flags must be genuinely REMOVED, not set to '' - getenv() treats an empty
 # string as set, which silently keeps a flag enabled (handover 5c.33a).
+# 5c.46 AP-AR: TLS_SCISSOR / TLS_NO_SCISSOR / TLS_NO_FORCE_BLEND / TLS_FORCE_BLEND now enable or
+# re-enable the promoted renderer defaults, so a gate run must not inherit them from whatever
+# shell launched it. The gate measures the DEFAULT renderer, which is what its references were
+# recorded on. (TLS_BATCH_CUTOFF is here for the empty-string trap AP-AQ documents: unset is not
+# the same as "".)
 foreach ($v in 'TLS_SCRIPT_FILTER','TLS_NO_SCRIPT_FILTER','TLS_FAKE_FADE','TLS_NO_FAKE_FADE',
                'TLS_EFB_ALPHA','TLS_SCENE_SM_PROBE','TLS_FADE_RET','TLS_PRESENT_PROBE',
                'TLS_TEX_HASH_FULL','TLS_R8_TILE_8X4','TLS_ACTION_PROBE','TLS_SHOT_FRAMES',
                'TLS_SAVE_PROBE','TLS_NAND_PROBE','TLS_ISFS_SERVICE','TLS_SAVE_PRECREATE',
-               'TLS_SHOT_GUEST') {
+               'TLS_SHOT_GUEST','TLS_BATCH_CUTOFF',
+               'TLS_SCISSOR','TLS_NO_SCISSOR','TLS_NO_FORCE_BLEND','TLS_FORCE_BLEND') {
     Remove-Item "Env:\$v" -ErrorAction SilentlyContinue
 }
 
@@ -225,7 +268,7 @@ $reachedGame = $false
 # with it - which is what AP-AN measured (3C601DDE / 1F9BE875 / 4201F485).
 $summary = "$log.summary.tsv"
 Remove-Item $summary -ErrorAction SilentlyContinue
-Set-Content $summary "attempt`thandover`tsha`tshaContent`tlumaContent`tbrightContent`tsave`tbanner`treachedGame"
+Set-Content $summary "attempt`thandover`tsha`tshaContent`tlumaContent`tbrightContent`tsave`tbanner`treachedGame`tlumaPopup`tbrightPopup"
 for ($attempt = 1; $attempt -le $Attempts; $attempt++) {
     $attemptLog = "$log.a$attempt"
     Remove-Item $ppm -ErrorAction SilentlyContinue
@@ -249,7 +292,7 @@ for ($attempt = 1; $attempt -le $Attempts; $attempt++) {
     if ($shotPaths.Count -lt 2 -or -not (Test-Path $contentPpm) -or -not (Test-Path $popupPpm)) {
         Write-Host ("attempt {0}: expected two shots, the log named {1} (handover {2})" -f `
                     $attempt, $shotPaths.Count, $handover) -ForegroundColor Yellow
-        Add-Content $summary ("{0}`t{1}`t`t`t`t`t0`t0`tFalse" -f $attempt, $handover)
+        Add-Content $summary ("{0}`t{1}`t`t`t`t`t0`t0`tFalse`t`t" -f $attempt, $handover)
         continue
     }
 
@@ -268,10 +311,16 @@ for ($attempt = 1; $attempt -le $Attempts; $attempt++) {
     $lumaContent   = if ($cs)  { [math]::Round($cs.Luma, 2) }   else { -1 }
     $brightContent = if ($cs)  { [math]::Round($cs.Bright, 4) } else { -1 }
     $lumaPopup     = if ($ps_) { [math]::Round($ps_.Luma, 2) }  else { -1 }
+    $brightPopup   = if ($ps_) { [math]::Round($ps_.Bright, 4) } else { -1 }
     $contentOk = ($shaContent -eq $EXPECTED_SHA_CONTENT) -and
                  ($lumaContent -ge $CONTENT_LUMA_MIN) -and ($lumaContent -le $CONTENT_LUMA_MAX) -and
                  ($brightContent -lt $CONTENT_BRIGHT_MAX)
-    $swapOk = ($lumaPopup -gt $POPUP_LUMA_MIN) -and ($lumaContent -lt 120.0)
+    # 5c.46 AP-AR: the popup frame must be a real scene, not the white plateau (luma bound), and
+    # must still show the band's white text (bright-pixel window). $swapOk then additionally
+    # requires the content frame to have no such band, so the two files cannot be swapped.
+    $popupOk = ($lumaPopup -lt $POPUP_LUMA_MAX) -and
+               ($brightPopup -ge $POPUP_BRIGHT_MIN) -and ($brightPopup -lt $POPUP_BRIGHT_MAX)
+    $swapOk = $popupOk -and ($brightContent -lt $CONTENT_BRIGHT_MAX)
 
     # 3. structural (5c.42 K): the run must have CREATED its own save, byte-exact in size,
     # because that is the defect this invariant now also guards.
@@ -280,12 +329,13 @@ for ($attempt = 1; $attempt -le $Attempts; $attempt++) {
     $saveOk    = ($saveLen -eq 1348992) -and ($bannerLen -eq 29344)
 
     $ok = $reachedGame -and ($sha -eq $EXPECTED_SHA) -and $contentOk -and $swapOk -and $saveOk
-    Add-Content $summary ("{0}`t{1}`t{2}`t{3}`t{4}`t{5}`t{6}`t{7}`t{8}" -f `
-        $attempt, $handover, $sha, $shaContent, $lumaContent, $brightContent, $saveLen, $bannerLen, $reachedGame)
-    Write-Host ("attempt {0}/{1}: reachedGame={2} handover={3} popup={4} content={5} luma={6} save={7}/{8}" -f `
+    Add-Content $summary ("{0}`t{1}`t{2}`t{3}`t{4}`t{5}`t{6}`t{7}`t{8}`t{9}`t{10}" -f `
+        $attempt, $handover, $sha, $shaContent, $lumaContent, $brightContent, $saveLen, $bannerLen, $reachedGame,
+        $lumaPopup, $brightPopup)
+    Write-Host ("attempt {0}/{1}: reachedGame={2} handover={3} popup={4} content={5} luma={6}/{7} save={8}/{9}" -f `
                 $attempt, $Attempts, $reachedGame, $handover, $sha.Substring(0, 8),
                 $(if ($shaContent) { $shaContent.Substring(0, 8) } else { 'none' }),
-                $lumaContent, $saveLen, $bannerLen)
+                $lumaPopup, $lumaContent, $saveLen, $bannerLen)
     if ($ok) { break }
 }
 
@@ -294,7 +344,8 @@ Write-Host "sequences : $($seqs -join ' -> ')"
 Write-Host "reached Game : $reachedGame"
 Write-Host "handover  : guest frame $handover (--frames 3520)"
 Write-Host "popup  f$SHOT_FRAME : sha $sha"
-Write-Host "                  expected $EXPECTED_SHA (luma $lumaPopup, must be > $POPUP_LUMA_MIN)"
+Write-Host "                  expected $EXPECTED_SHA"
+Write-Host "                  luma $lumaPopup (must be < $POPUP_LUMA_MAX, i.e. not a white-out), bright>250 $brightPopup (must be $POPUP_BRIGHT_MIN..$POPUP_BRIGHT_MAX - the tutorial band's text)"
 Write-Host "content f$CONTENT_FRAME : sha $shaContent"
 Write-Host "                  expected $EXPECTED_SHA_CONTENT"
 Write-Host "                  luma $lumaContent (must be $CONTENT_LUMA_MIN..$CONTENT_LUMA_MAX), bright>250 $brightContent (must be < $CONTENT_BRIGHT_MAX)"
@@ -303,7 +354,7 @@ Write-Host "per-attempt evidence: $summary and $log.a<attempt>"
 Write-Host ""
 
 if ($ok) {
-    Write-Host 'PASS - Chapter-1 progression invariant holds: the sequence reached Game, the save was created, the popup frame is unchanged and frame 2800 still renders the cave' -ForegroundColor Green
+    Write-Host 'PASS - Chapter-1 progression invariant holds: the sequence reached Game, the save was created, the popup frame is its recorded cave scene (not a white-out) and frame 2800 still renders the cave' -ForegroundColor Green
     exit 0
 } else {
     if (-not $reachedGame) { Write-Host 'FAIL: the sequence never reached Game (all attempts)' -ForegroundColor Red }
@@ -320,7 +371,13 @@ if ($ok) {
         if ($brightContent -ge $CONTENT_BRIGHT_MAX) { Write-Host "      $brightContent of its pixels are above luma 250 (AP-AI saturation)" }
     }
     if (-not $swapOk) {
-        Write-Host "FAIL: the two shots look swapped (popup luma $lumaPopup, content luma $lumaContent)" -ForegroundColor Red
+        Write-Host "FAIL: the two shots look swapped or the popup frame is not the recorded scene (popup luma $lumaPopup bright>250 $brightPopup, content luma $lumaContent bright>250 $brightContent)" -ForegroundColor Red
+        if (-not $popupOk) {
+            Write-Host "      popup frame: luma must be < $POPUP_LUMA_MAX and bright>250 in $POPUP_BRIGHT_MIN..$POPUP_BRIGHT_MAX"
+        }
+        if ($brightContent -ge $CONTENT_BRIGHT_MAX) {
+            Write-Host "      content frame: $brightContent of its pixels are above luma 250 (it is not the content frame)"
+        }
     }
     if (-not $saveOk) { Write-Host "FAIL: the game did not create its save (savedata.dat=$saveLen banner.bin=$bannerLen)" -ForegroundColor Red }
     exit 1
