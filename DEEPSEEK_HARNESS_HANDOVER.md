@@ -36,6 +36,16 @@
 > (53.08,54.07,50.56) for both the EFB at 50045 and the game's own copy at 50049) and the **1.78x** is the
 > blit at 50127 that samples it - so the copy is not the defect and the sampling draw is (item 11).
 
+> **THE FIELD IS INTERACTIVE - READ AP-AQ ITEMS 20/21 BEFORE ANYTHING ELSE ABOUT PRIORITY C.** The tutorial popup's
+> prompt is **(B)**, and every input script this project has ever used presses **A only** - so the popup was never
+> dismissed and the field was never actually asked to advance. Measured under the AP-AQ fix: one B press at frame
+> 1900 takes `PHASE 8 -> 0` at **f=2063** (340 frames after entering phase 8) instead of **f=3265** (1242 frames),
+> the "NEW TUTORIAL" band is **gone by guest 3800**, and holding direction buttons then **keeps the camera moving
+> through the cave** - 3800->4200 changes **94.71 %** of pixels against **11.15 %** for the identical script minus
+> the direction holds (`docs/evidence/aq_move_strip.png`). The script future field measurements must start from is
+> in item 21. What this does **not** change: the entry chain (`0x8036F5D8`) is still never entered, the task graph is
+> still slot-static, and the renderer fix is still default-off.
+
 > **PRIORITY C IS NOW LOCALISED - read AP-AQ items 13, 15, 15a, 16, 17, 18 and 19 before touching the field.** The
 > previous session's "the field is frozen" was the **renderer**: under the fix, guest 3800 vs 4400 changes **9.83 %**
 > of pixels, and the game's own state machine **cycles phase 8 -> 0 at frame 3265** (`g2_3468` 0->1->0) while the
