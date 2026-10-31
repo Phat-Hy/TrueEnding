@@ -2,6 +2,16 @@
 
 ## NEXT SESSION — START HERE
 
+> **WORKING IN PARALLEL WITH TRACK A? READ `CONTRIBUTING_TRACKS.md` FIRST.** Track A (byte-matching
+> decompilation, `src/`) and Track B (this port) are code-disjoint but machine-, repo- and document-shared.
+> That file holds the ownership table, the `track-a` / `track-b` branches, and the rules that protect
+> measurements (one runner, idle host, handover frame 1680). The measured asymmetry, so nobody plans on the
+> wrong thing: **Track A progress does not change this port's behaviour** — the runner links no `src/`
+> object and executes the same retail instructions, so Track A's value here is **names** (config/symbols.txt
+> has extents for 18 103 functions but only 411 human names, and the probes print raw hex) plus readable C
+> for a handful of stuck functions (`docs/TRACK_A_HANDOFF.md`). This dossier stays Track B's; Track A writes
+> `docs/TRACK_A_LOG.md`.
+>
 > **READ §5c.46 AP-AZ (the last section of this file) FIRST. TWO THINGS IT SETTLES, ONE OF WHICH
 > OVERTURNS THE PREVIOUS SESSION'S NAMED SUSPECT.**
 > (1) **Priority B is split, and the answer is neither "copy content" nor "sampling".** The 80x56

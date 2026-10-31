@@ -164,6 +164,14 @@ The port boots, reaches the title, hands over to `Game`, and **Chapter 1 (Gurgan
 game creates its own save (`savedata.dat` 1 348 992 B, `banner.bin` 29 344 B) and the field accepts input. The
 renderer is mid-migration and that is the project's active axis.
 
+> **Two tracks, sometimes two agents.** Track A (byte-matching decompilation) and Track B (this port) are
+> code-disjoint but machine-, repo- and document-shared. The ownership table, the branches (`track-a` / `track-b`)
+> and the rules that protect measurements — one runner, idle host, handover frame 1680 — are in
+> [`CONTRIBUTING_TRACKS.md`](CONTRIBUTING_TRACKS.md); the Track A work order is
+> [`docs/TRACK_A_HANDOFF.md`](docs/TRACK_A_HANDOFF.md) and its log is [`docs/TRACK_A_LOG.md`](docs/TRACK_A_LOG.md).
+> Note the asymmetry, measured: Track A progress does **not** change this port's behaviour (the runner links no
+> `src/` object) — it supplies **names** and, for a few functions, readable C.
+
 | | state |
 | :--- | :--- |
 | Sequence | `Boot → Stra → Titl → Game`, deterministic |
