@@ -14606,3 +14606,42 @@ build\recomp\tls_runner.exe --window --minimized --frames 4600 *> logs_ap\c_task
 # 0x803AB328, 0x8039D930): a task that is REGISTERED but whose update never runs is the answer; a task that is
 # never registered is a different (upstream) defect.
 ```
+
+**15. Priority C's first measurement, under the fixed renderer: the task graph is STATIC (3 entries, created before
+frame 2020, never changed to 4 599) while the Game task updates every frame.** One run, 4 600 frames,
+`TLS_SCISSOR=1 TLS_NO_FORCE_BLEND=1 TLS_SCENE_SM_PROBE=1 TLS_ENTRY_PROBE=1`, gate input script
+(`logs_ap/c_taskcensus.log`, exit 0, 976 773-byte log):
+
+* `tls_task_census` (task manager `[0x8087EE94]`, count at +0, array at +8, 20-byte slots) printed **one** line in
+  4 600 frames, at **f=2020**:
+
+```
+[TLS SceneSM] f=2020 TASKS count=3 arr=0x80C96CB0:
+    [0 up=0x80570CFC task=0x80AEDCF0] [1 up=0x80363DBC task=0x80B8DD10] [2 up=0x803646C4 task=0x80B8DD10]
+```
+
+  so **no task is registered and none exits** from frame 2020 to the end of the run. Two of the three slots are two
+  update hooks on the *same* object `0x80B8DD10`, whose update addresses (`0x80363DBC`, `0x803646C4`) sit in the
+  `GameTask` region (`GameTask::Update` is `0x80368280`); the third, `0x80AEDCF0` with `up=0x80570CFC`, has its
+  vtable at `0x807790B0` (`0x800B3C3C`, `0x800B320C`, `0x800B3F40`, `0x800B3CC8`, `0x800B3208`, `0x800B4054` - the
+  `0x800B....` OS/framework area), i.e. a system task, not a menu task. Read straight out of the capture's MEM1
+  plane (`logs_ap/c_tasks.py`), so the objects and vtables above are from the same guest memory the draw list uses.
+* The census cannot be "silent because the probe stopped": the runner's own method-activity table (always on, at
+  shutdown) says `GameTask::Update calls=1285 first=2020 last=4599` and `GameTask::Draw calls=1285 first=2021
+  last=4599`, so the Game task runs every frame to the end of the run (`GameTask::Init calls=131 first=1659
+  last=2019` is the load phase).
+* `TLS_ENTRY_PROBE=1` again printed **0 lines**, and the sequence manager printed **one** line (at f=2020:
+  `mgr=0x80BB5CC0 at76=0x809ADD00 at80=0x00000000 at84=0x00000000 at88=0x80C98D68`) - the sequence does not change
+  after that either.
+
+**What this settles and what it does not.** It settles the shape of C's question: the tutorial popup is **not** a
+separately registered task that fails to exit - the whole task graph is frozen at three entries, so the popup and
+the field are drawn by the `GameTask` object itself, and the entry chain's four callers (AP-AH:
+`0x803775DC`, `0x80529C74`, `0x8051F7D4`, `0x803AB328`, `0x8039D930`) belong to tasks that are **never registered**
+at all. It does **not** yet say *which* state inside `GameTask` should call the chain, and it does not say whether
+the popup is waiting on an event or is simply the state the field is in. The exact next step is therefore one level
+down, inside the Game task: hook the four caller *functions* by their entry (not their call sites) and hook
+`0x80368280`'s own dispatch (the state word `+0x5538` and the jump table at `0x8078A268`, per AP-AG/AP-AH) on the
+same run, then ask which state body the field is in when the popup is on screen and whether any of those bodies can
+reach the chain. `TLS_SCENE_SM_PROBE=1` already prints the state word on change, so this is a matter of reading the
+run that produced this item before adding a switch.
