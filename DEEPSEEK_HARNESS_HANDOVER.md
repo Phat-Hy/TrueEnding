@@ -2,6 +2,26 @@
 
 ## NEXT SESSION — START HERE
 
+> **READ §5c.46 AP-AR (the last section of this file) FIRST - it changes the default build.** The two AP-AQ
+> renderer fixes are now the **defaults**: the guest's `BP 0x20/0x21` scissor is applied and guest-disabled blends
+> are no longer promoted to adds (`TLS_NO_SCISSOR=1` / `TLS_FORCE_BLEND=1` restore the old picture). Both gate
+> references were re-recorded deliberately on **two independent runs each** and the gate now PASSes, attempt 1,
+> three times: guest 2800 `8938E36934002EC6B4840B3B9823538521C78D055F23E7C3C8CBAABCA7305DD7` (luma 50.04) and
+> guest 3500 `F97A586365100E36814A51C63CA0F701FECBCD1D7650CF4A5CB7E3B6CA806293` (luma 48.17, `>250` 2.02 %).
+> `$POPUP_LUMA_MIN = 200` is gone by construction and is replaced by a non-saturation bound (luma < 150, bright
+> fraction in 0.5..10 %) - the tutorial band's white text is now the swap guard. A control run with the escape
+> hatches returns the superseded `6465ACEF…` / `C5535C7D…` exactly, so the old references are reproducible rather
+> than lost. **AP-AR also answers item B**: the two 24-entry tables are the **NewCampPartsMapSelect** and
+> **NewCampPartsTop** vtables (slot 9 of each holds a chain root), the third root is **GameOverTask**'s slot 2, the
+> other two are `{fn, 0, -1}` records in a `GameEventScript` handler table - and **all four classes have 0 instances
+> in a Chapter-1 capture's MEM1** (control: the system task's vtable, 1). So the chain is the game-over / camp-menu /
+> event-script path and is **not** a Chapter-1 blocker; the task-creation dispatch (`fn_80207F80`) has no data-plane
+> pointer at all and needs a runtime probe, not another scan. What remains open is priority C (menu vignette, red
+> rock, black rectangle, the corner chain's TEV content - all Aurora's territory) and priority D (the migration).
+>
+> **READ §5c.46 AP-AQ (the section before AP-AR) for the cause** - and note that everything in it that says "the
+> switches are default-off" or "not promoted" is now **history**: AP-AR promoted them.
+
 > **READ §5c.46 AP-AQ (the last section of this file) FIRST, then the §5c.46 AP-AP addendum correction note.**
 > AP-AQ overturns the AP-AP addendum's causal claim, and the reason is an **instrument**: `TLS_SCISSOR=1` could
 > never clip anything, because D3D11 ignores `RSSetScissorRects` unless the bound rasterizer state has
@@ -14877,3 +14897,181 @@ to five table-slot-only virtual methods of never-instantiated menu classes (item
 slot-static with the census now watching slots (items 15/18), and the two switches are on for interactive play and
 off for the gate, with the promotion cost measured (items 14/22/23). Everything is committed; `src/` is untouched;
 the gate is **PASS, attempt 1** at both recorded references on the current binary.
+
+---
+
+### AP-AR. THE AP-AQ RENDERER FIX IS PROMOTED — both defaults on, both gate references re-recorded deliberately on two independent runs each, the "popup must be bright" assertion inverted into a non-saturation test, and item B answered by measurement: the two 24-entry tables are **NewCampPartsMapSelect** / **NewCampPartsTop**, GameOverTask's slot 2 is the third root, the other two are event-script table records, and **all four classes have 0 instances in a Chapter-1 capture** (positive control: 1)
+
+AP-AQ fixed the white-out and left both fixes **default-off** so the gate references recorded through the broken
+renderer stayed valid. This session promoted them, because they are not features: applying the guest's
+`BP 0x20/0x21` scissor and honouring CMODE0 bit 0 are what the hardware does, and a default renderer that is wrong
+means every future measurement has to remember two environment variables. AP-AQ item 14 called the promotion "not a
+re-record but a redesign of the gate's assertions", and it was right - this section is what that cost, what it
+measured, and the control that proves the promotion changes exactly the two gate frames and nothing else in the
+instrument.
+
+Host state before every run: no `fifa15`, no runner, 87.7 GB free disk; one runner at a time, every launch
+`--window --minimized`, save files deleted before each run, `TLS_INPUT_SCRIPT` set to the gate's script.
+
+**1. What changed, and the escape hatches that keep the old picture reachable.** `recomp/gfx_d3d11.c`:
+
+* the guest's scissor is applied **by default** (the `rs_scissor` rasterizer state with `ScissorEnable = TRUE` is
+  bound on every batch; `s_no_scissor` is now driven by `TLS_NO_SCISSOR`, value-tested with `atoi`, so an empty
+  string cannot disable it by accident). `TLS_SCISSOR` remains accepted and is now a **no-op** that asks for the
+  default;
+* the `dst_factor == 1/5/7 -> blend on` promotion is **off by default** (`s_force_blend` is driven by
+  `TLS_FORCE_BLEND`); `TLS_NO_FORCE_BLEND` is a no-op that asks for the default.
+
+`Play_TheLastStory.bat` therefore sets nothing any more (its comment names the escape hatches instead), and
+`tools/invariant.ps1` now **removes** `TLS_SCISSOR`/`TLS_NO_SCISSOR`/`TLS_NO_FORCE_BLEND`/`TLS_FORCE_BLEND`
+(and `TLS_BATCH_CUTOFF`, for AP-AQ's empty-string trap) so the gate always measures the default renderer regardless
+of the shell that launched it - the gate's job is to guard the shipped picture.
+
+**2. The two references, recorded twice on an idle host (gate-shaped: 3 520 frames, `TLS_SHOT_GUEST=1`,
+`TLS_SHOT_FRAMES=2800,3500`, save deleted first).** Two launches, 144 s and 275 s, both exit 0, both handover
+**1680**, both save **1 348 992 / 29 344**:
+
+| guest frame | run 1 (present 2864 / 3564) | run 2 | mean RGB | luma | >250 | <20 |
+|---|---|---|---|---|---|---|
+| **2800** (content) | `8938E369…` | `8938E369…` **identical** | (60.07, 45.10, 49.14) | **50.04** (sampled 50.62) | 0.00 % | 16.94 % |
+| **3500** (popup) | `F97A5863…` | `F97A5863…` **identical** | (45.57, 49.29, 49.20) | **48.17** (sampled 48.53) | **2.02 %** | 31.58 % |
+
+Full hashes: `8938E36934002EC6B4840B3B9823538521C78D055F23E7C3C8CBAABCA7305DD7` and
+`F97A586365100E36814A51C63CA0F701FECBCD1D7650CF4A5CB7E3B6CA806293`. Both numbers reproduce AP-AQ item 6/14/23
+exactly (50.04 and 48.17), which is the point of measuring them under the *default* build: the promoted path is the
+measured path, not a second implementation of it.
+
+**3. The control run: the escape hatches reproduce the superseded references byte for byte.** One launch with
+`TLS_NO_SCISSOR=1 TLS_FORCE_BLEND=1` (285 s, exit 0, same script, same shots) returns
+
+| guest frame | superseded behaviour | recorded reference before AP-AR |
+|---|---|---|
+| 2800 | `6465ACEF4664A1861B5BA7B2737B92C9A7838B67F417D7CD26EFEE428F8AA7AD`, luma **33.50** (sampled 33.30) | `6465ACEF…`, luma 33.3 - **exact** |
+| 3500 | `C5535C7D0039A18940A999D333D33301F2B0DBB14FE18E41A61AE9A0471166A5`, luma **253.56** (sampled 253.63) | `C5535C7D…`, luma 253.63 - **exact** |
+
+So the promotion moves exactly those two frames (79.23 % of pixels changed by > 8 at 2800, mean |d| 34.00; 97.52 %,
+mean |d| 205.51 at 3500) and nothing else the gate asserts: handover 1680, save 1 348 992, banner 29 344 in all
+three runs. It also means the old references are **reproducible on demand** rather than lost, which is what the
+comments in `invariant.ps1` and `gfx_d3d11.c` now say.
+
+**4. The assertions had to be re-derived, not loosened - and the inversion is the interesting part.** The old
+fourth check was "the popup frame must be BRIGHT (luma > 200) and the content frame DARK (luma < 120)". AP-AQ
+measured that `$POPUP_LUMA_MIN = 200` cannot hold at luma 48.17, and the temptation is to delete the check. That
+would be wrong: it was really guarding two things - the shot-to-frame mapping, and "the popup is on top of a scene".
+Both survive, expressed against the new frames:
+
+* the popup frame must be **non-saturated**: luma < `$POPUP_LUMA_MAX = 150` (measured 48.53 by the gate's own
+  sampling) and < 10 % of pixels above luma 250 (measured 2.02 %; the old white plateau was 99.33 %). This is the
+  assertion that still fails on a white-out even if someone re-records the hash carelessly;
+* and it must still carry the tutorial band's **white text**: >= `$POPUP_BRIGHT_MIN = 0.5 %` of pixels above luma 250
+  (measured 2.02 %, four times the threshold). The content frame keeps its measured **0.00 %** as the other half, so
+  swapping the two files fails both halves: a swapped pair measures 0.00 % on the "popup" and 2.02 % on the
+  "content", and neither value passes.
+* `$CONTENT_LUMA_MIN/MAX = 15..120` is unchanged and still contains the new 50.62 (it was 33.30), because its job is
+  "not black, not a wash", not "the exact old brightness".
+
+**5. Gate green, three times, attempt 1 every time, on two binaries.** `pwsh tools/invariant.ps1`:
+
+| invocation | log | result |
+|---|---|---|
+| 1 | `logs_ap/ar/gate1.log` | **PASS, attempt 1**: popup `F97A5863…` (luma 48.53, bright 2.02 %), content `8938E369…` (luma 50.62, bright 0.00 %), handover 1680, save 1 348 992 / 29 344 |
+| 2 | `logs_ap/ar/gate2.log` | **PASS, attempt 1**, byte-identical summary |
+| 3 | `logs_ap/ar/gate3.log` | **PASS, attempt 1** after the rebuild that followed the comment-only edits - this is the *current* binary |
+
+**6. Item B, answered with structure rather than with runs - the chain is the game-over / camp-menu /
+event-script path, and none of its classes exists in the field.** AP-AQ item 16 said the Chapter-1 entry chain is
+entered only through five functions with no direct caller, "slot 9 of the two 24-entry vtables" among them, and
+asked what those tables are. They can be named straight out of `orig/main.dol`, because Metrowerks' layout in this
+image is regular:
+
+```
+[vtable: N function pointers][typeinfo descriptor: 5 or 7 words][ptr to class-name string][ptr back to the descriptor]
+```
+
+and, decisively, **the word immediately BEFORE each vtable points at that class's own name slot**. Dumping the
+region (`logs_ap/ar/dumptables*.py`, static, no runner):
+
+| table | slots | name string | the chain root it holds |
+|---|---|---|---|
+| `0x8078A4C0` | 5 | **GameOverTask** (`0x8074DE94`) | slot 2 = `fn_803775DC` |
+| `0x807934A0` | 5 | **NewCampPartsItem** (`0x8075BB6C`) | - (the base class: its 5 methods are slots 18-22 of both tables below) |
+| `0x80793510` | 24 | **NewCampPartsMapSelect** (`0x8075BF28`) | slot 9 = `fn_8051F7D4` |
+| `0x80793748` | 24 | **NewCampPartsTop** (`0x8075D190`) | slot 9 = `fn_80529C74` |
+
+and the remaining two roots are **not** virtual methods at all: `fn_8039D930` (`0x8074F0E8`) and `fn_803AB328`
+(`0x8074F5E0`) sit inside the data object `lbl_8074F0B0` (size `0xB00`), in stride-12 records of the shape
+`{fn, 0, 0xFFFFFFFF}`, immediately after a block of `SE_*` sound-effect ID strings and next to a `GameEventScript`
+type string - i.e. a script/handler table, consistent with AP-AH's "GameOverTask, NewCampPartsTop,
+NewCampPartsMapSelect, +2 unnamed" and now with names for the last two.
+
+**The measurement that decides whether the chain matters: none of those classes is ever instantiated in the
+field.** Scanning the MEM1 plane of a Chapter-1 capture (`build/recomp/gxcap/aq3305`, frames 3294-3300, i.e. the
+field loaded with the popup up) for objects whose first word is the class vtable:
+
+| vtable | class | occurrences in MEM1 |
+|---|---|---|
+| `0x807790B0` | **control**, the system task object AP-AQ item 15's census sees | **1** (at `0x80AEDD20`) |
+| `0x8078A4C0` | GameOverTask | **0** |
+| `0x807934A0` | NewCampPartsItem | **0** |
+| `0x80793510` | NewCampPartsMapSelect | **0** |
+| `0x80793748` | NewCampPartsTop | **0** |
+
+The control is what makes the zeros a measurement instead of a broken scan, and the only words in MEM1 that point
+into either 24-slot table are the tables' own RTTI self-links (`0x80793508 -> 0x80793588`, `0x8079358C -> 0x8079356C`,
+and the two mirrored pairs) - no object, no dispatch table, no hand-built pointer. So the Chapter-1 entry chain is
+reachable from the **game-over screen, the camp/parts menus and the event-script dispatcher**, and not from the
+field: with the field rendering, dismissing its popup with (B), moving, and creating its save (AP-AQ items 20-22 and
+AP-AR's three gate runs), **the chain is not a Chapter-1 blocker**. It becomes relevant only when the goal moves to
+the camp menus, and then the names above are where to start - not more PC hooks.
+
+*Leftover, stated so the next session does not re-derive it:* AP-AQ item 19's "task creation" path still cannot be
+resolved statically. **No word in the whole image holds either `fn_80207F80` (the task-manager constructor's only
+caller) or `fn_802189EC` (the constructor)** - checked over every data region - so that dispatch is built in code
+(a computed address) rather than read from a table, and the next step there is a runtime probe, not another scan.
+
+**7. What the promotion does NOT fix - bounded, unchanged, and now the default renderer's own residue.** The title/
+menu frames are untouched by the switches (measured under the same fix in AP-AQ item 22: guest 400/900/1200/1600 all
+luma **90.43** with **8.28 %** above 250 - the pre-existing blown radial vignette of 5c.23), and the field still
+carries the two defects AP-AQ item 14 named as the reason not to record on this renderer: the **red-dominant rock**
+and the **one black rectangle** in the guest-2800 frame, plus the corner chain's own **TEV content** gap (AP-AQ
+item 8: the additive pass adds ~85 mean where Dolphin's 80x56 corpus has a median of 0.1 luma and 95.7 % zero
+texels). Those are GX-semantics defects, i.e. Aurora's territory per `AGENTS.md` §1, and they are now visible on the
+*default* build instead of hidden behind two environment variables - which is the honest trade the promotion makes.
+**Two consequences worth stating rather than discovering later:** the numbers recorded *through the old default*
+(the page's mean luma 150.33 and crest, AP-AQ's guest-3300 luma ladder 91.59 / 255.00 / 142.29, the 83.23 %/78.65
+same-launch pair, and every "white-out" number in AP-AI..AP-AQ) are now references for the **superseded**
+behaviour - reproducible with the escape hatches, not the shipped picture. And the only hash-asserting gate is
+`tools/invariant.ps1` (re-recorded here); `tools/page_run.ps1` measures and reports a sha but asserts none, so the
+promotion leaves no other gate able to fail on a reference it moved.
+
+**8. Changes.** `recomp/gfx_d3d11.c` (defaults + escape hatches, comments with the numbers),
+`recomp/gx_pipeline.c` / `recomp/gx_pipeline.h` (comments: the scissor snapshot is no longer a diagnostic-only
+field), `Play_TheLastStory.bat` (no environment, banner now says the fix is the default), `tools/invariant.ps1`
+(two hashes, the inverted popup assertion, the swap guard, the environment scrub, two extra summary columns),
+`tools/aurora_spike/README.md` (the promotion paragraph), `docs/evidence/ar_gate_promoted_pair.png` (the two gate
+frames), `docs/evidence/ar_promotion_g2800.png` / `..._g3500.png` (superseded | promoted | 4x difference). Scratch
+instruments (untracked, `logs_ap/ar/`): `stats.py` (full-image and gate-sampled luma/bright), `pairpng.py`,
+`dumptables*.py`, `scanvtables.py`, `find80207F80.py`. **0 changes to `src/`.**
+
+**9. Run log** (one runner at a time, every launch `--window --minimized`; 3 runner runs + 3 gate invocations =
+6 launches, 144-285 s each).
+
+| # | what | result |
+|---|---|---|
+| 1 | 3 520 frames, gate script, shots 2800/3500, promoted defaults | 144 s, exit 0, `8938E369…` / `F97A5863…`, handover 1680, save 1 348 992 |
+| 2 | same, second independent launch | 275 s, identical hashes - determinism measured, not assumed |
+| 3 | same + `TLS_NO_SCISSOR=1 TLS_FORCE_BLEND=1` | 285 s, `6465ACEF…` / `C5535C7D…` = the superseded references exactly |
+| 4 | `pwsh tools/invariant.ps1` (promoted build) | **PASS, attempt 1** |
+| 5 | `pwsh tools/invariant.ps1` again | **PASS, attempt 1**, identical |
+| 6 | no-op rebuild after comment edits, then `pwsh tools/invariant.ps1` | build green (1.92 s, 459 chunks / 470 objects), **PASS, attempt 1** on the current binary |
+
+**10. Definition of done, item by item.** *Both defaults promoted with the reason in the code*: **yes** (§1, and the
+escape hatches are measured in §3). *Both hashes recorded from two independent runs*: **yes** (§2, identical bytes).
+*Assertions re-derived from the new frames rather than loosened*: **yes** (§4 - the bright-popup check is inverted
+into a non-saturation bound plus a bright-pixel window, with the measured margins named in the script). *Gate green
+twice*: **yes** (§5, three times, attempt 1 each). *Item B decided on evidence*: **yes** (§6 - the chain's classes
+are named and are absent from a Chapter-1 capture; the task-creation dispatch is not statically reachable and that is
+stated as a leftover, not as a result). *Build green, 0 changes to `src/`, one runner at a time*: **yes** (§9).
+**What this session did not do, stated plainly:** it did not touch priority C (the menu vignette, the red rock, the
+black rectangle and the corner-chain TEV content are exactly where AP-AQ left them), and it did not start the
+migration (priority D).
