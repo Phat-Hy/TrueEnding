@@ -3,9 +3,9 @@
 <div align="center">
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![Decomp Progress](https://img.shields.io/badge/Track%20A%20Decomp-50.68%25%20(3%2C789%2C580%20bytes)-brightgreen)](docs/PROGRESS_LEDGER.json)
-[![Functions Matched](https://img.shields.io/badge/Functions%20Matched-9%2C123%20%2F%2018%2C120-blue)](docs/PROGRESS_LEDGER.json)
-[![PC Runner](https://img.shields.io/badge/Track%20B%20PC%20Port-Interactive%20Window%20%2F%20Configurable%20FPS-green)](recomp/)
+[![Decomp Progress](https://img.shields.io/badge/Track%20A%20Code-99.30%25%20(7%2C425%2C512%20bytes)-brightgreen)](#current-progress-tracker)
+[![Functions Matched](https://img.shields.io/badge/Functions%20Matched-18%2C054%20%2F%2018%2C155-blue)](#current-progress-tracker)
+[![PC Runner](https://img.shields.io/badge/Track%20B%20PC%20Port-Chapter%201%20Interactive%20%2F%20Aurora%20P2%20Closed-green)](recomp/)
 [![Target](https://img.shields.io/badge/Target-Wii%20USA%20(SLSEXJ)-red)](config/SLSEXJ/)
 
 **A dual-track byte-matching decompilation and native 60 FPS PC port of *The Last Story* (Nintendo Wii, 2011).**
@@ -46,18 +46,31 @@ To optimize execution velocity and preserve token budgets, Track A follows a tar
 
 ## Current Progress Tracker
 
-> **Track A** metrics last updated **October 2026** — Milestone **>50.00% Half-Game Code Barrier Surpassed! (3.78 MB Code, 9,123 Functions, 522 Translation Units 100% Byte-Matched & Linked into main.dol)**
-> **Track B** status updated **2026-11-01** — see [Native Port Status](#native-port-status-track-b) for the live state (gate references, renderer migration phase, and the measurements behind them).
+> **Track A** recomputed from the objdiff report `build/SLSEXJ/report.json` (**2026-10-11**) with `python configure.py progress` — the report is newer than the last `src/` change, so these are the live numbers for the current tree.
+> **Track B** status updated **2026-11-01** — see [Native Port Status](#native-port-status-track-b) for the gate references, the renderer migration phase and the measurements behind them.
 
-### Overall Metrics
+### Track A — Byte-Matching Decompilation (from `build/SLSEXJ/report.json`)
 
 | Metric | Target (`main.dol`) | Matched | Progress |
 | :--- | :--- | :--- | :--- |
-| **Total Code Bytes** | 7,477,324 bytes | **3,789,580 bytes** | **50.68%** (50.78% linked) |
-| **Total Functions** | 18,120 functions | **9,123 functions** | **50.35%** |
-| **Fully Matched Modules** | 663 modules | **522 modules** (linked) | **78.73%** |
-| **Overall Module Match Rate** | — | **100.00%** | (Zero byte mismatches across all 522 matched modules) |
-| **PC Runner Status** | Interactive Window | **Interactive Window + Aurora migration P2 closed** | Real-Time Win32 Window, Dynamic XInput + Keyboard, 3 Threads, DVD Asset Streaming; Chapter 1 interactive, save created by the game itself |
+| **Code bytes** | 7,477,608 B | **7,425,512 B** | **99.30 % matched** (99.77 % fuzzy) |
+| **Functions** | 18,155 | **18,054** | **99.44 %** |
+| **Files linked** | 1,025 | **999** | **99.77 % linked** (report's own measure, over code) |
+| **Data bytes** | 1,432,252 B | **800 B** | **0.06 %** — *this is the remaining gap* |
+
+Reproduce with `python configure.py progress`. Note that [`docs/PROGRESS_LEDGER.json`](docs/PROGRESS_LEDGER.json)
+still carries the **2026-10-09 milestone snapshot** (522 units / 9,123 functions / 3,789,580 B = 50.68 % code) it
+was written for and has not been regenerated since: **the table above is current and the ledger is history.**
+
+### Track B — Native PC Port
+
+| Metric | Target | State |
+| :--- | :--- | :--- |
+| Sequence | `Boot → Stra → Titl → Game` | reached, deterministic |
+| Chapter 1 | playable | interactive field; the game creates its own save (1 348 992 B + 29 344 B banner) |
+| Gate | `pwsh tools/invariant.ps1` | **PASS attempt 1** (handover 1680; guest 2800 `B4646917…`; guest 3500 `22B1CE31…`) |
+| Renderer | Aurora | migration **P2 closed**, **P1** boundary built; P3/P4 next — the layer stays the default until P4 |
+| Build | 471 objects | green |
 
 ---
 
@@ -141,7 +154,7 @@ To optimize execution velocity and preserve token budgets, Track A follows a tar
 | | [`global_destructor_chain.c`](file:///src/global_destructor_chain.c) | 2 / 2 | 96 B | **100.00%** | C++ global object teardown |
 | | [`__init_hardware.c`](file:///src/__init_hardware.c) | 2 / 2 | 100 B | **100.00%** | Early hardware initialization vector |
 | | [`init_user.c`](file:///src/init_user.c) | 1 / 1 | 28 B | **100.00%** | CRT user initialization stub |
-| **Remaining Track A work** | game code (Method A) | — | — | In progress | The GX SDK surface is complete (the ten modules above); the remaining byte-matching is game logic, tracked per unit in [`docs/PROGRESS_LEDGER.json`](docs/PROGRESS_LEDGER.json) |
+| **Remaining Track A work** | **data (not code)** | — | 800 B / 1,432,252 B | **0.06 %** | Code matching is at 99.30 % and every SDK module above is complete; what is left is the **data** section — 1.43 MB of tables, strings and assets that objdiff reports as 800 B matched |
 
 ---
 

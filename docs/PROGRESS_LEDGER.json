@@ -2,6 +2,7 @@
   "project": "Project The Maybe(Not) Last Story (TrueEnding)",
   "game_id": "SLSEXJ",
   "handoff_timestamp": "2026-10-09T17:45:00Z",
+  "SNAPSHOT_NOTE": "HISTORICAL MILESTONE SNAPSHOT, NOT CURRENT. These numbers are the 2026-10-09 '>50% half-game code barrier' milestone (522 units / 9,123 functions / 3,789,580 B = 50.68% of code) and have not been regenerated since. The live figure comes from the objdiff report: `python configure.py progress` reads build/SLSEXJ/report.json and currently prints 99.30% matched code (7,425,512 / 7,477,608 bytes, 18,054 / 18,155 functions, 999 / 1,025 files linked) with data at 800 / 1,432,252 bytes (0.06%). Do not cite this file as the current state; see README.md 'Current Progress Tracker'.",
   "status": {
     "track_a_decomp_matching": {
       "compiler": "Metrowerks CodeWarrior 4.3 build 145 (Wii/1.0)",
