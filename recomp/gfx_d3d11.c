@@ -83,8 +83,21 @@ _Static_assert(offsetof(GxTevConstants, num_stages) % 4 == 0, "scalar block misa
 static void gx_tev_fill_texgen(GxTevConstants* c, const GxDrawBatch* b, const GxTevState* st) {
     static int s_texgen = -1;
     if (s_texgen < 0) s_texgen = getenv("TLS_XF_TEXGEN") ? 1 : 0;
-    static int s_texcoord_sel = -1;
-    if (s_texcoord_sel < 0) s_texcoord_sel = getenv("TLS_TEV_TEXCOORD") ? 1 : 0;
+    /* 5c.46 AP-AU: THE PER-STAGE COORDINATE IS NOW THE DEFAULT, because it is not a feature -
+     * a TEV stage samples the texcoord TEVORDER names, and the previous default substituted
+     * coordinate 0 for every stage. Measured at the gate's content frame (guest 2800, same
+     * capture, aurora as the Dolphin-derived reference): mean |d| vs aurora **11.20 -> 4.83**,
+     * changed pixels 48.13 % -> 37.26 %, luma 45.58 -> 35.63 (aurora 37.00). The prompt for it
+     * was `TLS_TEV_UNIFORM` showing `st2` asking for `coord=1` and receiving `uvsrc=0`.
+     * The escape hatch is `TLS_NO_TEV_TEXCOORD`, value-tested with `atoi` so an empty string
+     * cannot disable the default by accident (the AP-AR lesson); `TLS_TEV_TEXCOORD=1` is now a
+     * no-op that asks for the default. 5c.23/AP-P recorded this switch as "default off until
+     * measured" - it has now been measured, on two frames, in both directions. */
+    static int s_texcoord_sel = -2;
+    if (s_texcoord_sel == -2) {
+        const char* off = getenv("TLS_NO_TEV_TEXCOORD");
+        s_texcoord_sel = (off && atoi(off) != 0) ? 0 : 1;
+    }
 
     uint32_t numtex = b->xf_num_texgens;
     for (int g = 0; g < 8; g++) {
@@ -113,9 +126,19 @@ static void gx_tev_fill_texgen(GxTevConstants* c, const GxDrawBatch* b, const Gx
         if (s_texgen) {
             c->order[i][3] = (tc < numtex) ? tc : 8u;
         } else if (s_texcoord_sel) {
-            bool have = (tc < numtex) && (tc < 2u) &&
-                        (((b->texcoord_mask >> tc) & 1u) != 0u);
-            c->order[i][3] = have ? tc : 8u;
+            /* 5c.46 AP-AU: Dolphin's quirk, quoted from its own comment in
+             * PixelShaderGen.cpp WriteStage: "when the tex coord is not less than the number
+             * of tex gens (i.e. the tex coord does not exist), then tex coord 0 is used".
+             * A stage that names a coordinate GEN_MODE does not define therefore samples
+             * TEX0 - NOT texel (0,0), which is what `8` selects and what this switch used to
+             * fall back to for both cases. The two cases are different and the host only
+             * owns one of them: (a) `tc >= numtex` is a GUEST declaration and hardware's
+             * answer is coordinate 0; (b) `tc < numtex` but this batch does not feed that
+             * attribute (the layer has TEX0/TEX1 only, and XF texgen is default-off) is a
+             * HOST limitation, and (0,0) remains the honest stand-in there. */
+            bool exists = (tc < numtex);
+            bool fed = (tc < 2u) && (((b->texcoord_mask >> tc) & 1u) != 0u);
+            c->order[i][3] = !exists ? 0u : (fed ? tc : 8u);
         } else {
             c->order[i][3] = 0u;
         }

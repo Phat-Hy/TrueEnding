@@ -109,7 +109,22 @@ Set-Location $root
 # (mean RGB 42.35,46.45,49.53, luma 45.58, >250 0.00 %, red-dominant 18.60 % -> 0.00 %).
 # Popup frame: F97A5863... -> 77BF4AB2... (mean RGB 45.60,49.43,49.11, luma 48.25, >250 2.02 %,
 # red-dominant 0.07 %). Handover 1680 and the save (1 348 992 / 29 344 B) are UNCHANGED.
-$EXPECTED_SHA = '77BF4AB2790091AA80D655200F840182393AD309071A23640A338E2DFD8B4866'
+#
+# RE-RECORDED AGAIN IN 5c.46 AP-AU (intended change, measured twice): the per-stage TEV texcoord
+# is now the DEFAULT (it used to be "coordinate 0 for every stage", with TLS_TEV_TEXCOORD=1 as a
+# diagnostic). Two independent reasons: (a) hardware - Dolphin's own PixelShaderGen comments the
+# quirk "when the tex coord is not less than the number of tex gens ... then tex coord 0 is used",
+# and a stage that names a coordinate the batch feeds must sample it; (b) measurement - at the
+# content frame the layer-vs-aurora difference halves: mean |d| 11.20 -> 4.83, changed pixels
+# 48.13 % -> 37.26 %, luma 45.58 -> 35.63 against aurora's 37.00 (docs/evidence/at_texcoord_g2800.png).
+# Content frame: 5BB1538F... -> B4646917... (mean RGB 36.63,35.80,32.17, luma 35.63, >250 0.00 %,
+# red-dominant 0.00 %). Popup frame: 77BF4AB2... -> 22B1CE31... (mean RGB 42.82,46.71,46.37, luma
+# 45.51, >250 1.98 %, still inside the 0.5..10 % band window). Menu frames 400/900/1200/1600:
+# 37.93 / 90.43 / 20.76 / 0.38 - guest 900 (the vignette) is BYTE-IDENTICAL to before, and the
+# other three are fades that get slightly darker. Handover 1680 and the save (1 348 992 / 29 344 B)
+# are UNCHANGED. The escape hatch is TLS_NO_TEV_TEXCOORD=1 (value-tested): it reproduces the
+# superseded 5BB1538F... / 77BF4AB2... exactly.
+$EXPECTED_SHA = '22B1CE31D81A75BA6E0E18A2A68DB2F748F4BDCA83A05D0418525D85FCD7BBEE'
 $SHOT_FRAME   = '3500'
 $INPUT        = '600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A'
 
@@ -153,7 +168,7 @@ $INPUT        = '600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1
 # The values below are recorded for THIS shot list and were each measured twice on an idle host;
 # a 3500-only run still produces C5447108... (kept here so the older reference is not lost).
 $CONTENT_FRAME          = '2800'
-$EXPECTED_SHA_CONTENT   = '5BB1538F9C52747B0C35266471698F15433DA9470E2503ED20DB23AD73B9C9AF'
+$EXPECTED_SHA_CONTENT   = 'B4646917A98EC7CE3036B583E7A8479D416F47B08FB484BE2AA316C911FE56B1'
 $CONTENT_LUMA_MIN       = 15.0
 $CONTENT_LUMA_MAX       = 120.0
 $CONTENT_BRIGHT_MAX     = 0.10
@@ -230,7 +245,7 @@ foreach ($v in 'TLS_SCRIPT_FILTER','TLS_NO_SCRIPT_FILTER','TLS_FAKE_FADE','TLS_N
                'TLS_SAVE_PROBE','TLS_NAND_PROBE','TLS_ISFS_SERVICE','TLS_SAVE_PRECREATE',
                'TLS_SHOT_GUEST','TLS_BATCH_CUTOFF',
                'TLS_SCISSOR','TLS_NO_SCISSOR','TLS_NO_FORCE_BLEND','TLS_FORCE_BLEND',
-               'TLS_GLOW_ALL','TLS_INK_STATS','TLS_TEX_DUMP_FINAL','TLS_TEV_UNIFORM') {
+               'TLS_GLOW_ALL','TLS_INK_STATS','TLS_TEX_DUMP_FINAL','TLS_TEV_UNIFORM','TLS_TEV_TEXCOORD','TLS_NO_TEV_TEXCOORD') {
     Remove-Item "Env:\$v" -ErrorAction SilentlyContinue
 }
 

@@ -31,14 +31,23 @@
 > the layer's is **mean 90 / corners 0 / centre 255**), so B is a *level* defect: the decoded mask
 > alpha is applied at full strength instead of scaled (`docs/evidence/at_menu_frames_400_900_1600.png`).
 
-> **AND AP-AT ITEM 11 IS THE NEXT SESSION'S CHEAPEST HIGH-VALUE EXPERIMENT**: every TEV stage
-> samples **texcoord 0** unless `TLS_TEV_TEXCOORD=1` (the uniform dump shows `st2` asking for
-> `coord=1` and receiving `uvsrc=0`), and that switch **halves the remaining layer-vs-aurora
-> difference at the gate's content frame** - mean |d| **11.20 -> 4.83**, changed pixels 48.13 % ->
-> 37.26 %, luma 45.58 -> 35.63 (`docs/evidence/at_texcoord_g2800.png`). It is **not promoted**:
-> it changes every batch whose stages name texcoord 1, and the menus, the popup band and a field
-> sequence are unmeasured under it. Measure those three, then re-record twice, deliberately, the
-> way AP-AR did the scissor.
+> **AP-AU (last section of this file) IS THE COORDINATE FIX, AND IT IS PROMOTED.** AP-AT item 11
+> measured the lead - every TEV stage sampled **texcoord 0** (the uniform dump shows `st2` asking
+> for `coord=1` and receiving `uvsrc=0`) and enabling the selection **halved** the remaining
+> layer-vs-aurora difference - and left it unpromoted on purpose. AP-AU measured the menus, the
+> popup band and the progression under it, made it the **default**, and re-recorded both gate
+> references deliberately on two independent runs each: a TEV stage now samples the coordinate
+> `TEVORDER` names, and a coordinate `GEN_MODE` does not define falls back to **coordinate 0**
+> (Dolphin's documented quirk), not to texel (0,0). Numbers: mean |d| vs aurora at guest 2800
+> **11.20 -> 4.83**, luma 45.58 -> 35.63 (aurora 37.00); popup luma 45.51 with 1.98 % above 250
+> (band intact); **guest 900 - the vignette - byte-identical**, so the title wash is NOT a texcoord
+> problem and priority B stays with the mask alpha / EFB alpha / the batch; handover 1680 and save
+> 1 348 992 / 29 344 unchanged. New references guest 2800 `B4646917…`, guest 3500 `22B1CE31…`,
+> gate **PASS attempt 1 twice**, control `TLS_NO_TEV_TEXCOORD=1` reproduces `5BB1538F…` /
+> `77BF4AB2…` exactly. Together with AP-AT's upload fix the pair at guest 2800 goes from
+> mean |d| **19.81 / 71.13 %** to **4.83 / 37.26 %**. What it does NOT fix: the water is at
+> aurora's *level* but not its *content* (still not rippled), 128x128 glow candidates keep the
+> AP-AT residue, and `TLS_XF_TEXGEN`'s own `8`-vs-`0` fallback is a named follow-up.
 
 > **READ §5c.46 AP-AS (the section before AP-AT)** for the back-buffer channel-order bug it fixed
 > and the same-launch aurora pair that localised the rock to batch b48 - and note that its item 7
@@ -15445,3 +15454,65 @@ So **only guest 900 is the vignette frame**; the other three numbers in the doss
 | **mean &#124;d&#124; vs aurora** | **11.20** (48.13 % of pixels changed by > 8) | **4.83** (37.26 %) | - |
 
 (`docs/evidence/at_texcoord_g2800.png` = default | texcoord | aurora | 4x difference.) For context, the same pair before the AP-AT fix was mean |d| **19.81** / 71.13 %, so the upload guard took it 19.81 -> 11.20 and the coordinate selection takes it to 4.83. **What the picture adds to the numbers:** with the switch on the water drops from a bright flat blue to near-black, which is aurora's *level*, but it is **still not rippled** - so the water's remaining divergence is the sampled *content*, not the coordinate. **Not promoted**, deliberately: this changes every batch whose stages name texcoord 1 (menus, the popup band and the whole field are unmeasured under it), and a global sampling change needs those three measured and then two deliberate re-records - the same bar AP-AR applied to the scissor and the blend. That is the next session's cheapest high-value experiment, and it is one run per configuration.
+
+---
+
+### AP-AU. THE PER-STAGE TEV TEXCOORD IS PROMOTED — a TEV stage now samples the coordinate TEVORDER names (and coordinate 0, not texel (0,0), for a coordinate GEN_MODE does not define, which is Dolphin's documented quirk), and it HALVES what is left of the layer-vs-aurora difference at the gate's content frame: mean |d| 11.20 -> 4.83, luma 45.58 -> 35.63 against aurora's 37.00
+
+AP-AT item 11 measured the lead and left it unpromoted, deliberately. This closes it the way AP-AR closed the scissor and the blend: the change is a hardware rule plus a measurement, both recorded, with an escape hatch, two independent re-records and two PASS-attempt-1 gate runs.
+
+**1. What the old default did, and why it was wrong twice.** `gx_tev_fill_texgen` filled `order[i][3]` (the coordinate a TEV stage samples) with **0 for every stage** unless `TLS_TEV_TEXCOORD=1`, so the guest's `TEVORDER` texcoord field was ignored: `TLS_TEV_UNIFORM` printed `st2 coord=1 uvsrc=0` for the rock batch. Two separate defects lived in the switch-gated form as well: it fell back to **`8` = "sample texel (0,0)"** whenever the coordinate was not usable, whereas Dolphin's `PixelShaderGen.cpp` `WriteStage` carries the hardware rule in its own comment -
+
+> Quirk: when the tex coord is not less than the number of tex gens (i.e. the tex coord does not exist), then **tex coord 0 is used** (though sometimes glitchy effects happen on console).
+
+- so the fallback is **coordinate 0**, not a single texel. The new code splits the two cases explicitly, because only one of them is the guest's:
+
+```
+bool exists = (tc < numtex);                      // GEN_MODE defines the coordinate
+bool fed    = (tc < 2u) && ((b->texcoord_mask >> tc) & 1u);   // this batch feeds the attribute
+order[i][3] = !exists ? 0u : (fed ? tc : 8u);     // guest quirk -> coord 0; host gap -> (0,0)
+```
+
+`tc >= numtex` is a **guest declaration** and hardware's answer is coordinate 0. `tc < numtex` but the batch does not feed that attribute is a **host limitation** (the layer has TEX0/TEX1 only and XF texgen is default-off), and (0,0) stays the honest stand-in there.
+
+**2. The measurement that justifies the promotion, on one launch each.** Guest-keyed, gate script, same capture as AP-AT, aurora as the Dolphin-derived reference for that stream:
+
+| guest 2800 | old default (coordinate 0) | **new default** | aurora |
+|---|---|---|---|
+| mean RGB | (42.35, 46.45, 49.53) | **(36.63, 35.80, 32.17)** | (36.10, 37.42, 37.18) |
+| luma | 45.58 | **35.63** | 37.00 |
+| **mean &#124;d&#124; vs aurora** | **11.20** (48.13 % changed) | **4.83** (37.26 %) | - |
+| red-dominant | 0.00 % | 0.00 % | 0.00 % |
+
+i.e. the coordinate selection is worth more than the sum of everything AP-AT's upload fix bought (19.81 -> 11.20) - and the two together take the pair from **19.81 / 71.13 %** to **4.83 / 37.26 %** (`docs/evidence/at_texcoord_g2800.png`). The other frames, measured in the same runs:
+
+| guest frame | old default | **new default** | note |
+|---|---|---|---|
+| 3500 (popup) | (45.60,49.43,49.11) luma 48.25, >250 2.02 % | (42.82,46.71,46.37) luma **45.51**, >250 **1.98 %** | the band is still there and still legible |
+| 400 / 900 / 1200 / 1600 (menu) | 39.89 / **90.43** / 16.12 / 1.22 | 37.93 / **90.43** / 20.76 / 0.38 | **900 (the vignette) is byte-identical**; the other three are fades that get darker (1600 is closer to black) |
+| handover / save | 1680 / 1 348 992 / 29 344 B | **identical** | progression untouched |
+
+The vignette being byte-identical is itself the useful negative: the title plate's wash is **not** a texcoord problem, which narrows priority B to the mask alpha (`K0.a`), the EFB alpha or the batch, exactly the three candidates 5c.23 left.
+
+**3. What it does NOT fix.** The water is still not rippled. With the coordinate right, the layer samples the water's detail map at the right coordinate and the surface goes to aurora's *level* (dark instead of bright flat blue) but not to its *content* - so the remaining water gap is the sampled content (indirect stage / the map the stage names), not the coordinate. `TLS_XF_TEXGEN` (coordinates 2..7) is untouched and still default-off, and its own `(tc < numtex) ? tc : 8` fallback has the same `8`-vs-`0` deviation, which is now a named follow-up rather than a silent one.
+
+**4. Gate: two deliberate re-records, two PASSes, one control.** Both references move because both gate frames are the cave. Recorded on two independent runs of the final binary (`logs_ap/at/run13_rec1.log` 160 s, `run14_rec2.log` 152 s, identical hashes):
+
+| guest frame | AP-AT reference | **AP-AU reference** |
+|---|---|---|
+| 2800 (content) | `5BB1538F…` | **`B4646917A98EC7CE3036B583E7A8479D416F47B08FB484BE2AA316C911FE56B1`** |
+| 3500 (popup) | `77BF4AB2…` | **`22B1CE31D81A75BA6E0E18A2A68DB2F748F4BDCA83A05D0418525D85FCD7BBEE`** |
+
+`pwsh tools/invariant.ps1` is **PASS, attempt 1** at `logs_ap/at/gate6.log` and `gate7.log` (content luma 36.51, bright 0; popup luma 46.18, bright 2.03 %; handover 1680; save 1 348 992 / 29 344). The control run with `TLS_NO_TEV_TEXCOORD=1` returns `5BB1538F…` and `77BF4AB2…` **exactly** (152 s), so the superseded picture is reproducible on demand and the promotion changed only what it says it changed. `tools/invariant.ps1` now scrubs `TLS_TEV_TEXCOORD`/`TLS_NO_TEV_TEXCOORD` as well, and `Play_TheLastStory.bat` documents the new default and its escape hatch.
+
+**5. Changes.** `recomp/gfx_d3d11.c` (the default + the two-case fallback + the comment quoting Dolphin's quirk and the numbers); `tools/invariant.ps1` (two re-recorded references, two more scrubbed variables, the reason); `Play_TheLastStory.bat` (a REM naming the default and `TLS_NO_TEV_TEXCOORD`); this file. **0 changes to `src/`**; build green.
+
+**6. Run log** (one runner at a time, `--window --minimized`, save files deleted before each).
+
+| # | what | result |
+|---|---|---|
+| 1 | 3 520 frames, `TLS_TEV_TEXCOORD=1` (old fallback), shots 400/900/1200/1600/2800/3500 | 159 s; 2800 luma 35.63 (the lead), menus as tabulated |
+| 2 | 3 520 frames, switch on + the corrected fallback | **identical to #1 at 2800** - no stage at the content frame names a coordinate >= numtex, so the quirk costs nothing there and the fix is invisible until a scene needs it |
+| 3-4 | the promoted default, twice, gate-shaped | 160 s / 152 s, `B4646917…` / `22B1CE31…` both times |
+| 5-6 | `pwsh tools/invariant.ps1` twice | **PASS, attempt 1** both |
+| 7 | `TLS_NO_TEV_TEXCOORD=1`, shots 2800/3500 | 152 s; `5BB1538F…` / `77BF4AB2…` exactly - the control |

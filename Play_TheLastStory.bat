@@ -38,4 +38,12 @@ REM 2800 luma 50.04, guest 3500 luma 48.17 with >250 2.02 %, two independent run
 REM each). To see the superseded picture, set TLS_NO_SCISSOR=1 and TLS_FORCE_BLEND=1.
 REM Handover 5c.46 AP-AR has the measurements; items 6/7/14/20/21 of AP-AQ the cause.
 
+REM --- AP-AU: the per-stage TEV texcoord is now a BUILD DEFAULT too -----------------
+REM A TEV stage samples the texcoord TEVORDER names (and, for a coordinate GEN_MODE does
+REM not define, coordinate 0 - Dolphin PixelShaderGen's documented quirk). Measured at the
+REM gate's content frame: the layer-vs-aurora difference halves (mean |d| 11.20 -> 4.83).
+REM The former TLS_TEV_TEXCOORD=1 is a no-op now; TLS_NO_TEV_TEXCOORD=1 restores the old
+REM "every stage samples coordinate 0" picture if a scene ever needs it. AP-AU in the
+REM handover has the numbers.
+
 start "" "%~dp0build\recomp\tls_runner.exe" --window --minimized --fps 60 %*
