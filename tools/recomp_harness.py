@@ -174,6 +174,7 @@ def build_runner(jobs: int = 12):
         (ROOT_DIR / "recomp" / "audio_player.c", RECOMP_DIR / "audio_player.o"),
         (ROOT_DIR / "recomp" / "gx_pipeline.c", RECOMP_DIR / "gx_pipeline.o"),
         (ROOT_DIR / "recomp" / "gx_fifo_capture.c", RECOMP_DIR / "gx_fifo_capture.o"),
+        (ROOT_DIR / "recomp" / "aurora_live_host.c", RECOMP_DIR / "aurora_live_host.o"),
         (ROOT_DIR / "recomp" / "tls_debug.c", RECOMP_DIR / "tls_debug.o"),
         (ROOT_DIR / "recomp" / "host_runner.c", RECOMP_DIR / "host_runner.o"),
     ]

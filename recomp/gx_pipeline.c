@@ -1,4 +1,5 @@
 #include "gx_pipeline.h"
+#include "aurora_live_host.h"
 #include "gx_fifo_capture.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -807,6 +808,7 @@ void gx_pipeline_end_frame(void) {
     /* TLS_GX_CAPTURE closes the frame here: this is the point the backend presents, i.e.
      * after every GX command the guest issued for the frame has been consumed. */
     if (tls_gxcap_on) tls_gxcap_frame_end((uint32_t)g_runner_current_frame);
+    tls_aurora_frame_end((uint32_t)g_runner_current_frame);
 }
 
 void gx_pipeline_set_vtx_desc(uint32_t attr, uint32_t type) {
@@ -2806,6 +2808,8 @@ void gx_pipeline_feed_byte(uint8_t byte) {
      * parser state the decoder does (that is how the 9-byte 0x40 display-list call is
      * recognised and dropped). One global load when the recorder is off. */
     if (tls_gxcap_on) tls_gxcap_byte(byte, s_parser_state == GX_STATE_IDLE);
+    /* 5c.47 AP-AX: the same tap, for aurora. One global test when the live path is off. */
+    if (tls_aurora_live_on) tls_aurora_tap_byte(byte, s_parser_state == GX_STATE_IDLE);
     switch (s_parser_state) {
         case GX_STATE_IDLE: {
             if (byte == 0x00) {

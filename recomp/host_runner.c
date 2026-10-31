@@ -16,6 +16,7 @@
 #include <windows.h>
 #include <mmsystem.h>
 #include "gfx_backend.h"
+#include "aurora_live_host.h"
 #include "audio_player.h"
 #include "gx_fifo_capture.h"
 #include "tls_debug.h"
@@ -1306,6 +1307,9 @@ int main(int argc, char** argv) {
     host_set_active_cpu(&cpu);
     gx_pipeline_init();
     gx_pipeline_set_pointer_resolver(host_resolve_gx_guest_addr);
+    /* 5c.47 AP-AX: aurora dereferences guest addresses directly, so the same planes the resolver
+     * translates are registered for one absolute mapping (TLS_AURORA only). */
+    tls_aurora_set_guest_ram(cpu.ram, (uint32_t)cpu.ram_size, cpu.mem2, (uint32_t)cpu.mem2_size);
     tls_debug_init();
 
 #ifdef _WIN32
@@ -1877,6 +1881,7 @@ int main(int argc, char** argv) {
     host_dump_mem_spec(&cpu);
 
     tls_gxcap_shutdown();
+    tls_aurora_shutdown_host();
 
     tls_debug_dump_full(&cpu, frame, "Runner Execution Completed");
 
