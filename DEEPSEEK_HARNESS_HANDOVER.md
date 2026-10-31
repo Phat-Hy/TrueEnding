@@ -24,7 +24,8 @@
 > than the snapshot decode. AP-AT also **falsifies AP-AQ item 22 / AP-AR §7's "guest
 > 400/900/1200/1600 are all luma 90.43"**: only 900 is (the vignette); 400/1200/1600 measure
 > 39.89 / 16.12 / 1.22 with 0.00 % above 250 - and the sprite compensation is **not** the
-> vignette's cause (`TLS_NO_GLOW=1` leaves frame 900 byte-identical), so B's next step is a bisect
+> vignette's cause (`TLS_NO_GLOW=1` leaves frame 900 essentially unchanged - luma 90.43 and
+> 8.28 % above 250 either way, 76 327 vs 76 329 pixels above 250), so B's next step is a bisect
 > of the four full-screen **REPLACE** quads on the EFB staging addresses `0x905C3000` /
 > `0x9038xxxx`, which the `TLS_BATCH_PROBE=900` ladder names - and against the one-frame reference
 > 5c.23 §5 already measured (hardware's plate is **mean 205 / corners 174-176 / centre 218-220**,
@@ -40,7 +41,8 @@
 > `TEVORDER` names, and a coordinate `GEN_MODE` does not define falls back to **coordinate 0**
 > (Dolphin's documented quirk), not to texel (0,0). Numbers: mean |d| vs aurora at guest 2800
 > **11.20 -> 4.83**, luma 45.58 -> 35.63 (aurora 37.00); popup luma 45.51 with 1.98 % above 250
-> (band intact); **guest 900 - the vignette - byte-identical**, so the title wash is NOT a texcoord
+> (band intact); **guest 900 - the vignette - keeps its level exactly** (luma 90.43, 8.28 % above 250 in
+> every configuration, though the pixels move: `949D51EB…` -> `F7D0A0D9…`), so the title wash is NOT a texcoord
 > problem and priority B stays with the mask alpha / EFB alpha / the batch; handover 1680 and save
 > 1 348 992 / 29 344 unchanged. New references guest 2800 `B4646917…`, guest 3500 `22B1CE31…`,
 > gate **PASS attempt 1 twice**, control `TLS_NO_TEV_TEXCOORD=1` reproduces `5BB1538F…` /
@@ -15422,7 +15424,7 @@ and `docs/evidence/at_pair_g2800.png` is the picture (layer before | layer after
 
 So **only guest 900 is the vignette frame**; the other three numbers in the dossier were not measured on those frames. The same run also shows the vignette is unchanged by the promotion (it is the promoted default) and by the AP-AT guard (identical hashes before and after: `949D51EB…` at 900). Its geometry, straight out of the 900 PPM (`logs_ap/at/vignette.py`): a radial gradient centred **exactly** at (641,360) = the image centre, mirror-symmetric in both axes, mean luma **255.00 for r<0.3**, then 242.9 / 226.4 / 186.0 / 129.3 / 72.8 / 31.0 / 7.5 in the next six rings - i.e. a single centred additive glow that saturates a 573x283 disc (76 329 px = 8.28 %, x[355..927] y[244..526]).
 
-**The obvious suspect is falsified too, cheaply.** The `TLS_BATCH_PROBE=900` ladder shows the menu is 27 batches, and after the first batch - a 1 386-vertex full-screen quad on **0x907FC980, the 64x64 golden glow sprite** - the frame is already (220,220,220); four full-screen **`blend=0` (REPLACE)** quads on `0x905C3000` and the `0x9038xxxx` EFB-copy staging addresses (b14..b17, 6 vertices each) take it to (254,254,254), and b18 onwards settles at (90,90,90). So the menu's presentation samples a **staging address**, which is exactly the AP-AQ item 12 feedback class, and the new one-line diagnostic `TLS_NO_GLOW=1` (disable the rewrite for every size) leaves the frame **identical**: 90.43, 8.28 %, 76 327 >250 pixels. **The sprite compensation is not the vignette's cause** (both facts are worth having: it *is* applied to that sprite, and it makes no difference to the menu). Priority B's next step is therefore a `--max-cmds`/batch bisect of the b14..b17 REPLACE quads, not the texture path.
+**The obvious suspect is falsified too, cheaply.** The `TLS_BATCH_PROBE=900` ladder shows the menu is 27 batches, and after the first batch - a 1 386-vertex full-screen quad on **0x907FC980, the 64x64 golden glow sprite** - the frame is already (220,220,220); four full-screen **`blend=0` (REPLACE)** quads on `0x905C3000` and the `0x9038xxxx` EFB-copy staging addresses (b14..b17, 6 vertices each) take it to (254,254,254), and b18 onwards settles at (90,90,90). So the menu's presentation samples a **staging address**, which is exactly the AP-AQ item 12 feedback class, and the new one-line diagnostic `TLS_NO_GLOW=1` (disable the rewrite for every size) leaves the frame **essentially unchanged**: luma 90.43 and 8.28 % above 250 either way, with 76 327 vs 76 329 pixels above 250. **The sprite compensation is not the vignette's cause** (both facts are worth having: it *is* applied to that sprite, and it makes no difference to the menu). Priority B's next step is therefore a `--max-cmds`/batch bisect of the b14..b17 REPLACE quads, not the texture path.
 
 **The reference for that frame exists, and it says the defect is the ALPHA, not the shape.** `docs/evidence/at_menu_frames_400_900_1600.png` shows what the numbers only imply: 400 is the *same* radial glow at a third of the brightness, 900 is the vignette with the game's own title text washed out to illegibility on it ("THE … RY", the ©2011-2012 Nintendo / MISTWALKER line and the black PRESS box are legible because they are drawn *after* the glow), and 1600 is black. And the title plate was measured against Dolphin's own mask dump in 5c.23 (§5, `tex1_64x64_e6053facb03e8a53_3.png`): hardware's plate is **mean 205, corners 174-176, centre 218-220** (an effective mask alpha of ~0.3 at the corners and ~0.15 at the centre), while the layer is **mean 90, corners 0, centre 255** - the mask is decoded correctly (the dump's row 32 is `2 26 80 152 215 246 254 255 …`) and its alpha is being applied at **full strength instead of scaled**. So B is a *level* defect with a one-frame reference and the three candidates 5c.23 left standing (`K0.a` for the stage, the pass writing EFB alpha, or the wrong batch); this session adds that it is **not** the texture compensation and that the frame it must be measured on is guest **900** of the gate's script, not "all four".
 
@@ -15436,7 +15438,7 @@ So **only guest 900 is the vignette frame**; the other three numbers in the doss
 |---|---|---|
 | 1 | 2 810 frames, `TLS_TEV_PROBE=2800` + `TLS_TEV_UNIFORM=48,2800` + `TLS_BATCH_PROBE=2800` + shots 400/900/1200/1600/2800 | 126 s; uniform == probe decode for all three stages; `vtx` greys; shot 2800 still `8938E369…` (the instruments are inert); the menu numbers of item 7 |
 | 2 | 2 810 frames, `TLS_INK_STATS=1` + `TLS_TEX_DUMP_FINAL=0x91EBC460` + shot 2800 | 121 s; the atlas is `action=glow` and its uploaded mean is **(169.76,80.21,75.02), 75.16 % red** - the cause, in one line |
-| 3 | 3 520 frames with the guard, shots 2800/3500 + the four menu frames | 156 s; `5BB1538F…` / `77BF4AB2…`; red-dominant **0.00 %** at 2800; the menu frames byte-identical to the pre-guard run |
+| 3 | 3 520 frames with the guard, shots 2800/3500 + the four menu frames | 156 s; `5BB1538F…` / `77BF4AB2…`; red-dominant **0.00 %** at 2800; the four menu frames' statistics identical to the pre-guard run (39.89 / 90.43 / 16.12 / 1.22, 0.00 / 8.28 / 0.00 / 0.00 % above 250; the hashes were not compared because run 1's files were overwritten) |
 | 4-5 | the same run twice more, gate-shaped, no instruments | 156 s each, **identical hashes** - the two runs the references are recorded from |
 | 6-7 | `pwsh tools/invariant.ps1` twice | **PASS, attempt 1** both times, new references |
 | 8 | `TLS_GLOW_ALL=1`, shots 2800/3500 | 162 s; `8938E369…` / `F97A5863…` **exactly** - the control |
@@ -15489,10 +15491,10 @@ i.e. the coordinate selection is worth more than the sum of everything AP-AT's u
 | guest frame | old default | **new default** | note |
 |---|---|---|---|
 | 3500 (popup) | (45.60,49.43,49.11) luma 48.25, >250 2.02 % | (42.82,46.71,46.37) luma **45.51**, >250 **1.98 %** | the band is still there and still legible |
-| 400 / 900 / 1200 / 1600 (menu) | 39.89 / **90.43** / 16.12 / 1.22 | 37.93 / **90.43** / 20.76 / 0.38 | **900 (the vignette) is byte-identical**; the other three are fades that get darker (1600 is closer to black) |
+| 400 / 900 / 1200 / 1600 (menu) | 39.89 / **90.43** / 16.12 / 1.22 | 37.93 / **90.43** / 20.76 / 0.38 | **900 (the vignette) keeps luma 90.43 / 8.28 % exactly, though its hash moves (`949D51EB…` -> `F7D0A0D9…`)**; the other three are fades that get darker (1600 is closer to black) |
 | handover / save | 1680 / 1 348 992 / 29 344 B | **identical** | progression untouched |
 
-The vignette being byte-identical is itself the useful negative: the title plate's wash is **not** a texcoord problem, which narrows priority B to the mask alpha (`K0.a`), the EFB alpha or the batch, exactly the three candidates 5c.23 left.
+The vignette's *level* not moving (90.43 / 8.28 % either way, though the pixels move: `949D51EB…` -> `F7D0A0D9…`) is itself the useful negative: the title plate's wash is **not** a texcoord problem, which narrows priority B to the mask alpha (`K0.a`), the EFB alpha or the batch, exactly the three candidates 5c.23 left.
 
 **3. What it does NOT fix.** The water is still not rippled. With the coordinate right, the layer samples the water's detail map at the right coordinate and the surface goes to aurora's *level* (dark instead of bright flat blue) but not to its *content* - so the remaining water gap is the sampled content (indirect stage / the map the stage names), not the coordinate. `TLS_XF_TEXGEN` (coordinates 2..7) is untouched and still default-off, and its own `(tc < numtex) ? tc : 8` fallback has the same `8`-vs-`0` deviation, which is now a named follow-up rather than a silent one.
 
@@ -15516,3 +15518,49 @@ The vignette being byte-identical is itself the useful negative: the title plate
 | 3-4 | the promoted default, twice, gate-shaped | 160 s / 152 s, `B4646917…` / `22B1CE31…` both times |
 | 5-6 | `pwsh tools/invariant.ps1` twice | **PASS, attempt 1** both |
 | 7 | `TLS_NO_TEV_TEXCOORD=1`, shots 2800/3500 | 152 s; `5BB1538F…` / `77BF4AB2…` exactly - the control |
+
+---
+
+### AP-AV. PRIORITY B DIAGNOSED (not fixed): the title plate is a multi-pass EFB-copy blur-glow composite that fades in and SATURATES the centre by guest 500 while the vignette paints the corners to black at full strength - 90.43 / 0.00 / 255.00 against the Dolphin reference's 205 / 175 / 219 - and this session removes two candidate causes and names the structure
+
+AP-AT item 7 measured the vignette and falsified the "all four menu frames are 90.43" note. This section takes it one step further without fixing it, because the two cheap candidates are now excluded and what is left is the composite itself.
+
+**1. The plate is a FADE that saturates, and the corners are black from the start.** One launch, 1 000 frames, guest-keyed shots every 100 frames (`logs_ap/at/run16_growth.log`, 30 s):
+
+| guest frame | mean luma | >250 | centre 128x128 mean | corner 40x40 mean |
+|---|---|---|---|---|
+| 300 | 0.13 | 0.02 % | 0.0 | 0.0 |
+| 400 | 37.93 | 0.00 % | 107.0 | **0.0** |
+| 500 | 90.69 | 8.11 % | **255.0** | **0.0** |
+| 600 | 90.69 | 8.11 % | 255.0 | 0.0 |
+| 700 | 90.43 | 8.28 % | 255.0 | 0.0 |
+| 900 | 90.43 | 8.28 % | 255.0 | 0.0 |
+
+So the plate is **not** an unbounded feedback loop: it fades in, the centre clips at 255 by frame 500, and the frame then **converges** (500 and 900 agree to 0.26 luma). It is also not a static gradient: at 400 the centre is 107 and the corners are already 0, so the **vignette is applied at full strength from the first frame**, while the plate behind it is still fading. Against 5c.23 §5's reference for this screen (Dolphin's mask dump and its own frame dumps: **mean 205, corners 174-176, centre 218-220**) the layer is simultaneously **too dark at the corners (0 vs 175)** and **too bright at the centre (255 vs 219)** - the adaptive range is inverted, which is what "the vignette strength is the question" has meant since 5c.23.
+
+**2. What the frame actually is: a blur-glow composite of full-screen quads sampling EFB-copy staging addresses.** `TLS_BATCH_DUMP_GUEST=900` + `TLS_TEV_PROBE=900` in one 30 s launch (`logs_ap/at/run17_menu_batches.log`) prints the menu frames' batch geometry: apart from the HUD text (the 256x256 I4 atlas `0x9076E5E0`, 540 vertices at X[-0.75,-0.55]) and the small `0x90D19B80` SKIP-plate quads, **every batch is a 6-vertex full-screen quad** at NDC `X,Y [-1,1]` sampling one of the stage addresses:
+
+```
+0x905C3000 640x448 fmt=6  REPLACE (blend=0 s=4 d=1) / (s=1 d=0) / (s=4 d=0)
+0x903917C0 320x224 fmt=6  REPLACE (s=1 d=0)     0x9044CC20 / 0x90429C00 / 0x90492C60 320x224 fmt=4
+0x903D77C0 160x112 fmt=6  REPLACE (s=1 d=0)     0x9038D1C0  80x56  fmt=6  REPLACE and s=4 d=5
+```
+
+i.e. copy the frame down to a 320x224 / 160x112 / 80x56 buffer, then draw those buffers back up additively, several times per frame. That is the **same architectural shape as the field's white-out** (AP-AP/AP-AQ: a downscale/blur chain into a corner of the EFB, plus full-screen composite quads), and AP-AQ's two defects there - an inert scissor and guest-disabled blends promoted to adds - were both in *that* shape. The differences here: the quads really are full-frame (no corner scissor in the NDC extents), and the blends are explicit (`blend=1 s=4 d=5`, `s=4 d=0`, `s=1 d=0`) plus REPLACE.
+
+**3. Two candidate causes excluded this session, with the measurement that excludes each.**
+
+* **The sprite (glow) compensation is not it.** `TLS_NO_GLOW=1` (disable the CMPR baseline rewrite for every size) leaves frame 900 **essentially unchanged**: luma 90.43 and 8.28 % above 250 either way, with 76 327 vs 76 329 pixels above 250. The rewrite *is* applied to the 64x64 sprite `0x907FC980` that the first batch samples - and it changes nothing, because batches b14..b17 **REPLACE** the whole frame afterwards, so b0's contribution is overwritten before it is seen.
+* **The per-stage texcoord is not it.** AP-AU promoted the coordinate rule and frame 900 keeps its **level** exactly (luma 90.43, 8.28 % above 250) while its pixels move (`949D51EB…` -> `F7D0A0D9…`) - i.e. the mask is read at a slightly different place and the plate's level and radial shape do not change. So the defect is the arithmetic of the composite, not where it is sampled.
+* Still standing from 5c.23 and untouched: (a) `K0.a` for the mask stage, (b) the pass writing EFB alpha that a later composite reads, (c) the batch being the wrong producer. This session adds a fourth, structurally suggested by item 2: **the additive upscales sum to more than 1.0** - the centre is clipped at 255 while the corners are painted 0, which is what a blur chain does when its additive gains are too high *and* its vignette multiply is too strong at the same time.
+
+**4. The measurement the next session should make first, and it is one launch.** `TLS_BATCH_RECT=900` (per-batch back-buffer average *inside the batch's own NDC rect*) on the same 1 000-frame run isolates which of the 27 batches carries the saturation and which carries the corner black-out; then the same frame with the guest's own `BP 0x20/0x21` and `BP 0x4F/0x50` read out of a short capture fixes the scissor and the copy-clear colour. Both instruments exist; this is the AP-AP method pointed at the menu instead of the field, and AP-AQ's result (a blur chain that saturates is *usually* a blend/scissor defect in the tail) is the reason to expect a fix rather than a rewrite.
+
+**5. Changes.** None to `recomp/` for B - this section is a diagnosis with its instruments already in place (`TLS_NO_GLOW`, `TLS_BATCH_PROBE`, `TLS_BATCH_DUMP_GUEST`, `TLS_TEV_PROBE`); `logs_ap/at/vignette.py` (radial profile) and the growth run are scratch. **0 changes to `src/`.**
+
+**6. Run log** (one runner at a time, `--window --minimized`).
+
+| # | what | result |
+|---|---|---|
+| 1 | 1 000 frames, shots at guest 300/400/500/600/700/900 | 30 s; the growth curve of item 1 (fade, saturation by 500, converged) |
+| 2 | 1 000 frames, `TLS_BATCH_DUMP_GUEST=900` + `TLS_TEV_PROBE=900` | 30 s; the full-screen 6-vertex staging-address composite of item 2 |

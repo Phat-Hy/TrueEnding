@@ -120,8 +120,9 @@ Set-Location $root
 # Content frame: 5BB1538F... -> B4646917... (mean RGB 36.63,35.80,32.17, luma 35.63, >250 0.00 %,
 # red-dominant 0.00 %). Popup frame: 77BF4AB2... -> 22B1CE31... (mean RGB 42.82,46.71,46.37, luma
 # 45.51, >250 1.98 %, still inside the 0.5..10 % band window). Menu frames 400/900/1200/1600:
-# 37.93 / 90.43 / 20.76 / 0.38 - guest 900 (the vignette) is BYTE-IDENTICAL to before, and the
-# other three are fades that get slightly darker. Handover 1680 and the save (1 348 992 / 29 344 B)
+# 37.93 / 90.43 / 20.76 / 0.38 - guest 900 (the vignette) keeps its level EXACTLY (luma 90.43,
+# 8.28 % above 250 both ways, though its hash moves 949D51EB... -> F7D0A0D9...), and the other
+# three are fades that get slightly darker. Handover 1680 and the save (1 348 992 / 29 344 B)
 # are UNCHANGED. The escape hatch is TLS_NO_TEV_TEXCOORD=1 (value-tested): it reproduces the
 # superseded 5BB1538F... / 77BF4AB2... exactly.
 $EXPECTED_SHA = '22B1CE31D81A75BA6E0E18A2A68DB2F748F4BDCA83A05D0418525D85FCD7BBEE'
