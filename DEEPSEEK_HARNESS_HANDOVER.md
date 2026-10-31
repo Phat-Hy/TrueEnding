@@ -15210,8 +15210,40 @@ arguments) or something the batch *inherits* (which texture map a stage samples,
 tables) - and both are printable without guessing: `TLS_TEV_PROBE=2800` prints the layer's own decode of the same
 registers, and `TLS_BATCH_DUMP_GUEST=2800,1` prints which map/tex the batch bound.
 
+**7. The batch's chain, fully decoded by the layer itself, and every input in it is neutral.** `TLS_TEV_PROBE=2800`
++ `TLS_BATCH_DUMP_GUEST=2800,1` + shot (2810 frames, 121 s, shot still `8938E369…`) gives b48 as `[tev #13]`,
+`vcnt=11892`, `tex=0x91EBC460 tex1=0x90782780`, `blend=0 s=4 d=5`, `ntexgen=2`, and:
 
-**7. The batch's TEV registers, read out of the same capture (raw, for the next measurement).** For the draws that
+| stage | the layer's own decode | what it computes |
+|---|---|---|
+| st0 | `tex=0` (texture off), `chan=0`, rgb `ZERO konst.rgb ras.rgb ZERO`, `kc=K1`, dest `c1` | `c1 = ras * K1` = ras (K1 is white) |
+| st1 | `tex=1`, `map=0`, `chan=7`, rgb `ZERO tex.rgb c1.rgb ZERO`, dest `prev` | `prev = c1 * tex0` |
+| st2 | `tex=1`, `map=1`, `coord=1`, rgb `ZERO tex.rgb prev.rgb ZERO`, **scale=2**, dest `prev` | `prev = prev * tex1 * 2` |
+
+with `K1 = (1,1,1,1)` (raw `0x8FF0FF`, the layer's printed value), `K0/K3 = 0`, `K2 = (0.2549,0.2000,0.2314,1.0)`,
+`C1..C3 = (1,1,1,0)`, both swap tables identity and both alpha tests `Always`. Then each input was measured:
+
+* **tex0** (`0x91EBC460`, 256x256 CMPR): decoded by the layer itself under `TLS_TEX_DUMP=0x91EBC460` - the dump is
+  `build/recomp/tex_91EBC460_256x256_f14.ppm`, mean RGB **(88.54, 85.39, 76.40)**, red-dominant **0.00 %**. (The
+  unconditional dump is the one that works: the frame-gated form writes no file because the atlas is uploaded
+  before frame 2800 - measured twice now.)
+* **tex1** (`0x90782780`): a **4x4 CMPR block**, `c0=0x8410` (131,129,131), `c1=0x7BEF` (123,125,123), indices all
+  `2` - a mid-grey ramp at (127,127,127). With `scale=2` on st2 it multiplies by exactly 1.
+* **ras**: the captured draws that sample the atlas declare **no CLR0 attribute** (`st.desc[GX_VA_CLR0] != 1`), and
+  `gx_pipeline.c` sets a missing CLR0 to **white** (line 2358-2360); `TLS_XF_LIGHTING` (the only path that replaces
+  `v->color` with the lit channel colour) is **default off**. So ras = white.
+
+So `white * grey * (grey*2) = grey (~62-88 luma)` - which is what aurora shows and **not** the (42,20,19) the batch
+actually writes. The divergence is therefore **inside the fragment program's evaluation of this chain, or in the
+vertex colour the shader receives**, not in the combiner decode, the konst, the atlas, the second texture or the
+lighting. The two remaining discriminators are cheap and named: dump the *uniform packet* for b48 (the `GxTevConstants`
+contents for `[tev #13]`, i.e. what the GPU actually got rather than what the probe decodes) and compare
+`TevRegular3`/`TevRegular1` against Dolphin's `WriteTevRegular` for a stage whose `c` is a **colour** argument
+(st2's `c = prev.rgb`) with `scale = 2` - the one unusual construction in this chain.
+
+
+
+**8. The batch's TEV registers, read out of the same capture (raw, for the next measurement).** For the draws that
 sample `0x91EBC460` the last-written TEV state is
 
 ```
@@ -15232,7 +15264,7 @@ registers is one run away (`TLS_TEV_PROBE=2800`, which prints the decode "the sh
 layout is the reference. If it is a konst leak, the fix is exactly the kind `AGENTS.md` §1 forbids in this layer -
 another reason this is now a migration test rather than a work item.
 
-**8. The exact next experiment, with the trap already recorded.** `TLS_TEX_DUMP=0x91EBC460` **without**
+**9. The exact next experiment, with the trap already recorded.** `TLS_TEX_DUMP=0x91EBC460` **without**
 `TLS_TEX_DUMP_FRAME`: the per-frame form only dumps uploads that happen *inside* the named frame, and this atlas is
 cached before 2800, so a frame-gated dump produces **no file at all** (measured this session - 26 min run, no
 `tex_*91EBC460*` written, because the host was also loaded and the run took 1563 s; the shot was still
@@ -15240,18 +15272,18 @@ cached before 2800, so a frame-gated dump produces **no file at all** (measured 
 dump** means the layer's CMPR decoder, a **grey dump** means the 3-stage TEV evaluation, and the batch's stage
 parameters are already readable from the capture (`BP 0xC0..0xDF`, `drawstate.py`).
 
-**9. What this changes for the migration.** The red rock is now a **two-way migration test on one capture**: the
+**10. What this changes for the migration.** The red rock is now a **two-way migration test on one capture**: the
 same stream renders red in the layer (18.60 % red-dominant) and neutral in aurora (0.00 %), with both pictures from
 one launch and the layer's frame hash equal to the gate reference. The black area is a **shared** result and must be
 excluded from any "the migration fixed it" claim. And the instrument fix is a precondition for the migration's own
 A/B work: every `TLS_BATCH_PROBE` comparison from here on reports real R, G and B.
 
-**10. Changes.** `recomp/gfx_d3d11.c`: the three readbacks' channel order plus the comment block that carries the
+**11. Changes.** `recomp/gfx_d3d11.c`: the three readbacks' channel order plus the comment block that carries the
 measurement (0 changes to `src/`). Scratch instruments in `logs_ap/as/` (untracked): `defects.py` (red/black censuses
 and 8x8 maps), `presentation.py` (the channel-swap test that first ruled a swap *out* for the presented image),
 `texorigin.py` (which draws sample a texture, and a CMPR decode of it out of the capture's MEM2 plane).
 
-**11. Run log** (every launch `--window --minimized`, one at a time).
+**12. Run log** (every launch `--window --minimized`, one at a time).
 
 | # | what | result |
 |---|---|---|
