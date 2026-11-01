@@ -390,6 +390,35 @@ void emit_texobj(std::vector<uint8_t>& out, uint32_t mapId, const TexState& t) {
     std::printf("[replay] texobj map %u -> 0x%08X %ux%u fmt %u\n", mapId, guest_addr_for_image3(t.image3), width,
                 height, format);
   }
+  /* TLS_AURORA_TEXBIND=<addr>[,<addr>...]: one line per bind of a LISTED address, with the size and
+   * format aurora is given. THE QUESTION IT ANSWERS (5c.46 AP-BK): the composite tail writes the SAME
+   * destinations at several sizes (frame 2801 copies 0x9038D1C0 as 80x56, then 320x224, ...), and the
+   * layer's own per-copy means and aurora's readback of two of those copies agree to 5-13 %, so the
+   * copy CONTENT is not the difference - which leaves the SIZE the composite quad samples. The first
+   * 6 binds were all the log above printed, which is why this needs to be address-keyed. Inert unless
+   * set. */
+  {
+    static char sBindList[512];
+    static int sBindLoaded = -1;
+    if (sBindLoaded < 0) {
+      sBindLoaded = 0;
+      const char* e = std::getenv("TLS_AURORA_TEXBIND");
+      if (e != nullptr && *e) {
+        std::snprintf(sBindList, sizeof(sBindList), "%s", e);
+        sBindLoaded = 1;
+      }
+    }
+    if (sBindLoaded) {
+      const uint32_t addr = guest_addr_for_image3(t.image3);
+      char pat[16];
+      std::snprintf(pat, sizeof(pat), "0x%08X", addr);
+      if (std::strstr(sBindList, pat) != nullptr) {
+        std::printf("[texbind] #%u map %u addr 0x%08X %ux%u fmt %u\n", g_texObjs, mapId, addr, width, height,
+                    format);
+        std::fflush(stdout);
+      }
+    }
+  }
   /* TLS_AURORA_TEX_BYTES=<n>: print the first bytes of the guest memory the texobj points at, for the
    * first <n> texobjs. THE QUESTION IT ANSWERS (5c.46 AP-BG): after culling, depth, the raster channel,
    * the texture-cache identity and the colour-update enable are all excluded, the remaining fork is

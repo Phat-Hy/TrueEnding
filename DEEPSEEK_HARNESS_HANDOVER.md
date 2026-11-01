@@ -16421,3 +16421,52 @@ AP-BJ left two differences named and unquantified: the water/foreground inside t
 **3. What that implies, and the one experiment that splits it.** Two causes remain and they are the same two AP-AZ split for the title: either the downscaled copy's **content** is not a downscale in aurora, or the quad's **sampling** of the copy texture reads the wrong resolution. The instruments already exist on both sides and do not need the live path: the layer prints every copy with its destination average (`TLS_EFB_CHAIN_GUEST=2800`), and the harness can dump one copy's bytes from a same-run capture (`--copy-record N` / `--copy-out`). Comparing one 80x56 copy's bytes between them answers it in one replay, with no runner launch. **That is the next measurement, and it is a copy-content/sampling split on a frame whose 3D already matches.**
 
 **4. Run log.** No new run: this addendum is computed from the AP-BJ launch's eight layer shots and eight aurora readbacks (`logs_ap/align_run2.log`, `tools/aurora_spike/align_matrix.py`, `logs_ap/sharpness.py`). Same-run control unchanged: the layer's guest-2800 shot is `B4646917…`.
+
+---
+
+### AP-BK. THE COMPOSITE TAIL'S COPIES ARE RIGHT ON BOTH SIDES — layer 106.0 / 74.75 mean byte against aurora 111.34 / 64.67 (+5.0 % / -13.5 %) — and the sizes the quads sample are right too (the guest binds 80x56 / 160x112 / 640x448 and the adapter passes each faithfully), so what is left is how aurora composes them, not the copies
+
+AP-BJ's addendum measured the composite frames as a blur in the layer and a sharp picture in aurora (gradient 1.75-1.82 vs 20.8-22.4) and named the AP-AZ split: copy **content** vs **sampling**. This section answers the content half and the size half with one run and two replays, on the same capture, frame and copies.
+
+**1. The tail's structure, from the capture alone** (`drawstate.py build/recomp/gxcap/gxfifo.tlscap --frame 7 --copies`; frame 2801 is the composite frame). Sixteen copies, in stream order:
+
+```
+640x448 -> 0x905C3000 320x224   640x448 -> 0x90536FE0 160x112   640x448 -> 0x903DBDC0 80x56
+640x448 -> 0x90395DC0 160x112   640x448 -> 0x9038D1C0 80x56(clear)   160x112 -> 0x903917C0 40x28
+80x56   -> 0x9038D1C0  (x3)     640x448 -> 0x905C3000 320x224   640x448 -> 0x9038D1C0 160x112(clear)
+320x224 -> 0x903D31C0 320x224   320x224 -> 0x9038D1C0 320x224   640x448 -> 0x905C3000 320x224(clear)
+640x448 -> 0x917A9AA0 160x112   640x448 -> 0x900997E0 display=1 clear=1   (the XFB display copy)
+```
+
+**2. The layer's per-copy content at frame 2801** (`TLS_EFB_CHAIN_GUEST=2801 TLS_EFB_CHAIN_DUMP=1`, `logs_ap/bk_tail2801.log`): sixteen copies, all `fmt=6`, with destination averages - e.g. `0x903DBDC0 160x112 dstavg=(52,58,59)`, `0x903917C0 80x56 dstavg=(12,15,17)`, `0x9038D1C0 80x56 dstavg=(6,9,9)`, `0x903D31C0 320x224 dstavg=(59,63,61)`. The display copy reports `srca=170`, i.e. the EFB alpha is not 255 at this moment. (The same probe at frame 2800 lists only three 320x224 copies with **black** destinations - `dstavg=(0,0,0)/(0,0,0)/(5,5,5)` - which is why the composite of the pair is the odd frame, not the even one.)
+
+**3. Aurora's content of the same copies, from the same capture** (`tls_gx_replay --copy-dst ... --copy-wh-fmt ... --copy-out ...`): `0x903DBDC0` 160x112 = 71 680 bytes, mean byte **111.34**; `0x903917C0` 80x56 = 17 920 bytes, mean byte **64.67**. The layer's payload-mean equivalent for those two copies is `(52+58+59+255)/4 = 106.0` and `(12+15+17+255)/4 = 74.75`. **The copy contents agree to +5.0 % and -13.5 %** - i.e. the downscale chain carries the same picture on both sides, so "the copy content is wrong" is falsified for the field's composite, exactly as AP-AZ falsified it for the title's plate.
+
+**4. The sampling SIZE is right too, and the instrument that shows it is new.** The tail binds the same addresses at several sizes, and the first six texobjs were the only ones the adapter logged, which is why an address-keyed probe was needed: **`TLS_AURORA_TEXBIND=<addr>[,<addr>...]`** (`tools/aurora_spike/aurora_replay.cpp`, inert unless set) prints one line per bind of a listed address with the size and format aurora is handed. Measured on the same replay:
+
+```
+[texbind] #437 map 0 addr 0x9038D1C0  80x56  fmt 6
+[texbind] #438 map 0 addr 0x903917C0  80x56  fmt 6
+[texbind] #439 map 0 addr 0x9038D1C0  80x56  fmt 6
+[texbind] #440 map 0 addr 0x903DBDC0 160x112 fmt 6
+[texbind] #441 map 0 addr 0x9038D1C0  80x56  fmt 6
+[texbind] #442 map 0 addr 0x9038D1C0 320x224 fmt 6
+[texbind] #431 map 0 addr 0x905C3000 640x448 fmt 6
+[texbind] #436 map 0 addr 0x90395DC0 320x224 fmt 6
+```
+
+The guest asks for an 80x56 sample of `0x9038D1C0` and an 160x112 sample of `0x903DBDC0`, and the adapter passes exactly that. **So the composite does not differ because the quad samples the wrong size, either.**
+
+**5. What is left, named, and why this is where a session boundary falls.** Three things are still unexcluded, and all three are aurora-side rather than adapter-side: (a) aurora's texture **identity** - the adapter emits `texObjId = 0` and `texDataVersion = 0` for every texture, which AP-BG changed and reverted **when the live feed was still truncated** (its measurement, "changed the field readback by 0.00", was taken on a feed that carried 203 draws instead of 28 372, so it is not evidence either way now); (b) the odd frame's **draw count** - 5 819 against the geometry frame's 22 553, so the composite frame is not a re-render and what it draws is what matters; (c) aurora logs **`STUB: display copy is not implemented`** for the XFB display copies, which is the path the guest uses to put the composite on screen. Testing (a) means rebuilding aurora, not just the adapter, and then re-validating the live path and the gate - a session of its own, with the measurement chain and the numbers above as its starting point.
+
+**6. Changes.** `tools/aurora_spike/aurora_replay.cpp` (`TLS_AURORA_TEXBIND`), this file. No change to the port's behaviour: 0 changes to `src/`, runner untouched, gate references untouched (last gate `logs_ap/gate_bj.log`, PASS attempt 1).
+
+**7. Run log.**
+
+| # | what | result |
+|---|---|---|
+| 1 | field window capture 2794..2801 + `TLS_EFB_CHAIN_GUEST=2800`, 2 812 frames | 8 copy records (all 640x448 display copies); the layer's 2800 chain = three 320x224 copies, **black** destinations |
+| 2 | same window, `TLS_EFB_CHAIN_GUEST=2801` + `TLS_BATCH_DUMP_GUEST=2801,1`, 2 812 frames | the 16-copy tail of item 2 with per-copy averages; layer guest-2800 shot still `B4646917…` |
+| 3 | harness replay, `--copy-dst 0x903DBDC0 --copy-wh-fmt 160x112:6` | 71 680 B, mean byte 111.34 |
+| 4 | harness replay, `--copy-dst 0x903917C0 --copy-wh-fmt 80x56:6` | 17 920 B, mean byte 64.67 |
+| 5 | harness replay with `TLS_AURORA_TEXBIND` on the five tail addresses | binds of item 4, sizes faithful to the guest |
