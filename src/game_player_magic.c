@@ -52,17 +52,17 @@ extern u32 lbl_80881834;
 /* Function declarations */
 void fn_801222D4(void);
 void fn_80122330(void);
-void magic_getOffset6C(void);
-void magic_getOffset51C(void);
+void* magic_getOffset6C(void* ptr);
+void* magic_getOffset51C(void* ptr);
 void f32_abs(void);
 void fn_8012256C(void);
 void fn_80122C70(void);
-void magic_getOffset244(void);
-void magic_isField28Zero(void);
-void magic_getField20(void);
+void* magic_getOffset244(void* ptr);
+u32 magic_isField28Zero(void* ptr);
+u32 magic_getField20(void* ptr);
 void magic_dispatchActionCommand(void);
-void magic_getField8(void);
-void magic_getOffset78(void);
+u32 magic_getField8(void* ptr);
+void* magic_getOffset78(void* ptr);
 void fn_801237F0(void);
 
 asm void fn_801222D4(void)
@@ -249,18 +249,14 @@ lbl_fn_80122330_0000025C:
     blr
 }
 
-asm void magic_getOffset6C(void)
+void* magic_getOffset6C(void* ptr)
 {
-    nofralloc
-    addi r3, r3, 0x6c
-    blr
+    return (char*)ptr + 0x6c;
 }
 
-asm void magic_getOffset51C(void)
+void* magic_getOffset51C(void* ptr)
 {
-    nofralloc
-    addi r3, r3, 0x51c
-    blr
+    return (char*)ptr + 0x51c;
 }
 
 asm void f32_abs(void)
@@ -1149,27 +1145,19 @@ lbl_fn_80122C70_00000EC8:
     blr
 }
 
-asm void magic_getOffset244(void)
+void* magic_getOffset244(void* ptr)
 {
-    nofralloc
-    addi r3, r3, 0x244
-    blr
+    return (char*)ptr + 0x244;
 }
 
-asm void magic_isField28Zero(void)
+u32 magic_isField28Zero(void* ptr)
 {
-    nofralloc
-    lwz r0, 0x28(r3)
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32*)((char*)ptr + 0x28) == 0;
 }
 
-asm void magic_getField20(void)
+u32 magic_getField20(void* ptr)
 {
-    nofralloc
-    lwz r3, 0x20(r3)
-    blr
+    return *(u32*)((char*)ptr + 0x20);
 }
 
 asm void magic_dispatchActionCommand(void)
@@ -1592,18 +1580,14 @@ lbl_magic_dispatchActionCommand_000014E8:
     blr
 }
 
-asm void magic_getField8(void)
+u32 magic_getField8(void* ptr)
 {
-    nofralloc
-    lwz r3, 0x8(r3)
-    blr
+    return *(u32*)((char*)ptr + 0x8);
 }
 
-asm void magic_getOffset78(void)
+void* magic_getOffset78(void* ptr)
 {
-    nofralloc
-    addi r3, r3, 0x78
-    blr
+    return (char*)ptr + 0x78;
 }
 
 asm void fn_801237F0(void)
