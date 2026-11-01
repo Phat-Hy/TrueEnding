@@ -16646,3 +16646,27 @@ Every row matches `drawstate.py`'s decode of the same draw in the capture: textu
 Next measurement, named: `TLS_TEV_PROBE` / `TLS_TEV_UNIFORM` on the layer for b76/b77, plus `TLS_TEX_CACHE_LOG=0x90536FE0` for those draws' second texture; aurora's side of any command is already one `--probe-at-cmd` run away.
 
 **Cross-track note.** Merging `origin/track-a` (see the merge commits `a8e07bc`/`bf14678`/`158cd10`/`bdbb3d4`) brought in `tools/patch_ldscript.py`, Track A's linker-script patcher that `tools/project.py`'s split rule calls. It was added to track-a long before this session's commits, so a scope check over a *commit range* does not see it: a merge integrates track-a's whole tree since the merge base. It has no bearing on the runner build (`tools/recomp_harness.py` never calls it). The names themselves are live at runtime - `recomp/tls_sym.c` parses `config/symbols.txt` lazily - and the merged runner already prints them (`CXUncompressLZ+0x70`, `weaponEffect_loadCSV+0x240`); symbols now name **977 of 18 103** functions, 17 126 still `fn_`.
+
+### AP-BM second addendum. The layer's **second sampler** for the two composite batches is not the guest's: `tex1 = 0x90419BE0` (b76) and `tex1 = 0` (b77) where the capture binds `m1 = 0x10536FE0` for **both** draws — measured with `TLS_TEV_PROBE=2801`, which is guest-keyed and lands on present 2865
+
+The previous addendum named `TLS_TEV_PROBE`/`TLS_TEV_UNIFORM` for b76/b77 as the next measurement; this is it, and it narrows the composite difference to one field.
+
+**1. The capture's two composite draws bind two textures each.** `drawstate.py` on frame 7, draws 5 809 (tev 3) and 5 810 (tev 4):
+
+```
+draw 5809 @cmd 21978  tev 3  m0: 0x105C3000 640x448 fmt 6   m1: 0x10536FE0 640x448 fmt 3   full-screen, blend off
+draw 5810 @cmd 22058  tev 4  m0: 0x105C3000 640x448 fmt 6   m1: 0x10536FE0 640x448 fmt 3   full-screen, blend off
+```
+
+**2. The layer's own state for the same two batches** (`TLS_TEV_PROBE=2801`, `TLS_TEV_PROBE_FROM=60`, same run as a `B4646917…` guest-2800 shot):
+
+```
+[TevProbe] frame=2865 b76 vcnt=6 tex=0x905C3000 tex1=0x90419BE0 blend=0 s=4 d=1 texcoord_mask=0x01 ntexgen=4
+[TevProbe] frame=2865 b77 vcnt=6 tex=0x905C3000 tex1=0x00000000 blend=0 s=4 d=1 texcoord_mask=0x01 ntexgen=1
+```
+
+`tex` (map 0) is right on both. `tex1` is **not**: 0x90419BE0 is an address **no draw in frame 7 binds anywhere** (the capture contains no `419BE0` at all), and b77 has **no second texture** at all - while the guest binds `0x10536FE0` for both draws. A two-texture composite stage fed a stale texture in one pass and nothing in the other is exactly the shape that turns "blur ⊗ scene" into "blur", which is the layer's observed full-screen blur at the same level (56.02 / 0.675 against aurora's 56.68 / 13.190).
+
+**3. What this does and does not establish.** It *is* measured: the layer's `tex1` for those two batches differs from the guest's m1 binding, on the same frame, with the rest of the state matching. It is *not* yet established that this is the mechanism, because (a) `TLS_TEV_PROBE`'s `tex1` is the batch's second texture slot, which is not necessarily the sampler a given TEV stage reads, (b) the layer binds `0x90536FE0` thousands of times per run (7 809 uploads, once per frame), so "the address is never bound" would be wrong - it is *not bound for these two batches*, and (c) the batch-to-draw mapping is inferred from (texture, size, blend, scissor), which matched row for row in the first addendum. The decisive next instrument is `TLS_TEV_UNIFORM=76[,2801]`, which prints the *uniform packet the shader actually receives* for a batch (sampler indices, texcoord source), i.e. whether stage 1 of b76 reads m1 at all; aurora's side of the same draw is one `--probe-at-cmd 21979` run away.
+
+**4. Why this is the right place to stop the composite thread for the session.** Four independent hypotheses have now been excluded by measurement (copy content, sample size, texture identity - AP-BK; upload staleness and the copy-map key - AP-BM), the state of the three composite passes is proven equal to the guest's, and the one remaining difference is a layer-side sampler binding. Under the project's renderer strategy that is a defect the migration retires rather than one to fix by hand in `gfx_d3d11.c` (AGENTS.md §1), and the layer's own reference is what the 43.16/1.123 target measures - so the exit criterion stays unreached *for a reason now named*, not for a lack of investigation.
