@@ -17111,3 +17111,18 @@ of killing the process.
 | 14 | `run_publish_record.ps1 -Tag g` on the **shipped** runner + DLL, still loaded (`fifa15` running) | void (handover **840**), but it reproduced the content reference exactly (`54CB46BD…` 38.20 / 0.00 %) and the popup showed the alternate `F1004F50…` 86.91 — i.e. the exception-guard DLL still draws aurora's content frame identically, and the popup frame is the one that moves when the present timing does |
 | 15 | `pwsh tools/invariant.ps1 -Log logs_ap/gate_br4.log` on the **shipped** binaries, host idle | **PASS attempt 2** (exit 0): handover 1 680, content `54CB46BD…` 38.20 / 0.00 %, popup `A81F3E35…` 89.89 / 1.85 %, save 1 348 992 / 29 344. Attempt 1 came in at handover **1 380** (a machine that had just run a game) with near-black shots `47E30E30…` / `847B7F79…` — the retry policy's reason for existing, and the reason a handover ≠ 1 680 must never be re-recorded |
 | 16 | same gate again, immediately after | **PASS attempt 1** (`logs_ap/gate_br5.log`, exit 0): handover 1 680, both references exact, save exact — the shipped pair's attempt-1 PASS, and the published run-to-run result |
+
+**10. Track A merged again after the close (c5b75f7 → `4f362ee9`, merge `3a6cec70`), and the merge was
+proven neutral: 32 incoming commits, clean, and the rebuilt runner is byte-identical (`145B9838…`), with
+`git diff --stat origin/track-a..HEAD -- src/` empty. What that batch *gives* Track B was then measured
+instead of assumed.** It adds **160 function names** (human-named functions 1 197 → 1 357 of 18 103, i.e.
+6.6 % → 7.5 %), and the runner picks them up **with no rebuild** because `recomp/tls_sym.c:52` reads
+`config/symbols.txt` at startup — a 400-frame boot already prints one of them by name (`GXBegin`).
+But of the **247 distinct executed-code PCs** a full gate run logs (`logs_ap/gate_br5.log.a1`), **0** fall
+inside one of the 160 new functions (`logs_ap/name_gain.py`): the batch is net (30), boss (12), battle
+(5), save (5), party (4) — content the Chapter-1 path never executes. So naming is **not** Track B's
+bottleneck any more; the two functions the transition milestone actually needs were already named
+(`world_updateMapTransition` 0x8036F268, `taskManager_initSystem` 0x8047A4C8) and are already #1/#2 on
+`docs/TRACK_A_HANDOFF.md` §A2, which asks for their **readable C**, not for more names. A handful of GX
+names in the batch (`GXBegin`, `GXSetTevIndTile`, `GXSetIndTexMatrix`, `__GXFlushPixelEngine`) do help
+renderer probes; the rest is for the milestones after the chapter transition.
