@@ -35,8 +35,8 @@ extern u8 lbl_807C80C8[];
 extern u32 lbl_8087DBE4;
 extern u32 lbl_8087DBF0;
 extern u32 lbl_8087DBF4;
-extern u32 lbl_808830D0;
-extern u32 lbl_808830D4;
+extern const float lbl_808830D0;
+extern const float lbl_808830D4;
 
 /* Function declarations */
 void fn_8022AB18(void);
@@ -48,7 +48,7 @@ void fn_8022B84C(void);
 void texCache_allocateSlot(void);
 void fn_8022BDB4(void);
 void tex_initDescriptor(void);
-void tex_initDefaultTransform(void);
+void tex_initDefaultTransform(float* rect);
 void fn_8022BEAC(void);
 void fn_8022C2A0(void);
 void fn_8022C3F0(void);
@@ -1453,17 +1453,13 @@ asm void tex_initDescriptor(void)
     blr
 }
 
-asm void tex_initDefaultTransform(void)
+void tex_initDefaultTransform(float* rect)
 {
-    nofralloc
-    lfs f1, lbl_808830D0
-    lfs f0, lbl_808830D4
-    stfs f1, 0x0(r3)
-    stfs f1, 0x4(r3)
-    stfs f1, 0x8(r3)
-    stfs f1, 0xc(r3)
-    stfs f0, 0x10(r3)
-    blr
+    rect[0] = lbl_808830D0;
+    rect[1] = lbl_808830D0;
+    rect[2] = lbl_808830D0;
+    rect[3] = lbl_808830D0;
+    rect[4] = lbl_808830D4;
 }
 
 asm void fn_8022BEAC(void)

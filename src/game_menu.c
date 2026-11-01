@@ -1981,10 +1981,8 @@ lbl_fn_80043014_000016C4:
     blr
 }
 
-asm void menu_dummyCallback(void)
+void menu_dummyCallback(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_8004312C(void)

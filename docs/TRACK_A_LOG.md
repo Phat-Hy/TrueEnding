@@ -1011,3 +1011,44 @@ Names applied:
   - iosAlloc (fn_8061D920, 508 B, 624 probe hits)
   - hud_updateTargetReticle (fn_8009E6EC, 1,076 B, 524 probe hits)
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+
+## Session 2026-11-01 - Conversion: 4 routines (msg_getStringPointer, menu_dummyCallback, hud_projectWorldPoints, tex_initDefaultTransform) to 100.0% matching C
+Subject:  track-a: decompile 4 routines (48 B) to 100.0% matching C progress 99.30% -> 99.30%
+Functions:
+  - msg_getStringPointer (fn_8061F470, 8 B, src/nand.c)
+  - menu_dummyCallback (fn_80043128, 4 B, src/game_menu.c)
+  - hud_projectWorldPoints (fn_8009F444, 4 B, src/game_hud.c)
+  - tex_initDefaultTransform (fn_8022BE8C, 32 B, src/game_res_texture.c)
+Checklist:
+  1. Converted 4 asm void functions to 100.0% matching C implementations.
+  2. Verified CodeWarrior tail-call optimization on hud_projectWorldPoints -> b atn_HUD_projectWorldPoints.
+  3. report.json clean, ninja passed (orig/main.dol: OK).
+Self-check: git diff -U0 -- src/ for 'asm void': -4 / +0 (conversion).
+Sources:
+`c
+// nand.c
+const char* msg_getStringPointer(const void* wrapper)
+{
+    return *(const char**)wrapper;
+}
+
+// game_menu.c
+void menu_dummyCallback(void) {}
+
+// game_hud.c
+void hud_projectWorldPoints(void)
+{
+    atn_HUD_projectWorldPoints();
+}
+
+// game_res_texture.c
+void tex_initDefaultTransform(float* rect)
+{
+    rect[0] = lbl_808830D0;
+    rect[1] = lbl_808830D0;
+    rect[2] = lbl_808830D0;
+    rect[3] = lbl_808830D0;
+    rect[4] = lbl_808830D4;
+}
+`
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.

@@ -1372,10 +1372,9 @@ lbl_fn_8009EE30_00001238:
     blr
 }
 
-asm void hud_projectWorldPoints(void)
+void hud_projectWorldPoints(void)
 {
-    nofralloc
-    b atn_HUD_projectWorldPoints
+    atn_HUD_projectWorldPoints();
 }
 
 asm void fn_8009F448(void)
