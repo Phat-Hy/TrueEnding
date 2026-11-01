@@ -2,46 +2,53 @@
 
 ## NEXT SESSION — START HERE
 
-> **§5c.46 AP-BN (THE LAST SECTION) IS THE DECISION, AND IT IS MADE: AURORA'S COMPOSITE IS THE FAITHFUL
-> ONE. THE COMPOSITE EXIT CRITERION IS RETIRED — DO NOT CHASE `43.16 / 1.123`.** The last named measurement
-> was spent, exactly as ordered: `TLS_BATCH_CUTOFF=76` against `=77`, two runs, same present (guest 2801 =
-> present 2865). With batch **b76** (draw 5 809) absent the layer's frame is **42.59 / 3.211**; with it present
-> **58.89 / 0.383**, and the difference covers **100 % of the rows and columns** (mean |d| 33.29, 96.32 % > 8) —
-> so b76 is a full-screen replace in the layer too, not a scissor artifact. The layer's *own* 640x448 copy chain
-> says what it does: its snapshot at batch 74 is **42.15 / 8.290** (bit-identical to the uncut run's copy 8 at
-> cmd 21 669), the input to b76 is **43.96 / 5.354**, and the output is **56.02 / 0.675** — the same two decimals
-> as the *uncut* reference's post-b76 copy at cmd 21 986, which is the control that the cut reproduces the
-> reference. **Aurora, fed the same guest bytes, leaves 56.68 / 13.190 unchanged across that draw** (cmd 21 669
-> = cmd 21 979): it restores the snapshot, which is what a 1:1 full-screen replace of a 640x448 copy into a
-> 640x448 EFB must do. The layer's output is **7.9x smoother than its own input** and smoother than both copy
-> textures the pass binds at the size it binds them (640x448 `0x905C3000`, 320x224 `0x9038D1C0`), so the layer's
-> number is the defect, not the target. **What that retires, in
-> writing: the "move the probe from 86.98 / 20.889 towards 43.16 / 1.123" criterion, the AP-BJ addendum's "the
-> layer applies the guest's blur, aurora does not" reading, and any reference re-recorded against the layer's
-> composite.** Not re-opened: the copy chain (four hypotheses excluded; AP-BM's keying patch stays in as `0007`
-> and is inert). Not claimed: byte equality with Dolphin (the field composite has no Dolphin frame — the
-> tiebreak is the pass-identity argument plus the title plate's Dolphin pair, 203.98 vs aurora 205.62 vs layer
-> 90.43).
+> **§5c.46 AP-BO (THE LAST SECTION): P1 IS MET — AND BYTE-FOR-BYTE, NOT "WITHIN NOISE".** One launch armed
+> the live aurora path **and** the FIFO recorder together on the gate's cave window, the harness replayed that
+> same capture, and the EFB copy payloads are **the same file**: live guest **2799** ↔ harness `--stop-after 6`
+> and live guest **2800** ↔ `--stop-after 7`, **mean |d| 0.00, 0 of 286 720 pixels, identical SHA-256**
+> (`5622FC18…`, `BEF9394A…`). The pairing rests on a *measured* one-frame rule — the harness delivers its probe
+> copy with the next frame, so `--stop-after N` returns recorded frame **N-1**, i.e. harness stop(N) == live
+> guest(2793+N) — and `tools/aurora_spike/p1_equality.py` prints the whole matrix so the diagonal is visible.
+> Both pairs span AP-BJ's two frame classes (2799 composite 99.29 / 22.363, 2800 geometry 37.00 / 9.323).
+> Everything the live boundary adds — the C ABI, the DLL, `mem1Size = mem2Size = 0` + `map_guest_region`, the
+> inlined display lists, the per-present feed, the AP-BH per-frame plane resync — contributes **nothing** to the
+> picture. **P3's criterion is the same equality** (AP-BB had already withdrawn P3's refactor as done by
+> construction, since the live target `#include`s the replay adapter), so **P3 is met too and the board is P4**.
+> Not claimed: the colour readback is black by design (P1 is measured on the copy probe), an N-frame capture
+> yields only N-1 pairs, and the two renderers still differ — AP-BN stands and P4 retires the layer rather than
+> fixing it.
 >
-> **THE BOARD IS NOW THE MIGRATION'S OWN CRITERIA: P1 equality → P3 → P4.** P1: aurora-in-runner equals
-> aurora-in-harness on one capture (the live path already reproduces the harness probe to the last digit; the open
-> items are the readback lifetime and the exit-time join). P3: the five register classes moved without a
-> re-derivation. P4: re-record **both** gate references against the aurora renderer, deliberately twice each, with
-> the layer reachable behind `TLS_LAYER=1` and reproducing today's `B4646917…` / `22B1CE31…` exactly. The only
-> field-level question left inside the geometry half is AP-BJ's water/foreground difference, and it is retired by
-> P4 rather than fixed in the layer.
+> **NEXT SESSION'S WHOLE JOB: P4 — PROMOTION AND THE GATE.** Promote aurora to the runner's rendering path over
+> option **(b)**, the CPU round-trip of its **1 146 880 B** EFB readback (the smallest slice, already proven by
+> `--probe-copy`), keep the hand-rolled layer reachable behind **`TLS_LAYER=1`**, then **re-record both gate
+> references against the aurora renderer deliberately, twice each**, and require the layer's escape hatch to
+> reproduce today's `B4646917…` / `22B1CE31…` exactly (the AP-AR/AP-AU discipline). The gate itself is unchanged
+> and still PASSes attempt 1 on the runner in the tree (`D7C3D48…`: handover 1 680, content `B4646917…` luma
+> 36.51, popup `22B1CE31…` luma 46.18, save 1 348 992 / 29 344, `logs_ap/gate.log.a1`).
 >
-> **State after this session.** Track A was merged again as ordered and had moved far: `origin/track-a` is at
-> **`ccadf1e` (Batch 44 + 25 `blr` stubs)**, 19 commits past `4f2e3cf`; the merge is `01f3c6a`, **761 files**,
-> clean, and the rebuilt runner is **byte-identical** (`D7C3D48…`, 472 objects, **0 chunks recompiled**) — so the
-> gate references transfer. **Gate: PASS attempt 1 on an idle host with nothing else running** (`logs_ap/gate.log`,
-> handover **1 680**, content `B4646917…` luma 36.51, popup `22B1CE31…` luma 46.18, save **1 348 992 / 29 344**).
-> `git diff --stat origin/track-a..HEAD -- src/` is empty: **0 changes to `src/` by Track B.** New instrument:
-> `tools/aurora_spike/shotdiff.py`. Re-fetch Track A before the next session — it commits several times an hour.
+> **State after this session.** Track A merged **twice** and had moved far both times: `4f2e3cf` → `ccadf1e`
+> (Batch 44, 761 files) → **`ebaa87c` (Batch 45-47, 484 files)**, clean both times, and the rebuilt runner was
+> **byte-identical** each time (`D7C3D48…`, 472 objects, **0 chunks recompiled**), so the gate references
+> transfer. `git diff --stat origin/track-a..HEAD -- src/` is empty: **0 changes to `src/` by Track B.** New
+> instruments: `tools/aurora_spike/shotdiff.py`, `p1_equality.py`, `p1_live_run.ps1`. Re-fetch Track A before the
+> next session — it commits several times an hour.
 >
-> **The AP-BM paragraphs below are the measurement history AP-BN closes** (they are kept because they carry the
-> per-draw and per-copy numbers, and because AP-BM's retraction is what stopped a wrong direction twice). Read them
-> only if a number in AP-BN needs its provenance.
+> **§5c.46 AP-BN (the decision, one step back): AURORA'S COMPOSITE IS THE FAITHFUL ONE AND THE COMPOSITE EXIT
+> CRITERION IS RETIRED — DO NOT CHASE `43.16 / 1.123`.** Summary of what it measured: `TLS_BATCH_CUTOFF=76|77`
+> isolates b76 (draw 5 809), which paints **100 % of the frame** (mean |d| 33.29, 96.32 % > 8) and turns its own
+> sharp 640x448 snapshot (43.96 / 5.354) into a near-uniform field (56.02 / 0.675, 7.9x smoother), while aurora
+> fed the same guest bytes leaves **56.68 / 13.190 unchanged** across the same draw — a 1:1 replace cannot blur,
+> so the layer's number is the defect, not the target. Retired in writing: that criterion, the AP-BJ addendum's
+> "the layer applies the guest's blur" reading, and any reference re-recorded against the layer's composite.
+>
+> **§5c.46 AP-BN §5 is also where the composite argument is written out** (what is excluded, what the layer does
+> differently, why the reference is the layer's own defect, and the Dolphin title-plate tiebreak
+> 203.98 / aurora 205.62 / layer 90.43). Read it before re-opening anything about the composite; then **AP-BM**
+> (why the copy map was inert), **AP-BK** (what was excluded before it) and **AP-BJ/AP-BI** (the feed model).
+>
+> **The AP-BM paragraphs below are the measurement history AP-BN closes** (kept because they carry the per-draw
+> and per-copy numbers, and because AP-BM's retraction is what stopped a wrong direction twice). Read them only
+> if a number in AP-BN or AP-BO needs its provenance.
 >
 > **§5c.46 AP-BM + its two addenda (previous session's measurement, now closed by AP-BN): AP-BL IS FALSIFIED AS THE CAUSE OF THE COMPOSITE
 > DIFFERENCE, AND SO IS EVERY STATE-LEVEL HYPOTHESIS AFTER IT.** The keying was implemented exactly as AP-BL
@@ -16783,7 +16790,7 @@ A pass that restores a same-size snapshot cannot blur it. Aurora does not; the l
 
 **6. What the layer does differently — the honest residue, and where it dies.** Everything a state dump can compare agrees (AP-BK, AP-BM, its two addenda, and §3-4 above): copy content, sampled sizes, texture identity, upload freshness, copy-map key (patch `0007`, measured inert), bound maps, the three stages with konst 16/20/24, blend, scissor, NDC geometry, XF texgen for coords 2..3. The measurement added here is that with **one batch toggled and nothing else changing**, the layer's own pass invents a field smoother than any input it has. That is the fragment-evaluation class AGENTS.md §1 names — **not** the copy chain (four hypotheses already excluded, and none of them is re-opened here). **Not localised, and deliberately not chased:** whether the layer's shader fetches map0 at the wrong effective resolution or the three-stage selection drops st0's contribution to a later map's upscale. Both are layer-only, both are retired by the migration, and no aurora-side change is implied either way. **What is retired with the criterion:** the "composite half is a defect to be fixed" line, the AP-BJ addendum's "the layer applies the guest's full-screen blur composite and aurora does not" reading (the blur is the layer's pass, and the guest's own 1:1 restore proves it), and any future re-recording of a reference against the layer's `43.16 / 1.123`.
 
-**7. Where the board goes.** Not to another composite measurement — to the migration's own criteria, in order: **P1**'s equality (aurora-in-runner equals aurora-in-harness on one capture; the live path already reproduces the harness probe to the last digit, AP-BM run log #8, and AP-BY's open items are the readback lifetime and the exit-time join), then **P3** (the five register classes moved without a re-derivation), then **P4** (re-record both gate references against the aurora renderer deliberately, twice each, with the layer reachable behind `TLS_LAYER=1` and reproducing today's `B4646917…` / `22B1CE31…` exactly). The AP-BJ addendum's *water/foreground* difference inside the geometry half is now the only named field-level question left in the layer, and it is also retired rather than fixed by P4.
+**7. Where the board goes.** Not to another composite measurement — to the migration's own criteria, in order: **P1**'s equality (aurora-in-runner equals aurora-in-harness on one capture; the live path already reproduces the harness probe to the last digit, AP-BM run log #8, and AP-AY §4/§10 are the two open items: the readback's delivery lifetime and the exit-time thread join), then **P3** (the five register classes moved without a re-derivation), then **P4** (re-record both gate references against the aurora renderer deliberately, twice each, with the layer reachable behind `TLS_LAYER=1` and reproducing today's `B4646917…` / `22B1CE31…` exactly). The AP-BJ addendum's *water/foreground* difference inside the geometry half is now the only named field-level question left in the layer, and it is also retired rather than fixed by P4.
 
 **8. What this does not claim.** Not byte equality with Dolphin — the field composite has no Dolphin frame, so the field-level tiebreak is the pass-identity argument above plus the title plate's Dolphin pair; the strongest claim available is that aurora is faithful *on this pass* and the layer is not, which is what the decision needs. Not that the layer's whole composite chain is one bug: b77 (`5 810`) moves the frame again (aurora 111.87 / 24.491 at cmd 22 059) and nothing here measures it. And not that the cut harness is free of the documented trap — cutting the loop leaves the guest's end-of-frame EFB copies unserviced (`gfx_d3d11.c`, handover 5c.43 F); it does not matter here because **both** runs carry it, the pre-b76 chain is bit-identical between them, and the post-b76 state equals the uncut reference's to the second decimal.
 
@@ -16796,3 +16803,53 @@ A pass that restores a same-size snapshot cannot blur it. Aurora does not; the l
 | 3 | 2 812 frames, `TLS_BATCH_CUTOFF=76`, cave window + `TLS_INPUT_SCRIPT`, shot at present 2 865, chain dump | shot **42.59 / 3.211**; copies #0..#13 identical to the uncut run; #10 `0x905C3000` = 42.15 / 8.290; handover 1 680, save created (`logs_ap/bn_cut76.log`) |
 | 4 | same, `TLS_BATCH_CUTOFF=77` | shot **58.89 / 0.383**; #14 = **56.02 / 0.675** = the uncut reference exactly; #13 bit-identical to run 3 (`logs_ap/bn_cut77.log`) |
 | 5 | `tools/aurora_spike/shotdiff.py` on (3) vs (4) vs the uncut reference | mean \|d\| 33.29, 96.32 % > 8, 60.64 % > 32, **100 % of rows and columns** (`logs_ap/bn_cut77_guest2801.ppm.diff.ppm`, `logs_ap/bn_b76_diff.png`) |
+
+---
+
+### 5c.46 AP-BO. **P1'S EXIT CRITERION IS MET IN ITS STRONGEST FORM: THE SAME EFB COPY PAYLOAD IS BYTE-IDENTICAL BETWEEN THE LIVE PATH INSIDE THE RUNNER AND THE HARNESS REPLAY OF THE SAME RUN** — two frames, guest 2799 (composite facet) and guest 2800 (geometry), **mean |d| 0.00, 0 of 286 720 pixels, identical SHA-256** — and the one-frame relationship that makes the pairing was measured, not assumed. With AP-BB's reduction of P3 to this same equality, **P1 and P3 are both met and the board is P4**.
+
+**1. What P1 asks, and what one launch was built to answer it.** §5c.47 P1: *"for guest frame 2800 of the gate's script, aurora's readback equals the replay harness's picture for the same capture … a per-pixel diff of 0 in the EFB payload."* The comparison is only valid when both sides render **the same bytes of the same run**, so one launch armed both instruments at once (`tools/aurora_spike/p1_live_run.ps1`, 2 812 frames, the gate's `TLS_INPUT_SCRIPT`): `TLS_AURORA=1 FROM/TO 2794..2801` + `TLS_AURORA_SHOTS 2794..2801` (eight readbacks) **and** `TLS_GX_CAPTURE=build/recomp/gxcap_bn` `2794..2801` (a fresh directory, so AP-BK/AP-BM's reference capture is untouched). The run's own controls: **handover 1 680** and the save **1 348 992 / 29 344**, i.e. the gate's scene.
+
+Eight fed frames, one readback each (1 146 880 B = 640x448 RGBA8): draws **22 345 / 6 044 / 22 553 / 5 835 / 14 192 / 14 184 / 22 553 / 5 819**, bytes **1 303 669 / 588 897 / 1 317 788 / 574 926 / 721 514 / 1 169 618 / 1 318 078 / 572 526**, copy commands **3 / 15 / 3 / 15 / 3 / 15 / 3 / 15** — the same frame classes AP-BJ defined. The capture is **146 373 317 B**: 2 802 frames seen, **7 567 016** FIFO bytes, **4 084** display-list calls inlined, and both MEM planes (`0x80000000..0x84000000`, `0x90000000..0x94000000`). The live path's process ended without reaching the DLL teardown (`[Runner] aurora armed: terminating before the DLL teardown (the exit hang)`), so AP-AY item 10's join did not have to be forced this time; the readbacks were already on disk.
+
+**2. Which replay output is the instrument.** `--probe-copy` puts the **colour** readback in the positional PPM and that one is **black** (`EFB mean RGB = (0.00, 0.00, 0.00)`, the documented next-frame fallback), exactly as the README warns; the payload P1 is measured on is written by **`--probe-ppm`** and de-tiled by the same `write_probe_ppm` the live path uses. Two replays of the same capture at 640x448:
+
+| replay | probe payload | luma | gradient | mean byte |
+|---|---|---|---|---|
+| `--start-at 0 --stop-after 6` | 1 146 880 B | 99.29 | 22.363 | 135.18 |
+| `--start-at 0 --stop-after 7` | 1 146 880 B | 37.00 | 9.323 | 91.43 |
+
+**3. The one-frame rule, measured.** The harness issues its probe copy at the end of the last replayed chunk and receives it with the **next** frame, so `--stop-after N` returns the EFB of recorded frame **N-1**: *harness stop(N) == live guest(2793+N)*. `tools/aurora_spike/p1_equality.py` prints the whole 8x2 matrix so the rule is visible rather than trusted (mean |d| / %px > 8):
+
+| live frame | luma | vs stop6 | vs stop7 |
+|---|---|---|---|
+| 2794 | 36.82 | 75.30 / 97.86 % | 7.69 / 35.10 % |
+| 2795 | 87.11 | 25.82 / 61.75 % | 69.98 / 96.84 % |
+| 2796 | 36.85 | 75.22 / 97.89 % | 6.51 / 28.88 % |
+| 2797 | 87.07 | 24.00 / 58.44 % | 69.95 / 96.83 % |
+| 2798 | 4.19 | 91.01 / 79.95 % | 32.87 / 90.42 % |
+| **2799** | 99.29 | **0.00 / 0.00 %** | 75.15 / 97.99 % |
+| **2800** | 37.00 | 75.15 / 97.99 % | **0.00 / 0.00 %** |
+| 2801 | 86.98 | 22.07 / 53.89 % | 69.82 / 96.86 % |
+
+**4. The two pairs are not merely close — they are the same file.** `SHA-256` of the live readback and of the harness probe PPM, per pair; and the raw pixel count:
+
+| pair | SHA-256 (both sides) | differing pixels |
+|---|---|---|
+| live 2799 (composite, gradient 22.363) ↔ harness stop6 | `5622FC18C3D60056AC90F941B7323996ED1E1E9794E1684ED41AC1AB1F2DADFB` | **0 / 286 720** |
+| live 2800 (geometry, gradient 9.323) ↔ harness stop7 | `BEF9394A3E2EBBA0B03B5671E6584E7176C01395DB99CD0CE1600A39983C0586` | **0 / 286 720** |
+
+So the two paths produce **bit-identical EFB copy payloads** from the same capture, on one frame of each of AP-BJ's two classes. Everything the live boundary adds — the C ABI, the DLL load, `mem1Size = mem2Size = 0` plus `map_guest_region`, the inlined display lists, the per-present feed, the per-frame plane resync of AP-BH — contributes **nothing** to the picture, which is what "the port is a refactor, not a re-derivation" means when it is measured instead of argued.
+
+**5. What that settles on the board.** P1's exit criterion is met, and met in a form §5c.47 did not ask for: not "within the harness's own noise" but byte equality. **P3** asked for the five register classes to be moved without re-deriving them and for its exit criterion to be P1's equality test (AP-BB withdrew the refactor itself as already done by construction, since `tools/aurora_spike/aurora_live.cpp` `#include`s `aurora_replay.cpp`, i.e. the adapter *is* the harness's code). With §4, P3's criterion is met by the same measurement. **The board is P4**: promote aurora to the runner's rendering path (option (b), the CPU round-trip over aurora's 1 146 880 B readback), keep the layer reachable behind `TLS_LAYER=1`, re-record **both** gate references against the aurora renderer deliberately twice each, and require the layer's escape hatch to reproduce today's `B4646917…` / `22B1CE31…` exactly.
+
+**6. What this does not claim.** Not that the two renderers agree — AP-BN stands: the layer's composite diverges from aurora's, and P4 retires the layer rather than fixing it. Not the colour readback: it is black by design and P1 is measured on the copy probe, so this says nothing about `AuroraReadbackCaptureColor`. Not a whole-window equality: a capture of **N** recorded frames yields **N-1** pairs under the one-frame rule, and this capture of 8 yields **2** with the replays run (the rest of the matrix is frame *misalignment*, not renderer difference — its diagonal is exactly 0). One capture, one run, one GPU backend, one window. And the pairing depends on the measured N-1 rule: it is printed by the instrument, not assumed.
+
+**7. Changes and run log.** `tools/aurora_spike/p1_equality.py` (new: the live-vs-probe matrix with SHA identity), `tools/aurora_spike/p1_live_run.ps1` (new: the one-launch recipe), this file. **No change to the port's behaviour**: no `recomp/` edit, no aurora change, no new patch, `src/` untouched by Track B, runner byte-identical (`D7C3D48…`), build green (472 objects, 0 chunks recompiled).
+
+| # | what | result |
+|---|---|---|
+| 1 | merge `origin/track-a` (`ccadf1e` → `ebaa87c`, Batch 45-47) | clean, **484 files**; rebuilt runner **byte-identical** `D7C3D48…` (472 objects, 0 chunks) |
+| 2 | one launch: live aurora + capture, guest 2794..2801, gate's input script, 2 812 frames | 8 fed frames with 8 readbacks (draws 22 345 / 6 044 / 22 553 / 5 835 / 14 192 / 14 184 / 22 553 / 5 819); capture 146 373 317 B, 7 567 016 FIFO bytes, 4 084 inlined DLs; handover 1 680, save 1 348 992 / 29 344 (`logs_ap/bo_live.log`) |
+| 3 | harness replay of that capture, `--stop-after 6` / `--stop-after 7`, `--probe-copy --probe-ppm` | probes 99.29 / 22.363 and 37.00 / 9.323, 1 146 880 B each (`logs_ap/bo_probe_2800.ppm`, `bo_probe_2801.ppm`); colour readback black in both, as documented |
+| 4 | `tools/aurora_spike/p1_equality.py` on the 8 readbacks vs both probes | **2799 ↔ stop6 IDENTICAL**, **2800 ↔ stop7 IDENTICAL** (`5622FC18…`, `BEF9394A…`), 0 / 286 720 pixels each; one-frame rule: stop(N) == live guest(2793+N) |
