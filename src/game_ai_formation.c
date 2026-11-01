@@ -127,40 +127,36 @@ extern u32 lbl_808836A4;
 extern u32 lbl_808836A8;
 
 /* Function declarations */
-void fn_802657FC(void);
-void fn_80265804(void);
+void fn_802657FC(void *p, u32 val);
+void fn_80265804(void *p, f32 val);
 void fn_8026580C(void);
 void fn_80265B00(void);
 void fn_8026607C(void);
 void fn_802660EC(void);
 void fn_802660FC(void);
 void fn_8026610C(void);
-void fn_80266154(void);
-void fn_8026615C(void);
-void fn_80266164(void);
-void fn_8026616C(void);
+void *fn_80266154(void *p);
+void *fn_8026615C(void *p);
+void *fn_80266164(void *p);
+void fn_8026616C(void *p, u32 val);
 void fn_80266174(void);
 void fn_8026618C(void);
 void fn_80266254(void);
 void fn_80266A24(void);
-void fn_80266FA4(void);
-void fn_80266FAC(void);
+void *fn_80266FA4(void *p);
+u32 fn_80266FAC(const void *p);
 void fn_80266FB4(void);
 void fn_80266FC4(void);
 void fn_80267134(void);
 
-asm void fn_802657FC(void)
+void fn_802657FC(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x58c(r3)
-    blr
+    *(u32 *)((char *)p + 0x58c) = val;
 }
 
-asm void fn_80265804(void)
+void fn_80265804(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x2fc(r3)
-    blr
+    *(f32 *)((char *)p + 0x2fc) = val;
 }
 
 asm void fn_8026580C(void)
@@ -826,32 +822,24 @@ lbl_fn_8026610C_00000950:
     blr
 }
 
-asm void fn_80266154(void)
+void *fn_80266154(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x8
-    blr
+    return (char *)p + 0x8;
 }
 
-asm void fn_8026615C(void)
+void *fn_8026615C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x10
-    blr
+    return (char *)p + 0x10;
 }
 
-asm void fn_80266164(void)
+void *fn_80266164(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x910
-    blr
+    return (char *)p + 0x910;
 }
 
-asm void fn_8026616C(void)
+void fn_8026616C(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x834(r3)
-    blr
+    *(u32 *)((char *)p + 0x834) = val;
 }
 
 asm void fn_80266174(void)
@@ -1829,18 +1817,14 @@ lbl_fn_80266A24_00001790:
     blr
 }
 
-asm void fn_80266FA4(void)
+void *fn_80266FA4(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x650
-    blr
+    return (char *)p + 0x650;
 }
 
-asm void fn_80266FAC(void)
+u32 fn_80266FAC(const void *p)
 {
-    nofralloc
-    lwz r3, 0x274(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x274);
 }
 
 asm void fn_80266FB4(void)

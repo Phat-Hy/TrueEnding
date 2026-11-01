@@ -91,24 +91,24 @@ extern u32 lbl_80881534;
 
 /* Function declarations */
 void fn_800F7250(void);
-void fn_800F7258(void);
+void *fn_800F7258(void *p);
 void fn_800F7260(void);
-void vec3_scale(void);
+void vec3_scale(f32 *dest, const f32 *src, f32 scale);
 void fn_800F72F4(void);
 void fn_800F7F60(void);
 void fn_800F7F80(void);
-void fn_800F7F90(void);
-void fn_800F7F98(void);
+u32 fn_800F7F90(void);
+void fn_800F7F98(void *p, u32 val);
 void viewport_getGlobalContext(void);
 void fn_800F7FA8(void);
-void fn_800F7FB4(void);
+u32 fn_800F7FB4(const void *p);
 void fn_800F7FBC(void);
 void fn_800F7FD8(void);
 void viewport_getNextSequenceId(void);
 void fn_800F7FF8(void);
 void fn_800F8014(void);
-void fn_800F8098(void);
-void fn_800F80A0(void);
+void *fn_800F8098(void *p);
+void *fn_800F80A0(void *p);
 void fn_800F80A8(void);
 void fn_800F80B8(void);
 void fn_800F8290(void);
@@ -132,11 +132,9 @@ asm void fn_800F7250(void)
     blr
 }
 
-asm void fn_800F7258(void)
+void *fn_800F7258(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x104
-    blr
+    return (char *)p + 0x104;
 }
 
 asm void fn_800F7260(void)
@@ -171,19 +169,14 @@ asm void fn_800F7260(void)
     blr
 }
 
-asm void vec3_scale(void)
+void vec3_scale(f32 *dest, const f32 *src, f32 scale)
 {
-    nofralloc
-    lfs f3, 0x8(r4)
-    lfs f2, 0x4(r4)
-    lfs f0, 0x0(r4)
-    fmuls f3, f3, f1
-    fmuls f2, f2, f1
-    fmuls f0, f0, f1
-    stfs f3, 0x8(r3)
-    stfs f0, 0x0(r3)
-    stfs f2, 0x4(r3)
-    blr
+    f32 z = src[2] * scale;
+    f32 y = src[1] * scale;
+    f32 x = src[0] * scale;
+    dest[2] = z;
+    dest[0] = x;
+    dest[1] = y;
 }
 
 asm void fn_800F72F4(void)
@@ -1052,18 +1045,14 @@ asm void fn_800F7F80(void)
     blr
 }
 
-asm void fn_800F7F90(void)
+u32 fn_800F7F90(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F610
-    blr
+    return lbl_8087F610;
 }
 
-asm void fn_800F7F98(void)
+void fn_800F7F98(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0xd0(r3)
-    blr
+    *(u32 *)((char *)p + 0xd0) = val;
 }
 
 asm void viewport_getGlobalContext(void)
@@ -1081,11 +1070,9 @@ asm void fn_800F7FA8(void)
     b sound_initGlobalInstances
 }
 
-asm void fn_800F7FB4(void)
+u32 fn_800F7FB4(const void *p)
 {
-    nofralloc
-    lwz r3, 0x146c(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x146c);
 }
 
 asm void fn_800F7FBC(void)
@@ -1170,18 +1157,14 @@ asm void fn_800F8014(void)
     blr
 }
 
-asm void fn_800F8098(void)
+void *fn_800F8098(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x350
-    blr
+    return (char *)p + 0x350;
 }
 
-asm void fn_800F80A0(void)
+void *fn_800F80A0(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x100
-    blr
+    return (char *)p + 0x100;
 }
 
 asm void fn_800F80A8(void)

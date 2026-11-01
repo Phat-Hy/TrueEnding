@@ -157,7 +157,7 @@ void fn_803235AC(void);
 void fn_803235D8(void);
 void fn_80323690(void);
 void fn_80323C18(void);
-void fn_80323C2C(void);
+u32 fn_80323C2C(void);
 void fn_80323C34(void);
 void fn_80323C6C(void);
 void fn_80323CDC(void);
@@ -699,11 +699,9 @@ asm void fn_80323C18(void)
     blr
 }
 
-asm void fn_80323C2C(void)
+u32 fn_80323C2C(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F428
-    blr
+    return lbl_8087F428;
 }
 
 asm void fn_80323C34(void)
