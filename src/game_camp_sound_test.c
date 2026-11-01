@@ -835,10 +835,8 @@ lbl_soundTest_initOption_0000090C:
     blr
 }
 
-asm void soundTest_dummyCallback(void)
+void soundTest_dummyCallback(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803C8288(void)

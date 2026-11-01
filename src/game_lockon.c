@@ -16,7 +16,7 @@ extern void fn_80080048(void);
 extern void fn_80084320(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
-extern void area_refresh(void);
+extern void* area_refresh(void*);
 extern void fn_8008A4E0(void);
 extern void atn_AABB_getMax(void);
 extern void atn_AABB_getMin(void);

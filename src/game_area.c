@@ -24,7 +24,7 @@ extern void fn_80083AD4(void);
 extern void fn_80084320(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
-extern void fn_800A08E0(void);
+extern void fn_800A08E0(void*);
 extern void fn_800C49F0(void);
 extern void fn_800C4E50(void);
 extern void atn_LH_Texture_release(void);
@@ -101,7 +101,7 @@ void fn_80089CE4(void);
 void fn_80089D70(void);
 void fn_80089EE4(void);
 void fn_8008A00C(void);
-void area_refresh(void);
+void* area_refresh(void* area);
 void fn_8008A4E0(void);
 void atn_LH_Material_destructor(void);
 void fn_8008A76C(void);
@@ -1441,21 +1441,10 @@ lbl_fn_8008A00C_0000110C:
     blr
 }
 
-asm void area_refresh(void)
+void* area_refresh(void* area)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    bl fn_800A08E0
-    mr r3, r31
-    lwz r31, 0xc(r1)
-    lwz r0, 0x14(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    fn_800A08E0(area);
+    return area;
 }
 
 asm void fn_8008A4E0(void)

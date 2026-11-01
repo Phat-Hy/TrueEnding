@@ -18,7 +18,7 @@ extern void fn_800844D8(void);
 extern void fn_800846FC(void);
 extern void fn_80084A78(void);
 extern void fn_80084C24(void);
-extern void area_refresh(void);
+extern void* area_refresh(void*);
 extern void fn_8008A76C(void);
 extern void fn_800970CC(void);
 extern void fn_80097180(void);

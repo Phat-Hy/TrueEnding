@@ -42,7 +42,7 @@ extern u32 lbl_8087EEE0;
 extern u32 lbl_8087EFB4;
 extern u32 lbl_8087F150;
 extern u32 lbl_8087F154;
-extern u32 lbl_80882CD0;
+extern const float lbl_80882CD0;
 extern u32 lbl_80882CD8;
 extern u32 lbl_80882CDC;
 extern u32 lbl_80882CE0;
@@ -54,8 +54,8 @@ extern u32 lbl_80882CF0;
 /* Function declarations */
 void fn_80200ED0(void);
 void fn_80201794(void);
-void fn_80201DC4(void);
-void profile_initMetric(void);
+void fn_80201DC4(void* ptr);
+void profile_initMetric(void* ptr);
 void fn_80201DE8(void);
 void fn_80201E10(void);
 void fn_80201E1C(void);
@@ -1080,23 +1080,16 @@ lbl_fn_80201794_00000EE0:
     blr
 }
 
-asm void fn_80201DC4(void)
+void fn_80201DC4(void* ptr)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    blr
+    *(u32*)ptr = 0;
+    *((u32*)ptr + 1) = 0;
 }
 
-asm void profile_initMetric(void)
+void profile_initMetric(void* ptr)
 {
-    nofralloc
-    lfs f0, lbl_80882CD0
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stfs f0, 0x4(r3)
-    blr
+    *(u32*)ptr = 0;
+    *(float*)((char*)ptr + 4) = lbl_80882CD0;
 }
 
 asm void fn_80201DE8(void)
