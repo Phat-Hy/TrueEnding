@@ -14,7 +14,7 @@ extern void fn_801426A4(void);
 extern void fn_8014C228(void);
 extern void fn_8014DEE4(void);
 extern void fn_80171F3C(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void world_getGlobalFlag(void);
 extern void PSVECCrossProduct(void);
 
@@ -463,7 +463,7 @@ lbl_fn_8013C564_00000374:
     stfs f3, 0xc(r1)
     stfs f2, 0x1c(r1)
     stfs f0, 0x18(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r28
     mr r5, r31

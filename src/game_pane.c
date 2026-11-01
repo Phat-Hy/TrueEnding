@@ -53,8 +53,8 @@ extern void fn_806175F0(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
-extern void fn_80617730(void);
-extern void fn_80617880(void);
+extern void GXSetTevSwapModeTable(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXLoadTexMtxImm(void);
@@ -425,7 +425,7 @@ lbl_fn_800AB774_000000A8:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     addi r26, r1, 0x1c
     li r27, 0x0
 lbl_fn_800AB774_000004D8:
@@ -466,7 +466,7 @@ lbl_fn_800AB774_00000514:
     mr r4, r27
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     mr r3, r27
     bl fn_80617220
     addi r27, r27, 0x1
@@ -696,7 +696,7 @@ lbl_fn_800ABD94_000006A0:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     lwz r3, lbl_8087EEE0
     mr r6, r28
     mr r7, r27
@@ -758,7 +758,7 @@ lbl_fn_800ABD94_000006A0:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -959,7 +959,7 @@ lbl_fn_800ABD94_00000BC0:
     li r4, 0x1
     li r5, 0x1
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     bl fn_80617220
     li r3, 0x1
@@ -995,7 +995,7 @@ lbl_fn_800ABD94_00000BC0:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     bl fn_80617220
     li r3, 0x1
@@ -1304,19 +1304,19 @@ asm void fn_800AC6DC(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x3
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x1
     bl fn_80617200
     li r3, 0x0
@@ -1365,7 +1365,7 @@ asm void fn_800AC6DC(void)
     li r4, 0x3
     li r5, 0x3
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -1387,7 +1387,7 @@ asm void fn_800AC6DC(void)
     li r4, 0x2
     li r5, 0x2
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x2
     li r4, 0x0
     li r5, 0x0

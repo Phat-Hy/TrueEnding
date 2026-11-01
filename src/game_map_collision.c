@@ -29,7 +29,7 @@ extern void dialog_setScriptSlot(void);
 extern void fn_8014C228(void);
 extern void fn_801598B4(void);
 extern void fn_80159BA4(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_80182134(void);
 extern void fn_8035B694(void);
 extern void fn_8035B78C(void);
@@ -1627,7 +1627,7 @@ asm void fn_80181A64(void)
     lwz r22, 0x48(r3)
     lwz r26, 0x10d8(r4)
     mr r3, r22
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80881C2C
     mr r5, r3
     mr r3, r26
@@ -1638,7 +1638,7 @@ asm void fn_80181A64(void)
     bl fn_803C1560
     mr r29, r3
     mr r3, r20
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80881C2C
     mr r5, r3
     mr r3, r26
@@ -1707,7 +1707,7 @@ lbl_fn_80181A64_0000163C:
     li r21, 0x0
 lbl_fn_80181A64_00001640:
     mr r3, r20
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80881C2C
     mr r5, r3
     mr r3, r26

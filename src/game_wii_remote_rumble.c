@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
-extern void fn_8000D0F8(void);
+extern void mtx_getTranslation(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_8000D844(void);
@@ -392,7 +392,7 @@ lbl_fn_80551198_000003DC:
     bl atn_Matrix_copy_2
     addi r3, r1, 0xf8
     addi r4, r1, 0x390
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x104
     addi r4, r1, 0x248
     addi r5, r1, 0xf8
@@ -421,7 +421,7 @@ lbl_fn_80551198_00000438:
     bl fn_80013410
     addi r3, r1, 0xd4
     addi r4, r1, 0x390
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0xe0
     addi r4, r1, 0x1f4
     addi r5, r1, 0xd4
@@ -472,7 +472,7 @@ lbl_fn_80551198_000004FC:
 lbl_fn_80551198_00000514:
     mr r4, r24
     addi r3, r1, 0xbc
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x1d0
     addi r4, r1, 0x248
     addi r5, r1, 0xbc
@@ -723,7 +723,7 @@ lbl_fn_80551198_00000894:
     beq lbl_fn_80551198_00000920
     mr r4, r24
     addi r3, r1, 0x44
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x1a0
     addi r4, r1, 0x44
     bl vec3_copy

@@ -61,7 +61,7 @@ extern void fn_801342B0(void);
 extern void fn_8014DEE4(void);
 extern void fn_8014EEC4(void);
 extern void fn_8016F3D0(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_802180A8(void);
 extern void task_findEntryById(void);
 extern void fn_8021A984(void);
@@ -284,7 +284,7 @@ lbl_fn_80017128_00000194:
     bne lbl_fn_80017128_000001D0
     lwz r25, 0xac(r30)
     mr r3, r27
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r6, 0xb4(r30)
     mr r5, r3
     lfs f1, lbl_80880734
@@ -761,7 +761,7 @@ lbl_fn_8001794C_000008A0:
     bne lbl_fn_8001794C_000008DC
     lwz r25, 0xac(r29)
     mr r3, r28
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r6, 0xb4(r29)
     mr r5, r3
     lfs f1, lbl_80880734
@@ -2135,7 +2135,7 @@ asm void fn_80018C80(void)
     lwz r31, 0xd10(r4)
 lbl_fn_80018C80_00001BC0:
     mr r3, r28
-    bl fn_80179D44
+    bl actor_getMovementFlags
     fmr f2, f29
     mr r9, r3
     fmr f3, f30

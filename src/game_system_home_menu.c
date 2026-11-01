@@ -33,7 +33,7 @@ extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_80089ACC(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31EC(void);
@@ -154,7 +154,7 @@ asm void fn_8035DE10(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8035DE10_0000004C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8035DE10_0000004C:
     addic. r31, r29, 0x1510
     beq lbl_fn_8035DE10_0000006C
@@ -483,7 +483,7 @@ asm void fn_8035E2A0(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8035E2A0_000004D8
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8035E2A0_000004D8:
     cmpwi r31, 0x0
     ble lbl_fn_8035E2A0_000004E8
@@ -572,7 +572,7 @@ lbl_fn_8035E314_000005D8:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8035E314_0000060C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8035E314_0000060C:
     addi r3, r30, 0x194
     li r4, -0x1

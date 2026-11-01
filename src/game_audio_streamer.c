@@ -29,7 +29,7 @@ extern void fn_80178A6C(void);
 extern void fn_8020A81C(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_findResourceSlot(void);
@@ -1663,13 +1663,13 @@ asm void fn_802FC850(void)
     bl res_MsgHandle_destructor
     addi r3, r30, 0x1588
     addi r4, r29, 0x2c
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r30, 0x1540
     addi r4, r29, 0x42
     bl res_MsgHandle_destructor
     addi r3, r30, 0x154c
     addi r4, r29, 0x58
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r30, 0x1558
     addi r4, r29, 0x6e
     bl res_MsgHandle_destructor

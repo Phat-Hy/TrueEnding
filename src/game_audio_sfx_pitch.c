@@ -3,8 +3,8 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void vec3_assign(void);
@@ -17,7 +17,7 @@ extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -71,8 +71,8 @@ extern void fn_8016F5EC(void);
 extern void fn_80204E04(void);
 extern void task_findEntryById(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -336,7 +336,7 @@ lbl_fn_80313544_00000124:
     bl res_MsgHandle_destructor
     addi r3, r31, 0x1570
     addi r4, r30, 0x5e
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x157c
     addi r4, r30, 0x74
     bl res_MsgHandle_destructor
@@ -388,7 +388,7 @@ asm void fn_80313848(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80313848_00000350
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80313848_00000350:
     addic. r31, r29, 0x1620
     beq lbl_fn_80313848_00000370
@@ -410,7 +410,7 @@ lbl_fn_80313848_00000370:
 lbl_fn_80313848_00000390:
     addi r3, r29, 0x1570
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x1564
     beq lbl_fn_80313848_000003BC
     mr r3, r31
@@ -1950,7 +1950,7 @@ lbl_fn_80314BD8_00001918:
     fmr f3, f1
     lfs f2, lbl_80884CF4
     addi r3, r1, 0xb0
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r1, 0xbc
     addi r5, r1, 0x188
@@ -1966,7 +1966,7 @@ lbl_fn_80314BD8_00001984:
     fmr f3, f1
     lfs f2, lbl_80884CF4
     addi r3, r1, 0x8c
-    bl fn_8000D114
+    bl vec3_set
     mr r5, r3
     addi r3, r1, 0x98
     addi r4, r1, 0x188
@@ -2019,7 +2019,7 @@ lbl_fn_80314BD8_000019E8:
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x164
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     mr r4, r30
     addi r3, r1, 0x50
     bl fn_8014052C

@@ -30,7 +30,7 @@ extern void fn_801F837C(void);
 extern void fn_801F8598(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_80207C34(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void fn_802376D0(void);
 extern void fn_8023772C(void);
 extern void res_MsgHandle_unload(void);
@@ -155,7 +155,7 @@ lbl_fn_800EF7F8_000000A0:
 lbl_fn_800EF7F8_000000C0:
     addi r3, r29, 0x1c
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x10
     beq lbl_fn_800EF7F8_000000EC
     mr r3, r31

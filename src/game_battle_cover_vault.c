@@ -36,7 +36,7 @@ extern void fn_80176ACC(void);
 extern void fn_8017CB2C(void);
 extern void fn_802180A8(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
@@ -686,7 +686,7 @@ lbl_fn_803F8890_00000844:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r28, 0x920
-    bl fn_80237654
+    bl res_Resource_unload
     b lbl_fn_803F8890_00000944
 lbl_fn_803F8890_00000870:
     mr r3, r29

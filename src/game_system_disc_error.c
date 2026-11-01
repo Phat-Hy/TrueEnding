@@ -15,7 +15,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AF38(void);
 extern void mem_free(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_applyLayerTransform(void);
@@ -34,10 +34,10 @@ extern void fn_8015ECC4(void);
 extern void fn_80161570(void);
 extern void fn_8016E4C4(void);
 extern void fn_8016EB48(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -695,7 +695,7 @@ asm void fn_80354398(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80354398_00000748
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80354398_00000748:
     addic. r31, r29, 0x1cac
     beq lbl_fn_80354398_00000768
@@ -713,7 +713,7 @@ lbl_fn_80354398_00000768:
 lbl_fn_80354398_00000778:
     addi r3, r29, 0x17d8
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r3, r29, 0x170c
     beq lbl_fn_80354398_00000794
     li r4, 0x0
@@ -780,7 +780,7 @@ lbl_fn_80354398_00000844:
 lbl_fn_80354398_00000864:
     addi r3, r29, 0x1648
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x163c
     beq lbl_fn_80354398_00000890
     mr r3, r31
@@ -1895,7 +1895,7 @@ asm void fn_80355390(void)
     stfs f0, 0x78(r1)
     stw r31, 0x16c(r1)
     stw r31, 0x170(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r28
     mr r5, r30

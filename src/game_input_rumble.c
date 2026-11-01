@@ -19,7 +19,7 @@ extern void fn_8006AFF8(void);
 extern void mem_free(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -48,13 +48,13 @@ extern void fn_8017039C(void);
 extern void fn_80170A20(void);
 extern void fn_801750FC(void);
 extern void fn_80176548(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_8017A33C(void);
 extern void fn_8017AC3C(void);
 extern void task_findEntryById(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -482,7 +482,7 @@ lbl_fn_802F09D4_000003BC:
     stw r0, 0xf8(r1)
     bl fn_80176548
     mr r3, r30
-    bl fn_80179D44
+    bl actor_getMovementFlags
     mr r7, r3
     lwz r3, lbl_8087EE98
     lfs f1, 0x14(r1)
@@ -1261,7 +1261,7 @@ lbl_fn_802F1524_00000E9C:
     bl res_MsgHandle_destructor
     addi r3, r30, 0x15b8
     addi r4, r31, 0x75
-    bl fn_80237654
+    bl res_Resource_unload
     lwz r0, 0x20(r1)
     srwi. r0, r0, 31
     beq lbl_fn_802F1524_00000F38
@@ -1310,7 +1310,7 @@ asm void fn_802F18E0(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802F18E0_00000FC8
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802F18E0_00000FC8:
     addic. r3, r29, 0x15c4
     beq lbl_fn_802F18E0_00000FD8
@@ -1319,7 +1319,7 @@ lbl_fn_802F18E0_00000FC8:
 lbl_fn_802F18E0_00000FD8:
     addi r3, r29, 0x15b8
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x15ac
     beq lbl_fn_802F18E0_00001004
     mr r3, r31

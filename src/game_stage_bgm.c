@@ -7,7 +7,7 @@ extern void __register_global_object(void);
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void fn_8000D3A4(void);
 extern void fn_8000DD0C(void);
 extern void vec3_assign(void);
@@ -1079,7 +1079,7 @@ lbl_fn_8019FEC4_00000BC4:
     addi r3, r1, 0x94
     lfs f3, lbl_80881FBC
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r1, 0x128
     addi r4, r1, 0xa0
     bl fn_800109E0

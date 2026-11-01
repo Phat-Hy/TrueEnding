@@ -15,7 +15,7 @@ extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void str_parseInt(void);
@@ -1472,7 +1472,7 @@ asm void fn_8030A07C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8030A07C_000013B4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8030A07C_000013B4:
     addic. r31, r29, 0x163c
     beq lbl_fn_8030A07C_000013D4
@@ -1844,7 +1844,7 @@ asm void fn_8030A5D8(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8030A5D8_00001910
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8030A5D8_00001910:
     addic. r31, r29, 0x15f4
     beq lbl_fn_8030A5D8_00001930

@@ -13,7 +13,7 @@ extern void fn_8004B338(void);
 extern void fn_80063484(void);
 extern void fn_80076FF8(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
@@ -1074,7 +1074,7 @@ asm void fn_801CD184(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_801CD184_00000D6C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_801CD184_00000D6C:
     addi r3, r30, 0x220
     li r4, -0x1

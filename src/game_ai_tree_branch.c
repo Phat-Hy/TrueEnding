@@ -21,7 +21,7 @@ extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -1291,7 +1291,7 @@ asm void fn_8025A4A4(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8025A4A4_000010D4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8025A4A4_000010D4:
     addic. r3, r29, 0x1580
     beq lbl_fn_8025A4A4_000010E4

@@ -61,7 +61,7 @@ extern void fn_806174C0(void);
 extern void fn_806175F0(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevSwapMode(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXSetZMode(void);
@@ -736,7 +736,7 @@ lbl_fn_800AF544_000007B0:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -761,7 +761,7 @@ lbl_fn_800AF544_000007B0:
     li r4, 0x2
     li r5, 0x2
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
@@ -1020,7 +1020,7 @@ lbl_fn_800AF544_00000C1C:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     bl fn_80617220
     li r3, 0x1
@@ -1043,7 +1043,7 @@ lbl_fn_800AF544_00000C1C:
     li r4, 0x1
     li r5, 0x1
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     bl fn_80617220
     li r3, 0x0
@@ -1603,7 +1603,7 @@ lbl_fn_800AFFEC_000014D0:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1661,7 +1661,7 @@ lbl_fn_800AFFEC_000014D0:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -2070,7 +2070,7 @@ asm void fn_800B0A70(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x7
     li r5, 0x5

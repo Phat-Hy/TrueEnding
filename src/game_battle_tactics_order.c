@@ -43,7 +43,7 @@ extern void fn_8021823C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_update(void);
@@ -646,9 +646,9 @@ asm void fn_803F0328(void)
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
     beq lbl_fn_803F0328_000006C0
-    lis r4, fn_802375C4@ha
+    lis r4, res_Resource_destructor@ha
     mr r3, r0
-    addi r4, r4, fn_802375C4@l
+    addi r4, r4, res_Resource_destructor@l
     bl __destroy_arr
 lbl_fn_803F0328_000006C0:
     cmpwi r30, 0x0
@@ -662,11 +662,11 @@ lbl_fn_803F0328_000006C0:
     li r7, 0x0
     bl mem_realloc
     lis r4, fn_80237518@ha
-    lis r5, fn_802375C4@ha
+    lis r5, res_Resource_destructor@ha
     mr r7, r30
     li r6, 0xc
     addi r4, r4, fn_80237518@l
-    addi r5, r5, fn_802375C4@l
+    addi r5, r5, res_Resource_destructor@l
     bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803F0328_00000714

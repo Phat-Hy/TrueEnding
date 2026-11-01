@@ -33,7 +33,7 @@ extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void actor_setState(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void task_mapIdToQueue(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -1001,7 +1001,7 @@ lbl_fn_80254F6C_00000B78:
 lbl_fn_80254F6C_00000B7C:
     lwz r29, lbl_8087EE68
     mr r3, r31
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f3, lbl_808833B8
     mr r9, r3
     lfs f0, 0x538(r31)
@@ -1021,7 +1021,7 @@ lbl_fn_80254F6C_00000B7C:
     bgt lbl_fn_80254F6C_00000C14
     lwz r29, lbl_8087EE68
     mr r3, r31
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f3, lbl_808833B8
     mr r9, r3
     lfs f0, 0x538(r31)
@@ -1042,7 +1042,7 @@ lbl_fn_80254F6C_00000C14:
     bgt lbl_fn_80254F6C_00000C64
     lwz r29, lbl_8087EE68
     mr r3, r31
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f3, lbl_808833B8
     mr r9, r3
     lfs f0, 0x538(r31)

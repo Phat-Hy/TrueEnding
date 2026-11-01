@@ -4,8 +4,8 @@
 /* External function declarations */
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
@@ -111,7 +111,7 @@ asm void fn_803041C8(void)
     stw r30, 0x188(r1)
     lfs f31, 0x16c8(r3)
     addi r3, r1, 0x110
-    bl fn_8000D114
+    bl vec3_set
     lwz r4, 0x1604(r31)
     cmpwi r4, 0x0
     beq lbl_fn_803041C8_00000050
@@ -423,7 +423,7 @@ lbl_fn_803041C8_000004CC:
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x8c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     li r3, 0x64d
     bl task_findEntryById
     mr r30, r3

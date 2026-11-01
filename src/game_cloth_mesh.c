@@ -37,7 +37,7 @@ extern void fn_8017039C(void);
 extern void fn_8021A888(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_findResourceSlot(void);
@@ -2066,7 +2066,7 @@ lbl_fn_8027C990_00001BCC:
     bl res_MsgHandle_destructor
     addi r3, r29, 0x155c
     addi r4, r30, 0x4a
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1568
     addi r4, r30, 0x60
     bl res_MsgHandle_destructor

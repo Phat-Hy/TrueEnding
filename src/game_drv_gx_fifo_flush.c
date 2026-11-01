@@ -29,7 +29,7 @@ extern void fn_80614A80(void);
 extern void fn_80615D20(void);
 extern void fn_80615D50(void);
 extern void fn_80617340(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXLoadPosMtxImm(void);
@@ -615,7 +615,7 @@ asm void fn_805C03A0(void)
     li r4, 0xff
     li r5, 0xff
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

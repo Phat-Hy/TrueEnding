@@ -28,7 +28,7 @@ extern void fn_8011FC10(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801A03E0(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
@@ -689,7 +689,7 @@ lbl_fn_8029C564_0000084C:
     lwz r30, 0x1564(r28)
     slwi r31, r31, 2
     lwz r29, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwzx r4, r30, r31
     mr r5, r3
     lfs f1, lbl_80883C0C

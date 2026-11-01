@@ -35,8 +35,8 @@ extern void fn_800E2778(void);
 extern void save_validateHeader(void);
 extern void task_findEntryById(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void fn_80237784(void);
 extern void res_MsgHandle_constructor(void);
@@ -1247,7 +1247,7 @@ asm void fn_80243758(void)
     beq lbl_fn_80243758_00000EC0
     li r4, -0x1
     addi r3, r3, 0x48
-    bl fn_802375C4
+    bl res_Resource_destructor
     cmpwi r31, 0x0
     ble lbl_fn_80243758_00000EC0
     mr r3, r30
@@ -1446,7 +1446,7 @@ lbl_fn_802438D4_000010E4:
     bl fn_802438C4
     addi r3, r3, 0x48
     addi r4, r1, 0x30
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r1, 0x130
     li r4, 0x1
     bl fn_800E114C

@@ -28,7 +28,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80087E9C(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void lockon_updateTarget(void);
@@ -162,7 +162,7 @@ lbl_fn_80361CA4_00000048:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80361CA4_00000074
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80361CA4_00000074:
     mr r3, r30
     li r4, 0x0
@@ -623,7 +623,7 @@ asm void fn_80362344(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80362344_000006EC
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80362344_000006EC:
     mr r3, r30
     li r4, 0x0
@@ -933,7 +933,7 @@ asm void fn_80362774(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80362774_00000B1C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80362774_00000B1C:
     mr r3, r30
     li r4, 0x0
@@ -1368,7 +1368,7 @@ asm void fn_80362D90(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80362D90_00001138
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80362D90_00001138:
     mr r3, r30
     li r4, 0x0

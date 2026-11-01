@@ -18,7 +18,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800BFAC8(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -1319,7 +1319,7 @@ asm void fn_801EA874(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_801EA874_000010E8
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_801EA874_000010E8:
     addic. r0, r30, 0x84
     beq lbl_fn_801EA874_0000110C

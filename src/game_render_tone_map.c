@@ -22,7 +22,7 @@ extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80176548(void);
 extern void fn_801765D8(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void fn_802BC4EC(void);
 extern void world_getLocalFlag(void);
@@ -2769,7 +2769,7 @@ lbl_fn_802BEE44_00002554:
     bl fn_80176548
     mr r3, r31
     lis r29, 0x8000
-    bl fn_80179D44
+    bl actor_getMovementFlags
     or r7, r29, r3
     lwz r3, lbl_8087EE98
     lfs f1, 0xa4(r1)
@@ -3368,7 +3368,7 @@ lbl_fn_802BF5C0_00002DF0:
     bl fn_80176548
     mr r3, r31
     lis r29, 0x8000
-    bl fn_80179D44
+    bl actor_getMovementFlags
     or r7, r29, r3
     lwz r3, lbl_8087EE98
     lfs f1, 0xd4(r1)

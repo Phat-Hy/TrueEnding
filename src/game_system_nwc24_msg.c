@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void vec3_assign(void);
@@ -530,7 +530,7 @@ lbl_fn_80387910_000004D8:
     addi r3, r1, 0xe0
     lfs f3, lbl_808858F8
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f0, 0x8a0(r29)
     addi r3, r1, 0x168
     fneg f1, f0
@@ -648,7 +648,7 @@ lbl_fn_80387910_00000730:
     addi r3, r1, 0x2c
     lfs f3, lbl_808858F8
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r1, 0x38
     addi r5, r1, 0x138

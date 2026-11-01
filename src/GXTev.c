@@ -34,10 +34,10 @@ extern f32 lbl_808887FC;
 void GXSetTevKColorSel(void);
 void GXSetTevKAlphaSel(void);
 void GXSetTevSwapMode(void);
-void fn_80617730(void);
+void GXSetTevSwapModeTable(void);
 void fn_806177B0(void);
 void fn_806177F0(void);
-void fn_80617880(void);
+void GXSetTevOrder(void);
 void GXSetNumTevStages(void);
 void fn_80617A10(void);
 void fn_80617C40(void);
@@ -144,7 +144,7 @@ asm void GXSetTevSwapMode(void)
     blr
 }
 
-asm void fn_80617730(void)
+asm void GXSetTevSwapModeTable(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -242,7 +242,7 @@ lbl_fn_806177F0_000001E8:
     blr
 }
 
-asm void fn_80617880(void)
+asm void GXSetTevOrder(void)
 {
     nofralloc
     rlwinm r11, r5, 0, 24, 22
@@ -260,76 +260,76 @@ asm void fn_80617880(void)
     stw r5, 0x5a4(r7)
     add r7, r10, r8
     andc r9, r11, r0
-    blt lbl_fn_80617880_0000028C
+    blt lbl_GXSetTevOrder_0000028C
     li r0, 0x1
     lwz r8, 0x5e8(r10)
     slw r0, r0, r3
     li r4, 0x0
     andc r0, r8, r0
     stw r0, 0x5e8(r10)
-    b lbl_fn_80617880_000002A0
-lbl_fn_80617880_0000028C:
+    b lbl_GXSetTevOrder_000002A0
+lbl_GXSetTevOrder_0000028C:
     li r0, 0x1
     lwz r8, 0x5e8(r10)
     slw r0, r0, r3
     or r0, r8, r0
     stw r0, 0x5e8(r10)
-lbl_fn_80617880_000002A0:
+lbl_GXSetTevOrder_000002A0:
     clrlwi. r0, r3, 31
-    beq lbl_fn_80617880_00000304
+    beq lbl_GXSetTevOrder_00000304
     lwz r8, 0x150(r7)
     cmpwi r6, 0xff
     rlwimi r8, r9, 12, 17, 19
     rlwimi r8, r4, 15, 14, 16
     stw r8, 0x150(r7)
-    bne lbl_fn_80617880_000002C8
+    bne lbl_GXSetTevOrder_000002C8
     li r0, 0x7
-    b lbl_fn_80617880_000002D8
-lbl_fn_80617880_000002C8:
+    b lbl_GXSetTevOrder_000002D8
+lbl_GXSetTevOrder_000002C8:
     lis r3, lbl_807B0E10@ha
     slwi r0, r6, 2
     addi r3, r3, lbl_807B0E10@l
     lwzx r0, r3, r0
-lbl_fn_80617880_000002D8:
+lbl_GXSetTevOrder_000002D8:
     cmpwi r5, 0xff
     rlwimi r8, r0, 19, 10, 12
     stw r8, 0x150(r7)
     li r3, 0x0
-    beq lbl_fn_80617880_000002F8
+    beq lbl_GXSetTevOrder_000002F8
     rlwinm. r0, r5, 0, 23, 23
-    bne lbl_fn_80617880_000002F8
+    bne lbl_GXSetTevOrder_000002F8
     li r3, 0x1
-lbl_fn_80617880_000002F8:
+lbl_GXSetTevOrder_000002F8:
     rlwimi r8, r3, 18, 13, 13
     stw r8, 0x150(r7)
-    b lbl_fn_80617880_0000035C
-lbl_fn_80617880_00000304:
+    b lbl_GXSetTevOrder_0000035C
+lbl_GXSetTevOrder_00000304:
     lwz r8, 0x150(r7)
     cmpwi r6, 0xff
     rlwimi r8, r9, 0, 29, 31
     rlwimi r8, r4, 3, 26, 28
     stw r8, 0x150(r7)
-    bne lbl_fn_80617880_00000324
+    bne lbl_GXSetTevOrder_00000324
     li r0, 0x7
-    b lbl_fn_80617880_00000334
-lbl_fn_80617880_00000324:
+    b lbl_GXSetTevOrder_00000334
+lbl_GXSetTevOrder_00000324:
     lis r3, lbl_807B0E10@ha
     slwi r0, r6, 2
     addi r3, r3, lbl_807B0E10@l
     lwzx r0, r3, r0
-lbl_fn_80617880_00000334:
+lbl_GXSetTevOrder_00000334:
     cmpwi r5, 0xff
     rlwimi r8, r0, 7, 22, 24
     stw r8, 0x150(r7)
     li r3, 0x0
-    beq lbl_fn_80617880_00000354
+    beq lbl_GXSetTevOrder_00000354
     rlwinm. r0, r5, 0, 23, 23
-    bne lbl_fn_80617880_00000354
+    bne lbl_GXSetTevOrder_00000354
     li r3, 0x1
-lbl_fn_80617880_00000354:
+lbl_GXSetTevOrder_00000354:
     rlwimi r8, r3, 6, 25, 25
     stw r8, 0x150(r7)
-lbl_fn_80617880_0000035C:
+lbl_GXSetTevOrder_0000035C:
     lis r4, 0xcc01
     li r0, 0x61
     stb r0, -0x8000(r4)

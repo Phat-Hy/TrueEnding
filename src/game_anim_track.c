@@ -13,7 +13,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void mem_free(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
 extern void ref_releaseHandle(void);
@@ -32,7 +32,7 @@ extern void fn_80151448(void);
 extern void fn_8015C6A0(void);
 extern void actor_setState(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_unload(void);
@@ -182,10 +182,10 @@ lbl_fn_80272CF0_000000EC:
 lbl_fn_80272CF0_0000010C:
     addi r3, r29, 0xbc
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r29, 0xb0
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0xa4
     beq lbl_fn_80272CF0_00000144
     mr r3, r31
@@ -197,7 +197,7 @@ lbl_fn_80272CF0_0000010C:
 lbl_fn_80272CF0_00000144:
     addi r3, r29, 0x98
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x8c
     beq lbl_fn_80272CF0_00000170
     mr r3, r31
@@ -243,7 +243,7 @@ asm void fn_80272E0C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80272E0C_000001EC
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80272E0C_000001EC:
     addic. r3, r29, 0x1938
     beq lbl_fn_80272E0C_000001FC

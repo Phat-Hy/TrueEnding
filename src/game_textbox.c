@@ -53,8 +53,8 @@ extern void GXSetTevIndirect(void);
 extern void fn_806175F0(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevSwapMode(void);
-extern void fn_80617730(void);
-extern void fn_80617880(void);
+extern void GXSetTevSwapModeTable(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXLoadTexMtxImm(void);
@@ -584,7 +584,7 @@ lbl_fn_800AD648_00000684:
     mr r5, r31
     li r4, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     mr r3, r31
     bl fn_80617220
     addi r31, r31, 0x1
@@ -646,25 +646,25 @@ asm void fn_800AD834(void)
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x1
     li r4, 0x0
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x2
     li r4, 0x0
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x3
     li r4, 0x0
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -715,7 +715,7 @@ asm void fn_800AD834(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1040,7 +1040,7 @@ lbl_fn_800AD834_00000D20:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1193,7 +1193,7 @@ lbl_fn_800AD834_00000F00:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     lfs f1, lbl_80880DD0
     addi r3, r1, 0x150
     lfs f0, lbl_80880DC8
@@ -1347,7 +1347,7 @@ lbl_fn_800AD834_00000F00:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     li r4, 0xf
     li r5, 0x0
@@ -1365,7 +1365,7 @@ lbl_fn_800AD834_00000F00:
     li r4, 0x1
     li r5, 0x1
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     bl fn_80617200
     li r3, 0x0
@@ -1830,7 +1830,7 @@ lbl_fn_800AE568_000017F8:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     lwz r0, lbl_80880E08
     addi r4, r1, 0x8
     stw r0, 0x8(r1)
@@ -1860,7 +1860,7 @@ lbl_fn_800AE568_000017F8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     bl fn_80617220
     li r3, 0x1
@@ -1887,7 +1887,7 @@ lbl_fn_800AE568_000017F8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x2
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -1912,7 +1912,7 @@ lbl_fn_800AE568_000017F8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x3
     li r4, 0xc
     bl GXSetTevKColorSel
@@ -1937,7 +1937,7 @@ lbl_fn_800AE568_000017F8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x4
     li r5, 0x1

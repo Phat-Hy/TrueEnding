@@ -14,7 +14,7 @@ extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -31,8 +31,8 @@ extern void actor_setState(void);
 extern void assert_formatLocation(void);
 extern void task_findEntryById(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -1594,7 +1594,7 @@ lbl_fn_80264DB4_00001494:
     bl res_MsgHandle_destructor
     addi r3, r30, 0x1600
     addi r4, r31, 0x171
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r30, 0x160c
     addi r4, r31, 0x18a
     bl res_MsgHandle_destructor
@@ -1677,7 +1677,7 @@ lbl_fn_802652F4_0000165C:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802652F4_00001680
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802652F4_00001680:
     addic. r29, r30, 0x1618
     beq lbl_fn_802652F4_000016A0
@@ -1699,7 +1699,7 @@ lbl_fn_802652F4_000016A0:
 lbl_fn_802652F4_000016C0:
     addi r3, r30, 0x1600
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r29, r30, 0x15f4
     beq lbl_fn_802652F4_000016EC
     mr r3, r29

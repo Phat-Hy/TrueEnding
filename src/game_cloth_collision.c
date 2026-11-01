@@ -31,7 +31,7 @@ extern void fn_80170A20(void);
 extern void fn_801781B0(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
@@ -161,7 +161,7 @@ lbl_fn_8027CD9C_00000094:
 lbl_fn_8027CD9C_000000B4:
     addi r3, r29, 0x155c
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x1550
     beq lbl_fn_8027CD9C_000000E0
     mr r3, r31

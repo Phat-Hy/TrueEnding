@@ -15,7 +15,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_free(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void str_parseInt(void);
@@ -31,8 +31,8 @@ extern void fn_8013C504(void);
 extern void fn_801A03E0(void);
 extern void fn_8020A81C(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -194,7 +194,7 @@ asm void fn_802D710C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802D710C_00000100
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802D710C_00000100:
     addic. r3, r30, 0x1650
     beq lbl_fn_802D710C_00000110
@@ -323,7 +323,7 @@ lbl_fn_802D710C_000002A4:
 lbl_fn_802D710C_000002C4:
     addi r3, r30, 0x157c
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r29, r30, 0x1554
     beq lbl_fn_802D710C_000002F0
     mr r3, r29
@@ -718,7 +718,7 @@ lbl_fn_802D7480_00000840:
     bl res_MsgHandle_destructor
     addi r3, r30, 0x1524
     addi r4, r31, 0x8c
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r30, 0x1530
     addi r4, r31, 0xa5
     bl res_MsgHandle_destructor
@@ -829,7 +829,7 @@ asm void fn_802D7A3C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802D7A3C_00000A30
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802D7A3C_00000A30:
     addic. r4, r30, 0x168c
     beq lbl_fn_802D7A3C_00000A5C
@@ -1068,7 +1068,7 @@ lbl_fn_802D7A3C_00000D60:
 lbl_fn_802D7A3C_00000D80:
     addi r3, r30, 0x1524
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r29, r30, 0x1508
     beq lbl_fn_802D7A3C_00000DAC
     mr r3, r29

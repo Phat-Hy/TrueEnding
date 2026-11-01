@@ -56,8 +56,8 @@ extern void fn_806175F0(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
-extern void fn_80617730(void);
-extern void fn_80617880(void);
+extern void GXSetTevSwapModeTable(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXLoadNrmMtxImm3x3(void);
@@ -702,7 +702,7 @@ lbl_font_renderString_00000730:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0x8
@@ -741,7 +741,7 @@ lbl_font_renderString_00000730:
     li r4, 0x1
     li r5, 0x1
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     li r4, 0xf
     li r5, 0x0
@@ -781,7 +781,7 @@ lbl_font_renderString_00000730:
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x1
     li r4, 0x0
     li r5, 0x1
@@ -1530,7 +1530,7 @@ asm void fn_80235BF8(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0x8
@@ -1581,7 +1581,7 @@ asm void fn_80235BF8(void)
     li r4, 0x1
     li r5, 0x2
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     li r4, 0xf
     li r5, 0x0
@@ -1621,7 +1621,7 @@ asm void fn_80235BF8(void)
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x1
     li r4, 0x0
     li r5, 0x1
@@ -1879,7 +1879,7 @@ lbl_fn_80235BF8_000018D4:
     li r4, 0x0
     li r5, 0x1
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0xf
@@ -1923,7 +1923,7 @@ lbl_fn_80235BF8_000018D4:
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -1934,7 +1934,7 @@ lbl_fn_80235BF8_000019E8:
     li r5, 0x0
     mr r4, r3
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     addi r3, r14, 0x1
     li r4, 0xf
     li r5, 0x8

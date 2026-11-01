@@ -37,7 +37,7 @@ extern void actor_setState(void);
 extern void fn_801A03E0(void);
 extern void task_findEntryById(void);
 extern void fn_80237518(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -555,7 +555,7 @@ lbl_fn_802D0038_000005D4:
     bl res_MsgHandle_destructor
     addi r3, r30, 0x157c
     addi r4, r31, 0x8d
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r30, 0x1588
     addi r4, r31, 0xa3
     bl res_MsgHandle_destructor

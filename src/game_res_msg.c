@@ -84,8 +84,8 @@ void fn_802371AC(void);
 void fn_802371BC(void);
 void fn_80237518(void);
 void atn_LH_Effect_destructor(void);
-void fn_802375C4(void);
-void fn_80237654(void);
+void res_Resource_destructor(void);
+void res_Resource_unload(void);
 void fn_802376D0(void);
 void fn_8023772C(void);
 void fn_80237784(void);
@@ -1057,7 +1057,7 @@ lbl_atn_LH_Effect_destructor_00000D3C:
     blr
 }
 
-asm void fn_802375C4(void)
+asm void res_Resource_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1068,31 +1068,31 @@ asm void fn_802375C4(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_802375C4_00000DCC
+    beq lbl_res_Resource_destructor_00000DCC
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_802375C4_00000DAC
+    beq lbl_res_Resource_destructor_00000DAC
     lwz r3, lbl_8087F3C0
     cmpwi r3, 0x0
-    beq lbl_fn_802375C4_00000D9C
+    beq lbl_res_Resource_destructor_00000D9C
     mr r4, r30
     bl fn_8023A2A8
-lbl_fn_802375C4_00000D9C:
+lbl_res_Resource_destructor_00000D9C:
     addi r3, r30, 0x4
     bl fn_80473F88
     li r0, 0x0
     stw r0, 0x0(r30)
-lbl_fn_802375C4_00000DAC:
+lbl_res_Resource_destructor_00000DAC:
     addic. r3, r30, 0x4
-    beq lbl_fn_802375C4_00000DBC
+    beq lbl_res_Resource_destructor_00000DBC
     li r4, 0x0
     bl atn_LoadHandle_destructor
-lbl_fn_802375C4_00000DBC:
+lbl_res_Resource_destructor_00000DBC:
     cmpwi r31, 0x0
-    ble lbl_fn_802375C4_00000DCC
+    ble lbl_res_Resource_destructor_00000DCC
     mr r3, r30
     bl dtor_80084684
-lbl_fn_802375C4_00000DCC:
+lbl_res_Resource_destructor_00000DCC:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1102,7 +1102,7 @@ lbl_fn_802375C4_00000DCC:
     blr
 }
 
-asm void fn_80237654(void)
+asm void res_Resource_unload(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1114,18 +1114,18 @@ asm void fn_80237654(void)
     mr r30, r3
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80237654_00000E34
+    beq lbl_res_Resource_unload_00000E34
     lwz r3, lbl_8087F3C0
     cmpwi r3, 0x0
-    beq lbl_fn_80237654_00000E24
+    beq lbl_res_Resource_unload_00000E24
     mr r4, r30
     bl fn_8023A2A8
-lbl_fn_80237654_00000E24:
+lbl_res_Resource_unload_00000E24:
     addi r3, r30, 0x4
     bl fn_80473F88
     li r0, 0x0
     stw r0, 0x0(r30)
-lbl_fn_80237654_00000E34:
+lbl_res_Resource_unload_00000E34:
     lwz r12, 0x4(r30)
     addi r3, r30, 0x4
     mr r4, r31

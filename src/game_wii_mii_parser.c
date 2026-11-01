@@ -14,7 +14,7 @@ extern void fn_800133B0(void);
 extern void fn_80063484(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void map_debugLog(void);
 extern void fn_8008CD60(void);
 extern void fn_80091CFC(void);
@@ -51,7 +51,7 @@ extern void fn_8015EB2C(void);
 extern void fn_8016D454(void);
 extern void fn_8016EB48(void);
 extern void fn_8016F67C(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void task_mapIdToQueue(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -599,7 +599,7 @@ asm void fn_805664E0(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_805664E0_000005F0
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_805664E0_000005F0:
     mr r3, r30
     li r4, 0x0
@@ -1713,7 +1713,7 @@ lbl_fn_80567428_00001570:
     cmpwi r0, 0x0
     bne lbl_fn_80567428_000015A8
     mr r3, r30
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80887F84
     mr r5, r3
     mr r3, r28

@@ -14,7 +14,7 @@ extern void fn_80125474(void);
 extern void actor_setState(void);
 extern void fn_801720AC(void);
 extern void fn_801749EC(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801C8938(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -543,7 +543,7 @@ lbl_fn_801426A4_000005EC:
 lbl_fn_801426A4_000006A4:
     lwz r28, lbl_8087EE98
     mr r3, r29
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r28
     addi r4, r1, 0xfc
@@ -605,7 +605,7 @@ lbl_fn_801426A4_00000788:
     stfs f0, 0xe4(r1)
 lbl_fn_801426A4_00000794:
     mr r3, r29
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r0, 0x48(r29)
     mr r7, r3
     cmpwi r0, 0x0

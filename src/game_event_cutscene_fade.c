@@ -9,7 +9,7 @@ extern void fn_8004B1EC(void);
 extern void fn_8004B338(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800CB480(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
@@ -602,7 +602,7 @@ lbl_fn_8047DF70_00000724:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8047DF70_00000748
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8047DF70_00000748:
     lis r4, fn_8047DC98@ha
     addi r3, r29, 0xc8

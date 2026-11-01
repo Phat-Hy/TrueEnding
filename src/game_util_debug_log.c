@@ -32,8 +32,8 @@ extern void fn_8021A984(void);
 extern void fn_8021A9CC(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void fn_8023772C(void);
 extern void res_MsgHandle_constructor(void);
@@ -1124,16 +1124,16 @@ lbl_fn_8059AD10_00000DE8:
 lbl_fn_8059AD10_00000E08:
     addi r3, r29, 0x28e8
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r29, 0x28dc
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r29, 0x28d0
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r29, 0x28c4
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x28b8
     beq lbl_fn_8059AD10_00000E58
     mr r3, r31
@@ -1154,7 +1154,7 @@ lbl_fn_8059AD10_00000E58:
 lbl_fn_8059AD10_00000E78:
     addi r3, r29, 0x28a0
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x2894
     beq lbl_fn_8059AD10_00000EA4
     mr r3, r31
@@ -1315,7 +1315,7 @@ asm void fn_8059AFDC(void)
     bl res_MsgHandle_destructor
     lwz r4, lbl_808881DC
     addi r3, r30, 0x28a0
-    bl fn_80237654
+    bl res_Resource_unload
     lwz r4, lbl_808881E0
     addi r3, r30, 0x28ac
     bl res_MsgHandle_destructor
@@ -1323,16 +1323,16 @@ asm void fn_8059AFDC(void)
     addi r3, r30, 0x28c4
     addi r31, r31, lbl_80762274@l
     addi r4, r31, 0x1
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r30, 0x28d0
     addi r4, r31, 0x1a
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r30, 0x28dc
     addi r4, r31, 0x33
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r30, 0x28e8
     addi r4, r31, 0x4c
-    bl fn_80237654
+    bl res_Resource_unload
     lwz r4, lbl_808881E4
     addi r3, r30, 0x28f4
     bl res_MsgHandle_destructor

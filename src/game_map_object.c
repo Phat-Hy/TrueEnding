@@ -18,8 +18,8 @@ extern void fn_80159E9C(void);
 extern void fn_8015A184(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void fn_80239D58(void);
@@ -324,11 +324,11 @@ asm void fn_80182418(void)
     li r29, 0x0
     lis r30, fn_80237518@ha
     addi r3, r3, lbl_8077CC10@l
-    lis r31, fn_802375C4@ha
+    lis r31, res_Resource_destructor@ha
     stw r3, 0x0(r28)
     addi r3, r28, 0xfc
     addi r4, r30, fn_80237518@l
-    addi r5, r31, fn_802375C4@l
+    addi r5, r31, res_Resource_destructor@l
     stw r29, 0x48(r28)
     li r6, 0xc
     li r7, 0x2
@@ -346,13 +346,13 @@ asm void fn_80182418(void)
     bl __construct_new_array
     addi r3, r28, 0x114
     addi r4, r30, fn_80237518@l
-    addi r5, r31, fn_802375C4@l
+    addi r5, r31, res_Resource_destructor@l
     li r6, 0xc
     li r7, 0x2
     bl __construct_new_array
     addi r3, r28, 0x12c
     addi r4, r30, fn_80237518@l
-    addi r5, r31, fn_802375C4@l
+    addi r5, r31, res_Resource_destructor@l
     li r6, 0xc
     li r7, 0x2
     bl __construct_new_array
@@ -372,22 +372,22 @@ asm void fn_80182418(void)
     stw r29, 0x1bc(r28)
     stw r0, 0x1c0(r28)
     stw r29, 0x1c4(r28)
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r28, 0x114
     addi r4, r31, 0xf
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r28, 0x12c
     addi r4, r31, 0x1d
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r28, 0x108
     addi r4, r31, 0x1
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r28, 0x120
     addi r4, r31, 0x2b
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r28, 0x138
     addi r4, r31, 0x1d
-    bl fn_80237654
+    bl res_Resource_unload
     lwz r0, 0x1bc(r28)
     cmpwi r0, 0x0
     beq lbl_fn_80182418_0000043C
@@ -468,19 +468,19 @@ lbl_fn_801825F0_00000514:
     li r6, 0x3c
     bl fn_80360780
 lbl_fn_801825F0_00000530:
-    lis r31, fn_802375C4@ha
+    lis r31, res_Resource_destructor@ha
     addi r3, r29, 0x12c
-    addi r4, r31, fn_802375C4@l
+    addi r4, r31, res_Resource_destructor@l
     li r5, 0xc
     li r6, 0x2
     bl __destroy_new_array
     addi r3, r29, 0x114
-    addi r4, r31, fn_802375C4@l
+    addi r4, r31, res_Resource_destructor@l
     li r5, 0xc
     li r6, 0x2
     bl __destroy_new_array
     addi r3, r29, 0xfc
-    addi r4, r31, fn_802375C4@l
+    addi r4, r31, res_Resource_destructor@l
     li r5, 0xc
     li r6, 0x2
     bl __destroy_new_array

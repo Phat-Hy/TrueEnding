@@ -20,7 +20,7 @@ extern void ref_releaseHandle(void);
 extern void fn_801010A0(void);
 extern void fn_8010EE78(void);
 extern void fn_80176548(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
 extern void PSMTXConcat(void);
@@ -278,7 +278,7 @@ lbl_fn_802B0430_00000288:
     stfs f7, 0x30(r1)
     stfs f8, 0x28(r1)
     stfs f0, 0x24(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r28
     addi r4, r1, 0x188

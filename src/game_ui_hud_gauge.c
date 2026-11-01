@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void vec3_assign(void);
@@ -39,7 +39,7 @@ extern void fn_8013C3B4(void);
 extern void fn_8013CB68(void);
 extern void fn_8014052C(void);
 extern void fn_801446F0(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_80188A70(void);
 extern void fn_80188AA0(void);
 extern void fn_80192758(void);
@@ -650,7 +650,7 @@ asm void fn_801C2198(void)
     stfs f2, 0x88(r1)
     stfs f3, 0x90(r1)
     stfs f0, 0x84(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r24
     mr r5, r26
@@ -880,7 +880,7 @@ lbl_fn_801C2198_000009F4:
     stfs f2, 0x88(r1)
     stfs f3, 0x90(r1)
     stfs f0, 0x84(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r24
     mr r5, r25
@@ -2033,7 +2033,7 @@ lbl_fn_801C346C_00001A68:
     lfs f1, lbl_80882748
     fmuls f3, f3, f0
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, 0xf0(r1)
     addi r3, r1, 0x138
     bl fn_8013A13C

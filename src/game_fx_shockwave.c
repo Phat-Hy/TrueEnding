@@ -18,7 +18,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800DB3EC(void);
@@ -36,7 +36,7 @@ extern void fn_8013C504(void);
 extern void quest_updateFlow(void);
 extern void fn_8014C540(void);
 extern void actor_setState(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -764,7 +764,7 @@ asm void fn_80293BC8(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80293BC8_000008AC
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80293BC8_000008AC:
     addic. r3, r30, 0x1660
     beq lbl_fn_80293BC8_000008BC
@@ -1947,7 +1947,7 @@ lbl_fn_802946BC_0000197C:
     lwz r29, 0x1564(r31)
     mr r3, r31
     lwz r27, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwzx r4, r29, r28
     mr r5, r3
     lfs f1, lbl_80883C0C

@@ -37,8 +37,8 @@ extern void fn_8016EB48(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -375,11 +375,11 @@ asm void fn_80546004(void)
     stw r30, 0x14f8(r29)
     stw r30, 0x14fc(r29)
     stw r0, 0x54c(r29)
-    bl fn_80237654
+    bl res_Resource_unload
     addi r31, r31, lbl_8075E324@l
     addi r3, r29, 0x14c4
     addi r4, r31, 0xd
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x14d0
     addi r4, r31, 0x1f
     bl res_MsgHandle_destructor
@@ -420,10 +420,10 @@ asm void fn_805460D0(void)
 lbl_fn_805460D0_0000042C:
     addi r3, r29, 0x14c4
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r29, 0x14b8
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     mr r3, r29
     li r4, 0x0
     bl fn_8035B78C

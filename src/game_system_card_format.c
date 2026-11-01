@@ -13,7 +13,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
@@ -864,7 +864,7 @@ asm void fn_8035B42C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8035B42C_00000A84
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8035B42C_00000A84:
     addic. r31, r29, 0x1658
     beq lbl_fn_8035B42C_00000AA4

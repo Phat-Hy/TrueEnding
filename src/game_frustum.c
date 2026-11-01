@@ -34,7 +34,7 @@ extern void fn_8016F3D0(void);
 extern void save_validateHeader(void);
 extern void fn_8020BD78(void);
 extern void task_mapIdToQueue(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void fn_8023772C(void);
 extern void res_MsgHandle_destructor(void);
@@ -251,7 +251,7 @@ lbl_fn_800F2C9C_0000016C:
 lbl_fn_800F2C9C_0000017C:
     mr r3, r29
     addi r4, r1, 0x8
-    bl fn_80237654
+    bl res_Resource_unload
     addi r26, r26, 0x1
     addi r29, r29, 0xc
     cmpwi r26, 0x7
@@ -274,7 +274,7 @@ lbl_fn_800F2C9C_000001C0:
     bl sprintf
     mr r3, r29
     addi r4, r1, 0x8
-    bl fn_80237654
+    bl res_Resource_unload
     mr r5, r26
     addi r3, r1, 0x8
     addi r4, r30, 0xa3
@@ -282,7 +282,7 @@ lbl_fn_800F2C9C_000001C0:
     bl sprintf
     mr r3, r28
     addi r4, r1, 0x8
-    bl fn_80237654
+    bl res_Resource_unload
     addi r26, r26, 0x1
     addi r28, r28, 0xc
     cmpwi r26, 0x5
@@ -296,7 +296,7 @@ lbl_fn_800F2C9C_000001C0:
 lbl_fn_800F2C9C_00000228:
     lwz r4, 0x0(r29)
     mr r3, r30
-    bl fn_80237654
+    bl res_Resource_unload
     addi r26, r26, 0x1
     addi r30, r30, 0xc
     cmpwi r26, 0x3
@@ -455,7 +455,7 @@ lbl_fn_800F2C9C_00000228:
     addis r3, r31, 0x4
     lwz r4, lbl_80881430
     subi r3, r3, 0x760c
-    bl fn_80237654
+    bl res_Resource_unload
     addis r3, r31, 0x4
     lwz r4, lbl_80881460
     subi r3, r3, 0x73b0
@@ -1130,27 +1130,27 @@ asm void fn_800F39A4(void)
     mr r28, r3
     addis r3, r3, 0x4
     subi r3, r3, 0x7688
-    bl fn_80237654
+    bl res_Resource_unload
     addis r3, r28, 0x4
     lwz r4, lbl_808813F8
     subi r3, r3, 0x767c
-    bl fn_80237654
+    bl res_Resource_unload
     addis r3, r28, 0x4
     lwz r4, lbl_808813FC
     subi r3, r3, 0x7658
-    bl fn_80237654
+    bl res_Resource_unload
     addis r3, r28, 0x4
     lwz r4, lbl_80881400
     subi r3, r3, 0x764c
-    bl fn_80237654
+    bl res_Resource_unload
     addis r3, r28, 0x4
     lwz r4, lbl_80881404
     subi r3, r3, 0x7670
-    bl fn_80237654
+    bl res_Resource_unload
     addis r3, r28, 0x4
     lwz r4, lbl_80881408
     subi r3, r3, 0x7664
-    bl fn_80237654
+    bl res_Resource_unload
     lis r31, lbl_80736040@ha
     addis r3, r28, 0x4
     addi r31, r31, lbl_80736040@l

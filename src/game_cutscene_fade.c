@@ -17,7 +17,7 @@ extern void fn_80161570(void);
 extern void fn_8016ADF4(void);
 extern void fn_8016D74C(void);
 extern void fn_80170A20(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -189,7 +189,7 @@ lbl_fn_80331094_000000F4:
     fadds f0, f0, f4
     stfs f3, 0x18(r1)
     stfs f0, 0x24(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r27
     mr r5, r29

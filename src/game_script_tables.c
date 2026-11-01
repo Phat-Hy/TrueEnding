@@ -16,7 +16,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_alloc(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -44,8 +44,8 @@ extern void fn_8019AFE8(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -1603,10 +1603,10 @@ lbl_fn_8024A650_0000148C:
     bl res_MsgHandle_destructor
     addi r3, r29, 0x1534
     addi r4, r30, 0x13c
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1528
     addi r4, r30, 0x155
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x157c
     addi r4, r30, 0x16e
     bl res_MsgHandle_destructor
@@ -1658,7 +1658,7 @@ asm void fn_8024AB20(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8024AB20_000015E4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8024AB20_000015E4:
     addic. r3, r29, 0x1588
     beq lbl_fn_8024AB20_000015F4
@@ -1721,10 +1721,10 @@ lbl_fn_8024AB20_00001694:
 lbl_fn_8024AB20_000016B4:
     addi r3, r29, 0x1534
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r29, 0x1528
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x151c
     beq lbl_fn_8024AB20_000016EC
     mr r3, r31

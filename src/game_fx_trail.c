@@ -2,8 +2,8 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
@@ -514,7 +514,7 @@ lbl_fn_8028CB38_00000574:
     lfs f1, lbl_80883A98
     fmr f3, f1
     fdivs f31, f0, f4
-    bl fn_8000D114
+    bl vec3_set
     fmr f1, f31
     la r3, lbl_8087DC38
     la r4, lbl_8087DC3C
@@ -549,7 +549,7 @@ lbl_fn_8028CB38_00000574:
     beq lbl_fn_8028CB38_00000640
     mr r4, r3
     addi r3, r1, 0x30
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r4, r1, 0x30
     b lbl_fn_8028CB38_00000644
 lbl_fn_8028CB38_00000640:

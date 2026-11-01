@@ -23,7 +23,7 @@ extern void fn_801539E0(void);
 extern void fn_8016DA4C(void);
 extern void fn_80178864(void);
 extern void fn_801789D8(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void kpad_getClampData(void);
 extern void fn_803CC1A4(void);
@@ -728,7 +728,7 @@ lbl_fn_801A4E08_00000824:
     stw r0, 0x340(r1)
     stw r0, 0x344(r1)
     stw r0, 0x348(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f2, 0x8(r29)
     addi r27, r1, 0x17c
     psq_l f1, 0x0(r29), 0, 0
@@ -1390,7 +1390,7 @@ lbl_fn_801A4E08_000011B4:
     stfs f2, 0x130(r1)
     stfs f4, 0x138(r1)
     stfs f0, 0x12c(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     lwz r3, lbl_8087EE98
     mr r5, r21
@@ -1846,7 +1846,7 @@ lbl_fn_801A5E90_00001868:
     stw r0, 0x188(r1)
     stw r0, 0x18c(r1)
     stw r0, 0x190(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     lwz r3, lbl_8087EE98
     mr r5, r30

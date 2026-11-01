@@ -13,7 +13,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
 extern void fn_801539E0(void);
 extern void fn_80155DAC(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_8017C9AC(void);
 extern void fn_8018059C(void);
 extern void task_mapIdToQueue(void);
@@ -426,7 +426,7 @@ asm void fn_801C3D1C(void)
     fadds f0, f3, f0
     stfs f4, 0x18(r1)
     stfs f0, 0xc(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r29
     mr r5, r31

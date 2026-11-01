@@ -6,8 +6,8 @@ extern void __register_global_object(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A8(void);
 extern void fn_8000D430(void);
@@ -959,7 +959,7 @@ lbl_fn_803FA5C8_00000AA0:
     bl fn_80266154
     mr r4, r3
     addi r3, r1, 0x84
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r31, 0x6c
     addi r4, r1, 0x84
     bl vec3_copy
@@ -1051,7 +1051,7 @@ lbl_fn_803FA5C8_00000C08:
     addi r3, r1, 0x78
     lfs f2, lbl_8088603C
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r1, 0x1b8
     bl fn_801A03E8

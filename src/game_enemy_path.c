@@ -7,8 +7,8 @@ extern void _restgpr_26(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000DD0C(void);
 extern void vec3_assign(void);
@@ -765,7 +765,7 @@ asm void fn_80129A6C(void)
     addi r3, r1, 0xf4
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r1, 0xe8
     addi r4, r31, 0x24
     bl vec3_assign
@@ -862,7 +862,7 @@ lbl_fn_80129A6C_00000A80:
     cmpwi r4, 0x0
     beq lbl_fn_80129A6C_00000AC0
     addi r3, r1, 0x7c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0xdc
     addi r4, r1, 0x7c
     bl fn_80012C88
@@ -885,7 +885,7 @@ lbl_fn_80129A6C_00000AEC:
     bl fn_8012A1C0
     mr r4, r3
     addi r3, r1, 0x64
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x70
     addi r4, r1, 0xdc
     addi r5, r1, 0x64
@@ -1006,7 +1006,7 @@ lbl_fn_80129A6C_00000C98:
     fmr f2, f31
     lfs f3, lbl_808818A8
     addi r3, r1, 0xc4
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_808818F0
     bl fn_801125F8
     fmr f31, f1
@@ -1015,7 +1015,7 @@ lbl_fn_80129A6C_00000C98:
     fmr f2, f31
     lfs f3, lbl_808818A8
     addi r3, r1, 0xb8
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r1, 0x100
     bl fn_80057A64
     addi r3, r1, 0x10c
@@ -1043,7 +1043,7 @@ lbl_fn_80129A6C_00000D18:
     cmpwi r4, 0x0
     beq lbl_fn_80129A6C_00000D58
     addi r3, r1, 0x40
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0xac
     addi r4, r1, 0x40
     bl fn_80012C88
@@ -1085,7 +1085,7 @@ lbl_fn_80129A6C_00000DCC:
     bl fn_8012A1C0
     mr r4, r3
     addi r3, r1, 0x28
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x34
     addi r4, r1, 0xac
     addi r5, r1, 0x28
@@ -1120,7 +1120,7 @@ lbl_fn_80129A6C_00000E4C:
     addi r3, r1, 0x94
     lfs f3, lbl_808818E4
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lwz r3, 0x0(r31)
     bl fn_8000DD0C
     addi r4, r29, 0x11

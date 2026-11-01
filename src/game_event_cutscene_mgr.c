@@ -26,7 +26,7 @@ extern void fn_800A091C(void);
 extern void fn_800DC500(void);
 extern void str_findChar(void);
 extern void fn_800EF73C(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void atn_Arc_decompressChunk(void);
 extern void fn_8046D1EC(void);
 extern void fn_8046F5CC(void);
@@ -1014,8 +1014,8 @@ lbl_atn_LoadMotionCommandData_slot0_00000B64:
     lwz r3, 0x14(r31)
     cmpwi r3, 0x0
     beq lbl_atn_LoadMotionCommandData_slot0_00000B84
-    lis r4, fn_802375C4@ha
-    addi r4, r4, fn_802375C4@l
+    lis r4, res_Resource_destructor@ha
+    addi r4, r4, res_Resource_destructor@l
     bl __destroy_arr
 lbl_atn_LoadMotionCommandData_slot0_00000B84:
     cmpwi r31, 0x0

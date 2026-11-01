@@ -19,14 +19,14 @@ extern void fn_800EF7F8(void);
 extern void fn_8011F970(void);
 extern void fn_8014FB60(void);
 extern void fn_8016F3D0(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_80207C00(void);
 extern void fn_80207C08(void);
 extern void fn_80207C34(void);
 extern void task_findEntryById(void);
 extern void fn_8021A984(void);
 extern void fn_80237518(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -1106,7 +1106,7 @@ lbl_fn_800EE794_00000C04:
     stw r29, 0x100(r1)
     stw r29, 0x104(r1)
     stw r29, 0x108(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r26
     mr r5, r27
@@ -1144,7 +1144,7 @@ lbl_fn_800EE794_00000DC4:
     lwz r26, lbl_8087EE98
     stfs f3, 0x78(r1)
     stfs f0, 0x6c(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r26
     mr r5, r27
@@ -1179,7 +1179,7 @@ lbl_fn_800EE794_00000E58:
     stfs f2, 0x70(r1)
     stfs f3, 0x78(r1)
     stfs f0, 0x6c(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r26
     mr r5, r27
@@ -1212,7 +1212,7 @@ lbl_fn_800EE794_00000EE0:
     stfs f3, 0x78(r1)
     stfs f0, 0xc(r1)
     stfs f0, 0x10(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80881330
     oris r7, r3, 0x8000
     mr r3, r26
@@ -1678,7 +1678,7 @@ lbl_cam_initStickBindings_0000148C:
     beq lbl_cam_initStickBindings_000014B8
     mr r4, r30
     addi r3, r31, 0x1c
-    bl fn_80237654
+    bl res_Resource_unload
 lbl_cam_initStickBindings_000014B8:
     lwz r3, 0x0(r31)
     lis r4, lbl_80735428@ha

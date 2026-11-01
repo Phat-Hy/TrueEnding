@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void fn_8004D388(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void map_debugLog(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1692,7 +1692,7 @@ asm void fn_80322E10(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80322E10_00001738
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80322E10_00001738:
     addic. r31, r29, 0x15fc
     beq lbl_fn_80322E10_00001758

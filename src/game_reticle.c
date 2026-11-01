@@ -61,8 +61,8 @@ extern void fn_806174C0(void);
 extern void fn_80617520(void);
 extern void fn_806175F0(void);
 extern void GXSetTevSwapMode(void);
-extern void fn_80617730(void);
-extern void fn_80617880(void);
+extern void GXSetTevSwapModeTable(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80618030(void);
 extern void GXLoadPosMtxImm(void);
@@ -931,7 +931,7 @@ lbl_atn_Model_setupMeshMaterial_00000B24:
     stw r0, 0x78(r1)
     lbz r5, 0x75(r1)
     lbz r4, 0x78(r1)
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     lwz r3, lbl_8087EFB4
     lwz r0, 0x2f8(r3)
     cmpwi r0, 0x4
@@ -1753,7 +1753,7 @@ lbl_fn_8009CC28_00001674:
     stw r0, 0x18(r1)
     lbz r5, 0x15(r1)
     lbz r4, 0x18(r1)
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x0
     li r4, 0x0
     li r5, 0x3
@@ -1762,7 +1762,7 @@ lbl_fn_8009CC28_00001674:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0xf
@@ -1842,7 +1842,7 @@ lbl_fn_8009CC28_000017B4:
     li r4, 0xff
     li r5, 0xff
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
 lbl_fn_8009CC28_0000181C:
     lwz r0, 0xf4(r1)
     psq_l f31, 0xe8(r1), 0, 0
@@ -1906,7 +1906,7 @@ asm void fn_8009D1A4(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x3
     bl fn_80617340
@@ -1916,7 +1916,7 @@ asm void fn_8009D1A4(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4

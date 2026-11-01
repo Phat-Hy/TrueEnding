@@ -19,7 +19,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -49,7 +49,7 @@ extern void fn_8020A780(void);
 extern void task_findEntryById(void);
 extern void fn_8021A984(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
@@ -1259,7 +1259,7 @@ asm void fn_802BA898(void)
     beq lbl_fn_802BA898_00001028
     lwz r3, 0x1514(r3)
     li r4, 0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
 lbl_fn_802BA898_00001028:
     addic. r0, r30, 0x1508
     beq lbl_fn_802BA898_0000104C
@@ -1269,7 +1269,7 @@ lbl_fn_802BA898_00001028:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802BA898_0000104C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802BA898_0000104C:
     mr r3, r30
     li r4, 0x0

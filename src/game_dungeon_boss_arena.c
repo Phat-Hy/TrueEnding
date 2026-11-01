@@ -25,7 +25,7 @@ extern void mem_realloc(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void map_debugLog(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
@@ -48,14 +48,14 @@ extern void fn_8012044C(void);
 extern void fn_801206EC(void);
 extern void fn_80120700(void);
 extern void fn_801207D4(void);
-extern void fn_80120D34(void);
+extern void equip_getElementPtr0(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8017CB2C(void);
 extern void fn_80205BE8(void);
 extern void fn_80216AFC(void);
 extern void fn_802180A8(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void res_MsgHandle_destructor(void);
 extern void kpad_getClampData(void);
 extern void fn_803ED8D8(void);
@@ -407,7 +407,7 @@ lbl_fn_803EE124_00000258:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_803EE124_0000027C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_803EE124_0000027C:
     addic. r0, r30, 0x5c
     beq lbl_fn_803EE124_0000029C
@@ -2010,8 +2010,8 @@ lbl_fn_803EF64C_000017E0:
     lwz r3, 0xc(r30)
     cmpwi r3, 0x0
     beq lbl_fn_803EF64C_00001800
-    lis r4, fn_802375C4@ha
-    addi r4, r4, fn_802375C4@l
+    lis r4, res_Resource_destructor@ha
+    addi r4, r4, res_Resource_destructor@l
     bl __destroy_arr
 lbl_fn_803EF64C_00001800:
     li r0, 0x0
@@ -2287,14 +2287,14 @@ lbl_fn_803EF780_00001BC4:
     mr r4, r3
     addi r3, r1, 0x38
     lwz r4, 0xc(r4)
-    bl fn_80120D34
+    bl equip_getElementPtr0
     bl fn_8004212C
     mr r26, r3
     mr r4, r31
     addi r3, r27, 0x8
     bl fn_803F0604
     mr r4, r26
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r1, 0x10
     bl fn_803F05FC
     stw r31, 0xc(r3)
@@ -2317,7 +2317,7 @@ lbl_fn_803EF780_00001C48:
     mr r4, r3
     addi r3, r1, 0x38
     lwz r4, 0xc(r4)
-    bl fn_80120D34
+    bl equip_getElementPtr0
     bl fn_8004212C
     mr r26, r3
     mr r4, r30
@@ -2352,7 +2352,7 @@ lbl_fn_803EF780_00001CCC:
     mr r4, r3
     addi r3, r1, 0x38
     lwz r4, 0xc(r4)
-    bl fn_80120D34
+    bl equip_getElementPtr0
     bl fn_8004212C
     mr r26, r3
     mr r4, r29

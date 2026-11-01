@@ -50,13 +50,13 @@ extern void fn_8015E7A0(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void fn_8021A4CC(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -421,7 +421,7 @@ asm void fn_8032DDD0(void)
 lbl_fn_8032DDD0_00000368:
     addi r3, r29, 0x15fc
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x15f0
     beq lbl_fn_8032DDD0_00000394
     mr r3, r31
@@ -727,7 +727,7 @@ lbl_fn_8032DEA0_00000650:
     bl res_MsgHandle_destructor
     addi r3, r31, 0x17b0
     addi r4, r30, 0xc6
-    bl fn_80237654
+    bl res_Resource_unload
     mr r3, r31
     lwz r31, 0x5c(r1)
     lwz r30, 0x58(r1)
@@ -1880,7 +1880,7 @@ lbl_fn_8032F204_00001790:
     fadds f0, f0, f4
     stfs f3, 0x18(r1)
     stfs f0, 0xc(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r29
     mr r5, r31
@@ -2050,7 +2050,7 @@ lbl_fn_8032F314_000019E4:
     stfs f4, 0x1c(r1)
     stfs f3, 0x24(r1)
     stfs f0, 0x18(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r27
     mr r5, r28

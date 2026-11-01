@@ -19,7 +19,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80088AF4(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800BDB40(void);
 extern void fn_800BDB58(void);
 extern void fn_800BFAC8(void);
@@ -40,7 +40,7 @@ extern void fn_80614790(void);
 extern void fn_80615D20(void);
 extern void fn_80615D50(void);
 extern void fn_80617340(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
@@ -386,7 +386,7 @@ asm void atn_LensFlare_destructor(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_atn_LensFlare_destructor_0000040C
-    bl fn_800897D8
+    bl node_destroy
 lbl_atn_LensFlare_destructor_0000040C:
     lis r4, atn_LH_Texture_destructAndFree@ha
     addi r3, r30, 0x20
@@ -2128,7 +2128,7 @@ asm void fn_80078938(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
     bl fn_80617340

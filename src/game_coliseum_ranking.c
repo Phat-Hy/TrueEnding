@@ -43,7 +43,7 @@ extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
 extern void str_skipWhitespace(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -1559,7 +1559,7 @@ asm void fn_8049707C(void)
     mr r30, r3
     beq lbl_fn_8049707C_00001210
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     cmpwi r31, 0x0
     ble lbl_fn_8049707C_00001210
     mr r3, r30

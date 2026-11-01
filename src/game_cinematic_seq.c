@@ -9,7 +9,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void mem_alloc(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -318,7 +318,7 @@ asm void fn_80334BCC(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80334BCC_00000244
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80334BCC_00000244:
     cmpwi r30, 0x0
     beq lbl_fn_80334BCC_00000258

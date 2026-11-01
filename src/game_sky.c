@@ -17,7 +17,7 @@ extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
 extern void fn_80087BB4(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800BDB58(void);
 extern void fn_805B55AC(void);
 extern void fn_805B56C4(void);
@@ -975,7 +975,7 @@ asm void fn_800DCC54(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_800DCC54_00000B88
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_800DCC54_00000B88:
     cmpwi r31, 0x0
     ble lbl_fn_800DCC54_00000B98

@@ -15,7 +15,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void msg_getMessageById(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -169,7 +169,7 @@ lbl_fn_805B342C_000000D4:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_805B342C_000000F8
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_805B342C_000000F8:
     addic. r0, r30, 0x48
     beq lbl_fn_805B342C_00000124

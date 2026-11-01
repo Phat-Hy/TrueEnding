@@ -21,7 +21,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_setActive(void);
@@ -46,8 +46,8 @@ extern void save_validateHeader(void);
 extern void fn_8020A780(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -1751,7 +1751,7 @@ asm void fn_8034515C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8034515C_0000169C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8034515C_0000169C:
     addic. r3, r29, 0x16b8
     beq lbl_fn_8034515C_000016AC
@@ -1796,7 +1796,7 @@ lbl_fn_8034515C_0000170C:
 lbl_fn_8034515C_0000172C:
     addi r3, r29, 0x1668
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x1638
     beq lbl_fn_8034515C_00001758
     mr r3, r31
@@ -1835,7 +1835,7 @@ lbl_fn_8034515C_00001798:
 lbl_fn_8034515C_000017B8:
     addi r3, r29, 0x15c8
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x15bc
     beq lbl_fn_8034515C_000017E4
     mr r3, r31
@@ -2104,7 +2104,7 @@ lbl_fn_80345384_00001B20:
     bl res_MsgHandle_destructor
     addi r3, r31, 0x1648
     addi r4, r30, 0x66
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x16c0
     addi r4, r30, 0x77
     bl res_MsgHandle_destructor
@@ -2113,7 +2113,7 @@ lbl_fn_80345384_00001B20:
     bl res_MsgHandle_destructor
     addi r3, r31, 0x17d8
     addi r4, r30, 0x93
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x1618
     addi r4, r30, 0xa1
     bl res_MsgHandle_destructor

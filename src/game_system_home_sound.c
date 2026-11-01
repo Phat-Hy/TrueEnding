@@ -67,7 +67,7 @@ extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void fn_806165B0(void);
 extern void fn_80617340(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXSetZMode(void);
@@ -1655,7 +1655,7 @@ lbl_fn_80364BE8_0000149C:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     li r4, 0x1
     li r5, 0x1

@@ -14,7 +14,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_8010A308(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_8016E4C4(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_80389838(void);
 extern void printf(void);
 extern void strcmp(void);
@@ -700,7 +700,7 @@ asm void fn_801883E8(void)
     stfs f2, 0xb0(r1)
     stfs f4, 0xb8(r1)
     stfs f0, 0xac(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r28
     mr r5, r30

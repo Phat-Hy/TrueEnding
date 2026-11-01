@@ -10,7 +10,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_23(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
@@ -363,7 +363,7 @@ lbl_fn_80487490_000002AC:
     addi r3, r1, 0x84
     lfs f3, lbl_80886F90
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lwz r0, 0x1eac(r31)
     cmpwi r0, 0x96
     blt lbl_fn_80487490_000004B0
@@ -541,7 +541,7 @@ lbl_fn_80487490_00000588:
     stfs f1, 0x2434(r31)
     fmr f2, f1
     lfs f3, lbl_80886F90
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r31, 0x243c
     bl vec3_copy

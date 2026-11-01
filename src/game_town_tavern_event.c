@@ -18,7 +18,7 @@ extern void fn_801F4FF4(void);
 extern void fn_801F64D0(void);
 extern void fn_801F8994(void);
 extern void fn_80202A6C(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void fn_8023772C(void);
 extern void fn_803B5470(void);
@@ -1358,34 +1358,34 @@ lbl_fn_803D0B20_00001284:
     bl atn_Task_setActive
     addi r3, r31, 0x1158
     addi r4, r30, 0xe9a
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x1164
     addi r4, r30, 0xeb4
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x1554
     addi r4, r30, 0xece
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x1584
     addi r4, r30, 0xee8
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x1560
     addi r4, r30, 0xf02
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x1590
     addi r4, r30, 0xf1c
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x156c
     addi r4, r30, 0xf36
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x159c
     addi r4, r30, 0xf50
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x1578
     addi r4, r30, 0xf6a
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x15a8
     addi r4, r30, 0xf84
-    bl fn_80237654
+    bl res_Resource_unload
     mr r3, r31
     addi r4, r30, 0x997
     li r5, 0x0

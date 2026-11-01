@@ -8,7 +8,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_24(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000D9F8(void);
@@ -28,7 +28,7 @@ extern void fn_8006EF48(void);
 extern void mem_getAllocSize(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_8008B978(void);
@@ -69,8 +69,8 @@ extern void fn_8020A780(void);
 extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -598,7 +598,7 @@ asm void fn_80452908(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80452908_000005E0
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80452908_000005E0:
     addic. r3, r30, 0x14b0
     beq lbl_fn_80452908_000005F0
@@ -1062,7 +1062,7 @@ asm void fn_80452F14(void)
     fmr f2, f1
     fmr f3, f1
     stw r29, 0x1910(r31)
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r31, 0x1928
     bl res_MsgHandle_constructor
     addi r3, r31, 0x1934
@@ -1280,7 +1280,7 @@ lbl_fn_80452F14_00000E68:
     bl res_MsgHandle_destructor
     addi r3, r31, 0x1994
     addi r4, r29, 0x116
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x252c
     addi r4, r29, 0x127
     bl res_MsgHandle_destructor
@@ -1473,7 +1473,7 @@ asm void fn_80453570(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80453570_0000124C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80453570_0000124C:
     addic. r31, r29, 0x2538
     beq lbl_fn_80453570_0000126C
@@ -1507,7 +1507,7 @@ lbl_fn_80453570_0000128C:
 lbl_fn_80453570_000012B8:
     addi r3, r29, 0x1994
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x1988
     beq lbl_fn_80453570_000012E4
     mr r3, r31

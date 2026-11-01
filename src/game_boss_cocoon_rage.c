@@ -14,7 +14,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void system_getNextSequenceId(void);
 extern void quest_ctorRewardItem(void);
 extern void actor_setState(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803B3B38(void);
@@ -1770,7 +1770,7 @@ lbl_fn_8045ABB4_00001814:
     psq_st f1, 0x0(r29), 0, 0
     lfs f0, 0x620(r31)
     stfs f0, 0xa4(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     or r7, r28, r3
     lwz r3, lbl_8087EE98
     lfs f1, 0xa4(r1)

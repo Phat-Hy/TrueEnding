@@ -17,7 +17,7 @@ extern void fn_8006A250(void);
 extern void fn_8006A5A8(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800A5B30(void);
 extern void fn_800AFEBC(void);
 extern void fn_800C16B4(void);
@@ -1997,7 +1997,7 @@ lbl_world_Manager_destructor_000019A4:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_world_Manager_destructor_000019D0
-    bl fn_800897D8
+    bl node_destroy
 lbl_world_Manager_destructor_000019D0:
     addi r3, r25, 0x8
     li r4, -0x1

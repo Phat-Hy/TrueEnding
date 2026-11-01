@@ -6,7 +6,7 @@ extern void _restgpr_19(void);
 extern void _restgpr_24(void);
 extern void _savegpr_19(void);
 extern void _savegpr_24(void);
-extern void fn_8000D0F8(void);
+extern void mtx_getTranslation(void);
 extern void fn_8000D3A4(void);
 extern void fn_8000DD0C(void);
 extern void vec3_assign(void);
@@ -1619,7 +1619,7 @@ lbl_fn_80279280_000015C0:
 lbl_fn_80279280_000015E0:
     addi r3, r1, 0xcc
     addi r4, r25, 0x28
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0xc0
     addi r4, r1, 0xcc
     addi r5, r25, 0x10
@@ -1751,7 +1751,7 @@ lbl_fn_80279280_0000174C:
     bl fn_8015C0C0
     addi r3, r1, 0x30
     addi r4, r25, 0x28
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     lfs f1, lbl_80883830
     addi r3, r1, 0x8
     addi r4, r26, 0x1f0
@@ -1771,7 +1771,7 @@ lbl_fn_80279280_0000174C:
     bl vec3_toEulerAngles
     addi r3, r1, 0x24
     addi r4, r25, 0x28
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     bl fn_800F7FA0
     lfs f1, lbl_80883830
     addi r4, r25, 0xa4
@@ -1828,10 +1828,10 @@ lbl_fn_80279280_000018FC:
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x78
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0xc
     addi r4, r25, 0x28
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x6c
     addi r4, r1, 0xc
     addi r5, r1, 0x78

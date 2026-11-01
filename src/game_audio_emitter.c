@@ -10,7 +10,7 @@ extern void fn_80063D3C(void);
 extern void fn_8007708C(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -31,7 +31,7 @@ extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
@@ -161,7 +161,7 @@ asm void fn_802FCF50(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802FCF50_00000088
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802FCF50_00000088:
     lis r4, atn_LH_Xsca_destructor@ha
     addi r3, r29, 0x1674
@@ -192,7 +192,7 @@ lbl_fn_802FCF50_000000CC:
 lbl_fn_802FCF50_000000EC:
     addi r3, r29, 0x1588
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x157c
     beq lbl_fn_802FCF50_00000118
     mr r3, r31
@@ -231,7 +231,7 @@ lbl_fn_802FCF50_00000158:
 lbl_fn_802FCF50_00000178:
     addi r3, r29, 0x154c
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x1540
     beq lbl_fn_802FCF50_000001A4
     mr r3, r31

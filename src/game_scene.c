@@ -56,8 +56,8 @@ extern u32 lbl_80880670;
 /* Function declarations */
 void fn_8000CBD0(void);
 void fn_8000CBD8(void);
-void fn_8000D0F8(void);
-void fn_8000D114(void);
+void mtx_getTranslation(void);
+void vec3_set(void);
 void vec3_copy(void);
 void fn_8000D138(void);
 void fn_8000D1A0(void);
@@ -440,7 +440,7 @@ lbl_fn_8000CBD8_0000050C:
     blr
 }
 
-asm void fn_8000D0F8(void)
+asm void mtx_getTranslation(void)
 {
     nofralloc
     lfs f2, 0x2c(r4)
@@ -452,7 +452,7 @@ asm void fn_8000D0F8(void)
     blr
 }
 
-asm void fn_8000D114(void)
+asm void vec3_set(void)
 {
     nofralloc
     stfs f1, 0x0(r3)

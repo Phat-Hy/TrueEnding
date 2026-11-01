@@ -7,7 +7,7 @@ extern void __register_global_object(void);
 extern void _restgpr_20(void);
 extern void _savegpr_20(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
 extern void fn_8003EFB0(void);
@@ -17,7 +17,7 @@ extern void fn_8004B338(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_80083AD4(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_80089ACC(void);
 extern void msg_getMessageById(void);
 extern void fn_800C310C(void);
@@ -57,7 +57,7 @@ extern void fn_8020A3E4(void);
 extern void fn_8020A81C(void);
 extern void fn_8020ED84(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void fn_80239798(void);
@@ -1473,7 +1473,7 @@ lbl_fn_804D201C_00000EC8:
     addis r3, r30, 0x1
     li r4, -0x1
     subi r3, r3, 0x6940
-    bl fn_802375C4
+    bl res_Resource_destructor
     addis r26, r30, 0x1
     subic. r26, r26, 0x694c
     beq lbl_fn_804D201C_00000F0C
@@ -1585,7 +1585,7 @@ lbl_fn_804D201C_00001054:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_804D201C_00001078
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_804D201C_00001078:
     mr r3, r30
     li r4, 0x0
@@ -5239,7 +5239,7 @@ lbl_fn_804D25D4_000045A8:
     addi r3, r1, 0x30
     lfs f2, lbl_808875C0
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addis r3, r24, 0x1
     subi r3, r3, 0x688c
@@ -5248,7 +5248,7 @@ lbl_fn_804D25D4_000045A8:
     addi r3, r1, 0x24
     lfs f2, lbl_808875C0
     lfs f3, lbl_808875C4
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addis r3, r24, 0x1
     subi r3, r3, 0x688c

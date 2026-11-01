@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_assign(void);
 extern void fn_80011410(void);
 extern void fn_8004D388(void);
@@ -941,7 +941,7 @@ asm void fn_801B6494(void)
     addi r3, r1, 0x50
     lfs f3, lbl_808824D4
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lwz r3, 0x4(r30)
     bl fn_8012A1B8
     lfs f1, 0x4(r3)
@@ -980,7 +980,7 @@ lbl_fn_801B6494_00000CC8:
     addi r3, r1, 0x44
     lfs f3, lbl_808824D4
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lwz r3, 0x4(r30)
     bl fn_8012A1B8
     lfs f1, 0x4(r3)

@@ -16,7 +16,7 @@ extern void fn_8014DEE4(void);
 extern void fn_80153B44(void);
 extern void fn_80164DCC(void);
 extern void actor_setState(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_80196C68(void);
 extern void fn_801AC434(void);
 extern void fn_801AD34C(void);
@@ -1398,7 +1398,7 @@ lbl_fn_8015F568_0000121C:
     stfs f2, 0x94(r1)
     stfs f3, 0x9c(r1)
     stfs f0, 0x90(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r23
     mr r5, r26

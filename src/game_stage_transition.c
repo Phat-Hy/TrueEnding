@@ -26,7 +26,7 @@ extern void fn_801539E0(void);
 extern void fn_80155DAC(void);
 extern void fn_80164DCC(void);
 extern void fn_8016DA4C(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801905AC(void);
 extern void fn_801905DC(void);
 extern void fn_803EA77C(void);
@@ -375,7 +375,7 @@ asm void fn_8019A8A8(void)
     stfs f0, 0x94(r1)
     stfs f3, 0x98(r1)
     stfs f4, 0x9c(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     mr r7, r3
     mr r3, r30
     mr r8, r31

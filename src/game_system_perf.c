@@ -27,8 +27,8 @@ extern void fn_801F64D0(void);
 extern void fn_801F69A8(void);
 extern void fn_801F6A38(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void fn_8023772C(void);
 extern void res_MsgHandle_constructor(void);
@@ -1536,7 +1536,7 @@ lbl_fn_80203D7C_000013B0:
 lbl_fn_80203D7C_000013D8:
     stw r3, 0x18(r28)
     mr r4, r29
-    bl fn_80237654
+    bl res_Resource_unload
     li r0, 0x2
     stw r0, 0x1c(r28)
 lbl_fn_80203D7C_000013EC:
@@ -1587,7 +1587,7 @@ lbl_fn_80203E78_00001474:
     bl fn_8023772C
     lwz r3, 0x18(r30)
     li r4, 0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
 lbl_fn_80203E78_00001490:
     li r0, 0x0
     stw r0, 0x18(r30)

@@ -49,7 +49,7 @@ extern void fn_80616250(void);
 extern void fn_80617200(void);
 extern void fn_80617220(void);
 extern void fn_80617340(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXSetZCompLoc(void);
@@ -980,7 +980,7 @@ asm void fn_800B2EA0(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1080,7 +1080,7 @@ asm void fn_800B2EA0(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1

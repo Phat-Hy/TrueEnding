@@ -82,8 +82,8 @@ extern u32 lbl_8088180C;
 extern u32 lbl_80881810;
 
 /* Function declarations */
-void* fn_80120D24(void*, int);
-void* fn_80120D34(void*, int);
+void* equip_getElementPtr8(void*, int);
+void* equip_getElementPtr0(void*, int);
 void fn_80120D44(void);
 void fn_80120E38(void);
 void fn_80120E48(void);
@@ -107,12 +107,12 @@ void fn_80122238(void);
 void fn_80122280(void);
 void fn_80122288(void);
 
-void* fn_80120D24(void* obj, int index)
+void* equip_getElementPtr8(void* obj, int index)
 {
     return (char*)(*(void**)((char*)obj + 8)) + index * 0xc;
 }
 
-void* fn_80120D34(void* obj, int index)
+void* equip_getElementPtr0(void* obj, int index)
 {
     return (char*)(*(void**)obj) + index * 0xc;
 }

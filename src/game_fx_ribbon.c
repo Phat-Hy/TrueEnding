@@ -23,7 +23,7 @@ extern void fn_801162A0(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8013C38C(void);
 extern void actor_setState(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void res_findResourceSlot(void);
 extern void fn_8028F560(void);
 extern void fn_8028F8E4(void);
@@ -577,7 +577,7 @@ lbl_fn_8028AFD8_000006AC:
     lwz r4, lbl_8087F430
     mr r3, r28
     lwz r24, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r4, 0x152c(r28)
     mr r5, r3
     lfs f1, lbl_80883AC0
@@ -591,7 +591,7 @@ lbl_fn_8028AFD8_000006AC:
     mr r25, r3
     mr r3, r28
     lwz r24, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r4, 0x1530(r28)
     mr r5, r3
     lfs f1, lbl_80883AC0
@@ -651,7 +651,7 @@ lbl_fn_8028AFD8_000007CC:
     lwz r4, lbl_8087F430
     mr r3, r28
     lwz r24, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r4, 0x152c(r28)
     mr r5, r3
     lfs f1, lbl_80883AC0
@@ -665,7 +665,7 @@ lbl_fn_8028AFD8_000007CC:
     mr r24, r3
     mr r3, r28
     lwz r25, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r4, 0x1530(r28)
     mr r5, r3
     lfs f1, lbl_80883AC0
@@ -826,7 +826,7 @@ lbl_fn_8028AFD8_00000A68:
     lwz r5, 0x14b0(r28)
     lwz r25, 0x10d8(r4)
     addi r24, r5, 0x528
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80883AC0
     mr r5, r3
     mr r3, r25
@@ -1121,7 +1121,7 @@ asm void fn_8028B75C(void)
     mr r3, r31
     lwz r4, lbl_8087F430
     lwz r30, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80883AC0
     mr r5, r3
     mr r3, r30
@@ -1451,7 +1451,7 @@ lbl_fn_8028B75C_000012F8:
     mr r3, r31
     lwz r4, lbl_8087F430
     lwz r30, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_80883AC0
     mr r5, r3
     mr r3, r30
@@ -1734,7 +1734,7 @@ lbl_fn_8028BFE0_00001784:
     bne lbl_fn_8028BFE0_00001B20
     lwz r4, lbl_8087F430
     lwz r29, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r4, 0x1530(r31)
     mr r5, r3
     lfs f1, lbl_80883AC0
@@ -1786,7 +1786,7 @@ lbl_fn_8028BFE0_0000180C:
     stfs f0, 0x1514(r31)
     lwz r4, lbl_8087F430
     lwz r29, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r4, 0x1530(r31)
     mr r5, r3
     lfs f1, lbl_80883AC0
@@ -2157,7 +2157,7 @@ lbl_fn_8028BFE0_00001DB0:
     stfs f2, 0x4c(r1)
     lwz r29, 0x10d8(r4)
     stfs f2, 0xc4(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r4, 0x1530(r31)
     mr r5, r3
     lfs f1, lbl_80883AC0

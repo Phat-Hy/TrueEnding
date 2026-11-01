@@ -19,7 +19,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -53,8 +53,8 @@ extern void fn_80178A6C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -371,7 +371,7 @@ asm void fn_802B21FC(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802B21FC_00000314
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802B21FC_00000314:
     addic. r29, r30, 0x1a78
     beq lbl_fn_802B21FC_00000334
@@ -384,7 +384,7 @@ lbl_fn_802B21FC_00000314:
 lbl_fn_802B21FC_00000334:
     addi r3, r30, 0x1a6c
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r29, r30, 0x1a60
     beq lbl_fn_802B21FC_00000360
     mr r3, r29
@@ -592,7 +592,7 @@ asm void fn_802B23E8(void)
     stw r28, 0x185c(r30)
     stw r5, 0x12a4(r30)
     stw r0, 0x958(r30)
-    bl fn_80237654
+    bl res_Resource_unload
     addi r29, r29, lbl_807465E0@l
     addi r3, r30, 0x1530
     addi r4, r29, 0xe

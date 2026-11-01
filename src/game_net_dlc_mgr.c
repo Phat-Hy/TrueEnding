@@ -14,7 +14,7 @@ extern void fn_80051CD8(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_80097A20(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -243,7 +243,7 @@ asm void fn_80547878(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80547878_000001BC
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80547878_000001BC:
     cmpwi r30, 0x0
     beq lbl_fn_80547878_000001D0

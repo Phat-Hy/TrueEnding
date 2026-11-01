@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void fn_8000D760(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
@@ -27,7 +27,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80099E9C(void);
@@ -68,7 +68,7 @@ extern void fn_801A03E0(void);
 extern void fn_8020A780(void);
 extern void task_findEntryById(void);
 extern void fn_80237518(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -507,7 +507,7 @@ asm void fn_803387DC(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_803387DC_00000444
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_803387DC_00000444:
     addic. r31, r29, 0x1534
     beq lbl_fn_803387DC_00000464
@@ -747,7 +747,7 @@ lbl_fn_803388A4_00000730:
     bl res_MsgHandle_destructor
     addi r3, r31, 0x15c8
     addi r4, r30, 0x67
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x162c
     addi r4, r30, 0x78
     bl res_MsgHandle_destructor
@@ -756,7 +756,7 @@ lbl_fn_803388A4_00000730:
     bl res_MsgHandle_destructor
     addi r3, r31, 0x1668
     addi r4, r30, 0x94
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x1610
     addi r4, r30, 0xa2
     bl res_MsgHandle_destructor
@@ -1795,13 +1795,13 @@ lbl_fn_80339760_0000163C:
     addi r3, r1, 0x8
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80885238
     mr r29, r3
     addi r3, r1, 0x14
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r30, r3
     bl fn_800F7FA0
     lfs f1, lbl_80885264

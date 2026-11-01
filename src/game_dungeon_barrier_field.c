@@ -17,7 +17,7 @@ extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_8008B130(void);
 extern void fn_8008CD60(void);
 extern void fn_800902C0(void);
@@ -227,7 +227,7 @@ lbl_fn_803EC69C_00000178:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_803EC69C_0000019C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_803EC69C_0000019C:
     addi r3, r30, 0xb0
     li r4, -0x1

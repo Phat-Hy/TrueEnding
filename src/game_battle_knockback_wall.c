@@ -10,7 +10,7 @@ extern void _savegpr_17(void);
 extern void _savegpr_19(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_8000D3A8(void);
@@ -2026,7 +2026,7 @@ lbl_fn_8041766C_000018C4:
     addi r3, r1, 0xac
     lfs f2, 0x54(r1)
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lwz r3, 0x228(r1)
     li r19, 0x1
     cmpwi r3, 0x0
@@ -2041,7 +2041,7 @@ lbl_fn_8041766C_000019C4:
     addi r3, r1, 0x44
     lfs f2, lbl_80886490
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r1, 0x218
     bl fn_801A03E8
@@ -2306,7 +2306,7 @@ lbl_fn_8041766C_00001D5C:
     fsubs f4, f4, f5
     fdivs f3, f4, f3
     fmuls f3, f0, f3
-    bl fn_8000D114
+    bl vec3_set
     bl rand
     addi r0, r28, 0x749f
     stw r26, 0x248(r1)

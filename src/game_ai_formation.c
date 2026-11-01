@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D0F8(void);
+extern void mtx_getTranslation(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_8000D9E8(void);
@@ -706,7 +706,7 @@ lbl_fn_80265B00_00000760:
     bl fn_80266154
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     lfs f1, lbl_80883674
     mr r3, r29
     addi r4, r1, 0x14
@@ -721,7 +721,7 @@ lbl_fn_80265B00_00000808:
     bl fn_80266154
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     mr r3, r29
     bl fn_80266164
     addi r3, r3, 0xc

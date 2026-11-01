@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void vec3_assign(void);
@@ -185,7 +185,7 @@ lbl_fn_8013A4E8_000000B8:
     lfs f1, lbl_8088196C
     addi r3, r1, 0x228
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r28, r3
     addi r3, r1, 0x234
     addi r4, r1, 0x384
@@ -638,7 +638,7 @@ lbl_fn_8013A4E8_0000072C:
     fmr f3, f1
     lfs f2, lbl_80881964
     addi r3, r1, 0x180
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r1, 0x18c
     addi r5, r1, 0x354
@@ -654,7 +654,7 @@ lbl_fn_8013A4E8_0000078C:
     fmr f3, f1
     lfs f2, lbl_80881964
     addi r3, r1, 0x15c
-    bl fn_8000D114
+    bl vec3_set
     mr r5, r3
     addi r3, r1, 0x168
     addi r4, r1, 0x354

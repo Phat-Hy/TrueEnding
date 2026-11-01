@@ -4,8 +4,8 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void fn_8000D3A4(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
@@ -485,14 +485,14 @@ lbl_fn_8030C490_0000053C:
     bl atn_Matrix_copy_2
     addi r3, r1, 0x98
     addi r4, r1, 0x198
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x198
     bl fn_8010F668
     lfs f1, lbl_80884BAC
     addi r3, r1, 0x8c
     lfs f2, lbl_80884C34
     lfs f3, lbl_80884BA8
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r1, 0x8c
     addi r4, r1, 0x198
     bl fn_80011410
@@ -548,7 +548,7 @@ lbl_fn_8030C490_000005E0:
     lfs f1, 0x534(r30)
     fadds f2, f2, f0
     lfs f3, 0x53c(r30)
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r1, 0x168
     addi r4, r30, 0x534
     bl fn_8030CA38
@@ -596,12 +596,12 @@ lbl_fn_8030C490_0000069C:
     addi r3, r1, 0x5c
     lfs f3, lbl_80884BA8
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80884BAC
     addi r3, r1, 0x50
     lfs f3, lbl_80884BA8
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80884C38
     bl fn_802A7964
     addi r3, r1, 0x138
@@ -646,7 +646,7 @@ lbl_fn_8030C490_0000077C:
     addi r3, r1, 0x44
     lfs f3, lbl_80884BA8
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80884C38
     bl fn_802A7964
     addi r3, r1, 0xd8

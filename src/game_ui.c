@@ -40,7 +40,7 @@ extern void fn_8016ADF4(void);
 extern void fn_8016E484(void);
 extern void fn_801781B0(void);
 extern void fn_801789D8(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_8017AC24(void);
 extern void fn_80187CC0(void);
 extern void task_findEntryById(void);
@@ -3563,7 +3563,7 @@ lbl_fn_800413EC_00002EEC:
     stfs f0, 0x14(r1)
     stfs f6, 0x18(r1)
     stfs f5, 0x1c(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r24
     mr r5, r25

@@ -4,8 +4,8 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void fn_8000DD04(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011410(void);
@@ -1503,7 +1503,7 @@ asm void fn_80148CC4(void)
     bne lbl_fn_80148CC4_000013C0
     mr r4, r31
     addi r3, r1, 0x184
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     mr r3, r31
     bl fn_8010F668
     lfs f2, lbl_808819FC
@@ -1541,12 +1541,12 @@ lbl_fn_80148CC4_000013F8:
     bl vec3_toEulerAngles
     mr r4, r31
     addi r3, r1, 0x16c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     lfs f1, lbl_8088196C
     addi r3, r1, 0x68
     lfs f2, lbl_80881964
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r28, r3
     mr r4, r30
     addi r3, r1, 0x74
@@ -1614,7 +1614,7 @@ lbl_fn_80148CC4_0000150C:
 lbl_fn_80148CC4_00001510:
     mr r4, r31
     addi r3, r1, 0x148
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     mr r3, r31
     bl fn_8010F668
     fmr f1, f31
@@ -1635,7 +1635,7 @@ lbl_fn_80148CC4_0000154C:
     bne lbl_fn_80148CC4_00001BE8
     mr r4, r31
     addi r3, r1, 0x13c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     mr r3, r31
     bl fn_8010F668
     lfs f2, lbl_808819BC
@@ -1685,7 +1685,7 @@ lbl_fn_80148CC4_00001618:
 lbl_fn_80148CC4_0000161C:
     mr r4, r31
     addi r3, r1, 0x124
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     mr r3, r31
     bl fn_8010F668
     fmr f1, f31
@@ -1712,7 +1712,7 @@ lbl_fn_80148CC4_00001658:
     bl vec3_toEulerAngles
     mr r4, r31
     addi r3, r1, 0x10c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     lfs f1, 0x118(r1)
     lfs f0, lbl_80881AC4
     fcmpo cr0, f1, f0
@@ -1762,7 +1762,7 @@ lbl_fn_80148CC4_00001700:
     bl vec3_toEulerAngles
     mr r4, r31
     addi r3, r1, 0xf4
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     lfs f31, 0x100(r1)
     lfs f0, lbl_80881AC4
     fcmpo cr0, f31, f0
@@ -1847,7 +1847,7 @@ lbl_fn_80148CC4_00001850:
     bl vec3_toEulerAngles
     mr r4, r31
     addi r3, r1, 0xdc
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     lfs f30, 0xe8(r1)
     lfs f0, lbl_80881AC4
     fcmpo cr0, f30, f0
@@ -1892,7 +1892,7 @@ lbl_fn_80148CC4_00001910:
     bl vec3_toEulerAngles
     mr r4, r31
     addi r3, r1, 0xc4
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     lfs f2, lbl_808819A4
     lfs f1, 0xd0(r1)
     lfs f0, lbl_80881AC4
@@ -1957,7 +1957,7 @@ lbl_fn_80148CC4_000019B0:
     blt lbl_fn_80148CC4_00001BE8
     mr r4, r31
     addi r3, r1, 0xb8
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     mr r3, r31
     bl fn_8010F668
     addi r3, r1, 0xa8
@@ -1968,7 +1968,7 @@ lbl_fn_80148CC4_000019B0:
     addi r3, r1, 0x8c
     lfs f3, lbl_80881964
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     mulli r27, r28, 0x2c
     addi r3, r30, 0xb0
     bl fn_80147A00
@@ -2019,7 +2019,7 @@ lbl_fn_80148CC4_00001AF8:
     addi r3, r1, 0x80
     lfs f3, lbl_80881964
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     mulli r27, r29, 0x2c
     addi r3, r30, 0xb0
     bl fn_80147A00

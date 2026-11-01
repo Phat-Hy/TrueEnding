@@ -10,7 +10,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void fn_8000DD14(void);
 extern void fn_8000DD98(void);
 extern void fn_8004B338(void);
@@ -79,7 +79,7 @@ extern void fn_80615D20(void);
 extern void fn_80615FF0(void);
 extern void fn_80616250(void);
 extern void fn_80617340(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void printf(void);
@@ -325,7 +325,7 @@ lbl_fn_804ABA2C_00000144:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     mr r3, r29
     bl fn_804ABF44
     bl fn_804ABF40
@@ -357,7 +357,7 @@ lbl_fn_804ABA2C_00000144:
     lfs f2, 0x5e0(r28)
     addi r3, r1, 0x78
     lfs f3, lbl_80887250
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     mr r6, r27
     addi r3, r1, 0xc0
@@ -376,7 +376,7 @@ lbl_fn_804ABA2C_00000144:
     lfs f2, 0x5e0(r28)
     fadds f1, f1, f0
     lfs f3, lbl_80887250
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     mr r6, r27
     addi r3, r1, 0xe0
@@ -397,7 +397,7 @@ lbl_fn_804ABA2C_00000144:
     fadds f1, f3, f1
     lfs f3, lbl_80887250
     fadds f2, f2, f0
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     mr r6, r27
     addi r3, r1, 0x100
@@ -416,7 +416,7 @@ lbl_fn_804ABA2C_00000144:
     lfs f1, 0x5dc(r28)
     fadds f2, f2, f0
     lfs f3, lbl_80887250
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     mr r6, r27
     addi r3, r1, 0x120

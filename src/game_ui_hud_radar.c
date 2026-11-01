@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000DD0C(void);
 extern void vec3_toEulerAngles(void);
@@ -34,7 +34,7 @@ extern void fn_801446F0(void);
 extern void fn_801539E0(void);
 extern void fn_8015495C(void);
 extern void fn_80176548(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801A03E8(void);
 extern void fn_801B2EDC(void);
 extern void fn_803EA77C(void);
@@ -726,7 +726,7 @@ lbl_fn_801C074C_00000674:
     stfs f4, 0x98(r1)
     stfs f3, 0x9c(r1)
     stfs f0, 0xa0(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     lwz r3, lbl_8087EE98
     mr r5, r31
@@ -1152,7 +1152,7 @@ lbl_fn_801C0D80_00000D34:
     addi r3, r1, 0x44
     lfs f2, lbl_808826A8
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r5, r3
     addi r3, r1, 0x50
     addi r4, r29, 0x8
@@ -1178,7 +1178,7 @@ lbl_fn_801C0D80_00000DD8:
     addi r3, r1, 0x20
     lfs f2, lbl_808826C8
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r5, r3
     addi r3, r1, 0x2c
     addi r4, r29, 0x8
@@ -1386,7 +1386,7 @@ lbl_fn_801C1084_00000F8C:
     stfs f4, 0xa0(r1)
     stfs f3, 0xa4(r1)
     stfs f0, 0xa8(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r27
     mr r5, r30
@@ -1486,7 +1486,7 @@ lbl_fn_801C1084_000011B0:
     stfs f2, 0x90(r1)
     bl fn_80176548
     lwz r3, 0x4(r31)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r5, 0x4(r31)
     mr r7, r3
     lwz r3, lbl_8087EE98
@@ -1698,7 +1698,7 @@ lbl_fn_801C1578_000014F8:
     stfs f5, 0xa4(r1)
     stfs f8, 0xa8(r1)
     stfs f7, 0xac(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r28
     mr r5, r29
@@ -1834,7 +1834,7 @@ lbl_fn_801C1578_00001714:
     lwz r3, 0x4(r30)
     stfs f5, 0x64(r1)
     stfs f7, 0x70(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r27
     mr r5, r29

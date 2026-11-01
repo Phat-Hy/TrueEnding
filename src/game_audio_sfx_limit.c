@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80013D60(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void fn_8000D3A8(void);
 extern void fn_8000DD14(void);
 extern void fn_8000DD98(void);
@@ -50,7 +50,7 @@ extern void fn_8020A780(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -989,19 +989,19 @@ asm void fn_803161F8(void)
     stw r4, 0x14cc(r31)
     stw r0, 0x14d0(r31)
     stw r30, 0x14d4(r31)
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80884D60
     addi r3, r31, 0x14e4
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80884D60
     addi r3, r31, 0x14f4
     lfs f0, lbl_80884D64
     fmr f2, f1
     stfs f0, 0x14f0(r31)
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f0, lbl_80884D68
     addi r3, r31, 0x1504
     stfs f0, 0x1500(r31)
@@ -1017,19 +1017,19 @@ asm void fn_803161F8(void)
     stw r30, 0x153c(r31)
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r31, 0x1550
     bl res_MsgHandle_constructor
     lfs f1, lbl_80884D60
     addi r3, r31, 0x155c
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80884D60
     addi r3, r31, 0x1568
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     li r29, 0x3c
     stw r29, 0x1574(r31)
     addi r3, r31, 0x1584
@@ -1164,16 +1164,16 @@ lbl_fn_803161F8_00000E54:
     bl res_MsgHandle_destructor
     addi r3, r31, 0x1584
     addi r4, r30, 0x4b
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x1590
     addi r4, r30, 0x5c
     bl res_MsgHandle_destructor
     addi r3, r31, 0x159c
     addi r4, r30, 0x6a
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r31, 0x15a8
     addi r4, r30, 0x7b
-    bl fn_80237654
+    bl res_Resource_unload
     li r28, 0x0
     li r29, 0x0
 lbl_fn_803161F8_00000F0C:

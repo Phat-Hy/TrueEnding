@@ -5,7 +5,7 @@
 extern void __files(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_8003E4A4(void);
@@ -23,7 +23,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_8008A76C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void skin_applyWeights(void);
@@ -50,8 +50,8 @@ extern void actor_setState(void);
 extern void fn_8020A780(void);
 extern void task_findEntryById(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -939,7 +939,7 @@ asm void fn_8031AF88(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8031AF88_00000B50
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8031AF88_00000B50:
     lis r4, fn_8008A76C@ha
     addi r3, r29, 0x1648
@@ -949,10 +949,10 @@ lbl_fn_8031AF88_00000B50:
     bl __destroy_new_array
     addi r3, r29, 0x15a8
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r29, 0x159c
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x1590
     beq lbl_fn_8031AF88_00000BA0
     mr r3, r31
@@ -964,7 +964,7 @@ lbl_fn_8031AF88_00000B50:
 lbl_fn_8031AF88_00000BA0:
     addi r3, r29, 0x1584
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x1550
     beq lbl_fn_8031AF88_00000BCC
     mr r3, r31
@@ -1034,12 +1034,12 @@ asm void fn_8031B0A8(void)
     addi r3, r29, 0x14d4
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80884DF0
     addi r3, r29, 0x14e0
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f0, lbl_80884DF4
     addi r3, r29, 0x14f0
     stfs f0, 0x14ec(r29)
@@ -1048,17 +1048,17 @@ asm void fn_8031B0A8(void)
     addi r3, r29, 0x1500
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80884DF0
     addi r3, r29, 0x150c
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80884DF0
     addi r3, r29, 0x1518
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r29, 0x1524
     bl fn_80057A64
     li r0, 0x5a
@@ -1169,10 +1169,10 @@ lbl_fn_8031B0A8_00000E20:
     addi r3, r29, 0x1574
     addi r31, r31, lbl_8074973C@l
     addi r4, r31, 0x36
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1580
     addi r4, r31, 0x47
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x158c
     addi r4, r31, 0x58
     bl res_MsgHandle_destructor
@@ -1290,7 +1290,7 @@ lbl_fn_8031B3CC_00001030:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8031B3CC_00001064
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8031B3CC_00001064:
     addic. r30, r28, 0x15b0
     beq lbl_fn_8031B3CC_00001084
@@ -1330,10 +1330,10 @@ lbl_fn_8031B3CC_000010C4:
 lbl_fn_8031B3CC_000010E4:
     addi r3, r28, 0x1580
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r28, 0x1574
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r30, r28, 0x1538
     beq lbl_fn_8031B3CC_0000120C
     lis r3, lbl_807889C0@ha

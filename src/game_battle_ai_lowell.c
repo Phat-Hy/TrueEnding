@@ -36,7 +36,7 @@ extern void fn_8021D9D4(void);
 extern void fn_8021E4E4(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -1483,7 +1483,7 @@ asm void fn_8043723C(void)
     beq lbl_fn_8043723C_000012C4
     li r4, -0x1
     addi r3, r3, 0xf18
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0xf0c
     beq lbl_fn_8043723C_00001290
     mr r3, r31

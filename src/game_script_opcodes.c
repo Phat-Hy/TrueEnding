@@ -11,7 +11,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -180,7 +180,7 @@ asm void fn_802446F0(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802446F0_000000C8
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802446F0_000000C8:
     addic. r31, r29, 0x159c
     beq lbl_fn_802446F0_000000E8

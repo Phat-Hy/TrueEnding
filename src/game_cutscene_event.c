@@ -35,7 +35,7 @@ extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -682,7 +682,7 @@ asm void fn_8032C52C(void)
     bl atn_Anim_applyLayerTransform
     addi r3, r31, 0x15fc
     addi r4, r30, 0x90
-    bl fn_80237654
+    bl res_Resource_unload
     stw r29, 0x24(r1)
     addi r3, r27, 0x2c
     addi r4, r30, 0xa1

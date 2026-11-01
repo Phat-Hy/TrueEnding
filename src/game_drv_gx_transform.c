@@ -27,9 +27,9 @@ extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_80617520(void);
 extern void GXSetTevSwapMode(void);
-extern void fn_80617730(void);
+extern void GXSetTevSwapModeTable(void);
 extern void fn_806177F0(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617A10(void);
 extern void fn_80617D50(void);
@@ -860,7 +860,7 @@ lbl_fn_805D9830_00000A00:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x0
     li r4, 0x11
     li r5, 0x0
@@ -917,7 +917,7 @@ lbl_fn_805D9830_00000A00:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     lwz r0, 0x0(r30)
     addi r4, r1, 0x10
     stw r0, 0x10(r1)
@@ -958,7 +958,7 @@ lbl_fn_805D9830_00000A00:
     li r4, 0xff
     li r5, 0xff
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     li r4, 0xf
     li r5, 0x0

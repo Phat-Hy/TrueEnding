@@ -6,8 +6,8 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
@@ -1937,12 +1937,12 @@ lbl_fn_802A3D80_00001A34:
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x2c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     lfs f1, lbl_80883D28
     addi r3, r1, 0x20
     lfs f3, lbl_80883D84
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r1, 0x108
     addi r4, r27, 0x534
     bl fn_800109E0
@@ -1970,7 +1970,7 @@ lbl_fn_802A3D80_00001A34:
     lfs f3, lbl_80883D6C
     addi r3, r1, 0x14
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80883E18
     bl fn_801125F8
     addi r3, r1, 0xa8

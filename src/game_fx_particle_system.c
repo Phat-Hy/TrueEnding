@@ -20,7 +20,7 @@ extern void fn_8006AFF8(void);
 extern void mem_free(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -1250,7 +1250,7 @@ asm void fn_80282EA4(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80282EA4_00001018
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80282EA4_00001018:
     addic. r3, r29, 0x15bc
     beq lbl_fn_80282EA4_00001028

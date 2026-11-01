@@ -72,7 +72,7 @@ void fn_801799BC(void);
 void fn_80179A34(void);
 void fn_80179AB4(void);
 void fn_80179AD0(void);
-void fn_80179D44(void);
+void actor_getMovementFlags(void);
 void fn_80179EBC(void);
 void fn_80179F98(void);
 void fn_80179FA8(void);
@@ -371,116 +371,116 @@ lbl_fn_80179AD0_00000378:
     blr
 }
 
-asm void fn_80179D44(void)
+asm void actor_getMovementFlags(void)
 {
     nofralloc
     lwz r6, 0x48(r3)
     li r7, 0x0
     cmpwi r6, 0x0
-    bne lbl_fn_80179D44_000003A0
+    bne lbl_actor_getMovementFlags_000003A0
     ori r7, r7, 0x20
-    b lbl_fn_80179D44_00000414
-lbl_fn_80179D44_000003A0:
+    b lbl_actor_getMovementFlags_00000414
+lbl_actor_getMovementFlags_000003A0:
     cmpwi r6, 0x3
-    bne lbl_fn_80179D44_000003B0
+    bne lbl_actor_getMovementFlags_000003B0
     ori r7, r7, 0x40
-    b lbl_fn_80179D44_00000414
-lbl_fn_80179D44_000003B0:
+    b lbl_actor_getMovementFlags_00000414
+lbl_actor_getMovementFlags_000003B0:
     cmpwi r6, 0x2
-    bne lbl_fn_80179D44_000003F0
+    bne lbl_actor_getMovementFlags_000003F0
     lwz r4, lbl_8087F430
     cmpwi r4, 0x0
-    beq lbl_fn_80179D44_000003E8
+    beq lbl_actor_getMovementFlags_000003E8
     lwz r0, 0x48(r4)
     cmpwi r0, 0x2
-    bne lbl_fn_80179D44_000003E8
+    bne lbl_actor_getMovementFlags_000003E8
     lwz r0, 0x4c(r4)
     cmpwi r0, 0x19
-    bne lbl_fn_80179D44_000003E8
+    bne lbl_actor_getMovementFlags_000003E8
     lwz r0, 0x50(r4)
     cmpwi r0, 0x2
-    beq lbl_fn_80179D44_00000414
-lbl_fn_80179D44_000003E8:
+    beq lbl_actor_getMovementFlags_00000414
+lbl_actor_getMovementFlags_000003E8:
     ori r7, r7, 0x80
-    b lbl_fn_80179D44_00000414
-lbl_fn_80179D44_000003F0:
+    b lbl_actor_getMovementFlags_00000414
+lbl_actor_getMovementFlags_000003F0:
     cmpwi r6, 0x1
     li r0, 0x0
-    beq lbl_fn_80179D44_00000404
+    beq lbl_actor_getMovementFlags_00000404
     cmpwi r6, 0x4
-    bne lbl_fn_80179D44_00000408
-lbl_fn_80179D44_00000404:
+    bne lbl_actor_getMovementFlags_00000408
+lbl_actor_getMovementFlags_00000404:
     li r0, 0x1
-lbl_fn_80179D44_00000408:
+lbl_actor_getMovementFlags_00000408:
     cmpwi r0, 0x0
-    beq lbl_fn_80179D44_00000414
+    beq lbl_actor_getMovementFlags_00000414
     ori r7, r7, 0x800
-lbl_fn_80179D44_00000414:
+lbl_actor_getMovementFlags_00000414:
     lwz r0, 0x12a4(r3)
     extrwi. r0, r0, 1, 28
-    beq lbl_fn_80179D44_00000424
+    beq lbl_actor_getMovementFlags_00000424
     oris r7, r7, 0x1
-lbl_fn_80179D44_00000424:
+lbl_actor_getMovementFlags_00000424:
     lwz r4, 0x60(r3)
     cmpwi r4, 0x0
-    beq lbl_fn_80179D44_000004D4
+    beq lbl_actor_getMovementFlags_000004D4
     lwz r0, 0x24(r4)
     cmpwi r0, 0x1a
-    beq lbl_fn_80179D44_00000474
+    beq lbl_actor_getMovementFlags_00000474
     cmpwi r0, 0x3b
-    beq lbl_fn_80179D44_00000474
+    beq lbl_actor_getMovementFlags_00000474
     cmpwi r0, 0x3c
-    beq lbl_fn_80179D44_00000474
+    beq lbl_actor_getMovementFlags_00000474
     cmpwi r0, 0x19
-    beq lbl_fn_80179D44_00000474
+    beq lbl_actor_getMovementFlags_00000474
     cmpwi r0, 0x17
-    bne lbl_fn_80179D44_00000478
+    bne lbl_actor_getMovementFlags_00000478
     lfs f1, 0x568(r3)
     lfs f0, lbl_808819C4
     fabs f1, f1
     frsp f1, f1
     fcmpo cr0, f1, f0
-    bge lbl_fn_80179D44_00000478
-lbl_fn_80179D44_00000474:
+    bge lbl_actor_getMovementFlags_00000478
+lbl_actor_getMovementFlags_00000474:
     oris r7, r7, 0x2000
-lbl_fn_80179D44_00000478:
+lbl_actor_getMovementFlags_00000478:
     cmpwi r0, 0x23
-    bne lbl_fn_80179D44_00000484
+    bne lbl_actor_getMovementFlags_00000484
     oris r7, r7, 0x8000
-lbl_fn_80179D44_00000484:
+lbl_actor_getMovementFlags_00000484:
     lwz r4, lbl_8087F610
     li r5, 0x0
     cmpwi r4, 0x0
-    beq lbl_fn_80179D44_000004A4
+    beq lbl_actor_getMovementFlags_000004A4
     lwz r0, 0x540(r4)
     cmpwi r0, 0x2
-    bne lbl_fn_80179D44_000004A4
+    bne lbl_actor_getMovementFlags_000004A4
     li r5, 0x1
-lbl_fn_80179D44_000004A4:
+lbl_actor_getMovementFlags_000004A4:
     cmpwi r5, 0x0
-    beq lbl_fn_80179D44_000004D4
+    beq lbl_actor_getMovementFlags_000004D4
     cmpwi r6, 0x2
-    bne lbl_fn_80179D44_000004D4
+    bne lbl_actor_getMovementFlags_000004D4
     lwz r4, lbl_8087F430
     lwz r0, 0x4c(r4)
     cmpwi r0, 0x3
-    bne lbl_fn_80179D44_000004D4
+    bne lbl_actor_getMovementFlags_000004D4
     lwz r0, 0x50(r4)
     cmpwi r0, 0x6
-    bne lbl_fn_80179D44_000004D4
+    bne lbl_actor_getMovementFlags_000004D4
     oris r7, r7, 0x8000
-lbl_fn_80179D44_000004D4:
+lbl_actor_getMovementFlags_000004D4:
     lwz r0, 0x12a4(r3)
     extrwi r0, r0, 1, 9
     cmplwi r0, 0x1
-    bne lbl_fn_80179D44_000004E8
+    bne lbl_actor_getMovementFlags_000004E8
     oris r7, r7, 0x2
-lbl_fn_80179D44_000004E8:
+lbl_actor_getMovementFlags_000004E8:
     lwz r0, 0x12a8(r3)
     extrwi. r0, r0, 1, 30
-    beq lbl_fn_80179D44_000004F8
+    beq lbl_actor_getMovementFlags_000004F8
     oris r7, r7, 0x8000
-lbl_fn_80179D44_000004F8:
+lbl_actor_getMovementFlags_000004F8:
     mr r3, r7
     blr
 }

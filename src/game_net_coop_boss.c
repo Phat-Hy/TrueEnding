@@ -22,7 +22,7 @@ extern void mem_alloc(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_80092954(void);
@@ -1465,7 +1465,7 @@ asm void fn_804A83E4(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_804A83E4_00001248
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_804A83E4_00001248:
     addi r3, r30, 0x640
     li r4, -0x1

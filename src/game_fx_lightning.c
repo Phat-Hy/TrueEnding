@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D0F8(void);
+extern void mtx_getTranslation(void);
 extern void vec3_copy(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void atn_Model_findBoneIndex(void);
@@ -890,7 +890,7 @@ asm void fn_8029E2AC(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x50
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x50
     bl vec3_copy
@@ -904,7 +904,7 @@ asm void fn_8029E2AC(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x44
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x44
     bl vec3_copy
@@ -918,7 +918,7 @@ asm void fn_8029E2AC(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x38
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x38
     bl vec3_copy
@@ -932,7 +932,7 @@ asm void fn_8029E2AC(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x2c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x2c
     bl vec3_copy
@@ -946,7 +946,7 @@ asm void fn_8029E2AC(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x20
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x20
     bl vec3_copy
@@ -960,7 +960,7 @@ asm void fn_8029E2AC(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x14
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x14
     bl vec3_copy
@@ -974,7 +974,7 @@ asm void fn_8029E2AC(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x8
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x60
     addi r4, r1, 0x8
     bl vec3_copy

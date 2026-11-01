@@ -29,7 +29,7 @@ extern void fn_801638A0(void);
 extern void fn_80165F54(void);
 extern void fn_801698E4(void);
 extern void fn_80176548(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803ABFD4(void);
 extern void fn_803AC088(void);
@@ -411,7 +411,7 @@ lbl_fn_803CB044_00000480:
     stw r31, 0x100(r1)
     stw r31, 0x104(r1)
     stw r31, 0x108(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r21
     addi r4, r1, 0xc8

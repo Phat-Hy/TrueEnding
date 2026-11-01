@@ -33,7 +33,7 @@ extern void fn_801765D8(void);
 extern void fn_80178A6C(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_findResourceSlot(void);
@@ -1996,7 +1996,7 @@ lbl_fn_8027278C_00001B10:
     add r3, r28, r25
     addi r4, r29, 0x8e
     addi r3, r3, 0x15d0
-    bl fn_80237654
+    bl res_Resource_unload
     add r3, r28, r25
     addi r4, r29, 0xa7
     addi r3, r3, 0x15dc
@@ -2004,11 +2004,11 @@ lbl_fn_8027278C_00001B10:
     add r3, r28, r25
     addi r4, r29, 0xbd
     addi r3, r3, 0x15e8
-    bl fn_80237654
+    bl res_Resource_unload
     add r3, r28, r25
     addi r4, r29, 0xd5
     addi r3, r3, 0x15f4
-    bl fn_80237654
+    bl res_Resource_unload
     add r3, r28, r25
     addi r4, r29, 0xed
     addi r3, r3, 0x1600

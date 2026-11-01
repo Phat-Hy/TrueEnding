@@ -27,7 +27,7 @@ extern void actor_setState(void);
 extern void fn_80178A6C(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_findResourceSlot(void);
@@ -1852,7 +1852,7 @@ lbl_fn_802AC364_00001914:
     addi r3, r29, 0x1a6c
     addi r31, r31, lbl_807462A8@l
     addi r4, r31, 0x48
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1a60
     addi r4, r31, 0x5e
     bl res_MsgHandle_destructor

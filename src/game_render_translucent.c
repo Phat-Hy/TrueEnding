@@ -33,8 +33,8 @@ extern void actor_setState(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A680(void);
@@ -223,12 +223,12 @@ lbl_fn_802B77AC_00000170:
     lwz r3, 0x1514(r31)
     li r4, 0x1
     stw r0, 0x1514(r31)
-    bl fn_802375C4
+    bl res_Resource_destructor
     lis r4, lbl_8074681C@ha
     lwz r3, 0x1514(r31)
     addi r4, r4, lbl_8074681C@l
     addi r4, r4, 0x49
-    bl fn_80237654
+    bl res_Resource_unload
 lbl_fn_802B77AC_00000194:
     lwz r0, 0x12a8(r31)
     mr r3, r31

@@ -19,7 +19,7 @@ extern void fn_800CB518(void);
 extern void fn_800CB688(void);
 extern void str_skipWhitespace(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
@@ -779,7 +779,7 @@ lbl_fn_80438EF8_000009CC:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r31, 0xf18
-    bl fn_80237654
+    bl res_Resource_unload
 lbl_fn_80438EF8_000009F4:
     addi r3, r1, 0x6c
     bl fn_8005BBF8

@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void fn_8000D9F8(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
@@ -1157,7 +1157,7 @@ lbl_fn_803A26F4_00000E3C:
     addi r3, r1, 0x68
     lfs f2, 0x14(r26)
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r23, r3
     mr r3, r31
     bl fn_8012A1B8
@@ -1399,7 +1399,7 @@ lbl_fn_803A26F4_000011AC:
     addi r3, r1, 0x38
     lfs f2, 0x14(r23)
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     mr r3, r31
     bl fn_801C0738

@@ -16,7 +16,7 @@ extern void fn_801546F4(void);
 extern void fn_8015495C(void);
 extern void fn_8016DF3C(void);
 extern void actor_setState(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void fn_8023772C(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -1749,7 +1749,7 @@ lbl_fn_804DE888_000015D8:
     addis r3, r24, 0x1
     lwz r4, lbl_808875A8
     subi r3, r3, 0x6940
-    bl fn_80237654
+    bl res_Resource_unload
     lwz r5, 0x5e8(r24)
     li r6, 0x0
     li r20, 0x0

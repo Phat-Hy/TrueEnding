@@ -25,9 +25,9 @@ extern void fn_80617420(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void GXSetTevSwapMode(void);
-extern void fn_80617730(void);
+extern void GXSetTevSwapModeTable(void);
 extern void fn_806177F0(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617A10(void);
 extern void fn_80617D50(void);
@@ -1712,7 +1712,7 @@ lbl_fn_805D8520_00001784:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x0
     li r4, 0x11
     li r5, 0x0
@@ -1763,7 +1763,7 @@ lbl_fn_805D8520_00001784:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0xf
@@ -1842,7 +1842,7 @@ lbl_fn_805D8520_00001984:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x0
     li r4, 0x11
     li r5, 0x0
@@ -1893,7 +1893,7 @@ lbl_fn_805D8520_00001984:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
     bl fn_80617340
@@ -1949,7 +1949,7 @@ lbl_fn_805D8520_00001B28:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x0
     li r4, 0x11
     li r5, 0x0
@@ -2000,7 +2000,7 @@ lbl_fn_805D8520_00001B28:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
     bl fn_80617340
@@ -2056,7 +2056,7 @@ lbl_fn_805D8520_00001CCC:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x0
     li r4, 0x11
     li r5, 0x0
@@ -2107,7 +2107,7 @@ lbl_fn_805D8520_00001CCC:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
     bl fn_80617340
@@ -2163,7 +2163,7 @@ lbl_fn_805D8520_00001E70:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x0
     li r4, 0x11
     li r5, 0x0
@@ -2214,7 +2214,7 @@ lbl_fn_805D8520_00001E70:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
     bl fn_80617340

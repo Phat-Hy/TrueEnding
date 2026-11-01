@@ -48,9 +48,9 @@ extern void fn_806175F0(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
-extern void fn_80617730(void);
+extern void GXSetTevSwapModeTable(void);
 extern void fn_806177B0(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXLoadTexMtxImm(void);
@@ -826,7 +826,7 @@ lbl_fn_805D1A40_00000A40:
     extrwi r5, r0, 2, 28
     extrwi r6, r0, 2, 26
     extrwi r7, r0, 2, 24
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     addi r23, r23, 0x1
     addi r27, r27, 0x1
     cmpwi r23, 0x4
@@ -838,25 +838,25 @@ lbl_fn_805D1A40_00000A70:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x2
     li r4, 0x1
     li r5, 0x1
     li r6, 0x1
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x3
     li r4, 0x2
     li r5, 0x2
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
 lbl_fn_805D1A40_00000AD0:
     lwz r0, 0x50(r26)
     li r27, 0x0
@@ -900,7 +900,7 @@ lbl_fn_805D1A40_00000B5C:
     lbz r4, 0x0(r25)
     rlwimi r5, r0, 8, 23, 23
     lbz r6, 0x1(r25)
-    bl fn_80617880
+    bl GXSetTevOrder
     lbz r0, 0x3(r25)
     mr r3, r28
     extrwi r4, r0, 2, 29
@@ -990,7 +990,7 @@ lbl_fn_805D1A40_00000CB4:
     li r4, 0xff
     li r5, 0xff
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0x4
@@ -1013,7 +1013,7 @@ lbl_fn_805D1A40_00000D10:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x2
     li r5, 0x4
@@ -1035,7 +1035,7 @@ lbl_fn_805D1A40_00000D64:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0xf
@@ -1052,7 +1052,7 @@ lbl_fn_805D1A40_00000D64:
     li r4, 0x1
     li r5, 0x1
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     li r4, 0x8
     li r5, 0x0
@@ -1088,7 +1088,7 @@ lbl_fn_805D1A40_00000E34:
     mr r3, r22
     mr r5, r23
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     cmpwi r23, 0x0
     li r7, 0x0
     bne lbl_fn_805D1A40_00000E5C
@@ -1172,7 +1172,7 @@ lbl_fn_805D1A40_00000F68:
     mr r3, r22
     li r5, 0xff
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     mr r3, r22
     li r4, 0x2
     li r5, 0x4
@@ -1194,7 +1194,7 @@ lbl_fn_805D1A40_00000FB4:
     mr r3, r22
     li r5, 0xff
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     mr r3, r22
     li r4, 0xf
     li r5, 0x0

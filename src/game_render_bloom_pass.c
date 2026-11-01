@@ -25,7 +25,7 @@ extern void fn_8013A158(void);
 extern void fn_8013A194(void);
 extern void quest_ctorRewardItem(void);
 extern void actor_setState(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801A03E0(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
@@ -1586,7 +1586,7 @@ lbl_fn_802BC4EC_000014C4:
     psq_st f1, 0x0(r29), 0, 0
     lfs f0, 0x620(r31)
     stfs f0, 0xa4(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     or r7, r28, r3
     lwz r3, lbl_8087EE98
     lfs f1, 0xa4(r1)

@@ -31,7 +31,7 @@ extern void actor_setState(void);
 extern void fn_80176ACC(void);
 extern void fn_80178208(void);
 extern void fn_80178A6C(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801C02F4(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -1012,7 +1012,7 @@ lbl_fn_8024F9B8_00000CE8:
     stw r0, 0x88(r1)
     stw r0, 0x8c(r1)
     stw r0, 0x90(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r29
     mr r5, r31
@@ -1037,7 +1037,7 @@ lbl_fn_8024F9B8_00000CE8:
     lwz r29, lbl_8087EE98
     stfs f4, 0x48(r1)
     stfs f0, 0x3c(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r29
     mr r5, r31
@@ -1073,7 +1073,7 @@ lbl_fn_8024F9B8_00000CE8:
     fadds f3, f3, f4
     stfs f0, 0x10(r1)
     stfs f3, 0x48(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, 0x620(r27)
     oris r7, r3, 0x8000
     mr r3, r29
@@ -1122,7 +1122,7 @@ lbl_fn_8024F9B8_00000ECC:
     lwz r28, lbl_8087EE98
     stfs f3, 0x48(r1)
     stfs f0, 0x3c(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r28
     mr r5, r31

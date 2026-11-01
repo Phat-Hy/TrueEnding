@@ -10,7 +10,7 @@ extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -35,7 +35,7 @@ extern void save_validateHeader(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void task_findEntryById(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void fn_802C9880(void);
 extern void fn_802C9BF8(void);
@@ -163,11 +163,11 @@ asm void fn_802C7AA8(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802C7AA8_00000094
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802C7AA8_00000094:
     addi r3, r29, 0x16f4
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x16b0
     beq lbl_fn_802C7AA8_000000C0
     mr r3, r31
@@ -207,7 +207,7 @@ lbl_fn_802C7AA8_00000100:
 lbl_fn_802C7AA8_00000120:
     addi r3, r29, 0x156c
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     mr r3, r29
     li r4, 0x0
     bl fn_8035B78C
@@ -317,7 +317,7 @@ asm void fn_802C7CBC(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802C7CBC_000002A4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802C7CBC_000002A4:
     mr r3, r30
     li r4, 0x0

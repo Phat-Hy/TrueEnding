@@ -62,7 +62,7 @@ extern void fn_806174C0(void);
 extern void fn_806175F0(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXLoadPosMtxImm(void);
@@ -232,7 +232,7 @@ lbl_fn_800B0CD4_000000F0:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x7
     li r5, 0x5
@@ -482,7 +482,7 @@ lbl_fn_800B105C_000003C0:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -1437,7 +1437,7 @@ asm void fn_800B1C44(void)
     li r4, 0xff
     li r5, 0xff
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     lfs f7, lbl_80880EF8
     lfs f0, 0x54(r31)
     lfs f8, lbl_80880EF4

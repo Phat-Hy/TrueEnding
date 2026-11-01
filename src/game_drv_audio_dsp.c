@@ -46,8 +46,8 @@ extern void fn_806175F0(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
-extern void fn_80617730(void);
-extern void fn_80617880(void);
+extern void GXSetTevSwapModeTable(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXSetZCompLoc(void);
@@ -130,7 +130,7 @@ asm void fn_805B4DF4(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x3
     bl fn_80617340
@@ -155,25 +155,25 @@ asm void fn_805B4DF4(void)
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x1
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x2
     li r4, 0x1
     li r5, 0x1
     li r6, 0x1
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x3
     li r4, 0x2
     li r5, 0x2
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10
@@ -301,7 +301,7 @@ asm void fn_805B4F0C(void)
     li r4, 0x1
     li r5, 0x1
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0x8
@@ -342,7 +342,7 @@ asm void fn_805B4F0C(void)
     li r4, 0x1
     li r5, 0x2
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     li r4, 0xf
     li r5, 0x8
@@ -383,7 +383,7 @@ asm void fn_805B4F0C(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x2
     li r4, 0xf
     li r5, 0x8
@@ -418,7 +418,7 @@ asm void fn_805B4F0C(void)
     li r4, 0xff
     li r5, 0xff
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x3
     li r4, 0x1
     li r5, 0x0
@@ -480,7 +480,7 @@ asm void fn_805B4F0C(void)
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     lwz r0, 0xb4(r1)
     lwz r31, 0xac(r1)
     lwz r30, 0xa8(r1)

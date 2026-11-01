@@ -20,7 +20,7 @@ extern void fn_801446F0(void);
 extern void fn_801539E0(void);
 extern void fn_8015495C(void);
 extern void fn_80178078(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803C11A4(void);
 extern void fn_803C1560(void);
@@ -199,7 +199,7 @@ lbl_fn_801B22AC_000000F0:
     lwz r4, lbl_8087F430
     mr r3, r30
     lwz r31, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r6, 0xd0c(r30)
     mr r5, r3
     lwz r7, 0xd04(r30)
@@ -374,7 +374,7 @@ lbl_fn_801B2560_00000354:
     lwz r4, lbl_8087F430
     mr r3, r30
     lwz r31, 0x10d8(r4)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lwz r6, 0xd0c(r30)
     mr r5, r3
     lwz r7, 0xd04(r30)
@@ -1362,7 +1362,7 @@ lbl_fn_801B3098_00001070:
     stfs f2, 0x214(r1)
     stfs f2, 0x208(r1)
     stfs f0, 0x204(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r24
     mr r5, r25
@@ -1430,7 +1430,7 @@ lbl_fn_801B3098_00001118:
     psq_st f1, 0x0(r25), 0, 0
     stfs f2, 0x208(r1)
     stfs f0, 0x204(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r22
     mr r5, r25

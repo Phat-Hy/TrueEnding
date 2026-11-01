@@ -7,7 +7,7 @@ extern void _restgpr_24(void);
 extern void _savegpr_14(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_8000D3A8(void);
@@ -67,7 +67,7 @@ extern void magic_dispatchActionCommand(void);
 extern void fn_80147A08(void);
 extern void quest_checkCondition(void);
 extern void fn_801498F0(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void save_validateHeader(void);
 extern void fn_801F45F4(void);
 extern void saveSlot_readSummary(void);
@@ -513,7 +513,7 @@ lbl_fn_805BAC18_00000420:
     lfs f1, lbl_80888454
     addi r3, r1, 0x68
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r1, 0x158
     addi r4, r1, 0x78
     bl fn_80147A08
@@ -1955,7 +1955,7 @@ asm void fn_805BC1C4(void)
     beq lbl_fn_805BC1C4_00001D28
     lwz r31, 0x10d8(r4)
     mr r3, r0
-    bl fn_80179D44
+    bl actor_getMovementFlags
     lfs f1, lbl_8088847C
     mr r5, r3
     mr r3, r31

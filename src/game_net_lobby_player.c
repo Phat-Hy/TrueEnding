@@ -19,7 +19,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_8008B130(void);
 extern void fn_8009FE24(void);
 extern void fn_800B1BAC(void);
@@ -1073,7 +1073,7 @@ lbl_fn_8049DDD8_00000CA8:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8049DDD8_00000CD8
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8049DDD8_00000CD8:
     addic. r3, r30, 0x68
     beq lbl_fn_8049DDD8_00000CE8

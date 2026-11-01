@@ -29,7 +29,7 @@ extern void fn_80087858(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800BC2E0(void);
 extern void fn_800C16B4(void);
 extern void fn_800C1A1C(void);
@@ -1388,7 +1388,7 @@ lbl_spectateManager_init_0000118C:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_spectateManager_init_000011B0
-    bl fn_800897D8
+    bl node_destroy
 lbl_spectateManager_init_000011B0:
     addic. r4, r30, 0x2e4
     beq lbl_spectateManager_init_000011DC

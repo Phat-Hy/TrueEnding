@@ -16,7 +16,7 @@ extern void fn_8004A660(void);
 extern void fn_80060D58(void);
 extern void skill_calculateDamage(void);
 extern void fn_80063D3C(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void map_debugLog(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C7E70(void);
@@ -217,7 +217,7 @@ lbl_fn_800CDD8C_000001AC:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_800CDD8C_000001D0
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_800CDD8C_000001D0:
     addic. r3, r30, 0x34e0
     beq lbl_fn_800CDD8C_000001F4

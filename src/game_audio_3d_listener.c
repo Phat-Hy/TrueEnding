@@ -13,7 +13,7 @@ extern void vec3_sub(void);
 extern void fn_80063484(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void map_debugLog(void);
 extern void atn_Matrix_copy(void);
 extern void fn_80091CFC(void);
@@ -969,7 +969,7 @@ asm void fn_8031EC5C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8031EC5C_00000C44
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8031EC5C_00000C44:
     mr r3, r30
     li r4, 0x0

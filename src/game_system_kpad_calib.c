@@ -24,7 +24,7 @@ extern void fn_80154344(void);
 extern void fn_80155DAC(void);
 extern void fn_8016DA4C(void);
 extern void fn_8016EB48(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_801E97DC(void);
 extern void fn_80216544(void);
 extern void fn_80219160(void);
@@ -1919,7 +1919,7 @@ lbl_fn_80371790_00001928:
     b lbl_fn_80371790_00001FF0
 lbl_fn_80371790_00001954:
     mr r3, r20
-    bl fn_80179D44
+    bl actor_getMovementFlags
     mr r5, r3
     lwz r3, 0x10d8(r15)
     lfs f1, lbl_808857CC

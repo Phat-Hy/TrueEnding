@@ -36,9 +36,9 @@ extern void fn_806174C0(void);
 extern void fn_806175F0(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevSwapMode(void);
-extern void fn_80617730(void);
+extern void GXSetTevSwapModeTable(void);
 extern void fn_806177B0(void);
-extern void fn_80617880(void);
+extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXLoadPosMtxImm(void);
@@ -103,7 +103,7 @@ asm void atn_ComDrawLine_execute(void)
     li r4, 0xff
     li r5, 0xff
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x4
     bl fn_80617340
@@ -297,7 +297,7 @@ asm void atn_ComDrawTexture_execute(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
     bl fn_80617340
@@ -540,7 +540,7 @@ asm void atn_ComDrawTextureAdd_execute(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
     bl fn_80617340
@@ -844,7 +844,7 @@ asm void atn_ComDrawTextureMask_execute(void)
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x1
     li r4, 0x0
     li r5, 0x1
@@ -853,12 +853,12 @@ asm void atn_ComDrawTextureMask_execute(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     li r4, 0x1
     li r5, 0x1
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0x8
@@ -1413,25 +1413,25 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x1
     li r4, 0x1
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x2
     li r4, 0x2
     li r5, 0x2
     li r6, 0x2
     li r7, 0x2
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x3
     li r4, 0x0
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1469,7 +1469,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     bl fn_80617220
     li r3, 0x1
@@ -1509,7 +1509,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     bl fn_80617220
     li r3, 0x2
@@ -1549,7 +1549,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x2
     bl fn_80617220
     li r3, 0x3
@@ -1586,7 +1586,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x3
     bl fn_80617220
     li r3, 0x4
@@ -1787,25 +1787,25 @@ lbl_atn_ComDrawTextureMono_execute_0000191C:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x1
     li r4, 0x0
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x2
     li r4, 0x0
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x3
     li r4, 0x0
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2052,25 +2052,25 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x1
     li r4, 0x1
     li r5, 0x1
     li r6, 0x1
     li r7, 0x1
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x2
     li r4, 0x2
     li r5, 0x2
     li r6, 0x2
     li r7, 0x2
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x3
     li r4, 0x0
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2108,7 +2108,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     bl fn_80617220
     li r3, 0x1
@@ -2148,7 +2148,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     bl fn_80617220
     li r3, 0x2
@@ -2188,7 +2188,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x2
     bl fn_80617220
     li r3, 0x3
@@ -2225,7 +2225,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00001AEC:
     li r4, 0x1
     li r5, 0x1
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x3
     bl fn_80617220
     li r3, 0x4
@@ -2447,25 +2447,25 @@ lbl_atn_ComDrawTextureMaskMono_execute_00002314:
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x1
     li r4, 0x0
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x2
     li r4, 0x0
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x3
     li r4, 0x0
     li r5, 0x1
     li r6, 0x2
     li r7, 0x3
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -2514,7 +2514,7 @@ asm void atn_ComDrawFont_execute(void)
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -2523,7 +2523,7 @@ asm void atn_ComDrawFont_execute(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0xc
@@ -2893,7 +2893,7 @@ lbl_atn_ComDrawFontSideFade_execute_000029CC:
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -2902,7 +2902,7 @@ lbl_atn_ComDrawFontSideFade_execute_000029CC:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0xc
@@ -3209,7 +3209,7 @@ asm void atn_ComDrawColliObject_execute(void)
     li r4, 0xff
     li r5, 0xff
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x4
     bl fn_80617340
@@ -3295,7 +3295,7 @@ asm void atn_ComDrawColliTree_execute(void)
     li r4, 0xff
     li r5, 0xff
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x4
     bl fn_80617340
@@ -3410,7 +3410,7 @@ asm void atn_ComDrawD3TextureMask_execute(void)
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     lwz r0, 0x1c(r31)
     cmpwi r0, 0x0
     bne lbl_atn_ComDrawD3TextureMask_execute_000031C8
@@ -3431,12 +3431,12 @@ lbl_atn_ComDrawD3TextureMask_execute_000031C8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     li r4, 0x0
     li r5, 0x1
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0x8
@@ -3524,7 +3524,7 @@ lbl_atn_ComDrawD3TextureMask_execute_00003344:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0xc
@@ -3686,7 +3686,7 @@ asm void atn_ComDrawWindow_execute(void)
     li r5, 0x0
     li r6, 0x0
     li r7, 0x0
-    bl fn_80617730
+    bl GXSetTevSwapModeTable
     li r3, 0x1
     li r4, 0x0
     li r5, 0x1
@@ -3695,12 +3695,12 @@ asm void atn_ComDrawWindow_execute(void)
     li r4, 0x0
     li r5, 0x0
     li r6, 0x4
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x1
     li r4, 0x1
     li r5, 0x1
     li r6, 0xff
-    bl fn_80617880
+    bl GXSetTevOrder
     li r3, 0x0
     li r4, 0xf
     li r5, 0x8

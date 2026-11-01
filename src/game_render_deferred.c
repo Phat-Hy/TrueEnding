@@ -9,7 +9,7 @@ extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void fn_8004D124(void);
 extern void atn_ColliBase_destructor(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -27,7 +27,7 @@ extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_80178A6C(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -1686,7 +1686,7 @@ asm void fn_802B73FC(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802B73FC_000016A4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802B73FC_000016A4:
     addic. r3, r29, 0x1850
     beq lbl_fn_802B73FC_000016B4
@@ -1741,7 +1741,7 @@ lbl_fn_802B73FC_00001730:
 lbl_fn_802B73FC_00001750:
     addi r3, r29, 0x1524
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     mr r3, r29
     li r4, 0x0
     bl fn_805A3D00

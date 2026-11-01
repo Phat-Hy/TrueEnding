@@ -17,7 +17,7 @@ extern void fn_8013A194(void);
 extern void fn_8013C460(void);
 extern void fn_80161880(void);
 extern void actor_setState(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void res_findResourceSlot(void);
 extern void fn_802657FC(void);
 extern void fn_80356FFC(void);
@@ -527,7 +527,7 @@ lbl_fn_803576F8_000005DC:
     lwz r22, lbl_8087EE98
     stfs f6, 0x10(r1)
     stfs f2, 0x1c(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r22
     addi r5, r1, 0x50
@@ -1175,7 +1175,7 @@ lbl_fn_80357F48_00000F74:
     mr r3, r31
     lwz r29, lbl_8087EE98
     addi r30, r4, 0x528
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r29
     mr r6, r30
@@ -1546,7 +1546,7 @@ lbl_fn_80357F48_000014D0:
     mr r3, r31
     lwz r30, lbl_8087EE98
     addi r29, r4, 0x528
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r30
     mr r6, r29

@@ -8,8 +8,8 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000DD0C(void);
 extern void vec3_assign(void);
@@ -33,7 +33,7 @@ extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void map_debugLog(void);
 extern void atn_Matrix_copy(void);
 extern void fn_80091CFC(void);
@@ -71,7 +71,7 @@ extern void actor_setState(void);
 extern void fn_80178A6C(void);
 extern void fn_8020A780(void);
 extern void fn_80237518(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -1114,7 +1114,7 @@ asm void fn_8045F9A0(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8045F9A0_00000D28
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8045F9A0_00000D28:
     addic. r31, r29, 0x196c
     beq lbl_fn_8045F9A0_00000D48
@@ -1203,12 +1203,12 @@ asm void fn_8045FAB0(void)
     stw r31, 0x14c4(r28)
     stw r31, 0x14c8(r28)
     stw r31, 0x14cc(r28)
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80886D60
     addi r3, r28, 0x14e0
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     stw r31, 0x14ec(r28)
     addi r3, r28, 0x14f8
     bl fn_80057A64
@@ -1229,18 +1229,18 @@ asm void fn_8045FAB0(void)
     stw r31, 0x15a8(r28)
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80886D60
     addi r3, r28, 0x15bc
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lfs f1, lbl_80886D60
     addi r3, r28, 0x15cc
     stw r31, 0x15c8(r28)
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lis r4, fn_802AC550@ha
     lis r5, atn_ColliCapsule_destructor@ha
     addi r3, r28, 0x15d8
@@ -1365,16 +1365,16 @@ lbl_fn_8045FAB0_00001040:
     bl res_MsgHandle_destructor
     addi r3, r28, 0x1824
     addi r4, r31, 0x52
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r28, 0x1830
     addi r4, r31, 0x63
     bl res_MsgHandle_destructor
     addi r3, r28, 0x183c
     addi r4, r31, 0x71
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r28, 0x1848
     addi r4, r31, 0x82
-    bl fn_80237654
+    bl res_Resource_unload
     lwz r0, 0x14a8(r28)
     addi r3, r1, 0x8
     li r4, -0x1
@@ -2086,7 +2086,7 @@ lbl_fn_80460458_00001B20:
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x58
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     lwz r0, 0x18ec(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80460458_00001B78
@@ -2213,7 +2213,7 @@ lbl_fn_80460458_00001CF4:
     addi r3, r1, 0x4c
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r31, 0xb0
     bl fn_80266154
     mr r4, r3
@@ -2221,7 +2221,7 @@ lbl_fn_80460458_00001CF4:
     bl atn_Matrix_copy
     addi r3, r1, 0x1c
     addi r4, r31, 0x1578
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x4c
     addi r4, r1, 0x1c
     bl fn_80012C88
@@ -2243,7 +2243,7 @@ lbl_fn_80460458_00001CF4:
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x10
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r31, 0x148c
     addi r4, r1, 0x10
     bl vec3_copy

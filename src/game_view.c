@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_8008A76C(void);
 extern void fn_8008AD4C(void);
 extern void map_debugLog(void);
@@ -31,7 +31,7 @@ extern void fn_8010D808(void);
 extern void fn_8010ED4C(void);
 extern void fn_8010EE38(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_unload(void);
 extern void fn_80441590(void);
@@ -243,11 +243,11 @@ lbl_fn_800F1430_000001B4:
     bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     lis r27, fn_80237518@ha
-    lis r30, fn_802375C4@ha
+    lis r30, res_Resource_destructor@ha
     li r6, 0xc
     addi r4, r27, fn_80237518@l
     li r7, 0x15
-    addi r5, r30, fn_802375C4@l
+    addi r5, r30, res_Resource_destructor@l
     addi r3, r3, 0x63f0
     bl __construct_new_array
     addis r3, r31, 0x3
@@ -264,21 +264,21 @@ lbl_fn_800F1430_000001B4:
     bl __construct_new_array
     addis r3, r31, 0x3
     addi r4, r27, fn_80237518@l
-    addi r5, r30, fn_802375C4@l
+    addi r5, r30, res_Resource_destructor@l
     li r6, 0xc
     li r7, 0x5
     addi r3, r3, 0x651c
     bl __construct_new_array
     addis r3, r31, 0x3
     addi r4, r27, fn_80237518@l
-    addi r5, r30, fn_802375C4@l
+    addi r5, r30, res_Resource_destructor@l
     li r6, 0xc
     li r7, 0x5
     addi r3, r3, 0x6558
     bl __construct_new_array
     addis r3, r31, 0x3
     addi r4, r27, fn_80237518@l
-    addi r5, r30, fn_802375C4@l
+    addi r5, r30, res_Resource_destructor@l
     li r6, 0xc
     li r7, 0x3
     addi r3, r3, 0x6594
@@ -1189,12 +1189,12 @@ lbl_fn_800F1F94_00000FF4:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_800F1F94_0000101C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_800F1F94_0000101C:
     addis r3, r30, 0x4
     li r4, -0x1
     subi r3, r3, 0x760c
-    bl fn_802375C4
+    bl res_Resource_destructor
     addis r3, r30, 0x4
     li r4, -0x1
     subi r3, r3, 0x763c
@@ -1204,30 +1204,30 @@ lbl_fn_800F1F94_0000101C:
     beq lbl_fn_800F1F94_00001060
     addi r3, r29, 0xc
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     mr r3, r29
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
 lbl_fn_800F1F94_00001060:
     addis r29, r30, 0x4
     subic. r29, r29, 0x7670
     beq lbl_fn_800F1F94_00001084
     addi r3, r29, 0xc
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     mr r3, r29
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
 lbl_fn_800F1F94_00001084:
     addis r29, r30, 0x4
     subic. r29, r29, 0x7688
     beq lbl_fn_800F1F94_000010A8
     addi r3, r29, 0xc
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     mr r3, r29
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
 lbl_fn_800F1F94_000010A8:
     addis r3, r30, 0x3
     lis r29, fn_800EF73C@ha
@@ -1283,20 +1283,20 @@ lbl_fn_800F1F94_00001148:
     bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_0000116C:
     addis r3, r30, 0x3
-    lis r29, fn_802375C4@ha
-    addi r4, r29, fn_802375C4@l
+    lis r29, res_Resource_destructor@ha
+    addi r4, r29, res_Resource_destructor@l
     li r5, 0xc
     li r6, 0x3
     addi r3, r3, 0x6594
     bl __destroy_new_array
     addis r3, r30, 0x3
-    addi r4, r29, fn_802375C4@l
+    addi r4, r29, res_Resource_destructor@l
     li r5, 0xc
     li r6, 0x5
     addi r3, r3, 0x6558
     bl __destroy_new_array
     addis r3, r30, 0x3
-    addi r4, r29, fn_802375C4@l
+    addi r4, r29, res_Resource_destructor@l
     li r5, 0xc
     li r6, 0x5
     addi r3, r3, 0x651c
@@ -1319,8 +1319,8 @@ lbl_fn_800F1F94_0000116C:
     bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_000011F8:
     addis r3, r30, 0x3
-    lis r4, fn_802375C4@ha
-    addi r4, r4, fn_802375C4@l
+    lis r4, res_Resource_destructor@ha
+    addi r4, r4, res_Resource_destructor@l
     li r5, 0xc
     li r6, 0x15
     addi r3, r3, 0x63f0

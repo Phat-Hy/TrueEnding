@@ -6,8 +6,8 @@ extern void __register_global_object(void);
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void fn_8000DD0C(void);
 extern void vec3_toEulerAngles(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
@@ -706,7 +706,7 @@ asm void fn_8010F4BC(void)
     bne lbl_fn_8010F4BC_000008AC
     mr r4, r31
     addi r3, r1, 0x74
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     mr r4, r31
     addi r3, r1, 0xb0
     bl atn_Matrix_copy_2
@@ -716,7 +716,7 @@ asm void fn_8010F4BC(void)
     addi r3, r1, 0x20
     lfs f3, lbl_8088164C
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r3
     addi r3, r1, 0x2c
     addi r5, r1, 0xb0

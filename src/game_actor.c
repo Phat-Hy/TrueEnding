@@ -31,7 +31,7 @@ extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -1005,7 +1005,7 @@ asm void fn_8001486C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8001486C_00000B6C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8001486C_00000B6C:
     addic. r3, r30, 0x48c
     beq lbl_fn_8001486C_00000B90

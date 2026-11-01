@@ -25,8 +25,8 @@ extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -319,7 +319,7 @@ asm void fn_803F6B04(void)
 lbl_fn_803F6B04_00000298:
     mr r3, r29
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     cmpwi r30, 0x0
     ble lbl_fn_803F6B04_000002B4
     mr r3, r29
@@ -628,7 +628,7 @@ lbl_fn_803F6E0C_000006A0:
     beq lbl_fn_803F6E0C_000006C0
     mr r3, r28
     addi r4, r1, 0x18
-    bl fn_80237654
+    bl res_Resource_unload
 lbl_fn_803F6E0C_000006C0:
     addi r29, r29, 0x1
     addi r28, r28, 0x38
@@ -1193,7 +1193,7 @@ asm void fn_803F76D8(void)
 lbl_fn_803F76D8_00000E6C:
     addi r3, r29, 0x920
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r3, r29, 0x8d0
     beq lbl_fn_803F76D8_00000E88
     li r4, 0x0

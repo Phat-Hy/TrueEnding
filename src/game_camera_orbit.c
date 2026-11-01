@@ -15,7 +15,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_free(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
@@ -323,7 +323,7 @@ asm void fn_802E84C8(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802E84C8_000002C4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802E84C8_000002C4:
     addic. r31, r29, 0x1510
     beq lbl_fn_802E84C8_000002E4
@@ -672,7 +672,7 @@ asm void fn_802E89B0(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802E89B0_000007D8
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802E89B0_000007D8:
     addi r3, r29, 0x15a4
     li r4, -0x1

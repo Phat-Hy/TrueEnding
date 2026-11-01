@@ -35,7 +35,7 @@ extern void fn_80154C08(void);
 extern void fn_80164DCC(void);
 extern void actor_setState(void);
 extern void fn_80178A6C(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_80204E04(void);
 extern void fn_8021A888(void);
 extern void fn_8021A8D0(void);
@@ -1564,7 +1564,7 @@ lbl_fn_80153FD8_00001484:
 lbl_fn_80153FD8_000014D0:
     lwz r30, lbl_8087EE98
     mr r3, r31
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r30
     addi r5, r1, 0x30

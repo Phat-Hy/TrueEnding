@@ -81,7 +81,7 @@ void fn_80089620(void);
 void fn_800897C8(void);
 void fn_800897D0(void);
 void fn_800897D4(void);
-void fn_800897D8(void);
+void node_destroy(void);
 void fn_8008984C(void);
 void fn_80089854(void);
 void fn_8008985C(void);
@@ -460,7 +460,7 @@ void fn_800897D4(void)
 {
 }
 
-asm void fn_800897D8(void)
+asm void node_destroy(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -470,24 +470,24 @@ asm void fn_800897D8(void)
     mr r31, r4
     lwz r5, 0x48(r4)
     cmpwi r5, 0x0
-    beq lbl_fn_800897D8_000004BC
+    beq lbl_node_destroy_000004BC
     addi r0, r3, 0x74
     cmplw r0, r4
-    beq lbl_fn_800897D8_000004BC
+    beq lbl_node_destroy_000004BC
     lwz r12, 0x0(r5)
     mr r3, r5
     lwz r12, 0x24(r12)
     mtctr r12
     bctrl
     cmpwi r31, 0x0
-    beq lbl_fn_800897D8_000004BC
+    beq lbl_node_destroy_000004BC
     lwz r12, 0x0(r31)
     mr r3, r31
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_800897D8_000004BC:
+lbl_node_destroy_000004BC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1640,7 +1640,7 @@ asm void fn_8008A76C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8008A76C_00001444
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8008A76C_00001444:
     addic. r0, r30, 0x208
     beq lbl_fn_8008A76C_0000146C

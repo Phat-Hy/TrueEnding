@@ -13,7 +13,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80087BB4(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
 extern void skin_playAnimationByName(void);
@@ -138,7 +138,7 @@ asm void fn_804A2078(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_804A2078_0000006C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_804A2078_0000006C:
     addi r3, r30, 0x23c
     li r4, -0x1
@@ -1044,7 +1044,7 @@ lbl_fn_804A2C98_00000C58:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_804A2C98_00000C7C
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_804A2C98_00000C7C:
     mr r3, r30
     li r4, 0x0

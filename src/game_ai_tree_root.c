@@ -19,7 +19,7 @@ extern void talk_setSpeakerName(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
@@ -205,7 +205,7 @@ asm void fn_80256014(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80256014_00000134
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80256014_00000134:
     addic. r31, r29, 0x1640
     beq lbl_fn_80256014_00000154

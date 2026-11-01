@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_20(void);
 extern void _savegpr_20(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_80011410(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
@@ -180,7 +180,7 @@ lbl_fn_80348FF4_000000B4:
     addi r3, r1, 0x60
     lfs f3, lbl_808853B0
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lis r29, lbl_8074AA58@ha
     addi r3, r31, 0xb0
     addi r29, r29, lbl_8074AA58@l
@@ -243,7 +243,7 @@ lbl_fn_80348FF4_000001AC:
     addi r3, r1, 0x54
     lfs f3, lbl_808853B0
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     lis r4, lbl_8074AA58@ha
     addi r3, r31, 0xb0
     addi r4, r4, lbl_8074AA58@l

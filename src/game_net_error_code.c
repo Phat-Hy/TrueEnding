@@ -45,8 +45,8 @@ extern void assert_formatLocation(void);
 extern void event_findEntryById(void);
 extern void fn_8021175C(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -1305,7 +1305,7 @@ lbl_fn_8051B988_00000F38:
     bl res_MsgHandle_destructor
     addi r3, r31, 0x47f4
     addi r4, r30, 0xc9
-    bl fn_80237654
+    bl res_Resource_unload
     lfs f4, lbl_80887924
     li r0, 0x0
     lfs f5, lbl_80887904
@@ -1385,7 +1385,7 @@ lbl_fn_8051C2AC_000011B8:
     addi r3, r29, 0x47f4
     li r4, -0x1
     stw r0, 0x46d8(r29)
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x47e8
     beq lbl_fn_8051C2AC_000011F0
     mr r3, r31

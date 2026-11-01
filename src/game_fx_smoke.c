@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D0F8(void);
+extern void mtx_getTranslation(void);
 extern void fn_8000D3A4(void);
 extern void vec3_assign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
@@ -123,7 +123,7 @@ asm void fn_80296B8C(void)
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x20
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x14
     addi r4, r1, 0x2c
     addi r5, r1, 0x20

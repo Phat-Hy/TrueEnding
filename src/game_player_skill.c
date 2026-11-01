@@ -25,8 +25,8 @@ extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_80120D24(void);
-extern void fn_80120D34(void);
+extern void equip_getElementPtr8(void);
+extern void equip_getElementPtr0(void);
 extern void fn_80120D44(void);
 extern void fn_80120E38(void);
 extern void fn_80120E48(void);
@@ -34,8 +34,8 @@ extern void fn_80120F4C(void);
 extern void actor_setState(void);
 extern void fn_80219544(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void res_MsgHandle_destructor(void);
 extern void fn_8035B808(void);
 extern void fn_8035B824(void);
@@ -1096,14 +1096,14 @@ lbl_fn_8011FFF8_00000B38:
 lbl_fn_8011FFF8_00000B7C:
     mr r4, r24
     addi r3, r1, 0x44
-    bl fn_80120D34
+    bl equip_getElementPtr0
     bl fn_8004212C
     mr r30, r3
     mr r4, r24
     addi r3, r31, 0xc
-    bl fn_80120D24
+    bl equip_getElementPtr8
     mr r4, r30
-    bl fn_80237654
+    bl res_Resource_unload
     addi r24, r24, 0x1
 lbl_fn_8011FFF8_00000BA8:
     addi r3, r1, 0x44
@@ -1127,7 +1127,7 @@ lbl_fn_8011FFF8_00000BB8:
 lbl_fn_8011FFF8_00000BEC:
     mr r4, r24
     addi r3, r1, 0x38
-    bl fn_80120D34
+    bl equip_getElementPtr0
     bl fn_8004212C
     mr r30, r3
     mr r4, r24
@@ -1158,7 +1158,7 @@ lbl_fn_8011FFF8_00000C28:
 lbl_fn_8011FFF8_00000C5C:
     mr r4, r24
     addi r3, r1, 0x2c
-    bl fn_80120D34
+    bl equip_getElementPtr0
     bl fn_8004212C
     mr r30, r3
     mr r4, r24
@@ -1792,11 +1792,11 @@ asm void fn_80120C30(void)
     li r7, 0x0
     bl mem_realloc
     lis r4, fn_80237518@ha
-    lis r5, fn_802375C4@ha
+    lis r5, res_Resource_destructor@ha
     mr r7, r26
     li r6, 0xc
     addi r4, r4, fn_80237518@l
-    addi r5, r5, fn_802375C4@l
+    addi r5, r5, res_Resource_destructor@l
     bl runtime_registerStaticObject
     mr r30, r3
     b lbl_fn_80120C30_00001518
@@ -1830,9 +1830,9 @@ lbl_fn_80120C30_00001548:
 lbl_fn_80120C30_00001570:
     cmplw r27, r31
     blt lbl_fn_80120C30_00001548
-    lis r4, fn_802375C4@ha
+    lis r4, res_Resource_destructor@ha
     lwz r3, 0x8(r25)
-    addi r4, r4, fn_802375C4@l
+    addi r4, r4, res_Resource_destructor@l
     bl __destroy_arr
 lbl_fn_80120C30_00001588:
     stw r30, 0x8(r25)

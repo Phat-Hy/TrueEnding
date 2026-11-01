@@ -38,7 +38,7 @@ extern void fn_80154C08(void);
 extern void fn_80164D24(void);
 extern void fn_80175B18(void);
 extern void fn_80176E30(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_802185FC(void);
 extern void task_mapIdToQueue(void);
 extern void kpad_getClampData(void);
@@ -1193,7 +1193,7 @@ lbl_quest_updateFlow_00000ED4:
     stw r0, 0x678(r1)
     stw r0, 0x67c(r1)
     stw r0, 0x680(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     psq_l f1, 0x614(r26), 0, 0
     addi r4, r1, 0x248
     lfs f2, 0x61c(r26)

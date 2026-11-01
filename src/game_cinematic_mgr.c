@@ -12,7 +12,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AF38(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -29,10 +29,10 @@ extern void fn_8015495C(void);
 extern void fn_80161570(void);
 extern void fn_8016D74C(void);
 extern void fn_8016EB48(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_registerResource(void);
 extern void fn_8035B694(void);
@@ -809,7 +809,7 @@ asm void fn_803334D0(void)
     beq lbl_fn_803334D0_00000A60
     li r4, -0x1
     addi r3, r3, 0x17b0
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r31, r29, 0x17a4
     beq lbl_fn_803334D0_000009E0
     mr r3, r31
@@ -840,7 +840,7 @@ lbl_fn_803334D0_00000A04:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_803334D0_00000A34
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_803334D0_00000A34:
     addic. r3, r29, 0x14b0
     beq lbl_fn_803334D0_00000A44
@@ -1366,7 +1366,7 @@ asm void fn_80333C40(void)
     stw r31, 0x58(r1)
     stw r31, 0x5c(r1)
     stw r31, 0x60(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     lwz r3, lbl_8087EE98
     mr r5, r30
@@ -1844,7 +1844,7 @@ lbl_fn_803342EC_00001858:
     stw r31, 0x68(r1)
     stw r31, 0x6c(r1)
     stw r31, 0x70(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     lwz r3, lbl_8087EE98
     mr r5, r30
@@ -2145,7 +2145,7 @@ lbl_fn_80334460_00001C10:
     stfs f2, 0xa8(r1)
     stfs f3, 0xb0(r1)
     stfs f0, 0xa4(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     li r0, 0x0
     oris r7, r3, 0x8000
     stw r0, 0x16c(r1)

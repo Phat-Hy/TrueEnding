@@ -8,7 +8,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -1120,7 +1120,7 @@ asm void fn_802E1DF0(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802E1DF0_00000DE8
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802E1DF0_00000DE8:
     addic. r4, r30, 0x1638
     beq lbl_fn_802E1DF0_00000E14
@@ -1444,7 +1444,7 @@ asm void fn_802E2270(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802E2270_00001268
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802E2270_00001268:
     addic. r31, r29, 0x14f8
     beq lbl_fn_802E2270_00001288

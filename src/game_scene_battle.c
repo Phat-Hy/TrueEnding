@@ -27,7 +27,7 @@ extern void fn_801539E0(void);
 extern void fn_8015495C(void);
 extern void fn_80155DAC(void);
 extern void fn_80176DFC(void);
-extern void fn_80179D44(void);
+extern void actor_getMovementFlags(void);
 extern void fn_80188F08(void);
 extern void fn_80188F40(void);
 extern void fn_80191960(void);
@@ -917,7 +917,7 @@ lbl_fn_801ADC14_00000A90:
     stw r28, 0x174(r1)
     stw r28, 0x178(r1)
     lwz r3, 0x4(r29)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r26
     mr r5, r27
@@ -1074,7 +1074,7 @@ lbl_fn_801ADC14_00000D68:
     fsubs f0, f0, f4
     stfs f3, 0x6c(r1)
     stfs f0, 0x60(r1)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r26
     mr r5, r27
@@ -1236,7 +1236,7 @@ lbl_fn_801ADC14_00000FF4:
     stw r0, 0x124(r1)
     stw r0, 0x128(r1)
     lwz r3, 0x4(r29)
-    bl fn_80179D44
+    bl actor_getMovementFlags
     oris r7, r3, 0x8000
     mr r3, r26
     addi r4, r1, 0xe8

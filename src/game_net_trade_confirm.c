@@ -19,7 +19,7 @@ extern void mem_realloc(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_8008C828(void);
 extern void fn_800C16B4(void);
 extern void atn_Task_constructor(void);
@@ -1797,7 +1797,7 @@ lbl_fn_8053121C_00001850:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_8053121C_00001880
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_8053121C_00001880:
     addic. r0, r30, 0x6c
     beq lbl_fn_8053121C_000018AC

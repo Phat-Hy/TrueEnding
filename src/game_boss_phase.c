@@ -23,7 +23,7 @@ extern void fn_8006B0C8(void);
 extern void fn_8006D008(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800899DC(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B130(void);
@@ -491,7 +491,7 @@ lbl_fn_80136138_00000480:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80136138_000004A4
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80136138_000004A4:
     mr r3, r30
     li r4, 0x0

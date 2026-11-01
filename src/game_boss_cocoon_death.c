@@ -18,7 +18,7 @@ extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void msg_getMessageById(void);
 extern void fn_800C3094(void);
@@ -44,7 +44,7 @@ extern void actor_setState(void);
 extern void save_validateHeader(void);
 extern void fn_801F64D0(void);
 extern void thread_findAndNotify(void);
-extern void fn_802375C4(void);
+extern void res_Resource_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_findResourceSlot(void);
 extern void fn_8032AB90(void);
@@ -1162,14 +1162,14 @@ asm void fn_80468D48(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80468D48_00000E44
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80468D48_00000E44:
     addi r3, r30, 0x1848
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addi r3, r30, 0x183c
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r29, r30, 0x1830
     beq lbl_fn_80468D48_00000E7C
     mr r3, r29
@@ -1181,7 +1181,7 @@ lbl_fn_80468D48_00000E44:
 lbl_fn_80468D48_00000E7C:
     addi r3, r30, 0x1824
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r3, r30, 0x17a8
     beq lbl_fn_80468D48_00000E98
     li r4, 0x0
@@ -1463,7 +1463,7 @@ lbl_task_Library_constructor_00001238:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_task_Library_constructor_0000126C
-    bl fn_800897D8
+    bl node_destroy
 lbl_task_Library_constructor_0000126C:
     addic. r4, r30, 0x9c
     beq lbl_task_Library_constructor_00001298

@@ -14,7 +14,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800CFBA0(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -1285,7 +1285,7 @@ asm void fn_80376A0C(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_80376A0C_00000EE0
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_80376A0C_00000EE0:
     addic. r31, r29, 0x5c
     beq lbl_fn_80376A0C_00000F20

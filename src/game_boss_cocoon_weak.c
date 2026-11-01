@@ -18,7 +18,7 @@ extern void dungeon_initGlobalContext(void);
 extern void fn_800838AC(void);
 extern void fn_80083AD4(void);
 extern void mem_alloc(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800A4460(void);
 extern void fn_800A55D4(void);
 extern void atn_Task_constructor(void);
@@ -793,7 +793,7 @@ lbl_atn_Loader_constructor_0000096C:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_atn_Loader_constructor_00000990
-    bl fn_800897D8
+    bl node_destroy
 lbl_atn_Loader_constructor_00000990:
     addic. r0, r30, 0x4010
     beq lbl_atn_Loader_constructor_000009AC

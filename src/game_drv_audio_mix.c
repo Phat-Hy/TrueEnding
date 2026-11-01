@@ -20,7 +20,7 @@ extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void route_findNextWaypoint(void);
 extern void node_createNamedChild(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void fn_800C16B4(void);
 extern void fn_800C18BC(void);
 extern void fn_800C2448(void);
@@ -826,7 +826,7 @@ lbl_fn_805B6EB0_00000924:
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_805B6EB0_00000948
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_805B6EB0_00000948:
     mr r3, r30
     li r4, 0x0

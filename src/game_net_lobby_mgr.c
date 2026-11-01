@@ -11,7 +11,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_27(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
-extern void fn_8000D114(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_800109E0(void);
 extern void fn_80013410(void);
@@ -34,7 +34,7 @@ extern void fn_801125F8(void);
 extern void fn_8012044C(void);
 extern void fn_801495E8(void);
 extern void fn_80237518(void);
-extern void fn_80237654(void);
+extern void res_Resource_unload(void);
 extern void res_findResourceSlot(void);
 extern void fn_8023A184(void);
 extern void fn_8030B408(void);
@@ -451,7 +451,7 @@ lbl_fn_804985E4_00000494:
     fmr f2, f30
     addi r3, r1, 0x84
     fmr f3, f31
-    bl fn_8000D114
+    bl vec3_set
     lwz r3, 0x8(r1)
     lwz r3, 0x2c(r3)
     lwz r22, 0x0(r3)
@@ -566,7 +566,7 @@ lbl_fn_804985E4_0000061C:
     fmr f2, f30
     addi r3, r1, 0x78
     fmr f3, f31
-    bl fn_8000D114
+    bl vec3_set
     lwz r3, 0x2c(r25)
     lwz r22, 0x0(r3)
     mr r3, r22
@@ -707,7 +707,7 @@ lbl_fn_804985E4_00000840:
     fmr f2, f31
     addi r3, r1, 0x60
     fmr f3, f30
-    bl fn_8000D114
+    bl vec3_set
     addi r3, r1, 0x148
     bl talk_parseQuotedString
     mr r22, r3
@@ -737,7 +737,7 @@ lbl_fn_804985E4_00000840:
     addi r3, r21, 0x60
     bl fn_80497864
     mr r4, r22
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r1, 0x24
     li r4, -0x1
     bl dtor_80013D60

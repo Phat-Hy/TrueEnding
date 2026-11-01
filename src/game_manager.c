@@ -12,8 +12,8 @@ extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D0F8(void);
-extern void fn_8000D114(void);
+extern void mtx_getTranslation(void);
+extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_8000D430(void);
@@ -3482,7 +3482,7 @@ lbl_fn_80012D34_00002C80:
     mr r31, r3
     addi r3, r1, 0xc8
     mr r4, r31
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x170
     addi r4, r1, 0x17c
     addi r5, r1, 0xc8
@@ -3493,7 +3493,7 @@ lbl_fn_80012D34_00002C80:
     lfs f1, lbl_80880668
     addi r3, r1, 0x164
     fmr f2, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r31
     addi r3, r1, 0x278
     bl fn_8001336C
@@ -3502,7 +3502,7 @@ lbl_fn_80012D34_00002C80:
     bl fn_80011410
     mr r4, r31
     addi r3, r1, 0xb0
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     mr r4, r28
     addi r3, r1, 0xbc
     addi r5, r1, 0xb0
@@ -3552,7 +3552,7 @@ lbl_fn_80012D34_00002DB8:
     lfs f3, lbl_80880668
     fmr f2, f29
     addi r3, r1, 0x14c
-    bl fn_8000D114
+    bl vec3_set
     fmr f1, f31
     bl fn_80013404
     fcmpo cr0, f1, f29
@@ -3595,7 +3595,7 @@ lbl_fn_80012D34_00002E44:
     bl fn_80011410
     mr r4, r31
     addi r3, r1, 0x80
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x8c
     addi r4, r1, 0x80
     addi r5, r1, 0x164
@@ -3652,14 +3652,14 @@ lbl_fn_80012D34_00002F00:
     addi r3, r1, 0x128
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     cmpwi r29, 0x0
     beq lbl_fn_80012D34_00002FF4
     lfs f1, lbl_80880668
     addi r3, r1, 0x11c
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     lis r4, lbl_807C7030@ha
     mr r3, r28
     addi r4, r4, lbl_807C7030@l
@@ -3671,7 +3671,7 @@ lbl_fn_80012D34_00002F00:
     bl fn_80010374
     mr r4, r31
     addi r3, r1, 0x5c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x68
     addi r4, r1, 0x5c
     addi r5, r1, 0x110
@@ -3690,7 +3690,7 @@ lbl_fn_80012D34_00002F00:
     bl fn_80012C88
     mr r4, r31
     addi r3, r1, 0x50
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x11c
     addi r4, r1, 0x50
     bl fn_80013484
@@ -3713,13 +3713,13 @@ lbl_fn_80012D34_00003000:
     addi r3, r1, 0x104
     fmr f2, f1
     fmr f3, f1
-    bl fn_8000D114
+    bl vec3_set
     mr r4, r26
     addi r3, r1, 0xf8
     bl fn_80010374
     mr r4, r31
     addi r3, r1, 0x2c
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
     addi r5, r1, 0x128
@@ -3742,7 +3742,7 @@ lbl_fn_80012D34_00003000:
     bl fn_80012C88
     mr r4, r31
     addi r3, r1, 0x20
-    bl fn_8000D0F8
+    bl mtx_getTranslation
     addi r3, r1, 0x104
     addi r4, r1, 0x20
     bl fn_80013484

@@ -21,7 +21,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
-extern void fn_800897D8(void);
+extern void node_destroy(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void morph_updateMesh(void);
@@ -45,8 +45,8 @@ extern void fn_8017039C(void);
 extern void fn_80178A6C(void);
 extern void task_findEntryById(void);
 extern void fn_80237518(void);
-extern void fn_802375C4(void);
-extern void fn_80237654(void);
+extern void res_Resource_destructor(void);
+extern void res_Resource_unload(void);
 extern void fn_802376D0(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -1133,22 +1133,22 @@ lbl_fn_80287E7C_00000E64:
     stfs f0, 0x151c(r29)
     stfs f0, 0x1520(r29)
     stfs f0, 0x1524(r29)
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1950
     addi r4, r30, 0x58
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x192c
     addi r4, r30, 0x35
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1938
     addi r4, r30, 0x79
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x195c
     addi r4, r30, 0x9c
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1968
     addi r4, r30, 0xbf
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x15b8
     addi r4, r30, 0xe2
     bl res_MsgHandle_destructor
@@ -1157,7 +1157,7 @@ lbl_fn_80287E7C_00000E64:
     bl res_MsgHandle_destructor
     addi r3, r29, 0x1568
     addi r4, r30, 0x120
-    bl fn_80237654
+    bl res_Resource_unload
     addi r3, r29, 0x1574
     addi r4, r30, 0x142
     bl res_MsgHandle_destructor
@@ -1225,7 +1225,7 @@ asm void fn_802883A4(void)
     lwz r3, lbl_8087EF10
     cmpwi r3, 0x0
     beq lbl_fn_802883A4_00000FF0
-    bl fn_800897D8
+    bl node_destroy
 lbl_fn_802883A4_00000FF0:
     addic. r3, r30, 0x1984
     beq lbl_fn_802883A4_00001000
@@ -1236,28 +1236,28 @@ lbl_fn_802883A4_00001000:
     beq lbl_fn_802883A4_00001020
     addi r3, r29, 0xc
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     mr r3, r29
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
 lbl_fn_802883A4_00001020:
     addic. r29, r30, 0x1944
     beq lbl_fn_802883A4_00001040
     addi r3, r29, 0xc
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     mr r3, r29
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
 lbl_fn_802883A4_00001040:
     addic. r29, r30, 0x192c
     beq lbl_fn_802883A4_00001060
     addi r3, r29, 0xc
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     mr r3, r29
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
 lbl_fn_802883A4_00001060:
     addi r3, r30, 0x1644
     li r4, -0x1
@@ -1315,7 +1315,7 @@ lbl_fn_802883A4_00001104:
 lbl_fn_802883A4_00001124:
     addi r3, r30, 0x1568
     li r4, -0x1
-    bl fn_802375C4
+    bl res_Resource_destructor
     addic. r29, r30, 0x155c
     beq lbl_fn_802883A4_00001150
     mr r3, r29
