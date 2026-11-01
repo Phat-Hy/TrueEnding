@@ -57,11 +57,11 @@ extern void fn_805FA4E0(void);
 extern void fn_806250D0(void);
 extern void fn_80625110(void);
 extern void CXUncompressAny(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_806823B0(void);
 extern void strstr(void);
 extern void fn_80686A48(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
 extern u32 strlen(const char* str);
@@ -1090,8 +1090,8 @@ lbl_atn_Arc_decompressChunk_00000D60:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078FB50@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_atn_Arc_decompressChunk_00000D9C:
     addic. r4, r20, 0x8
     addi r0, r22, 0x403c
@@ -1510,8 +1510,8 @@ lbl_atn_Arc_decompressChunk_00001378:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_atn_Arc_decompressChunk_000013B0:
     addic. r3, r20, 0x8
     addi r0, r29, 0x4

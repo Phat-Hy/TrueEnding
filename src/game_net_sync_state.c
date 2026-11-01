@@ -9,7 +9,7 @@ extern void fn_8006EF48(void);
 extern void fn_800A555C(void);
 extern void fn_800A55AC(void);
 extern void fn_800C32E0(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB5C8(void);
 extern void fn_800DC6B4(void);
@@ -203,7 +203,7 @@ lbl_fn_804C9C88_000001A4:
     bl fn_80117228
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lfs f0, lbl_808874E0
     stfs f0, 0x170(r26)
 lbl_fn_804C9C88_000001D0:
@@ -225,7 +225,7 @@ lbl_fn_804C9C88_00000200:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r30, 0x1
     b lbl_fn_804C9C88_00000254
 lbl_fn_804C9C88_00000220:
@@ -240,7 +240,7 @@ lbl_fn_804C9C88_00000220:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r30, 0x2
 lbl_fn_804C9C88_00000254:
     addi r11, r1, 0x30
@@ -292,7 +292,7 @@ lbl_fn_804C9EF8_000002D0:
     bl fn_80117228
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r31
     li r4, 0x3
     bl fn_804C8D80
@@ -321,7 +321,7 @@ lbl_fn_804C9EF8_0000034C:
     bl fn_80117228
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_804C9EF8_000003C8
 lbl_fn_804C9EF8_0000036C:
     lwz r3, lbl_8087EF70
@@ -348,7 +348,7 @@ lbl_fn_804C9EF8_000003AC:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804C9EF8_000003C8:
     cmpw r29, r30
     beq lbl_fn_804C9EF8_000003D8
@@ -492,7 +492,7 @@ lbl_fn_804C9EF8_00000558:
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804C9EF8_000005AC:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
@@ -688,7 +688,7 @@ lbl_fn_804CA250_000007F4:
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_804CA250_00000A74
 lbl_fn_804CA250_0000084C:
     mr r3, r28
@@ -865,7 +865,7 @@ lbl_fn_804CA250_00000AAC:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r5, 0xec(r29)
     lis r4, lbl_80759374@ha
     lwz r0, 0xe4(r29)

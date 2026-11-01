@@ -12,7 +12,7 @@ extern void _savegpr_18(void);
 extern void fn_8003EA3C(void);
 extern void fn_8003EFB0(void);
 extern void fn_80051C78(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB58C(void);
 extern void fn_8014EEC4(void);
@@ -59,7 +59,7 @@ extern void fn_8050DDE0(void);
 extern void fn_8050E098(void);
 extern void fn_8050EAEC(void);
 extern void fn_8054D798(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_806A8E40(void);
 extern void fn_806B0E30(void);
 
@@ -2338,7 +2338,7 @@ lbl_fn_804E5BC8_00001E34:
     bl fn_800CB58C
     cmpwi r3, 0x0
     bne lbl_fn_804E5BC8_00001F10
-    bl fn_80680CF8
+    bl rand
     lis r4, 0xb60b
     addi r0, r4, 0x60b7
     mulhw r0, r0, r3
@@ -2350,7 +2350,7 @@ lbl_fn_804E5BC8_00001E34:
     subf. r0, r0, r3
     bne lbl_fn_804E5BC8_00001F10
     lwz r19, lbl_8087F498
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x38e4
     lis r5, lbl_80791018@ha
     subi r0, r4, 0x71c7
@@ -2372,7 +2372,7 @@ lbl_fn_804E5BC8_00001E34:
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804E5BC8_00001F10:
     lwz r0, 0x4fc(r27)
     cmpwi r0, 0x1e

@@ -37,7 +37,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068A4A8(void);
 extern void fn_8068AD58(void);
 extern void fn_8068AE24(void);
@@ -446,7 +446,7 @@ lbl_fn_803792F0_000004F4:
     stfs f2, 0x320(r28)
     stfs f2, 0x324(r28)
     stfs f0, 0x328(r28)
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_8074DF88@ha
     addi r0, r5, 0x749f

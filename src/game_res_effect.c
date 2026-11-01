@@ -8,7 +8,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void fn_802328EC(void);
 extern void fn_80238560(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 
 /* External data declarations */
 extern u8 lbl_80742F78[];
@@ -1176,7 +1176,7 @@ lbl_fn_80233D74_00000F00:
     fcmpu cr0, f0, f30
     beq lbl_fn_80233D74_00000F60
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1203,7 +1203,7 @@ lbl_fn_80233D74_00000F60:
     fcmpu cr0, f1, f30
     beq lbl_fn_80233D74_00000FC8
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1230,7 +1230,7 @@ lbl_fn_80233D74_00000FC8:
     fcmpu cr0, f2, f30
     beq lbl_fn_80233D74_00001030
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1265,7 +1265,7 @@ lbl_fn_80233D74_00001050:
     fcmpu cr0, f0, f30
     beq lbl_fn_80233D74_000010B0
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1292,7 +1292,7 @@ lbl_fn_80233D74_000010B0:
     fcmpu cr0, f1, f30
     beq lbl_fn_80233D74_00001118
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1319,7 +1319,7 @@ lbl_fn_80233D74_00001118:
     fcmpu cr0, f2, f30
     beq lbl_fn_80233D74_00001180
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1354,7 +1354,7 @@ lbl_fn_80233D74_000011A0:
     fcmpu cr0, f0, f30
     beq lbl_fn_80233D74_00001200
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1381,7 +1381,7 @@ lbl_fn_80233D74_00001200:
     fcmpu cr0, f1, f30
     beq lbl_fn_80233D74_00001268
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1408,7 +1408,7 @@ lbl_fn_80233D74_00001268:
     fcmpu cr0, f2, f30
     beq lbl_fn_80233D74_000012D0
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1435,7 +1435,7 @@ lbl_fn_80233D74_000012D0:
     fcmpu cr0, f1, f30
     beq lbl_fn_80233D74_00001338
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1470,7 +1470,7 @@ lbl_fn_80233D74_00001358:
     fcmpu cr0, f0, f30
     beq lbl_fn_80233D74_000013B8
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1497,7 +1497,7 @@ lbl_fn_80233D74_000013B8:
     fcmpu cr0, f1, f30
     beq lbl_fn_80233D74_00001420
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1524,7 +1524,7 @@ lbl_fn_80233D74_00001420:
     fcmpu cr0, f2, f30
     beq lbl_fn_80233D74_00001488
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1559,7 +1559,7 @@ lbl_fn_80233D74_000014A8:
     fcmpu cr0, f0, f30
     beq lbl_fn_80233D74_00001508
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1586,7 +1586,7 @@ lbl_fn_80233D74_00001508:
     fcmpu cr0, f1, f30
     beq lbl_fn_80233D74_00001570
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1613,7 +1613,7 @@ lbl_fn_80233D74_00001570:
     fcmpu cr0, f2, f30
     beq lbl_fn_80233D74_000015D8
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1640,7 +1640,7 @@ lbl_fn_80233D74_000015D8:
     fcmpu cr0, f28, f30
     beq lbl_fn_80233D74_00001644
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1678,7 +1678,7 @@ lbl_fn_80233D74_00001668:
     fcmpu cr0, f0, f30
     beq lbl_fn_80233D74_000016C8
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1705,7 +1705,7 @@ lbl_fn_80233D74_000016C8:
     fcmpu cr0, f1, f30
     beq lbl_fn_80233D74_00001730
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f
@@ -1732,7 +1732,7 @@ lbl_fn_80233D74_00001730:
     fcmpu cr0, f2, f30
     beq lbl_fn_80233D74_00001798
     fneg f29, f30
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80742F78@ha
     addi r0, r5, 0x749f

@@ -26,7 +26,7 @@ extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CFD18(void);
 extern void fn_800DC288(void);
 extern void fn_800E41FC(void);
@@ -105,7 +105,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_806958E0(void);
@@ -354,7 +354,7 @@ lbl_fn_8032DAA0_00000150:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0
     beq lbl_fn_8032DAA0_000002B4
@@ -1456,7 +1456,7 @@ asm void fn_8032ECBC(void)
     beq lbl_fn_8032ECBC_000012AC
     b lbl_fn_8032ECBC_00001308
 lbl_fn_8032ECBC_0000124C:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -1481,7 +1481,7 @@ lbl_fn_8032ECBC_0000124C:
     li r31, 0x2
     b lbl_fn_8032ECBC_00001308
 lbl_fn_8032ECBC_000012AC:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -1777,7 +1777,7 @@ asm void fn_8032F0EC(void)
     bl fn_80333024
     b lbl_fn_8032F0EC_0000173C
 lbl_fn_8032F0EC_000016BC:
-    bl fn_80680CF8
+    bl rand
     slwi r0, r3, 30
     srwi r3, r3, 31
     subf r0, r3, r0
@@ -1939,7 +1939,7 @@ lbl_fn_8032F314_000018E0:
     stw r31, 0xb0(r1)
     stw r31, 0xb4(r1)
     stw r31, 0xb8(r1)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lwz r6, 0xd1c(r30)
     addi r4, r4, 0x749f

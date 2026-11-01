@@ -9,7 +9,7 @@ extern void fn_8004ED34(void);
 extern void mem_alloc(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_800F8C6C(void);
 extern void fn_800FB4B0(void);
@@ -41,7 +41,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_80695AD0(void);
 
 /* External data declarations */
@@ -1387,7 +1387,7 @@ lbl_fn_8035D6B8_0000126C:
     beq lbl_fn_8035D6B8_00001280
     lfs f31, lbl_8088560C
 lbl_fn_8035D6B8_00001280:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -1412,7 +1412,7 @@ lbl_fn_8035D6B8_00001280:
     b lbl_fn_8035D6B8_00001338
 lbl_fn_8035D6B8_000012DC:
     lfs f31, lbl_80885610
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -1834,7 +1834,7 @@ asm void fn_8035DC58(void)
     bl fn_800C344C
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8035DC58_00001980
 lbl_fn_8035DC58_000018C4:
     cmpwi r0, 0x0
@@ -1883,7 +1883,7 @@ lbl_fn_8035DC58_000018C4:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8035DC58_00001980:
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)

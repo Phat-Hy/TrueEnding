@@ -13,7 +13,7 @@ extern void fn_8021AF50(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void fn_80375B78(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEB0(void);
 
 /* External data declarations */
@@ -1647,7 +1647,7 @@ asm void fn_8013459C(void)
 lbl_fn_8013459C_000014D4:
     cmpwi r5, 0x0
     beq lbl_fn_8013459C_0000154C
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     lis r6, lbl_80737258@ha
     subi r4, r4, 0x7ae1

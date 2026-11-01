@@ -17,7 +17,7 @@ extern void fn_800897D8(void);
 extern void fn_800A555C(void);
 extern void fn_800A55AC(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB518(void);
 extern void fn_800CB5C8(void);
@@ -43,7 +43,7 @@ extern void world_setGlobalFlag(void);
 extern void fn_804A3BD4(void);
 extern void fn_805114D8(void);
 extern void fn_805115D4(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -142,7 +142,7 @@ asm void fn_804A2078(void)
 lbl_fn_804A2078_0000006C:
     addi r3, r30, 0x23c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor
@@ -180,12 +180,12 @@ asm void fn_804A2128(void)
 lbl_fn_804A2128_000000E8:
     bl fn_802179B4
     mr r30, r3
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
     mulli r30, r0, 0x3a
-    bl fn_80680CF8
+    bl rand
     mulhw r0, r29, r3
     lwz r4, 0x4(r28)
     li r6, 0x1
@@ -348,7 +348,7 @@ lbl_fn_804A233C_000002FC:
     bne lbl_fn_804A233C_00000348
     bl fn_802179B4
     mr r30, r3
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -411,7 +411,7 @@ lbl_fn_804A233C_000003CC:
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addi r3, r31, 0x23c
     li r4, 0x3c
     bl fn_800CB518
@@ -1544,7 +1544,7 @@ lbl_fn_804A3228_00001380:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804A3228_000013A8:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

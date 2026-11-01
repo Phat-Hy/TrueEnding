@@ -14,7 +14,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800EFD04(void);
 extern void fn_800EFDA0(void);
 extern void fn_800F72CC(void);
@@ -45,7 +45,7 @@ extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 
@@ -220,7 +220,7 @@ lbl_fn_80348FF4_000000B4:
     bl fn_800C31F4
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     stw r30, 0x1a24(r31)
     bl fn_8013A194
     bl fn_800F8548
@@ -807,7 +807,7 @@ lbl_fn_803494AC_00000960:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803494AC_00000B8C
 lbl_fn_803494AC_00000A04:
     lfs f8, 0x2e4(r3)
@@ -879,7 +879,7 @@ lbl_fn_803494AC_00000A64:
     li r5, 0x3ef
     li r6, 0x1
     bl fn_80239DAC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x14c0(r31)
     subi r5, r4, 0x7777
@@ -1221,7 +1221,7 @@ lbl_fn_80349BA0_00000F58:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, 0x14b4(r29)
     addi r0, r3, 0x1
     stw r0, 0x14b4(r29)
@@ -1262,7 +1262,7 @@ lbl_fn_80349BA0_00001014:
     li r5, 0x3ef
     li r6, 0x1
     bl fn_80239DAC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x14c0(r29)
     subi r5, r4, 0x7777
@@ -1604,7 +1604,7 @@ lbl_fn_8034A194_00001514:
     li r5, 0x3ef
     li r6, 0x1
     bl fn_80239DAC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x14c0(r31)
     subi r5, r4, 0x7777
@@ -2155,7 +2155,7 @@ lbl_fn_8034A644_00001D18:
     li r5, 0x3ef
     li r6, 0x1
     bl fn_80239DAC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x14c0(r31)
     subi r5, r4, 0x7777

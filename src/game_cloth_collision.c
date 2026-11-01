@@ -13,7 +13,7 @@ extern void mem_free(void);
 extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
@@ -57,10 +57,10 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068A850(void);
 
 /* External data declarations */
@@ -122,7 +122,7 @@ asm void fn_8027CD9C(void)
     beq lbl_fn_8027CD9C_0000016C
     li r4, -0x1
     addi r3, r3, 0x15a8
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r31, r29, 0x158c
     beq lbl_fn_8027CD9C_00000054
     mr r3, r31
@@ -498,8 +498,8 @@ lbl_fn_8027CF28_00000574:
     addi r4, r19, 0x14f
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8027CF28_00000598:
     lwz r3, 0x14c4(r27)
     addi r4, r27, 0x14c8
@@ -519,8 +519,8 @@ lbl_fn_8027CF28_00000598:
     addi r4, r19, 0x14f
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8027CF28_000005E8:
     addi r0, r21, 0x5555
     cmplw r25, r0
@@ -566,8 +566,8 @@ lbl_fn_8027CF28_0000066C:
     addi r4, r19, 0x14f
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8027CF28_0000068C:
     slwi r3, r16, 2
     bl mem_free
@@ -577,8 +577,8 @@ lbl_fn_8027CF28_0000068C:
     addi r3, r20, 0xa0
     addi r4, r24, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8027CF28_000006B4:
     lwz r0, 0x14c4(r27)
     lwz r3, 0x38(r1)
@@ -685,8 +685,8 @@ lbl_fn_8027CF28_0000081C:
     addi r4, r19, 0x14f
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8027CF28_00000840:
     lwz r3, 0x14d0(r27)
     addi r4, r27, 0x14d4
@@ -706,8 +706,8 @@ lbl_fn_8027CF28_00000840:
     addi r4, r19, 0x14f
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8027CF28_00000890:
     addi r0, r21, 0x5555
     cmplw r26, r0
@@ -753,8 +753,8 @@ lbl_fn_8027CF28_00000914:
     addi r4, r19, 0x14f
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8027CF28_00000934:
     slwi r3, r26, 2
     bl mem_free
@@ -764,8 +764,8 @@ lbl_fn_8027CF28_00000934:
     addi r3, r20, 0xa0
     addi r4, r24, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8027CF28_0000095C:
     lwz r0, 0x14d0(r27)
     lwz r3, 0x24(r1)

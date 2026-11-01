@@ -26,9 +26,9 @@ extern void PSMTXRotRad(void);
 extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -487,8 +487,8 @@ lbl_fn_801A9E94_00000538:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077FAD4@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801A9E94_000005D0:
     cmpwi r30, 0x0
     beq lbl_fn_801A9E94_00000600
@@ -578,8 +578,8 @@ lbl_fn_801AA114_000006B8:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077FAD4@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801AA114_000006F8:
     cmpwi r30, 0x0
     beq lbl_fn_801AA114_00000728
@@ -958,8 +958,8 @@ lbl_fn_801AA550_00000BF4:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077FAB8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801AA550_00000C8C:
     cmpwi r30, 0x0
     beq lbl_fn_801AA550_00000CBC
@@ -1049,8 +1049,8 @@ lbl_fn_801AA7D0_00000D74:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077FAB8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801AA7D0_00000DB4:
     cmpwi r30, 0x0
     beq lbl_fn_801AA7D0_00000DE4
@@ -1982,8 +1982,8 @@ lbl_fn_801AB294_000019B4:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077CF44@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801AB294_00001A88:
     cmpwi r30, 0x0
     beq lbl_fn_801AB294_00001AC4

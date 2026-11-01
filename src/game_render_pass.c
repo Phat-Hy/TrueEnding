@@ -25,7 +25,7 @@ extern void fn_800897D8(void);
 extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
@@ -81,7 +81,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_805A3D00(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_80684600(void);
@@ -178,7 +178,7 @@ asm void fn_802A40A8(void)
     psq_st f30, 0x18(r1), 0, 0
     fmr f30, f1
     fmr f31, f2
-    bl fn_80680CF8
+    bl rand
     xoris r3, r3, 0x8000
     lis r0, 0x4330
     lis r4, lbl_80745C50@ha
@@ -1370,7 +1370,7 @@ lbl_fn_802A5054_0000106C:
 lbl_fn_802A5054_0000108C:
     addi r3, r29, 0x1538
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r31, r29, 0x152c
     beq lbl_fn_802A5054_000010B8
     mr r3, r31

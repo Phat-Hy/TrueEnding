@@ -11,7 +11,7 @@ extern void fn_8005B9AC(void);
 extern void fn_8006F72C(void);
 extern void fn_800846FC(void);
 extern void fn_800A55AC(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800DC1DC(void);
 extern void fn_80117228(void);
 extern void fn_80117E88(void);
@@ -34,7 +34,7 @@ extern void fn_8016E484(void);
 extern void fn_8016F4D8(void);
 extern void fn_8016F5EC(void);
 extern void fn_803BEB54(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_80686A48(void);
 extern void fn_80686AF0(void);
 extern void fn_80695720(void);
@@ -144,7 +144,7 @@ lbl_fn_8011B570_00000094:
     bl fn_80117228
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8011B570_0000032C
 lbl_fn_8011B570_000000B0:
     lwz r3, lbl_8087EF70
@@ -190,7 +190,7 @@ lbl_fn_8011B570_00000130:
     bl fn_80117228
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8011B570_0000032C
 lbl_fn_8011B570_0000014C:
     lwz r3, lbl_8087EF70
@@ -261,7 +261,7 @@ lbl_fn_8011B570_00000228:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8011B570_0000032C
 lbl_fn_8011B570_00000244:
     lwz r3, lbl_8087EF70
@@ -329,7 +329,7 @@ lbl_fn_8011B570_00000314:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8011B570_0000032C:
     lwz r0, 0x48(r31)
     cmpwi r0, 0x1
@@ -985,7 +985,7 @@ lbl_fn_8011C074_00000BA4:
     bl fn_8014FCC4
     cmpwi r3, 0x0
     beq lbl_fn_8011C074_00000C64
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
     mulhw r0, r0, r3

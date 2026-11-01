@@ -27,7 +27,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068A4A8(void);
 extern void fn_8068AE24(void);
 extern void fn_8068AEA4(void);
@@ -381,7 +381,7 @@ lbl_fn_8034CF48_000003E0:
     li r5, 0x3ef
     li r6, 0x1
     bl fn_80239DAC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x14c0(r31)
     subi r5, r4, 0x7777
@@ -488,7 +488,7 @@ asm void fn_8034D450(void)
     lfs f19, lbl_80885454
     lfs f18, lbl_808853B0
 lbl_fn_8034D450_000005DC:
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x12c(r1)
     lfd f0, 0x128(r1)
@@ -498,7 +498,7 @@ lbl_fn_8034D450_000005DC:
     fdivs f0, f0, f27
     fmadds f0, f26, f0, f26
     stfs f0, 0x7c(r1)
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x134(r1)
     addi r3, r1, 0xf8
@@ -527,7 +527,7 @@ lbl_fn_8034D450_000005DC:
     psq_l f1, 0x0(r29), 0, 0
     psq_st f1, 0x0(r31), 0, 0
     stfs f2, 0x88(r1)
-    bl fn_80680CF8
+    bl rand
     mulhw r6, r30, r3
     lwz r5, 0x1cbc(r24)
     lwz r0, 0x1a28(r24)
@@ -659,7 +659,7 @@ lbl_fn_8034D450_000007F8:
     stfs f2, 0x34(r1)
     psq_st f1, 0x0(r28), 0, 0
     stfs f2, 0x88(r1)
-    bl fn_80680CF8
+    bl rand
     addi r0, r31, 0x749f
     lwz r5, 0x1cbc(r24)
     mulhw r6, r0, r3
@@ -706,14 +706,14 @@ lbl_fn_8034D450_00000914:
     fadds f22, f0, f29
     lfs f31, 0x68(r1)
 lbl_fn_8034D450_00000928:
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x12c(r1)
     lfd f0, 0x128(r1)
     fsubs f0, f0, f25
     fdivs f0, f0, f26
     fmadds f21, f27, f0, f28
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x134(r1)
     fadds f2, f30, f21
@@ -731,7 +731,7 @@ lbl_fn_8034D450_00000928:
     stfs f0, 0x8(r1)
     psq_l f1, 0x0(r27), 0, 0
     psq_st f1, 0x0(r28), 0, 0
-    bl fn_80680CF8
+    bl rand
     mulhw r6, r30, r3
     lwz r5, 0x1cbc(r24)
     lwz r0, 0x1a28(r24)
@@ -1079,7 +1079,7 @@ lbl_fn_8034DA0C_00000E0C:
     li r5, 0x3ef
     li r6, 0x1
     bl fn_80239DAC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x14c0(r31)
     subi r5, r4, 0x7777
@@ -1747,7 +1747,7 @@ lbl_fn_8034DE90_00001840:
     li r5, 0x3ef
     li r6, 0x1
     bl fn_80239DAC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x14c0(r29)
     subi r5, r4, 0x7777
@@ -1865,7 +1865,7 @@ lbl_fn_8034E898_000019F8:
     li r5, 0x3ef
     li r6, 0x1
     bl fn_80239DAC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x14c0(r31)
     subi r5, r4, 0x7777

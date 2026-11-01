@@ -15,7 +15,7 @@ extern void fn_80044C30(void);
 extern void mem_alloc(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800E8FB8(void);
 extern void fn_800F8548(void);
 extern void fn_800F8574(void);
@@ -439,7 +439,7 @@ lbl_fn_800E73EC_00000418:
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F430
     li r4, 0xef
     bl world_getGlobalFlag
@@ -744,7 +744,7 @@ lbl_fn_800E7650_0000086C:
     bl fn_800C344C
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F430
     li r4, 0xef
     bl world_getGlobalFlag
@@ -818,7 +818,7 @@ lbl_fn_800E7650_00000974:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_800E7650_00000A84
 lbl_fn_800E7650_000009CC:
     lwz r3, lbl_8087F0A8
@@ -841,7 +841,7 @@ lbl_fn_800E7650_000009CC:
     bl fn_800C31F4
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_800E7650_00000A84
 lbl_fn_800E7650_00000A24:
     lwz r3, lbl_8087F0A8
@@ -862,7 +862,7 @@ lbl_fn_800E7650_00000A24:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_800E7650_00000A84
 lbl_fn_800E7650_00000A74:
     lwz r3, lbl_8087F0A8

@@ -15,7 +15,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_800F8574(void);
 extern void fn_800FAB80(void);
@@ -34,9 +34,9 @@ extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 
@@ -530,8 +530,8 @@ lbl_fn_803405C0_00000624:
     addi r4, r22, 0xf6
     addi r3, r23, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803405C0_00000648:
     lwz r3, 0x70(r1)
     subi r0, r21, 0x1
@@ -550,8 +550,8 @@ lbl_fn_803405C0_00000648:
     addi r4, r22, 0xf6
     addi r3, r23, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803405C0_00000694:
     addi r0, r26, 0x5555
     cmplw r25, r0
@@ -597,8 +597,8 @@ lbl_fn_803405C0_00000718:
     addi r4, r22, 0xf6
     addi r3, r23, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803405C0_00000738:
     slwi r3, r18, 2
     bl mem_free
@@ -608,8 +608,8 @@ lbl_fn_803405C0_00000738:
     addi r3, r23, 0xa0
     addi r4, r29, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803405C0_00000760:
     lwz r5, 0x70(r1)
     lwz r0, 0x88(r1)
@@ -700,7 +700,7 @@ lbl_fn_803405C0_0000086C:
 lbl_fn_803405C0_000008A8:
     lwz r21, 0x16d8(r19)
     lwz r18, 0x70(r1)
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r18
     lwz r4, 0x6c(r1)
     lfs f4, 0x68(r1)
@@ -719,7 +719,7 @@ lbl_fn_803405C0_000008A8:
     stfs f4, 0x5c(r1)
     stfs f0, 0x54(r1)
     stfs f2, 0x58(r1)
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x9c(r1)
     stw r17, 0x98(r1)
@@ -727,7 +727,7 @@ lbl_fn_803405C0_000008A8:
     fsubs f0, f0, f31
     fdivs f0, f0, f28
     fmadds f27, f29, f0, f30
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0xa4(r1)
     stw r17, 0xa0(r1)
@@ -735,7 +735,7 @@ lbl_fn_803405C0_000008A8:
     fsubs f0, f0, f31
     fdivs f0, f0, f28
     fmadds f26, f29, f0, f30
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0xac(r1)
     lfs f0, 0x5c(r1)
@@ -1544,7 +1544,7 @@ lbl_fn_803412AC_000013A0:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803412AC_000018FC
 lbl_fn_803412AC_00001538:
     subi r0, r4, 0x1
@@ -1883,7 +1883,7 @@ asm void fn_80341BEC(void)
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80341BEC_00001B34
 lbl_fn_80341BEC_00001A20:
     lfs f31, 0x2e4(r3)

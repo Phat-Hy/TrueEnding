@@ -8,7 +8,7 @@ extern void __register_global_object(void);
 extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB518(void);
 extern void fn_800CB58C(void);
@@ -29,7 +29,7 @@ extern void fn_8050128C(void);
 extern void fn_8050DDE0(void);
 extern void fn_8050E098(void);
 extern void fn_8054D798(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_806A8E40(void);
 extern void fn_806B0E30(void);
 extern void fn_806B1250(void);
@@ -487,7 +487,7 @@ lbl_fn_804EB938_00000520:
     cmpwi r3, 0x0
     bne lbl_fn_804EB938_000005C0
     lwz r23, lbl_8087F498
-    bl fn_80680CF8
+    bl rand
     lis r4, 0xcccd
     lis r5, lbl_80790FF0@ha
     subi r0, r4, 0x3333
@@ -510,14 +510,14 @@ lbl_fn_804EB938_00000520:
     bl fn_800CB440
     addi r3, r1, 0x4c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804EB938_000005C0:
     lwz r3, lbl_8087F610
     li r4, 0xf
     li r5, 0x0
     addi r3, r3, 0x2b78
     bl fn_800CB5C8
-    bl fn_80680CF8
+    bl rand
     lis r4, lbl_807910A8@ha
     clrlslwi r0, r3, 31, 2
     addi r4, r4, lbl_807910A8@l
@@ -533,7 +533,7 @@ lbl_fn_804EB938_000005C0:
     bl fn_800CB440
     addi r3, r1, 0x48
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F610
     li r4, 0xa
     addi r3, r3, 0x2b78

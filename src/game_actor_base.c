@@ -18,7 +18,7 @@ extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AD58(void);
 
 /* External data declarations */
@@ -1189,7 +1189,7 @@ lbl_fn_801146A4_00000FF0:
     lfs f0, 0x3d0(r31)
     fmuls f3, f28, f3
     fmuls f27, f0, f3
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0xcc(r1)
     fneg f4, f27
@@ -1220,7 +1220,7 @@ lbl_fn_801146A4_0000105C:
     lfs f0, 0x3d4(r31)
     fmuls f3, f28, f3
     fmuls f27, f0, f3
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0xd4(r1)
     fneg f4, f27

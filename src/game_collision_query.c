@@ -15,7 +15,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80097D40(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB518(void);
 extern void fn_800CB688(void);
 extern void fn_800EFBC4(void);
@@ -1111,7 +1111,7 @@ lbl_fn_801061BC_00000DC0:
     bl fn_800C31F4
     addi r3, r1, 0x20
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r4, 0x64(r29)
     addi r3, r1, 0x28
     lfs f1, lbl_8088158C
@@ -1170,7 +1170,7 @@ lbl_fn_801061BC_00000EB4:
     bl fn_800CB518
     addi r3, r1, 0x28
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_801061BC_00000ED8:
     lwz r0, lbl_8087F8A8
     cmpwi r0, 0x0
@@ -2087,7 +2087,7 @@ lbl_fn_80106878_00001B10:
     bl fn_800C344C
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80106878_00001B4C:
     lfs f1, 0x234(r31)
     lfs f0, lbl_80881478

@@ -17,7 +17,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80099E9C(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC12C(void);
@@ -108,11 +108,11 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A04AC(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
+extern void printf(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068B100(void);
 
 /* External data declarations */
@@ -272,8 +272,8 @@ lbl_fn_803458EC_00000118:
     addi r4, r25, 0x17d
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803458EC_0000013C:
     addi r3, r20, 0x8
     stw r19, 0x14(r1)
@@ -293,8 +293,8 @@ lbl_fn_803458EC_0000013C:
     addi r4, r25, 0x17d
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803458EC_0000018C:
     addi r0, r28, 0x5555
     cmplw r27, r0
@@ -340,8 +340,8 @@ lbl_fn_803458EC_00000210:
     addi r4, r25, 0x17d
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803458EC_00000230:
     slwi r3, r18, 2
     bl mem_free
@@ -351,8 +351,8 @@ lbl_fn_803458EC_00000230:
     addi r3, r26, 0xa0
     addi r4, r31, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803458EC_00000258:
     lwz r0, 0x18(r1)
     stw r27, 0x14(r1)
@@ -1574,7 +1574,7 @@ lbl_fn_80346A34_00001398:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80346A34_00001518
 lbl_fn_80346A34_000013E8:
     lwz r4, 0x8(r4)
@@ -1710,7 +1710,7 @@ lbl_fn_80346D8C_000015C4:
     lwz r0, 0x1cd0(r30)
     cmpw r3, r0
     blt lbl_fn_80346D8C_00001794
-    bl fn_80680CF8
+    bl rand
     slwi r0, r3, 29
     srwi r3, r3, 31
     subf r0, r3, r0
@@ -1737,7 +1737,7 @@ lbl_fn_80346D8C_000015C4:
     fcmpo cr0, f3, f0
     cror eq, gt, eq
     bne lbl_fn_80346D8C_00001664
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4

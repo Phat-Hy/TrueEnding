@@ -10,7 +10,7 @@ extern void fn_8004D124(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB5C8(void);
 extern void fn_800DD3FC(void);
@@ -42,7 +42,7 @@ extern void fn_805A3D6C(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern void fn_806958E0(void);
@@ -798,7 +798,7 @@ asm void fn_802AB510(void)
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     stw r31, 0x14f8(r30)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1030,7 +1030,7 @@ lbl_fn_802AB794_00000D2C:
     bl fn_80109828
 lbl_fn_802AB794_00000D4C:
     lwz r29, 0x1580(r31)
-    bl fn_80680CF8
+    bl rand
     divwu r4, r3, r29
     addi r5, r31, 0x15d4
     li r0, 0x0

@@ -36,9 +36,9 @@ extern void fn_80494354(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void fn_8067E23C(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -1167,8 +1167,8 @@ lbl_fn_8049248C_00000EFC:
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8049248C_00000F34:
     lis r3, 0x141
     addi r0, r3, 0x4141
@@ -1218,8 +1218,8 @@ lbl_fn_8049248C_00000F8C:
     addi r4, r4, 0xcb
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8049248C_00000FF4:
     lis r3, 0x141
     addi r0, r3, 0x4141
@@ -1274,8 +1274,8 @@ lbl_fn_8049248C_00001088:
     addi r4, r4, 0xcb
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8049248C_000010BC:
     mulli r3, r16, 0x44
     bl mem_free
@@ -1288,8 +1288,8 @@ lbl_fn_8049248C_000010BC:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077927C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8049248C_000010F0:
     lwz r5, 0x5c(r15)
     addi r7, r1, 0x2e0
@@ -1561,8 +1561,8 @@ lbl_fn_8049248C_000014DC:
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8049248C_00001514:
     lis r3, 0x141
     addi r0, r3, 0x4141
@@ -1612,8 +1612,8 @@ lbl_fn_8049248C_0000156C:
     addi r4, r4, 0xcb
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8049248C_000015D4:
     lis r3, 0x141
     addi r0, r3, 0x4141
@@ -1668,8 +1668,8 @@ lbl_fn_8049248C_00001668:
     addi r4, r4, 0xcb
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8049248C_0000169C:
     mulli r3, r16, 0x44
     bl mem_free
@@ -1682,8 +1682,8 @@ lbl_fn_8049248C_0000169C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077927C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8049248C_000016D0:
     lwz r5, 0x5c(r15)
     addi r7, r1, 0x29c

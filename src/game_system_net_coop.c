@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800D3FA4(void);
 extern void fn_80145334(void);
 extern void fn_801539E0(void);
@@ -25,7 +25,7 @@ extern void fn_803B5950(void);
 extern void fn_803CC6B4(void);
 extern void fn_8046ECDC(void);
 extern void fn_8047F580(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -136,7 +136,7 @@ lbl_fn_8039C7F0_000000C0:
 lbl_fn_8039C7F0_000000D4:
     cmpwi r29, 0x3
     bne lbl_fn_8039C7F0_000000F0
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r3, r0, r3
@@ -184,7 +184,7 @@ lbl_fn_8039C7F0_00000158:
 lbl_fn_8039C7F0_0000016C:
     cmpwi r29, 0x3
     bne lbl_fn_8039C7F0_00000188
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r3, r0, r3
@@ -233,7 +233,7 @@ lbl_fn_8039C7F0_000001F4:
 lbl_fn_8039C7F0_00000208:
     cmpwi r29, 0x3
     bne lbl_fn_8039C7F0_00000224
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r3, r0, r3
@@ -283,7 +283,7 @@ lbl_fn_8039C7F0_00000294:
 lbl_fn_8039C7F0_000002A8:
     cmpwi r29, 0x3
     bne lbl_fn_8039C7F0_000002C4
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r3, r0, r3
@@ -332,7 +332,7 @@ lbl_fn_8039C7F0_00000330:
 lbl_fn_8039C7F0_00000344:
     cmpwi r29, 0x3
     bne lbl_fn_8039C7F0_00000360
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r3, r0, r3
@@ -382,7 +382,7 @@ lbl_fn_8039C7F0_000003D0:
 lbl_fn_8039C7F0_000003E4:
     cmpwi r29, 0x3
     bne lbl_fn_8039C7F0_00000400
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r3, r0, r3
@@ -1575,7 +1575,7 @@ lbl_fn_8039DB2C_000013CC:
     bl fn_803935FC
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, 0x10(r29)
     li r0, 0x0
     stw r3, 0xb4(r31)

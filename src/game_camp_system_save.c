@@ -20,8 +20,8 @@ extern void fn_803EC16C(void);
 extern void fn_803EC374(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
 
@@ -394,8 +394,8 @@ lbl_fn_803C95EC_00000364:
     addi r4, r4, 0x39f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803C95EC_000003A4:
     lis r3, 0x38e
     addi r0, r3, 0x38e3
@@ -445,8 +445,8 @@ lbl_fn_803C95EC_000003FC:
     addi r4, r4, 0x39f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803C95EC_00000464:
     lis r3, 0x38e
     addi r0, r3, 0x38e3
@@ -501,8 +501,8 @@ lbl_fn_803C95EC_000004F8:
     addi r4, r4, 0x39f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803C95EC_0000052C:
     mulli r3, r28, 0x18
     bl mem_free
@@ -515,8 +515,8 @@ lbl_fn_803C95EC_0000052C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078BC80@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803C95EC_00000560:
     lwz r0, 0x24(r1)
     stw r31, 0x20(r1)
@@ -648,8 +648,8 @@ lbl_fn_803C99A8_0000070C:
     addi r4, r4, 0x39f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803C99A8_00000744:
     li r5, 0x0
     addi r4, r29, 0x8
@@ -675,8 +675,8 @@ lbl_fn_803C99A8_00000744:
     addi r4, r4, 0x39f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803C99A8_000007AC:
     lis r3, 0x71c
     addi r0, r3, 0x71c7
@@ -731,8 +731,8 @@ lbl_fn_803C99A8_00000840:
     addi r4, r4, 0x39f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803C99A8_00000874:
     mulli r3, r28, 0xc
     bl mem_free
@@ -745,8 +745,8 @@ lbl_fn_803C99A8_00000874:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078BC9C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803C99A8_000008A8:
     lwz r3, 0x18(r1)
     li r0, 0xc

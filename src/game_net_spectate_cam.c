@@ -26,7 +26,7 @@ extern void fn_800A55AC(void);
 extern void fn_800A55D4(void);
 extern void fn_800C16B4(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB480(void);
 extern void fn_800CB538(void);
 extern void fn_800CF45C(void);
@@ -214,7 +214,7 @@ lbl_fn_80533A2C_00000154:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80533A2C_00000180:
     lwz r0, 0x2b8(r28)
     subf r3, r30, r0
@@ -697,7 +697,7 @@ lbl_spectateCamera_update_00000810:
     bl fn_800C31F4
     addi r3, r1, 0x3c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_spectateCamera_update_000008DC
 lbl_spectateCamera_update_000008A4:
     lwz r0, 0x598(r30)
@@ -1294,7 +1294,7 @@ lbl_spectateCamera_update_00001194:
     bl fn_800C31F4
     addi r3, r1, 0x38
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_spectateCamera_update_000011B8:
     lwz r3, 0x2c0(r28)
     lis r0, 0x4330
@@ -1439,7 +1439,7 @@ lbl_spectateCamera_update_00001378:
     bl fn_800C31F4
     addi r3, r1, 0x34
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_000013D8:
     mr r3, r28
@@ -1454,7 +1454,7 @@ lbl_spectateCamera_update_000013D8:
     bl fn_800C31F4
     addi r3, r1, 0x30
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001410:
     lwz r3, lbl_8087EF70
@@ -1480,7 +1480,7 @@ lbl_spectateCamera_update_00001438:
     bl fn_800C31F4
     addi r3, r1, 0x2c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_spectateCamera_update_00002308
     lwz r3, 0x4c(r28)
     addi r4, r1, 0x68
@@ -1793,7 +1793,7 @@ lbl_spectateCamera_update_000018D0:
     bl fn_800C31F4
     addi r3, r1, 0x28
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001904:
     lwz r3, lbl_8087EF70
@@ -1814,7 +1814,7 @@ lbl_spectateCamera_update_00001904:
     bl fn_800C31F4
     addi r3, r1, 0x24
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001954:
     lwz r0, 0x2b8(r28)
@@ -1921,7 +1921,7 @@ lbl_spectateCamera_update_00001A58:
     bl fn_800C31F4
     addi r3, r1, 0x20
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_00001AE8:
     lwz r3, lbl_8087EF70
@@ -1942,7 +1942,7 @@ lbl_spectateCamera_update_00001AE8:
     bl fn_800C31F4
     addi r3, r1, 0x1c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087F06C
     cmpwi r3, 0x0
@@ -2278,7 +2278,7 @@ lbl_spectateCamera_update_00001FB4:
     bl fn_800C31F4
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_spectateCamera_update_00001FF4:
     mr r3, r28
     li r4, 0x18
@@ -2329,7 +2329,7 @@ lbl_spectateCamera_update_00002088:
     bl fn_800C31F4
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_spectateCamera_update_00002308
 lbl_spectateCamera_update_000020B0:
     mr r3, r28
@@ -2344,7 +2344,7 @@ lbl_spectateCamera_update_000020B0:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_spectateCamera_update_00002308
     lwz r3, lbl_8087F9A0
     cmpwi r3, 0x0

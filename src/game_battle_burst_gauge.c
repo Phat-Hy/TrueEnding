@@ -38,7 +38,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
@@ -1116,7 +1116,7 @@ lbl_fn_803FFD10_00000E9C:
     lfs f0, lbl_808860C0
     stfs f1, 0x100(r27)
     stfs f0, 0x104(r27)
-    bl fn_80680CF8
+    bl rand
     lis r25, 0x6666
     lfs f0, lbl_808860C0
     addi r0, r25, 0x6667
@@ -1139,7 +1139,7 @@ lbl_fn_803FFD10_00000E9C:
     lfd f0, 0x8(r1)
     fsubs f0, f0, f1
     stfs f0, 0x108(r27)
-    bl fn_80680CF8
+    bl rand
     addi r0, r25, 0x6667
     li r4, 0x2
     mulhw r5, r0, r3

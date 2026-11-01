@@ -17,7 +17,7 @@ extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_80097A20(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
@@ -54,8 +54,8 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 
 /* External data declarations */
 extern u8 lbl_8075E324[];
@@ -161,7 +161,7 @@ asm void fn_8054770C(void)
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8054770C_000000A8:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
@@ -863,8 +863,8 @@ lbl_fn_80547EA4_00000938:
     addi r4, r4, lbl_8075E3C8@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80547EA4_00000994:
     mulli r3, r28, 0xc
     bl mem_free
@@ -877,8 +877,8 @@ lbl_fn_80547EA4_00000994:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80788D00@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80547EA4_000009C8:
     lwz r0, 0xc(r1)
     addi r5, r1, 0x14
@@ -1361,8 +1361,8 @@ asm void fn_80548760(void)
     addi r4, r4, lbl_8075E3C8@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80548760_000010C0:
     mulli r3, r27, 0xc
     bl mem_free
@@ -1375,8 +1375,8 @@ lbl_fn_80548760_000010C0:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80788D00@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80548760_000010F4:
     lwz r0, 0x3c(r1)
     addi r4, r1, 0x2c
@@ -2438,7 +2438,7 @@ lbl_fn_80548E74_00001FE0:
     bl fn_800C31F4
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80548E74_00002050
 lbl_fn_80548E74_00002018:
     lwz r0, 0x20(r21)
@@ -2454,7 +2454,7 @@ lbl_fn_80548E74_00002018:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80548E74_00002050:
     lbz r0, 0x1(r21)
     extsb r0, r0
@@ -2478,7 +2478,7 @@ lbl_fn_80548E74_00002050:
     bl fn_800C31F4
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80548E74_000020AC:
     lfs f7, 0x530(r27)
     addi r3, r1, 0x54

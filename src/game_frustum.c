@@ -9,7 +9,7 @@ extern void _savegpr_23(void);
 extern void fn_8008B140(void);
 extern void fn_800902C0(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void atn_LH_Texture_release(void);
 extern void fn_800D5908(void);
@@ -1831,7 +1831,7 @@ lbl_fn_800F3EF4_0000172C:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_800F3EF4_00001808
 lbl_fn_800F3EF4_00001804:
     stb r24, -0x2ae4(r25)

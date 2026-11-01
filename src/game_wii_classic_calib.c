@@ -47,7 +47,7 @@ extern void fn_80541214(void);
 extern void fn_80541524(void);
 extern void fn_80564344(void);
 extern void fn_80565068(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
@@ -1339,7 +1339,7 @@ lbl_fn_805634D4_00000EB8:
     add r3, r3, r0
     subi r24, r3, 0x2c80
 lbl_fn_805634D4_00000EFC:
-    bl fn_80680CF8
+    bl rand
     slwi r0, r3, 26
     srwi r3, r3, 31
     subf r0, r3, r0

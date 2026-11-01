@@ -11,7 +11,7 @@ extern void _savegpr_25(void);
 extern void fn_80043BF4(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
 extern void fn_800E2A24(void);
@@ -60,7 +60,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_8068A850(void);
 
@@ -1080,7 +1080,7 @@ lbl_fn_800FDF14_00000DE8:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F490
     cmpwi r3, 0x0
     beq lbl_fn_800FDF14_00000E2C
@@ -1216,7 +1216,7 @@ lbl_fn_800FDF14_00000F9C:
     fdivs f3, f4, f3
     fadds f30, f30, f3
     fadds f30, f30, f0
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lfd f4, 0x8e8(r31)
     addi r0, r4, 0x749f

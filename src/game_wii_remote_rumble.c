@@ -64,8 +64,8 @@ extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 
 /* External data declarations */
@@ -1766,8 +1766,8 @@ lbl_fn_80552464_000015F4:
     addi r4, r4, lbl_8075EB60@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80552464_00001648:
     mulli r3, r25, 0xc
     bl mem_free
@@ -1780,8 +1780,8 @@ lbl_fn_80552464_00001648:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80788D00@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80552464_0000167C:
     lwz r0, 0x48(r1)
     addi r5, r1, 0x50
@@ -2330,8 +2330,8 @@ lbl_fn_80552464_00001DE0:
     addi r4, r4, lbl_8075EB60@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80552464_00001E34:
     mulli r3, r25, 0xc
     bl mem_free
@@ -2344,8 +2344,8 @@ lbl_fn_80552464_00001E34:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80788D00@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80552464_00001E68:
     lwz r0, 0xc(r1)
     addi r5, r1, 0x14

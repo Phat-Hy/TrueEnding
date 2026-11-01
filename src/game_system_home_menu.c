@@ -38,7 +38,7 @@ extern void fn_80089ACC(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31EC(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB480(void);
 extern void fn_800CB538(void);
 extern void fn_800CB58C(void);
@@ -448,7 +448,7 @@ asm void fn_8035E244(void)
     beq lbl_fn_8035E244_00000474
     li r4, -0x1
     addi r3, r3, 0x58
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     cmpwi r31, 0x0
     ble lbl_fn_8035E244_00000474
     mr r3, r30
@@ -576,7 +576,7 @@ lbl_fn_8035E314_000005D8:
 lbl_fn_8035E314_0000060C:
     addi r3, r30, 0x194
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lis r4, fn_8004ADF4@ha
     addi r3, r30, 0x8c
     addi r4, r4, fn_8004ADF4@l

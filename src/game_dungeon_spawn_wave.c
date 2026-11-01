@@ -23,7 +23,7 @@ extern void fn_8009385C(void);
 extern void fn_800C93D4(void);
 extern void fn_800CA7D4(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
 extern void fn_800CB4EC(void);
 extern void fn_800CB58C(void);
@@ -178,7 +178,7 @@ asm void fn_803EAA7C(void)
     beq lbl_fn_803EAA7C_00000060
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803EAA7C_0000017C
 lbl_fn_803EAA7C_00000060:
     lwz r3, lbl_8087F490
@@ -202,14 +202,14 @@ lbl_fn_803EAA7C_0000009C:
     bne lbl_fn_803EAA7C_000000B4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803EAA7C_0000017C
 lbl_fn_803EAA7C_000000B4:
     cmpwi r28, 0x0
     bne lbl_fn_803EAA7C_000000CC
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803EAA7C_0000017C
 lbl_fn_803EAA7C_000000CC:
     lwz r31, 0x7c(r28)
@@ -223,7 +223,7 @@ lbl_fn_803EAA7C_000000CC:
 lbl_fn_803EAA7C_000000EC:
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803EAA7C_0000017C
 lbl_fn_803EAA7C_000000FC:
     lwz r3, lbl_8087F430
@@ -251,7 +251,7 @@ lbl_fn_803EAA7C_00000140:
     bne lbl_fn_803EAA7C_00000158
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803EAA7C_0000017C
 lbl_fn_803EAA7C_00000158:
     fmr f1, f31
@@ -262,7 +262,7 @@ lbl_fn_803EAA7C_00000158:
     addi r3, r1, 0x8
     li r4, -0x1
     stw r28, 0x2658(r5)
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803EAA7C_0000017C:
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0

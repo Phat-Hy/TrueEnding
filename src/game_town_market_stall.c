@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void fn_800897D8(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
@@ -1809,7 +1809,7 @@ asm void fn_803CF938(void)
     bl fn_800C31F4
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, 0x265c(r31)
     addi r0, r3, 0x1
     stw r0, 0x265c(r31)
@@ -1963,7 +1963,7 @@ lbl_fn_803CF938_0000198C:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r0, 0x2660(r31)
     andc r0, r0, r28
     stw r0, 0x2660(r31)

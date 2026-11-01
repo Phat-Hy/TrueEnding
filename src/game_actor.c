@@ -54,9 +54,9 @@ extern void fn_80547E48(void);
 extern void fn_8054A690(void);
 extern void fn_805B3518(void);
 extern void fn_805B3658(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void memmove(void);
@@ -205,8 +205,8 @@ asm void fn_80013DC4(void)
     addi r4, r4, 0x82
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80013DC4_000000B0:
     lwz r0, 0x0(r31)
     srwi. r29, r0, 31
@@ -251,8 +251,8 @@ lbl_fn_80013DC4_00000118:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775AC0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
     b lbl_fn_80013DC4_00000190
 lbl_fn_80013DC4_00000154:
     mr r3, r30
@@ -266,8 +266,8 @@ lbl_fn_80013DC4_00000154:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775AC0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80013DC4_00000188:
     cmpwi r27, 0x0
     beq lbl_fn_80013DC4_00000204
@@ -347,8 +347,8 @@ lbl_fn_80013F78_00000268:
     addi r4, r4, 0xa5
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80013F78_00000294:
     lwz r0, 0x8(r1)
     subf r3, r21, r28
@@ -376,8 +376,8 @@ lbl_fn_80013F78_000002D8:
     addi r4, r4, 0xc0
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80013F78_000002FC:
     add r30, r25, r30
     add r0, r21, r26
@@ -406,8 +406,8 @@ lbl_fn_80013F78_0000032C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775AC0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80013F78_00000368:
     cmpwi r21, 0x0
     beq lbl_fn_80013F78_00000380
@@ -3371,7 +3371,7 @@ lbl_fn_80016A94_00002DD8:
     lfs f2, 0x53c(r31)
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x1c(r1)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -3601,7 +3601,7 @@ lbl_fn_80016C10_00003134:
     stw r0, 0x8(r1)
     b lbl_fn_80016C10_000031D0
 lbl_fn_80016C10_00003148:
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r28
     lwz r4, 0x74(r30)
     lwz r5, 0xc(r1)

@@ -21,7 +21,7 @@ extern void fn_8009EE30(void);
 extern void fn_800C16B4(void);
 extern void fn_800C1990(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC288(void);
 extern void fn_800EF73C(void);
@@ -42,7 +42,7 @@ extern void fn_80499B9C(void);
 extern void fn_80499C48(void);
 extern void fn_8049D68C(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_80695720(void);
@@ -658,7 +658,7 @@ lbl_fn_8041D4B4_00000714:
     li r31, -0x1
     cmpwi r3, 0x2
     bne lbl_fn_8041D4B4_0000077C
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x2aab
     subi r0, r4, 0x5555
     mulhw r4, r0, r3
@@ -686,7 +686,7 @@ lbl_fn_8041D4B4_00000788:
     stfs f3, 0x3c(r1)
     stfs f0, 0x38(r1)
     stfs f5, 0x40(r1)
-    bl fn_80680CF8
+    bl rand
     lis r27, 0x4178
     lis r29, 0x4330
     addi r0, r27, 0x749f
@@ -712,7 +712,7 @@ lbl_fn_8041D4B4_00000788:
     fmsubs f2, f3, f4, f2
     fadds f0, f0, f2
     stfs f0, 0x38(r1)
-    bl fn_80680CF8
+    bl rand
     addi r0, r27, 0x749f
     stw r29, 0x60(r1)
     mulhw r0, r0, r3
@@ -735,7 +735,7 @@ lbl_fn_8041D4B4_00000788:
     fmsubs f2, f3, f4, f2
     fadds f0, f0, f2
     stfs f0, 0x3c(r1)
-    bl fn_80680CF8
+    bl rand
     addi r0, r27, 0x749f
     stw r29, 0x68(r1)
     mulhw r0, r0, r3
@@ -792,7 +792,7 @@ lbl_fn_8041D4B4_00000788:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lfs f2, 0x40(r1)
     addi r3, r1, 0x18
     lfs f0, 0x38(r1)
@@ -859,7 +859,7 @@ lbl_fn_8041D4B4_00000A44:
     cmpwi r27, 0x0
     stw r0, 0x22c(r30)
     ble lbl_fn_8041D4B4_00000A8C
-    bl fn_80680CF8
+    bl rand
     divw r5, r3, r27
     srwi r4, r27, 31
     lwz r0, 0x22c(r30)

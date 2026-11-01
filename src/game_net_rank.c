@@ -43,10 +43,10 @@ extern void fn_801FEA9C(void);
 extern void fn_801FECE0(void);
 extern void fn_801FED24(void);
 extern void fn_801FEDBC(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_80686A48(void);
 extern void fn_80686B24(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1096,8 +1096,8 @@ lbl_fn_801F19D0_00000D0C:
     addi r4, r4, 0x86
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801F19D0_00000D44:
     li r5, 0x0
     addi r4, r29, 0x8
@@ -1123,8 +1123,8 @@ lbl_fn_801F19D0_00000D44:
     addi r4, r4, 0x86
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801F19D0_00000DAC:
     lis r3, 0x555
     addi r0, r3, 0x5555
@@ -1179,8 +1179,8 @@ lbl_fn_801F19D0_00000E40:
     addi r4, r4, 0x86
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801F19D0_00000E74:
     slwi r3, r28, 4
     bl mem_free
@@ -1193,8 +1193,8 @@ lbl_fn_801F19D0_00000E74:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80782B48@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801F19D0_00000EA8:
     lwz r3, 0x30(r1)
     li r0, 0x0

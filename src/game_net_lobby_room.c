@@ -58,7 +58,7 @@ extern void fn_80490EA0(void);
 extern void fn_804962B0(void);
 extern void fn_804963A4(void);
 extern void PSMTXMultVecArray(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void strstr(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -228,7 +228,7 @@ lbl_fn_80499E14_000001B8:
     lwz r30, 0x90(r3)
     cmpwi r30, 0x0
     ble lbl_fn_80499E14_000001E0
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r4, r0, r3

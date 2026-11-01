@@ -14,7 +14,7 @@ extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_8011BF3C(void);
 extern void fn_80126214(void);
@@ -411,7 +411,7 @@ lbl_fn_80460B48_000003C0:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80460B48_00000448:
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)

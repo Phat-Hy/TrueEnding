@@ -13,7 +13,7 @@ extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800FFE68(void);
 extern void fn_801055A8(void);
 extern void fn_80232B7C(void);
@@ -1520,7 +1520,7 @@ lbl_fn_80101524_00001440:
     bl fn_800C344C
     addi r3, r1, 0x30
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80101524_0000153C
 lbl_fn_80101524_0000148C:
     rlwinm. r0, r31, 0, 9, 9
@@ -1536,7 +1536,7 @@ lbl_fn_80101524_0000148C:
     bl fn_800C344C
     addi r3, r1, 0x2c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80101524_0000153C
 lbl_fn_80101524_000014C8:
     rlwinm. r0, r31, 0, 16, 16
@@ -1552,7 +1552,7 @@ lbl_fn_80101524_000014C8:
     bl fn_800C344C
     addi r3, r1, 0x28
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80101524_0000153C
 lbl_fn_80101524_00001504:
     cmpwi r31, 0x0
@@ -1568,7 +1568,7 @@ lbl_fn_80101524_00001504:
     bl fn_800C344C
     addi r3, r1, 0x24
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80101524_0000153C:
     rlwinm r0, r30, 0, 9, 9
     rlwimi. r0, r30, 0, 31, 31
@@ -1584,7 +1584,7 @@ lbl_fn_80101524_0000153C:
     bl fn_800C344C
     addi r3, r1, 0x20
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80101524_000015F0
 lbl_fn_80101524_0000157C:
     rlwinm. r0, r30, 0, 25, 25
@@ -1600,7 +1600,7 @@ lbl_fn_80101524_0000157C:
     bl fn_800C344C
     addi r3, r1, 0x1c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80101524_000015F0
 lbl_fn_80101524_000015B8:
     cmpwi r30, 0x0
@@ -1616,7 +1616,7 @@ lbl_fn_80101524_000015B8:
     bl fn_800C344C
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80101524_000015F0:
     addi r11, r1, 0x80
     bl _restgpr_26

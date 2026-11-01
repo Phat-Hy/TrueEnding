@@ -53,7 +53,7 @@ extern void fn_80617880(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
 extern void GXSetZCompLoc(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 
@@ -279,7 +279,7 @@ asm void fn_800B257C(void)
     mr r30, r4
     lfs f30, 0x30(r3)
     mr r31, r5
-    bl fn_80680CF8
+    bl rand
     lis r28, 0x4178
     lis r27, lbl_80732D28@ha
     addi r0, r28, 0x749f
@@ -301,7 +301,7 @@ asm void fn_800B257C(void)
     fsubs f4, f4, f5
     fdivs f3, f4, f3
     fmadds f30, f0, f3, f30
-    bl fn_80680CF8
+    bl rand
     addi r0, r28, 0x749f
     lfs f7, lbl_80880F04
     mulhw r0, r0, r3
@@ -387,7 +387,7 @@ lbl_fn_800B257C_00000384:
     stfs f28, 0x10(r1)
     lfs f29, 0x50(r29)
     lfs f28, 0x4c(r29)
-    bl fn_80680CF8
+    bl rand
     lis r27, 0x4178
     lis r28, lbl_80732D28@ha
     addi r0, r27, 0x749f
@@ -412,7 +412,7 @@ lbl_fn_800B257C_00000384:
     lfs f3, 0x5c(r29)
     fmuls f29, f4, f3
     fmuls f28, f0, f3
-    bl fn_80680CF8
+    bl rand
     addi r0, r27, 0x749f
     lfd f6, lbl_80732D28@l(r28)
     mulhw r0, r0, r3
@@ -453,7 +453,7 @@ lbl_fn_800B257C_0000048C:
     lfs f3, 0x4(r30)
     lfs f0, 0x10(r30)
     fsubs f28, f3, f0
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, lbl_80732D28@ha
     addi r0, r5, 0x749f

@@ -6,7 +6,7 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void fn_8004ECC0(void);
 extern void fn_800BFAC8(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
 extern void world_getGlobalFlag(void);
@@ -699,7 +699,7 @@ lbl_fn_803B0808_000008CC:
     bl fn_803935FC
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803B0808_00000E68
     lwz r3, lbl_8087F430
     lwz r0, 0x868(r3)
@@ -914,7 +914,7 @@ lbl_fn_803B0808_00000978:
     bl fn_803935FC
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803B0808_00000C74:
     cmpwi r20, 0x0
     bne lbl_fn_803B0808_00000E68
@@ -1787,7 +1787,7 @@ lbl_fn_803B17C4_00001888:
     bl fn_803935FC
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803B17C4_00001E24
     lwz r3, lbl_8087F430
     lwz r0, 0x868(r3)
@@ -2002,7 +2002,7 @@ lbl_fn_803B17C4_00001934:
     bl fn_803935FC
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803B17C4_00001C30:
     cmpwi r20, 0x0
     bne lbl_fn_803B17C4_00001E24

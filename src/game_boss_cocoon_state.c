@@ -11,7 +11,7 @@ extern void mem_alloc(void);
 extern void fn_800846FC(void);
 extern void mem_getAllocSize(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -29,7 +29,7 @@ extern void fn_804439FC(void);
 extern void fn_8044F434(void);
 extern void fn_8044F96C(void);
 extern void fn_80450590(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_80695720(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -329,14 +329,14 @@ lbl_fn_8044D208_00000298:
     beq lbl_fn_8044D208_0000034C
     cmpwi r29, 0x2
     bne lbl_fn_8044D208_0000034C
-    bl fn_80680CF8
+    bl rand
     slwi r0, r3, 29
     srwi r3, r3, 31
     subf r0, r3, r0
     rotlwi r0, r0, 3
     add r0, r0, r3
     mulli r27, r0, 0x14
-    bl fn_80680CF8
+    bl rand
     lis r26, 0x6666
     addi r0, r26, 0x6667
     mulhw r0, r0, r3
@@ -346,14 +346,14 @@ lbl_fn_8044D208_00000298:
     mulli r0, r0, 0xa
     subf r0, r0, r3
     add r30, r0, r27
-    bl fn_80680CF8
+    bl rand
     slwi r0, r3, 29
     srwi r3, r3, 31
     subf r0, r3, r0
     rotlwi r0, r0, 3
     add r0, r0, r3
     mulli r27, r0, 0x14
-    bl fn_80680CF8
+    bl rand
     addi r0, r26, 0x6667
     slwi r4, r31, 6
     mulhw r5, r0, r3
@@ -1948,7 +1948,7 @@ lbl_fn_8044E644_0000179C:
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087EFE8
     li r0, 0x0
     stw r0, 0x34d8(r3)

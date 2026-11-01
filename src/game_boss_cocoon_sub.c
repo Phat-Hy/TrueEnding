@@ -8,7 +8,7 @@ extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_800F8C6C(void);
 extern void fn_800FAB80(void);
@@ -887,7 +887,7 @@ lbl_fn_8045D3A4_00000ADC:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8045D3A4_00000BA0:
     lfs f31, 0x2e4(r30)
     lfs f0, lbl_80886CEC

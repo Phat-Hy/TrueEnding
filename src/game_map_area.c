@@ -42,10 +42,10 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
+extern void printf(void);
+extern void rand(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern void fn_80695AD0(void);
@@ -1038,7 +1038,7 @@ lbl_fn_8017BDDC_00000C90:
     psq_l f1, 0x0(r3), 0, 0
     psq_st f1, 0x24(r29), 0, 0
     stfs f2, 0x2c(r29)
-    bl fn_80680CF8
+    bl rand
     lis r30, 0x4178
     lis r31, lbl_80737808@ha
     addi r0, r30, 0x749f
@@ -1063,7 +1063,7 @@ lbl_fn_8017BDDC_00000C90:
     fnmsubs f1, f3, f4, f0
     bl PSMTXRotRad
     addi r28, r1, 0x1f8
-    bl fn_80680CF8
+    bl rand
     addi r0, r30, 0x749f
     lfs f0, lbl_8088196C
     mulhw r0, r0, r3
@@ -1125,7 +1125,7 @@ lbl_fn_8017BDDC_00000C90:
     stfs f2, 0x100(r1)
     psq_st f1, 0x0(r29), 0, 0
     stfs f2, 0x8(r29)
-    bl fn_80680CF8
+    bl rand
     addi r0, r30, 0x749f
     lfs f0, lbl_80881B68
     mulhw r0, r0, r3
@@ -1148,7 +1148,7 @@ lbl_fn_8017BDDC_00000C90:
     fnmsubs f1, f3, f4, f0
     bl PSMTXRotRad
     addi r28, r1, 0x1c8
-    bl fn_80680CF8
+    bl rand
     addi r0, r30, 0x749f
     lfs f0, lbl_8088196C
     mulhw r0, r0, r3
@@ -1210,7 +1210,7 @@ lbl_fn_8017BDDC_00000C90:
     stfs f2, 0xc4(r1)
     psq_st f1, 0xc(r29), 0, 0
     stfs f2, 0x14(r29)
-    bl fn_80680CF8
+    bl rand
     addi r0, r30, 0x749f
     lfs f0, lbl_80881B6C
     mulhw r0, r0, r3
@@ -1233,7 +1233,7 @@ lbl_fn_8017BDDC_00000C90:
     fnmsubs f1, f3, f4, f0
     bl PSMTXRotRad
     addi r28, r1, 0x198
-    bl fn_80680CF8
+    bl rand
     addi r0, r30, 0x749f
     lfs f0, lbl_8088196C
     mulhw r0, r0, r3
@@ -1925,8 +1925,8 @@ lbl_fn_8017CB9C_00001960:
     addi r4, r28, lbl_807380F8@l
     addi r3, r22, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8017CB9C_00001984:
     addi r0, r23, 0x5555
     cmplw r25, r0
@@ -1968,8 +1968,8 @@ lbl_fn_8017CB9C_000019D4:
     addi r4, r28, lbl_807380F8@l
     addi r3, r22, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8017CB9C_00001A24:
     addi r0, r23, 0x5555
     cmplw r25, r0
@@ -2015,8 +2015,8 @@ lbl_fn_8017CB9C_00001AA8:
     addi r4, r28, lbl_807380F8@l
     addi r3, r22, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8017CB9C_00001AC8:
     slwi r3, r25, 2
     bl mem_free
@@ -2026,8 +2026,8 @@ lbl_fn_8017CB9C_00001AC8:
     addi r3, r22, 0xa0
     addi r4, r27, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8017CB9C_00001AF0:
     lwz r0, 0x18(r1)
     stw r17, 0x14(r1)

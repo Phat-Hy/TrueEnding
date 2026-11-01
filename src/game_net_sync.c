@@ -47,9 +47,9 @@ extern void fn_803EAC3C(void);
 extern void fn_80547C2C(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern void fn_80695720(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -208,8 +208,8 @@ lbl_fn_801EB188_00000138:
     addi r4, r19, 0x85
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801EB188_0000015C:
     addi r0, r21, 0x5555
     cmplw r24, r0
@@ -250,8 +250,8 @@ lbl_fn_801EB188_000001AC:
     addi r4, r19, 0x85
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801EB188_000001F8:
     addi r0, r21, 0x5555
     cmplw r24, r0
@@ -297,8 +297,8 @@ lbl_fn_801EB188_0000027C:
     addi r4, r19, 0x85
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801EB188_0000029C:
     slwi r3, r15, 2
     bl mem_free
@@ -308,8 +308,8 @@ lbl_fn_801EB188_0000029C:
     addi r3, r20, 0xa0
     addi r4, r26, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801EB188_000002C4:
     lwz r0, 0x60(r1)
     lwz r3, 0x6c(r1)
@@ -372,7 +372,7 @@ lbl_fn_801EB188_00000398:
     lwz r15, 0x60(r1)
     cmpwi r15, 0x0
     beq lbl_fn_801EB188_000005F8
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r15
     lwz r4, 0x7c(r28)
     lwz r5, 0x5c(r1)
@@ -415,7 +415,7 @@ lbl_fn_801EB188_00000398:
     lwz r3, 0x64(r28)
     addi r0, r3, 0x1
     stw r0, 0x64(r28)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lfs f2, lbl_80882B70
     addi r4, r4, 0x749f
@@ -872,7 +872,7 @@ lbl_fn_801EB9B0_00000A9C:
     lwz r0, 0x1630(r19)
     add r3, r0, r17
     stw r29, 0x30(r3)
-    bl fn_80680CF8
+    bl rand
     mulhw r0, r30, r3
     lwz r4, 0x1630(r19)
     stw r16, 0x40(r1)

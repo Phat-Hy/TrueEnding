@@ -11,7 +11,7 @@ extern void fn_800185B4(void);
 extern void fn_80018608(void);
 extern void fn_8003E918(void);
 extern void fn_800A55D4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void fn_8012D180(void);
 extern void fn_8014DEE4(void);
@@ -39,7 +39,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 
 /* External data declarations */
 extern u8 jumptable_80797618[];
@@ -763,7 +763,7 @@ asm void fn_805AA018(void)
 lbl_fn_805AA018_000009B4:
     cmpwi r30, 0x9
     bne lbl_fn_805AA018_000009EC
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -797,7 +797,7 @@ lbl_fn_805AA018_00000A08:
 lbl_fn_805AA018_00000A30:
     cmpwi r30, 0x9
     bne lbl_fn_805AA018_00000A68
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -824,7 +824,7 @@ lbl_fn_805AA018_00000A68:
 lbl_fn_805AA018_00000A94:
     cmpwi r30, 0x9
     bne lbl_fn_805AA018_00000ACC
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -858,7 +858,7 @@ lbl_fn_805AA018_00000AE8:
 lbl_fn_805AA018_00000B10:
     cmpwi r30, 0x9
     bne lbl_fn_805AA018_00000B48
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -885,7 +885,7 @@ lbl_fn_805AA018_00000B64:
     b lbl_fn_805AA018_00000CB0
     cmpwi r30, 0x9
     bne lbl_fn_805AA018_00000BAC
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -904,7 +904,7 @@ lbl_fn_805AA018_00000BAC:
     b lbl_fn_805AA018_00000CB0
     cmpwi r30, 0x9
     bne lbl_fn_805AA018_00000BF4
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1883,7 +1883,7 @@ lbl_fn_805AA950_00001924:
     bl fn_805A70D8
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_805AA950_00001AC8
 lbl_fn_805AA950_00001984:
     lwz r0, 0xa88(r28)
@@ -1965,7 +1965,7 @@ lbl_fn_805AA950_00001A6C:
     bl fn_805A70D8
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_805AA950_00001AC8
 lbl_fn_805AA950_00001AAC:
     addi r24, r24, 0x1

@@ -8,7 +8,7 @@ extern void _savegpr_18(void);
 extern void _savegpr_23(void);
 extern void mem_alloc(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
 extern void fn_800DC1DC(void);
 extern void fn_800DD3FC(void);
@@ -17,7 +17,7 @@ extern void fn_803E6BF0(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_806846C4(void);
 extern void fn_80686A48(void);
 
@@ -737,7 +737,7 @@ lbl_fn_8054D798_00000688:
     bl fn_800CB688
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8054D798_000006A0:
     rlwinm r0, r24, 0, 22, 22
     cmplwi r0, 0x200
@@ -1077,7 +1077,7 @@ lbl_fn_8054E100_00000B28:
     stfs f24, 0x14(r1)
     stfs f25, 0x18(r1)
     stfs f25, 0x1c(r1)
-    bl fn_80680CF8
+    bl rand
     addi r0, r24, 0x749f
     stw r25, 0x50(r1)
     mulhw r0, r0, r3

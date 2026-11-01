@@ -42,7 +42,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void fn_805F9D20(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strncmp(void);
 extern void fn_806952C4(void);
 extern void fn_80695720(void);
@@ -90,11 +90,11 @@ void fn_80097750(void);
 void fn_800977F0(void);
 void fn_800979E8(void);
 void fn_80097A20(void);
-void fn_80097A88(void);
+void atn_Anim_applyLayerTransform(void);
 void fn_80097A9C(void);
 void fn_80097B34(void);
 void fn_80097B74(void);
-void fn_80097BF4(void);
+void vec3_clear(void);
 void atn_Anim_setLayerAnimation(void);
 void fn_80097CCC(void);
 void fn_80097D40(void);
@@ -422,7 +422,7 @@ lbl_fn_8009757C_0000041C:
     psq_st f1, 0x0(r31), 0, 0
     lfs f26, 0x3b4(r29)
     lfs f27, 0x3b8(r29)
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x4c(r1)
     fsubs f5, f26, f27
@@ -440,7 +440,7 @@ lbl_fn_8009757C_0000041C:
     stfs f4, 0x8(r1)
     stfs f3, 0xc(r1)
     stfs f0, 0x10(r1)
-    bl fn_80680CF8
+    bl rand
     addi r0, r27, 0x749f
     stw r26, 0x50(r1)
     mulhw r0, r0, r3
@@ -651,11 +651,11 @@ lbl_fn_800977F0_00000760:
     la r6, lbl_8087D7AC
     li r7, 0x0
     bl fn_800846FC
-    lis r4, fn_80097BF4@ha
+    lis r4, vec3_clear@ha
     lis r5, fn_80097180@ha
     mr r7, r30
     li r6, 0x10
-    addi r4, r4, fn_80097BF4@l
+    addi r4, r4, vec3_clear@l
     addi r5, r5, fn_80097180@l
     bl fn_80695720
     stw r3, 0x358(r31)
@@ -743,7 +743,7 @@ asm void fn_80097A20(void)
     blr
 }
 
-asm void fn_80097A88(void)
+asm void atn_Anim_applyLayerTransform(void)
 {
     nofralloc
     mulli r0, r4, 0xc
@@ -862,7 +862,7 @@ lbl_fn_80097B74_000009F0:
     blr
 }
 
-asm void fn_80097BF4(void)
+asm void vec3_clear(void)
 {
     nofralloc
     li r0, 0x0

@@ -38,7 +38,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068B100(void);
 extern void fn_80695A50(void);
 extern void fn_80695B00(void);
@@ -240,7 +240,7 @@ lbl_fn_80401E50_0000013C:
     stfs f0, 0x20(r25)
     lwz r0, 0x130(r27)
     add r25, r0, r26
-    bl fn_80680CF8
+    bl rand
     addi r0, r31, 0x749f
     fdivs f0, f20, f24
     mulhw r0, r0, r3
@@ -275,7 +275,7 @@ lbl_fn_80401E50_0000025C:
     bl PSMTXMultVec
     lwz r0, 0x130(r27)
     add r25, r0, r26
-    bl fn_80680CF8
+    bl rand
     addi r0, r31, 0x749f
     lfs f3, 0x1c(r1)
     mulhw r0, r0, r3
@@ -311,7 +311,7 @@ lbl_fn_80401E50_0000025C:
     bl PSMTXMultVec
     lwz r0, 0x130(r27)
     add r25, r0, r26
-    bl fn_80680CF8
+    bl rand
     addi r0, r31, 0x749f
     lfs f2, 0x74(r27)
     mulhw r0, r0, r3
@@ -368,7 +368,7 @@ lbl_fn_80401E50_0000025C:
     lwz r0, 0x130(r27)
     add r25, r0, r26
     fdivs f19, f22, f0
-    bl fn_80680CF8
+    bl rand
     addi r0, r31, 0x749f
     lfs f0, 0x1c(r25)
     mulhw r0, r0, r3
@@ -388,7 +388,7 @@ lbl_fn_80401E50_0000025C:
     stfs f0, 0x1c(r25)
     lwz r0, 0x130(r27)
     add r25, r0, r26
-    bl fn_80680CF8
+    bl rand
     addi r0, r31, 0x749f
     lfs f0, 0x20(r25)
     mulhw r0, r0, r3
@@ -408,7 +408,7 @@ lbl_fn_80401E50_0000025C:
     stfs f0, 0x20(r25)
     lwz r0, 0x130(r27)
     add r25, r0, r26
-    bl fn_80680CF8
+    bl rand
     addi r0, r31, 0x749f
     fdivs f0, f20, f18
     mulhw r0, r0, r3
@@ -525,7 +525,7 @@ lbl_fn_804023E0_00000638:
     ble lbl_fn_804023E0_00000784
 lbl_fn_804023E0_00000658:
     add r26, r0, r27
-    bl fn_80680CF8
+    bl rand
     addi r0, r30, 0x749f
     lfs f2, 0x1c(r26)
     mulhw r0, r0, r3
@@ -547,7 +547,7 @@ lbl_fn_804023E0_00000658:
     stfs f0, 0x4(r26)
     lwz r0, 0x130(r28)
     add r26, r0, r27
-    bl fn_80680CF8
+    bl rand
     addi r0, r30, 0x749f
     lfs f2, 0x20(r26)
     mulhw r0, r0, r3
@@ -606,7 +606,7 @@ lbl_fn_804023E0_00000784:
     bne lbl_fn_804023E0_000007D4
     lwz r0, 0x130(r28)
     add r26, r0, r27
-    bl fn_80680CF8
+    bl rand
     addi r0, r31, 0x6667
     lfs f0, 0x8(r26)
     mulhw r0, r0, r3
@@ -636,7 +636,7 @@ lbl_fn_804023E0_000007D4:
 lbl_fn_804023E0_00000800:
     lwz r0, 0x130(r28)
     add r26, r0, r27
-    bl fn_80680CF8
+    bl rand
     addi r0, r30, 0x749f
     lfs f1, 0x1c(r26)
     mulhw r0, r0, r3
@@ -656,7 +656,7 @@ lbl_fn_804023E0_00000800:
     stfs f0, 0x4(r26)
     lwz r0, 0x130(r28)
     add r26, r0, r27
-    bl fn_80680CF8
+    bl rand
     addi r0, r30, 0x749f
     lfs f1, 0x20(r26)
     mulhw r0, r0, r3
@@ -1631,7 +1631,7 @@ lbl_fn_80403308_0000158C:
     lwz r0, 0x10c(r18)
     add r3, r0, r17
     stfs f1, 0x244(r3)
-    bl fn_80680CF8
+    bl rand
     mulhw r0, r30, r3
     stw r31, 0x1e8(r1)
     srawi r0, r0, 8
@@ -1645,7 +1645,7 @@ lbl_fn_80403308_0000158C:
     fsubs f0, f0, f27
     fdivs f0, f0, f28
     fmsubs f23, f29, f0, f30
-    bl fn_80680CF8
+    bl rand
     mulhw r4, r30, r3
     lwz r0, 0x10c(r18)
     stw r31, 0x1f0(r1)

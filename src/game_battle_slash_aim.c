@@ -18,7 +18,7 @@ extern void fn_8008B140(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80094F98(void);
 extern void fn_80095F10(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800BFAC8(void);
@@ -1175,7 +1175,7 @@ lbl_fn_803F5C2C_00000F94:
     mr r4, r3
     addi r3, r31, 0xf4
     addi r5, r1, 0x8
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     b lbl_fn_803F5C2C_0000132C
 lbl_fn_803F5C2C_00000FDC:
     mr r3, r28

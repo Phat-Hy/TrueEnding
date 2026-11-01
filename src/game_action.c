@@ -22,7 +22,7 @@ extern void fn_8001C068(void);
 extern void fn_8003D084(void);
 extern void fn_8003D3F8(void);
 extern void fn_8003DBA4(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 
 /* External data declarations */
 extern u8 lbl_8072FF60[];
@@ -278,7 +278,7 @@ asm void fn_8002BBEC(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_8002BBEC_0000027C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -517,7 +517,7 @@ asm void fn_8002BF30(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_8002BF30_000005C0
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -1063,7 +1063,7 @@ asm void fn_8002C680(void)
     add r0, r4, r0
     subf. r30, r29, r0
     ble lbl_fn_8002C680_00000D28
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -1474,7 +1474,7 @@ asm void fn_8002CC58(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_8002CC58_000012E8
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -2209,7 +2209,7 @@ asm void fn_8002D648(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_8002D648_00001CD8
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -2371,7 +2371,7 @@ lbl_fn_8002D7F4_00001EB4:
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_8002D7F4_00001EF8
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -2533,7 +2533,7 @@ asm void fn_8002DA90(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_8002DA90_00002120
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -3043,7 +3043,7 @@ lbl_fn_8002E0FC_000027BC:
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_8002E0FC_00002800
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -3267,7 +3267,7 @@ asm void fn_8002E47C(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_8002E47C_00002B0C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -3875,7 +3875,7 @@ asm void fn_8002ECCC(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_8002ECCC_0000335C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -4385,7 +4385,7 @@ lbl_fn_8002F354_00003A00:
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_8002F354_00003A4C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -4524,7 +4524,7 @@ lbl_fn_8002F4A4_00003BCC:
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_8002F4A4_00003C3C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -5104,7 +5104,7 @@ lbl_fn_8002FD54_000043D4:
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_8002FD54_00004434
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3

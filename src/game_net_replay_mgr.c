@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void fn_800A555C(void);
 extern void fn_800A55AC(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
@@ -2038,7 +2038,7 @@ lbl_fn_804C4150_00001AA4:
     bl fn_80117228
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lfs f0, lbl_80887470
     stfs f0, 0xb0(r28)
 lbl_fn_804C4150_00001AC4:
@@ -2059,7 +2059,7 @@ lbl_fn_804C4150_00001AE4:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F0A8
     li r4, 0x4
     li r5, 0x1
@@ -2085,7 +2085,7 @@ lbl_fn_804C4150_00001B40:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F0A8
     li r4, 0x5
     li r5, 0x1

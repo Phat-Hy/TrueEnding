@@ -34,7 +34,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -74,7 +74,7 @@ extern void fn_80499B9C(void);
 extern void fn_80499C48(void);
 extern void fn_8049D68C(void);
 extern void fn_804A0EFC(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_80695720(void);
@@ -1824,13 +1824,13 @@ lbl_fn_804269E0_000016E0:
     mr r4, r3
     addi r3, r28, 0x4c4
     addi r5, r1, 0x8
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     b lbl_fn_804269E0_00001830
 lbl_fn_804269E0_00001734:
     mr r4, r3
     addi r3, r28, 0xf4
     addi r5, r1, 0x8
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     b lbl_fn_804269E0_00001830
 lbl_fn_804269E0_00001748:
     mr r3, r29
@@ -2057,7 +2057,7 @@ lbl_fn_80426CF8_000019F4:
 lbl_fn_80426CF8_00001A84:
     lwz r0, 0x54(r30)
     slwi r27, r0, 2
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     add r5, r30, r27
     addi r0, r4, 0x749f
@@ -2198,7 +2198,7 @@ lbl_fn_80426CF8_00001C20:
 lbl_fn_80426CF8_00001CA0:
     lwz r0, 0x54(r30)
     slwi r27, r0, 2
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     add r4, r30, r27
     addi r0, r5, 0x749f

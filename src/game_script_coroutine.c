@@ -24,7 +24,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 
@@ -364,7 +364,7 @@ lbl_fn_8024D120_00000458:
     bne lbl_fn_8024D120_0000046C
     li r28, 0x2
 lbl_fn_8024D120_0000046C:
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r28
     mullw r0, r0, r28
     subf. r0, r0, r3
@@ -634,7 +634,7 @@ lbl_fn_8024D120_00000850:
     beq lbl_fn_8024D120_0000086C
     li r28, 0x4
 lbl_fn_8024D120_0000086C:
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r28
     mullw r0, r0, r28
     subf. r0, r0, r3
@@ -785,7 +785,7 @@ lbl_fn_8024D120_00000AA0:
     beq lbl_fn_8024D120_00000AB0
     li r28, 0x2
 lbl_fn_8024D120_00000AB0:
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r28
     mullw r0, r0, r28
     subf. r0, r0, r3
@@ -1039,7 +1039,7 @@ lbl_fn_8024D120_00000E54:
     beq lbl_fn_8024D120_00000E74
     li r28, 0x5
 lbl_fn_8024D120_00000E74:
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r28
     mullw r0, r0, r28
     subf. r0, r0, r3

@@ -23,9 +23,9 @@ extern void fn_8050BA6C(void);
 extern void fn_8050DDE0(void);
 extern void fn_8050E098(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern void fn_806A8E40(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
@@ -293,8 +293,8 @@ lbl_fn_804E9C68_000002C8:
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804E9C68_000002F8:
     lwz r3, 0x5f4(r15)
     addi r4, r15, 0x5f8
@@ -317,8 +317,8 @@ lbl_fn_804E9C68_000002F8:
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804E9C68_00000354:
     addi r0, r28, 0x5ceb
     cmplw r19, r0
@@ -367,8 +367,8 @@ lbl_fn_804E9C68_000003D8:
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804E9C68_00000404:
     mulli r3, r20, 0xb4
     bl mem_free
@@ -381,8 +381,8 @@ lbl_fn_804E9C68_00000404:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80791780@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804E9C68_00000438:
     lwz r7, 0x5f4(r15)
     addi r5, r1, 0x5c
@@ -1211,7 +1211,7 @@ lbl_fn_804EAA88_00000F50:
     lwz r23, 0x44(r1)
     cmplwi r23, 0x2
     ble lbl_fn_804EAA88_00001068
-    bl fn_80680CF8
+    bl rand
     subi r5, r23, 0x2
     lwz r0, 0x608(r24)
     divwu r4, r3, r5
@@ -1281,7 +1281,7 @@ lbl_fn_804EAA88_00001048:
     b lbl_fn_804EAA88_0000107C
 lbl_fn_804EAA88_00001068:
     lwz r23, 0x44(r1)
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r23
     mullw r0, r0, r23
     subf r27, r0, r3
@@ -1301,7 +1301,7 @@ lbl_fn_804EAA88_0000107C:
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x40(r1)
     bne lbl_fn_804EAA88_000011D8
-    bl fn_80680CF8
+    bl rand
     lis r29, 0x4178
     lis r31, 0x4330
     addi r0, r29, 0x749f
@@ -1323,7 +1323,7 @@ lbl_fn_804EAA88_0000107C:
     fsubs f5, f5, f6
     fdivs f4, f5, f4
     fmsubs f31, f3, f4, f0
-    bl fn_80680CF8
+    bl rand
     addi r0, r29, 0x749f
     stw r31, 0xd0(r1)
     mulhw r0, r0, r3
@@ -1342,7 +1342,7 @@ lbl_fn_804EAA88_0000107C:
     fsubs f5, f5, f6
     fdivs f4, f5, f4
     fmsubs f30, f3, f4, f0
-    bl fn_80680CF8
+    bl rand
     addi r0, r29, 0x749f
     lfs f3, 0x3c(r1)
     mulhw r0, r0, r3

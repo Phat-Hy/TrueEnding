@@ -26,7 +26,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 
 /* External data declarations */
 extern u8 lbl_80742F68[];
@@ -965,7 +965,7 @@ lbl_fn_80230780_00000D44:
     lwz r0, 0x108(r31)
     cmpwi r0, 0x0
     beq lbl_fn_80230780_00000D78
-    bl fn_80680CF8
+    bl rand
     lwz r4, 0x108(r31)
     divw r0, r3, r4
     mullw r0, r0, r4

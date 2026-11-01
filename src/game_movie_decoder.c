@@ -6,7 +6,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_800F8574(void);
 extern void fn_80126214(void);
@@ -1276,7 +1276,7 @@ lbl_fn_8033C490_00001050:
     bl fn_800C31F4
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8033C490_0000127C
 lbl_fn_8033C490_0000115C:
     lfs f26, 0x2e4(r3)
@@ -1734,7 +1734,7 @@ lbl_fn_8033D040_00001790:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8033D040_000019BC
 lbl_fn_8033D040_00001834:
     lfs f8, 0x2e4(r3)

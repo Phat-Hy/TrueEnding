@@ -14,7 +14,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB5C8(void);
 extern void fn_800CB6E4(void);
@@ -33,9 +33,9 @@ extern void fn_803EA77C(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695B00(void);
 
@@ -685,8 +685,8 @@ lbl_fn_8019AC60_00000808:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077EF28@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019AC60_000008A0:
     cmpwi r30, 0x0
     beq lbl_fn_8019AC60_000008D0
@@ -775,8 +775,8 @@ lbl_fn_8019AECC_00000984:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077EF28@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019AECC_000009C4:
     cmpwi r30, 0x0
     beq lbl_fn_8019AECC_000009F4
@@ -983,8 +983,8 @@ lbl_fn_8019B0F0_00000C0C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077DC10@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019B0F0_00000CA4:
     cmpwi r30, 0x0
     beq lbl_fn_8019B0F0_00000CD4
@@ -1289,7 +1289,7 @@ asm void fn_8019B630(void)
     bl fn_800CB5C8
     addi r3, r30, 0x20
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     cmpwi r31, 0x0
     ble lbl_fn_8019B630_0000110C
     mr r3, r30
@@ -1486,7 +1486,7 @@ lbl_fn_8019B6A8_000012F0:
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8019B6A8_00001458
 lbl_fn_8019B6A8_000013DC:
     cmpwi r0, 0x1
@@ -1641,8 +1641,8 @@ lbl_fn_8019BA1C_0000156C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077EEF0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019BA1C_00001604:
     cmpwi r30, 0x0
     beq lbl_fn_8019BA1C_00001634
@@ -1730,8 +1730,8 @@ lbl_fn_8019BC2C_000016E4:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077EEF0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019BC2C_00001724:
     cmpwi r30, 0x0
     beq lbl_fn_8019BC2C_00001754

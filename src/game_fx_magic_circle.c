@@ -39,9 +39,9 @@ extern void fn_802A49C8(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern void fn_8068AD58(void);
 extern void fn_8068AEA8(void);
 extern void fn_8068B100(void);
@@ -1021,7 +1021,7 @@ lbl_fn_8029FD34_00000D34:
     lfs f0, lbl_80883DAC
     fmuls f3, f4, f3
     fdivs f31, f3, f0
-    bl fn_80680CF8
+    bl rand
     lfs f3, lbl_80883D74
     lfs f0, 0x16b4(r29)
     fmuls f0, f3, f0
@@ -1032,7 +1032,7 @@ lbl_fn_8029FD34_00000D34:
     divw r0, r3, r4
     mullw r0, r0, r4
     subf r25, r0, r3
-    bl fn_80680CF8
+    bl rand
     lfs f0, lbl_80883D74
     lis r0, 0x4330
     lfs f9, 0x16b4(r29)
@@ -1156,8 +1156,8 @@ lbl_fn_8029FD34_00000F20:
     addi r4, r4, 0x221
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8029FD34_00000F60:
     lis r3, 0x555
     addi r0, r3, 0x5555
@@ -1207,8 +1207,8 @@ lbl_fn_8029FD34_00000FB8:
     addi r4, r4, 0x221
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8029FD34_00001020:
     lis r3, 0x555
     addi r0, r3, 0x5555
@@ -1263,8 +1263,8 @@ lbl_fn_8029FD34_000010B4:
     addi r4, r4, 0x221
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8029FD34_000010E8:
     slwi r3, r27, 4
     bl mem_free
@@ -1277,8 +1277,8 @@ lbl_fn_8029FD34_000010E8:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80785CB4@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8029FD34_0000111C:
     lwz r5, 0x1604(r29)
     lwz r0, 0x6c(r1)

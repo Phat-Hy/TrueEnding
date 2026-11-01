@@ -14,7 +14,7 @@ extern void fn_800629F0(void);
 extern void fn_80063764(void);
 extern void fn_80063D3C(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB518(void);
 extern void fn_800CB688(void);
 extern void fn_800DC288(void);
@@ -44,7 +44,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
 
@@ -1014,7 +1014,7 @@ lbl_fn_804392C0_00000D0C:
 lbl_fn_804392C0_00000D1C:
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804392C0_00000D28:
     lwz r0, 0xa4(r1)
     psq_l f31, 0x98(r1), 0, 0
@@ -1082,7 +1082,7 @@ asm void fn_80439574(void)
     stw r0, 0x0(r26)
     lwz r0, 0xef8(r25)
     stw r0, 0x184(r26)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x6666
     addi r0, r4, 0x6667
     mulhw r0, r0, r3
@@ -1246,7 +1246,7 @@ lbl_fn_80439574_00001034:
     stfs f0, 0xbc(r1)
     stfs f3, 0xc0(r1)
     stfs f4, 0xc4(r1)
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x2aab
     lfs f0, lbl_8088690C
     subi r0, r5, 0x5555
@@ -1322,7 +1322,7 @@ lbl_fn_80439574_000010EC:
     stfs f0, 0x7c(r1)
     stfs f2, 0x88(r1)
     stfs f2, 0x8(r4)
-    bl fn_80680CF8
+    bl rand
     mulhw r0, r31, r3
     srawi r0, r0, 8
     srwi r4, r0, 31
@@ -1335,7 +1335,7 @@ lbl_fn_80439574_000010EC:
     fsubs f0, f0, f24
     fdivs f0, f0, f25
     fmadds f21, f22, f0, f29
-    bl fn_80680CF8
+    bl rand
     mulhw r0, r31, r3
     addi r4, r1, 0xb0
     stfs f21, 0xb4(r1)
@@ -2069,7 +2069,7 @@ lbl_fn_8043A08C_00001C6C:
     stw r0, 0x0(r31)
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8043A08C_00001D00
 lbl_fn_8043A08C_00001C94:
     addi r3, r4, 0x90

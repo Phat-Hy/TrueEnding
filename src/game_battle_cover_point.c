@@ -11,11 +11,11 @@ extern void mem_alloc(void);
 extern void fn_800846FC(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB518(void);
 extern void fn_800CB5C8(void);
@@ -33,7 +33,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void fn_8068AEA4(void);
@@ -123,7 +123,7 @@ lbl_fn_8040BE88_00000058:
     bne lbl_fn_8040BE88_000001AC
     li r31, 0x0
     stb r31, 0x430(r30)
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -131,7 +131,7 @@ lbl_fn_8040BE88_00000058:
     bne lbl_fn_8040BE88_00000100
     lfs f0, lbl_80886320
     stfs f0, 0x414(r30)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     li r0, 0x2
     subi r4, r4, 0x7777
@@ -145,7 +145,7 @@ lbl_fn_8040BE88_00000058:
     subf r3, r0, r3
     addi r0, r3, 0x1e
     stw r0, 0x41c(r30)
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -158,7 +158,7 @@ lbl_fn_8040BE88_000000F4:
     stw r0, 0x420(r30)
     b lbl_fn_8040BE88_00000130
 lbl_fn_8040BE88_00000100:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     subi r0, r4, 0x7777
     mulhw r0, r0, r3
@@ -171,7 +171,7 @@ lbl_fn_8040BE88_00000100:
     addi r0, r3, 0x1e
     stw r0, 0x41c(r30)
 lbl_fn_8040BE88_00000130:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x6666
     lis r0, 0x4330
     addi r5, r4, 0x6667
@@ -262,7 +262,7 @@ asm void fn_8040C058(void)
     lwz r0, 0x420(r31)
     cmpwi r0, 0x1
     bne lbl_fn_8040C058_000002E0
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x6666
     lis r4, lbl_80752AD0@ha
     addi r0, r5, 0x6667
@@ -286,7 +286,7 @@ asm void fn_8040C058(void)
     stfs f0, 0x3e4(r31)
     b lbl_fn_8040C058_00000330
 lbl_fn_8040C058_000002E0:
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x6666
     lis r4, lbl_80752AD0@ha
     addi r0, r5, 0x6667
@@ -432,7 +432,7 @@ lbl_fn_8040C058_0000045C:
     lwz r0, 0x420(r31)
     cmpwi r0, 0x1
     bne lbl_fn_8040C058_00000564
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x6666
     lis r4, lbl_80752AD0@ha
     addi r0, r5, 0x6667
@@ -456,7 +456,7 @@ lbl_fn_8040C058_0000045C:
     stfs f0, 0x3e4(r31)
     b lbl_fn_8040C058_000005B4
 lbl_fn_8040C058_00000564:
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x6666
     lis r4, lbl_80752AD0@ha
     addi r0, r5, 0x6667
@@ -491,13 +491,13 @@ lbl_fn_8040C058_000005C4:
     bne lbl_fn_8040C058_00000754
     li r0, 0x0
     stb r0, 0x430(r31)
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
     subf. r0, r4, r0
     bne lbl_fn_8040C058_0000063C
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     li r0, 0x1
     subi r4, r4, 0x7777
@@ -515,7 +515,7 @@ lbl_fn_8040C058_000005C4:
 lbl_fn_8040C058_0000063C:
     lfs f0, lbl_80886320
     stfs f0, 0x414(r31)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     subi r0, r4, 0x7777
     mulhw r0, r0, r3
@@ -531,7 +531,7 @@ lbl_fn_8040C058_00000674:
     lwz r0, 0x420(r31)
     cmpwi r0, 0x1
     bne lbl_fn_8040C058_000006DC
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x8889
     lis r4, lbl_80752AD0@ha
     subi r0, r5, 0x7777
@@ -555,7 +555,7 @@ lbl_fn_8040C058_00000674:
     stfs f0, 0x3e4(r31)
     b lbl_fn_8040C058_00000730
 lbl_fn_8040C058_000006DC:
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x8889
     lis r4, lbl_80752AD0@ha
     subi r0, r5, 0x7777
@@ -650,7 +650,7 @@ asm void fn_8040C610(void)
     lwz r0, 0x420(r30)
     cmpwi r0, 0x1
     bne lbl_fn_8040C610_00000898
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x6666
     lis r4, lbl_80752AD0@ha
     addi r0, r5, 0x6667
@@ -674,7 +674,7 @@ asm void fn_8040C610(void)
     stfs f0, 0x3e4(r30)
     b lbl_fn_8040C610_000008E8
 lbl_fn_8040C610_00000898:
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x6666
     lis r4, lbl_80752AD0@ha
     addi r0, r5, 0x6667
@@ -820,7 +820,7 @@ lbl_fn_8040C610_00000A14:
     lwz r0, 0x420(r30)
     cmpwi r0, 0x1
     bne lbl_fn_8040C610_00000B1C
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x6666
     lis r4, lbl_80752AD0@ha
     addi r0, r5, 0x6667
@@ -844,7 +844,7 @@ lbl_fn_8040C610_00000A14:
     stfs f0, 0x3e4(r30)
     b lbl_fn_8040C610_00000B6C
 lbl_fn_8040C610_00000B1C:
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x6666
     lis r4, lbl_80752AD0@ha
     addi r0, r5, 0x6667
@@ -903,7 +903,7 @@ lbl_fn_8040C610_00000B7C:
     lwz r0, 0x420(r30)
     cmpwi r0, 0x1
     bne lbl_fn_8040C610_00000C5C
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x6666
     lis r4, lbl_80752AD0@ha
     addi r0, r5, 0x6667
@@ -927,7 +927,7 @@ lbl_fn_8040C610_00000B7C:
     stfs f0, 0x3e4(r30)
     b lbl_fn_8040C610_00000CAC
 lbl_fn_8040C610_00000C5C:
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x6666
     lis r4, lbl_80752AD0@ha
     addi r0, r5, 0x6667
@@ -959,13 +959,13 @@ lbl_fn_8040C610_00000CBC:
     li r31, 0x0
     stw r31, 0x42c(r30)
     stb r31, 0x430(r30)
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
     subf. r0, r4, r0
     bne lbl_fn_8040C610_00000D28
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     li r0, 0x1
     subi r4, r4, 0x7777
@@ -983,7 +983,7 @@ lbl_fn_8040C610_00000CBC:
 lbl_fn_8040C610_00000D28:
     lfs f0, lbl_80886320
     stfs f0, 0x414(r30)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     li r0, 0x2
     subi r4, r4, 0x7777
@@ -997,7 +997,7 @@ lbl_fn_8040C610_00000D28:
     subf r3, r0, r3
     addi r0, r3, 0x1e
     stw r0, 0x41c(r30)
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1012,7 +1012,7 @@ lbl_fn_8040C610_00000D90:
     lwz r0, 0x420(r30)
     cmpwi r0, 0x1
     bne lbl_fn_8040C610_00000DF8
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x8889
     lis r4, lbl_80752AD0@ha
     subi r0, r5, 0x7777
@@ -1036,7 +1036,7 @@ lbl_fn_8040C610_00000D90:
     stfs f0, 0x3e4(r30)
     b lbl_fn_8040C610_00000E4C
 lbl_fn_8040C610_00000DF8:
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x8889
     lis r4, lbl_80752AD0@ha
     subi r0, r5, 0x7777
@@ -1130,7 +1130,7 @@ lbl_fn_8040CD2C_00000F30:
     stfs f0, 0x414(r31)
     stw r3, 0x424(r31)
     bne lbl_fn_8040CD2C_00000FB0
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x6666
     lis r0, 0x4330
     addi r5, r4, 0x6667
@@ -1156,7 +1156,7 @@ lbl_fn_8040CD2C_00000F30:
     stfs f0, 0x3e4(r31)
     b lbl_fn_8040CD2C_00001008
 lbl_fn_8040CD2C_00000FB0:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x6666
     lis r0, 0x4330
     addi r5, r4, 0x6667
@@ -1549,7 +1549,7 @@ asm void fn_8040D3A0(void)
     beq lbl_fn_8040D3A0_00001590
     li r4, -0x1
     addi r3, r3, 0x638
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r0, r30, 0x608
     beq lbl_fn_8040D3A0_00001574
     lwz r3, 0x60c(r30)
@@ -1621,7 +1621,7 @@ lbl_fn_8040D434_00001628:
     lwz r4, 0x5f8(r22)
     add r3, r0, r24
     addi r3, r3, 0x4
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     addi r27, r27, 0x1
     addi r22, r22, 0x4
     cmpwi r27, 0x3
@@ -1859,7 +1859,7 @@ lbl_fn_8040D6F8_00001910:
     bl fn_800CB440
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addi r3, r31, 0x638
     li r4, 0xf
     bl fn_800CB518
@@ -1900,7 +1900,7 @@ lbl_fn_8040D6F8_000019CC:
     bl fn_800CB440
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addi r3, r31, 0x638
     li r4, 0xf
     bl fn_800CB518
@@ -1927,7 +1927,7 @@ lbl_fn_8040D6F8_00001A50:
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addi r3, r31, 0x638
     li r4, 0xf
     bl fn_800CB518

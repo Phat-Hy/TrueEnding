@@ -41,7 +41,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AE9C(void);
 extern void fn_8068AEA4(void);
 
@@ -1506,7 +1506,7 @@ lbl_fn_802CC4C8_0000143C:
     blt lbl_fn_802CC4C8_00001394
     cmpwi r26, 0x0
     ble lbl_fn_802CC4C8_00001474
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r26
     addi r4, r1, 0x18
     mullw r0, r0, r26

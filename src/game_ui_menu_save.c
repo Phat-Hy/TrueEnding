@@ -52,9 +52,9 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 
@@ -688,7 +688,7 @@ lbl_fn_801BE630_0000081C:
     lfs f2, 0x10(r31)
     stfs f2, 0x554(r1)
     psq_st f1, 0x0(r3), 0, 0
-    bl fn_80680CF8
+    bl rand
     lis r26, 0x4178
     lis r25, lbl_8073B3C8@ha
     addi r0, r26, 0x749f
@@ -713,7 +713,7 @@ lbl_fn_801BE630_0000081C:
     fnmsubs f1, f3, f4, f0
     bl PSMTXRotRad
     addi r15, r1, 0x488
-    bl fn_80680CF8
+    bl rand
     addi r0, r26, 0x749f
     lfs f0, lbl_808825E4
     mulhw r0, r0, r3
@@ -776,7 +776,7 @@ lbl_fn_801BE630_0000081C:
     stfs f2, 0x1a4(r1)
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x530(r1)
-    bl fn_80680CF8
+    bl rand
     addi r0, r26, 0x749f
     lfs f0, lbl_8088266C
     mulhw r0, r0, r3
@@ -799,7 +799,7 @@ lbl_fn_801BE630_0000081C:
     fnmsubs f1, f3, f4, f0
     bl PSMTXRotRad
     addi r15, r1, 0x458
-    bl fn_80680CF8
+    bl rand
     addi r0, r26, 0x749f
     lfs f0, lbl_808825E4
     mulhw r0, r0, r3
@@ -862,7 +862,7 @@ lbl_fn_801BE630_0000081C:
     stfs f2, 0x168(r1)
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x53c(r1)
-    bl fn_80680CF8
+    bl rand
     addi r0, r26, 0x749f
     lfs f0, lbl_80882670
     mulhw r0, r0, r3
@@ -885,7 +885,7 @@ lbl_fn_801BE630_0000081C:
     fnmsubs f1, f3, f4, f0
     bl PSMTXRotRad
     addi r15, r1, 0x428
-    bl fn_80680CF8
+    bl rand
     addi r0, r26, 0x749f
     lfs f0, lbl_808825E4
     mulhw r0, r0, r3
@@ -1212,7 +1212,7 @@ lbl_fn_801BE630_00000FE4:
     lwz r5, 0x48(r3)
     b lbl_fn_801BE630_00001034
 lbl_fn_801BE630_0000101C:
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r22
     mullw r0, r0, r22
     subf r0, r0, r3
@@ -1258,7 +1258,7 @@ lbl_fn_801BE630_00001034:
     mr r5, r24
     addi r3, r1, 0x3f8
     bl PSMTXMultVec
-    bl fn_80680CF8
+    bl rand
     mulhw r0, r30, r3
     srawi r0, r0, 1
     srwi r4, r0, 31
@@ -1919,8 +1919,8 @@ lbl_fn_801BFF28_000019F8:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_807818D4@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801BFF28_00001A90:
     cmpwi r30, 0x0
     beq lbl_fn_801BFF28_00001AC0

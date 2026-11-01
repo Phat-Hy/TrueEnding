@@ -32,7 +32,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 
 /* External data declarations */
@@ -693,7 +693,7 @@ lbl_fn_80553A78_00000828:
     fabs f0, f0
     stfs f2, 0x10(r1)
     frsp f31, f0
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x24(r1)
     lis r28, lbl_8075E850@ha
@@ -707,7 +707,7 @@ lbl_fn_80553A78_00000828:
     fmuls f0, f0, f3
     fsubs f0, f0, f28
     stfs f0, 0x8(r1)
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x2c(r1)
     lfs f0, lbl_80887E58
@@ -1812,7 +1812,7 @@ lbl_fn_805549EC_000017F4:
     fmuls f0, f0, f1
     fabs f0, f0
     frsp f29, f0
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x14(r1)
     lis r28, lbl_8075E850@ha
@@ -1825,7 +1825,7 @@ lbl_fn_805549EC_000017F4:
     fdivs f1, f2, f1
     fmuls f0, f0, f1
     fsubs f29, f0, f29
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0xc(r1)
     lfs f1, lbl_80887E58

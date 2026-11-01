@@ -18,7 +18,7 @@ extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800A555C(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
@@ -39,10 +39,10 @@ extern void fn_8047059C(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_805A4984(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -749,8 +749,8 @@ lbl_fn_802ACD3C_00000910:
     addi r4, r4, 0x179
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802ACD3C_00000948:
     lwz r4, 0x4(r28)
     li r6, 0x0
@@ -776,8 +776,8 @@ lbl_fn_802ACD3C_00000948:
     addi r4, r4, 0x179
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802ACD3C_000009B0:
     lis r3, 0x30c
     addi r0, r3, 0x30c3
@@ -832,8 +832,8 @@ lbl_fn_802ACD3C_00000A44:
     addi r4, r4, 0x179
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802ACD3C_00000A78:
     mulli r3, r31, 0x1c
     bl mem_free
@@ -846,8 +846,8 @@ lbl_fn_802ACD3C_00000A78:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80786068@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802ACD3C_00000AAC:
     lwz r5, 0x4(r28)
     li r27, 0x0
@@ -1207,8 +1207,8 @@ lbl_fn_802AD3D4_00000F68:
     addi r4, r4, 0x179
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802AD3D4_00000FA8:
     lis r3, 0x2ab
     subi r0, r3, 0x5556
@@ -1258,8 +1258,8 @@ lbl_fn_802AD3D4_00001000:
     addi r4, r4, 0x179
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802AD3D4_00001068:
     lis r3, 0x2ab
     subi r0, r3, 0x5556
@@ -1314,8 +1314,8 @@ lbl_fn_802AD3D4_000010FC:
     addi r4, r4, 0x179
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802AD3D4_00001130:
     slwi r3, r28, 5
     bl mem_free
@@ -1328,8 +1328,8 @@ lbl_fn_802AD3D4_00001130:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80786084@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802AD3D4_00001164:
     lwz r6, 0x4(r29)
     li r0, 0x0
@@ -1851,7 +1851,7 @@ lbl_fn_802AD930_000017E4:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F490
     cmpwi r3, 0x0
     beq lbl_fn_802AD930_000018E4

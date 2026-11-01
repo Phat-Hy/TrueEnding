@@ -69,7 +69,7 @@ extern void GXLoadPosMtxImm(void);
 extern void GXLoadNrmMtxImm3x3(void);
 extern void GXSetCurrentMtx(void);
 extern void GXLoadTexMtxImm(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_80695720(void);
 
 /* External data declarations */
@@ -902,7 +902,7 @@ lbl_fn_800B1598_00000AF4:
     lfs f26, lbl_80880E74
     lfs f27, lbl_80880E60
 lbl_fn_800B1598_00000B20:
-    bl fn_80680CF8
+    bl rand
     mulhw r0, r29, r3
     srawi r0, r0, 8
     srwi r4, r0, 31
@@ -935,7 +935,7 @@ lbl_fn_800B1598_00000B70:
     stw r0, 0x14(r1)
     lfd f0, 0x10(r1)
     fsubs f24, f0, f29
-    bl fn_80680CF8
+    bl rand
     addi r0, r31, 0x749f
     fsubs f0, f24, f31
     mulhw r0, r0, r3
@@ -957,7 +957,7 @@ lbl_fn_800B1598_00000B70:
     stw r0, 0x14(r1)
     lfd f0, 0x10(r1)
     fsubs f24, f0, f29
-    bl fn_80680CF8
+    bl rand
     addi r0, r31, 0x749f
     fsubs f0, f24, f31
     mulhw r0, r0, r3
@@ -973,7 +973,7 @@ lbl_fn_800B1598_00000B70:
     fdivs f1, f1, f30
     fmadds f0, f0, f1, f31
     stfs f0, 0x4(r28)
-    bl fn_80680CF8
+    bl rand
     addi r0, r31, 0x749f
     mulhw r0, r0, r3
     srawi r0, r0, 8
@@ -989,7 +989,7 @@ lbl_fn_800B1598_00000B70:
     fmadds f0, f25, f0, f26
     stfs f0, 0x8(r28)
     stfs f0, 0xc(r28)
-    bl fn_80680CF8
+    bl rand
     addi r0, r31, 0x749f
     mulhw r0, r0, r3
     srawi r0, r0, 8

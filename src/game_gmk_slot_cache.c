@@ -38,7 +38,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_804A24C4(void);
 extern void fn_804A28F8(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -315,7 +315,7 @@ lbl_fn_804439FC_00000304:
     srawi r0, r0, 31
     andi. r24, r0, 0x64
 lbl_fn_804439FC_00000314:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
     mulhw r0, r0, r3
@@ -1900,7 +1900,7 @@ lbl_fn_80444EFC_000017EC:
     lfsx f0, r3, r0
     fmuls f31, f31, f0
 lbl_fn_80444EFC_00001820:
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, 0x4330
     addi r0, r5, 0x749f
@@ -2124,7 +2124,7 @@ lbl_fn_80445130_00001B38:
     lfs f0, lbl_80886AF8
     fmuls f31, f31, f0
 lbl_fn_80445130_00001B5C:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -2471,7 +2471,7 @@ lbl_fn_80445130_00002034:
     bne lbl_fn_80445130_00002054
     lfs f31, 0x130(r25)
 lbl_fn_80445130_00002054:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -2864,7 +2864,7 @@ lbl_fn_80445130_000025D8:
     beq lbl_fn_80445130_00002650
     cmpwi r26, 0x0
     ble lbl_fn_80445130_0000263C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r26
     lwz r5, 0x58(r1)
     addi r4, r1, 0x5c

@@ -12,7 +12,7 @@ extern void fn_8004B338(void);
 extern void mem_free(void);
 extern void fn_800846FC(void);
 extern void fn_800C16B4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
@@ -26,8 +26,8 @@ extern void fn_80512C94(void);
 extern void fn_8052BBF0(void);
 extern void fn_805BDCC0(void);
 extern void fn_805BF414(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
 
@@ -191,7 +191,7 @@ lbl_fn_8052DEF0_00000178:
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8052DEF0_000001B0:
     cmpwi r30, 0x0
     beq lbl_fn_8052DEF0_00000298
@@ -837,8 +837,8 @@ asm void fn_8052E984(void)
     addi r4, r4, 0x107
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8052E984_00000B78:
     lis r3, 0x141
     addi r0, r3, 0x4141
@@ -1086,8 +1086,8 @@ lbl_fn_8052E984_00000EE0:
     addi r4, r4, 0x107
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8052E984_00000F14:
     mulli r3, r28, 0x44
     bl mem_free
@@ -1100,8 +1100,8 @@ lbl_fn_8052E984_00000F14:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077927C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8052E984_00000F48:
     lwz r0, 0x4(r27)
     stw r31, 0x0(r27)
@@ -1201,8 +1201,8 @@ asm void fn_8052EEC0(void)
     addi r4, r4, 0x107
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8052EEC0_000010B4:
     lis r3, 0x2c
     subi r0, r3, 0x4f31
@@ -1634,8 +1634,8 @@ lbl_fn_8052EEC0_000016EC:
     addi r4, r4, 0x107
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8052EEC0_00001720:
     mulli r3, r28, 0x1f4
     bl mem_free
@@ -1648,8 +1648,8 @@ lbl_fn_8052EEC0_00001720:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_807933A8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8052EEC0_00001754:
     lwz r0, 0x4(r27)
     stw r31, 0x0(r27)

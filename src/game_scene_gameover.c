@@ -32,10 +32,10 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
+extern void printf(void);
+extern void rand(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -842,8 +842,8 @@ lbl_fn_801B2A80_00000904:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_807807F8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801B2A80_0000099C:
     cmpwi r30, 0x0
     beq lbl_fn_801B2A80_000009CC
@@ -933,8 +933,8 @@ lbl_fn_801B2CF8_00000A84:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_807807F8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801B2CF8_00000AC4:
     cmpwi r30, 0x0
     beq lbl_fn_801B2CF8_00000AF4
@@ -1234,7 +1234,7 @@ asm void fn_801B3098(void)
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_801B3098_00000F54
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1323,7 +1323,7 @@ lbl_fn_801B3098_00000FD8:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_801B3098_00001060
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1485,7 +1485,7 @@ lbl_fn_801B3098_00001288:
 lbl_fn_801B3098_0000128C:
     cmpwi r22, 0x0
     beq lbl_fn_801B3098_00001A78
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f

@@ -50,7 +50,7 @@ extern void fn_805F8CA0(void);
 extern void PSMTXTrans(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_8068AC5C(void);
 extern void fn_8068AD58(void);
@@ -148,7 +148,7 @@ asm void fn_80417E88(void)
     stw r0, 0x24(r1)
     stw r31, 0x1c(r1)
     mr r31, r3
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f

@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_800F8574(void);
 extern void fn_800FAB80(void);
@@ -36,7 +36,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 
 /* External data declarations */
@@ -958,7 +958,7 @@ lbl_fn_80110858_00000CCC:
     bl fn_800C344C
     addi r3, r1, 0x20
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r0, 0x9c(r28)
     cmpwi r0, 0x0
     beq lbl_fn_80110858_00001340
@@ -1287,7 +1287,7 @@ lbl_fn_80110858_000011A0:
     bl fn_800C344C
     addi r3, r1, 0x1c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80110858_00001290
 lbl_fn_80110858_000011EC:
     cmpwi r30, 0x0
@@ -1302,7 +1302,7 @@ lbl_fn_80110858_000011EC:
     bl fn_800C344C
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80110858_00001290
 lbl_fn_80110858_00001224:
     cmpwi r30, 0x4
@@ -1318,7 +1318,7 @@ lbl_fn_80110858_00001224:
     bl fn_800C344C
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80110858_00001290
 lbl_fn_80110858_00001260:
     lis r4, lbl_80736680@ha
@@ -1332,7 +1332,7 @@ lbl_fn_80110858_00001260:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80110858_00001290:
     lwz r3, 0x68(r28)
     lwz r3, 0x6c(r3)
@@ -1606,7 +1606,7 @@ lbl_fn_80110858_00001680:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_80110858_000018B0
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1742,7 +1742,7 @@ lbl_fn_80110858_00001874:
     lwz r27, 0x4e0(r1)
     cmpwi r0, 0x0
     beq lbl_fn_80110858_000018B0
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r27
     addi r4, r1, 0x4e4
     lfs f1, lbl_808816A4

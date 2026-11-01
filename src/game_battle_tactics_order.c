@@ -27,7 +27,7 @@ extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
 extern void fn_800CB36C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB480(void);
 extern void fn_800CB518(void);
@@ -55,9 +55,9 @@ extern void fn_805A38F4(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_80684600(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695720(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -353,8 +353,8 @@ lbl_fn_803EFE64_00000258:
     addi r4, r4, 0x23
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803EFE64_00000298:
     lis r3, 0x222
     addi r0, r3, 0x2222
@@ -404,8 +404,8 @@ lbl_fn_803EFE64_000002F0:
     addi r4, r4, 0x23
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803EFE64_00000358:
     lis r3, 0x222
     addi r0, r3, 0x2222
@@ -460,8 +460,8 @@ lbl_fn_803EFE64_000003EC:
     addi r4, r4, 0x23
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803EFE64_00000420:
     mulli r3, r28, 0x28
     bl mem_free
@@ -474,8 +474,8 @@ lbl_fn_803EFE64_00000420:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078CB78@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803EFE64_00000454:
     lwz r0, 0x24(r1)
     stw r31, 0x20(r1)
@@ -750,9 +750,9 @@ asm void fn_803F0488(void)
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
     beq lbl_fn_803F0488_00000820
-    lis r4, fn_800CB3A0@ha
+    lis r4, ref_releaseHandle@ha
     mr r3, r0
-    addi r4, r4, fn_800CB3A0@l
+    addi r4, r4, ref_releaseHandle@l
     bl fn_80695A50
 lbl_fn_803F0488_00000820:
     cmpwi r30, 0x0
@@ -766,11 +766,11 @@ lbl_fn_803F0488_00000820:
     li r7, 0x0
     bl fn_800846FC
     lis r4, fn_800CB360@ha
-    lis r5, fn_800CB3A0@ha
+    lis r5, ref_releaseHandle@ha
     mr r7, r30
     li r6, 0x4
     addi r4, r4, fn_800CB360@l
-    addi r5, r5, fn_800CB3A0@l
+    addi r5, r5, ref_releaseHandle@l
     bl fn_80695720
     stw r3, 0x4(r29)
     b lbl_fn_803F0488_00000874
@@ -1382,7 +1382,7 @@ lbl_fn_803F0764_00000FD0:
 lbl_fn_803F0764_00001058:
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803F0764_00001064:
     stw r29, 0x24(r23)
     b lbl_fn_803F0764_000013A0
@@ -1910,7 +1910,7 @@ asm void fn_803F1418(void)
     beq lbl_fn_803F1418_000017B0
     li r4, -0x1
     addi r3, r3, 0xc
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     cmpwi r31, 0x0
     ble lbl_fn_803F1418_000017B0
     mr r3, r30
@@ -2047,7 +2047,7 @@ lbl_fn_803F1508_00001968:
     li r4, -0x1
     addi r0, r5, 0x1
     stw r0, 0x5c(r26)
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803F1508_00001980:
     addi r31, r31, 0x1
     addi r27, r27, 0x4c
@@ -2247,7 +2247,7 @@ lbl_fn_803F1508_00001C28:
     bl fn_800CB440
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r0, 0x48(r28)
     cmpwi r0, 0x0
     beq lbl_fn_803F1508_00001CB8
@@ -2271,7 +2271,7 @@ lbl_fn_803F1508_00001C88:
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803F1508_00001CB8:
     lwz r0, 0x44(r28)
     rlwinm r0, r0, 0, 29, 29
@@ -2313,7 +2313,7 @@ lbl_fn_803F1508_00001D38:
     stw r25, 0x8(r27)
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803F1508_00001D48:
     lwz r3, 0x4(r27)
     addi r0, r3, 0x1

@@ -52,9 +52,9 @@ extern void PSMTXScale(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AD58(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695B00(void);
@@ -498,8 +498,8 @@ lbl_fn_8031E078_00000540:
     addi r4, r4, 0xe1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8031E078_00000578:
     li r5, 0x0
     addi r4, r29, 0x30
@@ -525,8 +525,8 @@ lbl_fn_8031E078_00000578:
     addi r4, r4, 0xe1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8031E078_000005E0:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -581,8 +581,8 @@ lbl_fn_8031E078_00000674:
     addi r4, r4, 0xe1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8031E078_000006A8:
     slwi r3, r31, 2
     bl mem_free
@@ -595,8 +595,8 @@ lbl_fn_8031E078_000006A8:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8031E078_000006DC:
     lwz r0, 0x94(r1)
     stw r28, 0x90(r1)

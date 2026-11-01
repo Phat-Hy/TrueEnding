@@ -137,15 +137,15 @@ void __pformatter_8067FD34(void);
 void __FileWrite(void);
 void __StringWrite(void);
 void fn_806806A4(void);
-void fn_80680770(void);
+void printf(void);
 void vprintf(void);
 void vsnprintf(void);
-void fn_8068093C(void);
+void vsprintf(void);
 void fn_806809C0(void);
 void sprintf(void);
-void fn_80680B88(void);
-void fn_80680CF8(void);
-void fn_80680D18(void);
+void qsort(void);
+void rand(void);
+void srand(void);
 void fn_80680D20(void);
 void fn_806813B4(void);
 void fn_8068204C(void);
@@ -194,8 +194,8 @@ void fn_80686B90(void);
 void fn_80686CF8(void);
 void fwide(void);
 void fn_80686DD4(void);
-void fn_80686EA4(void);
-void fn_80686ED8(void);
+void abort(void);
+void atexit(void);
 void __msl_runtime_constraint_violation_s(void);
 
 asm void __close_all(void)
@@ -6461,7 +6461,7 @@ lbl_fn_806806A4_000052EC:
     blr
 }
 
-asm void fn_80680770(void)
+asm void printf(void)
 {
     nofralloc
     stwu r1, -0x80(r1)
@@ -6471,7 +6471,7 @@ asm void fn_80680770(void)
     mr r31, r4
     stw r30, 0x78(r1)
     mr r30, r3
-    bne cr1, lbl_fn_80680770_00005344
+    bne cr1, lbl_printf_00005344
     stfd f1, 0x28(r1)
     stfd f2, 0x30(r1)
     stfd f3, 0x38(r1)
@@ -6480,7 +6480,7 @@ asm void fn_80680770(void)
     stfd f6, 0x50(r1)
     stfd f7, 0x58(r1)
     stfd f8, 0x60(r1)
-lbl_fn_80680770_00005344:
+lbl_printf_00005344:
     stw r3, 0x8(r1)
     mr r3, r30
     stw r4, 0xc(r1)
@@ -6493,10 +6493,10 @@ lbl_fn_80680770_00005344:
     stw r10, 0x24(r1)
     bl fwide
     cmpwi r3, 0x0
-    blt lbl_fn_80680770_00005380
+    blt lbl_printf_00005380
     li r3, -0x1
-    b lbl_fn_80680770_000053B4
-lbl_fn_80680770_00005380:
+    b lbl_printf_000053B4
+lbl_printf_00005380:
     addi r7, r1, 0x88
     addi r0, r1, 0x8
     lis r4, 0x200
@@ -6510,7 +6510,7 @@ lbl_fn_80680770_00005380:
     li r7, 0x0
     stw r0, 0x70(r1)
     bl __pformatter_8067FD34
-lbl_fn_80680770_000053B4:
+lbl_printf_000053B4:
     lwz r0, 0x84(r1)
     lwz r31, 0x7c(r1)
     lwz r30, 0x78(r1)
@@ -6598,7 +6598,7 @@ lbl_vsnprintf_000054B4:
     blr
 }
 
-asm void fn_8068093C(void)
+asm void vsprintf(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -6621,14 +6621,14 @@ asm void fn_8068093C(void)
     stw r31, 0x10(r1)
     bl __pformatter_8067FD34
     cmpwi r29, 0x0
-    beq lbl_fn_8068093C_00005538
+    beq lbl_vsprintf_00005538
     cmplw r3, r30
-    bge lbl_fn_8068093C_00005534
+    bge lbl_vsprintf_00005534
     stbx r31, r29, r3
-    b lbl_fn_8068093C_00005538
-lbl_fn_8068093C_00005534:
+    b lbl_vsprintf_00005538
+lbl_vsprintf_00005534:
     stb r31, -0x2(r29)
-lbl_fn_8068093C_00005538:
+lbl_vsprintf_00005538:
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     lwz r30, 0x28(r1)
@@ -6768,7 +6768,7 @@ lbl_sprintf_00005708:
     blr
 }
 
-asm void fn_80680B88(void)
+asm void qsort(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -6779,7 +6779,7 @@ asm void fn_80680B88(void)
     mr r27, r3
     mr r28, r5
     mr r29, r6
-    blt lbl_fn_80680B88_00005878
+    blt lbl_qsort_00005878
     srwi r7, r4, 1
     slwi r0, r5, 1
     addi r31, r7, 0x1
@@ -6792,44 +6792,44 @@ asm void fn_80680B88(void)
     add r23, r3, r4
     mullw r26, r31, r5
     add r22, r3, r0
-lbl_fn_80680B88_00005770:
+lbl_qsort_00005770:
     cmplwi r31, 0x1
-    ble lbl_fn_80680B88_00005788
+    ble lbl_qsort_00005788
     subf r26, r28, r26
     subf r23, r28, r23
     subi r31, r31, 0x1
-    b lbl_fn_80680B88_000057C4
-lbl_fn_80680B88_00005788:
+    b lbl_qsort_000057C4
+lbl_qsort_00005788:
     subi r3, r22, 0x1
     subi r4, r23, 0x1
     addi r5, r28, 0x1
-    b lbl_fn_80680B88_000057AC
-lbl_fn_80680B88_00005798:
+    b lbl_qsort_000057AC
+lbl_qsort_00005798:
     lbz r6, 0x1(r4)
     lbz r0, 0x1(r3)
     stbu r0, 0x1(r4)
     extsb r6, r6
     stbu r6, 0x1(r3)
-lbl_fn_80680B88_000057AC:
+lbl_qsort_000057AC:
     subic. r5, r5, 0x1
-    bne lbl_fn_80680B88_00005798
+    bne lbl_qsort_00005798
     subi r30, r30, 0x1
     cmplwi r30, 0x1
-    beq lbl_fn_80680B88_00005878
+    beq lbl_qsort_00005878
     subf r22, r28, r22
-lbl_fn_80680B88_000057C4:
+lbl_qsort_000057C4:
     add r0, r26, r25
     mr r24, r31
     add r20, r27, r0
-    b lbl_fn_80680B88_00005868
-lbl_fn_80680B88_000057D4:
+    b lbl_qsort_00005868
+lbl_qsort_000057D4:
     slwi r24, r24, 1
     mr r21, r20
     subi r0, r24, 0x1
     mullw r0, r28, r0
     cmplw r24, r30
     add r20, r27, r0
-    bge lbl_fn_80680B88_00005818
+    bge lbl_qsort_00005818
     add r19, r20, r28
     mr r12, r29
     mr r3, r20
@@ -6837,22 +6837,22 @@ lbl_fn_80680B88_000057D4:
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bge lbl_fn_80680B88_00005818
+    bge lbl_qsort_00005818
     mr r20, r19
     addi r24, r24, 0x1
-lbl_fn_80680B88_00005818:
+lbl_qsort_00005818:
     mr r12, r29
     mr r3, r21
     mr r4, r20
     mtctr r12
     bctrl
     cmpwi r3, 0x0
-    bge lbl_fn_80680B88_00005770
+    bge lbl_qsort_00005770
     subi r3, r20, 0x1
     subi r4, r21, 0x1
     addi r5, r28, 0x1
-    b lbl_fn_80680B88_00005860
-lbl_fn_80680B88_00005844:
+    b lbl_qsort_00005860
+lbl_qsort_00005844:
     lbz r6, 0x1(r4)
     lbz r0, 0x1(r3)
     stb r0, 0x1(r4)
@@ -6860,15 +6860,15 @@ lbl_fn_80680B88_00005844:
     addi r4, r4, 0x1
     stb r6, 0x1(r3)
     addi r3, r3, 0x1
-lbl_fn_80680B88_00005860:
+lbl_qsort_00005860:
     subic. r5, r5, 0x1
-    bne lbl_fn_80680B88_00005844
-lbl_fn_80680B88_00005868:
+    bne lbl_qsort_00005844
+lbl_qsort_00005868:
     slwi r0, r24, 1
     cmplw r0, r30
-    ble lbl_fn_80680B88_000057D4
-    b lbl_fn_80680B88_00005770
-lbl_fn_80680B88_00005878:
+    ble lbl_qsort_000057D4
+    b lbl_qsort_00005770
+lbl_qsort_00005878:
     lmw r19, 0xc(r1)
     lwz r0, 0x44(r1)
     mtlr r0
@@ -6876,7 +6876,7 @@ lbl_fn_80680B88_00005878:
     blr
 }
 
-asm void fn_80680CF8(void)
+asm void rand(void)
 {
     nofralloc
     lis r3, 0x41c6
@@ -6889,7 +6889,7 @@ asm void fn_80680CF8(void)
     blr
 }
 
-asm void fn_80680D18(void)
+asm void srand(void)
 {
     nofralloc
     stw r3, lbl_8087EBF0
@@ -14240,7 +14240,7 @@ lbl_fn_80686DD4_0000BA18:
     blr
 }
 
-asm void fn_80686EA4(void)
+asm void abort(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -14258,7 +14258,7 @@ asm void fn_80686EA4(void)
     blr
 }
 
-asm void fn_80686ED8(void)
+asm void atexit(void)
 {
     nofralloc
     b __register_atexit

@@ -9,7 +9,7 @@ extern void fn_8006F72C(void);
 extern void mem_alloc(void);
 extern void fn_800A555C(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB5C8(void);
 extern void atn_Task_constructor(void);
@@ -191,7 +191,7 @@ asm void fn_803B6260(void)
     beq lbl_fn_803B6260_00000180
     li r4, -0x1
     addi r3, r3, 0x6c
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r30
     li r4, 0x0
     bl atn_Task_destructor
@@ -549,7 +549,7 @@ lbl_fn_803B6324_00000630:
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803B6324_00000824
 lbl_fn_803B6324_00000668:
     lwz r6, 0x48(r31)
@@ -667,7 +667,7 @@ lbl_fn_803B6324_000007DC:
     bl fn_803B4338
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r31
     li r4, 0x0
     bl fn_803B6C88

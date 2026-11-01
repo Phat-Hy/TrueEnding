@@ -15,8 +15,8 @@ extern void fn_800DC880(void);
 extern void fn_800DCA6C(void);
 extern void fn_8053770C(void);
 extern void fn_8053C6A8(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 
 /* External data declarations */
 extern u8 lbl_8075DA28[];
@@ -761,8 +761,8 @@ lbl_fn_8053A514_00000964:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8053A514_000009A4:
     lis r3, 0xaaab
     subi r0, r3, 0x5555
@@ -834,8 +834,8 @@ lbl_fn_8053A514_00000A4C:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8053A514_00000AB4:
     lis r3, 0xaaab
     subi r0, r3, 0x5555
@@ -891,8 +891,8 @@ lbl_fn_8053A514_00000B48:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8053A514_00000B7C:
     slwi r3, r30, 3
     bl mem_free
@@ -905,8 +905,8 @@ lbl_fn_8053A514_00000B7C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80793BF0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8053A514_00000BB0:
     lwz r0, 0x34(r1)
     stw r31, 0x30(r1)
@@ -1610,8 +1610,8 @@ lbl_fn_8053B034_000014B0:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8053B034_000014F0:
     lis r3, 0xaaab
     subi r0, r3, 0x5555
@@ -1683,8 +1683,8 @@ lbl_fn_8053B034_00001598:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8053B034_00001600:
     lis r3, 0xaaab
     subi r0, r3, 0x5555
@@ -1740,8 +1740,8 @@ lbl_fn_8053B034_00001694:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8053B034_000016C8:
     slwi r3, r30, 3
     bl mem_free
@@ -1754,8 +1754,8 @@ lbl_fn_8053B034_000016C8:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80793DB8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8053B034_000016FC:
     lwz r0, 0x34(r1)
     stw r31, 0x30(r1)

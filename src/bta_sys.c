@@ -71,7 +71,7 @@ extern void fn_8065C630(void);
 extern void fn_8065C6B0(void);
 extern void fn_8065C750(void);
 extern void fn_8065CDA0(void);
-extern void fn_8068093C(void);
+extern void vsprintf(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1391,7 +1391,7 @@ lbl_fn_80629750_000010B4:
     stw r12, 0x68(r1)
     stw r11, 0x6c(r1)
     stw r0, 0x70(r1)
-    bl fn_8068093C
+    bl vsprintf
     addi r3, r31, lbl_8081E2E0@l
     la r4, lbl_8087EAB8
     mr r5, r3

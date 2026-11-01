@@ -10,7 +10,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_23(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
-extern void fn_80680B88(void);
+extern void qsort(void);
 extern void fn_806A4270(void);
 extern void fn_806D7A90(void);
 extern void fn_806D7AA0(void);
@@ -602,7 +602,7 @@ asm void fn_806D5E40(void)
     lwz r4, 0x0(r5)
     lwz r3, 0x14(r3)
     lwz r5, 0x8(r5)
-    b fn_80680B88
+    b qsort
 }
 
 asm void fn_806D5E60(void)

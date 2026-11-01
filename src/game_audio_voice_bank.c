@@ -12,7 +12,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_800FAB80(void);
 extern void fn_8016E970(void);
@@ -1063,7 +1063,7 @@ lbl_fn_80302F94_00000DDC:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addi r4, r29, 0x15d8
     lfs f2, 0x15e0(r29)
     psq_l f1, 0x0(r4), 0, 0

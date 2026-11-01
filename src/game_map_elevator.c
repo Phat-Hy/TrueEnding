@@ -8,7 +8,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800EFF04(void);
 extern void fn_800F8548(void);
 extern void fn_80106878(void);
@@ -24,7 +24,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 
@@ -183,7 +183,7 @@ lbl_fn_8018CAEC_00000118:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_8018CAEC_0000017C
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -508,7 +508,7 @@ lbl_fn_8018CEF8_000005D4:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_8018CEF8_00000630
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -534,7 +534,7 @@ lbl_fn_8018CEF8_00000630:
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r31
     lwz r31, 0xac(r1)
     lwz r30, 0xa8(r1)
@@ -984,7 +984,7 @@ lbl_fn_8018D4AC_00000CBC:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_8018D4AC_00000CFC
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1010,7 +1010,7 @@ lbl_fn_8018D4AC_00000CFC:
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     psq_l f31, 0x108(r1), 0, 0
     mr r3, r30
     lfd f31, 0x100(r1)
@@ -1140,7 +1140,7 @@ lbl_fn_8018D840_00000DF0:
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8018D840_00000F20:
     addi r27, r27, 0x4
     addi r26, r26, 0x1
@@ -1342,7 +1342,7 @@ asm void fn_8018DAE4(void)
     stfs f0, 0x10(r1)
     cmpwi r0, 0x0
     beq lbl_fn_8018DAE4_00001238
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4

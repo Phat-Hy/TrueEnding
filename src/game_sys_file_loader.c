@@ -15,7 +15,7 @@ extern void fn_8020EF04(void);
 extern void fn_80211480(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_80695720(void);
@@ -990,7 +990,7 @@ lbl_fn_8021D770_00000C2C:
     li r3, 0x0
     b lbl_fn_8021D770_00000CB8
 lbl_fn_8021D770_00000C3C:
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r29
     add r5, r25, r31
     li r4, 0x0
@@ -1168,7 +1168,7 @@ lbl_fn_8021D9D4_00000E8C:
     li r3, 0x0
     b lbl_fn_8021D9D4_00000F14
 lbl_fn_8021D9D4_00000E9C:
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     add r5, r26, r31
     li r4, 0x0
@@ -1491,7 +1491,7 @@ lbl_fn_8021DECC_000012F8:
     li r3, 0x0
     b lbl_fn_8021DECC_000013C4
 lbl_fn_8021DECC_00001310:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -2115,7 +2115,7 @@ lbl_fn_8021E5A4_00001B2C:
     bge lbl_fn_8021E5A4_00001B60
     fmr f28, f0
 lbl_fn_8021E5A4_00001B60:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f

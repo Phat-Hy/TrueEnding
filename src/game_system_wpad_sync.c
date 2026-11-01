@@ -23,7 +23,7 @@ extern void fn_800AFEBC(void);
 extern void fn_800C16B4(void);
 extern void fn_800C289C(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CDF84(void);
 extern void fn_800CE368(void);
 extern void atn_Task_constructor(void);
@@ -1927,7 +1927,7 @@ lbl_world_Manager_destructor_000018C0:
 lbl_world_Manager_destructor_000018D0:
     addi r3, r28, 0x55a8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r0, r28, 0x558c
     beq lbl_world_Manager_destructor_000018F0
     lwz r3, 0x558c(r28)

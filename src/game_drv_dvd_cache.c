@@ -14,7 +14,7 @@ extern void fn_805B33BC(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 
 /* External data declarations */
 extern u8 lbl_80763C28[];
@@ -407,7 +407,7 @@ lbl_fn_805AF618_00000558:
 lbl_fn_805AF618_0000055C:
     cmplw r3, r31
     beq lbl_fn_805AF618_0000059C
-    bl fn_80680CF8
+    bl rand
     addi r0, r22, 0x749f
     mulhw r0, r0, r3
     srawi r0, r0, 8
@@ -522,7 +522,7 @@ lbl_fn_805AF618_000006F8:
 lbl_fn_805AF618_000006FC:
     cmplw r3, r23
     beq lbl_fn_805AF618_0000073C
-    bl fn_80680CF8
+    bl rand
     addi r0, r27, 0x749f
     mulhw r0, r0, r3
     srawi r0, r0, 8
@@ -1247,7 +1247,7 @@ lbl_fn_805B01C4_00001104:
 lbl_fn_805B01C4_00001108:
     cmplw r3, r31
     beq lbl_fn_805B01C4_00001148
-    bl fn_80680CF8
+    bl rand
     addi r0, r22, 0x749f
     mulhw r0, r0, r3
     srawi r0, r0, 8
@@ -1362,7 +1362,7 @@ lbl_fn_805B01C4_000012A4:
 lbl_fn_805B01C4_000012A8:
     cmplw r3, r23
     beq lbl_fn_805B01C4_000012E8
-    bl fn_80680CF8
+    bl rand
     addi r0, r27, 0x749f
     mulhw r0, r0, r3
     srawi r0, r0, 8
@@ -2087,7 +2087,7 @@ lbl_fn_805B0D70_00001CB0:
 lbl_fn_805B0D70_00001CB4:
     cmplw r3, r31
     beq lbl_fn_805B0D70_00001CF4
-    bl fn_80680CF8
+    bl rand
     addi r0, r22, 0x749f
     mulhw r0, r0, r3
     srawi r0, r0, 8
@@ -2202,7 +2202,7 @@ lbl_fn_805B0D70_00001E50:
 lbl_fn_805B0D70_00001E54:
     cmplw r3, r23
     beq lbl_fn_805B0D70_00001E94
-    bl fn_80680CF8
+    bl rand
     addi r0, r27, 0x749f
     mulhw r0, r0, r3
     srawi r0, r0, 8

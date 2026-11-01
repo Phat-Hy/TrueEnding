@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void fn_80041A28(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB58C(void);
 extern void fn_800CB5C8(void);
@@ -31,7 +31,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern void fn_80695AD0(void);
@@ -219,7 +219,7 @@ lbl_fn_8032F6A8_000001B0:
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r5, 0x15e0(r31)
     lis r4, 0xcccd
     subi r0, r4, 0x3333
@@ -327,7 +327,7 @@ lbl_fn_8032F828_0000033C:
     li r31, 0x0
     lis r29, 0x4330
 lbl_fn_8032F828_0000035C:
-    bl fn_80680CF8
+    bl rand
     mulhw r0, r28, r3
     stw r29, 0x20(r1)
     lfs f0, 0x0(r27)
@@ -733,7 +733,7 @@ lbl_fn_8032FDE8_000008D0:
     subis r0, r3, 0x100
     cmplwi r0, 0x0
     beq lbl_fn_8032FDE8_000009D8
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x5555
     addi r0, r4, 0x5556
     mulhw r4, r0, r3

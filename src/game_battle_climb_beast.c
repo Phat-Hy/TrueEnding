@@ -35,7 +35,7 @@ extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB5C8(void);
 extern void fn_800CB6E4(void);
@@ -861,7 +861,7 @@ lbl_fn_803FA5C8_00000944:
     bl fn_803FAE08
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803FA5C8_0000098C:
     bl fn_80121F00
     cmpwi r3, 0x0
@@ -1669,7 +1669,7 @@ lbl_fn_803FAF8C_00001494:
     bl fn_800C344C
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803FAF8C_000014EC:
     lis r3, 0x1062
     lwz r4, 0x48(r30)
@@ -1803,7 +1803,7 @@ lbl_fn_803FAF8C_000015DC:
     bl fn_800C344C
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r0, 0xc(r31)
     cmpwi r0, 0x1
     bne lbl_fn_803FAF8C_00001870
@@ -1877,7 +1877,7 @@ lbl_fn_803FAF8C_000016F4:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803FAF8C_00001870
 lbl_fn_803FAF8C_00001808:
     psq_l f1, 0x14(r31), 0, 0

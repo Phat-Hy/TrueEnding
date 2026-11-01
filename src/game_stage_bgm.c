@@ -62,9 +62,9 @@ extern void fn_804F5B0C(void);
 extern void fn_804F5CA0(void);
 extern void fn_804F5E3C(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695B00(void);
 extern void fn_806A8E40(void);
 extern void fn_806B0E30(void);
@@ -420,8 +420,8 @@ lbl_fn_8019F5BC_000002F4:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077EE48@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019F5BC_0000038C:
     cmpwi r30, 0x0
     beq lbl_fn_8019F5BC_000003BC
@@ -509,8 +509,8 @@ lbl_fn_8019F7CC_0000046C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077EE48@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019F7CC_000004AC:
     cmpwi r30, 0x0
     beq lbl_fn_8019F7CC_000004DC
@@ -900,8 +900,8 @@ lbl_fn_8019FC6C_000009A4:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077EE48@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019FC6C_00000A3C:
     cmpwi r30, 0x0
     beq lbl_fn_8019FC6C_00000A6C

@@ -25,7 +25,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_80686A64(void);
 extern void fn_8068AD58(void);
 extern void fn_8068AEA4(void);
@@ -2074,7 +2074,7 @@ lbl_fn_802C38E4_00001C58:
     lwz r0, 0x1700(r30)
     cmpwi r0, 0x0
     beq lbl_fn_802C38E4_00001CA0
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4

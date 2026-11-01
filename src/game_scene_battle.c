@@ -19,7 +19,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_801070C8(void);
 extern void fn_80107208(void);
 extern void fn_8013CB68(void);
@@ -44,9 +44,9 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void fn_8067E23C(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695AD0(void);
 extern u32 strlen(const char* str);
@@ -367,7 +367,7 @@ lbl_fn_801AD34C_0000037C:
 lbl_fn_801AD34C_000003AC:
     cmpwi r29, 0x0
     bge lbl_fn_801AD34C_000004E0
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x5555
     cmpwi r31, 0x0
     addi r0, r4, 0x5556
@@ -749,7 +749,7 @@ lbl_fn_801AD34C_00000878:
     bl world_setGlobalFlag
     b lbl_fn_801AD34C_00000934
 lbl_fn_801AD34C_00000900:
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -997,7 +997,7 @@ lbl_fn_801ADC14_00000C20:
     bl fn_800C344C
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_801ADC14_00000CDC
 lbl_fn_801ADC14_00000CAC:
     lis r3, lbl_8073A9A8@ha
@@ -1011,7 +1011,7 @@ lbl_fn_801ADC14_00000CAC:
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_801ADC14_00000CDC:
     lwz r3, 0x14(r29)
     addi r0, r3, 0x1
@@ -1866,8 +1866,8 @@ lbl_fn_801AEA04_00001828:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077CF28@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801AEA04_000018C0:
     cmpwi r28, 0x0
     beq lbl_fn_801AEA04_00001900

@@ -11,7 +11,7 @@ extern void fn_8006EF48(void);
 extern void fn_800A4450(void);
 extern void fn_800A555C(void);
 extern void fn_800A55AC(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC6B4(void);
@@ -264,7 +264,7 @@ lbl_fn_804B0F58_00000268:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F5D4
     li r4, 0x1
     bl fn_804C35F0
@@ -428,7 +428,7 @@ lbl_fn_804B12F8_0000047C:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r31, 0x1
     b lbl_fn_804B12F8_0000051C
 lbl_fn_804B12F8_000004E8:
@@ -443,7 +443,7 @@ lbl_fn_804B12F8_000004E8:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r31, 0x2
 lbl_fn_804B12F8_0000051C:
     cmpwi r31, 0x1
@@ -942,7 +942,7 @@ lbl_fn_804B1528_00000C08:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r0, 0xe4(r31)
     cmpwi r0, 0x0
     bne lbl_fn_804B1528_00000C60
@@ -996,7 +996,7 @@ lbl_fn_804B1528_00000CCC:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r31
     li r4, 0x8
     bl fn_804AF520
@@ -1227,7 +1227,7 @@ lbl_fn_804B1E48_00000F78:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r25, 0x1
     b lbl_fn_804B1E48_0000107C
 lbl_fn_804B1E48_00001048:
@@ -1242,7 +1242,7 @@ lbl_fn_804B1E48_00001048:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r25, 0x2
 lbl_fn_804B1E48_0000107C:
     cmpwi r25, 0x1
@@ -1379,7 +1379,7 @@ lbl_fn_804B1E48_00001238:
     bl fn_80117228
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F5A4
     lwz r4, 0xc8(r29)
     bl fn_8050C844
@@ -1649,7 +1649,7 @@ lbl_fn_804B1E48_00001610:
     bl fn_80117228
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804B1E48_00001650:
     li r0, 0x2
     mr r4, r29
@@ -1793,7 +1793,7 @@ asm void fn_804B274C(void)
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r31, 0x1
     b lbl_fn_804B274C_0000189C
 lbl_fn_804B274C_00001868:
@@ -1808,7 +1808,7 @@ lbl_fn_804B274C_00001868:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r31, 0x2
 lbl_fn_804B274C_0000189C:
     cmpwi r31, 0x1

@@ -82,9 +82,9 @@ extern void fn_80617340(void);
 extern void fn_80617880(void);
 extern void GXSetNumTevStages(void);
 extern void fn_80617D50(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_80686A48(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -2037,8 +2037,8 @@ lbl_fn_804AD1EC_0000192C:
     addi r4, r25, 0x17b
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804AD1EC_00001950:
     lwz r3, 0x3c(r1)
     addi r0, r24, 0x5555
@@ -2057,8 +2057,8 @@ lbl_fn_804AD1EC_00001950:
     addi r4, r25, 0x17b
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804AD1EC_0000199C:
     addi r0, r28, 0x71c7
     cmplw r16, r0
@@ -2104,8 +2104,8 @@ lbl_fn_804AD1EC_00001A20:
     addi r4, r25, 0x17b
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804AD1EC_00001A40:
     mulli r3, r16, 0xc
     bl mem_free
@@ -2115,8 +2115,8 @@ lbl_fn_804AD1EC_00001A40:
     addi r3, r26, 0xa0
     addi r4, r14, lbl_807799A0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804AD1EC_00001A68:
     lwz r5, 0x3c(r1)
     lwz r0, 0x48(r1)

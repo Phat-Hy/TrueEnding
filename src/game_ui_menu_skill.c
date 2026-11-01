@@ -23,7 +23,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 
@@ -1382,7 +1382,7 @@ lbl_fn_801B9DE4_00001128:
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
     beq lbl_fn_801B9DE4_00001228
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1474,7 +1474,7 @@ lbl_fn_801B9DE4_00001324:
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
     beq lbl_fn_801B9DE4_00001388
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1660,7 +1660,7 @@ lbl_fn_801B9DE4_00001558:
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
     beq lbl_fn_801B9DE4_0000162C
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1725,7 +1725,7 @@ lbl_fn_801B9DE4_00001664:
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
     beq lbl_fn_801B9DE4_00001720
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4

@@ -17,7 +17,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void fn_800F8548(void);
 extern void fn_800FAB80(void);
@@ -39,8 +39,8 @@ extern void fn_802E1414(void);
 extern void fn_802E1624(void);
 extern void fn_802E177C(void);
 extern void world_setLocalFlag(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_80695720(void);
 
 /* External data declarations */
@@ -1083,8 +1083,8 @@ lbl_fn_802E01A0_00000D70:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078249C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802E01A0_00000E08:
     cmpwi r30, 0x0
     beq lbl_fn_802E01A0_00000E38
@@ -1302,7 +1302,7 @@ lbl_fn_802E03F0_000010AC:
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, 0x14f4(r31)
     stw r30, 0x14f8(r31)
     addi r0, r3, 0x1
@@ -1708,7 +1708,7 @@ lbl_fn_802E094C_00001624:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_802E094C_000016D0:
     addi r11, r1, 0xc0
     psq_l f31, 0xc8(r1), 0, 0
@@ -1910,7 +1910,7 @@ asm void fn_802E0EC8(void)
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_802E0EC8_000019B4:
     lwz r0, 0x2dc(r30)
     cmpwi r0, 0x14d

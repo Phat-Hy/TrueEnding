@@ -6,7 +6,7 @@ extern void fn_80079044(void);
 extern void fn_800C16B4(void);
 extern void fn_800C2448(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800DC6B4(void);
 extern void fn_801FED24(void);
 extern void fn_80373148(void);
@@ -397,7 +397,7 @@ lbl_fn_80481818_000003C0:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r4, 0x48(r31)
     addi r3, r30, 0x27d
     lfs f31, lbl_80887008

@@ -83,7 +83,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
@@ -413,7 +413,7 @@ lbl_fn_80323690_00000274:
     bl fn_8000D124
     li r0, 0x1
     stw r0, 0x14cc(r30)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x5555
     lwz r5, 0x14fc(r30)
     addi r0, r4, 0x5556

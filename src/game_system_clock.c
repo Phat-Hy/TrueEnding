@@ -39,9 +39,9 @@ extern void fn_80201794(void);
 extern void fn_80201DC4(void*);
 extern void profile_initMetric(void*);
 extern void fn_80201DE8(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_80686A48(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
 extern void fn_80695D84(void);
@@ -1493,8 +1493,8 @@ lbl_player_clock_updateIntervals_000013C4:
     addi r4, r4, lbl_8073E628@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_player_clock_updateIntervals_00001404:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -1540,8 +1540,8 @@ lbl_player_clock_updateIntervals_0000144C:
     addi r4, r4, lbl_8073E628@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_player_clock_updateIntervals_000014B0:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -1595,8 +1595,8 @@ lbl_player_clock_updateIntervals_00001544:
     addi r4, r4, lbl_8073E628@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_player_clock_updateIntervals_00001574:
     slwi r3, r24, 2
     bl mem_free
@@ -1609,8 +1609,8 @@ lbl_player_clock_updateIntervals_00001574:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_player_clock_updateIntervals_000015A8:
     lwz r7, 0x80(r1)
     slwi r5, r26, 2

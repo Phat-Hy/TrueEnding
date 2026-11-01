@@ -43,8 +43,8 @@ extern void PSMTXMultVec(void);
 extern void PSMTXMultVecArray(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_80695720(void);
 extern u32 strlen(const char* str);
 
@@ -1930,8 +1930,8 @@ lbl_fn_8009F788_000019B8:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8009F788_000019F0:
     lwz r4, 0x4(r29)
     li r6, 0x0
@@ -1957,8 +1957,8 @@ lbl_fn_8009F788_000019F0:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8009F788_00001A58:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -2013,8 +2013,8 @@ lbl_fn_8009F788_00001AEC:
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8009F788_00001B20:
     slwi r3, r24, 2
     bl mem_free
@@ -2027,8 +2027,8 @@ lbl_fn_8009F788_00001B20:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8009F788_00001B54:
     lwz r5, 0x4(r29)
     lwz r3, 0x58(r1)

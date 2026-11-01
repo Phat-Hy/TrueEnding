@@ -45,8 +45,8 @@ extern void fn_805B8280(void);
 extern void fn_805BA938(void);
 extern void fn_805BB658(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_806958E0(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -882,8 +882,8 @@ asm void fn_805B983C(void)
     addi r4, r4, 0x69
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805B983C_00000ADC:
     li r3, 0x34
     bl mem_free
@@ -896,8 +896,8 @@ lbl_fn_805B983C_00000ADC:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80797908@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805B983C_00000B10:
     addic. r3, r26, 0xc
     addi r0, r27, 0x4

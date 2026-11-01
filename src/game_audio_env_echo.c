@@ -51,7 +51,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 
@@ -526,7 +526,7 @@ asm void fn_80318F9C(void)
     li r6, 0x1
     bl fn_80239DAC
     lwz r31, 0x1c84(r30)
-    bl fn_80680CF8
+    bl rand
     divw r4, r3, r31
     lwz r6, 0x7e0(r30)
     li r5, 0x1
@@ -680,7 +680,7 @@ asm void fn_803191FC(void)
     lwz r30, 0x1c84(r3)
     stfs f2, 0x530(r3)
     stw r0, 0x1578(r3)
-    bl fn_80680CF8
+    bl rand
     divw r4, r3, r30
     lwz r6, 0x7e0(r31)
     li r5, 0x1
@@ -1430,7 +1430,7 @@ asm void fn_80319C90(void)
     stw r29, 0x364(r1)
     stw r28, 0x360(r1)
     lwz r28, 0x1c84(r3)
-    bl fn_80680CF8
+    bl rand
     divw r4, r3, r28
     lwz r6, 0x7e0(r31)
     li r5, 0x1

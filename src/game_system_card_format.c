@@ -17,7 +17,7 @@ extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC288(void);
 extern void fn_800E2AF8(void);
@@ -52,7 +52,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
 
@@ -1399,7 +1399,7 @@ lbl_fn_8035B8B0_00001124:
     cmpwi r0, 0x0
     beq lbl_fn_8035B8B0_000011BC
 lbl_fn_8035B8B0_00001194:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x5555
     addi r0, r4, 0x5556
     mulhw r4, r0, r3
@@ -1528,7 +1528,7 @@ asm void fn_8035BC84(void)
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r30, 0x4(r29)
     li r3, 0x0
     li r4, 0x0
@@ -1597,7 +1597,7 @@ asm void fn_8035BDE8(void)
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r4, 0xc(r31)
     lis r0, 0x4330
     stw r0, 0x10(r1)

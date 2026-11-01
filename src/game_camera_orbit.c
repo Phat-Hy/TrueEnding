@@ -20,7 +20,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB58C(void);
 extern void fn_800CB5C8(void);
@@ -61,12 +61,12 @@ extern void fn_805A3D00(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_80683B54(void);
 extern void fn_80684600(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern u32 strlen(const char* str);
 
@@ -676,10 +676,10 @@ asm void fn_802E89B0(void)
 lbl_fn_802E89B0_000007D8:
     addi r3, r29, 0x15a4
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addi r3, r29, 0x15a0
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r31, r29, 0x1594
     beq lbl_fn_802E89B0_00000810
     mr r3, r31
@@ -933,8 +933,8 @@ lbl_fn_802E8B88_00000B70:
     addi r4, r23, 0xb0
     addi r3, r14, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802E8B88_00000B94:
     lwz r3, 0x14ec(r15)
     addi r4, r15, 0x14f0
@@ -954,8 +954,8 @@ lbl_fn_802E8B88_00000B94:
     addi r4, r23, 0xb0
     addi r3, r14, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802E8B88_00000BE4:
     addi r0, r24, 0x5555
     cmplw r18, r0
@@ -1001,8 +1001,8 @@ lbl_fn_802E8B88_00000C68:
     addi r4, r23, 0xb0
     addi r3, r14, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802E8B88_00000C88:
     slwi r3, r18, 2
     bl mem_free
@@ -1013,8 +1013,8 @@ lbl_fn_802E8B88_00000C88:
     addi r3, r14, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802E8B88_00000CB4:
     lwz r0, 0x14ec(r15)
     lwz r3, 0x38(r1)
@@ -1110,8 +1110,8 @@ lbl_fn_802E8B88_00000E04:
     addi r4, r23, 0xb0
     addi r3, r14, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802E8B88_00000E28:
     lwz r3, 0x14e0(r15)
     addi r4, r15, 0x14e4
@@ -1131,8 +1131,8 @@ lbl_fn_802E8B88_00000E28:
     addi r4, r23, 0xb0
     addi r3, r14, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802E8B88_00000E78:
     lis r3, 0x555
     addi r0, r3, 0x5555
@@ -1180,8 +1180,8 @@ lbl_fn_802E8B88_00000F04:
     addi r4, r23, 0xb0
     addi r3, r14, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802E8B88_00000F24:
     slwi r3, r19, 4
     bl mem_free
@@ -1192,8 +1192,8 @@ lbl_fn_802E8B88_00000F24:
     addi r3, r14, 0xa0
     addi r4, r4, lbl_80787548@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802E8B88_00000F50:
     lwz r5, 0x14e0(r15)
     lwz r4, 0x24(r1)
@@ -1593,7 +1593,7 @@ lbl_fn_802E9590_00001480:
     bl fn_800CB440
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_802E9590_00001564
 lbl_fn_802E9590_00001508:
     li r4, 0x5
@@ -1618,7 +1618,7 @@ lbl_fn_802E9590_00001508:
     bl fn_800CB440
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_802E9590_00001564:
     addi r3, r31, 0x15a0
     addi r4, r31, 0x528

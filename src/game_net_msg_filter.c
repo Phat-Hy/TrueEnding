@@ -9,8 +9,8 @@ extern void _savegpr_26(void);
 extern void mem_free(void);
 extern void fn_800DC6B4(void);
 extern void fn_8050E630(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
@@ -1176,8 +1176,8 @@ asm void fn_804FF3D4(void)
     addi r4, r4, lbl_80759E48@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804FF3D4_00001144:
     mulli r3, r30, 0xd5c
     bl mem_free
@@ -1190,8 +1190,8 @@ lbl_fn_804FF3D4_00001144:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80791764@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804FF3D4_00001178:
     stw r31, 0x0(r29)
     stw r30, 0x8(r29)

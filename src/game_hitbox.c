@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void fn_800846FC(void);
 extern void mem_getAllocSize(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800EFBC4(void);
 extern void fn_800EFDA0(void);
 extern void fn_800EFE3C(void);
@@ -22,7 +22,7 @@ extern void fn_8023A184(void);
 extern void fn_8023A680(void);
 extern void fn_8023A8B4(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 
 /* External data declarations */
 extern u8 lbl_80735EB0[];
@@ -202,7 +202,7 @@ asm void fn_80107208(void)
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80107208_00000194:
     lwz r0, 0x24(r1)
     lfd f31, 0x18(r1)
@@ -1465,7 +1465,7 @@ lbl_fn_801081D8_00001230:
     lwz r0, 0x6d8(r3)
     cmpw r8, r0
     blt lbl_fn_801081D8_00001218
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     lis r3, 0x4330
     stw r0, 0xc(r1)

@@ -27,8 +27,8 @@ extern void fn_8047FF70(void);
 extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1554,8 +1554,8 @@ lbl_fn_8000DE44_000012E8:
     addi r4, r4, lbl_8072F924@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8000DE44_0000131C:
     li r5, 0x0
     addi r4, r29, 0x8
@@ -1580,8 +1580,8 @@ lbl_fn_8000DE44_0000131C:
     addi r4, r4, lbl_8072F924@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8000DE44_00001380:
     lis r3, 0x555
     addi r0, r3, 0x5555
@@ -1635,8 +1635,8 @@ lbl_fn_8000DE44_00001414:
     addi r4, r4, lbl_8072F924@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8000DE44_00001444:
     slwi r3, r28, 4
     bl mem_free
@@ -1649,8 +1649,8 @@ lbl_fn_8000DE44_00001444:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775AA4@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8000DE44_00001478:
     lwz r0, 0x18(r1)
     stw r31, 0x14(r1)

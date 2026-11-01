@@ -120,7 +120,7 @@ extern void fn_804A04AC(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_806958E0(void);
@@ -1922,7 +1922,7 @@ lbl_fn_80460458_00001808:
     li r0, 0x1
     stw r0, 0x14c4(r31)
     stw r30, 0x14ec(r31)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x5555
     stw r30, 0x14c8(r31)
     addi r0, r4, 0x5556

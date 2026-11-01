@@ -29,9 +29,9 @@ extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 
@@ -246,7 +246,7 @@ lbl_fn_801C5A04_000001F0:
     stfs f2, 0x10(r1)
     cmpwi r0, 0x0
     beq lbl_fn_801C5A04_0000025C
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1507,8 +1507,8 @@ lbl_fn_801C6CDC_000013E4:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077FAF0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801C6CDC_0000147C:
     cmpwi r30, 0x0
     beq lbl_fn_801C6CDC_000014AC

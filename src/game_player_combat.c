@@ -33,9 +33,9 @@ extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
 
@@ -1328,8 +1328,8 @@ lbl_fn_8011EF14_0000118C:
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8011EF14_000011B8:
     lwz r3, 0x18(r1)
     subi r0, r23, 0x1
@@ -1350,8 +1350,8 @@ lbl_fn_8011EF14_000011B8:
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8011EF14_0000120C:
     addi r0, r26, 0x5555
     cmplw r18, r0
@@ -1399,8 +1399,8 @@ lbl_fn_8011EF14_00001290:
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8011EF14_000012B8:
     slwi r3, r18, 2
     bl mem_free
@@ -1413,8 +1413,8 @@ lbl_fn_8011EF14_000012B8:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8011EF14_000012EC:
     lwz r0, 0x18(r1)
     lwz r3, 0x24(r1)

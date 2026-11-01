@@ -57,8 +57,8 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
@@ -545,8 +545,8 @@ lbl_fn_800E2778_000004E0:
     addi r4, r4, 0x58
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800E2778_0000050C:
     lwz r0, 0x8(r1)
     subf r3, r23, r28
@@ -573,8 +573,8 @@ lbl_fn_800E2778_0000054C:
     addi r4, r4, 0x73
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800E2778_00000570:
     add r30, r24, r30
     add r0, r23, r26
@@ -603,8 +603,8 @@ lbl_fn_800E2778_000005A0:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775AC0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800E2778_000005DC:
     cmpwi r23, 0x0
     beq lbl_fn_800E2778_000005F4

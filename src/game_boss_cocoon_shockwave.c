@@ -40,9 +40,9 @@ extern void fn_804730E4(void);
 extern void fn_80473104(void);
 extern void fn_80473130(void);
 extern void fn_805F8CA0(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_806952C4(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
@@ -316,8 +316,8 @@ lbl_fn_80473C88_0000026C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80473C88_000002B8:
     addic. r3, r29, 0x8
     addi r0, r31, 0x3ed0
@@ -790,8 +790,8 @@ lbl_atn_LoadMaterial_destructor_000008A4:
     addi r4, r22, 0x1
     addi r3, r23, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_atn_LoadMaterial_destructor_000008C8:
     addi r3, r30, 0x64
     stw r24, 0x14(r1)
@@ -811,8 +811,8 @@ lbl_atn_LoadMaterial_destructor_000008C8:
     addi r4, r22, 0x1
     addi r3, r23, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_atn_LoadMaterial_destructor_00000918:
     addi r0, r26, 0x5555
     cmplw r25, r0
@@ -858,8 +858,8 @@ lbl_atn_LoadMaterial_destructor_0000099C:
     addi r4, r22, 0x1
     addi r3, r23, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_atn_LoadMaterial_destructor_000009BC:
     slwi r3, r18, 2
     bl mem_free
@@ -869,8 +869,8 @@ lbl_atn_LoadMaterial_destructor_000009BC:
     addi r3, r23, 0xa0
     addi r4, r29, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_atn_LoadMaterial_destructor_000009E4:
     lwz r0, 0x18(r1)
     stw r25, 0x14(r1)
@@ -1066,8 +1066,8 @@ lbl_fn_80474678_00000C58:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80474678_00000CA4:
     addic. r3, r29, 0x8
     addi r0, r31, 0x3ed0

@@ -19,7 +19,7 @@ extern void PSMTXTrans(void);
 extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 
 /* External data declarations */
 extern u8 lbl_8074A490[];
@@ -457,21 +457,21 @@ lbl_fn_8033F7FC_00000638:
     lfs f2, 0x530(r28)
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0xbc(r1)
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x32c(r1)
     lfd f0, 0x328(r1)
     fsubs f0, f0, f24
     fdivs f0, f0, f25
     fmadds f22, f26, f0, f27
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x334(r1)
     lfd f0, 0x330(r1)
     fsubs f0, f0, f24
     fdivs f0, f0, f25
     fmadds f21, f26, f0, f27
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x32c(r1)
     lfs f0, 0xb8(r1)
@@ -499,7 +499,7 @@ lbl_fn_8033F7FC_00000638:
     stfs f7, 0xa8(r1)
     stfs f9, 0xb0(r1)
     bl PSVECNormalize
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x334(r1)
     lfs f8, 0xb0(r1)
@@ -522,7 +522,7 @@ lbl_fn_8033F7FC_00000638:
     stfs f0, 0x48(r1)
     stfs f9, 0x4c(r1)
     stfs f8, 0x50(r1)
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4

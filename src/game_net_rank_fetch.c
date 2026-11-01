@@ -13,7 +13,7 @@ extern void mem_alloc(void);
 extern void fn_800846FC(void);
 extern void mem_getAllocSize(void);
 extern void fn_800A56A8(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC6B4(void);
 extern void fn_80117228(void);
@@ -825,7 +825,7 @@ lbl_fn_805212C0_000009BC:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_805212C0_000009F0:
     cmpwi r31, 0x0
     beq lbl_fn_805212C0_00000B54

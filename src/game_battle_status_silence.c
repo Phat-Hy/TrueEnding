@@ -26,10 +26,10 @@ extern void fn_80092954(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC288(void);
 extern void fn_800DC6B4(void);
@@ -788,7 +788,7 @@ lbl_fn_8042CA54_00000894:
     mr r4, r3
     addi r3, r29, 0xf4
     addi r5, r1, 0x8
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
 lbl_fn_8042CA54_000008D8:
     addi r3, r1, 0x108
     bl fn_8005BBF8
@@ -1361,7 +1361,7 @@ lbl_fn_8042D140_00001024:
     addi r5, r1, 0x20
     li r4, 0x13f
     addi r3, r3, 0xb0
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     b lbl_fn_8042D140_000010BC
 lbl_fn_8042D140_00001070:
     mr r3, r24
@@ -1381,7 +1381,7 @@ lbl_fn_8042D140_00001070:
     addi r5, r1, 0x20
     li r4, 0x142
     addi r3, r3, 0xb0
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     stw r27, 0xf8(r28)
 lbl_fn_8042D140_000010BC:
     addi r3, r1, 0x120
@@ -1999,7 +1999,7 @@ lbl_fn_8042D93C_000018A8:
     bl fn_800C344C
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8042D93C_000018F0
 lbl_fn_8042D93C_000018E4:
     addi r3, r3, 0x4

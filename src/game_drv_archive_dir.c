@@ -70,9 +70,9 @@ extern void fn_805AA394(void);
 extern void fn_805ADB2C(void);
 extern void fn_805AE13C(void);
 extern void fn_805AE18C(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_80686A48(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 
 /* External data declarations */
 extern u8 jumptable_807976BC[];
@@ -2452,8 +2452,8 @@ lbl_fn_805AC75C_000020D4:
     addi r4, r14, 0x1bd
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805AC75C_000020F8:
     lwz r3, 0x90(r1)
     addi r0, r25, 0x5555
@@ -2472,8 +2472,8 @@ lbl_fn_805AC75C_000020F8:
     addi r4, r14, 0x1bd
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805AC75C_00002144:
     addi r0, r28, 0x71c7
     cmplw r17, r0
@@ -2519,8 +2519,8 @@ lbl_fn_805AC75C_000021C8:
     addi r4, r14, 0x1bd
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805AC75C_000021E8:
     mulli r3, r17, 0xc
     bl mem_free
@@ -2531,8 +2531,8 @@ lbl_fn_805AC75C_000021E8:
     addi r3, r26, 0xa0
     addi r4, r4, lbl_807799A0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805AC75C_00002214:
     lwz r5, 0x90(r1)
     lwz r0, 0xbc(r1)
@@ -2752,8 +2752,8 @@ lbl_fn_805AC75C_0000252C:
     addi r4, r22, 0x1bd
     addi r3, r21, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805AC75C_00002550:
     lwz r3, 0x90(r1)
     addi r0, r23, 0x5555
@@ -2772,8 +2772,8 @@ lbl_fn_805AC75C_00002550:
     addi r4, r22, 0x1bd
     addi r3, r21, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805AC75C_0000259C:
     addi r0, r19, 0x71c7
     cmplw r27, r0
@@ -2819,8 +2819,8 @@ lbl_fn_805AC75C_00002620:
     addi r4, r22, 0x1bd
     addi r3, r21, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805AC75C_00002640:
     mulli r3, r27, 0xc
     bl mem_free
@@ -2830,8 +2830,8 @@ lbl_fn_805AC75C_00002640:
     addi r3, r21, 0xa0
     addi r4, r31, lbl_807799A0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805AC75C_00002668:
     lwz r5, 0x90(r1)
     lwz r0, 0xa8(r1)

@@ -27,7 +27,7 @@ extern void fn_800C1990(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void fn_800CB688(void);
 extern void fn_800DC288(void);
@@ -54,7 +54,7 @@ extern void fn_8047059C(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_8068B100(void);
 
@@ -1234,7 +1234,7 @@ lbl_fn_80421308_00000EA0:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r0, 0x0
     stw r0, 0x4e8(r30)
     lwz r3, lbl_8087F3C0
@@ -1458,7 +1458,7 @@ asm void fn_80421628(void)
     subic. r0, r4, 0x1
     stw r0, 0xf8(r3)
     bge lbl_fn_80421628_000013A0
-    bl fn_80680CF8
+    bl rand
     lwz r5, 0x108(r31)
     lwz r0, 0x10c(r31)
     divw r4, r3, r5
@@ -1468,7 +1468,7 @@ asm void fn_80421628(void)
     subf r3, r4, r3
     add r0, r0, r3
     stw r0, 0xf8(r31)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -1536,7 +1536,7 @@ lbl_fn_80421628_00001304:
     li r6, -0x1
     bl fn_800C31F4
     lwz r31, lbl_8087EFE8
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -1566,7 +1566,7 @@ lbl_fn_80421628_00001304:
     bl fn_800CB688
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80421628_000013A0:
     lwz r0, 0x64(r1)
     psq_l f31, 0x58(r1), 0, 0
@@ -1607,7 +1607,7 @@ lbl_fn_80421868_000013FC:
     cmplwi r0, 0x1
     bgt lbl_fn_80421868_00001430
     stw r4, 0x54(r3)
-    bl fn_80680CF8
+    bl rand
     lwz r5, 0x108(r31)
     lwz r0, 0x10c(r31)
     divw r4, r3, r5
@@ -1855,7 +1855,7 @@ lbl_fn_80421B7C_00001750:
 lbl_fn_80421B7C_00001770:
     addi r3, r29, 0x104
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r31, r29, 0xf8
     beq lbl_fn_80421B7C_0000179C
     mr r3, r31

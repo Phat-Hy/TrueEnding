@@ -37,10 +37,10 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
+extern void printf(void);
+extern void rand(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068B100(void);
 extern void fn_80695B00(void);
@@ -161,8 +161,8 @@ lbl_fn_801A474C_00000068:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077F66C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801A474C_000000A8:
     cmpwi r30, 0x0
     beq lbl_fn_801A474C_000000D8
@@ -261,8 +261,8 @@ lbl_fn_801A4898_000001B4:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077F650@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801A4898_000001F4:
     cmpwi r30, 0x0
     beq lbl_fn_801A4898_00000224
@@ -361,8 +361,8 @@ lbl_fn_801A49E4_00000300:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077F634@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801A49E4_00000340:
     cmpwi r30, 0x0
     beq lbl_fn_801A49E4_00000370
@@ -1524,7 +1524,7 @@ lbl_fn_801A59F4_00001408:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_801A59F4_00001464
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4

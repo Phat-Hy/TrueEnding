@@ -37,8 +37,8 @@ extern void fn_80575F70(void);
 extern void fn_80575FD0(void);
 extern void fn_8057666C(void);
 extern void fn_80624AB0(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void memmove(void);
 extern u32 strlen(const char* str);
 
@@ -1021,8 +1021,8 @@ asm void fn_8057DB18(void)
     addi r4, r4, 0x1f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057DB18_00000CA0:
     li r4, 0x0
     addi r0, r31, 0x8
@@ -1188,8 +1188,8 @@ lbl_fn_8057DC3C_00000EB0:
     addi r4, r4, 0x1f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057DC3C_00000F14:
     slwi r3, r26, 4
     bl mem_free
@@ -1202,8 +1202,8 @@ lbl_fn_8057DC3C_00000F14:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779F84@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057DC3C_00000F48:
     lwz r0, 0x2c(r31)
     stw r25, 0x28(r31)
@@ -1266,8 +1266,8 @@ lbl_fn_8057DC3C_00000F9C:
     addi r4, r4, 0x1f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057DC3C_00001034:
     slwi r3, r25, 4
     bl mem_free
@@ -1280,8 +1280,8 @@ lbl_fn_8057DC3C_00001034:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779F68@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057DC3C_00001068:
     lwz r0, 0x4(r30)
     stw r26, 0x0(r30)
@@ -1334,8 +1334,8 @@ lbl_fn_8057DC3C_000010C4:
     addi r4, r4, 0x1f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057DC3C_0000112C:
     slwi r3, r25, 4
     bl mem_free
@@ -1348,8 +1348,8 @@ lbl_fn_8057DC3C_0000112C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779F68@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057DC3C_00001160:
     lwz r0, 0x4(r30)
     stw r26, 0x0(r30)
@@ -1402,8 +1402,8 @@ lbl_fn_8057DC3C_000011BC:
     addi r4, r4, 0x1f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057DC3C_00001224:
     slwi r3, r25, 4
     bl mem_free
@@ -1416,8 +1416,8 @@ lbl_fn_8057DC3C_00001224:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779F68@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057DC3C_00001258:
     lwz r0, 0x4(r30)
     stw r26, 0x0(r30)
@@ -1470,8 +1470,8 @@ lbl_fn_8057DC3C_000012B4:
     addi r4, r4, 0x1f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057DC3C_0000131C:
     slwi r3, r25, 2
     bl mem_free
@@ -1484,8 +1484,8 @@ lbl_fn_8057DC3C_0000131C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057DC3C_00001350:
     subf r0, r28, r26
     lwz r3, 0x4(r30)
@@ -1625,8 +1625,8 @@ lbl_fn_8057E278_00001508:
     addi r4, r28, 0x1f
     addi r3, r29, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057E278_00001554:
     slwi r3, r19, 4
     bl mem_free
@@ -1637,8 +1637,8 @@ lbl_fn_8057E278_00001554:
     addi r3, r29, 0xa0
     addi r4, r4, lbl_80779F84@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057E278_00001580:
     stw r16, 0x28(r20)
     stw r19, 0x30(r20)
@@ -1695,8 +1695,8 @@ lbl_fn_8057E278_000015D4:
     addi r4, r28, 0x1f
     addi r3, r29, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057E278_00001654:
     slwi r3, r21, 4
     bl mem_free
@@ -1706,8 +1706,8 @@ lbl_fn_8057E278_00001654:
     addi r3, r29, 0xa0
     addi r4, r14, lbl_80779F68@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057E278_0000167C:
     stw r16, 0x0(r17)
     stw r21, 0x8(r17)
@@ -1754,8 +1754,8 @@ lbl_fn_8057E278_000016D8:
     addi r4, r28, 0x1f
     addi r3, r29, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057E278_00001728:
     slwi r3, r21, 4
     bl mem_free
@@ -1765,8 +1765,8 @@ lbl_fn_8057E278_00001728:
     addi r3, r29, 0xa0
     addi r4, r14, lbl_80779F68@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057E278_00001750:
     stw r16, 0x0(r17)
     stw r21, 0x8(r17)
@@ -1813,8 +1813,8 @@ lbl_fn_8057E278_000017AC:
     addi r4, r28, 0x1f
     addi r3, r29, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057E278_000017FC:
     slwi r3, r21, 4
     bl mem_free
@@ -1824,8 +1824,8 @@ lbl_fn_8057E278_000017FC:
     addi r3, r29, 0xa0
     addi r4, r14, lbl_80779F68@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057E278_00001824:
     stw r16, 0x0(r17)
     stw r21, 0x8(r17)
@@ -1872,8 +1872,8 @@ lbl_fn_8057E278_00001880:
     addi r4, r28, 0x1f
     addi r3, r29, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057E278_000018D0:
     slwi r3, r16, 2
     bl mem_free
@@ -1884,8 +1884,8 @@ lbl_fn_8057E278_000018D0:
     addi r3, r29, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8057E278_000018FC:
     stw r31, 0x0(r21)
     subf r0, r18, r19

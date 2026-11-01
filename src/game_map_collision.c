@@ -16,7 +16,7 @@ extern void mem_free(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800DC12C(void);
 extern void fn_80125474(void);
 extern void fn_801255C8(void);
@@ -44,10 +44,10 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
+extern void printf(void);
+extern void rand(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AE9C(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695D84(void);
@@ -214,8 +214,8 @@ lbl_fn_801805A4_0000015C:
     addi r4, r19, lbl_80738154@l
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801805A4_00000180:
     addi r3, r21, 0x14bc
     stw r23, 0x14(r1)
@@ -235,8 +235,8 @@ lbl_fn_801805A4_00000180:
     addi r4, r19, lbl_80738154@l
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801805A4_000001D0:
     addi r0, r28, 0x5555
     cmplw r27, r0
@@ -282,8 +282,8 @@ lbl_fn_801805A4_00000254:
     addi r4, r19, lbl_80738154@l
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801805A4_00000274:
     slwi r3, r18, 2
     bl mem_free
@@ -293,8 +293,8 @@ lbl_fn_801805A4_00000274:
     addi r3, r26, 0xa0
     addi r4, r31, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801805A4_0000029C:
     lwz r0, 0x18(r1)
     stw r27, 0x14(r1)
@@ -1369,7 +1369,7 @@ lbl_fn_8018161C_00001118:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F8A0
     li r4, 0x3
     li r5, 0x1f
@@ -1670,7 +1670,7 @@ asm void fn_80181A64(void)
     lwz r22, 0x14b8(r20)
     li r24, 0x0
     li r23, -0x1
-    bl fn_80680CF8
+    bl rand
     divwu r4, r3, r22
     subi r0, r21, 0x1
     lfs f30, lbl_80881C04

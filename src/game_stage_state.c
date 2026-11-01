@@ -18,9 +18,9 @@ extern void fn_80188F08(void);
 extern void fn_80188F40(void);
 extern void fn_801905AC(void);
 extern void fn_801905DC(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_806952C4(void);
 extern void fn_80695B00(void);
 extern char* strcpy(char* dest, const char* src);
@@ -363,8 +363,8 @@ lbl_fn_8019C234_00000374:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077CF28@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019C234_0000040C:
     cmpwi r28, 0x0
     beq lbl_fn_8019C234_0000044C
@@ -488,8 +488,8 @@ lbl_fn_8019C234_0000051C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077EEB8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019C234_000005E4:
     cmpwi r28, 0x0
     beq lbl_fn_8019C234_0000062C
@@ -677,8 +677,8 @@ lbl_fn_8019C234_00000804:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077DC10@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019C234_0000089C:
     cmpwi r28, 0x0
     beq lbl_fn_8019C234_000008CC
@@ -1333,8 +1333,8 @@ asm void fn_8019D0C4(void)
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077EED4@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019D0C4_0000118C:
     cmpwi r31, 0x0
     beq lbl_fn_8019D0C4_000011FC
@@ -1737,8 +1737,8 @@ lbl_fn_8019D634_000016E0:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077EED4@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019D634_00001720:
     cmpwi r29, 0x0
     beq lbl_fn_8019D634_00001790
@@ -1896,8 +1896,8 @@ lbl_fn_8019D858_00001904:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077EEB8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8019D858_00001944:
     cmpwi r29, 0x0
     beq lbl_fn_8019D858_0000198C

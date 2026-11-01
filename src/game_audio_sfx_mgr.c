@@ -52,7 +52,7 @@ extern void fn_805A4984(void);
 extern void fn_805A4F20(void);
 extern void fn_805A5224(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_80695720(void);
@@ -2034,7 +2034,7 @@ lbl_fn_80311364_00001AC4:
     li r8, 0x1
     addi r3, r3, 0xb0
     bl atn_Anim_setLayerAnimation
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -2079,7 +2079,7 @@ lbl_fn_80311364_00001BA8:
 lbl_fn_80311364_00001BAC:
     cmpwi r24, 0x0
     beq lbl_fn_80311364_00001BF4
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r25
     mr r4, r24
     mullw r0, r0, r25

@@ -13,10 +13,10 @@ extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AF38(void);
 extern void fn_800897D8(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
 extern void fn_800F8548(void);
@@ -831,7 +831,7 @@ lbl_fn_803334D0_000009E0:
 lbl_fn_803334D0_00000A04:
     addi r3, r29, 0x15b0
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r0, r29, 0x158c
     beq lbl_fn_803334D0_00000A34
     lwz r4, 0x158c(r29)
@@ -1017,19 +1017,19 @@ lbl_fn_803335C4_00000C84:
     addi r30, r30, lbl_8074A154@l
     li r4, 0x13f
     addi r5, r30, 0x51
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     addi r3, r31, 0xb0
     addi r5, r30, 0x67
     li r4, 0x142
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     addi r3, r31, 0xb0
     addi r5, r30, 0x7e
     li r4, 0x143
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     addi r3, r31, 0xb0
     addi r5, r30, 0x95
     li r4, 0x144
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     lwz r0, 0x12a8(r31)
     ori r0, r0, 0x10
     stw r0, 0x12a8(r31)

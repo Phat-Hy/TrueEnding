@@ -15,7 +15,7 @@ extern void _savegpr_21(void);
 extern void fn_8004ECC0(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800BFAC8(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
@@ -2334,7 +2334,7 @@ lbl_fn_803AF83C_00001F44:
     bl fn_803935FC
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803AF83C_000024E0
     lwz r3, lbl_8087F430
     lwz r0, 0x868(r3)
@@ -2549,7 +2549,7 @@ lbl_fn_803AF83C_00001FF0:
     bl fn_803935FC
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803AF83C_000022EC:
     cmpwi r20, 0x0
     bne lbl_fn_803AF83C_000024E0

@@ -21,7 +21,7 @@ extern void fn_8008B140(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -52,7 +52,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068236C(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
@@ -752,7 +752,7 @@ lbl_fn_8041BAC0_00000870:
     lwz r26, 0x90(r1)
     cmpwi r0, 0x0
     beq lbl_fn_8041BAC0_00000B4C
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r26
     addi r5, r1, 0x94
     addi r4, r1, 0x38
@@ -765,7 +765,7 @@ lbl_fn_8041BAC0_00000870:
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x40(r1)
 lbl_fn_8041BAC0_000008B0:
-    bl fn_80680CF8
+    bl rand
     lis r26, 0x4178
     lwz r4, 0xf4(r27)
     addi r0, r26, 0x749f
@@ -791,7 +791,7 @@ lbl_fn_8041BAC0_000008B0:
     fdivs f0, f0, f4
     fmuls f0, f3, f0
     stfs f0, 0x34(r1)
-    bl fn_80680CF8
+    bl rand
     addi r0, r26, 0x749f
     stw r31, 0xe0(r1)
     mulhw r0, r0, r3
@@ -1592,7 +1592,7 @@ lbl_fn_8041C784_000013F8:
     mr r4, r3
     addi r3, r29, 0xf4
     addi r5, r1, 0x8
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
 lbl_fn_8041C784_0000143C:
     mr r3, r30
     addi r4, r31, 0x18

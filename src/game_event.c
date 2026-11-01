@@ -22,7 +22,7 @@ extern void fn_8001C068(void);
 extern void fn_8003D298(void);
 extern void fn_8003D3F8(void);
 extern void fn_8003DBA4(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 
 /* External data declarations */
 extern u8 lbl_8072FF60[];
@@ -403,7 +403,7 @@ asm void fn_800303C0(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_800303C0_000003F4
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -929,7 +929,7 @@ asm void fn_80030AFC(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_80030AFC_00000B44
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -1008,7 +1008,7 @@ lbl_fn_80030AFC_00000C24:
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_80030AFC_00000C68
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -1516,7 +1516,7 @@ asm void fn_800312EC(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_800312EC_00001320
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -1584,7 +1584,7 @@ asm void fn_800313D4(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_800313D4_00001408
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -2134,7 +2134,7 @@ asm void fn_80031B28(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_80031B28_00001B5C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -2199,7 +2199,7 @@ asm void fn_80031C04(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_80031C04_00001C38
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -2678,7 +2678,7 @@ asm void fn_8003226C(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_8003226C_000022A0
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -2743,7 +2743,7 @@ asm void fn_80032348(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_80032348_0000237C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -2991,7 +2991,7 @@ asm void fn_8003268C(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_8003268C_000026C0
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -3163,7 +3163,7 @@ asm void fn_800328D8(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_800328D8_0000290C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -3995,7 +3995,7 @@ asm void fn_80033418(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_80033418_0000344C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -4407,7 +4407,7 @@ asm void fn_80033978(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_80033978_000039AC
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -4602,7 +4602,7 @@ asm void fn_80033C18(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_80033C18_00003C4C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -4970,7 +4970,7 @@ asm void fn_800340F0(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_800340F0_00004124
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -5187,7 +5187,7 @@ asm void fn_800343E8(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_800343E8_0000441C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3
@@ -5663,7 +5663,7 @@ asm void fn_80034A44(void)
     add r0, r4, r0
     subf. r30, r31, r0
     ble lbl_fn_80034A44_00004A78
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r0, r0, r3

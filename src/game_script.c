@@ -76,11 +76,11 @@ extern void fn_806185C0(void);
 extern void fn_80624830(void);
 extern void fn_80624910(void);
 extern void fn_806249F0(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_806846C4(void);
 extern void fn_806846CC(void);
 extern void fn_80686A48(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695D84(void);
 extern void memmove(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -775,8 +775,8 @@ lbl_fn_8006F72C_00000834:
     addi r4, r4, 0x10d
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8006F72C_00000860:
     lwz r0, 0x8(r1)
     subf r3, r20, r28
@@ -807,8 +807,8 @@ lbl_fn_8006F72C_000008B0:
     addi r4, r4, 0x128
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8006F72C_000008D4:
     add r24, r25, r30
     add r0, r20, r26
@@ -837,8 +837,8 @@ lbl_fn_8006F72C_00000904:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80777BF8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8006F72C_00000940:
     cmpwi r20, 0x0
     beq lbl_fn_8006F72C_00000958

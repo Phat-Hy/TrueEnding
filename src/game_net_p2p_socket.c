@@ -33,8 +33,8 @@ extern void fn_8050E630(void);
 extern void fn_8050F5AC(void);
 extern void fn_8050F668(void);
 extern void fn_8050F758(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_806A295C(void);
 extern void fn_806A2E8C(void);
 extern void fn_806A7020(void);
@@ -1863,8 +1863,8 @@ lbl_fn_8050D7F0_00001768:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80793180@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8050D7F0_00001814:
     addic. r3, r29, 0x20
     addi r0, r30, 0x8

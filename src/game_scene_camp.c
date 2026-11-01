@@ -22,9 +22,9 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068B100(void);
 extern void fn_80695B00(void);
@@ -400,8 +400,8 @@ lbl_fn_801A8080_000003F4:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077FB0C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801A8080_0000048C:
     cmpwi r30, 0x0
     beq lbl_fn_801A8080_000004BC
@@ -491,8 +491,8 @@ lbl_fn_801A8304_00000574:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077FB0C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801A8304_000005B4:
     cmpwi r30, 0x0
     beq lbl_fn_801A8304_000005E4
@@ -687,8 +687,8 @@ lbl_fn_801A84AC_000007E0:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077FAF0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801A84AC_00000878:
     cmpwi r30, 0x0
     beq lbl_fn_801A84AC_000008A8
@@ -779,8 +779,8 @@ lbl_fn_801A86F0_00000960:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077FAF0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801A86F0_000009A0:
     cmpwi r30, 0x0
     beq lbl_fn_801A86F0_000009D0
@@ -1390,8 +1390,8 @@ lbl_fn_801A8E68_000011DC:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077FB0C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801A8E68_00001274:
     cmpwi r30, 0x0
     beq lbl_fn_801A8E68_000012A4

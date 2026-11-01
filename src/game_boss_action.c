@@ -56,7 +56,7 @@ extern void fn_8036823C(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_80684600(void);
@@ -1446,7 +1446,7 @@ lbl_fn_80138E1C_0000133C:
     blt lbl_fn_80138E1C_000019AC
     li r0, 0x0
     stw r0, 0x12b0(r29)
-    bl fn_80680CF8
+    bl rand
     slwi r0, r3, 30
     srwi r6, r3, 31
     subf r0, r6, r0
@@ -1649,13 +1649,13 @@ lbl_fn_80138E1C_00001634:
     lwz r0, 0x12b4(r3)
     cmpwi r0, 0x0
     ble lbl_fn_80138E1C_000019AC
-    bl fn_80680CF8
+    bl rand
     lwz r4, 0x12b4(r29)
     divw r0, r3, r4
     mullw r0, r0, r4
     subf. r0, r0, r3
     bne lbl_fn_80138E1C_000019AC
-    bl fn_80680CF8
+    bl rand
     slwi r0, r3, 30
     srwi r6, r3, 31
     subf r0, r6, r0
@@ -1861,13 +1861,13 @@ lbl_fn_80138E1C_00001938:
     lwz r0, 0x12bc(r3)
     cmpwi r0, -0x1
     bne lbl_fn_80138E1C_000019AC
-    bl fn_80680CF8
+    bl rand
     lwz r4, 0x12b8(r29)
     divw r0, r3, r4
     mullw r0, r0, r4
     subf. r0, r0, r3
     bne lbl_fn_80138E1C_000019AC
-    bl fn_80680CF8
+    bl rand
     slwi r0, r3, 30
     srwi r3, r3, 31
     subf r0, r3, r0

@@ -17,7 +17,7 @@ extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
@@ -55,10 +55,10 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068A850(void);
 
 /* External data declarations */
@@ -283,7 +283,7 @@ asm void fn_80279930(void)
     beq lbl_fn_80279930_00000218
     li r4, -0x1
     addi r3, r3, 0x19c0
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r31, r29, 0x19b4
     beq lbl_fn_80279930_000001FC
     mr r3, r31
@@ -715,8 +715,8 @@ lbl_fn_802799C0_000007E8:
     addi r4, r21, 0xbe
     addi r3, r22, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802799C0_0000080C:
     lwz r3, 0x14c4(r29)
     addi r4, r29, 0x14c8
@@ -736,8 +736,8 @@ lbl_fn_802799C0_0000080C:
     addi r4, r21, 0xbe
     addi r3, r22, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802799C0_0000085C:
     addi r0, r23, 0x5555
     cmplw r27, r0
@@ -783,8 +783,8 @@ lbl_fn_802799C0_000008E0:
     addi r4, r21, 0xbe
     addi r3, r22, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802799C0_00000900:
     slwi r3, r27, 2
     bl mem_free
@@ -794,8 +794,8 @@ lbl_fn_802799C0_00000900:
     addi r3, r22, 0xa0
     addi r4, r26, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802799C0_00000928:
     lwz r5, 0x14c4(r29)
     lwz r3, 0x38(r1)
@@ -883,8 +883,8 @@ lbl_fn_802799C0_00000A54:
     addi r4, r21, 0xbe
     addi r3, r22, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802799C0_00000A78:
     lwz r3, 0x14b4(r29)
     addi r4, r29, 0x14b8
@@ -904,8 +904,8 @@ lbl_fn_802799C0_00000A78:
     addi r4, r21, 0xbe
     addi r3, r22, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802799C0_00000AC8:
     addi r0, r23, 0x5555
     cmplw r28, r0
@@ -951,8 +951,8 @@ lbl_fn_802799C0_00000B4C:
     addi r4, r21, 0xbe
     addi r3, r22, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802799C0_00000B6C:
     slwi r3, r17, 2
     bl mem_free
@@ -962,8 +962,8 @@ lbl_fn_802799C0_00000B6C:
     addi r3, r22, 0xa0
     addi r4, r26, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802799C0_00000B94:
     lwz r5, 0x14b4(r29)
     lwz r3, 0x24(r1)

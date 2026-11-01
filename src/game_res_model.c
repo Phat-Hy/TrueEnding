@@ -36,7 +36,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068A850(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
@@ -1188,7 +1188,7 @@ lbl_fn_8022D790_00000FBC:
     beq lbl_fn_8022D790_00001000
     stw r3, 0x0(r30)
     lwz r27, 0x108(r29)
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r27
     mullw r0, r0, r27
     subf r31, r0, r3

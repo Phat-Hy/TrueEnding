@@ -94,7 +94,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068236C(void);
 
 /* External data declarations */
@@ -418,7 +418,7 @@ lbl_fn_8001B714_00000328:
     stfs f0, 0x58(r1)
     stfs f3, 0x5c(r1)
     bl PSVECCrossProduct
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r3, r0, r4

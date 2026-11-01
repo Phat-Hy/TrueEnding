@@ -44,7 +44,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695AD0(void);
 
@@ -207,7 +207,7 @@ lbl_fn_802676BC_00000150:
     bl fn_8026C3E0
     b lbl_fn_802676BC_000001D4
 lbl_fn_802676BC_00000178:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
     mulhw r0, r0, r3
@@ -251,7 +251,7 @@ lbl_fn_802676BC_000001DC:
     mfcr r0
     extrwi. r0, r0, 1, 2
     beq lbl_fn_802676BC_000002D4
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x5555
     addi r0, r4, 0x5556
     mulhw r4, r0, r3
@@ -322,7 +322,7 @@ lbl_fn_802676BC_000002EC:
     cmpw r4, r0
     ble lbl_fn_802676BC_00000448
 lbl_fn_802676BC_00000310:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x6666
     addi r0, r4, 0x6667
     mulhw r0, r0, r3

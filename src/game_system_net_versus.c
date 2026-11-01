@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
@@ -31,8 +31,8 @@ extern void fn_803B583C(void);
 extern void fn_803B58D8(void);
 extern void fn_803CC6B4(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void memmove(void);
 
 /* External data declarations */
@@ -161,7 +161,7 @@ asm void fn_8039E328(void)
     bl fn_803935FC
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8039E328_00000148:
     lwz r3, 0x2c(r30)
     lwz r0, 0xb4(r29)
@@ -712,7 +712,7 @@ asm void fn_8039EACC(void)
     bl fn_803935FC
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F0A8
     lwz r0, 0xb8(r3)
     cmpwi r0, 0x0
@@ -811,7 +811,7 @@ lbl_fn_8039EBB8_000009E4:
     bl fn_803935FC
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8039EBB8_00000A18
 lbl_fn_8039EBB8_00000A04:
     lwz r3, 0x54(r28)
@@ -1309,8 +1309,8 @@ lbl_fn_8039F08C_000010A8:
     addi r4, r4, 0xce
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8039F08C_000010E0:
     lwz r4, 0x130(r23)
     li r6, 0x0
@@ -1336,8 +1336,8 @@ lbl_fn_8039F08C_000010E0:
     addi r4, r4, 0xce
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8039F08C_00001148:
     lis r3, 0x444
     addi r0, r3, 0x4444
@@ -1392,8 +1392,8 @@ lbl_fn_8039F08C_000011DC:
     addi r4, r4, 0xce
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8039F08C_00001210:
     mulli r3, r31, 0x14
     bl mem_free
@@ -1406,8 +1406,8 @@ lbl_fn_8039F08C_00001210:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078B2F8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8039F08C_00001244:
     lwz r6, 0x130(r23)
     li r0, 0x14

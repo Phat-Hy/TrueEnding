@@ -55,7 +55,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void fn_805F99F0(void);
 extern void fn_805F9AB0(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_80695720(void);
 extern void fn_80695AD0(void);
@@ -1616,7 +1616,7 @@ lbl_fn_803267E8_000015E0:
     bl fn_80323C18
     cmpwi r3, 0x0
     beq lbl_fn_803267E8_0000163C
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
     mulhw r0, r0, r3
@@ -1631,7 +1631,7 @@ lbl_fn_803267E8_000015E0:
     stw r0, 0x15dc(r31)
 lbl_fn_803267E8_0000163C:
     li r30, 0x0
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
     mulhw r0, r0, r3
@@ -1719,7 +1719,7 @@ lbl_fn_803267E8_00001788:
     bl fn_80323C18
     cmpwi r3, 0x0
     beq lbl_fn_803267E8_000018CC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x5555
     addi r0, r4, 0x5556
     mulhw r4, r0, r3

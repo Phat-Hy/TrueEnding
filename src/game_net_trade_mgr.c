@@ -29,7 +29,7 @@ extern void fn_800BC2E0(void);
 extern void fn_800C1A1C(void);
 extern void fn_800C1FB4(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CFBA0(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -844,7 +844,7 @@ lbl_fn_8052B014_000009DC:
 lbl_fn_8052B014_000009EC:
     addi r3, r29, 0x1340
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r3, r29, 0x1334
     beq lbl_fn_8052B014_00000A08
     li r4, 0x0
@@ -1918,7 +1918,7 @@ lbl_fn_8052BD00_00001998:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8052BD00_000019F4
 lbl_fn_8052BD00_000019BC:
     mr r3, r31

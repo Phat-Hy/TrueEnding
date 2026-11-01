@@ -9,7 +9,7 @@ extern void fn_80044CCC(void);
 extern void fn_80044E0C(void);
 extern void mem_alloc(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_80107CA8(void);
@@ -685,7 +685,7 @@ asm void fn_8016DC14(void)
     bl fn_800C31F4
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8016DC14_000008C4
 lbl_fn_8016DC14_00000898:
     lis r4, lbl_80737490@ha
@@ -698,7 +698,7 @@ lbl_fn_8016DC14_00000898:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8016DC14_000008C4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

@@ -54,7 +54,7 @@ extern void fn_804EB7C8(void);
 extern void fn_804EB818(void);
 extern void fn_8059B670(void);
 extern void PSVECNormalize(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 
 /* External data declarations */
 extern u8 lbl_80730C68[];
@@ -1229,7 +1229,7 @@ asm void fn_8003F538(void)
     lwz r29, 0x3c(r1)
     add r29, r29, r3
     ble lbl_fn_8003F538_00000F3C
-    bl fn_80680CF8
+    bl rand
     lwz r4, 0x18(r23)
     divw r0, r3, r4
     mullw r0, r0, r4
@@ -1407,7 +1407,7 @@ lbl_fn_8003F538_00001170:
     lwz r31, 0x3c(r1)
     add r31, r31, r3
     ble lbl_fn_8003F538_000011B8
-    bl fn_80680CF8
+    bl rand
     lwz r4, 0x20(r23)
     divw r0, r3, r4
     mullw r0, r0, r4
@@ -2809,7 +2809,7 @@ asm void fn_80040B44(void)
     stw r0, 0x1c(r3)
     lwz r0, 0xc(r6)
     extrwi r30, r0, 1, 26
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     rlwinm r31, r24, 0, 26, 26
     subi r4, r4, 0x7ae1
@@ -2920,7 +2920,7 @@ lbl_fn_80040B44_00002674:
 lbl_fn_80040B44_00002694:
     addi r7, r7, 0x1
     bdnz lbl_fn_80040B44_00002598
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r19
     addi r4, r1, 0x30
     mullw r0, r0, r19
@@ -3048,7 +3048,7 @@ lbl_fn_80040B44_0000285C:
 lbl_fn_80040B44_00002860:
     lwz r31, 0x1c(r21)
     lwz r24, 0x20(r21)
-    bl fn_80680CF8
+    bl rand
     addi r5, r24, 0x1
     srwi r0, r24, 31
     divw r4, r3, r5
@@ -3500,7 +3500,7 @@ lbl_fn_800413EC_00002E90:
     li r4, 0xc
     bl fn_80134134
     mr r29, r3
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x51ec
     lwz r4, 0x0(r29)
     subi r0, r5, 0x7ae1
@@ -3598,7 +3598,7 @@ lbl_fn_800413EC_0000301C:
 lbl_fn_800413EC_00003020:
     fadds f31, f31, f0
 lbl_fn_800413EC_00003024:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -3645,7 +3645,7 @@ lbl_fn_800413EC_000030B0:
     bl fn_8016ADF4
     cmpwi r3, 0x0
     beq lbl_fn_800413EC_00003110
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x5555
     addi r0, r4, 0x5556
     mulhw r4, r0, r3
@@ -3774,7 +3774,7 @@ lbl_fn_800417E8_00003278:
     li r4, 0xc
     bl fn_80134134
     mr r27, r3
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x51ec
     lwz r4, 0x0(r27)
     subi r0, r5, 0x7ae1
@@ -3797,7 +3797,7 @@ lbl_fn_800417E8_000032D4:
     beq lbl_fn_800417E8_000032F0
     lfs f31, lbl_808807C8
 lbl_fn_800417E8_000032F0:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f

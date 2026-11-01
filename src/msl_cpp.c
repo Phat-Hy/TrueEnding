@@ -28,7 +28,7 @@ extern void fn_8067E570(void);
 extern void strcmp(void);
 extern void fn_806846C4(void);
 extern void fn_80686A48(void);
-extern void fn_80686ED8(void);
+extern void atexit(void);
 extern void fn_806974B4(void);
 extern void fn_80697BB8(void);
 extern void fn_80697CFC(void);
@@ -13720,7 +13720,7 @@ lbl_fn_80691F24_0000B07C:
     lis r3, fn_80691E50@ha
     stw r0, lbl_808803A0
     addi r3, r3, fn_80691E50@l
-    bl fn_80686ED8
+    bl atexit
 lbl_fn_80691F24_0000B08C:
     lwz r0, lbl_808803A0
     li r3, 0x1
@@ -13735,7 +13735,7 @@ lbl_fn_80691F24_0000B0B0:
     lis r3, fn_80691E50@ha
     stw r0, lbl_808803A0
     addi r3, r3, fn_80691E50@l
-    bl fn_80686ED8
+    bl atexit
 lbl_fn_80691F24_0000B0C0:
     lwz r3, lbl_808803A0
     li r0, 0x1
@@ -14264,7 +14264,7 @@ lbl_fn_806926D4_0000B834:
     lis r3, fn_80691E50@ha
     stw r0, lbl_808803A0
     addi r3, r3, fn_80691E50@l
-    bl fn_80686ED8
+    bl atexit
 lbl_fn_806926D4_0000B844:
     lwz r0, lbl_808803A0
     li r3, 0x1
@@ -14279,7 +14279,7 @@ lbl_fn_806926D4_0000B868:
     lis r3, fn_80691E50@ha
     stw r0, lbl_808803A0
     addi r3, r3, fn_80691E50@l
-    bl fn_80686ED8
+    bl atexit
 lbl_fn_806926D4_0000B878:
     lbz r0, lbl_808803B0
     li r3, 0x1

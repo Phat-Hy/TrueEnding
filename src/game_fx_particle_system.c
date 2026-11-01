@@ -25,7 +25,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
@@ -69,11 +69,11 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_80684600(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1299,7 +1299,7 @@ lbl_fn_80282EA4_00001098:
 lbl_fn_80282EA4_000010B8:
     addi r3, r29, 0x151c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r31, r29, 0x14dc
     beq lbl_fn_80282EA4_000010E4
     mr r3, r31
@@ -1311,7 +1311,7 @@ lbl_fn_80282EA4_000010B8:
 lbl_fn_80282EA4_000010E4:
     addi r3, r29, 0x14d8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r29
     li r4, 0x0
     bl fn_8035B78C
@@ -1538,8 +1538,8 @@ lbl_fn_80283004_00001418:
     addi r4, r25, 0xb7
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80283004_0000143C:
     lwz r3, 0x1574(r18)
     addi r4, r18, 0x1578
@@ -1559,8 +1559,8 @@ lbl_fn_80283004_0000143C:
     addi r4, r25, 0xb7
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80283004_0000148C:
     addi r0, r28, 0x5555
     cmplw r27, r0
@@ -1606,8 +1606,8 @@ lbl_fn_80283004_00001510:
     addi r4, r25, 0xb7
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80283004_00001530:
     slwi r3, r19, 2
     bl mem_free
@@ -1617,8 +1617,8 @@ lbl_fn_80283004_00001530:
     addi r3, r26, 0xa0
     addi r4, r31, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80283004_00001558:
     lwz r5, 0x1574(r18)
     lwz r3, 0x18(r1)

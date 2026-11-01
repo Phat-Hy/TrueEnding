@@ -25,9 +25,9 @@ extern void fn_8054770C(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695B00(void);
 
@@ -1006,8 +1006,8 @@ lbl_fn_801B47EC_00000BC0:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80780B80@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801B47EC_00000CBC:
     cmpwi r27, 0x0
     beq lbl_fn_801B47EC_00000D08
@@ -1107,8 +1107,8 @@ lbl_fn_801B4C00_00000DC8:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80780B80@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801B4C00_00000E08:
     cmpwi r30, 0x0
     beq lbl_fn_801B4C00_00000E50
@@ -1850,8 +1850,8 @@ lbl_fn_801B54E8_000017C0:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80780EB4@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801B54E8_00001858:
     cmpwi r30, 0x0
     beq lbl_fn_801B54E8_00001888
@@ -1941,8 +1941,8 @@ lbl_fn_801B5778_00001940:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80780EB4@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801B5778_00001980:
     cmpwi r30, 0x0
     beq lbl_fn_801B5778_000019B0

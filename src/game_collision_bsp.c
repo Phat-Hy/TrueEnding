@@ -35,7 +35,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 
 /* External data declarations */
 extern u8 lbl_80735EB0[];
@@ -1683,7 +1683,7 @@ lbl_fn_80103FD4_00001528:
     lwz r0, 0x54(r15)
     cmpwi r0, 0x0
     ble lbl_fn_80103FD4_000015C0
-    bl fn_80680CF8
+    bl rand
     lwz r5, 0x54(r15)
     lwz r0, 0x6e0(r28)
     divw r4, r3, r5
@@ -1919,7 +1919,7 @@ lbl_fn_80103FD4_000018D0:
 lbl_fn_80103FD4_000018D4:
     fcmpu cr0, f20, f16
     bne lbl_fn_80103FD4_00001918
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x8c(r1)
     lfd f0, 0x88(r1)

@@ -50,7 +50,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void fn_80622180(void);
 extern void fn_8067E23C(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_806958E0(void);
 
 /* External data declarations */
@@ -403,7 +403,7 @@ lbl_fn_803B9804_000003F0:
 lbl_fn_803B9804_00000408:
     cmplwi r0, 0x3
     bne lbl_fn_803B9804_00000428
-    bl fn_80680CF8
+    bl rand
     lwz r4, 0x8(r25)
     divw r0, r3, r4
     mullw r0, r0, r4

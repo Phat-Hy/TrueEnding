@@ -18,10 +18,10 @@ extern void fn_80088724(void);
 extern void fn_8008937C(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800EF73C(void);
@@ -59,7 +59,7 @@ extern void fn_804F5B0C(void);
 extern void fn_804F5CA0(void);
 extern void fn_804F5E3C(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_806958E0(void);
@@ -305,7 +305,7 @@ lbl_fn_804089A0_00000218:
     mr r4, r3
     addi r3, r31, 0xf4
     addi r5, r1, 0x8
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     b lbl_fn_804089A0_000003A8
 lbl_fn_804089A0_00000260:
     mr r3, r29
@@ -531,7 +531,7 @@ lbl_fn_80408D58_0000053C:
     bl fn_800C344C
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80408D58_00000854
 lbl_fn_80408D58_0000058C:
     lwz r29, 0x8b0(r3)
@@ -539,7 +539,7 @@ lbl_fn_80408D58_0000058C:
     cmpwi r29, 0x0
     stw r0, 0x8b4(r3)
     ble lbl_fn_80408D58_00000854
-    bl fn_80680CF8
+    bl rand
     divw r5, r3, r29
     srwi r4, r29, 31
     lwz r0, 0x8b4(r30)
@@ -623,7 +623,7 @@ lbl_fn_80408D58_00000628:
     bl fn_800C344C
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80408D58_00000854
 lbl_fn_80408D58_000006EC:
     lwz r3, lbl_8087F3C0
@@ -673,7 +673,7 @@ lbl_fn_80408D58_000006EC:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80408D58_00000854
 lbl_fn_80408D58_000007B0:
     lwz r0, 0x54(r3)

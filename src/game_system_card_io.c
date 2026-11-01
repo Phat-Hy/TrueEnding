@@ -32,7 +32,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 
@@ -448,7 +448,7 @@ lbl_fn_803576F8_000004A0:
     stfs f2, 0x153c(r25)
     b lbl_fn_803576F8_00000684
 lbl_fn_803576F8_00000528:
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -459,7 +459,7 @@ lbl_fn_803576F8_00000528:
 lbl_fn_803576F8_00000548:
     lfs f26, lbl_8088557C
 lbl_fn_803576F8_0000054C:
-    bl fn_80680CF8
+    bl rand
     mulhw r0, r23, r3
     stw r24, 0xc8(r1)
     lfs f0, 0x1530(r25)
@@ -1100,7 +1100,7 @@ lbl_fn_80357F48_00000E5C:
 lbl_fn_80357F48_00000EA4:
     cmpwi r3, -0x1
     bne lbl_fn_80357F48_00000EBC
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r30
     mullw r0, r0, r30
     subf r3, r0, r3
@@ -1143,7 +1143,7 @@ lbl_fn_80357F48_00000F24:
     bctrl
     b lbl_fn_80357F48_00001054
 lbl_fn_80357F48_00000F40:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x6666
     addi r0, r4, 0x6667
     mulhw r0, r0, r3
@@ -1487,7 +1487,7 @@ lbl_fn_80357F48_00001430:
     lwz r0, 0x14cc(r31)
     srwi. r0, r0, 31
     beq lbl_fn_80357F48_00001494
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x5555
     addi r0, r4, 0x5556
     mulhw r4, r0, r3

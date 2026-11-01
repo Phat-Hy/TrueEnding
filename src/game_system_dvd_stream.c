@@ -20,7 +20,7 @@ extern void fn_80087858(void);
 extern void fn_8008937C(void);
 extern void fn_800A555C(void);
 extern void fn_800A55AC(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void fn_800DC6B4(void);
 extern void fn_80116FC0(void);
@@ -58,7 +58,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_806959D8(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -372,7 +372,7 @@ lbl_fn_803775DC_0000037C:
     bl fn_80117228
     addi r3, r1, 0x20
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803775DC_000007F0
 lbl_fn_803775DC_00000398:
     lwz r3, lbl_8087EF70
@@ -402,7 +402,7 @@ lbl_fn_803775DC_000003E8:
     bl fn_80117228
     addi r3, r1, 0x1c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803775DC_000007F0
 lbl_fn_803775DC_00000404:
     lwz r3, lbl_8087EF70
@@ -443,7 +443,7 @@ lbl_fn_803775DC_00000478:
     bl fn_80117228
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803775DC_00000AFC
 lbl_fn_803775DC_00000494:
     cmpwi r0, 0x1
@@ -471,7 +471,7 @@ lbl_fn_803775DC_000004DC:
     bl fn_80117228
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803775DC_00000AFC
 lbl_fn_803775DC_000004F8:
     addi r3, r1, 0x10
@@ -479,7 +479,7 @@ lbl_fn_803775DC_000004F8:
     bl fn_80117228
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r30, 0x1
     b lbl_fn_803775DC_000007F0
 lbl_fn_803775DC_00000518:
@@ -644,7 +644,7 @@ lbl_fn_803775DC_00000744:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803775DC_000007F0
 lbl_fn_803775DC_00000760:
     cmpwi r0, 0x4
@@ -685,7 +685,7 @@ lbl_fn_803775DC_000007D8:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803775DC_000007F0:
     lis r28, lbl_8074DEC0@ha
     addi r26, r31, 0x18
@@ -1373,7 +1373,7 @@ lbl_fn_803786FC_00001194:
     stfs f3, 0x58(r1)
     stfs f0, 0x50(r1)
     stfs f0, 0x54(r1)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -1449,7 +1449,7 @@ lbl_fn_803786FC_000012C4:
     stfs f3, 0x58(r1)
     stfs f0, 0x50(r1)
     stfs f0, 0x54(r1)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f

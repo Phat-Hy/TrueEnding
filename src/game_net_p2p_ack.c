@@ -12,7 +12,7 @@ extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800A55AC(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC6B4(void);
 extern void fn_800EF73C(void);
@@ -244,7 +244,7 @@ lbl_fn_80510FBC_00000208:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80510FBC_0000023C:
     lmw r27, 0x1c(r1)
     lwz r0, 0x34(r1)

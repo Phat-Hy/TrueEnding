@@ -44,9 +44,9 @@ extern void PSMTXTrans(void);
 extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -935,8 +935,8 @@ lbl_fn_80472A9C_00000B7C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80472A9C_00000BC8:
     addic. r3, r29, 0x8
     addi r0, r31, 0x3ed0
@@ -1179,8 +1179,8 @@ lbl_fn_80472DCC_00000E98:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80472DCC_00000EE4:
     addic. r3, r29, 0x8
     addi r0, r31, 0x3ed0
@@ -2043,8 +2043,8 @@ lbl_fn_8047392C_00001A0C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8047392C_00001A58:
     addic. r3, r29, 0x8
     addi r0, r31, 0x3ed0

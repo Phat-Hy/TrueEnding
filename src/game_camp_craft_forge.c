@@ -66,7 +66,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 
@@ -1309,7 +1309,7 @@ lbl_fn_803C11A4_00001040:
     lwz r3, 0x9c(r4)
     mulli r0, r0, 0x30
     add r31, r3, r0
-    bl fn_80680CF8
+    bl rand
     lis r27, 0x4178
     lis r29, 0x4330
     addi r0, r27, 0x749f
@@ -1330,7 +1330,7 @@ lbl_fn_803C11A4_00001040:
     fsubs f4, f4, f5
     fdivs f3, f4, f3
     fmuls f30, f0, f3
-    bl fn_80680CF8
+    bl rand
     addi r0, r27, 0x749f
     stw r29, 0x20(r1)
     mulhw r0, r0, r3
@@ -1442,7 +1442,7 @@ asm void fn_803C1338(void)
     lfs f30, lbl_80885CD4
     lfs f31, lbl_80885CBC
 lbl_fn_803C1338_00001248:
-    bl fn_80680CF8
+    bl rand
     mulhw r0, r31, r3
     stw r25, 0x20(r1)
     srawi r0, r0, 8
@@ -1456,7 +1456,7 @@ lbl_fn_803C1338_00001248:
     fsubs f0, f0, f25
     fdivs f0, f0, f26
     fmuls f24, f27, f0
-    bl fn_80680CF8
+    bl rand
     mulhw r0, r31, r3
     stw r25, 0x28(r1)
     srawi r0, r0, 8

@@ -32,7 +32,7 @@ extern void fn_800897D8(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void lockon_updateTarget(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void fn_800BFAC8(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -2081,7 +2081,7 @@ lbl_fn_803635E8_00001AB0:
     mr r4, r3
     addi r3, r29, 0x4
     addi r5, r1, 0x8
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
 lbl_fn_803635E8_00001B04:
     addi r3, r1, 0x308
     bl fn_8005BBF8

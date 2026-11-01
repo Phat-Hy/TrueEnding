@@ -36,8 +36,8 @@ extern void PSMTXTrans(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 
 /* External data declarations */
 extern u8 lbl_8074F8CC[];
@@ -1103,8 +1103,8 @@ asm void fn_803AD148(void)
     addi r4, r4, 0x239
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803AD148_00000DC8:
     li r3, 0x14
     bl mem_free
@@ -1117,8 +1117,8 @@ lbl_fn_803AD148_00000DC8:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078B330@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803AD148_00000DFC:
     addic. r3, r27, 0xc
     addi r0, r28, 0x4
@@ -1299,8 +1299,8 @@ asm void fn_803AD3D8(void)
     addi r4, r4, 0x239
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803AD3D8_00001058:
     li r3, 0x14
     bl mem_free
@@ -1313,8 +1313,8 @@ lbl_fn_803AD3D8_00001058:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078B314@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803AD3D8_0000108C:
     addic. r3, r27, 0xc
     addi r0, r28, 0x4

@@ -9,7 +9,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CF45C(void);
 extern void fn_800F8548(void);
 extern void fn_800FAB80(void);
@@ -35,7 +35,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068B100(void);
 
@@ -214,7 +214,7 @@ lbl_fn_8034EA50_0000016C:
     li r5, 0x3ef
     li r6, 0x1
     bl fn_80239DAC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x14c0(r31)
     subi r5, r4, 0x7777
@@ -688,7 +688,7 @@ lbl_fn_8034ECE8_000008D0:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r0, 0x0
     stw r0, 0xd18(r30)
 lbl_fn_8034ECE8_00000904:
@@ -786,7 +786,7 @@ asm void fn_8034F41C(void)
     li r5, 0x3ef
     li r6, 0x1
     bl fn_80239DAC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x14c0(r30)
     subi r5, r4, 0x7777
@@ -973,7 +973,7 @@ lbl_fn_8034F53C_00000C9C:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r0, 0x64(r1)
     lwz r31, 0x5c(r1)
     lwz r30, 0x58(r1)
@@ -1830,7 +1830,7 @@ lbl_fn_80350070_00001910:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_80350070_000019EC
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4

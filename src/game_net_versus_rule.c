@@ -14,7 +14,7 @@ extern void mem_free(void);
 extern void fn_800A4450(void);
 extern void fn_800A555C(void);
 extern void fn_800A55AC(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
@@ -56,9 +56,9 @@ extern void fn_8050F668(void);
 extern void fn_8050F728(void);
 extern void fn_8050F768(void);
 extern void fn_8050F86C(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_80686AF0(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1193,7 +1193,7 @@ lbl_fn_804BA970_00000E84:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r31, 0x1
     b lbl_fn_804BA970_00000F18
 lbl_fn_804BA970_00000EE4:
@@ -1208,7 +1208,7 @@ lbl_fn_804BA970_00000EE4:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r31, 0x2
 lbl_fn_804BA970_00000F18:
     lwz r30, lbl_8087EF70
@@ -1406,7 +1406,7 @@ lbl_fn_804BA970_000011B8:
     bl fn_80117228
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804BA970_000011D0:
     cmpwi r31, 0x1
     bne lbl_fn_804BA970_00001370
@@ -1860,8 +1860,8 @@ lbl_fn_804BB2CC_00001838:
     addi r4, r21, 0x19a
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804BB2CC_0000185C:
     addi r3, r27, 0x104
     stw r19, 0x14(r1)
@@ -1881,8 +1881,8 @@ lbl_fn_804BB2CC_0000185C:
     addi r4, r21, 0x19a
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804BB2CC_000018AC:
     addi r0, r17, 0x5555
     cmplw r18, r0
@@ -1928,8 +1928,8 @@ lbl_fn_804BB2CC_00001930:
     addi r4, r21, 0x19a
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804BB2CC_00001950:
     slwi r3, r26, 2
     bl mem_free
@@ -1939,8 +1939,8 @@ lbl_fn_804BB2CC_00001950:
     addi r3, r20, 0xa0
     addi r4, r14, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804BB2CC_00001978:
     lwz r0, 0x18(r1)
     stw r18, 0x14(r1)

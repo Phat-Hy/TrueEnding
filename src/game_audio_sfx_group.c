@@ -13,7 +13,7 @@ extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_800FD658(void);
 extern void fn_80107168(void);
@@ -41,7 +41,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695720(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1130,7 +1130,7 @@ lbl_fn_803123D0_00000E6C:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_803123D0_00000F54
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1692,7 +1692,7 @@ lbl_fn_8031319C_000016C0:
     bl fn_80310314
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F498
     cmpwi r3, 0x0
     beq lbl_fn_8031319C_00001704

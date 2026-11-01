@@ -44,10 +44,10 @@ extern void fn_80547DFC(void);
 extern void fn_80547E18(void);
 extern void fn_8054A644(void);
 extern void fn_8054A660(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
 extern u32 strlen(const char* str);
@@ -1528,8 +1528,8 @@ lbl_fn_801207D4_00001114:
     addi r4, r4, lbl_80737138@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801207D4_00001148:
     li r5, 0x0
     addi r4, r29, 0x8
@@ -1554,8 +1554,8 @@ lbl_fn_801207D4_00001148:
     addi r4, r4, lbl_80737138@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801207D4_000011AC:
     lis r3, 0x71c
     addi r0, r3, 0x71c7
@@ -1609,8 +1609,8 @@ lbl_fn_801207D4_00001240:
     addi r4, r4, lbl_80737138@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801207D4_00001270:
     mulli r3, r28, 0xc
     bl mem_free
@@ -1623,8 +1623,8 @@ lbl_fn_801207D4_00001270:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80778910@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801207D4_000012A4:
     lwz r3, 0x28(r1)
     li r0, 0x0

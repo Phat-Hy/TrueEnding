@@ -35,9 +35,9 @@ extern void fn_805B01C4(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -241,7 +241,7 @@ lbl_fn_805B1AA0_00000220:
     bl world_getGlobalFlag
     b lbl_fn_805B1AA0_00000238
 lbl_fn_805B1AA0_00000230:
-    bl fn_80680CF8
+    bl rand
     b lbl_fn_805B1AA0_00000354
 lbl_fn_805B1AA0_00000238:
     lbz r0, 0xa(r31)
@@ -645,7 +645,7 @@ lbl_fn_805B202C_00000790:
     mr r31, r3
     b lbl_fn_805B202C_000007AC
 lbl_fn_805B202C_000007A4:
-    bl fn_80680CF8
+    bl rand
     b lbl_fn_805B202C_0000093C
 lbl_fn_805B202C_000007AC:
     lbz r0, 0x5(r26)
@@ -1887,8 +1887,8 @@ asm void fn_805B3124(void)
     addi r4, r4, 0x46
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805B3124_00001864:
     li r3, 0x14
     bl mem_free
@@ -1901,8 +1901,8 @@ lbl_fn_805B3124_00001864:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80797774@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805B3124_00001898:
     addic. r3, r30, 0xc
     addi r0, r31, 0x4

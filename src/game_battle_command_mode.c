@@ -21,12 +21,12 @@ extern void fn_8008B140(void);
 extern void fn_8008CD60(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB518(void);
 extern void fn_800CB5C8(void);
@@ -55,7 +55,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
@@ -182,7 +182,7 @@ asm void fn_804052EC(void)
     lwz r0, 0x41c(r31)
     cmpwi r0, 0x1
     bne lbl_fn_804052EC_00000110
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x6666
     lis r4, lbl_80752880@ha
     addi r0, r5, 0x6667
@@ -206,7 +206,7 @@ asm void fn_804052EC(void)
     stfs f0, 0x3e4(r31)
     b lbl_fn_804052EC_00000160
 lbl_fn_804052EC_00000110:
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x6666
     lis r4, lbl_80752880@ha
     addi r0, r5, 0x6667
@@ -352,7 +352,7 @@ lbl_fn_804052EC_0000028C:
     lwz r0, 0x41c(r31)
     cmpwi r0, 0x1
     bne lbl_fn_804052EC_00000394
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x6666
     lis r4, lbl_80752880@ha
     addi r0, r5, 0x6667
@@ -376,7 +376,7 @@ lbl_fn_804052EC_0000028C:
     stfs f0, 0x3e4(r31)
     b lbl_fn_804052EC_000003E4
 lbl_fn_804052EC_00000394:
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x6666
     lis r4, lbl_80752880@ha
     addi r0, r5, 0x6667
@@ -411,13 +411,13 @@ lbl_fn_804052EC_000003F4:
     bne lbl_fn_804052EC_00000584
     li r0, 0x0
     stb r0, 0x424(r31)
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
     subf. r0, r4, r0
     bne lbl_fn_804052EC_0000046C
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     li r0, 0x1
     subi r4, r4, 0x7777
@@ -435,7 +435,7 @@ lbl_fn_804052EC_000003F4:
 lbl_fn_804052EC_0000046C:
     lfs f0, lbl_808861FC
     stfs f0, 0x414(r31)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     subi r0, r4, 0x7777
     mulhw r0, r0, r3
@@ -451,7 +451,7 @@ lbl_fn_804052EC_000004A4:
     lwz r0, 0x41c(r31)
     cmpwi r0, 0x1
     bne lbl_fn_804052EC_0000050C
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x8889
     lis r4, lbl_80752880@ha
     subi r0, r5, 0x7777
@@ -475,7 +475,7 @@ lbl_fn_804052EC_000004A4:
     stfs f0, 0x3e4(r31)
     b lbl_fn_804052EC_00000560
 lbl_fn_804052EC_0000050C:
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x8889
     lis r4, lbl_80752880@ha
     subi r0, r5, 0x7777
@@ -687,7 +687,7 @@ asm void fn_80405A14(void)
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80405A14_00000AC0
 lbl_fn_80405A14_00000820:
     lfs f0, lbl_80886228
@@ -1030,7 +1030,7 @@ asm void fn_80405F88(void)
     bl fn_800CB5C8
     addi r3, r30, 0x634
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r0, r30, 0x608
     beq lbl_fn_80405F88_00000D14
     lwz r3, 0x60c(r30)
@@ -1102,7 +1102,7 @@ lbl_fn_80406038_00000DC8:
     lwz r4, 0x5f8(r22)
     add r3, r0, r24
     addi r3, r3, 0x4
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     addi r27, r27, 0x1
     addi r22, r22, 0x4
     cmpwi r27, 0x4
@@ -1345,7 +1345,7 @@ lbl_fn_804062FC_00001094:
     bl fn_800CB440
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addi r3, r31, 0x634
     li r4, 0x1e
     bl fn_800CB518
@@ -1753,7 +1753,7 @@ asm void fn_80406998(void)
     beq lbl_fn_80406998_00001798
     li r4, -0x1
     addi r3, r3, 0x940
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r31, r29, 0x934
     beq lbl_fn_80406998_00001700
     mr r3, r31

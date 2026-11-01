@@ -17,7 +17,7 @@ extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
 extern void fn_800EF73C(void);
 extern void fn_80211480(void);
@@ -54,7 +54,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 
@@ -660,7 +660,7 @@ lbl_fn_804348C4_00000794:
     lwz r3, lbl_8087F430
     lwz r28, lbl_8087F490
     lwz r27, 0x10d8(r3)
-    bl fn_80680CF8
+    bl rand
     slwi r0, r3, 30
     srwi r5, r3, 31
     subf r3, r5, r0
@@ -684,7 +684,7 @@ lbl_fn_804348C4_00000794:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r30
     addi r4, r29, 0x154
     bl fn_8037F6D8
@@ -1024,7 +1024,7 @@ lbl_fn_804348C4_00000DA0:
     lwz r4, 0x28(r1)
     bl fn_80448F9C
     mr r28, r3
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
     mulhw r0, r0, r3
@@ -1205,7 +1205,7 @@ lbl_fn_804348C4_00001034:
     bl fn_800CB688
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804348C4_00001048:
     lwz r0, 0x7fc(r30)
     stw r0, 0x118(r29)
@@ -1264,7 +1264,7 @@ lbl_fn_80435684_000010F0:
     lwz r0, 0x820(r4)
     cmpwi r0, 0x0
     ble lbl_fn_80435684_00001130
-    bl fn_80680CF8
+    bl rand
     lwz r4, 0x144(r31)
     lwz r0, 0x148(r31)
     lwz r5, 0x820(r4)
@@ -1610,7 +1610,7 @@ lbl_fn_80435908_00001600:
     lwz r24, 0x58(r1)
     cmpwi r0, 0x0
     beq lbl_fn_80435908_00001654
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r24
     addi r4, r1, 0x5c
     mullw r0, r0, r24

@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_800A555C(void);
 extern void fn_800A55AC(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
@@ -802,7 +802,7 @@ lbl_fn_804BE330_000009C4:
     bl fn_80117228
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r30, 0x1
     b lbl_fn_804BE330_00000A30
 lbl_fn_804BE330_000009FC:
@@ -817,7 +817,7 @@ lbl_fn_804BE330_000009FC:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r30, 0x2
 lbl_fn_804BE330_00000A30:
     cmpwi r30, 0x0
@@ -857,7 +857,7 @@ lbl_fn_804BE330_00000AA4:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F5D4
     li r4, 0x1
     bl fn_804C35F0
@@ -1108,7 +1108,7 @@ lbl_fn_804BE610_00000DDC:
     bl fn_80117228
     addi r3, r1, 0x1c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_804BE610_000013F0
 lbl_fn_804BE610_00000E2C:
     lwz r28, 0x5c(r27)
@@ -1349,7 +1349,7 @@ lbl_fn_804BE610_00001158:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r27
     li r4, 0xa
     bl fn_804BC628
@@ -1456,7 +1456,7 @@ lbl_fn_804BE610_000012C4:
     bl fn_80117228
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_804BE610_0000139C
 lbl_fn_804BE610_00001300:
     mr r3, r29
@@ -1499,7 +1499,7 @@ lbl_fn_804BE610_00001364:
     bl fn_80117228
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804BE610_0000139C:
     lwz r0, 0x0(r30)
     cmpw r28, r0
@@ -1523,7 +1523,7 @@ lbl_fn_804BE610_000013D8:
     bl fn_80117228
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804BE610_000013F0:
     addi r11, r1, 0x40
     bl _restgpr_27
@@ -2013,7 +2013,7 @@ lbl_fn_804BEDB8_00001A84:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r29
     li r4, 0xa
     bl fn_804BC628

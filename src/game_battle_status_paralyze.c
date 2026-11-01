@@ -44,11 +44,11 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
 extern void strstr(void);
 extern void fn_80684600(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695720(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -1878,8 +1878,8 @@ lbl_fn_8042A360_00001834:
     addi r4, r27, 0x1c
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8042A360_00001858:
     addi r3, r15, 0x290
     stw r24, 0x38(r1)
@@ -1899,8 +1899,8 @@ lbl_fn_8042A360_00001858:
     addi r4, r27, 0x1c
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8042A360_000018A8:
     addi r0, r28, 0x71c7
     cmplw r17, r0
@@ -1946,8 +1946,8 @@ lbl_fn_8042A360_0000192C:
     addi r4, r27, 0x1c
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8042A360_0000194C:
     mulli r3, r17, 0xc
     bl mem_free
@@ -1957,8 +1957,8 @@ lbl_fn_8042A360_0000194C:
     addi r3, r26, 0xa0
     addi r4, r14, lbl_80778910@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8042A360_00001974:
     lwz r0, 0x3c(r1)
     stw r18, 0x38(r1)

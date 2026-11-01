@@ -23,7 +23,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068A850(void);
 extern void fn_8068AEA4(void);
 extern void fn_806958E0(void);
@@ -123,7 +123,7 @@ asm void fn_803920C8(void)
     stfs f2, 0x88(r1)
     bl PSVECNormalize
     addi r31, r1, 0x74
-    bl fn_80680CF8
+    bl rand
     lis r28, 0x4178
     lis r29, lbl_8074E008@ha
     addi r0, r28, 0x749f
@@ -146,7 +146,7 @@ asm void fn_803920C8(void)
     fdivs f5, f6, f5
     fmuls f3, f3, f5
     fmadds f31, f0, f4, f3
-    bl fn_80680CF8
+    bl rand
     addi r0, r28, 0x749f
     lfs f4, 0x908(r30)
     mulhw r0, r0, r3
@@ -1402,7 +1402,7 @@ asm void fn_803933F4(void)
     stw r28, 0x30(r1)
     stw r0, 0x18(r1)
     stw r0, 0x20(r1)
-    bl fn_80680CF8
+    bl rand
     lis r28, 0x4178
     lis r29, lbl_8074E008@ha
     addi r0, r28, 0x749f
@@ -1425,7 +1425,7 @@ asm void fn_803933F4(void)
     fdivs f5, f6, f5
     fmuls f3, f3, f5
     fmadds f31, f0, f4, f3
-    bl fn_80680CF8
+    bl rand
     addi r4, r28, 0x749f
     lfs f0, lbl_808858E8
     mulhw r5, r4, r3

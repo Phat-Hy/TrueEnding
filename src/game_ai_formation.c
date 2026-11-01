@@ -16,7 +16,7 @@ extern void fn_8005B6E8(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800E41FC(void);
 extern void fn_800F72CC(void);
 extern void fn_800F7FA0(void);
@@ -1393,7 +1393,7 @@ lbl_fn_80266254_00001070:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r0, 0x6d0(r30)
     lwz r4, 0x34(r31)
     slwi r0, r0, 3

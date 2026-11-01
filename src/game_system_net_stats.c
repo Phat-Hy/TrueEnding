@@ -55,7 +55,7 @@ extern void fn_8054A0A0(void);
 extern void fn_805B4D94(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 
 /* External data declarations */
 extern u8 jumptable_8078AFE0[];
@@ -1007,7 +1007,7 @@ lbl_fn_803A5CDC_00000C18:
 lbl_fn_803A5CDC_00000C30:
     cmpwi r0, 0x3
     bne lbl_fn_803A5CDC_00000C4C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r29
     mullw r0, r0, r29
     subf r3, r0, r3
@@ -1547,7 +1547,7 @@ lbl_fn_803A6410_00001350:
 lbl_fn_803A6410_00001368:
     cmpwi r0, 0x3
     bne lbl_fn_803A6410_00001384
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r31
     mullw r0, r0, r31
     subf r3, r0, r3
@@ -1575,7 +1575,7 @@ lbl_fn_803A6410_000013B4:
 lbl_fn_803A6410_000013C8:
     cmpwi r0, 0x3
     bne lbl_fn_803A6410_000013E4
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r28
     mullw r0, r0, r28
     subf r3, r0, r3
@@ -1888,7 +1888,7 @@ lbl_fn_803A68B8_000017F4:
 lbl_fn_803A68B8_00001810:
     cmpwi r0, 0x3
     bne lbl_fn_803A68B8_0000182C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r31
     mullw r0, r0, r31
     subf r3, r0, r3

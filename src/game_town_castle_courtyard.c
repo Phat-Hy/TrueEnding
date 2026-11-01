@@ -9,7 +9,7 @@ extern void fn_8006F72C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800DC6B4(void);
 extern void fn_801346C8(void);
 extern void fn_8016E484(void);
@@ -1766,7 +1766,7 @@ lbl_fn_803D83A8_00001860:
     bl fn_800C31F4
     addi r3, r1, 0x2c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803D83A8_0000193C
 lbl_fn_803D83A8_00001890:
     lis r4, lbl_80750618@ha
@@ -1779,7 +1779,7 @@ lbl_fn_803D83A8_00001890:
     bl fn_800C31F4
     addi r3, r1, 0x28
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803D83A8_0000193C
 lbl_fn_803D83A8_000018C0:
     lis r4, lbl_80750618@ha
@@ -1792,7 +1792,7 @@ lbl_fn_803D83A8_000018C0:
     bl fn_800C31F4
     addi r3, r1, 0x24
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_803D83A8_0000193C
 lbl_fn_803D83A8_000018F0:
     slwi r0, r4, 2
@@ -2519,7 +2519,7 @@ lbl_fn_803D83A8_00002328:
     bl fn_800C31F4
     addi r3, r1, 0x20
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803D83A8_000023A4:
     lwz r3, 0x1108(r15)
     lwz r0, 0x38(r3)

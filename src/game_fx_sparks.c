@@ -10,7 +10,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_800FAB80(void);
 extern void fn_8016E970(void);
@@ -23,8 +23,8 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 
@@ -1944,8 +1944,8 @@ lbl_fn_8029B704_00001AF4:
     addi r4, r4, 0x261
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8029B704_00001B34:
     lis r3, 0x555
     addi r0, r3, 0x5555
@@ -1995,8 +1995,8 @@ lbl_fn_8029B704_00001B8C:
     addi r4, r4, 0x261
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8029B704_00001BF4:
     lis r3, 0x555
     addi r0, r3, 0x5555
@@ -2051,8 +2051,8 @@ lbl_fn_8029B704_00001C88:
     addi r4, r4, 0x261
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8029B704_00001CBC:
     slwi r3, r31, 4
     bl mem_free
@@ -2065,8 +2065,8 @@ lbl_fn_8029B704_00001CBC:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80785AA8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8029B704_00001CF0:
     lwz r5, 0x15ac(r30)
     addi r6, r1, 0x3c
@@ -2155,7 +2155,7 @@ lbl_fn_8029B704_00001DF0:
     bl fn_800C344C
     addi r3, r1, 0x28
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8029B704_00001E3C:
     lfs f7, lbl_80883BF4
     li r7, 0x0

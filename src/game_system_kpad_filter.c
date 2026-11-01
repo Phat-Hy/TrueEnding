@@ -10,7 +10,7 @@ extern void fn_80016FB4(void);
 extern void fn_8003EA3C(void);
 extern void fn_800697D8(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CFA28(void);
 extern void fn_800CFBA0(void);
 extern void atn_Task_setActive(void);
@@ -384,7 +384,7 @@ lbl_fn_80373FC4_000003B0:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F490
     li r4, 0x8
     li r5, 0x1

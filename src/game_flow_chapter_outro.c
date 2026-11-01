@@ -51,7 +51,7 @@ extern void fn_804EB3D0(void);
 extern void fn_804EB874(void);
 extern void fn_80506530(void);
 extern void fn_8050E098(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_806A8E40(void);
 extern void fn_806B0E30(void);
 
@@ -317,7 +317,7 @@ lbl_fn_804E67A0_00000300:
 lbl_fn_804E67A0_00000308:
     li r25, 0xa
 lbl_fn_804E67A0_0000030C:
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r25
     mullw r0, r0, r25
     subf r0, r0, r3
@@ -359,7 +359,7 @@ lbl_fn_804E67A0_00000388:
     b lbl_fn_804E67A0_00000414
 lbl_fn_804E67A0_00000394:
     lwz r25, 0xa0(r1)
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r25
     lwz r4, 0x74(r1)
     addi r5, r1, 0x78
@@ -419,7 +419,7 @@ lbl_fn_804E67A0_00000458:
     b lbl_fn_804E67A0_000004E4
 lbl_fn_804E67A0_00000464:
     lwz r25, 0xa0(r1)
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r25
     lwz r4, 0x48(r1)
     addi r5, r1, 0x4c
@@ -520,7 +520,7 @@ lbl_fn_804E67A0_0000052C:
 lbl_fn_804E67A0_000005D8:
     cmpwi r31, 0x0
     ble lbl_fn_804E67A0_000006A0
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r31
     li r5, 0x0
     mullw r0, r0, r31
@@ -578,7 +578,7 @@ lbl_fn_804E67A0_000006A0:
     addi r29, r29, 0x4
     cmpwi r24, 0x3
     blt lbl_fn_804E67A0_00000500
-    bl fn_80680CF8
+    bl rand
     stw r3, 0x598(r26)
     mr r29, r26
     addi r31, r1, 0x74

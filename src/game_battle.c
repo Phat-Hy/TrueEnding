@@ -78,7 +78,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_8068A850(void);
 extern void fn_806952C4(void);
@@ -2456,7 +2456,7 @@ lbl_fn_80018D5C_00002048:
     add r24, r24, r0
     bdnz lbl_fn_80018D5C_00002048
 lbl_fn_80018D5C_0000206C:
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r24
     addi r5, r1, 0x78
     li r7, 0x0
@@ -2485,7 +2485,7 @@ lbl_fn_80018D5C_000020C0:
     bdnz lbl_fn_80018D5C_00002090
     b lbl_fn_80018D5C_000020F0
 lbl_fn_80018D5C_000020D4:
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r25
     addi r4, r1, 0x78
     mullw r0, r0, r25
@@ -2819,7 +2819,7 @@ lbl_fn_80019254_00002588:
     add r24, r24, r0
     bdnz lbl_fn_80019254_00002588
 lbl_fn_80019254_000025AC:
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r24
     addi r5, r1, 0x478
     li r7, 0x0
@@ -2848,7 +2848,7 @@ lbl_fn_80019254_00002600:
     bdnz lbl_fn_80019254_000025D0
     b lbl_fn_80019254_00002630
 lbl_fn_80019254_00002614:
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r26
     addi r4, r1, 0x478
     mullw r0, r0, r26

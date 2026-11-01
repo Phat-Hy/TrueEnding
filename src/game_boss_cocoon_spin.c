@@ -19,8 +19,8 @@ extern void fn_8046F834(void);
 extern void fn_80472FAC(void);
 extern void fn_804730D4(void);
 extern void fn_80473104(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_806952C4(void);
 extern void fn_80695AD0(void);
 extern char* strcpy(char* dest, const char* src);
@@ -138,8 +138,8 @@ lbl_fn_80470604_000000E8:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80470604_00000134:
     addic. r3, r30, 0x8
     addi r0, r31, 0x3ed0

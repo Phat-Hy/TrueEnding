@@ -24,7 +24,7 @@ extern void mem_free(void);
 extern void fn_800846FC(void);
 extern void mem_getAllocSize(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800DC6B4(void);
@@ -43,10 +43,10 @@ extern void fn_80473F88(void);
 extern void fn_805BDD20(void);
 extern void fn_805BDD78(void);
 extern void fn_80615FF0(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_806846C4(void);
 extern void fn_80686A48(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AD58(void);
 extern void fn_80695720(void);
 extern void fn_806958E0(void);
@@ -615,8 +615,8 @@ lbl_fn_80477DB8_00000690:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80477DB8_000006DC:
     addic. r3, r29, 0x8
     addi r0, r31, 0x3ed0
@@ -967,8 +967,8 @@ lbl_fn_80478204_00000AC8:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80478204_00000B14:
     addic. r3, r29, 0x8
     addi r0, r31, 0x3ed0
@@ -1201,8 +1201,8 @@ lbl_fn_80478518_00000DE4:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80478518_00000E30:
     addic. r3, r29, 0x8
     addi r0, r31, 0x3ed0
@@ -2033,7 +2033,7 @@ lbl_fn_80478A70_000019D8:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80478A70_00001A04:
     stw r24, 0x144(r1)
     stw r31, 0x14c(r1)

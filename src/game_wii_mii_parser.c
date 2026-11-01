@@ -70,7 +70,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_80695B00(void);
 
@@ -1747,7 +1747,7 @@ lbl_fn_80567428_000015E8:
     lwz r0, 0xd14(r29)
     cmpwi r0, 0x0
     bgt lbl_fn_80567428_00001694
-    bl fn_80680CF8
+    bl rand
     lwz r5, 0x1510(r29)
     lwz r0, 0x150c(r29)
     divw r4, r3, r5
@@ -1773,7 +1773,7 @@ lbl_fn_80567428_00001644:
     lwz r0, 0xd14(r29)
     cmpwi r0, 0x0
     bgt lbl_fn_80567428_00001694
-    bl fn_80680CF8
+    bl rand
     lwz r5, 0x1510(r29)
     lwz r0, 0x150c(r29)
     divw r4, r3, r5

@@ -24,7 +24,7 @@ extern void fn_8008B964(void);
 extern void atn_Matrix_copy(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800EE180(void);
 extern void fn_800EFD04(void);
 extern void fn_800EFDA0(void);
@@ -51,7 +51,7 @@ extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695D84(void);
 
@@ -819,7 +819,7 @@ lbl_fn_800F72F4_00000988:
     bl fn_800C31F4
     addi r3, r1, 0x20
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_800F72F4_00000A64
 lbl_fn_800F72F4_00000A0C:
     lis r3, lbl_80735DD0@ha
@@ -831,7 +831,7 @@ lbl_fn_800F72F4_00000A0C:
     bl fn_800C31F4
     addi r3, r1, 0x1c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_800F72F4_00000A64
 lbl_fn_800F72F4_00000A38:
     lis r4, lbl_80735DD0@ha
@@ -844,7 +844,7 @@ lbl_fn_800F72F4_00000A38:
     bl fn_800C31F4
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_800F72F4_00000A64:
     bl fn_800F7F90
     cmpwi r3, 0x0
@@ -1647,7 +1647,7 @@ lbl_fn_800F8574_000013F8:
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_800F8574_00001420:
     lfs f2, 0x8(r20)
     addi r19, r1, 0x54
@@ -1877,7 +1877,7 @@ lbl_fn_800F8574_00001760:
     fsubs f0, f28, f0
     fmuls f7, f7, f0
     fmuls f26, f29, f7
-    bl fn_80680CF8
+    bl rand
     mulhw r0, r29, r3
     stw r30, 0x2a8(r1)
     li r4, 0x79
@@ -1898,7 +1898,7 @@ lbl_fn_800F8574_00001760:
     addi r3, r1, 0x248
     mr r5, r4
     bl PSMTXMultVec
-    bl fn_80680CF8
+    bl rand
     mulhw r0, r29, r3
     stw r30, 0x2b0(r1)
     li r4, 0x7a

@@ -11,7 +11,7 @@ extern void fn_8008CD60(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void dialog_renderWindow(void);
 extern void fn_80151448(void);
@@ -28,9 +28,9 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 
 /* External data declarations */
@@ -562,7 +562,7 @@ lbl_fn_80317360_00000654:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r0, 0x154(r1)
     psq_l f31, 0x148(r1), 0, 0
     lfd f31, 0x140(r1)
@@ -710,8 +710,8 @@ lbl_fn_803176D0_000008C0:
     addi r4, r21, 0x10c
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803176D0_000008E4:
     lwz r3, 0x38(r1)
     subi r0, r22, 0x1
@@ -730,8 +730,8 @@ lbl_fn_803176D0_000008E4:
     addi r4, r21, 0x10c
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803176D0_00000930:
     addi r0, r17, 0x5555
     cmplw r18, r0
@@ -777,8 +777,8 @@ lbl_fn_803176D0_000009B4:
     addi r4, r21, 0x10c
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803176D0_000009D4:
     slwi r3, r18, 2
     bl mem_free
@@ -788,8 +788,8 @@ lbl_fn_803176D0_000009D4:
     addi r3, r20, 0xa0
     addi r4, r14, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803176D0_000009FC:
     lwz r6, 0x38(r1)
     lwz r3, 0x58(r1)
@@ -901,8 +901,8 @@ lbl_fn_803176D0_00000B80:
     addi r4, r14, 0x10c
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803176D0_00000BA4:
     lwz r3, 0x2c(r1)
     subi r0, r25, 0x1
@@ -921,8 +921,8 @@ lbl_fn_803176D0_00000BA4:
     addi r4, r14, 0x10c
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803176D0_00000BF0:
     addi r0, r28, 0x5555
     cmplw r18, r0
@@ -968,8 +968,8 @@ lbl_fn_803176D0_00000C74:
     addi r4, r14, 0x10c
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803176D0_00000C94:
     slwi r3, r19, 2
     bl mem_free
@@ -980,8 +980,8 @@ lbl_fn_803176D0_00000C94:
     addi r3, r26, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_803176D0_00000CC0:
     lwz r0, 0x2c(r1)
     lwz r3, 0x44(r1)
@@ -1284,7 +1284,7 @@ lbl_fn_80317EF8_0000100C:
     b lbl_fn_80317EF8_000015AC
 lbl_fn_80317EF8_000010F0:
     lwz r27, 0x1c88(r30)
-    bl fn_80680CF8
+    bl rand
     lwz r5, 0x1c88(r30)
     li r6, 0x1
     lwz r7, 0x7e0(r30)
@@ -1431,7 +1431,7 @@ lbl_fn_80317EF8_000012F0:
     fadds f0, f7, f0
     stfs f0, 0x60(r1)
 lbl_fn_80317EF8_00001310:
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     lis r29, 0x4330
     lis r28, lbl_80749578@ha
@@ -1451,7 +1451,7 @@ lbl_fn_80317EF8_00001310:
     fmadds f7, f8, f9, f7
     fmuls f0, f0, f7
     stfs f0, 0x58(r1)
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x214(r1)
     lfd f9, lbl_80749578@l(r28)
@@ -1463,7 +1463,7 @@ lbl_fn_80317EF8_00001310:
     lfs f0, lbl_80884D60
     fdivs f8, f9, f8
     fmadds f30, f7, f8, f0
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x21c(r1)
     lfs f7, lbl_80884D60
@@ -1601,7 +1601,7 @@ lbl_fn_80317EF8_00001560:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80317EF8_000015AC:
     addi r11, r1, 0x240
     psq_l f31, 0x258(r1), 0, 0

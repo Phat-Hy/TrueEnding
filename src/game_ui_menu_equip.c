@@ -12,7 +12,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_800FAB80(void);
 extern void fn_800FB4B0(void);
@@ -40,7 +40,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -325,7 +325,7 @@ asm void fn_801B73F0(void)
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, 0x4(r30)
     bl fn_801446F0
     lwz r3, lbl_8087F048
@@ -387,7 +387,7 @@ asm void fn_801B74FC(void)
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, 0x4(r31)
     lwz r0, 0x12a4(r3)
     rlwinm r0, r0, 0, 5, 3
@@ -661,7 +661,7 @@ lbl_fn_801B77DC_000006E4:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_801B77DC_00000764:
     lwz r3, lbl_8087F498
     cmpwi r3, 0x0
@@ -1257,7 +1257,7 @@ asm void fn_801B805C(void)
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_801B805C_00001008
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1562,7 +1562,7 @@ lbl_fn_801B8360_00001410:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_801B8360_00001480
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1795,7 +1795,7 @@ lbl_fn_801B86CC_0000177C:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_801B86CC_000017EC
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1812,7 +1812,7 @@ lbl_fn_801B86CC_000017EC:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_801B86CC_0000182C
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4

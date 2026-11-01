@@ -24,7 +24,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
@@ -56,12 +56,12 @@ extern void atn_LoadHandle_isLoading(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
+extern void printf(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_80684600(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern void fn_8068B100(void);
@@ -1314,7 +1314,7 @@ lbl_fn_802F726C_000010C8:
 lbl_fn_802F726C_000010E8:
     addi r3, r29, 0x151c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r31, r29, 0x14dc
     beq lbl_fn_802F726C_00001114
     mr r3, r31
@@ -1326,7 +1326,7 @@ lbl_fn_802F726C_000010E8:
 lbl_fn_802F726C_00001114:
     addi r3, r29, 0x14d8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r29
     li r4, 0x0
     bl fn_8035B78C
@@ -1605,8 +1605,8 @@ lbl_fn_802F73FC_0000150C:
     addi r4, r25, 0xd8
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802F73FC_00001530:
     lwz r3, 0x15b0(r18)
     addi r4, r18, 0x15b4
@@ -1626,8 +1626,8 @@ lbl_fn_802F73FC_00001530:
     addi r4, r25, 0xd8
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802F73FC_00001580:
     addi r0, r28, 0x5555
     cmplw r27, r0
@@ -1673,8 +1673,8 @@ lbl_fn_802F73FC_00001604:
     addi r4, r25, 0xd8
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802F73FC_00001624:
     slwi r3, r19, 2
     bl mem_free
@@ -1684,8 +1684,8 @@ lbl_fn_802F73FC_00001624:
     addi r3, r26, 0xa0
     addi r4, r31, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802F73FC_0000164C:
     lwz r5, 0x15b0(r18)
     lwz r3, 0x18(r1)
@@ -1975,7 +1975,7 @@ lbl_fn_802F73FC_00001A5C:
     ori r0, r0, 0x4010
     oris r0, r0, 0x300
     stw r0, 0x7ec(r18)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x1614(r18)
     subi r4, r4, 0x7777

@@ -36,12 +36,12 @@ extern void fn_80092F1C(void);
 extern void fn_80095D44(void);
 extern void fn_800971D4(void);
 extern void fn_80097510(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
 extern void fn_80097E80(void);
 extern void fn_80099E9C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_destructor(void);
 extern void fn_800DC288(void);
 extern void fn_800F29D0(void);
@@ -89,7 +89,7 @@ extern void fn_80563A20(void);
 extern void fn_80564060(void);
 extern void fn_80566014(void);
 extern void fn_805663FC(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void strstr(void);
 extern void fn_80684600(void);
@@ -388,7 +388,7 @@ lbl_fn_80136138_000002FC:
     bl fn_801352F8
     addi r3, r30, 0x1414
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r0, r30, 0x1400
     beq lbl_fn_80136138_0000034C
     lwz r3, 0x1408(r30)
@@ -1097,7 +1097,7 @@ lbl_boss_updatePhaseState_00000CE4:
     lwz r0, 0x12c0(r30)
     cmpwi r0, 0x0
     ble lbl_boss_updatePhaseState_00000D8C
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x4178
     lis r4, 0x4330
     addi r0, r5, 0x749f
@@ -1689,7 +1689,7 @@ lbl_fn_801371AC_00001528:
     mr r4, r3
     addi r3, r17, 0xb0
     addi r5, r1, 0x470
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     b lbl_fn_801371AC_00001AE8
 lbl_fn_801371AC_00001570:
     mr r3, r16

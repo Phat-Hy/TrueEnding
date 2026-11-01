@@ -23,7 +23,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CF45C(void);
 extern void fn_800F8548(void);
 extern void fn_800FAB80(void);
@@ -46,9 +46,9 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AE9C(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
@@ -207,7 +207,7 @@ lbl_fn_803520D8_00000100:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -465,7 +465,7 @@ lbl_fn_803524E4_00000458:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r4, lbl_8087F430
     lwz r0, 0x96c(r4)
     srwi r3, r0, 31
@@ -632,7 +632,7 @@ lbl_fn_803526A8_000006B8:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r4, lbl_8087F430
     lwz r0, 0x96c(r4)
     srwi r3, r0, 31
@@ -1204,7 +1204,7 @@ lbl_fn_80352F88_00000F44:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addi r5, r30, 0x3fb
     li r0, 0x0
     stw r0, 0xd18(r28)
@@ -1289,8 +1289,8 @@ lbl_fn_80352F88_00001028:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078969C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80352F88_000010C0:
     cmpwi r30, 0x0
     beq lbl_fn_80352F88_000010F0
@@ -1384,8 +1384,8 @@ lbl_fn_80353254_000011B4:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078969C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80353254_000011F4:
     cmpwi r30, 0x0
     beq lbl_fn_80353254_00001224
@@ -1787,8 +1787,8 @@ lbl_fn_8035359C_00001738:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80789680@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8035359C_000017D0:
     cmpwi r30, 0x0
     beq lbl_fn_8035359C_00001800

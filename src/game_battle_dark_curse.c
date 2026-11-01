@@ -23,7 +23,7 @@ extern void fn_800C16C0(void);
 extern void fn_800C1814(void);
 extern void fn_800C1990(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB5C8(void);
 extern void atn_LH_Texture_destructAndFree(void);
@@ -453,7 +453,7 @@ lbl_fn_80422084_000003F8:
     bl fn_800CB440
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0
     beq lbl_fn_80422084_000005E4
@@ -490,7 +490,7 @@ lbl_fn_80422084_00000494:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r3, 0x0
     li r4, 0x0
     bl fn_80232B7C

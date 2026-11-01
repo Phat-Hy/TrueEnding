@@ -12,7 +12,7 @@ extern void fn_800827E0(void);
 extern void mem_alloc(void);
 extern void fn_80084F84(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC6B4(void);
@@ -1050,7 +1050,7 @@ lbl_world_Manager_postUpdate_00000D68:
     bl fn_800C31F4
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     cmpwi r30, 0x0
     beq lbl_world_Manager_postUpdate_00000DB0
     lwz r3, 0xb10(r31)
@@ -1195,7 +1195,7 @@ lbl_world_Manager_postUpdate_00000F7C:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_world_Manager_postUpdate_00000FA8:
     lwz r3, 0xb08(r31)
     lfs f0, lbl_8088570C

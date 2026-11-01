@@ -13,7 +13,7 @@ extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800EE360(void);
 extern void fn_800F7FD8(void);
 extern void fn_800F8548(void);
@@ -43,7 +43,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 
@@ -152,7 +152,7 @@ asm void fn_802B5DA4(void)
     cmpwi r29, 0x1
     stw r0, 0x14dc(r30)
     blt lbl_fn_802B5DA4_000000DC
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r29
     addi r4, r30, 0x15e4
     mullw r0, r0, r29
@@ -183,7 +183,7 @@ lbl_fn_802B5DA4_000000E4:
     b lbl_fn_802B5DA4_000001C8
 lbl_fn_802B5DA4_0000010C:
     lwz r29, 0x154c(r30)
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r29
     addi r4, r30, 0x15e4
     mullw r0, r0, r29
@@ -430,7 +430,7 @@ lbl_fn_802B6104_00000470:
     cmpwi r29, 0x1
     stw r0, 0x14dc(r30)
     blt lbl_fn_802B6104_00000998
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r29
     addi r4, r30, 0x15e4
     mullw r0, r0, r29
@@ -460,7 +460,7 @@ lbl_fn_802B6104_000004E4:
     b lbl_fn_802B6104_000005D0
 lbl_fn_802B6104_00000514:
     lwz r29, 0x154c(r30)
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r29
     addi r4, r30, 0x15e4
     mullw r0, r0, r29
@@ -663,7 +663,7 @@ lbl_fn_802B6104_000007B0:
     addi r3, r1, 0xb8
     mr r5, r4
     bl PSMTXMultVec
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0xf4(r1)
     lfd f5, lbl_807465C0@l(r29)
@@ -1103,7 +1103,7 @@ asm void fn_802B6AF8(void)
     stw r28, 0xc8(r3)
     stw r28, 0x151c(r30)
     lwz r29, 0x1590(r30)
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r29
     addi r4, r30, 0x15e4
     mullw r0, r0, r29
@@ -1467,7 +1467,7 @@ lbl_fn_802B6F80_00001358:
     fdivs f1, f1, f2
     fcmpo cr0, f1, f0
     bge lbl_fn_802B6F80_000013D4
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1720,7 +1720,7 @@ lbl_fn_802B73FC_000016F4:
 lbl_fn_802B73FC_00001704:
     addi r3, r29, 0x1548
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r31, r29, 0x153c
     beq lbl_fn_802B73FC_00001730
     mr r3, r31

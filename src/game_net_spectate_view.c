@@ -33,11 +33,11 @@ extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void fn_80473F88(void);
 extern void fn_804A0F58(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void strtok(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695D84(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -1064,8 +1064,8 @@ lbl_spectateView_renderInterface_00000E14:
     addi r4, r22, 0x35b
     addi r3, r27, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_spectateView_renderInterface_00000E38:
     lwz r3, 0x2d4(r15)
     addi r4, r15, 0x2d8
@@ -1085,8 +1085,8 @@ lbl_spectateView_renderInterface_00000E38:
     addi r4, r22, 0x35b
     addi r3, r27, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_spectateView_renderInterface_00000E88:
     addi r0, r28, 0x5555
     cmplw r19, r0
@@ -1132,8 +1132,8 @@ lbl_spectateView_renderInterface_00000F0C:
     addi r4, r22, 0x35b
     addi r3, r27, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_spectateView_renderInterface_00000F2C:
     slwi r3, r20, 4
     bl mem_free
@@ -1144,8 +1144,8 @@ lbl_spectateView_renderInterface_00000F2C:
     addi r3, r27, 0xa0
     addi r4, r4, lbl_80793A58@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_spectateView_renderInterface_00000F58:
     lwz r5, 0x2d4(r15)
     lwz r4, 0x40(r1)
@@ -1247,8 +1247,8 @@ lbl_spectateView_renderInterface_000010B8:
     addi r4, r22, 0x35b
     addi r3, r27, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_spectateView_renderInterface_000010DC:
     lwz r3, 0x2e8(r15)
     addi r4, r15, 0x2ec
@@ -1268,8 +1268,8 @@ lbl_spectateView_renderInterface_000010DC:
     addi r4, r22, 0x35b
     addi r3, r27, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_spectateView_renderInterface_0000112C:
     subi r0, r30, 0x5556
     cmplw r16, r0
@@ -1315,8 +1315,8 @@ lbl_spectateView_renderInterface_000011B0:
     addi r4, r22, 0x35b
     addi r3, r27, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_spectateView_renderInterface_000011D0:
     slwi r3, r16, 3
     bl mem_free
@@ -1327,8 +1327,8 @@ lbl_spectateView_renderInterface_000011D0:
     addi r3, r27, 0xa0
     addi r4, r4, lbl_80793A74@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_spectateView_renderInterface_000011FC:
     lwz r6, 0x2e8(r15)
     lwz r5, 0x2c(r1)
@@ -1536,8 +1536,8 @@ lbl_fn_805377F4_0000149C:
     addi r4, r4, lbl_8075D94C@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805377F4_000014E0:
     lis r3, 0xaab
     subi r0, r3, 0x5556
@@ -1597,8 +1597,8 @@ lbl_fn_805377F4_00001558:
     addi r4, r4, lbl_8075D94C@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805377F4_000015BC:
     lis r3, 0xaab
     subi r0, r3, 0x5556
@@ -1652,8 +1652,8 @@ lbl_fn_805377F4_00001650:
     addi r4, r4, lbl_8075D94C@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805377F4_00001680:
     slwi r3, r27, 3
     bl mem_free
@@ -1666,8 +1666,8 @@ lbl_fn_805377F4_00001680:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80793AF0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805377F4_000016B4:
     lwz r0, 0x7c(r1)
     cmpwi r30, 0x0
@@ -1802,8 +1802,8 @@ lbl_fn_805377F4_00001870:
     addi r4, r4, lbl_8075D94C@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805377F4_000018A4:
     lwz r4, 0x24(r28)
     li r6, 0x0
@@ -1828,8 +1828,8 @@ lbl_fn_805377F4_000018A4:
     addi r4, r4, lbl_8075D94C@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805377F4_00001908:
     lis r3, 0xaab
     subi r0, r3, 0x5556
@@ -1883,8 +1883,8 @@ lbl_fn_805377F4_0000199C:
     addi r4, r4, lbl_8075D94C@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805377F4_000019CC:
     slwi r3, r27, 3
     bl mem_free
@@ -1897,8 +1897,8 @@ lbl_fn_805377F4_000019CC:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80793B0C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805377F4_00001A00:
     lwz r4, 0x24(r28)
     lwz r3, 0x68(r1)
@@ -1988,8 +1988,8 @@ lbl_fn_805377F4_00001B20:
     addi r4, r4, lbl_8075D94C@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805377F4_00001B54:
     lwz r4, 0x24(r28)
     li r6, 0x0
@@ -2014,8 +2014,8 @@ lbl_fn_805377F4_00001B54:
     addi r4, r4, lbl_8075D94C@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805377F4_00001BB8:
     lis r3, 0xaab
     subi r0, r3, 0x5556
@@ -2069,8 +2069,8 @@ lbl_fn_805377F4_00001C4C:
     addi r4, r4, lbl_8075D94C@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805377F4_00001C7C:
     slwi r3, r27, 3
     bl mem_free
@@ -2083,8 +2083,8 @@ lbl_fn_805377F4_00001C7C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80793B0C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805377F4_00001CB0:
     lwz r4, 0x24(r28)
     lwz r3, 0x54(r1)

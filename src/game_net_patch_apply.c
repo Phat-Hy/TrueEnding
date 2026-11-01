@@ -12,7 +12,7 @@ extern void fn_80041C0C(void);
 extern void mem_alloc(void);
 extern void fn_800846FC(void);
 extern void mem_getAllocSize(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_80112784(void);
@@ -1664,9 +1664,9 @@ asm void fn_8053E6E4(void)
     addi r3, r30, 0x184
     li r4, -0x1
     bl fn_8053E3B4
-    lis r4, fn_800CB3A0@ha
+    lis r4, ref_releaseHandle@ha
     addi r3, r30, 0x174
-    addi r4, r4, fn_800CB3A0@l
+    addi r4, r4, ref_releaseHandle@l
     li r5, 0x4
     li r6, 0x4
     bl fn_806959D8

@@ -12,7 +12,7 @@ extern void fn_8005E7F4(void);
 extern void mem_getAllocSize(void);
 extern void fn_800A555C(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void atn_LH_Texture_destructAndFree(void);
@@ -35,7 +35,7 @@ extern void world_setGlobalFlag(void);
 extern void fn_80389838(void);
 extern void fn_803EBAC8(void);
 extern void fn_80489C98(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695D84(void);
 
 /* External data declarations */
@@ -461,7 +461,7 @@ lbl_fn_80229414_000004E8:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r31
     li r4, 0x0
     bl fn_802292AC
@@ -1256,7 +1256,7 @@ lbl_fn_80229F4C_00000FD0:
     bne lbl_fn_80229F4C_00000FF8
     b lbl_fn_80229F4C_00000FFC
 lbl_fn_80229F4C_00000FF8:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_80229F4C_00000FFC:
     li r0, 0xc
     stw r0, lbl_80880348
@@ -1462,7 +1462,7 @@ lbl_fn_8022A054_00001260:
     stw r3, 0x8(r27)
     b lbl_fn_8022A054_00001328
 lbl_fn_8022A054_000012C0:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A054_000012C4:
     lwz r27, 0x14(r31)
     addi r3, r31, 0x14
@@ -1491,7 +1491,7 @@ lbl_fn_8022A054_000012F0:
     stw r0, 0x0(r3)
     b lbl_fn_8022A054_00001328
 lbl_fn_8022A054_00001324:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A054_00001328:
     cmpwi r28, 0x0
     beq lbl_fn_8022A054_00001408
@@ -1524,7 +1524,7 @@ lbl_fn_8022A054_00001390:
     stw r27, 0x14(r28)
     b lbl_fn_8022A054_0000139C
 lbl_fn_8022A054_00001398:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A054_0000139C:
     cmpwi r27, 0x0
     beq lbl_fn_8022A054_00001408
@@ -1542,7 +1542,7 @@ lbl_fn_8022A054_0000139C:
     stw r27, 0x18(r3)
     b lbl_fn_8022A054_000013DC
 lbl_fn_8022A054_000013D8:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A054_000013DC:
     lwz r3, 0x14(r31)
     cmpwi r3, 0x0
@@ -1554,9 +1554,9 @@ lbl_fn_8022A054_000013DC:
     stw r27, 0x18(r3)
     b lbl_fn_8022A054_00001408
 lbl_fn_8022A054_00001400:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A054_00001404:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A054_00001408:
     cmplwi r30, 0x10
     bge lbl_fn_8022A054_00001430
@@ -1597,7 +1597,7 @@ lbl_fn_8022A054_00001480:
     mr r26, r3
     b lbl_fn_8022A054_0000149C
 lbl_fn_8022A054_00001498:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A054_0000149C:
     stw r29, 0x8(r24)
     stw r29, 0xc(r26)
@@ -1688,7 +1688,7 @@ lbl_fn_8022A054_000015C0:
     stw r29, 0x8(r29)
     b lbl_fn_8022A054_0000161C
 lbl_fn_8022A054_000015E0:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A054_000015E4:
     lwz r0, 0x10(r25)
     lwz r3, 0x8(r27)
@@ -1704,12 +1704,12 @@ lbl_fn_8022A054_000015E4:
     stw r0, 0x18(r29)
     b lbl_fn_8022A054_0000161C
 lbl_fn_8022A054_00001618:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A054_0000161C:
     addi r3, r31, 0x8
     b lbl_fn_8022A054_0000162C
 lbl_fn_8022A054_00001624:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A054_00001628:
     li r3, 0x0
 lbl_fn_8022A054_0000162C:
@@ -1790,7 +1790,7 @@ lbl_fn_8022A618_000016F0:
     stw r3, 0x8(r27)
     b lbl_fn_8022A618_000017A4
 lbl_fn_8022A618_0000173C:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A618_00001740:
     lwz r27, 0x14(r31)
     addi r3, r31, 0x14
@@ -1819,7 +1819,7 @@ lbl_fn_8022A618_0000176C:
     stw r0, 0x0(r3)
     b lbl_fn_8022A618_000017A4
 lbl_fn_8022A618_000017A0:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A618_000017A4:
     cmpwi r28, 0x0
     beq lbl_fn_8022A618_00001884
@@ -1852,7 +1852,7 @@ lbl_fn_8022A618_0000180C:
     stw r27, 0x14(r28)
     b lbl_fn_8022A618_00001818
 lbl_fn_8022A618_00001814:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A618_00001818:
     cmpwi r27, 0x0
     beq lbl_fn_8022A618_00001884
@@ -1870,7 +1870,7 @@ lbl_fn_8022A618_00001818:
     stw r27, 0x18(r3)
     b lbl_fn_8022A618_00001858
 lbl_fn_8022A618_00001854:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A618_00001858:
     lwz r3, 0x14(r31)
     cmpwi r3, 0x0
@@ -1882,9 +1882,9 @@ lbl_fn_8022A618_00001858:
     stw r27, 0x18(r3)
     b lbl_fn_8022A618_00001884
 lbl_fn_8022A618_0000187C:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A618_00001880:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A618_00001884:
     cmplwi r30, 0x10
     bge lbl_fn_8022A618_000018AC
@@ -1927,7 +1927,7 @@ lbl_fn_8022A618_00001904:
     mr r27, r3
     b lbl_fn_8022A618_00001920
 lbl_fn_8022A618_0000191C:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A618_00001920:
     stw r24, 0x8(r26)
     stw r24, 0xc(r27)
@@ -1940,7 +1940,7 @@ lbl_fn_8022A618_00001938:
     addi r3, r31, 0x8
     b lbl_fn_8022A618_00001944
 lbl_fn_8022A618_00001940:
-    bl fn_80686EA4
+    bl abort
 lbl_fn_8022A618_00001944:
     lmw r24, 0x10(r1)
     lwz r0, 0x34(r1)

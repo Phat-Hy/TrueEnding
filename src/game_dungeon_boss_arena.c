@@ -27,7 +27,7 @@ extern void mem_getAllocSize(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_8008BBD8(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
@@ -1984,8 +1984,8 @@ lbl_fn_803EF64C_00001788:
     lwz r3, 0x1c(r30)
     cmpwi r3, 0x0
     beq lbl_fn_803EF64C_000017A8
-    lis r4, fn_800CB3A0@ha
-    addi r4, r4, fn_800CB3A0@l
+    lis r4, ref_releaseHandle@ha
+    addi r4, r4, ref_releaseHandle@l
     bl fn_80695A50
 lbl_fn_803EF64C_000017A8:
     li r0, 0x0

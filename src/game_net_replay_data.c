@@ -11,7 +11,7 @@ extern void fn_80061AE4(void);
 extern void fn_8006EF48(void);
 extern void mem_alloc(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
@@ -702,7 +702,7 @@ lbl_fn_804C4530_00000868:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, 0x94(r31)
     cmpwi r3, 0x3
     beq lbl_fn_804C4530_00000B1C
@@ -2172,7 +2172,7 @@ lbl_fn_804C5E9C_00001C74:
     bl fn_800C31F4
     addi r3, r1, 0x1c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r31
     bl fn_804C76EC
     mr r3, r31
@@ -2235,7 +2235,7 @@ lbl_fn_804C5E9C_00001D2C:
     bl fn_800C31F4
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F610
     bl fn_804DA3F8
     b lbl_fn_804C5E9C_00002178
@@ -2248,7 +2248,7 @@ lbl_fn_804C5E9C_00001D98:
     bl fn_800C31F4
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_804C5E9C_00002178
     lwz r29, 0xc8(r31)
     cmpwi r29, 0x0
@@ -2275,7 +2275,7 @@ lbl_fn_804C5E9C_00001DEC:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r0, 0x96
     stw r0, 0x1a4(r31)
     b lbl_fn_804C5E9C_00002178
@@ -2332,7 +2332,7 @@ lbl_fn_804C5E9C_00001EB4:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_804C5E9C_00002178
     lwz r29, 0x58(r31)
     cmpwi r29, 0x0
@@ -2402,7 +2402,7 @@ lbl_fn_804C5E9C_00001FB4:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_804C5E9C_00002178
     lwz r12, 0x0(r31)
     mr r3, r31

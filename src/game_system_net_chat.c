@@ -15,7 +15,7 @@ extern void fn_8009373C(void);
 extern void fn_80093B88(void);
 extern void fn_800A555C(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CFD18(void);
 extern void fn_800EFBC4(void);
 extern void fn_800EFC64(void);
@@ -65,7 +65,7 @@ extern void fn_805B4D94(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strncmp(void);
 extern void fn_80684600(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -669,7 +669,7 @@ lbl_fn_803A3AB4_0000071C:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F430
     li r4, 0x1
     bl fn_803748E0
@@ -1032,7 +1032,7 @@ lbl_fn_803A3FFC_00000C48:
 lbl_fn_803A3FFC_00000C60:
     cmpwi r0, 0x3
     bne lbl_fn_803A3FFC_00000C7C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r28
     mullw r0, r0, r28
     subf r3, r0, r3
@@ -1070,7 +1070,7 @@ lbl_fn_803A3FFC_00000CCC:
 lbl_fn_803A3FFC_00000CE4:
     cmpwi r0, 0x3
     bne lbl_fn_803A3FFC_00000D00
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r28
     mullw r0, r0, r28
     subf r3, r0, r3
@@ -1116,7 +1116,7 @@ lbl_fn_803A3FFC_00000D74:
 lbl_fn_803A3FFC_00000D8C:
     cmpwi r0, 0x3
     bne lbl_fn_803A3FFC_00000DA8
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r28
     mullw r0, r0, r28
     subf r3, r0, r3
@@ -1152,7 +1152,7 @@ lbl_fn_803A3FFC_00000DF4:
 lbl_fn_803A3FFC_00000E0C:
     cmpwi r0, 0x3
     bne lbl_fn_803A3FFC_00000E28
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r28
     mullw r0, r0, r28
     subf r3, r0, r3
@@ -1189,7 +1189,7 @@ lbl_fn_803A3FFC_00000E74:
 lbl_fn_803A3FFC_00000E8C:
     cmpwi r0, 0x3
     bne lbl_fn_803A3FFC_00000EA8
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r28
     mullw r0, r0, r28
     subf r3, r0, r3
@@ -1225,7 +1225,7 @@ lbl_fn_803A3FFC_00000EF4:
 lbl_fn_803A3FFC_00000F0C:
     cmpwi r0, 0x3
     bne lbl_fn_803A3FFC_00000F28
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r28
     mullw r0, r0, r28
     subf r3, r0, r3
@@ -1247,7 +1247,7 @@ lbl_fn_803A3FFC_00000F3C:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803A3FFC_00000F68:
     lwz r4, lbl_8087F4F0
     lis r3, lbl_8074ED24@ha
@@ -1584,7 +1584,7 @@ lbl_fn_803A47A4_000013DC:
     bl fn_803935AC
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087EFE8
     li r0, 0x0
     stw r0, 0x34d8(r3)

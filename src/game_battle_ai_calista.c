@@ -19,10 +19,10 @@ extern void fn_800697D8(void);
 extern void mem_alloc(void);
 extern void fn_8008B140(void);
 extern void fn_800971D4(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
@@ -64,7 +64,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_80686A64(void);
@@ -184,7 +184,7 @@ asm void fn_80431388(void)
     bl fn_800CB5C8
     addi r3, r29, 0x30a0
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lis r4, fn_80431320@ha
     addi r3, r29, 0x4f8
     addi r4, r4, fn_80431320@l
@@ -326,7 +326,7 @@ lbl_fn_80431458_000002AC:
     lwz r0, 0x280(r28)
     addi r3, r3, 0xb0
     add r4, r0, r21
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     addi r21, r21, 0x1
     addi r22, r22, 0x80
     cmpwi r21, 0x3
@@ -742,7 +742,7 @@ lbl_fn_80431774_00000898:
     stw r0, 0x3048(r30)
     b lbl_fn_80431774_00001040
 lbl_fn_80431774_000008A4:
-    bl fn_80680CF8
+    bl rand
     lwz r4, 0x4f4(r30)
     li r0, 0x0
     stw r0, 0x448(r1)
@@ -802,7 +802,7 @@ lbl_fn_80431774_00000968:
     lwz r28, 0x448(r1)
     cmpwi r0, 0x0
     bne lbl_fn_80431774_000009AC
-    bl fn_80680CF8
+    bl rand
     lwz r4, 0x304c(r30)
     lwz r0, 0x3058(r30)
     addi r4, r4, 0x1
@@ -813,7 +813,7 @@ lbl_fn_80431774_00000968:
     stw r0, 0x3048(r30)
     b lbl_fn_80431774_00001040
 lbl_fn_80431774_000009AC:
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r28
     addi r5, r1, 0x44c
     lfs f7, lbl_80886868
@@ -1592,7 +1592,7 @@ lbl_fn_80432728_000014CC:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80432728_0000150C:
     lwz r3, 0x0(r31)
     stw r3, 0x54(r30)

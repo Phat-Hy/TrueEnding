@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC6B4(void);
@@ -64,11 +64,11 @@ extern void fn_80585FD8(void);
 extern void fn_805860F4(void);
 extern void fn_80586220(void);
 extern void fn_80586624(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_80686A48(void);
 extern void fn_80686AF0(void);
 extern void fn_80686B64(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -792,8 +792,8 @@ lbl_fn_805849EC_00000924:
     addi r4, r4, 0x377
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805849EC_0000095C:
     addis r5, r25, 0x2
     li r6, 0x0
@@ -820,8 +820,8 @@ lbl_fn_805849EC_0000095C:
     addi r4, r4, 0x377
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805849EC_000009C8:
     lis r3, 0xaab
     subi r0, r3, 0x5556
@@ -876,8 +876,8 @@ lbl_fn_805849EC_00000A5C:
     addi r4, r4, 0x377
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805849EC_00000A90:
     slwi r3, r31, 3
     bl mem_free
@@ -890,8 +890,8 @@ lbl_fn_805849EC_00000A90:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80796808@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805849EC_00000AC4:
     lwz r0, 0x18(r1)
     addis r5, r25, 0x2
@@ -1949,7 +1949,7 @@ lbl_fn_80585994_00001960:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r31
     li r4, 0x1
     li r5, 0x9
@@ -1990,7 +1990,7 @@ lbl_fn_80585994_000019FC:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r31
     li r4, 0x1
     li r5, 0xa

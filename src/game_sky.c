@@ -39,7 +39,7 @@ extern void fn_805B6AE4(void);
 extern void fn_805B6C10(void);
 extern void fn_805B6C48(void);
 extern void fn_806140C0(void);
-extern void fn_8068093C(void);
+extern void vsprintf(void);
 extern void fn_80686A48(void);
 extern void fn_80686AC4(void);
 extern void fn_80686B64(void);
@@ -781,7 +781,7 @@ lbl_fn_800DC980_00000890:
     stw r12, 0x70(r1)
     stw r11, 0x74(r1)
     stw r0, 0x78(r1)
-    bl fn_8068093C
+    bl vsprintf
     li r0, 0x0
     stw r0, 0x0(r30)
     addi r3, r1, 0x80

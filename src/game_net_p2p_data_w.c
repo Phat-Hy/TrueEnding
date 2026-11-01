@@ -12,7 +12,7 @@ extern void fn_800A03E4(void);
 extern void fn_800A0548(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800A55AC(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -1955,7 +1955,7 @@ lbl_fn_80510D68_000018B4:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80510D68_000018D8:
     lmw r27, 0x1c(r1)
     lwz r0, 0x34(r1)
@@ -2040,7 +2040,7 @@ lbl_fn_80510E98_000019D8:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80510E98_000019FC:
     lmw r27, 0x1c(r1)
     lwz r0, 0x34(r1)

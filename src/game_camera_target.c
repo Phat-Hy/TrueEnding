@@ -15,7 +15,7 @@ extern void fn_80097CCC(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB5C8(void);
 extern void atn_Task_setActive(void);
@@ -349,7 +349,7 @@ asm void fn_802E1290(void)
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lfs f4, lbl_8088467C
     li r3, 0x0
     lfs f3, lbl_808846CC
@@ -451,7 +451,7 @@ asm void fn_802E1414(void)
     bl fn_800CB440
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r29
     li r4, 0x64
     bl fn_80232B7C
@@ -586,7 +586,7 @@ asm void fn_802E1624(void)
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addi r3, r30, 0x1560
     li r4, 0x0
     li r5, 0x0
@@ -791,7 +791,7 @@ lbl_fn_802E177C_00000964:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r28
     bl fn_800EB7A0
     lwz r0, 0x64(r1)
@@ -1272,7 +1272,7 @@ lbl_fn_802E1DF0_00000FE0:
 lbl_fn_802E1DF0_00001000:
     addi r3, r30, 0x1560
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r29, r30, 0x152c
     beq lbl_fn_802E1DF0_0000102C
     mr r3, r29

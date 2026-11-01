@@ -24,13 +24,13 @@ extern void fn_800DC1DC(void);
 extern void fn_800DC6B4(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
+extern void printf(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_806846C4(void);
 extern void fn_80686A48(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695720(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -1496,13 +1496,13 @@ lbl_fn_8021FD7C_000012A4:
     lwzx r3, r3, r0
     mtctr r3
     bctr
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
     subf r4, r4, r0
     b lbl_fn_8021FD7C_00001450
-    bl fn_80680CF8
+    bl rand
     slwi r0, r3, 30
     srwi r3, r3, 31
     subf r0, r3, r0
@@ -1510,42 +1510,42 @@ lbl_fn_8021FD7C_000012A4:
     add r3, r0, r3
     addi r4, r3, 0x2
     b lbl_fn_8021FD7C_00001450
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
     subf r3, r4, r0
     addi r4, r3, 0x6
     b lbl_fn_8021FD7C_00001450
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
     subf r3, r4, r0
     addi r4, r3, 0x8
     b lbl_fn_8021FD7C_00001450
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
     subf r3, r4, r0
     addi r4, r3, 0xa
     b lbl_fn_8021FD7C_00001450
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
     subf r3, r4, r0
     addi r4, r3, 0xc
     b lbl_fn_8021FD7C_00001450
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
     subf r3, r4, r0
     addi r4, r3, 0x13
     b lbl_fn_8021FD7C_00001450
-    bl fn_80680CF8
+    bl rand
     slwi r0, r3, 30
     srwi r3, r3, 31
     subf r0, r3, r0
@@ -1553,28 +1553,28 @@ lbl_fn_8021FD7C_000012A4:
     add r3, r0, r3
     addi r4, r3, 0x15
     b lbl_fn_8021FD7C_00001450
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
     subf r3, r4, r0
     addi r4, r3, 0x19
     b lbl_fn_8021FD7C_00001450
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
     subf r3, r4, r0
     addi r4, r3, 0x1c
     b lbl_fn_8021FD7C_00001450
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
     subf r3, r4, r0
     addi r4, r3, 0x1e
     b lbl_fn_8021FD7C_00001450
-    bl fn_80680CF8
+    bl rand
     slwi r0, r3, 30
     srwi r3, r3, 31
     subf r0, r3, r0
@@ -1582,14 +1582,14 @@ lbl_fn_8021FD7C_000012A4:
     add r3, r0, r3
     addi r4, r3, 0x20
     b lbl_fn_8021FD7C_00001450
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
     subf r3, r4, r0
     addi r4, r3, 0x26
     b lbl_fn_8021FD7C_00001450
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1666,8 +1666,8 @@ asm void fn_8021FFD8(void)
     addi r4, r4, 0x7
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8021FFD8_0000152C:
     li r3, 0x14
     bl mem_free
@@ -1680,8 +1680,8 @@ lbl_fn_8021FFD8_0000152C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_807835D0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8021FFD8_00001560:
     addic. r3, r27, 0xc
     addi r0, r28, 0x4
@@ -1836,8 +1836,8 @@ lbl_fn_80220168_00001714:
     addi r4, r4, lbl_807428F4@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80220168_00001768:
     mulli r3, r20, 0x14
     bl mem_free
@@ -1850,8 +1850,8 @@ lbl_fn_80220168_00001768:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078378C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80220168_0000179C:
     lwz r4, 0xc(r18)
     lis r3, __files@ha
@@ -1895,8 +1895,8 @@ lbl_fn_80220168_000017E0:
     addi r4, r28, lbl_807428F4@l
     addi r3, r29, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80220168_00001848:
     mulli r3, r17, 0xc
     bl mem_free
@@ -1906,8 +1906,8 @@ lbl_fn_80220168_00001848:
     addi r3, r29, 0xa0
     addi r4, r30, lbl_80778910@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80220168_00001870:
     stw r25, 0x4(r24)
     stw r17, 0xc(r24)

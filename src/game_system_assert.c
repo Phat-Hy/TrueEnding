@@ -65,14 +65,14 @@ extern void fn_8021F47C(void);
 extern void world_getGlobalFlag(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_8068236C(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_80684600(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695720(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -1095,8 +1095,8 @@ lbl_fn_80207310_00000CBC:
     addi r4, r19, 0x1
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80207310_00000CE0:
     lwz r3, 0x1c(r1)
     subi r0, r18, 0x1
@@ -1115,8 +1115,8 @@ lbl_fn_80207310_00000CE0:
     addi r4, r19, 0x1
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80207310_00000D2C:
     addi r0, r23, 0x5555
     cmplw r22, r0
@@ -1162,8 +1162,8 @@ lbl_fn_80207310_00000DB0:
     addi r4, r19, 0x1
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80207310_00000DD0:
     slwi r3, r15, 2
     bl mem_free
@@ -1173,8 +1173,8 @@ lbl_fn_80207310_00000DD0:
     addi r3, r20, 0xa0
     addi r4, r26, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80207310_00000DF8:
     lwz r5, 0x1c(r1)
     lwz r0, 0x28(r1)

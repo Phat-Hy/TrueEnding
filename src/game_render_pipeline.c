@@ -19,7 +19,7 @@ extern void fn_8001336C(void);
 extern void mem_free(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800E0AA8(void);
 extern void fn_800F8548(void);
 extern void fn_800F8574(void);
@@ -49,8 +49,8 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 
@@ -1560,8 +1560,8 @@ lbl_fn_802A36B8_000014F4:
     addi r4, r4, 0x221
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802A36B8_00001534:
     lis r3, 0x555
     addi r0, r3, 0x5555
@@ -1611,8 +1611,8 @@ lbl_fn_802A36B8_0000158C:
     addi r4, r4, 0x221
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802A36B8_000015F4:
     lis r3, 0x555
     addi r0, r3, 0x5555
@@ -1667,8 +1667,8 @@ lbl_fn_802A36B8_00001688:
     addi r4, r4, 0x221
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802A36B8_000016BC:
     slwi r3, r31, 4
     bl mem_free
@@ -1681,8 +1681,8 @@ lbl_fn_802A36B8_000016BC:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80785C98@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802A36B8_000016F0:
     lwz r5, 0x15f0(r30)
     addi r6, r1, 0x3c
@@ -1771,7 +1771,7 @@ lbl_fn_802A36B8_000017F0:
     bl fn_800C344C
     addi r3, r1, 0x28
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_802A36B8_0000183C:
     lfs f7, lbl_80883DDC
     li r7, 0x0

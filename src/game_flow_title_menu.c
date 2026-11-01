@@ -38,7 +38,7 @@ extern void fn_80509B50(void);
 extern void fn_8050BA6C(void);
 extern void fn_8050DDE0(void);
 extern void fn_8050E098(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_806A8E40(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
@@ -163,7 +163,7 @@ lbl_fn_804DDA08_000000E8:
     li r25, 0x0
     b lbl_fn_804DDA08_00000138
 lbl_fn_804DDA08_00000100:
-    bl fn_80680CF8
+    bl rand
     addi r4, r24, 0x1
     add r5, r23, r25
     divw r0, r3, r4
@@ -290,7 +290,7 @@ lbl_fn_804DDA08_000002AC:
     li r0, 0x1
     b lbl_fn_804DDA08_000002F4
 lbl_fn_804DDA08_000002BC:
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x64(r1)
     stw r31, 0x60(r1)

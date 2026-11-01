@@ -18,7 +18,7 @@ extern void mem_alloc(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_80092F1C(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void fn_80097B34(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_setActive(void);
@@ -594,7 +594,7 @@ lbl_fn_803F8890_000006C4:
     mr r4, r3
     addi r3, r28, 0xf4
     addi r5, r1, 0x8
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
 lbl_fn_803F8890_0000070C:
     mr r3, r29
     addi r4, r30, 0x18

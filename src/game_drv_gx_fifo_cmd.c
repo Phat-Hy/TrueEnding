@@ -22,8 +22,8 @@ extern void fn_80507794(void);
 extern void fn_805077F4(void);
 extern void fn_8061C8A0(void);
 extern void fn_8061D4C0(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern u32 strlen(const char* str);
@@ -1628,8 +1628,8 @@ asm void fn_805BF798(void)
     addi r4, r4, 0x1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805BF798_00001474:
     li r3, 0x28
     bl mem_free
@@ -1642,8 +1642,8 @@ lbl_fn_805BF798_00001474:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80797A08@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_805BF798_000014A8:
     addic. r3, r30, 0xc
     addi r0, r31, 0x4

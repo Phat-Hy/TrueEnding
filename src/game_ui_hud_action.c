@@ -31,10 +31,10 @@ extern void fn_803EA77C(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
+extern void printf(void);
+extern void rand(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695B00(void);
 
@@ -221,8 +221,8 @@ lbl_fn_801C7390_00000108:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077CF28@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801C7390_000001A0:
     cmpwi r30, 0x0
     beq lbl_fn_801C7390_000001E0
@@ -350,8 +350,8 @@ lbl_fn_801C7390_000002EC:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80781FE0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801C7390_00000384:
     cmpwi r30, 0x0
     beq lbl_fn_801C7390_000003B4
@@ -439,8 +439,8 @@ lbl_fn_801C777C_00000464:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80781FE0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801C777C_000004A4:
     cmpwi r30, 0x0
     beq lbl_fn_801C777C_000004D4
@@ -1727,7 +1727,7 @@ lbl_fn_801C8938_0000164C:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_801C8938_00001728
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1744,7 +1744,7 @@ lbl_fn_801C8938_00001728:
     lwz r0, lbl_8087F498
     cmpwi r0, 0x0
     beq lbl_fn_801C8938_00001768
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4

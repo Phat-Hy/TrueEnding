@@ -16,7 +16,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A56A8(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_800FAB80(void);
 extern void fn_801065E4(void);
@@ -40,9 +40,9 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern void fn_80695B00(void);
@@ -767,7 +767,7 @@ lbl_fn_801A6750_000008A8:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_801A6750_00000944:
     lwz r3, lbl_8087F498
     cmpwi r3, 0x0
@@ -1074,8 +1074,8 @@ lbl_fn_801A6F58_00000D1C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077F618@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801A6F58_00000DB4:
     cmpwi r30, 0x0
     beq lbl_fn_801A6F58_00000DE4
@@ -1168,8 +1168,8 @@ lbl_fn_801A71D0_00000EA4:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077F618@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801A71D0_00000EE4:
     cmpwi r30, 0x0
     beq lbl_fn_801A71D0_00000F14
@@ -1890,8 +1890,8 @@ lbl_fn_801A7A94_00001808:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077FB28@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801A7A94_000018A0:
     cmpwi r30, 0x0
     beq lbl_fn_801A7A94_000018D0
@@ -1979,8 +1979,8 @@ lbl_fn_801A7CAC_00001980:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077FB28@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801A7CAC_000019C0:
     cmpwi r30, 0x0
     beq lbl_fn_801A7CAC_000019F0

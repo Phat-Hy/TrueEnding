@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void fn_8006F72C(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DBF68(void);
@@ -116,7 +116,7 @@ asm void fn_803E58E4(void)
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803E58E4_00000064:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -494,7 +494,7 @@ lbl_fn_803E5C60_000004F4:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803E5C60_00000578:
     lwz r0, 0x44(r1)
     psq_l f31, 0x38(r1), 0, 0
@@ -1436,7 +1436,7 @@ lbl_fn_803E6890_000011AC:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_803E6890_00001200:
     lwz r0, 0x14(r1)
     mtlr r0

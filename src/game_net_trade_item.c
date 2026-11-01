@@ -17,7 +17,7 @@ extern void fn_8004BF64(void);
 extern void fn_8008B964(void);
 extern void fn_800A97C4(void);
 extern void fn_800C16B4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB58C(void);
 extern void fn_800CB5C8(void);
 extern void fn_800F52F0(void);
@@ -155,7 +155,7 @@ asm void fn_8052C10C(void)
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addi r3, r31, 0x1224
     bl fn_803CF734
     addi r3, r31, 0x1268
@@ -821,7 +821,7 @@ lbl_fn_8052C9C8_00000910:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8052C9C8_00000968
 lbl_fn_8052C9C8_00000934:
     bl fn_8052CA70

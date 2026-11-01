@@ -10,7 +10,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void fn_80061824(void);
 extern void fn_800A55AC(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
@@ -1188,7 +1188,7 @@ lbl_fn_804C0430_00000FC0:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804C0430_00000FD8:
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0

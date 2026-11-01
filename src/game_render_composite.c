@@ -63,9 +63,9 @@ extern void fn_805A3C58(void);
 extern void fn_805A3D00(void);
 extern void fn_805A5224(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strncmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695720(void);
 extern void fn_806958E0(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1202,8 +1202,8 @@ lbl_fn_802BA67C_00000EDC:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078249C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802BA67C_00000F74:
     cmpwi r30, 0x0
     beq lbl_fn_802BA67C_00000FA4

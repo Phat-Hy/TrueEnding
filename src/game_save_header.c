@@ -46,10 +46,10 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void taskManager_updateTasks(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695D84(void);
 extern u32 strlen(const char* str);
 
@@ -434,8 +434,8 @@ lbl_save_updateHeader_00000434:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_807799A0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_save_updateHeader_000004B8:
     lis r29, lbl_807C7F74@ha
     lis r3, 0x2aab
@@ -1436,8 +1436,8 @@ lbl_fn_801F36C8_000011FC:
     addi r4, r19, lbl_8073E380@l
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801F36C8_00001220:
     lwz r3, 0x44(r1)
     subi r0, r18, 0x1
@@ -1456,8 +1456,8 @@ lbl_fn_801F36C8_00001220:
     addi r4, r19, lbl_8073E380@l
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801F36C8_0000126C:
     addi r0, r23, 0x5555
     cmplw r22, r0
@@ -1503,8 +1503,8 @@ lbl_fn_801F36C8_000012F0:
     addi r4, r19, lbl_8073E380@l
     addi r3, r20, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801F36C8_00001310:
     slwi r3, r22, 4
     bl mem_free
@@ -1514,8 +1514,8 @@ lbl_fn_801F36C8_00001310:
     addi r3, r20, 0xa0
     addi r4, r26, lbl_80782BB0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801F36C8_00001338:
     lwz r5, 0x44(r1)
     lwz r0, 0x50(r1)

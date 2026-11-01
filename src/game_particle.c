@@ -9,8 +9,8 @@ extern void fn_80013F78(void);
 extern void fn_8006F72C(void);
 extern void fn_800DBF68(void);
 extern void fn_800E2778(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 extern void fn_8068B39C(void);
 extern void fn_8068B50C(void);
 extern void fn_806952C4(void);
@@ -116,8 +116,8 @@ lbl_fn_800E0908_000000BC:
     addi r4, r4, 0x14
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800E0908_000000E8:
     lwz r0, 0x1c(r1)
     subf r3, r31, r28

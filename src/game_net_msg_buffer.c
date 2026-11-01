@@ -23,8 +23,8 @@ extern void fn_80176ACC(void);
 extern void fn_8035B78C(void);
 extern void fn_8050128C(void);
 extern void fn_80508F0C(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 
 /* External data declarations */
 extern u8 lbl_80759E48[];
@@ -603,8 +603,8 @@ asm void fn_804FC8D0(void)
     addi r4, r4, lbl_80759E48@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804FC8D0_000006D8:
     lis r3, 0x6
     addi r0, r3, 0x6334

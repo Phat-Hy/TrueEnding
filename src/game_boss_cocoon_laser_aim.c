@@ -32,11 +32,11 @@ extern void fn_80473F88(void);
 extern void taskManager_updateTasks(void);
 extern void fn_805F9EF0(void);
 extern void fn_8067E23C(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void strstr(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -386,8 +386,8 @@ lbl_fn_8046EF08_000003B0:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8046EF08_000003E8:
     addic. r3, r31, 0x8
     addi r0, r27, 0x4024
@@ -461,8 +461,8 @@ lbl_fn_8046F014_000004B8:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8046F014_000004F0:
     addic. r3, r29, 0x8
     addi r0, r31, 0x4030
@@ -517,8 +517,8 @@ lbl_fn_8046F014_00000588:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8046F014_000005C0:
     addic. r3, r29, 0x8
     addi r0, r31, 0x4030
@@ -573,8 +573,8 @@ lbl_fn_8046F014_00000658:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80779810@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8046F014_00000690:
     addic. r3, r29, 0x8
     addi r0, r31, 0x4030

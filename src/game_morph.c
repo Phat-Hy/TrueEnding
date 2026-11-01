@@ -86,7 +86,7 @@ void fn_800CB14C(void);
 void fn_800CB1F4(void);
 void fn_800CB360(void);
 void fn_800CB36C(void);
-void fn_800CB3A0(void);
+void ref_releaseHandle(void);
 void fn_800CB404(void);
 void fn_800CB440(void);
 void fn_800CB480(void);
@@ -1330,7 +1330,7 @@ lbl_fn_800CB36C_00000F54:
     blr
 }
 
-asm void fn_800CB3A0(void)
+asm void ref_releaseHandle(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1339,21 +1339,21 @@ asm void fn_800CB3A0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_800CB3A0_00000FC0
+    beq lbl_ref_releaseHandle_00000FC0
     lwz r6, 0x0(r3)
     cmpwi r6, 0x0
-    beq lbl_fn_800CB3A0_00000FB0
+    beq lbl_ref_releaseHandle_00000FB0
     lwz r5, 0xa4(r6)
     li r0, 0x0
     subi r5, r5, 0x1
     stw r5, 0xa4(r6)
     stw r0, 0x0(r3)
-lbl_fn_800CB3A0_00000FB0:
+lbl_ref_releaseHandle_00000FB0:
     cmpwi r4, 0x0
-    ble lbl_fn_800CB3A0_00000FC0
+    ble lbl_ref_releaseHandle_00000FC0
     mr r3, r31
     bl dtor_80084684
-lbl_fn_800CB3A0_00000FC0:
+lbl_ref_releaseHandle_00000FC0:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

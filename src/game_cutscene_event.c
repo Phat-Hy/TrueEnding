@@ -21,11 +21,11 @@ extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AF38(void);
 extern void mem_free(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CFD18(void);
 extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
@@ -58,11 +58,11 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
 extern void strstr(void);
 extern void fn_80684600(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_806958E0(void);
 extern u32 strlen(const char* str);
 
@@ -152,8 +152,8 @@ lbl_fn_8032BE88_00000048:
     addi r4, r4, 0x46
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8032BE88_00000090:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -202,8 +202,8 @@ lbl_fn_8032BE88_000000E0:
     addi r4, r4, 0x46
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8032BE88_00000148:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -258,8 +258,8 @@ lbl_fn_8032BE88_000001DC:
     addi r4, r4, 0x46
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8032BE88_00000210:
     slwi r3, r28, 2
     bl mem_free
@@ -272,8 +272,8 @@ lbl_fn_8032BE88_00000210:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8032BE88_00000244:
     lwz r0, 0x18(r1)
     slwi r5, r30, 2
@@ -675,11 +675,11 @@ asm void fn_8032C52C(void)
     li r4, 0x13f
     clrrwi r0, r0, 1
     stw r0, 0x1540(r31)
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     addi r3, r31, 0xb0
     addi r5, r30, 0x79
     li r4, 0x140
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     addi r3, r31, 0x15fc
     addi r4, r30, 0x90
     bl fn_80237654
@@ -1401,7 +1401,7 @@ asm void fn_8032CF10(void)
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0
     beq lbl_fn_8032CF10_00001248
@@ -1601,7 +1601,7 @@ lbl_fn_8032D1F4_000013CC:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0
     beq lbl_fn_8032D1F4_00001544
@@ -2026,7 +2026,7 @@ lbl_fn_8032D5EC_0000192C:
     bl fn_800C344C
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087EFE8
     stw r27, 0x34d8(r3)
 lbl_fn_8032D5EC_00001B88:

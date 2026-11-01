@@ -13,7 +13,7 @@ extern void dtor_80084684(void);
 extern void fn_8006F72C(void);
 extern void mem_free(void);
 extern void fn_800A55AC(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DBF68(void);
 extern void fn_800DC6B4(void);
@@ -37,9 +37,9 @@ extern void fn_80203260(void);
 extern void fn_802091E8(void);
 extern void fn_804A660C(void);
 extern void fn_804A71F0(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_80686A48(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -284,8 +284,8 @@ lbl_fn_804A3C24_000002A4:
     addi r4, r14, 0x143
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804A3C24_000002C8:
     lwz r3, 0x3c(r1)
     addi r0, r25, 0x5555
@@ -304,8 +304,8 @@ lbl_fn_804A3C24_000002C8:
     addi r4, r14, 0x143
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804A3C24_00000314:
     addi r0, r28, 0x71c7
     cmplw r17, r0
@@ -351,8 +351,8 @@ lbl_fn_804A3C24_00000398:
     addi r4, r14, 0x143
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804A3C24_000003B8:
     mulli r3, r17, 0xc
     bl mem_free
@@ -363,8 +363,8 @@ lbl_fn_804A3C24_000003B8:
     addi r3, r26, 0xa0
     addi r4, r4, lbl_807799A0@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_804A3C24_000003E4:
     lwz r5, 0x3c(r1)
     lwz r0, 0x48(r1)
@@ -784,7 +784,7 @@ lbl_fn_804A436C_0000096C:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804A436C_00000990:
     lmw r26, 0x18(r1)
     lwz r0, 0x34(r1)
@@ -975,7 +975,7 @@ lbl_fn_804A4494_00000C10:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804A4494_00000C34:
     lmw r22, 0x18(r1)
     lwz r0, 0x44(r1)

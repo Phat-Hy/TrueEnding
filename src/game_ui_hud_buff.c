@@ -16,7 +16,7 @@ extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800A555C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC6B4(void);
 extern void fn_8010C00C(void);
@@ -1219,7 +1219,7 @@ lbl_fn_801CD210_00000F40:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r0, -0x1
     stw r0, 0xa8c(r31)
     b lbl_fn_801CD210_00000F8C

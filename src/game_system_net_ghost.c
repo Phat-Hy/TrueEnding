@@ -32,9 +32,9 @@ extern void PSMTXTrans(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1573,7 +1573,7 @@ lbl_fn_8039BF04_000014C4:
 lbl_fn_8039BF04_000014D8:
     cmpwi r25, 0x3
     bne lbl_fn_8039BF04_000014F8
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r26
     mullw r0, r0, r26
     subf r3, r0, r3
@@ -1622,7 +1622,7 @@ lbl_fn_8039BF04_00001560:
 lbl_fn_8039BF04_00001574:
     cmpwi r25, 0x3
     bne lbl_fn_8039BF04_00001594
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r26
     mullw r0, r0, r26
     subf r3, r0, r3
@@ -1671,7 +1671,7 @@ lbl_fn_8039BF04_000015FC:
 lbl_fn_8039BF04_00001610:
     cmpwi r25, 0x3
     bne lbl_fn_8039BF04_00001630
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r26
     mullw r0, r0, r26
     subf r3, r0, r3
@@ -1720,7 +1720,7 @@ lbl_fn_8039BF04_00001698:
 lbl_fn_8039BF04_000016AC:
     cmpwi r25, 0x3
     bne lbl_fn_8039BF04_000016CC
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r26
     mullw r0, r0, r26
     subf r3, r0, r3
@@ -1769,7 +1769,7 @@ lbl_fn_8039BF04_00001734:
 lbl_fn_8039BF04_00001748:
     cmpwi r25, 0x3
     bne lbl_fn_8039BF04_00001768
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r26
     mullw r0, r0, r26
     subf r3, r0, r3
@@ -1916,8 +1916,8 @@ lbl_fn_8039BF04_0000194C:
     addi r3, r3, __files@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8039BF04_0000197C:
     lwz r4, 0x388(r22)
     li r6, 0x0
@@ -1943,8 +1943,8 @@ lbl_fn_8039BF04_0000197C:
     addi r4, r4, 0xce
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8039BF04_000019E4:
     lis r3, 0x71c
     addi r0, r3, 0x71c7
@@ -1999,8 +1999,8 @@ lbl_fn_8039BF04_00001A78:
     addi r4, r4, 0xce
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8039BF04_00001AAC:
     mulli r3, r21, 0xc
     bl mem_free
@@ -2013,8 +2013,8 @@ lbl_fn_8039BF04_00001AAC:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80778910@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8039BF04_00001AE0:
     lwz r6, 0x388(r22)
     li r0, 0x0

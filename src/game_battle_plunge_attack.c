@@ -22,12 +22,12 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800DC288(void);
 extern void fn_800EF73C(void);
 extern void fn_800F8548(void);
@@ -693,7 +693,7 @@ asm void fn_8041158C(void)
     beq lbl_fn_8041158C_0000087C
     li r4, -0x1
     addi r3, r3, 0x684
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lis r4, fn_800EF73C@ha
     addi r3, r29, 0x66c
     addi r4, r4, fn_800EF73C@l
@@ -897,7 +897,7 @@ lbl_fn_80411720_00000A7C:
     mr r4, r3
     addi r3, r29, 0xf4
     addi r5, r1, 0x8
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     b lbl_fn_80411720_00000BC8
 lbl_fn_80411720_00000AC4:
     mr r3, r30
@@ -1389,7 +1389,7 @@ lbl_fn_80411BC4_0000115C:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F048
     bl fn_800F8548
     lfs f2, 0x74(r31)

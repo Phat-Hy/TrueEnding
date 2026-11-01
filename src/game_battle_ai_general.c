@@ -40,7 +40,7 @@ extern void fn_8008CD60(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -94,10 +94,10 @@ extern void PSVECCrossProduct(void);
 extern void fn_805F99F0(void);
 extern void fn_805F9AB0(void);
 extern void fn_805F9B50(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
+extern void printf(void);
+extern void rand(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AE9C(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
@@ -1851,7 +1851,7 @@ asm void fn_8043D9F8(void)
     lwz r12, 0x40(r12)
     mtctr r12
     bctrl
-    bl fn_80680CF8
+    bl rand
     lis r31, 0x8889
     lwz r0, 0xf8(r28)
     subi r4, r31, 0x7777
@@ -1884,7 +1884,7 @@ lbl_fn_8043D9F8_00001770:
     bge lbl_fn_8043D9F8_000017FC
     lwzx r3, r5, r4
     bl fn_8043E770
-    bl fn_80680CF8
+    bl rand
     subi r0, r31, 0x7777
     lwz r4, 0x120(r28)
     mulhw r6, r0, r3
@@ -1964,7 +1964,7 @@ lbl_fn_8043DB84_00001888:
     bge lbl_fn_8043DB84_0000191C
     lwzx r3, r5, r4
     bl fn_8043E770
-    bl fn_80680CF8
+    bl rand
     lis r5, 0x8889
     lwz r4, 0x120(r31)
     subi r5, r5, 0x7777
@@ -2437,8 +2437,8 @@ lbl_fn_8043E1F0_00001F10:
     addi r4, r4, 0x4d
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8043E1F0_00001F48:
     li r5, 0x0
     addi r4, r29, 0x8
@@ -2464,8 +2464,8 @@ lbl_fn_8043E1F0_00001F48:
     addi r4, r4, 0x4d
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8043E1F0_00001FB0:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -2520,8 +2520,8 @@ lbl_fn_8043E1F0_00002044:
     addi r4, r4, 0x4d
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8043E1F0_00002078:
     slwi r3, r31, 2
     bl mem_free
@@ -2534,8 +2534,8 @@ lbl_fn_8043E1F0_00002078:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8043E1F0_000020AC:
     lwz r0, 0x18(r1)
     stw r28, 0x14(r1)
@@ -2764,7 +2764,7 @@ asm void fn_8043E6B0(void)
     mr r5, r4
     addi r3, r6, 0xb0
     li r4, 0x13f
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     li r30, 0x0
     li r31, 0x0
     b lbl_fn_8043E6B0_00002408
@@ -2782,7 +2782,7 @@ lbl_fn_8043E6B0_000023D0:
 lbl_fn_8043E6B0_000023F8:
     lwz r5, 0x8(r5)
 lbl_fn_8043E6B0_000023FC:
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     addi r31, r31, 0xc
     addi r30, r30, 0x1
 lbl_fn_8043E6B0_00002408:
@@ -2968,7 +2968,7 @@ lbl_fn_8043E770_00002674:
 lbl_fn_8043E770_0000269C:
     lwz r3, 0x0(r31)
     lwz r29, 0x194(r3)
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r29
     lwz r9, 0x8(r31)
     li r30, 0x1
@@ -3312,7 +3312,7 @@ lbl_fn_8043EA64_00002B80:
     stw r0, 0x2c(r29)
     addi r31, r4, 0xb0
     lwz r28, 0x194(r5)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     lwz r0, 0x2c(r29)
     subi r4, r4, 0x7ae1
@@ -3329,7 +3329,7 @@ lbl_fn_8043EA64_00002B80:
     stw r0, 0x2c(r29)
     lwz r3, 0x0(r29)
     lwz r28, 0x118(r3)
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r28
     lfs f1, lbl_808869CC
     lfs f2, lbl_808869FC

@@ -8,7 +8,7 @@ extern void fn_8004ECC0(void);
 extern void fn_8004ED34(void);
 extern void fn_80051B70(void);
 extern void fn_800BFAC8(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801240B4(void);
 extern void world_getGlobalFlag(void);
@@ -1267,7 +1267,7 @@ lbl_fn_80399734_00001144:
     bl fn_803935FC
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80399734_00001198:
     cmpwi r17, 0x0
     bne lbl_fn_80399734_0000187C
@@ -1610,7 +1610,7 @@ lbl_fn_80399734_00001628:
     bl fn_803935FC
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80399734_000016C4:
     cmpwi r17, 0x0
     bne lbl_fn_80399734_0000187C

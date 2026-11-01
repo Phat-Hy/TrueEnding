@@ -11,7 +11,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800FAB80(void);
 extern void fn_800FDB20(void);
@@ -516,7 +516,7 @@ lbl_fn_802C5F5C_0000062C:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_802C5F5C_0000067C:
     cmpwi r27, 0x0
     bne lbl_fn_802C5F5C_000006E8
@@ -1355,7 +1355,7 @@ lbl_fn_802C6DF4_000011D0:
     bl fn_800C31F4
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r8, lbl_8087F430
     li r0, 0xa
     lfs f0, lbl_80884324
@@ -1869,7 +1869,7 @@ lbl_fn_802C6DF4_0000195C:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r0, 0x55c(r28)
     cmpwi r0, 0x5
     beq lbl_fn_802C6DF4_00001CC4

@@ -15,7 +15,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB5C8(void);
 extern void fn_800EB7A0(void);
@@ -51,9 +51,9 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void memmove(void);
 
@@ -519,7 +519,7 @@ asm void fn_8031CA30(void)
     lwz r3, lbl_8087F3C0
     bl fn_8023A8B4
     stw r30, 0x153c(r31)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0xb60b
     addi r0, r4, 0x60b7
     mulhw r0, r0, r3
@@ -981,7 +981,7 @@ lbl_fn_8031CA30_00000C6C:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8031CA30_00000CFC:
     lwz r0, 0x424(r1)
     psq_l f31, 0x418(r1), 0, 0
@@ -1288,7 +1288,7 @@ lbl_fn_8031D57C_00001130:
     bl fn_800CB5C8
     addi r3, r30, 0x38
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r4, r30, 0x28
     beq lbl_fn_8031D57C_0000117C
     beq lbl_fn_8031D57C_0000117C
@@ -1737,8 +1737,8 @@ lbl_fn_8031D6DC_000017C0:
     addi r4, r4, 0xe1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8031D6DC_000017F8:
     li r5, 0x0
     addi r4, r28, 0x30
@@ -1764,8 +1764,8 @@ lbl_fn_8031D6DC_000017F8:
     addi r4, r4, 0xe1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8031D6DC_00001860:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -1820,8 +1820,8 @@ lbl_fn_8031D6DC_000018F4:
     addi r4, r4, 0xe1
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8031D6DC_00001928:
     slwi r3, r31, 2
     bl mem_free
@@ -1834,8 +1834,8 @@ lbl_fn_8031D6DC_00001928:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8031D6DC_0000195C:
     lwz r0, 0x98(r1)
     stw r27, 0x94(r1)
@@ -1937,7 +1937,7 @@ lbl_fn_8031D6DC_00001A94:
     bl fn_800CB440
     addi r3, r1, 0x24
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addi r11, r1, 0x340
     psq_l f31, 0x398(r1), 0, 0
     lfd f31, 0x390(r1)

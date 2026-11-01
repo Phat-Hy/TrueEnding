@@ -17,7 +17,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800EB7A0(void);
 extern void fn_800F8548(void);
 extern void fn_800F8574(void);
@@ -45,7 +45,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 
 /* External data declarations */
@@ -270,7 +270,7 @@ lbl_fn_8024ED68_000001EC:
     stw r31, 0xf0(r1)
     lwz r0, 0x14(r26)
     stw r0, 0xd0(r1)
-    bl fn_80680CF8
+    bl rand
     mulhw r6, r21, r3
     stfs f29, 0xe0(r1)
     lfs f1, lbl_80883268
@@ -308,7 +308,7 @@ lbl_fn_8024ED68_000001EC:
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8024ED68_000003A4
 lbl_fn_8024ED68_00000348:
     lfs f21, 0x2e4(r3)
@@ -1441,7 +1441,7 @@ asm void fn_8024FFE8(void)
     stfs f2, 0x15fc(r29)
     stfs f0, 0x160c(r29)
     beq lbl_fn_8024FFE8_0000191C
-    bl fn_80680CF8
+    bl rand
     lis r26, 0x5555
     lwz r30, 0x1654(r29)
     addi r0, r26, 0x5556
@@ -1712,7 +1712,7 @@ lbl_fn_8024FFE8_000017B4:
     psq_st f1, 0x0(r3), 0, 0
     stfs f2, 0x1618(r29)
     stw r0, 0x1654(r29)
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -1772,7 +1772,7 @@ lbl_fn_8024FFE8_00001808:
     stfs f2, 0x8(r3)
     lwz r3, 0x16dc(r26)
     stw r27, 0x1654(r3)
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4

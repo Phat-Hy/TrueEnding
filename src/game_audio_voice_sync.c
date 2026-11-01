@@ -17,7 +17,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC288(void);
 extern void fn_800E41FC(void);
@@ -64,7 +64,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_80684600(void);
 extern void fn_8068AEA4(void);
@@ -1619,7 +1619,7 @@ lbl_fn_80306EB0_000014B4:
     lwz r0, 0x14cc(r31)
     srwi. r0, r0, 31
     beq lbl_fn_80306EB0_00001548
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     lwz r0, 0x1538(r31)
     subi r4, r4, 0x7ae1
@@ -1659,7 +1659,7 @@ lbl_fn_80306EB0_00001548:
     lwz r0, 0xd1c(r31)
     cmplw r0, r4
     beq lbl_fn_80306EB0_000015E4
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     lwz r0, 0x1538(r31)
     subi r4, r4, 0x7ae1
@@ -3021,7 +3021,7 @@ lbl_fn_803073C4_0000289C:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lfs f4, 0x1548(r24)
     addi r4, r1, 0x628
     lfs f5, lbl_80884B54

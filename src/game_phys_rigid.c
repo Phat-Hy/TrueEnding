@@ -16,7 +16,7 @@ extern void fn_80044FBC(void);
 extern void fn_8004ED34(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_80105510(void);
 extern void fn_80109864(void);
 extern void fn_8011D1FC(void);
@@ -41,7 +41,7 @@ extern void fn_80376210(void);
 extern void fn_803C1884(void);
 extern void fn_8054E100(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_806846C4(void);
 extern void fn_80686A48(void);
 
@@ -443,7 +443,7 @@ lbl_fn_8010A308_0000046C:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8010A308_00000504:
     lwz r0, 0xa4(r1)
     psq_l f31, 0x98(r1), 0, 0
@@ -1487,7 +1487,7 @@ asm void fn_8010B250(void)
     cmpwi r3, 0x0
     mr r30, r3
     ble lbl_fn_8010B250_00001394
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
     mulhw r0, r0, r3
@@ -1511,7 +1511,7 @@ lbl_fn_8010B250_0000138C:
     b lbl_fn_8010B250_000013CC
 lbl_fn_8010B250_00001394:
     bge lbl_fn_8010B250_000013CC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     neg r0, r30
     subi r4, r4, 0x7ae1
@@ -1862,7 +1862,7 @@ lbl_fn_8010B398_00001858:
     li r5, -0x1
     bl fn_801341B8
     mr r21, r3
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
     mulhw r0, r0, r3
@@ -1918,7 +1918,7 @@ lbl_fn_8010B398_00001950:
     lwz r0, 0x0(r22)
     cmpwi r0, 0x23
     bne lbl_fn_8010B398_00001A00
-    bl fn_80680CF8
+    bl rand
     subi r4, r21, 0x7ae1
     lwz r0, 0x10(r22)
     mulhw r4, r4, r3
@@ -1984,7 +1984,7 @@ lbl_fn_8010B398_00001A20:
     beq lbl_fn_8010B398_00001AD4
     lwz r0, 0x274(r26)
     add r21, r0, r18
-    bl fn_80680CF8
+    bl rand
     subi r4, r22, 0x7ae1
     lwz r0, 0xd4(r21)
     mulhw r4, r4, r3
@@ -2053,7 +2053,7 @@ lbl_fn_8010B398_00001B34:
     bl fn_80044FBC
     cmpwi r3, 0x0
     beq lbl_fn_8010B398_00001BDC
-    bl fn_80680CF8
+    bl rand
     subi r4, r22, 0x7ae1
     lwz r0, 0x10(r21)
     mulhw r4, r4, r3

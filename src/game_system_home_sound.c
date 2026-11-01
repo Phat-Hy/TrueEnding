@@ -32,7 +32,7 @@ extern void fn_80097D9C(void);
 extern void fn_800A4228(void);
 extern void fn_800A555C(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CF7DC(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC288(void);
@@ -2022,7 +2022,7 @@ lbl_fn_8036503C_00001A80:
     bl fn_800C31F4
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8036503C_00001B28
 lbl_fn_8036503C_00001AB0:
     mr r3, r29
@@ -2056,7 +2056,7 @@ lbl_fn_8036503C_00001AFC:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8036503C_00001B28:
     lwz r0, 0x74(r1)
     psq_l f31, 0x68(r1), 0, 0

@@ -26,7 +26,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A555C(void);
 extern void fn_800C31F4(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
@@ -86,12 +86,12 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
+extern void printf(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_80684600(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068A850(void);
 extern void fn_8068AEA8(void);
 extern void fn_8068B100(void);
@@ -1353,7 +1353,7 @@ lbl_fn_802F18E0_00001034:
 lbl_fn_802F18E0_00001054:
     addi r3, r29, 0x1514
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r31, r29, 0x14d8
     beq lbl_fn_802F18E0_00001080
     mr r3, r31
@@ -1365,7 +1365,7 @@ lbl_fn_802F18E0_00001054:
 lbl_fn_802F18E0_00001080:
     addi r3, r29, 0x14d4
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r29
     li r4, 0x0
     bl fn_8035B78C
@@ -1596,8 +1596,8 @@ lbl_fn_802F1A2C_000013C4:
     addi r4, r25, 0xb7
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802F1A2C_000013E8:
     lwz r3, 0x1574(r18)
     addi r4, r18, 0x1578
@@ -1617,8 +1617,8 @@ lbl_fn_802F1A2C_000013E8:
     addi r4, r25, 0xb7
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802F1A2C_00001438:
     addi r0, r28, 0x5555
     cmplw r27, r0
@@ -1664,8 +1664,8 @@ lbl_fn_802F1A2C_000014BC:
     addi r4, r25, 0xb7
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802F1A2C_000014DC:
     slwi r3, r19, 2
     bl mem_free
@@ -1675,8 +1675,8 @@ lbl_fn_802F1A2C_000014DC:
     addi r3, r26, 0xa0
     addi r4, r31, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802F1A2C_00001504:
     lwz r5, 0x1574(r18)
     lwz r3, 0x18(r1)
@@ -1899,7 +1899,7 @@ lbl_fn_802F1A2C_00001820:
     ori r0, r0, 0x4218
     oris r0, r0, 0x380
     stw r0, 0x7ec(r18)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x15cc(r18)
     subi r5, r4, 0x7777
@@ -2532,7 +2532,7 @@ lbl_fn_802F2294_000020E0:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_802F2294_00002170:
     lwz r0, 0xa4(r1)
     psq_l f31, 0x98(r1), 0, 0

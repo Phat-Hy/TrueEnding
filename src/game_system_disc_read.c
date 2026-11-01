@@ -23,7 +23,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068B100(void);
 
@@ -634,7 +634,7 @@ asm void fn_80350BF0(void)
     stw r0, 0x14b0(r31)
     stw r0, 0xd1c(r31)
     stb r30, 0x17ec(r31)
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4

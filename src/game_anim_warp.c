@@ -20,7 +20,7 @@ extern void atn_Matrix_copy_2(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DD3FC(void);
 extern void fn_800F72CC(void);
@@ -1761,7 +1761,7 @@ lbl_fn_80279280_0000174C:
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     bl fn_800F7FA0
     li r4, 0x0
     li r5, 0x0

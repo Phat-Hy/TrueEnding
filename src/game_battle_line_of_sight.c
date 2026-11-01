@@ -22,7 +22,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800DD3FC(void);
 extern void fn_800EF73C(void);
 extern void fn_8014F698(void);
@@ -71,7 +71,7 @@ extern void PSMTXRotRad(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
@@ -836,7 +836,7 @@ lbl_fn_8040AB64_0000092C:
     lwz r3, lbl_8087F4F0
     bl fn_80448F9C
     mr r27, r3
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
     mulhw r0, r0, r3
@@ -1237,7 +1237,7 @@ lbl_fn_8040B200_00000F14:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r29
     li r4, 0x1
     bl fn_80232B7C
@@ -1954,7 +1954,7 @@ asm void fn_8040BC38(void)
     fmuls f1, f1, f0
     bl fn_8068B100
     frsp f31, f1
-    bl fn_80680CF8
+    bl rand
     lis r27, 0x4178
     lis r29, 0x4330
     addi r0, r27, 0x749f
@@ -1981,7 +1981,7 @@ asm void fn_8040BC38(void)
     fmsubs f0, f2, f0, f31
     fadds f0, f1, f0
     stfs f0, 0x3d4(r30)
-    bl fn_80680CF8
+    bl rand
     addi r0, r27, 0x749f
     lfs f0, lbl_80886334
     mulhw r0, r0, r3
@@ -2003,7 +2003,7 @@ asm void fn_8040BC38(void)
     fmsubs f1, f1, f2, f31
     fadds f0, f0, f1
     stfs f0, 0x3dc(r30)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0xb60b
     stw r29, 0x18(r1)
     addi r0, r4, 0x60b7
@@ -2053,7 +2053,7 @@ asm void fn_8040BC38(void)
     stfs f0, 0x414(r30)
     rlwinm r0, r0, 0, 29, 27
     stw r0, 0x8(r30)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     li r29, 0x0
     subi r0, r4, 0x7777
@@ -2067,7 +2067,7 @@ asm void fn_8040BC38(void)
     subf r3, r0, r3
     addi r0, r3, 0x1e
     stw r0, 0x41c(r30)
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4

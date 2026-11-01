@@ -27,7 +27,7 @@ extern void world_setLocalFlag(void);
 extern void fn_80373148(void);
 extern void fn_805A49E8(void);
 extern void fn_805A4A20(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_80695720(void);
 
 /* External data declarations */
@@ -1403,7 +1403,7 @@ lbl_fn_802D3370_00001358:
     cmpwi r0, 0x0
     bne lbl_fn_802D3370_00001380
     lwz r29, 0x1630(r3)
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r29
     mullw r0, r0, r29
     subf r4, r0, r3
@@ -1699,7 +1699,7 @@ lbl_fn_802D3370_000017B8:
     cmpwi r0, 0x0
     bne lbl_fn_802D3370_000017E0
     lwz r29, 0x1630(r3)
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r29
     mullw r0, r0, r29
     subf r4, r0, r3

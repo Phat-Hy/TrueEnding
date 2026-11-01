@@ -36,12 +36,12 @@ extern void fn_8008CD60(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80097E80(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
 extern void fn_800D8814(void);
 extern void fn_800D8BB4(void);
@@ -98,7 +98,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -224,7 +224,7 @@ lbl_fn_80415E40_0000006C:
     psq_st f1, 0x17c(r3), 0, 0
     stfs f2, 0x184(r3)
     stfs f0, 0x180(r3)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -1232,7 +1232,7 @@ lbl_fn_80416CB8_00000EB0:
     stw r0, 0x54(r3)
     cmpwi r0, 0x3
     bne lbl_fn_80416CB8_0000103C
-    bl fn_80680CF8
+    bl rand
     lis r30, 0x4178
     lis r31, lbl_80752EC0@ha
     addi r0, r30, 0x749f
@@ -1253,7 +1253,7 @@ lbl_fn_80416CB8_00000EB0:
     fdivs f2, f3, f2
     fmsubs f0, f1, f2, f0
     stfs f0, 0x4cc(r28)
-    bl fn_80680CF8
+    bl rand
     addi r0, r30, 0x749f
     lfs f0, lbl_80886484
     mulhw r0, r0, r3
@@ -1273,7 +1273,7 @@ lbl_fn_80416CB8_00000EB0:
     fdivs f2, f3, f2
     fmsubs f0, f1, f2, f0
     stfs f0, 0x4d4(r28)
-    bl fn_80680CF8
+    bl rand
     addi r0, r30, 0x749f
     lfd f3, lbl_80752EC0@l(r31)
     mulhw r0, r0, r3
@@ -1291,7 +1291,7 @@ lbl_fn_80416CB8_00000EB0:
     fdivs f1, f2, f1
     fmuls f0, f0, f1
     stfs f0, 0x4d8(r28)
-    bl fn_80680CF8
+    bl rand
     addi r0, r30, 0x749f
     lfd f3, lbl_80752EC0@l(r31)
     mulhw r0, r0, r3
@@ -1309,7 +1309,7 @@ lbl_fn_80416CB8_00000EB0:
     fdivs f1, f2, f1
     fmuls f0, f0, f1
     stfs f0, 0x4dc(r28)
-    bl fn_80680CF8
+    bl rand
     addi r0, r30, 0x749f
     lfd f3, lbl_80752EC0@l(r31)
     mulhw r0, r0, r3
@@ -1729,7 +1729,7 @@ lbl_fn_8041726C_00001564:
     mr r5, r3
     addi r3, r31, 0xfc
     li r4, 0x0
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     b lbl_fn_8041726C_000016CC
 lbl_fn_8041726C_00001594:
     mr r3, r29
@@ -1746,7 +1746,7 @@ lbl_fn_8041726C_000015BC:
     mr r3, r29
     mr r5, r27
     li r4, 0x0
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     addi r28, r28, 0x1
     addi r29, r29, 0x3ec
     cmplwi r28, 0x8
@@ -2084,7 +2084,7 @@ lbl_fn_8041766C_000019F0:
     li r9, -0x1
     li r10, 0x1
     bl fn_80276AE4
-    bl fn_80680CF8
+    bl rand
     addi r0, r20, 0x5556
     lfs f1, lbl_80886490
     mulhw r4, r0, r3
@@ -2110,7 +2110,7 @@ lbl_fn_8041766C_000019F0:
 lbl_fn_8041766C_00001AC8:
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8041766C_00001AE4
 lbl_fn_8041766C_00001AD8:
     mr r3, r28
@@ -2273,7 +2273,7 @@ lbl_fn_8041766C_00001D14:
     addi r3, r1, 0x1a8
     bl fn_80372574
     mr r26, r3
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r26
     mullw r0, r0, r26
     subf r4, r0, r3
@@ -2285,7 +2285,7 @@ lbl_fn_8041766C_00001D14:
     addi r3, r1, 0x80
     bl fn_8000D124
 lbl_fn_8041766C_00001D5C:
-    bl fn_80680CF8
+    bl rand
     lis r28, 0x4178
     lis r26, 0x4330
     addi r0, r28, 0x749f
@@ -2311,7 +2311,7 @@ lbl_fn_8041766C_00001D5C:
     fdivs f3, f4, f3
     fmuls f3, f0, f3
     bl fn_8000D114
-    bl fn_80680CF8
+    bl rand
     addi r0, r28, 0x749f
     stw r26, 0x248(r1)
     mulhw r0, r0, r3

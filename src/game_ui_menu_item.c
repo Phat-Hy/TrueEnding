@@ -31,10 +31,10 @@ extern void fn_801B4C00(void);
 extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
+extern void printf(void);
+extern void rand(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -409,8 +409,8 @@ lbl_fn_801B5A2C_000003CC:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80780B80@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801B5A2C_000004C8:
     cmpwi r27, 0x0
     beq lbl_fn_801B5A2C_00000514
@@ -655,8 +655,8 @@ lbl_fn_801B5EC0_00000760:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80780B80@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801B5EC0_0000085C:
     cmpwi r29, 0x0
     beq lbl_fn_801B5EC0_000008A8
@@ -802,7 +802,7 @@ asm void fn_801B6278(void)
     stw r0, 0xc(r31)
     b lbl_fn_801B6278_00000A80
 lbl_fn_801B6278_00000A50:
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x5555
     addi r0, r4, 0x5556
     mulhw r4, r0, r3
@@ -1155,8 +1155,8 @@ lbl_fn_801B66F0_00000ED8:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80780E7C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801B66F0_00000F70:
     cmpwi r30, 0x0
     beq lbl_fn_801B66F0_00000FA0
@@ -1245,8 +1245,8 @@ lbl_fn_801B68B0_00001054:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80780E7C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801B68B0_00001094:
     cmpwi r30, 0x0
     beq lbl_fn_801B68B0_000010C4
@@ -1476,8 +1476,8 @@ lbl_fn_801B6A80_00001304:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80780E60@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801B6A80_000013EC:
     cmpwi r30, 0x0
     beq lbl_fn_801B6A80_00001430
@@ -1572,8 +1572,8 @@ lbl_fn_801B6D44_000014E8:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80780E60@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801B6D44_00001528:
     cmpwi r30, 0x0
     beq lbl_fn_801B6D44_00001568

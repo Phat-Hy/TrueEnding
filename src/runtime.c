@@ -5,7 +5,7 @@
 extern void dtor_80084684(void);
 extern void mem_getAllocSize(void);
 extern void fn_80394068(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80697BB8(void);
 
 /* External data declarations */
@@ -150,7 +150,7 @@ lbl___register_atexit_00000014:
 asm void fn_806954CC(void)
 {
     nofralloc
-    b fn_80686EA4
+    b abort
 }
 
 asm void fn_806954D0(void)

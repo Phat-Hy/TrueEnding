@@ -27,7 +27,7 @@ extern void fn_800897D8(void);
 extern void fn_8008A76C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EC254(void);
@@ -79,12 +79,12 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
+extern void printf(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_80684600(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern void fn_806959D8(void);
@@ -192,7 +192,7 @@ asm void fn_8031A484(void)
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lfs f3, lbl_80884D60
     lfs f0, 0x6b8(r31)
     fcmpu cr0, f3, f0
@@ -746,8 +746,8 @@ asm void fn_8031ACC0(void)
     addi r4, r4, 0x10c
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8031ACC0_000008A0:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -804,8 +804,8 @@ lbl_fn_8031ACC0_00000920:
     addi r4, r4, 0x10c
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8031ACC0_00000974:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -858,8 +858,8 @@ lbl_fn_8031ACC0_00000A00:
     addi r4, r4, 0x10c
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8031ACC0_00000A34:
     slwi r3, r26, 2
     bl mem_free
@@ -872,8 +872,8 @@ lbl_fn_8031ACC0_00000A34:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8031ACC0_00000A68:
     stw r25, 0x0(r27)
     cmpwi r30, 0x0
@@ -1392,7 +1392,7 @@ lbl_fn_8031B3CC_000011C0:
     bl fn_800CB5C8
     addi r3, r30, 0x38
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r4, r30, 0x28
     beq lbl_fn_8031B3CC_0000120C
     beq lbl_fn_8031B3CC_0000120C
@@ -1866,7 +1866,7 @@ lbl_fn_8031B9B4_00001844:
     li r5, 0x66
     li r6, 0x0
     bl fn_80239DAC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0xb60b
     addi r0, r4, 0x60b7
     mulhw r0, r0, r3

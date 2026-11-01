@@ -20,7 +20,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_800A555C(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
@@ -57,10 +57,10 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A39EC(void);
 extern void fn_804A4930(void);
 extern void fn_804A55FC(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695A50(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -527,8 +527,8 @@ lbl_fn_80469D60_000005C8:
     addi r4, r23, 0x147
     addi r3, r24, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80469D60_000005EC:
     addi r3, r17, 0xa4
     stw r25, 0x14(r1)
@@ -548,8 +548,8 @@ lbl_fn_80469D60_000005EC:
     addi r4, r23, 0x147
     addi r3, r24, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80469D60_0000063C:
     subi r0, r27, 0x47dd
     cmplw r26, r0
@@ -595,8 +595,8 @@ lbl_fn_80469D60_000006C0:
     addi r4, r23, 0x147
     addi r3, r24, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80469D60_000006E0:
     mulli r3, r26, 0x98
     bl mem_free
@@ -606,8 +606,8 @@ lbl_fn_80469D60_000006E0:
     addi r3, r24, 0xa0
     addi r4, r30, lbl_8078FB30@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80469D60_00000708:
     stw r20, 0x14(r1)
     addi r4, r1, 0x38
@@ -1518,7 +1518,7 @@ asm void fn_8046ACDC(void)
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r30)
     mr r3, r30
     li r4, 0x2
@@ -1555,7 +1555,7 @@ lbl_fn_8046ACDC_000013E4:
     bl fn_800C31F4
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r30)
     mr r3, r30
     li r4, 0x3
@@ -1590,7 +1590,7 @@ lbl_fn_8046ACDC_00001470:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r30)
     mr r3, r30
     li r4, 0x4

@@ -77,7 +77,7 @@ extern void fn_804EB654(void);
 extern void fn_804EB818(void);
 extern void fn_805634D4(void);
 extern void fn_805638C0(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_80695AD0(void);
 
 /* External data declarations */
@@ -1882,7 +1882,7 @@ lbl_fn_8015076C_00001818:
     addi r3, r1, 0x104
     li r4, 0x2
     bl fn_80151194
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x6666
     li r0, 0x3c
     addi r4, r4, 0x6667

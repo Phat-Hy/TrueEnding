@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void mem_alloc(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_800FD658(void);
 extern void fn_8010337C(void);
@@ -1848,7 +1848,7 @@ lbl_fn_80164DCC_00001884:
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80164DCC_00001918:
     lwz r3, lbl_8087F048
     mr r4, r30

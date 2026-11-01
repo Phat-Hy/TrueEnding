@@ -12,7 +12,7 @@ extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800BFAC8(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -1124,7 +1124,7 @@ asm void fn_804B5360(void)
     bl fn_803E9608
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_804B5360_00000DCC
 lbl_fn_804B5360_00000D68:
     cmpwi r5, 0x1
@@ -1151,7 +1151,7 @@ lbl_fn_804B5360_00000D68:
     bl fn_803E9608
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804B5360_00000DCC:
     lwz r3, 0x48(r30)
     lfs f1, 0xa0(r3)

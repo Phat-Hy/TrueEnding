@@ -12,7 +12,7 @@ extern void fn_8009373C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_800FAB80(void);
 extern void fn_800FDB20(void);
@@ -47,7 +47,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern void fn_8068B100(void);
@@ -1643,7 +1643,7 @@ lbl_fn_8026DB8C_00001598:
     bl fn_800C344C
     addi r3, r1, 0x24
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8026DB8C_00001640:
     lfs f7, 0x1668(r28)
     lfs f0, lbl_80883678
@@ -1704,7 +1704,7 @@ lbl_fn_8026DB8C_00001640:
     bl fn_800C344C
     addi r3, r1, 0x20
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8026DB8C_00001730:
     lfs f24, lbl_80883670
     lfs f0, 0x1668(r28)
@@ -2243,7 +2243,7 @@ lbl_fn_8026DB8C_00001EF4:
     lwz r0, 0xd18(r31)
     cmpwi r0, 0x0
     beq lbl_fn_8026DB8C_00001F30
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x5555
     addi r0, r4, 0x5556
     mulhw r4, r0, r3
@@ -2294,7 +2294,7 @@ lbl_fn_8026DB8C_00001F30:
     bl fn_800C344C
     addi r3, r1, 0x1c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lfs f7, lbl_80883674
     li r0, 0x1
     stw r0, 0x1660(r28)
@@ -2621,7 +2621,7 @@ lbl_fn_8026DB8C_00002418:
     bl fn_800C344C
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8026DB8C_00002B38
 lbl_fn_8026DB8C_000024CC:
     lwz r4, lbl_8087EFA8
@@ -2644,7 +2644,7 @@ lbl_fn_8026DB8C_000024CC:
     bl fn_800C344C
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lfs f0, lbl_80883670
     li r0, 0x2
     stw r0, 0x1660(r28)
@@ -2967,7 +2967,7 @@ lbl_fn_8026DB8C_00002988:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F490
     cmpwi r3, 0x0
     beq lbl_fn_8026DB8C_000029E8

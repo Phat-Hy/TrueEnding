@@ -28,7 +28,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A4228(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_80211480(void);
 extern void fn_80216AFC(void);
 extern void fn_8021D990(void);
@@ -81,7 +81,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -540,7 +540,7 @@ lbl_fn_804360D4_00000528:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_804360D4_000005A4
 lbl_fn_804360D4_00000590:
     lwz r0, 0x340(r31)
@@ -1089,7 +1089,7 @@ asm void fn_80436CA8(void)
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80436CA8_00000CF4:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1564,7 +1564,7 @@ asm void fn_8043730C(void)
     stw r5, 0xeec(r3)
     stw r4, 0xefc(r3)
     ble lbl_fn_8043730C_000013A0
-    bl fn_80680CF8
+    bl rand
     lwz r5, 0xf04(r31)
     lwz r0, 0xefc(r31)
     divw r4, r3, r5
@@ -1577,7 +1577,7 @@ lbl_fn_8043730C_000013A0:
     srwi r0, r3, 31
     add r0, r0, r3
     srawi r27, r0, 1
-    bl fn_80680CF8
+    bl rand
     addi r4, r27, 0x1
     lfs f30, lbl_80886900
     divw r0, r3, r4
@@ -1791,7 +1791,7 @@ lbl_fn_804375C0_000016B4:
     stw r4, 0xeec(r15)
     stw r3, 0xefc(r15)
     ble lbl_fn_804375C0_000027A4
-    bl fn_80680CF8
+    bl rand
     lwz r5, 0xf04(r15)
     lwz r0, 0xefc(r15)
     divw r4, r3, r5
@@ -1897,7 +1897,7 @@ lbl_fn_804375C0_00001834:
     stw r4, 0xeec(r15)
     stw r3, 0xefc(r15)
     ble lbl_fn_804375C0_00001870
-    bl fn_80680CF8
+    bl rand
     lwz r5, 0xf04(r15)
     lwz r0, 0xefc(r15)
     divw r4, r3, r5
@@ -2744,7 +2744,7 @@ lbl_fn_804375C0_000024C8:
     lwz r4, 0x18(r1)
     bl fn_80448F9C
     mr r18, r3
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
     mulhw r0, r0, r3

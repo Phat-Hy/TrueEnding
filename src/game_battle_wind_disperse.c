@@ -31,7 +31,7 @@ extern void fn_80491528(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA8(void);
 extern void fn_80695A50(void);
 
@@ -705,7 +705,7 @@ lbl_fn_8041EF90_00000850:
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_8041EF90_00000988
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     lwz r5, 0xf4(r31)
     subi r0, r4, 0x7ae1

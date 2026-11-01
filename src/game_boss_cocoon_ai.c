@@ -14,7 +14,7 @@ extern void fn_80094958(void);
 extern void fn_80094B6C(void);
 extern void fn_80097E80(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_80101340(void);
 extern void fn_80108C10(void);
@@ -53,9 +53,9 @@ extern void fn_8054D798(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void rand(void);
+extern void abort(void);
 extern void fn_8068A918(void);
 extern void fn_8068AD58(void);
 
@@ -200,8 +200,8 @@ lbl_fn_80453E20_000000EC:
     addi r4, r4, 0x14f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80453E20_00000124:
     li r5, 0x0
     addi r4, r29, 0x8
@@ -227,8 +227,8 @@ lbl_fn_80453E20_00000124:
     addi r4, r4, 0x14f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80453E20_0000018C:
     lis r3, 0x38e
     addi r0, r3, 0x38e3
@@ -283,8 +283,8 @@ lbl_fn_80453E20_00000220:
     addi r4, r4, 0x14f
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80453E20_00000254:
     mulli r3, r28, 0x18
     bl mem_free
@@ -297,8 +297,8 @@ lbl_fn_80453E20_00000254:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8078F760@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80453E20_00000288:
     lwz r3, 0x18(r1)
     li r0, 0x18
@@ -1442,7 +1442,7 @@ lbl_fn_80454F08_0000127C:
     stfs f2, 0x4c(r1)
     b lbl_fn_80454F08_00001420
 lbl_fn_80454F08_000012B8:
-    bl fn_80680CF8
+    bl rand
     lis r28, 0x4178
     lis r29, lbl_807549B8@ha
     addi r0, r28, 0x749f
@@ -1465,7 +1465,7 @@ lbl_fn_80454F08_000012B8:
     fdivs f5, f6, f5
     fmuls f3, f3, f5
     fmadds f31, f0, f4, f3
-    bl fn_80680CF8
+    bl rand
     addi r4, r28, 0x749f
     lfs f0, lbl_80886B80
     mulhw r5, r4, r3
@@ -2130,7 +2130,7 @@ lbl_fn_80455638_00001BEC:
     bl fn_800C344C
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80455638_00001CF0:
     addi r22, r22, 0x1
     addi r18, r18, 0x18

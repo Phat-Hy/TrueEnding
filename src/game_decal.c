@@ -13,7 +13,7 @@ extern void mem_getAllocSize(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800DCA6C(void);
 extern void fn_800E70EC(void);
 extern void fn_800E7214(void);
@@ -1291,7 +1291,7 @@ lbl_fn_800E62AC_00001018:
     bl fn_800C31F4
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_800E62AC_0000113C
 lbl_fn_800E62AC_00001084:
     lwz r3, lbl_8087F0A8
@@ -1314,7 +1314,7 @@ lbl_fn_800E62AC_00001084:
     bl fn_800C31F4
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_800E62AC_0000113C
 lbl_fn_800E62AC_000010DC:
     lwz r3, lbl_8087F0A8
@@ -1335,7 +1335,7 @@ lbl_fn_800E62AC_000010DC:
     bl fn_800C31F4
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_800E62AC_0000113C
 lbl_fn_800E62AC_0000112C:
     lwz r3, lbl_8087F0A8

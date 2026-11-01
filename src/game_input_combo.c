@@ -53,12 +53,12 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_80683B54(void);
 extern void fn_80684600(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern u32 strlen(const char* str);
 
@@ -1513,8 +1513,8 @@ lbl_fn_802EC9A8_000013BC:
     addi r4, r23, 0x97
     addi r3, r14, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802EC9A8_000013E0:
     lwz r3, 0x14ec(r15)
     addi r4, r15, 0x14f0
@@ -1534,8 +1534,8 @@ lbl_fn_802EC9A8_000013E0:
     addi r4, r23, 0x97
     addi r3, r14, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802EC9A8_00001430:
     addi r0, r24, 0x5555
     cmplw r18, r0
@@ -1581,8 +1581,8 @@ lbl_fn_802EC9A8_000014B4:
     addi r4, r23, 0x97
     addi r3, r14, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802EC9A8_000014D4:
     slwi r3, r18, 2
     bl mem_free
@@ -1593,8 +1593,8 @@ lbl_fn_802EC9A8_000014D4:
     addi r3, r14, 0xa0
     addi r4, r4, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802EC9A8_00001500:
     lwz r0, 0x14ec(r15)
     lwz r3, 0x38(r1)
@@ -1690,8 +1690,8 @@ lbl_fn_802EC9A8_00001650:
     addi r4, r23, 0x97
     addi r3, r14, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802EC9A8_00001674:
     lwz r3, 0x14e0(r15)
     addi r4, r15, 0x14e4
@@ -1711,8 +1711,8 @@ lbl_fn_802EC9A8_00001674:
     addi r4, r23, 0x97
     addi r3, r14, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802EC9A8_000016C4:
     lis r3, 0x555
     addi r0, r3, 0x5555
@@ -1760,8 +1760,8 @@ lbl_fn_802EC9A8_00001750:
     addi r4, r23, 0x97
     addi r3, r14, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802EC9A8_00001770:
     slwi r3, r19, 4
     bl mem_free
@@ -1772,8 +1772,8 @@ lbl_fn_802EC9A8_00001770:
     addi r3, r14, 0xa0
     addi r4, r4, lbl_80787548@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_802EC9A8_0000179C:
     lwz r5, 0x14e0(r15)
     lwz r4, 0x24(r1)

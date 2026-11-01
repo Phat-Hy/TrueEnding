@@ -24,7 +24,7 @@ extern void fn_800C122C(void);
 extern void fn_800C1A1C(void);
 extern void fn_800C1FB4(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
@@ -54,10 +54,10 @@ extern void fn_80237874(void);
 extern void fn_8023A680(void);
 extern void fn_8023A8B4(void);
 extern void atn_LoadHandle_destructor(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
+extern void printf(void);
+extern void rand(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695720(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -1094,7 +1094,7 @@ lbl_fn_80184548_00000C50:
     lwz r29, lbl_8087EFE8
     cmpwi r29, 0x0
     beq lbl_fn_80184548_00000CE8
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lis r0, 0x4330
     addi r5, r4, 0x749f
@@ -1125,7 +1125,7 @@ lbl_fn_80184548_00000C50:
 lbl_fn_80184548_00000CE8:
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80184548_00000CF4:
     addi r11, r1, 0xc0
     psq_l f31, 0xc8(r1), 0, 0
@@ -1871,8 +1871,8 @@ lbl_fn_80185188_000017A8:
     addi r4, r4, lbl_807382A8@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80185188_000017E4:
     lis r3, 0x141
     addi r0, r3, 0x4141
@@ -1921,8 +1921,8 @@ lbl_fn_80185188_0000183C:
     addi r4, r4, lbl_807382A8@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80185188_000018A0:
     lis r3, 0x141
     addi r0, r3, 0x4141
@@ -1976,8 +1976,8 @@ lbl_fn_80185188_00001934:
     addi r4, r4, lbl_807382A8@l
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80185188_00001964:
     mulli r3, r31, 0x44
     bl mem_free
@@ -1990,8 +1990,8 @@ lbl_fn_80185188_00001964:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077927C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80185188_00001998:
     lwz r0, 0x24(r1)
     stw r28, 0x20(r1)

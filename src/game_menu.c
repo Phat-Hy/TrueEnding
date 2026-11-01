@@ -44,7 +44,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
 extern void fn_800C0A50(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
@@ -83,11 +83,11 @@ extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXScale(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
-extern void fn_80680CF8(void);
+extern void printf(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_806868C4(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
 extern void fn_80695AD0(void);
@@ -961,8 +961,8 @@ lbl_fn_800422D4_00000918:
     addi r4, r4, 0x21
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800422D4_00000950:
     li r5, 0x0
     addi r4, r29, 0x8
@@ -988,8 +988,8 @@ lbl_fn_800422D4_00000950:
     addi r4, r4, 0x21
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800422D4_000009B8:
     lis r3, 0x2ab
     subi r0, r3, 0x5556
@@ -1044,8 +1044,8 @@ lbl_fn_800422D4_00000A4C:
     addi r4, r4, 0x21
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800422D4_00000A80:
     slwi r3, r28, 5
     bl mem_free
@@ -1058,8 +1058,8 @@ lbl_fn_800422D4_00000A80:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_8077733C@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800422D4_00000AB4:
     lwz r0, 0x18(r1)
     stw r31, 0x14(r1)
@@ -1386,8 +1386,8 @@ lbl_fn_800427C8_00000EB4:
     addi r4, r4, 0x21
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800427C8_00000EEC:
     lwz r4, 0x4(r28)
     li r6, 0x0
@@ -1413,8 +1413,8 @@ lbl_fn_800427C8_00000EEC:
     addi r4, r4, 0x21
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800427C8_00000F54:
     lis r3, 0x2ab
     subi r0, r3, 0x5556
@@ -1469,8 +1469,8 @@ lbl_fn_800427C8_00000FE8:
     addi r4, r4, 0x21
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800427C8_0000101C:
     slwi r3, r24, 5
     bl mem_free
@@ -1483,8 +1483,8 @@ lbl_fn_800427C8_0000101C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80777320@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_800427C8_00001050:
     lwz r5, 0x4(r28)
     lis r25, fn_80041C0C@ha
@@ -2361,7 +2361,7 @@ lbl_ArenaTask_execute_00001BAC:
     lwz r25, 0x1a4(r28)
     cmpwi r25, 0x0
     beq lbl_ArenaTask_execute_00001C60
-    bl fn_80680CF8
+    bl rand
     divwu r4, r3, r25
     lwz r6, 0x64(r31)
     addi r0, r28, 0x1a8
@@ -2860,7 +2860,7 @@ lbl_fn_80043BF4_00002224:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_80043BF4_00002268:
     cmpwi r28, 0x0
     beq lbl_fn_80043BF4_0000227C
@@ -2959,7 +2959,7 @@ lbl_fn_80043D58_0000238C:
     addi r28, r3, 0x2cc
     cmpwi r31, 0x0
     beq lbl_fn_80043D58_0000243C
-    bl fn_80680CF8
+    bl rand
     divwu r0, r3, r31
     mullw r0, r0, r31
     subf r0, r0, r3

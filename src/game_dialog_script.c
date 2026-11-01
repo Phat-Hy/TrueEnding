@@ -17,7 +17,7 @@ extern void fn_80094F98(void);
 extern void fn_80097D40(void);
 extern void fn_800C122C(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800FC410(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
@@ -56,7 +56,7 @@ extern void fn_80481654(void);
 extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_80695AD0(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -1240,7 +1240,7 @@ lbl_fn_8014C540_00000FEC:
     bl fn_800C344C
     addi r3, r1, 0x1c
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8014C540_0000101C:
     lwz r0, 0x7e0(r28)
     rlwinm r3, r0, 0, 15, 15
@@ -1455,7 +1455,7 @@ lbl_fn_8014C540_000012F0:
     bl fn_800C344C
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8014C540_00001320:
     lwz r0, 0x12a8(r28)
     extrwi. r0, r0, 1, 24
@@ -1470,7 +1470,7 @@ lbl_fn_8014C540_00001340:
     subic. r0, r3, 0x1
     stw r0, 0x1398(r28)
     bgt lbl_fn_8014C540_00001394
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     subi r0, r4, 0x7777
     mulhw r0, r0, r3

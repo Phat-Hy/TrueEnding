@@ -10,7 +10,7 @@ extern void fn_80044F54(void);
 extern void fn_80045510(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800DD3FC(void);
 extern void fn_800EFBC4(void);
 extern void fn_800EFE3C(void);
@@ -39,7 +39,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 
 /* External data declarations */
@@ -1123,7 +1123,7 @@ lbl_fn_8010CD3C_00000D70:
     bl fn_801346C8
     cmpwi r3, 0x0
     beq lbl_fn_8010CD3C_00000F04
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
     mulhw r0, r0, r3
@@ -1157,7 +1157,7 @@ lbl_fn_8010CD3C_00000E08:
 lbl_fn_8010CD3C_00000E0C:
     cmpwi r0, 0x0
     ble lbl_fn_8010CD3C_00000F04
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
     mulhw r0, r0, r3
@@ -1184,7 +1184,7 @@ lbl_fn_8010CD3C_00000E48:
     lwz r0, 0x12a8(r5)
     extrwi. r0, r0, 1, 15
     bne lbl_fn_8010CD3C_00000EA8
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
     mulhw r0, r0, r3
@@ -1207,7 +1207,7 @@ lbl_fn_8010CD3C_00000EB0:
     bl fn_801346C8
     cmpwi r3, 0x0
     beq lbl_fn_8010CD3C_00000F04
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
     mulhw r0, r0, r3
@@ -1390,7 +1390,7 @@ lbl_fn_8010CF28_00001124:
     bl fn_800C31F4
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F490
     cmpwi r3, 0x0
     beq lbl_fn_8010CF28_000012FC
@@ -1494,7 +1494,7 @@ lbl_fn_8010CF28_000012A8:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8010CF28_000012E4:
     mr r3, r30
     mr r5, r31

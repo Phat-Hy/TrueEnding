@@ -13,7 +13,7 @@ extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB5C8(void);
 extern void fn_800CB6E4(void);
@@ -408,7 +408,7 @@ lbl_fn_80598904_00000430:
 lbl_fn_80598904_00000438:
     addi r3, r29, 0x64
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     cmpwi r30, 0x0
     ble lbl_fn_80598904_00000454
     mr r3, r29
@@ -1339,7 +1339,7 @@ lbl_fn_80599458_00001184:
     bl fn_800C344C
     addi r3, r1, 0x14
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lfs f1, lbl_8088817C
     mr r4, r31
     addi r3, r1, 0x10
@@ -1352,7 +1352,7 @@ lbl_fn_80599458_00001184:
     bl fn_800CB440
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_80599458_00001530
 lbl_fn_80599458_00001204:
     cmpwi r0, 0x1

@@ -9,7 +9,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void atn_Task_setActive(void);
 extern void fn_800F8548(void);
@@ -59,7 +59,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068A850(void);
 extern void fn_8068AEA4(void);
 
@@ -666,7 +666,7 @@ lbl_fn_8026F9BC_00000734:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     li r0, 0xa
     stw r0, 0x14f0(r28)
     lwz r31, 0xec(r1)
@@ -849,7 +849,7 @@ asm void fn_8026FDD0(void)
     beq lbl_fn_8026FDD0_00000B20
     li r4, -0x1
     addi r3, r3, 0x153c
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r31, r29, 0x1530
     beq lbl_fn_8026FDD0_00000A98
     mr r3, r31
@@ -1258,7 +1258,7 @@ lbl_fn_8026FFE4_00001058:
     lfs f0, lbl_808837B4
     fcmpo cr0, f1, f0
     bge lbl_fn_8026FFE4_000010B4
-    bl fn_80680CF8
+    bl rand
     slwi r0, r3, 29
     srwi r3, r3, 31
     subf r0, r3, r0

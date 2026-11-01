@@ -10,7 +10,7 @@ extern void fn_80017E90(void);
 extern void fn_80017EB0(void);
 extern void fn_800697D8(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800FDE60(void);
 extern void fn_8011CD84(void);
 extern void fn_8011F8F4(void);
@@ -61,7 +61,7 @@ extern void fn_805B4D94(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -170,7 +170,7 @@ lbl_fn_8039FBFC_00000068:
 lbl_fn_8039FBFC_00000080:
     cmpwi r0, 0x3
     bne lbl_fn_8039FBFC_0000009C
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r31
     mullw r0, r0, r31
     subf r3, r0, r3
@@ -374,7 +374,7 @@ lbl_fn_8039FBFC_000002C4:
     bl fn_800C31F4
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8039FBFC_00000428
 lbl_fn_8039FBFC_000003A8:
     cmpwi r31, 0x2
@@ -395,7 +395,7 @@ lbl_fn_8039FBFC_000003A8:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8039FBFC_00000428
 lbl_fn_8039FBFC_000003F8:
     li r0, 0x0
@@ -1603,7 +1603,7 @@ lbl_fn_803A0F4C_000013E8:
 lbl_fn_803A0F4C_000013FC:
     cmpwi r0, 0x3
     bne lbl_fn_803A0F4C_00001418
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r29
     mullw r0, r0, r29
     subf r3, r0, r3
@@ -1636,7 +1636,7 @@ lbl_fn_803A0F4C_00001454:
 lbl_fn_803A0F4C_00001468:
     cmpwi r0, 0x3
     bne lbl_fn_803A0F4C_00001484
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r29
     mullw r0, r0, r29
     subf r3, r0, r3
@@ -1678,7 +1678,7 @@ lbl_fn_803A0F4C_000014E0:
 lbl_fn_803A0F4C_000014F8:
     cmpwi r0, 0x3
     bne lbl_fn_803A0F4C_00001514
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r29
     mullw r0, r0, r29
     subf r3, r0, r3
@@ -1951,7 +1951,7 @@ lbl_fn_803A11D8_000018BC:
     stfs f2, 0x10(r1)
     stfs f2, 0x70(r1)
     stfs f2, 0x68(r1)
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4

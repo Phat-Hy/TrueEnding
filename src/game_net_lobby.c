@@ -40,7 +40,7 @@ extern void world_getGlobalFlag(void);
 extern void fn_8044441C(void);
 extern void fn_804444E8(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_80695D84(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
@@ -735,7 +735,7 @@ asm void fn_801EA01C(void)
     cmpwi r30, 0x71
     lwz r31, 0xc4(r3)
     bne lbl_fn_801EA01C_000008BC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x5555
     addi r0, r4, 0x5556
     mulhw r4, r0, r3

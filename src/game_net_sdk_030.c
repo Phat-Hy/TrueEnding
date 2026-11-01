@@ -16,7 +16,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068236C(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -2314,7 +2314,7 @@ asm void fn_806DF860(void)
     addi r27, r31, 0x198
     li r25, 0x0
 lbl_fn_806DF860_00001E6C:
-    bl fn_80680CF8
+    bl rand
     mulhwu r5, r26, r3
     add r4, r29, r25
     addi r25, r25, 0x1

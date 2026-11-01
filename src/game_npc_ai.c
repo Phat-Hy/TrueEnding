@@ -90,7 +90,7 @@ extern void fn_8016F4D8(void);
 extern void fn_8016F530(void);
 extern void fn_8016F5EC(void);
 extern void fn_80219E6C(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 
 /* External data declarations */
 extern u8 jumptable_8077A7B0[];
@@ -607,7 +607,7 @@ lbl_fn_8013A4E8_000006CC:
     lfs f0, lbl_808819E0
     fcmpo cr0, f1, f0
     ble lbl_fn_8013A4E8_0000072C
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x51ec
     subi r0, r4, 0x7ae1
     mulhw r0, r0, r3
@@ -1311,7 +1311,7 @@ lbl_fn_8013A4E8_00001084:
     addi r3, r1, 0x2d0
     bl fn_800F7FF0
 lbl_fn_8013A4E8_000010F8:
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r3, r0, r4

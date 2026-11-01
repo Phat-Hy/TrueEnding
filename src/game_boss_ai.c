@@ -47,7 +47,7 @@ extern void world_getGlobalFlag(void);
 extern void fn_804444E8(void);
 extern void fn_804446BC(void);
 extern void atn_LoadHandle_constructor(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -1465,7 +1465,7 @@ lbl_fn_801354B4_000012D4:
     sth r28, 0x1388(r29)
     sth r28, 0x138a(r29)
     stw r28, 0x138c(r29)
-    bl fn_80680CF8
+    bl rand
     slwi r0, r3, 30
     srwi r3, r3, 31
     subf r0, r3, r0

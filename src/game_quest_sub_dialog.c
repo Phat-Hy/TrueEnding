@@ -27,8 +27,8 @@ extern void fn_80541538(void);
 extern void fn_80543064(void);
 extern void fn_805A38F4(void);
 extern void PSVECMag(void);
-extern void fn_80680770(void);
-extern void fn_80686EA4(void);
+extern void printf(void);
+extern void abort(void);
 
 /* External data declarations */
 extern u8 jumptable_807900A0[];
@@ -1522,8 +1522,8 @@ lbl_fn_8048A584_0000134C:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8048A584_00001398:
     lis r3, 0x71c
     addi r0, r3, 0x71c7
@@ -1596,8 +1596,8 @@ lbl_fn_8048A584_00001440:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8048A584_000014A8:
     lis r3, 0x71c
     addi r0, r3, 0x71c7
@@ -1652,8 +1652,8 @@ lbl_fn_8048A584_0000153C:
     addi r4, r4, 0x1c8
     addi r3, r3, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8048A584_00001570:
     mulli r3, r31, 0xc
     bl mem_free
@@ -1666,8 +1666,8 @@ lbl_fn_8048A584_00001570:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80788D00@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8048A584_000015A4:
     lwz r0, 0x3c(r1)
     addi r5, r1, 0x2c

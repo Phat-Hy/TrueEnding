@@ -8,7 +8,7 @@ extern void fn_8004D124(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_800F8574(void);
 extern void fn_800FAB80(void);
@@ -28,7 +28,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 
@@ -1486,7 +1486,7 @@ lbl_fn_802B55B0_000013C0:
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r3, lbl_8087F610
     li r31, 0x0
     lfs f29, lbl_80884028
@@ -1773,7 +1773,7 @@ lbl_fn_802B596C_000017E8:
     addi r3, r1, 0xa0
     mr r5, r4
     bl PSMTXMultVec
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0xdc(r1)
     lfd f5, lbl_807465C0@l(r29)

@@ -11,7 +11,7 @@ extern void _savegpr_25(void);
 extern void fn_80061824(void);
 extern void fn_80061AE4(void);
 extern void fn_8006EF48(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
@@ -40,7 +40,7 @@ extern void fn_804FA890(void);
 extern void fn_804FC014(void);
 extern void fn_805075C8(void);
 extern void fn_8050BA6C(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_80686AF0(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
@@ -1724,7 +1724,7 @@ lbl_fn_804C23E4_000016C0:
     bl fn_804EB1B0
     cmpwi r3, 0x0
     beq lbl_fn_804C23E4_0000183C
-    bl fn_80680CF8
+    bl rand
     divw r4, r3, r31
     li r0, 0x2
     mr r5, r29
@@ -1945,7 +1945,7 @@ lbl_fn_804C28A0_00001970:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     mr r3, r31
     li r4, 0x8
     bl fn_804BC628
@@ -1958,7 +1958,7 @@ lbl_fn_804C28A0_000019D8:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_804C28A0_000019F8:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

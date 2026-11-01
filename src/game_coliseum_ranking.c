@@ -74,7 +74,7 @@ extern void fn_8049C8DC(void);
 extern void fn_805F89F0(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void strstr(void);
 extern void fn_80683B54(void);
@@ -993,7 +993,7 @@ lbl_fn_8049682C_000009BC:
     stw r31, 0x68(r30)
     b lbl_fn_8049682C_00000B64
 lbl_fn_8049682C_00000A50:
-    bl fn_80680CF8
+    bl rand
     lwz r4, 0x64(r30)
     divw r0, r3, r4
     mullw r0, r0, r4
@@ -2106,7 +2106,7 @@ lbl_fn_80497374_00001928:
     lwz r29, 0x90(r3)
     cmpwi r29, 0x0
     ble lbl_fn_80497374_00001950
-    bl fn_80680CF8
+    bl rand
     divw r0, r3, r29
     mullw r0, r0, r29
     subf r4, r0, r3
@@ -2371,7 +2371,7 @@ lbl_fn_80497874_00001CD8:
     add r29, r0, r16
     lfs f26, 0x94(r29)
     fneg f27, f26
-    bl fn_80680CF8
+    bl rand
     addi r0, r31, 0x749f
     lwz r4, 0x64(r15)
     mulhw r5, r0, r3
@@ -2434,7 +2434,7 @@ lbl_fn_80497874_00001DDC:
     lwz r0, 0x90(r29)
     cmpwi r0, 0x0
     ble lbl_fn_80497874_00001E0C
-    bl fn_80680CF8
+    bl rand
     lwz r5, 0x90(r29)
     slwi r4, r5, 1
     divw r0, r3, r4
@@ -2655,7 +2655,7 @@ lbl_fn_80497874_000020C0:
     add r18, r0, r31
     lfs f27, 0x94(r18)
     fneg f26, f27
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     fsubs f7, f27, f26
     addi r0, r4, 0x749f
@@ -2719,7 +2719,7 @@ lbl_fn_80497874_000021EC:
     lwz r0, 0x90(r18)
     cmpwi r0, 0x0
     ble lbl_fn_80497874_0000225C
-    bl fn_80680CF8
+    bl rand
     lwz r6, 0x90(r18)
     lwz r0, 0x98(r18)
     slwi r5, r6, 1

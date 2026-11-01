@@ -9,7 +9,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_800F8574(void);
 extern void fn_800F8C6C(void);
@@ -31,7 +31,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern void fn_8068B100(void);
@@ -765,7 +765,7 @@ lbl_fn_8034AE48_00000948:
     li r5, 0x3ef
     li r6, 0x1
     bl fn_80239DAC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x14c0(r31)
     subi r5, r4, 0x7777
@@ -862,7 +862,7 @@ asm void fn_8034B8CC(void)
     li r5, 0x3ef
     li r6, 0x1
     bl fn_80239DAC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x14c0(r30)
     subi r5, r4, 0x7777
@@ -1199,7 +1199,7 @@ lbl_fn_8034B8CC_00000FB0:
     li r5, 0x3ef
     li r6, 0x1
     bl fn_80239DAC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x14c0(r30)
     subi r5, r4, 0x7777
@@ -1537,7 +1537,7 @@ lbl_fn_8034C060_000014A0:
     li r5, 0x3ef
     li r6, 0x1
     bl fn_80239DAC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x14c0(r31)
     subi r5, r4, 0x7777
@@ -1963,7 +1963,7 @@ asm void fn_8034C714(void)
     bl fn_800C31F4
     addi r3, r1, 0x18
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8034C714_00002088
 lbl_fn_8034C714_00001B70:
     cmpwi r4, 0x1
@@ -2037,21 +2037,21 @@ lbl_fn_8034C714_00001C74:
     lfs f2, 0x530(r28)
     psq_st f1, 0x0(r30), 0, 0
     stfs f2, 0x9c(r1)
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x23c(r1)
     lfd f0, 0x238(r1)
     fsubs f0, f0, f24
     fdivs f0, f0, f25
     fmadds f22, f26, f0, f27
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x244(r1)
     lfd f0, 0x240(r1)
     fsubs f0, f0, f24
     fdivs f0, f0, f25
     fmadds f21, f26, f0, f27
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x23c(r1)
     lfs f0, 0x98(r1)
@@ -2079,7 +2079,7 @@ lbl_fn_8034C714_00001C74:
     stfs f7, 0x88(r1)
     stfs f9, 0x90(r1)
     bl PSVECNormalize
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x244(r1)
     lfs f8, 0x90(r1)
@@ -2102,7 +2102,7 @@ lbl_fn_8034C714_00001C74:
     stfs f0, 0x40(r1)
     stfs f9, 0x44(r1)
     stfs f8, 0x48(r1)
-    bl fn_80680CF8
+    bl rand
     srwi r4, r3, 31
     clrlwi r0, r3, 31
     xor r0, r0, r4
@@ -2265,7 +2265,7 @@ lbl_fn_8034C714_00001F74:
     li r5, 0x3ef
     li r6, 0x1
     bl fn_80239DAC
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x8889
     lwz r0, 0x14c0(r31)
     subi r5, r4, 0x7777

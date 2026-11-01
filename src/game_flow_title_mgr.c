@@ -30,7 +30,7 @@ extern void fn_8050F728(void);
 extern void fn_8050F738(void);
 extern void fn_8050F768(void);
 extern void fn_8050F85C(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void strstr(void);
 extern void fn_80684600(void);
@@ -1298,7 +1298,7 @@ lbl_fn_804DCA58_00000FF8:
     li r19, 0x0
     b lbl_fn_804DCA58_0000103C
 lbl_fn_804DCA58_00001004:
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x3c(r1)
     stw r26, 0x38(r1)
@@ -2213,7 +2213,7 @@ lbl_fn_804DD578_00001BE0:
 lbl_fn_804DD578_00001BE8:
     cmpwi r26, 0x0
     beq lbl_fn_804DD578_00001C7C
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x64(r1)
     xoris r0, r26, 0x8000
@@ -2252,7 +2252,7 @@ lbl_fn_804DD578_00001C6C:
     bdnz lbl_fn_804DD578_00001C48
     b lbl_fn_804DD578_00001CC8
 lbl_fn_804DD578_00001C7C:
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x64(r1)
     xoris r0, r28, 0x8000
@@ -2281,7 +2281,7 @@ lbl_fn_804DD578_00001CD0:
     li r3, 0x15
     b lbl_fn_804DD578_00001D28
 lbl_fn_804DD578_00001CE4:
-    bl fn_80680CF8
+    bl rand
     xoris r0, r3, 0x8000
     stw r0, 0x64(r1)
     lfd f2, 0x58(r31)

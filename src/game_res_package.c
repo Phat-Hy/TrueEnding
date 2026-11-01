@@ -38,7 +38,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getName(void);
 extern void PSMTXTrans(void);
 extern void PSVECMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strstr(void);
 extern void fn_806958E0(void);
 extern void fn_80695A50(void);
@@ -779,7 +779,7 @@ lbl_fn_8022589C_000009AC:
     mr r3, r23
     li r4, 0x0
     bl fn_80225C80
-    bl fn_80680CF8
+    bl rand
     lis r4, 0xb60b
     lfs f0, lbl_8088302C
     addi r0, r4, 0x60b7
@@ -1043,7 +1043,7 @@ lbl_fn_80225DDC_00000CF8:
     lfs f4, lbl_80883068
     lfs f5, lbl_8088306C
     bl fn_8011EE58
-    bl fn_80680CF8
+    bl rand
     lis r4, 0xb60b
     addi r0, r4, 0x60b7
     mulhw r0, r0, r3

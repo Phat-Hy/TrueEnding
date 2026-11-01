@@ -12,7 +12,7 @@ extern void mem_free(void);
 extern void fn_8008BBD8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C31F4(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void fn_80105B3C(void);
 extern void fn_80105B4C(void);
@@ -40,9 +40,9 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695B00(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -131,7 +131,7 @@ asm void fn_801BC904(void)
     bl fn_800CB5C8
     addi r3, r30, 0x30
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     cmpwi r31, 0x0
     ble lbl_fn_801BC904_0000005C
     mr r3, r30
@@ -1409,8 +1409,8 @@ lbl_fn_801BDA9C_00001268:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_807818B8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801BDA9C_00001310:
     cmpwi r30, 0x0
     beq lbl_fn_801BDA9C_00001348
@@ -1535,8 +1535,8 @@ lbl_fn_801BDA9C_00001450:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_807818D4@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801BDA9C_000014E8:
     cmpwi r30, 0x0
     beq lbl_fn_801BDA9C_00001518
@@ -1625,8 +1625,8 @@ lbl_fn_801BDE98_000015CC:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_807818D4@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801BDE98_0000160C:
     cmpwi r30, 0x0
     beq lbl_fn_801BDE98_0000163C
@@ -1726,8 +1726,8 @@ lbl_fn_801BDFE8_0000171C:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_807818B8@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_801BDFE8_0000175C:
     cmpwi r30, 0x0
     beq lbl_fn_801BDFE8_00001794
@@ -2102,7 +2102,7 @@ lbl_fn_801BE10C_00001C38:
     bl fn_800C31F4
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_801BE10C_00001CBC:
     lwz r3, lbl_8087F498
     cmpwi r3, 0x0

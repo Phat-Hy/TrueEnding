@@ -26,7 +26,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
@@ -70,11 +70,11 @@ extern void fn_8059C6E0(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_80684600(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068B100(void);
 extern void fn_80695AD0(void);
 extern u32 strlen(const char* str);
@@ -1588,8 +1588,8 @@ lbl_fn_8025A67C_000014E8:
     addi r4, r25, 0xc9
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8025A67C_0000150C:
     addi r0, r27, 0x5555
     cmplw r19, r0
@@ -1631,8 +1631,8 @@ lbl_fn_8025A67C_0000155C:
     addi r4, r25, 0xc9
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8025A67C_000015AC:
     addi r0, r27, 0x5555
     cmplw r29, r0
@@ -1678,8 +1678,8 @@ lbl_fn_8025A67C_00001630:
     addi r4, r25, 0xc9
     addi r3, r26, 0xa0
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8025A67C_00001650:
     slwi r3, r19, 2
     bl mem_free
@@ -1689,8 +1689,8 @@ lbl_fn_8025A67C_00001650:
     addi r3, r26, 0xa0
     addi r4, r31, lbl_80775A88@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_8025A67C_00001678:
     lwz r5, 0x14c4(r18)
     lwz r3, 0x34(r1)
@@ -2129,7 +2129,7 @@ lbl_fn_8025ACA0_00001C34:
     bl fn_800C344C
     addi r3, r1, 0x10
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r0, 0x15d4(r31)
     lwz r3, lbl_8087F430
     cntlzw r0, r0

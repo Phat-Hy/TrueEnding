@@ -40,7 +40,7 @@ extern void fn_803EDB18(void);
 extern void fn_803FFC50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSVECSquareMag(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void strcmp(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
@@ -1314,7 +1314,7 @@ lbl_fn_803FE390_0000113C:
     stfs f0, 0x36c(r31)
     lfs f0, lbl_808860C0
     stfs f0, 0x370(r31)
-    bl fn_80680CF8
+    bl rand
     lis r28, 0x6666
     lis r30, 0x4330
     addi r0, r28, 0x6667
@@ -1337,7 +1337,7 @@ lbl_fn_803FE390_0000113C:
     stfs f0, 0x378(r31)
     stfs f0, 0x37c(r31)
     stfs f0, 0x380(r31)
-    bl fn_80680CF8
+    bl rand
     addi r0, r28, 0x6667
     stw r30, 0x10(r1)
     mulhw r5, r0, r3
@@ -1441,7 +1441,7 @@ lbl_fn_803FE570_00001310:
     stfs f0, 0x36c(r31)
     lfs f0, lbl_808860C0
     stfs f0, 0x370(r31)
-    bl fn_80680CF8
+    bl rand
     lis r27, 0x6666
     lis r29, 0x4330
     addi r0, r27, 0x6667
@@ -1464,7 +1464,7 @@ lbl_fn_803FE570_00001310:
     stfs f0, 0x378(r31)
     stfs f0, 0x37c(r31)
     stfs f0, 0x380(r31)
-    bl fn_80680CF8
+    bl rand
     addi r0, r27, 0x6667
     stw r29, 0x28(r1)
     mulhw r5, r0, r3

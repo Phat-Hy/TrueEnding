@@ -17,7 +17,7 @@ extern void fn_8004ED34(void);
 extern void fn_8005361C(void);
 extern void atn_Matrix_copy_2(void);
 extern void fn_800C344C(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void atn_Task_destructor(void);
 extern void fn_800F7FD8(void);
 extern void fn_800F80B8(void);
@@ -45,7 +45,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_80680CF8(void);
+extern void rand(void);
 extern void fn_8068AEA4(void);
 
 /* External data declarations */
@@ -1601,7 +1601,7 @@ asm void fn_801100A0(void)
     bl fn_800C344C
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lfs f3, 0x140(r1)
     addi r3, r1, 0xa0
     lfs f0, 0xb8(r1)
@@ -1665,7 +1665,7 @@ lbl_fn_801100A0_00001588:
     stfs f4, 0x94(r1)
     stfs f3, 0x98(r1)
     stfs f0, 0x9c(r1)
-    bl fn_80680CF8
+    bl rand
     lis r4, 0x4178
     lfs f3, lbl_80881640
     addi r4, r4, 0x749f
@@ -1807,7 +1807,7 @@ lbl_fn_801100A0_000017E0:
     bl fn_800C344C
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     lwz r12, 0x0(r31)
     mr r3, r31
     li r4, 0x1

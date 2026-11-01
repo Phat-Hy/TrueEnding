@@ -14,7 +14,7 @@ extern void fn_8006EF48(void);
 extern void fn_8006F72C(void);
 extern void fn_800A4450(void);
 extern void fn_800A55AC(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
 extern void fn_80116FC0(void);
@@ -1588,7 +1588,7 @@ lbl_fn_8011B3D8_000015C0:
     bl fn_80117228
     addi r3, r1, 0xc
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     b lbl_fn_8011B3D8_0000168C
 lbl_fn_8011B3D8_000015DC:
     lwz r3, lbl_8087EF70
@@ -1641,7 +1641,7 @@ lbl_fn_8011B3D8_00001674:
     bl fn_80117228
     addi r3, r1, 0x8
     li r4, -0x1
-    bl fn_800CB3A0
+    bl ref_releaseHandle
 lbl_fn_8011B3D8_0000168C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

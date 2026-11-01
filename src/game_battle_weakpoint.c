@@ -11,7 +11,7 @@ extern void fn_8003F030(void);
 extern void mem_alloc(void);
 extern void fn_800971D4(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800CB3A0(void);
+extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
@@ -670,7 +670,7 @@ asm void fn_803FBEEC(void)
     beq lbl_fn_803FBEEC_00000800
     li r4, -0x1
     addi r3, r3, 0x518
-    bl fn_800CB3A0
+    bl ref_releaseHandle
     addic. r31, r29, 0x50c
     beq lbl_fn_803FBEEC_000007B8
     mr r3, r31

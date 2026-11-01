@@ -18,7 +18,7 @@ extern void mem_free(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
-extern void fn_80097A88(void);
+extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800E2DD4(void);
@@ -52,11 +52,11 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
-extern void fn_80680770(void);
+extern void printf(void);
 extern void strcmp(void);
 extern void strstr(void);
 extern void fn_80684600(void);
-extern void fn_80686EA4(void);
+extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern void fn_8068B100(void);
@@ -194,8 +194,8 @@ lbl_fn_80353CCC_00000068:
     addi r3, r3, 0xa0
     addi r4, r4, lbl_80789680@l
     crclr 6
-    bl fn_80680770
-    bl fn_80686EA4
+    bl printf
+    bl abort
 lbl_fn_80353CCC_000000A8:
     cmpwi r30, 0x0
     beq lbl_fn_80353CCC_000000D8
@@ -996,15 +996,15 @@ lbl_fn_803545E0_00000B54:
     addi r30, r30, lbl_8074AF58@l
     li r4, 0x13f
     addi r5, r30, 0x4f
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     addi r3, r31, 0xb0
     addi r5, r30, 0x66
     li r4, 0x140
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     addi r3, r31, 0xb0
     addi r5, r30, 0x7d
     li r4, 0x142
-    bl fn_80097A88
+    bl atn_Anim_applyLayerTransform
     lwz r0, 0x12a8(r31)
     ori r0, r0, 0x1000
     stw r0, 0x12a8(r31)
