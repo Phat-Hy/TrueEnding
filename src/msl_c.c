@@ -6,7 +6,7 @@ extern void OSGetConsoleType(void);
 extern void __div2u(void);
 extern void __files(void);
 extern void __mod2u(void);
-extern void __register_atexit(void);
+extern int __register_atexit(void (*)(void));
 extern void __va_arg(void);
 extern void _restgpr_14(void);
 extern void _restgpr_15(void);
@@ -14,7 +14,7 @@ extern void _restgpr_21(void);
 extern void _savegpr_14(void);
 extern void _savegpr_15(void);
 extern void _savegpr_21(void);
-extern void exit(void);
+extern void exit(int);
 extern void fn_8061A350(void);
 extern void fn_8061A3A0(void);
 extern void fn_80678668(void);
@@ -144,8 +144,8 @@ void vsprintf(void);
 void fn_806809C0(void);
 void sprintf(void);
 void qsort(void);
-void rand(void);
-void srand(void);
+int rand(void);
+void srand(u32 seed);
 void fn_80680D20(void);
 void fn_806813B4(void);
 void fn_8068204C(void);
@@ -195,7 +195,7 @@ void fn_80686CF8(void);
 void fwide(void);
 void fn_80686DD4(void);
 void abort(void);
-void atexit(void);
+int atexit(void (*func)(void));
 void __msl_runtime_constraint_violation_s(void);
 
 asm void __close_all(void)
@@ -6876,24 +6876,15 @@ lbl_qsort_00005878:
     blr
 }
 
-asm void rand(void)
+int rand(void)
 {
-    nofralloc
-    lis r3, 0x41c6
-    lwz r4, lbl_8087EBF0
-    addi r0, r3, 0x4e6d
-    mullw r3, r4, r0
-    addi r0, r3, 0x3039
-    stw r0, lbl_8087EBF0
-    extrwi r3, r0, 15, 1
-    blr
+    lbl_8087EBF0 = lbl_8087EBF0 * 1103515245 + 12345;
+    return (lbl_8087EBF0 >> 16) & 0x7fff;
 }
 
-asm void srand(void)
+void srand(u32 seed)
 {
-    nofralloc
-    stw r3, lbl_8087EBF0
-    blr
+    lbl_8087EBF0 = seed;
 }
 
 asm void fn_80680D20(void)
@@ -14240,28 +14231,16 @@ lbl_fn_80686DD4_0000BA18:
     blr
 }
 
-asm void abort(void)
+void abort(void)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    li r3, 0x1
-    stw r0, 0x14(r1)
-    bl fn_80682204
-    li r0, 0x1
-    stw r0, lbl_80880358
-    li r3, 0x1
-    bl exit
-    lwz r0, 0x14(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    ((void (*)(int))fn_80682204)(1);
+    lbl_80880358 = 1;
+    exit(1);
 }
 
-asm void atexit(void)
+int atexit(void (*func)(void))
 {
-    nofralloc
-    b __register_atexit
+    return __register_atexit(func);
 }
 
 asm void __msl_runtime_constraint_violation_s(void)

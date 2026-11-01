@@ -94,7 +94,7 @@ void atn_Anim_applyLayerTransform(void);
 void fn_80097A9C(void);
 void fn_80097B34(void);
 void fn_80097B74(void);
-void vec3_clear(void);
+void vec3_clear(void* ptr);
 void atn_Anim_setLayerAnimation(void);
 void fn_80097CCC(void);
 void fn_80097D40(void);
@@ -862,14 +862,11 @@ lbl_fn_80097B74_000009F0:
     blr
 }
 
-asm void vec3_clear(void)
+void vec3_clear(void* ptr)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x4(r3)
-    stw r0, 0x0(r3)
-    stw r0, 0x8(r3)
-    blr
+    *(u32*)((char*)ptr + 4) = 0;
+    *(u32*)ptr = 0;
+    *(u32*)((char*)ptr + 8) = 0;
 }
 
 asm void atn_Anim_setLayerAnimation(void)
