@@ -57,7 +57,13 @@ def load_ppm(path):
 
 def mean_abs(a, b):
     if a.shape != b.shape:
-        from PIL import Image
+        try:
+            from PIL import Image
+        except ModuleNotFoundError:
+            raise SystemExit('align_matrix.py needs Pillow for the BOX resize (layer shots are 1280x720, the '
+                             'EFB readback is 640x448): run it with the bundled python that has Pillow, or '
+                             'install Pillow.')
+
         b = np.asarray(Image.fromarray(b).resize((a.shape[1], a.shape[0]), Image.BOX))
     d = np.abs(a.astype(np.int16) - b.astype(np.int16)).max(axis=2)
     return float(d.mean()), float((d > 8).sum()) / d.size, d
