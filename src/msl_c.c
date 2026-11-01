@@ -169,10 +169,10 @@ void fn_80683FC4(void);
 void fn_8068446C(void);
 void fn_80684514(void);
 void atoi(void);
-void wmemcpy(void);
-void wmemmove(void);
-void wmemchr(void);
-void wmemcmp(void);
+void* wmemcpy(void* dest, const void* src, u32 n);
+void* wmemmove(void* dest, const void* src, u32 n);
+u16* wmemchr(const u16* s, u16 c, u32 n);
+int wmemcmp(const u16* s1, const u16* s2, u32 n);
 void wcscmp(void);
 void fn_80684CC0(void);
 void fn_80684F04(void);
@@ -11214,55 +11214,36 @@ lbl_atoi_00009244:
     blr
 }
 
-asm void wmemcpy(void)
+void* wmemcpy(void* dest, const void* src, u32 n)
 {
-    nofralloc
-    slwi r5, r5, 1
-    b memcpy
+    return ((void* (*)(void*, const void*, u32))memcpy)(dest, src, n * 2);
 }
 
-asm void wmemmove(void)
+void* wmemmove(void* dest, const void* src, u32 n)
 {
-    nofralloc
-    slwi r5, r5, 1
-    b memmove
+    return ((void* (*)(void*, const void*, u32))memmove)(dest, src, n * 2);
 }
 
-asm void wmemchr(void)
+u16* wmemchr(const u16* s, u16 c, u32 n)
 {
-    nofralloc
-    mtctr r5
-    cmpwi r5, 0x0
-    beq lbl_wmemchr_00009288
-lbl_wmemchr_00009274:
-    lhz r0, 0x0(r3)
-    cmplw r0, r4
-    beqlr
-    addi r3, r3, 0x2
-    bdnz lbl_wmemchr_00009274
-lbl_wmemchr_00009288:
-    li r3, 0x0
-    blr
+    for (; n != 0; s++, n--) {
+        if (*s == c) {
+            return (u16*)s;
+        }
+    }
+    return 0;
 }
 
-asm void wmemcmp(void)
+int wmemcmp(const u16* s1, const u16* s2, u32 n)
 {
-    nofralloc
-    li r0, 0x0
-    mtctr r5
-    cmpwi r5, 0x0
-    beq lbl_wmemcmp_000092BC
-lbl_wmemcmp_000092A0:
-    lhz r5, 0x0(r4)
-    lhz r0, 0x0(r3)
-    subf. r0, r5, r0
-    bne lbl_wmemcmp_000092BC
-    addi r3, r3, 0x2
-    addi r4, r4, 0x2
-    bdnz lbl_wmemcmp_000092A0
-lbl_wmemcmp_000092BC:
-    mr r3, r0
-    blr
+    int diff = 0;
+    for (; n != 0; s1++, s2++, n--) {
+        diff = *s1 - *s2;
+        if (diff != 0) {
+            break;
+        }
+    }
+    return diff;
 }
 
 asm void wcscmp(void)
