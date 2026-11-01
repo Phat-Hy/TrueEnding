@@ -55,7 +55,7 @@ extern void fn_803920C8(void);
 extern void fn_80392510(void);
 extern void fn_803928C0(void);
 extern void fn_80392964(void);
-extern void fn_80392A04(void);
+extern void mtx_copyPairedSingle(void);
 extern void fn_80392FE8(void);
 extern void fn_805B81F4(void);
 extern void PSMTXConcat(void);
@@ -1022,7 +1022,7 @@ lbl_fn_803830A8_00000D08:
     bl item_useConsumable
     mr r4, r30
     addi r3, r30, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r30
     bl fn_803918EC
     mr r3, r30
@@ -1569,7 +1569,7 @@ lbl_fn_8038378C_00001338:
     bl item_useConsumable
     mr r4, r30
     addi r3, r30, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r30
     bl fn_80392510
     mr r3, r30
@@ -1859,7 +1859,7 @@ lbl_fn_80384188_0000187C:
     bl item_useConsumable
     mr r4, r29
     addi r3, r29, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r29
     bl fn_803918EC
     mr r3, r29
@@ -3446,7 +3446,7 @@ lbl_fn_80384188_000030DC:
     bl item_useConsumable
     mr r4, r29
     addi r3, r29, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r29
     bl fn_803918EC
     mr r3, r29

@@ -23,7 +23,7 @@ extern void fn_8068446C(void);
 extern void wcslen(void);
 extern void wcscpy(void);
 extern void fn_80696324(void);
-extern void fn_806A7110(void);
+extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
 extern void net_memFree(void);
@@ -642,7 +642,7 @@ asm void fn_806D3D70(void)
     beq lbl_fn_806D3D70_00000908
     b lbl_fn_806D3D70_0000093C
 lbl_fn_806D3D70_000007CC:
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806D3D70_000007E8
     lis r4, 0xffff
@@ -672,7 +672,7 @@ lbl_fn_806D3D70_000007F8:
     stw r0, lbl_807C2710@l(r30)
     b lbl_fn_806D3D70_0000093C
 lbl_fn_806D3D70_00000838:
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806D3D70_00000854
     lis r4, 0xffff
@@ -688,7 +688,7 @@ lbl_fn_806D3D70_00000864:
     bl fn_806A7B10
     cmpwi r3, 0x0
     bne lbl_fn_806D3D70_0000093C
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806D3D70_0000088C
     lis r4, 0xffff
@@ -718,7 +718,7 @@ lbl_fn_806D3D70_0000089C:
     stw r0, lbl_807C2710@l(r30)
     b lbl_fn_806D3D70_0000093C
 lbl_fn_806D3D70_000008DC:
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806D3D70_000008F8
     lis r4, 0xffff
@@ -734,7 +734,7 @@ lbl_fn_806D3D70_00000908:
     bl fn_806A7B10
     cmpwi r3, 0x0
     bne lbl_fn_806D3D70_0000093C
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806D3D70_00000930
     lis r4, 0xffff
@@ -1526,7 +1526,7 @@ lbl_fn_806D49C0_00001410:
     b lbl_fn_806D49C0_00001488
 lbl_fn_806D49C0_00001418:
     lwz r31, 0x1c(r31)
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806D49C0_00001430
     li r3, 0x1
@@ -1596,7 +1596,7 @@ asm void fn_806D4AC0(void)
     mr r28, r5
     mr r29, r6
     mr r30, r7
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806D4AC0_00001510
     li r3, 0x1
@@ -1681,7 +1681,7 @@ asm void fn_806D4BE0(void)
     mr r29, r4
     mr r30, r5
     mr r31, r6
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806D4BE0_0000162C
     li r3, 0x1
@@ -1836,7 +1836,7 @@ asm void fn_806D4E00(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806D4E00_00001834
     li r3, 0x1
@@ -1869,7 +1869,7 @@ asm void fn_806D4E70(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806D4E70_000018A4
     li r3, 0x1
@@ -1982,13 +1982,13 @@ asm void fn_806D4FE0(void)
     mr r31, r3
     stw r30, 0x18(r1)
     mr r30, r4
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806D4FE0_00001A24
     li r3, 0x1
     b lbl_fn_806D4FE0_00001BC0
 lbl_fn_806D4FE0_00001A24:
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806D4FE0_00001A38
     li r3, 0x1
@@ -2121,13 +2121,13 @@ asm void fn_806D51D0(void)
     stw r0, 0x24(r1)
     stw r31, 0x1c(r1)
     mr r31, r3
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806D51D0_00001C0C
     li r3, 0x1
     b lbl_fn_806D51D0_00001CA8
 lbl_fn_806D51D0_00001C0C:
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806D51D0_00001C20
     li r3, 0x1

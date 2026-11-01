@@ -45,7 +45,7 @@ extern void fn_80178078(void);
 extern void battle_generateLootDrops(void);
 extern void fn_8017B3C0(void);
 extern void fn_8017B434(void);
-extern void fn_8017C974(void);
+extern void map_isAreaCombatActive(void);
 extern void fn_801A1BE4(void);
 extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
@@ -172,7 +172,7 @@ lbl_npc_calcTargetDistance_00000094:
     cmpwi r3, 0x1
     bne lbl_npc_calcTargetDistance_000002D4
     mr r3, r31
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     cmpwi r3, 0x0
     bne lbl_npc_calcTargetDistance_000000C8
     lwz r0, 0x12a4(r31)

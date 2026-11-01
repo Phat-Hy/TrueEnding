@@ -20,7 +20,7 @@ extern void fn_80383F7C(void);
 extern void fn_803918EC(void);
 extern void fn_803920C8(void);
 extern void fn_803928C0(void);
-extern void fn_80392A04(void);
+extern void mtx_copyPairedSingle(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -179,7 +179,7 @@ lbl_fn_80385B48_000000BC:
     bl item_useConsumable
     mr r4, r28
     addi r3, r28, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r28
     bl fn_803918EC
     mr r3, r28
@@ -1783,7 +1783,7 @@ lbl_fn_80385B48_0000195C:
     bl item_useConsumable
     mr r4, r28
     addi r3, r28, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r28
     bl fn_803918EC
     mr r3, r28

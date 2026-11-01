@@ -133,7 +133,7 @@ void fn_806A6CA0(void);
 void fn_806A6E40(void);
 void fn_806A7020(void);
 void fn_806A70E0(void);
-void fn_806A7110(void);
+void net_isConnectionActive(void);
 void net_checkConnectionSession(void);
 void fn_806A7150(void);
 void fn_806A7250(void);
@@ -1034,7 +1034,7 @@ asm void fn_806A70E0(void)
     blr
 }
 
-asm void fn_806A7110(void)
+asm void net_isConnectionActive(void)
 {
     nofralloc
     lis r3, lbl_8085FF18@ha
@@ -1800,7 +1800,7 @@ asm void fn_806A7B10(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806A7B10_000015C8
     li r3, 0x0
@@ -1979,7 +1979,7 @@ asm void fn_806A7D40(void)
     li r3, 0x4
     crclr 6
     bl net_formatLog
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806A7D40_00001834
     li r3, -0x1

@@ -26,7 +26,7 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void save_parseSlotHeader(void);
-extern void fn_801F4998(void);
+extern void save_formatSlotMetadata(void);
 extern void fn_801F4F84(void);
 extern void thread_findAndNotify(void);
 extern void boss_getOffset54(void);
@@ -604,7 +604,7 @@ lbl_spectateView_update_0000075C:
     addi r29, r4, lbl_8075D5B0@l
     or r5, r28, r0
     addi r4, r29, 0x25d
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     li r28, 0x0
 lbl_spectateView_update_0000078C:
     mr r5, r28

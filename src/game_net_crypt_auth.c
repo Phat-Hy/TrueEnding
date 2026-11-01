@@ -24,7 +24,7 @@ extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
 extern void save_validateHeader(void);
 extern void save_parseSlotHeader(void);
-extern void fn_801F4998(void);
+extern void save_formatSlotMetadata(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotify(void);
@@ -259,27 +259,27 @@ lbl_fn_804B6204_00000228:
     addi r31, r31, lbl_80758150@l
     lis r5, 0xffff
     addi r4, r31, 0x189
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0x4c(r30)
     addi r4, r31, 0x191
     lis r5, 0xffff
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0x4c(r30)
     addi r4, r31, 0x199
     lis r5, 0xffff
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0x4c(r30)
     addi r4, r31, 0x1c5
     lis r5, 0xffff
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0x4c(r30)
     addi r4, r31, 0x1cd
     lis r5, 0xffff
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0x4c(r30)
     addi r4, r31, 0x1d5
     lis r5, 0xffff
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r4, 0x4c(r30)
     addi r3, r31, 0x1dd
     addi r29, r4, 0x58
@@ -350,27 +350,27 @@ lbl_fn_804B6204_00000398:
     addi r31, r31, lbl_80758150@l
     li r5, -0x1
     addi r4, r31, 0x189
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0x4c(r30)
     addi r4, r31, 0x191
     li r5, -0x1
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0x4c(r30)
     addi r4, r31, 0x199
     li r5, -0x1
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0x4c(r30)
     addi r4, r31, 0x1c5
     li r5, -0x1
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0x4c(r30)
     addi r4, r31, 0x1cd
     li r5, -0x1
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0x4c(r30)
     addi r4, r31, 0x1d5
     li r5, -0x1
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r4, 0x4c(r30)
     addi r3, r31, 0x1dd
     addi r29, r4, 0x58

@@ -43,7 +43,7 @@ extern void fn_806A0A78(void);
 extern void fn_806A0AD8(void);
 extern void fn_806A6CA0(void);
 extern void fn_806A6E40(void);
-extern void fn_806A7110(void);
+extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
 extern void net_memFree(void);
@@ -2213,7 +2213,7 @@ lbl_fn_806D3210_00001EA8:
     li r3, 0x8
     crclr 6
     bl net_formatLog
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806D3210_00001ED8
     lis r4, 0xffff
@@ -2243,7 +2243,7 @@ lbl_fn_806D3210_00001EEC:
     bl net_formatLog
     mr r3, r28
     bl fn_806A75C0
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806D3210_00001F44
     lis r4, 0xffff
@@ -2269,7 +2269,7 @@ lbl_fn_806D3210_00001F68:
     bne lbl_fn_806D3210_00001FAC
     mr r3, r28
     bl fn_806A75C0
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806D3210_00001FA0
     lis r4, 0xffff
@@ -2293,7 +2293,7 @@ lbl_fn_806D3210_00001FAC:
     bne lbl_fn_806D3210_00002004
     mr r3, r28
     bl fn_806A75C0
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806D3210_00001FF8
     lis r4, 0xffff
@@ -2312,7 +2312,7 @@ lbl_fn_806D3210_00002004:
     stw r0, 0x0(r30)
     b lbl_fn_806D3210_00002040
 lbl_fn_806D3210_0000201C:
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806D3210_00002038
     lis r4, 0xffff

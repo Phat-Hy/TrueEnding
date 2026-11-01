@@ -30,7 +30,7 @@ extern void net_checkLinkStatus(void);
 extern void fn_806B15B0(void);
 extern void fn_806B1660(void);
 extern void fn_806B1710(void);
-extern void fn_806BBCA0(void);
+extern void net_logSessionStatus(void);
 extern void fn_806BCD40(void);
 extern void fn_806C10C0(void);
 extern void fn_806C1AC0(void);
@@ -461,7 +461,7 @@ lbl_fn_806B85B0_00000500:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     b lbl_fn_806B85B0_0000091C
 lbl_fn_806B85B0_00000594:
     lis r3, lbl_80860898@ha
@@ -645,7 +645,7 @@ lbl_fn_806B85B0_000007BC:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     b lbl_fn_806B85B0_0000091C
 lbl_fn_806B85B0_00000850:
     mr r3, r26
@@ -1116,7 +1116,7 @@ lbl_fn_806B8D60_00000E8C:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     b lbl_fn_806B8D60_00000FC4
 lbl_fn_806B8D60_00000F20:
     bl fn_806B1660
@@ -1385,7 +1385,7 @@ lbl_fn_806B9500_0000125C:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
 lbl_fn_806B9500_000012EC:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)

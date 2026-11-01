@@ -85,7 +85,7 @@ extern u32 lbl_8087D6F1;
 
 /* Function declarations */
 void fn_8001E0A8(void *p);
-void fn_8001E0B8(void);
+void property_copyValue(void);
 void fn_8001E168(void);
 void fn_8001E1D0(void);
 void fn_8001E340(void *p);
@@ -160,7 +160,7 @@ void fn_8001E0A8(void *p)
     *(void **)p = &lbl_80777230;
 }
 
-asm void fn_8001E0B8(void)
+asm void property_copyValue(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -174,14 +174,14 @@ asm void fn_8001E0B8(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    bne lbl_fn_8001E0B8_00000058
+    bne lbl_property_copyValue_00000058
     lwz r5, 0x4(r4)
     lwz r0, 0x8(r4)
     stw r6, 0x0(r3)
     stw r5, 0x4(r3)
     stw r0, 0x8(r3)
-    b lbl_fn_8001E0B8_00000098
-lbl_fn_8001E0B8_00000058:
+    b lbl_property_copyValue_00000098
+lbl_property_copyValue_00000058:
     li r0, 0x0
     stw r0, 0x0(r3)
     lwz r4, 0x4(r4)
@@ -198,7 +198,7 @@ lbl_fn_8001E0B8_00000058:
     li r5, 0x0
     add r7, r6, r0
     bl actor_dispatchMessage
-lbl_fn_8001E0B8_00000098:
+lbl_property_copyValue_00000098:
     lwz r0, 0x0(r31)
     mr r3, r29
     stw r0, 0xc(r29)

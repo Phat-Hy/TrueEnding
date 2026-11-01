@@ -18,7 +18,7 @@ extern void memcmp(void);
 extern void snprintf(void);
 extern void strcmp(void);
 extern void fn_806A70E0(void);
-extern void fn_806A7110(void);
+extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
 extern void net_memFree(void);
@@ -1303,7 +1303,7 @@ asm void fn_806AE960(void)
     lwz r0, lbl_8085FF90@l(r31)
     cmpwi r0, 0x0
     beq lbl_fn_806AE960_000011F4
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806AE960_000010B0
     b lbl_fn_806AE960_000011F4

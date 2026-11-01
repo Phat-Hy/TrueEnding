@@ -62,7 +62,7 @@ void fn_803920C8(void);
 void fn_80392510(void);
 void fn_803928C0(void);
 void fn_80392964(void);
-void fn_80392A04(void);
+void mtx_copyPairedSingle(void);
 void fn_80392C94(void);
 void fn_80392CE0(void);
 void fn_80392D2C(void);
@@ -675,7 +675,7 @@ asm void fn_80392964(void)
     mr r31, r7
     mr r4, r27
     addi r3, r3, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     cmpwi r30, 0x0
     beq lbl_fn_80392964_000008DC
     mr r3, r27
@@ -710,7 +710,7 @@ lbl_fn_80392964_0000090C:
     blr
 }
 
-asm void fn_80392A04(void)
+asm void mtx_copyPairedSingle(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -857,7 +857,7 @@ asm void fn_80392A04(void)
     stfs f0, 0x178(r3)
     psq_st f1, 0xc(r7), 0, 0
     stfs f2, 0x190(r3)
-lbl_fn_80392A04_00000B7C:
+lbl_mtx_copyPairedSingle_00000B7C:
     psq_l f1, 0x0(r8), 0, 0
     psq_st f1, 0x0(r9), 0, 0
     lfs f2, 0x8(r8)
@@ -867,7 +867,7 @@ lbl_fn_80392A04_00000B7C:
     stfs f0, 0xc(r9)
     addi r9, r9, 0x10
     cmplw r9, r0
-    blt lbl_fn_80392A04_00000B7C
+    blt lbl_mtx_copyPairedSingle_00000B7C
     psq_l f31, 0x48(r1), 0, 0
     lfd f31, 0x40(r1)
     psq_l f30, 0x38(r1), 0, 0

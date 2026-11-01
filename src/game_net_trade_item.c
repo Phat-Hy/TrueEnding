@@ -47,7 +47,7 @@ extern void world_getGlobalFlag(void);
 extern void fn_8037529C(void);
 extern void fn_8037F688(void);
 extern void fn_80383728(void);
-extern void fn_80392A04(void);
+extern void mtx_copyPairedSingle(void);
 extern void fn_803CF734(void);
 extern void fn_803CFC58(void);
 extern void fn_80453DBC(void);
@@ -456,7 +456,7 @@ lbl_fn_8052C10C_00000408:
     bl actor_calcSpawnTransform
     addi r3, r31, 0x260
     addi r4, r31, 0x6c
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     bl sys_getMainManager
     bl fn_8052C6C4
     bl sys_getMainManager

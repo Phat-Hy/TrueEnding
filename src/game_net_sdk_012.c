@@ -15,7 +15,7 @@ extern void snprintf(void);
 extern void strncpy(void);
 extern void strcmp(void);
 extern void fn_8068446C(void);
-extern void fn_806A7110(void);
+extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
 extern void net_memFree(void);
@@ -34,7 +34,7 @@ extern void fn_806BAE10(void);
 extern void fn_806BB3F0(void);
 extern void fn_806BB440(void);
 extern void fn_806BB6A0(void);
-extern void fn_806BBCA0(void);
+extern void net_logSessionStatus(void);
 extern void fn_806C3670(void);
 extern void fn_806CB4C0(void);
 extern void fn_806CCB70(void);
@@ -125,7 +125,7 @@ asm void fn_806B1A00(void)
     lwz r0, lbl_8085FF98@l(r31)
     cmpwi r0, 0x0
     beq lbl_fn_806B1A00_00000074
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806B1A00_00000074
     lwz r3, lbl_8085FF98@l(r31)
@@ -1826,7 +1826,7 @@ asm void fn_806B3160(void)
     mflr r0
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806B3160_00001788
     li r0, 0x0
@@ -2158,7 +2158,7 @@ lbl_fn_806B3220_00001B9C:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
 lbl_fn_806B3220_00001C2C:
     li r3, 0x0
     b lbl_fn_806B3220_00001C68
@@ -2465,7 +2465,7 @@ lbl_fn_806B3680_00002000:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
 lbl_fn_806B3680_00002090:
     li r3, 0x0
     b lbl_fn_806B3680_000020CC

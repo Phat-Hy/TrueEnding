@@ -22,7 +22,7 @@ extern void net_findSessionSlot(void);
 extern void net_sendSessionCommand(void);
 extern void fn_806B1230(void);
 extern void net_checkLinkStatus(void);
-extern void fn_806BBCA0(void);
+extern void net_logSessionStatus(void);
 extern void fn_806BC4C0(void);
 extern void fn_806BCD40(void);
 extern void fn_806C10C0(void);
@@ -1708,7 +1708,7 @@ lbl_fn_806C9880_00001520:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
 lbl_fn_806C9880_000015B0:
     cmpwi r28, 0x0
     bne lbl_fn_806C9880_000015C8
@@ -2613,7 +2613,7 @@ lbl_fn_806CA040_00002248:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
 lbl_fn_806CA040_000022D8:
     subi r0, r31, 0x1
     cmplwi r0, 0x2
@@ -2805,7 +2805,7 @@ lbl_fn_806CA040_00002520:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
 lbl_fn_806CA040_000025B0:
     cmpwi r29, 0x0
     beq lbl_fn_806CA040_000025C8
@@ -3035,7 +3035,7 @@ lbl_fn_806CA040_00002870:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
 lbl_fn_806CA040_00002900:
     cmpwi r31, 0x0
     beq lbl_fn_806CA040_00002C84
@@ -3237,7 +3237,7 @@ lbl_fn_806CA040_00002B6C:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
 lbl_fn_806CA040_00002BFC:
     cmpwi r29, 0x0
     beq lbl_fn_806CA040_00002C14

@@ -20,7 +20,7 @@ extern void actor_spawnActorWithId(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801F0544(void);
 extern void save_parseSlotHeader(void);
-extern void fn_801F4998(void);
+extern void save_formatSlotMetadata(void);
 extern void save_findSlotTask(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801FEC08(void);
@@ -1049,14 +1049,14 @@ lbl_fn_804B1C88_00000D84:
     bne lbl_fn_804B1C88_00000DB0
     lwz r3, 0x78(r31)
     addi r4, r29, 0x41e
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     b lbl_fn_804B1C88_00000DC4
 lbl_fn_804B1C88_00000DB0:
     cmpwi r27, 0x1
     bne lbl_fn_804B1C88_00000DC4
     lwz r3, 0x78(r31)
     addi r4, r29, 0x429
-    bl fn_801F4998
+    bl save_formatSlotMetadata
 lbl_fn_804B1C88_00000DC4:
     lwz r3, 0xec(r28)
     addi r0, r3, 0x1
@@ -1071,7 +1071,7 @@ lbl_fn_804B1C88_00000DE0:
     lwz r3, 0x78(r31)
     addi r4, r29, 0x41e
     lis r5, 0xff00
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     b lbl_fn_804B1C88_00000E14
 lbl_fn_804B1C88_00000DFC:
     cmpwi r27, 0x1
@@ -1079,7 +1079,7 @@ lbl_fn_804B1C88_00000DFC:
     lwz r3, 0x78(r31)
     addi r4, r29, 0x429
     lis r5, 0xff00
-    bl fn_801F4998
+    bl save_formatSlotMetadata
 lbl_fn_804B1C88_00000E14:
     addi r27, r27, 0x1
     addi r28, r28, 0x4
@@ -1285,14 +1285,14 @@ lbl_fn_804B1E48_000010E4:
     bne lbl_fn_804B1E48_00001110
     lwz r3, 0x78(r29)
     addi r4, r26, 0x41e
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     b lbl_fn_804B1E48_00001124
 lbl_fn_804B1E48_00001110:
     cmpwi r23, 0x1
     bne lbl_fn_804B1E48_00001124
     lwz r3, 0x78(r29)
     addi r4, r26, 0x429
-    bl fn_801F4998
+    bl save_formatSlotMetadata
 lbl_fn_804B1E48_00001124:
     lwz r3, 0xec(r22)
     addi r0, r3, 0x1
@@ -1307,7 +1307,7 @@ lbl_fn_804B1E48_00001140:
     lwz r3, 0x78(r29)
     addi r4, r26, 0x41e
     lis r5, 0xff00
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     b lbl_fn_804B1E48_00001174
 lbl_fn_804B1E48_0000115C:
     cmpwi r23, 0x1
@@ -1315,7 +1315,7 @@ lbl_fn_804B1E48_0000115C:
     lwz r3, 0x78(r29)
     addi r4, r26, 0x429
     lis r5, 0xff00
-    bl fn_801F4998
+    bl save_formatSlotMetadata
 lbl_fn_804B1E48_00001174:
     addi r23, r23, 0x1
     addi r22, r22, 0x4

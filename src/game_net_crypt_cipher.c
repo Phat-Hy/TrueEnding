@@ -21,7 +21,7 @@ extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void save_validateHeader(void);
 extern void save_parseSlotHeader(void);
-extern void fn_801F4998(void);
+extern void save_formatSlotMetadata(void);
 extern void save_findSlotTask(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -393,29 +393,29 @@ lbl_fn_804B49E0_000003AC:
     addi r4, r30, 0x4bc
     add r5, r28, r31
     lwz r5, 0x50(r5)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     add r4, r28, r31
     lwz r3, 0xb8(r29)
     lwz r5, 0x54(r4)
     addi r4, r30, 0x4ca
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     add r31, r28, r31
     lwz r3, 0xb8(r29)
     lwz r5, 0x58(r31)
     addi r4, r30, 0x4d8
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0xb8(r29)
     addi r4, r30, 0x4dd
     lwz r5, 0x58(r31)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0xb8(r29)
     addi r4, r30, 0x4e2
     lwz r5, 0x58(r31)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0xb8(r29)
     addi r4, r30, 0x4e7
     lwz r5, 0x58(r31)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -1782,7 +1782,7 @@ lbl_fn_804B5B10_0000173C:
     add r25, r31, r18
     addi r4, r27, 0x14a
     lwz r3, 0x50(r25)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     cmpwi r22, 0x1
     lwz r3, 0x50(r25)
     addi r4, r27, 0x155
@@ -1790,7 +1790,7 @@ lbl_fn_804B5B10_0000173C:
     bne lbl_fn_804B5B10_00001764
     subi r5, r29, 0x61ca
 lbl_fn_804B5B10_00001764:
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r4, 0x50(r25)
     addi r3, r27, 0x160
     lwz r0, 0x38(r4)

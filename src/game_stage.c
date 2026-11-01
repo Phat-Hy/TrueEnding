@@ -20,7 +20,7 @@ extern void fn_8001BF4C(void);
 extern void fn_8001C068(void);
 extern void fn_8003CDB0(void);
 extern void fn_8003D298(void);
-extern void fn_8003DBA4(void);
+extern void effect_testLifetime(void);
 extern void rand(void);
 
 /* External data declarations */
@@ -398,7 +398,7 @@ lbl_fn_800202BC_000003E0:
 lbl_fn_800202BC_000003E4:
     cmpwi r0, 0x6
     bne lbl_fn_800202BC_00000430
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x6
     bne lbl_fn_800202BC_0000040C
     lis r3, lbl_807C6A40@ha
@@ -545,7 +545,7 @@ lbl_fn_8002055C_000005C4:
     li r3, -0x1
     b lbl_fn_8002055C_00000614
 lbl_fn_8002055C_000005CC:
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x6
     bne lbl_fn_8002055C_000005E8
     li r0, 0x1
@@ -654,7 +654,7 @@ lbl_fn_800206B8_0000071C:
 lbl_fn_800206B8_00000738:
     cmpwi r0, 0x6
     bne lbl_fn_800206B8_00000784
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x4
     bne lbl_fn_800206B8_00000760
     lis r3, lbl_807C6A40@ha
@@ -4124,7 +4124,7 @@ lbl_fn_80023568_0000366C:
 lbl_fn_80023568_00003670:
     cmpwi r0, 0x6
     bne lbl_fn_80023568_000036BC
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x6
     bne lbl_fn_80023568_00003698
     lis r3, lbl_807C6A40@ha
@@ -4280,7 +4280,7 @@ lbl_fn_800237E8_00003874:
     li r3, -0x1
     b lbl_fn_800237E8_000038BC
 lbl_fn_800237E8_0000387C:
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x4
     bne lbl_fn_800237E8_00003898
     li r0, 0x1
@@ -4368,7 +4368,7 @@ lbl_fn_80023960_00003984:
 lbl_fn_80023960_000039A0:
     cmpwi r0, 0x6
     bne lbl_fn_80023960_000039EC
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x4
     bne lbl_fn_80023960_000039C8
     lis r3, lbl_807C6A40@ha
@@ -5877,7 +5877,7 @@ lbl_fn_80024DCC_00004D74:
 lbl_fn_80024DCC_00004D78:
     cmpwi r0, 0x6
     bne lbl_fn_80024DCC_00004DC4
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x6
     bne lbl_fn_80024DCC_00004DA0
     lis r3, lbl_807C6A40@ha
@@ -6044,7 +6044,7 @@ lbl_fn_80024F9C_00004FBC:
 lbl_fn_80024F9C_00004FC0:
     cmpwi r0, 0x6
     bne lbl_fn_80024F9C_0000500C
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x4
     bne lbl_fn_80024F9C_00004FE8
     lis r3, lbl_807C6A40@ha

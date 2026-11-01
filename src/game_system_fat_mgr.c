@@ -25,7 +25,7 @@ extern void fn_803918EC(void);
 extern void fn_803920C8(void);
 extern void fn_80392510(void);
 extern void fn_803928C0(void);
-extern void fn_80392A04(void);
+extern void mtx_copyPairedSingle(void);
 extern void fn_80392FE8(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -1490,7 +1490,7 @@ lbl_fn_8037EF48_00001438:
     bl item_useConsumable
     mr r4, r30
     addi r3, r30, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r30
     bl fn_80392510
     mr r3, r30

@@ -86,7 +86,7 @@ extern void fn_80372754(void);
 extern void fn_803727D4(void);
 extern void fn_8037529C(void);
 extern void fn_8037F688(void);
-extern void fn_80392A04(void);
+extern void mtx_copyPairedSingle(void);
 extern void craft_forgeUpgradeWeapon(void);
 extern void fn_803CFC58(void);
 extern void fn_803CFC64(void);
@@ -966,7 +966,7 @@ lbl_fn_805BAC18_00000B78:
     bne lbl_fn_805BAC18_00000BC4
     addi r3, r29, 0x8c
     addi r4, r29, 0x280
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     addi r3, r29, 0x54
     addi r4, r29, 0x6c
     bl vec3_copy

@@ -16,7 +16,7 @@ extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
-extern void fn_801F4998(void);
+extern void save_formatSlotMetadata(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotify(void);
@@ -1359,7 +1359,7 @@ lbl_fn_804C18A8_000011C4:
 lbl_fn_804C18A8_000011D0:
     lwz r3, 0x84(r18)
     addi r4, r30, 0x405
-    bl fn_801F4998
+    bl save_formatSlotMetadata
 lbl_fn_804C18A8_000011DC:
     lwz r16, 0x80(r18)
     cmpwi r16, 0x0

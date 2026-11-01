@@ -16,7 +16,7 @@ extern void fn_803918EC(void);
 extern void fn_803920C8(void);
 extern void fn_80392510(void);
 extern void fn_803928C0(void);
-extern void fn_80392A04(void);
+extern void mtx_copyPairedSingle(void);
 extern void fn_80392FE8(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -166,7 +166,7 @@ asm void fn_80389060(void)
     bl item_useConsumable
     mr r4, r28
     addi r3, r28, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r28
     bl fn_80392510
     mr r3, r28
@@ -273,7 +273,7 @@ asm void fn_80389210(void)
     bl item_useConsumable
     mr r4, r30
     addi r3, r30, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r30
     bl fn_80392510
     mr r3, r30
@@ -377,7 +377,7 @@ asm void fn_803893A0(void)
     bl item_useConsumable
     mr r4, r28
     addi r3, r28, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r28
     bl fn_80392510
     mr r3, r28
@@ -468,7 +468,7 @@ lbl_fn_8038952C_00000524:
     bl item_useConsumable
     mr r4, r29
     addi r3, r29, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r29
     bl fn_80392510
     mr r3, r29
@@ -566,7 +566,7 @@ lbl_fn_80389678_000006F4:
     bl item_useConsumable
     mr r4, r28
     addi r3, r28, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r28
     bl fn_80392510
     mr r3, r28
@@ -962,7 +962,7 @@ lbl_fn_80389A00_00000C9C:
     mr r4, r30
     addi r3, r30, 0x1f4
     stw r0, 0x914(r30)
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r30
     bl fn_80392510
     mr r3, r30
@@ -1171,7 +1171,7 @@ lbl_fn_80389A00_00000F10:
     bl item_useConsumable
     mr r4, r30
     addi r3, r30, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r30
     bl fn_80392510
     mr r3, r30
@@ -1480,7 +1480,7 @@ lbl_fn_8038A200_00001268:
     bl item_useConsumable
     mr r4, r31
     addi r3, r31, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r31
     bl fn_803918EC
     mr r3, r31
@@ -2080,7 +2080,7 @@ lbl_fn_8038A5F0_00001BA0:
     bl item_useConsumable
     mr r4, r29
     addi r3, r29, 0x1f4
-    bl fn_80392A04
+    bl mtx_copyPairedSingle
     mr r3, r29
     bl fn_80392510
     mr r3, r29

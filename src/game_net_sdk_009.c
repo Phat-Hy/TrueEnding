@@ -20,7 +20,7 @@ extern void fn_80698A28(void);
 extern void fn_80698EF0(void);
 extern void fn_80698F30(void);
 extern void fn_80699020(void);
-extern void fn_806A7110(void);
+extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
 extern void net_memFree(void);
@@ -724,7 +724,7 @@ asm void fn_806AC0A0(void)
     lwz r0, lbl_8085FF7C@l(r5)
     cmpwi r0, 0x2
     bne lbl_fn_806AC0A0_0000084C
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806AC0A0_0000084C
     lis r29, lbl_8085FF78@ha
@@ -914,7 +914,7 @@ asm void fn_806AC360(void)
     lwz r0, 0x0(r31)
     cmpwi r0, 0x0
     beq lbl_fn_806AC360_00000F58
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806AC360_00000AF4
     b lbl_fn_806AC360_00000F58

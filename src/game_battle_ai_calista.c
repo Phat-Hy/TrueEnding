@@ -38,7 +38,7 @@ extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void battle_awardExp(void);
 extern void battle_activateExpReward(void);
-extern void fn_8017C974(void);
+extern void map_isAreaCombatActive(void);
 extern void event_findEntryById(void);
 extern void fn_8021DE88(void);
 extern void fn_8021DECC(void);
@@ -624,7 +624,7 @@ lbl_fn_80431774_000006E0:
     cmpwi r31, 0x0
     beq lbl_fn_80431774_00001040
     mr r3, r31
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     cmpwi r3, 0x0
     beq lbl_fn_80431774_000006FC
     b lbl_fn_80431774_00001040

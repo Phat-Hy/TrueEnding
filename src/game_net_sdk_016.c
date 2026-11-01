@@ -22,7 +22,7 @@ extern void fn_806B14D0(void);
 extern void fn_806B1680(void);
 extern void fn_806B1A00(void);
 extern void fn_806BAC80(void);
-extern void fn_806BBCA0(void);
+extern void net_logSessionStatus(void);
 extern void fn_806BC010(void);
 extern void fn_806BC4C0(void);
 extern void fn_806BC860(void);
@@ -1269,7 +1269,7 @@ lbl_fn_806BCD40_00001148:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
 lbl_fn_806BCD40_000011D8:
     cmpwi r25, 0x0
     beq lbl_fn_806BCD40_00002E44
@@ -1525,7 +1525,7 @@ lbl_fn_806BCD40_00001514:
     li r4, 0x0
     mtctr r12
     bctrl
-    bl fn_806BBCA0
+    bl net_logSessionStatus
 lbl_fn_806BCD40_000015A4:
     li r3, 0x0
     b lbl_fn_806BCD40_00002E48

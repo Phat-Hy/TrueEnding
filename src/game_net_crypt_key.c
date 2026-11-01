@@ -18,7 +18,7 @@ extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_findSpawnTemplate(void);
 extern void save_parseSlotHeader(void);
-extern void fn_801F4998(void);
+extern void save_formatSlotMetadata(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findTaskById(void);
@@ -868,29 +868,29 @@ lbl_fn_804B3494_00000B68:
     mulli r29, r0, 0xc
     add r5, r28, r29
     lwz r5, 0x50(r5)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     add r4, r28, r29
     lwz r3, 0xb8(r28)
     lwz r5, 0x54(r4)
     addi r4, r31, 0x4ca
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     add r30, r28, r29
     lwz r3, 0xb8(r28)
     lwz r5, 0x58(r30)
     addi r4, r31, 0x4d8
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0xb8(r28)
     addi r4, r31, 0x4dd
     lwz r5, 0x58(r30)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0xb8(r28)
     addi r4, r31, 0x4e2
     lwz r5, 0x58(r30)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, 0xb8(r28)
     addi r4, r31, 0x4e7
     lwz r5, 0x58(r30)
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r3, lbl_8087F588
     lwz r0, 0x4c(r3)
     cmpwi r0, 0x0

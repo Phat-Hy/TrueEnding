@@ -16,7 +16,7 @@ extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void save_parseSlotHeader(void);
-extern void fn_801F4998(void);
+extern void save_formatSlotMetadata(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F4F08(void);
@@ -1849,7 +1849,7 @@ lbl_fn_804C0A40_000018E8:
     or r0, r0, r3
     lwz r3, 0x94(r30)
     or r5, r27, r0
-    bl fn_801F4998
+    bl save_formatSlotMetadata
 lbl_fn_804C0A40_0000190C:
     addi r29, r29, 0x1
     addi r30, r30, 0x22c

@@ -20,7 +20,7 @@ extern void atn_Task_setActive(void);
 extern void str_findChar(void);
 extern void fn_800F8348(void);
 extern void fn_801856A4(void);
-extern void fn_801F4998(void);
+extern void save_formatSlotMetadata(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_80383728(void);
@@ -145,7 +145,7 @@ asm void fn_8048EE78(void)
     lis r30, lbl_80756380@ha
     addi r30, r30, lbl_80756380@l
     addi r4, r30, 0x2b4
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r4, 0x23ac(r31)
     addi r3, r30, 0x2bf
     addi r29, r4, 0x58
@@ -220,7 +220,7 @@ lbl_fn_8048EE78_0000019C:
     lis r30, lbl_80756380@ha
     addi r30, r30, lbl_80756380@l
     addi r4, r30, 0x2b4
-    bl fn_801F4998
+    bl save_formatSlotMetadata
     lwz r4, 0x23b0(r31)
     addi r3, r30, 0x2bf
     addi r29, r4, 0x58

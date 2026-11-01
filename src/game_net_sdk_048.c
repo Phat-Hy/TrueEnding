@@ -47,7 +47,7 @@ extern void fn_806D7D60(void);
 extern void fn_806D8650(void);
 extern void net_getTimestampMs(void);
 extern void fn_806FDBC0(void);
-extern void fn_806FE840(void);
+extern void net_http_initConnection(void);
 extern void fn_806FE900(void);
 extern void fn_806FEC90(void);
 extern void fn_806FECB0(void);
@@ -230,7 +230,7 @@ lbl_fn_80703610_00000150:
     lwz r0, 0x0(r3)
     mr r3, r31
     stw r0, 0x10(r1)
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x10
     bl net_invokeChannelCallback
     cmpwi r3, 0x0
@@ -240,7 +240,7 @@ lbl_fn_80703610_00000150:
     stw r0, 0x4(r3)
     bne lbl_fn_80703610_0000019C
     mr r3, r31
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x10
     bl fn_806D6560
 lbl_fn_80703610_0000019C:
@@ -264,7 +264,7 @@ lbl_fn_80703610_000001D4:
     lwz r0, 0x84(r29)
     mr r3, r31
     stw r0, 0x8(r1)
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x8
     bl net_invokeChannelCallback
     cmpwi r3, 0x0
@@ -274,7 +274,7 @@ lbl_fn_80703610_000001D4:
     stw r0, 0x4(r3)
     bne lbl_fn_80703610_00000214
     mr r3, r31
-    bl fn_806FE840
+    bl net_http_initConnection
     addi r4, r1, 0x8
     bl fn_806D6560
 lbl_fn_80703610_00000214:

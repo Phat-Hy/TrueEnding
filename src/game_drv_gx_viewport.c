@@ -66,7 +66,7 @@ void fn_805D8090(void);
 void fn_805D80B0(void);
 void fn_805D80D0(void);
 void fn_805D8130(void);
-void fn_805D84C0(void);
+void viewport_destroyContext(void);
 void fn_805D8500(void *p, u32 val);
 u32 fn_805D8510(const void *p);
 void fn_805D8520(void);
@@ -1605,7 +1605,7 @@ lbl_fn_805D8130_00001570:
     blr
 }
 
-asm void fn_805D84C0(void)
+asm void viewport_destroyContext(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1614,11 +1614,11 @@ asm void fn_805D84C0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_805D84C0_00001688
+    beq lbl_viewport_destroyContext_00001688
     cmpwi r4, 0x0
-    ble lbl_fn_805D84C0_00001688
+    ble lbl_viewport_destroyContext_00001688
     bl dtor_80084684
-lbl_fn_805D84C0_00001688:
+lbl_viewport_destroyContext_00001688:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

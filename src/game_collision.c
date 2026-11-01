@@ -14,7 +14,7 @@ extern void fn_8001BCB4(void);
 extern void entity_isActive(void);
 extern void fn_8001BEB0(void);
 extern void fn_800281A0(void);
-extern void fn_8003DBA4(void);
+extern void effect_testLifetime(void);
 extern void rand(void);
 
 /* External data declarations */
@@ -298,7 +298,7 @@ lbl_fn_80025478_00000308:
     bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_80025478_00000364
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x6
     bne lbl_fn_80025478_00000340
     lis r3, lbl_807C6A40@ha
@@ -377,7 +377,7 @@ lbl_fn_8002558C_0000040C:
 lbl_fn_8002558C_00000410:
     cmpwi r0, 0x6
     bne lbl_fn_8002558C_0000045C
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x6
     bne lbl_fn_8002558C_00000438
     lis r3, lbl_807C6A40@ha
@@ -547,7 +547,7 @@ lbl_fn_8002575C_00000660:
 lbl_fn_8002575C_00000664:
     cmpwi r0, 0x6
     bne lbl_fn_8002575C_000006B0
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x4
     bne lbl_fn_8002575C_0000068C
     lis r3, lbl_807C6A40@ha
@@ -942,7 +942,7 @@ lbl_fn_80025D2C_00000BBC:
     bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_80025D2C_00000C18
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x6
     bne lbl_fn_80025D2C_00000BF4
     lis r3, lbl_807C6A40@ha
@@ -2973,7 +2973,7 @@ lbl_fn_8002779C_0000273C:
     li r3, -0x1
     b lbl_fn_8002779C_00002784
 lbl_fn_8002779C_00002744:
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x4
     bne lbl_fn_8002779C_00002760
     li r0, 0x1
@@ -3417,7 +3417,7 @@ lbl_fn_80027E54_00002D4C:
 lbl_fn_80027E54_00002D50:
     cmpwi r0, 0x6
     bne lbl_fn_80027E54_00002D9C
-    bl fn_8003DBA4
+    bl effect_testLifetime
     cmpwi r3, 0x4
     bne lbl_fn_80027E54_00002D78
     lis r3, lbl_807C6A40@ha

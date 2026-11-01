@@ -9,7 +9,7 @@ extern void _savegpr_18(void);
 extern void _savegpr_21(void);
 extern void _savegpr_25(void);
 extern void fn_8068446C(void);
-extern void fn_806A7110(void);
+extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
 extern void net_memFree(void);
 extern void net_formatLog(void);
@@ -50,7 +50,7 @@ extern void fn_806B9500(void);
 extern void fn_806B9740(void);
 extern void fn_806BB440(void);
 extern void fn_806BB5E0(void);
-extern void fn_806BBCA0(void);
+extern void net_logSessionStatus(void);
 extern void fn_806CCB70(void);
 extern void fn_806CCC90(void);
 extern void fn_806CCCB0(void);
@@ -259,7 +259,7 @@ asm void fn_806AFAA0(void)
     lwz r0, 0x24(r3)
     cmpwi r0, 0x0
     beq lbl_fn_806AFAA0_00000480
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806AFAA0_000001CC
     b lbl_fn_806AFAA0_00000480
@@ -485,7 +485,7 @@ asm void fn_806AFDB0(void)
     li r3, 0x0
     b lbl_fn_806AFDB0_00000848
 lbl_fn_806AFDB0_00000500:
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806AFDB0_00000520
     lis r4, lbl_8085FF98@ha
@@ -739,7 +739,7 @@ asm void fn_806B0180(void)
     li r3, 0x4
     crclr 6
     bl net_formatLog
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806B0180_000008DC
     lis r31, lbl_8085FF98@ha
@@ -812,7 +812,7 @@ asm void fn_806B0260(void)
     li r3, 0x4
     crclr 6
     bl net_formatLog
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806B0260_000009D0
     lwz r3, 0x0(r31)
@@ -923,7 +923,7 @@ asm void fn_806B0410(void)
     li r3, 0x4
     crclr 6
     bl net_formatLog
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806B0410_00000B74
     lwz r3, 0x0(r31)
@@ -1034,7 +1034,7 @@ asm void fn_806B05B0(void)
     li r3, 0x4
     crclr 6
     bl net_formatLog
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806B05B0_00000D1C
     lwz r3, 0x0(r31)
@@ -1300,7 +1300,7 @@ lbl_fn_806B0980_000010C8:
     lwz r0, lbl_8085FF98@l(r29)
     cmpwi r0, 0x0
     beq lbl_fn_806B0980_000010F8
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806B0980_000010F8
     lwz r4, lbl_8085FF98@l(r29)
@@ -1420,7 +1420,7 @@ lbl_fn_806B0980_000011D4:
     bl fn_806CCC90
     li r3, 0x0
     bl fn_806CCB70
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     li r3, 0x1
     b lbl_fn_806B0980_000013BC
 lbl_fn_806B0980_00001290:
@@ -1464,7 +1464,7 @@ lbl_fn_806B0980_000012F4:
     bl fn_806CCC90
     li r3, 0x0
     bl fn_806CCB70
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     lwz r3, lbl_8085FF98@l(r30)
     cmpwi r3, 0x0
     beq lbl_fn_806B0980_00001330

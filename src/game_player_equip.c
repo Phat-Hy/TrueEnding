@@ -25,7 +25,7 @@ extern void morph_dispatchTargetUpdate(void);
 extern void str_findChar(void);
 extern void cam_destroyMsgHandle(void);
 extern void fn_8011FFF8(void);
-extern void fn_8017C974(void);
+extern void map_isAreaCombatActive(void);
 extern void fn_8018412C(void);
 extern void fn_80184548(void);
 extern void fn_80218218(void);
@@ -1453,7 +1453,7 @@ lbl_fn_80121F08_0000124C:
 lbl_fn_80121F08_00001250:
     cmpwi r3, 0x0
     beq lbl_fn_80121F08_0000126C
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -1516,7 +1516,7 @@ lbl_fn_80121FD4_00001318:
 lbl_fn_80121FD4_0000131C:
     cmpwi r3, 0x0
     beq lbl_fn_80121FD4_00001338
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -1579,7 +1579,7 @@ lbl_fn_801220A0_000013E4:
 lbl_fn_801220A0_000013E8:
     cmpwi r3, 0x0
     beq lbl_fn_801220A0_00001404
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -1642,7 +1642,7 @@ lbl_fn_8012216C_000014B0:
 lbl_fn_8012216C_000014B4:
     cmpwi r3, 0x0
     beq lbl_fn_8012216C_000014D0
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5

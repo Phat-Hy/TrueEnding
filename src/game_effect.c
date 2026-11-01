@@ -79,7 +79,7 @@ void fn_8003D084(void);
 void fn_8003D298(void);
 void fn_8003D3F8(void);
 void fn_8003D6E8(void);
-void fn_8003DBA4(void);
+void effect_testLifetime(void);
 void fn_8003DD50(void);
 void fn_8003DEE0(void);
 void fn_8003E120(void);
@@ -4850,7 +4850,7 @@ lbl_fn_8003D6E8_0000423C:
     blr
 }
 
-asm void fn_8003DBA4(void)
+asm void effect_testLifetime(void)
 {
     nofralloc
     stwu r1, -0x50(r1)
@@ -4871,17 +4871,17 @@ asm void fn_8003DBA4(void)
     lfd f0, 0x38(r1)
     fsubs f0, f0, f1
     fcmpo cr0, f2, f0
-    blt lbl_fn_8003DBA4_000042B0
+    blt lbl_effect_testLifetime_000042B0
     lwz r3, lbl_807C68C0@l(r30)
     bl fn_8001BEB0
     cmpwi r3, 0x0
-    beq lbl_fn_8003DBA4_00004308
-lbl_fn_8003DBA4_000042B0:
+    beq lbl_effect_testLifetime_00004308
+lbl_effect_testLifetime_000042B0:
     lis r3, lbl_807C68C0@ha
     addi r3, r3, lbl_807C68C0@l
     lwz r8, 0x20(r3)
     cmpwi r8, 0x0
-    beq lbl_fn_8003DBA4_000042F4
+    beq lbl_effect_testLifetime_000042F4
     li r3, 0x0
     li r0, 0x1e
     stw r3, 0x34(r1)
@@ -4894,31 +4894,31 @@ lbl_fn_8003DBA4_000042B0:
     stw r0, 0x2c(r1)
     stw r8, 0x28(r1)
     bl battle_getCharacterState
-lbl_fn_8003DBA4_000042F4:
+lbl_effect_testLifetime_000042F4:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
     li r3, 0x6
-    b lbl_fn_8003DBA4_000043E8
-lbl_fn_8003DBA4_00004308:
+    b lbl_effect_testLifetime_000043E8
+lbl_effect_testLifetime_00004308:
     lfs f1, 0x1c(r31)
     lfs f0, lbl_80880798
     fcmpo cr0, f1, f0
     mfcr r0
     srwi. r0, r0, 31
-    beq lbl_fn_8003DBA4_0000433C
+    beq lbl_effect_testLifetime_0000433C
     lwz r3, lbl_807C68C0@l(r30)
     bl fn_8001B634
     cmpwi r3, 0x0
-    ble lbl_fn_8003DBA4_0000433C
+    ble lbl_effect_testLifetime_0000433C
     stw r3, 0x64(r31)
     li r0, 0x1
-    b lbl_fn_8003DBA4_00004340
-lbl_fn_8003DBA4_0000433C:
+    b lbl_effect_testLifetime_00004340
+lbl_effect_testLifetime_0000433C:
     li r0, 0x0
-lbl_fn_8003DBA4_00004340:
+lbl_effect_testLifetime_00004340:
     cmpwi r0, 0x0
-    beq lbl_fn_8003DBA4_00004394
+    beq lbl_effect_testLifetime_00004394
     lis r3, lbl_807C68C0@ha
     li r8, 0x0
     addi r3, r3, lbl_807C68C0@l
@@ -4937,13 +4937,13 @@ lbl_fn_8003DBA4_00004340:
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
     li r3, 0x4
-    b lbl_fn_8003DBA4_000043E8
-lbl_fn_8003DBA4_00004394:
+    b lbl_effect_testLifetime_000043E8
+lbl_effect_testLifetime_00004394:
     lis r3, lbl_807C68C0@ha
     addi r3, r3, lbl_807C68C0@l
     lwz r8, 0x20(r3)
     cmpwi r8, 0x0
-    beq lbl_fn_8003DBA4_000043D8
+    beq lbl_effect_testLifetime_000043D8
     li r3, 0x0
     li r0, 0x1e
     stw r3, 0x14(r1)
@@ -4956,12 +4956,12 @@ lbl_fn_8003DBA4_00004394:
     stw r0, 0xc(r1)
     stw r8, 0x8(r1)
     bl battle_getCharacterState
-lbl_fn_8003DBA4_000043D8:
+lbl_effect_testLifetime_000043D8:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
     li r3, 0x6
-lbl_fn_8003DBA4_000043E8:
+lbl_effect_testLifetime_000043E8:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
     lwz r30, 0x48(r1)

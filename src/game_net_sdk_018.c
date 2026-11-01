@@ -22,7 +22,7 @@ extern void net_checkLinkStatus(void);
 extern void fn_806B15B0(void);
 extern void fn_806B1A00(void);
 extern void fn_806BB6C0(void);
-extern void fn_806BBCA0(void);
+extern void net_logSessionStatus(void);
 extern void fn_806BC010(void);
 extern void fn_806BC860(void);
 extern void net_logConnectionEvent(void);
@@ -1131,7 +1131,7 @@ lbl_fn_806C3670_00000F58:
     bl net_logConnectionEvent
     cmpwi r3, 0x0
     bne lbl_fn_806C3670_00001634
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     lis r3, lbl_80860898@ha
     lwz r29, lbl_80860898@l(r3)
     lwz r4, 0x7b0(r29)
@@ -1318,7 +1318,7 @@ lbl_fn_806C3670_00001208:
     bl net_logConnectionEvent
     cmpwi r3, 0x0
     bne lbl_fn_806C3670_00001634
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     lis r3, lbl_80860898@ha
     lwz r29, lbl_80860898@l(r3)
     lwz r4, 0x7b0(r29)
@@ -1556,7 +1556,7 @@ lbl_fn_806C3670_00001570:
     bl net_logConnectionEvent
     cmpwi r3, 0x0
     bne lbl_fn_806C3670_00001634
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     lis r3, lbl_80860898@ha
     lwz r29, lbl_80860898@l(r3)
     lwz r4, 0x7b0(r29)
@@ -1703,7 +1703,7 @@ lbl_fn_806C3ED0_00001790:
     bl net_logConnectionEvent
     cmpwi r3, 0x0
     bne lbl_fn_806C3ED0_00001B90
-    bl fn_806BBCA0
+    bl net_logSessionStatus
     lis r3, lbl_80860898@ha
     lwz r28, lbl_80860898@l(r3)
     lwz r4, 0x7b0(r28)

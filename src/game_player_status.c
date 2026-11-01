@@ -8,7 +8,7 @@ extern void msg_formatWindowLayout(void);
 extern void fn_800A5870(void);
 extern void msg_isWindowActive(void);
 extern void fn_80122C70(void);
-extern void fn_8017C974(void);
+extern void map_isAreaCombatActive(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECMag(void);
@@ -90,7 +90,7 @@ lbl_fn_80123C7C_0000008C:
 lbl_fn_80123C7C_00000090:
     cmpwi r3, 0x0
     beq lbl_fn_80123C7C_000000AC
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -139,7 +139,7 @@ lbl_fn_80123C7C_00000134:
 lbl_fn_80123C7C_00000138:
     cmpwi r3, 0x0
     beq lbl_fn_80123C7C_00000154
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -183,7 +183,7 @@ lbl_fn_80123C7C_000001CC:
 lbl_fn_80123C7C_000001D0:
     cmpwi r3, 0x0
     beq lbl_fn_80123C7C_000001EC
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -227,7 +227,7 @@ lbl_fn_80123C7C_00000264:
 lbl_fn_80123C7C_00000268:
     cmpwi r3, 0x0
     beq lbl_fn_80123C7C_00000284
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -284,7 +284,7 @@ lbl_fn_80123C7C_0000032C:
 lbl_fn_80123C7C_00000330:
     cmpwi r3, 0x0
     beq lbl_fn_80123C7C_0000034C
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -333,7 +333,7 @@ lbl_fn_80123C7C_000003D4:
 lbl_fn_80123C7C_000003D8:
     cmpwi r3, 0x0
     beq lbl_fn_80123C7C_000003F4
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -413,7 +413,7 @@ lbl_player_evaluateStatusCondition_000004E0:
 lbl_player_evaluateStatusCondition_000004E4:
     cmpwi r3, 0x0
     beq lbl_player_evaluateStatusCondition_00000500
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -463,7 +463,7 @@ lbl_player_evaluateStatusCondition_0000058C:
 lbl_player_evaluateStatusCondition_00000590:
     cmpwi r3, 0x0
     beq lbl_player_evaluateStatusCondition_000005AC
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -514,7 +514,7 @@ lbl_player_evaluateStatusCondition_00000640:
 lbl_player_evaluateStatusCondition_00000644:
     cmpwi r3, 0x0
     beq lbl_player_evaluateStatusCondition_00000660
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -565,7 +565,7 @@ lbl_player_evaluateStatusCondition_000006F0:
 lbl_player_evaluateStatusCondition_000006F4:
     cmpwi r3, 0x0
     beq lbl_player_evaluateStatusCondition_00000710
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -614,7 +614,7 @@ lbl_player_evaluateStatusCondition_00000798:
 lbl_player_evaluateStatusCondition_0000079C:
     cmpwi r3, 0x0
     beq lbl_player_evaluateStatusCondition_000007B8
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -666,7 +666,7 @@ lbl_player_evaluateStatusCondition_0000084C:
 lbl_player_evaluateStatusCondition_00000850:
     cmpwi r3, 0x0
     beq lbl_player_evaluateStatusCondition_0000086C
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -718,7 +718,7 @@ lbl_player_evaluateStatusCondition_00000900:
 lbl_player_evaluateStatusCondition_00000904:
     cmpwi r3, 0x0
     beq lbl_player_evaluateStatusCondition_00000920
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -782,7 +782,7 @@ lbl_player_evaluateStatusCondition_000009E0:
 lbl_player_evaluateStatusCondition_000009E4:
     cmpwi r3, 0x0
     beq lbl_player_evaluateStatusCondition_00000A00
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -831,7 +831,7 @@ lbl_player_evaluateStatusCondition_00000A88:
 lbl_player_evaluateStatusCondition_00000A8C:
     cmpwi r3, 0x0
     beq lbl_player_evaluateStatusCondition_00000AA8
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -895,7 +895,7 @@ lbl_player_testStatusCondition_00000B58:
 lbl_player_testStatusCondition_00000B5C:
     cmpwi r3, 0x0
     beq lbl_player_testStatusCondition_00000B78
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -940,7 +940,7 @@ lbl_player_testStatusCondition_00000BF4:
 lbl_player_testStatusCondition_00000BF8:
     cmpwi r3, 0x0
     beq lbl_player_testStatusCondition_00000C14
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r0, r0, 5
@@ -1174,7 +1174,7 @@ lbl_fn_80124B60_00000F34:
 lbl_fn_80124B60_00000F38:
     cmpwi r3, 0x0
     beq lbl_fn_80124B60_00000F54
-    bl fn_8017C974
+    bl map_isAreaCombatActive
     subi r0, r3, 0x1
     cntlzw r0, r0
     srwi r3, r0, 5

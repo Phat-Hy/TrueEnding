@@ -97,7 +97,7 @@ void fn_806FE760(void);
 void fn_806FE7B0(void);
 void fn_806FE820(void);
 void fn_806FE830(void);
-void fn_806FE840(void);
+void net_http_initConnection(void);
 void fn_806FE8B0(void);
 void fn_806FE900(void);
 void fn_806FE940(void);
@@ -1898,7 +1898,7 @@ asm void fn_806FE830(void)
     b net_socketClose
 }
 
-asm void fn_806FE840(void)
+asm void net_http_initConnection(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1908,7 +1908,7 @@ asm void fn_806FE840(void)
     lis r31, lbl_80862AF0@ha
     lwz r0, lbl_80862AF0@l(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_806FE840_000018B8
+    bne lbl_net_http_initConnection_000018B8
     lis r6, fn_806FE7B0@ha
     lis r7, fn_806FE820@ha
     lis r8, fn_806FE830@ha
@@ -1920,7 +1920,7 @@ asm void fn_806FE840(void)
     li r5, 0x4
     bl fn_806D62F0
     stw r3, lbl_80862AF0@l(r31)
-lbl_fn_806FE840_000018B8:
+lbl_net_http_initConnection_000018B8:
     lwz r31, 0xc(r1)
     lis r3, lbl_80862AF0@ha
     lwz r0, 0x14(r1)

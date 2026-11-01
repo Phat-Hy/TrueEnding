@@ -18,7 +18,7 @@ extern void memcmp(void);
 extern void strncpy(void);
 extern void strncmp(void);
 extern void fn_8068446C(void);
-extern void fn_806A7110(void);
+extern void net_isConnectionActive(void);
 extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
 extern void net_memFree(void);
@@ -518,7 +518,7 @@ asm void fn_806CD880(void)
     stw r29, 0x14(r1)
     mr r29, r4
     stw r28, 0x10(r1)
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806CD880_00000514
     cmplwi r29, 0x1
@@ -842,7 +842,7 @@ asm void fn_806CDD00(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806CDD00_0000097C
     li r3, 0x0
@@ -948,7 +948,7 @@ asm void fn_806CDE80(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     beq lbl_fn_806CDE80_00000AF0
     li r3, 0x0

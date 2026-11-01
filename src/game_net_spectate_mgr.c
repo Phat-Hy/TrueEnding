@@ -80,7 +80,7 @@ extern void fn_8052E8D8(void);
 extern void fn_8052E984(void);
 extern void fn_8052EEC0(void);
 extern void fn_8052F890(void);
-extern void fn_80533BE0(void);
+extern void spectate_dispatchCameraMode(void);
 extern void spectateView_renderInterface(void);
 extern void PSVECNormalize(void);
 extern void fn_806163C0(void);
@@ -2175,7 +2175,7 @@ lbl_spectateManager_update_00001D40:
     bl boss_releaseLaserTarget
     mr r3, r30
     li r4, 0x1
-    bl fn_80533BE0
+    bl spectate_dispatchCameraMode
     lwz r3, 0x5c(r30)
     lis r28, lbl_8075D5B0@ha
     addi r28, r28, lbl_8075D5B0@l

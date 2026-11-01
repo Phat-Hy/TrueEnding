@@ -11,7 +11,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void snprintf(void);
-extern void fn_806A7110(void);
+extern void net_isConnectionActive(void);
 extern void net_formatLog(void);
 extern void net_formatString(void);
 extern void http_formatParam(void);
@@ -1347,7 +1347,7 @@ asm void fn_806CC550(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_806A7110
+    bl net_isConnectionActive
     cmpwi r3, 0x0
     bne lbl_fn_806CC550_00001268
     lis r3, lbl_80860898@ha
