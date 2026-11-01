@@ -393,74 +393,74 @@ u32 fn_80500B50(void);
 u32 fn_80500B58(void);
 u32 fn_80500B60(void);
 u32 fn_80500B68(void);
-void fn_80500B70(void);
-void fn_80500B78(void);
+u32 fn_80500B70(void);
+u32 fn_80500B78(void);
 void fn_80500B80(void);
-void fn_80500D14(void);
+u32 fn_80500D14(void);
 void fn_80500D1C(void);
-void fn_80500E08(void);
-void fn_80500E10(void);
-void fn_80500E18(void);
-void fn_80500E20(void);
-void fn_80500E28(void);
-void fn_80500E30(void);
-void fn_80500E38(void);
-void fn_80500E40(void);
-void fn_80500E48(void);
-void fn_80500E50(void);
-void fn_80500E58(void);
-void fn_80500E60(void);
-void fn_80500E68(void);
-void fn_80500E70(void);
-void fn_80500E78(void);
-void fn_80500E80(void);
-void fn_80500E88(void);
-void fn_80500E90(void);
-void fn_80500E98(void);
-void fn_80500EA0(void);
-void fn_80500EA8(void);
-void fn_80500EB0(void);
-void fn_80500EB8(void);
-void fn_80500EC0(void);
-void fn_80500EC8(void);
-void fn_80500ED0(void);
-void fn_80500ED8(void);
-void fn_80500EE0(void);
-void fn_80500EE8(void);
-void fn_80500EF0(void);
-void fn_80500EF8(void);
-void fn_80500F00(void);
-void fn_80500F08(void);
-void fn_80500F10(void);
-void fn_80500F18(void);
-void fn_80500F20(void);
-void fn_80500F28(void);
-void fn_80500F30(void);
-void fn_80500F38(void);
-void fn_80500F40(void);
-void fn_80500F48(void);
-void fn_80500F50(void);
-void fn_80500F58(void);
-void fn_80500F60(void);
-void fn_80500F68(void);
-void fn_80500F70(void);
-void fn_80500F78(void);
-void fn_80500F80(void);
-void fn_80500F88(void);
-void fn_80500F90(void);
-void fn_80500F98(void);
-void fn_80500FA0(void);
-void fn_80500FA8(void);
-void fn_80500FB0(void);
-void fn_80500FB8(void);
-void fn_80500FC0(void);
-void fn_80500FC8(void);
-void fn_80500FD0(void);
-void fn_80500FD8(void);
-void fn_80500FE0(void);
-void fn_80500FE8(void);
-void fn_80500FF0(void);
-void fn_80500FF8(void);
+u32 fn_80500E08(void);
+u32 fn_80500E10(void);
+u32 fn_80500E18(void);
+u32 fn_80500E20(void);
+u32 fn_80500E28(void);
+u32 fn_80500E30(void);
+u32 fn_80500E38(void);
+u32 fn_80500E40(void);
+u32 fn_80500E48(void);
+u32 fn_80500E50(void);
+u32 fn_80500E58(void);
+u32 fn_80500E60(void);
+u32 fn_80500E68(void);
+u32 fn_80500E70(void);
+u32 fn_80500E78(void);
+u32 fn_80500E80(void);
+u32 fn_80500E88(void);
+u32 fn_80500E90(void);
+u32 fn_80500E98(void);
+u32 fn_80500EA0(void);
+u32 fn_80500EA8(void);
+u32 fn_80500EB0(void);
+u32 fn_80500EB8(void);
+u32 fn_80500EC0(void);
+u32 fn_80500EC8(void);
+u32 fn_80500ED0(void);
+u32 fn_80500ED8(void);
+u32 fn_80500EE0(void);
+u32 fn_80500EE8(void);
+u32 fn_80500EF0(void);
+u32 fn_80500EF8(void);
+u32 fn_80500F00(void);
+u32 fn_80500F08(void);
+u32 fn_80500F10(void);
+u32 fn_80500F18(void);
+u32 fn_80500F20(void);
+u32 fn_80500F28(void);
+u32 fn_80500F30(void);
+u32 fn_80500F38(void);
+u32 fn_80500F40(void);
+u32 fn_80500F48(void);
+u32 fn_80500F50(void);
+u32 fn_80500F58(void);
+u32 fn_80500F60(void);
+u32 fn_80500F68(void);
+u32 fn_80500F70(void);
+u32 fn_80500F78(void);
+u32 fn_80500F80(void);
+u32 fn_80500F88(void);
+u32 fn_80500F90(void);
+u32 fn_80500F98(void);
+u32 fn_80500FA0(void);
+u32 fn_80500FA8(void);
+u32 fn_80500FB0(void);
+u32 fn_80500FB8(void);
+u32 fn_80500FC0(void);
+u32 fn_80500FC8(void);
+u32 fn_80500FD0(void);
+u32 fn_80500FD8(void);
+u32 fn_80500FE0(void);
+u32 fn_80500FE8(void);
+u32 fn_80500FF0(void);
+u32 fn_80500FF8(void);
 void fn_80501000(void);
 void fn_80501008(void);
 void fn_80501010(void);
@@ -1794,18 +1794,14 @@ u32 fn_80500B68(void)
     return 0x0;
 }
 
-asm void fn_80500B70(void)
+u32 fn_80500B70(void)
 {
-    nofralloc
-    li r3, 0x17
-    blr
+    return 0x17;
 }
 
-asm void fn_80500B78(void)
+u32 fn_80500B78(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
 asm void fn_80500B80(void)
@@ -1916,11 +1912,9 @@ lbl_fn_80500B80_00000EF4:
     blr
 }
 
-asm void fn_80500D14(void)
+u32 fn_80500D14(void)
 {
-    nofralloc
-    li r3, 0x3c
-    blr
+    return 0x3c;
 }
 
 asm void fn_80500D1C(void)
@@ -1988,445 +1982,319 @@ lbl_fn_80500D1C_00000FE8:
     blr
 }
 
-asm void fn_80500E08(void)
+u32 fn_80500E08(void)
 {
-    nofralloc
-    li r3, 0x16
-    blr
+    return 0x16;
 }
 
-asm void fn_80500E10(void)
+u32 fn_80500E10(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80500E18(void)
+u32 fn_80500E18(void)
 {
-    nofralloc
-    li r3, 0x8
-    blr
+    return 0x8;
 }
 
-asm void fn_80500E20(void)
+u32 fn_80500E20(void)
 {
-    nofralloc
-    li r3, 0x15
-    blr
+    return 0x15;
 }
 
-asm void fn_80500E28(void)
+u32 fn_80500E28(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0x0;
 }
 
-asm void fn_80500E30(void)
+u32 fn_80500E30(void)
 {
-    nofralloc
-    li r3, 0x50
-    blr
+    return 0x50;
 }
 
-asm void fn_80500E38(void)
+u32 fn_80500E38(void)
 {
-    nofralloc
-    li r3, 0x14
-    blr
+    return 0x14;
 }
 
-asm void fn_80500E40(void)
+u32 fn_80500E40(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0x0;
 }
 
-asm void fn_80500E48(void)
+u32 fn_80500E48(void)
 {
-    nofralloc
-    li r3, 0x5b
-    blr
+    return 0x5b;
 }
 
-asm void fn_80500E50(void)
+u32 fn_80500E50(void)
 {
-    nofralloc
-    li r3, 0x2c
-    blr
+    return 0x2c;
 }
 
-asm void fn_80500E58(void)
+u32 fn_80500E58(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80500E60(void)
+u32 fn_80500E60(void)
 {
-    nofralloc
-    li r3, 0x20
-    blr
+    return 0x20;
 }
 
-asm void fn_80500E68(void)
+u32 fn_80500E68(void)
 {
-    nofralloc
-    li r3, 0x13
-    blr
+    return 0x13;
 }
 
-asm void fn_80500E70(void)
+u32 fn_80500E70(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80500E78(void)
+u32 fn_80500E78(void)
 {
-    nofralloc
-    li r3, 0x4
-    blr
+    return 0x4;
 }
 
-asm void fn_80500E80(void)
+u32 fn_80500E80(void)
 {
-    nofralloc
-    li r3, 0x12
-    blr
+    return 0x12;
 }
 
-asm void fn_80500E88(void)
+u32 fn_80500E88(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80500E90(void)
+u32 fn_80500E90(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0x0;
 }
 
-asm void fn_80500E98(void)
+u32 fn_80500E98(void)
 {
-    nofralloc
-    li r3, 0x11
-    blr
+    return 0x11;
 }
 
-asm void fn_80500EA0(void)
+u32 fn_80500EA0(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80500EA8(void)
+u32 fn_80500EA8(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0x0;
 }
 
-asm void fn_80500EB0(void)
+u32 fn_80500EB0(void)
 {
-    nofralloc
-    li r3, 0x10
-    blr
+    return 0x10;
 }
 
-asm void fn_80500EB8(void)
+u32 fn_80500EB8(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80500EC0(void)
+u32 fn_80500EC0(void)
 {
-    nofralloc
-    li r3, 0x3c
-    blr
+    return 0x3c;
 }
 
-asm void fn_80500EC8(void)
+u32 fn_80500EC8(void)
 {
-    nofralloc
-    li r3, 0xf
-    blr
+    return 0xf;
 }
 
-asm void fn_80500ED0(void)
+u32 fn_80500ED0(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80500ED8(void)
+u32 fn_80500ED8(void)
 {
-    nofralloc
-    li r3, 0x4
-    blr
+    return 0x4;
 }
 
-asm void fn_80500EE0(void)
+u32 fn_80500EE0(void)
 {
-    nofralloc
-    li r3, 0xe
-    blr
+    return 0xe;
 }
 
-asm void fn_80500EE8(void)
+u32 fn_80500EE8(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80500EF0(void)
+u32 fn_80500EF0(void)
 {
-    nofralloc
-    li r3, 0x4
-    blr
+    return 0x4;
 }
 
-asm void fn_80500EF8(void)
+u32 fn_80500EF8(void)
 {
-    nofralloc
-    li r3, 0xd
-    blr
+    return 0xd;
 }
 
-asm void fn_80500F00(void)
+u32 fn_80500F00(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80500F08(void)
+u32 fn_80500F08(void)
 {
-    nofralloc
-    li r3, 0x4
-    blr
+    return 0x4;
 }
 
-asm void fn_80500F10(void)
+u32 fn_80500F10(void)
 {
-    nofralloc
-    li r3, 0xc
-    blr
+    return 0xc;
 }
 
-asm void fn_80500F18(void)
+u32 fn_80500F18(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80500F20(void)
+u32 fn_80500F20(void)
 {
-    nofralloc
-    li r3, 0x8c
-    blr
+    return 0x8c;
 }
 
-asm void fn_80500F28(void)
+u32 fn_80500F28(void)
 {
-    nofralloc
-    li r3, 0xb
-    blr
+    return 0xb;
 }
 
-asm void fn_80500F30(void)
+u32 fn_80500F30(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80500F38(void)
+u32 fn_80500F38(void)
 {
-    nofralloc
-    li r3, 0x8c
-    blr
+    return 0x8c;
 }
 
-asm void fn_80500F40(void)
+u32 fn_80500F40(void)
 {
-    nofralloc
-    li r3, 0xa
-    blr
+    return 0xa;
 }
 
-asm void fn_80500F48(void)
+u32 fn_80500F48(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0x0;
 }
 
-asm void fn_80500F50(void)
+u32 fn_80500F50(void)
 {
-    nofralloc
-    li r3, 0x8
-    blr
+    return 0x8;
 }
 
-asm void fn_80500F58(void)
+u32 fn_80500F58(void)
 {
-    nofralloc
-    li r3, 0x9
-    blr
+    return 0x9;
 }
 
-asm void fn_80500F60(void)
+u32 fn_80500F60(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80500F68(void)
+u32 fn_80500F68(void)
 {
-    nofralloc
-    li r3, 0x1f
-    blr
+    return 0x1f;
 }
 
-asm void fn_80500F70(void)
+u32 fn_80500F70(void)
 {
-    nofralloc
-    li r3, 0x40
-    blr
+    return 0x40;
 }
 
-asm void fn_80500F78(void)
+u32 fn_80500F78(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0x0;
 }
 
-asm void fn_80500F80(void)
+u32 fn_80500F80(void)
 {
-    nofralloc
-    li r3, 0x1f
-    blr
+    return 0x1f;
 }
 
-asm void fn_80500F88(void)
+u32 fn_80500F88(void)
 {
-    nofralloc
-    li r3, 0x8
-    blr
+    return 0x8;
 }
 
-asm void fn_80500F90(void)
+u32 fn_80500F90(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0x0;
 }
 
-asm void fn_80500F98(void)
+u32 fn_80500F98(void)
 {
-    nofralloc
-    li r3, 0x26
-    blr
+    return 0x26;
 }
 
-asm void fn_80500FA0(void)
+u32 fn_80500FA0(void)
 {
-    nofralloc
-    li r3, 0x7
-    blr
+    return 0x7;
 }
 
-asm void fn_80500FA8(void)
+u32 fn_80500FA8(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 0x1;
 }
 
-asm void fn_80500FB0(void)
+u32 fn_80500FB0(void)
 {
-    nofralloc
-    li r3, 0x1f
-    blr
+    return 0x1f;
 }
 
-asm void fn_80500FB8(void)
+u32 fn_80500FB8(void)
 {
-    nofralloc
-    li r3, 0x6
-    blr
+    return 0x6;
 }
 
-asm void fn_80500FC0(void)
+u32 fn_80500FC0(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0x0;
 }
 
-asm void fn_80500FC8(void)
+u32 fn_80500FC8(void)
 {
-    nofralloc
-    li r3, 0x44
-    blr
+    return 0x44;
 }
 
-asm void fn_80500FD0(void)
+u32 fn_80500FD0(void)
 {
-    nofralloc
-    li r3, 0x3a
-    blr
+    return 0x3a;
 }
 
-asm void fn_80500FD8(void)
+u32 fn_80500FD8(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0x0;
 }
 
-asm void fn_80500FE0(void)
+u32 fn_80500FE0(void)
 {
-    nofralloc
-    li r3, 0x26
-    blr
+    return 0x26;
 }
 
-asm void fn_80500FE8(void)
+u32 fn_80500FE8(void)
 {
-    nofralloc
-    li r3, 0x5
-    blr
+    return 0x5;
 }
 
-asm void fn_80500FF0(void)
+u32 fn_80500FF0(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0x0;
 }
 
-asm void fn_80500FF8(void)
+u32 fn_80500FF8(void)
 {
-    nofralloc
-    li r3, 0x35
-    blr
+    return 0x35;
 }
 
 asm void fn_80501000(void)
