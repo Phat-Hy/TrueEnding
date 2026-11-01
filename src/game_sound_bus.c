@@ -44,16 +44,16 @@ void fn_801DBB14(void);
 void fn_801DBB78(void);
 void fn_801DBB94(void);
 void fn_801DC000(void);
-void fn_801DC028(void);
-void fn_801DC038(void);
+void *fn_801DC028(void *p, u32 idx);
+void fn_801DC038(void *dst, void *src);
 void fn_801DC044(void);
-void fn_801DC058(void);
-void fn_801DC064(void);
-void fn_801DC074(void);
-void fn_801DC07C(void);
-void fn_801DC08C(void);
+void fn_801DC058(void *dst, void *src);
+void fn_801DC064(void *p);
+u32 fn_801DC074(void *p);
+void fn_801DC07C(void *p);
+void fn_801DC08C(void *p);
 void fn_801DC09C(void);
-void fn_801DC410(void);
+u32 fn_801DC410(void *p);
 void fn_801DC418(void);
 void fn_801DC42C(void);
 
@@ -1297,21 +1297,14 @@ asm void fn_801DC000(void)
     blr
 }
 
-asm void fn_801DC028(void)
+void *fn_801DC028(void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x18
-    lwz r3, 0x0(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)p + idx * 0x18;
 }
 
-asm void fn_801DC038(void)
+void fn_801DC038(void *dst, void *src)
 {
-    nofralloc
-    lwz r0, 0x0(r4)
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)dst = *(u32 *)src;
 }
 
 asm void fn_801DC044(void)
@@ -1324,46 +1317,29 @@ asm void fn_801DC044(void)
     blr
 }
 
-asm void fn_801DC058(void)
+void fn_801DC058(void *dst, void *src)
 {
-    nofralloc
-    lwz r0, 0x0(r4)
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)dst = *(u32 *)src;
 }
 
-asm void fn_801DC064(void)
+void fn_801DC064(void *p)
 {
-    nofralloc
-    lwz r4, 0x0(r3)
-    addi r0, r4, 0x18
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p += 0x18;
 }
 
-asm void fn_801DC074(void)
+u32 fn_801DC074(void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(u32 *)p;
 }
 
-asm void fn_801DC07C(void)
+void fn_801DC07C(void *p)
 {
-    nofralloc
-    lwz r4, 0x0(r3)
-    subi r0, r4, 0x18
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p -= 0x18;
 }
 
-asm void fn_801DC08C(void)
+void fn_801DC08C(void *p)
 {
-    nofralloc
-    lwz r0, 0x4(r3)
-    subf r0, r0, r0
-    stw r0, 0x4(r3)
-    blr
+    *(u32 *)((u8 *)p + 4) = 0;
 }
 
 asm void fn_801DC09C(void)
@@ -1606,11 +1582,9 @@ lbl_fn_801DC09C_0000150C:
     blr
 }
 
-asm void fn_801DC410(void)
+u32 fn_801DC410(void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(u32 *)p;
 }
 
 asm void fn_801DC418(void)

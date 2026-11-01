@@ -102,8 +102,8 @@ u32 fn_80139EF4(void);
 u32 fn_80139EFC(void *p);
 void fn_80139F04(void);
 void fn_80139F24(void *p, u32 val);
-void fn_80139F2C(void);
-void fn_80139F3C(void);
+u32 fn_80139F2C(void *p, u32 idx);
+void fn_80139F3C(void *p, u32 idx, f32 val);
 void fn_80139F4C(void);
 void *fn_80139F58(void *p);
 void fn_80139F60(void);
@@ -861,22 +861,14 @@ void fn_80139F24(void *p, u32 val)
     *(u32 *)((u8 *)p + 0x34c) = val;
 }
 
-asm void fn_80139F2C(void)
+u32 fn_80139F2C(void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x30
-    add r3, r3, r0
-    lwz r3, 0x22c(r3)
-    blr
+    return *(u32 *)((u8 *)p + idx * 0x30 + 0x22c);
 }
 
-asm void fn_80139F3C(void)
+void fn_80139F3C(void *p, u32 idx, f32 val)
 {
-    nofralloc
-    mulli r0, r4, 0x30
-    add r3, r3, r0
-    stfs f1, 0x238(r3)
-    blr
+    *(f32 *)((u8 *)p + idx * 0x30 + 0x238) = val;
 }
 
 asm void fn_80139F4C(void)
