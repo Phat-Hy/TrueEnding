@@ -2390,26 +2390,14 @@ lbl_fn_806F2820_00001FC4:
     blr
 }
 
-asm void fn_806F2880(void)
-{
-    nofralloc
-    blr
+void fn_806F2880(void) {
 }
 
-asm void fn_806F2890(void)
-{
-    nofralloc
-    blr
+void fn_806F2890(void) {
 }
 
-asm void fn_806F28A0(void)
-{
-    nofralloc
-    blr
+void fn_806F28A0(void) {
 }
 
-asm void fn_806F28B0(void)
-{
-    nofralloc
-    blr
+void fn_806F28B0(void) {
 }

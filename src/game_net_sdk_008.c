@@ -249,28 +249,16 @@ lbl_fn_806A8F40_00000200:
     blr
 }
 
-asm void fn_806A8FA0(void)
-{
-    nofralloc
-    blr
+void fn_806A8FA0(void) {
 }
 
-asm void fn_806A8FB0(void)
-{
-    nofralloc
-    blr
+void fn_806A8FB0(void) {
 }
 
-asm void fn_806A8FC0(void)
-{
-    nofralloc
-    blr
+void fn_806A8FC0(void) {
 }
 
-asm void fn_806A8FD0(void)
-{
-    nofralloc
-    blr
+void fn_806A8FD0(void) {
 }
 
 asm void fn_806A8FE0(void)
@@ -280,10 +268,7 @@ asm void fn_806A8FE0(void)
     blr
 }
 
-asm void fn_806A8FF0(void)
-{
-    nofralloc
-    blr
+void fn_806A8FF0(void) {
 }
 
 asm void fn_806A9000(void)
@@ -570,10 +555,7 @@ lbl_fn_806A9290_0000065C:
     bctr
 }
 
-asm void fn_806A93FC(void)
-{
-    nofralloc
-    blr
+void fn_806A93FC(void) {
 }
 
 asm void fn_806A9400(void)

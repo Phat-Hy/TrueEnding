@@ -1275,16 +1275,10 @@ lbl_fn_806C8DB0_00000F54:
     blr
 }
 
-asm void fn_806C9670(void)
-{
-    nofralloc
-    blr
+void fn_806C9670(void) {
 }
 
-asm void fn_806C9680(void)
-{
-    nofralloc
-    blr
+void fn_806C9680(void) {
 }
 
 asm void fn_806C9690(void)

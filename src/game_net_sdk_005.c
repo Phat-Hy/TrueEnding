@@ -2468,10 +2468,7 @@ asm void fn_806A420C(void)
     blr
 }
 
-asm void fn_806A4260(void)
-{
-    nofralloc
-    blr
+void fn_806A4260(void) {
 }
 
 asm void fn_806A4264(void)
@@ -2481,10 +2478,7 @@ asm void fn_806A4264(void)
     blr
 }
 
-asm void fn_806A426C(void)
-{
-    nofralloc
-    blr
+void fn_806A426C(void) {
 }
 
 asm void fn_806A4270(void)

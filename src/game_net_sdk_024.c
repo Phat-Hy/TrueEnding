@@ -170,10 +170,7 @@ asm void fn_806D1610(void)
     blr
 }
 
-asm void fn_806D1660(void)
-{
-    nofralloc
-    blr
+void fn_806D1660(void) {
 }
 
 asm void fn_806D1670(void)
@@ -2067,10 +2064,7 @@ lbl_fn_806D2F50_00001C5C:
     blr
 }
 
-asm void fn_806D3200(void)
-{
-    nofralloc
-    blr
+void fn_806D3200(void) {
 }
 
 asm void fn_806D3210(void)
