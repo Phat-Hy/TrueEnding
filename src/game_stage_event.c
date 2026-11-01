@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void __files(void);
 extern void dtor_80084684(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
@@ -360,7 +360,7 @@ lbl_fn_8019DBA4_0000036C:
     stw r30, 0x90(r1)
     lwz r4, 0x20(r31)
     lwz r5, 0x1c(r31)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r3, 0x4(r31)
     li r4, 0x0
     bl fn_80148B0C

@@ -22,7 +22,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getDuration(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void fn_800F7FD8(void);
 extern void system_getNextSequenceId(void);
 extern void equip_getGlobalManager(void);
@@ -1657,7 +1657,7 @@ lbl_fn_803267E8_0000163C:
     lfs f1, lbl_80884FC8
     addi r3, r1, 0xf0
     addi r4, r1, 0xe4
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x138
     addi r4, r1, 0x144
     addi r5, r1, 0xf0
@@ -1678,7 +1678,7 @@ lbl_fn_803267E8_0000163C:
     lfs f1, 0x620(r31)
     addi r3, r1, 0xd8
     addi r4, r1, 0xcc
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x1bc
     addi r4, r1, 0xd8
     bl fn_80013484
@@ -1743,7 +1743,7 @@ lbl_fn_803267E8_00001788:
     lfs f1, lbl_80884FC8
     addi r3, r1, 0xa8
     addi r4, r1, 0x9c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x120
     addi r4, r1, 0x12c
     addi r5, r1, 0xa8
@@ -1764,7 +1764,7 @@ lbl_fn_803267E8_00001788:
     lfs f1, 0x620(r31)
     addi r3, r1, 0x90
     addi r4, r1, 0x84
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x16c
     addi r4, r1, 0x90
     bl fn_80013484

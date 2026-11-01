@@ -20,7 +20,7 @@ extern void fn_8015C6A0(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void battle_updateActorStatus(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -1701,7 +1701,7 @@ asm void fn_80277968(void)
     lwz r31, lbl_8087F048
     mr r4, r30
     addi r3, r1, 0x38
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r31
     addi r4, r1, 0x38
     li r5, 0x80

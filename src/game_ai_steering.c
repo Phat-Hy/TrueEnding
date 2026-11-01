@@ -26,7 +26,7 @@ extern void boss_updatePhaseState(void);
 extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void actor_setState(void);
 extern void assert_formatLocation(void);
 extern void task_findEntryById(void);
@@ -640,7 +640,7 @@ asm void fn_8026442C(void)
     stw r31, 0xdc(r1)
     stw r30, 0xd8(r1)
     mr r30, r3
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_8026442C_00000788
     li r31, 0x0

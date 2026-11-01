@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -24,7 +24,7 @@ extern void fn_8010EE78(void);
 extern void fn_8012DF7C(void);
 extern void quest_evaluateConditions(void);
 extern void fn_80148B0C(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_8015A46C(void);
 extern void fn_8015AC48(void);
 extern void actor_setState(void);
@@ -305,7 +305,7 @@ asm void fn_802A94C8(void)
     mr r31, r3
     stw r30, 0xf8(r1)
     stw r29, 0xf4(r1)
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_802A94C8_000003BC
     li r0, 0x6
@@ -386,7 +386,7 @@ lbl_fn_802A94C8_000003BC:
     li r7, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r3, 0x14b0(r31)
     li r4, 0x0
     bl fn_80148B0C
@@ -606,7 +606,7 @@ lbl_fn_802A97C8_00000778:
     stfs f4, 0x28(r1)
     stfs f3, 0x2c(r1)
     stfs f0, 0x30(r1)
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_802A97C8_0000083C
     li r0, 0x6

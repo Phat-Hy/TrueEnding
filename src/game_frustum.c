@@ -40,7 +40,7 @@ extern void fn_8023772C(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void world_getGlobalFlag(void);
 extern void kpad_testActiveFlags(void);
 extern void fn_803761BC(void);
@@ -1927,7 +1927,7 @@ lbl_fn_800F3EF4_00001940:
     cmpwi r25, 0x0
     bne lbl_fn_800F3EF4_0000182C
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     lfs f26, lbl_808814C0
     mr r25, r3
     lfs f30, lbl_808814C8
@@ -2112,7 +2112,7 @@ lbl_fn_800F3EF4_00001BE0:
     cmpwi r28, 0x0
     bne lbl_fn_800F3EF4_00001AC8
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r26, r3
     b lbl_fn_800F3EF4_00001CF4
 lbl_fn_800F3EF4_00001BF8:

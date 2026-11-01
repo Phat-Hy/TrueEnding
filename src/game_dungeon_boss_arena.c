@@ -35,7 +35,7 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_800EC2C4(void);
 extern void fn_800EC440(void);
 extern void fn_800EC534(void);
@@ -1801,7 +1801,7 @@ lbl_fn_803EF3B0_00001544:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_fn_803EF3B0_0000158C
     addic. r3, r3, 0x4

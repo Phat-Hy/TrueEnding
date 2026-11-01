@@ -21,7 +21,7 @@ extern void atn_Task_constructor(void);
 extern void str_findChar(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void fn_803CC5E4(void);
 extern void fn_8047FF70(void);
 extern void PSMTXConcat(void);
@@ -1082,7 +1082,7 @@ lbl_fn_8000D8C0_00000D84:
     lwz r3, lbl_8087F428
     cmpwi r3, 0x0
     beq lbl_fn_8000D8C0_00000DC0
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     b lbl_fn_8000D8C0_00000DB8
 lbl_fn_8000D8C0_00000D98:
     lwz r0, 0x48(r3)
@@ -1181,7 +1181,7 @@ lbl_fn_8000DA00_00000E8C:
     lwz r3, lbl_8087F428
     cmpwi r3, 0x0
     beq lbl_fn_8000DA00_00000EC8
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     b lbl_fn_8000DA00_00000EC0
 lbl_fn_8000DA00_00000EA0:
     lwz r0, 0x48(r3)

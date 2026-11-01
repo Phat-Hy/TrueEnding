@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void collision_queryGeometry(void);
 extern void magic_castSpellCircle(void);
 extern void atn_Model_findBoneIndex(void);
@@ -20,7 +20,7 @@ extern void npc_initScriptContext(void);
 extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void battle_awardExp(void);
 extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
@@ -780,7 +780,7 @@ lbl_fn_802BD480_00000880:
     li r7, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r3, lbl_8087F610
     cmpwi r3, 0x0
     beq lbl_fn_802BD480_00000950
@@ -2766,7 +2766,7 @@ lbl_fn_802BEE44_00002554:
     addi r5, r1, 0xc0
     stw r0, 0x1e4(r1)
     stw r0, 0x1e8(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     mr r3, r31
     lis r29, 0x8000
     bl actor_getMovementFlags
@@ -3365,7 +3365,7 @@ lbl_fn_802BF5C0_00002DF0:
     stw r0, 0x268(r1)
     stw r0, 0x26c(r1)
     stw r0, 0x270(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     mr r3, r31
     lis r29, 0x8000
     bl actor_getMovementFlags

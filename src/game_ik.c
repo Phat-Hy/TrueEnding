@@ -15,7 +15,7 @@ extern void mem_getAllocSize(void);
 extern void msg_getMessageById(void);
 extern void fn_800A5584(void);
 extern void msg_getMessageString(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void PSMTXRotRad(void);
 extern void C_MTXLookAt(void);
 extern void PSMTXMultVec(void);
@@ -185,7 +185,7 @@ lbl_fn_800C6CD4_000000F8:
     bl strcpy
     stw r21, 0x18(r1)
     addi r3, r1, 0x18
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r27, 0x0
     beq lbl_fn_800C6CD4_00000134
     addic. r3, r27, 0x4
@@ -898,7 +898,7 @@ lbl_fn_800C7568_00000A00:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_fn_800C7568_00000A48
     addic. r3, r3, 0x4
@@ -1215,7 +1215,7 @@ lbl_fn_800C7A30_00000E18:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_fn_800C7A30_00000E60
     addic. r3, r3, 0x4
@@ -1304,7 +1304,7 @@ lbl_fn_800C7B78_00000F54:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_fn_800C7B78_00000F9C
     addic. r3, r3, 0x4
@@ -1388,7 +1388,7 @@ lbl_fn_800C7CA8_0000107C:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_fn_800C7CA8_000010C4
     addic. r3, r3, 0x4

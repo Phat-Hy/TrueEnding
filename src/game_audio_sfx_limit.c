@@ -41,7 +41,7 @@ extern void fn_800ED42C(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void fn_800EDFE8(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
@@ -1467,7 +1467,7 @@ lbl_fn_803165EC_000012FC:
     b lbl_fn_803165EC_0000133C
 lbl_fn_803165EC_00001330:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0x14d4(r30)
 lbl_fn_803165EC_0000133C:
     lwz r0, 0x54c(r30)

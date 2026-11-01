@@ -18,7 +18,7 @@ extern void dialog_selectChoice(void);
 extern void fn_80160170(void);
 extern void fn_80160324(void);
 extern void battle_canTargetActor(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void fn_80178864(void);
 extern void fn_8017ABD4(void);
 extern void fn_8017AC08(void);
@@ -1804,7 +1804,7 @@ lbl_fn_805AA950_0000184C:
     bne lbl_fn_805AA950_00001868
     lwz r4, 0x4(r21)
     mr r3, r24
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     b lbl_fn_805AA950_00001898
 lbl_fn_805AA950_00001868:
     cmpwi r0, 0x1

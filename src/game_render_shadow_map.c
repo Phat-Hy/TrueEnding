@@ -19,7 +19,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_801010A0(void);
 extern void fn_8010EE78(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void actor_getMovementFlags(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
@@ -768,7 +768,7 @@ lbl_fn_802B0D90_00000A00:
     mr r4, r30
     addi r3, r1, 0x98
     addi r5, r30, 0x528
-    bl fn_80176548
+    bl battle_calcExpPosition
     lfs f6, 0xa4(r1)
     xoris r0, r22, 0x8000
     lfs f5, 0x53c(r30)

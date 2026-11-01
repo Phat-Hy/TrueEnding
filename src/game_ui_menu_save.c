@@ -7,7 +7,7 @@ extern void _restgpr_15(void);
 extern void _savegpr_15(void);
 extern void fn_800185B4(void);
 extern void fn_80018608(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void fn_8003F030(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -1406,7 +1406,7 @@ lbl_fn_801BE630_000012A4:
     stw r11, 0x294(r1)
     stw r0, 0x29c(r1)
     stw r11, 0x298(r1)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r0, 0xb0(r19)
     cmpwi r0, 0x0
     beq lbl_fn_801BE630_0000136C
@@ -1481,7 +1481,7 @@ lbl_fn_801BE630_00001390:
     addi r9, r1, 0x1c0
     addi r10, r1, 0x1b4
     li r7, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     b lbl_fn_801BE630_0000145C
 lbl_fn_801BE630_00001434:
     lis r8, lbl_807C6B90@ha
@@ -1493,7 +1493,7 @@ lbl_fn_801BE630_00001434:
     li r7, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
 lbl_fn_801BE630_0000145C:
     lwz r7, 0x14(r31)
     addi r4, r1, 0x260

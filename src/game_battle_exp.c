@@ -68,7 +68,7 @@ extern u32 lbl_80881B54;
 void fn_8017639C(void);
 void fn_801763E0(void);
 void fn_80176428(void);
-void fn_80176548(void);
+void battle_calcExpPosition(void);
 void battle_awardExp(void);
 void fn_80176ACC(void);
 void fn_80176B68(void);
@@ -215,7 +215,7 @@ lbl_fn_80176428_00000198:
     blr
 }
 
-asm void fn_80176548(void)
+asm void battle_calcExpPosition(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -244,16 +244,16 @@ asm void fn_80176548(void)
     stfs f2, 0x10(r1)
     rlwinm r0, r0, 0, 25, 25
     cmplwi r0, 0x40
-    bne lbl_fn_80176548_00000228
+    bne lbl_battle_calcExpPosition_00000228
     lfs f0, 0x4(r3)
     fsubs f0, f0, f7
     stfs f0, 0x4(r3)
-    b lbl_fn_80176548_00000234
-lbl_fn_80176548_00000228:
+    b lbl_battle_calcExpPosition_00000234
+lbl_battle_calcExpPosition_00000228:
     lfs f0, 0x4(r3)
     fadds f0, f0, f7
     stfs f0, 0x4(r3)
-lbl_fn_80176548_00000234:
+lbl_battle_calcExpPosition_00000234:
     addi r1, r1, 0x20
     blr
 }

@@ -43,7 +43,7 @@ extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void task_destroyWorker(void);
-extern void fn_803ED774(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_8040BE88(void);
 extern void fn_8040C058(void);
 extern void fn_8040C610(void);
@@ -194,7 +194,7 @@ lbl_fn_8040A32C_00000098:
     bctrl
     mr r4, r3
     mr r3, r30
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_8040A32C_000000D4:
     addi r4, r30, 0x294
     b lbl_fn_8040A32C_000000F8

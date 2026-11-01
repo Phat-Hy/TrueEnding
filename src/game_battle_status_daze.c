@@ -32,7 +32,7 @@ extern void fn_800C2C20(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void str_skipWhitespace(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void task_lookupTagIndex(void);
@@ -49,7 +49,7 @@ extern void fn_803EC7A0(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
-extern void fn_803ED774(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_803EDB18(void);
 extern void fn_803F11F8(void);
 extern void boss_getOffset54(void);
@@ -172,7 +172,7 @@ asm void fn_8042DFD4(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_8042DFD4_0000004C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -866,7 +866,7 @@ asm void fn_8042E930(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_8042E930_000009B8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1732,7 +1732,7 @@ lbl_fn_8042F4D4_00001580:
 lbl_fn_8042F4D4_00001594:
     lwz r3, lbl_8087F8A0
     lwz r4, 0xfc(r31)
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0xf8(r31)
 lbl_fn_8042F4D4_000015A4:
     lwz r3, 0xf4(r31)

@@ -20,7 +20,7 @@ extern void fn_80129954(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
 extern void fn_80139560(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_80161570(void);
 extern void battle_applyStatusEffect(void);
 extern void fn_80182874(void);
@@ -539,7 +539,7 @@ lbl_fn_8017E9D8_00000698:
     addi r4, r1, 0xbc
     li r5, 0x38
     li r6, 0x0
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     lfs f0, lbl_80881B80
     stfs f0, 0x2e8(r31)
 lbl_fn_8017E9D8_000006B4:

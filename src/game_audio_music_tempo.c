@@ -23,7 +23,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EAECC(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void fn_800F7FD8(void);
 extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
@@ -2010,7 +2010,7 @@ lbl_fn_8030F564_00001A14:
 lbl_fn_8030F564_00001A28:
     addi r3, r1, 0xbc
     addi r4, r1, 0x128
-    bl fn_800F72CC
+    bl vec3_scale
     lwz r3, 0x14d4(r30)
     bl npc_getPosition
     mr r4, r3

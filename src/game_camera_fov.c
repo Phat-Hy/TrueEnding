@@ -11,7 +11,7 @@ extern void dtor_80084684(void);
 extern void fn_8000E18C(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void fn_8004203C(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -1726,7 +1726,7 @@ lbl_fn_802DEE28_000015F4:
     li r7, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
 lbl_fn_802DEE28_00001674:
     lwz r12, 0x0(r31)
     mr r3, r31

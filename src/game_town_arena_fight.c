@@ -34,7 +34,7 @@ extern void fn_800F52F0(void);
 extern void fn_800F52F8(void);
 extern void fn_800F530C(void);
 extern void fn_800F7260(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void fn_800F7F80(void);
 extern void fn_800F7F90(void);
 extern void fn_800F7FB4(void);
@@ -108,7 +108,7 @@ extern void fn_80315644(void);
 extern void fn_80318F90(void);
 extern void fn_80323C2C(void);
 extern void fn_80339F04(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void fn_80366DA4(void);
 extern void fn_80366DAC(void);
 extern void fn_80366E08(void);
@@ -3019,7 +3019,7 @@ lbl_fn_803D2A6C_000027AC:
     lfs f1, lbl_80885E58
     addi r3, r1, 0x168
     addi r4, r1, 0x398
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x38c
     addi r4, r31, 0x4
     addi r5, r1, 0x168
@@ -4157,7 +4157,7 @@ lbl_fn_803D2A6C_00003814:
     addi r3, r1, 0x2f0
     bl mission_updateStub
     bl fn_80323C2C
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     lis r4, lbl_807506A0@ha
     lfs f31, lbl_80885DDC
     lfs f29, lbl_80885D60

@@ -24,7 +24,7 @@ extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void fn_80158CA4(void);
 extern void fn_8015E4B0(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_8015ECC4(void);
 extern void actor_setState(void);
 extern void fn_8017BC58(void);
@@ -1929,7 +1929,7 @@ lbl_fn_80357004_0000194C:
     stfs f3, 0x1c(r1)
     stfs f0, 0x14(r1)
     stfs f1, 0x18(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     b lbl_fn_80357004_00001B58
 lbl_fn_80357004_000019A0:
     lfs f1, lbl_8088552C

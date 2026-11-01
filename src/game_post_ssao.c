@@ -21,7 +21,7 @@ extern void fn_80108C10(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8012DF7C(void);
 extern void fn_80148B0C(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_80160170(void);
 extern void fn_8016CDB8(void);
 extern void actor_setState(void);
@@ -1243,7 +1243,7 @@ lbl_fn_802D4628_00001030:
     li r6, 0x0
     stfs f3, 0x12c(r1)
     stfs f0, 0x130(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     stw r24, 0x13b0(r20)
     addi r25, r25, 0x1
     addi r23, r23, 0x1c

@@ -8,7 +8,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_18(void);
 extern void dtor_80084684(void);
 extern void fn_800185B4(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void fn_80057F28(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
@@ -33,7 +33,7 @@ extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_8015ECC4(void);
 extern void fn_80166A54(void);
 extern void debuff_clearStatus(void);
@@ -1654,7 +1654,7 @@ lbl_fn_80256C04_00001564:
     li r7, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r0, 0x7e0(r16)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
@@ -1689,7 +1689,7 @@ lbl_fn_80256C04_0000163C:
     li r6, 0x0
     stfs f0, 0x18(r1)
     stfs f7, 0x1c(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     lwz r12, 0x0(r16)
     mr r3, r16
     lwz r12, 0x44(r12)

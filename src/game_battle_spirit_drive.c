@@ -24,7 +24,7 @@ extern void fn_8009EE30(void);
 extern void fn_8009F788(void);
 extern void fn_8009FFCC(void);
 extern void str_skipWhitespace(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
@@ -1802,7 +1802,7 @@ lbl_fn_80401BF0_0000183C:
     lwz r3, lbl_8087F428
     cmpwi r3, 0x0
     beq lbl_fn_80401BF0_000018F0
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r30, r3
     b lbl_fn_80401BF0_000018E8
 lbl_fn_80401BF0_00001854:

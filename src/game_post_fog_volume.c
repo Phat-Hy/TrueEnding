@@ -45,7 +45,7 @@ extern void fn_802DDBB0(void);
 extern void fn_802E2468(void);
 extern void entity_Instance_constructor(void);
 extern void entity_Instance_destructor(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
@@ -124,7 +124,7 @@ lbl_fn_802D7058_0000004C:
     bdnz lbl_fn_802D7058_00000020
 lbl_fn_802D7058_00000054:
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     b lbl_fn_802D7058_00000088
 lbl_fn_802D7058_00000060:
     lwz r4, 0x7e0(r3)

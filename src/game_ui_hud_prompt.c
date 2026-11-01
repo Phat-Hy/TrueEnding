@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
@@ -20,7 +20,7 @@ extern void fn_8011BF3C(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_801240B4(void);
 extern void inventory_unequipItem(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
 extern void actor_getMovementFlags(void);
@@ -425,7 +425,7 @@ lbl_fn_801C900C_000003BC:
     stfs f0, 0x1c(r1)
     lwz r4, 0x4(r31)
     addi r5, r4, 0x528
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r5, 0x4(r31)
     lis r7, 0x8000
     lwz r3, lbl_8087EE98
@@ -885,7 +885,7 @@ lbl_fn_801C951C_00000A78:
     stw r5, 0xd0(r1)
     lwz r5, 0x4(r29)
     mr r6, r5
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     b lbl_fn_801C951C_00000B20
 lbl_fn_801C951C_00000AE8:
     lwz r28, lbl_8087F048

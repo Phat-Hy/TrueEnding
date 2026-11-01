@@ -38,7 +38,7 @@ extern void fn_80168EC0(void);
 extern void fn_80168F3C(void);
 extern void fn_80168F5C(void);
 extern void fn_80168F94(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 
 /* External data declarations */
 extern u8 lbl_80737380[];
@@ -674,7 +674,7 @@ lbl_fn_8012F440_00000844:
     lwz r29, lbl_8087F048
     addi r3, r1, 0xe0
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r29
     addi r4, r1, 0xe0
     li r5, 0x1
@@ -885,7 +885,7 @@ lbl_fn_8012F440_00000B18:
     lwz r29, lbl_8087F048
     addi r3, r1, 0xd4
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r29
     addi r4, r1, 0xd4
     lis r5, 0x40
@@ -1090,7 +1090,7 @@ lbl_fn_8012F440_00000DE0:
     lwz r29, lbl_8087F048
     addi r3, r1, 0xc8
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     lis r5, 0x1
     mr r3, r29
     addi r4, r1, 0xc8
@@ -1259,7 +1259,7 @@ lbl_fn_8012F440_00001048:
     lwz r31, lbl_8087F048
     addi r3, r1, 0xbc
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r31
     addi r4, r1, 0xbc
     li r5, 0x100
@@ -1407,7 +1407,7 @@ lbl_fn_8012F440_00001250:
     lwz r25, lbl_8087F048
     addi r3, r1, 0xb0
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r25
     addi r4, r1, 0xb0
     li r5, 0x40
@@ -1633,7 +1633,7 @@ lbl_fn_8012F440_00001560:
     lwz r22, lbl_8087F048
     addi r3, r1, 0xa4
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r22
     addi r4, r1, 0xa4
     li r5, 0x80
@@ -1810,7 +1810,7 @@ lbl_fn_8012F440_000017DC:
     lwz r22, lbl_8087F048
     addi r3, r1, 0x98
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r22
     addi r4, r1, 0x98
     lis r5, 0x1
@@ -1956,7 +1956,7 @@ lbl_fn_8012F440_000019BC:
     lwz r22, lbl_8087F048
     addi r3, r1, 0x8c
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r22
     addi r4, r1, 0x8c
     li r5, 0x10
@@ -2111,7 +2111,7 @@ lbl_fn_8012F440_00001BAC:
     lwz r22, lbl_8087F048
     addi r3, r1, 0x80
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r22
     addi r4, r1, 0x80
     li r5, 0x4000
@@ -2446,7 +2446,7 @@ lbl_fn_8012F440_00002088:
     lwz r22, lbl_8087F048
     addi r3, r1, 0x74
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r22
     addi r4, r1, 0x74
     li r5, 0x4
@@ -2651,7 +2651,7 @@ lbl_fn_8012F440_00002350:
     lwz r22, lbl_8087F048
     addi r3, r1, 0x68
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r22
     addi r4, r1, 0x68
     li r5, 0x2
@@ -2859,7 +2859,7 @@ lbl_fn_8012F440_0000263C:
     lwz r22, lbl_8087F048
     addi r3, r1, 0x5c
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r22
     addi r4, r1, 0x5c
     li r5, 0x8
@@ -3059,7 +3059,7 @@ lbl_fn_8012F440_000028DC:
     lwz r22, lbl_8087F048
     addi r3, r1, 0x50
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r22
     addi r4, r1, 0x50
     li r5, 0x200
@@ -3414,7 +3414,7 @@ lbl_fn_8012F440_00002D8C:
     lwz r22, lbl_8087F048
     addi r3, r1, 0x44
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r22
     addi r4, r1, 0x44
     lis r5, 0x4
@@ -3703,7 +3703,7 @@ lbl_fn_8012F440_000031B8:
     lwz r22, lbl_8087F048
     addi r3, r1, 0x38
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r22
     addi r4, r1, 0x38
     li r5, 0x400
@@ -3907,7 +3907,7 @@ lbl_fn_8012F440_00003468:
     lwz r22, lbl_8087F048
     addi r3, r1, 0x2c
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r22
     addi r4, r1, 0x2c
     lis r5, 0x100
@@ -4121,7 +4121,7 @@ lbl_fn_8012F440_00003764:
     lwz r22, lbl_8087F048
     addi r3, r1, 0x20
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r22
     addi r4, r1, 0x20
     lis r5, 0x80
@@ -4347,7 +4347,7 @@ lbl_fn_8012F440_00003A68:
     lwz r22, lbl_8087F048
     addi r3, r1, 0x14
     lwz r4, 0x2f0(r21)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r22
     addi r4, r1, 0x14
     lis r5, 0x200

@@ -26,7 +26,7 @@ extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_8012B3E8(void);
@@ -763,7 +763,7 @@ lbl_fn_80250ECC_000008A4:
     b lbl_fn_80250ECC_00000928
 lbl_fn_80250ECC_000008E4:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0x1504(r30)
     b lbl_fn_80250ECC_00000928
 lbl_fn_80250ECC_000008F4:

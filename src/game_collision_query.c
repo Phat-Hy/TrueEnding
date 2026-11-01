@@ -29,7 +29,7 @@ extern void res_findResourceSlot(void);
 extern void fn_8023A108(void);
 extern void fn_8023A254(void);
 extern void res_registerResource(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void world_setGlobalFlag(void);
 extern void atn_LoadHandle_getName(void);
 extern void fn_8054D798(void);
@@ -233,7 +233,7 @@ lbl_fn_801055A8_00000188:
     bl fn_800F72F4
 lbl_fn_801055A8_000001FC:
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r29, r3
     addis r30, r31, 0x4
     b lbl_fn_801055A8_0000023C
@@ -279,7 +279,7 @@ lbl_fn_801055A8_00000270:
     bl fn_800F72F4
 lbl_fn_801055A8_00000294:
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r29, r3
     addis r30, r31, 0x4
     b lbl_fn_801055A8_000002D4
@@ -317,7 +317,7 @@ lbl_fn_801055A8_00000308:
     cmpwi r0, 0x3
     bne lbl_fn_801055A8_00000364
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r29, r3
     b lbl_fn_801055A8_00000334
 lbl_fn_801055A8_00000320:

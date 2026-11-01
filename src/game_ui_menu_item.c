@@ -24,7 +24,7 @@ extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void fn_8015E4B0(void);
 extern void debuff_clearStatus(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void battle_generateLootDrops(void);
 extern void fn_801B4BC8(void);
 extern void fn_801B4C00(void);
@@ -1777,7 +1777,7 @@ lbl_fn_801B6E70_000017EC:
     stw r0, 0x1d0(r1)
     lwz r4, 0x4(r30)
     addi r5, r4, 0x528
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r6, 0x4(r30)
     addi r4, r1, 0x190
     lwz r3, lbl_8087EE98

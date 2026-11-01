@@ -32,7 +32,7 @@ extern void fn_800E0AA8(void);
 extern void fn_800EC204(void);
 extern void fn_800EFE3C(void);
 extern void fn_800F52F0(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void fn_800F7F90(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F80A8(void);
@@ -596,7 +596,7 @@ lbl_fn_803729B4_00000564:
     lfs f1, lbl_8088574C
     addi r3, r1, 0x20
     addi r4, r1, 0x5c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x50
     addi r4, r1, 0x68
     addi r5, r1, 0x20

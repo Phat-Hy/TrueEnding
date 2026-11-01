@@ -104,7 +104,7 @@ void fn_803ECBD4(void);
 void task_initWorkerContext(void);
 void fn_803ED5D0(void);
 void fn_803ED610(void);
-void fn_803ED774(void);
+void dungeon_updateBarrierField(void);
 void fn_803ED8D8(void);
 void fn_803ED8F4(void);
 void fn_803ED92C(void);
@@ -1387,7 +1387,7 @@ lbl_fn_803ED610_000011F4:
     blr
 }
 
-asm void fn_803ED774(void)
+asm void dungeon_updateBarrierField(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -1398,13 +1398,13 @@ asm void fn_803ED774(void)
     mr r30, r3
     lwz r0, 0x9c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_803ED774_00001358
+    beq lbl_dungeon_updateBarrierField_00001358
     mr r3, r4
     bl fn_8008CD60
     lwz r3, lbl_8087F0A8
     lwz r0, 0x74(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_803ED774_00001358
+    beq lbl_dungeon_updateBarrierField_00001358
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x8
     lfs f0, 0x74(r30)
@@ -1422,7 +1422,7 @@ asm void fn_803ED774(void)
     bl PSVECSquareMag
     lfs f0, lbl_80885F5C
     fcmpo cr0, f1, f0
-    bge lbl_fn_803ED774_00001358
+    bge lbl_dungeon_updateBarrierField_00001358
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x14
     addi r5, r30, 0x6c
@@ -1430,10 +1430,10 @@ asm void fn_803ED774(void)
     lfs f0, lbl_80885F54
     lfs f1, 0x1c(r1)
     fcmpo cr0, f0, f1
-    bge lbl_fn_803ED774_00001358
+    bge lbl_dungeon_updateBarrierField_00001358
     lfs f0, lbl_80885F58
     fcmpo cr0, f1, f0
-    bge lbl_fn_803ED774_00001358
+    bge lbl_dungeon_updateBarrierField_00001358
     lis r3, 0x1062
     lwz r9, 0x48(r30)
     addi r0, r3, 0x4dd3
@@ -1473,7 +1473,7 @@ asm void fn_803ED774(void)
     li r7, 0x1
     li r8, 0x0
     bl skill_calculateDamage
-lbl_fn_803ED774_00001358:
+lbl_dungeon_updateBarrierField_00001358:
     lwz r0, 0x74(r1)
     lwz r31, 0x6c(r1)
     lwz r30, 0x68(r1)

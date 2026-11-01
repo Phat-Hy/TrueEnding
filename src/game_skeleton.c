@@ -19,7 +19,7 @@ struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct 
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void atn_Curve_evaluate(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
@@ -214,7 +214,7 @@ lbl_fn_800C122C_0000014C:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_fn_800C122C_00000194
     addic. r3, r3, 0x4
@@ -371,7 +371,7 @@ lbl_fn_800C1424_00000388:
     addi r3, r1, 0x48
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x48(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x48
     beq lbl_fn_800C1424_000003D0
     addic. r3, r3, 0x4

@@ -16,7 +16,7 @@ extern void fn_801426A4(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void battle_awardExp(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
@@ -1198,7 +1198,7 @@ asm void fn_802F566C(void)
     stw r30, 0x88(r1)
     fadds f0, f0, f3
     stfs f0, 0x3c(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lfs f3, 0x52c(r31)
     lfs f0, 0x3c(r1)
     lfs f4, 0x530(r31)

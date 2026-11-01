@@ -16,7 +16,7 @@ extern void node_destroy(void);
 extern void fn_800D03AC(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_80124B60(void);
@@ -439,7 +439,7 @@ lbl_fn_803CCCC0_000003E8:
 lbl_fn_803CCCC0_00000414:
     lwz r3, lbl_8087F8A0
     lwz r4, 0x198(r31)
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     b lbl_fn_803CCCC0_00000450
 lbl_fn_803CCCC0_00000424:
     lwz r3, lbl_8087F890
@@ -454,7 +454,7 @@ lbl_fn_803CCCC0_00000434:
 lbl_fn_803CCCC0_00000444:
     lwz r3, lbl_8087F8A0
     lwz r4, 0x198(r31)
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
 lbl_fn_803CCCC0_00000450:
     cmpwi r3, 0x0
     beq lbl_fn_803CCCC0_00000460

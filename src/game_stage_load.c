@@ -14,7 +14,7 @@ extern void quest_evaluateConditions(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void debuff_clearStatus(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void fn_80188A70(void);
 extern void fn_80188AA0(void);
 extern void fn_80192758(void);
@@ -1796,7 +1796,7 @@ lbl_fn_80198874_00001898:
     stw r0, 0x200(r1)
     lwz r4, 0x4(r30)
     addi r5, r4, 0x528
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r6, 0x4(r30)
     addi r4, r1, 0x1c0
     lwz r3, lbl_8087EE98

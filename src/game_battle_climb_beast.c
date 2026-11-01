@@ -43,7 +43,7 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void str_skipWhitespace(void);
 extern void fn_800F52F8(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void fn_800F7F90(void);
 extern void fn_800F7FD8(void);
 extern void fn_800F80A8(void);
@@ -84,7 +84,7 @@ extern void fn_803D6E24(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
-extern void fn_803ED774(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_803EFDA4(void);
 extern void fn_803EFDAC(void);
 extern void fn_803FB870(void);
@@ -1071,14 +1071,14 @@ lbl_fn_803FA5C8_00000C08:
     lfs f1, lbl_80886050
     addi r3, r1, 0x48
     addi r4, r1, 0xb4
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x54
     addi r4, r1, 0xc0
     bl fn_8013C3B4
     lfs f1, lbl_8088604C
     addi r3, r1, 0x60
     addi r4, r1, 0x54
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x6c
     addi r4, r1, 0x60
     addi r5, r1, 0x48
@@ -1428,7 +1428,7 @@ lbl_fn_803FAEFC_00001128:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_803FAEFC_00001164:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

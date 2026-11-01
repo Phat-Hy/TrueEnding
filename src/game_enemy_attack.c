@@ -16,7 +16,7 @@ extern void fn_801092C8(void);
 extern void fn_8010CCD0(void);
 extern void fn_8012476C(void);
 extern void fn_8012F440(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_80166544(void);
 extern void fn_80166A54(void);
 extern void fn_80167038(void);
@@ -1107,7 +1107,7 @@ lbl_fn_8012E540_00000E18:
     addi r4, r1, 0x2c
     li r5, -0x1
     li r6, 0x0
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     b lbl_fn_8012E540_00000F8C
 lbl_fn_8012E540_00000E80:
     clrrwi r0, r26, 31

@@ -92,7 +92,7 @@ void str_calcHash(void);
 void fn_800DC978(void);
 void fn_800DC97C(void);
 void fn_800DC980(void);
-void fn_800DCA6C(void);
+void sky_renderStub(void);
 void fn_800DCA70(void);
 void fn_800DCC54(void);
 void fn_800DCCE0(void);
@@ -810,7 +810,7 @@ lbl_fn_800DC980_00000890:
     blr
 }
 
-void fn_800DCA6C(void) {
+void sky_renderStub(void) {
 }
 
 asm void fn_800DCA70(void)

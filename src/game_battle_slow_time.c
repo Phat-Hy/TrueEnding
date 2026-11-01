@@ -45,7 +45,7 @@ extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
-extern void fn_803ED774(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_803EDB18(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -144,7 +144,7 @@ lbl_fn_80406EC4_0000002C:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_80406EC4_00000068:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x8(r3)

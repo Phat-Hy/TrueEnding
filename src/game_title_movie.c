@@ -16,7 +16,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_8011F8F4(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_8013310C(void);
@@ -992,7 +992,7 @@ lbl_fn_803A9C40_00000C18:
 lbl_fn_803A9C40_00000C2C:
     lwz r3, lbl_8087F8A0
     mr r4, r0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r28, r3
 lbl_fn_803A9C40_00000C3C:
     cmpwi r28, 0x0
@@ -1100,7 +1100,7 @@ lbl_fn_803A9DBC_00000D94:
 lbl_fn_803A9DBC_00000DA8:
     lwz r3, lbl_8087F8A0
     mr r4, r0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r30, r3
 lbl_fn_803A9DBC_00000DB8:
     lwz r0, 0x9c(r25)
@@ -1679,7 +1679,7 @@ lbl_fn_803AA5E4_000015AC:
     b lbl_fn_803AA5E4_000015C8
 lbl_fn_803AA5E4_000015BC:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r27, r3
 lbl_fn_803AA5E4_000015C8:
     lwz r3, lbl_8087F430
@@ -1845,7 +1845,7 @@ lbl_fn_803AA82C_000017F4:
     b lbl_fn_803AA82C_00001810
 lbl_fn_803AA82C_00001804:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r5, r3
 lbl_fn_803AA82C_00001810:
     cmpwi r5, 0x0
@@ -1932,7 +1932,7 @@ lbl_fn_803AA954_0000191C:
     b lbl_fn_803AA954_00001938
 lbl_fn_803AA954_0000192C:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r5, r3
 lbl_fn_803AA954_00001938:
     cmpwi r5, 0x0

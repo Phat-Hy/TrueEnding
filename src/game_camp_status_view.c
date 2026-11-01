@@ -6,7 +6,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_80089B5C(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_8012AE50(void);
@@ -19,7 +19,7 @@ extern void quest_updateFlow(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
 extern void fn_80153698(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_8016F824(void);
 extern void fn_8016FDCC(void);
 extern void battle_resolveAggroHierarchy(void);
@@ -543,7 +543,7 @@ lbl_fn_803B9804_000005E4:
     lwz r4, 0x94(r31)
     lwz r3, lbl_8087F8A0
     lwzx r4, r4, r27
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     cmpwi r3, 0x0
     beq lbl_fn_803B9804_00000628
     lwz r4, 0x94(r31)
@@ -813,13 +813,13 @@ lbl_fn_803B9D78_00000980:
     cmplwi r0, 0xffff
     beq lbl_fn_803B9D78_000009C0
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     cmpwi r3, 0x0
     beq lbl_fn_803B9D78_000009C0
     lwz r24, lbl_8087F8A0
     lwz r4, 0x4d14(r29)
     mr r3, r24
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r4, r3
     mr r3, r24
     li r5, 0x0
@@ -1479,7 +1479,7 @@ lbl_fn_803BA620_00001214:
     li r6, 0x0
     stfs f0, 0x14(r1)
     stfs f3, 0x18(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
 lbl_fn_803BA620_000012E0:
     lbz r0, 0x3(r30)
     extsb. r8, r0
@@ -1562,7 +1562,7 @@ lbl_fn_803BA620_000013E8:
 lbl_fn_803BA620_000013FC:
     lwz r3, lbl_8087F8A0
     lwz r4, 0x28(r30)
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     lwz r0, 0x2c(r30)
     mr r4, r3
     stw r25, 0x90(r1)

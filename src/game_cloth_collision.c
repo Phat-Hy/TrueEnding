@@ -28,7 +28,7 @@ extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_Resource_destructor(void);
@@ -1935,7 +1935,7 @@ lbl_fn_8027E678_00001980:
     lwz r29, lbl_8087F048
     mr r4, r30
     addi r3, r1, 0x10
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r29
     addi r4, r1, 0x10
     li r5, 0x80

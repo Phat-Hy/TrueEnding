@@ -32,7 +32,7 @@ struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct 
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void str_findChar(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void memcmp(void);
 extern void strcat(void);
 extern void std_cos(void);
@@ -1057,7 +1057,7 @@ lbl_fn_80080C20_00000D24:
     bl strcpy
     stw r22, 0x40(r1)
     addi r3, r1, 0x40
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r17, 0x0
     beq lbl_fn_80080C20_00000D60
     addic. r3, r17, 0x4

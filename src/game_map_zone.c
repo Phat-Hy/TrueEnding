@@ -16,7 +16,7 @@ extern void fn_80128A30(void);
 extern void fn_80139560(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void battle_applyStatusEffect(void);
 extern void fn_8017E9D8(void);
 extern void fn_8017F118(void);
@@ -1798,7 +1798,7 @@ lbl_fn_8017E650_00001750:
     stfs f0, 0x4c(r1)
     stfs f4, 0x44(r1)
     stfs f3, 0x48(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     lfs f0, lbl_80881B80
     li r0, 0x0
     stfs f0, 0x2e8(r31)

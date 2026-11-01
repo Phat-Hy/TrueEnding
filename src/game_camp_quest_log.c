@@ -34,7 +34,7 @@ extern void fn_800ED42C(void);
 extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void fn_800EDFE8(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void fn_8020A780(void);
 extern void fn_8021A4CC(void);
 extern void fn_80288390(void);
@@ -2548,7 +2548,7 @@ lbl_fn_803C3894_000021F8:
     lfs f1, lbl_80885CCC
     addi r3, r1, 0x34
     addi r4, r1, 0x28
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x114
     addi r4, r1, 0x34
     bl vec3_copy
@@ -2719,7 +2719,7 @@ lbl_fn_803C3894_000024D4:
     lfs f1, lbl_80885CCC
     addi r3, r1, 0x1c
     addi r4, r1, 0x10
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0xfc
     addi r4, r1, 0x1c
     bl vec3_copy

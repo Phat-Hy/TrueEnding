@@ -22,7 +22,7 @@ extern void fn_80148B0C(void);
 extern void fn_80155D70(void);
 extern void fn_8015B808(void);
 extern void actor_setState(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void battle_awardExp(void);
 extern void task_findEntryById(void);
 extern void fn_802CC19C(void);
@@ -1125,7 +1125,7 @@ lbl_fn_802CA490_00000E10:
     fdivs f3, f3, f4
     fadds f0, f0, f3
     stfs f0, 0x54(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r3, lbl_8087EE98
     mr r6, r30
     lfs f1, 0x4c(r1)

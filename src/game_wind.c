@@ -20,7 +20,7 @@ extern void fn_80139560(void);
 extern void quest_evaluateConditions(void);
 extern void fn_80153B44(void);
 extern void fn_801562A0(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_80158CA4(void);
 extern void fn_80158EF0(void);
 extern void fn_8015F568(void);
@@ -1632,7 +1632,7 @@ lbl_fn_800E9ED8_00001650:
     stw r0, 0xf08(r31)
     b lbl_fn_800E9ED8_00001A08
 lbl_fn_800E9ED8_0000165C:
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_800E9ED8_000016B0
     lwz r3, 0x560(r31)

@@ -19,7 +19,7 @@ extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
 extern void fn_801595BC(void);
 extern void fn_8015AC48(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_8016C4D8(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
@@ -1723,7 +1723,7 @@ lbl_fn_802E3EE8_000016CC:
     stfs f0, 0x98(r1)
     stfs f3, 0x9c(r1)
     lwz r3, 0x14d0(r31)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     li r30, 0x0
     stw r30, 0x14b8(r31)
     stw r30, 0x14bc(r31)

@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -18,7 +18,7 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E854C(void);
 extern void system_getNextSequenceId(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void fn_8011F9CC(void);
 extern void skill_findNodeById(void);
 extern void fn_801255C8(void);
@@ -649,7 +649,7 @@ lbl_fn_80334FDC_000006A4:
     bl str_parseInt
     mr r4, r3
     mr r3, r30
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0x1580(r29)
     b lbl_fn_80334FDC_00000970
 lbl_fn_80334FDC_000006E4:
@@ -1698,7 +1698,7 @@ lbl_fn_80335988_00001558:
     slwi r0, r0, 2
     add r4, r31, r0
     lwz r4, 0x1520(r4)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r0, 0x14d8(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80335988_00001610

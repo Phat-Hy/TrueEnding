@@ -32,7 +32,7 @@ extern void fn_80139EFC(void);
 extern void fn_80139F4C(void);
 extern void fn_8013A16C(void);
 extern void fn_8013C480(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void fn_801A03E0(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
@@ -1723,7 +1723,7 @@ asm void fn_805AC75C(void)
     bne lbl_fn_805AC75C_00001620
     lwz r4, 0x4c(r15)
     mr r3, r16
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     b lbl_fn_805AC75C_00001658
 lbl_fn_805AC75C_00001620:
     cmpwi r0, 0x1

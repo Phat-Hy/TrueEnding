@@ -15,7 +15,7 @@ extern void fn_8012A288(void);
 extern void fn_8012B0B0(void);
 extern void fn_8012B3A8(void);
 extern void fn_8012DB04(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void battle_generateLootDrops(void);
 extern void fn_801B3E70(void);
 extern void fn_801C0C70(void);
@@ -427,7 +427,7 @@ lbl_fn_8056796C_00000498:
     stw r0, 0x1b8(r1)
     stw r0, 0x1bc(r1)
     stw r0, 0x1c0(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r4, 0x48(r29)
     neg r0, r30
     or r3, r0, r30

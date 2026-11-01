@@ -12,7 +12,7 @@ extern void fn_80154654(void);
 extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
 extern void fn_8021ECD0(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803972A8(void);
 extern void fn_80397BEC(void);
@@ -1368,7 +1368,7 @@ lbl_fn_803965FC_00001178:
     bl fn_80396F44
     mr r19, r3
     lwz r3, 0x8(r1)
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r22, r3
     b lbl_fn_803965FC_000011C4
 lbl_fn_803965FC_000011B0:

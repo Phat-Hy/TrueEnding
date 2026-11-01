@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void fn_80056DB8(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void route_createSegment(void);
@@ -852,7 +852,7 @@ lbl_fn_802C07F8_00000984:
     li r7, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r3, lbl_8087F448
     cmpwi r3, 0x0
     beq lbl_fn_802C07F8_00000A2C

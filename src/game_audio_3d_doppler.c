@@ -44,7 +44,7 @@ extern void fn_8016D454(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_applyStatusEffect(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void battle_updateActorStatus(void);
 extern void fn_802657FC(void);
 extern void fn_80266154(void);
@@ -74,7 +74,7 @@ extern void fn_80329ED8(void);
 extern void fn_8032A650(void);
 extern void fn_8032A894(void);
 extern void fn_8032C3CC(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void world_setLocalFlag(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXTrans(void);
@@ -587,7 +587,7 @@ lbl_fn_80323690_000005B8:
     bl fn_800EC1F4
 lbl_fn_80323690_000005D4:
     bl fn_80323C2C
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     lfs f31, lbl_80884F1C
     mr r29, r3
     lfs f30, lbl_80884F10
@@ -1961,7 +1961,7 @@ lbl_fn_80324A38_00001930:
     stw r0, 0x168(r1)
     stw r0, 0x16c(r1)
     stw r0, 0x170(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r4, 0x48(r30)
     neg r0, r28
     or r3, r0, r28

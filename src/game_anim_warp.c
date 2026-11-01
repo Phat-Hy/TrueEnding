@@ -23,7 +23,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F80B8(void);
@@ -57,7 +57,7 @@ extern void fn_80279798(void);
 extern void fn_802797A0(void);
 extern void fn_802797A8(void);
 extern void fn_802797D4(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void PSMTXConcat(void);
@@ -434,7 +434,7 @@ asm void fn_80278218(void)
     stfs f2, 0x8(r4)
     psq_st f1, 0x0(r4), 0, 0
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     b lbl_fn_80278218_00000500
 lbl_fn_80278218_000004AC:
     lwz r0, 0x7e0(r3)
@@ -523,7 +523,7 @@ asm void fn_80278330(void)
     psq_st f1, 0x0(r3), 0, 0
     lwz r3, lbl_8087F428
     stfs f2, 0x1c(r1)
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     b lbl_fn_80278330_00000644
 lbl_fn_80278330_000005F0:
     lwz r0, 0x7e0(r3)
@@ -1669,7 +1669,7 @@ lbl_fn_80279280_0000160C:
     bge lbl_fn_80279280_00001740
     addi r3, r1, 0x48
     addi r4, r1, 0x90
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x84
     addi r4, r1, 0xb4
     addi r5, r1, 0x48

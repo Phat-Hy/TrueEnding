@@ -46,7 +46,7 @@ extern void fn_8014052C(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_801513D0(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
@@ -267,7 +267,7 @@ lbl_fn_8032DAA0_00000134:
     addi r4, r29, 0x10
     li r5, -0x1
     li r6, 0x0
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
 lbl_fn_8032DAA0_00000148:
     li r0, 0x0
     stw r0, 0x58c(r31)

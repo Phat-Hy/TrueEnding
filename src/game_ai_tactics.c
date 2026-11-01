@@ -21,7 +21,7 @@ extern void fn_8014052C(void);
 extern void quest_evaluateConditions(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void fn_801A03E8(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -1937,7 +1937,7 @@ lbl_fn_80268CB4_000019E0:
     addi r5, r31, 0x528
     stw r0, 0x1c4(r1)
     stw r0, 0x1c8(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r3, lbl_8087EE98
     addi r4, r1, 0x188
     lfs f1, 0x24(r1)

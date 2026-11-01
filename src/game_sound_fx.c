@@ -9,7 +9,7 @@ extern void dtor_80013D60(void);
 extern void scene_traverseNode(void);
 extern void fn_8000EC88(void);
 extern void str_initFromCStr(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void ui_destroyWidget(void);
 extern void fn_80041A28(void);
 extern void fn_8004203C(void);
@@ -63,7 +63,7 @@ extern void inventory_calcTotalStats(void);
 extern void fn_801561E4(void);
 extern void fn_801562A0(void);
 extern void fn_8015783C(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_8015EB2C(void);
 extern void fn_80164DCC(void);
 extern void fn_80165C5C(void);
@@ -278,7 +278,7 @@ lbl_fn_800EA9D4_0000019C:
     stw r11, 0x1c(r1)
     stw r0, 0x24(r1)
     stw r11, 0x20(r1)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     b lbl_fn_800EA9D4_000002F8
 lbl_fn_800EA9D4_000001F8:
     lbz r0, lbl_8087EE74
@@ -453,7 +453,7 @@ lbl_fn_800EACEC_00000408:
     stw r11, 0x1c(r1)
     stw r0, 0x24(r1)
     stw r11, 0x20(r1)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r0, 0x48(r31)
     cmpwi r0, 0x3
     bne lbl_fn_800EACEC_000004E0
@@ -636,7 +636,7 @@ lbl_fn_800EAFD4_0000069C:
     stfs f3, 0x10(r1)
     stfs f0, 0x8(r1)
     stfs f1, 0xc(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
 lbl_fn_800EAFD4_000006D8:
     lwz r12, 0x0(r30)
     mr r3, r30

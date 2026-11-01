@@ -28,7 +28,7 @@ extern void fn_801635B8(void);
 extern void fn_801638A0(void);
 extern void fn_80165F54(void);
 extern void fn_801698E4(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void actor_getMovementFlags(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803ABFD4(void);
@@ -765,7 +765,7 @@ asm void fn_803CB820(void)
     mr r4, r18
     mr r5, r0
     addi r3, r1, 0x130
-    bl fn_80176548
+    bl battle_calcExpPosition
     addi r3, r1, 0x120
     psq_l f1, 0x0(r19), 0, 0
     li r30, 0x0

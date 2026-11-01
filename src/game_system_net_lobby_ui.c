@@ -22,7 +22,7 @@ extern void fn_800EC204(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_801162A0(void);
 extern void fn_8011F8F4(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void equip_getGlobalManager(void);
@@ -784,7 +784,7 @@ lbl_fn_803A2210_00000914:
     b lbl_fn_803A2210_00000930
 lbl_fn_803A2210_00000924:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r31, r3
 lbl_fn_803A2210_00000930:
     cmpwi r31, 0x0
@@ -885,7 +885,7 @@ lbl_fn_803A2378_00000A74:
     b lbl_fn_803A2378_00000A90
 lbl_fn_803A2378_00000A84:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r5, r3
 lbl_fn_803A2378_00000A90:
     cmpwi r5, 0x0
@@ -1656,7 +1656,7 @@ lbl_fn_803A2E20_0000152C:
 lbl_fn_803A2E20_00001540:
     lwz r3, lbl_8087F8A0
     mr r4, r0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r31, r3
 lbl_fn_803A2E20_00001550:
     cmpwi r31, 0x0
@@ -1764,7 +1764,7 @@ lbl_fn_803A2E20_000016C0:
     b lbl_fn_803A2E20_000016DC
 lbl_fn_803A2E20_000016D0:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r26, r3
 lbl_fn_803A2E20_000016DC:
     lfs f3, 0x5b0(r26)
@@ -2005,7 +2005,7 @@ lbl_fn_803A330C_00001A08:
     b lbl_fn_803A330C_00001A24
 lbl_fn_803A330C_00001A18:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r5, r3
 lbl_fn_803A330C_00001A24:
     cmpwi r5, 0x0

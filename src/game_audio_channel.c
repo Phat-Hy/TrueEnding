@@ -15,7 +15,7 @@ extern void viewport_updateCulling(void);
 extern void fn_8012DB04(void);
 extern void fn_801426A4(void);
 extern void fn_80148B0C(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void battle_updateTargetAggro(void);
@@ -217,7 +217,7 @@ lbl_fn_802F97B8_00000180:
     bl atn_Anim_setLayerAnimation
     b lbl_fn_802F97B8_0000073C
 lbl_fn_802F97B8_0000021C:
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_802F97B8_00000298
     lwz r3, 0x14f4(r31)

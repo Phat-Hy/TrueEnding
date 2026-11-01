@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void fn_80108C10(void);
 extern void fn_801092C8(void);
 extern void fn_80206B68(void);
@@ -317,7 +317,7 @@ lbl_fn_80450778_00000344:
     stw r11, 0x2c(r1)
     stw r0, 0x34(r1)
     stw r11, 0x30(r1)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r29, lbl_8087F048
     cmpwi r29, 0x0
     beq lbl_fn_80450778_0000047C

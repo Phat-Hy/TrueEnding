@@ -38,7 +38,7 @@ extern void fn_800D0AB0(void);
 extern void fn_8011F944(void);
 extern void fn_80179EBC(void);
 extern void fn_8021FD7C(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void fn_803761CC(void);
 extern void fn_803EB668(void);
 extern void fn_803EB7E4(void);
@@ -1765,7 +1765,7 @@ lbl_chest_spawnLoot_000018B0:
     cmpwi r26, 0x0
     bne lbl_chest_spawnLoot_000018C8
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r26, r3
 lbl_chest_spawnLoot_000018C8:
     cmplw r26, r27

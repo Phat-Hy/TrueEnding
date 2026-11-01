@@ -31,7 +31,7 @@ extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
 extern void task_updateWorker(void);
-extern void fn_803ED774(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_8040161C(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -1521,7 +1521,7 @@ lbl_fn_80403280_00001458:
     beq lbl_fn_80403280_00001488
     mr r3, r29
     addi r4, r4, 0x10
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_80403280_00001488:
     addi r30, r30, 0x1
     addi r31, r31, 0x42c

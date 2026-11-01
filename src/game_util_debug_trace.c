@@ -17,7 +17,7 @@ extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_800EFC64(void);
 extern void fn_800EFE3C(void);
 extern void fn_800EFEA0(void);
@@ -1077,7 +1077,7 @@ lbl_fn_805991E4_00000DC8:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_fn_805991E4_00000E10
     addic. r3, r3, 0x4

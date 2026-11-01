@@ -57,7 +57,7 @@ extern void atn_Fog_apply(void);
 extern void atn_Task_pause(void);
 extern void fn_800D2D7C(void);
 extern void env_updateAtmosphere(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_80185AD4(void);
 extern void fn_80186520(void);
 extern void fn_80187C44(void);
@@ -750,7 +750,7 @@ lbl_main_00000808:
     bl strcpy
     stw r30, 0x18(r1)
     addi r3, r1, 0x18
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r17, 0x0
     beq lbl_main_00000844
     addic. r3, r17, 0x4

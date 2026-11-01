@@ -24,9 +24,9 @@ extern void npc_updateTalkInteraction(void);
 extern void fn_80140588(void);
 extern void quest_ctorRewardItem(void);
 extern void fn_801595BC(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_8016E4C4(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void task_findEntryById(void);
 extern void fn_80310314(void);
 extern void kpad_testActiveFlags(void);
@@ -1166,7 +1166,7 @@ lbl_fn_803123D0_00000F54:
     stfs f0, 0x58(r1)
     stfs f0, 0x5c(r1)
     lwz r4, 0x14e4(r29)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     lis r9, lbl_807C7030@ha
     lfs f1, lbl_80884CA4
     mr r3, r30
@@ -1755,7 +1755,7 @@ lbl_fn_803132D0_000017A0:
     stfs f31, 0x10(r1)
     stfs f31, 0x14(r1)
     lwz r4, 0x14e4(r31)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     lfs f1, lbl_80884CA4
     mr r3, r29
     addi r8, r1, 0x18
@@ -1814,7 +1814,7 @@ lbl_fn_803132D0_00001890:
     mr r5, r27
     addi r4, r1, 0x24
     li r6, 0x0
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     lwz r3, 0x14e4(r31)
     li r0, 0x0
     stw r0, 0xf1c(r3)

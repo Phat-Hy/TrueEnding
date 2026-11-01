@@ -16,7 +16,7 @@ extern void mission_updateStub(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800E932C(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void viewport_getNextSequenceId(void);
@@ -34,7 +34,7 @@ extern void fn_8014052C(void);
 extern void fn_80158CA4(void);
 extern void fn_80158E1C(void);
 extern void actor_setState(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void battle_awardExp(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
@@ -597,7 +597,7 @@ lbl_fn_80319090_000006BC:
     addi r5, r31, 0x528
     stw r0, 0x54(r1)
     stw r0, 0x58(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lis r0, 0x8000
     lwz r3, lbl_8087EE98
     lfs f1, 0x14(r1)
@@ -982,14 +982,14 @@ lbl_fn_8031958C_00000BE8:
     lfs f1, lbl_80884DCC
     addi r3, r1, 0xa8
     addi r4, r1, 0x9c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0xe4
     addi r4, r1, 0xa8
     bl fn_80012C88
     lfs f1, 0x5b0(r31)
     addi r3, r1, 0x78
     addi r4, r31, 0x155c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x84
     addi r4, r31, 0x528
     addi r5, r1, 0x78
@@ -1013,7 +1013,7 @@ lbl_fn_8031958C_00000BE8:
     lfs f1, 0x5b0(r31)
     addi r3, r1, 0x60
     addi r4, r31, 0x155c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x6c
     addi r4, r31, 0x528
     addi r5, r1, 0x60
@@ -1073,7 +1073,7 @@ lbl_fn_8031958C_00000D8C:
     lfs f1, lbl_80884DD4
     addi r3, r1, 0x54
     addi r4, r31, 0x155c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0xc0
     addi r4, r1, 0xcc
     addi r5, r1, 0x54
@@ -1101,7 +1101,7 @@ lbl_fn_8031958C_00000E08:
     lfs f1, 0x5b0(r31)
     addi r3, r1, 0x30
     addi r4, r31, 0x155c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x3c
     addi r4, r31, 0x528
     addi r5, r1, 0x30
@@ -1125,7 +1125,7 @@ lbl_fn_8031958C_00000E08:
     lfs f1, 0x5b0(r31)
     addi r3, r1, 0x18
     addi r4, r31, 0x155c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x24
     addi r4, r31, 0x528
     addi r5, r1, 0x18

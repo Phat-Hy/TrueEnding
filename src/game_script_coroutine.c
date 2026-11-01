@@ -11,7 +11,7 @@ extern void scissor_clipFrustum(void);
 extern void fn_8015F568(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void battle_awardExp(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
@@ -1911,7 +1911,7 @@ lbl_fn_8024E7E4_00001B10:
     stfs f0, 0xb0(r1)
     stw r0, 0x184(r1)
     stw r0, 0x188(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r3, lbl_8087EE98
     addi r4, r1, 0x148
     lfs f1, 0xa4(r1)

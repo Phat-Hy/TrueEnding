@@ -19,7 +19,7 @@ extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void sound_playSpatialEffect(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F7FD8(void);
@@ -1110,7 +1110,7 @@ asm void fn_8031D350(void)
     lfs f1, lbl_80884E34
     addi r3, r1, 0x50
     addi r4, r31, 0x1524
-    bl fn_800F72CC
+    bl vec3_scale
     lwz r3, 0x14b8(r31)
     bl npc_getPosition
     mr r4, r3
@@ -1133,7 +1133,7 @@ asm void fn_8031D350(void)
     lfs f1, lbl_80884E38
     addi r3, r1, 0x2c
     addi r4, r1, 0x74
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x68
     addi r4, r31, 0x528
     addi r5, r1, 0x2c

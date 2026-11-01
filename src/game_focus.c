@@ -12,7 +12,7 @@ extern void fn_800A0548(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800A08E0(void);
 extern void str_findChar(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_805ED460(void);
 extern void fn_805ED5A0(void);
 extern void PSMTXConcat(void);
@@ -877,7 +877,7 @@ lbl_fn_800991D0_00000BEC:
     lwz r0, 0x234(r1)
     addi r3, r1, 0x90
     stw r0, 0x90(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r0, r1, 0x90
     beq lbl_fn_800991D0_00000C34
     mr r3, r0
@@ -1875,7 +1875,7 @@ lbl_fn_8009A5CC_000019E0:
     lwz r0, 0x224(r1)
     addi r3, r1, 0x50
     stw r0, 0x50(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r0, r1, 0x50
     beq lbl_fn_8009A5CC_00001A28
     mr r3, r0
@@ -2563,7 +2563,7 @@ lbl_fn_8009ADA4_000023F8:
     lwz r0, 0x2c8(r1)
     addi r3, r1, 0x8c
     stw r0, 0x8c(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r0, r1, 0x8c
     beq lbl_fn_8009ADA4_00002440
     mr r3, r0
@@ -2736,7 +2736,7 @@ lbl_fn_8009ADA4_00002684:
     lwz r0, 0x2c8(r1)
     addi r3, r1, 0x80
     stw r0, 0x80(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r0, r1, 0x80
     beq lbl_fn_8009ADA4_000026CC
     mr r3, r0

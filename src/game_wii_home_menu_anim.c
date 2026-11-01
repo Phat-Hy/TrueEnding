@@ -26,7 +26,7 @@ extern void fn_80239C14(void);
 extern void fn_80239C20(void);
 extern void fn_8023B71C(void);
 extern void fn_8023B724(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void fn_8056A9E8(void);
 extern void fn_8056CB24(void);
 extern void fn_8056D440(void);
@@ -351,7 +351,7 @@ asm void fn_8056F5B8(void)
     addi r3, r3, 0x3970
     bl fn_8056CB24
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r23, r3
     b lbl_fn_8056F5B8_0000041C
 lbl_fn_8056F5B8_000003C8:

@@ -29,7 +29,7 @@ extern void morph_updateMesh(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void sound_initGlobalInstances(void);
@@ -1101,7 +1101,7 @@ lbl_fn_804229A8_00000CDC:
 lbl_fn_804229A8_00000CF0:
     lwz r4, 0x24(r4)
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0x148(r31)
 lbl_fn_804229A8_00000D00:
     lwz r7, 0xf4(r31)

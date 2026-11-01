@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void fn_80016FB4(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void boss_recordDamage(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -1030,7 +1030,7 @@ lbl_fn_80374964_00000C8C:
     stw r28, 0x2c(r1)
     stw r0, 0x34(r1)
     stw r28, 0x30(r1)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
 lbl_fn_80374964_00000CF0:
     addi r3, r31, 0x7d4
     li r4, 0x0

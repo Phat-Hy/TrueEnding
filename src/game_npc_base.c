@@ -16,7 +16,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C61C0(void);
 extern void fn_800C622C(void);
 extern void fn_800C7CA8(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_800F52F8(void);
 extern void fn_800F7F60(void);
 extern void fn_800F7F80(void);
@@ -1297,7 +1297,7 @@ lbl_npc_initScriptContext_00000EC0:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_npc_initScriptContext_00000F08
     addic. r3, r3, 0x4

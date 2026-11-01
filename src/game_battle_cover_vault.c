@@ -24,7 +24,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void fn_8011BE54(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
@@ -48,7 +48,7 @@ extern void fn_803E598C(void);
 extern void task_createWorker(void);
 extern void fn_803EC7A0(void);
 extern void task_updateWorker(void);
-extern void fn_803ED774(void);
+extern void dungeon_updateBarrierField(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void fn_80499B9C(void);
@@ -401,7 +401,7 @@ lbl_fn_803F86E0_00000420:
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_803F86E0_0000045C:
     lwz r3, lbl_8087F0A8
     lwz r0, 0x8(r3)
@@ -1459,7 +1459,7 @@ lbl_fn_803F957C_000012A0:
 lbl_fn_803F957C_000012B4:
     lwz r3, lbl_8087F8A0
     lwz r4, 0x24(r4)
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0xf8(r31)
 lbl_fn_803F957C_000012C4:
     lwz r3, 0xf8(r31)
@@ -1860,7 +1860,7 @@ lbl_fn_803F9624_00001878:
     b lbl_fn_803F9624_000018A0
 lbl_fn_803F9624_00001898:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
 lbl_fn_803F9624_000018A0:
     cmpwi r3, 0x0
     beq lbl_fn_803F9624_000019F0

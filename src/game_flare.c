@@ -6,7 +6,7 @@ extern void _restgpr_21(void);
 extern void _restgpr_26(void);
 extern void _savegpr_21(void);
 extern void _savegpr_26(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void fn_8003F1E4(void);
 extern void collision_testLineSegment(void);
 extern void fn_80063484(void);
@@ -1455,7 +1455,7 @@ lbl_fn_800E4278_000012B0:
     stw r11, 0x144(r1)
     stw r0, 0x14c(r1)
     stw r11, 0x148(r1)
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r3, lbl_8087F048
     mr r5, r24
     li r4, 0x16

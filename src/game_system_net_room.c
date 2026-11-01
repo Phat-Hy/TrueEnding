@@ -14,7 +14,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800FDE60(void);
 extern void fn_8011CD84(void);
 extern void fn_8011F8F4(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_8012B3E8(void);
@@ -27,7 +27,7 @@ extern void fn_8014EEC4(void);
 extern void inventory_unequipItem(void);
 extern void fn_80183930(void);
 extern void task_mapIdToQueue(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void world_getGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void world_reloadMapTransition(void);
@@ -533,7 +533,7 @@ lbl_fn_803A0040_000005A0:
     lfd f0, 0x20(r1)
     lwz r3, lbl_8087F428
     fsubs f31, f0, f1
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     fmuls f31, f31, f31
     mr r28, r3
     b lbl_fn_803A0040_00000680
@@ -849,7 +849,7 @@ lbl_fn_803A0520_000009E0:
 lbl_fn_803A0520_000009F4:
     lwz r3, lbl_8087F8A0
     mr r4, r0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r4, r3
 lbl_fn_803A0520_00000A04:
     mr r3, r29
@@ -937,7 +937,7 @@ lbl_fn_803A064C_00000B14:
     b lbl_fn_803A064C_00000C1C
 lbl_fn_803A064C_00000B24:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r31, r3
     b lbl_fn_803A064C_00000C1C
 lbl_fn_803A064C_00000B34:
@@ -1125,7 +1125,7 @@ lbl_fn_803A08D4_00000D98:
 lbl_fn_803A08D4_00000DAC:
     lwz r3, lbl_8087F8A0
     mr r4, r0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r29, r3
 lbl_fn_803A08D4_00000DBC:
     lwz r0, 0x10(r31)
@@ -1176,7 +1176,7 @@ lbl_fn_803A08D4_00000E50:
     b lbl_fn_803A08D4_00000E6C
 lbl_fn_803A08D4_00000E60:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r5, r3
 lbl_fn_803A08D4_00000E6C:
     lwz r3, lbl_8087EE68

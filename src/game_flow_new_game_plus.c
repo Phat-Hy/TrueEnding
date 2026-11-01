@@ -9,7 +9,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void ui_destroyWidget(void);
 extern void fn_8003F1E4(void);
 extern void dungeon_initGlobalContext(void);
@@ -29,7 +29,7 @@ extern void fn_80133F18(void);
 extern void fn_80148B0C(void);
 extern void fn_80150460(void);
 extern void fn_8015076C(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_801681B0(void);
 extern void fn_8016D0A0(void);
 extern void fn_801750FC(void);
@@ -925,7 +925,7 @@ lbl_fn_804EFF78_00000B6C:
     addi r8, r1, 0xf0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r3, lbl_8087F610
     lwz r0, 0x540(r3)
     cmpwi r0, 0x2
@@ -1447,7 +1447,7 @@ lbl_fn_804EFF78_00001344:
     li r6, 0x0
     stfs f0, 0x44(r1)
     stfs f7, 0x48(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
 lbl_fn_804EFF78_0000136C:
     lwz r12, 0x0(r26)
     mr r3, r26

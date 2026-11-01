@@ -12,11 +12,11 @@ extern void atn_Anim_getLayerDuration(void);
 extern void str_findChar(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8011F8F4(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void quest_updateFlow(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_80171420(void);
 extern void fn_80171DB0(void);
 extern void battle_awardExp(void);
@@ -170,7 +170,7 @@ lbl_fn_803A5118_000000B4:
     b lbl_fn_803A5118_000000D0
 lbl_fn_803A5118_000000C4:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r29, r3
 lbl_fn_803A5118_000000D0:
     cmpwi r29, 0x0
@@ -222,7 +222,7 @@ lbl_fn_803A5118_00000118:
     li r6, 0x0
     stfs f0, 0x2c(r1)
     stfs f1, 0x30(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     lfs f0, lbl_80885B30
     addi r3, r29, 0xb0
     stfs f0, 0x2ec(r29)
@@ -262,7 +262,7 @@ lbl_fn_803A5118_000001C0:
     li r6, 0x0
     stfs f0, 0x14(r1)
     stfs f1, 0x18(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
 lbl_fn_803A5118_0000022C:
     lwz r4, 0x0(r31)
     lis r3, lbl_8074ED24@ha
@@ -439,7 +439,7 @@ lbl_fn_803A54C0_00000468:
 lbl_fn_803A54C0_0000047C:
     lwz r3, lbl_8087F8A0
     mr r4, r0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r29, r3
 lbl_fn_803A54C0_0000048C:
     lwz r0, 0x48(r29)
@@ -554,7 +554,7 @@ lbl_fn_803A5650_00000600:
     b lbl_fn_803A5650_0000061C
 lbl_fn_803A5650_00000610:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r28, r3
 lbl_fn_803A5650_0000061C:
     cmpwi r31, 0x0
@@ -1807,7 +1807,7 @@ lbl_fn_803A6744_000016F0:
     b lbl_fn_803A6744_0000170C
 lbl_fn_803A6744_00001700:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r6, r3
 lbl_fn_803A6744_0000170C:
     lwz r0, 0x8(r29)

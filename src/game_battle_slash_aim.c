@@ -37,7 +37,7 @@ extern void res_registerResource(void);
 extern void fn_803EC7A0(void);
 extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
-extern void fn_803ED774(void);
+extern void dungeon_updateBarrierField(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void PSMTXTranspose(void);
@@ -1011,7 +1011,7 @@ asm void fn_803F5AD8(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_803F5AD8_00000D9C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

@@ -40,14 +40,14 @@ extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_80164DCC(void);
 extern void fn_8016C1E0(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void battle_updateTargetAggro(void);
 extern void fn_801750FC(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void actor_getMovementFlags(void);
 extern void fn_8017A33C(void);
 extern void fn_8017AC3C(void);
@@ -480,7 +480,7 @@ lbl_fn_802F09D4_000003BC:
     stw r0, 0xf0(r1)
     stw r0, 0xf4(r1)
     stw r0, 0xf8(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     mr r3, r30
     bl actor_getMovementFlags
     mr r7, r3
@@ -2027,7 +2027,7 @@ lbl_fn_802F2294_000019D4:
     mtctr r4
     bctr
     mr r3, r31
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_802F2294_00001A4C
     lwz r3, 0x14ec(r31)

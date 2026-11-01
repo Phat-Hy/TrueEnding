@@ -51,14 +51,14 @@ extern void fn_800EDFE8(void);
 extern void fn_800F52F0(void);
 extern void fn_800F8014(void);
 extern void fn_8010EDFC(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
 extern void fn_80154654(void);
 extern void equip_applyToCharacter(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_8016DF3C(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
@@ -723,7 +723,7 @@ lbl_fn_80452998_00000780:
     stw r3, 0x14d8(r29)
     stw r0, 0x14c8(r29)
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0x14d4(r29)
     lwz r4, 0x14d8(r29)
     lwz r3, lbl_8087F408
@@ -978,7 +978,7 @@ lbl_fn_80452B6C_00000B14:
     bl fn_80178668
     lwz r3, lbl_8087F8A0
     lwz r3, 0x48(r3)
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_80452B6C_00000B70
     lwz r3, lbl_8087F430

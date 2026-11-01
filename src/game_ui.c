@@ -38,7 +38,7 @@ extern void fn_80134168(void);
 extern void fn_80156120(void);
 extern void fn_8016ADF4(void);
 extern void fn_8016E484(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void fn_801789D8(void);
 extern void actor_getMovementFlags(void);
 extern void fn_8017AC24(void);
@@ -109,7 +109,7 @@ void fn_8003E688(void);
 void fn_8003E6B8(void);
 void fn_8003E918(void);
 void fn_8003E950(void);
-void fn_8003EA3C(void);
+void ui_drawColoredQuad(void);
 void ui_destroyWidget(void);
 void fn_8003F030(void);
 void fn_8003F1E4(void);
@@ -410,7 +410,7 @@ lbl_fn_8003E950_00000398:
     blr
 }
 
-asm void fn_8003EA3C(void)
+asm void ui_drawColoredQuad(void)
 {
     nofralloc
     stwu r1, -0xe0(r1)
@@ -427,10 +427,10 @@ asm void fn_8003EA3C(void)
     mr r29, r8
     mr r31, r9
     mr r30, r10
-    beq lbl_fn_8003EA3C_00000460
+    beq lbl_ui_drawColoredQuad_00000460
     rlwinm r0, r7, 0, 28, 28
     cmplwi r0, 0x8
-    beq lbl_fn_8003EA3C_00000460
+    beq lbl_ui_drawColoredQuad_00000460
     addi r3, r5, 0x7d4
     li r4, 0x40
     li r5, 0x9
@@ -444,22 +444,22 @@ asm void fn_8003EA3C(void)
     li r5, -0x1
     bl fn_80133F6C
     cmpwi r3, 0x0
-    bgt lbl_fn_8003EA3C_00000444
+    bgt lbl_ui_drawColoredQuad_00000444
     lwz r0, 0x1c(r24)
     rlwinm r28, r28, 0, 7, 5
     oris r0, r0, 0x2000
     stw r0, 0x1c(r24)
-lbl_fn_8003EA3C_00000444:
+lbl_ui_drawColoredQuad_00000444:
     rlwinm r0, r28, 0, 16, 16
     cmplwi r0, 0x8000
-    bne lbl_fn_8003EA3C_00000460
+    bne lbl_ui_drawColoredQuad_00000460
     lwz r0, 0x1c(r24)
     rlwinm r28, r28, 0, 17, 15
     oris r0, r0, 0x1000
     stw r0, 0x1c(r24)
-lbl_fn_8003EA3C_00000460:
+lbl_ui_drawColoredQuad_00000460:
     cmpwi r26, 0x0
-    beq lbl_fn_8003EA3C_00000488
+    beq lbl_ui_drawColoredQuad_00000488
     mr r3, r24
     mr r4, r25
     mr r7, r28
@@ -467,11 +467,11 @@ lbl_fn_8003EA3C_00000460:
     addi r6, r27, 0x7d4
     addi r5, r26, 0x7d4
     bl fn_80040B44
-    b lbl_fn_8003EA3C_000004DC
-lbl_fn_8003EA3C_00000488:
+    b lbl_ui_drawColoredQuad_000004DC
+lbl_ui_drawColoredQuad_00000488:
     lwz r0, lbl_8087EE70
     cmpwi r0, 0x0
-    bne lbl_fn_8003EA3C_000004C0
+    bne lbl_ui_drawColoredQuad_000004C0
     lis r5, lbl_80730C70@ha
     li r3, 0x43c
     addi r5, r5, lbl_80730C70@l
@@ -480,11 +480,11 @@ lbl_fn_8003EA3C_00000488:
     li r7, 0x0
     bl mem_alloc
     cmpwi r3, 0x0
-    beq lbl_fn_8003EA3C_000004BC
+    beq lbl_ui_drawColoredQuad_000004BC
     bl fn_8012B0B0
-lbl_fn_8003EA3C_000004BC:
+lbl_ui_drawColoredQuad_000004BC:
     stw r3, lbl_8087EE70
-lbl_fn_8003EA3C_000004C0:
+lbl_ui_drawColoredQuad_000004C0:
     lwz r5, lbl_8087EE70
     mr r3, r24
     mr r4, r25
@@ -492,58 +492,58 @@ lbl_fn_8003EA3C_000004C0:
     mr r8, r29
     addi r6, r27, 0x7d4
     bl fn_80040B44
-lbl_fn_8003EA3C_000004DC:
+lbl_ui_drawColoredQuad_000004DC:
     cmpwi r25, 0x0
-    beq lbl_fn_8003EA3C_0000083C
+    beq lbl_ui_drawColoredQuad_0000083C
     cmpwi r24, 0x0
-    beq lbl_fn_8003EA3C_0000083C
+    beq lbl_ui_drawColoredQuad_0000083C
     lwz r4, 0x0(r24)
     li r3, 0x0
     subi r4, r4, 0x1
     cmplwi r4, 0x4
-    bgt lbl_fn_8003EA3C_00000514
+    bgt lbl_ui_drawColoredQuad_00000514
     li r0, 0x1
     slw r0, r0, r4
     andi. r0, r0, 0x19
-    beq lbl_fn_8003EA3C_00000514
+    beq lbl_ui_drawColoredQuad_00000514
     li r3, 0x1
-lbl_fn_8003EA3C_00000514:
+lbl_ui_drawColoredQuad_00000514:
     cmpwi r3, 0x0
-    beq lbl_fn_8003EA3C_0000083C
+    beq lbl_ui_drawColoredQuad_0000083C
     lwz r3, 0xb0(r25)
     bl fn_800EFC64
     cmpwi r3, 0x0
-    beq lbl_fn_8003EA3C_000005F0
+    beq lbl_ui_drawColoredQuad_000005F0
     cmpwi r31, 0x0
-    beq lbl_fn_8003EA3C_00000538
-    b lbl_fn_8003EA3C_0000053C
-lbl_fn_8003EA3C_00000538:
+    beq lbl_ui_drawColoredQuad_00000538
+    b lbl_ui_drawColoredQuad_0000053C
+lbl_ui_drawColoredQuad_00000538:
     addi r31, r27, 0x528
-lbl_fn_8003EA3C_0000053C:
+lbl_ui_drawColoredQuad_0000053C:
     psq_l f1, 0x0(r31), 0, 0
     cmpwi r30, 0x0
     lfs f2, 0x8(r31)
     addi r3, r1, 0x14
     stfs f2, 0x1c(r1)
     psq_st f1, 0x0(r3), 0, 0
-    beq lbl_fn_8003EA3C_0000055C
-    b lbl_fn_8003EA3C_00000560
-lbl_fn_8003EA3C_0000055C:
+    beq lbl_ui_drawColoredQuad_0000055C
+    b lbl_ui_drawColoredQuad_00000560
+lbl_ui_drawColoredQuad_0000055C:
     addi r30, r27, 0x534
-lbl_fn_8003EA3C_00000560:
+lbl_ui_drawColoredQuad_00000560:
     psq_l f1, 0x0(r30), 0, 0
     cmpwi r26, 0x0
     lfs f2, 0x8(r30)
     addi r3, r1, 0x8
     stfs f2, 0x10(r1)
     psq_st f1, 0x0(r3), 0, 0
-    beq lbl_fn_8003EA3C_00000588
+    beq lbl_ui_drawColoredQuad_00000588
     mr r3, r26
     bl fn_8017AC24
-    b lbl_fn_8003EA3C_0000058C
-lbl_fn_8003EA3C_00000588:
+    b lbl_ui_drawColoredQuad_0000058C
+lbl_ui_drawColoredQuad_00000588:
     lfs f1, lbl_808807C8
-lbl_fn_8003EA3C_0000058C:
+lbl_ui_drawColoredQuad_0000058C:
     li r0, 0x0
     stw r0, 0x20(r1)
     lwz r3, lbl_8087F9E8
@@ -555,27 +555,27 @@ lbl_fn_8003EA3C_0000058C:
     addi r9, r1, 0x20
     bl fn_8059B670
     addic. r3, r1, 0x20
-    beq lbl_fn_8003EA3C_000005F0
+    beq lbl_ui_drawColoredQuad_000005F0
     lwz r4, 0x20(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_8003EA3C_000005F0
+    beq lbl_ui_drawColoredQuad_000005F0
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_8003EA3C_000005E8
+    beq lbl_ui_drawColoredQuad_000005E8
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8003EA3C_000005E8:
+lbl_ui_drawColoredQuad_000005E8:
     li r0, 0x0
     stw r0, 0x20(r1)
-lbl_fn_8003EA3C_000005F0:
+lbl_ui_drawColoredQuad_000005F0:
     cmpwi r26, 0x0
-    beq lbl_fn_8003EA3C_0000063C
+    beq lbl_ui_drawColoredQuad_0000063C
     lwz r0, 0x4(r24)
     cmpwi r0, 0x0
-    bge lbl_fn_8003EA3C_0000063C
+    bge lbl_ui_drawColoredQuad_0000063C
     addi r3, r26, 0x7d4
     li r4, 0x23
     li r5, 0x9
@@ -585,27 +585,27 @@ lbl_fn_8003EA3C_000005F0:
     li r5, -0x1
     bl fn_80133F6C
     cmpwi r3, 0x0
-    bgt lbl_fn_8003EA3C_0000063C
+    bgt lbl_ui_drawColoredQuad_0000063C
     lwz r0, 0x1c(r24)
     rlwinm r28, r28, 0, 7, 5
     oris r0, r0, 0x2000
     stw r0, 0x1c(r24)
-lbl_fn_8003EA3C_0000063C:
+lbl_ui_drawColoredQuad_0000063C:
     cmpwi r26, 0x0
-    beq lbl_fn_8003EA3C_0000083C
+    beq lbl_ui_drawColoredQuad_0000083C
     cmpwi r27, 0x0
-    beq lbl_fn_8003EA3C_0000083C
+    beq lbl_ui_drawColoredQuad_0000083C
     mr r3, r25
     bl fn_8021A684
     cmpwi r3, 0x0
-    beq lbl_fn_8003EA3C_0000083C
+    beq lbl_ui_drawColoredQuad_0000083C
     addi r31, r26, 0x7d4
     addi r30, r27, 0x7d4
     mr r3, r31
     li r4, 0x1a
     bl fn_80133EE8
     cmpwi r3, 0x0
-    beq lbl_fn_8003EA3C_000006B4
+    beq lbl_ui_drawColoredQuad_000006B4
     mr r3, r31
     li r4, 0x1a
     bl fn_80133EE8
@@ -621,12 +621,12 @@ lbl_fn_8003EA3C_0000063C:
     stw r6, 0x98(r1)
     stw r0, 0x9c(r1)
     bl fn_80133FBC
-lbl_fn_8003EA3C_000006B4:
+lbl_ui_drawColoredQuad_000006B4:
     mr r3, r31
     li r4, 0x1c
     bl fn_80133EE8
     cmpwi r3, 0x0
-    beq lbl_fn_8003EA3C_00000704
+    beq lbl_ui_drawColoredQuad_00000704
     mr r3, r31
     li r4, 0x1c
     bl fn_80133EE8
@@ -642,12 +642,12 @@ lbl_fn_8003EA3C_000006B4:
     stw r6, 0x84(r1)
     stw r0, 0x88(r1)
     bl fn_80133FBC
-lbl_fn_8003EA3C_00000704:
+lbl_ui_drawColoredQuad_00000704:
     mr r3, r31
     li r4, 0x1e
     bl fn_80133EE8
     cmpwi r3, 0x0
-    beq lbl_fn_8003EA3C_00000754
+    beq lbl_ui_drawColoredQuad_00000754
     mr r3, r31
     li r4, 0x1e
     bl fn_80133EE8
@@ -663,12 +663,12 @@ lbl_fn_8003EA3C_00000704:
     stw r6, 0x70(r1)
     stw r0, 0x74(r1)
     bl fn_80133FBC
-lbl_fn_8003EA3C_00000754:
+lbl_ui_drawColoredQuad_00000754:
     mr r3, r31
     li r4, 0x20
     bl fn_80133EE8
     cmpwi r3, 0x0
-    beq lbl_fn_8003EA3C_000007A4
+    beq lbl_ui_drawColoredQuad_000007A4
     mr r3, r31
     li r4, 0x20
     bl fn_80133EE8
@@ -684,12 +684,12 @@ lbl_fn_8003EA3C_00000754:
     stw r6, 0x5c(r1)
     stw r0, 0x60(r1)
     bl fn_80133FBC
-lbl_fn_8003EA3C_000007A4:
+lbl_ui_drawColoredQuad_000007A4:
     mr r3, r31
     li r4, 0x34
     bl fn_80133EE8
     cmpwi r3, 0x0
-    beq lbl_fn_8003EA3C_0000083C
+    beq lbl_ui_drawColoredQuad_0000083C
     mr r3, r31
     li r4, 0x34
     bl fn_80133EE8
@@ -723,7 +723,7 @@ lbl_fn_8003EA3C_000007A4:
     stfd f0, 0xb8(r1)
     lwz r4, 0xbc(r1)
     bl fn_8044D6E0
-lbl_fn_8003EA3C_0000083C:
+lbl_ui_drawColoredQuad_0000083C:
     lwz r3, 0x4(r25)
     lbz r0, lbl_8087EE74
     stw r3, 0x40(r1)
@@ -736,7 +736,7 @@ lbl_fn_8003EA3C_0000083C:
     lwz r0, 0x1c(r24)
     srwi r0, r0, 31
     stw r0, 0x48(r1)
-    bne lbl_fn_8003EA3C_000008A4
+    bne lbl_ui_drawColoredQuad_000008A4
     lis r3, lbl_807C6BB8@ha
     li r0, 0x0
     stwu r0, lbl_807C6BB8@l(r3)
@@ -750,38 +750,38 @@ lbl_fn_8003EA3C_0000083C:
     stw r25, 0xc(r3)
     bl __register_global_object
     stb r25, lbl_8087EE74
-lbl_fn_8003EA3C_000008A4:
+lbl_ui_drawColoredQuad_000008A4:
     lis r27, lbl_807C6BB8@ha
     addi r27, r27, lbl_807C6BB8@l
     lwz r0, 0xc(r27)
     cmpwi r0, 0x0
-    beq lbl_fn_8003EA3C_0000090C
+    beq lbl_ui_drawColoredQuad_0000090C
     li r28, 0x0
     li r25, 0x0
-    b lbl_fn_8003EA3C_00000900
-lbl_fn_8003EA3C_000008C4:
+    b lbl_ui_drawColoredQuad_00000900
+lbl_ui_drawColoredQuad_000008C4:
     lwz r0, 0x0(r27)
     add r3, r0, r25
     lwzx r0, r25, r0
     cmpwi r0, -0x1
-    beq lbl_fn_8003EA3C_000008E0
+    beq lbl_ui_drawColoredQuad_000008E0
     cmpwi r0, 0x7
-    bne lbl_fn_8003EA3C_000008F8
-lbl_fn_8003EA3C_000008E0:
+    bne lbl_ui_drawColoredQuad_000008F8
+lbl_ui_drawColoredQuad_000008E0:
     lwz r12, 0x4(r3)
     mr r4, r26
     addi r5, r1, 0x38
     li r3, 0x7
     mtctr r12
     bctrl
-lbl_fn_8003EA3C_000008F8:
+lbl_ui_drawColoredQuad_000008F8:
     addi r28, r28, 0x1
     addi r25, r25, 0x8
-lbl_fn_8003EA3C_00000900:
+lbl_ui_drawColoredQuad_00000900:
     lwz r0, 0x4(r27)
     cmpw r28, r0
-    blt lbl_fn_8003EA3C_000008C4
-lbl_fn_8003EA3C_0000090C:
+    blt lbl_ui_drawColoredQuad_000008C4
+lbl_ui_drawColoredQuad_0000090C:
     addi r11, r1, 0xe0
     lwz r3, 0x0(r24)
     bl _restgpr_24
@@ -2946,7 +2946,7 @@ lbl_fn_80040B44_000026B8:
     beq lbl_fn_80040B44_00002714
     lwz r4, 0x2f0(r23)
     addi r3, r1, 0x8
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r26
     addi r4, r1, 0x8
     li r5, 0x20

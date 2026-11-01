@@ -93,7 +93,7 @@ extern u32 lbl_80881534;
 void fn_800F7250(void);
 void fn_800F7258(void);
 void fn_800F7260(void);
-void fn_800F72CC(void);
+void vec3_scale(void);
 void fn_800F72F4(void);
 void fn_800F7F60(void);
 void fn_800F7F80(void);
@@ -171,7 +171,7 @@ asm void fn_800F7260(void)
     blr
 }
 
-asm void fn_800F72CC(void)
+asm void vec3_scale(void)
 {
     nofralloc
     lfs f3, 0x8(r4)
@@ -415,7 +415,7 @@ lbl_fn_800F72F4_000003A4:
     bl fn_800F7FF8
     addi r3, r1, 0x16c
     addi r4, r1, 0x1a4
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x1bc
     addi r4, r1, 0x16c
     bl fn_80012C88
@@ -423,11 +423,11 @@ lbl_fn_800F72F4_000003A4:
     bl fn_800F7FF8
     addi r3, r1, 0x154
     addi r4, r1, 0x1a4
-    bl fn_800F72CC
+    bl vec3_scale
     lfs f1, lbl_80881514
     addi r3, r1, 0x160
     addi r4, r1, 0x154
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x1b0
     addi r4, r1, 0x160
     bl fn_80013484
@@ -668,7 +668,7 @@ lbl_fn_800F72F4_0000076C:
     lfs f1, lbl_808814B0
     addi r3, r1, 0x9c
     addi r4, r1, 0x1a4
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0xa8
     addi r4, r1, 0x1b0
     addi r5, r1, 0x9c
@@ -754,7 +754,7 @@ lbl_fn_800F72F4_0000088C:
     addi r3, r1, 0x84
     addi r4, r1, 0x78
     fmuls f1, f31, f0
-    bl fn_800F72CC
+    bl vec3_scale
     mr r3, r22
     addi r4, r1, 0x84
     bl fn_80012C88
@@ -924,7 +924,7 @@ lbl_fn_800F72F4_00000B7C:
     lfs f1, lbl_808814B0
     addi r3, r1, 0x48
     addi r4, r1, 0x1a4
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x54
     addi r4, r1, 0x1b0
     addi r5, r1, 0x48

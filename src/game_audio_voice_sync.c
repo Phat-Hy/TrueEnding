@@ -39,7 +39,7 @@ extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void fn_80176ACC(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -2976,7 +2976,7 @@ lbl_fn_803073C4_0000289C:
     mr r4, r24
     addi r3, r1, 0x2d0
     addi r5, r24, 0x528
-    bl fn_80176548
+    bl battle_calcExpPosition
     li r20, 0x0
     stw r20, 0x6ac(r1)
     lfs f5, lbl_80884B88

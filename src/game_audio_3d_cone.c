@@ -21,7 +21,7 @@ extern void fn_8012A288(void);
 extern void boss_updatePhaseState(void);
 extern void quest_ctorRewardItem(void);
 extern void actor_setState(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -1506,7 +1506,7 @@ lbl_fn_80322AD4_0000142C:
     stw r0, 0x60(r1)
     stw r0, 0x64(r1)
     stw r0, 0x68(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lis r7, 0x8000
     lwz r3, lbl_8087EE98
     lfs f1, 0x14(r1)

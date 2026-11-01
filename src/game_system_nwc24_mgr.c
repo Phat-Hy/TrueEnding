@@ -25,7 +25,7 @@ extern void mission_updateStub(void);
 extern void fn_800A56A8(void);
 extern void fn_800A58D0(void);
 extern void fn_800F7260(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void fn_800F7FD8(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_801002DC(void);
@@ -429,7 +429,7 @@ lbl_fn_80382A1C_000001E4:
     lfs f1, lbl_8088593C
     addi r3, r1, 0x74
     addi r4, r1, 0x68
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x188
     addi r4, r1, 0x74
     bl fn_80012C88

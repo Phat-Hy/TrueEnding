@@ -15,7 +15,7 @@ extern void res_registerResource(void);
 extern void fn_8027EB14(void);
 extern void fn_802826A0(void);
 extern void fn_802829DC(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -1853,7 +1853,7 @@ lbl_fn_80281924_00001A08:
     lfs f2, 0x530(r6)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0xdc(r1)
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     b lbl_fn_80281924_00001A8C
 lbl_fn_80281924_00001A44:
     lwz r0, 0x7e0(r3)

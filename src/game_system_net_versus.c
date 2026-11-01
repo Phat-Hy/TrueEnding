@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void ref_releaseHandle(void);
 extern void fn_8011F8F4(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_80154654(void);
@@ -1168,7 +1168,7 @@ lbl_fn_8039F08C_00000EC0:
 lbl_fn_8039F08C_00000ED4:
     lwz r3, lbl_8087F8A0
     mr r4, r0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r30, r3
 lbl_fn_8039F08C_00000EE4:
     cmpwi r30, 0x0
@@ -1558,7 +1558,7 @@ lbl_fn_8039F600_00001440:
 lbl_fn_8039F600_00001454:
     lwz r3, lbl_8087F8A0
     mr r4, r0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r31, r3
 lbl_fn_8039F600_00001464:
     cmpwi r31, 0x0
@@ -1737,7 +1737,7 @@ lbl_fn_8039F878_000016B4:
 lbl_fn_8039F878_000016C8:
     lwz r3, lbl_8087F8A0
     mr r4, r0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r4, r3
 lbl_fn_8039F878_000016D8:
     mr r3, r29

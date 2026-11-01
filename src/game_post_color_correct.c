@@ -13,12 +13,12 @@ extern void scissor_clipFrustum(void);
 extern void quest_evaluateConditions(void);
 extern void quest_ctorRewardItem(void);
 extern void equip_applyToCharacter(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void fn_8016F824(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void battle_awardExp(void);
 extern void battle_updateActorStatus(void);
 extern void task_findEntryById(void);
@@ -448,7 +448,7 @@ asm void fn_802C42D4(void)
     stw r31, 0x3c(r1)
     stw r30, 0x38(r1)
     mr r30, r3
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_802C42D4_00000538
     li r31, 0x0
@@ -635,7 +635,7 @@ lbl_fn_802C4480_00000700:
     addi r5, r30, 0x528
     stw r0, 0xa4(r1)
     stw r0, 0xa8(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r3, lbl_8087EE98
     addi r4, r1, 0x68
     lfs f1, 0x24(r1)

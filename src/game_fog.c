@@ -24,7 +24,7 @@ extern void atn_Task_deleteLater(void);
 extern void atn_TaskBase_constructor(void);
 extern void atn_TaskBase_destructor(void);
 extern void atn_TaskBase_isValid(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void msl_releaseRefCount(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
@@ -150,7 +150,7 @@ lbl_fn_800D0DB0_0000010C:
     bl strcpy
     stw r26, 0x18(r1)
     addi r3, r1, 0x18
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r30, 0x0
     beq lbl_fn_800D0DB0_00000148
     addic. r3, r30, 0x4
@@ -262,7 +262,7 @@ lbl_fn_800D0F34_00000290:
     bl strcpy
     stw r26, 0x18(r1)
     addi r3, r1, 0x18
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r30, 0x0
     beq lbl_fn_800D0F34_000002CC
     addic. r3, r30, 0x4
@@ -374,7 +374,7 @@ lbl_fn_800D10B8_00000414:
     bl strcpy
     stw r26, 0x18(r1)
     addi r3, r1, 0x18
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r30, 0x0
     beq lbl_fn_800D10B8_00000450
     addic. r3, r30, 0x4
@@ -522,7 +522,7 @@ lbl_fn_800D123C_00000608:
     bl strcpy
     stw r21, 0x18(r1)
     addi r3, r1, 0x18
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r25, 0x0
     beq lbl_fn_800D123C_00000644
     addic. r3, r25, 0x4

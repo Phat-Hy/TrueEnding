@@ -17,7 +17,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800EFD04(void);
 extern void fn_800EFDA0(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F8524(void);
@@ -347,7 +347,7 @@ lbl_fn_80348FF4_00000340:
     fmr f1, f31
     addi r3, r1, 0x28
     addi r4, r1, 0x1c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x48
     addi r4, r31, 0x528
     addi r5, r1, 0x28

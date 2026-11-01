@@ -7,7 +7,7 @@ extern void bloom_processPasses(void);
 extern void quest_updateFlow(void);
 extern void inventory_unequipItem(void);
 extern void actor_setState(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void world_updateMapTransition(void);
 extern void world_getGlobalFlag(void);
 extern void world_getLocalFlag(void);
@@ -1283,7 +1283,7 @@ lbl_fn_8039D4C4_0000100C:
     cmpwi r0, 0x3
     bne lbl_fn_8039D4C4_000010FC
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r28, r3
     b lbl_fn_8039D4C4_000010F4
 lbl_fn_8039D4C4_00001024:

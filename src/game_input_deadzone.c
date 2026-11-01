@@ -18,7 +18,7 @@ extern void msg_getMessageById(void);
 extern void fn_800A55D4(void);
 extern void fn_800A56A8(void);
 extern void fn_800F52F8(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80102824(void);
@@ -39,7 +39,7 @@ extern void fn_801446F0(void);
 extern void dialog_renderWindow(void);
 extern void fn_801533C8(void);
 extern void equip_applyToCharacter(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_80163E70(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
@@ -1313,7 +1313,7 @@ lbl_fn_802EF5FC_0000107C:
     psq_st f1, 0x574(r3), 0, 0
     stfs f2, 0x57c(r3)
     lwz r3, 0x152c(r31)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     lwz r0, 0x155c(r31)
     stw r30, 0x152c(r31)
     cmpwi r0, 0x0
@@ -1392,7 +1392,7 @@ lbl_fn_802EF5FC_000011A4:
     psq_st f1, 0x574(r3), 0, 0
     stfs f2, 0x57c(r3)
     lwz r3, 0x14e8(r31)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     stw r30, 0x14e8(r31)
     mr r5, r31
     li r4, 0x0
@@ -1771,7 +1771,7 @@ lbl_fn_802F0328_000017C0:
     addi r3, r1, 0x44
     fmr f1, f29
     addi r4, r31, 0x14d8
-    bl fn_800F72CC
+    bl vec3_scale
     fmr f1, f30
     addi r3, r1, 0x44
     bl fn_8012A190

@@ -18,7 +18,7 @@ extern void mem_alloc(void);
 extern void fn_80093F1C(void);
 extern void fn_80094778(void);
 extern void fn_800F52F0(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void fn_800F7F80(void);
 extern void fn_800F7FB4(void);
 extern void fn_801162A0(void);
@@ -54,7 +54,7 @@ extern void fn_8015D8C0(void);
 extern void fn_8015DEC0(void);
 extern void fn_8015E1B8(void);
 extern void fn_8015E4B0(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_80160324(void);
 extern void fn_801681B0(void);
 extern void fn_80168824(void);
@@ -1286,7 +1286,7 @@ asm void fn_8015076C(void)
     lfs f1, lbl_808819F8
     addi r3, r1, 0xbc
     addi r4, r28, 0x28
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x124
     addi r4, r1, 0xbc
     bl vec3_copy
@@ -1437,7 +1437,7 @@ lbl_fn_8015076C_00001158:
     lfs f1, lbl_80881B0C
     mr r4, r25
     addi r3, r1, 0x8c
-    bl fn_800F72CC
+    bl vec3_scale
     lfs f1, lbl_8088196C
     addi r3, r1, 0x98
     lfs f2, lbl_808819F8
@@ -1539,7 +1539,7 @@ lbl_fn_8015076C_00001310:
     lfs f1, lbl_808819DC
     addi r3, r1, 0x50
     addi r4, r1, 0x44
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0xd4
     addi r4, r23, 0x528
     addi r5, r1, 0x50
@@ -1550,7 +1550,7 @@ lbl_fn_8015076C_00001310:
     lfs f1, lbl_80881A80
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0xc8
     addi r4, r23, 0x528
     addi r5, r1, 0x38
@@ -1763,7 +1763,7 @@ lbl_fn_8015076C_00001680:
     li r5, -0x1
 lbl_fn_8015076C_00001684:
     li r6, 0x0
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
 lbl_fn_8015076C_0000168C:
     lwz r3, 0xd1c(r23)
     cmpwi r3, 0x0

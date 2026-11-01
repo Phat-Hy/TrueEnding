@@ -49,7 +49,7 @@ extern void str_skipWhitespace(void);
 extern void fn_800EC204(void);
 extern void cam_destroyMsgHandle(void);
 extern void fn_800F52F8(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void viewport_getNextSequenceId(void);
@@ -2393,7 +2393,7 @@ lbl_fn_8041766C_00001EF8:
     fmr f1, f27
     addi r3, r1, 0x20
     addi r4, r1, 0x68
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r25, 0x3e0
     addi r4, r1, 0x20
     bl vec3_copy

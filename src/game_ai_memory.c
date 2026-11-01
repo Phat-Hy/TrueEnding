@@ -21,7 +21,7 @@ extern void dialog_setScriptSlot(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void fn_801561E4(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_80158CA4(void);
 extern void fn_8015E4B0(void);
 extern void fn_8016D74C(void);
@@ -200,7 +200,7 @@ lbl_fn_802604E0_00000160:
     mtctr r3
     bctr
     mr r3, r31
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_802604E0_000001E0
     li r29, 0x0

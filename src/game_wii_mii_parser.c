@@ -44,9 +44,9 @@ extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_80158CA4(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_8015EB2C(void);
 extern void fn_8016D454(void);
 extern void battle_applyStatusEffect(void);
@@ -1352,7 +1352,7 @@ lbl_fn_80566F04_00001024:
     stfs f3, 0x10(r1)
     stfs f0, 0x8(r1)
     stfs f1, 0xc(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
 lbl_fn_80566F04_00001060:
     mr r3, r30
     bl fn_800EB49C
@@ -1588,7 +1588,7 @@ lbl_fn_80566FB8_000013B0:
     stw r0, 0xf08(r31)
     b lbl_fn_80566FB8_000014D8
 lbl_fn_80566FB8_000013BC:
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_80566FB8_00001420
     lwz r3, 0x560(r31)

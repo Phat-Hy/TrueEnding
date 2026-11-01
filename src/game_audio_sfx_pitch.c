@@ -29,7 +29,7 @@ extern void str_skipWhitespace(void);
 extern void fn_800F52F0(void);
 extern void fn_800F52F8(void);
 extern void fn_800F7260(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F7FD8(void);
@@ -2026,7 +2026,7 @@ lbl_fn_80314BD8_000019E8:
     lfs f1, lbl_80884D24
     addi r3, r1, 0x5c
     addi r4, r1, 0x50
-    bl fn_800F72CC
+    bl vec3_scale
     lwz r3, 0x161c(r30)
     bl npc_getPosition
     mr r4, r3

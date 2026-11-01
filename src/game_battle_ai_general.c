@@ -49,7 +49,7 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_8011D424(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_801207D4(void);
@@ -288,7 +288,7 @@ lbl_fn_8043C368_000000F4:
     bne lbl_fn_8043C368_0000010C
     lwz r3, lbl_8087F8A0
     lwz r4, 0x24(r4)
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0x30c(r31)
 lbl_fn_8043C368_0000010C:
     lwz r3, 0x30c(r31)

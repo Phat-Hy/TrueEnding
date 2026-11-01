@@ -21,7 +21,7 @@ extern void mem_getAllocSize(void);
 extern void fn_800904E0(void);
 extern void fn_8009A584(void);
 extern void str_findChar(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_8024373C(void);
 extern void fn_80243758(void);
 extern void fn_802437B4(void);
@@ -572,7 +572,7 @@ lbl_taskManager_updateTasks_000005BC:
     bl strcpy
     stw r31, 0x18(r1)
     addi r3, r1, 0x18
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r24, 0x0
     beq lbl_taskManager_updateTasks_000005F8
     addic. r3, r24, 0x4

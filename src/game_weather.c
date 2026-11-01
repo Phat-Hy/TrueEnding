@@ -42,7 +42,7 @@ extern void fn_80157444(void);
 extern void fn_8015783C(void);
 extern void fn_80157C34(void);
 extern void fn_8015802C(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_8015F568(void);
 extern void fn_8016125C(void);
 extern void fn_801647BC(void);
@@ -52,7 +52,7 @@ extern void fn_8016DDB0(void);
 extern void battle_canTargetActor(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void battle_generateLootDrops(void);
 extern void fn_8018E438(void);
 extern void fn_801B77DC(void);
@@ -1457,7 +1457,7 @@ lbl_fn_800E7F04_00001200:
     stw r0, 0xb8(r1)
     stfs f27, 0xd0(r1)
     stw r27, 0xd8(r1)
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     lfs f1, lbl_808812DC
     mr r3, r23
     lfs f2, lbl_808812D8
@@ -1474,7 +1474,7 @@ lbl_fn_800E7F04_00001310:
     lwz r23, lbl_8087F048
     mr r4, r17
     addi r3, r1, 0x10
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     lfs f1, lbl_808812DC
     mr r3, r23
     lfs f2, lbl_808812D8
@@ -1627,7 +1627,7 @@ lbl_fn_800E854C_0000150C:
     stfs f3, 0x10(r1)
     stfs f0, 0x8(r1)
     stfs f1, 0xc(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
 lbl_fn_800E854C_00001548:
     lwz r12, 0x0(r30)
     mr r3, r30

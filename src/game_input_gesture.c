@@ -37,7 +37,7 @@ extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -1104,7 +1104,7 @@ lbl_fn_802EDFE4_00000CF4:
     lwz r29, lbl_8087F048
     mr r4, r30
     addi r3, r1, 0x60
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     mr r3, r29
     addi r4, r1, 0x60
     li r5, 0x80

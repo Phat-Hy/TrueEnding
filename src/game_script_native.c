@@ -22,7 +22,7 @@ extern void quest_evaluateConditions(void);
 extern void fn_801489CC(void);
 extern void dialog_renderWindow(void);
 extern void inventory_applyItemStats(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_80158CA4(void);
 extern void fn_8015DEC0(void);
 extern void fn_8015E4B0(void);
@@ -1142,7 +1142,7 @@ asm void fn_80253884(void)
     psq_l f1, 0x534(r3), 0, 0
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x88(r1)
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_80253884_00000FC8
     lwz r3, 0x560(r31)

@@ -26,7 +26,7 @@ extern void fn_80148B0C(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015BAF0(void);
 extern void fn_8015BDD8(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
@@ -257,7 +257,7 @@ lbl_fn_802CB1CC_00000224:
     addi r4, r1, 0x20
     li r5, -0x1
     li r6, 0x0
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     li r0, 0x0
     stw r0, 0x14d0(r31)
 lbl_fn_802CB1CC_00000254:

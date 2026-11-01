@@ -57,7 +57,7 @@ extern void fn_803EC7A0(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
-extern void fn_803ED774(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_803EDB18(void);
 extern void fn_803F10AC(void);
 extern void fn_803F1DA4(void);
@@ -1477,7 +1477,7 @@ asm void fn_80413AAC(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_80413AAC_00001260:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

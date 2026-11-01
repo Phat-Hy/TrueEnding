@@ -32,7 +32,7 @@ extern void battle_updateActorStatus(void);
 extern void task_mapIdToQueue(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void world_setGlobalFlag(void);
 extern void kpad_testActiveFlags(void);
 extern void fn_80389838(void);
@@ -545,7 +545,7 @@ asm void fn_802D5D18(void)
     b lbl_fn_802D5D18_00000958
 lbl_fn_802D5D18_000006D4:
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r26, r3
     b lbl_fn_802D5D18_00000738
 lbl_fn_802D5D18_000006E4:
@@ -579,7 +579,7 @@ lbl_fn_802D5D18_00000744:
     li r0, 0x0
     stw r0, 0x8(r1)
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r29, r3
     b lbl_fn_802D5D18_00000848
 lbl_fn_802D5D18_0000075C:

@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8021ECD0(void);
 extern void world_getGlobalFlag(void);
@@ -1288,7 +1288,7 @@ lbl_fn_803CA0F4_00000F0C:
 lbl_fn_803CA0F4_00000F48:
     lwz r3, lbl_8087F8A0
     lwz r4, 0x0(r4)
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0xc(r22)
     addi r23, r23, 0x4
     addi r22, r22, 0x4
@@ -1302,7 +1302,7 @@ lbl_fn_803CA0F4_00000F64:
     beq lbl_fn_803CA0F4_00000F90
     lwz r3, lbl_8087F8A0
     lwz r4, 0x0(r4)
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0x8c(r24)
     b lbl_fn_803CA0F4_00000FC4
 lbl_fn_803CA0F4_00000F90:

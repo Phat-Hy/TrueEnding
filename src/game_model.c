@@ -29,7 +29,7 @@ extern void fn_800BF0EC(void);
 extern void fn_800C5644(void);
 extern void fn_800D5B58(void);
 extern void fn_800D5F68(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_805ED390(void);
 extern void PSMTXConcat(void);
 extern void fn_80615E00(void);
@@ -890,7 +890,7 @@ lbl_atn_Model_updateAnimation_00000B60:
     addi r3, r1, 0x6c
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x6c(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x6c
     beq lbl_atn_Model_updateAnimation_00000BA8
     addic. r3, r3, 0x4
@@ -1262,7 +1262,7 @@ lbl_atn_Model_updateAnimation_000010DC:
     addi r3, r1, 0x60
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x60(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x60
     beq lbl_atn_Model_updateAnimation_00001124
     addic. r3, r3, 0x4
@@ -1342,7 +1342,7 @@ lbl_atn_Model_updateAnimation_0000120C:
     addi r3, r1, 0x54
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x54(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x54
     beq lbl_atn_Model_updateAnimation_00001254
     addic. r3, r3, 0x4
@@ -1410,7 +1410,7 @@ lbl_atn_Model_updateAnimation_0000130C:
     addi r3, r1, 0x48
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x48(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x48
     beq lbl_atn_Model_updateAnimation_00001354
     addic. r3, r3, 0x4

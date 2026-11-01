@@ -23,7 +23,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
 extern void str_findChar(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void kpad_getClampData(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
@@ -1136,7 +1136,7 @@ lbl_fn_80491528_00000E2C:
     bl strcpy
     stw r22, 0x2c(r1)
     addi r3, r1, 0x2c
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r20, 0x0
     beq lbl_fn_80491528_00000E68
     addic. r3, r20, 0x4
@@ -1230,7 +1230,7 @@ lbl_fn_80491528_00000F84:
     bl strcpy
     stw r28, 0x20(r1)
     addi r3, r1, 0x20
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r21, 0x0
     beq lbl_fn_80491528_00000FC0
     addic. r3, r21, 0x4

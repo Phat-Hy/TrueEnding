@@ -41,7 +41,7 @@ extern void res_registerResource(void);
 extern void fn_80272C6C(void);
 extern void fn_80272CF0(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void atn_LoadHandle_constructor(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -1088,7 +1088,7 @@ lbl_fn_80271DAC_00000DD0:
     lfs f2, 0x530(r6)
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x7c(r1)
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     b lbl_fn_80271DAC_00000E54
 lbl_fn_80271DAC_00000E0C:
     lwz r0, 0x7e0(r3)

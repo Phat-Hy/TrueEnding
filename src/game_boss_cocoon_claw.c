@@ -17,7 +17,7 @@ extern void quest_evaluateConditions(void);
 extern void fn_80148B0C(void);
 extern void fn_8015B238(void);
 extern void actor_setState(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -710,7 +710,7 @@ lbl_fn_80464CF0_00000888:
     fdivs f7, f7, f8
     fadds f0, f0, f7
     stfs f0, 0x6c(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lfs f8, 0x64(r1)
     lis r7, 0x8000
     lfs f7, lbl_80886DB8
@@ -892,7 +892,7 @@ lbl_fn_80464CF0_00000BB0:
     addi r5, r31, 0x528
     stw r0, 0x204(r1)
     stw r0, 0x208(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lfs f8, 0x44(r1)
     lis r7, 0x8000
     lfs f7, lbl_80886DB8

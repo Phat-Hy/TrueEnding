@@ -9,7 +9,7 @@ extern void _restgpr_14(void);
 extern void _restgpr_18(void);
 extern void _savegpr_14(void);
 extern void _savegpr_18(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void ui_destroyWidget(void);
 extern void fn_80051C78(void);
 extern void ref_releaseHandle(void);
@@ -1555,7 +1555,7 @@ lbl_fn_804E4EB4_00001344:
     stw r30, 0x88(r1)
     lwz r5, 0x0(r23)
     mr r6, r5
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r3, 0x0(r23)
     li r4, 0xa
     bl fn_8015EFAC
@@ -1630,7 +1630,7 @@ lbl_fn_804E4EB4_00001490:
     li r9, 0x0
     li r10, 0x0
     mr r6, r5
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lbz r0, lbl_8087EE74
     extsb. r0, r0
     bne lbl_fn_804E4EB4_000014F4

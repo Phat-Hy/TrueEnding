@@ -23,7 +23,7 @@ extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void equip_getGlobalManager(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
@@ -568,7 +568,7 @@ lbl_fn_80345BA8_00000570:
     mr r30, r3
     bl scene_transformPoint
     mr r4, r30
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0x14c4(r29)
     b lbl_fn_80345BA8_00000AC8
 lbl_fn_80345BA8_000005B0:

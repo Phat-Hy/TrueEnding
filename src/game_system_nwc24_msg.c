@@ -20,7 +20,7 @@ extern void fn_80057A68(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A56A8(void);
 extern void fn_800A58D0(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_800F8524(void);
 extern void fn_8010F6FC(void);
@@ -550,7 +550,7 @@ lbl_fn_80387910_000004D8:
     lfs f1, lbl_80885A68
     addi r3, r1, 0x8c
     addi r4, r1, 0xe0
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x11c
     addi r4, r1, 0x8c
     bl fn_80012C88
@@ -574,7 +574,7 @@ lbl_fn_80387910_00000680:
     stfs f0, 0xcc(r1)
     addi r4, r1, 0xe0
     lfs f1, lbl_80885A68
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0xc8
     addi r4, r1, 0x80
     bl fn_80012C88
@@ -659,7 +659,7 @@ lbl_fn_80387910_00000730:
     lfs f1, 0x10(r1)
     addi r3, r1, 0x14
     addi r4, r1, 0x110
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x20
     addi r4, r1, 0x11c
     addi r5, r1, 0x14

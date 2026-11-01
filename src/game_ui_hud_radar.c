@@ -33,7 +33,7 @@ extern void fn_8014052C(void);
 extern void fn_801446F0(void);
 extern void inventory_unequipItem(void);
 extern void equip_applyToCharacter(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void actor_getMovementFlags(void);
 extern void fn_801A03E8(void);
 extern void fn_801B2EDC(void);
@@ -1481,7 +1481,7 @@ lbl_fn_801C1084_000011B0:
     psq_l f1, 0x0(r5), 0, 0
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x90(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r3, 0x4(r31)
     bl actor_getMovementFlags
     lwz r5, 0x4(r31)

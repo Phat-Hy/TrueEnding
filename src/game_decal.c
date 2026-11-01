@@ -14,7 +14,7 @@ extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_800E70EC(void);
 extern void fn_800E7214(void);
 extern void fn_800E73EC(void);
@@ -36,7 +36,7 @@ extern void fn_80139560(void);
 extern void quest_evaluateConditions(void);
 extern void fn_80155790(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_80158CA4(void);
 extern void fn_8016AFE8(void);
 extern void fn_8016D74C(void);
@@ -202,7 +202,7 @@ lbl_fn_800E589C_0000010C:
     mr r3, r30
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x34(r1)
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_800E589C_000001AC
     lwz r0, 0x55c(r30)
@@ -1047,7 +1047,7 @@ lbl_fn_800E62AC_00000CE0:
     addi r3, r1, 0x20
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x20(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x20
     beq lbl_fn_800E62AC_00000D28
     addic. r3, r3, 0x4

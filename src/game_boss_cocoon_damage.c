@@ -38,7 +38,7 @@ extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void fn_8015AC48(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
 extern void fn_8020A780(void);
@@ -492,7 +492,7 @@ lbl_fn_80457E98_00000468:
     addi r4, r1, 0x20
     li r5, 0x39
     li r6, 0x0
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     li r0, 0x0
     stw r0, 0x1908(r31)
 lbl_fn_80457E98_00000518:

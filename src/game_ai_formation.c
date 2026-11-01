@@ -18,7 +18,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800E41FC(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F84D0(void);
@@ -1610,7 +1610,7 @@ lbl_fn_80266A24_00001458:
     lfs f1, lbl_8088369C
     addi r3, r1, 0x20
     addi r4, r1, 0x50
-    bl fn_800F72CC
+    bl vec3_scale
     mr r3, r30
     addi r4, r1, 0x20
     bl fn_80198514

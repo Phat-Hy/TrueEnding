@@ -36,7 +36,7 @@ extern void task_mapIdToQueue(void);
 extern void res_registerResource(void);
 extern void fn_80249588(void);
 extern void entity_Instance_constructor(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void kpad_testActiveFlags(void);
@@ -275,7 +275,7 @@ asm void fn_80247DA4(void)
 lbl_fn_80247DA4_00000204:
     lwz r3, lbl_8087F428
     li r30, 0x0
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r29, r3
     b lbl_fn_80247DA4_000002C8
 lbl_fn_80247DA4_00000218:

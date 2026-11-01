@@ -34,7 +34,7 @@ extern void fn_800A787C(void);
 extern void fn_800A8BE4(void);
 extern void str_parseInt(void);
 extern void str_findChar(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void atn_LoadHandle_getName(void);
 extern void shockwave_freeEmitter(void);
 extern void fn_804741C0(void);
@@ -1604,7 +1604,7 @@ lbl_fn_80097E80_00001424:
     addi r3, r1, 0x28
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x28(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x28
     beq lbl_fn_80097E80_0000146C
     addic. r3, r3, 0x4

@@ -23,12 +23,12 @@ extern void dialog_renderWindow(void);
 extern void dialog_setScriptSlot(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_8015AC48(void);
 extern void fn_8016BEDC(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void res_findResourceSlot(void);
 extern void fn_802A74A4(void);
 extern void fn_802A7970(void);
@@ -234,7 +234,7 @@ lbl_fn_802A5A1C_000001A0:
     bl fn_802A8718
     b lbl_fn_802A5A1C_00000DFC
     mr r3, r31
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_802A5A1C_000002D4
     lwz r3, 0x1694(r31)
@@ -994,7 +994,7 @@ lbl_fn_802A5A1C_00000D74:
     bl fn_802A711C
     mr r4, r31
     addi r3, r1, 0xc
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     addi r3, r1, 0xc
     lfs f7, lbl_80883E40
     lfs f2, 0x14(r1)

@@ -13,7 +13,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_801092C8(void);
 extern void fn_8011F8F4(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_80161570(void);
@@ -21,7 +21,7 @@ extern void fn_80161B70(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void fn_80170F20(void);
 extern void fn_80171DB0(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void fn_8017A33C(void);
 extern void fn_8017A504(void);
 extern void fn_8036E6D4(void);
@@ -367,7 +367,7 @@ lbl_fn_803A6E24_0000033C:
     b lbl_fn_803A6E24_00000358
 lbl_fn_803A6E24_0000034C:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r31, r3
 lbl_fn_803A6E24_00000358:
     cmpwi r31, 0x0
@@ -481,7 +481,7 @@ lbl_fn_803A6F90_000004B4:
 lbl_fn_803A6F90_000004C8:
     lwz r3, lbl_8087F8A0
     mr r4, r0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r5, r3
 lbl_fn_803A6F90_000004D8:
     cmpwi r5, 0x0
@@ -758,7 +758,7 @@ lbl_fn_803A7124_0000084C:
 lbl_fn_803A7124_000008A0:
     mr r4, r30
     addi r3, r1, 0xb0
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     addi r5, r1, 0xb0
 lbl_fn_803A7124_000008B0:
     lwz r3, 0x10(r29)
@@ -911,7 +911,7 @@ lbl_fn_803A7124_00000A74:
 lbl_fn_803A7124_00000AC8:
     mr r4, r30
     addi r3, r1, 0xa4
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     addi r5, r1, 0xa4
 lbl_fn_803A7124_00000AD8:
     lwz r3, 0x10(r29)
@@ -953,7 +953,7 @@ lbl_fn_803A7124_00000B54:
     beq lbl_fn_803A7124_00000B74
     lwz r4, 0x8(r5)
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r30, r3
     b lbl_fn_803A7124_00000B78
 lbl_fn_803A7124_00000B74:
@@ -1065,7 +1065,7 @@ lbl_fn_803A7124_00000CA0:
 lbl_fn_803A7124_00000CF4:
     mr r4, r30
     addi r3, r1, 0x98
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     addi r5, r1, 0x98
 lbl_fn_803A7124_00000D04:
     lwz r3, 0x10(r29)
@@ -1179,7 +1179,7 @@ lbl_fn_803A7954_00000E6C:
 lbl_fn_803A7954_00000E80:
     lwz r3, lbl_8087F8A0
     mr r4, r0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r29, r3
 lbl_fn_803A7954_00000E90:
     lwz r0, 0x14(r31)
@@ -1230,7 +1230,7 @@ lbl_fn_803A7954_00000F24:
     b lbl_fn_803A7954_00000F40
 lbl_fn_803A7954_00000F34:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r28, r3
 lbl_fn_803A7954_00000F40:
     lwz r3, lbl_8087F430
@@ -2016,7 +2016,7 @@ lbl_fn_803A8470_00001994:
 lbl_fn_803A8470_000019A8:
     lwz r3, lbl_8087F8A0
     mr r4, r0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     mr r31, r3
 lbl_fn_803A8470_000019B8:
     lwz r3, lbl_8087F4A0

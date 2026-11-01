@@ -45,7 +45,7 @@ extern void fn_8012DB04(void);
 extern void battle_canTargetActor(void);
 extern void fn_8017C904(void);
 extern void fn_8035B854(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void fn_803C11A4(void);
 extern void fn_803C1884(void);
 extern void atn_LoadHandle_constructor(void);
@@ -1458,7 +1458,7 @@ lbl_fn_80014A5C_0000115C:
     b lbl_fn_80014A5C_000011E8
 lbl_fn_80014A5C_0000117C:
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     stw r3, 0x80(r22)
     b lbl_fn_80014A5C_000011E8
 lbl_fn_80014A5C_0000118C:
@@ -3175,7 +3175,7 @@ asm void fn_80016888(void)
     lwz r4, 0x48(r4)
     bl fn_80017064
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     mr r28, r3
     addi r29, r1, 0x1c
     li r30, 0x0
@@ -3274,7 +3274,7 @@ lbl_fn_80016888_00002CA8:
     lwz r0, 0x48(r3)
     stw r0, 0x8c(r31)
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     stw r3, 0x80(r31)
     lwz r3, lbl_8087F8A0
     lwz r0, 0x48(r3)

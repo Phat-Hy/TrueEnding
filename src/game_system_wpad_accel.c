@@ -20,7 +20,7 @@ extern void fn_8016D0A0(void);
 extern void fn_80175AEC(void);
 extern void fn_8017C974(void);
 extern void task_mapIdToQueue(void);
-extern void fn_8036554C(void);
+extern void wpad_getActiveDevice(void);
 extern void fn_8036EA6C(void);
 extern void fn_8036EE0C(void);
 extern void world_setGlobalFlag(void);
@@ -1164,7 +1164,7 @@ asm void fn_8036DDD4(void)
     mr r5, r4
     bl PSMTXMultVec
     lwz r3, lbl_8087F428
-    bl fn_8036554C
+    bl wpad_getActiveDevice
     lis r4, lbl_8074DBE8@ha
     lfs f28, lbl_80885708
     lfd f27, lbl_8074DBE8@l(r4)

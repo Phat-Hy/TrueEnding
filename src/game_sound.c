@@ -51,7 +51,7 @@ extern void fn_800D0AB0(void);
 extern void fn_800D19FC(void);
 extern void str_parseInt(void);
 extern void str_findChar(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
 extern void fn_8059D7DC(void);
@@ -341,7 +341,7 @@ lbl_sound_updateActiveTasks_00000100:
     bl strcpy
     stw r23, 0x18(r1)
     addi r3, r1, 0x18
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r28, 0x0
     beq lbl_sound_updateActiveTasks_0000013C
     addic. r3, r28, 0x4

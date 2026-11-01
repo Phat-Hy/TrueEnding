@@ -25,7 +25,7 @@ extern void fn_80108C10(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8012DF7C(void);
 extern void fn_80148B0C(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
 extern void task_findEntryById(void);
@@ -768,7 +768,7 @@ lbl_fn_802DAA38_00000998:
     li r6, 0x0
     stfs f3, 0x138(r1)
     stfs f0, 0x13c(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
     addi r30, r30, 0x1
     addi r28, r28, 0x1c
 lbl_fn_802DAA38_00000A2C:

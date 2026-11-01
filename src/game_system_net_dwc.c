@@ -14,7 +14,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Task_destructor(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_800E1D5C(void);
 extern void fn_801360C4(void);
 extern void fn_801360D8(void);
@@ -332,7 +332,7 @@ lbl_fn_80393BEC_00000378:
     stw r6, 0x24(r1)
     stw r5, 0x28(r1)
     stw r4, 0x2c(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
 lbl_fn_80393BEC_000003A4:
     addic. r28, r1, 0x30
     beq lbl_fn_80393BEC_0000045C

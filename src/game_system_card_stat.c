@@ -23,7 +23,7 @@ extern void fn_80155790(void);
 extern void fn_80155A88(void);
 extern void fn_801562A0(void);
 extern void fn_8015783C(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void fn_80158CA4(void);
 extern void fn_80161880(void);
 extern void fn_8016D74C(void);
@@ -875,7 +875,7 @@ asm void fn_8035CF78(void)
     beq lbl_fn_8035CF78_00000CEC
     b lbl_fn_8035CF78_00000DEC
 lbl_fn_8035CF78_00000B30:
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     bne lbl_fn_8035CF78_00000CB4
     lwz r0, 0x560(r31)

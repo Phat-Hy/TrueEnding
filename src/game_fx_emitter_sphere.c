@@ -34,7 +34,7 @@ extern void fn_800EC204(void);
 extern void fn_800EC24C(void);
 extern void fn_800F7FD8(void);
 extern void system_getNextSequenceId(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
@@ -1633,7 +1633,7 @@ lbl_fn_802885EC_00001594:
     mr r29, r3
     bl scene_transformPoint
     mr r4, r29
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     stw r3, 0x1630(r31)
     b lbl_fn_802885EC_00001928
 lbl_fn_802885EC_000015CC:

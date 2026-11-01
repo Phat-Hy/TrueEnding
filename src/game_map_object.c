@@ -10,7 +10,7 @@ extern void fn_80063764(void);
 extern void mem_alloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_8011F91C(void);
+extern void skill_findNodeBySlotId(void);
 extern void dialog_setScriptSlot(void);
 extern void fn_8014C228(void);
 extern void fn_801598B4(void);
@@ -1553,7 +1553,7 @@ lbl_fn_80183588_00001490:
     b lbl_fn_80183588_000014D0
 lbl_fn_80183588_000014A0:
     lwz r3, lbl_8087F8A0
-    bl fn_8011F91C
+    bl skill_findNodeBySlotId
     lwz r0, 0x1c4(r31)
     slwi r0, r0, 2
     add r0, r31, r0

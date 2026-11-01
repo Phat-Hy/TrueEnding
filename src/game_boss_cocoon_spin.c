@@ -11,7 +11,7 @@ extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void str_findChar(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void atn_Arc_decompressChunk(void);
 extern void fn_8046D1EC(void);
 extern void fn_8046F5CC(void);
@@ -1352,7 +1352,7 @@ lbl_fn_804714B0_0000102C:
     bl strcpy
     stw r31, 0x18(r1)
     addi r3, r1, 0x18
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi r21, 0x0
     beq lbl_fn_804714B0_00001068
     addic. r3, r21, 0x4

@@ -15,7 +15,7 @@ extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void str_calcHash(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void fn_8021A4CC(void);
 extern void fn_80288390(void);
 extern void fn_803BF818(void);
@@ -198,7 +198,7 @@ lbl_fn_8053B82C_00000128:
     addi r3, r3, lbl_80793BC8@l
     stw r3, 0x20(r1)
     mr r3, r30
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi cr6, r30, 0x0
 lbl_fn_8053B82C_00000144:
     mr r4, r25
@@ -1343,7 +1343,7 @@ lbl_fn_8053C78C_00001080:
     addi r3, r3, lbl_80793BC8@l
     stw r3, 0x20(r1)
     mr r3, r30
-    bl fn_800DCA6C
+    bl sky_renderStub
     cmpwi cr6, r30, 0x0
 lbl_fn_8053C78C_0000109C:
     mr r4, r25

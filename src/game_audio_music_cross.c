@@ -23,7 +23,7 @@ extern void atn_Task_setActive(void);
 extern void sound_playSpatialEffect(void);
 extern void fn_800EC204(void);
 extern void fn_800F530C(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_updateCulling(void);
 extern void fn_8010A308(void);
 extern void fn_8010F668(void);
@@ -371,7 +371,7 @@ lbl_fn_8030C490_0000037C:
     lfs f1, lbl_80884BCC
     addi r3, r1, 0x20
     addi r4, r1, 0x14
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0xc8
     addi r4, r30, 0x528
     addi r5, r1, 0x20

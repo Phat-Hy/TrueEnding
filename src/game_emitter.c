@@ -34,7 +34,7 @@ extern void dialog_updateScriptState(void);
 extern void fn_8014F2B4(void);
 extern void fn_8014FB60(void);
 extern void fn_80155A88(void);
-extern void fn_8015E7A0(void);
+extern void party_configureMemberSlot(void);
 extern void fn_801603CC(void);
 extern void fn_80161570(void);
 extern void fn_80164B00(void);
@@ -2102,7 +2102,7 @@ lbl_fn_800E2FE0_00001A94:
     li r6, 0x0
     stfs f0, 0x140(r1)
     stfs f3, 0x144(r1)
-    bl fn_8015E7A0
+    bl party_configureMemberSlot
 lbl_fn_800E2FE0_00001B64:
     lwz r0, 0x314(r1)
     psq_l f31, 0x308(r1), 0, 0

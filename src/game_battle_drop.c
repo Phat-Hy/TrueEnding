@@ -72,7 +72,7 @@ void fn_80178018(void);
 void fn_80178078(void);
 void fn_80178088(void);
 void fn_80178164(void);
-void fn_801781B0(void);
+void battle_calcAABBCenter(void);
 void battle_generateLootDrops(void);
 void fn_801784BC(void);
 void fn_80178668(void);
@@ -307,7 +307,7 @@ asm void fn_80178164(void)
     blr
 }
 
-asm void fn_801781B0(void)
+asm void battle_calcAABBCenter(void)
 {
     nofralloc
     stwu r1, -0x20(r1)

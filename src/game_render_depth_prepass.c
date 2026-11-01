@@ -44,11 +44,11 @@ extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void equip_applyToCharacter(void);
-extern void fn_80158BB4(void);
+extern void shop_canPurchaseItem(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void battle_updateActorStatus(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -1989,7 +1989,7 @@ lbl_fn_802B3764_000019EC:
     mtctr r3
     bctr
     mr r3, r31
-    bl fn_80158BB4
+    bl shop_canPurchaseItem
     cmpwi r3, 0x0
     beq lbl_fn_802B3764_00001A94
     li r29, 0x1
@@ -2638,7 +2638,7 @@ lbl_fn_802B3764_000023DC:
     bl fn_802B43C8
     mr r4, r31
     addi r3, r1, 0x10
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     addi r3, r1, 0x10
     lfs f3, lbl_80884028
     lfs f2, 0x18(r1)

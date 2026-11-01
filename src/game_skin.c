@@ -59,7 +59,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3F28(void);
 extern void str_findChar(void);
-extern void fn_800DCA6C(void);
+extern void sky_renderStub(void);
 extern void printf(void);
 extern void abort(void);
 extern void msl_releaseRefCount(void);
@@ -1384,7 +1384,7 @@ lbl_fn_800C3FF0_0000100C:
     addi r3, r1, 0x18
     addi r4, r4, lbl_80775B30@l
     stw r4, 0x18(r1)
-    bl fn_800DCA6C
+    bl sky_renderStub
     addic. r3, r1, 0x18
     beq lbl_fn_800C3FF0_00001054
     addic. r3, r3, 0x4

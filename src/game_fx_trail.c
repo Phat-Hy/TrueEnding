@@ -19,7 +19,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void wcs_vformat(void);
-extern void fn_800F72CC(void);
+extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F8524(void);
@@ -581,7 +581,7 @@ lbl_fn_8028CB38_00000644:
     lfs f1, lbl_80883AF0
     addi r3, r1, 0x18
     addi r4, r1, 0x84
-    bl fn_800F72CC
+    bl vec3_scale
     addi r3, r1, 0x24
     addi r4, r1, 0x6c
     addi r5, r1, 0x18

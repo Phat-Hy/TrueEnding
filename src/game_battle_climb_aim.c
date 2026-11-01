@@ -41,7 +41,7 @@ extern void fn_803EC7A0(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
-extern void fn_803ED774(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_803EDB18(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -142,7 +142,7 @@ asm void fn_8040F3CC(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_8040F3CC_0000004C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1001,7 +1001,7 @@ asm void fn_8040FF5C(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_8040FF5C_00000BDC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

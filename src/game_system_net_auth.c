@@ -14,7 +14,7 @@ extern void fn_80154654(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
 extern void fn_80176ACC(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void fn_80395848(void);
 extern void fn_80396F44(void);
 extern void fn_80399148(void);
@@ -1696,7 +1696,7 @@ lbl_fn_80398704_000015B8:
 lbl_fn_80398704_0000160C:
     mr r4, r29
     addi r3, r1, 0x4c
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     addi r3, r1, 0x4c
 lbl_fn_80398704_0000161C:
     lwz r4, lbl_8087F430

@@ -6,7 +6,7 @@ extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
-extern void fn_8003EA3C(void);
+extern void ui_drawColoredQuad(void);
 extern void collision_testLineSegment(void);
 extern void cursor_updateSlotState(void);
 extern void system_getNextSequenceId(void);
@@ -708,7 +708,7 @@ asm void fn_803579FC(void)
     li r7, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_8003EA3C
+    bl ui_drawColoredQuad
     lwz r0, 0x14e0(r31)
     cmpwi r0, 0x0
     bne lbl_fn_803579FC_0000094C

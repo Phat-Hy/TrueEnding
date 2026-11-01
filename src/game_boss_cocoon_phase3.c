@@ -25,7 +25,7 @@ extern void inventory_applyItemStats(void);
 extern void fn_8015B238(void);
 extern void fn_8016D454(void);
 extern void actor_setState(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
@@ -1897,7 +1897,7 @@ lbl_fn_80462038_00001968:
     stw r0, 0x168(r1)
     stw r0, 0x16c(r1)
     stw r0, 0x170(r1)
-    bl fn_80176548
+    bl battle_calcExpPosition
     lwz r4, 0x48(r30)
     neg r0, r28
     or r3, r0, r28

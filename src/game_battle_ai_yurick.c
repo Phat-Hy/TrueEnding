@@ -33,7 +33,7 @@ extern void fn_8010653C(void);
 extern void fn_8011FE3C(void);
 extern void fn_80155A88(void);
 extern void fn_8016B8D4(void);
-extern void fn_801781B0(void);
+extern void battle_calcAABBCenter(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -163,7 +163,7 @@ lbl_fn_8043A530_00000068:
     b lbl_fn_8043A530_00000210
 lbl_fn_8043A530_00000078:
     addi r3, r1, 0x20
-    bl fn_801781B0
+    bl battle_calcAABBCenter
     lfs f31, lbl_80886920
     addi r29, r1, 0x14
     addi r27, r1, 0x20

@@ -41,7 +41,7 @@ extern void fn_80136544(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_80176548(void);
+extern void battle_calcExpPosition(void);
 extern void task_lookupTagIndex(void);
 extern void kpad_getClampData(void);
 extern void task_createWorker(void);
@@ -51,7 +51,7 @@ extern void fn_803EC7A0(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void fn_803ED5D0(void);
-extern void fn_803ED774(void);
+extern void dungeon_updateBarrierField(void);
 extern void fn_803EDB18(void);
 extern void fn_803EDCF4(void);
 extern void fn_803F11F8(void);
@@ -469,7 +469,7 @@ lbl_fn_8042C5AC_0000040C:
     mr r4, r30
     addi r5, r30, 0x528
     addi r3, r1, 0x20
-    bl fn_80176548
+    bl battle_calcExpPosition
     lfs f0, 0x24(r1)
     addi r3, r1, 0x20
     addi r4, r31, 0x500
@@ -657,7 +657,7 @@ asm void fn_8042C9B4(void)
     bctrl
     mr r4, r3
     mr r3, r31
-    bl fn_803ED774
+    bl dungeon_updateBarrierField
 lbl_fn_8042C9B4_00000704:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
