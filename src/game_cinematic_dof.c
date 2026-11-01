@@ -839,10 +839,8 @@ lbl_fn_80338CDC_00000910:
     blr
 }
 
-asm void fn_80338D04(void)
+void fn_80338D04(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_80338D08(void)

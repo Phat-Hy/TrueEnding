@@ -629,10 +629,8 @@ lbl_fn_803C7F38_00000668:
     blr
 }
 
-asm void fn_803C7FE0(void)
+void fn_803C7FE0(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803C7FE4(void)
@@ -779,10 +777,8 @@ lbl_fn_803C8130_00000860:
     blr
 }
 
-asm void fn_803C81D8(void)
+void fn_803C81D8(void)
 {
-    nofralloc
-    blr
 }
 
 asm void soundTest_initOption(void)
@@ -889,10 +885,8 @@ lbl_fn_803C8288_000009B8:
     blr
 }
 
-asm void fn_803C8330(void)
+void fn_803C8330(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803C8334(void)
@@ -952,10 +946,8 @@ lbl_fn_803C833C_00000A6C:
     blr
 }
 
-asm void fn_803C83E4(void)
+void fn_803C83E4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803C83E8(void)
@@ -1552,10 +1544,8 @@ lbl_fn_803C8B0C_0000123C:
     blr
 }
 
-asm void fn_803C8BB4(void)
+void fn_803C8BB4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803C8BB8(void)
@@ -1615,10 +1605,8 @@ lbl_fn_803C8BC0_000012F0:
     blr
 }
 
-asm void fn_803C8C68(void)
+void fn_803C8C68(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803C8C6C(void)
@@ -1815,10 +1803,8 @@ lbl_fn_803C8E6C_0000159C:
     blr
 }
 
-asm void fn_803C8F14(void)
+void fn_803C8F14(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803C8F18(void)
@@ -1994,10 +1980,8 @@ lbl_fn_803C90C4_000017F4:
     blr
 }
 
-asm void fn_803C916C(void)
+void fn_803C916C(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803C9170(void)

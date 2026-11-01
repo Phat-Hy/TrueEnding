@@ -1175,10 +1175,8 @@ lbl_fn_80617270_00000F28:
     blr
 }
 
-asm void fn_806172D0(void)
+void fn_806172D0(void)
 {
-    nofralloc
-    blr
 }
 
 asm void __GXSetIndirectMask(void)

@@ -1552,10 +1552,8 @@ asm void fn_8046CBB0(void)
     blr
 }
 
-asm void fn_8046CBBC(void)
+void fn_8046CBBC(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_8046CBC0(void)

@@ -1512,10 +1512,8 @@ asm void fn_800EF2F0(void)
     blr
 }
 
-asm void fn_800EF304(void)
+void fn_800EF304(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800EF308(void)
@@ -1610,16 +1608,12 @@ asm void fn_800EF394(void)
     blr
 }
 
-asm void fn_800EF3D8(void)
+void fn_800EF3D8(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_800EF3DC(void)
+void fn_800EF3DC(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800EF3E0(void)
