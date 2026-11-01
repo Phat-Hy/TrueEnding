@@ -114,8 +114,8 @@ void fn_8013A158(void);
 void fn_8013A16C(void);
 void fn_8013A184(void);
 void fn_8013A18C(void);
-void npc_getGlobalManager(void);
-void fn_8013A19C(void);
+u32 npc_getGlobalManager(void);
+void fn_8013A19C(void *p, u32 val);
 void fn_8013A1A8(void);
 void fn_8013A214(void);
 void fn_8013A21C(void);
@@ -1089,19 +1089,14 @@ asm void fn_8013A18C(void)
     blr
 }
 
-asm void npc_getGlobalManager(void)
+u32 npc_getGlobalManager(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F048
-    blr
+    return lbl_8087F048;
 }
 
-asm void fn_8013A19C(void)
+void fn_8013A19C(void *p, u32 val)
 {
-    nofralloc
-    addis r3, r3, 0x4
-    stw r4, -0x1c64(r3)
-    blr
+    *(u32 *)((char *)p + 0x3e39c) = val;
 }
 
 asm void fn_8013A1A8(void)

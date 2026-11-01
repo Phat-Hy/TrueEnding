@@ -135,7 +135,7 @@ void fn_802E211C(void);
 void fn_802E2270(void);
 void fn_802E2328(void);
 void fn_802E2360(void);
-void fn_802E2468(void);
+void fn_802E2468(void *p, u32 val);
 void fn_802E2470(void);
 void fn_802E2640(void);
 void fn_802E289C(void);
@@ -1571,11 +1571,9 @@ lbl_fn_802E2360_000013F4:
     blr
 }
 
-asm void fn_802E2468(void)
+void fn_802E2468(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x1504(r3)
-    blr
+    *(u32 *)((char *)p + 0x1504) = val;
 }
 
 asm void fn_802E2470(void)

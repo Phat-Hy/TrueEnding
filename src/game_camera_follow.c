@@ -88,7 +88,7 @@ void fn_802E55B0(void);
 void fn_802E58C8(void);
 void fn_802E5970(void);
 void fn_802E59E0(void);
-void fn_802E5B30(void);
+void fn_802E5B30(void *p, u32 val);
 void fn_802E5B38(void);
 void fn_802E5CD0(void);
 void fn_802E5E94(void);
@@ -1061,11 +1061,9 @@ lbl_fn_802E59E0_00000D74:
     blr
 }
 
-asm void fn_802E5B30(void)
+void fn_802E5B30(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x14f0(r3)
-    blr
+    *(u32 *)((char *)p + 0x14f0) = val;
 }
 
 asm void fn_802E5B38(void)

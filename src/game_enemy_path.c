@@ -71,7 +71,7 @@ void fn_80129978(void);
 void fn_80129A48(void);
 void fn_80129A6C(void);
 void fn_8012A190(void);
-void fn_8012A1B8(void);
+void *fn_8012A1B8(void *p);
 void fn_8012A1C0(void);
 void fn_8012A1E0(void);
 void fn_8012A218(void);
@@ -1274,11 +1274,9 @@ asm void fn_8012A190(void)
     blr
 }
 
-asm void fn_8012A1B8(void)
+void *fn_8012A1B8(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x534
-    blr
+    return (char *)p + 0x534;
 }
 
 asm void fn_8012A1C0(void)

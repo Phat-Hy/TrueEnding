@@ -39,10 +39,10 @@ void fn_800848B4(void);
 void field_initGridPoints(void);
 void mem_getAllocSize(void);
 void fn_80084DC8(void);
-void fn_80084E00(void);
+u32 fn_80084E00(const void *p);
 void fn_80084E08(void);
 void fn_80084E0C(void);
-void fn_80084E44(void);
+u32 fn_80084E44(const void *p);
 void fn_80084E4C(void);
 void fn_80084E50(void);
 void fn_80084E78(void);
@@ -970,11 +970,9 @@ asm void fn_80084DC8(void)
     blr
 }
 
-asm void fn_80084E00(void)
+u32 fn_80084E00(const void *p)
 {
-    nofralloc
-    lwz r3, 0x14(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x14);
 }
 
 void fn_80084E08(void) {
@@ -999,11 +997,9 @@ asm void fn_80084E0C(void)
     blr
 }
 
-asm void fn_80084E44(void)
+u32 fn_80084E44(const void *p)
 {
-    nofralloc
-    lwz r3, 0x14(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x14);
 }
 
 void fn_80084E4C(void) {

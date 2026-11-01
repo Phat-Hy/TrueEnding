@@ -49,7 +49,7 @@ void fn_800DB6E0(void);
 void fn_800DBC1C(void);
 void fn_800DBCC8(void);
 void fn_800DBD58(void);
-void fn_800DBF5C(void);
+u32 fn_800DBF5C(void);
 void fn_800DBF64(void);
 void env_updateAtmosphere(void);
 
@@ -1608,11 +1608,9 @@ lbl_fn_800DBD58_000015A0:
     blr
 }
 
-asm void fn_800DBF5C(void)
+u32 fn_800DBF5C(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 void fn_800DBF64(void) {

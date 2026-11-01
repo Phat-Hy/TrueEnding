@@ -100,12 +100,12 @@ extern u32 lbl_80883908;
 extern u32 lbl_8088390C;
 
 /* Function declarations */
-void fn_80279788(void);
-void fn_80279790(void);
-void fn_80279798(void);
-void fn_802797A0(void);
+u32 fn_80279788(const void *p);
+u32 fn_80279790(void);
+u32 fn_80279798(const void *p);
+void *fn_802797A0(void *p);
 void fn_802797A8(void);
-void fn_802797D4(void);
+u32 fn_802797D4(const void *p);
 void fn_802797DC(void);
 void fn_80279858(void);
 void fn_80279860(void);
@@ -115,32 +115,24 @@ void fn_8027A478(void);
 void fn_8027AC38(void);
 void fn_8027AF4C(void);
 
-asm void fn_80279788(void)
+u32 fn_80279788(const void *p)
 {
-    nofralloc
-    lwz r3, 0x48(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x48);
 }
 
-asm void fn_80279790(void)
+u32 fn_80279790(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F4A0
-    blr
+    return lbl_8087F4A0;
 }
 
-asm void fn_80279798(void)
+u32 fn_80279798(const void *p)
 {
-    nofralloc
-    lwz r3, 0x50(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x50);
 }
 
-asm void fn_802797A0(void)
+void *fn_802797A0(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x6c
-    blr
+    return (char *)p + 0x6c;
 }
 
 asm void fn_802797A8(void)
@@ -159,11 +151,9 @@ asm void fn_802797A8(void)
     blr
 }
 
-asm void fn_802797D4(void)
+u32 fn_802797D4(const void *p)
 {
-    nofralloc
-    lwz r3, 0x5c(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x5c);
 }
 
 asm void fn_802797DC(void)

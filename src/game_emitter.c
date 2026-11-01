@@ -117,11 +117,11 @@ void fn_800E24CC(void);
 void fn_800E24D0(void);
 void fn_800E24D4(void);
 void fn_800E24EC(void);
-void fn_800E2504(void);
+u32 fn_800E2504(void);
 void fn_800E250C(void);
-void fn_800E2608(void);
+s32 fn_800E2608(void);
 void fn_800E2610(void);
-void fn_800E2668(void);
+s32 fn_800E2668(void);
 void fn_800E2670(void);
 void fn_800E2778(void);
 void fn_800E29B4(void);
@@ -304,11 +304,9 @@ asm void fn_800E24EC(void)
     blr
 }
 
-asm void fn_800E2504(void)
+u32 fn_800E2504(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_800E250C(void)
@@ -385,11 +383,9 @@ lbl_fn_800E250C_00000300:
     blr
 }
 
-asm void fn_800E2608(void)
+s32 fn_800E2608(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
 asm void fn_800E2610(void)
@@ -421,11 +417,9 @@ lbl_fn_800E2610_0000036C:
     blr
 }
 
-asm void fn_800E2668(void)
+s32 fn_800E2668(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
 asm void fn_800E2670(void)

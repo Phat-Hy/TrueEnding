@@ -117,7 +117,7 @@ void fn_805AB1C4(void);
 void fn_805AB1DC(void);
 void fn_805AB50C(void);
 void fn_805AB82C(void);
-void fn_805ABD70(void);
+u32 fn_805ABD70(const void *p);
 void fn_805ABD78(void);
 void fn_805ABD8C(void);
 void fn_805ABDEC(void);
@@ -961,11 +961,9 @@ lbl_fn_805AB82C_00000B7C:
     blr
 }
 
-asm void fn_805ABD70(void)
+u32 fn_805ABD70(const void *p)
 {
-    nofralloc
-    lwz r3, 0xf94(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0xf94);
 }
 
 asm void fn_805ABD78(void)

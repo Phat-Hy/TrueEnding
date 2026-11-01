@@ -67,8 +67,8 @@ void fn_805D80B0(void);
 void fn_805D80D0(void);
 void fn_805D8130(void);
 void fn_805D84C0(void);
-void fn_805D8500(void);
-void fn_805D8510(void);
+void fn_805D8500(void *p, u32 val);
+u32 fn_805D8510(const void *p);
 void fn_805D8520(void);
 
 asm void fn_805D6E60(void)
@@ -1627,18 +1627,14 @@ lbl_fn_805D84C0_00001688:
     blr
 }
 
-asm void fn_805D8500(void)
+void fn_805D8500(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x48(r3)
-    blr
+    *(u32 *)((char *)p + 0x48) = val;
 }
 
-asm void fn_805D8510(void)
+u32 fn_805D8510(const void *p)
 {
-    nofralloc
-    lwz r3, 0x48(r3)
-    blr
+    return *(const u32 *)((const char *)p + 0x48);
 }
 
 asm void fn_805D8520(void)

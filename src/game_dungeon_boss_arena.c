@@ -151,7 +151,7 @@ void fn_803EDF40(void);
 void fn_803EDF5C(void);
 void fn_803EDF6C(void);
 void fn_803EDF70(void);
-void fn_803EDF74(void);
+u32 fn_803EDF74(void);
 void fn_803EDF7C(void);
 void fn_803EDFBC(void);
 void fn_803EE024(void);
@@ -231,11 +231,9 @@ void fn_803EDF70(void)
 {
 }
 
-asm void fn_803EDF74(void)
+u32 fn_803EDF74(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void fn_803EDF7C(void)

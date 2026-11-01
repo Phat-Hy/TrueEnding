@@ -125,7 +125,7 @@ void fn_80495EA8(void);
 void fn_80495F78(void);
 void fn_804961B4(void);
 void fn_804962B0(void);
-void fn_8049638C(void);
+u32 fn_8049638C(void);
 void fn_80496394(void);
 void fn_80496398(void);
 void fn_8049639C(void);
@@ -539,11 +539,9 @@ lbl_fn_804962B0_000004D0:
     blr
 }
 
-asm void fn_8049638C(void)
+u32 fn_8049638C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 void fn_80496394(void)

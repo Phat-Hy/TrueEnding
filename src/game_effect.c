@@ -73,7 +73,7 @@ void fn_8003C804(void);
 void fn_8003CBE0(void);
 void fn_8003CC44(void);
 void fn_8003CCD4(void);
-void fn_8003CDA8(void);
+s32 fn_8003CDA8(void);
 void fn_8003CDB0(void);
 void fn_8003D084(void);
 void fn_8003D298(void);
@@ -3855,11 +3855,9 @@ lbl_fn_8003CCD4_00003444:
     blr
 }
 
-asm void fn_8003CDA8(void)
+s32 fn_8003CDA8(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
 asm void fn_8003CDB0(void)

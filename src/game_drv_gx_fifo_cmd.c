@@ -51,7 +51,7 @@ void fn_805BEA38(void);
 void fn_805BEAD0(void);
 void fn_805BEB18(void);
 void fn_805BEB58(void);
-void fn_805BEC6C(void);
+void fn_805BEC6C(void *p, u32 val);
 void fn_805BEC74(void);
 void fn_805BECA4(void);
 void fn_805BED54(void);
@@ -710,11 +710,9 @@ lbl_fn_805BEB58_000008C0:
     blr
 }
 
-asm void fn_805BEC6C(void)
+void fn_805BEC6C(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x0(r3)
-    blr
+    *(u32 *)p = val;
 }
 
 asm void fn_805BEC74(void)

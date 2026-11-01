@@ -96,7 +96,7 @@ void task_destroyWorker(void);
 void fn_803EC758(void);
 void fn_803EC7A0(void);
 void task_updateWorker(void);
-void fn_803ECB7C(void);
+u32 fn_803ECB7C(void);
 void fn_803ECB84(void);
 void fn_803ECBCC(void);
 void fn_803ECBD0(void);
@@ -557,11 +557,9 @@ lbl_task_updateWorker_000005F4:
     blr
 }
 
-asm void fn_803ECB7C(void)
+u32 fn_803ECB7C(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_803ECB84(void)
