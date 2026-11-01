@@ -70,7 +70,7 @@ extern void GXLoadNrmMtxImm3x3(void);
 extern void GXSetCurrentMtx(void);
 extern void GXLoadTexMtxImm(void);
 extern void rand(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_80732CE8[];
@@ -1590,7 +1590,7 @@ asm void fn_800B2180(void)
     addi r4, r4, fn_800B23C4@l
     li r5, 0x0
     li r6, 0x18
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r30, r3
     b lbl_fn_800B2180_00001518
 lbl_fn_800B2180_00001514:

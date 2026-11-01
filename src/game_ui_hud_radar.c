@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000DD0C(void);
 extern void fn_80011034(void);
 extern void fn_800133B0(void);
@@ -1094,7 +1094,7 @@ asm void fn_801C0D80(void)
     bl fn_801446F0
     mr r4, r30
     addi r3, r29, 0x8
-    bl fn_8000D124
+    bl vec3_copy
     lwz r4, 0x4(r29)
     addi r3, r1, 0x80
     bl fn_8014052C
@@ -1220,7 +1220,7 @@ lbl_fn_801C0D80_00000E84:
     bl fn_8013C38C
     mr r4, r3
     addi r3, r29, 0x14
-    bl fn_8000D124
+    bl vec3_copy
     lfs f0, lbl_808826A4
     mr r3, r31
     stfs f0, 0x24(r29)

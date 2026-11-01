@@ -11,7 +11,7 @@ extern void fn_8005BD10(void);
 extern void fn_8005BEF8(void);
 extern void fn_8005BFAC(void);
 extern void fn_80060D58(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void fn_8006CA80(void);
 extern void fn_8006F420(void);
 extern void mem_alloc(void);
@@ -414,7 +414,7 @@ lbl_fn_803B7E20_00000394:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f4, lbl_80885C64
     addi r4, r31, 0x12
     lwz r0, 0xd68(r30)
@@ -432,7 +432,7 @@ lbl_fn_803B7E20_00000420:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f4, lbl_80885C64
     lis r4, lbl_8074FF58@ha
     lwz r0, 0xd68(r30)
@@ -452,7 +452,7 @@ lbl_fn_803B7E20_0000046C:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     b lbl_fn_803B7E20_000004E0
 lbl_fn_803B7E20_00000484:
     lfs f1, lbl_80885C58
@@ -477,7 +477,7 @@ lbl_fn_803B7E20_00000484:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_803B7E20_000004E0:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1427,7 +1427,7 @@ lbl_fn_803B8B08_00001148:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     addi r27, r27, 0x1
     addi r28, r28, 0xb8
     cmpwi r27, 0x11

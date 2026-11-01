@@ -12,7 +12,7 @@ extern void fn_8008CD60(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void fn_80097E80(void);
 extern void fn_800BFAC8(void);
 extern void atn_Task_constructor(void);
@@ -606,7 +606,7 @@ lbl_fn_801E8244_000006EC:
     li r4, 0x3
     lfs f1, lbl_80882B10
     addi r3, r30, 0xb0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, -0x1
     stw r0, 0x12bc(r30)
     lfs f0, lbl_80882B10

@@ -33,7 +33,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DCA6C(void);
 extern void fn_800EC2C4(void);
@@ -99,7 +99,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void fn_806952C4(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern void fn_80695B00(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -944,7 +944,7 @@ lbl_fn_803EE7FC_00000914:
     li r6, 0x4c
     addi r5, r5, fn_803EDF7C@l
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x64(r25)
     mr r26, r3
     cmpwi r0, 0x0
@@ -1027,7 +1027,7 @@ lbl_fn_803EE7FC_00000A3C:
     li r6, 0x4c
     addi r4, r4, fn_803EEB38@l
     addi r5, r5, fn_803EDF7C@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x64(r25)
     mr r26, r3
     cmpwi r0, 0x0
@@ -1558,19 +1558,19 @@ lbl_fn_803EEEDC_00001134:
 lbl_fn_803EEEDC_000011BC:
     addi r3, r1, 0x280
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x164(r1)
     addi r3, r1, 0x280
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x168(r1)
     addi r3, r1, 0x280
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x16c(r1)
     addi r3, r1, 0x280
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x170(r1)
     addi r3, r1, 0x280
     bl talk_parseQuotedString
@@ -2126,19 +2126,19 @@ lbl_fn_803EF780_00001948:
     bl dtor_80013D60
     addi r3, r1, 0x70
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x58(r1)
     addi r3, r1, 0x70
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x5c(r1)
     addi r3, r1, 0x70
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x60(r1)
     addi r3, r1, 0x70
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x64(r1)
     addi r3, r1, 0x70
     bl talk_formatQuotedString

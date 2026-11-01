@@ -18,7 +18,7 @@ extern void fn_80013F78(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_800C16B4(void);
@@ -895,7 +895,7 @@ lbl_fn_805B7220_00000A08:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x22
     addi r5, r29, 0x254
@@ -904,7 +904,7 @@ lbl_fn_805B7220_00000A08:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
 lbl_fn_805B7220_00000A58:
     lwz r0, 0x128(r29)
     cmpwi r0, 0x0

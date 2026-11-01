@@ -5,7 +5,7 @@
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
 extern void fn_8001047C(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
@@ -40,7 +40,7 @@ extern void world_setLocalFlag(void);
 extern void fn_803EA77C(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 jumptable_80789360[];
@@ -731,7 +731,7 @@ asm void fn_8033A7A0(void)
     addi r3, r1, 0x8
     addi r4, r30, 0x528
     addi r5, r1, 0x14
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x8
     bl fn_801C3910
     lwz r0, 0x14bc(r30)
@@ -1146,7 +1146,7 @@ lbl_fn_8033ACB0_00000EB8:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1260,7 +1260,7 @@ lbl_fn_8033ACB0_00001058:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1420,7 +1420,7 @@ lbl_fn_8033ACB0_000012BC:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1534,7 +1534,7 @@ lbl_fn_8033ACB0_0000145C:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1694,7 +1694,7 @@ lbl_fn_8033ACB0_000016C0:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1808,7 +1808,7 @@ lbl_fn_8033ACB0_00001860:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1968,7 +1968,7 @@ lbl_fn_8033ACB0_00001AC4:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -2082,7 +2082,7 @@ lbl_fn_8033ACB0_00001C64:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0

@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000DD04(void);
 extern void fn_80013F78(void);
 extern void fn_80070B60(void);
@@ -39,7 +39,7 @@ extern void atn_LoadHandle_getData(void);
 extern void fn_80476130(void);
 extern void PSMTXMultVec(void);
 extern void fn_8067E23C(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern void fn_80695AD0(void);
 extern u32 strlen(const char* str);
@@ -337,7 +337,7 @@ asm void fn_80095300(void)
     bl atn_AABB_getMin
     mr r3, r27
     addi r4, r1, 0x14
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r28
     bl fn_8000DD04
     mr r4, r3
@@ -345,7 +345,7 @@ asm void fn_80095300(void)
     bl atn_AABB_getMax
     addi r3, r27, 0xc
     addi r4, r1, 0x8
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r28
     bl fn_800952F8
     mr r29, r3
@@ -2323,7 +2323,7 @@ asm void lockon_updateTarget(void)
     addi r4, r4, area_refresh@l
     li r6, 0x2c
     li r7, 0x400
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087EF18
 lbl_lockon_updateTarget_00001FE0:
     li r0, 0x2
@@ -2401,7 +2401,7 @@ lbl_lockon_updateTarget_000020C4:
     li r6, 0xc
     addi r4, r4, fn_800A03A0@l
     addi r5, r5, fn_800970CC@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x228(r31)
     b lbl_lockon_updateTarget_00002118
 lbl_lockon_updateTarget_00002110:

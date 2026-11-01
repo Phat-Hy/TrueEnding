@@ -27,7 +27,7 @@ extern void fn_800CB5C8(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DD8A8(void);
 extern void fn_801092C8(void);
 extern void fn_8011D424(void);
@@ -1414,29 +1414,29 @@ lbl_fn_8043239C_00001258:
     bge lbl_fn_8043239C_000013AC
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f29, f1
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f30, f1
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f29, 0x2ec4(r25)
     addi r3, r1, 0x8
     stfs f30, 0x2ec8(r25)
     stfs f1, 0x2ecc(r25)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f29, f31, f1
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f30, f31, f1
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f29, 0x2ed0(r25)
     fmuls f0, f31, f1
     addi r30, r30, 0x1
@@ -1476,11 +1476,11 @@ lbl_fn_8043239C_0000134C:
     bne lbl_fn_8043239C_00001384
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x3060(r29)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x305c(r29)
     b lbl_fn_8043239C_000013AC
 lbl_fn_8043239C_00001384:

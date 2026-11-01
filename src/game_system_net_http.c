@@ -7,7 +7,7 @@ extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
 extern void atn_LH_Binary_destructor(void);
 extern void item_useConsumable(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void fn_80063D3C(void);
 extern void fn_8006AA20(void);
 extern void fn_8006B2D8(void);
@@ -1319,7 +1319,7 @@ asm void fn_8039328C(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f1, 0x14(r29)
     addi r3, r1, 0x8
     lfs f2, 0x18(r29)
@@ -1339,7 +1339,7 @@ asm void fn_8039328C(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r0, 0x7fc(r29)
     cmpwi r0, 0x6
     bne lbl_fn_8039328C_000012C0

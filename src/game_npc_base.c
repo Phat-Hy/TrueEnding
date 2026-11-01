@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
@@ -166,7 +166,7 @@ asm void fn_80139560(void)
 lbl_fn_80139560_00000084:
     addi r3, r1, 0x6c
     addi r4, r31, 0x534
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80139560_00000700
 lbl_fn_80139560_00000094:
     cmpwi r3, 0x1
@@ -185,7 +185,7 @@ lbl_fn_80139560_00000094:
 lbl_fn_80139560_000000C8:
     addi r3, r1, 0x6c
     addi r4, r31, 0x534
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80139560_00000700
 lbl_fn_80139560_000000D8:
     mr r3, r31
@@ -196,7 +196,7 @@ lbl_fn_80139560_000000D8:
     bl fn_80178018
     addi r3, r1, 0x6c
     addi r4, r1, 0x54
-    bl fn_8000D124
+    bl vec3_copy
     lfs f0, 0x14(r1)
     lfs f2, lbl_808819A0
     fcmpo cr0, f0, f2
@@ -431,7 +431,7 @@ lbl_fn_80139560_00000438:
     addi r3, r1, 0x6c
     stfs f0, 0x14(r1)
     addi r4, r31, 0x534
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80139560_00000700
 lbl_fn_80139560_00000468:
     addi r3, r31, 0x1030
@@ -456,12 +456,12 @@ lbl_fn_80139560_00000468:
     bl fn_80011034
     addi r3, r1, 0x6c
     addi r4, r1, 0x48
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80139560_000004D4
 lbl_fn_80139560_000004C8:
     addi r3, r1, 0x6c
     addi r4, r31, 0x534
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_80139560_000004D4:
     mr r3, r31
     bl fn_800F7F80

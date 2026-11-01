@@ -10,7 +10,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
@@ -423,7 +423,7 @@ asm void fn_802DC618(void)
     lfs f1, lbl_808845F0
     addi r3, r28, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f2, lbl_80884600
     li r0, 0x1
     lfs f0, lbl_80884660

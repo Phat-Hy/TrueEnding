@@ -7,7 +7,7 @@ extern void dtor_80084684(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
 extern void fn_8006F420(void);
@@ -63,7 +63,7 @@ extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
 extern void fn_8068C240(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -943,7 +943,7 @@ lbl_fn_803B30D8_00000A78:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_803B30D8_00000A8C:
     lbz r0, 0xdb0(r31)
     cmpwi r0, 0x0
@@ -963,7 +963,7 @@ lbl_fn_803B30D8_00000A8C:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_803B30D8_00000AD8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1380,7 +1380,7 @@ lbl_fn_803B35FC_0000100C:
     li r6, 0x38
     addi r4, r4, fn_803B3AA0@l
     addi r5, r5, fn_80366364@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0xc(r28)
     b lbl_fn_803B35FC_00001060
 lbl_fn_803B35FC_00001058:

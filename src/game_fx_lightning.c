@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void fn_8000D0F8(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -893,7 +893,7 @@ asm void fn_8029E2AC(void)
     bl fn_8000D0F8
     addi r3, r1, 0x60
     addi r4, r1, 0x50
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r30, 0x624
     addi r4, r1, 0x5c
     bl fn_8028A1F8
@@ -907,7 +907,7 @@ asm void fn_8029E2AC(void)
     bl fn_8000D0F8
     addi r3, r1, 0x60
     addi r4, r1, 0x44
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r30, 0x624
     addi r4, r1, 0x5c
     bl fn_8028A1F8
@@ -921,7 +921,7 @@ asm void fn_8029E2AC(void)
     bl fn_8000D0F8
     addi r3, r1, 0x60
     addi r4, r1, 0x38
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r30, 0x624
     addi r4, r1, 0x5c
     bl fn_8028A1F8
@@ -935,7 +935,7 @@ asm void fn_8029E2AC(void)
     bl fn_8000D0F8
     addi r3, r1, 0x60
     addi r4, r1, 0x2c
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r30, 0x624
     addi r4, r1, 0x5c
     bl fn_8028A1F8
@@ -949,7 +949,7 @@ asm void fn_8029E2AC(void)
     bl fn_8000D0F8
     addi r3, r1, 0x60
     addi r4, r1, 0x20
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r30, 0x624
     addi r4, r1, 0x5c
     bl fn_8028A1F8
@@ -963,7 +963,7 @@ asm void fn_8029E2AC(void)
     bl fn_8000D0F8
     addi r3, r1, 0x60
     addi r4, r1, 0x14
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r30, 0x624
     addi r4, r1, 0x5c
     bl fn_8028A1F8
@@ -977,7 +977,7 @@ asm void fn_8029E2AC(void)
     bl fn_8000D0F8
     addi r3, r1, 0x60
     addi r4, r1, 0x8
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r30, 0x624
     addi r4, r1, 0x5c
     bl fn_8028A1F8

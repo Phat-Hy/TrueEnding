@@ -8,7 +8,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void fn_80148990(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -20,7 +20,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_8074A8E0[];
@@ -144,7 +144,7 @@ lbl_fn_80347218_0000010C:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -258,7 +258,7 @@ lbl_fn_80347218_000002AC:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -418,7 +418,7 @@ lbl_fn_80347218_00000510:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -532,7 +532,7 @@ lbl_fn_80347218_000006B0:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -692,7 +692,7 @@ lbl_fn_80347218_00000914:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -806,7 +806,7 @@ lbl_fn_80347218_00000AB4:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -966,7 +966,7 @@ lbl_fn_80347218_00000D18:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1080,7 +1080,7 @@ lbl_fn_80347218_00000EB8:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1614,7 +1614,7 @@ lbl_fn_80348568_0000168C:
     lfs f1, lbl_80885378
     addi r3, r30, 0xb0
     li r4, 0x1
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     stfs f29, 0x538(r30)
     b lbl_fn_80348568_000016E4
 lbl_fn_80348568_000016B8:

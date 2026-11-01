@@ -17,7 +17,7 @@ extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB518(void);
 extern void fn_800CB688(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80237654(void);
 extern void fn_802376D0(void);
@@ -647,32 +647,32 @@ lbl_fn_80438EF8_000007B4:
     stfs f30, 0x1c(r1)
     stfs f30, 0x20(r1)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x8(r1)
     addi r3, r1, 0x6c
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xc(r1)
     addi r3, r1, 0x6c
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x10(r1)
     addi r3, r1, 0x6c
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f31, f1
     addi r3, r1, 0x6c
     stfs f0, 0x14(r1)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x24(r1)
     addi r3, r1, 0x6c
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x28(r1)
     addi r3, r1, 0x6c
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0xf4(r31)
     addi r4, r31, 0xf4
     fmr f0, f1
@@ -730,7 +730,7 @@ lbl_fn_80438EF8_00000908:
     stw r3, 0xecc(r31)
     addi r3, r1, 0x6c
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xef4(r31)
     addi r3, r1, 0x6c
     bl talk_formatQuotedString

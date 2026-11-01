@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B6E8(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800CB360(void);
 extern void fn_800CB5C8(void);
@@ -520,7 +520,7 @@ lbl_fn_802FB6AC_000005F4:
     stfs f2, 0x70(r1)
     stfs f2, 0x534(r29)
     stfs f2, 0x53c(r29)
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_80884994
     li r0, 0x1
     stw r0, 0x3fc(r29)
@@ -785,7 +785,7 @@ lbl_fn_802FBA30_000009C4:
     stfs f2, 0x534(r31)
     stfs f2, 0x53c(r31)
     stw r0, 0x15d8(r31)
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_80884994
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1028,7 +1028,7 @@ lbl_fn_802FBE00_00000D30:
     lfs f1, lbl_80884980
     addi r3, r28, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f3, lbl_80884994
     li r0, 0x1
     lfs f0, lbl_808849BC
@@ -1129,7 +1129,7 @@ lbl_fn_802FC188_00000E98:
     lfs f1, lbl_80884980
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_80884994
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1223,7 +1223,7 @@ lbl_fn_802FC2E0_00001000:
     lfs f1, lbl_80884980
     addi r3, r29, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_80884994
     li r0, 0x1
     stw r0, 0x3fc(r29)

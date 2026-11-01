@@ -5,7 +5,7 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D3A8(void);
 extern void fn_8000D430(void);
 extern void fn_8000DD0C(void);
@@ -570,7 +570,7 @@ lbl_fn_803729B4_00000540:
     bl fn_8012A1B8
     mr r4, r3
     addi r3, r1, 0x74
-    bl fn_8000D124
+    bl vec3_copy
     lfs f29, lbl_808857D0
     li r29, 0x0
     lfs f28, lbl_8088579C

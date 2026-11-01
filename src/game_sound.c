@@ -83,7 +83,7 @@ extern void fn_80624AB0(void);
 extern void printf(void);
 extern void abort(void);
 extern void fn_806952C4(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80703F90(void);
 extern void fn_80704780(void);
 extern void fn_80704890(void);
@@ -2906,7 +2906,7 @@ lbl_fn_8004829C_000023D0:
     li r5, 0x0
     li r6, 0x54
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x3a8(r28)
     mr r22, r3
     cmpwi r0, 0x0
@@ -2998,7 +2998,7 @@ lbl_fn_8004829C_0000251C:
     addi r4, r26, fn_800465E8@l
     li r5, 0x0
     li r6, 0x54
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x3a8(r28)
     mr r21, r3
     cmpwi r0, 0x0
@@ -3345,7 +3345,7 @@ lbl_fn_800489F4_00002A00:
     addi r4, r4, fn_800465E8@l
     li r6, 0x54
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x39c(r29)
     mr r31, r3
     cmpwi r0, 0x0
@@ -3439,7 +3439,7 @@ lbl_fn_800489F4_00002B54:
     addi r4, r4, fn_800465E8@l
     li r5, 0x0
     li r6, 0x54
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x39c(r29)
     mr r30, r3
     cmpwi r0, 0x0

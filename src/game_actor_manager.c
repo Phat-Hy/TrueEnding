@@ -3,14 +3,14 @@
 
 /* External function declarations */
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_8000DB1C(void);
 extern void fn_8001047C(void);
 extern void fn_800109E0(void);
 extern void fn_80011034(void);
 extern void fn_80011220(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80013410(void);
 extern void item_useConsumable(void);
@@ -1371,14 +1371,14 @@ lbl_fn_801162A4_000011A8:
     bl fn_80112A00
     addi r3, r29, 0x204
     addi r4, r1, 0xa0
-    bl fn_8000D124
+    bl vec3_copy
     fmr f1, f29
     addi r3, r1, 0x94
     addi r4, r29, 0x240
     bl fn_80112A00
     addi r3, r29, 0x228
     addi r4, r1, 0x94
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r29
     bl fn_801157DC
     b lbl_fn_801162A4_000012D0
@@ -1389,7 +1389,7 @@ lbl_fn_801162A4_000011FC:
     bl fn_80112A00
     addi r3, r29, 0x228
     addi r4, r1, 0x88
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r29
     bl fn_801157DC
     b lbl_fn_801162A4_000012D0
@@ -1408,7 +1408,7 @@ lbl_fn_801162A4_00001240:
     bl fn_80112A00
     addi r3, r29, 0x204
     addi r4, r1, 0x7c
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r29
     bl fn_801151A4
     mr r3, r29
@@ -1430,14 +1430,14 @@ lbl_fn_801162A4_00001280:
     bl fn_80112A00
     addi r3, r29, 0x204
     addi r4, r1, 0x70
-    bl fn_8000D124
+    bl vec3_copy
     fmr f1, f29
     addi r3, r1, 0x64
     addi r4, r29, 0x240
     bl fn_80112A00
     addi r3, r29, 0x228
     addi r4, r1, 0x64
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r29
     bl fn_801157DC
 lbl_fn_801162A4_000012D0:
@@ -1743,7 +1743,7 @@ lbl_fn_801162A4_000016B4:
     addi r3, r1, 0xd0
     addi r4, r1, 0xdc
     addi r5, r1, 0xe8
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0xd0
     bl fn_8000D3A4
     fmr f29, f1
@@ -1809,7 +1809,7 @@ lbl_fn_801162A4_000017BC:
     bl fn_80013410
     addi r3, r1, 0xdc
     addi r4, r1, 0x58
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r29
     addi r4, r1, 0xdc
     bl fn_80112960

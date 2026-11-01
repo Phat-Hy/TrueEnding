@@ -35,7 +35,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void rand(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_80743D00[];
@@ -246,7 +246,7 @@ lbl_fn_80257B50_000001F8:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -360,7 +360,7 @@ lbl_fn_80257B50_00000398:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -498,7 +498,7 @@ lbl_fn_80257B50_000005AC:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -611,7 +611,7 @@ lbl_fn_80257B50_0000074C:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0

@@ -23,7 +23,7 @@ extern void fn_8009EB20(void);
 extern void fn_8009EE30(void);
 extern void fn_8009F788(void);
 extern void fn_8009FFCC(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_8036554C(void);
 extern void fn_803EC568(void);
 extern void fn_803EC69C(void);
@@ -42,7 +42,7 @@ extern void strcmp(void);
 extern void atoi(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695B00(void);
 extern u32 strlen(const char* str);
 
@@ -1288,7 +1288,7 @@ lbl_fn_8040134C_00001090:
     stw r3, 0x114(r31)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0xf8(r31)
     stfs f1, 0x10c(r31)
     cmpwi r0, 0x1
@@ -1299,11 +1299,11 @@ lbl_fn_8040134C_00001090:
 lbl_fn_8040134C_000010EC:
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x110(r31)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     frsp f0, f1
     stfs f1, 0x11c(r31)
     fcmpo cr0, f0, f31
@@ -1341,7 +1341,7 @@ lbl_fn_8040134C_00001150:
     addi r4, r4, fn_80401610@l
     li r5, 0x0
     li r6, 0x30
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x130(r31)
     b lbl_fn_8040134C_000011A0
 lbl_fn_8040134C_00001198:

@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
@@ -1839,14 +1839,14 @@ asm void fn_80567600(void)
 lbl_fn_80567600_00001734:
     addi r3, r1, 0x30
     addi r4, r31, 0x534
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80567600_000019C8
 lbl_fn_80567600_00001744:
     cmpwi r3, 0x1
     bne lbl_fn_80567600_0000175C
     addi r3, r1, 0x30
     addi r4, r31, 0x534
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80567600_000019C8
 lbl_fn_80567600_0000175C:
     cmpwi r3, 0x4
@@ -1854,7 +1854,7 @@ lbl_fn_80567600_0000175C:
     stfs f0, 0x8(r1)
     addi r3, r1, 0x30
     addi r4, r31, 0x534
-    bl fn_8000D124
+    bl vec3_copy
     lwz r0, 0xc58(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80567600_0000178C
@@ -1983,7 +1983,7 @@ lbl_fn_80567600_00001914:
     addi r3, r1, 0x30
     stfs f0, 0x8(r1)
     addi r4, r31, 0x534
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80567600_000019C8
 lbl_fn_80567600_00001944:
     addi r3, r31, 0x1030
@@ -2008,12 +2008,12 @@ lbl_fn_80567600_00001944:
     bl fn_80011034
     addi r3, r1, 0x30
     addi r4, r1, 0x18
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80567600_000019C8
 lbl_fn_80567600_000019A4:
     addi r3, r1, 0x30
     addi r4, r31, 0x534
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80567600_000019C8
 lbl_fn_80567600_000019B4:
     cmpwi r3, 0x6

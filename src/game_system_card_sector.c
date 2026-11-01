@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800F8C6C(void);
 extern void fn_800FAB80(void);
@@ -1887,7 +1887,7 @@ lbl_fn_80358A5C_00001AB0:
     li r4, 0x0
     lfs f1, lbl_8088552C
     stfs f2, 0x530(r31)
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f7, lbl_80885550
     li r0, 0x1
     lfs f0, lbl_808855AC

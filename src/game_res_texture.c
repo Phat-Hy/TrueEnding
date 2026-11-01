@@ -21,7 +21,7 @@ extern void fn_80238148(void);
 extern void fn_802381D8(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 
 /* External data declarations */
@@ -1043,7 +1043,7 @@ asm void texCache_allocateSlot(void)
     addi r4, r4, fn_8022BDB4@l
     li r5, 0x0
     li r6, 0xe0
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mulli r7, r27, 0x1b8
     stw r3, 0x4(r29)
     addi r5, r30, lbl_80742F80@l
@@ -1058,7 +1058,7 @@ asm void texCache_allocateSlot(void)
     addi r4, r4, tex_initDescriptor@l
     li r5, 0x0
     li r6, 0x1b8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mulli r7, r28, 0x94
     stw r3, 0x14(r29)
     addi r5, r30, lbl_80742F80@l
@@ -1074,7 +1074,7 @@ asm void texCache_allocateSlot(void)
     li r6, 0x94
     addi r4, r4, fn_80238148@l
     addi r5, r5, fn_802381D8@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x2c(r29)
     stw r3, 0x24(r29)
     cmplwi r0, 0x40
@@ -1108,7 +1108,7 @@ lbl_texCache_allocateSlot_00000E54:
     addi r4, r4, tex_initDefaultTransform@l
     li r6, 0x14
     li r7, 0x4800
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x38(r29)
     b lbl_texCache_allocateSlot_00000E9C
     stw r0, 0x38(r29)
@@ -1506,7 +1506,7 @@ lbl_fn_8022BEAC_000013F4:
     addi r4, r4, tex_initDefaultTransform@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x38(r29)
     b lbl_fn_8022BEAC_00001444
 lbl_fn_8022BEAC_0000143C:

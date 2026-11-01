@@ -11,7 +11,7 @@ extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_80087BB4(void);
@@ -30,7 +30,7 @@ extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void fn_800CB688(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void task_findEntryById(void);
@@ -247,7 +247,7 @@ lbl_fn_8042049C_0000016C:
     bne lbl_fn_8042049C_00000194
     addi r3, r1, 0x34
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xf4(r31)
     b lbl_fn_8042049C_0000040C
 lbl_fn_8042049C_00000194:
@@ -258,11 +258,11 @@ lbl_fn_8042049C_00000194:
     bne lbl_fn_8042049C_000001CC
     addi r3, r1, 0x34
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x150(r31)
     addi r3, r1, 0x34
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x154(r31)
     b lbl_fn_8042049C_0000040C
 lbl_fn_8042049C_000001CC:
@@ -273,11 +273,11 @@ lbl_fn_8042049C_000001CC:
     bne lbl_fn_8042049C_00000204
     addi r3, r1, 0x34
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x158(r31)
     addi r3, r1, 0x34
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x15c(r31)
     b lbl_fn_8042049C_0000040C
 lbl_fn_8042049C_00000204:
@@ -344,15 +344,15 @@ lbl_fn_8042049C_000002C8:
     bne lbl_fn_8042049C_00000378
     addi r3, r1, 0x34
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f28, f1
     addi r3, r1, 0x34
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f29, f1
     addi r3, r1, 0x34
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     stfs f28, 0x28(r1)
     addi r3, r1, 0x28
@@ -390,11 +390,11 @@ lbl_fn_8042049C_00000378:
     bne lbl_fn_8042049C_000003B0
     addi r3, r1, 0x34
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x118(r31)
     addi r3, r1, 0x34
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x11c(r31)
     b lbl_fn_8042049C_0000040C
 lbl_fn_8042049C_000003B0:
@@ -405,11 +405,11 @@ lbl_fn_8042049C_000003B0:
     bne lbl_fn_8042049C_000003F4
     addi r3, r1, 0x34
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     addi r3, r1, 0x34
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f31, 0x8(r1)
     stfs f1, 0xc(r1)
     psq_l f1, 0x0(r19), 0, 0
@@ -510,7 +510,7 @@ lbl_fn_80420934_00000508:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808865C4
     mr r3, r30
     lfs f2, lbl_808865C8
@@ -552,7 +552,7 @@ lbl_fn_80420934_00000508:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r4, r30
     addi r3, r29, 0xb0
     bl fn_803F11F8
@@ -853,7 +853,7 @@ lbl_fn_80420D0C_000009E4:
     bne lbl_fn_80420D0C_00000A08
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x4f0(r28)
 lbl_fn_80420D0C_00000A08:
     addi r3, r1, 0x8
@@ -1683,7 +1683,7 @@ lbl_fn_80421904_000014DC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808865FC
     mr r3, r29
     lfs f2, lbl_80886600
@@ -1711,7 +1711,7 @@ lbl_fn_80421904_000014DC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x30
     addi r5, r28, 0x108
@@ -1720,7 +1720,7 @@ lbl_fn_80421904_000014DC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x3b
     addi r5, r28, 0x10c
@@ -1729,7 +1729,7 @@ lbl_fn_80421904_000014DC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808865FC
     mr r3, r29
     lfs f2, lbl_80886600

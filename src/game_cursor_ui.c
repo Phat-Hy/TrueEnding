@@ -39,7 +39,7 @@ extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
@@ -447,31 +447,31 @@ lbl_fn_800A85CC_00000470:
     stw r3, 0x40(r28)
     mr r3, r29
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lfs f0, lbl_80880CF8
     mr r3, r29
     fmuls f0, f0, f1
     stfs f0, 0x48(r28)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lfs f0, lbl_80880CF8
     mr r3, r29
     fmuls f0, f0, f1
     stfs f0, 0x54(r28)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lfs f0, lbl_80880CF8
     mr r3, r29
     fmuls f0, f0, f1
     stfs f0, 0x4c(r28)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lfs f0, lbl_80880CF8
     mr r3, r29
     fmuls f0, f0, f1
     stfs f0, 0x58(r28)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lfs f0, lbl_80880CD8
     li r3, 0x1
     stfs f1, 0x60(r28)

@@ -41,7 +41,7 @@ struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct 
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_802375C4(void);
 extern void fn_802376D0(void);
@@ -1732,15 +1732,15 @@ lbl_fn_80497248_000013E0:
     bne lbl_fn_80497248_0000143C
     mr r3, r27
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x124(r26)
     mr r3, r27
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x128(r26)
     mr r3, r27
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x12c(r26)
     b lbl_fn_80497248_00001484
 lbl_fn_80497248_0000143C:
@@ -1761,7 +1761,7 @@ lbl_fn_80497248_0000145C:
     stb r30, 0x121(r26)
     mr r3, r27
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x130(r26)
 lbl_fn_80497248_00001484:
     mr r3, r27

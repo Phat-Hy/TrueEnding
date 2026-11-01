@@ -29,7 +29,7 @@ extern void fn_8046DD20(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void fn_80686A64(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 extern void strchr(void);
 extern u32 strlen(const char* str);
@@ -642,7 +642,7 @@ lbl_fn_802144A8_00000720:
     li r6, 0x18
     addi r4, r4, fn_80214BF4@l
     addi r5, r5, fn_80214E24@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F248
     mr r4, r31
     lwz r12, 0xc(r1)
@@ -705,7 +705,7 @@ lbl_fn_802144A8_00000824:
     li r5, 0x0
     li r6, 0x8
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x14(r30)
     mr r25, r3
     cmpwi r0, 0x0
@@ -828,7 +828,7 @@ lbl_fn_802144A8_000009E4:
     addi r4, r28, fn_80214E04@l
     li r5, 0x0
     li r6, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x14(r30)
     mr r24, r3
     cmpwi r0, 0x0
@@ -1001,7 +1001,7 @@ lbl_fn_802144A8_00000C68:
     li r6, 0x14
     addi r4, r4, fn_80214E14@l
     addi r5, r5, fn_80214E94@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F250
     mr r4, r25
     lwz r12, 0xc(r1)
@@ -1092,7 +1092,7 @@ asm void fn_80214BF4(void)
     addi r4, r4, fn_80214E04@l
     li r6, 0x8
     li r7, 0x2
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x14(r30)
     mr r31, r3
     cmpwi r0, 0x0
@@ -1762,7 +1762,7 @@ lbl_fn_802150F0_000016A4:
     addi r4, r4, fn_80216440@l
     li r5, 0x0
     li r6, 0x78
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F258
     mr r4, r25
     lwz r12, 0xc70(r1)
@@ -1887,7 +1887,7 @@ lbl_fn_802150F0_0000188C:
     li r5, 0x0
     li r6, 0x8
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x8(r21)
     mr r19, r3
     cmpwi r0, 0x0
@@ -2046,7 +2046,7 @@ lbl_fn_802150F0_00001ADC:
     addi r4, r20, fn_80216488@l
     li r5, 0x0
     li r6, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x8(r21)
     mr r18, r3
     cmpwi r0, 0x0
@@ -2270,7 +2270,7 @@ lbl_fn_802150F0_00001E1C:
     addi r4, r4, fn_802164A0@l
     li r5, 0x0
     li r6, 0x78
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F260
     mr r4, r26
     lwz r12, 0xc70(r1)
@@ -2386,7 +2386,7 @@ lbl_fn_802150F0_00001FE4:
     li r5, 0x0
     li r6, 0x2
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x8(r27)
     mr r18, r3
     cmpwi r0, 0x0
@@ -2509,7 +2509,7 @@ lbl_fn_802150F0_000021A4:
     addi r4, r28, fn_802164E8@l
     li r5, 0x0
     li r6, 0x2
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x8(r27)
     mr r18, r3
     cmpwi r0, 0x0
@@ -2723,7 +2723,7 @@ lbl_fn_802150F0_000024B8:
     addi r4, r4, fn_80216500@l
     li r5, 0x0
     li r6, 0x88
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0x18(r1)
     stw r3, lbl_8087F268
     srwi r0, r4, 31

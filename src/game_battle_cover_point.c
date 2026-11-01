@@ -38,7 +38,7 @@ extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 
 /* External data declarations */
@@ -1494,7 +1494,7 @@ lbl_fn_8040D244_00001444:
     li r6, 0x434
     addi r4, r4, fn_8040B560@l
     addi r5, r5, fn_8040B60C@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x60c(r29)
     b lbl_fn_8040D244_00001498
 lbl_fn_8040D244_00001490:

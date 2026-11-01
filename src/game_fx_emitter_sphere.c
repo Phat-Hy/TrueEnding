@@ -7,12 +7,12 @@ extern void _restgpr_25(void);
 extern void _savegpr_22(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D760(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000E18C(void);
 extern void fn_80011034(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
 extern void fn_8004203C(void);
@@ -23,12 +23,12 @@ extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void fn_800CB5C8(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EC204(void);
 extern void fn_800EC24C(void);
@@ -337,7 +337,7 @@ lbl_fn_80287400_000002CC:
     lfs f1, lbl_808839F8
     addi r3, r28, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f3, lbl_808839FC
     li r0, 0x1
     lfs f0, lbl_80883A20
@@ -435,7 +435,7 @@ lbl_fn_80287788_000003F8:
     lfs f1, lbl_808839F8
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_808839FC
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -535,7 +535,7 @@ lbl_fn_802878EC_000005A8:
     lfs f1, lbl_808839F8
     addi r3, r29, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_808839FC
     li r0, 0x1
     stw r0, 0x3fc(r29)
@@ -1464,7 +1464,7 @@ lbl_fn_802885EC_00001334:
     bne lbl_fn_802885EC_00001364
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1518(r31)
     b lbl_fn_802885EC_00001928
 lbl_fn_802885EC_00001364:
@@ -1475,7 +1475,7 @@ lbl_fn_802885EC_00001364:
     bne lbl_fn_802885EC_0000138C
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1994(r31)
     b lbl_fn_802885EC_00001928
 lbl_fn_802885EC_0000138C:
@@ -1486,7 +1486,7 @@ lbl_fn_802885EC_0000138C:
     bne lbl_fn_802885EC_000013B4
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1998(r31)
     b lbl_fn_802885EC_00001928
 lbl_fn_802885EC_000013B4:
@@ -1497,7 +1497,7 @@ lbl_fn_802885EC_000013B4:
     bne lbl_fn_802885EC_000013DC
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x199c(r31)
     b lbl_fn_802885EC_00001928
 lbl_fn_802885EC_000013DC:
@@ -1508,7 +1508,7 @@ lbl_fn_802885EC_000013DC:
     bne lbl_fn_802885EC_00001404
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x19a0(r31)
     b lbl_fn_802885EC_00001928
 lbl_fn_802885EC_00001404:
@@ -1892,7 +1892,7 @@ lbl_fn_802885EC_00001938:
     beq lbl_fn_802885EC_0000196C
     addi r3, r31, 0x1978
     addi r4, r4, 0x4
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_802885EC_00001980
 lbl_fn_802885EC_0000196C:
     lfs f1, lbl_80883A98
@@ -1904,7 +1904,7 @@ lbl_fn_802885EC_00001980:
     addi r3, r1, 0x14
     addi r4, r31, 0x1978
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x20
     addi r4, r1, 0x14
     bl fn_800F7FD8

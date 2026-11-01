@@ -12,7 +12,7 @@ extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_8008937C(void);
 extern void lockon_updateTarget(void);
@@ -28,7 +28,7 @@ extern void fn_800CB440(void);
 extern void fn_800CB5C8(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_8011F91C(void);
 extern void fn_8011FC10(void);
 extern void fn_8011FE3C(void);
@@ -675,7 +675,7 @@ lbl_fn_80422510_00000720:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80886618
     mr r3, r30
     lfs f2, lbl_80886624
@@ -1491,15 +1491,15 @@ lbl_fn_80422F78_00001214:
     addi r3, r1, 0x8
     add r30, r29, r0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x154(r30)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x158(r30)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x15c(r30)
 lbl_fn_80422F78_0000127C:
     addi r3, r1, 0x8
@@ -1623,7 +1623,7 @@ lbl_fn_804231C0_000013CC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r28
     addi r4, r31, 0x15
     bl fn_8008937C

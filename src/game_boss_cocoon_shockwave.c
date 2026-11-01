@@ -44,7 +44,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
 extern void fn_806952C4(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -1343,7 +1343,7 @@ lbl_atn_LoadModel_destructor_00001000:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x30
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x6c(r30)
     b lbl_atn_LoadModel_destructor_0000104C
 lbl_atn_LoadModel_destructor_00001044:

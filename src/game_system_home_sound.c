@@ -35,7 +35,7 @@ extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CF7DC(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_801F3FF8(void);
 extern void saveSlot_readSummary(void);
@@ -201,15 +201,15 @@ lbl_fn_803637D4_000000B0:
     bne lbl_fn_803637D4_0000010C
     addi r3, r1, 0x34
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x3e0(r29)
     addi r3, r1, 0x34
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x3e4(r29)
     addi r3, r1, 0x34
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x3e8(r29)
     b lbl_fn_803637D4_00000160
 lbl_fn_803637D4_0000010C:

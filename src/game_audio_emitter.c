@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void fn_80063200(void);
 extern void fn_800638B0(void);
 extern void fn_80063D3C(void);
@@ -13,7 +13,7 @@ extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
@@ -64,7 +64,7 @@ extern void PSVECNormalize(void);
 extern void PSVECDotProduct(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806959D8(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -479,7 +479,7 @@ lbl_fn_802FD328_00000470:
     addi r3, r31, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
@@ -541,7 +541,7 @@ lbl_fn_802FD328_00000570:
     addi r3, r31, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
@@ -625,7 +625,7 @@ lbl_fn_802FD328_00000660:
     addi r3, r31, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
@@ -699,7 +699,7 @@ lbl_fn_802FD328_00000810:
     addi r3, r31, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, 0x6
     stw r0, 0x58c(r31)
     mr r3, r31
@@ -876,7 +876,7 @@ lbl_fn_802FD328_00000AAC:
     addi r3, r31, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, 0x7
     stw r0, 0x58c(r31)
     mr r3, r31
@@ -940,7 +940,7 @@ lbl_fn_802FD328_00000B9C:
     addi r3, r31, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, 0x9
     stw r0, 0x58c(r31)
     mr r3, r31
@@ -1014,7 +1014,7 @@ lbl_fn_802FD328_00000C8C:
     addi r3, r31, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
@@ -1059,7 +1059,7 @@ lbl_fn_802FD328_00000D34:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     mr r3, r31
     bl fn_80304B40
     cmpwi r3, 0x0
@@ -1080,7 +1080,7 @@ lbl_fn_802FD328_00000D34:
     li r7, 0x1
     lfs f6, lbl_80884A20
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_802FD328_00000DE4:
     lwz r3, lbl_8087EEB0
     addi r4, r31, 0x1618
@@ -1624,7 +1624,7 @@ lbl_fn_802FE3E4_0000155C:
     addi r3, r30, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, 0x2
     stw r0, 0x58c(r30)
     mr r3, r30
@@ -1680,7 +1680,7 @@ lbl_fn_802FE3E4_00001640:
     addi r3, r30, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, 0x2
     stw r0, 0x58c(r30)
     mr r3, r30
@@ -1785,7 +1785,7 @@ lbl_fn_802FE630_000017D8:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1899,7 +1899,7 @@ lbl_fn_802FE630_00001978:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -2066,7 +2066,7 @@ lbl_fn_802FE630_00001BF8:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -2180,7 +2180,7 @@ lbl_fn_802FE630_00001D98:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -2350,7 +2350,7 @@ lbl_fn_802FE630_00002024:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -2464,7 +2464,7 @@ lbl_fn_802FE630_000021C4:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0

@@ -21,7 +21,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_8011FC10(void);
 extern void fn_80133130(void);
 extern void boss_updatePhaseState(void);
@@ -484,7 +484,7 @@ lbl_fn_802799C0_000004A4:
     bne lbl_fn_802799C0_000004D4
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1504(r29)
     b lbl_fn_802799C0_00000C54
 lbl_fn_802799C0_000004D4:
@@ -495,7 +495,7 @@ lbl_fn_802799C0_000004D4:
     bne lbl_fn_802799C0_000004FC
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1510(r29)
     b lbl_fn_802799C0_00000C54
 lbl_fn_802799C0_000004FC:
@@ -506,7 +506,7 @@ lbl_fn_802799C0_000004FC:
     bne lbl_fn_802799C0_00000540
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     frsp f0, f1
     stfs f1, 0x1514(r29)
     fsubs f0, f0, f29
@@ -579,7 +579,7 @@ lbl_fn_802799C0_00000608:
     bne lbl_fn_802799C0_00000630
     addi r3, r1, 0x48
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x19a8(r29)
     b lbl_fn_802799C0_00000C54
 lbl_fn_802799C0_00000630:

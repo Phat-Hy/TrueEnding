@@ -15,7 +15,7 @@ extern void fn_8005E7F4(void);
 extern void fn_80076FF8(void);
 extern void fn_800BDB58(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_801F4728(void);
 extern void fn_801FECE0(void);
@@ -648,31 +648,31 @@ lbl_fn_804AA490_00000750:
     bl talk_parseQuotedString
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f25, f1
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f26, f1
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f27, f1
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f30, f1
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f29, f1
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f28, f1
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     mr r4, r23
     stfs f30, 0x58(r1)
     li r6, -0x1
@@ -809,39 +809,39 @@ lbl_fn_804AA490_000009B4:
     bne lbl_fn_804AA490_00000AC8
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x5fc(r23)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x5dc(r23)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x5e0(r23)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x5e4(r23)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x5e8(r23)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f30, f1
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f29, f1
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f28, f1
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     frsp f5, f30
     stfs f30, 0x48(r1)
     frsp f4, f29
@@ -856,19 +856,19 @@ lbl_fn_804AA490_000009B4:
     stfs f3, 0x608(r23)
     stfs f0, 0x60c(r23)
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x5ec(r23)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x5f0(r23)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x5f4(r23)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x5f8(r23)
     b lbl_fn_804AA490_00000D04
 lbl_fn_804AA490_00000AC8:
@@ -879,27 +879,27 @@ lbl_fn_804AA490_00000AC8:
     bne lbl_fn_804AA490_00000B6C
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x638(r23)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x63c(r23)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f30, f1
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f29, f1
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f28, f1
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     frsp f5, f30
     stfs f30, 0x38(r1)
     frsp f4, f29
@@ -921,27 +921,27 @@ lbl_fn_804AA490_00000B6C:
     bne lbl_fn_804AA490_00000C10
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x630(r23)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x634(r23)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f28, f1
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f29, f1
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f30, f1
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     frsp f5, f28
     stfs f28, 0x28(r1)
     frsp f4, f29
@@ -963,19 +963,19 @@ lbl_fn_804AA490_00000C10:
     bne lbl_fn_804AA490_00000C9C
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x78(r1)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x7c(r1)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x80(r1)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x1538(r23)
     addi r4, r23, 0x1538
     stfs f1, 0x84(r1)
@@ -1000,23 +1000,23 @@ lbl_fn_804AA490_00000C9C:
     bne lbl_fn_804AA490_00000D04
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x15f4(r23)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x15f8(r23)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x15fc(r23)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1600(r23)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1604(r23)
     stfs f31, 0x1608(r23)
 lbl_fn_804AA490_00000D04:

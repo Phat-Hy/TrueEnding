@@ -7,7 +7,7 @@ extern void fn_8004D314(void);
 extern void fn_8004ED34(void);
 extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800CB5C8(void);
 extern void system_getNextSequenceId(void);
@@ -1141,7 +1141,7 @@ lbl_fn_802F8CA4_00000EE0:
     lfs f1, lbl_80884980
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_80884994
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1773,7 +1773,7 @@ lbl_fn_802F93F0_00001814:
     lfs f1, lbl_80884980
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_80884994
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1840,7 +1840,7 @@ lbl_fn_802F93F0_0000190C:
     lfs f1, lbl_80884980
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_80884994
     li r0, 0x1
     stw r0, 0x3fc(r31)

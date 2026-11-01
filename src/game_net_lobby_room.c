@@ -37,7 +37,7 @@ struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct 
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void res_findResourceSlot(void);
 extern void fn_80470580(void);
@@ -620,7 +620,7 @@ lbl_fn_8049A09C_00000710:
     oris r0, r0, 0x2000
     stw r0, 0x340(r29)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x58(r29)
     b lbl_fn_8049A09C_000008CC
 lbl_fn_8049A09C_00000744:

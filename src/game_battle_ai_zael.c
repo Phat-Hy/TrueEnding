@@ -13,7 +13,7 @@ extern void fn_8006AA20(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087858(void);
 extern void fn_80087994(void);
@@ -32,7 +32,7 @@ extern void fn_800C31F4(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_802180A8(void);
 extern void res_MsgHandle_constructor(void);
 extern void fn_803EBC44(void);
@@ -63,7 +63,7 @@ extern void PSVECDotProduct(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
@@ -1010,11 +1010,11 @@ lbl_fn_80430428_00000C84:
     bne lbl_fn_80430428_00000D44
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x8d0(r31)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x8d4(r31)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
@@ -1083,7 +1083,7 @@ lbl_fn_80430428_00000D6C:
     addi r4, r4, fn_803F3334@l
     li r5, 0x0
     li r6, 0x1c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x8a8(r31)
     b lbl_fn_80430428_00000DBC
 lbl_fn_80430428_00000DB4:
@@ -1112,7 +1112,7 @@ lbl_fn_80430428_00000DD4:
     addi r4, r4, fn_803F3360@l
     li r5, 0x0
     li r6, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x8b0(r31)
     b lbl_fn_80430428_00000E24
 lbl_fn_80430428_00000E1C:
@@ -1615,7 +1615,7 @@ lbl_fn_80430DE4_000014CC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80886848
     mr r3, r30
     lfs f2, lbl_8088684C

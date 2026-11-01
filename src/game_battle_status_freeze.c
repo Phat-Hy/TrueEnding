@@ -17,7 +17,7 @@ extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
@@ -33,7 +33,7 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80097E80(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_802180A8(void);
 extern void fn_803C1560(void);
 extern void fn_803EC568(void);
@@ -58,7 +58,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void swprintf(void);
 extern void std_atan2(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern char* strcpy(char* dest, const char* src);
 
@@ -364,7 +364,7 @@ lbl_fn_804275D0_00000290:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808866B8
     mr r3, r30
     lfs f2, lbl_808866BC
@@ -406,7 +406,7 @@ lbl_fn_804275D0_00000290:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r4, r30
     addi r3, r29, 0xb0
     bl fn_803F11F8
@@ -1019,7 +1019,7 @@ lbl_fn_80427F28_00000BE8:
     li r6, 0x450
     addi r4, r4, fn_80427730@l
     addi r5, r5, fn_80427804@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x5f8(r30)
     b lbl_fn_80427F28_00000C3C
 lbl_fn_80427F28_00000C34:
@@ -1421,7 +1421,7 @@ lbl_fn_804283EC_00001180:
     bne lbl_fn_804283EC_000011A4
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x600(r27)
 lbl_fn_804283EC_000011A4:
     addi r3, r1, 0x8

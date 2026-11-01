@@ -11,7 +11,7 @@ extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
@@ -829,7 +829,7 @@ lbl_fn_804091FC_000009A0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808862A0
     mr r3, r30
     lfs f2, lbl_808862A4
@@ -871,7 +871,7 @@ lbl_fn_804091FC_000009A0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x60
     addi r5, r29, 0x8b0
@@ -880,7 +880,7 @@ lbl_fn_804091FC_000009A0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808862A0
     mr r3, r30
     lfs f2, lbl_808862A4

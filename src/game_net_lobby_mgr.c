@@ -12,7 +12,7 @@ extern void _savegpr_27(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_800109E0(void);
 extern void fn_80013410(void);
 extern void fn_8003E4A4(void);
@@ -27,7 +27,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8009EE30(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_800F80A8(void);
 extern void fn_801125F8(void);
@@ -61,7 +61,7 @@ extern void rand(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern u32 strlen(const char* str);
 
@@ -753,13 +753,13 @@ lbl_fn_804985E4_00000840:
     bl fn_80497864
     addi r3, r3, 0x2c
     addi r4, r1, 0x18
-    bl fn_8000D124
+    bl vec3_copy
     mr r4, r24
     addi r3, r21, 0x60
     bl fn_80497864
     addi r3, r3, 0x38
     addi r4, r1, 0x60
-    bl fn_8000D124
+    bl vec3_copy
     lfs f31, 0x1c(r25)
     mr r4, r24
     addi r3, r21, 0x60
@@ -804,7 +804,7 @@ lbl_fn_804985E4_00000840:
     stw r22, 0x90(r3)
     addi r3, r1, 0x148
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     mr r4, r24
     addi r3, r21, 0x60
@@ -1612,7 +1612,7 @@ lbl_fn_80499734_00001420:
     li r6, 0xa0
     addi r4, r4, fn_804997E4@l
     addi r5, r5, fn_8049707C@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_80499734_00001474
 lbl_fn_80499734_0000146C:

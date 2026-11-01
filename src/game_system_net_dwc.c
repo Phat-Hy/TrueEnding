@@ -36,7 +36,7 @@ extern void fn_806920C0(void);
 extern void fn_806926D4(void);
 extern void fn_8069293C(void);
 extern void fn_806952C4(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
 
@@ -668,7 +668,7 @@ lbl_fn_80394320_000007C4:
     addi r4, r4, fn_803AB948@l
     li r5, 0x0
     li r6, 0x18
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x368(r30)
     b lbl_fn_80394320_00000814
 lbl_fn_80394320_0000080C:
@@ -702,7 +702,7 @@ lbl_fn_80394320_00000840:
     addi r4, r4, fn_803AB948@l
     li r5, 0x0
     li r6, 0x18
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x370(r30)
     b lbl_fn_80394320_00000890
 lbl_fn_80394320_00000888:
@@ -736,7 +736,7 @@ lbl_fn_80394320_000008BC:
     addi r4, r4, fn_803AB948@l
     li r5, 0x0
     li r6, 0x18
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x378(r30)
     b lbl_fn_80394320_0000090C
 lbl_fn_80394320_00000904:
@@ -770,7 +770,7 @@ lbl_fn_80394320_00000938:
     addi r4, r4, fn_803AB948@l
     li r5, 0x0
     li r6, 0x18
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x358(r30)
     b lbl_fn_80394320_00000988
 lbl_fn_80394320_00000980:
@@ -804,7 +804,7 @@ lbl_fn_80394320_000009B4:
     addi r4, r4, fn_803AB948@l
     li r5, 0x0
     li r6, 0x18
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x360(r30)
     b lbl_fn_80394320_00000A18
 lbl_fn_80394320_000009FC:
@@ -1335,7 +1335,7 @@ lbl_fn_80394C68_000010BC:
     addi r4, r4, fn_80395794@l
     li r5, 0x0
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x118(r25)
     b lbl_fn_80394C68_0000110C
 lbl_fn_80394C68_00001104:
@@ -1366,7 +1366,7 @@ lbl_fn_80394C68_0000112C:
     addi r4, r4, fn_80395794@l
     li r5, 0x0
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x120(r25)
     b lbl_fn_80394C68_0000117C
 lbl_fn_80394C68_00001174:
@@ -1397,7 +1397,7 @@ lbl_fn_80394C68_0000119C:
     addi r4, r4, fn_80395794@l
     li r5, 0x0
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x128(r25)
     b lbl_fn_80394C68_000011EC
 lbl_fn_80394C68_000011E4:
@@ -1428,7 +1428,7 @@ lbl_fn_80394C68_0000120C:
     addi r4, r4, fn_80395794@l
     li r5, 0x0
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x100(r25)
     b lbl_fn_80394C68_0000125C
 lbl_fn_80394C68_00001254:
@@ -1459,7 +1459,7 @@ lbl_fn_80394C68_0000127C:
     addi r4, r4, fn_80395794@l
     li r5, 0x0
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x110(r25)
     b lbl_fn_80394C68_000012CC
 lbl_fn_80394C68_000012C4:
@@ -1491,7 +1491,7 @@ lbl_fn_80394C68_000012EC:
     li r6, 0x378
     addi r4, r4, fn_803957B0@l
     addi r5, r5, atn_ColliBox_destructor@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x108(r25)
     b lbl_fn_80394C68_00001340
 lbl_fn_80394C68_00001338:
@@ -1523,7 +1523,7 @@ lbl_fn_80394C68_00001360:
     li r6, 0xc
     addi r4, r4, fn_801360C4@l
     addi r5, r5, fn_801360D8@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x148(r25)
     b lbl_fn_80394C68_000013B4
 lbl_fn_80394C68_000013AC:
@@ -1555,7 +1555,7 @@ lbl_fn_80394C68_000013D4:
     li r6, 0xc
     addi r4, r4, fn_801360C4@l
     addi r5, r5, fn_801360D8@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x150(r25)
     b lbl_fn_80394C68_00001428
 lbl_fn_80394C68_00001420:

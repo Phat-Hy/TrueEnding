@@ -14,7 +14,7 @@ extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -23,7 +23,7 @@ extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
@@ -34,7 +34,7 @@ extern void fn_800CB5C8(void);
 extern void fn_800CB6E4(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_800FAB80(void);
@@ -220,7 +220,7 @@ lbl_fn_802B1F2C_00000074:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80883F40
     mr r3, r30
     lfs f2, lbl_8088400C
@@ -238,7 +238,7 @@ lbl_fn_802B1F2C_00000074:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x103
     addi r5, r29, 0x1514
@@ -247,7 +247,7 @@ lbl_fn_802B1F2C_00000074:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x115
     addi r5, r29, 0x1518
@@ -256,7 +256,7 @@ lbl_fn_802B1F2C_00000074:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x121
     addi r5, r29, 0x151c
@@ -265,7 +265,7 @@ lbl_fn_802B1F2C_00000074:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80883F40
     mr r3, r30
     lfs f2, lbl_80884010
@@ -325,7 +325,7 @@ lbl_fn_802B1F2C_00000074:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x25e
     addi r5, r29, 0x14bc
@@ -334,7 +334,7 @@ lbl_fn_802B1F2C_00000074:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     stw r30, 0x1a9c(r29)
     lwz r31, 0x11c(r1)
     lwz r30, 0x118(r1)
@@ -1180,7 +1180,7 @@ lbl_fn_802B28BC_00000E98:
     bne lbl_fn_802B28BC_00000EC0
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x15e0(r30)
     b lbl_fn_802B28BC_00000F34
 lbl_fn_802B28BC_00000EC0:
@@ -1191,7 +1191,7 @@ lbl_fn_802B28BC_00000EC0:
     bne lbl_fn_802B28BC_00000EE8
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14f8(r30)
     b lbl_fn_802B28BC_00000F34
 lbl_fn_802B28BC_00000EE8:
@@ -1937,7 +1937,7 @@ lbl_fn_802B3764_00001938:
     lfs f1, lbl_80884028
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_80884034
     li r29, 0x1
     stw r29, 0x3fc(r31)

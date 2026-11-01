@@ -11,7 +11,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800A4494(void);
 extern void atn_Task_destructor(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DDA70(void);
 extern void fn_800DDD18(void);
 extern void fn_800DEEDC(void);
@@ -1929,7 +1929,7 @@ lbl_fn_800A67D4_00001830:
     stw r0, lbl_8087EF78
 lbl_fn_800A67D4_0000183C:
     mr r3, r4
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x4(r31)
     mr r3, r31
     lwz r31, 0xc(r1)

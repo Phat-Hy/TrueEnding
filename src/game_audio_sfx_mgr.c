@@ -13,7 +13,7 @@ extern void fn_8005B6E8(void);
 extern void fn_80062C8C(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_8008937C(void);
 extern void atn_Model_findBoneIndex(void);
@@ -22,7 +22,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_80097E80(void);
 extern void fn_800C344C(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_8012D8B8(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80145334(void);
@@ -55,7 +55,7 @@ extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -316,7 +316,7 @@ lbl_fn_80310098_00000260:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0xa7
     addi r5, r27, 0x1574
@@ -325,7 +325,7 @@ lbl_fn_80310098_00000260:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0xb6
     addi r5, r27, 0x1578
@@ -334,7 +334,7 @@ lbl_fn_80310098_00000260:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0xc5
     addi r5, r27, 0x157c
@@ -343,7 +343,7 @@ lbl_fn_80310098_00000260:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x153
     bl fn_8008937C
@@ -356,7 +356,7 @@ lbl_fn_80310098_00000260:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r28
     addi r4, r30, 0x166
     addi r5, r27, 0x14f4
@@ -365,7 +365,7 @@ lbl_fn_80310098_00000260:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x16f
     bl fn_8008937C
@@ -377,7 +377,7 @@ lbl_fn_80310098_00000260:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r28
     addi r4, r30, 0x166
     addi r5, r27, 0x1504
@@ -386,7 +386,7 @@ lbl_fn_80310098_00000260:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x17a
     bl fn_8008937C
@@ -397,7 +397,7 @@ lbl_fn_80310098_00000260:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x184
     bl fn_8008937C
@@ -408,7 +408,7 @@ lbl_fn_80310098_00000260:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     addi r11, r1, 0x120
     bl _restgpr_27
     lwz r0, 0x124(r1)
@@ -834,7 +834,7 @@ lbl_fn_803104D4_000009E8:
     li r5, 0x0
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x1518(r25)
     mr r24, r3
     cmpwi r0, 0x0
@@ -947,7 +947,7 @@ lbl_fn_803104D4_00000B80:
     addi r4, r31, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x1518(r25)
     mr r24, r3
     cmpwi r0, 0x0
@@ -1182,7 +1182,7 @@ lbl_fn_80310C64_00000F00:
     bne lbl_fn_80310C64_00000F28
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14fc(r29)
     b lbl_fn_80310C64_00001020
 lbl_fn_80310C64_00000F28:
@@ -1193,7 +1193,7 @@ lbl_fn_80310C64_00000F28:
     bne lbl_fn_80310C64_00000F50
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1500(r29)
     b lbl_fn_80310C64_00001020
 lbl_fn_80310C64_00000F50:
@@ -1204,7 +1204,7 @@ lbl_fn_80310C64_00000F50:
     bne lbl_fn_80310C64_00000F78
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1504(r29)
     b lbl_fn_80310C64_00001020
 lbl_fn_80310C64_00000F78:
@@ -1215,7 +1215,7 @@ lbl_fn_80310C64_00000F78:
     bne lbl_fn_80310C64_00000FA0
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1508(r29)
     b lbl_fn_80310C64_00001020
 lbl_fn_80310C64_00000FA0:
@@ -1776,7 +1776,7 @@ lbl_fn_80311364_00001710:
     li r5, 0x0
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x1518(r27)
     mr r25, r3
     cmpwi r0, 0x0
@@ -1889,7 +1889,7 @@ lbl_fn_80311364_000018A8:
     addi r4, r31, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x1518(r27)
     mr r24, r3
     cmpwi r0, 0x0

@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void fn_8000D0F8(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -52,7 +52,7 @@ extern void rand(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
 extern void fn_8068B100(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 jumptable_807857A0[];
@@ -1396,7 +1396,7 @@ asm void fn_8028A024(void)
     bl fn_8000D0F8
     addi r3, r1, 0x60
     addi r4, r1, 0x50
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r30, 0x624
     addi r4, r1, 0x5c
     bl fn_8028A1F8
@@ -1410,7 +1410,7 @@ asm void fn_8028A024(void)
     bl fn_8000D0F8
     addi r3, r1, 0x60
     addi r4, r1, 0x44
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r30, 0x624
     addi r4, r1, 0x5c
     bl fn_8028A1F8
@@ -1424,7 +1424,7 @@ asm void fn_8028A024(void)
     bl fn_8000D0F8
     addi r3, r1, 0x60
     addi r4, r1, 0x38
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r30, 0x624
     addi r4, r1, 0x5c
     bl fn_8028A1F8
@@ -1438,7 +1438,7 @@ asm void fn_8028A024(void)
     bl fn_8000D0F8
     addi r3, r1, 0x60
     addi r4, r1, 0x2c
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r30, 0x624
     addi r4, r1, 0x5c
     bl fn_8028A1F8
@@ -1452,7 +1452,7 @@ asm void fn_8028A024(void)
     bl fn_8000D0F8
     addi r3, r1, 0x60
     addi r4, r1, 0x20
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r30, 0x624
     addi r4, r1, 0x5c
     bl fn_8028A1F8
@@ -1466,7 +1466,7 @@ asm void fn_8028A024(void)
     bl fn_8000D0F8
     addi r3, r1, 0x60
     addi r4, r1, 0x14
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r30, 0x624
     addi r4, r1, 0x5c
     bl fn_8028A1F8
@@ -1480,7 +1480,7 @@ asm void fn_8028A024(void)
     bl fn_8000D0F8
     addi r3, r1, 0x60
     addi r4, r1, 0x8
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r30, 0x624
     addi r4, r1, 0x5c
     bl fn_8028A1F8
@@ -1529,7 +1529,7 @@ lbl_fn_8028A1F8_0000145C:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x8(r30)
     mr r28, r3
     cmpwi r0, 0x0
@@ -1643,7 +1643,7 @@ lbl_fn_8028A1F8_000015FC:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x8(r30)
     mr r28, r3
     cmpwi r0, 0x0

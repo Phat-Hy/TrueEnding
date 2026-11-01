@@ -3,13 +3,13 @@
 
 /* External function declarations */
 extern void fn_8000D0F8(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
@@ -726,7 +726,7 @@ lbl_fn_80265B00_00000808:
     bl fn_80266164
     addi r3, r3, 0xc
     addi r4, r1, 0x8
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80265B00_00000864
 lbl_fn_80265B00_00000838:
     lwz r0, 0x1640(r31)
@@ -1724,7 +1724,7 @@ lbl_fn_80266A24_00001614:
     mr r4, r3
     addi r3, r1, 0x44
     addi r5, r30, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x44
     bl fn_8000D3A4
     lfs f0, lbl_808836A0

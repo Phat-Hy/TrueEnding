@@ -16,7 +16,7 @@ extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -27,7 +27,7 @@ extern void fn_8008B140(void);
 extern void fn_80092F1C(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_802180A8(void);
@@ -336,7 +336,7 @@ lbl_fn_80419C00_000002F0:
     bl strcpy
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r23, 0xf4
     addi r4, r1, 0x110
     li r5, 0x0
@@ -442,7 +442,7 @@ lbl_fn_80419C00_00000448:
     stw r3, 0xe8(r1)
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xec(r1)
     addi r3, r1, 0x210
     bl talk_formatQuotedString
@@ -460,7 +460,7 @@ lbl_fn_80419C00_00000448:
     srwi r0, r0, 5
     stb r0, 0xf1(r1)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xf4(r1)
 lbl_fn_80419C00_00000500:
     addi r3, r1, 0x210
@@ -475,15 +475,15 @@ lbl_fn_80419C00_00000500:
     bne lbl_fn_80419C00_0000062C
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x30(r1)
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x34(r1)
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x38(r1)
     addi r3, r1, 0xb8
     li r4, 0x79
@@ -510,7 +510,7 @@ lbl_fn_80419C00_00000500:
     stfs f2, 0x38(r1)
     stfs f2, 0x28(r1)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     frsp f0, f1
     stfs f1, 0x2c(r1)
     fcmpo cr0, f0, f30
@@ -567,19 +567,19 @@ lbl_fn_80419C00_00000674:
     bne lbl_fn_80419C00_000006F8
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x100(r1)
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x104(r1)
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x108(r1)
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x10c(r1)
     addi r3, r1, 0x88
     li r4, 0x79
@@ -601,19 +601,19 @@ lbl_fn_80419C00_000006F8:
     bne lbl_fn_80419C00_0000077C
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x100(r1)
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x104(r1)
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x108(r1)
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x10c(r1)
     addi r3, r1, 0x58
     li r4, 0x79
@@ -701,7 +701,7 @@ lbl_fn_80419C00_00000820:
 lbl_fn_80419C00_00000888:
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r30, r30, 0x1
     stfs f1, 0x8(r22)
     cmpwi r30, 0x5
@@ -741,17 +741,17 @@ lbl_fn_80419C00_0000090C:
     bne lbl_fn_80419C00_0000098C
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f31, f1
     addi r3, r1, 0x210
     stfs f0, 0x14(r1)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f31, f1
     addi r3, r1, 0x210
     stfs f0, 0x18(r1)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f7, f31, f1
     lfs f0, 0x80(r23)
     lfs f6, 0x78(r23)
@@ -774,15 +774,15 @@ lbl_fn_80419C00_0000098C:
     bne lbl_fn_80419C00_00000A00
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x8(r1)
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xc(r1)
     addi r3, r1, 0x210
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     frsp f0, f1
     lfs f3, 0x98(r23)
     lfs f6, 0x90(r23)
@@ -1740,7 +1740,7 @@ lbl_fn_8041B094_000016AC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80886514
     mr r3, r30
     lfs f2, lbl_80886518
@@ -1782,7 +1782,7 @@ lbl_fn_8041B094_000016AC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r4, r30
     addi r3, r27, 0xb0
     bl fn_803F11F8

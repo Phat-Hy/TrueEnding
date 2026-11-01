@@ -18,7 +18,7 @@ extern void fn_80063D3C(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_80136138(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -41,7 +41,7 @@ extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 
 /* External data declarations */
@@ -815,7 +815,7 @@ lbl_fn_804334EC_000009C8:
     bne lbl_fn_804334EC_00000A00
     addi r3, r1, 0x858
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x120(r15)
     addi r3, r1, 0x858
     bl talk_formatQuotedString
@@ -842,7 +842,7 @@ lbl_fn_804334EC_00000A00:
     stw r3, 0x2c(r1)
     addi r3, r1, 0x858
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x840(r1)
     addi r3, r1, 0x858
     bl talk_formatQuotedString
@@ -884,7 +884,7 @@ lbl_fn_804334EC_00000ABC:
     addi r5, r27, fn_80432E50@l
     li r6, 0x830
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x140(r15)
     mr r22, r3
     cmpwi r0, 0x0
@@ -931,7 +931,7 @@ lbl_fn_804334EC_00000B64:
     addi r4, r28, fn_804345E0@l
     li r5, 0x0
     li r6, 0x1c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r30, r3
     b lbl_fn_804334EC_00000BAC
 lbl_fn_804334EC_00000BA8:
@@ -1118,7 +1118,7 @@ lbl_fn_804334EC_00000E0C:
     addi r4, r26, fn_804345C8@l
     addi r5, r27, fn_80432E50@l
     li r6, 0x830
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x140(r15)
     mr r18, r3
     cmpwi r0, 0x0
@@ -1165,7 +1165,7 @@ lbl_fn_804334EC_00000EC4:
     addi r4, r28, fn_804345E0@l
     li r5, 0x0
     li r6, 0x1c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r16, r3
     b lbl_fn_804334EC_00000F0C
 lbl_fn_804334EC_00000F08:
@@ -1366,7 +1366,7 @@ lbl_fn_804334EC_000011A8:
     addi r4, r28, fn_804345E0@l
     li r5, 0x0
     li r6, 0x1c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r18, r3
     b lbl_fn_804334EC_000011F0
 lbl_fn_804334EC_000011EC:
@@ -1556,32 +1556,32 @@ lbl_fn_804334EC_00001488:
     bne lbl_fn_804334EC_000018FC
     addi r3, r1, 0x858
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x8(r1)
     addi r3, r1, 0x858
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xc(r1)
     addi r3, r1, 0x858
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x10(r1)
     addi r3, r1, 0x858
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f31, f1
     addi r3, r1, 0x858
     stfs f0, 0x14(r1)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x18(r1)
     addi r3, r1, 0x858
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1c(r1)
     addi r3, r1, 0x858
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x10(r17)
     stfs f1, 0x20(r1)
     cmpwi r0, 0x0
@@ -1603,7 +1603,7 @@ lbl_fn_804334EC_00001528:
     li r5, 0x0
     li r6, 0x1c
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x10(r17)
     mr r16, r3
     cmpwi r0, 0x0
@@ -1726,7 +1726,7 @@ lbl_fn_804334EC_000016E8:
     addi r4, r28, fn_804345E0@l
     li r5, 0x0
     li r6, 0x1c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x10(r17)
     mr r18, r3
     cmpwi r0, 0x0

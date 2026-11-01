@@ -14,7 +14,7 @@ extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
@@ -23,7 +23,7 @@ extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_8008CD60(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A4228(void);
 extern void fn_800BFAC8(void);
@@ -1137,7 +1137,7 @@ lbl_fn_80436D04_00000D68:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808868E4
     mr r3, r30
     lfs f2, lbl_808868E8
@@ -2930,7 +2930,7 @@ lbl_fn_804375C0_00002784:
     stfs f0, 0x2c8(r14)
     li r4, 0x3
     lfs f1, lbl_80886900
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, 0x2
     stw r0, 0xed0(r15)
 lbl_fn_804375C0_000027A4:

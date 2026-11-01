@@ -19,7 +19,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800E41FC(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
@@ -598,7 +598,7 @@ lbl_fn_80306078_00000660:
     bne lbl_fn_80306078_00000688
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14e4(r31)
     b lbl_fn_80306078_00000884
 lbl_fn_80306078_00000688:
@@ -653,7 +653,7 @@ lbl_fn_80306078_00000728:
     bne lbl_fn_80306078_00000754
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fdivs f0, f1, f31
     stfs f0, 0x15b8(r31)
     b lbl_fn_80306078_00000884
@@ -740,7 +740,7 @@ lbl_fn_80306078_00000860:
     bne lbl_fn_80306078_00000884
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x153c(r31)
 lbl_fn_80306078_00000884:
     addi r3, r1, 0x8

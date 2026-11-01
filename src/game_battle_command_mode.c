@@ -61,7 +61,7 @@ extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern char* strcpy(char* dest, const char* src);
 
@@ -971,7 +971,7 @@ lbl_fn_80405E48_00000BD4:
     li r6, 0x43c
     addi r4, r4, fn_804047A4@l
     addi r5, r5, fn_80404864@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x60c(r29)
     b lbl_fn_80405E48_00000C28
 lbl_fn_80405E48_00000C20:

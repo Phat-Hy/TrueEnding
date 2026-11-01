@@ -45,7 +45,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -407,7 +407,7 @@ asm void fn_8009E5A0(void)
     li r5, 0x0
     li r6, 0x30
     li r7, 0x100
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087EF40
 lbl_fn_8009E5A0_0000047C:
     li r0, 0x0

@@ -16,7 +16,7 @@ extern void fn_8006BB6C(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_800EC654(void);
 extern void fn_800EDFE8(void);
@@ -30,7 +30,7 @@ extern void atoi(void);
 extern void wmemcpy(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -820,7 +820,7 @@ lbl_fn_8020DF88_000009CC:
     li r6, 0x10c
     addi r4, r4, fn_8020E990@l
     addi r5, r5, fn_8020EACC@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F1F0
     mr r0, r14
     lwz r12, 0x13c(r1)
@@ -897,43 +897,43 @@ lbl_fn_8020DF88_00000AF0:
 lbl_fn_8020DF88_00000B30:
     addi r3, r1, 0x13c
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x0(r16)
     addi r3, r1, 0x13c
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x4(r16)
     addi r3, r1, 0x13c
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x8(r16)
     addi r3, r1, 0x13c
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xc(r16)
     addi r3, r1, 0x13c
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x10(r16)
     addi r3, r1, 0x13c
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14(r16)
     addi r3, r1, 0x13c
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x28(r16)
     addi r3, r1, 0x13c
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x2c(r16)
     addi r3, r1, 0x13c
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x18(r16)
     addi r3, r1, 0x13c
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1c(r16)
     addi r3, r1, 0x13c
     bl talk_parseQuotedString
@@ -1107,7 +1107,7 @@ lbl_fn_8020DF88_00000E34:
 lbl_fn_8020DF88_00000E48:
     lwz r3, 0x10c(r1)
 lbl_fn_8020DF88_00000E4C:
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x38(r18)
     addi r3, r1, 0x74
     addi r4, r1, 0xd4

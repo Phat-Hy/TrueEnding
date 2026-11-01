@@ -28,7 +28,7 @@ extern void mem_realloc(void);
 extern void fn_8008B130(void);
 extern void fn_80095750(void);
 extern void fn_800D8C14(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
 extern void strcmp(void);
@@ -977,21 +977,21 @@ lbl_fn_8020C5D4_00000B80:
 lbl_fn_8020C5D4_00000B90:
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x10d4(r31)
     addi r3, r1, 0x8
     mulli r0, r0, 0x54
     add r4, r31, r0
     stfs f1, 0x480(r4)
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x10d4(r31)
     addi r3, r1, 0x8
     mulli r0, r0, 0x54
     add r4, r31, r0
     stfs f1, 0x484(r4)
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x10d4(r31)
     addi r3, r1, 0x8
     mulli r0, r0, 0x54

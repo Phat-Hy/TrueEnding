@@ -7,7 +7,7 @@ extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80096218(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_801065F4(void);
@@ -896,7 +896,7 @@ lbl_fn_8017A33C_00000A24:
     lfs f1, lbl_8088196C
     li r4, 0x3
     addi r3, r3, 0xb0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     cmpwi r29, 0x0
     beq lbl_fn_8017A33C_00000A74
     lwz r3, 0x139c(r30)

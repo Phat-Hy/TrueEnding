@@ -5,7 +5,7 @@
 extern void _restgpr_16(void);
 extern void _savegpr_16(void);
 extern void fn_80060D58(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void fn_80061824(void);
 extern void fn_80062C8C(void);
 extern void fn_80063484(void);
@@ -536,7 +536,7 @@ lbl_fn_800F5314_00000530:
     li r7, 0x1
     li r8, 0x0
     fadds f1, f0, f7
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_800F5314_0000067C:
     addis r3, r31, 0x3
     lwz r4, lbl_8087F8A0
@@ -1385,7 +1385,7 @@ lbl_fn_800F5314_0000127C:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_800F5314_000012B8:
     addis r19, r31, 0x1
     lis r21, lbl_80736040@ha
@@ -1445,7 +1445,7 @@ lbl_fn_800F5314_000012E4:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_800F5314_000013A0:
     addi r19, r19, 0x934
     addi r16, r16, 0x1

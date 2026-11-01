@@ -16,7 +16,7 @@ extern void fn_8004ED34(void);
 extern void fn_80051A88(void);
 extern void fn_80051CD8(void);
 extern void fn_80060D58(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void mem_free(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
@@ -1363,7 +1363,7 @@ asm void fn_8039BC6C(void)
     li r6, 0x0
     li r7, 0x0
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r0, 0x94(r30)
     cmpwi r0, 0x0
     beq lbl_fn_8039BC6C_0000128C
@@ -1391,7 +1391,7 @@ asm void fn_8039BC6C(void)
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_8039BC6C_0000128C:
     lwz r0, 0x114(r1)
     lwz r31, 0x10c(r1)

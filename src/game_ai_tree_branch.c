@@ -29,7 +29,7 @@ extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DD3FC(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
@@ -1530,7 +1530,7 @@ lbl_fn_8025A67C_0000141C:
     bne lbl_fn_8025A67C_00001444
     addi r3, r1, 0x44
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14bc(r18)
     b lbl_fn_8025A67C_000017AC
 lbl_fn_8025A67C_00001444:

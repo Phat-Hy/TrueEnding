@@ -6,7 +6,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80148990(void);
 extern void dialog_renderWindow(void);
@@ -28,7 +28,7 @@ extern void fn_80373148(void);
 extern void fn_805A49E8(void);
 extern void fn_805A4A20(void);
 extern void rand(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_807470A4[];
@@ -523,7 +523,7 @@ lbl_fn_802D2844_00000674:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -637,7 +637,7 @@ lbl_fn_802D2844_00000814:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -808,7 +808,7 @@ lbl_fn_802D2844_00000AA4:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -922,7 +922,7 @@ lbl_fn_802D2844_00000C44:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1352,7 +1352,7 @@ lbl_fn_802D3370_00001268:
     lfs f1, lbl_80884564
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_8088458C
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1503,7 +1503,7 @@ lbl_fn_802D3370_000014A0:
     lfs f1, lbl_80884564
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_8088458C
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1649,7 +1649,7 @@ lbl_fn_802D3370_000016C8:
     lfs f1, lbl_80884564
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_8088458C
     addi r3, r31, 0xb0
     stw r30, 0x3fc(r31)
@@ -1799,7 +1799,7 @@ lbl_fn_802D3370_00001900:
     lfs f1, lbl_80884564
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_8088458C
     addi r3, r31, 0xb0
     stw r29, 0x3fc(r31)

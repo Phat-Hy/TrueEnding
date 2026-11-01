@@ -4,13 +4,13 @@
 /* External function declarations */
 extern void fn_8000D0F8(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8001047C(void);
 extern void fn_800109E0(void);
 extern void fn_80011034(void);
 extern void fn_80011410(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void fn_8004ED34(void);
 extern void fn_80057A64(void);
@@ -415,7 +415,7 @@ lbl_fn_8028CB38_00000418:
     mr r4, r3
     addi r3, r1, 0x48
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x48
     bl fn_801C3910
     stfs f1, 0x1558(r31)
@@ -577,7 +577,7 @@ lbl_fn_8028CB38_00000644:
     bl fn_80057A64
     addi r3, r1, 0x6c
     addi r4, r1, 0x78
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, lbl_80883AF0
     addi r3, r1, 0x18
     addi r4, r1, 0x84
@@ -588,7 +588,7 @@ lbl_fn_8028CB38_00000644:
     bl fn_80013410
     addi r3, r1, 0x60
     addi r4, r1, 0x24
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r1, 0x120
     bl fn_80140500
     bl fn_801404F8

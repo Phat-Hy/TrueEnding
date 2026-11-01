@@ -45,7 +45,7 @@ extern void fn_805F9D20(void);
 extern void rand(void);
 extern void strncmp(void);
 extern void fn_806952C4(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern void fn_80695AD0(void);
 extern void fn_8072D210(void);
@@ -96,7 +96,7 @@ void fn_80097B34(void);
 void fn_80097B74(void);
 void vec3_clear(void* ptr);
 void atn_Anim_setLayerAnimation(void);
-void fn_80097CCC(void);
+void cursor_updateSlotState(void);
 void fn_80097D40(void);
 void atn_Anim_getLayerDuration(void);
 void fn_80097D9C(void);
@@ -591,7 +591,7 @@ lbl_fn_800977F0_00000674:
     addi r4, r4, fn_800979E8@l
     li r5, 0x0
     li r6, 0x12
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x218(r31)
     b lbl_fn_800977F0_000006C4
 lbl_fn_800977F0_000006BC:
@@ -622,7 +622,7 @@ lbl_fn_800977F0_000006E4:
     addi r4, r4, area_refresh@l
     li r5, 0x0
     li r6, 0x2c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x220(r31)
     b lbl_fn_800977F0_00000734
 lbl_fn_800977F0_0000072C:
@@ -657,7 +657,7 @@ lbl_fn_800977F0_00000760:
     li r6, 0x10
     addi r4, r4, vec3_clear@l
     addi r5, r5, fn_80097180@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x358(r31)
     b lbl_fn_800977F0_000007B4
 lbl_fn_800977F0_000007AC:
@@ -926,7 +926,7 @@ lbl_atn_Anim_setLayerAnimation_00000AE4:
     blr
 }
 
-asm void fn_80097CCC(void)
+asm void cursor_updateSlotState(void)
 {
     nofralloc
     mulli r0, r4, 0x30
@@ -938,19 +938,19 @@ asm void fn_80097CCC(void)
     stfs f0, 0x254(r3)
     lfs f0, 0x23c(r3)
     stfs f0, 0x258(r3)
-    bne lbl_fn_80097CCC_00000B44
+    bne lbl_cursor_updateSlotState_00000B44
     li r0, 0x0
     stw r0, 0x230(r3)
     lfs f0, 0x258(r3)
     fcmpo cr0, f1, f0
-    bge lbl_fn_80097CCC_00000B38
-    b lbl_fn_80097CCC_00000B3C
-lbl_fn_80097CCC_00000B38:
+    bge lbl_cursor_updateSlotState_00000B38
+    b lbl_cursor_updateSlotState_00000B3C
+lbl_cursor_updateSlotState_00000B38:
     fmr f1, f0
-lbl_fn_80097CCC_00000B3C:
+lbl_cursor_updateSlotState_00000B3C:
     stfs f1, 0x23c(r3)
     blr
-lbl_fn_80097CCC_00000B44:
+lbl_cursor_updateSlotState_00000B44:
     li r0, -0x1
     stw r0, 0x22c(r3)
     li r0, 0x0

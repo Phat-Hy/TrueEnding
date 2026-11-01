@@ -73,7 +73,7 @@ extern void atoi(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -761,7 +761,7 @@ lbl_weaponEffect_loadCSV_000007F0:
     li r6, 0x20
     addi r4, r4, fn_80207250@l
     addi r5, r5, fn_8020726C@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F16C
     mr r4, r29
     lwz r12, 0x30(r1)
@@ -1028,7 +1028,7 @@ lbl_fn_80207310_00000B8C:
     li r6, 0xc
     addi r4, r4, fn_802077F8@l
     addi r5, r5, fn_80207808@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F178
     mr r4, r29
     lwz r12, 0x38(r1)
@@ -2088,7 +2088,7 @@ lbl_fn_80208144_00001A34:
     addi r4, r4, fn_802085B4@l
     li r5, 0x0
     li r6, 0x64
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F190
     li r0, 0x0
     mr r28, r3

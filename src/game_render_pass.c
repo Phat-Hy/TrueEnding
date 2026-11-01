@@ -18,7 +18,7 @@ extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void fn_8007708C(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -28,7 +28,7 @@ extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8015495C(void);
@@ -1838,7 +1838,7 @@ lbl_fn_802A51F4_0000171C:
     bne lbl_fn_802A51F4_00001744
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x15d0(r30)
     b lbl_fn_802A51F4_000017B8
 lbl_fn_802A51F4_00001744:
@@ -1849,7 +1849,7 @@ lbl_fn_802A51F4_00001744:
     bne lbl_fn_802A51F4_0000176C
     addi r3, r1, 0x20
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14dc(r30)
     b lbl_fn_802A51F4_000017B8
 lbl_fn_802A51F4_0000176C:
@@ -1973,7 +1973,7 @@ lbl_fn_802A51F4_000018DC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lwz r3, 0x1438(r30)
     cmpwi r3, 0x0
     beq lbl_fn_802A51F4_0000195C

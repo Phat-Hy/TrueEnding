@@ -21,7 +21,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800EAECC(void);
 extern void fn_800EB49C(void);
 extern void fn_800EE360(void);
@@ -2032,7 +2032,7 @@ lbl_fn_8024AD30_00001B28:
     bne lbl_fn_8024AD30_00001B50
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1660(r29)
     b lbl_fn_8024AD30_00001F00
 lbl_fn_8024AD30_00001B50:
@@ -2054,7 +2054,7 @@ lbl_fn_8024AD30_00001B78:
     bne lbl_fn_8024AD30_00001BA0
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1664(r29)
     b lbl_fn_8024AD30_00001F00
 lbl_fn_8024AD30_00001BA0:
@@ -2065,7 +2065,7 @@ lbl_fn_8024AD30_00001BA0:
     bne lbl_fn_8024AD30_00001BC8
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1668(r29)
     b lbl_fn_8024AD30_00001F00
 lbl_fn_8024AD30_00001BC8:
@@ -2076,7 +2076,7 @@ lbl_fn_8024AD30_00001BC8:
     bne lbl_fn_8024AD30_00001BF0
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x166c(r29)
     b lbl_fn_8024AD30_00001F00
 lbl_fn_8024AD30_00001BF0:
@@ -2087,7 +2087,7 @@ lbl_fn_8024AD30_00001BF0:
     bne lbl_fn_8024AD30_00001C18
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x568(r29)
     b lbl_fn_8024AD30_00001F00
 lbl_fn_8024AD30_00001C18:
@@ -2179,7 +2179,7 @@ lbl_fn_8024AD30_00001D48:
     bne lbl_fn_8024AD30_00001D70
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x16c0(r29)
     b lbl_fn_8024AD30_00001F00
 lbl_fn_8024AD30_00001D70:

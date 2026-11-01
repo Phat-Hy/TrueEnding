@@ -4,11 +4,11 @@
 /* External function declarations */
 extern void _restgpr_24(void);
 extern void _savegpr_24(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80063D3C(void);
 extern void atn_Model_findBoneIndex(void);
@@ -187,7 +187,7 @@ lbl_fn_8028AA38_00000118:
     addi r3, r1, 0xa0
     addi r4, r1, 0xac
     addi r5, r30, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0xa0
     bl fn_800F7FF0
     addi r3, r1, 0x94
@@ -199,7 +199,7 @@ lbl_fn_8028AA38_00000118:
     addi r3, r1, 0x64
     addi r4, r1, 0xac
     addi r5, r30, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x64
     bl fn_8000D3A4
     lfs f0, 0x1514(r30)
@@ -208,19 +208,19 @@ lbl_fn_8028AA38_00000118:
 lbl_fn_8028AA38_00000170:
     addi r3, r30, 0x528
     addi r4, r1, 0xac
-    bl fn_8000D124
+    bl vec3_copy
     mr r5, r31
     addi r3, r1, 0x88
     addi r4, r31, 0xc
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x7c
     addi r4, r31, 0x18
     addi r5, r31, 0xc
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x70
     addi r4, r31, 0x24
     addi r5, r31, 0x18
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x88
     bl fn_801162A0
     lfs f0, lbl_80883B18
@@ -228,7 +228,7 @@ lbl_fn_8028AA38_00000170:
     bge lbl_fn_8028AA38_000001CC
     addi r3, r1, 0x88
     addi r4, r1, 0x7c
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_8028AA38_000001CC:
     addi r3, r1, 0x70
     bl fn_801162A0
@@ -237,7 +237,7 @@ lbl_fn_8028AA38_000001CC:
     bge lbl_fn_8028AA38_000001EC
     addi r3, r1, 0x70
     addi r4, r1, 0x7c
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_8028AA38_000001EC:
     addi r3, r1, 0x88
     bl fn_800F7FF0
@@ -273,7 +273,7 @@ lbl_fn_8028AA38_000001EC:
     addi r3, r1, 0x28
     addi r4, r30, 0x1978
     addi r5, r30, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x34
     addi r4, r1, 0x28
     bl fn_80011034
@@ -287,7 +287,7 @@ lbl_fn_8028AA38_0000029C:
     addi r3, r1, 0x10
     addi r4, r30, 0x1978
     addi r5, r30, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x1c
     addi r4, r1, 0x10
     bl fn_80011034
@@ -880,7 +880,7 @@ asm void fn_8028B47C(void)
     addi r3, r1, 0x8
     addi r4, r1, 0x14
     addi r5, r30, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x8
     bl fn_8000D3A4
     lwz r0, 0x14c8(r30)

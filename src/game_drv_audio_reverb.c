@@ -8,7 +8,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_24(void);
 extern void dtor_80084684(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_8000D3A8(void);
 extern void fn_8000D430(void);
@@ -16,7 +16,7 @@ extern void fn_8000DD0C(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
 extern void fn_80011410(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
@@ -45,7 +45,7 @@ extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void fn_800D089C(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DCA70(void);
 extern void fn_800F52F8(void);
@@ -477,11 +477,11 @@ lbl_fn_805BAC18_00000420:
     mr r4, r3
     mr r5, r28
     addi r3, r1, 0xb4
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0xa8
     addi r4, r1, 0xfc
     addi r5, r1, 0x108
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x5c
     addi r4, r1, 0xb4
     bl fn_80011034
@@ -533,14 +533,14 @@ lbl_fn_805BAC18_00000420:
     bl fn_800F7260
     addi r3, r1, 0xfc
     addi r4, r1, 0x44
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r1, 0x2c
     addi r4, r1, 0xfc
     addi r5, r1, 0x68
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x108
     addi r4, r1, 0x2c
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r29, 0x8c
     bl fn_80116BA4
     stfs f1, 0x8(r1)
@@ -969,10 +969,10 @@ lbl_fn_805BAC18_00000B78:
     bl fn_80392A04
     addi r3, r29, 0x54
     addi r4, r29, 0x6c
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r29, 0x60
     addi r4, r29, 0x78
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r29
     bl fn_805BA938
 lbl_fn_805BAC18_00000BC4:
@@ -1210,7 +1210,7 @@ lbl_fn_805BB658_00000E18:
     stw r3, 0x4a8(r26)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x4ac(r26)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
@@ -1223,35 +1223,35 @@ lbl_fn_805BB658_00000E18:
 lbl_fn_805BB658_00000EB0:
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x488(r26)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x48c(r26)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x490(r26)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x494(r26)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x498(r26)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x49c(r26)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x4a0(r26)
     addi r3, r1, 0xb4
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f31, f1
     addi r3, r1, 0xb4
     stfs f0, 0x4a4(r26)

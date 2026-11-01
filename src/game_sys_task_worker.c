@@ -16,7 +16,7 @@ extern void mem_realloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_8011FFF8(void);
 extern void fn_8021771C(void);
@@ -35,7 +35,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void strstr(void);
 extern void atoi(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1156,7 +1156,7 @@ lbl_fn_80218BD4_00000DEC:
     addi r4, r4, fn_80219018@l
     li r6, 0x88
     li r7, 0xe0
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lis r4, lbl_807772D0@ha
     li r0, 0x0
     stw r3, lbl_8087F2B8
@@ -2076,31 +2076,31 @@ lbl_fn_802196D0_00001AA0:
     stw r29, 0x4(r24)
     addi r3, r1, 0xc
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x8(r24)
     addi r3, r1, 0xc
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xc(r24)
     addi r3, r1, 0xc
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x10(r24)
     addi r3, r1, 0xc
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14(r24)
     addi r3, r1, 0xc
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x18(r24)
     addi r3, r1, 0xc
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1c(r24)
     addi r3, r1, 0xc
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x20(r24)
     mr r4, r24
     lwz r3, lbl_8087EE90

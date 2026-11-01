@@ -23,7 +23,7 @@ extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
@@ -38,7 +38,7 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_800EF73C(void);
 extern void system_getNextSequenceId(void);
@@ -77,7 +77,7 @@ extern void fn_804A0EFC(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern char* strcpy(char* dest, const char* src);
@@ -887,7 +887,7 @@ lbl_fn_80425E2C_000009F8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80886684
     mr r3, r30
     lfs f2, lbl_80886688
@@ -929,7 +929,7 @@ lbl_fn_80425E2C_000009F8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x2c
     addi r5, r29, 0x110
@@ -938,7 +938,7 @@ lbl_fn_80425E2C_000009F8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r4, r30
     addi r3, r29, 0xb0
     bl fn_803F11F8
@@ -1263,7 +1263,7 @@ lbl_fn_80426344_00000F3C:
     addi r4, r4, fn_803F3334@l
     li r5, 0x0
     li r6, 0x1c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x994(r31)
     b lbl_fn_80426344_00000F8C
 lbl_fn_80426344_00000F84:
@@ -1798,7 +1798,7 @@ lbl_fn_804269E0_00001698:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r28, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
@@ -1877,11 +1877,11 @@ lbl_fn_804269E0_000017C0:
     addi r3, r1, 0x108
     add r29, r28, r0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x964(r29)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x978(r29)
     b lbl_fn_804269E0_00001830
 lbl_fn_804269E0_0000180C:

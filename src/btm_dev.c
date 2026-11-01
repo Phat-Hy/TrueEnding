@@ -4,10 +4,10 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_80626AC0(void);
+extern void scapi_initContext(void);
 extern void fn_80626C60(void);
 extern void fn_80629810(void);
-extern void fn_80629830(void);
+extern void bta_sys_log(void);
 extern void fn_80629850(void);
 extern void fn_80629890(void);
 extern void fn_80629E20(void);
@@ -700,7 +700,7 @@ lbl_fn_80632B00_00000848:
     lhz r5, 0x654(r4)
     addi r3, r3, 0x4
     addi r4, r30, 0x44
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_80632B00_00000870:
     lbz r3, 0x641(r31)
     lis r4, lbl_80820018@ha
@@ -799,7 +799,7 @@ lbl_fn_80632B00_000009AC:
     lhz r5, 0x656(r4)
     addi r3, r3, 0x4
     addi r4, r30, 0x70
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_80632B00_000009D4:
     lbz r0, 0x640(r31)
     rlwinm. r0, r0, 0, 26, 26
@@ -1232,7 +1232,7 @@ lbl_fn_806332CC_00000F40:
 lbl_fn_806332CC_00000F48:
     addi r0, r28, 0xb
     clrlwi r3, r0, 16
-    bl fn_80626AC0
+    bl scapi_initContext
     cmpwi r3, 0x0
     beq lbl_fn_806332CC_00000F98
     cmpwi r30, 0x0
@@ -1379,7 +1379,7 @@ asm void fn_80633504(void)
     mr r5, r31
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B4530@l
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_80633504_00001130:
     mulli r0, r31, 0x271
     lis r3, 0x1062
@@ -1448,7 +1448,7 @@ lbl_fn_806335A4_000011E0:
     beq lbl_fn_806335A4_00001214
     la r5, lbl_8087EADC
 lbl_fn_806335A4_00001214:
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_806335A4_00001218:
     li r3, 0x2
     bl fn_80626C60
@@ -1504,7 +1504,7 @@ lbl_fn_8063367C_000012B0:
     mr r5, r28
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B45CC@l
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8063367C_000012D4:
     cmplwi r28, 0xb
     ble lbl_fn_8063367C_000012E0
@@ -1575,7 +1575,7 @@ lbl_fn_8063374C_00001388:
     beq lbl_fn_8063374C_000013BC
     la r5, lbl_8087EADC
 lbl_fn_8063374C_000013BC:
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8063374C_000013C0:
     lis r5, lbl_80820018@ha
     mr r3, r29

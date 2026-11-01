@@ -50,7 +50,7 @@ extern void strcmp(void);
 extern void atoi(void);
 extern void wmemcpy(void);
 extern void fn_80686A48(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
@@ -2151,7 +2151,7 @@ lbl_fn_80506D98_00001B70:
     addi r5, r30, fn_804D147C@l
     li r6, 0x1c
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x8(r27)
     mr r22, r3
     cmpwi r0, 0x0
@@ -2217,7 +2217,7 @@ lbl_fn_80506D98_00001C50:
     addi r4, r29, fn_805072C8@l
     addi r5, r30, fn_804D147C@l
     li r6, 0x1c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x8(r27)
     mr r22, r3
     cmpwi r0, 0x0

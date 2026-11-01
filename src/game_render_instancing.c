@@ -5,7 +5,7 @@
 extern void fn_8000D3A4(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_8004D124(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -1580,7 +1580,7 @@ asm void fn_802AC0E0(void)
     addi r3, r1, 0x20
     addi r4, r1, 0x2c
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x20
     bl fn_8000D3A4
     fmr f30, f1

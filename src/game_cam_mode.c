@@ -44,7 +44,7 @@ extern void PSVECMag(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void std_atan2(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern void fn_80695AD0(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1790,7 +1790,7 @@ lbl_camera_setMode_000015E8:
     li r6, 0x48
     addi r4, r4, fn_800EF6BC@l
     addi r5, r5, fn_800EF7F8@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F030
     li r30, 0x0
     li r31, 0x0

@@ -48,7 +48,7 @@ extern void wmemcpy(void);
 extern void fn_80686A48(void);
 extern void abort(void);
 extern void fn_8068AD58(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
@@ -225,7 +225,7 @@ lbl_fn_804778DC_00000104:
     li r6, 0x1f4
     addi r4, r4, fn_80477DAC@l
     addi r5, r5, fn_8004B338@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x6c(r15)
     b lbl_fn_804778DC_00000158
 lbl_fn_804778DC_00000150:
@@ -421,7 +421,7 @@ lbl_fn_804778DC_000003F4:
     addi r4, r4, fn_80079044@l
     li r5, 0x0
     li r6, 0x44
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x64(r15)
     b lbl_fn_804778DC_00000444
 lbl_fn_804778DC_0000043C:

@@ -22,7 +22,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 
 /* External data declarations */
@@ -218,7 +218,7 @@ lbl_fn_803C940C_00000148:
     li r6, 0x8
     addi r4, r4, fn_803C94BC@l
     addi r5, r5, fn_803BF898@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C940C_0000019C
 lbl_fn_803C940C_00000194:
@@ -871,7 +871,7 @@ lbl_fn_803C9CE4_00000A1C:
     addi r4, r4, fn_803C95E8@l
     li r5, 0x0
     li r6, 0x18
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C9CE4_00000A6C
 lbl_fn_803C9CE4_00000A64:

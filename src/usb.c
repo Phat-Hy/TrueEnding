@@ -49,7 +49,7 @@ extern void fn_80624B90(void);
 extern void fn_80624C00(void);
 extern void fn_80624C70(void);
 extern void fn_80624CD0(void);
-extern void fn_80626AC0(void);
+extern void scapi_initContext(void);
 extern void fn_8062CDA4(void);
 extern void fn_8062F278(void);
 extern void fn_8062F41C(void);
@@ -1977,7 +1977,7 @@ lbl_fn_8065D100_000018A4:
     bl OSRestoreInterrupts
     addi r0, r25, 0x12
     clrlwi r3, r0, 24
-    bl fn_80626AC0
+    bl scapi_initContext
     addi r4, r25, 0x1
     li r0, 0xa
     clrlwi r4, r4, 24

@@ -18,10 +18,10 @@ extern void mem_getAllocSize(void);
 extern void fn_8008771C(void);
 extern void fn_80087E9C(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void atn_Curve_evaluate(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
@@ -34,7 +34,7 @@ extern void fn_80615AD0(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_8068B100(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695D84(void);
 extern void strchr(void);
 extern u32 strlen(const char* str);
@@ -1698,7 +1698,7 @@ lbl_fn_8007A530_000015B0:
     addi r4, r4, fn_8007A748@l
     li r5, 0x0
     li r6, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r31)
     b lbl_fn_8007A530_00001600
 lbl_fn_8007A530_000015F8:
@@ -1767,7 +1767,7 @@ lbl_fn_8007A530_000016D4:
     stw r0, 0x0(r26)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x4(r26)
     addi r30, r30, 0x8
 lbl_fn_8007A530_000016EC:
@@ -1860,7 +1860,7 @@ lbl_fn_8007A7BC_000017F8:
     lfs f1, lbl_80880B48
     mr r3, r30
     li r4, 0x5
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     b lbl_fn_8007A7BC_00001940
 lbl_fn_8007A7BC_0000180C:
     lfs f1, 0x4(r3)

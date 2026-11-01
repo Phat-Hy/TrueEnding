@@ -17,7 +17,7 @@ extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void fn_8007FAF0(void);
 extern void mem_alloc(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -34,7 +34,7 @@ extern void atn_Anim_getLayerDuration(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void atn_LH_Texture_update(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800EF73C(void);
 extern void fn_80179A34(void);
 extern void fn_80179AB4(void);
@@ -189,7 +189,7 @@ lbl_fn_803F33A4_000000BC:
     stw r3, 0xa50(r25)
     addi r3, r1, 0x14
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xa54(r25)
     addi r3, r1, 0x14
     bl talk_formatQuotedString
@@ -294,15 +294,15 @@ lbl_fn_803F33A4_0000023C:
     beq lbl_fn_803F33A4_000002F0
     addi r3, r1, 0x14
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x4(r23)
     addi r3, r1, 0x14
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x8(r23)
     addi r3, r1, 0x14
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xc(r23)
     addi r3, r1, 0x14
     bl talk_formatQuotedString
@@ -1008,7 +1008,7 @@ lbl_fn_803F3FBC_00000C80:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80885FCC
     mr r3, r30
     lfs f2, lbl_80885FD0
@@ -1071,7 +1071,7 @@ lbl_fn_803F3FBC_00000C80:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r31, 0x178
     addi r5, r28, 0x280
@@ -1080,7 +1080,7 @@ lbl_fn_803F3FBC_00000C80:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r4, r30
     addi r3, r28, 0xb0
     bl fn_803F11F8

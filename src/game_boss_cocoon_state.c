@@ -30,7 +30,7 @@ extern void fn_8044F434(void);
 extern void fn_8044F96C(void);
 extern void fn_80450590(void);
 extern void rand(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
@@ -971,7 +971,7 @@ lbl_fn_8044D9BC_00000AA0:
     li r6, 0x84
     addi r4, r4, fn_8044E198@l
     addi r5, r5, fn_8044E158@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x50(r20)
 lbl_fn_8044D9BC_00000AE4:
     lwz r23, lbl_8087F4F8

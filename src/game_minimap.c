@@ -29,7 +29,7 @@ extern void fn_804761B0(void);
 extern void PSMTXConcat(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -192,7 +192,7 @@ lbl_fn_8008C950_00000170:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x30
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x3c(r30)
     b lbl_fn_8008C950_000001BC
 lbl_fn_8008C950_000001B4:

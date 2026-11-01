@@ -26,7 +26,7 @@ extern void fn_80093D98(void);
 extern void fn_80093EEC(void);
 extern void fn_80095D44(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_8020C4C8(void);
 extern void fn_8020C5D4(void);
 extern void fn_8020CC64(void);
@@ -718,7 +718,7 @@ lbl_fn_80564344_0000088C:
 lbl_fn_80564344_00000890:
     addi r3, r1, 0xd4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     mr r4, r20
     addi r3, r22, 0x24
     li r5, 0x0
@@ -742,7 +742,7 @@ lbl_fn_80564344_000008D8:
 lbl_fn_80564344_000008DC:
     addi r3, r1, 0xd4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     mr r4, r21
     mr r5, r20
     addi r3, r22, 0x24
@@ -756,15 +756,15 @@ lbl_fn_80564344_000008FC:
     bne lbl_fn_80564344_00000940
     addi r3, r1, 0xd4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x400(r22)
     addi r3, r1, 0xd4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x404(r22)
     addi r3, r1, 0xd4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x408(r22)
 lbl_fn_80564344_00000940:
     addi r3, r1, 0xd4

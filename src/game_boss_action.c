@@ -33,7 +33,7 @@ extern void fn_800973C0(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800EC254(void);
 extern void fn_800EC2C4(void);
 extern void fn_800EC440(void);
@@ -172,7 +172,7 @@ lbl_fn_80137B78_000000C4:
     bne lbl_fn_80137B78_00000138
     addi r3, r1, 0x308
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r31, 0xb0
     addi r4, r1, 0x208
     li r5, 0x0
@@ -181,7 +181,7 @@ lbl_fn_80137B78_000000C4:
 lbl_fn_80137B78_00000138:
     addi r3, r1, 0x308
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     mr r5, r29
     addi r3, r31, 0xb0
     addi r4, r1, 0x208
@@ -222,7 +222,7 @@ lbl_fn_80137B78_0000019C:
     bne lbl_fn_80137B78_000001F0
     addi r3, r1, 0x308
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r31, 0xb0
     addi r4, r1, 0x108
     li r5, 0x0
@@ -231,7 +231,7 @@ lbl_fn_80137B78_0000019C:
 lbl_fn_80137B78_000001F0:
     addi r3, r1, 0x308
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     mr r5, r29
     addi r3, r31, 0xb0
     addi r4, r1, 0x108
@@ -272,7 +272,7 @@ lbl_fn_80137B78_00000254:
     bne lbl_fn_80137B78_000002A8
     addi r3, r1, 0x308
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r31, 0xb0
     addi r4, r1, 0x8
     li r5, 0x0
@@ -281,7 +281,7 @@ lbl_fn_80137B78_00000254:
 lbl_fn_80137B78_000002A8:
     addi r3, r1, 0x308
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     mr r5, r29
     addi r3, r31, 0xb0
     addi r4, r1, 0x8
@@ -491,57 +491,57 @@ lbl_fn_80137FC0_00000570:
     bl strcpy
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f30, f1
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f29, f1
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f31, 0x38(r1)
     addi r3, r1, 0x2a0
     stfs f30, 0x3c(r1)
     stfs f29, 0x40(r1)
     stfs f1, 0x44(r1)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f30, f1
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f29, f1
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f31, 0x28(r1)
     addi r3, r1, 0x2a0
     stfs f30, 0x2c(r1)
     stfs f29, 0x30(r1)
     stfs f1, 0x34(r1)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f29, f1
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f30, f1
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f29, 0x18(r1)
     addi r3, r31, 0xb0
     addi r4, r1, 0xa0
@@ -591,11 +591,11 @@ lbl_fn_80137FC0_000006F8:
     beq lbl_fn_80137FC0_00000904
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x5b0(r31)
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x5b4(r31)
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
@@ -619,15 +619,15 @@ lbl_fn_80137FC0_00000774:
     bne lbl_fn_80137FC0_000007BC
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x540(r31)
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x544(r31)
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x548(r31)
     b lbl_fn_80137FC0_00000904
 lbl_fn_80137FC0_000007BC:
@@ -693,7 +693,7 @@ lbl_fn_80137FC0_00000880:
     bne lbl_fn_80137FC0_000008A8
     addi r3, r1, 0x2a0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x514(r31)
     b lbl_fn_80137FC0_00000904
 lbl_fn_80137FC0_000008A8:

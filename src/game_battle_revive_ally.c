@@ -42,7 +42,7 @@ extern void atoi(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void fn_8068B100(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern u32 strlen(const char* str);
 
@@ -237,7 +237,7 @@ lbl_fn_804038D0_000001AC:
     li r6, 0x42c
     addi r4, r4, fn_80403B58@l
     addi r5, r5, fn_80402A40@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x10c(r31)
     b lbl_fn_804038D0_00000200
 lbl_fn_804038D0_000001F8:

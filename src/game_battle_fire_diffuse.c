@@ -23,7 +23,7 @@ extern void fn_800C1990(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800EF73C(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_destructor(void);
@@ -45,7 +45,7 @@ extern void PSVECMag(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
 extern char* strcpy(char* dest, const char* src);
@@ -1013,7 +1013,7 @@ lbl_fn_8041DAB8_00000C34:
     mr r29, r3
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     addi r3, r1, 0x108
     bl talk_formatQuotedString
@@ -1082,27 +1082,27 @@ lbl_fn_8041DAB8_00000D4C:
     stw r3, 0x214(r31)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1fc(r31)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x200(r31)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x204(r31)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x208(r31)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x20c(r31)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x210(r31)
 lbl_fn_8041DAB8_00000DD0:
     addi r3, r1, 0x108
@@ -1324,7 +1324,7 @@ lbl_fn_8041DF38_00001068:
     addi r4, r4, fn_8041E23C@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x110(r26)
     b lbl_fn_8041DF38_000010B8
 lbl_fn_8041DF38_000010B0:
@@ -2019,19 +2019,19 @@ lbl_fn_8041E89C_00001A10:
     bne lbl_fn_8041E89C_00001A64
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xf8(r27)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xfc(r27)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x100(r27)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x104(r27)
 lbl_fn_8041E89C_00001A64:
     addi r3, r1, 0x8

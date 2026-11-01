@@ -2,12 +2,12 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
 extern void fn_80011220(void);
 extern void fn_80011410(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80013484(void);
 extern void fn_8004D388(void);
@@ -1512,7 +1512,7 @@ lbl_fn_802F0328_0000140C:
     addi r3, r1, 0x74
     addi r4, r1, 0x80
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x74
     bl fn_801162A0
     bl fn_80011220
@@ -1524,7 +1524,7 @@ lbl_fn_802F0328_0000140C:
 lbl_fn_802F0328_00001448:
     addi r3, r31, 0x14d8
     addi r4, r1, 0x74
-    bl fn_8000D124
+    bl vec3_copy
     lfs f0, lbl_80884850
     addi r3, r31, 0xb0
     stfs f0, 0x14dc(r31)
@@ -1550,7 +1550,7 @@ lbl_fn_802F0328_00001490:
     bl fn_80011034
     addi r3, r1, 0x8c
     addi r4, r1, 0x2c
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_802F0328_00001938
     lwz r0, 0x14bc(r31)
     cmpwi r0, 0x0
@@ -1596,7 +1596,7 @@ lbl_fn_802F0328_00001548:
     addi r3, r1, 0x5c
     addi r4, r1, 0x68
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     lfs f0, lbl_80884850
     addi r3, r1, 0x5c
     stfs f0, 0x60(r1)
@@ -1618,7 +1618,7 @@ lbl_fn_802F0328_0000158C:
     addi r3, r1, 0x50
     addi r4, r1, 0x20
     addi r5, r1, 0x14
-    bl fn_80013338
+    bl vec3_sub
     lfs f1, 0x54(r1)
     bl fn_800133B0
     frsp f2, f1
@@ -1642,7 +1642,7 @@ lbl_fn_802F0328_000015E4:
     bl fn_80011034
     addi r3, r1, 0x8c
     addi r4, r1, 0x8
-    bl fn_8000D124
+    bl vec3_copy
     lwz r0, 0x58c(r31)
     lfs f29, lbl_8088485C
     cmpwi r0, 0xa
@@ -1788,7 +1788,7 @@ lbl_fn_802F0328_000017C0:
     bl fn_8004D388
     addi r3, r31, 0x528
     addi r4, r1, 0xd8
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r31, 0x528
     addi r4, r31, 0x5a4
     bl fn_80013484

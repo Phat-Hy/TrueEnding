@@ -48,7 +48,7 @@ extern void strcmp(void);
 extern void strrchr(void);
 extern void strstr(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern u32 strlen(const char* str);
 
@@ -1746,7 +1746,7 @@ lbl_fn_80476ED4_00001530:
     li r6, 0x10
     addi r4, r4, fn_80477414@l
     addi r5, r5, fn_80476D00@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x60(r30)
     b lbl_fn_80476ED4_00001584
 lbl_fn_80476ED4_0000157C:

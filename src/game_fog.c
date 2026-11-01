@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
@@ -600,7 +600,7 @@ lbl_fn_800D1430_000006D4:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r28
     addi r4, r30, 0xeb
     addi r5, r31, 0x2a10
@@ -609,7 +609,7 @@ lbl_fn_800D1430_000006D4:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_8088118C
     mr r3, r28
     lfs f2, lbl_808811A8
@@ -906,7 +906,7 @@ lbl_fn_800D1430_000009F0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_8088118C
     mr r3, r28
     lfs f2, lbl_808811A8

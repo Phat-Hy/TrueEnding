@@ -17,7 +17,7 @@ extern void fn_8006F2F0(void);
 extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
 extern void fn_80116FC0(void);
@@ -1761,7 +1761,7 @@ lbl_fn_80581A58_000016A4:
     beq lbl_fn_80581A58_00001A18
     addi r3, r1, 0x6c
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     frsp f0, f1
     stfs f1, 0x50(r1)
     fcmpo cr0, f0, f30

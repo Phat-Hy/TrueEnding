@@ -94,7 +94,7 @@ void fn_806265C0(void);
 void fn_806265D0(void);
 void fn_806267F0(void);
 void fn_80626AA0(void);
-void fn_80626AC0(void);
+void scapi_initContext(void);
 void fn_80626C60(void);
 void fn_80626D50(void);
 void fn_80626EC0(void);
@@ -2616,7 +2616,7 @@ asm void fn_80626AA0(void)
     blr
 }
 
-asm void fn_80626AC0(void)
+asm void scapi_initContext(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2628,7 +2628,7 @@ asm void fn_80626AC0(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     addi r30, r4, 0x54
-    bne lbl_fn_80626AC0_00002188
+    bne lbl_scapi_initContext_00002188
     lis r3, 0x1
     lis r4, lbl_807B3168@ha
     subi r0, r3, 0xa
@@ -2636,13 +2636,13 @@ asm void fn_80626AC0(void)
     addi r4, r4, lbl_807B3168@l
     bl fn_806282C0
     li r3, 0x0
-    b lbl_fn_80626AC0_000022C8
-lbl_fn_80626AC0_00002188:
+    b lbl_scapi_initContext_000022C8
+lbl_scapi_initContext_00002188:
     addis r4, r30, 0x3
     li r31, 0x0
     lbz r5, -0x7579(r4)
-    b lbl_fn_80626AC0_000021C4
-lbl_fn_80626AC0_00002198:
+    b lbl_scapi_initContext_000021C4
+lbl_scapi_initContext_00002198:
     clrlwi r4, r31, 24
     addis r4, r4, 0x3
     subi r0, r4, 0x7582
@@ -2652,16 +2652,16 @@ lbl_fn_80626AC0_00002198:
     subi r0, r4, 0x766c
     lhzx r0, r30, r0
     cmplw r3, r0
-    ble lbl_fn_80626AC0_000021D0
+    ble lbl_scapi_initContext_000021D0
     addi r31, r31, 0x1
-lbl_fn_80626AC0_000021C4:
+lbl_scapi_initContext_000021C4:
     clrlwi r0, r31, 24
     cmplw r0, r5
-    blt lbl_fn_80626AC0_00002198
-lbl_fn_80626AC0_000021D0:
+    blt lbl_scapi_initContext_00002198
+lbl_scapi_initContext_000021D0:
     clrlwi r0, r31, 24
     cmplw r0, r5
-    bne lbl_fn_80626AC0_000021FC
+    bne lbl_scapi_initContext_000021FC
     lis r3, 0x1
     lis r4, lbl_807B3180@ha
     subi r0, r3, 0x9
@@ -2669,14 +2669,14 @@ lbl_fn_80626AC0_000021D0:
     addi r4, r4, lbl_807B3180@l
     bl fn_806282C0
     li r3, 0x0
-    b lbl_fn_80626AC0_000022C8
-lbl_fn_80626AC0_000021FC:
+    b lbl_scapi_initContext_000022C8
+lbl_scapi_initContext_000021FC:
     bl fn_80628270
     addis r6, r30, 0x3
     li r5, 0x1
     lbz r7, -0x7579(r6)
-    b lbl_fn_80626AC0_000022B4
-lbl_fn_80626AC0_00002210:
+    b lbl_scapi_initContext_000022B4
+lbl_scapi_initContext_00002210:
     clrlwi r4, r31, 24
     lhz r3, -0x7584(r6)
     addis r4, r4, 0x3
@@ -2684,31 +2684,31 @@ lbl_fn_80626AC0_00002210:
     lbzx r4, r30, r0
     slw r0, r5, r4
     and. r0, r3, r0
-    bne lbl_fn_80626AC0_000022B0
+    bne lbl_scapi_initContext_000022B0
     clrlslwi r0, r4, 24, 4
     add r4, r6, r0
     lhz r3, -0x7668(r4)
     lhz r0, -0x766a(r4)
     cmplw r3, r0
-    bge lbl_fn_80626AC0_000022B0
+    bge lbl_scapi_initContext_000022B0
     lwz r30, -0x7674(r4)
     lwz r0, 0x0(r30)
     stw r0, -0x7674(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_80626AC0_00002264
+    bne lbl_scapi_initContext_00002264
     li r0, 0x0
     stw r0, -0x7670(r4)
-lbl_fn_80626AC0_00002264:
+lbl_scapi_initContext_00002264:
     lhz r3, -0x7668(r4)
     addi r0, r3, 0x1
     sth r0, -0x7668(r4)
     clrlwi r3, r0, 16
     lhz r0, -0x7666(r4)
     cmplw r3, r0
-    ble lbl_fn_80626AC0_00002288
+    ble lbl_scapi_initContext_00002288
     lhz r0, -0x7668(r4)
     sth r0, -0x7666(r4)
-lbl_fn_80626AC0_00002288:
+lbl_scapi_initContext_00002288:
     bl fn_80628240
     bl fn_80628230
     stb r3, 0x5(r30)
@@ -2718,16 +2718,16 @@ lbl_fn_80626AC0_00002288:
     stb r4, 0x6(r30)
     stw r0, 0x0(r30)
     stb r0, 0x7(r30)
-    b lbl_fn_80626AC0_000022C8
-lbl_fn_80626AC0_000022B0:
+    b lbl_scapi_initContext_000022C8
+lbl_scapi_initContext_000022B0:
     addi r31, r31, 0x1
-lbl_fn_80626AC0_000022B4:
+lbl_scapi_initContext_000022B4:
     clrlwi r0, r31, 24
     cmplw r0, r7
-    blt lbl_fn_80626AC0_00002210
+    blt lbl_scapi_initContext_00002210
     bl fn_80628240
     li r3, 0x0
-lbl_fn_80626AC0_000022C8:
+lbl_scapi_initContext_000022C8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -2794,7 +2794,7 @@ lbl_fn_80626C60_0000239C:
     addis r0, r30, 0x3
     add r3, r0, r31
     lhz r3, -0x766c(r3)
-    bl fn_80626AC0
+    bl scapi_initContext
 lbl_fn_80626C60_000023B0:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

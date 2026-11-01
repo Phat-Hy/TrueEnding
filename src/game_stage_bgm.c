@@ -15,7 +15,7 @@ extern void fn_800109E0(void);
 extern void fn_80011034(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80013410(void);
 extern void fn_8003EFB0(void);
@@ -1104,7 +1104,7 @@ lbl_fn_8019FEC4_00000CEC:
     mr r4, r3
     addi r3, r1, 0x88
     addi r5, r1, 0xb8
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x88
     bl fn_8000D3A4
     fmr f28, f1
@@ -1134,7 +1134,7 @@ lbl_fn_8019FEC4_00000D5C:
     mr r4, r3
     addi r3, r1, 0x7c
     addi r5, r1, 0xb8
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x7c
     bl fn_800F7FF0
     addi r3, r1, 0x1c
@@ -1143,7 +1143,7 @@ lbl_fn_8019FEC4_00000D5C:
     addi r3, r1, 0x70
     addi r4, r1, 0x1c
     addi r5, r1, 0xac
-    bl fn_80013338
+    bl vec3_sub
     lis r4, fn_800133B0@ha
     addi r3, r1, 0x70
     addi r4, r4, fn_800133B0@l

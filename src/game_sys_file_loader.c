@@ -9,7 +9,7 @@ extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void mem_realloc(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_80206B9C(void);
 extern void fn_8020EF04(void);
 extern void fn_80211480(void);
@@ -18,7 +18,7 @@ extern void fn_8046DD20(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -401,7 +401,7 @@ lbl_fn_8021CF8C_000003F8:
     li r6, 0x3e0
     addi r4, r4, fn_8021D4C4@l
     addi r5, r5, fn_8021D650@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r19, lbl_8087F31C
     addi r5, r27, 0x12
     stw r3, lbl_8087F310
@@ -417,7 +417,7 @@ lbl_fn_8021CF8C_000003F8:
     li r6, 0x3dc
     addi r4, r4, fn_8021D5F8@l
     addi r5, r5, fn_8021D6B8@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F318
     mr r4, r21
     lwz r12, 0x40(r1)
@@ -1289,7 +1289,7 @@ lbl_fn_8021DBEC_00001008:
     addi r4, r4, fn_8021DE50@l
     li r5, 0x0
     li r6, 0x108
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F320
     mr r4, r28
     lwz r12, 0xc(r1)
@@ -1348,7 +1348,7 @@ lbl_fn_8021DBEC_000010D4:
     stw r3, 0x88(r27)
     addi r3, r1, 0xc
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xc8(r27)
     addi r27, r27, 0x4
     addi r26, r26, 0x1
@@ -1667,7 +1667,7 @@ lbl_fn_8021E0B0_00001550:
     addi r4, r4, fn_8021E41C@l
     li r5, 0x0
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r30, lbl_8087F334
     addi r5, r29, 0xa
     stw r3, lbl_8087F328
@@ -1682,7 +1682,7 @@ lbl_fn_8021E0B0_00001550:
     addi r4, r4, fn_8021E42C@l
     li r5, 0x0
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F32C
     mr r4, r31
     lwz r12, 0xc(r1)
@@ -1746,7 +1746,7 @@ lbl_fn_8021E0B0_00001684:
     add r24, r0, r27
     addi r0, r4, 0x1
     stw r0, 0x8(r23)
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x8(r24)
     addi r3, r1, 0xc
     bl talk_parseQuotedString

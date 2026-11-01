@@ -10,7 +10,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void fn_80079BC8(void);
 extern void mem_alloc(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_800875F8(void);
 extern void fn_8008771C(void);
 extern void fn_80087858(void);
@@ -359,7 +359,7 @@ lbl_fn_801856B8_000002D8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80881CFC
     mr r3, r24
     lfs f2, lbl_80881DBC
@@ -1182,7 +1182,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x1bd
     addi r5, r31, 0x184
@@ -1248,7 +1248,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r26
     addi r4, r30, 0x21f
     bl fn_8008937C
@@ -1269,7 +1269,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80881CFC
     mr r3, r28
     lfs f2, lbl_80881DB0
@@ -1287,7 +1287,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80881CFC
     mr r3, r28
     lfs f2, lbl_80881DB0
@@ -1305,7 +1305,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80881CFC
     mr r3, r28
     lfs f2, lbl_80881DB0
@@ -1323,7 +1323,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r26
     addi r4, r30, 0x224
     bl fn_8008937C
@@ -1344,7 +1344,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80881CFC
     mr r3, r28
     lfs f2, lbl_80881DB0
@@ -1362,7 +1362,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80881CFC
     mr r3, r28
     lfs f2, lbl_80881DB0
@@ -1380,7 +1380,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80881CFC
     mr r3, r28
     lfs f2, lbl_80881DB0
@@ -1398,7 +1398,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r26
     addi r4, r30, 0x22b
     bl fn_8008937C
@@ -1419,7 +1419,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80881CFC
     mr r3, r28
     lfs f2, lbl_80881DB0
@@ -1437,7 +1437,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80881CFC
     mr r3, r28
     lfs f2, lbl_80881DB0
@@ -1455,7 +1455,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80881CFC
     mr r3, r28
     lfs f2, lbl_80881DB0
@@ -1473,7 +1473,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r26
     addi r4, r30, 0x230
     bl fn_8008937C
@@ -1494,7 +1494,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80881CFC
     mr r3, r28
     lfs f2, lbl_80881DB0
@@ -1512,7 +1512,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80881CFC
     mr r3, r28
     lfs f2, lbl_80881DB0
@@ -1530,7 +1530,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80881CFC
     mr r3, r28
     lfs f2, lbl_80881DB0
@@ -1548,7 +1548,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x239
     bl fn_8008937C
@@ -1560,7 +1560,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r28
     addi r4, r30, 0x11e
     addi r5, r31, 0x588
@@ -1569,7 +1569,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r28
     addi r4, r30, 0x12c
     addi r5, r31, 0x58c
@@ -1578,7 +1578,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r28
     addi r4, r30, 0x13b
     addi r5, r31, 0x590
@@ -1587,7 +1587,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r28
     addi r4, r30, 0x14c
     addi r5, r31, 0x594
@@ -1596,7 +1596,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r28
     addi r4, r30, 0x15f
     addi r5, r31, 0x598
@@ -1605,7 +1605,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x23f
     bl fn_8008937C
@@ -1617,7 +1617,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r28
     addi r4, r30, 0x17d
     addi r5, r31, 0x5a4
@@ -1626,7 +1626,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lis r6, 0x2
     mr r3, r29
     subi r7, r6, 0x7960
@@ -1636,7 +1636,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x256
     addi r5, r31, 0x164
@@ -1660,7 +1660,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r27
     addi r4, r30, 0x28e
     addi r5, r31, 0x254
@@ -1669,7 +1669,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x5
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80881CFC
     mr r3, r27
     lfs f2, lbl_80881D2C
@@ -1735,7 +1735,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x64
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r27
     addi r4, r30, 0x310
     addi r5, r31, 0x290
@@ -1750,7 +1750,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r27
     addi r4, r30, 0x32f
     addi r5, r31, 0x298
@@ -1855,7 +1855,7 @@ lbl_fn_80186520_00000F4C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r28
     addi r4, r30, 0x3fc
     addi r5, r31, 0x2cc
@@ -1941,7 +1941,7 @@ lbl_fn_80186520_00001A1C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x478
     addi r5, r31, 0x78
@@ -2118,7 +2118,7 @@ lbl_fn_80186520_00001A1C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x5e5
     addi r5, r31, 0x174
@@ -2127,7 +2127,7 @@ lbl_fn_80186520_00001A1C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x5f5
     addi r5, r31, 0x70
@@ -2136,7 +2136,7 @@ lbl_fn_80186520_00001A1C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x60a
     bl fn_8008937C
@@ -2208,7 +2208,7 @@ lbl_fn_80186520_00001A1C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r25
     addi r4, r30, 0x681
     addi r5, r31, 0x354
@@ -2277,7 +2277,7 @@ lbl_fn_80186520_00001A1C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r25
     addi r4, r30, 0x706
     bl fn_8008937C
@@ -2304,7 +2304,7 @@ lbl_fn_80186520_000020C8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r23
     mr r5, r26
     addi r4, r30, 0x71b
@@ -2313,7 +2313,7 @@ lbl_fn_80186520_000020C8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     addi r24, r24, 0x1
     addi r27, r27, 0x4
     cmpwi r24, 0xa
@@ -2333,7 +2333,7 @@ lbl_fn_80186520_000020C8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r23
     addi r4, r30, 0x737
     addi r5, r31, 0x3d0
@@ -2390,7 +2390,7 @@ lbl_fn_80186520_000020C8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r23
     addi r4, r30, 0x7a4
     addi r5, r31, 0x3f4
@@ -2405,7 +2405,7 @@ lbl_fn_80186520_000020C8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r23
     addi r4, r30, 0x7bb
     addi r5, r31, 0x3fc
@@ -2426,7 +2426,7 @@ lbl_fn_80186520_000020C8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r23
     addi r4, r30, 0x7dd
     addi r5, r31, 0x408
@@ -2477,7 +2477,7 @@ lbl_fn_80186520_000020C8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80881CFC
     mr r3, r23
     lfs f2, lbl_80881CE4
@@ -2603,7 +2603,7 @@ lbl_fn_80186520_000020C8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x91e
     addi r5, r31, 0x178

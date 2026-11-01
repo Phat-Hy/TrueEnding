@@ -28,7 +28,7 @@ extern void hud_updateTargetReticle(void);
 extern void fn_8009EE30(void);
 extern void fn_8009F788(void);
 extern void fn_8009FFCC(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_80178208(void);
 extern void fn_80187D04(void);
 extern void sound_initGlobalInstances(void);
@@ -912,7 +912,7 @@ lbl_fn_80414C9C_00000A68:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
@@ -1828,15 +1828,15 @@ lbl_fn_80415974_000016FC:
     bne lbl_fn_80415974_00001760
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x188(r29)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x18c(r29)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x190(r29)
     addi r3, r1, 0x8
     bl talk_formatQuotedString

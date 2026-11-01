@@ -31,14 +31,14 @@ extern void atn_LH_Texture_release(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800D87C4(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void fn_80473F88(void);
 extern void strcmp(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern char* strcpy(char* dest, const char* src);
@@ -1058,43 +1058,43 @@ asm void fn_80089EE4(void)
     bl strcpy
     mr r3, r31
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     mr r3, r31
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f30, f1
     mr r3, r31
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f31, 0x20(r1)
     mr r3, r31
     stfs f30, 0x24(r1)
     stfs f1, 0x28(r1)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     mr r3, r31
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f30, f1
     mr r3, r31
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f31, 0x14(r1)
     mr r3, r31
     stfs f30, 0x18(r1)
     stfs f1, 0x1c(r1)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f30, f1
     mr r3, r31
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     mr r3, r31
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f30, 0x8(r1)
     mr r3, r31
     stfs f31, 0xc(r1)
@@ -1194,7 +1194,7 @@ lbl_fn_8008A00C_00000D78:
     li r5, 0x0
     li r6, 0x2c
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x8(r23)
     mr r24, r3
     cmpwi r0, 0x0
@@ -1307,7 +1307,7 @@ lbl_fn_8008A00C_00000F10:
     addi r4, r31, fn_8000FAE4@l
     li r5, 0x0
     li r6, 0x2c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x8(r23)
     mr r24, r3
     cmpwi r0, 0x0

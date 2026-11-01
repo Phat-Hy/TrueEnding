@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80013D60(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004212C(void);
 extern void fn_80056DB8(void);
@@ -727,7 +727,7 @@ lbl_fn_80458270_000007D0:
     stw r31, 0x18f8(r28)
     addi r3, r28, 0x1948
     addi r4, r4, lbl_807C7030@l
-    bl fn_8000D124
+    bl vec3_copy
     lfs f0, lbl_80886C20
     addi r3, r28, 0x1964
     stfs f0, 0x1954(r28)

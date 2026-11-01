@@ -50,7 +50,7 @@ extern void fn_80226B48(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_80686A48(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
 extern void fn_80695AD0(void);
@@ -218,7 +218,7 @@ lbl_fn_80227434_00000130:
     addi r4, r4, fn_8000FAE4@l
     li r5, 0x0
     li r6, 0x2c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r27, r3
     b lbl_fn_80227434_0000017C
 lbl_fn_80227434_00000178:
@@ -1565,7 +1565,7 @@ lbl_fn_802280B4_00001358:
     addi r4, r4, fn_8007A748@l
     li r6, 0x8
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x194(r21)
     b lbl_fn_802280B4_0000139C
     stw r0, 0x194(r21)
@@ -1609,7 +1609,7 @@ lbl_fn_802280B4_000013F0:
     addi r4, r4, fn_8007A748@l
     li r5, 0x0
     li r6, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x188(r21)
     b lbl_fn_802280B4_00001440
 lbl_fn_802280B4_00001438:

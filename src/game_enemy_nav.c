@@ -6,7 +6,7 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
@@ -197,7 +197,7 @@ asm void fn_8012AD20(void)
     li r6, 0x0
     li r7, 0x3
     li r8, 0x1
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808818F8
     mr r3, r29
     lfs f2, lbl_808818FC
@@ -224,7 +224,7 @@ asm void fn_8012AD20(void)
     li r6, 0x0
     li r7, 0x3
     li r8, 0x1
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808818F8
     mr r3, r29
     lfs f2, lbl_808818FC

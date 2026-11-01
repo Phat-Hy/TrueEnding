@@ -6,17 +6,17 @@ extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void fn_8000D0F8(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8001047C(void);
 extern void fn_800109E0(void);
 extern void fn_80011034(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_80057A68(void);
 extern void fn_80063764(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
@@ -117,12 +117,12 @@ asm void fn_803041C8(void)
     beq lbl_fn_803041C8_00000050
     addi r3, r1, 0x110
     addi r4, r4, 0x4
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_803041C8_00000050:
     addi r3, r1, 0x74
     addi r4, r1, 0x110
     addi r5, r31, 0x1608
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x80
     addi r4, r1, 0x74
     bl fn_800F7FD8
@@ -132,7 +132,7 @@ lbl_fn_803041C8_00000050:
     addi r3, r1, 0x5c
     addi r4, r31, 0x1608
     addi r5, r1, 0x110
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x68
     addi r4, r1, 0x5c
     bl fn_800F7FD8
@@ -204,7 +204,7 @@ lbl_fn_803041C8_00000108:
     addi r3, r1, 0x44
     addi r4, r1, 0x110
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x50
     addi r4, r1, 0x44
     bl fn_800F7FD8
@@ -214,7 +214,7 @@ lbl_fn_803041C8_00000108:
     addi r3, r1, 0x2c
     addi r4, r31, 0x1608
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
     bl fn_800F7FD8
@@ -285,7 +285,7 @@ lbl_fn_803041C8_00000284:
     addi r3, r1, 0xc8
     addi r5, r31, 0x528
     addi r4, r4, 0x4
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0xc8
     bl fn_801C3910
     lfs f0, lbl_80884A38
@@ -294,7 +294,7 @@ lbl_fn_803041C8_00000284:
     lwz r4, 0x1518(r31)
     addi r3, r31, 0x528
     addi r4, r4, 0x4
-    bl fn_8000D124
+    bl vec3_copy
     lfs f0, lbl_80884A20
     mr r3, r31
     stfs f0, 0x534(r31)
@@ -315,7 +315,7 @@ lbl_fn_803041C8_00000334:
     addi r3, r1, 0xbc
     addi r4, r31, 0x1608
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0xbc
     bl fn_801C3910
     lfs f0, lbl_80884A38
@@ -325,7 +325,7 @@ lbl_fn_803041C8_00000334:
     addi r3, r31, 0x528
     stfs f0, 0x538(r31)
     addi r4, r31, 0x1608
-    bl fn_8000D124
+    bl vec3_copy
     lwz r3, 0x15e4(r31)
     li r0, 0x2
     stw r0, 0x1624(r31)
@@ -339,7 +339,7 @@ lbl_fn_803041C8_00000390:
     addi r3, r1, 0xb0
     addi r4, r1, 0x110
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0xb0
     bl fn_801C3910
     lfs f0, lbl_80884A38
@@ -349,7 +349,7 @@ lbl_fn_803041C8_00000390:
     addi r3, r31, 0x528
     stfs f0, 0x538(r31)
     addi r4, r1, 0x110
-    bl fn_8000D124
+    bl vec3_copy
     lwz r3, 0x15e4(r31)
     li r0, 0x1
     stw r0, 0x1624(r31)
@@ -364,7 +364,7 @@ lbl_fn_803041C8_000003E8:
     addi r3, r1, 0xa4
     addi r5, r31, 0x528
     addi r4, r4, 0x4
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x14
     addi r4, r1, 0xa4
     bl fn_800F7FD8
@@ -1633,7 +1633,7 @@ lbl_fn_803057A8_00001638:
     li r8, 0x1e
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lis r6, 0x5
     mr r3, r30
     subi r7, r6, 0x6c3e
@@ -1643,7 +1643,7 @@ lbl_fn_803057A8_00001638:
     li r8, 0x1e
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80884A34
     mr r3, r30
     lfs f2, lbl_80884A70
@@ -1661,7 +1661,7 @@ lbl_fn_803057A8_00001638:
     li r8, 0x1e
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80884A20
     mr r3, r30
     lfs f2, lbl_80884B1C
@@ -1697,7 +1697,7 @@ lbl_fn_803057A8_00001638:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x1f5
     addi r5, r29, 0x16b0
@@ -1706,7 +1706,7 @@ lbl_fn_803057A8_00001638:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80884A20
     mr r3, r30
     lfs f2, lbl_80884A74
@@ -1766,7 +1766,7 @@ lbl_fn_803057A8_00001638:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x26b
     addi r5, r29, 0x16d4
@@ -1775,7 +1775,7 @@ lbl_fn_803057A8_00001638:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x276
     addi r5, r29, 0x16d8
@@ -1784,7 +1784,7 @@ lbl_fn_803057A8_00001638:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x27f
     addi r5, r29, 0x16dc
@@ -1793,7 +1793,7 @@ lbl_fn_803057A8_00001638:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80884A20
     mr r3, r30
     lfs f2, lbl_80884A74
@@ -1811,7 +1811,7 @@ lbl_fn_803057A8_00001638:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x29e
     addi r5, r29, 0x16e8
@@ -1820,7 +1820,7 @@ lbl_fn_803057A8_00001638:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80884A20
     mr r3, r30
     lfs f2, lbl_80884A74

@@ -50,7 +50,7 @@ extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void strstr(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_8074308C[];
@@ -1220,7 +1220,7 @@ lbl_res_registerResource_00000E84:
     addi r4, r4, fn_80239AB4@l
     li r6, 0x64
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0xe0(r24)
     mr r30, r3
     cmpwi r0, 0x0
@@ -1318,7 +1318,7 @@ lbl_res_registerResource_00000FEC:
     addi r4, r4, fn_80239AB4@l
     li r5, 0x0
     li r6, 0x64
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0xe0(r24)
     mr r30, r3
     cmpwi r0, 0x0

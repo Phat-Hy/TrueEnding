@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_80088FAC(void);
@@ -368,7 +368,7 @@ lbl_fn_803CFC78_00000084:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r31, 0x137
     addi r5, r28, 0xd7c
@@ -377,7 +377,7 @@ lbl_fn_803CFC78_00000084:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r31, 0x148
     addi r5, r28, 0xd80

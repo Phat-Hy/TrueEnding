@@ -73,7 +73,7 @@ extern void fn_805115D4(void);
 extern void fn_80517B40(void);
 extern void fn_80520638(void);
 extern void fn_8052DEF0(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1180,7 +1180,7 @@ lbl_fn_8051B988_00000E34:
     addi r4, r4, fn_801D082C@l
     li r6, 0x40
     li r7, 0x6
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0x1910(r31)
     cmpwi r4, 0x0
     stw r3, 0x1910(r31)
@@ -1703,7 +1703,7 @@ lbl_fn_8051C754_0000161C:
     addi r4, r4, fn_801D082C@l
     li r5, 0x0
     li r6, 0x40
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0x50(r24)
     cmpwi r4, 0x0
     stw r3, 0x50(r24)

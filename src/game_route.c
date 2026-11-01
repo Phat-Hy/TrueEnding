@@ -4,10 +4,10 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_80060D58(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void mem_alloc(void);
 extern void fn_8008510C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -50,7 +50,7 @@ void fn_80087098(void);
 void fn_80087270(void);
 void fn_8008730C(void);
 void fn_80087320(void);
-void fn_800874C8(void);
+void route_findNextWaypoint(void);
 void fn_800875EC(void);
 void fn_800875F8(void);
 void fn_8008771C(void);
@@ -133,7 +133,7 @@ lbl_fn_80086560_000000C4:
     lfs f6, lbl_80880BD8
     li r7, 0x0
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r3, 0x14(r30)
     lwz r0, 0x0(r31)
     cmpw r3, r0
@@ -164,7 +164,7 @@ lbl_fn_80086560_000000C4:
     fnmsubs f1, f0, f7, f1
     lfs f3, lbl_80880BD4
     lfs f6, lbl_80880BD8
-    bl fn_800616C0
+    bl skill_calculateDamage
     b lbl_fn_80086560_00000214
 lbl_fn_80086560_00000194:
     lwz r4, 0x58(r29)
@@ -198,7 +198,7 @@ lbl_fn_80086560_00000194:
     fnmsubs f1, f0, f7, f1
     lfs f3, lbl_80880BD4
     lfs f6, lbl_80880BD8
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_80086560_00000214:
     lwz r3, 0x0(r31)
     addi r0, r3, 0x1
@@ -237,7 +237,7 @@ asm void fn_800867B4(void)
     cmpwi r3, 0x0
     beq lbl_fn_800867B4_00000288
     addi r3, r31, 0x68
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r3, 0x58(r31)
     stfs f1, 0x0(r3)
 lbl_fn_800867B4_00000288:
@@ -370,7 +370,7 @@ lbl_fn_8008689C_00000400:
     lfs f6, lbl_80880BD8
     li r7, 0x0
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r3, 0x14(r30)
     lwz r0, 0x0(r31)
     cmpw r3, r0
@@ -401,7 +401,7 @@ lbl_fn_8008689C_00000400:
     fnmsubs f1, f0, f7, f1
     lfs f3, lbl_80880BD4
     lfs f6, lbl_80880BD8
-    bl fn_800616C0
+    bl skill_calculateDamage
     b lbl_fn_8008689C_00000550
 lbl_fn_8008689C_000004D0:
     lwz r4, 0x58(r29)
@@ -435,7 +435,7 @@ lbl_fn_8008689C_000004D0:
     fnmsubs f1, f0, f7, f1
     lfs f3, lbl_80880BD4
     lfs f6, lbl_80880BD8
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_8008689C_00000550:
     lwz r3, 0x0(r31)
     addi r0, r3, 0x1
@@ -474,7 +474,7 @@ asm void fn_80086AF0(void)
     cmpwi r3, 0x0
     beq lbl_fn_80086AF0_000005CC
     addi r3, r31, 0x68
-    bl fn_800DC288
+    bl str_skipWhitespace
     lfs f0, lbl_80880BE0
     lwz r3, 0x58(r31)
     fmuls f0, f0, f1
@@ -609,7 +609,7 @@ lbl_fn_80086BE0_00000744:
     lfs f6, lbl_80880BD8
     li r7, 0x0
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r3, 0x14(r30)
     lwz r0, 0x0(r31)
     cmpw r3, r0
@@ -640,7 +640,7 @@ lbl_fn_80086BE0_00000744:
     fnmsubs f1, f0, f7, f1
     lfs f3, lbl_80880BD4
     lfs f6, lbl_80880BD8
-    bl fn_800616C0
+    bl skill_calculateDamage
     b lbl_fn_80086BE0_0000089C
 lbl_fn_80086BE0_00000814:
     lwz r3, 0x58(r29)
@@ -676,7 +676,7 @@ lbl_fn_80086BE0_00000814:
     fnmsubs f1, f0, f7, f1
     lfs f3, lbl_80880BD4
     lfs f6, lbl_80880BD8
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_80086BE0_0000089C:
     lwz r3, 0x0(r31)
     addi r0, r3, 0x1
@@ -783,7 +783,7 @@ lbl_fn_80086E70_000009BC:
     fmadds f1, f4, f1, f0
     li r7, 0x0
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r4, 0x58(r28)
     lis r6, lbl_807321F0@ha
     addi r6, r6, lbl_807321F0@l
@@ -822,7 +822,7 @@ lbl_fn_80086E70_00000A3C:
     lfs f6, lbl_80880BD8
     li r7, 0x0
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_80086E70_00000AAC:
     lwz r3, 0x0(r31)
     addi r0, r3, 0x1
@@ -937,7 +937,7 @@ lbl_fn_80087098_00000BE4:
     fmadds f1, f4, f1, f0
     li r7, 0x0
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r3, 0x58(r29)
     lis r6, lbl_807321F0@ha
     addi r6, r6, lbl_807321F0@l
@@ -978,7 +978,7 @@ lbl_fn_80087098_00000C6C:
     lfs f6, lbl_80880BD8
     li r7, 0x0
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_80087098_00000CDC:
     lwz r3, 0x0(r31)
     addi r0, r3, 0x1
@@ -1135,7 +1135,7 @@ lbl_fn_80087320_00000E94:
     fmadds f1, f4, f1, f0
     li r7, 0x0
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_80087320_00000EF4:
     lwz r3, 0x0(r31)
     addi r0, r3, 0x1
@@ -1171,7 +1171,7 @@ lbl_fn_80087320_00000F40:
     blr
 }
 
-asm void fn_800874C8(void)
+asm void route_findNextWaypoint(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1196,13 +1196,13 @@ asm void fn_800874C8(void)
     bl mem_alloc
     cmpwi r3, 0x0
     mr r31, r3
-    beq lbl_fn_800874C8_00001030
+    beq lbl_route_findNextWaypoint_00001030
     addi r0, r3, 0x4
     lis r4, lbl_80778808@ha
     cmplw r24, r0
     addi r4, r4, lbl_80778808@l
     stw r4, 0x0(r3)
-    beq lbl_fn_800874C8_00000FF8
+    beq lbl_route_findNextWaypoint_00000FF8
     mr r3, r24
     bl strlen
     mr r5, r3
@@ -1210,7 +1210,7 @@ asm void fn_800874C8(void)
     addi r3, r31, 0x4
     addi r5, r5, 0x1
     bl memcpy
-lbl_fn_800874C8_00000FF8:
+lbl_route_findNextWaypoint_00000FF8:
     li r0, 0x0
     stw r0, 0x44(r31)
     lis r3, lbl_807787C0@ha
@@ -1225,9 +1225,9 @@ lbl_fn_800874C8_00000FF8:
     stw r27, 0x60(r31)
     stw r28, 0x64(r31)
     stb r0, 0x68(r31)
-lbl_fn_800874C8_00001030:
+lbl_route_findNextWaypoint_00001030:
     cmpwi r31, 0x0
-    beq lbl_fn_800874C8_00001078
+    beq lbl_route_findNextWaypoint_00001078
     lwz r12, 0x0(r31)
     mr r3, r31
     mr r4, r29
@@ -1237,15 +1237,15 @@ lbl_fn_800874C8_00001030:
     bctrl
     lwz r0, 0x58(r23)
     cmpwi r0, 0x0
-    bne lbl_fn_800874C8_0000106C
+    bne lbl_route_findNextWaypoint_0000106C
     stw r31, 0x58(r23)
     stw r31, 0x5c(r23)
-    b lbl_fn_800874C8_00001078
-lbl_fn_800874C8_0000106C:
+    b lbl_route_findNextWaypoint_00001078
+lbl_route_findNextWaypoint_0000106C:
     lwz r3, 0x5c(r23)
     stw r31, 0x44(r3)
     stw r31, 0x5c(r23)
-lbl_fn_800874C8_00001078:
+lbl_route_findNextWaypoint_00001078:
     lmw r23, 0xc(r1)
     lwz r0, 0x34(r1)
     mtlr r0

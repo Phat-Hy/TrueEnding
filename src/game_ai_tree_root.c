@@ -63,7 +63,7 @@ extern void PSMTXMultVec(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806959D8(void);
 
 /* External data declarations */
@@ -579,7 +579,7 @@ lbl_fn_80256384_00000638:
     li r5, 0x0
     li r6, 0xc
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x14c4(r22)
     mr r18, r3
     cmpwi r0, 0x0
@@ -672,7 +672,7 @@ lbl_fn_80256384_00000780:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x14c4(r22)
     mr r24, r3
     cmpwi r0, 0x0

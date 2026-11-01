@@ -45,7 +45,7 @@ extern void fn_80476CE4(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void strncmp(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern u32 strlen(const char* str);
 
@@ -149,7 +149,7 @@ asm void fn_80120D44(void)
     li r6, 0xc
     addi r4, r4, res_MsgHandle_constructor@l
     addi r5, r5, fn_800EF73C@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r30, r3
     b lbl_fn_80120D44_00000084
 lbl_fn_80120D44_00000080:
@@ -230,7 +230,7 @@ asm void fn_80120E48(void)
     li r6, 0x20
     addi r4, r4, fn_80042740@l
     addi r5, r5, fn_80041C0C@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r29, r3
     b lbl_fn_80120E48_00000188
 lbl_fn_80120E48_00000184:

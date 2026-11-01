@@ -36,7 +36,7 @@ extern void fn_80093E90(void);
 extern void fn_80094420(void);
 extern void fn_80097A20(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_unlink(void);
@@ -76,7 +76,7 @@ extern void fn_8067E23C(void);
 extern void printf(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1484,7 +1484,7 @@ lbl_fn_8000F1EC_00001240:
     addi r4, r4, fn_8000FAE4@l
     li r5, 0x0
     li r6, 0x2c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r17, r3
     b lbl_fn_8000F1EC_0000128C
 lbl_fn_8000F1EC_00001288:
@@ -2152,11 +2152,11 @@ lbl_fn_8000FAE8_00001C00:
     lfs f1, lbl_80880668
     mr r3, r30
     li r4, 0x4
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f1, lbl_80880668
     mr r3, r30
     li r4, 0x3
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lwz r3, 0x1c(r31)
     li r4, 0x1
     lwz r3, 0x48(r3)

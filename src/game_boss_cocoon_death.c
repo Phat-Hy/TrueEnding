@@ -7,7 +7,7 @@ extern void _restgpr_23(void);
 extern void _savegpr_22(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8001047C(void);
 extern void fn_8004D388(void);
 extern void fn_8004ED34(void);
@@ -15,7 +15,7 @@ extern void atn_ColliBase_destructor(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void fn_8007708C(void);
 extern void mem_alloc(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -1065,7 +1065,7 @@ lbl_fn_80468B68_00000CE8:
     beq lbl_fn_80468B68_00000D10
     addi r3, r1, 0x14
     addi r4, r4, 0x4
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_80468B68_00000D10:
     bl fn_80121F00
     bl fn_8013C504
@@ -1076,7 +1076,7 @@ lbl_fn_80468B68_00000D10:
     beq lbl_fn_80468B68_00000D38
     addi r3, r1, 0x2c
     addi r4, r4, 0x4
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_80468B68_00000D38:
     bl fn_80121F00
     bl fn_8013C504
@@ -1087,7 +1087,7 @@ lbl_fn_80468B68_00000D38:
     beq lbl_fn_80468B68_00000D60
     addi r3, r1, 0x20
     addi r4, r4, 0x4
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_80468B68_00000D60:
     addi r3, r1, 0x8
     bl fn_8032AB90
@@ -1642,7 +1642,7 @@ lbl_task_Library_destructor_00001468:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80886E94
     mr r3, r30
     lfs f2, lbl_80886E98

@@ -8,7 +8,7 @@ extern void fn_8003EA3C(void);
 extern void fn_8004ED34(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
@@ -245,7 +245,7 @@ lbl_fn_802A91D0_000001FC:
     lfs f1, lbl_80883E40
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, 0x6
     stw r30, 0x14c8(r31)
     mr r3, r31

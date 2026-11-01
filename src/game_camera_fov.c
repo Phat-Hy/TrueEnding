@@ -26,7 +26,7 @@ extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
 extern void fn_800EC204(void);
@@ -919,7 +919,7 @@ lbl_fn_802DE27C_00000AEC:
     bne lbl_fn_802DE27C_00000B14
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14f0(r31)
     b lbl_fn_802DE27C_00000B84
 lbl_fn_802DE27C_00000B14:
@@ -930,15 +930,15 @@ lbl_fn_802DE27C_00000B14:
     bne lbl_fn_802DE27C_00000B5C
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x15b4(r31)
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x15b8(r31)
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x15bc(r31)
     b lbl_fn_802DE27C_00000B84
 lbl_fn_802DE27C_00000B5C:

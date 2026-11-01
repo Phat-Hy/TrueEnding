@@ -12,7 +12,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -39,7 +39,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void abort(void);
 extern void std_atan2(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695B00(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -266,7 +266,7 @@ lbl_fn_80308E6C_00000240:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -380,7 +380,7 @@ lbl_fn_80308E6C_000003E0:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -512,7 +512,7 @@ lbl_fn_80308E6C_000005DC:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -625,7 +625,7 @@ lbl_fn_80308E6C_0000077C:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1358,7 +1358,7 @@ lbl_fn_80309E6C_000011CC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r28
     addi r4, r30, 0x1e0
     addi r5, r27, 0x14f0
@@ -1367,7 +1367,7 @@ lbl_fn_80309E6C_000011CC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x1e9
     bl fn_8008937C
@@ -1379,7 +1379,7 @@ lbl_fn_80309E6C_000011CC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r28
     addi r4, r30, 0x1f4
     addi r5, r27, 0x14ec
@@ -1388,7 +1388,7 @@ lbl_fn_80309E6C_000011CC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r28
     addi r4, r30, 0x1e0
     addi r5, r27, 0x14f0
@@ -1397,7 +1397,7 @@ lbl_fn_80309E6C_000011CC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x1ff
     bl fn_8008937C
@@ -1408,7 +1408,7 @@ lbl_fn_80309E6C_000011CC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80884B20
     mr r3, r29
     lfs f2, lbl_80884BA0
@@ -1426,7 +1426,7 @@ lbl_fn_80309E6C_000011CC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x106
     addi r5, r27, 0x1538
@@ -1435,7 +1435,7 @@ lbl_fn_80309E6C_000011CC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     addi r11, r1, 0x120
     bl _restgpr_27
     lwz r0, 0x124(r1)

@@ -21,7 +21,7 @@ extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A555C(void);
 extern void fn_800C31F4(void);
@@ -29,7 +29,7 @@ extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_80102824(void);
@@ -1747,7 +1747,7 @@ lbl_fn_802F1A2C_000015F0:
     bne lbl_fn_802F1A2C_00001618
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1524(r18)
     b lbl_fn_802F1A2C_00001810
 lbl_fn_802F1A2C_00001618:
@@ -1758,7 +1758,7 @@ lbl_fn_802F1A2C_00001618:
     bne lbl_fn_802F1A2C_00001640
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14e8(r18)
     b lbl_fn_802F1A2C_00001810
 lbl_fn_802F1A2C_00001640:
@@ -1780,7 +1780,7 @@ lbl_fn_802F1A2C_00001668:
     bne lbl_fn_802F1A2C_00001690
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x155c(r18)
     b lbl_fn_802F1A2C_00001810
 lbl_fn_802F1A2C_00001690:
@@ -1791,7 +1791,7 @@ lbl_fn_802F1A2C_00001690:
     bne lbl_fn_802F1A2C_000016D4
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     frsp f0, f1
     stfs f1, 0x152c(r18)
     fsubs f0, f0, f28
@@ -1809,7 +1809,7 @@ lbl_fn_802F1A2C_000016D4:
     bne lbl_fn_802F1A2C_00001700
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f31, f1
     stfs f0, 0x14f0(r18)
     b lbl_fn_802F1A2C_00001810
@@ -1885,7 +1885,7 @@ lbl_fn_802F1A2C_000017EC:
     bne lbl_fn_802F1A2C_00001810
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1258(r18)
 lbl_fn_802F1A2C_00001810:
     addi r3, r1, 0x28
@@ -2249,7 +2249,7 @@ lbl_fn_802F2294_00001CF4:
     stfs f2, 0x57c(r31)
     psq_st f1, 0x574(r31), 0, 0
     lfs f1, lbl_808848DC
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_808848FC
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -2297,7 +2297,7 @@ lbl_fn_802F2294_00001DB8:
     stw r4, 0x58c(r31)
     li r4, 0x0
     stw r0, 0x54c(r31)
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_808848FC
     li r30, 0x1
     stw r30, 0x3fc(r31)
@@ -2506,7 +2506,7 @@ lbl_fn_802F2294_000020E0:
     addi r3, r31, 0xb0
     stw r0, 0x58c(r31)
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f3, lbl_808848FC
     li r0, 0x1
     lfs f0, lbl_808848E0

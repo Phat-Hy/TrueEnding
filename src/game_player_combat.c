@@ -25,7 +25,7 @@ extern void fn_80099010(void);
 extern void fn_800A0548(void);
 extern void fn_800A08E0(void);
 extern void atn_Task_constructor(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_8011D320(void);
 extern void fn_802180A8(void);
@@ -36,7 +36,7 @@ extern void fn_80473F88(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 
 /* External data declarations */
@@ -577,7 +577,7 @@ lbl_fn_8011E81C_000006F4:
     li r6, 0x10
     addi r5, r5, fn_8011D320@l
     li r7, 0x1
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x1c(r27)
     b lbl_fn_8011E81C_0000073C
     stw r0, 0x1c(r27)
@@ -790,7 +790,7 @@ lbl_fn_8011EB18_000009E4:
     li r6, 0x10
     addi r4, r4, fn_8011EAF8@l
     addi r5, r5, fn_8011D320@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x1c(r31)
     b lbl_fn_8011EB18_00000A38
 lbl_fn_8011EB18_00000A30:
@@ -1120,7 +1120,7 @@ lbl_fn_8011EF14_00000E68:
     li r6, 0x10
     addi r4, r4, fn_8011EAF8@l
     addi r5, r5, fn_8011D320@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0xc(r15)
     b lbl_fn_8011EF14_00000EBC
 lbl_fn_8011EF14_00000EB4:
@@ -1142,7 +1142,7 @@ lbl_fn_8011EF14_00000EBC:
     addi r4, r4, fn_8000FAE4@l
     li r5, 0x0
     li r6, 0x2c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r16, r3
     b lbl_fn_8011EF14_00000F08
 lbl_fn_8011EF14_00000F04:
@@ -1293,7 +1293,7 @@ lbl_fn_8011EF14_000010D0:
     blt lbl_fn_8011EF14_0000147C
     addi r3, r1, 0x34
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x4(r19)
     stw r29, 0x14(r1)
     stw r29, 0x18(r1)

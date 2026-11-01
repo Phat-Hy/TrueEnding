@@ -5,10 +5,10 @@
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void fn_80011034(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_8003EA3C(void);
 extern void fn_8004ED34(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801255C8(void);
 extern void fn_80127D8C(void);
@@ -818,7 +818,7 @@ lbl_fn_803579FC_00000A7C:
     addi r3, r1, 0x8
     addi r4, r31, 0x1534
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x14
     addi r4, r1, 0x8
     bl fn_80011034
@@ -838,7 +838,7 @@ lbl_fn_803579FC_00000AF8:
     lfs f1, lbl_8088552C
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f1, lbl_80885550
     mr r3, r31
     li r4, 0x1ea

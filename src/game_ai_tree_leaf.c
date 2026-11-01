@@ -14,7 +14,7 @@ extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
@@ -1744,7 +1744,7 @@ lbl_fn_8025C998_00001718:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808834F0
     mr r3, r26
     lfs f2, lbl_808834FC

@@ -16,7 +16,7 @@ extern void fn_800827E0(void);
 extern void fn_800839EC(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DD3FC(void);
 extern void fn_80206B14(void);
 extern void fn_80206B68(void);
@@ -528,7 +528,7 @@ lbl_event_processScriptAction_000005E0:
     stw r3, 0xb4(r19)
     addi r3, r1, 0x14
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xb8(r19)
     addi r3, r1, 0x14
     bl talk_parseQuotedString

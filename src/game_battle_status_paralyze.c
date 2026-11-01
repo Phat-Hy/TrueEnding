@@ -25,7 +25,7 @@ extern void fn_800A0448(void);
 extern void fn_800A04A0(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800A08E0(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_8015495C(void);
 extern void fn_8016EB48(void);
 extern void fn_80170F20(void);
@@ -49,7 +49,7 @@ extern void strcmp(void);
 extern void strstr(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern char* strcpy(char* dest, const char* src);
@@ -1111,7 +1111,7 @@ lbl_fn_80429964_00000DB0:
     addi r4, r4, fn_80429ED0@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x284(r31)
     b lbl_fn_80429964_00000E00
 lbl_fn_80429964_00000DF8:
@@ -1769,11 +1769,11 @@ lbl_fn_8042A360_00001654:
     stw r3, 0x174(r19)
     addi r3, r1, 0x4c
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x190(r19)
     addi r3, r1, 0x4c
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1ac(r19)
     addi r3, r1, 0x4c
     bl talk_formatQuotedString

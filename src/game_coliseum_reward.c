@@ -18,7 +18,7 @@ extern void fn_8006B2D8(void);
 extern void fn_80079BC8(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
@@ -35,7 +35,7 @@ extern void fn_800C23E8(void);
 extern void fn_800C2448(void);
 extern void fn_800C2E30(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_801207D4(void);
 extern void fn_80185188(void);
@@ -212,27 +212,27 @@ lbl_fn_80494354_00000194:
     bl fn_8008E2DC
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x98(r1)
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x9c(r1)
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xa0(r1)
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xa4(r1)
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xa8(r1)
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xac(r1)
     addi r3, r28, 0x28
     addi r4, r1, 0x98
@@ -278,27 +278,27 @@ lbl_fn_80494354_000002B0:
     bl fn_8008E2DC
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x80(r1)
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x84(r1)
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x88(r1)
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x8c(r1)
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x90(r1)
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x94(r1)
     addi r3, r28, 0x28
     addi r4, r1, 0x80
@@ -314,23 +314,23 @@ lbl_fn_80494354_0000033C:
     bl fn_8049506C
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x68(r1)
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x6c(r1)
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x70(r1)
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x78(r1)
     addi r3, r1, 0xf4
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x74(r1)
     addi r3, r28, 0x34
     addi r4, r1, 0x68
@@ -481,19 +481,19 @@ asm void fn_804948F0(void)
     mr r30, r3
     mr r3, r31
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x0(r30)
     mr r3, r31
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x4(r30)
     mr r3, r31
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x8(r30)
     mr r3, r31
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xc(r30)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1606,7 +1606,7 @@ lbl_fn_80495788_00001464:
     li r9, 0x0
     addi r5, r5, 0x88
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lwz r5, 0x58(r27)
     mr r3, r29
     lfs f1, lbl_8088706C
@@ -1904,7 +1904,7 @@ lbl_fn_80495788_0000193C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r25, 0x24a
     addi r5, r24, 0x48
@@ -1913,7 +1913,7 @@ lbl_fn_80495788_0000193C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
 lbl_fn_80495788_00001A38:
     li r23, 0x0
     li r24, 0x0

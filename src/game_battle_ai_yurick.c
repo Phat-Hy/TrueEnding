@@ -16,7 +16,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
@@ -58,7 +58,7 @@ extern void PSVECMag(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1378,7 +1378,7 @@ lbl_fn_8043B614_00001148:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80886974
     mr r3, r30
     lfs f2, lbl_80886978
@@ -2073,7 +2073,7 @@ lbl_fn_8043B9E0_00001AF8:
     addi r4, r4, fn_8043C334@l
     li r5, 0x0
     li r6, 0x5c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0x32c(r15)
     cmpwi r4, 0x0
     stw r3, 0x32c(r15)
@@ -2187,7 +2187,7 @@ lbl_fn_8043B9E0_00001CBC:
     addi r4, r4, fn_8043C334@l
     li r5, 0x0
     li r6, 0x5c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0x330(r15)
     cmpwi r4, 0x0
     stw r3, 0x330(r15)

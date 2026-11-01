@@ -31,7 +31,7 @@ extern void atoi(void);
 extern void wmemcpy(void);
 extern void fn_80686A48(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -346,7 +346,7 @@ lbl_fn_8021ED08_0000031C:
     li r6, 0xec
     addi r4, r4, fn_8021F040@l
     addi r5, r5, fn_8021F054@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     li r0, 0x0
     stw r3, lbl_8087F340
     addi r3, r1, 0x28
@@ -941,7 +941,7 @@ lbl_fn_8021F47C_00000B14:
     li r6, 0x17c
     addi r4, r4, fn_8021FAF4@l
     addi r5, r5, fn_8021FB98@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F350
     addi r5, r27, lbl_80742860@l
     mr r3, r21

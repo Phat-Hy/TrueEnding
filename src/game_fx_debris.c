@@ -7,7 +7,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_15(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D760(void);
 extern void fn_8000E18C(void);
 extern void fn_80013DC4(void);
@@ -21,7 +21,7 @@ extern void fn_8006AFF8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800DB3EC(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800EC204(void);
 extern void fn_800F8574(void);
 extern void fn_8011FC10(void);
@@ -1410,7 +1410,7 @@ lbl_fn_8029CF00_00001224:
     bne lbl_fn_8029CF00_00001254
     addi r3, r1, 0x2c
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x168c(r31)
     b lbl_fn_8029CF00_00001968
 lbl_fn_8029CF00_00001254:
@@ -1421,7 +1421,7 @@ lbl_fn_8029CF00_00001254:
     bne lbl_fn_8029CF00_0000127C
     addi r3, r1, 0x2c
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1690(r31)
     b lbl_fn_8029CF00_00001968
 lbl_fn_8029CF00_0000127C:
@@ -1432,7 +1432,7 @@ lbl_fn_8029CF00_0000127C:
     bne lbl_fn_8029CF00_000012A4
     addi r3, r1, 0x2c
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1694(r31)
     b lbl_fn_8029CF00_00001968
 lbl_fn_8029CF00_000012A4:
@@ -1520,7 +1520,7 @@ lbl_fn_8029CF00_000013BC:
     bne lbl_fn_8029CF00_000013E4
     addi r3, r1, 0x2c
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x16b4(r31)
     b lbl_fn_8029CF00_00001968
 lbl_fn_8029CF00_000013E4:
@@ -1703,7 +1703,7 @@ lbl_fn_8029CF00_00001644:
 lbl_fn_8029CF00_00001660:
     addi r3, r1, 0x2c
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x10(r1)
     addi r3, r31, 0x1624
     addi r4, r1, 0x10
@@ -1921,7 +1921,7 @@ lbl_fn_8029CF00_00001978:
     beq lbl_fn_8029CF00_00001990
     addi r3, r31, 0x1638
     addi r4, r25, 0x4
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_8029CF00_000019A4
 lbl_fn_8029CF00_00001990:
     lfs f1, lbl_80883D28

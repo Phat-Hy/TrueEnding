@@ -19,7 +19,7 @@ extern void fn_80094778(void);
 extern void fn_80095F10(void);
 extern void fn_8009757C(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80097E80(void);
 extern void fn_80098698(void);
@@ -3112,7 +3112,7 @@ lbl_fn_80145334_00002AE8:
     lfs f1, lbl_80881964
     addi r3, r26, 0xb0
     li r4, 0x3
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     b lbl_fn_80145334_00002BA0
 lbl_fn_80145334_00002B34:
     lfs f1, lbl_80881A00

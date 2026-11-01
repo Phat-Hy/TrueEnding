@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DD3FC(void);
 extern void fn_800EB7A0(void);
@@ -207,7 +207,7 @@ asm void fn_802D57B8(void)
     lfs f1, lbl_80884564
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_8088458C
     li r30, 0x1
     stw r30, 0x3fc(r31)

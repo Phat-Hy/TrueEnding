@@ -28,7 +28,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
@@ -42,11 +42,11 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_8011D424(void);
 extern void fn_8011F91C(void);
@@ -101,7 +101,7 @@ extern void abort(void);
 extern void fn_8068AE9C(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695AD0(void);
 extern char* strcpy(char* dest, const char* src);
 
@@ -739,7 +739,7 @@ asm void fn_8043CA58(void)
     addi r4, r4, fn_8043C334@l
     li r5, 0x0
     li r6, 0x5c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r28, r3
     li r7, 0x0
     li r4, 0x0
@@ -2207,15 +2207,15 @@ lbl_fn_8043DD78_00001C08:
     bne lbl_fn_8043DD78_00001C5C
     addi r3, r1, 0x130
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x24(r1)
     addi r3, r1, 0x130
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x28(r1)
     addi r3, r1, 0x130
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x2c(r1)
     addi r3, r29, 0x134
     addi r4, r1, 0x24
@@ -2229,7 +2229,7 @@ lbl_fn_8043DD78_00001C5C:
     bne lbl_fn_8043DD78_00001C84
     addi r3, r1, 0x130
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x104(r29)
     b lbl_fn_8043DD78_00001CC8
 lbl_fn_8043DD78_00001C84:
@@ -2701,7 +2701,7 @@ lbl_fn_8043E580_000022B0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808869D8
     mr r3, r30
     lfs f2, lbl_808869DC
@@ -3353,7 +3353,7 @@ lbl_fn_8043EA64_00002C28:
     lfs f1, lbl_808869CC
     mr r3, r31
     li r4, 0x3
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     b lbl_fn_8043EA64_00002CBC
 lbl_fn_8043EA64_00002C58:
     lfs f3, lbl_808869CC
@@ -3378,7 +3378,7 @@ lbl_fn_8043EA64_00002C58:
     lwz r3, 0x8(r3)
     stfs f3, 0x58(r1)
     addi r3, r3, 0xb0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, 0x0
     stw r0, 0x2c(r29)
 lbl_fn_8043EA64_00002CBC:

@@ -29,7 +29,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC3CC(void);
 extern void fn_80453DBC(void);
 extern void fn_80470580(void);
@@ -54,7 +54,7 @@ extern void wmemcpy(void);
 extern void fn_80686A48(void);
 extern void fn_80686AF0(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern char* strcpy(char* dest, const char* src);
 
@@ -832,7 +832,7 @@ lbl_fn_805303D4_00000A84:
     bne lbl_fn_805303D4_00000AB4
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1328(r29)
     b lbl_fn_805303D4_00000B58
 lbl_fn_805303D4_00000AB4:
@@ -843,19 +843,19 @@ lbl_fn_805303D4_00000AB4:
     bne lbl_fn_805303D4_00000B0C
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1318(r29)
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x131c(r29)
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1320(r29)
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1324(r29)
     b lbl_fn_805303D4_00000B58
 lbl_fn_805303D4_00000B0C:
@@ -866,7 +866,7 @@ lbl_fn_805303D4_00000B0C:
     bne lbl_fn_805303D4_00000B34
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x132c(r29)
     b lbl_fn_805303D4_00000B58
 lbl_fn_805303D4_00000B34:
@@ -877,7 +877,7 @@ lbl_fn_805303D4_00000B34:
     bne lbl_fn_805303D4_00000B58
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1330(r29)
 lbl_fn_805303D4_00000B58:
     addi r3, r1, 0x8
@@ -2016,7 +2016,7 @@ lbl_fn_80531398_00001B38:
     li r6, 0x110
     addi r4, r4, fn_80531814@l
     addi r5, r5, fn_805311DC@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x70(r26)
     b lbl_fn_80531398_00001B8C
 lbl_fn_80531398_00001B84:

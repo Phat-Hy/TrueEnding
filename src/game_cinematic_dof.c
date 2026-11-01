@@ -23,7 +23,7 @@ extern void fn_8005B5F8(void);
 extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void mem_free(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
@@ -33,7 +33,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_80099E9C(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800EC254(void);
 extern void fn_800EC2C4(void);
 extern void fn_800EC440(void);
@@ -360,7 +360,7 @@ lbl_fn_80338568_000001DC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x1aa
     addi r5, r29, 0x14d4
@@ -369,7 +369,7 @@ lbl_fn_80338568_000001DC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0xbb
     addi r5, r29, 0x1504
@@ -378,7 +378,7 @@ lbl_fn_80338568_000001DC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0xe5
     addi r5, r29, 0x1508
@@ -387,7 +387,7 @@ lbl_fn_80338568_000001DC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808851B0
     mr r3, r30
     lfs f2, lbl_80885230
@@ -1187,7 +1187,7 @@ lbl_fn_80338FD0_00000DE8:
     bne lbl_fn_80338FD0_00000E18
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1764(r31)
     b lbl_fn_80338FD0_00001290
 lbl_fn_80338FD0_00000E18:
@@ -1264,7 +1264,7 @@ lbl_fn_80338FD0_00000F08:
     bne lbl_fn_80338FD0_00000F30
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1774(r31)
     b lbl_fn_80338FD0_00001290
 lbl_fn_80338FD0_00000F30:
@@ -1286,7 +1286,7 @@ lbl_fn_80338FD0_00000F58:
     bne lbl_fn_80338FD0_00000F80
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x177c(r31)
     b lbl_fn_80338FD0_00001290
 lbl_fn_80338FD0_00000F80:
@@ -1297,7 +1297,7 @@ lbl_fn_80338FD0_00000F80:
     bne lbl_fn_80338FD0_00000FA8
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1780(r31)
     b lbl_fn_80338FD0_00001290
 lbl_fn_80338FD0_00000FA8:
@@ -1308,7 +1308,7 @@ lbl_fn_80338FD0_00000FA8:
     bne lbl_fn_80338FD0_00000FD0
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1784(r31)
     b lbl_fn_80338FD0_00001290
 lbl_fn_80338FD0_00000FD0:

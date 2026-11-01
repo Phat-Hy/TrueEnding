@@ -26,11 +26,11 @@ extern void fn_8004B1EC(void);
 extern void fn_80051CD8(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void fn_800629F0(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
@@ -395,7 +395,7 @@ lbl_fn_8035DFB8_00000374:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lwz r3, 0x1ac(r31)
     addi r4, r30, 0x12
     lfs f1, lbl_80885674
@@ -783,7 +783,7 @@ lbl_fn_8035E5B8_000008C0:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_8035E5B8_000008D4:
     addi r26, r26, 0xa8
     addi r25, r25, 0x1

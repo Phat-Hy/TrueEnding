@@ -12,7 +12,7 @@ extern void _savegpr_27(void);
 extern void fn_80626C60(void);
 extern void fn_80626D50(void);
 extern void fn_80629810(void);
-extern void fn_80629830(void);
+extern void bta_sys_log(void);
 extern void fn_80629850(void);
 extern void fn_806298D0(void);
 extern void fn_80630CE8(void);
@@ -875,7 +875,7 @@ lbl_fn_80636DF8_00000AE4:
     lhz r5, 0x185e(r31)
     addi r3, r3, 0x2
     addi r4, r30, 0x28c
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_80636DF8_00000B0C:
     lis r3, lbl_80820018@ha
     addi r3, r3, lbl_80820018@l

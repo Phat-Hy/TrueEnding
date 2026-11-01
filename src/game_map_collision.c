@@ -11,7 +11,7 @@ extern void dtor_80084684(void);
 extern void fn_8004ED34(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B6E8(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void mem_free(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800BFAC8(void);
@@ -738,7 +738,7 @@ lbl_fn_80180AE0_00000874:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r0, 0x14c0(r31)
     lis r4, lbl_80738154@ha
     addi r4, r4, lbl_80738154@l
@@ -866,7 +866,7 @@ lbl_fn_80180AE0_00000A30:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r4, lbl_8087F8A0
     addi r3, r1, 0x28
     lfs f1, lbl_80881C0C
@@ -999,7 +999,7 @@ lbl_fn_80180AE0_00000C08:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_80180AE0_00000C50:
     lwz r0, 0x1a4(r1)
     psq_l f31, 0x198(r1), 0, 0

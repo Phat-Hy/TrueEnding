@@ -11,7 +11,7 @@ extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -42,7 +42,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -844,7 +844,7 @@ lbl_fn_803FF9A4_00000A8C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808860FC
     mr r3, r29
     lfs f2, lbl_80886100
@@ -966,7 +966,7 @@ lbl_fn_803FF9A4_00000AFC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r31, 0xcf
     addi r5, r26, 0x38c
@@ -975,7 +975,7 @@ lbl_fn_803FF9A4_00000AFC:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     addi r11, r1, 0x140
     bl _restgpr_26
     lwz r0, 0x144(r1)
@@ -1270,7 +1270,7 @@ lbl_fn_803FFF40_000010A8:
     li r4, 0x0
     li r5, 0x0
     li r6, 0x30
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0x98(r31)
     cmpwi r4, 0x0
     stw r3, 0x98(r31)

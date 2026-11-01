@@ -23,7 +23,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_80120D24(void);
 extern void fn_80120D34(void);
@@ -48,7 +48,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern u32 strlen(const char* str);
 
@@ -1049,19 +1049,19 @@ lbl_fn_8011FFF8_00000AC4:
 lbl_fn_8011FFF8_00000AC8:
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14(r26)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x18(r26)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1c(r26)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x20(r26)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
@@ -1243,7 +1243,7 @@ asm void fn_801204A8(void)
     addi r4, r4, fn_801206E8@l
     li r5, 0x0
     li r6, 0x34
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r31, r3
     b lbl_fn_801204A8_00000D94
 lbl_fn_801204A8_00000D90:
@@ -1797,7 +1797,7 @@ asm void fn_80120C30(void)
     li r6, 0xc
     addi r4, r4, fn_80237518@l
     addi r5, r5, fn_802375C4@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r30, r3
     b lbl_fn_80120C30_00001518
 lbl_fn_80120C30_00001514:

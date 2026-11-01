@@ -25,7 +25,7 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_802180A8(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -268,7 +268,7 @@ lbl_fn_8040F498_000001D0:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
@@ -1195,7 +1195,7 @@ lbl_fn_80410028_00000E44:
 lbl_fn_80410028_00000E88:
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x588(r31)
     b lbl_fn_80410028_00000F58
 lbl_fn_80410028_00000E9C:
@@ -1219,15 +1219,15 @@ lbl_fn_80410028_00000E9C:
     add r0, r31, r0
     add r30, r4, r0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x594(r30)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x598(r30)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f31, f1
     stfs f0, 0x59c(r30)
     b lbl_fn_80410028_00000F58
@@ -1243,7 +1243,7 @@ lbl_fn_80410028_00000F1C:
     mr r30, r3
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     slwi r0, r30, 2
     add r3, r31, r0
     stfs f1, 0x58c(r3)
@@ -1971,7 +1971,7 @@ lbl_fn_80410BF8_00001930:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0

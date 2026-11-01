@@ -11,12 +11,12 @@ extern void _savegpr_23(void);
 extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_80626AC0(void);
+extern void scapi_initContext(void);
 extern void fn_80626C60(void);
 extern void fn_80626D50(void);
 extern void fn_80627B30(void);
 extern void fn_80629810(void);
-extern void fn_80629830(void);
+extern void bta_sys_log(void);
 extern void fn_80629850(void);
 extern void fn_80629870(void);
 extern void fn_80629890(void);
@@ -1536,7 +1536,7 @@ lbl_fn_80634E50_00001254:
     lis r4, lbl_807B47C8@ha
     addi r3, r3, 0x1
     addi r4, r4, lbl_807B47C8@l
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_80634E50_0000128C:
     li r0, 0xa
     stb r0, 0x8(r1)
@@ -1631,7 +1631,7 @@ lbl_fn_80634E50_000013C8:
     li r3, 0x708
     sth r0, 0x16e0(r30)
     sth r0, 0x16e2(r30)
-    bl fn_80626AC0
+    bl scapi_initContext
     cmpwi r3, 0x0
     stw r3, 0x16dc(r31)
     beq lbl_fn_80634E50_000013FC

@@ -28,7 +28,7 @@ extern void PSVECMag(void);
 extern void fn_80686A64(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_80754C24[];
@@ -833,7 +833,7 @@ lbl_fn_80459FD0_00000A9C:
     li r5, 0x0
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r22)
     mr r26, r3
     cmpwi r0, 0x0
@@ -946,7 +946,7 @@ lbl_fn_80459FD0_00000C34:
     addi r4, r31, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r22)
     mr r24, r3
     cmpwi r0, 0x0
@@ -1090,7 +1090,7 @@ lbl_fn_80459FD0_00000E58:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r22)
     mr r23, r3
     cmpwi r0, 0x0
@@ -1204,7 +1204,7 @@ lbl_fn_80459FD0_00000FF8:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r22)
     mr r23, r3
     cmpwi r0, 0x0

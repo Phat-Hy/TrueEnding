@@ -15,7 +15,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800E854C(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8011F91C(void);
@@ -762,7 +762,7 @@ lbl_fn_80334FDC_0000085C:
     bne lbl_fn_80334FDC_00000884
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14e8(r29)
     b lbl_fn_80334FDC_00000970
 lbl_fn_80334FDC_00000884:

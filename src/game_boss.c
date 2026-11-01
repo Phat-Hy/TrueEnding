@@ -12,7 +12,7 @@ extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
 extern void fn_8005ED6C(void);
 extern void fn_80060D58(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void fn_800827E0(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
@@ -1381,7 +1381,7 @@ lbl_fn_80069E50_000010FC:
     li r7, 0x1
     li r8, 0x0
     fmadds f2, f30, f0, f31
-    bl fn_800616C0
+    bl skill_calculateDamage
     addi r25, r25, 0x88
     addi r26, r26, 0x88
     addi r27, r27, 0x1

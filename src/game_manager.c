@@ -14,7 +14,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D0F8(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_8000D430(void);
 extern void fn_8000DD0C(void);
@@ -25,7 +25,7 @@ extern void fn_800929C0(void);
 extern void fn_80094958(void);
 extern void fn_80097A9C(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void fn_80097D40(void);
 extern void atn_Task_destructor(void);
 extern void fn_800DC6B4(void);
@@ -120,7 +120,7 @@ void fn_80012CE4(void);
 void fn_80012D0C(void);
 void fn_80012D34(void);
 void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
-void fn_80013338(void);
+void vec3_sub(void);
 void fn_8001336C(void);
 void fn_800133B0(void);
 void fn_80013404(void);
@@ -2630,7 +2630,7 @@ lbl_fn_80012294_00002240:
     lfd f1, 0x8(r1)
     fsubs f1, f1, f2
     fdivs f1, f0, f1
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     b lbl_fn_80012294_00002408
 lbl_fn_80012294_00002280:
     xoris r3, r29, 0x8000
@@ -3486,7 +3486,7 @@ lbl_fn_80012D34_00002C80:
     addi r3, r1, 0x170
     addi r4, r1, 0x17c
     addi r5, r1, 0xc8
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x170
     bl fn_8000D3A4
     fmr f3, f1
@@ -3506,7 +3506,7 @@ lbl_fn_80012D34_00002C80:
     mr r4, r28
     addi r3, r1, 0xbc
     addi r5, r1, 0xb0
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x158
     addi r4, r1, 0xbc
     bl fn_80011034
@@ -3545,7 +3545,7 @@ lbl_fn_80012D34_00002D94:
 lbl_fn_80012D34_00002DA8:
     mr r4, r28
     addi r3, r1, 0x17c
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80012D34_00002E84
 lbl_fn_80012D34_00002DB8:
     fmr f1, f29
@@ -3602,7 +3602,7 @@ lbl_fn_80012D34_00002E44:
     bl fn_80013410
     addi r3, r1, 0x17c
     addi r4, r1, 0x8c
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_80012D34_00002E84:
     lis r4, lbl_807C7030@ha
     mr r3, r30
@@ -3616,7 +3616,7 @@ lbl_fn_80012D34_00002E84:
     addi r3, r1, 0x134
     addi r4, r1, 0x17c
     addi r5, r1, 0x140
-    bl fn_80013338
+    bl vec3_sub
     mr r4, r30
     addi r3, r1, 0x218
     bl fn_800109E0
@@ -3629,7 +3629,7 @@ lbl_fn_80012D34_00002E84:
     bl fn_80013410
     addi r3, r1, 0x17c
     addi r4, r1, 0x74
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_80012D34_00002EEC:
     fmr f1, f28
     mr r3, r26
@@ -3675,10 +3675,10 @@ lbl_fn_80012D34_00002F00:
     addi r3, r1, 0x68
     addi r4, r1, 0x5c
     addi r5, r1, 0x110
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x11c
     addi r4, r1, 0x68
-    bl fn_8000D124
+    bl vec3_copy
     mr r4, r28
     addi r3, r1, 0x1e8
     bl fn_800109E0
@@ -3696,7 +3696,7 @@ lbl_fn_80012D34_00002F00:
     bl fn_80013484
     addi r3, r1, 0x128
     addi r4, r1, 0x11c
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_80012D34_00003000
 lbl_fn_80012D34_00002FF4:
     mr r4, r28
@@ -3727,10 +3727,10 @@ lbl_fn_80012D34_00003000:
     addi r3, r1, 0x44
     addi r4, r1, 0x38
     addi r5, r1, 0xf8
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x104
     addi r4, r1, 0x44
-    bl fn_8000D124
+    bl vec3_copy
     mr r4, r30
     addi r3, r1, 0x1b8
     bl fn_800109E0
@@ -3748,7 +3748,7 @@ lbl_fn_80012D34_00003000:
     bl fn_80013484
     addi r3, r1, 0x128
     addi r4, r1, 0x104
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_80012D34_000030B8:
     fmr f1, f28
     mr r3, r26
@@ -3771,7 +3771,7 @@ lbl_fn_80012D34_000030D0:
     bl fn_80013410
     addi r3, r1, 0xe0
     addi r4, r1, 0x14
-    bl fn_8000D124
+    bl vec3_copy
     fmr f1, f28
     mr r3, r26
     addi r4, r1, 0xe0
@@ -3790,7 +3790,7 @@ lbl_fn_80012D34_00003120:
     addi r3, r1, 0xd4
     addi r4, r1, 0xe0
     addi r5, r1, 0xec
-    bl fn_80013338
+    bl vec3_sub
     mr r4, r30
     addi r3, r1, 0x188
     bl fn_800109E0
@@ -3803,7 +3803,7 @@ lbl_fn_80012D34_00003120:
     bl fn_80013410
     addi r3, r1, 0xe0
     addi r4, r1, 0x8
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_80012D34_00003188:
     fmr f1, f28
     mr r3, r26
@@ -3836,7 +3836,7 @@ void* atn_Model_getBoneMatrix(void* model, u32 bone_id)
     }
 }
 
-asm void fn_80013338(void)
+asm void vec3_sub(void)
 {
     nofralloc
     lfs f1, 0x8(r4)

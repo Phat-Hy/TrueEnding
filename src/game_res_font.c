@@ -62,7 +62,7 @@ extern void GXSetNumTevStages(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXLoadNrmMtxImm3x3(void);
 extern void GXSetCurrentMtx(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_80742F98[];
@@ -290,7 +290,7 @@ lbl_font_loadGlyphMetrics_000001D8:
     addi r4, r4, font_initGlyphDesc@l
     li r5, 0x0
     li r6, 0x70
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r30, lbl_8087DBFC
     addi r5, r31, lbl_80742FB8@l
     stw r3, lbl_8087F388
@@ -305,7 +305,7 @@ lbl_font_loadGlyphMetrics_000001D8:
     addi r4, r4, fn_80234C54@l
     li r5, 0x0
     li r6, 0x5c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, lbl_8087F378
     addi r5, r31, lbl_80742FB8@l
     stw r3, lbl_8087F398

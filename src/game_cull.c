@@ -43,7 +43,7 @@ extern void printf(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80695D84(void);
@@ -1693,7 +1693,7 @@ lbl_fn_800D9960_00001444:
     addi r4, r4, fn_800D98DC@l
     li r5, 0x0
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x3c(r1)
     b lbl_fn_800D9960_00001494
 lbl_fn_800D9960_0000148C:

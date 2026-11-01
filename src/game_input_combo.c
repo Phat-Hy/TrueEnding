@@ -13,7 +13,7 @@ extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void mem_free(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_80088FAC(void);
@@ -979,7 +979,7 @@ lbl_fn_802EC38C_00000BD0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808847B0
     mr r3, r30
     lfs f2, lbl_808847E0
@@ -997,7 +997,7 @@ lbl_fn_802EC38C_00000BD0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808847B0
     mr r3, r30
     lfs f2, lbl_808847E0
@@ -1015,7 +1015,7 @@ lbl_fn_802EC38C_00000BD0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808847A8
     mr r3, r30
     lfs f2, lbl_808847AC
@@ -1042,7 +1042,7 @@ lbl_fn_802EC38C_00000BD0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808847A8
     mr r3, r30
     lfs f2, lbl_808847AC
@@ -1060,7 +1060,7 @@ lbl_fn_802EC38C_00000BD0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x245
     addi r5, r29, 0x1600
@@ -1069,7 +1069,7 @@ lbl_fn_802EC38C_00000BD0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x24f
     addi r5, r29, 0x1530
@@ -1078,7 +1078,7 @@ lbl_fn_802EC38C_00000BD0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x258
     addi r5, r29, 0x1534
@@ -1087,7 +1087,7 @@ lbl_fn_802EC38C_00000BD0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808847A8
     mr r3, r30
     lfs f2, lbl_808847F8

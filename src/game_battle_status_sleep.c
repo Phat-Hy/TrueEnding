@@ -29,7 +29,7 @@ extern void atn_Anim_getDuration(void);
 extern void fn_800B2180(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800EF73C(void);
 extern void fn_802180A8(void);
 extern void sound_initGlobalInstances(void);
@@ -1783,7 +1783,7 @@ lbl_fn_8042BF38_000016B0:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
@@ -1840,7 +1840,7 @@ lbl_fn_8042BF38_00001798:
     bne lbl_fn_8042BF38_000017BC
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x558(r29)
 lbl_fn_8042BF38_000017BC:
     addi r3, r1, 0x108

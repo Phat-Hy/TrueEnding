@@ -27,7 +27,7 @@ extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void rand(void);
 extern void std_atan2(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 
@@ -887,7 +887,7 @@ lbl_fn_802E7298_00000B64:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1001,7 +1001,7 @@ lbl_fn_802E7298_00000D04:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0

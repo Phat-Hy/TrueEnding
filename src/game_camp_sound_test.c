@@ -11,7 +11,7 @@ extern void mem_getAllocSize(void);
 extern void fn_803BF824(void);
 extern void fn_803BF8EC(void);
 extern void fn_803BF960(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 
 /* External data declarations */
@@ -160,7 +160,7 @@ lbl_fn_803C7964_00000048:
     li r6, 0x148
     addi r4, r4, fn_803C7A14@l
     addi r5, r5, fn_803BF824@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C7964_0000009C
 lbl_fn_803C7964_00000094:
@@ -215,7 +215,7 @@ asm void fn_803C7A24(void)
     li r6, 0x148
     addi r4, r4, fn_803C7A14@l
     addi r5, r5, fn_803BF824@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r28, 0x0
     stw r3, 0x4(r25)
     beq lbl_fn_803C7A24_000002A8
@@ -368,7 +368,7 @@ lbl_fn_803C7C34_00000314:
     addi r4, r4, fn_803C7CDC@l
     li r5, 0x0
     li r6, 0x20
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C7C34_00000364
 lbl_fn_803C7C34_0000035C:
@@ -450,7 +450,7 @@ lbl_fn_803C7D20_00000400:
     addi r4, r4, fn_803C7DC8@l
     li r5, 0x0
     li r6, 0x20
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C7D20_00000450
 lbl_fn_803C7D20_00000448:
@@ -514,7 +514,7 @@ asm void fn_803C7DF8(void)
     addi r4, r4, fn_803C7DC8@l
     li r5, 0x0
     li r6, 0x20
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r30, 0x0
     stw r3, 0x4(r28)
     beq lbl_fn_803C7DF8_000005A0
@@ -613,7 +613,7 @@ lbl_fn_803C7F38_00000618:
     addi r4, r4, fn_803C7FE0@l
     li r5, 0x0
     li r6, 0x28
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C7F38_00000668
 lbl_fn_803C7F38_00000660:
@@ -666,7 +666,7 @@ asm void fn_803C7FE4(void)
     addi r4, r4, fn_803C7FE0@l
     li r5, 0x0
     li r6, 0x28
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r29, 0x0
     stw r3, 0x4(r31)
     beq lbl_fn_803C7FE4_000007A0
@@ -763,7 +763,7 @@ lbl_fn_803C8130_00000810:
     addi r4, r4, fn_803C81D8@l
     li r5, 0x0
     li r6, 0x30
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C8130_00000860
 lbl_fn_803C8130_00000858:
@@ -819,7 +819,7 @@ lbl_soundTest_initOption_000008BC:
     addi r4, r4, soundTest_dummyCallback@l
     li r5, 0x0
     li r6, 0x40
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_soundTest_initOption_0000090C
 lbl_soundTest_initOption_00000904:
@@ -873,7 +873,7 @@ lbl_fn_803C8288_00000968:
     addi r4, r4, fn_803C8330@l
     li r5, 0x0
     li r6, 0x30
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C8288_000009B8
 lbl_fn_803C8288_000009B0:
@@ -936,7 +936,7 @@ lbl_fn_803C833C_00000A1C:
     addi r4, r4, fn_803C83E4@l
     li r5, 0x0
     li r6, 0x40
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C833C_00000A6C
 lbl_fn_803C833C_00000A64:
@@ -989,7 +989,7 @@ asm void fn_803C83E8(void)
     addi r4, r4, fn_803C83E4@l
     li r5, 0x0
     li r6, 0x40
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r31, 0x0
     stw r3, 0x4(r29)
     beq lbl_fn_803C83E8_00000BD4
@@ -1107,7 +1107,7 @@ lbl_fn_803C856C_00000C50:
     li r6, 0x48
     addi r4, r4, fn_803C861C@l
     addi r5, r5, fn_803BF8EC@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C856C_00000CA4
 lbl_fn_803C856C_00000C9C:
@@ -1162,7 +1162,7 @@ asm void fn_803C862C(void)
     li r6, 0x48
     addi r4, r4, fn_803C861C@l
     addi r5, r5, fn_803BF8EC@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r28, 0x0
     stw r3, 0x4(r25)
     beq lbl_fn_803C862C_00000E84
@@ -1354,7 +1354,7 @@ lbl_fn_803C88A0_00000F84:
     li r6, 0x28
     addi r4, r4, fn_803C8950@l
     addi r5, r5, fn_803BF960@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C88A0_00000FD8
 lbl_fn_803C88A0_00000FD0:
@@ -1409,7 +1409,7 @@ asm void fn_803C8960(void)
     li r6, 0x28
     addi r4, r4, fn_803C8950@l
     addi r5, r5, fn_803BF960@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r31, 0x0
     stw r3, 0x4(r28)
     beq lbl_fn_803C8960_00001180
@@ -1536,7 +1536,7 @@ lbl_fn_803C8B0C_000011EC:
     addi r4, r4, fn_803C8BB4@l
     li r5, 0x0
     li r6, 0x30
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C8B0C_0000123C
 lbl_fn_803C8B0C_00001234:
@@ -1599,7 +1599,7 @@ lbl_fn_803C8BC0_000012A0:
     addi r4, r4, fn_803C8C68@l
     li r5, 0x0
     li r6, 0x80
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C8BC0_000012F0
 lbl_fn_803C8BC0_000012E8:
@@ -1652,7 +1652,7 @@ asm void fn_803C8C6C(void)
     addi r4, r4, fn_803C8C68@l
     li r5, 0x0
     li r6, 0x80
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r31, 0x0
     stw r3, 0x4(r29)
     beq lbl_fn_803C8C6C_000014D4
@@ -1799,7 +1799,7 @@ lbl_fn_803C8E6C_0000154C:
     addi r4, r4, fn_803C8F14@l
     li r5, 0x0
     li r6, 0x58
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C8E6C_0000159C
 lbl_fn_803C8E6C_00001594:
@@ -1852,7 +1852,7 @@ asm void fn_803C8F18(void)
     addi r4, r4, fn_803C8F14@l
     li r5, 0x0
     li r6, 0x58
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r31, 0x0
     stw r3, 0x4(r29)
     beq lbl_fn_803C8F18_0000172C
@@ -1978,7 +1978,7 @@ lbl_fn_803C90C4_000017A4:
     addi r4, r4, fn_803C916C@l
     li r5, 0x0
     li r6, 0x50
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C90C4_000017F4
 lbl_fn_803C90C4_000017EC:
@@ -2031,7 +2031,7 @@ asm void fn_803C9170(void)
     addi r4, r4, fn_803C916C@l
     li r5, 0x0
     li r6, 0x50
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r31, 0x0
     stw r3, 0x4(r29)
     beq lbl_fn_803C9170_00001974

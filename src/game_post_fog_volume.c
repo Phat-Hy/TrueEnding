@@ -19,7 +19,7 @@ extern void fn_800897D8(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
 extern void fn_800EC204(void);
@@ -1341,7 +1341,7 @@ lbl_fn_802D7E80_00001158:
     bne lbl_fn_802D7E80_00001180
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1514(r31)
     b lbl_fn_802D7E80_00001410
 lbl_fn_802D7E80_00001180:
@@ -1477,7 +1477,7 @@ lbl_fn_802D7E80_00001348:
     bne lbl_fn_802D7E80_00001370
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14cc(r31)
     b lbl_fn_802D7E80_00001410
 lbl_fn_802D7E80_00001370:
@@ -1488,15 +1488,15 @@ lbl_fn_802D7E80_00001370:
     bne lbl_fn_802D7E80_000013B8
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x15dc(r31)
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x15e0(r31)
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x15e4(r31)
     b lbl_fn_802D7E80_00001410
 lbl_fn_802D7E80_000013B8:

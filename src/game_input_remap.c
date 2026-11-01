@@ -22,13 +22,13 @@ extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
@@ -391,7 +391,7 @@ lbl_fn_802F62A0_00000394:
     addi r3, r28, 0xb0
     stw r0, 0x58c(r28)
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f3, lbl_808848FC
     li r0, 0x1
     lfs f0, lbl_80884960
@@ -476,7 +476,7 @@ lbl_fn_802F66CC_0000048C:
     lfs f1, lbl_808848DC
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_808848FC
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -652,7 +652,7 @@ lbl_fn_802F693C_00000754:
     addi r3, r29, 0xb0
     stw r0, 0x58c(r29)
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_808848FC
     li r0, 0x1
     stw r0, 0x3fc(r29)
@@ -1767,7 +1767,7 @@ lbl_fn_802F73FC_00001760:
     bne lbl_fn_802F73FC_00001788
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x152c(r18)
     b lbl_fn_802F73FC_00001A4C
 lbl_fn_802F73FC_00001788:
@@ -1778,7 +1778,7 @@ lbl_fn_802F73FC_00001788:
     bne lbl_fn_802F73FC_000017B0
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14f0(r18)
     b lbl_fn_802F73FC_00001A4C
 lbl_fn_802F73FC_000017B0:
@@ -1789,7 +1789,7 @@ lbl_fn_802F73FC_000017B0:
     bne lbl_fn_802F73FC_000017D8
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1594(r18)
     b lbl_fn_802F73FC_00001A4C
 lbl_fn_802F73FC_000017D8:
@@ -1800,7 +1800,7 @@ lbl_fn_802F73FC_000017D8:
     bne lbl_fn_802F73FC_00001800
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1598(r18)
     b lbl_fn_802F73FC_00001A4C
 lbl_fn_802F73FC_00001800:
@@ -1811,7 +1811,7 @@ lbl_fn_802F73FC_00001800:
     bne lbl_fn_802F73FC_00001844
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     frsp f0, f1
     stfs f1, 0x1534(r18)
     fsubs f0, f0, f28
@@ -1829,7 +1829,7 @@ lbl_fn_802F73FC_00001844:
     bne lbl_fn_802F73FC_00001870
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f31, f1
     stfs f0, 0x14f8(r18)
     b lbl_fn_802F73FC_00001A4C
@@ -1864,7 +1864,7 @@ lbl_fn_802F73FC_000018C4:
     bne lbl_fn_802F73FC_000018EC
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1584(r18)
     b lbl_fn_802F73FC_00001A4C
 lbl_fn_802F73FC_000018EC:
@@ -1875,7 +1875,7 @@ lbl_fn_802F73FC_000018EC:
     bne lbl_fn_802F73FC_00001914
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1588(r18)
     b lbl_fn_802F73FC_00001A4C
 lbl_fn_802F73FC_00001914:
@@ -1886,7 +1886,7 @@ lbl_fn_802F73FC_00001914:
     bne lbl_fn_802F73FC_0000193C
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x158c(r18)
     b lbl_fn_802F73FC_00001A4C
 lbl_fn_802F73FC_0000193C:
@@ -1961,7 +1961,7 @@ lbl_fn_802F73FC_00001A28:
     bne lbl_fn_802F73FC_00001A4C
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x15e0(r18)
 lbl_fn_802F73FC_00001A4C:
     addi r3, r1, 0x28

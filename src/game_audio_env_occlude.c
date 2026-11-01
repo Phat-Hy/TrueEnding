@@ -6,7 +6,7 @@ extern void __files(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_80011034(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004212C(void);
@@ -18,7 +18,7 @@ extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void mem_free(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -1188,7 +1188,7 @@ lbl_fn_8031B0A8_00000E20:
     lis r4, lbl_807C7030@ha
     addi r3, r29, 0x14c8
     addi r4, r4, lbl_807C7030@l
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r1, 0x8
     li r4, -0x1
     bl dtor_80013D60
@@ -1520,7 +1520,7 @@ lbl_fn_8031B6E0_00001334:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80884E04
     mr r3, r29
     lfs f2, lbl_80884E08

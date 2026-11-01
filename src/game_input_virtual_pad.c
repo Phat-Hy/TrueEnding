@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_80063D3C(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
@@ -268,7 +268,7 @@ lbl_fn_802F469C_000002D0:
     addi r3, r31, 0xb0
     stw r0, 0x58c(r31)
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_808848FC
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -565,7 +565,7 @@ lbl_fn_802F4A98_00000718:
     addi r3, r31, 0xb0
     stw r0, 0x58c(r31)
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_808848FC
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1256,7 +1256,7 @@ lbl_fn_802F566C_00001114:
     addi r3, r31, 0xb0
     stw r0, 0x58c(r31)
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_808848FC
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1503,7 +1503,7 @@ lbl_fn_802F59D8_00001498:
     stw r4, 0x58c(r31)
     li r4, 0x0
     stw r0, 0x54c(r31)
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f2, lbl_808848FC
     li r0, 0x1
     lfs f0, lbl_808848E0
@@ -1734,7 +1734,7 @@ lbl_fn_802F5BCC_000017EC:
     stfs f2, 0x70(r1)
     stfs f2, 0x534(r29)
     stfs f2, 0x53c(r29)
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_808848FC
     li r0, 0x1
     stw r0, 0x3fc(r29)
@@ -1977,7 +1977,7 @@ lbl_fn_802F5F20_00001B64:
     stfs f2, 0x534(r31)
     stfs f2, 0x53c(r31)
     stw r0, 0x15a4(r31)
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_808848FC
     li r0, 0x1
     stw r0, 0x3fc(r31)

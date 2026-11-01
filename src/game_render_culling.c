@@ -21,7 +21,7 @@ extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80145334(void);
 extern void dialog_renderWindow(void);
@@ -461,7 +461,7 @@ lbl_fn_802AC8E8_00000528:
     bne lbl_fn_802AC8E8_00000550
     addi r3, r1, 0x44
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14fc(r29)
     b lbl_fn_802AC8E8_00000718
 lbl_fn_802AC8E8_00000550:
@@ -505,7 +505,7 @@ lbl_fn_802AC8E8_000005C8:
     bne lbl_fn_802AC8E8_000005F0
     addi r3, r1, 0x44
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x154c(r29)
     b lbl_fn_802AC8E8_00000718
 lbl_fn_802AC8E8_000005F0:
@@ -550,7 +550,7 @@ lbl_fn_802AC8E8_00000640:
     bl fn_8020A780
     addi r3, r1, 0x44
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x40(r1)
     addi r3, r29, 0x1558
     addi r4, r1, 0x28
@@ -574,11 +574,11 @@ lbl_fn_802AC8E8_000006B0:
     bl fn_8020A780
     addi r3, r1, 0x44
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14(r1)
     addi r3, r1, 0x44
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x18(r1)
     addi r3, r29, 0x1a34
     addi r4, r1, 0x8

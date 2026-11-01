@@ -11,7 +11,7 @@ extern void mem_getAllocSize(void);
 extern void fn_8008BBD8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
@@ -50,7 +50,7 @@ extern void PSMTXMultVec(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695B00(void);
 
 /* External data declarations */
@@ -721,7 +721,7 @@ lbl_fn_802D92E4_00000864:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -835,7 +835,7 @@ lbl_fn_802D92E4_00000A04:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1850,7 +1850,7 @@ lbl_fn_802DA174_00001864:
     lfs f1, lbl_808845F0
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_80884600
     li r0, 0x1
     stw r0, 0x3fc(r31)

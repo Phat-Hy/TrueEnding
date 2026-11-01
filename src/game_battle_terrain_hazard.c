@@ -14,7 +14,7 @@ extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087858(void);
 extern void fn_80087994(void);
@@ -28,7 +28,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800EF73C(void);
 extern void res_MsgHandle_constructor(void);
 extern void fn_80373148(void);
@@ -748,15 +748,15 @@ lbl_fn_804184BC_00000744:
     add r0, r29, r0
     add r31, r4, r0
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x4c4(r31)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x4c8(r31)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f31, f1
     stfs f0, 0x4cc(r31)
 lbl_fn_804184BC_000007C0:
@@ -1224,7 +1224,7 @@ lbl_fn_80418C4C_00000E24:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808864D8
     mr r3, r24
     lfs f2, lbl_808864DC
@@ -1266,7 +1266,7 @@ lbl_fn_80418C4C_00000E24:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r4, r24
     addi r3, r21, 0xb0
     bl fn_803F11F8

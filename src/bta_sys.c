@@ -134,7 +134,7 @@ void fn_80629710(void);
 void fn_80629720(void);
 void fn_80629750(void);
 void fn_80629810(void);
-void fn_80629830(void);
+void bta_sys_log(void);
 void fn_80629850(void);
 void fn_80629870(void);
 void fn_80629890(void);
@@ -148,7 +148,7 @@ void fn_80629A60(void);
 void fn_80629AA0(void);
 void fn_80629E20(void);
 void fn_80629E90(void);
-void fn_80629EA4(void);
+void bd_addr_copy(void);
 void fn_80629ED8(void);
 void fn_80629F78(void);
 void fn_80629F88(void);
@@ -1418,7 +1418,7 @@ asm void fn_80629810(void)
     blr
 }
 
-asm void fn_80629830(void)
+asm void bta_sys_log(void)
 {
     nofralloc
     lbz r0, lbl_80880178
@@ -1931,7 +1931,7 @@ asm void fn_80629E90(void)
     b fn_80627ED0
 }
 
-asm void fn_80629EA4(void)
+asm void bd_addr_copy(void)
 {
     nofralloc
     lbz r9, 0x0(r4)

@@ -58,7 +58,7 @@ void fn_8000CBD0(void);
 void fn_8000CBD8(void);
 void fn_8000D0F8(void);
 void fn_8000D114(void);
-void fn_8000D124(void);
+void vec3_copy(void);
 void fn_8000D138(void);
 void fn_8000D1A0(void);
 void fn_8000D1A8(void);
@@ -461,7 +461,7 @@ asm void fn_8000D114(void)
     blr
 }
 
-asm void fn_8000D124(void)
+asm void vec3_copy(void)
 {
     nofralloc
     psq_l f1, 0x0(r4), 0, 0

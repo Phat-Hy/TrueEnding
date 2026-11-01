@@ -67,7 +67,7 @@ extern void fn_80617D50(void);
 extern void GXSetZMode(void);
 extern void GXLoadTexMtxImm(void);
 extern void std_pow(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_80732C78[];
@@ -1934,7 +1934,7 @@ lbl_graphic_initViewportTransform_00001A0C:
     addi r4, r4, graphic_dummyCallback@l
     li r6, 0x1c
     li r7, 0x100
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x84(r30)
     b lbl_graphic_initViewportTransform_00001A54
     stw r0, 0x84(r30)

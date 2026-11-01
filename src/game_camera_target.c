@@ -11,7 +11,7 @@ extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
@@ -20,7 +20,7 @@ extern void fn_800CB440(void);
 extern void fn_800CB5C8(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DD3FC(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
@@ -676,7 +676,7 @@ asm void fn_802E177C(void)
     lfs f1, lbl_8088467C
     addi r3, r28, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f2, lbl_80884698
     addi r3, r28, 0xb0
     lfs f0, lbl_808846D4
@@ -1797,7 +1797,7 @@ lbl_fn_802E2640_00001714:
     bne lbl_fn_802E2640_0000173C
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14e4(r31)
     b lbl_fn_802E2640_0000181C
 lbl_fn_802E2640_0000173C:
@@ -1808,7 +1808,7 @@ lbl_fn_802E2640_0000173C:
     bne lbl_fn_802E2640_00001764
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14c8(r31)
     b lbl_fn_802E2640_0000181C
 lbl_fn_802E2640_00001764:

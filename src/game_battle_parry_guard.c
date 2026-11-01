@@ -31,7 +31,7 @@ extern void fn_800971D4(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011FC10(void);
 extern void fn_80144710(void);
@@ -71,7 +71,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern char* strcpy(char* dest, const char* src);
@@ -1643,7 +1643,7 @@ lbl_fn_80413BD4_00001468:
     addi r4, r14, fn_803F3334@l
     li r5, 0x0
     li r6, 0x1c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x22c8(r18)
     b lbl_fn_80413BD4_000014B4
 lbl_fn_80413BD4_000014B0:
@@ -1677,7 +1677,7 @@ lbl_fn_80413BD4_000014DC:
     addi r4, r4, fn_803F3360@l
     li r5, 0x0
     li r6, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x2308(r18)
     b lbl_fn_80413BD4_0000152C
 lbl_fn_80413BD4_00001528:
@@ -1721,7 +1721,7 @@ lbl_fn_80413BD4_0000158C:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     add r3, r31, r30
     addi r4, r1, 0x8
     addi r3, r3, 0xfc
@@ -1751,7 +1751,7 @@ lbl_fn_80413BD4_000015D8:
     bl atn_Anim_applyLayerTransform
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1fa0(r18)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
@@ -1769,7 +1769,7 @@ lbl_fn_80413BD4_000015D8:
     srwi r0, r0, 5
     stb r0, 0x1fa5(r18)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1fa8(r18)
     b lbl_fn_80413BD4_00001958
 lbl_fn_80413BD4_00001684:
@@ -1819,19 +1819,19 @@ lbl_fn_80413BD4_00001724:
     stw r18, 0x2044(r21)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x4c(r18)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x50(r18)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x54(r18)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x58(r18)
     lis r3, 0x8
     addi r3, r3, 0x8f8
@@ -1906,35 +1906,35 @@ lbl_fn_80413BD4_0000184C:
     addi r3, r1, 0x108
     stw r23, 0x2160(r18)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x2164(r18)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x2168(r18)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x216c(r18)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x2170(r18)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x2174(r18)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x2178(r18)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x217c(r18)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f31, f1
     li r0, 0x6
     stfs f0, 0x2180(r18)
@@ -1999,7 +1999,7 @@ lbl_fn_80413BD4_00001990:
     addi r4, r4, fn_803F3334@l
     li r5, 0x0
     li r6, 0x1c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x22c8(r14)
     b lbl_fn_80413BD4_000019E4
 lbl_fn_80413BD4_000019DC:
@@ -2033,7 +2033,7 @@ lbl_fn_80413BD4_00001A0C:
     addi r4, r4, fn_803F3360@l
     li r5, 0x0
     li r6, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x2308(r14)
     b lbl_fn_80413BD4_00001A60
 lbl_fn_80413BD4_00001A58:

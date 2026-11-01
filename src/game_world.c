@@ -23,7 +23,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_800875F8(void);
 extern void fn_8008771C(void);
 extern void fn_8008937C(void);
@@ -38,7 +38,7 @@ extern void fn_806823B0(void);
 extern void fn_8068AD58(void);
 extern void std_fmod(void);
 extern void fn_806952C4(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -615,7 +615,7 @@ asm void fn_80080584(void)
     li r6, 0x18
     addi r4, r4, fn_8007E9EC@l
     addi r5, r5, fn_8007AA64@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0xc(r29)
     li r16, 0x0
     li r15, 0x0
@@ -774,7 +774,7 @@ lbl_fn_80080584_00000910:
     addi r4, r4, fn_8007C0D8@l
     li r5, 0x0
     li r6, 0x54
-    bl fn_80695720
+    bl runtime_registerStaticObject
 lbl_fn_80080584_00000948:
     stw r3, 0x10(r29)
     li r9, 0x0
@@ -1856,7 +1856,7 @@ lbl_fn_800816B4_000016D4:
     li r6, 0x0
     li r7, 0x3
     li r8, 0x1
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r28
     mr r10, r26
     addi r4, r31, 0x17f
@@ -1865,7 +1865,7 @@ lbl_fn_800816B4_000016D4:
     li r6, 0x0
     li r7, 0xff
     li r8, 0x1
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lis r24, lbl_80777D80@ha
     li r27, 0x0
     addi r24, r24, lbl_80777D80@l
@@ -1992,7 +1992,7 @@ lbl_fn_800816B4_0000182C:
     li r6, 0x0
     li r7, 0x2
     li r8, 0x1
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r23
     mr r10, r30
     addi r4, r31, 0x59
@@ -2001,7 +2001,7 @@ lbl_fn_800816B4_0000182C:
     li r6, 0x0
     li r7, 0x2
     li r8, 0x1
-    bl fn_800874C8
+    bl route_findNextWaypoint
     addi r29, r29, 0x18
     addi r27, r27, 0x1
 lbl_fn_800816B4_00001A38:

@@ -21,7 +21,7 @@ extern void atn_LH_Texture_update(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_80731150[];
@@ -137,7 +137,7 @@ lbl_fn_8005E000_000000F8:
     add r3, r0, r6
     li r6, 0x18
     li r7, 0x4
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r26)
     mr r25, r3
     addi r0, r4, 0x74
@@ -422,7 +422,7 @@ lbl_fn_8005E40C_00000504:
     add r3, r0, r6
     li r6, 0x18
     li r7, 0x4
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r26)
     mr r25, r3
     addi r0, r4, 0x74
@@ -722,7 +722,7 @@ lbl_fn_8005E838_00000960:
     add r3, r0, r6
     li r6, 0x20
     li r7, 0x4
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r25)
     mr r23, r3
     addi r0, r4, 0x94
@@ -1202,7 +1202,7 @@ lbl_fn_8005EEE0_00001014:
     add r3, r0, r6
     li r6, 0x18
     li r7, 0x4
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r21)
     mr r31, r3
     addi r0, r4, 0x74
@@ -1532,7 +1532,7 @@ lbl_fn_8005F36C_000014C8:
     add r3, r0, r6
     li r6, 0x20
     li r7, 0x4
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r21)
     mr r31, r3
     addi r0, r4, 0x94
@@ -1910,7 +1910,7 @@ lbl_fn_8005F90C_000019FC:
     add r3, r0, r6
     li r6, 0x18
     li r7, 0x4
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r28)
     mr r26, r3
     addi r0, r4, 0x74
@@ -2235,7 +2235,7 @@ lbl_fn_8005FD80_00001EA4:
     add r3, r0, r6
     li r6, 0x20
     li r7, 0x4
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r26)
     mr r24, r3
     addi r0, r4, 0x94
@@ -2615,7 +2615,7 @@ lbl_fn_800602E8_00002414:
     add r3, r0, r6
     li r6, 0x18
     li r7, 0x4
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r23)
     mr r31, r3
     addi r0, r4, 0x74
@@ -2970,7 +2970,7 @@ lbl_fn_800607C0_00002918:
     add r3, r0, r6
     li r6, 0x20
     li r7, 0x4
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r23)
     mr r31, r3
     addi r0, r4, 0x94
@@ -3334,7 +3334,7 @@ lbl_fn_80060D58_00002E14:
     add r3, r0, r6
     li r6, 0x10
     li r7, 0x4
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r29)
     mr r28, r3
     addi r0, r4, 0x54

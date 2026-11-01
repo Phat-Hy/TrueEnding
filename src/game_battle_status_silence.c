@@ -15,7 +15,7 @@ extern void fn_8005BCE8(void);
 extern void fn_8006AA20(void);
 extern void fn_8007FAF0(void);
 extern void mem_alloc(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
@@ -31,7 +31,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_8011D424(void);
 extern void fn_8011E81C(void);
@@ -765,7 +765,7 @@ lbl_fn_8042CA54_0000084C:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0
@@ -902,7 +902,7 @@ lbl_fn_8042CCAC_00000A10:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_8088677C
     mr r3, r30
     lfs f2, lbl_80886780
@@ -944,7 +944,7 @@ lbl_fn_8042CCAC_00000A10:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r4, r30
     addi r3, r29, 0xb0
     bl fn_803F11F8
@@ -1491,7 +1491,7 @@ lbl_fn_8042D488_000011E0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_808867A4
     mr r3, r30
     lfs f2, lbl_808867A8

@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void fn_8000D3A4(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_8004ED34(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -44,7 +44,7 @@ extern void fn_8068A850(void);
 extern void fn_8068AE9C(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_80747D70[];
@@ -390,7 +390,7 @@ lbl_fn_802E315C_000003E0:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -504,7 +504,7 @@ lbl_fn_802E315C_00000580:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1037,7 +1037,7 @@ lbl_fn_802E3B24_00000D30:
     mr r4, r3
     addi r3, r1, 0x20
     addi r5, r30, 0x528
-    bl fn_80013338
+    bl vec3_sub
     lfs f0, lbl_808846EC
     addi r3, r1, 0x20
     stfs f0, 0x24(r1)
@@ -1056,7 +1056,7 @@ lbl_fn_802E3B24_00000D84:
     mr r4, r3
     addi r3, r1, 0x8
     addi r5, r30, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x8
     bl fn_8000D3A4
     lwz r0, 0x14c4(r30)
@@ -1117,7 +1117,7 @@ lbl_fn_802E3B24_00000E64:
     addi r3, r1, 0x14
     addi r4, r4, 0x4
     addi r5, r30, 0x528
-    bl fn_80013338
+    bl vec3_sub
     lfs f0, lbl_808846EC
     addi r3, r1, 0x14
     stfs f0, 0x18(r1)

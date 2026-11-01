@@ -9,7 +9,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_80041C0C(void);
 extern void fn_80042108(void);
 extern void fn_80042740(void);
@@ -58,7 +58,7 @@ extern void printf(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
@@ -407,7 +407,7 @@ lbl_fn_80183D00_000002D8:
     li r6, 0x70
     addi r5, r5, fn_80183AAC@l
     li r7, 0x21
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x54(r31)
     b lbl_fn_80183D00_00000324
     stw r0, 0x54(r31)
@@ -476,7 +476,7 @@ lbl_fn_80183D00_000003CC:
     li r6, 0x70
     addi r5, r5, fn_80183AAC@l
     li r7, 0x10
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x54(r31)
     b lbl_fn_80183D00_00000418
     stw r0, 0x54(r31)
@@ -1501,7 +1501,7 @@ asm void fn_80184C30(void)
     bl fn_8000D114
     mr r4, r3
     addi r3, r30, 0x10
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, lbl_80881D54
     addi r3, r1, 0x1ac
     lfs f2, lbl_80881D58
@@ -1509,7 +1509,7 @@ asm void fn_80184C30(void)
     bl fn_8000D114
     mr r4, r3
     addi r3, r30, 0x1c
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, lbl_80881D60
     addi r3, r1, 0x1a0
     lfs f2, lbl_80881D64
@@ -1517,7 +1517,7 @@ asm void fn_80184C30(void)
     bl fn_8000D114
     mr r4, r3
     addi r3, r30, 0x28
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, lbl_80881D6C
     bl fn_801125F8
     stfs f1, 0x34(r30)
@@ -1542,7 +1542,7 @@ asm void fn_80184C30(void)
     bl fn_8000D114
     mr r4, r3
     addi r3, r30, 0x48
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, lbl_80881D70
     addi r3, r1, 0x188
     lfs f2, lbl_80881D58
@@ -1550,7 +1550,7 @@ asm void fn_80184C30(void)
     bl fn_8000D114
     mr r4, r3
     addi r3, r30, 0x54
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, lbl_80881D78
     addi r3, r1, 0x17c
     lfs f2, lbl_80881D64
@@ -1558,7 +1558,7 @@ asm void fn_80184C30(void)
     bl fn_8000D114
     mr r4, r3
     addi r3, r30, 0x60
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, lbl_80881D6C
     bl fn_801125F8
     stfs f1, 0x6c(r30)
@@ -1583,7 +1583,7 @@ asm void fn_80184C30(void)
     bl fn_8000D114
     mr r4, r3
     addi r3, r30, 0x80
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, lbl_80881D80
     addi r3, r1, 0x164
     lfs f2, lbl_80881D58
@@ -1591,7 +1591,7 @@ asm void fn_80184C30(void)
     bl fn_8000D114
     mr r4, r3
     addi r3, r30, 0x8c
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, lbl_80881D88
     addi r3, r1, 0x158
     lfs f2, lbl_80881D64
@@ -1599,7 +1599,7 @@ asm void fn_80184C30(void)
     bl fn_8000D114
     mr r4, r3
     addi r3, r30, 0x98
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, lbl_80881D6C
     bl fn_801125F8
     stfs f1, 0xa4(r30)

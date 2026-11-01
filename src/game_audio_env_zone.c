@@ -6,9 +6,9 @@ extern void __files(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_80011034(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void fn_8004ED34(void);
 extern void mem_alloc(void);
@@ -1097,12 +1097,12 @@ asm void fn_8031D350(void)
     mr r4, r3
     addi r3, r1, 0x74
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x74
     bl fn_800F7FF0
     addi r3, r31, 0x1524
     addi r4, r1, 0x74
-    bl fn_8000D124
+    bl vec3_copy
     lfs f0, lbl_80884DF0
     addi r3, r31, 0x1524
     stfs f0, 0x1528(r31)
@@ -1116,20 +1116,20 @@ asm void fn_8031D350(void)
     mr r4, r3
     addi r3, r1, 0x5c
     addi r5, r1, 0x50
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r31, 0x150c
     addi r4, r1, 0x5c
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r1, 0x38
     addi r4, r31, 0x150c
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x44
     addi r4, r1, 0x38
     bl fn_800F7FD8
     addi r3, r1, 0x74
     addi r4, r1, 0x44
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, lbl_80884E38
     addi r3, r1, 0x2c
     addi r4, r1, 0x74
@@ -1158,7 +1158,7 @@ asm void fn_8031D350(void)
     addi r3, r1, 0x8
     addi r4, r1, 0x90
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x14
     addi r4, r1, 0x8
     bl fn_800F7FD8
@@ -1167,7 +1167,7 @@ asm void fn_8031D350(void)
     bl fn_80011034
     addi r3, r31, 0x534
     addi r4, r1, 0x20
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_8031D350_00000FB0
 lbl_fn_8031D350_00000FA8:
     mr r3, r31

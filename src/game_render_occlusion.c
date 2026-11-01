@@ -9,7 +9,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void fn_8000D0F8(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8001047C(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void fn_8004D124(void);
@@ -42,7 +42,7 @@ extern void fn_805A4258(void);
 extern void fn_805A4A20(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 jumptable_80785E58[];
@@ -306,7 +306,7 @@ lbl_fn_802AE0B8_00000284:
     li r5, 0x0
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r26)
     mr r24, r3
     cmpwi r0, 0x0
@@ -419,7 +419,7 @@ lbl_fn_802AE0B8_0000041C:
     addi r4, r31, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r26)
     mr r23, r3
     cmpwi r0, 0x0
@@ -2201,7 +2201,7 @@ lbl_fn_802AF7D8_00001D30:
     bl fn_8000D0F8
     addi r3, r1, 0x44
     addi r4, r1, 0x20
-    bl fn_8000D124
+    bl vec3_copy
     bl fn_8013A194
     stw r30, 0x8(r1)
     mr r4, r31
@@ -2223,7 +2223,7 @@ lbl_fn_802AF7D8_00001D30:
     bl fn_8000D0F8
     addi r3, r1, 0x44
     addi r4, r1, 0x14
-    bl fn_8000D124
+    bl vec3_copy
     bl fn_8013A194
     stw r30, 0x8(r1)
     mr r4, r31

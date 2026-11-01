@@ -13,14 +13,14 @@ extern void dtor_80084684(void);
 extern void fn_80063D3C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_8008BBD8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void fn_800C31F4(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
@@ -883,7 +883,7 @@ lbl_fn_80352938_00000ADC:
     lfs f1, lbl_80885378
     addi r3, r30, 0xb0
     li r4, 0x1
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     stfs f29, 0x538(r30)
     b lbl_fn_80352938_00000B34
 lbl_fn_80352938_00000B08:
@@ -1480,7 +1480,7 @@ lbl_fn_80353370_000012F4:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x1c7
     addi r5, r28, 0x1818
@@ -1489,7 +1489,7 @@ lbl_fn_80353370_000012F4:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x1db
     addi r5, r28, 0x17fc
@@ -1498,7 +1498,7 @@ lbl_fn_80353370_000012F4:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x1e5
     addi r5, r28, 0x1800
@@ -1507,7 +1507,7 @@ lbl_fn_80353370_000012F4:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x442
     addi r5, r28, 0x1cd4
@@ -1516,7 +1516,7 @@ lbl_fn_80353370_000012F4:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80885378
     mr r3, r29
     lfs f2, lbl_808854B8
@@ -1561,7 +1561,7 @@ lbl_fn_80353370_000012F4:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80885378
     mr r3, r29
     lfs f2, lbl_808854BC

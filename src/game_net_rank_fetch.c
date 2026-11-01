@@ -48,7 +48,7 @@ extern void fn_80526694(void);
 extern void fn_805266C0(void);
 extern void fn_80530D8C(void);
 extern void PSVECNormalize(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern u32 strlen(const char* str);
 
@@ -1621,7 +1621,7 @@ lbl_fn_80521E84_00001460:
     addi r4, r4, fn_801D082C@l
     li r6, 0x40
     li r7, 0x7
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0x50(r31)
     cmpwi r4, 0x0
     stw r3, 0x50(r31)
@@ -1671,7 +1671,7 @@ lbl_fn_80521E84_00001520:
     addi r4, r4, fn_80526694@l
     li r6, 0x20
     li r7, 0x1
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xf8(r31)
     cmpwi r4, 0x0
     stw r3, 0xf8(r31)
@@ -1706,7 +1706,7 @@ lbl_fn_80521E84_000015AC:
     addi r4, r4, fn_80526694@l
     li r6, 0x20
     li r7, 0x2
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0x104(r31)
     cmpwi r4, 0x0
     stw r3, 0x104(r31)
@@ -1746,7 +1746,7 @@ lbl_fn_80521E84_00001634:
     addi r4, r4, fn_80526694@l
     li r6, 0x20
     li r7, 0x6
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0x110(r31)
     cmpwi r4, 0x0
     stw r3, 0x110(r31)
@@ -1806,7 +1806,7 @@ lbl_fn_80521E84_000016D0:
     addi r4, r4, fn_80526694@l
     li r6, 0x20
     li r7, 0x3
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0x11c(r31)
     cmpwi r4, 0x0
     stw r3, 0x11c(r31)
@@ -1851,7 +1851,7 @@ lbl_fn_80521E84_000017BC:
     addi r4, r4, fn_80526694@l
     li r6, 0x20
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0x128(r31)
     cmpwi r4, 0x0
     stw r3, 0x128(r31)
@@ -1921,7 +1921,7 @@ lbl_fn_80521E84_0000186C:
     addi r4, r4, fn_80526694@l
     li r6, 0x20
     li r7, 0x5
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0x134(r31)
     cmpwi r4, 0x0
     stw r3, 0x134(r31)

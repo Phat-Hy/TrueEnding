@@ -6,7 +6,7 @@ extern void dtor_80084684(void);
 extern void fn_8004ED34(void);
 extern void fn_8008B130(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
@@ -499,7 +499,7 @@ lbl_fn_801C3DCC_00000574:
     lfs f1, lbl_8088277C
     mr r3, r31
     li r4, 0x3
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_8088277C
     fcmpo cr0, f31, f0
     cror eq, gt, eq
@@ -525,7 +525,7 @@ lbl_fn_801C3DCC_000005C0:
     stfs f1, 0x584(r3)
     lwz r31, 0x4(r28)
     addi r3, r31, 0xb0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, -0x1
     stw r0, 0x12bc(r31)
     lis r4, lbl_807C7030@ha
@@ -619,7 +619,7 @@ asm void fn_801C3FB0(void)
     stfs f0, 0x238(r31)
     li r4, 0x3
     lfs f1, lbl_8088277C
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lwz r3, 0x4(r30)
     li r4, 0x3
     lfs f1, lbl_8088277C
@@ -627,7 +627,7 @@ asm void fn_801C3FB0(void)
     stfs f1, 0x584(r3)
     lwz r31, 0x4(r30)
     addi r3, r31, 0xb0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, -0x1
     stw r0, 0x12bc(r31)
     lis r4, lbl_807C7030@ha
@@ -918,7 +918,7 @@ asm void fn_801C43F0(void)
     stfs f0, 0x238(r31)
     li r4, 0x3
     lfs f1, lbl_8088277C
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lwz r3, 0x4(r30)
     li r4, 0x3
     lfs f1, lbl_8088277C
@@ -926,7 +926,7 @@ asm void fn_801C43F0(void)
     stfs f1, 0x584(r3)
     lwz r31, 0x4(r30)
     addi r3, r31, 0xb0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, -0x1
     stw r0, 0x12bc(r31)
     lis r4, lbl_807C7030@ha
@@ -1277,7 +1277,7 @@ lbl_fn_801C48B4_0000101C:
     li r4, 0x3
     lfs f1, lbl_808827AC
     addi r3, r30, 0xb0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, -0x1
     stw r0, 0x12bc(r30)
     li r0, 0x1

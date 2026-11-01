@@ -18,7 +18,7 @@ extern void font_loadGlyphMetrics(void);
 extern void fn_802371BC(void);
 extern void fn_80237DA8(void);
 extern void PSMTXMultVec(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_80742FD8[];
@@ -1739,7 +1739,7 @@ asm void fn_80239828(void)
     addi r4, r4, fn_80239AB4@l
     li r5, 0x0
     li r6, 0x64
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0xe0(r29)
     mr r31, r3
     cmpwi r0, 0x0

@@ -13,7 +13,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
 extern void boss_updatePhaseState(void);
@@ -1260,7 +1260,7 @@ lbl_fn_802E5CD0_00001064:
     bne lbl_fn_802E5CD0_0000108C
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14ec(r29)
     b lbl_fn_802E5CD0_000010FC
 lbl_fn_802E5CD0_0000108C:

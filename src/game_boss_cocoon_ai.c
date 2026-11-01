@@ -7,7 +7,7 @@ extern void _restgpr_17(void);
 extern void _savegpr_17(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80094958(void);
@@ -569,7 +569,7 @@ lbl_fn_804541A0_00000630:
     mr r4, r3
     addi r3, r1, 0x8
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x8
     bl fn_801162A0
     fcmpo cr0, f1, f31

@@ -26,7 +26,7 @@ extern void fn_806163C0(void);
 extern void fn_806163E0(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -56,7 +56,7 @@ extern u32 lbl_808809BC;
 void fn_800610A0(void);
 void fn_800610A4(void);
 void fn_8006144C(void);
-void fn_800616C0(void);
+void skill_calculateDamage(void);
 void fn_80061824(void);
 void fn_80061AE4(void);
 void atn_ComDrawFont_destructor(void);
@@ -134,7 +134,7 @@ lbl_fn_800610A4_000000C0:
     add r3, r0, r6
     li r6, 0x10
     li r7, 0x5
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r29)
     mr r28, r3
     addi r0, r4, 0x64
@@ -384,7 +384,7 @@ lbl_fn_8006144C_00000468:
     add r3, r0, r6
     li r6, 0x10
     li r7, 0x2
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r29)
     mr r28, r3
     addi r0, r4, 0x34
@@ -496,7 +496,7 @@ lbl_fn_8006144C_000005E0:
     blr
 }
 
-asm void fn_800616C0(void)
+asm void skill_calculateDamage(void)
 {
     nofralloc
     stwu r1, -0x90(r1)
@@ -534,7 +534,7 @@ asm void fn_800616C0(void)
     addi r29, r3, 0x1
     li r31, 0x0
     cmplwi r29, 0x200
-    blt lbl_fn_800616C0_000006DC
+    blt lbl_skill_calculateDamage_000006DC
     lis r5, lbl_80731340@ha
     slwi r3, r29, 1
     addi r5, r5, lbl_80731340@l
@@ -546,7 +546,7 @@ asm void fn_800616C0(void)
     li r3, 0x0
     bl mem_getAllocSize
     mr r30, r31
-lbl_fn_800616C0_000006DC:
+lbl_skill_calculateDamage_000006DC:
     lwz r3, lbl_8087EEC8
     mr r4, r30
     mr r5, r24
@@ -1221,7 +1221,7 @@ lbl_fn_80061E2C_00001060:
     add r3, r0, r7
     li r6, 0x20
     li r7, 0x4
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r15)
     mr r28, r3
     addi r0, r4, 0x94
@@ -1443,7 +1443,7 @@ lbl_fn_80061E2C_000013D0:
     li r6, 0x20
     add r3, r0, r7
     li r7, 0x4
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r15)
     mr r20, r3
     addi r0, r4, 0x94
@@ -1894,7 +1894,7 @@ lbl_fn_800629F0_000019E8:
     add r3, r0, r6
     li r6, 0x10
     li r7, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r26)
     mr r25, r3
     addi r0, r4, 0x154
@@ -2105,7 +2105,7 @@ lbl_fn_80062C8C_00001D04:
     add r3, r0, r6
     addi r4, r4, fn_800610A0@l
     li r6, 0x10
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0xc(r27)
     mr r31, r3
     add r0, r0, r24
@@ -2293,7 +2293,7 @@ lbl_fn_80062F7C_00001FBC:
     add r3, r0, r6
     li r6, 0x10
     li r7, 0x4
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xc(r29)
     mr r30, r3
     addi r0, r4, 0x54

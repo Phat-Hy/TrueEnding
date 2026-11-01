@@ -34,7 +34,7 @@ extern void fn_80478034(void);
 extern void PSVECNormalize(void);
 extern void std_fmod(void);
 extern void fn_806952C4(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern void fn_80695AD0(void);
 extern char* strcpy(char* dest, const char* src);
@@ -537,7 +537,7 @@ lbl_fn_800C1720_00000574:
     li r6, 0x30
     addi r5, r5, atn_LH_Texture_destructAndFree@l
     li r7, 0x1
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x40(r30)
     b lbl_fn_800C1720_000005C0
     stw r0, 0x40(r30)
@@ -587,7 +587,7 @@ lbl_fn_800C1814_00000620:
     li r6, 0x30
     addi r5, r5, atn_LH_Texture_destructAndFree@l
     li r7, 0x1
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x40(r30)
     b lbl_fn_800C1814_0000066C
     stw r0, 0x40(r30)
@@ -1640,7 +1640,7 @@ lbl_fn_800C2634_000014B8:
     li r6, 0x30
     addi r4, r4, atn_LH_Texture_constructor@l
     addi r5, r5, atn_LH_Texture_destructAndFree@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0xb8(r30)
     b lbl_fn_800C2634_0000150C
 lbl_fn_800C2634_00001504:
@@ -1816,7 +1816,7 @@ lbl_fn_800C289C_0000173C:
     li r6, 0x30
     addi r5, r5, atn_LH_Texture_destructAndFree@l
     li r7, 0x1
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0xb8(r30)
     b lbl_fn_800C289C_00001790
 lbl_fn_800C289C_00001788:
@@ -1970,7 +1970,7 @@ lbl_fn_800C2B24_0000196C:
     li r6, 0x30
     addi r5, r5, atn_LH_Texture_destructAndFree@l
     li r7, 0x1
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x110(r30)
     b lbl_fn_800C2B24_000019B8
     stw r0, 0x110(r30)

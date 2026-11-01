@@ -4,12 +4,12 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
 extern void fn_80011220(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_8004ECC0(void);
 extern void fn_8004ED34(void);
 extern void fn_80057A64(void);
@@ -754,7 +754,7 @@ asm void fn_80463174(void)
     addi r3, r1, 0x80
     addi r4, r1, 0x8c
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x80
     bl fn_8000D3A4
     lwz r0, 0x14c4(r31)
@@ -814,14 +814,14 @@ lbl_fn_80463174_000009CC:
     bl fn_802797A0
     mr r4, r3
     addi r3, r1, 0x74
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r27
     bl fn_804635AC
     mr r28, r3
     addi r3, r1, 0x68
     addi r4, r1, 0x74
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x68
     bl fn_8000D3A4
     fmr f28, f1
@@ -924,7 +924,7 @@ lbl_fn_80463174_00000B8C:
     mr r4, r3
     addi r3, r1, 0x5c
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x80
     bl fn_8000D3A4
     fmr f30, f1

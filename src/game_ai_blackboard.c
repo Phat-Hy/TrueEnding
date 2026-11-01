@@ -13,7 +13,7 @@ extern void mem_getAllocSize(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
 extern void fn_80139560(void);
@@ -45,7 +45,7 @@ extern void PSVECMag(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void std_atan2(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695AD0(void);
 
 /* External data declarations */
@@ -170,7 +170,7 @@ lbl_fn_8025CFF4_00000100:
     bne lbl_fn_8025CFF4_00000128
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x15c4(r27)
     b lbl_fn_8025CFF4_0000062C
 lbl_fn_8025CFF4_00000128:
@@ -292,7 +292,7 @@ lbl_fn_8025CFF4_0000028C:
     li r5, 0x0
     li r6, 0xc
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x14cc(r27)
     mr r26, r3
     cmpwi r0, 0x0
@@ -385,7 +385,7 @@ lbl_fn_8025CFF4_000003D4:
     li r4, 0x0
     li r5, 0x0
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x14cc(r27)
     mr r25, r3
     cmpwi r0, 0x0
@@ -528,7 +528,7 @@ lbl_fn_8025CFF4_00000608:
     bne lbl_fn_8025CFF4_0000062C
     addi r3, r1, 0x8
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1568(r27)
 lbl_fn_8025CFF4_0000062C:
     addi r3, r1, 0x8

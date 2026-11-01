@@ -10,14 +10,14 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void fn_8000D0F8(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000DD0C(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
 extern void fn_80011220(void);
 extern void fn_80012C88(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004212C(void);
 extern void fn_8004ECC0(void);
@@ -1903,7 +1903,7 @@ lbl_fn_80460458_00001808:
     bl fn_804687B0
     addi r3, r31, 0x14d4
     addi r4, r1, 0x40
-    bl fn_8000D124
+    bl vec3_copy
     lwz r5, 0x14f4(r31)
     mr r4, r31
     addi r3, r1, 0x64
@@ -1912,13 +1912,13 @@ lbl_fn_80460458_00001808:
     addi r3, r1, 0x28
     addi r4, r1, 0x64
     addi r5, r31, 0x14d4
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x34
     addi r4, r1, 0x28
     bl fn_80011034
     addi r3, r31, 0x14e0
     addi r4, r1, 0x34
-    bl fn_8000D124
+    bl vec3_copy
     li r0, 0x1
     stw r0, 0x14c4(r31)
     stw r30, 0x14ec(r31)
@@ -1938,10 +1938,10 @@ lbl_fn_80460458_00001808:
 lbl_fn_80460458_00001908:
     addi r3, r31, 0x14d4
     addi r4, r1, 0x70
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r31, 0x14e0
     addi r4, r31, 0x534
-    bl fn_8000D124
+    bl vec3_copy
     lfs f0, 0x8(r1)
     stfs f0, 0x14e4(r31)
 lbl_fn_80460458_00001928:
@@ -2109,7 +2109,7 @@ lbl_fn_80460458_00001B78:
     bl fn_80266164
     addi r3, r3, 0xc
     addi r4, r1, 0x58
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_80460458_00001B98:
     mr r3, r30
     bl fn_80339F7C
@@ -2246,7 +2246,7 @@ lbl_fn_80460458_00001CF4:
     bl fn_8000D0F8
     addi r3, r31, 0x148c
     addi r4, r1, 0x10
-    bl fn_8000D124
+    bl vec3_copy
     lfs f0, lbl_80886D7C
     stfs f0, 0x1498(r31)
     psq_l f31, 0xe8(r1), 0, 0

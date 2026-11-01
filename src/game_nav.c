@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void fn_80060D58(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void fn_8007708C(void);
 extern void fn_806820D4(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -667,7 +667,7 @@ lbl_fn_800858FC_000008B4:
     lfs f6, lbl_80880BD8
     li r7, 0x0
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r3, 0x14(r30)
     lwz r0, 0x0(r31)
     cmpw r3, r0
@@ -698,7 +698,7 @@ lbl_fn_800858FC_000008B4:
     fnmsubs f1, f0, f7, f1
     lfs f3, lbl_80880BD4
     lfs f6, lbl_80880BD8
-    bl fn_800616C0
+    bl skill_calculateDamage
     b lbl_fn_800858FC_00000A00
 lbl_fn_800858FC_00000984:
     lwz r5, 0x58(r29)
@@ -731,7 +731,7 @@ lbl_fn_800858FC_00000984:
     fnmsubs f1, f0, f7, f1
     lfs f3, lbl_80880BD4
     lfs f6, lbl_80880BD8
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_800858FC_00000A00:
     lwz r3, 0x0(r31)
     addi r0, r3, 0x1

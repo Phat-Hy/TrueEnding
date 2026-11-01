@@ -4,13 +4,13 @@
 /* External function declarations */
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_80042108(void);
 extern void fn_8004AD9C(void);
 extern void fn_8006A250(void);
 extern void fn_80079044(void);
 extern void mem_alloc(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
@@ -1863,7 +1863,7 @@ asm void fn_8047CB74(void)
     bl fn_8047C780
     addi r3, r3, 0x38
     addi r4, r1, 0x38
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r28
     bl fn_8047C780
     fmr f1, f30
@@ -2713,7 +2713,7 @@ lbl_fn_8047CF7C_000022C8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r27
     addi r4, r29, 0xab
     addi r5, r31, 0x1f64
@@ -2722,7 +2722,7 @@ lbl_fn_8047CF7C_000022C8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r27
     addi r4, r29, 0xb8
     addi r5, r31, 0x238c
@@ -2731,7 +2731,7 @@ lbl_fn_8047CF7C_000022C8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r27
     addi r4, r29, 0xc3
     bl fn_8008937C
@@ -2743,7 +2743,7 @@ lbl_fn_8047CF7C_000022C8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80886F8C
     mr r3, r26
     lfs f2, lbl_80886F90

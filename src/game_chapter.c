@@ -15,7 +15,7 @@ extern void fn_800763C0(void);
 extern void gx_setRenderStateParam(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80088AF4(void);
 extern void fn_8008937C(void);
@@ -44,7 +44,7 @@ extern void fn_80617880(void);
 extern void GXSetNumTevStages(void);
 extern void GXLoadPosMtxImm(void);
 extern void GXSetCurrentMtx(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80695D84(void);
@@ -250,7 +250,7 @@ lbl_fn_80077160_000001E4:
     addi r4, r4, fn_80077418@l
     li r5, 0x0
     li r6, 0x1c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x1c(r31)
     b lbl_fn_80077160_00000234
 lbl_fn_80077160_0000022C:
@@ -315,7 +315,7 @@ lbl_fn_80077160_0000029C:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80880AD0
     mr r3, r24
     lfs f2, lbl_80880AD8

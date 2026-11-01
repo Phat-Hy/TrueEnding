@@ -7,7 +7,7 @@ extern void fn_8001A65C(void);
 extern void fn_8001A8A4(void);
 extern void fn_8001AC54(void);
 extern void fn_8001AD80(void);
-extern void fn_8001AEDC(void);
+extern void battle_getCharacterState(void);
 extern void fn_8001B5DC(void);
 extern void fn_8001B634(void);
 extern void fn_8001BB04(void);
@@ -244,7 +244,7 @@ lbl_fn_8003015C_000001A4:
     li r3, 0x0
     stw r0, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r3, 0x1
     b lbl_fn_8003015C_000001E4
 lbl_fn_8003015C_000001E0:
@@ -278,7 +278,7 @@ asm void fn_80030220(void)
     li r3, 0xc
     stw r8, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lwz r4, 0x40(r31)
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r30)
@@ -360,7 +360,7 @@ lbl_fn_800302F0_00000314:
     stw r8, 0xc(r1)
     li r3, 0x2
     stw r0, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807307A0@ha
     lis r4, lbl_807C6A40@ha
     addi r3, r3, lbl_807307A0@l
@@ -419,7 +419,7 @@ lbl_fn_800303C0_000003F4:
     li r3, 0x0
     stw r0, 0xc(r1)
     stw r31, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r4, lbl_807307A0@ha
     lis r3, lbl_807C68C0@ha
     addi r4, r4, lbl_807307A0@l
@@ -679,7 +679,7 @@ lbl_fn_80030700_0000072C:
     li r3, 0x3
     stw r0, 0x50(r1)
     stw r8, 0x54(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
 lbl_fn_80030700_000007B8:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
@@ -697,7 +697,7 @@ lbl_fn_80030700_000007CC:
     li r3, 0x7
     stw r0, 0x60(r1)
     stw r0, 0x64(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r31)
     li r0, 0x9
@@ -766,7 +766,7 @@ lbl_fn_80030700_00000898:
     li r3, 0x4
     stw r8, 0x30(r1)
     stw r0, 0x34(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r31)
     li r0, 0x5
@@ -785,7 +785,7 @@ lbl_fn_80030700_00000904:
     li r3, 0x0
     stw r0, 0x40(r1)
     stw r0, 0x44(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r31)
     li r0, 0x1
@@ -850,7 +850,7 @@ lbl_fn_80030700_000009DC:
     stw r8, 0x1c(r1)
     li r3, 0x2
     stw r0, 0x18(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -885,7 +885,7 @@ lbl_fn_80030700_00000A38:
     li r3, 0x4
     stw r8, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -945,7 +945,7 @@ lbl_fn_80030AFC_00000B44:
     li r3, 0x0
     stw r0, 0x30(r1)
     stw r31, 0x34(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -990,7 +990,7 @@ lbl_fn_80030AFC_00000BAC:
     li r3, 0x4
     stw r8, 0x10(r1)
     stw r0, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r31)
     li r0, 0x5
@@ -1024,7 +1024,7 @@ lbl_fn_80030AFC_00000C68:
     li r3, 0x0
     stw r0, 0x20(r1)
     stw r31, 0x24(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -1120,7 +1120,7 @@ lbl_fn_80030D2C_00000D58:
     li r3, 0x3
     stw r0, 0x10(r1)
     stw r8, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
 lbl_fn_80030D2C_00000DE4:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
@@ -1138,7 +1138,7 @@ lbl_fn_80030D2C_00000DF8:
     li r3, 0x7
     stw r0, 0x20(r1)
     stw r0, 0x24(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r30)
     li r0, 0x9
@@ -1447,7 +1447,7 @@ lbl_fn_80031178_000011F0:
     li r3, 0x5
     stw r0, 0x10(r1)
     stw r31, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     stw r31, lbl_807C6A40@l(r30)
     li r0, 0x8
     b lbl_fn_80031178_0000123C
@@ -1535,7 +1535,7 @@ lbl_fn_800312EC_00001320:
     stw r31, 0x10(r1)
     li r3, 0x4
     stw r0, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -1600,7 +1600,7 @@ lbl_fn_800313D4_00001408:
     li r3, 0x0
     stw r0, 0x10(r1)
     stw r31, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -1676,7 +1676,7 @@ asm void fn_800314B0(void)
     stw r0, 0x30(r1)
     stw r0, 0x2c(r1)
     stw r0, 0x28(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r3, 0x0
     b lbl_fn_800314B0_00001640
 lbl_fn_800314B0_00001548:
@@ -1711,7 +1711,7 @@ lbl_fn_800314B0_0000157C:
     stw r8, 0x20(r1)
     stw r8, 0x1c(r1)
     stw r8, 0x18(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r3, 0x0
     b lbl_fn_800314B0_00001640
 lbl_fn_800314B0_000015C4:
@@ -1742,7 +1742,7 @@ lbl_fn_800314B0_000015C4:
     stw r8, 0x10(r1)
     stw r8, 0xc(r1)
     stw r8, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r3, 0x0
     b lbl_fn_800314B0_00001640
 lbl_fn_800314B0_0000163C:
@@ -1876,7 +1876,7 @@ asm void fn_800317AC(void)
     li r3, 0x7
     stw r0, 0x10(r1)
     stw r0, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -1896,7 +1896,7 @@ lbl_fn_800317AC_000017FC:
     li r3, 0x0
     stw r0, 0x20(r1)
     stw r0, 0x24(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -1987,7 +1987,7 @@ lbl_fn_8003191C_00001924:
     li r3, 0x0
     stw r0, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -2039,7 +2039,7 @@ asm void fn_800319AC(void)
     li r3, 0x3
     stw r0, 0x10(r1)
     stw r8, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
 lbl_fn_800319AC_00001A0C:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
@@ -2057,7 +2057,7 @@ lbl_fn_800319AC_00001A20:
     li r3, 0x7
     stw r0, 0x20(r1)
     stw r0, 0x24(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -2150,7 +2150,7 @@ lbl_fn_80031B28_00001B5C:
     li r3, 0x0
     stw r0, 0x10(r1)
     stw r31, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -2215,7 +2215,7 @@ lbl_fn_80031C04_00001C38:
     li r3, 0x0
     stw r0, 0x10(r1)
     stw r31, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -2286,7 +2286,7 @@ lbl_fn_80031CE0_00001CFC:
     li r3, 0x7
     stw r0, 0xc(r1)
     stw r31, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     stw r31, lbl_807C6A40@l(r3)
     li r3, 0x9
@@ -2374,7 +2374,7 @@ asm void fn_80031E38(void)
     li r3, 0x7
     stw r0, 0x30(r1)
     stw r0, 0x34(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -2394,7 +2394,7 @@ lbl_fn_80031E38_00001E88:
     li r3, 0x0
     stw r0, 0x40(r1)
     stw r0, 0x44(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -2432,7 +2432,7 @@ lbl_fn_80031E38_00001F08:
     li r3, 0x7
     stw r0, 0x1c(r1)
     stw r31, 0x18(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     stw r31, lbl_807C6A40@l(r3)
     li r3, 0x9
@@ -2462,7 +2462,7 @@ lbl_fn_80031E38_00001F74:
     li r3, 0x7
     stw r0, 0xc(r1)
     stw r31, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     stw r31, lbl_807C6A40@l(r3)
     li r3, 0x9
@@ -2507,7 +2507,7 @@ lbl_fn_80032000_00002008:
     li r3, 0x0
     stw r0, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -2560,7 +2560,7 @@ asm void fn_80032090(void)
     li r3, 0x3
     stw r0, 0x30(r1)
     stw r8, 0x34(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
 lbl_fn_80032090_000020F4:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
@@ -2578,7 +2578,7 @@ lbl_fn_80032090_00002108:
     li r3, 0x7
     stw r0, 0x40(r1)
     stw r0, 0x44(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -2603,7 +2603,7 @@ lbl_fn_80032090_0000214C:
     li r3, 0x7
     stw r0, 0x1c(r1)
     stw r31, 0x18(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     stw r31, lbl_807C6A40@l(r3)
     li r3, 0x9
@@ -2641,7 +2641,7 @@ lbl_fn_80032090_000021E0:
     li r3, 0x7
     stw r0, 0xc(r1)
     stw r31, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     stw r31, lbl_807C6A40@l(r3)
     li r3, 0x9
@@ -2694,7 +2694,7 @@ lbl_fn_8003226C_000022A0:
     li r3, 0x0
     stw r0, 0x10(r1)
     stw r31, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -2759,7 +2759,7 @@ lbl_fn_80032348_0000237C:
     li r3, 0x0
     stw r0, 0x10(r1)
     stw r31, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -2922,7 +2922,7 @@ lbl_fn_80032470_00002598:
     li r3, 0x7
     stw r0, 0xc(r1)
     stw r31, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     stw r31, lbl_807C6A40@l(r3)
     li r3, 0x9
@@ -3007,7 +3007,7 @@ lbl_fn_8003268C_000026C0:
     li r3, 0x0
     stw r0, 0x10(r1)
     stw r31, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -3060,7 +3060,7 @@ asm void fn_80032768(void)
     li r3, 0x7
     stw r0, 0x10(r1)
     stw r0, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -3080,7 +3080,7 @@ lbl_fn_80032768_000027B8:
     li r3, 0x0
     stw r0, 0x20(r1)
     stw r0, 0x24(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -3179,7 +3179,7 @@ lbl_fn_800328D8_0000290C:
     li r3, 0x0
     stw r0, 0x10(r1)
     stw r31, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -3280,7 +3280,7 @@ lbl_fn_800329B4_00002A04:
     li r3, 0x3
     stw r0, 0x40(r1)
     stw r8, 0x44(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
 lbl_fn_800329B4_00002A98:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
@@ -3298,7 +3298,7 @@ lbl_fn_800329B4_00002AAC:
     li r3, 0x7
     stw r0, 0x50(r1)
     stw r0, 0x54(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -3360,7 +3360,7 @@ lbl_fn_800329B4_00002B7C:
     li r3, 0x7
     stw r0, 0x2c(r1)
     stw r31, 0x28(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     stw r31, lbl_807C6A40@l(r3)
     li r3, 0x9
@@ -3397,7 +3397,7 @@ lbl_fn_800329B4_00002BC0:
     li r3, 0x3
     stw r0, 0x10(r1)
     stw r8, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
 lbl_fn_800329B4_00002C40:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
@@ -3415,7 +3415,7 @@ lbl_fn_800329B4_00002C54:
     li r3, 0x7
     stw r0, 0x20(r1)
     stw r0, 0x24(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -3501,7 +3501,7 @@ lbl_fn_80032D60_00002D68:
     li r3, 0x0
     stw r0, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -3574,7 +3574,7 @@ lbl_fn_80032DF0_00002E10:
     li r3, 0x7
     stw r0, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -3637,7 +3637,7 @@ lbl_fn_80032F18_00002F20:
     li r3, 0x0
     stw r0, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -3674,7 +3674,7 @@ asm void fn_80032FA8(void)
     li r3, 0x0
     stw r8, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -3761,7 +3761,7 @@ lbl_fn_80033040_00003098:
     li r3, 0x3
     stw r0, 0x6c(r1)
     stw r8, 0x68(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
 lbl_fn_80033040_000030E8:
     li r0, 0x1
     stw r0, 0x180(r31)
@@ -3827,7 +3827,7 @@ lbl_fn_80033040_0000319C:
     li r3, 0x0
     stw r8, 0x5c(r1)
     stw r0, 0x58(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, 0x180(r31)
     li r3, 0x1
@@ -3864,7 +3864,7 @@ lbl_fn_80033040_00003228:
     li r3, 0x2
     stw r8, 0x4c(r1)
     stw r0, 0x48(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, 0x180(r31)
     li r3, 0x4
@@ -3881,7 +3881,7 @@ lbl_fn_80033040_00003274:
     li r3, 0x0
     stw r8, 0x3c(r1)
     stw r0, 0x38(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, 0x180(r31)
     li r3, 0x1
@@ -3902,7 +3902,7 @@ lbl_fn_80033040_000032B4:
     li r3, 0x0
     stw r8, 0x2c(r1)
     stw r0, 0x28(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, 0x180(r31)
     li r3, 0x1
@@ -3938,7 +3938,7 @@ lbl_fn_80033040_0000333C:
     li r3, 0x2
     stw r8, 0x1c(r1)
     stw r0, 0x18(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, 0x180(r31)
     li r3, 0x4
@@ -3955,7 +3955,7 @@ lbl_fn_80033040_00003388:
     li r3, 0x0
     stw r8, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, 0x180(r31)
     li r3, 0x1
@@ -4011,7 +4011,7 @@ lbl_fn_80033418_0000344C:
     li r3, 0x0
     stw r0, 0x10(r1)
     stw r31, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -4059,7 +4059,7 @@ asm void fn_800334F4(void)
     li r3, 0x0
     stw r0, 0x10(r1)
     stw r0, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -4105,7 +4105,7 @@ asm void fn_80033588(void)
     li r3, 0x0
     stw r0, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -4158,7 +4158,7 @@ asm void fn_800335FC(void)
     li r3, 0x7
     stw r0, 0x2c(r1)
     stw r31, 0x28(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r29)
     li r3, 0x9
@@ -4186,7 +4186,7 @@ lbl_fn_800335FC_0000367C:
     li r3, 0x3
     stw r0, 0x1c(r1)
     stw r8, 0x18(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
 lbl_fn_800335FC_000036C8:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
@@ -4207,7 +4207,7 @@ lbl_fn_800335FC_000036E4:
     li r3, 0x0
     stw r0, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r29)
     li r3, 0x1
@@ -4251,7 +4251,7 @@ lbl_fn_80033764_0000376C:
     li r3, 0x0
     stw r0, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -4423,7 +4423,7 @@ lbl_fn_80033978_000039AC:
     li r3, 0x0
     stw r0, 0x10(r1)
     stw r31, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -4507,7 +4507,7 @@ lbl_fn_80033A54_00003A7C:
     li r3, 0x3
     stw r0, 0x10(r1)
     stw r8, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
 lbl_fn_80033A54_00003AFC:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
@@ -4525,7 +4525,7 @@ lbl_fn_80033A54_00003B10:
     li r3, 0x7
     stw r0, 0x20(r1)
     stw r0, 0x24(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r31)
     li r0, 0x9
@@ -4618,7 +4618,7 @@ lbl_fn_80033C18_00003C4C:
     li r3, 0x0
     stw r0, 0x10(r1)
     stw r31, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -4691,7 +4691,7 @@ lbl_fn_80033CF4_00003D20:
     li r3, 0x7
     stw r0, 0x10(r1)
     stw r0, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r30)
     li r0, 0x9
@@ -4710,7 +4710,7 @@ lbl_fn_80033CF4_00003D88:
     li r3, 0x0
     stw r0, 0x20(r1)
     stw r0, 0x24(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r30)
     li r0, 0x1
@@ -4801,7 +4801,7 @@ lbl_fn_80033EA8_00003EB0:
     li r3, 0x0
     stw r0, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -4913,7 +4913,7 @@ lbl_fn_80033F98_00004020:
     li r3, 0x7
     stw r0, 0xc(r1)
     stw r31, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     stw r31, lbl_807C6A40@l(r30)
     li r3, 0x9
     b lbl_fn_80033F98_000040AC
@@ -4986,7 +4986,7 @@ lbl_fn_800340F0_00004124:
     li r3, 0x0
     stw r0, 0x10(r1)
     stw r31, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -5070,7 +5070,7 @@ lbl_fn_800341CC_000041F4:
     li r3, 0x3
     stw r0, 0x30(r1)
     stw r8, 0x34(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
 lbl_fn_800341CC_00004274:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
@@ -5088,7 +5088,7 @@ lbl_fn_800341CC_00004288:
     li r3, 0x7
     stw r0, 0x40(r1)
     stw r0, 0x44(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r31)
     li r0, 0x9
@@ -5109,7 +5109,7 @@ lbl_fn_800341CC_000042C8:
     li r3, 0x7
     stw r0, 0x1c(r1)
     stw r31, 0x18(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     stw r31, lbl_807C6A40@l(r3)
     li r3, 0x9
@@ -5139,7 +5139,7 @@ lbl_fn_800341CC_00004338:
     li r3, 0x7
     stw r0, 0xc(r1)
     stw r31, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     stw r31, lbl_807C6A40@l(r3)
     li r3, 0x9
@@ -5203,7 +5203,7 @@ lbl_fn_800343E8_0000441C:
     li r3, 0x0
     stw r0, 0x10(r1)
     stw r31, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -5276,7 +5276,7 @@ lbl_fn_800344C4_000044F0:
     li r3, 0x7
     stw r0, 0x30(r1)
     stw r0, 0x34(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r30)
     li r0, 0x9
@@ -5295,7 +5295,7 @@ lbl_fn_800344C4_00004558:
     li r3, 0x0
     stw r0, 0x40(r1)
     stw r0, 0x44(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r30)
     li r0, 0x1
@@ -5313,7 +5313,7 @@ lbl_fn_800344C4_00004590:
     li r3, 0x7
     stw r0, 0x1c(r1)
     stw r31, 0x18(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     stw r31, lbl_807C6A40@l(r3)
     li r3, 0x9
@@ -5335,7 +5335,7 @@ lbl_fn_800344C4_000045D8:
     li r3, 0x7
     stw r0, 0xc(r1)
     stw r31, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     stw r31, lbl_807C6A40@l(r3)
     li r3, 0x9
@@ -5408,7 +5408,7 @@ lbl_fn_800346D0_000046D8:
     li r3, 0x0
     stw r0, 0xc(r1)
     stw r0, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -5579,7 +5579,7 @@ lbl_fn_800347C0_0000491C:
     li r3, 0x7
     stw r0, 0xc(r1)
     stw r31, 0x8(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     stw r31, lbl_807C6A40@l(r3)
     li r3, 0x9
@@ -5679,7 +5679,7 @@ lbl_fn_80034A44_00004A78:
     li r3, 0x0
     stw r0, 0x10(r1)
     stw r31, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r3)
@@ -5800,7 +5800,7 @@ lbl_fn_80034B20_00004BD4:
     li r3, 0x3
     stw r0, 0x40(r1)
     stw r8, 0x44(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
 lbl_fn_80034B20_00004C4C:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
@@ -5818,7 +5818,7 @@ lbl_fn_80034B20_00004C60:
     li r3, 0x7
     stw r0, 0x50(r1)
     stw r0, 0x54(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r31)
     li r0, 0x9
@@ -5879,7 +5879,7 @@ lbl_fn_80034B20_00004D2C:
     li r3, 0x7
     stw r0, 0x2c(r1)
     stw r31, 0x28(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     lis r3, lbl_807C6A40@ha
     stw r31, lbl_807C6A40@l(r3)
     li r3, 0x9
@@ -5935,7 +5935,7 @@ lbl_fn_80034B20_00004DB4:
     li r3, 0x3
     stw r0, 0x10(r1)
     stw r8, 0x14(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
 lbl_fn_80034B20_00004E34:
     lis r3, lbl_807C6A40@ha
     li r0, 0x1
@@ -5953,7 +5953,7 @@ lbl_fn_80034B20_00004E48:
     li r3, 0x7
     stw r0, 0x20(r1)
     stw r0, 0x24(r1)
-    bl fn_8001AEDC
+    bl battle_getCharacterState
     li r0, 0x1
     stw r0, lbl_807C6A40@l(r31)
     li r0, 0x9

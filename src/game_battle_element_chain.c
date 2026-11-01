@@ -47,7 +47,7 @@ extern void PSMTXRotRad(void);
 extern void PSVECMag(void);
 extern void strcmp(void);
 extern void fn_8068A850(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -855,7 +855,7 @@ lbl_fn_80424254_00000A40:
     addi r4, r4, fn_804248E0@l
     li r5, 0x0
     li r6, 0x50
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x11c(r31)
     b lbl_fn_80424254_00000A90
 lbl_fn_80424254_00000A88:

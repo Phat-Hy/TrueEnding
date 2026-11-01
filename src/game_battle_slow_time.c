@@ -28,7 +28,7 @@ extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB5C8(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800FAB80(void);
 extern void fn_802180A8(void);
@@ -418,11 +418,11 @@ lbl_fn_804070B4_00000428:
     bne lbl_fn_804070B4_0000047C
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x950(r29)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x954(r29)
     addi r3, r1, 0x108
     bl talk_formatQuotedString

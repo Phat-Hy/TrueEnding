@@ -14,7 +14,7 @@ extern void fn_8000D9E8(void);
 extern void fn_8000D9F8(void);
 extern void fn_8000DCF4(void);
 extern void fn_8001047C(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_8006EF48(void);
 extern void fn_8006F72C(void);
 extern void mem_free(void);
@@ -912,7 +912,7 @@ lbl_fn_805AB82C_00000AC8:
     addi r3, r1, 0x34
     addi r4, r1, 0x28
     addi r5, r1, 0x1c
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x34
     bl fn_803D6EC0
     fmr f30, f1

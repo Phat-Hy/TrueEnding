@@ -7,7 +7,7 @@ extern void item_useConsumable(void);
 extern void fn_8004ED34(void);
 extern void fn_80063764(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
@@ -104,7 +104,7 @@ asm void fn_80300654(void)
     addi r3, r30, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r31, 0x1
     stw r31, 0x58c(r30)
     mr r3, r30
@@ -173,7 +173,7 @@ asm void fn_8030073C(void)
     addi r3, r30, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, 0x6
     stw r0, 0x58c(r30)
     mr r3, r30
@@ -356,7 +356,7 @@ asm void fn_803009F4(void)
     addi r3, r31, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, 0x9
     stw r0, 0x58c(r31)
     mr r3, r31
@@ -421,7 +421,7 @@ asm void fn_80300AD8(void)
     addi r3, r30, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, 0xa
     stw r0, 0x58c(r30)
     mr r3, r30
@@ -631,7 +631,7 @@ asm void fn_80300DF4(void)
     addi r3, r30, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, 0xb
     stw r0, 0x58c(r30)
     mr r3, r30
@@ -816,7 +816,7 @@ asm void fn_803010BC(void)
     addi r3, r31, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, 0xc
     stw r0, 0x58c(r31)
     mr r3, r31
@@ -907,7 +907,7 @@ asm void fn_80301200(void)
     addi r3, r31, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     li r0, 0xd
     stw r0, 0x58c(r31)
     mr r3, r31
@@ -1834,7 +1834,7 @@ lbl_fn_80301DDC_00001990:
     addi r3, r31, 0xb0
     lfs f1, lbl_80884A20
     li r4, 0x2
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     stw r28, 0x58c(r31)
     mr r3, r31
     li r4, 0x3

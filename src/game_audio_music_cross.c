@@ -11,7 +11,7 @@ extern void fn_8001047C(void);
 extern void fn_80011034(void);
 extern void fn_80011410(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -64,7 +64,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void std_atan2(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -383,7 +383,7 @@ lbl_fn_8030C490_0000037C:
     addi r3, r1, 0xbc
     addi r4, r4, 0x4
     addi r5, r1, 0xc8
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0xbc
     bl fn_8000D3A4
     fmr f28, f1
@@ -425,7 +425,7 @@ lbl_fn_8030C490_00000448:
     addi r3, r1, 0xa4
     addi r4, r1, 0xb0
     addi r5, r30, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0xa4
     bl fn_801C3910
     lfs f0, lbl_80884BD0
@@ -536,7 +536,7 @@ lbl_fn_8030C490_000005E0:
     addi r3, r1, 0x74
     addi r4, r1, 0x80
     addi r5, r30, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x74
     bl fn_801C3910
     lfs f0, lbl_80884BD0
@@ -683,7 +683,7 @@ lbl_fn_8030C490_0000080C:
     addi r3, r1, 0x2c
     addi r4, r1, 0x38
     addi r5, r30, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x2c
     bl fn_801C3910
     lfs f0, lbl_80884BD0
@@ -1556,7 +1556,7 @@ lbl_fn_8030D5C8_000014B4:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1670,7 +1670,7 @@ lbl_fn_8030D5C8_00001654:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0

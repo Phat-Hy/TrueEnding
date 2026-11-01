@@ -27,7 +27,7 @@ extern void fn_800C2C20(void);
 extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_802180A8(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_destructor(void);
@@ -1185,7 +1185,7 @@ lbl_fn_803F5C2C_00000FDC:
     bne lbl_fn_803F5C2C_0000101C
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x5d4(r31)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
@@ -1202,7 +1202,7 @@ lbl_fn_803F5C2C_0000101C:
     bne lbl_fn_803F5C2C_0000105C
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x5d8(r31)
     addi r3, r1, 0x108
     bl talk_formatQuotedString
@@ -1484,19 +1484,19 @@ lbl_fn_803F60E8_00001408:
     stw r31, 0x5f0(r28)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x5f8(r28)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x5fc(r28)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x600(r28)
     addi r3, r1, 0x8
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x604(r28)
     addi r3, r1, 0x8
     bl talk_formatQuotedString

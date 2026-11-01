@@ -17,7 +17,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087E9C(void);
 extern void fn_8008937C(void);
@@ -58,7 +58,7 @@ extern void PSVECMag(void);
 extern void printf(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
@@ -615,7 +615,7 @@ lbl_fn_803F0280_00000614:
     addi r4, r4, fn_803EFD60@l
     li r5, 0x0
     li r6, 0x28
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803F0280_00000664
 lbl_fn_803F0280_0000065C:
@@ -667,7 +667,7 @@ lbl_fn_803F0328_000006C0:
     li r6, 0xc
     addi r4, r4, fn_80237518@l
     addi r5, r5, fn_802375C4@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803F0328_00000714
 lbl_fn_803F0328_0000070C:
@@ -719,7 +719,7 @@ lbl_fn_803F03D8_00000770:
     li r6, 0xc
     addi r4, r4, res_MsgHandle_constructor@l
     addi r5, r5, fn_800EF73C@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803F03D8_000007C4
 lbl_fn_803F03D8_000007BC:
@@ -771,7 +771,7 @@ lbl_fn_803F0488_00000820:
     li r6, 0x4
     addi r4, r4, fn_800CB360@l
     addi r5, r5, ref_releaseHandle@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803F0488_00000874
 lbl_fn_803F0488_0000086C:
@@ -823,7 +823,7 @@ lbl_fn_803F0538_000008D0:
     li r6, 0x20
     addi r4, r4, fn_80042740@l
     addi r5, r5, fn_80041C0C@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803F0538_00000924
 lbl_fn_803F0538_0000091C:
@@ -1784,7 +1784,7 @@ lbl_fn_803F11F8_00001594:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80885F9C
     mr r3, r25
     lfs f2, lbl_80885FA0

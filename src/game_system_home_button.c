@@ -14,7 +14,7 @@ extern void fn_8004A1D4(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B1EC(void);
 extern void talk_parseQuotedString(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void fn_80063D3C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -45,7 +45,7 @@ extern void fn_800D03AC(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800EC654(void);
 extern void fn_800EDFE8(void);
 extern void fn_80205BE8(void);
@@ -70,7 +70,7 @@ extern void rand(void);
 extern void fn_8068236C(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -213,7 +213,7 @@ lbl_fn_8035FC10_00000050:
     li r6, 0x5c
     addi r4, r4, fn_8035FCB4@l
     addi r5, r5, fn_8035E244@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r30)
     b lbl_fn_8035FC10_000000A4
 lbl_fn_8035FC10_0000009C:
@@ -302,7 +302,7 @@ lbl_fn_8035FD40_00000180:
     li r6, 0xa8
     addi r4, r4, fn_8035FDE4@l
     addi r5, r5, fn_8035E2A0@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r30)
     b lbl_fn_8035FD40_000001D4
 lbl_fn_8035FD40_000001CC:
@@ -395,7 +395,7 @@ lbl_fn_8035FE88_000002C4:
     addi r4, r4, fn_8035FF24@l
     li r5, 0x0
     li r6, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r30)
     b lbl_fn_8035FE88_00000314
 lbl_fn_8035FE88_0000030C:
@@ -1363,15 +1363,15 @@ asm void fn_80360B40(void)
 lbl_fn_80360B40_00000F94:
     mr r3, r31
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x28(r30)
     mr r3, r31
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x38(r30)
     mr r3, r31
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x3c(r30)
     mr r3, r31
     bl talk_parseQuotedString
@@ -1883,17 +1883,17 @@ asm void fn_8036126C(void)
     mr r30, r3
     mr r3, r31
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r4, 0x50(r30)
     mr r3, r31
     stfs f1, 0x2c(r4)
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r4, 0x50(r30)
     mr r3, r31
     stfs f1, 0x30(r4)
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r3, 0x50(r30)
     stfs f1, 0x34(r3)
     lwz r31, 0xc(r1)
@@ -1991,7 +1991,7 @@ lbl_fn_803612F4_000017F4:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_fn_803612F4_00001808:
     lwz r0, 0x124(r1)
     lwz r31, 0x11c(r1)

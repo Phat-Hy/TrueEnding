@@ -15,7 +15,7 @@ extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DD3FC(void);
 extern void fn_800EC254(void);
 extern void fn_800EC2C4(void);
@@ -39,7 +39,7 @@ extern void strcmp(void);
 extern void atoi(void);
 extern void fn_80686A48(void);
 extern void fn_80686AF0(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void strchr(void);
 
 /* External data declarations */
@@ -208,7 +208,7 @@ lbl_fn_8021996C_0000011C:
     addi r4, r4, fn_80219EC4@l
     li r5, 0x0
     li r6, 0xd0
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F2C8
     addi r5, r28, 0x1e
     lwz r3, 0xc(r1)
@@ -612,23 +612,23 @@ asm void fn_80219F84(void)
     stw r3, 0x20(r27)
     mr r3, r28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x28(r27)
     mr r3, r28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x2c(r27)
     mr r3, r28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x30(r27)
     mr r3, r28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x34(r27)
     mr r3, r28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x38(r27)
     mr r3, r28
     bl talk_parseQuotedString
@@ -636,11 +636,11 @@ asm void fn_80219F84(void)
     stw r3, 0x3c(r27)
     mr r3, r28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x40(r27)
     mr r3, r28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x44(r27)
     mr r3, r28
     bl talk_parseQuotedString
@@ -648,20 +648,20 @@ asm void fn_80219F84(void)
     stw r3, 0x48(r27)
     mr r3, r28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x4c(r27)
     mr r3, r28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     bl fn_801125F8
     stfs f1, 0x50(r27)
     mr r3, r28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x54(r27)
     mr r3, r28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x58(r27)
     mr r3, r28
     bl talk_parseQuotedString
@@ -713,7 +713,7 @@ lbl_fn_80219F84_00000864:
     addi r3, r1, 0x260
     bl fn_800ED4D8
     bl fn_8004212C
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x74(r30)
     addi r3, r1, 0x188
     addi r4, r1, 0x260
@@ -1517,7 +1517,7 @@ lbl_fn_8021AAB8_00001290:
     li r6, 0x18
     addi r4, r4, fn_8021AEF0@l
     addi r5, r5, fn_8021AF10@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F2D8
     mr r4, r26
     lwz r12, 0xc60(r1)
@@ -1878,7 +1878,7 @@ asm void fn_8021B060(void)
     li r6, 0x8
     addi r5, r27, fn_8020C07C@l
     li r7, 0x49
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F2E8
     addi r5, r29, lbl_80742658@l
     mr r6, r5
@@ -1890,7 +1890,7 @@ asm void fn_8021B060(void)
     addi r5, r27, fn_8020C07C@l
     li r6, 0x8
     li r7, 0x1b
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, lbl_8087F2EC
     stw r3, lbl_8087F2F0
     cmpwi r0, 0x0

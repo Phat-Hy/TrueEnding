@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_8000D3A4(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
@@ -19,7 +19,7 @@ extern void atn_ColliObject_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -28,7 +28,7 @@ extern void fn_800C344C(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFD18(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800E41FC(void);
 extern void fn_800E854C(void);
 extern void fn_800EF73C(void);
@@ -638,7 +638,7 @@ lbl_fn_8032DEA0_00000650:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80885078
     mr r3, r29
     lfs f2, lbl_80885080
@@ -665,7 +665,7 @@ lbl_fn_8032DEA0_00000650:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80885078
     mr r3, r29
     lfs f2, lbl_80885080
@@ -690,7 +690,7 @@ lbl_fn_8032DEA0_00000650:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80885084
     mr r3, r29
     lfs f2, lbl_80885088
@@ -708,7 +708,7 @@ lbl_fn_8032DEA0_00000650:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80885078
     mr r3, r29
     lfs f2, lbl_80885080
@@ -969,7 +969,7 @@ lbl_fn_8032E3DC_00000B68:
     bne lbl_fn_8032E3DC_00000B90
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1580(r28)
     b lbl_fn_8032E3DC_00000E74
 lbl_fn_8032E3DC_00000B90:
@@ -980,7 +980,7 @@ lbl_fn_8032E3DC_00000B90:
     bne lbl_fn_8032E3DC_00000BB8
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1584(r28)
     b lbl_fn_8032E3DC_00000E74
 lbl_fn_8032E3DC_00000BB8:
@@ -991,7 +991,7 @@ lbl_fn_8032E3DC_00000BB8:
     bne lbl_fn_8032E3DC_00000BE0
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1588(r28)
     b lbl_fn_8032E3DC_00000E74
 lbl_fn_8032E3DC_00000BE0:
@@ -1010,7 +1010,7 @@ lbl_fn_8032E3DC_00000BE0:
     stw r3, 0x2c(r1)
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x30(r1)
     addi r3, r1, 0x38
     bl talk_parseQuotedString
@@ -1119,51 +1119,51 @@ lbl_fn_8032E3DC_00000D80:
     add r25, r28, r0
     stw r27, 0x1660(r25)
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1664(r25)
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1668(r25)
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x166c(r25)
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1674(r25)
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1678(r25)
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x167c(r25)
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1684(r25)
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1688(r25)
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x168c(r25)
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1694(r25)
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1698(r25)
     addi r3, r1, 0x38
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x169c(r25)
 lbl_fn_8032E3DC_00000E74:
     addi r3, r1, 0x38
@@ -1758,7 +1758,7 @@ asm void fn_8032F0EC(void)
     mr r4, r3
     addi r3, r1, 0x8
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x8
     bl fn_8000D3A4
     lfs f0, lbl_80885094

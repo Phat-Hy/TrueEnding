@@ -12,7 +12,7 @@ extern void fn_8000D0F8(void);
 extern void fn_8000D3A4(void);
 extern void fn_8001047C(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_80057A68(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
@@ -127,7 +127,7 @@ asm void fn_80296B8C(void)
     addi r3, r1, 0x14
     addi r4, r1, 0x2c
     addi r5, r1, 0x20
-    bl fn_80013338
+    bl vec3_sub
     lfs f0, lbl_80883BE8
     addi r3, r1, 0x14
     stfs f0, 0x18(r1)

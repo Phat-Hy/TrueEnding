@@ -6,7 +6,7 @@ extern void __register_global_object(void);
 extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
 extern void fn_80013410(void);
@@ -1272,10 +1272,10 @@ asm void fn_8015076C(void)
     stw r24, 0x120(r1)
     mr r4, r25
     addi r3, r1, 0x124
-    bl fn_8000D124
+    bl vec3_copy
     mr r4, r29
     addi r3, r1, 0x130
-    bl fn_8000D124
+    bl vec3_copy
     cmpwi r28, 0x0
     stw r26, 0x13c(r1)
     stw r27, 0x140(r1)
@@ -1289,7 +1289,7 @@ asm void fn_8015076C(void)
     bl fn_800F72CC
     addi r3, r1, 0x124
     addi r4, r1, 0xbc
-    bl fn_8000D124
+    bl vec3_copy
     lwz r0, 0x140(r1)
     oris r0, r0, 0x1
     stw r0, 0x140(r1)
@@ -1577,7 +1577,7 @@ lbl_fn_8015076C_00001310:
     bl fn_80011034
     addi r3, r1, 0xe0
     addi r4, r1, 0x20
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_8015076C_000013E8:
     mr r3, r23
     bl fn_8016DA4C

@@ -12,7 +12,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D844(void);
 extern void fn_8001047C(void);
 extern void fn_8004D388(void);
@@ -569,7 +569,7 @@ lbl_fn_8032A9F4_000006DC:
     beq lbl_fn_8032A9F4_00000704
     addi r3, r1, 0x14
     addi r4, r4, 0x4
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_8032A9F4_00000704:
     bl fn_80121F00
     bl fn_8013C504
@@ -580,7 +580,7 @@ lbl_fn_8032A9F4_00000704:
     beq lbl_fn_8032A9F4_0000072C
     addi r3, r1, 0x2c
     addi r4, r4, 0x4
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_8032A9F4_0000072C:
     bl fn_80121F00
     bl fn_8013C504
@@ -591,7 +591,7 @@ lbl_fn_8032A9F4_0000072C:
     beq lbl_fn_8032A9F4_00000754
     addi r3, r1, 0x20
     addi r4, r4, 0x4
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_8032A9F4_00000754:
     addi r3, r1, 0x8
     bl fn_8032AB90

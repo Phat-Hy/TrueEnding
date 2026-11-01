@@ -7,7 +7,7 @@ extern void _savegpr_20(void);
 extern void fn_8004ED34(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C3118(void);
 extern void fn_800C344C(void);
@@ -527,7 +527,7 @@ asm void fn_80276944(void)
     lfs f1, lbl_80883820
     addi r3, r30, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_80883830
     li r0, 0x1
     stw r0, 0x3fc(r30)
@@ -659,7 +659,7 @@ asm void fn_80276B3C(void)
     stw r5, 0x58c(r31)
     li r4, 0x0
     stw r0, 0x14e4(r31)
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_80883830
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -711,7 +711,7 @@ asm void fn_80276BF4(void)
     stw r5, 0x58c(r31)
     li r4, 0x0
     stw r0, 0x14e4(r31)
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_80883830
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1486,7 +1486,7 @@ lbl_fn_80277478_00001304:
     addi r3, r29, 0xb0
     stw r0, 0x58c(r29)
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f3, lbl_80883830
     li r0, 0x1
     lfs f0, lbl_808838B4

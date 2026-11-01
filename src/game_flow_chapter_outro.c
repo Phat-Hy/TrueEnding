@@ -7,12 +7,12 @@ extern void _restgpr_14(void);
 extern void _restgpr_25(void);
 extern void _savegpr_14(void);
 extern void _savegpr_25(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
 extern void fn_8001047C(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_800A555C(void);
 extern void fn_8012A190(void);
@@ -1674,7 +1674,7 @@ asm void fn_804E7AC4(void)
     bl fn_8013C38C
     mr r4, r3
     mr r3, r27
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r29
     li r4, 0x1
     bl fn_804E8094
@@ -1685,10 +1685,10 @@ asm void fn_804E7AC4(void)
     mr r4, r3
     mr r5, r28
     addi r3, r1, 0x20
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r27, 0xc
     addi r4, r1, 0x20
-    bl fn_8000D124
+    bl vec3_copy
     mr r3, r29
     bl fn_8013C3A8
     cmpwi r3, 0x0
@@ -1801,7 +1801,7 @@ lbl_fn_804E7AC4_0000176C:
     bl fn_8013C38C
     mr r4, r3
     mr r3, r25
-    bl fn_8000D124
+    bl vec3_copy
     lwz r3, 0x0(r28)
     li r4, 0x1
     bl fn_804E8094
@@ -1812,10 +1812,10 @@ lbl_fn_804E7AC4_0000176C:
     mr r4, r3
     mr r5, r30
     addi r3, r1, 0x14
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r25, 0xc
     addi r4, r1, 0x14
-    bl fn_8000D124
+    bl vec3_copy
     lwz r3, 0x0(r28)
     bl fn_8013C3A8
     cmpwi r3, 0x0
@@ -1932,7 +1932,7 @@ lbl_fn_804E7AC4_000019C8:
     bl fn_8013C38C
     mr r4, r3
     mr r3, r27
-    bl fn_8000D124
+    bl vec3_copy
     lwz r3, 0x10c(r1)
     li r4, 0x1
     bl fn_804E8094
@@ -1943,10 +1943,10 @@ lbl_fn_804E7AC4_000019C8:
     mr r4, r3
     mr r5, r29
     addi r3, r1, 0x8
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r27, 0xc
     addi r4, r1, 0x8
-    bl fn_8000D124
+    bl vec3_copy
     lwz r3, 0x10c(r1)
     bl fn_8013C3A8
     cmpwi r3, 0x0

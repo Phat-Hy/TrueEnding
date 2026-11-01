@@ -8,7 +8,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_22(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
@@ -753,7 +753,7 @@ lbl_fn_80100BF0_00000978:
     li r7, 0x3
     li r8, 0x1
     addi r5, r5, 0x67b0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     addis r5, r28, 0x3
     mr r3, r30
     addi r4, r31, 0x260

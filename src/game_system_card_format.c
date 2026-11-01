@@ -9,7 +9,7 @@ extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void mem_alloc(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
@@ -19,7 +19,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800E2AF8(void);
 extern void fn_800E2D4C(void);
 extern void fn_8011FAF0(void);
@@ -615,7 +615,7 @@ lbl_fn_8035B034_00000698:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x2bc
     addi r5, r29, 0x16c4
@@ -624,7 +624,7 @@ lbl_fn_8035B034_00000698:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x2c7
     addi r5, r29, 0x14d4
@@ -633,7 +633,7 @@ lbl_fn_8035B034_00000698:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x133
     addi r5, r29, 0x1518
@@ -642,7 +642,7 @@ lbl_fn_8035B034_00000698:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x1a7
     addi r5, r29, 0x1520
@@ -651,7 +651,7 @@ lbl_fn_8035B034_00000698:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x195
     addi r5, r29, 0x151c
@@ -660,7 +660,7 @@ lbl_fn_8035B034_00000698:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_8088552C
     mr r3, r30
     lfs f2, lbl_808855F0
@@ -1712,7 +1712,7 @@ lbl_fn_8035BEA4_000015E0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     mr r3, r28
     addi r4, r29, 0x41
     addi r5, r31, 0x15a8
@@ -1721,7 +1721,7 @@ lbl_fn_8035BEA4_000015E0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80885610
     mr r3, r28
     lfs f2, lbl_8088561C
@@ -1739,7 +1739,7 @@ lbl_fn_8035BEA4_000015E0:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lwz r4, lbl_80885600
     addi r3, r31, 0x14f8
     bl res_MsgHandle_destructor
@@ -1958,7 +1958,7 @@ lbl_fn_8035C1B4_00001968:
     bne lbl_fn_8035C1B4_00001990
     addi r3, r1, 0x14
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x15ac(r31)
     b lbl_fn_8035C1B4_00001A5C
 lbl_fn_8035C1B4_00001990:
@@ -1999,7 +1999,7 @@ lbl_fn_8035C1B4_000019E0:
     stw r3, 0xc(r1)
     addi r3, r1, 0x14
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x1540(r31)
     stfs f1, 0x10(r1)
     mulli r0, r0, 0xc

@@ -36,7 +36,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_8008937C(void);
 extern void fn_800C507C(void);
@@ -63,7 +63,7 @@ extern void fn_800DCA6C(void);
 extern void printf(void);
 extern void abort(void);
 extern void fn_806952C4(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695B00(void);
 extern void fn_80709AD0(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1506,7 +1506,7 @@ lbl_atn_Skin_init_0000117C:
     addi r4, r4, skin_initLink@l
     li r5, 0x0
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r31)
     b lbl_atn_Skin_init_000011CC
 lbl_atn_Skin_init_000011C4:
@@ -2238,7 +2238,7 @@ lbl_fn_800C4A90_00001A54:
     li r6, 0x18
     addi r4, r4, fn_8007E9EC@l
     addi r5, r5, fn_8007AA64@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0xc(r31)
     li r28, 0x0
     li r29, 0x0
@@ -2478,7 +2478,7 @@ asm void fn_800C4F70(void)
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     li r29, 0x0
     li r31, 0x0
     b lbl_fn_800C4F70_00001F8C

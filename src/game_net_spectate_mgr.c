@@ -23,7 +23,7 @@ extern void fn_8006EF48(void);
 extern void fn_80076FF8(void);
 extern void fn_80079044(void);
 extern void mem_alloc(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087858(void);
 extern void fn_80087994(void);
@@ -2374,7 +2374,7 @@ lbl_spectateManager_update_00001FC8:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80887C10
     mr r3, r29
     lfs f2, lbl_80887C14

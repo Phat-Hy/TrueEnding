@@ -38,7 +38,7 @@ extern void fn_8050FD3C(void);
 extern void fn_805113EC(void);
 extern void fn_805114D8(void);
 extern void fn_805115D4(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
@@ -709,7 +709,7 @@ lbl_fn_801CFDCC_00000768:
     addi r4, r4, fn_801D082C@l
     li r6, 0x40
     li r7, 0xb
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0x50(r29)
     cmpwi r4, 0x0
     stw r3, 0x50(r29)
@@ -730,7 +730,7 @@ lbl_fn_801CFDCC_000007F4:
     li r6, 0x54
     addi r5, r26, fn_801D0960@l
     li r7, 0xd
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x54(r29)
     addi r4, r26, fn_801D0960@l
     stw r3, 0x54(r29)

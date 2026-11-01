@@ -14,7 +14,7 @@ extern void fn_8005B5F8(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80089ACC(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_800EC254(void);
 extern void fn_800EC2C4(void);
@@ -37,7 +37,7 @@ extern void fn_803C7A24(void);
 extern void fn_803C8810(void);
 extern void fn_8068236C(void);
 extern void atoi(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_807500DC[];
@@ -443,7 +443,7 @@ lbl_fn_803C63D0_00000448:
     addi r4, r4, fn_803C6478@l
     li r5, 0x0
     li r6, 0xa0
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C63D0_00000498
 lbl_fn_803C63D0_00000490:
@@ -496,7 +496,7 @@ asm void fn_803C647C(void)
     addi r4, r4, fn_803C6478@l
     li r5, 0x0
     li r6, 0xa0
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r31, 0x0
     stw r3, 0x4(r29)
     beq lbl_fn_803C647C_000005E4
@@ -827,7 +827,7 @@ lbl_fn_803C68E4_0000095C:
     addi r4, r4, fn_803C698C@l
     li r5, 0x0
     li r6, 0x94
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C68E4_000009AC
 lbl_fn_803C68E4_000009A4:
@@ -880,7 +880,7 @@ asm void fn_803C6990(void)
     addi r4, r4, fn_803C698C@l
     li r5, 0x0
     li r6, 0x94
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r31, 0x0
     stw r3, 0x4(r29)
     beq lbl_fn_803C6990_00000AE0
@@ -1205,7 +1205,7 @@ lbl_fn_803C6DE0_00000E58:
     addi r4, r4, fn_803C6E88@l
     li r5, 0x0
     li r6, 0x94
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C6DE0_00000EA8
 lbl_fn_803C6DE0_00000EA0:
@@ -1258,7 +1258,7 @@ asm void fn_803C6E8C(void)
     addi r4, r4, fn_803C6E88@l
     li r5, 0x0
     li r6, 0x94
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r31, 0x0
     stw r3, 0x4(r29)
     beq lbl_fn_803C6E8C_00000FDC
@@ -1583,7 +1583,7 @@ lbl_fn_803C72DC_00001354:
     addi r4, r4, fn_803C7384@l
     li r5, 0x0
     li r6, 0x94
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803C72DC_000013A4
 lbl_fn_803C72DC_0000139C:
@@ -1636,7 +1636,7 @@ asm void fn_803C7388(void)
     addi r4, r4, fn_803C7384@l
     li r5, 0x0
     li r6, 0x94
-    bl fn_80695720
+    bl runtime_registerStaticObject
     cmpwi r31, 0x0
     stw r3, 0x4(r29)
     beq lbl_fn_803C7388_000014D8
@@ -1802,7 +1802,7 @@ lbl_fn_803C74E0_00001630:
     bl fn_803C3724
     mr r3, r26
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     mr r3, r25
     mr r4, r28

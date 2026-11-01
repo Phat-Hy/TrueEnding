@@ -19,7 +19,7 @@ extern void fn_800D5908(void);
 extern void fn_800D594C(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void fn_80478198(void);
 extern void fn_80616250(void);
@@ -544,7 +544,7 @@ lbl_fn_8007B260_00000648:
     addi r5, r1, 0x2c
     bl fn_8007A994
     mr r21, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x8(r15)
     fmr f30, f1
     cmpwi r0, 0x0
@@ -573,7 +573,7 @@ lbl_fn_8007B260_000006C0:
     add r3, r21, r0
     bl fn_8007A994
     mr r21, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x8(r15)
     fmr f30, f1
     cmpwi r0, 0x0
@@ -602,7 +602,7 @@ lbl_fn_8007B260_0000072C:
     addi r5, r1, 0x2c
     bl fn_8007A994
     mr r21, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x8(r15)
     fmr f30, f1
     cmpwi r0, 0x0
@@ -631,7 +631,7 @@ lbl_fn_8007B260_00000798:
     addi r5, r1, 0x2c
     bl fn_8007A994
     mr r21, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x8(r15)
     fmr f30, f1
     cmpwi r0, 0x0
@@ -660,7 +660,7 @@ lbl_fn_8007B260_00000804:
     add r3, r21, r0
     bl fn_8007A994
     mr r21, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0x8(r15)
     fmr f30, f1
     cmpwi r0, 0x0
@@ -729,7 +729,7 @@ lbl_fn_8007B260_00000870:
     addi r5, r1, 0x2c
     bl fn_8007A994
     mr r21, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0xc(r15)
     fmr f30, f1
     cmpwi r0, 0x0
@@ -758,7 +758,7 @@ lbl_fn_8007B260_0000097C:
     add r3, r21, r0
     bl fn_8007A994
     mr r21, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0xc(r15)
     fmr f30, f1
     cmpwi r0, 0x0
@@ -787,7 +787,7 @@ lbl_fn_8007B260_000009E8:
     addi r5, r1, 0x2c
     bl fn_8007A994
     mr r21, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0xc(r15)
     fmr f30, f1
     cmpwi r0, 0x0
@@ -816,7 +816,7 @@ lbl_fn_8007B260_00000A54:
     addi r5, r1, 0x2c
     bl fn_8007A994
     mr r21, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0xc(r15)
     fmr f30, f1
     cmpwi r0, 0x0
@@ -845,7 +845,7 @@ lbl_fn_8007B260_00000AC0:
     add r3, r21, r0
     bl fn_8007A994
     mr r21, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r0, 0xc(r15)
     fmr f30, f1
     cmpwi r0, 0x0
@@ -880,7 +880,7 @@ lbl_fn_8007B260_00000B2C:
     addi r5, r1, 0x2c
     bl fn_8007A994
     mr r21, r3
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f31, f1
     fctiwz f0, f0
     stfd f0, 0x48(r1)

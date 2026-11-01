@@ -22,7 +22,7 @@ extern void atn_LoadHandle_getName(void);
 extern void fn_80473F88(void);
 extern void fn_80475DF8(void);
 extern void fn_8067E23C(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1443,7 +1443,7 @@ lbl_fn_80093F58_00001140:
     addi r4, r4, fn_8000FAE4@l
     li r6, 0x2c
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0xe0(r30)
     mr r28, r3
     cmpwi r0, 0x0
@@ -1557,7 +1557,7 @@ lbl_fn_80093F58_000012E0:
     addi r4, r4, fn_8000FAE4@l
     li r5, 0x0
     li r6, 0x2c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0xe0(r30)
     mr r28, r3
     cmpwi r0, 0x0
@@ -1776,7 +1776,7 @@ lbl_fn_80094420_00001604:
     addi r4, r4, fn_8000FAE4@l
     li r5, 0x0
     li r6, 0x2c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r28, r3
     b lbl_fn_80094420_00001650
 lbl_fn_80094420_0000164C:

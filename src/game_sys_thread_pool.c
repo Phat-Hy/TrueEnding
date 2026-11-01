@@ -18,7 +18,7 @@ extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
 extern void atoi(void);
 extern void fn_80686A48(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern u32 strlen(const char* str);
 
@@ -202,7 +202,7 @@ lbl_fn_8021B2F8_000001BC:
     addi r4, r26, fn_8021BE80@l
     addi r5, r25, fn_8021BE40@l
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r28)
     b lbl_fn_8021B2F8_00000204
 lbl_fn_8021B2F8_00000200:
@@ -252,7 +252,7 @@ lbl_fn_8021B2F8_00000270:
     addi r4, r26, fn_8021BE80@l
     addi r5, r25, fn_8021BE40@l
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r24)
     b lbl_fn_8021B2F8_000002B8
 lbl_fn_8021B2F8_000002B4:
@@ -302,7 +302,7 @@ lbl_fn_8021B2F8_00000324:
     addi r4, r26, fn_8021BE80@l
     addi r5, r25, fn_8021BE40@l
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r23)
     b lbl_fn_8021B2F8_0000036C
 lbl_fn_8021B2F8_00000368:
@@ -352,7 +352,7 @@ lbl_fn_8021B2F8_000003D8:
     addi r4, r26, fn_8021BE80@l
     addi r5, r25, fn_8021BE40@l
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r22)
     b lbl_fn_8021B2F8_00000420
 lbl_fn_8021B2F8_0000041C:
@@ -402,7 +402,7 @@ lbl_fn_8021B2F8_0000048C:
     addi r4, r26, fn_8021BE80@l
     addi r5, r25, fn_8021BE40@l
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r21)
     b lbl_fn_8021B2F8_000004D4
 lbl_fn_8021B2F8_000004D0:
@@ -452,7 +452,7 @@ lbl_fn_8021B2F8_00000540:
     addi r4, r26, fn_8021BE80@l
     addi r5, r25, fn_8021BE40@l
     li r6, 0xc
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r18)
     b lbl_fn_8021B2F8_00000588
 lbl_fn_8021B2F8_00000584:
@@ -492,7 +492,7 @@ lbl_fn_8021B2F8_000005C4:
     li r6, 0xc
     addi r4, r4, fn_8021BE80@l
     addi r5, r5, fn_8021BE40@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     addi r4, r31, 0x88
     stw r3, 0x4(r4)
     b lbl_fn_8021B2F8_00000620

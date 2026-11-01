@@ -8,7 +8,7 @@ extern void _savegpr_15(void);
 extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void mem_free(void);
 extern void fn_801207CC(void);
 extern void fn_80220168(void);
@@ -1663,7 +1663,7 @@ lbl_fn_802219CC_000015C0:
     li r7, 0x0
     li r8, 0x0
     fmadds f2, f28, f0, f27
-    bl fn_800616C0
+    bl skill_calculateDamage
     addi r18, r21, 0x2
     li r19, 0x0
     li r15, 0x0
@@ -1727,7 +1727,7 @@ lbl_fn_802219CC_000016A8:
     li r8, 0x0
     addi r18, r18, 0x1
     fmadds f2, f28, f0, f27
-    bl fn_800616C0
+    bl skill_calculateDamage
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
     beq lbl_fn_802219CC_00001700
@@ -1781,7 +1781,7 @@ asm void fn_80221CAC(void)
     lfs f6, lbl_80882FF0
     li r7, 0x0
     li r8, 0x0
-    b fn_800616C0
+    b skill_calculateDamage
 }
 
 asm void fn_80221CBC(void)

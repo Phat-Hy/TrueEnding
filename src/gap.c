@@ -17,7 +17,7 @@ extern void fn_80626D50(void);
 extern void fn_80627180(void);
 extern void fn_80627400(void);
 extern void fn_80629810(void);
-extern void fn_80629830(void);
+extern void bta_sys_log(void);
 extern void fn_80629850(void);
 extern void fn_8063450C(void);
 extern void fn_8063472C(void);
@@ -227,7 +227,7 @@ lbl_fn_8063B644_00000108:
     lhz r5, 0x6(r29)
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B5664@l
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8063B644_00000168:
     mr r3, r31
     addi r4, r29, 0x24
@@ -639,7 +639,7 @@ asm void fn_8063BCD4(void)
     mr r5, r29
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B5690@l
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8063BCD4_000006DC:
     lis r3, lbl_808227E0@ha
     li r0, 0x2
@@ -998,7 +998,7 @@ lbl_fn_8063C110_00000B84:
     lis r3, 0xe
     addi r4, r7, 0x3c
     addi r3, r3, 0x3
-    bl fn_80629830
+    bl bta_sys_log
     b lbl_fn_8063C110_00000C5C
 lbl_fn_8063C110_00000BB0:
     lbz r0, 0x28(r8)
@@ -1046,7 +1046,7 @@ lbl_fn_8063C110_00000C34:
     lis r3, 0xe
     addi r4, r7, 0x98
     addi r3, r3, 0x3
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8063C110_00000C5C:
     lwz r12, 0x4(r31)
     cmpwi r12, 0x0
@@ -1185,7 +1185,7 @@ lbl_fn_8063C300_00000E08:
     lis r4, lbl_807B58AC@ha
     addi r3, r3, 0x3
     addi r4, r4, lbl_807B58AC@l
-    bl fn_80629830
+    bl bta_sys_log
 lbl_fn_8063C300_00000E28:
     lhz r0, 0x0(r29)
     clrlwi r0, r0, 24

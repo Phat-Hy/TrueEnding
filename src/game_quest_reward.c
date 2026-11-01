@@ -39,7 +39,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXQuat(void);
 extern void PSMTXMultVec(void);
 extern void strcmp(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 lbl_80737A9C[];
@@ -824,7 +824,7 @@ lbl_fn_80148340_000009B0:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x1
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -985,7 +985,7 @@ lbl_fn_80148340_00000C0C:
     addi r4, r4, fn_80148990@l
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1099,7 +1099,7 @@ lbl_fn_80148340_00000DAC:
     addi r4, r4, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r31)
     mr r29, r3
     cmpwi r0, 0x0

@@ -5,7 +5,7 @@
 extern void fn_8000D3A4(void);
 extern void fn_8000D9E8(void);
 extern void fn_80011034(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80013404(void);
 extern void fn_80063D3C(void);
@@ -1056,7 +1056,7 @@ lbl_fn_802FFFF8_00000D84:
     mr r4, r3
     addi r3, r1, 0x5c
     addi r5, r30, 0x4
-    bl fn_80013338
+    bl vec3_sub
     lfs f0, lbl_80884A20
     addi r3, r1, 0x5c
     stfs f0, 0x60(r1)
@@ -1066,7 +1066,7 @@ lbl_fn_802FFFF8_00000D84:
     addi r3, r1, 0x50
     addi r4, r29, 0x528
     addi r5, r5, 0x4
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x50
     bl fn_801C3910
     fmr f27, f1
@@ -1078,7 +1078,7 @@ lbl_fn_802FFFF8_00000E18:
     mr r4, r3
     addi r3, r1, 0x44
     addi r5, r29, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x44
     bl fn_801C3910
     fmr f31, f1
@@ -1098,7 +1098,7 @@ lbl_fn_802FFFF8_00000E64:
     mr r4, r3
     addi r3, r1, 0x38
     addi r5, r29, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x38
     bl fn_801C3910
     fmr f26, f1
@@ -1163,7 +1163,7 @@ lbl_fn_802FFFF8_00000F44:
     mr r5, r3
     addi r3, r1, 0x14
     addi r4, r4, 0x4
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x14
     bl fn_8000D3A4
     fmr f29, f1
@@ -1173,7 +1173,7 @@ lbl_fn_802FFFF8_00000F44:
     mr r5, r3
     addi r3, r1, 0x8
     addi r4, r4, 0x4
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x8
     bl fn_8000D3A4
     fcmpo cr0, f29, f1

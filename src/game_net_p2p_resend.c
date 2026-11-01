@@ -37,7 +37,7 @@ extern void printf(void);
 extern void strstr(void);
 extern void abort(void);
 extern void std_atan2(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
 
@@ -1790,7 +1790,7 @@ lbl_fn_8051421C_00001868:
     li r6, 0x30
     addi r4, r4, atn_LH_Texture_constructor@l
     addi r5, r5, atn_LH_Texture_destructAndFree@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x40(r26)
     b lbl_fn_8051421C_000018BC
 lbl_fn_8051421C_000018B4:

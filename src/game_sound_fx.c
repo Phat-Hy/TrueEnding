@@ -25,7 +25,7 @@ extern void fn_80097D40(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800EC1F4(void);
 extern void fn_800EC204(void);
 extern void fn_800EC24C(void);
@@ -1727,11 +1727,11 @@ lbl_fn_800EBF1C_000015C0:
     stb r30, 0xd74(r27)
     addi r3, r1, 0xd68
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xd88(r27)
     addi r3, r1, 0xd68
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xd8c(r27)
     addi r3, r1, 0xd68
     bl talk_parseQuotedString
@@ -1743,7 +1743,7 @@ lbl_fn_800EBF1C_000015C0:
     stw r3, 0xd80(r27)
     addi r3, r1, 0xd68
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0xd90(r27)
     addi r3, r1, 0xd68
     bl talk_parseQuotedString

@@ -19,7 +19,7 @@ extern void fn_800A2D20(void);
 extern void fn_800BFAC8(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EC204(void);
@@ -344,7 +344,7 @@ lbl_fn_80244898_000002F4:
     bne lbl_fn_80244898_0000031C
     addi r3, r1, 0x118
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14c0(r28)
     b lbl_fn_80244898_0000051C
 lbl_fn_80244898_0000031C:

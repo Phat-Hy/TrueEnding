@@ -50,7 +50,7 @@ extern void PSVECSquareMag(void);
 extern void printf(void);
 extern void rand(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -784,7 +784,7 @@ lbl_fn_801EB9B0_00000948:
     addi r4, r4, fn_801EBD7C@l
     li r5, 0x0
     li r6, 0x34
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x1630(r19)
     b lbl_fn_801EB9B0_00000998
 lbl_fn_801EB9B0_00000990:

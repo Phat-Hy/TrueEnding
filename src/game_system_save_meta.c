@@ -21,7 +21,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8011F91C(void);
 extern void fn_80121F00(void);
@@ -585,7 +585,7 @@ lbl_fn_80345BA8_000005B0:
     bne lbl_fn_80345BA8_000005D8
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1cc8(r29)
     b lbl_fn_80345BA8_00000AC8
 lbl_fn_80345BA8_000005D8:
@@ -651,7 +651,7 @@ lbl_fn_80345BA8_000006A0:
     bne lbl_fn_80345BA8_000006C8
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1cd8(r29)
     b lbl_fn_80345BA8_00000AC8
 lbl_fn_80345BA8_000006C8:
@@ -673,7 +673,7 @@ lbl_fn_80345BA8_000006F0:
     bne lbl_fn_80345BA8_00000718
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1ce0(r29)
     b lbl_fn_80345BA8_00000AC8
 lbl_fn_80345BA8_00000718:
@@ -684,7 +684,7 @@ lbl_fn_80345BA8_00000718:
     bne lbl_fn_80345BA8_00000740
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1ce4(r29)
     b lbl_fn_80345BA8_00000AC8
 lbl_fn_80345BA8_00000740:
@@ -695,7 +695,7 @@ lbl_fn_80345BA8_00000740:
     bne lbl_fn_80345BA8_00000768
     addi r3, r1, 0x10
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x1ce8(r29)
     b lbl_fn_80345BA8_00000AC8
 lbl_fn_80345BA8_00000768:

@@ -29,7 +29,7 @@ extern void fn_80545088(void);
 extern void fn_80545C40(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void memmove(void);
 
 /* External data declarations */
@@ -1710,7 +1710,7 @@ asm void fn_80543C04(void)
     addi r4, r4, fn_8000FAE4@l
     li r5, 0x0
     li r6, 0x2c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r30, r3
     b lbl_fn_80543C04_000015F4
 lbl_fn_80543C04_000015F0:
@@ -2025,7 +2025,7 @@ asm void fn_80544074(void)
     addi r4, r4, fn_80544294@l
     li r5, 0x0
     li r6, 0x10
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r28, r3
     b lbl_fn_80544074_00001A6C
 lbl_fn_80544074_00001A68:

@@ -32,7 +32,7 @@ extern void fn_800CB6F8(void);
 extern void fn_800CFDA0(void);
 extern void fn_800CFDC8(void);
 extern void fn_800D0AB0(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_8021FFB0(void);
 extern void fn_803CC6B4(void);
@@ -1553,7 +1553,7 @@ asm void fn_803EBC44(void)
     stfs f0, 0xc(r29)
     stfs f1, 0x18(r1)
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x10(r29)
     lwz r3, 0x0(r29)
     lbz r0, 0x4d(r3)

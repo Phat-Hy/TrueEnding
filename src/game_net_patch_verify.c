@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void __files(void);
 extern void dtor_80084684(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_80042740(void);
 extern void fn_80057A64(void);
 extern void fn_8006CA80(void);
@@ -2083,10 +2083,10 @@ asm void fn_8053D0F8(void)
     lis r31, lbl_807C7030@ha
     addi r3, r28, 0x9c
     addi r4, r31, lbl_807C7030@l
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r28, 0xa8
     addi r4, r31, lbl_807C7030@l
-    bl fn_8000D124
+    bl vec3_copy
     stw r30, 0x1b0(r28)
     addi r31, r28, 0x1f0
     li r29, 0x0

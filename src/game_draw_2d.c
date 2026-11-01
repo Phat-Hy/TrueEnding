@@ -20,7 +20,7 @@ extern void fn_800763FC(void);
 extern void gx_setRenderStateParam(void);
 extern void fn_800848B4(void);
 extern void mem_getAllocSize(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -164,7 +164,7 @@ asm void fn_800B23C8(void)
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80880EFC
     mr r3, r30
     lfs f2, lbl_80880EF4

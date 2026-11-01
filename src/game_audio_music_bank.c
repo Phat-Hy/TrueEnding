@@ -7,17 +7,17 @@ extern void _restgpr_26(void);
 extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_800109E0(void);
 extern void fn_80011034(void);
 extern void fn_80011410(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80013410(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void fn_80063764(void);
 extern void fn_8007708C(void);
-extern void fn_800874C8(void);
+extern void route_findNextWaypoint(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
@@ -190,7 +190,7 @@ lbl_fn_8030A6A0_000000C4:
     li r8, 0x1
     li r9, 0x0
     li r10, 0x0
-    bl fn_800874C8
+    bl route_findNextWaypoint
     lfs f1, lbl_80884BB8
     mr r3, r30
     lfs f2, lbl_80884BBC
@@ -807,7 +807,7 @@ lbl_fn_8030AF10_0000095C:
     fadds f2, f29, f0
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     addi r26, r26, 0x1
     addi r25, r25, 0xa
     cmpwi r26, 0x3
@@ -987,7 +987,7 @@ lbl_fn_8030AF10_00000B8C:
     addi r3, r1, 0x1c
     addi r4, r1, 0x10
     addi r5, r31, 0x534
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x28
     addi r4, r1, 0x1c
     bl fn_800F7FD8
@@ -1016,7 +1016,7 @@ lbl_fn_8030AF10_00000B8C:
     li r7, 0x1
     lfs f6, lbl_80884BAC
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     addi r24, r24, 0x1
     addi r26, r26, 0x8
     cmpwi r24, 0x4
@@ -1306,7 +1306,7 @@ lbl_fn_8030B74C_00001108:
     addi r3, r1, 0x64
     addi r4, r1, 0x70
     addi r5, r30, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x64
     bl fn_800F7FF0
     addi r3, r1, 0x58
@@ -1314,19 +1314,19 @@ lbl_fn_8030B74C_00001108:
     bl fn_80011034
     addi r3, r30, 0x528
     addi r4, r1, 0x70
-    bl fn_8000D124
+    bl vec3_copy
     mr r5, r31
     addi r3, r1, 0x4c
     addi r4, r31, 0xc
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x40
     addi r4, r31, 0x18
     addi r5, r31, 0xc
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x34
     addi r4, r31, 0x24
     addi r5, r31, 0x18
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x4c
     bl fn_801162A0
     lfs f0, lbl_80884C10
@@ -1334,7 +1334,7 @@ lbl_fn_8030B74C_00001108:
     bge lbl_fn_8030B74C_0000118C
     addi r3, r1, 0x4c
     addi r4, r1, 0x40
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_8030B74C_0000118C:
     addi r3, r1, 0x34
     bl fn_801162A0
@@ -1343,7 +1343,7 @@ lbl_fn_8030B74C_0000118C:
     bge lbl_fn_8030B74C_000011AC
     addi r3, r1, 0x34
     addi r4, r1, 0x40
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_8030B74C_000011AC:
     addi r3, r1, 0x4c
     bl fn_800F7FF0

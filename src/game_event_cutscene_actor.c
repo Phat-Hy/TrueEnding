@@ -94,7 +94,7 @@ extern void wmemcpy(void);
 extern void wmemcmp(void);
 extern void fn_80686A48(void);
 extern void fn_806952C4(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -1939,7 +1939,7 @@ lbl_cutscene_actor_updatePose_000018D0:
     li r6, 0x14
     addi r5, r5, fn_800C622C@l
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x8(r30)
     mr r26, r3
     cmpwi r0, 0x0
@@ -2112,7 +2112,7 @@ lbl_cutscene_actor_updatePose_00001B2C:
     li r6, 0x14
     addi r4, r4, atn_TaskEntry_zeroInit@l
     addi r5, r5, fn_800C622C@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x8(r30)
     mr r23, r3
     cmpwi r0, 0x0

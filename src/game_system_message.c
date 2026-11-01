@@ -27,7 +27,7 @@ extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
 extern void strncmp(void);
 extern void atoi(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void strchr(void);
 extern u32 strlen(const char* str);
 
@@ -994,7 +994,7 @@ lbl_fn_802130BC_00000CC4:
     li r6, 0x18
     addi r4, r4, fn_802137DC@l
     addi r5, r5, fn_80213A98@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, lbl_8087F238
     mr r4, r31
     lwz r12, 0x28(r1)
@@ -1074,7 +1074,7 @@ lbl_fn_802130BC_00000E0C:
     li r5, 0x0
     li r6, 0x10
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x14(r30)
     mr r25, r3
     cmpwi r0, 0x0
@@ -1233,7 +1233,7 @@ lbl_fn_802130BC_0000105C:
     addi r4, r28, fn_80213A7C@l
     li r5, 0x0
     li r6, 0x10
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x14(r30)
     mr r24, r3
     cmpwi r0, 0x0
@@ -1434,7 +1434,7 @@ asm void fn_802137DC(void)
     addi r4, r4, fn_80213A7C@l
     li r6, 0x10
     li r7, 0x2
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x14(r30)
     mr r31, r3
     cmpwi r0, 0x0

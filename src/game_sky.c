@@ -83,7 +83,7 @@ extern u32 lbl_80881290;
 /* Function declarations */
 void fn_800DC12C(void);
 void fn_800DC1DC(void);
-void fn_800DC288(void);
+void str_skipWhitespace(void);
 void fn_800DC3C8(void);
 void fn_800DC3CC(void);
 void fn_800DC500(void);
@@ -221,57 +221,57 @@ lbl_fn_800DC1DC_0000013C:
     blr
 }
 
-asm void fn_800DC288(void)
+asm void str_skipWhitespace(void)
 {
     nofralloc
-    b lbl_fn_800DC288_00000160
-lbl_fn_800DC288_00000160:
+    b lbl_str_skipWhitespace_00000160
+lbl_str_skipWhitespace_00000160:
     lis r5, lbl_80734870@ha
     stwu r1, -0x10(r1)
     addi r5, r5, lbl_80734870@l
-    b lbl_fn_800DC288_00000174
-lbl_fn_800DC288_00000170:
+    b lbl_str_skipWhitespace_00000174
+lbl_str_skipWhitespace_00000170:
     addi r3, r3, 0x1
-lbl_fn_800DC288_00000174:
+lbl_str_skipWhitespace_00000174:
     lbz r6, 0x0(r3)
     extsb r4, r6
     cmpwi r4, 0x20
-    beq lbl_fn_800DC288_00000170
+    beq lbl_str_skipWhitespace_00000170
     subi r0, r6, 0x30
     li r7, 0x0
     clrlwi r0, r0, 24
     cmplwi r0, 0x9
-    ble lbl_fn_800DC288_000001B0
+    ble lbl_str_skipWhitespace_000001B0
     cmpwi r4, 0x2d
-    beq lbl_fn_800DC288_000001B0
+    beq lbl_str_skipWhitespace_000001B0
     cmpwi r4, 0x2e
-    beq lbl_fn_800DC288_000001B0
+    beq lbl_str_skipWhitespace_000001B0
     lfs f1, lbl_80881258
-    b lbl_fn_800DC288_00000294
-lbl_fn_800DC288_000001B0:
+    b lbl_str_skipWhitespace_00000294
+lbl_str_skipWhitespace_000001B0:
     lfd f5, 0x8(r5)
     extsb r0, r6
     cmpwi r0, 0x2d
     lfd f4, 0x0(r5)
     fmr f6, f5
     li r6, 0x0
-    bne lbl_fn_800DC288_000001D4
+    bne lbl_str_skipWhitespace_000001D4
     lfd f5, 0x10(r5)
     li r7, 0x1
-lbl_fn_800DC288_000001D4:
+lbl_str_skipWhitespace_000001D4:
     lfd f2, 0x20(r5)
     add r3, r3, r7
     lfd f1, 0x28(r5)
     lis r4, 0x4330
     lfd f3, 0x18(r5)
-    b lbl_fn_800DC288_0000025C
-lbl_fn_800DC288_000001EC:
+    b lbl_str_skipWhitespace_0000025C
+lbl_str_skipWhitespace_000001EC:
     li r6, 0x1
     addi r3, r3, 0x1
-    b lbl_fn_800DC288_0000025C
-lbl_fn_800DC288_000001F8:
+    b lbl_str_skipWhitespace_0000025C
+lbl_str_skipWhitespace_000001F8:
     cmpwi r6, 0x0
-    bne lbl_fn_800DC288_00000230
+    bne lbl_str_skipWhitespace_00000230
     lbz r0, 0x0(r3)
     fmul f4, f4, f3
     stw r4, 0x8(r1)
@@ -283,8 +283,8 @@ lbl_fn_800DC288_000001F8:
     lfd f0, 0x8(r1)
     fsubs f0, f0, f1
     fadd f4, f4, f0
-    b lbl_fn_800DC288_0000025C
-lbl_fn_800DC288_00000230:
+    b lbl_str_skipWhitespace_0000025C
+lbl_str_skipWhitespace_00000230:
     lbz r0, 0x0(r3)
     fmul f6, f6, f2
     stw r4, 0x8(r1)
@@ -296,22 +296,22 @@ lbl_fn_800DC288_00000230:
     lfd f0, 0x8(r1)
     fsubs f0, f0, f1
     fmadd f4, f6, f0, f4
-lbl_fn_800DC288_0000025C:
+lbl_str_skipWhitespace_0000025C:
     lbz r5, 0x0(r3)
     subi r0, r5, 0x30
     clrlwi r0, r0, 24
     cmplwi r0, 0x9
-    ble lbl_fn_800DC288_000001F8
+    ble lbl_str_skipWhitespace_000001F8
     extsb r0, r5
     cmpwi r0, 0x2e
-    beq lbl_fn_800DC288_000001EC
+    beq lbl_str_skipWhitespace_000001EC
     fmul f1, f4, f5
     lfs f0, lbl_8088125C
     frsp f1, f1
     fcmpu cr0, f0, f1
-    bne lbl_fn_800DC288_00000294
+    bne lbl_str_skipWhitespace_00000294
     lfs f1, lbl_80881258
-lbl_fn_800DC288_00000294:
+lbl_str_skipWhitespace_00000294:
     addi r1, r1, 0x10
     blr
 }

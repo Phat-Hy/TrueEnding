@@ -25,7 +25,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_80116FC0(void);
 extern void magic_dispatchActionCommand(void);
@@ -57,7 +57,7 @@ extern void fn_8067E23C(void);
 extern void printf(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -926,7 +926,7 @@ lbl_fn_805BCF08_00000B5C:
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r4)
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x70(r28)
     addi r3, r1, 0x58
     bl talk_parseQuotedString
@@ -1418,7 +1418,7 @@ lbl_fn_805BD4BC_0000121C:
     li r6, 0xc
     addi r4, r4, fn_8021A4CC@l
     addi r5, r19, dtor_80013D60@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r0, r3
     lwz r3, 0x1c(r31)
     addi r4, r19, dtor_80013D60@l

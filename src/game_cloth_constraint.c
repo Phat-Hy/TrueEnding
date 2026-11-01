@@ -6,7 +6,7 @@ extern void _restgpr_19(void);
 extern void _savegpr_19(void);
 extern void fn_8000D3A4(void);
 extern void fn_8001047C(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_8004ED34(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -937,7 +937,7 @@ asm void fn_8027F504(void)
     addi r3, r1, 0x8
     addi r4, r1, 0x14
     addi r5, r31, 0x528
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x8
     bl fn_8000D3A4
     lwz r0, 0x14e4(r31)

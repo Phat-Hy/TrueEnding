@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void fn_8004B338(void);
 extern void item_useConsumable(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void actor_setState(void);
@@ -263,7 +263,7 @@ lbl_fn_8034CF48_0000027C:
     lfs f1, lbl_80885378
     addi r3, r31, 0xb0
     li r4, 0x1
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     stfs f29, 0x538(r31)
     b lbl_fn_8034CF48_000002D4
 lbl_fn_8034CF48_000002A8:
@@ -1003,7 +1003,7 @@ lbl_fn_8034DA0C_00000D5C:
     lfs f1, lbl_80885378
     addi r3, r31, 0xb0
     li r4, 0x1
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     stfs f29, 0x538(r31)
     b lbl_fn_8034DA0C_00000DB4
 lbl_fn_8034DA0C_00000D88:

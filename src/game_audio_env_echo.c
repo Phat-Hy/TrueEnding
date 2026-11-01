@@ -2,12 +2,12 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
 extern void fn_80012C88(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void fn_8004D388(void);
 extern void fn_8004ED34(void);
@@ -971,7 +971,7 @@ lbl_fn_8031958C_00000BE8:
     bl fn_8013C38C
     mr r4, r3
     addi r3, r1, 0xe4
-    bl fn_8000D124
+    bl vec3_copy
     lfs f1, 0xe8(r1)
     addi r3, r1, 0x9c
     lfs f0, lbl_80884DC8
@@ -997,10 +997,10 @@ lbl_fn_8031958C_00000BE8:
     addi r3, r1, 0x90
     addi r4, r1, 0xe4
     addi r5, r1, 0x84
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r31, 0x155c
     addi r4, r1, 0x90
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r31, 0x155c
     bl fn_8000D3A4
     lfs f0, lbl_80884DD0
@@ -1091,12 +1091,12 @@ lbl_fn_8031958C_00000D8C:
     beq lbl_fn_8031958C_00000DFC
     addi r3, r1, 0xe4
     addi r4, r1, 0x184
-    bl fn_8000D124
+    bl vec3_copy
     b lbl_fn_8031958C_00000E08
 lbl_fn_8031958C_00000DFC:
     addi r3, r1, 0xe4
     addi r4, r1, 0xc0
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_8031958C_00000E08:
     lfs f1, 0x5b0(r31)
     addi r3, r1, 0x30
@@ -1109,10 +1109,10 @@ lbl_fn_8031958C_00000E08:
     addi r3, r1, 0x48
     addi r4, r1, 0xe4
     addi r5, r1, 0x3c
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r31, 0x155c
     addi r4, r1, 0x48
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r31, 0x155c
     bl fn_8000D3A4
     lfs f0, lbl_80884DD0

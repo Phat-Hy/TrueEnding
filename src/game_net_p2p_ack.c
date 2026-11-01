@@ -39,7 +39,7 @@ extern void fn_80530D8C(void);
 extern void PSMTXConcat(void);
 extern void PSMTXScale(void);
 extern void PSVECMag(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_806958E0(void);
 extern u32 strlen(const char* str);
 
@@ -1990,7 +1990,7 @@ lbl_fn_805128C4_000019B4:
     addi r4, r4, fn_80512A38@l
     li r6, 0x40
     li r7, 0xd
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r4, 0xd4(r30)
     cmpwi r4, 0x0
     stw r3, 0xd4(r30)

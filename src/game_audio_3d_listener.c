@@ -6,10 +6,10 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D3A4(void);
 extern void fn_80011034(void);
-extern void fn_80013338(void);
+extern void vec3_sub(void);
 extern void fn_80063484(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -758,7 +758,7 @@ lbl_fn_8031E8BC_00000928:
     mr r4, r30
     addi r3, r1, 0x48
     addi r5, r5, 0x30
-    bl fn_80013338
+    bl vec3_sub
     addi r3, r1, 0x48
     bl fn_8000D3A4
     lfs f0, lbl_80884E3C
@@ -814,7 +814,7 @@ lbl_fn_8031E8BC_000009D8:
     lwz r3, 0x34(r29)
     addi r4, r1, 0x24
     addi r3, r3, 0x3c
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_8031E8BC_00000A10:
     lwz r4, 0x34(r29)
     addi r3, r1, 0x58
@@ -857,10 +857,10 @@ lbl_fn_8031E8BC_00000A98:
     bl fn_800CB6E4
     mr r4, r30
     addi r3, r29, 0x10
-    bl fn_8000D124
+    bl vec3_copy
     mr r4, r31
     addi r3, r29, 0x1c
-    bl fn_8000D124
+    bl vec3_copy
 lbl_fn_8031E8BC_00000ABC:
     addi r11, r1, 0xa0
     psq_l f31, 0xa8(r1), 0, 0

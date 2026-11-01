@@ -22,14 +22,14 @@ extern void fn_80087994(void);
 extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097CCC(void);
+extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB5C8(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800EB7A0(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
@@ -951,7 +951,7 @@ lbl_fn_802829DC_00000B44:
     lfs f1, lbl_80883948
     addi r3, r31, 0xb0
     li r4, 0x0
-    bl fn_80097CCC
+    bl cursor_updateSlotState
     lfs f0, lbl_8088394C
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1700,7 +1700,7 @@ lbl_fn_80283004_0000166C:
     bne lbl_fn_80283004_00001694
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x152c(r18)
     b lbl_fn_80283004_00001838
 lbl_fn_80283004_00001694:
@@ -1711,7 +1711,7 @@ lbl_fn_80283004_00001694:
     bne lbl_fn_80283004_000016BC
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x14f0(r18)
     b lbl_fn_80283004_00001838
 lbl_fn_80283004_000016BC:
@@ -1733,7 +1733,7 @@ lbl_fn_80283004_000016E4:
     bne lbl_fn_80283004_0000170C
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x155c(r18)
     b lbl_fn_80283004_00001838
 lbl_fn_80283004_0000170C:
@@ -1744,7 +1744,7 @@ lbl_fn_80283004_0000170C:
     bne lbl_fn_80283004_00001750
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f31, f1
     stfs f0, 0x1534(r18)
     fsubs f0, f0, f28
@@ -1762,7 +1762,7 @@ lbl_fn_80283004_00001750:
     bne lbl_fn_80283004_0000177C
     addi r3, r1, 0x28
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f31, f1
     stfs f0, 0x14f8(r18)
     b lbl_fn_80283004_00001838

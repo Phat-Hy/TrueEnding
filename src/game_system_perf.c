@@ -48,7 +48,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
 extern void strstr(void);
 extern void fn_8068B100(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -1918,7 +1918,7 @@ lbl_fn_80204230_00001884:
     addi r4, r4, fn_8000FAE4@l
     li r5, 0x0
     li r6, 0x2c
-    bl fn_80695720
+    bl runtime_registerStaticObject
     mr r29, r3
     b lbl_fn_80204230_000018D0
 lbl_fn_80204230_000018CC:

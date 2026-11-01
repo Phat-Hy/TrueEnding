@@ -9,7 +9,7 @@ extern void _savegpr_24(void);
 extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void fn_8000D114(void);
-extern void fn_8000D124(void);
+extern void vec3_copy(void);
 extern void fn_8000D9E8(void);
 extern void fn_8000D9F8(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
@@ -1252,10 +1252,10 @@ lbl_fn_80452F14_00000E68:
     lis r30, lbl_807C7030@ha
     addi r3, r31, 0x18ec
     addi r4, r30, lbl_807C7030@l
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r31, 0x18f8
     addi r4, r30, lbl_807C7030@l
-    bl fn_8000D124
+    bl vec3_copy
     addi r3, r31, 0x18bc
     bl fn_8010EDFC
     li r30, 0x0

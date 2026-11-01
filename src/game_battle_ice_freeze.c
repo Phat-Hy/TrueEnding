@@ -26,7 +26,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C1720(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800EF73C(void);
 extern void fn_800EFD04(void);
 extern void fn_800EFDA0(void);
@@ -1569,7 +1569,7 @@ lbl_fn_8041C784_000013B0:
     bl strcpy
     addi r3, r1, 0x108
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r29, 0xf4
     addi r4, r1, 0x8
     li r5, 0x0

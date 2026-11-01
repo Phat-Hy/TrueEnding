@@ -16,14 +16,14 @@ extern void talk_parseQuotedString(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_8006144C(void);
-extern void fn_800616C0(void);
+extern void skill_calculateDamage(void);
 extern void fn_80061824(void);
 extern void fn_8006EF48(void);
 extern void fn_8006F2F0(void);
 extern void mem_free(void);
 extern void mem_getAllocSize(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_801F4728(void);
 extern void fn_801F4998(void);
@@ -144,7 +144,7 @@ asm void spectateView_update(void)
     lfs f6, lbl_80887BB4
     li r7, 0x1
     li r8, 0x0
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f4, lbl_80887C40
     lis r5, 0xff00
     lwz r4, lbl_8087F0A8
@@ -158,7 +158,7 @@ asm void spectateView_update(void)
     lfs f3, lbl_80887C10
     li r8, 0x0
     lfs f6, lbl_80887BB4
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f4, lbl_80887C40
     lis r5, 0xff00
     lwz r4, lbl_8087F0A8
@@ -172,7 +172,7 @@ asm void spectateView_update(void)
     lfs f3, lbl_80887C10
     li r8, 0x0
     lfs f6, lbl_80887BB4
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f4, lbl_80887C40
     lis r5, 0xff00
     lwz r4, lbl_8087F0A8
@@ -186,7 +186,7 @@ asm void spectateView_update(void)
     lfs f3, lbl_80887C10
     li r8, 0x0
     lfs f6, lbl_80887BB4
-    bl fn_800616C0
+    bl skill_calculateDamage
     lfs f4, lbl_80887C40
     li r5, -0x1
     lwz r4, lbl_8087F0A8
@@ -200,7 +200,7 @@ asm void spectateView_update(void)
     lfs f3, lbl_80887C10
     li r8, 0x0
     lfs f6, lbl_80887BB4
-    bl fn_800616C0
+    bl skill_calculateDamage
 lbl_spectateView_update_000001A8:
     lwz r3, 0x434(r30)
     cmpwi r3, 0x0
@@ -761,15 +761,15 @@ lbl_spectateView_renderInterface_0000099C:
     bne lbl_spectateView_renderInterface_000009EC
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x440(r15)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x444(r15)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x448(r15)
     b lbl_spectateView_renderInterface_000012DC
 lbl_spectateView_renderInterface_000009EC:
@@ -780,15 +780,15 @@ lbl_spectateView_renderInterface_000009EC:
     bne lbl_spectateView_renderInterface_00000A34
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x44c(r15)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x450(r15)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x454(r15)
     b lbl_spectateView_renderInterface_000012DC
 lbl_spectateView_renderInterface_00000A34:
@@ -799,7 +799,7 @@ lbl_spectateView_renderInterface_00000A34:
     bne lbl_spectateView_renderInterface_00000A60
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f31, f1
     stfs f0, 0x458(r15)
     b lbl_spectateView_renderInterface_000012DC
@@ -811,7 +811,7 @@ lbl_spectateView_renderInterface_00000A60:
     bne lbl_spectateView_renderInterface_00000A88
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x45c(r15)
     b lbl_spectateView_renderInterface_000012DC
 lbl_spectateView_renderInterface_00000A88:
@@ -822,15 +822,15 @@ lbl_spectateView_renderInterface_00000A88:
     bne lbl_spectateView_renderInterface_00000AD0
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x460(r15)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x464(r15)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x468(r15)
     b lbl_spectateView_renderInterface_000012DC
 lbl_spectateView_renderInterface_00000AD0:
@@ -841,15 +841,15 @@ lbl_spectateView_renderInterface_00000AD0:
     bne lbl_spectateView_renderInterface_00000B18
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x46c(r15)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x470(r15)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x474(r15)
     b lbl_spectateView_renderInterface_000012DC
 lbl_spectateView_renderInterface_00000B18:
@@ -860,7 +860,7 @@ lbl_spectateView_renderInterface_00000B18:
     bne lbl_spectateView_renderInterface_00000B44
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f31, f1
     stfs f0, 0x478(r15)
     b lbl_spectateView_renderInterface_000012DC
@@ -872,7 +872,7 @@ lbl_spectateView_renderInterface_00000B44:
     bne lbl_spectateView_renderInterface_00000B6C
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x47c(r15)
     b lbl_spectateView_renderInterface_000012DC
 lbl_spectateView_renderInterface_00000B6C:
@@ -883,15 +883,15 @@ lbl_spectateView_renderInterface_00000B6C:
     bne lbl_spectateView_renderInterface_00000BB4
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x480(r15)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x484(r15)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x488(r15)
     b lbl_spectateView_renderInterface_000012DC
 lbl_spectateView_renderInterface_00000BB4:
@@ -902,15 +902,15 @@ lbl_spectateView_renderInterface_00000BB4:
     bne lbl_spectateView_renderInterface_00000BFC
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x48c(r15)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x490(r15)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x494(r15)
     b lbl_spectateView_renderInterface_000012DC
 lbl_spectateView_renderInterface_00000BFC:
@@ -921,7 +921,7 @@ lbl_spectateView_renderInterface_00000BFC:
     bne lbl_spectateView_renderInterface_00000C28
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f0, f31, f1
     stfs f0, 0x498(r15)
     b lbl_spectateView_renderInterface_000012DC
@@ -933,7 +933,7 @@ lbl_spectateView_renderInterface_00000C28:
     bne lbl_spectateView_renderInterface_00000C50
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x49c(r15)
     b lbl_spectateView_renderInterface_000012DC
 lbl_spectateView_renderInterface_00000C50:
@@ -1008,7 +1008,7 @@ lbl_spectateView_renderInterface_00000D20:
     srwi r0, r0, 5
     stw r0, 0x410(r15)
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     stfs f1, 0x430(r15)
     b lbl_spectateView_renderInterface_000012DC
 lbl_spectateView_renderInterface_00000D64:
@@ -1223,7 +1223,7 @@ lbl_spectateView_renderInterface_0000104C:
     stw r3, 0x20(r1)
     addi r3, r1, 0x50
     bl talk_parseQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     lwz r4, 0x2e8(r15)
     lwz r3, 0x2ec(r15)
     stfs f1, 0x24(r1)

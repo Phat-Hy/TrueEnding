@@ -43,7 +43,7 @@ extern void fn_80097E80(void);
 extern void fn_80099E9C(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_destructor(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800F29D0(void);
 extern void fn_8011D394(void);
 extern void fn_8011D424(void);
@@ -1544,7 +1544,7 @@ lbl_fn_801371AC_0000130C:
     bne lbl_fn_801371AC_00001368
     addi r3, r1, 0x870
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r17, 0xb0
     addi r4, r1, 0x270
     li r5, 0x0
@@ -1553,7 +1553,7 @@ lbl_fn_801371AC_0000130C:
 lbl_fn_801371AC_00001368:
     addi r3, r1, 0x870
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r17, 0xb0
     addi r4, r1, 0x270
     addi r5, r1, 0x770
@@ -1593,7 +1593,7 @@ lbl_fn_801371AC_000013CC:
     bne lbl_fn_801371AC_0000141C
     addi r3, r1, 0x870
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r17, 0xb0
     addi r4, r1, 0x170
     li r5, 0x0
@@ -1602,7 +1602,7 @@ lbl_fn_801371AC_000013CC:
 lbl_fn_801371AC_0000141C:
     addi r3, r1, 0x870
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r17, 0xb0
     addi r4, r1, 0x170
     addi r5, r1, 0x770
@@ -1642,7 +1642,7 @@ lbl_fn_801371AC_00001480:
     bne lbl_fn_801371AC_000014D0
     addi r3, r1, 0x870
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r17, 0xb0
     addi r4, r1, 0x70
     li r5, 0x0
@@ -1651,7 +1651,7 @@ lbl_fn_801371AC_00001480:
 lbl_fn_801371AC_000014D0:
     addi r3, r1, 0x870
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     addi r3, r17, 0xb0
     addi r4, r1, 0x70
     addi r5, r1, 0x770

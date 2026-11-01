@@ -28,7 +28,7 @@ extern void fn_805BDCC0(void);
 extern void fn_805BF414(void);
 extern void printf(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 
 /* External data declarations */
@@ -1878,7 +1878,7 @@ lbl_fn_8052F890_00001A74:
     li r6, 0x30
     addi r4, r4, atn_LH_Texture_constructor@l
     addi r5, r5, atn_LH_Texture_destructAndFree@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x40(r26)
     b lbl_fn_8052F890_00001AC8
 lbl_fn_8052F890_00001AC0:

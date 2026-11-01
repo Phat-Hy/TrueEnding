@@ -26,7 +26,7 @@ extern void fn_800A1B84(void);
 extern void fn_800A1CE4(void);
 extern void fn_800A1E24(void);
 extern void fn_800A1F84(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC500(void);
 extern void fn_800DC6B4(void);
 extern void fn_802376D0(void);
@@ -285,7 +285,7 @@ lbl_fn_800A005C_000002D4:
     bl sprintf
     addi r3, r1, 0x430
     bl talk_formatQuotedString
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmuls f1, f31, f1
     addi r3, r30, 0x10
     addi r4, r1, 0x130

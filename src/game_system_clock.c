@@ -42,7 +42,7 @@ extern void fn_80201DE8(void);
 extern void printf(void);
 extern void fn_80686A48(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern void fn_80695D84(void);
 
@@ -1076,7 +1076,7 @@ lbl_player_clock_updateIntervals_00000DA0:
     addi r4, r4, fn_80201DC4@l
     li r5, 0x0
     li r6, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x6c(r30)
     b lbl_player_clock_updateIntervals_00000DF0
 lbl_player_clock_updateIntervals_00000DE8:
@@ -1115,7 +1115,7 @@ lbl_player_clock_updateIntervals_00000E30:
     addi r4, r4, profile_initMetric@l
     li r5, 0x0
     li r6, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x74(r30)
     b lbl_player_clock_updateIntervals_00000E80
 lbl_player_clock_updateIntervals_00000E78:
@@ -1155,7 +1155,7 @@ lbl_player_clock_updateIntervals_00000EC0:
     li r6, 0x10
     addi r4, r4, fn_80201DE8@l
     addi r5, r5, fn_801EEF04@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x7c(r30)
     b lbl_player_clock_updateIntervals_00000F14
 lbl_player_clock_updateIntervals_00000F0C:
@@ -1194,7 +1194,7 @@ lbl_player_clock_updateIntervals_00000F54:
     addi r4, r4, fn_801EFAB8@l
     li r5, 0x0
     li r6, 0x10
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x8c(r30)
     b lbl_player_clock_updateIntervals_00000FA4
 lbl_player_clock_updateIntervals_00000F9C:

@@ -62,7 +62,7 @@ extern void fn_806823B0(void);
 extern void strstr(void);
 extern void fn_80686A48(void);
 extern void abort(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern u32 strlen(const char* str);
 
@@ -200,7 +200,7 @@ lbl_fn_8046B798_00000124:
     li r6, 0x54
     addi r4, r4, fn_8046BB60@l
     addi r5, r5, fn_8046A514@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x9c(r25)
     b lbl_fn_8046B798_00000178
 lbl_fn_8046B798_00000170:
@@ -891,7 +891,7 @@ asm void fn_8046C1C8(void)
     li r5, 0x0
     addi r6, r6, 0xb8
     li r7, 0x2
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x10(r30)
 lbl_fn_8046C1C8_00000AE0:
     stw r30, lbl_8087F510
@@ -1388,7 +1388,7 @@ lbl_atn_Arc_decompressChunk_0000115C:
     li r5, 0x0
     addi r6, r6, 0xb8
     li r7, 0x2
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x10(r20)
 lbl_atn_Arc_decompressChunk_000011F4:
     stw r20, lbl_8087F510

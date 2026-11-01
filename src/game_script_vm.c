@@ -22,7 +22,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
-extern void fn_800DC288(void);
+extern void str_skipWhitespace(void);
 extern void fn_800DC6B4(void);
 extern void fn_800E0CF0(void);
 extern void fn_800E0D54(void);
@@ -55,7 +55,7 @@ extern void fn_8068BD60(void);
 extern void fn_8068C240(void);
 extern void fn_806920C0(void);
 extern void fn_806952C4(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 extern void fn_80695A50(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -1511,7 +1511,7 @@ lbl_fn_802438D4_00001200:
     li r4, 0x0
     bl fn_800E114C
     bl fn_8004212C
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
     mr r4, r27
@@ -1521,7 +1521,7 @@ lbl_fn_802438D4_00001200:
     li r4, 0x1
     bl fn_800E114C
     bl fn_8004212C
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
     mr r4, r27
@@ -1531,7 +1531,7 @@ lbl_fn_802438D4_00001200:
     li r4, 0x2
     bl fn_800E114C
     bl fn_8004212C
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
     mr r4, r27
@@ -1548,7 +1548,7 @@ lbl_fn_802438D4_00001290:
     li r4, 0x0
     bl fn_800E114C
     bl fn_8004212C
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
     mr r4, r27
@@ -1558,7 +1558,7 @@ lbl_fn_802438D4_00001290:
     li r4, 0x1
     bl fn_800E114C
     bl fn_8004212C
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
     mr r4, r27
@@ -1568,7 +1568,7 @@ lbl_fn_802438D4_00001290:
     li r4, 0x2
     bl fn_800E114C
     bl fn_8004212C
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
     mr r4, r27
@@ -1590,7 +1590,7 @@ lbl_fn_802438D4_00001334:
     li r4, 0x0
     bl fn_800E114C
     bl fn_8004212C
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
     mr r4, r27
@@ -1607,7 +1607,7 @@ lbl_fn_802438D4_00001374:
     li r4, 0x0
     bl fn_800E114C
     bl fn_8004212C
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
     mr r4, r27
@@ -1617,7 +1617,7 @@ lbl_fn_802438D4_00001374:
     li r4, 0x1
     bl fn_800E114C
     bl fn_8004212C
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
     mr r4, r27
@@ -1627,7 +1627,7 @@ lbl_fn_802438D4_00001374:
     li r4, 0x2
     bl fn_800E114C
     bl fn_8004212C
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
     mr r4, r27
@@ -1637,7 +1637,7 @@ lbl_fn_802438D4_00001374:
     li r4, 0x3
     bl fn_800E114C
     bl fn_8004212C
-    bl fn_800DC288
+    bl str_skipWhitespace
     fmr f31, f1
     mr r3, r24
     mr r4, r27
@@ -1881,7 +1881,7 @@ lbl_fn_80243FAC_00001714:
     li r6, 0x54
     addi r4, r4, fn_8024405C@l
     addi r5, r5, fn_80243758@l
-    bl fn_80695720
+    bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_80243FAC_00001768
 lbl_fn_80243FAC_00001760:

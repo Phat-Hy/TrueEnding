@@ -62,7 +62,7 @@ extern void PSVECMag(void);
 extern void rand(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_80695720(void);
+extern void runtime_registerStaticObject(void);
 
 /* External data declarations */
 extern u8 jumptable_80786510[];
@@ -912,7 +912,7 @@ lbl_fn_802BBCDC_00000B28:
     li r5, 0x0
     li r6, 0x14
     li r7, 0x8
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r22)
     mr r26, r3
     cmpwi r0, 0x0
@@ -1025,7 +1025,7 @@ lbl_fn_802BBCDC_00000CC0:
     addi r4, r31, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
-    bl fn_80695720
+    bl runtime_registerStaticObject
     lwz r0, 0x62c(r22)
     mr r24, r3
     cmpwi r0, 0x0
