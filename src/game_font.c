@@ -14,7 +14,7 @@ extern void fn_800827E0(void);
 extern void fn_800838B8(void);
 extern void fn_80083AD4(void);
 extern void fn_80084320(void);
-extern void fn_800A500C(void);
+extern void fn_800A500C(void* res, void* font, u32 mode);
 extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
@@ -34,7 +34,7 @@ extern void fn_8061EC60(void);
 extern void fn_8061EF10(void);
 extern void fn_8061EF90(void);
 extern void fn_8061F460(void);
-extern void fn_8061F470(void);
+extern void* fn_8061F470(const char* str);
 extern void fn_8061F9F0(void);
 extern void fn_8061FBE0(void);
 extern void fn_80620220(void);
@@ -71,13 +71,13 @@ extern u32 lbl_80880CAC;
 
 /* Function declarations */
 void fn_800A291C(void);
-void font_drawTextCenter(void);
-void font_drawTextLeft(void);
-void font_drawTextRight(void);
-void fn_800A2A2C(void);
-void fn_800A2A68(void);
-void fn_800A2AA4(void);
-void fn_800A2AE0(void);
+void font_drawTextCenter(void* font, const char* str);
+void font_drawTextLeft(void* font, const char* str);
+void font_drawTextRight(void* font, const char* str);
+void fn_800A2A2C(void* font, const char* str);
+void fn_800A2A68(void* font, const char* str);
+void fn_800A2AA4(void* font, const char* str);
+void fn_800A2AE0(void* font, const char* str);
 void fn_800A2B1C(void);
 void fn_800A2B58(void);
 void fn_800A2B94(void);
@@ -131,144 +131,39 @@ asm void fn_800A291C(void)
     blr
 }
 
-asm void font_drawTextCenter(void)
+void font_drawTextCenter(void* font, const char* str)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    mr r3, r4
-    bl fn_8061F470
-    mr r4, r31
-    li r5, 0x3
-    bl fn_800A500C
-    lwz r0, 0x14(r1)
-    lwz r31, 0xc(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    fn_800A500C(fn_8061F470(str), font, 3);
 }
 
-asm void font_drawTextLeft(void)
+void font_drawTextLeft(void* font, const char* str)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    mr r3, r4
-    bl fn_8061F470
-    mr r4, r31
-    li r5, 0x5
-    bl fn_800A500C
-    lwz r0, 0x14(r1)
-    lwz r31, 0xc(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    fn_800A500C(fn_8061F470(str), font, 5);
 }
 
-asm void font_drawTextRight(void)
+void font_drawTextRight(void* font, const char* str)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    mr r3, r4
-    bl fn_8061F470
-    mr r4, r31
-    li r5, 0x7
-    bl fn_800A500C
-    lwz r0, 0x14(r1)
-    lwz r31, 0xc(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    fn_800A500C(fn_8061F470(str), font, 7);
 }
 
-asm void fn_800A2A2C(void)
+void fn_800A2A2C(void* font, const char* str)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    mr r3, r4
-    bl fn_8061F470
-    mr r4, r31
-    li r5, 0x9
-    bl fn_800A500C
-    lwz r0, 0x14(r1)
-    lwz r31, 0xc(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    fn_800A500C(fn_8061F470(str), font, 9);
 }
 
-asm void fn_800A2A68(void)
+void fn_800A2A68(void* font, const char* str)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    mr r3, r4
-    bl fn_8061F470
-    mr r4, r31
-    li r5, 0xd
-    bl fn_800A500C
-    lwz r0, 0x14(r1)
-    lwz r31, 0xc(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    fn_800A500C(fn_8061F470(str), font, 0xd);
 }
 
-asm void fn_800A2AA4(void)
+void fn_800A2AA4(void* font, const char* str)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    mr r3, r4
-    bl fn_8061F470
-    mr r4, r31
-    li r5, 0xf
-    bl fn_800A500C
-    lwz r0, 0x14(r1)
-    lwz r31, 0xc(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    fn_800A500C(fn_8061F470(str), font, 0xf);
 }
 
-asm void fn_800A2AE0(void)
+void fn_800A2AE0(void* font, const char* str)
 {
-    nofralloc
-    stwu r1, -0x10(r1)
-    mflr r0
-    stw r0, 0x14(r1)
-    stw r31, 0xc(r1)
-    mr r31, r3
-    mr r3, r4
-    bl fn_8061F470
-    mr r4, r31
-    li r5, 0x11
-    bl fn_800A500C
-    lwz r0, 0x14(r1)
-    lwz r31, 0xc(r1)
-    mtlr r0
-    addi r1, r1, 0x10
-    blr
+    fn_800A500C(fn_8061F470(str), font, 0x11);
 }
 
 asm void fn_800A2B1C(void)

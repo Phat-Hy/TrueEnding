@@ -732,3 +732,56 @@ Names applied:
   - font_drawTextRight (fn_800A29F0, 60 B, 1,580 probe hits)
   - saveSlot_readSummary (fn_801F4E8C, 124 B, 2,224 probe hits)
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+
+## Session 2026-11-01 - Conversion: 7 font_drawText functions (420 B) to 100.0% matching C
+Subject:  track-a: decompile 7 font_drawText functions (420 B) to 100.0% matching C progress 99.30% -> 99.30%
+Scope:    Decompile font_drawTextCenter, font_drawTextLeft, font_drawTextRight, fn_800A2A2C, fn_800A2A68, fn_800A2AA4, fn_800A2AE0 (60 B each, 420 B total) in src/game_font.c.
+Checklist:
+  1. src/game_font.c: 7 font text rendering functions converted from inline asm to C.
+  2. All declarations and caller contexts verified self-contained within game_font.c.
+  3. report.json clean, ninja passed (orig/main.dol: OK).
+Self-check: git diff -U0 -- src/ for 'asm void': -7 / +0 (net 7 C conversions).
+Decompiled C logic:
+`c
+void font_drawTextCenter(void* font, const char* str)
+{
+    fn_800A500C(fn_8061F470(str), font, 3);
+}
+
+void font_drawTextLeft(void* font, const char* str)
+{
+    fn_800A500C(fn_8061F470(str), font, 5);
+}
+
+void font_drawTextRight(void* font, const char* str)
+{
+    fn_800A500C(fn_8061F470(str), font, 7);
+}
+
+void fn_800A2A2C(void* font, const char* str)
+{
+    fn_800A500C(fn_8061F470(str), font, 9);
+}
+
+void fn_800A2A68(void* font, const char* str)
+{
+    fn_800A500C(fn_8061F470(str), font, 0xd);
+}
+
+void fn_800A2AA4(void* font, const char* str)
+{
+    fn_800A500C(fn_8061F470(str), font, 0xf);
+}
+
+void fn_800A2AE0(void* font, const char* str)
+{
+    fn_800A500C(fn_8061F470(str), font, 0x11);
+}
+`
+Analysis for Track B:
+- UI font drawing pipeline dispatches strings with specific text alignment modes:
+  - 3: Center alignment
+  - 5: Left alignment
+  - 7: Right alignment
+  - 9, 13, 15, 17: Extended UI text formatting flags
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
