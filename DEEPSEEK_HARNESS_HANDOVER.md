@@ -16041,3 +16041,30 @@ The corner (131.1 vs 127.7), the mean (205.62 vs 203.98) and the absence of satu
 | 6 | aurora, 440..452, 460 frames, display-boundary accumulate | unchanged control: 106-draw feeds, `mean=205.62`, exit 0 |
 | 7 | aurora, 2794..2800, 2 810 frames, display-boundary accumulate | **whole-frame feeds 220/219/207/203**, readback `mean=(10.37,12.72,7.09)`, exit **code 0** in 255 s |
 | 8 | gate, final build | **PASS attempt 1**, 325 s |
+
+### AP-BD addendum to AP-BC. The live path CANNOT be the equality test, quantified: the layer's own neighbouring frames at the gate's content moment differ by **33-48 mean |d|**, so any live-vs-layer number is dominated by frame alignment, not by the renderers - and aurora's readback does not align with the layer at the same counter, which is the AP-AN content gap, measured
+
+AP-BC item 4(b) said the aurora range is "still present-keyed" and lands on the wrong scene. **That is wrong and is corrected here:** the counters agree. In one launch, `TLS_SHOT_FRAMES=2800` with `TLS_SHOT_GUEST=1` writes `d3d11_screenshot_2864.ppm`, i.e. guest 2800 is the present counter's 2864 (the 64 offset AP-AO documented), and `TLS_AURORA_FROM/TO` gate on the **same** `g_runner_current_frame` the shot uses. So the range was never the problem.
+
+**The problem is that the two renderers are not looking at the same instant, and "instant" cannot be inferred from the counter.** One launch captured the layer at four consecutive guest frames *and* fed aurora the same window, then matched aurora's readback against each:
+
+| layer frame (present = guest + 64) | layer luma | **mean &#124;d&#124; vs aurora 2801** | changed > 8 |
+|---|---|---|---|
+| present 2862 (guest 2798) | **1.95** (a black frame) | **11.82** | 21.1 % |
+| present 2863 (guest 2799) | 40.69 (cave) | 46.39 | 96.4 % |
+| present 2864 (guest 2800) - the gate's content frame | 35.64 (cave) | 33.37 | 87.9 % |
+| present 2865 (guest 2801) | 43.17 (cave) | 48.80 | 96.4 % |
+
+Two facts follow, and both matter more than the numbers themselves.
+
+1. **The layer's own neighbouring frames differ by 33-48 mean |d|** (`2863` vs `2864` vs `2865` are the same cave at luma 40.7 / 35.6 / 43.2). For comparison: the *validated* same-capture pair agrees to **1.79** (AP-AY §13) and the whole point of that pair is that both pictures come from one recorded stream. So a live-vs-layer `mean |d|` of 33 cannot be attributed to the renderers: a one-frame misalignment alone produces more than that. **This is the quantitative version of AP-AY §15's "a double-render measurement is a boundary test, never an equality test", and it is the reason the harness stays the equality instrument.**
+2. **Aurora's readback is closest to the layer's black frame (11.82 / 21.1 %), not to the three cave frames (33-49 / 88-96 %).** That is the **AP-AN content gap** seen from the other side: at this moment aurora renders a mostly-empty frame (86.09 % of its pixels are below luma 20, and the only content it does draw is a dialogue subtitle that the layer's cave frame does not contain at all). The feed is whole-frame now (AP-BC), so this is not a half-frame artefact - it is missing content in the payload, which is exactly what AP-AN measured as "68 % of that copy's texels are still zero".
+
+**What this changes for the plan.** P1's equality criterion must be measured on a **single capture replayed by both implementations** (the harness path, `tools/aurora_spike` with `--probe-copy`), never live-against-layer. The live path's job is the boundary (ABI, memory, whole-frame feed, clean exit - all now proven) and a *sanity* picture; its numbers are not evidence of agreement. The next real question is the one AP-AN named: why 68-86 % of aurora's payload is empty, i.e. the texture/first-frame content, not the feed and not the depth state that AP-AY suspected.
+
+**Run log addition to AP-BC's table.**
+
+| # | what | result |
+|---|---|---|
+| 9 | 2 810 frames, `TLS_SHOT_FRAMES=2800` + aurora 2794..2800, one launch | layer `2864` = the Gurgan Cave (luma 35.64); aurora `2801` = `mean=(10.37,12.72,7.09)`; **mean &#124;d&#124; 33.37, 87.9 % changed**; exit code 0 in 256 s |
+| 10 | the same plus shots at guest 2798, 2799, 2800, 2801 | the alignment table above; the layer's own neighbouring frames spread **33-48**, aurora matches the black one best at **11.82** |
