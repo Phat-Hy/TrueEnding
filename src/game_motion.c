@@ -824,10 +824,7 @@ lbl_fn_800BF9C4_000009C4:
     blr
 }
 
-asm void fn_800BFAC4(void)
-{
-    nofralloc
-    blr
+void fn_800BFAC4(void) {
 }
 
 asm void motion_updateFogAdj(void)

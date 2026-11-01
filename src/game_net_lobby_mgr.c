@@ -944,10 +944,7 @@ asm void fn_80498EF8(void)
     b PSMTXScale
 }
 
-asm void fn_80498F08(void)
-{
-    nofralloc
-    blr
+void fn_80498F08(void) {
 }
 
 asm void fn_80498F0C(void)
@@ -976,10 +973,7 @@ asm void fn_80498F14(void)
     blr
 }
 
-asm void fn_80498F4C(void)
-{
-    nofralloc
-    blr
+void fn_80498F4C(void) {
 }
 
 asm void fn_80498F50(void)

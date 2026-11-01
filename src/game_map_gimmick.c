@@ -153,10 +153,7 @@ asm void fn_801856AC(void)
     blr
 }
 
-asm void fn_801856B4(void)
-{
-    nofralloc
-    blr
+void fn_801856B4(void) {
 }
 
 asm void fn_801856B8(void)

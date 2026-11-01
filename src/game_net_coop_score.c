@@ -542,10 +542,7 @@ asm void fn_804ABF34(void)
     b __GXSetVtxDesc
 }
 
-asm void fn_804ABF40(void)
-{
-    nofralloc
-    blr
+void fn_804ABF40(void) {
 }
 
 asm void fn_804ABF44(void)

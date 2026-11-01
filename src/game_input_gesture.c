@@ -1416,10 +1416,7 @@ lbl_fn_802EE20C_000011E8:
     blr
 }
 
-asm void fn_802EE600(void)
-{
-    nofralloc
-    blr
+void fn_802EE600(void) {
 }
 
 asm void fn_802EE604(void)

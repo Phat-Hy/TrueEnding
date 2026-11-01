@@ -1093,10 +1093,7 @@ lbl_fn_800CAE64_00000C50:
     blr
 }
 
-asm void fn_800CB09C(void)
-{
-    nofralloc
-    blr
+void fn_800CB09C(void) {
 }
 
 asm void fn_800CB0A0(void)

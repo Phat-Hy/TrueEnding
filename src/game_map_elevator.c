@@ -1850,10 +1850,7 @@ lbl_fn_8018DD34_0000191C:
     blr
 }
 
-asm void fn_8018E434(void)
-{
-    nofralloc
-    blr
+void fn_8018E434(void) {
 }
 
 asm void fn_8018E438(void)

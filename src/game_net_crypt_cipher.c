@@ -1062,10 +1062,7 @@ lbl_fn_804B50C0_00000C84:
     blr
 }
 
-asm void fn_804B531C(void)
-{
-    nofralloc
-    blr
+void fn_804B531C(void) {
 }
 
 asm void fn_804B5320(void)
