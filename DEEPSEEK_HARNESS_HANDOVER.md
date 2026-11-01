@@ -17126,3 +17126,32 @@ bottleneck any more; the two functions the transition milestone actually needs w
 `docs/TRACK_A_HANDOFF.md` §A2, which asks for their **readable C**, not for more names. A handful of GX
 names in the batch (`GXBegin`, `GXSetTevIndTile`, `GXSetIndTexMatrix`, `__GXFlushPixelEngine`) do help
 renderer probes; the rest is for the milestones after the chapter transition.
+
+**11. The gate never measured SPEED — and a playtest of the shipped binaries says "below 5 fps and a black
+screen". Both are real, and neither is a rendering regression.** Measured on the same binaries that PASS the
+gate (runner `145B9838…`, DLL `6E7D7182…`) by reading the runner's own per-30-frame breakdown:
+
+| phase | CPU (guest) | Gfx/Present | total | fps |
+|---|---|---|---|---|
+| boot/title, frames 30-300 | 10-40 ms | 0.2-0.6 ms | 17-42 ms | 24-60 |
+| field, frames 1500-2100, **aurora** | 137-194 ms | 80-140 ms (25 ms with `--novsync`) | 219-300 ms | **3.3-3.6** |
+| field, same frames, **layer** (`TLS_LAYER=1`) | 74-148 ms | 83-140 ms (25 ms with `--novsync`) | 182-289 ms | **4.9-5.5** |
+| same frames, host quiet (earlier the same night) | 10-28 ms | 0.4-88 ms | 17-142 ms | 6.5-60 |
+
+So: (a) the field is 3-6 fps in **both** renderers, so the bottleneck is the recompiled guest CPU — every
+frame hits the 321 000-block budget — plus a vsync-backed `Present` on the minimized window; (b) the
+promotion costs ~25-35 % on top of that (its per-frame 640x448 EFB readback + blit), which is the
+difference between 5.5 and 3.3 fps; (c) `--novsync` removes 60-100 ms of `Present` and nearly doubles the
+field rate, so `Play_TheLastStory.bat` now passes it; (d) the same binary on the same frames ran **2-5x
+faster earlier the same night** (60 fps capped at boot, 6.5 fps aurora in the field), and the only
+environmental difference found is a Defender QuickScan at 02:31 with real-time protection on — the numbers
+swing ~2x run to run, so an fps number is only meaningful with the host state stated. **The gate needs a
+speed assertion** (e.g. "field frames under N ms"); no such check exists today, so a PASS says nothing
+about whether the game is playable.
+
+**The "black screen" is the boot phase and is legitimate picture content, not a hang.** Screenshots of the
+same presents from both renderers: present 301 luma **0.07 (layer) / 0.16 (aurora)**, 1201 **20.71 /
+45.10**, 2049 **8.87 / 0.00**, 2864 (= guest 2800) **38.20 aurora (the gate reference) / 57.23 layer with
+this shot list**. At 4-5 fps the ~200 boot presents are **1-2 minutes of near-black before the title**, which
+is exactly what a playtest reports as "only a black screen". Recorded so nobody re-diagnoses it: the port is
+not stuck, it is slow, and the gate's PASS says nothing about either number.

@@ -60,4 +60,17 @@ REM frames for measurement), so both are set here and neither is optional for pl
 set TLS_AURORA=1
 set TLS_AURORA_PUBLISH=1
 
-start "" "%~dp0build\recomp\tls_runner.exe" --window --minimized --fps 60 %*
+REM --- AP-BR: fps reality, measured on this laptop (i7-13620H), because the gate only proves the
+REM PICTURE and says nothing about speed. The runner prints its own breakdown every 30 frames:
+REM   "[Runner] Frame N | VBlank .. CPU .. Gfx/Present .. Total .. (FPS)".
+REM   boot/title   frames 30..300     CPU 10-40 ms    24-60 fps
+REM   field        frames 1500..2100  CPU 77-194 ms   3.3 fps aurora / 5.5 fps layer (host busy)
+REM                                                  6.5 fps aurora / 9.9 fps layer (host quiet)
+REM So the Chapter-1 field is single-digit fps here, and the cost is the recompiled guest CPU
+REM (~300 000 blocks/frame), not the renderer: the aurora promotion adds ~25-35 % (a per-frame
+REM 640x448 EFB readback + blit) on top. --novsync is passed because Present on a minimized window
+REM was measured at 80-140 ms with vsync and 24 ms without - nearly doubling the field rate.
+REM If the machine is 2-5x slower than the numbers above, look for a Defender scan: this session
+REM measured the same binary on the same frames running 2-5x faster before a QuickScan started.
+REM Use TLS_LAYER=1 if fps matters more than the reference picture.
+start "" "%~dp0build\recomp\tls_runner.exe" --window --minimized --novsync --fps 60 %*
