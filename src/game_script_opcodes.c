@@ -41,7 +41,7 @@ extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void fn_8015495C(void);
 extern void fn_8016DA4C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_80178208(void);
 extern void fn_80178A6C(void);
@@ -72,7 +72,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void printf(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void abort(void);
 extern void fn_8068AEA4(void);
 extern u32 strlen(const char* str);
@@ -441,7 +441,7 @@ lbl_fn_80244898_0000044C:
     bne lbl_fn_80244898_00000488
     addi r3, r1, 0x118
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x2
     stw r3, 0x14b8(r28)
     bne lbl_fn_80244898_0000051C
@@ -1278,7 +1278,7 @@ lbl_fn_80245340_00000FC4:
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lis r5, lbl_8074320C@ha
     li r3, 0x34
     addi r5, r5, lbl_8074320C@l
@@ -1327,7 +1327,7 @@ lbl_fn_80245340_00001084:
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_80245340_000011FC
     lfs f28, 0x2e4(r31)
     addi r3, r31, 0xb0
@@ -1355,7 +1355,7 @@ lbl_fn_80245340_00001084:
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_80245340_000011FC
     lwz r3, lbl_8087EFA8
     lfs f3, 0x156c(r31)
@@ -1398,7 +1398,7 @@ lbl_fn_80245340_000011C8:
     beq lbl_fn_80245340_000011E0
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_80245340_000011E0:
     mr r3, r31
     bl fn_80245F14

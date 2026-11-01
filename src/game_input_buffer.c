@@ -19,7 +19,7 @@ extern void fn_8013CB68(void);
 extern void fn_80144710(void);
 extern void dialog_renderWindow(void);
 extern void fn_80151448(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
 extern void fn_801781B0(void);
@@ -379,7 +379,7 @@ lbl_fn_802E9FC8_000003FC:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f1, lbl_808847A8
     li r30, 0x1
     lfs f0, lbl_808847AC
@@ -702,7 +702,7 @@ lbl_fn_802EA490_000008A0:
     mr r3, r31
     li r4, 0x6
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808847AC
     li r3, 0x4
     li r0, 0x1
@@ -992,7 +992,7 @@ asm void fn_802EA994(void)
     mr r3, r31
     li r4, 0x6
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808847AC
     li r3, 0x4
     li r0, 0x1
@@ -1114,7 +1114,7 @@ asm void fn_802EABE4(void)
     cmplwi r0, 0x1
     ble lbl_fn_802EABE4_00000F1C
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r0, 0x1500(r31)
     cmpwi r0, 0x1
     bne lbl_fn_802EABE4_00000F08
@@ -1173,7 +1173,7 @@ asm void fn_802EAC70(void)
     mr r3, r29
     li r4, 0x3
     stw r31, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_802EAC70_00001204
 lbl_fn_802EAC70_00000FAC:
     lfs f3, 0x2e4(r29)
@@ -1511,7 +1511,7 @@ lbl_fn_802EAF68_00001450:
     mr r3, r30
     li r4, 0x3
     stw r31, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_802EAF68_0000149C:
     lwz r0, 0xa4(r1)
     psq_l f31, 0x98(r1), 0, 0
@@ -1761,7 +1761,7 @@ lbl_fn_802EB1F4_000017E8:
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_802EB1F4_00001834:
     addi r3, r1, 0x80
     bl PSVECMag
@@ -1837,7 +1837,7 @@ asm void fn_802EB61C(void)
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_802EB61C_00001ABC
 lbl_fn_802EB61C_0000194C:
     lfs f3, 0x2e4(r31)

@@ -8,7 +8,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
@@ -946,7 +946,7 @@ lbl_fn_8044D9BC_00000A6C:
     la r5, lbl_8087E014
     la r6, lbl_8087E010
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x4c(r20)
     li r4, 0x0
     li r5, 0x1
@@ -964,7 +964,7 @@ lbl_fn_8044D9BC_00000AA0:
     mulli r3, r19, 0x84
     li r7, 0x0
     addi r3, r3, 0x10
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8044E198@ha
     lis r5, fn_8044E158@ha
     mr r7, r19

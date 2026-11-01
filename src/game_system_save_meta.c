@@ -38,7 +38,7 @@ extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void fn_8015ECC4(void);
 extern void fn_8016E4C4(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80219E6C(void);
 extern void fn_802376D0(void);
 extern void fn_80237874(void);
@@ -111,7 +111,7 @@ extern void PSMTXMultVec(void);
 extern void printf(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void abort(void);
 extern void fn_8068B100(void);
 
@@ -796,7 +796,7 @@ lbl_fn_80345BA8_000008AC:
     bne lbl_fn_80345BA8_000008D8
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x152c(r29)
     b lbl_fn_80345BA8_00000AC8
@@ -808,7 +808,7 @@ lbl_fn_80345BA8_000008D8:
     bne lbl_fn_80345BA8_00000904
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1530(r29)
     b lbl_fn_80345BA8_00000AC8
@@ -820,12 +820,12 @@ lbl_fn_80345BA8_00000904:
     bne lbl_fn_80345BA8_00000944
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1534(r29)
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1538(r29)
     b lbl_fn_80345BA8_00000AC8
@@ -837,7 +837,7 @@ lbl_fn_80345BA8_00000944:
     bne lbl_fn_80345BA8_00000970
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x153c(r29)
     b lbl_fn_80345BA8_00000AC8
@@ -849,7 +849,7 @@ lbl_fn_80345BA8_00000970:
     bne lbl_fn_80345BA8_0000099C
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1540(r29)
     b lbl_fn_80345BA8_00000AC8
@@ -861,12 +861,12 @@ lbl_fn_80345BA8_0000099C:
     bne lbl_fn_80345BA8_000009DC
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1544(r29)
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1548(r29)
     b lbl_fn_80345BA8_00000AC8
@@ -878,7 +878,7 @@ lbl_fn_80345BA8_000009DC:
     bne lbl_fn_80345BA8_00000A08
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x154c(r29)
     b lbl_fn_80345BA8_00000AC8
@@ -890,7 +890,7 @@ lbl_fn_80345BA8_00000A08:
     bne lbl_fn_80345BA8_00000A34
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1550(r29)
     b lbl_fn_80345BA8_00000AC8
@@ -902,7 +902,7 @@ lbl_fn_80345BA8_00000A34:
     bne lbl_fn_80345BA8_00000A60
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1528(r29)
     b lbl_fn_80345BA8_00000AC8
@@ -914,7 +914,7 @@ lbl_fn_80345BA8_00000A60:
     bne lbl_fn_80345BA8_00000A8C
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x155c(r29)
     b lbl_fn_80345BA8_00000AC8
@@ -1060,7 +1060,7 @@ lbl_fn_80346384_00000C54:
     bne lbl_fn_80346384_00000CC0
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f1, lbl_80885398
     mr r3, r31
     li r4, 0x3e
@@ -1078,7 +1078,7 @@ lbl_fn_80346384_00000C54:
 lbl_fn_80346384_00000CC0:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     mr r3, r31
     bl fn_8034F41C
     mr r3, r31
@@ -1186,7 +1186,7 @@ lbl_fn_80346384_00000E20:
 lbl_fn_80346384_00000E38:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     mr r3, r31
     li r4, 0x1
     bl fn_80339F74
@@ -1527,7 +1527,7 @@ lbl_fn_80346A34_0000129C:
     bl fn_80239DAC
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f3, lbl_80885398
     li r0, 0x10
     lfs f0, lbl_808853C0
@@ -1611,7 +1611,7 @@ lbl_fn_80346A34_000013E8:
     bl fn_80239DAC
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885398
     li r3, 0xf
     li r0, 0x1

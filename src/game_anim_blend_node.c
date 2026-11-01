@@ -26,7 +26,7 @@ extern void fn_8015D8C0(void);
 extern void fn_80161570(void);
 extern void fn_8016DA4C(void);
 extern void fn_8016DDB0(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80178A6C(void);
 extern void fn_80219558(void);
 extern void fn_80219E6C(void);
@@ -135,7 +135,7 @@ asm void fn_8026C7A4(void)
     stw r31, 0x14c4(r30)
     stw r5, 0x12a4(r30)
     stw r0, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883670
     li r0, 0x1
     stw r0, 0x3fc(r30)
@@ -190,7 +190,7 @@ asm void fn_8026C844(void)
     stw r0, 0x58c(r30)
     mr r3, r30
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883670
     li r3, 0x8e
     li r0, 0x1
@@ -388,7 +388,7 @@ asm void fn_8026CB50(void)
     stw r31, 0x14c4(r30)
     stw r5, 0x12a4(r30)
     stw r0, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883670
     li r31, 0x1
     stw r31, 0x3fc(r30)
@@ -451,7 +451,7 @@ asm void fn_8026CC28(void)
     stw r31, 0x14c4(r29)
     stw r5, 0x12a4(r29)
     stw r0, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r29
     li r5, 0x64
@@ -477,7 +477,7 @@ lbl_fn_8026CC28_00000510:
     stw r31, 0x14c4(r29)
     stw r5, 0x12a4(r29)
     stw r0, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
     lfs f1, lbl_80883670
     li r0, 0x1
     stw r0, 0x3fc(r29)
@@ -558,7 +558,7 @@ asm void fn_8026CDB4(void)
     stw r31, 0x14c4(r30)
     stw r5, 0x12a4(r30)
     stw r0, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
     lfs f1, lbl_80883670
     li r0, 0x1
     stw r0, 0x3fc(r30)
@@ -736,7 +736,7 @@ asm void fn_8026D058(void)
     stw r31, 0x14c4(r30)
     stw r5, 0x12a4(r30)
     stw r0, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883670
     li r0, 0x1
     stw r0, 0x3fc(r30)

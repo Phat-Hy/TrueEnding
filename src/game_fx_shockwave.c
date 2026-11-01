@@ -35,7 +35,7 @@ extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
 extern void fn_80145334(void);
 extern void fn_8014C540(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80179D44(void);
 extern void fn_80219E6C(void);
 extern void fn_802377B8(void);
@@ -82,7 +82,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068B100(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -1356,12 +1356,12 @@ lbl_fn_80293E30_000010EC:
     bne lbl_fn_80293E30_0000112C
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14d4(r27)
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14d8(r27)
     b lbl_fn_80293E30_000012B8
@@ -1373,12 +1373,12 @@ lbl_fn_80293E30_0000112C:
     bne lbl_fn_80293E30_0000116C
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14dc(r27)
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14e0(r27)
     b lbl_fn_80293E30_000012B8
@@ -1390,12 +1390,12 @@ lbl_fn_80293E30_0000116C:
     bne lbl_fn_80293E30_000011AC
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14e4(r27)
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14e8(r27)
     b lbl_fn_80293E30_000012B8
@@ -1407,12 +1407,12 @@ lbl_fn_80293E30_000011AC:
     bne lbl_fn_80293E30_000011EC
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14ec(r27)
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14f0(r27)
     b lbl_fn_80293E30_000012B8
@@ -1424,12 +1424,12 @@ lbl_fn_80293E30_000011EC:
     bne lbl_fn_80293E30_0000122C
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14f4(r27)
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14f8(r27)
     b lbl_fn_80293E30_000012B8
@@ -1441,12 +1441,12 @@ lbl_fn_80293E30_0000122C:
     bne lbl_fn_80293E30_0000126C
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14fc(r27)
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1500(r27)
     b lbl_fn_80293E30_000012B8
@@ -1458,7 +1458,7 @@ lbl_fn_80293E30_0000126C:
     bne lbl_fn_80293E30_00001294
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14cc(r27)
     b lbl_fn_80293E30_000012B8
 lbl_fn_80293E30_00001294:
@@ -1469,7 +1469,7 @@ lbl_fn_80293E30_00001294:
     bne lbl_fn_80293E30_000012B8
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14d0(r27)
 lbl_fn_80293E30_000012B8:
     addi r3, r1, 0x20
@@ -1586,7 +1586,7 @@ asm void fn_802946BC(void)
     bl fn_80239DAC
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F048
     bl fn_800F8548
     lfs f0, lbl_80883BF0
@@ -1632,7 +1632,7 @@ lbl_fn_802946BC_000014AC:
     bl fn_80239DAC
     mr r3, r31
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r31)
     lwz r3, lbl_8087F048
@@ -1751,7 +1751,7 @@ lbl_fn_802946BC_0000169C:
 lbl_fn_802946BC_000016B4:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_802946BC_00001B60
 lbl_fn_802946BC_000016C4:
     beq lbl_fn_802946BC_00001B60
@@ -1886,7 +1886,7 @@ lbl_fn_802946BC_00001778:
     bl atn_Anim_setLayerAnimation
     mr r3, r31
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0x1568(r31)
     li r0, 0x4
     stw r0, 0x560(r31)

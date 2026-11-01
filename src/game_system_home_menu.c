@@ -82,7 +82,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
 extern void fn_805A38F4(void);
 extern void PSVECSquareMag(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern void fn_80695A50(void);
@@ -1745,7 +1745,7 @@ lbl_fn_8035F3D4_0000160C:
     beq lbl_fn_8035F3D4_00001670
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     add r27, r27, r3
     b lbl_fn_8035F3D4_00001734
 lbl_fn_8035F3D4_00001670:
@@ -1756,7 +1756,7 @@ lbl_fn_8035F3D4_00001670:
     beq lbl_fn_8035F3D4_00001698
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     add r27, r27, r3
     b lbl_fn_8035F3D4_00001734
 lbl_fn_8035F3D4_00001698:
@@ -1767,7 +1767,7 @@ lbl_fn_8035F3D4_00001698:
     beq lbl_fn_8035F3D4_000016C0
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     add r27, r27, r3
     b lbl_fn_8035F3D4_00001734
 lbl_fn_8035F3D4_000016C0:
@@ -1778,7 +1778,7 @@ lbl_fn_8035F3D4_000016C0:
     beq lbl_fn_8035F3D4_000016E8
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     add r27, r27, r3
     b lbl_fn_8035F3D4_00001734
 lbl_fn_8035F3D4_000016E8:
@@ -1789,7 +1789,7 @@ lbl_fn_8035F3D4_000016E8:
     beq lbl_fn_8035F3D4_00001710
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     add r27, r27, r3
     b lbl_fn_8035F3D4_00001734
 lbl_fn_8035F3D4_00001710:
@@ -1800,7 +1800,7 @@ lbl_fn_8035F3D4_00001710:
     beq lbl_fn_8035F3D4_00001734
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     add r29, r29, r3
 lbl_fn_8035F3D4_00001734:
     addi r3, r1, 0x14
@@ -1873,7 +1873,7 @@ lbl_fn_8035F3D4_00001800:
     beq lbl_fn_8035F3D4_00001848
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
 lbl_fn_8035F3D4_00001848:
     addi r3, r1, 0x20
     bl fn_8005B5F8
@@ -2177,7 +2177,7 @@ lbl_fn_8035F3D4_00001C7C:
     beq lbl_fn_8035F3D4_00001D44
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     addi r3, r28, 0x64
     li r25, 0x0
@@ -2202,7 +2202,7 @@ lbl_fn_8035F3D4_00001CB0:
     beq lbl_fn_8035F3D4_00001D34
     addi r3, r1, 0x20
     bl fn_800422CC
-    bl fn_80684600
+    bl atoi
     mr r27, r3
     mr r4, r25
     addi r3, r28, 0x64
@@ -2210,7 +2210,7 @@ lbl_fn_8035F3D4_00001CB0:
     stw r27, 0x0(r3)
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r27, r3
     mr r4, r25
     addi r3, r28, 0x64

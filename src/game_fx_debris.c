@@ -48,7 +48,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068B100(void);
 extern void fn_806958E0(void);
 extern u32 strlen(const char* str);
@@ -1777,7 +1777,7 @@ lbl_fn_8029CF00_00001758:
     bne lbl_fn_8029CF00_0000178C
     addi r3, r1, 0x2c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     cmpwi r3, 0x0
     beq lbl_fn_8029CF00_00001968
@@ -1791,7 +1791,7 @@ lbl_fn_8029CF00_0000178C:
     bne lbl_fn_8029CF00_000017C0
     addi r3, r1, 0x2c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     cmpwi r3, 0x0
     beq lbl_fn_8029CF00_00001968
@@ -1805,7 +1805,7 @@ lbl_fn_8029CF00_000017C0:
     bne lbl_fn_8029CF00_000017F4
     addi r3, r1, 0x2c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     cmpwi r3, 0x0
     beq lbl_fn_8029CF00_00001968
@@ -1819,7 +1819,7 @@ lbl_fn_8029CF00_000017F4:
     bne lbl_fn_8029CF00_00001828
     addi r3, r1, 0x2c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     cmpwi r3, 0x0
     beq lbl_fn_8029CF00_00001968
@@ -1833,7 +1833,7 @@ lbl_fn_8029CF00_00001828:
     bne lbl_fn_8029CF00_0000185C
     addi r3, r1, 0x2c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     cmpwi r3, 0x0
     beq lbl_fn_8029CF00_00001968
@@ -1847,7 +1847,7 @@ lbl_fn_8029CF00_0000185C:
     bne lbl_fn_8029CF00_00001890
     addi r3, r1, 0x2c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     cmpwi r3, 0x0
     beq lbl_fn_8029CF00_00001968
@@ -1861,7 +1861,7 @@ lbl_fn_8029CF00_00001890:
     bne lbl_fn_8029CF00_000018C4
     addi r3, r1, 0x2c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     cmpwi r3, 0x0
     beq lbl_fn_8029CF00_00001968
@@ -1875,7 +1875,7 @@ lbl_fn_8029CF00_000018C4:
     bne lbl_fn_8029CF00_000018F8
     addi r3, r1, 0x2c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     cmpwi r3, 0x0
     beq lbl_fn_8029CF00_00001968
@@ -1890,7 +1890,7 @@ lbl_fn_8029CF00_000018F8:
     stw r29, 0x1644(r31)
     addi r3, r1, 0x2c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r30, r3
     bl fn_801A03E0
     mr r4, r30
@@ -1905,7 +1905,7 @@ lbl_fn_8029CF00_00001934:
     bne lbl_fn_8029CF00_00001968
     addi r3, r1, 0x2c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r30, r3
     bl fn_801A03E0
     mr r4, r30

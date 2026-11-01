@@ -5,7 +5,7 @@
 extern void fn_8000D0F8(void);
 extern void fn_8000D124(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -20,7 +20,7 @@ extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void fn_80168E60(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80179D44(void);
 extern void fn_80219E6C(void);
 extern void fn_802376D0(void);
@@ -167,7 +167,7 @@ asm void fn_80288E38(void)
     bne lbl_fn_80288E38_000000AC
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_80288E38_00000B60
 lbl_fn_80288E38_000000AC:
     lwz r3, 0x1630(r31)
@@ -301,7 +301,7 @@ lbl_fn_80288E38_00000244:
     bl atn_Anim_setLayerAnimation
     mr r3, r31
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r31)
     mr r3, r31
@@ -706,7 +706,7 @@ lbl_fn_80288E38_00000854:
     stfs f0, 0x1510(r31)
     stw r30, 0x15d4(r31)
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883AA8
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1024,7 +1024,7 @@ lbl_fn_80289978_00000CEC:
     mr r3, r31
     stfs f0, 0x1510(r31)
     stw r30, 0x15d4(r31)
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r31)
     lwz r3, lbl_8087F048
@@ -1084,7 +1084,7 @@ lbl_fn_80289978_00000DC8:
     stfs f0, 0x1510(r31)
     stw r30, 0x15d4(r31)
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883AA8
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1523,7 +1523,7 @@ lbl_fn_8028A1F8_0000145C:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
@@ -1637,7 +1637,7 @@ lbl_fn_8028A1F8_000015FC:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r29
     addi r4, r4, fn_80148990@l

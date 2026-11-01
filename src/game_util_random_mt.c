@@ -46,7 +46,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void strstr(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068A850(void);
 extern void fn_8068AEA4(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -2020,7 +2020,7 @@ asm void fn_805A4984(void)
     srwi r0, r0, 5
     stw r0, 0x0(r30)
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x4(r30)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

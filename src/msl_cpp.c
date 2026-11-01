@@ -26,7 +26,7 @@ extern void fn_8067DABC(void);
 extern void fn_8067DB74(void);
 extern void fn_8067E570(void);
 extern void strcmp(void);
-extern void fn_806846C4(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 extern void atexit(void);
 extern void fn_806974B4(void);
@@ -13419,7 +13419,7 @@ lbl_fn_80691B80_0000ACDC:
     lwz r4, 0x8(r30)
     mr r3, r31
     mr r5, r29
-    bl fn_806846C4
+    bl wmemcpy
     lwz r0, 0x8(r30)
     slwi r3, r29, 1
     add r31, r31, r3
@@ -13545,7 +13545,7 @@ lbl_fn_80691D08_0000AE64:
     lwz r3, 0x14(r3)
     mr r4, r31
     mr r5, r29
-    bl fn_806846C4
+    bl wmemcpy
     lwz r0, 0x14(r30)
     slwi r3, r29, 1
     add r31, r31, r3

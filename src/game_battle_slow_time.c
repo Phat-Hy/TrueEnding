@@ -55,7 +55,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068AEA4(void);
 extern char* strcpy(char* dest, const char* src);
 
@@ -426,11 +426,11 @@ lbl_fn_804070B4_00000428:
     stfs f1, 0x954(r29)
     addi r3, r1, 0x108
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x958(r29)
     addi r3, r1, 0x108
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x95c(r29)
 lbl_fn_804070B4_0000047C:
     addi r3, r1, 0x108

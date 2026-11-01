@@ -19,7 +19,7 @@ extern void fn_800839EC(void);
 extern void fn_80083F50(void);
 extern void fn_80084110(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void atn_Reticle_updateDraw(void);
@@ -133,7 +133,7 @@ asm void fn_800BD9C0(void)
     la r5, lbl_8087D72C
     la r6, lbl_8087D728
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0xf0(r27)
     addi r3, r1, 0x8
     li r4, -0x1
@@ -295,7 +295,7 @@ lbl_atn_Model_updateAnimation_000002D4:
     la r5, lbl_8087D914
     la r6, lbl_8087D910
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x80(r1)
     mr r28, r3
     cmpwi r0, 0x0
@@ -388,7 +388,7 @@ lbl_atn_Model_updateAnimation_00000428:
     la r5, lbl_8087D914
     la r6, lbl_8087D910
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x80(r1)
     mr r28, r3
     cmpwi r0, 0x0
@@ -472,7 +472,7 @@ lbl_atn_Model_updateAnimation_00000550:
     la r5, lbl_8087D914
     la r6, lbl_8087D910
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x80(r1)
     mr r28, r3
     cmpwi r0, 0x0

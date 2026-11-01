@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -17,7 +17,7 @@ extern void fn_8013CB68(void);
 extern void fn_80148990(void);
 extern void fn_8015495C(void);
 extern void fn_8016DA4C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_80178A6C(void);
 extern void fn_8017A300(void);
@@ -118,7 +118,7 @@ lbl_fn_802CE504_00000038:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808844EC
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -420,7 +420,7 @@ lbl_fn_802CE8EC_000004D0:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
@@ -534,7 +534,7 @@ lbl_fn_802CE8EC_00000670:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r30
     addi r4, r4, fn_80148990@l
@@ -721,7 +721,7 @@ asm void fn_802CEDFC(void)
     mr r3, r29
     li r4, 0x3
     stw r0, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808844EC
     li r0, 0x1
     stw r0, 0x3fc(r29)
@@ -790,7 +790,7 @@ asm void fn_802CEF0C(void)
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1148,7 +1148,7 @@ asm void fn_802CF3AC(void)
     mr r3, r29
     li r4, 0x3
     stw r0, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808844EC
     li r31, 0x1
     stw r31, 0x3fc(r29)
@@ -1499,7 +1499,7 @@ lbl_fn_802CF728_0000144C:
     mr r3, r29
     li r4, 0x3
     stw r31, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_802CF728_00001484:
     lwz r0, 0x94(r1)
     psq_l f31, 0x88(r1), 0, 0
@@ -1644,7 +1644,7 @@ asm void fn_802CFB24(void)
     mr r3, r29
     li r4, 0x3
     stw r0, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808844EC
     li r31, 0x1
     stw r31, 0x3fc(r29)

@@ -96,8 +96,8 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
-extern void fn_806868C4(void);
+extern void atoi(void);
+extern void swprintf(void);
 
 /* External data declarations */
 extern u8 lbl_80735238[];
@@ -1279,7 +1279,7 @@ lbl_fn_800EB7A0_00000FE0:
     li r4, 0x20
     addi r5, r5, lbl_80779CA0@l
     crclr 6
-    bl fn_806868C4
+    bl swprintf
     li r4, 0x0
     stw r4, 0x8(r1)
     li r3, 0x1
@@ -1735,11 +1735,11 @@ lbl_fn_800EBF1C_000015C0:
     stfs f1, 0xd8c(r27)
     addi r3, r1, 0xd68
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xd7c(r27)
     addi r3, r1, 0xd68
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xd80(r27)
     addi r3, r1, 0xd68
     bl fn_8005B3CC
@@ -1747,7 +1747,7 @@ lbl_fn_800EBF1C_000015C0:
     stfs f1, 0xd90(r27)
     addi r3, r1, 0xd68
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xd84(r27)
     mr r3, r27
     li r4, 0x0
@@ -1783,7 +1783,7 @@ lbl_fn_800EBF1C_000016A0:
     bl fn_8004203C
     addi r3, r1, 0x734
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     mr r3, r28
     bl fn_800EC204
@@ -1819,7 +1819,7 @@ lbl_fn_800EBF1C_0000172C:
     bl fn_8004203C
     addi r3, r1, 0x100
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     addi r3, r27, 0x1030
     bl fn_800EC24C

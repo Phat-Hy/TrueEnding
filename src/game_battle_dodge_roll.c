@@ -54,7 +54,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068AEA8(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
@@ -219,7 +219,7 @@ lbl_fn_80414328_0000015C:
     stw r0, 0x2040(r28)
     addi r3, r1, 0x8
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x22a4(r27)
     b lbl_fn_80414328_0000026C
 lbl_fn_80414328_00000174:
@@ -230,16 +230,16 @@ lbl_fn_80414328_00000174:
     bne lbl_fn_80414328_000001C0
     addi r3, r1, 0x8
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     slwi r0, r3, 3
     addi r3, r1, 0x8
     add r22, r23, r0
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x211c(r22)
     addi r3, r1, 0x8
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x2120(r22)
     b lbl_fn_80414328_0000026C
 lbl_fn_80414328_000001C0:
@@ -1840,7 +1840,7 @@ lbl_fn_80415974_000016FC:
     stfs f1, 0x190(r29)
     addi r3, r1, 0x8
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x194(r29)
 lbl_fn_80415974_00001760:
     addi r3, r1, 0x8

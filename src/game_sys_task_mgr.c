@@ -11,7 +11,7 @@ extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_8006F420(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC1DC(void);
@@ -25,7 +25,7 @@ extern void fn_8046DD20(void);
 extern void fn_8068236C(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_80686A80(void);
 extern void fn_80686AF0(void);
 extern void fn_80695720(void);
@@ -964,7 +964,7 @@ lbl_fn_80216CD0_00000AFC:
     addi r5, r29, 0xc
     mr r6, r5
     addi r3, r3, 0x10
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_802174E8@ha
     mr r7, r28
     addi r4, r4, fn_802174E8@l
@@ -977,7 +977,7 @@ lbl_fn_80216CD0_00000AFC:
     li r4, 0x3
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r4, 0x14(r1)
     li r26, 0x0
     stw r3, lbl_8087F27C
@@ -1418,7 +1418,7 @@ lbl_fn_802174F4_00001190:
     addi r5, r5, 0xc
     li r7, 0x0
     mr r6, r5
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, lbl_8087F278
     mr r4, r31
     lwz r12, 0xc(r1)
@@ -1467,7 +1467,7 @@ lbl_fn_802174F4_00001234:
     b lbl_fn_802174F4_00001288
 lbl_fn_802174F4_00001264:
     mr r3, r28
-    bl fn_80684600
+    bl atoi
     lwz r4, 0xb8(r27)
     addi r26, r26, 0x1
     stwx r3, r4, r30
@@ -1581,7 +1581,7 @@ asm void fn_80217778(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_802178C4@ha
     li r5, 0x0
     addi r4, r4, fn_802178C4@l
@@ -1786,7 +1786,7 @@ lbl_fn_802179FC_00001688:
     li r7, 0x0
     mr r6, r5
     addi r3, r3, 0x10
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80217D64@ha
     mr r7, r29
     addi r4, r4, fn_80217D64@l
@@ -1814,7 +1814,7 @@ lbl_fn_802179FC_00001700:
     addi r3, r1, 0xc
     add r28, r0, r31
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r28)
     addi r3, r1, 0xc
     bl fn_8005B3CC
@@ -1875,7 +1875,7 @@ lbl_fn_802179FC_000017EC:
     bne lbl_fn_802179FC_000018F4
     addi r3, r1, 0xc
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r6, lbl_8087F28C
     lwz r31, lbl_8087F288
     mulli r4, r6, 0x14

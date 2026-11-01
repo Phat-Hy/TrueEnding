@@ -21,7 +21,7 @@ extern void fn_801342B0(void);
 extern void fn_8013539C(void);
 extern void fn_8014C228(void);
 extern void fn_8014DEE4(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8017A9A8(void);
 extern void fn_801B0D88(void);
 extern void fn_801B11BC(void);
@@ -36,7 +36,7 @@ extern void fn_8023A02C(void);
 extern void fn_8023A098(void);
 extern void world_getGlobalFlag(void);
 extern void fn_80375254(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_80695AD0(void);
 
 /* External data declarations */
@@ -103,17 +103,17 @@ lbl_fn_801546F4_00000050:
     beq lbl_fn_801546F4_0000009C
     lwz r3, 0x10(r3)
     addi r3, r3, 0x8
-    bl fn_80684600
+    bl atoi
     lwz r4, 0x60(r29)
     mulli r27, r3, 0x64
     lwz r3, 0x10(r4)
     addi r3, r3, 0x2
-    bl fn_80684600
+    bl atoi
     lwz r4, 0x60(r29)
     mulli r28, r3, 0x2710
     lwz r3, 0x10(r4)
     addi r3, r3, 0xb
-    bl fn_80684600
+    bl atoi
     add r0, r28, r27
     add r4, r3, r0
     b lbl_fn_801546F4_000000A0
@@ -817,7 +817,7 @@ lbl_fn_80154EC4_000009D8:
 lbl_fn_80154EC4_00000A14:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -1021,7 +1021,7 @@ lbl_fn_801551AC_00000CB8:
 lbl_fn_801551AC_00000CF4:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -1231,7 +1231,7 @@ lbl_fn_80155494_00000FB0:
 lbl_fn_80155494_00000FEC:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -1441,7 +1441,7 @@ lbl_fn_80155790_000012A8:
 lbl_fn_80155790_000012E4:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -1650,7 +1650,7 @@ lbl_fn_80155A88_0000159C:
 lbl_fn_80155A88_000015D8:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0

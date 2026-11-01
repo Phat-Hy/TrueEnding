@@ -35,7 +35,7 @@ extern void fn_80108378(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8015495C(void);
 extern void fn_8016DA4C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80178A6C(void);
 extern void fn_80219E6C(void);
@@ -60,7 +60,7 @@ extern void printf(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
@@ -906,7 +906,7 @@ lbl_fn_802F693C_00000B08:
     mr r3, r29
     li r4, 0x3
     stw r0, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_802F693C_00000B2C:
     addi r11, r1, 0x120
     psq_l f31, 0x1f8(r1), 0, 0
@@ -1745,7 +1745,7 @@ lbl_fn_802F73FC_00001710:
     bne lbl_fn_802F73FC_00001738
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14e8(r18)
     b lbl_fn_802F73FC_00001A4C
 lbl_fn_802F73FC_00001738:
@@ -1756,7 +1756,7 @@ lbl_fn_802F73FC_00001738:
     bne lbl_fn_802F73FC_00001760
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14ec(r18)
     b lbl_fn_802F73FC_00001A4C
 lbl_fn_802F73FC_00001760:
@@ -1841,7 +1841,7 @@ lbl_fn_802F73FC_00001870:
     bne lbl_fn_802F73FC_00001898
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x1574(r18)
     b lbl_fn_802F73FC_00001A4C
 lbl_fn_802F73FC_00001898:
@@ -1852,7 +1852,7 @@ lbl_fn_802F73FC_00001898:
     bne lbl_fn_802F73FC_000018C4
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x157c(r18)
     stw r3, 0x1580(r18)
     b lbl_fn_802F73FC_00001A4C
@@ -1897,7 +1897,7 @@ lbl_fn_802F73FC_0000193C:
     bne lbl_fn_802F73FC_00001968
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1530(r18)
     b lbl_fn_802F73FC_00001A4C
@@ -1909,7 +1909,7 @@ lbl_fn_802F73FC_00001968:
     bne lbl_fn_802F73FC_00001994
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14f4(r18)
     b lbl_fn_802F73FC_00001A4C
@@ -1921,7 +1921,7 @@ lbl_fn_802F73FC_00001994:
     bne lbl_fn_802F73FC_000019C0
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1578(r18)
     b lbl_fn_802F73FC_00001A4C

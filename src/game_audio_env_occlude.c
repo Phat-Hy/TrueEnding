@@ -46,7 +46,7 @@ extern void boss_updatePhaseState(void);
 extern void fn_80145334(void);
 extern void fn_8014C540(void);
 extern void fn_80158E1C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8020A780(void);
 extern void fn_80219E6C(void);
 extern void fn_80237518(void);
@@ -83,7 +83,7 @@ extern void printf(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
@@ -170,7 +170,7 @@ asm void fn_8031A484(void)
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3e8
@@ -306,7 +306,7 @@ asm void fn_8031A670(void)
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3e8
@@ -1578,7 +1578,7 @@ lbl_fn_8031B6E0_00001474:
     bne lbl_fn_8031B6E0_000014A0
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1534(r31)
 lbl_fn_8031B6E0_000014A0:
@@ -1743,7 +1743,7 @@ lbl_fn_8031B9B4_000016A4:
 lbl_fn_8031B9B4_000016D4:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r0, 0x153c(r31)
     cmpwi r0, 0x0
     beq lbl_fn_8031B9B4_000017AC
@@ -1850,7 +1850,7 @@ lbl_fn_8031B9B4_00001844:
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3e8
@@ -1905,7 +1905,7 @@ lbl_fn_8031B9B4_00001914:
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x3e8

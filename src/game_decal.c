@@ -44,7 +44,7 @@ extern void fn_8016DA4C(void);
 extern void fn_8016DC14(void);
 extern void fn_8016DCD4(void);
 extern void fn_8016E484(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
 extern void fn_80178208(void);
@@ -237,7 +237,7 @@ lbl_fn_800E589C_00000194:
     beq lbl_fn_800E589C_00000590
     mr r3, r30
     li r4, 0x1
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_800E589C_00000590
 lbl_fn_800E589C_000001AC:
     lwz r3, 0x560(r30)

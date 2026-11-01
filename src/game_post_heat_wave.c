@@ -6,7 +6,7 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008BBD8(void);
 extern void atn_Model_findBoneIndex(void);
@@ -25,7 +25,7 @@ extern void fn_80148990(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80194550(void);
 extern void fn_80232B7C(void);
 extern void fn_80239DAC(void);
@@ -228,7 +228,7 @@ lbl_fn_802D8B7C_00000180:
 lbl_fn_802D8B7C_00000198:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r0, 0x58c(r31)
     cmpwi r0, 0x7
     bne lbl_fn_802D8B7C_000004F4
@@ -308,7 +308,7 @@ lbl_fn_802D8B7C_00000258:
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     addi r3, r31, 0x1588
     li r4, 0x0
     li r5, 0x0
@@ -346,7 +346,7 @@ lbl_fn_802D8B7C_00000258:
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     addi r3, r31, 0x1588
     li r4, 0x0
     li r5, 0x0
@@ -428,7 +428,7 @@ lbl_fn_802D8B7C_00000438:
 lbl_fn_802D8B7C_00000494:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     psq_l f1, 0x534(r31), 0, 0
     addi r4, r1, 0x8
     lfs f2, 0x53c(r31)
@@ -715,7 +715,7 @@ lbl_fn_802D92E4_00000864:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
@@ -829,7 +829,7 @@ lbl_fn_802D92E4_00000A04:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r30
     addi r4, r4, fn_80148990@l
@@ -1153,7 +1153,7 @@ asm void fn_802D99D8(void)
     mr r3, r28
     li r4, 0x3
     stw r0, 0x58c(r28)
-    bl fn_8016E970
+    bl actor_setState
     lis r3, lbl_80747654@ha
     stw r30, 0x1600(r28)
     addi r3, r3, lbl_80747654@l
@@ -1802,7 +1802,7 @@ lbl_fn_802DA174_000017BC:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lis r4, lbl_80747654@ha
     lfs f1, lbl_80884600
     addi r4, r4, lbl_80747654@l
@@ -1846,7 +1846,7 @@ lbl_fn_802DA174_00001864:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f1, lbl_808845F0
     addi r3, r31, 0xb0
     li r4, 0x0
@@ -1974,7 +1974,7 @@ lbl_fn_802DA174_00001A24:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884600
     li r30, 0x1
     stw r30, 0x3fc(r31)

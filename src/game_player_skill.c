@@ -13,7 +13,7 @@ extern void fn_8004212C(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80089AD4(void);
 extern void fn_8008B140(void);
@@ -31,7 +31,7 @@ extern void fn_80120D44(void);
 extern void fn_80120E38(void);
 extern void fn_80120E48(void);
 extern void fn_80120F4C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80219544(void);
 extern void fn_80237518(void);
 extern void fn_802375C4(void);
@@ -46,7 +46,7 @@ extern void fn_8054A644(void);
 extern void fn_8054A660(void);
 extern void printf(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void abort(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
@@ -189,7 +189,7 @@ asm void fn_8011F82C(void)
 lbl_fn_8011F82C_000000C8:
     mr r3, r31
     li r4, 0x2
-    bl fn_8016E970
+    bl actor_setState
     mr r3, r31
     li r4, 0x0
     bl atn_Task_setActive
@@ -474,7 +474,7 @@ asm void fn_8011FB48(void)
 lbl_fn_8011FB48_000003E4:
     mr r3, r31
     li r4, 0x2
-    bl fn_8016E970
+    bl actor_setState
     mr r3, r31
     li r4, 0x0
     bl atn_Task_setActive
@@ -692,7 +692,7 @@ asm void fn_8011FDB4(void)
 lbl_fn_8011FDB4_00000650:
     mr r3, r31
     li r4, 0x2
-    bl fn_8016E970
+    bl actor_setState
     mr r3, r31
     li r4, 0x0
     bl atn_Task_setActive
@@ -949,7 +949,7 @@ lbl_fn_8011FFF8_00000944:
     lbz r0, 0x0(r3)
     cmpwi r0, 0x3b
     beq lbl_fn_8011FFF8_00000B38
-    bl fn_80684600
+    bl atoi
     mr r26, r3
     addi r3, r1, 0x50
     bl fn_8005B3CC
@@ -968,7 +968,7 @@ lbl_fn_8011FFF8_00000944:
     stw r3, 0x4(r26)
     addi r3, r1, 0x50
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x8(r26)
     addi r3, r1, 0x50
     bl fn_8005B3CC
@@ -1065,7 +1065,7 @@ lbl_fn_8011FFF8_00000AC8:
     stfs f1, 0x20(r26)
     addi r3, r1, 0x50
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x24(r26)
     addi r3, r1, 0x50
     bl fn_8005B3CC
@@ -1237,7 +1237,7 @@ asm void fn_801204A8(void)
     la r6, lbl_8087D9C8
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_801206E8@ha
     mr r7, r30
     addi r4, r4, fn_801206E8@l
@@ -1790,7 +1790,7 @@ asm void fn_80120C30(void)
     la r6, lbl_8087D9C0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80237518@ha
     lis r5, fn_802375C4@ha
     mr r7, r26

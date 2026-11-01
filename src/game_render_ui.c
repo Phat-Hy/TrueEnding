@@ -13,7 +13,7 @@ extern void fn_80075F58(void);
 extern void gx_applyRenderState(void);
 extern void fn_800763FC(void);
 extern void gx_setRenderStateParam(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800A96AC(void);
 extern void fn_800B0A70(void);
@@ -1584,7 +1584,7 @@ asm void fn_800B2180(void)
     la r6, lbl_8087D87C
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_800B23C4@ha
     mr r7, r31
     addi r4, r4, fn_800B23C4@l

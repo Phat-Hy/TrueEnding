@@ -20,7 +20,7 @@ extern void fn_805D9580(void);
 extern void fn_805D9590(void);
 extern void fn_805DFA30(void);
 extern void fn_805DFB50(void);
-extern void fn_806869BC(void);
+extern void vswprintf(void);
 extern void fn_80686A48(void);
 extern void fn_80695B00(void);
 
@@ -207,7 +207,7 @@ lbl_fn_805DDED0_00000174:
     lwz r4, lbl_8079A734@l(r4)
     mr r5, r16
     addi r6, r31, 0x68
-    bl fn_806869BC
+    bl vswprintf
     lwz r16, 0x0(r30)
     mr r5, r15
     lwz r17, 0x4(r30)
@@ -341,7 +341,7 @@ lbl_fn_805DE0D0_00000374:
     lwz r4, lbl_8079A734@l(r4)
     mr r5, r16
     addi r6, r31, 0x68
-    bl fn_806869BC
+    bl vswprintf
     lwz r16, 0x0(r30)
     mr r5, r15
     lwz r17, 0x4(r30)
@@ -468,7 +468,7 @@ lbl_fn_805DE2D0_0000055C:
     mr r3, r15
     lwz r4, lbl_8079A734@l(r4)
     addi r6, r31, 0x68
-    bl fn_806869BC
+    bl vswprintf
     lwz r16, 0x0(r30)
     mr r4, r18
     lwz r17, 0x4(r30)
@@ -567,7 +567,7 @@ lbl_fn_805DE4A0_000006D0:
     lis r4, lbl_8079A734@ha
     mr r3, r15
     lwz r4, lbl_8079A734@l(r4)
-    bl fn_806869BC
+    bl vswprintf
     lwz r16, 0x0(r30)
     mr r4, r18
     lwz r17, 0x4(r30)
@@ -1200,7 +1200,7 @@ lbl_fn_805DED70_00001014:
     lwz r4, lbl_8079A734@l(r4)
     mr r5, r28
     addi r6, r31, 0x68
-    bl fn_806869BC
+    bl vswprintf
     lwz r0, 0x0(r30)
     mr r5, r3
     stw r0, 0x78(r31)
@@ -1321,7 +1321,7 @@ lbl_fn_805DEFA0_000011E8:
     mr r3, r29
     lwz r4, lbl_8079A734@l(r4)
     mr r5, r7
-    bl fn_806869BC
+    bl vswprintf
     lwz r0, 0x0(r30)
     mr r5, r3
     stw r0, 0x8(r31)
@@ -1637,7 +1637,7 @@ asm void fn_805DF490(void)
 asm void fn_805DF4A0(void)
 {
     nofralloc
-    b fn_806869BC
+    b vswprintf
 }
 
 asm void fn_805DF4B0(void)

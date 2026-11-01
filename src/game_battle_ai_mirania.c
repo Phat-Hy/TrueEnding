@@ -46,7 +46,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 
 /* External data declarations */
 extern u8 lbl_80754260[];
@@ -726,7 +726,7 @@ lbl_fn_80438EF8_00000908:
     bne lbl_fn_80438EF8_000009A0
     addi r3, r1, 0x6c
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xecc(r31)
     addi r3, r1, 0x6c
     bl fn_8005B9CC
@@ -734,27 +734,27 @@ lbl_fn_80438EF8_00000908:
     stfs f1, 0xef4(r31)
     addi r3, r1, 0x6c
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xf00(r31)
     addi r3, r1, 0x6c
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xf04(r31)
     addi r3, r1, 0x6c
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xedc(r31)
     addi r3, r1, 0x6c
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xee0(r31)
     addi r3, r1, 0x6c
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xef0(r31)
     addi r3, r1, 0x6c
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xee8(r31)
     b lbl_fn_80438EF8_000009F4
 lbl_fn_80438EF8_000009A0:

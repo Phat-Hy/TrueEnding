@@ -55,7 +55,7 @@ extern void PSVECNormalize(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void strstr(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
@@ -1132,7 +1132,7 @@ lbl_fn_80354910_00000D24:
     bne lbl_fn_80354910_00000D68
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14bc(r29)
     b lbl_fn_80354910_00000DDC
 lbl_fn_80354910_00000D68:
@@ -1143,7 +1143,7 @@ lbl_fn_80354910_00000D68:
     bne lbl_fn_80354910_00000D90
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14c8(r29)
     b lbl_fn_80354910_00000DDC
 lbl_fn_80354910_00000D90:
@@ -1154,7 +1154,7 @@ lbl_fn_80354910_00000D90:
     bne lbl_fn_80354910_00000DB8
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14d4(r29)
     b lbl_fn_80354910_00000DDC
 lbl_fn_80354910_00000DB8:
@@ -1165,7 +1165,7 @@ lbl_fn_80354910_00000DB8:
     bne lbl_fn_80354910_00000DDC
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14f0(r29)
 lbl_fn_80354910_00000DDC:
     addi r3, r1, 0x8

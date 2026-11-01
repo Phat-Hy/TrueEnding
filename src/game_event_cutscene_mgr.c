@@ -16,7 +16,7 @@ extern void atn_normalizePath(char* str);
 extern void fn_8006B404(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80097A9C(void);
 extern void fn_800A03A0(void);
@@ -1739,7 +1739,7 @@ lbl_fn_80476ED4_00001530:
     la r5, lbl_8087E064
     la r6, lbl_8087E060
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80477414@ha
     lis r5, fn_80476D00@ha
     mr r7, r16

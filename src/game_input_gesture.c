@@ -33,7 +33,7 @@ extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void fn_8015495C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_801765D8(void);
 extern void fn_80176ACC(void);
@@ -72,7 +72,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void strcmp(void);
 extern void strstr(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068AEA4(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -511,7 +511,7 @@ lbl_fn_802ED830_00000528:
     bne lbl_fn_802ED830_00000540
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_802ED830_00000608
 lbl_fn_802ED830_00000540:
     lwz r0, 0x14f4(r3)
@@ -1739,7 +1739,7 @@ lbl_fn_802EE9A8_00001658:
     bne lbl_fn_802EE9A8_00001688
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14ec(r31)
     b lbl_fn_802EE9A8_0000178C
 lbl_fn_802EE9A8_00001688:
@@ -1750,7 +1750,7 @@ lbl_fn_802EE9A8_00001688:
     bne lbl_fn_802EE9A8_000016B0
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14f0(r31)
     b lbl_fn_802EE9A8_0000178C
 lbl_fn_802EE9A8_000016B0:
@@ -1773,7 +1773,7 @@ lbl_fn_802EE9A8_000016DC:
     bl fn_8005B3CC
     b lbl_fn_802EE9A8_0000176C
 lbl_fn_802EE9A8_000016F0:
-    bl fn_80684600
+    bl atoi
     lwz r0, 0x78(r29)
     li r4, 0x0
     li r5, 0x0

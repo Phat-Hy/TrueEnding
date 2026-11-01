@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void mem_alloc(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_801978C0(void);
 extern void fn_801980B4(void);
 extern void fn_80198528(void);
@@ -196,7 +196,7 @@ lbl_fn_8015AF40_0000020C:
 lbl_fn_8015AF40_00000248:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -403,7 +403,7 @@ lbl_fn_8015B238_000004F8:
 lbl_fn_8015B238_00000534:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -609,7 +609,7 @@ lbl_fn_8015B520_000007E0:
 lbl_fn_8015B520_0000081C:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -817,7 +817,7 @@ lbl_fn_8015B808_00000AD0:
 lbl_fn_8015B808_00000B0C:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -1023,7 +1023,7 @@ lbl_fn_8015BAF0_00000DB8:
 lbl_fn_8015BAF0_00000DF4:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -1229,7 +1229,7 @@ lbl_fn_8015BDD8_000010A0:
 lbl_fn_8015BDD8_000010DC:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -1435,7 +1435,7 @@ lbl_fn_8015C0C0_00001388:
 lbl_fn_8015C0C0_000013C4:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -1642,7 +1642,7 @@ lbl_fn_8015C3A8_00001674:
 lbl_fn_8015C3A8_000016B0:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -1849,7 +1849,7 @@ lbl_fn_8015C6A0_00001960:
 lbl_fn_8015C6A0_0000199C:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0

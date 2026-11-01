@@ -33,7 +33,7 @@ extern void fn_80081C34(void);
 extern void fn_80081D00(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void fn_800874C8(void);
@@ -1500,7 +1500,7 @@ lbl_atn_Skin_init_0000117C:
     la r6, lbl_8087D924
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, skin_initLink@ha
     mr r7, r28
     addi r4, r4, skin_initLink@l
@@ -1528,7 +1528,7 @@ lbl_atn_Skin_init_000011E4:
     la r5, lbl_8087D6EC
     la r6, lbl_8087D6E8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0xc(r31)
     b lbl_atn_Skin_init_00001218
 lbl_atn_Skin_init_00001210:
@@ -2231,7 +2231,7 @@ lbl_fn_800C4A90_00001A54:
     lwz r29, 0xe4(r3)
     mulli r3, r29, 0x18
     addi r3, r3, 0x10
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8007E9EC@ha
     lis r5, fn_8007AA64@ha
     mr r7, r29

@@ -54,7 +54,7 @@ extern void fn_80151448(void);
 extern void fn_8015495C(void);
 extern void fn_8016DA4C(void);
 extern void fn_8016DDB0(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_801765D8(void);
 extern void fn_80178A6C(void);
@@ -238,7 +238,7 @@ lbl_fn_802CCC24_000000E0:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808844C4
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1041,7 +1041,7 @@ asm void fn_802CD73C(void)
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808844EC
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1122,7 +1122,7 @@ lbl_fn_802CD73C_00000DB8:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808844EC
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1180,7 +1180,7 @@ lbl_fn_802CD73C_00000EAC:
 lbl_fn_802CD73C_00000ED0:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r0, 0x58c(r31)
     cmpwi r0, 0x7
     bne lbl_fn_802CD73C_00000EF4
@@ -1206,7 +1206,7 @@ lbl_fn_802CD73C_00000EF4:
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_802CD73C_00000F40:
     lfs f4, 0x2e4(r31)
     lfs f3, lbl_808844FC
@@ -1326,7 +1326,7 @@ lbl_fn_802CD73C_000010BC:
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_802CD73C_00001100:
     lfs f4, 0x2e4(r31)
     lfs f3, lbl_808844FC
@@ -1415,7 +1415,7 @@ lbl_fn_802CD73C_0000120C:
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_802CD73C_00001250:
     lfs f3, 0x2e4(r31)
     lfs f0, lbl_80884504
@@ -1472,7 +1472,7 @@ lbl_fn_802CD73C_000012E4:
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_802CD73C_00001478
 lbl_fn_802CD73C_0000132C:
     xoris r0, r0, 0x8000
@@ -1524,7 +1524,7 @@ lbl_fn_802CD73C_000013C0:
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_802CD73C_00001478
 lbl_fn_802CD73C_000013F4:
     lwz r12, 0x0(r31)
@@ -1542,7 +1542,7 @@ lbl_fn_802CD73C_0000140C:
     bne lbl_fn_802CD73C_00001448
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r4, 0x14b8(r31)
     mr r3, r31
     lfs f1, lbl_80884510
@@ -1554,7 +1554,7 @@ lbl_fn_802CD73C_00001448:
     bne lbl_fn_802CD73C_0000145C
     mr r3, r31
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_802CD73C_0000145C:
     mr r3, r31
     bl fn_802CF054
@@ -1805,7 +1805,7 @@ lbl_fn_802CD73C_00001760:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808844EC
     li r0, 0x1
     stw r0, 0x3fc(r31)

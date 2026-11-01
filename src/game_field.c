@@ -34,7 +34,7 @@ void fn_80084110(void);
 void mem_alloc(void);
 void mem_free(void);
 void dtor_80084684(void);
-void fn_800846FC(void);
+void mem_realloc(void);
 void fn_800848B4(void);
 void fn_80084A78(void);
 void mem_getAllocSize(void);
@@ -476,7 +476,7 @@ lbl_dtor_80084684_000005C4:
     blr
 }
 
-asm void fn_800846FC(void)
+asm void mem_realloc(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -489,7 +489,7 @@ asm void fn_800846FC(void)
     mr r29, r3
     lbz r0, lbl_8087EF08
     extsb. r0, r0
-    bne lbl_fn_800846FC_00000770
+    bne lbl_mem_realloc_00000770
     lis r8, lbl_807C709C@ha
     lis r5, lbl_80778598@ha
     addi r31, r8, lbl_807C709C@l
@@ -512,20 +512,20 @@ asm void fn_800846FC(void)
     stw r7, 0x54(r31)
     stw r7, 0x48(r31)
     stw r7, 0x4c(r31)
-    bge lbl_fn_800846FC_000006A0
+    bge lbl_mem_realloc_000006A0
     addi r0, r3, 0xf
     subf r0, r9, r0
     srwi r0, r0, 4
     mtctr r0
-    bge lbl_fn_800846FC_000006A0
-lbl_fn_800846FC_00000688:
+    bge lbl_mem_realloc_000006A0
+lbl_mem_realloc_00000688:
     stw r7, 0x8(r9)
     stw r7, 0xc(r9)
     stw r7, 0x0(r9)
     stw r7, 0x4(r9)
     addi r9, r9, 0x10
-    bdnz lbl_fn_800846FC_00000688
-lbl_fn_800846FC_000006A0:
+    bdnz lbl_mem_realloc_00000688
+lbl_mem_realloc_000006A0:
     addi r7, r31, 0xe8
     addi r3, r31, 0x138
     lis r6, lbl_80778560@ha
@@ -543,20 +543,20 @@ lbl_fn_800846FC_000006A0:
     stw r5, 0xe4(r31)
     stw r5, 0xd8(r31)
     stw r5, 0xdc(r31)
-    bge lbl_fn_800846FC_00000714
+    bge lbl_mem_realloc_00000714
     addi r0, r3, 0xf
     subf r0, r7, r0
     srwi r0, r0, 4
     mtctr r0
-    bge lbl_fn_800846FC_00000714
-lbl_fn_800846FC_000006FC:
+    bge lbl_mem_realloc_00000714
+lbl_mem_realloc_000006FC:
     stw r5, 0x8(r7)
     stw r5, 0xc(r7)
     stw r5, 0x0(r7)
     stw r5, 0x4(r7)
     addi r7, r7, 0x10
-    bdnz lbl_fn_800846FC_000006FC
-lbl_fn_800846FC_00000714:
+    bdnz lbl_mem_realloc_000006FC
+lbl_mem_realloc_00000714:
     addi r3, r31, 0x138
     bl fn_80084E50
     addi r3, r31, 0x150
@@ -580,7 +580,7 @@ lbl_fn_800846FC_00000714:
     bl __register_global_object
     li r0, 0x1
     stb r0, lbl_8087EF08
-lbl_fn_800846FC_00000770:
+lbl_mem_realloc_00000770:
     lis r3, lbl_807C709C@ha
     mr r4, r29
     addi r3, r3, lbl_807C709C@l

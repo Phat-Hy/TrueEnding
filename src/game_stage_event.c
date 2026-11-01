@@ -29,7 +29,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void printf(void);
 extern void strcmp(void);
-extern void fn_806868C4(void);
+extern void swprintf(void);
 extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695B00(void);
@@ -421,7 +421,7 @@ lbl_fn_8019DBA4_0000036C:
     stfs f3, 0x60(r1)
     stfs f0, 0x64(r1)
     crclr 6
-    bl fn_806868C4
+    bl swprintf
     stw r29, 0x8(r1)
     li r0, 0x1
     mr r6, r28

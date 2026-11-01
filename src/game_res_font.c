@@ -15,7 +15,7 @@ extern void fn_800763C0(void);
 extern void gx_setRenderStateParam(void);
 extern void fn_80076A28(void);
 extern void fn_80079994(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_8008771C(void);
 extern void fn_8008937C(void);
 extern void fn_800902C0(void);
@@ -275,7 +275,7 @@ lbl_font_loadGlyphMetrics_000001D8:
     li r4, 0x7
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r30, lbl_8087DBF8
     addi r5, r31, lbl_80742FB8@l
     stw r3, lbl_8087F37C
@@ -284,7 +284,7 @@ lbl_font_loadGlyphMetrics_000001D8:
     li r4, 0x7
     li r7, 0x0
     addi r3, r3, 0x10
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, font_initGlyphDesc@ha
     mr r7, r30
     addi r4, r4, font_initGlyphDesc@l
@@ -299,7 +299,7 @@ lbl_font_loadGlyphMetrics_000001D8:
     li r4, 0x7
     li r7, 0x0
     addi r3, r3, 0x10
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80234C54@ha
     mr r7, r30
     addi r4, r4, fn_80234C54@l
@@ -313,7 +313,7 @@ lbl_font_loadGlyphMetrics_000001D8:
     mulli r3, r0, 0x14
     li r4, 0x7
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, lbl_8087DC00
     addi r5, r31, lbl_80742FB8@l
     stw r3, lbl_8087F3A8
@@ -321,7 +321,7 @@ lbl_font_loadGlyphMetrics_000001D8:
     slwi r3, r0, 2
     li r4, 0x7
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r4, lbl_8087EFA8
     li r0, 0x0
     stw r3, lbl_8087F3A0

@@ -11,7 +11,7 @@ extern void atn_Task_setActive(void);
 extern void fn_8012D8B8(void);
 extern void fn_80145334(void);
 extern void fn_80154654(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_80176ACC(void);
 extern void fn_801781B0(void);
@@ -2100,7 +2100,7 @@ lbl_fn_80398704_00001C08:
     cmpwi r0, 0x0
     beq lbl_fn_80398704_00001C44
     li r4, 0x1
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x0
     stw r0, 0xd0(r28)
 lbl_fn_80398704_00001C44:

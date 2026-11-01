@@ -29,7 +29,7 @@ extern void fn_80145334(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_8015DBC8(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80219E6C(void);
 extern void fn_80232B7C(void);
 extern void fn_80237518(void);
@@ -58,7 +58,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695AD0(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -408,7 +408,7 @@ lbl_fn_802B7AF8_000003EC:
     bne lbl_fn_802B7AF8_0000041C
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14e8(r29)
     b lbl_fn_802B7AF8_00000508
 lbl_fn_802B7AF8_0000041C:
@@ -419,7 +419,7 @@ lbl_fn_802B7AF8_0000041C:
     bne lbl_fn_802B7AF8_00000444
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14ec(r29)
     b lbl_fn_802B7AF8_00000508
 lbl_fn_802B7AF8_00000444:
@@ -430,7 +430,7 @@ lbl_fn_802B7AF8_00000444:
     bne lbl_fn_802B7AF8_0000046C
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14f0(r29)
     b lbl_fn_802B7AF8_00000508
 lbl_fn_802B7AF8_0000046C:
@@ -441,7 +441,7 @@ lbl_fn_802B7AF8_0000046C:
     bne lbl_fn_802B7AF8_00000494
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14f4(r29)
     b lbl_fn_802B7AF8_00000508
 lbl_fn_802B7AF8_00000494:
@@ -463,7 +463,7 @@ lbl_fn_802B7AF8_000004BC:
     bne lbl_fn_802B7AF8_000004E4
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x1500(r29)
     b lbl_fn_802B7AF8_00000508
 lbl_fn_802B7AF8_000004E4:
@@ -474,7 +474,7 @@ lbl_fn_802B7AF8_000004E4:
     bne lbl_fn_802B7AF8_00000508
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x1504(r29)
 lbl_fn_802B7AF8_00000508:
     addi r3, r1, 0x8
@@ -692,7 +692,7 @@ asm void fn_802B7F4C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_8016E970
+    bl actor_setState
     lwz r12, 0x0(r31)
     mr r3, r31
     li r4, 0x6
@@ -752,7 +752,7 @@ lbl_fn_802B7F94_00000880:
     oris r0, r0, 0x4000
     stw r0, 0x14cc(r3)
     li r4, 0x2
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_802B7F94_00000BD8
 lbl_fn_802B7F94_00000894:
     lwz r4, 0xd1c(r3)
@@ -781,7 +781,7 @@ lbl_fn_802B7F94_000008CC:
     li r4, 0x2
     oris r0, r0, 0x4000
     stw r0, 0x14cc(r31)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_802B7F94_00000BD8
 lbl_fn_802B7F94_000008FC:
     lwz r4, 0xd1c(r3)
@@ -845,7 +845,7 @@ lbl_fn_802B7F94_000009B8:
     li r4, 0x6
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r31)
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r31)
     b lbl_fn_802B7F94_00000BD8
@@ -911,7 +911,7 @@ lbl_fn_802B7F94_00000AB4:
     li r4, 0x6
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r31)
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r31)
     b lbl_fn_802B7F94_00000BD8
@@ -950,7 +950,7 @@ lbl_fn_802B7F94_00000B60:
     li r4, 0x2
     oris r0, r0, 0x4000
     stw r0, 0x14cc(r31)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_802B7F94_00000BD8
 lbl_fn_802B7F94_00000B7C:
     lwz r0, 0x7e0(r3)
@@ -976,7 +976,7 @@ lbl_fn_802B7F94_00000BA4:
     li r4, 0x2
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r31)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_802B7F94_00000BD8:
     lwz r0, 0x94(r1)
     lwz r31, 0x8c(r1)
@@ -1059,7 +1059,7 @@ lbl_fn_802B8398_00000C90:
     bne lbl_fn_802B8398_00000CFC
     mr r3, r31
     li r4, 0x2
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_802B8398_00000CFC:
     lwz r6, 0x38(r31)
     li r4, 0x0
@@ -1273,7 +1273,7 @@ lbl_fn_802B8398_00000FD8:
     bne lbl_fn_802B8398_00000FFC
     mr r3, r31
     li r4, 0x2
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_802B8398_00000FFC:
     lwz r12, 0x0(r31)
     mr r3, r31

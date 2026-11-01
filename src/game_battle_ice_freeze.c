@@ -55,7 +55,7 @@ extern void PSVECDotProduct(void);
 extern void rand(void);
 extern void fn_8068236C(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068A850(void);
 extern void fn_806958E0(void);
 extern char* strcpy(char* dest, const char* src);
@@ -1607,7 +1607,7 @@ lbl_fn_8041C784_0000143C:
     bl fn_8068236C
     addi r3, r1, 0x108
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x0
     bne lbl_fn_8041C784_0000148C
     addi r3, r29, 0x4c4

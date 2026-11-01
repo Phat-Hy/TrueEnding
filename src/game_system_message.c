@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80206B14(void);
 extern void fn_80206B68(void);
@@ -26,7 +26,7 @@ extern void fn_80216AFC(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_80695720(void);
 extern void strchr(void);
 extern u32 strlen(const char* str);
@@ -870,7 +870,7 @@ lbl_fn_80212F68_00000B28:
     or r0, r4, r0
     srwi r0, r0, 31
     stw r0, 0x0(r30)
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r31)
     b lbl_fn_80212F68_00000BF0
 lbl_fn_80212F68_00000B5C:
@@ -903,7 +903,7 @@ lbl_fn_80212F68_00000BA4:
     or r0, r4, r0
     srwi r0, r0, 31
     stw r0, 0x0(r30)
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r31)
     b lbl_fn_80212F68_00000BF0
 lbl_fn_80212F68_00000BD8:
@@ -911,7 +911,7 @@ lbl_fn_80212F68_00000BD8:
     stw r0, 0x0(r28)
     mr r3, r27
     stw r0, 0x0(r30)
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r31)
 lbl_fn_80212F68_00000BF0:
     li r3, 0x1
@@ -987,7 +987,7 @@ lbl_fn_802130BC_00000CC4:
     mulli r8, r23, 0x18
     mr r6, r5
     addi r3, r8, 0x10
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_802137DC@ha
     lis r5, fn_80213A98@ha
     mr r7, r23
@@ -1069,7 +1069,7 @@ lbl_fn_802130BC_00000E0C:
     la r5, lbl_8087DB64
     la r6, lbl_8087DB60
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     addi r4, r28, fn_80213A7C@l
     li r5, 0x0
     li r6, 0x10
@@ -1228,7 +1228,7 @@ lbl_fn_802130BC_0000105C:
     la r5, lbl_8087DB64
     la r6, lbl_8087DB60
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r25
     addi r4, r28, fn_80213A7C@l
     li r5, 0x0
@@ -1428,7 +1428,7 @@ asm void fn_802137DC(void)
     stw r0, 0x10(r3)
     stw r0, 0x14(r3)
     li r3, 0x30
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80213A7C@ha
     li r5, 0x0
     addi r4, r4, fn_80213A7C@l

@@ -15,7 +15,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_8011FE3C(void);
 extern void fn_80144710(void);
 extern void fn_8015495C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8016EB48(void);
 extern void fn_80170F20(void);
 extern void fn_803C1560(void);
@@ -433,7 +433,7 @@ lbl_fn_8041EE28_00000470:
     cmpwi r3, 0x0
     beq lbl_fn_8041EE28_00000560
     li r4, 0xa
-    bl fn_8016E970
+    bl actor_setState
     lwz r5, 0x11c(r31)
     mr r3, r31
     li r4, 0x2
@@ -1230,7 +1230,7 @@ lbl_fn_8041F6A4_00000FA0:
     stfs f4, 0x138(r31)
     stfs f3, 0x13c(r31)
     stfs f0, 0x140(r31)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0x120(r31)
     li r0, 0x1
     lfs f0, lbl_80886578

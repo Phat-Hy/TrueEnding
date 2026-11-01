@@ -6,7 +6,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800D3FA4(void);
 extern void fn_80145334(void);
 extern void fn_801539E0(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8036554C(void);
 extern void world_updateMapTransition(void);
 extern void world_getGlobalFlag(void);
@@ -860,7 +860,7 @@ asm void fn_8039D1E8(void)
     beq lbl_fn_8039D1E8_00000A48
     mr r3, r4
     li r4, 0x0
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_8039D1E8_00000A48:
     lwz r4, 0x0(r31)
     lis r3, lbl_8074ED24@ha
@@ -910,7 +910,7 @@ asm void fn_8039D274(void)
     beq lbl_fn_8039D274_00000BBC
     mr r3, r7
     li r4, 0x1
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_8039D274_00000BBC
 lbl_fn_8039D274_00000AFC:
     cmpwi r8, 0x1
@@ -1421,7 +1421,7 @@ asm void fn_8039D9B0(void)
     lwz r3, lbl_8087F8A0
     li r4, 0x0
     lwz r3, 0x48(r3)
-    bl fn_8016E970
+    bl actor_setState
     li r3, 0x0
     li r0, 0x1
     stw r3, 0x0(r31)
@@ -1504,7 +1504,7 @@ lbl_fn_8039DA38_000012C4:
     stw r30, 0xa8(r27)
     mr r3, r29
     li r4, 0x5
-    bl fn_8016E970
+    bl actor_setState
     stw r30, 0x4(r31)
     b lbl_fn_8039DA38_0000130C
 lbl_fn_8039DA38_000012F8:
@@ -1787,7 +1787,7 @@ lbl_fn_8039DB2C_000016BC:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
     lwz r3, 0x48(r3)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_8039DB2C_00001A74
 lbl_fn_8039DB2C_000016E8:
     lwz r0, 0xb4(r3)
@@ -2040,7 +2040,7 @@ lbl_fn_8039DB2C_00001A4C:
     lwz r3, lbl_8087F8A0
     li r4, 0x1
     lwz r3, 0x48(r3)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_8039DB2C_00001A74:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

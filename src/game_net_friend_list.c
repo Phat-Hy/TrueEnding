@@ -51,7 +51,7 @@ extern void fn_8014DEE4(void);
 extern void fn_8014EEC4(void);
 extern void fn_80155DAC(void);
 extern void fn_80160324(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8017C7F8(void);
 extern void fn_80219E6C(void);
 extern void fn_80237518(void);
@@ -727,7 +727,7 @@ lbl_fn_804CF640_0000071C:
 lbl_fn_804CF640_00000730:
     lhz r4, 0x4(r30)
     mr r3, r31
-    bl fn_8016E970
+    bl actor_setState
     lhz r5, 0x8(r30)
     lis r4, 0x4330
     stw r5, 0x1c(r1)

@@ -15,7 +15,7 @@ extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
@@ -56,7 +56,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_80695720(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -1715,11 +1715,11 @@ lbl_fn_803F2CD0_00001654:
     stfs f1, 0x278(r29)
     addi r3, r1, 0x108
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x27c(r29)
     addi r3, r1, 0x108
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x280(r29)
     addi r3, r1, 0x108
     bl fn_8005B9CC
@@ -1799,7 +1799,7 @@ lbl_fn_803F2CD0_000017C4:
     la r6, lbl_8087DF48
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803F3334@ha
     mr r7, r25
     addi r4, r4, fn_803F3334@l
@@ -1828,7 +1828,7 @@ lbl_fn_803F2CD0_0000182C:
     la r5, lbl_8087DF44
     la r6, lbl_8087DF40
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803F3360@ha
     mr r7, r31
     addi r4, r4, fn_803F3360@l
@@ -1857,7 +1857,7 @@ lbl_fn_803F2CD0_00001894:
     la r6, lbl_8087DF38
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803F3374@ha
     mr r7, r30
     addi r4, r4, fn_803F3374@l

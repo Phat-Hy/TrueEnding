@@ -10,7 +10,7 @@ extern void fn_8001282C(void);
 extern void atn_LH_Binary_destructor(void);
 extern void fn_80041C0C(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_destructor(void);
@@ -1611,7 +1611,7 @@ lbl_fn_8053E65C_000012B0:
     la r5, lbl_8087E4CC
     la r6, lbl_8087E4C8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x4(r29)
     b lbl_fn_8053E65C_000012E4
 lbl_fn_8053E65C_000012DC:

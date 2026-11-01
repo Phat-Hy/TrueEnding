@@ -19,7 +19,7 @@ extern void fn_800F8C6C(void);
 extern void fn_8013C38C(void);
 extern void fn_8014052C(void);
 extern void fn_80144710(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80176548(void);
 extern void fn_801A03E8(void);
@@ -779,7 +779,7 @@ asm void fn_80267F88(void)
     cmpwi r0, 0x0
     beq lbl_fn_80267F88_00000930
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r4, 0x14b8(r29)
     mr r3, r29
     lfs f1, lbl_808836AC
@@ -945,7 +945,7 @@ lbl_fn_80267F88_00000B38:
     stw r31, 0x14c4(r29)
     stw r5, 0x12a4(r29)
     stw r0, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883670
     li r0, 0x1
     stw r0, 0x3fc(r29)
@@ -991,7 +991,7 @@ asm void fn_802682C4(void)
     stw r31, 0x2c(r1)
     stw r30, 0x28(r1)
     mr r30, r3
-    bl fn_8016E970
+    bl actor_setState
     mr r3, r30
     bl fn_80267134
     lwz r0, 0x4ec(r30)
@@ -1062,7 +1062,7 @@ lbl_fn_802682C4_00000CA0:
     stw r31, 0x14c4(r30)
     stw r5, 0x12a4(r30)
     stw r0, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x64
@@ -1092,7 +1092,7 @@ lbl_fn_802682C4_00000D74:
     stw r31, 0x14c4(r30)
     stw r5, 0x12a4(r30)
     stw r0, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x64
@@ -1145,7 +1145,7 @@ asm void fn_802684C0(void)
     stw r31, 0x14c4(r30)
     stw r5, 0x12a4(r30)
     stw r0, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x64
@@ -1238,7 +1238,7 @@ asm void fn_8026860C(void)
     stw r30, 0x14c4(r31)
     stw r5, 0x12a4(r31)
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x64
@@ -1697,7 +1697,7 @@ asm void fn_80268CB4(void)
     stw r30, 0x14c4(r31)
     stw r5, 0x12a4(r31)
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x64

@@ -40,7 +40,7 @@ extern void fn_8014C540(void);
 extern void fn_8015495C(void);
 extern void fn_80158BB4(void);
 extern void fn_8016DA4C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
 extern void fn_80178A6C(void);
@@ -72,7 +72,7 @@ extern void PSVECSquareMag(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void abort(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
@@ -1678,7 +1678,7 @@ lbl_fn_80283004_0000161C:
     bne lbl_fn_80283004_00001644
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14e8(r18)
     b lbl_fn_80283004_00001838
 lbl_fn_80283004_00001644:
@@ -1689,7 +1689,7 @@ lbl_fn_80283004_00001644:
     bne lbl_fn_80283004_0000166C
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14ec(r18)
     b lbl_fn_80283004_00001838
 lbl_fn_80283004_0000166C:
@@ -1722,7 +1722,7 @@ lbl_fn_80283004_000016BC:
     bne lbl_fn_80283004_000016E4
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x1558(r18)
     b lbl_fn_80283004_00001838
 lbl_fn_80283004_000016E4:
@@ -1774,7 +1774,7 @@ lbl_fn_80283004_0000177C:
     bne lbl_fn_80283004_000017A8
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1530(r18)
     b lbl_fn_80283004_00001838
@@ -1786,7 +1786,7 @@ lbl_fn_80283004_000017A8:
     bne lbl_fn_80283004_000017D4
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14f4(r18)
     b lbl_fn_80283004_00001838
@@ -1920,7 +1920,7 @@ lbl_fn_802837F4_00001968:
 lbl_fn_802837F4_00001990:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r0, 0x58c(r31)
     cmpwi r0, 0x2
     bne lbl_fn_802837F4_000019C0
@@ -1958,7 +1958,7 @@ lbl_fn_802837F4_000019CC:
     bne lbl_fn_802837F4_00001A2C
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_802837F4_00001A2C:
     lfs f3, 0x2e4(r31)
     lfs f0, lbl_80883A10
@@ -2043,7 +2043,7 @@ lbl_fn_802837F4_00001B2C:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r0, 0x5c0(r31)
     ori r0, r0, 0x1
     stw r0, 0x5c0(r31)
@@ -2117,7 +2117,7 @@ lbl_fn_802837F4_00001C48:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_802837F4_00001D48
     cmpwi r5, 0x1c2
     blt lbl_fn_802837F4_00001D48
@@ -2149,7 +2149,7 @@ lbl_fn_802837F4_00001CC0:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_802837F4_00001D48
 lbl_fn_802837F4_00001D0C:
     lwz r4, 0x55c(r3)

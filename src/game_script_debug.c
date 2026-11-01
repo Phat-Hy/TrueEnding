@@ -45,7 +45,7 @@ extern void fn_80158EF0(void);
 extern void fn_80161570(void);
 extern void fn_801644D4(void);
 extern void fn_8016E4C4(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8016EB48(void);
 extern void fn_8016F3D0(void);
 extern void fn_80178208(void);
@@ -88,7 +88,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068AEA4(void);
 extern u32 strlen(const char* str);
 
@@ -752,7 +752,7 @@ lbl_fn_80250ECC_000008A4:
     bne lbl_fn_80250ECC_000008F4
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x0
     stw r3, 0x1500(r30)
     mr r4, r3
@@ -774,7 +774,7 @@ lbl_fn_80250ECC_000008F4:
     bne lbl_fn_80250ECC_00000928
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14f8(r30)
     mr r4, r3
     lwz r3, lbl_8087F408
@@ -1623,7 +1623,7 @@ lbl_fn_80251344_00001538:
     mr r3, r29
     li r4, 0x3
     stw r0, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883358
     li r28, 0x1
     stw r28, 0x3fc(r29)
@@ -1709,7 +1709,7 @@ lbl_fn_80251344_00001684:
     bne lbl_fn_80251344_000016AC
     mr r3, r29
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_80251344_00001F44
 lbl_fn_80251344_000016AC:
     lwz r0, 0x14bc(r29)
@@ -1762,7 +1762,7 @@ lbl_fn_80251344_0000174C:
     bne lbl_fn_80251344_00001764
     mr r3, r29
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_80251344_00001764:
     lwz r0, 0x58c(r29)
     cmpwi r0, 0x5
@@ -1997,7 +1997,7 @@ lbl_fn_80251344_00001AAC:
     mr r3, r29
     li r4, 0x3
     stw r28, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_80251344_00001F44
 lbl_fn_80251344_00001AD8:
     mr r3, r29
@@ -2020,7 +2020,7 @@ lbl_fn_80251344_00001AE4:
     mr r3, r29
     li r4, 0x3
     stw r28, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_80251344_00001F44
 lbl_fn_80251344_00001B2C:
     lwz r4, 0xd1c(r29)
@@ -2173,7 +2173,7 @@ lbl_fn_80251344_00001D20:
     mr r3, r29
     li r4, 0x3
     stw r28, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_80251344_00001F44
 lbl_fn_80251344_00001D68:
     lfs f4, 0x2e4(r29)
@@ -2269,7 +2269,7 @@ lbl_fn_80251344_00001E94:
     mr r3, r29
     li r4, 0x3
     stw r28, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_80251344_00001F44
 lbl_fn_80251344_00001ED4:
     lfs f28, 0x2e4(r29)
@@ -2288,7 +2288,7 @@ lbl_fn_80251344_00001ED4:
     mr r3, r29
     li r4, 0x3
     stw r28, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_80251344_00001F44
 lbl_fn_80251344_00001F1C:
     lwz r0, 0x55c(r29)

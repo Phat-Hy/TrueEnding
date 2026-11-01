@@ -105,7 +105,7 @@ extern void fn_8043B778(void);
 extern void fn_8043D594(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80473F88(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1514,11 +1514,11 @@ asm void fn_803EBC44(void)
     beq lbl_fn_803EBC44_000012D4
     mr r3, r30
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x4(r29)
     mr r3, r30
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x8(r29)
     lis r4, lbl_80751DB0@ha
     lwz r5, 0x0(r29)
@@ -1812,7 +1812,7 @@ asm void fn_803EC0A4(void)
     stw r3, 0x0(r30)
     mr r3, r31
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x4(r30)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

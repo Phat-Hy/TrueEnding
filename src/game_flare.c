@@ -39,7 +39,7 @@ extern void fn_80155DAC(void);
 extern void fn_80166544(void);
 extern void fn_80166A54(void);
 extern void fn_8016DC14(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8016F3D0(void);
 extern void fn_80178018(void);
 extern void fn_80178668(void);
@@ -1912,7 +1912,7 @@ lbl_fn_800E4278_00001964:
     bgt lbl_fn_800E4278_000019FC
     lwz r4, 0x564(r22)
     mr r3, r22
-    bl fn_8016E970
+    bl actor_setState
     mr r3, r22
     li r4, 0x1
     bl fn_80155DAC

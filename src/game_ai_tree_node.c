@@ -6,7 +6,7 @@ extern void _restgpr_19(void);
 extern void _savegpr_19(void);
 extern void fn_8004ED34(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -21,7 +21,7 @@ extern void fn_80139560(void);
 extern void fn_80148990(void);
 extern void fn_8016D74C(void);
 extern void fn_8016DA4C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80178208(void);
 extern void fn_801C02F4(void);
 extern void fn_80232B7C(void);
@@ -240,7 +240,7 @@ lbl_fn_80257B50_000001F8:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
@@ -354,7 +354,7 @@ lbl_fn_80257B50_00000398:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r30
     addi r4, r4, fn_80148990@l
@@ -492,7 +492,7 @@ lbl_fn_80257B50_000005AC:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
@@ -605,7 +605,7 @@ lbl_fn_80257B50_0000074C:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r30
     addi r4, r4, fn_80148990@l
@@ -944,7 +944,7 @@ lbl_fn_80258574_00000C34:
     stw r30, 0x14d0(r31)
     stw r30, 0x1660(r31)
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808833F4
     li r30, 0x1
     stw r30, 0x3fc(r31)
@@ -1000,7 +1000,7 @@ lbl_fn_80258574_00000D10:
     stw r30, 0x14d0(r31)
     stw r30, 0x1660(r31)
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808833F4
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1081,7 +1081,7 @@ lbl_fn_80258574_00000E44:
     stw r30, 0x14d0(r31)
     stw r30, 0x1660(r31)
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808833F4
     addi r6, r31, 0x1668
     lwz r9, 0x1518(r31)
@@ -1120,7 +1120,7 @@ lbl_fn_80258574_00000EDC:
     stw r30, 0x14d0(r31)
     stw r30, 0x1660(r31)
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808833F4
     addi r6, r31, 0x1668
     lwz r9, 0x1518(r31)
@@ -1161,7 +1161,7 @@ lbl_fn_80258574_00000F7C:
     stw r30, 0x14d0(r31)
     stw r30, 0x1660(r31)
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808833F4
     addi r6, r31, 0x1668
     lwz r9, 0x1518(r31)

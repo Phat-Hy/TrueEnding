@@ -21,7 +21,7 @@ extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800874C8(void);
 extern void fn_80087994(void);
@@ -76,7 +76,7 @@ extern void fn_8049D68C(void);
 extern void fn_804A0EFC(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_80695720(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -613,7 +613,7 @@ lbl_fn_804259B8_00000628:
     beq lbl_fn_804259B8_000006A8
     addi r3, r1, 0x8
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     slwi r0, r3, 4
     mr r5, r29
     mr r6, r29
@@ -1257,7 +1257,7 @@ lbl_fn_80426344_00000F3C:
     la r6, lbl_8087DF48
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803F3334@ha
     mr r7, r30
     addi r4, r4, fn_803F3334@l
@@ -1857,7 +1857,7 @@ lbl_fn_804269E0_00001774:
     bl strcpy
     addi r3, r1, 0x108
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     mulli r0, r3, 0xc
     addi r4, r1, 0x8
     add r3, r28, r0
@@ -1872,7 +1872,7 @@ lbl_fn_804269E0_000017C0:
     bne lbl_fn_804269E0_0000180C
     addi r3, r1, 0x108
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     slwi r0, r3, 2
     addi r3, r1, 0x108
     add r29, r28, r0
@@ -1892,7 +1892,7 @@ lbl_fn_804269E0_0000180C:
     bne lbl_fn_804269E0_00001830
     addi r3, r1, 0x108
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x98c(r28)
 lbl_fn_804269E0_00001830:
     addi r3, r1, 0x108

@@ -19,7 +19,7 @@ extern void fn_80128818(void);
 extern void fn_80128930(void);
 extern void fn_8014C228(void);
 extern void fn_8014DEE4(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_801718F8(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803C17FC(void);
@@ -739,7 +739,7 @@ lbl_fn_8016F824_000008B8:
 lbl_fn_8016F824_000008F4:
     mr r3, r30
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r30)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -1149,7 +1149,7 @@ lbl_fn_8016FDCC_00000E88:
 lbl_fn_8016FDCC_00000EC4:
     mr r3, r30
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r30)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -1610,7 +1610,7 @@ lbl_fn_8017039C_00001514:
 lbl_fn_8017039C_00001550:
     mr r3, r30
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r30)
     li r0, 0x0
     cmpwi r3, 0x0
@@ -1997,7 +1997,7 @@ lbl_fn_80170A20_00001A90:
 lbl_fn_80170A20_00001ACC:
     mr r3, r31
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r31)
     li r0, 0x0
     cmpwi r3, 0x0

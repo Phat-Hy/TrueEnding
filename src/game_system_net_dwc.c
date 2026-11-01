@@ -11,7 +11,7 @@ extern void fn_800575BC(void);
 extern void atn_ColliBox_destructor(void);
 extern void fn_80069D48(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Task_destructor(void);
 extern void fn_800DCA6C(void);
@@ -662,7 +662,7 @@ lbl_fn_80394320_000007C4:
     la r6, lbl_8087DD40
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803AB948@ha
     mr r7, r27
     addi r4, r4, fn_803AB948@l
@@ -696,7 +696,7 @@ lbl_fn_80394320_00000840:
     la r6, lbl_8087DD40
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803AB948@ha
     mr r7, r27
     addi r4, r4, fn_803AB948@l
@@ -730,7 +730,7 @@ lbl_fn_80394320_000008BC:
     la r6, lbl_8087DD40
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803AB948@ha
     mr r7, r27
     addi r4, r4, fn_803AB948@l
@@ -764,7 +764,7 @@ lbl_fn_80394320_00000938:
     la r6, lbl_8087DD40
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803AB948@ha
     mr r7, r27
     addi r4, r4, fn_803AB948@l
@@ -798,7 +798,7 @@ lbl_fn_80394320_000009B4:
     la r6, lbl_8087DD40
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803AB948@ha
     mr r7, r27
     addi r4, r4, fn_803AB948@l
@@ -1329,7 +1329,7 @@ lbl_fn_80394C68_000010BC:
     la r6, lbl_8087DD58
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80395794@ha
     mr r7, r18
     addi r4, r4, fn_80395794@l
@@ -1360,7 +1360,7 @@ lbl_fn_80394C68_0000112C:
     la r6, lbl_8087DD58
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80395794@ha
     mr r7, r18
     addi r4, r4, fn_80395794@l
@@ -1391,7 +1391,7 @@ lbl_fn_80394C68_0000119C:
     la r6, lbl_8087DD58
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80395794@ha
     mr r7, r18
     addi r4, r4, fn_80395794@l
@@ -1422,7 +1422,7 @@ lbl_fn_80394C68_0000120C:
     la r6, lbl_8087DD58
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80395794@ha
     mr r7, r18
     addi r4, r4, fn_80395794@l
@@ -1453,7 +1453,7 @@ lbl_fn_80394C68_0000127C:
     la r6, lbl_8087DD58
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80395794@ha
     mr r7, r18
     addi r4, r4, fn_80395794@l
@@ -1484,7 +1484,7 @@ lbl_fn_80394C68_000012EC:
     la r6, lbl_8087DD50
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803957B0@ha
     lis r5, atn_ColliBox_destructor@ha
     mr r7, r18
@@ -1516,7 +1516,7 @@ lbl_fn_80394C68_00001360:
     la r6, lbl_8087DD48
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_801360C4@ha
     lis r5, fn_801360D8@ha
     mr r7, r18
@@ -1548,7 +1548,7 @@ lbl_fn_80394C68_000013D4:
     la r6, lbl_8087DD48
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_801360C4@ha
     lis r5, fn_801360D8@ha
     mr r7, r18
@@ -1628,7 +1628,7 @@ lbl_fn_80394C68_00001500:
     la r5, lbl_8087D9EC
     la r6, lbl_8087D9E8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r30)
     mr r18, r3
     cmpwi r0, 0x0
@@ -1722,7 +1722,7 @@ lbl_fn_80394C68_00001650:
     la r5, lbl_8087D9EC
     la r6, lbl_8087D9E8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r30)
     mr r19, r3
     cmpwi r0, 0x0
@@ -1871,7 +1871,7 @@ lbl_fn_80394C68_00001878:
     la r5, lbl_8087D9EC
     la r6, lbl_8087D9E8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r20)
     mr r18, r3
     cmpwi r0, 0x0
@@ -1965,7 +1965,7 @@ lbl_fn_80394C68_000019C8:
     la r5, lbl_8087D9EC
     la r6, lbl_8087D9E8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r20)
     mr r18, r3
     cmpwi r0, 0x0

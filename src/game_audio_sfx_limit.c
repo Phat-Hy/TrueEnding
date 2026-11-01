@@ -45,7 +45,7 @@ extern void fn_8011F91C(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80145334(void);
 extern void fn_8014C540(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8020A780(void);
 extern void fn_80219E6C(void);
 extern void fn_80232B7C(void);
@@ -91,7 +91,7 @@ extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068AEA4(void);
 extern void fn_806958E0(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1409,7 +1409,7 @@ lbl_fn_803165EC_00001240:
     bne lbl_fn_803165EC_00001274
     addi r3, r1, 0x18
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x157c(r30)
     b lbl_fn_803165EC_000012EC
@@ -1421,7 +1421,7 @@ lbl_fn_803165EC_00001274:
     bne lbl_fn_803165EC_000012A0
     addi r3, r1, 0x18
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1580(r30)
     b lbl_fn_803165EC_000012EC
@@ -1433,7 +1433,7 @@ lbl_fn_803165EC_000012A0:
     bne lbl_fn_803165EC_000012C8
     addi r3, r1, 0x18
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x1c88(r30)
     b lbl_fn_803165EC_000012EC
 lbl_fn_803165EC_000012C8:
@@ -1444,7 +1444,7 @@ lbl_fn_803165EC_000012C8:
     bne lbl_fn_803165EC_000012EC
     addi r3, r1, 0x18
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x1c84(r30)
 lbl_fn_803165EC_000012EC:
     addi r3, r1, 0x18
@@ -1594,7 +1594,7 @@ lbl_fn_80316A68_00001470:
 lbl_fn_80316A68_000014F4:
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_80316A68_000017BC
 lbl_fn_80316A68_00001504:
     beq lbl_fn_80316A68_0000159C

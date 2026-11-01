@@ -8,7 +8,7 @@ extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_8006BA30(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_800DC1DC(void);
 extern void fn_800DD3FC(void);
 extern void fn_80206B14(void);
@@ -16,7 +16,7 @@ extern void fn_80209294(void);
 extern void fn_802092F8(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_80686A48(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
@@ -197,7 +197,7 @@ lbl_fn_8021B2F8_000001BC:
     la r6, lbl_8087DBA0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r19
     addi r4, r26, fn_8021BE80@l
     addi r5, r25, fn_8021BE40@l
@@ -247,7 +247,7 @@ lbl_fn_8021B2F8_00000270:
     la r6, lbl_8087DBA0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r19
     addi r4, r26, fn_8021BE80@l
     addi r5, r25, fn_8021BE40@l
@@ -297,7 +297,7 @@ lbl_fn_8021B2F8_00000324:
     la r6, lbl_8087DBA0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r19
     addi r4, r26, fn_8021BE80@l
     addi r5, r25, fn_8021BE40@l
@@ -347,7 +347,7 @@ lbl_fn_8021B2F8_000003D8:
     la r6, lbl_8087DBA0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r19
     addi r4, r26, fn_8021BE80@l
     addi r5, r25, fn_8021BE40@l
@@ -397,7 +397,7 @@ lbl_fn_8021B2F8_0000048C:
     la r6, lbl_8087DBA0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r19
     addi r4, r26, fn_8021BE80@l
     addi r5, r25, fn_8021BE40@l
@@ -447,7 +447,7 @@ lbl_fn_8021B2F8_00000540:
     la r6, lbl_8087DBA0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r19
     addi r4, r26, fn_8021BE80@l
     addi r5, r25, fn_8021BE40@l
@@ -485,7 +485,7 @@ lbl_fn_8021B2F8_000005C4:
     la r6, lbl_8087DBA0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8021BE80@ha
     lis r5, fn_8021BE40@ha
     mr r7, r19
@@ -507,7 +507,7 @@ lbl_fn_8021B2F8_00000620:
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r4, 0x8(r1)
     li r30, 0x0
     stw r3, lbl_8087F2F4
@@ -1242,15 +1242,15 @@ lbl_fn_8021BFA0_00001040:
     cmplwi r3, 0xd
     blt lbl_fn_8021BFA0_00001098
     addi r3, r28, 0x8
-    bl fn_80684600
+    bl atoi
     mulli r28, r3, 0x64
     lwz r3, 0x10(r27)
     addi r3, r3, 0x2
-    bl fn_80684600
+    bl atoi
     mulli r29, r3, 0x2710
     lwz r3, 0x10(r27)
     addi r3, r3, 0xb
-    bl fn_80684600
+    bl atoi
     add r0, r29, r28
     add r0, r3, r0
     cmpw r0, r25
@@ -1376,7 +1376,7 @@ lbl_fn_8021C3F4_00001214:
     li r4, 0xc
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, lbl_8087F2FC
     addi r5, r25, lbl_80742658@l
     stw r3, lbl_8087F300
@@ -1384,7 +1384,7 @@ lbl_fn_8021C3F4_00001214:
     mulli r3, r0, 0x14
     li r4, 0x3
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r4, 0x8(r1)
     li r29, 0x0
     stw r3, lbl_8087F2F8

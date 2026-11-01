@@ -7,7 +7,7 @@ extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void fn_80041C0C(void);
 extern void fn_80042740(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_800928B0(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A555C(void);
@@ -142,7 +142,7 @@ asm void fn_80120D44(void)
     la r6, lbl_8087D9B8
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_802377B8@ha
     lis r5, fn_800EF73C@ha
     mr r7, r26
@@ -223,7 +223,7 @@ asm void fn_80120E48(void)
     la r6, lbl_8087D9B0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80042740@ha
     lis r5, fn_80041C0C@ha
     mr r7, r25

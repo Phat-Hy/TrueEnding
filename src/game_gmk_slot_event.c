@@ -23,7 +23,7 @@ extern void fn_80375D0C(void);
 extern void fn_8054A340(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068AEB0(void);
 extern u32 strlen(const char* str);
 
@@ -1443,7 +1443,7 @@ lbl_fn_80448B80_00001300:
     cmpwi r3, 0x0
     bne lbl_fn_80448B80_0000135C
     addi r3, r26, 0x2
-    bl fn_80684600
+    bl atoi
     cmpw r3, r30
     bne lbl_fn_80448B80_0000135C
     mr r3, r26
@@ -1451,7 +1451,7 @@ lbl_fn_80448B80_00001300:
     cmplwi r3, 0x6
     blt lbl_fn_80448B80_00001358
     addi r3, r26, 0x6
-    bl fn_80684600
+    bl atoi
     cmpw r3, r29
     bne lbl_fn_80448B80_00001350
     li r28, 0x1
@@ -1498,7 +1498,7 @@ lbl_fn_80448B80_000013A4:
     cmpwi r0, 0x2
     bne lbl_fn_80448B80_000015CC
     addi r3, r26, 0x2
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     li r3, 0x2
     bl fn_802085E0
@@ -1527,7 +1527,7 @@ lbl_fn_80448B80_00001424:
     cmpwi r3, 0x0
     bne lbl_fn_80448B80_00001568
     addi r3, r26, 0x2
-    bl fn_80684600
+    bl atoi
     mr r24, r3
     mr r3, r26
     li r23, 0x0
@@ -1535,11 +1535,11 @@ lbl_fn_80448B80_00001424:
     cmplwi r3, 0x6
     blt lbl_fn_80448B80_00001480
     addi r3, r26, 0x6
-    bl fn_80684600
+    bl atoi
     mr r23, r3
 lbl_fn_80448B80_00001480:
     addi r3, r27, 0x5
-    bl fn_80684600
+    bl atoi
     mr r25, r3
     mr r3, r27
     li r26, 0x0
@@ -1547,7 +1547,7 @@ lbl_fn_80448B80_00001480:
     cmplwi r3, 0x9
     blt lbl_fn_80448B80_000014AC
     addi r3, r27, 0x9
-    bl fn_80684600
+    bl atoi
     mr r26, r3
 lbl_fn_80448B80_000014AC:
     li r27, 0x0
@@ -1614,7 +1614,7 @@ lbl_fn_80448B80_00001568:
     cmpwi r3, 0x0
     bne lbl_fn_80448B80_000015CC
     addi r3, r27, 0x2
-    bl fn_80684600
+    bl atoi
     cmpw r3, r30
     bne lbl_fn_80448B80_000015CC
     mr r3, r27
@@ -1622,7 +1622,7 @@ lbl_fn_80448B80_00001568:
     cmplwi r3, 0x6
     blt lbl_fn_80448B80_000015C8
     addi r3, r27, 0x6
-    bl fn_80684600
+    bl atoi
     cmpw r3, r29
     bne lbl_fn_80448B80_000015C0
     li r28, 0x1

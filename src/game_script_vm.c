@@ -19,7 +19,7 @@ extern void fn_8005B6E8(void);
 extern void fn_8006AFF8(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
@@ -1874,7 +1874,7 @@ lbl_fn_80243FAC_00001714:
     la r6, lbl_8087DC20
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8024405C@ha
     lis r5, fn_80243758@ha
     mr r7, r30

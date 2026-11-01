@@ -59,7 +59,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void fn_8067E23C(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -1525,7 +1525,7 @@ asm void fn_80362FA4(void)
     mr r30, r3
     mr r3, r31
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r30)
     mr r3, r31
     bl fn_8005B3CC
@@ -1589,7 +1589,7 @@ asm void fn_80362FA4(void)
     stfs f7, 0x88(r30)
     stfs f0, 0x98(r30)
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x9c(r30)
     mr r3, r31
     bl fn_8005B3CC

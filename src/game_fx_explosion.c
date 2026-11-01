@@ -17,7 +17,7 @@ extern void fn_8013322C(void);
 extern void fn_80148990(void);
 extern void dialog_renderWindow(void);
 extern void fn_80151448(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80179D44(void);
 extern void fn_80239DAC(void);
 extern void fn_8028A1F8(void);
@@ -653,7 +653,7 @@ lbl_fn_802956D8_00000790:
     bl fn_80239DAC
     mr r3, r31
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r31)
     lwz r3, lbl_8087F048
@@ -720,7 +720,7 @@ lbl_fn_802956D8_0000090C:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883BF0
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1660,7 +1660,7 @@ lbl_fn_80296268_00001654:
     bl fn_80239DAC
     mr r3, r31
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lfs f3, lbl_80883BF0
     li r3, 0x1d
     lfs f0, lbl_80883C58
@@ -1703,7 +1703,7 @@ lbl_fn_80296268_00001718:
     bl fn_80239DAC
     mr r3, r31
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lfs f3, lbl_80883BF0
     li r3, 0x1d
     lfs f0, lbl_80883C58
@@ -1756,7 +1756,7 @@ lbl_fn_80296268_000017E4:
     bl fn_80239DAC
     mr r3, r31
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883BF0
     li r3, 0x1d
     li r0, 0x1
@@ -1836,7 +1836,7 @@ lbl_fn_80296268_00001908:
     bl fn_80239DAC
     mr r3, r31
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r31)
     lwz r3, lbl_8087F048
@@ -1897,7 +1897,7 @@ lbl_fn_80296268_000019C0:
     bl atn_Anim_setLayerAnimation
     mr r3, r31
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0x1568(r31)
     li r0, 0x4
     stw r0, 0x560(r31)

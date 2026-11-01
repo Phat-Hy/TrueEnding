@@ -16,7 +16,7 @@ extern void fn_806823B0(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void strstr(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_806D57A0(void);
 extern void fn_806D5850(void);
 extern void fn_806D58F0(void);
@@ -518,7 +518,7 @@ lbl_fn_806E2010_000005C8:
     beq lbl_fn_806E2010_00000AE0
     b lbl_fn_806E2010_00000AE4
     mr r3, r28
-    bl fn_80684600
+    bl atoi
     mr r5, r3
     mr r3, r30
     li r4, 0x70d
@@ -527,7 +527,7 @@ lbl_fn_806E2010_000005C8:
     beq lbl_fn_806E2010_00000AE0
     b lbl_fn_806E2010_00000AE4
     mr r3, r28
-    bl fn_80684600
+    bl atoi
     mr r5, r3
     mr r3, r30
     li r4, 0x70e
@@ -563,7 +563,7 @@ lbl_fn_806E2010_00000670:
     beq lbl_fn_806E2010_00000AE0
     b lbl_fn_806E2010_00000AE4
     mr r3, r28
-    bl fn_80684600
+    bl atoi
     mr r5, r3
     mr r3, r30
     li r4, 0x710
@@ -599,7 +599,7 @@ lbl_fn_806E2010_000006F4:
     beq lbl_fn_806E2010_00000AE0
     b lbl_fn_806E2010_00000AE4
     mr r3, r28
-    bl fn_80684600
+    bl atoi
     mr r5, r3
     mr r3, r30
     li r4, 0x712
@@ -608,7 +608,7 @@ lbl_fn_806E2010_000006F4:
     beq lbl_fn_806E2010_00000AE0
     b lbl_fn_806E2010_00000AE4
     mr r3, r28
-    bl fn_80684600
+    bl atoi
     mr r5, r3
     mr r3, r30
     li r4, 0x714
@@ -617,7 +617,7 @@ lbl_fn_806E2010_000006F4:
     beq lbl_fn_806E2010_00000AE0
     b lbl_fn_806E2010_00000AE4
     mr r3, r28
-    bl fn_80684600
+    bl atoi
     mr r5, r3
     mr r3, r30
     li r4, 0x715
@@ -2451,7 +2451,7 @@ lbl_fn_806E4010_0000206C:
     b lbl_fn_806E4010_00002210
 lbl_fn_806E4010_000020D0:
     addi r3, r1, 0x10
-    bl fn_80684600
+    bl atoi
     mr r29, r3
     lwz r3, 0x1c(r27)
     addi r4, r30, 0x2c

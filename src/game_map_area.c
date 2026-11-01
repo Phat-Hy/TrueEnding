@@ -31,7 +31,7 @@ extern void fn_80128818(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8014C228(void);
 extern void fn_8014DEE4(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_801718F8(void);
 extern void fn_8035B694(void);
@@ -631,7 +631,7 @@ lbl_fn_8017B434_000006E0:
 lbl_fn_8017B434_0000071C:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0

@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void fn_8004D388(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -15,7 +15,7 @@ extern void fn_80148990(void);
 extern void fn_8015495C(void);
 extern void fn_80158BB4(void);
 extern void fn_8016DA4C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8016F824(void);
 extern void fn_80170A20(void);
 extern void fn_80176548(void);
@@ -188,7 +188,7 @@ asm void fn_802C3EDC(void)
     cmplw r4, r0
     beq lbl_fn_802C3EDC_000001A4
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r4, 0x1584(r31)
     mr r3, r31
     lfs f1, lbl_808842B0
@@ -200,7 +200,7 @@ lbl_fn_802C3EDC_00000158:
     cmpwi r0, 0x2
     bne lbl_fn_802C3EDC_00000188
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x0
     stw r0, 0x10d0(r31)
     mr r3, r31
@@ -210,7 +210,7 @@ lbl_fn_802C3EDC_00000158:
     b lbl_fn_802C3EDC_000001A4
 lbl_fn_802C3EDC_00000188:
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r4, 0x1584(r31)
     mr r3, r31
     lfs f1, lbl_808842B0
@@ -424,7 +424,7 @@ lbl_fn_802C3EDC_0000047C:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_802C3EDC_000004B0:
     lwz r0, 0x124(r1)
     psq_l f31, 0x118(r1), 0, 0
@@ -459,7 +459,7 @@ asm void fn_802C42D4(void)
     mr r3, r30
     li r4, 0x3
     stw r31, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3e8
@@ -584,7 +584,7 @@ asm void fn_802C4480(void)
     mr r3, r30
     li r4, 0x3
     stw r31, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3e8
@@ -848,7 +848,7 @@ asm void fn_802C4858(void)
     mr r3, r30
     li r4, 0x6
     stw r0, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808842AC
     li r0, 0x4
     li r31, 0x1
@@ -1436,7 +1436,7 @@ lbl_fn_802C5068_00001330:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
@@ -1550,7 +1550,7 @@ lbl_fn_802C5068_000014D0:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r30
     addi r4, r4, fn_80148990@l
@@ -1726,7 +1726,7 @@ lbl_fn_802C5068_00001774:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
@@ -1840,7 +1840,7 @@ lbl_fn_802C5068_00001914:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r30
     addi r4, r4, fn_80148990@l
@@ -2012,7 +2012,7 @@ lbl_fn_802C5068_00001BA8:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
@@ -2126,7 +2126,7 @@ lbl_fn_802C5068_00001D48:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r30
     addi r4, r4, fn_80148990@l

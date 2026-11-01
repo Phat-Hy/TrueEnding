@@ -37,7 +37,7 @@ extern void fn_804A313C(void);
 extern void fn_80571630(void);
 extern void fn_805A2FD8(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1157,7 +1157,7 @@ lbl_world_updateMapTransition_00000E6C:
     cmpwi r3, 0x0
     bne lbl_world_updateMapTransition_00000EEC
     addi r3, r20, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r21, r3, 0x64
     bne lbl_world_updateMapTransition_00000EEC
@@ -1166,7 +1166,7 @@ lbl_world_updateMapTransition_00000E6C:
     cmplwi r3, 0x8
     blt lbl_world_updateMapTransition_00000EEC
     addi r3, r20, 0x6
-    bl fn_80684600
+    bl atoi
     add r21, r21, r3
 lbl_world_updateMapTransition_00000EEC:
     lis r3, lbl_8074DAF8@ha
@@ -1198,7 +1198,7 @@ lbl_world_updateMapTransition_00000F1C:
     cmpwi r3, 0x0
     bne lbl_world_updateMapTransition_00000F7C
     addi r3, r20, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r21, r3, 0x64
     bne lbl_world_updateMapTransition_00000F7C
@@ -1207,7 +1207,7 @@ lbl_world_updateMapTransition_00000F1C:
     cmplwi r3, 0x8
     blt lbl_world_updateMapTransition_00000F7C
     addi r3, r20, 0x6
-    bl fn_80684600
+    bl atoi
     add r21, r21, r3
 lbl_world_updateMapTransition_00000F7C:
     lis r4, lbl_8074DA2C@ha

@@ -15,7 +15,7 @@ extern void _savegpr_26(void);
 extern void fn_806823B0(void);
 extern void strncmp(void);
 extern void strstr(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_806D57A0(void);
 extern void fn_806D5850(void);
 extern void fn_806D58F0(void);
@@ -1041,7 +1041,7 @@ lbl_fn_806F96F0_00000DBC:
 lbl_fn_806F96F0_00000DC8:
     addi r3, r29, 0x120
 lbl_fn_806F96F0_00000DCC:
-    bl fn_80684600
+    bl atoi
     li r0, 0x20
     mr r26, r3
     addi r4, r29, 0x140
@@ -1105,7 +1105,7 @@ lbl_fn_806F96F0_00000E9C:
 lbl_fn_806F96F0_00000EA8:
     addi r3, r29, 0x120
 lbl_fn_806F96F0_00000EAC:
-    bl fn_80684600
+    bl atoi
     li r0, 0x20
     mr r30, r3
     addi r4, r29, 0x144
@@ -1169,7 +1169,7 @@ lbl_fn_806F96F0_00000F7C:
 lbl_fn_806F96F0_00000F88:
     addi r3, r29, 0x120
 lbl_fn_806F96F0_00000F8C:
-    bl fn_80684600
+    bl atoi
     li r0, 0x20
     mr r31, r3
     addi r4, r29, 0x148
@@ -1233,7 +1233,7 @@ lbl_fn_806F96F0_0000105C:
 lbl_fn_806F96F0_00001068:
     addi r3, r29, 0x120
 lbl_fn_806F96F0_0000106C:
-    bl fn_80684600
+    bl atoi
     lwz r0, 0x228(r28)
     mr r25, r3
     cmpwi r0, 0x0
@@ -1330,7 +1330,7 @@ lbl_fn_806F96F0_000011AC:
 lbl_fn_806F96F0_000011B8:
     addi r3, r29, 0x120
 lbl_fn_806F96F0_000011BC:
-    bl fn_80684600
+    bl atoi
     mr r30, r3
     mr r3, r24
     addi r4, r29, 0x154
@@ -1519,7 +1519,7 @@ lbl_fn_806F9D60_0000144C:
 lbl_fn_806F9D60_00001458:
     addi r3, r29, 0x120
 lbl_fn_806F9D60_0000145C:
-    bl fn_80684600
+    bl atoi
     li r0, 0x20
     mr r31, r3
     addi r4, r29, 0x140
@@ -1583,7 +1583,7 @@ lbl_fn_806F9D60_0000152C:
 lbl_fn_806F9D60_00001538:
     addi r3, r29, 0x120
 lbl_fn_806F9D60_0000153C:
-    bl fn_80684600
+    bl atoi
     li r0, 0x20
     mr r30, r3
     addi r4, r29, 0x170
@@ -1845,7 +1845,7 @@ lbl_fn_806F9D60_000018D4:
 lbl_fn_806F9D60_000018E0:
     addi r3, r29, 0x120
 lbl_fn_806F9D60_000018E4:
-    bl fn_80684600
+    bl atoi
     li r0, 0x20
     mr r30, r3
     addi r4, r29, 0x140
@@ -1909,7 +1909,7 @@ lbl_fn_806F9D60_000019B4:
 lbl_fn_806F9D60_000019C0:
     addi r3, r29, 0x120
 lbl_fn_806F9D60_000019C4:
-    bl fn_80684600
+    bl atoi
     lwz r0, 0x228(r28)
     mr r26, r3
     cmpwi r0, 0x0
@@ -2109,7 +2109,7 @@ lbl_fn_806F9D60_00001C84:
 lbl_fn_806F9D60_00001C90:
     addi r3, r29, 0x120
 lbl_fn_806F9D60_00001C94:
-    bl fn_80684600
+    bl atoi
     li r0, 0x20
     mr r30, r3
     addi r4, r29, 0x140
@@ -2173,7 +2173,7 @@ lbl_fn_806F9D60_00001D64:
 lbl_fn_806F9D60_00001D70:
     addi r3, r29, 0x120
 lbl_fn_806F9D60_00001D74:
-    bl fn_80684600
+    bl atoi
     lwz r0, 0x228(r28)
     mr r26, r3
     cmpwi r0, 0x0
@@ -2384,7 +2384,7 @@ lbl_fn_806F9D60_0000205C:
 lbl_fn_806F9D60_00002068:
     addi r3, r29, 0x120
 lbl_fn_806F9D60_0000206C:
-    bl fn_80684600
+    bl atoi
     li r0, 0x20
     mr r27, r3
     addi r4, r29, 0x144
@@ -2448,7 +2448,7 @@ lbl_fn_806F9D60_0000213C:
 lbl_fn_806F9D60_00002148:
     addi r3, r29, 0x120
 lbl_fn_806F9D60_0000214C:
-    bl fn_80684600
+    bl atoi
     li r0, 0x20
     mr r30, r3
     addi r4, r29, 0x140
@@ -2512,7 +2512,7 @@ lbl_fn_806F9D60_0000221C:
 lbl_fn_806F9D60_00002228:
     addi r3, r29, 0x120
 lbl_fn_806F9D60_0000222C:
-    bl fn_80684600
+    bl atoi
     li r0, 0x20
     mr r31, r3
     addi r4, r29, 0x148
@@ -2576,7 +2576,7 @@ lbl_fn_806F9D60_000022FC:
 lbl_fn_806F9D60_00002308:
     addi r3, r29, 0x120
 lbl_fn_806F9D60_0000230C:
-    bl fn_80684600
+    bl atoi
     lwz r0, 0x228(r28)
     mr r29, r3
     cmpwi r0, 0x0

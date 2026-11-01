@@ -31,7 +31,7 @@ extern void PSMTXRotRad(void);
 extern void PSVECSquareMag(void);
 extern void fn_805F99F0(void);
 extern void fn_805F9A50(void);
-extern void fn_806868C4(void);
+extern void swprintf(void);
 extern void fn_8072D210(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -1568,7 +1568,7 @@ lbl_dialog_renderWindow_00001384:
     addi r5, r25, lbl_8077C6F8@l
     li r4, 0x100
     crclr 6
-    bl fn_806868C4
+    bl swprintf
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x9f8
     lfs f1, lbl_80881A88
@@ -1608,7 +1608,7 @@ lbl_dialog_renderWindow_00001384:
     lfs f2, 0x2e8(r24)
     lfs f1, 0x2fc(r24)
     crset 6
-    bl fn_806868C4
+    bl swprintf
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x9f8
     lfs f1, lbl_80881A88
@@ -1642,7 +1642,7 @@ lbl_dialog_renderWindow_00001384:
     fadds f30, f30, f0
     li r4, 0x100
     crset 6
-    bl fn_806868C4
+    bl swprintf
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x9f8
     lfs f1, lbl_80881A88
@@ -1821,7 +1821,7 @@ lbl_dialog_renderWindow_00001774:
     addi r3, r1, 0x5f8
     li r4, 0x100
     crset 6
-    bl fn_806868C4
+    bl swprintf
     b lbl_dialog_renderWindow_0000191C
 lbl_dialog_renderWindow_000018C4:
     cmpwi r0, 0x3
@@ -1835,7 +1835,7 @@ lbl_dialog_renderWindow_000018C4:
     addi r3, r1, 0x5f8
     li r4, 0x100
     crset 6
-    bl fn_806868C4
+    bl swprintf
     b lbl_dialog_renderWindow_0000191C
 lbl_dialog_renderWindow_000018F8:
     lis r5, lbl_8077C6F8@ha
@@ -1846,7 +1846,7 @@ lbl_dialog_renderWindow_000018F8:
     li r4, 0x100
     addi r5, r5, 0x152
     crset 6
-    bl fn_806868C4
+    bl swprintf
 lbl_dialog_renderWindow_0000191C:
     lfs f3, lbl_8088196C
     lis r5, 0xb000
@@ -1883,7 +1883,7 @@ lbl_dialog_renderWindow_0000191C:
     li r6, 0x44
 lbl_dialog_renderWindow_000019A0:
     crset 6
-    bl fn_806868C4
+    bl swprintf
     lfs f3, lbl_8088196C
     lis r26, 0xb000
     lfs f4, lbl_80881A88
@@ -1912,7 +1912,7 @@ lbl_dialog_renderWindow_000019A0:
     addi r5, r25, 0x1a2
     li r4, 0x100
     crset 6
-    bl fn_806868C4
+    bl swprintf
     lfs f3, lbl_8088196C
     fmr f2, f30
     lfs f4, lbl_80881A88
@@ -1938,7 +1938,7 @@ lbl_dialog_renderWindow_000019A0:
     lfs f2, 0x8c8(r24)
     li r4, 0x100
     crset 6
-    bl fn_806868C4
+    bl swprintf
     lfs f3, lbl_8088196C
     fmr f2, f30
     lfs f4, lbl_80881A88

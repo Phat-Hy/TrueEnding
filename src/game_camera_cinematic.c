@@ -5,7 +5,7 @@
 extern void fn_8000D3A4(void);
 extern void fn_80013338(void);
 extern void fn_8004ED34(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -22,7 +22,7 @@ extern void fn_8015AC48(void);
 extern void fn_8015E7A0(void);
 extern void fn_8016C4D8(void);
 extern void fn_8016E4C4(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_802DC5B4(void);
 extern void fn_802DC8B0(void);
 extern void fn_802E4D6C(void);
@@ -185,7 +185,7 @@ lbl_fn_802E2F24_00000104:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884720
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -384,7 +384,7 @@ lbl_fn_802E315C_000003E0:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
@@ -498,7 +498,7 @@ lbl_fn_802E315C_00000580:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r30
     addi r4, r4, fn_80148990@l
@@ -1163,7 +1163,7 @@ asm void fn_802E3D60(void)
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     mr r3, r31
     li r4, 0x1
     bl fn_8016E4C4
@@ -1228,7 +1228,7 @@ asm void fn_802E3E38(void)
     mr r3, r29
     li r4, 0x3
     stw r0, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884720
     li r0, 0x1
     stw r0, 0x3fc(r29)
@@ -1515,7 +1515,7 @@ lbl_fn_802E3EE8_000013F4:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_802E3EE8_000014D4
 lbl_fn_802E3EE8_00001424:
     lfs f30, 0x2e4(r31)
@@ -1535,7 +1535,7 @@ lbl_fn_802E3EE8_00001424:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884720
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1587,7 +1587,7 @@ lbl_fn_802E3EE8_000014F8:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884720
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1734,7 +1734,7 @@ lbl_fn_802E3EE8_000016CC:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884720
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1920,7 +1920,7 @@ lbl_fn_802E470C_0000196C:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884720
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1996,7 +1996,7 @@ lbl_fn_802E470C_00001B14:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884720
     li r0, 0x1
     stw r0, 0x3fc(r31)

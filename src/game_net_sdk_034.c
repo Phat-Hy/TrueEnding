@@ -10,7 +10,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_26(void);
 extern void strcmp(void);
 extern void strstr(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_806D7A90(void);
 extern void fn_806D7AA0(void);
 extern void fn_806D7AC0(void);
@@ -1128,7 +1128,7 @@ lbl_fn_806E65E0_00000F6C:
     mr r3, r18
     bl memset
     addi r3, r1, 0x100
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r18)
     li r17, 0x0
 lbl_fn_806E65E0_00000F9C:
@@ -1171,7 +1171,7 @@ lbl_fn_806E65E0_00001014:
     cmpwi r3, 0x0
     bne lbl_fn_806E65E0_00001038
     addi r3, r1, 0x100
-    bl fn_80684600
+    bl atoi
     stw r3, 0x38(r18)
     b lbl_fn_806E65E0_000010E0
 lbl_fn_806E65E0_00001038:
@@ -1609,7 +1609,7 @@ lbl_fn_806E65E0_00001658:
     bl memset
     stw r27, 0x24(r15)
     addi r3, r1, 0x100
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r15)
     li r17, 0x0
 lbl_fn_806E65E0_0000168C:
@@ -1651,7 +1651,7 @@ lbl_fn_806E65E0_00001700:
     cmpwi r3, 0x0
     bne lbl_fn_806E65E0_00001724
     addi r3, r1, 0x100
-    bl fn_80684600
+    bl atoi
     stw r3, 0x24(r15)
     b lbl_fn_806E65E0_00001754
 lbl_fn_806E65E0_00001724:
@@ -1732,7 +1732,7 @@ lbl_fn_806E65E0_00001800:
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_0000183C:
     addi r3, r1, 0x100
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x0
     mr r15, r3
     beq lbl_fn_806E65E0_0000185C
@@ -1759,7 +1759,7 @@ lbl_fn_806E65E0_0000185C:
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_000018A0:
     addi r3, r1, 0x100
-    bl fn_80684600
+    bl atoi
     mr r16, r3
 lbl_fn_806E65E0_000018AC:
     li r3, 0x8
@@ -1820,7 +1820,7 @@ lbl_fn_806E65E0_00001948:
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_00001984:
     addi r3, r1, 0x100
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x0
     mr r15, r3
     beq lbl_fn_806E65E0_0000199C
@@ -1850,7 +1850,7 @@ lbl_fn_806E65E0_000019E8:
     b lbl_fn_806E65E0_000019FC
 lbl_fn_806E65E0_000019F0:
     addi r3, r1, 0x100
-    bl fn_80684600
+    bl atoi
     mr r16, r3
 lbl_fn_806E65E0_000019FC:
     li r3, 0x8
@@ -1974,7 +1974,7 @@ lbl_fn_806E65E0_00001B90:
     addi r3, r1, 0x100
     addi r0, r4, 0x1
     stw r0, 0x4(r15)
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r18)
     li r17, 0x0
 lbl_fn_806E65E0_00001BCC:
@@ -2184,7 +2184,7 @@ lbl_fn_806E65E0_00001E90:
     addi r3, r1, 0x100
     addi r0, r4, 0x1
     stw r0, 0x4(r15)
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r16)
     li r18, 0x0
 lbl_fn_806E65E0_00001ECC:
@@ -2302,7 +2302,7 @@ lbl_fn_806E65E0_00002030:
     b lbl_fn_806E65E0_000023E4
 lbl_fn_806E65E0_0000206C:
     addi r3, r1, 0x100
-    bl fn_80684600
+    bl atoi
     stw r3, 0x4(r18)
     slwi r3, r3, 2
     bl fn_806D7A90
@@ -2474,7 +2474,7 @@ lbl_fn_806E65E0_000022D0:
     cmpwi r3, 0x0
     bne lbl_fn_806E65E0_00002320
     addi r3, r1, 0x100
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x0
     ble lbl_fn_806E65E0_00002384
     slwi r3, r3, 2
@@ -2496,7 +2496,7 @@ lbl_fn_806E65E0_00002320:
     cmpwi r3, 0x0
     bne lbl_fn_806E65E0_0000235C
     addi r3, r1, 0x100
-    bl fn_80684600
+    bl atoi
     lwz r0, 0xc(r16)
     lwz r4, 0x10(r16)
     slwi r0, r0, 2

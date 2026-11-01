@@ -49,7 +49,7 @@ extern void fn_804EB874(void);
 extern void fn_805AE3C8(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
-extern void fn_806846C4(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
 extern void fn_806958E0(void);
@@ -1672,7 +1672,7 @@ lbl_fn_8054B0A0_00001428:
     mr r4, r24
     addi r3, r31, 0x24
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8054B0A0_000014A4:
     lfs f2, 0x6c(r30)
     addi r25, r25, 0x1

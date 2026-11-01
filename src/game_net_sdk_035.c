@@ -18,7 +18,7 @@ extern void fn_806820D4(void);
 extern void fn_8068236C(void);
 extern void strncmp(void);
 extern void strstr(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_806D58F0(void);
 extern void fn_806D5900(void);
 extern void fn_806D5930(void);
@@ -536,7 +536,7 @@ lbl_fn_806E8B60_000005DC:
     cmpwi r0, 0x0
     beq lbl_fn_806E8B60_000005F0
     addi r3, r1, 0x8
-    bl fn_80684600
+    bl atoi
     stw r3, 0x5b8(r30)
 lbl_fn_806E8B60_000005F0:
     addi r24, r31, 0x10

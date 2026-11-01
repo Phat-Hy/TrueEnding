@@ -90,7 +90,7 @@ extern void fn_8067CE80(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_80686A48(void);
 extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -2023,7 +2023,7 @@ lbl_fn_80587628_00001A88:
     bne lbl_fn_80587628_00001AD0
     addi r3, r1, 0x4c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x60(r20)
     b lbl_fn_80587628_00001EE0
 lbl_fn_80587628_00001AD0:
@@ -2034,7 +2034,7 @@ lbl_fn_80587628_00001AD0:
     bne lbl_fn_80587628_00001AF8
     addi r3, r1, 0x4c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x64(r20)
     b lbl_fn_80587628_00001EE0
 lbl_fn_80587628_00001AF8:

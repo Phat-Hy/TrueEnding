@@ -11,7 +11,7 @@ extern void fn_8006AC08(void);
 extern void fn_8007A994(void);
 extern void fn_8007AA64(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
@@ -343,7 +343,7 @@ lbl_fn_8007B260_00000388:
     la r5, lbl_8087D790
     la r6, lbl_8087D78C
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r22, r3
     mr r4, r27
     mr r5, r23
@@ -379,7 +379,7 @@ lbl_fn_8007B260_000003F8:
     la r5, lbl_8087D790
     la r6, lbl_8087D78C
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r23, r3
     mr r4, r21
     mr r5, r22
@@ -512,7 +512,7 @@ lbl_fn_8007B260_000005D0:
     la r5, lbl_8087D790
     la r6, lbl_8087D78C
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r23, r3
     mr r4, r21
     mr r5, r22

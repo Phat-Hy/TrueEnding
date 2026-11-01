@@ -158,7 +158,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068A918(void);
 extern void fn_8068AEA8(void);
 extern void fn_806959D8(void);
@@ -1092,7 +1092,7 @@ lbl_world_Manager_draw_00000B94:
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00000C4C
     addi r3, r25, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r29, r3, 0x64
     bne lbl_world_Manager_draw_00000C4C
@@ -1101,7 +1101,7 @@ lbl_world_Manager_draw_00000B94:
     cmplwi r3, 0x8
     blt lbl_world_Manager_draw_00000C4C
     addi r3, r25, 0x6
-    bl fn_80684600
+    bl atoi
     add r29, r29, r3
 lbl_world_Manager_draw_00000C4C:
     lis r3, lbl_8074DAF8@ha
@@ -1133,7 +1133,7 @@ lbl_world_Manager_draw_00000C7C:
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00000CDC
     addi r3, r25, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r29, r3, 0x64
     bne lbl_world_Manager_draw_00000CDC
@@ -1142,7 +1142,7 @@ lbl_world_Manager_draw_00000C7C:
     cmplwi r3, 0x8
     blt lbl_world_Manager_draw_00000CDC
     addi r3, r25, 0x6
-    bl fn_80684600
+    bl atoi
     add r29, r29, r3
 lbl_world_Manager_draw_00000CDC:
     lis r4, lbl_8074DA2C@ha
@@ -1353,7 +1353,7 @@ lbl_world_Manager_draw_00000F04:
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00001008
     addi r3, r25, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r30, r3, 0x64
     bne lbl_world_Manager_draw_00001008
@@ -1362,7 +1362,7 @@ lbl_world_Manager_draw_00000F04:
     cmplwi r3, 0x8
     blt lbl_world_Manager_draw_00001008
     addi r3, r25, 0x6
-    bl fn_80684600
+    bl atoi
     add r30, r30, r3
 lbl_world_Manager_draw_00001008:
     lis r3, lbl_8074DAF8@ha
@@ -1394,7 +1394,7 @@ lbl_world_Manager_draw_00001038:
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00001098
     addi r3, r25, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r30, r3, 0x64
     bne lbl_world_Manager_draw_00001098
@@ -1403,7 +1403,7 @@ lbl_world_Manager_draw_00001038:
     cmplwi r3, 0x8
     blt lbl_world_Manager_draw_00001098
     addi r3, r25, 0x6
-    bl fn_80684600
+    bl atoi
     add r30, r30, r3
 lbl_world_Manager_draw_00001098:
     lis r4, lbl_8074DA2C@ha
@@ -1719,7 +1719,7 @@ lbl_world_Manager_draw_000014E4:
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00001568
     addi r3, r25, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r29, r3, 0x64
     bne lbl_world_Manager_draw_00001568
@@ -1728,7 +1728,7 @@ lbl_world_Manager_draw_000014E4:
     cmplwi r3, 0x8
     blt lbl_world_Manager_draw_00001568
     addi r3, r25, 0x6
-    bl fn_80684600
+    bl atoi
     add r29, r29, r3
 lbl_world_Manager_draw_00001568:
     lis r3, lbl_8074DAF8@ha
@@ -1760,7 +1760,7 @@ lbl_world_Manager_draw_00001598:
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_000015F8
     addi r3, r25, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r29, r3, 0x64
     bne lbl_world_Manager_draw_000015F8
@@ -1769,7 +1769,7 @@ lbl_world_Manager_draw_00001598:
     cmplwi r3, 0x8
     blt lbl_world_Manager_draw_000015F8
     addi r3, r25, 0x6
-    bl fn_80684600
+    bl atoi
     add r29, r29, r3
 lbl_world_Manager_draw_000015F8:
     lis r4, lbl_8074DA2C@ha
@@ -2103,7 +2103,7 @@ lbl_world_Manager_draw_00001A30:
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00001AE4
     addi r3, r24, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r26, r3, 0x64
     bne lbl_world_Manager_draw_00001AE4
@@ -2112,7 +2112,7 @@ lbl_world_Manager_draw_00001A30:
     cmplwi r3, 0x8
     blt lbl_world_Manager_draw_00001AE4
     addi r3, r24, 0x6
-    bl fn_80684600
+    bl atoi
     add r26, r26, r3
 lbl_world_Manager_draw_00001AE4:
     lis r3, lbl_8074DAF8@ha
@@ -2144,7 +2144,7 @@ lbl_world_Manager_draw_00001B14:
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00001B74
     addi r3, r24, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r26, r3, 0x64
     bne lbl_world_Manager_draw_00001B74
@@ -2153,7 +2153,7 @@ lbl_world_Manager_draw_00001B14:
     cmplwi r3, 0x8
     blt lbl_world_Manager_draw_00001B74
     addi r3, r24, 0x6
-    bl fn_80684600
+    bl atoi
     add r26, r26, r3
 lbl_world_Manager_draw_00001B74:
     lis r4, lbl_8074DA2C@ha
@@ -2237,7 +2237,7 @@ lbl_world_Manager_draw_00001C60:
     cmpwi r3, 0x0
     bne lbl_world_Manager_draw_00001CC0
     addi r3, r24, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r25, r3, 0x64
     bne lbl_world_Manager_draw_00001CC0
@@ -2246,7 +2246,7 @@ lbl_world_Manager_draw_00001C60:
     cmplwi r3, 0x8
     blt lbl_world_Manager_draw_00001CC0
     addi r3, r24, 0x6
-    bl fn_80684600
+    bl atoi
     add r25, r25, r3
 lbl_world_Manager_draw_00001CC0:
     lis r3, lbl_8074DB70@ha

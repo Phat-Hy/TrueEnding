@@ -16,7 +16,7 @@ extern void fn_800F8C6C(void);
 extern void fn_800FAB80(void);
 extern void fn_8015ECC4(void);
 extern void fn_8016C7D8(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80192FB4(void);
 extern void fn_80232B7C(void);
 extern void fn_80239DAC(void);
@@ -781,7 +781,7 @@ lbl_fn_8034AE48_00000948:
     subfic r5, r5, 0x1e
     add r0, r0, r5
     stw r0, 0x14c0(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885398
     li r0, 0x1
     stw r30, 0x58c(r31)
@@ -878,7 +878,7 @@ asm void fn_8034B8CC(void)
     subfic r5, r5, 0x1e
     add r0, r0, r5
     stw r0, 0x14c0(r30)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885398
     li r0, 0x1
     stw r31, 0x58c(r30)
@@ -1215,7 +1215,7 @@ lbl_fn_8034B8CC_00000FB0:
     subfic r5, r5, 0x1e
     add r0, r0, r5
     stw r0, 0x14c0(r30)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885398
     li r0, 0x1
     stw r31, 0x58c(r30)
@@ -1274,7 +1274,7 @@ lbl_fn_8034B8CC_000010D0:
     bl fn_80239DAC
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885398
     li r3, 0xe
     li r0, 0x1
@@ -1553,7 +1553,7 @@ lbl_fn_8034C060_000014A0:
     subfic r5, r5, 0x1e
     add r0, r0, r5
     stw r0, 0x14c0(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885398
     li r0, 0x1
     stw r30, 0x58c(r31)
@@ -2281,7 +2281,7 @@ lbl_fn_8034C714_00001F74:
     subfic r5, r5, 0x1e
     add r0, r0, r5
     stw r0, 0x14c0(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885398
     li r0, 0x1
     stw r30, 0x58c(r31)

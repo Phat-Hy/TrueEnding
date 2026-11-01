@@ -15,7 +15,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_8005ED68(void);
 extern void fn_8006F2F0(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800BDB58(void);
 extern void atn_LH_Texture_update(void);
@@ -541,7 +541,7 @@ asm void fn_800616C0(void)
     li r4, 0x6
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r31, r3
     li r3, 0x0
     bl mem_getAllocSize

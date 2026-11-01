@@ -12,7 +12,7 @@ extern void fn_80044CCC(void);
 extern void fn_80044E0C(void);
 extern void fn_8004D388(void);
 extern void fn_8004ED34(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_800E2FE0(void);
 extern void fn_800EC7F0(void);
 extern void fn_800EF7F8(void);
@@ -1783,7 +1783,7 @@ lbl_camera_setMode_000015E8:
     mr r6, r5
     li r4, 0x1
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_800EF6BC@ha
     lis r5, fn_800EF7F8@ha
     mr r7, r31

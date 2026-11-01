@@ -5,7 +5,7 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
@@ -1314,7 +1314,7 @@ lbl_fn_80108090_00001004:
     mr r6, r5
     li r4, 0x3
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x6d8(r30)
     addi r5, r31, lbl_80736040@l
     stw r3, 0x6d0(r30)
@@ -1322,7 +1322,7 @@ lbl_fn_80108090_00001004:
     slwi r3, r0, 1
     li r4, 0x3
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lfs f0, lbl_80881494
     li r0, 0x0
     stw r3, 0x6d4(r30)

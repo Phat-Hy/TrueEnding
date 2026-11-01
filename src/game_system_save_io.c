@@ -7,7 +7,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800C31F4(void);
 extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80232B7C(void);
 extern void fn_80239DAC(void);
 extern void fn_8023A8B4(void);
@@ -155,7 +155,7 @@ asm void fn_80341EE4(void)
     bl fn_80239DAC
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885260
     li r0, 0x1
     stw r31, 0x58c(r30)
@@ -232,7 +232,7 @@ asm void fn_80342004(void)
     bl fn_80239DAC
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x6
     stw r0, 0x58c(r30)
     mr r3, r30
@@ -407,7 +407,7 @@ asm void fn_8034228C(void)
     bl fn_80239DAC
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885260
     li r3, 0x7
     lfs f1, lbl_80885238
@@ -672,7 +672,7 @@ asm void fn_80342674(void)
     bl fn_80239DAC
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x8
     stw r0, 0x58c(r31)
     lwz r3, lbl_8087F048
@@ -1034,7 +1034,7 @@ asm void fn_80342BC8(void)
     bl fn_80239DAC
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x9
     stw r0, 0x58c(r30)
     lwz r3, lbl_8087F048
@@ -1295,7 +1295,7 @@ asm void fn_80342FB4(void)
     bl fn_80239DAC
     mr r3, r29
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0xe
     stw r0, 0x58c(r29)
     lwz r3, lbl_8087F048
@@ -1409,7 +1409,7 @@ asm void fn_8034315C(void)
     bl fn_80239DAC
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0xa
     stw r0, 0x58c(r30)
     lwz r3, lbl_8087F048
@@ -1703,10 +1703,10 @@ asm void fn_803435B8(void)
     bl fn_80239DAC
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885260
     li r3, 0xf
     li r0, 0x1

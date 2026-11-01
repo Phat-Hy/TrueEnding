@@ -16,7 +16,7 @@ extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_800874C8(void);
 extern void fn_80087994(void);
 extern void fn_80087E9C(void);
@@ -56,7 +56,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_806868C4(void);
+extern void swprintf(void);
 extern void fn_8068AEA4(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
@@ -1012,7 +1012,7 @@ lbl_fn_80427F28_00000BE8:
     la r6, lbl_8087DFA8
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80427730@ha
     lis r5, fn_80427804@ha
     mr r7, r31
@@ -1791,7 +1791,7 @@ lbl_fn_80428928_0000162C:
     li r4, 0x20
     addi r5, r5, lbl_8078E5A0@l
     crclr 6
-    bl fn_806868C4
+    bl swprintf
     stw r31, 0x8(r1)
     li r0, -0x1
     addi r5, r1, 0x38

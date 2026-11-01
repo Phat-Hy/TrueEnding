@@ -15,7 +15,7 @@ extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_8006A250(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
 extern void fn_8008937C(void);
@@ -50,7 +50,7 @@ extern void fn_8052F890(void);
 extern void fn_80531814(void);
 extern void printf(void);
 extern void strcmp(void);
-extern void fn_806846C4(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 extern void fn_80686AF0(void);
 extern void abort(void);
@@ -2009,7 +2009,7 @@ lbl_fn_80531398_00001B38:
     la r6, lbl_8087E4B0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80531814@ha
     lis r5, fn_805311DC@ha
     mr r7, r23
@@ -2148,7 +2148,7 @@ lbl_fn_80531398_00001D18:
     mr r3, r24
     mr r4, r23
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80531398_00001D5C:
     lwz r0, 0x70(r26)
     add r3, r0, r28

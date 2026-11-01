@@ -78,7 +78,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void strstr(void);
 extern void fn_80683B54(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_80695A50(void);
 extern void fn_80695D84(void);
 extern u32 strlen(const char* str);
@@ -849,14 +849,14 @@ lbl_fn_80496670_0000084C:
     stw r31, 0x60(r27)
     mr r3, r28
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x1
     bge lbl_fn_80496670_00000880
     b lbl_fn_80496670_00000890
 lbl_fn_80496670_00000880:
     mr r3, r28
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     mr r31, r3
 lbl_fn_80496670_00000890:
     stw r31, 0x64(r27)
@@ -1287,7 +1287,7 @@ asm void fn_80496CC0(void)
     addi r4, r4, lbl_807903F0@l
     stw r4, 0x0(r26)
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     lis r5, lbl_80756A68@ha
     mr r29, r3
     addi r5, r5, lbl_80756A68@l
@@ -1318,7 +1318,7 @@ lbl_fn_80496CC0_00000EAC:
     lwz r0, 0x1c(r4)
     add r30, r0, r31
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r30)
     mr r3, r27
     bl fn_8005B9CC

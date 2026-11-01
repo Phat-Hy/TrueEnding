@@ -9,7 +9,7 @@ extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void fn_80060D58(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -43,7 +43,7 @@ extern void fn_805075C8(void);
 extern void fn_8050F5AC(void);
 extern void fn_8050F668(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_80686AF0(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -1792,15 +1792,15 @@ asm void fn_804B4400(void)
     addi r30, r4, lbl_80757B7C@l
 lbl_fn_804B4400_0000189C:
     mr r3, r27
-    bl fn_80684600
+    bl atoi
     mr r27, r3
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r28, r3
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r29, r3
     addi r3, r1, 0x8
     bl fn_8005B3CC
@@ -1854,7 +1854,7 @@ lbl_fn_804B4400_00001978:
     li r26, 0x0
     li r30, 0x0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, 0xb4(r31)
     mr r24, r3
     cmpwi r0, 0x0
@@ -1870,7 +1870,7 @@ lbl_fn_804B4400_000019A4:
     la r5, lbl_8087E0F8
     la r6, lbl_8087E0F4
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0xb4(r31)
     b lbl_fn_804B4400_00001A34
 lbl_fn_804B4400_000019D0:
@@ -1882,19 +1882,19 @@ lbl_fn_804B4400_000019DC:
     addi r3, r1, 0x8
     add r27, r0, r30
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r27)
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x4(r27)
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x8(r27)
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     addi r26, r26, 0x1
     stw r3, 0xc(r27)
     cmpw r26, r24

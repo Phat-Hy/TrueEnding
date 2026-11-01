@@ -20,7 +20,7 @@ extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void fn_8015E4B0(void);
 extern void fn_8016DA4C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80232B7C(void);
 extern void fn_80239DAC(void);
@@ -192,7 +192,7 @@ lbl_fn_8024B4F0_000000E8:
     bl fn_8024FCDC
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_8024B4F0_00000200
 lbl_fn_8024B4F0_00000140:
     lwz r0, 0x1624(r31)
@@ -237,13 +237,13 @@ lbl_fn_8024B4F0_000001CC:
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     stw r30, 0x14b8(r31)
     mr r3, r31
     li r4, 0x3
     stw r30, 0x14bc(r31)
     stw r30, 0x14dc(r31)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_8024B4F0_00000200:
     lwz r0, 0xd18(r31)
     cmpwi r0, 0x0
@@ -273,7 +273,7 @@ lbl_fn_8024B4F0_00000254:
     bne lbl_fn_8024B4F0_0000026C
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_8024B4F0_0000026C:
     lwz r0, 0x1624(r31)
     lwz r3, 0x14bc(r31)
@@ -351,7 +351,7 @@ lbl_fn_8024B4F0_0000035C:
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     stw r30, 0x14b8(r31)
     stw r30, 0x14bc(r31)
     stw r30, 0x14dc(r31)
@@ -410,7 +410,7 @@ lbl_fn_8024B4F0_0000035C:
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r0, 0x12a4(r31)
     stw r30, 0x14b8(r31)
     extrwi r0, r0, 1, 9
@@ -534,12 +534,12 @@ lbl_fn_8024B4F0_0000055C:
 lbl_fn_8024B4F0_0000063C:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     li r30, 0x0
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     stw r30, 0x14b8(r31)
     stw r30, 0x14bc(r31)
     stw r30, 0x14dc(r31)
@@ -549,7 +549,7 @@ lbl_fn_8024B4F0_0000066C:
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     stw r30, 0x14b8(r31)
     stw r30, 0x14bc(r31)
     stw r30, 0x14dc(r31)
@@ -566,7 +566,7 @@ lbl_fn_8024B4F0_0000068C:
     ble lbl_fn_8024B4F0_000006D4
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r4, 0x14b0(r31)
     mr r3, r31
     lfs f1, lbl_808832A8
@@ -1695,7 +1695,7 @@ lbl_fn_8024C46C_000016DC:
     stw r0, 0x58c(r29)
     mr r3, r29
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x0
     stw r0, 0x14b8(r29)
     lwz r4, 0x14b0(r29)
@@ -1774,7 +1774,7 @@ lbl_fn_8024CC78_000017F0:
     addi r0, r4, 0x1e
     li r4, 0x3
     stw r0, 0x14bc(r30)
-    bl fn_8016E970
+    bl actor_setState
     stw r31, 0x14b8(r30)
     stw r31, 0x14bc(r30)
     stw r31, 0x14dc(r30)

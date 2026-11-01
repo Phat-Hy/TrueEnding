@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_800697D8(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -843,7 +843,7 @@ asm void fn_80238CA0(void)
     mr r6, r5
     slwi r3, r0, 2
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x30(r31)
     li r5, 0x0
     lfs f0, lbl_8088315C
@@ -1224,7 +1224,7 @@ lbl_fn_80239030_00001054:
     mulli r3, r3, 0xb0
     li r7, 0x0
     mr r6, r5
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x1c(r27)
     li r30, 0x0
     li r22, 0x0
@@ -1248,7 +1248,7 @@ lbl_fn_80239030_000010A4:
     slwi r3, r0, 3
     li r7, 0x0
     addi r29, r29, 0x4
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x4(r21)
     mr r4, r29
     lwz r0, 0x0(r21)
@@ -1354,7 +1354,7 @@ lbl_fn_80239030_00001224:
     mulli r3, r3, 0x68
     li r7, 0x0
     mr r6, r5
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x24(r27)
     li r29, 0x0
     li r23, 0x0
@@ -1378,7 +1378,7 @@ lbl_fn_80239030_00001274:
     slwi r3, r0, 3
     li r7, 0x0
     addi r28, r28, 0x4
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x4(r20)
     mr r4, r28
     lwz r0, 0x0(r20)
@@ -1506,7 +1506,7 @@ lbl_fn_80239030_00001444:
     mr r6, r5
     slwi r3, r0, 2
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x34(r27)
     b lbl_fn_80239030_0000148C
 lbl_fn_80239030_00001484:
@@ -1733,7 +1733,7 @@ asm void fn_80239828(void)
     la r6, lbl_8087DC18
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80239AB4@ha
     mr r7, r30
     addi r4, r4, fn_80239AB4@l

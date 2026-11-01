@@ -12,7 +12,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097CCC(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800F8548(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80239DAC(void);
 extern void fn_80350BF0(void);
 extern void world_getLocalFlag(void);
@@ -397,7 +397,7 @@ lbl_fn_8034CF48_000003E0:
     subfic r5, r5, 0x1e
     add r0, r0, r5
     stw r0, 0x14c0(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885398
     li r0, 0x1
     stw r30, 0x58c(r31)
@@ -1095,7 +1095,7 @@ lbl_fn_8034DA0C_00000E0C:
     subfic r5, r5, 0x1e
     add r0, r0, r5
     stw r0, 0x14c0(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885398
     li r0, 0x1
     stw r30, 0x58c(r31)
@@ -1763,7 +1763,7 @@ lbl_fn_8034DE90_00001840:
     subfic r5, r5, 0x1e
     add r0, r0, r5
     stw r0, 0x14c0(r29)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885398
     li r0, 0x1
     stw r30, 0x58c(r29)
@@ -1881,7 +1881,7 @@ lbl_fn_8034E898_000019F8:
     subfic r5, r5, 0x1e
     add r0, r0, r5
     stw r0, 0x14c0(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885398
     li r0, 0x1
     stw r30, 0x58c(r31)

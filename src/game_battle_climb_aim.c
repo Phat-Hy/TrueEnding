@@ -51,7 +51,7 @@ extern void fn_8059B670(void);
 extern void fn_805F89F0(void);
 extern void PSMTXTrans(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068AD58(void);
 extern void fn_8068AEA8(void);
 extern void fn_80695B00(void);
@@ -306,7 +306,7 @@ lbl_fn_8040F498_00000270:
     bne lbl_fn_8040F498_00000298
     addi r3, r1, 0x108
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x558(r29)
 lbl_fn_8040F498_00000298:
@@ -1167,11 +1167,11 @@ lbl_fn_80410028_00000E0C:
     bne lbl_fn_80410028_00000E44
     addi r3, r1, 0x108
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x560(r31)
     addi r3, r1, 0x108
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x564(r31)
     b lbl_fn_80410028_00000F58
 lbl_fn_80410028_00000E44:

@@ -14,7 +14,7 @@ extern void fn_8001047C(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void fn_8004D124(void);
 extern void fn_80051A88(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -27,7 +27,7 @@ extern void fn_8013A194(void);
 extern void fn_8013CB68(void);
 extern void fn_801404F8(void);
 extern void fn_80148990(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_802B0430(void);
 extern void fn_802B07F0(void);
 extern void fn_802B0D90(void);
@@ -206,7 +206,7 @@ asm void fn_802AE070(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_8016E970
+    bl actor_setState
     lwz r12, 0x0(r31)
     mr r3, r31
     li r4, 0x6
@@ -301,7 +301,7 @@ lbl_fn_802AE0B8_00000284:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     addi r4, r31, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
@@ -414,7 +414,7 @@ lbl_fn_802AE0B8_0000041C:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r24
     addi r4, r31, fn_80148990@l
     li r5, 0x0

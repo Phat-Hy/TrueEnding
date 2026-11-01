@@ -17,7 +17,7 @@ extern void fn_8005B9AC(void);
 extern void fn_8006BB6C(void);
 extern void fn_8006F420(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_800DC6B4(void);
@@ -26,7 +26,7 @@ extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
 extern void fn_8068236C(void);
 extern void strcmp(void);
-extern void fn_806846C4(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 extern void fn_80686AF0(void);
 extern void fn_806958E0(void);
@@ -1048,7 +1048,7 @@ asm void fn_8020AFF4(void)
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, lbl_8087F1C0
     li r29, 0x0
     li r31, 0x0
@@ -1497,7 +1497,7 @@ lbl_fn_8020B2BC_0000132C:
     mr r3, r28
     mr r4, r30
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8020B2BC_00001370:
     addi r3, r1, 0x16d0
     bl fn_8005B8F8
@@ -1749,7 +1749,7 @@ lbl_fn_8020B2BC_000016DC:
     mr r3, r28
     mr r4, r29
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8020B2BC_00001720:
     addi r3, r1, 0x448
     bl fn_8005B8F8

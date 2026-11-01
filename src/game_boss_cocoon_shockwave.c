@@ -15,7 +15,7 @@ extern void fn_8007C3F8(void);
 extern void fn_8007C46C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void fn_800904E0(void);
@@ -1338,7 +1338,7 @@ lbl_atn_LoadModel_destructor_00001000:
     la r6, lbl_8087D7EC
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r29
     li r4, 0x0
     li r5, 0x0
@@ -1441,7 +1441,7 @@ lbl_atn_LoadModel_destructor_00001178:
     la r5, lbl_8087D7E8
     la r6, lbl_8087D7E4
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x74(r30)
     b lbl_atn_LoadModel_destructor_000011AC
 lbl_atn_LoadModel_destructor_000011A4:
@@ -1654,7 +1654,7 @@ lbl_fn_80474F0C_00001424:
     la r5, lbl_8087D6EC
     la r6, lbl_8087D6E8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x80(r23)
     b lbl_fn_80474F0C_00001458
 lbl_fn_80474F0C_00001450:
@@ -2093,7 +2093,7 @@ lbl_fn_80474F0C_00001AC4:
     la r5, lbl_8087E05C
     la r6, lbl_8087E058
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x88(r23)
     b lbl_fn_80474F0C_00001AF8
 lbl_fn_80474F0C_00001AF0:

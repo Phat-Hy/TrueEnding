@@ -48,7 +48,7 @@ extern void fn_805118B8(void);
 extern void fn_805119CC(void);
 extern void fn_8052635C(void);
 extern void fn_805F89F0(void);
-extern void fn_806846C4(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 extern void fn_80686B24(void);
 extern void fn_806958E0(void);
@@ -416,7 +416,7 @@ lbl_fn_8052293C_00000404:
     mr r3, r28
     mr r4, r22
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8052293C_00000430:
     addi r3, r1, 0x128
     bl talk_parseDialogue
@@ -428,7 +428,7 @@ lbl_fn_8052293C_00000430:
     mr r3, r29
     mr r4, r22
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8052293C_0000045C:
     addi r3, r1, 0x128
     bl talk_parseDialogue
@@ -440,7 +440,7 @@ lbl_fn_8052293C_0000045C:
     mr r3, r30
     mr r4, r22
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8052293C_00000488:
     addi r3, r1, 0x128
     bl talk_parseDialogue
@@ -452,7 +452,7 @@ lbl_fn_8052293C_00000488:
     mr r3, r31
     mr r4, r22
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8052293C_000004B4:
     lwz r0, 0x18c(r23)
     mulli r0, r0, 0x110
@@ -666,7 +666,7 @@ lbl_fn_80522DDC_00000794:
     mr r3, r30
     mr r4, r29
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_000007E4:
     addi r29, r31, 0x910
     addi r0, r31, 0x800
@@ -678,7 +678,7 @@ lbl_fn_80522DDC_000007E4:
     mr r4, r29
     addi r3, r31, 0x800
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000810:
     addi r29, r1, 0x8
     addi r0, r31, 0x910
@@ -690,7 +690,7 @@ lbl_fn_80522DDC_00000810:
     mr r4, r29
     addi r3, r31, 0x910
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_0000083C:
     addi r29, r31, 0x840
     addi r30, r1, 0x8
@@ -702,7 +702,7 @@ lbl_fn_80522DDC_0000083C:
     mr r3, r30
     mr r4, r29
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000868:
     addi r29, r31, 0x950
     addi r0, r31, 0x840
@@ -714,7 +714,7 @@ lbl_fn_80522DDC_00000868:
     mr r4, r29
     addi r3, r31, 0x840
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000894:
     addi r29, r1, 0x8
     addi r0, r31, 0x950
@@ -726,7 +726,7 @@ lbl_fn_80522DDC_00000894:
     mr r4, r29
     addi r3, r31, 0x950
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_000008C0:
     addi r29, r31, 0xee0
     addi r30, r1, 0x8
@@ -738,7 +738,7 @@ lbl_fn_80522DDC_000008C0:
     mr r3, r30
     mr r4, r29
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_000008EC:
     addi r29, r31, 0xff0
     addi r0, r31, 0xee0
@@ -750,7 +750,7 @@ lbl_fn_80522DDC_000008EC:
     mr r4, r29
     addi r3, r31, 0xee0
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000918:
     addi r29, r1, 0x8
     addi r0, r31, 0xff0
@@ -762,7 +762,7 @@ lbl_fn_80522DDC_00000918:
     mr r4, r29
     addi r3, r31, 0xff0
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000944:
     addi r29, r31, 0xf20
     addi r30, r1, 0x8
@@ -774,7 +774,7 @@ lbl_fn_80522DDC_00000944:
     mr r3, r30
     mr r4, r29
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000970:
     addi r29, r31, 0x1030
     addi r0, r31, 0xf20
@@ -786,7 +786,7 @@ lbl_fn_80522DDC_00000970:
     mr r4, r29
     addi r3, r31, 0xf20
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_0000099C:
     addi r29, r1, 0x8
     addi r0, r31, 0x1030
@@ -798,7 +798,7 @@ lbl_fn_80522DDC_0000099C:
     mr r4, r29
     addi r3, r31, 0x1030
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_000009C8:
     lis r3, lbl_8075C6C4@ha
     mr r28, r31
@@ -838,7 +838,7 @@ lbl_fn_80522DDC_00000A20:
     mr r3, r30
     mr r4, r29
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000A58:
     addi r29, r31, 0xb30
     addi r0, r31, 0xa20
@@ -850,7 +850,7 @@ lbl_fn_80522DDC_00000A58:
     mr r4, r29
     addi r3, r31, 0xa20
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000A84:
     addi r29, r1, 0x8
     addi r0, r31, 0xb30
@@ -862,7 +862,7 @@ lbl_fn_80522DDC_00000A84:
     mr r4, r29
     addi r3, r31, 0xb30
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000AB0:
     addi r29, r31, 0xa60
     addi r30, r1, 0x8
@@ -874,7 +874,7 @@ lbl_fn_80522DDC_00000AB0:
     mr r3, r30
     mr r4, r29
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000ADC:
     addi r29, r31, 0xb70
     addi r0, r31, 0xa60
@@ -886,7 +886,7 @@ lbl_fn_80522DDC_00000ADC:
     mr r4, r29
     addi r3, r31, 0xa60
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000B08:
     addi r29, r1, 0x8
     addi r0, r31, 0xb70
@@ -898,7 +898,7 @@ lbl_fn_80522DDC_00000B08:
     mr r4, r29
     addi r3, r31, 0xb70
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80522DDC_00000B34:
     addi r11, r1, 0x60
     bl _restgpr_27

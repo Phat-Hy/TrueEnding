@@ -12,7 +12,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_800F8548(void);
 extern void fn_8013A258(void);
 extern void fn_80144710(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80232B7C(void);
 extern void fn_8023A8B4(void);
 extern void world_getLocalFlag(void);
@@ -971,7 +971,7 @@ asm void fn_8045BFFC(void)
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80886C30
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1037,7 +1037,7 @@ lbl_fn_8045BFFC_00000DA4:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80886C30
     li r30, 0x1
     stw r30, 0x3fc(r31)
@@ -1126,7 +1126,7 @@ lbl_fn_8045BFFC_00000EC8:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80886C30
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1168,7 +1168,7 @@ lbl_fn_8045BFFC_00000FB4:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80886C30
     li r30, 0x1
     stw r30, 0x3fc(r31)
@@ -1239,7 +1239,7 @@ lbl_fn_8045BFFC_000010CC:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80886C30
     li r30, 0x1
     stw r30, 0x3fc(r31)
@@ -1369,7 +1369,7 @@ lbl_fn_8045BFFC_000011EC:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80886C30
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1416,7 +1416,7 @@ lbl_fn_8045BFFC_00001354:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80886C30
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1480,7 +1480,7 @@ asm void fn_8045C83C(void)
     mr r3, r28
     li r4, 0x3
     stw r0, 0x58c(r28)
-    bl fn_8016E970
+    bl actor_setState
     lfs f1, lbl_80886C30
     li r0, 0x1
     stw r0, 0x3fc(r28)

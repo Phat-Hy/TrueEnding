@@ -54,7 +54,7 @@ extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 
 /* External data declarations */
 extern u8 lbl_8074B090[];
@@ -1899,7 +1899,7 @@ lbl_fn_8035C1B4_00001870:
     bne lbl_fn_8035C1B4_000018BC
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14e8(r31)
     b lbl_fn_8035C1B4_00001A5C
@@ -1911,7 +1911,7 @@ lbl_fn_8035C1B4_000018BC:
     bne lbl_fn_8035C1B4_000018E8
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14ec(r31)
     b lbl_fn_8035C1B4_00001A5C
@@ -1923,7 +1923,7 @@ lbl_fn_8035C1B4_000018E8:
     bne lbl_fn_8035C1B4_00001914
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14f0(r31)
     b lbl_fn_8035C1B4_00001A5C
@@ -1935,7 +1935,7 @@ lbl_fn_8035C1B4_00001914:
     bne lbl_fn_8035C1B4_00001940
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14f4(r31)
     b lbl_fn_8035C1B4_00001A5C
@@ -1947,7 +1947,7 @@ lbl_fn_8035C1B4_00001940:
     bne lbl_fn_8035C1B4_00001968
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15a4(r31)
     b lbl_fn_8035C1B4_00001A5C
 lbl_fn_8035C1B4_00001968:
@@ -1969,7 +1969,7 @@ lbl_fn_8035C1B4_00001990:
     bne lbl_fn_8035C1B4_000019B8
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15a8(r31)
     b lbl_fn_8035C1B4_00001A5C
 lbl_fn_8035C1B4_000019B8:
@@ -1980,7 +1980,7 @@ lbl_fn_8035C1B4_000019B8:
     bne lbl_fn_8035C1B4_000019E0
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15b0(r31)
     b lbl_fn_8035C1B4_00001A5C
 lbl_fn_8035C1B4_000019E0:
@@ -1991,11 +1991,11 @@ lbl_fn_8035C1B4_000019E0:
     bne lbl_fn_8035C1B4_00001A5C
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x8(r1)
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xc(r1)
     addi r3, r1, 0x14
     bl fn_8005B3CC

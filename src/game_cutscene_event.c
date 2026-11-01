@@ -61,7 +61,7 @@ extern void PSVECDotProduct(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void strstr(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void abort(void);
 extern void fn_806958E0(void);
 extern u32 strlen(const char* str);
@@ -950,7 +950,7 @@ lbl_fn_8032C964_00000B8C:
     bne lbl_fn_8032C964_00000BD0
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x1628(r30)
     b lbl_fn_8032C964_00000D48
 lbl_fn_8032C964_00000BD0:
@@ -963,7 +963,7 @@ lbl_fn_8032C964_00000BD0:
 lbl_fn_8032C964_00000BE8:
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x0
     ble lbl_fn_8032C964_00000C74
     lwz r4, lbl_8087F430
@@ -1014,7 +1014,7 @@ lbl_fn_8032C964_00000C84:
     bne lbl_fn_8032C964_00000CAC
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x1650(r30)
     b lbl_fn_8032C964_00000D48
 lbl_fn_8032C964_00000CAC:
@@ -1025,7 +1025,7 @@ lbl_fn_8032C964_00000CAC:
     bne lbl_fn_8032C964_00000CD4
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x1654(r30)
     b lbl_fn_8032C964_00000D48
 lbl_fn_8032C964_00000CD4:
@@ -1036,7 +1036,7 @@ lbl_fn_8032C964_00000CD4:
     bne lbl_fn_8032C964_00000CFC
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x1658(r30)
     b lbl_fn_8032C964_00000D48
 lbl_fn_8032C964_00000CFC:
@@ -1047,7 +1047,7 @@ lbl_fn_8032C964_00000CFC:
     bne lbl_fn_8032C964_00000D24
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x165c(r30)
     b lbl_fn_8032C964_00000D48
 lbl_fn_8032C964_00000D24:
@@ -1058,7 +1058,7 @@ lbl_fn_8032C964_00000D24:
     bne lbl_fn_8032C964_00000D48
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x1660(r30)
 lbl_fn_8032C964_00000D48:
     addi r3, r1, 0x8

@@ -17,7 +17,7 @@ extern void fn_8010EE78(void);
 extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
 extern void fn_80158BB4(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80219E6C(void);
 extern void fn_80239DAC(void);
 extern void fn_802B6F80(void);
@@ -1263,7 +1263,7 @@ lbl_fn_802B52D8_00001098:
     stw r0, 0x58c(r30)
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x65
@@ -1673,7 +1673,7 @@ lbl_fn_802B596C_0000166C:
     mr r3, r31
     li r4, 0x6
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r31)
     lwz r3, lbl_8087F048

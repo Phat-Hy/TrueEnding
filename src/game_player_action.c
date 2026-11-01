@@ -9,7 +9,7 @@ extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_8006F72C(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_800A55AC(void);
 extern void ref_releaseHandle(void);
 extern void fn_800DC1DC(void);
@@ -443,7 +443,7 @@ lbl_fn_8011B8D4_00000498:
     la r6, lbl_8087D994
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8011BBBC@ha
     lis r5, fn_80117E88@ha
     mr r7, r26

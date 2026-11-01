@@ -9,7 +9,7 @@ extern void fn_80069BF4(void);
 extern void fn_8006B174(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006F72C(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_LH_Texture_release(void);
 extern void fn_800D5908(void);
@@ -941,7 +941,7 @@ asm void fn_801FE090(void)
     la r5, lbl_8087DAB4
     la r6, lbl_8087DAB0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r30)
     mr r28, r3
     cmpwi r0, 0x0
@@ -1031,7 +1031,7 @@ lbl_fn_801FE090_00000CD0:
     la r5, lbl_8087DABC
     la r6, lbl_8087DAB8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x14(r30)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1121,7 +1121,7 @@ lbl_fn_801FE090_00000E1C:
     la r5, lbl_8087DB04
     la r6, lbl_8087DB00
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x20(r30)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1211,7 +1211,7 @@ lbl_fn_801FE090_00000F68:
     la r5, lbl_8087DAC4
     la r6, lbl_8087DAC0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x2c(r30)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1301,7 +1301,7 @@ lbl_fn_801FE090_000010B4:
     la r5, lbl_8087DAEC
     la r6, lbl_8087DAE8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x38(r30)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1391,7 +1391,7 @@ lbl_fn_801FE090_00001200:
     la r5, lbl_8087DACC
     la r6, lbl_8087DAC8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x44(r30)
     mr r29, r3
     cmpwi r0, 0x0

@@ -92,7 +92,7 @@ extern void fn_805663FC(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void strstr(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_806959D8(void);
 extern void fn_80695AD0(void);
 extern void fn_80695B00(void);
@@ -1963,7 +1963,7 @@ lbl_fn_801371AC_000018F4:
 lbl_fn_801371AC_00001944:
     addi r3, r1, 0x870
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F4F0
     cmpwi cr1, r0, 0x0
     beq cr1, lbl_fn_801371AC_000019E8

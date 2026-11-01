@@ -47,7 +47,7 @@ extern void fn_806078E0(void);
 extern void fn_806820D4(void);
 extern void strcmp(void);
 extern void fn_80683B54(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1607,11 +1607,11 @@ lbl_fn_805B7B28_00001424:
     bne lbl_fn_805B7B28_00001470
     addi r3, r1, 0x118
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x138(r27)
     addi r3, r1, 0x118
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x13c(r27)
     addi r3, r1, 0x118
     bl fn_8005B9CC

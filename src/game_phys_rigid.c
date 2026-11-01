@@ -42,7 +42,7 @@ extern void fn_803C1884(void);
 extern void fn_8054E100(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
-extern void fn_806846C4(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 
 /* External data declarations */
@@ -632,7 +632,7 @@ lbl_fn_8010A4A8_00000788:
     mr r3, r29
     mr r4, r26
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8010A4A8_000007B0:
     lfs f1, lbl_80881478
     lis r4, lbl_80736040@ha

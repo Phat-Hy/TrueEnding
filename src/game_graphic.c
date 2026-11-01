@@ -18,7 +18,7 @@ extern void fn_800763FC(void);
 extern void fn_800827E0(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800A96AC(void);
 extern void layout_drawPane(void);
@@ -1928,7 +1928,7 @@ lbl_graphic_initViewportTransform_00001A0C:
     la r6, lbl_8087D870
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, graphic_dummyCallback@ha
     li r5, 0x0
     addi r4, r4, graphic_dummyCallback@l

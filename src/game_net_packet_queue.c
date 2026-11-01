@@ -49,7 +49,7 @@ extern void fn_8050EAEC(void);
 extern void fn_8050EFD0(void);
 extern void fn_8050F5AC(void);
 extern void fn_80624D40(void);
-extern void fn_806846C4(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 extern void fn_80686B24(void);
 extern void fn_806959D8(void);
@@ -786,7 +786,7 @@ lbl_fn_804AF520_00000968:
     mr r4, r24
     addi r3, r23, 0xfc
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804AF520_0000099C:
     lwz r3, lbl_8087F860
     bl fn_805053FC

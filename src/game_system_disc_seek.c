@@ -29,7 +29,7 @@ extern void fn_800F8548(void);
 extern void fn_800FAB80(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80194E2C(void);
 extern void fn_80232B7C(void);
 extern void fn_80239DAC(void);
@@ -160,7 +160,7 @@ asm void fn_803520D8(void)
     bl fn_80239DAC
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f3, lbl_80885398
     li r0, 0x10
     lfs f0, lbl_808853C0

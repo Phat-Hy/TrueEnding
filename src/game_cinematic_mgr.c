@@ -49,7 +49,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
 extern void strstr(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern void fn_806959D8(void);
@@ -1149,7 +1149,7 @@ lbl_fn_803338D8_00000E44:
     bne lbl_fn_803338D8_00000E88
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14c0(r29)
     b lbl_fn_803338D8_00000EFC
 lbl_fn_803338D8_00000E88:
@@ -1160,7 +1160,7 @@ lbl_fn_803338D8_00000E88:
     bne lbl_fn_803338D8_00000EB0
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14c4(r29)
     b lbl_fn_803338D8_00000EFC
 lbl_fn_803338D8_00000EB0:
@@ -1171,7 +1171,7 @@ lbl_fn_803338D8_00000EB0:
     bne lbl_fn_803338D8_00000ED8
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14cc(r29)
     b lbl_fn_803338D8_00000EFC
 lbl_fn_803338D8_00000ED8:
@@ -1182,7 +1182,7 @@ lbl_fn_803338D8_00000ED8:
     bne lbl_fn_803338D8_00000EFC
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14d0(r29)
 lbl_fn_803338D8_00000EFC:
     addi r3, r1, 0x8

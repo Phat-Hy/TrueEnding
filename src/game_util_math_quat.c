@@ -56,7 +56,7 @@ extern void fn_804A4930(void);
 extern void fn_804A55FC(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -1721,7 +1721,7 @@ lbl_fn_80581A58_00001634:
     bne lbl_fn_80581A58_0000167C
     addi r3, r1, 0x6c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x60(r25)
     b lbl_fn_80581A58_00001A18
 lbl_fn_80581A58_0000167C:
@@ -1732,7 +1732,7 @@ lbl_fn_80581A58_0000167C:
     bne lbl_fn_80581A58_000016A4
     addi r3, r1, 0x6c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x64(r25)
     b lbl_fn_80581A58_00001A18
 lbl_fn_80581A58_000016A4:

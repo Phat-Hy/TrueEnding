@@ -12,7 +12,7 @@ extern void _savegpr_20(void);
 extern void _savegpr_22(void);
 extern void _savegpr_24(void);
 extern void _savegpr_26(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800928B0(void);
 extern void fn_800BDB58(void);
@@ -1214,7 +1214,7 @@ lbl_fn_8023A8B4_00000E84:
     la r5, lbl_8087DC1C
     la r6, lbl_8087DC18
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80239AB4@ha
     li r5, 0x0
     addi r4, r4, fn_80239AB4@l
@@ -1312,7 +1312,7 @@ lbl_fn_8023A8B4_00000FEC:
     la r6, lbl_8087DC18
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80239AB4@ha
     mr r7, r31
     addi r4, r4, fn_80239AB4@l

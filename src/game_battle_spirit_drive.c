@@ -15,7 +15,7 @@ extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8009E5A0(void);
 extern void hud_updateTargetReticle(void);
@@ -39,7 +39,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void fn_80695720(void);
@@ -1280,11 +1280,11 @@ lbl_fn_8040134C_00001090:
     bne lbl_fn_8040134C_00001124
     addi r3, r1, 0x108
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xf8(r31)
     addi r3, r1, 0x108
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x114(r31)
     addi r3, r1, 0x108
     bl fn_8005B9CC
@@ -1335,7 +1335,7 @@ lbl_fn_8040134C_00001150:
     la r6, lbl_8087DF60
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80401610@ha
     mr r7, r29
     addi r4, r4, fn_80401610@l

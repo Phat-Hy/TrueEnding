@@ -10,7 +10,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_80013F78(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800A56A8(void);
 extern void ref_releaseHandle(void);
@@ -1615,7 +1615,7 @@ lbl_fn_80521E84_00001460:
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_801D082C@ha
     li r5, 0x0
     addi r4, r4, fn_801D082C@l
@@ -1665,7 +1665,7 @@ lbl_fn_80521E84_00001520:
     li r3, 0x30
     li r4, 0x1
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80526694@ha
     li r5, 0x0
     addi r4, r4, fn_80526694@l
@@ -1700,7 +1700,7 @@ lbl_fn_80521E84_000015AC:
     li r3, 0x50
     li r4, 0x1
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80526694@ha
     li r5, 0x0
     addi r4, r4, fn_80526694@l
@@ -1740,7 +1740,7 @@ lbl_fn_80521E84_00001634:
     li r3, 0xd0
     li r4, 0x1
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80526694@ha
     li r5, 0x0
     addi r4, r4, fn_80526694@l
@@ -1800,7 +1800,7 @@ lbl_fn_80521E84_000016D0:
     li r3, 0x70
     li r4, 0x1
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80526694@ha
     li r5, 0x0
     addi r4, r4, fn_80526694@l
@@ -1845,7 +1845,7 @@ lbl_fn_80521E84_000017BC:
     li r3, 0x110
     li r4, 0x1
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80526694@ha
     li r5, 0x0
     addi r4, r4, fn_80526694@l
@@ -1915,7 +1915,7 @@ lbl_fn_80521E84_0000186C:
     li r3, 0xb0
     li r4, 0x1
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80526694@ha
     li r5, 0x0
     addi r4, r4, fn_80526694@l

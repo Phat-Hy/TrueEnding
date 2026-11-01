@@ -20,7 +20,7 @@ extern void fn_8015802C(void);
 extern void fn_80158BB4(void);
 extern void fn_80158CA4(void);
 extern void fn_8016ADF4(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8032F0EC(void);
 extern void fn_8032F314(void);
 extern void world_getLocalFlag(void);
@@ -710,7 +710,7 @@ lbl_fn_8032FDE8_00000898:
     b lbl_fn_8032FDE8_000009D8
 lbl_fn_8032FDE8_000008AC:
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_8032FDE8_000009D8
 lbl_fn_8032FDE8_000008B8:
     lwz r0, 0x1590(r3)
@@ -724,7 +724,7 @@ lbl_fn_8032FDE8_000008D0:
     li r4, 0x3
     stw r0, 0xfc0(r3)
     mr r3, r31
-    bl fn_8016E970
+    bl actor_setState
     lwz r0, 0x17bc(r31)
     cmpwi r0, 0x5
     ble lbl_fn_8032FDE8_000009D8
@@ -1104,7 +1104,7 @@ lbl_fn_80330218_00000E1C:
 lbl_fn_80330218_00000E34:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_80330218_00000E40:
     lwz r0, 0x58c(r31)
     cmpwi r0, 0x6

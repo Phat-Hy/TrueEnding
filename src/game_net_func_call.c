@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void fn_8004B20C(void);
 extern void fn_8006BA30(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008BBD8(void);
 extern void fn_800C622C(void);
@@ -407,7 +407,7 @@ lbl_fn_80502460_000003A0:
     li r7, 0x0
     mr r6, r5
     clrrwi r3, r0, 5
-    bl fn_800846FC
+    bl mem_realloc
     mr r0, r3
     lwz r3, 0x60(r31)
     stw r0, 0x60(r31)
@@ -437,7 +437,7 @@ lbl_fn_80502460_00000430:
     li r7, 0x0
     mr r6, r5
     clrrwi r3, r0, 5
-    bl fn_800846FC
+    bl mem_realloc
     mr r0, r3
     lwz r3, 0x60(r31)
     stw r0, 0x60(r31)

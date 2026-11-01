@@ -8,7 +8,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void atn_Anim_applyLayerTransform(void);
@@ -1487,7 +1487,7 @@ lbl_fn_8040D244_00001444:
     la r6, lbl_8087DF78
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8040B560@ha
     lis r5, fn_8040B60C@ha
     mr r7, r31

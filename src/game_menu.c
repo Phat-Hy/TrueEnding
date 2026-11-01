@@ -32,7 +32,7 @@ extern void fn_80070A70(void);
 extern void fn_80070C98(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
@@ -86,7 +86,7 @@ extern void PSVECMag(void);
 extern void printf(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_806868C4(void);
+extern void swprintf(void);
 extern void abort(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
@@ -1207,7 +1207,7 @@ lbl_fn_8004269C_00000C84:
     la r5, lbl_8087D704
     la r6, lbl_8087D700
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80042740@ha
     lis r5, fn_80041C0C@ha
     mr r7, r31
@@ -1330,7 +1330,7 @@ lbl_fn_800427C8_00000DFC:
     la r5, lbl_8087D704
     la r6, lbl_8087D700
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80042740@ha
     lis r5, fn_80041C0C@ha
     mr r7, r23
@@ -1529,7 +1529,7 @@ lbl_fn_800427C8_000010D4:
     la r5, lbl_8087D704
     la r6, lbl_8087D700
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r23
     addi r4, r26, fn_80042740@l
     addi r5, r25, fn_80041C0C@l
@@ -1614,7 +1614,7 @@ lbl_fn_800427C8_00001208:
     la r5, lbl_8087D704
     la r6, lbl_8087D700
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r23
     addi r4, r26, fn_80042740@l
     addi r5, r27, fn_80041C0C@l
@@ -1770,7 +1770,7 @@ lbl_fn_80042E28_00001410:
     la r5, lbl_8087D6FC
     la r6, lbl_8087D6F8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80042684@ha
     lis r5, fn_80041B90@ha
     mr r7, r31
@@ -1849,7 +1849,7 @@ lbl_fn_80042EEC_00001504:
     la r5, lbl_8087D704
     la r6, lbl_8087D700
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80042740@ha
     lis r5, fn_80041C0C@ha
     mr r7, r28
@@ -2525,7 +2525,7 @@ lbl_ArenaTask_draw_00001DDC:
     li r4, 0x100
     fmuls f31, f0, f1
     crclr 6
-    bl fn_806868C4
+    bl swprintf
     fmr f1, f31
     lwz r3, lbl_8087EEC8
     lfs f2, lbl_80880844

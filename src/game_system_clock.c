@@ -12,7 +12,7 @@ extern void fn_80041B8C(void);
 extern void fn_80061E2C(void);
 extern void fn_8006F72C(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800A6E8C(void);
 extern void fn_800D8BB4(void);
@@ -1037,7 +1037,7 @@ lbl_player_clock_updateIntervals_00000D2C:
     la r5, lbl_8087D824
     la r6, lbl_8087D820
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x84(r30)
     b lbl_player_clock_updateIntervals_00000D60
 lbl_player_clock_updateIntervals_00000D58:
@@ -1070,7 +1070,7 @@ lbl_player_clock_updateIntervals_00000DA0:
     la r5, lbl_8087DB1C
     la r6, lbl_8087DB18
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80201DC4@ha
     mr r7, r24
     addi r4, r4, fn_80201DC4@l
@@ -1109,7 +1109,7 @@ lbl_player_clock_updateIntervals_00000E30:
     la r5, lbl_8087DB14
     la r6, lbl_8087DB10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, profile_initMetric@ha
     mr r7, r24
     addi r4, r4, profile_initMetric@l
@@ -1148,7 +1148,7 @@ lbl_player_clock_updateIntervals_00000EC0:
     la r5, lbl_8087DB0C
     la r6, lbl_8087DB08
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80201DE8@ha
     lis r5, fn_801EEF04@ha
     mr r7, r24
@@ -1188,7 +1188,7 @@ lbl_player_clock_updateIntervals_00000F54:
     la r5, lbl_8087DAD4
     la r6, lbl_8087DAD0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_801EFAB8@ha
     mr r7, r24
     addi r4, r4, fn_801EFAB8@l
@@ -1926,7 +1926,7 @@ lbl_player_clock_updateIntervals_00001A40:
     la r5, lbl_8087DAFC
     la r6, lbl_8087DAF8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x130(r26)
     b lbl_player_clock_updateIntervals_00001A70
 lbl_player_clock_updateIntervals_00001A6C:
@@ -1982,7 +1982,7 @@ lbl_player_clock_updateIntervals_00001B00:
     la r5, lbl_8087DAB4
     la r6, lbl_8087DAB0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x18(r30)
     mr r26, r3
     cmpwi r0, 0x0
@@ -2076,7 +2076,7 @@ lbl_player_clock_updateIntervals_00001C50:
     la r5, lbl_8087DAB4
     la r6, lbl_8087DAB0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x18(r30)
     mr r27, r3
     cmpwi r0, 0x0

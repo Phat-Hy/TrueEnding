@@ -15,7 +15,7 @@ extern void fn_80042740(void);
 extern void fn_8005BCE8(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800874C8(void);
 extern void fn_8008771C(void);
@@ -56,7 +56,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
 extern void printf(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void abort(void);
 extern void fn_80695720(void);
 extern void fn_806958E0(void);
@@ -609,7 +609,7 @@ lbl_fn_803F0280_00000614:
     la r6, lbl_8087DF30
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803EFD60@ha
     mr r7, r30
     addi r4, r4, fn_803EFD60@l
@@ -660,7 +660,7 @@ lbl_fn_803F0328_000006C0:
     la r6, lbl_8087DF28
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80237518@ha
     lis r5, fn_802375C4@ha
     mr r7, r30
@@ -712,7 +712,7 @@ lbl_fn_803F03D8_00000770:
     la r6, lbl_8087DF20
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_802377B8@ha
     lis r5, fn_800EF73C@ha
     mr r7, r30
@@ -764,7 +764,7 @@ lbl_fn_803F0488_00000820:
     la r5, lbl_8087DF1C
     la r6, lbl_8087DF18
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_800CB360@ha
     lis r5, ref_releaseHandle@ha
     mr r7, r30
@@ -816,7 +816,7 @@ lbl_fn_803F0538_000008D0:
     la r5, lbl_8087D704
     la r6, lbl_8087D700
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80042740@ha
     lis r5, fn_80041C0C@ha
     mr r7, r30
@@ -1583,7 +1583,7 @@ lbl_fn_803F0764_00001328:
     lwz r3, 0x24(r15)
     slwi r0, r0, 5
     add r3, r3, r0
-    bl fn_80684600
+    bl atoi
     lwz r21, lbl_8087F048
     mr r17, r3
     cmpwi r21, 0x0

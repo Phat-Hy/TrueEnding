@@ -41,7 +41,7 @@ extern void fn_80619A00(void);
 extern void fn_80619AB0(void);
 extern void fn_80619B80(void);
 extern void fn_80619C60(void);
-extern void fn_806869BC(void);
+extern void vswprintf(void);
 extern void fn_80722FE0(void);
 extern void fn_80723050(void);
 extern void fn_80724330(void);
@@ -214,7 +214,7 @@ lbl_fn_807244F0_00000094:
     mr r4, r30
     mr r5, r29
     addi r6, r1, 0x68
-    bl fn_806869BC
+    bl vswprintf
     mr r8, r3
     mr r3, r25
     mr r4, r26
@@ -271,7 +271,7 @@ lbl_fn_80724610_0000015C:
     mr r4, r30
     mr r5, r28
     mr r6, r29
-    bl fn_806869BC
+    bl vswprintf
     mr r8, r3
     mr r3, r24
     mr r4, r25

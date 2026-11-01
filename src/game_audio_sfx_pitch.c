@@ -63,7 +63,7 @@ extern void fn_80145334(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80164168(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8016EB48(void);
 extern void fn_8016F4D8(void);
 extern void fn_8016F530(void);
@@ -104,7 +104,7 @@ extern void fn_805A4A20(void);
 extern void fn_805A4F20(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -609,7 +609,7 @@ lbl_fn_80313AAC_0000063C:
     bne lbl_fn_80313AAC_0000066C
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15c8(r31)
     b lbl_fn_80313AAC_000008BC
 lbl_fn_80313AAC_0000066C:
@@ -620,7 +620,7 @@ lbl_fn_80313AAC_0000066C:
     bne lbl_fn_80313AAC_00000694
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15d8(r31)
     b lbl_fn_80313AAC_000008BC
 lbl_fn_80313AAC_00000694:
@@ -631,7 +631,7 @@ lbl_fn_80313AAC_00000694:
     bne lbl_fn_80313AAC_000006BC
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15d0(r31)
     b lbl_fn_80313AAC_000008BC
 lbl_fn_80313AAC_000006BC:
@@ -642,7 +642,7 @@ lbl_fn_80313AAC_000006BC:
     bne lbl_fn_80313AAC_000006E4
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15e0(r31)
     b lbl_fn_80313AAC_000008BC
 lbl_fn_80313AAC_000006E4:
@@ -653,7 +653,7 @@ lbl_fn_80313AAC_000006E4:
     bne lbl_fn_80313AAC_0000070C
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15e8(r31)
     b lbl_fn_80313AAC_000008BC
 lbl_fn_80313AAC_0000070C:
@@ -664,7 +664,7 @@ lbl_fn_80313AAC_0000070C:
     bne lbl_fn_80313AAC_00000734
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15f0(r31)
     b lbl_fn_80313AAC_000008BC
 lbl_fn_80313AAC_00000734:
@@ -675,7 +675,7 @@ lbl_fn_80313AAC_00000734:
     bne lbl_fn_80313AAC_0000075C
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15b8(r31)
     b lbl_fn_80313AAC_000008BC
 lbl_fn_80313AAC_0000075C:
@@ -708,7 +708,7 @@ lbl_fn_80313AAC_000007AC:
     bne lbl_fn_80313AAC_000008BC
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x0
     stw r3, 0x1634(r31)
     beq lbl_fn_80313AAC_000008BC
@@ -998,7 +998,7 @@ asm void fn_803140C0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_8016E970
+    bl actor_setState
     lwz r0, 0x1634(r31)
     cmpwi r0, 0x0
     beq lbl_fn_803140C0_00000BC0

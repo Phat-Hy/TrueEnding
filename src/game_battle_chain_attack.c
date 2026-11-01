@@ -24,7 +24,7 @@ extern void fn_800DC6B4(void);
 extern void fn_800F29D0(void);
 extern void fn_8015495C(void);
 extern void fn_8016D3F8(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8016EB48(void);
 extern void fn_80232B7C(void);
 extern void fn_802377B8(void);
@@ -157,7 +157,7 @@ lbl_fn_803FD328_000000B4:
 lbl_fn_803FD328_000000C4:
     lwz r3, 0xf8(r3)
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r26)
     li r0, 0x1
     lfs f0, lbl_808860B4
@@ -180,7 +180,7 @@ lbl_fn_803FD328_000000C4:
 lbl_fn_803FD328_0000011C:
     lwz r3, 0xf8(r3)
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r26)
     li r0, 0x1
     lfs f0, lbl_808860B4
@@ -203,7 +203,7 @@ lbl_fn_803FD328_0000011C:
 lbl_fn_803FD328_00000174:
     lwz r3, 0xf8(r3)
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r26)
     li r0, 0x1
     lfs f0, lbl_808860B4
@@ -243,7 +243,7 @@ lbl_fn_803FD328_000001CC:
 lbl_fn_803FD328_0000020C:
     lwz r3, 0xf8(r3)
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r26)
     li r0, 0x1
     lfs f0, lbl_808860B4
@@ -266,7 +266,7 @@ lbl_fn_803FD328_0000020C:
 lbl_fn_803FD328_00000264:
     lwz r3, 0xf8(r3)
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r26)
     li r0, 0x1
     lfs f0, lbl_808860B4
@@ -289,7 +289,7 @@ lbl_fn_803FD328_00000264:
 lbl_fn_803FD328_000002BC:
     lwz r3, 0xf8(r3)
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r26)
     li r0, 0x1
     lfs f1, lbl_808860B4
@@ -343,7 +343,7 @@ lbl_fn_803FD328_00000368:
 lbl_fn_803FD328_00000388:
     lwz r3, 0xf8(r3)
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r26)
     li r0, 0x1
     lfs f0, lbl_808860B4
@@ -366,7 +366,7 @@ lbl_fn_803FD328_00000388:
 lbl_fn_803FD328_000003E0:
     lwz r3, 0xf8(r3)
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r26)
     li r0, 0x1
     lfs f1, lbl_808860B4
@@ -443,7 +443,7 @@ lbl_fn_803FD328_000004EC:
 lbl_fn_803FD328_000004FC:
     lwz r3, 0xfc(r3)
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xfc(r26)
     li r0, 0x1
     lfs f0, lbl_808860B4
@@ -466,7 +466,7 @@ lbl_fn_803FD328_000004FC:
 lbl_fn_803FD328_00000554:
     lwz r3, 0xfc(r3)
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xfc(r26)
     li r0, 0x1
     lfs f0, lbl_808860B4
@@ -518,7 +518,7 @@ lbl_fn_803FD328_00000610:
     cmpwi r0, 0x1
     bne lbl_fn_803FD328_00000668
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r28)
     li r4, 0x0
     lfs f1, lbl_808860AC
@@ -538,7 +538,7 @@ lbl_fn_803FD328_00000610:
     b lbl_fn_803FD328_00000864
 lbl_fn_803FD328_00000668:
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r28)
     cmpwi r27, 0x0
     li r4, 0x0
@@ -562,7 +562,7 @@ lbl_fn_803FD328_000006A4:
     b lbl_fn_803FD328_00000864
 lbl_fn_803FD328_000006C0:
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r28)
     li r4, 0x0
     lfs f1, lbl_808860AC
@@ -582,7 +582,7 @@ lbl_fn_803FD328_000006C0:
     b lbl_fn_803FD328_00000864
 lbl_fn_803FD328_0000070C:
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r28)
     cmpwi r27, 0x0
     li r4, 0x0
@@ -633,7 +633,7 @@ lbl_fn_803FD328_000007A8:
     b lbl_fn_803FD328_00000864
 lbl_fn_803FD328_000007C8:
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r28)
     li r4, 0x0
     lfs f1, lbl_808860AC
@@ -655,7 +655,7 @@ lbl_fn_803FD328_00000814:
     cmpwi r27, 0x1
     bne lbl_fn_803FD328_00000864
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r28)
     li r4, 0x0
     lfs f1, lbl_808860AC
@@ -703,7 +703,7 @@ lbl_fn_803FD328_000008B8:
 lbl_fn_803FD328_000008C8:
     mr r3, r4
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xfc(r26)
     li r0, 0x1
     lfs f0, lbl_808860B4
@@ -726,7 +726,7 @@ lbl_fn_803FD328_000008C8:
 lbl_fn_803FD328_00000920:
     mr r3, r4
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xfc(r26)
     li r0, 0x1
     lfs f0, lbl_808860B4
@@ -775,7 +775,7 @@ lbl_fn_803FD328_000009C4:
 lbl_fn_803FD328_000009D4:
     mr r3, r4
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r26)
     li r0, 0x1
     lfs f0, lbl_808860B4
@@ -798,7 +798,7 @@ lbl_fn_803FD328_000009D4:
 lbl_fn_803FD328_00000A2C:
     mr r3, r4
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r26)
     li r0, 0x1
     lfs f0, lbl_808860B4
@@ -821,7 +821,7 @@ lbl_fn_803FD328_00000A2C:
 lbl_fn_803FD328_00000A84:
     mr r3, r4
     li r4, 0x9
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf8(r26)
     li r0, 0x1
     lfs f0, lbl_808860B4

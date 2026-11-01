@@ -6,7 +6,7 @@ extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void fn_8004D388(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void fn_8008BBD8(void);
@@ -20,7 +20,7 @@ extern void fn_800F8C6C(void);
 extern void fn_8012A288(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80148990(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80176548(void);
 extern void fn_80219E6C(void);
 extern void fn_802377B8(void);
@@ -636,7 +636,7 @@ lbl_fn_80321E20_000007B8:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
@@ -750,7 +750,7 @@ lbl_fn_80321E20_00000958:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r30
     addi r4, r4, fn_80148990@l
@@ -910,7 +910,7 @@ lbl_fn_80321E20_00000BBC:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
@@ -1024,7 +1024,7 @@ lbl_fn_80321E20_00000D5C:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r30
     addi r4, r4, fn_80148990@l
@@ -1245,7 +1245,7 @@ asm void fn_803227A0(void)
     stw r30, 0x118(r1)
     mr r30, r3
     stw r0, 0x58c(r3)
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r30)
     lwz r3, lbl_8087F048
@@ -1470,7 +1470,7 @@ asm void fn_80322AD4(void)
     cmpwi r0, 0x4
     bne lbl_fn_80322AD4_000013FC
     li r4, 0x4
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_80322AD4_000013FC:
     li r0, 0x0
     stw r0, 0x1560(r31)

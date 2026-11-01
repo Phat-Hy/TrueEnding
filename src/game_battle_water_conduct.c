@@ -52,7 +52,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068A850(void);
 extern void fn_80695AD0(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -408,7 +408,7 @@ lbl_fn_80419C00_000003FC:
     bl strcpy
     addi r3, r1, 0x210
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     mulli r0, r3, 0xc
     addi r4, r1, 0x110
     add r3, r23, r0
@@ -434,7 +434,7 @@ lbl_fn_80419C00_00000448:
     stfs f30, 0x108(r1)
     stfs f30, 0x10c(r1)
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     mr r30, r3
     addi r3, r1, 0x210
     bl fn_8005B9CC
@@ -446,14 +446,14 @@ lbl_fn_80419C00_00000448:
     stfs f1, 0xec(r1)
     addi r3, r1, 0x210
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     subi r0, r3, 0x1
     addi r3, r1, 0x210
     cntlzw r0, r0
     srwi r0, r0, 5
     stb r0, 0xf0(r1)
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     subi r0, r3, 0x1
     addi r3, r1, 0x210
     cntlzw r0, r0
@@ -686,15 +686,15 @@ lbl_fn_80419C00_00000820:
     bl memset
     addi r3, r1, 0x210
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stb r3, 0x3c(r1)
     addi r3, r1, 0x210
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stb r3, 0x3d(r1)
     addi r3, r1, 0x210
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x40(r1)
     addi r22, r1, 0x3c
     li r30, 0x0

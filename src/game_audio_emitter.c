@@ -8,7 +8,7 @@ extern void fn_80063200(void);
 extern void fn_800638B0(void);
 extern void fn_80063D3C(void);
 extern void fn_8007708C(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
@@ -29,7 +29,7 @@ extern void fn_80145334(void);
 extern void fn_80148990(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80219E6C(void);
 extern void fn_802375C4(void);
 extern void fn_802376D0(void);
@@ -384,7 +384,7 @@ lbl_fn_802FD134_00000388:
     mr r3, r30
     li r4, 0x3
     stw r0, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F4A0
     lwz r0, 0x48(r3)
     stw r0, 0x1614(r30)
@@ -483,7 +483,7 @@ lbl_fn_802FD328_00000470:
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0x15f0(r31)
     addi r0, r3, 0x1
     stw r0, 0x15f0(r31)
@@ -545,7 +545,7 @@ lbl_fn_802FD328_00000570:
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0x15f0(r31)
     addi r0, r3, 0x1
     stw r0, 0x15f0(r31)
@@ -629,7 +629,7 @@ lbl_fn_802FD328_00000660:
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0x15f0(r31)
     addi r0, r3, 0x1
     stw r0, 0x15f0(r31)
@@ -704,7 +704,7 @@ lbl_fn_802FD328_00000810:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884A5C
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -881,7 +881,7 @@ lbl_fn_802FD328_00000AAC:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884A5C
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -945,7 +945,7 @@ lbl_fn_802FD328_00000B9C:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884A5C
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1018,7 +1018,7 @@ lbl_fn_802FD328_00000C8C:
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0x15f0(r31)
     addi r0, r3, 0x1
     stw r0, 0x15f0(r31)
@@ -1629,7 +1629,7 @@ lbl_fn_802FE3E4_0000155C:
     stw r0, 0x58c(r30)
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884A5C
     li r31, 0x1
     stw r31, 0x3fc(r30)
@@ -1685,7 +1685,7 @@ lbl_fn_802FE3E4_00001640:
     stw r0, 0x58c(r30)
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884A5C
     li r0, 0x1
     stw r0, 0x3fc(r30)
@@ -1779,7 +1779,7 @@ lbl_fn_802FE630_000017D8:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
@@ -1893,7 +1893,7 @@ lbl_fn_802FE630_00001978:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r30
     addi r4, r4, fn_80148990@l
@@ -2060,7 +2060,7 @@ lbl_fn_802FE630_00001BF8:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
@@ -2174,7 +2174,7 @@ lbl_fn_802FE630_00001D98:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r30
     addi r4, r4, fn_80148990@l
@@ -2344,7 +2344,7 @@ lbl_fn_802FE630_00002024:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
@@ -2458,7 +2458,7 @@ lbl_fn_802FE630_000021C4:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r30
     addi r4, r4, fn_80148990@l

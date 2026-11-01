@@ -9,7 +9,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_23(void);
 extern void _savegpr_25(void);
 extern void fn_8004D388(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -24,7 +24,7 @@ extern void dialog_renderWindow(void);
 extern void fn_80151448(void);
 extern void fn_8015B238(void);
 extern void fn_8016D454(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80176548(void);
 extern void fn_80232B7C(void);
 extern void fn_80239DAC(void);
@@ -207,7 +207,7 @@ lbl_fn_80460B48_00000134:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80886D8C
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -321,7 +321,7 @@ lbl_fn_80460B48_000002D4:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80886D8C
     li r30, 0x1
     stw r30, 0x3fc(r31)
@@ -382,7 +382,7 @@ lbl_fn_80460B48_000003C0:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80886D8C
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -505,7 +505,7 @@ lbl_fn_80460F18_00000560:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     addi r4, r31, fn_80148990@l
     li r5, 0x0
     li r6, 0x14
@@ -618,7 +618,7 @@ lbl_fn_80460F18_000006F8:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r27
     addi r4, r31, fn_80148990@l
     li r5, 0x0

@@ -20,7 +20,7 @@ extern void fn_8006EF48(void);
 extern void fn_8006F72C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Task_constructor(void);
 extern void fn_800DBF68(void);
@@ -135,7 +135,7 @@ lbl_fn_801F275C_00000048:
     la r5, lbl_8087DAEC
     la r6, lbl_8087DAE8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x48(r29)
     mr r31, r3
     cmpwi r0, 0x0
@@ -229,7 +229,7 @@ lbl_fn_801F275C_00000198:
     la r5, lbl_8087DAEC
     la r6, lbl_8087DAE8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x48(r29)
     mr r30, r3
     cmpwi r0, 0x0
@@ -1666,7 +1666,7 @@ lbl_fn_801F36C8_00001544:
     la r5, lbl_8087DAF4
     la r6, lbl_8087DAF0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x4(r29)
     b lbl_fn_801F36C8_00001578
 lbl_fn_801F36C8_00001570:
@@ -1680,7 +1680,7 @@ lbl_fn_801F36C8_00001578:
     addi r5, r5, 0x14
     li r7, 0x0
     mr r6, r5
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x14(r29)
     li r16, 0x0
     li r19, 0x0

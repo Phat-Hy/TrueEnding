@@ -14,7 +14,7 @@ extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
 extern void fn_800827E0(void);
 extern void fn_800839EC(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800DC288(void);
 extern void fn_800DD3FC(void);
@@ -35,7 +35,7 @@ extern void fn_8021A4E0(void);
 extern void fn_8021A5F8(void);
 extern void world_getGlobalFlag(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_80686A64(void);
 extern void fn_80686AF0(void);
 extern void fn_80686B64(void);
@@ -142,7 +142,7 @@ asm void event_processScriptAction(void)
     bne lbl_event_processScriptAction_000000DC
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r21, r3
 lbl_event_processScriptAction_000000DC:
     addi r3, r1, 0x14
@@ -190,7 +190,7 @@ lbl_event_processScriptAction_00000124:
     mr r6, r5
     li r4, 0x1
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, lbl_8087F228
     mr r4, r22
     lwz r12, 0x14(r1)
@@ -227,7 +227,7 @@ lbl_event_processScriptAction_000001E0:
     stb r29, 0x3(r19)
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     sth r3, 0xbc(r19)
     addi r3, r1, 0x14
     bl fn_8005B3CC
@@ -235,54 +235,54 @@ lbl_event_processScriptAction_000001E0:
     bl fn_8005B3CC
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xc4(r19)
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xc8(r19)
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     addi r3, r1, 0x14
     bl fn_8005B3CC
     mr r25, r3
@@ -325,11 +325,11 @@ lbl_event_processScriptAction_0000037C:
     stb r25, 0xc1(r19)
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stb r3, 0xc2(r19)
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stb r3, 0xc3(r19)
     addi r3, r1, 0x14
     bl fn_8005B3CC
@@ -500,23 +500,23 @@ lbl_event_processScriptAction_000005D8:
 lbl_event_processScriptAction_000005E0:
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xec(r18)
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xf0(r18)
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xf4(r18)
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xf8(r18)
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     addi r17, r17, 0x1
     stw r3, 0xfc(r18)
     cmpwi r17, 0x2
@@ -524,7 +524,7 @@ lbl_event_processScriptAction_000005E0:
     blt lbl_event_processScriptAction_000005E0
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xb4(r19)
     addi r3, r1, 0x14
     bl fn_8005B3CC
@@ -545,18 +545,18 @@ lbl_event_processScriptAction_000005E0:
 lbl_event_processScriptAction_00000690:
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x130(r19)
     mr r18, r19
     li r17, 0x0
 lbl_event_processScriptAction_000006A8:
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x11c(r18)
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     add r4, r19, r17
     addi r17, r17, 0x1
     cmpwi r17, 0x4
@@ -565,11 +565,11 @@ lbl_event_processScriptAction_000006A8:
     blt lbl_event_processScriptAction_000006A8
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x134(r19)
     addi r3, r1, 0x14
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     sth r3, 0xbe(r19)
     addi r23, r23, 0x138
     addi r20, r20, 0x1
@@ -708,7 +708,7 @@ lbl_fn_80211244_000008B8:
     li r7, 0x0
     slwi r3, r0, 1
     mr r6, r5
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x10(r1)
     stw r3, lbl_8087F22C
     srwi. r3, r0, 1
@@ -1089,7 +1089,7 @@ lbl_fn_80211770_00000D78:
     addi r5, r5, 0x1d
     li r7, 0x0
     mr r6, r5
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, lbl_8087F230
 lbl_fn_80211770_00000DA8:
     lwz r3, lbl_8087F230

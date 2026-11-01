@@ -61,7 +61,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068B100(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
@@ -185,7 +185,7 @@ lbl_fn_803F33A4_000000BC:
     bne lbl_fn_803F33A4_00000124
     addi r3, r1, 0x14
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xa50(r25)
     addi r3, r1, 0x14
     bl fn_8005B9CC
@@ -207,7 +207,7 @@ lbl_fn_803F33A4_00000124:
     bne lbl_fn_803F33A4_000001DC
     addi r3, r1, 0x14
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xa5c(r25)
     addi r3, r1, 0x14
     bl fn_8005B9CC
@@ -316,7 +316,7 @@ lbl_fn_803F33A4_0000023C:
     bl fn_80208748
     stw r3, 0x10(r23)
     addi r3, r24, 0x2
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14(r23)
     lwz r3, 0x0(r23)
     lbz r0, 0x4d(r3)
@@ -333,7 +333,7 @@ lbl_fn_803F33A4_000002F8:
     bne lbl_fn_803F33A4_00000334
     addi r3, r1, 0x14
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     addi r4, r25, 0x28c
     addi r0, r25, 0x65c
     stw r4, 0xa84(r25)

@@ -26,7 +26,7 @@ extern void fn_8000DE44(void);
 extern void fn_800697D8(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008B140(void);
 extern void atn_Model_findBoneIndex(void);
@@ -58,7 +58,7 @@ extern void fn_80155DAC(void);
 extern void fn_80164DCC(void);
 extern void fn_8016E4C4(void);
 extern void fn_8016E5F0(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8016EB48(void);
 extern void fn_801750FC(void);
 extern void fn_801765D8(void);
@@ -74,7 +74,7 @@ extern void fn_80564060(void);
 extern void fn_80566014(void);
 extern void fn_8067E23C(void);
 extern void printf(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void abort(void);
 extern void fn_80695720(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -764,10 +764,10 @@ lbl_fn_8000E820_000008D4:
     li r0, 0x0
     stbx r0, r26, r28
     addi r3, r1, 0x40
-    bl fn_80684600
+    bl atoi
     mr r25, r3
     addi r3, r1, 0x20
-    bl fn_80684600
+    bl atoi
     cmpwi r27, 0x656d
     mr r5, r3
     beq lbl_fn_8000E820_00000940
@@ -1478,7 +1478,7 @@ lbl_fn_8000F1EC_00001240:
     la r6, lbl_8087D6DC
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8000FAE4@ha
     mr r7, r15
     addi r4, r4, fn_8000FAE4@l
@@ -1810,7 +1810,7 @@ lbl_fn_8000F1EC_00001720:
     lwz r3, 0x1c(r29)
     li r4, 0x8
     lwz r3, 0x48(r3)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0x1c(r29)
     li r4, 0x1
     lwz r3, 0x48(r3)
@@ -2082,7 +2082,7 @@ lbl_fn_8000FAE8_00001AD4:
     bne lbl_fn_8000FAE8_00001B2C
     lwz r3, 0x1c(r31)
     lwz r3, 0x48(r3)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0x1c(r31)
     li r4, 0x1
     li r5, 0x1
@@ -2093,7 +2093,7 @@ lbl_fn_8000FAE8_00001AD4:
 lbl_fn_8000FAE8_00001B2C:
     lwz r3, 0x1c(r31)
     lwz r3, 0x48(r3)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_8000FAE8_00001B38:
     lwz r3, 0x1c(r31)
     li r28, 0x0

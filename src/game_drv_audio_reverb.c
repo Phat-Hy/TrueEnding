@@ -105,7 +105,7 @@ extern void fn_805F9AB0(void);
 extern void fn_805F9D20(void);
 extern void fn_8067E23C(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern u32 strlen(const char* str);
@@ -1184,7 +1184,7 @@ asm void fn_805BB658(void)
 lbl_fn_805BB658_00000E18:
     addi r3, r1, 0xb4
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     subi r0, r3, 0x1
     cmplwi r0, 0x3
     bgt lbl_fn_805BB658_0000142C
@@ -1206,7 +1206,7 @@ lbl_fn_805BB658_00000E18:
     rlwinm r0, r0, 0, 4, 2
     stw r0, 0xfc(r4)
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x4a8(r26)
     addi r3, r1, 0xb4
     bl fn_8005B3CC
@@ -1542,11 +1542,11 @@ lbl_fn_805BB658_00001310:
     stw r3, 0x4b0(r26)
     addi r3, r1, 0xb4
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x4b8(r26)
     addi r3, r1, 0xb4
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x4bc(r26)
     addi r16, r29, 0x58
     mr r3, r16

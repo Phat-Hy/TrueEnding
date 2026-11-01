@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void DCZeroRange(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80089ACC(void);
 extern void fn_8008B964(void);
@@ -964,7 +964,7 @@ lbl_fn_80091CFC_00000CF0:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0xd4(r28)
     mr r31, r3
     cmpwi r0, 0x0
@@ -1058,7 +1058,7 @@ lbl_fn_80091CFC_00000E40:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0xd4(r28)
     mr r30, r3
     cmpwi r0, 0x0
@@ -1229,7 +1229,7 @@ lbl_fn_800920B8_000010A4:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0xd4(r28)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1323,7 +1323,7 @@ lbl_fn_800920B8_000011F4:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0xd4(r28)
     mr r30, r3
     cmpwi r0, 0x0

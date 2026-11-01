@@ -25,7 +25,7 @@ extern void fn_80144710(void);
 extern void fn_80148B0C(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80232B7C(void);
 extern void fn_80239DAC(void);
 extern void fn_8023A680(void);
@@ -457,7 +457,7 @@ lbl_fn_804541A0_00000490:
 lbl_fn_804541A0_000004C0:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r0, 0xd18(r31)
     li r3, 0x0
     stw r3, 0x14e0(r31)
@@ -1047,7 +1047,7 @@ lbl_fn_804549F8_00000CD0:
     mr r3, r30
     li r4, 0x3
     stw r0, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r30
     li r5, 0x3e8

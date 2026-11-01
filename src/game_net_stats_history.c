@@ -25,7 +25,7 @@ extern void fn_805428AC(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void printf(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_80686A48(void);
 extern void fn_80686A64(void);
 extern void abort(void);
@@ -1631,7 +1631,7 @@ lbl_fn_80541D00_000014C4:
     cmpw r6, r0
     blt lbl_fn_80541D00_0000142C
     addi r3, r1, 0x8
-    bl fn_80684600
+    bl atoi
     cmpw r3, r29
     bne lbl_fn_80541D00_000014E4
     li r3, 0x1

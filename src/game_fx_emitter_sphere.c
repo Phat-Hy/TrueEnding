@@ -40,7 +40,7 @@ extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
 extern void fn_8015495C(void);
 extern void fn_8016DA4C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80178A6C(void);
 extern void fn_80219E6C(void);
@@ -69,7 +69,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern void fn_8068B100(void);
@@ -799,7 +799,7 @@ lbl_fn_802878EC_00000984:
     stw r0, 0x58c(r29)
     mr r3, r29
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_802878EC_000009CC:
     addi r11, r1, 0x120
     psq_l f31, 0x1f8(r1), 0, 0
@@ -1800,7 +1800,7 @@ lbl_fn_802885EC_000017F8:
     bne lbl_fn_802885EC_00001824
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14cc(r31)
     b lbl_fn_802885EC_00001928
@@ -1812,7 +1812,7 @@ lbl_fn_802885EC_00001824:
     bne lbl_fn_802885EC_00001850
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14d0(r31)
     b lbl_fn_802885EC_00001928
@@ -1824,7 +1824,7 @@ lbl_fn_802885EC_00001850:
     bne lbl_fn_802885EC_0000187C
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14d4(r31)
     b lbl_fn_802885EC_00001928
@@ -1836,7 +1836,7 @@ lbl_fn_802885EC_0000187C:
     bne lbl_fn_802885EC_000018A8
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14d8(r31)
     b lbl_fn_802885EC_00001928
@@ -1848,7 +1848,7 @@ lbl_fn_802885EC_000018A8:
     bne lbl_fn_802885EC_000018D4
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14dc(r31)
     b lbl_fn_802885EC_00001928
@@ -1860,7 +1860,7 @@ lbl_fn_802885EC_000018D4:
     bne lbl_fn_802885EC_00001900
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14e0(r31)
     b lbl_fn_802885EC_00001928
@@ -1872,7 +1872,7 @@ lbl_fn_802885EC_00001900:
     bne lbl_fn_802885EC_00001928
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14e4(r31)
 lbl_fn_802885EC_00001928:

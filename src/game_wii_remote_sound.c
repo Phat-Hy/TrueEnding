@@ -13,7 +13,7 @@ extern void fn_8001296C(void);
 extern void fn_80012CBC(void);
 extern void fn_80012CE4(void);
 extern void fn_80012D0C(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800928B0(void);
@@ -147,7 +147,7 @@ lbl_fn_805553D8_000000C4:
     la r6, lbl_8087D6DC
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8000FAE4@ha
     mr r7, r23
     addi r4, r4, fn_8000FAE4@l
@@ -345,7 +345,7 @@ lbl_fn_805553D8_000003C4:
     la r5, lbl_8087D810
     la r6, lbl_8087D80C
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     addi r4, r31, fn_8000FAE4@l
     li r5, 0x0
     li r6, 0x2c
@@ -458,7 +458,7 @@ lbl_fn_805553D8_0000055C:
     la r6, lbl_8087D80C
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r30
     addi r4, r31, fn_8000FAE4@l
     li r5, 0x0
@@ -2128,7 +2128,7 @@ lbl_fn_80556C08_00001D04:
     la r5, lbl_8087E674
     la r6, lbl_8087E670
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80544294@ha
     li r5, 0x0
     addi r4, r4, fn_80544294@l
@@ -2232,7 +2232,7 @@ lbl_fn_80556C08_00001E7C:
     la r5, lbl_8087E674
     la r6, lbl_8087E670
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80544294@ha
     mr r7, r25
     addi r4, r4, fn_80544294@l
@@ -2380,7 +2380,7 @@ lbl_fn_80556C08_000020A8:
     la r5, lbl_8087E674
     la r6, lbl_8087E670
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80544294@ha
     li r5, 0x0
     addi r4, r4, fn_80544294@l
@@ -2484,7 +2484,7 @@ lbl_fn_80556C08_00002220:
     la r5, lbl_8087E674
     la r6, lbl_8087E670
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80544294@ha
     mr r7, r25
     addi r4, r4, fn_80544294@l

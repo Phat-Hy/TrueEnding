@@ -49,7 +49,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
 
@@ -1514,7 +1514,7 @@ lbl_fn_803F60E8_00001494:
     bne lbl_fn_803F60E8_000014B8
     addi r3, r1, 0x8
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x5ec(r28)
 lbl_fn_803F60E8_000014B8:
     addi r3, r1, 0x8

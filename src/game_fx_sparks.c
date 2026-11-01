@@ -13,7 +13,7 @@ extern void fn_800C344C(void);
 extern void ref_releaseHandle(void);
 extern void fn_800F8548(void);
 extern void fn_800FAB80(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80239DAC(void);
 extern void world_setGlobalFlag(void);
 extern void world_setLocalFlag(void);
@@ -122,7 +122,7 @@ asm void fn_80299EF8(void)
     bl fn_80239DAC
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F048
     bl fn_800F8548
     lfs f0, lbl_80883BF0
@@ -580,7 +580,7 @@ asm void fn_8029A580(void)
     bl fn_80239DAC
     mr r3, r29
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F430
     li r4, 0x38d
     li r5, 0x0
@@ -641,7 +641,7 @@ lbl_fn_8029A674_000007C8:
     bl fn_80239DAC
     mr r3, r30
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lfs f3, lbl_80883BF0
     li r3, 0x4
     lfs f0, lbl_80883C58
@@ -705,7 +705,7 @@ asm void fn_8029A788(void)
     stw r31, 0x15fc(r30)
     mr r3, r30
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883BF0
     li r3, 0x4
     li r0, 0x1
@@ -817,7 +817,7 @@ asm void fn_8029A928(void)
     bl fn_80239DAC
     mr r3, r30
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883BF0
     li r3, 0x4
     li r0, 0x1
@@ -1670,7 +1670,7 @@ asm void fn_8029B59C(void)
     bl fn_80239DAC
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883BF0
     li r0, 0x1
     stw r0, 0x3fc(r30)

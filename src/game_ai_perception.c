@@ -31,7 +31,7 @@ extern void fn_80139560(void);
 extern void fn_80151448(void);
 extern void fn_8015E4B0(void);
 extern void fn_8016D74C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80178208(void);
 extern void fn_801B2480(void);
 extern void fn_80219E6C(void);
@@ -55,7 +55,7 @@ extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068B100(void);
 extern u32 strlen(const char* str);
@@ -176,7 +176,7 @@ lbl_fn_8025E9E4_00000098:
     li r4, 0x3
     stw r0, 0x14f4(r3)
     stw r0, 0x58c(r3)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x1f4
@@ -799,7 +799,7 @@ lbl_fn_8025F35C_000009A4:
     li r4, 0x3
     stw r0, 0x14f4(r3)
     stw r0, 0x58c(r3)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x1f4
@@ -822,7 +822,7 @@ lbl_fn_8025F35C_00000A08:
     li r4, 0x3
     stw r0, 0x14f4(r3)
     stw r0, 0x58c(r3)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x1f4
@@ -1071,7 +1071,7 @@ asm void fn_8025F754(void)
     li r4, 0x3
     stw r0, 0x14f4(r3)
     stw r0, 0x58c(r3)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x1f4
@@ -1840,7 +1840,7 @@ lbl_fn_80260218_00001870:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x2
-    bl fn_8016E970
+    bl actor_setState
     mr r3, r31
     bl fn_80260324
     lwz r3, 0x1438(r31)
@@ -1940,7 +1940,7 @@ lbl_fn_80260324_000019F0:
     bne lbl_fn_80260324_00001A3C
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14c8(r31)
     b lbl_fn_80260324_00001AD0
@@ -1955,7 +1955,7 @@ lbl_fn_80260324_00001A3C:
     beq lbl_fn_80260324_00001AD0
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r4, lbl_8087F430
     li r5, 0x0
     li r6, 0x0

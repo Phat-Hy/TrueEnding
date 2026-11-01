@@ -26,7 +26,7 @@ extern void fn_80158CA4(void);
 extern void fn_8015E4B0(void);
 extern void fn_8015E7A0(void);
 extern void fn_8015ECC4(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_8017BC58(void);
 extern void fn_80219E6C(void);
 extern void fn_802377B8(void);
@@ -50,7 +50,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068AEA4(void);
 extern void fn_8068AEA8(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -633,7 +633,7 @@ lbl_fn_80355DD8_00000714:
     bne lbl_fn_80355DD8_00000748
     addi r3, r1, 0x1c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x155c(r31)
     b lbl_fn_80355DD8_00000C5C
@@ -645,7 +645,7 @@ lbl_fn_80355DD8_00000748:
     bne lbl_fn_80355DD8_00000774
     addi r3, r1, 0x1c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1560(r31)
     b lbl_fn_80355DD8_00000C5C
@@ -657,7 +657,7 @@ lbl_fn_80355DD8_00000774:
     bne lbl_fn_80355DD8_000007A0
     addi r3, r1, 0x1c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1564(r31)
     b lbl_fn_80355DD8_00000C5C
@@ -669,7 +669,7 @@ lbl_fn_80355DD8_000007A0:
     bne lbl_fn_80355DD8_000007CC
     addi r3, r1, 0x1c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1568(r31)
     b lbl_fn_80355DD8_00000C5C
@@ -681,7 +681,7 @@ lbl_fn_80355DD8_000007CC:
     bne lbl_fn_80355DD8_000007F8
     addi r3, r1, 0x1c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x156c(r31)
     b lbl_fn_80355DD8_00000C5C
@@ -693,7 +693,7 @@ lbl_fn_80355DD8_000007F8:
     bne lbl_fn_80355DD8_00000824
     addi r3, r1, 0x1c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1570(r31)
     b lbl_fn_80355DD8_00000C5C
@@ -705,7 +705,7 @@ lbl_fn_80355DD8_00000824:
     bne lbl_fn_80355DD8_00000850
     addi r3, r1, 0x1c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1574(r31)
     b lbl_fn_80355DD8_00000C5C
@@ -717,7 +717,7 @@ lbl_fn_80355DD8_00000850:
     bne lbl_fn_80355DD8_0000087C
     addi r3, r1, 0x1c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1584(r31)
     b lbl_fn_80355DD8_00000C5C
@@ -729,17 +729,17 @@ lbl_fn_80355DD8_0000087C:
     bne lbl_fn_80355DD8_000008D0
     addi r3, r1, 0x1c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1578(r31)
     addi r3, r1, 0x1c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x157c(r31)
     addi r3, r1, 0x1c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1580(r31)
     b lbl_fn_80355DD8_00000C5C
@@ -751,7 +751,7 @@ lbl_fn_80355DD8_000008D0:
     bne lbl_fn_80355DD8_000008F8
     addi r3, r1, 0x1c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x1518(r31)
     b lbl_fn_80355DD8_00000C5C
 lbl_fn_80355DD8_000008F8:
@@ -762,7 +762,7 @@ lbl_fn_80355DD8_000008F8:
     bne lbl_fn_80355DD8_00000920
     addi r3, r1, 0x1c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x1540(r31)
     b lbl_fn_80355DD8_00000C5C
 lbl_fn_80355DD8_00000920:
@@ -850,11 +850,11 @@ lbl_fn_80355DD8_00000A38:
     bne lbl_fn_80355DD8_00000AD0
     addi r3, r1, 0x1c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xc(r1)
     addi r3, r1, 0x1c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14(r1)
     addi r3, r1, 0x1c
     stw r28, 0x8(r1)
@@ -1977,7 +1977,7 @@ lbl_fn_80357004_00001A0C:
     bctrl
     mr r3, r31
     li r4, 0x2
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_80357004_00001B08
 lbl_fn_80357004_00001A50:
     lwz r12, 0x0(r31)

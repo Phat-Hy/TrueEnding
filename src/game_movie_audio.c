@@ -8,7 +8,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800F8548(void);
 extern void fn_800F8574(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80232B7C(void);
 extern void fn_80239DAC(void);
 extern void fn_8023A680(void);
@@ -202,7 +202,7 @@ asm void fn_8033F7FC(void)
     bl fn_8023A680
     mr r3, r31
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r0, 0x14b8(r31)
     lis r3, lbl_8074A490@ha
     lfd f7, lbl_8074A490@l(r3)
@@ -387,7 +387,7 @@ lbl_fn_8033F7FC_0000052C:
     cmpwi r6, 0x3
     bne lbl_fn_8033F7FC_00000894
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f7, lbl_80885238
     addi r3, r1, 0x148
     lfs f0, lbl_80885260
@@ -701,7 +701,7 @@ lbl_fn_8033F7FC_00000938:
     bl fn_80239DAC
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80885260
     li r0, 0x1
     stw r30, 0x58c(r31)

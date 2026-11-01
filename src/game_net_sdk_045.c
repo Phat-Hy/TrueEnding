@@ -17,7 +17,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void strstr(void);
 extern void fn_80683B54(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068B1FC(void);
 extern void fn_806A420C(void);
 extern void fn_806A4260(void);
@@ -1447,7 +1447,7 @@ lbl_fn_806FE1F0_0000124C:
     stb r0, 0x14(r4)
     ble lbl_fn_806FE1F0_000013B0
     mr r3, r30
-    bl fn_80684600
+    bl atoi
     stw r3, 0x20(r29)
     mr r4, r29
     addi r3, r28, 0x8
@@ -2163,7 +2163,7 @@ lbl_fn_806FEAA0_00001BC8:
     b lbl_fn_806FEAA0_00001BE0
 lbl_fn_806FEAA0_00001BD8:
     mr r3, r31
-    bl fn_80684600
+    bl atoi
 lbl_fn_806FEAA0_00001BE0:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

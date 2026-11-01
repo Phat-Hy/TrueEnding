@@ -31,7 +31,7 @@ extern void fn_80108F38(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8015495C(void);
 extern void fn_8016DA4C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_801781B0(void);
 extern void fn_80178A6C(void);
@@ -57,7 +57,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void fn_80683B54(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void abort(void);
 extern void fn_8068AEA4(void);
 extern u32 strlen(const char* str);
@@ -142,7 +142,7 @@ asm void fn_802EB814(void)
     mr r3, r30
     li r4, 0x3
     stw r31, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_802EB814_000000B8
 lbl_fn_802EB814_0000006C:
     lfs f1, 0x2e4(r30)
@@ -239,7 +239,7 @@ asm void fn_802EB97C(void)
     mr r3, r30
     li r4, 0x3
     stw r31, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_802EB97C_000001CC:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -324,7 +324,7 @@ asm void fn_802EBABC(void)
     mr r3, r30
     li r4, 0x3
     stw r31, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -351,7 +351,7 @@ asm void fn_802EBB14(void)
     mr r3, r31
     li r4, 0x6
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808847AC
     li r3, 0x4
     li r0, 0x1
@@ -402,7 +402,7 @@ asm void fn_802EBBA8(void)
     mr r3, r29
     li r4, 0x6
     stw r0, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808847AC
     li r0, 0x4
     li r31, 0x1
@@ -788,7 +788,7 @@ asm void fn_802EC160(void)
     mr r3, r30
     li r4, 0x3
     stw r0, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
     lfs f1, lbl_808847A8
     li r31, 0x1
     lfs f0, lbl_808847AC
@@ -1846,15 +1846,15 @@ lbl_fn_802EC9A8_0000188C:
     bne lbl_fn_802EC9A8_000018D4
     addi r3, r1, 0x48
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15e4(r15)
     addi r3, r1, 0x48
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15e8(r15)
     addi r3, r1, 0x48
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15ec(r15)
     b lbl_fn_802EC9A8_00001B64
 lbl_fn_802EC9A8_000018D4:
@@ -1899,7 +1899,7 @@ lbl_fn_802EC9A8_00001954:
     bne lbl_fn_802EC9A8_0000197C
     addi r3, r1, 0x48
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15fc(r15)
     b lbl_fn_802EC9A8_00001B64
 lbl_fn_802EC9A8_0000197C:
@@ -1910,7 +1910,7 @@ lbl_fn_802EC9A8_0000197C:
     bne lbl_fn_802EC9A8_000019A4
     addi r3, r1, 0x48
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x1600(r15)
     b lbl_fn_802EC9A8_00001B64
 lbl_fn_802EC9A8_000019A4:
@@ -1945,7 +1945,7 @@ lbl_fn_802EC9A8_000019FC:
     bne lbl_fn_802EC9A8_00001A24
     addi r3, r1, 0x48
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15a8(r15)
     b lbl_fn_802EC9A8_00001B64
 lbl_fn_802EC9A8_00001A24:
@@ -1956,7 +1956,7 @@ lbl_fn_802EC9A8_00001A24:
     bne lbl_fn_802EC9A8_00001A4C
     addi r3, r1, 0x48
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15ac(r15)
     b lbl_fn_802EC9A8_00001B64
 lbl_fn_802EC9A8_00001A4C:
@@ -1967,7 +1967,7 @@ lbl_fn_802EC9A8_00001A4C:
     bne lbl_fn_802EC9A8_00001A74
     addi r3, r1, 0x48
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x1604(r15)
     b lbl_fn_802EC9A8_00001B64
 lbl_fn_802EC9A8_00001A74:
@@ -1978,7 +1978,7 @@ lbl_fn_802EC9A8_00001A74:
     bne lbl_fn_802EC9A8_00001A9C
     addi r3, r1, 0x48
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x15b8(r15)
     b lbl_fn_802EC9A8_00001B64
 lbl_fn_802EC9A8_00001A9C:
@@ -1992,7 +1992,7 @@ lbl_fn_802EC9A8_00001A9C:
 lbl_fn_802EC9A8_00001AB8:
     addi r3, r1, 0x48
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     addi r18, r18, 0x1
     stw r3, 0x1608(r16)
@@ -2011,7 +2011,7 @@ lbl_fn_802EC9A8_00001AE0:
 lbl_fn_802EC9A8_00001AFC:
     addi r3, r1, 0x48
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     addi r18, r18, 0x1
     stw r3, 0x1614(r16)
@@ -2030,7 +2030,7 @@ lbl_fn_802EC9A8_00001B24:
 lbl_fn_802EC9A8_00001B40:
     addi r3, r1, 0x48
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     addi r18, r18, 0x1
     stw r3, 0x1620(r16)

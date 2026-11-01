@@ -61,7 +61,7 @@ extern void fn_804F5E3C(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_806958E0(void);
 extern void fn_806A8E40(void);
 extern void fn_806B0E30(void);
@@ -345,11 +345,11 @@ lbl_fn_804089A0_000002CC:
     bne lbl_fn_804089A0_00000304
     addi r3, r1, 0x108
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x8ac(r31)
     addi r3, r1, 0x108
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x8b0(r31)
     b lbl_fn_804089A0_000003A8
 lbl_fn_804089A0_00000304:

@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void fn_8004B338(void);
 extern void fn_800795DC(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008771C(void);
@@ -530,7 +530,7 @@ lbl_fn_800C1720_00000574:
     la r6, lbl_8087D918
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, atn_LH_Texture_constructor@ha
     lis r5, atn_LH_Texture_destructAndFree@ha
     addi r4, r4, atn_LH_Texture_constructor@l
@@ -580,7 +580,7 @@ lbl_fn_800C1814_00000620:
     la r6, lbl_8087D918
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, atn_LH_Texture_constructor@ha
     lis r5, atn_LH_Texture_destructAndFree@ha
     addi r4, r4, atn_LH_Texture_constructor@l
@@ -1633,7 +1633,7 @@ lbl_fn_800C2634_000014B8:
     la r6, lbl_8087D918
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, atn_LH_Texture_constructor@ha
     lis r5, atn_LH_Texture_destructAndFree@ha
     mr r7, r31
@@ -1809,7 +1809,7 @@ lbl_fn_800C289C_0000173C:
     la r6, lbl_8087D918
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, atn_LH_Texture_constructor@ha
     lis r5, atn_LH_Texture_destructAndFree@ha
     addi r4, r4, atn_LH_Texture_constructor@l
@@ -1963,7 +1963,7 @@ lbl_fn_800C2B24_0000196C:
     la r6, lbl_8087D918
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, atn_LH_Texture_constructor@ha
     lis r5, atn_LH_Texture_destructAndFree@ha
     addi r4, r4, atn_LH_Texture_constructor@l

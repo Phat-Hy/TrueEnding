@@ -11,7 +11,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_80125474(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_801720AC(void);
 extern void fn_801749EC(void);
 extern void fn_80179D44(void);
@@ -1146,7 +1146,7 @@ lbl_fn_801426A4_00000F28:
 lbl_fn_801426A4_00000F64:
     mr r3, r29
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0xf80(r29)
     li r0, 0x0
     cmpwi r3, 0x0

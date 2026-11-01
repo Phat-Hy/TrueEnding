@@ -14,7 +14,7 @@ extern void fn_80070B60(void);
 extern void fn_80070C98(void);
 extern void fn_80080048(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void* area_refresh(void*);
 extern void fn_8008A4E0(void);
@@ -693,7 +693,7 @@ lbl_fn_80095750_0000089C:
     la r5, lbl_8087D7D8
     la r6, lbl_8087D7D4
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x1ec(r28)
     mr r29, r3
     cmpwi r0, 0x0
@@ -787,7 +787,7 @@ lbl_fn_80095750_000009EC:
     la r5, lbl_8087D7D8
     la r6, lbl_8087D7D4
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x1ec(r28)
     mr r30, r3
     cmpwi r0, 0x0
@@ -1425,7 +1425,7 @@ lbl_fn_80096218_000012D0:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r28)
     mr r24, r3
     cmpwi r0, 0x0
@@ -1519,7 +1519,7 @@ lbl_fn_80096218_00001420:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r28)
     mr r30, r3
     cmpwi r0, 0x0
@@ -1634,7 +1634,7 @@ lbl_fn_80096218_000015D4:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r28)
     mr r24, r3
     cmpwi r0, 0x0
@@ -1728,7 +1728,7 @@ lbl_fn_80096218_00001724:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r28)
     mr r24, r3
     cmpwi r0, 0x0
@@ -1848,7 +1848,7 @@ lbl_fn_80096218_000018E8:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r28)
     mr r23, r3
     cmpwi r0, 0x0
@@ -1942,7 +1942,7 @@ lbl_fn_80096218_00001A38:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r28)
     mr r24, r3
     cmpwi r0, 0x0
@@ -2069,7 +2069,7 @@ lbl_fn_80096218_00001C10:
     la r5, lbl_8087D7D0
     la r6, lbl_8087D7CC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r29)
     mr r23, r3
     cmpwi r0, 0x0
@@ -2163,7 +2163,7 @@ lbl_fn_80096218_00001D60:
     la r5, lbl_8087D7D0
     la r6, lbl_8087D7CC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r29)
     mr r23, r3
     cmpwi r0, 0x0
@@ -2317,7 +2317,7 @@ asm void lockon_updateTarget(void)
     li r7, 0x0
     subi r3, r6, 0x4ff0
     mr r6, r5
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, area_refresh@ha
     li r5, 0x0
     addi r4, r4, area_refresh@l
@@ -2394,7 +2394,7 @@ lbl_lockon_updateTarget_000020C4:
     la r6, lbl_8087D7C4
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_800A03A0@ha
     lis r5, fn_800970CC@ha
     mr r7, r30

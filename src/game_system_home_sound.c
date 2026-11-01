@@ -22,7 +22,7 @@ extern void gx_syncFrameFifo(void);
 extern void fn_80071D60(void);
 extern void fn_80075DEC(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_80089EE4(void);
 extern void fn_8008CD60(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1586,7 +1586,7 @@ asm void fn_80364BE8(void)
     mr r6, r5
     addi r3, r3, 0xf00
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r0, r3
     lwz r3, 0x48(r31)
     stw r0, 0x48(r31)
@@ -1600,7 +1600,7 @@ lbl_fn_80364BE8_0000146C:
     mr r6, r5
     addi r3, r3, 0x120
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r0, r3
     lwz r3, 0x48(r31)
     stw r0, 0x48(r31)

@@ -34,7 +34,7 @@ extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void fn_8068AEA4(void);
@@ -190,7 +190,7 @@ asm void fn_8037E12C(void)
 lbl_fn_8037E12C_0000014C:
     addi r3, r1, 0x170
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     cmpw r25, r3
     bne lbl_fn_8037E12C_00000660
     addi r3, r1, 0x170

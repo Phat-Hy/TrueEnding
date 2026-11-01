@@ -77,8 +77,8 @@ extern void fn_80624830(void);
 extern void fn_80624910(void);
 extern void fn_806249F0(void);
 extern void printf(void);
-extern void fn_806846C4(void);
-extern void fn_806846CC(void);
+extern void wmemcpy(void);
+extern void wmemmove(void);
 extern void fn_80686A48(void);
 extern void abort(void);
 extern void fn_80695D84(void);
@@ -845,7 +845,7 @@ lbl_fn_8006F72C_00000940:
     mr r3, r30
     mr r4, r29
     mr r5, r20
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8006F72C_00000958:
     subf r3, r21, r22
     slwi r22, r20, 1
@@ -864,7 +864,7 @@ lbl_fn_8006F72C_00000958:
     mr r5, r23
     add r3, r20, r3
     add r4, r4, r0
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8006F72C_000009A0:
     cmpwi r31, 0x0
     slwi r0, r24, 1
@@ -935,13 +935,13 @@ lbl_fn_8006F72C_00000A74:
     slwi r0, r26, 1
     add r3, r4, r3
     add r4, r4, r0
-    bl fn_806846CC
+    bl wmemmove
 lbl_fn_8006F72C_00000A9C:
     slwi r0, r20, 1
     mr r4, r21
     mr r5, r25
     add r3, r29, r0
-    bl fn_806846CC
+    bl wmemmove
     cmpwi r31, 0x0
     slwi r0, r24, 1
     lhz r3, lbl_8087D736

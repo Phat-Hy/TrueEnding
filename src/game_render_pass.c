@@ -33,7 +33,7 @@ extern void fn_800F8548(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8015495C(void);
 extern void fn_8016DA4C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80178A6C(void);
 extern void fn_80179D44(void);
 extern void fn_80219E6C(void);
@@ -84,7 +84,7 @@ extern void fn_805A3D00(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068B100(void);
 extern void fn_806959D8(void);
 extern u32 strlen(const char* str);
@@ -511,7 +511,7 @@ asm void fn_802A4478(void)
     mr r3, r28
     stfs f0, 0x155c(r28)
     stw r31, 0x15fc(r28)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883D30
     li r0, 0x17
     stw r0, 0x560(r28)
@@ -601,7 +601,7 @@ asm void fn_802A4628(void)
     stfs f0, 0x155c(r30)
     stw r31, 0x15fc(r30)
     stw r0, 0x58c(r30)
-    bl fn_8016E970
+    bl actor_setState
     lfs f2, lbl_80883D30
     li r0, 0x1
     lfs f0, lbl_80883D88
@@ -677,7 +677,7 @@ lbl_fn_802A46E4_000006B0:
 lbl_fn_802A46E4_000006D4:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_802A46E4_00000834
 lbl_fn_802A46E4_000006E4:
     beq lbl_fn_802A46E4_00000834
@@ -1707,7 +1707,7 @@ lbl_fn_802A51F4_0000153C:
     bne lbl_fn_802A51F4_00001568
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1664(r30)
     b lbl_fn_802A51F4_000017B8
@@ -1719,7 +1719,7 @@ lbl_fn_802A51F4_00001568:
     bne lbl_fn_802A51F4_00001594
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1668(r30)
     b lbl_fn_802A51F4_000017B8
@@ -1731,7 +1731,7 @@ lbl_fn_802A51F4_00001594:
     bne lbl_fn_802A51F4_000015C0
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x166c(r30)
     b lbl_fn_802A51F4_000017B8
@@ -1743,7 +1743,7 @@ lbl_fn_802A51F4_000015C0:
     bne lbl_fn_802A51F4_000015EC
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1670(r30)
     b lbl_fn_802A51F4_000017B8
@@ -1755,7 +1755,7 @@ lbl_fn_802A51F4_000015EC:
     bne lbl_fn_802A51F4_00001618
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1674(r30)
     b lbl_fn_802A51F4_000017B8
@@ -1767,7 +1767,7 @@ lbl_fn_802A51F4_00001618:
     bne lbl_fn_802A51F4_00001644
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1678(r30)
     b lbl_fn_802A51F4_000017B8
@@ -1779,7 +1779,7 @@ lbl_fn_802A51F4_00001644:
     bne lbl_fn_802A51F4_00001670
     addi r3, r1, 0x20
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x167c(r30)
     b lbl_fn_802A51F4_000017B8

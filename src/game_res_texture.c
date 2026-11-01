@@ -7,7 +7,7 @@ extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80229DF0(void);
 extern void fn_80229F4C(void);
@@ -1037,7 +1037,7 @@ asm void texCache_allocateSlot(void)
     addi r3, r7, 0x10
     li r4, 0x7
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8022BDB4@ha
     mr r7, r31
     addi r4, r4, fn_8022BDB4@l
@@ -1052,7 +1052,7 @@ asm void texCache_allocateSlot(void)
     addi r3, r7, 0x10
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, tex_initDescriptor@ha
     mr r7, r27
     addi r4, r4, tex_initDescriptor@l
@@ -1067,7 +1067,7 @@ asm void texCache_allocateSlot(void)
     addi r3, r7, 0x10
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80238148@ha
     lis r5, fn_802381D8@ha
     mr r7, r28
@@ -1102,7 +1102,7 @@ lbl_texCache_allocateSlot_00000E54:
     la r6, lbl_8087DBF0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, tex_initDefaultTransform@ha
     li r5, 0x0
     addi r4, r4, tex_initDefaultTransform@l
@@ -1500,7 +1500,7 @@ lbl_fn_8022BEAC_000013F4:
     la r6, lbl_8087DBF0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, tex_initDefaultTransform@ha
     mr r7, r28
     addi r4, r4, tex_initDefaultTransform@l

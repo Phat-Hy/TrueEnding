@@ -29,7 +29,7 @@ extern void fn_80444CF8(void);
 extern void fn_80445F44(void);
 extern void fn_8044D678(void);
 extern void rand(void);
-extern void fn_806846C4(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 
 /* External data declarations */
@@ -110,7 +110,7 @@ lbl_fn_80450590_00000088:
     mr r3, r30
     mr r4, r29
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80450590_000000BC:
     subic. r28, r28, 0x1
     subi r30, r30, 0x40
@@ -128,7 +128,7 @@ lbl_fn_80450590_000000BC:
     mr r4, r30
     addi r3, r31, 0x2c
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
     b lbl_fn_80450590_000001C8
 lbl_fn_80450590_00000104:
     addi r3, r1, 0x88
@@ -155,7 +155,7 @@ lbl_fn_80450590_00000138:
     mr r4, r30
     addi r3, r31, 0x6c
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
     b lbl_fn_80450590_000001C8
 lbl_fn_80450590_00000168:
     addi r3, r1, 0x8
@@ -182,7 +182,7 @@ lbl_fn_80450590_0000019C:
     mr r4, r30
     addi r3, r31, 0x2c
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80450590_000001C8:
     lwz r0, 0x1a4(r1)
     lwz r31, 0x19c(r1)

@@ -15,7 +15,7 @@ extern void fn_800610A4(void);
 extern void fn_80061824(void);
 extern void fn_8006F420(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800C6E60(void);
 extern void fn_800C6ED8(void);
@@ -47,8 +47,8 @@ extern void fn_8050541C(void);
 extern void fn_805072C8(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
-extern void fn_806846C4(void);
+extern void atoi(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 extern void fn_80695720(void);
 extern void fn_806958E0(void);
@@ -256,7 +256,7 @@ lbl_fn_80505514_000001E4:
     mr r4, r27
     addi r3, r31, 0xfc
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_80505514_0000020C:
     lwz r3, 0x1c(r1)
     cmpwi r3, 0x0
@@ -981,7 +981,7 @@ lbl_fn_80505FC8_00000BB4:
     li r4, 0x1
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     cmpwi r30, 0x0
     stw r3, lbl_8087F868
     li r27, 0x0
@@ -1123,7 +1123,7 @@ lbl_fn_805061CC_00000DAC:
 lbl_fn_805061CC_00000DD8:
     addi r3, r1, 0x10c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x0
     ble lbl_fn_805061CC_00000E20
     lwz r0, 0x2084(r25)
@@ -1175,7 +1175,7 @@ lbl_fn_805061CC_00000E64:
 lbl_fn_805061CC_00000E90:
     addi r3, r1, 0x10c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x0
     ble lbl_fn_805061CC_00000ED8
     lwz r0, 0x221c(r26)
@@ -1208,7 +1208,7 @@ lbl_fn_805061CC_00000EF8:
     li r5, 0x104
     bl memset
     mr r3, r25
-    bl fn_80684600
+    bl atoi
     stw r3, 0x8(r1)
     addi r26, r1, 0x8
     li r24, 0x0
@@ -1227,11 +1227,11 @@ lbl_fn_805061CC_00000F20:
     bge lbl_fn_805061CC_00000F90
     addi r3, r1, 0x10c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x4(r26)
     addi r3, r1, 0x10c
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x0
     stw r3, 0x84(r26)
     bgt lbl_fn_805061CC_00000F78
@@ -2021,7 +2021,7 @@ lbl_fn_80506D98_0000198C:
     addi r5, r5, 0x13
     li r7, 0x0
     mr r6, r5
-    bl fn_800846FC
+    bl mem_realloc
     cmpwi r21, 0x0
     stw r3, 0xfc(r19)
     beq lbl_fn_80506D98_000019CC
@@ -2146,7 +2146,7 @@ lbl_fn_80506D98_00001B70:
     la r5, lbl_8087E464
     la r6, lbl_8087E460
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     addi r4, r29, fn_805072C8@l
     addi r5, r30, fn_804D147C@l
     li r6, 0x1c
@@ -2212,7 +2212,7 @@ lbl_fn_80506D98_00001C50:
     la r6, lbl_8087E460
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r28
     addi r4, r29, fn_805072C8@l
     addi r5, r30, fn_804D147C@l

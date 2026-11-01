@@ -13,7 +13,7 @@ extern void _savegpr_27(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void strstr(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_806A420C(void);
 extern void fn_806A4270(void);
 extern void fn_806D57A0(void);
@@ -1616,7 +1616,7 @@ lbl_fn_806E5570_000013C8:
     b lbl_fn_806E5570_000014A4
 lbl_fn_806E5570_0000140C:
     addi r3, r1, 0x18
-    bl fn_80684600
+    bl atoi
     lwz r4, 0xc(r29)
     mr r31, r3
     lwz r0, 0x10(r29)
@@ -2185,7 +2185,7 @@ lbl_fn_806E5D70_00001B84:
     b lbl_fn_806E5D70_00001D3C
 lbl_fn_806E5D70_00001BCC:
     addi r3, r1, 0x10
-    bl fn_80684600
+    bl atoi
     mr r30, r3
     mr r3, r25
     addi r4, r28, 0x214
@@ -2258,7 +2258,7 @@ lbl_fn_806E5D70_00001C8C:
     b lbl_fn_806E5D70_00001D3C
 lbl_fn_806E5D70_00001CD4:
     addi r3, r1, 0x10
-    bl fn_80684600
+    bl atoi
     mr r21, r3
     mr r3, r24
     mr r4, r21

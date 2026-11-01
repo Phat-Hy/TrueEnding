@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void fn_8005B9CC(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800874C8(void);
 extern void fn_8008771C(void);
@@ -1265,7 +1265,7 @@ lbl_fn_803FFF40_000010A8:
     lwz r30, 0x44(r8)
     mulli r3, r30, 0x30
     addi r3, r3, 0x10
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r30
     li r4, 0x0
     li r5, 0x0

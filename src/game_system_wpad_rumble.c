@@ -54,7 +54,7 @@ extern void fn_80547984(void);
 extern void fn_80547B58(void);
 extern void fn_80549F18(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
 
@@ -432,7 +432,7 @@ lbl_world_Manager_update_00000404:
     cmpwi r3, 0x0
     bne lbl_world_Manager_update_00000488
     addi r3, r28, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r27, r3, 0x64
     bne lbl_world_Manager_update_00000488
@@ -441,7 +441,7 @@ lbl_world_Manager_update_00000404:
     cmplwi r3, 0x8
     blt lbl_world_Manager_update_00000488
     addi r3, r28, 0x6
-    bl fn_80684600
+    bl atoi
     add r27, r27, r3
 lbl_world_Manager_update_00000488:
     lis r3, lbl_8074DAF8@ha
@@ -473,7 +473,7 @@ lbl_world_Manager_update_000004B8:
     cmpwi r3, 0x0
     bne lbl_world_Manager_update_00000518
     addi r3, r27, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r28, r3, 0x64
     bne lbl_world_Manager_update_00000518
@@ -482,7 +482,7 @@ lbl_world_Manager_update_000004B8:
     cmplwi r3, 0x8
     blt lbl_world_Manager_update_00000518
     addi r3, r27, 0x6
-    bl fn_80684600
+    bl atoi
     add r28, r28, r3
 lbl_world_Manager_update_00000518:
     lis r4, lbl_8074DA2C@ha
@@ -854,7 +854,7 @@ lbl_world_Manager_update_00000A08:
     cmpwi r3, 0x0
     bne lbl_world_Manager_update_00000A8C
     addi r3, r28, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r27, r3, 0x64
     bne lbl_world_Manager_update_00000A8C
@@ -863,7 +863,7 @@ lbl_world_Manager_update_00000A08:
     cmplwi r3, 0x8
     blt lbl_world_Manager_update_00000A8C
     addi r3, r28, 0x6
-    bl fn_80684600
+    bl atoi
     add r27, r27, r3
 lbl_world_Manager_update_00000A8C:
     lis r3, lbl_8074DAF8@ha
@@ -895,7 +895,7 @@ lbl_world_Manager_update_00000ABC:
     cmpwi r3, 0x0
     bne lbl_world_Manager_update_00000B1C
     addi r3, r28, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r27, r3, 0x64
     bne lbl_world_Manager_update_00000B1C
@@ -904,7 +904,7 @@ lbl_world_Manager_update_00000ABC:
     cmplwi r3, 0x8
     blt lbl_world_Manager_update_00000B1C
     addi r3, r28, 0x6
-    bl fn_80684600
+    bl atoi
     add r27, r27, r3
 lbl_world_Manager_update_00000B1C:
     lis r4, lbl_8074DA2C@ha

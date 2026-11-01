@@ -67,7 +67,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -1461,7 +1461,7 @@ lbl_fn_803A4568_000011F8:
     cmpwi r3, 0x0
     bne lbl_fn_803A4568_0000131C
     addi r3, r1, 0xb
-    bl fn_80684600
+    bl atoi
     lwz r0, 0x6a4(r29)
     cmpw r3, r0
     bge lbl_fn_803A4568_00001264

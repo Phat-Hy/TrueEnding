@@ -18,7 +18,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECMag(void);
 extern void rand(void);
-extern void fn_806846C4(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 
 /* External data declarations */
@@ -362,7 +362,7 @@ lbl_fn_8054D798_000000F8:
     mr r3, r18
     mr r4, r21
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8054D798_000001A8:
     lis r5, lbl_807C7030@ha
     lfs f2, 0x8(r22)
@@ -642,7 +642,7 @@ lbl_fn_8054D798_000004E4:
     mr r3, r20
     mr r4, r21
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8054D798_00000550:
     cmpwi r26, 0x0
     beq lbl_fn_8054D798_000006A0

@@ -48,7 +48,7 @@ extern void fn_8014C540(void);
 extern void fn_801513D0(void);
 extern void fn_8015E7A0(void);
 extern void fn_8016D74C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80179D44(void);
 extern void fn_80219E6C(void);
@@ -107,7 +107,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void rand(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_806958E0(void);
 extern void fn_806959D8(void);
 extern u32 strlen(const char* str);
@@ -874,7 +874,7 @@ lbl_fn_8032E3DC_000009EC:
     bne lbl_fn_8032E3DC_00000A38
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14d0(r28)
     b lbl_fn_8032E3DC_00000E74
@@ -886,7 +886,7 @@ lbl_fn_8032E3DC_00000A38:
     bne lbl_fn_8032E3DC_00000A64
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14d4(r28)
     b lbl_fn_8032E3DC_00000E74
@@ -898,7 +898,7 @@ lbl_fn_8032E3DC_00000A64:
     bne lbl_fn_8032E3DC_00000A90
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14dc(r28)
     b lbl_fn_8032E3DC_00000E74
@@ -910,7 +910,7 @@ lbl_fn_8032E3DC_00000A90:
     bne lbl_fn_8032E3DC_00000ABC
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14d8(r28)
     b lbl_fn_8032E3DC_00000E74
@@ -922,7 +922,7 @@ lbl_fn_8032E3DC_00000ABC:
     bne lbl_fn_8032E3DC_00000AE8
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14e0(r28)
     b lbl_fn_8032E3DC_00000E74
@@ -934,7 +934,7 @@ lbl_fn_8032E3DC_00000AE8:
     bne lbl_fn_8032E3DC_00000B14
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14e4(r28)
     b lbl_fn_8032E3DC_00000E74
@@ -946,7 +946,7 @@ lbl_fn_8032E3DC_00000B14:
     bne lbl_fn_8032E3DC_00000B40
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14e8(r28)
     b lbl_fn_8032E3DC_00000E74
@@ -958,7 +958,7 @@ lbl_fn_8032E3DC_00000B40:
     bne lbl_fn_8032E3DC_00000B68
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x157c(r28)
     b lbl_fn_8032E3DC_00000E74
 lbl_fn_8032E3DC_00000B68:
@@ -1002,11 +1002,11 @@ lbl_fn_8032E3DC_00000BE0:
     bne lbl_fn_8032E3DC_00000C74
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x28(r1)
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x2c(r1)
     addi r3, r1, 0x38
     bl fn_8005B3CC
@@ -1014,7 +1014,7 @@ lbl_fn_8032E3DC_00000BE0:
     stfs f1, 0x30(r1)
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, 0x14ec(r28)
     stw r3, 0x34(r1)
     slwi r0, r0, 4
@@ -1111,7 +1111,7 @@ lbl_fn_8032E3DC_00000D80:
     bne lbl_fn_8032E3DC_00000E74
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x4
     bge lbl_fn_8032E3DC_00000E74
     mulli r0, r3, 0x50
@@ -1194,7 +1194,7 @@ asm void fn_8032E938(void)
     cmpwi r0, 0x2
     bne lbl_fn_8032E938_00000ED4
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_8032E938_00000ED4:
     lwz r0, 0x1590(r31)
     cmpwi r0, 0x0

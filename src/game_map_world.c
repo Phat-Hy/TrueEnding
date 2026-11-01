@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80096218(void);
@@ -35,7 +35,7 @@ extern void atn_LoadHandle_getData(void);
 extern void fn_80563A64(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_80686A64(void);
 extern void fn_80695AD0(void);
 
@@ -148,17 +148,17 @@ asm void fn_80179A34(void)
     beq lbl_fn_80179A34_000000DC
     lwz r3, 0x10(r4)
     addi r3, r3, 0x8
-    bl fn_80684600
+    bl atoi
     lwz r4, 0x60(r31)
     mulli r30, r3, 0x64
     lwz r3, 0x10(r4)
     addi r3, r3, 0x2
-    bl fn_80684600
+    bl atoi
     lwz r4, 0x60(r31)
     mulli r31, r3, 0x2710
     lwz r3, 0x10(r4)
     addi r3, r3, 0xb
-    bl fn_80684600
+    bl atoi
     add r0, r31, r30
     add r3, r3, r0
     b lbl_fn_80179A34_000000E0
@@ -1656,7 +1656,7 @@ lbl_fn_8017AD44_00001468:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r28)
     mr r29, r3
     cmpwi r0, 0x0
@@ -1750,7 +1750,7 @@ lbl_fn_8017AD44_000015B8:
     la r5, lbl_8087D7E0
     la r6, lbl_8087D7DC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lwz r0, 0x8(r28)
     mr r30, r3
     cmpwi r0, 0x0
@@ -1942,7 +1942,7 @@ lbl_fn_8017B1C4_00001858:
     la r5, lbl_8087D9DC
     la r6, lbl_8087D9D8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r30, r3
     b lbl_fn_8017B1C4_00001888
 lbl_fn_8017B1C4_00001884:

@@ -41,7 +41,7 @@ extern void fn_805A4984(void);
 extern void PSVECMag(void);
 extern void printf(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void abort(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -366,7 +366,7 @@ lbl_fn_802AC8E8_000003C4:
     bne lbl_fn_802AC8E8_000003F8
     addi r3, r1, 0x44
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x152c(r29)
     b lbl_fn_802AC8E8_00000718
@@ -378,7 +378,7 @@ lbl_fn_802AC8E8_000003F8:
     bne lbl_fn_802AC8E8_00000424
     addi r3, r1, 0x44
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1530(r29)
     b lbl_fn_802AC8E8_00000718
@@ -390,7 +390,7 @@ lbl_fn_802AC8E8_00000424:
     bne lbl_fn_802AC8E8_00000450
     addi r3, r1, 0x44
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1534(r29)
     b lbl_fn_802AC8E8_00000718
@@ -402,7 +402,7 @@ lbl_fn_802AC8E8_00000450:
     bne lbl_fn_802AC8E8_0000047C
     addi r3, r1, 0x44
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1538(r29)
     b lbl_fn_802AC8E8_00000718
@@ -414,7 +414,7 @@ lbl_fn_802AC8E8_0000047C:
     bne lbl_fn_802AC8E8_000004A8
     addi r3, r1, 0x44
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x153c(r29)
     b lbl_fn_802AC8E8_00000718
@@ -426,7 +426,7 @@ lbl_fn_802AC8E8_000004A8:
     bne lbl_fn_802AC8E8_000004D4
     addi r3, r1, 0x44
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1540(r29)
     b lbl_fn_802AC8E8_00000718
@@ -438,7 +438,7 @@ lbl_fn_802AC8E8_000004D4:
     bne lbl_fn_802AC8E8_00000500
     addi r3, r1, 0x44
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1544(r29)
     b lbl_fn_802AC8E8_00000718
@@ -450,7 +450,7 @@ lbl_fn_802AC8E8_00000500:
     bne lbl_fn_802AC8E8_00000528
     addi r3, r1, 0x44
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x1510(r29)
     b lbl_fn_802AC8E8_00000718
 lbl_fn_802AC8E8_00000528:

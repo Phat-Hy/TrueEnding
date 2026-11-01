@@ -12,7 +12,7 @@ extern void fn_8005B6E8(void);
 extern void fn_8006BA8C(void);
 extern void fn_8006BB6C(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_800A5D14(void);
 extern void fn_800A5D6C(void);
 extern void fn_800A5E00(void);
@@ -28,7 +28,7 @@ extern void fn_8046DD20(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void strstr(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
 extern u32 strlen(const char* str);
@@ -361,7 +361,7 @@ lbl_fn_8020F248_00000358:
     la r6, lbl_8087DB38
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8020F710@ha
     lis r5, fn_8020F190@ha
     mr r7, r22
@@ -400,7 +400,7 @@ lbl_fn_8020F248_000003F0:
     beq lbl_fn_8020F248_000006F0
     cmpwi r0, 0x23
     beq lbl_fn_8020F248_000006F0
-    bl fn_80684600
+    bl atoi
     stw r3, 0x10(r1)
     addi r3, r1, 0x70
     bl fn_8005B3CC
@@ -473,7 +473,7 @@ lbl_fn_8020F248_00000504:
     addi r3, r1, 0x70
     stw r30, 0x5c(r1)
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     neg r4, r3
     lwz r0, 0x5c(r1)
     or r4, r4, r3
@@ -482,7 +482,7 @@ lbl_fn_8020F248_00000504:
     or r0, r0, r4
     stw r0, 0x5c(r1)
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     neg r4, r3
     lwz r0, 0x5c(r1)
     or r4, r4, r3
@@ -492,7 +492,7 @@ lbl_fn_8020F248_00000504:
     or r0, r0, r4
     stw r0, 0x5c(r1)
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     neg r4, r3
     lwz r0, 0x5c(r1)
     or r4, r4, r3
@@ -502,7 +502,7 @@ lbl_fn_8020F248_00000504:
     or r0, r0, r4
     stw r0, 0x5c(r1)
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     neg r4, r3
     lwz r0, 0x5c(r1)
     or r4, r4, r3
@@ -561,7 +561,7 @@ lbl_fn_8020F248_00000650:
     stfs f1, 0x6c(r1)
     addi r3, r1, 0x70
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     neg r4, r3
     lwz r0, 0x5c(r1)
     or r4, r4, r3
@@ -790,7 +790,7 @@ asm void fn_8020F84C(void)
     bne lbl_fn_8020F84C_00000960
     addi r3, r1, 0x28
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
 lbl_fn_8020F84C_00000960:
     addi r3, r1, 0x28
     bl fn_8005B5F8
@@ -818,7 +818,7 @@ lbl_fn_8020F84C_00000990:
     mulli r8, r29, 0x4c
     mr r6, r5
     addi r3, r8, 0x10
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8020FD30@ha
     lis r5, fn_8020FBC4@ha
     mr r7, r29
@@ -849,7 +849,7 @@ lbl_fn_8020F84C_00000A14:
     lwz r0, lbl_8087F208
     mr r3, r30
     add r30, r0, r29
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r30)
     addi r3, r1, 0x28
     bl fn_8005B3CC
@@ -1201,7 +1201,7 @@ lbl_fn_8020FDEC_00000ED0:
     li r7, 0x0
     mr r6, r5
     addi r3, r3, 0x10
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8021021C@ha
     mr r7, r31
     addi r4, r4, fn_8021021C@l
@@ -1233,24 +1233,24 @@ lbl_fn_8020FDEC_00000F44:
     bl fn_8005B3CC
     addi r3, r1, 0xc
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r4, lbl_8087F210
     stwx r3, r4, r31
     addi r3, r1, 0xc
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F210
     add r4, r0, r31
     stw r3, 0x4(r4)
     addi r3, r1, 0xc
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F210
     add r4, r0, r31
     stw r3, 0x8(r4)
     addi r3, r1, 0xc
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F210
     add r4, r0, r31
     stw r3, 0xc(r4)
@@ -1268,19 +1268,19 @@ lbl_fn_8020FDEC_00000F44:
     add r4, r0, r31
     stfs f1, 0x14(r4)
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F210
     add r4, r0, r31
     stw r3, 0x18(r4)
     addi r3, r1, 0xc
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F210
     add r4, r0, r31
     stw r3, 0x1c(r4)
     addi r3, r1, 0xc
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F210
     add r4, r0, r31
     stw r3, 0x20(r4)
@@ -1292,13 +1292,13 @@ lbl_fn_8020FDEC_00000F44:
     add r4, r0, r31
     stfs f1, 0x24(r4)
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F210
     add r4, r0, r31
     stw r3, 0x28(r4)
     addi r3, r1, 0xc
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F210
     add r4, r0, r31
     stw r3, 0x2c(r4)
@@ -1328,31 +1328,31 @@ lbl_fn_8020FDEC_00000F44:
     add r4, r0, r31
     stfs f1, 0x3c(r4)
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F210
     add r4, r0, r31
     stw r3, 0x40(r4)
     addi r3, r1, 0xc
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F210
     add r4, r0, r31
     stw r3, 0x44(r4)
     addi r3, r1, 0xc
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F210
     add r4, r0, r31
     stw r3, 0x48(r4)
     addi r3, r1, 0xc
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F210
     add r4, r0, r31
     stw r3, 0x4c(r4)
     addi r3, r1, 0xc
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F210
     add r4, r0, r31
     stw r3, 0x50(r4)
@@ -1370,7 +1370,7 @@ lbl_fn_8020FDEC_00000F44:
     add r4, r0, r31
     stfs f1, 0x58(r4)
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F210
     add r4, r0, r31
     stw r3, 0x5c(r4)
@@ -1757,11 +1757,11 @@ lbl_fn_80210244_000016E0:
     cmpwi r3, 0x0
     beq lbl_fn_80210244_00001AA4
     addi r3, r1, 0x1c
-    bl fn_80684600
+    bl atoi
     mr r27, r3
     addi r3, r1, 0xc
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     cmpwi r27, 0x0
     ble lbl_fn_80210244_0000175C
     cmpwi r3, 0x0
@@ -1802,11 +1802,11 @@ lbl_fn_80210244_00001788:
     cmpwi r3, 0x0
     beq lbl_fn_80210244_00001AA4
     addi r3, r1, 0x1c
-    bl fn_80684600
+    bl atoi
     mr r27, r3
     addi r3, r1, 0xc
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     cmpwi r27, 0x0
     blt lbl_fn_80210244_000017F8
     cmpwi r27, 0xa
@@ -1921,13 +1921,13 @@ lbl_fn_80210244_00001958:
     addi r3, r25, 0x2
     add r4, r0, r26
     stw r23, 0x134(r4)
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F218
     add r4, r0, r26
     stw r3, 0x138(r4)
     addi r3, r1, 0xc
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F218
     addi r24, r24, 0x1
     cmpwi r24, 0x20
@@ -1988,13 +1988,13 @@ lbl_fn_80210244_00001A4C:
     addi r3, r25, 0x2
     add r4, r0, r27
     stw r23, 0x2b4(r4)
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F218
     add r4, r0, r27
     stw r3, 0x2b8(r4)
     addi r3, r1, 0xc
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, lbl_8087F218
     addi r22, r22, 0x1
     cmpwi r22, 0x20

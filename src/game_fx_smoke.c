@@ -30,7 +30,7 @@ extern void fn_800FAB80(void);
 extern void fn_80109828(void);
 extern void fn_8013C38C(void);
 extern void fn_8014052C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_801A03E8(void);
 extern void fn_80232B7C(void);
 extern void fn_80239DAC(void);
@@ -328,7 +328,7 @@ asm void fn_80296DB8(void)
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f3, lbl_80883BF0
     li r0, 0x1
     lfs f0, lbl_80883C58
@@ -451,7 +451,7 @@ lbl_fn_80296DB8_000004D8:
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f3, lbl_80883BF0
     li r0, 0x1
     lfs f0, lbl_80883C58
@@ -535,7 +535,7 @@ lbl_fn_80297114_00000638:
     bne lbl_fn_80297114_000008C8
     mr r3, r31
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883BF0
     li r0, 0x1
     li r3, 0x1e
@@ -586,7 +586,7 @@ lbl_fn_80297114_000006A8:
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f3, lbl_80883BF0
     li r0, 0x1
     lfs f0, lbl_80883C58
@@ -766,7 +766,7 @@ lbl_fn_80297474_00000998:
     bne lbl_fn_80297474_00000DB0
     mr r3, r31
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883BF0
     li r0, 0x1e
     li r28, 0x1
@@ -1015,7 +1015,7 @@ lbl_fn_80297474_00000D10:
     stw r30, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f2, lbl_80883BF0
     li r0, 0x1
     lfs f0, lbl_80883C58
@@ -1116,7 +1116,7 @@ lbl_fn_8029795C_00000EA8:
 lbl_fn_8029795C_00000ED0:
     mr r3, r28
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r0, 0x14c4(r28)
     li r4, 0x1e
     lfs f0, lbl_80883BF0
@@ -1167,7 +1167,7 @@ lbl_fn_8029795C_00000F5C:
 lbl_fn_8029795C_00000F8C:
     mr r3, r28
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lwz r0, 0x15d8(r28)
     li r5, 0x4
     li r4, 0x2
@@ -1786,7 +1786,7 @@ lbl_fn_8029795C_0000183C:
     bl fn_80239DAC
     mr r3, r28
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r28)
     lwz r3, lbl_8087F048
@@ -1830,7 +1830,7 @@ lbl_fn_8029795C_00001910:
     stw r29, 0x58c(r28)
     mr r3, r28
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f3, lbl_80883BF0
     li r0, 0x1
     lfs f0, lbl_80883C58

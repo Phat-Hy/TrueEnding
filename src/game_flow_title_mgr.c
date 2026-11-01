@@ -33,7 +33,7 @@ extern void fn_8050F85C(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void strstr(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_80686AF0(void);
 extern void fn_806A8E40(void);
 extern void fn_806A8E70(void);
@@ -950,7 +950,7 @@ lbl_fn_804DC7C4_00000B70:
     li r3, 0x0
     b lbl_fn_804DC7C4_00000B7C
 lbl_fn_804DC7C4_00000B78:
-    bl fn_80684600
+    bl atoi
 lbl_fn_804DC7C4_00000B7C:
     lwz r0, 0x124(r1)
     mtlr r0
@@ -977,7 +977,7 @@ lbl_fn_804DC810_00000BBC:
     li r3, 0x0
     b lbl_fn_804DC810_00000BC8
 lbl_fn_804DC810_00000BC4:
-    bl fn_80684600
+    bl atoi
 lbl_fn_804DC810_00000BC8:
     lwz r0, 0x124(r1)
     mtlr r0

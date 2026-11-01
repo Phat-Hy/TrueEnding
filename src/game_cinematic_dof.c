@@ -63,7 +63,7 @@ extern void fn_80145334(void);
 extern void fn_8014C540(void);
 extern void fn_8015ECC4(void);
 extern void fn_8016E4C4(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_801A03E0(void);
 extern void fn_8020A780(void);
 extern void fn_80219E6C(void);
@@ -145,7 +145,7 @@ extern void PSVECMag(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void abort(void);
 extern void fn_806958E0(void);
 
@@ -1409,7 +1409,7 @@ lbl_fn_80338FD0_00001114:
     bne lbl_fn_80338FD0_00001140
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14d0(r31)
     b lbl_fn_80338FD0_00001290
@@ -1421,7 +1421,7 @@ lbl_fn_80338FD0_00001140:
     bne lbl_fn_80338FD0_0000116C
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14d4(r31)
     b lbl_fn_80338FD0_00001290
@@ -1433,7 +1433,7 @@ lbl_fn_80338FD0_0000116C:
     bne lbl_fn_80338FD0_00001198
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14d8(r31)
     b lbl_fn_80338FD0_00001290
@@ -1445,7 +1445,7 @@ lbl_fn_80338FD0_00001198:
     bne lbl_fn_80338FD0_000011C4
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14dc(r31)
     b lbl_fn_80338FD0_00001290
@@ -1457,7 +1457,7 @@ lbl_fn_80338FD0_000011C4:
     bne lbl_fn_80338FD0_000011F0
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14e0(r31)
     b lbl_fn_80338FD0_00001290
@@ -1469,7 +1469,7 @@ lbl_fn_80338FD0_000011F0:
     bne lbl_fn_80338FD0_0000121C
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14cc(r31)
     b lbl_fn_80338FD0_00001290
@@ -1481,7 +1481,7 @@ lbl_fn_80338FD0_0000121C:
     bne lbl_fn_80338FD0_00001254
     addi r3, r1, 0x10
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r30, r3
     bl fn_801A03E0
     mr r4, r30
@@ -1729,7 +1729,7 @@ lbl_fn_80339760_00001568:
     bne lbl_fn_80339760_000015CC
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f1, lbl_80885260
     mr r3, r31
     li r4, 0x3e
@@ -1747,7 +1747,7 @@ lbl_fn_80339760_00001568:
 lbl_fn_80339760_000015CC:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     mr r3, r31
     bl fn_80341EE4
     mr r3, r31
@@ -1936,7 +1936,7 @@ lbl_fn_80339760_00001860:
 lbl_fn_80339760_00001884:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     mr r3, r31
     li r4, 0x1
     bl fn_80339F74

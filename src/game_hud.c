@@ -20,7 +20,7 @@ extern void fn_80079ECC(void);
 extern void fn_8007A36C(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void fn_8008B140(void);
@@ -402,7 +402,7 @@ asm void fn_8009E5A0(void)
     li r4, 0x6
     mr r6, r5
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     li r4, 0x0
     li r5, 0x0
     li r6, 0x30

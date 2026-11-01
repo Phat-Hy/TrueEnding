@@ -14,7 +14,7 @@ extern void fn_80080528(void);
 extern void fn_800816A8(void);
 extern void fn_800827E0(void);
 extern void fn_800838B8(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800902C0(void);
 extern void atn_Model_updateMatrices(void);
@@ -187,7 +187,7 @@ lbl_fn_8008C950_00000170:
     la r6, lbl_8087D7EC
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r29
     li r4, 0x0
     li r5, 0x0
@@ -253,7 +253,7 @@ lbl_fn_8008C950_0000026C:
     la r5, lbl_8087D7E8
     la r6, lbl_8087D7E4
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0xe8(r30)
     b lbl_fn_8008C950_000002A0
 lbl_fn_8008C950_00000298:
@@ -275,7 +275,7 @@ lbl_fn_8008C950_000002B8:
     la r5, lbl_8087D7F8
     la r6, lbl_8087D7F4
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0xf0(r30)
     b lbl_fn_8008C950_000002EC
 lbl_fn_8008C950_000002E4:

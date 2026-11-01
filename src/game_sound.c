@@ -28,7 +28,7 @@ extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void fn_800C93D4(void);
@@ -531,7 +531,7 @@ asm void fn_800463FC(void)
     li r7, 0x0
     stw r30, 0x924(r29)
     stw r30, 0x928(r29)
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, lbl_8087EE88
     li r4, 0x0
     li r5, 0x800
@@ -541,7 +541,7 @@ asm void fn_800463FC(void)
     mr r6, r5
     li r4, 0xa
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, lbl_8087EE8C
     li r4, 0x0
     li r5, 0x100
@@ -2917,7 +2917,7 @@ lbl_fn_8004829C_000023D0:
     la r5, lbl_8087D71C
     la r6, lbl_8087D718
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     addi r4, r26, fn_800465E8@l
     li r5, 0x0
     li r6, 0x54
@@ -3009,7 +3009,7 @@ lbl_fn_8004829C_0000251C:
     la r6, lbl_8087D718
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r22
     addi r4, r26, fn_800465E8@l
     li r5, 0x0
@@ -3355,7 +3355,7 @@ lbl_fn_800489F4_00002A00:
     la r5, lbl_8087D71C
     la r6, lbl_8087D718
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_800465E8@ha
     li r5, 0x0
     addi r4, r4, fn_800465E8@l
@@ -3449,7 +3449,7 @@ lbl_fn_800489F4_00002B54:
     la r6, lbl_8087D718
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_800465E8@ha
     mr r7, r31
     addi r4, r4, fn_800465E8@l

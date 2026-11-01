@@ -46,7 +46,7 @@ extern void fn_80151448(void);
 extern void fn_8015495C(void);
 extern void fn_80158BB4(void);
 extern void fn_8016DA4C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_801781B0(void);
 extern void fn_80178A6C(void);
@@ -89,7 +89,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECMag(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068B100(void);
 extern void fn_806959D8(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -1048,7 +1048,7 @@ lbl_fn_802B28BC_00000CB4:
     bne lbl_fn_802B28BC_00000CE0
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x166c(r30)
     b lbl_fn_802B28BC_00000F34
@@ -1060,7 +1060,7 @@ lbl_fn_802B28BC_00000CE0:
     bne lbl_fn_802B28BC_00000D0C
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1670(r30)
     b lbl_fn_802B28BC_00000F34
@@ -1072,7 +1072,7 @@ lbl_fn_802B28BC_00000D0C:
     bne lbl_fn_802B28BC_00000D38
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1674(r30)
     b lbl_fn_802B28BC_00000F34
@@ -1084,7 +1084,7 @@ lbl_fn_802B28BC_00000D38:
     bne lbl_fn_802B28BC_00000D64
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1678(r30)
     b lbl_fn_802B28BC_00000F34
@@ -1096,7 +1096,7 @@ lbl_fn_802B28BC_00000D64:
     bne lbl_fn_802B28BC_00000D90
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x167c(r30)
     b lbl_fn_802B28BC_00000F34
@@ -1108,7 +1108,7 @@ lbl_fn_802B28BC_00000D90:
     bne lbl_fn_802B28BC_00000DBC
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1680(r30)
     b lbl_fn_802B28BC_00000F34
@@ -1120,7 +1120,7 @@ lbl_fn_802B28BC_00000DBC:
     bne lbl_fn_802B28BC_00000DE8
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1684(r30)
     b lbl_fn_802B28BC_00000F34
@@ -1132,7 +1132,7 @@ lbl_fn_802B28BC_00000DE8:
     bne lbl_fn_802B28BC_00000E14
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1688(r30)
     b lbl_fn_802B28BC_00000F34
@@ -1144,7 +1144,7 @@ lbl_fn_802B28BC_00000E14:
     bne lbl_fn_802B28BC_00000E40
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x168c(r30)
     b lbl_fn_802B28BC_00000F34
@@ -1156,7 +1156,7 @@ lbl_fn_802B28BC_00000E40:
     bne lbl_fn_802B28BC_00000E6C
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1690(r30)
     b lbl_fn_802B28BC_00000F34
@@ -1168,7 +1168,7 @@ lbl_fn_802B28BC_00000E6C:
     bne lbl_fn_802B28BC_00000E98
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1694(r30)
     b lbl_fn_802B28BC_00000F34
@@ -1807,7 +1807,7 @@ asm void fn_802B3684(void)
     stw r31, 0x1c(r1)
     mr r31, r3
     stw r0, 0x58c(r3)
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x65
@@ -1933,7 +1933,7 @@ lbl_fn_802B3764_00001914:
 lbl_fn_802B3764_00001938:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f1, lbl_80884028
     addi r3, r31, 0xb0
     li r4, 0x0
@@ -1956,7 +1956,7 @@ lbl_fn_802B3764_00001938:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x65
@@ -2000,7 +2000,7 @@ lbl_fn_802B3764_000019EC:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x65
@@ -2075,7 +2075,7 @@ lbl_fn_802B3764_00001B4C:
     li r4, 0x6
     stw r29, 0x14dc(r31)
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884034
     li r3, 0x4
     li r0, 0x1
@@ -2123,7 +2123,7 @@ lbl_fn_802B3764_00001C04:
     li r4, 0x6
     stw r29, 0x14dc(r31)
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884034
     li r3, 0x4
     li r0, 0x1
@@ -2161,7 +2161,7 @@ lbl_fn_802B3764_00001C94:
     li r4, 0x6
     stw r29, 0x14dc(r31)
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884034
     li r3, 0x4
     li r0, 0x1
@@ -2209,7 +2209,7 @@ lbl_fn_802B3764_00001D4C:
     li r4, 0x6
     stw r29, 0x14dc(r31)
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884034
     li r3, 0x4
     li r0, 0x1
@@ -2256,7 +2256,7 @@ lbl_fn_802B3764_00001E04:
     mr r3, r31
     li r4, 0x6
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80884034
     li r0, 0x4
     li r30, 0x1
@@ -2331,7 +2331,7 @@ lbl_fn_802B3764_00001E04:
     mr r3, r31
     li r4, 0x6
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r31)
     lwz r3, lbl_8087F048
@@ -2393,7 +2393,7 @@ lbl_fn_802B3764_00001F9C:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x65
@@ -2422,7 +2422,7 @@ lbl_fn_802B3764_00001F9C:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F3C0
     mr r4, r31
     li r5, 0x65
@@ -2500,7 +2500,7 @@ lbl_fn_802B3764_0000211C:
     mr r3, r31
     li r4, 0x6
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r31)
     lwz r3, lbl_8087F048
@@ -2627,7 +2627,7 @@ lbl_fn_802B3764_000023AC:
     ble lbl_fn_802B3764_000023DC
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r4, 0x14d4(r31)
     mr r3, r31
     lfs f1, lbl_80884064

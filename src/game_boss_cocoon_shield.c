@@ -31,7 +31,7 @@ extern void fn_800827E0(void);
 extern void fn_800839EC(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void fn_800D5908(void);
 extern void fn_800DBF68(void);
@@ -193,7 +193,7 @@ lbl_fn_8046B798_00000124:
     la r6, lbl_8087E044
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8046BB60@ha
     lis r5, fn_8046A514@ha
     mr r7, r24
@@ -884,7 +884,7 @@ asm void fn_8046C1C8(void)
     stw r9, 0x14(r3)
     stw r0, 0x18(r3)
     addi r3, r8, 0x180
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, atn_Arc_initDecompressHeader@ha
     lis r6, 0x4
     addi r4, r4, atn_Arc_initDecompressHeader@l
@@ -1381,7 +1381,7 @@ lbl_atn_Arc_decompressChunk_0000115C:
     stw r9, 0x14(r3)
     stw r0, 0x18(r3)
     addi r3, r8, 0x180
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, atn_Arc_initDecompressHeader@ha
     lis r6, 0x4
     addi r4, r4, atn_Arc_initDecompressHeader@l

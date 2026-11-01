@@ -22,7 +22,7 @@ extern void fn_8054D798(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECSquareMag(void);
-extern void fn_806868C4(void);
+extern void swprintf(void);
 extern void fn_80686A64(void);
 extern void fn_8068AEA8(void);
 
@@ -516,7 +516,7 @@ lbl_fn_80108C10_000005F0:
     addi r5, r4, 0x26
     li r4, 0x20
     crclr 6
-    bl fn_806868C4
+    bl swprintf
     stw r29, 0x8(r1)
     mr r4, r25
     mr r6, r28

@@ -10,7 +10,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8004B338(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_800C16B4(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
@@ -1871,7 +1871,7 @@ lbl_fn_8052F890_00001A74:
     la r6, lbl_8087D918
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, atn_LH_Texture_constructor@ha
     lis r5, atn_LH_Texture_destructAndFree@ha
     mr r7, r28

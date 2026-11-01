@@ -23,7 +23,7 @@ extern void fn_8044D404(void);
 extern void fn_8044D4F0(void);
 extern void fn_8044D530(void);
 extern void fn_8044D6E0(void);
-extern void fn_806846C4(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 
 /* External data declarations */
@@ -932,7 +932,7 @@ lbl_fn_803BB584_00000CF0:
     mr r4, r24
     addi r3, r29, 0x294
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_803BB584_00000D38:
     addi r27, r27, 0x1
     addi r30, r30, 0x2d4
@@ -1910,7 +1910,7 @@ lbl_fn_803BC2D4_00001BE4:
     mr r4, r22
     addi r3, r26, 0x294
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_803BC2D4_00001C2C:
     addi r24, r24, 0x1
     addi r27, r27, 0x2d4
@@ -1951,7 +1951,7 @@ lbl_fn_803BC2D4_00001C7C:
     mr r4, r22
     addi r3, r29, 0x294
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_803BC2D4_00001CC4:
     addi r24, r24, 0x1
     addi r26, r26, 0x2d4

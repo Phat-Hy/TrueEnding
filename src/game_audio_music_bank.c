@@ -43,7 +43,7 @@ extern void fn_80149624(void);
 extern void dialog_renderWindow(void);
 extern void fn_801513D0(void);
 extern void fn_80151448(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_80232B7C(void);
 extern void fn_80237874(void);
@@ -220,7 +220,7 @@ lbl_fn_8030A6A0_000000C4:
     stfs f0, 0x56c(r29)
     stw r5, 0x14a8(r29)
     stw r0, 0x58c(r29)
-    bl fn_8016E970
+    bl actor_setState
     li r3, 0x1
     b lbl_fn_8030A6A0_0000018C
 lbl_fn_8030A6A0_00000188:
@@ -321,7 +321,7 @@ lbl_fn_8030A848_000002D0:
     li r0, 0x1
     stw r0, 0xd18(r30)
     b lbl_fn_8030A848_000002E4
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_8030A848_00000320
 lbl_fn_8030A848_000002E4:
     lwz r0, 0x58c(r30)
@@ -525,7 +525,7 @@ lbl_fn_8030A848_000005B0:
     stw r0, 0x58c(r30)
     mr r3, r30
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, lbl_8087F430
     addi r7, r30, 0x1594
     lwz r4, 0x158c(r30)

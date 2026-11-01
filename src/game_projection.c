@@ -24,7 +24,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void PSVECSquareMag(void);
-extern void fn_806868C4(void);
+extern void swprintf(void);
 extern void fn_8068AD58(void);
 extern void fn_8068AEA0(void);
 extern void fn_8068AEA4(void);
@@ -623,7 +623,7 @@ lbl_fn_800F5314_00000798:
     addi r5, r5, lbl_80779DF4@l
     li r4, 0x20
     crclr 6
-    bl fn_806868C4
+    bl swprintf
     lwz r3, lbl_8087EEC8
     addi r4, r1, 0x478
     lfs f1, lbl_808814FC
@@ -836,7 +836,7 @@ lbl_fn_800F5314_00000AC4:
     addi r5, r29, 0x10
     li r4, 0x100
     crclr 6
-    bl fn_806868C4
+    bl swprintf
     lfs f3, lbl_80881478
     fmr f1, f23
     fmr f2, f22
@@ -936,7 +936,7 @@ lbl_fn_800F5314_00000C3C:
     addi r5, r29, 0x10
     li r4, 0x100
     crclr 6
-    bl fn_806868C4
+    bl swprintf
     lfs f3, lbl_80881478
     fmr f1, f23
     fmr f2, f22
@@ -1231,7 +1231,7 @@ lbl_fn_800F5314_0000105C:
     addi r5, r28, 0x10
     li r4, 0x100
     crclr 6
-    bl fn_806868C4
+    bl swprintf
     lfs f3, lbl_80881478
     fmr f1, f22
     fmr f2, f23

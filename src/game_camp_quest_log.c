@@ -114,7 +114,7 @@ extern void fn_803CA014(void);
 extern void fn_803CCF64(void);
 extern void fn_803CD598(void);
 extern void fn_8067CE80(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 
 /* External data declarations */
 extern u8 lbl_807500DC[];
@@ -260,7 +260,7 @@ asm void fn_803C3724(void)
     stw r30, 0x8(r1)
     mr r30, r4
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r30)
     mr r3, r31
     bl fn_8005B3CC
@@ -294,19 +294,19 @@ asm void fn_803C3798(void)
     stw r30, 0x8(r1)
     mr r30, r4
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r30)
     mr r3, r31
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x4(r30)
     mr r3, r31
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x8(r30)
     mr r3, r31
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0xc(r30)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -328,15 +328,15 @@ asm void fn_803C380C(void)
     stw r30, 0x8(r1)
     mr r30, r4
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r30)
     mr r3, r31
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x4(r30)
     mr r3, r31
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, 0x4(r30)
     stw r3, 0x8(r30)
     cmpwi r0, 0x0
@@ -424,7 +424,7 @@ lbl_fn_803C3894_000002E4:
     beq lbl_fn_803C3894_00000330
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r22, r3
 lbl_fn_803C3894_00000330:
     addi r3, r1, 0x2b0
@@ -459,7 +459,7 @@ lbl_fn_803C3894_0000035C:
     bgt lbl_fn_803C3894_000003B4
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x68(r28)
     b lbl_fn_803C3894_000006F8
 lbl_fn_803C3894_000003B4:
@@ -472,7 +472,7 @@ lbl_fn_803C3894_000003B4:
     bgt lbl_fn_803C3894_000003E4
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x6c(r28)
     b lbl_fn_803C3894_000006F8
 lbl_fn_803C3894_000003E4:
@@ -485,7 +485,7 @@ lbl_fn_803C3894_000003E4:
     bgt lbl_fn_803C3894_00000414
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x70(r28)
     b lbl_fn_803C3894_000006F8
 lbl_fn_803C3894_00000414:
@@ -498,7 +498,7 @@ lbl_fn_803C3894_00000414:
     bgt lbl_fn_803C3894_00000594
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     addi r3, r28, 0xd4
     addi r6, r25, 0x140
@@ -527,7 +527,7 @@ lbl_fn_803C3894_00000458:
 lbl_fn_803C3894_0000049C:
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0xd4
@@ -535,7 +535,7 @@ lbl_fn_803C3894_0000049C:
     stw r19, 0x4(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0xd4
@@ -551,7 +551,7 @@ lbl_fn_803C3894_0000049C:
     stfs f31, 0x10(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0xd4
@@ -559,7 +559,7 @@ lbl_fn_803C3894_0000049C:
     stw r19, 0x0(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0xd4
@@ -567,7 +567,7 @@ lbl_fn_803C3894_0000049C:
     stw r19, 0x14(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0xd4
@@ -575,7 +575,7 @@ lbl_fn_803C3894_0000049C:
     stw r19, 0x18(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0xd4
@@ -602,7 +602,7 @@ lbl_fn_803C3894_00000594:
     bne lbl_fn_803C3894_000005E0
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     addi r3, r28, 0xdc
     addi r6, r25, 0x158
@@ -615,7 +615,7 @@ lbl_fn_803C3894_000005E0:
     mr r18, r3
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r0, r3
     addi r3, r28, 0xdc
     add r4, r18, r0
@@ -644,7 +644,7 @@ lbl_fn_803C3894_00000614:
 lbl_fn_803C3894_00000658:
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r18
     addi r3, r28, 0xdc
@@ -709,7 +709,7 @@ lbl_fn_803C3894_0000070C:
     bne lbl_fn_803C3894_0000076C
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     addi r3, r28, 0x78
     addi r6, r25, 0x176
@@ -722,7 +722,7 @@ lbl_fn_803C3894_0000076C:
     mr r18, r3
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     mr r0, r3
     addi r3, r28, 0x78
     add r4, r18, r0
@@ -751,7 +751,7 @@ lbl_fn_803C3894_000007A4:
     beq lbl_fn_803C3894_00000874
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     add r19, r18, r3
     mr r4, r20
     addi r3, r28, 0x78
@@ -842,7 +842,7 @@ lbl_fn_803C3894_0000090C:
     bl fn_8020A780
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     stw r3, 0x74(r28)
     mr r4, r3
     addi r3, r28, 0x98
@@ -870,7 +870,7 @@ lbl_fn_803C3894_00000968:
     beq lbl_fn_803C3894_00000AC8
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0x98
@@ -893,7 +893,7 @@ lbl_fn_803C3894_00000968:
     stfs f31, 0x14(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0x98
@@ -901,7 +901,7 @@ lbl_fn_803C3894_00000968:
     stw r19, 0x18(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0x98
@@ -909,7 +909,7 @@ lbl_fn_803C3894_00000968:
     stw r19, 0x1c(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0x98
@@ -925,7 +925,7 @@ lbl_fn_803C3894_00000968:
     stw r26, 0x2c(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0x98
@@ -933,7 +933,7 @@ lbl_fn_803C3894_00000968:
     stw r19, 0x24(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0x98
@@ -961,7 +961,7 @@ lbl_fn_803C3894_00000ADC:
     bl fn_8020A780
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     stw r3, 0xa8(r28)
     mr r4, r3
     addi r3, r28, 0xac
@@ -989,7 +989,7 @@ lbl_fn_803C3894_00000B38:
     beq lbl_fn_803C3894_00000C98
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0xac
@@ -1004,7 +1004,7 @@ lbl_fn_803C3894_00000B38:
     bl fn_803C3724
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0xac
@@ -1012,7 +1012,7 @@ lbl_fn_803C3894_00000B38:
     stw r19, 0x14(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0xac
@@ -1020,7 +1020,7 @@ lbl_fn_803C3894_00000B38:
     stw r19, 0x18(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0xac
@@ -1040,7 +1040,7 @@ lbl_fn_803C3894_00000B38:
     stw r26, 0x38(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0xac
@@ -1048,7 +1048,7 @@ lbl_fn_803C3894_00000B38:
     stw r19, 0x20(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0xac
@@ -1075,7 +1075,7 @@ lbl_fn_803C3894_00000CAC:
     bgt lbl_fn_803C3894_00000DF4
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     addi r3, r28, 0xc4
     addi r6, r25, 0x200
@@ -1102,7 +1102,7 @@ lbl_fn_803C3894_00000CF0:
     beq lbl_fn_803C3894_00000DE0
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r18
     addi r3, r28, 0xc4
@@ -1117,7 +1117,7 @@ lbl_fn_803C3894_00000CF0:
     bl fn_803C3724
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r18
     addi r3, r28, 0xc4
@@ -1133,7 +1133,7 @@ lbl_fn_803C3894_00000CF0:
     bl fn_803C3798
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r18
     addi r3, r28, 0xc4
@@ -1163,7 +1163,7 @@ lbl_fn_803C3894_00000DF4:
     bne lbl_fn_803C3894_00000E40
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     addi r3, r28, 0xfc
     addi r6, r25, 0x222
@@ -1176,7 +1176,7 @@ lbl_fn_803C3894_00000E40:
     mr r21, r3
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r0, r3
     addi r3, r28, 0xfc
     add r4, r21, r0
@@ -1205,7 +1205,7 @@ lbl_fn_803C3894_00000E78:
     beq lbl_fn_803C3894_00000FA8
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     add r19, r21, r3
     mr r4, r20
     addi r3, r28, 0xfc
@@ -1228,7 +1228,7 @@ lbl_fn_803C3894_00000E78:
     stfs f31, 0x14(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r20
     addi r3, r28, 0xfc
@@ -1244,7 +1244,7 @@ lbl_fn_803C3894_00000E78:
     bl fn_803C3798
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r20
     addi r3, r28, 0xfc
@@ -1282,7 +1282,7 @@ lbl_fn_803C3894_00000FBC:
     bne lbl_fn_803C3894_00001008
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     addi r3, r28, 0xe4
     addi r6, r25, 0x23f
@@ -1295,7 +1295,7 @@ lbl_fn_803C3894_00001008:
     mr r31, r3
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r0, r3
     addi r3, r28, 0xe4
     add r4, r31, r0
@@ -1328,7 +1328,7 @@ lbl_fn_803C3894_00001040:
     mr r21, r3
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     add r0, r31, r3
     stw r0, 0x10(r21)
     mr r3, r28
@@ -1380,7 +1380,7 @@ lbl_fn_803C3894_00001158:
     addi r3, r1, 0x248
     bl fn_800ED4D8
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     stw r3, 0xc(r1)
     addi r3, r1, 0xb8
     addi r4, r1, 0xc
@@ -1438,34 +1438,34 @@ lbl_fn_803C3894_00001224:
     blt lbl_fn_803C3894_000011E0
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x2c(r21)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     subi r0, r3, 0x1
     addi r3, r1, 0x2b0
     cntlzw r0, r0
     srwi r0, r0, 5
     stw r0, 0x30(r21)
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x38(r21)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x3c(r21)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x34(r21)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x40(r21)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x44(r21)
     addi r3, r1, 0x284
     li r4, -0x1
@@ -1496,7 +1496,7 @@ lbl_fn_803C3894_000012EC:
     bne lbl_fn_803C3894_00001338
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     addi r3, r28, 0xec
     addi r6, r25, 0x267
@@ -1509,7 +1509,7 @@ lbl_fn_803C3894_00001338:
     mr r30, r3
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r0, r3
     addi r3, r28, 0xec
     add r4, r30, r0
@@ -1542,7 +1542,7 @@ lbl_fn_803C3894_00001370:
     mr r18, r3
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     add r0, r30, r3
     stw r0, 0x10(r18)
     mr r3, r28
@@ -1582,7 +1582,7 @@ lbl_fn_803C3894_00001458:
     addi r3, r1, 0x1e0
     bl fn_800ED4D8
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     stw r3, 0x8(r1)
     addi r3, r1, 0xa0
     addi r4, r1, 0x8
@@ -1640,7 +1640,7 @@ lbl_fn_803C3894_00001524:
     blt lbl_fn_803C3894_000014E0
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x20(r18)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
@@ -1648,7 +1648,7 @@ lbl_fn_803C3894_00001524:
     bl fn_8005B3CC
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x24(r18)
     addi r3, r1, 0x21c
     li r4, -0x1
@@ -1676,7 +1676,7 @@ lbl_fn_803C3894_000015A0:
     bgt lbl_fn_803C3894_00001768
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     addi r3, r28, 0xf4
     addi r6, r25, 0x27f
@@ -1703,7 +1703,7 @@ lbl_fn_803C3894_000015E4:
     beq lbl_fn_803C3894_00001754
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r20
     addi r3, r28, 0xf4
@@ -1752,7 +1752,7 @@ lbl_fn_803C3894_000015E4:
     stfs f31, 0x20(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r20
     addi r3, r28, 0xf4
@@ -1760,7 +1760,7 @@ lbl_fn_803C3894_000015E4:
     stw r19, 0x24(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r20
     addi r3, r28, 0xf4
@@ -1768,7 +1768,7 @@ lbl_fn_803C3894_000015E4:
     stw r19, 0x28(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     subi r0, r3, 0x1
     mr r4, r20
     cntlzw r0, r0
@@ -1866,7 +1866,7 @@ lbl_fn_803C3894_00001858:
     bne lbl_fn_803C3894_000018B8
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     addi r3, r28, 0x104
     addi r6, r25, 0x2e0
@@ -1879,7 +1879,7 @@ lbl_fn_803C3894_000018B8:
     mr r20, r3
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     mr r0, r3
     addi r3, r28, 0x104
     add r4, r20, r0
@@ -1908,7 +1908,7 @@ lbl_fn_803C3894_000018F0:
     beq lbl_fn_803C3894_00001AA0
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     add r19, r20, r3
     mr r4, r21
     addi r3, r28, 0x104
@@ -1933,7 +1933,7 @@ lbl_fn_803C3894_000018F0:
     bl fn_8005B3CC
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0x104
@@ -1941,7 +1941,7 @@ lbl_fn_803C3894_000018F0:
     stw r19, 0x18(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0x104
@@ -1952,7 +1952,7 @@ lbl_fn_803C3894_000018F0:
 lbl_fn_803C3894_000019DC:
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0x104
@@ -2024,7 +2024,7 @@ lbl_fn_803C3894_00001AB4:
     bne lbl_fn_803C3894_00001B14
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     addi r3, r28, 0x10c
     addi r6, r25, 0x2f7
@@ -2037,7 +2037,7 @@ lbl_fn_803C3894_00001B14:
     mr r20, r3
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     mr r0, r3
     addi r3, r28, 0x10c
     add r4, r20, r0
@@ -2066,7 +2066,7 @@ lbl_fn_803C3894_00001B4C:
     beq lbl_fn_803C3894_00001D44
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     add r19, r20, r3
     mr r4, r21
     addi r3, r28, 0x10c
@@ -2123,7 +2123,7 @@ lbl_fn_803C3894_00001B4C:
     bl fn_803C3798
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0x10c
@@ -2131,7 +2131,7 @@ lbl_fn_803C3894_00001B4C:
     stw r19, 0x24(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0x10c
@@ -2139,7 +2139,7 @@ lbl_fn_803C3894_00001B4C:
     stw r19, 0x28(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0x10c
@@ -2147,7 +2147,7 @@ lbl_fn_803C3894_00001B4C:
     stw r19, 0x2c(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0x10c
@@ -2155,7 +2155,7 @@ lbl_fn_803C3894_00001B4C:
     stw r19, 0x30(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0x10c
@@ -2198,7 +2198,7 @@ lbl_fn_803C3894_00001D58:
     bne lbl_fn_803C3894_00001DB8
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     addi r3, r28, 0x114
     addi r6, r25, 0x30d
@@ -2211,7 +2211,7 @@ lbl_fn_803C3894_00001DB8:
     mr r20, r3
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     mr r0, r3
     addi r3, r28, 0x114
     add r4, r20, r0
@@ -2240,7 +2240,7 @@ lbl_fn_803C3894_00001DF0:
     beq lbl_fn_803C3894_00001FA8
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     add r19, r20, r3
     mr r4, r21
     addi r3, r28, 0x114
@@ -2297,7 +2297,7 @@ lbl_fn_803C3894_00001DF0:
     bl fn_803C3798
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0x114
@@ -2313,7 +2313,7 @@ lbl_fn_803C3894_00001DF0:
     stfs f31, 0x28(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r19, r3
     mr r4, r21
     addi r3, r28, 0x114
@@ -2377,7 +2377,7 @@ lbl_fn_803C3894_00001FF8:
 lbl_fn_803C3894_00002044:
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     clrlwi r19, r3, 16
     mr r4, r17
     addi r3, r1, 0x94
@@ -2512,18 +2512,18 @@ lbl_fn_803C3894_000021F8:
     beq lbl_fn_803C3894_00002310
     addi r3, r1, 0x2b0
     bl fn_800422CC
-    bl fn_80684600
+    bl atoi
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r17, r3
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r18, r3
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     clrlwi r0, r3, 31
     mr r20, r3
     cmpwi r0, 0x1
@@ -2664,7 +2664,7 @@ lbl_fn_803C3894_00002428:
 lbl_fn_803C3894_00002470:
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     clrlwi r19, r3, 24
     mr r4, r17
     addi r3, r1, 0x64
@@ -2823,7 +2823,7 @@ lbl_fn_803C3894_00002698:
     bgt lbl_fn_803C3894_00002774
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     addi r3, r28, 0xcc
     addi r6, r25, 0x32d
@@ -2850,7 +2850,7 @@ lbl_fn_803C3894_000026DC:
     beq lbl_fn_803C3894_00002760
     addi r3, r1, 0xe0
     bl fn_8004212C
-    bl fn_80684600
+    bl atoi
     mr r20, r3
     mr r4, r17
     addi r3, r28, 0xcc
@@ -2858,7 +2858,7 @@ lbl_fn_803C3894_000026DC:
     stw r20, 0x0(r3)
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r20, r3
     mr r4, r17
     addi r3, r28, 0xcc
@@ -2879,7 +2879,7 @@ lbl_fn_803C3894_00002774:
     beq lbl_fn_803C3894_00002830
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r17, r3
     addi r3, r28, 0x180
     li r18, 0x0
@@ -2910,7 +2910,7 @@ lbl_fn_803C3894_000027E4:
 lbl_fn_803C3894_000027F8:
     addi r3, r1, 0x2b0
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_8067CE80
     mr r20, r3
     mr r4, r18

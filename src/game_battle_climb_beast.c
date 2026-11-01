@@ -96,7 +96,7 @@ extern void fn_804EB1B0(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern char* strcpy(char* dest, const char* src);
 
 /* External data declarations */
@@ -650,11 +650,11 @@ lbl_fn_803FA3D0_00000674:
     bne lbl_fn_803FA3D0_000006D8
     addi r3, r1, 0x8
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x4f4(r28)
     addi r3, r1, 0x8
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x4f8(r28)
     lwz r0, lbl_8087F610
     cmpwi r0, 0x0
@@ -671,7 +671,7 @@ lbl_fn_803FA3D0_000006D8:
     bne lbl_fn_803FA3D0_000006FC
     addi r3, r1, 0x8
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x4fc(r28)
 lbl_fn_803FA3D0_000006FC:
     addi r3, r1, 0x8

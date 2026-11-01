@@ -23,7 +23,7 @@ extern void fn_80148B0C(void);
 extern void dialog_renderWindow(void);
 extern void fn_80151448(void);
 extern void fn_80158BB4(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_801781B0(void);
 extern void fn_80232B7C(void);
 extern void fn_80239DAC(void);
@@ -541,7 +541,7 @@ lbl_fn_8028429C_0000065C:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f1, lbl_808839F8
     li r30, 0x1
     lfs f0, lbl_808839FC
@@ -777,7 +777,7 @@ lbl_fn_802846F8_000009D0:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x6
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808839FC
     li r3, 0x16
     li r0, 0x1
@@ -1175,7 +1175,7 @@ lbl_fn_80284CC8_00000FB4:
     beq lbl_fn_80284CC8_00001004
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r3, 0x14f4(r31)
     cmpwi r3, 0x0
     beq lbl_fn_80284CC8_00000FE4
@@ -1214,7 +1214,7 @@ lbl_fn_80284CC8_00001004:
     bge lbl_fn_80284CC8_000010B8
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, 0x14f0(r31)
     fcmpo cr0, f31, f0
     cror eq, lt, eq
@@ -1267,7 +1267,7 @@ lbl_fn_80284CC8_0000110C:
     bge lbl_fn_80284CC8_00001208
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r4, 0x1580(r31)
     mr r3, r31
     li r5, 0xb
@@ -1336,7 +1336,7 @@ lbl_fn_80284CC8_00001208:
     bge lbl_fn_80284CC8_000012E8
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r4, 0x1580(r31)
     mr r3, r31
     li r5, 0xa
@@ -1504,7 +1504,7 @@ lbl_fn_80285064_00001468:
     stw r4, 0x158c(r3)
     li r4, 0x6
     stw r0, 0x1598(r3)
-    bl fn_8016E970
+    bl actor_setState
     li r0, 0x4
     stw r0, 0x560(r31)
     mr r4, r31
@@ -1581,7 +1581,7 @@ lbl_fn_80285064_00001574:
     stw r0, 0x58c(r31)
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_80285064_00001A0C
 lbl_fn_80285064_000015C0:
     lfs f7, 0x2e4(r31)

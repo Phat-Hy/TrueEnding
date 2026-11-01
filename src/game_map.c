@@ -18,7 +18,7 @@ extern void fn_80080C20(void);
 extern void fn_800816B4(void);
 extern void fn_80081BD0(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008937C(void);
 extern void fn_8008C850(void);
@@ -1024,7 +1024,7 @@ lbl_fn_8008BD10_00000C54:
     la r5, lbl_8087D808
     la r6, lbl_8087D804
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x148(r26)
     b lbl_fn_8008BD10_00000C88
 lbl_fn_8008BD10_00000C80:
@@ -1044,7 +1044,7 @@ lbl_fn_8008BD10_00000C98:
     la r5, lbl_8087D800
     la r6, lbl_8087D7FC
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x108(r26)
     b lbl_fn_8008BD10_00000CCC
 lbl_fn_8008BD10_00000CC4:
@@ -1069,7 +1069,7 @@ lbl_fn_8008BD10_00000CF0:
     la r5, lbl_8087D7F8
     la r6, lbl_8087D7F4
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0xf8(r26)
     b lbl_fn_8008BD10_00000D24
 lbl_fn_8008BD10_00000D1C:
@@ -1335,7 +1335,7 @@ lbl_fn_8008BD10_000010A8:
     la r5, lbl_8087D808
     la r6, lbl_8087D804
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x140(r26)
     b lbl_fn_8008BD10_000010DC
 lbl_fn_8008BD10_000010D4:
@@ -1450,7 +1450,7 @@ lbl_fn_8008BD10_00001248:
     la r5, lbl_8087D6EC
     la r6, lbl_8087D6E8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x110(r26)
     b lbl_fn_8008BD10_0000127C
 lbl_fn_8008BD10_00001274:
@@ -1470,7 +1470,7 @@ lbl_fn_8008BD10_0000128C:
     la r5, lbl_8087D6EC
     la r6, lbl_8087D6E8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x130(r26)
     b lbl_fn_8008BD10_000012C0
 lbl_fn_8008BD10_000012B8:
@@ -1671,7 +1671,7 @@ lbl_fn_8008C62C_00001544:
     la r5, lbl_8087D6EC
     la r6, lbl_8087D6E8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x110(r29)
     b lbl_fn_8008C62C_0000157C
 lbl_fn_8008C62C_00001574:

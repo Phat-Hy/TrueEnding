@@ -20,7 +20,7 @@ extern void rand(void);
 extern void fn_8068236C(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_806A4270(void);
 extern void fn_806D5850(void);
 extern void fn_806D58F0(void);
@@ -226,7 +226,7 @@ lbl_fn_806DDA30_00000114:
     b lbl_fn_806DDA30_00000410
 lbl_fn_806DDA30_00000178:
     addi r3, r1, 0x448
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_806DDA30_00000234
@@ -1423,7 +1423,7 @@ lbl_fn_806DEBA0_000011F4:
     b lbl_fn_806DEBA0_000012B8
 lbl_fn_806DEBA0_0000121C:
     addi r3, r1, 0x8
-    bl fn_80684600
+    bl atoi
     stw r3, 0x0(r26)
     addi r4, r28, 0x78
     addi r5, r1, 0x8
@@ -1436,7 +1436,7 @@ lbl_fn_806DEBA0_0000121C:
     b lbl_fn_806DEBA0_000012B8
 lbl_fn_806DEBA0_0000124C:
     addi r3, r1, 0x8
-    bl fn_80684600
+    bl atoi
     lwz r0, 0x0(r31)
     lwz r5, 0x8(r31)
     subf r0, r0, r30

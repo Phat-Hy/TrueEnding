@@ -50,7 +50,7 @@ extern void fn_80570A44(void);
 extern void fn_805B9F54(void);
 extern void fn_805BC6CC(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_806952C4(void);
 extern void fn_80695AD0(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -166,7 +166,7 @@ asm void fn_80375B78(void)
     cmpwi r3, 0x0
     bne lbl_fn_80375B78_0000009C
     addi r3, r27, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r26, r3, 0x64
     bne lbl_fn_80375B78_0000009C
@@ -175,7 +175,7 @@ asm void fn_80375B78(void)
     cmplwi r3, 0x8
     blt lbl_fn_80375B78_0000009C
     addi r3, r27, 0x6
-    bl fn_80684600
+    bl atoi
     add r26, r26, r3
 lbl_fn_80375B78_0000009C:
     lis r3, lbl_8074DB88@ha
@@ -334,7 +334,7 @@ lbl_fn_80375D0C_00000228:
     cmpwi r3, 0x0
     bne lbl_fn_80375D0C_000002DC
     addi r3, r23, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r22, r3, 0x64
     bne lbl_fn_80375D0C_000002DC
@@ -343,7 +343,7 @@ lbl_fn_80375D0C_00000228:
     cmplwi r3, 0x8
     blt lbl_fn_80375D0C_000002DC
     addi r3, r23, 0x6
-    bl fn_80684600
+    bl atoi
     add r22, r22, r3
 lbl_fn_80375D0C_000002DC:
     lis r3, lbl_8074DAF8@ha
@@ -375,7 +375,7 @@ lbl_fn_80375D0C_0000030C:
     cmpwi r3, 0x0
     bne lbl_fn_80375D0C_0000036C
     addi r3, r22, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r23, r3, 0x64
     bne lbl_fn_80375D0C_0000036C
@@ -384,7 +384,7 @@ lbl_fn_80375D0C_0000030C:
     cmplwi r3, 0x8
     blt lbl_fn_80375D0C_0000036C
     addi r3, r22, 0x6
-    bl fn_80684600
+    bl atoi
     add r23, r23, r3
 lbl_fn_80375D0C_0000036C:
     lis r4, lbl_8074DA2C@ha
@@ -468,7 +468,7 @@ lbl_fn_80375D0C_00000458:
     cmpwi r3, 0x0
     bne lbl_fn_80375D0C_000004B8
     addi r3, r22, 0x2
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x9
     mulli r23, r3, 0x64
     bne lbl_fn_80375D0C_000004B8
@@ -477,7 +477,7 @@ lbl_fn_80375D0C_00000458:
     cmplwi r3, 0x8
     blt lbl_fn_80375D0C_000004B8
     addi r3, r22, 0x6
-    bl fn_80684600
+    bl atoi
     add r23, r23, r3
 lbl_fn_80375D0C_000004B8:
     lis r3, lbl_8074DB70@ha

@@ -17,7 +17,7 @@ extern void fn_8007EA24(void);
 extern void fn_8007FAF0(void);
 extern void fn_80081080(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800DC12C(void);
@@ -228,7 +228,7 @@ lbl_fn_8007C46C_00000240:
     la r5, lbl_8087D778
     la r6, lbl_8087D774
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8007E9EC@ha
     lis r5, fn_8007AA64@ha
     addi r4, r4, fn_8007E9EC@l
@@ -282,7 +282,7 @@ lbl_fn_8007C46C_000002FC:
     la r5, lbl_8087D790
     la r6, lbl_8087D78C
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r24, r3
     mr r4, r28
     mr r5, r25
@@ -407,7 +407,7 @@ lbl_fn_8007C46C_000004AC:
     la r6, lbl_8087D774
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8007E9EC@ha
     lis r5, fn_8007AA64@ha
     mr r7, r22
@@ -461,7 +461,7 @@ lbl_fn_8007C46C_00000578:
     la r5, lbl_8087D790
     la r6, lbl_8087D78C
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r23, r3
     mr r4, r17
     mr r5, r20
@@ -605,7 +605,7 @@ lbl_fn_8007C46C_00000770:
     la r5, lbl_8087D790
     la r6, lbl_8087D78C
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r18, r3
     mr r4, r20
     mr r5, r19
@@ -1320,7 +1320,7 @@ lbl_fn_8007C46C_000011E8:
     la r5, lbl_8087D770
     la r6, lbl_8087D76C
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8007C0D8@ha
     li r5, 0x0
     addi r4, r4, fn_8007C0D8@l
@@ -1409,7 +1409,7 @@ lbl_fn_8007C46C_00001328:
     la r6, lbl_8087D76C
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8007C0D8@ha
     mr r7, r17
     addi r4, r4, fn_8007C0D8@l
@@ -2355,7 +2355,7 @@ lbl_fn_8007C46C_0000209C:
     mr r6, r5
     li r7, 0x0
     addi r3, r3, 0x10
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8007E9EC@ha
     lis r5, fn_8007AA64@ha
     mr r7, r14
@@ -2404,7 +2404,7 @@ lbl_fn_8007C46C_00002140:
     la r5, lbl_8087D790
     la r6, lbl_8087D78C
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r23, r3
     mr r4, r25
     mr r5, r24
@@ -2521,7 +2521,7 @@ lbl_fn_8007C46C_000022E8:
     mr r6, r5
     li r7, 0x0
     addi r3, r3, 0x10
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_8007C0D8@ha
     mr r7, r14
     addi r4, r4, fn_8007C0D8@l

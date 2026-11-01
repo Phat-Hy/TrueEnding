@@ -66,7 +66,7 @@ extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_8068AEA4(void);
 extern u32 strlen(const char* str);
 
@@ -1936,7 +1936,7 @@ lbl_fn_8024AD30_000019C0:
     bne lbl_fn_8024AD30_000019F4
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14c8(r29)
     b lbl_fn_8024AD30_00001F00
@@ -1948,7 +1948,7 @@ lbl_fn_8024AD30_000019F4:
     bne lbl_fn_8024AD30_00001A20
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14d0(r29)
     b lbl_fn_8024AD30_00001F00
@@ -1960,7 +1960,7 @@ lbl_fn_8024AD30_00001A20:
     bne lbl_fn_8024AD30_00001A4C
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14d4(r29)
     b lbl_fn_8024AD30_00001F00
@@ -1972,7 +1972,7 @@ lbl_fn_8024AD30_00001A4C:
     bne lbl_fn_8024AD30_00001A78
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14d8(r29)
     b lbl_fn_8024AD30_00001F00
@@ -1984,7 +1984,7 @@ lbl_fn_8024AD30_00001A78:
     bne lbl_fn_8024AD30_00001AA4
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x14cc(r29)
     b lbl_fn_8024AD30_00001F00
@@ -1996,7 +1996,7 @@ lbl_fn_8024AD30_00001AA4:
     bne lbl_fn_8024AD30_00001AE0
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x0
     stw r3, 0x1620(r29)
     beq lbl_fn_8024AD30_00001AD8
@@ -2013,12 +2013,12 @@ lbl_fn_8024AD30_00001AE0:
     bne lbl_fn_8024AD30_00001B28
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     slwi r4, r3, 1
     addi r3, r1, 0x8
     subi r27, r4, 0x1
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     slwi r0, r27, 2
     add r4, r29, r0
     stw r3, 0x1624(r4)
@@ -2043,7 +2043,7 @@ lbl_fn_8024AD30_00001B50:
     bne lbl_fn_8024AD30_00001B78
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x161c(r29)
     b lbl_fn_8024AD30_00001F00
 lbl_fn_8024AD30_00001B78:
@@ -2098,7 +2098,7 @@ lbl_fn_8024AD30_00001C18:
     bne lbl_fn_8024AD30_00001C48
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     lwz r0, 0x12a4(r29)
     rlwimi r0, r3, 22, 9, 9
     stw r0, 0x12a4(r29)
@@ -2111,12 +2111,12 @@ lbl_fn_8024AD30_00001C48:
     bne lbl_fn_8024AD30_00001C90
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     slwi r4, r3, 1
     addi r3, r1, 0x8
     subi r27, r4, 0x1
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     slwi r0, r27, 2
     add r4, r29, r0
     stw r3, 0x1688(r4)
@@ -2130,12 +2130,12 @@ lbl_fn_8024AD30_00001C90:
     bne lbl_fn_8024AD30_00001CD8
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     slwi r4, r3, 1
     addi r3, r1, 0x8
     subi r27, r4, 0x1
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     slwi r0, r27, 2
     add r4, r29, r0
     stw r3, 0x16a0(r4)
@@ -2149,12 +2149,12 @@ lbl_fn_8024AD30_00001CD8:
     bne lbl_fn_8024AD30_00001D20
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     slwi r4, r3, 1
     addi r3, r1, 0x8
     subi r27, r4, 0x1
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     slwi r0, r27, 2
     add r4, r29, r0
     stw r3, 0x1670(r4)
@@ -2168,7 +2168,7 @@ lbl_fn_8024AD30_00001D20:
     bne lbl_fn_8024AD30_00001D48
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x16bc(r29)
     b lbl_fn_8024AD30_00001F00
 lbl_fn_8024AD30_00001D48:
@@ -2191,7 +2191,7 @@ lbl_fn_8024AD30_00001D70:
 lbl_fn_8024AD30_00001D84:
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x0
     ble lbl_fn_8024AD30_00001F00
     lwz r0, 0x78(r30)
@@ -2240,7 +2240,7 @@ lbl_fn_8024AD30_00001E1C:
     bne lbl_fn_8024AD30_00001E44
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x16cc(r29)
     b lbl_fn_8024AD30_00001F00
 lbl_fn_8024AD30_00001E44:
@@ -2251,7 +2251,7 @@ lbl_fn_8024AD30_00001E44:
     bne lbl_fn_8024AD30_00001E6C
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x16d0(r29)
     b lbl_fn_8024AD30_00001F00
 lbl_fn_8024AD30_00001E6C:
@@ -2262,7 +2262,7 @@ lbl_fn_8024AD30_00001E6C:
     bne lbl_fn_8024AD30_00001E94
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x16d4(r29)
     b lbl_fn_8024AD30_00001F00
 lbl_fn_8024AD30_00001E94:
@@ -2275,7 +2275,7 @@ lbl_fn_8024AD30_00001E94:
 lbl_fn_8024AD30_00001EAC:
     addi r3, r1, 0x8
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     lwz r3, lbl_8087F408
     bl fn_8011FC10

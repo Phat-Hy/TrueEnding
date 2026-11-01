@@ -5,7 +5,7 @@
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void atn_ColliBase_destructor(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008771C(void);
 extern void fn_80087994(void);
@@ -28,7 +28,7 @@ extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80178A6C(void);
 extern void fn_801F3FF8(void);
@@ -499,7 +499,7 @@ lbl_fn_802C7F10_000004F0:
 lbl_fn_802C7F10_00000514:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_802C7F10_00000920
 lbl_fn_802C7F10_00000524:
     beq lbl_fn_802C7F10_00000920
@@ -534,7 +534,7 @@ lbl_fn_802C7F10_00000524:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_802C7F10_00000920
 lbl_fn_802C7F10_000005AC:
     lwz r0, 0x14bc(r31)
@@ -643,7 +643,7 @@ lbl_fn_802C7F10_000006B0:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808843F4
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -673,7 +673,7 @@ lbl_fn_802C7F10_0000077C:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808843F4
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -700,7 +700,7 @@ lbl_fn_802C7F10_000007F0:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808843F4
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -748,7 +748,7 @@ lbl_fn_802C7F10_000008AC:
     beq lbl_fn_802C7F10_00000910
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r4, 0x14b0(r31)
     mr r3, r31
     lfs f1, lbl_80884408
@@ -758,7 +758,7 @@ lbl_fn_802C7F10_000008AC:
 lbl_fn_802C7F10_000008F0:
     mr r3, r31
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r4, 0x14b0(r31)
     mr r3, r31
     lfs f1, lbl_80884408
@@ -1320,7 +1320,7 @@ lbl_fn_802C8A68_000010C4:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
@@ -1434,7 +1434,7 @@ lbl_fn_802C8A68_00001264:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r30
     addi r4, r4, fn_80148990@l
@@ -1594,7 +1594,7 @@ lbl_fn_802C8A68_000014C8:
     la r5, lbl_8087D9E4
     la r6, lbl_8087D9E0
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     li r5, 0x0
     addi r4, r4, fn_80148990@l
@@ -1708,7 +1708,7 @@ lbl_fn_802C8A68_00001668:
     la r6, lbl_8087D9E0
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_80148990@ha
     mr r7, r30
     addi r4, r4, fn_80148990@l

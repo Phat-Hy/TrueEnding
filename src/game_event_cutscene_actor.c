@@ -30,7 +30,7 @@ extern void fn_80071D60(void);
 extern void fn_800827E0(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void fn_80089620(void);
@@ -90,8 +90,8 @@ extern void fn_805A6D14(void);
 extern void OSInitMutex(void);
 extern void VISetNextFrameBuffer(void);
 extern void strcmp(void);
-extern void fn_806846C4(void);
-extern void fn_806846FC(void);
+extern void wmemcpy(void);
+extern void wmemcmp(void);
 extern void fn_80686A48(void);
 extern void fn_806952C4(void);
 extern void fn_80695720(void);
@@ -210,7 +210,7 @@ asm void fn_8047961C(void)
     mr r3, r29
     mr r4, r26
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8047961C_000000B0:
     addi r30, r30, 0x50
     addi r24, r1, 0x20
@@ -250,7 +250,7 @@ lbl_fn_8047961C_00000120:
     la r3, lbl_808813D0
 lbl_fn_8047961C_00000124:
     mr r4, r30
-    bl fn_806846FC
+    bl wmemcmp
     cntlzw r0, r3
     srwi r0, r0, 5
 lbl_fn_8047961C_00000134:
@@ -280,7 +280,7 @@ lbl_fn_8047961C_00000158:
     mr r4, r24
     addi r3, r29, 0x4
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8047961C_00000198:
     lwz r0, 0x160(r30)
     addi r29, r29, 0x90
@@ -344,7 +344,7 @@ lbl_fn_8047961C_0000025C:
     mr r3, r26
     mr r4, r24
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_8047961C_00000284:
     stw r27, 0x124(r1)
     stw r28, 0x128(r1)
@@ -1932,7 +1932,7 @@ lbl_cutscene_actor_updatePose_000018D0:
     la r5, lbl_8087E084
     la r6, lbl_8087E080
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, atn_TaskEntry_zeroInit@ha
     lis r5, fn_800C622C@ha
     addi r4, r4, atn_TaskEntry_zeroInit@l
@@ -2105,7 +2105,7 @@ lbl_cutscene_actor_updatePose_00001B2C:
     la r6, lbl_8087E080
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, atn_TaskEntry_zeroInit@ha
     lis r5, fn_800C622C@ha
     mr r7, r24

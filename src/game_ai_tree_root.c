@@ -17,7 +17,7 @@ extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -37,7 +37,7 @@ extern void fn_8015E7A0(void);
 extern void fn_8015ECC4(void);
 extern void fn_80166A54(void);
 extern void fn_8016DA4C(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_80219E6C(void);
 extern void fn_8023781C(void);
 extern void fn_80237874(void);
@@ -62,7 +62,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_80695720(void);
 extern void fn_806959D8(void);
 
@@ -368,7 +368,7 @@ lbl_fn_802561C4_000002E0:
     ori r0, r0, 0xc21d
     oris r0, r0, 0x380
     stw r0, 0x7ec(r31)
-    bl fn_8016E970
+    bl actor_setState
     mr r3, r31
     bl fn_80256384
     lwz r3, 0x1438(r31)
@@ -511,7 +511,7 @@ lbl_fn_80256384_00000540:
     bne lbl_fn_80256384_00000584
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x16b0(r22)
 lbl_fn_80256384_00000584:
     mr r3, r18
@@ -521,7 +521,7 @@ lbl_fn_80256384_00000584:
     bne lbl_fn_80256384_000005AC
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x14fc(r22)
     b lbl_fn_80256384_00000CA0
 lbl_fn_80256384_000005AC:
@@ -533,7 +533,7 @@ lbl_fn_80256384_000005AC:
 lbl_fn_80256384_000005C0:
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     cmpwi r3, 0x0
     ble lbl_fn_80256384_00000CA0
     lwz r0, 0x78(r25)
@@ -574,7 +574,7 @@ lbl_fn_80256384_00000638:
     la r5, lbl_8087DC2C
     la r6, lbl_8087DC28
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     li r4, 0x0
     li r5, 0x0
     li r6, 0xc
@@ -667,7 +667,7 @@ lbl_fn_80256384_00000780:
     la r6, lbl_8087DC28
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     mr r7, r28
     li r4, 0x0
     li r5, 0x0
@@ -922,7 +922,7 @@ lbl_fn_80256384_00000B34:
     lwz r18, lbl_8087F408
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     mr r4, r3
     mr r3, r18
     bl fn_8011FC10
@@ -937,7 +937,7 @@ lbl_fn_80256384_00000B70:
     bne lbl_fn_80256384_00000B9C
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1500(r22)
     b lbl_fn_80256384_00000CA0
@@ -949,7 +949,7 @@ lbl_fn_80256384_00000B9C:
     bne lbl_fn_80256384_00000BC8
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1510(r22)
     b lbl_fn_80256384_00000CA0
@@ -961,7 +961,7 @@ lbl_fn_80256384_00000BC8:
     bne lbl_fn_80256384_00000BF4
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1504(r22)
     b lbl_fn_80256384_00000CA0
@@ -973,7 +973,7 @@ lbl_fn_80256384_00000BF4:
     bne lbl_fn_80256384_00000C20
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1518(r22)
     b lbl_fn_80256384_00000CA0
@@ -985,7 +985,7 @@ lbl_fn_80256384_00000C20:
     bne lbl_fn_80256384_00000C4C
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1508(r22)
     b lbl_fn_80256384_00000CA0
@@ -997,7 +997,7 @@ lbl_fn_80256384_00000C4C:
     bne lbl_fn_80256384_00000C78
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x150c(r22)
     b lbl_fn_80256384_00000CA0
@@ -1009,7 +1009,7 @@ lbl_fn_80256384_00000C78:
     bne lbl_fn_80256384_00000CA0
     addi r3, r1, 0x38
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     bl fn_80219E6C
     stw r3, 0x1514(r22)
 lbl_fn_80256384_00000CA0:
@@ -1711,7 +1711,7 @@ lbl_fn_80256C04_000016E0:
     bne lbl_fn_80256C04_000016F8
     mr r3, r15
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_80256C04_000016F8:
     lwz r3, 0x58c(r15)
     subi r0, r3, 0x7
@@ -1786,7 +1786,7 @@ lbl_fn_80256C04_00001790:
     stw r14, 0x14d0(r15)
     stw r14, 0x1660(r15)
     stw r0, 0x58c(r15)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_808833F4
     li r0, 0x1
     stw r0, 0x3fc(r15)
@@ -1889,7 +1889,7 @@ lbl_fn_80256C04_0000198C:
     bne lbl_fn_80256C04_000019B0
     mr r3, r15
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_80256C04_000019C8
 lbl_fn_80256C04_000019B0:
     lwz r3, 0x14c8(r15)

@@ -28,7 +28,7 @@ extern void fn_8015DEC0(void);
 extern void fn_8015E4B0(void);
 extern void fn_801656A4(void);
 extern void fn_8016E4C4(void);
-extern void fn_8016E970(void);
+extern void actor_setState(void);
 extern void fn_801765D8(void);
 extern void fn_80179D44(void);
 extern void fn_80219E6C(void);
@@ -472,7 +472,7 @@ asm void fn_80252E6C(void)
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883358
     addi r3, r31, 0xb0
     stw r30, 0x3fc(r31)
@@ -543,7 +543,7 @@ lbl_fn_80252E6C_00000618:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883358
     li r30, 0x1
     stw r30, 0x3fc(r31)
@@ -617,7 +617,7 @@ lbl_fn_80252E6C_00000724:
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883358
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -661,7 +661,7 @@ lbl_fn_80252E6C_000007E4:
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_80252E6C_00000810:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
@@ -925,7 +925,7 @@ lbl_fn_802531F4_00000BBC:
     b lbl_fn_802531F4_00000C84
 lbl_fn_802531F4_00000BD8:
     li r4, 0x3
-    bl fn_8016E970
+    bl actor_setState
     lwz r6, 0x1504(r29)
     cmpwi r6, 0x0
     beq lbl_fn_802531F4_00000C84
@@ -1158,7 +1158,7 @@ asm void fn_80253884(void)
     mr r3, r31
     li r4, 0x3
     stw r0, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     lfs f0, lbl_80883358
     li r0, 0x1
     stw r0, 0x3fc(r31)
@@ -1192,7 +1192,7 @@ lbl_fn_80253884_00000F9C:
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
     b lbl_fn_80253884_0000129C
 lbl_fn_80253884_00000FC8:
     psq_l f1, 0x534(r31), 0, 0
@@ -1563,7 +1563,7 @@ lbl_fn_80253C9C_000014E0:
     mr r3, r31
     li r4, 0x3
     stw r30, 0x58c(r31)
-    bl fn_8016E970
+    bl actor_setState
 lbl_fn_80253C9C_0000150C:
     lwz r0, 0x74(r1)
     psq_l f31, 0x68(r1), 0, 0

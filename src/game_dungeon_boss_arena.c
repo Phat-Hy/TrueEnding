@@ -21,7 +21,7 @@ extern void fn_8005BBF8(void);
 extern void fn_8006AA20(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008937C(void);
@@ -97,7 +97,7 @@ extern void fn_80473F88(void);
 extern void fn_8049D5DC(void);
 extern void strcmp(void);
 extern void strncmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_806952C4(void);
 extern void fn_80695720(void);
 extern void fn_80695A50(void);
@@ -356,7 +356,7 @@ lbl_fn_803EE024_000001B0:
     la r5, lbl_8087DEFC
     la r6, lbl_8087DEF8
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x7c(r31)
     b lbl_fn_803EE024_000001DC
     stw r0, 0x7c(r31)
@@ -937,7 +937,7 @@ lbl_fn_803EE7FC_00000914:
     la r5, lbl_8087DF14
     la r6, lbl_8087DF10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803EEB38@ha
     lis r5, fn_803EDF7C@ha
     addi r4, r4, fn_803EEB38@l
@@ -1020,7 +1020,7 @@ lbl_fn_803EE7FC_00000A3C:
     la r6, lbl_8087DF10
     addi r3, r3, 0x10
     li r7, 0x0
-    bl fn_800846FC
+    bl mem_realloc
     lis r4, fn_803EEB38@ha
     lis r5, fn_803EDF7C@ha
     mr r7, r27
@@ -1524,25 +1524,25 @@ lbl_fn_803EEEDC_00001134:
     addi r3, r1, 0x134
     bl fn_803EEB38
     addi r3, r17, 0x2
-    bl fn_80684600
+    bl atoi
     mulli r20, r3, 0x3e8
     addi r3, r17, 0x6
-    bl fn_80684600
+    bl atoi
     add r0, r3, r20
     stw r0, 0x134(r1)
     addi r3, r1, 0x280
     bl fn_8005B3CC
     addi r3, r1, 0x280
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x138(r1)
     addi r3, r1, 0x280
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x13c(r1)
     addi r3, r1, 0x280
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x140(r1)
     addi r3, r1, 0x280
     bl fn_8005B3CC
@@ -1721,7 +1721,7 @@ lbl_fn_803EEEDC_000013FC:
     bl fn_800ED42C
     addi r3, r1, 0x280
     bl fn_8005B3CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x17c(r1)
     addi r3, r18, 0x50
     addi r4, r1, 0x134
@@ -2084,7 +2084,7 @@ lbl_fn_803EF780_000018A4:
     stw r3, 0x48(r1)
     addi r3, r1, 0x70
     bl fn_8005B9CC
-    bl fn_80684600
+    bl atoi
     stw r3, 0x4c(r1)
     addi r3, r1, 0x70
     bl fn_8005B9CC

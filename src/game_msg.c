@@ -7,7 +7,7 @@ extern void fn_800827E0(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
 extern void mem_alloc(void);
-extern void fn_800846FC(void);
+extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800A4494(void);
 extern void atn_Task_destructor(void);
@@ -1214,7 +1214,7 @@ lbl_fn_800A5E00_00000E30:
     addi r5, r3, 0x14
     mr r3, r31
     mr r6, r5
-    bl fn_800846FC
+    bl mem_realloc
     stw r3, 0x8(r29)
     mr r5, r31
     li r4, 0x0

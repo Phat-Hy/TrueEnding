@@ -50,7 +50,7 @@ extern void fn_80502978(void);
 extern void fn_805053FC(void);
 extern void fn_8050C844(void);
 extern void fn_8050F5AC(void);
-extern void fn_806846C4(void);
+extern void wmemcpy(void);
 extern void fn_80686A48(void);
 extern int sprintf(char* str, const char* format, ...);
 
@@ -1970,7 +1970,7 @@ lbl_fn_804B2934_00001AB0:
     mr r4, r30
     addi r3, r29, 0xfc
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804B2934_00001AE4:
     lwz r3, lbl_8087F860
     bl fn_805053FC
@@ -2068,7 +2068,7 @@ lbl_fn_804B2934_00001C1C:
     mr r4, r30
     addi r3, r29, 0xfc
     addi r5, r5, 0x1
-    bl fn_806846C4
+    bl wmemcpy
 lbl_fn_804B2934_00001C50:
     lwz r3, lbl_8087F860
     bl fn_805053FC

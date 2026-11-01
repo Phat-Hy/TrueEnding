@@ -17,7 +17,7 @@ extern void _savegpr_27(void);
 extern void rand(void);
 extern void srand(void);
 extern void strcmp(void);
-extern void fn_80684600(void);
+extern void atoi(void);
 extern void fn_806A420C(void);
 extern void fn_806A4264(void);
 extern void fn_806A426C(void);
@@ -713,7 +713,7 @@ lbl_fn_806EEEC0_000007DC:
     extsb. r0, r3
     bne lbl_fn_806EEEC0_00000794
     addi r3, r27, 0x1
-    bl fn_80684600
+    bl atoi
     cmplwi r3, 0xffff
     ble lbl_fn_806EEEC0_00000800
     li r3, 0x0
