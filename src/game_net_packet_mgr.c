@@ -81,7 +81,7 @@ void fn_804AE11C(void);
 void fn_804AE124(void);
 void fn_804AE264(void);
 void fn_804AE2DC(void);
-void net_getPacketManager(void);
+u32 net_getPacketManager(void);
 void fn_804AE3C4(void);
 void fn_804AE3CC(void);
 void fn_804AE4C4(void);
@@ -988,11 +988,9 @@ lbl_fn_804AE2DC_00000C68:
     blr
 }
 
-asm void net_getPacketManager(void)
+u32 net_getPacketManager(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F62C
-    blr
+    return lbl_8087F62C;
 }
 
 asm void fn_804AE3C4(void)

@@ -373,7 +373,7 @@ void fn_804D1400(void);
 void fn_804D1414(void);
 void fn_804D147C(void);
 void fn_804D14BC(void);
-void net_getFriendManager(void);
+u32 net_getFriendManager(void);
 void fn_804D16A0(void);
 void fn_804D16D0(void);
 void fn_804D16D8(void);
@@ -593,11 +593,9 @@ lbl_fn_804D14BC_00000280:
     blr
 }
 
-asm void net_getFriendManager(void)
+u32 net_getFriendManager(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F628
-    blr
+    return lbl_8087F628;
 }
 
 asm void fn_804D16A0(void)

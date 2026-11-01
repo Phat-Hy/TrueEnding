@@ -1647,10 +1647,8 @@ lbl_fn_80429F90_000014E8:
     blr
 }
 
-asm void fn_8042A2FC(void)
+void fn_8042A2FC(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_8042A300(void)

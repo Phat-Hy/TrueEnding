@@ -820,10 +820,8 @@ asm void fn_805C0790(void)
     blr
 }
 
-asm void fn_805C07A0(void)
+void fn_805C07A0(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_805C07B0(void)
@@ -839,10 +837,8 @@ asm void fn_805C07B0(void)
     blr
 }
 
-asm void fn_805C07D0(void)
+void fn_805C07D0(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_805C07E0(void)
@@ -860,10 +856,8 @@ asm void fn_805C07F0(void)
     blr
 }
 
-asm void fn_805C0800(void)
+void fn_805C0800(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_805C0810(void)

@@ -325,10 +325,8 @@ lbl_atn_Curve_evaluate_00000304:
     blr
 }
 
-asm void fn_80472340(void)
+void fn_80472340(void)
 {
-    nofralloc
-    blr
 }
 
 asm void atn_LoadColliObject_constructor(void)

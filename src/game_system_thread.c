@@ -66,10 +66,8 @@ void fn_801FED70(void);
 void fn_801FEDBC(void);
 void thread_dispatchToQueue(void);
 
-asm void fn_801FD530(void)
+void fn_801FD530(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_801FD534(void)

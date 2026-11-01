@@ -998,22 +998,16 @@ lbl_fn_80452B6C_00000B70:
     blr
 }
 
-asm void fn_80452F08(void)
+void fn_80452F08(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_80452F0C(void)
+void fn_80452F0C(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_80452F10(void)
+void fn_80452F10(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_80452F14(void)
