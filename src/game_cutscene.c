@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void boss_recordDamage(void);
-extern void fn_8007A994(void);
+extern void str_nextToken(void);
 extern void fn_8007AA64(void);
 extern void fn_8007B260(void);
 extern void fn_8007C0D8(void);
@@ -89,13 +89,13 @@ asm void fn_8007C46C(void)
     stw r26, 0xf4(r1)
     stw r26, 0xf8(r1)
     stw r26, 0xfc(r1)
-    bl fn_8007A994
+    bl str_nextToken
     lwz r0, 0x9c(r1)
     addi r5, r1, 0x9c
     lwz r17, lbl_80880B84
     add r3, r3, r0
     mr r4, r17
-    bl fn_8007A994
+    bl str_nextToken
     lis r30, lbl_80731D40@ha
     lfs f30, lbl_80880BA0
     lfs f31, lbl_80880B9C
@@ -764,7 +764,7 @@ lbl_fn_8007C46C_000009AC:
 lbl_fn_8007C46C_000009BC:
     mr r4, r17
     addi r5, r1, 0x9c
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     lwz r5, 0x9c(r1)
     mr r4, r16
@@ -792,7 +792,7 @@ lbl_fn_8007C46C_00000A14:
 lbl_fn_8007C46C_00000A24:
     mr r4, r17
     addi r5, r1, 0x9c
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     lwz r5, 0x9c(r1)
     mr r4, r16
@@ -808,7 +808,7 @@ lbl_fn_8007C46C_00000A24:
     mr r4, r17
     add r3, r16, r22
     addi r5, r1, 0x9c
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     lis r3, lbl_80731A60@ha
     lwz r17, 0x9c(r1)
@@ -848,7 +848,7 @@ lbl_fn_8007C46C_00000ADC:
     mr r4, r17
     add r3, r16, r22
     addi r5, r1, 0x9c
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     lis r3, lbl_80731A60@ha
     lwz r17, 0x9c(r1)
@@ -888,7 +888,7 @@ lbl_fn_8007C46C_00000B68:
     mr r4, r17
     add r3, r16, r22
     addi r5, r1, 0x9c
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     lis r3, lbl_80731A60@ha
     lwz r17, 0x9c(r1)
@@ -931,7 +931,7 @@ lbl_fn_8007C46C_00000BF8:
     add r3, r16, r22
     addi r5, r1, 0x9c
     mr r4, r17
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     fmuls f0, f30, f1
@@ -943,7 +943,7 @@ lbl_fn_8007C46C_00000BF8:
     stb r0, 0x18(r15)
     lwz r0, 0x9c(r1)
     add r3, r16, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     fmuls f0, f30, f1
@@ -955,7 +955,7 @@ lbl_fn_8007C46C_00000BF8:
     stb r0, 0x19(r15)
     lwz r0, 0x9c(r1)
     add r3, r16, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     fmuls f0, f30, f1
@@ -967,7 +967,7 @@ lbl_fn_8007C46C_00000BF8:
     stb r0, 0x1a(r15)
     lwz r0, 0x9c(r1)
     add r3, r16, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     fmuls f0, f30, f1
@@ -980,7 +980,7 @@ lbl_fn_8007C46C_00000BF8:
     add r3, r16, r22
     addi r5, r1, 0x9c
     mr r4, r17
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     fmuls f0, f30, f1
@@ -992,7 +992,7 @@ lbl_fn_8007C46C_00000BF8:
     stb r0, 0x1c(r15)
     lwz r0, 0x9c(r1)
     add r3, r16, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     fmuls f0, f30, f1
@@ -1004,7 +1004,7 @@ lbl_fn_8007C46C_00000BF8:
     stb r0, 0x1d(r15)
     lwz r0, 0x9c(r1)
     add r3, r16, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     fmuls f0, f30, f1
@@ -1017,7 +1017,7 @@ lbl_fn_8007C46C_00000BF8:
     add r3, r16, r22
     addi r5, r1, 0x9c
     mr r4, r17
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     fmuls f0, f30, f1
@@ -1029,7 +1029,7 @@ lbl_fn_8007C46C_00000BF8:
     stb r0, 0x20(r15)
     lwz r0, 0x9c(r1)
     add r3, r16, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     fmuls f0, f30, f1
@@ -1041,7 +1041,7 @@ lbl_fn_8007C46C_00000BF8:
     stb r0, 0x21(r15)
     lwz r0, 0x9c(r1)
     add r3, r16, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     fmuls f0, f30, f1
@@ -1055,7 +1055,7 @@ lbl_fn_8007C46C_00000BF8:
     add r3, r16, r22
     addi r5, r1, 0x9c
     mr r4, r19
-    bl fn_8007A994
+    bl str_nextToken
     slwi r0, r17, 2
     mr r16, r3
     add r17, r15, r0
@@ -1069,7 +1069,7 @@ lbl_fn_8007C46C_00000BF8:
     stb r0, 0x24(r17)
     lwz r0, 0x9c(r1)
     add r3, r16, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     fmuls f0, f30, f1
@@ -1081,7 +1081,7 @@ lbl_fn_8007C46C_00000BF8:
     stb r0, 0x25(r17)
     lwz r0, 0x9c(r1)
     add r3, r16, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     fmuls f0, f30, f1
@@ -1093,7 +1093,7 @@ lbl_fn_8007C46C_00000BF8:
     mr r4, r17
     add r3, r16, r22
     addi r5, r1, 0x9c
-    bl fn_8007A994
+    bl str_nextToken
     mr r20, r3
     addi r3, r1, 0x128
     bl fn_8007C0D8
@@ -1128,7 +1128,7 @@ lbl_fn_8007C46C_00000F0C:
     stw r17, 0x128(r1)
     addi r5, r1, 0x9c
     mr r4, r16
-    bl fn_8007A994
+    bl str_nextToken
     mr r17, r3
     bl str_skipWhitespace
     lwz r0, 0x9c(r1)
@@ -1136,7 +1136,7 @@ lbl_fn_8007C46C_00000F0C:
     stfs f1, 0x130(r1)
     addi r5, r1, 0x9c
     add r3, r17, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r17, r3
     bl str_skipWhitespace
     lwz r0, 0x9c(r1)
@@ -1144,7 +1144,7 @@ lbl_fn_8007C46C_00000F0C:
     stfs f1, 0x134(r1)
     addi r5, r1, 0x9c
     add r3, r17, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r17, r3
     bl str_skipWhitespace
     lwz r0, 0x9c(r1)
@@ -1152,7 +1152,7 @@ lbl_fn_8007C46C_00000F0C:
     stfs f1, 0x138(r1)
     addi r5, r1, 0x9c
     add r3, r17, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r17, r3
     bl str_skipWhitespace
     lwz r0, 0x9c(r1)
@@ -1160,7 +1160,7 @@ lbl_fn_8007C46C_00000F0C:
     stfs f1, 0x13c(r1)
     addi r5, r1, 0x9c
     add r3, r17, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r17, r3
     bl str_skipWhitespace
     lwz r0, 0x9c(r1)
@@ -1168,7 +1168,7 @@ lbl_fn_8007C46C_00000F0C:
     stfs f1, 0x140(r1)
     addi r5, r1, 0x9c
     add r3, r17, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r17, r3
     bl str_skipWhitespace
     lwz r0, 0x9c(r1)
@@ -1176,7 +1176,7 @@ lbl_fn_8007C46C_00000F0C:
     stfs f1, 0x144(r1)
     addi r5, r1, 0x9c
     add r3, r17, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r17, r3
     bl str_skipWhitespace
     lwz r0, 0x9c(r1)
@@ -1184,7 +1184,7 @@ lbl_fn_8007C46C_00000F0C:
     stfs f1, 0x148(r1)
     addi r5, r1, 0x9c
     add r3, r17, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r17, r3
     bl str_skipWhitespace
     lwz r0, 0x9c(r1)
@@ -1192,7 +1192,7 @@ lbl_fn_8007C46C_00000F0C:
     stfs f1, 0x14c(r1)
     addi r5, r1, 0x9c
     add r3, r17, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r17, r3
     bl str_skipWhitespace
     lwz r0, 0x9c(r1)
@@ -1200,7 +1200,7 @@ lbl_fn_8007C46C_00000F0C:
     stfs f1, 0x150(r1)
     addi r5, r1, 0x9c
     add r3, r17, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     lfs f0, 0x144(r1)
@@ -1235,7 +1235,7 @@ lbl_fn_8007C46C_00001094:
     add r3, r16, r3
     addi r5, r1, 0x9c
     mr r4, r17
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     lwz r0, 0x9c(r1)
@@ -1243,7 +1243,7 @@ lbl_fn_8007C46C_00001094:
     stfs f1, 0x158(r1)
     addi r5, r1, 0x9c
     add r3, r16, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     lwz r0, 0x9c(r1)
@@ -1251,7 +1251,7 @@ lbl_fn_8007C46C_00001094:
     stfs f1, 0x15c(r1)
     addi r5, r1, 0x9c
     add r3, r16, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     lwz r0, 0x9c(r1)
@@ -1259,7 +1259,7 @@ lbl_fn_8007C46C_00001094:
     stfs f1, 0x160(r1)
     addi r5, r1, 0x9c
     add r3, r16, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     lwz r0, 0x9c(r1)
@@ -1267,7 +1267,7 @@ lbl_fn_8007C46C_00001094:
     stfs f1, 0x164(r1)
     addi r5, r1, 0x9c
     add r3, r16, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     lwz r0, 0x9c(r1)
@@ -1275,7 +1275,7 @@ lbl_fn_8007C46C_00001094:
     stfs f1, 0x168(r1)
     addi r5, r1, 0x9c
     add r3, r16, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     lfs f0, 0x158(r1)
@@ -1533,7 +1533,7 @@ lbl_fn_8007C46C_00001470:
     mr r4, r17
     add r3, r16, r22
     addi r5, r1, 0x9c
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     stfs f1, 0x30(r15)
@@ -1541,7 +1541,7 @@ lbl_fn_8007C46C_00001470:
     mr r4, r17
     add r3, r16, r22
     addi r5, r1, 0x9c
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_skipWhitespace
     fcmpo cr0, f1, f28
@@ -1563,7 +1563,7 @@ lbl_fn_8007C46C_0000158C:
     mr r4, r17
     add r3, r16, r22
     addi r5, r1, 0x9c
-    bl fn_8007A994
+    bl str_nextToken
     stw r26, 0xdc(r1)
     addi r17, r31, 0x5f
     mr r16, r3
@@ -1728,7 +1728,7 @@ lbl_fn_8007C46C_000017C0:
     mr r4, r17
     add r3, r16, r22
     addi r5, r1, 0x9c
-    bl fn_8007A994
+    bl str_nextToken
     stw r26, 0xc4(r1)
     addi r17, r31, 0x62
     mr r16, r3
@@ -1895,19 +1895,19 @@ lbl_fn_8007C46C_00001A18:
     mr r4, r17
     add r3, r16, r22
     addi r5, r1, 0x9c
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     b lbl_fn_8007C46C_00002028
     mr r4, r17
     add r3, r16, r22
     addi r5, r1, 0x9c
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     b lbl_fn_8007C46C_00002028
     mr r4, r17
     add r3, r16, r22
     addi r5, r1, 0x9c
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     lis r3, lbl_80777D40@ha
     lwz r17, 0x9c(r1)
@@ -1971,7 +1971,7 @@ lbl_fn_8007C46C_00001B3C:
     mr r4, r17
     add r3, r16, r22
     addi r5, r1, 0x9c
-    bl fn_8007A994
+    bl str_nextToken
     lwz r17, 0x9c(r1)
     mr r16, r3
     stw r26, 0xe8(r1)
@@ -2143,7 +2143,7 @@ lbl_fn_8007C46C_00001D88:
     mr r4, r17
     add r3, r16, r22
     addi r5, r1, 0x9c
-    bl fn_8007A994
+    bl str_nextToken
     stw r26, 0xac(r1)
     addi r17, r31, 0x8a
     mr r16, r3
@@ -2311,7 +2311,7 @@ lbl_fn_8007C46C_00001FF4:
     mr r4, r17
     add r3, r16, r22
     addi r5, r1, 0x9c
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
     bl str_parseInt
     stw r3, 0x44(r15)
@@ -2321,7 +2321,7 @@ lbl_fn_8007C46C_00002028:
     lwz r0, 0x9c(r1)
     mr r4, r17
     add r3, r16, r0
-    bl fn_8007A994
+    bl str_nextToken
     mr r16, r3
 lbl_fn_8007C46C_00002044:
     cmpwi r16, 0x0

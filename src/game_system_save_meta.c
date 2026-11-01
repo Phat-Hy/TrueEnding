@@ -43,7 +43,7 @@ extern void task_findEntryById(void);
 extern void res_MsgHandle_isLoading(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
-extern void fn_80244CAC(void);
+extern void script_setTaskTerminated(void);
 extern void fn_80265804(void);
 extern void fn_80267B28(void);
 extern void fn_80288E30(void);
@@ -512,12 +512,12 @@ asm void fn_80345BA8(void)
     li r4, 0x0
     bl atn_Task_setActive
     lwz r3, 0x17f4(r29)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x17f8(r29)
     li r4, 0x0
     bl atn_Task_setActive
     lwz r3, 0x17f8(r29)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r0, 0x7ec(r29)
     ori r0, r0, 0x1c0
     oris r0, r0, 0x1

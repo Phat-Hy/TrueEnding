@@ -57,7 +57,7 @@ extern void fn_807214D0(void);
 extern void net_packetDebugLog(void);
 extern void fn_80724E90(void);
 extern void fn_80725200(void);
-extern void fn_807252A0(void);
+extern void net_listInsertNode(void);
 
 /* External data declarations */
 extern u8 lbl_80762810[];
@@ -376,7 +376,7 @@ lbl_fn_8059F878_00000398:
     mr r3, r19
     addi r4, r1, 0x2c
     addi r5, r23, 0xf0
-    bl fn_807252A0
+    bl net_listInsertNode
 lbl_fn_8059F878_000003AC:
     lwz r0, 0x48(r31)
     cmpwi r0, 0x0
@@ -440,7 +440,7 @@ lbl_fn_8059F878_0000047C:
     addi r3, r31, 0x48
     addi r4, r1, 0x34
     addi r5, r27, 0xf0
-    bl fn_807252A0
+    bl net_listInsertNode
 lbl_fn_8059F878_00000490:
     lwz r0, 0x0(r18)
     cmpwi r0, 0x0
@@ -540,7 +540,7 @@ lbl_fn_8059F878_000005E4:
     mr r3, r19
     addi r4, r1, 0x1c
     addi r5, r23, 0xf0
-    bl fn_807252A0
+    bl net_listInsertNode
 lbl_fn_8059F878_000005F8:
     lwz r0, 0x70(r31)
     cmpwi r0, 0x0
@@ -604,7 +604,7 @@ lbl_fn_8059F878_000006C8:
     addi r3, r31, 0x70
     addi r4, r1, 0x24
     addi r5, r27, 0xf0
-    bl fn_807252A0
+    bl net_listInsertNode
 lbl_fn_8059F878_000006DC:
     lwz r0, 0x0(r18)
     cmpwi r0, 0x0
@@ -704,7 +704,7 @@ lbl_fn_8059F878_00000830:
     mr r3, r19
     addi r4, r1, 0xc
     addi r5, r23, 0xf0
-    bl fn_807252A0
+    bl net_listInsertNode
 lbl_fn_8059F878_00000844:
     lwz r0, 0x98(r31)
     cmpwi r0, 0x0
@@ -768,7 +768,7 @@ lbl_fn_8059F878_00000914:
     addi r3, r31, 0x98
     addi r4, r1, 0x14
     addi r5, r22, 0xf0
-    bl fn_807252A0
+    bl net_listInsertNode
 lbl_fn_8059F878_00000928:
     lwz r0, 0x0(r18)
     cmpwi r0, 0x0
@@ -1464,7 +1464,7 @@ lbl_fn_805A03A4_0000124C:
     addi r3, r15, 0x48
     addi r4, r1, 0x1c
     addi r5, r20, 0xf0
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r27
     bl OSUnlockMutex
 lbl_fn_805A03A4_00001268:
@@ -1676,7 +1676,7 @@ lbl_fn_805A03A4_0000152C:
     addi r3, r15, 0x70
     addi r4, r1, 0x18
     addi r5, r19, 0xf0
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r27
     bl OSUnlockMutex
 lbl_fn_805A03A4_00001548:
@@ -1888,7 +1888,7 @@ lbl_fn_805A03A4_0000180C:
     addi r3, r15, 0x98
     addi r4, r1, 0x14
     addi r5, r18, 0xf0
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r27
     bl OSUnlockMutex
 lbl_fn_805A03A4_00001828:

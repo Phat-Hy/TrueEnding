@@ -56,8 +56,8 @@ extern void fn_80710460(void);
 extern void fn_807122C0(void);
 extern void fn_80712610(void);
 extern void fn_80725170(void);
-extern void fn_807252A0(void);
-extern void fn_807252D0(void);
+extern void net_listInsertNode(void);
+extern void net_listRemoveNode(void);
 
 /* External data declarations */
 extern u8 lbl_8076CFA0[];
@@ -194,7 +194,7 @@ lbl_fn_8070D850_00000078:
     addi r0, r3, 0xc
     stw r0, 0x8(r1)
     addi r3, r3, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r31
 lbl_fn_8070D850_00000094:
     addi r11, r1, 0x30
@@ -246,7 +246,7 @@ lbl_fn_8070D900_00000130:
     stw r0, 0x8(r1)
     addi r3, r31, 0x4
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     li r0, 0x1
 lbl_fn_8070D900_00000148:
     cmpwi r0, 0x0
@@ -313,7 +313,7 @@ lbl_fn_8070D9D0_000001FC:
 lbl_fn_8070D9D0_00000218:
     mr r4, r28
     addi r3, r31, 0x4
-    bl fn_807252D0
+    bl net_listRemoveNode
 lbl_fn_8070D9D0_00000224:
     lwz r0, 0x4(r31)
     cmpwi r0, 0x0
@@ -344,7 +344,7 @@ lbl_fn_8070D9D0_00000280:
     stw r0, 0xc(r1)
     addi r3, r31, 0x4
     addi r4, r1, 0xc
-    bl fn_807252A0
+    bl net_listInsertNode
     b lbl_fn_8070D9D0_00000390
 lbl_fn_8070D9D0_00000298:
     lwz r0, 0x4(r3)
@@ -381,7 +381,7 @@ lbl_fn_8070D9D0_000002EC:
 lbl_fn_8070D9D0_00000308:
     mr r4, r28
     addi r3, r31, 0x4
-    bl fn_807252D0
+    bl net_listRemoveNode
 lbl_fn_8070D9D0_00000314:
     lwz r0, 0x4(r31)
     cmpw r27, r0
@@ -415,7 +415,7 @@ lbl_fn_8070D9D0_0000037C:
     stw r0, 0x8(r1)
     addi r3, r31, 0x4
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
 lbl_fn_8070D9D0_00000390:
     addi r11, r1, 0x30
     bl _restgpr_27

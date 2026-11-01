@@ -69,7 +69,7 @@ void fn_806E8650(void);
 void fn_806E87A0(void);
 void fn_806E8890(void);
 void fn_806E89D0(void);
-void fn_806E8B10(void);
+void str_safeCopy(void);
 void fn_806E8B60(void);
 void fn_806E8D30(void);
 void net_formatPlayerInfo(void);
@@ -454,7 +454,7 @@ lbl_fn_806E89D0_0000049C:
     blr
 }
 
-asm void fn_806E8B10(void)
+asm void str_safeCopy(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

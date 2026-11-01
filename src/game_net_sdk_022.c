@@ -21,7 +21,7 @@ extern void fn_8068446C(void);
 extern void fn_806A7110(void);
 extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
-extern void fn_806A7400(void);
+extern void net_memFree(void);
 extern void net_formatLog(void);
 extern void fn_806A9CA0(void);
 extern void fn_806AB8B0(void);
@@ -282,11 +282,11 @@ lbl_fn_806CD560_000001C4:
     stw r0, lbl_808608A0@l(r31)
     lwz r4, 0x4(r30)
     lwz r5, 0x8(r30)
-    bl fn_806A7400
+    bl net_memFree
     mr r4, r30
     li r3, 0x4
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     lwz r30, lbl_808608A0@l(r31)
 lbl_fn_806CD560_000001F0:
     cmpwi r30, 0x0
@@ -359,7 +359,7 @@ lbl_fn_806CD620_00000294:
     stw r0, 0x4(r30)
     lwz r4, 0x4(r29)
     lwz r5, 0x8(r29)
-    bl fn_806A7400
+    bl net_memFree
     stw r31, 0x4(r29)
     stw r31, 0x8(r29)
     stw r31, 0x0(r29)
@@ -394,7 +394,7 @@ lbl_fn_806CD620_0000032C:
     li r3, 0x4
     stw r0, lbl_808608A0@l(r31)
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     lwz r4, lbl_808608A0@l(r31)
 lbl_fn_806CD620_00000350:
     cmpwi r4, 0x0
@@ -463,7 +463,7 @@ lbl_fn_806CD740_0000040C:
     bne lbl_fn_806CD740_0000044C
     li r3, 0x4
     li r5, 0x10
-    bl fn_806A7400
+    bl net_memFree
     li r0, 0x0
     stw r0, 0x0(r31)
     li r3, 0x0
@@ -1693,7 +1693,7 @@ lbl_fn_806CE750_00001488:
     mr r4, r30
     li r3, 0x4
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     b lbl_fn_806CE750_00001538
 lbl_fn_806CE750_00001524:
     mr r3, r31
@@ -2231,7 +2231,7 @@ lbl_fn_806CF030_00001C94:
     lwz r30, 0x18(r4)
     li r3, 0xc
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     stw r30, lbl_808608B0@l(r31)
     mr r4, r30
 lbl_fn_806CF030_00001CAC:

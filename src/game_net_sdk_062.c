@@ -47,8 +47,8 @@ extern void fn_8071F450(void);
 extern void fn_807229E0(void);
 extern void fn_80725170(void);
 extern void fn_80725200(void);
-extern void fn_807252A0(void);
-extern void fn_807252D0(void);
+extern void net_listInsertNode(void);
+extern void net_listRemoveNode(void);
 
 /* External data declarations */
 extern u8 lbl_8076D008[];
@@ -362,7 +362,7 @@ lbl_fn_807205D0_000002C4:
     addi r3, r27, 0x10
     addi r4, r1, 0x8
     addi r5, r5, 0xfc
-    bl fn_807252A0
+    bl net_listInsertNode
     addi r29, r29, 0x104
     addi r28, r28, 0x1
 lbl_fn_807205D0_000002E0:
@@ -522,7 +522,7 @@ lbl_fn_80720760_000004E8:
     mr r29, r3
     mr r4, r27
     addi r3, r31, 0x10
-    bl fn_807252D0
+    bl net_listRemoveNode
     addi r3, r31, 0x8
     b lbl_fn_80720760_0000052C
     nop
@@ -542,7 +542,7 @@ lbl_fn_80720760_00000538:
     mr r5, r27
     addi r3, r31, 0x4
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r29
     bl OSRestoreInterrupts
     addi r29, r31, 0x8
@@ -598,13 +598,13 @@ asm void fn_80720920(void)
     mr r30, r3
     mr r4, r29
     addi r3, r28, 0x4
-    bl fn_807252D0
+    bl net_listRemoveNode
     addi r0, r28, 0x14
     stw r0, 0x8(r1)
     mr r5, r29
     addi r3, r28, 0x10
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r30
     bl OSRestoreInterrupts
     mr r3, r31
@@ -724,20 +724,20 @@ asm void fn_80720AE0(void)
     mr r30, r3
     mr r4, r29
     addi r3, r27, 0x4
-    bl fn_807252D0
+    bl net_listRemoveNode
     addi r0, r27, 0x14
     stw r0, 0xc(r1)
     mr r5, r29
     addi r3, r27, 0x10
     addi r4, r1, 0xc
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r30
     bl OSRestoreInterrupts
     bl OSDisableInterrupts
     mr r30, r3
     mr r4, r29
     addi r3, r27, 0x10
-    bl fn_807252D0
+    bl net_listRemoveNode
     addi r3, r27, 0x8
     b lbl_fn_80720AE0_00000804
 lbl_fn_80720AE0_000007EC:
@@ -756,7 +756,7 @@ lbl_fn_80720AE0_00000810:
     mr r5, r29
     addi r3, r27, 0x4
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r30
     bl OSRestoreInterrupts
     addi r30, r27, 0x8
@@ -1588,7 +1588,7 @@ asm void fn_80721620(void)
 lbl_fn_80721620_000012FC:
     addi r3, r30, 0x4
     addi r4, r29, 0xf0
-    bl fn_807252D0
+    bl net_listRemoveNode
     lwz r12, 0x0(r29)
     mr r3, r29
     li r4, -0x1
@@ -1675,7 +1675,7 @@ lbl_fn_80721720_000013F8:
     addi r28, r28, 0xf0
     addi r3, r30, 0x4
     mr r4, r28
-    bl fn_807252D0
+    bl net_listRemoveNode
     lwz r3, 0x8(r30)
     addi r0, r30, 0x8
     b lbl_fn_80721720_00001454
@@ -1702,7 +1702,7 @@ lbl_fn_80721720_0000145C:
     mr r5, r28
     addi r3, r30, 0x4
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r31
     bl OSUnlockMutex
     lwz r0, 0x24(r1)

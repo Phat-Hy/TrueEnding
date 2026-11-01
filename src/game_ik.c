@@ -34,8 +34,8 @@ extern void fn_80715B20(void);
 extern void fn_80715BA0(void);
 extern void fn_80717630(void);
 extern void net_packetDebugLog(void);
-extern void fn_807252A0(void);
-extern void fn_807252D0(void);
+extern void net_listInsertNode(void);
+extern void net_listRemoveNode(void);
 extern int sprintf(char* str, const char* format, ...);
 extern char* strcpy(char* dest, const char* src);
 extern u32 strlen(const char* str);
@@ -1450,7 +1450,7 @@ lbl_fn_800C7DC4_00001168:
     addi r3, r30, 0x370
     addi r4, r1, 0x8
     addi r5, r29, 0x68
-    bl fn_807252A0
+    bl net_listInsertNode
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)
@@ -1490,7 +1490,7 @@ asm void fn_800C7E70(void)
 lbl_fn_800C7E70_000011F8:
     addi r3, r31, 0x370
     addi r4, r29, 0x68
-    bl fn_807252D0
+    bl net_listRemoveNode
     cmpwi r30, 0x0
     ble lbl_fn_800C7E70_00001214
     mr r3, r29

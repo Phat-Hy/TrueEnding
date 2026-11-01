@@ -72,7 +72,7 @@ extern void save_validateHeader(void);
 extern void fn_801F45F4(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotifySlot(void);
-extern void fn_80244CAC(void);
+extern void script_setTaskTerminated(void);
 extern void fn_802A4968(void);
 extern void fn_802A49BC(void);
 extern void fn_802F0990(void);
@@ -922,7 +922,7 @@ lbl_fn_805BAC18_00000AEC:
     lwz r3, 0x40(r31)
     cmpwi r3, 0x0
     beq lbl_fn_805BAC18_00000B08
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_805BAC18_00000B08:
     li r0, 0x3
     stw r0, 0x88(r29)

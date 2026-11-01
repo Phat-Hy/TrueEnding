@@ -25,7 +25,7 @@ extern void atn_Task_setActive(void);
 extern void fn_8010653C(void);
 extern void enemy_calcAttackTrajectory(void);
 extern void fn_8012F440(void);
-extern void fn_80133EE8(void);
+extern void boss_findPartSlotById(void);
 extern void boss_updatePhaseState(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801437D0(void);
@@ -677,7 +677,7 @@ lbl_fn_80254B98_000006F4:
     beq lbl_fn_80254B98_00000744
     addi r3, r3, 0x7d4
     li r4, 0x19
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80254B98_00000744
 lbl_fn_80254B98_00000730:

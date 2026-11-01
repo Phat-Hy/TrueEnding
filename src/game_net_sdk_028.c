@@ -54,7 +54,7 @@ extern void fn_806E5BC0(void);
 extern void fn_806E5D00(void);
 extern void fn_806E6250(void);
 extern void fn_806E64E0(void);
-extern void fn_806E8B10(void);
+extern void str_safeCopy(void);
 extern void net_copyStringSafe(void);
 extern void fn_806EA840(void);
 extern void fn_806EA850(void);
@@ -1721,7 +1721,7 @@ lbl_fn_806DAD50_00001550:
     mr r4, r5
     addi r3, r1, 0x8
     li r5, 0x401
-    bl fn_806E8B10
+    bl str_safeCopy
     addi r4, r1, 0x8
     li r3, 0x2f
     b lbl_fn_806DAD50_00001584
@@ -1996,7 +1996,7 @@ lbl_fn_806DB0A0_000018E0:
     beq lbl_fn_806DB0A0_00001914
     addi r3, r31, 0x8
     li r5, 0x100
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806DB0A0_0000191C
 lbl_fn_806DB0A0_00001914:
     li r0, 0x0
@@ -2008,7 +2008,7 @@ lbl_fn_806DB0A0_0000191C:
     beq lbl_fn_806DB0A0_0000193C
     addi r3, r31, 0x108
     li r5, 0x100
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806DB0A0_00001944
 lbl_fn_806DB0A0_0000193C:
     li r0, 0x0
@@ -2260,7 +2260,7 @@ lbl_fn_806DB460_00001C74:
     mr r4, r5
     addi r3, r1, 0x108
     li r5, 0x100
-    bl fn_806E8B10
+    bl str_safeCopy
     addi r4, r1, 0x108
     li r3, 0x2f
     b lbl_fn_806DB460_00001CA4
@@ -2278,7 +2278,7 @@ lbl_fn_806DB460_00001CA4:
     mr r4, r27
     addi r3, r1, 0x8
     li r5, 0x100
-    bl fn_806E8B10
+    bl str_safeCopy
     addi r4, r1, 0x8
     li r3, 0x2f
     b lbl_fn_806DB460_00001CE4
@@ -2314,11 +2314,11 @@ lbl_fn_806DB460_00001D2C:
     addi r3, r28, 0x3b8
     addi r4, r1, 0x108
     li r5, 0x100
-    bl fn_806E8B10
+    bl str_safeCopy
     addi r3, r28, 0x4b8
     addi r4, r1, 0x8
     li r5, 0x100
-    bl fn_806E8B10
+    bl str_safeCopy
     mr r3, r30
     addi r4, r28, 0x210
     addi r5, r29, 0x1a0

@@ -36,7 +36,7 @@ extern void fn_806D7EE0(void);
 extern void fn_806D7F20(void);
 extern void fn_806D8060(void);
 extern void fn_806D8560(void);
-extern void fn_806D8E30(void);
+extern void net_strdup(void);
 extern void fn_806D8EB0(void);
 extern void fn_806D9060(void);
 extern void fn_806D9EE0(void);
@@ -64,7 +64,7 @@ extern void fn_806E59C0(void);
 extern void fn_806E5A60(void);
 extern void fn_806E5B10(void);
 extern void fn_806E5D00(void);
-extern void fn_806E8B10(void);
+extern void str_safeCopy(void);
 extern void net_formatPlayerInfo(void);
 extern void fn_806E8FB0(void);
 extern void net_setTaggedString(void);
@@ -318,10 +318,10 @@ lbl_fn_806DDA30_00000268:
     lwz r0, 0x10(r1)
     mr r3, r30
     stbx r28, r31, r0
-    bl fn_806D8E30
+    bl net_strdup
     stw r3, 0x0(r27)
     mr r3, r31
-    bl fn_806D8E30
+    bl net_strdup
     stw r3, 0x0(r26)
     mr r3, r20
     mr r5, r30
@@ -2192,19 +2192,19 @@ lbl_fn_806DF610_00001CB4:
     mr r4, r19
     addi r3, r30, 0x110
     li r5, 0x1f
-    bl fn_806E8B10
+    bl str_safeCopy
     mr r4, r20
     addi r3, r30, 0x12f
     li r5, 0x15
-    bl fn_806E8B10
+    bl str_safeCopy
     mr r4, r21
     addi r3, r30, 0x144
     li r5, 0x33
-    bl fn_806E8B10
+    bl str_safeCopy
     mr r4, r22
     addi r3, r30, 0x177
     li r5, 0x1f
-    bl fn_806E8B10
+    bl str_safeCopy
     addi r3, r30, 0x144
     bl fn_806D8EB0
     li r3, 0x308
@@ -2231,18 +2231,18 @@ lbl_fn_806DF610_00001D24:
     mr r4, r23
     addi r3, r19, 0xc2
     li r5, 0x100
-    bl fn_806E8B10
+    bl str_safeCopy
     mr r4, r24
     addi r3, r19, 0x1c2
     li r5, 0x100
-    bl fn_806E8B10
+    bl str_safeCopy
 lbl_fn_806DF610_00001D6C:
     cmpwi r25, 0x0
     beq lbl_fn_806DF610_00001D84
     mr r4, r25
     addi r3, r19, 0x2c2
     li r5, 0x41
-    bl fn_806E8B10
+    bl str_safeCopy
 lbl_fn_806DF610_00001D84:
     mr r3, r18
     mr r5, r19

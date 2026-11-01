@@ -18,7 +18,7 @@ extern void net_socketConnect(void);
 extern void net_socketClose(void);
 extern void fn_806D7B30(void);
 extern void fn_806D7B70(void);
-extern void fn_806D8E30(void);
+extern void net_strdup(void);
 extern void fn_806D8FC0(void);
 extern void fn_806D8FE0(void);
 extern void fn_806D9380(void);
@@ -41,7 +41,7 @@ extern void fn_806E57E0(void);
 extern void fn_806E5970(void);
 extern void fn_806E59C0(void);
 extern void fn_806E5B10(void);
-extern void fn_806E8B10(void);
+extern void str_safeCopy(void);
 extern void fn_806E8B60(void);
 extern void net_formatPlayerInfo(void);
 extern void fn_806E8EC0(void);
@@ -652,7 +652,7 @@ lbl_fn_806DFEC0_00000824:
     addi r4, r1, 0x24
     li r5, 0x15
     stw r0, 0x0(r27)
-    bl fn_806E8B10
+    bl str_safeCopy
     lwz r4, 0x10(r1)
     mr r3, r29
     lwz r0, 0x14(r1)
@@ -1163,7 +1163,7 @@ asm void fn_806E0BA0(void)
     addi r3, r4, 0x8
     mr r4, r0
     li r5, 0x1f
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E0BA0_00000F50
 lbl_fn_806E0BA0_00000F48:
     li r0, 0x0
@@ -1174,7 +1174,7 @@ lbl_fn_806E0BA0_00000F50:
     beq lbl_fn_806E0BA0_00000F6C
     addi r3, r31, 0x27
     li r5, 0x15
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E0BA0_00000F74
 lbl_fn_806E0BA0_00000F6C:
     li r0, 0x0
@@ -1185,7 +1185,7 @@ lbl_fn_806E0BA0_00000F74:
     beq lbl_fn_806E0BA0_00000F90
     addi r3, r31, 0x3c
     li r5, 0x33
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E0BA0_00000F98
 lbl_fn_806E0BA0_00000F90:
     li r0, 0x0
@@ -1196,7 +1196,7 @@ lbl_fn_806E0BA0_00000F98:
     beq lbl_fn_806E0BA0_00000FB4
     addi r3, r31, 0x6f
     li r5, 0x1f
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E0BA0_00000FBC
 lbl_fn_806E0BA0_00000FB4:
     li r0, 0x0
@@ -1207,7 +1207,7 @@ lbl_fn_806E0BA0_00000FBC:
     beq lbl_fn_806E0BA0_00000FD8
     addi r3, r31, 0x8e
     li r5, 0x1f
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E0BA0_00000FE0
 lbl_fn_806E0BA0_00000FD8:
     li r0, 0x0
@@ -1218,7 +1218,7 @@ lbl_fn_806E0BA0_00000FE0:
     beq lbl_fn_806E0BA0_00000FFC
     addi r3, r31, 0xad
     li r5, 0x4c
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E0BA0_00001004
 lbl_fn_806E0BA0_00000FFC:
     li r0, 0x0
@@ -1229,11 +1229,11 @@ lbl_fn_806E0BA0_00001004:
     stw r0, 0xfc(r31)
     addi r4, r30, 0x1c
     li r5, 0xb
-    bl fn_806E8B10
+    bl str_safeCopy
     addi r3, r31, 0x10b
     addi r4, r30, 0x27
     li r5, 0x3
-    bl fn_806E8B10
+    bl str_safeCopy
     lfs f1, 0x2c(r30)
     addic. r4, r30, 0x34
     lfs f0, 0x30(r30)
@@ -1242,7 +1242,7 @@ lbl_fn_806E0BA0_00001004:
     beq lbl_fn_806E0BA0_00001054
     addi r3, r31, 0x118
     li r5, 0x80
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E0BA0_0000105C
 lbl_fn_806E0BA0_00001054:
     li r0, 0x0
@@ -1263,7 +1263,7 @@ lbl_fn_806E0BA0_0000105C:
     beq lbl_fn_806E0BA0_000010A0
     addi r3, r31, 0x1ac
     li r5, 0x33
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E0BA0_000010A8
 lbl_fn_806E0BA0_000010A0:
     li r0, 0x0
@@ -1829,7 +1829,7 @@ lbl_fn_806E0DE0_00001860:
     li r0, 0x0
     addi r3, r1, 0x100
     stw r0, 0x1c(r4)
-    bl fn_806D8E30
+    bl net_strdup
     lwz r4, 0x8(r1)
     stw r3, 0x1c(r4)
 lbl_fn_806E0DE0_00001890:
@@ -1859,31 +1859,31 @@ lbl_fn_806E0DE0_000018DC:
     stwu r0, 0x8(r5)
     bdnz lbl_fn_806E0DE0_000018DC
     lwz r3, 0x190(r1)
-    bl fn_806D8E30
+    bl net_strdup
     lwz r4, 0x10(r30)
     stw r3, 0x0(r4)
     lwz r3, 0x194(r1)
-    bl fn_806D8E30
+    bl net_strdup
     lwz r4, 0x10(r30)
     stw r3, 0x4(r4)
     lwz r3, 0x198(r1)
-    bl fn_806D8E30
+    bl net_strdup
     lwz r4, 0x10(r30)
     stw r3, 0x8(r4)
     lwz r3, 0x19c(r1)
-    bl fn_806D8E30
+    bl net_strdup
     lwz r4, 0x10(r30)
     stw r3, 0xc(r4)
     lwz r3, 0x1a0(r1)
-    bl fn_806D8E30
+    bl net_strdup
     lwz r4, 0x10(r30)
     stw r3, 0x10(r4)
     lwz r3, 0x1a4(r1)
-    bl fn_806D8E30
+    bl net_strdup
     lwz r4, 0x10(r30)
     stw r3, 0x14(r4)
     lwz r3, 0x258(r1)
-    bl fn_806D8E30
+    bl net_strdup
     lwz r4, 0x10(r30)
     stw r3, 0xc8(r4)
 lbl_fn_806E0DE0_00001960:

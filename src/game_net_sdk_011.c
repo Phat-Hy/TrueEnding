@@ -11,7 +11,7 @@ extern void _savegpr_25(void);
 extern void fn_8068446C(void);
 extern void fn_806A7110(void);
 extern void net_checkConnectionSession(void);
-extern void fn_806A7400(void);
+extern void net_memFree(void);
 extern void net_formatLog(void);
 extern void fn_806A9CA0(void);
 extern void fn_806ABA10(void);
@@ -233,7 +233,7 @@ lbl_fn_806AF910_00000158:
     li r3, 0x4
     lwz r4, lbl_8085FF98@l(r31)
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     li r0, 0x0
     stw r0, lbl_8085FF98@l(r31)
 lbl_fn_806AF910_00000174:

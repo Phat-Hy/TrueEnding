@@ -141,7 +141,7 @@ void fn_806A72B0(void);
 void fn_806A72C0(void);
 void fn_806A72E0(void);
 void fn_806A7370(void);
-void fn_806A7400(void);
+void net_memFree(void);
 void fn_806A7420(void);
 void fn_806A74C0(void);
 void fn_806A75C0(void);
@@ -1267,7 +1267,7 @@ lbl_fn_806A7370_00000E7C:
     blr
 }
 
-asm void fn_806A7400(void)
+asm void net_memFree(void)
 {
     nofralloc
     cmpwi r4, 0x0
@@ -1778,12 +1778,12 @@ lbl_fn_806A7A50_00001548:
     beq lbl_fn_806A7A50_00001568
     li r3, 0x6
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
 lbl_fn_806A7A50_00001568:
     mr r4, r31
     li r3, 0x6
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
 lbl_fn_806A7A50_00001578:
     cmpwi r30, 0x0
     bne lbl_fn_806A7A50_00001548
@@ -1895,7 +1895,7 @@ lbl_fn_806A7B50_000016D0:
     beq lbl_fn_806A7B50_000016F4
     li r3, 0x6
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     b lbl_fn_806A7B50_000016F8
 lbl_fn_806A7B50_000016F4:
     li r29, 0x1
@@ -2117,7 +2117,7 @@ lbl_fn_806A7D40_000019B8:
     beq lbl_fn_806A7D40_00001A08
     li r3, 0x6
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
 lbl_fn_806A7D40_00001A08:
     mr r3, r26
     bl fn_806A8160
@@ -2165,7 +2165,7 @@ lbl_fn_806A7FB0_00001A88:
     beq lbl_fn_806A7FB0_00001AA8
     li r3, 0x6
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
 lbl_fn_806A7FB0_00001AA8:
     mr r3, r31
     bl fn_806A8160
@@ -2277,7 +2277,7 @@ asm void fn_806A8160(void)
     lwz r30, 0x1c(r4)
     li r3, 0x6
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     stw r30, lbl_8085FF38@l(r31)
     b lbl_fn_806A8160_00001C7C
 lbl_fn_806A8160_00001C3C:
@@ -2294,7 +2294,7 @@ lbl_fn_806A8160_00001C58:
     li r3, 0x6
     stw r0, 0x1c(r5)
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     b lbl_fn_806A8160_00001C7C
 lbl_fn_806A8160_00001C70:
     lwz r4, 0x1c(r5)
@@ -2536,7 +2536,7 @@ lbl_fn_806A8290_00001F20:
     beq lbl_fn_806A8290_00002804
     li r3, 0x5
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     stw r24, 0x0(r31)
     b lbl_fn_806A8290_00002804
 lbl_fn_806A8290_00001FDC:

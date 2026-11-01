@@ -29,7 +29,7 @@ extern void fn_806D8560(void);
 extern void fn_806D85E0(void);
 extern void fn_806D8C20(void);
 extern void fn_806D8DA0(void);
-extern void fn_806D8E30(void);
+extern void net_strdup(void);
 extern void fn_806D8F10(void);
 extern void fn_806D9590(void);
 extern void fn_806DA860(void);
@@ -1289,7 +1289,7 @@ lbl_fn_806F5920_00001048:
     mr r30, r3
     stbx r0, r28, r3
     mr r3, r28
-    bl fn_806D8E30
+    bl net_strdup
     cmpwi r3, 0x0
     stw r3, 0x18(r31)
     bne lbl_fn_806F5920_00001080
@@ -1333,7 +1333,7 @@ lbl_fn_806F5920_000010EC:
     addi r28, r29, 0x18
 lbl_fn_806F5920_000010FC:
     mr r3, r28
-    bl fn_806D8E30
+    bl net_strdup
     stw r3, 0x24(r31)
     li r30, 0x2b
     b lbl_fn_806F5920_00001114

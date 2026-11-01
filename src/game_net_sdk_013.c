@@ -20,7 +20,7 @@ extern void snprintf(void);
 extern void fn_806A7110(void);
 extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
-extern void fn_806A7400(void);
+extern void net_memFree(void);
 extern void net_formatLog(void);
 extern void fn_806A9CA0(void);
 extern void fn_806AB920(void);
@@ -515,7 +515,7 @@ lbl_fn_806B3DF0_00000578:
     beq lbl_fn_806B3DF0_00000590
     li r3, 0x4
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
 lbl_fn_806B3DF0_00000590:
     addi r22, r22, 0x1
     addi r23, r23, 0xc
@@ -695,7 +695,7 @@ asm void fn_806B42B0(void)
     mr r4, r0
     li r3, 0x4
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     li r0, 0x0
     stw r0, lbl_80860140@l(r17)
 lbl_fn_806B42B0_00000844:

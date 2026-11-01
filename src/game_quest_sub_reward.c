@@ -43,7 +43,7 @@ extern void fn_80116E64(void);
 extern void fn_8012A1E0(void);
 extern void mtx_rotYRad(void);
 extern void fn_80221F54(void);
-extern void fn_80244CAC(void);
+extern void script_setTaskTerminated(void);
 extern void fn_802A7964(void);
 extern void fn_802F0988(void);
 extern void fn_802F0990(void);
@@ -524,7 +524,7 @@ lbl_fn_80487490_00000588:
     lwz r3, 0x241c(r31)
     bl fn_803D2A54
     lwz r3, 0x241c(r31)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     li r0, 0x0
     lis r30, lbl_807C7028@ha
     stw r0, 0x1eac(r31)
@@ -535,7 +535,7 @@ lbl_fn_80487490_00000588:
     addi r4, r30, lbl_807C7028@l
     bl fn_800F833C
     lwz r3, 0x2438(r31)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lfs f1, lbl_80886F8C
     addi r3, r1, 0x30
     stfs f1, 0x2434(r31)

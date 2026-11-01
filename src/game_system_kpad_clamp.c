@@ -68,7 +68,7 @@ extern void fn_802328DC(void);
 extern void fn_8023A60C(void);
 extern void fn_8023A614(void);
 extern void fn_80244674(void);
-extern void fn_80244CAC(void);
+extern void script_setTaskTerminated(void);
 extern void fn_80244FC0(void);
 extern void fn_80267B20(void);
 extern void fn_802A4170(void);
@@ -855,7 +855,7 @@ lbl_fn_803729B4_000008B8:
     li r4, 0x0
     bl fn_80357F38
     mr r3, r26
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r3, r26
     addi r4, r1, 0x2c
     bl fn_8036B438

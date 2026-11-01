@@ -40,8 +40,8 @@ extern void fn_8071D220(void);
 extern void fn_8071D260(void);
 extern void net_packet_enqueueSend(void);
 extern void fn_8071D760(void);
-extern void fn_807252A0(void);
-extern void fn_807252D0(void);
+extern void net_listInsertNode(void);
+extern void net_listRemoveNode(void);
 
 /* External data declarations */
 extern u8 lbl_807C6220[];
@@ -1665,7 +1665,7 @@ lbl_fn_80713040_000014D8:
 lbl_fn_80713040_00001508:
     addi r3, r30, 0x4
     addi r4, r29, 0xf0
-    bl fn_807252D0
+    bl net_listRemoveNode
     lwz r12, 0x0(r29)
     mr r3, r29
     li r4, -0x1
@@ -1771,7 +1771,7 @@ lbl_fn_807131C0_00001644:
     addi r28, r28, 0xf0
     addi r3, r30, 0x4
     mr r4, r28
-    bl fn_807252D0
+    bl net_listRemoveNode
     lwz r3, 0x8(r30)
     addi r0, r30, 0x8
     b lbl_fn_807131C0_000016A0
@@ -1798,7 +1798,7 @@ lbl_fn_807131C0_000016A8:
     mr r5, r28
     addi r3, r30, 0x4
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r31
     bl OSUnlockMutex
     lwz r0, 0x24(r1)

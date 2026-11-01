@@ -11,7 +11,7 @@ extern void fn_8005DF90(void);
 extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
 extern void gx_applyRenderState(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void gx_setRenderStateParam(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -249,7 +249,7 @@ lbl_fn_800B0CD4_000000F0:
     lwz r3, lbl_8087EEE0
     addi r4, r31, 0xb8
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -551,11 +551,11 @@ lbl_fn_800B105C_000003C0:
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x74c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
     addi r4, r31, 0x60
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1

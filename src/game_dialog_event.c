@@ -23,7 +23,7 @@ extern void fn_800F7F80(void);
 extern void fn_800F7FB4(void);
 extern void vec3_sqMag(void);
 extern void equip_getGlobalManager(void);
-extern void fn_80133EE8(void);
+extern void boss_findPartSlotById(void);
 extern void fn_80133F18(void);
 extern void fn_80134270(void);
 extern void fn_80134290(void);
@@ -1042,7 +1042,7 @@ asm void fn_80150460(void)
     addi r29, r4, 0x7d4
     li r4, 0xa
     mr r3, r29
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80150460_00000C7C
     mr r3, r29
@@ -1615,7 +1615,7 @@ lbl_fn_8015076C_00001454:
     beq lbl_fn_8015076C_000014BC
     bl proj_getMatrix
     li r4, 0x18
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8015076C_000014BC
     addi r3, r23, 0x7d4

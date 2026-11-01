@@ -94,7 +94,7 @@ extern void perf_getMetricValue(void);
 extern void fn_802168BC(void);
 extern void fn_80216908(void);
 extern void fn_80244CA0(void);
-extern void fn_80244CAC(void);
+extern void script_setTaskTerminated(void);
 extern void fn_80267B20(void);
 extern void fn_80267B28(void);
 extern void fn_802A36B0(void);
@@ -340,29 +340,29 @@ lbl_fn_803D2A6C_000000BC:
     bl fn_803D2A60
 lbl_fn_803D2A6C_000000D4:
     lwz r3, 0x5c(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x60(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x64(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000000F4
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_803D2A6C_000000F4:
     lwz r3, 0x68(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x6c(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_0000010C
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_803D2A6C_0000010C:
     lwz r3, 0x70(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x74(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x78(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x7c(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r21, r24
     mr r22, r24
     li r19, 0x0
@@ -391,30 +391,30 @@ lbl_fn_803D2A6C_00000170:
     bl fn_803D2A60
 lbl_fn_803D2A6C_00000188:
     lwz r3, 0xbc(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xc0(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xc4(r21)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000001A8
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_803D2A6C_000001A8:
     lwz r3, 0xc8(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xcc(r21)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000001C0
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_803D2A6C_000001C0:
     lwz r3, 0xd0(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xdc(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r23, r22
     li r20, 0x0
 lbl_fn_803D2A6C_000001D8:
     lwz r3, 0x318(r23)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r20, r20, 0x1
     addi r23, r23, 0x4
     cmpwi r20, 0x5
@@ -428,22 +428,22 @@ lbl_fn_803D2A6C_000001D8:
     li r19, 0x0
 lbl_fn_803D2A6C_0000020C:
     lwz r3, 0x574(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x594(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r19, r19, 0x1
     addi r21, r21, 0x4
     cmpwi r19, 0x8
     blt lbl_fn_803D2A6C_0000020C
     lwz r3, 0x5b8(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x3d8(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r21, r24
     li r19, 0x0
 lbl_fn_803D2A6C_00000244:
     lwz r3, 0x3dc(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r19, r19, 0x1
     addi r21, r21, 0x4
     cmpwi r19, 0x4
@@ -459,23 +459,23 @@ lbl_fn_803D2A6C_00000264:
     bl fn_803D2A60
 lbl_fn_803D2A6C_0000027C:
     lwz r3, 0x6fc(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r19, r19, 0x1
     addi r21, r21, 0x4
     cmpwi r19, 0x6
     blt lbl_fn_803D2A6C_00000264
     lwz r3, 0x714(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x71c(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x718(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x720(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x72c(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x730(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r21, r24
     li r19, 0x0
 lbl_fn_803D2A6C_000002CC:
@@ -487,45 +487,45 @@ lbl_fn_803D2A6C_000002CC:
     bl fn_803D2A60
 lbl_fn_803D2A6C_000002E4:
     lwz r3, 0x8a0(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r19, r19, 0x1
     addi r21, r21, 0x4
     cmpwi r19, 0xc
     blt lbl_fn_803D2A6C_000002CC
     lwz r3, 0xa84(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xa88(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x73c(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x740(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x744(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x7b8(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x7bc(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r21, r24
     li r19, 0x0
 lbl_fn_803D2A6C_0000033C:
     lwz r3, 0x814(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x81c(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x824(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x82c(r21)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000364
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_803D2A6C_00000364:
     addi r19, r19, 0x1
     addi r21, r21, 0x4
     cmpwi r19, 0x2
     blt lbl_fn_803D2A6C_0000033C
     lwz r3, 0x83c(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x840(r24)
     bl fn_803CFC58
     cmpwi r3, 0x0
@@ -534,13 +534,13 @@ lbl_fn_803D2A6C_00000364:
     bl fn_803D2A54
 lbl_fn_803D2A6C_00000394:
     lwz r3, 0x840(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r3, r24, 0x85c
     bl fn_803CF734
     lwz r3, 0x844(r24)
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000003B4
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_803D2A6C_000003B4:
     lwz r3, 0x870(r24)
     cmpwi r3, 0x0
@@ -552,7 +552,7 @@ lbl_fn_803D2A6C_000003B4:
     bl fn_803D2A54
 lbl_fn_803D2A6C_000003D4:
     lwz r3, 0x870(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_803D2A6C_000003DC:
     lwz r3, 0x848(r24)
     cmpwi r3, 0x0
@@ -564,27 +564,27 @@ lbl_fn_803D2A6C_000003DC:
     bl fn_803D2A54
 lbl_fn_803D2A6C_000003FC:
     lwz r3, 0x848(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r21, r24
     li r19, 0x0
 lbl_fn_803D2A6C_0000040C:
     lwz r3, 0x84c(r21)
     bl fn_803D2A60
     lwz r3, 0x84c(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r19, r19, 0x1
     addi r21, r21, 0x4
     cmpwi r19, 0x4
     blt lbl_fn_803D2A6C_0000040C
     lwz r3, 0x874(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r21, r24
     li r19, 0x0
 lbl_fn_803D2A6C_0000043C:
     lwz r3, 0x878(r21)
     bl fn_803D2A60
     lwz r3, 0x878(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r19, r19, 0x1
     addi r21, r21, 0x4
     cmpwi r19, 0x4
@@ -594,39 +594,39 @@ lbl_fn_803D2A6C_0000045C:
     li r19, 0x0
 lbl_fn_803D2A6C_00000464:
     lwz r3, 0xb38(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xb3c(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xb40(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xb44(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xb48(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xb4c(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xb50(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xb54(r21)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     addi r19, r19, 0x1
     addi r21, r21, 0x20
     cmpwi r19, 0x8
     blt lbl_fn_803D2A6C_00000464
     lwz r3, 0x2654(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xd70(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xd74(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xdb4(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xdb8(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xdbc(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0xdc0(r24)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     mr r3, r24
     bl fn_803D6DE4
     cmpwi r3, 0x0

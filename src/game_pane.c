@@ -14,7 +14,7 @@ extern void fn_8005DF90(void);
 extern void fn_8005DFC8(void);
 extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_registerInteractionPoint(void);
 extern void fn_800A96AC(void);
@@ -419,7 +419,7 @@ lbl_fn_800AB774_000000A8:
     lwz r3, lbl_8087EEE0
     mr r4, r27
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -681,7 +681,7 @@ lbl_fn_800ABD94_000006A0:
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x40
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -743,7 +743,7 @@ lbl_fn_800ABD94_000006A0:
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x20
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -805,11 +805,11 @@ lbl_fn_800ABD94_000006A0:
     lwz r3, lbl_8087EEE0
     addi r4, r4, lbl_807C7410@l
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
     addi r4, r29, lbl_807C7440@l
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1283,20 +1283,20 @@ asm void fn_800AC6DC(void)
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x74c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r4, lbl_8087EFB4
     li r5, 0x1
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x77c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
     addi r4, r29, 0x8
     li r5, 0x2
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
     addi r4, r29, 0x48
     li r5, 0x3
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x3
     bl GXSetTevDirect

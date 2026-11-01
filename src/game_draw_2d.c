@@ -16,7 +16,7 @@ extern void gx_drawScreenQuad(void);
 extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
 extern void gx_applyRenderState(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void gx_setRenderStateParam(void);
 extern void fn_800848B4(void);
 extern void mem_getAllocSize(void);
@@ -994,7 +994,7 @@ asm void fn_800B2EA0(void)
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x74c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
     slwi r6, r31, 1
     slwi r7, r30, 1
@@ -1072,7 +1072,7 @@ asm void fn_800B2EA0(void)
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x28
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x3
     bl GXSetTevDirect

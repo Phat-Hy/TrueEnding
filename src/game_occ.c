@@ -12,7 +12,7 @@ extern void fn_8006945C(void);
 extern void gx_drawScreenQuad(void);
 extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void model_updateBoneTransforms(void);
 extern void fn_800BFB70(void);
 extern void fn_800C0FBC(void);
@@ -744,7 +744,7 @@ asm void fn_800D775C(void)
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0x8(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -755,7 +755,7 @@ asm void fn_800D775C(void)
     lwz r3, lbl_8087EEE0
     li r5, 0x1
     lwz r4, 0x4(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x1
     li r4, 0x1
     li r5, 0x4
@@ -766,7 +766,7 @@ asm void fn_800D775C(void)
     lwz r3, lbl_8087EEE0
     li r5, 0x2
     lwz r4, 0xc(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x2
     li r4, 0x1
     li r5, 0x4
@@ -1134,7 +1134,7 @@ asm void fn_800D7D00(void)
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0x4(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1255,7 +1255,7 @@ asm void fn_800D7F18(void)
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0x4(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4

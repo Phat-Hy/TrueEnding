@@ -29,7 +29,7 @@ extern void fn_8012E534(void);
 extern void fn_80133B30(void);
 extern void fn_80133BD8(void);
 extern void fn_80133E24(void);
-extern void fn_80133EE8(void);
+extern void boss_findPartSlotById(void);
 extern void fn_80133F18(void);
 extern void fn_80133F6C(void);
 extern void fn_80133FBC(void);
@@ -603,12 +603,12 @@ lbl_ui_drawColoredQuad_0000063C:
     addi r30, r27, 0x7d4
     mr r3, r31
     li r4, 0x1a
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_ui_drawColoredQuad_000006B4
     mr r3, r31
     li r4, 0x1a
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     lwz r4, 0x648(r26)
     li r6, 0x384
     li r0, 0x0
@@ -624,12 +624,12 @@ lbl_ui_drawColoredQuad_0000063C:
 lbl_ui_drawColoredQuad_000006B4:
     mr r3, r31
     li r4, 0x1c
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_ui_drawColoredQuad_00000704
     mr r3, r31
     li r4, 0x1c
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     lwz r4, 0x648(r26)
     li r6, 0x384
     li r0, 0x0
@@ -645,12 +645,12 @@ lbl_ui_drawColoredQuad_000006B4:
 lbl_ui_drawColoredQuad_00000704:
     mr r3, r31
     li r4, 0x1e
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_ui_drawColoredQuad_00000754
     mr r3, r31
     li r4, 0x1e
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     lwz r4, 0x648(r26)
     li r6, 0x384
     li r0, 0x0
@@ -666,12 +666,12 @@ lbl_ui_drawColoredQuad_00000704:
 lbl_ui_drawColoredQuad_00000754:
     mr r3, r31
     li r4, 0x20
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_ui_drawColoredQuad_000007A4
     mr r3, r31
     li r4, 0x20
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     lwz r4, 0x648(r26)
     li r6, 0x12c
     li r0, 0x0
@@ -687,12 +687,12 @@ lbl_ui_drawColoredQuad_00000754:
 lbl_ui_drawColoredQuad_000007A4:
     mr r3, r31
     li r4, 0x34
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_ui_drawColoredQuad_0000083C
     mr r3, r31
     li r4, 0x34
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     lwz r6, 0x4(r24)
     lis r4, 0x4330
     lwz r0, 0x4(r3)
@@ -1468,7 +1468,7 @@ lbl_fn_8003F538_00001240:
 lbl_fn_8003F538_00001278:
     mr r3, r24
     li r4, 0x30
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_000012B8
     xoris r0, r28, 0x8000
@@ -1491,7 +1491,7 @@ lbl_fn_8003F538_000012B8:
     bne lbl_fn_8003F538_000012E8
     mr r3, r24
     li r4, 0x1
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_000012E8
 lbl_fn_8003F538_000012E4:
@@ -2061,7 +2061,7 @@ lbl_fn_8003F538_00001AA8:
 lbl_fn_8003F538_00001AF4:
     mr r3, r24
     li r4, 0x3
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_00001B48
     mr r3, r24
@@ -2083,7 +2083,7 @@ lbl_fn_8003F538_00001AF4:
 lbl_fn_8003F538_00001B48:
     mr r3, r24
     li r4, 0x41
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_00001B70
     mr r3, r24
@@ -2094,7 +2094,7 @@ lbl_fn_8003F538_00001B48:
 lbl_fn_8003F538_00001B70:
     mr r3, r24
     li r4, 0x42
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_00001BF0
     lwz r0, 0xac(r23)
@@ -2127,7 +2127,7 @@ lbl_fn_8003F538_00001B70:
 lbl_fn_8003F538_00001BF0:
     mr r3, r24
     li r4, 0x3b
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_00001C48
     mr r3, r24
@@ -2150,7 +2150,7 @@ lbl_fn_8003F538_00001BF0:
 lbl_fn_8003F538_00001C48:
     mr r3, r24
     li r4, 0xb
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_00001CA0
     xoris r0, r29, 0x8000
@@ -2202,7 +2202,7 @@ lbl_fn_8003F538_00001CFC:
 lbl_fn_8003F538_00001D0C:
     mr r3, r24
     li r4, 0xe
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8003F538_00001D24
     li r23, 0x0
@@ -2259,7 +2259,7 @@ asm void fn_80040434(void)
     stw r30, 0x8(r1)
     mr r30, r3
     mr r3, r31
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040434_00001EE8
     lfs f0, lbl_808807C8
@@ -2937,7 +2937,7 @@ lbl_fn_80040B44_000026B8:
     bne lbl_fn_80040B44_00002818
     mr r3, r22
     li r4, 0x10
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_00002714
     lwz r26, lbl_8087F048
@@ -2954,63 +2954,63 @@ lbl_fn_80040B44_000026B8:
 lbl_fn_80040B44_00002714:
     mr r3, r22
     li r4, 0x11
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_0000272C
     oris r29, r29, 0x1
 lbl_fn_80040B44_0000272C:
     mr r3, r22
     li r4, 0x12
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_00002744
     oris r29, r29, 0x40
 lbl_fn_80040B44_00002744:
     mr r3, r22
     li r4, 0x13
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_0000275C
     ori r29, r29, 0x80
 lbl_fn_80040B44_0000275C:
     mr r3, r22
     li r4, 0x14
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_00002774
     ori r29, r29, 0x1
 lbl_fn_80040B44_00002774:
     mr r3, r22
     li r4, 0x15
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_0000278C
     ori r29, r29, 0x40
 lbl_fn_80040B44_0000278C:
     mr r3, r22
     li r4, 0x16
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_000027A4
     ori r29, r29, 0x10
 lbl_fn_80040B44_000027A4:
     mr r3, r22
     li r4, 0x17
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_000027BC
     ori r29, r29, 0x8000
 lbl_fn_80040B44_000027BC:
     mr r3, r22
     li r4, 0x19
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_000027D4
     ori r29, r29, 0x4
 lbl_fn_80040B44_000027D4:
     mr r3, r22
     li r4, 0x18
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80040B44_00002818
     rlwinm r0, r24, 0, 28, 28

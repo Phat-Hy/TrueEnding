@@ -116,7 +116,7 @@ void fn_8007A530(void);
 void fn_8007A748(void);
 void fn_8007A75C(void);
 void fn_8007A7BC(void);
-void fn_8007A994(void);
+void str_nextToken(void);
 void fn_8007AA30(void);
 void fn_8007AA64(void);
 void fn_8007AB38(void);
@@ -1964,7 +1964,7 @@ lbl_fn_8007A7BC_00001940:
     blr
 }
 
-asm void fn_8007A994(void)
+asm void str_nextToken(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1975,40 +1975,40 @@ asm void fn_8007A994(void)
     mr r27, r4
     mr r28, r5
     li r31, 0x0
-    b lbl_fn_8007A994_00001984
-lbl_fn_8007A994_00001980:
+    b lbl_str_nextToken_00001984
+lbl_str_nextToken_00001980:
     addi r30, r30, 0x1
-lbl_fn_8007A994_00001984:
+lbl_str_nextToken_00001984:
     lbz r0, 0x0(r30)
     extsb. r4, r0
-    beq lbl_fn_8007A994_000019A0
+    beq lbl_str_nextToken_000019A0
     mr r3, r27
     bl strchr
     cmpwi r3, 0x0
-    bne lbl_fn_8007A994_00001980
-lbl_fn_8007A994_000019A0:
+    bne lbl_str_nextToken_00001980
+lbl_str_nextToken_000019A0:
     mr r29, r30
-    b lbl_fn_8007A994_000019B0
-lbl_fn_8007A994_000019A8:
+    b lbl_str_nextToken_000019B0
+lbl_str_nextToken_000019A8:
     addi r29, r29, 0x1
     addi r31, r31, 0x1
-lbl_fn_8007A994_000019B0:
+lbl_str_nextToken_000019B0:
     lbz r0, 0x0(r29)
     extsb. r4, r0
-    beq lbl_fn_8007A994_000019CC
+    beq lbl_str_nextToken_000019CC
     mr r3, r27
     bl strchr
     cmpwi r3, 0x0
-    beq lbl_fn_8007A994_000019A8
-lbl_fn_8007A994_000019CC:
+    beq lbl_str_nextToken_000019A8
+lbl_str_nextToken_000019CC:
     cmpwi r31, 0x0
     stw r31, 0x0(r28)
-    bne lbl_fn_8007A994_000019E0
+    bne lbl_str_nextToken_000019E0
     li r3, 0x0
-    b lbl_fn_8007A994_000019E4
-lbl_fn_8007A994_000019E0:
+    b lbl_str_nextToken_000019E4
+lbl_str_nextToken_000019E0:
     mr r3, r30
-lbl_fn_8007A994_000019E4:
+lbl_str_nextToken_000019E4:
     lmw r27, 0xc(r1)
     lwz r0, 0x24(r1)
     mtlr r0

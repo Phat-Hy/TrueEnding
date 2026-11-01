@@ -188,7 +188,7 @@ void fn_800760E8(void);
 void fn_80076174(void);
 void gx_applyRenderState(void);
 void fn_800763C0(void);
-void fn_800763FC(void);
+void seq_bindSlotResource(void);
 void fn_8007642C(void);
 void gx_setRenderStateParam(void);
 void fn_80076A28(void);
@@ -5022,7 +5022,7 @@ lbl_fn_800763C0_000045CC:
     blr
 }
 
-asm void fn_800763FC(void)
+asm void seq_bindSlotResource(void)
 {
     nofralloc
     slwi r0, r5, 2

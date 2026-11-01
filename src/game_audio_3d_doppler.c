@@ -28,7 +28,7 @@ extern void fn_80129978(void);
 extern void path_resetWaypointVelocity(void);
 extern void boss_setPartCollisionFlags(void);
 extern void actor_testBitFlag(void);
-extern void fn_80133EE8(void);
+extern void boss_findPartSlotById(void);
 extern void npc_getGlobalManager(void);
 extern void npc_initScriptContext(void);
 extern void quest_updateFlow(void);
@@ -980,7 +980,7 @@ lbl_fn_80323E50_00000AEC:
     beq lbl_fn_80323E50_00000BE4
     addi r3, r3, 0x7d4
     li r4, 0x18
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_80323E50_00000BE4
 lbl_fn_80323E50_00000B40:

@@ -44,7 +44,7 @@ void fn_80084E08(void);
 void fn_80084E0C(void);
 u32 fn_80084E44(const void *p);
 void fn_80084E4C(void);
-void fn_80084E50(void);
+void field_initContext(void);
 void fn_80084E78(void);
 void fn_80084EE8(void);
 void* field_getTextureSlot(void* field, u32 arg2, u32 arg3);
@@ -143,15 +143,15 @@ lbl_fn_80084110_00000118:
     bdnz lbl_fn_80084110_00000118
 lbl_fn_80084110_00000130:
     addi r3, r31, 0x138
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x150
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x168
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x180
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x198
-    bl fn_80084E50
+    bl field_initContext
     li r0, 0x0
     stw r0, 0x1b0(r31)
     mr r3, r31
@@ -285,15 +285,15 @@ lbl_mem_alloc_00000320:
     bdnz lbl_mem_alloc_00000320
 lbl_mem_alloc_00000338:
     addi r3, r31, 0x138
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x150
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x168
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x180
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x198
-    bl fn_80084E50
+    bl field_initContext
     li r0, 0x0
     stw r0, 0x1b0(r31)
     mr r3, r31
@@ -403,15 +403,15 @@ lbl_mem_free_000004D0:
     bdnz lbl_mem_free_000004D0
 lbl_mem_free_000004E8:
     addi r3, r31, 0x138
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x150
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x168
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x180
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x198
-    bl fn_80084E50
+    bl field_initContext
     li r0, 0x0
     stw r0, 0x1b0(r31)
     mr r3, r31
@@ -558,15 +558,15 @@ lbl_mem_realloc_000006FC:
     bdnz lbl_mem_realloc_000006FC
 lbl_mem_realloc_00000714:
     addi r3, r31, 0x138
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x150
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x168
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x180
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x198
-    bl fn_80084E50
+    bl field_initContext
     li r0, 0x0
     stw r0, 0x1b0(r31)
     mr r3, r31
@@ -680,15 +680,15 @@ lbl_fn_800848B4_000008BC:
     bdnz lbl_fn_800848B4_000008BC
 lbl_fn_800848B4_000008D4:
     addi r3, r31, 0x138
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x150
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x168
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x180
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x198
-    bl fn_80084E50
+    bl field_initContext
     li r0, 0x0
     stw r0, 0x1b0(r31)
     mr r3, r31
@@ -799,15 +799,15 @@ lbl_field_initGridPoints_00000A70:
     bdnz lbl_field_initGridPoints_00000A70
 lbl_field_initGridPoints_00000A88:
     addi r3, r31, 0x138
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x150
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x168
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x180
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x198
-    bl fn_80084E50
+    bl field_initContext
     li r0, 0x0
     stw r0, 0x1b0(r31)
     mr r3, r31
@@ -916,15 +916,15 @@ lbl_mem_getAllocSize_00000C1C:
     bdnz lbl_mem_getAllocSize_00000C1C
 lbl_mem_getAllocSize_00000C34:
     addi r3, r31, 0x138
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x150
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x168
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x180
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x198
-    bl fn_80084E50
+    bl field_initContext
     li r0, 0x0
     stw r0, 0x1b0(r31)
     mr r3, r31
@@ -1005,7 +1005,7 @@ u32 fn_80084E44(const void *p)
 void fn_80084E4C(void) {
 }
 
-asm void fn_80084E50(void)
+asm void field_initContext(void)
 {
     nofralloc
     lis r4, lbl_807785D8@ha

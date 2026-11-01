@@ -23,7 +23,7 @@ extern void fn_807183D0(void);
 extern void fn_8071E680(void);
 extern void fn_8071E970(void);
 extern void fn_80725170(void);
-extern void fn_807252D0(void);
+extern void net_listRemoveNode(void);
 
 /* External data declarations */
 extern u8 lbl_8076B868[];
@@ -2514,7 +2514,7 @@ lbl_fn_8070B640_00002014:
 lbl_fn_8070B640_00002060:
     addi r3, r22, 0x4
     addi r4, r21, 0xd8
-    bl fn_807252D0
+    bl net_listRemoveNode
     cmpwi r21, 0x0
     beq lbl_fn_8070B640_00002080
     mr r3, r22

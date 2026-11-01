@@ -24,7 +24,7 @@ extern void gx_drawScreenQuad(void);
 extern void seq_stepPlaybackTimer(void);
 extern void fn_800760BC(void);
 extern void fn_800760D0(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void gx_setRenderStateParam(void);
 extern void fn_80076FF8(void);
 extern void fn_8007FAF0(void);
@@ -333,7 +333,7 @@ lbl_fn_804ABA2C_00000144:
     bl fn_803D71C4
     mr r4, r27
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     mr r3, r29
     bl fn_800BFB70
     addi r3, r1, 0xc0

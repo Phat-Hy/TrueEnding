@@ -18,7 +18,7 @@ extern void fn_8068446C(void);
 extern void fn_806A7110(void);
 extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
-extern void fn_806A7400(void);
+extern void net_memFree(void);
 extern void net_formatLog(void);
 extern void fn_806AB920(void);
 extern void http_formatParam(void);
@@ -2019,7 +2019,7 @@ lbl_fn_806B3220_000019D8:
     beq lbl_fn_806B3220_00001A18
     li r3, 0x4
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
 lbl_fn_806B3220_00001A18:
     lis r26, lbl_80860158@ha
     mr r3, r29
@@ -2326,7 +2326,7 @@ lbl_fn_806B3680_00001E38:
     beq lbl_fn_806B3680_00001E7C
     li r3, 0x4
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
 lbl_fn_806B3680_00001E7C:
     lis r26, lbl_80860158@ha
     mr r3, r29

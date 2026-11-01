@@ -46,7 +46,7 @@ extern void fn_806A6E40(void);
 extern void fn_806A7110(void);
 extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
-extern void fn_806A7400(void);
+extern void net_memFree(void);
 extern void fn_806A75C0(void);
 extern void net_formatLog(void);
 extern void fn_806AA690(void);
@@ -1970,7 +1970,7 @@ lbl_fn_806D2F50_00001A9C:
     mr r4, r27
     li r3, 0x8
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     li r0, 0x4
     addi r4, r1, 0x1c
     addi r3, r1, 0x8

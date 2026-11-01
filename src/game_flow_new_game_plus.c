@@ -24,7 +24,7 @@ extern void fn_801031D0(void);
 extern void hurtbox_testCollisionLayer(void);
 extern void fn_80109864(void);
 extern void enemy_calcAttackTrajectory(void);
-extern void fn_80133EE8(void);
+extern void boss_findPartSlotById(void);
 extern void fn_80133F18(void);
 extern void quest_getRewardItemSlot(void);
 extern void fn_80150460(void);
@@ -934,7 +934,7 @@ lbl_fn_804EFF78_00000B6C:
     beq lbl_fn_804EFF78_00000D00
     addi r3, r27, 0x7d4
     li r4, 0x23
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_804EFF78_00000D00
     lwz r0, 0x7e0(r26)

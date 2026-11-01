@@ -15,7 +15,7 @@ extern void fn_800FA4FC(void);
 extern void clip_calculateFrustum(void);
 extern void fn_800FBA9C(void);
 extern void fn_800FC410(void);
-extern void fn_80133EE8(void);
+extern void boss_findPartSlotById(void);
 extern void boss_findPartById(void);
 extern void quest_getRewardItemSlot(void);
 extern void task_findEntryById(void);
@@ -766,7 +766,7 @@ lbl_scissor_clipFrustum_00000994:
     stfs f6, 0x1a0(r1)
     stfs f4, 0x19c(r1)
     stfs f0, 0x198(r1)
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     bne lbl_scissor_clipFrustum_00000A74
     addi r3, r16, 0x7d4
@@ -803,7 +803,7 @@ lbl_scissor_clipFrustum_00000A98:
 lbl_scissor_clipFrustum_00000AD4:
     addi r3, r16, 0x7d4
     li r4, 0x2f
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     bne lbl_scissor_clipFrustum_00000AFC
     addi r3, r16, 0x7d4
@@ -840,7 +840,7 @@ lbl_scissor_clipFrustum_00000B20:
 lbl_scissor_clipFrustum_00000B5C:
     addi r3, r16, 0x7d4
     li r4, 0x32
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     bne lbl_scissor_clipFrustum_00000B84
     addi r3, r16, 0x7d4
@@ -980,7 +980,7 @@ lbl_scissor_clipFrustum_00000CE0:
 lbl_scissor_clipFrustum_00000D78:
     addi r3, r16, 0x7d4
     li r4, 0x34
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_scissor_clipFrustum_00000E28
     stfs f25, 0xe0(r1)
@@ -1026,17 +1026,17 @@ lbl_scissor_clipFrustum_00000DF0:
 lbl_scissor_clipFrustum_00000E28:
     addi r3, r16, 0x7d4
     li r4, 0x7
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     bne lbl_scissor_clipFrustum_00000E64
     addi r3, r16, 0x7d4
     li r4, 0x8
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     bne lbl_scissor_clipFrustum_00000E64
     addi r3, r16, 0x7d4
     li r4, 0x9
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_scissor_clipFrustum_0000110C
 lbl_scissor_clipFrustum_00000E64:
@@ -1109,7 +1109,7 @@ lbl_scissor_clipFrustum_00000F58:
     li r4, 0x8
     addi r0, r5, 0x1
     stw r0, 0x3c0(r1)
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_scissor_clipFrustum_00001048
     lwz r3, lbl_8087F8A0
@@ -1229,7 +1229,7 @@ lbl_scissor_clipFrustum_00001104:
 lbl_scissor_clipFrustum_0000110C:
     addi r3, r16, 0x7d4
     li r4, 0x3e
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     mr r19, r3
     beq lbl_scissor_clipFrustum_00001194

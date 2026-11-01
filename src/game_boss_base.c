@@ -44,7 +44,7 @@ void fn_8013354C(void);
 void fn_80133B30(void);
 void fn_80133BD8(void);
 void fn_80133E24(void);
-void fn_80133EE8(void);
+void boss_findPartSlotById(void);
 void fn_80133F18(void);
 void fn_80133F6C(void);
 void fn_80133FBC(void);
@@ -1085,21 +1085,21 @@ lbl_fn_80133E24_00000DC0:
     blr
 }
 
-asm void fn_80133EE8(void)
+asm void boss_findPartSlotById(void)
 {
     nofralloc
     lwz r0, 0x304(r3)
     addi r3, r3, 0x308
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_80133EE8_00000E04
-lbl_fn_80133EE8_00000DF0:
+    ble lbl_boss_findPartSlotById_00000E04
+lbl_boss_findPartSlotById_00000DF0:
     lwz r0, 0x0(r3)
     cmpw r0, r4
     beqlr
     addi r3, r3, 0x14
-    bdnz lbl_fn_80133EE8_00000DF0
-lbl_fn_80133EE8_00000E04:
+    bdnz lbl_boss_findPartSlotById_00000DF0
+lbl_boss_findPartSlotById_00000E04:
     li r3, 0x0
     blr
 }

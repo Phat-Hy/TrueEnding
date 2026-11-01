@@ -45,8 +45,8 @@ extern void net_getGlobalContext(void);
 extern void fn_80721120(void);
 extern void fn_80725170(void);
 extern void fn_80725200(void);
-extern void fn_807252A0(void);
-extern void fn_807252D0(void);
+extern void net_listInsertNode(void);
+extern void net_listRemoveNode(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -2505,7 +2505,7 @@ asm void fn_80717C10(void)
     addi r31, r30, 0x100
     addi r3, r29, 0xc
     mr r4, r31
-    bl fn_807252D0
+    bl net_listRemoveNode
     bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
@@ -2549,7 +2549,7 @@ lbl_fn_80717C10_00001F70:
     mr r5, r31
     addi r3, r29, 0xc
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
@@ -2629,7 +2629,7 @@ lbl_fn_80717D10_00002088:
     add r3, r30, r0
     addi r0, r3, 0x4
     stw r0, 0x10(r1)
-    bl fn_807252A0
+    bl net_listInsertNode
 lbl_fn_80717D10_000020A4:
     lwz r0, 0xc(r31)
     cmpwi r0, 0x0
@@ -2653,7 +2653,7 @@ lbl_fn_80717D10_000020D0:
     mr r5, r28
     addi r3, r31, 0xc
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
 lbl_fn_80717D10_000020F8:
     lwz r0, 0x0(r29)
     cmpwi r0, 0x0

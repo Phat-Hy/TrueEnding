@@ -113,8 +113,8 @@ void fn_80725150(void);
 void fn_80725170(void);
 void fn_80725200(void);
 void fn_80725250(void);
-void fn_807252A0(void);
-void fn_807252D0(void);
+void net_listInsertNode(void);
+void net_listRemoveNode(void);
 void fn_80725300(void);
 void fn_80725310(void);
 void fn_80725350(void);
@@ -1166,7 +1166,7 @@ lbl_fn_80725250_00000D98:
     blr
 }
 
-asm void fn_807252A0(void)
+asm void net_listInsertNode(void)
 {
     nofralloc
     lwz r4, 0x0(r4)
@@ -1182,7 +1182,7 @@ asm void fn_807252A0(void)
     blr
 }
 
-asm void fn_807252D0(void)
+asm void net_listRemoveNode(void)
 {
     nofralloc
     lwz r6, 0x0(r4)

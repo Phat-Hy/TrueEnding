@@ -41,7 +41,7 @@ extern void fn_806D7C40(void);
 extern void fn_806D7D60(void);
 extern void fn_806D7EE0(void);
 extern void fn_806D8060(void);
-extern void fn_806D8E30(void);
+extern void net_strdup(void);
 extern void fn_806D8F10(void);
 extern void net_getTimestampMs(void);
 extern void fn_806D8F80(void);
@@ -1838,7 +1838,7 @@ asm void fn_807007A0(void)
     b lbl_fn_807007A0_000016E8
 lbl_fn_807007A0_000016C0:
     mr r3, r31
-    bl fn_806D8E30
+    bl net_strdup
     stw r3, 0x8(r1)
     li r0, 0x1
     mr r3, r30

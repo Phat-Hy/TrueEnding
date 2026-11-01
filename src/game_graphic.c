@@ -14,7 +14,7 @@ extern void fn_8005DF90(void);
 extern void fn_800610A4(void);
 extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void dungeon_initGlobalContext(void);
 extern void town_registerInteractionPoint(void);
 extern void town_updateInteractionPoints(void);
@@ -642,7 +642,7 @@ lbl_fn_800AF544_0000065C:
     li r5, 0x2
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x74c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x2
     li r4, 0x1
     li r5, 0x4
@@ -672,12 +672,12 @@ lbl_fn_800AF544_000007B0:
     lwz r3, lbl_8087EEE0
     addi r4, r24, 0x38
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r4, lbl_8087EFB4
     li r5, 0x1
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x77c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -1064,11 +1064,11 @@ lbl_fn_800AF544_00000C1C:
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x74c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
     addi r4, r24, 0x8
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x4
     li r5, 0x1
@@ -1617,7 +1617,7 @@ lbl_fn_800AFFEC_000014D0:
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x74c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x0
@@ -1683,7 +1683,7 @@ lbl_fn_800AFFEC_000014D0:
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x74c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
     bl seq_stepPlaybackTimer
     li r3, 0x1
@@ -1732,7 +1732,7 @@ lbl_fn_800AFFEC_00001708:
     slwi r0, r0, 5
     add r4, r28, r0
     addi r4, r4, 0x4
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lfs f1, lbl_80880E40
     addi r4, r1, 0x8
     lfs f5, 0x28(r1)
@@ -2087,7 +2087,7 @@ asm void fn_800B0A70(void)
     lwz r3, lbl_8087EEE0
     addi r4, r28, 0x88
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5

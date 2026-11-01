@@ -10,7 +10,7 @@ extern void _restgpr_23(void);
 extern void _restgpr_27(void);
 extern void _savegpr_23(void);
 extern void _savegpr_27(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void fn_805B697C(void);
 extern void fn_805E4090(void);
 extern void fn_805E7480(void);
@@ -528,7 +528,7 @@ asm void fn_805B53D0(void)
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x48
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     srawi r31, r27, 1
     mr r4, r30
     srawi r30, r26, 1
@@ -553,7 +553,7 @@ asm void fn_805B53D0(void)
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x28
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
     mr r4, r23
     addi r3, r1, 0x8
     clrlwi r5, r30, 16
@@ -576,7 +576,7 @@ asm void fn_805B53D0(void)
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x8
     li r5, 0x2
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x80
     li r4, 0x7
     li r5, 0x4

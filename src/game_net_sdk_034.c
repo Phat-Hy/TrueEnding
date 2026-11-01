@@ -29,7 +29,7 @@ extern void fn_806DEE40(void);
 extern void fn_806E3980(void);
 extern void fn_806E5F90(void);
 extern void fn_806E6160(void);
-extern void fn_806E8B10(void);
+extern void str_safeCopy(void);
 extern void fn_806E8B60(void);
 extern void net_formatPlayerInfo(void);
 extern void fn_806E8EC0(void);
@@ -136,7 +136,7 @@ lbl_fn_806E6250_000000FC:
     mr r4, r22
     li r5, 0x1f
     addi r3, r3, 0x28
-    bl fn_806E8B10
+    bl str_safeCopy
 lbl_fn_806E6250_00000110:
     cmpwi r23, 0x0
     bne lbl_fn_806E6250_00000128
@@ -149,7 +149,7 @@ lbl_fn_806E6250_00000128:
     mr r4, r23
     li r5, 0x15
     addi r3, r3, 0x47
-    bl fn_806E8B10
+    bl str_safeCopy
 lbl_fn_806E6250_0000013C:
     cmpwi r24, 0x0
     bne lbl_fn_806E6250_00000154
@@ -162,7 +162,7 @@ lbl_fn_806E6250_00000154:
     mr r4, r24
     li r5, 0x33
     addi r3, r3, 0xa0
-    bl fn_806E8B10
+    bl str_safeCopy
 lbl_fn_806E6250_00000168:
     lwz r3, 0xc(r1)
     addi r3, r3, 0xa0
@@ -178,7 +178,7 @@ lbl_fn_806E6250_0000018C:
     mr r4, r25
     li r5, 0x1f
     addi r3, r3, 0xd3
-    bl fn_806E8B10
+    bl str_safeCopy
 lbl_fn_806E6250_000001A0:
     cmpwi r26, 0x0
     bne lbl_fn_806E6250_000001B8
@@ -191,7 +191,7 @@ lbl_fn_806E6250_000001B8:
     mr r4, r26
     li r5, 0x1f
     addi r3, r3, 0xf2
-    bl fn_806E8B10
+    bl str_safeCopy
 lbl_fn_806E6250_000001CC:
     lwz r3, 0xc(r1)
     cmpwi r28, 0x0
@@ -1151,7 +1151,7 @@ lbl_fn_806E65E0_00000FC4:
     addi r3, r18, 0x4
     addi r4, r1, 0x100
     li r5, 0x1f
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E65E0_000010E0
 lbl_fn_806E65E0_00000FEC:
     addi r3, r1, 0x300
@@ -1162,7 +1162,7 @@ lbl_fn_806E65E0_00000FEC:
     addi r3, r18, 0x23
     addi r4, r1, 0x100
     li r5, 0x15
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E65E0_000010E0
 lbl_fn_806E65E0_00001014:
     addi r3, r1, 0x300
@@ -1183,7 +1183,7 @@ lbl_fn_806E65E0_00001038:
     addi r3, r18, 0x3c
     addi r4, r1, 0x100
     li r5, 0x1f
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E65E0_000010E0
 lbl_fn_806E65E0_00001060:
     addi r3, r1, 0x300
@@ -1194,7 +1194,7 @@ lbl_fn_806E65E0_00001060:
     addi r3, r18, 0x5b
     addi r4, r1, 0x100
     li r5, 0x1f
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E65E0_000010E0
 lbl_fn_806E65E0_00001088:
     addi r3, r1, 0x300
@@ -1205,7 +1205,7 @@ lbl_fn_806E65E0_00001088:
     addi r3, r18, 0x7a
     addi r4, r1, 0x100
     li r5, 0x33
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E65E0_000010E0
 lbl_fn_806E65E0_000010B0:
     addi r3, r1, 0x300
@@ -1328,7 +1328,7 @@ lbl_fn_806E65E0_0000125C:
     addi r4, r31, 0xa0
     li r5, 0x33
     addi r3, r3, 0x4
-    bl fn_806E8B10
+    bl str_safeCopy
     lbz r0, 0x100(r1)
     cmpwi r0, 0x30
     bne lbl_fn_806E65E0_00001284
@@ -1452,7 +1452,7 @@ lbl_fn_806E65E0_00001410:
     lwz r3, 0x3c(r16)
     slwi r0, r0, 2
     lwzx r3, r3, r0
-    bl fn_806E8B10
+    bl str_safeCopy
     lwz r3, 0x38(r16)
     addi r0, r3, 0x1
     stw r0, 0x38(r16)
@@ -1500,7 +1500,7 @@ lbl_fn_806E65E0_000014BC:
     slwi r0, r0, 2
     add r3, r3, r0
     lwz r3, -0x4(r3)
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E65E0_00001538
 lbl_fn_806E65E0_000014F4:
     addi r3, r1, 0x300
@@ -1632,7 +1632,7 @@ lbl_fn_806E65E0_000016B4:
     addi r3, r15, 0x28
     addi r4, r1, 0x100
     li r5, 0x100
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E65E0_00001700
 lbl_fn_806E65E0_000016DC:
     addi r3, r1, 0x300
@@ -1643,7 +1643,7 @@ lbl_fn_806E65E0_000016DC:
     addi r3, r15, 0x4
     addi r4, r1, 0x100
     li r5, 0x1f
-    bl fn_806E8B10
+    bl str_safeCopy
 lbl_fn_806E65E0_00001700:
     addi r3, r1, 0x300
     addi r4, r20, 0x414
@@ -1997,7 +1997,7 @@ lbl_fn_806E65E0_00001BF4:
     addi r3, r18, 0x4
     addi r4, r1, 0x100
     li r5, 0x1f
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E65E0_00001CEC
 lbl_fn_806E65E0_00001C1C:
     addi r3, r1, 0x300
@@ -2008,7 +2008,7 @@ lbl_fn_806E65E0_00001C1C:
     addi r3, r18, 0x23
     addi r4, r1, 0x100
     li r5, 0x15
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E65E0_00001CEC
 lbl_fn_806E65E0_00001C44:
     addi r3, r1, 0x300
@@ -2019,7 +2019,7 @@ lbl_fn_806E65E0_00001C44:
     addi r3, r18, 0x3c
     addi r4, r1, 0x100
     li r5, 0x1f
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E65E0_00001CEC
 lbl_fn_806E65E0_00001C6C:
     addi r3, r1, 0x300
@@ -2030,7 +2030,7 @@ lbl_fn_806E65E0_00001C6C:
     addi r3, r18, 0x5b
     addi r4, r1, 0x100
     li r5, 0x1f
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E65E0_00001CEC
 lbl_fn_806E65E0_00001C94:
     addi r3, r1, 0x300
@@ -2041,7 +2041,7 @@ lbl_fn_806E65E0_00001C94:
     addi r3, r18, 0x7a
     addi r4, r1, 0x100
     li r5, 0x33
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E65E0_00001CEC
 lbl_fn_806E65E0_00001CBC:
     addi r3, r1, 0x300
@@ -2207,7 +2207,7 @@ lbl_fn_806E65E0_00001EF4:
     addi r3, r16, 0x4
     addi r4, r1, 0x100
     li r5, 0x15
-    bl fn_806E8B10
+    bl str_safeCopy
     b lbl_fn_806E65E0_00001F4C
 lbl_fn_806E65E0_00001F1C:
     addi r3, r1, 0x300
@@ -2349,7 +2349,7 @@ lbl_fn_806E65E0_000020CC:
 lbl_fn_806E65E0_00002114:
     addi r4, r1, 0x100
     li r5, 0x15
-    bl fn_806E8B10
+    bl str_safeCopy
     addi r15, r15, 0x4
     addi r17, r17, 0x1
     b lbl_fn_806E65E0_00002174

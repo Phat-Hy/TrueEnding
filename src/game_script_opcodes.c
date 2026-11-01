@@ -108,7 +108,7 @@ void fn_80244674(void);
 void fn_802446F0(void);
 void fn_80244898(void);
 void fn_80244CA0(void);
-void fn_80244CAC(void);
+void script_setTaskTerminated(void);
 void fn_80244CBC(void);
 void fn_80244CCC(void);
 void fn_80244FC0(void);
@@ -541,7 +541,7 @@ lbl_fn_80244898_00000584:
     li r4, 0x0
     bl atn_Task_setActive
     lwz r3, 0x15bc(r28)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
     lwz r3, 0x15bc(r28)
     li r4, 0x0
     bl fn_80244CBC
@@ -551,7 +551,7 @@ lbl_fn_80244898_00000584:
     li r4, 0x0
     bl atn_Task_setActive
     lwz r3, 0x1438(r28)
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_80244898_00000600:
     li r3, 0x1
     b lbl_fn_80244898_0000060C
@@ -576,7 +576,7 @@ asm void fn_80244CA0(void)
     blr
 }
 
-asm void fn_80244CAC(void)
+asm void script_setTaskTerminated(void)
 {
     nofralloc
     lwz r0, 0x38(r3)

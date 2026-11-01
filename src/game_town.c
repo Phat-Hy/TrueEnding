@@ -5,7 +5,7 @@
 extern void __register_global_object(void);
 extern void fn_80082BE0(void);
 extern void fn_80082CAC(void);
-extern void fn_80084E50(void);
+extern void field_initContext(void);
 extern void fn_80084FA0(void);
 extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
@@ -1048,15 +1048,15 @@ lbl_fn_80083F50_00000DBC:
     bdnz lbl_fn_80083F50_00000DBC
 lbl_fn_80083F50_00000DD4:
     addi r3, r31, 0x138
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x150
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x168
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x180
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x198
-    bl fn_80084E50
+    bl field_initContext
     li r0, 0x0
     stw r0, 0x1b0(r31)
     mr r3, r31

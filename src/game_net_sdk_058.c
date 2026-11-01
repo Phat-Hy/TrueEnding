@@ -81,8 +81,8 @@ extern void fn_807210F0(void);
 extern void fn_80721120(void);
 extern void fn_80725170(void);
 extern void fn_80725200(void);
-extern void fn_807252A0(void);
-extern void fn_807252D0(void);
+extern void net_listInsertNode(void);
+extern void net_listRemoveNode(void);
 
 /* External data declarations */
 extern u8 lbl_807C6380[];
@@ -245,7 +245,7 @@ lbl_fn_80717EC0_00000110:
     mr r3, r30
     addi r4, r1, 0xc
     addi r5, r31, 0xf8
-    bl fn_807252A0
+    bl net_listInsertNode
     bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSLockMutex
@@ -287,7 +287,7 @@ lbl_fn_80717EC0_000001B0:
     addi r3, r30, 0xc
     addi r4, r1, 0x8
     addi r5, r31, 0x100
-    bl fn_807252A0
+    bl net_listInsertNode
     bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
@@ -323,7 +323,7 @@ asm void fn_807180A0(void)
     bl OSLockMutex
     addi r3, r30, 0xc
     addi r4, r31, 0x100
-    bl fn_807252D0
+    bl net_listRemoveNode
     bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
@@ -332,7 +332,7 @@ asm void fn_807180A0(void)
     bl OSLockMutex
     mr r3, r30
     addi r4, r31, 0xf8
-    bl fn_807252D0
+    bl net_listRemoveNode
     mr r3, r31
     mr r4, r30
     bl fn_8070AB90
@@ -484,7 +484,7 @@ asm void fn_807182B0(void)
     addi r4, r1, 0x8
     stw r0, 0x8(r1)
     addi r5, r31, 0x18
-    bl fn_807252A0
+    bl net_listInsertNode
     bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
@@ -578,7 +578,7 @@ lbl_fn_807183D0_00000584:
     addi r3, r29, 0x18
     addi r4, r1, 0x8
     addi r5, r31, 0x18
-    bl fn_807252A0
+    bl net_listInsertNode
     bl net_getGlobalContext
     addi r3, r3, 0x354
     bl OSUnlockMutex
@@ -1232,7 +1232,7 @@ asm void fn_80718D00(void)
     mr r5, r30
     addi r3, r29, 0x384
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r31
     bl OSUnlockMutex
     lwz r0, 0x24(r1)
@@ -1260,7 +1260,7 @@ asm void fn_80718D70(void)
     bl OSLockMutex
     mr r4, r30
     addi r3, r29, 0x384
-    bl fn_807252D0
+    bl net_listRemoveNode
     mr r3, r31
     bl OSUnlockMutex
     lwz r0, 0x24(r1)

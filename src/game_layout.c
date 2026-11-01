@@ -9,7 +9,7 @@ extern void _savegpr_25(void);
 extern void fn_8005DF90(void);
 extern void seq_stepPlaybackTimer(void);
 extern void fn_80075F58(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void fn_800A96AC(void);
 extern void fn_800BFB70(void);
 extern void fn_800BFC18(void);
@@ -418,7 +418,7 @@ lbl_layout_drawPane_000004E0:
     lwz r3, lbl_8087EEE0
     mr r4, r26
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x0
     li r5, 0x1
@@ -685,7 +685,7 @@ asm void fn_800A9E64(void)
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x50
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -737,7 +737,7 @@ asm void fn_800A9E64(void)
     lwz r3, lbl_8087EEE0
     addi r4, r22, 0x4
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -914,7 +914,7 @@ lbl_fn_800A9E64_00000A28:
     lwz r3, lbl_8087EEE0
     addi r4, r1, 0x30
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4
@@ -965,7 +965,7 @@ lbl_fn_800A9E64_00000A28:
     stfs f1, 0x24(r1)
     stfs f1, 0x28(r1)
     stfs f0, 0x2c(r1)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lfs f28, 0x20(r1)
     li r19, 0x1
     lfs f29, 0x24(r1)
@@ -1606,7 +1606,7 @@ asm void fn_800AAE2C(void)
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x74c
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x0
     li r4, 0x1
     li r5, 0x4

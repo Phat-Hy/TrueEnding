@@ -12,7 +12,7 @@ extern void scissor_clipFrustum(void);
 extern void bsp_findLeafNode(void);
 extern void fn_80108378(void);
 extern void boss_setPartCollisionFlags(void);
-extern void fn_80133EE8(void);
+extern void boss_findPartSlotById(void);
 extern void npc_calcTargetDistance(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
@@ -1253,7 +1253,7 @@ lbl_fn_8024C46C_0000105C:
     beq lbl_fn_8024C46C_000010C8
     addi r3, r3, 0x7d4
     li r4, 0x3f
-    bl fn_80133EE8
+    bl boss_findPartSlotById
     cmpwi r3, 0x0
     beq lbl_fn_8024C46C_000010C8
     lwz r3, 0x0(r30)

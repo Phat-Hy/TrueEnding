@@ -12,7 +12,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void snprintf(void);
 extern void fn_806A72E0(void);
-extern void fn_806A7400(void);
+extern void net_memFree(void);
 extern void net_formatLog(void);
 extern void fn_806AB920(void);
 extern void http_formatParam(void);
@@ -2445,7 +2445,7 @@ lbl_fn_806C4740_00002254:
     mr r4, r30
     li r3, 0x4
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
 lbl_fn_806C4740_00002284:
     bl OSGetTime
     lis r5, lbl_80860898@ha

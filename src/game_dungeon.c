@@ -9,7 +9,7 @@ extern void OSGetMEM2ArenaLo(void);
 extern void __register_global_object(void);
 extern void fn_800832AC(void);
 extern void town_updateInteractionPoints(void);
-extern void fn_80084E50(void);
+extern void field_initContext(void);
 extern void fn_80084E78(void);
 extern void fn_80084EE8(void);
 extern void fn_80084FA0(void);
@@ -166,15 +166,15 @@ lbl_fn_80081E54_00000190:
     bdnz lbl_fn_80081E54_00000190
 lbl_fn_80081E54_000001A8:
     addi r3, r31, 0x138
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x150
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x168
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x180
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x198
-    bl fn_80084E50
+    bl field_initContext
     li r0, 0x0
     stw r0, 0x1b0(r31)
     mr r3, r31
@@ -338,15 +338,15 @@ lbl_fn_800820BC_000003FC:
     bdnz lbl_fn_800820BC_000003FC
 lbl_fn_800820BC_00000414:
     addi r3, r31, 0x138
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x150
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x168
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x180
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x198
-    bl fn_80084E50
+    bl field_initContext
     li r0, 0x0
     stw r0, 0x1b0(r31)
     mr r3, r31
@@ -452,15 +452,15 @@ lbl_fn_80082260_0000059C:
     bdnz lbl_fn_80082260_0000059C
 lbl_fn_80082260_000005B4:
     addi r3, r31, 0x138
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x150
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x168
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x180
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x198
-    bl fn_80084E50
+    bl field_initContext
     li r0, 0x0
     stw r0, 0x1b0(r31)
     mr r3, r31
@@ -608,15 +608,15 @@ lbl_fn_80082490_000007D0:
     bdnz lbl_fn_80082490_000007D0
 lbl_fn_80082490_000007E8:
     addi r3, r31, 0x138
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x150
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x168
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x180
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x198
-    bl fn_80084E50
+    bl field_initContext
     li r0, 0x0
     stw r0, 0x1b0(r31)
     mr r3, r31
@@ -725,15 +725,15 @@ lbl_fn_8008263C_0000097C:
     bdnz lbl_fn_8008263C_0000097C
 lbl_fn_8008263C_00000994:
     addi r3, r31, 0x138
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x150
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x168
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x180
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x198
-    bl fn_80084E50
+    bl field_initContext
     li r0, 0x0
     stw r0, 0x1b0(r31)
     mr r3, r31
@@ -838,15 +838,15 @@ lbl_dungeon_initGlobalContext_00000B18:
     bdnz lbl_dungeon_initGlobalContext_00000B18
 lbl_dungeon_initGlobalContext_00000B30:
     addi r3, r31, 0x138
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x150
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x168
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x180
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x198
-    bl fn_80084E50
+    bl field_initContext
     li r0, 0x0
     stw r0, 0x1b0(r31)
     mr r3, r31
@@ -944,15 +944,15 @@ lbl_fn_80082970_00000C98:
     bdnz lbl_fn_80082970_00000C98
 lbl_fn_80082970_00000CB0:
     addi r3, r3, 0x138
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x150
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x168
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x180
-    bl fn_80084E50
+    bl field_initContext
     addi r3, r31, 0x198
-    bl fn_80084E50
+    bl field_initContext
     li r0, 0x0
     stw r0, 0x1b0(r31)
     mr r3, r31

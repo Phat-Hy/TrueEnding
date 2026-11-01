@@ -23,7 +23,7 @@ extern void fn_80699020(void);
 extern void fn_806A7110(void);
 extern void net_checkConnectionSession(void);
 extern void fn_806A72E0(void);
-extern void fn_806A7400(void);
+extern void net_memFree(void);
 extern void net_formatLog(void);
 extern void fn_806AD8F0(void);
 extern void fn_806ADC80(void);
@@ -761,7 +761,7 @@ lbl_fn_806AC0A0_0000089C:
     beq lbl_fn_806AC0A0_000008CC
     li r3, 0x4
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     lis r3, lbl_8085FF78@ha
     li r0, 0x0
     lwz r3, lbl_8085FF78@l(r3)
@@ -1153,7 +1153,7 @@ lbl_fn_806AC360_00000E50:
     beq lbl_fn_806AC360_00000E7C
     li r3, 0x4
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     lwz r3, 0x0(r31)
     li r0, 0x0
     stw r0, 0x60(r3)
@@ -1321,7 +1321,7 @@ lbl_fn_806AC8F0_000010A4:
     beq lbl_fn_806AC8F0_000010D4
     li r3, 0x4
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     lis r3, lbl_8085FF78@ha
     li r0, 0x0
     lwz r3, lbl_8085FF78@l(r3)
@@ -2425,7 +2425,7 @@ lbl_fn_806AD770_00001FA8:
     beq lbl_fn_806AD770_00001FD8
     li r3, 0x4
     li r5, 0x0
-    bl fn_806A7400
+    bl net_memFree
     lis r3, lbl_8085FF78@ha
     li r0, 0x0
     lwz r3, lbl_8085FF78@l(r3)

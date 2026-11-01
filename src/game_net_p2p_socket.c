@@ -18,7 +18,7 @@ extern void town_registerInteractionPoint(void);
 extern void town_updateInteractionPoints(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_80084E50(void);
+extern void field_initContext(void);
 extern void fn_80084EE8(void);
 extern void fn_80508DA0(void);
 extern void fn_80509A8C(void);
@@ -1479,7 +1479,7 @@ asm void fn_8050D3EC(void)
     bl mem_alloc
     cmpwi r3, 0x0
     beq lbl_fn_8050D3EC_000012C4
-    bl fn_80084E50
+    bl field_initContext
 lbl_fn_8050D3EC_000012C4:
     stw r3, lbl_8087F878
     bl dungeon_initGlobalContext

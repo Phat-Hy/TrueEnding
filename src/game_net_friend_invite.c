@@ -63,7 +63,7 @@ extern void res_MsgHandle_update(void);
 extern void fn_80239798(void);
 extern void res_findResourceSlot(void);
 extern void fn_80244CA0(void);
-extern void fn_80244CAC(void);
+extern void script_setTaskTerminated(void);
 extern void fn_8026607C(void);
 extern void fn_80266FA4(void);
 extern void fn_80266FB4(void);
@@ -4415,7 +4415,7 @@ lbl_fn_804D25D4_00003960:
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_000039BC
     bl fn_8036635C
-    bl fn_80244CAC
+    bl script_setTaskTerminated
 lbl_fn_804D25D4_000039BC:
     lwz r0, 0xd0(r31)
     extrwi. r0, r0, 1, 5

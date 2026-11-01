@@ -63,8 +63,8 @@ extern void fn_807204D0(void);
 extern void fn_80720BF0(void);
 extern void fn_80725170(void);
 extern void fn_80725250(void);
-extern void fn_807252A0(void);
-extern void fn_807252D0(void);
+extern void net_listInsertNode(void);
+extern void net_listRemoveNode(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -1342,7 +1342,7 @@ asm void fn_807046B0(void)
     stw r0, 0x8(r1)
     addi r3, r29, 0x8
     addi r4, r1, 0x8
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r31
     bl OSRestoreInterrupts
     lwz r0, 0x24(r1)
@@ -1369,7 +1369,7 @@ asm void fn_80704720(void)
     mr r31, r3
     mr r4, r30
     addi r3, r29, 0x8
-    bl fn_807252D0
+    bl net_listRemoveNode
     mr r3, r31
     bl OSRestoreInterrupts
     lwz r0, 0x24(r1)
@@ -1756,7 +1756,7 @@ lbl_fn_80704AD0_00001678:
     mr r3, r27
     addi r4, r1, 0x8
     addi r5, r31, 0x4
-    bl fn_807252A0
+    bl net_listInsertNode
     mr r3, r28
     bl OSRestoreInterrupts
     li r3, 0x1

@@ -36,7 +36,7 @@ extern void fn_806D7F20(void);
 extern void fn_806D8060(void);
 extern void fn_806D8560(void);
 extern void fn_806D8B20(void);
-extern void fn_806D8E30(void);
+extern void net_strdup(void);
 extern void net_getTimestampMs(void);
 extern void fn_806DA070(void);
 extern void fn_806DA120(void);
@@ -295,7 +295,7 @@ lbl_fn_806E4240_00000220:
     lwz r0, 0x10(r30)
     stw r0, 0x0(r3)
     lwz r3, 0x14(r1)
-    bl fn_806D8E30
+    bl net_strdup
     stw r3, 0x8(r27)
     li r3, 0x0
     bl fn_806D8B20
@@ -335,7 +335,7 @@ lbl_fn_806E4240_000002B8:
     lwz r0, 0x10(r30)
     stw r0, 0x0(r3)
     lwz r3, 0x14(r1)
-    bl fn_806D8E30
+    bl net_strdup
     stw r3, 0x8(r27)
     li r3, 0x0
     bl fn_806D8B20

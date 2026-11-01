@@ -14,7 +14,7 @@ extern void fn_8006F17C(void);
 extern void fn_80072914(void);
 extern void gx_beginQuadBatch(void);
 extern void gx_applyRenderState(void);
-extern void fn_800763FC(void);
+extern void seq_bindSlotResource(void);
 extern void gx_setRenderStateParam(void);
 extern void fn_80076BE4(void);
 extern void GXSetVtxDesc(void);
@@ -367,7 +367,7 @@ lbl_atn_ComDrawTexture_execute_0000042C:
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0xc(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lbz r3, 0x10(r31)
     li r4, 0x4
     li r5, 0x5
@@ -610,7 +610,7 @@ lbl_atn_ComDrawTextureAdd_execute_000007C0:
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0xc(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r0, 0x14(r31)
     cmpwi r0, 0x0
     beq lbl_atn_ComDrawTextureAdd_execute_00000800
@@ -991,7 +991,7 @@ lbl_atn_ComDrawTextureMask_execute_00000D5C:
     addi r4, r4, 0x10
 lbl_atn_ComDrawTextureMask_execute_00000D64:
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r4, 0x10(r31)
     lwz r3, lbl_8087EEE0
     cmpwi r4, 0x0
@@ -1002,7 +1002,7 @@ lbl_atn_ComDrawTextureMask_execute_00000D80:
     addi r4, r4, 0x10
 lbl_atn_ComDrawTextureMask_execute_00000D88:
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r0, 0x18(r31)
     cmpwi r0, 0x0
     beq lbl_atn_ComDrawTextureMask_execute_00000DC0
@@ -1312,7 +1312,7 @@ lbl_atn_ComDrawTextureMono_execute_00001108:
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0xc(r30)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -2308,7 +2308,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_00002158:
     addi r4, r4, 0x10
 lbl_atn_ComDrawTextureMaskMono_execute_00002160:
     li r5, 0x0
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r4, 0x10(r30)
     lwz r3, lbl_8087EEE0
     cmpwi r4, 0x0
@@ -2319,7 +2319,7 @@ lbl_atn_ComDrawTextureMaskMono_execute_0000217C:
     addi r4, r4, 0x10
 lbl_atn_ComDrawTextureMaskMono_execute_00002184:
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
     li r3, 0x1
     li r4, 0x4
     li r5, 0x5
@@ -3507,11 +3507,11 @@ lbl_atn_ComDrawD3TextureMask_execute_000031C8:
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0x18(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     lwz r3, lbl_8087EEE0
     li r5, 0x1
     lwz r4, 0x1c(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
     b lbl_atn_ComDrawD3TextureMask_execute_00003424
 lbl_atn_ComDrawD3TextureMask_execute_00003344:
     li r3, 0x1
@@ -3569,7 +3569,7 @@ lbl_atn_ComDrawD3TextureMask_execute_00003344:
     lwz r3, lbl_8087EEE0
     li r5, 0x0
     lwz r4, 0x1c(r31)
-    bl fn_800763FC
+    bl seq_bindSlotResource
 lbl_atn_ComDrawD3TextureMask_execute_00003424:
     lwz r3, lbl_8087EEE0
     li r4, 0x0
@@ -3946,7 +3946,7 @@ lbl_atn_ComDrawWindow_execute_000039A8:
     li r5, 0x0
     lwz r3, lbl_8087EEE0
     addi r4, r4, 0x10
-    bl fn_800763FC
+    bl seq_bindSlotResource
     cmplwi r31, 0x4
     bge lbl_atn_ComDrawWindow_execute_000039EC
     lwz r4, 0x28(r30)
@@ -3959,7 +3959,7 @@ lbl_atn_ComDrawWindow_execute_000039D8:
     addi r4, r4, 0x10
 lbl_atn_ComDrawWindow_execute_000039E0:
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
     b lbl_atn_ComDrawWindow_execute_00003A10
 lbl_atn_ComDrawWindow_execute_000039EC:
     lwz r4, 0x2c(r30)
@@ -3972,7 +3972,7 @@ lbl_atn_ComDrawWindow_execute_00003A00:
     addi r4, r4, 0x10
 lbl_atn_ComDrawWindow_execute_00003A08:
     li r5, 0x1
-    bl fn_800763FC
+    bl seq_bindSlotResource
 lbl_atn_ComDrawWindow_execute_00003A10:
     lwz r3, lbl_8087EEE0
     bl gx_applyRenderState
