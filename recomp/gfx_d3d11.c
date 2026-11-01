@@ -11,6 +11,7 @@
 #include <stddef.h>
 #include "gfx_backend.h"
 #include "gx_pipeline.h"
+#include "aurora_live_host.h"
 
 const void* host_resolve_gx_guest_addr(uint32_t addr);
 
@@ -3133,10 +3134,136 @@ static bool batch_dump_guest_hit(void) {
  * element tree can be read without guessing a frame number (handover 5c.46 AA). */
 int g_tls_page_capture_frame = -1;
 
+/* ============================================================================================
+ * P4 PUBLISH (handover 5c.46 AP-BQ): replace the back buffer with aurora's picture for THIS frame.
+ *
+ * Option (b) of 5c.47, the CPU round-trip, which --probe-copy proved end to end (AP-BO measured the
+ * two paths byte-identical). aurora's 640x448 EFB readback is bilinearly scaled into a staging
+ * texture in the BACK BUFFER'S OWN format and CopyResource'd in, so the existing
+ * capture-before-Present screenshot - which reads the back buffer - hashes what aurora drew with no
+ * change to that path at all. That is the whole point of doing it here rather than with a shader.
+ *
+ * WHY AFTER d3d11_capture_efb_snapshot(). That snapshot is the layer's copy source for its own
+ * EFB-copy service, and the layer keeps drawing (it is the fallback for a failed readback and for
+ * TLS_LAYER=1). Overwriting the back buffer after the snapshot leaves the layer's own machinery
+ * untouched and keeps this change to one function plus two call sites.
+ *
+ * Returns 1 when aurora's picture replaced the frame, 0 when the layer's picture stands.
+ * ============================================================================ */
+static ID3D11Texture2D* s_aurora_stage;
+static UINT s_aurora_stage_w, s_aurora_stage_h;
+static DXGI_FORMAT s_aurora_stage_fmt;
+static unsigned long s_aurora_blits, s_aurora_blit_fail;
+
+static int aurora_blit_presented_frame(void) {
+    uint32_t sw = 0, sh = 0;
+    const uint8_t* src = tls_aurora_published(&sw, &sh);
+    if (!src || sw == 0 || sh == 0) return 0;
+
+    ID3D11Texture2D* back_buffer = NULL;
+    if (FAILED(IDXGISwapChain_GetBuffer(s_d3d11.swap_chain, 0, &IID_ID3D11Texture2D, (void**)&back_buffer)))
+        return 0;
+    D3D11_TEXTURE2D_DESC desc;
+    ID3D11Texture2D_GetDesc(back_buffer, &desc);
+
+    if (!s_aurora_stage || s_aurora_stage_w != desc.Width || s_aurora_stage_h != desc.Height ||
+        s_aurora_stage_fmt != desc.Format) {
+        if (s_aurora_stage) { ID3D11Texture2D_Release(s_aurora_stage); s_aurora_stage = NULL; }
+        D3D11_TEXTURE2D_DESC sd = desc;
+        sd.Usage = D3D11_USAGE_STAGING;
+        sd.BindFlags = 0;
+        sd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+        sd.MiscFlags = 0;
+        sd.MipLevels = 1;
+        sd.ArraySize = 1;
+        if (FAILED(ID3D11Device_CreateTexture2D(s_d3d11.device, &sd, NULL, &s_aurora_stage))) {
+            ID3D11Texture2D_Release(back_buffer);
+            return 0;
+        }
+        s_aurora_stage_w = desc.Width;
+        s_aurora_stage_h = desc.Height;
+        s_aurora_stage_fmt = desc.Format;
+    }
+
+    D3D11_MAPPED_SUBRESOURCE mapped;
+    if (FAILED(ID3D11DeviceContext_Map(s_d3d11.context, (ID3D11Resource*)s_aurora_stage, 0,
+                                      D3D11_MAP_WRITE, 0, &mapped))) {
+        ID3D11Texture2D_Release(back_buffer);
+        return 0;
+    }
+
+    /* Bilinear, and the swizzle is decided from the swap chain's actual format rather than assumed:
+     * the screenshot path reads channels 0,1,2 as R,G,B, so a B8G8R8A8 back buffer would otherwise
+     * hash a blue-red-swapped frame. */
+    const int bgra = (desc.Format == DXGI_FORMAT_B8G8R8A8_UNORM ||
+                      desc.Format == DXGI_FORMAT_B8G8R8A8_UNORM_SRGB);
+    const float xr = (float)sw / (float)desc.Width;
+    const float yr = (float)sh / (float)desc.Height;
+    for (UINT y = 0; y < desc.Height; y++) {
+        float fy = ((float)y + 0.5f) * yr - 0.5f;
+        int y0 = (int)floorf(fy);
+        float wy = fy - (float)y0;
+        if (y0 < 0) { y0 = 0; wy = 0.0f; }
+        int y1 = y0 + 1;
+        if (y1 > (int)sh - 1) y1 = (int)sh - 1;
+        const uint8_t* r0 = src + (size_t)y0 * sw * 4u;
+        const uint8_t* r1 = src + (size_t)y1 * sw * 4u;
+        uint8_t* out = (uint8_t*)mapped.pData + (size_t)y * mapped.RowPitch;
+        for (UINT x = 0; x < desc.Width; x++) {
+            float fx = ((float)x + 0.5f) * xr - 0.5f;
+            int x0 = (int)floorf(fx);
+            float wx = fx - (float)x0;
+            if (x0 < 0) { x0 = 0; wx = 0.0f; }
+            int x1 = x0 + 1;
+            if (x1 > (int)sw - 1) x1 = (int)sw - 1;
+            const uint8_t* p00 = r0 + (size_t)x0 * 4u;
+            const uint8_t* p10 = r0 + (size_t)x1 * 4u;
+            const uint8_t* p01 = r1 + (size_t)x0 * 4u;
+            const uint8_t* p11 = r1 + (size_t)x1 * 4u;
+            float c[3];
+            for (int k = 0; k < 3; k++) {
+                float top = (float)p00[k] + ((float)p10[k] - (float)p00[k]) * wx;
+                float bot = (float)p01[k] + ((float)p11[k] - (float)p01[k]) * wx;
+                c[k] = top + (bot - top) * wy;
+            }
+            uint8_t* o = out + (size_t)x * 4u;
+            if (bgra) { o[0] = (uint8_t)(c[2] + 0.5f); o[1] = (uint8_t)(c[1] + 0.5f); o[2] = (uint8_t)(c[0] + 0.5f); }
+            else      { o[0] = (uint8_t)(c[0] + 0.5f); o[1] = (uint8_t)(c[1] + 0.5f); o[2] = (uint8_t)(c[2] + 0.5f); }
+            o[3] = 255;
+        }
+    }
+    ID3D11DeviceContext_Unmap(s_d3d11.context, (ID3D11Resource*)s_aurora_stage, 0);
+    ID3D11DeviceContext_CopyResource(s_d3d11.context, (ID3D11Resource*)back_buffer,
+                                     (ID3D11Resource*)s_aurora_stage);
+    ID3D11Texture2D_Release(back_buffer);
+
+    s_aurora_blits++;
+    if (s_aurora_blits == 1 || (s_aurora_blits % 500) == 0) {
+        printf("[AuroraPublish] blitted %lu frame(s) into the %ux%u back buffer, %lu failure(s)\n",
+               s_aurora_blits, desc.Width, desc.Height, s_aurora_blit_fail);
+        fflush(stdout);
+    }
+    return 1;
+}
+
 bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     if (!s_d3d11.device || !s_d3d11.swap_chain) return false;
 
     s_d3d11.frame_counter += s_flush_only ? 0 : 1;
+
+    /* P4 PUBLISH (5c.46 AP-BQ), and this line's POSITION is the whole change: the aurora feed has
+     * to run before the frame is drawn, captured and presented, or the picture is one guest frame
+     * late - which on this scene shows the previous half (the guest alternates a geometry half and a
+     * composite half, AP-BJ). A flush is not a frame: publishing it would consume half a frame's
+     * bytes and leave the aurora feed accumulating nothing. */
+    int aurora_published = 0;
+    if (!s_flush_only) {
+        static int s_publish = -1;
+        if (s_publish < 0) s_publish = getenv("TLS_AURORA_PUBLISH") ? 1 : 0;
+        if (s_publish) {
+            aurora_published = tls_aurora_publish_frame();
+        }
+    }
 
     // Check if guest resolution changed
     if (fb_width != s_d3d11.fb_width || fb_height != s_d3d11.fb_height) {
@@ -4499,6 +4626,28 @@ bool d3d11_present(const uint8_t* yuyv_data, int fb_width, int fb_height) {
     const int xfb_boundary_this_frame = s_xfbs_this_frame;
     s_clears_this_frame = 0;
     s_xfbs_this_frame = 0;
+
+    /* P4 (5c.46 AP-BQ): aurora's picture replaces this frame in the back buffer.
+     *
+     * IT MUST BE BEFORE `if (take_shot)` BELOW, and that ordering cost the first promotion run its
+     * evidence: the screenshot happens BEFORE d3d11_capture_efb_snapshot(), so a blit placed after the
+     * snapshot produced a shot byte-identical to the layer's (mean |d| 0.00, max 0) - the promotion
+     * looked inert while it was merely late. Blitting here means the screenshot AND the snapshot both
+     * see aurora's frame; the snapshot feeds only the layer's own EFB-copy sampling, and the layer's
+     * picture is not presented while aurora publishes.
+     *
+     * A failed blit - a readback that did not deliver, a device that went away - falls through and the
+     * layer's picture is presented instead: a frame is never presented black because of the promotion. */
+    if (aurora_published) {
+        if (!aurora_blit_presented_frame()) {
+            s_aurora_blit_fail++;
+            if (s_aurora_blit_fail <= 8 || (s_aurora_blit_fail % 200) == 0) {
+                printf("[AuroraPublish] blit failed on frame %d - the layer's picture is presented\n",
+                       s_d3d11_dump_count);
+                fflush(stdout);
+            }
+        }
+    }
 
     if (take_shot) {
         ID3D11Texture2D* back_buffer = NULL;

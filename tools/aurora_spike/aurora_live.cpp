@@ -46,11 +46,23 @@ std::vector<uint8_t> g_liveRewritten;
  * A DISTINCT SLOT PER SHOT (5c.46 AP-BI). The readback is looked up by key in the latest delivered
  * packet, so one key re-used across shots returned the same payload repeatedly (measured: three
  * byte-identical readbacks, SHA BBE1D16E7B76ADE1). One 640x448 RGBA8 payload is 0x118000 bytes, so
- * shot n goes to PROBE_COPY_DST + n*0x200000 - far enough apart that a copy can never overlap the
- * next shot's, and n is bounded by the host's shot list (32). */
+ * shot n goes to PROBE_COPY_DST + slot*0x200000 - far enough apart that a copy can never overlap the
+ * next slot's.
+ *
+ * A BOUNDED RING, NOT A COUNTER (5c.46 AP-BQ). The counter was fine while a run took at most 32
+ * shots, and it is fatal once the probe runs once per PRESENTED frame: each new destination key is a
+ * new 640x448 copy texture in aurora (2 MB of address space per slot), so a 2 812-frame promotion
+ * walk allocated ~2 300 of them and the process died with 0xC000001D (STATUS_ILLEGAL_INSTRUCTION,
+ * i.e. a terminate after the device went away) at published frame ~2 100 - measured on the first
+ * P4 promotion run, `logs_ap/bq_publish.log`. Eight slots bound the ring at 16 MB, and the ring is
+ * still deep enough that consecutive frames never share a key: the aliasing AP-BI measured needs the
+ * SAME key twice within the readback's delivery latency, which was one frame in every live run so
+ * far. The keys themselves stay inside the mapped MEM2 window (0x90001000 + 8*0x200000 = 0x91001000,
+ * well below the 0x94000000 end), so a probe copy can never land on guest data. */
 constexpr uint32_t kProbeCopyDst = 0x90001000u;
 constexpr uint32_t kProbeCopyW = 640, kProbeCopyH = 448;
 constexpr uint32_t kProbeCopyStride = 0x200000u;
+constexpr uint32_t kProbeSlots = 8u;
 constexpr size_t PayloadBytes = static_cast<size_t>(kProbeCopyW) * kProbeCopyH * 4u;
 std::vector<uint8_t> g_probeCopyCmd;
 std::vector<uint8_t> g_probePayload;
@@ -235,12 +247,12 @@ TLS_LIVE_EXPORT void tls_aurora_live_frame(const void* fifo, uint32_t len, int w
      * one key made consecutive shots return the SAME payload: on the field window the first three
      * readbacks came back byte-identical (SHA BBE1D16E7B76ADE1 x3) and only the fourth differed -
      * an instrument artefact, not a renderer fact, and it would have been read as "aurora's frames
-     * are static". Each request therefore takes the next key and the next 640x448 slot
-     * (kProbeCopyStride apart, inside the mapped MEM2 copy), so the payload looked up can only be
-     * that shot's own. */
+     * are static". Each request therefore takes the next slot in a bounded RING (kProbeSlots,
+     * kProbeCopyStride apart, inside the mapped MEM2 copy), so the payload looked up can only be
+     * that shot's own while the memory the ring costs stays fixed - see the kProbeSlots comment. */
     if (g_probeCopyCmd.empty()) g_probePayload.assign(PayloadBytes, 0);
     const uint32_t seq = g_probeSeq++;
-    const uint32_t dst = kProbeCopyDst + seq * kProbeCopyStride;
+    const uint32_t dst = kProbeCopyDst + (seq % kProbeSlots) * kProbeCopyStride;
     {
       CopyRegs regs{};
       regs.srcX0 = 0;

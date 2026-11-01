@@ -2,54 +2,46 @@
 
 ## NEXT SESSION — START HERE
 
-> **§5c.46 AP-BP (THE LAST SECTION) IS THE P4 PRE-FLIGHT, AND IT CLEARS THE RECORD'S BIGGEST RISK: AURORA'S
-> PICTURE LANDS INSIDE BOTH OF THE GATE'S STRUCTURAL WINDOWS AT BOTH REFERENCE FRAMES.** Content guest 2800:
-> **39.31** luma, **0.00 %** above 250 (window 15..120, < 10 %). Popup guest 3500: **87.53** luma, **2.17 %** above
-> 250 (window < 150, 0.5..10 %) — so aurora *does* draw the tutorial band's white text (4.3x the lower bound) and
-> keeps **62.5 luma of headroom** under the ceiling, against the layer's 36.51 / 0.00 % and 46.18 / 2.03 %. **The
-> gate's windows therefore stay; only `EXPECTED_SHA_CONTENT` and `EXPECTED_SHA` change**, each recorded from two
-> independent clean runs of the promoted path. Two launches (2795..2805 and 3495..3505, 11-frame history, one
-> published frame each), both at handover **1 680**; readbacks 1 146 880 B, 22 553 / 9 314 draws.
+> **§5c.46 AP-BQ (THE LAST SECTION): P4'S PRESENT PATH IS BUILT AND ITS PICTURE IS AURORA'S — BUT IT IS NOT
+> SHIPPABLE YET, SO THE GATE'S REFERENCES WERE NOT CHANGED.** `TLS_AURORA_PUBLISH=1` makes aurora render every
+> presented frame, and the shot at present 2 864 is aurora's frame 2800 to **0.01 mean RGB** (36.10/37.43/37.18 vs
+> the readback's 36.10/37.42/37.18, luma 37.00 both) and **4.74 mean |d| / 41.26 % > 8** against the layer's same
+> present, with **handover 1 680 unchanged** over 2 812 frames. Two defects were found and fixed on the way: the
+> blit must go **before `if (take_shot)`** (the screenshot runs *before* `d3d11_capture_efb_snapshot()`, so a blit
+> after it produced a shot byte-identical to the layer's — late, not inert), and the probe copy's destination is
+> now a **bounded 8-slot ring** instead of a 2 MB-per-frame counter that killed the process at published frame
+> ~2 100 with `0xC000001D`. **The blocker:** a 3 520-frame publishing run still dies mid-run (probe **#1 689**)
+> because `tls_aurora_live_readback()` pumps up to **24 empty aurora frames per publish** and its capture
+> resources do not survive thousands of them. So `EXPECTED_SHA` / `EXPECTED_SHA_CONTENT` are **unchanged**, the
+> promotion is **off by default**, and the gate **PASSes attempt 1 at the layer's references** on the new binary
+> (`414E81AA…`, `logs_ap/gate_bq.log`: handover 1 680, `B4646917…` 36.51, `22B1CE31…` 46.18, save 1 348 992 / 29 344).
 >
-> **NEXT SESSION'S WHOLE JOB: P4 — BUILD THE PRESENT PATH, THEN RE-RECORD. It is a code session, and AP-BP §5 is
-> the reason:** the aurora feed and readback today happen at the **end** of `d3d11_present()` (`gfx_d3d11.c:4628`),
-> *after* the snapshot (`:4600`), the screenshot (`:4503-4540`) and `Present` (`:4622`), so a promoted picture would
-> be one guest frame late — and on this scene a one-frame lag shows the previous *half* (the guest alternates
-> geometry and composite halves, AP-BJ). Move the feed to the **top** of `d3d11_present()`, where the frame's tapped
-> bytes are already complete, and hand the readback to the present path before the screenshot. Then: scale
-> 640x448 -> 1280x720 bilinear RGBA8 -> BGRA8 into a `D3D11_USAGE_STAGING` texture, `CopyResource` into the back
-> buffer, skip the layer's batch loop for that frame, `TLS_LAYER=1` forces the layer (and must beat `TLS_AURORA`),
-> and a failed readback **falls back to the layer for that frame** rather than presenting black. Exit criterion:
-> `tools/invariant.ps1` PASS attempt 1 at the two **newly recorded** references, twice each recording, with the
-> layer's escape hatch reproducing today's `B4646917…` / `22B1CE31…` exactly; then `Play_TheLastStory.bat` defaults
-> to aurora. The gate itself is unchanged and still PASSes attempt 1 on the runner in the tree (`D7C3D48…`:
-> handover 1 680, content `B4646917…` luma 36.51, popup `22B1CE31…` luma 46.18, save 1 348 992 / 29 344,
-> `logs_ap/gate.log.a1`).
+> **NEXT SESSION, IN THIS ORDER (AP-BQ §6).** (1) Make the per-frame readback cheap and stable — pump an empty
+> frame only when `AuroraReadbackGet` has not delivered, and release the capture resources per publish (fork
+> patch under `lib/gx/readback.cpp` if the API has no release path). (2) Re-run `logs_ap/run_publish_record.ps1`
+> **twice** at 3 520 frames and require the two pairs of SHAs to agree. (3) Only then write the two numbers into
+> `tools/invariant.ps1` — the luma/bright windows do **not** need to move (AP-BP: aurora is 39.31 / 0.00 % and
+> 87.53 / 2.17 %, both inside the existing bounds). (4) `TLS_LAYER=1` must reproduce `B4646917…` / `22B1CE31…`
+> exactly. (5) `Play_TheLastStory.bat` defaults to aurora and the gate PASSes attempt 1 at the new references.
 >
-> **Board, in one line: P1 MET (byte-identical, AP-BO) → P3 MET (same equality) → P4 = the work above.** AP-BN's
-> decision stands: the layer's composite is the defect and is retired by the promotion, not fixed.
+> **§5c.46 AP-BP (one step back): the P4 pre-flight** — aurora's picture lands inside both of the gate's windows
+> at both reference frames (content 39.31 / 0.00 %, popup 87.53 / 2.17 %, against the layer's 36.51 / 0.00 % and
+> 46.18 / 2.03 %), so the re-record only changes hashes, not bounds.
 >
-> **State after this session.** Track A merged **twice** and had moved far both times: `4f2e3cf` → `ccadf1e`
-> (Batch 44, 761 files) → **`ebaa87c` (Batch 45-47, 484 files)**, clean both times, and the rebuilt runner was
-> **byte-identical** each time (`D7C3D48…`, 472 objects, **0 chunks recompiled**), so the gate references transfer.
-> `git diff --stat origin/track-a..HEAD -- src/` is empty: **0 changes to `src/` by Track B.** New tracked
-> instruments: `tools/aurora_spike/shotdiff.py`, `p1_equality.py`, `p1_live_run.ps1`. Re-fetch Track A before the
+> **§5c.46 AP-BO: P1 is MET BYTE-FOR-BYTE.** Live aurora inside the runner and the harness replay of the same
+> capture produced **the same file** (live 2799 ↔ `--stop-after 6`, live 2800 ↔ `--stop-after 7`, 0 / 286 720
+> pixels, SHA `5622FC18…` / `BEF9394A…`), under a measured one-frame rule (stop(N) == live guest(2793+N)).
+> **P3's criterion is the same equality, so P3 is met too.**
+>
+> **§5c.46 AP-BN (the decision): AURORA'S COMPOSITE IS THE FAITHFUL ONE; the `43.16 / 1.123` criterion is RETIRED.**
+> `TLS_BATCH_CUTOFF=76|77` isolates b76, which paints 100 % of the frame and turns its own sharp snapshot
+> (43.96 / 5.354) into a near-uniform field (56.02 / 0.675, 7.9x smoother), while aurora leaves 56.68 / 13.190
+> unchanged across the same draw. AP-BN §5 carries the argument and the Dolphin title-plate tiebreak.
+>
+> **State after this session.** Track A merged twice (`4f2e3cf` → `ccadf1e` → **`ebaa87c`**), clean, runner
+> byte-identical both times; `git diff --stat origin/track-a..HEAD -- src/` empty (**0 changes to `src/` by Track
+> B**). New tracked instruments: `shotdiff.py`, `p1_equality.py`, `p1_live_run.ps1`. Re-fetch Track A before the
 > next session — it commits several times an hour.
->
-> **§5c.46 AP-BO (one step back): P1 IS MET BYTE-FOR-BYTE.** One launch armed the live path *and* the recorder; the
-> harness replayed the same capture and the EFB copy payloads are **the same file** (live 2799 ↔ `--stop-after 6`,
-> live 2800 ↔ `--stop-after 7`, mean |d| 0.00, 0 / 286 720 pixels, SHA `5622FC18…` / `BEF9394A…`), under a
-> **measured** one-frame rule (harness stop(N) == live guest(2793+N): the probe copy is delivered with the next
-> frame). Everything the live boundary adds contributes nothing to the picture.
->
-> **§5c.46 AP-BN (two steps back, the decision): AURORA'S COMPOSITE IS THE FAITHFUL ONE AND THE COMPOSITE EXIT
-> CRITERION IS RETIRED — DO NOT CHASE `43.16 / 1.123`.** `TLS_BATCH_CUTOFF=76|77` isolates b76 (draw 5 809), which
-> paints **100 % of the frame** (mean |d| 33.29, 96.32 % > 8) and turns its own sharp 640x448 snapshot
-> (43.96 / 5.354) into a near-uniform field (56.02 / 0.675, 7.9x smoother), while aurora fed the same guest bytes
-> leaves **56.68 / 13.190 unchanged** across that draw — a 1:1 replace cannot blur. Retired in writing: that
-> criterion, the AP-BJ addendum's "the layer applies the guest's blur" reading, and any reference re-recorded
-> against the layer's composite. **AP-BN §5** carries the whole argument (what is excluded, what the layer does
-> differently, and the Dolphin title-plate tiebreak 203.98 / aurora 205.62 / layer 90.43).
 >
 > **The AP-BM paragraphs below are measurement history** (kept for provenance: per-draw and per-copy numbers, and
 > the retraction that stopped a wrong direction twice). Read them only if a number above needs its source.
@@ -16895,3 +16887,41 @@ Aurora is **2.06 units brighter** at the content frame and **41.35** at the popu
 | 1 | 2 812 frames, `TLS_AURORA_FROM/TO 2795..2805`, shot 2800 | fed 1 318 078 B / 22 553 draws / 3 copy cmds; readback luma 37.00; **gate sampling 39.31 luma, 0.00 % bright** - inside the content window; handover 1 680 |
 | 2 | 3 520 frames, `3495..3505`, shot 3500 | fed 790 316 B / 9 314 draws / 9 copy cmds; readback luma 86.19; **gate sampling 87.53 luma, 2.17 % bright** - inside the popup window; handover 1 680 |
 | 3 | `bp_gate_metrics.py` against the layer's own gate shots of the same run set | layer 36.51 / 0.00 % (2800) and 46.18 / 2.03 % (3500): aurora is +2.06 and +41.35 luma, both windows still clear |
+
+---
+
+### 5c.46 AP-BQ. **P4'S PRESENT PATH EXISTS AND ITS PICTURE IS AURORA'S — MEASURED ON THE GATE'S OWN PRESENT: the shot at present 2 864 is aurora's frame 2800 to 0.01 mean RGB and 4.74 mean |d| against the layer's**, with **handover 1 680 unchanged** — but the promotion is **NOT SHIPPABLE YET**: a 3 520-frame publishing run dies mid-run, so the gate's two references were **deliberately not changed** and the gate still PASSes attempt 1 at the layer's.
+
+**1. What was built (option (b) of 5c.47, the CPU round-trip).** `tls_aurora_publish_frame()` (`recomp/aurora_live_host.c`, declared in the header) feeds the frame's tapped bytes and reads aurora's EFB back **at the top of `d3d11_present()`**, where the bytes are already complete; `aurora_blit_presented_frame()` (`recomp/gfx_d3d11.c`) bilinearly scales the 640x448 RGBA8 payload into a `D3D11_USAGE_STAGING` texture in the **back buffer's own format** (the swizzle is decided from `desc.Format`, not assumed) and `CopyResource`s it in **before** `if (take_shot)`; the layer keeps drawing as the fallback, `TLS_LAYER=1` beats `TLS_AURORA`, and a failed readback or blit presents the layer's frame instead of black. Everything is inert unless `TLS_AURORA=1` **and** `TLS_AURORA_PUBLISH=1`.
+
+**2. The demonstration run (2 812 frames, `logs_ap/bq_publish.log`).** 2 800 presents fed and blitted (>2 000 at the 500-frame counter, **0 failures**), **handover 1 680** — the promotion does not disturb the sequence — and the gate's content-frame shot is aurora's picture:
+
+| at present 2 864 (guest 2800) | mean RGB | luma | source |
+|---|---|---|---|
+| **promoted shot** | **(36.10, 37.43, 37.18)** | **37.00** | aurora, upscaled |
+| aurora's own 640x448 readback (`logs_ap/bp_aurora_2800.ppm`) | (36.10, 37.42, 37.18) | 37.00 | the renderer |
+| the layer's shot of the same present (`logs_ap/bq_layer_2864.ppm`) | (36.63, 35.80, 32.17) | 35.63 | the layer |
+
+`mean |d|` against the layer's shot of the same present: **4.74 on luma, 41.26 % of pixels above 8** (`tools/aurora_spike/shotdiff.py`) — the frame is the same scene seen by the other renderer, not the layer's own picture. Candidate content reference recorded for later: `d3d11_screenshot_2864.ppm` = **`54CB46BD379983EDA45B2FBCF60392D8EBF42349109BAECCD33FF6C6744F2AA8`**, gate luma **38.20**, bright 0.00 % (inside 15..120 and < 10 %).
+
+**3. Two defects, both found by running it, both fixed and both worth the paragraph they get.**
+
+1. **The blit was late and the promotion looked inert.** The first run's shot was **byte-identical to the layer's** (mean |d| **0.00**, max **0**) because in `d3d11_present()` the screenshot block runs **before** `d3d11_capture_efb_snapshot()`, so a blit placed after the snapshot is after the shot. The fix is one move — blit immediately before `if (take_shot)` — and this is recorded so the next session does not re-learn it: an inert-looking promotion is the first thing to suspect of being late.
+2. **The probe copy's destination was a counter, not a ring.** `tools/aurora_spike/aurora_live.cpp` gave readback *n* the address `0x90001000 + n*0x200000`, designed when a run took at most 32 shots. A promotion takes one per presented frame, so it allocated a fresh 2 MB copy texture per frame and the process died with **`0xC000001D` (STATUS_ILLEGAL_INSTRUCTION — a terminate after the device went away) at published frame ~2 100**. It is now a bounded **8-slot ring** (16 MB, `0x90001000..0x91001000`, inside MEM2; consecutive frames still never share a key, which is what AP-BI's aliasing needed). After the fix the run survived 2 812 frames.
+
+**4. The blocker, measured, and why no reference was changed.** With the ring fixed, a **3 520-frame** publishing run still dies mid-run (last probe copy **#1 689**, `logs_ap/bq_record_a.log`) — long enough to write the content-frame shot, not long enough to reach the popup frame at present 3 564 (which is why `d3d11_screenshot_3564.ppm` still held the layer's stale file, `22B1CE31…`). The cause is the per-frame readback's cost and lifetime, not the blit: `tls_aurora_live_readback()` pumps **up to 24 `aurora_begin_frame`/`end_frame` pairs per publish**, and its capture resources are not released in a way that survives thousands of publishes. **So P4 is built and demonstrated, not finished**: `EXPECTED_SHA` / `EXPECTED_SHA_CONTENT` are **unchanged**, `tools/invariant.ps1` still records the layer's renderer, and the promotion is off by default. Re-recording on a renderer that dies at frame 1 700 would have written a reference nothing can reproduce.
+
+**5. The gate, on the new binary, is still green.** `pwsh tools/invariant.ps1 -Log logs_ap/gate_bq.log`: **PASS attempt 1**, handover **1 680**, content `B4646917…` luma 36.51, popup `22B1CE31…` luma 46.18, save **1 348 992 / 29 344**. The runner's hash changed with this section's code (`414E81AA22ECA0D4B4E97D90F85411AD170C64940106A908BC98EEB4D73C0DDA`, was `D7C3D48…`) because `recomp/` changed — the publish path is unreachable unless both switches are set, and the gate proves it.
+
+**6. Exactly what the next session should do, in order.** (1) Make the per-frame readback cheap and stable: pump an empty frame only when `AuroraReadbackGet` has not delivered, and free the capture resources per publish (a fork patch under `lib/gx/readback.cpp` if the API has no release path). (2) Re-run `logs_ap/run_publish_record.ps1` **twice** at 3 520 frames and require the two pairs of SHAs to agree. (3) Only then write the two numbers into `tools/invariant.ps1` (and the luma/bright windows only if they moved — AP-BP says they do not). (4) Verify the escape hatch: `TLS_LAYER=1` must reproduce `B4646917…` / `22B1CE31…` exactly. (5) `Play_TheLastStory.bat` defaults to aurora, and the gate PASSes attempt 1 at the new references.
+
+**7. Changes and run log.** `recomp/aurora_live_host.c` / `.h` (+98 lines), `recomp/gfx_d3d11.c` (+149: the blit, the publish call at the top of the present, the pre-screenshot call site), `tools/aurora_spike/aurora_live.cpp` (the bounded probe ring, +18/-6), this file. **0 changes to `src/`**; build green (**472 objects, 0 chunks recompiled**); the DLL rebuilt (`libtls_aurora_live.dll` — the repo's `tools/aurora_spike` is its source of truth, `CMAKE_PROJECT_TOP_LEVEL_INCLUDES` points at it).
+
+| # | what | result |
+|---|---|---|
+| 1 | publish run before the ring fix, 2 812 frames | blit worked, but died `0xC000001D` at published frame ~2 100; probe keys walked `0xB5E01000`… (`logs_ap/bq_publish.log`) |
+| 2 | same after the ring fix | survived all 2 812 frames, handover 1 680, 0 readback/blit failures |
+| 3 | first blit placement (after the snapshot) | shot **byte-identical to the layer's** (mean \|d\| 0.00, max 0) — late, not inert |
+| 4 | blit moved before `if (take_shot)` | shot is aurora's: mean RGB (36.10, 37.43, 37.18) vs the readback's (36.10, 37.42, 37.18), luma 37.00 both; 4.74 mean \|d\| / 41.26 % > 8 against the layer's same present; candidate reference `54CB46BD…`, gate luma 38.20 |
+| 5 | 3 520-frame recording run (`bq_record_a`) | dies at probe **#1 689**; content shot written, popup shot **stale** (`22B1CE31…` = the layer's) — so no reference was recorded |
+| 6 | `pwsh tools/invariant.ps1 -Log logs_ap/gate_bq.log` on the new binary | **PASS attempt 1**: handover 1 680, content `B4646917…` 36.51, popup `22B1CE31…` 46.18, save 1 348 992 / 29 344 |

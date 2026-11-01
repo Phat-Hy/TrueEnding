@@ -65,4 +65,25 @@ void tls_aurora_frame_end(uint32_t guest_frame, int at_present);
  * with a joinable static thread calls std::terminate -> SIGILL at exit (measured). */
 void tls_aurora_shutdown_host(void);
 
+/* ============================================================================================
+ * P4 PUBLISH (handover 5c.46 AP-BQ): aurora renders the frame the runner is about to present.
+ *
+ * WHY THIS IS A SEPARATE ENTRY POINT FROM tls_aurora_frame_end(). The feed has to happen BEFORE the
+ * present, not after it: gx_pipeline_end_frame() - and therefore tls_aurora_frame_end() - runs at
+ * the END of d3d11_present(), after the EFB snapshot, the screenshot and IDXGISwapChain_Present, so
+ * a picture fed there can only be drawn on the NEXT present, one guest frame late. On this scene a
+ * one-frame lag is not subtle: the guest alternates a geometry half and a composite half (5c.46
+ * AP-BJ), so a delayed picture puts the previous half on screen. d3d11_present() therefore calls
+ * tls_aurora_publish_frame() at its TOP, where the frame's tapped bytes are already complete (the
+ * XFB copy that ends the frame has been issued), and blits the result in before the screenshot.
+ *
+ * Publishing ignores TLS_AURORA_FROM/_TO/_SHOTS: every present is rendered and published, which is
+ * what "aurora is the renderer" means. TLS_LAYER=1 wins over TLS_AURORA and disables it (the escape
+ * hatch). Inert unless TLS_AURORA and TLS_AURORA_PUBLISH are both set.
+ *
+ * Returns nonzero when a picture is available for THIS frame; tls_aurora_published() then hands back
+ * the RGBA8 buffer (640x448) the present path blits, valid until the next publish call. */
+int tls_aurora_publish_frame(void);
+const uint8_t* tls_aurora_published(uint32_t* w, uint32_t* h);
+
 #endif

@@ -301,3 +301,80 @@ void tls_aurora_shutdown_host(void) {
     if (s_mod) { FreeLibrary(s_mod); s_mod = NULL; }
 #endif
 }
+
+/* ============================================================================================
+ * P4 PUBLISH (handover 5c.46 AP-BQ). See aurora_live_host.h for why this is not
+ * tls_aurora_frame_end(). The differences are deliberate and small:
+ *
+ *  - it runs at the TOP of d3d11_present(), so the picture belongs to THIS frame;
+ *  - it ignores TLS_AURORA_FROM/_TO/_SHOTS (publishing means every present is rendered);
+ *  - it never prints a per-frame line: a full-run promotion would emit 3 500 of them, so the
+ *    counter it reports is a cumulative one behind TLS_AURORA_STATS instead.
+ *
+ * Everything else is the same path the P1/P4 measurements used: the frame's bytes go to the DLL,
+ * which requests its EFB copy probe and returns the de-tiled 640x448 RGBA8 payload. The probe copy
+ * is an extra copy appended INSIDE aurora, which the harness replay also performs, so the picture
+ * stays the one AP-BO proved byte-identical across the two paths.
+ * ============================================================================ */
+static uint8_t* s_pub_buf;
+static size_t s_pub_cap;
+static uint32_t s_pub_w, s_pub_h;
+static int s_pub_ok;
+static unsigned long s_pub_frames, s_pub_fail;
+
+const uint8_t* tls_aurora_published(uint32_t* w, uint32_t* h) {
+    if (!s_pub_ok) return NULL;
+    if (w) *w = s_pub_w;
+    if (h) *h = s_pub_h;
+    return s_pub_buf;
+}
+
+int tls_aurora_publish_frame(void) {
+#ifdef _WIN32
+    s_pub_ok = 0;
+    if (!getenv("TLS_AURORA")) return 0;
+    if (getenv("TLS_LAYER")) return 0;          /* the escape hatch wins over TLS_AURORA */
+    if (!tls_aurora_live_on) {
+        if (s_mod != NULL) return 0;
+        load();
+        if (!tls_aurora_live_on) return 0;
+    }
+    if (s_len == 0) return 0;                   /* nothing was emitted for this frame */
+    if (!s_mapped) {
+        if (!s_map || !s_mem1) return 0;
+        if (!s_map(s_mem1, s_mem1_size, s_mem2, s_mem2_size)) return 0;
+        s_mapped = 1;
+    }
+    const size_t need = 640u * 448u * 4u;
+    if (s_pub_cap < need) {
+        s_pub_buf = (uint8_t*)realloc(s_pub_buf, need);
+        s_pub_cap = s_pub_buf ? need : 0;
+        if (!s_pub_buf) return 0;
+    }
+    int draws = 0, copies = 0;
+    s_frame(s_buf, (uint32_t)s_len, 1, &draws, &copies);
+    s_len = 0;                                  /* consumed: the end-of-present feed sees empty */
+    uint32_t w = 0, h = 0;
+    int bytes = s_readback(s_pub_buf, (uint32_t)s_pub_cap, &w, &h);
+    s_pub_frames++;
+    if (bytes <= 0 || w == 0 || h == 0) {
+        s_pub_fail++;
+        if (s_pub_fail <= 8 || (s_pub_fail % 200) == 0)
+            printf("[AuroraPublish] frame %lu: no readback (%d bytes, %ux%u) - the layer presents this one\n",
+                   s_pub_frames, bytes, w, h);
+        if ((s_pub_fail % 200) == 0 && s_pub_fail) fflush(stdout);
+        return 0;
+    }
+    s_pub_w = w;
+    s_pub_h = h;
+    s_pub_ok = 1;
+    if (s_pub_frames == 1 || (s_pub_frames % 500) == 0) {
+        printf("[AuroraPublish] fed %lu frame(s), %d draw(s), %d copy cmd(s), %ux%u, failures %lu\n",
+               s_pub_frames, draws, copies, w, h, s_pub_fail);
+        fflush(stdout);
+    }
+    return 1;
+#else
+    return 0;
+#endif
+}
