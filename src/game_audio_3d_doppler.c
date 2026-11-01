@@ -10,7 +10,7 @@ extern void fn_80011220(void);
 extern void vec3_sub(void);
 extern void collision_queryGeometry(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void fn_80063484(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -440,7 +440,7 @@ lbl_fn_80323690_000003A0:
     addi r3, r30, 0x14e8
     lfs f2, 0x8(r1)
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_80323690_000003C0:
     lwz r0, 0x15d4(r30)
     cmpwi r0, 0x0

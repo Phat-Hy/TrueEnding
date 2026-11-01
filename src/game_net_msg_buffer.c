@@ -14,7 +14,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800E2FE0(void);
 extern void fn_800EE5AC(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
@@ -403,7 +403,7 @@ lbl_fn_804FC5AC_00000418:
     cmpwi r0, 0x0
     bne lbl_fn_804FC5AC_00000454
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     li r0, 0x0
     stw r0, 0x1450(r31)
     b lbl_fn_804FC5AC_00000538

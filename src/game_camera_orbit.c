@@ -33,7 +33,7 @@ extern void clip_calculateFrustum(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void battle_resolveAggroHierarchy(void);
 extern void battle_updateTargetAggro(void);
@@ -213,7 +213,7 @@ asm void fn_802E8354(void)
     bl actor_setState
     mr r3, r30
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r0, 0x5c0(r30)
     mr r3, r30
     stb r31, 0x1508(r30)

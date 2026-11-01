@@ -6,7 +6,7 @@ extern void vec3_copy(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80013484(void);
@@ -1635,7 +1635,7 @@ lbl_fn_802F0328_000015E4:
     bl fn_8013A13C
     addi r3, r31, 0x14d8
     addi r4, r1, 0x98
-    bl fn_80011410
+    bl mtx_multVec
     lfs f30, lbl_80884858
     addi r3, r1, 0x8
     addi r4, r31, 0x14d8

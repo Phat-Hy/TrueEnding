@@ -13,7 +13,7 @@ extern void str_initFromCStr(void);
 extern void str_getData(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void magic_castSpellCircle(void);
 extern void boss_initActionStream(void);
 extern void fn_8006CA80(void);
@@ -40,7 +40,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void equip_getGlobalManager(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void save_validateHeader(void);
 extern void fn_8020A780(void);
@@ -1507,7 +1507,7 @@ asm void fn_80344DF4(void)
     stb r31, 0x16b4(r3)
     ori r0, r0, 0x2000
     stw r0, 0x54c(r3)
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r6, 0x6a8(r30)
     addi r3, r30, 0xb0
     lfs f0, lbl_80885260
@@ -2175,7 +2175,7 @@ lbl_fn_80345384_00001B20:
     addi r3, r31, 0x160c
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     lwz r5, 0x12a8(r31)
     addi r3, r1, 0x8
     lwz r0, 0x12a4(r31)

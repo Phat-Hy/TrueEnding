@@ -6,7 +6,7 @@ extern void _restgpr_20(void);
 extern void _savegpr_20(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_add(void);
 extern void atn_Model_findBoneIndex(void);
@@ -188,7 +188,7 @@ lbl_fn_80348FF4_000000B4:
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x60
-    bl fn_80011410
+    bl mtx_multVec
     mr r3, r31
     addi r4, r1, 0x60
     bl fn_803489F4
@@ -251,7 +251,7 @@ lbl_fn_80348FF4_000001AC:
     bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x54
-    bl fn_80011410
+    bl mtx_multVec
     mr r3, r31
     addi r4, r1, 0x54
     bl fn_803489F4

@@ -36,7 +36,7 @@ extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXClampLightAngle(void);
 extern void GXDrawDone(void);
 extern void fn_80616EF0(void);
 extern void fn_80617030(void);
@@ -589,7 +589,7 @@ lbl_fn_800ABD94_000006A0:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     srwi r3, r30, 31
     srwi r0, r31, 31
     add r4, r3, r30
@@ -620,7 +620,7 @@ lbl_fn_800ABD94_000006A0:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     slwi r27, r22, 1
     slwi r28, r23, 1
     lwz r3, lbl_8087EF8C
@@ -1125,7 +1125,7 @@ asm void fn_800AC5F4(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1178,7 +1178,7 @@ asm void fn_800AC6DC(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     lwz r3, lbl_8087EF8C
     mr r4, r28
     mr r5, r27
@@ -1203,7 +1203,7 @@ asm void fn_800AC6DC(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     bl fn_80614190
     bl GXDrawDone
     lwz r3, lbl_8087EFB4
@@ -1721,7 +1721,7 @@ lbl_fn_800ACCB8_000017F0:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     addi r11, r1, 0x40
     bl _restgpr_26
     lwz r0, 0x44(r1)

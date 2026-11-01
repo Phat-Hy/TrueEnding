@@ -19,7 +19,7 @@ extern void collision_queryGeometry(void);
 extern void mem_free(void);
 extern void fn_800EC204(void);
 extern void equip_getGlobalManager(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void fn_8032BE88(void);
 extern void fn_8032C1EC(void);
 extern void PSMTXRotRad(void);
@@ -561,7 +561,7 @@ lbl_fn_8032A9F4_000006D0:
     bdnz lbl_fn_8032A9F4_00000680
 lbl_fn_8032A9F4_000006DC:
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r26
     bl fn_800EC204
     cmpwi r3, 0x0
@@ -572,7 +572,7 @@ lbl_fn_8032A9F4_000006DC:
     bl vec3_copy
 lbl_fn_8032A9F4_00000704:
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r27
     bl fn_800EC204
     cmpwi r3, 0x0
@@ -583,7 +583,7 @@ lbl_fn_8032A9F4_00000704:
     bl vec3_copy
 lbl_fn_8032A9F4_0000072C:
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r28
     bl fn_800EC204
     cmpwi r3, 0x0

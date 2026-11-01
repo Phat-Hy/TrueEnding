@@ -15,7 +15,7 @@ extern void fn_80013484(void);
 extern void item_testLineOfSight(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1703,7 +1703,7 @@ lbl_fn_803267E8_0000163C:
     addi r3, r31, 0x1518
     lfs f2, 0xb8(r1)
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     mr r3, r31
     bl fn_803279D4
     li r30, 0x1
@@ -1789,7 +1789,7 @@ lbl_fn_803267E8_00001788:
     addi r3, r31, 0x1518
     lfs f2, 0x70(r1)
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     mr r3, r31
     bl fn_803279D4
     b lbl_fn_803267E8_00001B58
@@ -1816,7 +1816,7 @@ lbl_fn_803267E8_000018CC:
     addi r3, r31, 0x14e8
     lfs f2, 0x8(r1)
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     mr r3, r31
     bl fn_803271A4
     b lbl_fn_803267E8_00001B58

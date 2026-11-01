@@ -8,10 +8,10 @@ extern void mtx_getTranslation(void);
 extern void vec3_set(void);
 extern void fn_8000DD04(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_800133B0(void);
 extern void fn_80013404(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
@@ -2001,7 +2001,7 @@ lbl_fn_80148CC4_000019B0:
     bl fn_80147A08
     addi r3, r1, 0x8c
     addi r4, r1, 0x1c0
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x8c
     bl fn_80139F60
     b lbl_fn_80148CC4_00001AF8
@@ -2010,7 +2010,7 @@ lbl_fn_80148CC4_00001AE4:
     addi r3, r1, 0x8c
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_80148CC4_00001AF8:
     lfs f1, lbl_8088196C
     addi r3, r1, 0x80
@@ -2052,7 +2052,7 @@ lbl_fn_80148CC4_00001AF8:
     bl fn_80147A08
     addi r3, r1, 0x80
     addi r4, r1, 0x190
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x80
     bl fn_80139F60
     b lbl_fn_80148CC4_00001BBC
@@ -2061,7 +2061,7 @@ lbl_fn_80148CC4_00001BA8:
     addi r3, r1, 0x80
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_80148CC4_00001BBC:
     lfs f2, 0x90(r1)
     mr r3, r31

@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void ui_destroyWidget(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
@@ -1795,7 +1795,7 @@ lbl_fn_803F4A4C_00001710:
     li r4, 0x0
     li r5, 0x0
     addi r3, r3, 0x8
-    bl fn_8004B290
+    bl sound_initChannelParams
 lbl_fn_803F4A4C_00001754:
     lwz r30, 0x2fc(r29)
     cmpwi r30, 0x0

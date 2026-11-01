@@ -16,7 +16,7 @@ extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
 extern void lockon_updateTarget(void);
@@ -1137,7 +1137,7 @@ asm void fn_804150BC(void)
     cmplwi r0, 0x2
     blelr
     addi r3, r3, 0xf4
-    b fn_8008CD60
+    b minimap_renderOverlay
     blr
 }
 

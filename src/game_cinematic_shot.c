@@ -22,7 +22,7 @@ extern void npc_initScriptContext(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
 extern void fn_80158CA4(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
 extern void battle_generateLootDrops(void);
@@ -1724,7 +1724,7 @@ lbl_fn_80336C8C_000017AC:
     cror eq, gt, eq
     bne lbl_fn_80336C8C_00001844
     li r4, 0x0
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r3, lbl_8087F3C0
     addi r4, r30, 0x1534
     li r5, 0x0

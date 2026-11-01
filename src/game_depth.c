@@ -11,7 +11,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void*);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void* dungeon_initGlobalContext(void);
@@ -32,7 +32,7 @@ extern void PSVECNormalize(void);
 extern void PSVECCrossProduct(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXClampLightAngle(void);
 extern void fn_806163B0(void);
 extern void fn_80616400(void);
 extern void fn_80616430(void);
@@ -93,7 +93,7 @@ atn_LH_Texture* atn_LH_Texture_constructor(atn_LH_Texture* this);
 atn_LoadHandle* atn_LH_Texture_destructor(atn_LoadHandle* handle, int flags);
 atn_LH_Texture* atn_LH_Texture_destructAndFree(atn_LH_Texture* this, int flags);
 void atn_LH_Texture_release(atn_LH_Texture* this);
-void fn_800D5908(void);
+void depth_resetRenderTarget(void);
 void fn_800D594C(void);
 void atn_LH_Texture_update(void);
 void fn_800D5A3C(void);
@@ -185,7 +185,7 @@ atn_LH_Texture* atn_LH_Texture_destructAndFree(atn_LH_Texture* this, int flags)
     return this;
 }
 
-asm void fn_800D5908(void)
+asm void depth_resetRenderTarget(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -346,7 +346,7 @@ lbl_fn_800D5A3C_000003D4:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     li r0, 0x1
     stb r0, 0x2c(r27)
     addi r11, r1, 0x20
@@ -427,7 +427,7 @@ lbl_fn_800D5B58_000004F4:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     li r0, 0x1
     stb r0, 0x2c(r25)
     addi r11, r1, 0x30
@@ -1094,7 +1094,7 @@ lbl_fn_800D5F68_00000F54:
     li r4, 0x0
     addi r3, r30, lbl_807C75F4@l
     li r5, 0x1
-    bl fn_8004B290
+    bl sound_initChannelParams
     lis r4, sound_releaseChannel@ha
     lis r5, lbl_807C75E8@ha
     addi r3, r30, lbl_807C75F4@l

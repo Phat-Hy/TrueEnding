@@ -18,7 +18,7 @@ extern void fn_800FDE60(void);
 extern void actor_findSpawnTemplate(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_801446F0(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void fn_80176ACC(void);
 extern void save_validateHeader(void);
 extern void fn_801F4AA0(void);
@@ -2900,7 +2900,7 @@ asm void fn_805011D0(void)
     rlwinm r0, r0, 0, 7, 5
     stw r0, 0x12a4(r3)
     lwz r3, 0x0(r31)
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
 lbl_fn_805011D0_00001470:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

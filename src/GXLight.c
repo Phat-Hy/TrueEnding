@@ -54,7 +54,7 @@ void fn_80615E00(void);
 void fn_80615F30(void);
 void fn_80615FF0(void);
 void fn_80616200(void);
-void fn_80616250(void);
+void GXClampLightAngle(void);
 void fn_80616360(void);
 
 asm void fn_80615700(void)
@@ -893,22 +893,22 @@ asm void fn_80616200(void)
     blr
 }
 
-asm void fn_80616250(void)
+asm void GXClampLightAngle(void)
 {
     nofralloc
     lfs f0, lbl_80888798
     stwu r1, -0x10(r1)
     fcmpo cr0, f3, f0
-    bge lbl_fn_80616250_00000B68
+    bge lbl_GXClampLightAngle_00000B68
     fmr f3, f0
-    b lbl_fn_80616250_00000B7C
-lbl_fn_80616250_00000B68:
+    b lbl_GXClampLightAngle_00000B7C
+lbl_GXClampLightAngle_00000B68:
     lfs f0, lbl_808887A0
     fcmpo cr0, f3, f0
     cror eq, gt, eq
-    bne lbl_fn_80616250_00000B7C
+    bne lbl_GXClampLightAngle_00000B7C
     lfs f3, lbl_8088879C
-lbl_fn_80616250_00000B7C:
+lbl_GXClampLightAngle_00000B7C:
     lfs f4, lbl_808887A4
     subi r0, r5, 0x1
     cntlzw r9, r0
@@ -931,15 +931,15 @@ lbl_fn_80616250_00000B7C:
     rlwimi r0, r8, 19, 11, 12
     rlwimi r0, r6, 21, 10, 10
     stw r0, 0x0(r3)
-    bge lbl_fn_80616250_00000BE0
+    bge lbl_GXClampLightAngle_00000BE0
     fmr f1, f0
-    b lbl_fn_80616250_00000BF0
-lbl_fn_80616250_00000BE0:
+    b lbl_GXClampLightAngle_00000BF0
+lbl_GXClampLightAngle_00000BE0:
     lfs f0, lbl_808887AC
     fcmpo cr0, f1, f0
-    ble lbl_fn_80616250_00000BF0
+    ble lbl_GXClampLightAngle_00000BF0
     fmr f1, f0
-lbl_fn_80616250_00000BF0:
+lbl_GXClampLightAngle_00000BF0:
     lfs f3, lbl_80888788
     lfs f0, lbl_808887A8
     fmuls f1, f3, f1
@@ -947,15 +947,15 @@ lbl_fn_80616250_00000BF0:
     fctiwz f1, f1
     stfd f1, 0x8(r1)
     lwz r4, 0xc(r1)
-    bge lbl_fn_80616250_00000C18
+    bge lbl_GXClampLightAngle_00000C18
     fmr f2, f0
-    b lbl_fn_80616250_00000C28
-lbl_fn_80616250_00000C18:
+    b lbl_GXClampLightAngle_00000C28
+lbl_GXClampLightAngle_00000C18:
     lfs f0, lbl_808887AC
     fcmpo cr0, f2, f0
-    ble lbl_fn_80616250_00000C28
+    ble lbl_GXClampLightAngle_00000C28
     fmr f2, f0
-lbl_fn_80616250_00000C28:
+lbl_GXClampLightAngle_00000C28:
     lfs f0, lbl_80888788
     lwz r0, 0x4(r3)
     rlwimi r0, r4, 0, 24, 31

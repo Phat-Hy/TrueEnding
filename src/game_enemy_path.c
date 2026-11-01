@@ -13,7 +13,7 @@ extern void vec3_copy(void);
 extern void fn_8000DD0C(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_80012C88(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
@@ -21,7 +21,7 @@ extern void fn_8001336C(void);
 extern void fn_800133B0(void);
 extern void fn_80013404(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800F7260(void);
 extern void viewport_getNextSequenceId(void);
@@ -1130,7 +1130,7 @@ lbl_fn_80129A6C_00000E4C:
     bl fn_8001336C
     addi r3, r1, 0x94
     addi r4, r1, 0x118
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x88
     addi r4, r1, 0x94
     bl vec3_toEulerAngles
@@ -1202,12 +1202,12 @@ lbl_fn_80129A6C_00000F74:
     addi r3, r1, 0x100
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     lfs f1, lbl_808818A8
     addi r3, r1, 0x10c
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_80129A6C_00000F9C:
     li r0, 0x0
     stb r0, 0x35(r31)

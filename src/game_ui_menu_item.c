@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_assign(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void collision_queryGeometry(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -949,7 +949,7 @@ asm void fn_801B6494(void)
     bl fn_8013A13C
     addi r3, r1, 0x50
     addi r4, r1, 0x100
-    bl fn_80011410
+    bl mtx_multVec
     addi r4, r31, 0x18
     lwz r6, 0x18(r31)
     lwz r5, 0x4(r4)
@@ -988,7 +988,7 @@ lbl_fn_801B6494_00000CC8:
     bl fn_8013A13C
     addi r3, r1, 0x44
     addi r4, r1, 0xa8
-    bl fn_80011410
+    bl mtx_multVec
     addi r4, r31, 0x24
     lwz r6, 0x24(r31)
     lwz r5, 0x4(r4)

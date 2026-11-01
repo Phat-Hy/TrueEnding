@@ -28,7 +28,7 @@ extern void atn_Anim_getLayerTrack(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void fn_800DAA3C(void);
 extern void fn_800DAB68(void);
 extern void fn_800DC980(void);
@@ -1541,7 +1541,7 @@ lbl_fn_802280B4_000012F4:
     addi r4, r14, lbl_80742EA8@l
     addi r3, r21, 0x120
     addi r4, r4, 0x24
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     lwz r3, 0x194(r21)
     li r0, 0x0
     stb r0, 0x14d(r21)

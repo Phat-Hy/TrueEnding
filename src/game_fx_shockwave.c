@@ -13,7 +13,7 @@ extern void fn_8000E18C(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004203C(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -32,7 +32,7 @@ extern void fn_8012F034(void);
 extern void actor_testBitFlag(void);
 extern void fn_80133B30(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void actor_setState(void);
@@ -963,7 +963,7 @@ asm void fn_80293E30(void)
     cmpwi r3, 0x0
     beq lbl_fn_80293E30_00000B84
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r29, r3
     b lbl_fn_80293E30_00000B88
 lbl_fn_80293E30_00000B84:
@@ -1498,7 +1498,7 @@ lbl_fn_80293E30_00001300:
     addi r3, r27, 0x1654
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_80293E30_00001314:
     lwz r12, 0x0(r27)
     mr r3, r27

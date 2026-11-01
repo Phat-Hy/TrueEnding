@@ -17,7 +17,7 @@ extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void map_debugLog(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
@@ -154,7 +154,7 @@ lbl_fn_8040DA48_00000044:
     cmpwi r0, 0x0
     beq lbl_fn_8040DA48_00000064
     addi r3, r3, 0x4
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_8040DA48_00000064:
     addi r30, r30, 0x1
     addi r31, r31, 0x434

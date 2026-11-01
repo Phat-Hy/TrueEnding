@@ -17,7 +17,7 @@ extern void route_createWaypoint(void);
 extern void fn_800B6218(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void sky_renderStub(void);
 extern void atn_Curve_evaluate(void);
@@ -90,7 +90,7 @@ void fn_800C122C(void);
 void fn_800C1424(void);
 void fn_800C1660(void);
 void fn_800C169C(void);
-void fn_800C16B4(void);
+void skeleton_getGlobalManager(void);
 void fn_800C16BC(void);
 void fn_800C16C0(void);
 void fn_800C1720(void);
@@ -444,7 +444,7 @@ lbl_fn_800C169C_00000480:
     blr
 }
 
-asm void fn_800C16B4(void)
+asm void skeleton_getGlobalManager(void)
 {
     nofralloc
     lwz r3, lbl_8087EFB8
@@ -541,7 +541,7 @@ lbl_fn_800C1720_00000574:
 lbl_fn_800C1720_000005C0:
     lwz r3, 0x40(r30)
     mr r4, r31
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -591,7 +591,7 @@ lbl_fn_800C1814_00000620:
 lbl_fn_800C1814_0000066C:
     lwz r3, 0x40(r30)
     mr r4, r31
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1214,7 +1214,7 @@ lbl_fn_800C2108_00000F4C:
     lis r4, lbl_807337B0@ha
     addi r3, r27, 0x164
     addi r4, r4, lbl_807337B0@l
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_fn_800C2108_00000F64:
     addi r3, r27, 0x164
     bl atn_LH_Texture_update
@@ -1908,7 +1908,7 @@ lbl_fn_800C289C_000018B8:
 lbl_fn_800C289C_000018D0:
     lwz r3, 0xb8(r30)
     mr r4, r31
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_fn_800C289C_000018DC:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
@@ -1974,7 +1974,7 @@ lbl_fn_800C2B24_0000196C:
 lbl_fn_800C2B24_000019B8:
     lwz r3, 0x110(r30)
     mr r4, r31
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     lfs f0, lbl_808810D0
     addi r3, r1, 0x8
     stfs f0, 0x8(r1)

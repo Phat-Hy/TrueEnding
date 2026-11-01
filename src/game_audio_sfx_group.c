@@ -25,7 +25,7 @@ extern void fn_80140588(void);
 extern void quest_ctorRewardItem(void);
 extern void fn_801595BC(void);
 extern void party_configureMemberSlot(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void battle_calcAABBCenter(void);
 extern void task_findEntryById(void);
 extern void fn_80310314(void);
@@ -775,7 +775,7 @@ lbl_fn_803123D0_0000099C:
 lbl_fn_803123D0_000009DC:
     mr r3, r29
     li r4, 0x0
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r0, 0x12a4(r29)
     lwz r3, 0x5c0(r29)
     extrwi. r0, r0, 1, 13

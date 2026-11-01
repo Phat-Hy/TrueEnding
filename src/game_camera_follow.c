@@ -23,7 +23,7 @@ extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015AC48(void);
 extern void debuff_clearStatus(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
 extern void battle_updateActorStatus(void);
@@ -1609,7 +1609,7 @@ lbl_fn_802E6228_00001514:
     bl actor_setState
     mr r3, r31
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r0, 0x5c0(r31)
     mr r3, r31
     stb r30, 0x1508(r31)

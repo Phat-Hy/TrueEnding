@@ -27,7 +27,7 @@ extern void cam_destroyMsgHandle(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void fn_801A03E0(void);
 extern void fn_8020A81C(void);
 extern void res_MsgHandle_ctor(void);
@@ -1199,7 +1199,7 @@ asm void fn_802D7E80(void)
     cmpwi r3, 0x0
     beq lbl_fn_802D7E80_00001420
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     cmpwi r3, 0x0
     beq lbl_fn_802D7E80_00001420
     addi r3, r31, 0x1684
@@ -1228,7 +1228,7 @@ lbl_fn_802D7E80_00000FF8:
     bl str_parseInt
     mr r28, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r28
     bl fn_800EC204
     cmpwi r3, 0x0
@@ -1262,7 +1262,7 @@ lbl_fn_802D7E80_00001074:
     bl str_parseInt
     mr r28, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r28
     bl fn_800EC204
     cmpwi r3, 0x0
@@ -1406,7 +1406,7 @@ lbl_fn_802D7E80_00001264:
     bl str_parseInt
     mr r28, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r28
     bl fn_800EC204
     cmpwi r3, 0x0

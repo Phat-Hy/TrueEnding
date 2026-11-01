@@ -67,7 +67,7 @@ extern u32 lbl_80880980;
 
 /* Function declarations */
 void mission_updateStub(void);
-void fn_80057A68(f32 *v, f32 x, f32 y, f32 z);
+void vec3_initValues(f32 *v, f32 x, f32 y, f32 z);
 void fn_80057A78(void);
 void atn_ColliBox_testRay(void);
 void atn_ColliBox_testSphere(void);
@@ -110,7 +110,7 @@ void mission_updateStub(void)
 {
 }
 
-void fn_80057A68(f32 *v, f32 x, f32 y, f32 z)
+void vec3_initValues(f32 *v, f32 x, f32 y, f32 z)
 {
     v[0] = x;
     v[1] = y;

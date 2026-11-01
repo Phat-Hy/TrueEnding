@@ -17,7 +17,7 @@ extern void fn_80063200(void);
 extern void fn_80063764(void);
 extern void fn_800638B0(void);
 extern void magic_castSpellCircle(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void world_getGlobalFlag(void);
 extern void world_getLocalFlag(void);
 extern void fn_8037D4C0(void);
@@ -1841,7 +1841,7 @@ lbl_fn_803C221C_00001930:
     cmpwi r0, 0x0
     beq lbl_fn_803C221C_00001974
     lwz r3, 0x4(r3)
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_803C221C_00001974:
     addi r15, r15, 0x20
     addi r16, r16, 0x1

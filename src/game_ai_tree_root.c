@@ -30,7 +30,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_801028E4(void);
 extern void skill_findNodeById(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void party_configureMemberSlot(void);
@@ -1879,7 +1879,7 @@ lbl_fn_80256C04_00001948:
     cmpwi r0, 0x0
     beq lbl_fn_80256C04_000019DC
     mr r3, r15
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_80256C04_000019DC
 lbl_fn_80256C04_0000198C:
     lwz r0, 0x55c(r15)
@@ -1903,7 +1903,7 @@ lbl_fn_80256C04_000019C8:
     cmpwi r0, 0x3
     beq lbl_fn_80256C04_000019DC
     mr r3, r15
-    bl fn_80139560
+    bl npc_calcTargetDistance
 lbl_fn_80256C04_000019DC:
     mr r3, r15
     bl dialog_updateScriptState

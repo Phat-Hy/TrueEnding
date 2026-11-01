@@ -30,14 +30,14 @@ extern void boss_updatePhaseState(void);
 extern void npc_updateDialogueTarget(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void quest_checkCondition(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void fn_8015ECC4(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
 extern void res_MsgHandle_isLoading(void);
@@ -531,7 +531,7 @@ asm void fn_80345BA8(void)
     cmpwi r3, 0x0
     beq lbl_fn_80345BA8_00000528
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r31, r3
     b lbl_fn_80345BA8_0000052C
 lbl_fn_80345BA8_00000528:
@@ -985,7 +985,7 @@ asm void fn_80346384(void)
     bne lbl_fn_80346384_00000BC8
     mr r3, r31
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     addi r3, r31, 0xb0
     li r4, 0x0
     bl atn_Anim_getLayerDuration

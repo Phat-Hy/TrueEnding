@@ -20,7 +20,7 @@ extern void mem_getAllocSize(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void atn_LH_Texture_release(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void fn_800D594C(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800DC978(void);
@@ -1223,7 +1223,7 @@ lbl_fn_8006D0C8_00000F40:
 lbl_fn_8006D0C8_00000F64:
     lwz r4, 0x44(r1)
 lbl_fn_8006D0C8_00000F68:
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     lwz r0, 0x3c(r1)
     srwi. r0, r0, 31
     bne lbl_fn_8006D0C8_00000F84

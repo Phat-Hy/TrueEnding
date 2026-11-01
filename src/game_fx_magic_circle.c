@@ -12,7 +12,7 @@ extern void vec3_assign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void ui_drawColoredQuad(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -173,7 +173,7 @@ lbl_fn_8029F148_000000A4:
     addi r3, r1, 0x14
     lfs f3, lbl_80883D30
     fmr f2, f1
-    bl fn_80057A68
+    bl vec3_initValues
     lfs f30, lbl_80883D60
     b lbl_fn_8029F148_0000012C
 lbl_fn_8029F148_00000124:

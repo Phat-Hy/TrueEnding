@@ -33,7 +33,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void env_updateAtmosphere(void);
 extern void wcs_parseInt(void);
 extern void fn_800E19AC(void);
@@ -264,7 +264,7 @@ lbl_fn_8046B798_000001B4:
     bl strcat
     addi r3, r28, 0xc
     addi r4, r1, 0x30
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_fn_8046B798_00000254:
     addi r3, r1, 0x130
     bl talk_parseDialogue

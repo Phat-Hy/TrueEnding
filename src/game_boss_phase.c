@@ -11,7 +11,7 @@ extern void fn_8000D7DC(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void ui_destroyWidget(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_formatQuotedString(void);
@@ -777,7 +777,7 @@ lbl_boss_updatePhaseState_0000083C:
     li r4, 0x0
     li r5, 0x0
     addi r3, r3, 0x8
-    bl fn_8004B290
+    bl sound_initChannelParams
 lbl_boss_updatePhaseState_00000878:
     lwz r27, 0x2b8(r30)
     cmpwi r27, 0x0

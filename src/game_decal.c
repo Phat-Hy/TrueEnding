@@ -32,7 +32,7 @@ extern void magic_dispatchActionCommand(void);
 extern void fn_801237F0(void);
 extern void fn_801240B4(void);
 extern void fn_80134134(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_evaluateConditions(void);
 extern void fn_80155790(void);
 extern void inventory_calcTotalStats(void);
@@ -173,7 +173,7 @@ lbl_fn_800E589C_00000078:
     bl fn_8011E81C
 lbl_fn_800E589C_000000B4:
     mr r3, r30
-    bl fn_80139560
+    bl npc_calcTargetDistance
     cmpwi r29, 0x0
     beq lbl_fn_800E589C_00000838
     lwz r0, 0x55c(r30)
@@ -578,7 +578,7 @@ lbl_fn_800E589C_00000664:
     stfs f31, 0x2e8(r30)
 lbl_fn_800E589C_00000668:
     mr r3, r30
-    bl fn_80139560
+    bl npc_calcTargetDistance
     lwz r0, lbl_8087F048
     cmpwi r0, 0x0
     beq lbl_fn_800E589C_00000838
@@ -703,7 +703,7 @@ lbl_fn_800E589C_00000818:
     b lbl_fn_800E589C_00000838
 lbl_fn_800E589C_00000830:
     mr r3, r30
-    bl fn_80139560
+    bl npc_calcTargetDistance
 lbl_fn_800E589C_00000838:
     addi r11, r1, 0xf0
     psq_l f31, 0x108(r1), 0, 0

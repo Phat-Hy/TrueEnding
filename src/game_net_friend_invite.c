@@ -46,9 +46,9 @@ extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_80139F4C(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void dialog_selectChoice(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void fn_80176ACC(void);
 extern void fn_8017A300(void);
 extern void fn_80198C00(void);
@@ -4086,7 +4086,7 @@ lbl_fn_804D25D4_0000346C:
     bne lbl_fn_804D25D4_00003544
 lbl_fn_804D25D4_000034B4:
     lwz r3, 0x5e0(r24)
-    bl fn_8013C504
+    bl npc_getDialogController
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00003544
     bl fn_804D64A0
@@ -4238,7 +4238,7 @@ lbl_fn_804D25D4_0000367C:
     bne lbl_fn_804D25D4_000036E8
     lwz r3, 0x0(r30)
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
 lbl_fn_804D25D4_000036E8:
     addi r20, r20, 0x1
 lbl_fn_804D25D4_000036EC:

@@ -239,7 +239,7 @@ void fn_8004B0E4(void);
 void fn_8004B158(void);
 void fn_8004B1EC(void);
 void fn_8004B20C(void);
-void fn_8004B290(void);
+void sound_initChannelParams(void);
 void sound_releaseChannel(void);
 
 void fn_800461FC(void)
@@ -6275,7 +6275,7 @@ asm void fn_8004B20C(void)
     blr
 }
 
-asm void fn_8004B290(void)
+asm void sound_initChannelParams(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

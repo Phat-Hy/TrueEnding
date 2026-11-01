@@ -24,7 +24,7 @@ extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void fn_80092A4C(void);
 extern void fn_80094F98(void);
 extern void lockon_updateTarget(void);
@@ -1312,7 +1312,7 @@ lbl_fn_80428338_00001000:
     cmpwi r0, 0x0
     beq lbl_fn_80428338_00001018
     addi r3, r4, 0x54
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_80428338_00001018:
     addi r31, r31, 0x450
     addi r30, r30, 0x1

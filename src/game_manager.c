@@ -87,7 +87,7 @@ void vec3_toEulerAngles(void);
 void fn_80011220(void);
 void fn_8001122C(void);
 void fn_800112E0(void);
-void fn_80011410(void);
+void mtx_multVec(void);
 void fn_80011420(void);
 void fn_80011964(void);
 void fn_800119B8(void);
@@ -1476,7 +1476,7 @@ lbl_fn_800112E0_000012E0:
     blr
 }
 
-asm void fn_80011410(void)
+asm void mtx_multVec(void)
 {
     nofralloc
     mr r5, r3
@@ -3499,7 +3499,7 @@ lbl_fn_80012D34_00002C80:
     bl fn_8001336C
     addi r3, r1, 0x164
     addi r4, r1, 0x278
-    bl fn_80011410
+    bl mtx_multVec
     mr r4, r31
     addi r3, r1, 0xb0
     bl mtx_getTranslation
@@ -3592,7 +3592,7 @@ lbl_fn_80012D34_00002E44:
     bl fn_800109E0
     addi r3, r1, 0x164
     addi r4, r1, 0x248
-    bl fn_80011410
+    bl mtx_multVec
     mr r4, r31
     addi r3, r1, 0x80
     bl mtx_getTranslation
@@ -3622,7 +3622,7 @@ lbl_fn_80012D34_00002E84:
     bl fn_800109E0
     addi r3, r1, 0x134
     addi r4, r1, 0x218
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x74
     addi r4, r1, 0x140
     addi r5, r1, 0x134
@@ -3684,7 +3684,7 @@ lbl_fn_80012D34_00002F00:
     bl fn_800109E0
     addi r3, r1, 0x11c
     addi r4, r1, 0x1e8
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x11c
     addi r4, r1, 0x110
     bl fn_80012C88
@@ -3736,7 +3736,7 @@ lbl_fn_80012D34_00003000:
     bl fn_800109E0
     addi r3, r1, 0x104
     addi r4, r1, 0x1b8
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x104
     addi r4, r1, 0xf8
     bl fn_80012C88
@@ -3796,7 +3796,7 @@ lbl_fn_80012D34_00003120:
     bl fn_800109E0
     addi r3, r1, 0xd4
     addi r4, r1, 0x188
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x8
     addi r4, r1, 0xec
     addi r5, r1, 0xd4

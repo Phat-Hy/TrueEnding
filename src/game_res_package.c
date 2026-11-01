@@ -8,7 +8,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void scene_traverseNode(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_80071D68(void);
@@ -122,14 +122,14 @@ lbl_fn_8022526C_00000038:
     li r4, 0x0
     li r5, 0x0
     stw r0, 0x1424(r29)
-    bl fn_8004B290
+    bl sound_initChannelParams
     li r31, 0x0
     stw r31, 0x1620(r29)
     addi r3, r29, 0x162c
     li r4, 0x0
     stw r31, 0x1624(r29)
     li r5, 0x0
-    bl fn_8004B290
+    bl sound_initChannelParams
     lfs f0, lbl_80883020
     li r0, -0x1
     lis r4, fn_802253D8@ha
@@ -283,7 +283,7 @@ asm void fn_802254B0(void)
     addi r3, r1, 0x8
     stw r30, 0x208(r1)
     stw r29, 0x204(r1)
-    bl fn_8004B290
+    bl sound_initChannelParams
     fadds f9, f30, f29
     lfs f31, lbl_80883020
     lfs f0, lbl_8088302C
@@ -613,7 +613,7 @@ lbl_fn_8022589C_000006F0:
     li r4, 0x0
     li r5, 0x0
     addi r3, r3, 0x8
-    bl fn_8004B290
+    bl sound_initChannelParams
 lbl_fn_8022589C_00000774:
     lwz r24, 0x2b8(r23)
     cmpwi r24, 0x0

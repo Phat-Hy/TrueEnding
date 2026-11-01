@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_80058078(void);
@@ -24,7 +24,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void motion_updateFogAdj(void);
 extern void fn_800C122C(void);
 extern void fn_800C2C20(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
@@ -560,7 +560,7 @@ lbl_fn_803F53E0_000006B8:
     addi r3, r1, 0x2d4
     li r4, 0x0
     li r5, 0x1
-    bl fn_8004B290
+    bl sound_initChannelParams
     lwz r3, lbl_8087F490
     lwz r27, lbl_8087F430
     lwz r0, 0x10fc(r3)
@@ -788,7 +788,7 @@ lbl_fn_803F53E0_000009C8:
     addi r3, r1, 0xe0
     li r4, 0x0
     li r5, 0x0
-    bl fn_8004B290
+    bl sound_initChannelParams
     lfs f2, 0x2e4(r1)
     addi r3, r1, 0xe8
     psq_l f1, 0x0(r29), 0, 0
@@ -1388,7 +1388,7 @@ lbl_fn_803F5C2C_000012B8:
     bl talk_formatQuotedString
     mr r4, r3
     addi r3, r31, 0x6a0
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     stw r30, 0x6d0(r31)
     b lbl_fn_803F5C2C_0000132C
 lbl_fn_803F5C2C_000012E8:

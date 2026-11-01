@@ -34,7 +34,7 @@ extern void fn_805ED390(void);
 extern void PSMTXConcat(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXClampLightAngle(void);
 extern void msl_releaseRefCount(void);
 extern void runtime_clampDouble(void);
 extern char* strcpy(char* dest, const char* src);
@@ -178,7 +178,7 @@ asm void fn_800BD9C0(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     mr r3, r27
     addi r4, r27, 0x530
     bl fn_800BC468
@@ -205,7 +205,7 @@ asm void fn_800BD9C0(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     addi r11, r1, 0x30
     bl _restgpr_27
     lwz r0, 0x34(r1)

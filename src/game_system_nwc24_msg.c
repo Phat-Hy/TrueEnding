@@ -9,14 +9,14 @@ extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void item_useConsumable(void);
 extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A56A8(void);
 extern void fn_800A58D0(void);
@@ -443,7 +443,7 @@ lbl_fn_80387910_00000454:
     addi r3, r1, 0x104
     lfs f3, lbl_808858F8
     fmr f2, f1
-    bl fn_80057A68
+    bl vec3_initValues
     b lbl_fn_80387910_000004D8
 lbl_fn_80387910_000004D0:
     addi r3, r1, 0x104
@@ -498,7 +498,7 @@ lbl_fn_80387910_000004D8:
     fneg f3, f30
     addi r3, r1, 0x110
     fmr f2, f1
-    bl fn_80057A68
+    bl vec3_initValues
     addi r3, r1, 0xa4
     addi r4, r1, 0xf8
     bl fn_8013C3B4
@@ -507,7 +507,7 @@ lbl_fn_80387910_000004D8:
     bl fn_800109E0
     addi r3, r1, 0x110
     addi r4, r1, 0x198
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x98
     addi r4, r1, 0x11c
     addi r5, r1, 0x110
@@ -537,7 +537,7 @@ lbl_fn_80387910_000004D8:
     bl fn_8013A13C
     addi r3, r1, 0xe0
     addi r4, r1, 0x168
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0xd4
     addi r4, r1, 0x11c
     addi r5, r1, 0x128

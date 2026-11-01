@@ -13,7 +13,7 @@ extern void fn_80063764(void);
 extern void magic_castSpellCircle(void);
 extern void script_executeOpcode(void);
 extern void fn_8006F2F0(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
@@ -2137,7 +2137,7 @@ lbl_fn_800F5314_00001E1C:
     cmpwi r0, 0x0
     beq lbl_fn_800F5314_00001E40
     mr r3, r20
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_800F5314_00001E40:
     addi r16, r16, 0x1
     addi r20, r20, 0x21c

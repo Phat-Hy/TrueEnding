@@ -10,7 +10,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_26(void);
 extern void boss_recordDamage(void);
 extern void mem_alloc(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void atn_Task_setActive(void);
 extern void fn_80101138(void);
 extern void fn_8010EE78(void);
@@ -147,7 +147,7 @@ lbl_fn_8056F2FC_000000B0:
     b lbl_fn_8056F2FC_000000DC
 lbl_fn_8056F2FC_000000CC:
     lwz r3, 0x838(r30)
-    bl fn_8008CD60
+    bl minimap_renderOverlay
     addi r30, r30, 0x38
     addi r29, r29, 0x1
 lbl_fn_8056F2FC_000000DC:

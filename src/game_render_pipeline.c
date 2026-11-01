@@ -12,7 +12,7 @@ extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
 extern void fn_800109E0(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_80012C88(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void fn_8001336C(void);
@@ -1948,7 +1948,7 @@ lbl_fn_802A3D80_00001A34:
     bl fn_800109E0
     addi r3, r1, 0x20
     addi r4, r1, 0x108
-    bl fn_80011410
+    bl mtx_multVec
     mr r3, r27
     bl fn_8000DD0C
     addi r4, r30, 0x277
@@ -1958,7 +1958,7 @@ lbl_fn_802A3D80_00001A34:
     bl fn_8001336C
     addi r3, r1, 0x20
     addi r4, r1, 0xd8
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x2c
     addi r4, r1, 0x20
     bl fn_80012C88
@@ -1977,20 +1977,20 @@ lbl_fn_802A3D80_00001A34:
     bl fn_8013A13C
     addi r3, r1, 0x14
     addi r4, r1, 0xa8
-    bl fn_80011410
+    bl mtx_multVec
     fmr f1, f28
     bl fn_801125F8
     addi r3, r1, 0x78
     bl fn_802A3D64
     addi r3, r1, 0x14
     addi r4, r1, 0x78
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x48
     addi r4, r27, 0x534
     bl fn_800109E0
     addi r3, r1, 0x14
     addi r4, r1, 0x48
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x138
     bl fn_802A4120
     stw r28, 0x138(r1)

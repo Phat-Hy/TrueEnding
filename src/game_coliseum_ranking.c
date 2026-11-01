@@ -39,7 +39,7 @@ extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void str_skipWhitespace(void);
 extern void sound_initGlobalInstances(void);
@@ -2016,7 +2016,7 @@ lbl_fn_80497374_00001820:
     bne lbl_fn_80497374_00001834
     addi r3, r30, 0xf0
     addi r4, r30, 0x70
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_fn_80497374_00001834:
     li r0, 0x1
     stw r0, 0x50(r30)

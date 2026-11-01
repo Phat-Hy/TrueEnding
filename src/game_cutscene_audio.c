@@ -39,7 +39,7 @@ extern void magic_getOffset6C(void);
 extern void fn_8012A1B8(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void fn_8013A194(void);
 extern void npc_getPosition(void);
 extern void fn_8014052C(void);
@@ -1377,7 +1377,7 @@ lbl_fn_8032E938_0000116C:
     bl fn_8032EF38
 lbl_fn_8032E938_0000117C:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     mr r3, r31
     bl dialog_updateScriptState
     mr r3, r31

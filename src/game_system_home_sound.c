@@ -24,7 +24,7 @@ extern void fn_80075DEC(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void fn_80089EE4(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800928B0(void);
 extern void fn_80093F58(void);
@@ -64,7 +64,7 @@ extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void GXInitLightDistAttn(void);
 extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXClampLightAngle(void);
 extern void fn_806165B0(void);
 extern void fn_80617340(void);
 extern void GXSetTevOrder(void);
@@ -448,7 +448,7 @@ asm void fn_80363C10(void)
     cmpwi r0, 0x0
     bltlr
     addi r3, r3, 0x4
-    b fn_8008CD60
+    b minimap_renderOverlay
     blr
 }
 
@@ -1484,7 +1484,7 @@ lbl_dvd_initFatalErrorScreen_00001278:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     addi r3, r1, 0x38
     li r4, 0x0
     bl fn_806165B0

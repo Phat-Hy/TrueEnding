@@ -30,7 +30,7 @@ extern void node_createNamedChild(void);
 extern void fn_800C5F5C(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void str_findChar(void);
 extern void sky_renderStub(void);
 extern void memcmp(void);
@@ -1263,7 +1263,7 @@ lbl_fn_80080C20_00000FC4:
 lbl_fn_80080C20_00000FF0:
     stw r3, 0x4(r15)
     addi r4, r1, 0x58
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_fn_80080C20_00000FFC:
     lwz r0, 0x4c(r1)
     srwi. r0, r0, 31

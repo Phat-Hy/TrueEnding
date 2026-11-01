@@ -14,7 +14,7 @@ extern void fn_8004AE84(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B158(void);
 extern void fn_8004B1EC(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void fn_80076FF8(void);
 extern void mem_alloc(void);
@@ -1472,11 +1472,11 @@ asm void fn_8037D8B8(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_8004B290
+    bl sound_initChannelParams
     addi r3, r29, 0x1f4
     li r4, 0x0
     li r5, 0x0
-    bl fn_8004B290
+    bl sound_initChannelParams
     lfs f5, lbl_808858E8
     li r30, 0x0
     lfs f0, lbl_808858EC
@@ -1597,7 +1597,7 @@ asm void fn_8037D8B8(void)
     stfs f5, 0xa14(r29)
     stfs f5, 0xa18(r29)
     stfs f5, 0xa1c(r29)
-    bl fn_8004B290
+    bl sound_initChannelParams
     lfs f1, lbl_80885918
     li r3, 0x140
     lfs f6, lbl_808858E8

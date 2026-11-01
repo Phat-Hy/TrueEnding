@@ -14,7 +14,7 @@ extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80134674(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_setScriptSlot(void);
@@ -224,7 +224,7 @@ lbl_fn_802604E0_00000160:
     b lbl_fn_802604E0_00000920
 lbl_fn_802604E0_000001E0:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     lwz r0, lbl_8087F048
     cmpwi r0, 0x0
     beq lbl_fn_802604E0_00000920
@@ -1537,7 +1537,7 @@ lbl_fn_80261948_00001548:
     stw r0, 0xfc0(r30)
 lbl_fn_80261948_00001550:
     mr r3, r30
-    bl fn_80139560
+    bl npc_calcTargetDistance
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -1812,10 +1812,10 @@ asm void fn_80261DC0(void)
     beq lbl_fn_80261DC0_00001948
     b lbl_fn_80261DC0_00001ADC
 lbl_fn_80261DC0_00001940:
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_80261DC0_00001B90
 lbl_fn_80261DC0_00001948:
-    bl fn_80139560
+    bl npc_calcTargetDistance
     addi r3, r1, 0x14
     psq_l f1, 0x528(r31), 0, 0
     psq_st f1, 0x0(r3), 0, 0

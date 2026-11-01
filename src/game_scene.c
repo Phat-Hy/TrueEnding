@@ -12,7 +12,7 @@ extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void fn_800902C0(void);
 extern void fn_800929C0(void);
 extern void fn_80093E90(void);
@@ -774,7 +774,7 @@ lbl_fn_8000D4D4_00000944:
     beqlr
 lbl_fn_8000D4D4_0000094C:
     lwz r3, 0x48(r3)
-    b fn_8008CD60
+    b minimap_renderOverlay
     blr
 }
 

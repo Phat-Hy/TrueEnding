@@ -18,7 +18,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8009EE30(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void fn_800C1990(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -122,7 +122,7 @@ asm void fn_8041CF94(void)
     addi r4, r4, lbl_8078DE58@l
     stw r4, 0x0(r3)
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     li r4, 0x0
     stw r4, 0x74(r3)
     lwz r0, 0x70(r3)
@@ -389,7 +389,7 @@ asm void fn_8041D320(void)
     stw r31, 0x4c(r1)
     mr r31, r3
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     addic. r0, r31, 0x2dc
     li r4, 0x0
     stw r0, 0x74(r3)
@@ -402,7 +402,7 @@ lbl_fn_8041D320_000003C4:
 lbl_fn_8041D320_000003C8:
     stw r4, 0x70(r3)
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     li r0, -0x1
     stw r0, 0xc8(r3)
     li r3, 0x0

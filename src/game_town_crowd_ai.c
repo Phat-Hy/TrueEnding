@@ -20,7 +20,7 @@ extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_80124B60(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void world_getGlobalFlag(void);
 extern void kpad_getClampData(void);
 extern void kpad_testActiveFlags(void);
@@ -459,7 +459,7 @@ lbl_fn_803CCCC0_00000450:
     cmpwi r3, 0x0
     beq lbl_fn_803CCCC0_00000460
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
 lbl_fn_803CCCC0_00000460:
     addi r31, r31, 0x8
     addi r30, r30, 0x1

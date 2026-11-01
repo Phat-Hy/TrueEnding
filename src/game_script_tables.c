@@ -28,7 +28,7 @@ extern void camera_updateTargetMode(void);
 extern void fn_8011CD84(void);
 extern void skill_findNodeById(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void inventory_applyItemStats(void);
 extern void fn_80152D10(void);
 extern void equip_applyToCharacter(void);
@@ -1201,7 +1201,7 @@ asm void fn_8024A4A0(void)
     cmpwi r3, 0x0
     bne lbl_fn_8024A4A0_00000F58
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     lwz r0, 0x560(r31)
     cmpwi r0, 0x3b
     bne lbl_fn_8024A4A0_0000106C

@@ -11,7 +11,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void atn_LH_Texture_release(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void save_validateHeader(void);
 extern void fn_801F4FF4(void);
@@ -1058,16 +1058,16 @@ asm void fn_803D0B20(void)
     addi r30, r4, lbl_807506A0@l
     addi r4, r30, 0xa6a
     addi r3, r3, 0xdd4
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     addi r3, r31, 0xe04
     addi r4, r30, 0xa8a
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     addi r3, r31, 0xe34
     addi r4, r30, 0xab0
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     addi r3, r31, 0xe64
     addi r4, r30, 0xacf
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     mr r27, r31
     li r29, 0x0
 lbl_fn_803D0B20_00000F30:

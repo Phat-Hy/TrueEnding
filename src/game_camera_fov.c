@@ -34,7 +34,7 @@ extern void system_getNextSequenceId(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
@@ -680,7 +680,7 @@ asm void fn_802DE27C(void)
     cmpwi r3, 0x0
     beq lbl_fn_802DE27C_00000B94
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     cmpwi r3, 0x0
     beq lbl_fn_802DE27C_00000B94
     addi r3, r31, 0x1630
@@ -709,7 +709,7 @@ lbl_fn_802DE27C_000007FC:
     bl str_parseInt
     mr r28, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r28
     bl fn_800EC204
     cmpwi r3, 0x0
@@ -817,7 +817,7 @@ lbl_fn_802DE27C_0000097C:
     bl str_parseInt
     mr r28, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r28
     bl fn_800EC204
     cmpwi r28, 0x0
@@ -882,7 +882,7 @@ lbl_fn_802DE27C_00000A58:
     bl str_parseInt
     mr r28, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r28
     bl fn_800EC204
     cmpwi r3, 0x0

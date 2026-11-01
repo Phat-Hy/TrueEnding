@@ -11,7 +11,7 @@ extern void dtor_80084684(void);
 extern void sound_releaseChannel(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateWeights(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
@@ -292,7 +292,7 @@ asm void fn_8052E1A4(void)
     stw r30, 0x8(r1)
     mr r30, r3
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     mr r31, r3
     addi r3, r30, 0x258
     mr r4, r31

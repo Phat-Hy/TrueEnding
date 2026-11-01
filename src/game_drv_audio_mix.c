@@ -21,7 +21,7 @@ extern void talk_copySpeakerName(void);
 extern void route_findNextWaypoint(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void fn_800C18BC(void);
 extern void fn_800C2448(void);
 extern void fn_800C24B4(void);
@@ -932,7 +932,7 @@ lbl_fn_805B7220_00000AA4:
     cmpwi r0, 0x4
     bne lbl_fn_805B7220_00000AC4
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     mr r4, r3
     mr r3, r30
     bl fn_8049B780
@@ -1420,7 +1420,7 @@ lbl_fn_805B739C_000011B4:
     lwz r0, 0x74(r4)
     cmpwi r0, 0x0
     bne lbl_fn_805B739C_00001234
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     lwz r0, 0x70(r3)
     cmpwi r0, 0x0
     beq lbl_fn_805B739C_000011F0
@@ -1437,7 +1437,7 @@ lbl_fn_805B739C_000011F4:
     cmpwi r0, 0x0
     beq lbl_fn_805B739C_00001234
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     lwz r0, 0x70(r3)
     cmpwi r0, 0x0
     beq lbl_fn_805B739C_00001228

@@ -11,7 +11,7 @@ extern void fn_8004AD9C(void);
 extern void fn_8004ADF4(void);
 extern void fn_8004AE84(void);
 extern void fn_8004B0E4(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void fn_8005E7F4(void);
 extern void fn_80060D58(void);
@@ -31,7 +31,7 @@ extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void fn_800BC2E0(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void fn_800C1A1C(void);
 extern void fn_800C1FB4(void);
 extern void fn_800C310C(void);
@@ -723,7 +723,7 @@ asm void fn_80531F48(void)
     li r4, 0x0
     stw r30, 0x5c(r28)
     li r5, 0x0
-    bl fn_8004B290
+    bl sound_initChannelParams
     stw r30, 0x258(r28)
     addi r3, r28, 0x268
     stw r26, 0x260(r28)
@@ -1823,7 +1823,7 @@ lbl_spectateManager_update_000017C8:
     ori r0, r0, 0x4
     stw r0, 0x38(r3)
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     mr r31, r3
     addi r3, r30, 0x750
     mr r4, r31

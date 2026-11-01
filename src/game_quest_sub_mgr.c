@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void fn_80079044(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void fn_800C2448(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -2063,7 +2063,7 @@ asm void fn_80482ED8(void)
     stfs f3, 0x34(r1)
     stfs f3, 0x38(r1)
     stfs f3, 0x3c(r1)
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     lwz r0, 0x3c(r3)
     addi r6, r31, 0x1c54
     stw r0, 0x1bd0(r31)
@@ -2322,7 +2322,7 @@ lbl_fn_80482ED8_0000207C:
     stw r0, 0x8(r1)
 lbl_fn_80482ED8_00002084:
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     lwz r0, 0x74(r3)
     li r30, 0x0
     stw r0, 0x1bcc(r31)

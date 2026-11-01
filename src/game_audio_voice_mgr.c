@@ -16,7 +16,7 @@ extern void camera_updateTargetMode(void);
 extern void system_getNextSequenceId(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void quest_evaluateConditions(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
 extern void fn_8017A300(void);
@@ -1028,7 +1028,7 @@ lbl_fn_803012AC_00000DA0:
     bne lbl_fn_803012AC_00001010
     mr r3, r30
     li r4, 0x0
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     b lbl_fn_803012AC_00001010
 lbl_fn_803012AC_00000DB8:
     lwz r3, lbl_8087F430

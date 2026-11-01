@@ -16,7 +16,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void node_destroy(void);
 extern void map_debugLog(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void fn_80091CFC(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800928B0(void);
@@ -203,7 +203,7 @@ lbl_fn_80565F38_000000A8:
     stw r0, 0x28(r3)
 lbl_fn_80565F38_000000BC:
     addi r3, r30, 0x24
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_80565F38_000000C4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

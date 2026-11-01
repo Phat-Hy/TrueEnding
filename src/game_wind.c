@@ -16,7 +16,7 @@ extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_8010CA34(void);
 extern void fn_80134134(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_evaluateConditions(void);
 extern void fn_80153B44(void);
 extern void fn_801562A0(void);
@@ -1225,7 +1225,7 @@ lbl_fn_800E9ED8_00001050:
     li r0, 0x0
     stw r0, 0xf08(r3)
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_800E9ED8_00001A08
 lbl_fn_800E9ED8_00001064:
     cmpwi r4, 0x6
@@ -1304,7 +1304,7 @@ lbl_fn_800E9ED8_00001160:
     mr r3, r31
     psq_st f1, 0x0(r4), 0, 0
     stfs f2, 0x74(r1)
-    bl fn_80139560
+    bl npc_calcTargetDistance
     lfs f5, 0x6c(r1)
     lfs f4, 0x528(r31)
     lfs f3, 0x70(r1)
@@ -1442,7 +1442,7 @@ lbl_fn_800E9ED8_00001368:
     stfs f2, 0x5c(r1)
     bne lbl_fn_800E9ED8_00001394
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_800E9ED8_00001438
 lbl_fn_800E9ED8_00001394:
     lwz r0, 0x48(r3)
@@ -1464,7 +1464,7 @@ lbl_fn_800E9ED8_00001394:
     li r30, 0x1
 lbl_fn_800E9ED8_000013D8:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     cmpwi r30, 0x0
     beq lbl_fn_800E9ED8_00001438
     lwz r0, 0x55c(r31)
@@ -1488,7 +1488,7 @@ lbl_fn_800E9ED8_00001400:
     b lbl_fn_800E9ED8_00001438
 lbl_fn_800E9ED8_00001430:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
 lbl_fn_800E9ED8_00001438:
     lfs f5, 0x54(r1)
     lfs f4, 0x528(r31)
@@ -1719,7 +1719,7 @@ lbl_fn_800E9ED8_00001784:
     stfs f31, 0x2e8(r31)
 lbl_fn_800E9ED8_00001788:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     lwz r0, lbl_8087F048
     cmpwi r0, 0x0
     beq lbl_fn_800E9ED8_00001A08
@@ -1836,10 +1836,10 @@ lbl_fn_800E9ED8_00001930:
     li r0, 0x0
     stw r0, 0x58c(r3)
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_800E9ED8_00001A08
 lbl_fn_800E9ED8_00001944:
-    bl fn_80139560
+    bl npc_calcTargetDistance
     lwz r3, 0xf80(r31)
     lfs f0, lbl_808812DC
     lfs f3, 0x8(r3)
@@ -1892,7 +1892,7 @@ lbl_fn_800E9ED8_000019EC:
     bctrl
     b lbl_fn_800E9ED8_00001A08
 lbl_fn_800E9ED8_00001A04:
-    bl fn_80139560
+    bl npc_calcTargetDistance
 lbl_fn_800E9ED8_00001A08:
     mr r3, r31
     bl fn_800E7BB0

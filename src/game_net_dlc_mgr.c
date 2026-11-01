@@ -34,7 +34,7 @@ extern void fn_8011FD84(void);
 extern void fn_801354B4(void);
 extern void fn_80136138(void);
 extern void boss_updatePhaseState(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void battle_canTargetActor(void);
@@ -644,7 +644,7 @@ asm void fn_80547DC4(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_80139560
+    bl npc_calcTargetDistance
     mr r3, r31
     bl quest_updateFlow
     lwz r0, 0x14(r1)

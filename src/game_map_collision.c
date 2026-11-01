@@ -22,7 +22,7 @@ extern void fn_80125474(void);
 extern void fn_801255C8(void);
 extern void enemy_updateCombatBehavior(void);
 extern void fn_80128818(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_setScriptSlot(void);
@@ -471,7 +471,7 @@ asm void fn_801809F4(void)
     b lbl_fn_801809F4_00000534
 lbl_fn_801809F4_00000514:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     mr r3, r31
     bl quest_updateFlow
     b lbl_fn_801809F4_00000534
@@ -529,7 +529,7 @@ asm void fn_80180AE0(void)
     beq lbl_fn_80180AE0_0000069C
     b lbl_fn_80180AE0_000006A0
 lbl_fn_80180AE0_000005CC:
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_80180AE0_000006A0
 lbl_fn_80180AE0_000005D4:
     lwz r4, lbl_8087F8A0

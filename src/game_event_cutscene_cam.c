@@ -11,7 +11,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_20(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void skill_calcTrajectory(void);
@@ -521,7 +521,7 @@ asm void fn_80477DAC(void)
     nofralloc
     li r4, 0x0
     li r5, 0x0
-    b fn_8004B290
+    b sound_initChannelParams
 }
 
 asm void fn_80477DB8(void)

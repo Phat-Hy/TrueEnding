@@ -32,7 +32,7 @@ extern void enemy_updateAnimTimer(void);
 extern void npc_getPosition(void);
 extern void fn_8013C404(void);
 extern void fn_8013C42C(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void dialog_setScriptSlot(void);
 extern void fn_8014C468(void);
 extern void fn_80161570(void);
@@ -1316,7 +1316,7 @@ lbl_fn_803A26F4_00001064:
     cmpwi r3, 0x0
     beq lbl_fn_803A26F4_000010B8
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r23, r3
     b lbl_fn_803A26F4_000010BC
 lbl_fn_803A26F4_000010B8:
@@ -1376,7 +1376,7 @@ lbl_fn_803A26F4_00001174:
     cmpwi r3, 0x0
     beq lbl_fn_803A26F4_0000118C
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     b lbl_fn_803A26F4_00001190
 lbl_fn_803A26F4_0000118C:
     li r3, 0x0
@@ -1408,7 +1408,7 @@ lbl_fn_803A26F4_000011AC:
     cmpwi r3, 0x0
     beq lbl_fn_803A26F4_000011FC
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     b lbl_fn_803A26F4_00001200
 lbl_fn_803A26F4_000011FC:
     li r3, 0x0
@@ -1472,7 +1472,7 @@ lbl_fn_803A26F4_00001294:
     cmpwi r3, 0x0
     beq lbl_fn_803A26F4_000012E4
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     b lbl_fn_803A26F4_000012E8
 lbl_fn_803A26F4_000012E4:
     li r3, 0x0

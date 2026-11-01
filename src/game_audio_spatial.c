@@ -20,7 +20,7 @@ extern void fn_80127D8C(void);
 extern void fn_8012DD70(void);
 extern void npc_initScriptContext(void);
 extern void npc_getPosition(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void npc_updateTalkInteraction(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
@@ -1034,7 +1034,7 @@ asm void fn_802FFFF8(void)
     beq lbl_fn_802FFFF8_00001318
 lbl_fn_802FFFF8_00000D84:
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     bl scene_transformPoint
     bl fn_802A36B0
     lfs f28, lbl_80884AB0

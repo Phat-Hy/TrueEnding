@@ -6,7 +6,7 @@ extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
 extern void fn_8004B20C(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void boss_recordDamage(void);
 extern void chapter_updateProgression(void);
@@ -1430,7 +1430,7 @@ asm void fn_80376BE8(void)
     stw r30, 0x70(r29)
     stw r30, 0x78(r29)
     stw r30, 0x7c(r29)
-    bl fn_8004B290
+    bl sound_initChannelParams
     lis r31, lbl_8074DEC0@ha
     stw r30, 0x288(r29)
     addi r31, r31, lbl_8074DEC0@l

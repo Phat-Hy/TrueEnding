@@ -12,7 +12,7 @@ extern void str_assignBuffer(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_LH_Texture_release(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
@@ -417,12 +417,12 @@ lbl_fn_801FD5A0_00000494:
     addi r3, r29, 0x194
     addi r4, r4, lbl_8073E57C@l
     addi r4, r4, 0x26
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     b lbl_fn_801FD5A0_000004CC
 lbl_fn_801FD5A0_000004C0:
     addi r3, r29, 0x194
     addi r4, r1, 0x70
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_fn_801FD5A0_000004CC:
     li r0, 0x1
     stb r0, 0x1c1(r29)
@@ -749,7 +749,7 @@ lbl_fn_801FDA20_00000928:
     bl atn_LH_Texture_release
     addi r3, r29, 0x1c4
     addi r4, r1, 0x70
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     li r0, 0x1
     stb r0, 0x1f1(r29)
     li r3, 0x1

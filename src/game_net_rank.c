@@ -22,7 +22,7 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void env_updateAtmosphere(void);
 extern void str_findChar(void);
@@ -165,12 +165,12 @@ asm void fn_801F0DF0(void)
     addi r3, r27, 0x48
     stw r30, 0x1ac(r27)
     addi r4, r31, 0x1
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     stb r30, 0x75(r27)
     addi r3, r27, 0x78
     addi r4, r31, 0x12
     stb r30, 0x76(r27)
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     stb r30, 0xa5(r27)
     addi r3, r27, 0x168
     addi r4, r31, 0x23

@@ -5,7 +5,7 @@
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void map_debugLog(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void fn_800CF45C(void);
 extern void fn_800CF7DC(void);
 extern void fn_80112840(void);
@@ -963,7 +963,7 @@ lbl_fn_8055BCAC_00000C20:
     b lbl_fn_8055BCAC_000018D0
 lbl_fn_8055BCAC_00000C2C:
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     lwz r5, 0x30(r31)
     cmpwi r5, 0x1
     ble lbl_fn_8055BCAC_00000C4C
@@ -1571,7 +1571,7 @@ lbl_fn_8055BCAC_00001468:
     psq_st f1, 0x0(r26), 0, 0
     lwz r3, lbl_8087EFB4
     psq_st f2, 0x8(r26), 0, 0
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     lwz r0, 0x184(r1)
     addi r5, r1, 0x190
     stw r0, 0x1f8(r3)

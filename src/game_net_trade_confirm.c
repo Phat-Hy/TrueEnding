@@ -21,12 +21,12 @@ extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void fn_8008C828(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
@@ -130,7 +130,7 @@ asm void fn_8052FA48(void)
     stw r30, 0x8(r1)
     mr r30, r3
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     mr r31, r3
     addi r4, r30, 0x258
     bl fn_804741C0
@@ -1718,7 +1718,7 @@ lbl_fn_80531090_00001724:
     bl route_interpolatePath
     addi r3, r29, 0x7c
     addi r4, r31, 0x42
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)

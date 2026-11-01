@@ -9,7 +9,7 @@ extern void vec3_set(void);
 extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void vec3_add(void);
@@ -31,7 +31,7 @@ extern void equip_getGlobalManager(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_8013A194(void);
 extern void fn_8013C480(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void fn_8014052C(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
@@ -345,7 +345,7 @@ asm void fn_8030C490(void)
     bl _savegpr_27
     mr r30, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r31, r3
     mr r3, r30
     li r4, 0x3
@@ -363,7 +363,7 @@ asm void fn_8030C490(void)
     li r28, 0x0
 lbl_fn_8030C490_0000037C:
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r27, r3
     mr r4, r30
     addi r3, r1, 0x14
@@ -495,7 +495,7 @@ lbl_fn_8030C490_0000053C:
     bl vec3_set
     addi r3, r1, 0x8c
     addi r4, r1, 0x198
-    bl fn_80011410
+    bl mtx_multVec
     bl fn_8013A194
     lfs f1, lbl_80884BAC
     mr r4, r30
@@ -612,10 +612,10 @@ lbl_fn_8030C490_0000069C:
     bl fn_80149624
     addi r3, r1, 0x5c
     addi r4, r1, 0x138
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x50
     addi r4, r1, 0x108
-    bl fn_80011410
+    bl mtx_multVec
     cmpwi r27, 0x4
     bge lbl_fn_8030C490_00000760
     lwz r4, 0x1504(r30)
@@ -653,7 +653,7 @@ lbl_fn_8030C490_0000077C:
     bl fn_80149624
     addi r3, r1, 0x44
     addi r4, r1, 0x168
-    bl fn_80011410
+    bl mtx_multVec
     lwz r4, 0x1500(r30)
     mr r3, r30
     addi r5, r1, 0x44
@@ -670,7 +670,7 @@ lbl_fn_8030C490_000007E8:
     stw r0, 0x14b8(r30)
 lbl_fn_8030C490_0000080C:
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     lwz r4, 0x1528(r30)
     bl fn_803C17FC
     mr r4, r3

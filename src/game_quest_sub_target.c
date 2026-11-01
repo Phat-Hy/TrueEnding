@@ -14,7 +14,7 @@ extern void fn_800790D0(void);
 extern void fn_80079210(void);
 extern void fn_8007A154(void);
 extern void mem_free(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void fn_800C1990(void);
 extern void atn_Task_setActive(void);
 extern void kpad_getClampData(void);
@@ -1334,7 +1334,7 @@ asm void fn_80486BEC(void)
     stw r0, 0x30(r1)
     lwz r3, lbl_8087EFB4
     stw r0, 0x38(r1)
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     extrwi r0, r31, 8, 8
     stw r0, 0x34(r1)
     lis r5, lbl_80756338@ha
@@ -1456,7 +1456,7 @@ asm void fn_80486DAC(void)
     stw r0, 0x30(r1)
     lwz r3, lbl_8087EFB4
     stw r0, 0x38(r1)
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     extrwi r0, r31, 8, 8
     stw r0, 0x34(r1)
     lis r5, lbl_80756338@ha

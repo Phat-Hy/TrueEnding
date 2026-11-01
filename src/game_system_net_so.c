@@ -20,7 +20,7 @@ extern void fn_801240B4(void);
 extern void npc_updateDialogueTarget(void);
 extern void fn_80139F2C(void);
 extern void fn_8013C3A8(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void fn_801479D8(void);
 extern void fn_8015EB2C(void);
 extern void fn_80267B20(void);
@@ -2119,11 +2119,11 @@ lbl_fn_8038F52C_00001D5C:
     cmpwi r3, 0x0
     beq lbl_fn_8038F52C_00001DDC
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     cmpwi r3, 0x0
     beq lbl_fn_8038F52C_00001DDC
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r30
     bl fn_803C2048
     cmpwi r3, 0x0

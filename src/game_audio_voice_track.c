@@ -10,11 +10,11 @@ extern void vec3_copy(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_80012C88(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void fn_80063764(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
@@ -233,13 +233,13 @@ lbl_fn_803041C8_00000108:
     stfs f1, 0xd4(r1)
     fmr f2, f1
     lfs f3, 0x16c4(r31)
-    bl fn_80057A68
+    bl vec3_initValues
     addi r3, r1, 0x150
     addi r4, r1, 0xd4
     bl fn_800109E0
     addi r3, r31, 0x15d8
     addi r4, r1, 0x150
-    bl fn_80011410
+    bl mtx_multVec
     lwz r3, 0x1628(r31)
     slwi r0, r3, 2
     cmpwi r3, 0x1
@@ -400,13 +400,13 @@ lbl_fn_803041C8_00000438:
     stfs f1, 0x98(r1)
     fmr f2, f1
     lfs f3, 0x16c4(r31)
-    bl fn_80057A68
+    bl vec3_initValues
     addi r3, r1, 0x120
     addi r4, r1, 0x98
     bl fn_800109E0
     addi r3, r31, 0x15d8
     addi r4, r1, 0x120
-    bl fn_80011410
+    bl mtx_multVec
     lfs f0, lbl_80884A20
     stfs f0, 0x15dc(r31)
     bl equip_getGlobalManager

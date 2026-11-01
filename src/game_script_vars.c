@@ -17,7 +17,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_801092C8(void);
 extern void enemy_updateCombatBehavior(void);
 extern void enemy_updateAnimTimer(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
@@ -1864,7 +1864,7 @@ lbl_fn_80249394_000018D0:
     mr r3, r31
     addi r0, r4, 0x1
     stw r0, 0x1504(r31)
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_80249394_0000196C
 lbl_fn_80249394_000018E8:
     lwz r0, 0x1504(r3)

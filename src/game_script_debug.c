@@ -44,7 +44,7 @@ extern void fn_801561E4(void);
 extern void fn_80158EF0(void);
 extern void fn_80161570(void);
 extern void fn_801644D4(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void battle_applyStatusEffect(void);
 extern void battle_canTargetActor(void);
@@ -880,7 +880,7 @@ lbl_fn_80250ECC_00000A34:
     lwz r0, 0x104(r6)
     stw r0, 0xac0(r30)
     stw r5, 0xabc(r30)
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     li r3, 0x1
     b lbl_fn_80250ECC_00000AA0
 lbl_fn_80250ECC_00000A9C:
@@ -986,7 +986,7 @@ lbl_fn_80251344_00000BF8:
     stw r0, 0x14bc(r29)
     li r4, 0x1
     mr r3, r29
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     li r22, 0x0
     stw r22, 0x14b4(r29)
     stw r22, 0x14b8(r29)
@@ -1377,7 +1377,7 @@ lbl_fn_80251344_0000115C:
     srwi. r0, r0, 31
     beq lbl_fn_80251344_000011C4
     li r4, 0x0
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
 lbl_fn_80251344_000011C4:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
@@ -1440,7 +1440,7 @@ lbl_fn_80251344_0000129C:
     li r4, 0x1
     li r4, 0x0
     mr r3, r29
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     b lbl_fn_80251344_00001684
 lbl_fn_80251344_000012B8:
     cmpwi r0, 0x2
@@ -1465,7 +1465,7 @@ lbl_fn_80251344_000012B8:
     srwi. r0, r0, 31
     bne lbl_fn_80251344_00001314
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
 lbl_fn_80251344_00001314:
     lwz r0, 0x54c(r29)
     rlwinm r4, r0, 0, 28, 28
@@ -1476,7 +1476,7 @@ lbl_fn_80251344_00001314:
     beq lbl_fn_80251344_0000138C
     mr r3, r29
     li r4, 0x0
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     b lbl_fn_80251344_0000138C
 lbl_fn_80251344_00001340:
     lwz r0, 0x54c(r3)
@@ -1487,7 +1487,7 @@ lbl_fn_80251344_00001340:
     srwi. r0, r0, 31
     beq lbl_fn_80251344_00001364
     li r4, 0x0
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
 lbl_fn_80251344_00001364:
     lwz r0, 0x54c(r29)
     rlwinm r4, r0, 0, 28, 28
@@ -1498,7 +1498,7 @@ lbl_fn_80251344_00001364:
     bne lbl_fn_80251344_0000138C
     mr r3, r29
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
 lbl_fn_80251344_0000138C:
     lwz r3, 0x14fc(r29)
     li r4, 0x2
@@ -1695,7 +1695,7 @@ lbl_fn_80251344_00001640:
     srwi. r0, r0, 31
     beq lbl_fn_80251344_00001678
     li r4, 0x0
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
 lbl_fn_80251344_00001678:
     lwz r3, 0x14fc(r29)
     li r4, 0x3

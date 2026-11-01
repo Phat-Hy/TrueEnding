@@ -17,7 +17,7 @@ extern void fn_8004203C(void);
 extern void str_getData(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void boss_initActionStream(void);
@@ -58,11 +58,11 @@ extern void npc_updateDialogueTarget(void);
 extern void fn_80139F3C(void);
 extern void npc_getPosition(void);
 extern void fn_8013C480(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_8015ECC4(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void fn_801A03E0(void);
 extern void fn_8020A780(void);
@@ -792,7 +792,7 @@ lbl_fn_803388A4_00000730:
     addi r3, r31, 0x1598
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     lwz r5, 0x12a8(r31)
     addi r3, r1, 0x8
     lwz r0, 0x12a4(r31)
@@ -1152,7 +1152,7 @@ asm void fn_80338FD0(void)
     cmpwi r3, 0x0
     beq lbl_fn_80338FD0_00000DA0
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r29, r3
     b lbl_fn_80338FD0_00000DA4
 lbl_fn_80338FD0_00000DA0:
@@ -1608,7 +1608,7 @@ asm void fn_80339760(void)
     bge lbl_fn_80339760_000013E0
     mr r3, r31
     li r4, 0x0
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     li r0, 0x0
     stw r0, 0x14b4(r31)
     b lbl_fn_80339760_000014BC
@@ -1643,7 +1643,7 @@ lbl_fn_80339760_0000143C:
     bl fn_80139F3C
     mr r3, r31
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     addi r3, r31, 0xb0
     li r4, 0x0
     bl npc_updateDialogueTarget

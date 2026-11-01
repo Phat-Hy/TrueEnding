@@ -11,7 +11,7 @@ extern void vec3_copy(void);
 extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
@@ -20,7 +20,7 @@ extern void vec3_add(void);
 extern void fn_80013484(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_8008B964(void);
@@ -2039,7 +2039,7 @@ lbl_fn_801C346C_00001A68:
     bl fn_8013A13C
     addi r3, r1, 0xe0
     addi r4, r1, 0x138
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0xd4
     addi r4, r30, 0x8
     addi r5, r1, 0xe0
@@ -2203,13 +2203,13 @@ lbl_fn_801C346C_00001CF4:
     lfs f1, lbl_80882748
     addi r3, r1, 0xe0
     fmr f2, f1
-    bl fn_80057A68
+    bl vec3_initValues
     fmr f1, f28
     addi r3, r1, 0x108
     bl fn_8013A13C
     addi r3, r1, 0xe0
     addi r4, r1, 0x108
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x14
     addi r4, r30, 0x14
     addi r5, r1, 0xe0

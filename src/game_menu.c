@@ -38,7 +38,7 @@ extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092F1C(void);
@@ -3938,7 +3938,7 @@ asm void Arms_slot3(void)
     cmpwi r0, 0x0
     beqlr
     addi r3, r3, 0x10
-    b fn_8008CD60
+    b minimap_renderOverlay
     blr
 }
 

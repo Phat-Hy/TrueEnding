@@ -13,7 +13,7 @@ extern void fn_8006F2F0(void);
 extern void motion_updateFogAdj(void);
 extern void fn_801255C8(void);
 extern void fn_80128A30(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void party_configureMemberSlot(void);
@@ -143,7 +143,7 @@ asm void fn_8017D0B0(void)
     lwz r0, 0x55c(r3)
     cmpwi r0, 0x6
     bne lbl_fn_8017D0B0_00000110
-    bl fn_80139560
+    bl npc_calcTargetDistance
     mr r3, r31
     bl quest_updateFlow
     b lbl_fn_8017D0B0_00000124

@@ -10,7 +10,7 @@ extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void vec3_add(void);
@@ -37,7 +37,7 @@ extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void quest_updateFlow(void);
 extern void fn_80149624(void);
 extern void dialog_renderWindow(void);
@@ -838,7 +838,7 @@ lbl_fn_8030AF10_0000095C:
     bl vec3_set
     addi r3, r1, 0x100
     addi r4, r1, 0x1c0
-    bl fn_80011410
+    bl mtx_multVec
     lfs f1, lbl_80884BA8
     addi r3, r1, 0x90
     fmr f2, f1
@@ -862,13 +862,13 @@ lbl_fn_8030AF10_0000095C:
     bl fn_80149624
     addi r3, r1, 0xf4
     addi r4, r1, 0x190
-    bl fn_80011410
+    bl mtx_multVec
     lfs f1, lbl_80884BEC
     addi r3, r1, 0x160
     bl fn_80149624
     addi r3, r1, 0xe8
     addi r4, r1, 0x160
-    bl fn_80011410
+    bl mtx_multVec
     lfs f1, lbl_80884BA8
     addi r3, r1, 0x70
     lfs f2, lbl_80884BAC
@@ -917,7 +917,7 @@ lbl_fn_8030AF10_0000095C:
     li r25, 0x64
 lbl_fn_8030AF10_00000B8C:
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     lfs f1, lbl_80884BAC
     mr r30, r3
     addi r3, r1, 0xd8
@@ -959,7 +959,7 @@ lbl_fn_8030AF10_00000B8C:
     bl vec3_set
     addi r3, r1, 0xc0
     addi r4, r1, 0x130
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0xd8
     bl fn_800F8348
     lwz r4, 0x1538(r26)

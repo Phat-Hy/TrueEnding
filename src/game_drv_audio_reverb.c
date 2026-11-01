@@ -15,7 +15,7 @@ extern void scene_traverseNode(void);
 extern void fn_8000DD0C(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void actor_validateIndex(void);
@@ -465,10 +465,10 @@ lbl_fn_805BAC18_00000420:
     bl fn_80147A08
     addi r3, r1, 0x108
     addi r4, r1, 0x1b8
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0xfc
     addi r4, r1, 0x1b8
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r29, 0x8c
     bl fn_80113CCC
     mr r28, r3
@@ -519,7 +519,7 @@ lbl_fn_805BAC18_00000420:
     bl fn_80147A08
     addi r3, r1, 0x68
     addi r4, r1, 0x158
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x38
     addi r4, r1, 0xf0
     addi r5, r1, 0xfc

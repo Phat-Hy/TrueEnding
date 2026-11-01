@@ -25,7 +25,7 @@ extern void GXSetTexCopySrc(void);
 extern void GXSetTexCopyDst(void);
 extern void GXCopyTex(void);
 extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXClampLightAngle(void);
 extern void fn_80617A10(void);
 extern void fn_806180B0(void);
 extern void fn_80618290(void);
@@ -1650,7 +1650,7 @@ asm void fn_800C0590(void)
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     b lbl_fn_800C0590_000015AC
 lbl_fn_800C0590_00001560:
     lwz r4, 0x79c(r27)
@@ -1671,7 +1671,7 @@ lbl_fn_800C0590_00001560:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
 lbl_fn_800C0590_000015AC:
     addi r11, r1, 0x20
     bl _restgpr_27

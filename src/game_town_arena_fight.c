@@ -20,7 +20,7 @@ extern void vec3_sub(void);
 extern void fn_80013404(void);
 extern void vec3_add(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void script_executeOpcode(void);
 extern void fn_8006FA4C(void);
 extern void fn_8008B964(void);
@@ -67,7 +67,7 @@ extern void fn_8013C42C(void);
 extern void fn_8013C43C(void);
 extern void fn_8013C458(void);
 extern void fn_8013C480(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void fn_80140518(void);
 extern void fn_8014052C(void);
 extern void fn_801479D8(void);
@@ -1259,16 +1259,16 @@ lbl_fn_803D2A6C_00000DE8:
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000E64
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000E64
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     bl fn_80244CA0
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000E64
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     bl fn_803CC900
     cmpwi r3, 0x0
     ble lbl_fn_803D2A6C_00000E64
@@ -4572,7 +4572,7 @@ lbl_fn_803D2A6C_00003E5C:
     addi r3, r24, 0xd60
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     lwz r0, 0xd3c(r24)
     cmpwi r0, 0x0
     beq lbl_fn_803D2A6C_00003F50

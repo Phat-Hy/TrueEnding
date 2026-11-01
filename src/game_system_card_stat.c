@@ -14,7 +14,7 @@ extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_800FB4B0(void);
 extern void actor_testBitFlag(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
@@ -362,7 +362,7 @@ lbl_fn_8035C47C_000003B8:
     bl fn_8035C8CC
 lbl_fn_8035C47C_000003C0:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     mr r3, r31
     bl dialog_updateScriptState
     mr r3, r31

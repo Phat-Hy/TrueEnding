@@ -23,19 +23,19 @@ extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void fn_800902C0(void);
 extern void fn_80092A4C(void);
 extern void fn_80095300(void);
 extern void fn_8009E690(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
 extern void fn_800D4558(void);
 extern void fn_800D4DB8(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
@@ -131,7 +131,7 @@ lbl_fn_80499D60_0000002C:
     b lbl_fn_80499D60_00000088
 lbl_fn_80499D60_00000074:
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     lwz r4, 0x6c(r27)
     lwzx r4, r4, r31
     stw r3, 0x64(r4)
@@ -1114,14 +1114,14 @@ asm void fn_8049AAFC(void)
     beq lbl_fn_8049AAFC_00000DF8
     li r31, 0x0
     addi r3, r3, 0x110
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_8049AAFC_00000DF8:
     lwz r0, 0x340(r30)
     extlwi r0, r0, 2, 5
     srawi. r0, r0, 31
     beq lbl_fn_8049AAFC_00000E14
     lwz r3, 0x324(r30)
-    bl fn_8008CD60
+    bl minimap_renderOverlay
     b lbl_fn_8049AAFC_00000E98
 lbl_fn_8049AAFC_00000E14:
     lwz r3, lbl_8087FA20
@@ -1808,7 +1808,7 @@ lbl_fn_8049B1F0_00001818:
     bne lbl_fn_8049B1F0_0000182C
     addi r3, r27, 0xdc
     addi r4, r27, 0x9c
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_fn_8049B1F0_0000182C:
     lwz r0, 0x340(r27)
     extlwi r0, r0, 2, 5

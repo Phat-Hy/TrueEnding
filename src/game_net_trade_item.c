@@ -16,7 +16,7 @@ extern void item_useConsumable(void);
 extern void fn_8004BF64(void);
 extern void fn_8008B964(void);
 extern void fn_800A97C4(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB58C(void);
 extern void morph_updateMesh(void);
@@ -865,7 +865,7 @@ asm void fn_8052CA70(void)
     bl fn_8036E624
 lbl_fn_8052CA70_000009B8:
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     mr r31, r3
     addi r4, r30, 0xd74
     bl fn_804741C0

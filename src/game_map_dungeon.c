@@ -19,7 +19,7 @@ extern void fn_80128A30(void);
 extern void fn_80129954(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void party_configureMemberSlot(void);
 extern void fn_80161570(void);
 extern void battle_applyStatusEffect(void);
@@ -550,7 +550,7 @@ lbl_fn_8017E9D8_000006B4:
     cmpwi r0, 0x2
     beq lbl_fn_8017E9D8_000006D8
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_8017E9D8_00000714
 lbl_fn_8017E9D8_000006D8:
     lwz r3, lbl_8087F430

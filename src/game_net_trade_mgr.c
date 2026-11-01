@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_assign(void);
 extern void vec3_add(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void fn_8006A250(void);
 extern void fn_8006CA80(void);
@@ -341,11 +341,11 @@ asm void fn_8052A8F0(void)
     li r4, 0x0
     stw r31, 0x60(r29)
     li r5, 0x0
-    bl fn_8004B290
+    bl sound_initChannelParams
     addi r3, r29, 0x260
     li r4, 0x0
     li r5, 0x0
-    bl fn_8004B290
+    bl sound_initChannelParams
     lfs f1, lbl_80887AB0
     addi r3, r29, 0x468
     lfs f0, lbl_80887AB4
@@ -604,7 +604,7 @@ asm void fn_8052ACDC(void)
     stw r31, 0x9c(r1)
     stw r30, 0x98(r1)
     mr r30, r3
-    bl fn_8004B290
+    bl sound_initChannelParams
     addi r3, r30, 0x1f4
     bl fn_80079044
     addi r3, r30, 0x258

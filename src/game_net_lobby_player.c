@@ -56,7 +56,7 @@ extern void fn_8049ED90(void);
 extern void fn_804A04AC(void);
 extern void fn_804A0F80(void);
 extern void fn_805B6C60(void);
-extern void fn_80616250(void);
+extern void GXClampLightAngle(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
 extern void memcmp(void);
@@ -1001,7 +1001,7 @@ lbl_fn_8049D974_00000B98:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
 lbl_fn_8049D974_00000BE4:
     lwz r3, lbl_8087F4A0
     cmpwi r3, 0x0

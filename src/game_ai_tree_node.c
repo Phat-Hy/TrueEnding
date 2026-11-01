@@ -17,7 +17,7 @@ extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void hurtbox_dispatchHitEvent(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void quest_ctorRewardItem(void);
 extern void fn_8016D74C(void);
 extern void debuff_clearStatus(void);
@@ -1496,7 +1496,7 @@ lbl_fn_80258A50_00001478:
     stw r0, 0x14c8(r3)
 lbl_fn_80258A50_00001488:
     mr r3, r20
-    bl fn_80139560
+    bl npc_calcTargetDistance
     addi r11, r1, 0x180
     psq_l f31, 0x238(r1), 0, 0
     lfd f31, 0x230(r1)
@@ -1853,7 +1853,7 @@ lbl_fn_8025922C_000019BC:
     stw r4, 0x58c(r3)
     stw r0, 0x14c8(r3)
 lbl_fn_8025922C_000019D4:
-    bl fn_80139560
+    bl npc_calcTargetDistance
     lwz r0, 0x94(r1)
     psq_l f31, 0x88(r1), 0, 0
     lfd f31, 0x80(r1)

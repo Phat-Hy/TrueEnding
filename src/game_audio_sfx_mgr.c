@@ -30,7 +30,7 @@ extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_8015AC48(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void battle_canTargetActor(void);
 extern void battle_updateActorStatus(void);
@@ -1634,7 +1634,7 @@ asm void fn_80311364(void)
     stw r0, 0x14cc(r3)
     b lbl_fn_80311364_00001CEC
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r0, 0x5c0(r27)
     mr r3, r27
     ori r0, r0, 0x1

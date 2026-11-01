@@ -8,7 +8,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void scene_traverseNode(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void fn_80063484(void);
 extern void fn_80076FF8(void);
@@ -903,7 +903,7 @@ lbl_fn_801CCE50_00000ABC:
     stw r29, 0x1ec(r31)
     stw r29, 0x1f0(r31)
     stw r29, 0x1f4(r31)
-    bl fn_8004B290
+    bl sound_initChannelParams
     lwz r3, lbl_8087EEE0
     bl fn_80076FF8
     lfs f3, lbl_808829C8

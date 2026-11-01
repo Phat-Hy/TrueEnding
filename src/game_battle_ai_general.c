@@ -36,7 +36,7 @@ extern void node_createNamedChild(void);
 extern void fn_8008A4E0(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
@@ -3790,7 +3790,7 @@ lbl_fn_8043F24C_00003248:
     stw r0, 0x50(r1)
 lbl_fn_8043F24C_00003250:
     lwz r3, 0x2a8(r31)
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_8043F24C_00003258:
     mr r3, r31
     bl Arms_slot3

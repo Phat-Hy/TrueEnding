@@ -13,7 +13,7 @@ extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -140,7 +140,7 @@ asm void fn_80296B8C(void)
     addi r3, r1, 0x14
     lfs f3, lbl_80883BF0
     fmr f2, f1
-    bl fn_80057A68
+    bl vec3_initValues
     lfs f30, lbl_80883BF8
     b lbl_fn_80296B8C_000000B8
 lbl_fn_80296B8C_000000B0:

@@ -53,7 +53,7 @@ extern void fn_80133BD8(void);
 extern void fn_80134134(void);
 extern void fn_80137B78(void);
 extern void fn_801388B8(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void fn_801446F0(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
@@ -156,7 +156,7 @@ asm void fn_800EA9D4(void)
     cmpwi r3, 0x0
     bne lbl_fn_800EA9D4_00000040
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     li r0, 0x0
     stw r0, 0x1450(r31)
     b lbl_fn_800EA9D4_000002F8
@@ -352,7 +352,7 @@ lbl_fn_800EA9D4_000002E4:
     b lbl_fn_800EA9D4_000002F8
 lbl_fn_800EA9D4_000002F0:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
 lbl_fn_800EA9D4_000002F8:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
@@ -377,7 +377,7 @@ asm void fn_800EACEC(void)
     cmpwi r3, 0x0
     bne lbl_fn_800EACEC_00000350
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     li r0, 0x0
     stw r0, 0x1450(r31)
     b lbl_fn_800EACEC_000004E0
@@ -482,7 +482,7 @@ lbl_fn_800EACEC_000004B4:
     b lbl_fn_800EACEC_000004E0
 lbl_fn_800EACEC_000004C0:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_800EACEC_000004E0
 lbl_fn_800EACEC_000004CC:
     lwz r0, 0x12a4(r31)
@@ -1118,7 +1118,7 @@ lbl_fn_800EB4AC_00000D98:
     bl fn_80165C5C
 lbl_fn_800EB4AC_00000DAC:
     mr r3, r31
-    bl fn_80139560
+    bl npc_calcTargetDistance
     addi r11, r1, 0xe0
     bl _restgpr_27
     lwz r0, 0xe4(r1)

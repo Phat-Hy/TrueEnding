@@ -19,7 +19,7 @@ extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void fn_8008B130(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void fn_800902C0(void);
 extern void fn_80092A4C(void);
 extern void atn_Lockon_updateTargetTextures(void);
@@ -1305,7 +1305,7 @@ asm void fn_803ED610(void)
     cmpwi r0, 0x0
     beq lbl_fn_803ED610_000011F4
     mr r3, r4
-    bl fn_8008CD60
+    bl minimap_renderOverlay
     lwz r3, lbl_8087F0A8
     lwz r0, 0x74(r3)
     cmpwi r0, 0x0
@@ -1400,7 +1400,7 @@ asm void dungeon_updateBarrierField(void)
     cmpwi r0, 0x0
     beq lbl_dungeon_updateBarrierField_00001358
     mr r3, r4
-    bl fn_8008CD60
+    bl minimap_renderOverlay
     lwz r3, lbl_8087F0A8
     lwz r0, 0x74(r3)
     cmpwi r0, 0x0

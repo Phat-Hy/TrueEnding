@@ -10,7 +10,7 @@ extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
@@ -295,7 +295,7 @@ lbl_fn_80382A1C_000001E4:
     bl fn_800109E0
     addi r3, r1, 0x11c
     addi r4, r1, 0x228
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x110
     bl mission_updateStub
     addi r3, r1, 0xd4
@@ -321,7 +321,7 @@ lbl_fn_80382A1C_000001E4:
     bl fn_8013A13C
     addi r3, r1, 0x104
     addi r4, r1, 0x1f8
-    bl fn_80011410
+    bl mtx_multVec
     lfs f1, 0x728(r30)
     addi r3, r1, 0x1c8
     lfs f0, 0x12c(r1)
@@ -330,7 +330,7 @@ lbl_fn_80382A1C_000001E4:
     bl fn_8013A13C
     addi r3, r1, 0x104
     addi r4, r1, 0x1c8
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0xc8
     addi r4, r1, 0x104
     addi r5, r1, 0x17c
@@ -388,7 +388,7 @@ lbl_fn_80382A1C_000001E4:
     bl fn_800109E0
     addi r3, r1, 0x170
     addi r4, r1, 0x198
-    bl fn_80011410
+    bl mtx_multVec
     addi r3, r1, 0x80
     addi r4, r1, 0x170
     addi r5, r1, 0x17c

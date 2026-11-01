@@ -33,7 +33,7 @@ extern void enemy_updateCombatBehavior(void);
 extern void actor_testBitFlag(void);
 extern void boss_updatePhaseState(void);
 extern void npc_initScriptContext(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
@@ -311,7 +311,7 @@ asm void fn_80244898(void)
     cmpwi r3, 0x0
     beq lbl_fn_80244898_0000052C
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     cmpwi r3, 0x0
     beq lbl_fn_80244898_0000052C
     addi r3, r28, 0x14b0
@@ -359,7 +359,7 @@ lbl_fn_80244898_00000330:
     bl str_parseInt
     mr r31, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r31
     bl fn_800EC204
     cmpwi r3, 0x0
@@ -384,7 +384,7 @@ lbl_fn_80244898_00000388:
     bl str_parseInt
     mr r31, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r31
     bl fn_800EC204
     cmpwi r3, 0x0

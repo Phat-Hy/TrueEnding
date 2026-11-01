@@ -25,12 +25,12 @@ extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void fn_8008B130(void);
 extern void map_processTrigger(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void atn_Model_findBoneIndex(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
 extern void fn_800B1B28(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void atn_Task_destructor(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
@@ -176,7 +176,7 @@ lbl_fn_8049B7CC_00000078:
     b lbl_fn_8049B7CC_000000D4
 lbl_fn_8049B7CC_000000C0:
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     lwz r4, 0x348(r27)
     lwzx r4, r4, r31
     stw r3, 0x64(r4)
@@ -1180,7 +1180,7 @@ lbl_fn_8049C458_00000EC0:
     cmpwi r0, 0x0
     beq lbl_fn_8049C458_00000EE4
     addi r3, r31, 0x50
-    bl fn_8008CD60
+    bl minimap_renderOverlay
 lbl_fn_8049C458_00000EE4:
     lwz r0, 0xc4(r1)
     psq_l f31, 0xb8(r1), 0, 0

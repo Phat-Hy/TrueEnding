@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void scene_traverseNode(void);
 extern void ui_destroyWidget(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void collision_queryGeometry(void);
@@ -741,7 +741,7 @@ asm void fn_80144F4C(void)
     stw r29, 0x404(r1)
     mr r29, r3
     addi r3, r1, 0x204
-    bl fn_8004B290
+    bl sound_initChannelParams
     fadds f9, f29, f30
     lfs f28, lbl_8088196C
     lfs f0, lbl_808819A8
@@ -771,7 +771,7 @@ asm void fn_80144F4C(void)
     addi r3, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_8004B290
+    bl sound_initChannelParams
     addi r4, r1, 0x20c
     addi r3, r1, 0x25c
     lfs f2, 0x214(r1)

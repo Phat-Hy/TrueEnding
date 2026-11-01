@@ -30,7 +30,7 @@ extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
 extern void fn_80615E00(void);
 extern void fn_80615FF0(void);
-extern void fn_80616250(void);
+extern void GXClampLightAngle(void);
 extern void memcmp(void);
 extern void fn_8068A6D8(void);
 extern void fn_8068A918(void);
@@ -220,7 +220,7 @@ lbl_fn_800B4134_0000010C:
     fmr f3, f1
     li r7, 0x0
     li r8, 0x0
-    bl fn_80616250
+    bl GXClampLightAngle
     li r0, 0x1
     stb r0, lbl_8087EFA0
 lbl_fn_800B4134_000001F8:

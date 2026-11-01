@@ -56,7 +56,7 @@ extern void fn_80150178(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
 extern void fn_80164DCC(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void fn_8016E5F0(void);
 extern void actor_setState(void);
 extern void battle_applyStatusEffect(void);
@@ -2015,7 +2015,7 @@ lbl_fn_8000FAE8_000019F4:
     lwz r0, 0x18(r31)
     lwz r3, 0x48(r3)
     extrwi r4, r0, 1, 18
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r0, 0x18(r31)
     lwz r3, 0x1c(r31)
     extrwi r0, r0, 1, 19

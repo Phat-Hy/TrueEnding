@@ -21,7 +21,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void fn_8017CB9C(void);
 extern void fn_801805A4(void);
 extern void fn_801CC0AC(void);
@@ -1865,7 +1865,7 @@ lbl_fn_805A6270_0000192C:
     add r3, r27, r29
     addi r4, r1, 0x8
     addi r3, r3, 0x54
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     addi r28, r28, 0x1
     addi r29, r29, 0x30
     cmpwi r28, 0x2

@@ -24,7 +24,7 @@ extern void fn_800A4F0C(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
 extern void fn_800A55D4(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB480(void);
@@ -798,7 +798,7 @@ lbl_spectateCamera_update_000009A4:
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     lwz r3, lbl_8087EFB4
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     mr r31, r3
     addi r4, r28, 0x750
     bl fn_804741C0

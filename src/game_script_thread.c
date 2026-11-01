@@ -24,7 +24,7 @@ extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
 extern void enemy_updateAnimTimer(void);
 extern void fn_8012DD70(void);
-extern void fn_80139560(void);
+extern void npc_calcTargetDistance(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
@@ -149,7 +149,7 @@ lbl_fn_8024ED68_000000C0:
     li r21, 0x0
     ori r0, r0, 0x10
     stw r0, 0x12a4(r3)
-    bl fn_80139560
+    bl npc_calcTargetDistance
     b lbl_fn_8024ED68_000003C0
 lbl_fn_8024ED68_000000D8:
     lwz r26, 0xf80(r3)
@@ -343,7 +343,7 @@ lbl_fn_8024ED68_000003AC:
     li r21, 0x0
     ori r0, r0, 0x10
     stw r0, 0x12a4(r3)
-    bl fn_80139560
+    bl npc_calcTargetDistance
 lbl_fn_8024ED68_000003C0:
     cmpwi r21, 0x0
     beq lbl_fn_8024ED68_000003FC
@@ -351,7 +351,7 @@ lbl_fn_8024ED68_000003C0:
     mr r3, r22
     ori r0, r0, 0x10
     stw r0, 0x12a4(r22)
-    bl fn_80139560
+    bl npc_calcTargetDistance
     li r23, 0x0
     stw r23, 0x58c(r22)
     mr r3, r22

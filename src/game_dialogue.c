@@ -15,14 +15,14 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void fn_800D594C(void);
 extern void atn_LH_Texture_update(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void atn_LoadHandle_getStatus(void);
 extern void fn_80478198(void);
-extern void fn_80616250(void);
+extern void GXClampLightAngle(void);
 extern void fn_80616360(void);
 extern void memcmp(void);
 extern void strncmp(void);
@@ -207,7 +207,7 @@ lbl_fn_8007B100_00000188:
     mr r3, r31
     fsubs f2, f0, f2
     lfs f1, lbl_80880B9C
-    bl fn_80616250
+    bl GXClampLightAngle
 lbl_fn_8007B100_000001CC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1225,7 +1225,7 @@ lbl_fn_8007C018_00001020:
     b lbl_fn_8007C018_00001040
 lbl_fn_8007C018_00001038:
     mr r4, r30
-    bl fn_800D5908
+    bl depth_resetRenderTarget
 lbl_fn_8007C018_00001040:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

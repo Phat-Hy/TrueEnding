@@ -11,13 +11,13 @@ extern void scene_traverseNode(void);
 extern void fn_8000DD0C(void);
 extern void vec3_assign(void);
 extern void fn_800109E0(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_800133B0(void);
 extern void vec3_add(void);
 extern void fn_80043D58(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
 extern void skin_playAnimationByName(void);
@@ -563,7 +563,7 @@ lbl_fn_803729B4_0000050C:
     addi r3, r1, 0x74
     lfs f2, 0x14(r28)
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     b lbl_fn_803729B4_0000060C
 lbl_fn_803729B4_00000540:
     mr r3, r31
@@ -592,7 +592,7 @@ lbl_fn_803729B4_00000564:
     bl fn_8013A13C
     addi r3, r1, 0x5c
     addi r4, r1, 0xf8
-    bl fn_80011410
+    bl mtx_multVec
     lfs f1, lbl_8088574C
     addi r3, r1, 0x20
     addi r4, r1, 0x5c
@@ -761,7 +761,7 @@ lbl_fn_803729B4_000007C8:
     addi r3, r1, 0x38
     fmr f2, f1
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
     b lbl_fn_803729B4_000008B8
 lbl_fn_803729B4_00000828:
     clrlwi r0, r27, 31
@@ -783,7 +783,7 @@ lbl_fn_803729B4_00000848:
     lfd f0, 0x1d0(r1)
     fsubs f0, f0, f28
     fmadds f1, f29, f0, f30
-    bl fn_80057A68
+    bl vec3_initValues
     b lbl_fn_803729B4_000008B8
 lbl_fn_803729B4_00000874:
     cmpwi r0, 0x0
@@ -804,7 +804,7 @@ lbl_fn_803729B4_00000890:
     lfd f0, 0x1d0(r1)
     fsubs f0, f0, f28
     fnmsubs f1, f29, f0, f31
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_803729B4_000008B8:
     addi r3, r1, 0xc8
     addi r4, r1, 0x74

@@ -59,7 +59,7 @@ void fn_8013C460(void);
 void fn_8013C470(void);
 void fn_8013C478(void);
 void fn_8013C480(void);
-void fn_8013C504(void);
+void npc_getDialogController(void);
 void fn_8013C50C(void);
 void fn_8013C514(void);
 void fn_8013C53C(void);
@@ -263,7 +263,7 @@ lbl_fn_8013C480_00000170:
     blr
 }
 
-asm void fn_8013C504(void)
+asm void npc_getDialogController(void)
 {
     nofralloc
     lwz r3, 0x10d8(r3)

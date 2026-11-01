@@ -15,7 +15,7 @@ extern void fn_80010B68(void);
 extern void fn_80012A1C(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004B290(void);
+extern void sound_initChannelParams(void);
 extern void collision_testLineSegment(void);
 extern void fn_80076FF8(void);
 extern void mem_free(void);
@@ -227,7 +227,7 @@ asm void fn_80112254(void)
     mr r31, r3
     li r4, 0x0
     li r5, 0x0
-    bl fn_8004B290
+    bl sound_initChannelParams
     lis r26, lbl_807C7030@ha
     lis r25, lbl_807366D4@ha
     addi r26, r26, lbl_807C7030@l
@@ -373,7 +373,7 @@ asm void fn_80112254(void)
     stfs f0, 0x434(r31)
     stfs f0, 0x438(r31)
     stw r28, 0x43c(r31)
-    bl fn_8004B290
+    bl sound_initChannelParams
     lfs f6, lbl_808816B0
     lfs f5, lbl_808816AC
     stfs f6, 0x638(r31)

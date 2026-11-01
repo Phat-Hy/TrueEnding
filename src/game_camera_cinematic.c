@@ -21,7 +21,7 @@ extern void fn_801595BC(void);
 extern void fn_8015AC48(void);
 extern void party_configureMemberSlot(void);
 extern void fn_8016C4D8(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void fn_802DC5B4(void);
 extern void fn_802DC8B0(void);
@@ -1166,7 +1166,7 @@ asm void fn_802E3D60(void)
     bl actor_setState
     mr r3, r31
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r0, 0x5c0(r31)
     mr r3, r31
     ori r0, r0, 0x1

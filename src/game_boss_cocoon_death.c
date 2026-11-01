@@ -38,7 +38,7 @@ extern void fn_800FBA9C(void);
 extern void fn_800FBE70(void);
 extern void actor_spawnActorWithId(void);
 extern void equip_getGlobalManager(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void fn_80158E1C(void);
 extern void actor_setState(void);
 extern void save_validateHeader(void);
@@ -1057,7 +1057,7 @@ lbl_fn_80468B68_00000CDC:
     bdnz lbl_fn_80468B68_00000C7C
 lbl_fn_80468B68_00000CE8:
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r25
     bl fn_800EC204
     cmpwi r3, 0x0
@@ -1068,7 +1068,7 @@ lbl_fn_80468B68_00000CE8:
     bl vec3_copy
 lbl_fn_80468B68_00000D10:
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r27
     bl fn_800EC204
     cmpwi r3, 0x0
@@ -1079,7 +1079,7 @@ lbl_fn_80468B68_00000D10:
     bl vec3_copy
 lbl_fn_80468B68_00000D38:
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r28
     bl fn_800EC204
     cmpwi r3, 0x0

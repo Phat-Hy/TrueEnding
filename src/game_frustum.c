@@ -12,7 +12,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void atn_LH_Texture_release(void);
-extern void fn_800D5908(void);
+extern void depth_resetRenderTarget(void);
 extern void atn_LH_Texture_update(void);
 extern void fn_800EF91C(void);
 extern void fn_80103600(void);
@@ -331,7 +331,7 @@ lbl_fn_800F2C9C_00000228:
     addis r3, r31, 0x1
     lwz r4, lbl_808813DC
     subi r3, r3, 0x3484
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     addis r3, r31, 0x3
     lwz r4, lbl_808813F0
     addi r3, r3, 0x64ec
@@ -1156,7 +1156,7 @@ asm void fn_800F39A4(void)
     addi r31, r31, lbl_80736040@l
     addi r4, r31, 0x169
     subi r3, r3, 0x763c
-    bl fn_800D5908
+    bl depth_resetRenderTarget
     lwz r4, lbl_808813D4
     mr r3, r28
     li r5, 0x0

@@ -13,7 +13,7 @@ extern void _savegpr_27(void);
 extern void vec3_set(void);
 extern void vec3_copy(void);
 extern void vec3_toEulerAngles(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void fn_80012774(void);
 extern void vec3_sub(void);
 extern void actor_dispatchMessage(void);
@@ -21,11 +21,11 @@ extern void fn_80049B74(void);
 extern void fn_8004AE84(void);
 extern void fn_8004B158(void);
 extern void fn_8004B1EC(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void magic_castSpellCircle(void);
 extern void fn_8008B964(void);
 extern void fn_800A56A8(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void fn_800CB480(void);
 extern void fn_800CB640(void);
 extern void fn_800CB6F8(void);
@@ -167,7 +167,7 @@ asm void fn_80487490(void)
     cror eq, lt, eq
     bne lbl_fn_80487490_000000A8
     bl fn_8008B964
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     mr r4, r3
     addi r3, r31, 0x1bd0
     bl fn_8047C88C
@@ -191,7 +191,7 @@ asm void fn_80487490(void)
     b lbl_fn_80487490_00000100
 lbl_fn_80487490_000000A8:
     bl fn_8008B964
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     lfs f1, 0x1ab4(r31)
     mr r4, r3
     addi r3, r31, 0x1bd0
@@ -417,7 +417,7 @@ lbl_fn_80487490_000003A8:
     addi r3, r1, 0x84
     lfs f3, lbl_80886F90
     fmr f2, f1
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_80487490_0000040C:
     addi r3, r1, 0x84
     bl viewport_getNextSequenceId
@@ -439,7 +439,7 @@ lbl_fn_80487490_0000040C:
     bl fn_80487BD0
     addi r3, r1, 0x84
     addi r4, r1, 0xd8
-    bl fn_80011410
+    bl mtx_multVec
     lfs f0, lbl_80886F8C
     addi r3, r1, 0x84
     stfs f0, 0x8c(r1)
@@ -450,7 +450,7 @@ lbl_fn_80487490_0000040C:
     addi r3, r1, 0x84
     lfs f2, lbl_80886F90
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_80487490_0000048C:
     addi r3, r1, 0x84
     bl viewport_getNextSequenceId
@@ -459,7 +459,7 @@ lbl_fn_80487490_0000048C:
     lfs f2, lbl_80886F8C
     fneg f1, f0
     lfs f3, 0x88(r1)
-    bl fn_80057A68
+    bl vec3_initValues
     b lbl_fn_80487490_000004D4
 lbl_fn_80487490_000004B0:
     lfs f1, 0x2434(r31)

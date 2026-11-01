@@ -21,7 +21,7 @@ extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -591,7 +591,7 @@ asm void fn_804365FC(void)
     cmpwi r0, 0x0
     bnelr
     addi r3, r3, 0xf4
-    b fn_8008CD60
+    b minimap_renderOverlay
     blr
 }
 

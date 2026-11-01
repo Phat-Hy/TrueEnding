@@ -32,7 +32,7 @@ extern void dialog_updateScriptState(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015ECC4(void);
 extern void fn_80161570(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void battle_applyStatusEffect(void);
 extern void actor_getMovementFlags(void);
 extern void task_findEntryById(void);
@@ -492,7 +492,7 @@ asm void fn_80354110(void)
     stw r30, 0x8(r1)
     mr r30, r3
     stb r31, 0x1809(r3)
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r0, 0x54c(r30)
     addi r3, r30, 0xb0
     lfs f0, lbl_80885398

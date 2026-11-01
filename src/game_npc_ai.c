@@ -10,7 +10,7 @@ extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
-extern void fn_80011410(void);
+extern void mtx_multVec(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void fn_80017F18(void);
@@ -74,7 +74,7 @@ extern void fn_8013C460(void);
 extern void fn_8013C470(void);
 extern void fn_8013C478(void);
 extern void fn_8013C480(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void fn_8013C50C(void);
 extern void fn_8013C514(void);
 extern void fn_8013C53C(void);
@@ -1334,7 +1334,7 @@ lbl_fn_8013A4E8_000010F8:
     bl fn_8013A13C
     addi r3, r1, 0x2d0
     addi r4, r1, 0x390
-    bl fn_80011410
+    bl mtx_multVec
     mr r3, r27
     addi r4, r1, 0x2d0
     bl fn_80155790
@@ -1353,7 +1353,7 @@ lbl_fn_8013A4E8_00001170:
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_000011A4
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     b lbl_fn_8013A4E8_000011A8
 lbl_fn_8013A4E8_000011A4:
     li r3, 0x0
@@ -1388,7 +1388,7 @@ lbl_fn_8013A4E8_000011E0:
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_0000121C
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     b lbl_fn_8013A4E8_00001220
 lbl_fn_8013A4E8_0000121C:
     li r3, 0x0

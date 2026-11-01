@@ -27,7 +27,7 @@ extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void npc_initScriptContext(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
@@ -703,7 +703,7 @@ asm void fn_802D0594(void)
     cmpwi r3, 0x0
     beq lbl_fn_802D0594_00000C6C
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     cmpwi r3, 0x0
     beq lbl_fn_802D0594_00000C6C
     addi r3, r29, 0x1650
@@ -731,7 +731,7 @@ lbl_fn_802D0594_000008A8:
     bl str_parseInt
     mr r30, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r30
     bl fn_800EC204
     cmpwi r3, 0x0
@@ -767,7 +767,7 @@ lbl_fn_802D0594_00000928:
     bl str_parseInt
     mr r30, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r30
     bl fn_800EC204
     cmpwi r3, 0x0

@@ -10,7 +10,7 @@ extern void skill_calcTrajectory(void);
 extern void magic_castSpellCircle(void);
 extern void script_executeOpcode(void);
 extern void fn_8006F2F0(void);
-extern void fn_8008CD60(void);
+extern void minimap_renderOverlay(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
 extern void fn_80094F98(void);
@@ -1223,7 +1223,7 @@ lbl_dialog_renderWindow_00000FCC:
     stw r0, 0xb4(r24)
 lbl_dialog_renderWindow_00000FD8:
     addi r3, r24, 0xb0
-    bl fn_8008CD60
+    bl minimap_renderOverlay
     mr r3, r24
     bl fn_8014FB60
     cmpwi r3, 0x0

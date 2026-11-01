@@ -55,12 +55,12 @@ extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void fn_80154654(void);
 extern void equip_applyToCharacter(void);
 extern void shop_canPurchaseItem(void);
 extern void fn_8016DF3C(void);
-extern void fn_8016E4C4(void);
+extern void debuff_removeStatusEffect(void);
 extern void actor_setState(void);
 extern void fn_80178164(void);
 extern void fn_80178668(void);
@@ -849,7 +849,7 @@ lbl_fn_80452B6C_0000094C:
     bne lbl_fn_80452B6C_000009A8
     lwz r3, 0x14cc(r31)
     li r4, 0x1
-    bl fn_8016E4C4
+    bl debuff_removeStatusEffect
     lwz r3, 0x14cc(r31)
     li r4, 0x2
     lwz r0, 0x14dc(r31)
@@ -1662,7 +1662,7 @@ asm void fn_8045374C(void)
     cmpwi r3, 0x0
     beq lbl_fn_8045374C_00001540
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     cmpwi r3, 0x0
     beq lbl_fn_8045374C_00001540
     addi r3, r31, 0x14b0

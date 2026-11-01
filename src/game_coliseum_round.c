@@ -12,7 +12,7 @@ extern void fn_8007A154(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_8008B964(void);
-extern void fn_800C16B4(void);
+extern void skeleton_getGlobalManager(void);
 extern void fn_800C2448(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
@@ -997,7 +997,7 @@ lbl_fn_8048F9B0_00000CF8:
     addi r4, r29, 0x1bec
     bl fn_8047CF48
     bl fn_8008B964
-    bl fn_800C16B4
+    bl skeleton_getGlobalManager
     bl fn_801856A4
     addi r4, r1, 0x10
     bl fn_80042108

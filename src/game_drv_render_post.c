@@ -34,7 +34,7 @@ extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
 extern void fn_80615FF0(void);
 extern void fn_80616200(void);
-extern void fn_80616250(void);
+extern void GXClampLightAngle(void);
 extern void fn_80616390(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
@@ -981,7 +981,7 @@ lbl_fn_805CE6F0_00000C3C:
     lfs f3, 0x1c(r9)
     fsubs f2, f0, f2
     lbz r7, 0x20(r9)
-    bl fn_80616250
+    bl GXClampLightAngle
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     lwz r30, 0x28(r1)

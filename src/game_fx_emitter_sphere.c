@@ -16,7 +16,7 @@ extern void vec3_sub(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004203C(void);
-extern void fn_80057A68(void);
+extern void vec3_initValues(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -37,7 +37,7 @@ extern void system_getNextSequenceId(void);
 extern void skill_findNodeBySlotId(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
-extern void fn_8013C504(void);
+extern void npc_getDialogController(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
@@ -1435,7 +1435,7 @@ asm void fn_802885EC(void)
     oris r0, r0, 0x380
     stw r0, 0x7ec(r31)
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r30, r3
     addi r3, r31, 0x1984
     bl boss_getOffset54
@@ -1648,7 +1648,7 @@ lbl_fn_802885EC_000015E0:
     bl str_parseInt
     mr r29, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r29
     bl fn_800EC204
     cmpwi r3, 0x0
@@ -1673,7 +1673,7 @@ lbl_fn_802885EC_00001638:
     bl str_parseInt
     mr r29, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r29
     bl fn_800EC204
     cmpwi r3, 0x0
@@ -1697,7 +1697,7 @@ lbl_fn_802885EC_0000167C:
     bl str_parseInt
     mr r29, r3
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     mr r4, r29
     bl fn_800EC204
     stw r3, 0x1500(r31)
@@ -1884,7 +1884,7 @@ lbl_fn_802885EC_00001938:
     mr r3, r31
     bl fn_802914F8
     bl equip_getGlobalManager
-    bl fn_8013C504
+    bl npc_getDialogController
     li r4, 0x3e9
     bl fn_800EC204
     cmpwi r3, 0x0
@@ -1899,7 +1899,7 @@ lbl_fn_802885EC_0000196C:
     addi r3, r31, 0x1978
     lfs f2, lbl_80883AAC
     fmr f3, f1
-    bl fn_80057A68
+    bl vec3_initValues
 lbl_fn_802885EC_00001980:
     addi r3, r1, 0x14
     addi r4, r31, 0x1978
