@@ -82,8 +82,8 @@ extern u32 lbl_8088180C;
 extern u32 lbl_80881810;
 
 /* Function declarations */
-void fn_80120D24(void);
-void fn_80120D34(void);
+void* fn_80120D24(void*, int);
+void* fn_80120D34(void*, int);
 void fn_80120D44(void);
 void fn_80120E38(void);
 void fn_80120E48(void);
@@ -98,7 +98,7 @@ void fn_8012111C(void);
 void fn_8012133C(void);
 void fn_80121E14(void);
 void fn_80121EB0(void);
-void equip_getGlobalManager(void);
+u32 equip_getGlobalManager(void);
 void fn_80121F08(void);
 void fn_80121FD4(void);
 void fn_801220A0(void);
@@ -107,22 +107,14 @@ void fn_80122238(void);
 void fn_80122280(void);
 void fn_80122288(void);
 
-asm void fn_80120D24(void)
+void* fn_80120D24(void* obj, int index)
 {
-    nofralloc
-    mulli r0, r4, 0xc
-    lwz r3, 0x8(r3)
-    add r3, r3, r0
-    blr
+    return (char*)(*(void**)((char*)obj + 8)) + index * 0xc;
 }
 
-asm void fn_80120D34(void)
+void* fn_80120D34(void* obj, int index)
 {
-    nofralloc
-    mulli r0, r4, 0xc
-    lwz r3, 0x0(r3)
-    add r3, r3, r0
-    blr
+    return (char*)(*(void**)obj) + index * 0xc;
 }
 
 asm void fn_80120D44(void)
@@ -1422,11 +1414,9 @@ asm void fn_80121EB0(void)
     blr
 }
 
-asm void equip_getGlobalManager(void)
+u32 equip_getGlobalManager(void)
 {
-    nofralloc
-    lwz r3, lbl_8087F430
-    blr
+    return lbl_8087F430;
 }
 
 asm void fn_80121F08(void)
