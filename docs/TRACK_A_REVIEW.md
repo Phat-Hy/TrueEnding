@@ -97,3 +97,37 @@ That distinction is the whole value question for Track B:
 So Batches 5-6 buy naming (40 more named routines, which is 40 fewer `fn_XXXX` in a log) and buy Track B **no** new readable behaviour. Both are worth having; they are not the same thing, and the `progress 99.30 % -> 99.30 %` figure is the honest signal of that - a rename cannot move a byte.
 
 **Ask for the next batch:** alternate one A2-style conversion in with each naming batch. Forty names is ~40 minutes of a session's value to Track B; one converted function is a permanent reference. If a naming batch is what the queue needs, say so - just do not let the log's vocabulary ("decompile", "name", "convert") blur the difference, because the next session will read it as a promise.
+
+## Round 5 review — `acd195c..e961a00` (Batches 7-8, 86 files, 107 renames + 2 C conversions + one new build script)
+
+Isolation re-checked: this checkout is `main` and clean; the Track A copy is `G:\Program\TrueEnding-TrackA`. Read against the revision with `git grep … origin/track-a`.
+
+| claim | verdict |
+|---|---|
+| Batches 7-8: **107 names** | **verified**: 107 rename pairs; **0 old-name lines left in `src/`** (ignoring `lbl_*`), **0 new names unmatched**. Fourth consecutive batch at that bar. |
+| "**decompile** `atn_LH_Texture` ctor/dtor (208 B) **to C**" | **verified, and it is a real conversion**: `-asm void atn_LH_Texture_constructor(void)` → `+atn_LH_Texture* atn_LH_Texture_constructor(atn_LH_Texture* this)`, same for the destructor (`atn_LoadHandle* atn_LH_Texture_destructor(atn_LoadHandle*, int)`). Net `asm void` count fell by exactly **2**, which is the self-check from round 4 and it agrees. |
+| "name real `taskManager_initSystem` (2548 B)" | **verified as the function Track B asked for**: it is `fn_8047A4C8`, the only writer of the manager slot `0x8087EE94` (5c.46 AP-BE). Naming it is the first half of A2's new priority - **the conversion is still the half Track B needs**, because the 12-byte manager object's `+0`/`+4`/`+8` words are what the task-creation question turns on. |
+| prototypes updated across translation units | **done** - every caller of the two converted functions now carries the typed declaration (`struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);`). That was round 2's ask, and it did not have to be asked twice. |
+
+### `tools/patch_ldscript.py` (finally reviewed, and it needs one change)
+
+It injects 29 fixed-address symbol definitions into the **generated** `build/SLSEXJ/ldscript.lcf`, is invoked by
+`tools/project.py`'s split rule and `tools/debug/batch_pipeline.py`, and is idempotent (it skips when its marker is
+present). Committing it is defensible: without it a clean worktree cannot link.
+
+What it must not be is a place where symbols *enter the build that the symbol map does not know about*. Checked each
+injected name against `config/symbols.txt`:
+
+* **real, at the injected address**: `__OSDBINTEND 0x805EBE04`, `__OSDBJUMPEND 0x805EBE14`, `lbl_80764848 0x80764848`, and the other `lbl_*/__OSDB*` entries of that family;
+* **NOT in `config/symbols.txt`**: `lbl_LOCAL_SIInit__Fv_Initialized` (`0x8087FB84`), `lbl_LOCAL_SIGetType__Fl_cmdTypeAndStatus` (`0x8087FB88`), `lbl_807BB4A8` (`0x807BB4A8`).
+
+Those three are probably real labels the split never declared - and the fact that the build still reports the same
+99.30 % with them is evidence their addresses are consistent with the image, because a wrong address would move
+relocated bytes and show as a diff. But the rule should be explicit:
+
+1. **Every injected symbol must exist in `config/symbols.txt` at that address.** Move these three there - the map is
+   the single source of truth, and a reader who greps the map for a symbol the linker knows should find it.
+2. **The shim may define data and labels, never a function.** A function added by the linker would let a deleted
+   `asm void` body link clean and match, which is exactly the failure mode the round-4 `asm void` count is meant to
+   catch (this review used that count to confirm the A3 conversion was real rather than a deletion).
+3. Keep the "generated file only" scope and the idempotence marker; both are right.
