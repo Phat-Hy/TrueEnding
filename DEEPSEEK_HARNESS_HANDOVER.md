@@ -16521,3 +16521,18 @@ So the 80x56 content a composite quad binds is **not** what a sample of that add
 Option 1 is the cheaper one and it is measurable with the instrument already in hand: replay the capture and the probe copy's gradient must fall from **20.889** towards the layer's **1.123**.
 
 **Changes.** None to the port (this section is measurement). `logs_ap/bk_ram80.bin`, `logs_ap/bk_ram160.bin`, `logs_ap/bk_copy320.bin`, `logs_ap/bk_ab_*.log` are the evidence; the capture is `build/recomp/gxcap/gxfifo.tlscap` (frames 2794..2801).
+
+### AP-BL addendum. The mechanism is in two lines of aurora: a drawn texture bound at a copy destination resolves through `copyTextures`, and that map is keyed by the DESTINATION POINTER ALONE
+
+`lib/gx/texture.cpp:842-857` is the path a draw takes for a texture whose data pointer is a copy destination:
+
+```
+const auto copyIt = g_gxState.copyTextures.find(obj.data);
+const GXState::CopyTextureRef* copyRef = copyIt != end ? &copyIt->second : nullptr;
+...
+} else if (copyRef != nullptr) { handle = copyRef->handle; }
+```
+
+So a sampled copy is **its copy texture, not guest memory** - which is the right model, and it also explains why reading the RAM plane (AP-BL's numbers) measures the *last writer* rather than what a draw sees. But `copyTextures` is `absl::flat_hash_map<const void*, CopyTextureRef>` (`lib/gx/gx.hpp:413`): **one entry per destination address**. The tail writes `0x9038D1C0` as 80x56 four times and then as 320x224 inside one frame, and each write replaces the single entry for that address (`GXFrameBuffer.cpp:45`, `texture.cpp:510`). Whatever order the guest uses, the address can only name ONE of those copies at a time, so a quad that binds the address at 80x56 while the entry holds the 320x224 copy samples the wrong one - and the two are different pictures, not different resolutions of the same one (AP-BL: mean byte 69.75 against 113.25).
+
+That makes the fix precise, and smaller than AP-BL's option 1 guessed: **key the copy-texture map by (destination, width, height, format) and match on the bound texobj**, so a sample of an address at a given size resolves to the copy written at that size. The adapter-side alias variant is then unnecessary. Both the live path and the harness go through this one path, so one change fixes both, and its exit criterion is already measured: the composite probe copy's gradient must fall from **20.889** towards the layer's **1.123** (`logs_ap/bk_layer_2801.ppm`), with the geometry frames' 6.20-7.59 diagonal unchanged.
