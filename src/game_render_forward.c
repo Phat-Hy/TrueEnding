@@ -87,16 +87,10 @@ void fn_802B52D8(void);
 void fn_802B55B0(void);
 void fn_802B596C(void);
 
-asm void fn_802B43C0(void)
-{
-    nofralloc
-    blr
+void fn_802B43C0(void) {
 }
 
-asm void fn_802B43C4(void)
-{
-    nofralloc
-    blr
+void fn_802B43C4(void) {
 }
 
 asm void fn_802B43C8(void)

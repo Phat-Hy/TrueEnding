@@ -132,10 +132,7 @@ void atn_Model_drawMeshNode(void);
 void reticle_updateTargetNodes(void);
 void atn_Reticle_updateDraw(void);
 
-asm void fn_8009B938(void)
-{
-    nofralloc
-    blr
+void fn_8009B938(void) {
 }
 
 asm void atn_Model_drawSubNodes(void)

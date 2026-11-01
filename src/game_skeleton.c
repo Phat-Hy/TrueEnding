@@ -451,10 +451,7 @@ asm void fn_800C16B4(void)
     blr
 }
 
-asm void fn_800C16BC(void)
-{
-    nofralloc
-    blr
+void fn_800C16BC(void) {
 }
 
 asm void fn_800C16C0(void)

@@ -152,22 +152,13 @@ lbl_fn_802D7058_00000094:
 void fn_802D70FC(void) {
 }
 
-asm void fn_802D7100(void)
-{
-    nofralloc
-    blr
+void fn_802D7100(void) {
 }
 
-asm void fn_802D7104(void)
-{
-    nofralloc
-    blr
+void fn_802D7104(void) {
 }
 
-asm void fn_802D7108(void)
-{
-    nofralloc
-    blr
+void fn_802D7108(void) {
 }
 
 asm void fn_802D710C(void)

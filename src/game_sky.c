@@ -810,10 +810,7 @@ lbl_fn_800DC980_00000890:
     blr
 }
 
-asm void fn_800DCA6C(void)
-{
-    nofralloc
-    blr
+void fn_800DCA6C(void) {
 }
 
 asm void fn_800DCA70(void)
@@ -1324,10 +1321,7 @@ lbl_fn_800DCE20_00001038:
     blr
 }
 
-asm void fn_800DD178(void)
-{
-    nofralloc
-    blr
+void fn_800DD178(void) {
 }
 
 asm void fn_800DD17C(void)

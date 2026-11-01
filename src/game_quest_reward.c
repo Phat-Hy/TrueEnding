@@ -124,10 +124,7 @@ asm void fn_80147A08(void)
     b PSMTXQuat
 }
 
-asm void fn_80147A0C(void)
-{
-    nofralloc
-    blr
+void fn_80147A0C(void) {
 }
 
 asm void fn_80147A10(void)
