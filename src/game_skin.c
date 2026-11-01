@@ -122,16 +122,16 @@ void fn_800C32E0(void);
 void skin_applyWeights(void);
 void fn_800C3610(void);
 void fn_800C36B8(void);
-void fn_800C3718(void);
+u32 fn_800C3718(void);
 void skin_updateWeights(void);
-void fn_800C37D8(void);
+u32 fn_800C37D8(void);
 void fn_800C37E0(void);
 void fn_800C37E4(void);
 void fn_800C37FC(void);
 void fn_800C3834(void);
 void fn_800C3950(void);
 void fn_800C3990(void);
-void fn_800C3D6C(void);
+void *fn_800C3D6C(void *p);
 void fn_800C3D74(void);
 void fn_800C3E84(void);
 void fn_800C3FB0(void);
@@ -661,11 +661,9 @@ lbl_fn_800C36B8_00000668:
     blr
 }
 
-asm void fn_800C3718(void)
+u32 fn_800C3718(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
 asm void skin_updateWeights(void)
@@ -723,11 +721,9 @@ lbl_skin_updateWeights_0000072C:
     blr
 }
 
-asm void fn_800C37D8(void)
+u32 fn_800C37D8(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 void fn_800C37E0(void) {
@@ -1129,11 +1125,9 @@ lbl_fn_800C3990_00000CC0:
     blr
 }
 
-asm void fn_800C3D6C(void)
+void *fn_800C3D6C(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((u8 *)p + 4);
 }
 
 asm void fn_800C3D74(void)

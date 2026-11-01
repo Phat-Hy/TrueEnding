@@ -25,11 +25,11 @@ extern u32 lbl_80885DE8;
 
 /* Function declarations */
 void fn_803D164C(void);
-void fn_803D2134(void);
+void fn_803D2134(void *p, f32 val);
 void fn_803D213C(void);
 void fn_803D2148(void);
 void fn_803D215C(void);
-void fn_803D218C(void);
+void fn_803D218C(void *p, f32 val);
 void fn_803D2194(void);
 void fn_803D2A54(void);
 void fn_803D2A60(void);
@@ -750,11 +750,9 @@ lbl_fn_803D164C_00000838:
     blr
 }
 
-asm void fn_803D2134(void)
+void fn_803D2134(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x104(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x104) = val;
 }
 
 asm void fn_803D213C(void)
@@ -792,11 +790,9 @@ asm void fn_803D215C(void)
     blr
 }
 
-asm void fn_803D218C(void)
+void fn_803D218C(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x54(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x54) = val;
 }
 
 asm void fn_803D2194(void)

@@ -35,11 +35,11 @@ extern u32 lbl_80880BE4;
 
 /* Function declarations */
 void fn_80086560(void);
-void fn_800867A8(void);
+void fn_800867A8(void *p);
 void fn_800867B4(void);
 void fn_80086844(void);
 void fn_8008689C(void);
-void fn_80086AE4(void);
+void fn_80086AE4(void *p);
 void fn_80086AF0(void);
 void fn_80086B88(void);
 void fn_80086BE0(void);
@@ -51,7 +51,7 @@ void fn_80087270(void);
 void fn_8008730C(void);
 void fn_80087320(void);
 void route_findNextWaypoint(void);
-void fn_800875EC(void);
+void fn_800875EC(void *p, void *arg1, void *arg2);
 void fn_800875F8(void);
 void route_interpolatePath(void);
 void fn_80087858(void);
@@ -216,12 +216,9 @@ lbl_fn_80086560_00000220:
     blr
 }
 
-asm void fn_800867A8(void)
+void fn_800867A8(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stb r0, 0x68(r3)
-    blr
+    *(u8 *)((u8 *)p + 0x68) = 0;
 }
 
 asm void fn_800867B4(void)
@@ -453,12 +450,9 @@ lbl_fn_8008689C_0000055C:
     blr
 }
 
-asm void fn_80086AE4(void)
+void fn_80086AE4(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stb r0, 0x68(r3)
-    blr
+    *(u8 *)((u8 *)p + 0x68) = 0;
 }
 
 asm void fn_80086AF0(void)
@@ -1253,12 +1247,10 @@ lbl_route_findNextWaypoint_00001078:
     blr
 }
 
-asm void fn_800875EC(void)
+void fn_800875EC(void *p, void *arg1, void *arg2)
 {
-    nofralloc
-    stw r4, 0x54(r3)
-    stw r5, 0x50(r3)
-    blr
+    *(void **)((u8 *)p + 0x54) = arg1;
+    *(void **)((u8 *)p + 0x50) = arg2;
 }
 
 asm void fn_800875F8(void)

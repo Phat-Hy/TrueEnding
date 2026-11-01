@@ -124,7 +124,7 @@ void fn_80040B40(void);
 void fn_80040B44(void);
 void fn_800413EC(void);
 void fn_800417E8(void);
-void fn_80041A20(void);
+s32 fn_80041A20(void);
 void fn_80041A28(void);
 
 asm void fn_8003E688(void)
@@ -3845,11 +3845,9 @@ lbl_fn_800417E8_00003378:
     blr
 }
 
-asm void fn_80041A20(void)
+s32 fn_80041A20(void)
 {
-    nofralloc
-    li r3, -0x1
-    blr
+    return -1;
 }
 
 asm void fn_80041A28(void)

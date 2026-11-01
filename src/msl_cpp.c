@@ -428,11 +428,11 @@ s32 fn_8068EA68(void *p, s8 val);
 void fn_8068EA70(void);
 void fn_8068EAF8(void);
 s32 fn_8068EB0C(void);
-void fn_8068EB14(void);
+s64 fn_8068EB14(void);
 void fn_8068EB20(void);
 void fn_8068EBA8(void);
 s32 fn_8068EBBC(void);
-void fn_8068EBC4(void);
+s64 fn_8068EBC4(void);
 void fn_8068EBD0(void);
 void fn_8068EBF8(void);
 void fn_8068EC74(void);
@@ -9693,12 +9693,9 @@ s32 fn_8068EB0C(void)
     return -1;
 }
 
-asm void fn_8068EB14(void)
+s64 fn_8068EB14(void)
 {
-    nofralloc
-    li r4, -0x1
-    li r3, -0x1
-    blr
+    return -1LL;
 }
 
 asm void fn_8068EB20(void)
@@ -9759,12 +9756,9 @@ s32 fn_8068EBBC(void)
     return -1;
 }
 
-asm void fn_8068EBC4(void)
+s64 fn_8068EBC4(void)
 {
-    nofralloc
-    li r4, -0x1
-    li r3, -0x1
-    blr
+    return -1LL;
 }
 
 asm void fn_8068EBD0(void)

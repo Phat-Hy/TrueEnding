@@ -50,12 +50,12 @@ void fn_80084EE8(void);
 void* field_getTextureSlot(void* field, u32 arg2, u32 arg3);
 void fn_80084F58(void);
 void fn_80084F6C(void);
-void fn_80084F7C(void);
+void *fn_80084F7C(void *p);
 void fn_80084F84(void);
-void fn_80084FA0(void);
+void *fn_80084FA0(void *p);
 void fn_80084FA8(void);
 void fn_80084FD8(void);
-void fn_80085018(void);
+void fn_80085018(void *p);
 void fn_80085024(void);
 void fn_800850B4(void);
 
@@ -1105,11 +1105,9 @@ asm void fn_80084F6C(void)
     blr
 }
 
-asm void fn_80084F7C(void)
+void *fn_80084F7C(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((u8 *)p + 4);
 }
 
 asm void fn_80084F84(void)
@@ -1125,11 +1123,9 @@ lbl_fn_80084F84_00000E88:
     blr
 }
 
-asm void fn_80084FA0(void)
+void *fn_80084FA0(void *p)
 {
-    nofralloc
-    lwz r3, 0x8(r3)
-    blr
+    return *(void **)((u8 *)p + 8);
 }
 
 asm void fn_80084FA8(void)
@@ -1172,12 +1168,9 @@ lbl_fn_80084FD8_00000EF0:
     blr
 }
 
-asm void fn_80085018(void)
+void fn_80085018(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stb r0, 0x68(r3)
-    blr
+    *(u8 *)((u8 *)p + 0x68) = 0;
 }
 
 asm void fn_80085024(void)

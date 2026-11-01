@@ -73,7 +73,7 @@ extern u32 lbl_80886B48;
 extern u32 lbl_80886B4C;
 
 /* Function declarations */
-void fn_8044D028(void);
+void fn_8044D028(void *p);
 void fn_8044D034(void);
 void fn_8044D060(void);
 void fn_8044D0DC(void);
@@ -87,13 +87,13 @@ void fn_8044D490(void);
 void fn_8044D4F0(void);
 void fn_8044D500(void);
 void fn_8044D530(void);
-void fn_8044D560(void);
+u32 fn_8044D560(void *p);
 void fn_8044D56C(void);
 void fn_8044D678(void);
 void fn_8044D6AC(void);
 void fn_8044D6E0(void);
 void fn_8044D710(void);
-void fn_8044D878(void);
+void fn_8044D878(void *p);
 void fn_8044D884(void);
 void fn_8044D9BC(void);
 void fn_8044E0A8(void);
@@ -105,12 +105,9 @@ void fn_8044E610(void);
 void fn_8044E644(void);
 void fn_8044E88C(void);
 
-asm void fn_8044D028(void)
+void fn_8044D028(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x601c(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x601c) = 0;
 }
 
 asm void fn_8044D034(void)
@@ -537,12 +534,9 @@ lbl_fn_8044D530_00000528:
     blr
 }
 
-asm void fn_8044D560(void)
+u32 fn_8044D560(void *p)
 {
-    nofralloc
-    addis r3, r3, 0x1
-    lwz r3, -0x24d4(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0xdb2c);
 }
 
 asm void fn_8044D56C(void)
@@ -781,12 +775,9 @@ lbl_fn_8044D710_00000834:
     blr
 }
 
-asm void fn_8044D878(void)
+void fn_8044D878(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    sth r0, 0x0(r3)
-    blr
+    *(u16 *)p = 0;
 }
 
 asm void fn_8044D884(void)

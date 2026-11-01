@@ -57,9 +57,9 @@ void fn_801588A0(void);
 void shop_canPurchaseItem(void);
 void fn_80158C9C(void);
 void shop_loadCatalogItem(void);
-void fn_80158D58(void);
+u32 fn_80158D58(void);
 void fn_80158D60(void);
-void fn_80158E14(void);
+u32 fn_80158E14(void);
 void fn_80158E1C(void);
 void fn_80158EF0(void);
 void fn_801591E8(void);
@@ -1287,11 +1287,9 @@ lbl_shop_loadCatalogItem_00001110:
     blr
 }
 
-asm void fn_80158D58(void)
+u32 fn_80158D58(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80158D60(void)
@@ -1348,11 +1346,9 @@ lbl_fn_80158D60_000011CC:
     blr
 }
 
-asm void fn_80158E14(void)
+u32 fn_80158E14(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
 asm void fn_80158E1C(void)

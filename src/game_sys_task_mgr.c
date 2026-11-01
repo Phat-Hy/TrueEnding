@@ -87,18 +87,18 @@ void fn_802167E0(void);
 void fn_802168BC(void);
 void fn_80216908(void);
 void fn_80216954(void);
-void fn_80216988(void);
+u32 fn_80216988(void);
 void fn_80216994(void);
 void fn_80216A2C(void);
 void fn_80216A94(void);
 void fn_80216AFC(void);
 void fn_80216CD0(void);
-void fn_802174E8(void);
+void fn_802174E8(void *p);
 void fn_802174F4(void);
 void task_findNextReady(void);
 void fn_80217778(void);
 void fn_802178C4(void);
-void fn_802179B4(void);
+u32 fn_802179B4(void);
 void fn_802179BC(void);
 void fn_802179FC(void);
 void fn_80217D64(void);
@@ -542,12 +542,9 @@ lbl_fn_80216954_00000534:
     blr
 }
 
-asm void fn_80216988(void)
+u32 fn_80216988(void)
 {
-    nofralloc
-    lis r3, lbl_807C7FBC@ha
-    lwz r3, lbl_807C7FBC@l(r3)
-    blr
+    return *(u32 *)lbl_807C7FBC;
 }
 
 asm void fn_80216994(void)
@@ -1337,12 +1334,9 @@ lbl_fn_80216CD0_00001074:
     blr
 }
 
-asm void fn_802174E8(void)
+void fn_802174E8(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0xb4(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xb4) = 0;
 }
 
 asm void fn_802174F4(void)
@@ -1689,11 +1683,9 @@ asm void fn_802178C4(void)
     blr
 }
 
-asm void fn_802179B4(void)
+u32 fn_802179B4(void)
 {
-    nofralloc
-    li r3, 0xa
-    blr
+    return 10;
 }
 
 asm void fn_802179BC(void)

@@ -94,7 +94,7 @@ void fn_803CE5DC(void);
 void fn_803CE684(void);
 void fn_803CE688(void);
 void fn_803CE6BC(void);
-void fn_803CE6FC(void);
+void fn_803CE6FC(void *p);
 void fn_803CE708(void);
 void fn_803CE738(void);
 void fn_803CE768(void);
@@ -103,8 +103,8 @@ void fn_803CE854(void);
 void fn_803CE8A8(void);
 void fn_803CE910(void);
 void fn_803CE980(void);
-void fn_803CF734(void);
-void fn_803CF740(void);
+void fn_803CF734(void *p);
+void fn_803CF740(void *p);
 void fn_803CF74C(void);
 void fn_803CF78C(void);
 void fn_803CF79C(void);
@@ -479,12 +479,9 @@ lbl_fn_803CE6BC_00000464:
     blr
 }
 
-asm void fn_803CE6FC(void)
+void fn_803CE6FC(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x48(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x48) = 0;
 }
 
 asm void fn_803CE708(void)
@@ -1589,20 +1586,14 @@ lbl_fn_803CE980_000010DC:
     blr
 }
 
-asm void fn_803CF734(void)
+void fn_803CF734(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p = 0;
 }
 
-asm void fn_803CF740(void)
+void fn_803CF740(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0xc38(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xc38) = 0;
 }
 
 asm void fn_803CF74C(void)

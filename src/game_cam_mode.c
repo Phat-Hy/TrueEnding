@@ -102,7 +102,7 @@ void fn_800EF2B4(void);
 void fn_800EF2F0(void);
 void fn_800EF304(void);
 u32 fn_800EF308(void);
-void fn_800EF310(void);
+void fn_800EF310(void *p);
 u32 fn_800EF31C(void);
 void fn_800EF324(void);
 void fn_800EF368(void);
@@ -1519,12 +1519,9 @@ u32 fn_800EF308(void)
     return 1;
 }
 
-asm void fn_800EF310(void)
+void fn_800EF310(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p = 0;
 }
 
 u32 fn_800EF31C(void)

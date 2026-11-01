@@ -93,12 +93,12 @@ void fn_80602240(void);
 void fn_806023D0(void);
 void fn_80602580(void);
 void fn_80602700(void);
-void fn_80602710(void);
-void fn_80602720(void);
+u32 fn_80602710(void);
+u32 fn_80602720(void);
 void fn_80602730(void);
 void fn_806028A0(void);
 void fn_80602A10(void);
-void DVDLowGetImmBufferReg(void);
+u32 DVDLowGetImmBufferReg(void);
 u32 DVDLowUnmaskStatusInterrupts(void);
 u32 DVDLowMaskCoverInterrupt(void);
 void fn_80602BB0(void);
@@ -2632,20 +2632,14 @@ asm void fn_80602700(void)
     blr
 }
 
-asm void fn_80602710(void)
+u32 fn_80602710(void)
 {
-    nofralloc
-    lis r3, lbl_807D1460@ha
-    lwz r3, lbl_807D1460@l(r3)
-    blr
+    return *(u32 *)lbl_807D1460;
 }
 
-asm void fn_80602720(void)
+u32 fn_80602720(void)
 {
-    nofralloc
-    lis r3, lbl_807D1480@ha
-    lwz r3, lbl_807D1480@l(r3)
-    blr
+    return *(u32 *)lbl_807D1480;
 }
 
 asm void fn_80602730(void)
@@ -2960,12 +2954,9 @@ lbl_fn_80602A10_2764:
     blr
 }
 
-asm void DVDLowGetImmBufferReg(void)
+u32 DVDLowGetImmBufferReg(void)
 {
-    nofralloc
-    lis r3, lbl_807D1360@ha
-    lwz r3, lbl_807D1360@l(r3)
-    blr
+    return *(u32 *)lbl_807D1360;
 }
 
 u32 DVDLowUnmaskStatusInterrupts(void)

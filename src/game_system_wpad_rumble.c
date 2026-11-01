@@ -92,10 +92,10 @@ extern u32 lbl_80885748;
 
 /* Function declarations */
 void fn_80366D40(void);
-void fn_80366DA4(void);
+void *fn_80366DA4(void *p);
 void fn_80366DAC(void);
-void fn_80366DF8(void);
-void fn_80366E00(void);
+void fn_80366DF8(void *p, void *val);
+void fn_80366E00(void *p, f32 val);
 void fn_80366E08(void);
 void world_Manager_update(void);
 void fn_80367A40(void);
@@ -131,11 +131,9 @@ asm void fn_80366D40(void)
     blr
 }
 
-asm void fn_80366DA4(void)
+void *fn_80366DA4(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x374
-    blr
+    return (u8 *)p + 0x374;
 }
 
 asm void fn_80366DAC(void)
@@ -162,18 +160,14 @@ asm void fn_80366DAC(void)
     blr
 }
 
-asm void fn_80366DF8(void)
+void fn_80366DF8(void *p, void *val)
 {
-    nofralloc
-    stw r4, 0x240(r3)
-    blr
+    *(void **)((u8 *)p + 0x240) = val;
 }
 
-asm void fn_80366E00(void)
+void fn_80366E00(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x3a4(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x3a4) = val;
 }
 
 asm void fn_80366E08(void)

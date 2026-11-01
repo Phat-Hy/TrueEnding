@@ -30,12 +30,12 @@ extern u32 lbl_8087F628;
 /* Function declarations */
 void fn_804D807C(void);
 void fn_804D8100(void);
-void fn_804D8110(void);
+void *fn_804D8110(void *p);
 void fn_804D8118(void);
 void net_voiceCodec_destroy(void);
-void fn_804D81CC(void);
+void *fn_804D81CC(void *p);
 void fn_804D81D4(void);
-void fn_804D8248(void);
+void *fn_804D8248(void *p);
 void fn_804D8250(void);
 void fn_804D8614(void);
 void fn_804D87B4(void);
@@ -91,11 +91,9 @@ asm void fn_804D8100(void)
     blr
 }
 
-asm void fn_804D8110(void)
+void *fn_804D8110(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(void **)((u8 *)p + 4);
 }
 
 asm void fn_804D8118(void)
@@ -155,11 +153,9 @@ lbl_net_voiceCodec_destroy_00000138:
     blr
 }
 
-asm void fn_804D81CC(void)
+void *fn_804D81CC(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x4
-    blr
+    return (u8 *)p + 4;
 }
 
 asm void fn_804D81D4(void)
@@ -197,11 +193,9 @@ lbl_fn_804D81D4_000001A4:
     blr
 }
 
-asm void fn_804D8248(void)
+void *fn_804D8248(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x4
-    blr
+    return (u8 *)p + 4;
 }
 
 asm void fn_804D8250(void)

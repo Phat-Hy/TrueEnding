@@ -125,11 +125,11 @@ extern u32 lbl_80887300;
 /* Function declarations */
 void fn_804ABA2C(void);
 void *fn_804ABEE4(void *obj);
-void fn_804ABEEC(void);
+u32 fn_804ABEEC(u32 *p, s32 idx);
 void *fn_804ABEF8(void *obj);
 void fn_804ABF00(void *obj, void *val);
-void fn_804ABF08(void);
-void fn_804ABF14(void);
+u32 fn_804ABF08(void *p);
+void fn_804ABF14(void *p);
 u32 fn_804ABF20(void);
 void fn_804ABF28(void);
 void fn_804ABF34(void);
@@ -479,12 +479,9 @@ void *fn_804ABEE4(void *obj)
     return (char *)obj + 0x88;
 }
 
-asm void fn_804ABEEC(void)
+u32 fn_804ABEEC(u32 *p, s32 idx)
 {
-    nofralloc
-    slwi r0, r4, 2
-    lwzx r3, r3, r0
-    blr
+    return p[idx];
 }
 
 void *fn_804ABEF8(void *obj)
@@ -497,20 +494,14 @@ void fn_804ABF00(void *obj, void *val)
     *(void **)((char *)obj + 0xc) = val;
 }
 
-asm void fn_804ABF08(void)
+u32 fn_804ABF08(void *p)
 {
-    nofralloc
-    lwz r0, 0x4(r3)
-    extrwi r3, r0, 1, 27
-    blr
+    return (*(u32 *)((u8 *)p + 4) >> 4) & 1;
 }
 
-asm void fn_804ABF14(void)
+void fn_804ABF14(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x54(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x54) = 0;
 }
 
 u32 fn_804ABF20(void)

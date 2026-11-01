@@ -159,9 +159,9 @@ void fn_8001C1B4(void);
 void fn_8001C1B8(void);
 void fn_8001C1BC(void);
 void fn_8001C1C0(void);
-void fn_8001C260(void);
-void fn_8001C26C(void);
-void fn_8001C278(void);
+void *fn_8001C260(void);
+void *fn_8001C26C(void);
+void *fn_8001C278(void);
 void fn_8001C284(void);
 
 asm void fn_8001B4A4(void)
@@ -1250,28 +1250,19 @@ lbl_fn_8001C1C0_00000DA0:
     blr
 }
 
-asm void fn_8001C260(void)
+void *fn_8001C260(void)
 {
-    nofralloc
-    lis r3, lbl_807C68C0@ha
-    addi r3, r3, lbl_807C68C0@l
-    blr
+    return (void *)lbl_807C68C0;
 }
 
-asm void fn_8001C26C(void)
+void *fn_8001C26C(void)
 {
-    nofralloc
-    lis r3, lbl_807C6A40@ha
-    addi r3, r3, lbl_807C6A40@l
-    blr
+    return (void *)lbl_807C6A40;
 }
 
-asm void fn_8001C278(void)
+void *fn_8001C278(void)
 {
-    nofralloc
-    lis r3, lbl_807C6B30@ha
-    addi r3, r3, lbl_807C6B30@l
-    blr
+    return (void *)lbl_807C6B30;
 }
 
 asm void fn_8001C284(void)
