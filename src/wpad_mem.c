@@ -3365,10 +3365,7 @@ lbl_fn_8066CF40_00002EDC:
     blr
 }
 
-asm void fn_8066D0A0(void)
-{
-    nofralloc
-    blr
+void fn_8066D0A0(void) {
 }
 
 asm void fn_8066D0B0(void)

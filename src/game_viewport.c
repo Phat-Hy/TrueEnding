@@ -1557,10 +1557,7 @@ asm void fn_800F8538(void)
     blr
 }
 
-asm void fn_800F8544(void)
-{
-    nofralloc
-    blr
+void fn_800F8544(void) {
 }
 
 s32 system_getNextSequenceId(s32* obj)

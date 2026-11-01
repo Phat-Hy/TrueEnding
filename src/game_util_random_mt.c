@@ -102,10 +102,7 @@ void fn_805A4258(void);
 void fn_805A45FC(void);
 void fn_805A4984(void);
 
-asm void fn_805A2FD4(void)
-{
-    nofralloc
-    blr
+void fn_805A2FD4(void) {
 }
 
 asm void fn_805A2FD8(void)

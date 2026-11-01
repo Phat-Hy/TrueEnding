@@ -105,10 +105,7 @@ asm void fn_800E8FAC(void)
     blr
 }
 
-asm void fn_800E8FB4(void)
-{
-    nofralloc
-    blr
+void fn_800E8FB4(void) {
 }
 
 asm void fn_800E8FB8(void)
