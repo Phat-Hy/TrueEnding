@@ -19,7 +19,7 @@ extern void save_validateHeader(void);
 extern void save_formatSlotTitle(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_804A5CD8(void);
 extern void fn_804AC96C(void);
@@ -972,7 +972,7 @@ asm void fn_804BC628(void)
     li r5, 0x0
     lfd f0, 0x250(r1)
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     subi r3, r25, 0x2
     subfic r0, r25, 0x2
     nor r0, r3, r0
@@ -991,7 +991,7 @@ asm void fn_804BC628(void)
     li r5, 0x0
     lfd f0, 0x258(r1)
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r5, lbl_8087F610
     addi r4, r26, 0x28a
     lwz r3, 0x4c(r28)
@@ -1436,7 +1436,7 @@ lbl_fn_804BC628_00001294:
     mr r4, r3
     mr r3, r24
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r0, 0xe60(r28)
     addi r3, r31, 0x2db
     mulli r0, r0, 0x22c
@@ -1448,7 +1448,7 @@ lbl_fn_804BC628_00001294:
     mr r4, r3
     mr r3, r24
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x5c(r28)
     addi r3, r31, 0x2e6
     addi r24, r4, 0x58
@@ -1457,7 +1457,7 @@ lbl_fn_804BC628_00001294:
     mr r4, r3
     mr r3, r24
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x5c(r28)
     addi r3, r31, 0x2db
     addi r24, r4, 0x58
@@ -1466,7 +1466,7 @@ lbl_fn_804BC628_00001294:
     mr r4, r3
     mr r3, r24
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r0, 0xe60(r28)
     addi r3, r31, 0x2f1
     mulli r0, r0, 0x22c

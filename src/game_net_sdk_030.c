@@ -23,7 +23,7 @@ extern void strncmp(void);
 extern void atoi(void);
 extern void fn_806A4270(void);
 extern void fn_806D5850(void);
-extern void fn_806D58F0(void);
+extern void net_bufferGetCount(void);
 extern void fn_806D7350(void);
 extern void fn_806D7A90(void);
 extern void fn_806D7AA0(void);
@@ -1019,7 +1019,7 @@ lbl_fn_806DE670_00000C80:
     subf. r0, r3, r0
     bne lbl_fn_806DE670_00000D18
     lwz r3, 0x3c(r4)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpwi r3, 0x0
     bne lbl_fn_806DE670_00000D18
     lwz r3, 0x8(r27)

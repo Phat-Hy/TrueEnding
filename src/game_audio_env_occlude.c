@@ -11,7 +11,7 @@ extern void vec3_toEulerAngles(void);
 extern void str_initFromCStr(void);
 extern void str_getData(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -1029,7 +1029,7 @@ asm void fn_8031B0A8(void)
     stw r30, 0x14bc(r29)
     stw r30, 0x14c0(r29)
     stw r30, 0x14c4(r29)
-    bl fn_80057A64
+    bl mission_updateStub
     lfs f1, lbl_80884DF0
     addi r3, r29, 0x14d4
     fmr f2, f1
@@ -1043,7 +1043,7 @@ asm void fn_8031B0A8(void)
     lfs f0, lbl_80884DF4
     addi r3, r29, 0x14f0
     stfs f0, 0x14ec(r29)
-    bl fn_80057A64
+    bl mission_updateStub
     lfs f1, lbl_80884DF0
     addi r3, r29, 0x1500
     fmr f2, f1
@@ -1060,7 +1060,7 @@ asm void fn_8031B0A8(void)
     fmr f3, f1
     bl vec3_set
     addi r3, r29, 0x1524
-    bl fn_80057A64
+    bl mission_updateStub
     li r0, 0x5a
     stw r0, 0x1530(r29)
     addi r3, r29, 0x1538

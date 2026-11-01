@@ -16,7 +16,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800E0AA8(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8013322C(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void quest_ctorRewardItem(void);
 extern void fn_80151448(void);
 extern void actor_setState(void);
@@ -724,7 +724,7 @@ asm void fn_8033A7A0(void)
     bl fn_8000D9E8
     bl fn_8000DCF4
     lwz r3, 0x14b0(r30)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x14
     bl vec3_assign

@@ -16,7 +16,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
-extern void fn_80626C60(void);
+extern void scapi_getConfigItem(void);
 extern void scapi_cleanupContext(void);
 extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
@@ -2218,7 +2218,7 @@ asm void fn_8065034C(void)
     mr r27, r4
     mr r28, r5
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r29, r3
     bne lbl_fn_8065034C_00001C64
@@ -2569,7 +2569,7 @@ lbl_fn_80650738_00002100:
     cmplw r3, r0
     bge lbl_fn_80650738_00002290
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_80650738_00002134
@@ -2735,7 +2735,7 @@ lbl_fn_806509E0_00002358:
     bne lbl_fn_806509E0_000024A4
 lbl_fn_806509E0_00002368:
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_806509E0_0000238C
@@ -4524,7 +4524,7 @@ lbl_fn_80652198_00003BD8:
     sth r0, 0x476(r30)
 lbl_fn_80652198_00003BEC:
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_80652198_00003C24
     lis r3, lbl_80823CE0@ha
@@ -4867,7 +4867,7 @@ lbl_fn_806525A8_000040B8:
     sth r0, 0x24(r25)
 lbl_fn_806525A8_000040D8:
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_806525A8_00004114
@@ -5161,7 +5161,7 @@ lbl_fn_80652938_000044D4:
     sth r0, 0x24(r21)
 lbl_fn_80652938_000044F4:
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r25, r3
     bne lbl_fn_80652938_00004530
@@ -5599,7 +5599,7 @@ asm void fn_806531B4(void)
     bl fn_80629850
 lbl_fn_806531B4_00004AD8:
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_806531B4_00004B14

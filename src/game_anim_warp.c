@@ -24,7 +24,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F80B8(void);
 extern void fn_800F8290(void);
@@ -1739,7 +1739,7 @@ lbl_fn_80279280_0000174C:
     addi r3, r25, 0x28
     addi r4, r1, 0x138
     bl fn_801479E4
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r25
     li r5, 0x64
     li r6, 0x1
@@ -1762,7 +1762,7 @@ lbl_fn_80279280_0000174C:
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x0
     li r5, 0x0
     bl fn_800F7FA8
@@ -1772,7 +1772,7 @@ lbl_fn_80279280_0000174C:
     addi r3, r1, 0x24
     addi r4, r25, 0x28
     bl mtx_getTranslation
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     lfs f1, lbl_80883830
     addi r4, r25, 0xa4
     addi r6, r1, 0x24
@@ -1782,26 +1782,26 @@ lbl_fn_80279280_0000174C:
     li r9, -0x1
     li r10, 0x1
     bl fn_80276AE4
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r25
     li r5, 0x66
     bl fn_800F7FA8
     lwz r3, 0x88(r25)
     bl fn_8000DD0C
     mr r29, r3
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r5, r29
     addi r4, r25, 0xc8
     li r6, 0x1
     bl fn_8026607C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r25
     li r5, 0x67
     bl fn_800F7FA8
     lwz r3, 0x88(r25)
     bl fn_8000DD0C
     mr r29, r3
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r5, r29
     addi r4, r25, 0xd4
     li r6, 0x1

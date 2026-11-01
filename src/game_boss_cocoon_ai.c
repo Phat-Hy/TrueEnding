@@ -20,7 +20,7 @@ extern void fn_80101340(void);
 extern void fn_80108C10(void);
 extern void fn_801162A0(void);
 extern void fn_8012DF7C(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_80144710(void);
 extern void fn_80148B0C(void);
 extern void dialog_renderWindow(void);
@@ -565,7 +565,7 @@ lbl_fn_804541A0_00000630:
     addi r3, r31, 0x19a0
     bl fn_80454554
     lwz r3, 0x0(r3)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x8
     addi r5, r31, 0x528

@@ -17,7 +17,7 @@ extern void fn_800D03AC(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_80124B60(void);
 extern void fn_8016E4C4(void);
@@ -449,7 +449,7 @@ lbl_fn_803CCCC0_00000424:
 lbl_fn_803CCCC0_00000434:
     lwz r3, lbl_8087F408
     lwz r4, 0x198(r31)
-    bl fn_8011FC10
+    bl skill_findNodeById
     b lbl_fn_803CCCC0_00000450
 lbl_fn_803CCCC0_00000444:
     lwz r3, lbl_8087F8A0

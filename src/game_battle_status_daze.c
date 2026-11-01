@@ -33,7 +33,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void str_skipWhitespace(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_802180A8(void);
 extern void res_MsgHandle_constructor(void);
@@ -1730,7 +1730,7 @@ lbl_fn_8042F4D4_00001568:
 lbl_fn_8042F4D4_00001580:
     lwz r3, lbl_8087F408
     lwz r4, 0xfc(r31)
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0xf8(r31)
     b lbl_fn_8042F4D4_000015A4
 lbl_fn_8042F4D4_00001594:

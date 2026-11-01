@@ -25,7 +25,7 @@ extern void fn_800A0448(void);
 extern void fn_800A091C(void);
 extern void fn_800DC500(void);
 extern void str_findChar(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void res_Resource_destructor(void);
 extern void atn_Arc_decompressChunk(void);
 extern void fn_8046D1EC(void);
@@ -1005,8 +1005,8 @@ lbl_atn_LoadMotionCommandData_slot0_00000B44:
     lwz r3, 0x20(r31)
     cmpwi r3, 0x0
     beq lbl_atn_LoadMotionCommandData_slot0_00000B64
-    lis r4, fn_800EF73C@ha
-    addi r4, r4, fn_800EF73C@l
+    lis r4, cam_destroyMsgHandle@ha
+    addi r4, r4, cam_destroyMsgHandle@l
     bl __destroy_arr
 lbl_atn_LoadMotionCommandData_slot0_00000B64:
     addic. r0, r31, 0xc

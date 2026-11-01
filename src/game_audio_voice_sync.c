@@ -26,7 +26,7 @@ extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_801255C8(void);
 extern void fn_80126214(void);
 extern void fn_80128930(void);
@@ -3388,7 +3388,7 @@ lbl_fn_803073C4_00002EB4:
     cmpwi r3, 0x0
     beq lbl_fn_803073C4_00002ED8
     lwz r4, 0x0(r26)
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r25, r3
     b lbl_fn_803073C4_00002EDC
 lbl_fn_803073C4_00002ED8:

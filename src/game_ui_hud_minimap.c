@@ -31,7 +31,7 @@ extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void profile_getMetricValue(void);
 extern void perf_getMetricValue(void);
@@ -1983,7 +1983,7 @@ lbl_fn_801D19F0_00001B7C:
     mr r4, r3
     addi r3, r14, 0x58
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_801D19F0_00001BE8
 lbl_fn_801D19F0_00001BB4:
     lis r4, lbl_8073C56C@ha
@@ -1998,7 +1998,7 @@ lbl_fn_801D19F0_00001BB4:
     mr r4, r3
     addi r3, r14, 0x58
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_801D19F0_00001BE8:
     li r0, 0x5
     mr r4, r15

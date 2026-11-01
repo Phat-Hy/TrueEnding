@@ -6,7 +6,7 @@ extern void OSIsThreadSuspended(void);
 extern void OSResumeThread(void);
 extern void OSWakeupThread(void);
 extern void __register_global_object(void);
-extern void fn_804D818C(void);
+extern void net_voiceCodec_destroy(void);
 extern void fn_8050DDE0(void);
 extern void fn_8050E098(void);
 extern void fn_8050EAE8(void);
@@ -862,9 +862,9 @@ lbl_fn_8050B01C_000009D4:
     extsb. r0, r0
     sth r3, 0xa(r1)
     bne lbl_fn_8050B01C_00000A1C
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8FC8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8FC8@l
     bl __register_global_object
@@ -1985,9 +1985,9 @@ lbl_fn_8050BDC8_00001810:
     lbz r0, lbl_8087F5F8
     extsb. r0, r0
     bne lbl_fn_8050BDC8_000018C8
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8FC8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8FC8@l
     bl __register_global_object

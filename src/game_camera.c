@@ -5,7 +5,7 @@
 extern void battle_getCharacterState(void);
 extern void fn_8001B634(void);
 extern void fn_8001BD14(void);
-extern void fn_8001BE00(void);
+extern void entity_isActive(void);
 extern void fn_8001BEB0(void);
 extern void fn_8003CDB0(void);
 extern void fn_8003D298(void);
@@ -193,7 +193,7 @@ asm void fn_8001EEBC(void)
     lis r31, lbl_807C68C0@ha
     addi r31, r31, lbl_807C68C0@l
     lwz r3, 0x20(r31)
-    bl fn_8001BE00
+    bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_8001EEBC_00000164
     lwz r0, 0x8(r31)
@@ -277,7 +277,7 @@ lbl_fn_8001EEBC_00000228:
     lis r31, lbl_807C68C0@ha
     addi r31, r31, lbl_807C68C0@l
     lwz r3, 0x20(r31)
-    bl fn_8001BE00
+    bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_8001EEBC_00000294
     lwz r0, 0x8(r31)
@@ -805,7 +805,7 @@ lbl_fn_8001F6F8_00000958:
     lis r3, lbl_807C68C0@ha
     addi r3, r3, lbl_807C68C0@l
     lwz r3, 0x20(r3)
-    bl fn_8001BE00
+    bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_8001F6F8_00000A14
     lis r31, lbl_807C6A40@ha
@@ -1242,7 +1242,7 @@ lbl_fn_8001FCB4_00000F24:
     lis r30, lbl_807C68C0@ha
     addi r30, r30, lbl_807C68C0@l
     lwz r3, 0x20(r30)
-    bl fn_8001BE00
+    bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_8001FCB4_00000F98
     lwz r0, 0x8(r30)
@@ -1331,7 +1331,7 @@ lbl_fn_8001FCB4_0000106C:
     lis r30, lbl_807C68C0@ha
     addi r30, r30, lbl_807C68C0@l
     lwz r3, 0x20(r30)
-    bl fn_8001BE00
+    bl entity_isActive
     cmpwi r3, 0x0
     beq lbl_fn_8001FCB4_000010D8
     lwz r0, 0x8(r30)

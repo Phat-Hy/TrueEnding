@@ -6,7 +6,7 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void str_initFromCStr(void);
 extern void str_getData(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -487,13 +487,13 @@ asm void fn_802CCFD8(void)
     stw r29, 0x14c0(r28)
     stw r29, 0x14c4(r28)
     stw r29, 0x14c8(r28)
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x14d8
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x14e4
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x14f0
-    bl fn_80057A64
+    bl mission_updateStub
     lis r4, lbl_807C83C8@ha
     addi r3, r28, 0x14fc
     addi r4, r4, lbl_807C83C8@l

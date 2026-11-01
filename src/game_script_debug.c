@@ -27,7 +27,7 @@ extern void fn_800F8574(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_80126214(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
@@ -778,7 +778,7 @@ lbl_fn_80250ECC_000008F4:
     stw r3, 0x14f8(r30)
     mr r4, r3
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x14fc(r30)
 lbl_fn_80250ECC_00000928:
     addi r3, r1, 0x8

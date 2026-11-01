@@ -35,7 +35,7 @@ struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct 
 extern void atn_LH_Texture_destructAndFree(void);
 extern void atn_LH_Texture_update(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void fn_80179A34(void);
 extern void fn_80179AB4(void);
 extern void fn_80208748(void);
@@ -1622,10 +1622,10 @@ asm void fn_803F4894(void)
     stwu r1, -0x10(r1)
     mflr r0
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     stw r0, 0x14(r1)
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r6, 0xc
     stw r31, 0xc(r1)
     mr r31, r3
@@ -1652,9 +1652,9 @@ asm void fn_803F48E0(void)
     stw r30, 0x8(r1)
     mr r30, r3
     beq lbl_fn_803F48E0_00001588
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     li r5, 0xc
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     li r6, 0x3
     addi r3, r3, 0xc
     bl __destroy_new_array

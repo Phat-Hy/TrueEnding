@@ -21,7 +21,7 @@ extern void fn_8004D388(void);
 extern void collision_testLineSegment(void);
 extern void fn_80050900(void);
 extern void fn_80051B70(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_800A56A8(void);
 extern void fn_800A58D0(void);
 extern void fn_800F7260(void);
@@ -297,7 +297,7 @@ lbl_fn_80382A1C_000001E4:
     addi r4, r1, 0x228
     bl fn_80011410
     addi r3, r1, 0x110
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0xd4
     addi r4, r1, 0x11c
     addi r5, r1, 0x17c

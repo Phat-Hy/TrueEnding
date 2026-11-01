@@ -12,7 +12,7 @@ extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -28,7 +28,7 @@ extern void fn_800F7FD8(void);
 extern void fn_800F7FF0(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801162A0(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_801255C8(void);
 extern void fn_80126214(void);
 extern void fn_80128930(void);
@@ -38,7 +38,7 @@ extern void boss_updatePhaseState(void);
 extern void fn_80139550(void);
 extern void fn_80139F58(void);
 extern void fn_8013A194(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C3F4(void);
 extern void fn_8013C478(void);
 extern void fn_8013C480(void);
@@ -256,7 +256,7 @@ lbl_fn_8030DD40_00000194:
     bl atoi
     mr r4, r3
     mr r3, r31
-    bl fn_8011FC10
+    bl skill_findNodeById
     lwz r0, 0x146c(r3)
     cmpwi r0, 0x6
     bne lbl_fn_8030DD40_000001E4
@@ -1965,15 +1965,15 @@ asm void fn_8030F564(void)
     fmuls f29, f0, f1
     bne lbl_fn_8030F564_00001B4C
     addi r3, r1, 0x128
-    bl fn_80057A64
+    bl mission_updateStub
     lwz r0, 0xd1c(r30)
     cmpwi r0, 0x0
     beq lbl_fn_8030F564_000019D0
     lwz r3, 0x14d4(r30)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r29, r3
     lwz r3, 0xd1c(r30)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     mr r5, r29
     addi r3, r1, 0xd4
@@ -1984,7 +1984,7 @@ asm void fn_8030F564(void)
     b lbl_fn_8030F564_000019F4
 lbl_fn_8030F564_000019D0:
     lwz r3, 0x14d4(r30)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r5, r3
     addi r3, r1, 0xc8
     addi r4, r30, 0x528
@@ -2012,7 +2012,7 @@ lbl_fn_8030F564_00001A28:
     addi r4, r1, 0x128
     bl fn_800F72CC
     lwz r3, 0x14d4(r30)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x11c
     addi r5, r1, 0xbc
@@ -2188,7 +2188,7 @@ lbl_fn_8030F564_00001C78:
     subi r0, r4, 0x9
     slwi r0, r0, 4
     add r29, r30, r0
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0xec
     addi r5, r30, 0x528
@@ -2286,11 +2286,11 @@ lbl_fn_8030F564_00001DFC:
     subi r0, r4, 0x9
     slwi r0, r0, 4
     add r29, r30, r0
-    bl fn_80057A64
+    bl mission_updateStub
     lwz r3, 0xd1c(r30)
     cmpwi r3, 0x0
     beq lbl_fn_8030F564_00001E78
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x44
     addi r5, r30, 0x528

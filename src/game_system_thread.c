@@ -63,7 +63,7 @@ void fn_801FEC74(void);
 void thread_findAndNotify(void);
 void thread_findAndNotifySlot(void);
 void fn_801FED70(void);
-void fn_801FEDBC(void);
+void thread_findTaskById(void);
 void thread_dispatchToQueue(void);
 
 void fn_801FD530(void)
@@ -1919,30 +1919,30 @@ lbl_fn_801FED70_00001880:
     blr
 }
 
-asm void fn_801FEDBC(void)
+asm void thread_findTaskById(void)
 {
     nofralloc
     lwz r0, 0x24(r3)
     lwz r7, 0x2c(r3)
     slwi r0, r0, 2
     add r3, r7, r0
-    b lbl_fn_801FEDBC_000018CC
-lbl_fn_801FEDBC_000018A0:
+    b lbl_thread_findTaskById_000018CC
+lbl_thread_findTaskById_000018A0:
     lwz r6, 0x0(r7)
     lwz r0, 0x0(r6)
     cmplw r4, r0
-    bne lbl_fn_801FEDBC_000018C8
+    bne lbl_thread_findTaskById_000018C8
     slwi r0, r5, 3
     li r4, 0x0
     add r3, r6, r0
     li r5, 0x1
     addi r3, r3, 0x4
     b fn_801F04FC
-lbl_fn_801FEDBC_000018C8:
+lbl_thread_findTaskById_000018C8:
     addi r7, r7, 0x4
-lbl_fn_801FEDBC_000018CC:
+lbl_thread_findTaskById_000018CC:
     cmplw r7, r3
-    bne lbl_fn_801FEDBC_000018A0
+    bne lbl_thread_findTaskById_000018A0
     blr
 }
 

@@ -29,7 +29,7 @@ extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void res_MsgHandle_constructor(void);
 extern void kpad_getClampData(void);
 extern void fn_803EC568(void);
@@ -1476,11 +1476,11 @@ asm void fn_80419010(void)
     bl lockon_updateTarget
     li r31, 0x0
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     stw r31, 0x4c4(r28)
     addi r3, r28, 0x4c8
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r6, 0xc
     li r7, 0x7
     bl __construct_new_array
@@ -1597,9 +1597,9 @@ lbl_fn_8041919C_0000137C:
     addi r31, r31, 0x28
     cmplwi r30, 0x7
     blt lbl_fn_8041919C_00001354
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     addi r3, r28, 0x4c8
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x7
     bl __destroy_new_array

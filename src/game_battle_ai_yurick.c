@@ -28,7 +28,7 @@ extern void map_processTrigger(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void fn_8010653C(void);
 extern void fn_8011FE3C(void);
 extern void fn_80155A88(void);
@@ -316,11 +316,11 @@ asm void fn_8043A770(void)
     lis r3, lbl_8078F008@ha
     lis r4, res_MsgHandle_constructor@ha
     addi r3, r3, lbl_8078F008@l
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     stw r3, 0x0(r31)
     addi r3, r31, 0xf4
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r6, 0xc
     li r7, 0x5
     bl __construct_new_array
@@ -378,11 +378,11 @@ asm void fn_8043A850(void)
     lis r3, lbl_8078F008@ha
     lis r4, res_MsgHandle_constructor@ha
     addi r3, r3, lbl_8078F008@l
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     stw r3, 0x0(r31)
     addi r3, r31, 0xf4
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r6, 0xc
     li r7, 0x5
     bl __construct_new_array
@@ -459,9 +459,9 @@ asm void fn_8043A98C(void)
     li r6, 0x0
     bl res_findResourceSlot
 lbl_fn_8043A98C_000004A8:
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     addi r3, r30, 0xf4
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x5
     bl __destroy_new_array

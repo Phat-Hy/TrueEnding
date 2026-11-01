@@ -11,7 +11,7 @@ extern void fn_8000DD14(void);
 extern void fn_8000DD98(void);
 extern void str_initFromCStr(void);
 extern void str_getData(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -1005,13 +1005,13 @@ asm void fn_803161F8(void)
     lfs f0, lbl_80884D68
     addi r3, r31, 0x1504
     stfs f0, 0x1500(r31)
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r31, 0x1510
-    bl fn_80057A64
+    bl mission_updateStub
     stw r30, 0x1520(r31)
     addi r3, r31, 0x1528
     stw r30, 0x1524(r31)
-    bl fn_80057A64
+    bl mission_updateStub
     lfs f1, lbl_80884D60
     addi r3, r31, 0x1540
     stw r30, 0x153c(r31)

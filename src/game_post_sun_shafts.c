@@ -18,12 +18,12 @@ extern void atn_Anim_getLayerDuration(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC204(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
@@ -346,11 +346,11 @@ asm void fn_802D0038(void)
     addi r3, r30, 0x15d8
     bl res_MsgHandle_constructor
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     stw r28, 0x15e8(r30)
     addi r3, r30, 0x15f0
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     stw r28, 0x15ec(r30)
     li r6, 0xc
     li r7, 0x2
@@ -793,7 +793,7 @@ lbl_fn_802D0594_00000980:
     mr r30, r3
     bl fn_801A03E0
     mr r4, r30
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     stw r3, 0x8(r1)
     beq lbl_fn_802D0594_000009B4

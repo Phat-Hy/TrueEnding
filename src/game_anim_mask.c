@@ -7,7 +7,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -1715,10 +1715,10 @@ asm void fn_8027276C(void)
 {
     nofralloc
     lis r3, lbl_807C8350@ha
-    lis r4, fn_80057A64@ha
+    lis r4, mission_updateStub@ha
     addi r3, r3, lbl_807C8350@l
     li r5, 0x0
-    addi r4, r4, fn_80057A64@l
+    addi r4, r4, mission_updateStub@l
     li r6, 0xc
     li r7, 0x6
     b __construct_new_array

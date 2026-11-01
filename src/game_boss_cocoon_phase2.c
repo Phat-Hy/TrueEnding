@@ -24,7 +24,7 @@ extern void fn_8004ECC0(void);
 extern void fn_80051B14(void);
 extern void fn_80051B70(void);
 extern void atn_ColliBase_destructor(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -1211,16 +1211,16 @@ asm void fn_8045FAB0(void)
     bl vec3_set
     stw r31, 0x14ec(r28)
     addi r3, r28, 0x14f8
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x1504
     bl fn_8045FE2C
     li r0, 0x1
     stw r31, 0x1554(r28)
     addi r3, r28, 0x155c
     stw r0, 0x1558(r28)
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x1568
-    bl fn_80057A64
+    bl mission_updateStub
     stw r31, 0x1574(r28)
     addi r3, r28, 0x1578
     bl fn_803165E0
@@ -1257,9 +1257,9 @@ asm void fn_8045FAB0(void)
     bl fn_802AC550
     stw r31, 0x1800(r28)
     addi r3, r28, 0x1804
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x1810
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x1824
     bl res_MsgHandle_ctor
     addi r3, r28, 0x1830
@@ -1882,7 +1882,7 @@ lbl_fn_80460458_00001808:
     li r30, 0x0
     stw r30, 0xc(r1)
     addi r3, r1, 0x70
-    bl fn_80057A64
+    bl mission_updateStub
     mr r3, r31
     addi r4, r1, 0xc
     addi r5, r1, 0x70

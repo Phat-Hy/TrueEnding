@@ -20,7 +20,7 @@ extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_80133130(void);
 extern void fn_80134270(void);
 extern void fn_80134290(void);
@@ -825,7 +825,7 @@ lbl_fn_80272FB8_00000A28:
     mr r30, r3
     lwz r3, lbl_8087F408
     mr r4, r30
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_80272FB8_00000C74

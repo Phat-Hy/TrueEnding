@@ -31,7 +31,7 @@ extern void fn_800CFD18(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E41FC(void);
 extern void fn_800E854C(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void equip_getGlobalManager(void);
@@ -41,7 +41,7 @@ extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
 extern void fn_8013A194(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8014052C(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
@@ -431,9 +431,9 @@ lbl_fn_8032DDD0_00000368:
     li r4, 0x0
     bl atn_LoadHandle_destructor
 lbl_fn_8032DDD0_00000394:
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     addi r3, r29, 0x15c0
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x4
     bl __destroy_new_array
@@ -1284,7 +1284,7 @@ lbl_fn_8032E938_00000FC0:
     addi r3, r1, 0x10
     bl fn_8014052C
     lwz r3, 0xd1c(r31)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x1c
     addi r5, r1, 0x10
@@ -1754,7 +1754,7 @@ asm void fn_8032F0EC(void)
     stw r31, 0x1c(r1)
     mr r31, r3
     lwz r3, 0xd1c(r3)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x8
     addi r5, r31, 0x528

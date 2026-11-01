@@ -21,7 +21,7 @@ extern void fn_800F8524(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801162A0(void);
 extern void equip_getGlobalManager(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void actor_setState(void);
 extern void actor_getMovementFlags(void);
 extern void res_findResourceSlot(void);
@@ -873,7 +873,7 @@ asm void fn_8028B47C(void)
     cmpwi r0, 0x0
     beq lbl_fn_8028B47C_00000DB4
     mr r3, r0
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x14
     bl vec3_assign

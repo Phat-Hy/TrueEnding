@@ -13,7 +13,7 @@ extern void mem_free(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_8012476C(void);
 extern void fn_801446F0(void);
@@ -689,7 +689,7 @@ asm void fn_801A1854(void)
     bne lbl_fn_801A1854_0000094C
     lwz r3, lbl_8087F408
     li r4, 0x4
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801A1854_0000094C
@@ -826,7 +826,7 @@ lbl_fn_801A1854_000009E8:
     bne lbl_fn_801A1854_00000AF4
     lwz r3, lbl_8087F408
     li r4, 0x4
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_801A1854_00000AF4
@@ -1044,7 +1044,7 @@ asm void fn_801A1D9C(void)
     bne lbl_fn_801A1D9C_00000D9C
     lwz r3, lbl_8087F408
     li r4, 0x4
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_801A1D9C_00000D9C
@@ -1099,7 +1099,7 @@ lbl_fn_801A1D9C_00000DD8:
     bne lbl_fn_801A1D9C_00000EE4
     lwz r3, lbl_8087F408
     li r4, 0x4
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_801A1D9C_00000EE4

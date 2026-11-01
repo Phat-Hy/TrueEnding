@@ -23,7 +23,7 @@ extern void morph_updateMesh(void);
 extern void fn_800CB6B0(void);
 extern void fn_800CB6E4(void);
 extern void str_findChar(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void fn_8011FFF8(void);
 extern void fn_8017C974(void);
 extern void fn_8018412C(void);
@@ -136,11 +136,11 @@ asm void fn_80120D44(void)
     li r7, 0x0
     bl mem_realloc
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     mr r7, r26
     li r6, 0xc
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     bl runtime_registerStaticObject
     mr r30, r3
     b lbl_fn_80120D44_00000084
@@ -174,9 +174,9 @@ lbl_fn_80120D44_000000B4:
 lbl_fn_80120D44_000000DC:
     cmplw r27, r31
     blt lbl_fn_80120D44_000000B4
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     lwz r3, 0x8(r25)
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     bl __destroy_arr
 lbl_fn_80120D44_000000F4:
     stw r30, 0x8(r25)

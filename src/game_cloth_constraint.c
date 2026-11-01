@@ -21,7 +21,7 @@ extern void fn_800F8574(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801426A4(void);
 extern void actor_setState(void);
@@ -930,7 +930,7 @@ asm void fn_8027F504(void)
     cmpwi r0, 0x0
     beq lbl_fn_8027F504_00000D9C
     mr r3, r0
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x14
     bl vec3_assign

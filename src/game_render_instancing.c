@@ -19,7 +19,7 @@ extern void fn_800F7FD8(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80109828(void);
 extern void fn_8012A1B8(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015AC48(void);
 extern void debuff_clearStatus(void);
@@ -1573,7 +1573,7 @@ asm void fn_802AC0E0(void)
     stw r31, 0x4c(r1)
     mr r31, r3
     lwz r3, 0x14b0(r3)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x2c
     bl vec3_assign

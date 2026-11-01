@@ -18,7 +18,7 @@ extern void bloom_processPasses(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void fn_800E2A24(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void fn_800F2BB8(void);
 extern void fn_800F2BE4(void);
 extern void fn_800F3490(void);
@@ -255,11 +255,11 @@ lbl_fn_800F1430_000001B4:
     bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     lis r29, res_MsgHandle_constructor@ha
-    lis r28, fn_800EF73C@ha
+    lis r28, cam_destroyMsgHandle@ha
     li r6, 0xc
     addi r4, r29, res_MsgHandle_constructor@l
     li r7, 0x3
-    addi r5, r28, fn_800EF73C@l
+    addi r5, r28, cam_destroyMsgHandle@l
     addi r3, r3, 0x64f8
     bl __construct_new_array
     addis r3, r31, 0x3
@@ -297,14 +297,14 @@ lbl_fn_800F1430_000001B4:
     bl res_MsgHandle_constructor
     addis r3, r31, 0x3
     addi r4, r29, res_MsgHandle_constructor@l
-    addi r5, r28, fn_800EF73C@l
+    addi r5, r28, cam_destroyMsgHandle@l
     li r6, 0xc
     li r7, 0x7
     addi r3, r3, 0x65e8
     bl __construct_new_array
     addis r3, r31, 0x3
     addi r4, r29, res_MsgHandle_constructor@l
-    addi r5, r28, fn_800EF73C@l
+    addi r5, r28, cam_destroyMsgHandle@l
     li r6, 0xc
     li r7, 0x1f
     addi r3, r3, 0x663c
@@ -470,11 +470,11 @@ lbl_fn_800F1430_00000448:
     bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     lis r30, res_MsgHandle_constructor@ha
-    lis r29, fn_800EF73C@ha
+    lis r29, cam_destroyMsgHandle@ha
     li r6, 0xc
     addi r4, r30, res_MsgHandle_constructor@l
     li r7, 0x3
-    addi r5, r29, fn_800EF73C@l
+    addi r5, r29, cam_destroyMsgHandle@l
     subi r3, r3, 0x74f4
     bl __construct_new_array
     addis r3, r31, 0x4
@@ -494,14 +494,14 @@ lbl_fn_800F1430_00000448:
     bl res_MsgHandle_constructor
     addis r3, r31, 0x4
     addi r4, r30, res_MsgHandle_constructor@l
-    addi r5, r29, fn_800EF73C@l
+    addi r5, r29, cam_destroyMsgHandle@l
     li r6, 0xc
     li r7, 0x3
     subi r3, r3, 0x7494
     bl __construct_new_array
     addis r3, r31, 0x4
     addi r4, r30, res_MsgHandle_constructor@l
-    addi r5, r29, fn_800EF73C@l
+    addi r5, r29, cam_destroyMsgHandle@l
     li r6, 0xc
     li r7, 0x3
     subi r3, r3, 0x7470
@@ -745,12 +745,12 @@ lbl_fn_800F1430_000009A0:
     li r29, 0x0
     mr r3, r30
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     stw r29, -0x1d20(r30)
     addi r4, r4, res_MsgHandle_constructor@l
     li r6, 0xc
     stw r29, -0x1d1c(r30)
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r7, 0x6
     subi r3, r3, 0x1cb8
     stw r29, -0x1d18(r30)
@@ -923,9 +923,9 @@ asm void fn_800F1F94(void)
     beq lbl_fn_800F1F94_0000133C
     addis r3, r3, 0x4
     li r0, 0x0
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     stw r0, lbl_8087F048
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x6
     subi r3, r3, 0x1cb8
@@ -1091,14 +1091,14 @@ lbl_fn_800F1F94_00000E84:
     bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000EA8:
     addis r3, r30, 0x4
-    lis r29, fn_800EF73C@ha
-    addi r4, r29, fn_800EF73C@l
+    lis r29, cam_destroyMsgHandle@ha
+    addi r4, r29, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x3
     subi r3, r3, 0x7470
     bl __destroy_new_array
     addis r3, r30, 0x4
-    addi r4, r29, fn_800EF73C@l
+    addi r4, r29, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x3
     subi r3, r3, 0x7494
@@ -1154,8 +1154,8 @@ lbl_fn_800F1F94_00000F6C:
     bl atn_LoadHandle_destructor
 lbl_fn_800F1F94_00000F90:
     addis r3, r30, 0x4
-    lis r4, fn_800EF73C@ha
-    addi r4, r4, fn_800EF73C@l
+    lis r4, cam_destroyMsgHandle@ha
+    addi r4, r4, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x3
     subi r3, r3, 0x74f4
@@ -1230,14 +1230,14 @@ lbl_fn_800F1F94_00001084:
     bl res_Resource_destructor
 lbl_fn_800F1F94_000010A8:
     addis r3, r30, 0x3
-    lis r29, fn_800EF73C@ha
-    addi r4, r29, fn_800EF73C@l
+    lis r29, cam_destroyMsgHandle@ha
+    addi r4, r29, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x1f
     addi r3, r3, 0x663c
     bl __destroy_new_array
     addis r3, r30, 0x3
-    addi r4, r29, fn_800EF73C@l
+    addi r4, r29, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x7
     addi r3, r3, 0x65e8
@@ -1302,8 +1302,8 @@ lbl_fn_800F1F94_0000116C:
     addi r3, r3, 0x651c
     bl __destroy_new_array
     addis r3, r30, 0x3
-    lis r4, fn_800EF73C@ha
-    addi r4, r4, fn_800EF73C@l
+    lis r4, cam_destroyMsgHandle@ha
+    addi r4, r4, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x3
     addi r3, r3, 0x64f8

@@ -18,7 +18,7 @@ extern void fn_80018078(void);
 extern void fn_80018240(void);
 extern void fn_80018BAC(void);
 extern void fn_8003F440(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800EC204(void);
@@ -54,7 +54,7 @@ extern void fn_80139F3C(void);
 extern void fn_80139F58(void);
 extern void fn_8013A13C(void);
 extern void fn_8013A194(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C394(void);
 extern void fn_8013C3A8(void);
 extern void fn_8013C3B4(void);
@@ -167,7 +167,7 @@ lbl_fn_8013A4E8_0000004C:
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_0000011C
     lwz r3, 0xd1c(r27)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x384
     addi r5, r27, 0x528
@@ -277,7 +277,7 @@ lbl_fn_8013A4E8_00000214:
     lwz r3, 0xd1c(r27)
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_00000264
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x378
     addi r5, r27, 0x528
@@ -472,7 +472,7 @@ lbl_fn_8013A4E8_000004D0:
     bl fn_8016F530
 lbl_fn_8013A4E8_000004F0:
     lwz r3, 0xd1c(r27)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x354
     addi r5, r27, 0x528
@@ -1014,7 +1014,7 @@ lbl_fn_8013A4E8_00000CA0:
     lwz r3, 0xd64(r27)
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_00000CCC
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x30c
     bl vec3_copy
@@ -1069,11 +1069,11 @@ lbl_fn_8013A4E8_00000D64:
     bl fn_8013C470
 lbl_fn_8013A4E8_00000D80:
     addi r3, r1, 0x300
-    bl fn_80057A64
+    bl mission_updateStub
     lwz r3, 0xd1c(r27)
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_00000DB8
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0xf0
     addi r5, r27, 0xd50
@@ -1275,7 +1275,7 @@ lbl_fn_8013A4E8_00001060:
     b lbl_fn_8013A4E8_00001E78
 lbl_fn_8013A4E8_0000106C:
     lwz r3, 0xd24(r27)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r27, 0xd50
     bl vec3_copy
@@ -1297,7 +1297,7 @@ lbl_fn_8013A4E8_00001084:
     lha r0, 0xd3e(r27)
     cmpwi r0, 0x0
     bne lbl_fn_8013A4E8_00001170
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x2d0
     addi r5, r27, 0x528
@@ -1469,7 +1469,7 @@ lbl_fn_8013A4E8_00001300:
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_000014B8
     lwz r3, 0xd64(r27)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x90
     addi r5, r27, 0x528
@@ -1634,7 +1634,7 @@ lbl_fn_8013A4E8_0000158C:
     cmpwi r0, 0x2
     bne lbl_fn_8013A4E8_00001E78
     lwz r3, 0xd64(r27)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x2a0
     addi r5, r27, 0x528
@@ -1684,7 +1684,7 @@ lbl_fn_8013A4E8_00001604:
     cmpwi r0, 0x0
     bne lbl_fn_8013A4E8_000016CC
     addi r3, r1, 0x294
-    bl fn_80057A64
+    bl mission_updateStub
     bl fn_80139EF4
     mr r4, r27
     addi r5, r1, 0x294
@@ -1760,7 +1760,7 @@ lbl_fn_8013A4E8_00001744:
     cmpwi r0, 0x0
     bne lbl_fn_8013A4E8_000017E4
     addi r3, r1, 0x27c
-    bl fn_80057A64
+    bl mission_updateStub
     bl fn_80139EF4
     mr r4, r27
     addi r5, r1, 0x27c
@@ -1871,7 +1871,7 @@ lbl_fn_8013A4E8_00001918:
     lwz r3, 0xd64(r27)
     cmpwi r3, 0x0
     beq lbl_fn_8013A4E8_00001934
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r27, 0xd50
     bl vec3_copy

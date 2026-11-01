@@ -21,7 +21,7 @@ extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80107A68(void);
 extern void fn_80108F38(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
@@ -1425,7 +1425,7 @@ lbl_fn_802C1208_00001218:
 lbl_fn_802C1208_00001220:
     lwz r3, lbl_8087F408
     lwz r4, 0x4(r28)
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     beq lbl_fn_802C1208_00001238
     bl fn_801765D8

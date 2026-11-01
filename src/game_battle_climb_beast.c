@@ -22,7 +22,7 @@ extern void fn_80013484(void);
 extern void ui_destroyWidget(void);
 extern void fn_8004ECC0(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -52,7 +52,7 @@ extern void fn_800F84C8(void);
 extern void fn_801162A0(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8013A18C(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C3B4(void);
 extern void fn_8013C480(void);
 extern void fn_801404F8(void);
@@ -984,7 +984,7 @@ lbl_fn_803FA5C8_00000B08:
     lfs f0, lbl_80886044
     fadds f0, f1, f0
     stfs f0, 0xf4(r1)
-    bl fn_80057A64
+    bl mission_updateStub
     bl fn_801404F8
     lis r7, 0x8000
     addi r4, r1, 0xe4
@@ -1023,7 +1023,7 @@ lbl_fn_803FA5C8_00000BA8:
     addi r4, r31, 0x4e4
     bl fn_80012C88
     addi r3, r1, 0xcc
-    bl fn_80057A64
+    bl mission_updateStub
     lwz r3, 0x4c4(r31)
     li r30, 0x2
     lwz r0, 0x20(r3)
@@ -1197,7 +1197,7 @@ lbl_fn_803FA5C8_00000E6C:
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_00000ED0
     mr r3, r30
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x9c
     addi r5, r31, 0x6c
@@ -1235,7 +1235,7 @@ lbl_fn_803FA5C8_00000EF8:
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_00000F5C
     mr r3, r30
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x90
     addi r5, r31, 0x6c

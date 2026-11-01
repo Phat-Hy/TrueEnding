@@ -19,7 +19,7 @@ extern void fn_80013404(void);
 extern void vec3_add(void);
 extern void fn_80013484(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_80057A68(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -1963,7 +1963,7 @@ asm void fn_801C346C(void)
     stw r30, 0x168(r1)
     mr r30, r3
     addi r3, r1, 0xf8
-    bl fn_80057A64
+    bl mission_updateStub
     bl fn_801156BC
     li r4, 0x0
     li r5, 0x0

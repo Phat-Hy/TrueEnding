@@ -19,7 +19,7 @@ extern void strncpy(void);
 extern void strncmp(void);
 extern void strstr(void);
 extern void atoi(void);
-extern void fn_806D58F0(void);
+extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D6560(void);
@@ -2437,7 +2437,7 @@ lbl_fn_806EA540_00001F5C:
     b lbl_fn_806EA540_00002024
 lbl_fn_806EA540_00001F6C:
     lwz r3, 0x60(r28)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r31, r3
     li r30, 0x0
     b lbl_fn_806EA540_00001FBC

@@ -28,7 +28,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80109828(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8014052C(void);
 extern void actor_setState(void);
 extern void fn_801A03E8(void);
@@ -112,7 +112,7 @@ asm void fn_80296B8C(void)
     stw r29, 0x44(r1)
     mr r29, r4
     lwz r3, 0x14b0(r3)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x2c
     bl vec3_assign

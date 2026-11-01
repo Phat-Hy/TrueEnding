@@ -25,7 +25,7 @@ extern void fn_806A5AF8(void);
 extern void fn_806A5BC0(void);
 extern void fn_806D57A0(void);
 extern void fn_806D5850(void);
-extern void fn_806D58F0(void);
+extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D7A90(void);
@@ -2086,7 +2086,7 @@ asm void fn_806F42E0(void)
     lwz r29, 0x164(r3)
     li r27, 0x0
     lwz r3, 0x0(r29)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_806F42E0_00001A64
@@ -2165,7 +2165,7 @@ lbl_fn_806F43B0_00001B44:
     li r20, 0x0
 lbl_fn_806F43B0_00001B5C:
     lwz r3, 0x0(r26)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r30, r3
     li r25, 0x0
     b lbl_fn_806F43B0_00001E18
@@ -2451,7 +2451,7 @@ lbl_fn_806F47B0_00001F30:
     lwz r0, 0x8(r4)
     stw r0, 0x17c(r3)
     lwz r3, 0x0(r4)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r30, r3
     li r3, 0x10
     mr r4, r30

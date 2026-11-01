@@ -12,7 +12,7 @@ extern void fn_80011220(void);
 extern void vec3_sub(void);
 extern void fn_8004ECC0(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_80063D3C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097D40(void);
@@ -26,7 +26,7 @@ extern void scissor_clipFrustum(void);
 extern void fn_80107A68(void);
 extern void fn_8012A1B8(void);
 extern void fn_8012A288(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void fn_801404F8(void);
 extern void fn_80144710(void);
@@ -747,7 +747,7 @@ asm void fn_80463174(void)
     cmpwi r0, 0x0
     beq lbl_fn_80463174_00000CB8
     mr r3, r0
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x8c
     bl vec3_assign
@@ -787,7 +787,7 @@ lbl_fn_80463174_00000988:
     bgt lbl_fn_80463174_00000B24
     addi r3, r1, 0x74
     li r29, 0x0
-    bl fn_80057A64
+    bl mission_updateStub
     lwz r0, 0x1558(r31)
     li r28, 0x0
     cmpwi r0, 0x0
@@ -920,7 +920,7 @@ lbl_fn_80463174_00000B7C:
     bl fn_80466974
 lbl_fn_80463174_00000B8C:
     lwz r3, 0x1554(r31)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x5c
     addi r5, r31, 0x528

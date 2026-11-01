@@ -18,7 +18,7 @@ extern void msg_getMessageById(void);
 extern void fn_8012A190(void);
 extern void fn_8012A1B8(void);
 extern void fn_80139F2C(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C3A8(void);
 extern void fn_80147A00(void);
 extern void world_getLocalFlag(void);
@@ -33,7 +33,7 @@ extern void fn_804D5F44(void);
 extern void fn_804D619C(void);
 extern void fn_804D64A8(void);
 extern void fn_804D8110(void);
-extern void fn_804D818C(void);
+extern void net_voiceCodec_destroy(void);
 extern void fn_804DD1AC(void);
 extern void fn_804E8094(void);
 extern void fn_804E80A4(void);
@@ -687,9 +687,9 @@ lbl_fn_804E67A0_000007FC:
     extsb. r0, r0
     sth r3, 0xa(r1)
     bne lbl_fn_804E67A0_00000844
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -796,9 +796,9 @@ lbl_fn_804E6DD4_00000978:
     sth r4, 0x28(r1)
     sth r3, 0x2a(r1)
     bne lbl_fn_804E6DD4_000009BC
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -866,7 +866,7 @@ lbl_fn_804E6DD4_00000A18:
     addi r23, r1, 0x1c
     li r22, 0x0
     li r24, 0x0
-    lis r18, fn_804D818C@ha
+    lis r18, net_voiceCodec_destroy@ha
     lis r17, lbl_807C8AE8@ha
     li r16, 0x1
     li r20, 0x2
@@ -943,7 +943,7 @@ lbl_fn_804E6DD4_00000B64:
     extsb. r0, r0
     sth r19, 0x1a(r1)
     bne lbl_fn_804E6DD4_00000BBC
-    addi r4, r18, fn_804D818C@l
+    addi r4, r18, net_voiceCodec_destroy@l
     addi r5, r17, lbl_807C8AE8@l
     la r3, lbl_8087F5FC
     bl __register_global_object
@@ -1129,8 +1129,8 @@ lbl_fn_804E6DD4_00000E60:
     li r0, 0x101c
     sth r0, 0xa(r1)
     bne lbl_fn_804E6DD4_00000E9C
-    lis r3, fn_804D818C@ha
-    addi r4, r3, fn_804D818C@l
+    lis r3, net_voiceCodec_destroy@ha
+    addi r4, r3, net_voiceCodec_destroy@l
     lis r3, lbl_807C8AE8@ha
     addi r5, r3, lbl_807C8AE8@l
     la r3, lbl_8087F5FC
@@ -1369,9 +1369,9 @@ lbl_fn_804E762C_000011C4:
     sth r4, 0x40(r1)
     sth r3, 0x42(r1)
     bne lbl_fn_804E762C_00001208
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -1419,7 +1419,7 @@ lbl_fn_804E762C_00001264:
     addi r22, r1, 0x28
     li r21, 0x0
     li r15, 0x0
-    lis r23, fn_804D818C@ha
+    lis r23, net_voiceCodec_destroy@ha
     lis r19, lbl_807C8AE8@ha
     li r18, 0x1
     li r25, 0x2
@@ -1496,7 +1496,7 @@ lbl_fn_804E762C_00001360:
     extsb. r0, r0
     sth r24, 0x26(r1)
     bne lbl_fn_804E762C_000013B8
-    addi r4, r23, fn_804D818C@l
+    addi r4, r23, net_voiceCodec_destroy@l
     addi r5, r19, lbl_807C8AE8@l
     la r3, lbl_8087F5FC
     bl __register_global_object
@@ -1529,7 +1529,7 @@ lbl_fn_804E762C_00001400:
     addi r16, r1, 0xc
     li r19, 0x0
     li r15, 0x0
-    lis r24, fn_804D818C@ha
+    lis r24, net_voiceCodec_destroy@ha
     lis r25, lbl_807C8AE8@ha
     li r26, 0x1
     li r22, 0x2
@@ -1571,7 +1571,7 @@ lbl_fn_804E762C_00001484:
     extsb. r0, r0
     sth r23, 0x5e(r1)
     bne lbl_fn_804E762C_000014D0
-    addi r4, r24, fn_804D818C@l
+    addi r4, r24, net_voiceCodec_destroy@l
     addi r5, r25, lbl_807C8AE8@l
     la r3, lbl_8087F5FC
     bl __register_global_object
@@ -1605,7 +1605,7 @@ lbl_fn_804E762C_00001528:
     extsb. r0, r0
     sth r29, 0xa(r1)
     bne lbl_fn_804E762C_00001550
-    addi r4, r24, fn_804D818C@l
+    addi r4, r24, net_voiceCodec_destroy@l
     addi r5, r25, lbl_807C8AE8@l
     la r3, lbl_8087F5FC
     bl __register_global_object
@@ -1671,7 +1671,7 @@ asm void fn_804E7AC4(void)
     bl fn_804E8244
     mr r27, r3
     mr r3, r29
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     mr r3, r27
     bl vec3_copy
@@ -1798,7 +1798,7 @@ lbl_fn_804E7AC4_0000176C:
     bl fn_804E82C0
     mr r25, r3
     lwz r3, 0x0(r28)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     mr r3, r25
     bl vec3_copy
@@ -1929,7 +1929,7 @@ lbl_fn_804E7AC4_000019C8:
     bl fn_804E82C0
     mr r27, r3
     lwz r3, 0x10c(r1)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     mr r3, r27
     bl vec3_copy

@@ -24,7 +24,7 @@ extern void net_getFriendManager(void);
 extern void fn_804D5F44(void);
 extern void fn_804D5F4C(void);
 extern void fn_804D634C(void);
-extern void fn_804D818C(void);
+extern void net_voiceCodec_destroy(void);
 extern void fn_804DD15C(void);
 extern void fn_804EB1B0(void);
 extern void fn_804EF9B8(void);
@@ -2471,9 +2471,9 @@ lbl_fn_804EF0F4_00001F94:
     extsb. r0, r0
     sth r3, 0x1a(r1)
     bne lbl_fn_804EF0F4_00002020
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -2549,9 +2549,9 @@ lbl_fn_804EF0F4_000020C8:
     extsb. r0, r0
     sth r3, 0xa(r1)
     bne lbl_fn_804EF0F4_00002148
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object

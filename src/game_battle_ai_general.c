@@ -19,7 +19,7 @@ extern void fn_80043EAC(void);
 extern void Arms_destructor(void);
 extern void Arms_execute(void);
 extern void Arms_slot3(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void fn_80063200(void);
@@ -50,7 +50,7 @@ extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_8011D424(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_801207D4(void);
 extern void fn_801354B4(void);
@@ -280,7 +280,7 @@ lbl_fn_8043C368_000000D8:
     bne lbl_fn_8043C368_000000F4
     lwz r3, lbl_8087F408
     lwz r4, 0x24(r4)
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x30c(r31)
     b lbl_fn_8043C368_0000010C
 lbl_fn_8043C368_000000F4:
@@ -2095,7 +2095,7 @@ asm void fn_8043DD78(void)
     addi r3, r29, 0x114
     bl fn_80223EE0
     addi r3, r1, 0x24
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r29, 0x60
     bl boss_getOffset50
     mr r31, r3

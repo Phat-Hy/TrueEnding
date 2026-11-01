@@ -27,7 +27,7 @@ extern void fn_801F4728(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void thread_findAndNotify(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_804A4738(void);
 extern void fn_804A53D4(void);
@@ -823,7 +823,7 @@ lbl_fn_804B83F4_00000A38:
     mr r4, r3
     mr r3, r27
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804B83F4_00000AA8
 lbl_fn_804B83F4_00000A7C:
     cmpwi r25, 0x1
@@ -836,7 +836,7 @@ lbl_fn_804B83F4_00000A7C:
     mr r4, r3
     mr r3, r27
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_804B83F4_00000AA8:
     lwz r3, 0x2cc(r26)
     addi r0, r3, 0x1
@@ -1095,7 +1095,7 @@ lbl_fn_804B8C54_00000D54:
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r3, 0x2b8(r31)
     li r6, 0xa
     lwz r4, 0x2c8(r31)
@@ -1181,7 +1181,7 @@ asm void fn_804B8E14(void)
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r4, 0x320(r31)
     lis r3, lbl_80758368@ha
     li r0, 0x5

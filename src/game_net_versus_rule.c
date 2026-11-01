@@ -30,7 +30,7 @@ extern void saveSlot_readSummary(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_804A436C(void);
 extern void fn_804A4738(void);
@@ -1643,7 +1643,7 @@ lbl_fn_804BAFAC_000014C8:
     mr r4, r3
     mr r3, r31
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804BAFAC_00001590
 lbl_fn_804BAFAC_0000153C:
     lwz r4, 0x84(r3)
@@ -1780,7 +1780,7 @@ lbl_fn_804BB10C_0000162C:
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r3, 0x80(r31)
     li r6, 0xa
     lwz r4, 0x94(r31)

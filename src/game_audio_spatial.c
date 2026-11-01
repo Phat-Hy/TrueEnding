@@ -19,7 +19,7 @@ extern void fn_80126214(void);
 extern void fn_80127D8C(void);
 extern void fn_8012DD70(void);
 extern void fn_8013A258(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C504(void);
 extern void npc_updateTalkInteraction(void);
 extern void equip_applyToCharacter(void);
@@ -1052,7 +1052,7 @@ lbl_fn_802FFFF8_00000D84:
     lwz r30, 0x1518(r29)
     cmpwi r30, 0x0
     beq lbl_fn_802FFFF8_00000E18
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x5c
     addi r5, r30, 0x4
@@ -1074,7 +1074,7 @@ lbl_fn_802FFFF8_00000E18:
     lwz r3, 0x14ec(r29)
     cmpwi r3, 0x0
     beq lbl_fn_802FFFF8_00000E64
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x44
     addi r5, r29, 0x528
@@ -1094,7 +1094,7 @@ lbl_fn_802FFFF8_00000E64:
     cmpwi r31, 0x0
     beq lbl_fn_802FFFF8_00000EB0
     mr r3, r31
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x38
     addi r5, r29, 0x528
@@ -1158,7 +1158,7 @@ lbl_fn_802FFFF8_00000F44:
     bne lbl_fn_802FFFF8_00001058
     lwz r3, 0x14ec(r29)
     li r30, 0x0
-    bl fn_8013C38C
+    bl npc_getPosition
     lwz r4, 0x1510(r29)
     mr r5, r3
     addi r3, r1, 0x14
@@ -1168,7 +1168,7 @@ lbl_fn_802FFFF8_00000F44:
     bl vec3_mag
     fmr f29, f1
     lwz r3, 0x14ec(r29)
-    bl fn_8013C38C
+    bl npc_getPosition
     lwz r4, 0x1514(r29)
     mr r5, r3
     addi r3, r1, 0x8

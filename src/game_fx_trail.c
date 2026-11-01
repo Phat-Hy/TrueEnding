@@ -13,14 +13,14 @@ extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void wcs_vformat(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F8524(void);
 extern void system_getNextSequenceId(void);
@@ -36,7 +36,7 @@ extern void fn_80139550(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A194(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C554(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
@@ -411,7 +411,7 @@ asm void fn_8028CB38(void)
     bl world_setLocalFlag
 lbl_fn_8028CB38_00000418:
     lwz r3, 0x14b0(r31)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x48
     addi r5, r31, 0x528
@@ -419,11 +419,11 @@ lbl_fn_8028CB38_00000418:
     addi r3, r1, 0x48
     bl fn_801C3910
     stfs f1, 0x1558(r31)
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addi r4, r31, 0x155c
     addi r5, r31, 0xb0
     li r6, 0x1
@@ -464,16 +464,16 @@ lbl_fn_8028CB38_00000498:
     li r30, 0x0
     stw r29, 0x154c(r31)
     stw r30, 0x1548(r31)
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     stw r30, 0x8(r1)
     li r0, -0x1
     lfs f1, lbl_80883AA8
@@ -495,7 +495,7 @@ lbl_fn_8028CB38_00000548:
     li r0, 0x0
     stw r0, 0x154c(r31)
     stw r0, 0x1548(r31)
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
@@ -572,9 +572,9 @@ lbl_fn_8028CB38_00000644:
     subf. r0, r0, r4
     bne lbl_fn_8028CB38_00000740
     addi r3, r1, 0x6c
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0x60
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0x6c
     addi r4, r1, 0x78
     bl vec3_copy

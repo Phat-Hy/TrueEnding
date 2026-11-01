@@ -24,7 +24,7 @@ extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void fn_8014F698(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F791C(void);
@@ -1431,9 +1431,9 @@ asm void fn_8040B4B8(void)
     li r4, 0x0
     bl atn_LoadHandle_destructor
 lbl_fn_8040B4B8_000011E0:
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     addi r3, r29, 0xf4
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x7
     bl __destroy_new_array

@@ -38,7 +38,7 @@ extern u8 lbl_80860DD0[];
 void pad_03_806D5798_text(void);
 void fn_806D57A0(void);
 void fn_806D5850(void);
-void fn_806D58F0(void);
+void net_bufferGetCount(void);
 void net_bufferGetElement(void);
 void fn_806D5930(void);
 void fn_806D5A60(void);
@@ -174,7 +174,7 @@ lbl_fn_806D5850_00000134:
     blr
 }
 
-asm void fn_806D58F0(void)
+asm void net_bufferGetCount(void)
 {
     nofralloc
     lwz r3, 0x0(r3)
@@ -1067,7 +1067,7 @@ lbl_fn_806D6420_00000CBC:
 lbl_fn_806D6420_00000CC8:
     lwz r3, 0x0(r28)
     lwzx r3, r3, r31
-    bl fn_806D58F0
+    bl net_bufferGetCount
     add r29, r29, r3
     addi r31, r31, 0x4
     addi r30, r30, 0x1

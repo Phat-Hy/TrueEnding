@@ -16,7 +16,7 @@ extern void atoi(void);
 extern void fn_806A426C(void);
 extern void fn_806A4270(void);
 extern void fn_806D5850(void);
-extern void fn_806D58F0(void);
+extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void net_socketClose(void);
 extern void fn_806D7AE0(void);
@@ -112,7 +112,7 @@ asm void fn_806F4980(void)
     cmpwi r0, 0x0
     beq lbl_fn_806F4980_00000098
     mr r3, r0
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r29, r3
     li r28, 0x0
     li r31, 0x0
@@ -1077,7 +1077,7 @@ asm void fn_806F56D0(void)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
     lwz r3, 0x168(r3)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     lwz r4, 0x68(r30)
     mr r31, r3
     lwz r0, 0x64(r30)
@@ -1154,7 +1154,7 @@ lbl_fn_806F56D0_00000E7C:
     mr r28, r3
     lwz r29, 0x16c(r30)
     lwz r3, 0x168(r30)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     subi r3, r3, 0x1
     cntlzw r0, r29
     subf r4, r29, r3

@@ -35,7 +35,7 @@ extern void fn_800EC1F4(void);
 extern void fn_800F52F0(void);
 extern void fn_800F530C(void);
 extern void fn_800F7F90(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_801125F8(void);
 extern void fn_80112960(void);
@@ -2459,7 +2459,7 @@ lbl_fn_804D25D4_00001CC0:
     li r4, 0x0
     lwz r3, -0x6890(r3)
     bl atn_Task_setActive
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addis r4, r24, 0x1
     li r5, 0x0
     li r6, 0x1
@@ -3394,15 +3394,15 @@ lbl_fn_804D25D4_00002A5C:
     addi r3, r24, 0x4fc
     li r4, 0x12
     bl fn_804D16A0
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     cmpwi r3, 0x0
     beq lbl_fn_804D25D4_00004898
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r24
     li r5, 0x0
     li r6, 0x0
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     bl atn_Task_unlink
     b lbl_fn_804D25D4_00004898
 lbl_fn_804D25D4_00002AA8:
@@ -3425,7 +3425,7 @@ lbl_fn_804D25D4_00002AA8:
     bl fn_804DA2D4
     cmplwi r3, 0x1
     bne lbl_fn_804D25D4_00002B58
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_00002B58
     mr r3, r24
@@ -5006,7 +5006,7 @@ lbl_fn_804D25D4_00004220:
     li r4, 0x22
     bl fn_804D16A0
     b lbl_fn_804D25D4_00004898
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     cmpwi r3, 0x0
     bne lbl_fn_804D25D4_000046D8
     addis r3, r24, 0x1
@@ -5020,11 +5020,11 @@ lbl_fn_804D25D4_00004220:
     li r6, 0x8
     li r7, 0x180
     bl fn_80239798
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r24
     li r5, 0x0
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addis r4, r24, 0x1
     li r5, 0x0
     li r6, 0x1

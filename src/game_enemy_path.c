@@ -20,7 +20,7 @@ extern void vec3_sub(void);
 extern void fn_8001336C(void);
 extern void fn_800133B0(void);
 extern void fn_80013404(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_80057A68(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800F7260(void);
@@ -868,7 +868,7 @@ lbl_fn_80129A6C_00000A80:
     bl fn_80012C88
 lbl_fn_80129A6C_00000AC0:
     addi r3, r1, 0xd0
-    bl fn_80057A64
+    bl mission_updateStub
     lwz r27, 0x30(r31)
     cmpwi r27, 0x0
     bge lbl_fn_80129A6C_00000AEC
@@ -1017,9 +1017,9 @@ lbl_fn_80129A6C_00000C98:
     addi r3, r1, 0xb8
     bl vec3_set
     addi r3, r1, 0x100
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0x10c
-    bl fn_80057A64
+    bl mission_updateStub
     lwz r0, 0x4c(r31)
     cmpwi r0, 0x3
     bne lbl_fn_80129A6C_00000D18
@@ -1068,7 +1068,7 @@ lbl_fn_80129A6C_00000D58:
     lis r30, fn_800133B0@ha
 lbl_fn_80129A6C_00000DA0:
     addi r3, r1, 0xa0
-    bl fn_80057A64
+    bl mission_updateStub
     lwz r26, 0x0(r27)
     cmpwi r26, 0x0
     bge lbl_fn_80129A6C_00000DCC

@@ -29,7 +29,7 @@ extern void fn_801F7590(void);
 extern void fn_801F791C(void);
 extern void fn_801FEB9C(void);
 extern void thread_findAndNotify(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void perf_getMetricValue(void);
 extern void fn_8020303C(void);
@@ -1019,7 +1019,7 @@ asm void fn_804A473C(void)
     mr r4, r3
     addi r3, r27, 0x58
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     cmpw r29, r30
     ble lbl_fn_804A473C_00000E18
     addi r3, r31, 0x17b
@@ -1028,7 +1028,7 @@ asm void fn_804A473C(void)
     mr r4, r3
     addi r3, r27, 0x58
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     addi r4, r31, 0x183
     addi r3, r27, 0x58
     bl fn_801FEB9C

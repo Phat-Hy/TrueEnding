@@ -7,7 +7,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_80089B5C(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_8012AE50(void);
 extern void fn_8012AFE8(void);
@@ -511,7 +511,7 @@ lbl_fn_803B9804_00000574:
     lwz r4, 0x8c(r31)
     lwz r3, lbl_8087F408
     lwzx r4, r4, r27
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     beq lbl_fn_803B9804_000005B8
     lwz r4, 0x8c(r31)

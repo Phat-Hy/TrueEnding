@@ -24,7 +24,7 @@ extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void fn_801028E4(void);
 extern void fn_80108F38(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_80129A48(void);
 extern void fn_80129A6C(void);
 extern void boss_updatePhaseState(void);
@@ -1627,7 +1627,7 @@ lbl_fn_802EE838_000014AC:
     oris r0, r0, 0x380
     stw r0, 0x7ec(r30)
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     stw r3, 0x14e8(r30)
     beq lbl_fn_802EE838_00001560

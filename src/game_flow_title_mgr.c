@@ -13,7 +13,7 @@ extern void fn_8006F420(void);
 extern void fn_800DC97C(void);
 extern void fn_8016F3D0(void);
 extern void net_getPacketManager(void);
-extern void fn_804D818C(void);
+extern void net_voiceCodec_destroy(void);
 extern void fn_804FB224(void);
 extern void fn_8050128C(void);
 extern void fn_80502874(void);
@@ -1221,9 +1221,9 @@ lbl_fn_804DCA58_00000E9C:
     extsb. r0, r0
     sth r3, 0x26(r1)
     bne lbl_fn_804DCA58_00000F14
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object

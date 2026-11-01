@@ -36,7 +36,7 @@ extern void fn_800CB688(void);
 extern void fn_800CB6B0(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8021823C(void);
@@ -698,9 +698,9 @@ asm void fn_803F03D8(void)
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
     beq lbl_fn_803F03D8_00000770
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     mr r3, r0
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     bl __destroy_arr
 lbl_fn_803F03D8_00000770:
     cmpwi r30, 0x0
@@ -714,11 +714,11 @@ lbl_fn_803F03D8_00000770:
     li r7, 0x0
     bl mem_realloc
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     mr r7, r30
     li r6, 0xc
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     bl runtime_registerStaticObject
     stw r3, 0x4(r29)
     b lbl_fn_803F03D8_000007C4

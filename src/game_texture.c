@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8004B290(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_8005DFC8(void);
 extern void fn_8006FEBC(void);
 extern void gx_drawScreenQuad(void);
@@ -435,10 +435,10 @@ asm void fn_800B6684(void)
 {
     nofralloc
     lis r3, lbl_807C74A0@ha
-    lis r4, fn_80057A64@ha
+    lis r4, mission_updateStub@ha
     addi r3, r3, lbl_807C74A0@l
     li r5, 0x0
-    addi r4, r4, fn_80057A64@l
+    addi r4, r4, mission_updateStub@l
     li r6, 0xc
     li r7, 0x10
     b __construct_new_array

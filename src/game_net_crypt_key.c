@@ -21,7 +21,7 @@ extern void fn_801F4728(void);
 extern void fn_801F4998(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -444,7 +444,7 @@ lbl_fn_804B2C20_00000474:
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804B2C20_0000078C
     lwz r4, 0xb8(r3)
     lwz r0, 0x38(r4)
@@ -951,7 +951,7 @@ asm void fn_804B3838(void)
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r3, 0x8c(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28

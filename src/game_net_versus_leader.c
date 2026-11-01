@@ -21,7 +21,7 @@ extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void fn_801F4F08(void);
 extern void thread_findAndNotify(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_804A3C24(void);
 extern void fn_804AC734(void);
@@ -129,7 +129,7 @@ asm void fn_804BF550(void)
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     li r0, 0x5
     stw r0, 0xdb0(r31)
     b lbl_fn_804BF550_00000348
@@ -185,7 +185,7 @@ lbl_fn_804BF550_00000118:
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804BF550_00000174
 lbl_fn_804BF550_00000148:
     lwz r4, 0x64(r31)
@@ -198,7 +198,7 @@ lbl_fn_804BF550_00000148:
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_804BF550_00000174:
     lwz r3, 0xdb0(r31)
     cmpwi r3, 0x0
@@ -256,7 +256,7 @@ lbl_fn_804BF550_00000200:
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804BF550_00000348
 lbl_fn_804BF550_00000248:
     lwz r3, lbl_8087F610
@@ -303,7 +303,7 @@ lbl_fn_804BF550_000002BC:
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804BF550_00000348
 lbl_fn_804BF550_000002EC:
     lwz r4, 0x64(r31)
@@ -316,7 +316,7 @@ lbl_fn_804BF550_000002EC:
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804BF550_00000348
 lbl_fn_804BF550_0000031C:
     lwz r4, 0x64(r31)
@@ -329,7 +329,7 @@ lbl_fn_804BF550_0000031C:
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_804BF550_00000348:
     lwz r4, 0x64(r31)
     lis r30, lbl_807588DC@ha
@@ -341,7 +341,7 @@ lbl_fn_804BF550_00000348:
     mr r4, r3
     mr r3, r29
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r3, 0xe60(r31)
     lis r0, 0x4330
     lis r5, lbl_80758848@ha
@@ -378,7 +378,7 @@ lbl_fn_804BF550_00000348:
     mr r4, r3
     mr r3, r29
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804BF550_00000438
 lbl_fn_804BF550_0000040C:
     lwz r4, 0x64(r31)
@@ -391,7 +391,7 @@ lbl_fn_804BF550_0000040C:
     mr r4, r3
     mr r3, r29
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_804BF550_00000438:
     lwz r0, 0x44(r1)
     psq_l f31, 0x38(r1), 0, 0
@@ -453,7 +453,7 @@ lbl_fn_804BF9AC_000004CC:
     mr r4, r3
     mr r3, r25
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804BF9AC_000005B4
 lbl_fn_804BF9AC_00000510:
     cmpwi r28, 0x1
@@ -466,7 +466,7 @@ lbl_fn_804BF9AC_00000510:
     mr r4, r3
     mr r3, r25
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804BF9AC_000005B4
 lbl_fn_804BF9AC_00000540:
     cmpwi r28, 0x2
@@ -482,7 +482,7 @@ lbl_fn_804BF9AC_00000540:
     mr r4, r3
     mr r3, r25
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804BF9AC_000005B4
 lbl_fn_804BF9AC_0000057C:
     cmpwi r28, 0x3
@@ -498,7 +498,7 @@ lbl_fn_804BF9AC_0000057C:
     mr r4, r3
     mr r3, r25
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_804BF9AC_000005B4:
     lwz r3, 0xdbc(r29)
     addi r0, r3, 0x1
@@ -1043,7 +1043,7 @@ lbl_fn_804C0094_00000D08:
     li r5, 0x0
     lfd f0, 0x48(r1)
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     subi r3, r27, 0x2
     subfic r0, r27, 0x2
     nor r0, r3, r0
@@ -1062,7 +1062,7 @@ lbl_fn_804C0094_00000D08:
     li r5, 0x0
     lfd f0, 0x50(r1)
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r5, lbl_8087F610
     addi r4, r28, 0x28a
     lwz r3, 0x4c(r31)
@@ -1368,7 +1368,7 @@ lbl_fn_804C06C8_000011BC:
     mr r4, r3
     mr r3, r30
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r3, 0x64(r31)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 28

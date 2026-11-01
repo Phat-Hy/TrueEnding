@@ -14,7 +14,7 @@ extern void vec3_add(void);
 extern void fn_80013484(void);
 extern void fn_8004ECC0(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_80057A68(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -29,7 +29,7 @@ extern void equip_getGlobalManager(void);
 extern void fn_8012A1B8(void);
 extern void fn_8012A288(void);
 extern void fn_8013A194(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
 extern void quest_ctorRewardItem(void);
@@ -1585,7 +1585,7 @@ lbl_fn_803267E8_00001584:
     lwz r3, 0x14bc(r3)
     cmpwi r3, 0x0
     beq lbl_fn_803267E8_00001B58
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x15c
     bl vec3_assign
@@ -1799,7 +1799,7 @@ lbl_fn_803267E8_000018C0:
     b lbl_fn_803267E8_00001B58
 lbl_fn_803267E8_000018CC:
     addi r3, r1, 0x114
-    bl fn_80057A64
+    bl mission_updateStub
     lwz r3, 0x14bc(r31)
     bl fn_8012A1B8
     lfs f1, 0x4(r3)

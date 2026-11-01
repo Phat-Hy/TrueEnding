@@ -20,7 +20,7 @@ extern void actor_spawnActorWithId(void);
 extern void fn_80124BFC(void);
 extern void save_validateHeader(void);
 extern void thread_findAndNotify(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_804C4530(void);
 extern void fn_804E4A24(void);
@@ -198,7 +198,7 @@ lbl_fn_804C2994_0000013C:
     li r5, 0x0
     lfd f0, 0x50(r1)
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     addi r0, r30, 0x35d8
     lwz r4, 0x70(r26)
     xoris r3, r0, 0x8000
@@ -218,7 +218,7 @@ lbl_fn_804C2994_0000013C:
     li r5, 0x0
     lfd f0, 0x58(r1)
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     addi r3, r30, 0x35d8
     lwz r5, 0x70(r26)
     xoris r4, r3, 0x8000

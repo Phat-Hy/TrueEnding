@@ -42,7 +42,7 @@ extern void fn_801F48C8(void);
 extern void fn_801FEA9C(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void printf(void);
 extern void wcslen(void);
 extern void wcsncmp(void);
@@ -479,7 +479,7 @@ lbl_fn_801F10E0_000003C8:
     mr r4, r3
     mr r3, r23
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     add r3, r31, r29
     lwz r4, 0x180(r24)
     lfs f31, 0x24(r3)

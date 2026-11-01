@@ -28,7 +28,7 @@ extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801028E4(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
 extern void quest_updateFlow(void);
@@ -925,7 +925,7 @@ lbl_fn_80256384_00000B34:
     bl atoi
     mr r4, r3
     mr r3, r18
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x16a0(r22)
     stw r22, 0x1530(r3)
     b lbl_fn_80256384_00000CA0

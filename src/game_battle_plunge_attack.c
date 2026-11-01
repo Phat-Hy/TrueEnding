@@ -29,7 +29,7 @@ extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_8012476C(void);
@@ -653,11 +653,11 @@ asm void fn_804114B4(void)
     addi r3, r30, 0x660
     bl res_MsgHandle_constructor
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     addi r3, r30, 0x66c
     li r6, 0xc
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r7, 0x2
     bl __construct_new_array
     addi r3, r30, 0x684
@@ -694,9 +694,9 @@ asm void fn_8041158C(void)
     li r4, -0x1
     addi r3, r3, 0x684
     bl ref_releaseHandle
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     addi r3, r29, 0x66c
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x2
     bl __destroy_new_array

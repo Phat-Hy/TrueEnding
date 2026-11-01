@@ -17,7 +17,7 @@ extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_8013310C(void);
 extern void fn_8013322C(void);
@@ -986,7 +986,7 @@ lbl_fn_803A9C40_00000BDC:
 lbl_fn_803A9C40_00000C18:
     lwz r3, lbl_8087F408
     mr r4, r0
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r28, r3
     b lbl_fn_803A9C40_00000C3C
 lbl_fn_803A9C40_00000C2C:
@@ -1094,7 +1094,7 @@ lbl_fn_803A9DBC_00000D58:
 lbl_fn_803A9DBC_00000D94:
     lwz r3, lbl_8087F408
     mr r4, r0
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r30, r3
     b lbl_fn_803A9DBC_00000DB8
 lbl_fn_803A9DBC_00000DA8:
@@ -1674,7 +1674,7 @@ lbl_fn_803AA5E4_00001574:
     b lbl_fn_803AA5E4_000015C8
 lbl_fn_803AA5E4_000015AC:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r27, r3
     b lbl_fn_803AA5E4_000015C8
 lbl_fn_803AA5E4_000015BC:
@@ -1840,7 +1840,7 @@ lbl_fn_803AA82C_000017BC:
     b lbl_fn_803AA82C_00001810
 lbl_fn_803AA82C_000017F4:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r5, r3
     b lbl_fn_803AA82C_00001810
 lbl_fn_803AA82C_00001804:
@@ -1927,7 +1927,7 @@ lbl_fn_803AA954_000018E4:
     b lbl_fn_803AA954_00001938
 lbl_fn_803AA954_0000191C:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r5, r3
     b lbl_fn_803AA954_00001938
 lbl_fn_803AA954_0000192C:

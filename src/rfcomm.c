@@ -9,7 +9,7 @@ extern void _savegpr_20(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_80626AA0(void);
-extern void fn_80626C60(void);
+extern void scapi_getConfigItem(void);
 extern void scapi_cleanupContext(void);
 extern void fn_80627180(void);
 extern void fn_80627400(void);
@@ -5422,7 +5422,7 @@ asm void fn_8064C904(void)
 lbl_fn_8064C904_00004648:
     clrlslwi r29, r3, 25, 1
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8064C904_000046B0
@@ -5473,7 +5473,7 @@ asm void fn_8064C9B4(void)
 lbl_fn_8064C9B4_000046F8:
     clrlslwi r29, r3, 25, 1
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8064C9B4_00004760
@@ -5525,7 +5525,7 @@ asm void fn_8064CA64(void)
 lbl_fn_8064CA64_000047AC:
     clrlslwi r28, r0, 25, 1
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_8064CA64_00004824
@@ -5580,7 +5580,7 @@ asm void fn_8064CB28(void)
 lbl_fn_8064CB28_0000486C:
     clrlslwi r29, r3, 25, 1
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r30, r3
     beq lbl_fn_8064CB28_000048D4
@@ -5745,7 +5745,7 @@ asm void fn_8064CD70(void)
     mr r28, r7
     mr r29, r8
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     beq lbl_fn_8064CD70_00004B54
     neg r0, r27
@@ -5807,7 +5807,7 @@ asm void fn_8064CE58(void)
     stw r30, 0x8(r1)
     mr r30, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     beq lbl_fn_8064CE58_00004BD8
     neg r0, r31
@@ -5846,7 +5846,7 @@ asm void fn_8064CEDC(void)
     stw r30, 0x8(r1)
     mr r30, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     beq lbl_fn_8064CEDC_00004C5C
     neg r0, r31
@@ -5889,7 +5889,7 @@ asm void fn_8064CF60(void)
     mr r27, r5
     mr r29, r6
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     beq lbl_fn_8064CF60_00004D7C
     neg r0, r27
@@ -5968,7 +5968,7 @@ asm void fn_8064D080(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     beq lbl_fn_8064D080_00004E24
     neg r0, r30
@@ -6017,7 +6017,7 @@ asm void fn_8064D130(void)
     mr r30, r6
     mr r31, r7
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r5, r3
     beq lbl_fn_8064D130_00004F48
@@ -6151,7 +6151,7 @@ asm void fn_8064D2F4(void)
 lbl_fn_8064D2F4_0000503C:
     clrlslwi r30, r0, 25, 1
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8064D2F4_000050B0
@@ -6987,7 +6987,7 @@ lbl_fn_8064D928_00005BD0:
     cmpwi r31, 0x0
     beq lbl_fn_8064D928_00005C40
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     beq lbl_fn_8064D928_00005C40
     li r0, 0xc

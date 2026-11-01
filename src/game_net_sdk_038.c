@@ -23,7 +23,7 @@ extern void fn_806A4264(void);
 extern void fn_806A426C(void);
 extern void fn_806A4270(void);
 extern void fn_806D5850(void);
-extern void fn_806D58F0(void);
+extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5C90(void);
 extern void fn_806D63A0(void);
@@ -149,7 +149,7 @@ lbl_fn_806EE7E0_00000044:
     bne lbl_fn_806EE7E0_000000AC
     lwz r3, 0x8(r3)
     lwz r3, 0x10(r3)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r31, r3
     li r29, 0x0
     b lbl_fn_806EE7E0_000000A0
@@ -382,7 +382,7 @@ lbl_fn_806EEAD0_00000340:
     bne lbl_fn_806EEAD0_000003E8
     lwz r3, 0x8(r29)
     lwz r3, 0x10(r3)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r31, r3
     li r30, 0x0
     b lbl_fn_806EEAD0_000003DC
@@ -457,7 +457,7 @@ asm void fn_806EEC40(void)
     bl _savegpr_27
     mr r27, r3
     lwz r3, 0x10(r3)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     subi r28, r3, 0x1
     b lbl_fn_806EEC40_0000053C
 lbl_fn_806EEC40_00000494:
@@ -477,7 +477,7 @@ lbl_fn_806EEC40_00000494:
     bne lbl_fn_806EEC40_00000528
     lwz r3, 0x8(r3)
     lwz r3, 0x10(r3)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r31, r3
     li r30, 0x0
     b lbl_fn_806EEC40_0000051C

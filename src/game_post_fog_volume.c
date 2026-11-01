@@ -23,8 +23,8 @@ extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
 extern void fn_800EC204(void);
-extern void fn_800EF73C(void);
-extern void fn_8011FC10(void);
+extern void cam_destroyMsgHandle(void);
+extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
@@ -258,9 +258,9 @@ lbl_fn_802D710C_000001C0:
     li r4, 0x0
     bl atn_LoadHandle_destructor
 lbl_fn_802D710C_000001E0:
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     addi r3, r30, 0x15f0
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x2
     bl __destroy_new_array
@@ -1322,7 +1322,7 @@ lbl_fn_802D7E80_00001118:
     mr r28, r3
     bl fn_801A03E0
     mr r4, r28
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     stw r3, 0xc(r1)
     beq lbl_fn_802D7E80_0000114C
@@ -1357,7 +1357,7 @@ lbl_fn_802D7E80_00001194:
     mr r28, r3
     bl fn_801A03E0
     mr r4, r28
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     stw r3, 0x8(r1)
     beq lbl_fn_802D7E80_000011C8

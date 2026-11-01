@@ -6,7 +6,7 @@ extern void __files(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
 extern void fn_80042740(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_8006CA80(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -1996,9 +1996,9 @@ asm void fn_8053D0F8(void)
     bl fn_8021A4CC
     stw r30, 0x94(r28)
     addi r3, r28, 0x9c
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0xa8
-    bl fn_80057A64
+    bl mission_updateStub
     lfs f0, lbl_80887CA0
     addi r3, r28, 0xb8
     stfs f0, 0xb4(r28)

@@ -30,7 +30,7 @@ extern void atn_LH_Texture_destructAndFree(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -1095,7 +1095,7 @@ lbl_fn_804229A8_00000CC8:
 lbl_fn_804229A8_00000CDC:
     lwz r3, lbl_8087F408
     lwz r4, 0x24(r4)
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x148(r31)
     b lbl_fn_804229A8_00000D00
 lbl_fn_804229A8_00000CF0:

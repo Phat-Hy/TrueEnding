@@ -25,7 +25,7 @@ extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void fn_8011BE54(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
 extern void fn_8012D8B8(void);
@@ -1455,7 +1455,7 @@ asm void fn_803F957C(void)
 lbl_fn_803F957C_000012A0:
     lwz r3, lbl_8087F408
     lwz r4, 0x24(r4)
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0xf8(r31)
     b lbl_fn_803F957C_000012C4
 lbl_fn_803F957C_000012B4:

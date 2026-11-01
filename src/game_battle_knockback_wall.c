@@ -25,7 +25,7 @@ extern void vec3_add(void);
 extern void ui_destroyWidget(void);
 extern void fn_8004CCA0(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
@@ -47,10 +47,10 @@ extern void fn_800D8814(void);
 extern void fn_800D8BB4(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC204(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void fn_800F52F8(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F7FF0(void);
 extern void fn_800F80A8(void);
@@ -61,7 +61,7 @@ extern void fn_8012A190(void);
 extern void fn_80139550(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A13C(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C504(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
@@ -1459,16 +1459,16 @@ asm void fn_80416F74(void)
     addi r3, r28, 0x2438
     bl res_MsgHandle_constructor
     lis r30, res_MsgHandle_constructor@ha
-    lis r31, fn_800EF73C@ha
+    lis r31, cam_destroyMsgHandle@ha
     addi r3, r28, 0x2444
     li r6, 0xc
     addi r4, r30, res_MsgHandle_constructor@l
-    addi r5, r31, fn_800EF73C@l
+    addi r5, r31, cam_destroyMsgHandle@l
     li r7, 0x3
     bl __construct_new_array
     addi r3, r28, 0x2468
     addi r4, r30, res_MsgHandle_constructor@l
-    addi r5, r31, fn_800EF73C@l
+    addi r5, r31, cam_destroyMsgHandle@l
     li r6, 0xc
     li r7, 0x3
     bl __construct_new_array
@@ -1551,14 +1551,14 @@ asm void fn_80417130(void)
     stw r29, 0x14(r1)
     mr r29, r3
     beq lbl_fn_80417130_000013C4
-    lis r31, fn_800EF73C@ha
+    lis r31, cam_destroyMsgHandle@ha
     li r5, 0xc
-    addi r4, r31, fn_800EF73C@l
+    addi r4, r31, cam_destroyMsgHandle@l
     li r6, 0x3
     addi r3, r3, 0x2468
     bl __destroy_new_array
     addi r3, r29, 0x2444
-    addi r4, r31, fn_800EF73C@l
+    addi r4, r31, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x3
     bl __destroy_new_array
@@ -2049,27 +2049,27 @@ lbl_fn_8041766C_000019C4:
     ble lbl_fn_8041766C_000019F0
     li r19, 0x0
 lbl_fn_8041766C_000019F0:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r26
     li r5, 0x0
     li r6, 0x1
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r26
     li r5, 0x1
     bl fn_800F7FA8
     mulli r19, r19, 0xc
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     add r4, r24, r19
     mr r5, r26
     addi r4, r4, 0x2444
     li r6, 0x1
     bl fn_8026607C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r26
     li r5, 0x2
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     add r4, r24, r19
     lfs f1, lbl_80886490
     addi r4, r4, 0x2468
@@ -2160,7 +2160,7 @@ lbl_fn_8041766C_00001B3C:
     fcmpo cr0, f1, f28
     cror eq, gt, eq
     bne lbl_fn_8041766C_00001C3C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r26
     li r5, 0x1
     li r6, 0x1
@@ -2237,7 +2237,7 @@ lbl_fn_8041766C_00001C3C:
     bl fn_800EC204
     mr r26, r3
     addi r3, r1, 0x80
-    bl fn_80057A64
+    bl mission_updateStub
     cmpwi r26, 0x0
     beq lbl_fn_8041766C_00001CD8
     addi r3, r1, 0x80
@@ -2276,7 +2276,7 @@ lbl_fn_8041766C_00001D14:
     addi r3, r1, 0x1a8
     bl fn_804180BC
     lwz r3, 0x0(r3)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x80
     bl vec3_copy
@@ -2334,7 +2334,7 @@ lbl_fn_8041766C_00001D5C:
     addi r4, r1, 0x74
     bl fn_80012C88
     addi r3, r1, 0x68
-    bl fn_80057A64
+    bl mission_updateStub
     lbz r0, 0x2(r31)
     lfs f27, 0x4c(r31)
     cmpwi r0, 0x1
@@ -2445,11 +2445,11 @@ lbl_fn_8041766C_00001EF8:
     mr r4, r3
     mr r3, r25
     bl fn_80417F1C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r25
     li r5, 0x0
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r5, r25
     addi r4, r24, 0x2438
     li r6, 0x1

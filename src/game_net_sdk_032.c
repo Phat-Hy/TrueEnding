@@ -19,7 +19,7 @@ extern void strstr(void);
 extern void atoi(void);
 extern void fn_806D57A0(void);
 extern void fn_806D5850(void);
-extern void fn_806D58F0(void);
+extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5A60(void);
 extern void fn_806D5E60(void);
@@ -1408,7 +1408,7 @@ asm void fn_806E3210(void)
     lwz r3, 0x3b4(r26)
     addi r27, r27, lbl_807C38E8@l
     li r25, 0x0
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r23, r3
     addi r3, r1, 0x8
     mr r5, r23

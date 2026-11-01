@@ -24,7 +24,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void fn_80161570(void);
 extern void fn_801F64D0(void);
 extern void fn_802180A8(void);
@@ -966,11 +966,11 @@ asm void fn_80409438(void)
     lis r3, lbl_8078D458@ha
     lis r4, res_MsgHandle_constructor@ha
     addi r3, r3, lbl_8078D458@l
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     stw r3, 0x0(r31)
     addi r3, r31, 0xf4
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r6, 0xc
     li r7, 0x7
     bl __construct_new_array

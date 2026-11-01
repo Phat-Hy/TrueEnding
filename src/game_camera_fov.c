@@ -31,7 +31,7 @@ extern void fn_800E0AA8(void);
 extern void fn_800E0AB0(void);
 extern void fn_800EC204(void);
 extern void system_getNextSequenceId(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
@@ -766,7 +766,7 @@ lbl_fn_802DE27C_000008C4:
     mr r28, r3
     bl fn_801A03E0
     mr r4, r28
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r28, 0x0
     stw r3, 0x10(r1)
     beq lbl_fn_802DE27C_00000900
@@ -792,7 +792,7 @@ lbl_fn_802DE27C_00000920:
     mr r28, r3
     bl fn_801A03E0
     mr r4, r28
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r28, 0x0
     stw r3, 0xc(r1)
     beq lbl_fn_802DE27C_0000095C

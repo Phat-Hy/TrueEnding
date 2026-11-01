@@ -16,7 +16,7 @@ extern void srand(void);
 extern void strcmp(void);
 extern void fn_806D57A0(void);
 extern void fn_806D5850(void);
-extern void fn_806D58F0(void);
+extern void net_bufferGetCount(void);
 extern void net_bufferGetElement(void);
 extern void fn_806D5930(void);
 extern void fn_806D5BE0(void);
@@ -197,7 +197,7 @@ lbl_fn_806D9890_0000006C:
     bl fn_806D5C90
 lbl_fn_806D9890_000000E0:
     lwz r3, 0x8(r26)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r27, r3
     li r25, 0x0
     lis r29, fn_806D9640@ha
@@ -304,7 +304,7 @@ asm void fn_806D9AB0(void)
     addi r5, r1, 0x8
     bl fn_806EEDC0
     lwz r3, 0x8(r29)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r31, r3
     li r28, 0x0
     b lbl_fn_806D9AB0_000002C4
@@ -564,7 +564,7 @@ lbl_fn_806D9D80_0000060C:
     li r5, 0x0
     bl fn_806EA910
     lwz r3, 0x4(r31)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r4, r3
     lwz r3, 0x4(r31)
     subi r4, r4, 0x1
@@ -860,7 +860,7 @@ lbl_fn_806DA120_00000994:
     mr r31, r3
     beq lbl_fn_806DA120_00000A74
     lwz r3, 0x4(r30)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     mr r4, r3
     lwz r3, 0x4(r30)
     subi r4, r4, 0x1
@@ -1185,7 +1185,7 @@ asm void fn_806DA700(void)
     b lbl_fn_806DA700_00000EA8
 lbl_fn_806DA700_00000E98:
     lwz r3, 0x8(r3)
-    bl fn_806D58F0
+    bl net_bufferGetCount
     cntlzw r0, r3
     srwi r3, r0, 5
 lbl_fn_806DA700_00000EA8:

@@ -30,7 +30,7 @@ extern void fn_8012A190(void);
 extern void fn_80139550(void);
 extern void fn_8013A13C(void);
 extern void fn_8013A194(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_801404F8(void);
@@ -1501,7 +1501,7 @@ asm void fn_802F0328(void)
     cmpwi r3, 0x0
     bne lbl_fn_802F0328_00001408
     lwz r3, 0x14d4(r31)
-    bl fn_8013C38C
+    bl npc_getPosition
     b lbl_fn_802F0328_0000140C
 lbl_fn_802F0328_00001408:
     addi r3, r3, 0x4
@@ -1585,7 +1585,7 @@ lbl_fn_802F0328_00001524:
     cmpwi r3, 0x0
     bne lbl_fn_802F0328_00001544
     lwz r3, 0x14d4(r31)
-    bl fn_8013C38C
+    bl npc_getPosition
     b lbl_fn_802F0328_00001548
 lbl_fn_802F0328_00001544:
     addi r3, r3, 0x4

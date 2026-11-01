@@ -9,7 +9,7 @@ extern void dtor_80013D60(void);
 extern void dtor_80084684(void);
 extern void str_initFromCStr(void);
 extern void str_getData(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
@@ -1314,17 +1314,17 @@ asm void fn_802BA92C(void)
     stw r31, 0x14ec(r28)
     stw r31, 0x14f0(r28)
     stw r31, 0x14f4(r28)
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x1508
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x1514
-    bl fn_80057A64
+    bl mission_updateStub
     li r0, 0x5
     stw r31, 0x1520(r28)
     addi r3, r28, 0x152c
     stw r31, 0x1524(r28)
     stw r0, 0x1528(r28)
-    bl fn_80057A64
+    bl mission_updateStub
     lis r4, fn_802AC550@ha
     lis r5, atn_ColliCapsule_destructor@ha
     addi r3, r28, 0x1538

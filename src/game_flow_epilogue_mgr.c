@@ -17,7 +17,7 @@ extern void fn_803EBA54(void);
 extern void fn_803FC65C(void);
 extern void net_getPacketManager(void);
 extern void fn_804C54FC(void);
-extern void fn_804D818C(void);
+extern void net_voiceCodec_destroy(void);
 extern void fn_804E9C68(void);
 extern void fn_804F50E0(void);
 extern void fn_8050128C(void);
@@ -204,9 +204,9 @@ asm void fn_804E81D0(void)
     lbz r0, lbl_8087F5F8
     extsb. r0, r0
     bne lbl_fn_804E81D0_00000188
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -246,9 +246,9 @@ asm void fn_804E824C(void)
     lbz r0, lbl_8087F5F8
     extsb. r0, r0
     bne lbl_fn_804E824C_00000204
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -752,9 +752,9 @@ lbl_fn_804E82C8_00000848:
     extsb. r0, r0
     sth r3, 0x1a(r1)
     bne lbl_fn_804E82C8_00000884
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -833,9 +833,9 @@ lbl_fn_804E82C8_00000954:
     extsb. r0, r0
     sth r3, 0x12(r1)
     bne lbl_fn_804E82C8_000009A0
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -941,9 +941,9 @@ lbl_fn_804E8A84_00000AD0:
     extsb. r0, r0
     sth r3, 0xa(r1)
     bne lbl_fn_804E8A84_00000B0C
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -1520,9 +1520,9 @@ lbl_fn_804E8BF8_00001230:
     extsb. r0, r0
     sth r3, 0xa(r1)
     bne lbl_fn_804E8BF8_0000127C
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object

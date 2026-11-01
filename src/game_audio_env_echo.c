@@ -12,12 +12,12 @@ extern void vec3_add(void);
 extern void fn_8004D388(void);
 extern void collision_testLineSegment(void);
 extern void fn_80051BC4(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800E932C(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F7FF0(void);
 extern void fn_800F80A8(void);
@@ -27,7 +27,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
 extern void fn_800FBA9C(void);
 extern void fn_8013A194(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
 extern void fn_8014052C(void);
@@ -945,12 +945,12 @@ asm void fn_8031958C(void)
     li r0, 0x0
     stw r0, 0x15b4(r31)
 lbl_fn_8031958C_00000BBC:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e9
     li r6, 0x1
@@ -958,7 +958,7 @@ lbl_fn_8031958C_00000BBC:
     b lbl_fn_8031958C_00000F4C
 lbl_fn_8031958C_00000BE8:
     addi r3, r1, 0xe4
-    bl fn_80057A64
+    bl mission_updateStub
     lwz r3, 0x15b4(r31)
     bl fn_80267B20
     cmpwi r3, 0x6
@@ -968,7 +968,7 @@ lbl_fn_8031958C_00000BE8:
     cmpwi r3, 0x8c
     bne lbl_fn_8031958C_00000D24
     lwz r3, 0x15b4(r31)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0xe4
     bl vec3_copy
@@ -1153,17 +1153,17 @@ lbl_fn_8031958C_00000E08:
     addi r3, r31, 0x1618
     addi r4, r1, 0xf0
     bl atn_Matrix_copy
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e9
     bl fn_80239D58
     cmpwi r3, 0x0
     bne lbl_fn_8031958C_00000F4C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e9
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r0, 0x0
     stw r0, 0x8(r1)
     li r0, -0x1

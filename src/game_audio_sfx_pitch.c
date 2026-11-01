@@ -30,7 +30,7 @@ extern void fn_800F52F0(void);
 extern void fn_800F52F8(void);
 extern void fn_800F7260(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F7FD8(void);
 extern void fn_800F7FF0(void);
@@ -48,7 +48,7 @@ extern void fn_80139F2C(void);
 extern void fn_80139F3C(void);
 extern void fn_80139F58(void);
 extern void fn_8013A194(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C394(void);
 extern void fn_8013C3B4(void);
 extern void fn_8013C3F4(void);
@@ -1834,7 +1834,7 @@ lbl_fn_80314BD8_00001778:
     cmpwi r3, 0x0
     beq lbl_fn_80314BD8_0000207C
     li r31, 0x1
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x188
     addi r5, r30, 0x528
@@ -2028,7 +2028,7 @@ lbl_fn_80314BD8_000019E8:
     addi r4, r1, 0x50
     bl fn_800F72CC
     lwz r3, 0x161c(r30)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x68
     addi r5, r1, 0x5c
@@ -2226,7 +2226,7 @@ lbl_fn_80314BD8_00001D4C:
     lwz r3, 0xd1c(r30)
     cmpwi r3, 0x0
     beq lbl_fn_80314BD8_0000207C
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x134
     addi r5, r30, 0x528
@@ -2313,7 +2313,7 @@ lbl_fn_80314BD8_00001E68:
     bl fn_803140B4
     mr r3, r30
     bl fn_80315FE0
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r30
     li r5, 0x0
     li r6, 0x1
@@ -2389,14 +2389,14 @@ lbl_fn_80314BD8_00001F5C:
     fcmpo cr0, f31, f1
     cror eq, gt, eq
     bne lbl_fn_80314BD8_0000207C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x1
     bl fn_8031564C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x0
     li r5, 0x0
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     lfs f1, lbl_80884D20
     addi r4, r30, 0x1620
     addi r6, r30, 0x528
@@ -2406,7 +2406,7 @@ lbl_fn_80314BD8_00001F5C:
     li r9, -0x1
     li r10, 0x1
     bl fn_80276AE4
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x0
     bl fn_8031564C
     lis r4, lbl_80749390@ha

@@ -12,7 +12,7 @@ extern void fn_8000D760(void);
 extern void str_initFromCStr(void);
 extern void str_getData(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_80057A68(void);
 extern void fn_80063D3C(void);
 extern void fn_8006AFF8(void);
@@ -1928,7 +1928,7 @@ asm void fn_80345384(void)
     stw r28, 0x15d8(r31)
     bl fn_803458CC
     addi r3, r31, 0x160c
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r31, 0x1618
     bl res_MsgHandle_constructor
     addi r3, r31, 0x1624
@@ -1940,7 +1940,7 @@ asm void fn_80345384(void)
     addi r3, r31, 0x1648
     bl res_MsgHandle_ctor
     addi r3, r31, 0x1654
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r31, 0x1660
     bl fn_803165E0
     addi r3, r31, 0x1690
@@ -1959,9 +1959,9 @@ asm void fn_80345384(void)
     addi r3, r31, 0x16e0
     stb r28, 0x16d8(r31)
     stfs f0, 0x16dc(r31)
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r31, 0x16f8
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r31, 0x1704
     bl fn_802FCF14
     addi r3, r31, 0x170c

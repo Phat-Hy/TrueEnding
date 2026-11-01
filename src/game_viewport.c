@@ -99,7 +99,7 @@ void fn_800F7F60(void);
 void fn_800F7F80(void);
 void fn_800F7F90(void);
 void fn_800F7F98(void);
-void fn_800F7FA0(void);
+void viewport_getGlobalContext(void);
 void fn_800F7FA8(void);
 void fn_800F7FB4(void);
 void fn_800F7FBC(void);
@@ -287,15 +287,15 @@ lbl_fn_800F72F4_000001F0:
 lbl_fn_800F72F4_00000208:
     cmpwi r22, 0x0
     beq lbl_fn_800F72F4_00000254
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x1
     bl fn_800F7F98
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
     li r6, 0x0
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x0
     bl fn_800F7F98
     li r0, 0xc
@@ -316,14 +316,14 @@ lbl_fn_800F72F4_00000254:
     rlwinm r0, r0, 0, 27, 27
     cmpwi r0, 0x10
     beq lbl_fn_800F72F4_00000388
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x1
     bl fn_800F7F98
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r23, 0x0
     stw r23, 0x8(r1)
     li r25, -0x1
@@ -340,7 +340,7 @@ lbl_fn_800F72F4_00000254:
     li r10, 0x0
     subi r4, r4, 0x7670
     bl res_Shader_bindParams
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     stw r23, 0x8(r1)
     addis r4, r26, 0x4
     lfs f1, lbl_80881510
@@ -363,7 +363,7 @@ lbl_fn_800F72F4_00000254:
     cmpwi r3, 0x11
     bne lbl_fn_800F72F4_0000037C
 lbl_fn_800F72F4_00000338:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r0, 0x0
     stw r0, 0x8(r1)
     li r0, -0x1
@@ -381,7 +381,7 @@ lbl_fn_800F72F4_00000338:
     subi r4, r4, 0x7670
     bl res_Shader_bindParams
 lbl_fn_800F72F4_0000037C:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x0
     bl fn_800F7F98
 lbl_fn_800F72F4_00000388:
@@ -943,7 +943,7 @@ lbl_fn_800F72F4_00000B7C:
     bl vec3_copy
     stfs f27, 0x6c(r29)
 lbl_fn_800F72F4_00000BD0:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
     bl fn_80239D58
@@ -966,17 +966,17 @@ lbl_fn_800F72F4_00000C14:
     addis r23, r26, 0x4
     subi r23, r23, 0x7688
 lbl_fn_800F72F4_00000C1C:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x1
     bl fn_800F7F98
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x5
     bl fn_800F84D0
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r29
     li r5, 0x0
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r28, 0x0
     stw r28, 0x8(r1)
     li r27, -0x1
@@ -992,7 +992,7 @@ lbl_fn_800F72F4_00000C1C:
     li r8, 0x0
     li r9, 0x0
     bl res_Shader_bindParams
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     stw r28, 0x8(r1)
     addi r4, r23, 0xc
     lfs f1, lbl_80881494
@@ -1005,10 +1005,10 @@ lbl_fn_800F72F4_00000C1C:
     li r8, 0x0
     li r9, 0x0
     bl res_Shader_bindParams
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x0
     bl fn_800F84D0
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x0
     bl fn_800F7F98
 lbl_fn_800F72F4_00000CD0:
@@ -1066,7 +1066,7 @@ asm void fn_800F7F98(void)
     blr
 }
 
-asm void fn_800F7FA0(void)
+asm void viewport_getGlobalContext(void)
 {
     nofralloc
     lwz r3, lbl_8087F3C0

@@ -28,7 +28,7 @@ extern void equip_getGlobalManager(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139550(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void fn_8013C504(void);
 extern void fn_80144710(void);
@@ -1160,7 +1160,7 @@ lbl_fn_80346384_00000DD0:
     lbz r0, 0x1808(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80346384_00000E04
-    bl fn_8013C38C
+    bl npc_getPosition
     lfs f1, 0x4(r3)
     lfs f0, lbl_808853AC
     fcmpo cr0, f1, f0
@@ -1271,7 +1271,7 @@ lbl_fn_80346384_00000F68:
     mr r28, r3
     bl fn_8000D9E8
     bl fn_8000DCF4
-    bl fn_8013C38C
+    bl npc_getPosition
     lfs f2, 0x4(r3)
     lfs f1, 0x52c(r31)
     lfs f0, lbl_808853B0

@@ -10,7 +10,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8021ECD0(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
@@ -1465,7 +1465,7 @@ lbl_fn_803CA0F4_00001178:
 lbl_fn_803CA0F4_000011B0:
     lwz r3, lbl_8087F408
     lwz r4, 0x0(r4)
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0xc(r23)
     addi r26, r26, 0x4
     addi r23, r23, 0x4
@@ -1478,7 +1478,7 @@ lbl_fn_803CA0F4_000011C8:
     beq lbl_fn_803CA0F4_000011F4
     lwz r3, lbl_8087F408
     lwz r4, 0x0(r4)
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x8c(r24)
     b lbl_fn_803CA0F4_000011F8
 lbl_fn_803CA0F4_000011F4:

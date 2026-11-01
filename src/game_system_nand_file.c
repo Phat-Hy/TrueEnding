@@ -18,7 +18,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800EFD04(void);
 extern void fn_800EFDA0(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F8524(void);
 extern void system_getNextSequenceId(void);
@@ -142,16 +142,16 @@ asm void fn_80348FF4(void)
     fcmpo cr0, f1, f0
     cror eq, gt, eq
     bne lbl_fn_80348FF4_0000040C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     lis r6, lbl_807C7030@ha
     lfs f1, lbl_80885398
     addi r6, r6, lbl_807C7030@l
@@ -192,11 +192,11 @@ lbl_fn_80348FF4_000000B4:
     mr r3, r31
     addi r4, r1, 0x60
     bl fn_803489F4
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r30, 0x0
     stw r30, 0x8(r1)
     li r0, -0x1
@@ -368,7 +368,7 @@ lbl_fn_80348FF4_00000340:
     bl fn_80349470
     b lbl_fn_80348FF4_0000040C
 lbl_fn_80348FF4_000003B8:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x1

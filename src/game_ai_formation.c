@@ -19,7 +19,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800E41FC(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F84D0(void);
 extern void system_getNextSequenceId(void);
@@ -31,7 +31,7 @@ extern void fn_8012F034(void);
 extern void fn_8013322C(void);
 extern void fn_80139F4C(void);
 extern void fn_8013A258(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C3B4(void);
 extern void npc_updateTalkInteraction(void);
 extern void fn_8014052C(void);
@@ -394,24 +394,24 @@ asm void fn_80265B00(void)
     stfs f0, 0x9fc(r31)
     stw r0, 0x14ec(r31)
     bne lbl_fn_80265B00_000003A0
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addi r4, r31, 0x15ac
     li r5, 0x0
     li r6, 0x1
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addi r4, r31, 0x15a0
     li r5, 0x0
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x2
     bl fn_800F84D0
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addi r4, r31, 0x15a0
     addi r5, r31, 0xb0
     li r6, 0x1
     bl fn_8026607C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x0
     bl fn_800F84D0
 lbl_fn_80265B00_000003A0:
@@ -424,7 +424,7 @@ lbl_fn_80265B00_000003A0:
     lwz r0, 0x58c(r31)
     cmpwi r0, 0x6
     bne lbl_fn_80265B00_000003DC
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x3e8
     li r6, 0x0
@@ -565,16 +565,16 @@ lbl_fn_80265B00_00000598:
     subic. r0, r3, 0x1
     stw r0, 0x1654(r31)
     bge lbl_fn_80265B00_00000600
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0xc8
     li r6, 0x1
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0xc8
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addi r4, r31, 0x15c4
     addi r5, r31, 0xb0
     li r6, 0x1
@@ -1561,7 +1561,7 @@ lbl_fn_80266A24_0000139C:
     subi r0, r3, 0x16
     cmplwi r0, 0x1
     bgt lbl_fn_80266A24_00001514
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r30
     li r5, 0x65
     bl fn_800F7FA8
@@ -1641,12 +1641,12 @@ lbl_fn_80266A24_000014D4:
     mr r3, r30
     bl fn_8026AF24
 lbl_fn_80266A24_000014E8:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r30
     li r5, 0x64
     li r6, 0x0
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r30
     li r5, 0x65
     li r6, 0x1
@@ -1663,11 +1663,11 @@ lbl_fn_80266A24_00001514:
     bl vec3_toEulerAngles
     lfs f0, 0x18(r1)
     stfs f0, 0x538(r30)
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x0
     li r5, 0x0
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addi r4, r30, 0x1588
     addi r5, r30, 0xb0
     li r6, 0x1
@@ -1685,12 +1685,12 @@ lbl_fn_80266A24_00001514:
     stw r0, 0x164c(r30)
     ori r3, r3, 0x20
     stw r3, 0x12a4(r30)
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r30
     li r5, 0x64
     li r6, 0x0
     bl res_findResourceSlot
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r30
     li r5, 0x65
     li r6, 0x1
@@ -1720,7 +1720,7 @@ lbl_fn_80266A24_000015C0:
     b lbl_fn_80266A24_00001654
 lbl_fn_80266A24_00001614:
     lwz r3, 0x0(r31)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x44
     addi r5, r30, 0x528
@@ -1747,7 +1747,7 @@ lbl_fn_80266A24_00001664:
     bl fn_80139F4C
     cmpwi r3, 0x0
     beq lbl_fn_80266A24_00001790
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r30
     li r5, 0x65
     bl fn_800F7FA8
@@ -1768,7 +1768,7 @@ lbl_fn_80266A24_00001664:
     bl world_setGlobalFlag
     b lbl_fn_80266A24_00001790
 lbl_fn_80266A24_000016C4:
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r30
     li r5, 0x65
     bl fn_800F7FA8

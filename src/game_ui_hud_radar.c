@@ -14,7 +14,7 @@ extern void vec3_toEulerAngles(void);
 extern void fn_800133B0(void);
 extern void fn_8004D388(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void morph_updateMesh(void);
@@ -23,7 +23,7 @@ extern void scissor_clipFrustum(void);
 extern void fn_8012A1B8(void);
 extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C394(void);
 extern void fn_8013C3B4(void);
 extern void fn_8013C460(void);
@@ -1075,9 +1075,9 @@ asm void fn_801C0D80(void)
     addi r3, r29, 0x8
     addi r4, r4, lbl_80781A00@l
     stw r4, 0x0(r29)
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r29, 0x14
-    bl fn_80057A64
+    bl mission_updateStub
     lwz r3, 0x4(r29)
     li r4, 0x2d
     bl fn_801C0730
@@ -1217,7 +1217,7 @@ lbl_fn_801C0D80_00000E84:
     lwz r3, 0x4(r29)
     fdivs f0, f0, f1
     stfs f0, 0x20(r29)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r29, 0x14
     bl vec3_copy

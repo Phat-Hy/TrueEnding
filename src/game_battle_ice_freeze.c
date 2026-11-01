@@ -27,7 +27,7 @@ extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800C1720(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void fn_800EFD04(void);
 extern void fn_800EFDA0(void);
 extern void fn_801010A0(void);
@@ -1955,11 +1955,11 @@ asm void fn_8041CDD8(void)
     lis r3, lbl_8078DE58@ha
     lis r4, res_MsgHandle_constructor@ha
     addi r3, r3, lbl_8078DE58@l
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     stw r3, 0x0(r31)
     addi r3, r31, 0xf4
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r6, 0xc
     li r7, 0x6
     bl __construct_new_array

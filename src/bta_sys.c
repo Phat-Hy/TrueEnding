@@ -16,7 +16,7 @@ extern void fn_805EC3B0(void);
 extern void fn_805EDC50(void);
 extern void fn_805EDC80(void);
 extern void fn_80626AA0(void);
-extern void fn_80626C60(void);
+extern void scapi_getConfigItem(void);
 extern void scapi_cleanupContext(void);
 extern void fn_80626EC0(void);
 extern void fn_80626F10(void);
@@ -458,7 +458,7 @@ lbl_fn_80628A70_000003FC:
     b lbl_fn_80628A70_00000498
 lbl_fn_80628A70_0000041C:
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_80628A70_0000043C
@@ -494,7 +494,7 @@ lbl_fn_80628A70_00000498:
     addi r31, r30, lbl_8081C280@l
 lbl_fn_80628A70_000004A0:
     lbz r3, 0x1c(r31)
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_80628A70_000004A0
@@ -571,7 +571,7 @@ lbl_fn_80628C20_000005A0:
 lbl_fn_80628C20_000005B4:
     sth r3, 0x2(r4)
     li r3, 0x3
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r28, r3
     bne lbl_fn_80628C20_000005D8
@@ -614,7 +614,7 @@ lbl_fn_80628C20_0000064C:
     addi r31, r30, lbl_8081C280@l
 lbl_fn_80628C20_00000654:
     lbz r3, 0x1d(r31)
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_80628C20_00000654
@@ -960,7 +960,7 @@ lbl_fn_806291A0_00000B20:
     bl fn_80628240
 lbl_fn_806291A0_00000B34:
     lbz r3, 0x1c(r30)
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_806291A0_00000B34
@@ -996,7 +996,7 @@ lbl_fn_806291A0_00000BAC:
     stb r0, 0x2b(r31)
 lbl_fn_806291A0_00000BBC:
     lbz r3, 0x1d(r31)
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_806291A0_00000BBC
@@ -1072,7 +1072,7 @@ lbl_fn_80629340_00000CAC:
     b lbl_fn_80629340_00000E60
 lbl_fn_80629340_00000CC0:
     lbz r3, 0x1c(r30)
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r26, r3
     bne lbl_fn_80629340_00000CDC
@@ -1131,7 +1131,7 @@ lbl_fn_80629340_00000D80:
     b lbl_fn_80629340_00000E60
 lbl_fn_80629340_00000D98:
     lbz r3, 0x1d(r30)
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r27, r3
     bne lbl_fn_80629340_00000DB4

@@ -42,7 +42,7 @@ extern void fn_803750E4(void);
 extern void fn_8037D4C0(void);
 extern void fn_803E9B7C(void);
 extern void net_getPacketManager(void);
-extern void fn_804D818C(void);
+extern void net_voiceCodec_destroy(void);
 extern void fn_804E8BF8(void);
 extern void fn_8050E098(void);
 extern void PSMTXConcat(void);
@@ -1662,9 +1662,9 @@ lbl_fn_804EFF78_00001610:
     extsb. r0, r0
     sth r3, 0xa(r1)
     bne lbl_fn_804EFF78_00001654
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object

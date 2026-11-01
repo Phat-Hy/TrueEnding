@@ -20,7 +20,7 @@ extern void msg_getMessageById(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
@@ -1115,7 +1115,7 @@ lbl_fn_805B3FD4_00000CD8:
 lbl_fn_805B3FD4_00000CEC:
     lwz r3, lbl_8087F408
     lwz r4, 0x14(r4)
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0xc(r1)
     b lbl_fn_805B3FD4_00000D10
 lbl_fn_805B3FD4_00000D00:

@@ -24,7 +24,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FD8(void);
 extern void clip_calculateFrustum(void);
 extern void fn_801125F8(void);
@@ -299,7 +299,7 @@ lbl_fn_803041C8_00000284:
     mr r3, r31
     stfs f0, 0x534(r31)
     bl fn_80301200
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x190
     li r6, 0x1

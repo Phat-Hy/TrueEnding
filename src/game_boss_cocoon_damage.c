@@ -7,7 +7,7 @@ extern void vec3_copy(void);
 extern void str_initFromCStr(void);
 extern void str_getData(void);
 extern void fn_80056DB8(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void fn_80063D3C(void);
 extern void fn_8006AFF8(void);
@@ -605,9 +605,9 @@ asm void fn_80458270(void)
     stw r31, 0x14c0(r28)
     stw r31, 0x14c4(r28)
     stw r0, 0x14d0(r28)
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x14e0
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r28, 0x14f0
     bl res_MsgHandle_constructor
     lis r4, fn_802AC550@ha
@@ -627,7 +627,7 @@ asm void fn_80458270(void)
     stw r31, 0x18f0(r28)
     bl fn_80458550
     addi r3, r28, 0x1948
-    bl fn_80057A64
+    bl mission_updateStub
     stw r31, 0x1960(r28)
     addi r3, r28, 0x1964
     bl fn_802FCF14

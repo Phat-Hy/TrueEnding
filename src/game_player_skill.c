@@ -85,7 +85,7 @@ void fn_8011FB18(void);
 void fn_8011FB48(void);
 void fn_8011FB98(void);
 void fn_8011FBD8(void);
-void fn_8011FC10(void);
+void skill_findNodeById(void);
 void fn_8011FC38(void);
 void fn_8011FC84(void);
 void fn_8011FD04(void);
@@ -533,19 +533,19 @@ lbl_fn_8011FBD8_00000484:
     blr
 }
 
-asm void fn_8011FC10(void)
+asm void skill_findNodeById(void)
 {
     nofralloc
     lwz r3, 0x48(r3)
-    b lbl_fn_8011FC10_000004AC
-lbl_fn_8011FC10_0000049C:
+    b lbl_skill_findNodeById_000004AC
+lbl_skill_findNodeById_0000049C:
     lwz r0, 0x58(r3)
     cmpw r4, r0
     beqlr
     lwz r3, 0x14ac(r3)
-lbl_fn_8011FC10_000004AC:
+lbl_skill_findNodeById_000004AC:
     cmpwi r3, 0x0
-    bne lbl_fn_8011FC10_0000049C
+    bne lbl_skill_findNodeById_0000049C
     li r3, 0x0
     blr
 }

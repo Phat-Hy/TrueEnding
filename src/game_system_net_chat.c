@@ -25,7 +25,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_801092C8(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_80161570(void);
 extern void fn_80162A08(void);
@@ -841,7 +841,7 @@ lbl_fn_803A3D20_00000960:
 lbl_fn_803A3D20_0000099C:
     lwz r3, lbl_8087F408
     mr r4, r0
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r4, r3
     b lbl_fn_803A3D20_000009C0
 lbl_fn_803A3D20_000009B0:
@@ -1434,7 +1434,7 @@ lbl_fn_803A4568_000011A4:
     b lbl_fn_803A4568_000011F8
 lbl_fn_803A4568_000011DC:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r29, r3
     b lbl_fn_803A4568_000011F8
 lbl_fn_803A4568_000011EC:
@@ -2137,7 +2137,7 @@ lbl_fn_803A4A7C_00001B90:
     b lbl_fn_803A4A7C_00001BE4
 lbl_fn_803A4A7C_00001BC8:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r21, r3
     b lbl_fn_803A4A7C_00001BE4
 lbl_fn_803A4A7C_00001BD8:

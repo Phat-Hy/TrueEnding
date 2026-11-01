@@ -30,7 +30,7 @@ extern void fn_8012AFE8(void);
 extern void fn_801F4F84(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_8036E964(void);
 extern void world_getGlobalFlag(void);
@@ -563,7 +563,7 @@ lbl_fn_801189B4_00000664:
     mr r4, r3
     mr r3, r27
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lfs f2, 0x48(r1)
     lfs f0, lbl_8088174C
     fcmpo cr0, f2, f0
@@ -793,7 +793,7 @@ lbl_fn_801189B4_00000980:
     mr r4, r3
     mr r3, r26
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_801189B4_000009AC:
     lwz r3, lbl_8087F430
     cmpwi r3, 0x0

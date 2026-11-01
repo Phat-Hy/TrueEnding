@@ -29,7 +29,7 @@ extern void fn_801F6D7C(void);
 extern void save_findEntryByName(void);
 extern void fn_801F8830(void);
 extern void thread_findAndNotify(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void profile_getMetricValue(void);
 extern void perf_getMetricValue(void);
@@ -1647,7 +1647,7 @@ lbl_fn_805233FC_00001598:
     mr r4, r3
     addi r3, r27, 0x58
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r0, 0x8(r21)
     cmpwi r0, 0x0
     bne lbl_fn_805233FC_000015E0

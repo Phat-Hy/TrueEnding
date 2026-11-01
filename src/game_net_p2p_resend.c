@@ -18,7 +18,7 @@ extern void fn_800C1FB4(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void str_findChar(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
@@ -118,9 +118,9 @@ asm void fn_80512A88(void)
     stw r30, 0x8(r1)
     mr r30, r3
     beq lbl_fn_80512A88_000000C4
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     li r5, 0xc
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     li r6, 0x8
     addi r3, r3, 0xd8
     bl __destroy_new_array

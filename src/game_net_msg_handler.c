@@ -12,7 +12,7 @@ extern void fn_80178668(void);
 extern void fn_80178864(void);
 extern void task_findEntryById(void);
 extern void net_getPacketManager(void);
-extern void fn_804D818C(void);
+extern void net_voiceCodec_destroy(void);
 extern void fn_804E82C8(void);
 extern void fn_804EAA88(void);
 extern void fn_804F50E0(void);
@@ -607,9 +607,9 @@ lbl_fn_804F34B8_00000734:
     lwz r29, lbl_8087F600
     sth r3, 0xa(r1)
     bne lbl_fn_804F34B8_00000774
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -2236,9 +2236,9 @@ lbl_fn_804F4800_00001D0C:
     extsb. r0, r0
     sth r3, 0xa(r1)
     bne lbl_fn_804F4800_00001D48
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object

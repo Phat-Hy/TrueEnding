@@ -27,7 +27,7 @@ extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80105BD8(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void fn_80126214(void);
 extern void fn_8013322C(void);
@@ -410,7 +410,7 @@ lbl_fn_80244898_000003E0:
     mr r31, r3
     bl fn_801A03E0
     mr r4, r31
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     stw r3, 0xc(r1)
     beq lbl_fn_80244898_00000414
@@ -462,7 +462,7 @@ lbl_fn_80244898_0000049C:
     mr r31, r3
     bl fn_801A03E0
     mr r4, r31
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     stw r3, 0x8(r1)
     beq lbl_fn_80244898_000004D0

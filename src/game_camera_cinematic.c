@@ -12,7 +12,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
@@ -1033,7 +1033,7 @@ lbl_fn_802E3B24_00000D30:
     cmpwi r0, 0x1e
     ble lbl_fn_802E3B24_00000EC4
     lwz r3, 0x14cc(r30)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x20
     addi r5, r30, 0x528
@@ -1052,7 +1052,7 @@ lbl_fn_802E3B24_00000D84:
     lwz r3, 0x14cc(r3)
     cmpwi r3, 0x0
     beq lbl_fn_802E3B24_00000EC4
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x8
     addi r5, r30, 0x528

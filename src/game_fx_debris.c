@@ -24,7 +24,7 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EC204(void);
 extern void fn_800F8574(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
@@ -1894,7 +1894,7 @@ lbl_fn_8029CF00_000018F8:
     mr r30, r3
     bl fn_801A03E0
     mr r4, r30
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x1648(r31)
     b lbl_fn_8029CF00_00001968
 lbl_fn_8029CF00_00001934:
@@ -1909,7 +1909,7 @@ lbl_fn_8029CF00_00001934:
     mr r30, r3
     bl fn_801A03E0
     mr r4, r30
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x164c(r31)
 lbl_fn_8029CF00_00001968:
     addi r3, r1, 0x2c

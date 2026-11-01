@@ -16,7 +16,7 @@ extern void atn_Task_setActive(void);
 extern void clip_calculateFrustum(void);
 extern void fn_800FDB20(void);
 extern void fn_80101434(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8012D8B8(void);
 extern void quest_updateFlow(void);
 extern void equip_applyToCharacter(void);
@@ -696,7 +696,7 @@ lbl_fn_802C653C_00000888:
     slwi r0, r0, 4
     add r4, r4, r0
     lwz r4, 0x4(r4)
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r4, r3
     mr r3, r31
     mr r5, r30
@@ -757,7 +757,7 @@ lbl_fn_802C653C_00000968:
     slwi r0, r0, 4
     add r4, r4, r0
     lwz r4, 0x8(r4)
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r4, r3
     mr r3, r31
     mr r5, r30
@@ -818,7 +818,7 @@ lbl_fn_802C653C_00000A48:
     slwi r0, r0, 4
     add r4, r4, r0
     lwz r4, 0xc(r4)
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r4, r3
     mr r3, r31
     mr r5, r30

@@ -9,7 +9,7 @@ extern void _savegpr_20(void);
 extern void _savegpr_24(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_80626C60(void);
+extern void scapi_getConfigItem(void);
 extern void scapi_cleanupContext(void);
 extern void bta_sys_logEvent(void);
 extern void bta_sys_log(void);
@@ -69,7 +69,7 @@ asm void fn_80636408(void)
     mr r28, r6
     li r31, 0x0
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r30, r3
     bne lbl_fn_80636408_00000064

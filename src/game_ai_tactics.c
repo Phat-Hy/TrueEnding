@@ -16,7 +16,7 @@ extern void fn_800F52F0(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
 extern void scissor_clipFrustum(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8014052C(void);
 extern void fn_80144710(void);
 extern void actor_setState(void);
@@ -117,7 +117,7 @@ asm void fn_802676BC(void)
     cmpwi r0, 0x0
     beq lbl_fn_802676BC_00000448
     mr r3, r0
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x20
     bl vec3_assign

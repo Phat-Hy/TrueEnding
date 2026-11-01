@@ -17,7 +17,7 @@ extern void str_initFromCStr(void);
 extern void fn_8004203C(void);
 extern void fn_80042108(void);
 extern void str_getData(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -52,7 +52,7 @@ extern void fn_800F52F0(void);
 extern void fn_800F8014(void);
 extern void fn_8010EDFC(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void boss_updatePhaseState(void);
 extern void fn_8013C504(void);
@@ -727,11 +727,11 @@ lbl_fn_80452998_00000780:
     stw r3, 0x14d4(r29)
     lwz r4, 0x14d8(r29)
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x14dc(r29)
     lwz r4, 0x14c8(r29)
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     lwz r0, 0x14a8(r29)
     stw r3, 0x14cc(r29)
     li r3, 0x1
@@ -1053,9 +1053,9 @@ asm void fn_80452F14(void)
     addi r3, r31, 0x18bc
     bl fn_803165E0
     addi r3, r31, 0x18ec
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r31, 0x18f8
-    bl fn_80057A64
+    bl mission_updateStub
     lfs f1, lbl_80886B80
     addi r3, r31, 0x1914
     stw r29, 0x190c(r31)
@@ -1076,9 +1076,9 @@ asm void fn_80452F14(void)
     addi r3, r31, 0x195c
     bl res_MsgHandle_constructor
     addi r3, r31, 0x1968
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r31, 0x1974
-    bl fn_80057A64
+    bl mission_updateStub
     stw r29, 0x1980(r31)
     addi r3, r31, 0x1988
     stw r29, 0x1984(r31)

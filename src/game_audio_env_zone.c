@@ -20,7 +20,7 @@ extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
 extern void fn_800EB7A0(void);
 extern void fn_800F72CC(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
 extern void fn_800F7FD8(void);
 extern void fn_800F7FF0(void);
@@ -28,7 +28,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_800FDB20(void);
 extern void fn_80101434(void);
 extern void fn_8012D8B8(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
 extern void dialog_renderWindow(void);
@@ -1083,17 +1083,17 @@ asm void fn_8031D350(void)
     mr r3, r31
     li r4, 0x3
     bl actor_setState
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     mr r4, r31
     li r5, 0x65
     bl fn_800F7FA8
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     addi r4, r31, 0x1598
     addi r5, r31, 0xb0
     li r6, 0x1
     bl fn_8026607C
     lwz r3, 0x14b8(r31)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x74
     addi r5, r31, 0x528
@@ -1112,7 +1112,7 @@ asm void fn_8031D350(void)
     addi r4, r31, 0x1524
     bl fn_800F72CC
     lwz r3, 0x14b8(r31)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x5c
     addi r5, r1, 0x50

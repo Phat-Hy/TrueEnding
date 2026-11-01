@@ -12,7 +12,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void scapi_initContext(void);
-extern void fn_80626C60(void);
+extern void scapi_getConfigItem(void);
 extern void scapi_cleanupContext(void);
 extern void fn_80626F10(void);
 extern void fn_80627B50(void);
@@ -3382,7 +3382,7 @@ asm void fn_8062C920(void)
     li r0, 0x1
     addi r4, r4, lbl_8081FB78@l
     stb r0, 0x7e(r4)
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     beq lbl_fn_8062C920_000028E8
     li r4, 0x0

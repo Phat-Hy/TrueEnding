@@ -18,7 +18,7 @@ extern void motion_updateFogAdj(void);
 extern void ref_releaseHandle(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
@@ -802,7 +802,7 @@ lbl_fn_803AEA24_000009CC:
     b lbl_fn_803AEA24_00000A20
 lbl_fn_803AEA24_00000A04:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r5, r3
     b lbl_fn_803AEA24_00000A20
 lbl_fn_803AEA24_00000A14:

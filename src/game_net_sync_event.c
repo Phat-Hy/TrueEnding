@@ -14,7 +14,7 @@ extern void wcs_vformat(void);
 extern void fn_801F4C14(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_8020924C(void);
 extern void fn_804A3C24(void);
@@ -1180,7 +1180,7 @@ lbl_fn_804CC618_00000F1C:
     mr r4, r3
     mr r3, r28
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     cmpwi r23, 0x15
     bgt lbl_fn_804CC618_00000FE4
     cmpwi r23, 0x0
@@ -1495,7 +1495,7 @@ lbl_fn_804CC7A4_00001354:
     mr r4, r3
     mr r3, r22
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_804CC7A4_000013B0
 lbl_fn_804CC7A4_00001388:
     stw r19, 0x110(r26)
@@ -1507,7 +1507,7 @@ lbl_fn_804CC7A4_00001388:
     mr r4, r3
     mr r3, r22
     li r5, 0x0
-    bl fn_801FEDBC
+    bl thread_findTaskById
 lbl_fn_804CC7A4_000013B0:
     addi r21, r21, 0x1
     addi r25, r25, 0x8

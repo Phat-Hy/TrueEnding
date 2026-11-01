@@ -22,7 +22,7 @@ extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_80133130(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
@@ -860,7 +860,7 @@ lbl_fn_802799C0_00000A00:
     mr r30, r3
     lwz r3, lbl_8087F408
     mr r4, r30
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     mr r27, r3
     beq lbl_fn_802799C0_00000C4C

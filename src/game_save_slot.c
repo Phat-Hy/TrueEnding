@@ -25,7 +25,7 @@ extern void fn_801FDA20(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_801FED70(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_801FEEFC(void);
 extern void fn_801FEF40(void);
@@ -661,7 +661,7 @@ asm void fn_801F4998(void)
     lfd f0, 0x8(r1)
     li r5, 0x0
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     mr r3, r29
     bl str_findChar
     extrwi r0, r30, 8, 8
@@ -672,7 +672,7 @@ asm void fn_801F4998(void)
     addi r3, r28, 0x58
     li r5, 0x1
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     mr r3, r29
     bl str_findChar
     extrwi r0, r30, 8, 16
@@ -683,7 +683,7 @@ asm void fn_801F4998(void)
     addi r3, r28, 0x58
     li r5, 0x2
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     mr r3, r29
     bl str_findChar
     clrlwi r0, r30, 24
@@ -694,7 +694,7 @@ asm void fn_801F4998(void)
     addi r3, r28, 0x58
     li r5, 0x3
     fsubs f1, f0, f1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r0, 0x34(r1)
     lwz r31, 0x2c(r1)
     lwz r30, 0x28(r1)
@@ -727,21 +727,21 @@ asm void fn_801F4AA0(void)
     mr r4, r3
     addi r3, r30, 0x58
     li r5, 0x1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     mr r3, r31
     bl str_findChar
     fmr f1, f30
     mr r4, r3
     addi r3, r30, 0x58
     li r5, 0x2
-    bl fn_801FEDBC
+    bl thread_findTaskById
     mr r3, r31
     bl str_findChar
     fmr f1, f31
     mr r4, r3
     addi r3, r30, 0x58
     li r5, 0x3
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r0, 0x34(r1)
     lfd f31, 0x28(r1)
     lfd f30, 0x20(r1)
@@ -776,7 +776,7 @@ asm void fn_801F4B4C(void)
     mr r4, r3
     addi r3, r29, 0x58
     li r5, 0x1
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lfs f1, lbl_80882C88
     mr r3, r30
     lfs f0, 0x4(r31)
@@ -786,7 +786,7 @@ asm void fn_801F4B4C(void)
     mr r4, r3
     addi r3, r29, 0x58
     li r5, 0x2
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lfs f1, lbl_80882C88
     mr r3, r30
     lfs f0, 0x8(r31)
@@ -796,7 +796,7 @@ asm void fn_801F4B4C(void)
     mr r4, r3
     addi r3, r29, 0x58
     li r5, 0x3
-    bl fn_801FEDBC
+    bl thread_findTaskById
     lwz r0, 0x34(r1)
     psq_l f31, 0x28(r1), 0, 0
     lfd f31, 0x20(r1)
@@ -1532,7 +1532,7 @@ lbl_fn_801F54CC_0000135C:
     addi r3, r3, 0x58
     lwz r4, 0x4(r29)
     extsb r5, r5
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_801F54CC_00001390
 lbl_fn_801F54CC_0000137C:
     lwz r3, 0x48(r31)

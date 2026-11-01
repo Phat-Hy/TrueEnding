@@ -40,7 +40,7 @@ extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_802180A8(void);
@@ -1106,11 +1106,11 @@ asm void fn_8042618C(void)
     addi r3, r30, 0x898
     bl fn_80057F28
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     addi r3, r30, 0x928
     li r6, 0xc
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r7, 0x5
     bl __construct_new_array
     lfs f0, lbl_808866A0
@@ -1164,9 +1164,9 @@ lbl_fn_80426260_00000E10:
     stw r0, 0x994(r29)
     stw r0, 0x990(r29)
 lbl_fn_80426260_00000E1C:
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     addi r3, r29, 0x928
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x5
     bl __destroy_new_array

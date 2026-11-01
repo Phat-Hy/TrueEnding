@@ -29,7 +29,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800CFD18(void);
 extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_80151448(void);
@@ -607,11 +607,11 @@ asm void fn_8032C52C(void)
     li r7, 0x2
     bl __construct_new_array
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     addi r3, r31, 0x15c0
     li r6, 0xc
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r7, 0x4
     bl __construct_new_array
     addi r3, r31, 0x15f0

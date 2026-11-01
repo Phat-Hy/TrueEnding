@@ -15,7 +15,7 @@ extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_800697D8(void);
 extern void atn_Task_unlink(void);
 extern void fn_800EC204(void);
@@ -23,13 +23,13 @@ extern void fn_800F7FF0(void);
 extern void fn_801162A0(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8012A190(void);
 extern void fn_8012A1B8(void);
 extern void fn_8012D8B8(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C404(void);
 extern void fn_8013C42C(void);
 extern void fn_8013C504(void);
@@ -779,7 +779,7 @@ lbl_fn_803A2210_000008DC:
     b lbl_fn_803A2210_00000930
 lbl_fn_803A2210_00000914:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r31, r3
     b lbl_fn_803A2210_00000930
 lbl_fn_803A2210_00000924:
@@ -880,7 +880,7 @@ lbl_fn_803A2378_00000A3C:
     b lbl_fn_803A2378_00000A90
 lbl_fn_803A2378_00000A74:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r5, r3
     b lbl_fn_803A2378_00000A90
 lbl_fn_803A2378_00000A84:
@@ -1144,7 +1144,7 @@ lbl_fn_803A26F4_00000DD8:
     mr r3, r31
     lfs f0, 0x14(r26)
     fadds f31, f0, f1
-    bl fn_8013C38C
+    bl npc_getPosition
     fmr f1, f31
     mr r4, r3
     lfs f2, lbl_80885B14
@@ -1172,7 +1172,7 @@ lbl_fn_803A26F4_00000E3C:
     cmpwi r28, 0x0
     bne lbl_fn_803A26F4_00000EA8
     mr r3, r31
-    bl fn_8013C38C
+    bl npc_getPosition
     lfs f1, 0x14(r26)
     mr r4, r3
     lfs f2, lbl_80885B14
@@ -1228,10 +1228,10 @@ lbl_fn_803A26F4_00000F34:
     b lbl_fn_803A26F4_000013B0
 lbl_fn_803A26F4_00000F54:
     mr r3, r22
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r23, r3
     mr r3, r31
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     mr r5, r23
     addi r3, r1, 0xe0
@@ -1249,7 +1249,7 @@ lbl_fn_803A26F4_00000F98:
     addi r3, r1, 0xe0
     bl fn_8012A190
     mr r3, r22
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x5c
     addi r5, r1, 0xe0
@@ -1266,10 +1266,10 @@ lbl_fn_803A26F4_00000F98:
     mr r22, r3
     beq lbl_fn_803A26F4_000013B0
     mr r3, r31
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r23, r3
     mr r3, r22
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     mr r5, r23
     addi r3, r1, 0xd4
@@ -1289,7 +1289,7 @@ lbl_fn_803A26F4_0000102C:
     addi r4, r1, 0xd4
     bl vec3_toEulerAngles
     mr r3, r31
-    bl fn_8013C38C
+    bl npc_getPosition
     lfs f1, 0x54(r1)
     mr r4, r3
     lfs f2, lbl_80885B14
@@ -1325,9 +1325,9 @@ lbl_fn_803A26F4_000010BC:
     cmpwi r23, 0x0
     beq lbl_fn_803A26F4_000013B0
     addi r3, r1, 0xbc
-    bl fn_80057A64
+    bl mission_updateStub
     addi r3, r1, 0xb0
-    bl fn_80057A64
+    bl mission_updateStub
     mr r3, r23
     mr r4, r31
     addi r5, r1, 0xbc
@@ -1425,7 +1425,7 @@ lbl_fn_803A26F4_0000121C:
     cmpwi r23, 0x0
     beq lbl_fn_803A26F4_000013B0
     mr r3, r31
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r5, r3
     addi r3, r1, 0xa4
     addi r4, r23, 0x4
@@ -1445,7 +1445,7 @@ lbl_fn_803A26F4_0000125C:
     addi r4, r1, 0xa4
     bl vec3_toEulerAngles
     mr r3, r31
-    bl fn_8013C38C
+    bl npc_getPosition
     lfs f1, 0x30(r1)
     mr r4, r3
     lfs f2, lbl_80885B14
@@ -1489,7 +1489,7 @@ lbl_fn_803A26F4_00001304:
     cmpwi r23, 0x0
     beq lbl_fn_803A26F4_000013B0
     mr r3, r31
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r5, r3
     addi r3, r1, 0x8c
     addi r4, r23, 0x4
@@ -1509,7 +1509,7 @@ lbl_fn_803A26F4_00001344:
     addi r4, r1, 0x8c
     bl vec3_toEulerAngles
     mr r3, r31
-    bl fn_8013C38C
+    bl npc_getPosition
     lfs f1, 0x18(r1)
     mr r4, r3
     lfs f2, lbl_80885B14
@@ -1650,7 +1650,7 @@ lbl_fn_803A2E20_000014F0:
 lbl_fn_803A2E20_0000152C:
     lwz r3, lbl_8087F408
     mr r4, r0
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r31, r3
     b lbl_fn_803A2E20_00001550
 lbl_fn_803A2E20_00001540:
@@ -1759,7 +1759,7 @@ lbl_fn_803A2E20_00001688:
     b lbl_fn_803A2E20_000016DC
 lbl_fn_803A2E20_000016C0:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r26, r3
     b lbl_fn_803A2E20_000016DC
 lbl_fn_803A2E20_000016D0:
@@ -2000,7 +2000,7 @@ lbl_fn_803A330C_000019D0:
     b lbl_fn_803A330C_00001A24
 lbl_fn_803A330C_00001A08:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r5, r3
     b lbl_fn_803A330C_00001A24
 lbl_fn_803A330C_00001A18:

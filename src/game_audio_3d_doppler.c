@@ -9,7 +9,7 @@ extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
 extern void fn_8004D388(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_80057A68(void);
 extern void fn_80063484(void);
 extern void atn_Matrix_copy(void);
@@ -374,7 +374,7 @@ lbl_fn_80323690_00000274:
     li r29, 0x0
     stw r29, 0xc(r1)
     addi r3, r1, 0x40
-    bl fn_80057A64
+    bl mission_updateStub
     mr r3, r30
     addi r4, r1, 0xc
     addi r5, r1, 0x40

@@ -33,7 +33,7 @@ extern void fn_800F7FF0(void);
 extern void fn_800F8348(void);
 extern void fn_800F8524(void);
 extern void fn_801162A0(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
@@ -145,7 +145,7 @@ asm void fn_8030A6A0(void)
 lbl_fn_8030A6A0_00000050:
     lwz r3, lbl_8087F408
     lwz r4, 0x14f4(r30)
-    bl fn_8011FC10
+    bl skill_findNodeById
     addi r31, r31, 0x1
     stw r3, 0x1500(r30)
     cmpwi r31, 0x3

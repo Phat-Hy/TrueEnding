@@ -43,7 +43,7 @@ extern void fn_800EC5BC(void);
 extern void fn_800EC654(void);
 extern void fn_800ED42C(void);
 extern void fn_800EDFE8(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void fn_8012044C(void);
 extern void fn_801206EC(void);
 extern void fn_80120700(void);
@@ -1987,8 +1987,8 @@ lbl_fn_803EF64C_000017B4:
     lwz r3, 0x14(r30)
     cmpwi r3, 0x0
     beq lbl_fn_803EF64C_000017D4
-    lis r4, fn_800EF73C@ha
-    addi r4, r4, fn_800EF73C@l
+    lis r4, cam_destroyMsgHandle@ha
+    addi r4, r4, cam_destroyMsgHandle@l
     bl __destroy_arr
 lbl_fn_803EF64C_000017D4:
     li r0, 0x0

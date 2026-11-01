@@ -15,7 +15,7 @@ extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void actor_spawnActorWithId(void);
 extern void fn_8012B028(void);
 extern void fn_80134800(void);
@@ -1934,11 +1934,11 @@ asm void fn_805128C4(void)
     addi r3, r3, lbl_80793320@l
     stw r3, 0x0(r30)
     li r0, 0x0
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     stw r0, 0xd4(r30)
     addi r3, r30, 0xd8
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r6, 0xc
     li r7, 0x8
     bl __construct_new_array

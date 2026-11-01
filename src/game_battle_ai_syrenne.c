@@ -19,7 +19,7 @@ extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
-extern void fn_800EF73C(void);
+extern void cam_destroyMsgHandle(void);
 extern void event_findEntryById(void);
 extern void fn_80216AFC(void);
 extern void fn_8021D720(void);
@@ -1704,11 +1704,11 @@ asm void fn_80435CE4(void)
     li r4, 0x9
     bl fn_8008A4E0
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     addi r3, r31, 0x308
     li r6, 0xc
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r7, 0x3
     bl __construct_new_array
     li r5, 0x1
@@ -1778,11 +1778,11 @@ asm void fn_80435DEC(void)
     li r4, 0x9
     bl fn_8008A4E0
     lis r4, res_MsgHandle_constructor@ha
-    lis r5, fn_800EF73C@ha
+    lis r5, cam_destroyMsgHandle@ha
     addi r3, r31, 0x308
     li r6, 0xc
     addi r4, r4, res_MsgHandle_constructor@l
-    addi r5, r5, fn_800EF73C@l
+    addi r5, r5, cam_destroyMsgHandle@l
     li r7, 0x3
     bl __construct_new_array
     li r5, 0x1
@@ -1865,9 +1865,9 @@ asm void fn_80435F58(void)
     li r6, 0x0
     bl res_findResourceSlot
 lbl_fn_80435F58_000019A0:
-    lis r4, fn_800EF73C@ha
+    lis r4, cam_destroyMsgHandle@ha
     addi r3, r30, 0x308
-    addi r4, r4, fn_800EF73C@l
+    addi r4, r4, cam_destroyMsgHandle@l
     li r5, 0xc
     li r6, 0x3
     bl __destroy_new_array

@@ -20,7 +20,7 @@ extern void fn_800E854C(void);
 extern void system_getNextSequenceId(void);
 extern void fn_8011F91C(void);
 extern void fn_8011F9CC(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_801255C8(void);
 extern void fn_80128930(void);
 extern void fn_80129978(void);
@@ -729,7 +729,7 @@ lbl_fn_80334FDC_000007D4:
     bl atoi
     mr r4, r3
     mr r3, r30
-    bl fn_8011FC10
+    bl skill_findNodeById
     stw r3, 0x1540(r29)
     b lbl_fn_80334FDC_00000970
 lbl_fn_80334FDC_0000080C:

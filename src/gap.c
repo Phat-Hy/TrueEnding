@@ -12,7 +12,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_80626C60(void);
+extern void scapi_getConfigItem(void);
 extern void scapi_cleanupContext(void);
 extern void fn_80627180(void);
 extern void fn_80627400(void);
@@ -1404,7 +1404,7 @@ asm void fn_8063C72C(void)
     stw r29, 0x14(r1)
     mr r29, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063C72C_00001124
     li r3, 0x0
@@ -1447,7 +1447,7 @@ asm void fn_8063C7D4(void)
     mflr r0
     li r3, 0x2
     stw r0, 0x14(r1)
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063C7D4_000011B4
     li r3, 0x0
@@ -1485,7 +1485,7 @@ asm void fn_8063C834(void)
     mr r30, r6
     mr r31, r7
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063C834_00001230
     li r3, 0x0
@@ -1541,7 +1541,7 @@ asm void fn_8063C8F4(void)
     mr r30, r7
     mr r31, r8
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063C8F4_000012F4
     li r3, 0x0
@@ -1600,7 +1600,7 @@ asm void fn_8063C9D4(void)
     stw r30, 0x8(r1)
     mr r30, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063C9D4_000013C4
     li r3, 0x0
@@ -1641,7 +1641,7 @@ asm void fn_8063CA5C(void)
     stw r30, 0x8(r1)
     mr r30, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063CA5C_0000144C
     li r3, 0x0
@@ -1740,7 +1740,7 @@ asm void fn_8063CBA4(void)
     mr r30, r3
     mr r31, r4
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063CBA4_00001594
     li r3, 0x0
@@ -1849,7 +1849,7 @@ asm void fn_8063CD44(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063CD44_0000172C
     li r3, 0x0
@@ -1900,7 +1900,7 @@ asm void fn_8063CDE4(void)
     stw r29, 0x14(r1)
     mr r29, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063CDE4_000017DC
     li r3, 0x0
@@ -2033,7 +2033,7 @@ asm void fn_8063CFC8(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063CFC8_000019B0
     li r3, 0x0
@@ -2082,7 +2082,7 @@ asm void fn_8063D068(void)
     stw r30, 0x8(r1)
     mr r30, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063D068_00001A58
     li r3, 0x0
@@ -2123,7 +2123,7 @@ asm void fn_8063D0F8(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063D0F8_00001AE0
     li r3, 0x0
@@ -2163,7 +2163,7 @@ asm void fn_8063D174(void)
     stw r30, 0x8(r1)
     mr r30, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063D174_00001B64
     li r3, 0x0
@@ -2209,7 +2209,7 @@ asm void fn_8063D200(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063D200_00001C00
     li r3, 0x0
@@ -2264,7 +2264,7 @@ asm void fn_8063D2D8(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063D2D8_00001CC0
     li r3, 0x0
@@ -2311,7 +2311,7 @@ asm void fn_8063D378(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063D378_00001D60
     li r3, 0x0
@@ -2349,7 +2349,7 @@ asm void fn_8063D3F4(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063D3F4_00001DDC
     li r3, 0x0
@@ -2387,7 +2387,7 @@ asm void fn_8063D470(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063D470_00001E58
     li r3, 0x0
@@ -2432,7 +2432,7 @@ asm void fn_8063D4EC(void)
     mr r30, r8
     mr r31, r9
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063D4EC_00001EF0
     li r3, 0x0
@@ -2593,7 +2593,7 @@ asm void fn_8063D730(void)
     mr r29, r4
     bne lbl_fn_8063D730_00002130
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063D730_00002130
     li r3, 0x0
@@ -2646,7 +2646,7 @@ asm void fn_8063D7E4(void)
     mr r31, r8
     bne lbl_fn_8063D7E4_000021E8
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063D7E4_000021E8
     li r3, 0x0
@@ -2699,7 +2699,7 @@ asm void fn_8063D8B0(void)
     mr r31, r4
     bne lbl_fn_8063D8B0_000022A0
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063D8B0_000022A0
     li r3, 0x0
@@ -2743,7 +2743,7 @@ asm void fn_8063D934(void)
     mr r29, r4
     bne lbl_fn_8063D934_00002334
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063D934_00002334
     li r3, 0x0
@@ -2791,7 +2791,7 @@ asm void fn_8063D9E8(void)
     mr r31, r4
     bne lbl_fn_8063D9E8_000023D8
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063D9E8_000023D8
     li r3, 0x0
@@ -2831,7 +2831,7 @@ asm void fn_8063DA6C(void)
     stw r30, 0x8(r1)
     mr r30, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063DA6C_0000245C
     li r3, 0x0
@@ -2882,7 +2882,7 @@ asm void fn_8063DB1C(void)
     stw r30, 0x8(r1)
     mr r30, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063DB1C_0000250C
     li r3, 0x0
@@ -2922,7 +2922,7 @@ asm void fn_8063DBB0(void)
     mflr r0
     li r3, 0x2
     stw r0, 0x14(r1)
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063DBB0_00002590
     li r3, 0x0
@@ -3078,7 +3078,7 @@ asm void fn_8063DDC8(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063DDC8_000027B0
     li r3, 0x0
@@ -3265,7 +3265,7 @@ asm void fn_8063E05C(void)
     stw r30, 0x8(r1)
     mr r30, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063E05C_00002A4C
     li r3, 0x0
@@ -3484,7 +3484,7 @@ asm void fn_8063E33C(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063E33C_00002D24
     li r3, 0x0
@@ -3520,7 +3520,7 @@ asm void fn_8063E3B0(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063E3B0_00002D98
     li r3, 0x0
@@ -3606,7 +3606,7 @@ asm void fn_8063E4AC(void)
     stw r28, 0x10(r1)
     mr r28, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063E4AC_00002EAC
     li r3, 0x0
@@ -3656,7 +3656,7 @@ asm void fn_8063E568(void)
     stw r30, 0x8(r1)
     mr r30, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063E568_00002F58
     li r3, 0x0
@@ -3731,7 +3731,7 @@ asm void fn_8063E66C(void)
     mflr r0
     li r3, 0x2
     stw r0, 0x14(r1)
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063E66C_0000304C
     li r3, 0x0
@@ -3762,7 +3762,7 @@ asm void fn_8063E6CC(void)
     mflr r0
     li r3, 0x2
     stw r0, 0x14(r1)
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063E6CC_000030AC
     li r3, 0x0
@@ -3807,7 +3807,7 @@ asm void fn_8063E750(void)
     mflr r0
     li r3, 0x2
     stw r0, 0x14(r1)
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063E750_00003130
     li r3, 0x0
@@ -3840,7 +3840,7 @@ asm void fn_8063E7B0(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063E7B0_00003198
     li r3, 0x0
@@ -3878,7 +3878,7 @@ asm void fn_8063E82C(void)
     stw r31, 0xc(r1)
     mr r31, r3
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063E82C_00003214
     li r3, 0x0
@@ -3939,7 +3939,7 @@ asm void fn_8063E8A4(void)
     stb r5, 0xf(r1)
     stb r4, 0x10(r1)
     stb r0, 0x11(r1)
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     bne lbl_fn_8063E8A4_000032EC
     li r3, 0x0

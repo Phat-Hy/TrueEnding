@@ -116,7 +116,7 @@ void fn_800EF3E8(void);
 void cam_initStickBindings(void);
 void camera_setMode(void);
 void fn_800EF6BC(void);
-void fn_800EF73C(void);
+void cam_destroyMsgHandle(void);
 
 asm void fn_800EDFE8(void)
 {
@@ -1868,7 +1868,7 @@ asm void fn_800EF6BC(void)
     blr
 }
 
-asm void fn_800EF73C(void)
+asm void cam_destroyMsgHandle(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1879,18 +1879,18 @@ asm void fn_800EF73C(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_800EF73C_0000179C
+    beq lbl_cam_destroyMsgHandle_0000179C
     bl res_MsgHandle_unload
     addic. r3, r30, 0x4
-    beq lbl_fn_800EF73C_0000178C
+    beq lbl_cam_destroyMsgHandle_0000178C
     li r4, 0x0
     bl atn_LoadHandle_destructor
-lbl_fn_800EF73C_0000178C:
+lbl_cam_destroyMsgHandle_0000178C:
     cmpwi r31, 0x0
-    ble lbl_fn_800EF73C_0000179C
+    ble lbl_cam_destroyMsgHandle_0000179C
     mr r3, r30
     bl dtor_80084684
-lbl_fn_800EF73C_0000179C:
+lbl_cam_destroyMsgHandle_0000179C:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

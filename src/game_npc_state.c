@@ -39,7 +39,7 @@ extern u32 lbl_80881A04;
 extern u32 lbl_80881A08;
 
 /* Function declarations */
-void fn_8013C38C(void);
+void npc_getPosition(void);
 void fn_8013C394(void);
 void fn_8013C3A8(void);
 void fn_8013C3B4(void);
@@ -67,7 +67,7 @@ void fn_8013C544(void);
 void fn_8013C554(void);
 void fn_8013C564(void);
 
-asm void fn_8013C38C(void)
+asm void npc_getPosition(void)
 {
     nofralloc
     addi r3, r3, 0x528

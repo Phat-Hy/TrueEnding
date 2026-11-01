@@ -32,7 +32,7 @@ void fn_804D807C(void);
 void fn_804D8100(void);
 void fn_804D8110(void);
 void fn_804D8118(void);
-void fn_804D818C(void);
+void net_voiceCodec_destroy(void);
 void fn_804D81CC(void);
 void fn_804D81D4(void);
 void fn_804D8248(void);
@@ -112,9 +112,9 @@ asm void fn_804D8118(void)
     lbz r0, lbl_8087F5F8
     extsb. r0, r0
     bne lbl_fn_804D8118_000000E8
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -133,7 +133,7 @@ lbl_fn_804D8118_000000E8:
     blr
 }
 
-asm void fn_804D818C(void)
+asm void net_voiceCodec_destroy(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -142,11 +142,11 @@ asm void fn_804D818C(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    beq lbl_fn_804D818C_00000138
+    beq lbl_net_voiceCodec_destroy_00000138
     cmpwi r4, 0x0
-    ble lbl_fn_804D818C_00000138
+    ble lbl_net_voiceCodec_destroy_00000138
     bl dtor_80084684
-lbl_fn_804D818C_00000138:
+lbl_net_voiceCodec_destroy_00000138:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -176,9 +176,9 @@ asm void fn_804D81D4(void)
     lbz r0, lbl_8087F5F8
     extsb. r0, r0
     bne lbl_fn_804D81D4_000001A4
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -232,9 +232,9 @@ lbl_fn_804D8250_00000220:
     sth r3, 0xa(r1)
     extsb. r0, r0
     bne lbl_fn_804D8250_00000250
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -790,9 +790,9 @@ lbl_fn_804D8914_0000094C:
     lbz r0, lbl_8087F5F8
     extsb. r0, r0
     bne lbl_fn_804D8914_000009F8
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -1075,9 +1075,9 @@ lbl_fn_804D8914_00000E0C:
     extsb. r0, r0
     sth r3, 0x12(r1)
     bne lbl_fn_804D8914_00000E48
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object
@@ -1130,9 +1130,9 @@ lbl_fn_804D8914_00000EDC:
     extsb. r0, r0
     sth r3, 0xa(r1)
     bne lbl_fn_804D8914_00000F18
-    lis r4, fn_804D818C@ha
+    lis r4, net_voiceCodec_destroy@ha
     lis r5, lbl_807C8AE8@ha
-    addi r4, r4, fn_804D818C@l
+    addi r4, r4, net_voiceCodec_destroy@l
     la r3, lbl_8087F5FC
     addi r5, r5, lbl_807C8AE8@l
     bl __register_global_object

@@ -11,7 +11,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_80626C60(void);
+extern void scapi_getConfigItem(void);
 extern void scapi_cleanupContext(void);
 extern void fn_80627180(void);
 extern void fn_806272C0(void);
@@ -1452,7 +1452,7 @@ lbl_fn_8063835C_00001134:
     bl bta_sys_logEvent
 lbl_fn_8063835C_0000115C:
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     beq lbl_fn_8063835C_000011F8
     mr r4, r29
@@ -1472,7 +1472,7 @@ lbl_fn_8063835C_0000117C:
     clrlwi. r0, r3, 24
     bne lbl_fn_8063835C_000011C8
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     beq lbl_fn_8063835C_000011F8
     mr r4, r29
@@ -4117,7 +4117,7 @@ lbl_fn_8063A778_000035A0:
     cmplwi r0, 0xc35
     beq lbl_fn_8063A778_00003630
     li r3, 0x2
-    bl fn_80626C60
+    bl scapi_getConfigItem
     cmpwi r3, 0x0
     mr r29, r3
     beq lbl_fn_8063A778_00003630

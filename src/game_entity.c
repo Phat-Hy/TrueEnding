@@ -143,7 +143,7 @@ void fn_8001BC38(void);
 void fn_8001BC80(void);
 void fn_8001BCB4(void);
 void fn_8001BD14(void);
-void fn_8001BE00(void);
+void entity_isActive(void);
 void fn_8001BE90(void);
 void fn_8001BEB0(void);
 void fn_8001BEE0(void);
@@ -873,47 +873,47 @@ lbl_fn_8001BD14_0000093C:
     blr
 }
 
-asm void fn_8001BE00(void)
+asm void entity_isActive(void)
 {
     nofralloc
     cmpwi r3, 0x0
     li r7, 0x0
-    beq lbl_fn_8001BE00_000009E4
+    beq lbl_entity_isActive_000009E4
     lwz r6, 0x38(r3)
     li r7, 0x0
     li r4, 0x0
     li r5, 0x0
     rlwinm r0, r6, 0, 29, 29
     cmplwi r0, 0x4
-    beq lbl_fn_8001BE00_00000994
+    beq lbl_entity_isActive_00000994
     clrlwi r0, r6, 31
     cmplwi r0, 0x1
-    beq lbl_fn_8001BE00_00000994
+    beq lbl_entity_isActive_00000994
     li r5, 0x1
-lbl_fn_8001BE00_00000994:
+lbl_entity_isActive_00000994:
     cmpwi r5, 0x0
-    beq lbl_fn_8001BE00_000009B0
+    beq lbl_entity_isActive_000009B0
     lwz r0, 0x7e0(r3)
     rlwinm r0, r0, 0, 26, 26
     cmplwi r0, 0x20
-    beq lbl_fn_8001BE00_000009B0
+    beq lbl_entity_isActive_000009B0
     li r4, 0x1
-lbl_fn_8001BE00_000009B0:
+lbl_entity_isActive_000009B0:
     cmpwi r4, 0x0
-    beq lbl_fn_8001BE00_000009E4
+    beq lbl_entity_isActive_000009E4
     lwz r0, 0x55c(r3)
     li r4, 0x0
     cmpwi r0, 0x6
-    bne lbl_fn_8001BE00_000009D8
+    bne lbl_entity_isActive_000009D8
     lwz r0, 0x560(r3)
     cmpwi r0, 0x1c
-    bne lbl_fn_8001BE00_000009D8
+    bne lbl_entity_isActive_000009D8
     li r4, 0x1
-lbl_fn_8001BE00_000009D8:
+lbl_entity_isActive_000009D8:
     cmpwi r4, 0x0
-    bne lbl_fn_8001BE00_000009E4
+    bne lbl_entity_isActive_000009E4
     li r7, 0x1
-lbl_fn_8001BE00_000009E4:
+lbl_entity_isActive_000009E4:
     mr r3, r7
     blr
 }

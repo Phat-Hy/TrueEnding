@@ -14,7 +14,7 @@ extern void ref_releaseHandle(void);
 extern void fn_801092C8(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_80161570(void);
 extern void fn_80161B70(void);
@@ -362,7 +362,7 @@ lbl_fn_803A6E24_00000304:
     b lbl_fn_803A6E24_00000358
 lbl_fn_803A6E24_0000033C:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r31, r3
     b lbl_fn_803A6E24_00000358
 lbl_fn_803A6E24_0000034C:
@@ -475,7 +475,7 @@ lbl_fn_803A6F90_00000478:
 lbl_fn_803A6F90_000004B4:
     lwz r3, lbl_8087F408
     mr r4, r0
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r5, r3
     b lbl_fn_803A6F90_000004D8
 lbl_fn_803A6F90_000004C8:
@@ -799,7 +799,7 @@ lbl_fn_803A7124_0000092C:
     cmpwi r3, 0x0
     beq lbl_fn_803A7124_00000948
     lwz r4, 0x8(r5)
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r30, r3
     b lbl_fn_803A7124_0000094C
 lbl_fn_803A7124_00000948:
@@ -1173,7 +1173,7 @@ lbl_fn_803A7954_00000E30:
 lbl_fn_803A7954_00000E6C:
     lwz r3, lbl_8087F408
     mr r4, r0
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r29, r3
     b lbl_fn_803A7954_00000E90
 lbl_fn_803A7954_00000E80:
@@ -1225,7 +1225,7 @@ lbl_fn_803A7954_00000EEC:
     b lbl_fn_803A7954_00000F40
 lbl_fn_803A7954_00000F24:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r28, r3
     b lbl_fn_803A7954_00000F40
 lbl_fn_803A7954_00000F34:
@@ -2010,7 +2010,7 @@ lbl_fn_803A8470_00001958:
 lbl_fn_803A8470_00001994:
     lwz r3, lbl_8087F408
     mr r4, r0
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r31, r3
     b lbl_fn_803A8470_000019B8
 lbl_fn_803A8470_000019A8:

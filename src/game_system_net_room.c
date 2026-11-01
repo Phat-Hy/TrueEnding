@@ -15,7 +15,7 @@ extern void fn_800FDE60(void);
 extern void fn_8011CD84(void);
 extern void fn_8011F8F4(void);
 extern void fn_8011F91C(void);
-extern void fn_8011FC10(void);
+extern void skill_findNodeById(void);
 extern void fn_8011FE3C(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
@@ -843,7 +843,7 @@ lbl_fn_803A0520_000009A4:
 lbl_fn_803A0520_000009E0:
     lwz r3, lbl_8087F408
     mr r4, r0
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r4, r3
     b lbl_fn_803A0520_00000A04
 lbl_fn_803A0520_000009F4:
@@ -932,7 +932,7 @@ lbl_fn_803A064C_00000ADC:
     b lbl_fn_803A064C_00000C1C
 lbl_fn_803A064C_00000B14:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r31, r3
     b lbl_fn_803A064C_00000C1C
 lbl_fn_803A064C_00000B24:
@@ -1119,7 +1119,7 @@ lbl_fn_803A08D4_00000D5C:
 lbl_fn_803A08D4_00000D98:
     lwz r3, lbl_8087F408
     mr r4, r0
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r29, r3
     b lbl_fn_803A08D4_00000DBC
 lbl_fn_803A08D4_00000DAC:
@@ -1171,7 +1171,7 @@ lbl_fn_803A08D4_00000E18:
     b lbl_fn_803A08D4_00000E6C
 lbl_fn_803A08D4_00000E50:
     lwz r3, lbl_8087F408
-    bl fn_8011FC10
+    bl skill_findNodeById
     mr r5, r3
     b lbl_fn_803A08D4_00000E6C
 lbl_fn_803A08D4_00000E60:
@@ -1818,7 +1818,7 @@ lbl_fn_803A11D8_000016D0:
     lis r4, 0x6
     lwz r3, lbl_8087F408
     addi r4, r4, 0x1a84
-    bl fn_8011FC10
+    bl skill_findNodeById
     cmpwi r3, 0x0
     beq lbl_fn_803A11D8_00001960
     lwz r4, lbl_8087F8A0

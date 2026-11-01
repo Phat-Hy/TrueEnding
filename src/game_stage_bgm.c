@@ -45,7 +45,7 @@ extern void fn_80139550(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A158(void);
 extern void fn_8013A194(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C480(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
@@ -1042,7 +1042,7 @@ lbl_fn_8019FEC4_00000BC4:
     mtctr r12
     bctrl
     lwz r3, 0x4(r28)
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0xb8
     bl vec3_assign
@@ -1100,7 +1100,7 @@ lbl_fn_8019FEC4_00000CEC:
     cmpwi r3, 0x0
     beq lbl_fn_8019FEC4_00000D50
     mr r3, r31
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x88
     addi r5, r1, 0xb8
@@ -1130,7 +1130,7 @@ lbl_fn_8019FEC4_00000D5C:
     cmpwi r30, 0x0
     beq lbl_fn_8019FEC4_00000E78
     mr r3, r30
-    bl fn_8013C38C
+    bl npc_getPosition
     mr r4, r3
     addi r3, r1, 0x7c
     addi r5, r1, 0xb8

@@ -16,7 +16,7 @@ extern void fn_800133B0(void);
 extern void vec3_add(void);
 extern void fn_80043D58(void);
 extern void collision_testLineSegment(void);
-extern void fn_80057A64(void);
+extern void mission_updateStub(void);
 extern void fn_80057A68(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
@@ -34,7 +34,7 @@ extern void fn_800EFE3C(void);
 extern void fn_800F52F0(void);
 extern void fn_800F72CC(void);
 extern void fn_800F7F90(void);
-extern void fn_800F7FA0(void);
+extern void viewport_getGlobalContext(void);
 extern void fn_800F80A8(void);
 extern void fn_801011B8(void);
 extern void fn_8010129C(void);
@@ -49,7 +49,7 @@ extern void fn_80139F24(void);
 extern void fn_80139F3C(void);
 extern void fn_8013A13C(void);
 extern void fn_8013A194(void);
-extern void fn_8013C38C(void);
+extern void npc_getPosition(void);
 extern void fn_8013C3A8(void);
 extern void fn_8013C554(void);
 extern void fn_801404F8(void);
@@ -521,22 +521,22 @@ asm void fn_803729B4(void)
     bl fn_80356FFC
     li r4, 0x0
     bl fn_8059C330
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x1
     bl atn_Task_setActive
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x1
     bl fn_80373084
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x0
     bl fn_8023A60C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x2
     bl fn_8023A60C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x3
     bl fn_8023A60C
-    bl fn_800F7FA0
+    bl viewport_getGlobalContext
     li r4, 0x5
     bl fn_8023A60C
     lis r4, 0x2
@@ -550,13 +550,13 @@ asm void fn_803729B4(void)
     b lbl_fn_803729B4_0000050C
 lbl_fn_803729B4_00000504:
     mr r3, r31
-    bl fn_8013C38C
+    bl npc_getPosition
 lbl_fn_803729B4_0000050C:
     mr r4, r3
     addi r3, r1, 0x80
     bl vec3_assign
     addi r3, r1, 0x74
-    bl fn_80057A64
+    bl mission_updateStub
     cmpwi r28, 0x0
     beq lbl_fn_803729B4_00000540
     lfs f1, lbl_8088570C
@@ -754,7 +754,7 @@ lbl_fn_803729B4_000007C8:
     li r4, 0x0
     bl fn_80139F3C
     addi r3, r1, 0x38
-    bl fn_80057A64
+    bl mission_updateStub
     cmpwi r27, 0x0
     bne lbl_fn_803729B4_00000828
     lfs f1, lbl_8088570C

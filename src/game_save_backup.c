@@ -23,7 +23,7 @@ extern void fn_801F9488(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void fn_801FED70(void);
-extern void fn_801FEDBC(void);
+extern void thread_findTaskById(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_801FEEFC(void);
 extern void wcslen(void);
@@ -1930,7 +1930,7 @@ lbl_fn_801F8E6C_0000199C:
     addi r3, r3, 0x58
     lwz r4, 0x4(r29)
     extsb r5, r5
-    bl fn_801FEDBC
+    bl thread_findTaskById
     b lbl_fn_801F8E6C_000019D0
 lbl_fn_801F8E6C_000019BC:
     lwz r3, 0x48(r31)
