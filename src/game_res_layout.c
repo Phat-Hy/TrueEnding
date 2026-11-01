@@ -11,7 +11,7 @@ extern void fn_800846FC(void);
 extern void fn_80084C24(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
-extern void fn_8022B850(void);
+extern void texCache_allocateSlot(void);
 extern void fn_8022C2A0(void);
 extern void fn_8022C9C8(void);
 extern void fn_80234A8C(void);
@@ -1722,7 +1722,7 @@ asm void fn_80239828(void)
     stw r7, 0xec(r29)
     stw r7, 0xf0(r29)
     stw r7, 0xf4(r29)
-    bl fn_8022B850
+    bl texCache_allocateSlot
     lwz r0, 0xdc(r29)
     stw r30, 0xd4(r29)
     cmplw r0, r30

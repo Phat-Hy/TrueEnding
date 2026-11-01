@@ -84,7 +84,7 @@ extern u32 lbl_8088167C;
 extern u32 lbl_80881680;
 
 /* Function declarations */
-void fn_8010ECF4(void);
+void rope_destructor(void);
 void fn_8010ED4C(void);
 void fn_8010EDFC(void);
 void fn_8010EE38(void);
@@ -103,7 +103,7 @@ void fn_8010F720(void);
 void fn_8010FF74(void);
 void fn_801100A0(void);
 
-asm void fn_8010ECF4(void)
+asm void rope_destructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -114,14 +114,14 @@ asm void fn_8010ECF4(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_8010ECF4_0000003C
+    beq lbl_rope_destructor_0000003C
     li r4, 0x0
     bl atn_Task_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_8010ECF4_0000003C
+    ble lbl_rope_destructor_0000003C
     mr r3, r30
     bl dtor_80084684
-lbl_fn_8010ECF4_0000003C:
+lbl_rope_destructor_0000003C:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

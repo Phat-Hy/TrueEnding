@@ -61,7 +61,7 @@ extern void GXSetTexCopyDst(void);
 extern void fn_80614E90(void);
 extern void fn_806150C0(void);
 extern void fn_80615190(void);
-extern void fn_80615210(void);
+extern void __GXSetSamplePattern(void);
 extern void fn_80615400(void);
 extern void GXCopyDisp(void);
 extern void GXCopyTex(void);
@@ -3032,7 +3032,7 @@ lbl_fn_800713D4_000026B4:
     addi r4, r30, 0x1a
     addi r6, r30, 0x32
     li r5, 0x0
-    bl fn_80615210
+    bl __GXSetSamplePattern
     li r3, 0x0
     bl fn_80615400
     lbz r0, 0x19(r30)
@@ -3328,7 +3328,7 @@ lbl_gx_syncFrameFifo_00002CD0:
     lwz r5, lbl_8087EFA8
     lwz r0, 0x3ac(r5)
     clrlwi r5, r0, 24
-    bl fn_80615210
+    bl __GXSetSamplePattern
     lwz r3, 0x78(r27)
     li r4, 0x1
     bl GXCopyDisp

@@ -20,7 +20,7 @@ extern void fn_800F8348(void);
 extern void fn_801EC158(void);
 extern void fn_801EC6C0(void);
 extern void fn_801ED910(void);
-extern void fn_801ED928(void);
+extern void net_player_interpolateState(void);
 extern void fn_801EDC78(void);
 extern void fn_801EEF04(void);
 extern void fn_801EF15C(void);
@@ -387,7 +387,7 @@ asm void player_syncTimersAndClock(void)
     addi r5, r1, 0x20
     addi r6, r1, 0x8
     addi r7, r1, 0x30
-    bl fn_801ED928
+    bl net_player_interpolateState
     addi r3, r1, 0x10
     addi r4, r1, 0x38
     bl fn_800D8BB4

@@ -13,7 +13,7 @@ extern void fn_80084C24(void);
 extern void fn_800DBF68(void);
 extern void fn_801EC158(void);
 extern void fn_801EC6C0(void);
-extern void fn_801ED928(void);
+extern void net_player_interpolateState(void);
 extern void fn_801EDC78(void);
 extern void fn_801F2398(void);
 extern void fn_801F3EF4(void);
@@ -743,7 +743,7 @@ asm void player_syncPositionAndMotion(void)
     stfs f0, 0x60(r1)
     stfs f0, 0x10(r1)
     stw r30, 0x14(r1)
-    bl fn_801ED928
+    bl net_player_interpolateState
     lfs f3, 0x34(r1)
     lfs f5, lbl_80882C10
     fcmpo cr0, f3, f5
@@ -1876,7 +1876,7 @@ asm void fn_801F0B5C(void)
     stfs f0, 0x48(r1)
     stfs f0, 0x8(r1)
     stw r29, 0xc(r1)
-    bl fn_801ED928
+    bl net_player_interpolateState
     lfs f2, 0x10(r1)
     lfs f0, lbl_80882C3C
     lfs f31, 0x38(r1)

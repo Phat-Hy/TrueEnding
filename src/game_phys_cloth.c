@@ -101,8 +101,8 @@ void fn_8010E604(void);
 void fn_8010E60C(void);
 void fn_8010E7B8(void);
 void fn_8010EB58(void);
-void fn_8010EBE0(void);
-void fn_8010ECBC(void);
+void cloth_updateSimulation(void);
+void cloth_unlinkTask(void);
 
 asm void fn_8010D770(void)
 {
@@ -1627,7 +1627,7 @@ lbl_fn_8010EB58_00001458:
     blr
 }
 
-asm void fn_8010EBE0(void)
+asm void cloth_updateSimulation(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1638,16 +1638,16 @@ asm void fn_8010EBE0(void)
     mr r30, r3
     lwz r0, 0x48(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8010EBE0_000014A0
+    beq lbl_cloth_updateSimulation_000014A0
     cmpwi r0, 0x1
-    beq lbl_fn_8010EBE0_0000150C
-    b lbl_fn_8010EBE0_00001524
-lbl_fn_8010EBE0_000014A0:
+    beq lbl_cloth_updateSimulation_0000150C
+    b lbl_cloth_updateSimulation_00001524
+lbl_cloth_updateSimulation_000014A0:
     lwz r3, lbl_8087F518
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    bne lbl_fn_8010EBE0_00001524
+    bne lbl_cloth_updateSimulation_00001524
     bl fn_8046EC7C
     lis r4, lbl_80736614@ha
     lwz r3, lbl_8087EE90
@@ -1660,9 +1660,9 @@ lbl_fn_8010EBE0_000014A0:
     stw r3, 0x2a10(r4)
     lwz r3, lbl_8087F9C0
     cmpwi r3, 0x0
-    beq lbl_fn_8010EBE0_000014EC
+    beq lbl_cloth_updateSimulation_000014EC
     bl fn_8057F0FC
-lbl_fn_8010EBE0_000014EC:
+lbl_cloth_updateSimulation_000014EC:
     bl fn_802144A8
     lwz r31, lbl_8087EE90
     bl fn_803CE148
@@ -1671,14 +1671,14 @@ lbl_fn_8010EBE0_000014EC:
     bl fn_80047B54
     li r0, 0x1
     stw r0, 0x48(r30)
-lbl_fn_8010EBE0_0000150C:
+lbl_cloth_updateSimulation_0000150C:
     lwz r3, lbl_8087F518
     bl fn_8046ECC8
     cmpwi r3, 0x0
-    bne lbl_fn_8010EBE0_00001524
+    bne lbl_cloth_updateSimulation_00001524
     li r0, 0x3
     stw r0, 0x48(r30)
-lbl_fn_8010EBE0_00001524:
+lbl_cloth_updateSimulation_00001524:
     lwz r3, 0x48(r30)
     lwz r31, 0xc(r1)
     subi r0, r3, 0x3
@@ -1691,7 +1691,7 @@ lbl_fn_8010EBE0_00001524:
     blr
 }
 
-asm void fn_8010ECBC(void)
+asm void cloth_unlinkTask(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

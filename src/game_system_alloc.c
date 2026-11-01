@@ -13,7 +13,7 @@ extern void fn_8005FD80(void);
 extern void fn_800602E8(void);
 extern void fn_800607C0(void);
 extern void atn_LH_Texture_update(void);
-extern void fn_801ED928(void);
+extern void net_player_interpolateState(void);
 extern void fn_801EDC78(void);
 extern void fn_801F9E70(void);
 extern void fn_80695D84(void);
@@ -71,7 +71,7 @@ lbl_player_updateEquipment_00000054:
     stfs f0, 0x98(r1)
     stfs f0, 0x28(r1)
     stw r0, 0x2c(r1)
-    bl fn_801ED928
+    bl net_player_interpolateState
     mr r3, r31
     addi r4, r1, 0x50
     addi r5, r1, 0x40

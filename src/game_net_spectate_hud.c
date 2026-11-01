@@ -8,7 +8,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_800081C0(void);
+extern void entry_callCtors(void);
 extern void fn_80010374(void);
 extern void fn_80011964(void);
 extern void fn_80012A1C(void);
@@ -1319,7 +1319,7 @@ asm void fn_805391E8(void)
     stw r30, 0x8(r1)
     mr r30, r3
     lwz r3, 0xc(r3)
-    bl fn_800081C0
+    bl entry_callCtors
     lwz r0, 0x14(r3)
     li r8, 0x0
     lwz r5, 0x18(r3)

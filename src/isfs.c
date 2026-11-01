@@ -18,7 +18,7 @@ extern void fn_8061CC60(void);
 extern void fn_8061CD70(void);
 extern void fn_8061CE50(void);
 extern void fn_8061D080(void);
-extern void fn_8061D2F0(void);
+extern void IOS_IoctlvAsync(void);
 extern void iosAllocAligned(void);
 extern void iosCreateHeap(void);
 extern void iosFree(void*, void*);
@@ -591,7 +591,7 @@ lbl_fn_8061ABE0_00000724:
     mr r9, r30
     addi r8, r8, _isfsFuncCb@l
     li r4, 0x4
-    bl fn_8061D2F0
+    bl IOS_IoctlvAsync
 lbl_fn_8061ABE0_00000740:
     addi r11, r1, 0x30
     bl _restgpr_25
@@ -1129,7 +1129,7 @@ lbl_ISFS_GetUsageAsync_00000E5C:
     stw r0, 0x10(r29)
     stw r31, 0x14(r29)
     lwz r3, __fsFd_8087E8C0
-    bl fn_8061D2F0
+    bl IOS_IoctlvAsync
 lbl_ISFS_GetUsageAsync_00000EDC:
     addi r11, r1, 0x30
     bl _restgpr_25

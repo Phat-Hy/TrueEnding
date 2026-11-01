@@ -14,7 +14,7 @@ extern void fn_800827E0(void);
 extern void fn_800838B8(void);
 extern void fn_80083AD4(void);
 extern void fn_80084320(void);
-extern void fn_800A500C(void* res, void* font, u32 mode);
+extern void msg_formatTextWithAlignment(void* res, void* font, u32 mode);
 extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
@@ -34,7 +34,7 @@ extern void fn_8061EC60(void);
 extern void fn_8061EF10(void);
 extern void fn_8061EF90(void);
 extern void fn_8061F460(void);
-extern void* fn_8061F470(const char* str);
+extern void* msg_getStringPointer(const char* str);
 extern void fn_8061F9F0(void);
 extern void fn_8061FBE0(void);
 extern void fn_80620220(void);
@@ -133,37 +133,37 @@ asm void fn_800A291C(void)
 
 void font_drawTextCenter(void* font, const char* str)
 {
-    fn_800A500C(fn_8061F470(str), font, 3);
+    msg_formatTextWithAlignment(msg_getStringPointer(str), font, 3);
 }
 
 void font_drawTextLeft(void* font, const char* str)
 {
-    fn_800A500C(fn_8061F470(str), font, 5);
+    msg_formatTextWithAlignment(msg_getStringPointer(str), font, 5);
 }
 
 void font_drawTextRight(void* font, const char* str)
 {
-    fn_800A500C(fn_8061F470(str), font, 7);
+    msg_formatTextWithAlignment(msg_getStringPointer(str), font, 7);
 }
 
 void fn_800A2A2C(void* font, const char* str)
 {
-    fn_800A500C(fn_8061F470(str), font, 9);
+    msg_formatTextWithAlignment(msg_getStringPointer(str), font, 9);
 }
 
 void fn_800A2A68(void* font, const char* str)
 {
-    fn_800A500C(fn_8061F470(str), font, 0xd);
+    msg_formatTextWithAlignment(msg_getStringPointer(str), font, 0xd);
 }
 
 void fn_800A2AA4(void* font, const char* str)
 {
-    fn_800A500C(fn_8061F470(str), font, 0xf);
+    msg_formatTextWithAlignment(msg_getStringPointer(str), font, 0xf);
 }
 
 void fn_800A2AE0(void* font, const char* str)
 {
-    fn_800A500C(fn_8061F470(str), font, 0x11);
+    msg_formatTextWithAlignment(msg_getStringPointer(str), font, 0x11);
 }
 
 asm void fn_800A2B1C(void)
@@ -175,10 +175,10 @@ asm void fn_800A2B1C(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_8061F470
+    bl msg_getStringPointer
     mr r4, r31
     li r5, 0x13
-    bl fn_800A500C
+    bl msg_formatTextWithAlignment
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -195,10 +195,10 @@ asm void fn_800A2B58(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_8061F470
+    bl msg_getStringPointer
     mr r4, r31
     li r5, 0xb
-    bl fn_800A500C
+    bl msg_formatTextWithAlignment
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -215,10 +215,10 @@ asm void fn_800A2B94(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_8061F470
+    bl msg_getStringPointer
     mr r4, r31
     li r5, 0x15
-    bl fn_800A500C
+    bl msg_formatTextWithAlignment
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -235,10 +235,10 @@ asm void fn_800A2BD0(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_8061F470
+    bl msg_getStringPointer
     mr r4, r31
     li r5, 0x17
-    bl fn_800A500C
+    bl msg_formatTextWithAlignment
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -255,10 +255,10 @@ asm void fn_800A2C0C(void)
     stw r31, 0xc(r1)
     mr r31, r3
     mr r3, r4
-    bl fn_8061F470
+    bl msg_getStringPointer
     mr r4, r31
     li r5, 0x19
-    bl fn_800A500C
+    bl msg_formatTextWithAlignment
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

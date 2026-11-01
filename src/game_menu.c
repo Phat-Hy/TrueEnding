@@ -189,7 +189,7 @@ void fn_80042ECC(void);
 void fn_80042EDC(void);
 void fn_80042EEC(void);
 void fn_80043014(void);
-void fn_80043128(void);
+void menu_dummyCallback(void);
 void fn_8004312C(void);
 void fn_80043130(void);
 void fn_8004318C(void);
@@ -1981,7 +1981,7 @@ lbl_fn_80043014_000016C4:
     blr
 }
 
-asm void fn_80043128(void)
+asm void menu_dummyCallback(void)
 {
     nofralloc
     blr

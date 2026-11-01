@@ -19,7 +19,7 @@ void fn_80614E60(void);
 void fn_80614E90(void);
 void fn_806150C0(void);
 void fn_80615190(void);
-void fn_80615210(void);
+void __GXSetSamplePattern(void);
 void fn_80615400(void);
 void GXCopyDisp(void);
 void GXCopyTex(void);
@@ -439,11 +439,11 @@ asm void fn_80615190(void)
     blr
 }
 
-asm void fn_80615210(void)
+asm void __GXSetSamplePattern(void)
 {
     nofralloc
     cmpwi r3, 0x0
-    beq lbl_fn_80615210_0000068C
+    beq lbl___GXSetSamplePattern_0000068C
     lbz r8, 0x0(r4)
     li r0, 0x0
     lbz r10, 0x1(r4)
@@ -504,8 +504,8 @@ asm void fn_80615210(void)
     rlwimi r3, r10, 24, 0, 7
     rlwimi r7, r9, 24, 0, 7
     rlwimi r8, r4, 24, 0, 7
-    b lbl_fn_80615210_000006AC
-lbl_fn_80615210_0000068C:
+    b lbl___GXSetSamplePattern_000006AC
+lbl___GXSetSamplePattern_0000068C:
     lis r8, 0x166
     lis r3, 0x266
     lis r7, 0x366
@@ -514,7 +514,7 @@ lbl_fn_80615210_0000068C:
     addi r3, r3, 0x6666
     addi r7, r7, 0x6666
     addi r8, r4, 0x6666
-lbl_fn_80615210_000006AC:
+lbl___GXSetSamplePattern_000006AC:
     lis r9, 0xcc01
     li r10, 0x61
     stb r10, -0x8000(r9)
@@ -532,7 +532,7 @@ lbl_fn_80615210_000006AC:
     stw r7, -0x8000(r9)
     stb r10, -0x8000(r9)
     stw r8, -0x8000(r9)
-    beq lbl_fn_80615210_00000730
+    beq lbl___GXSetSamplePattern_00000730
     lbz r4, 0x0(r6)
     lbz r0, 0x4(r6)
     rlwimi r11, r4, 0, 26, 31
@@ -547,8 +547,8 @@ lbl_fn_80615210_000006AC:
     rlwimi r12, r3, 6, 20, 25
     rlwimi r11, r4, 18, 8, 13
     rlwimi r12, r0, 12, 14, 19
-    b lbl_fn_80615210_0000074C
-lbl_fn_80615210_00000730:
+    b lbl___GXSetSamplePattern_0000074C
+lbl___GXSetSamplePattern_00000730:
     li r3, 0x15
     clrrwi r11, r11, 12
     rlwimi r12, r3, 0, 26, 31
@@ -556,7 +556,7 @@ lbl_fn_80615210_00000730:
     rlwimi r11, r3, 12, 14, 19
     rlwimi r11, r0, 18, 8, 13
     rlwinm r12, r12, 0, 26, 13
-lbl_fn_80615210_0000074C:
+lbl___GXSetSamplePattern_0000074C:
     lis r4, 0xcc01
     li r5, 0x61
     stb r5, -0x8000(r4)

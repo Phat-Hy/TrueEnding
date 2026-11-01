@@ -11,7 +11,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
-extern void fn_801ED928(void);
+extern void net_player_interpolateState(void);
 extern void fn_801EEF74(void);
 extern void fn_801EF9B4(void);
 extern void fn_801EFA78(void);
@@ -1028,7 +1028,7 @@ asm void saveSlot_readSummary(void)
     addi r6, r1, 0x8
     stw r0, 0xc(r1)
     addi r7, r1, 0x20
-    bl fn_801ED928
+    bl net_player_interpolateState
 lbl_saveSlot_readSummary_00000CC4:
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
@@ -1065,7 +1065,7 @@ asm void fn_801F4F08(void)
     addi r6, r1, 0x8
     stw r0, 0xc(r1)
     addi r7, r1, 0x10
-    bl fn_801ED928
+    bl net_player_interpolateState
 lbl_fn_801F4F08_00000D40:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)
@@ -1096,7 +1096,7 @@ asm void fn_801F4F84(void)
     mr r5, r29
     mr r6, r30
     mr r7, r31
-    bl fn_801ED928
+    bl net_player_interpolateState
 lbl_fn_801F4F84_00000DA4:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

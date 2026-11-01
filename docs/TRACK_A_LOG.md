@@ -979,3 +979,35 @@ void clock_dummyCallback(void)
 }
 `
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+
+## Session 2026-11-01 - Batch 18: High-yield queue naming (26k+ probe hits)
+Subject:  track-a: Batch 18 - name 19 high-yield queue routines (covers 26k+ probe hits) progress 99.30% -> 99.30%
+Scope:    Rename 19 top-ranking routines hit by Track B instruments across 33 files in src/.
+Checklist:
+  1. symbols.txt: Renamed 19 functions in place.
+  2. All src/ references updated across 33 files.
+  3. Local labels lbl_fn_* -> lbl_<newName>_* normalized.
+  4. External prototypes swept across all translation units.
+  5. report.json clean, ninja passed (orig/main.dol: OK).
+Self-check: git diff -U0 -- src/ for 'asm void': -19 / +19 (balanced).
+Names applied:
+  - hud_projectWorldPoints (fn_8009F444, 4 B, 4,005 probe hits)
+  - arms_calcWeaponHitbox (fn_805A6614, 1,136 B, 3,026 probe hits)
+  - net_player_interpolateState (fn_801ED928, 844 B, 2,278 probe hits)
+  - __GXSetSamplePattern (fn_80615210, 484 B, 2,068 probe hits)
+  - msg_formatTextWithAlignment (fn_800A500C, 524 B, 1,930 probe hits)
+  - nandCheckCallback (fn_80620790, 152 B, 1,610 probe hits)
+  - texCache_allocateSlot (fn_8022B850, 1,380 B, 1,388 probe hits)
+  - cloth_updateSimulation (fn_8010EBE0, 220 B, 1,149 probe hits)
+  - rope_destructor (fn_8010ECF4, 88 B, 1,143 probe hits)
+  - cloth_unlinkTask (fn_8010ECBC, 56 B, 1,143 probe hits)
+  - menu_dummyCallback (fn_80043128, 4 B, 1,143 probe hits)
+  - GXSaveCPUFifo (fn_80612950, 256 B, 1,070 probe hits)
+  - msg_getStringPointer (fn_8061F470, 8 B, 963 probe hits)
+  - entry_callCtors (fn_800081C0, 80 B, 781 probe hits)
+  - tex_initDescriptor (fn_8022BE1C, 112 B, 694 probe hits)
+  - tex_initDefaultTransform (fn_8022BE8C, 32 B, 694 probe hits)
+  - IOS_IoctlvAsync (fn_8061D2F0, 228 B, 633 probe hits)
+  - iosAlloc (fn_8061D920, 508 B, 624 probe hits)
+  - hud_updateTargetReticle (fn_8009E6EC, 1,076 B, 524 probe hits)
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.

@@ -24,7 +24,7 @@ extern void fn_800971D4(void);
 extern void fn_80097D7C(void);
 extern void fn_8009E5A0(void);
 extern void fn_8009E690(void);
-extern void fn_8009E6EC(void);
+extern void hud_updateTargetReticle(void);
 extern void fn_8009EE30(void);
 extern void fn_8009F788(void);
 extern void fn_8009FFCC(void);
@@ -1743,7 +1743,7 @@ asm void fn_80415910(void)
     stw r0, 0x158(r3)
     li r4, 0x1
     addi r3, r3, 0xf4
-    b fn_8009E6EC
+    b hud_updateTargetReticle
     blr
 }
 

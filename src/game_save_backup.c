@@ -12,7 +12,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800DBF68(void);
 extern void fn_800DC6B4(void);
 extern void fn_800DD3FC(void);
-extern void fn_801ED928(void);
+extern void net_player_interpolateState(void);
 extern void fn_801EFA78(void);
 extern void fn_801F3FF8(void);
 extern void fn_801F45F4(void);
@@ -1451,7 +1451,7 @@ lbl_fn_801F8830_00001328:
     addi r6, r1, 0x8
     stw r0, 0xc(r1)
     addi r7, r1, 0x20
-    bl fn_801ED928
+    bl net_player_interpolateState
 lbl_fn_801F8830_00001368:
     lwz r0, 0x54(r1)
     lwz r31, 0x4c(r1)

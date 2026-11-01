@@ -18,7 +18,7 @@ extern void fn_80084320(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
 extern void fn_8009E5A0(void);
-extern void fn_8009E6EC(void);
+extern void hud_updateTargetReticle(void);
 extern void fn_8009EB20(void);
 extern void fn_8009EE30(void);
 extern void fn_8009F788(void);
@@ -325,7 +325,7 @@ asm void fn_804006E0(void)
     cmpwi r0, 0x0
     beqlr
     li r4, 0x0
-    b fn_8009E6EC
+    b hud_updateTargetReticle
     blr
 }
 
@@ -763,7 +763,7 @@ lbl_fn_80400C74_000008C4:
     beq lbl_fn_80400C74_000008F4
     stw r30, 0x64(r3)
     li r4, 0x1
-    bl fn_8009E6EC
+    bl hud_updateTargetReticle
 lbl_fn_80400C74_000008F4:
     addi r29, r29, 0x1
     addi r31, r31, 0x30

@@ -35,7 +35,7 @@ void GXInitFifoBase(void);
 void fn_806123E0(void);
 void GXSetCPUFifo(void);
 void GXSetGPFifo(void);
-void fn_80612950(void);
+void GXSaveCPUFifo(void);
 void fn_80612A50(void);
 void GXGetFifoStatus(void);
 void GXGetFifoCount(void);
@@ -467,7 +467,7 @@ lbl_GXSetGPFifo_000005E8:
     blr
 }
 
-asm void fn_80612950(void)
+asm void GXSaveCPUFifo(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -476,7 +476,7 @@ asm void fn_80612950(void)
     bl OSDisableInterrupts
     lbz r6, lbl_80880080
     cmpwi r6, 0x0
-    beq lbl_fn_80612950_00000640
+    beq lbl_GXSaveCPUFifo_00000640
     lwz r5, __piReg
     lis r4, lbl_807E75E4@ha
     addi r4, r4, lbl_807E75E4@l
@@ -486,10 +486,10 @@ asm void fn_80612950(void)
     addis r5, r5, 0x8000
     stw r5, 0x18(r4)
     stb r0, 0x20(r4)
-lbl_fn_80612950_00000640:
+lbl_GXSaveCPUFifo_00000640:
     lbz r0, lbl_80880081
     cmpwi r0, 0x0
-    beq lbl_fn_80612950_0000067C
+    beq lbl_GXSaveCPUFifo_0000067C
     lwz r7, __cpReg
     lis r4, lbl_807E75C0@ha
     addi r4, r4, lbl_807E75C0@l
@@ -502,10 +502,10 @@ lbl_fn_80612950_00000640:
     lhz r5, 0x30(r7)
     rlwimi r5, r0, 16, 0, 15
     stw r5, 0x1c(r4)
-lbl_fn_80612950_0000067C:
+lbl_GXSaveCPUFifo_0000067C:
     lbz r0, lbl_80880098
     cmpwi r0, 0x0
-    beq lbl_fn_80612950_000006BC
+    beq lbl_GXSaveCPUFifo_000006BC
     lis r8, lbl_807E75C0@ha
     lis r6, lbl_807E75E4@ha
     addi r8, r8, lbl_807E75C0@l
@@ -518,21 +518,21 @@ lbl_fn_80612950_0000067C:
     stw r5, 0x1c(r6)
     stw r4, 0x18(r8)
     stb r0, 0x20(r8)
-    b lbl_fn_80612950_000006EC
-lbl_fn_80612950_000006BC:
+    b lbl_GXSaveCPUFifo_000006EC
+lbl_GXSaveCPUFifo_000006BC:
     cmpwi r6, 0x0
-    beq lbl_fn_80612950_000006EC
+    beq lbl_GXSaveCPUFifo_000006EC
     lis r5, lbl_807E75E4@ha
     addi r5, r5, lbl_807E75E4@l
     lwz r4, 0x14(r5)
     lwz r0, 0x18(r5)
     subf. r4, r4, r0
     stw r4, 0x1c(r5)
-    bge lbl_fn_80612950_000006EC
+    bge lbl_GXSaveCPUFifo_000006EC
     lwz r0, 0x8(r5)
     add r0, r4, r0
     stw r0, 0x1c(r5)
-lbl_fn_80612950_000006EC:
+lbl_GXSaveCPUFifo_000006EC:
     bl OSRestoreInterrupts
     lwz r0, 0x14(r1)
     mtlr r0
@@ -561,7 +561,7 @@ asm void GXGetFifoStatus(void)
     li r3, 0x0
     b lbl_GXGetFifoStatus_0000078C
 lbl_GXGetFifoStatus_00000738:
-    bl fn_80612950
+    bl GXSaveCPUFifo
     lis r5, lbl_807E75E4@ha
     lwzu r4, lbl_807E75E4@l(r5)
     li r3, 0x1

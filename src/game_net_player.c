@@ -39,7 +39,7 @@ extern u32 lbl_80882C08;
 /* Function declarations */
 void net_playerDummyCallback(void);
 void fn_801ED910(void);
-void fn_801ED928(void);
+void net_player_interpolateState(void);
 void fn_801EDC74(void);
 void fn_801EDC78(void);
 void fn_801EDCB8(void);
@@ -67,7 +67,7 @@ asm void fn_801ED910(void)
     blr
 }
 
-asm void fn_801ED928(void)
+asm void net_player_interpolateState(void)
 {
     nofralloc
     stwu r1, -0xa0(r1)
@@ -126,12 +126,12 @@ asm void fn_801ED928(void)
     stfs f0, 0x4(r7)
     lwz r3, 0x100(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_801ED928_000001CC
+    beq lbl_net_player_interpolateState_000001CC
     addi r4, r1, 0x48
     addi r5, r1, 0x20
     addi r6, r1, 0x8
     addi r7, r1, 0x30
-    bl fn_801ED928
+    bl net_player_interpolateState
     lfs f1, 0x0(r29)
     addi r3, r1, 0x60
     lfs f0, 0x50(r1)
@@ -178,117 +178,117 @@ asm void fn_801ED928(void)
     lfs f0, 0x4c(r1)
     fadds f0, f1, f0
     stfs f0, 0x4(r29)
-lbl_fn_801ED928_000001CC:
+lbl_net_player_interpolateState_000001CC:
     lwz r3, 0x104(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_801ED928_000001E4
+    beq lbl_net_player_interpolateState_000001E4
     lfs f1, 0x0(r29)
     bl fn_800A6BD4
     stfs f1, 0x0(r29)
-lbl_fn_801ED928_000001E4:
+lbl_net_player_interpolateState_000001E4:
     lwz r3, 0x108(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_801ED928_000001FC
+    beq lbl_net_player_interpolateState_000001FC
     lfs f1, 0x4(r29)
     bl fn_800A6BD4
     stfs f1, 0x4(r29)
-lbl_fn_801ED928_000001FC:
+lbl_net_player_interpolateState_000001FC:
     lwz r3, 0x10c(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_801ED928_00000214
+    beq lbl_net_player_interpolateState_00000214
     lfs f1, 0x8(r29)
     bl fn_800A6BD4
     stfs f1, 0x8(r29)
-lbl_fn_801ED928_00000214:
+lbl_net_player_interpolateState_00000214:
     lwz r3, 0x110(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_801ED928_0000022C
+    beq lbl_net_player_interpolateState_0000022C
     lfs f1, 0xc(r29)
     bl fn_800A6BD4
     stfs f1, 0xc(r29)
-lbl_fn_801ED928_0000022C:
+lbl_net_player_interpolateState_0000022C:
     lwz r3, 0x114(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_801ED928_00000244
+    beq lbl_net_player_interpolateState_00000244
     lfs f1, 0x10(r29)
     bl fn_800A6BD4
     stfs f1, 0x10(r29)
-lbl_fn_801ED928_00000244:
+lbl_net_player_interpolateState_00000244:
     lwz r3, 0x118(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_801ED928_00000268
+    beq lbl_net_player_interpolateState_00000268
     lfs f1, 0xc(r30)
     bl fn_800A6BD4
     lfs f0, lbl_80882BF0
     fdivs f0, f1, f0
     stfs f0, 0xc(r30)
-    b lbl_fn_801ED928_00000278
-lbl_fn_801ED928_00000268:
+    b lbl_net_player_interpolateState_00000278
+lbl_net_player_interpolateState_00000268:
     lfs f1, 0xc(r30)
     lfs f0, lbl_80882BF0
     fdivs f0, f1, f0
     stfs f0, 0xc(r30)
-lbl_fn_801ED928_00000278:
+lbl_net_player_interpolateState_00000278:
     lwz r3, 0x11c(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_801ED928_0000029C
+    beq lbl_net_player_interpolateState_0000029C
     lfs f1, 0x0(r30)
     bl fn_800A6BD4
     lfs f0, lbl_80882BF0
     fdivs f0, f1, f0
     stfs f0, 0x0(r30)
-    b lbl_fn_801ED928_000002AC
-lbl_fn_801ED928_0000029C:
+    b lbl_net_player_interpolateState_000002AC
+lbl_net_player_interpolateState_0000029C:
     lfs f1, 0x0(r30)
     lfs f0, lbl_80882BF0
     fdivs f0, f1, f0
     stfs f0, 0x0(r30)
-lbl_fn_801ED928_000002AC:
+lbl_net_player_interpolateState_000002AC:
     lwz r3, 0x120(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_801ED928_000002D0
+    beq lbl_net_player_interpolateState_000002D0
     lfs f1, 0x4(r30)
     bl fn_800A6BD4
     lfs f0, lbl_80882BF0
     fdivs f0, f1, f0
     stfs f0, 0x4(r30)
-    b lbl_fn_801ED928_000002E0
-lbl_fn_801ED928_000002D0:
+    b lbl_net_player_interpolateState_000002E0
+lbl_net_player_interpolateState_000002D0:
     lfs f1, 0x4(r30)
     lfs f0, lbl_80882BF0
     fdivs f0, f1, f0
     stfs f0, 0x4(r30)
-lbl_fn_801ED928_000002E0:
+lbl_net_player_interpolateState_000002E0:
     lwz r3, 0x124(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_801ED928_00000304
+    beq lbl_net_player_interpolateState_00000304
     lfs f1, 0x8(r30)
     bl fn_800A6BD4
     lfs f0, lbl_80882BF0
     fdivs f0, f1, f0
     stfs f0, 0x8(r30)
-    b lbl_fn_801ED928_00000314
-lbl_fn_801ED928_00000304:
+    b lbl_net_player_interpolateState_00000314
+lbl_net_player_interpolateState_00000304:
     lfs f1, 0x8(r30)
     lfs f0, lbl_80882BF0
     fdivs f0, f1, f0
     stfs f0, 0x8(r30)
-lbl_fn_801ED928_00000314:
+lbl_net_player_interpolateState_00000314:
     lwz r3, 0x128(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_801ED928_0000032C
+    beq lbl_net_player_interpolateState_0000032C
     lfs f1, 0x0(r31)
     bl fn_800A6BD4
     stfs f1, 0x0(r31)
-lbl_fn_801ED928_0000032C:
+lbl_net_player_interpolateState_0000032C:
     lwz r0, 0x100(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_801ED928_00000348
+    beq lbl_net_player_interpolateState_00000348
     lfs f1, 0x10(r29)
     lfs f0, 0x58(r1)
     fadds f0, f1, f0
     stfs f0, 0x10(r29)
-lbl_fn_801ED928_00000348:
+lbl_net_player_interpolateState_00000348:
     lwz r0, 0xa4(r1)
     lwz r31, 0x9c(r1)
     lwz r30, 0x98(r1)

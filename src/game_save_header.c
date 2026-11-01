@@ -30,7 +30,7 @@ extern void fn_800E0908(void);
 extern void fn_801EC158(void);
 extern void fn_801EC6C0(void);
 extern void fn_801EC784(void);
-extern void fn_801ED928(void);
+extern void net_player_interpolateState(void);
 extern void fn_801EDC78(void);
 extern void fn_801EEE54(void);
 extern void fn_801F04FC(void);
@@ -365,7 +365,7 @@ asm void save_updateHeader(void)
     stfs f0, 0xa0(r1)
     stfs f0, 0x10(r1)
     stw r0, 0x14(r1)
-    bl fn_801ED928
+    bl net_player_interpolateState
     lfs f1, 0x94(r1)
     lfs f0, lbl_80882C60
     fcmpo cr0, f1, f0

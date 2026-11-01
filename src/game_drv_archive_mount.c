@@ -144,7 +144,7 @@ extern u32 lbl_80888328;
 /* Function declarations */
 void arms_attachWeapon(void);
 void arms_updateWeaponState(void);
-void fn_805A6614(void);
+void arms_calcWeaponHitbox(void);
 void fn_805A6A84(void);
 void fn_805A6AC0(void);
 void fn_805A6B18(void);
@@ -316,7 +316,7 @@ lbl_arms_updateWeaponState_000001F8:
     blr
 }
 
-asm void fn_805A6614(void)
+asm void arms_calcWeaponHitbox(void)
 {
     nofralloc
     stwu r1, -0xc0(r1)
@@ -361,13 +361,13 @@ asm void fn_805A6614(void)
     clrlwi r0, r0, 31
     xor r0, r0, r4
     subf r31, r4, r0
-    ble lbl_fn_805A6614_00000324
+    ble lbl_arms_calcWeaponHitbox_00000324
     cmpwi r6, 0x1
-    beq lbl_fn_805A6614_000002D0
+    beq lbl_arms_calcWeaponHitbox_000002D0
     cmpwi r6, 0x2
-    beq lbl_fn_805A6614_000002F8
-    b lbl_fn_805A6614_00000508
-lbl_fn_805A6614_000002D0:
+    beq lbl_arms_calcWeaponHitbox_000002F8
+    b lbl_arms_calcWeaponHitbox_00000508
+lbl_arms_calcWeaponHitbox_000002D0:
     lwz r0, 0x4c(r3)
     lis r3, lbl_807637E0@ha
     lfd f2, lbl_807637E0@l(r3)
@@ -377,8 +377,8 @@ lbl_fn_805A6614_000002D0:
     lfd f1, 0x18(r1)
     fsubs f1, f1, f2
     fdivs f31, f1, f0
-    b lbl_fn_805A6614_00000508
-lbl_fn_805A6614_000002F8:
+    b lbl_arms_calcWeaponHitbox_00000508
+lbl_arms_calcWeaponHitbox_000002F8:
     lwz r0, 0x4c(r3)
     lis r3, lbl_807637E0@ha
     lfd f2, lbl_807637E0@l(r3)
@@ -389,8 +389,8 @@ lbl_fn_805A6614_000002F8:
     lfd f1, 0x20(r1)
     fsubs f1, f1, f2
     fdivs f31, f1, f0
-    b lbl_fn_805A6614_00000508
-lbl_fn_805A6614_00000324:
+    b lbl_arms_calcWeaponHitbox_00000508
+lbl_arms_calcWeaponHitbox_00000324:
     lwz r0, 0x4c(r3)
     lis r3, lbl_807637E0@ha
     lfd f2, lbl_807637E0@l(r3)
@@ -401,14 +401,14 @@ lbl_fn_805A6614_00000324:
     fsubs f0, f0, f2
     fdivs f0, f0, f1
     fcmpo cr0, f31, f0
-    bge lbl_fn_805A6614_00000354
-    b lbl_fn_805A6614_00000364
-lbl_fn_805A6614_00000354:
+    bge lbl_arms_calcWeaponHitbox_00000354
+    b lbl_arms_calcWeaponHitbox_00000364
+lbl_arms_calcWeaponHitbox_00000354:
     stw r0, 0x24(r1)
     lfd f0, 0x20(r1)
     fsubs f0, f0, f2
     fdivs f31, f0, f1
-lbl_fn_805A6614_00000364:
+lbl_arms_calcWeaponHitbox_00000364:
     li r0, 0x0
     stw r0, 0x8(r1)
     lwz r4, lbl_8087F1E4
@@ -417,11 +417,11 @@ lbl_fn_805A6614_00000364:
     stw r0, 0x10(r1)
     lwz r4, 0xe3c(r4)
     cmpwi r4, 0x0
-    beq lbl_fn_805A6614_0000038C
-    b lbl_fn_805A6614_00000390
-lbl_fn_805A6614_0000038C:
+    beq lbl_arms_calcWeaponHitbox_0000038C
+    b lbl_arms_calcWeaponHitbox_00000390
+lbl_arms_calcWeaponHitbox_0000038C:
     la r4, lbl_808813D0
-lbl_fn_805A6614_00000390:
+lbl_arms_calcWeaponHitbox_00000390:
     lfs f1, lbl_808882AC
     li r5, 0x1
     lfs f2, lbl_808882B0
@@ -438,20 +438,20 @@ lbl_fn_805A6614_00000390:
     lfs f28, lbl_808882C4
     lfs f29, lbl_808882C0
     lfs f30, lbl_808882C8
-    b lbl_fn_805A6614_00000498
-lbl_fn_805A6614_000003D4:
+    b lbl_arms_calcWeaponHitbox_00000498
+lbl_arms_calcWeaponHitbox_000003D4:
     lwz r0, 0x8(r1)
     lwz r3, lbl_8087EEC8
     add r4, r0, r30
     lwzx r0, r30, r0
     lfs f1, lbl_808882B0
     srwi. r0, r0, 31
-    bne lbl_fn_805A6614_000003F8
+    bne lbl_arms_calcWeaponHitbox_000003F8
     addi r4, r4, 0x2
-    b lbl_fn_805A6614_000003FC
-lbl_fn_805A6614_000003F8:
+    b lbl_arms_calcWeaponHitbox_000003FC
+lbl_arms_calcWeaponHitbox_000003F8:
     lwz r4, 0x8(r4)
-lbl_fn_805A6614_000003FC:
+lbl_arms_calcWeaponHitbox_000003FC:
     lfs f2, lbl_808882B4
     li r5, 0x1
     li r6, 0x1
@@ -476,12 +476,12 @@ lbl_fn_805A6614_000003FC:
     srwi. r0, r0, 31
     lfs f3, lbl_808882B4
     ori r5, r5, 0xffff
-    bne lbl_fn_805A6614_00000468
+    bne lbl_arms_calcWeaponHitbox_00000468
     addi r4, r4, 0x2
-    b lbl_fn_805A6614_0000046C
-lbl_fn_805A6614_00000468:
+    b lbl_arms_calcWeaponHitbox_0000046C
+lbl_arms_calcWeaponHitbox_00000468:
     lwz r4, 0x8(r4)
-lbl_fn_805A6614_0000046C:
+lbl_arms_calcWeaponHitbox_0000046C:
     lfs f6, lbl_808882B4
     li r6, 0x1
     li r7, 0x1
@@ -493,39 +493,39 @@ lbl_fn_805A6614_0000046C:
     bl fn_80061824
     addi r30, r30, 0xc
     addi r31, r31, 0x1
-lbl_fn_805A6614_00000498:
+lbl_arms_calcWeaponHitbox_00000498:
     lwz r0, 0xc(r1)
     cmplw r31, r0
-    blt lbl_fn_805A6614_000003D4
+    blt lbl_arms_calcWeaponHitbox_000003D4
     addic. r0, r1, 0x8
-    beq lbl_fn_805A6614_00000620
-    beq lbl_fn_805A6614_00000620
+    beq lbl_arms_calcWeaponHitbox_00000620
+    beq lbl_arms_calcWeaponHitbox_00000620
     lwz r4, 0x8(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_805A6614_00000620
+    beq lbl_arms_calcWeaponHitbox_00000620
     lwz r31, 0xc(r1)
     mulli r3, r31, 0xc
     subf r0, r31, r31
     stw r0, 0xc(r1)
     add r30, r4, r3
-    b lbl_fn_805A6614_000004F4
-lbl_fn_805A6614_000004D4:
+    b lbl_arms_calcWeaponHitbox_000004F4
+lbl_arms_calcWeaponHitbox_000004D4:
     subic. r30, r30, 0xc
-    beq lbl_fn_805A6614_000004F0
+    beq lbl_arms_calcWeaponHitbox_000004F0
     lwz r0, 0x0(r30)
     srwi. r0, r0, 31
-    beq lbl_fn_805A6614_000004F0
+    beq lbl_arms_calcWeaponHitbox_000004F0
     lwz r3, 0x8(r30)
     bl dtor_80084684
-lbl_fn_805A6614_000004F0:
+lbl_arms_calcWeaponHitbox_000004F0:
     subi r31, r31, 0x1
-lbl_fn_805A6614_000004F4:
+lbl_arms_calcWeaponHitbox_000004F4:
     cmpwi r31, 0x0
-    bne lbl_fn_805A6614_000004D4
+    bne lbl_arms_calcWeaponHitbox_000004D4
     lwz r3, 0x8(r1)
     bl dtor_80084684
-    b lbl_fn_805A6614_00000620
-lbl_fn_805A6614_00000508:
+    b lbl_arms_calcWeaponHitbox_00000620
+lbl_arms_calcWeaponHitbox_00000508:
     lwz r6, lbl_8087EEE0
     lis r5, lbl_807637E0@ha
     lfs f8, lbl_808882A4
@@ -560,15 +560,15 @@ lbl_fn_805A6614_00000508:
     fsubs f1, f1, f5
     fsubs f7, f4, f5
     fdivs f9, f1, f0
-    beq lbl_fn_805A6614_000005A4
+    beq lbl_arms_calcWeaponHitbox_000005A4
     fmr f2, f10
     lfs f8, lbl_808882D4
     lfs f6, lbl_808882C4
-    b lbl_fn_805A6614_000005AC
-lbl_fn_805A6614_000005A4:
+    b lbl_arms_calcWeaponHitbox_000005AC
+lbl_arms_calcWeaponHitbox_000005A4:
     lfs f10, lbl_808882D8
     lfs f6, lbl_808882DC
-lbl_fn_805A6614_000005AC:
+lbl_arms_calcWeaponHitbox_000005AC:
     fmuls f5, f8, f2
     lfs f0, lbl_808882C8
     fmuls f4, f9, f10
@@ -598,7 +598,7 @@ lbl_fn_805A6614_000005AC:
     addi r5, r5, 0x54
     li r6, 0x1
     bl fn_8005DFC8
-lbl_fn_805A6614_00000620:
+lbl_arms_calcWeaponHitbox_00000620:
     lwz r0, 0xc4(r1)
     psq_l f31, 0xb8(r1), 0, 0
     lfd f31, 0xb0(r1)

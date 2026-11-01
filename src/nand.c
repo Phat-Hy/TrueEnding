@@ -71,7 +71,7 @@ void fn_8061F2F0(void);
 void fn_8061F360(void);
 void fn_8061F3D0(void);
 void fn_8061F460(void);
-void fn_8061F470(void);
+void msg_getStringPointer(void);
 
 asm void fn_8061E130(void)
 {
@@ -1483,7 +1483,7 @@ asm void fn_8061F460(void)
     blr
 }
 
-asm void fn_8061F470(void)
+asm void msg_getStringPointer(void)
 {
     nofralloc
     lwz r3, 0x0(r3)

@@ -64,7 +64,7 @@ void fn_80620040(void);
 void fn_80620220(void);
 void fn_80620250(void);
 void fn_806203C0(void);
-void fn_80620790(void);
+void nandCheckCallback(void);
 void fn_80620830(void);
 void fn_80620840(void);
 void fn_80620940(void);
@@ -550,12 +550,12 @@ lbl_fn_80620250_00000634:
 lbl_fn_80620250_00000670:
     cmplwi r25, 0x1
     bne lbl_fn_80620250_000006B0
-    lis r5, fn_80620790@ha
+    lis r5, nandCheckCallback@ha
     stw r24, 0x8(r29)
     mr r6, r29
     addi r3, r24, 0x8
     stw r28, 0x4(r29)
-    addi r5, r5, fn_80620790@l
+    addi r5, r5, nandCheckCallback@l
     li r4, 0x1
     bl ISFS_OpenAsync
     cmpwi r3, 0x0
@@ -871,7 +871,7 @@ lbl_fn_806203C0_00000AF8:
     blr
 }
 
-asm void fn_80620790(void)
+asm void nandCheckCallback(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -880,7 +880,7 @@ asm void fn_80620790(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r4
-    blt lbl_fn_80620790_00000B80
+    blt lbl_nandCheckCallback_00000B80
     lwz r5, 0x8(r4)
     li r0, 0x2
     stw r3, 0x0(r5)
@@ -888,29 +888,29 @@ asm void fn_80620790(void)
     stb r0, 0x89(r3)
     lwz r0, 0xb8(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_80620790_00000B5C
+    bne lbl_nandCheckCallback_00000B5C
     lwz r3, 0x8(r4)
     li r0, 0x3
     stb r0, 0x8a(r3)
-    b lbl_fn_80620790_00000B68
-lbl_fn_80620790_00000B5C:
+    b lbl_nandCheckCallback_00000B68
+lbl_nandCheckCallback_00000B5C:
     lwz r3, 0x8(r4)
     li r0, 0x5
     stb r0, 0x8a(r3)
-lbl_fn_80620790_00000B68:
+lbl_nandCheckCallback_00000B68:
     lwz r12, 0x4(r31)
     mr r4, r31
     li r3, 0x0
     mtctr r12
     bctrl
-    b lbl_fn_80620790_00000B94
-lbl_fn_80620790_00000B80:
+    b lbl_nandCheckCallback_00000B94
+lbl_nandCheckCallback_00000B80:
     bl nandConvertErrorCode
     lwz r12, 0x4(r31)
     mr r4, r31
     mtctr r12
     bctrl
-lbl_fn_80620790_00000B94:
+lbl_nandCheckCallback_00000B94:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0

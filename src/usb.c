@@ -44,7 +44,7 @@ extern void fn_805EC3B0(void);
 extern void fn_805EDC80(void);
 extern void fn_806056C0(void);
 extern void fn_8061C7E0(void);
-extern void fn_8061D2F0(void);
+extern void IOS_IoctlvAsync(void);
 extern void fn_80624B90(void);
 extern void fn_80624C00(void);
 extern void fn_80624C70(void);
@@ -765,7 +765,7 @@ lbl_fn_8065BF70_000007B4:
     stw r29, 0x1c(r26)
     stw r24, 0x40(r26)
     sth r23, 0x44(r26)
-    bl fn_8061D2F0
+    bl IOS_IoctlvAsync
     cmpwi r3, 0x0
     mr r30, r3
     bge lbl_fn_8065BF70_00000918
@@ -997,7 +997,7 @@ lbl_fn_8065C2D0_00000B18:
     stw r29, 0x1c(r26)
     stw r23, 0x40(r26)
     sth r22, 0x44(r26)
-    bl fn_8061D2F0
+    bl IOS_IoctlvAsync
     cmpwi r3, 0x0
     mr r30, r3
     bge lbl_fn_8065C2D0_00000C7C
@@ -1462,7 +1462,7 @@ lbl_fn_8065C7F0_000011B0:
     stw r30, 0x2c(r14)
     stw r21, 0x40(r14)
     sth r20, 0x44(r14)
-    bl fn_8061D2F0
+    bl IOS_IoctlvAsync
     mr r15, r3
     addi r3, r31, 0x514
     mr r4, r15

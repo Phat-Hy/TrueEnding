@@ -56,7 +56,7 @@ extern void fn_80614A00(void);
 extern void fn_80614A40(void);
 extern void fn_80614A80(void);
 extern void fn_80614AB0(void);
-extern void fn_80615210(void);
+extern void __GXSetSamplePattern(void);
 extern void fn_80615700(void);
 extern void fn_806158C0(void);
 extern void fn_80615990(void);
@@ -4840,13 +4840,13 @@ asm void fn_80076174(void)
     addi r4, r5, 0x1a
     addi r6, r5, 0x32
     li r5, 0x1
-    b fn_80615210
+    b __GXSetSamplePattern
 lbl_fn_80076174_00004390:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
-    b fn_80615210
+    b __GXSetSamplePattern
 }
 
 asm void gx_applyRenderState(void)
