@@ -13,10 +13,10 @@ extern void fn_80011220(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_800897D8(void);
 extern void fn_80092954(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -35,7 +35,7 @@ extern void fn_800F7FA8(void);
 extern void fn_800F7FD8(void);
 extern void fn_800F7FF0(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80109950(void);
 extern void fn_801162A0(void);
 extern void fn_801255C8(void);
@@ -592,7 +592,7 @@ asm void fn_80313AAC(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x28(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r3, lbl_80749378@ha
     lis r30, lbl_80749390@ha
     lfd f31, lbl_80749378@l(r3)
@@ -2059,7 +2059,7 @@ lbl_fn_80314BD8_000019E8:
     lis r7, 0x8000
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80314BD8_00001B0C
     lfs f0, 0x1b8(r1)
@@ -2173,7 +2173,7 @@ lbl_fn_80314BD8_00001C48:
     addi r8, r8, lbl_807C7030@l
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r3, 0x14bc(r30)
     addi r0, r3, 0x1
     stw r0, 0x14bc(r30)

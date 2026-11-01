@@ -11,7 +11,7 @@ extern void dtor_80084684(void);
 extern void fn_80051B70(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void mem_free(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
@@ -491,7 +491,7 @@ lbl_fn_80272FB8_00000484:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x48(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r3, __files@ha
     lis r4, lbl_80744AA4@ha
     lfs f31, lbl_8088383C

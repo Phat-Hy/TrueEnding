@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
@@ -129,7 +129,7 @@ asm void fn_8057EAF4(void)
     cmpwi r3, 0x0
     beq lbl_fn_8057EAF4_00000058
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x0(r28)
     mr r30, r3
     b lbl_fn_8057EAF4_0000005C
@@ -140,7 +140,7 @@ lbl_fn_8057EAF4_0000005C:
     mr r3, r30
     addi r31, r31, lbl_8076105C@l
     addi r4, r31, 0xb
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r29, r3
     addi r4, r31, 0x16
     addi r5, r28, 0x28
@@ -179,7 +179,7 @@ lbl_fn_8057EAF4_0000005C:
     bl route_findNextWaypoint
     mr r3, r30
     addi r4, r31, 0x46
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_808880A4
     mr r29, r3
     lfs f2, lbl_80888098
@@ -227,7 +227,7 @@ lbl_fn_8057EAF4_0000005C:
     bl route_interpolatePath
     mr r3, r30
     addi r4, r31, 0x8d
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r29, r3
     addi r4, r31, 0x96
     addi r5, r28, 0x58
@@ -257,7 +257,7 @@ lbl_fn_8057EAF4_0000005C:
     bl route_createSegment
     mr r3, r30
     addi r4, r31, 0xce
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r29, r3
     addi r4, r31, 0xd6
     addi r5, r28, 0x78
@@ -287,7 +287,7 @@ lbl_fn_8057EAF4_0000005C:
     bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x10f
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r29, r3
     addi r4, r31, 0x115
     addi r5, r28, 0x94
@@ -892,7 +892,7 @@ lbl_fn_8057F284_00000AAC:
     cmpwi r3, 0x0
     beq lbl_fn_8057F284_00000B70
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     addis r4, r29, 0x2
     mr r25, r3
     stw r3, 0x5b48(r4)

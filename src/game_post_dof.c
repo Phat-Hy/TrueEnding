@@ -11,14 +11,14 @@ extern void fn_8003EA3C(void);
 extern void fn_80056DB8(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80094958(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80107A68(void);
 extern void fn_80108F38(void);
 extern void fn_8011FC10(void);
@@ -539,7 +539,7 @@ lbl_fn_802C0458_00000524:
     addi r8, r29, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r3, 0x14dc(r29)
     addi r0, r3, 0x1
     stw r0, 0x14dc(r29)
@@ -797,7 +797,7 @@ asm void fn_802C07F8(void)
     addi r8, r30, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     stw r28, 0x1914(r30)
     b lbl_fn_802C07F8_00000AB0
 lbl_fn_802C07F8_00000944:
@@ -1231,7 +1231,7 @@ asm void fn_802C0F28(void)
     cmpwi r3, 0x0
     beq lbl_fn_802C0F28_00000F78
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x170c(r31)
     b lbl_fn_802C0F28_00000F7C
 lbl_fn_802C0F28_00000F78:
@@ -1950,7 +1950,7 @@ lbl_fn_802C1208_000019C4:
     addi r8, r30, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802C1208_00001A08:
     lfs f7, 0x2e4(r30)
     lfs f0, lbl_80884314

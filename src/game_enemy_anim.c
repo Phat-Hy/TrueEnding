@@ -8,7 +8,7 @@ extern void fn_800185B4(void);
 extern void fn_800A6BDC(void);
 extern void fn_8020FCE8(void);
 extern void fn_80219160(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_8021AF98(void);
 extern void fn_8021AFF4(void);
 extern void world_getGlobalFlag(void);
@@ -815,7 +815,7 @@ asm void fn_8012D180(void)
     mr r31, r3
     lwz r4, 0x2f0(r3)
     lwz r3, 0x50(r4)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     mr r25, r3
     blt lbl_fn_8012D180_00000F40

@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -20,7 +20,7 @@ extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
 extern void fn_80148990(void);
@@ -373,10 +373,8 @@ lbl_fn_802DF570_000003CC:
     blr
 }
 
-asm void fn_802DF968(void)
+void fn_802DF968(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_802DF96C(void)
@@ -1586,7 +1584,7 @@ lbl_fn_802E094C_00001474:
     stw r0, 0x88(r1)
     stw r0, 0x8c(r1)
     stw r0, 0x90(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_802E094C_00001514
     addi r3, r1, 0x60
@@ -1636,7 +1634,7 @@ lbl_fn_802E094C_00001514:
     li r6, 0x0
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     mr r3, r30
     li r4, 0x1f4
     bl sound_initGlobalInstances
@@ -1696,7 +1694,7 @@ lbl_fn_802E094C_00001624:
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F048
     lwz r6, 0x590(r30)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lis r4, lbl_80747B10@ha
     lfs f1, lbl_80884698
     addi r4, r4, lbl_80747B10@l
@@ -1833,7 +1831,7 @@ lbl_fn_802E0C60_00001844:
     addi r8, r31, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lfs f1, lbl_808846BC
     mr r4, r31
     lfs f2, lbl_80884684
@@ -1852,7 +1850,7 @@ lbl_fn_802E0C60_00001844:
     stw r30, 0xc(r1)
     lwz r3, lbl_8087F048
     lwz r6, 0x590(r31)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lfs f1, lbl_808846C4
     mr r4, r31
     lfs f2, lbl_80884684
@@ -1871,7 +1869,7 @@ lbl_fn_802E0C60_00001844:
     stw r30, 0xc(r1)
     lwz r3, lbl_8087F048
     lwz r6, 0x590(r31)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     li r0, 0x2
     stw r0, 0x1554(r31)
 lbl_fn_802E0C60_00001938:

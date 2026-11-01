@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void fn_8000D3A4(void);
 extern void vec3_sub(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -270,7 +270,7 @@ lbl_fn_802E2F24_00000200:
     stw r0, 0x58(r1)
     stw r0, 0x5c(r1)
     stw r0, 0x60(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_802E2F24_000002BC
     lfs f3, 0x30(r1)
@@ -1672,7 +1672,7 @@ lbl_fn_802E3EE8_00001604:
     stw r0, 0x1e8(r1)
     stw r0, 0x1ec(r1)
     stw r0, 0x1f0(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_802E3EE8_000016C0
     lfs f3, 0x1c0(r1)
@@ -1775,7 +1775,7 @@ lbl_fn_802E3EE8_000016CC:
     stw r30, 0x198(r1)
     stw r30, 0x19c(r1)
     stw r30, 0x1a0(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_802E3EE8_00001854
     lfs f3, 0x170(r1)
@@ -1961,7 +1961,7 @@ lbl_fn_802E470C_0000196C:
     stw r30, 0x178(r1)
     stw r30, 0x17c(r1)
     stw r30, 0x180(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_802E470C_00001B08
     lfs f3, 0x150(r1)
@@ -2081,7 +2081,7 @@ lbl_fn_802E470C_00001C10:
     stw r0, 0x128(r1)
     stw r0, 0x12c(r1)
     stw r0, 0x130(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_802E470C_00001CCC
     lfs f3, 0x100(r1)

@@ -14,7 +14,7 @@ extern void fn_80008210(void);
 extern void fn_8004AE84(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006144C(void);
 extern void skill_calculateDamage(void);
 extern void fn_80061824(void);
@@ -725,7 +725,7 @@ asm void spectateView_renderInterface(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x50(r1)
     la r4, lbl_8087D720
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     addi r3, r15, 0x438
     bl boss_getOffset50
     mr r14, r3

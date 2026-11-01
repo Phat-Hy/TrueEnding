@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
 extern void mem_alloc(void);
@@ -70,7 +70,7 @@ void fn_800A5508(void);
 void fn_800A5554(void);
 void msg_getMessageById(void);
 void fn_800A5584(void);
-void fn_800A55AC(void);
+void msg_getMessageString(void);
 void fn_800A55D4(void);
 void fn_800A55FC(void);
 void fn_800A5648(void);
@@ -384,7 +384,7 @@ lbl_fn_800A5218_000003F4:
     srawi r0, r0, 5
     addze r0, r0
     slwi r31, r0, 5
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r7, lbl_807327B4@ha
     mr r4, r31
     addi r7, r7, lbl_807327B4@l
@@ -406,7 +406,7 @@ lbl_fn_800A5218_000003F4:
     mr r5, r31
     addi r3, r1, 0x148
     bl fn_8061E850
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r30
     bl fn_80083AD4
     addi r3, r1, 0x148
@@ -513,7 +513,7 @@ asm void fn_800A5584(void)
     b fn_800DEF04
 }
 
-asm void fn_800A55AC(void)
+asm void msg_getMessageString(void)
 {
     nofralloc
     lis r7, lbl_80732898@ha

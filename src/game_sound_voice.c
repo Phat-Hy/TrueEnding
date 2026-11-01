@@ -9,7 +9,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void msg_getMessageById(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFBA0(void);
 extern void str_findChar(void);
@@ -46,7 +46,7 @@ extern void fn_8020ED84(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void fn_803750E4(void);
@@ -845,13 +845,13 @@ asm void fn_801D7DE8(void)
     li r5, 0x1a
     lwz r27, lbl_8087EF70
     mr r3, r27
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_801D7DE8_00000AEC
     mr r3, r27
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_801D7DE8_00000B40
 lbl_fn_801D7DE8_00000AEC:
@@ -882,13 +882,13 @@ lbl_fn_801D7DE8_00000B40:
     mr r3, r27
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_801D7DE8_00000B70
     mr r3, r27
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_801D7DE8_00000BC8
 lbl_fn_801D7DE8_00000B70:
@@ -920,13 +920,13 @@ lbl_fn_801D7DE8_00000BC8:
     mr r3, r27
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_801D7DE8_00000BF8
     mr r3, r27
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_801D7DE8_00000C50
 lbl_fn_801D7DE8_00000BF8:
@@ -958,13 +958,13 @@ lbl_fn_801D7DE8_00000C50:
     mr r3, r27
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_801D7DE8_00000C80
     mr r3, r27
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_801D7DE8_00000CD8
 lbl_fn_801D7DE8_00000C80:
@@ -1529,7 +1529,7 @@ lbl_fn_801D8560_00001408:
     b lbl_fn_801D8560_00001928
 lbl_fn_801D8560_0000143C:
     lwz r3, 0xc(r29)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r5, lbl_8087F4F0
     mr r27, r3
     lwz r3, 0x48(r26)

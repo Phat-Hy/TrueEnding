@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800F52F8(void);
 extern void fn_800F84C8(void);
@@ -176,7 +176,7 @@ lbl_fn_8038E540_000000AC:
     lfs f0, 0x4(r31)
     fadds f0, f3, f0
     stfs f0, 0x78(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8038E540_00000164
     lfs f3, 0xa4(r1)
@@ -283,7 +283,7 @@ lbl_fn_8038E540_0000026C:
     addi r6, r1, 0x74
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8038E540_00000364
     lfs f3, 0x64(r1)
@@ -517,7 +517,7 @@ lbl_fn_8038E9B0_000004EC:
     li r9, 0x0
     stfs f3, 0xd8(r1)
     stfs f0, 0xdc(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8038E9B0_00000A2C
     lfs f3, 0xd0(r1)
@@ -640,7 +640,7 @@ lbl_fn_8038E9B0_000007A8:
     lis r7, 0x800
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8038E9B0_00000880
     lfs f3, 0x88(r1)
@@ -713,7 +713,7 @@ lbl_fn_8038E9B0_0000089C:
     lfs f2, 0x8(r26)
     stfs f2, 0xa0(r1)
     psq_st f1, 0x0(r6), 0, 0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8038E9B0_000008FC
     addi r4, r1, 0x100
@@ -739,7 +739,7 @@ lbl_fn_8038E9B0_000008FC:
     lfs f2, 0x8(r31)
     stfs f2, 0xa0(r1)
     psq_st f1, 0x0(r6), 0, 0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8038E9B0_00000A24
     lwz r3, 0x89c(r30)

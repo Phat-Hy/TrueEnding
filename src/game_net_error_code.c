@@ -21,7 +21,7 @@ extern void fn_80087BB4(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
 extern void fn_80088AF4(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
@@ -1455,7 +1455,7 @@ asm void fn_8051C3E0(void)
 lbl_fn_8051C3E0_000012B0:
     lwz r4, 0xa0(r28)
 lbl_fn_8051C3E0_000012B4:
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r31, lbl_8075BF40@ha
     lfs f1, lbl_80887970
     addi r31, r31, lbl_8075BF40@l
@@ -1511,7 +1511,7 @@ lbl_fn_8051C3E0_000012B4:
     bl fn_80087E9C
     mr r3, r30
     addi r4, r31, 0x119
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f2, lbl_80887908
     mr r29, r3
     lfs f1, lbl_80887904
@@ -1532,7 +1532,7 @@ lbl_fn_8051C3E0_000012B4:
     bl fn_80088AF4
     mr r3, r30
     addi r4, r31, 0x133
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80887978
     mr r29, r3
     lfs f2, lbl_8088797C
@@ -1580,7 +1580,7 @@ lbl_fn_8051C3E0_000012B4:
     bl fn_80088724
     mr r3, r30
     addi r4, r31, 0x184
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80887904
     mr r29, r3
     lfs f2, lbl_80887980

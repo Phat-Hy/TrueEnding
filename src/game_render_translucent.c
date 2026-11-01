@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void mem_alloc(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80093C8C(void);
@@ -395,7 +395,7 @@ asm void fn_802B7AF8(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r31, lbl_8074681C@ha
     addi r31, r31, lbl_8074681C@l
 lbl_fn_802B7AF8_000003EC:

@@ -7,9 +7,9 @@ extern void _restgpr_26(void);
 extern void _savegpr_20(void);
 extern void _savegpr_26(void);
 extern void fn_80087E9C(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void msg_getMessageById(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void fn_800A58D0(void);
 extern void ref_releaseHandle(void);
 extern void fn_80116EB8(void);
@@ -1229,13 +1229,13 @@ asm void fn_80525804(void)
     mr r3, r31
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80525804_0000105C
     mr r3, r31
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80525804_0000106C
 lbl_fn_80525804_0000105C:
@@ -1247,13 +1247,13 @@ lbl_fn_80525804_0000106C:
     mr r3, r31
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80525804_0000109C
     mr r3, r31
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80525804_000010A8
 lbl_fn_80525804_0000109C:
@@ -1426,13 +1426,13 @@ lbl_fn_80525A0C_000012C8:
     mr r3, r31
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80525A0C_00001314
     mr r3, r31
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80525A0C_000013CC
 lbl_fn_80525A0C_00001314:
@@ -1487,13 +1487,13 @@ lbl_fn_80525A0C_000013CC:
     mr r3, r31
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80525A0C_000013FC
     mr r3, r31
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80525A0C_00001598
 lbl_fn_80525A0C_000013FC:
@@ -1864,7 +1864,7 @@ asm void fn_80526138(void)
 lbl_fn_80526138_00001948:
     lwz r4, 0xa0(r29)
 lbl_fn_80526138_0000194C:
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r31, lbl_8075C6C4@ha
     lfs f1, lbl_80887A50
     addi r31, r31, lbl_8075C6C4@l

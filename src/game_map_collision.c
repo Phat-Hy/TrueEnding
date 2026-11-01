@@ -8,14 +8,14 @@ extern void _restgpr_19(void);
 extern void _savegpr_18(void);
 extern void _savegpr_19(void);
 extern void dtor_80084684(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void skill_calculateDamage(void);
 extern void mem_free(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800BFAC8(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_parseInt(void);
 extern void fn_80125474(void);
@@ -176,7 +176,7 @@ asm void fn_801805A4(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x28(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     addi r3, r1, 0x28
     bl talk_parseQuotedString
     lis r4, __files@ha
@@ -1117,7 +1117,7 @@ lbl_fn_8018128C_00000DA4:
     li r8, 0x0
     li r9, 0x0
     addi r6, r6, 0x528
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8018128C_00000E14
     lwz r3, 0x14cc(r30)
@@ -1366,7 +1366,7 @@ lbl_fn_8018161C_00001118:
     addi r4, r4, 0x34
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

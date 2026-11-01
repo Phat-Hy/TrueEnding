@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_8008BBD8(void);
@@ -23,7 +23,7 @@ extern void fn_8017AC3C(void);
 extern void fn_80188F08(void);
 extern void fn_80188F40(void);
 extern void fn_801EA0B4(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
@@ -1343,7 +1343,7 @@ lbl_fn_801C82F8_0000108C:
     stfs f0, 0x70(r1)
     lwz r3, 0x4(r28)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x2
     bne lbl_fn_801C82F8_00001174
     li r29, 0x1
@@ -1368,7 +1368,7 @@ lbl_fn_801C82F8_000011A4:
     lis r7, 0x8000
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801C82F8_0000123C
     lwz r4, 0x4(r28)
@@ -1426,7 +1426,7 @@ lbl_fn_801C82F8_00001274:
     lis r7, 0x8000
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801C82F8_00001314
     lwz r4, 0x4(r28)
@@ -1471,7 +1471,7 @@ lbl_fn_801C82F8_00001320:
     lis r7, 0x8000
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801C82F8_000013C0
     lwz r4, 0x4(r28)

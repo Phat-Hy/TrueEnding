@@ -40,7 +40,7 @@ void fn_800820BC(void);
 void fn_80082260(void);
 void fn_80082490(void);
 void fn_8008263C(void);
-void fn_800827E0(void);
+void dungeon_initGlobalContext(void);
 void fn_80082970(void);
 void fn_80082AC8(void);
 void fn_80082B54(void);
@@ -760,7 +760,7 @@ lbl_fn_8008263C_000009F0:
     blr
 }
 
-asm void fn_800827E0(void)
+asm void dungeon_initGlobalContext(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -769,7 +769,7 @@ asm void fn_800827E0(void)
     stw r31, 0xc(r1)
     lbz r0, lbl_8087EF08
     extsb. r0, r0
-    bne lbl_fn_800827E0_00000B8C
+    bne lbl_dungeon_initGlobalContext_00000B8C
     lis r8, lbl_807C709C@ha
     lis r5, lbl_80778598@ha
     addi r31, r8, lbl_807C709C@l
@@ -792,20 +792,20 @@ asm void fn_800827E0(void)
     stw r7, 0x54(r31)
     stw r7, 0x48(r31)
     stw r7, 0x4c(r31)
-    bge lbl_fn_800827E0_00000ABC
+    bge lbl_dungeon_initGlobalContext_00000ABC
     addi r0, r3, 0xf
     subf r0, r9, r0
     srwi r0, r0, 4
     mtctr r0
-    bge lbl_fn_800827E0_00000ABC
-lbl_fn_800827E0_00000AA4:
+    bge lbl_dungeon_initGlobalContext_00000ABC
+lbl_dungeon_initGlobalContext_00000AA4:
     stw r7, 0x8(r9)
     stw r7, 0xc(r9)
     stw r7, 0x0(r9)
     stw r7, 0x4(r9)
     addi r9, r9, 0x10
-    bdnz lbl_fn_800827E0_00000AA4
-lbl_fn_800827E0_00000ABC:
+    bdnz lbl_dungeon_initGlobalContext_00000AA4
+lbl_dungeon_initGlobalContext_00000ABC:
     addi r7, r31, 0xe8
     addi r3, r31, 0x138
     lis r6, lbl_80778560@ha
@@ -823,20 +823,20 @@ lbl_fn_800827E0_00000ABC:
     stw r5, 0xe4(r31)
     stw r5, 0xd8(r31)
     stw r5, 0xdc(r31)
-    bge lbl_fn_800827E0_00000B30
+    bge lbl_dungeon_initGlobalContext_00000B30
     addi r0, r3, 0xf
     subf r0, r7, r0
     srwi r0, r0, 4
     mtctr r0
-    bge lbl_fn_800827E0_00000B30
-lbl_fn_800827E0_00000B18:
+    bge lbl_dungeon_initGlobalContext_00000B30
+lbl_dungeon_initGlobalContext_00000B18:
     stw r5, 0x8(r7)
     stw r5, 0xc(r7)
     stw r5, 0x0(r7)
     stw r5, 0x4(r7)
     addi r7, r7, 0x10
-    bdnz lbl_fn_800827E0_00000B18
-lbl_fn_800827E0_00000B30:
+    bdnz lbl_dungeon_initGlobalContext_00000B18
+lbl_dungeon_initGlobalContext_00000B30:
     addi r3, r31, 0x138
     bl fn_80084E50
     addi r3, r31, 0x150
@@ -860,7 +860,7 @@ lbl_fn_800827E0_00000B30:
     bl __register_global_object
     li r0, 0x1
     stb r0, lbl_8087EF08
-lbl_fn_800827E0_00000B8C:
+lbl_dungeon_initGlobalContext_00000B8C:
     lwz r31, 0xc(r1)
     lis r3, lbl_807C709C@ha
     lwz r0, 0x14(r1)

@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_8008B130(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -16,7 +16,7 @@ extern void fn_80155DAC(void);
 extern void fn_80179D44(void);
 extern void fn_8017C9AC(void);
 extern void fn_8018059C(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void fn_803761DC(void);
@@ -33,7 +33,7 @@ extern void rand(void);
 extern void strstr(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_8073B718[];
@@ -126,7 +126,7 @@ asm void fn_801C3910(void)
     fmuls f1, f1, f1
     stw r0, 0x14(r1)
     fmadds f1, f0, f0, f1
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r0, 0x14(r1)
     frsp f1, f1
     mtlr r0
@@ -211,7 +211,7 @@ lbl_fn_801C3944_00000084:
     stfs f0, 0x98(r1)
     stfs f3, 0x9c(r1)
     stfs f4, 0xa0(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801C3944_0000017C
     addi r3, r1, 0x13c
@@ -434,7 +434,7 @@ asm void fn_801C3D1C(void)
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cntlzw r0, r3
     lwz r31, 0x2c(r1)
     lwz r30, 0x28(r1)
@@ -1145,7 +1145,7 @@ asm void fn_801C4750(void)
     stw r30, 0x8(r1)
     mr r30, r3
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     blt lbl_fn_801C4750_00000E70
     li r3, 0x0

@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006A900(void);
 extern void fn_8009EE30(void);
 extern void msg_getMessageById(void);
@@ -1992,7 +1992,7 @@ asm void fn_80520638(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0xb0(r1)
     la r4, lbl_8087D720
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     addi r5, r1, 0x90
     addi r3, r1, 0xb0
     cmplw r5, r3

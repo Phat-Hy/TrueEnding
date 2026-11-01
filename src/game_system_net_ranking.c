@@ -5,7 +5,7 @@
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void fn_8004ECC0(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80051B70(void);
 extern void fn_800BFAC8(void);
 extern void ref_releaseHandle(void);
@@ -107,7 +107,7 @@ asm void fn_80399148(void)
     stfs f0, 0x18(r1)
     stfs f3, 0x1c(r1)
     stfs f4, 0x20(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80399148_0000011C
     lfs f4, lbl_80885B10
@@ -546,7 +546,7 @@ asm void fn_80399734(void)
     stfs f0, 0x6c(r1)
     stfs f7, 0x70(r1)
     stfs f8, 0x74(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80399734_00000758
     lfs f8, lbl_80885B10

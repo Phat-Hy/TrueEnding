@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_20(void);
 extern void _savegpr_20(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -14,7 +14,7 @@ extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80103600(void);
 extern void fn_80107850(void);
 extern void fn_80108C10(void);
@@ -653,7 +653,7 @@ lbl_fn_802D4378_00000774:
     stw r0, 0xa8(r1)
     stw r0, 0xac(r1)
     stw r0, 0xb0(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_802D4378_00000824
     addi r3, r1, 0x80
@@ -728,7 +728,7 @@ lbl_fn_802D4378_000008E4:
     lwz r6, 0x590(r29)
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r4, lbl_8087F1E4
     addi r3, r1, 0xc0
     lwz r4, 0x454(r4)

@@ -19,7 +19,7 @@ extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80013410(void);
 extern void fn_8003EFB0(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80057A68(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -36,7 +36,7 @@ extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
 extern void fn_800F8290(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80116BAC(void);
 extern void fn_801240B4(void);
 extern void fn_8012A1B8(void);
@@ -1228,7 +1228,7 @@ lbl_fn_8019FEC4_00000E78:
     addi r6, r1, 0x58
     li r7, 0x6
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8019FEC4_00000F7C
     lwz r3, 0x190(r1)
@@ -1269,7 +1269,7 @@ lbl_fn_8019FEC4_00000E78:
     addi r8, r8, lbl_807C7030@l
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_8019FEC4_00000F7C:
     lwz r3, 0x4(r28)
     bl fn_800F7F80

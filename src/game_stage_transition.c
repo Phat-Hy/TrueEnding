@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_8008BBD8(void);
@@ -19,7 +19,7 @@ extern void fn_800CB440(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_8012476C(void);
 extern void fn_8013CB68(void);
 extern void fn_801539E0(void);
@@ -383,7 +383,7 @@ asm void fn_8019A8A8(void)
     addi r5, r1, 0xa0
     addi r6, r1, 0x94
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8019A8A8_00000650
     addi r3, r1, 0x124
@@ -527,7 +527,7 @@ lbl_fn_8019A8A8_000005DC:
     lwz r5, 0x8(r29)
     li r10, 0x1e
     addi r8, r4, 0x534
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     li r3, 0x1
     b lbl_fn_8019A8A8_000006B4
 lbl_fn_8019A8A8_00000650:

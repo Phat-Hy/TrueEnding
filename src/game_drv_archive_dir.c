@@ -16,7 +16,7 @@ extern void fn_8000DCF4(void);
 extern void fn_8001047C(void);
 extern void vec3_sub(void);
 extern void fn_8006EF48(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -48,7 +48,7 @@ extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80219344(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_802A36B0(void);
 extern void fn_802A4094(void);
@@ -1077,7 +1077,7 @@ asm void fn_805ABE78(void)
     addi r3, r3, 0x54
     bl fn_805AE18C
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     mr r31, r3
     blt lbl_fn_805ABE78_00000D3C
@@ -2403,7 +2403,7 @@ lbl_fn_805AC75C_00001FC8:
     addi r8, r1, 0x30
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x90(r1)
     lwz r3, 0x94(r1)
     cmplw r0, r3
@@ -2438,7 +2438,7 @@ lbl_fn_805AC75C_00002080:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_805AC75C_000020C4:
     lwz r3, 0x90(r1)
     addi r0, r3, 0x1
@@ -2570,7 +2570,7 @@ lbl_fn_805AC75C_00002260:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_805AC75C_000022A4:
     lwz r0, 0x90(r1)
     subi r6, r31, 0x5555
@@ -2703,7 +2703,7 @@ lbl_fn_805AC75C_0000244C:
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x90(r1)
     lwz r3, 0x94(r1)
     cmplw r0, r3
@@ -2738,7 +2738,7 @@ lbl_fn_805AC75C_000024D8:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_805AC75C_0000251C:
     lwz r3, 0x90(r1)
     addi r0, r3, 0x1
@@ -2869,7 +2869,7 @@ lbl_fn_805AC75C_000026B4:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_805AC75C_000026F8:
     lwz r0, 0x90(r1)
     subi r6, r14, 0x5555

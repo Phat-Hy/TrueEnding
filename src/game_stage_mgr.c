@@ -4,13 +4,13 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800EFBC4(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_8016DA4C(void);
 extern void task_findEntryById(void);
@@ -282,7 +282,7 @@ lbl_fn_801953B8_00000240:
     addi r7, r1, 0x4c
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     b lbl_fn_801953B8_000003AC
 lbl_fn_801953B8_000002A8:
     lfs f0, lbl_80882088
@@ -739,7 +739,7 @@ lbl_fn_80195AD0_000008DC:
     addi r7, r1, 0x130
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r5, lbl_8087F430
     li r0, 0x6
     lfs f3, lbl_80881FCC
@@ -840,7 +840,7 @@ lbl_fn_80195AD0_0000099C:
     stw r0, 0x2b0(r1)
     stw r0, 0x2b4(r1)
     stw r0, 0x2b8(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80195AD0_00000E10
     lwz r5, 0x4(r30)
@@ -922,7 +922,7 @@ lbl_fn_80195AD0_0000099C:
     stfs f2, 0xcc(r1)
     psq_st f1, 0x0(r27), 0, 0
     stfs f2, 0x114(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80195AD0_00000E10
     lwz r5, 0x4(r30)
@@ -1002,7 +1002,7 @@ lbl_fn_80195AD0_0000099C:
     stfs f2, 0x9c(r1)
     psq_st f1, 0x0(r27), 0, 0
     stfs f2, 0x114(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80195AD0_00000E10
     lwz r5, 0x4(r30)
@@ -1071,7 +1071,7 @@ lbl_fn_80195AD0_00000E10:
     stfs f3, 0x11c(r1)
     stfs f2, 0x114(r1)
     stfs f0, 0x110(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80195AD0_00000E80
     addi r3, r1, 0x27c
@@ -1492,7 +1492,7 @@ lbl_fn_80196548_000013EC:
     addi r7, r1, 0x40
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_80196548_00001454:
     lis r3, lbl_80739700@ha
     lfs f1, 0x64(r1)

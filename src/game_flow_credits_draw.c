@@ -7,7 +7,7 @@ extern void __div2i(void);
 extern void __register_global_object(void);
 extern void _restgpr_23(void);
 extern void _savegpr_23(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB518(void);
@@ -526,7 +526,7 @@ lbl_fn_804EB938_000005C0:
     addi r3, r1, 0x48
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     lwz r3, lbl_8087F610
     addi r4, r1, 0x48
     addi r3, r3, 0x2b78

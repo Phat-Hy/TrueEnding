@@ -30,7 +30,7 @@ extern void wcscpy(void);
 extern void fn_8068AD58(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_80746C68[];
@@ -1122,7 +1122,7 @@ lbl_fn_802C2BCC_00000E48:
     stfs f5, 0x14(r1)
     stfs f7, 0x8(r1)
     stfs f8, 0xc(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f3, f1
     lfs f0, lbl_808842F0
     fcmpo cr0, f3, f0

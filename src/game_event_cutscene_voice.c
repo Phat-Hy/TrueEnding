@@ -13,7 +13,7 @@ extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800C16C0(void);
 extern void fn_800C1814(void);
 extern void fn_800C2448(void);
@@ -2666,7 +2666,7 @@ lbl_fn_8047CF7C_00002284:
     cmpwi r3, 0x0
     beq lbl_fn_8047CF7C_000022C4
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x1a5c(r31)
     mr r27, r3
     b lbl_fn_8047CF7C_000022C8
@@ -2734,7 +2734,7 @@ lbl_fn_8047CF7C_000022C8:
     bl route_findNextWaypoint
     mr r3, r27
     addi r4, r29, 0xc3
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r26, r3
     addi r4, r29, 0xd0
     addi r5, r31, 0x240c

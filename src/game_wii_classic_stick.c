@@ -10,7 +10,7 @@ extern void fn_800128FC(void);
 extern void fn_80049B74(void);
 extern void fn_8004B0E4(void);
 extern void fn_8004B1EC(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
@@ -957,7 +957,7 @@ lbl_fn_8055F690_00000B18:
     fmr f1, f31
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x34
     addi r4, r1, 0x28
     bl fn_800CB440
@@ -1279,7 +1279,7 @@ lbl_fn_8055FE0C_00000F58:
     fmr f1, f31
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     mr r3, r29
     addi r4, r1, 0x8
     bl fn_800CB440

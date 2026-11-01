@@ -32,7 +32,7 @@ extern void fn_8020C5D4(void);
 extern void fn_8020CC64(void);
 extern void fn_8020DE0C(void);
 extern void fn_8020EF4C(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_getName(void);
@@ -205,7 +205,7 @@ lbl_fn_80564344_00000180:
     bne lbl_fn_80564344_0000072C
     lwz r3, 0x40c(r22)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     mr r27, r3
     addi r3, r1, 0xa4
     addi r4, r1, 0xc8
@@ -856,7 +856,7 @@ lbl_fn_80564344_00000A6C:
     bl fn_8020C5D4
     lwz r3, 0x40c(r22)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r0, 0x18(r22)
     mr r31, r3
     cmpwi r0, 0x0
@@ -1536,7 +1536,7 @@ lbl_fn_8056556C_000013C8:
     blt lbl_fn_8056556C_00001328
     lwz r3, 0x40c(r28)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     bne lbl_fn_8056556C_00001410
     lwz r3, 0x414(r28)
@@ -1551,7 +1551,7 @@ lbl_fn_8056556C_000013C8:
 lbl_fn_8056556C_00001410:
     lwz r3, 0x40c(r28)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x1
     bne lbl_fn_8056556C_00001464
     lwz r3, 0x414(r28)

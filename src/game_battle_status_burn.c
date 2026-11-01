@@ -27,7 +27,7 @@ extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void atn_Model_findBoneIndex(void);
@@ -42,7 +42,7 @@ extern void str_skipWhitespace(void);
 extern void str_findChar(void);
 extern void fn_800EF73C(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_802180A8(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -868,7 +868,7 @@ asm void fn_80425E2C(void)
     beq lbl_fn_80425E2C_000009F4
     mr r3, r30
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0xf0(r29)
     mr r30, r3
     b lbl_fn_80425E2C_000009F8
@@ -2192,7 +2192,7 @@ lbl_fn_80426CF8_00001C20:
     li r4, 0x0
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_80426CF8_00001CA0:
     lwz r0, 0x54(r30)
     slwi r27, r0, 2

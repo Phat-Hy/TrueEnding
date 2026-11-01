@@ -11,7 +11,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_8004203C(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void fn_80092954(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -20,7 +20,7 @@ extern void str_skipWhitespace(void);
 extern void fn_800EC204(void);
 extern void fn_800EF73C(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_8011FC10(void);
@@ -478,7 +478,7 @@ asm void fn_802D0038(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_802D0038_00000510:
     addi r3, r1, 0x44
     bl talk_parseQuotedString
@@ -1206,7 +1206,7 @@ lbl_fn_802D0B84_00000F0C:
     stw r0, 0x8(r1)
     stw r0, 0xc(r1)
     lwz r6, 0x590(r31)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     b lbl_fn_802D0B84_00001004
     mr r3, r31
     bl fn_802D4E9C

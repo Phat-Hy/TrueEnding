@@ -24,7 +24,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_8008BBD8(void);
 extern void ref_releaseHandle(void);
@@ -336,7 +336,7 @@ asm void fn_803EE024(void)
     cmpwi r3, 0x0
     beq lbl_fn_803EE024_00000194
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x70(r31)
     b lbl_fn_803EE024_00000198
 lbl_fn_803EE024_00000194:
@@ -1405,7 +1405,7 @@ lbl_fn_803EEE44_00000F58:
     lwz r31, 0x7c(r29)
     addi r4, r1, 0x8
     lwz r3, 0x74(r29)
-    bl fn_8008937C
+    bl node_createNamedChild
     stwx r3, r31, r30
 lbl_fn_803EEE44_00000F9C:
     lwz r3, 0x7c(r29)

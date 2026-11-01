@@ -15,7 +15,7 @@ extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void item_useConsumable(void);
 extern void fn_8004D388(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80057A68(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A56A8(void);
@@ -1003,7 +1003,7 @@ lbl_fn_80387DE4_00000C70:
     stw r0, 0xa0(r1)
     stw r0, 0xa4(r1)
     stw r0, 0xa8(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80387DE4_00000D0C
     lwz r3, 0x9c(r1)
@@ -1146,7 +1146,7 @@ lbl_fn_80387DE4_00000EB4:
     stfs f2, 0x34(r1)
     stfs f4, 0x3c(r1)
     stfs f0, 0x30(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80387DE4_00000F24
     lfs f0, 0xcc(r1)
@@ -1792,7 +1792,7 @@ asm void fn_80388C44(void)
     stw r0, 0x178(r1)
     stw r0, 0x17c(r1)
     stw r0, 0x180(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80388C44_000019CC
     lfs f0, 0x94(r1)

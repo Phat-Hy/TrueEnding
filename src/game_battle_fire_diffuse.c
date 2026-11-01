@@ -20,7 +20,7 @@ extern void mem_getAllocSize(void);
 extern void fn_8009EE30(void);
 extern void fn_800C16B4(void);
 extern void fn_800C1990(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void str_skipWhitespace(void);
@@ -789,7 +789,7 @@ lbl_fn_8041D4B4_00000788:
     addi r4, r4, 0x13c
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle

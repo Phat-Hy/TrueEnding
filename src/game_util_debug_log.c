@@ -9,7 +9,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -531,7 +531,7 @@ lbl_fn_8059A29C_00000490:
     stw r0, 0x398(r1)
     stw r0, 0x39c(r1)
     stw r0, 0x3a0(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8059A29C_00000B8C
     cmpwi r21, 0x0
@@ -786,7 +786,7 @@ lbl_fn_8059A29C_000008CC:
     stfs f26, 0x104(r1)
     stfs f10, 0x108(r1)
     stfs f8, 0x10c(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8059A29C_000009BC
     psq_l f1, 0x0(r28), 0, 0
@@ -837,7 +837,7 @@ lbl_fn_8059A29C_000009BC:
     stfs f8, 0x70(r1)
     psq_st f1, 0x0(r23), 0, 0
     stfs f2, 0x130(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8059A29C_00000AA0
     lfd f1, lbl_80762120@l(r26)

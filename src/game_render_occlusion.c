@@ -19,7 +19,7 @@ extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80139550(void);
 extern void fn_80139F2C(void);
 extern void fn_80139F3C(void);
@@ -2070,7 +2070,7 @@ lbl_fn_802AF7D8_00001B64:
     li r9, 0x0
     lwz r6, 0x590(r31)
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802AF7D8_00001BF4:
     addi r3, r31, 0xb0
     li r4, 0x0
@@ -2192,7 +2192,7 @@ lbl_fn_802AF7D8_00001D30:
     li r9, 0x0
     lwz r6, 0x590(r31)
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     addi r3, r31, 0xb0
     addi r4, r29, 0x19a
     bl atn_Model_getBoneMatrix
@@ -2214,7 +2214,7 @@ lbl_fn_802AF7D8_00001D30:
     lwz r5, 0x1530(r31)
     li r10, 0x1e
     lwz r6, 0x590(r31)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     addi r3, r31, 0xb0
     addi r4, r29, 0x1b0
     bl atn_Model_getBoneMatrix
@@ -2236,7 +2236,7 @@ lbl_fn_802AF7D8_00001D30:
     lwz r5, 0x1530(r31)
     li r10, 0x1e
     lwz r6, 0x590(r31)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802AF7D8_00001E78:
     addi r3, r31, 0xb0
     li r4, 0x0
@@ -2273,7 +2273,7 @@ lbl_fn_802AF7D8_00001E78:
     li r9, 0x0
     lwz r6, 0x590(r31)
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802AF7D8_00001F08:
     addi r3, r31, 0xb0
     li r4, 0x0
@@ -2420,7 +2420,7 @@ lbl_fn_802AF7D8_000020D8:
     li r9, 0x0
     lwz r6, 0x590(r31)
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     b lbl_fn_802AF7D8_00002478
 lbl_fn_802AF7D8_00002134:
     addi r3, r31, 0xb0

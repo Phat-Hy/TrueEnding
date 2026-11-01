@@ -12,13 +12,13 @@ extern void fn_80056DB8(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
@@ -37,7 +37,7 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80145334(void);
 extern void dialog_renderWindow(void);
@@ -90,7 +90,7 @@ extern void PSVECMag(void);
 extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void __destroy_new_array(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -187,7 +187,7 @@ asm void fn_802B1F2C(void)
     beq lbl_fn_802B1F2C_00000070
     mr r3, r30
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x1a98(r29)
     mr r30, r3
     b lbl_fn_802B1F2C_00000074
@@ -720,7 +720,7 @@ asm void fn_802B23E8(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_802B23E8_0000083C:
     addi r3, r1, 0x44
     bl talk_parseQuotedString
@@ -926,7 +926,7 @@ lbl_fn_802B28BC_000009D8:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r31, lbl_807465E0@ha
     addi r31, r31, lbl_807465E0@l
 lbl_fn_802B28BC_00000B3C:
@@ -1252,7 +1252,7 @@ lbl_fn_802B28BC_00000F94:
     cmpwi r3, 0x0
     beq lbl_fn_802B28BC_00000FC8
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x1858(r30)
     b lbl_fn_802B28BC_00000FCC
 lbl_fn_802B28BC_00000FC8:
@@ -1840,7 +1840,7 @@ asm void fn_802B3684(void)
     stfs f7, 0x8(r1)
     stfs f3, 0xc(r1)
     stfs f6, 0x10(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f3, f1
     lfs f0, lbl_80884040
     fcmpo cr0, f3, f0
@@ -2587,7 +2587,7 @@ lbl_fn_802B3764_000022D4:
     li r6, 0x3e8
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802B3764_00002330:
     lwz r6, 0x14e0(r31)
     lis r3, lbl_807465C0@ha

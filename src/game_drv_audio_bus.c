@@ -14,7 +14,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void msg_getMessageById(void);
 extern void atn_Task_constructor(void);
@@ -266,7 +266,7 @@ asm void fn_805B3518(void)
     beq lbl_fn_805B3518_00000260
     mr r4, r29
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x64(r28)
     b lbl_fn_805B3518_00000264
 lbl_fn_805B3518_00000260:

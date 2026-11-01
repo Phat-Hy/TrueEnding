@@ -8,18 +8,18 @@ extern void _restgpr_27(void);
 extern void _savegpr_21(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void morph_updateMesh(void);
 extern void wcs_vformat(void);
 extern void fn_800EE360(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80107850(void);
 extern void fn_80108C10(void);
 extern void fn_80109828(void);
@@ -159,7 +159,7 @@ lbl_fn_802DA718_00000098:
     stw r0, 0x98(r1)
     stw r0, 0x9c(r1)
     stw r0, 0xa0(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_802DA718_00000138
     addi r3, r1, 0x70
@@ -272,7 +272,7 @@ lbl_fn_802DA718_00000254:
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F048
     lwz r6, 0x590(r31)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lis r4, lbl_80747654@ha
     lfs f1, lbl_80884600
     addi r4, r4, lbl_80747654@l
@@ -1171,7 +1171,7 @@ lbl_fn_802DB534_00000FAC:
     lwz r6, 0x590(r31)
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r28, 0x1638(r31)
     li r27, 0x0
     lfs f31, lbl_808845F0
@@ -1302,7 +1302,7 @@ lbl_fn_802DB7C8_00001130:
     addi r4, r4, 0x2b2
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -1373,7 +1373,7 @@ lbl_fn_802DB7C8_000011F0:
     addi r4, r4, 0x2d1
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1517,7 +1517,7 @@ lbl_fn_802DBA3C_000014C0:
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F048
     lwz r6, 0x590(r30)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     b lbl_fn_802DBA3C_00001530
 lbl_fn_802DBA3C_00001514:
     cmpwi r3, 0xb4

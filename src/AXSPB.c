@@ -9,7 +9,7 @@ extern BOOL OSDisableInterrupts(void);
 extern BOOL OSRestoreInterrupts(BOOL);
 extern void fn_80607F60(void);
 extern void fn_8068A850(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External large data symbols */
 extern u8 lbl_807D5840[];
@@ -401,7 +401,7 @@ asm void fn_8060AFC0(void)
     fsubs f31, f1, f2
     fmuls f1, f31, f31
     fsubs f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f1, f1
     lfs f0, lbl_808885B0
     fsubs f1, f1, f31

@@ -11,9 +11,9 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8006BA30(void);
 extern void fn_8006EF48(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void fn_800A4450(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
@@ -853,7 +853,7 @@ lbl_fn_8011A4D0_00000B38:
     addi r8, r1, 0x18
     add r7, r27, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_8011A4D0_00000C28
 lbl_fn_8011A4D0_00000B6C:
     li r3, 0x0
@@ -880,7 +880,7 @@ lbl_fn_8011A4D0_00000B98:
     addi r8, r1, 0x10
     add r7, r27, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_8011A4D0_00000C28
 lbl_fn_8011A4D0_00000BCC:
     li r3, 0x0
@@ -907,7 +907,7 @@ lbl_fn_8011A4D0_00000BF8:
     addi r8, r1, 0x8
     add r7, r27, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_8011A4D0_00000C28:
     lwz r4, 0x64(r29)
     lis r30, lbl_80736B10@ha
@@ -1544,7 +1544,7 @@ asm void fn_8011B3D8(void)
     mr r3, r0
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_8011B3D8_0000154C
 lbl_fn_8011B3D8_00001548:
     li r3, 0x0
@@ -1558,7 +1558,7 @@ lbl_fn_8011B3D8_0000154C:
     beq lbl_fn_8011B3D8_00001578
     li r4, 0x0
     li r5, 0x1a
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_8011B3D8_0000157C
 lbl_fn_8011B3D8_00001578:
     li r3, 0x0
@@ -1596,7 +1596,7 @@ lbl_fn_8011B3D8_000015DC:
     beq lbl_fn_8011B3D8_000015F8
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_8011B3D8_000015FC
 lbl_fn_8011B3D8_000015F8:
     li r3, 0x0
@@ -1610,7 +1610,7 @@ lbl_fn_8011B3D8_000015FC:
     beq lbl_fn_8011B3D8_00001628
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_8011B3D8_0000162C
 lbl_fn_8011B3D8_00001628:
     li r3, 0x0

@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void item_useConsumable(void);
 extern void fn_8004D388(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80116BD4(void);
 extern void fn_80178088(void);
@@ -1791,7 +1791,7 @@ lbl_fn_8038E23C_00001998:
     stw r28, 0xbc(r1)
     li r9, 0x0
     stw r28, 0xc0(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8038E23C_00001B20
     lwz r3, 0x89c(r30)

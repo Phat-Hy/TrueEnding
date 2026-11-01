@@ -21,7 +21,7 @@ extern void fn_800709F4(void);
 extern void mem_alloc(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B130(void);
 extern void fn_8008B140(void);
@@ -1520,7 +1520,7 @@ lbl_fn_8049CA9C_0000134C:
     bl sprintf
     mr r3, r25
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_8088714C
     mr r26, r3
     lfs f2, lbl_80887150

@@ -6,7 +6,7 @@ extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_804DBC84(void);
@@ -17,7 +17,7 @@ extern void fn_8050E8CC(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void wcscpy(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void __construct_new_array(void);
 extern void fn_80699E24(void);
 extern void fn_80699E2C(void);
@@ -131,7 +131,7 @@ asm void fn_80507314(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r28, lbl_8075B038@ha
     addi r29, r28, lbl_8075B038@l
     b lbl_fn_80507314_000002DC
@@ -1499,7 +1499,7 @@ lbl_fn_8050845C_0000132C:
     fmuls f0, f0, f1
     fmuls f0, f0, f1
     fmsubs f1, f31, f31, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f5, f1
     lfs f1, lbl_8087F870
     fneg f4, f31

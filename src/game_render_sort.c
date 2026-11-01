@@ -11,7 +11,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void morph_updateMesh(void);
 extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80109828(void);
 extern void fn_8013322C(void);
 extern void fn_801426A4(void);
@@ -1361,7 +1361,7 @@ lbl_fn_802A820C_000011EC:
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F048
     lwz r5, 0x1664(r31)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802A820C_0000123C:
     lwz r0, 0x154(r1)
     psq_l f31, 0x148(r1), 0, 0
@@ -1680,7 +1680,7 @@ lbl_fn_802A8718_00001690:
     stw r0, 0xc(r1)
     lwz r3, lbl_8087F048
     lwz r5, 0x1668(r31)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802A8718_000016E0:
     lwz r0, 0x134(r1)
     psq_l f31, 0x128(r1), 0, 0

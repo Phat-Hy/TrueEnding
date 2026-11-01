@@ -21,7 +21,7 @@ extern void fn_8007FAF0(void);
 extern void mem_alloc(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
@@ -1401,7 +1401,7 @@ lbl_fn_804A7F18_00001074:
     cmpwi r3, 0x0
     beq lbl_fn_804A7F18_00001170
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x15bc(r30)
     mr r28, r3
     b lbl_fn_804A7F18_00001174

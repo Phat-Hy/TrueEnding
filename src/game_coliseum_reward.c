@@ -21,7 +21,7 @@ extern void mem_free(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80087E9C(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_8008B964(void);
 extern void fn_8008E2DC(void);
 extern void fn_800B2180(void);
@@ -1526,7 +1526,7 @@ lbl_fn_80495788_00001464:
     mr r3, r28
     lwzx r4, r4, r26
     addi r4, r4, 0x4
-    bl fn_8008937C
+    bl node_createNamedChild
     lwz r5, 0x58(r27)
     mr r30, r3
     lfs f1, lbl_8088706C
@@ -1595,7 +1595,7 @@ lbl_fn_80495788_00001464:
     bl route_interpolatePath
     mr r3, r30
     addi r4, r25, 0x19f
-    bl fn_8008937C
+    bl node_createNamedChild
     lwz r5, 0x58(r27)
     mr r29, r3
     addi r4, r25, 0x1a3
@@ -1669,7 +1669,7 @@ lbl_fn_80495788_00001464:
     beq lbl_fn_80495788_000016C8
     mr r3, r30
     addi r4, r25, 0x1d0
-    bl fn_8008937C
+    bl node_createNamedChild
     lwz r5, 0x58(r27)
     mr r4, r3
     lwzx r3, r5, r26
@@ -1683,7 +1683,7 @@ lbl_fn_80495788_000016C8:
     beq lbl_fn_80495788_00001714
     mr r3, r30
     addi r4, r25, 0x1d7
-    bl fn_8008937C
+    bl node_createNamedChild
     lwz r5, 0x58(r27)
     mr r4, r3
     lwzx r3, r5, r26
@@ -1705,7 +1705,7 @@ lbl_fn_80495788_00001714:
     beq lbl_fn_80495788_00001740
     mr r3, r30
     addi r4, r25, 0x1e3
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r4, r3
     addi r3, r24, 0x230
     bl fn_800BB8D8
@@ -1728,7 +1728,7 @@ lbl_fn_80495788_00001768:
     beq lbl_fn_80495788_00001794
     mr r3, r30
     addi r4, r25, 0x1e8
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r4, r3
     addi r3, r24, 0x244
     bl fn_800BBA64
@@ -1743,7 +1743,7 @@ lbl_fn_80495788_00001794:
     bl strcpy
     mr r3, r30
     addi r4, r1, 0x208
-    bl fn_8008937C
+    bl node_createNamedChild
     lwz r5, 0x58(r27)
     mr r4, r3
     lwzx r3, r5, r26
@@ -1774,7 +1774,7 @@ lbl_fn_80495788_00001810:
     bl strcpy
     mr r3, r30
     addi r4, r1, 0x108
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80887074
     mr r24, r3
     lfs f2, lbl_808870A8
@@ -1834,7 +1834,7 @@ lbl_fn_80495788_000018E8:
     bne lbl_fn_80495788_00001A38
     mr r3, r30
     addi r4, r25, 0x21e
-    bl fn_8008937C
+    bl node_createNamedChild
     lwz r4, 0x58(r27)
     mr r29, r3
     lwzx r3, r4, r26
@@ -1957,7 +1957,7 @@ lbl_fn_80495788_00001AB8:
     bl sprintf
     mr r3, r30
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     lwz r5, 0x58(r27)
     mr r24, r3
     mr r4, r23

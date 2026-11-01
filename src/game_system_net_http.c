@@ -14,7 +14,7 @@ extern void fn_8006B2D8(void);
 extern void fn_8006CA80(void);
 extern void mem_alloc(void);
 extern void fn_8008B964(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void atn_Task_constructor(void);
 extern void fn_80116BD4(void);
 extern void fn_803918EC(void);
@@ -1515,7 +1515,7 @@ asm void fn_803935AC(void)
 lbl_fn_803935AC_00001504:
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0
     beq lbl_fn_803935AC_00001524

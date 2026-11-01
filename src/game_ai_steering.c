@@ -10,10 +10,10 @@ extern void actor_dispatchMessage(void);
 extern void fn_800457A4(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -1469,7 +1469,7 @@ asm void fn_80264DB4(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_80264DB4_00001388:
     addi r3, r1, 0x44
     bl talk_parseQuotedString
@@ -1540,7 +1540,7 @@ lbl_fn_80264DB4_0000144C:
     cmpwi r3, 0x0
     beq lbl_fn_80264DB4_00001490
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x168c(r30)
     b lbl_fn_80264DB4_00001494
 lbl_fn_80264DB4_00001490:

@@ -19,7 +19,7 @@ extern void PSMTXConcat(void);
 extern void PSMTXTrans(void);
 extern void PSMTXScale(void);
 extern void PSMTXMultVec(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void fn_8068B770(void);
 extern void fn_8068BC30(void);
 extern void fn_8068BD60(void);
@@ -1551,7 +1551,7 @@ lbl_fn_80202260_000014DC:
     stfs f8, 0x10(r1)
     stfs f2, 0x1c(r1)
     stfs f2, 0x28(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     mr r3, r30
     mr r4, r29

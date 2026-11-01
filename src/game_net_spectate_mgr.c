@@ -28,7 +28,7 @@ extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_800BC2E0(void);
 extern void fn_800C16B4(void);
@@ -2324,7 +2324,7 @@ lbl_spectateManager_update_00001D40:
     cmpwi r3, 0x0
     beq lbl_spectateManager_update_00001FC4
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x314(r30)
     mr r29, r3
     b lbl_spectateManager_update_00001FC8

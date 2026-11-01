@@ -13,7 +13,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80044E98(void);
 extern void fn_80044FBC(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
@@ -369,7 +369,7 @@ asm void fn_8010A308(void)
     stw r0, 0x60(r1)
     stw r0, 0x64(r1)
     stw r0, 0x68(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8010A308_00000504
     lwz r3, 0x5c(r1)

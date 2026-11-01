@@ -10,14 +10,14 @@ extern void fn_80063484(void);
 extern void mem_free(void);
 extern void msg_getMessageById(void);
 extern void fn_800BFAC8(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_calcHash(void);
 extern void fn_800E2DD4(void);
 extern void fn_800E2FE0(void);
 extern void fn_800E854C(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80105BD8(void);
 extern void fn_8012D8B8(void);
 extern void fn_8012DB04(void);
@@ -696,7 +696,7 @@ lbl_fn_8054622C_000006B4:
     addi r8, r31, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r12, 0x0(r31)
     mr r3, r31
     lwz r12, 0x44(r12)
@@ -1918,7 +1918,7 @@ lbl_fn_8054746C_0000196C:
     addi r4, r4, 0x40
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

@@ -12,7 +12,7 @@ extern void fn_800928B0(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void msg_getMessageById(void);
 extern void fn_800A5584(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void fn_800A55D4(void);
 extern void fn_800A58D0(void);
 extern void skin_applyWeights(void);
@@ -1543,7 +1543,7 @@ lbl_fn_80121FD4_0000134C:
     lwz r3, lbl_8087EF70
     mr r5, r31
     li r4, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31

@@ -6,10 +6,10 @@ extern void _restgpr_25(void);
 extern void _restgpr_26(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_801092C8(void);
 extern void fn_8011F8F4(void);
@@ -166,7 +166,7 @@ asm void fn_803A6B9C(void)
     lwz r4, 0x10(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1884,7 +1884,7 @@ lbl_fn_803A8284_000017D0:
     lwz r4, 0x10(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -2228,7 +2228,7 @@ lbl_fn_803A8470_00001BBC:
     stfs f6, 0xec(r1)
     stfs f5, 0xf0(r1)
     stfs f7, 0xf4(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_803A8470_00001D3C
     lfs f4, 0x148(r1)
@@ -2307,7 +2307,7 @@ lbl_fn_803A8470_00001D5C:
     stfs f8, 0xa4(r1)
     stfs f5, 0xa8(r1)
     stfs f0, 0xac(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_803A8470_00001E28
     addi r4, r1, 0x2d0

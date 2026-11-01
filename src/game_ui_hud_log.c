@@ -26,7 +26,7 @@ extern void fn_801E92D4(void);
 extern void fn_80206B14(void);
 extern void assert_generateId(void);
 extern void assert_formatLocation(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_804439FC(void);
 extern void fn_8044441C(void);
 extern void fn_8044D034(void);
@@ -949,7 +949,7 @@ lbl_fn_801CE87C_00000BE4:
 lbl_fn_801CE87C_00000C08:
     lwz r3, 0x48(r4)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     mr r0, r3
     lwz r3, lbl_8087F4F0
     slwi r0, r0, 2
@@ -1369,7 +1369,7 @@ lbl_fn_801CEA98_000011EC:
     cmpwi r24, 0x1
     bne lbl_fn_801CEA98_00001204
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     blt lbl_fn_801CEA98_000012DC
 lbl_fn_801CEA98_00001204:
@@ -1446,7 +1446,7 @@ lbl_fn_801CEA98_00001300:
     cmpwi r24, 0x1
     bne lbl_fn_801CEA98_00001318
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     blt lbl_fn_801CEA98_000013F0
 lbl_fn_801CEA98_00001318:

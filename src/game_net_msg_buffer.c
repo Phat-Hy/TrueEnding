@@ -8,7 +8,7 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
 extern void fn_8003EFB0(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_80083AD4(void);
 extern void atn_Task_setActive(void);
 extern void fn_800E2FE0(void);
@@ -160,7 +160,7 @@ lbl_fn_804FC2F4_00000130:
     lwz r27, 0x28(r26)
     cmpwi r27, 0x0
     beq lbl_fn_804FC2F4_0000014C
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r27
     bl fn_80083AD4
     stw r29, 0x28(r26)
@@ -168,7 +168,7 @@ lbl_fn_804FC2F4_0000014C:
     lwz r27, 0x2c(r26)
     cmpwi r27, 0x0
     beq lbl_fn_804FC2F4_00000168
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r27
     bl fn_80083AD4
     stw r29, 0x2c(r26)
@@ -195,7 +195,7 @@ lbl_fn_804FC2F4_000001A4:
     lwz r26, 0x8(r27)
     cmpwi r26, 0x0
     beq lbl_fn_804FC2F4_000001C8
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r26
     bl fn_80083AD4
     stw r29, 0x8(r27)
@@ -203,7 +203,7 @@ lbl_fn_804FC2F4_000001C8:
     lwz r26, 0xc(r27)
     cmpwi r26, 0x0
     beq lbl_fn_804FC2F4_000001E4
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r26
     bl fn_80083AD4
     stw r29, 0xc(r27)
@@ -241,7 +241,7 @@ lbl_fn_804FC2F4_00000248:
     lwz r26, 0x8(r27)
     cmpwi r26, 0x0
     beq lbl_fn_804FC2F4_0000026C
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r26
     bl fn_80083AD4
     stw r29, 0x8(r27)
@@ -249,7 +249,7 @@ lbl_fn_804FC2F4_0000026C:
     lwz r26, 0xc(r27)
     cmpwi r26, 0x0
     beq lbl_fn_804FC2F4_00000288
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r26
     bl fn_80083AD4
     stw r29, 0xc(r27)

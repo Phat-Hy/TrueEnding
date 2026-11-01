@@ -12,12 +12,12 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80056DB8(void);
 extern void atn_ColliBase_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -75,7 +75,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void vec3_isNonZero(void);
 extern u32 strlen(const char* str);
 
@@ -222,7 +222,7 @@ lbl_fn_8025941C_000000C0:
     stfs f0, 0x44(r1)
     stfs f3, 0x48(r1)
     stfs f4, 0x4c(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8025941C_00000158
     addi r3, r1, 0x60
@@ -556,7 +556,7 @@ lbl_fn_802598DC_000005D8:
     stfs f4, 0x10(r1)
     stfs f3, 0xc(r1)
     fmadds f1, f5, f5, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f31, f0
     ble lbl_fn_802598DC_00000624
@@ -1123,7 +1123,7 @@ asm void fn_8025A060(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_8025A060_00000E7C:
     addi r3, r1, 0x44
     bl talk_parseQuotedString
@@ -1498,7 +1498,7 @@ lbl_fn_8025A67C_000012A0:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r4, lbl_80743F78@ha
     lis r3, __files@ha
     addi r20, r1, 0x30

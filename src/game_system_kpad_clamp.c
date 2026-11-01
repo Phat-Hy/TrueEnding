@@ -15,12 +15,12 @@ extern void fn_80011410(void);
 extern void fn_800133B0(void);
 extern void fn_80013410(void);
 extern void fn_80043D58(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80057A64(void);
 extern void fn_80057A68(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_80097E80(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB5B4(void);
@@ -608,7 +608,7 @@ lbl_fn_803729B4_00000564:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_803729B4_0000060C
     lfs f0, 0x78(r1)
@@ -1304,7 +1304,7 @@ lbl_fn_803731E8_00000F80:
     lwz r4, 0x4(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r30, 0x55a8
     addi r4, r1, 0x8
     bl fn_800CB440
@@ -1722,7 +1722,7 @@ asm void fn_80373AE8(void)
     li r5, 0x0
     lwz r4, 0x8(r4)
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1917,7 +1917,7 @@ lbl_fn_80373AE8_00001854:
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

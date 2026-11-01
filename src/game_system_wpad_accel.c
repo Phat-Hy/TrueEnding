@@ -19,7 +19,7 @@ extern void fn_8015EB2C(void);
 extern void fn_8016D0A0(void);
 extern void fn_80175AEC(void);
 extern void fn_8017C974(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_8036554C(void);
 extern void fn_8036EA6C(void);
 extern void fn_8036EE0C(void);
@@ -361,7 +361,7 @@ asm void fn_8036D2D0(void)
     cmplwi r0, 0x1
     bgt lbl_fn_8036D2D0_00000490
     lwz r3, 0x50(r5)
-    bl fn_80219558
+    bl task_mapIdToQueue
     subi r0, r3, 0x2
     cmplwi r0, 0x1
     ble lbl_fn_8036D2D0_000003B8
@@ -484,7 +484,7 @@ lbl_fn_8036D2D0_0000050C:
     cmpwi r31, 0x0
     beq lbl_fn_8036D2D0_00000AEC
     lwz r3, 0x50(r31)
-    bl fn_80219558
+    bl task_mapIdToQueue
     subi r0, r3, 0x4
     mr r27, r3
     cmplwi r0, 0x2

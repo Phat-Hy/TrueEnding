@@ -11,7 +11,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8006EF48(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_800A4450(void);
@@ -966,7 +966,7 @@ lbl_fn_8058A0F4_00000BFC:
     addi r8, r1, 0x8
     add r7, r28, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_8058A0F4_00000C2C:
     lwz r0, 0x40(r1)
     srwi r0, r0, 31

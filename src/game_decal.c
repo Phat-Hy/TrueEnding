@@ -12,7 +12,7 @@ extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800DCA6C(void);
 extern void fn_800E70EC(void);
@@ -53,7 +53,7 @@ extern void fn_801E97DC(void);
 extern void fn_801E9ECC(void);
 extern void fn_8021921C(void);
 extern void fn_80219344(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8021AF98(void);
 extern void world_getGlobalFlag(void);
@@ -1288,7 +1288,7 @@ lbl_fn_800E62AC_00001018:
     lwz r4, 0x10(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -1311,7 +1311,7 @@ lbl_fn_800E62AC_00001084:
     lwz r4, 0x10(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1332,7 +1332,7 @@ lbl_fn_800E62AC_000010DC:
     lwz r4, 0x10(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1585,7 +1585,7 @@ lbl_fn_800E62AC_00001434:
     cror eq, gt, eq
     bne lbl_fn_800E62AC_000017B4
     lwz r3, 0x50(r25)
-    bl fn_80219558
+    bl task_mapIdToQueue
     subi r0, r3, 0x2
     cmplwi r0, 0x1
     ble lbl_fn_800E62AC_000015C0

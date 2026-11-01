@@ -13,7 +13,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_800A4450(void);
 extern void msg_getMessageById(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -1215,13 +1215,13 @@ lbl_fn_804BA970_00000F18:
     li r4, 0x0
     li r5, 0x1a
     mr r3, r30
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804BA970_00000F4C
     mr r3, r30
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804BA970_00000F9C
 lbl_fn_804BA970_00000F4C:
@@ -1250,13 +1250,13 @@ lbl_fn_804BA970_00000F9C:
     mr r3, r30
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804BA970_00000FCC
     mr r3, r30
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804BA970_00001038
 lbl_fn_804BA970_00000FCC:
@@ -1294,13 +1294,13 @@ lbl_fn_804BA970_00001038:
     mr r3, r30
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804BA970_00001068
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804BA970_000010D0
 lbl_fn_804BA970_00001068:
@@ -1337,13 +1337,13 @@ lbl_fn_804BA970_000010D0:
     mr r3, r30
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804BA970_00001100
     mr r3, r30
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804BA970_000011A0
 lbl_fn_804BA970_00001100:

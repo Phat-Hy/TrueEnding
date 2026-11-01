@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void msg_getMessageById(void);
 extern void fn_800A58D0(void);
 extern void ref_releaseHandle(void);
@@ -1294,7 +1294,7 @@ lbl_fn_801D4E74_00001148:
     addi r8, r1, 0x28
     add r7, r30, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_801D4E74_00001468
 lbl_fn_801D4E74_0000117C:
     lwz r3, lbl_8087F4F0
@@ -1336,7 +1336,7 @@ lbl_fn_801D4E74_000011E4:
     addi r8, r1, 0x20
     add r7, r30, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_801D4E74_00001468
 lbl_fn_801D4E74_00001218:
     subi r30, r6, 0x2
@@ -1405,7 +1405,7 @@ lbl_fn_801D4E74_000012E8:
     addi r8, r1, 0x18
     add r7, r30, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_801D4E74_00001468
 lbl_fn_801D4E74_0000131C:
     cmpwi r6, 0x0
@@ -1446,7 +1446,7 @@ lbl_fn_801D4E74_00001380:
     addi r8, r1, 0x10
     add r7, r30, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_801D4E74_00001468
 lbl_fn_801D4E74_000013B4:
     li r5, 0x2
@@ -1495,7 +1495,7 @@ lbl_fn_801D4E74_00001438:
     addi r8, r1, 0x8
     add r7, r30, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_801D4E74_00001468:
     lwz r0, 0x90(r1)
     srwi r0, r0, 31

@@ -22,12 +22,12 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
 extern void fn_80087E9C(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_800BFAC8(void);
 extern void fn_800C3184(void);
 extern void fn_800C31E4(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
@@ -740,7 +740,7 @@ lbl_fn_80360230_0000076C:
     addi r4, r31, 0x8
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     mr r3, r29
     addi r4, r1, 0x10
     bl fn_800CB440
@@ -1287,7 +1287,7 @@ lbl_fn_80360A2C_00000E5C:
     addi r4, r1, 0x10
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r31, 0x194
     addi r4, r1, 0x8
     bl fn_800CB440
@@ -1514,7 +1514,7 @@ asm void fn_80360CDC(void)
     beq lbl_fn_80360CDC_000011D8
     mr r3, r28
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x60(r31)
     mr r28, r3
     b lbl_fn_80360CDC_000011DC

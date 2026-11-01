@@ -10,7 +10,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80041B8C(void);
 extern void fn_80061E2C(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -262,7 +262,7 @@ lbl_fn_801FEF40_00000228:
     add r7, r6, r0
     addi r8, r1, 0xc
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_801FEF40_00000248:
     lwz r0, 0x10(r1)
     srwi. r0, r0, 31
@@ -1388,7 +1388,7 @@ lbl_player_clock_updateIntervals_00001244:
     addi r8, r1, 0x8
     add r7, r7, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     addi r25, r25, 0x10
     addi r29, r29, 0x1
 lbl_player_clock_updateIntervals_0000127C:

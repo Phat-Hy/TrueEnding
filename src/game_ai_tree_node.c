@@ -4,18 +4,18 @@
 /* External function declarations */
 extern void _restgpr_19(void);
 extern void _savegpr_19(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80109828(void);
 extern void fn_80139560(void);
 extern void fn_80148990(void);
@@ -1626,7 +1626,7 @@ lbl_fn_80258F1C_000015BC:
     stw r0, 0xb0(r1)
     stw r0, 0xb4(r1)
     stw r0, 0xb8(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80258F1C_0000169C
     addi r3, r1, 0x88
@@ -1678,7 +1678,7 @@ lbl_fn_80258F1C_0000169C:
     addi r4, r4, 0x1b0
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1723,7 +1723,7 @@ lbl_fn_80258F1C_00001758:
     li r10, 0x1e
     lwz r5, 0x638(r30)
     lwz r6, 0x590(r30)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_80258F1C_000017F8:
     lwz r0, 0xe4(r1)
     psq_l f31, 0xd8(r1), 0, 0

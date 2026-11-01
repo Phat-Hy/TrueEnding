@@ -20,7 +20,7 @@ extern void fn_80087858(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_8008CD60(void);
@@ -1207,7 +1207,7 @@ asm void fn_80418C4C(void)
     beq lbl_fn_80418C4C_00000E20
     mr r3, r20
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0xf0(r21)
     mr r24, r3
     b lbl_fn_80418C4C_00000E24
@@ -1282,7 +1282,7 @@ lbl_fn_80418C4C_00000F14:
     bl sprintf
     mr r3, r24
     addi r4, r1, 0x128
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r22, r3
     mr r27, r30
     mr r26, r29
@@ -1296,7 +1296,7 @@ lbl_fn_80418C4C_00000F48:
     bl sprintf
     mr r3, r22
     addi r4, r1, 0x28
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_808864E8
     mr r20, r3
     lfs f2, lbl_808864EC

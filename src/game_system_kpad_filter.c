@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void fn_80016FB4(void);
 extern void fn_8003EA3C(void);
 extern void fn_800697D8(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CFA28(void);
 extern void fn_800CFBA0(void);
@@ -35,7 +35,7 @@ extern void thread_findAndNotify(void);
 extern void fn_802085E0(void);
 extern void fn_8021771C(void);
 extern void fn_80219074(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8021CF08(void);
 extern void fn_802328DC(void);
@@ -381,7 +381,7 @@ lbl_fn_80373FC4_000003B0:
     addi r4, r4, 0x1c9
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1125,7 +1125,7 @@ lbl_fn_80374D64_00000E20:
     mr r29, r3
     beq lbl_fn_80374D64_0000114C
     lwz r3, 0x50(r28)
-    bl fn_80219558
+    bl task_mapIdToQueue
     mr r30, r3
     li r27, 0x0
     li r25, 0x0

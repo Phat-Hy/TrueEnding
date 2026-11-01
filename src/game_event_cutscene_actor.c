@@ -23,11 +23,11 @@ extern void fn_8005DED8(void);
 extern void fn_800696C8(void);
 extern void fn_80069E50(void);
 extern void fn_8006BA54(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void fn_80071220(void);
 extern void fn_800713D4(void);
 extern void fn_80071D60(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -318,7 +318,7 @@ lbl_fn_8047961C_000001D0:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     mr r3, r30
     bl fn_803B3D2C
     lwz r0, 0x10(r1)
@@ -1255,7 +1255,7 @@ asm void taskManager_initSystem(void)
     li r3, 0x7
     oris r3, r3, 0x7
     mtspr GQR5, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r3, r3, 0x1b4
     bl OSInitMutex
     bl DVDInit

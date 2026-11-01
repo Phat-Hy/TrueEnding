@@ -11,10 +11,10 @@ extern void dtor_80084684(void);
 extern void fn_80051B70(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void mem_free(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
@@ -184,7 +184,7 @@ asm void fn_802797DC(void)
     cmpwi r3, 0x0
     beq lbl_fn_802797DC_0000009C
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x1960(r31)
     b lbl_fn_802797DC_000000A0
 lbl_fn_802797DC_0000009C:
@@ -459,7 +459,7 @@ lbl_fn_802799C0_00000370:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x48(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r3, __files@ha
     lis r4, lbl_80744D2C@ha
     lfs f31, lbl_808838E8

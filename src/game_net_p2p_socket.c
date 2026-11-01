@@ -12,7 +12,7 @@ extern void OSSleepTicks(void);
 extern void OSWakeupThread(void);
 extern void __files(void);
 extern void dtor_80084684(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800838B8(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
@@ -1028,7 +1028,7 @@ asm void fn_8050CDD4(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r4, lbl_8075B098@ha
     lis r31, 0x1
     addi r4, r4, lbl_8075B098@l
@@ -1467,7 +1467,7 @@ asm void fn_8050D3EC(void)
     mflr r0
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r5, lbl_8075B180@ha
     li r0, 0x1
     addi r5, r5, lbl_8075B180@l
@@ -1482,7 +1482,7 @@ asm void fn_8050D3EC(void)
     bl fn_80084E50
 lbl_fn_8050D3EC_000012C4:
     stw r3, lbl_8087F878
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r31, lbl_8075B180@ha
     lis r4, 0x10
     addi r7, r31, lbl_8075B180@l
@@ -1512,7 +1512,7 @@ asm void fn_8050D488(void)
     mflr r0
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r0, 0x0
     stw r0, 0x1b0(r3)
     lwz r3, lbl_8087F878
@@ -1521,7 +1521,7 @@ asm void fn_8050D488(void)
     mtctr r12
     bctrl
     mr r31, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r31
     bl fn_80083AD4
     lwz r3, lbl_8087F878
@@ -1572,7 +1572,7 @@ asm void fn_8050D504(void)
     bl fn_80509A94
     cmpwi r30, 0x0
     bne lbl_fn_8050D504_0000142C
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r28
     mr r5, r29
     mr r7, r31
@@ -1638,7 +1638,7 @@ lbl_fn_8050D5BC_000014B8:
     bl fn_80509A94
     b lbl_fn_8050D5BC_000014F8
 lbl_fn_8050D5BC_000014EC:
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r29
     bl fn_80083AD4
 lbl_fn_8050D5BC_000014F8:
@@ -1679,7 +1679,7 @@ asm void fn_8050D680(void)
     bl fn_80509A94
     cmpwi r30, 0x0
     bne lbl_fn_8050D680_000015A0
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r29
     mr r7, r31
     mr r8, r31
@@ -1744,7 +1744,7 @@ lbl_fn_8050D72C_00001628:
     bl fn_80509A94
     b lbl_fn_8050D72C_00001668
 lbl_fn_8050D72C_0000165C:
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r29
     bl fn_80083AD4
 lbl_fn_8050D72C_00001668:
@@ -1945,7 +1945,7 @@ lbl_fn_8050D7F0_00001920:
     bctrl
     clrlwi r29, r3, 24
     clrlslwi r31, r3, 24, 1
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r31
     li r5, 0x1
     li r6, 0x5
@@ -1957,7 +1957,7 @@ lbl_fn_8050D7F0_00001920:
     mr r5, r31
     li r4, 0x0
     bl memset
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r31
     li r5, 0x1
     li r6, 0x5
@@ -1973,7 +1973,7 @@ lbl_fn_8050D7F0_00001920:
     lwz r29, 0x48(r1)
     cmpwi r29, 0x0
     beq lbl_fn_8050D7F0_000019C4
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r29
     bl fn_80083AD4
     li r0, 0x0
@@ -1982,7 +1982,7 @@ lbl_fn_8050D7F0_000019C4:
     lwz r29, 0x4c(r1)
     cmpwi r29, 0x0
     beq lbl_fn_8050D7F0_000019E4
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r29
     bl fn_80083AD4
     li r0, 0x0

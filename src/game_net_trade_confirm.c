@@ -9,7 +9,7 @@ extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
@@ -18,7 +18,7 @@ extern void mem_free(void);
 extern void mem_realloc(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_8008C828(void);
 extern void fn_800C16B4(void);
@@ -788,7 +788,7 @@ asm void fn_805303D4(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D720
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lwz r5, lbl_8087EFA8
     addi r3, r29, 0x1334
     lwz r0, 0x374(r5)
@@ -924,7 +924,7 @@ asm void fn_805305D4(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8c(r1)
     la r4, lbl_8087D720
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     addi r3, r30, 0x1344
     bl boss_getOffset50
     mr r17, r3
@@ -1692,7 +1692,7 @@ asm void fn_80531090(void)
     cmpwi r3, 0x0
     beq lbl_fn_80531090_00001720
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x78(r29)
     mr r30, r3
     b lbl_fn_80531090_00001724

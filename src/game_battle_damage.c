@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void fn_80044E0C(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void fn_80097D40(void);
 extern void fn_801059F8(void);
@@ -1312,7 +1312,7 @@ asm void fn_8016AFE8(void)
     stfs f0, 0x5c(r1)
     stfs f3, 0x60(r1)
     stfs f4, 0x64(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8016AFE8_000011E0
     lwz r3, 0xb0(r1)

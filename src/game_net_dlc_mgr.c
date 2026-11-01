@@ -13,10 +13,10 @@ extern void fn_8004ECC0(void);
 extern void fn_80051CD8(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_80097A20(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -158,7 +158,7 @@ asm void fn_8054770C(void)
     addi r4, r4, 0x4d
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -286,7 +286,7 @@ asm void fn_80547908(void)
     cmpwi r3, 0x0
     beq lbl_fn_80547908_00000250
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x54(r31)
     b lbl_fn_80547908_00000254
 lbl_fn_80547908_00000250:
@@ -2435,7 +2435,7 @@ lbl_fn_80548E74_00001FE0:
     addi r3, r1, 0x14
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -2451,7 +2451,7 @@ lbl_fn_80548E74_00002018:
     addi r3, r1, 0x10
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -2475,7 +2475,7 @@ lbl_fn_80548E74_00002050:
     addi r3, r1, 0xc
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle

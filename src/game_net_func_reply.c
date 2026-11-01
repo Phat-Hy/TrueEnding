@@ -6,7 +6,7 @@ extern void OSIsThreadSuspended(void);
 extern void OSResumeThread(void);
 extern void OSWakeupThread(void);
 extern void dtor_80084684(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_80083AD4(void);
 extern void fn_804DBC84(void);
 extern void fn_8050AA90(void);
@@ -138,7 +138,7 @@ asm void fn_80508CF0(void)
     lwz r31, -0x4130(r3)
     cmpwi r31, 0x0
     beq lbl_fn_80508CF0_00000090
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r31
     bl fn_80083AD4
     addis r3, r29, 0x1

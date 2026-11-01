@@ -26,7 +26,7 @@ extern void fn_800DC3C8(void);
 extern void fn_8016E484(void);
 extern void fn_8020ED84(void);
 extern void fn_8020EF4C(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_80228AF4(void);
 extern void fn_80228AF8(void);
 extern void fn_80228CA0(void);
@@ -1289,11 +1289,11 @@ lbl_fn_805634D4_00000E24:
     addi r4, r1, 0x8
     bl strcpy
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r31, 0x0
     beq lbl_fn_805634D4_00000E58
     lwz r3, 0x50(r31)
-    bl fn_80219558
+    bl task_mapIdToQueue
 lbl_fn_805634D4_00000E58:
     mr r3, r30
     bl fn_8016E484
@@ -1329,7 +1329,7 @@ lbl_fn_805634D4_00000EB8:
     bne lbl_fn_805634D4_00000F28
     lwz r3, 0x40c(r28)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x7
     bge lbl_fn_805634D4_00000F28
     lwz r4, lbl_8087F4F0
@@ -2126,7 +2126,7 @@ lbl_fn_80564194_00001994:
     bl strcpy
     lwz r3, 0x40c(r28)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r0, 0x0(r28)
     cmplwi r0, 0x3
     bgt lbl_fn_80564194_00001A2C

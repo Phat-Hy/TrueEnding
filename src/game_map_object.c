@@ -5,7 +5,7 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80063764(void);
 extern void mem_alloc(void);
 extern void atn_Task_constructor(void);
@@ -223,7 +223,7 @@ asm void fn_80182134(void)
     li r8, 0x0
     li r9, 0x0
     stw r0, 0xd8(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     lwz r4, lbl_8087F0A8
     cntlzw r0, r3
     srwi r29, r0, 5

@@ -16,7 +16,7 @@ extern void mem_alloc(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
 extern void fn_800BFAC8(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB688(void);
 extern void fn_800EF73C(void);
@@ -681,7 +681,7 @@ lbl_fn_804348C4_00000794:
     addi r3, r1, 0x10
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1153,7 +1153,7 @@ lbl_fn_804348C4_00000F6C:
     lfs f1, lbl_8088689C
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     lwz r3, 0x160(r29)
     lfs f1, lbl_8088689C
     subic. r3, r3, 0x1

@@ -14,7 +14,7 @@ extern void dtor_80084684(void*);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void item_useConsumable(void);
-extern void* fn_800827E0(void);
+extern void* dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void*, void*);
 extern void fn_800C2418(void);
@@ -160,7 +160,7 @@ static inline void atn_LH_Texture_release_inline(atn_LH_Texture* this)
     buffer = this->field_28;
     this->field_2c = 0;
     if (buffer != NULL) {
-        void* heap = fn_800827E0();
+        void* heap = dungeon_initGlobalContext();
         fn_80083AD4(heap, buffer);
         this->field_28 = NULL;
     }
@@ -303,7 +303,7 @@ asm void fn_800D5A3C(void)
     stb r31, 0x2c(r27)
     cmpwi r28, 0x0
     beq lbl_fn_800D5A3C_000003D4
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r28
     bl fn_80083AD4
     stw r31, 0x28(r27)
@@ -317,7 +317,7 @@ lbl_fn_800D5A3C_000003D4:
     li r7, 0x0
     bl fn_80615E00
     mr r31, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r7, lbl_80734638@ha
     mr r4, r31
     addi r7, r7, lbl_80734638@l
@@ -381,7 +381,7 @@ asm void fn_800D5B58(void)
     stb r31, 0x2c(r25)
     cmpwi r30, 0x0
     beq lbl_fn_800D5B58_000004F4
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r30
     bl fn_80083AD4
     stw r31, 0x28(r25)
@@ -398,7 +398,7 @@ lbl_fn_800D5B58_000004F4:
     clrlwi r7, r29, 24
     bl fn_80615E00
     mr r30, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r7, lbl_80734638@ha
     mr r4, r30
     addi r7, r7, lbl_80734638@l

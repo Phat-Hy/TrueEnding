@@ -15,11 +15,11 @@ extern void fn_8003EA3C(void);
 extern void fn_8004203C(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_free(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void skin_applyWeights(void);
 extern void fn_800CB360(void);
@@ -143,7 +143,7 @@ asm void fn_802DDBB0(void)
     cmpwi r3, 0x0
     beq lbl_fn_802DDBB0_00000048
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x16a4(r31)
     b lbl_fn_802DDBB0_0000004C
 lbl_fn_802DDBB0_00000048:
@@ -492,7 +492,7 @@ asm void fn_802DDDB8(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_802DDDB8_000004F4:
     addi r3, r1, 0x44
     bl talk_parseQuotedString

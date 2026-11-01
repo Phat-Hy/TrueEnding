@@ -22,7 +22,7 @@ extern void fn_801F791C(void);
 extern void event_findEntryById(void);
 extern void fn_8021150C(void);
 extern void fn_80213E60(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void kpad_getClampData(void);
 extern void fn_803750E4(void);
 extern void fn_804439FC(void);
@@ -144,7 +144,7 @@ asm void fn_8044D060(void)
     stw r29, 0x14(r1)
     mr r29, r3
     mr r3, r7
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     blt lbl_fn_8044D060_00000098
     cmpwi r3, 0x7
@@ -198,7 +198,7 @@ asm void fn_8044D104(void)
     stw r28, 0x10(r1)
     mr r28, r3
     mr r3, r7
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     blt lbl_fn_8044D104_0000013C
     cmpwi r3, 0x7
@@ -245,7 +245,7 @@ asm void fn_8044D1A4(void)
     stw r30, 0x8(r1)
     mr r30, r3
     mr r3, r5
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmplwi r3, 0x6
     bgt lbl_fn_8044D1A4_000001C4
     addis r4, r30, 0x1
@@ -276,7 +276,7 @@ asm void fn_8044D208(void)
     mr r28, r3
     mr r29, r4
     mr r3, r5
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmplwi r3, 0x6
     mr r31, r3
     ble lbl_fn_8044D208_00000214
@@ -395,7 +395,7 @@ asm void weapon_getDamageParam(void)
     stw r30, 0x8(r1)
     mr r30, r3
     mr r3, r5
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmplwi r3, 0x6
     bgt lbl_weapon_getDamageParam_000003C0
     addis r4, r30, 0x1

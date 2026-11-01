@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void item_useConsumable(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80116BD4(void);
 extern void world_getGlobalFlag(void);
@@ -662,7 +662,7 @@ asm void fn_8038B650(void)
     stfs f0, 0x68(r1)
     stfs f3, 0x6c(r1)
     stfs f4, 0x70(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8038B650_000008C0
     addi r3, r1, 0xfc

@@ -11,7 +11,7 @@ extern void fn_8009EE30(void);
 extern void fn_800A03E4(void);
 extern void fn_800A0548(void);
 extern void atn_Anim_getDuration(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -1894,13 +1894,13 @@ asm void fn_80510D68(void)
     lwz r30, 0x80(r3)
     li r5, 0x1a
     mr r3, r31
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80510D68_0000181C
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80510D68_00001850
 lbl_fn_80510D68_0000181C:
@@ -1922,13 +1922,13 @@ lbl_fn_80510D68_00001850:
     mr r3, r31
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80510D68_00001880
     mr r3, r31
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80510D68_000018B4
 lbl_fn_80510D68_00001880:
@@ -1979,13 +1979,13 @@ asm void fn_80510E98(void)
     lwz r31, lbl_8087EF70
     lwz r30, 0x80(r3)
     mr r3, r31
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80510E98_00001940
     mr r3, r31
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80510E98_00001974
 lbl_fn_80510E98_00001940:
@@ -2007,13 +2007,13 @@ lbl_fn_80510E98_00001974:
     mr r3, r31
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80510E98_000019A4
     mr r3, r31
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80510E98_000019D8
 lbl_fn_80510E98_000019A4:

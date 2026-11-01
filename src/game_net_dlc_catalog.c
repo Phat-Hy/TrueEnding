@@ -12,7 +12,7 @@ extern void dtor_80084684(void);
 extern void fn_80061824(void);
 extern void fn_8006EF48(void);
 extern void mem_alloc(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_800A4450(void);
 extern void fn_800BFAC8(void);
@@ -190,7 +190,7 @@ asm void fn_80549D90(void)
     cmpwi r3, 0x0
     beq lbl_fn_80549D90_000000A0
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x58(r30)
     b lbl_fn_80549D90_000000A4
 lbl_fn_80549D90_000000A0:

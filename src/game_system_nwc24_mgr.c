@@ -18,7 +18,7 @@ extern void fn_80013410(void);
 extern void fn_80013484(void);
 extern void item_useConsumable(void);
 extern void fn_8004D388(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80050900(void);
 extern void fn_80051B70(void);
 extern void fn_80057A64(void);
@@ -404,7 +404,7 @@ lbl_fn_80382A1C_000001E4:
     addi r7, r7, 0x8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80382A1C_000004B4
     addi r3, r1, 0xf8
@@ -2808,7 +2808,7 @@ lbl_fn_80384188_000026BC:
     li r8, 0x0
     stfs f0, 0x2bc(r1)
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80384188_00002A20
     lfs f7, 0x8c4(r1)
@@ -3047,7 +3047,7 @@ lbl_fn_80384188_00002A20:
     psq_st f1, 0x0(r6), 0, 0
     lwz r3, lbl_8087EE98
     stfs f2, 0x2c4(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80384188_00002B84
     lfs f7, 0x8c4(r1)
@@ -3174,7 +3174,7 @@ lbl_fn_80384188_00002C2C:
     stfs f8, 0x184(r1)
     psq_st f1, 0x0(r6), 0, 0
     stfs f2, 0x2c4(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80384188_00002D78
     lfs f7, 0x8c4(r1)
@@ -3362,7 +3362,7 @@ lbl_fn_80384188_00002E80:
     li r4, 0x0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_80384188_0000306C
     addi r3, r1, 0x328

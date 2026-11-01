@@ -19,7 +19,7 @@ extern void fn_8006AA20(void);
 extern void fn_8006B2D8(void);
 extern void fn_8006D008(void);
 extern void fn_8006EF48(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_80084F84(void);
 extern void fn_800A4450(void);
 extern void fn_800C3094(void);
@@ -648,11 +648,11 @@ asm void fn_8053F6F0(void)
     stw r31, 0x10c(r1)
     stw r30, 0x108(r1)
     mr r30, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r3, r3, 0x150
     bl fn_80084F84
     mr r31, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r3, r3, 0x138
     bl fn_80084F84
     lwz r0, 0x194(r30)
@@ -1765,11 +1765,11 @@ lbl_fn_80540120_00001654:
     li r3, 0x0
     b lbl_fn_80540120_000016D8
 lbl_fn_80540120_00001664:
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r3, r3, 0x150
     bl fn_80084F84
     mr r30, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r3, r3, 0x138
     bl fn_80084F84
     lwz r0, 0x284(r31)

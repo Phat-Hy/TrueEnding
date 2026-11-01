@@ -14,14 +14,14 @@ extern void fn_8003EFB0(void);
 extern void fn_8004895C(void);
 extern void fn_80049654(void);
 extern void fn_8004B338(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_80083AD4(void);
 extern void mem_getAllocSize(void);
 extern void fn_800897D8(void);
 extern void fn_80089ACC(void);
 extern void msg_getMessageById(void);
 extern void fn_800C310C(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB58C(void);
 extern void morph_updateMesh(void);
@@ -476,7 +476,7 @@ lbl_fn_804D14BC_000000F8:
     lwz r27, 0x28(r26)
     cmpwi r27, 0x0
     beq lbl_fn_804D14BC_00000114
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r27
     bl fn_80083AD4
     stw r29, 0x28(r26)
@@ -484,7 +484,7 @@ lbl_fn_804D14BC_00000114:
     lwz r27, 0x2c(r26)
     cmpwi r27, 0x0
     beq lbl_fn_804D14BC_00000130
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r27
     bl fn_80083AD4
     stw r29, 0x2c(r26)
@@ -511,7 +511,7 @@ lbl_fn_804D14BC_0000016C:
     lwz r26, 0x8(r27)
     cmpwi r26, 0x0
     beq lbl_fn_804D14BC_00000190
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r26
     bl fn_80083AD4
     stw r29, 0x8(r27)
@@ -519,7 +519,7 @@ lbl_fn_804D14BC_00000190:
     lwz r26, 0xc(r27)
     cmpwi r26, 0x0
     beq lbl_fn_804D14BC_000001AC
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r26
     bl fn_80083AD4
     stw r29, 0xc(r27)
@@ -557,7 +557,7 @@ lbl_fn_804D14BC_00000210:
     lwz r26, 0x8(r27)
     cmpwi r26, 0x0
     beq lbl_fn_804D14BC_00000234
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r26
     bl fn_80083AD4
     stw r29, 0x8(r27)
@@ -565,7 +565,7 @@ lbl_fn_804D14BC_00000234:
     lwz r26, 0xc(r27)
     cmpwi r26, 0x0
     beq lbl_fn_804D14BC_00000250
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r26
     bl fn_80083AD4
     stw r29, 0xc(r27)
@@ -2185,7 +2185,7 @@ lbl_fn_804D25D4_000018A0:
     addi r4, r4, 0x15f
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -2207,7 +2207,7 @@ lbl_fn_804D25D4_000018FC:
     addi r4, r4, 0x16c
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -2234,7 +2234,7 @@ lbl_fn_804D25D4_00001960:
     addi r4, r4, 0x16c
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -2842,7 +2842,7 @@ lbl_fn_804D25D4_00002274:
     addi r4, r4, 0x16c
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

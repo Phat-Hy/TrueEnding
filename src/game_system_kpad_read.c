@@ -18,7 +18,7 @@ extern void fn_801092C8(void);
 extern void fn_8011770C(void);
 extern void fn_802085E0(void);
 extern void fn_8021771C(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_8037D34C(void);
 extern void fn_8037D3E8(void);
 extern void fn_803933A4(void);
@@ -812,7 +812,7 @@ lbl_world_updateMapTransition_00000980:
     b lbl_world_updateMapTransition_00000BF8
 lbl_world_updateMapTransition_000009A0:
     lwz r3, 0x50(r25)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmplwi r3, 0x6
     bgt lbl_world_updateMapTransition_00000BF4
     mulli r0, r3, 0x43c
@@ -1907,7 +1907,7 @@ asm void fn_803701E0(void)
     mr r29, r5
     beq lbl_fn_803701E0_000019E0
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     blt lbl_fn_803701E0_000019E0
     cmpwi r3, 0x7

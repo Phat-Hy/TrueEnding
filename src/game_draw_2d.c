@@ -25,7 +25,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_80088AF4(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800A96AC(void);
 extern void layout_drawPane(void);
 extern void fn_800B448C(void);
@@ -154,7 +154,7 @@ asm void fn_800B23C8(void)
     mr r29, r3
     mr r3, r4
     addi r4, r31, lbl_80732D3C@l
-    bl fn_8008937C
+    bl node_createNamedChild
     addi r31, r31, lbl_80732D3C@l
     lwz r7, 0x48(r29)
     mr r30, r3

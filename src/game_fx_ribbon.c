@@ -50,7 +50,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_807452F0[];
@@ -788,7 +788,7 @@ lbl_fn_8028AFD8_000009C0:
     fmadds f1, f6, f6, f0
     stfs f3, 0x18(r1)
     stfs f5, 0x1c(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f4, 0x50(r1)
     frsp f31, f1
     lfs f0, 0x530(r28)
@@ -804,7 +804,7 @@ lbl_fn_8028AFD8_000009C0:
     fmadds f1, f6, f6, f0
     stfs f3, 0xc(r1)
     stfs f5, 0x10(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f0, f31
     bge lbl_fn_8028AFD8_00000A4C

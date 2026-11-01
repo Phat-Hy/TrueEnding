@@ -3,7 +3,7 @@
 /* External functions referenced */
 extern void fn_80615FF0(void);
 extern void fn_8068A850(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void _savegpr_24(void);
 extern void _restgpr_24(void);
 
@@ -306,7 +306,7 @@ asm void fn_806159C0(void)
     fadds f1, f6, f1
     fcmpu cr0, f0, f1
     beq lbl_fn_806159C0_00000354
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f1, f1
     lfs f0, lbl_80888768
     fdivs f1, f0, f1

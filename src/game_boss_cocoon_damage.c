@@ -14,7 +14,7 @@ extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -71,7 +71,7 @@ extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void strncmp(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void __construct_new_array(void);
 
 /* External data declarations */
@@ -525,7 +525,7 @@ asm void fn_8045817C(void)
     cmpwi r3, 0x0
     beq lbl_fn_8045817C_00000588
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x2a40(r29)
     mr r30, r3
     b lbl_fn_8045817C_0000058C
@@ -834,7 +834,7 @@ asm void fn_80458590(void)
     cmpwi r3, 0x0
     beq lbl_fn_80458590_000009F4
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x1980(r31)
     b lbl_fn_80458590_000009F8
 lbl_fn_80458590_000009F4:
@@ -1781,7 +1781,7 @@ lbl_fn_80459358_00001748:
     fmadds f1, f6, f6, f0
     stfs f3, 0x3c(r1)
     stfs f5, 0x40(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f3, f1
     lfs f0, lbl_80886C20
     fcmpo cr0, f3, f0

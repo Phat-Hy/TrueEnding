@@ -9,7 +9,7 @@ extern void fn_8006EF48(void);
 extern void mem_alloc(void);
 extern void fn_800A4450(void);
 extern void msg_getMessageById(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -1313,13 +1313,13 @@ asm void fn_804CE2EC(void)
     mr r3, r30
     lwz r28, 0x6c(r4)
     li r4, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804CE2EC_00001054
     mr r3, r30
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804CE2EC_00001070
 lbl_fn_804CE2EC_00001054:
@@ -1334,13 +1334,13 @@ lbl_fn_804CE2EC_00001070:
     mr r3, r30
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804CE2EC_000010A0
     mr r3, r30
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804CE2EC_000010C0
 lbl_fn_804CE2EC_000010A0:
@@ -1356,13 +1356,13 @@ lbl_fn_804CE2EC_000010C0:
     mr r3, r30
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804CE2EC_000010F0
     mr r3, r30
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804CE2EC_0000114C
 lbl_fn_804CE2EC_000010F0:
@@ -1394,13 +1394,13 @@ lbl_fn_804CE2EC_0000114C:
     mr r3, r30
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804CE2EC_0000117C
     mr r3, r30
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804CE2EC_000011D4
 lbl_fn_804CE2EC_0000117C:

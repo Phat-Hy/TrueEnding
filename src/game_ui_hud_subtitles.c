@@ -12,7 +12,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80087E9C(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800A03A0(void);
 extern void fn_800A0448(void);
 extern void fn_800A08E0(void);
@@ -171,7 +171,7 @@ asm void fn_801CFACC(void)
 lbl_fn_801CFACC_000000A4:
     lwz r4, 0xa0(r29)
 lbl_fn_801CFACC_000000A8:
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r31, lbl_8073BCF0@ha
     lfs f1, lbl_80882A18
     addi r31, r31, lbl_8073BCF0@l

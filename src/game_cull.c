@@ -15,7 +15,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_80061824(void);
 extern void fn_8006EF48(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -1876,7 +1876,7 @@ lbl_fn_800D9960_000016CC:
     addi r8, r1, 0x20
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x74(r1)
     lwz r3, lbl_8087EEC8
     srwi. r0, r0, 31
@@ -1929,7 +1929,7 @@ lbl_fn_800D9960_00001774:
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     cmpwi r21, 0x0
     li r22, 0x0
     li r19, 0x0
@@ -1977,7 +1977,7 @@ lbl_fn_800D9960_00001810:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x4c(r1)
     lhz r3, 0x0(r23)
     srwi. r0, r0, 31
@@ -2082,7 +2082,7 @@ lbl_fn_800D9960_000019E4:
     addi r8, r1, 0xc
     add r7, r6, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r3, 0x24(r20)
     clrlwi. r0, r3, 31
     beq lbl_fn_800D9960_00001B74

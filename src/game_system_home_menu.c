@@ -32,7 +32,7 @@ extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_80089ACC(void);
 extern void fn_800BFAC8(void);
@@ -377,7 +377,7 @@ asm void fn_8035DFB8(void)
     cmpwi r3, 0x0
     beq lbl_fn_8035DFB8_00000370
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x1a8(r31)
     b lbl_fn_8035DFB8_00000374
 lbl_fn_8035DFB8_00000370:

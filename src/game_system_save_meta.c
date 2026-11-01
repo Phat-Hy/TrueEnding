@@ -16,7 +16,7 @@ extern void mem_free(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80099E9C(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
@@ -113,7 +113,7 @@ extern void rand(void);
 extern void strcmp(void);
 extern void atoi(void);
 extern void abort(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 jumptable_807894B8[];
@@ -1571,7 +1571,7 @@ lbl_fn_80346A34_00001398:
     addi r4, r4, 0x39d
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1697,7 +1697,7 @@ asm void fn_80346D8C(void)
     fmadds f1, f6, f6, f0
     stfs f3, 0x18(r1)
     stfs f5, 0x1c(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r0, 0x17e4(r30)
     frsp f31, f1
     li r31, 0x0
@@ -1731,7 +1731,7 @@ lbl_fn_80346D8C_000015C4:
     fmadds f1, f5, f5, f0
     stfs f3, 0xc(r1)
     stfs f6, 0x10(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f3, f1
     lfs f0, lbl_808853C8
     fcmpo cr0, f3, f0

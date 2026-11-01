@@ -28,11 +28,11 @@ extern void fn_80057A64(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void fn_8006CA80(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_8008BBD8(void);
 extern void atn_Matrix_copy(void);
@@ -1483,7 +1483,7 @@ asm void fn_8045FE70(void)
     cmpwi r3, 0x0
     beq lbl_fn_8045FE70_00001290
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x18f0(r31)
     b lbl_fn_8045FE70_00001294
 lbl_fn_8045FE70_00001290:
@@ -1540,7 +1540,7 @@ lbl_fn_8045FE70_00001294:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x138(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_8045FE70_00001364:
     addi r3, r1, 0x138
     bl talk_parseQuotedString

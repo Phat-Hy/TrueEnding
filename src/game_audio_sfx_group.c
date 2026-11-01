@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80097D40(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -1857,7 +1857,7 @@ asm void fn_8031348C(void)
     beq lbl_fn_8031348C_00001944
     mr r3, r31
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x54(r30)
     mr r31, r3
     b lbl_fn_8031348C_00001948

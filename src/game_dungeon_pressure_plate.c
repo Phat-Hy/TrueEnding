@@ -8,10 +8,10 @@ extern void _restgpr_27(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800BFAC8(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
 extern void fn_80134250(void);
@@ -539,7 +539,7 @@ asm void fn_803E41AC(void)
     li r5, 0x0
     addi r4, r30, 0x1551
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -655,7 +655,7 @@ asm void fn_803E43B8(void)
     lfs f1, lbl_80885DFC
     stw r0, 0xd7c(r3)
     addi r3, r1, 0x8
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1086,7 +1086,7 @@ lbl_fn_803E4978_00000DE4:
     addi r8, r1, 0x8
     add r7, r30, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     li r0, 0x2
     stw r0, 0xdb0(r29)
 lbl_fn_803E4978_00000E1C:

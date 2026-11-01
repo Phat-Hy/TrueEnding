@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800A6BD4(void);
@@ -265,7 +265,7 @@ lbl_fn_801F91DC_000002C8:
     addi r8, r1, 0xc
     add r7, r7, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0xbc(r31)
     mr r4, r31
     lwz r5, 0x20(r1)
@@ -317,7 +317,7 @@ lbl_fn_801F91DC_00000398:
     add r7, r6, r0
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_801F91DC_00000458
 lbl_fn_801F91DC_000003B8:
     addi r4, r4, 0x10
@@ -358,7 +358,7 @@ lbl_fn_801F91DC_00000404:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_801F91DC_0000044C:
     lwz r3, 0xbc(r31)
     addi r0, r3, 0x1

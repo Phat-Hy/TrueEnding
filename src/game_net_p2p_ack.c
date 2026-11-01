@@ -9,9 +9,9 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80087E9C(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
@@ -100,13 +100,13 @@ asm void fn_80510FBC(void)
     lwz r28, lbl_8087EF70
     lwz r31, 0x80(r3)
     mr r3, r28
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80510FBC_00000054
     mr r3, r28
     li r4, 0x0
     li r5, 0x1a
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80510FBC_00000088
 lbl_fn_80510FBC_00000054:
@@ -128,13 +128,13 @@ lbl_fn_80510FBC_00000088:
     mr r3, r28
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80510FBC_000000B8
     mr r3, r28
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80510FBC_000000F0
 lbl_fn_80510FBC_000000B8:
@@ -157,13 +157,13 @@ lbl_fn_80510FBC_000000F0:
     mr r3, r28
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80510FBC_00000120
     mr r3, r28
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80510FBC_00000184
 lbl_fn_80510FBC_00000120:
@@ -198,13 +198,13 @@ lbl_fn_80510FBC_00000184:
     mr r3, r28
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_80510FBC_000001B4
     mr r3, r28
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_80510FBC_00000208
 lbl_fn_80510FBC_000001B4:
@@ -350,7 +350,7 @@ asm void fn_805112FC(void)
 lbl_fn_805112FC_00000374:
     lwz r4, 0xa0(r29)
 lbl_fn_805112FC_00000378:
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r31, lbl_8075B2B8@ha
     lfs f1, lbl_808877D4
     addi r31, r31, lbl_8075B2B8@l

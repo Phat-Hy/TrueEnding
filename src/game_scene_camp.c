@@ -26,7 +26,7 @@ extern void printf(void);
 extern void strcmp(void);
 extern void abort(void);
 extern void std_atan2(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void __ptmf_scall(void);
 
 /* External data declarations */
@@ -1813,7 +1813,7 @@ lbl_fn_801A90E4_00001870:
     fcmpo cr0, f1, f0
     cror eq, gt, eq
     bne lbl_fn_801A90E4_00001A88
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f5, f1
     lfs f0, lbl_80882278
     lfs f4, lbl_8088227C
@@ -1956,10 +1956,10 @@ lbl_fn_801A90E4_00001A44:
     b lbl_fn_801A90E4_00001C94
 lbl_fn_801A90E4_00001A88:
     fmr f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f29, f1
     fmr f1, f30
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     lfs f3, 0x570(r29)
     fdivs f4, f0, f29

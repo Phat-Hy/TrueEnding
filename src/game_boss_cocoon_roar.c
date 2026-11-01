@@ -7,7 +7,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_801079C0(void);
 extern void fn_80107A68(void);
 extern void actor_setState(void);
@@ -152,7 +152,7 @@ lbl_fn_80466370_000000F4:
     li r9, 0x0
     li r10, 0x1e
     lwz r6, 0x590(r29)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     li r0, 0x1
     stw r0, 0x14bc(r29)
 lbl_fn_80466370_0000015C:

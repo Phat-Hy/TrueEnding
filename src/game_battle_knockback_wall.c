@@ -24,7 +24,7 @@ extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void fn_8003EFB0(void);
 extern void fn_8004CCA0(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80057A64(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
@@ -540,7 +540,7 @@ asm void fn_80416268(void)
     stfs f6, 0x94(r1)
     stfs f0, 0x8c(r1)
     stfs f4, 0x90(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80416268_000005F0
     lfs f3, 0xcc(r1)
@@ -1996,7 +1996,7 @@ lbl_fn_8041766C_000018C4:
     addi r7, r30, 0x4
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8041766C_00001AD8
     mr r3, r28

@@ -17,13 +17,13 @@ extern void Arms_execute(void);
 extern void fn_8005DFC8(void);
 extern void fn_80061824(void);
 extern void fn_8006EF48(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void mem_alloc(void);
 extern void fn_80084F84(void);
 extern void msg_getMessageById(void);
 extern void fn_800A55FC(void);
 extern void fn_800A5920(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void fn_800CB360(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
@@ -45,7 +45,7 @@ extern void fn_8016034C(void);
 extern void fn_8017ABD4(void);
 extern void save_validateHeader(void);
 extern void fn_801F64D0(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8021A77C(void);
 extern void fn_80375184(void);
@@ -68,7 +68,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
 extern void runtime_clampDouble(void);
@@ -807,15 +807,15 @@ asm void archive_mountCheckStatus(void)
     fsub f0, f0, f1
     frsp f0, f0
     stfs f0, 0x84(r3)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r3, r3, 0x138
     bl fn_80084F84
     stw r3, 0x88(r31)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r3, r3, 0x150
     bl fn_80084F84
     stw r3, 0x8c(r31)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r3, r3, 0x168
     bl fn_80084F84
     stw r3, 0x90(r31)
@@ -1105,7 +1105,7 @@ asm void fn_805A70D8(void)
     li r5, 0x0
     lwzx r4, r6, r0
     li r6, -0x1
-    b fn_800C31F4
+    b skin_playAnimationByName
 }
 
 asm void fn_805A70F4(void)
@@ -2547,7 +2547,7 @@ lbl_fn_805A7820_000020EC:
     fmadds f1, f6, f6, f0
     stfs f3, 0x78(r1)
     stfs f5, 0x7c(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f3, f1
     lfs f0, lbl_80888328
     fcmpo cr0, f3, f0
@@ -2885,7 +2885,7 @@ lbl_fn_805A7820_00002628:
     li r25, 0x0
 lbl_fn_805A7820_0000262C:
     lwz r3, 0x50(r4)
-    bl fn_80219558
+    bl task_mapIdToQueue
     subi r0, r3, 0x2
     cmplwi r0, 0x1
     ble lbl_fn_805A7820_00002688
@@ -3135,7 +3135,7 @@ lbl_fn_805A7820_000029C0:
 lbl_fn_805A7820_000029C4:
     lwz r3, 0x4c(r24)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     subi r0, r3, 0x2
     cmplwi r0, 0x1
     ble lbl_fn_805A7820_00002A08

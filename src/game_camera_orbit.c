@@ -12,7 +12,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_free(void);
 extern void fn_800897D8(void);
@@ -29,7 +29,7 @@ extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80145334(void);
 extern void fn_8014C540(void);
@@ -532,7 +532,7 @@ asm void fn_802E8580(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_802E8580_000005E4:
     addi r3, r1, 0x44
     bl talk_parseQuotedString
@@ -864,7 +864,7 @@ lbl_fn_802E8B88_0000097C:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x48(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r3, __files@ha
     lis r4, lbl_80747F70@ha
     addi r20, r1, 0x34
@@ -1877,7 +1877,7 @@ lbl_fn_802E9590_000018DC:
     lwz r5, 0x1514(r31)
     li r10, 0x1e
     lwz r6, 0x590(r31)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_802E9590_00001928:
     lwz r0, 0x1528(r31)
     cmpwi r0, 0x0
@@ -1907,7 +1907,7 @@ lbl_fn_802E9590_00001928:
     addi r8, r31, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r3, lbl_8087F430
     li r4, 0x5
     li r5, 0x1

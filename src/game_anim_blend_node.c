@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void fn_80044E0C(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
@@ -14,7 +14,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_800FDB20(void);
 extern void fn_80101434(void);
 extern void fn_8010B250(void);
@@ -28,7 +28,7 @@ extern void fn_8016DA4C(void);
 extern void fn_8016DDB0(void);
 extern void actor_setState(void);
 extern void fn_80178A6C(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -50,7 +50,7 @@ extern void PSVECCrossProduct(void);
 extern void rand(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_80744510[];
@@ -964,7 +964,7 @@ lbl_fn_8026D0F8_00000B18:
     stfs f2, 0x1cc(r1)
     stfs f2, 0x1c0(r1)
     stfs f0, 0x1bc(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8026D0F8_00000C7C
     addi r3, r1, 0x334
@@ -1429,7 +1429,7 @@ lbl_fn_8026D0F8_0000122C:
     stfs f11, 0xfc(r1)
     lwz r3, lbl_8087EE98
     stfs f9, 0x100(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8026D0F8_00001390
     lfs f9, 0x184(r1)
@@ -1692,7 +1692,7 @@ lbl_fn_8026DB8C_00001640:
     addi r8, r28, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lis r4, lbl_80744608@ha
     lfs f1, lbl_80883670
     addi r4, r4, lbl_80744608@l
@@ -2158,7 +2158,7 @@ lbl_fn_8026DB8C_00001D88:
     li r7, 0x2
     li r9, 0x0
     stw r0, 0x700(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8026DB8C_00002B38
     lwz r4, 0x6f8(r1)
@@ -2200,7 +2200,7 @@ lbl_fn_8026DB8C_00001D88:
     bctrl
     mr r29, r3
     lwz r3, 0x50(r31)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x3
     bne lbl_fn_8026DB8C_00001F30
     lwz r6, 0x38(r31)
@@ -2544,7 +2544,7 @@ lbl_fn_8026DB8C_0000220C:
     stfs f11, 0x1c8(r1)
     lwz r3, lbl_8087EE98
     stfs f9, 0x1cc(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8026DB8C_00002404
     lfs f9, 0x22c(r1)
@@ -2855,7 +2855,7 @@ lbl_fn_8026DB8C_000027D8:
     stfs f12, 0x194(r1)
     stfs f7, 0x198(r1)
     stfs f11, 0x19c(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f7, f1
     lfs f0, lbl_808836C0
     fcmpo cr0, f7, f0

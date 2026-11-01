@@ -21,7 +21,7 @@ void fn_8005B05C(void);
 void fn_8005B064(void);
 void talk_parseQuotedString(void);
 void talk_scanQuotedString(void);
-void fn_8005B6E8(void);
+void talk_setSpeakerName(void);
 void talk_parseDialogue(void);
 void fn_8005B8F8(void);
 void fn_8005B9AC(void);
@@ -533,11 +533,11 @@ lbl_talk_scanQuotedString_00000674:
     blr
 }
 
-asm void fn_8005B6E8(void)
+asm void talk_setSpeakerName(void)
 {
     nofralloc
     li r6, 0x0
-lbl_fn_8005B6E8_00000690:
+lbl_talk_setSpeakerName_00000690:
     lbz r0, 0x0(r4)
     add r5, r3, r6
     stb r0, 0x610(r5)
@@ -545,7 +545,7 @@ lbl_fn_8005B6E8_00000690:
     beqlr
     addi r6, r6, 0x1
     addi r4, r4, 0x1
-    b lbl_fn_8005B6E8_00000690
+    b lbl_talk_setSpeakerName_00000690
     blr
 }
 

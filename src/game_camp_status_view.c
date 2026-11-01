@@ -26,7 +26,7 @@ extern void fn_8017039C(void);
 extern void fn_80171420(void);
 extern void fn_80183618(void);
 extern void fn_80183774(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_8036DAF4(void);
 extern void fn_80370094(void);
 extern void world_getGlobalFlag(void);
@@ -209,10 +209,8 @@ lbl_fn_803B9638_0000018C:
     blr
 }
 
-asm void fn_803B97C4(void)
+void fn_803B97C4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_803B97C8(void)
@@ -1815,7 +1813,7 @@ asm void fn_803BAD6C(void)
     b lbl_fn_803BAD6C_0000180C
 lbl_fn_803BAD6C_0000177C:
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x9
     beq lbl_fn_803BAD6C_0000179C
     cmpwi r3, 0xa
@@ -1882,7 +1880,7 @@ asm void fn_803BAE54(void)
     extrwi. r0, r0, 1, 16
     beq lbl_fn_803BAE54_000018B4
     mr r3, r5
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     blt lbl_fn_803BAE54_000018B4
     cmpwi r3, 0x7

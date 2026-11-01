@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -23,7 +23,7 @@ extern void fn_8016DA4C(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
 extern void fn_801C3414(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_803E2110(void);
 extern void fn_803EA77C(void);
 extern void PSMTXRotRad(void);
@@ -1097,7 +1097,7 @@ asm void fn_801BB8BC(void)
     stfs f6, 0x24(r1)
     stfs f10, 0x28(r1)
     stfs f2, 0x34(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801BB8BC_00000F24
     lwz r3, 0x4(r27)
@@ -1137,7 +1137,7 @@ asm void fn_801BB8BC(void)
     stfs f4, 0x50(r1)
     stfs f3, 0x54(r1)
     stfs f0, 0x58(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801BB8BC_00000F24
     addi r3, r1, 0xac
@@ -1977,7 +1977,7 @@ lbl_fn_801BC5B8_000019E8:
     stfs f0, 0x18(r1)
     stfs f0, 0x1c(r1)
     lwz r3, 0x50(r3)
-    bl fn_80219558
+    bl task_mapIdToQueue
     subi r0, r3, 0x9
     cmplwi r0, 0x1
     ble lbl_fn_801BC5B8_00001A84
@@ -2085,7 +2085,7 @@ lbl_fn_801BC5B8_00001B10:
     fsubs f0, f3, f0
     stfs f4, 0x30(r1)
     stfs f0, 0x24(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801BC5B8_00001C08
     addi r3, r1, 0x3c

@@ -10,7 +10,7 @@ extern void vec3_copy(void);
 extern void fn_80011034(void);
 extern void vec3_sub(void);
 extern void fn_80013410(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void skin_applyWeights(void);
@@ -807,7 +807,7 @@ lbl_fn_8031CA30_000009F0:
     stw r0, 0x390(r1)
     stw r0, 0x394(r1)
     stw r0, 0x398(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8031CA30_00000CFC
     lwz r3, 0x390(r1)
@@ -1148,7 +1148,7 @@ asm void fn_8031D350(void)
     addi r7, r7, 0x4
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8031D350_00000FA8
     addi r3, r31, 0x1538

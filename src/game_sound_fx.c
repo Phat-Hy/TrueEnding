@@ -75,7 +75,7 @@ extern void fn_8017A33C(void);
 extern void fn_8017AC44(void);
 extern void fn_8017CB2C(void);
 extern void fn_802185F4(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void world_getLocalFlag(void);
@@ -701,7 +701,7 @@ lbl_fn_800EAFD4_00000784:
     bne lbl_fn_800EAFD4_000007E0
     lwz r29, lbl_8087F430
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     mr r5, r3
     mr r3, r29
     li r4, 0xfa

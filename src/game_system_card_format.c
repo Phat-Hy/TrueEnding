@@ -4,15 +4,15 @@
 /* External function declarations */
 extern void dtor_80084684(void);
 extern void fn_8003F538(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -198,7 +198,7 @@ asm void fn_8035A9F4(void)
     stfs f4, 0x14(r1)
     stfs f3, 0x18(r1)
     stfs f0, 0x1c(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_8035A9F4_00000160
     lfs f2, 0x530(r30)
@@ -582,7 +582,7 @@ asm void fn_8035B034(void)
     cmpwi r3, 0x0
     beq lbl_fn_8035B034_00000694
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x16b4(r29)
     mr r30, r3
     b lbl_fn_8035B034_00000698
@@ -1694,7 +1694,7 @@ asm void fn_8035BEA4(void)
     cmpwi r3, 0x0
     beq lbl_fn_8035BEA4_000015DC
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x15b4(r31)
     mr r28, r3
     b lbl_fn_8035BEA4_000015E0
@@ -1880,7 +1880,7 @@ asm void fn_8035C1B4(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x14(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r30, lbl_8074B448@ha
     addi r30, r30, lbl_8074B448@l
 lbl_fn_8035C1B4_00001870:

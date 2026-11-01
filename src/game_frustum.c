@@ -8,7 +8,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_23(void);
 extern void fn_8008B140(void);
 extern void fn_800902C0(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void atn_LH_Texture_release(void);
@@ -33,7 +33,7 @@ extern void fn_8016F368(void);
 extern void fn_8016F3D0(void);
 extern void save_validateHeader(void);
 extern void fn_8020BD78(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_80237654(void);
 extern void fn_802376D0(void);
 extern void fn_8023772C(void);
@@ -1828,7 +1828,7 @@ lbl_fn_800F3EF4_0000172C:
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -2333,7 +2333,7 @@ lbl_fn_800F3EF4_00001EE0:
     lwz r3, 0x50(r25)
     addis r4, r4, 0x4
     lfs f31, -0x75fc(r4)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x2
     beq lbl_fn_800F3EF4_00001F20
     cmpwi r3, 0x3

@@ -18,7 +18,7 @@ extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void wcs_vformat(void);
 extern void fn_800E0AA8(void);
@@ -26,7 +26,7 @@ extern void fn_800E0AB0(void);
 extern void fn_800F7FF0(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80109828(void);
 extern void fn_8013C38C(void);
 extern void fn_8014052C(void);
@@ -50,7 +50,7 @@ extern void printf(void);
 extern void rand(void);
 extern void abort(void);
 extern void fn_8068AD58(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_807457F8[];
@@ -283,7 +283,7 @@ asm void fn_80296DB8(void)
     stfs f4, 0x44(r1)
     stfs f3, 0x48(r1)
     stfs f6, 0x4c(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r3, 0x1540(r31)
     lwz r0, 0x1528(r31)
     lwz r3, 0x10(r3)
@@ -1334,7 +1334,7 @@ lbl_fn_8029795C_00001050:
     addi r4, r4, 0x2ef
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x2c
     li r4, -0x1
     bl ref_releaseHandle
@@ -1680,7 +1680,7 @@ lbl_fn_8029795C_000016A8:
     add r5, r28, r5
     add r7, r0, r30
     lwz r5, 0x14fc(r5)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     subi r0, r25, 0x5555
     mulhwu r0, r0, r29
     srwi r0, r0, 1
@@ -1702,7 +1702,7 @@ lbl_fn_8029795C_000016A8:
     stw r26, 0x970(r8)
     stfs f30, 0x974(r8)
     stfs f31, 0x978(r8)
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x28
     li r4, -0x1
     bl ref_releaseHandle

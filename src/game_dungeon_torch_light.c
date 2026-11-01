@@ -4,9 +4,9 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void fn_800BFAC8(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
@@ -113,7 +113,7 @@ asm void fn_803E58E4(void)
     lfs f1, lbl_80885D60
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -491,7 +491,7 @@ lbl_fn_803E5C60_000004F4:
     lfs f1, lbl_80885DFC
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1433,7 +1433,7 @@ lbl_fn_803E6890_000011AC:
     lfs f1, lbl_80885D60
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1624,7 +1624,7 @@ asm void fn_803E6CBC(void)
     addi r8, r1, 0xc
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r31, 0x1c(r1)
     mr r3, r29
     lwz r30, 0x18(r1)

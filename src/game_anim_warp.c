@@ -15,7 +15,7 @@ extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void fn_80013410(void);
 extern void fn_8004D124(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Matrix_copy_2(void);
 extern void atn_Matrix_copy(void);
 extern void atn_Model_findBoneIndex(void);
@@ -688,7 +688,7 @@ lbl_fn_8027851C_000007F8:
     stw r0, 0x58(r1)
     stw r0, 0x5c(r1)
     stw r0, 0x60(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8027851C_00000854
     li r3, 0x0
@@ -1722,7 +1722,7 @@ lbl_fn_80279280_0000174C:
     addi r6, r1, 0xc0
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80279280_000018F0
     lwz r3, 0x160(r1)

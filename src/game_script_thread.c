@@ -11,7 +11,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void fn_8004D388(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -21,7 +21,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800EB7A0(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_8012D8B8(void);
 extern void fn_8012DD70(void);
 extern void fn_80139560(void);
@@ -1020,7 +1020,7 @@ lbl_fn_8024F9B8_00000CE8:
     addi r4, r1, 0x50
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_8024F9B8_00000F58
     psq_l f1, 0x0(r30), 0, 0
@@ -1045,7 +1045,7 @@ lbl_fn_8024F9B8_00000CE8:
     addi r4, r1, 0x50
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8024F9B8_00000F58
     lfs f4, 0x58(r1)
@@ -1130,7 +1130,7 @@ lbl_fn_8024F9B8_00000ECC:
     addi r4, r1, 0x50
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_8024F9B8_00000F58
     lfs f2, 0x28(r1)
@@ -1320,7 +1320,7 @@ asm void fn_8024FE18(void)
     lwz r3, lbl_8087F048
     lwz r5, 0x14d8(r29)
     lwz r6, 0x590(r29)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     b lbl_fn_8024FE18_00001258
 lbl_fn_8024FE18_000011EC:
     li r3, 0x0

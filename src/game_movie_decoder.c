@@ -5,7 +5,7 @@
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8574(void);
@@ -1273,7 +1273,7 @@ lbl_fn_8033C490_00001050:
     addi r4, r4, 0x339
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle
@@ -1731,7 +1731,7 @@ lbl_fn_8033D040_00001790:
     stfs f2, 0x1654(r31)
     stfs f0, 0x1650(r31)
     stfs f0, 0x9fc(r31)
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle

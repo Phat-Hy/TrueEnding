@@ -6,11 +6,11 @@ extern void _restgpr_24(void);
 extern void _restgpr_27(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80063764(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_801255C8(void);
 extern void fn_80126214(void);
@@ -1100,7 +1100,7 @@ lbl_fn_8017F4A0_00000D98:
     stw r28, 0x118(r1)
     stw r28, 0x11c(r1)
     stw r28, 0x120(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_8017F4A0_00000F48
     lfs f5, 0x7c(r1)
@@ -1186,7 +1186,7 @@ lbl_fn_8017F4A0_00000FF8:
     addi r4, r29, 0x1a
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1447,7 +1447,7 @@ lbl_fn_8017FBEC_0000129C:
     li r8, 0x0
     li r9, 0x0
     stw r0, 0xe8(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     lwz r4, lbl_8087F0A8
     cntlzw r0, r3
     srwi r27, r0, 5

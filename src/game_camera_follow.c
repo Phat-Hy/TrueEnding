@@ -2,12 +2,12 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -853,7 +853,7 @@ lbl_fn_802E55B0_00000A7C:
     stw r0, 0x88(r1)
     stw r0, 0x8c(r1)
     stw r0, 0x90(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_802E55B0_00000B38
     lfs f3, 0x60(r1)
@@ -1117,7 +1117,7 @@ lbl_fn_802E5B38_00000E4C:
     cmpwi r3, 0x0
     beq lbl_fn_802E5B38_00000E80
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x151c(r31)
     b lbl_fn_802E5B38_00000E84
 lbl_fn_802E5B38_00000E80:
@@ -1223,7 +1223,7 @@ asm void fn_802E5CD0(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r31, lbl_80747EA0@ha
     addi r31, r31, lbl_80747EA0@l
 lbl_fn_802E5CD0_00001004:

@@ -9,14 +9,14 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void talk_formatQuotedString(void);
 extern void skill_calculateDamage(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_8008B130(void);
 extern void fn_8008CD60(void);
@@ -1561,7 +1561,7 @@ asm void fn_803ED92C(void)
     beq lbl_fn_803ED92C_00001464
     mr r3, r30
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0xf0(r29)
     mr r30, r3
     b lbl_fn_803ED92C_00001468
@@ -1745,7 +1745,7 @@ lbl_fn_803EDB18_00001654:
     stw r28, 0x18(r1)
     addi r3, r1, 0x18
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     addi r3, r1, 0x18
     bl talk_parseQuotedString
     mr r29, r3

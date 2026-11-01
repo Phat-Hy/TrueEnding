@@ -18,7 +18,7 @@ extern void fn_800588FC(void);
 extern void atn_ColliObject_destructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AF38(void);
 extern void mem_free(void);
 extern void atn_Anim_applyLayerTransform(void);
@@ -932,7 +932,7 @@ asm void fn_8032C964(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r29, lbl_80749DC0@ha
     addi r29, r29, lbl_80749DC0@l
 lbl_fn_8032C964_00000B8C:

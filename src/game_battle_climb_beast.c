@@ -21,7 +21,7 @@ extern void fn_80013410(void);
 extern void fn_80013484(void);
 extern void fn_8003EFB0(void);
 extern void fn_8004ECC0(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80057A64(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
@@ -1040,7 +1040,7 @@ lbl_fn_803FA5C8_00000C08:
     addi r5, r1, 0xd8
     addi r6, r31, 0x6c
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_803FA5C8_00000D4C
     lwz r3, 0x4c4(r31)

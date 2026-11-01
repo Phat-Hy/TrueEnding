@@ -13,7 +13,7 @@ extern void fn_8000DD0C(void);
 extern void fn_80011034(void);
 extern void fn_800133B0(void);
 extern void fn_8004D388(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80057A64(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -734,7 +734,7 @@ lbl_fn_801C074C_00000674:
     addi r4, r1, 0x130
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801C074C_00000860
     lfs f3, 0xc(r28)
@@ -1394,7 +1394,7 @@ lbl_fn_801C1084_00000F8C:
     addi r4, r1, 0xc8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801C1084_000011A8
     lfs f3, 0xc(r31)
@@ -1706,7 +1706,7 @@ lbl_fn_801C1578_000014F8:
     addi r6, r1, 0xb0
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801C1578_000015E0
     addi r4, r1, 0x190
@@ -1842,7 +1842,7 @@ lbl_fn_801C1578_00001714:
     addi r4, r1, 0x168
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_801C1578_000017F0
     addi r3, r1, 0x16c

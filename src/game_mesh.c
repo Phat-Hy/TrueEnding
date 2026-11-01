@@ -12,7 +12,7 @@ extern void talk_formatQuotedString(void);
 extern void fn_80079044(void);
 extern void fn_800790D0(void);
 extern void fn_80079BC8(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
@@ -23,7 +23,7 @@ extern void fn_80087BB4(void);
 extern void fn_80087E9C(void);
 extern void fn_8008826C(void);
 extern void fn_80088AF4(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800B2E2C(void);
 extern void fn_800B3A94(void);
 extern void fn_800B66A4(void);
@@ -1222,7 +1222,7 @@ asm void fn_800BC468(void)
     mr r30, r3
     cmpwi r0, 0x0
     bne lbl_fn_800BC468_00000FE0
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r7, lbl_807336B0@ha
     mr r4, r30
     addi r7, r7, lbl_807336B0@l
@@ -1344,7 +1344,7 @@ asm void fn_800BC618(void)
     mr r27, r3
     cmpwi r28, 0x0
     bne lbl_fn_800BC618_00001190
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r7, lbl_807336B0@ha
     mr r4, r27
     addi r7, r7, lbl_807336B0@l
@@ -2079,14 +2079,14 @@ lbl_fn_800BC874_00001C08:
     addi r30, r30, lbl_807336B0@l
     lwz r3, 0x4c(r3)
     addi r4, r30, 0x15
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r4, r3
     lwz r3, 0x2fc(r29)
     bl fn_800C2E30
     lwz r3, lbl_8087EFA8
     addi r4, r30, 0x20
     lwz r3, 0x4c(r3)
-    bl fn_8008937C
+    bl node_createNamedChild
     lwz r5, 0x2fc(r29)
     mr r28, r3
     addi r4, r30, 0x24
@@ -2150,7 +2150,7 @@ lbl_fn_800BC874_00001C08:
     lwz r3, lbl_8087EFA8
     addi r4, r30, 0x51
     lwz r3, 0x4c(r3)
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r28, r3
     lwz r3, 0x2fc(r29)
     li r4, 0x0
@@ -2160,7 +2160,7 @@ lbl_fn_800BC874_00001C08:
     lwz r3, lbl_8087EFA8
     addi r4, r30, 0x5a
     lwz r3, 0x4c(r3)
-    bl fn_8008937C
+    bl node_createNamedChild
     lwz r5, 0x2fc(r29)
     mr r28, r3
     lfs f1, lbl_80881088
@@ -2598,7 +2598,7 @@ lbl_fn_800BC874_000023D4:
     lwz r5, lbl_8087EFA8
     addi r4, r3, 0xe1
     lwz r3, 0x4c(r5)
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r28, r3
     mr r30, r29
     li r31, 0x0

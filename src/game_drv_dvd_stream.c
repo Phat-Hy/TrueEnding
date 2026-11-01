@@ -7,7 +7,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void fn_8003E918(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void ref_releaseHandle(void);
 extern void fn_800DBF68(void);
 extern void fn_800FDE60(void);
@@ -125,7 +125,7 @@ lbl_fn_805ADB2C_0000006C:
     addi r8, r1, 0x10
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lbz r4, 0xc(r1)
     slwi r0, r30, 1
     stb r4, 0x8(r1)
@@ -134,7 +134,7 @@ lbl_fn_805ADB2C_0000006C:
     add r7, r28, r0
     addi r8, r1, 0x8
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lmw r27, 0x1c(r1)
     lwz r0, 0x34(r1)
     mtlr r0

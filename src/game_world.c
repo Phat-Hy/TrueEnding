@@ -26,7 +26,7 @@ extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void fn_800875F8(void);
 extern void route_interpolatePath(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800C5F5C(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
 extern void atn_LH_Texture_destructAndFree(void);
@@ -1790,7 +1790,7 @@ lbl_fn_800816B4_000016D4:
     stb r0, 0x227(r1)
     mr r3, r23
     addi r4, r1, 0x208
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r4, lbl_80731D40@ha
     lis r24, fn_80081BCC@ha
     addi r31, r4, lbl_80731D40@l
@@ -1885,7 +1885,7 @@ lbl_fn_800816B4_0000182C:
     bl sprintf
     mr r3, r28
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     lwz r5, 0x8(r30)
     mr r23, r3
     lfs f1, lbl_80880BA4
@@ -2015,7 +2015,7 @@ lbl_fn_800816B4_00001A38:
     mr r3, r28
     addi r28, r4, lbl_80731D40@l
     addi r4, r28, 0x18c
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r27, lbl_80777D80@ha
     mr r24, r3
     li r25, 0x0
@@ -2033,7 +2033,7 @@ lbl_fn_800816B4_00001A7C:
     bl sprintf
     mr r3, r24
     addi r4, r1, 0x108
-    bl fn_8008937C
+    bl node_createNamedChild
     lwz r0, 0x10(r26)
     mr r29, r3
     lfs f1, lbl_80880BBC

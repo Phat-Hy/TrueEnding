@@ -5,7 +5,7 @@
 extern void fn_80079044(void);
 extern void fn_800C16B4(void);
 extern void fn_800C2448(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
 extern void thread_findAndNotifySlot(void);
@@ -394,7 +394,7 @@ lbl_fn_80481818_000003C0:
     addi r4, r30, 0x270
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

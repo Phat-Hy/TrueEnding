@@ -35,7 +35,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSVECNormalize(void);
 extern void PSVECDotProduct(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void fn_80708CF0(void);
 extern void fn_80708D30(void);
 extern void fn_80708D70(void);
@@ -2109,7 +2109,7 @@ lbl_fn_805A2510_00001AB0:
     fmadds f1, f6, f6, f0
     stfs f3, 0x90(r1)
     stfs f5, 0x94(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f31, f1
     lfs f0, lbl_80888224
     fcmpo cr0, f31, f0

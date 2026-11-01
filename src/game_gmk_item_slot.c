@@ -20,7 +20,7 @@ extern void fn_8006BB6C(void);
 extern void fn_80071D74(void);
 extern void gx_drawScreenQuad(void);
 extern void gx_setRenderStateParam(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
 extern void mem_alloc(void);
@@ -956,7 +956,7 @@ lbl_fn_80440B2C_00000AEC:
     li r5, 0x0
     bl fn_8006BA8C
     mr r28, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r30, lbl_80754520@ha
     lwz r4, 0x8(r1)
     addi r30, r30, lbl_80754520@l
@@ -1021,7 +1021,7 @@ lbl_fn_80440B2C_00000AEC:
     stfs f0, 0x30(r31)
     stw r29, 0x10(r31)
     stw r29, 0x2c(r31)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r0, r3, 0x8
     stw r0, 0x3c(r31)
     stw r29, 0x24(r31)
@@ -1221,7 +1221,7 @@ lbl_fn_80440F64_00000E64:
     li r5, 0x0
     bl fn_8006BA8C
     mr r30, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r7, r31, 0x95
     lwz r4, 0x8(r1)
     mr r8, r7
@@ -1237,7 +1237,7 @@ lbl_fn_80440F64_00000E64:
     mr r3, r30
     li r4, 0x0
     bl fn_8006BB6C
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r7, r31, 0x95
     lis r31, 0x2
     mr r8, r7
@@ -1278,14 +1278,14 @@ asm void fn_804410C0(void)
     lwz r31, 0x10(r28)
     cmpwi r31, 0x0
     beq lbl_fn_804410C0_00000F84
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r31
     bl fn_80083AD4
 lbl_fn_804410C0_00000F84:
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r4, 0x0(r28)
     bl fn_80083AD4
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r4, 0x4(r28)
     bl fn_80083AD4
     lwz r3, 0x8(r28)
@@ -1294,10 +1294,10 @@ lbl_fn_804410C0_00000F84:
     lwz r3, 0xc(r28)
     li r4, 0x0
     bl fn_8006BB6C
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r4, 0x0(r29)
     bl fn_80083AD4
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r4, 0x0(r30)
     bl fn_80083AD4
     lwz r0, 0x24(r1)

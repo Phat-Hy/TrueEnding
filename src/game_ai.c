@@ -20,7 +20,7 @@ extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void PSVECCrossProduct(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_80731048[];
@@ -356,7 +356,7 @@ lbl_fn_8005361C_00000424:
     stfs f2, 0xd0(r1)
     b lbl_fn_8005361C_00000504
 lbl_fn_8005361C_000004B4:
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f5, f1
     lfs f4, 0x100(r1)
     lfs f3, 0xfc(r1)
@@ -2237,7 +2237,7 @@ lbl_fn_800551BC_00002004:
     stfs f2, 0xf4(r1)
     b lbl_fn_800551BC_000020E4
 lbl_fn_800551BC_00002094:
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f5, f1
     lfs f4, 0x124(r1)
     lfs f3, 0x120(r1)
@@ -3405,7 +3405,7 @@ lbl_fn_80055C40_0000316C:
     stfs f2, 0xf8(r1)
     b lbl_fn_80055C40_00003244
 lbl_fn_80055C40_000031F4:
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f5, f1
     lfs f4, 0x11c(r1)
     lfs f3, 0x118(r1)

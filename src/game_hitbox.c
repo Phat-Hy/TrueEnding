@@ -14,7 +14,7 @@ extern void fn_800EFDA0(void);
 extern void fn_800EFE3C(void);
 extern void fn_80134168(void);
 extern void fn_80210220(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void sound_initGlobalInstances(void);
 extern void fn_80239D58(void);
 extern void res_findResourceSlot(void);
@@ -1799,7 +1799,7 @@ lbl_fn_801083D8_000016B4:
     cmpwi r0, 0x0
     bne lbl_fn_801083D8_000016F4
     lwz r3, 0x50(r30)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x2
     beq lbl_fn_801083D8_000016F4
     lwz r0, 0x374(r31)

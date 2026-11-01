@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void actor_dispatchMessage(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void talk_parseDialogue(void);
 extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
@@ -119,7 +119,7 @@ asm void fn_8020A360(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x0(r31)
     la r4, lbl_8087D720
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -576,7 +576,7 @@ asm void fn_8020A90C(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0xc(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lfs f31, lbl_80882E18
     addi r31, r29, lbl_8073ECD8@l
     b lbl_fn_8020A90C_00000C50
@@ -1038,7 +1038,7 @@ asm void fn_8020AFF4(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0xc(r1)
     la r4, lbl_8087D720
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lwz r0, lbl_8087F1C0
     cmpwi r0, 0x0
     bne lbl_fn_8020AFF4_00000E6C
@@ -1306,7 +1306,7 @@ lbl_fn_8020B2BC_00000FFC:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x2324(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lfs f31, lbl_80882E2C
     lis r29, lbl_8073F210@ha
     b lbl_fn_8020B2BC_000011B4
@@ -1582,7 +1582,7 @@ lbl_fn_8020B2BC_0000140C:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x109c(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r31, lbl_8073F410@ha
     b lbl_fn_8020B2BC_00001564
 lbl_fn_8020B2BC_000014BC:
@@ -1860,7 +1860,7 @@ lbl_fn_8020BB0C_000017EC:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x150(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lfs f0, lbl_80882E2C
     li r28, 0x0
     stfs f0, 0x40(r1)

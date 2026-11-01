@@ -8,7 +8,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_80069BF4(void);
 extern void fn_8006B174(void);
 extern void fn_8006B2D8(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_LH_Texture_release(void);
@@ -1987,7 +1987,7 @@ lbl_thread_dispatchToQueue_0000190C:
     addi r8, r1, 0x8
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r3, 0x0(r29)
     mr r5, r31
     li r4, 0x0

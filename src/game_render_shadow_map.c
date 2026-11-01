@@ -9,7 +9,7 @@ extern void _savegpr_22(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void fn_8004D314(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_800638B0(void);
 extern void fn_80063D3C(void);
 extern void atn_Model_findBoneIndex(void);
@@ -286,7 +286,7 @@ lbl_fn_802B0430_00000288:
     addi r6, r1, 0x20
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_802B0430_0000038C
     lfs f7, 0x1a0(r1)

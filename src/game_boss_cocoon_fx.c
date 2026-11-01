@@ -15,11 +15,11 @@ extern void fn_8005B8F8(void);
 extern void fn_8005B9AC(void);
 extern void fn_8006EF48(void);
 extern void fn_8006F420(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void msg_getMessageById(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -894,7 +894,7 @@ lbl_fn_8046A370_00000AF0:
     addi r8, r1, 0x8
     add r7, r31, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lis r4, lbl_80755394@ha
     mr r5, r30
     addi r4, r4, lbl_80755394@l
@@ -1515,7 +1515,7 @@ asm void fn_8046ACDC(void)
     lwz r4, 0x4(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1552,7 +1552,7 @@ lbl_fn_8046ACDC_000013E4:
     lwz r4, 0x8(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1587,7 +1587,7 @@ lbl_fn_8046ACDC_00001470:
     lwz r4, 0x8(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1900,7 +1900,7 @@ lbl_fn_8046AE7C_00001904:
     addi r8, r1, 0x10
     add r7, r6, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x24(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8046AE7C_00001934
@@ -1949,7 +1949,7 @@ lbl_fn_8046AE7C_000019B0:
     add r7, r6, r0
     addi r8, r1, 0x8
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x18(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8046AE7C_000019EC

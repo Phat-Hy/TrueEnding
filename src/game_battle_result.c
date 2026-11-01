@@ -6,7 +6,7 @@ extern void _restgpr_24(void);
 extern void _restgpr_26(void);
 extern void _savegpr_24(void);
 extern void _savegpr_26(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -21,7 +21,7 @@ extern void fn_801A17A4(void);
 extern void fn_801B2888(void);
 extern void fn_801B2984(void);
 extern void fn_801C1DCC(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void fn_803761DC(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -151,7 +151,7 @@ lbl_fn_801749EC_00000094:
     stfs f2, 0x40(r1)
     stfs f4, 0x48(r1)
     stfs f0, 0x3c(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_801749EC_000003FC
     lis r5, lbl_80737A9C@ha
@@ -1781,7 +1781,7 @@ lbl_fn_80175B18_0000174C:
     bl fn_803761DC
     mr r25, r3
     lwz r3, 0x50(r29)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     li r0, 0x0
     blt lbl_fn_80175B18_00001830

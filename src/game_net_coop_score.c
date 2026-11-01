@@ -17,7 +17,7 @@ extern void fn_8004B338(void);
 extern void item_useConsumable(void);
 extern void fn_8005ED68(void);
 extern void atn_ComDrawTextureMask_execute(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void fn_80071D68(void);
 extern void fn_80071D74(void);
 extern void gx_drawScreenQuad(void);
@@ -1988,7 +1988,7 @@ lbl_fn_804AD1EC_0000184C:
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x3c(r1)
     lwz r3, 0x40(r1)
     cmplw r0, r3
@@ -2023,7 +2023,7 @@ lbl_fn_804AD1EC_000018D8:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804AD1EC_0000191C:
     lwz r3, 0x3c(r1)
     addi r0, r3, 0x1
@@ -2154,7 +2154,7 @@ lbl_fn_804AD1EC_00001AB4:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804AD1EC_00001AF8:
     lwz r0, 0x3c(r1)
     subi r6, r31, 0x5555

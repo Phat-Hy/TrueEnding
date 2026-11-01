@@ -47,7 +47,7 @@ extern void printf(void);
 extern void abort(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_80744A08[];
@@ -508,7 +508,7 @@ lbl_fn_80274CFC_000005AC:
     fmadds f1, f4, f4, f0
     stfs f2, 0xc(r1)
     stfs f3, 0x10(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r0, 0x14e0(r31)
     frsp f1, f1
     cmpwi r0, 0x0

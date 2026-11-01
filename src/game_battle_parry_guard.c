@@ -8,7 +8,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void fn_8000D430(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80056DB8(void);
 extern void atn_ColliBase_destructor(void);
 extern void fn_80057F28(void);
@@ -37,7 +37,7 @@ extern void fn_8011FC10(void);
 extern void fn_80144710(void);
 extern void quest_checkCondition(void);
 extern void fn_802180A8(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
@@ -227,7 +227,7 @@ lbl_fn_80412968_00000130:
     lwz r3, lbl_8087F430
     bl world_getLocalFlag
     mr r30, r3
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     mr r31, r3
     bge lbl_fn_80412968_00000194
@@ -1187,7 +1187,7 @@ lbl_fn_804131A4_00000DF4:
     stw r26, 0xd8(r1)
     stw r26, 0xdc(r1)
     stw r26, 0xe0(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_804131A4_00000EE4
     lwz r3, 0xd8(r1)

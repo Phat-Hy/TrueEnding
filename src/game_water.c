@@ -5,7 +5,7 @@
 extern void __va_arg(void);
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
 extern void mem_alloc(void);
@@ -18,7 +18,7 @@ extern void fn_8065F530(void);
 extern void fn_80660B90(void);
 extern void fn_80660C50(void);
 extern void fn_80661300(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 jumptable_80779950[];
@@ -232,7 +232,7 @@ asm void fn_800DDAC4(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lis r7, lbl_80734DD0@ha
     mr r4, r31
     addi r7, r7, lbl_80734DD0@l
@@ -257,7 +257,7 @@ asm void fn_800DDB14(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r31
     bl fn_80083AD4
     lwz r31, 0xc(r1)
@@ -1786,7 +1786,7 @@ lbl_fn_800DEFAC_000017AC:
     fmuls f0, f2, f2
     stfs f1, 0x8(r1)
     fmadds f1, f1, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f0, f31
     ble lbl_fn_800DEFAC_0000182C

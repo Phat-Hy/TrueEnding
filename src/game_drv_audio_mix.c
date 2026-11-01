@@ -19,7 +19,7 @@ extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
 extern void route_findNextWaypoint(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void fn_800C16B4(void);
 extern void fn_800C18BC(void);
@@ -878,7 +878,7 @@ lbl_fn_805B7220_000009B0:
     cmpwi r3, 0x0
     beq lbl_fn_805B7220_00000A04
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x11c(r29)
     mr r30, r3
     b lbl_fn_805B7220_00000A08

@@ -8,14 +8,14 @@ extern void actor_dispatchMessage(void);
 extern void talk_formatQuotedString(void);
 extern void fn_800638B0(void);
 extern void fn_80063D3C(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800A9E54(void);
 extern void fn_800AA6C4(void);
@@ -730,7 +730,7 @@ asm void fn_800A8A80(void)
 lbl_fn_800A8A80_000008C0:
     lwz r4, 0x74(r28)
 lbl_fn_800A8A80_000008C4:
-    bl fn_8008937C
+    bl node_createNamedChild
     lis r31, lbl_80732A5C@ha
     mr r30, r3
     addi r4, r31, lbl_80732A5C@l
@@ -747,7 +747,7 @@ lbl_fn_800A8A80_000008C4:
     bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x11
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80880D00
     mr r29, r3
     lfs f2, lbl_80880D04
@@ -768,7 +768,7 @@ lbl_fn_800A8A80_000008C4:
     bl fn_80087858
     mr r3, r30
     addi r4, r31, 0x21
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80880D00
     mr r29, r3
     lfs f2, lbl_80880D04
@@ -1134,7 +1134,7 @@ asm void fn_800A8FF0(void)
     lis r3, lbl_80778C68@ha
     addi r3, r3, lbl_80778C68@l
     stw r3, 0x0(r30)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r7, r31, lbl_80732AF4@l
     lis r31, 0x9
     mr r8, r7

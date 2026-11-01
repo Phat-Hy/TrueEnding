@@ -8,7 +8,7 @@ extern void atn_ColliBase_destructor(void);
 extern void fn_800575BC(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void talk_formatQuotedString(void);
 extern void fn_8005BBF8(void);
 extern void fn_8005BCE8(void);
@@ -17,7 +17,7 @@ extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1302,7 +1302,7 @@ asm void fn_8042EF4C(void)
     beq lbl_fn_8042EF4C_00000FD8
     mr r3, r30
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0xf0(r29)
     mr r30, r3
     b lbl_fn_8042EF4C_00000FDC
@@ -1596,7 +1596,7 @@ asm void fn_8042F2DC(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x48(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_8042F2DC_000013C0:
     addi r3, r1, 0x48
     bl talk_parseQuotedString
@@ -1907,7 +1907,7 @@ asm void fn_8042F750(void)
     beq lbl_fn_8042F750_000017D4
     mr r3, r31
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0xf0(r30)
     b lbl_fn_8042F750_000017D8
 lbl_fn_8042F750_000017D4:

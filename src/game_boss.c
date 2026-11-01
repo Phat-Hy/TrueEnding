@@ -13,7 +13,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_8005ED6C(void);
 extern void fn_80060D58(void);
 extern void skill_calculateDamage(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
 extern void mem_alloc(void);
@@ -3512,7 +3512,7 @@ lbl_fn_8006BA8C_00002D24:
     beq lbl_fn_8006BA8C_00002DA0
     lwz r0, 0x3c(r1)
     stw r0, 0x0(r30)
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r4, 0x0(r30)
     lis r7, lbl_8073148C@ha
     addi r7, r7, lbl_8073148C@l
@@ -3566,7 +3566,7 @@ asm void fn_8006BB6C(void)
 lbl_fn_8006BB6C_00002DF4:
     cmpwi r3, 0x0
     beq lbl_fn_8006BB6C_00002E08
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     mr r4, r31
     bl fn_80083AD4
 lbl_fn_8006BB6C_00002E08:

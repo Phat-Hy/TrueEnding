@@ -10,9 +10,9 @@ extern void _savegpr_14(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_free(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DBF68(void);
@@ -235,7 +235,7 @@ lbl_fn_804A3C24_000001C4:
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x3c(r1)
     lwz r3, 0x40(r1)
     cmplw r0, r3
@@ -270,7 +270,7 @@ lbl_fn_804A3C24_00000250:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804A3C24_00000294:
     lwz r3, 0x3c(r1)
     addi r0, r3, 0x1
@@ -402,7 +402,7 @@ lbl_fn_804A3C24_00000430:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804A3C24_00000474:
     lwz r0, 0x3c(r1)
     subi r6, r31, 0x5555
@@ -725,13 +725,13 @@ asm void fn_804A436C(void)
     lwz r30, 0x0(r3)
     li r5, 0x1a
     mr r3, r31
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804A436C_000008DC
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804A436C_0000090C
 lbl_fn_804A436C_000008DC:
@@ -752,13 +752,13 @@ lbl_fn_804A436C_0000090C:
     mr r3, r31
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804A436C_0000093C
     mr r3, r31
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804A436C_0000096C
 lbl_fn_804A436C_0000093C:
@@ -834,13 +834,13 @@ lbl_fn_804A4494_00000A24:
     li r4, 0x0
     li r5, 0x0
     mr r3, r23
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804A4494_00000A58
     mr r3, r23
     li r4, 0x0
     li r5, 0x1a
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804A4494_00000A94
 lbl_fn_804A4494_00000A58:
@@ -864,13 +864,13 @@ lbl_fn_804A4494_00000A94:
     mr r3, r23
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804A4494_00000AC4
     mr r3, r23
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804A4494_00000B00
 lbl_fn_804A4494_00000AC4:
@@ -894,13 +894,13 @@ lbl_fn_804A4494_00000B00:
     mr r3, r23
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804A4494_00000B30
     mr r3, r23
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804A4494_00000B88
 lbl_fn_804A4494_00000B30:
@@ -932,13 +932,13 @@ lbl_fn_804A4494_00000B88:
     mr r3, r23
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_804A4494_00000BB8
     mr r3, r23
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_804A4494_00000C10
 lbl_fn_804A4494_00000BB8:

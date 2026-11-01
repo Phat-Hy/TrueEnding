@@ -18,7 +18,7 @@ extern void route_createSegment(void);
 extern void fn_80087BB4(void);
 extern void fn_80087E9C(void);
 extern void fn_80088FAC(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800C2448(void);
 extern void fn_801222D4(void);
 extern void fn_80184A64(void);
@@ -172,7 +172,7 @@ asm void fn_801856B8(void)
     addi r30, r5, lbl_807382A8@l
     mr r3, r4
     addi r4, r30, 0x14
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r26, r3
     addi r4, r30, 0x1b
     addi r5, r24, 0xb78
@@ -187,7 +187,7 @@ asm void fn_801856B8(void)
     bl route_createSegment
     mr r3, r26
     addi r4, r30, 0x34
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80881DAC
     mr r31, r3
     lfs f2, lbl_80881DB0
@@ -244,7 +244,7 @@ asm void fn_801856B8(void)
     bl fn_80087858
     mr r3, r26
     addi r4, r30, 0x6d
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80881DAC
     mr r31, r3
     lfs f2, lbl_80881DB0
@@ -311,7 +311,7 @@ asm void fn_801856B8(void)
 lbl_fn_801856B8_000002D8:
     lwz r4, 0x0(r29)
     mr r3, r26
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80881CFC
     mr r31, r3
     lfs f2, lbl_80881D2C
@@ -350,7 +350,7 @@ lbl_fn_801856B8_000002D8:
     bl fn_80088FAC
     mr r3, r31
     addi r4, r30, 0x91
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r24, r3
     addi r4, r30, 0x95
     addi r5, r28, 0x3c
@@ -407,7 +407,7 @@ lbl_fn_801856B8_000002D8:
     bl route_interpolatePath
     mr r3, r31
     addi r4, r30, 0xc2
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r31, r3
     mr r3, r28
     li r4, 0x0
@@ -1165,7 +1165,7 @@ asm void fn_80186520(void)
     cmpwi r3, 0x0
     beq lbl_fn_80186520_00000F48
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x0(r31)
     mr r29, r3
     b lbl_fn_80186520_00000F4C
@@ -1191,7 +1191,7 @@ lbl_fn_80186520_00000F4C:
     bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x1ca
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80881E38
     mr r26, r3
     lfs f2, lbl_80881E3C
@@ -1239,7 +1239,7 @@ lbl_fn_80186520_00000F4C:
     bl route_interpolatePath
     mr r3, r29
     addi r4, r30, 0x202
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r26, r3
     addi r4, r30, 0x212
     addi r5, r31, 0xd4
@@ -1251,7 +1251,7 @@ lbl_fn_80186520_00000F4C:
     bl route_findNextWaypoint
     mr r3, r26
     addi r4, r30, 0x21f
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80881CFC
     mr r28, r3
     lfs f2, lbl_80881DB0
@@ -1326,7 +1326,7 @@ lbl_fn_80186520_00000F4C:
     bl route_findNextWaypoint
     mr r3, r26
     addi r4, r30, 0x224
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80881CFC
     mr r28, r3
     lfs f2, lbl_80881DB0
@@ -1401,7 +1401,7 @@ lbl_fn_80186520_00000F4C:
     bl route_findNextWaypoint
     mr r3, r26
     addi r4, r30, 0x22b
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80881CFC
     mr r28, r3
     lfs f2, lbl_80881DB0
@@ -1476,7 +1476,7 @@ lbl_fn_80186520_00000F4C:
     bl route_findNextWaypoint
     mr r3, r26
     addi r4, r30, 0x230
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80881CFC
     mr r28, r3
     lfs f2, lbl_80881DB0
@@ -1551,7 +1551,7 @@ lbl_fn_80186520_00000F4C:
     bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x239
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r28, r3
     addi r4, r30, 0x114
     addi r5, r31, 0x584
@@ -1608,7 +1608,7 @@ lbl_fn_80186520_00000F4C:
     bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x23f
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r28, r3
     addi r4, r30, 0x170
     addi r5, r31, 0x5a0
@@ -1645,7 +1645,7 @@ lbl_fn_80186520_00000F4C:
     bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x264
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r27, r3
     addi r4, r30, 0x26b
     addi r5, r31, 0x304
@@ -1846,7 +1846,7 @@ lbl_fn_80186520_00000F4C:
     bl route_interpolatePath
     mr r3, r27
     addi r4, r30, 0x3e9
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r28, r3
     addi r4, r30, 0x3f7
     addi r5, r31, 0x2d0
@@ -1956,7 +1956,7 @@ lbl_fn_80186520_00001A1C:
     bl route_createSegment
     mr r3, r29
     addi r4, r30, 0x49a
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x4a5
     addi r5, r31, 0x214
@@ -2139,7 +2139,7 @@ lbl_fn_80186520_00001A1C:
     bl route_findNextWaypoint
     mr r3, r29
     addi r4, r30, 0x60a
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80881CFC
     mr r25, r3
     lfs f2, lbl_80881DB8
@@ -2199,7 +2199,7 @@ lbl_fn_80186520_00001A1C:
     bl route_interpolatePath
     mr r3, r29
     addi r4, r30, 0x669
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x66e
     addi r5, r31, 0x350
@@ -2280,7 +2280,7 @@ lbl_fn_80186520_00001A1C:
     bl route_findNextWaypoint
     mr r3, r25
     addi r4, r30, 0x706
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r25, r3
     addi r4, r30, 0x4a5
     addi r5, r31, 0x378
@@ -2295,7 +2295,7 @@ lbl_fn_80186520_00001A1C:
 lbl_fn_80186520_000020C8:
     lwz r4, 0x0(r28)
     mr r3, r25
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r23, r3
     mr r5, r27
     addi r4, r30, 0x715
@@ -2324,7 +2324,7 @@ lbl_fn_80186520_000020C8:
     mr r3, r29
     addi r30, r30, lbl_807382A8@l
     addi r4, r30, 0x720
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r23, r3
     addi r4, r30, 0x72c
     addi r5, r31, 0x3cc
@@ -2462,7 +2462,7 @@ lbl_fn_80186520_000020C8:
     bl route_interpolatePath
     mr r3, r29
     addi r4, r30, 0x816
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r23, r3
     addi r4, r30, 0x4a5
     addi r5, r31, 0x454
@@ -2525,7 +2525,7 @@ lbl_fn_80186520_000020C8:
     bl route_interpolatePath
     mr r3, r29
     addi r4, r30, 0x871
-    bl fn_8008937C
+    bl node_createNamedChild
     mr r23, r3
     addi r4, r30, 0x874
     addi r5, r31, 0x470

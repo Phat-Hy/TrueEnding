@@ -9,7 +9,7 @@ extern u32 lbl_80764798[];
 extern void PSVECNormalize(void);
 extern void fn_8068AD58(void);
 extern void fn_8068A850(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void fn_8068AE9C(void);
 extern void _savegpr_25(void);
 extern void _restgpr_25(void);
@@ -143,7 +143,7 @@ asm void fn_805F9B50(void) {
     ble lbl_0218
     lfs f0, lbl_80888580
     fadds f1, f0, f1
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f7, f1
     lfs f6, lbl_80888588
     lfs f5, 0x24(r25)
@@ -199,7 +199,7 @@ lbl_0248:
     fadds f2, f3, f2
     fsubs f1, f1, f2
     fadds f1, f0, f1
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f5, f1
     lfs f2, lbl_80888588
     lfs f0, lbl_80888584

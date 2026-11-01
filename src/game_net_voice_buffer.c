@@ -9,7 +9,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_800183E0(void);
 extern void fn_80018608(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
 extern void fn_800CB518(void);
@@ -623,7 +623,7 @@ asm void fn_804DA350(void)
     lfs f1, lbl_80887590
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -685,7 +685,7 @@ asm void fn_804DA3F8(void)
     addi r3, r1, 0x8
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r31, 0x2b78
     addi r4, r1, 0x8
     bl fn_800CB440
@@ -1180,7 +1180,7 @@ lbl_fn_804DA694_00000EB8:
     addi r4, r4, 0x18e
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle

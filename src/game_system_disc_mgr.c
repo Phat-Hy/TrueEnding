@@ -8,11 +8,11 @@ extern void mem_alloc(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CF45C(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void magic_dispatchActionCommand(void);
 extern void fn_8015ECC4(void);
 extern void fn_8016DDB0(void);
@@ -37,7 +37,7 @@ extern void PSVECMag(void);
 extern void PSVECDotProduct(void);
 extern void rand(void);
 extern void std_atan2(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_8074A8D8[];
@@ -360,7 +360,7 @@ lbl_fn_8034ECE8_00000328:
     addi r8, r30, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r3, 0x14c4(r30)
     lfs f0, lbl_80885398
     stfs f0, 0xad0(r3)
@@ -685,7 +685,7 @@ lbl_fn_8034ECE8_000008D0:
     addi r4, r4, 0x3fc
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -970,7 +970,7 @@ lbl_fn_8034F53C_00000C9C:
     addi r4, r4, 0x409
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1378,7 +1378,7 @@ lbl_fn_8034FB50_0000128C:
     fmadds f1, f3, f3, f0
     stfs f4, 0x9c(r1)
     stfs f7, 0xa0(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f4, 0x88(r1)
     frsp f30, f1
     lfs f0, 0x94(r1)
@@ -1394,7 +1394,7 @@ lbl_fn_8034FB50_0000128C:
     fmadds f1, f5, f5, f0
     stfs f3, 0xa8(r1)
     stfs f6, 0xac(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f30, f0
     bge lbl_fn_8034FB50_00001358

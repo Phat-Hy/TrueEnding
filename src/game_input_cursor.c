@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void fn_8004D314(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -43,7 +43,7 @@ extern void PSVECDotProduct(void);
 extern void fn_8068A850(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_80748538[];
@@ -227,7 +227,7 @@ asm void fn_802F2C50(void)
     stw r31, 0x58(r1)
     stw r31, 0x5c(r1)
     stw r31, 0x60(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_802F2C50_00000210
     lwz r3, 0x54(r1)
@@ -1119,7 +1119,7 @@ lbl_fn_802F389C_00000E44:
     fmadds f1, f4, f4, f0
     stfs f2, 0x18(r1)
     stfs f3, 0x1c(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r0, 0x15a0(r31)
     frsp f31, f1
     cmpwi r0, 0x0

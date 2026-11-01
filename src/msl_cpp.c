@@ -358,7 +358,7 @@ void std_sqrt(void);
 void std_pow(void);
 void fn_8068AEB4(void);
 void fn_8068B0FC(void);
-void fn_8068B100(void);
+void math_u64DivMod(void);
 void fn_8068B104(void);
 void fn_8068B1A4(void);
 void fn_8068B1F8(void);
@@ -677,7 +677,7 @@ lbl_fn_80686F34_0000016C:
     fmul f0, f1, f2
     fadd f0, f5, f0
     fmul f31, f1, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     fdiv f4, f31, f30
     lfd f3, lbl_80888B60
     lfd f2, lbl_80888B70
@@ -694,7 +694,7 @@ lbl_fn_80686F34_00000224:
     fsub f1, f2, f1
     fmul f31, f0, f1
     fmr f1, f31
-    bl fn_8068B100
+    bl math_u64DivMod
     lfd f2, lbl_80888B30
     li r0, 0x0
     stfd f1, 0x10(r1)
@@ -872,7 +872,7 @@ lbl_fn_80687200_00000448:
     fmul f0, f31, f2
     fadd f0, f5, f0
     fmul f30, f31, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     lis r3, 0x3fef
     addi r0, r3, 0x3333
     cmpw r30, r0
@@ -1792,7 +1792,7 @@ lbl_fn_80687E38_00001118:
     bne lbl_fn_80687E38_00001134
     cmpwi r9, 0x0
     blt lbl_fn_80687E38_00001134
-    bl fn_8068B100
+    bl math_u64DivMod
     b lbl_fn_80687E38_00001718
 lbl_fn_80687E38_00001134:
     fabs f0, f1
@@ -5327,7 +5327,7 @@ asm void fn_8068B0FC(void)
     blr
 }
 
-asm void fn_8068B100(void)
+asm void math_u64DivMod(void)
 {
     nofralloc
     b fn_8068AEB4

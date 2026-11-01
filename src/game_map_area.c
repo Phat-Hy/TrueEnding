@@ -12,10 +12,10 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_80017064(void);
 extern void fn_80044E0C(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80050A1C(void);
 extern void talk_parseQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_800697D8(void);
 extern void mem_free(void);
 extern void fn_80094BD8(void);
@@ -1479,7 +1479,7 @@ lbl_fn_8017C52C_000012C4:
     stfs f0, 0x38(r1)
     stfs f8, 0x3c(r1)
     stfs f7, 0x40(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_8017C52C_000013EC
     lfs f5, 0x58(r1)
@@ -1883,7 +1883,7 @@ asm void fn_8017CB9C(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x28(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     addi r3, r1, 0x28
     bl talk_parseQuotedString
     lis r4, __files@ha

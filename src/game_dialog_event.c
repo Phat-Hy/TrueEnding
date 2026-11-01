@@ -13,7 +13,7 @@ extern void fn_80013410(void);
 extern void fn_80013484(void);
 extern void fn_8003EFB0(void);
 extern void fn_80045694(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void fn_80093F1C(void);
 extern void fn_80094778(void);
@@ -68,7 +68,7 @@ extern void fn_8020ED84(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
 extern void fn_80211940(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void world_getGlobalFlag(void);
 extern void fn_8044D034(void);
@@ -701,7 +701,7 @@ lbl_fn_8014FF9C_00000784:
     cmpwi r0, 0x0
     beq lbl_fn_8014FF9C_00000868
     lwz r3, 0x50(r25)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmpwi r3, 0x0
     blt lbl_fn_8014FF9C_0000089C
     cmpwi r3, 0x7
@@ -1458,7 +1458,7 @@ lbl_fn_8015076C_00001158:
     lis r7, 0x8000
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8015076C_000012D0
     lwz r0, 0x1d4(r1)
@@ -1569,7 +1569,7 @@ lbl_fn_8015076C_00001310:
     lis r7, 0x8000
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8015076C_000013E8
     addi r3, r1, 0x20

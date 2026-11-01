@@ -11,14 +11,14 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void mem_alloc(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
@@ -57,7 +57,7 @@ extern void strcmp(void);
 extern void strncmp(void);
 extern void atoi(void);
 extern void std_atan2(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern u32 strlen(const char* str);
 
 /* External data declarations */
@@ -917,7 +917,7 @@ lbl_fn_8025F45C_00000B34:
     stfs f6, 0x14(r1)
     fmadds f1, f6, f6, f0
     stfs f3, 0x18(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f28, f0
     ble lbl_fn_8025F45C_00000B8C
@@ -1010,7 +1010,7 @@ lbl_fn_8025F45C_00000C9C:
     stfs f4, 0x28(r1)
     stfs f3, 0x24(r1)
     fmadds f1, f5, f5, f0
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f28, f0
     ble lbl_fn_8025F45C_00000CE8
@@ -1454,7 +1454,7 @@ lbl_fn_8025F8C8_00001204:
     stfs f0, 0x14(r1)
     stfs f3, 0x18(r1)
     stfs f6, 0x1c(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8025F8C8_00001358
     addi r3, r1, 0x150
@@ -1678,7 +1678,7 @@ asm void fn_8025FE60(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_8025FE60_00001684:
     addi r3, r1, 0x44
     bl talk_parseQuotedString
@@ -1749,7 +1749,7 @@ lbl_fn_8025FE60_00001748:
     cmpwi r3, 0x0
     beq lbl_fn_8025FE60_0000178C
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x1550(r30)
     b lbl_fn_8025FE60_00001790
 lbl_fn_8025FE60_0000178C:
@@ -1921,7 +1921,7 @@ asm void fn_80260324(void)
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x8(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
     lis r30, lbl_80744298@ha
     addi r30, r30, lbl_80744298@l
 lbl_fn_80260324_000019F0:

@@ -10,7 +10,7 @@ extern void _savegpr_23(void);
 extern void _savegpr_25(void);
 extern void fn_80043BF4(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
@@ -43,7 +43,7 @@ extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80210220(void);
 extern void event_findEntryById(void);
-extern void fn_80219558(void);
+extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8021A8D0(void);
 extern void fn_8021E48C(void);
@@ -1077,7 +1077,7 @@ lbl_fn_800FDF14_00000DE8:
     addi r3, r1, 0x10
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -2666,7 +2666,7 @@ lbl_fn_800FDF14_00002470:
     srwi. r0, r0, 31
     beq lbl_fn_800FDF14_000025D8
     lwz r3, 0x50(r28)
-    bl fn_80219558
+    bl task_mapIdToQueue
     lwz r4, lbl_8087F8A0
     mr r30, r3
     cmpwi r4, 0x0
@@ -2681,7 +2681,7 @@ lbl_fn_800FDF14_000024A0:
 lbl_fn_800FDF14_000024A8:
     lfs f29, lbl_80881478
     lwz r3, 0x50(r21)
-    bl fn_80219558
+    bl task_mapIdToQueue
     cmplwi r3, 0xa
     bgt lbl_fn_800FDF14_000025C0
     addi r4, r27, jumptable_80779CEC@l

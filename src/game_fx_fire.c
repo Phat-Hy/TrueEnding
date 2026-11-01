@@ -7,7 +7,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
 extern void fn_800F8C6C(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void actor_setState(void);
 extern void res_findResourceSlot(void);
 extern void fn_802953C8(void);
@@ -19,7 +19,7 @@ extern void PSVECNormalize(void);
 extern void PSVECMag(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_807457F0[];
@@ -105,7 +105,7 @@ asm void fn_80298580(void)
     stfs f4, 0x28(r1)
     stfs f3, 0x2c(r1)
     stfs f6, 0x30(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r0, 0x14b4(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80298580_000002B0
@@ -254,7 +254,7 @@ lbl_fn_80298580_00000254:
     lwz r6, 0x590(r31)
     add r5, r31, r0
     lwz r5, 0x14dc(r5)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_80298580_000002B0:
     lwz r0, 0x64(r1)
     psq_l f31, 0x58(r1), 0, 0

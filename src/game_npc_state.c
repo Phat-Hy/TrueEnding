@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void fn_80044E0C(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_8010CA3C(void);
 extern void fn_801279E8(void);
 extern void fn_8012DB04(void);
@@ -471,7 +471,7 @@ lbl_fn_8013C564_00000374:
     addi r4, r1, 0x38
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8013C564_0000072C
     lwz r5, 0x6c(r1)

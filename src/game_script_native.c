@@ -5,7 +5,7 @@
 extern void _restgpr_17(void);
 extern void _savegpr_17(void);
 extern void fn_8004D388(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
@@ -1836,7 +1836,7 @@ lbl_fn_80253F00_00001768:
     addi r4, r1, 0x98
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80253F00_00001910
     psq_l f1, 0x0(r25), 0, 0
@@ -1866,7 +1866,7 @@ lbl_fn_80253F00_00001910:
     addi r4, r1, 0x98
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80253F00_00001984
     psq_l f1, 0x0(r25), 0, 0

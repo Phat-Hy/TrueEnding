@@ -22,7 +22,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80092954(void);
 extern void fn_80095D44(void);
@@ -62,7 +62,7 @@ extern void atn_LoadHandle_getStatus(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
 extern void atoi(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
@@ -991,7 +991,7 @@ asm void fn_803F3FBC(void)
     beq lbl_fn_803F3FBC_00000C7C
     mr r3, r29
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0xf0(r28)
     mr r30, r3
     b lbl_fn_803F3FBC_00000C80
@@ -1044,7 +1044,7 @@ lbl_fn_803F3FBC_00000C80:
     bl route_createSegment
     mr r3, r30
     addi r4, r31, 0x159
-    bl fn_8008937C
+    bl node_createNamedChild
     lfs f1, lbl_80885FCC
     mr r29, r3
     lfs f2, lbl_80885FD0
@@ -1316,7 +1316,7 @@ lbl_fn_803F42C8_00001104:
     lfs f30, lbl_80885FB0
     beq lbl_fn_803F42C8_0000117C
     fmr f1, f31
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f1, f1
     lfs f3, 0x5b0(r31)
     lfs f0, 0xc(r29)

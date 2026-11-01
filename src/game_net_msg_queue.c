@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void OSGetTime(void);
 extern void __register_global_object(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void fn_800838B8(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
@@ -88,7 +88,7 @@ asm void fn_804F4CBC(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F4CBC_00000068
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -107,7 +107,7 @@ lbl_fn_804F4CBC_00000078:
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F4CBC_000000AC
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -195,7 +195,7 @@ asm void fn_804F4E44(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F4E44_000001D8
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5
@@ -314,7 +314,7 @@ asm void fn_804F4FC8(void)
     lwz r0, lbl_8087F600
     cmpwi r0, 0x0
     bne lbl_fn_804F4FC8_00000364
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     li r4, 0x1000
     li r5, 0x4
     li r6, 0x5

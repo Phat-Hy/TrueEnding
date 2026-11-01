@@ -18,7 +18,7 @@ extern void fn_80069BF4(void);
 extern void fn_8006AA20(void);
 extern void fn_8006B174(void);
 extern void fn_8006EF48(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void fn_8007A748(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -2053,7 +2053,7 @@ lbl_fn_80228CA0_00001A14:
     addi r8, r1, 0x8
     add r7, r27, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     slwi r31, r31, 4
     addi r4, r1, 0x34
     add r3, r26, r31

@@ -8,7 +8,7 @@ extern void _savegpr_20(void);
 extern void _savegpr_25(void);
 extern void fn_8000D430(void);
 extern void item_useConsumable(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80097E80(void);
@@ -203,7 +203,7 @@ lbl_fn_80379104_000000A0:
     stfs f0, 0x40(r1)
     psq_st f1, 0x0(r23), 0, 0
     stfs f2, 0x28(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80379104_000001A0
     addi r22, r22, 0x1

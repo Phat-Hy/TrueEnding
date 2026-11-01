@@ -11,7 +11,7 @@ extern void fn_80044C50(void);
 extern void fn_80044CCC(void);
 extern void fn_80044E0C(void);
 extern void fn_8004D388(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_realloc(void);
 extern void fn_800E2FE0(void);
 extern void fn_800EC7F0(void);
@@ -1114,7 +1114,7 @@ lbl_fn_800EE794_00000C04:
     addi r6, r1, 0x68
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_800EE794_00000DC4
     addi r3, r1, 0xcc
@@ -1152,7 +1152,7 @@ lbl_fn_800EE794_00000DC4:
     addi r4, r1, 0xc8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_800EE794_00000E58
     addi r3, r1, 0xcc
@@ -1187,7 +1187,7 @@ lbl_fn_800EE794_00000E58:
     addi r4, r1, 0xc8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_800EE794_00000EE0
     addi r3, r1, 0xcc
@@ -1512,10 +1512,8 @@ asm void fn_800EF2F0(void)
     blr
 }
 
-asm void fn_800EF304(void)
+void fn_800EF304(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800EF308(void)
@@ -1610,16 +1608,12 @@ asm void fn_800EF394(void)
     blr
 }
 
-asm void fn_800EF3D8(void)
+void fn_800EF3D8(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_800EF3DC(void)
+void fn_800EF3DC(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800EF3E0(void)

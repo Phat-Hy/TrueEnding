@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void fn_80044E0C(void);
 extern void fn_8004D314(void);
 extern void fn_8004D388(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80050A1C(void);
 extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -34,7 +34,7 @@ extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void vec3_isNonZero(void);
 
 /* External data declarations */
@@ -709,7 +709,7 @@ lbl_fn_80140588_00000830:
     stfs f2, 0xc4(r1)
     stfs f4, 0xcc(r1)
     stfs f0, 0xc0(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_80140588_000008AC
     li r28, 0x1
@@ -1042,7 +1042,7 @@ lbl_fn_80140588_00000D3C:
     lfs f0, 0xcbc(r27)
     fmuls f3, f3, f3
     fmadds f1, f0, f0, f3
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f0, lbl_808819B8
     frsp f3, f1
     fcmpo cr0, f29, f0
@@ -2251,7 +2251,7 @@ lbl_fn_80141674_00001E58:
     stfs f6, 0x68(r1)
     stfs f3, 0x6c(r1)
     stfs f5, 0x70(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f4, 0xc28(r31)
     frsp f28, f1
     lfs f0, 0x134(r1)
@@ -2267,7 +2267,7 @@ lbl_fn_80141674_00001E58:
     fmadds f1, f6, f6, f0
     stfs f3, 0x78(r1)
     stfs f5, 0x7c(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f4, f1
     lfs f0, 0xc30(r31)
     lfs f3, 0xc24(r31)
@@ -2300,7 +2300,7 @@ lbl_fn_80141674_00001E58:
     addi r4, r1, 0x320
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80141674_00002184
     lfs f0, 0x328(r1)

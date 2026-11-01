@@ -11,7 +11,7 @@ extern void fn_80060D58(void);
 extern void skill_calculateDamage(void);
 extern void fn_80061824(void);
 extern void fn_8006F2F0(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void fn_800BFAC8(void);
 extern void fn_800DBF68(void);
 extern void fn_8050284C(void);
@@ -1736,7 +1736,7 @@ asm void fn_804F8468(void)
     addi r8, r1, 0x230
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r3, lbl_8087F628
     lwz r14, lbl_8087EEC8
     lwz r4, 0xc8(r3)
@@ -1763,7 +1763,7 @@ lbl_fn_804F8468_0000174C:
     addi r7, r1, 0x23a
     addi r8, r1, 0x22c
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x260(r1)
     la r3, lbl_8087E1C4
     addi r14, r3, 0x62
@@ -1786,7 +1786,7 @@ lbl_fn_804F8468_00001790:
     addi r8, r1, 0x220
     add r7, r14, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x260(r1)
     la r3, lbl_8087E1C4
     addi r14, r3, 0x78
@@ -1809,7 +1809,7 @@ lbl_fn_804F8468_000017E4:
     addi r8, r1, 0x218
     add r7, r14, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r3, lbl_8087F628
     lwz r0, 0x25c(r3)
     cmpwi r0, 0x0
@@ -1849,7 +1849,7 @@ lbl_fn_804F8468_0000186C:
     addi r8, r1, 0x210
     add r7, r14, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x260(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_000018B0
@@ -1978,7 +1978,7 @@ lbl_fn_804F8468_000018B4:
     addi r8, r1, 0x208
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r3, 0x4fc(r25)
     addi r0, r3, 0x1
     cmplwi r0, 0x2b
@@ -2076,7 +2076,7 @@ lbl_fn_804F8468_00001BE0:
     addi r8, r1, 0x200
     add r7, r14, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x254(r1)
     la r3, lbl_8087E1C4
     addi r14, r3, 0x9e
@@ -2099,7 +2099,7 @@ lbl_fn_804F8468_00001C34:
     addi r8, r1, 0x1f8
     add r7, r14, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x540(r25)
     cmpwi r0, 0x0
     beq lbl_fn_804F8468_00001C84
@@ -2144,7 +2144,7 @@ lbl_fn_804F8468_00001CCC:
     addi r8, r1, 0x1f0
     add r7, r14, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x254(r1)
     la r3, lbl_8087E1C4
     addi r14, r3, 0xae
@@ -2167,7 +2167,7 @@ lbl_fn_804F8468_00001D20:
     addi r8, r1, 0x1e8
     add r7, r14, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x560(r25)
     cmplwi r0, 0xa
     bgt lbl_fn_804F8468_00001DF8
@@ -2234,7 +2234,7 @@ lbl_fn_804F8468_00001E1C:
     addi r8, r1, 0x1e0
     add r7, r14, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r3, 0x564(r25)
     addi r4, r1, 0x770
     li r5, 0xa
@@ -2261,7 +2261,7 @@ lbl_fn_804F8468_00001E80:
     addi r8, r1, 0x1d8
     add r7, r14, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x254(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00001EC8
@@ -2283,7 +2283,7 @@ lbl_fn_804F8468_00001ECC:
     addi r8, r1, 0x1d0
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r3, 0x568(r25)
     addi r4, r1, 0x770
     li r5, 0xa
@@ -2310,7 +2310,7 @@ lbl_fn_804F8468_00001F34:
     addi r8, r1, 0x1c8
     add r7, r14, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x254(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00001F7C
@@ -2332,7 +2332,7 @@ lbl_fn_804F8468_00001F80:
     addi r8, r1, 0x1c0
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x254(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00001FC8
@@ -2387,7 +2387,7 @@ lbl_fn_804F8468_00002050:
     addi r8, r1, 0x1b8
     add r7, r14, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     la r3, lbl_8087E1C4
     lbz r15, 0x1b4(r1)
     lbz r14, 0x1ac(r1)
@@ -2419,7 +2419,7 @@ lbl_fn_804F8468_000020C4:
     addi r8, r1, 0x1b0
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x254(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_0000210C
@@ -2439,7 +2439,7 @@ lbl_fn_804F8468_00002110:
     addi r8, r1, 0x1a8
     add r7, r16, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     addi r19, r19, 0x1
     addi r18, r18, 0x4
     cmpwi r19, 0x8
@@ -2498,7 +2498,7 @@ lbl_fn_804F8468_000021E8:
     addi r8, r1, 0x1a0
     add r7, r14, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     la r3, lbl_8087E1C4
     lbz r15, 0x19c(r1)
     lbz r14, 0x194(r1)
@@ -2530,7 +2530,7 @@ lbl_fn_804F8468_0000225C:
     addi r8, r1, 0x198
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x254(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_000022A4
@@ -2550,7 +2550,7 @@ lbl_fn_804F8468_000022A8:
     addi r8, r1, 0x190
     add r7, r16, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     addi r19, r19, 0x1
     addi r18, r18, 0x4
     cmpwi r19, 0x3
@@ -2577,7 +2577,7 @@ lbl_fn_804F8468_00002308:
     addi r8, r1, 0x188
     add r7, r14, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r3, 0x598(r25)
     addi r4, r1, 0x770
     li r5, 0xa
@@ -2603,7 +2603,7 @@ lbl_fn_804F8468_00002364:
     addi r8, r1, 0x180
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x254(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_000023AC
@@ -2661,7 +2661,7 @@ lbl_fn_804F8468_000023B0:
     addi r8, r1, 0x178
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r4, lbl_8087F628
     addis r3, r4, 0x1
     lbz r0, -0x3deb(r3)
@@ -2708,7 +2708,7 @@ lbl_fn_804F8468_000024E8:
     addi r8, r1, 0x170
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x248(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00002530
@@ -2838,7 +2838,7 @@ lbl_fn_804F8468_000026C8:
     addi r8, r1, 0x168
     add r7, r20, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x248(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_0000270C
@@ -2859,7 +2859,7 @@ lbl_fn_804F8468_00002710:
     addi r8, r1, 0x160
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x248(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00002758
@@ -2879,7 +2879,7 @@ lbl_fn_804F8468_0000275C:
     addi r8, r1, 0x158
     add r7, r19, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lbz r3, 0x0(r29)
     addi r4, r1, 0x570
     li r5, 0xa
@@ -2905,7 +2905,7 @@ lbl_fn_804F8468_000027B4:
     addi r8, r1, 0x150
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x248(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00002800
@@ -2926,7 +2926,7 @@ lbl_fn_804F8468_00002804:
     addi r8, r1, 0x148
     add r7, r18, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r3, 0x4(r29)
     addi r4, r1, 0x570
     li r5, 0xa
@@ -2952,7 +2952,7 @@ lbl_fn_804F8468_00002860:
     addi r8, r1, 0x140
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x248(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_000028AC
@@ -2973,7 +2973,7 @@ lbl_fn_804F8468_000028B0:
     addi r8, r1, 0x138
     add r7, r17, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0xc(r29)
     extrwi. r0, r0, 1, 1
     beq lbl_fn_804F8468_0000293C
@@ -2998,7 +2998,7 @@ lbl_fn_804F8468_0000290C:
     addi r8, r1, 0x130
     add r7, r16, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804F8468_0000293C:
     lwz r0, 0xc(r29)
     extrwi. r0, r0, 1, 3
@@ -3024,7 +3024,7 @@ lbl_fn_804F8468_00002968:
     addi r8, r1, 0x128
     add r7, r16, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804F8468_00002998:
     lwz r0, 0xc(r29)
     extrwi. r0, r0, 1, 4
@@ -3050,7 +3050,7 @@ lbl_fn_804F8468_000029C4:
     addi r8, r1, 0x120
     add r7, r16, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804F8468_000029F4:
     lwz r0, 0x248(r1)
     srwi. r0, r0, 31
@@ -3072,7 +3072,7 @@ lbl_fn_804F8468_00002A10:
     addi r8, r1, 0x118
     add r7, r31, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x248(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00002A58
@@ -3094,7 +3094,7 @@ lbl_fn_804F8468_00002A5C:
     addi r6, r29, 0x10
     addi r8, r1, 0x110
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x248(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00002AA8
@@ -3115,7 +3115,7 @@ lbl_fn_804F8468_00002AAC:
     addi r8, r1, 0x108
     add r7, r30, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r3, 0x8(r29)
     addi r4, r1, 0x570
     li r5, 0xa
@@ -3141,7 +3141,7 @@ lbl_fn_804F8468_00002B08:
     addi r8, r1, 0x100
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x248(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00002B50
@@ -3209,7 +3209,7 @@ lbl_fn_804F8468_00002BD4:
     addi r8, r1, 0xf8
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r3, 0x5e8(r25)
     addi r4, r1, 0x370
     li r5, 0xa
@@ -3235,7 +3235,7 @@ lbl_fn_804F8468_00002C68:
     addi r8, r1, 0xf0
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x23c(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00002CB0
@@ -3366,7 +3366,7 @@ lbl_fn_804F8468_00002E48:
     addi r8, r1, 0xe8
     add r7, r24, r0
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     mr r3, r17
     addi r4, r1, 0x370
     li r5, 0xa
@@ -3391,7 +3391,7 @@ lbl_fn_804F8468_00002EA0:
     addi r8, r1, 0xe0
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x23c(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00002EE8
@@ -3411,7 +3411,7 @@ lbl_fn_804F8468_00002EEC:
     addi r8, r1, 0xd8
     add r7, r26, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lbz r3, 0xcc(r16)
     addi r4, r1, 0x370
     li r5, 0xa
@@ -3436,7 +3436,7 @@ lbl_fn_804F8468_00002F44:
     addi r8, r1, 0xd0
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x23c(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00002F8C
@@ -3457,7 +3457,7 @@ lbl_fn_804F8468_00002F90:
     addi r8, r1, 0xc8
     add r7, r27, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0xd0(r16)
     srwi. r0, r0, 31
     beq lbl_fn_804F8468_0000301C
@@ -3482,7 +3482,7 @@ lbl_fn_804F8468_00002FEC:
     addi r8, r1, 0xc0
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804F8468_0000301C:
     lwz r0, 0xd0(r16)
     extrwi. r0, r0, 1, 2
@@ -3508,7 +3508,7 @@ lbl_fn_804F8468_00003048:
     addi r8, r1, 0xb8
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804F8468_00003078:
     lwz r0, 0xd0(r16)
     extrwi. r0, r0, 1, 3
@@ -3534,7 +3534,7 @@ lbl_fn_804F8468_000030A4:
     addi r8, r1, 0xb0
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804F8468_000030D4:
     lwz r0, 0xd0(r16)
     extrwi. r0, r0, 1, 4
@@ -3560,7 +3560,7 @@ lbl_fn_804F8468_00003100:
     addi r8, r1, 0xa8
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804F8468_00003130:
     lwz r0, 0xd0(r16)
     extrwi. r0, r0, 1, 5
@@ -3586,7 +3586,7 @@ lbl_fn_804F8468_0000315C:
     addi r8, r1, 0xa0
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804F8468_0000318C:
     lwz r0, 0xd0(r16)
     extrwi. r0, r0, 4, 6
@@ -3612,7 +3612,7 @@ lbl_fn_804F8468_000031B8:
     addi r8, r1, 0x98
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0xd0(r16)
     addi r4, r1, 0x370
     li r5, 0xa
@@ -3639,7 +3639,7 @@ lbl_fn_804F8468_00003218:
     addi r8, r1, 0x90
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x23c(r1)
     addi r29, r23, 0x142
     srwi. r0, r0, 31
@@ -3661,7 +3661,7 @@ lbl_fn_804F8468_0000326C:
     addi r8, r1, 0x88
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804F8468_0000329C:
     lwz r0, 0xd0(r16)
     extrwi. r0, r0, 8, 10
@@ -3687,7 +3687,7 @@ lbl_fn_804F8468_000032C8:
     addi r8, r1, 0x80
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0xd0(r16)
     addi r4, r1, 0x370
     li r5, 0xa
@@ -3714,7 +3714,7 @@ lbl_fn_804F8468_00003328:
     addi r8, r1, 0x78
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x23c(r1)
     addi r29, r23, 0x142
     srwi. r0, r0, 31
@@ -3736,7 +3736,7 @@ lbl_fn_804F8468_0000337C:
     addi r8, r1, 0x70
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804F8468_000033AC:
     lwz r0, 0x23c(r1)
     srwi. r0, r0, 31
@@ -3758,7 +3758,7 @@ lbl_fn_804F8468_000033C8:
     addi r8, r1, 0x68
     add r7, r14, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r3, 0x0(r16)
     cmpwi r3, 0x0
     bne lbl_fn_804F8468_00003458
@@ -3783,7 +3783,7 @@ lbl_fn_804F8468_00003424:
     addi r8, r1, 0x60
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_804F8468_00003790
 lbl_fn_804F8468_00003458:
     lwz r0, 0x38(r3)
@@ -3811,7 +3811,7 @@ lbl_fn_804F8468_00003488:
     addi r8, r1, 0x58
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_804F8468_0000350C
 lbl_fn_804F8468_000034BC:
     lwz r0, 0x23c(r1)
@@ -3835,7 +3835,7 @@ lbl_fn_804F8468_000034DC:
     addi r8, r1, 0x50
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804F8468_0000350C:
     lwz r3, 0x0(r16)
     lwz r0, 0x38(r3)
@@ -3863,7 +3863,7 @@ lbl_fn_804F8468_00003540:
     addi r8, r1, 0x48
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_804F8468_000035C4
 lbl_fn_804F8468_00003574:
     lwz r0, 0x23c(r1)
@@ -3887,7 +3887,7 @@ lbl_fn_804F8468_00003594:
     addi r8, r1, 0x40
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804F8468_000035C4:
     lwz r3, 0x0(r16)
     lwz r0, 0x12a4(r3)
@@ -3914,7 +3914,7 @@ lbl_fn_804F8468_000035F4:
     addi r8, r1, 0x38
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804F8468_00003624:
     lwz r3, 0x0(r16)
     lwz r0, 0x55c(r3)
@@ -3941,7 +3941,7 @@ lbl_fn_804F8468_00003654:
     addi r8, r1, 0x30
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_804F8468_00003790
 lbl_fn_804F8468_00003688:
     cmpwi r0, 0x1
@@ -3967,7 +3967,7 @@ lbl_fn_804F8468_000036B0:
     addi r8, r1, 0x28
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_804F8468_00003790
 lbl_fn_804F8468_000036E4:
     cmpwi r0, 0x2
@@ -3993,7 +3993,7 @@ lbl_fn_804F8468_0000370C:
     addi r8, r1, 0x20
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     b lbl_fn_804F8468_00003790
 lbl_fn_804F8468_00003740:
     lwz r0, 0x23c(r1)
@@ -4017,7 +4017,7 @@ lbl_fn_804F8468_00003760:
     addi r8, r1, 0x18
     add r7, r29, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_804F8468_00003790:
     lwz r0, 0x23c(r1)
     srwi. r0, r0, 31
@@ -4039,7 +4039,7 @@ lbl_fn_804F8468_000037AC:
     addi r8, r1, 0x10
     add r7, r15, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r3, 0xdc(r16)
     addi r4, r1, 0x370
     li r5, 0xa
@@ -4065,7 +4065,7 @@ lbl_fn_804F8468_00003808:
     addi r8, r1, 0x8
     add r7, r7, r0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x23c(r1)
     srwi. r0, r0, 31
     bne lbl_fn_804F8468_00003850

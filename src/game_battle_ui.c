@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_23(void);
 extern void _savegpr_23(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void fn_80134208(void);
 extern void fn_801346C8(void);
@@ -336,7 +336,7 @@ lbl_fn_80172EFC_00000304:
     stfs f3, 0x90(r1)
     stfs f0, 0x94(r1)
     stw r29, 0x150(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80172EFC_000008B8
     lwz r3, 0x13ac(r27)
@@ -457,7 +457,7 @@ lbl_fn_80172EFC_000004A4:
     stfs f4, 0x8c(r1)
     stfs f3, 0x90(r1)
     stfs f0, 0x94(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80172EFC_000005D4
     addi r3, r1, 0x138
@@ -825,7 +825,7 @@ lbl_fn_8017380C_00000A3C:
     stfs f3, 0xc0(r1)
     stfs f0, 0xc4(r1)
     stw r0, 0x1a0(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8017380C_000011E0
     lwz r0, 0x19c(r1)
@@ -900,7 +900,7 @@ lbl_fn_8017380C_00000B1C:
     stfs f0, 0x38(r1)
     stfs f3, 0x3c(r1)
     stfs f4, 0x40(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_8017380C_000011D8
     lfs f4, 0x140(r1)
@@ -1453,7 +1453,7 @@ lbl_fn_80174104_00001350:
     stfs f0, 0x118(r1)
     stw r30, 0x264(r1)
     stw r30, 0x268(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80174104_00001ABC
     lwz r3, 0x264(r1)
@@ -1538,7 +1538,7 @@ lbl_fn_80174104_0000143C:
     stfs f0, 0xa4(r1)
     stfs f3, 0xa8(r1)
     stfs f4, 0xac(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80174104_00001ABC
     lwz r0, 0x214(r1)
@@ -1574,7 +1574,7 @@ lbl_fn_80174104_0000143C:
     stfs f0, 0x8c(r1)
     stfs f5, 0x90(r1)
     stfs f6, 0x94(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80174104_00001ABC
     lwz r0, 0x214(r1)

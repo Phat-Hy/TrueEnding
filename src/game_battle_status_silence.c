@@ -19,7 +19,7 @@ extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void fn_80087E9C(void);
 extern void fn_80088724(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_80092954(void);
@@ -885,7 +885,7 @@ asm void fn_8042CCAC(void)
     beq lbl_fn_8042CCAC_00000A0C
     mr r3, r30
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0xf0(r29)
     mr r30, r3
     b lbl_fn_8042CCAC_00000A10
@@ -1474,7 +1474,7 @@ asm void fn_8042D488(void)
     beq lbl_fn_8042D488_000011DC
     mr r3, r30
     addi r4, r1, 0x8
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0xf0(r29)
     mr r30, r3
     b lbl_fn_8042D488_000011E0

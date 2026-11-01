@@ -12,7 +12,7 @@ extern void ref_releaseHandle(void);
 extern void fn_800EFDA0(void);
 extern void fn_800EFE3C(void);
 extern void fn_800FA4FC(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_800FBA9C(void);
 extern void fn_800FC410(void);
 extern void fn_80133EE8(void);
@@ -32,7 +32,7 @@ extern void printf(void);
 extern void abort(void);
 extern void fn_8068A850(void);
 extern void std_atan2(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_80736040[];
@@ -799,7 +799,7 @@ lbl_fn_800F8C6C_00000A98:
     addi r8, r16, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_800F8C6C_00000AD4:
     addi r3, r16, 0x7d4
     li r4, 0x2f
@@ -836,7 +836,7 @@ lbl_fn_800F8C6C_00000B20:
     addi r8, r16, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_800F8C6C_00000B5C:
     addi r3, r16, 0x7d4
     li r4, 0x32
@@ -926,7 +926,7 @@ lbl_fn_800F8C6C_00000BD4:
     addi r8, r16, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     b lbl_fn_800F8C6C_00000D78
 lbl_fn_800F8C6C_00000CBC:
     lwz r4, lbl_8087F048
@@ -976,7 +976,7 @@ lbl_fn_800F8C6C_00000CE0:
     addi r8, r16, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_800F8C6C_00000D78:
     addi r3, r16, 0x7d4
     li r4, 0x34
@@ -1261,7 +1261,7 @@ lbl_fn_800F8C6C_00001158:
     addi r8, r16, 0x534
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
 lbl_fn_800F8C6C_00001194:
     lwz r0, 0x14(r1)
     cmpw r22, r0
@@ -1387,10 +1387,10 @@ lbl_fn_800F8C6C_000012F4:
     fcmpo cr0, f0, f29
     ble lbl_fn_800F8C6C_000013A8
     fnmsubs f1, f25, f25, f30
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f25, f1
     fmr f1, f23
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r12, 0x0(r19)
     frsp f24, f1
     mr r3, r19

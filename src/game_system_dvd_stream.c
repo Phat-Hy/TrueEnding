@@ -11,15 +11,15 @@ extern void fn_8004B290(void);
 extern void item_useConsumable(void);
 extern void fn_8004D388(void);
 extern void fn_8004ECC0(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_8006A250(void);
 extern void fn_8006EF48(void);
 extern void fn_80076FF8(void);
 extern void route_interpolatePath(void);
 extern void fn_80087858(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void msg_getMessageById(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_unlink(void);
 extern void str_findChar(void);
@@ -349,13 +349,13 @@ lbl_fn_803775DC_00000308:
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r3)
     lwz r3, lbl_8087EF70
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_803775DC_00000360
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_803775DC_00000398
 lbl_fn_803775DC_00000360:
@@ -378,13 +378,13 @@ lbl_fn_803775DC_00000398:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     bne lbl_fn_803775DC_000003C8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     cmpwi r3, 0x0
     beq lbl_fn_803775DC_00000404
 lbl_fn_803775DC_000003C8:
@@ -1193,7 +1193,7 @@ asm void fn_80378474(void)
     cmpwi r3, 0x0
     beq lbl_fn_80378474_00000F78
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x1fc(r29)
     mr r30, r3
     b lbl_fn_80378474_00000F7C
@@ -1787,7 +1787,7 @@ asm void fn_80378D34(void)
     stfs f2, 0xd0(r1)
     lwz r3, lbl_8087EE98
     psq_st f1, 0x0(r11), 0, 0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80378D34_0000183C
     lfs f3, 0xec(r1)

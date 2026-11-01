@@ -6,11 +6,11 @@ extern void __files(void);
 extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void dtor_80084684(void);
-extern void fn_8006F72C(void);
+extern void str_assignBuffer(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void msg_getMessageById(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
@@ -101,7 +101,7 @@ asm void fn_803B42E8(void)
 lbl_fn_803B42E8_00000020:
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     lwz r3, lbl_8087EFE8
     cmpwi r3, 0x0
     beq lbl_fn_803B42E8_00000040
@@ -779,7 +779,7 @@ asm void fn_803B4C38(void)
     addi r8, r1, 0x20
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     mr r3, r17
     bl fn_803B3D2C
     lwz r0, 0x4c(r1)
@@ -838,7 +838,7 @@ lbl_fn_803B4C38_00000A6C:
     addi r8, r1, 0x18
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     lwz r0, 0x44(r1)
     lwz r3, 0x48(r1)
     cmplw r0, r3
@@ -873,7 +873,7 @@ lbl_fn_803B4C38_00000AF8:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_803B4C38_00000B3C:
     lwz r3, 0x44(r1)
     addi r0, r3, 0x1
@@ -1004,7 +1004,7 @@ lbl_fn_803B4C38_00000CD4:
     li r4, 0x0
     li r5, 0x0
     add r7, r6, r0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_803B4C38_00000D18:
     lwz r0, 0x44(r1)
     subi r6, r31, 0x5555
@@ -1787,7 +1787,7 @@ lbl_fn_803B5974_0000171C:
     addi r8, r1, 0x28
     li r4, 0x0
     li r5, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
     mr r3, r31
     bl fn_803B3D2C
     lwz r0, 0x84(r1)
@@ -1846,7 +1846,7 @@ lbl_fn_803B5974_00001828:
     add r7, r6, r0
     addi r8, r1, 0x20
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_803B5974_00001848:
     lwz r0, 0x54(r1)
     srwi. r0, r0, 31
@@ -1945,7 +1945,7 @@ lbl_fn_803B5974_00001980:
     add r7, r6, r0
     addi r8, r1, 0x18
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_803B5974_000019A0:
     lwz r0, 0x48(r1)
     srwi. r0, r0, 31
@@ -2039,7 +2039,7 @@ lbl_fn_803B5974_00001AC4:
     add r7, r6, r0
     addi r8, r1, 0x10
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_803B5974_00001AE4:
     lwz r0, 0x3c(r1)
     srwi. r0, r0, 31
@@ -2133,7 +2133,7 @@ lbl_fn_803B5974_00001C08:
     add r7, r6, r0
     addi r8, r1, 0x8
     li r4, 0x0
-    bl fn_8006F72C
+    bl str_assignBuffer
 lbl_fn_803B5974_00001C28:
     lwz r0, 0x30(r1)
     srwi. r0, r0, 31

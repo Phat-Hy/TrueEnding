@@ -15,7 +15,7 @@ extern void fn_80087E9C(void);
 extern void fn_80088724(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void fn_800BFAC8(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -460,7 +460,7 @@ lbl_fn_805A4A58_000000F4:
     lfs f1, lbl_80888250
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

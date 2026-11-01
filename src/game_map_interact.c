@@ -13,7 +13,7 @@ extern void vec3_copy(void);
 extern void fn_80041C0C(void);
 extern void fn_80042108(void);
 extern void fn_80042740(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80079044(void);
 extern void fn_800790D0(void);
 extern void mem_free(void);
@@ -1301,7 +1301,7 @@ lbl_fn_80184864_00000F44:
     addi r5, r1, 0x68
     addi r8, r29, 0x5b8
     li r9, 0x0
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_80184864_00000F94
     lwz r3, 0x34(r28)

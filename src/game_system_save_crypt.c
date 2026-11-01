@@ -11,7 +11,7 @@ extern void dtor_80084684(void);
 extern void fn_8000D760(void);
 extern void fn_8003E4A4(void);
 extern void fn_8004212C(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80057A64(void);
 extern void fn_80057A68(void);
 extern void fn_80063D3C(void);
@@ -20,7 +20,7 @@ extern void fn_8006CA80(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
-extern void fn_8008937C(void);
+extern void node_createNamedChild(void);
 extern void fn_800897D8(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -36,7 +36,7 @@ extern void fn_800ED4D8(void);
 extern void fn_800ED4E0(void);
 extern void fn_800EDFE8(void);
 extern void system_getNextSequenceId(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_80121F00(void);
@@ -81,7 +81,7 @@ extern void strncmp(void);
 extern void fn_8068AE9C(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
 
@@ -315,7 +315,7 @@ lbl_fn_80343B0C_000001C0:
     fmadds f1, f3, f3, f0
     stfs f4, 0x9c(r1)
     stfs f7, 0xa0(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f4, 0x88(r1)
     frsp f30, f1
     lfs f0, 0x94(r1)
@@ -331,7 +331,7 @@ lbl_fn_80343B0C_000001C0:
     fmadds f1, f5, f5, f0
     stfs f3, 0xa8(r1)
     stfs f6, 0xac(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f30, f0
     bge lbl_fn_80343B0C_0000028C
@@ -713,7 +713,7 @@ lbl_fn_803441AC_00000784:
     lwz r3, lbl_8087F048
     lwz r5, 0x14d8(r27)
     lwz r6, 0x1658(r27)
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lwz r0, 0x1760(r27)
     cmpwi r0, 0x0
     beq lbl_fn_803441AC_0000086C
@@ -878,7 +878,7 @@ lbl_fn_80344454_00000A28:
     stfs f5, 0x20(r1)
     stfs f4, 0x28(r1)
     stfs f26, 0x24(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r12, 0x0(r30)
     frsp f25, f1
     mr r3, r30
@@ -987,7 +987,7 @@ asm void fn_803446BC(void)
     fmadds f1, f4, f4, f0
     stfs f2, 0xc(r1)
     stfs f3, 0x10(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f1, f1
     lfs f0, lbl_80885350
     fcmpo cr0, f1, f0
@@ -1048,7 +1048,7 @@ asm void fn_80344780(void)
     cmpwi r3, 0x0
     beq lbl_fn_80344780_00000CCC
     addi r3, r3, 0x10
-    bl fn_8008937C
+    bl node_createNamedChild
     stw r3, 0x175c(r28)
     mr r29, r3
     b lbl_fn_80344780_00000CD0
@@ -1672,7 +1672,7 @@ lbl_fn_80344E88_000014D0:
     stfs f0, 0x38(r1)
     stfs f8, 0x3c(r1)
     stfs f7, 0x40(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     bne lbl_fn_80344E88_000015F4
     lfs f4, 0x58(r1)

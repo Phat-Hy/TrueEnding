@@ -12,7 +12,7 @@ extern void mem_free(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB440(void);
@@ -541,7 +541,7 @@ lbl_fn_802DC618_00000668:
     stw r0, 0x40(r1)
     stfs f0, 0x4c(r1)
     stfs f0, 0x2b8(r8)
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle

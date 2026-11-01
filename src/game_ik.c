@@ -14,7 +14,7 @@ extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
 extern void msg_getMessageById(void);
 extern void fn_800A5584(void);
-extern void fn_800A55AC(void);
+extern void msg_getMessageString(void);
 extern void fn_800DCA6C(void);
 extern void PSMTXRotRad(void);
 extern void C_MTXLookAt(void);
@@ -300,7 +300,7 @@ asm void fn_800C6F28(void)
     beq lbl_fn_800C6F28_00000290
     li r4, 0x0
     li r5, 0x0
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_800C6F28_00000294
 lbl_fn_800C6F28_00000290:
     li r3, 0x0
@@ -314,7 +314,7 @@ lbl_fn_800C6F28_00000294:
     beq lbl_fn_800C6F28_000002C0
     li r4, 0x0
     li r5, 0x1a
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_800C6F28_000002C4
 lbl_fn_800C6F28_000002C0:
     li r3, 0x0
@@ -345,7 +345,7 @@ asm void fn_800C6FB4(void)
     beq lbl_fn_800C6FB4_0000031C
     li r4, 0x0
     li r5, 0x1
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_800C6FB4_00000320
 lbl_fn_800C6FB4_0000031C:
     li r3, 0x0
@@ -359,7 +359,7 @@ lbl_fn_800C6FB4_00000320:
     beq lbl_fn_800C6FB4_0000034C
     li r4, 0x0
     li r5, 0x19
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_800C6FB4_00000350
 lbl_fn_800C6FB4_0000034C:
     li r3, 0x0
@@ -390,7 +390,7 @@ asm void fn_800C7040(void)
     beq lbl_fn_800C7040_000003A8
     li r4, 0x0
     li r5, 0x2
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_800C7040_000003AC
 lbl_fn_800C7040_000003A8:
     li r3, 0x0
@@ -404,7 +404,7 @@ lbl_fn_800C7040_000003AC:
     beq lbl_fn_800C7040_000003D8
     li r4, 0x0
     li r5, 0x17
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_800C7040_000003DC
 lbl_fn_800C7040_000003D8:
     li r3, 0x0
@@ -435,7 +435,7 @@ asm void fn_800C70CC(void)
     beq lbl_fn_800C70CC_00000434
     li r4, 0x0
     li r5, 0x3
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_800C70CC_00000438
 lbl_fn_800C70CC_00000434:
     li r3, 0x0
@@ -449,7 +449,7 @@ lbl_fn_800C70CC_00000438:
     beq lbl_fn_800C70CC_00000464
     li r4, 0x0
     li r5, 0x18
-    bl fn_800A55AC
+    bl msg_getMessageString
     b lbl_fn_800C70CC_00000468
 lbl_fn_800C70CC_00000464:
     li r3, 0x0

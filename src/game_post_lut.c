@@ -4,16 +4,16 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8004ED34(void);
+extern void collision_testLineSegment(void);
 extern void fn_80051B70(void);
 extern void fn_80063764(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800BFAC8(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
-extern void fn_800FAB80(void);
+extern void clip_calculateFrustum(void);
 extern void fn_800FDB20(void);
 extern void fn_80101434(void);
 extern void fn_8011FC10(void);
@@ -513,7 +513,7 @@ lbl_fn_802C5F5C_0000062C:
     addi r4, r4, 0xf1
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1344,7 +1344,7 @@ lbl_fn_802C6DF4_000011D0:
     li r6, 0x7d0
     li r9, 0x0
     li r10, 0x1e
-    bl fn_800FAB80
+    bl clip_calculateFrustum
     lis r4, lbl_80746C90@ha
     lfs f1, lbl_808842AC
     addi r4, r4, lbl_80746C90@l
@@ -1352,7 +1352,7 @@ lbl_fn_802C6DF4_000011D0:
     addi r4, r4, 0xfe
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -1808,7 +1808,7 @@ lbl_fn_802C6DF4_0000189C:
     stw r0, 0x578(r1)
     stw r0, 0x57c(r1)
     stw r0, 0x580(r1)
-    bl fn_8004ED34
+    bl collision_testLineSegment
     cmpwi r3, 0x0
     beq lbl_fn_802C6DF4_00001CAC
     lwz r3, 0x578(r1)

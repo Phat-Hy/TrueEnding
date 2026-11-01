@@ -13,7 +13,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void fn_800EFD04(void);
 extern void fn_800EFDA0(void);
@@ -217,7 +217,7 @@ lbl_fn_80348FF4_000000B4:
     addi r4, r29, 0x3bc
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x18
     li r4, -0x1
     bl ref_releaseHandle
@@ -804,7 +804,7 @@ lbl_fn_803494AC_00000960:
     stfs f2, 0x16e8(r31)
     stfs f0, 0x16e4(r31)
     stfs f0, 0x9fc(r31)
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1218,7 +1218,7 @@ lbl_fn_80349BA0_00000F58:
     addi r4, r4, 0x3d8
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
 extern void actor_setState(void);
@@ -15,7 +15,7 @@ extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
 extern void std_atan2(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 
 /* External data declarations */
 extern u8 lbl_8074A4C0[];
@@ -338,7 +338,7 @@ lbl_fn_80342004_000003DC:
     addi r4, r4, 0x37c
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -766,7 +766,7 @@ lbl_fn_80342674_00000A20:
     fmadds f1, f3, f3, f0
     stfs f4, 0x9c(r1)
     stfs f7, 0xa0(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f4, 0x88(r1)
     frsp f30, f1
     lfs f0, 0x94(r1)
@@ -782,7 +782,7 @@ lbl_fn_80342674_00000A20:
     fmadds f1, f5, f5, f0
     stfs f3, 0xa8(r1)
     stfs f6, 0xac(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f30, f0
     bge lbl_fn_80342674_00000AEC
@@ -1797,7 +1797,7 @@ lbl_fn_803435B8_00001964:
     fmadds f1, f3, f3, f0
     stfs f4, 0x9c(r1)
     stfs f7, 0xa0(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lfs f4, 0x88(r1)
     frsp f30, f1
     lfs f0, 0x94(r1)
@@ -1813,7 +1813,7 @@ lbl_fn_803435B8_00001964:
     fmadds f1, f5, f5, f0
     stfs f3, 0xa8(r1)
     stfs f6, 0xac(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     frsp f0, f1
     fcmpo cr0, f30, f0
     bge lbl_fn_803435B8_00001A30

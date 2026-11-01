@@ -19,7 +19,7 @@ extern void fn_8004203C(void);
 extern void fn_80057A68(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
-extern void fn_8005B6E8(void);
+extern void talk_setSpeakerName(void);
 extern void fn_8006AFF8(void);
 extern void fn_800897D8(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -72,7 +72,7 @@ extern void strncmp(void);
 extern void atoi(void);
 extern void std_atan2(void);
 extern void std_fmod(void);
-extern void fn_8068B100(void);
+extern void math_u64DivMod(void);
 extern void __construct_new_array(void);
 extern void __destroy_new_array(void);
 extern u32 strlen(const char* str);
@@ -593,7 +593,7 @@ lbl_fn_802878EC_00000694:
     stfs f6, 0x68(r1)
     fmadds f1, f6, f6, f0
     stfs f3, 0x6c(r1)
-    bl fn_8068B100
+    bl math_u64DivMod
     lwz r4, 0x1570(r29)
     frsp f25, f1
     lfs f0, 0x530(r29)
@@ -1057,7 +1057,7 @@ lbl_fn_80287E7C_00000BC8:
     addi r4, r4, lbl_807772B0@l
     stw r4, 0x44(r1)
     la r4, lbl_8087D708
-    bl fn_8005B6E8
+    bl talk_setSpeakerName
 lbl_fn_80287E7C_00000DA0:
     addi r3, r1, 0x44
     bl talk_parseQuotedString

@@ -8,10 +8,10 @@ extern void fn_80061824(void);
 extern void fn_8006A900(void);
 extern void fn_8006EF48(void);
 extern void fn_8006F2F0(void);
-extern void fn_800827E0(void);
+extern void dungeon_initGlobalContext(void);
 extern void mem_alloc(void);
 extern void fn_80084F84(void);
-extern void fn_800C31F4(void);
+extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
 extern void fn_800D3FA4(void);
@@ -679,7 +679,7 @@ lbl_world_Manager_postUpdate_00000750:
     lfs f0, lbl_8088577C
     fadds f31, f31, f0
 lbl_world_Manager_postUpdate_00000808:
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r12, 0x138(r3)
     mr r29, r3
     lwz r12, 0x14(r12)
@@ -701,7 +701,7 @@ lbl_world_Manager_postUpdate_00000808:
     lfs f0, lbl_80885780
     fsubs f3, f3, f4
     fdivs f30, f3, f0
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r12, 0x150(r3)
     mr r29, r3
     lwz r12, 0x14(r12)
@@ -722,7 +722,7 @@ lbl_world_Manager_postUpdate_00000808:
     lfd f3, 0x588(r1)
     fsubs f3, f3, f4
     fdivs f29, f3, f0
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     lwz r12, 0x168(r3)
     mr r29, r3
     lwz r12, 0x14(r12)
@@ -743,7 +743,7 @@ lbl_world_Manager_postUpdate_00000808:
     lfd f3, 0x580(r1)
     fsubs f3, f3, f4
     fdivs f28, f3, f0
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r3, r3, 0x138
     bl fn_80084F84
     stw r3, 0x58c(r1)
@@ -752,7 +752,7 @@ lbl_world_Manager_postUpdate_00000808:
     lfs f0, lbl_80885780
     fsubs f3, f3, f4
     fdivs f27, f3, f0
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r3, r3, 0x150
     bl fn_80084F84
     stw r3, 0x584(r1)
@@ -761,7 +761,7 @@ lbl_world_Manager_postUpdate_00000808:
     lfs f0, lbl_80885780
     fsubs f3, f3, f4
     fdivs f26, f3, f0
-    bl fn_800827E0
+    bl dungeon_initGlobalContext
     addi r3, r3, 0x168
     bl fn_80084F84
     stw r3, 0x58c(r1)
@@ -1047,7 +1047,7 @@ lbl_world_Manager_postUpdate_00000D68:
     lwz r4, 0x14(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1192,7 +1192,7 @@ lbl_world_Manager_postUpdate_00000F7C:
     lwz r4, 0x18(r4)
     li r5, 0x0
     li r6, -0x1
-    bl fn_800C31F4
+    bl skin_playAnimationByName
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
