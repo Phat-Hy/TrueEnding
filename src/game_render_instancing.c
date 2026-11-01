@@ -15,7 +15,7 @@ extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void wcs_vformat(void);
 extern void sound_playSpatialEffect(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
 extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8012A1B8(void);
@@ -37,7 +37,7 @@ extern void fn_802A7964(void);
 extern void fn_802AC550(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D6C(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
@@ -1589,7 +1589,7 @@ asm void fn_802AC0E0(void)
     lfs f31, 0x4(r3)
     addi r3, r1, 0x8
     addi r4, r1, 0x20
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x14
     addi r4, r1, 0x8
     bl vec3_toEulerAngles
@@ -1750,7 +1750,7 @@ asm void fn_802AC364(void)
     mr r30, r5
     stw r29, 0x214(r1)
     mr r29, r3
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lfs f4, lbl_80883F30
     lis r3, lbl_80785F0C@ha
     li r31, 0x0

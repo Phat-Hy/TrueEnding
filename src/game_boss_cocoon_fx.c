@@ -39,7 +39,7 @@ extern void fn_801F4DDC(void);
 extern void fn_801F4E30(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void save_findEntryByName(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -261,7 +261,7 @@ lbl_fn_80469AB8_000001E0:
     lwz r3, 0x80(r31)
     addi r4, r30, 0x134
     addi r5, r1, 0x8
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x80(r31)
     addi r4, r30, 0x13c
     lfs f1, lbl_80886EA8
@@ -754,7 +754,7 @@ lbl_fn_8046A20C_000008B8:
     stfs f1, 0x28(r1)
     stfs f0, 0x2c(r1)
     lwz r3, 0x58(r27)
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x98(r31)
     lwz r0, 0xa0(r31)
     add r3, r26, r3

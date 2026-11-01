@@ -9,7 +9,7 @@ extern void scene_traverseNode(void);
 extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void mem_free(void);
@@ -551,7 +551,7 @@ lbl_fn_80345BA8_0000052C:
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0x10
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r31, lbl_8074AA58@ha
     addi r31, r31, lbl_8074AA58@l
 lbl_fn_80345BA8_00000570:

@@ -25,7 +25,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void viewport_getGlobalContext(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void clip_calculateFrustum(void);
 extern void fn_801125F8(void);
 extern void equip_getGlobalManager(void);
@@ -125,7 +125,7 @@ lbl_fn_803041C8_00000050:
     bl vec3_sub
     addi r3, r1, 0x80
     addi r4, r1, 0x74
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x104
     addi r4, r1, 0x80
     bl vec3_toEulerAngles
@@ -135,7 +135,7 @@ lbl_fn_803041C8_00000050:
     bl vec3_sub
     addi r3, r1, 0x68
     addi r4, r1, 0x5c
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0xf8
     addi r4, r1, 0x68
     bl vec3_toEulerAngles
@@ -207,7 +207,7 @@ lbl_fn_803041C8_00000108:
     bl vec3_sub
     addi r3, r1, 0x50
     addi r4, r1, 0x44
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0xec
     addi r4, r1, 0x50
     bl vec3_toEulerAngles
@@ -217,7 +217,7 @@ lbl_fn_803041C8_00000108:
     bl vec3_sub
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0xe0
     addi r4, r1, 0x38
     bl vec3_toEulerAngles
@@ -367,7 +367,7 @@ lbl_fn_803041C8_000003E8:
     bl vec3_sub
     addi r3, r1, 0x14
     addi r4, r1, 0xa4
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x20
     addi r4, r1, 0x14
     bl vec3_toEulerAngles

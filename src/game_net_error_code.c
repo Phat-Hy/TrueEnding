@@ -19,7 +19,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80087BB4(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void fn_80088AF4(void);
 extern void node_createNamedChild(void);
 extern void msg_getMessageById(void);
@@ -1541,7 +1541,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x4828
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_80887978
     mr r3, r29
     lfs f2, lbl_8088797C
@@ -1550,7 +1550,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x4834
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_80887978
     mr r3, r29
     lfs f2, lbl_8088797C
@@ -1559,7 +1559,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x4840
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_80887978
     mr r3, r29
     lfs f2, lbl_8088797C
@@ -1568,7 +1568,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x484c
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_80887978
     mr r3, r29
     lfs f2, lbl_8088797C
@@ -1577,7 +1577,7 @@ lbl_fn_8051C3E0_000012B4:
     addi r5, r28, 0x4858
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     mr r3, r30
     addi r4, r31, 0x184
     bl node_createNamedChild

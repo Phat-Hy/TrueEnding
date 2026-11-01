@@ -65,7 +65,7 @@ extern void fn_80616820(void);
 extern void fn_80617030(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevKColorSel(void);
 extern void GXSetTevKAlphaSel(void);
 extern void GXSetTevSwapMode(void);
@@ -937,7 +937,7 @@ lbl___GXInitGX_00000800:
     bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x7
     li r4, 0x0
     li r5, 0x0

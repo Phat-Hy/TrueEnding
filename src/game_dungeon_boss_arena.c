@@ -11,7 +11,7 @@ extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void str_initFromCStr(void);
 extern void fn_80041C0C(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void str_getData(void);
 extern void fn_8004274C(void);
 extern void talk_parseQuotedString(void);
@@ -1435,7 +1435,7 @@ lbl_fn_803EEEDC_00000FEC:
     mr r5, r20
     mr r4, r19
     addi r3, r1, 0x280
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lwz r12, 0x280(r1)
     mr r4, r19
     mr r5, r20

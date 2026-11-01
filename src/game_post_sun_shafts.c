@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -57,7 +57,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A04AC(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A4984(void);
 extern void fn_805A4A20(void);
 extern void fn_805A4A58(void);
@@ -274,7 +274,7 @@ asm void fn_802D0038(void)
     bl _savegpr_25
     mr r30, r3
     mr r31, r5
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lis r3, lbl_80786C44@ha
     li r28, 0x0
     addi r3, r3, lbl_80786C44@l
@@ -714,7 +714,7 @@ asm void fn_802D0594(void)
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0x14
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r31, lbl_807470A4@ha
     addi r31, r31, lbl_807470A4@l
 lbl_fn_802D0594_0000088C:

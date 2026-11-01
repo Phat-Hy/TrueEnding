@@ -34,7 +34,7 @@ extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
 extern void dungeon_updateBarrierField(void);
@@ -1156,7 +1156,7 @@ lbl_fn_803F5C2C_00000F40:
     mr r3, r31
     addi r4, r31, 0xf4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_803F5C2C_0000132C
 lbl_fn_803F5C2C_00000F94:
     mr r3, r28

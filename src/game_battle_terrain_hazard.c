@@ -19,7 +19,7 @@ extern void route_interpolatePath(void);
 extern void fn_80087858(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
@@ -35,7 +35,7 @@ extern void kpad_getClampData(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
@@ -723,7 +723,7 @@ lbl_fn_804184BC_000006F0:
     mr r3, r29
     addi r4, r29, 0xf4
     addi r5, r1, 0x8
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_804184BC_000007C0
 lbl_fn_804184BC_00000744:
     mr r3, r31
@@ -1240,7 +1240,7 @@ lbl_fn_80418C4C_00000E24:
     addi r5, r21, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_808864D8
     mr r3, r24
     lfs f2, lbl_808864DC

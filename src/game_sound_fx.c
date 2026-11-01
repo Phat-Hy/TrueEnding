@@ -12,7 +12,7 @@ extern void str_initFromCStr(void);
 extern void ui_drawColoredQuad(void);
 extern void ui_destroyWidget(void);
 extern void fn_80041A28(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void str_getData(void);
 extern void fn_80044BD4(void);
 extern void fn_80044C30(void);
@@ -1723,7 +1723,7 @@ lbl_fn_800EBF1C_000015C0:
     mr r5, r31
     addi r3, r1, 0xd68
     addi r4, r4, 0x5
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     stb r30, 0xd74(r27)
     addi r3, r1, 0xd68
     bl talk_parseQuotedString
@@ -1780,7 +1780,7 @@ lbl_fn_800EBF1C_000016A0:
     mr r5, r31
     addi r3, r1, 0x734
     addi r4, r4, 0xd
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     addi r3, r1, 0x734
     bl talk_parseQuotedString
     bl atoi
@@ -1816,7 +1816,7 @@ lbl_fn_800EBF1C_0000172C:
     mr r5, r31
     addi r3, r1, 0x100
     addi r4, r4, 0xe
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     addi r3, r1, 0x100
     bl talk_parseQuotedString
     bl atoi

@@ -31,7 +31,7 @@ extern void fn_801F791C(void);
 extern void save_findEntryByName(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
 extern void fn_8021E4E4(void);
@@ -851,7 +851,7 @@ lbl_fn_8040AB64_0000092C:
     b lbl_fn_8040AB64_000009F4
 lbl_fn_8040AB64_000009CC:
     lwz r3, 0x158(r28)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     bne lbl_fn_8040AB64_000009F4
     lwz r0, 0x158(r28)
@@ -1349,7 +1349,7 @@ lbl_fn_8040B394_000010D4:
     b lbl_fn_8040B394_00001150
 lbl_fn_8040B394_000010DC:
     mr r3, r29
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_8040B394_00001120
     mr r3, r29

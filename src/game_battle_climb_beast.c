@@ -45,7 +45,7 @@ extern void str_skipWhitespace(void);
 extern void fn_800F52F8(void);
 extern void vec3_scale(void);
 extern void fn_800F7F90(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
 extern void fn_800F84C8(void);
@@ -1135,7 +1135,7 @@ lbl_fn_803FA5C8_00000D88:
     stw r0, 0x4cc(r31)
     addi r3, r1, 0x24
     addi r4, r31, 0x4e4
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x30
     addi r4, r1, 0x24
     bl vec3_toEulerAngles
@@ -1164,7 +1164,7 @@ lbl_fn_803FA5C8_00000DC8:
     addi r4, r31, 0x4e4
     fmadds f0, f2, f1, f0
     stfs f0, 0x4e8(r31)
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x18
     addi r4, r1, 0xc
     bl vec3_toEulerAngles

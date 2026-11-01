@@ -31,7 +31,7 @@ extern void fn_801F45F4(void);
 extern void save_parseSlotStats(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
 extern void fn_801F8830(void);
@@ -178,12 +178,12 @@ lbl_fn_801D7354_00000094:
     bl perf_getMetricValue
     addi r4, r29, 0x2e
     addi r5, r1, 0x1c
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x4(r25)
     bl perf_getMetricValue
     addi r4, r29, 0x2e
     addi r5, r1, 0x1c
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     cmpwi r28, 0x0
     beq lbl_fn_801D7354_00000178
     lwz r3, lbl_8087F4F0
@@ -337,7 +337,7 @@ lbl_fn_801D7560_000002DC:
     bl perf_getMetricValue
     addi r4, r29, 0x2e
     addi r5, r1, 0x4c
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
 lbl_fn_801D7560_00000370:
     lwz r3, 0x1378(r30)
     bl perf_getMetricValue
@@ -374,7 +374,7 @@ lbl_fn_801D7560_00000370:
     bl perf_getMetricValue
     addi r4, r29, 0x2e
     addi r5, r1, 0x38
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     cmpwi r26, 0x0
     ble lbl_fn_801D7560_00000420
     lwz r3, 0x1378(r30)
@@ -555,7 +555,7 @@ lbl_fn_801D77A4_00000610:
     bl perf_getMetricValue
     addi r4, r25, 0x2e
     addi r5, r1, 0x60
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     mr r3, r23
     bl fn_80117214
     slwi r0, r3, 2
@@ -769,7 +769,7 @@ lbl_fn_801D7AC0_0000092C:
     bl perf_getMetricValue
     addi r4, r25, 0x2e
     addi r5, r1, 0x60
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     mr r3, r22
     bl fn_80117214
     slwi r0, r3, 2

@@ -53,7 +53,7 @@ extern void fn_8011CAE4(void);
 extern void fn_8011CC30(void);
 extern void fn_8011CCA0(void);
 extern void fn_8011CD1C(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void fn_80134134(void);
 extern void fn_80134270(void);
 extern void fn_80134290(void);
@@ -4604,7 +4604,7 @@ asm void fn_8001AEBC(void)
     cmpwi r0, 0x0
     beqlr
     mr r3, r0
-    b fn_8011FE3C
+    b skill_findNodeByTag
     blr
 }
 

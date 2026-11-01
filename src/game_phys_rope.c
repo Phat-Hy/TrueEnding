@@ -19,7 +19,7 @@ extern void atn_Matrix_copy_2(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_destructor(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void fn_800F80B8(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
@@ -751,7 +751,7 @@ lbl_fn_8010F4BC_000008AC:
     bl fn_8010F6FC
     addi r3, r1, 0x14
     addi r4, r1, 0x50
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x44
     addi r4, r1, 0x14
     bl vec3_toEulerAngles
@@ -767,7 +767,7 @@ lbl_fn_8010F4BC_000008AC:
 lbl_fn_8010F4BC_00000924:
     addi r3, r1, 0x8
     addi r4, r30, 0x20
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x38
     addi r4, r1, 0x8
     bl vec3_toEulerAngles

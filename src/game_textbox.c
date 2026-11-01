@@ -47,7 +47,7 @@ extern void fn_80617130(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
 extern void fn_80617270(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806175F0(void);
@@ -710,7 +710,7 @@ asm void fn_800AD834(void)
     bl fn_80617200
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1035,7 +1035,7 @@ lbl_fn_800AD834_00000D20:
     bl fn_80617200
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1188,7 +1188,7 @@ lbl_fn_800AD834_00000F00:
     bl __GXSetVtxDesc
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -1340,7 +1340,7 @@ lbl_fn_800AD834_00000F00:
     bl GXLoadTexMtxImm
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     bl GXInitTexObjDefault
     li r3, 0x0

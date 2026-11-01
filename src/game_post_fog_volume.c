@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void fn_8000E18C(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -1210,7 +1210,7 @@ asm void fn_802D7E80(void)
     mr r4, r3
     mr r5, r29
     addi r3, r1, 0x28
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r3, lbl_80747654@ha
     li r29, 0x0
     addi r30, r3, lbl_80747654@l

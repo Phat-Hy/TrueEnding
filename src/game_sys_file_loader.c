@@ -11,7 +11,7 @@ extern void talk_setSpeakerName(void);
 extern void mem_realloc(void);
 extern void str_skipWhitespace(void);
 extern void game_initGlobalDatabases(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void event_findEntryById(void);
 extern void fn_8046DC5C(void);
 extern void fn_8046DD20(void);
@@ -1981,7 +1981,7 @@ lbl_fn_8021E5A4_0000199C:
     cmpwi r3, 0x0
     bne lbl_fn_8021E5A4_000019BC
     mr r3, r19
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_8021E5A4_000019C4
 lbl_fn_8021E5A4_000019BC:
@@ -2183,7 +2183,7 @@ lbl_fn_8021E5A4_00001C50:
     cmpwi r3, 0x0
     bne lbl_fn_8021E5A4_00001C70
     mr r3, r19
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_8021E5A4_00001C78
 lbl_fn_8021E5A4_00001C70:

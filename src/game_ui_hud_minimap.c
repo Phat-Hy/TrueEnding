@@ -6,7 +6,7 @@ extern void _restgpr_14(void);
 extern void _restgpr_26(void);
 extern void _savegpr_14(void);
 extern void _savegpr_26(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void atn_Anim_getDuration(void);
 extern void motion_updateFogAdj(void);
 extern void atn_Task_unlink(void);
@@ -28,7 +28,7 @@ extern void fn_801E75F8(void);
 extern void save_parseSlotHeader(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_findTaskById(void);
@@ -841,7 +841,7 @@ lbl_fn_801D19F0_00000A44:
     li r3, 0x0
 lbl_fn_801D19F0_00000A9C:
     addi r4, r1, 0x220
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
 lbl_fn_801D19F0_00000AA4:
     lwz r12, 0x0(r15)
     mr r3, r15
@@ -1930,7 +1930,7 @@ lbl_fn_801D19F0_00001A34:
     bl perf_getMetricValue
     addi r4, r18, 0x396
     addi r5, r1, 0x1b8
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
 lbl_fn_801D19F0_00001AE8:
     addi r20, r20, 0x1
     addi r19, r19, 0x4

@@ -12,7 +12,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void fn_8006A900(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void msg_getMessageById(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB5B4(void);
@@ -423,7 +423,7 @@ lbl_fn_8051EF24_000004A4:
     li r3, 0x0
 lbl_fn_8051EF24_000004A8:
     addi r4, r1, 0x20
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
 lbl_fn_8051EF24_000004B0:
     addi r26, r26, 0x1
     addi r31, r31, 0x94
@@ -870,7 +870,7 @@ lbl_fn_8051F13C_00000B34:
     li r3, 0x0
 lbl_fn_8051F13C_00000B38:
     addi r4, r1, 0x38
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
 lbl_fn_8051F13C_00000B40:
     addi r25, r25, 0x1
     addi r30, r30, 0x94

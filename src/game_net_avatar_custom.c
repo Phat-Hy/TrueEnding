@@ -16,7 +16,7 @@ extern void actor_dispatchMessage(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
@@ -31,7 +31,7 @@ extern void fn_801D80B4(void);
 extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_findAndNotify(void);
@@ -248,7 +248,7 @@ lbl_fn_8052635C_00000160:
     mr r3, r30
     addi r4, r27, 0x2a5
     addi r5, r1, 0x8
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x0(r28)
     subi r0, r3, 0xa
     cmplwi r0, 0x1
@@ -1129,7 +1129,7 @@ lbl_fn_80526D98_00000DDC:
     li r3, 0x0
 lbl_fn_80526D98_00000DE0:
     addi r4, r1, 0xc8
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
 lbl_fn_80526D98_00000DE8:
     lwz r12, 0x0(r29)
     mr r3, r29

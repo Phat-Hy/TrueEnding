@@ -6,7 +6,7 @@ extern void __files(void);
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void mem_alloc(void);
@@ -322,7 +322,7 @@ asm void fn_80244898(void)
     mr r4, r3
     mr r5, r31
     addi r3, r1, 0x118
-    bl fn_8004203C
+    bl menu_initWindowBuffer
 lbl_fn_80244898_000002C4:
     addi r3, r1, 0x118
     bl talk_parseQuotedString

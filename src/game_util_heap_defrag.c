@@ -21,7 +21,7 @@ extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
 extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
@@ -592,7 +592,7 @@ lbl_fn_805880F4_0000062C:
     stfs f3, 0x48(r1)
     stfs f0, 0x4c(r1)
     lwz r3, 0x5b78(r25)
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x5b0c(r27)
     lwz r0, 0x5bc0(r27)
     add r3, r30, r3
@@ -771,7 +771,7 @@ lbl_fn_805883DC_000008D4:
     stfs f1, 0x28(r1)
     stfs f0, 0x2c(r1)
     lwz r3, 0x5ba0(r3)
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r0, 0x4(r27)
     cmpwi r0, 0x0
     beq lbl_fn_805883DC_00000AE0

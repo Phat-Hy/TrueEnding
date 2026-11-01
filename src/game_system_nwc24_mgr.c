@@ -26,7 +26,7 @@ extern void msg_formatWindowLayout(void);
 extern void msg_isWindowActive(void);
 extern void fn_800F7260(void);
 extern void vec3_scale(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_801002DC(void);
 extern void fn_80112960(void);
@@ -425,7 +425,7 @@ lbl_fn_80382A1C_000001E4:
     bl vec3_sub
     addi r3, r1, 0x68
     addi r4, r1, 0x5c
-    bl fn_800F7FD8
+    bl vec3_normalize
     lfs f1, lbl_8088593C
     addi r3, r1, 0x74
     addi r4, r1, 0x68
@@ -559,7 +559,7 @@ lbl_fn_80382A1C_0000058C:
     ble lbl_fn_80382A1C_00000648
     addi r3, r1, 0x8
     addi r4, r1, 0x11c
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x188
     addi r4, r1, 0x8
     bl fn_80013484

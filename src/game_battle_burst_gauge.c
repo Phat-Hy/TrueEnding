@@ -20,7 +20,7 @@ extern void area_updateZoneState(void);
 extern void compass_findWaypointIndex(void);
 extern void fn_8009E5A0(void);
 extern void fn_8009EB20(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void fn_8009F788(void);
 extern void fn_8009FFCC(void);
 extern void sound_initGlobalInstances(void);
@@ -1245,7 +1245,7 @@ lbl_fn_803FFF40_00001078:
     stw r0, 0x90(r31)
     mr r3, r31
     addi r4, r31, 0x30
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     lwz r3, 0x134(r31)
     clrlwi r0, r3, 31
     cmplwi r0, 0x1

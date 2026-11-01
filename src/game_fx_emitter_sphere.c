@@ -15,7 +15,7 @@ extern void vec3_toEulerAngles(void);
 extern void vec3_sub(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void vec3_initValues(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -32,7 +32,7 @@ extern void str_skipWhitespace(void);
 extern void sound_playSpatialEffect(void);
 extern void fn_800EC204(void);
 extern void fn_800EC24C(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
 extern void skill_findNodeBySlotId(void);
 extern void equip_getGlobalManager(void);
@@ -1451,7 +1451,7 @@ asm void fn_802885EC(void)
     mr r4, r3
     mr r5, r30
     addi r3, r1, 0x38
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r30, lbl_80745314@ha
     addi r30, r30, lbl_80745314@l
 lbl_fn_802885EC_00001334:
@@ -1907,7 +1907,7 @@ lbl_fn_802885EC_00001980:
     bl vec3_sub
     addi r3, r1, 0x20
     addi r4, r1, 0x14
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x2c
     addi r4, r1, 0x20
     bl vec3_toEulerAngles

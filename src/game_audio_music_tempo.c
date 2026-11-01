@@ -24,7 +24,7 @@ extern void atn_Task_setActive(void);
 extern void str_skipWhitespace(void);
 extern void fn_800EAECC(void);
 extern void vec3_scale(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void fn_801162A0(void);
@@ -2160,7 +2160,7 @@ lbl_fn_8030F564_00001C08:
     ble lbl_fn_8030F564_00001C78
     addi r3, r1, 0x68
     addi r4, r1, 0xf8
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x74
     addi r4, r1, 0x68
     bl vec3_toEulerAngles

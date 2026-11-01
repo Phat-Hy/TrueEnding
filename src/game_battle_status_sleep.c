@@ -23,7 +23,7 @@ extern void cursor_Object_constructor(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void fn_800A04A0(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800B2180(void);
@@ -42,7 +42,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
@@ -413,7 +413,7 @@ lbl_fn_8042AB58_0000037C:
     stfs f0, 0x44(r1)
     lwz r3, 0x4(r6)
     stfs f8, 0x48(r1)
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     b lbl_fn_8042AB58_00000498
 lbl_fn_8042AB58_00000404:
     cmpwi r0, 0x2
@@ -1766,7 +1766,7 @@ lbl_fn_8042BF38_0000165C:
     mr r3, r29
     addi r4, r29, 0xf4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_8042BF38_000017BC
 lbl_fn_8042BF38_000016B0:
     mr r3, r30

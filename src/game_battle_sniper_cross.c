@@ -17,7 +17,7 @@ extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
 extern void lockon_updateTarget(void);
 extern void cursor_Object_constructor(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
@@ -38,7 +38,7 @@ extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
@@ -608,7 +608,7 @@ lbl_fn_803F6E0C_00000654:
     lwz r4, 0x174(r31)
     mr r3, r31
     addi r5, r1, 0x8
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_803F6E0C_0000080C
 lbl_fn_803F6E0C_00000684:
     mr r3, r28
@@ -1616,7 +1616,7 @@ lbl_fn_803F77B8_0000144C:
     stfs f0, 0x344(r1)
     stfs f7, 0x354(r1)
     stfs f8, 0x364(r1)
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     addi r17, r17, 0x1
     addi r31, r31, 0x4
 lbl_fn_803F77B8_000014B8:

@@ -29,7 +29,7 @@ extern void fn_800CB688(void);
 extern void atn_Task_destructor(void);
 extern void bloom_processPasses(void);
 extern void fn_800D8814(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void fn_800F833C(void);
 extern void fn_800F84BC(void);
 extern void fn_801125F8(void);
@@ -1616,7 +1616,7 @@ asm void fn_80184C30(void)
     bl vec3_set
     mr r4, r3
     addi r3, r1, 0x14c
-    bl fn_800F7FD8
+    bl vec3_normalize
     mr r5, r31
     addi r3, r1, 0x2d4
     addi r4, r1, 0x14c
@@ -1663,7 +1663,7 @@ asm void fn_80184C30(void)
     bl vec3_set
     mr r4, r3
     addi r3, r1, 0x104
-    bl fn_800F7FD8
+    bl vec3_normalize
     mr r5, r31
     addi r3, r1, 0x2d4
     addi r4, r1, 0x104
@@ -1710,7 +1710,7 @@ asm void fn_80184C30(void)
     bl vec3_set
     mr r4, r3
     addi r3, r1, 0xbc
-    bl fn_800F7FD8
+    bl vec3_normalize
     mr r5, r31
     addi r3, r1, 0x2d4
     addi r4, r1, 0xbc
@@ -1757,7 +1757,7 @@ asm void fn_80184C30(void)
     bl vec3_set
     mr r4, r3
     addi r3, r1, 0x74
-    bl fn_800F7FD8
+    bl vec3_normalize
     mr r5, r31
     addi r3, r1, 0x2d4
     addi r4, r1, 0x74

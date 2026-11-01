@@ -53,7 +53,7 @@ extern void fn_803EBE74(void);
 extern void fn_803EC0F8(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
@@ -1702,7 +1702,7 @@ lbl_fn_80413BD4_00001530:
     mr r3, r31
     mr r4, r18
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     add r3, r31, r24
     stw r23, 0x1f7c(r3)
     b lbl_fn_80413BD4_00001958

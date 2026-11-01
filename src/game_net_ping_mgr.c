@@ -17,7 +17,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
@@ -25,7 +25,7 @@ extern void actor_findSpawnTemplate(void);
 extern void fn_801D082C(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_80201E78(void);
 extern void profile_getMetricValue(void);
@@ -835,7 +835,7 @@ lbl_fn_80514C90_000009DC:
     li r3, 0x0
 lbl_fn_80514C90_000009E0:
     addi r4, r1, 0x140
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r25
@@ -1029,7 +1029,7 @@ lbl_fn_80514C90_00000C58:
     bl perf_getMetricValue
     addi r4, r29, 0xc2
     addi r5, r1, 0xe8
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     stfs f30, 0x8(r1)
     mr r3, r30
     mr r4, r28
@@ -1129,7 +1129,7 @@ lbl_fn_80514C90_00000DDC:
     bl perf_getMetricValue
     addi r4, r29, 0xe8
     addi r5, r1, 0xe8
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x124(r30)
     bl perf_getMetricValue
     lfs f1, lbl_80887884

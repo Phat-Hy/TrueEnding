@@ -5,7 +5,7 @@ extern u32 __GXData;
 extern u8 lbl_807B0DC0[];
 
 /* Function declarations */
-void fn_80617340(void);
+void GXSetTevDirect(void);
 void GXSetTevColorIn(void);
 void GXSetTevColorOp(void);
 void GXSetTevIndirect(void);
@@ -14,26 +14,26 @@ void fn_80617520(void);
 void fn_80617580(void);
 void fn_806175F0(void);
 
-asm void fn_80617340(void)
+asm void GXSetTevDirect(void)
 {
     nofralloc
     cmpwi r3, 0x0
     lis r5, lbl_807B0DC0@ha
     addi r5, r5, lbl_807B0DC0@l
-    bne lbl_fn_80617340_00000028
+    bne lbl_GXSetTevDirect_00000028
     slwi r6, r4, 2
     addi r4, r5, 0x0
     addi r0, r5, 0x28
     add r8, r4, r6
     add r9, r0, r6
-    b lbl_fn_80617340_0000003C
-lbl_fn_80617340_00000028:
+    b lbl_GXSetTevDirect_0000003C
+lbl_GXSetTevDirect_00000028:
     slwi r6, r4, 2
     addi r4, r5, 0x14
     addi r0, r5, 0x3c
     add r8, r4, r6
     add r9, r0, r6
-lbl_fn_80617340_0000003C:
+lbl_GXSetTevDirect_0000003C:
     lwz r7, __GXData
     slwi r0, r3, 2
     lwz r3, 0x0(r8)

@@ -28,7 +28,7 @@ extern void fn_806149C0(void);
 extern void fn_80614A80(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void GXSetTevAlphaIn(void);
@@ -610,7 +610,7 @@ asm void fn_805C03A0(void)
     bl GXSetNumTevStages
     li r3, 0x0
     li r4, 0x4
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0xff
     li r5, 0xff

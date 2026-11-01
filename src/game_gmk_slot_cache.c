@@ -17,7 +17,7 @@ extern void fn_8020BD3C(void);
 extern void fn_8020BD78(void);
 extern void fn_8020BDAC(void);
 extern void time_wrapMilliseconds(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void random_generateValue(void);
 extern void fn_8020EFEC(void);
 extern void fn_80210AC4(void);
@@ -333,7 +333,7 @@ lbl_fn_804439FC_00000344:
     cmpwi r3, 0x0
     bne lbl_fn_804439FC_00000364
     lwz r3, 0x8(r1)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_000003A8
 lbl_fn_804439FC_00000364:
@@ -530,7 +530,7 @@ lbl_fn_804439FC_00000614:
     cmpwi r3, 0x0
     bne lbl_fn_804439FC_00000634
     lwz r3, 0x8(r1)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_00000654
 lbl_fn_804439FC_00000634:
@@ -572,7 +572,7 @@ lbl_fn_804439FC_00000678:
     bl kpad_validateButtonIndex
 lbl_fn_804439FC_000006BC:
     lwz r3, 0x8(r1)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_804439FC_00000728
     lwz r3, 0x8(r1)
@@ -1105,7 +1105,7 @@ lbl_fn_80444564_00000DA8:
     blt lbl_fn_80444564_00000D54
 lbl_fn_80444564_00000DC8:
     mr r3, r31
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80444564_00000E38
     li r26, 0x0
@@ -1709,7 +1709,7 @@ lbl_fn_80444CF8_00001584:
     b lbl_fn_80444CF8_0000166C
 lbl_fn_80444CF8_00001590:
     lwz r3, 0x4(r31)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80444CF8_000015CC
     lwz r4, lbl_8087F1E4

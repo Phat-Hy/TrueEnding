@@ -59,7 +59,7 @@ extern void fn_802BDA04(void);
 extern void world_setLocalFlag(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80599C94(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D00(void);
 extern void fn_805A5224(void);
 extern void PSVECMag(void);
@@ -1300,7 +1300,7 @@ asm void fn_802BA92C(void)
     mr r29, r5
     stw r28, 0x100(r1)
     mr r28, r3
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lis r4, lbl_80786568@ha
     addi r3, r28, 0x14d4
     addi r4, r4, lbl_80786568@l

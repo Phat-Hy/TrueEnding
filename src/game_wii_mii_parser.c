@@ -27,7 +27,7 @@ extern void fn_800EAECC(void);
 extern void fn_800EB270(void);
 extern void fn_800EB49C(void);
 extern void fn_800F29D0(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void scissor_clipFrustum(void);
 extern void fn_801125F8(void);
 extern void fn_8011C044(void);
@@ -2002,7 +2002,7 @@ lbl_fn_80567600_00001944:
     ble lbl_fn_80567600_000019A4
     addi r3, r1, 0xc
     addi r4, r1, 0x24
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x18
     addi r4, r1, 0xc
     bl vec3_toEulerAngles

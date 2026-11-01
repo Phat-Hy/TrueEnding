@@ -12,7 +12,7 @@ extern void fn_8000D760(void);
 extern void fn_8000E18C(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void vec3_initValues(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -983,7 +983,7 @@ lbl_fn_80293E30_00000B88:
     mr r4, r3
     mr r5, r30
     addi r3, r1, 0x20
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r30, lbl_80745818@ha
     lfs f31, lbl_80883BE8
     addi r30, r30, lbl_80745818@l

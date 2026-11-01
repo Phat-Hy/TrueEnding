@@ -8,7 +8,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_26(void);
 extern void fn_800629F0(void);
 extern void script_executeOpcode(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void saveSlot_readSummary(void);
@@ -922,7 +922,7 @@ lbl_fn_8051D868_00000BF8:
     li r3, 0x0
 lbl_fn_8051D868_00000BFC:
     addi r4, r1, 0x2f0
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
 lbl_fn_8051D868_00000C04:
     lwz r12, 0x0(r27)
     mr r3, r27
@@ -1045,7 +1045,7 @@ lbl_fn_8051D868_00000DB8:
     li r3, 0x0
 lbl_fn_8051D868_00000DBC:
     addi r4, r1, 0x260
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
 lbl_fn_8051D868_00000DC4:
     lwz r12, 0x0(r27)
     mr r3, r27
@@ -1219,7 +1219,7 @@ lbl_fn_8051D868_00001028:
     li r3, 0x0
 lbl_fn_8051D868_0000102C:
     addi r4, r1, 0x3b0
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     lwz r0, 0x50(r27)
     add r3, r27, r26
     lfs f0, 0x19f8(r3)
@@ -1300,7 +1300,7 @@ lbl_fn_8051D868_00001154:
     li r3, 0x0
 lbl_fn_8051D868_00001158:
     addi r4, r1, 0x1d0
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
 lbl_fn_8051D868_00001160:
     lwz r12, 0x0(r27)
     mr r3, r27
@@ -1748,7 +1748,7 @@ lbl_fn_8051D868_00001818:
     li r3, 0x0
 lbl_fn_8051D868_0000181C:
     addi r4, r1, 0x380
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     lwz r12, 0x0(r27)
     mr r3, r27
     mr r4, r19

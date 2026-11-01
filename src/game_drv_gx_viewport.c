@@ -19,7 +19,7 @@ extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
@@ -1892,7 +1892,7 @@ lbl_fn_805D8520_00001984:
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -1999,7 +1999,7 @@ lbl_fn_805D8520_00001B28:
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -2106,7 +2106,7 @@ lbl_fn_805D8520_00001CCC:
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1
@@ -2213,7 +2213,7 @@ lbl_fn_805D8520_00001E70:
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x9
     li r5, 0x1

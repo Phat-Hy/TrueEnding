@@ -46,7 +46,7 @@ extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_803E598C(void);
 extern void task_createWorker(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void dungeon_updateBarrierField(void);
 extern void boss_getOffset54(void);
@@ -554,7 +554,7 @@ lbl_fn_803F8890_00000624:
     mr r3, r28
     addi r4, r28, 0xf4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     stw r31, 0x4c4(r28)
     b lbl_fn_803F8890_0000070C
 lbl_fn_803F8890_0000067C:

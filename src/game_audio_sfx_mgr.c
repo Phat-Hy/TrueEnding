@@ -45,7 +45,7 @@ extern void fn_803CD958(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D00(void);
 extern void fn_805A3D6C(void);
 extern void fn_805A4984(void);
@@ -439,7 +439,7 @@ asm void fn_80310330(void)
     mr r31, r5
     stw r30, 0x208(r1)
     mr r30, r3
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lis r3, lbl_807883D0@ha
     lfs f1, lbl_80884CA8
     addi r3, r3, lbl_807883D0@l

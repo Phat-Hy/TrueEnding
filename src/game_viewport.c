@@ -103,7 +103,7 @@ void viewport_getGlobalContext(void);
 void fn_800F7FA8(void);
 u32 fn_800F7FB4(const void *p);
 void fn_800F7FBC(void);
-void fn_800F7FD8(void);
+void vec3_normalize(void);
 void viewport_getNextSequenceId(void);
 void fn_800F7FF8(void);
 void fn_800F8014(void);
@@ -403,7 +403,7 @@ lbl_fn_800F72F4_000003A4:
     bl vec3_sub
     addi r3, r1, 0x1a4
     addi r4, r1, 0x178
-    bl fn_800F7FD8
+    bl vec3_normalize
     mr r3, r27
     bl fn_800F7FF8
     addi r3, r1, 0x16c
@@ -742,7 +742,7 @@ lbl_fn_800F72F4_0000088C:
     bl vec3_sub
     addi r3, r1, 0x78
     addi r4, r1, 0x6c
-    bl fn_800F7FD8
+    bl vec3_normalize
     fnmsubs f0, f27, f27, f30
     addi r3, r1, 0x84
     addi r4, r1, 0x78
@@ -1088,7 +1088,7 @@ lbl_fn_800F7FBC_00000D80:
     blr
 }
 
-asm void fn_800F7FD8(void)
+asm void vec3_normalize(void)
 {
     nofralloc
     psq_l f1, 0x0(r4), 0, 0

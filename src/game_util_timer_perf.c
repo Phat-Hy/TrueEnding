@@ -12,7 +12,7 @@ extern void fn_80051B70(void);
 extern void mem_alloc(void);
 extern void route_interpolatePath(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
@@ -774,7 +774,7 @@ asm void fn_805A5224(void)
     addi r5, r29, 0x534
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_8088827C
     mr r3, r30
     lfs f2, lbl_80888280

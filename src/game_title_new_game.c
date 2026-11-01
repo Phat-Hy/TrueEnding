@@ -19,7 +19,7 @@ extern void ref_releaseHandle(void);
 extern void fn_8011F8F4(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void magic_dispatchActionCommand(void);
 extern void boss_updatePhaseState(void);
 extern void wpad_getActiveDevice(void);
@@ -146,7 +146,7 @@ lbl_fn_803AE1D4_000000B8:
     blt lbl_fn_803AE1D4_000004CC
     lwz r4, 0x0(r27)
     mr r3, r21
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     cmpwi r3, 0x0
     mr r28, r3
     beq lbl_fn_803AE1D4_000004CC
@@ -787,7 +787,7 @@ lbl_fn_803AEA24_000009C4:
     b lbl_fn_803AEA24_00000A20
 lbl_fn_803AEA24_000009CC:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r5, r3
     cmpwi r0, 0x0

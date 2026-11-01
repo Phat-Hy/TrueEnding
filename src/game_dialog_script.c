@@ -11,7 +11,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void fn_80087AA0(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void fn_80094F98(void);
 extern void atn_Anim_getLayerTrack(void);
@@ -180,7 +180,7 @@ lbl_fn_8014BDB0_000000CC:
     addi r5, r31, 0x534
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_80881AEC
     mr r3, r30
     lfs f2, lbl_80881AF0

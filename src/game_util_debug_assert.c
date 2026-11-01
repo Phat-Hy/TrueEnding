@@ -15,7 +15,7 @@ extern void fn_801F4AA0(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
 extern void thread_findAndNotify(void);
@@ -23,7 +23,7 @@ extern void thread_dispatchToQueue(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void time_wrapMilliseconds(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
@@ -1451,7 +1451,7 @@ lbl_fn_8059726C_000013B8:
     stfs f1, 0x28(r1)
     stfs f0, 0x2c(r1)
     lwz r3, 0x5b7c(r3)
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x5b0c(r31)
     lwz r0, 0x60a8(r31)
     add r3, r26, r3
@@ -1621,7 +1621,7 @@ asm void fn_80597558(void)
     stfs f1, 0xa0(r1)
     stfs f0, 0xa4(r1)
     lwz r3, 0x5ba4(r3)
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     addis r3, r15, 0x2
     lfs f1, lbl_80888150
     lwz r3, 0x5ba4(r3)
@@ -1631,7 +1631,7 @@ asm void fn_80597558(void)
     addi r4, r17, 0x269
     lwz r3, 0x5bb8(r3)
     addi r5, r1, 0x94
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     mr r19, r15
     addis r14, r15, 0x2
     li r20, 0x0
@@ -1662,12 +1662,12 @@ lbl_fn_80597558_000016D4:
     stfs f1, 0xa0(r1)
     stfs f0, 0xa4(r1)
     lwz r3, 0x5ba8(r3)
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     addis r3, r19, 0x2
     addi r4, r17, 0x269
     lwz r3, 0x5bb0(r3)
     addi r5, r1, 0x94
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     addi r20, r20, 0x1
     addi r19, r19, 0x4
     cmpwi r20, 0x2
@@ -1704,7 +1704,7 @@ lbl_fn_80597558_00001778:
     stfs f1, 0xa0(r1)
     stfs f0, 0xa4(r1)
     lwz r3, 0x5bbc(r3)
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     addis r3, r19, 0x2
     lfs f1, lbl_80888150
     lwz r3, 0x5bbc(r3)
@@ -1912,7 +1912,7 @@ lbl_fn_80597558_00001AC8:
     stw r0, 0x5d20(r5)
     lwz r0, 0x134(r17)
     stw r0, 0x5d24(r5)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80597558_00001B24
     lwz r3, 0x4(r14)
@@ -2195,7 +2195,7 @@ lbl_fn_80597558_00001EF8:
     b lbl_fn_80597558_00001FA8
 lbl_fn_80597558_00001F1C:
     lwz r3, 0x4(r17)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80597558_00001FA8
     lwz r3, 0x4(r17)
@@ -2611,7 +2611,7 @@ lbl_fn_80597558_0000250C:
     addi r5, r1, 0x44
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r17)
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
 lbl_fn_80597558_00002564:
     addi r18, r18, 0x1
     addi r22, r22, 0x4

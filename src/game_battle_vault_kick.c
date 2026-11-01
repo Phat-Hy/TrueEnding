@@ -43,7 +43,7 @@ extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
@@ -835,7 +835,7 @@ lbl_fn_8040E31C_00000984:
     mr r3, r29
     addi r4, r29, 0xf4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_8040E31C_00000A74
 lbl_fn_8040E31C_000009D8:
     mr r3, r30

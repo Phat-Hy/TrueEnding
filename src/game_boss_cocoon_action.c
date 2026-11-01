@@ -14,7 +14,7 @@ extern void scene_transformPoint(void);
 extern void fn_8000D9F8(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void str_initFromCStr(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void fn_80042108(void);
 extern void str_getData(void);
 extern void mission_updateStub(void);
@@ -1673,7 +1673,7 @@ asm void fn_8045374C(void)
     mr r4, r3
     mr r5, r25
     addi r3, r1, 0x120
-    bl fn_8004203C
+    bl menu_initWindowBuffer
 lbl_fn_8045374C_00001528:
     addi r3, r1, 0x120
     bl talk_parseQuotedString

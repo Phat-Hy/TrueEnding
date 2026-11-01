@@ -25,7 +25,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800F29D0(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void fn_800F80A8(void);
 extern void fn_800F80B8(void);
 extern void fn_800F8290(void);
@@ -768,7 +768,7 @@ lbl_fn_8031E8BC_00000928:
     addi r3, r1, 0x3c
     addi r4, r1, 0x48
     li r27, 0x0
-    bl fn_800F7FD8
+    bl vec3_normalize
     mr r4, r31
     addi r3, r1, 0x3c
     bl fn_801A03E8
@@ -784,7 +784,7 @@ lbl_fn_8031E8BC_00000980:
     ble lbl_fn_8031E8BC_000009BC
     addi r3, r1, 0x30
     addi r4, r1, 0x48
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x30
     addi r4, r28, 0x3c
     bl fn_801A03E8
@@ -810,7 +810,7 @@ lbl_fn_8031E8BC_000009D8:
     bne lbl_fn_8031E8BC_00000A10
     addi r3, r1, 0x24
     addi r4, r1, 0x48
-    bl fn_800F7FD8
+    bl vec3_normalize
     lwz r3, 0x34(r29)
     addi r4, r1, 0x24
     addi r3, r3, 0x3c

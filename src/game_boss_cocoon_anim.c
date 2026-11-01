@@ -14,7 +14,7 @@ extern void assert_generateId(void);
 extern void time_wrapMilliseconds(void);
 extern void fn_8020EE58(void);
 extern void fn_8020EE60(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void random_generateValue(void);
 extern void fn_802114D8(void);
 extern void fn_802114E0(void);
@@ -2066,7 +2066,7 @@ lbl_fn_804515A8_00001BF4:
 lbl_fn_804515A8_00001C18:
     lwz r3, 0x20(r15)
     lwz r3, 0x4(r3)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_804515A8_00001C94
     bl fn_8020EE58

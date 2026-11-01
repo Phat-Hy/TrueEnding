@@ -28,7 +28,7 @@ extern void fn_80615C40(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
 extern void GXInitTexObjDefault(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
@@ -106,7 +106,7 @@ asm void atn_ComDrawLine_execute(void)
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x4
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -300,7 +300,7 @@ asm void atn_ComDrawTexture_execute(void)
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -543,7 +543,7 @@ asm void atn_ComDrawTextureAdd_execute(void)
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1
@@ -3212,7 +3212,7 @@ asm void atn_ComDrawColliObject_execute(void)
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x4
-    bl fn_80617340
+    bl GXSetTevDirect
     li r31, 0x0
     stb r31, 0xc(r1)
     addi r4, r1, 0x14
@@ -3298,7 +3298,7 @@ asm void atn_ComDrawColliTree_execute(void)
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x4
-    bl fn_80617340
+    bl GXSetTevDirect
     li r31, 0x0
     stb r31, 0xc(r1)
     addi r4, r1, 0x14

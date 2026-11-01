@@ -90,7 +90,7 @@ void fn_805A3664(void);
 void fn_805A3738(void);
 void fn_805A380C(void);
 void fn_805A38F4(void);
-void fn_805A3C58(void);
+void rand_Mersenne_constructor(void);
 void fn_805A3D00(void);
 void fn_805A3D6C(void);
 void fn_805A3F5C(void);
@@ -1040,7 +1040,7 @@ lbl_fn_805A38F4_00000C64:
     blr
 }
 
-asm void fn_805A3C58(void)
+asm void rand_Mersenne_constructor(void)
 {
     nofralloc
     stwu r1, -0x20(r1)

@@ -24,7 +24,7 @@ extern void game_initGlobalDatabases(void);
 extern void assert_generateId(void);
 extern void assert_formatLocation(void);
 extern void time_wrapMilliseconds(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void random_generateValue(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
@@ -1188,7 +1188,7 @@ lbl_fn_8058DB14_00000F18:
     beq lbl_fn_8058DB14_00000FE8
     lwz r25, 0x4(r3)
     mr r3, r25
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_8058DB14_00000FE8
     mr r3, r25

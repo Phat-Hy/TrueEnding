@@ -20,7 +20,7 @@ extern void mem_getAllocSize(void);
 extern void fn_8009E5A0(void);
 extern void hud_updateTargetReticle(void);
 extern void fn_8009EB20(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void fn_8009F788(void);
 extern void fn_8009FFCC(void);
 extern void str_skipWhitespace(void);
@@ -714,7 +714,7 @@ lbl_fn_8040099C_000007DC:
     stfs f0, 0x84(r1)
     stfs f10, 0xa4(r1)
     lwzx r3, r3, r30
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
 lbl_fn_8040099C_00000850:
     addi r24, r24, 0x1
     addi r30, r30, 0x30

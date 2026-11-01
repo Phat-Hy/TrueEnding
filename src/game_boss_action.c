@@ -8,7 +8,7 @@ extern void fn_8000EC88(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void str_initFromCStr(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void str_getData(void);
 extern void talk_parseQuotedString(void);
 extern void talk_formatQuotedString(void);
@@ -1069,7 +1069,7 @@ lbl_fn_801388B8_00000DAC:
     addi r3, r1, 0xf8
     addi r4, r4, 0x5
     subi r5, r31, 0x5
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     addi r3, r1, 0xc
     bl fn_801360C4
 lbl_fn_801388B8_00000E14:

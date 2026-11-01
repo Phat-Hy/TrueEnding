@@ -18,7 +18,7 @@ extern void ref_releaseHandle(void);
 extern void fn_8011F8F4(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void fn_8013310C(void);
 extern void actor_testBitFlag(void);
 extern void fn_80161570(void);
@@ -970,7 +970,7 @@ lbl_fn_803A9C40_00000BD4:
 lbl_fn_803A9C40_00000BDC:
     lwz r3, lbl_8087F890
     mr r4, r0
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r28, r3
     cmpwi r0, 0x0
@@ -1078,7 +1078,7 @@ lbl_fn_803A9DBC_00000D50:
 lbl_fn_803A9DBC_00000D58:
     lwz r3, lbl_8087F890
     mr r4, r0
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r30, r3
     cmpwi r0, 0x0
@@ -1659,7 +1659,7 @@ lbl_fn_803AA5E4_0000156C:
     b lbl_fn_803AA5E4_000015C8
 lbl_fn_803AA5E4_00001574:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r27, r3
     cmpwi r0, 0x0
@@ -1825,7 +1825,7 @@ lbl_fn_803AA82C_000017B4:
     b lbl_fn_803AA82C_00001810
 lbl_fn_803AA82C_000017BC:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r5, r3
     cmpwi r0, 0x0
@@ -1912,7 +1912,7 @@ lbl_fn_803AA954_000018DC:
     b lbl_fn_803AA954_00001938
 lbl_fn_803AA954_000018E4:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r5, r3
     cmpwi r0, 0x0

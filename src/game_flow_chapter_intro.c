@@ -23,7 +23,7 @@ extern void fn_80178668(void);
 extern void fn_80178864(void);
 extern void fn_8017C7F8(void);
 extern void game_initGlobalDatabases(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void event_findEntryById(void);
 extern void task_findEntryById(void);
 extern void world_setGlobalFlag(void);
@@ -328,7 +328,7 @@ lbl_fn_804E4490_000002E4:
     bne lbl_fn_804E4490_00000328
     addis r3, r28, 0x1
     lwz r3, -0x698c(r3)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_804E4490_000003D0
 lbl_fn_804E4490_00000328:

@@ -16,7 +16,7 @@ extern void fn_8011CD84(void);
 extern void fn_8011F8F4(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void fn_8012B3E8(void);
 extern void fn_8012B988(void);
 extern void enemy_updateAnimTimer(void);
@@ -827,7 +827,7 @@ lbl_fn_803A0520_0000099C:
 lbl_fn_803A0520_000009A4:
     lwz r3, lbl_8087F890
     mr r4, r0
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r4, r3
     cmpwi r0, 0x0
@@ -917,7 +917,7 @@ lbl_fn_803A064C_00000AD4:
     b lbl_fn_803A064C_00000C1C
 lbl_fn_803A064C_00000ADC:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r31, r3
     cmpwi r0, 0x0
@@ -1103,7 +1103,7 @@ lbl_fn_803A08D4_00000D54:
 lbl_fn_803A08D4_00000D5C:
     lwz r3, lbl_8087F890
     mr r4, r0
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r29, r3
     cmpwi r0, 0x0
@@ -1156,7 +1156,7 @@ lbl_fn_803A08D4_00000E10:
     b lbl_fn_803A08D4_00000E6C
 lbl_fn_803A08D4_00000E18:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r5, r3
     cmpwi r0, 0x0

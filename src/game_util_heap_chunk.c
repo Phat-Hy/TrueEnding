@@ -30,7 +30,7 @@ extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
@@ -43,7 +43,7 @@ extern void assert_formatLocation(void);
 extern void fn_80206D18(void);
 extern void mem_findBlockById(void);
 extern void time_wrapMilliseconds(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
@@ -643,7 +643,7 @@ lbl_fn_80586220_000006A8:
     stfs f3, 0x64(r1)
     stfs f0, 0x68(r1)
     lwz r3, 0xac(r18)
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x5b0c(r26)
     lwz r0, 0xf8(r31)
     add r3, r16, r3
@@ -1138,7 +1138,7 @@ lbl_fn_805866F8_00000DE8:
     b lbl_fn_805866F8_00001044
 lbl_fn_805866F8_00000E40:
     mr r3, r21
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_805866F8_00001024
     lis r3, lbl_807616DC@ha
@@ -1318,7 +1318,7 @@ lbl_fn_805866F8_00001094:
     addi r5, r1, 0x5c
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x38(r24)
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     mr r3, r24
     mr r5, r25
     addi r4, r21, 0x1c8

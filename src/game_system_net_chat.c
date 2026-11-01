@@ -26,7 +26,7 @@ extern void hurtbox_processHitDamage(void);
 extern void fn_8011F8F4(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void fn_80161570(void);
 extern void fn_80162A08(void);
 extern void fn_80163B88(void);
@@ -825,7 +825,7 @@ lbl_fn_803A3D20_00000958:
 lbl_fn_803A3D20_00000960:
     lwz r3, lbl_8087F890
     mr r4, r0
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r4, r3
     cmpwi r0, 0x0
@@ -1419,7 +1419,7 @@ lbl_fn_803A4568_0000119C:
     b lbl_fn_803A4568_000011F8
 lbl_fn_803A4568_000011A4:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r29, r3
     cmpwi r0, 0x0
@@ -2122,7 +2122,7 @@ lbl_fn_803A4A7C_00001B88:
     b lbl_fn_803A4A7C_00001BE4
 lbl_fn_803A4A7C_00001B90:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r21, r3
     cmpwi r0, 0x0

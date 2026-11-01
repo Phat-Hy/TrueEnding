@@ -81,7 +81,7 @@ void time_wrapMilliseconds(void);
 void fn_8020EE58(void);
 void fn_8020EE60(void);
 void fn_8020EE8C(void);
-void fn_8020EF04(void);
+void rand_scaleRangeInt(void);
 void fn_8020EF4C(void);
 void random_generateValue(void);
 
@@ -1842,7 +1842,7 @@ lbl_fn_8020EE8C_00001860:
     blr
 }
 
-asm void fn_8020EF04(void)
+asm void rand_scaleRangeInt(void)
 {
     nofralloc
     lis r5, 0x14f9

@@ -15,7 +15,7 @@ extern void mem_getAllocSize(void);
 extern void wcs_parseInt(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void fn_8020EFEC(void);
 extern void fn_80213B08(void);
 extern void fn_80216440(void);
@@ -183,7 +183,7 @@ lbl_fn_80213E60_00000120:
     b lbl_fn_80213E60_000002CC
 lbl_fn_80213E60_00000128:
     lwz r3, 0x4(r31)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80213E60_00000200
     lwz r3, 0x4(r31)

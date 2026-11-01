@@ -15,7 +15,7 @@ extern void skill_calculateDamage(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
 extern void fn_8008B130(void);
@@ -94,7 +94,7 @@ extern u32 lbl_80885F84;
 void task_createWorker(void);
 void task_destroyWorker(void);
 void fn_803EC758(void);
-void fn_803EC7A0(void);
+void barrier_formatDialogString(void);
 void task_updateWorker(void);
 u32 fn_803ECB7C(void);
 void fn_803ECB84(void);
@@ -277,7 +277,7 @@ asm void fn_803EC758(void)
     b sprintf
 }
 
-asm void fn_803EC7A0(void)
+asm void barrier_formatDialogString(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -293,94 +293,94 @@ asm void fn_803EC7A0(void)
     mr r26, r3
     li r31, 0x1
     addi r27, r4, lbl_80751DD0@l
-    b lbl_fn_803EC7A0_0000036C
-lbl_fn_803EC7A0_00000270:
+    b lbl_barrier_formatDialogString_0000036C
+lbl_barrier_formatDialogString_00000270:
     mr r3, r26
     addi r4, r27, 0x12
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_803EC7A0_0000028C
+    bne lbl_barrier_formatDialogString_0000028C
     stw r31, 0xa4(r28)
-    b lbl_fn_803EC7A0_00000360
-lbl_fn_803EC7A0_0000028C:
+    b lbl_barrier_formatDialogString_00000360
+lbl_barrier_formatDialogString_0000028C:
     mr r3, r26
     addi r4, r27, 0x1a
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_803EC7A0_000002B0
+    bne lbl_barrier_formatDialogString_000002B0
     lwz r0, 0x4(r29)
     ori r0, r0, 0x1800
     stw r0, 0x4(r29)
-    b lbl_fn_803EC7A0_00000360
-lbl_fn_803EC7A0_000002B0:
+    b lbl_barrier_formatDialogString_00000360
+lbl_barrier_formatDialogString_000002B0:
     mr r3, r26
     addi r4, r27, 0x22
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_803EC7A0_000002D4
+    bne lbl_barrier_formatDialogString_000002D4
     lwz r0, 0x4(r29)
     ori r0, r0, 0x4
     stw r0, 0x4(r29)
-    b lbl_fn_803EC7A0_00000360
-lbl_fn_803EC7A0_000002D4:
+    b lbl_barrier_formatDialogString_00000360
+lbl_barrier_formatDialogString_000002D4:
     mr r3, r26
     addi r4, r27, 0x30
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_803EC7A0_000002F8
+    bne lbl_barrier_formatDialogString_000002F8
     lwz r0, 0x4(r29)
     rlwinm r0, r0, 0, 30, 28
     stw r0, 0x4(r29)
-    b lbl_fn_803EC7A0_00000360
-lbl_fn_803EC7A0_000002F8:
+    b lbl_barrier_formatDialogString_00000360
+lbl_barrier_formatDialogString_000002F8:
     mr r3, r26
     addi r4, r27, 0x42
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_803EC7A0_0000031C
+    bne lbl_barrier_formatDialogString_0000031C
     lwz r0, 0x4(r29)
     ori r0, r0, 0x8
     stw r0, 0x4(r29)
-    b lbl_fn_803EC7A0_00000360
-lbl_fn_803EC7A0_0000031C:
+    b lbl_barrier_formatDialogString_00000360
+lbl_barrier_formatDialogString_0000031C:
     mr r3, r26
     addi r4, r27, 0x52
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_803EC7A0_00000340
+    bne lbl_barrier_formatDialogString_00000340
     lwz r0, 0x4(r29)
     rlwinm r0, r0, 0, 29, 27
     stw r0, 0x4(r29)
-    b lbl_fn_803EC7A0_00000360
-lbl_fn_803EC7A0_00000340:
+    b lbl_barrier_formatDialogString_00000360
+lbl_barrier_formatDialogString_00000340:
     mr r3, r26
     addi r4, r27, 0x66
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_803EC7A0_00000360
+    bne lbl_barrier_formatDialogString_00000360
     lwz r0, 0x4(r29)
     oris r0, r0, 0x10
     stw r0, 0x4(r29)
-lbl_fn_803EC7A0_00000360:
+lbl_barrier_formatDialogString_00000360:
     mr r3, r30
     bl talk_formatQuotedString
     mr r26, r3
-lbl_fn_803EC7A0_0000036C:
+lbl_barrier_formatDialogString_0000036C:
     cmpwi r26, 0x0
-    beq lbl_fn_803EC7A0_00000388
+    beq lbl_barrier_formatDialogString_00000388
     mr r4, r26
     addi r3, r27, 0x6f
     bl strcmp
     cmpwi r3, 0x0
-    bne lbl_fn_803EC7A0_00000270
-lbl_fn_803EC7A0_00000388:
+    bne lbl_barrier_formatDialogString_00000270
+lbl_barrier_formatDialogString_00000388:
     lwz r0, 0xa4(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_803EC7A0_000003A0
+    beq lbl_barrier_formatDialogString_000003A0
     lwz r0, 0x4(r29)
     ori r0, r0, 0x1400
     stw r0, 0x4(r29)
-lbl_fn_803EC7A0_000003A0:
+lbl_barrier_formatDialogString_000003A0:
     lmw r26, 0x8(r1)
     lwz r0, 0x24(r1)
     mtlr r0
@@ -1590,7 +1590,7 @@ lbl_fn_803ED92C_00001468:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_80885F70
     mr r3, r30
     lfs f2, lbl_80885F74
@@ -1599,7 +1599,7 @@ lbl_fn_803ED92C_00001468:
     addi r5, r29, 0x84
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_80885F64
     mr r3, r30
     lfs f2, lbl_80885F68

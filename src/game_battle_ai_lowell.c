@@ -17,7 +17,7 @@ extern void mem_alloc(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
@@ -54,7 +54,7 @@ extern void fn_803E3050(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void fn_803ECBD4(void);
 extern void fn_804392C0(void);
@@ -701,7 +701,7 @@ lbl_fn_804366A0_0000074C:
     mr r3, r27
     addi r4, r27, 0xf4
     addi r5, r1, 0x8
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_804366A0_000007DC
 lbl_fn_804366A0_000007A0:
     mr r3, r28
@@ -1155,7 +1155,7 @@ lbl_fn_80436D04_00000D68:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_808868E4
     mr r3, r30
     lfs f2, lbl_808868E8

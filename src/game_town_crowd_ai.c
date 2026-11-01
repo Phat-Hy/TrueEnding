@@ -18,7 +18,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void fn_80124B60(void);
 extern void debuff_removeStatusEffect(void);
 extern void world_getGlobalFlag(void);
@@ -444,7 +444,7 @@ lbl_fn_803CCCC0_00000414:
 lbl_fn_803CCCC0_00000424:
     lwz r3, lbl_8087F890
     lwz r4, 0x198(r31)
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     b lbl_fn_803CCCC0_00000450
 lbl_fn_803CCCC0_00000434:
     lwz r3, lbl_8087F408

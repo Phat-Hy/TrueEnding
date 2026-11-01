@@ -39,7 +39,7 @@ extern void GXClearVtxDesc(void);
 extern void fn_80614790(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightSpot(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void GXLoadPosMtxImm(void);
@@ -2131,7 +2131,7 @@ asm void fn_80078938(void)
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x4
     li r4, 0x0
     li r5, 0x1

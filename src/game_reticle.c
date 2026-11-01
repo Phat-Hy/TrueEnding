@@ -53,7 +53,7 @@ extern void GXInitLightSpot(void);
 extern void GXClampLightAngle(void);
 extern void fn_806163C0(void);
 extern void fn_80616EF0(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevColorOp(void);
 extern void GXSetTevIndirect(void);
@@ -1834,7 +1834,7 @@ lbl_fn_8009CC28_000017B4:
     bl GXSetTevSwapMode
     li r3, 0x0
     li r4, 0x4
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0xff
     li r5, 0xff
@@ -1906,7 +1906,7 @@ asm void fn_8009D1A4(void)
     bl GXSetTevOrder
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x1
     bl GXClearVtxDesc
     li r3, 0x0

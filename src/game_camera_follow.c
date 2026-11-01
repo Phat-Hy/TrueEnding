@@ -38,7 +38,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void strcmp(void);
@@ -982,7 +982,7 @@ asm void fn_802E59E0(void)
     mr r29, r5
     stw r28, 0x110(r1)
     mr r28, r3
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lis r3, lbl_80787290@ha
     addi r31, r28, 0x14d4
     addi r3, r3, lbl_80787290@l

@@ -19,7 +19,7 @@ extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void fn_8008A4E0(void);
 extern void fn_8008A76C(void);
@@ -30,7 +30,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cam_destroyMsgHandle(void);
 extern void fn_8010653C(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void fn_80155A88(void);
 extern void fn_8016B8D4(void);
 extern void battle_calcAABBCenter(void);
@@ -1183,7 +1183,7 @@ lbl_fn_8043B164_00000EA8:
     cmpwi r3, 0x0
     beq lbl_fn_8043B164_00000ECC
     lwz r4, 0x20(r4)
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     b lbl_fn_8043B164_00000ED0
 lbl_fn_8043B164_00000ECC:
     li r3, 0x0
@@ -1392,7 +1392,7 @@ lbl_fn_8043B614_00001148:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_80886974
     mr r3, r30
     lfs f2, lbl_80886978

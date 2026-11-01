@@ -78,7 +78,7 @@ extern void GXCopyTex(void);
 extern void GXInitLightDistAttn(void);
 extern void GXInitLightObj(void);
 extern void GXClampLightAngle(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevOrder(void);
 extern void GXSetNumTevStages(void);
 extern void GXSetTevAlphaIn(void);
@@ -320,7 +320,7 @@ lbl_fn_804ABA2C_00000144:
     bl fn_804ABF34
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

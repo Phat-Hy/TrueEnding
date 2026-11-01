@@ -15,7 +15,7 @@ extern void mem_getAllocSize(void);
 extern void fn_8009E5A0(void);
 extern void hud_updateTargetReticle(void);
 extern void fn_8009EB20(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void fn_8009F788(void);
 extern void fn_8009FFCC(void);
 extern void fn_800C1FB4(void);
@@ -235,7 +235,7 @@ lbl_fn_80490884_000001E4:
     bl PSMTXConcat
     mr r3, r29
     addi r4, r1, 0x198
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     lwz r4, 0x2c(r30)
     lfs f8, lbl_8088705C
     lfs f9, 0xc(r4)
@@ -426,7 +426,7 @@ lbl_fn_80490B0C_000004C0:
     bl PSMTXConcat
     mr r3, r29
     addi r4, r1, 0x1c8
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     lwz r4, 0x2c(r30)
     lfs f8, lbl_8088705C
     lfs f9, 0xc(r4)
@@ -471,7 +471,7 @@ asm void fn_80490DE8(void)
 lbl_fn_80490DE8_00000590:
     mr r3, r31
     addi r4, r31, 0x30
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     li r3, 0x1
 lbl_fn_80490DE8_000005A0:
     lwz r0, 0x14(r1)

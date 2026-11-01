@@ -14,7 +14,7 @@ extern void hurtbox_dispatchHitEvent(void);
 extern void fn_8011F8F4(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void quest_updateFlow(void);
 extern void party_configureMemberSlot(void);
 extern void fn_80171420(void);
@@ -150,7 +150,7 @@ lbl_fn_803A5118_00000074:
     b lbl_fn_803A5118_000000D0
 lbl_fn_803A5118_0000007C:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r29, r3
     cmpwi r0, 0x0
@@ -417,7 +417,7 @@ lbl_fn_803A54C0_00000424:
 lbl_fn_803A54C0_0000042C:
     lwz r3, lbl_8087F890
     mr r4, r0
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r29, r3
     cmpwi r0, 0x0
@@ -534,7 +534,7 @@ lbl_fn_803A5650_000005C0:
     b lbl_fn_803A5650_0000061C
 lbl_fn_803A5650_000005C8:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r28, r3
     cmpwi r0, 0x0
@@ -1787,7 +1787,7 @@ lbl_fn_803A6744_000016B0:
     b lbl_fn_803A6744_0000170C
 lbl_fn_803A6744_000016B8:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r6, r3
     cmpwi r0, 0x0

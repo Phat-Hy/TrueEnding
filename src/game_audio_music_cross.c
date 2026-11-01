@@ -55,7 +55,7 @@ extern void fn_8030B92C(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803C17FC(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D6C(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
@@ -1824,7 +1824,7 @@ asm void fn_8030DA20(void)
     stw r29, 0x214(r1)
     stw r28, 0x210(r1)
     mr r28, r5
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     addi r6, r31, 0x14fc
     addi r3, r31, 0x152c
     lfs f1, lbl_80884C40

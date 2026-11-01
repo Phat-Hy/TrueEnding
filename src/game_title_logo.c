@@ -15,7 +15,7 @@ extern void hurtbox_processHitDamage(void);
 extern void fn_8011F8F4(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void fn_80161570(void);
 extern void fn_80161B70(void);
 extern void battle_resolveAggroHierarchy(void);
@@ -347,7 +347,7 @@ lbl_fn_803A6E24_000002FC:
     b lbl_fn_803A6E24_00000358
 lbl_fn_803A6E24_00000304:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r31, r3
     cmpwi r0, 0x0
@@ -459,7 +459,7 @@ lbl_fn_803A6F90_00000470:
 lbl_fn_803A6F90_00000478:
     lwz r3, lbl_8087F890
     mr r4, r0
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r5, r3
     cmpwi r0, 0x0
@@ -646,7 +646,7 @@ lbl_fn_803A7124_00000704:
     cmpwi r3, 0x0
     beq lbl_fn_803A7124_00000720
     lwz r4, 0x8(r5)
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     mr r30, r3
     b lbl_fn_803A7124_00000724
 lbl_fn_803A7124_00000720:
@@ -1157,7 +1157,7 @@ lbl_fn_803A7954_00000E28:
 lbl_fn_803A7954_00000E30:
     lwz r3, lbl_8087F890
     mr r4, r0
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r29, r3
     cmpwi r0, 0x0
@@ -1210,7 +1210,7 @@ lbl_fn_803A7954_00000EE4:
     b lbl_fn_803A7954_00000F40
 lbl_fn_803A7954_00000EEC:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r28, r3
     cmpwi r0, 0x0
@@ -1994,7 +1994,7 @@ lbl_fn_803A8470_00001950:
 lbl_fn_803A8470_00001958:
     lwz r3, lbl_8087F890
     mr r4, r0
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r31, r3
     cmpwi r0, 0x0

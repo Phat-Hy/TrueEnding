@@ -21,7 +21,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
 extern void compass_findMarkerByName(void);
@@ -1026,7 +1026,7 @@ lbl_fn_803F3FBC_00000C80:
     addi r5, r28, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_80885FCC
     mr r3, r30
     lfs f2, lbl_80885FD0

@@ -8,7 +8,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void path_Object_constructor(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -353,7 +353,7 @@ asm void fn_802AC8E8(void)
     stw r29, 0x684(r1)
     mr r29, r3
     addi r3, r1, 0x44
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r31, lbl_807462A8@ha
     addi r31, r31, lbl_807462A8@l
 lbl_fn_802AC8E8_000003C4:

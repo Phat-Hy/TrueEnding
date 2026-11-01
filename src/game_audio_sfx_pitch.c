@@ -32,7 +32,7 @@ extern void fn_800F7260(void);
 extern void vec3_scale(void);
 extern void viewport_getGlobalContext(void);
 extern void fn_800F7FA8(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
@@ -94,7 +94,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D00(void);
 extern void fn_805A3D6C(void);
 extern void fn_805A40BC(void);
@@ -178,7 +178,7 @@ asm void fn_80313544(void)
     stw r30, 0x218(r1)
     stw r29, 0x214(r1)
     mr r29, r5
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lis r4, lbl_807885D0@ha
     addi r3, r31, 0x1564
     addi r4, r4, lbl_807885D0@l
@@ -1813,7 +1813,7 @@ asm void fn_80314BD8(void)
     ble lbl_fn_80314BD8_00001778
     addi r3, r1, 0x110
     addi r4, r1, 0x194
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x11c
     addi r4, r1, 0x110
     bl vec3_toEulerAngles
@@ -2347,7 +2347,7 @@ lbl_fn_80314BD8_00001ED0:
     ble lbl_fn_80314BD8_00001F5C
     addi r3, r1, 0x14
     addi r4, r1, 0x128
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x20
     addi r4, r1, 0x14
     bl vec3_toEulerAngles

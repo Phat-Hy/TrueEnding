@@ -13,7 +13,7 @@ extern void dtor_80084684(void);
 extern void sys_copyString(void);
 extern void fn_8000ECA8(void);
 extern void str_initFromCStr(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void fn_800422CC(void);
 extern void fn_80049B74(void);
 extern void fn_8004A1D4(void);
@@ -1717,7 +1717,7 @@ asm void fn_8035F3D4(void)
     mr r4, r3
     mr r5, r26
     addi r3, r1, 0x20
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r26, lbl_8074B538@ha
     li r27, 0x0
     addi r26, r26, lbl_8074B538@l

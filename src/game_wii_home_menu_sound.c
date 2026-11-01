@@ -31,7 +31,7 @@ extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_dispatchToQueue(void);
@@ -1932,7 +1932,7 @@ lbl_fn_80572454_000018A0:
     stfs f1, 0x30(r1)
     stfs f0, 0x34(r1)
     lwz r3, 0x4c(r29)
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     add r31, r27, r26
     lwz r3, 0x70(r31)
     bl fn_80219544

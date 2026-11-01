@@ -11,7 +11,7 @@ extern void ref_releaseHandle(void);
 extern void fn_8011F8F4(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void fn_80154654(void);
 extern void inventory_calcTotalStats(void);
 extern void actor_setState(void);
@@ -1146,7 +1146,7 @@ lbl_fn_8039F08C_00000E7C:
 lbl_fn_8039F08C_00000E84:
     lwz r3, lbl_8087F890
     mr r4, r0
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r30, r3
     cmpwi r0, 0x0
@@ -1536,7 +1536,7 @@ lbl_fn_8039F600_000013FC:
 lbl_fn_8039F600_00001404:
     lwz r3, lbl_8087F890
     mr r4, r0
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r31, r3
     cmpwi r0, 0x0
@@ -1715,7 +1715,7 @@ lbl_fn_8039F878_00001670:
 lbl_fn_8039F878_00001678:
     lwz r3, lbl_8087F890
     mr r4, r0
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r4, r3
     cmpwi r0, 0x0

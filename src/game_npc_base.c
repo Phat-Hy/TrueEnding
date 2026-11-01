@@ -21,7 +21,7 @@ extern void fn_800F52F8(void);
 extern void fn_800F7F60(void);
 extern void fn_800F7F80(void);
 extern void fn_800F7F90(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
 extern void clip_calculateFrustum(void);
 extern void fn_80116BAC(void);
@@ -450,7 +450,7 @@ lbl_npc_calcTargetDistance_00000468:
     ble lbl_npc_calcTargetDistance_000004C8
     addi r3, r1, 0x3c
     addi r4, r1, 0x60
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x48
     addi r4, r1, 0x3c
     bl vec3_toEulerAngles

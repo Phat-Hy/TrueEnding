@@ -29,7 +29,7 @@ extern void assert_generateId(void);
 extern void assert_formatLocation(void);
 extern void fn_80206D18(void);
 extern void time_wrapMilliseconds(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
 extern void fn_8020EFEC(void);
@@ -884,7 +884,7 @@ lbl_fn_801DD26C_00000AF0:
     mr r31, r3
     beq lbl_fn_801DD26C_00000C5C
     lwz r3, 0x4(r3)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_801DD26C_00000C5C
     lwz r3, 0x4(r31)

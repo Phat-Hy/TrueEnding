@@ -20,7 +20,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void atn_Anim_getDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
 extern void scissor_clipFrustum(void);
 extern void fn_80107A68(void);
@@ -830,7 +830,7 @@ lbl_fn_80463174_000009CC:
     lfs f29, 0x4(r3)
     addi r3, r1, 0x2c
     addi r4, r1, 0x68
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x38
     addi r4, r1, 0x2c
     bl vec3_toEulerAngles
@@ -933,7 +933,7 @@ lbl_fn_80463174_00000B8C:
     lfs f31, 0x4(r3)
     addi r3, r1, 0x8
     addi r4, r1, 0x5c
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x14
     addi r4, r1, 0x8
     bl vec3_toEulerAngles

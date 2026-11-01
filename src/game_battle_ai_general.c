@@ -31,7 +31,7 @@ extern void mem_getAllocSize(void);
 extern void route_findNextWaypoint(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void fn_8008A4E0(void);
 extern void area_updateZoneState(void);
@@ -51,7 +51,7 @@ extern void fn_800E0AA8(void);
 extern void fn_8011D424(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void fn_801207D4(void);
 extern void fn_801354B4(void);
 extern void fn_80136544(void);
@@ -272,7 +272,7 @@ lbl_fn_8043C368_000000BC:
     bne lbl_fn_8043C368_000000D8
     lwz r3, lbl_8087F890
     lwz r4, 0x24(r4)
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     stw r3, 0x30c(r31)
     b lbl_fn_8043C368_0000010C
 lbl_fn_8043C368_000000D8:
@@ -2717,7 +2717,7 @@ lbl_fn_8043E580_000022B0:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_808869D8
     mr r3, r30
     lfs f2, lbl_808869DC

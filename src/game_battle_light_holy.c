@@ -16,7 +16,7 @@ extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void fn_80087BB4(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void area_updateZoneState(void);
 extern void map_processTrigger(void);
@@ -44,7 +44,7 @@ extern void res_registerResource(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
 extern void fn_803EC758(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void dungeon_updateBarrierField(void);
@@ -526,7 +526,7 @@ lbl_fn_80420934_00000508:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_808865C4
     mr r3, r30
     lfs f2, lbl_808865C8
@@ -840,7 +840,7 @@ lbl_fn_80420D0C_000009A0:
     mr r3, r28
     addi r4, r28, 0xf4
     addi r5, r1, 0x8
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     stw r31, 0x4ec(r28)
     b lbl_fn_80420D0C_00000A08
 lbl_fn_80420D0C_000009E4:

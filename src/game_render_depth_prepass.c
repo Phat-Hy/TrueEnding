@@ -78,7 +78,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804DA490(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void fn_805A3D00(void);
 extern void fn_805A507C(void);
 extern void fn_805A5224(void);
@@ -504,7 +504,7 @@ asm void fn_802B23E8(void)
     bl _savegpr_25
     mr r30, r3
     mr r31, r5
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lfs f0, lbl_80884020
     lis r3, lbl_80786204@ha
     li r28, 0x0

@@ -26,7 +26,7 @@ extern void fn_800F52F0(void);
 extern void fn_800F52F8(void);
 extern void vec3_scale(void);
 extern void fn_800F7F60(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_80109950(void);
 extern void fn_8010C948(void);
@@ -189,7 +189,7 @@ lbl_fn_8013A4E8_000000B8:
     mr r28, r3
     addi r3, r1, 0x234
     addi r4, r1, 0x384
-    bl fn_800F7FD8
+    bl vec3_normalize
     mr r5, r28
     addi r3, r1, 0x240
     addi r4, r1, 0x234
@@ -374,7 +374,7 @@ lbl_fn_8013A4E8_00000354:
     ble lbl_fn_8013A4E8_000003C4
     addi r3, r1, 0x360
     addi r4, r1, 0x36c
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x1ec
     addi r4, r1, 0x360
     bl vec3_toEulerAngles
@@ -620,7 +620,7 @@ lbl_fn_8013A4E8_000006CC:
     bge lbl_fn_8013A4E8_0000072C
     addi r3, r1, 0x1b0
     addi r4, r1, 0x33c
-    bl fn_800F7FD8
+    bl vec3_normalize
     mr r3, r27
     addi r4, r1, 0x1b0
     bl fn_80155790
@@ -727,7 +727,7 @@ lbl_fn_8013A4E8_00000870:
     ble lbl_fn_8013A4E8_000008C8
     addi r3, r1, 0x12c
     addi r4, r1, 0x330
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x138
     addi r4, r1, 0x12c
     bl vec3_toEulerAngles
@@ -1651,7 +1651,7 @@ lbl_fn_8013A4E8_0000158C:
     ble lbl_fn_8013A4E8_000015F8
     addi r3, r1, 0x60
     addi r4, r1, 0x2a0
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x6c
     addi r4, r1, 0x60
     bl vec3_toEulerAngles

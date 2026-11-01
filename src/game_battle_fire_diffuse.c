@@ -17,7 +17,7 @@ extern void talk_copySpeakerName(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void skeleton_getGlobalManager(void);
 extern void fn_800C1990(void);
 extern void skin_playAnimationByName(void);
@@ -1825,7 +1825,7 @@ lbl_fn_8041E480_0000171C:
     stfs f0, 0x5c(r1)
     stfs f7, 0x60(r1)
     stfs f8, 0x64(r1)
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     b lbl_fn_8041E480_0000180C
 lbl_fn_8041E480_000017B4:
     lfs f7, 0xfc(r21)

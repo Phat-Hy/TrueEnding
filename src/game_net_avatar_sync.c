@@ -19,7 +19,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void route_createWaypoint(void);
 extern void node_createNamedChild(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void fn_800A4450(void);
 extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
@@ -41,7 +41,7 @@ extern void save_validateHeader(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void save_findEntryByName(void);
 extern void fn_801FEC74(void);
 extern void thread_findAndNotify(void);
@@ -949,7 +949,7 @@ lbl_fn_80528BF4_00000A88:
     bl perf_getMetricValue
     addi r4, r28, 0x184
     addi r5, r1, 0x4c
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
 lbl_fn_80528BF4_00000AAC:
     stfs f31, 0x20(r1)
     mr r3, r29
@@ -1565,7 +1565,7 @@ lbl_fn_80529528_000012E4:
     li r3, 0x0
 lbl_fn_80529528_000012E8:
     addi r4, r4, 0xc
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     lwz r12, 0x0(r26)
     mr r3, r26
     lwz r0, 0x50(r26)
@@ -1662,7 +1662,7 @@ lbl_fn_80529528_00001428:
     bl perf_getMetricValue
     addi r4, r30, 0x94
     addi r5, r1, 0x38
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x10(r27)
     bl perf_getMetricValue
     lwz r0, 0x4(r27)
@@ -1704,7 +1704,7 @@ lbl_fn_80529528_00001428:
     bl perf_getMetricValue
     addi r4, r30, 0x94
     addi r5, r1, 0x38
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r4, 0x8(r27)
     li r3, 0x0
     bl actor_findSpawnTemplate

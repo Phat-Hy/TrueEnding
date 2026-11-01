@@ -12,7 +12,7 @@ extern void skeleton_getGlobalManager(void);
 extern void fn_800C16C0(void);
 extern void fn_800C18BC(void);
 extern void atn_LH_Texture_destructAndFree(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void quest_evaluateConditions(void);
 extern void equip_applyToCharacter(void);
 extern void actor_setState(void);
@@ -410,7 +410,7 @@ asm void fn_8041EE28(void)
     lwz r4, 0xf4(r31)
     lwz r3, lbl_8087F890
     lwz r4, 0x20(r4)
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     cmpwi r3, 0x0
     stw r3, 0x11c(r31)
     beq lbl_fn_8041EE28_00000470

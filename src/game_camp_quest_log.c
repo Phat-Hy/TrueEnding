@@ -12,7 +12,7 @@ extern void sys_copyString(void);
 extern void fn_8000ECA8(void);
 extern void vec3_add(void);
 extern void str_initFromCStr(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void str_getData(void);
 extern void fn_800422CC(void);
 extern void talk_parseQuotedString(void);
@@ -371,7 +371,7 @@ asm void fn_803C3894(void)
     mr r28, r3
     mr r29, r6
     addi r3, r1, 0x2b0
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     addi r3, r1, 0xe0
     bl fn_8021A4CC
     mulli r23, r29, 0x2710

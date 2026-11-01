@@ -164,7 +164,7 @@ void fn_80041C0C(void);
 void AreaEffConfig_destructor(void);
 void AreaEffConfig_execute(void);
 void fn_80041D44(void);
-void fn_8004203C(void);
+void menu_initWindowBuffer(void);
 void fn_800420F4(void);
 void fn_80042108(void);
 void str_getData(void);
@@ -487,7 +487,7 @@ asm void fn_80041D44(void)
     mr r4, r3
     mr r5, r30
     addi r3, r1, 0x80
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     addi r3, r1, 0x34
     bl fn_80042148
     lis r3, lbl_80730CB4@ha
@@ -678,7 +678,7 @@ lbl_fn_80041D44_000005B0:
     blr
 }
 
-asm void fn_8004203C(void)
+asm void menu_initWindowBuffer(void)
 {
     nofralloc
     stwu r1, -0x20(r1)

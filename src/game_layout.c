@@ -29,7 +29,7 @@ extern void GXClampLightAngle(void);
 extern void GXDrawDone(void);
 extern void fn_80617200(void);
 extern void GXInitTexObjDefault(void);
-extern void fn_80617340(void);
+extern void GXSetTevDirect(void);
 extern void GXSetTevColorIn(void);
 extern void GXSetTevIndirect(void);
 extern void fn_806175F0(void);
@@ -695,7 +695,7 @@ asm void fn_800A9E64(void)
     bl __GXSetVtxDesc
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -747,7 +747,7 @@ asm void fn_800A9E64(void)
     bl __GXSetVtxDesc
     li r3, 0x0
     li r4, 0x3
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
@@ -924,7 +924,7 @@ lbl_fn_800A9E64_00000A28:
     bl __GXSetVtxDesc
     li r3, 0x0
     li r4, 0x0
-    bl fn_80617340
+    bl GXSetTevDirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

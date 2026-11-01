@@ -17,7 +17,7 @@ extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void route_createWaypoint(void);
-extern void fn_80088724(void);
+extern void zone_testPointInBounds(void);
 extern void node_createNamedChild(void);
 extern void map_processTrigger(void);
 extern void fn_80092A4C(void);
@@ -770,7 +770,7 @@ lbl_fn_80402768_0000097C:
     addi r5, r29, 0x78
     li r6, 0x0
     li r7, 0x0
-    bl fn_80088724
+    bl zone_testPointInBounds
     lfs f1, lbl_8088617C
     mr r3, r30
     lfs f2, lbl_80886180

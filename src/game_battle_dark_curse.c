@@ -31,7 +31,7 @@ extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_unload(void);
@@ -1089,7 +1089,7 @@ lbl_fn_804229A8_00000CB8:
 lbl_fn_804229A8_00000CC8:
     lwz r3, lbl_8087F890
     lwz r4, 0x24(r4)
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     stw r3, 0x148(r31)
     b lbl_fn_804229A8_00000D00
 lbl_fn_804229A8_00000CDC:

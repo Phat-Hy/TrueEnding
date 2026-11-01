@@ -37,7 +37,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void task_createWorker(void);
 extern void task_destroyWorker(void);
-extern void fn_803EC7A0(void);
+extern void barrier_formatDialogString(void);
 extern void task_updateWorker(void);
 extern void task_initWorkerContext(void);
 extern void barrier_bindFieldAnimation(void);
@@ -253,7 +253,7 @@ lbl_fn_8040F498_0000017C:
     mr r3, r29
     addi r4, r29, 0xf4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_8040F498_00000298
 lbl_fn_8040F498_000001D0:
     mr r3, r30
@@ -1112,7 +1112,7 @@ lbl_fn_80410028_00000D18:
     mr r3, r31
     addi r4, r31, 0xf4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_80410028_00000F58
 lbl_fn_80410028_00000D6C:
     mr r3, r30
@@ -1952,7 +1952,7 @@ lbl_fn_80410BF8_000018DC:
     mr r3, r29
     addi r4, r29, 0xf4
     addi r5, r1, 0x108
-    bl fn_803EC7A0
+    bl barrier_formatDialogString
     b lbl_fn_80410BF8_000019E8
 lbl_fn_80410BF8_00001930:
     mr r3, r30

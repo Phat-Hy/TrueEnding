@@ -18,7 +18,7 @@ extern void assert_formatLocation(void);
 extern void time_wrapMilliseconds(void);
 extern void fn_8020EE58(void);
 extern void fn_8020EE60(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
@@ -211,7 +211,7 @@ lbl_fn_802124B4_000001C4:
     b lbl_fn_802124B4_0000022C
 lbl_fn_802124B4_000001D4:
     lwz r3, 0x4(r31)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_802124B4_0000022C
     li r29, 0x0
@@ -273,7 +273,7 @@ asm void fn_80212714(void)
     b lbl_fn_80212714_000002C0
 lbl_fn_80212714_000002A0:
     lwz r3, 0x4(r31)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80212714_000002C0
     lwz r3, 0x4(r31)
@@ -323,7 +323,7 @@ lbl_fn_80212790_000002FC:
     b lbl_fn_80212790_00000360
 lbl_fn_80212790_00000344:
     lwz r3, 0x4(r30)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80212790_00000360
     lwz r3, 0x4(r30)
@@ -1754,7 +1754,7 @@ lbl_fn_80213B78_000017DC:
     b lbl_fn_80213B78_00001988
 lbl_fn_80213B78_000017EC:
     lwz r3, 0x4(r31)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80213B78_000018C0
     lwz r3, 0x4(r31)

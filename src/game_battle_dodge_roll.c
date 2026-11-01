@@ -25,7 +25,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_8009E5A0(void);
 extern void fn_8009E690(void);
 extern void hud_updateTargetReticle(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void fn_8009F788(void);
 extern void fn_8009FFCC(void);
 extern void str_skipWhitespace(void);
@@ -1710,7 +1710,7 @@ lbl_fn_8041553C_00001578:
     stfs f0, 0x2e4(r1)
     stfs f7, 0x2f4(r1)
     stfs f8, 0x304(r1)
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     lfs f7, 0x70(r30)
     lfs f0, lbl_8088644C
     lwz r0, 0x54(r30)
@@ -2081,7 +2081,7 @@ lbl_fn_80415AB4_00001ACC:
     stfs f0, 0x2e4(r1)
     stfs f7, 0x2f4(r1)
     stfs f8, 0x304(r1)
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
     lwz r0, 0x314(r1)
     lwz r31, 0x30c(r1)
     lwz r30, 0x308(r1)

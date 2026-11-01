@@ -15,7 +15,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
 extern void camera_updateTargetMode(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void system_getNextSequenceId(void);
 extern void viewport_updateCulling(void);
 extern void clip_calculateFrustum(void);
@@ -1373,7 +1373,7 @@ asm void fn_802B6F80(void)
     lfs f31, 0x4(r3)
     addi r3, r1, 0x8
     addi r4, r1, 0x20
-    bl fn_800F7FD8
+    bl vec3_normalize
     addi r3, r1, 0x14
     addi r4, r1, 0x8
     bl vec3_toEulerAngles

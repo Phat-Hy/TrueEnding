@@ -26,7 +26,7 @@ extern void assert_formatLocation(void);
 extern void time_wrapMilliseconds(void);
 extern void fn_8020EE58(void);
 extern void fn_8020EE60(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
 extern void fn_8020EFEC(void);
 extern void fn_80219F1C(void);
@@ -970,7 +970,7 @@ lbl_fn_80211648_00000BF4:
     b lbl_fn_80211648_00000C5C
 lbl_fn_80211648_00000C28:
     lwz r3, 0x4(r31)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80211648_00000C58
     lwz r3, 0x4(r31)
@@ -1701,7 +1701,7 @@ lbl_fn_80211940_0000165C:
     b lbl_fn_80211940_000019B8
 lbl_fn_80211940_0000166C:
     lwz r3, 0x4(r29)
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_80211940_000019B8
     li r28, 0x0

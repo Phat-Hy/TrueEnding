@@ -28,7 +28,7 @@ extern void fn_801D7DE8(void);
 extern void fn_801F45F4(void);
 extern void saveSlot_readSummary(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
@@ -1836,12 +1836,12 @@ lbl_fn_801D70EC_000017F0:
     bl perf_getMetricValue
     addi r4, r29, 0x2e
     addi r5, r1, 0x1c
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lwz r3, 0x4(r25)
     bl perf_getMetricValue
     addi r4, r29, 0x2e
     addi r5, r1, 0x1c
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     cmpwi r28, 0x0
     beq lbl_fn_801D70EC_00001908
     lwz r3, 0x0(r25)

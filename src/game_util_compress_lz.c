@@ -28,7 +28,7 @@ extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
 extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
-extern void fn_801F6E78(void);
+extern void save_calculateBlockCrc(void);
 extern void fn_801F7590(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
@@ -39,7 +39,7 @@ extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
-extern void fn_8020EF04(void);
+extern void rand_scaleRangeInt(void);
 extern void fn_8020EFEC(void);
 extern void event_findEntryById(void);
 extern void fn_8021154C(void);
@@ -546,7 +546,7 @@ lbl_fn_80589AF8_000005B4:
     stfs f3, 0x48(r1)
     stfs f0, 0x4c(r1)
     lwz r3, 0x5b74(r28)
-    bl fn_801F6E78
+    bl save_calculateBlockCrc
     lfs f1, lbl_80888138
     addi r4, r30, 0xfc
     lwz r3, 0x5b74(r28)
@@ -1621,7 +1621,7 @@ lbl_fn_8058AAC0_00001564:
     lwz r3, 0x0(r27)
     addis r0, r4, 0x1
     add r29, r0, r31
-    bl fn_8020EF04
+    bl rand_scaleRangeInt
     cmpwi r3, 0x0
     beq lbl_fn_8058AAC0_000015B4
     lwz r3, 0x0(r27)

@@ -24,7 +24,7 @@ extern void fn_801162A0(void);
 extern void fn_8011F8F4(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void equip_getGlobalManager(void);
 extern void fn_8012A190(void);
 extern void fn_8012A1B8(void);
@@ -764,7 +764,7 @@ lbl_fn_803A2210_000008D4:
     b lbl_fn_803A2210_00000930
 lbl_fn_803A2210_000008DC:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r31, r3
     cmpwi r0, 0x0
@@ -865,7 +865,7 @@ lbl_fn_803A2378_00000A34:
     b lbl_fn_803A2378_00000A90
 lbl_fn_803A2378_00000A3C:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r5, r3
     cmpwi r0, 0x0
@@ -1634,7 +1634,7 @@ lbl_fn_803A2E20_000014E8:
 lbl_fn_803A2E20_000014F0:
     lwz r3, lbl_8087F890
     mr r4, r0
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r31, r3
     cmpwi r0, 0x0
@@ -1744,7 +1744,7 @@ lbl_fn_803A2E20_00001680:
     b lbl_fn_803A2E20_000016DC
 lbl_fn_803A2E20_00001688:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r26, r3
     cmpwi r0, 0x0
@@ -1985,7 +1985,7 @@ lbl_fn_803A330C_000019C8:
     b lbl_fn_803A330C_00001A24
 lbl_fn_803A330C_000019D0:
     lwz r3, lbl_8087F890
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r5, r3
     cmpwi r0, 0x0

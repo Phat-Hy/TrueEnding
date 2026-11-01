@@ -13,7 +13,7 @@ extern void scene_transformPoint(void);
 extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
 extern void str_initFromCStr(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void str_getData(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
@@ -1172,7 +1172,7 @@ lbl_fn_80338FD0_00000DA4:
     mr r4, r3
     mr r5, r29
     addi r3, r1, 0x10
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r29, lbl_8074A4C0@ha
     addi r29, r29, lbl_8074A4C0@l
 lbl_fn_80338FD0_00000DE8:

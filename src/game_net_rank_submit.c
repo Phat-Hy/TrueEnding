@@ -15,7 +15,7 @@ extern void talk_copyUtf16String(void);
 extern void fn_8006F5E8(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009EE30(void);
+extern void hud_drawTargetMarker(void);
 extern void msg_isWindowActive(void);
 extern void atn_Task_setActive(void);
 extern void str_findChar(void);
@@ -1185,7 +1185,7 @@ lbl_fn_805233FC_00000F0C:
     li r3, 0x0
 lbl_fn_805233FC_00000F10:
     addi r4, r1, 0x1f0
-    bl fn_8009EE30
+    bl hud_drawTargetMarker
 lbl_fn_805233FC_00000F18:
     lwz r12, 0x0(r25)
     mr r3, r25

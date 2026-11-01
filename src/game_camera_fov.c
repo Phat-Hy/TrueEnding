@@ -12,7 +12,7 @@ extern void fn_8000E18C(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void ui_drawColoredQuad(void);
-extern void fn_8004203C(void);
+extern void menu_initWindowBuffer(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -61,7 +61,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3C58(void);
+extern void rand_Mersenne_constructor(void);
 extern void printf(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -313,7 +313,7 @@ asm void fn_802DDDB8(void)
     bl _savegpr_25
     mr r30, r3
     mr r31, r5
-    bl fn_805A3C58
+    bl rand_Mersenne_constructor
     lfs f0, lbl_80884678
     lis r3, lbl_80786F9C@ha
     li r29, 0x0
@@ -691,7 +691,7 @@ asm void fn_802DE27C(void)
     mr r4, r3
     mr r5, r29
     addi r3, r1, 0x28
-    bl fn_8004203C
+    bl menu_initWindowBuffer
     lis r3, lbl_80747B10@ha
     li r29, 0x0
     addi r30, r3, lbl_80747B10@l

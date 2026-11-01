@@ -25,7 +25,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void fn_8011F8F4(void);
 extern void skill_findNodeBySlotId(void);
 extern void skill_findNodeById(void);
-extern void fn_8011FE3C(void);
+extern void skill_findNodeByTag(void);
 extern void player_evaluateStatusCondition(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803E3C78(void);
@@ -1032,7 +1032,7 @@ lbl_fn_803AD05C_00000CDC:
 lbl_fn_803AD05C_00000CE4:
     lwz r3, lbl_8087F890
     mr r4, r5
-    bl fn_8011FE3C
+    bl skill_findNodeByTag
     lwz r0, lbl_8087FA20
     mr r6, r3
     cmpwi r0, 0x0

@@ -28,7 +28,7 @@ extern void fn_800D8814(void);
 extern void sound_playSpatialEffect(void);
 extern void fn_800EC204(void);
 extern void fn_800F7250(void);
-extern void fn_800F7FD8(void);
+extern void vec3_normalize(void);
 extern void viewport_getNextSequenceId(void);
 extern void fn_800F8348(void);
 extern void fn_800F8524(void);
@@ -946,7 +946,7 @@ lbl_fn_8030AF10_00000B8C:
     bl vec3_toEulerAngles
     addi r3, r1, 0xcc
     addi r4, r1, 0x40
-    bl fn_800F7FD8
+    bl vec3_normalize
     stfs f31, 0xcc(r1)
     addi r3, r1, 0x130
     addi r4, r1, 0xcc
@@ -990,7 +990,7 @@ lbl_fn_8030AF10_00000B8C:
     bl vec3_sub
     addi r3, r1, 0x28
     addi r4, r1, 0x1c
-    bl fn_800F7FD8
+    bl vec3_normalize
     lfs f1, 0x2c(r1)
     bl fn_802A7964
     mr r5, r24
