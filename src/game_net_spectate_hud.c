@@ -43,7 +43,7 @@ extern u32 lbl_80887C78;
 void fn_805381A4(void);
 void fn_805381B0(void);
 void fn_805381BC(void);
-void spectate_getRootNode(void);
+void* spectate_getRootNode(void*);
 void fn_805381E0(void);
 void fn_805381F4(void);
 void fn_805382C0(void);
@@ -87,14 +87,16 @@ asm void fn_805381BC(void)
     blr
 }
 
-asm void spectate_getRootNode(void)
+struct SpectateNode {
+    u32 _00;
+    u32 _04;
+    struct SpectateNode* next;
+};
+
+void* spectate_getRootNode(void* obj)
 {
-    nofralloc
-    lwz r3, 0x8(r3)
-    lwz r3, 0x8(r3)
-    lwz r3, 0x8(r3)
-    lwz r3, 0x8(r3)
-    blr
+    struct SpectateNode* n = (struct SpectateNode*)obj;
+    return n->next->next->next->next;
 }
 
 asm void fn_805381E0(void)

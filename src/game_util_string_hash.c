@@ -33,7 +33,7 @@ void fn_8058FEC8(void);
 void fn_8058FED4(void);
 void fn_8058FEE8(void);
 void fn_8058FEF4(void);
-void hash_getHashValue(void);
+u32 hash_getHashValue(const void*);
 void fn_8058FF0C(void);
 void fn_8058FF1C(void);
 void fn_8059044C(void);
@@ -1316,11 +1316,9 @@ asm void fn_8058FEF4(void)
     blr
 }
 
-asm void hash_getHashValue(void)
+u32 hash_getHashValue(const void* obj)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(const u32*)obj;
 }
 
 asm void fn_8058FF0C(void)

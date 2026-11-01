@@ -63,7 +63,7 @@ void fn_80201E78(void);
 void fn_80201EFC(void);
 void fn_8020205C(void);
 void fn_802020B4(void);
-void profile_getMetricValue(void);
+void* profile_getMetricValue(void*);
 void fn_80202138(void);
 void fn_802021D0(void);
 void fn_80202260(void);
@@ -1335,18 +1335,13 @@ asm void fn_802020B4(void)
     blr
 }
 
-asm void profile_getMetricValue(void)
+void* profile_getMetricValue(void* obj)
 {
-    nofralloc
-    lwz r0, 0x104(r3)
-    srawi r0, r0, 24
-    cmpwi r0, 0x1
-    bne lbl_profile_getMetricValue_00001260
-    li r3, 0x0
-    blr
-lbl_profile_getMetricValue_00001260:
-    lwz r3, 0x48(r3)
-    blr
+    s32 r0 = (*(s32*)((char*)obj + 0x104)) >> 24;
+    if (r0 == 1) {
+        return 0;
+    }
+    return *(void**)((char*)obj + 0x48);
 }
 
 asm void fn_80202138(void)
