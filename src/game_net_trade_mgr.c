@@ -125,20 +125,20 @@ void fn_8052A66C(void);
 void fn_8052A88C(void);
 void fn_8052A8F0(void);
 void fn_8052ACAC(void);
-void fn_8052ACCC(void);
-void fn_8052ACD4(void);
+void fn_8052ACCC(void *p, f32 val);
+void fn_8052ACD4(void *p, u32 val);
 void fn_8052ACDC(void);
 void fn_8052AFAC(void);
-void fn_8052AFF4(void);
-void fn_8052B004(void);
+void fn_8052AFF4(void *p);
+void fn_8052B004(void *p);
 void fn_8052B014(void);
 void fn_8052B190(void);
-void fn_8052B7F4(void);
+void *fn_8052B7F4(void *p);
 void fn_8052B7FC(void);
 void fn_8052BBF0(void);
 void fn_8052BC94(void);
-void fn_8052BCE8(void);
-void fn_8052BCF8(void);
+void *fn_8052BCE8(void *p, u32 idx);
+u32 fn_8052BCF8(void *p);
 void fn_8052BD00(void);
 
 asm void fn_8052A66C(void)
@@ -579,18 +579,14 @@ asm void fn_8052ACAC(void)
     blr
 }
 
-asm void fn_8052ACCC(void)
+void fn_8052ACCC(void *p, f32 val)
 {
-    nofralloc
-    stfs f1, 0x54(r3)
-    blr
+    *(f32 *)((u8 *)p + 0x54) = val;
 }
 
-asm void fn_8052ACD4(void)
+void fn_8052ACD4(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0x48(r3)
-    blr
+    *(u32 *)((u8 *)p + 0x48) = val;
 }
 
 asm void fn_8052ACDC(void)
@@ -802,22 +798,15 @@ lbl_fn_8052AFAC_00000974:
     blr
 }
 
-asm void fn_8052AFF4(void)
+void fn_8052AFF4(void *p)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, 0x0(r3)
-    stw r0, 0x4(r3)
-    blr
+    *(u32 *)p = 0;
+    *(u32 *)((u8 *)p + 4) = 0;
 }
 
-asm void fn_8052B004(void)
+void fn_8052B004(void *p)
 {
-    nofralloc
-    lwz r0, 0x4(r3)
-    subf r0, r0, r0
-    stw r0, 0x4(r3)
-    blr
+    *(u32 *)((u8 *)p + 4) = 0;
 }
 
 asm void fn_8052B014(void)
@@ -1349,11 +1338,9 @@ lbl_fn_8052B190_00001170:
     blr
 }
 
-asm void fn_8052B7F4(void)
+void *fn_8052B7F4(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x3dc
-    blr
+    return (u8 *)p + 0x3dc;
 }
 
 asm void fn_8052B7FC(void)
@@ -1688,20 +1675,14 @@ lbl_fn_8052BC94_00001668:
     blr
 }
 
-asm void fn_8052BCE8(void)
+void *fn_8052BCE8(void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x64
-    lwz r3, 0x0(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)p + idx * 0x64;
 }
 
-asm void fn_8052BCF8(void)
+u32 fn_8052BCF8(void *p)
 {
-    nofralloc
-    lwz r3, 0x4(r3)
-    blr
+    return *(u32 *)((u8 *)p + 4);
 }
 
 asm void fn_8052BD00(void)

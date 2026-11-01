@@ -26,34 +26,27 @@ extern u32 lbl_8087F1E4;
 extern u32 lbl_808813D0;
 
 /* Function declarations */
-void fn_805193B8(void);
-void fn_805193C8(void);
+void *fn_805193B8(void *p, u32 idx);
+void fn_805193C8(void *dst, void *src);
 void fn_805193D4(void);
-void fn_805193E8(void);
-void fn_805193F4(void);
-void fn_80519404(void);
-void fn_8051940C(void);
+void fn_805193E8(void *dst, void *src);
+void fn_805193F4(void *p);
+u32 fn_80519404(void *p);
+void fn_8051940C(void *p);
 void fn_8051941C(void);
 void fn_8051994C(void);
 void fn_80519C6C(void);
 void fn_8051A19C(void);
 void fn_8051AD58(void);
 
-asm void fn_805193B8(void)
+void *fn_805193B8(void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0x18
-    lwz r3, 0x0(r3)
-    add r3, r3, r0
-    blr
+    return (u8 *)*(void **)p + idx * 0x18;
 }
 
-asm void fn_805193C8(void)
+void fn_805193C8(void *dst, void *src)
 {
-    nofralloc
-    lwz r0, 0x0(r4)
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)dst = *(u32 *)src;
 }
 
 asm void fn_805193D4(void)
@@ -66,37 +59,24 @@ asm void fn_805193D4(void)
     blr
 }
 
-asm void fn_805193E8(void)
+void fn_805193E8(void *dst, void *src)
 {
-    nofralloc
-    lwz r0, 0x0(r4)
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)dst = *(u32 *)src;
 }
 
-asm void fn_805193F4(void)
+void fn_805193F4(void *p)
 {
-    nofralloc
-    lwz r4, 0x0(r3)
-    addi r0, r4, 0x18
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p += 0x18;
 }
 
-asm void fn_80519404(void)
+u32 fn_80519404(void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(u32 *)p;
 }
 
-asm void fn_8051940C(void)
+void fn_8051940C(void *p)
 {
-    nofralloc
-    lwz r4, 0x0(r3)
-    subi r0, r4, 0x18
-    stw r0, 0x0(r3)
-    blr
+    *(u32 *)p -= 0x18;
 }
 
 asm void fn_8051941C(void)

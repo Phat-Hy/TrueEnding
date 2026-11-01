@@ -170,18 +170,18 @@ extern u32 lbl_808857E8;
 extern u32 lbl_808857EC;
 
 /* Function declarations */
-void fn_80372574(void);
+u32 fn_80372574(void *p);
 void fn_8037257C(void);
 void fn_80372754(void);
-void fn_803727D4(void);
+void *fn_803727D4(void *p);
 void fn_803727DC(void);
 void fn_803729B4(void);
-void fn_80373084(void);
-void fn_8037308C(void);
-void fn_80373094(void);
+void fn_80373084(void *p, u32 val);
+void *fn_8037308C(void *p);
+void *fn_80373094(void *p);
 void fn_8037309C(void);
-void fn_80373100(void);
-void fn_80373108(void);
+void *fn_80373100(void *p);
+void *fn_80373108(void *p, u32 idx);
 void fn_80373118(void);
 void kpad_getClampData(void);
 void fn_80373164(void);
@@ -189,11 +189,9 @@ void fn_803731E8(void);
 void fn_803737C0(void);
 void fn_80373AE8(void);
 
-asm void fn_80372574(void)
+u32 fn_80372574(void *p)
 {
-    nofralloc
-    lwz r3, 0x0(r3)
-    blr
+    return *(u32 *)p;
 }
 
 asm void fn_8037257C(void)
@@ -359,11 +357,9 @@ asm void fn_80372754(void)
     blr
 }
 
-asm void fn_803727D4(void)
+void *fn_803727D4(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x540
-    blr
+    return (u8 *)p + 0x540;
 }
 
 asm void fn_803727DC(void)
@@ -960,25 +956,19 @@ lbl_fn_803729B4_00000AD8:
     blr
 }
 
-asm void fn_80373084(void)
+void fn_80373084(void *p, u32 val)
 {
-    nofralloc
-    stw r4, 0xe8(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xe8) = val;
 }
 
-asm void fn_8037308C(void)
+void *fn_8037308C(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x2b80
-    blr
+    return (u8 *)p + 0x2b80;
 }
 
-asm void fn_80373094(void)
+void *fn_80373094(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x10d8
-    blr
+    return (u8 *)p + 0x10d8;
 }
 
 asm void fn_8037309C(void)
@@ -1011,20 +1001,14 @@ asm void fn_8037309C(void)
     blr
 }
 
-asm void fn_80373100(void)
+void *fn_80373100(void *p)
 {
-    nofralloc
-    addi r3, r3, 0x324
-    blr
+    return (u8 *)p + 0x324;
 }
 
-asm void fn_80373108(void)
+void *fn_80373108(void *p, u32 idx)
 {
-    nofralloc
-    mulli r0, r4, 0xd5c
-    add r3, r3, r0
-    addi r3, r3, 0x4
-    blr
+    return (u8 *)p + idx * 0xd5c + 4;
 }
 
 asm void fn_80373118(void)

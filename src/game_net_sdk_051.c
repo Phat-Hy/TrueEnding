@@ -51,12 +51,12 @@ extern u32 lbl_80889090;
 void pad_03_807096F4_text(void);
 void fn_80709700(void);
 void fn_807097C0(void);
-void fn_807097D0(void);
-void fn_807097E0(void);
-void fn_807097F0(void);
+void fn_807097D0(void *p, u32 idx, f32 val);
+f32 fn_807097E0(void *p, u32 idx);
+void fn_807097F0(void *p, u8 a, f32 val);
 void fn_80709800(void *p, u8 val);
-void fn_80709810(void);
-void fn_80709820(void);
+void fn_80709810(void *p, u32 idx, f32 val);
+f32 fn_80709820(void *p, u32 idx);
 void fn_80709830(void);
 void fn_80709870(void);
 void fn_80709950(void);
@@ -85,10 +85,10 @@ void fn_8070AC90(void);
 void fn_8070ACB0(void);
 void fn_8070AD40(void *p, f32 val);
 void fn_8070AD50(void *p, f32 val);
-void fn_8070AD60(void);
+void fn_8070AD60(void *p, u8 a, f32 val);
 void fn_8070AD70(void *p, u32 val);
-void fn_8070AD80(void);
-void fn_8070AD90(void);
+void fn_8070AD80(void *p);
+void fn_8070AD90(void *p, u32 idx, f32 val);
 void fn_8070ADA0(void);
 void fn_8070ADE0(void);
 void fn_8070AE20(void);
@@ -187,30 +187,20 @@ asm void fn_807097C0(void)
     b fn_80709630
 }
 
-asm void fn_807097D0(void)
+void fn_807097D0(void *p, u32 idx, f32 val)
 {
-    nofralloc
-    slwi r0, r4, 2
-    add r3, r3, r0
-    stfs f1, 0x34(r3)
-    blr
+    *(f32 *)((u8 *)p + (idx << 2) + 0x34) = val;
 }
 
-asm void fn_807097E0(void)
+f32 fn_807097E0(void *p, u32 idx)
 {
-    nofralloc
-    slwi r0, r4, 2
-    add r3, r3, r0
-    lfs f1, 0x34(r3)
-    blr
+    return *(f32 *)((u8 *)p + (idx << 2) + 0x34);
 }
 
-asm void fn_807097F0(void)
+void fn_807097F0(void *p, u8 a, f32 val)
 {
-    nofralloc
-    stb r4, 0x1c(r3)
-    stfs f1, 0x18(r3)
-    blr
+    *(u8 *)((u8 *)p + 0x1c) = a;
+    *(f32 *)((u8 *)p + 0x18) = val;
 }
 
 void fn_80709800(void *p, u8 val)
@@ -218,22 +208,14 @@ void fn_80709800(void *p, u8 val)
     *(u8 *)((u8 *)p + 0x1d) = val;
 }
 
-asm void fn_80709810(void)
+void fn_80709810(void *p, u32 idx, f32 val)
 {
-    nofralloc
-    slwi r0, r4, 2
-    add r3, r3, r0
-    stfs f1, 0x40(r3)
-    blr
+    *(f32 *)((u8 *)p + (idx << 2) + 0x40) = val;
 }
 
-asm void fn_80709820(void)
+f32 fn_80709820(void *p, u32 idx)
 {
-    nofralloc
-    slwi r0, r4, 2
-    add r3, r3, r0
-    lfs f1, 0x40(r3)
-    blr
+    return *(f32 *)((u8 *)p + (idx << 2) + 0x40);
 }
 
 asm void fn_80709830(void)
@@ -1739,12 +1721,10 @@ void fn_8070AD50(void *p, f32 val)
     *(f32 *)((u8 *)p + 0xc0) = val;
 }
 
-asm void fn_8070AD60(void)
+void fn_8070AD60(void *p, u8 a, f32 val)
 {
-    nofralloc
-    stb r4, 0x9a(r3)
-    stfs f1, 0xc4(r3)
-    blr
+    *(u8 *)((u8 *)p + 0x9a) = a;
+    *(f32 *)((u8 *)p + 0xc4) = val;
 }
 
 void fn_8070AD70(void *p, u32 val)
@@ -1752,22 +1732,14 @@ void fn_8070AD70(void *p, u32 val)
     *(u32 *)((u8 *)p + 0xc8) = val;
 }
 
-asm void fn_8070AD80(void)
+void fn_8070AD80(void *p)
 {
-    nofralloc
-    lwz r4, 0x10(r3)
-    lwz r0, 0x34(r4)
-    stw r0, 0xc8(r3)
-    blr
+    *(u32 *)((u8 *)p + 0xc8) = *(u32 *)(*(u8 **)((u8 *)p + 0x10) + 0x34);
 }
 
-asm void fn_8070AD90(void)
+void fn_8070AD90(void *p, u32 idx, f32 val)
 {
-    nofralloc
-    slwi r0, r4, 2
-    add r3, r3, r0
-    stfs f1, 0xd4(r3)
-    blr
+    *(f32 *)((u8 *)p + (idx << 2) + 0xd4) = val;
 }
 
 asm void fn_8070ADA0(void)

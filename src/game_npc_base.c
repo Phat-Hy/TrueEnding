@@ -119,7 +119,7 @@ void fn_8013A19C(void *p, u32 val);
 void fn_8013A1A8(void);
 u32 fn_8013A214(void *p);
 void fn_8013A21C(void);
-void fn_8013A248(void);
+u32 fn_8013A248(void *p);
 void npc_initScriptContext(void);
 
 asm void npc_updateDialogueTarget(void)
@@ -1129,13 +1129,9 @@ asm void fn_8013A21C(void)
     blr
 }
 
-asm void fn_8013A248(void)
+u32 fn_8013A248(void *p)
 {
-    nofralloc
-    lwz r0, 0x0(r3)
-    cntlzw r0, r0
-    srwi r3, r0, 5
-    blr
+    return *(u32 *)p == 0;
 }
 
 asm void npc_initScriptContext(void)
