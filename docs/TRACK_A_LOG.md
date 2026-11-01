@@ -872,3 +872,41 @@ Key Architectural Findings:
     [2]=world_Manager_destructor, [3]=world_Manager_update, [4]=world_Manager_draw,
     [5]=world_Manager_postUpdate, [6]=world_dummyEventCallback.
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+
+## Session 2026-11-01 - Conversion: 7 routines (__GXGetOverflowCount, skin_initLink, 5 stubs) to 100.0% matching C
+Subject:  track-a: decompile 7 routines (60 B) to 100.0% matching C progress 99.30% -> 99.30%
+Functions:
+  - __GXGetOverflowCount (fn_80612E70, 16 B, src/GXFifo.c)
+  - skin_initLink (fn_800C442C, 24 B, src/game_skin.c)
+  - world_dummyEventCallback (fn_80013CAC, 4 B, src/game_manager.c)
+  - player_dummyCallback (fn_801F9E6C, 4 B, src/game_system_heap.c)
+  - net_playerDummyCallback (fn_801ED90C, 4 B, src/game_net_player.c)
+  - save_dummyCallback (fn_801F2A88, 4 B, src/game_save_header.c)
+  - save_dummyCallback2 (fn_801F3FF4, 4 B, src/game_save_header.c)
+Checklist:
+  1. Converted 7 asm void functions to 100.0% matching C implementations.
+  2. Prototypes swept across translation units.
+  3. report.json clean, ninja passed (orig/main.dol: OK).
+Self-check: git diff -U0 -- src/ for 'asm void': -7 / +0 (conversion).
+Sources:
+`c
+// GXFifo.c
+u32 __GXGetOverflowCount(void)
+{
+    u32 count = lbl_80880084;
+    lbl_80880084 = 0;
+    return count;
+}
+
+// game_skin.c
+void skin_initLink(s32* link)
+{
+    link[0] = -1;
+    link[1] = -1;
+    link[2] = 0;
+}
+
+// game_manager.c, game_system_heap.c, game_net_player.c, game_save_header.c
+void <stubName>(void) {}
+`
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.

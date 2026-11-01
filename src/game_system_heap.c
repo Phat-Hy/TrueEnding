@@ -1089,10 +1089,8 @@ lbl_fn_801F9860_00000E68:
     blr
 }
 
-asm void player_dummyCallback(void)
+void player_dummyCallback(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_801F9E70(void)

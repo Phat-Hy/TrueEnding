@@ -52,10 +52,8 @@ void fn_801EEF04(void);
 void fn_801EEF74(void);
 void fn_801EF15C(void);
 
-asm void net_playerDummyCallback(void)
+void net_playerDummyCallback(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_801ED910(void)

@@ -139,7 +139,7 @@ void fn_800C3FF0(void);
 void fn_800C411C(void);
 void fn_800C41B4(void);
 void atn_Skin_init(void);
-void skin_initLink(void);
+void skin_initLink(s32* link);
 void fn_800C4444(void);
 void fn_800C4894(void);
 void fn_800C49F0(void);
@@ -1640,15 +1640,11 @@ lbl_atn_Skin_init_00001374:
     blr
 }
 
-asm void skin_initLink(void)
+void skin_initLink(s32* link)
 {
-    nofralloc
-    li r4, -0x1
-    li r0, 0x0
-    stw r4, 0x0(r3)
-    stw r4, 0x4(r3)
-    stw r0, 0x8(r3)
-    blr
+    link[0] = -1;
+    link[1] = -1;
+    link[2] = 0;
 }
 
 asm void fn_800C4444(void)

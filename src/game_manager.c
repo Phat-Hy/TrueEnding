@@ -4539,10 +4539,8 @@ lbl_fn_80013558_00003B68:
     blr
 }
 
-asm void world_dummyEventCallback(void)
+void world_dummyEventCallback(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_80013CB0(void)

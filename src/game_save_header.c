@@ -329,10 +329,8 @@ lbl_fn_801F275C_0000030C:
     blr
 }
 
-asm void save_dummyCallback(void)
+void save_dummyCallback(void)
 {
-    nofralloc
-    blr
 }
 
 asm void save_updateHeader(void)
@@ -1911,10 +1909,8 @@ lbl_fn_801F3F74_0000187C:
     blr
 }
 
-asm void save_dummyCallback2(void)
+void save_dummyCallback2(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_801F3FF8(void)

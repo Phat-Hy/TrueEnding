@@ -48,7 +48,7 @@ extern void GXGetFifoStatus(void);
 extern void GXGetFifoCount(void);
 extern void fn_80612B10(void);
 extern void fn_80612B60(void);
-extern void __GXGetOverflowCount(void);
+extern u32 __GXGetOverflowCount(void);
 extern void GXInvalidateVtxCache(void);
 extern void GXFlush(void);
 extern void GXSetDrawSync(void);
