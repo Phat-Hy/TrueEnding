@@ -7,10 +7,10 @@ the rules. This file is the work order.
 
 
 > [!NOTE]
-> **Track A Status as of Batch 50 / Commit b89b55**:
-> - Completed all 222 pure lr stubs to 100.0% matching C.
-> - Decompiled **131 accessors, getters, setters, math helpers (ec3_scale, mtx_multVec, ec3_initValues), and SDK hooks** to 100.0% matching C.
-> - Batches 1 through 50 completed and pushed (500+ high-yield symbols named across all major engine systems).
+> **Track A Status as of Batch 60 / Commit 29dde5f0**:
+> - Completed all 222 pure blr stubs to 100.0% matching C.
+> - Decompiled **479 accessors, getters, setters, math helpers, and SDK routines** across all engine subsystems to 100.0% matching C.
+> - Batches 1 through 60 completed and pushed (600+ high-yield symbols named across all major engine systems, including GXBegin, GXSetTevDirect, GXSetTevIndTile, ec3_normalize, ec3_sqMag, ec3_addAssign, nemy_stepBehavior).
 > - Byte-for-byte bit-identical match maintained on all commits (orig/main.dol: OK).
 
 ## 0. Where things stand (measured, do not re-derive)
