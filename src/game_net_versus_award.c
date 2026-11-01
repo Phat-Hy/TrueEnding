@@ -44,7 +44,7 @@ extern void rand(void);
 extern void wcscmp(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 extern int sprintf(char* str, const char* format, ...);
 
 /* External data declarations */
@@ -278,7 +278,7 @@ lbl_fn_804C0F88_00000248:
     li r0, 0x0
     b lbl_fn_804C0F88_0000028C
 lbl_fn_804C0F88_0000027C:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804C0F88_0000028C
 lbl_fn_804C0F88_00000288:
@@ -776,7 +776,7 @@ asm void fn_804C18A8(void)
     li r0, 0x0
     b lbl_fn_804C18A8_00000998
 lbl_fn_804C18A8_00000988:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804C18A8_00000998
 lbl_fn_804C18A8_00000994:
@@ -1842,7 +1842,7 @@ lbl_fn_804C23E4_0000183C:
     li r0, 0x0
     b lbl_fn_804C23E4_00001874
 lbl_fn_804C23E4_00001864:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804C23E4_00001874
 lbl_fn_804C23E4_00001870:

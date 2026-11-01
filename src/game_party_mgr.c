@@ -65,14 +65,14 @@ extern u32 lbl_80881B24;
 extern u32 lbl_80881B28;
 
 /* Function declarations */
-void fn_8015E4B0(void);
+void party_initFormationSlots(void);
 void party_configureMemberSlot(void);
 void fn_8015EB2C(void);
 void fn_8015ECC4(void);
 void fn_8015EFAC(void);
 void fn_8015F568(void);
 
-asm void fn_8015E4B0(void)
+asm void party_initFormationSlots(void)
 {
     nofralloc
     stwu r1, -0x70(r1)
@@ -94,19 +94,19 @@ asm void fn_8015E4B0(void)
     bl mem_alloc
     cmpwi r3, 0x0
     mr r30, r3
-    beq lbl_fn_8015E4B0_00000064
+    beq lbl_party_initFormationSlots_00000064
     mr r4, r29
     mr r5, r27
     mr r6, r28
     bl fn_801AC434
     mr r30, r3
-lbl_fn_8015E4B0_00000064:
+lbl_party_initFormationSlots_00000064:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_8015E4B0_000000F4
+    bne lbl_party_initFormationSlots_000000F4
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_8015E4B0_0000009C
+    bne lbl_party_initFormationSlots_0000009C
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x2c(r1)
@@ -114,8 +114,8 @@ lbl_fn_8015E4B0_00000064:
     lwz r0, 0x8(r5)
     stw r3, 0x30(r1)
     stw r0, 0x34(r1)
-    b lbl_fn_8015E4B0_000000B8
-lbl_fn_8015E4B0_0000009C:
+    b lbl_party_initFormationSlots_000000B8
+lbl_party_initFormationSlots_0000009C:
     addi r3, r31, 0xf00
     lwz r5, 0xf00(r31)
     lwz r4, 0x4(r3)
@@ -123,7 +123,7 @@ lbl_fn_8015E4B0_0000009C:
     stw r5, 0x2c(r1)
     stw r4, 0x30(r1)
     stw r0, 0x34(r1)
-lbl_fn_8015E4B0_000000B8:
+lbl_party_initFormationSlots_000000B8:
     lwz r5, 0x2c(r1)
     addi r3, r1, 0x8
     lwz r4, 0x30(r1)
@@ -133,26 +133,26 @@ lbl_fn_8015E4B0_000000B8:
     stw r0, 0x10(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8015E4B0_000000F4
+    beq lbl_party_initFormationSlots_000000F4
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E4B0_000000F4:
+lbl_party_initFormationSlots_000000F4:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    beq lbl_fn_8015E4B0_000002A8
+    beq lbl_party_initFormationSlots_000002A8
     cmpwi r0, 0x8
-    beq lbl_fn_8015E4B0_0000010C
+    beq lbl_party_initFormationSlots_0000010C
     stw r0, 0x564(r29)
-lbl_fn_8015E4B0_0000010C:
+lbl_party_initFormationSlots_0000010C:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_8015E4B0_000002A8
+    bne lbl_party_initFormationSlots_000002A8
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_8015E4B0_00000144
+    bne lbl_party_initFormationSlots_00000144
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x38(r1)
@@ -160,8 +160,8 @@ lbl_fn_8015E4B0_0000010C:
     lwz r0, 0x8(r5)
     stw r3, 0x3c(r1)
     stw r0, 0x40(r1)
-    b lbl_fn_8015E4B0_00000160
-lbl_fn_8015E4B0_00000144:
+    b lbl_party_initFormationSlots_00000160
+lbl_party_initFormationSlots_00000144:
     addi r3, r31, 0xf0c
     lwz r5, 0xf0c(r31)
     lwz r4, 0x4(r3)
@@ -169,7 +169,7 @@ lbl_fn_8015E4B0_00000144:
     stw r5, 0x38(r1)
     stw r4, 0x3c(r1)
     stw r0, 0x40(r1)
-lbl_fn_8015E4B0_00000160:
+lbl_party_initFormationSlots_00000160:
     lwz r5, 0x38(r1)
     addi r3, r1, 0x20
     lwz r4, 0x3c(r1)
@@ -179,26 +179,26 @@ lbl_fn_8015E4B0_00000160:
     stw r0, 0x28(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8015E4B0_0000019C
+    beq lbl_party_initFormationSlots_0000019C
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E4B0_0000019C:
+lbl_party_initFormationSlots_0000019C:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    beq lbl_fn_8015E4B0_00000278
+    beq lbl_party_initFormationSlots_00000278
     cmpwi r0, 0x8
-    beq lbl_fn_8015E4B0_000001B4
+    beq lbl_party_initFormationSlots_000001B4
     stw r0, 0x564(r29)
-lbl_fn_8015E4B0_000001B4:
+lbl_party_initFormationSlots_000001B4:
     lwz r0, 0x55c(r29)
     cmpwi r0, 0x6
-    bne lbl_fn_8015E4B0_00000278
+    bne lbl_party_initFormationSlots_00000278
     lwz r0, 0xf80(r29)
     cmpwi r0, 0x0
-    bne lbl_fn_8015E4B0_000001EC
+    bne lbl_party_initFormationSlots_000001EC
     lis r5, lbl_80766768@ha
     lwzu r4, lbl_80766768@l(r5)
     stw r4, 0x44(r1)
@@ -206,8 +206,8 @@ lbl_fn_8015E4B0_000001B4:
     lwz r0, 0x8(r5)
     stw r3, 0x48(r1)
     stw r0, 0x4c(r1)
-    b lbl_fn_8015E4B0_00000208
-lbl_fn_8015E4B0_000001EC:
+    b lbl_party_initFormationSlots_00000208
+lbl_party_initFormationSlots_000001EC:
     addi r3, r31, 0xf18
     lwz r5, 0xf18(r31)
     lwz r4, 0x4(r3)
@@ -215,7 +215,7 @@ lbl_fn_8015E4B0_000001EC:
     stw r5, 0x44(r1)
     stw r4, 0x48(r1)
     stw r0, 0x4c(r1)
-lbl_fn_8015E4B0_00000208:
+lbl_party_initFormationSlots_00000208:
     lwz r5, 0x44(r1)
     addi r3, r1, 0x14
     lwz r4, 0x48(r1)
@@ -225,13 +225,13 @@ lbl_fn_8015E4B0_00000208:
     stw r0, 0x1c(r1)
     bl vec3_isNonZero
     cmpwi r3, 0x0
-    beq lbl_fn_8015E4B0_00000244
+    beq lbl_party_initFormationSlots_00000244
     lwz r3, 0xf80(r29)
     lwz r12, 0x0(r3)
     lwz r12, 0x1c(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E4B0_00000244:
+lbl_party_initFormationSlots_00000244:
     mr r3, r29
     li r4, 0x6
     bl actor_setState
@@ -239,38 +239,38 @@ lbl_fn_8015E4B0_00000244:
     li r0, 0x0
     cmpwi r3, 0x0
     stw r0, 0xf80(r29)
-    beq lbl_fn_8015E4B0_00000278
+    beq lbl_party_initFormationSlots_00000278
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E4B0_00000278:
+lbl_party_initFormationSlots_00000278:
     lwz r3, 0xf80(r29)
     li r4, 0x6
     li r0, 0x0
     stw r4, 0x55c(r29)
     cmpwi r3, 0x0
     stw r0, 0xf80(r29)
-    beq lbl_fn_8015E4B0_000002A8
+    beq lbl_party_initFormationSlots_000002A8
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E4B0_000002A8:
+lbl_party_initFormationSlots_000002A8:
     lwz r3, 0xf80(r29)
     li r0, 0x6
     stw r0, 0x55c(r29)
     cmpwi r3, 0x0
     stw r30, 0xf80(r29)
-    beq lbl_fn_8015E4B0_000002D4
+    beq lbl_party_initFormationSlots_000002D4
     lwz r12, 0x0(r3)
     li r4, 0x1
     lwz r12, 0x8(r12)
     mtctr r12
     bctrl
-lbl_fn_8015E4B0_000002D4:
+lbl_party_initFormationSlots_000002D4:
     li r0, 0x0
     stw r0, 0x638(r29)
     lmw r27, 0x5c(r1)

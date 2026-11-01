@@ -19,7 +19,7 @@ extern void time_wrapMilliseconds(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
 extern void event_findEntryById(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void fn_8044441C(void);
 extern void fn_8044D0DC(void);
 extern void printf(void);
@@ -1739,7 +1739,7 @@ lbl_fn_801DC42C_000016AC:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_804439FC
+    bl gmk_registerSlot
 lbl_fn_801DC42C_000016F0:
     cmpwi r23, 0x0
     bne lbl_fn_801DC42C_0000173C
@@ -1759,7 +1759,7 @@ lbl_fn_801DC42C_000016F0:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_804439FC
+    bl gmk_registerSlot
 lbl_fn_801DC42C_0000173C:
     slwi r29, r26, 2
     lwz r3, lbl_8087F4F0

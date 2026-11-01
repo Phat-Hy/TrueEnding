@@ -6,7 +6,7 @@ extern void _restgpr_14(void);
 extern void _savegpr_14(void);
 extern void wcs_vformat(void);
 extern void assert_formatLocation(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_8058ECD8(void);
 extern void fn_8058ECF0(void);
@@ -56,10 +56,10 @@ asm void fn_80590AAC(void)
     mr r29, r4
     lwz r3, 0x0(r16)
     mr r30, r5
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r14, r3
     lwz r3, 0x0(r15)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r14, 0x0
     beq lbl_fn_80590AAC_00000054
     cmpwi r3, 0x0
@@ -128,10 +128,10 @@ lbl_fn_80590AAC_0000011C:
     lwz r15, 0x0(r30)
     srwi r31, r0, 5
     lwz r3, 0x0(r16)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r14, r3
     lwz r3, 0x0(r15)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r14, 0x0
     beq lbl_fn_80590AAC_00000158
     cmpwi r3, 0x0
@@ -321,10 +321,10 @@ lbl_fn_80590AAC_00000404:
     lwz r16, 0x0(r29)
     lwz r15, 0x0(r28)
     lwz r3, 0x0(r16)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r14, r3
     lwz r3, 0x0(r15)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r14, 0x0
     beq lbl_fn_80590AAC_00000438
     cmpwi r3, 0x0
@@ -764,10 +764,10 @@ lbl_fn_80591508_00000A9C:
     b lbl_fn_80591508_00000BB4
 lbl_fn_80591508_00000AB4:
     lwz r3, 0x0(r15)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r16, r3
     lwz r3, 0x0(r31)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r16, 0x0
     beq lbl_fn_80591508_00000AE0
     cmpwi r3, 0x0

@@ -15,7 +15,7 @@ extern void fn_8050DE38(void);
 extern void net_p2p_readPayload(void);
 extern void net_getSocket(void);
 extern void net_getMyAid(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 
 /* External data declarations */
 extern u8 lbl_807C8AE8[];
@@ -561,7 +561,7 @@ lbl_fn_804D8614_000006A8:
     li r0, 0x0
     b lbl_fn_804D8614_000006E0
 lbl_fn_804D8614_000006D0:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804D8614_000006E0
 lbl_fn_804D8614_000006DC:
@@ -638,7 +638,7 @@ lbl_fn_804D87B4_000007A0:
     li r0, 0x0
     b lbl_fn_804D87B4_000007D8
 lbl_fn_804D87B4_000007C8:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804D87B4_000007D8
 lbl_fn_804D87B4_000007D4:
@@ -1787,7 +1787,7 @@ lbl_fn_804D97F4_000017E0:
     li r0, 0x0
     b lbl_fn_804D97F4_00001818
 lbl_fn_804D97F4_00001808:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804D97F4_00001818
 lbl_fn_804D97F4_00001814:
@@ -1816,7 +1816,7 @@ lbl_fn_804D97F4_00001844:
     li r30, 0x0
     b lbl_fn_804D97F4_0000187C
 lbl_fn_804D97F4_0000186C:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r30, r3, 24
     b lbl_fn_804D97F4_0000187C
 lbl_fn_804D97F4_00001878:
@@ -1839,7 +1839,7 @@ lbl_fn_804D97F4_0000187C:
     li r30, 0x0
     b lbl_fn_804D97F4_000018CC
 lbl_fn_804D97F4_000018BC:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r30, r3, 24
     b lbl_fn_804D97F4_000018CC
 lbl_fn_804D97F4_000018C8:
@@ -1952,7 +1952,7 @@ lbl_fn_804D9970_000019FC:
     li r0, 0x0
     b lbl_fn_804D9970_00001A34
 lbl_fn_804D9970_00001A24:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804D9970_00001A34
 lbl_fn_804D9970_00001A30:

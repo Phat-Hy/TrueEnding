@@ -29,7 +29,7 @@ extern void fn_801F8598(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
 extern void event_findEntryById(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void fn_8044441C(void);
 extern void gmk_findSlotByIndex(void);
 extern void fn_80444BE8(void);
@@ -493,7 +493,7 @@ lbl_fn_80588008_00000500:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     li r30, 0x0
 lbl_fn_80588008_00000538:
     lwz r4, 0x4(r29)

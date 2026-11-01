@@ -37,7 +37,7 @@ extern void save_findEntryByName(void);
 extern void fn_801F8598(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void fn_80206D18(void);
@@ -45,7 +45,7 @@ extern void mem_findBlockById(void);
 extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_80217D9C(void);
 extern void task_getWorkerByIndex(void);
@@ -1065,7 +1065,7 @@ lbl_fn_805866F8_00000C9C:
     rlwinm r0, r0, 30, 2, 28
     add r4, r28, r0
     lwz r4, 0x20(r4)
-    bl fn_80206B14
+    bl sys_findModuleById
     mr r29, r3
     mr r25, r31
     li r24, 0x1
@@ -1150,7 +1150,7 @@ lbl_fn_805866F8_00000E40:
     addi r3, r26, 0x58
     bl thread_findAndNotify
     mr r3, r21
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     lfs f31, lbl_808880F0
     cmpwi r3, 0x0
     fmr f30, f31

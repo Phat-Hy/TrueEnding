@@ -22,7 +22,7 @@ extern void net_getSocket(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
 extern void net_getMyAid(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 
 /* External data declarations */
 extern u8 lbl_80759E48[];
@@ -583,7 +583,7 @@ asm void fn_804D622C(void)
     li r3, 0x0
     b lbl_fn_804D622C_00000364
 lbl_fn_804D622C_00000354:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r3, r3, 24
     b lbl_fn_804D622C_00000364
 lbl_fn_804D622C_00000360:
@@ -613,7 +613,7 @@ asm void fn_804D627C(void)
     li r0, 0x0
     b lbl_fn_804D627C_000003BC
 lbl_fn_804D627C_000003AC:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804D627C_000003BC
 lbl_fn_804D627C_000003B8:

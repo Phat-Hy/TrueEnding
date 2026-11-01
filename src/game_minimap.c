@@ -5,7 +5,7 @@
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void fn_8004FF58(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void magic_castSpellCircle(void);
 extern void boss_recordDamage(void);
 extern void fn_8006FEBC(void);
@@ -887,7 +887,7 @@ lbl_minimap_renderOverlay_00000B38:
     stfs f7, 0x30(r1)
     stfs f0, 0x34(r1)
     lfs f1, 0x98(r31)
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_minimap_renderOverlay_00000B80:
     addi r28, r28, 0x4
     addi r27, r27, 0x1

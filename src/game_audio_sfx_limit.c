@@ -16,7 +16,7 @@ extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void boss_initActionStream(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
@@ -31,7 +31,7 @@ extern void atn_Model_findBoneIndex(void);
 extern void compass_findMarkerByName(void);
 extern void fn_80094D88(void);
 extern void str_parseInt(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
@@ -969,7 +969,7 @@ asm void fn_803161F8(void)
     addi r3, r31, 0x14b0
     addi r4, r4, lbl_80788760@l
     stw r4, 0x0(r31)
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     lfs f1, lbl_80884D60
     li r30, 0x0
     li r4, 0x1
@@ -1131,7 +1131,7 @@ lbl_fn_803161F8_00000E54:
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r30, r3
     addi r3, r1, 0x38
     li r4, -0x1

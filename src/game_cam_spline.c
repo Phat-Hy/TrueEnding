@@ -37,7 +37,7 @@ extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803E5E64(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void fn_80444020(void);
 extern void fn_80444CF8(void);
 extern void atn_LoadHandle_destructor(void);
@@ -2052,7 +2052,7 @@ lbl_fn_800F0D14_00001AA8:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     addi r3, r1, 0x40
     li r4, 0x0
     li r5, 0x80

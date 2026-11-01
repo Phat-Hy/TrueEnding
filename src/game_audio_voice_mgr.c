@@ -5,7 +5,7 @@
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void collision_testLineSegment(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -2182,7 +2182,7 @@ lbl_fn_80301DDC_00001E94:
     lfs f1, lbl_80884A74
     or r6, r6, r0
     stfs f10, 0x98(r1)
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f8, lbl_80884A5C
     stfs f8, 0x60(r1)
     fcmpo cr0, f8, f8
@@ -2294,7 +2294,7 @@ lbl_fn_80301DDC_00002018:
     lfs f1, lbl_80884A74
     or r6, r6, r0
     stfs f10, 0x78(r1)
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_fn_80301DDC_00002074:
     lwz r0, 0x5e4(r1)
     psq_l f31, 0x5d8(r1), 0, 0

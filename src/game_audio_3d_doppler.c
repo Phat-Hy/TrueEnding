@@ -39,7 +39,7 @@ extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015B238(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void fn_8016D454(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
@@ -945,7 +945,7 @@ lbl_fn_80323E50_00000A8C:
     mr r3, r30
     addi r4, r30, 0x6b8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_80323E50_00000AB4:
     lwz r3, 0x8(r31)
     lwz r0, 0x90(r3)

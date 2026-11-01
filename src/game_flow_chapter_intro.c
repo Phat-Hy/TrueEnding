@@ -35,7 +35,7 @@ extern void fn_803BD2B0(void);
 extern void fn_803BD49C(void);
 extern void fn_803E9608(void);
 extern void fn_803EBA54(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void net_getPacketManager(void);
 extern void fn_804B6204(void);
 extern void fn_804B671C(void);
@@ -1692,7 +1692,7 @@ lbl_fn_804E4EB4_000014F4:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     lwz r3, lbl_8087F4F0
     li r4, 0x70
     li r5, 0x63
@@ -1701,7 +1701,7 @@ lbl_fn_804E4EB4_000014F4:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     lwz r3, lbl_8087F610
     lwz r0, 0x50c(r3)
     cmpwi r0, 0x0

@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void collision_queryGeometry(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void system_getNextSequenceId(void);
@@ -109,7 +109,7 @@ asm void fn_802E9D38(void)
     stfs f1, 0xf8(r3)
     stfs f0, 0xfc(r3)
     addi r3, r3, 0xb0
-    bl fn_8009373C
+    bl target_findEntryByName
     b lbl_fn_802E9D38_00000098
 lbl_fn_802E9D38_0000005C:
     lfs f0, lbl_808847AC
@@ -126,7 +126,7 @@ lbl_fn_802E9D38_0000005C:
     stfs f0, 0xf8(r3)
     stfs f0, 0xfc(r3)
     addi r3, r3, 0xb0
-    bl fn_8009373C
+    bl target_findEntryByName
 lbl_fn_802E9D38_00000098:
     mr r3, r31
     bl dialog_renderWindow

@@ -19,7 +19,7 @@ extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void skill_calculateDamage(void);
 extern void fn_800629F0(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void magic_castSpellCircle(void);
 extern void fn_8006AC08(void);
 extern void mem_alloc(void);
@@ -467,7 +467,7 @@ lbl_fn_8036205C_00000428:
     beq lbl_fn_8036205C_000004B4
     li r6, -0x80
 lbl_fn_8036205C_000004B4:
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f3, 0x38(r1)
     addi r3, r1, 0x8
     lfs f0, 0x44(r1)

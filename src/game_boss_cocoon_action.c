@@ -23,7 +23,7 @@ extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
 extern void skill_calcTrajectory(void);
 extern void boss_initActionStream(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void script_executeOpcode(void);
 extern void mem_getAllocSize(void);
 extern void route_createSegment(void);
@@ -38,7 +38,7 @@ extern void atn_Anim_applyLayerTransform(void);
 extern void motion_updateFogAdj(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
@@ -462,7 +462,7 @@ asm void fn_80452710(void)
     addi r3, r28, 0x14b0
     addi r4, r4, lbl_8078F500@l
     stw r4, 0x0(r28)
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     li r31, 0x0
     stw r31, 0x14b8(r28)
     addi r3, r28, 0x14e0
@@ -530,7 +530,7 @@ lbl_fn_80452710_000004CC:
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r31, r3
     addi r3, r1, 0x38
     li r4, -0x1
@@ -1028,7 +1028,7 @@ asm void fn_80452F14(void)
     addi r3, r31, 0x14b0
     addi r4, r4, lbl_8078F630@l
     stw r4, 0x0(r31)
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     lfs f2, lbl_80886B78
     li r29, 0x0
     lfs f1, lbl_80886B7C
@@ -1200,7 +1200,7 @@ lbl_fn_80452F14_00000E68:
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r29, r3
     addi r3, r1, 0x38
     li r4, -0x1

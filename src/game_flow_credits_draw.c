@@ -32,7 +32,7 @@ extern void fn_8054D798(void);
 extern void rand(void);
 extern void net_getSocket(void);
 extern void net_getMyAid(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 
 /* External data declarations */
 extern u8 jumptable_807912B0[];
@@ -2009,7 +2009,7 @@ lbl_fn_804EB938_00001A78:
     li r0, 0x0
     b lbl_fn_804EB938_00001AB0
 lbl_fn_804EB938_00001AA0:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00001AB0
 lbl_fn_804EB938_00001AAC:
@@ -2096,7 +2096,7 @@ lbl_fn_804EB938_00001B90:
     li r4, 0x0
     b lbl_fn_804EB938_00001BD8
 lbl_fn_804EB938_00001BC8:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r4, r3, 24
     b lbl_fn_804EB938_00001BD8
 lbl_fn_804EB938_00001BD4:
@@ -2158,7 +2158,7 @@ lbl_fn_804EB938_00001C50:
     li r23, 0x0
     b lbl_fn_804EB938_00001CB0
 lbl_fn_804EB938_00001CA0:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r23, r3, 24
     b lbl_fn_804EB938_00001CB0
 lbl_fn_804EB938_00001CAC:
@@ -2208,7 +2208,7 @@ lbl_fn_804EB938_00001D1C:
     li r0, 0x0
     b lbl_fn_804EB938_00001D54
 lbl_fn_804EB938_00001D44:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EB938_00001D54
 lbl_fn_804EB938_00001D50:
@@ -2333,7 +2333,7 @@ lbl_fn_804EB938_00001EB4:
     li r4, 0x0
     b lbl_fn_804EB938_00001EFC
 lbl_fn_804EB938_00001EEC:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r4, r3, 24
     b lbl_fn_804EB938_00001EFC
 lbl_fn_804EB938_00001EF8:
@@ -2395,7 +2395,7 @@ lbl_fn_804EB938_00001F74:
     li r23, 0x0
     b lbl_fn_804EB938_00001FD4
 lbl_fn_804EB938_00001FC4:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r23, r3, 24
     b lbl_fn_804EB938_00001FD4
 lbl_fn_804EB938_00001FD0:

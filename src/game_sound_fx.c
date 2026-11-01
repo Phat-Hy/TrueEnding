@@ -29,7 +29,7 @@ extern void str_skipWhitespace(void);
 extern void fn_800EC1F4(void);
 extern void cam_findTargetIndex(void);
 extern void fn_800EC24C(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
@@ -1835,7 +1835,7 @@ lbl_fn_800EBF1C_000017B8:
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r31, r3
     addi r3, r1, 0x38
     li r4, -0x1

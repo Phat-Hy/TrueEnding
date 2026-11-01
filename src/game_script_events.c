@@ -18,7 +18,7 @@ extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
 extern void battle_updateTargetAggro(void);
@@ -1765,7 +1765,7 @@ lbl_fn_8024CC78_000017B8:
 lbl_fn_8024CC78_000017E4:
     addi r4, r3, 0x6b8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_8024CC78_000017F0:
     lwz r4, 0x14bc(r30)
     li r31, 0x0

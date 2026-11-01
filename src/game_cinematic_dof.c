@@ -21,20 +21,20 @@ extern void vec3_initValues(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void boss_initActionStream(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void node_destroy(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_80099E9C(void);
 extern void bloom_processPasses(void);
 extern void str_parseInt(void);
 extern void str_skipWhitespace(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
@@ -138,7 +138,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804A04AC(void);
 extern void dlc_findItemInCatalog(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void fn_805A5224(void);
 extern void PSVECNormalize(void);
 extern void PSVECMag(void);
@@ -529,7 +529,7 @@ lbl_fn_803387DC_00000464:
 lbl_fn_803387DC_00000484:
     mr r3, r29
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r30, 0x0
     ble lbl_fn_803387DC_000004A0
     mr r3, r29
@@ -636,7 +636,7 @@ asm void fn_803388A4(void)
     stb r28, 0x16b2(r31)
     stb r0, 0x16b3(r31)
     stb r28, 0x16b4(r31)
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     li r4, 0xf
     li r0, 0x4b0
     stw r28, 0x16c8(r31)
@@ -712,7 +712,7 @@ lbl_fn_803388A4_00000730:
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r30, r3
     addi r3, r1, 0x38
     li r4, -0x1
@@ -1831,7 +1831,7 @@ lbl_fn_80339760_0000163C:
     li r5, 0x0
     addi r4, r4, lbl_8074A4C0@l
     addi r4, r4, 0x2ea
-    bl fn_8009373C
+    bl target_findEntryByName
 lbl_fn_80339760_00001720:
     addi r3, r31, 0x7d4
     bl fn_8029F3AC

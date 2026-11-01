@@ -77,7 +77,7 @@ void fn_8006C858(void);
 void fn_8006C8F8(void);
 void fn_8006CA14(void);
 void fn_8006CA20(void);
-void fn_8006CA80(void);
+void gmk_LoadHandle_constructor(void);
 void fn_8006CABC(void);
 void fn_8006D008(void);
 void fn_8006D0C8(void);
@@ -557,11 +557,11 @@ asm void fn_8006C8F8(void)
     addi r5, r5, fn_8006CA20@l
     li r7, 0x38
     bl __construct_new_array
-    lis r4, fn_8006CA80@ha
+    lis r4, gmk_LoadHandle_constructor@ha
     lis r5, atn_LH_Binary_destructor@ha
     addi r3, r30, 0x10a0
     li r6, 0x8
-    addi r4, r4, fn_8006CA80@l
+    addi r4, r4, gmk_LoadHandle_constructor@l
     addi r5, r5, atn_LH_Binary_destructor@l
     li r7, 0x38
     bl __construct_new_array
@@ -648,7 +648,7 @@ lbl_fn_8006CA20_00000764:
     blr
 }
 
-asm void fn_8006CA80(void)
+asm void gmk_LoadHandle_constructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

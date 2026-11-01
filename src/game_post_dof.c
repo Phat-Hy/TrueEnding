@@ -59,7 +59,7 @@ extern void world_setLocalFlag(void);
 extern void dvd_showDiskErrorDialog(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_804DA490(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void PSMTXConcat(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXScale(void);
@@ -980,7 +980,7 @@ lbl_fn_802C0B68_00000B7C:
 lbl_fn_802C0B68_00000BA4:
     mr r3, r29
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r30, 0x0
     ble lbl_fn_802C0B68_00000BC0
     mr r3, r29

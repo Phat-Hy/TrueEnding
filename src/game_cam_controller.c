@@ -16,7 +16,7 @@ extern u8 lbl_807BB380[];
 void fn_800EC1F4(void);
 void cam_findTargetIndex(void);
 void fn_800EC24C(void *obj, void *val);
-void fn_800EC254(void);
+void cam_testTargetVisibility(void);
 void cam_registerTarget(void);
 void cam_initTrajectoryParams(void);
 void cam_bindPathTarget(void);
@@ -67,37 +67,37 @@ void fn_800EC24C(void *obj, void *val)
     *(void **)((char *)obj + 0xa0) = val;
 }
 
-asm void fn_800EC254(void)
+asm void cam_testTargetVisibility(void)
 {
     nofralloc
     lbz r6, 0x2c(r4)
     li r5, 0x0
     cmpwi r6, 0x0
-    beq lbl_fn_800EC254_00000080
+    beq lbl_cam_testTargetVisibility_00000080
     lbz r0, 0x2c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800EC254_00000080
+    beq lbl_cam_testTargetVisibility_00000080
     li r5, 0x1
-lbl_fn_800EC254_00000080:
+lbl_cam_testTargetVisibility_00000080:
     cmpwi r5, 0x0
-    beq lbl_fn_800EC254_000000B4
+    beq lbl_cam_testTargetVisibility_000000B4
     lwz r5, 0x24(r4)
     li r6, 0x0
     lwz r0, 0x24(r3)
     cmplw r5, r0
-    bne lbl_fn_800EC254_000000C4
+    bne lbl_cam_testTargetVisibility_000000C4
     lwz r4, 0x28(r4)
     lwz r0, 0x28(r3)
     cmplw r4, r0
-    bne lbl_fn_800EC254_000000C4
+    bne lbl_cam_testTargetVisibility_000000C4
     li r6, 0x1
-    b lbl_fn_800EC254_000000C4
-lbl_fn_800EC254_000000B4:
+    b lbl_cam_testTargetVisibility_000000C4
+lbl_cam_testTargetVisibility_000000B4:
     lbz r0, 0x2c(r3)
     subf r0, r6, r0
     cntlzw r0, r0
     srwi r6, r0, 5
-lbl_fn_800EC254_000000C4:
+lbl_cam_testTargetVisibility_000000C4:
     cntlzw r0, r6
     srwi r3, r0, 5
     blr

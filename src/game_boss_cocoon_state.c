@@ -25,7 +25,7 @@ extern void fn_80213E60(void);
 extern void task_mapIdToQueue(void);
 extern void kpad_getClampData(void);
 extern void kpad_validateButtonIndex(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void fn_8044F434(void);
 extern void fn_8044F96C(void);
 extern void fn_80450590(void);
@@ -582,7 +582,7 @@ lbl_fn_8044D56C_000005A4:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     lwz r3, -0x24d0(r31)
     bl fn_8021150C
     cmpwi r3, 0x0

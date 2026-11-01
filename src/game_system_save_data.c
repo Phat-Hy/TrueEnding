@@ -10,7 +10,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void mem_free(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
@@ -1438,11 +1438,11 @@ lbl_fn_803412AC_00001318:
     addi r29, r29, lbl_8074A4C0@l
     li r5, 0x0
     addi r4, r29, 0x2fb
-    bl fn_8009373C
+    bl target_findEntryByName
     addi r3, r30, 0xb0
     addi r4, r29, 0x308
     li r5, 0x0
-    bl fn_8009373C
+    bl target_findEntryByName
 lbl_fn_803412AC_000013A0:
     lfs f1, lbl_80885238
     addi r3, r30, 0xb0

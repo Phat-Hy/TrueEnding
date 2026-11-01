@@ -40,7 +40,7 @@ extern void thread_dispatchToQueue(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_8021154C(void);
 extern void fn_80211648(void);
@@ -1625,7 +1625,7 @@ lbl_fn_8058AAC0_00001564:
     cmpwi r3, 0x0
     beq lbl_fn_8058AAC0_000015B4
     lwz r3, 0x0(r27)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r3, 0x0
     beq lbl_fn_8058AAC0_000015F8
     lwz r3, 0x7c(r3)

@@ -25,7 +25,7 @@ extern void PSVECSquareMag(void);
 extern void PSVECDotProduct(void);
 extern void net_getSocket(void);
 extern void net_getMyAid(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 
 /* External data declarations */
 extern u8 jumptable_807913E0[];
@@ -226,7 +226,7 @@ lbl_fn_804F1568_000001B4:
     li r0, 0x0
     b lbl_fn_804F1568_00000228
 lbl_fn_804F1568_00000218:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804F1568_00000228
 lbl_fn_804F1568_00000224:

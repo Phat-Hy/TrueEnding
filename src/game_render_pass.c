@@ -80,7 +80,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void rand(void);
 extern void strcmp(void);
 extern void strncmp(void);
@@ -975,7 +975,7 @@ lbl_fn_802A4A04_00000AD4:
     bl __destroy_new_array
     mr r3, r30
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r31, 0x0
     ble lbl_fn_802A4A04_00000B08
     mr r3, r30

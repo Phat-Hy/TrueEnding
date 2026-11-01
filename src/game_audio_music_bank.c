@@ -15,7 +15,7 @@ extern void vec3_sub(void);
 extern void math_wrapAngle(void);
 extern void vec3_add(void);
 extern void skill_calculateDamage(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void chapter_updateProgression(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
@@ -856,7 +856,7 @@ lbl_fn_8030AF10_0000095C:
     mr r6, r28
     addi r4, r31, 0x528
     addi r5, r1, 0xa0
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f1, lbl_80884BE8
     addi r3, r1, 0x190
     bl fn_80149624
@@ -886,7 +886,7 @@ lbl_fn_8030AF10_0000095C:
     mr r6, r28
     addi r4, r31, 0x528
     addi r5, r1, 0x80
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f1, lbl_80884BA8
     addi r3, r1, 0x50
     lfs f2, lbl_80884BAC
@@ -904,7 +904,7 @@ lbl_fn_8030AF10_0000095C:
     mr r6, r28
     addi r4, r31, 0x528
     addi r5, r1, 0x60
-    bl fn_80063764
+    bl magic_updateCircleArea
     lis r3, lbl_80748FD0@ha
     lis r29, lbl_80748FE8@ha
     lfd f29, lbl_80748FD0@l(r3)
@@ -980,7 +980,7 @@ lbl_fn_8030AF10_00000B8C:
     mr r6, r28
     addi r4, r30, 0x4
     addi r5, r1, 0x34
-    bl fn_80063764
+    bl magic_updateCircleArea
     mr r4, r27
     addi r3, r1, 0x10
     bl vec3_toEulerAngles

@@ -11,7 +11,7 @@ extern void talk_formatQuotedString(void);
 extern void talk_parseQuotes(void);
 extern void talk_copySpeakerName(void);
 extern void fn_800629F0(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void magic_castSpellCircle(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -480,7 +480,7 @@ lbl_fn_80438814_00000594:
     lfs f1, lbl_80886900
     addi r5, r1, 0x68
     subi r6, r22, 0x1
-    bl fn_80063764
+    bl magic_updateCircleArea
     fadds f28, f28, f31
 lbl_fn_80438814_000005B0:
     fcmpo cr0, f28, f29

@@ -16,7 +16,7 @@ extern void mission_updateStub(void);
 extern void vec3_initValues(void);
 extern void magic_castSpellCircle(void);
 extern void boss_initActionStream(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
@@ -25,7 +25,7 @@ extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Task_setActive(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
@@ -1990,7 +1990,7 @@ lbl_fn_80345384_000019B0:
     stb r28, 0x1809(r31)
     stb r28, 0x180a(r31)
     stb r28, 0x180b(r31)
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     li r0, 0xf
     stw r28, 0x1814(r31)
     addi r3, r31, 0x181c
@@ -2069,7 +2069,7 @@ lbl_fn_80345384_00001B20:
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r30, r3
     addi r3, r1, 0x38
     li r4, -0x1

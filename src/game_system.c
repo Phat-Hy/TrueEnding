@@ -31,7 +31,7 @@ extern void mem_getAllocSize(void);
 extern void map_processTrigger(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_800929C0(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void fn_80093E90(void);
 extern void fn_80094420(void);
 extern void fn_80097A20(void);
@@ -2184,7 +2184,7 @@ lbl_fn_8000FAE8_00001C5C:
     addi r4, r4, lbl_8072F924@l
     li r5, 0x0
     addi r4, r4, 0x48
-    bl fn_8009373C
+    bl target_findEntryByName
     lwz r0, 0x20(r31)
     cmpwi r0, 0x7
     beq lbl_fn_8000FAE8_00001CA0

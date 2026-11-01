@@ -23,11 +23,11 @@ extern void fn_801E9164(void);
 extern void fn_801E9168(void);
 extern void fn_801E917C(void);
 extern void fn_801E92D4(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void assert_generateId(void);
 extern void assert_formatLocation(void);
 extern void task_mapIdToQueue(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void fn_8044441C(void);
 extern void fn_8044D034(void);
 extern void fn_8044D184(void);
@@ -1671,14 +1671,14 @@ lbl_fn_801CF3C0_000015F4:
     li r3, 0x1
     add r4, r4, r0
     lwz r4, 0x20(r4)
-    bl fn_80206B14
+    bl sys_findModuleById
     b lbl_fn_801CF3C0_00001644
 lbl_fn_801CF3C0_00001630:
     slwi r0, r28, 3
     li r3, 0x0
     add r4, r4, r0
     lwz r4, 0x20(r4)
-    bl fn_80206B14
+    bl sys_findModuleById
 lbl_fn_801CF3C0_00001644:
     cmpwi r3, 0x0
     beq lbl_fn_801CF3C0_0000165C
@@ -1702,7 +1702,7 @@ lbl_fn_801CF3C0_0000165C:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_804439FC
+    bl gmk_registerSlot
 lbl_fn_801CF3C0_0000169C:
     lwz r3, lbl_8087F4F0
     mr r4, r28

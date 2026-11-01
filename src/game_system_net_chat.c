@@ -11,7 +11,7 @@ extern void _savegpr_27(void);
 extern void ui_drawColoredQuad(void);
 extern void boss_recordDamage(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void fn_80093B88(void);
 extern void msg_getMessageById(void);
 extern void skin_playAnimationByName(void);
@@ -53,7 +53,7 @@ extern void fn_803935AC(void);
 extern void fn_8039BF04(void);
 extern void fn_803C18DC(void);
 extern void fn_803E5E64(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void fn_8044441C(void);
 extern void gmk_findSlotByIndex(void);
 extern void fn_804A04AC(void);
@@ -1084,7 +1084,7 @@ lbl_fn_803A3FFC_00000D00:
     li r7, 0x1
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     lwz r3, 0x8(r30)
     bl game_initGlobalDatabases
     cmpwi r3, 0x0
@@ -1507,7 +1507,7 @@ lbl_fn_803A4568_000012B4:
     addi r4, r1, 0x8
     cntlzw r0, r0
     srwi r5, r0, 5
-    bl fn_8009373C
+    bl target_findEntryByName
     b lbl_fn_803A4568_0000131C
 lbl_fn_803A4568_000012F4:
     lis r4, lbl_8074F8CC@ha

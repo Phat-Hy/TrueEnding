@@ -29,7 +29,7 @@ extern void str_parseInt(void);
 extern void wcs_parseInt(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
@@ -1925,7 +1925,7 @@ lbl_fn_80209960_00001870:
     addi r3, r1, 0x26c
     addi r4, r1, 0x12c
     li r20, 0x0
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     cmpwi r3, 0x0
     beq lbl_fn_80209960_000018A0
     cmpwi r22, 0x7
@@ -1988,7 +1988,7 @@ lbl_fn_80209960_00001960:
     addi r3, r1, 0x230
     addi r4, r1, 0x90
     li r20, 0x0
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     cmpwi r3, 0x0
     beq lbl_fn_80209960_00001990
     cmpwi r22, 0x7
@@ -2147,7 +2147,7 @@ lbl_fn_80209960_00001BB4:
     addi r3, r1, 0x1c8
     addi r4, r1, 0x30
     li r20, 0x0
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     cmpwi r3, 0x0
     beq lbl_fn_80209960_00001BE4
     cmpwi r17, 0x2

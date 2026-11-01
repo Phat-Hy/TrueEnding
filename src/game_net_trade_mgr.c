@@ -13,7 +13,7 @@ extern void vec3_add(void);
 extern void sound_initChannelParams(void);
 extern void sound_releaseChannel(void);
 extern void fn_8006A250(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void fn_80076FF8(void);
 extern void fn_80079044(void);
 extern void mem_alloc(void);
@@ -404,12 +404,12 @@ asm void fn_8052A8F0(void)
     stw r31, 0x1308(r29)
     bl fn_803D6E3C
     addi r3, r29, 0x1334
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     stw r31, 0x133c(r29)
     addi r3, r29, 0x1340
     bl morph_reset
     addi r3, r29, 0x1344
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     addi r3, r29, 0x134c
     bl fn_803BF818
     lfs f1, lbl_80887AB0

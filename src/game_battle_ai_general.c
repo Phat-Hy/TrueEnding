@@ -39,7 +39,7 @@ extern void map_processTrigger(void);
 extern void minimap_renderOverlay(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -3628,7 +3628,7 @@ lbl_fn_8043F24C_00002FE8:
     addi r3, r31, 0x10
     addi r4, r4, lbl_80754498@l
     addi r4, r4, 0x10
-    bl fn_8009373C
+    bl target_findEntryByName
     cmpwi r30, 0x0
     beq lbl_fn_8043F24C_00003258
     lwz r0, 0x2a8(r31)

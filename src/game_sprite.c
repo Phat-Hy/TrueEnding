@@ -13,7 +13,7 @@ extern void _savegpr_24(void);
 extern void fn_800500FC(void);
 extern void fn_8005DF90(void);
 extern void fn_800610A4(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void fn_8006FE08(void);
 extern void fn_800704DC(void);
 extern void fn_80075DEC(void);
@@ -897,7 +897,7 @@ lbl_fn_800B47AC_00000B40:
     lwz r3, lbl_8087EEB0
     or r6, r15, r0
     addi r5, r1, 0xb8
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f0, 0x90(r1)
     fcmpo cr0, f0, f28
     cror eq, gt, eq
@@ -978,7 +978,7 @@ lbl_fn_800B47AC_00000C48:
     lwz r3, lbl_8087EEB0
     or r6, r15, r0
     addi r5, r1, 0xac
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f0, 0x90(r1)
     fcmpo cr0, f0, f28
     cror eq, gt, eq
@@ -1059,7 +1059,7 @@ lbl_fn_800B47AC_00000D50:
     lwz r3, lbl_8087EEB0
     or r6, r15, r0
     addi r5, r1, 0xc4
-    bl fn_80063764
+    bl magic_updateCircleArea
     b lbl_fn_800B47AC_000013A0
 lbl_fn_800B47AC_00000D80:
     addi r3, r1, 0xc4
@@ -1165,7 +1165,7 @@ lbl_fn_800B47AC_00000EB8:
     lwz r3, lbl_8087EEB0
     or r6, r15, r0
     addi r5, r1, 0xb8
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f0, 0x80(r1)
     fcmpo cr0, f0, f28
     cror eq, gt, eq
@@ -1246,7 +1246,7 @@ lbl_fn_800B47AC_00000FC0:
     lwz r3, lbl_8087EEB0
     or r6, r15, r0
     addi r5, r1, 0xac
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f0, 0x80(r1)
     fcmpo cr0, f0, f28
     cror eq, gt, eq
@@ -1327,7 +1327,7 @@ lbl_fn_800B47AC_000010C8:
     lwz r3, lbl_8087EEB0
     or r6, r17, r0
     addi r5, r1, 0xc4
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_fn_800B47AC_000010F4:
     lwz r0, 0x10(r1)
     li r15, 0x3

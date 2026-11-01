@@ -33,7 +33,7 @@ extern void task_findEntryById(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803BB3C0(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXConcat(void);
@@ -1647,7 +1647,7 @@ lbl_fn_80442FF4_000015DC:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
 lbl_fn_80442FF4_00001608:
     addi r22, r22, 0x1
     addi r21, r21, 0x8
@@ -1666,7 +1666,7 @@ lbl_fn_80442FF4_00001608:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     mr r3, r23
     subi r4, r21, 0x7820
     li r5, 0x1
@@ -1675,7 +1675,7 @@ lbl_fn_80442FF4_00001608:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     mr r3, r23
     subi r4, r21, 0x76c7
     li r5, 0x1
@@ -1684,7 +1684,7 @@ lbl_fn_80442FF4_00001608:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     lis r21, 0x3
     mr r3, r23
     addi r4, r21, 0xd7d
@@ -1694,7 +1694,7 @@ lbl_fn_80442FF4_00001608:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     mr r3, r23
     addi r4, r21, 0x1165
     li r5, 0x1
@@ -1703,7 +1703,7 @@ lbl_fn_80442FF4_00001608:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     mr r3, r23
     li r4, 0x1c2
     li r5, 0x1
@@ -1712,7 +1712,7 @@ lbl_fn_80442FF4_00001608:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     mr r3, r23
     li r4, 0x1c3
     li r5, 0x1
@@ -1721,7 +1721,7 @@ lbl_fn_80442FF4_00001608:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
 lbl_fn_80442FF4_0000172C:
     lwz r3, lbl_8087F0A8
     lis r7, lbl_80754650@ha

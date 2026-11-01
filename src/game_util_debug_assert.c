@@ -25,7 +25,7 @@ extern void assert_formatLocation(void);
 extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_80211770(void);
 extern void fn_80212840(void);
@@ -1730,7 +1730,7 @@ lbl_fn_80597558_00001778:
     cmpwi r0, 0x0
     beq lbl_fn_80597558_00001BD8
     lwz r3, 0x4(r3)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r18, r3
     lwz r3, 0x4(r14)
     bl assert_formatLocation
@@ -1916,7 +1916,7 @@ lbl_fn_80597558_00001AC8:
     cmpwi r3, 0x0
     beq lbl_fn_80597558_00001B24
     lwz r3, 0x4(r14)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r18, r3
 lbl_fn_80597558_00001B24:
     lwz r3, 0x4(r14)
@@ -2200,7 +2200,7 @@ lbl_fn_80597558_00001F1C:
     beq lbl_fn_80597558_00001FA8
     lwz r3, 0x4(r17)
     li r14, 0x0
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r24, r3
     mr r19, r18
     bl fn_8020EF4C

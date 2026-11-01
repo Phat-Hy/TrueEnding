@@ -14,7 +14,7 @@ extern void fn_8013407C(void);
 extern void dialog_setScriptSlot(void);
 extern void dialog_initScriptSlot(void);
 extern void fn_8014FD30(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void assert_generateId(void);
 extern void event_findEntryById(void);
 extern void fn_80211940(void);
@@ -1439,7 +1439,7 @@ asm void fn_8014F2B4(void)
     blt lbl_fn_8014F2B4_000014A8
     mr r4, r28
     li r3, 0x0
-    bl fn_80206B14
+    bl sys_findModuleById
     cmpwi r3, 0x0
     bne lbl_fn_8014F2B4_000014A8
     lis r29, 0x1062
@@ -1451,7 +1451,7 @@ asm void fn_8014F2B4(void)
     add r0, r0, r4
     mulli r0, r0, 0x3e8
     subf r4, r0, r28
-    bl fn_80206B14
+    bl sys_findModuleById
     bl assert_generateId
     bl event_findEntryById
     addi r0, r29, 0x4dd3

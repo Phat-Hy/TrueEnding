@@ -51,7 +51,7 @@ extern void fn_803E5E64(void);
 extern void fn_803EC16C(void);
 extern void task_destroyWorker(void);
 extern void task_updateWorker(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void fn_8044D6AC(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -1565,7 +1565,7 @@ lbl_fn_80432728_00001464:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_80432728_000014CC

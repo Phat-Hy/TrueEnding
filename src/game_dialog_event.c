@@ -53,7 +53,7 @@ extern void fn_8015CC70(void);
 extern void fn_8015D8C0(void);
 extern void fn_8015DEC0(void);
 extern void fn_8015E1B8(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void party_configureMemberSlot(void);
 extern void fn_80160324(void);
 extern void fn_801681B0(void);
@@ -1838,7 +1838,7 @@ lbl_fn_8015076C_0000176C:
 lbl_fn_8015076C_00001794:
     li r5, -0x1
 lbl_fn_8015076C_00001798:
-    bl fn_8015E4B0
+    bl party_initFormationSlots
     lwz r3, 0xd1c(r23)
     cmpwi r3, 0x0
     beq lbl_fn_8015076C_000017C0

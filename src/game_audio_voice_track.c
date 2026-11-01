@@ -15,7 +15,7 @@ extern void fn_80012C88(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void vec3_sub(void);
 extern void vec3_initValues(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void route_findNextWaypoint(void);
 extern void route_interpolatePath(void);
 extern void route_createSegment(void);
@@ -942,7 +942,7 @@ lbl_fn_80304B40_00000C30:
     mr r4, r29
     addi r5, r29, 0xc
     or r6, r6, r0
-    bl fn_80063764
+    bl magic_updateCircleArea
     fcmpo cr0, f27, f25
     stfs f27, 0x58(r1)
     stfs f27, 0x5c(r1)
@@ -1026,7 +1026,7 @@ lbl_fn_80304B40_00000D44:
     addi r4, r28, 0x528
     addi r5, r25, 0x528
     or r6, r6, r0
-    bl fn_80063764
+    bl magic_updateCircleArea
     addi r26, r26, 0x1
     addi r29, r29, 0x18
     cmpwi r26, 0x2

@@ -52,7 +52,7 @@ extern void debuff_removeStatusEffect(void);
 extern void battle_activateExpReward(void);
 extern void fn_8017A300(void);
 extern void fn_80198C00(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void fn_8020A3E4(void);
 extern void fn_8020A81C(void);
 extern void time_wrapMilliseconds(void);
@@ -3520,7 +3520,7 @@ lbl_fn_804D25D4_00002C48:
     lwz r4, 0xd8(r22)
     lbz r0, 0xd4(r3)
     extsb r3, r0
-    bl fn_80206B14
+    bl sys_findModuleById
     mr r22, r3
     lwz r3, 0x0(r23)
     bl fn_80266FA4

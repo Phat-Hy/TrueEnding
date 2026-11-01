@@ -8,7 +8,7 @@ extern void menu_renderLayout(void);
 extern void collision_testLineSegment(void);
 extern void fn_800902C0(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
@@ -505,7 +505,7 @@ lbl_fn_8026CC28_000005A4:
     lwz r4, 0x0(r30)
     addi r3, r29, 0xb0
     li r5, 0x1
-    bl fn_8009373C
+    bl target_findEntryByName
     addi r31, r31, 0x1
     addi r30, r30, 0x4
     cmpwi r31, 0x4
@@ -790,7 +790,7 @@ lbl_fn_8026D0F8_000009B4:
     lwz r4, 0x0(r28)
     addi r3, r29, 0xb0
     li r5, 0x0
-    bl fn_8009373C
+    bl target_findEntryByName
     addi r27, r27, 0x1
     addi r28, r28, 0x4
     cmpwi r27, 0x4

@@ -23,7 +23,7 @@ extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void fn_80158CA4(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void party_configureMemberSlot(void);
 extern void fn_8015ECC4(void);
 extern void actor_setState(void);
@@ -2050,7 +2050,7 @@ lbl_fn_80357004_00001B08:
     stfs f3, 0x10(r1)
     stfs f0, 0x8(r1)
     stfs f1, 0xc(r1)
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_80357004_00001B58:
     lwz r3, 0x1630(r31)
     lwz r0, 0x1588(r31)

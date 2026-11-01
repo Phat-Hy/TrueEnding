@@ -22,7 +22,7 @@ extern void fn_80139F4C(void);
 extern void fn_8013A13C(void);
 extern void inventory_unequipItem(void);
 extern void inventory_calcTotalStats(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void debuff_clearStatus(void);
 extern void battle_calcExpPosition(void);
 extern void battle_generateLootDrops(void);
@@ -178,7 +178,7 @@ asm void fn_801B5894(void)
     lwz r3, 0x8(r30)
     addi r4, r1, 0x8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
     li r3, 0x1
     b lbl_fn_801B5894_00000180
 lbl_fn_801B5894_00000158:
@@ -893,7 +893,7 @@ lbl_fn_801B6278_00000B30:
     lwz r3, 0x8(r31)
     addi r4, r1, 0x8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
     li r3, 0x1
     b lbl_fn_801B6278_00000BE4
 lbl_fn_801B6278_00000BBC:

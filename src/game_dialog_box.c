@@ -12,7 +12,7 @@ extern void script_executeOpcode(void);
 extern void fn_8006F2F0(void);
 extern void minimap_renderOverlay(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void fn_80094F98(void);
 extern void motion_updateFogAdj(void);
 extern void wcs_vformat(void);
@@ -1423,41 +1423,41 @@ lbl_dialog_renderWindow_00001274:
     addi r25, r25, lbl_80737A9C@l
     addi r3, r24, 0xb0
     addi r4, r25, 0x37d
-    bl fn_8009373C
+    bl target_findEntryByName
     mr r5, r31
     addi r3, r24, 0xb0
     addi r4, r25, 0x38b
-    bl fn_8009373C
+    bl target_findEntryByName
     mr r5, r31
     addi r3, r24, 0xb0
     addi r4, r25, 0x399
-    bl fn_8009373C
+    bl target_findEntryByName
     cntlzw r0, r31
     addi r3, r24, 0xb0
     srwi r26, r0, 5
     addi r4, r25, 0x3ac
     mr r5, r26
-    bl fn_8009373C
+    bl target_findEntryByName
     mr r5, r26
     addi r3, r24, 0xb0
     addi r4, r25, 0x3b7
-    bl fn_8009373C
+    bl target_findEntryByName
     mr r5, r26
     addi r3, r24, 0xb0
     addi r4, r25, 0x3c4
-    bl fn_8009373C
+    bl target_findEntryByName
     mr r5, r31
     addi r3, r24, 0xb0
     addi r4, r25, 0x3d1
-    bl fn_8009373C
+    bl target_findEntryByName
     mr r5, r31
     addi r3, r24, 0xb0
     addi r4, r25, 0x3dc
-    bl fn_8009373C
+    bl target_findEntryByName
     mr r5, r31
     addi r3, r24, 0xb0
     addi r4, r25, 0x3e9
-    bl fn_8009373C
+    bl target_findEntryByName
     b lbl_dialog_renderWindow_00001384
 lbl_dialog_renderWindow_00001334:
     cmplwi r0, 0xae77
@@ -1467,19 +1467,19 @@ lbl_dialog_renderWindow_00001334:
     addi r25, r25, lbl_80737A9C@l
     addi r3, r24, 0xb0
     addi r4, r25, 0x3f6
-    bl fn_8009373C
+    bl target_findEntryByName
     mr r5, r26
     addi r3, r24, 0xb0
     addi r4, r25, 0x3ff
-    bl fn_8009373C
+    bl target_findEntryByName
     mr r5, r26
     addi r3, r24, 0xb0
     addi r4, r25, 0x40e
-    bl fn_8009373C
+    bl target_findEntryByName
     mr r5, r26
     addi r3, r24, 0xb0
     addi r4, r25, 0x417
-    bl fn_8009373C
+    bl target_findEntryByName
 lbl_dialog_renderWindow_00001384:
     lwz r4, lbl_8087EFB4
     addi r3, r1, 0x190

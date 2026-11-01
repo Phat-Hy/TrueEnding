@@ -39,7 +39,7 @@ extern void assert_formatLocation(void);
 extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_8021C6A4(void);
 extern void world_getGlobalFlag(void);
@@ -1024,7 +1024,7 @@ asm void fn_805811E0(void)
     cmpwi r3, 0x0
     beq lbl_fn_805811E0_00000FE0
     mr r3, r21
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r3, 0x0
     bne lbl_fn_805811E0_00000CB8
     mr r3, r21
@@ -1078,7 +1078,7 @@ lbl_fn_805811E0_00000CF0:
     cmpwi r22, 0x2
     blt lbl_fn_805811E0_00000CF0
     mr r3, r21
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r29, r3
     mr r3, r21
     bl assert_formatLocation
@@ -1302,7 +1302,7 @@ lbl_fn_80581574_00001088:
     cmpwi r3, 0x0
     beq lbl_fn_80581574_000010C0
     lwz r3, 0x4(r31)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r3, 0x0
     mr r4, r3
     beq lbl_fn_80581574_000010D0

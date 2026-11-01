@@ -94,7 +94,7 @@ extern void strcmp(void);
 extern void __dynamic_cast(void);
 extern void net_getSocket(void);
 extern void net_getMyAid(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 extern void fn_806B3AE0(void);
 extern void fn_806B3B80(void);
 
@@ -582,7 +582,7 @@ lbl_fn_804EDCD0_000005CC:
     li r0, 0x0
     b lbl_fn_804EDCD0_00000604
 lbl_fn_804EDCD0_000005F4:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EDCD0_00000604
 lbl_fn_804EDCD0_00000600:
@@ -678,7 +678,7 @@ lbl_fn_804EDCD0_00000718:
     li r0, 0x0
     b lbl_fn_804EDCD0_00000750
 lbl_fn_804EDCD0_00000740:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EDCD0_00000750
 lbl_fn_804EDCD0_0000074C:
@@ -731,7 +731,7 @@ lbl_fn_804EDCD0_000007CC:
     li r0, 0x0
     b lbl_fn_804EDCD0_00000804
 lbl_fn_804EDCD0_000007F4:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EDCD0_00000804
 lbl_fn_804EDCD0_00000800:
@@ -752,7 +752,7 @@ lbl_fn_804EDCD0_00000804:
     li r0, 0x0
     b lbl_fn_804EDCD0_0000084C
 lbl_fn_804EDCD0_0000083C:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EDCD0_0000084C
 lbl_fn_804EDCD0_00000848:
@@ -2177,7 +2177,7 @@ lbl_fn_804EF0F4_00001B6C:
     li r0, 0x0
     b lbl_fn_804EF0F4_00001C10
 lbl_fn_804EF0F4_00001C00:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EF0F4_00001C10
 lbl_fn_804EF0F4_00001C0C:
@@ -2233,7 +2233,7 @@ lbl_fn_804EF0F4_00001C94:
     li r0, 0x0
     b lbl_fn_804EF0F4_00001CCC
 lbl_fn_804EF0F4_00001CBC:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EF0F4_00001CCC
 lbl_fn_804EF0F4_00001CC8:
@@ -2374,7 +2374,7 @@ lbl_fn_804EF0F4_00001E88:
     li r0, 0x0
     b lbl_fn_804EF0F4_00001EC0
 lbl_fn_804EF0F4_00001EB0:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EF0F4_00001EC0
 lbl_fn_804EF0F4_00001EBC:
@@ -2438,7 +2438,7 @@ lbl_fn_804EF0F4_00001F5C:
     li r0, 0x0
     b lbl_fn_804EF0F4_00001F94
 lbl_fn_804EF0F4_00001F84:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804EF0F4_00001F94
 lbl_fn_804EF0F4_00001F90:

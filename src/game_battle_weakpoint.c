@@ -44,7 +44,7 @@ extern void PSVECDotProduct(void);
 extern void std_fmod(void);
 extern void net_getSocket(void);
 extern void net_getMyAid(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 
 /* External data declarations */
 extern u8 jumptable_8078CFC0[];
@@ -887,7 +887,7 @@ lbl_fn_803FC134_00000A60:
     li r0, 0x0
     b lbl_fn_803FC134_00000A98
 lbl_fn_803FC134_00000A88:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_803FC134_00000A98
 lbl_fn_803FC134_00000A94:

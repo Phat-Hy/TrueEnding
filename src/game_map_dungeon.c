@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void collision_testLineSegment(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
@@ -1461,14 +1461,14 @@ lbl_fn_8017FBEC_0000129C:
     lfs f1, lbl_80881B78
     addi r5, r1, 0xac
     li r6, -0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
     lis r6, 0xff4d
     lwz r3, lbl_8087EEB0
     lfs f1, lbl_80881B78
     addi r4, r1, 0xac
     addi r5, r1, 0x50
     addi r6, r6, 0x4d00
-    bl fn_80063764
+    bl magic_updateCircleArea
     b lbl_fn_8017FBEC_00001474
 lbl_fn_8017FBEC_00001458:
     lis r6, 0xff4d
@@ -1477,7 +1477,7 @@ lbl_fn_8017FBEC_00001458:
     addi r4, r1, 0x5c
     addi r5, r1, 0x50
     addi r6, r6, 0x4d00
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_fn_8017FBEC_00001474:
     cmpwi r27, 0x0
     beq lbl_fn_8017FBEC_000014D4

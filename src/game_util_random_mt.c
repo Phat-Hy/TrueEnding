@@ -91,7 +91,7 @@ void fn_805A3738(void);
 void fn_805A380C(void);
 void fn_805A38F4(void);
 void rand_Mersenne_constructor(void);
-void fn_805A3D00(void);
+void rand_Mersenne_init(void);
 void fn_805A3D6C(void);
 void fn_805A3F5C(void);
 void fn_805A3FCC(void);
@@ -1087,7 +1087,7 @@ asm void rand_Mersenne_constructor(void)
     blr
 }
 
-asm void fn_805A3D00(void)
+asm void rand_Mersenne_init(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1098,20 +1098,20 @@ asm void fn_805A3D00(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    beq lbl_fn_805A3D00_00000D7C
+    beq lbl_rand_Mersenne_init_00000D7C
     addic. r3, r3, 0x14b4
-    beq lbl_fn_805A3D00_00000D60
+    beq lbl_rand_Mersenne_init_00000D60
     li r4, 0x0
     bl atn_LoadHandle_destructor
-lbl_fn_805A3D00_00000D60:
+lbl_rand_Mersenne_init_00000D60:
     mr r3, r30
     li r4, 0x0
     bl entity_Instance_destructor
     cmpwi r31, 0x0
-    ble lbl_fn_805A3D00_00000D7C
+    ble lbl_rand_Mersenne_init_00000D7C
     mr r3, r30
     bl dtor_80084684
-lbl_fn_805A3D00_00000D7C:
+lbl_rand_Mersenne_init_00000D7C:
     mr r3, r30
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

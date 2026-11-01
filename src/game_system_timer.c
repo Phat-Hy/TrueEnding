@@ -69,7 +69,7 @@ extern u32 lbl_80882ED8;
 extern u32 lbl_80882EDC;
 
 /* Function declarations */
-void fn_8020EFEC(void);
+void time_ticksToSeconds(void);
 void fn_8020F064(void);
 void fn_8020F0AC(void);
 void fn_8020F130(void);
@@ -91,7 +91,7 @@ void fn_8021021C(void);
 void fn_80210220(void);
 void fn_80210244(void);
 
-asm void fn_8020EFEC(void)
+asm void time_ticksToSeconds(void)
 {
     nofralloc
     subis r4, r3, 0x3

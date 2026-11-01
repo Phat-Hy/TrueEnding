@@ -14,7 +14,7 @@ extern void fn_80051CD8(void);
 extern void fn_800629F0(void);
 extern void fn_80062F7C(void);
 extern void fn_80063200(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void fn_800638B0(void);
 extern void magic_castSpellCircle(void);
 extern void minimap_renderOverlay(void);
@@ -1062,7 +1062,7 @@ lbl_fn_803C221C_00000CFC:
     lfs f1, lbl_80885CBC
     mr r5, r21
     mr r6, r18
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_fn_803C221C_00000E08:
     addi r19, r19, 0x1
     addi r15, r15, 0x30
@@ -1248,7 +1248,7 @@ lbl_fn_803C221C_00000FAC:
     lfs f1, lbl_80885CBC
     mr r5, r21
     addi r6, r15, 0xff
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_fn_803C221C_000010C8:
     addi r18, r18, 0x1
     addi r19, r19, 0x18
@@ -1354,7 +1354,7 @@ lbl_fn_803C221C_00001144:
     lfs f1, lbl_80885CBC
     mr r5, r21
     subi r6, r15, 0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_fn_803C221C_00001260:
     addi r18, r18, 0x1
     addi r19, r19, 0xc
@@ -1531,7 +1531,7 @@ lbl_fn_803C221C_000013E4:
     lfs f1, lbl_80885CBC
     mr r5, r21
     addi r6, r15, 0x4000
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_fn_803C221C_00001500:
     addi r18, r18, 0x1
     addi r19, r19, 0x8

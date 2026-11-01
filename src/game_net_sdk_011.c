@@ -123,7 +123,7 @@ void fn_806B0EB0(void);
 void fn_806B0F80(void);
 void fn_806B1170(void);
 void fn_806B1230(void);
-void fn_806B1250(void);
+void net_isSessionConnected(void);
 void fn_806B12F0(void);
 void fn_806B13C0(void);
 void fn_806B14D0(void);
@@ -1936,7 +1936,7 @@ lbl_fn_806B1230_00001938:
     blr
 }
 
-asm void fn_806B1250(void)
+asm void net_isSessionConnected(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1945,37 +1945,37 @@ asm void fn_806B1250(void)
     stw r0, 0x14(r1)
     lwz r3, lbl_8085FF98@l(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_806B1250_0000198C
+    beq lbl_net_isSessionConnected_0000198C
     lwz r4, 0xaa4(r3)
     subi r0, r4, 0x9
     cmplwi r0, 0x2
-    ble lbl_fn_806B1250_0000198C
+    ble lbl_net_isSessionConnected_0000198C
     cmpwi r4, 0x0
-    beq lbl_fn_806B1250_0000198C
+    beq lbl_net_isSessionConnected_0000198C
     lbz r0, 0x36d(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_806B1250_0000198C
+    beq lbl_net_isSessionConnected_0000198C
     lbz r0, 0x376(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_806B1250_00001994
-lbl_fn_806B1250_0000198C:
+    bne lbl_net_isSessionConnected_00001994
+lbl_net_isSessionConnected_0000198C:
     li r3, 0xff
-    b lbl_fn_806B1250_000019C4
-lbl_fn_806B1250_00001994:
+    b lbl_net_isSessionConnected_000019C4
+lbl_net_isSessionConnected_00001994:
     li r3, 0x0
     bl fn_806CCED0
     cmpwi r3, 0x0
-    bne lbl_fn_806B1250_000019C0
+    bne lbl_net_isSessionConnected_000019C0
     lis r4, lbl_807BE128@ha
     li r3, 0x8
     addi r4, r4, lbl_807BE128@l
     crclr 6
     bl net_formatLog
     li r3, 0xff
-    b lbl_fn_806B1250_000019C4
-lbl_fn_806B1250_000019C0:
+    b lbl_net_isSessionConnected_000019C4
+lbl_net_isSessionConnected_000019C0:
     lbz r3, 0x16(r3)
-lbl_fn_806B1250_000019C4:
+lbl_net_isSessionConnected_000019C4:
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10

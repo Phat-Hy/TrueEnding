@@ -19,7 +19,7 @@ extern void quest_evaluateConditions(void);
 extern void inventory_applyItemStats(void);
 extern void shop_canPurchaseItem(void);
 extern void fn_80158CA4(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void party_configureMemberSlot(void);
 extern void fn_8015EB2C(void);
 extern void actor_setState(void);
@@ -337,7 +337,7 @@ lbl_fn_8031FD34_000002F4:
     mr r3, r30
     addi r4, r30, 0x6b8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_8031FD34_0000031C:
     lwz r0, 0x7e0(r30)
     rlwinm r0, r0, 0, 26, 26

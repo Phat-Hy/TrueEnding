@@ -9,7 +9,7 @@ extern void vec3_sub(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
@@ -524,11 +524,11 @@ lbl_fn_8033A154_000005B8:
     addi r31, r31, lbl_8074A4C0@l
     li r5, 0x0
     addi r4, r31, 0x2fb
-    bl fn_8009373C
+    bl target_findEntryByName
     addi r3, r30, 0xb0
     addi r4, r31, 0x308
     li r5, 0x0
-    bl fn_8009373C
+    bl target_findEntryByName
     b lbl_fn_8033A154_00000884
 lbl_fn_8033A154_000005F4:
     lwz r5, 0x68(r4)

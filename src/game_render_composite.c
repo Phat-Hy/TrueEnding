@@ -12,7 +12,7 @@ extern void str_getData(void);
 extern void mission_updateStub(void);
 extern void atn_ColliCapsule_destructor(void);
 extern void boss_initActionStream(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -23,7 +23,7 @@ extern void node_destroy(void);
 extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
@@ -60,7 +60,7 @@ extern void world_setLocalFlag(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_80599C94(void);
 extern void rand_Mersenne_constructor(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void fn_805A5224(void);
 extern void PSVECMag(void);
 extern void printf(void);
@@ -1273,7 +1273,7 @@ lbl_fn_802BA898_00001028:
 lbl_fn_802BA898_0000104C:
     mr r3, r30
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r31, 0x0
     ble lbl_fn_802BA898_00001068
     mr r3, r30
@@ -1305,7 +1305,7 @@ asm void fn_802BA92C(void)
     addi r3, r28, 0x14d4
     addi r4, r4, lbl_80786568@l
     stw r4, 0x0(r28)
-    bl fn_8006CA80
+    bl gmk_LoadHandle_constructor
     li r31, 0x0
     stw r31, 0x14dc(r28)
     addi r3, r28, 0x14f8
@@ -1405,7 +1405,7 @@ lbl_fn_802BA92C_0000122C:
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x98
     addi r4, r1, 0x38
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r31, r3
     addi r3, r1, 0x38
     li r4, -0x1

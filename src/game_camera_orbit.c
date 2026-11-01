@@ -57,7 +57,7 @@ extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void rand_Mersenne_constructor(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -341,7 +341,7 @@ lbl_fn_802E84C8_000002E4:
 lbl_fn_802E84C8_000002F4:
     mr r3, r29
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r30, 0x0
     ble lbl_fn_802E84C8_00000310
     mr r3, r29
@@ -757,7 +757,7 @@ lbl_fn_802E89B0_000008EC:
 lbl_fn_802E89B0_000008FC:
     mr r3, r29
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r30, 0x0
     ble lbl_fn_802E89B0_00000918
     mr r3, r29

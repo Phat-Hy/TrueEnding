@@ -17,7 +17,7 @@ extern void fn_8006AF38(void);
 extern void mem_free(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -378,11 +378,11 @@ asm void fn_80353F50(void)
     addi r30, r30, lbl_8074AA58@l
     addi r3, r3, 0xb0
     addi r4, r30, 0x466
-    bl fn_8009373C
+    bl target_findEntryByName
     addi r3, r29, 0xb0
     addi r4, r30, 0x473
     li r5, 0x0
-    bl fn_8009373C
+    bl target_findEntryByName
     lwz r3, lbl_8087F3C0
     li r0, 0x2
     li r4, 0x0

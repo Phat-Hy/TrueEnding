@@ -58,7 +58,7 @@ extern void fn_8050A4E4(void);
 extern void fn_8050BA6C(void);
 extern void fn_806A8E70(void);
 extern void fn_806B0DE0(void);
-extern void fn_806B1250(void);
+extern void net_isSessionConnected(void);
 extern void fn_806B3CC0(void);
 
 /* External data declarations */
@@ -670,7 +670,7 @@ lbl_fn_804BDD68_000007AC:
     li r0, 0x0
     b lbl_fn_804BDD68_00000858
 lbl_fn_804BDD68_00000848:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804BDD68_00000858
 lbl_fn_804BDD68_00000854:
@@ -720,7 +720,7 @@ lbl_fn_804BDD68_000008A8:
     li r0, 0x0
     b lbl_fn_804BDD68_00000904
 lbl_fn_804BDD68_000008F4:
-    bl fn_806B1250
+    bl net_isSessionConnected
     clrlwi r0, r3, 24
     b lbl_fn_804BDD68_00000904
 lbl_fn_804BDD68_00000900:

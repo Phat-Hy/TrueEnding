@@ -32,7 +32,7 @@ extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void fn_8020F0AC(void);
 extern void event_findEntryById(void);
 extern void fn_802114D8(void);
@@ -888,7 +888,7 @@ lbl_fn_801DD26C_00000AF0:
     cmpwi r3, 0x0
     beq lbl_fn_801DD26C_00000C5C
     lwz r3, 0x4(r31)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r3, 0x0
     mr r23, r3
     beq lbl_fn_801DD26C_00000C5C

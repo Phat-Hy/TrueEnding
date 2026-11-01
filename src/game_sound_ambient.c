@@ -35,12 +35,12 @@ extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
 extern void random_generateValue(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_802114D8(void);
 extern void fn_802114E0(void);
 extern void task_mapIdToQueue(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void gmk_findSlotByIndex(void);
 extern void fn_804A3C24(void);
 extern void fn_804A4294(void);
@@ -702,7 +702,7 @@ lbl_fn_801D94D0_0000088C:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_804439FC
+    bl gmk_registerSlot
     stw r16, 0x20(r20)
 lbl_fn_801D94D0_000008E8:
     addi r22, r22, 0x1
@@ -727,7 +727,7 @@ lbl_fn_801D94D0_00000900:
     li r8, 0x0
     li r9, 0x0
     li r10, 0x0
-    bl fn_804439FC
+    bl gmk_registerSlot
     cmpwi r22, 0x0
     stw r16, 0x0(r20)
     bne lbl_fn_801D94D0_00000954
@@ -981,7 +981,7 @@ lbl_fn_801D94D0_00000CA4:
     cmpwi r3, 0x0
     beq lbl_fn_801D94D0_00001030
     lwz r3, 0x4(r25)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r3, 0x0
     mr r18, r3
     beq lbl_fn_801D94D0_00001030

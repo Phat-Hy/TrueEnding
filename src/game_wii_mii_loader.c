@@ -21,7 +21,7 @@ extern void fn_8008B130(void);
 extern void fn_80091C10(void);
 extern void atn_Model_findBoneIndex(void);
 extern void target_pushPointToHistory(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void fn_80093D98(void);
 extern void fn_80093EEC(void);
 extern void fn_80095D44(void);
@@ -1165,7 +1165,7 @@ lbl_fn_80565068_00000E88:
     mr r5, r3
     addi r3, r31, 0x24
     addi r4, r1, 0x20
-    bl fn_8009373C
+    bl target_findEntryByName
     b lbl_fn_80565068_00000EFC
 lbl_fn_80565068_00000ED0:
     mr r3, r27
@@ -1298,7 +1298,7 @@ lbl_fn_80565068_00001088:
     subf r0, r5, r0
     cntlzw r0, r0
     srwi r5, r0, 5
-    bl fn_8009373C
+    bl target_findEntryByName
     addi r28, r28, 0x44
     addi r29, r29, 0x1
 lbl_fn_80565068_000010B8:
@@ -1547,7 +1547,7 @@ lbl_fn_8056556C_000013C8:
     mr r3, r31
     srwi r5, r0, 5
     addi r4, r4, 0x9b
-    bl fn_8009373C
+    bl target_findEntryByName
 lbl_fn_8056556C_00001410:
     lwz r3, 0x40c(r28)
     lwz r3, 0x50(r3)
@@ -1562,14 +1562,14 @@ lbl_fn_8056556C_00001410:
     mr r3, r31
     srwi r5, r0, 5
     addi r4, r29, 0xa3
-    bl fn_8009373C
+    bl target_findEntryByName
     lwz r3, 0x414(r28)
     bl fn_8020EF4C
     cntlzw r0, r3
     mr r3, r31
     srwi r5, r0, 5
     addi r4, r29, 0xb1
-    bl fn_8009373C
+    bl target_findEntryByName
 lbl_fn_8056556C_00001464:
     lwz r0, 0x34(r1)
     srwi. r0, r0, 31
@@ -1704,7 +1704,7 @@ lbl_fn_805657D0_00001614:
     subf r0, r5, r0
     cntlzw r0, r0
     srwi r5, r0, 5
-    bl fn_8009373C
+    bl target_findEntryByName
     addi r28, r28, 0x44
     addi r29, r29, 0x1
 lbl_fn_805657D0_00001644:
@@ -1842,7 +1842,7 @@ lbl_fn_805659B8_000017F8:
     subf r0, r5, r0
     cntlzw r0, r0
     srwi r5, r0, 5
-    bl fn_8009373C
+    bl target_findEntryByName
     addi r29, r29, 0x44
     addi r28, r28, 0x1
 lbl_fn_805659B8_00001828:

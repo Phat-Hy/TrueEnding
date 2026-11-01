@@ -15,7 +15,7 @@ extern void fn_800431F4(void);
 extern void boss_triggerEventSequence(void);
 extern void fn_8006AD24(void);
 extern void fn_8006B2D8(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800C3094(void);
@@ -242,11 +242,11 @@ asm void fn_803BEC40(void)
     lis r3, lbl_8078BC48@ha
     li r21, 0x0
     addi r3, r3, lbl_8078BC48@l
-    lis r4, fn_8006CA80@ha
+    lis r4, gmk_LoadHandle_constructor@ha
     lis r5, atn_LH_Binary_destructor@ha
     stw r3, 0x0(r17)
     addi r3, r17, 0x4c
-    addi r4, r4, fn_8006CA80@l
+    addi r4, r4, gmk_LoadHandle_constructor@l
     stw r21, 0x48(r17)
     addi r5, r5, atn_LH_Binary_destructor@l
     li r6, 0x8

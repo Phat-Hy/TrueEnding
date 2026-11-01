@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void wcs_vformat(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_80590AAC(void);
 extern void fn_80591508(void);
@@ -218,10 +218,10 @@ asm void fn_8058EF0C(void)
     lwz r16, 0x0(r5)
     lwz r15, 0x0(r3)
     lwz r3, 0x0(r16)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r14, r3
     lwz r3, 0x0(r15)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r14, 0x0
     beq lbl_fn_8058EF0C_00000284
     cmpwi r3, 0x0
@@ -323,10 +323,10 @@ lbl_fn_8058EF0C_000003C8:
     lwz r15, 0x0(r30)
     srwi r31, r0, 5
     lwz r3, 0x0(r16)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r14, r3
     lwz r3, 0x0(r15)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r14, 0x0
     beq lbl_fn_8058EF0C_00000404
     cmpwi r3, 0x0
@@ -549,10 +549,10 @@ lbl_fn_8058EF0C_0000072C:
     lwz r16, 0x0(r29)
     lwz r15, 0x0(r28)
     lwz r3, 0x0(r16)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r14, r3
     lwz r3, 0x0(r15)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r14, 0x0
     beq lbl_fn_8058EF0C_00000760
     cmpwi r3, 0x0
@@ -1024,10 +1024,10 @@ lbl_fn_8058FAD4_00000E38:
     b lbl_fn_8058FAD4_00000FC4
 lbl_fn_8058FAD4_00000E54:
     lwz r3, 0x0(r15)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r16, r3
     lwz r3, 0x0(r29)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r16, 0x0
     beq lbl_fn_8058FAD4_00000E80
     cmpwi r3, 0x0
@@ -1702,10 +1702,10 @@ asm void fn_8059044C(void)
     mr r30, r5
     stw r29, 0x14(r1)
     mr r29, r4
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r31, r3
     lwz r3, 0x0(r30)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r31, 0x0
     beq lbl_fn_8059044C_000017C0
     cmpwi r3, 0x0

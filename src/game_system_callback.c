@@ -16,7 +16,7 @@ extern void wcs_parseInt(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_formatLocation(void);
 extern void rand_scaleRangeInt(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void fn_80213B08(void);
 extern void fn_80216440(void);
 extern void fn_80216488(void);
@@ -187,7 +187,7 @@ lbl_fn_80213E60_00000128:
     cmpwi r3, 0x0
     beq lbl_fn_80213E60_00000200
     lwz r3, 0x4(r31)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r31, r3
     mr r3, r28
     mr r4, r29

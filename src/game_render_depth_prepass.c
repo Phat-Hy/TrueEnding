@@ -79,7 +79,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void fn_804DA490(void);
 extern void rand_Mersenne_constructor(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void fn_805A507C(void);
 extern void fn_805A5224(void);
 extern void PSMTXRotRad(void);
@@ -480,7 +480,7 @@ lbl_fn_802B21FC_00000478:
 lbl_fn_802B21FC_00000488:
     mr r3, r30
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r31, 0x0
     ble lbl_fn_802B21FC_000004A4
     mr r3, r30

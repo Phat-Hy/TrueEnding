@@ -20,7 +20,7 @@ extern void assert_formatLocation(void);
 extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
 extern void fn_8020EF4C(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_80211940(void);
 extern void task_getWorkerByIndex(void);
@@ -873,7 +873,7 @@ lbl_fn_8058BE7C_00000B0C:
     cmpwi r3, 0x0
     beq lbl_fn_8058BE7C_00000FF8
     mr r3, r29
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r3, 0x0
     mr r22, r3
     beq lbl_fn_8058BE7C_00000B38

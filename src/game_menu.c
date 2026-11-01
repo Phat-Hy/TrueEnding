@@ -56,7 +56,7 @@ extern void fn_8014FCE8(void);
 extern void fn_80179A34(void);
 extern void save_validateHeader(void);
 extern void thread_findAndNotify(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void fn_802072AC(void);
 extern void task_findEntryById(void);
 extern void sound_initGlobalInstances(void);
@@ -3067,7 +3067,7 @@ asm void fn_80043EAC(void)
     stfs f0, 0x250(r31)
     stfs f0, 0x23c(r31)
     stfs f0, 0x228(r31)
-    bl fn_80206B14
+    bl sys_findModuleById
     stw r3, 0x274(r31)
     lwz r3, 0x4(r31)
     lwz r4, 0x8(r31)
@@ -4826,7 +4826,7 @@ asm void fn_800457A4(void)
     mr r30, r6
     mr r31, r7
     bge lbl_fn_800457A4_00003D94
-    bl fn_80206B14
+    bl sys_findModuleById
     cmpwi r3, 0x0
     bne lbl_fn_800457A4_00003D94
     li r3, 0x0

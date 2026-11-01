@@ -24,7 +24,7 @@ extern void area_updateZoneState(void);
 extern void lockon_updateTarget(void);
 extern void str_skipWhitespace(void);
 extern void fn_800E0AA8(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
@@ -1393,7 +1393,7 @@ lbl_fn_803C3894_00001180:
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x248
     addi r4, r1, 0x180
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r19, r3
     addi r3, r1, 0x180
     li r4, -0x1
@@ -1595,7 +1595,7 @@ lbl_fn_803C3894_00001480:
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x1e0
     addi r4, r1, 0x120
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r19, r3
     addi r3, r1, 0x120
     li r4, -0x1

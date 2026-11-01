@@ -11,7 +11,7 @@ extern void fn_8006BA30(void);
 extern void mem_realloc(void);
 extern void wcs_parseInt(void);
 extern void wcs_vformat(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void fn_80209294(void);
 extern void fn_802092F8(void);
 extern void boss_loadWeakpointResource(void);
@@ -1178,7 +1178,7 @@ lbl_fn_8021BFA0_00000F58:
 lbl_fn_8021BFA0_00000F78:
     addi r4, r5, 0x12c
     li r3, 0x0
-    bl fn_80206B14
+    bl sys_findModuleById
     cmpwi r3, 0x0
     beq lbl_fn_8021BFA0_000010E4
     lwz r5, 0x84(r3)

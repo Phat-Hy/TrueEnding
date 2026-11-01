@@ -12,7 +12,7 @@ extern void fn_8005BEF8(void);
 extern void fn_8005BFAC(void);
 extern void equip_calcTotalStatBonuses(void);
 extern void skill_calculateDamage(void);
-extern void fn_8006CA80(void);
+extern void gmk_LoadHandle_constructor(void);
 extern void fn_8006F420(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
@@ -1776,11 +1776,11 @@ asm void fn_803B9044(void)
     stw r31, 0x0(r27)
     mr r3, r28
     bl atn_LoadHandle_constructor
-    lis r4, fn_8006CA80@ha
+    lis r4, gmk_LoadHandle_constructor@ha
     lis r5, atn_LH_Binary_destructor@ha
     stw r31, 0x0(r28)
     addi r3, r29, 0x60
-    addi r4, r4, fn_8006CA80@l
+    addi r4, r4, gmk_LoadHandle_constructor@l
     addi r5, r5, atn_LH_Binary_destructor@l
     li r6, 0x8
     li r7, 0x8

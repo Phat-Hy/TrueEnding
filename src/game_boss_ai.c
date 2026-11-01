@@ -30,7 +30,7 @@ extern void fn_8012D628(void);
 extern void fn_8012D714(void);
 extern void fn_8013459C(void);
 extern void fn_80204E04(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void fn_8020787C(void);
 extern void mem_findBlockById(void);
 extern void fn_802092C0(void);
@@ -468,7 +468,7 @@ lbl_fn_80134800_0000051C:
     mr r4, r30
 lbl_fn_80134800_00000530:
     li r3, 0x0
-    bl fn_80206B14
+    bl sys_findModuleById
     cmpwi r25, 0x1
     lwz r4, 0x28(r31)
     mr r21, r3
@@ -484,7 +484,7 @@ lbl_fn_80134800_00000554:
     mr r4, r30
 lbl_fn_80134800_00000568:
     li r3, 0x0
-    bl fn_80206B14
+    bl sys_findModuleById
     mr r6, r3
     mr r3, r23
     mr r4, r22
@@ -506,7 +506,7 @@ lbl_fn_80134800_000005A0:
     mr r4, r30
 lbl_fn_80134800_000005B4:
     li r3, 0x0
-    bl fn_80206B14
+    bl sys_findModuleById
     mr r5, r3
     mr r3, r23
     mr r4, r22
@@ -587,7 +587,7 @@ lbl_fn_80134800_000006B8:
     mr r4, r30
 lbl_fn_80134800_000006CC:
     li r3, 0x0
-    bl fn_80206B14
+    bl sys_findModuleById
     cmpwi r3, 0x0
     beq lbl_fn_80134800_0000075C
     lwz r0, 0xc4(r3)

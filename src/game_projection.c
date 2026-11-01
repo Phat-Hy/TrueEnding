@@ -9,7 +9,7 @@ extern void skill_calculateDamage(void);
 extern void skill_calcTrajectory(void);
 extern void fn_80062C8C(void);
 extern void fn_80063484(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void magic_castSpellCircle(void);
 extern void script_executeOpcode(void);
 extern void fn_8006F2F0(void);
@@ -1597,7 +1597,7 @@ lbl_fn_800F5314_00001490:
     lfs f1, lbl_80881478
     mr r5, r26
     mr r6, r20
-    bl fn_80063764
+    bl magic_updateCircleArea
     lwz r6, 0x50(r1)
     addi r3, r1, 0x448
     lwz r7, 0x54(r1)
@@ -1651,7 +1651,7 @@ lbl_fn_800F5314_00001490:
     stfs f0, 0x19c(r1)
     stfs f6, 0x1a0(r1)
     stfs f5, 0x1a4(r1)
-    bl fn_80063764
+    bl magic_updateCircleArea
     lwz r5, 0x50(r1)
     addi r3, r1, 0x418
     lwz r6, 0x54(r1)
@@ -1694,7 +1694,7 @@ lbl_fn_800F5314_00001490:
     stfs f0, 0x184(r1)
     stfs f6, 0x188(r1)
     stfs f5, 0x18c(r1)
-    bl fn_80063764
+    bl magic_updateCircleArea
     lwz r3, 0x50(r1)
     lwz r0, 0x54(r1)
     lwz r4, 0x504(r3)
@@ -1822,7 +1822,7 @@ lbl_fn_800F5314_00001490:
     stfs f0, 0x16c(r1)
     stfs f6, 0x170(r1)
     stfs f5, 0x174(r1)
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f3, 0x240(r1)
     mr r6, r20
     lfs f5, 0x264(r1)
@@ -1849,7 +1849,7 @@ lbl_fn_800F5314_00001490:
     stfs f0, 0x154(r1)
     stfs f6, 0x158(r1)
     stfs f5, 0x15c(r1)
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f5, 0x24c(r1)
     mr r6, r20
     lfs f3, 0x264(r1)
@@ -1876,7 +1876,7 @@ lbl_fn_800F5314_00001490:
     stfs f0, 0x13c(r1)
     stfs f6, 0x140(r1)
     stfs f5, 0x144(r1)
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f5, 0x240(r1)
     mr r6, r20
     lfs f3, 0x264(r1)
@@ -1903,7 +1903,7 @@ lbl_fn_800F5314_00001490:
     stfs f0, 0x124(r1)
     stfs f6, 0x128(r1)
     stfs f5, 0x12c(r1)
-    bl fn_80063764
+    bl magic_updateCircleArea
     lwz r5, 0x50(r1)
     addi r3, r1, 0x388
     lwz r6, 0x54(r1)
@@ -1954,7 +1954,7 @@ lbl_fn_800F5314_00001490:
     stfs f0, 0x10c(r1)
     stfs f6, 0x110(r1)
     stfs f5, 0x114(r1)
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f3, 0x240(r1)
     mr r6, r20
     lfs f5, 0x264(r1)
@@ -1981,7 +1981,7 @@ lbl_fn_800F5314_00001490:
     stfs f0, 0xf4(r1)
     stfs f6, 0xf8(r1)
     stfs f5, 0xfc(r1)
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f5, 0x24c(r1)
     mr r6, r20
     lfs f3, 0x264(r1)
@@ -2008,7 +2008,7 @@ lbl_fn_800F5314_00001490:
     stfs f0, 0xdc(r1)
     stfs f6, 0xe0(r1)
     stfs f5, 0xe4(r1)
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f5, 0x240(r1)
     mr r6, r20
     lfs f3, 0x264(r1)
@@ -2035,7 +2035,7 @@ lbl_fn_800F5314_00001490:
     stfs f0, 0xc4(r1)
     stfs f6, 0xc8(r1)
     stfs f5, 0xcc(r1)
-    bl fn_80063764
+    bl magic_updateCircleArea
     b lbl_fn_800F5314_00001CF8
 lbl_fn_800F5314_00001CC4:
     cmpwi r0, 0x1

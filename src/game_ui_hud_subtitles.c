@@ -25,7 +25,7 @@ extern void save_validateHeader(void);
 extern void save_createWorkerTask(void);
 extern void fn_80201E78(void);
 extern void fn_80202A6C(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void fn_8020BD78(void);
 extern void fn_8020BDE0(void);
 extern void fn_8020BE10(void);
@@ -129,13 +129,13 @@ asm void fn_801CFA5C(void)
     li r3, 0x1
     add r4, r4, r0
     lwz r4, 0x20(r4)
-    b fn_80206B14
+    b sys_findModuleById
 lbl_fn_801CFA5C_00000038:
     slwi r0, r5, 3
     li r3, 0x0
     add r4, r4, r0
     lwz r4, 0x20(r4)
-    b fn_80206B14
+    b sys_findModuleById
 }
 
 asm void fn_801CFAA8(void)

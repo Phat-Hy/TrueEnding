@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void collision_testLineSegment(void);
 extern void fn_80051B70(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void atn_Model_findBoneIndex(void);
 extern void motion_updateFogAdj(void);
 extern void skin_playAnimationByName(void);
@@ -20,7 +20,7 @@ extern void skill_findNodeById(void);
 extern void enemy_updateAnimTimer(void);
 extern void quest_updateFlow(void);
 extern void equip_applyToCharacter(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void battle_activateExpReward(void);
 extern void task_findEntryById(void);
 extern void res_findResourceSlot(void);
@@ -1076,7 +1076,7 @@ lbl_fn_802C69BC_00000E18:
     addi r4, r1, 0x70
     addi r5, r1, 0x7c
     or r6, r6, r0
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f2, lbl_808843D8
     lfs f0, lbl_808842AC
     lfs f1, lbl_808842A8
@@ -1176,7 +1176,7 @@ lbl_fn_802C69BC_00000F6C:
     addi r4, r1, 0x88
     addi r5, r1, 0x94
     or r6, r6, r0
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_fn_802C69BC_00000F98:
     lfs f7, 0x528(r31)
     lfs f1, 0x15d0(r31)
@@ -1908,7 +1908,7 @@ lbl_fn_802C6DF4_00001A24:
     beq lbl_fn_802C6DF4_00001CC4
     addi r4, r1, 0xe4
     li r5, 0x33
-    bl fn_8015E4B0
+    bl party_initFormationSlots
     b lbl_fn_802C6DF4_00001CC4
 lbl_fn_802C6DF4_00001A90:
     lfs f0, 0x14e4(r31)

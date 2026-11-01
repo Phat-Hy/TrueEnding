@@ -41,7 +41,7 @@ extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
 extern void fn_801513D0(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
 extern void task_findEntryById(void);
@@ -447,7 +447,7 @@ lbl_fn_80259604_00000474:
     mr r3, r30
     addi r4, r30, 0x6b8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_80259604_00000484:
     li r31, 0x0
     stw r31, 0x58c(r30)

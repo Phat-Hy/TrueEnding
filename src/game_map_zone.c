@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void skill_calcTrajectory(void);
 extern void fn_80062C8C(void);
 extern void fn_80063484(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void fn_8006F2F0(void);
 extern void motion_updateFogAdj(void);
 extern void enemy_stepBehavior(void);
@@ -424,7 +424,7 @@ lbl_fn_8017D13C_00000440:
     stfs f0, 0x17c(r1)
     stfs f2, 0x180(r1)
     stfs f3, 0x184(r1)
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f2, 0x1a8(r1)
     lfs f0, lbl_80881B7C
     fcmpo cr0, f2, f0
@@ -769,7 +769,7 @@ lbl_fn_8017D13C_000008E8:
     stfs f0, 0x11c(r1)
     stfs f2, 0x120(r1)
     stfs f3, 0x124(r1)
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f2, lbl_80881B7C
     stfs f2, 0xa8(r1)
     fcmpo cr0, f2, f2
@@ -901,7 +901,7 @@ lbl_fn_8017D13C_00000AA0:
     stfs f0, 0xdc(r1)
     stfs f2, 0xe0(r1)
     stfs f3, 0xe4(r1)
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f2, lbl_80881B80
     lfs f0, lbl_80881B7C
     lfs f1, lbl_80881B78

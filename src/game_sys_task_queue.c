@@ -17,7 +17,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void str_skipWhitespace(void);
 extern void wcs_vformat(void);
-extern void fn_800EC254(void);
+extern void cam_testTargetVisibility(void);
 extern void cam_registerTarget(void);
 extern void cam_initTrajectoryParams(void);
 extern void cam_bindPathTarget(void);
@@ -731,7 +731,7 @@ lbl_fn_80219F84_0000089C:
     addi r3, r1, 0x260
     addi r4, r1, 0x14c
     li r31, 0x0
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     cmpwi r3, 0x0
     beq lbl_fn_80219F84_000008CC
     cmpwi r29, 0x7
@@ -815,7 +815,7 @@ lbl_fn_80219F84_000009DC:
     addi r3, r1, 0x224
     addi r4, r1, 0xb0
     li r31, 0x0
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     cmpwi r3, 0x0
     beq lbl_fn_80219F84_00000A0C
     cmpwi r29, 0x4
@@ -866,7 +866,7 @@ lbl_fn_80219F84_00000AA0:
     bl cam_evalLookAtMatrix
     addi r3, r1, 0x1e8
     addi r4, r1, 0x14
-    bl fn_800EC254
+    bl cam_testTargetVisibility
     mr r31, r3
     addi r3, r1, 0x14
     li r4, -0x1

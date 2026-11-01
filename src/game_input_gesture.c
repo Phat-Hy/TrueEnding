@@ -12,7 +12,7 @@ extern void talk_setSpeakerName(void);
 extern void node_destroy(void);
 extern void atn_Model_findBoneIndex(void);
 extern void compass_findMarkerByName(void);
-extern void fn_8009373C(void);
+extern void target_findEntryByName(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
@@ -63,7 +63,7 @@ extern void atn_LoadHandle_isLoading(void);
 extern void fn_804DA490(void);
 extern void fn_804DA4A4(void);
 extern void rand_Mersenne_constructor(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void fn_805A3D6C(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
@@ -691,7 +691,7 @@ asm void fn_802EDB34(void)
     stfs f1, 0xf8(r3)
     stfs f0, 0xfc(r3)
     addi r3, r3, 0xb0
-    bl fn_8009373C
+    bl target_findEntryByName
     b lbl_fn_802EDB34_00000990
 lbl_fn_802EDB34_000007A4:
     lfs f0, lbl_80884820
@@ -708,7 +708,7 @@ lbl_fn_802EDB34_000007A4:
     stfs f0, 0xf8(r3)
     stfs f0, 0xfc(r3)
     addi r3, r3, 0xb0
-    bl fn_8009373C
+    bl target_findEntryByName
     lwz r4, 0x940(r31)
     lis r0, 0x4330
     stw r0, 0x38(r1)
@@ -1562,7 +1562,7 @@ asm void fn_802EE7B8(void)
 lbl_fn_802EE7B8_00001410:
     mr r3, r30
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r31, 0x0
     ble lbl_fn_802EE7B8_0000142C
     mr r3, r30

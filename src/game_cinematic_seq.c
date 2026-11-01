@@ -34,7 +34,7 @@ extern void dialog_setScriptSlot(void);
 extern void dialog_updateScriptState(void);
 extern void inventory_applyItemStats(void);
 extern void fn_8015783C(void);
-extern void fn_8015E4B0(void);
+extern void party_initFormationSlots(void);
 extern void fn_80168F3C(void);
 extern void fn_8016D74C(void);
 extern void actor_setState(void);
@@ -1179,7 +1179,7 @@ lbl_fn_80335788_00000E28:
     bne lbl_fn_80335788_00000E4C
     addi r4, r3, 0x6b8
     li r5, -0x1
-    bl fn_8015E4B0
+    bl party_initFormationSlots
 lbl_fn_80335788_00000E4C:
     lwz r0, 0x560(r30)
     cmpwi r0, 0xa

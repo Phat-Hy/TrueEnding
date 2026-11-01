@@ -19,14 +19,14 @@ extern void saveSlot_readSummary(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
 extern void thread_dispatchToQueue(void);
-extern void fn_80206B14(void);
+extern void sys_findModuleById(void);
 extern void game_initGlobalDatabases(void);
 extern void assert_generateId(void);
 extern void assert_formatLocation(void);
 extern void time_wrapMilliseconds(void);
 extern void rand_scaleRangeInt(void);
 extern void random_generateValue(void);
-extern void fn_8020EFEC(void);
+extern void time_ticksToSeconds(void);
 extern void event_findEntryById(void);
 extern void fn_802114E0(void);
 extern void fn_80211940(void);
@@ -34,7 +34,7 @@ extern void fn_802124B4(void);
 extern void fn_80217D9C(void);
 extern void world_getGlobalFlag(void);
 extern void fn_804438E0(void);
-extern void fn_804439FC(void);
+extern void gmk_registerSlot(void);
 extern void fn_8044441C(void);
 extern void gmk_findSlotByIndex(void);
 extern void fn_8044453C(void);
@@ -873,7 +873,7 @@ asm void fn_8058D998(void)
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     mr r29, r31
     b lbl_fn_8058D998_00000B80
 lbl_fn_8058D998_00000AE8:
@@ -912,7 +912,7 @@ lbl_fn_8058D998_00000B28:
     li r8, 0x0
     li r9, 0x1
     li r10, 0x1
-    bl fn_804439FC
+    bl gmk_registerSlot
     b lbl_fn_8058D998_00000B80
 lbl_fn_8058D998_00000B74:
     lwz r3, lbl_8087F4F0
@@ -1040,7 +1040,7 @@ lbl_fn_8058DB14_00000CF8:
 lbl_fn_8058DB14_00000D14:
     lwz r4, 0x20(r26)
     li r3, 0x0
-    bl fn_80206B14
+    bl sys_findModuleById
     lwz r0, 0x4(r24)
     cmpwi r0, 0x0
     bne lbl_fn_8058DB14_00000D40
@@ -1048,7 +1048,7 @@ lbl_fn_8058DB14_00000D14:
     bne lbl_fn_8058DB14_00000D40
     lwz r4, 0x20(r26)
     li r3, 0x1
-    bl fn_80206B14
+    bl sys_findModuleById
 lbl_fn_8058DB14_00000D40:
     cmpwi r3, 0x0
     beq lbl_fn_8058DB14_00000D70
@@ -1192,7 +1192,7 @@ lbl_fn_8058DB14_00000F18:
     cmpwi r3, 0x0
     beq lbl_fn_8058DB14_00000FE8
     mr r3, r25
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     addis r4, r27, 0x2
     cmpwi r3, 0x0
     lwz r0, 0x5b68(r4)
@@ -1718,10 +1718,10 @@ asm void fn_8058E5FC(void)
     stw r30, 0x118(r1)
     mr r30, r5
     stw r29, 0x114(r1)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     mr r29, r3
     lwz r3, 0x0(r30)
-    bl fn_8020EFEC
+    bl time_ticksToSeconds
     cmpwi r29, 0x0
     beq lbl_fn_8058E5FC_000016E4
     cmpwi r3, 0x0

@@ -43,7 +43,7 @@ extern void boss_getOffset50(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void fn_805A49E8(void);
 extern void fn_805A5224(void);
 extern void fn_805A5378(void);
@@ -904,7 +904,7 @@ lbl_fn_8035B42C_00000AE4:
 lbl_fn_8035B42C_00000B04:
     mr r3, r29
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r30, 0x0
     ble lbl_fn_8035B42C_00000B20
     mr r3, r29

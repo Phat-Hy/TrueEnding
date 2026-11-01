@@ -64,7 +64,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
-extern void fn_805A3D00(void);
+extern void rand_Mersenne_init(void);
 extern void fn_805A4258(void);
 extern void fn_805A4F20(void);
 extern void PSVECNormalize(void);
@@ -156,7 +156,7 @@ lbl_fn_8030DC9C_00000048:
 lbl_fn_8030DC9C_00000068:
     mr r3, r29
     li r4, 0x0
-    bl fn_805A3D00
+    bl rand_Mersenne_init
     cmpwi r30, 0x0
     ble lbl_fn_8030DC9C_00000084
     mr r3, r29

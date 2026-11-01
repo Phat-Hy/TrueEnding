@@ -11,7 +11,7 @@ extern void _savegpr_27(void);
 extern void sound_releaseChannel(void);
 extern void item_useConsumable(void);
 extern void fn_8005DF90(void);
-extern void fn_80063764(void);
+extern void magic_updateCircleArea(void);
 extern void fn_800638B0(void);
 extern void fn_8006FAB0(void);
 extern void fn_8006FDD8(void);
@@ -1523,7 +1523,7 @@ lbl_fn_800B79E4_000015DC:
     lfs f1, lbl_80880F7C
     addi r5, r30, 0x27c
     lis r6, 0xffff
-    bl fn_80063764
+    bl magic_updateCircleArea
     lfs f9, 0x280(r30)
     addi r4, r30, 0x270
     lfs f11, 0x274(r30)
@@ -1611,73 +1611,73 @@ lbl_fn_800B79E4_00001758:
     addi r4, r1, 0x168
     addi r5, r1, 0x174
     subi r6, r30, 0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
     lwz r3, lbl_8087EEB0
     addi r4, r1, 0x174
     lfs f1, lbl_80880F7C
     addi r5, r1, 0x180
     subi r6, r30, 0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
     lwz r3, lbl_8087EEB0
     addi r4, r1, 0x180
     lfs f1, lbl_80880F7C
     addi r5, r1, 0x18c
     subi r6, r30, 0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
     lwz r3, lbl_8087EEB0
     addi r4, r1, 0x18c
     lfs f1, lbl_80880F7C
     addi r5, r1, 0x168
     subi r6, r30, 0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
     lwz r3, lbl_8087EEB0
     addi r4, r1, 0x198
     lfs f1, lbl_80880F7C
     addi r5, r1, 0x1a4
     subi r6, r30, 0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
     lwz r3, lbl_8087EEB0
     addi r4, r1, 0x1a4
     lfs f1, lbl_80880F7C
     addi r5, r1, 0x1b0
     subi r6, r30, 0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
     lwz r3, lbl_8087EEB0
     addi r4, r1, 0x1b0
     lfs f1, lbl_80880F7C
     addi r5, r1, 0x1bc
     subi r6, r30, 0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
     lwz r3, lbl_8087EEB0
     addi r4, r1, 0x1bc
     lfs f1, lbl_80880F7C
     addi r5, r1, 0x198
     subi r6, r30, 0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
     lwz r3, lbl_8087EEB0
     addi r4, r1, 0x168
     lfs f1, lbl_80880F7C
     addi r5, r1, 0x198
     subi r6, r30, 0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
     lwz r3, lbl_8087EEB0
     addi r4, r1, 0x174
     lfs f1, lbl_80880F7C
     addi r5, r1, 0x1a4
     subi r6, r30, 0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
     lwz r3, lbl_8087EEB0
     addi r4, r1, 0x180
     lfs f1, lbl_80880F7C
     addi r5, r1, 0x1b0
     subi r6, r30, 0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
     lwz r3, lbl_8087EEB0
     addi r4, r1, 0x18c
     lfs f1, lbl_80880F7C
     addi r5, r1, 0x1bc
     subi r6, r30, 0x100
-    bl fn_80063764
+    bl magic_updateCircleArea
 lbl_fn_800B79E4_0000189C:
     addi r11, r1, 0x4f0
     psq_l f31, 0x528(r1), 0, 0
