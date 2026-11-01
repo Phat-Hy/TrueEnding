@@ -12,7 +12,7 @@ extern void fn_800109E0(void);
 extern void fn_80011034(void);
 extern void fn_80011410(void);
 extern void fn_80012C88(void);
-extern void fn_800132EC(void);
+extern void atn_Model_getBoneMatrix(void);
 extern void fn_80013338(void);
 extern void fn_80057A68(void);
 extern void fn_80063764(void);
@@ -420,7 +420,7 @@ lbl_fn_803041C8_000004CC:
     addi r3, r31, 0xb0
     addi r4, r4, lbl_80748A14@l
     addi r4, r4, 0x194
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x8c
     bl fn_8000D0F8

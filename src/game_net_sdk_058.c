@@ -20,7 +20,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_805F2670(void);
 extern void fn_805F26D0(void);
-extern void fn_805F27A0(void);
+extern void OSReceiveMessage(void);
 extern void fn_805F2880(void);
 extern void OSInitMutex(void);
 extern void OSLockMutex(void);
@@ -125,7 +125,7 @@ void fn_80718890(void);
 void fn_80718900(void);
 void fn_80718A30(void);
 void fn_80718B30(void);
-void fn_80718C40(void);
+void net_workerThreadMain(void);
 void fn_80718D00(void);
 void fn_80718D70(void);
 void fn_80718DD0(void);
@@ -986,12 +986,12 @@ lbl_fn_80718900_00000AA4:
     bl __register_global_object
     stb r31, lbl_808804F0
 lbl_fn_80718900_00000B38:
-    lis r4, fn_80718C40@ha
+    lis r4, net_workerThreadMain@ha
     lis r5, lbl_80879210@ha
     mr r3, r26
     mr r7, r29
     mr r8, r27
-    addi r4, r4, fn_80718C40@l
+    addi r4, r4, net_workerThreadMain@l
     addi r5, r5, lbl_80879210@l
     add r6, r28, r29
     li r9, 0x0
@@ -1158,7 +1158,7 @@ lbl_fn_80718B30_00000D80:
     blr
 }
 
-asm void fn_80718C40(void)
+asm void net_workerThreadMain(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1173,33 +1173,33 @@ asm void fn_80718C40(void)
     addi r4, r29, 0x36c
     addi r5, r5, fn_80718B30@l
     bl fn_807046B0
-lbl_fn_80718C40_00000DDC:
+lbl_net_workerThreadMain_00000DDC:
     addi r3, r29, 0x320
     addi r4, r1, 0x8
     li r5, 0x1
-    bl fn_805F27A0
+    bl OSReceiveMessage
     lwz r0, 0x8(r1)
     cmplwi r0, 0x1
-    bne lbl_fn_80718C40_00000E04
+    bne lbl_net_workerThreadMain_00000E04
     mr r3, r29
     bl fn_80718DD0
-    b lbl_fn_80718C40_00000DDC
-lbl_fn_80718C40_00000E04:
+    b lbl_net_workerThreadMain_00000DDC
+lbl_net_workerThreadMain_00000E04:
     cmplwi r0, 0x2
-    bne lbl_fn_80718C40_00000DDC
+    bne lbl_net_workerThreadMain_00000DDC
     lwz r31, 0x388(r29)
     addi r30, r29, 0x388
-    b lbl_fn_80718C40_00000E30
-lbl_fn_80718C40_00000E18:
+    b lbl_net_workerThreadMain_00000E30
+lbl_net_workerThreadMain_00000E18:
     mr r3, r31
     lwz r31, 0x0(r31)
     lwz r12, 0x8(r3)
     lwz r12, 0x14(r12)
     mtctr r12
     bctrl
-lbl_fn_80718C40_00000E30:
+lbl_net_workerThreadMain_00000E30:
     cmplw r31, r30
-    bne lbl_fn_80718C40_00000E18
+    bne lbl_net_workerThreadMain_00000E18
     bl fn_80703F90
     addi r4, r29, 0x36c
     bl fn_80704720

@@ -20,7 +20,7 @@ extern void fn_800DD3FC(void);
 extern void fn_800E426C(void);
 extern void fn_800E4278(void);
 extern void fn_801231D0(void);
-extern void fn_80149A30(void);
+extern void dialog_renderWindow(void);
 extern void fn_8014DEE4(void);
 extern void fn_8016EB48(void);
 extern void fn_801E9EA4(void);
@@ -960,7 +960,7 @@ lbl_fn_8036B7F4_00000C3C:
     lwz r3, 0x56d4(r27)
     cmpwi r3, 0x0
     beq lbl_fn_8036B7F4_00000C4C
-    bl fn_80149A30
+    bl dialog_renderWindow
 lbl_fn_8036B7F4_00000C4C:
     lwz r3, 0x5620(r27)
     lwz r0, 0x38(r3)

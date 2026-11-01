@@ -65,8 +65,8 @@ void fn_80618570(void);
 void fn_806185A0(void);
 void fn_806185C0(void);
 void fn_80618630(void);
-void fn_80618670(void);
-void fn_806186A0(void);
+void __GXSetIndTexMtx(void);
+void GXSetIndTexCoordScale(void);
 void fn_80618730(void);
 void fn_80618F50(void);
 
@@ -1275,7 +1275,7 @@ asm void fn_80618630(void)
     blr
 }
 
-asm void fn_80618670(void)
+asm void __GXSetIndTexMtx(void)
 {
     nofralloc
     lis r6, 0xcc01
@@ -1290,11 +1290,11 @@ asm void fn_80618670(void)
     blr
 }
 
-asm void fn_806186A0(void)
+asm void GXSetIndTexCoordScale(void)
 {
     nofralloc
     cmpwi r3, 0x5
-    bge lbl_fn_806186A0_00001094
+    bge lbl_GXSetIndTexCoordScale_00001094
     lis r5, 0xcc01
     li r0, 0x8
     stb r0, -0x8000(r5)
@@ -1309,8 +1309,8 @@ asm void fn_806186A0(void)
     stw r0, -0x8000(r5)
     lwz r0, 0x80(r6)
     stw r0, -0x8000(r5)
-    b lbl_fn_806186A0_000010CC
-lbl_fn_806186A0_00001094:
+    b lbl_GXSetIndTexCoordScale_000010CC
+lbl_GXSetIndTexCoordScale_00001094:
     lis r5, 0xcc01
     li r0, 0x8
     stb r0, -0x8000(r5)
@@ -1325,7 +1325,7 @@ lbl_fn_806186A0_00001094:
     stw r0, -0x8000(r5)
     lwz r0, 0x84(r6)
     stw r0, -0x8000(r5)
-lbl_fn_806186A0_000010CC:
+lbl_GXSetIndTexCoordScale_000010CC:
     li r0, 0x1
     sth r0, 0x2(r6)
     blr

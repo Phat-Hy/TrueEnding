@@ -19,7 +19,7 @@ extern void fn_80109828(void);
 extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
 extern void fn_80145334(void);
-extern void fn_80149A30(void);
+extern void dialog_renderWindow(void);
 extern void fn_8014C0B4(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
@@ -1369,7 +1369,7 @@ lbl_fn_802A6B90_000011FC:
     stb r0, 0x1b(r3)
 lbl_fn_802A6B90_00001320:
     mr r3, r31
-    bl fn_80149A30
+    bl dialog_renderWindow
     lwz r0, 0x94(r1)
     lwz r31, 0x8c(r1)
     mtlr r0

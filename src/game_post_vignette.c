@@ -25,7 +25,7 @@ extern void fn_80144710(void);
 extern void fn_80145334(void);
 extern void fn_80148990(void);
 extern void quest_checkCondition(void);
-extern void fn_80149A30(void);
+extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80151448(void);
 extern void fn_8016E970(void);
@@ -934,7 +934,7 @@ asm void fn_802C85B0(void)
     stw r30, 0x28(r1)
     stw r29, 0x24(r1)
     stw r28, 0x20(r1)
-    bl fn_80149A30
+    bl dialog_renderWindow
     lwz r0, 0xd18(r31)
     cmpwi r0, 0x0
     beq lbl_fn_802C85B0_00000D8C

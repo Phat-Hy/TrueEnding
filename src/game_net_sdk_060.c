@@ -130,13 +130,13 @@ void fn_8071D5D0(void);
 void fn_8071D6E0(void);
 void fn_8071D760(void);
 void fn_8071D860(void);
-void fn_8071D950(void);
+void net_waitForEvent(void);
 void fn_8071D9C0(void);
 void fn_8071DA10(void);
 void fn_8071DA30(void);
 void fn_8071DAB0(void);
 void fn_8071DB80(void);
-void fn_8071DBE0(void);
+void net_pollEvent(void);
 void fn_8071DC40(void);
 void fn_8071DD10(void);
 void fn_8071DDC0(void);
@@ -2095,7 +2095,7 @@ lbl_fn_8071D860_000019A4:
     blr
 }
 
-asm void fn_8071D950(void)
+asm void net_waitForEvent(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2108,19 +2108,19 @@ asm void fn_8071D950(void)
     li r0, 0x0
     stb r0, 0x28(r30)
     mr r31, r3
-    b lbl_fn_8071D950_00001A04
-lbl_fn_8071D950_000019FC:
+    b lbl_net_waitForEvent_00001A04
+lbl_net_waitForEvent_000019FC:
     addi r3, r30, 0x2c
     bl OSSleepThread
-lbl_fn_8071D950_00001A04:
+lbl_net_waitForEvent_00001A04:
     mr r3, r30
     bl fn_8071D5D0
     cmpwi r3, 0x0
-    bne lbl_fn_8071D950_00001A20
+    bne lbl_net_waitForEvent_00001A20
     lbz r0, 0x28(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_8071D950_000019FC
-lbl_fn_8071D950_00001A20:
+    beq lbl_net_waitForEvent_000019FC
+lbl_net_waitForEvent_00001A20:
     mr r3, r31
     bl OSRestoreInterrupts
     lwz r0, 0x14(r1)
@@ -2232,12 +2232,12 @@ asm void fn_8071DAB0(void)
     li r0, 0x0
     stb r0, 0x31d(r28)
 lbl_fn_8071DAB0_00001B8C:
-    lis r4, fn_8071DBE0@ha
+    lis r4, net_pollEvent@ha
     mr r3, r28
     mr r5, r28
     mr r7, r31
     mr r8, r29
-    addi r4, r4, fn_8071DBE0@l
+    addi r4, r4, net_pollEvent@l
     add r6, r30, r31
     li r9, 0x0
     bl OSCreateThread
@@ -2293,7 +2293,7 @@ lbl_fn_8071DB80_00001C44:
     blr
 }
 
-asm void fn_8071DBE0(void)
+asm void net_pollEvent(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2301,20 +2301,20 @@ asm void fn_8071DBE0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    b lbl_fn_8071DBE0_00001C94
-lbl_fn_8071DBE0_00001C78:
+    b lbl_net_pollEvent_00001C94
+lbl_net_pollEvent_00001C78:
     bl fn_8071D260
-    bl fn_8071D950
+    bl net_waitForEvent
     lbz r0, 0x31c(r31)
     cmpwi r0, 0x0
-    bne lbl_fn_8071DBE0_00001CA0
+    bne lbl_net_pollEvent_00001CA0
     bl fn_8071D260
     bl fn_8071D6E0
-lbl_fn_8071DBE0_00001C94:
+lbl_net_pollEvent_00001C94:
     lbz r0, 0x31c(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_8071DBE0_00001C78
-lbl_fn_8071DBE0_00001CA0:
+    beq lbl_net_pollEvent_00001C78
+lbl_net_pollEvent_00001CA0:
     lwz r31, 0xc(r1)
     li r3, 0x0
     lwz r0, 0x14(r1)

@@ -785,3 +785,29 @@ Analysis for Track B:
   - 7: Right alignment
   - 9, 13, 15, 17: Extended UI text formatting flags
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+
+## Session 2026-11-01 - Batch 15: High-yield queue naming (61k+ probe hits)
+Subject:  track-a: Batch 15 - name 13 high-yield queue routines (covers 61k+ probe hits) progress 99.30% -> 99.30%
+Scope:    Rename 13 top-ranking routines hit by Track B instruments across 89 files in src/.
+Checklist:
+  1. symbols.txt: Renamed 13 functions in place.
+  2. All src/ references updated across 89 files.
+  3. Local labels lbl_fn_* -> lbl_<newName>_* normalized.
+  4. External prototypes swept across all translation units.
+  5. report.json clean, ninja passed (orig/main.dol: OK).
+Self-check: git diff -U0 -- src/ for 'asm void': -13 / +13 (balanced).
+Names applied:
+  - atn_Model_updateAnimation (fn_800BDBC8, 4,392 B, 15,137 probe hits)
+  - gimmick_updateAll (fn_8006D7B0, 6,040 B, 14,920 probe hits)
+  - dialog_renderWindow (fn_80149A30, 9,088 B, 14,848 probe hits)
+  - p2p_sendDataPacket (fn_8050FE48, 568 B, 6,842 probe hits)
+  - NANDAsyncCallback (fn_80622310, 564 B, 1,874 probe hits)
+  - OSReceiveMessage (fn_805F27A0, 168 B, 1,503 probe hits)
+  - atn_Model_getBoneMatrix (fn_800132EC, 76 B, 1,372 probe hits)
+  - weapon_getDamageParam (fn_8044D3A0, 412 B, 1,252 probe hits)
+  - __GXSetIndTexMtx (fn_80618670, 48 B, 770 probe hits)
+  - GXSetIndTexCoordScale (fn_806186A0, 48 B, 770 probe hits)
+  - net_waitForEvent (fn_8071D950, 436 B, 1,503 probe hits)
+  - net_pollEvent (fn_8071DBE0, 156 B, 748 probe hits)
+  - net_workerThreadMain (fn_80718C40, 2,164 B, 748 probe hits)
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.

@@ -15,7 +15,7 @@ extern void fn_8000DCF4(void);
 extern void fn_8000DD0C(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
-extern void fn_800132EC(void);
+extern void atn_Model_getBoneMatrix(void);
 extern void fn_80013338(void);
 extern void fn_80013404(void);
 extern void fn_80013410(void);
@@ -1336,7 +1336,7 @@ lbl_fn_803D2A6C_00000EDC:
     lis r4, lbl_807506A0@ha
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x10c1
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00000F58
     mr r4, r3
@@ -1440,7 +1440,7 @@ lbl_fn_803D2A6C_00001090:
     lwz r3, 0x0(r3)
     bl fn_8000DD0C
     addi r4, r21, 0x10c1
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_000010E4
     mr r4, r3
@@ -1829,7 +1829,7 @@ lbl_fn_803D2A6C_00001634:
     lis r4, lbl_807506A0@ha
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x10c1
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00001688
     mr r4, r3
@@ -3557,7 +3557,7 @@ lbl_fn_803D2A6C_00002F80:
     lwz r3, 0x8(r3)
     bl fn_8000DD0C
     addi r4, r23, 0x10c1
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00002FBC
     mr r4, r3
@@ -3995,7 +3995,7 @@ lbl_fn_803D2A6C_000035CC:
     beq lbl_fn_803D2A6C_00003800
     bl fn_8000DD0C
     addi r4, r23, 0x10c1
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     cmpwi r3, 0x0
     beq lbl_fn_803D2A6C_00003600
     mr r4, r3
@@ -4182,7 +4182,7 @@ lbl_fn_803D2A6C_00003864:
     mr r3, r19
     bl fn_8000DD0C
     addi r4, r23, 0x119b
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0xd8
     bl fn_8000D0F8
@@ -4335,7 +4335,7 @@ lbl_fn_803D2A6C_00003A84:
     mr r3, r19
     bl fn_8000DD0C
     addi r4, r23, 0x119b
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0xc0
     bl fn_8000D0F8
@@ -4586,7 +4586,7 @@ lbl_fn_803D2A6C_00003E5C:
     lis r4, lbl_807506A0@ha
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x10c1
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     cmpwi r3, 0x0
     mr r18, r3
     beq lbl_fn_803D2A6C_00003EF0

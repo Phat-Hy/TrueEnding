@@ -12,7 +12,7 @@ extern void fn_806169C0(void);
 extern void fn_806172D0(void);
 extern void fn_80618240(void);
 extern void fn_806184E0(void);
-extern void fn_806186A0(void);
+extern void GXSetIndTexCoordScale(void);
 
 /* External SDA symbols */
 extern u32 __GXData;
@@ -193,9 +193,9 @@ lbl___GXSetDirtyState_00000228:
     rlwinm. r0, r30, 0, 5, 5
     beq lbl___GXSetDirtyState_00000240
     li r3, 0x0
-    bl fn_806186A0
+    bl GXSetIndTexCoordScale
     li r3, 0x5
-    bl fn_806186A0
+    bl GXSetIndTexCoordScale
 lbl___GXSetDirtyState_00000240:
     rlwinm. r0, r30, 0, 3, 3
     beq lbl___GXSetDirtyState_0000024C

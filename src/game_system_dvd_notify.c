@@ -31,7 +31,7 @@ extern void fn_800CB6F8(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800D3FA4(void);
-extern void fn_80149A30(void);
+extern void dialog_renderWindow(void);
 extern void fn_80207EE8(void);
 extern void fn_80207F34(void);
 extern void fn_803605EC(void);
@@ -157,7 +157,7 @@ asm void fn_8037C69C(void)
     cmpwi r0, 0x0
     beq lbl_fn_8037C69C_0000003C
     mr r3, r0
-    bl fn_80149A30
+    bl dialog_renderWindow
 lbl_fn_8037C69C_0000003C:
     lwz r0, 0x4(r29)
     cmpwi r0, 0x6
@@ -167,7 +167,7 @@ lbl_fn_8037C69C_0000003C:
     b lbl_fn_8037C69C_00000064
 lbl_fn_8037C69C_00000054:
     lwz r3, 0x218(r31)
-    bl fn_80149A30
+    bl dialog_renderWindow
     addi r31, r31, 0x20
     addi r30, r30, 0x1
 lbl_fn_8037C69C_00000064:

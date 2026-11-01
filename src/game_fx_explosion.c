@@ -6,7 +6,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_26(void);
 extern void fn_8000D0F8(void);
 extern void fn_8000D124(void);
-extern void fn_800132EC(void);
+extern void atn_Model_getBoneMatrix(void);
 extern void fn_80092814(void);
 extern void fn_80092954(void);
 extern void fn_8009373C(void);
@@ -15,7 +15,7 @@ extern void fn_800F8548(void);
 extern void fn_80133130(void);
 extern void fn_8013322C(void);
 extern void fn_80148990(void);
-extern void fn_80149A30(void);
+extern void dialog_renderWindow(void);
 extern void fn_80151448(void);
 extern void fn_8016E970(void);
 extern void fn_80179D44(void);
@@ -347,7 +347,7 @@ lbl_fn_80294F88_000003D0:
     bctrl
 lbl_fn_80294F88_0000041C:
     mr r3, r31
-    bl fn_80149A30
+    bl dialog_renderWindow
     lwz r0, 0xc4(r1)
     lwz r31, 0xbc(r1)
     lwz r30, 0xb8(r1)
@@ -946,7 +946,7 @@ asm void fn_80295BE4(void)
     stfs f0, 0x6c(r1)
     addi r3, r30, 0xb0
     addi r4, r31, 0x2bf
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x50
     bl fn_8000D0F8
@@ -960,7 +960,7 @@ asm void fn_80295BE4(void)
     addi r3, r30, 0xb0
     stfs f0, 0x6c(r1)
     addi r4, r31, 0x2ba
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x44
     bl fn_8000D0F8
@@ -974,7 +974,7 @@ asm void fn_80295BE4(void)
     addi r3, r30, 0xb0
     stfs f0, 0x6c(r1)
     addi r4, r31, 0x2c4
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x38
     bl fn_8000D0F8
@@ -988,7 +988,7 @@ asm void fn_80295BE4(void)
     addi r3, r30, 0xb0
     stfs f0, 0x6c(r1)
     addi r4, r31, 0x2d1
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x2c
     bl fn_8000D0F8
@@ -1002,7 +1002,7 @@ asm void fn_80295BE4(void)
     addi r3, r30, 0xb0
     stfs f0, 0x6c(r1)
     addi r4, r31, 0x2dd
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x20
     bl fn_8000D0F8
@@ -1016,7 +1016,7 @@ asm void fn_80295BE4(void)
     addi r3, r30, 0xb0
     stfs f0, 0x6c(r1)
     addi r4, r31, 0x2b1
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x14
     bl fn_8000D0F8
@@ -1030,7 +1030,7 @@ asm void fn_80295BE4(void)
     addi r3, r30, 0xb0
     stfs f0, 0x6c(r1)
     addi r4, r31, 0x2a7
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x8
     bl fn_8000D0F8

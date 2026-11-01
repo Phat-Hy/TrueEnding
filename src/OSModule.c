@@ -16,7 +16,7 @@ extern void OSWakeupThread(void);
 void __OSModuleInit(void);
 void fn_805F2670(void);
 void fn_805F26D0(void);
-void fn_805F27A0(void);
+void OSReceiveMessage(void);
 void fn_805F2880(void);
 
 asm void __OSModuleInit(void)
@@ -118,7 +118,7 @@ lbl_fn_805F26D0_00000128:
     blr
 }
 
-asm void fn_805F27A0(void)
+asm void OSReceiveMessage(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -134,29 +134,29 @@ asm void fn_805F27A0(void)
     bl OSDisableInterrupts
     mr r29, r3
     clrlwi r30, r30, 31
-    b lbl_fn_805F27A0_000001A8
-lbl_fn_805F27A0_00000188:
+    b lbl_OSReceiveMessage_000001A8
+lbl_OSReceiveMessage_00000188:
     cmpwi r30, 0x0
-    bne lbl_fn_805F27A0_000001A0
+    bne lbl_OSReceiveMessage_000001A0
     mr r3, r29
     bl OSRestoreInterrupts
     li r3, 0x0
-    b lbl_fn_805F27A0_0000020C
-lbl_fn_805F27A0_000001A0:
+    b lbl_OSReceiveMessage_0000020C
+lbl_OSReceiveMessage_000001A0:
     addi r3, r31, 0x8
     bl OSSleepThread
-lbl_fn_805F27A0_000001A8:
+lbl_OSReceiveMessage_000001A8:
     lwz r0, 0x1c(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_805F27A0_00000188
+    beq lbl_OSReceiveMessage_00000188
     cmpwi r28, 0x0
-    beq lbl_fn_805F27A0_000001D0
+    beq lbl_OSReceiveMessage_000001D0
     lwz r0, 0x18(r31)
     lwz r3, 0x10(r31)
     slwi r0, r0, 2
     lwzx r0, r3, r0
     stw r0, 0x0(r28)
-lbl_fn_805F27A0_000001D0:
+lbl_OSReceiveMessage_000001D0:
     lwz r4, 0x18(r31)
     mr r3, r31
     lwz r6, 0x14(r31)
@@ -172,7 +172,7 @@ lbl_fn_805F27A0_000001D0:
     mr r3, r29
     bl OSRestoreInterrupts
     li r3, 0x1
-lbl_fn_805F27A0_0000020C:
+lbl_OSReceiveMessage_0000020C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

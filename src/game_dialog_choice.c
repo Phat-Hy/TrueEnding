@@ -19,7 +19,7 @@ extern void fn_80206BE4(void);
 extern void fn_80211480(void);
 extern void fn_80211940(void);
 extern void fn_80219558(void);
-extern void fn_8044D3A0(void);
+extern void weapon_getDamageParam(void);
 extern void fn_804EB754(void);
 extern void fn_8059C088(void);
 extern void fn_805F89F0(void);
@@ -1471,7 +1471,7 @@ lbl_fn_8014F2B4_000014B0:
     blt lbl_fn_8014F2B4_000014DC
     lwz r5, 0x50(r30)
     mr r4, r27
-    bl fn_8044D3A0
+    bl weapon_getDamageParam
     cmpwi r3, 0x0
     blt lbl_fn_8014F2B4_000014DC
     mr r29, r3

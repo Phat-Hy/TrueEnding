@@ -80,7 +80,7 @@ void fn_8050FC08(void);
 void fn_8050FC8C(void);
 void fn_8050FD24(void);
 void fn_8050FD3C(void);
-void fn_8050FE48(void);
+void p2p_sendDataPacket(void);
 void fn_80510080(void);
 void fn_805100FC(void);
 void fn_80510100(void);
@@ -741,7 +741,7 @@ lbl_fn_8050FD3C_000007E4:
     mr r4, r29
     mr r5, r30
     mr r6, r31
-    bl fn_8050FE48
+    bl p2p_sendDataPacket
 lbl_fn_8050FD3C_0000080C:
     addi r31, r31, 0xc
     addi r30, r30, 0x40
@@ -789,7 +789,7 @@ lbl_fn_8050FD3C_00000888:
     blr
 }
 
-asm void fn_8050FE48(void)
+asm void p2p_sendDataPacket(void)
 {
     nofralloc
     stwu r1, -0x80(r1)
@@ -807,71 +807,71 @@ asm void fn_8050FE48(void)
     addi r29, r1, 0x14
     li r27, 0x0
     li r23, 0x0
-    b lbl_fn_8050FE48_00000AB0
-lbl_fn_8050FE48_000008DC:
+    b lbl_p2p_sendDataPacket_00000AB0
+lbl_p2p_sendDataPacket_000008DC:
     lwz r4, 0x348(r24)
     lwz r3, 0x0(r26)
     lwzx r22, r4, r23
     lwz r21, 0x8c(r22)
     bl fn_800DC6B4
     cmplw r21, r3
-    bne lbl_fn_8050FE48_00000AA8
+    bne lbl_p2p_sendDataPacket_00000AA8
     cmpwi r22, 0x0
     stw r22, 0x8(r25)
-    beq lbl_fn_8050FE48_00000910
+    beq lbl_p2p_sendDataPacket_00000910
     lwz r3, 0x4(r22)
     addi r0, r3, 0x10
-    b lbl_fn_8050FE48_00000914
-lbl_fn_8050FE48_00000910:
+    b lbl_p2p_sendDataPacket_00000914
+lbl_p2p_sendDataPacket_00000910:
     li r0, 0x0
-lbl_fn_8050FE48_00000914:
+lbl_p2p_sendDataPacket_00000914:
     cmpwi r0, 0x0
-    beq lbl_fn_8050FE48_00000A64
+    beq lbl_p2p_sendDataPacket_00000A64
     cmpwi r22, 0x0
-    beq lbl_fn_8050FE48_00000930
+    beq lbl_p2p_sendDataPacket_00000930
     lwz r3, 0x4(r22)
     addi r22, r3, 0x10
-    b lbl_fn_8050FE48_00000934
-lbl_fn_8050FE48_00000930:
+    b lbl_p2p_sendDataPacket_00000934
+lbl_p2p_sendDataPacket_00000930:
     li r22, 0x0
-lbl_fn_8050FE48_00000934:
+lbl_p2p_sendDataPacket_00000934:
     mr r3, r22
     addi r4, r31, 0x3
     li r5, 0x0
     bl fn_80092814
     cmpwi r3, 0x0
-    bge lbl_fn_8050FE48_00000954
+    bge lbl_p2p_sendDataPacket_00000954
     li r0, 0x0
-    b lbl_fn_8050FE48_00000960
-lbl_fn_8050FE48_00000954:
+    b lbl_p2p_sendDataPacket_00000960
+lbl_p2p_sendDataPacket_00000954:
     mulli r0, r3, 0x30
     lwz r3, 0x3c(r22)
     add r0, r3, r0
-lbl_fn_8050FE48_00000960:
+lbl_p2p_sendDataPacket_00000960:
     cmpwi r0, 0x0
-    beq lbl_fn_8050FE48_00000A64
+    beq lbl_p2p_sendDataPacket_00000A64
     lwz r3, 0x8(r25)
     cmpwi r3, 0x0
-    beq lbl_fn_8050FE48_00000980
+    beq lbl_p2p_sendDataPacket_00000980
     lwz r3, 0x4(r3)
     addi r22, r3, 0x10
-    b lbl_fn_8050FE48_00000984
-lbl_fn_8050FE48_00000980:
+    b lbl_p2p_sendDataPacket_00000984
+lbl_p2p_sendDataPacket_00000980:
     li r22, 0x0
-lbl_fn_8050FE48_00000984:
+lbl_p2p_sendDataPacket_00000984:
     mr r3, r22
     addi r4, r31, 0x3
     li r5, 0x0
     bl fn_80092814
     cmpwi r3, 0x0
-    bge lbl_fn_8050FE48_000009A4
+    bge lbl_p2p_sendDataPacket_000009A4
     li r3, 0x0
-    b lbl_fn_8050FE48_000009B0
-lbl_fn_8050FE48_000009A4:
+    b lbl_p2p_sendDataPacket_000009B0
+lbl_p2p_sendDataPacket_000009A4:
     mulli r0, r3, 0x30
     lwz r3, 0x3c(r22)
     add r3, r3, r0
-lbl_fn_8050FE48_000009B0:
+lbl_p2p_sendDataPacket_000009B0:
     psq_l f1, 0x0(r3), 0, 0
     mr r4, r30
     psq_l f2, 0x8(r3), 0, 0
@@ -891,10 +891,10 @@ lbl_fn_8050FE48_000009B0:
     bl fn_805F89F0
     lha r0, 0x4(r25)
     cmpwi r0, 0x1
-    bne lbl_fn_8050FE48_00000A34
+    bne lbl_p2p_sendDataPacket_00000A34
     lwz r3, 0x0(r25)
     cmpwi r3, 0x0
-    beq lbl_fn_8050FE48_00000A64
+    beq lbl_p2p_sendDataPacket_00000A64
     lfs f0, 0x3c(r1)
     lfs f7, 0x2c(r1)
     lfs f2, 0x4c(r1)
@@ -904,11 +904,11 @@ lbl_fn_8050FE48_000009B0:
     psq_st f1, 0xbc(r3), 0, 0
     stfs f2, 0x1c(r1)
     stfs f2, 0xc4(r3)
-    b lbl_fn_8050FE48_00000A64
-lbl_fn_8050FE48_00000A34:
+    b lbl_p2p_sendDataPacket_00000A64
+lbl_p2p_sendDataPacket_00000A34:
     lwz r3, 0x0(r25)
     cmpwi r3, 0x0
-    beq lbl_fn_8050FE48_00000A64
+    beq lbl_p2p_sendDataPacket_00000A64
     lfs f0, 0x3c(r1)
     lfs f7, 0x2c(r1)
     lfs f2, 0x4c(r1)
@@ -918,14 +918,14 @@ lbl_fn_8050FE48_00000A34:
     psq_st f1, 0xbc(r3), 0, 0
     stfs f2, 0x10(r1)
     stfs f2, 0xc4(r3)
-lbl_fn_8050FE48_00000A64:
+lbl_p2p_sendDataPacket_00000A64:
     lwz r3, 0x8(r25)
     cmpwi r3, 0x0
-    beq lbl_fn_8050FE48_00000A74
-    b lbl_fn_8050FE48_00000A78
-lbl_fn_8050FE48_00000A74:
+    beq lbl_p2p_sendDataPacket_00000A74
+    b lbl_p2p_sendDataPacket_00000A78
+lbl_p2p_sendDataPacket_00000A74:
     li r3, 0x0
-lbl_fn_8050FE48_00000A78:
+lbl_p2p_sendDataPacket_00000A78:
     psq_l f1, 0x30(r3), 0, 0
     psq_l f2, 0x38(r3), 0, 0
     psq_l f3, 0x40(r3), 0, 0
@@ -938,13 +938,13 @@ lbl_fn_8050FE48_00000A78:
     psq_st f3, 0x1c(r25), 0, 0
     psq_st f4, 0x24(r25), 0, 0
     psq_st f5, 0x2c(r25), 0, 0
-lbl_fn_8050FE48_00000AA8:
+lbl_p2p_sendDataPacket_00000AA8:
     addi r27, r27, 0x1
     addi r23, r23, 0x4
-lbl_fn_8050FE48_00000AB0:
+lbl_p2p_sendDataPacket_00000AB0:
     lwz r0, 0x344(r24)
     cmpw r27, r0
-    blt lbl_fn_8050FE48_000008DC
+    blt lbl_p2p_sendDataPacket_000008DC
     addi r11, r1, 0x80
     bl _restgpr_21
     lwz r0, 0x84(r1)

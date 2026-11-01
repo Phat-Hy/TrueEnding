@@ -24,7 +24,7 @@ extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_8013655C(void);
 extern void fn_80145334(void);
-extern void fn_80149A30(void);
+extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_801588A0(void);
 extern void fn_8020A780(void);
@@ -1870,7 +1870,7 @@ lbl_fn_802AD930_000018E4:
 asm void fn_802ADE54(void)
 {
     nofralloc
-    b fn_80149A30
+    b dialog_renderWindow
 }
 
 asm void fn_802ADE58(void)

@@ -36,7 +36,7 @@ extern void fn_80121F00(void);
 extern void fn_8013655C(void);
 extern void fn_8013C504(void);
 extern void fn_80145334(void);
-extern void fn_80149A30(void);
+extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_8016E970(void);
 extern void fn_801A03E0(void);
@@ -1830,7 +1830,7 @@ asm void fn_802DF384(void)
     lwz r0, 0x151c(r3)
     cmpwi r0, 0x0
     bnelr
-    b fn_80149A30
+    b dialog_renderWindow
     blr
 }
 

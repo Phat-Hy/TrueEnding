@@ -74,7 +74,7 @@ void fn_800BD94C(void);
 void fn_800BD9C0(void);
 void fn_800BDB40(void);
 void fn_800BDB58(void);
-void fn_800BDBC8(void);
+void atn_Model_updateAnimation(void);
 void fn_800BECF0(void);
 void fn_800BEDA8(void);
 
@@ -260,7 +260,7 @@ lbl_fn_800BDB58_00000244:
     blr
 }
 
-asm void fn_800BDBC8(void)
+asm void atn_Model_updateAnimation(void)
 {
     nofralloc
     stwu r1, -0x270(r1)
@@ -285,11 +285,11 @@ asm void fn_800BDBC8(void)
     li r31, 0x8
     stw r30, 0x7c(r1)
     stw r30, 0x80(r1)
-lbl_fn_800BDBC8_000002D4:
+lbl_atn_Model_updateAnimation_000002D4:
     lwz r29, 0xa0(r27)
     lwz r0, 0x7c(r1)
     cmplw r0, r29
-    bgt lbl_fn_800BDBC8_000003FC
+    bgt lbl_atn_Model_updateAnimation_000003FC
     slwi r3, r29, 2
     li r4, 0x0
     la r5, lbl_8087D914
@@ -299,19 +299,19 @@ lbl_fn_800BDBC8_000002D4:
     lwz r0, 0x80(r1)
     mr r28, r3
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_000003F4
+    beq lbl_atn_Model_updateAnimation_000003F4
     lwz r0, 0x78(r1)
     mr r7, r29
     cmplw r29, r0
-    ble lbl_fn_800BDBC8_00000320
+    ble lbl_atn_Model_updateAnimation_00000320
     mr r7, r0
-lbl_fn_800BDBC8_00000320:
+lbl_atn_Model_updateAnimation_00000320:
     cmpwi r7, 0x0
     li r8, 0x0
-    beq lbl_fn_800BDBC8_000003EC
+    beq lbl_atn_Model_updateAnimation_000003EC
     cmplwi r7, 0x8
     subi r5, r7, 0x8
-    ble lbl_fn_800BDBC8_000003B4
+    ble lbl_atn_Model_updateAnimation_000003B4
     addi r0, r5, 0x7
     lwz r6, 0x80(r1)
     srwi r0, r0, 3
@@ -320,8 +320,8 @@ lbl_fn_800BDBC8_00000320:
     li r9, 0x0
     mtctr r0
     cmplwi r5, 0x0
-    ble lbl_fn_800BDBC8_000003B4
-lbl_fn_800BDBC8_0000035C:
+    ble lbl_atn_Model_updateAnimation_000003B4
+lbl_atn_Model_updateAnimation_0000035C:
     lwz r0, 0x0(r4)
     add r5, r6, r9
     stw r0, 0x0(r10)
@@ -343,8 +343,8 @@ lbl_fn_800BDBC8_0000035C:
     lwz r0, 0x1c(r5)
     stw r0, 0x1c(r10)
     addi r10, r10, 0x20
-    bdnz lbl_fn_800BDBC8_0000035C
-lbl_fn_800BDBC8_000003B4:
+    bdnz lbl_atn_Model_updateAnimation_0000035C
+lbl_atn_Model_updateAnimation_000003B4:
     lwz r4, 0x80(r1)
     slwi r6, r8, 2
     subf r0, r8, r7
@@ -352,37 +352,37 @@ lbl_fn_800BDBC8_000003B4:
     add r3, r4, r6
     mtctr r0
     cmplw r8, r7
-    bge lbl_fn_800BDBC8_000003EC
-lbl_fn_800BDBC8_000003D4:
+    bge lbl_atn_Model_updateAnimation_000003EC
+lbl_atn_Model_updateAnimation_000003D4:
     lwz r0, 0x0(r3)
     addi r8, r8, 0x1
     stw r0, 0x0(r5)
     addi r5, r5, 0x4
     addi r3, r3, 0x4
-    bdnz lbl_fn_800BDBC8_000003D4
-lbl_fn_800BDBC8_000003EC:
+    bdnz lbl_atn_Model_updateAnimation_000003D4
+lbl_atn_Model_updateAnimation_000003EC:
     lwz r3, 0x80(r1)
     bl fn_80084C24
-lbl_fn_800BDBC8_000003F4:
+lbl_atn_Model_updateAnimation_000003F4:
     stw r28, 0x80(r1)
     stw r29, 0x7c(r1)
-lbl_fn_800BDBC8_000003FC:
+lbl_atn_Model_updateAnimation_000003FC:
     lwz r24, 0x50(r27)
     cmpwi r24, 0x0
-    beq lbl_fn_800BDBC8_00000724
+    beq lbl_atn_Model_updateAnimation_00000724
     stw r30, 0x78(r1)
-    b lbl_fn_800BDBC8_0000069C
-lbl_fn_800BDBC8_00000410:
+    b lbl_atn_Model_updateAnimation_0000069C
+lbl_atn_Model_updateAnimation_00000410:
     lwz r0, 0x80(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_00000428
+    beq lbl_atn_Model_updateAnimation_00000428
     lwz r0, 0x7c(r1)
     cmpwi r0, 0x0
-    bne lbl_fn_800BDBC8_00000550
-lbl_fn_800BDBC8_00000428:
+    bne lbl_atn_Model_updateAnimation_00000550
+lbl_atn_Model_updateAnimation_00000428:
     lwz r0, 0x7c(r1)
     cmplwi r0, 0x8
-    bgt lbl_fn_800BDBC8_00000680
+    bgt lbl_atn_Model_updateAnimation_00000680
     li r3, 0x20
     li r4, 0x0
     la r5, lbl_8087D914
@@ -392,19 +392,19 @@ lbl_fn_800BDBC8_00000428:
     lwz r0, 0x80(r1)
     mr r28, r3
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_00000544
+    beq lbl_atn_Model_updateAnimation_00000544
     lwz r0, 0x78(r1)
     li r7, 0x8
     cmplwi r0, 0x8
-    bge lbl_fn_800BDBC8_00000470
+    bge lbl_atn_Model_updateAnimation_00000470
     mr r7, r0
-lbl_fn_800BDBC8_00000470:
+lbl_atn_Model_updateAnimation_00000470:
     cmpwi r7, 0x0
     li r8, 0x0
-    beq lbl_fn_800BDBC8_0000053C
+    beq lbl_atn_Model_updateAnimation_0000053C
     cmplwi r7, 0x8
     subi r5, r7, 0x8
-    ble lbl_fn_800BDBC8_00000504
+    ble lbl_atn_Model_updateAnimation_00000504
     addi r0, r5, 0x7
     lwz r6, 0x80(r1)
     srwi r0, r0, 3
@@ -413,8 +413,8 @@ lbl_fn_800BDBC8_00000470:
     li r9, 0x0
     mtctr r0
     cmplwi r5, 0x0
-    ble lbl_fn_800BDBC8_00000504
-lbl_fn_800BDBC8_000004AC:
+    ble lbl_atn_Model_updateAnimation_00000504
+lbl_atn_Model_updateAnimation_000004AC:
     lwz r0, 0x0(r4)
     add r5, r6, r9
     stw r0, 0x0(r10)
@@ -436,8 +436,8 @@ lbl_fn_800BDBC8_000004AC:
     lwz r0, 0x1c(r5)
     stw r0, 0x1c(r10)
     addi r10, r10, 0x20
-    bdnz lbl_fn_800BDBC8_000004AC
-lbl_fn_800BDBC8_00000504:
+    bdnz lbl_atn_Model_updateAnimation_000004AC
+lbl_atn_Model_updateAnimation_00000504:
     lwz r4, 0x80(r1)
     slwi r6, r8, 2
     subf r0, r8, r7
@@ -445,28 +445,28 @@ lbl_fn_800BDBC8_00000504:
     add r3, r4, r6
     mtctr r0
     cmplw r8, r7
-    bge lbl_fn_800BDBC8_0000053C
-lbl_fn_800BDBC8_00000524:
+    bge lbl_atn_Model_updateAnimation_0000053C
+lbl_atn_Model_updateAnimation_00000524:
     lwz r0, 0x0(r3)
     addi r8, r8, 0x1
     stw r0, 0x0(r5)
     addi r5, r5, 0x4
     addi r3, r3, 0x4
-    bdnz lbl_fn_800BDBC8_00000524
-lbl_fn_800BDBC8_0000053C:
+    bdnz lbl_atn_Model_updateAnimation_00000524
+lbl_atn_Model_updateAnimation_0000053C:
     lwz r3, 0x80(r1)
     bl fn_80084C24
-lbl_fn_800BDBC8_00000544:
+lbl_atn_Model_updateAnimation_00000544:
     stw r28, 0x80(r1)
     stw r31, 0x7c(r1)
-    b lbl_fn_800BDBC8_00000680
-lbl_fn_800BDBC8_00000550:
+    b lbl_atn_Model_updateAnimation_00000680
+lbl_atn_Model_updateAnimation_00000550:
     lwz r3, 0x78(r1)
     cmplw r3, r0
-    blt lbl_fn_800BDBC8_00000680
+    blt lbl_atn_Model_updateAnimation_00000680
     slwi r29, r3, 1
     cmplw r0, r29
-    bgt lbl_fn_800BDBC8_00000680
+    bgt lbl_atn_Model_updateAnimation_00000680
     slwi r3, r29, 2
     li r4, 0x0
     la r5, lbl_8087D914
@@ -476,19 +476,19 @@ lbl_fn_800BDBC8_00000550:
     lwz r0, 0x80(r1)
     mr r28, r3
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_00000678
+    beq lbl_atn_Model_updateAnimation_00000678
     lwz r0, 0x78(r1)
     mr r8, r29
     cmplw r29, r0
-    ble lbl_fn_800BDBC8_000005A4
+    ble lbl_atn_Model_updateAnimation_000005A4
     mr r8, r0
-lbl_fn_800BDBC8_000005A4:
+lbl_atn_Model_updateAnimation_000005A4:
     cmpwi r8, 0x0
     li r4, 0x0
-    beq lbl_fn_800BDBC8_00000670
+    beq lbl_atn_Model_updateAnimation_00000670
     cmplwi r8, 0x8
     subi r6, r8, 0x8
-    ble lbl_fn_800BDBC8_00000638
+    ble lbl_atn_Model_updateAnimation_00000638
     addi r0, r6, 0x7
     lwz r7, 0x80(r1)
     srwi r0, r0, 3
@@ -497,8 +497,8 @@ lbl_fn_800BDBC8_000005A4:
     li r9, 0x0
     mtctr r0
     cmplwi r6, 0x0
-    ble lbl_fn_800BDBC8_00000638
-lbl_fn_800BDBC8_000005E0:
+    ble lbl_atn_Model_updateAnimation_00000638
+lbl_atn_Model_updateAnimation_000005E0:
     lwz r0, 0x0(r5)
     add r6, r7, r9
     stw r0, 0x0(r10)
@@ -520,8 +520,8 @@ lbl_fn_800BDBC8_000005E0:
     lwz r0, 0x1c(r6)
     stw r0, 0x1c(r10)
     addi r10, r10, 0x20
-    bdnz lbl_fn_800BDBC8_000005E0
-lbl_fn_800BDBC8_00000638:
+    bdnz lbl_atn_Model_updateAnimation_000005E0
+lbl_atn_Model_updateAnimation_00000638:
     lwz r5, 0x80(r1)
     slwi r7, r4, 2
     subf r0, r4, r8
@@ -529,21 +529,21 @@ lbl_fn_800BDBC8_00000638:
     add r3, r5, r7
     mtctr r0
     cmplw r4, r8
-    bge lbl_fn_800BDBC8_00000670
-lbl_fn_800BDBC8_00000658:
+    bge lbl_atn_Model_updateAnimation_00000670
+lbl_atn_Model_updateAnimation_00000658:
     lwz r0, 0x0(r3)
     addi r4, r4, 0x1
     stw r0, 0x0(r6)
     addi r6, r6, 0x4
     addi r3, r3, 0x4
-    bdnz lbl_fn_800BDBC8_00000658
-lbl_fn_800BDBC8_00000670:
+    bdnz lbl_atn_Model_updateAnimation_00000658
+lbl_atn_Model_updateAnimation_00000670:
     lwz r3, 0x80(r1)
     bl fn_80084C24
-lbl_fn_800BDBC8_00000678:
+lbl_atn_Model_updateAnimation_00000678:
     stw r28, 0x80(r1)
     stw r29, 0x7c(r1)
-lbl_fn_800BDBC8_00000680:
+lbl_atn_Model_updateAnimation_00000680:
     lwz r4, 0x78(r1)
     lwz r5, 0x80(r1)
     slwi r3, r4, 2
@@ -551,9 +551,9 @@ lbl_fn_800BDBC8_00000680:
     stwx r24, r5, r3
     stw r0, 0x78(r1)
     lwz r24, 0x8(r24)
-lbl_fn_800BDBC8_0000069C:
+lbl_atn_Model_updateAnimation_0000069C:
     cmpwi r24, 0x0
-    bne lbl_fn_800BDBC8_00000410
+    bne lbl_atn_Model_updateAnimation_00000410
     lwz r0, 0x78(r1)
     addi r5, r1, 0x18
     lwz r3, 0x80(r1)
@@ -569,44 +569,44 @@ lbl_fn_800BDBC8_0000069C:
     lwz r6, 0x80(r1)
     mtctr r0
     cmplwi r0, 0x0
-    ble lbl_fn_800BDBC8_00000718
-lbl_fn_800BDBC8_000006E4:
+    ble lbl_atn_Model_updateAnimation_00000718
+lbl_atn_Model_updateAnimation_000006E4:
     cmplw r7, r5
-    bne lbl_fn_800BDBC8_000006F8
+    bne lbl_atn_Model_updateAnimation_000006F8
     lwzx r4, r6, r3
     stw r30, 0x8(r4)
-    b lbl_fn_800BDBC8_0000070C
-lbl_fn_800BDBC8_000006F8:
+    b lbl_atn_Model_updateAnimation_0000070C
+lbl_atn_Model_updateAnimation_000006F8:
     addi r0, r7, 0x1
     lwzx r4, r6, r3
     slwi r0, r0, 2
     lwzx r0, r6, r0
     stw r0, 0x8(r4)
-lbl_fn_800BDBC8_0000070C:
+lbl_atn_Model_updateAnimation_0000070C:
     addi r7, r7, 0x1
     addi r3, r3, 0x4
-    bdnz lbl_fn_800BDBC8_000006E4
-lbl_fn_800BDBC8_00000718:
+    bdnz lbl_atn_Model_updateAnimation_000006E4
+lbl_atn_Model_updateAnimation_00000718:
     lwz r3, 0x80(r1)
     lwz r0, 0x0(r3)
     stw r0, 0x50(r27)
-lbl_fn_800BDBC8_00000724:
+lbl_atn_Model_updateAnimation_00000724:
     addi r25, r25, 0x1
     addi r27, r27, 0x4
     cmpwi r25, 0x14
-    blt lbl_fn_800BDBC8_000002D4
+    blt lbl_atn_Model_updateAnimation_000002D4
     lwz r3, 0x80(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_800BDBC8_00000744
+    beq lbl_atn_Model_updateAnimation_00000744
     bl fn_80084C24
-lbl_fn_800BDBC8_00000744:
+lbl_atn_Model_updateAnimation_00000744:
     lwz r3, lbl_8087EFA8
     lwz r0, 0x1c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_000007D4
+    beq lbl_atn_Model_updateAnimation_000007D4
     lwz r0, 0x44(r26)
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_000007D4
+    beq lbl_atn_Model_updateAnimation_000007D4
     lfs f0, lbl_808810B8
     li r0, 0x13
     lfs f8, lbl_808810B0
@@ -636,11 +636,11 @@ lbl_fn_800BDBC8_00000744:
     lwz r3, lbl_8087EEB0
     li r0, 0x12
     stw r0, 0xa0(r3)
-lbl_fn_800BDBC8_000007D4:
+lbl_atn_Model_updateAnimation_000007D4:
     lwz r3, lbl_8087EFA8
     lwz r0, 0x18(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_0000095C
+    beq lbl_atn_Model_updateAnimation_0000095C
     lfs f11, lbl_808810BC
     li r25, 0x13
     lfs f0, lbl_80881098
@@ -735,7 +735,7 @@ lbl_fn_800BDBC8_000007D4:
     bl fn_8006144C
     lwz r3, lbl_8087EEB0
     stw r24, 0xa0(r3)
-lbl_fn_800BDBC8_0000095C:
+lbl_atn_Model_updateAnimation_0000095C:
     lwz r4, lbl_8087EF8C
     li r3, 0x0
     lfs f0, lbl_80881098
@@ -744,87 +744,87 @@ lbl_fn_800BDBC8_0000095C:
     lfs f8, 0x3c(r28)
     fcmpo cr0, f8, f0
     cror eq, gt, eq
-    bne lbl_fn_800BDBC8_00000988
+    bne lbl_atn_Model_updateAnimation_00000988
     li r27, 0xff
-    b lbl_fn_800BDBC8_000009B0
-lbl_fn_800BDBC8_00000988:
+    b lbl_atn_Model_updateAnimation_000009B0
+lbl_atn_Model_updateAnimation_00000988:
     lfs f0, lbl_80881088
     fcmpo cr0, f8, f0
     cror eq, lt, eq
-    bne lbl_fn_800BDBC8_0000099C
-    b lbl_fn_800BDBC8_000009AC
-lbl_fn_800BDBC8_0000099C:
+    bne lbl_atn_Model_updateAnimation_0000099C
+    b lbl_atn_Model_updateAnimation_000009AC
+lbl_atn_Model_updateAnimation_0000099C:
     lfs f7, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f7, f8, f0
     bl fn_80695D84
-lbl_fn_800BDBC8_000009AC:
+lbl_atn_Model_updateAnimation_000009AC:
     mr r27, r3
-lbl_fn_800BDBC8_000009B0:
+lbl_atn_Model_updateAnimation_000009B0:
     lfs f8, 0x40(r28)
     lfs f0, lbl_80881098
     fcmpo cr0, f8, f0
     cror eq, gt, eq
-    bne lbl_fn_800BDBC8_000009CC
+    bne lbl_atn_Model_updateAnimation_000009CC
     li r25, 0xff
-    b lbl_fn_800BDBC8_000009F8
-lbl_fn_800BDBC8_000009CC:
+    b lbl_atn_Model_updateAnimation_000009F8
+lbl_atn_Model_updateAnimation_000009CC:
     lfs f0, lbl_80881088
     fcmpo cr0, f8, f0
     cror eq, lt, eq
-    bne lbl_fn_800BDBC8_000009E4
+    bne lbl_atn_Model_updateAnimation_000009E4
     li r3, 0x0
-    b lbl_fn_800BDBC8_000009F4
-lbl_fn_800BDBC8_000009E4:
+    b lbl_atn_Model_updateAnimation_000009F4
+lbl_atn_Model_updateAnimation_000009E4:
     lfs f7, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f7, f8, f0
     bl fn_80695D84
-lbl_fn_800BDBC8_000009F4:
+lbl_atn_Model_updateAnimation_000009F4:
     mr r25, r3
-lbl_fn_800BDBC8_000009F8:
+lbl_atn_Model_updateAnimation_000009F8:
     lfs f8, 0x44(r28)
     lfs f0, lbl_80881098
     fcmpo cr0, f8, f0
     cror eq, gt, eq
-    bne lbl_fn_800BDBC8_00000A14
+    bne lbl_atn_Model_updateAnimation_00000A14
     li r24, 0xff
-    b lbl_fn_800BDBC8_00000A40
-lbl_fn_800BDBC8_00000A14:
+    b lbl_atn_Model_updateAnimation_00000A40
+lbl_atn_Model_updateAnimation_00000A14:
     lfs f0, lbl_80881088
     fcmpo cr0, f8, f0
     cror eq, lt, eq
-    bne lbl_fn_800BDBC8_00000A2C
+    bne lbl_atn_Model_updateAnimation_00000A2C
     li r3, 0x0
-    b lbl_fn_800BDBC8_00000A3C
-lbl_fn_800BDBC8_00000A2C:
+    b lbl_atn_Model_updateAnimation_00000A3C
+lbl_atn_Model_updateAnimation_00000A2C:
     lfs f7, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f7, f8, f0
     bl fn_80695D84
-lbl_fn_800BDBC8_00000A3C:
+lbl_atn_Model_updateAnimation_00000A3C:
     mr r24, r3
-lbl_fn_800BDBC8_00000A40:
+lbl_atn_Model_updateAnimation_00000A40:
     lfs f8, 0x48(r28)
     lfs f0, lbl_80881098
     fcmpo cr0, f8, f0
     cror eq, gt, eq
-    bne lbl_fn_800BDBC8_00000A5C
+    bne lbl_atn_Model_updateAnimation_00000A5C
     li r3, 0xff
-    b lbl_fn_800BDBC8_00000A84
-lbl_fn_800BDBC8_00000A5C:
+    b lbl_atn_Model_updateAnimation_00000A84
+lbl_atn_Model_updateAnimation_00000A5C:
     lfs f0, lbl_80881088
     fcmpo cr0, f8, f0
     cror eq, lt, eq
-    bne lbl_fn_800BDBC8_00000A74
+    bne lbl_atn_Model_updateAnimation_00000A74
     li r3, 0x0
-    b lbl_fn_800BDBC8_00000A84
-lbl_fn_800BDBC8_00000A74:
+    b lbl_atn_Model_updateAnimation_00000A84
+lbl_atn_Model_updateAnimation_00000A74:
     lfs f7, lbl_808810C8
     lfs f0, lbl_80881094
     fmadds f1, f7, f8, f0
     bl fn_80695D84
-lbl_fn_800BDBC8_00000A84:
+lbl_atn_Model_updateAnimation_00000A84:
     slwi r5, r25, 8
     slwi r4, r3, 24
     slwi r0, r27, 16
@@ -843,10 +843,10 @@ lbl_fn_800BDBC8_00000A84:
     srwi r3, r0, 5
     cntlzw r0, r3
     srwi. r0, r0, 5
-    beq lbl_fn_800BDBC8_00000BC0
+    beq lbl_atn_Model_updateAnimation_00000BC0
     cmpwi r3, 0x0
     lwz r25, 0x8c4(r23)
-    beq lbl_fn_800BDBC8_00000BA8
+    beq lbl_atn_Model_updateAnimation_00000BA8
     lis r4, lbl_80775B60@ha
     li r0, 0x0
     addi r4, r4, lbl_80775B60@l
@@ -867,7 +867,7 @@ lbl_fn_800BDBC8_00000A84:
     stw r0, 0x3c(r1)
     bl fn_800844D8
     cmpwi r3, 0x0
-    beq lbl_fn_800BDBC8_00000B4C
+    beq lbl_atn_Model_updateAnimation_00000B4C
     li r0, 0x1
     stw r0, 0x4(r3)
     lis r4, lbl_80775B98@ha
@@ -875,13 +875,13 @@ lbl_fn_800BDBC8_00000A84:
     addi r4, r4, lbl_80775B98@l
     stw r4, 0x0(r3)
     stw r24, 0xc(r3)
-lbl_fn_800BDBC8_00000B4C:
+lbl_atn_Model_updateAnimation_00000B4C:
     li r0, 0x0
     stw r3, 0x74(r1)
     stw r0, 0x38(r1)
-    b lbl_fn_800BDBC8_00000B60
+    b lbl_atn_Model_updateAnimation_00000B60
     bl fn_80084C24
-lbl_fn_800BDBC8_00000B60:
+lbl_atn_Model_updateAnimation_00000B60:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x70(r1)
     addi r4, r4, lbl_80775BC8@l
@@ -892,22 +892,22 @@ lbl_fn_800BDBC8_00000B60:
     stw r4, 0x6c(r1)
     bl fn_800DCA6C
     addic. r3, r1, 0x6c
-    beq lbl_fn_800BDBC8_00000BA8
+    beq lbl_atn_Model_updateAnimation_00000BA8
     addic. r3, r3, 0x4
-    beq lbl_fn_800BDBC8_00000BA8
-    beq lbl_fn_800BDBC8_00000BA8
+    beq lbl_atn_Model_updateAnimation_00000BA8
+    beq lbl_atn_Model_updateAnimation_00000BA8
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_800BDBC8_00000BA8
+    beq lbl_atn_Model_updateAnimation_00000BA8
     bl fn_806952C4
-lbl_fn_800BDBC8_00000BA8:
+lbl_atn_Model_updateAnimation_00000BA8:
     lwz r5, 0x8b0(r23)
     mr r4, r25
     addi r3, r23, 0x8b4
     lwz r12, 0x4(r5)
     mtctr r12
     bctrl
-lbl_fn_800BDBC8_00000BC0:
+lbl_atn_Model_updateAnimation_00000BC0:
     lfs f0, lbl_80881088
     addi r3, r1, 0x40
     stfs f0, 0x40(r1)
@@ -919,44 +919,44 @@ lbl_fn_800BDBC8_00000BC0:
     lwz r3, lbl_8087EFA8
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_00000BF8
+    beq lbl_atn_Model_updateAnimation_00000BF8
     lwz r3, lbl_8087EEF8
     bl fn_8007A4CC
-lbl_fn_800BDBC8_00000BF8:
+lbl_atn_Model_updateAnimation_00000BF8:
     mr r24, r23
     li r25, 0x0
-lbl_fn_800BDBC8_00000C00:
+lbl_atn_Model_updateAnimation_00000C00:
     cmpwi r25, 0x3
-    bne lbl_fn_800BDBC8_00000C18
+    bne lbl_atn_Model_updateAnimation_00000C18
     lwz r3, lbl_8087EFA8
     lwz r0, 0x104(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_00000C60
-lbl_fn_800BDBC8_00000C18:
+    beq lbl_atn_Model_updateAnimation_00000C60
+lbl_atn_Model_updateAnimation_00000C18:
     cmpwi r25, 0x4
-    bne lbl_fn_800BDBC8_00000C30
+    bne lbl_atn_Model_updateAnimation_00000C30
     addis r3, r23, 0x5
     lwz r0, 0x4960(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_00000C60
-lbl_fn_800BDBC8_00000C30:
+    beq lbl_atn_Model_updateAnimation_00000C60
+lbl_atn_Model_updateAnimation_00000C30:
     stw r25, 0x2f8(r23)
     lwz r3, 0x0(r24)
     cmpwi r3, 0x0
-    beq lbl_fn_800BDBC8_00000C60
+    beq lbl_atn_Model_updateAnimation_00000C60
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_00000C60
+    beq lbl_atn_Model_updateAnimation_00000C60
     lwz r12, 0x0(r3)
     lwz r4, 0x50(r24)
     lwz r12, 0x10(r12)
     mtctr r12
     bctrl
-lbl_fn_800BDBC8_00000C60:
+lbl_atn_Model_updateAnimation_00000C60:
     addi r25, r25, 0x1
     addi r24, r24, 0x4
     cmpwi r25, 0x14
-    blt lbl_fn_800BDBC8_00000C00
+    blt lbl_atn_Model_updateAnimation_00000C00
     addi r3, r1, 0xe8
     li r4, 0x1
     li r5, -0x1
@@ -979,7 +979,7 @@ lbl_fn_800BDBC8_00000C60:
     psq_st f3, 0x10(r4), 0, 0
     psq_st f4, 0x18(r4), 0, 0
     psq_st f5, 0x20(r4), 0, 0
-    beq lbl_fn_800BDBC8_00000DA0
+    beq lbl_atn_Model_updateAnimation_00000DA0
     psq_l f1, 0x1d4(r23), 0, 0
     addi r4, r1, 0x88
     psq_l f2, 0x1dc(r23), 0, 0
@@ -1033,7 +1033,7 @@ lbl_fn_800BDBC8_00000C60:
     psq_st f3, 0x10(r4), 0, 0
     psq_st f4, 0x18(r4), 0, 0
     psq_st f5, 0x20(r4), 0, 0
-lbl_fn_800BDBC8_00000DA0:
+lbl_atn_Model_updateAnimation_00000DA0:
     addi r3, r1, 0x178
     li r4, 0x2
     li r5, -0x1
@@ -1110,32 +1110,32 @@ lbl_fn_800BDBC8_00000DA0:
     mr r28, r23
     li r24, 0x0
     li r31, 0x0
-lbl_fn_800BDBC8_00000ED0:
+lbl_atn_Model_updateAnimation_00000ED0:
     cmpwi r24, 0x3
     stw r31, 0x890(r23)
-    bne lbl_fn_800BDBC8_00000EEC
+    bne lbl_atn_Model_updateAnimation_00000EEC
     lwz r3, lbl_8087EFA8
     lwz r0, 0x104(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_00001030
-lbl_fn_800BDBC8_00000EEC:
+    beq lbl_atn_Model_updateAnimation_00001030
+lbl_atn_Model_updateAnimation_00000EEC:
     cmpwi r24, 0x4
-    bne lbl_fn_800BDBC8_00000F04
+    bne lbl_atn_Model_updateAnimation_00000F04
     addis r3, r23, 0x5
     lwz r0, 0x4960(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_00001030
-lbl_fn_800BDBC8_00000F04:
+    beq lbl_atn_Model_updateAnimation_00001030
+lbl_atn_Model_updateAnimation_00000F04:
     stw r24, 0x2f8(r23)
     lwz r3, 0x0(r28)
     cmpwi r3, 0x0
-    beq lbl_fn_800BDBC8_00000FF8
+    beq lbl_atn_Model_updateAnimation_00000FF8
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_00000FF8
+    beq lbl_atn_Model_updateAnimation_00000FF8
     lwz r0, 0x50(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_00000FF8
+    beq lbl_atn_Model_updateAnimation_00000FF8
     addis r3, r23, 0x1
     stw r31, 0x958(r23)
     stw r31, -0x76a4(r3)
@@ -1153,20 +1153,20 @@ lbl_fn_800BDBC8_00000F04:
     lwz r3, lbl_8087EFA8
     lwz r0, 0x39c(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_00000F90
+    beq lbl_atn_Model_updateAnimation_00000F90
     addis r3, r23, 0x1
     lwz r0, -0x76a4(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_00000F90
+    beq lbl_atn_Model_updateAnimation_00000F90
     lwz r4, 0x958(r23)
     addi r3, r23, 0x95c
     bl fn_800BECF0
-lbl_fn_800BDBC8_00000F90:
+lbl_atn_Model_updateAnimation_00000F90:
     mr r27, r23
     addis r25, r23, 0x1
     li r29, 0x0
-    b lbl_fn_800BDBC8_00000FC0
-lbl_fn_800BDBC8_00000FA0:
+    b lbl_atn_Model_updateAnimation_00000FC0
+lbl_atn_Model_updateAnimation_00000FA0:
     lwz r0, 0x960(r27)
     lfs f1, lbl_80881088
     mulli r0, r0, 0x4c
@@ -1175,10 +1175,10 @@ lbl_fn_800BDBC8_00000FA0:
     bl atn_Reticle_updateDraw
     addi r27, r27, 0x8
     addi r29, r29, 0x1
-lbl_fn_800BDBC8_00000FC0:
+lbl_atn_Model_updateAnimation_00000FC0:
     lwz r0, -0x76a4(r25)
     cmplw r29, r0
-    blt lbl_fn_800BDBC8_00000FA0
+    blt lbl_atn_Model_updateAnimation_00000FA0
     lwz r3, 0x0(r28)
     lwz r4, 0x50(r28)
     lwz r12, 0x0(r3)
@@ -1190,35 +1190,35 @@ lbl_fn_800BDBC8_00000FC0:
     lwz r12, 0x20(r12)
     mtctr r12
     bctrl
-lbl_fn_800BDBC8_00000FF8:
+lbl_atn_Model_updateAnimation_00000FF8:
     mr r25, r23
     li r27, 0x0
-    b lbl_fn_800BDBC8_00001024
-lbl_fn_800BDBC8_00001004:
+    b lbl_atn_Model_updateAnimation_00001024
+lbl_atn_Model_updateAnimation_00001004:
     lwz r0, 0x918(r25)
     cmpw r24, r0
-    bne lbl_fn_800BDBC8_0000101C
+    bne lbl_atn_Model_updateAnimation_0000101C
     lwz r4, 0x914(r25)
     mr r3, r26
     bl fn_80071D80
-lbl_fn_800BDBC8_0000101C:
+lbl_atn_Model_updateAnimation_0000101C:
     addi r25, r25, 0x8
     addi r27, r27, 0x1
-lbl_fn_800BDBC8_00001024:
+lbl_atn_Model_updateAnimation_00001024:
     lwz r0, 0x910(r23)
     cmplw r27, r0
-    blt lbl_fn_800BDBC8_00001004
-lbl_fn_800BDBC8_00001030:
+    blt lbl_atn_Model_updateAnimation_00001004
+lbl_atn_Model_updateAnimation_00001030:
     addi r24, r24, 0x1
     addi r28, r28, 0x4
     cmpwi r24, 0x14
-    blt lbl_fn_800BDBC8_00000ED0
+    blt lbl_atn_Model_updateAnimation_00000ED0
     bl LCDisable
     lwz r0, 0x8c8(r23)
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_0000113C
+    beq lbl_atn_Model_updateAnimation_0000113C
     lwz r25, 0x8dc(r23)
-    bne lbl_fn_800BDBC8_00001124
+    bne lbl_atn_Model_updateAnimation_00001124
     lis r4, lbl_80775B60@ha
     li r0, 0x0
     addi r4, r4, lbl_80775B60@l
@@ -1239,7 +1239,7 @@ lbl_fn_800BDBC8_00001030:
     stw r0, 0x34(r1)
     bl fn_800844D8
     cmpwi r3, 0x0
-    beq lbl_fn_800BDBC8_000010C8
+    beq lbl_atn_Model_updateAnimation_000010C8
     li r0, 0x1
     stw r0, 0x4(r3)
     lis r4, lbl_80775B98@ha
@@ -1247,13 +1247,13 @@ lbl_fn_800BDBC8_00001030:
     addi r4, r4, lbl_80775B98@l
     stw r4, 0x0(r3)
     stw r24, 0xc(r3)
-lbl_fn_800BDBC8_000010C8:
+lbl_atn_Model_updateAnimation_000010C8:
     li r0, 0x0
     stw r3, 0x68(r1)
     stw r0, 0x30(r1)
-    b lbl_fn_800BDBC8_000010DC
+    b lbl_atn_Model_updateAnimation_000010DC
     bl fn_80084C24
-lbl_fn_800BDBC8_000010DC:
+lbl_atn_Model_updateAnimation_000010DC:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x64(r1)
     addi r4, r4, lbl_80775BC8@l
@@ -1264,22 +1264,22 @@ lbl_fn_800BDBC8_000010DC:
     stw r4, 0x60(r1)
     bl fn_800DCA6C
     addic. r3, r1, 0x60
-    beq lbl_fn_800BDBC8_00001124
+    beq lbl_atn_Model_updateAnimation_00001124
     addic. r3, r3, 0x4
-    beq lbl_fn_800BDBC8_00001124
-    beq lbl_fn_800BDBC8_00001124
+    beq lbl_atn_Model_updateAnimation_00001124
+    beq lbl_atn_Model_updateAnimation_00001124
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_800BDBC8_00001124
+    beq lbl_atn_Model_updateAnimation_00001124
     bl fn_806952C4
-lbl_fn_800BDBC8_00001124:
+lbl_atn_Model_updateAnimation_00001124:
     lwz r5, 0x8c8(r23)
     mr r4, r25
     addi r3, r23, 0x8cc
     lwz r12, 0x4(r5)
     mtctr r12
     bctrl
-lbl_fn_800BDBC8_0000113C:
+lbl_atn_Model_updateAnimation_0000113C:
     addi r3, r23, 0x50
     li r4, 0x0
     li r5, 0x50
@@ -1297,9 +1297,9 @@ lbl_fn_800BDBC8_0000113C:
     stw r5, 0x910(r23)
     cmpwi r0, 0x0
     stw r5, 0x4960(r3)
-    beq lbl_fn_800BDBC8_0000126C
+    beq lbl_atn_Model_updateAnimation_0000126C
     lwz r25, 0x8f4(r23)
-    bne lbl_fn_800BDBC8_00001254
+    bne lbl_atn_Model_updateAnimation_00001254
     lis r4, lbl_80775B60@ha
     lis r3, lbl_80775BC8@ha
     addi r4, r4, lbl_80775B60@l
@@ -1319,7 +1319,7 @@ lbl_fn_800BDBC8_0000113C:
     stw r0, 0x2c(r1)
     bl fn_800844D8
     cmpwi r3, 0x0
-    beq lbl_fn_800BDBC8_000011F8
+    beq lbl_atn_Model_updateAnimation_000011F8
     li r0, 0x1
     stw r0, 0x4(r3)
     lis r4, lbl_80775B98@ha
@@ -1327,13 +1327,13 @@ lbl_fn_800BDBC8_0000113C:
     addi r4, r4, lbl_80775B98@l
     stw r4, 0x0(r3)
     stw r24, 0xc(r3)
-lbl_fn_800BDBC8_000011F8:
+lbl_atn_Model_updateAnimation_000011F8:
     li r0, 0x0
     stw r3, 0x5c(r1)
     stw r0, 0x28(r1)
-    b lbl_fn_800BDBC8_0000120C
+    b lbl_atn_Model_updateAnimation_0000120C
     bl fn_80084C24
-lbl_fn_800BDBC8_0000120C:
+lbl_atn_Model_updateAnimation_0000120C:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x58(r1)
     addi r4, r4, lbl_80775BC8@l
@@ -1344,29 +1344,29 @@ lbl_fn_800BDBC8_0000120C:
     stw r4, 0x54(r1)
     bl fn_800DCA6C
     addic. r3, r1, 0x54
-    beq lbl_fn_800BDBC8_00001254
+    beq lbl_atn_Model_updateAnimation_00001254
     addic. r3, r3, 0x4
-    beq lbl_fn_800BDBC8_00001254
-    beq lbl_fn_800BDBC8_00001254
+    beq lbl_atn_Model_updateAnimation_00001254
+    beq lbl_atn_Model_updateAnimation_00001254
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_800BDBC8_00001254
+    beq lbl_atn_Model_updateAnimation_00001254
     bl fn_806952C4
-lbl_fn_800BDBC8_00001254:
+lbl_atn_Model_updateAnimation_00001254:
     lwz r5, 0x8e0(r23)
     mr r4, r25
     addi r3, r23, 0x8e4
     lwz r12, 0x4(r5)
     mtctr r12
     bctrl
-lbl_fn_800BDBC8_0000126C:
+lbl_atn_Model_updateAnimation_0000126C:
     mr r3, r26
     bl gx_syncFrameFifo
     lwz r0, 0x8f8(r23)
     cmpwi r0, 0x0
-    beq lbl_fn_800BDBC8_0000136C
+    beq lbl_atn_Model_updateAnimation_0000136C
     lwz r25, 0x90c(r23)
-    bne lbl_fn_800BDBC8_00001354
+    bne lbl_atn_Model_updateAnimation_00001354
     lis r4, lbl_80775B60@ha
     li r0, 0x0
     addi r4, r4, lbl_80775B60@l
@@ -1387,7 +1387,7 @@ lbl_fn_800BDBC8_0000126C:
     stw r0, 0x24(r1)
     bl fn_800844D8
     cmpwi r3, 0x0
-    beq lbl_fn_800BDBC8_000012F8
+    beq lbl_atn_Model_updateAnimation_000012F8
     li r0, 0x1
     stw r0, 0x4(r3)
     lis r4, lbl_80775B98@ha
@@ -1395,13 +1395,13 @@ lbl_fn_800BDBC8_0000126C:
     addi r4, r4, lbl_80775B98@l
     stw r4, 0x0(r3)
     stw r24, 0xc(r3)
-lbl_fn_800BDBC8_000012F8:
+lbl_atn_Model_updateAnimation_000012F8:
     li r0, 0x0
     stw r3, 0x50(r1)
     stw r0, 0x20(r1)
-    b lbl_fn_800BDBC8_0000130C
+    b lbl_atn_Model_updateAnimation_0000130C
     bl fn_80084C24
-lbl_fn_800BDBC8_0000130C:
+lbl_atn_Model_updateAnimation_0000130C:
     lis r4, lbl_80775BC8@ha
     lwz r3, 0x4c(r1)
     addi r4, r4, lbl_80775BC8@l
@@ -1412,22 +1412,22 @@ lbl_fn_800BDBC8_0000130C:
     stw r4, 0x48(r1)
     bl fn_800DCA6C
     addic. r3, r1, 0x48
-    beq lbl_fn_800BDBC8_00001354
+    beq lbl_atn_Model_updateAnimation_00001354
     addic. r3, r3, 0x4
-    beq lbl_fn_800BDBC8_00001354
-    beq lbl_fn_800BDBC8_00001354
+    beq lbl_atn_Model_updateAnimation_00001354
+    beq lbl_atn_Model_updateAnimation_00001354
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_800BDBC8_00001354
+    beq lbl_atn_Model_updateAnimation_00001354
     bl fn_806952C4
-lbl_fn_800BDBC8_00001354:
+lbl_atn_Model_updateAnimation_00001354:
     lwz r5, 0x8f8(r23)
     mr r4, r25
     addi r3, r23, 0x8fc
     lwz r12, 0x4(r5)
     mtctr r12
     bctrl
-lbl_fn_800BDBC8_0000136C:
+lbl_atn_Model_updateAnimation_0000136C:
     addi r11, r1, 0x230
     psq_l f31, 0x268(r1), 0, 0
     lfd f31, 0x260(r1)

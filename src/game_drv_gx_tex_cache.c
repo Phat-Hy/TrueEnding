@@ -60,7 +60,7 @@ extern void fn_805E3F20(void);
 extern void fn_805E4070(void);
 extern void fn_805E4080(void);
 extern void fn_805F2670(void);
-extern void fn_805F27A0(void);
+extern void OSReceiveMessage(void);
 extern void fn_805F2880(void);
 extern void OSInitMutex(void);
 extern void fn_805F8980(void);
@@ -173,7 +173,7 @@ lbl_fn_805C3330_00000020:
     li r5, 0x1
     addis r3, r3, 0x1
     addi r3, r3, 0x4680
-    bl fn_805F27A0
+    bl OSReceiveMessage
     lwz r0, 0x8(r1)
     cmplwi r0, 0x1
     bne lbl_fn_805C3330_0000021C

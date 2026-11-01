@@ -10,7 +10,7 @@ extern void fn_8000D3A4(void);
 extern void fn_8001047C(void);
 extern void fn_80011034(void);
 extern void fn_80011220(void);
-extern void fn_800132EC(void);
+extern void atn_Model_getBoneMatrix(void);
 extern void fn_80013338(void);
 extern void fn_800133B0(void);
 extern void fn_8004ED34(void);
@@ -60,7 +60,7 @@ extern void fn_80140500(void);
 extern void fn_8014052C(void);
 extern void fn_80140588(void);
 extern void fn_80145334(void);
-extern void fn_80149A30(void);
+extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_80164168(void);
 extern void fn_8016E970(void);
@@ -908,7 +908,7 @@ asm void fn_80313FC0(void)
 asm void fn_80313FC4(void)
 {
     nofralloc
-    b fn_80149A30
+    b dialog_renderWindow
 }
 
 asm void fn_80313FC8(void)
@@ -2018,7 +2018,7 @@ lbl_fn_80314BD8_000019E8:
     addi r3, r30, 0xb0
     addi r4, r4, lbl_80749390@l
     addi r4, r4, 0x9f
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     mr r4, r3
     addi r3, r1, 0x164
     bl fn_8000D0F8

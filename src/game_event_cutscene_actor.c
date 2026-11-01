@@ -43,7 +43,7 @@ extern void fn_800B95C4(void);
 extern void fn_800BC798(void);
 extern void fn_800BD94C(void);
 extern void fn_800BD9C0(void);
-extern void fn_800BDBC8(void);
+extern void atn_Model_updateAnimation(void);
 extern void fn_800BFAC4(void);
 extern void fn_800C622C(void);
 extern void fn_800CCBA4(void);
@@ -618,7 +618,7 @@ lbl_main_00000614:
     lwz r3, lbl_8087EF70
     bl fn_800A5554
     lwz r3, lbl_8087EFB4
-    bl fn_800BDBC8
+    bl atn_Model_updateAnimation
     lwz r15, lbl_8087F534
     bl OSGetTime
     stw r4, 0x1c(r15)

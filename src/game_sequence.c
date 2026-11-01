@@ -107,7 +107,7 @@ extern void GXLoadTexMtxImm(void);
 extern void fn_80618570(void);
 extern void fn_806185C0(void);
 extern void fn_80618630(void);
-extern void fn_80618670(void);
+extern void __GXSetIndTexMtx(void);
 extern void fn_8068A850(void);
 extern void fn_8068AD58(void);
 extern void fn_80695D84(void);
@@ -598,7 +598,7 @@ asm void gx_drawScreenQuad(void)
     li r3, 0x2
     bl fn_80614A80
     li r3, 0x0
-    bl fn_80618670
+    bl __GXSetIndTexMtx
     li r3, 0x0
     li r4, 0x0
     bl fn_80618630

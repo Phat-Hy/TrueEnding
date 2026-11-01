@@ -20,7 +20,7 @@ extern void fn_80097E80(void);
 extern void atn_Task_constructor(void);
 extern void fn_800DC6B4(void);
 extern void fn_80145334(void);
-extern void fn_80149A30(void);
+extern void dialog_renderWindow(void);
 extern void fn_8036554C(void);
 extern void fn_803CC5E4(void);
 extern void fn_8047FF70(void);
@@ -501,7 +501,7 @@ lbl_fn_8000D138_000005A0:
     rlwinm r0, r0, 0, 29, 29
     cmplwi r0, 0x4
     bnelr
-    b fn_80149A30
+    b dialog_renderWindow
     blr
 }
 

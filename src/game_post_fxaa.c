@@ -9,7 +9,7 @@ extern void fn_80097C08(void);
 extern void fn_80097CCC(void);
 extern void fn_800F8548(void);
 extern void fn_80148990(void);
-extern void fn_80149A30(void);
+extern void dialog_renderWindow(void);
 extern void fn_8014FCC4(void);
 extern void fn_80151448(void);
 extern void fn_8016E970(void);
@@ -63,7 +63,7 @@ asm void fn_802D228C(void)
     lwz r0, 0x15c8(r3)
     cmpwi r0, 0x0
     bnelr
-    b fn_80149A30
+    b dialog_renderWindow
     blr
 }
 

@@ -22,7 +22,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_805F2670(void);
 extern void fn_805F26D0(void);
-extern void fn_805F27A0(void);
+extern void OSReceiveMessage(void);
 extern void OSInitMutex(void);
 extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
@@ -954,7 +954,7 @@ asm void fn_8069AAEC(void)
     li r5, 0x1
     stw r0, 0x14(r1)
     addi r4, r1, 0x8
-    bl fn_805F27A0
+    bl OSReceiveMessage
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10

@@ -40,7 +40,7 @@ extern void fn_8013655C(void);
 extern void fn_8013C504(void);
 extern void fn_80145334(void);
 extern void fn_80149624(void);
-extern void fn_80149A30(void);
+extern void dialog_renderWindow(void);
 extern void fn_801513D0(void);
 extern void fn_80151448(void);
 extern void fn_8016E970(void);
@@ -734,7 +734,7 @@ asm void fn_8030AF10(void)
     cmpwi r3, 0x0
     beq lbl_fn_8030AF10_00000D38
     mr r3, r31
-    bl fn_80149A30
+    bl dialog_renderWindow
     bl fn_80121F00
     lwz r4, 0x1518(r31)
     bl world_getLocalFlag
@@ -749,9 +749,9 @@ asm void fn_8030AF10(void)
     lwz r0, 0x1508(r31)
     cmpwi r0, 0x0
     beq lbl_fn_8030AF10_00000934
-    bl fn_80149A30
+    bl dialog_renderWindow
     lwz r3, 0x1508(r31)
-    bl fn_80149A30
+    bl dialog_renderWindow
     b lbl_fn_8030AF10_00000934
 lbl_fn_8030AF10_00000910:
     cmpwi r3, 0x2
@@ -762,7 +762,7 @@ lbl_fn_8030AF10_00000910:
     lwz r3, 0x1500(r31)
     cmpwi r3, 0x0
     beq lbl_fn_8030AF10_00000934
-    bl fn_80149A30
+    bl dialog_renderWindow
 lbl_fn_8030AF10_00000934:
     lwz r0, 0x1604(r31)
     cmpwi r0, 0x0

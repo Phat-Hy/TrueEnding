@@ -5,7 +5,7 @@
 extern void _restgpr_25(void);
 extern void _savegpr_25(void);
 extern void dtor_80084684(void);
-extern void fn_800132EC(void);
+extern void atn_Model_getBoneMatrix(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
 extern void fn_8004203C(void);
@@ -1009,7 +1009,7 @@ lbl_fn_802D0594_00000C6C:
     addi r3, r29, 0xb0
     addi r4, r4, lbl_807470A4@l
     addi r4, r4, 0x2b2
-    bl fn_800132EC
+    bl atn_Model_getBoneMatrix
     lfs f0, lbl_80884574
     li r0, 0x1
     stw r3, 0x1658(r29)

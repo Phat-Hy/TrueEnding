@@ -33,7 +33,7 @@ extern void fn_80127D8C(void);
 extern void fn_80129978(void);
 extern void fn_8013655C(void);
 extern void fn_80145334(void);
-extern void fn_80149A30(void);
+extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
 extern void fn_801A03E8(void);
 extern void fn_80232B7C(void);
@@ -1810,7 +1810,7 @@ asm void fn_8031F810(void)
     stw r28, 0x60(r1)
     stw r0, 0x48(r1)
     stw r0, 0x50(r1)
-    bl fn_80149A30
+    bl dialog_renderWindow
     lwz r5, 0x155c(r31)
     lis r4, 0x8889
     lis r3, lbl_807498B0@ha

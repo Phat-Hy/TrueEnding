@@ -40,7 +40,7 @@ extern void fn_80136138(void);
 extern void fn_80136544(void);
 extern void fn_8013655C(void);
 extern void fn_80145334(void);
-extern void fn_80149A30(void);
+extern void dialog_renderWindow(void);
 extern void fn_80176548(void);
 extern void fn_802180A8(void);
 extern void fn_80373148(void);
@@ -1531,7 +1531,7 @@ lbl_fn_8042D488_000011E0:
 asm void fn_8042D5A0(void)
 {
     nofralloc
-    b fn_80149A30
+    b dialog_renderWindow
 }
 
 asm void fn_8042D5A4(void)

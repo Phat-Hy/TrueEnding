@@ -81,7 +81,7 @@ void fn_8044D104(void);
 void fn_8044D184(void);
 void fn_8044D1A4(void);
 void fn_8044D208(void);
-void fn_8044D3A0(void);
+void weapon_getDamageParam(void);
 void fn_8044D404(void);
 void fn_8044D490(void);
 void fn_8044D4F0(void);
@@ -384,7 +384,7 @@ lbl_fn_8044D208_00000364:
     blr
 }
 
-asm void fn_8044D3A0(void)
+asm void weapon_getDamageParam(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -397,17 +397,17 @@ asm void fn_8044D3A0(void)
     mr r3, r5
     bl fn_80219558
     cmplwi r3, 0x6
-    bgt lbl_fn_8044D3A0_000003C0
+    bgt lbl_weapon_getDamageParam_000003C0
     addis r4, r30, 0x1
     slwi r0, r3, 6
     add r3, r4, r0
     slwi r0, r31, 3
     add r3, r3, r0
     lwz r3, -0x7d50(r3)
-    b lbl_fn_8044D3A0_000003C4
-lbl_fn_8044D3A0_000003C0:
+    b lbl_weapon_getDamageParam_000003C4
+lbl_weapon_getDamageParam_000003C0:
     li r3, -0x1
-lbl_fn_8044D3A0_000003C4:
+lbl_weapon_getDamageParam_000003C4:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

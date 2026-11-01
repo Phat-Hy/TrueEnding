@@ -9,7 +9,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_800584B4(void);
 extern void fn_80059240(void);
-extern void fn_8006D7B0(void);
+extern void gimmick_updateAll(void);
 extern void fn_8006F17C(void);
 extern void fn_80072914(void);
 extern void gx_beginQuadBatch(void);
@@ -2737,7 +2737,7 @@ lbl_atn_ComDrawFont_execute_0000278C:
     lwz r9, 0x6c(r30)
     lfs f6, 0x64(r30)
     lfs f7, 0x68(r30)
-    bl fn_8006D7B0
+    bl gimmick_updateAll
     lwz r5, lbl_8087EEC8
     li r3, 0x0
     lfs f7, lbl_808809A0
@@ -3126,7 +3126,7 @@ lbl_atn_ComDrawFontSideFade_execute_00002D30:
     lfs f5, 0x28(r27)
     lfs f6, 0x64(r27)
     lfs f7, 0x68(r27)
-    bl fn_8006D7B0
+    bl gimmick_updateAll
     addi r20, r20, 0x1
     addi r26, r26, 0xc
 lbl_atn_ComDrawFontSideFade_execute_00002D8C:

@@ -94,7 +94,7 @@ extern void GXLoadTexMtxImm(void);
 extern void fn_80618570(void);
 extern void fn_806185C0(void);
 extern void fn_80618630(void);
-extern void fn_80618670(void);
+extern void __GXSetIndTexMtx(void);
 extern void fn_80618730(void);
 extern void fn_80618F50(void);
 extern void fn_80611060(void);
@@ -770,7 +770,7 @@ lbl___GXInitGX_00000800:
     li r3, 0x2
     bl fn_80614A80
     li r3, 0x0
-    bl fn_80618670
+    bl __GXSetIndTexMtx
     lhz r5, 0x4(r27)
     li r3, 0x0
     lhz r6, 0x6(r27)
