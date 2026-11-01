@@ -65,7 +65,7 @@ void fn_8051120C(void);
 void fn_8051125C(void);
 void fn_805112AC(void);
 void fn_805112FC(void);
-void fn_805113EC(void);
+void net_p2p_updateMetricRecord(void);
 void fn_805114D8(void);
 void fn_805115D4(void);
 void fn_80511668(void);
@@ -398,7 +398,7 @@ lbl_fn_805112FC_00000378:
     blr
 }
 
-asm void fn_805113EC(void)
+asm void net_p2p_updateMetricRecord(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -415,7 +415,7 @@ asm void fn_805113EC(void)
     mr r30, r4
     stw r29, 0x14(r1)
     mr r29, r3
-    beq lbl_fn_805113EC_000004F8
+    beq lbl_net_p2p_updateMetricRecord_000004F8
     li r4, 0x0
     bl atn_Task_setActive
     lwz r0, 0x104(r29)
@@ -424,7 +424,7 @@ asm void fn_805113EC(void)
     mr r3, r29
     bl profile_getMetricValue
     cmpwi r3, 0x0
-    beq lbl_fn_805113EC_000004F8
+    beq lbl_net_p2p_updateMetricRecord_000004F8
     mr r3, r29
     bl profile_getMetricValue
     lwz r0, 0xfc(r3)
@@ -451,7 +451,7 @@ asm void fn_805113EC(void)
     lis r4, fn_80511710@ha
     addi r4, r4, fn_80511710@l
     stw r4, 0xec(r3)
-lbl_fn_805113EC_000004F8:
+lbl_net_p2p_updateMetricRecord_000004F8:
     lwz r0, 0x34(r1)
     lfd f31, 0x28(r1)
     lfd f30, 0x20(r1)

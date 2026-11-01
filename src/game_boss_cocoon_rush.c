@@ -13,7 +13,7 @@ extern void atn_normalizePath(char* str);
 extern void boss_lookupActionEntry(void);
 extern void fn_8006B0C8(void);
 extern void fn_8006B404(void);
-extern void fn_8006D008(void);
+extern void gimmick_initObject(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_8008A4E0(void);
@@ -1625,11 +1625,11 @@ lbl_atn_LoadEffect_destructor_0000149C:
     addi r3, r1, 0x50
     addi r4, r1, 0x80
     addi r5, r27, lbl_80755CB8@l
-    bl fn_8006D008
+    bl gimmick_initObject
     mr r5, r18
     addi r3, r1, 0x74
     addi r4, r1, 0x50
-    bl fn_8006D008
+    bl gimmick_initObject
     lwz r0, 0x50(r1)
     srwi. r0, r0, 31
     beq lbl_atn_LoadEffect_destructor_000014E0
@@ -1660,11 +1660,11 @@ lbl_atn_LoadEffect_destructor_0000151C:
     mr r5, r28
     addi r3, r1, 0x44
     addi r4, r1, 0x80
-    bl fn_8006D008
+    bl gimmick_initObject
     addi r3, r1, 0x68
     addi r4, r1, 0x44
     addi r5, r18, 0x80
-    bl fn_8006D008
+    bl gimmick_initObject
     lwz r0, 0x44(r1)
     srwi. r0, r0, 31
     beq lbl_atn_LoadEffect_destructor_00001564
@@ -1747,11 +1747,11 @@ lbl_atn_LoadEffect_destructor_0000164C:
     addi r4, r1, 0x80
     addi r5, r27, lbl_80755CB8@l
     stb r30, 0x2e(r26)
-    bl fn_8006D008
+    bl gimmick_initObject
     addi r3, r1, 0x2c
     addi r4, r1, 0x38
     addi r5, r18, 0x80
-    bl fn_8006D008
+    bl gimmick_initObject
     lwz r0, 0x74(r1)
     srwi. r3, r0, 31
     bne lbl_atn_LoadEffect_destructor_000016A4

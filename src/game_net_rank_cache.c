@@ -25,7 +25,7 @@ extern void net_initCoopSession(void);
 extern void fn_804A62C8(void);
 extern void fn_80510D68(void);
 extern void fn_80510E98(void);
-extern void fn_805113EC(void);
+extern void net_p2p_updateMetricRecord(void);
 extern void fn_805114D8(void);
 extern void fn_805115D4(void);
 extern void fn_8052293C(void);
@@ -234,7 +234,7 @@ lbl_fn_80524824_000001F0:
     li r5, 0x0
     fmr f2, f1
     lwzx r3, r3, r21
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     addi r21, r21, 0x40
     addi r22, r22, 0x1
 lbl_fn_80524824_00000214:
@@ -254,7 +254,7 @@ lbl_fn_80524824_00000238:
     li r5, 0x0
     fmr f2, f1
     lwz r3, 0xf0(r24)
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     mr r22, r28
     mr r21, r28
     li r27, 0x0
@@ -302,7 +302,7 @@ lbl_fn_80524824_000002D0:
     lfs f1, lbl_808879F0
     li r5, 0x1
     lfs f2, lbl_808879F8
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     lfs f31, lbl_808879F0
     mr r26, r30
     li r20, 0x0
@@ -312,13 +312,13 @@ lbl_fn_80524824_00000314:
     lfs f1, lbl_808879F0
     li r5, 0x0
     lfs f2, lbl_808879F8
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     lwz r3, 0x144(r26)
     li r4, 0x1
     lfs f1, lbl_808879F0
     li r5, 0x1
     lfs f2, lbl_808879F8
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     addi r20, r20, 0x1
     stfs f31, 0x14c(r26)
     cmpwi r20, 0x2

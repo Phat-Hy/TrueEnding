@@ -35,7 +35,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void fn_8050FB3C(void);
 extern void fn_8050FC08(void);
 extern void fn_8050FD3C(void);
-extern void fn_805113EC(void);
+extern void net_p2p_updateMetricRecord(void);
 extern void fn_805114D8(void);
 extern void fn_805115D4(void);
 extern void runtime_registerStaticObject(void);
@@ -1420,7 +1420,7 @@ lbl_fn_801D0C10_000011F8:
     lfs f1, 0x0(r28)
     li r5, 0x0
     lfs f2, lbl_80882A5C
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
 lbl_fn_801D0C10_00001228:
     addi r29, r29, 0x40
     addi r28, r28, 0x14
@@ -1621,49 +1621,49 @@ lbl_fn_801D0C10_00001498:
     lfs f1, lbl_80882A7C
     li r5, 0x0
     lfs f2, lbl_80882A5C
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     lwz r3, 0xad0(r31)
     li r4, 0x1
     lfs f1, lbl_80882A7C
     li r5, 0x0
     lfs f2, lbl_80882A5C
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     lfs f1, lbl_80882A5C
     li r4, 0x1
     lwz r3, 0xad4(r31)
     li r5, 0x0
     fmr f2, f1
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     lfs f1, lbl_80882A5C
     li r4, 0x1
     lwz r3, 0xad8(r31)
     li r5, 0x0
     fmr f2, f1
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     lfs f1, lbl_80882A5C
     li r4, 0x1
     lwz r3, 0xadc(r31)
     li r5, 0x0
     fmr f2, f1
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     lfs f1, lbl_80882A5C
     li r4, 0x1
     lwz r3, 0xae0(r31)
     li r5, 0x0
     fmr f2, f1
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     lfs f1, lbl_80882A5C
     li r4, 0x1
     lwz r3, 0xb0c(r31)
     li r5, 0x0
     fmr f2, f1
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     lfs f1, lbl_80882A5C
     li r4, 0x1
     lwz r3, 0xb10(r31)
     li r5, 0x0
     fmr f2, f1
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     lwz r3, 0xb84(r31)
     li r4, 0x1
     lfs f1, lbl_80882A5C
@@ -1675,7 +1675,7 @@ lbl_fn_801D0C10_00001498:
     lfs f1, lbl_80882A5C
     li r5, 0x0
     lfs f2, lbl_80882A74
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     lwz r3, 0xb1c(r31)
     li r4, 0x1
     lfs f1, lbl_80882A5C
@@ -1698,7 +1698,7 @@ lbl_fn_801D0C10_00001608:
     li r4, 0x1
     li r5, 0x0
     fmr f2, f1
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
 lbl_fn_801D0C10_00001628:
     lwz r3, 0x140(r29)
     cmpwi r3, 0x0
@@ -1731,7 +1731,7 @@ lbl_fn_801D0C10_00001650:
     lfs f1, lbl_80882A5C
     li r5, 0x1
     lfs f2, lbl_80882A74
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     mr r29, r31
     li r27, 0x0
 lbl_fn_801D0C10_000016A8:
@@ -1841,7 +1841,7 @@ lbl_fn_801D0C10_000017E0:
     lfs f1, lbl_80882A5C
     li r5, 0x0
     lfs f2, lbl_80882A78
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     lwz r3, 0xb2c(r31)
     li r4, 0x1
     lfs f1, lbl_80882A5C

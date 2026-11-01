@@ -24,7 +24,7 @@ extern void fn_8006BBCC(void);
 extern void atn_FileList_destructor(void);
 extern void fn_8006C300(void);
 extern void fn_8006C3F0(void);
-extern void fn_8006D008(void);
+extern void gimmick_initObject(void);
 extern void fn_8006F420(void);
 extern void str_assignBuffer(void);
 extern void dungeon_initGlobalContext(void);
@@ -1749,11 +1749,11 @@ lbl_fn_8046CC90_00001698:
     mr r4, r3
     addi r3, r1, 0x14
     addi r5, r5, lbl_8075561C@l
-    bl fn_8006D008
+    bl gimmick_initObject
     addi r3, r1, 0x2c
     addi r4, r1, 0x14
     addi r5, r1, 0x70
-    bl fn_8006D008
+    bl gimmick_initObject
     addi r3, r1, 0x14
     li r4, -0x1
     bl dtor_80013D60

@@ -57,7 +57,7 @@ extern void fn_805A4258(void);
 extern void fn_805A45FC(void);
 extern void fn_805A4984(void);
 extern void world_setFlagByType(void);
-extern void fn_805A4F20(void);
+extern void atn_Anim_startLayerAnimation(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXRotAxis(void);
 extern void PSMTXMultVec(void);
@@ -1365,7 +1365,7 @@ lbl_fn_80306B40_0000110C:
     li r4, 0x140
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     b lbl_fn_80306B40_0000117C
 lbl_fn_80306B40_00001138:
     cmpwi r0, 0xa
@@ -1376,7 +1376,7 @@ lbl_fn_80306B40_00001138:
     li r4, 0x143
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     b lbl_fn_80306B40_0000117C
 lbl_fn_80306B40_00001160:
     lfs f1, lbl_80884B38
@@ -1385,7 +1385,7 @@ lbl_fn_80306B40_00001160:
     li r4, 0x145
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
 lbl_fn_80306B40_0000117C:
     lwz r3, lbl_8087F048
     bl system_getNextSequenceId
@@ -1432,7 +1432,7 @@ lbl_fn_80306B40_0000117C:
     stfs f0, 0x154c(r31)
     stfs f0, 0x1550(r31)
     stfs f0, 0x1554(r31)
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r3, lbl_8087F048
     bl system_getNextSequenceId
     lwz r0, 0x14cc(r31)
@@ -1445,7 +1445,7 @@ lbl_fn_80306B40_0000117C:
     lfs f2, lbl_80884B20
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r31)
     oris r0, r0, 0x1000
     stw r0, 0x14cc(r31)
@@ -1455,7 +1455,7 @@ lbl_fn_80306B40_0000117C:
     lfs f2, lbl_80884B20
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r31)
     oris r0, r0, 0x1000
     stw r0, 0x14cc(r31)
@@ -1477,7 +1477,7 @@ lbl_fn_80306B40_000012C8:
     li r4, 0x2e
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
 lbl_fn_80306B40_000012E4:
     lwz r0, 0xa4(r1)
     lwz r31, 0x9c(r1)

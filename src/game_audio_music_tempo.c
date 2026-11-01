@@ -66,7 +66,7 @@ extern void atn_LoadHandle_destructor(void);
 extern void atn_LoadHandle_isLoading(void);
 extern void rand_Mersenne_init(void);
 extern void fn_805A4258(void);
-extern void fn_805A4F20(void);
+extern void atn_Anim_startLayerAnimation(void);
 extern void PSVECNormalize(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
@@ -970,7 +970,7 @@ lbl_fn_8030E710_00000B44:
     lwz r4, 0x152c(r4)
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r3, 0x58c(r29)
     subi r0, r3, 0x9
     slwi r0, r0, 4
@@ -1064,7 +1064,7 @@ lbl_fn_8030E710_00000C94:
     lfs f2, lbl_80884C5C
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14d8(r29)
     lwz r3, 0x14cc(r29)
     cmpwi r0, 0x0

@@ -49,7 +49,7 @@ extern void rand_Mersenne_constructor(void);
 extern void rand_Mersenne_init(void);
 extern void fn_805A3D6C(void);
 extern void fn_805A4984(void);
-extern void fn_805A4F20(void);
+extern void atn_Anim_startLayerAnimation(void);
 extern void fn_805A5224(void);
 extern void PSVECSquareMag(void);
 extern void rand(void);
@@ -1649,7 +1649,7 @@ asm void fn_80311364(void)
     li r5, 0x0
     fmr f2, f1
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r27)
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r27)
@@ -1664,7 +1664,7 @@ asm void fn_80311364(void)
     li r4, 0x2d
     li r5, 0x0
     li r6, 0x0
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     addi r3, r27, 0xb0
     li r4, 0x0
     bl atn_Anim_getLayerDuration
@@ -2105,7 +2105,7 @@ lbl_fn_80311364_00001BF4:
     lfs f2, lbl_80884CA8
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r27)
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r27)
@@ -2115,7 +2115,7 @@ lbl_fn_80311364_00001BF4:
     lfs f2, lbl_80884CA8
     li r5, 0x1
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r3, 0x14e4(r27)
     cmpwi r3, 0x0
     beq lbl_fn_80311364_00001CB8
@@ -2156,7 +2156,7 @@ lbl_fn_80311364_00001CB8:
     lfs f2, lbl_80884CA8
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r27)
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r27)

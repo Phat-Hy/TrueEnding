@@ -9,7 +9,7 @@ extern void actor_dispatchMessage(void);
 extern void boss_decodePhaseBitfield(void);
 extern void boss_parseStateCondition(void);
 extern void boss_triggerEventAction(void);
-extern void fn_8006D008(void);
+extern void gimmick_initObject(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
@@ -234,7 +234,7 @@ lbl_fn_80576034_000001C8:
     addi r5, r5, lbl_80760D70@l
     addi r4, r1, 0x1c
     addi r5, r5, 0xf
-    bl fn_8006D008
+    bl gimmick_initObject
     lwz r0, 0x10(r1)
     srwi. r0, r0, 31
     bne lbl_fn_80576034_0000025C

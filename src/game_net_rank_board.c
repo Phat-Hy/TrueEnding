@@ -31,7 +31,7 @@ extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
 extern void shockwave_freeEmitter(void);
 extern void fn_804A62C8(void);
-extern void fn_805113EC(void);
+extern void net_p2p_updateMetricRecord(void);
 extern void fn_80521014(void);
 extern void fn_805212C0(void);
 extern void fn_8052190C(void);
@@ -113,7 +113,7 @@ lbl_fn_8051EC54_0000003C:
     li r5, 0x1
     lwzx r3, r3, r27
     lfs f2, lbl_80887908
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     lwz r3, 0x50(r31)
     lwzx r3, r3, r27
     cmpwi r3, 0x0
@@ -745,7 +745,7 @@ lbl_fn_8051F13C_00000954:
     li r5, 0x1
     lwzx r3, r3, r26
     lfs f2, lbl_80887908
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     lwz r3, 0x50(r31)
     lwzx r3, r3, r26
     cmpwi r3, 0x0

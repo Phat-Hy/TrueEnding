@@ -17,7 +17,7 @@ extern void fn_80069BF4(void);
 extern void boss_dispatchActionTransition(void);
 extern void boss_triggerEventSequence(void);
 extern void boss_parseStateCondition(void);
-extern void fn_8006D008(void);
+extern void gimmick_initObject(void);
 extern void script_executeOpcode(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_80084F84(void);
@@ -948,7 +948,7 @@ lbl_fn_8053F81C_00000B80:
     addi r5, r5, lbl_8075E148@l
     addi r4, r1, 0x68
     addi r5, r5, 0x4a
-    bl fn_8006D008
+    bl gimmick_initObject
     lwz r0, 0x68(r24)
     srwi. r4, r0, 31
     bne lbl_fn_8053F81C_00000BE0
@@ -1036,7 +1036,7 @@ lbl_fn_8053F81C_00000CB0:
     addi r5, r5, lbl_8075E148@l
     addi r4, r1, 0x44
     addi r5, r5, 0x4a
-    bl fn_8006D008
+    bl gimmick_initObject
     lwz r0, 0x68(r24)
     srwi. r4, r0, 31
     bne lbl_fn_8053F81C_00000D14
@@ -1098,7 +1098,7 @@ lbl_fn_8053F81C_00000D98:
     addi r5, r5, lbl_8075E148@l
     addi r4, r1, 0x2c
     addi r5, r5, 0x4a
-    bl fn_8006D008
+    bl gimmick_initObject
     lwz r0, 0x68(r24)
     srwi. r4, r0, 31
     bne lbl_fn_8053F81C_00000DEC

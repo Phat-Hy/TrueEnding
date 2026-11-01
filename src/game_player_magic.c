@@ -56,7 +56,7 @@ void* magic_getOffset6C(void* ptr);
 void* magic_getOffset51C(void* ptr);
 void f32_abs(void);
 void fn_8012256C(void);
-void fn_80122C70(void);
+void player_getSpellStatus(void);
 void* magic_getOffset244(void* ptr);
 u32 magic_isField28Zero(void* ptr);
 u32 magic_getField20(void* ptr);
@@ -130,14 +130,14 @@ lbl_fn_80122330_000000C8:
 lbl_fn_80122330_000000D0:
     mr r3, r31
     li r4, 0x8
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_8012216C
     cmpwi r3, 0x0
     bne lbl_fn_80122330_00000108
     mr r3, r31
     li r4, 0x8
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_801220A0
     cmpwi r3, 0x0
@@ -301,7 +301,7 @@ lbl_fn_8012256C_000002B8:
 lbl_fn_8012256C_00000304:
     mr r3, r28
     mr r4, r29
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpwi r3, 0x21
     mr r26, r3
     beq lbl_fn_8012256C_0000038C
@@ -402,7 +402,7 @@ lbl_fn_8012256C_0000045C:
     bne lbl_fn_8012256C_00000968
     mr r3, r28
     mr r4, r29
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpwi r3, 0x21
     mr r26, r3
     beq lbl_fn_8012256C_000004EC
@@ -453,7 +453,7 @@ lbl_fn_8012256C_000004F4:
 lbl_fn_8012256C_00000514:
     mr r3, r28
     mr r4, r29
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpwi r3, 0x21
     mr r26, r3
     beq lbl_fn_8012256C_0000059C
@@ -672,7 +672,7 @@ lbl_fn_8012256C_000007F0:
 lbl_fn_8012256C_0000080C:
     mr r3, r28
     mr r4, r29
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpwi r3, 0x21
     mr r26, r3
     beq lbl_fn_8012256C_00000894
@@ -723,7 +723,7 @@ lbl_fn_8012256C_0000089C:
 lbl_fn_8012256C_000008BC:
     mr r3, r28
     mr r4, r29
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpwi r3, 0x21
     mr r26, r3
     beq lbl_fn_8012256C_00000944
@@ -788,7 +788,7 @@ lbl_fn_8012256C_0000097C:
     blr
 }
 
-asm void fn_80122C70(void)
+asm void player_getSpellStatus(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -798,13 +798,13 @@ asm void fn_80122C70(void)
     stw r31, 0xc(r1)
     lbz r0, 0x14(r5)
     cmpwi r0, 0x0
-    beq lbl_fn_80122C70_000009C4
+    beq lbl_player_getSpellStatus_000009C4
     li r3, 0x21
-    b lbl_fn_80122C70_00000EC8
-lbl_fn_80122C70_000009C4:
+    b lbl_player_getSpellStatus_00000EC8
+lbl_player_getSpellStatus_000009C4:
     cmplwi r4, 0x35
     lwz r6, lbl_8087F0A8
-    bgt lbl_fn_80122C70_00000EC4
+    bgt lbl_player_getSpellStatus_00000EC4
     lis r5, jumptable_8077A228@ha
     slwi r0, r4, 2
     addi r5, r5, jumptable_8077A228@l
@@ -812,89 +812,89 @@ lbl_fn_80122C70_000009C4:
     mtctr r5
     bctr
     li r3, 0x4
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0x5
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087F9C0
     lwz r0, 0x28(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80122C70_00000A10
+    bne lbl_player_getSpellStatus_00000A10
     li r3, 0x4
-    b lbl_fn_80122C70_00000EC8
-lbl_fn_80122C70_00000A10:
+    b lbl_player_getSpellStatus_00000EC8
+lbl_player_getSpellStatus_00000A10:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
     cmpwi r3, 0x0
-    beq lbl_fn_80122C70_00000A2C
+    beq lbl_player_getSpellStatus_00000A2C
     li r3, 0xf
-    b lbl_fn_80122C70_00000EC8
-lbl_fn_80122C70_00000A2C:
+    b lbl_player_getSpellStatus_00000EC8
+lbl_player_getSpellStatus_00000A2C:
     lwz r3, lbl_8087F9C0
     lwz r0, 0x30(r3)
     cntlzw r0, r0
     srwi r3, r0, 5
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0x4
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r4, lbl_8087F9C0
     li r3, 0x4
     lwz r0, 0x28(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_80122C70_00000EC8
+    bne lbl_player_getSpellStatus_00000EC8
     li r3, 0x21
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0x4
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0x4
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
     cmpwi r3, 0x0
     li r3, 0x5
-    beq lbl_fn_80122C70_00000EC8
+    beq lbl_player_getSpellStatus_00000EC8
     li r3, 0x20
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r4, lbl_8087F9C0
     li r3, 0x9
     lwz r0, 0x34(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_80122C70_00000EC8
+    bne lbl_player_getSpellStatus_00000EC8
     li r3, 0x6
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087F9C0
     lwz r0, 0x20(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80122C70_00000AD4
+    beq lbl_player_getSpellStatus_00000AD4
     cmpwi r0, 0x1
-    beq lbl_fn_80122C70_00000ADC
+    beq lbl_player_getSpellStatus_00000ADC
     cmpwi r0, 0x2
-    beq lbl_fn_80122C70_00000AE4
-    b lbl_fn_80122C70_00000EC4
-lbl_fn_80122C70_00000AD4:
+    beq lbl_player_getSpellStatus_00000AE4
+    b lbl_player_getSpellStatus_00000EC4
+lbl_player_getSpellStatus_00000AD4:
     li r3, 0x4
-    b lbl_fn_80122C70_00000EC8
-lbl_fn_80122C70_00000ADC:
+    b lbl_player_getSpellStatus_00000EC8
+lbl_player_getSpellStatus_00000ADC:
     li r3, 0x4
-    b lbl_fn_80122C70_00000EC8
-lbl_fn_80122C70_00000AE4:
+    b lbl_player_getSpellStatus_00000EC8
+lbl_player_getSpellStatus_00000AE4:
     li r3, 0x6
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r0, 0x278(r6)
     li r3, 0xe
     cmpwi r0, 0x0
-    beq lbl_fn_80122C70_00000EC8
+    beq lbl_player_getSpellStatus_00000EC8
     li r3, 0x21
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0xf
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0xf
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0x0
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0x1
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -902,153 +902,153 @@ lbl_fn_80122C70_00000AE4:
     or r0, r0, r3
     srawi r3, r0, 31
     addi r3, r3, 0xf
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r4, lbl_8087F9C0
     li r3, 0x6
     lwz r0, 0x34(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_80122C70_00000EC8
+    bne lbl_player_getSpellStatus_00000EC8
     li r3, 0x9
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r4, lbl_8087F9C0
     li r3, 0x6
     lwz r0, 0x34(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_80122C70_00000EC8
+    bne lbl_player_getSpellStatus_00000EC8
     li r3, 0x9
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087F9C0
     lwz r0, 0x28(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80122C70_00000B94
+    bne lbl_player_getSpellStatus_00000B94
     li r3, 0x4
-    b lbl_fn_80122C70_00000EC8
-lbl_fn_80122C70_00000B94:
+    b lbl_player_getSpellStatus_00000EC8
+lbl_player_getSpellStatus_00000B94:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
     cmpwi r3, 0x0
-    beq lbl_fn_80122C70_00000BB0
+    beq lbl_player_getSpellStatus_00000BB0
     li r3, 0xf
-    b lbl_fn_80122C70_00000EC8
-lbl_fn_80122C70_00000BB0:
+    b lbl_player_getSpellStatus_00000EC8
+lbl_player_getSpellStatus_00000BB0:
     lwz r3, lbl_8087F9C0
     lwz r0, 0x30(r3)
     cntlzw r0, r0
     srwi r3, r0, 5
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r4, 0x2
-    bl fn_80122C70
-    b lbl_fn_80122C70_00000EC8
+    bl player_getSpellStatus
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087F9C0
     lwz r0, 0x34(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80122C70_00000C18
+    bne lbl_player_getSpellStatus_00000C18
     lwz r3, lbl_8087F430
     li r31, 0x1
     cmpwi r3, 0x0
-    beq lbl_fn_80122C70_00000C04
+    beq lbl_player_getSpellStatus_00000C04
     li r4, 0xd0
     bl world_getGlobalFlag
     cmpwi r3, 0x0
-    beq lbl_fn_80122C70_00000C04
+    beq lbl_player_getSpellStatus_00000C04
     li r31, 0x0
-lbl_fn_80122C70_00000C04:
+lbl_player_getSpellStatus_00000C04:
     cmpwi r31, 0x0
     li r3, 0x21
-    beq lbl_fn_80122C70_00000EC8
+    beq lbl_player_getSpellStatus_00000EC8
     li r3, 0x9
-    b lbl_fn_80122C70_00000EC8
-lbl_fn_80122C70_00000C18:
+    b lbl_player_getSpellStatus_00000EC8
+lbl_player_getSpellStatus_00000C18:
     lwz r3, lbl_8087F430
     li r31, 0x1
     cmpwi r3, 0x0
-    beq lbl_fn_80122C70_00000C3C
+    beq lbl_player_getSpellStatus_00000C3C
     li r4, 0xd0
     bl world_getGlobalFlag
     cmpwi r3, 0x0
-    beq lbl_fn_80122C70_00000C3C
+    beq lbl_player_getSpellStatus_00000C3C
     li r31, 0x0
-lbl_fn_80122C70_00000C3C:
+lbl_player_getSpellStatus_00000C3C:
     cmpwi r31, 0x0
     li r3, 0x21
-    beq lbl_fn_80122C70_00000EC8
+    beq lbl_player_getSpellStatus_00000EC8
     li r3, 0x6
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087F9C0
     lwz r0, 0x28(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80122C70_00000C68
+    bne lbl_player_getSpellStatus_00000C68
     li r3, 0x4
-    b lbl_fn_80122C70_00000EC8
-lbl_fn_80122C70_00000C68:
+    b lbl_player_getSpellStatus_00000EC8
+lbl_player_getSpellStatus_00000C68:
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
     cmpwi r3, 0x0
-    beq lbl_fn_80122C70_00000C84
+    beq lbl_player_getSpellStatus_00000C84
     li r3, 0xf
-    b lbl_fn_80122C70_00000EC8
-lbl_fn_80122C70_00000C84:
+    b lbl_player_getSpellStatus_00000EC8
+lbl_player_getSpellStatus_00000C84:
     lwz r3, lbl_8087F9C0
     lwz r0, 0x30(r3)
     cntlzw r0, r0
     srwi r3, r0, 5
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0x0
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0x1
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0x1
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0x2
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0x3
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r4, lbl_8087F9C0
     li r3, 0x0
     lwz r0, 0x28(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_80122C70_00000EC8
+    beq lbl_player_getSpellStatus_00000EC8
     li r3, 0x3
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r4, lbl_8087F9C0
     li r3, 0x1
     lwz r0, 0x28(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_80122C70_00000EC8
+    beq lbl_player_getSpellStatus_00000EC8
     li r3, 0x2
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r4, lbl_8087F9C0
     li r3, 0x6
     lwz r0, 0x34(r4)
     cmpwi r0, 0x0
-    bne lbl_fn_80122C70_00000EC8
+    bne lbl_player_getSpellStatus_00000EC8
     li r3, 0x9
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r0, 0x27c(r6)
     li r3, 0x21
     cmpwi r0, 0x0
-    beq lbl_fn_80122C70_00000EC8
+    beq lbl_player_getSpellStatus_00000EC8
     li r3, 0x4
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, 0x27c(r6)
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
     addi r3, r3, 0x4
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0x4
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r4, 0x7
-    bl fn_80122C70
-    b lbl_fn_80122C70_00000EC8
+    bl player_getSpellStatus
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0xc
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0xd
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     li r3, 0x4
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -1056,7 +1056,7 @@ lbl_fn_80122C70_00000C84:
     or r0, r0, r3
     srwi r3, r0, 31
     addi r3, r3, 0xe
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -1064,15 +1064,15 @@ lbl_fn_80122C70_00000C84:
     or r0, r0, r3
     srawi r3, r0, 31
     addi r3, r3, 0xe
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
     cmpwi r3, 0x0
     li r3, 0x0
-    beq lbl_fn_80122C70_00000EC8
+    beq lbl_player_getSpellStatus_00000EC8
     li r3, 0x7
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -1080,7 +1080,7 @@ lbl_fn_80122C70_00000C84:
     or r0, r0, r3
     srwi r3, r0, 31
     addi r3, r3, 0xe
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
@@ -1088,56 +1088,56 @@ lbl_fn_80122C70_00000C84:
     or r0, r0, r3
     srwi r3, r0, 31
     addi r3, r3, 0xe
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
     cmpwi r3, 0x0
-    beq lbl_fn_80122C70_00000E2C
+    beq lbl_player_getSpellStatus_00000E2C
     li r3, 0x0
-    b lbl_fn_80122C70_00000EC8
-lbl_fn_80122C70_00000E2C:
+    b lbl_player_getSpellStatus_00000EC8
+lbl_player_getSpellStatus_00000E2C:
     lwz r3, lbl_8087F9C0
     lwz r3, 0x30(r3)
     neg r0, r3
     or r0, r0, r3
     srwi r3, r0, 31
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
     cmpwi r3, 0x0
     li r3, 0xa
-    beq lbl_fn_80122C70_00000EC8
+    beq lbl_player_getSpellStatus_00000EC8
     li r3, 0x6
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
     cmpwi r3, 0x0
     li r3, 0x1f
-    beq lbl_fn_80122C70_00000EC8
+    beq lbl_player_getSpellStatus_00000EC8
     li r3, 0x9
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
     cmpwi r3, 0x0
     li r3, 0xf
-    beq lbl_fn_80122C70_00000EC8
+    beq lbl_player_getSpellStatus_00000EC8
     li r3, 0x7
-    b lbl_fn_80122C70_00000EC8
+    b lbl_player_getSpellStatus_00000EC8
     lwz r3, lbl_8087EF70
     li r4, 0x0
     bl msg_isWindowActive
     cmpwi r3, 0x0
     li r3, 0xe
-    beq lbl_fn_80122C70_00000EC8
+    beq lbl_player_getSpellStatus_00000EC8
     li r3, 0x8
-    b lbl_fn_80122C70_00000EC8
-lbl_fn_80122C70_00000EC4:
+    b lbl_player_getSpellStatus_00000EC8
+lbl_player_getSpellStatus_00000EC4:
     li r3, 0x21
-lbl_fn_80122C70_00000EC8:
+lbl_player_getSpellStatus_00000EC8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     mtlr r0
@@ -1186,7 +1186,7 @@ asm void magic_dispatchActionCommand(void)
     bctr
     mr r3, r29
     mr r4, r30
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_80121F08
     b lbl_magic_dispatchActionCommand_000014E8
@@ -1203,7 +1203,7 @@ asm void magic_dispatchActionCommand(void)
     bne lbl_magic_dispatchActionCommand_00000FB0
     mr r3, r29
     mr r4, r30
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_80121F08
     cmpwi r3, 0x0
@@ -1214,7 +1214,7 @@ lbl_magic_dispatchActionCommand_00000FB0:
 lbl_magic_dispatchActionCommand_00000FB8:
     mr r3, r29
     mr r4, r30
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_80121F08
     mr r31, r3
@@ -1276,7 +1276,7 @@ lbl_magic_dispatchActionCommand_00001068:
 lbl_magic_dispatchActionCommand_0000109C:
     mr r3, r29
     mr r4, r30
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_80121F08
     cmpwi r3, 0x0
@@ -1318,7 +1318,7 @@ lbl_magic_dispatchActionCommand_0000110C:
     beq lbl_magic_dispatchActionCommand_00001158
     mr r3, r29
     mr r4, r30
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_80121F08
     cmpwi r3, 0x0
@@ -1326,7 +1326,7 @@ lbl_magic_dispatchActionCommand_0000110C:
 lbl_magic_dispatchActionCommand_00001158:
     mr r3, r29
     mr r4, r30
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_8012216C
     cmpwi r3, 0x0
@@ -1359,13 +1359,13 @@ lbl_magic_dispatchActionCommand_0000118C:
 lbl_magic_dispatchActionCommand_000011D0:
     mr r3, r29
     mr r4, r30
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_80121F08
     b lbl_magic_dispatchActionCommand_000014E8
     mr r3, r29
     li r4, 0x1
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_80121F08
     cmpwi r3, 0x0
@@ -1374,14 +1374,14 @@ lbl_magic_dispatchActionCommand_000011D0:
     b lbl_magic_dispatchActionCommand_000014E8
     mr r3, r29
     li r4, 0x0
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_80121F08
     cmpwi r3, 0x0
     bne lbl_magic_dispatchActionCommand_000014E4
     mr r3, r29
     li r4, 0x0
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_80121FD4
     cmpwi r3, 0x0
@@ -1408,7 +1408,7 @@ lbl_magic_dispatchActionCommand_000011D0:
 lbl_magic_dispatchActionCommand_00001290:
     mr r3, r29
     li r4, 0x20
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_80121F08
     b lbl_magic_dispatchActionCommand_000014E8
@@ -1490,7 +1490,7 @@ lbl_magic_dispatchActionCommand_000013A8:
     mr r3, r29
     mr r4, r30
     li r31, 0x0
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_801220A0
     cmpwi r3, 0x0
@@ -1503,7 +1503,7 @@ lbl_magic_dispatchActionCommand_000013A8:
 lbl_magic_dispatchActionCommand_000013F4:
     mr r3, r29
     mr r4, r30
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_80121F08
     mr r31, r3
@@ -1528,7 +1528,7 @@ lbl_magic_dispatchActionCommand_00001444:
     b lbl_magic_dispatchActionCommand_000014E8
     mr r3, r29
     mr r4, r30
-    bl fn_80122C70
+    bl player_getSpellStatus
     mr r31, r3
     bl fn_801156BC
     mr r5, r31
@@ -1549,20 +1549,20 @@ lbl_magic_dispatchActionCommand_00001444:
 lbl_magic_dispatchActionCommand_0000149C:
     mr r3, r29
     mr r4, r30
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_80121F08
     b lbl_magic_dispatchActionCommand_000014E8
     mr r3, r29
     mr r4, r30
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x0
     bl fn_80121F08
     b lbl_magic_dispatchActionCommand_000014E8
 lbl_magic_dispatchActionCommand_000014CC:
     mr r3, r29
     mr r4, r30
-    bl fn_80122C70
+    bl player_getSpellStatus
     li r4, 0x1
     bl fn_80121F08
     b lbl_magic_dispatchActionCommand_000014E8
@@ -1609,7 +1609,7 @@ asm void fn_801237F0(void)
     beq lbl_fn_801237F0_00001778
     b lbl_fn_801237F0_000018F0
 lbl_fn_801237F0_00001558:
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpwi r3, 0x21
     mr r31, r3
     beq lbl_fn_801237F0_000015D8
@@ -1826,7 +1826,7 @@ lbl_fn_801237F0_0000182C:
     li r3, 0x0
     b lbl_fn_801237F0_00001994
 lbl_fn_801237F0_00001848:
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpwi r3, 0x21
     mr r31, r3
     beq lbl_fn_801237F0_000018C8
@@ -1875,7 +1875,7 @@ lbl_fn_801237F0_000018D0:
     srwi r3, r0, 31
     b lbl_fn_801237F0_00001994
 lbl_fn_801237F0_000018F0:
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpwi r3, 0x21
     mr r31, r3
     beq lbl_fn_801237F0_00001970

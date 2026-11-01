@@ -67,7 +67,7 @@ extern void fn_8050F940(void);
 extern void fn_8050FA80(void);
 extern void fn_8050FB3C(void);
 extern void fn_8050FD3C(void);
-extern void fn_805113EC(void);
+extern void net_p2p_updateMetricRecord(void);
 extern void fn_805114D8(void);
 extern void fn_805115D4(void);
 extern void fn_80517B40(void);
@@ -2184,13 +2184,13 @@ lbl_fn_8051CA78_00001CEC:
     lfs f1, lbl_80887904
     li r5, 0x1
     lfs f2, lbl_80887908
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     lwz r3, 0x18e4(r31)
     li r4, 0x0
     lfs f1, lbl_80887904
     li r5, 0x1
     lfs f2, lbl_80887908
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     lwz r3, 0x1904(r31)
     li r4, 0x1
     lfs f1, lbl_80887904

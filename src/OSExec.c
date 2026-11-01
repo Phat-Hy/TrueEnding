@@ -28,7 +28,7 @@ extern void fn_805ED1C0(void);
 extern void __OSReturnToMenuForError(void);
 extern void fn_805F3D40(void);
 extern void fn_805F7E30(void);
-extern void fn_80600800(void);
+extern void DVDLowFinish(void);
 extern void fn_80600AC0(void);
 extern void fn_80600C50(void);
 extern void fn_80600EC0(void);
@@ -865,7 +865,7 @@ lbl_fn_805EED60_00000A90:
     bl OSReport
     bl fn_805F3D40
 lbl_fn_805EED60_00000AE4:
-    bl fn_80600800
+    bl DVDLowFinish
     lis r5, 0x8000
     li r4, 0x100
     lwz r28, 0x311c(r5)

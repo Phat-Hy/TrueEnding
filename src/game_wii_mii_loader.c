@@ -14,7 +14,7 @@ extern void talk_copySpeakerName(void);
 extern void fn_80069BF4(void);
 extern void boss_decodePhaseBitfield(void);
 extern void boss_parseStateCondition(void);
-extern void fn_8006D008(void);
+extern void gimmick_initObject(void);
 extern void mem_alloc(void);
 extern void area_updateZoneState(void);
 extern void map_getArchiveName(void);
@@ -1509,7 +1509,7 @@ lbl_fn_8056556C_00001374:
     addi r3, r1, 0x28
     addi r4, r1, 0x34
     addi r5, r5, 0xf40
-    bl fn_8006D008
+    bl gimmick_initObject
     lwz r0, 0x28(r1)
     mr r3, r31
     srwi. r0, r0, 31

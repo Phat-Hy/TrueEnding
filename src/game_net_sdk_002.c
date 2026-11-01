@@ -13,7 +13,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void strcmp(void);
-extern void fn_8069A15C(void);
+extern void net_initAndDispatchSubsystem(void);
 extern void fn_8069A1A8(void);
 extern void fn_8069A574(void);
 extern void fn_8069AA08(void);
@@ -2197,7 +2197,7 @@ lbl_fn_8069DB98_00001B2C:
     b lbl_fn_8069DB98_00001B68
 lbl_fn_8069DB98_00001B48:
     mr r3, r30
-    bl fn_8069A15C
+    bl net_initAndDispatchSubsystem
     addi r3, r31, 0x30
     bl fn_8069A574
     mr r30, r3

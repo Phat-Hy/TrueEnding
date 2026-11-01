@@ -7,7 +7,7 @@ extern void msg_lookupFormattedEntry(void);
 extern void msg_formatWindowLayout(void);
 extern void fn_800A5870(void);
 extern void msg_isWindowActive(void);
-extern void fn_80122C70(void);
+extern void player_getSpellStatus(void);
 extern void map_isAreaCombatActive(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
@@ -64,7 +64,7 @@ asm void fn_80123C7C(void)
     beq lbl_fn_80123C7C_00000220
     b lbl_fn_80123C7C_00000380
 lbl_fn_80123C7C_00000038:
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpwi r3, 0x21
     mr r31, r3
     beq lbl_fn_80123C7C_000000B8
@@ -258,7 +258,7 @@ lbl_fn_80123C7C_000002B8:
     srwi r3, r0, 5
     b lbl_fn_80123C7C_00000424
 lbl_fn_80123C7C_000002D8:
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpwi r3, 0x21
     mr r31, r3
     beq lbl_fn_80123C7C_00000358
@@ -307,7 +307,7 @@ lbl_fn_80123C7C_00000360:
     srwi r3, r0, 31
     b lbl_fn_80123C7C_00000424
 lbl_fn_80123C7C_00000380:
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpwi r3, 0x21
     mr r31, r3
     beq lbl_fn_80123C7C_00000400
@@ -387,7 +387,7 @@ asm void player_evaluateStatusCondition(void)
     beq lbl_player_evaluateStatusCondition_000008BC
     b lbl_player_evaluateStatusCondition_00000A34
 lbl_player_evaluateStatusCondition_0000048C:
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpwi r3, 0x21
     mr r31, r3
     beq lbl_player_evaluateStatusCondition_0000050C
@@ -488,7 +488,7 @@ lbl_player_evaluateStatusCondition_000005DC:
     bne lbl_player_evaluateStatusCondition_00000AD8
     mr r3, r31
     mr r4, r30
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpwi r3, 0x21
     mr r31, r3
     beq lbl_player_evaluateStatusCondition_0000066C
@@ -539,7 +539,7 @@ lbl_player_evaluateStatusCondition_00000674:
 lbl_player_evaluateStatusCondition_00000694:
     mr r3, r31
     mr r4, r30
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpwi r3, 0x21
     mr r31, r3
     beq lbl_player_evaluateStatusCondition_0000071C
@@ -756,7 +756,7 @@ lbl_player_evaluateStatusCondition_00000970:
     li r3, 0x0
     b lbl_player_evaluateStatusCondition_00000AD8
 lbl_player_evaluateStatusCondition_0000098C:
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpwi r3, 0x21
     mr r31, r3
     beq lbl_player_evaluateStatusCondition_00000A0C
@@ -805,7 +805,7 @@ lbl_player_evaluateStatusCondition_00000A14:
     srwi r3, r0, 31
     b lbl_player_evaluateStatusCondition_00000AD8
 lbl_player_evaluateStatusCondition_00000A34:
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpwi r3, 0x21
     mr r31, r3
     beq lbl_player_evaluateStatusCondition_00000AB4
@@ -1217,7 +1217,7 @@ lbl_fn_80124BFC_00000FA4:
     lbz r28, 0x14(r30)
     mr r4, r29
     stb r31, 0x14(r30)
-    bl fn_80122C70
+    bl player_getSpellStatus
     cmpw r26, r3
     bne lbl_fn_80124BFC_00000FCC
     stb r27, 0x14(r30)

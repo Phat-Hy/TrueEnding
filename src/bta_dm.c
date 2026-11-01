@@ -143,7 +143,7 @@ void fn_8062A1CC(void);
 void fn_8062A230(void);
 void fn_8062A31C(void);
 void fn_8062A33C(void);
-void fn_8062A350(void);
+void bta_dm_send_msg(void);
 void fn_8062A36C(void);
 void fn_8062A38C(void);
 void fn_8062A3A0(void);
@@ -468,7 +468,7 @@ asm void fn_8062A33C(void)
     blr
 }
 
-asm void fn_8062A350(void)
+asm void bta_dm_send_msg(void)
 {
     nofralloc
     lwz r4, lbl_8087EAB0
@@ -600,7 +600,7 @@ lbl_fn_8062A45C_0000043C:
     beq lbl_fn_8062A45C_00000464
     lhz r0, 0x14(r31)
     sth r0, 0x0(r3)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062A45C_00000464:
     lwz r31, 0x0(r30)
     cmpwi r31, 0x0
@@ -1123,7 +1123,7 @@ asm void fn_8062AB40(void)
     beq lbl_fn_8062AB40_00000B48
     li r0, 0x207
     sth r0, 0x0(r3)
-    bl fn_8062A350
+    bl bta_dm_send_msg
     b lbl_fn_8062AB40_00000B48
 lbl_fn_8062AB40_00000B30:
     lis r3, lbl_8081FC38@ha
@@ -1206,7 +1206,7 @@ lbl_fn_8062ABC4_00000BF0:
     stb r3, 0xe(r30)
     mr r3, r30
     sth r0, 0x0(r30)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062ABC4_00000C54:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1326,7 +1326,7 @@ lbl_fn_8062ACD8_00000D94:
     stb r3, 0xe(r29)
     mr r3, r29
     sth r0, 0x0(r29)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062ACD8_00000E04:
     li r27, 0x0
     b lbl_fn_8062ACD8_00000E24
@@ -1351,7 +1351,7 @@ lbl_fn_8062ACD8_00000E24:
     beq lbl_fn_8062ACD8_00000E58
     li r0, 0x207
     sth r0, 0x0(r3)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062ACD8_00000E58:
     lis r3, lbl_8081FC38@ha
     lbz r0, 0x8(r31)
@@ -1437,7 +1437,7 @@ lbl_fn_8062AEFC_00000F1C:
     stb r3, 0xe(r29)
     mr r3, r29
     sth r0, 0x0(r29)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062AEFC_00000F8C:
     li r27, 0x0
     b lbl_fn_8062AEFC_00000FA8
@@ -1456,7 +1456,7 @@ lbl_fn_8062AEFC_00000FA8:
     beq lbl_fn_8062AEFC_00000FCC
     li r0, 0x207
     sth r0, 0x0(r3)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062AEFC_00000FCC:
     lis r3, lbl_8081FC38@ha
     addi r4, r31, 0x8
@@ -1486,7 +1486,7 @@ asm void fn_8062B068(void)
     beq lbl_fn_8062B068_0000102C
     li r0, 0x207
     sth r0, 0x0(r3)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062B068_0000102C:
     li r0, 0x0
     lis r5, lbl_8081FC38@ha
@@ -1610,7 +1610,7 @@ lbl_fn_8062B0CC_000011D0:
     li r5, 0x20
     bl strncpy
     mr r3, r29
-    bl fn_8062A350
+    bl bta_dm_send_msg
     b lbl_fn_8062B0CC_000012AC
 lbl_fn_8062B0CC_000011EC:
     cmplwi r5, 0xfff1
@@ -1663,7 +1663,7 @@ lbl_fn_8062B0CC_00001294:
     li r5, 0x20
     bl strncpy
     mr r3, r29
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062B0CC_000012AC:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1703,7 +1703,7 @@ asm void fn_8062B34C(void)
     beq lbl_fn_8062B34C_00001320
     li r0, 0x207
     sth r0, 0x0(r3)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062B34C_00001320:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1882,7 +1882,7 @@ asm void fn_8062B588(void)
     lwz r3, 0x74(r31)
     cmpwi r3, 0x0
     beq lbl_fn_8062B588_0000154C
-    bl fn_8062A350
+    bl bta_dm_send_msg
     li r0, 0x0
     stw r0, 0x74(r31)
 lbl_fn_8062B588_0000154C:
@@ -2039,7 +2039,7 @@ lbl_fn_8062B640_00001744:
     li r5, 0x20
     bl strncpy
     mr r3, r24
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062B640_0000175C:
     addi r11, r1, 0x50
     bl _restgpr_23
@@ -2104,7 +2104,7 @@ lbl_fn_8062B7E0_00001818:
     beq lbl_fn_8062B7E0_0000183C
     li r0, 0x207
     sth r0, 0x0(r3)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062B7E0_0000183C:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -2129,7 +2129,7 @@ asm void fn_8062B8C0(void)
     li r0, 0x206
     sth r0, 0x0(r3)
     sth r31, 0x8(r3)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062B8C0_00001888:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -2197,7 +2197,7 @@ asm void fn_8062B998(void)
     sth r0, 0x0(r3)
     lbz r0, 0x1(r31)
     stb r0, 0x8(r3)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062B998_00001964:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -2257,7 +2257,7 @@ asm void fn_8062BA24(void)
     li r0, 0x204
     mr r3, r30
     sth r0, 0x0(r30)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062BA24_00001A28:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -2297,7 +2297,7 @@ asm void fn_8062BAB0(void)
     li r0, 0x204
     mr r3, r30
     sth r0, 0x0(r30)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062BAB0_00001AB0:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -2736,7 +2736,7 @@ asm void fn_8062C074(void)
     li r0, 0x105
     mr r3, r31
     sth r0, 0x0(r31)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062C074_0000205C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -3423,7 +3423,7 @@ asm void fn_8062C970(void)
     li r0, 0x100
     sth r0, 0x0(r3)
     stw r31, 0x8(r3)
-    bl fn_8062A350
+    bl bta_dm_send_msg
     li r3, 0x0
     b lbl_fn_8062C970_00002978
 lbl_fn_8062C970_00002974:
@@ -3448,7 +3448,7 @@ asm void fn_8062C9F8(void)
     beq lbl_fn_8062C9F8_000029B4
     li r0, 0x101
     sth r0, 0x0(r3)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062C9F8_000029B4:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -3496,7 +3496,7 @@ asm void fn_8062CA68(void)
     addi r3, r3, 0x8
     bl strncpy
     mr r3, r31
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062CA68_00002A48:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -3524,7 +3524,7 @@ asm void fn_8062CACC(void)
     sth r0, 0x0(r3)
     stb r30, 0x8(r3)
     stb r31, 0x9(r3)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062CACC_00002AA0:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -3561,7 +3561,7 @@ asm void fn_8062CB24(void)
     stw r29, 0x14(r31)
     mr r3, r31
     stw r30, 0x18(r31)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062CB24_00002B1C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -3585,7 +3585,7 @@ asm void fn_8062CBA8(void)
     beq lbl_fn_8062CBA8_00002B64
     li r0, 0x201
     sth r0, 0x0(r3)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062CBA8_00002B64:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -3625,7 +3625,7 @@ asm void fn_8062CBE0(void)
     bl memcpy
 lbl_fn_8062CBE0_00002BE0:
     mr r3, r31
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062CBE0_00002BE8:
     addi r11, r1, 0x20
     bl _restgpr_27
@@ -3739,7 +3739,7 @@ asm void fn_8062CDA4(void)
     beq lbl_fn_8062CDA4_00002D60
     li r0, 0x10c
     sth r0, 0x0(r3)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062CDA4_00002D60:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -4418,7 +4418,7 @@ asm void fn_8062D6BC(void)
     addi r3, r3, 0x8
     bl bd_addr_copy
     mr r3, r31
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062D6BC_000036B0:
     addi r11, r1, 0x20
     bl _restgpr_27
@@ -4490,7 +4490,7 @@ lbl_fn_8062D734_00003760:
     addi r3, r3, 0x8
     bl bd_addr_copy
     mr r3, r31
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062D734_000037A8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

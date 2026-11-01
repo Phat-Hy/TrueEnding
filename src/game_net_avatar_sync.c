@@ -84,7 +84,7 @@ extern void fn_80510D68(void);
 extern void fn_80510E98(void);
 extern void fn_8051125C(void);
 extern void fn_805112AC(void);
-extern void fn_805113EC(void);
+extern void net_p2p_updateMetricRecord(void);
 extern void fn_805114D8(void);
 extern void fn_805115D4(void);
 extern void fn_8052C9C8(void);
@@ -1463,7 +1463,7 @@ lbl_fn_805293CC_00001190:
     li r5, 0x0
     fmr f2, f1
     lwzx r3, r3, r31
-    bl fn_805113EC
+    bl net_p2p_updateMetricRecord
     addi r31, r31, 0x40
     addi r30, r30, 0x1
 lbl_fn_805293CC_000011B4:

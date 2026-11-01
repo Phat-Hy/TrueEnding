@@ -32,7 +32,7 @@ extern void boss_initActionStream(void);
 extern void boss_parseStateCondition(void);
 extern void fn_8006BA30(void);
 extern void fn_8006BA38(void);
-extern void fn_8006D008(void);
+extern void gimmick_initObject(void);
 extern void mem_alloc(void);
 extern void sys_getMainManager(void);
 extern void atn_Matrix_copy(void);
@@ -1399,16 +1399,16 @@ lbl_fn_805BB658_00001144:
     addi r3, r1, 0x6c
     addi r4, r1, 0x78
     addi r5, r29, 0x54
-    bl fn_8006D008
+    bl gimmick_initObject
     bl fn_8006BA38
     mr r5, r3
     addi r3, r1, 0x60
     addi r4, r1, 0x6c
-    bl fn_8006D008
+    bl gimmick_initObject
     addi r3, r1, 0x54
     addi r4, r1, 0x60
     addi r5, r29, 0x56
-    bl fn_8006D008
+    bl gimmick_initObject
     addi r3, r1, 0x48
     addi r4, r1, 0xa8
     bl fn_8006AC08

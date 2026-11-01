@@ -20,7 +20,7 @@ extern void talk_copySpeakerName(void);
 extern void fn_8006A004(void);
 extern void boss_lookupActionEntry(void);
 extern void fn_8006B0C8(void);
-extern void fn_8006D008(void);
+extern void gimmick_initObject(void);
 extern void mem_alloc(void);
 extern void mem_getAllocSize(void);
 extern void node_destroy(void);
@@ -1778,7 +1778,7 @@ lbl_fn_801371AC_0000169C:
     addi r3, r1, 0x30
     addi r4, r1, 0x3c
     addi r5, r28, 0x134
-    bl fn_8006D008
+    bl gimmick_initObject
     lwz r0, 0x60(r1)
     srwi. r3, r0, 31
     bne lbl_fn_801371AC_000016F0

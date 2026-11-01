@@ -101,7 +101,7 @@ extern void fn_805A40BC(void);
 extern void fn_805A4258(void);
 extern void fn_805A4984(void);
 extern void world_setFlagByType(void);
-extern void fn_805A4F20(void);
+extern void atn_Anim_startLayerAnimation(void);
 extern void PSVECSquareMag(void);
 extern void strcmp(void);
 extern void atoi(void);
@@ -1083,7 +1083,7 @@ asm void fn_80314130(void)
     lfs f2, lbl_80884CF0
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r31)
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r31)
@@ -1111,7 +1111,7 @@ asm void fn_80314130(void)
     lfs f2, lbl_80884CF0
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r3, 0x14cc(r31)
     lwz r0, 0x15f0(r31)
     rlwinm r3, r3, 0, 2, 0
@@ -1126,7 +1126,7 @@ asm void fn_80314130(void)
     li r5, 0x0
     li r6, 0x1
     fmr f2, f1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r31)
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r31)
@@ -1136,7 +1136,7 @@ asm void fn_80314130(void)
     lfs f2, lbl_80884CF0
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r31)
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r31)
@@ -1158,7 +1158,7 @@ lbl_fn_80314130_00000DE0:
     li r4, 0x2e
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r31)
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r31)

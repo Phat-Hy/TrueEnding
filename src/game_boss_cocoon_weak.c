@@ -13,7 +13,7 @@ extern void fn_8006BBCC(void);
 extern void atn_FileList_destructor(void);
 extern void fn_8006C300(void);
 extern void fn_8006C3F0(void);
-extern void fn_8006D008(void);
+extern void gimmick_initObject(void);
 extern void dungeon_initGlobalContext(void);
 extern void fn_800838AC(void);
 extern void town_updateInteractionPoints(void);
@@ -283,11 +283,11 @@ lbl_fn_8046D1EC_00000278:
     addi r3, r1, 0x24
     addi r4, r4, 0x4010
     addi r5, r5, lbl_8075561C@l
-    bl fn_8006D008
+    bl gimmick_initObject
     addi r3, r1, 0x3c
     addi r4, r1, 0x24
     addi r5, r1, 0x68
-    bl fn_8006D008
+    bl gimmick_initObject
     lwz r0, 0x24(r1)
     srwi. r0, r0, 31
     beq lbl_fn_8046D1EC_000002B4

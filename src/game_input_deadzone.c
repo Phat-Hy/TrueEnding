@@ -57,7 +57,7 @@ extern void fn_802F1320(void);
 extern void fat_dispatchFsRequest(void);
 extern void fn_805A40BC(void);
 extern void fn_805A4258(void);
-extern void fn_805A4F20(void);
+extern void atn_Anim_startLayerAnimation(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -282,7 +282,7 @@ asm void fn_802EF16C(void)
     lfs f2, lbl_80884850
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r31)
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r31)
@@ -292,7 +292,7 @@ asm void fn_802EF16C(void)
     lfs f2, lbl_80884850
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r3, lbl_8087F048
     bl system_getNextSequenceId
     lfs f2, 0x14e0(r31)
@@ -422,7 +422,7 @@ lbl_fn_802EF16C_00000408:
     lfs f2, lbl_80884850
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r31)
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r31)
@@ -432,7 +432,7 @@ lbl_fn_802EF16C_00000408:
     lfs f2, lbl_80884850
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r31)
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r31)
@@ -464,7 +464,7 @@ lbl_fn_802EF16C_000004D4:
     li r4, 0x2e
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r3, 0x14e8(r31)
     lwz r0, 0x14cc(r31)
     cmpwi r3, 0x0
@@ -528,7 +528,7 @@ lbl_fn_802EF16C_000005B8:
     lfs f2, lbl_80884850
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r31)
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r31)

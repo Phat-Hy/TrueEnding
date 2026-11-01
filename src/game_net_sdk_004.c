@@ -34,7 +34,7 @@ extern void fn_806806A4(void);
 extern void fn_80696324(void);
 extern void fn_80696348(void);
 extern void fn_8069A0D0(void);
-extern void fn_8069A15C(void);
+extern void net_initAndDispatchSubsystem(void);
 extern void fn_8069A5BC(void);
 extern void fn_8069A5DC(void);
 extern void fn_8069A768(void);
@@ -210,7 +210,7 @@ lbl_fn_806A02C0_00000094:
     mr r4, r31
     bl fn_806A0D04
     mr r3, r31
-    bl fn_8069A15C
+    bl net_initAndDispatchSubsystem
     li r4, 0x0
 lbl_fn_806A02C0_000000B4:
     mr r3, r4
@@ -457,7 +457,7 @@ lbl_fn_806A0638_000003D0:
     mr r4, r30
     bl fn_806A0D04
     mr r3, r30
-    bl fn_8069A15C
+    bl net_initAndDispatchSubsystem
 lbl_fn_806A0638_000003E4:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

@@ -21,7 +21,7 @@ extern void fn_8062A130(void);
 extern void fn_8062A164(void);
 extern void fn_8062A198(void);
 extern void fn_8062A33C(void);
-extern void fn_8062A350(void);
+extern void bta_dm_send_msg(void);
 extern void fn_8062A5F0(void);
 extern void fn_8062D958(void);
 extern void fn_8062DACC(void);
@@ -1564,7 +1564,7 @@ lbl_fn_8062EE08_000013DC:
     stw r30, 0x8(r3)
     lwz r0, 0x8(r1)
     stw r0, 0xc(r3)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062EE08_0000140C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1605,7 +1605,7 @@ asm void fn_8062F0A0(void)
     sth r0, 0x0(r31)
     stw r30, 0x30(r31)
     stb r29, 0x8(r31)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062F0A0_00001498:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1628,7 +1628,7 @@ asm void fn_8062F128(void)
     beq lbl_fn_8062F128_000014DC
     li r0, 0x170d
     sth r0, 0x0(r3)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062F128_000014DC:
     lwz r0, 0x14(r1)
     mtlr r0
@@ -1657,7 +1657,7 @@ asm void fn_8062F160(void)
     mr r3, r31
     sth r0, 0x0(r31)
     sth r30, 0x6(r31)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062F160_00001538:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1698,7 +1698,7 @@ asm void fn_8062F1C4(void)
     stb r29, 0xf(r31)
     bl bd_addr_copy
     mr r3, r31
-    bl fn_8062A350
+    bl bta_dm_send_msg
     b lbl_fn_8062F1C4_000015E4
 lbl_fn_8062F1C4_000015C8:
     lbz r0, lbl_80880188
@@ -1750,7 +1750,7 @@ asm void fn_8062F278(void)
     stb r0, 0x9(r31)
     stw r30, 0x10(r31)
     stb r4, 0xa(r31)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062F278_00001678:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
@@ -1799,7 +1799,7 @@ asm void fn_8062F308(void)
     addi r3, r31, 0x8
     bl bd_addr_copy
     mr r3, r31
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062F308_00001724:
     addi r11, r1, 0x20
     bl _restgpr_26
@@ -1832,7 +1832,7 @@ asm void fn_8062F3B0(void)
     mr r3, r31
     sth r0, 0x10(r31)
     sth r30, 0x6(r31)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062F3B0_00001790:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
@@ -1860,7 +1860,7 @@ asm void fn_8062F41C(void)
     li r0, 0x170e
     mr r3, r31
     sth r0, 0x0(r31)
-    bl fn_8062A350
+    bl bta_dm_send_msg
 lbl_fn_8062F41C_000017E8:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)

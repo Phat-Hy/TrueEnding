@@ -50,7 +50,7 @@ extern void fn_805A3D6C(void);
 extern void fn_805A40BC(void);
 extern void fn_805A418C(void);
 extern void fn_805A4258(void);
-extern void fn_805A4F20(void);
+extern void atn_Anim_startLayerAnimation(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
 extern void PSMTX44Identity(void);
@@ -839,7 +839,7 @@ lbl_fn_802B7F94_000009B8:
     li r4, 0x15c
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r31)
     mr r3, r31
     li r4, 0x6
@@ -905,7 +905,7 @@ lbl_fn_802B7F94_00000AB4:
     li r4, 0x13f
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r31)
     mr r3, r31
     li r4, 0x6
@@ -970,7 +970,7 @@ lbl_fn_802B7F94_00000BA4:
     li r4, 0x2e
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r31)
     mr r3, r31
     li r4, 0x2

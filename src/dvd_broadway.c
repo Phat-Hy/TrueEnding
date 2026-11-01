@@ -71,9 +71,9 @@ extern u32 lowIntType_8087FDB0;
 
 /* Function declarations */
 void __DVDCheckDevice(void);
-void fn_80600680(void);
-void fn_80600740(void);
-void fn_80600800(void);
+void doTransactionCallback(void);
+void doCoverCallback(void);
+void DVDLowFinish(void);
 void DVDLowInit(void);
 void fn_80600AC0(void);
 void fn_80600C50(void);
@@ -291,7 +291,7 @@ lbl___DVDCheckDevice_260:
     blr
 }
 
-asm void fn_80600680(void)
+asm void doTransactionCallback(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -302,7 +302,7 @@ asm void fn_80600680(void)
     lwz r5, 0xc(r4)
     addis r0, r5, 0x115
     cmplwi r0, 0xdaed
-    beq lbl_fn_80600680_2c4
+    beq lbl_doTransactionCallback_2c4
     lis r3, lbl_807AAB08@ha
     addi r3, r3, lbl_807AAB08@l
     crclr 6
@@ -310,32 +310,32 @@ asm void fn_80600680(void)
     lis r3, 0xfeec
     subi r0, r3, 0x2513
     stw r0, 0xc(r31)
-    b lbl_fn_80600680_318
-lbl_fn_80600680_2c4:
+    b lbl_doTransactionCallback_318
+lbl_doTransactionCallback_2c4:
     li r6, 0x0
     stb r6, lbl_8087FDB8
     lwz r0, 0x0(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_80600680_318
+    beq lbl_doTransactionCallback_318
     lbz r0, lbl_8087FDD8
     li r5, 0x1
     stb r5, lbl_8087FDB9
     cmplwi r0, 0x1
-    bne lbl_fn_80600680_2f4
+    bne lbl_doTransactionCallback_2f4
     stb r6, lbl_8087FDD8
     ori r3, r3, 0x8
-lbl_fn_80600680_2f4:
+lbl_doTransactionCallback_2f4:
     clrlwi. r0, r3, 31
-    beq lbl_fn_80600680_304
+    beq lbl_doTransactionCallback_304
     li r0, 0x0
     stw r0, lbl_8087FDCC
-lbl_fn_80600680_304:
+lbl_doTransactionCallback_304:
     lwz r12, 0x0(r4)
     mtctr r12
     bctrl
     li r0, 0x0
     stb r0, lbl_8087FDB9
-lbl_fn_80600680_318:
+lbl_doTransactionCallback_318:
     li r0, 0x0
     stb r0, 0x8(r31)
     li r3, 0x0
@@ -346,7 +346,7 @@ lbl_fn_80600680_318:
     blr
 }
 
-asm void fn_80600740(void)
+asm void doCoverCallback(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -364,7 +364,7 @@ asm void fn_80600740(void)
     lwz r5, 0xc(r4)
     addis r0, r5, 0x115
     cmplwi r0, 0xdaed
-    beq lbl_fn_80600740_3a0
+    beq lbl_doCoverCallback_3a0
     lis r3, lbl_807AAB08@ha
     addi r3, r3, lbl_807AAB08@l
     crclr 6
@@ -372,25 +372,25 @@ asm void fn_80600740(void)
     lis r3, 0xfeec
     subi r0, r3, 0x2513
     stw r0, 0xc(r31)
-    b lbl_fn_80600740_3dc
-lbl_fn_80600740_3a0:
+    b lbl_doCoverCallback_3dc
+lbl_doCoverCallback_3a0:
     lwz r0, 0x0(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_80600740_3dc
+    beq lbl_doCoverCallback_3dc
     lbz r0, lbl_8087FDD8
     li r5, 0x1
     stb r5, lbl_8087FDB9
     cmplwi r0, 0x1
-    bne lbl_fn_80600740_3c8
+    bne lbl_doCoverCallback_3c8
     stb r6, lbl_8087FDD8
     ori r3, r3, 0x8
-lbl_fn_80600740_3c8:
+lbl_doCoverCallback_3c8:
     lwz r12, 0x0(r4)
     mtctr r12
     bctrl
     li r0, 0x0
     stb r0, lbl_8087FDB9
-lbl_fn_80600740_3dc:
+lbl_doCoverCallback_3dc:
     li r0, 0x0
     stb r0, 0x8(r31)
     li r3, 0x0
@@ -401,7 +401,7 @@ lbl_fn_80600740_3dc:
     blr
 }
 
-asm void fn_80600800(void)
+asm void DVDLowFinish(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -410,18 +410,18 @@ asm void fn_80600800(void)
     lwz r3, lbl_8087E7F8
     bl IOS_Close
     cmpwi r3, 0x0
-    beq lbl_fn_80600800_434
+    beq lbl_DVDLowFinish_434
     lis r3, lbl_807AAB68@ha
     addi r3, r3, lbl_807AAB68@l
     crclr 6
     bl OSReport
     li r3, 0x0
-    b lbl_fn_80600800_440
-lbl_fn_80600800_434:
+    b lbl_DVDLowFinish_440
+lbl_DVDLowFinish_434:
     li r0, 0x0
     stb r0, lbl_8087FDC5
     li r3, 0x1
-lbl_fn_80600800_440:
+lbl_DVDLowFinish_440:
     lwz r0, 0x14(r1)
     mtlr r0
     addi r1, r1, 0x10
@@ -678,13 +678,13 @@ lbl_fn_80600AC0_7a4:
     stw r0, lbl_8087FDBC
 lbl_fn_80600AC0_7c0:
     lwz r3, lbl_8087FDD4
-    lis r9, fn_80600680@ha
+    lis r9, doTransactionCallback@ha
     slwi r0, r0, 5
     li r4, 0x70
     stbx r4, r3, r0
     mr r7, r30
     mr r10, r29
-    addi r9, r9, fn_80600680@l
+    addi r9, r9, doTransactionCallback@l
     lwz r0, lbl_8087FDBC
     li r4, 0x70
     lwz r5, lbl_8087FDD4
@@ -856,13 +856,13 @@ lbl_fn_80600C50_a2c:
     stw r7, 0x18(r6)
     li r3, 0x49e4
     li r0, 0x20
-    lis r8, fn_80600680@ha
+    lis r8, doTransactionCallback@ha
     stw r3, 0x1c(r6)
     mr r7, r6
     lwz r3, lbl_8087E7F8
     mr r9, r30
     stw r4, 0x20(r6)
-    addi r8, r8, fn_80600680@l
+    addi r8, r8, doTransactionCallback@l
     li r4, 0x8b
     li r5, 0x3
     stw r0, 0x24(r6)
@@ -1033,11 +1033,11 @@ lbl_fn_80600EC0_cac:
     addi r7, r10, 0xc0
     addi r3, r10, 0x120
     li r0, 0x20
-    lis r8, fn_80600680@ha
+    lis r8, doTransactionCallback@ha
     stw r3, 0x20(r7)
     mr r9, r30
     lwz r3, lbl_8087E7F8
-    addi r8, r8, fn_80600680@l
+    addi r8, r8, doTransactionCallback@l
     stw r0, 0x24(r7)
     li r4, 0x94
     li r5, 0x4
@@ -1161,7 +1161,7 @@ lbl_fn_80601130_e50:
     stw r0, lbl_8087FDBC
 lbl_fn_80601130_e7c:
     lwz r6, lbl_8087FDD4
-    lis r8, fn_80600680@ha
+    lis r8, doTransactionCallback@ha
     slwi r0, r0, 5
     li r7, 0x92
     stbx r7, r6, r0
@@ -1173,7 +1173,7 @@ lbl_fn_80601130_e7c:
     lwz r12, lbl_8087FDD4
     mr r9, r30
     slwi r6, r6, 5
-    addi r8, r8, fn_80600680@l
+    addi r8, r8, doTransactionCallback@l
     add r6, r12, r6
     stw r3, 0x4(r6)
     li r6, 0x2
@@ -1339,7 +1339,7 @@ lbl_fn_80601340_10c4:
     add r25, r24, r25
     addi r0, r11, -0x8000
     stw r3, 0x4(r25)
-    lis r11, fn_80600680@ha
+    lis r11, doTransactionCallback@ha
     lwz r3, lbl_8087FDBC
     lwz r25, lbl_8087FDD4
     slwi r3, r3, 5
@@ -1362,7 +1362,7 @@ lbl_fn_80601340_10c4:
     li r5, 0x3
     stw r12, 0x2c(r28)
     stw r8, 0x38(r28)
-    addi r8, r11, fn_80600680@l
+    addi r8, r11, doTransactionCallback@l
     stw r7, 0x30(r28)
     stw r29, 0x34(r28)
     lwz r11, 0x0(r7)
@@ -1466,13 +1466,13 @@ lbl_fn_806015E0_12c0:
     slwi r5, r4, 5
     lwz r4, lbl_8087FDD4
     addi r3, r3, lbl_807D12E0@l
-    lis r9, fn_80600680@ha
+    lis r9, doTransactionCallback@ha
     add r30, r3, r5
     slwi r0, r0, 5
     add r5, r4, r0
     lwz r3, lbl_8087E7F8
     mr r10, r30
-    addi r9, r9, fn_80600680@l
+    addi r9, r9, doTransactionCallback@l
     li r4, 0x8c
     li r6, 0x20
     li r7, 0x0
@@ -1567,7 +1567,7 @@ lbl_DVDLowUnencryptedRead_1408:
     stw r0, lbl_8087FDBC
 lbl_DVDLowUnencryptedRead_1438:
     lwz r6, lbl_8087FDD4
-    lis r9, fn_80600680@ha
+    lis r9, doTransactionCallback@ha
     slwi r0, r0, 5
     li r7, 0x8d
     stbx r7, r6, r0
@@ -1575,7 +1575,7 @@ lbl_DVDLowUnencryptedRead_1438:
     mr r8, r4
     mr r10, r30
     lwz r0, lbl_8087FDBC
-    addi r9, r9, fn_80600680@l
+    addi r9, r9, doTransactionCallback@l
     lwz r3, lbl_8087FDD4
     li r6, 0x20
     slwi r0, r0, 5
@@ -1685,11 +1685,11 @@ lbl_fn_806018F0_15d4:
     slwi r0, r0, 5
     li r6, 0xe3
     stbx r6, r5, r0
-    lis r9, fn_80600680@ha
+    lis r9, doTransactionCallback@ha
     mr r10, r30
     addi r7, r7, lbl_807D1360@l
     lwz r0, lbl_8087FDBC
-    addi r9, r9, fn_80600680@l
+    addi r9, r9, doTransactionCallback@l
     lwz r5, lbl_8087FDD4
     li r6, 0x20
     slwi r0, r0, 5
@@ -1796,13 +1796,13 @@ lbl_fn_80601A90_1748:
     stw r0, lbl_8087FDBC
 lbl_fn_80601A90_1774:
     lwz r4, lbl_8087FDD4
-    lis r9, fn_80600680@ha
+    lis r9, doTransactionCallback@ha
     slwi r0, r0, 5
     li r5, 0x12
     stbx r5, r4, r0
     mr r7, r3
     mr r10, r30
-    addi r9, r9, fn_80600680@l
+    addi r9, r9, doTransactionCallback@l
     lwz r0, lbl_8087FDBC
     li r4, 0x12
     lwz r5, lbl_8087FDD4
@@ -1902,11 +1902,11 @@ lbl_DVDLowRequestError_18dc:
     slwi r0, r0, 5
     li r4, 0xe0
     stbx r4, r3, r0
-    lis r9, fn_80600680@ha
+    lis r9, doTransactionCallback@ha
     mr r10, r30
     addi r7, r7, lbl_807D1360@l
     lwz r0, lbl_8087FDBC
-    addi r9, r9, fn_80600680@l
+    addi r9, r9, doTransactionCallback@l
     lwz r5, lbl_8087FDD4
     li r4, 0xe0
     slwi r0, r0, 5
@@ -2009,12 +2009,12 @@ lbl_fn_80601D80_1a30:
     stw r0, lbl_8087FDBC
 lbl_fn_80601D80_1a5c:
     lwz r3, lbl_8087FDD4
-    lis r9, fn_80600680@ha
+    lis r9, doTransactionCallback@ha
     slwi r0, r0, 5
     li r4, 0x8a
     stbx r4, r3, r0
     mr r10, r30
-    addi r9, r9, fn_80600680@l
+    addi r9, r9, doTransactionCallback@l
     li r4, 0x8a
     lwz r0, lbl_8087FDBC
     li r6, 0x20
@@ -2123,11 +2123,11 @@ lbl_fn_80601F00_1be4:
     slwi r0, r0, 5
     li r6, 0xe4
     stbx r6, r5, r0
-    lis r9, fn_80600680@ha
+    lis r9, doTransactionCallback@ha
     mr r10, r30
     addi r7, r7, lbl_807D1360@l
     lwz r0, lbl_8087FDBC
-    addi r9, r9, fn_80600680@l
+    addi r9, r9, doTransactionCallback@l
     lwz r5, lbl_8087FDD4
     li r6, 0x20
     slwi r0, r0, 5
@@ -2239,10 +2239,10 @@ lbl_DVDLowReportKey_1d84:
     li r4, 0xa4
     stbx r4, r6, r0
     mr r7, r3
-    lis r9, fn_80600680@ha
+    lis r9, doTransactionCallback@ha
     mr r10, r30
     lwz r0, lbl_8087FDBC
-    addi r9, r9, fn_80600680@l
+    addi r9, r9, doTransactionCallback@l
     lwz r3, lbl_8087FDD4
     li r4, 0xa4
     slwi r0, r0, 5
@@ -2349,13 +2349,13 @@ lbl_fn_80602240_1ef8:
     stw r0, lbl_8087FDBC
 lbl_fn_80602240_1f24:
     lwz r4, lbl_8087FDD4
-    lis r9, fn_80600680@ha
+    lis r9, doTransactionCallback@ha
     slwi r0, r0, 5
     li r5, 0xdd
     stbx r5, r4, r0
     extrwi r5, r3, 2, 14
     mr r10, r30
-    addi r9, r9, fn_80600680@l
+    addi r9, r9, doTransactionCallback@l
     lwz r0, lbl_8087FDBC
     li r4, 0xdd
     lwz r3, lbl_8087FDD4
@@ -2467,7 +2467,7 @@ lbl_fn_806023D0_20a0:
     stw r0, lbl_8087FDBC
 lbl_fn_806023D0_20d0:
     lwz r6, lbl_8087FDD4
-    lis r9, fn_80600680@ha
+    lis r9, doTransactionCallback@ha
     slwi r0, r0, 5
     li r7, 0x71
     stbx r7, r6, r0
@@ -2475,7 +2475,7 @@ lbl_fn_806023D0_20d0:
     mr r8, r4
     mr r10, r30
     lwz r0, lbl_8087FDBC
-    addi r9, r9, fn_80600680@l
+    addi r9, r9, doTransactionCallback@l
     lwz r3, lbl_8087FDD4
     li r6, 0x20
     slwi r0, r0, 5
@@ -2581,12 +2581,12 @@ lbl_fn_80602580_2238:
     stw r0, lbl_8087FDBC
 lbl_fn_80602580_2264:
     lwz r4, lbl_8087FDD4
-    lis r9, fn_80600680@ha
+    lis r9, doTransactionCallback@ha
     slwi r0, r0, 5
     li r5, 0xab
     stbx r5, r4, r0
     mr r10, r30
-    addi r9, r9, fn_80600680@l
+    addi r9, r9, doTransactionCallback@l
     li r4, 0xab
     lwz r0, lbl_8087FDBC
     li r6, 0x20
@@ -2715,12 +2715,12 @@ lbl_fn_80602730_2410:
     lis r7, lbl_807D1380@ha
     add r30, r3, r5
     slwi r0, r0, 5
-    lis r9, fn_80600740@ha
+    lis r9, doCoverCallback@ha
     lwz r3, lbl_8087E7F8
     add r5, r4, r0
     mr r10, r30
     addi r7, r7, lbl_807D1380@l
-    addi r9, r9, fn_80600740@l
+    addi r9, r9, doCoverCallback@l
     li r4, 0x7a
     li r6, 0x20
     li r8, 0x20
@@ -2819,12 +2819,12 @@ lbl_fn_806028A0_2580:
     lis r7, lbl_807D1460@ha
     add r30, r3, r5
     slwi r0, r0, 5
-    lis r9, fn_80600680@ha
+    lis r9, doTransactionCallback@ha
     lwz r3, lbl_8087E7F8
     add r5, r4, r0
     mr r10, r30
     addi r7, r7, lbl_807D1460@l
-    addi r9, r9, fn_80600680@l
+    addi r9, r9, doTransactionCallback@l
     li r4, 0x95
     li r6, 0x20
     li r8, 0x20
@@ -2923,12 +2923,12 @@ lbl_fn_80602A10_26f0:
     lis r7, lbl_807D1480@ha
     add r30, r3, r5
     slwi r0, r0, 5
-    lis r9, fn_80600680@ha
+    lis r9, doTransactionCallback@ha
     lwz r3, lbl_8087E7F8
     add r5, r4, r0
     mr r10, r30
     addi r7, r7, lbl_807D1480@l
-    addi r9, r9, fn_80600680@l
+    addi r9, r9, doTransactionCallback@l
     li r4, 0x96
     li r6, 0x20
     li r8, 0x20
@@ -3039,13 +3039,13 @@ lbl_fn_80602BB0_2890:
     slwi r5, r4, 5
     lwz r4, lbl_8087FDD4
     addi r3, r3, lbl_807D12E0@l
-    lis r9, fn_80600680@ha
+    lis r9, doTransactionCallback@ha
     add r30, r3, r5
     slwi r0, r0, 5
     add r5, r4, r0
     lwz r3, lbl_8087E7F8
     mr r10, r30
-    addi r9, r9, fn_80600680@l
+    addi r9, r9, doTransactionCallback@l
     li r4, 0x86
     li r6, 0x20
     li r7, 0x0

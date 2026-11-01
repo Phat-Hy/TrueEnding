@@ -55,7 +55,7 @@ extern void rand_Mersenne_init(void);
 extern void fn_805A3D6C(void);
 extern void fn_805A40BC(void);
 extern void fn_805A4258(void);
-extern void fn_805A4F20(void);
+extern void atn_Anim_startLayerAnimation(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -972,7 +972,7 @@ lbl_fn_80254F6C_00000B0C:
     lfs f2, lbl_808833B4
     li r5, 0x1
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r31)
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r31)
@@ -983,7 +983,7 @@ lbl_fn_80254F6C_00000B34:
     lfs f2, lbl_808833B4
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r3, lbl_8087F048
     cmpwi r3, 0x0
     beq lbl_fn_80254F6C_00000B64
@@ -1089,7 +1089,7 @@ lbl_fn_80254F6C_00000CBC:
     lfs f2, lbl_808833B4
     li r5, 0x0
     li r6, 0x1
-    bl fn_805A4F20
+    bl atn_Anim_startLayerAnimation
     lwz r0, 0x14cc(r31)
     rlwinm r0, r0, 0, 2, 0
     stw r0, 0x14cc(r31)

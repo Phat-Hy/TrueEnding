@@ -18,7 +18,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_8069A100(void);
-extern void fn_8069A15C(void);
+extern void net_initAndDispatchSubsystem(void);
 extern void fn_8069A1A0(void);
 extern void fn_8069A1B0(void);
 extern void fn_8069A1B8(void);
@@ -408,7 +408,7 @@ lbl_fn_8069E480_000003C8:
     mr r3, r30
     bl fn_8069AA08
     lwz r3, 0x0(r31)
-    bl fn_8069A15C
+    bl net_initAndDispatchSubsystem
     li r0, 0x0
     mr r3, r30
     stw r0, 0x0(r31)
@@ -2161,7 +2161,7 @@ lbl_fn_8069FCC8_00001B84:
     stw r3, 0x10(r29)
     bne lbl_fn_8069FCC8_00001BCC
     mr r3, r29
-    bl fn_8069A15C
+    bl net_initAndDispatchSubsystem
     li r3, 0x0
     b lbl_fn_8069FCC8_00001C3C
 lbl_fn_8069FCC8_00001BCC:
@@ -2506,14 +2506,14 @@ lbl_fn_806A00DC_00001FEC:
     mr r3, r28
     bl fn_8069FF38
     lis r6, fn_8069A100@ha
-    lis r7, fn_8069A15C@ha
+    lis r7, net_initAndDispatchSubsystem@ha
     mr r8, r3
     mr r12, r30
     mr r5, r31
     addi r3, r1, 0x8
     addi r4, r29, 0x4
     addi r6, r6, fn_8069A100@l
-    addi r7, r7, fn_8069A15C@l
+    addi r7, r7, net_initAndDispatchSubsystem@l
     mtctr r12
     bctrl
     cmpwi r3, 0x0

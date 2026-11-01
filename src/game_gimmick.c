@@ -79,7 +79,7 @@ void fn_8006CA14(void);
 void fn_8006CA20(void);
 void gmk_LoadHandle_constructor(void);
 void fn_8006CABC(void);
-void fn_8006D008(void);
+void gimmick_initObject(void);
 void fn_8006D0C8(void);
 void fn_8006D3F8(void);
 void fn_8006D54C(void);
@@ -711,11 +711,11 @@ lbl_fn_8006CABC_0000082C:
     mr r4, r16
     addi r3, r1, 0x84
     addi r5, r29, 0xa9
-    bl fn_8006D008
+    bl gimmick_initObject
     addi r3, r1, 0x78
     addi r4, r1, 0x84
     addi r5, r1, 0xa0
-    bl fn_8006D008
+    bl gimmick_initObject
     lwz r0, 0x90(r1)
     srwi. r3, r0, 31
     bne lbl_fn_8006CABC_00000894
@@ -849,11 +849,11 @@ lbl_fn_8006CABC_00000A0C:
     mr r4, r16
     addi r3, r1, 0x6c
     addi r5, r29, 0xa9
-    bl fn_8006D008
+    bl gimmick_initObject
     addi r3, r1, 0x60
     addi r4, r1, 0x6c
     addi r5, r1, 0xa0
-    bl fn_8006D008
+    bl gimmick_initObject
     lwz r0, 0x90(r1)
     srwi. r3, r0, 31
     bne lbl_fn_8006CABC_00000A78
@@ -980,7 +980,7 @@ lbl_fn_8006CABC_00000BD4:
     addi r5, r5, lbl_80731538@l
     addi r3, r1, 0x48
     addi r5, r5, 0xa9
-    bl fn_8006D008
+    bl gimmick_initObject
     lwz r0, 0x48(r1)
     lwz r14, lbl_8087D730
     srwi. r0, r0, 31
@@ -1050,7 +1050,7 @@ lbl_fn_8006CABC_00000CF0:
     blr
 }
 
-asm void fn_8006D008(void)
+asm void gimmick_initObject(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -1069,15 +1069,15 @@ asm void fn_8006D008(void)
     lwz r0, 0x0(r30)
     mr r31, r3
     srwi. r0, r0, 31
-    bne lbl_fn_8006D008_00000D5C
+    bne lbl_gimmick_initObject_00000D5C
     lbz r0, 0x0(r30)
     addi r29, r30, 0x1
     clrlwi r30, r0, 25
-    b lbl_fn_8006D008_00000D64
-lbl_fn_8006D008_00000D5C:
+    b lbl_gimmick_initObject_00000D64
+lbl_gimmick_initObject_00000D5C:
     lwz r29, 0x8(r30)
     lwz r30, 0x4(r30)
-lbl_fn_8006D008_00000D64:
+lbl_gimmick_initObject_00000D64:
     mr r3, r27
     add r4, r30, r31
     bl actor_validateIndex

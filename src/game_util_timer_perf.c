@@ -145,7 +145,7 @@ extern u32 lbl_80888294;
 void fn_805A49E8(void);
 void world_setFlagByType(void);
 void fn_805A4A58(void);
-void fn_805A4F20(void);
+void atn_Anim_startLayerAnimation(void);
 void fn_805A4F5C(void);
 void fn_805A4F70(void);
 void fn_805A4F84(void);
@@ -515,7 +515,7 @@ lbl_fn_805A4A58_00000508:
     blr
 }
 
-asm void fn_805A4F20(void)
+asm void atn_Anim_startLayerAnimation(void)
 {
     nofralloc
     stfs f1, 0x2e8(r3)

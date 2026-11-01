@@ -21,7 +21,7 @@ extern void str_getData(void);
 extern void fn_80043014(void);
 extern void talk_parseQuotedString(void);
 extern void fn_8006B0C8(void);
-extern void fn_8006D008(void);
+extern void gimmick_initObject(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void mem_realloc(void);
@@ -725,11 +725,11 @@ lbl_fn_804985E4_00000840:
     mr r5, r3
     addi r3, r1, 0x30
     addi r4, r1, 0x6c
-    bl fn_8006D008
+    bl gimmick_initObject
     addi r3, r1, 0x24
     addi r4, r1, 0x30
     addi r5, r23, 0x6c
-    bl fn_8006D008
+    bl gimmick_initObject
     addi r3, r1, 0x24
     bl str_getData
     mr r22, r3

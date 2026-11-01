@@ -22,7 +22,7 @@ extern void fn_8006B0C8(void);
 extern void boss_parseStateCondition(void);
 extern void fn_8006BA8C(void);
 extern void boss_triggerEventAction(void);
-extern void fn_8006D008(void);
+extern void gimmick_initObject(void);
 extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void map_getArchiveName(void);
@@ -1580,7 +1580,7 @@ lbl_fn_8020CC64_000013EC:
     addi r3, r1, 0x5c
     addi r4, r1, 0x98
     addi r5, r31, 0x1c
-    bl fn_8006D008
+    bl gimmick_initObject
     addi r3, r1, 0x50
     addi r4, r1, 0x5c
     addi r5, r1, 0x8c
@@ -1687,7 +1687,7 @@ lbl_fn_8020CC64_00001540:
     addi r3, r1, 0x44
     addi r4, r1, 0x98
     addi r5, r31, 0x27
-    bl fn_8006D008
+    bl gimmick_initObject
     mr r5, r22
     addi r3, r1, 0x38
     addi r4, r1, 0x44

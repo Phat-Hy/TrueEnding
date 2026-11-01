@@ -185,7 +185,7 @@ void fn_805FD3F0(void);
 void fn_805FD580(void);
 void fn_805FD5B0(void);
 void fn_805FD8D0(void);
-void fn_805FDE80(void);
+void dvd_execCommand(void);
 void fn_805FE860(void);
 void DVDInquiryAsync(void);
 void fn_805FEA30(void);
@@ -3664,9 +3664,9 @@ lbl_30cc:
     li r3, 0x0
     bl fn_80602BB0
     li r0, 0x20
-    lis r4, fn_805FDE80@ha
+    lis r4, dvd_execCommand@ha
     stw r0, 0x1c(r29)
-    addi r4, r4, fn_805FDE80@l
+    addi r4, r4, dvd_execCommand@l
     lwz r3, 0x18(r29)
     bl fn_80600AC0
     b lbl_3598
@@ -3738,9 +3738,9 @@ lbl_31b0:
     mr r3, r31
     bl OSRestoreInterrupts
     lwz r3, 0x20(r29)
-    lis r6, fn_805FDE80@ha
+    lis r6, dvd_execCommand@ha
     lwz r7, 0x18(r29)
-    addi r6, r6, fn_805FDE80@l
+    addi r6, r6, dvd_execCommand@l
     srwi r0, r3, 2
     lwz r5, 0x10(r29)
     lwz r4, 0x1c(r29)
@@ -3750,52 +3750,52 @@ lbl_31b0:
     b lbl_3598
     li r3, 0x0
     bl fn_80602BB0
-    lis r4, fn_805FDE80@ha
+    lis r4, dvd_execCommand@ha
     lwz r3, 0x10(r29)
-    addi r4, r4, fn_805FDE80@l
+    addi r4, r4, dvd_execCommand@l
     bl fn_80602580
     b lbl_3598
-    lis r5, fn_805FDE80@ha
+    lis r5, dvd_execCommand@ha
     li r3, 0x0
-    addi r5, r5, fn_805FDE80@l
+    addi r5, r5, dvd_execCommand@l
     li r4, 0x0
     bl fn_806018F0
     b lbl_3598
-    lis r5, fn_805FDE80@ha
+    lis r5, dvd_execCommand@ha
     li r3, 0x0
-    addi r5, r5, fn_805FDE80@l
+    addi r5, r5, dvd_execCommand@l
     li r4, 0x0
     bl fn_806018F0
     b lbl_3598
     li r3, 0x0
     bl fn_80602BB0
-    lis r5, fn_805FDE80@ha
+    lis r5, dvd_execCommand@ha
     lwz r3, 0x10(r29)
     lwz r4, 0x14(r29)
-    addi r5, r5, fn_805FDE80@l
+    addi r5, r5, dvd_execCommand@l
     bl fn_80601F00
     b lbl_3598
     li r3, 0x0
     bl fn_80602BB0
     li r0, 0x20
-    lis r4, fn_805FDE80@ha
+    lis r4, dvd_execCommand@ha
     stw r0, 0x1c(r29)
-    addi r4, r4, fn_805FDE80@l
+    addi r4, r4, dvd_execCommand@l
     lwz r3, 0x18(r29)
     bl fn_80601A90
     b lbl_3598
     li r3, 0x0
     bl fn_80602BB0
-    lis r5, fn_805FDE80@ha
+    lis r5, dvd_execCommand@ha
     li r3, 0x0
-    addi r5, r5, fn_805FDE80@l
+    addi r5, r5, dvd_execCommand@l
     li r4, 0x0
     bl fn_806018F0
     b lbl_3598
     li r3, 0x1
     bl fn_80601D70
-    lis r3, fn_805FDE80@ha
-    addi r3, r3, fn_805FDE80@l
+    lis r3, dvd_execCommand@ha
+    addi r3, r3, dvd_execCommand@l
     bl fn_80601D80
     b lbl_3598
     lwz r0, 0x14(r29)
@@ -3866,9 +3866,9 @@ lbl_33a0:
     mr r3, r31
     bl OSRestoreInterrupts
     lwz r3, 0x20(r29)
-    lis r6, fn_805FDE80@ha
+    lis r6, dvd_execCommand@ha
     lwz r7, 0x18(r29)
-    addi r6, r6, fn_805FDE80@l
+    addi r6, r6, dvd_execCommand@l
     srwi r0, r3, 2
     lwz r5, 0x10(r29)
     lwz r4, 0x1c(r29)
@@ -3878,10 +3878,10 @@ lbl_33a0:
     b lbl_3598
     li r3, 0x0
     bl fn_80602BB0
-    lis r8, fn_805FDE80@ha
+    lis r8, dvd_execCommand@ha
     lwz r3, 0x10(r29)
     lwz r7, 0x18(r29)
-    addi r8, r8, fn_805FDE80@l
+    addi r8, r8, dvd_execCommand@l
     li r4, 0x0
     li r5, 0x0
     li r6, 0x0
@@ -3889,23 +3889,23 @@ lbl_33a0:
     b lbl_3598
     li r3, 0x0
     bl fn_80602BB0
-    lis r3, fn_805FDE80@ha
-    addi r3, r3, fn_805FDE80@l
+    lis r3, dvd_execCommand@ha
+    addi r3, r3, dvd_execCommand@l
     bl fn_806015E0
     b lbl_3598
-    lis r3, fn_805FDE80@ha
-    addi r3, r3, fn_805FDE80@l
+    lis r3, dvd_execCommand@ha
+    addi r3, r3, dvd_execCommand@l
     bl fn_80602730
     b lbl_3598
-    lis r3, fn_805FDE80@ha
-    addi r3, r3, fn_805FDE80@l
+    lis r3, dvd_execCommand@ha
+    addi r3, r3, dvd_execCommand@l
     bl fn_80602730
     b lbl_3598
     li r3, 0x0
     bl fn_80602BB0
-    lis r4, fn_805FDE80@ha
+    lis r4, dvd_execCommand@ha
     lis r3, 0x2
-    addi r4, r4, fn_805FDE80@l
+    addi r4, r4, dvd_execCommand@l
     bl fn_80602240
     b lbl_3598
     li r3, 0x0
@@ -3913,9 +3913,9 @@ lbl_33a0:
     lis r3, lbl_807D0F40@ha
     li r0, 0x20
     addi r3, r3, lbl_807D0F40@l
-    lis r4, fn_805FDE80@ha
+    lis r4, dvd_execCommand@ha
     stw r3, 0x18(r29)
-    addi r4, r4, fn_805FDE80@l
+    addi r4, r4, dvd_execCommand@l
     stw r0, 0x1c(r29)
     bl fn_80600AC0
     b lbl_3598
@@ -3928,17 +3928,17 @@ lbl_33a0:
     lwz r0, 0x4dc0(r10)
     cmpwi r0, 0x0
     bne lbl_3518
-    lis r6, fn_805FDE80@ha
+    lis r6, dvd_execCommand@ha
     lwz r3, 0x10(r29)
     addi r4, r10, 0x3a0
     addi r5, r10, 0x4dc0
-    addi r6, r6, fn_805FDE80@l
+    addi r6, r6, dvd_execCommand@l
     bl fn_80601130
     b lbl_3598
 lbl_3518:
-    lis r3, fn_805FDE80@ha
+    lis r3, dvd_execCommand@ha
     mr r4, r10
-    addi r3, r3, fn_805FDE80@l
+    addi r3, r3, dvd_execCommand@l
     stw r3, 0x8(r1)
     addi r5, r10, 0x3a0
     addi r6, r10, 0x3c0
@@ -3952,9 +3952,9 @@ lbl_3518:
     li r3, 0x0
     bl fn_80602BB0
     lwz r8, 0x18(r29)
-    lis r9, fn_805FDE80@ha
+    lis r9, dvd_execCommand@ha
     lwz r3, 0x10(r29)
-    addi r9, r9, fn_805FDE80@l
+    addi r9, r9, dvd_execCommand@l
     lwz r5, 0x3a0(r8)
     addi r4, r8, 0x2c0
     lwz r7, 0x4dc0(r8)
@@ -3964,9 +3964,9 @@ lbl_3518:
     b lbl_3598
 lbl_3580:
     lwz r12, lbl_8087E7D8
-    lis r4, fn_805FDE80@ha
+    lis r4, dvd_execCommand@ha
     mr r3, r29
-    addi r4, r4, fn_805FDE80@l
+    addi r4, r4, dvd_execCommand@l
     mtctr r12
     bctrl 
 lbl_3598:
@@ -3979,7 +3979,7 @@ lbl_3598:
 }
 
 
-asm void fn_805FDE80(void) {
+asm void dvd_execCommand(void) {
     nofralloc
     stwu r1, -0x20(r1)
     mflr r0
