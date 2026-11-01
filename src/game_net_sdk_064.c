@@ -127,8 +127,8 @@ void fn_80725800(void);
 void fn_80725930(void);
 void fn_80725B20(void);
 void fn_80725B90(void);
-void fn_80725C60(void);
-void fn_80725C70(void);
+u32 fn_80725C60(void);
+u32 fn_80725C70(void);
 void fn_80725C80(void);
 void fn_80725C90(void);
 void fn_80725D00(void);
@@ -146,10 +146,10 @@ void fn_80726290(void);
 void fn_80726310(void);
 void fn_80726320(void);
 void fn_80726330(void);
-void fn_80726390(void);
-void fn_807263A0(void);
-void fn_807263B0(void);
-void fn_807263C0(void);
+u32 fn_80726390(void);
+u32 fn_807263A0(void *p);
+u32 fn_807263B0(void *p);
+void *fn_807263C0(void);
 void fn_807263D0(void);
 void fn_807263E0(void);
 void fn_80726470(void);
@@ -1875,26 +1875,19 @@ lbl_fn_80725B90_00001748:
     blr
 }
 
-asm void fn_80725C60(void)
+u32 fn_80725C60(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80725C70(void)
+u32 fn_80725C70(void)
 {
-    nofralloc
-    li r3, 0x0
-    blr
+    return 0;
 }
 
-asm void fn_80725C80(void)
+void fn_80725C80(void)
 {
-    nofralloc
-    li r0, 0x0
-    stw r0, lbl_80880540
-    blr
+    lbl_80880540 = 0;
 }
 
 asm void fn_80725C90(void)
@@ -1976,12 +1969,9 @@ lbl_fn_80725D00_00001890:
     blr
 }
 
-asm void fn_80725D90(void)
+void fn_80725D90(void)
 {
-    nofralloc
-    la r0, lbl_80880540
-    stw r0, lbl_80880548
-    blr
+    lbl_80880548 = (u32)&lbl_80880540;
 }
 
 asm void fn_80725DA0(void)
@@ -2427,40 +2417,29 @@ lbl_fn_80726330_00001E7C:
     blr
 }
 
-asm void fn_80726390(void)
+u32 fn_80726390(void)
 {
-    nofralloc
-    li r3, 0x1
-    blr
+    return 1;
 }
 
-asm void fn_807263A0(void)
+u32 fn_807263A0(void *p)
 {
-    nofralloc
-    lwz r3, 0x14(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x14);
 }
 
-asm void fn_807263B0(void)
+u32 fn_807263B0(void *p)
 {
-    nofralloc
-    lwz r3, 0x18(r3)
-    blr
+    return *(u32 *)((u8 *)p + 0x18);
 }
 
-asm void fn_807263C0(void)
+void *fn_807263C0(void)
 {
-    nofralloc
-    la r3, lbl_80880550
-    blr
+    return &lbl_80880550;
 }
 
-asm void fn_807263D0(void)
+void fn_807263D0(void)
 {
-    nofralloc
-    la r0, lbl_80880548
-    stw r0, lbl_80880550
-    blr
+    lbl_80880550 = (u32)&lbl_80880548;
 }
 
 asm void fn_807263E0(void)
