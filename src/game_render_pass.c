@@ -30,7 +30,7 @@ extern void atn_Task_setActive(void);
 extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_800F8548(void);
-extern void fn_8013655C(void);
+extern void boss_updatePhaseState(void);
 extern void fn_8015495C(void);
 extern void fn_8016DA4C(void);
 extern void fn_8016E970(void);
@@ -1442,7 +1442,7 @@ asm void fn_802A51F4(void)
     stw r28, 0x670(r1)
     stw r0, 0x658(r1)
     stw r0, 0x660(r1)
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     bne lbl_fn_802A51F4_00001964
     lwz r3, 0x1438(r30)

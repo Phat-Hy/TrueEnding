@@ -31,7 +31,7 @@ extern void fn_8043F5C4(void);
 extern void fn_8043F63C(void);
 extern void fn_8043FA08(void);
 extern void fn_8043FE90(void);
-extern void fn_8046C3FC(void);
+extern void atn_Arc_decompressChunk(void);
 extern void fn_8046D1EC(void);
 extern void fn_8046DD20(void);
 extern void fn_8046F5CC(void);
@@ -920,7 +920,7 @@ lbl_fn_80472A9C_00000B1C:
 lbl_fn_80472A9C_00000B7C:
     mr r3, r31
     mr r4, r30
-    bl fn_8046C3FC
+    bl atn_Arc_decompressChunk
     cmpwi r3, 0x0
     beq lbl_fn_80472A9C_00000C1C
     addi r28, r31, 0x3ed0
@@ -1164,7 +1164,7 @@ lbl_fn_80472DCC_00000E4C:
 lbl_fn_80472DCC_00000E98:
     mr r3, r31
     mr r4, r30
-    bl fn_8046C3FC
+    bl atn_Arc_decompressChunk
     cmpwi r3, 0x0
     beq lbl_fn_80472DCC_00000F38
     addi r28, r31, 0x3ed0
@@ -2028,7 +2028,7 @@ lbl_fn_8047392C_000019AC:
 lbl_fn_8047392C_00001A0C:
     mr r3, r31
     mr r4, r30
-    bl fn_8046C3FC
+    bl atn_Arc_decompressChunk
     cmpwi r3, 0x0
     beq lbl_fn_8047392C_00001AAC
     addi r28, r31, 0x3ed0

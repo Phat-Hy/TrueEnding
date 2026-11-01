@@ -29,7 +29,7 @@ extern void fn_800AEE9C(void);
 extern void fn_800AEF4C(void);
 extern void fn_800AEF68(void);
 extern void fn_800AFE40(void);
-extern void fn_800B089C(void);
+extern void graphic_initViewportTransform(void);
 extern void fn_800B0A48(void);
 extern void fn_800B1554(void);
 extern void fn_800B1598(void);
@@ -1165,7 +1165,7 @@ asm void fn_800A8FF0(void)
     addi r3, r30, 0x33c
     bl fn_800ABD84
     addi r3, r30, 0x340
-    bl fn_800B089C
+    bl graphic_initViewportTransform
     addi r3, r30, 0x428
     bl fn_800AD0F0
     li r0, 0xe

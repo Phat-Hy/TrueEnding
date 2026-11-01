@@ -31,7 +31,7 @@ extern void fn_8011EE58(void);
 extern void fn_8011EF14(void);
 extern void fn_801354B4(void);
 extern void fn_80136544(void);
-extern void fn_8013655C(void);
+extern void boss_updatePhaseState(void);
 extern void quest_checkCondition(void);
 extern void fn_80219558(void);
 extern void atn_LoadHandle_destructor(void);
@@ -594,7 +594,7 @@ lbl_fn_8022589C_000006F0:
     cmpwi r26, 0x7
     blt lbl_fn_8022589C_00000664
     mr r3, r23
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     bne lbl_fn_8022589C_000009F8
     cmpwi r27, 0x0

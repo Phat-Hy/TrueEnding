@@ -8,7 +8,7 @@ extern void fn_8004ECC0(void);
 extern void fn_800BFAC8(void);
 extern void fn_800CB3A0(void);
 extern void fn_801231D0(void);
-extern void fn_8013655C(void);
+extern void boss_updatePhaseState(void);
 extern void world_getGlobalFlag(void);
 extern void fn_8037F690(void);
 extern void fn_803935FC(void);
@@ -161,7 +161,7 @@ lbl_fn_803B0808_00000178:
     cmpwi r19, 0x0
     beq lbl_fn_803B0808_00000300
     mr r3, r19
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     bne lbl_fn_803B0808_00000300
     lwz r0, 0x38(r19)
@@ -373,7 +373,7 @@ lbl_fn_803B0808_00000448:
     b lbl_fn_803B0808_00000F3C
 lbl_fn_803B0808_00000468:
     mr r3, r28
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     bne lbl_fn_803B0808_00000F34
     lwz r0, 0x38(r28)
@@ -1249,7 +1249,7 @@ lbl_fn_803B17C4_00001134:
     cmpwi r19, 0x0
     beq lbl_fn_803B17C4_000012BC
     mr r3, r19
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     bne lbl_fn_803B17C4_000012BC
     lwz r0, 0x38(r19)
@@ -1461,7 +1461,7 @@ lbl_fn_803B17C4_00001404:
     b lbl_fn_803B17C4_00001EF8
 lbl_fn_803B17C4_00001424:
     mr r3, r28
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     bne lbl_fn_803B17C4_00001EF0
     lwz r0, 0x38(r28)

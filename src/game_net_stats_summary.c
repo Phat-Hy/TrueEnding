@@ -29,7 +29,7 @@ extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC6B4(void);
 extern void fn_801231D0(void);
-extern void fn_8013655C(void);
+extern void boss_updatePhaseState(void);
 extern void fn_801F3FF8(void);
 extern void fn_801FEC74(void);
 extern void fn_801FECE0(void);
@@ -1444,7 +1444,7 @@ lbl_fn_80540120_00001224:
     bl fn_800128FC
     cmpwi r3, 0x0
     beq lbl_fn_80540120_0000124C
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     beq lbl_fn_80540120_0000124C
     li r3, 0x0

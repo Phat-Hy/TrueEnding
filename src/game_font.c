@@ -83,7 +83,7 @@ void fn_800A2B58(void);
 void fn_800A2B94(void);
 void fn_800A2BD0(void);
 void fn_800A2C0C(void);
-void fn_800A2C48(void);
+void font_calcTextExtents(void);
 void fn_800A2D20(void);
 void fn_800A2D60(void);
 void fn_800A2DE0(void);
@@ -266,7 +266,7 @@ asm void fn_800A2C0C(void)
     blr
 }
 
-asm void fn_800A2C48(void)
+asm void font_calcTextExtents(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -278,7 +278,7 @@ asm void fn_800A2C48(void)
     mr r29, r3
     lwz r0, lbl_8087EF68
     cmpwi r0, 0x0
-    bne lbl_fn_800A2C48_000003E4
+    bne lbl_font_calcTextExtents_000003E4
     lis r31, lbl_807327B4@ha
     lis r3, 0x1
     addi r5, r31, lbl_807327B4@l
@@ -289,7 +289,7 @@ asm void fn_800A2C48(void)
     bl fn_80084320
     cmpwi r3, 0x0
     mr r30, r3
-    beq lbl_fn_800A2C48_000003E0
+    beq lbl_font_calcTextExtents_000003E0
     mr r4, r29
     bl atn_Task_constructor
     lis r3, lbl_80778A9C@ha
@@ -314,9 +314,9 @@ asm void fn_800A2C48(void)
     li r4, 0x1
     stw r3, -0x7d40(r5)
     bl atn_Task_setActive
-lbl_fn_800A2C48_000003E0:
+lbl_font_calcTextExtents_000003E0:
     stw r30, lbl_8087EF68
-lbl_fn_800A2C48_000003E4:
+lbl_font_calcTextExtents_000003E4:
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
     lwz r29, 0x14(r1)

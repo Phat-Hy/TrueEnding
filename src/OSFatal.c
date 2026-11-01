@@ -53,7 +53,7 @@ extern void fn_805FEBB0(void);
 extern void fn_805FF240(void);
 extern void fn_806036E0(void);
 extern void fn_80603730(void);
-extern void fn_80603AA0(void);
+extern void VISetNextFrameBuffer(void);
 extern void fn_80604580(void);
 extern void fn_80604C50(void);
 extern void fn_80604FB0(void);
@@ -1063,7 +1063,7 @@ asm void OSFatal(void)
     addi r3, r24, lbl_807CB320@l
     bl OSSetCurrentContext
     bl __OSStopAudioSystem
-    bl fn_80603AA0
+    bl VISetNextFrameBuffer
     li r3, 0x80
     bl __OSUnmaskInterrupts
     li r3, 0x1

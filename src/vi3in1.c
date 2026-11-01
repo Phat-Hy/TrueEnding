@@ -86,18 +86,18 @@ extern u32 lbl_8087FE8C;
 extern u32 lbl_8087FE98;
 
 /* Function declarations */
-void fn_80602ED0(void);
+void VIConfigure(void);
 void fn_806036E0(void);
 void fn_80603730(void);
 void fn_80603780(void);
 void fn_806038A0(void);
-void fn_80603AA0(void);
+void VISetNextFrameBuffer(void);
 void fn_80603FF0(void);
 void fn_80604050(void);
 void fn_80604300(void);
 void fn_806043E0(void);
 
-asm void fn_80602ED0(void)
+asm void VIConfigure(void)
 {
     nofralloc
     stwu r1, -0x2f0(r1)
@@ -112,61 +112,61 @@ asm void fn_80602ED0(void)
     addi r30, r30, lbl_807D14A0@l
     li r6, 0x0
     rlwinm. r0, r3, 0, 16, 16
-    beq lbl_fn_80602ED0_40
+    beq lbl_VIConfigure_40
     clrlwi r0, r3, 17
     sth r0, 0x2030(r5)
     ori r6, r6, 0x1
-lbl_fn_80602ED0_40:
+lbl_VIConfigure_40:
     lis r4, 0xcc00
     lhz r3, 0x2034(r4)
     rlwinm. r0, r3, 0, 16, 16
-    beq lbl_fn_80602ED0_5c
+    beq lbl_VIConfigure_5c
     clrlwi r0, r3, 17
     sth r0, 0x2034(r4)
     ori r6, r6, 0x2
-lbl_fn_80602ED0_5c:
+lbl_VIConfigure_5c:
     lis r4, 0xcc00
     lhz r3, 0x2038(r4)
     rlwinm. r0, r3, 0, 16, 16
-    beq lbl_fn_80602ED0_78
+    beq lbl_VIConfigure_78
     clrlwi r0, r3, 17
     sth r0, 0x2038(r4)
     ori r6, r6, 0x4
-lbl_fn_80602ED0_78:
+lbl_VIConfigure_78:
     lis r4, 0xcc00
     lhz r3, 0x203c(r4)
     rlwinm. r0, r3, 0, 16, 16
-    beq lbl_fn_80602ED0_94
+    beq lbl_VIConfigure_94
     clrlwi r0, r3, 17
     sth r0, 0x203c(r4)
     ori r6, r6, 0x8
-lbl_fn_80602ED0_94:
+lbl_VIConfigure_94:
     rlwinm. r0, r6, 0, 29, 29
     lis r3, 0xcc00
     lhz r0, 0x203c(r3)
-    bne lbl_fn_80602ED0_ac
+    bne lbl_VIConfigure_ac
     rlwinm. r0, r6, 0, 28, 28
-    beq lbl_fn_80602ED0_128
-lbl_fn_80602ED0_ac:
+    beq lbl_VIConfigure_128
+lbl_VIConfigure_ac:
     addi r3, r1, 0x10
     bl OSClearContext
     addi r3, r1, 0x10
     bl OSSetCurrentContext
     lwz r0, lbl_8087FE08
     cmpwi r0, 0x0
-    beq lbl_fn_80602ED0_114
+    beq lbl_VIConfigure_114
     lis r5, 0xcc00
     lhz r0, 0x202c(r5)
     clrlwi r4, r0, 21
     nop
-lbl_fn_80602ED0_d8:
+lbl_VIConfigure_d8:
     lhz r3, 0x202e(r5)
     mr r6, r4
     lhz r0, 0x202c(r5)
     clrlwi r3, r3, 21
     clrlwi r4, r0, 21
     cmplw r6, r4
-    bne lbl_fn_80602ED0_d8
+    bne lbl_VIConfigure_d8
     addi r5, r1, 0xa
     addi r6, r1, 0x8
     bl fn_80605300
@@ -175,13 +175,13 @@ lbl_fn_80602ED0_d8:
     lha r4, 0x8(r1)
     mtctr r12
     bctrl
-lbl_fn_80602ED0_114:
+lbl_VIConfigure_114:
     addi r3, r1, 0x10
     bl OSClearContext
     mr r3, r28
     bl OSSetCurrentContext
-    b lbl_fn_80602ED0_7f4
-lbl_fn_80602ED0_128:
+    b lbl_VIConfigure_7f4
+lbl_VIConfigure_128:
     lwz r4, lbl_8087FE8C
     addi r3, r1, 0x10
     addi r0, r4, 0x1
@@ -191,54 +191,54 @@ lbl_fn_80602ED0_128:
     bl OSSetCurrentContext
     lwz r12, lbl_8087FE60
     cmpwi r12, 0x0
-    beq lbl_fn_80602ED0_15c
+    beq lbl_VIConfigure_15c
     lwz r3, lbl_8087FE8C
     mtctr r12
     bctrl
-lbl_fn_80602ED0_15c:
+lbl_VIConfigure_15c:
     lwz r0, lbl_8087FDE8
     cmpwi r0, 0x0
-    beq lbl_fn_80602ED0_1bc
+    beq lbl_VIConfigure_1bc
     lis r3, 0xcc00
     lhz r0, 0x202c(r3)
     clrlwi r4, r0, 21
     nop
-lbl_fn_80602ED0_178:
+lbl_VIConfigure_178:
     lhz r0, 0x202e(r3)
     mr r5, r4
     lhz r0, 0x202c(r3)
     clrlwi r4, r0, 21
     cmplw r5, r4
-    bne lbl_fn_80602ED0_178
+    bne lbl_VIConfigure_178
     cmplwi r4, 0x1
-    beq lbl_fn_80602ED0_1bc
+    beq lbl_VIConfigure_1bc
     lwz r3, lbl_8087FE54
     lhz r0, 0x18(r3)
     srwi r3, r0, 1
     addi r0, r3, 0x1
     cmplw r4, r0
-    beq lbl_fn_80602ED0_1bc
+    beq lbl_VIConfigure_1bc
     lwz r3, lbl_8087FDE4
     addi r0, r3, 0x1
     stw r0, lbl_8087FDE4
-lbl_fn_80602ED0_1bc:
+lbl_VIConfigure_1bc:
     lwz r0, lbl_8087FE88
     cmpwi r0, 0x0
-    beq lbl_fn_80602ED0_2f8
+    beq lbl_VIConfigure_2f8
     lwz r0, lbl_8087FE20
     cmplwi r0, 0x1
-    bne lbl_fn_80602ED0_230
+    bne lbl_VIConfigure_230
     lis r4, 0xcc00
     lhz r0, 0x202c(r4)
     clrlwi r7, r0, 21
-lbl_fn_80602ED0_1e0:
+lbl_VIConfigure_1e0:
     lhz r3, 0x202e(r4)
     mr r6, r7
     lhz r0, 0x202c(r4)
     clrlwi r5, r3, 21
     clrlwi r7, r0, 21
     cmplw r6, r7
-    bne lbl_fn_80602ED0_1e0
+    bne lbl_VIConfigure_1e0
     lwz r6, lbl_8087FE54
     subi r4, r5, 0x1
     subi r3, r7, 0x1
@@ -251,24 +251,24 @@ lbl_fn_80602ED0_1e0:
     cntlzw r0, r0
     slw r0, r3, r0
     srwi. r0, r0, 31
-    beq lbl_fn_80602ED0_2e0
-lbl_fn_80602ED0_230:
+    beq lbl_VIConfigure_2e0
+lbl_VIConfigure_230:
     addi r26, r30, 0x0
     li r31, -0x1
     lis r27, 0xcc00
-    b lbl_fn_80602ED0_2a4
-lbl_fn_80602ED0_240:
+    b lbl_VIConfigure_2a4
+lbl_VIConfigure_240:
     lwz r0, lbl_8087FE28
     lwz r3, lbl_8087FE2C
     cntlzw r4, r0
     cmpwi r4, 0x20
     and r0, r3, r31
-    bge lbl_fn_80602ED0_25c
-    b lbl_fn_80602ED0_264
-lbl_fn_80602ED0_25c:
+    bge lbl_VIConfigure_25c
+    b lbl_VIConfigure_264
+lbl_VIConfigure_25c:
     cntlzw r3, r0
     addi r4, r3, 0x20
-lbl_fn_80602ED0_264:
+lbl_VIConfigure_264:
     slwi r0, r4, 1
     subfic r5, r4, 0x3f
     add r3, r27, r0
@@ -285,11 +285,11 @@ lbl_fn_80602ED0_264:
     and r3, r3, r4
     stw r3, lbl_8087FE2C
     stw r0, lbl_8087FE28
-lbl_fn_80602ED0_2a4:
+lbl_VIConfigure_2a4:
     lwz r0, lbl_8087FE28
     lwz r3, lbl_8087FE2C
     or. r0, r3, r0
-    bne lbl_fn_80602ED0_240
+    bne lbl_VIConfigure_240
     addi r3, r30, 0xf0
     lwz r0, lbl_8087FE4C
     lwz r4, 0x54(r3)
@@ -300,16 +300,16 @@ lbl_fn_80602ED0_2a4:
     stw r4, lbl_8087FE54
     stw r3, CurrTvMode_8087FE50
     stw r0, lbl_8087FE48
-    b lbl_fn_80602ED0_2e4
-lbl_fn_80602ED0_2e0:
+    b lbl_VIConfigure_2e4
+lbl_VIConfigure_2e0:
     li r6, 0x0
-lbl_fn_80602ED0_2e4:
+lbl_VIConfigure_2e4:
     cmpwi r6, 0x0
-    beq lbl_fn_80602ED0_2f8
+    beq lbl_VIConfigure_2f8
     li r0, 0x0
     stw r0, lbl_8087FE88
     bl fn_805EA980
-lbl_fn_80602ED0_2f8:
+lbl_VIConfigure_2f8:
     bl OSDisableInterrupts
     lis r4, 0xcc00
     lhz r0, 0x206e(r4)
@@ -318,15 +318,15 @@ lbl_fn_80602ED0_2f8:
     lwz r0, lbl_8087E810
     clrlwi r26, r26, 31
     cmplw r26, r0
-    beq lbl_fn_80602ED0_324
+    beq lbl_VIConfigure_324
     mr r3, r26
     bl fn_80605FF0
-lbl_fn_80602ED0_324:
+lbl_VIConfigure_324:
     stw r26, lbl_8087E810
     bl OSDisableInterrupts
     lwz r5, CurrTvMode_8087FE50
     cmplwi r5, 0x8
-    bgt lbl_fn_80602ED0_364
+    bgt lbl_VIConfigure_364
     lis r4, jumptable_807ABCF8@ha
     slwi r0, r5, 2
     addi r4, r4, jumptable_807ABCF8@l
@@ -334,160 +334,160 @@ lbl_fn_80602ED0_324:
     mtctr r4
     bctr
     li r29, 0x0
-    b lbl_fn_80602ED0_364
+    b lbl_VIConfigure_364
     li r29, 0x1
-    b lbl_fn_80602ED0_364
+    b lbl_VIConfigure_364
     mr r29, r5
-lbl_fn_80602ED0_364:
+lbl_VIConfigure_364:
     bl OSRestoreInterrupts
     lwz r0, lbl_8087E814
     cmplw r29, r0
-    beq lbl_fn_80602ED0_43c
+    beq lbl_VIConfigure_43c
     cmplwi r29, 0x5
-    bne lbl_fn_80602ED0_388
+    bne lbl_VIConfigure_388
     li r3, 0x1
     bl fn_80606090
-    b lbl_fn_80602ED0_390
-lbl_fn_80602ED0_388:
+    b lbl_VIConfigure_390
+lbl_VIConfigure_388:
     li r3, 0x0
     bl fn_80606090
-lbl_fn_80602ED0_390:
+lbl_VIConfigure_390:
     cmplwi r29, 0x1
-    bne lbl_fn_80602ED0_3e4
+    bne lbl_VIConfigure_3e4
     lwz r0, lbl_8087FE78
     cmpwi r0, 0x1
-    beq lbl_fn_80602ED0_3b0
+    beq lbl_VIConfigure_3b0
     cmpwi r0, 0x2
-    beq lbl_fn_80602ED0_3bc
-    b lbl_fn_80602ED0_3cc
-lbl_fn_80602ED0_3b0:
+    beq lbl_VIConfigure_3bc
+    b lbl_VIConfigure_3cc
+lbl_VIConfigure_3b0:
     li r0, 0x7530
     stw r0, lbl_8087FDF4
-    b lbl_fn_80602ED0_3d4
-lbl_fn_80602ED0_3bc:
+    b lbl_VIConfigure_3d4
+lbl_VIConfigure_3bc:
     lis r3, 0x1
     subi r0, r3, 0x5038
     stw r0, lbl_8087FDF4
-    b lbl_fn_80602ED0_3d4
-lbl_fn_80602ED0_3cc:
+    b lbl_VIConfigure_3d4
+lbl_VIConfigure_3cc:
     li r0, 0x3a98
     stw r0, lbl_8087FDF4
-lbl_fn_80602ED0_3d4:
+lbl_VIConfigure_3d4:
     lis r3, 0x1
     addi r0, r3, 0x5f90
     stw r0, lbl_8087FDF8
-    b lbl_fn_80602ED0_430
-lbl_fn_80602ED0_3e4:
+    b lbl_VIConfigure_430
+lbl_VIConfigure_3e4:
     lwz r0, lbl_8087FE78
     cmpwi r0, 0x1
-    beq lbl_fn_80602ED0_3fc
+    beq lbl_VIConfigure_3fc
     cmpwi r0, 0x2
-    beq lbl_fn_80602ED0_40c
-    b lbl_fn_80602ED0_41c
-lbl_fn_80602ED0_3fc:
+    beq lbl_VIConfigure_40c
+    b lbl_VIConfigure_41c
+lbl_VIConfigure_3fc:
     lis r3, 0x1
     subi r0, r3, 0x7360
     stw r0, lbl_8087FDF4
-    b lbl_fn_80602ED0_424
-lbl_fn_80602ED0_40c:
+    b lbl_VIConfigure_424
+lbl_VIConfigure_40c:
     lis r3, 0x1
     subi r0, r3, 0x2d10
     stw r0, lbl_8087FDF4
-    b lbl_fn_80602ED0_424
-lbl_fn_80602ED0_41c:
+    b lbl_VIConfigure_424
+lbl_VIConfigure_41c:
     li r0, 0x4650
     stw r0, lbl_8087FDF4
-lbl_fn_80602ED0_424:
+lbl_VIConfigure_424:
     lis r3, 0x2
     subi r0, r3, 0x5a20
     stw r0, lbl_8087FDF8
-lbl_fn_80602ED0_430:
+lbl_VIConfigure_430:
     li r0, 0x0
     stw r0, lbl_8087FDFC
     stw r0, lbl_8087FE00
-lbl_fn_80602ED0_43c:
+lbl_VIConfigure_43c:
     lwz r0, lbl_8087FE84
     stw r29, lbl_8087E814
     cmpwi r0, 0x0
-    beq lbl_fn_80602ED0_520
+    beq lbl_VIConfigure_520
     li r29, 0x1
-    b lbl_fn_80602ED0_50c
-lbl_fn_80602ED0_454:
+    b lbl_VIConfigure_50c
+lbl_VIConfigure_454:
     lwz r0, lbl_8087FE98
     cntlzw r0, r0
     subfic r0, r0, 0x1f
     slw r26, r29, r0
     cmpwi r26, 0x10
-    beq lbl_fn_80602ED0_4e4
-    bge lbl_fn_80602ED0_4a0
+    beq lbl_VIConfigure_4e4
+    bge lbl_VIConfigure_4a0
     cmpwi r26, 0x4
-    beq lbl_fn_80602ED0_4d4
-    bge lbl_fn_80602ED0_494
+    beq lbl_VIConfigure_4d4
+    bge lbl_VIConfigure_494
     cmpwi r26, 0x2
-    beq lbl_fn_80602ED0_4cc
-    bge lbl_fn_80602ED0_500
+    beq lbl_VIConfigure_4cc
+    bge lbl_VIConfigure_500
     cmpwi r26, 0x1
-    bge lbl_fn_80602ED0_4c4
-    b lbl_fn_80602ED0_500
-lbl_fn_80602ED0_494:
+    bge lbl_VIConfigure_4c4
+    b lbl_VIConfigure_500
+lbl_VIConfigure_494:
     cmpwi r26, 0x8
-    beq lbl_fn_80602ED0_4dc
-    b lbl_fn_80602ED0_500
-lbl_fn_80602ED0_4a0:
+    beq lbl_VIConfigure_4dc
+    b lbl_VIConfigure_500
+lbl_VIConfigure_4a0:
     cmpwi r26, 0x40
-    beq lbl_fn_80602ED0_4f4
-    bge lbl_fn_80602ED0_4b8
+    beq lbl_VIConfigure_4f4
+    bge lbl_VIConfigure_4b8
     cmpwi r26, 0x20
-    beq lbl_fn_80602ED0_4ec
-    b lbl_fn_80602ED0_500
-lbl_fn_80602ED0_4b8:
+    beq lbl_VIConfigure_4ec
+    b lbl_VIConfigure_500
+lbl_VIConfigure_4b8:
     cmpwi r26, 0x80
-    beq lbl_fn_80602ED0_4fc
-    b lbl_fn_80602ED0_500
-lbl_fn_80602ED0_4c4:
+    beq lbl_VIConfigure_4fc
+    b lbl_VIConfigure_500
+lbl_VIConfigure_4c4:
     bl fn_806060D0
-    b lbl_fn_80602ED0_500
-lbl_fn_80602ED0_4cc:
+    b lbl_VIConfigure_500
+lbl_VIConfigure_4cc:
     bl fn_80606130
-    b lbl_fn_80602ED0_500
-lbl_fn_80602ED0_4d4:
+    b lbl_VIConfigure_500
+lbl_VIConfigure_4d4:
     bl fn_806061A0
-    b lbl_fn_80602ED0_500
-lbl_fn_80602ED0_4dc:
+    b lbl_VIConfigure_500
+lbl_VIConfigure_4dc:
     bl fn_80606210
-    b lbl_fn_80602ED0_500
-lbl_fn_80602ED0_4e4:
+    b lbl_VIConfigure_500
+lbl_VIConfigure_4e4:
     bl fn_80607100
-    b lbl_fn_80602ED0_500
-lbl_fn_80602ED0_4ec:
+    b lbl_VIConfigure_500
+lbl_VIConfigure_4ec:
     bl fn_80607140
-    b lbl_fn_80602ED0_500
-lbl_fn_80602ED0_4f4:
+    b lbl_VIConfigure_500
+lbl_VIConfigure_4f4:
     bl fn_806071A0
-    b lbl_fn_80602ED0_500
-lbl_fn_80602ED0_4fc:
+    b lbl_VIConfigure_500
+lbl_VIConfigure_4fc:
     bl __VISetRGBModeImm
-lbl_fn_80602ED0_500:
+lbl_VIConfigure_500:
     lwz r0, lbl_8087FE98
     andc r0, r0, r26
     stw r0, lbl_8087FE98
-lbl_fn_80602ED0_50c:
+lbl_VIConfigure_50c:
     lwz r0, lbl_8087FE98
     cmpwi r0, 0x0
-    bne lbl_fn_80602ED0_454
+    bne lbl_VIConfigure_454
     li r0, 0x0
     stw r0, lbl_8087FE84
-lbl_fn_80602ED0_520:
+lbl_VIConfigure_520:
     lwz r0, lbl_8087FE5C
     cmpwi r0, 0x0
-    beq lbl_fn_80602ED0_544
+    beq lbl_VIConfigure_544
     addi r3, r1, 0x10
     bl OSClearContext
     lwz r12, lbl_8087FE5C
     lwz r3, lbl_8087FE8C
     mtctr r12
     bctrl
-lbl_fn_80602ED0_544:
+lbl_VIConfigure_544:
     la r3, lbl_8087FE68
     bl OSWakeupThread
     addi r3, r1, 0x10
@@ -496,160 +496,160 @@ lbl_fn_80602ED0_544:
     bl OSSetCurrentContext
     lwz r0, lbl_8087FDEC
     cmpwi r0, 0x1
-    bne lbl_fn_80602ED0_58c
+    bne lbl_VIConfigure_58c
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
     bl fn_805F6CF0
     cmpwi r3, 0x1
-    bne lbl_fn_80602ED0_58c
+    bne lbl_VIConfigure_58c
     li r0, 0x0
     stw r0, lbl_8087FDEC
     stw r0, lbl_8087FDFC
-lbl_fn_80602ED0_58c:
+lbl_VIConfigure_58c:
     li r0, 0xa
     addi r3, r30, 0x148
     mtctr r0
-lbl_fn_80602ED0_598:
+lbl_VIConfigure_598:
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_80602ED0_5b0
+    bne lbl_VIConfigure_5b0
     li r0, 0x0
     stw r0, 0x148(r30)
-    b lbl_fn_80602ED0_5b8
-lbl_fn_80602ED0_5b0:
+    b lbl_VIConfigure_5b8
+lbl_VIConfigure_5b0:
     addi r3, r3, 0x4
-    bdnz lbl_fn_80602ED0_598
-lbl_fn_80602ED0_5b8:
+    bdnz lbl_VIConfigure_598
+lbl_VIConfigure_5b8:
     lwz r0, lbl_8087FE74
     cmpwi r0, 0x0
-    beq lbl_fn_80602ED0_630
+    beq lbl_VIConfigure_630
     lwz r0, lbl_8087FE70
     cmpwi r0, 0x0
-    beq lbl_fn_80602ED0_630
+    beq lbl_VIConfigure_630
     lwz r0, 0x148(r30)
     cmpwi r0, 0x0
-    beq lbl_fn_80602ED0_630
+    beq lbl_VIConfigure_630
     lwz r0, lbl_8087FE80
     cmpwi r0, 0x1
-    bne lbl_fn_80602ED0_604
+    bne lbl_VIConfigure_604
     lwz r3, lbl_8087FDFC
     li r0, -0x1
     cmplw r3, r0
-    bge lbl_fn_80602ED0_604
+    bge lbl_VIConfigure_604
     lwz r3, lbl_8087FDFC
     addi r0, r3, 0x1
     stw r0, lbl_8087FDFC
-lbl_fn_80602ED0_604:
+lbl_VIConfigure_604:
     lwz r0, lbl_8087FE7C
     cmpwi r0, 0x1
-    bne lbl_fn_80602ED0_670
+    bne lbl_VIConfigure_670
     lwz r3, lbl_8087FE00
     li r0, -0x1
     cmplw r3, r0
-    bge lbl_fn_80602ED0_670
+    bge lbl_VIConfigure_670
     lwz r3, lbl_8087FE00
     addi r0, r3, 0x1
     stw r0, lbl_8087FE00
-    b lbl_fn_80602ED0_670
-lbl_fn_80602ED0_630:
+    b lbl_VIConfigure_670
+lbl_VIConfigure_630:
     lwz r3, lbl_8087FDFC
     lwz r0, lbl_8087FDF0
     cmplw r3, r0
-    blt lbl_fn_80602ED0_648
+    blt lbl_VIConfigure_648
     li r0, 0x1
     stw r0, lbl_8087FE40
-lbl_fn_80602ED0_648:
+lbl_VIConfigure_648:
     lwz r3, lbl_8087FE00
     lwz r0, lbl_8087FDF8
     cmplw r3, r0
-    blt lbl_fn_80602ED0_65c
+    blt lbl_VIConfigure_65c
     bl fn_805FF4E0
-lbl_fn_80602ED0_65c:
+lbl_VIConfigure_65c:
     li r0, 0x0
     stw r0, lbl_8087FDFC
     stw r0, lbl_8087FE00
     lwz r0, lbl_8087FDF4
     stw r0, lbl_8087FDF0
-lbl_fn_80602ED0_670:
+lbl_VIConfigure_670:
     lwz r3, lbl_8087E818
     lwz r0, lbl_8087FE80
     cmpw r3, r0
-    beq lbl_fn_80602ED0_6b4
+    beq lbl_VIConfigure_6b4
     lwz r0, lbl_8087FE80
     cmpwi r0, 0x0
-    bne lbl_fn_80602ED0_6a4
+    bne lbl_VIConfigure_6a4
     lwz r3, lbl_8087FDFC
     lwz r0, lbl_8087FDF0
     cmplw r3, r0
-    blt lbl_fn_80602ED0_6a4
+    blt lbl_VIConfigure_6a4
     li r0, 0x1
     stw r0, lbl_8087FE40
-lbl_fn_80602ED0_6a4:
+lbl_VIConfigure_6a4:
     li r0, 0x0
     stw r0, lbl_8087FDFC
     lwz r0, lbl_8087FDF4
     stw r0, lbl_8087FDF0
-lbl_fn_80602ED0_6b4:
+lbl_VIConfigure_6b4:
     lwz r3, lbl_8087FDFC
     lwz r0, lbl_8087FDF0
     cmplw r3, r0
-    bne lbl_fn_80602ED0_6cc
+    bne lbl_VIConfigure_6cc
     li r0, 0x1
     stw r0, lbl_8087FE3C
-lbl_fn_80602ED0_6cc:
+lbl_VIConfigure_6cc:
     lwz r0, lbl_8087FE40
     cmpwi r0, 0x0
-    beq lbl_fn_80602ED0_6fc
+    beq lbl_VIConfigure_6fc
     li r3, 0x0
     li r4, 0x2
     li r5, 0x2
     bl fn_805F6CF0
     cmpwi r3, 0x1
-    bne lbl_fn_80602ED0_6fc
+    bne lbl_VIConfigure_6fc
     li r0, 0x0
     stw r0, lbl_8087FE40
     stw r0, lbl_8087FE04
-lbl_fn_80602ED0_6fc:
+lbl_VIConfigure_6fc:
     lwz r0, lbl_8087FE3C
     cmpwi r0, 0x0
-    beq lbl_fn_80602ED0_730
+    beq lbl_VIConfigure_730
     li r3, 0x1
     li r4, 0x2
     li r5, 0x2
     bl fn_805F6CF0
     cmpwi r3, 0x1
-    bne lbl_fn_80602ED0_730
+    bne lbl_VIConfigure_730
     li r3, 0x0
     li r0, 0x1
     stw r3, lbl_8087FE3C
     stw r0, lbl_8087FE04
-lbl_fn_80602ED0_730:
+lbl_VIConfigure_730:
     lwz r3, lbl_8087E81C
     lwz r0, lbl_8087FE7C
     cmpw r3, r0
-    beq lbl_fn_80602ED0_768
+    beq lbl_VIConfigure_768
     lwz r0, lbl_8087FE7C
     cmpwi r0, 0x0
-    bne lbl_fn_80602ED0_760
+    bne lbl_VIConfigure_760
     lwz r3, lbl_8087FE00
     lwz r0, lbl_8087FDF8
     cmplw r3, r0
-    blt lbl_fn_80602ED0_760
+    blt lbl_VIConfigure_760
     bl fn_805FF4E0
-lbl_fn_80602ED0_760:
+lbl_VIConfigure_760:
     li r0, 0x0
     stw r0, lbl_8087FE00
-lbl_fn_80602ED0_768:
+lbl_VIConfigure_768:
     lwz r3, lbl_8087FE00
     lwz r0, lbl_8087FDF8
     cmplw r3, r0
-    bne lbl_fn_80602ED0_788
+    bne lbl_VIConfigure_788
     lis r3, lbl_807D0FD0@ha
     li r4, 0x0
     addi r3, r3, lbl_807D0FD0@l
     bl fn_805FF4D0
-lbl_fn_80602ED0_788:
+lbl_VIConfigure_788:
     li r0, 0x1
     stw r0, lbl_8087FE74
     addi r3, r30, 0x148
@@ -671,13 +671,13 @@ lbl_fn_80602ED0_788:
     stw r5, lbl_8087E818
     cmplw r3, r0
     stw r4, lbl_8087E81C
-    ble lbl_fn_80602ED0_7f4
+    ble lbl_VIConfigure_7f4
     lwz r0, lbl_8087FE04
     cmpwi r0, 0x0
-    bne lbl_fn_80602ED0_7f4
+    bne lbl_VIConfigure_7f4
     lwz r0, lbl_8087FDF4
     stw r0, lbl_8087FDF0
-lbl_fn_80602ED0_7f4:
+lbl_VIConfigure_7f4:
     addi r11, r1, 0x2f0
     bl _restgpr_26
     lwz r0, 0x2f4(r1)
@@ -944,7 +944,7 @@ lbl_fn_806038A0_bb8:
     blr
 }
 
-asm void fn_80603AA0(void)
+asm void VISetNextFrameBuffer(void)
 {
     nofralloc
     stwu r1, -0x30(r1)
@@ -954,7 +954,7 @@ asm void fn_80603AA0(void)
     bl _savegpr_24
     lwz r0, lbl_8087FDE0
     cmpwi r0, 0x0
-    bne lbl_fn_80603AA0_1100
+    bne lbl_VISetNextFrameBuffer_1100
     lwz r3, lbl_8087E808
     bl OSRegisterVersion
     li r0, 0x1
@@ -962,10 +962,10 @@ asm void fn_80603AA0(void)
     lis r3, 0xcc00
     lhz r0, 0x2002(r3)
     clrlwi. r0, r0, 31
-    bne lbl_fn_80603AA0_c18
+    bne lbl_VISetNextFrameBuffer_c18
     li r3, 0x0
     bl fn_806038A0
-lbl_fn_80603AA0_c18:
+lbl_VISetNextFrameBuffer_c18:
     lis r4, lbl_807ABBFC@ha
     li r29, 0x0
     addi r3, r4, lbl_807ABBFC@l
@@ -1062,16 +1062,16 @@ lbl_fn_80603AA0_c18:
     lhz r0, 0x206c(r30)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    bne lbl_fn_80603AA0_da4
+    bne lbl_VISetNextFrameBuffer_da4
     li r27, 0x2
-    b lbl_fn_80603AA0_db8
-lbl_fn_80603AA0_da4:
+    b lbl_VISetNextFrameBuffer_db8
+lbl_VISetNextFrameBuffer_da4:
     lhz r0, 0x2002(r30)
     extrwi r4, r0, 1, 29
     neg r0, r4
     or r0, r0, r4
     srwi r27, r0, 31
-lbl_fn_80603AA0_db8:
+lbl_VISetNextFrameBuffer_db8:
     bl OSRestoreInterrupts
     lis r3, lbl_807D1590@ha
     cmplwi r24, 0x5
@@ -1079,17 +1079,17 @@ lbl_fn_80603AA0_db8:
     extrwi r0, r29, 2, 22
     stw r27, 0x24(r3)
     stw r0, 0x28(r3)
-    beq lbl_fn_80603AA0_de8
+    beq lbl_VISetNextFrameBuffer_de8
     cmplwi r24, 0x1
-    bne lbl_fn_80603AA0_df8
+    bne lbl_VISetNextFrameBuffer_df8
     cmpwi r0, 0x0
-    bne lbl_fn_80603AA0_df8
-lbl_fn_80603AA0_de8:
+    bne lbl_VISetNextFrameBuffer_df8
+lbl_VISetNextFrameBuffer_de8:
     lis r3, lbl_807D1590@ha
     li r0, 0x5
     addi r3, r3, lbl_807D1590@l
     stw r0, 0x28(r3)
-lbl_fn_80603AA0_df8:
+lbl_VISetNextFrameBuffer_df8:
     lis r30, lbl_807D1590@ha
     addi r31, r30, lbl_807D1590@l
     lwz r5, 0x28(r31)
@@ -1127,12 +1127,12 @@ lbl_fn_80603AA0_df8:
     sth r6, lbl_807D1590@l(r30)
     sth r5, 0x2(r31)
     lhz r7, 0x2(r3)
-    ble lbl_fn_80603AA0_e94
-    b lbl_fn_80603AA0_e9c
-lbl_fn_80603AA0_e94:
+    ble lbl_VISetNextFrameBuffer_e94
+    b lbl_VISetNextFrameBuffer_e9c
+lbl_VISetNextFrameBuffer_e94:
     srawi r0, r4, 31
     andc r9, r4, r0
-lbl_fn_80603AA0_e9c:
+lbl_VISetNextFrameBuffer_e9c:
     lis r5, lbl_807D1590@ha
     lha r8, lbl_8087FE0E
     addi r5, r5, lbl_807D1590@l
@@ -1147,9 +1147,9 @@ lbl_fn_80603AA0_e9c:
     cmpw r10, r6
     mr r0, r6
     addi r5, r4, 0x1
-    ble lbl_fn_80603AA0_edc
+    ble lbl_VISetNextFrameBuffer_edc
     mr r0, r10
-lbl_fn_80603AA0_edc:
+lbl_VISetNextFrameBuffer_edc:
     lis r4, lbl_807D1590@ha
     extsh r7, r7
     addi r4, r4, lbl_807D1590@l
@@ -1221,9 +1221,9 @@ lbl_fn_80603AA0_edc:
     stw r29, 0x44(r4)
     bl OSInitThreadQueue
     lis r5, 0xcc00
-    lis r4, fn_80602ED0@ha
+    lis r4, VIConfigure@ha
     lhz r0, 0x2030(r5)
-    addi r4, r4, fn_80602ED0@l
+    addi r4, r4, VIConfigure@l
     li r3, 0x18
     clrlwi r0, r0, 17
     sth r0, 0x2030(r5)
@@ -1241,7 +1241,7 @@ lbl_fn_80603AA0_edc:
     bl OSDisableInterrupts
     lwz r5, CurrTvMode_8087FE50
     cmplwi r5, 0x8
-    bgt lbl_fn_80603AA0_1078
+    bgt lbl_VISetNextFrameBuffer_1078
     lis r4, jumptable_807ABDA8@ha
     slwi r0, r5, 2
     addi r4, r4, jumptable_807ABDA8@l
@@ -1249,29 +1249,29 @@ lbl_fn_80603AA0_edc:
     mtctr r4
     bctr
     li r28, 0x0
-    b lbl_fn_80603AA0_1078
+    b lbl_VISetNextFrameBuffer_1078
     li r28, 0x1
-    b lbl_fn_80603AA0_1078
+    b lbl_VISetNextFrameBuffer_1078
     mr r28, r5
-lbl_fn_80603AA0_1078:
+lbl_VISetNextFrameBuffer_1078:
     bl OSRestoreInterrupts
     cmplwi r28, 0x1
-    bne lbl_fn_80603AA0_10a0
+    bne lbl_VISetNextFrameBuffer_10a0
     lis r3, 0x1
     li r4, 0x3a98
     stw r4, lbl_8087FDF0
     addi r0, r3, 0x5f90
     stw r4, lbl_8087FDF4
     stw r0, lbl_8087FDF8
-    b lbl_fn_80603AA0_10b8
-lbl_fn_80603AA0_10a0:
+    b lbl_VISetNextFrameBuffer_10b8
+lbl_VISetNextFrameBuffer_10a0:
     lis r3, 0x2
     li r4, 0x4650
     stw r4, lbl_8087FDF0
     subi r0, r3, 0x5a20
     stw r4, lbl_8087FDF4
     stw r0, lbl_8087FDF8
-lbl_fn_80603AA0_10b8:
+lbl_VISetNextFrameBuffer_10b8:
     li r3, 0x0
     stw r3, lbl_8087FDFC
     li r0, 0x1
@@ -1283,15 +1283,15 @@ lbl_fn_80603AA0_10b8:
     lwz r0, lbl_8087FE80
     bl fn_80624A50
     clrlwi. r0, r3, 24
-    bne lbl_fn_80603AA0_10ec
+    bne lbl_VISetNextFrameBuffer_10ec
     li r27, 0x0
-lbl_fn_80603AA0_10ec:
+lbl_VISetNextFrameBuffer_10ec:
     stw r27, lbl_8087FE80
     li r0, 0x0
     lwz r3, lbl_8087FE7C
     stw r0, lbl_8087FE7C
     bl fn_80607290
-lbl_fn_80603AA0_1100:
+lbl_VISetNextFrameBuffer_1100:
     addi r11, r1, 0x30
     bl _restgpr_24
     lwz r0, 0x34(r1)

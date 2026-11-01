@@ -29,8 +29,8 @@ void OSGetConsoleSimulatedMem1Size(void);
 void OSGetConsoleSimulatedMem2Size(void);
 void fn_805F2980(void);
 void MEMIntrruptHandler(void);
-void fn_805F2A10(void);
-void fn_805F2A90(void);
+void __OSSetMEM1Protection(void);
+void __OSSetMEM2Protection(void);
 void fn_805F2B70(void);
 void fn_805F2C50(void);
 void fn_805F2D00(void);
@@ -112,7 +112,7 @@ lbl_MEMIntrruptHandler_000000B0:
     b __OSUnhandledException
 }
 
-asm void fn_805F2A10(void)
+asm void __OSSetMEM1Protection(void)
 {
     nofralloc
     li r7, 0x0
@@ -149,7 +149,7 @@ asm void fn_805F2A10(void)
     rfi
 }
 
-asm void fn_805F2A90(void)
+asm void __OSSetMEM2Protection(void)
 {
     nofralloc
     li r7, 0x0
@@ -455,8 +455,8 @@ lbl_BATConfig_000005B0:
     lis r0, 0x180
     cmplw r31, r0
     bgt lbl_BATConfig_000005C8
-    lis r3, fn_805F2A10@ha
-    addi r3, r3, fn_805F2A10@l
+    lis r3, __OSSetMEM1Protection@ha
+    addi r3, r3, __OSSetMEM1Protection@l
     bl fn_805F2E90
 lbl_BATConfig_000005C8:
     lis r3, 0x8000
@@ -468,8 +468,8 @@ lbl_BATConfig_000005C8:
     lis r0, 0x9340
     cmplw r3, r0
     bgt lbl_BATConfig_000005FC
-    lis r3, fn_805F2A90@ha
-    addi r3, r3, fn_805F2A90@l
+    lis r3, __OSSetMEM2Protection@ha
+    addi r3, r3, __OSSetMEM2Protection@l
     bl fn_805F2E90
     b lbl_BATConfig_0000065C
 lbl_BATConfig_000005FC:
@@ -518,11 +518,11 @@ asm void fn_805F2FD0(void)
     nofralloc
     stwu r1, -0x10(r1)
     mflr r0
-    lis r4, fn_805F2A10@ha
+    lis r4, __OSSetMEM1Protection@ha
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    addi r3, r4, fn_805F2A10@l
+    addi r3, r4, __OSSetMEM1Protection@l
     bl fn_805F2E90
     subis r0, r31, 0xb
     nop

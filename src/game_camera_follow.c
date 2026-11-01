@@ -16,7 +16,7 @@ extern void fn_800DC12C(void);
 extern void fn_800DC288(void);
 extern void fn_800EE360(void);
 extern void fn_800F8548(void);
-extern void fn_8013655C(void);
+extern void boss_updatePhaseState(void);
 extern void fn_80145334(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014C540(void);
@@ -1077,7 +1077,7 @@ asm void fn_802E5B38(void)
     stw r31, 0xc(r1)
     mr r31, r3
     stw r30, 0x8(r1)
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     beq lbl_fn_802E5B38_00000DF8
     li r3, 0x0

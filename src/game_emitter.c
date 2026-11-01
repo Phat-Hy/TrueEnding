@@ -26,7 +26,7 @@ extern void fn_8011D1FC(void);
 extern void fn_8011D21C(void);
 extern void fn_801354B4(void);
 extern void fn_80136138(void);
-extern void fn_8013655C(void);
+extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
 extern void fn_80145334(void);
 extern void quest_checkCondition(void);
@@ -986,7 +986,7 @@ asm void fn_800E2DD4(void)
     li r31, 0x1
     stw r30, 0x18(r1)
     mr r30, r3
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     beq lbl_fn_800E2DD4_00000B18
     li r31, 0x0

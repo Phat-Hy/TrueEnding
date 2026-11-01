@@ -14,7 +14,7 @@ extern void atn_Task_destructor(void);
 extern void texCache_allocateSlot(void);
 extern void fn_8022C2A0(void);
 extern void fn_8022C9C8(void);
-extern void fn_80234A8C(void);
+extern void font_loadGlyphMetrics(void);
 extern void fn_802371BC(void);
 extern void fn_80237DA8(void);
 extern void fn_805F93C0(void);
@@ -1608,7 +1608,7 @@ lbl_fn_802396A0_000015A8:
 asm void fn_80239794(void)
 {
     nofralloc
-    b fn_80234A8C
+    b font_loadGlyphMetrics
 }
 
 asm void fn_80239798(void)

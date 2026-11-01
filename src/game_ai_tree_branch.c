@@ -37,7 +37,7 @@ extern void fn_80102EAC(void);
 extern void fn_80103F60(void);
 extern void fn_80108378(void);
 extern void fn_80109828(void);
-extern void fn_8013655C(void);
+extern void boss_updatePhaseState(void);
 extern void fn_80145334(void);
 extern void fn_8014C540(void);
 extern void fn_801513D0(void);
@@ -1415,7 +1415,7 @@ asm void fn_8025A67C(void)
     addi r11, r1, 0x6c0
     bl _savegpr_17
     mr r18, r3
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     bne lbl_fn_8025A67C_00001868
     lwz r3, 0x1438(r18)

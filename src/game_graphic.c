@@ -126,8 +126,8 @@ void fn_800AF544(void);
 void fn_800AFE40(void);
 void fn_800AFEBC(void);
 void fn_800AFFEC(void);
-void fn_800B089C(void);
-void fn_800B0A44(void);
+void graphic_initViewportTransform(void);
+void graphic_dummyCallback(void);
 void fn_800B0A48(void);
 void fn_800B0A70(void);
 
@@ -1862,7 +1862,7 @@ lbl_fn_800AFFEC_000018F4:
     blr
 }
 
-asm void fn_800B089C(void)
+asm void graphic_initViewportTransform(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1915,11 +1915,11 @@ asm void fn_800B089C(void)
     bl atn_LH_Texture_constructor
     lwz r3, 0x84(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_800B089C_00001A0C
-    beq lbl_fn_800B089C_00001A0C
+    beq lbl_graphic_initViewportTransform_00001A0C
+    beq lbl_graphic_initViewportTransform_00001A0C
     subi r3, r3, 0x10
     bl fn_80084C24
-lbl_fn_800B089C_00001A0C:
+lbl_graphic_initViewportTransform_00001A0C:
     li r0, 0x100
     stw r0, 0x80(r30)
     mulli r3, r0, 0x1c
@@ -1929,30 +1929,30 @@ lbl_fn_800B089C_00001A0C:
     addi r3, r3, 0x10
     li r7, 0x0
     bl fn_800846FC
-    lis r4, fn_800B0A44@ha
+    lis r4, graphic_dummyCallback@ha
     li r5, 0x0
-    addi r4, r4, fn_800B0A44@l
+    addi r4, r4, graphic_dummyCallback@l
     li r6, 0x1c
     li r7, 0x100
     bl fn_80695720
     stw r3, 0x84(r30)
-    b lbl_fn_800B089C_00001A54
+    b lbl_graphic_initViewportTransform_00001A54
     stw r0, 0x84(r30)
-lbl_fn_800B089C_00001A54:
+lbl_graphic_initViewportTransform_00001A54:
     li r6, 0x0
     li r5, 0x0
     li r4, 0x0
-    b lbl_fn_800B089C_00001A78
-lbl_fn_800B089C_00001A64:
+    b lbl_graphic_initViewportTransform_00001A78
+lbl_graphic_initViewportTransform_00001A64:
     lwz r0, 0x84(r30)
     addi r6, r6, 0x1
     add r3, r0, r5
     addi r5, r5, 0x1c
     stw r4, 0x18(r3)
-lbl_fn_800B089C_00001A78:
+lbl_graphic_initViewportTransform_00001A78:
     lwz r0, 0x80(r30)
     cmplw r6, r0
-    blt lbl_fn_800B089C_00001A64
+    blt lbl_graphic_initViewportTransform_00001A64
     li r0, 0x1
     lis r31, lbl_80732D00@ha
     stb r0, 0xe5(r30)
@@ -1977,7 +1977,7 @@ lbl_fn_800B089C_00001A78:
     blr
 }
 
-asm void fn_800B0A44(void)
+asm void graphic_dummyCallback(void)
 {
     nofralloc
     blr

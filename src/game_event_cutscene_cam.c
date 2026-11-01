@@ -28,7 +28,7 @@ extern void fn_800CB3A0(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void fn_800DC6B4(void);
-extern void fn_8046C3FC(void);
+extern void atn_Arc_decompressChunk(void);
 extern void fn_8046D1EC(void);
 extern void fn_8046F5CC(void);
 extern void fn_8046F834(void);
@@ -600,7 +600,7 @@ lbl_fn_80477DB8_00000638:
 lbl_fn_80477DB8_00000690:
     mr r3, r31
     mr r4, r30
-    bl fn_8046C3FC
+    bl atn_Arc_decompressChunk
     cmpwi r3, 0x0
     beq lbl_fn_80477DB8_00000730
     addi r28, r31, 0x3ed0
@@ -952,7 +952,7 @@ lbl_fn_80478204_00000A84:
 lbl_fn_80478204_00000AC8:
     mr r3, r31
     mr r4, r30
-    bl fn_8046C3FC
+    bl atn_Arc_decompressChunk
     cmpwi r3, 0x0
     beq lbl_fn_80478204_00000B68
     addi r28, r31, 0x3ed0
@@ -1186,7 +1186,7 @@ lbl_fn_80478518_00000D98:
 lbl_fn_80478518_00000DE4:
     mr r3, r31
     mr r4, r30
-    bl fn_8046C3FC
+    bl atn_Arc_decompressChunk
     cmpwi r3, 0x0
     beq lbl_fn_80478518_00000E84
     addi r28, r31, 0x3ed0

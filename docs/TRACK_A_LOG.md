@@ -1052,3 +1052,32 @@ void tex_initDefaultTransform(float* rect)
 }
 `
 Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.
+
+## Session 2026-11-01 - Batch 19: High-yield queue naming (12k+ probe hits)
+Subject:  track-a: Batch 19 - name 16 high-yield queue routines (covers 12k+ probe hits) progress 99.30% -> 99.30%
+Scope:    Rename 16 top-ranking routines hit by Track B instruments across 91 files in src/.
+Checklist:
+  1. symbols.txt: Renamed 16 functions in place.
+  2. All src/ references updated across 91 files.
+  3. Local labels lbl_fn_* -> lbl_<newName>_* normalized.
+  4. External prototypes swept across all translation units.
+  5. report.json clean, ninja passed (orig/main.dol: OK).
+Self-check: git diff -U0 -- src/ for 'asm void': -16 / +16 (balanced).
+Names applied:
+  - boss_updatePhaseState (fn_8013655C, 2,908 B, 1,393 probe hits)
+  - sound_applyAudioFilter (fn_801E18E0, 3,540 B, 1,120 probe hits)
+  - field_getTextureSlot (fn_80084F30, 40 B, 974 probe hits)
+  - sound_updateActiveTasks (fn_80046228, 368 B, 769 probe hits)
+  - atn_Arc_decompressChunk (fn_8046C3FC, 1,972 B, 394 probe hits)
+  - atn_Arc_initDecompressHeader (fn_8046BBB0, 48 B, 391 probe hits)
+  - __OSSetMEM1Protection (fn_805F2A10, 128 B, 391 probe hits)
+  - __OSSetMEM2Protection (fn_805F2A90, 212 B, 391 probe hits)
+  - VIConfigure (fn_80602ED0, 2,060 B, 391 probe hits)
+  - VISetNextFrameBuffer (fn_80603AA0, 1,352 B, 391 probe hits)
+  - __GXSetTevKonst (fn_80618730, 2,076 B, 391 probe hits)
+  - graphic_dummyCallback (fn_800B0A44, 4 B, 391 hits)
+  - graphic_initViewportTransform (fn_800B089C, 424 B, 391 hits)
+  - font_initGlyphDesc (fn_80234C24, 48 B, 388 hits)
+  - font_loadGlyphMetrics (fn_80234A8C, 408 B, 388 hits)
+  - font_calcTextExtents (fn_800A2C48, 216 B, 388 hits)
+Progress: 99.30% matched (7,425,512 / 7,477,608 bytes), 18,054 / 18,155 functions matched.

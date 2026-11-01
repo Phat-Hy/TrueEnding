@@ -32,7 +32,7 @@ extern void fn_800FAB80(void);
 extern void fn_80109828(void);
 extern void fn_80126214(void);
 extern void fn_8013322C(void);
-extern void fn_8013655C(void);
+extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
 extern void fn_8013CB68(void);
 extern void dialog_renderWindow(void);
@@ -1883,7 +1883,7 @@ asm void fn_8025CEF8(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     bne lbl_fn_8025CEF8_00001A08
     lwz r3, 0x1438(r31)

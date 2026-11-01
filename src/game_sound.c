@@ -177,7 +177,7 @@ void fn_80046214(void);
 void fn_80046218(void);
 void fn_80046220(void);
 void fn_80046224(void);
-void fn_80046228(void);
+void sound_updateActiveTasks(void);
 void fn_80046398(void);
 void fn_800463A8(void);
 void fn_800463FC(void);
@@ -293,7 +293,7 @@ asm void fn_80046224(void)
     blr
 }
 
-asm void fn_80046228(void)
+asm void sound_updateActiveTasks(void)
 {
     nofralloc
     stwu r1, -0x60(r1)
@@ -302,7 +302,7 @@ asm void fn_80046228(void)
     stmw r18, 0x28(r1)
     lwz r25, g_TaskManager
     cmpwi r25, 0x0
-    beq lbl_fn_80046228_00000164
+    beq lbl_sound_updateActiveTasks_00000164
     li r27, 0x0
     lis r29, lbl_80775B60@ha
     lis r21, lbl_80775B98@ha
@@ -317,13 +317,13 @@ asm void fn_80046228(void)
     li r24, 0x0
     lis r31, lbl_80775BC8@ha
     li r20, 0x1
-    b lbl_fn_80046228_00000158
-lbl_fn_80046228_00000084:
+    b lbl_sound_updateActiveTasks_00000158
+lbl_sound_updateActiveTasks_00000084:
     lwz r0, 0x8(r25)
     add r26, r0, r24
     lwzx r0, r24, r0
     cmpwi r0, 0x0
-    bne lbl_fn_80046228_0000013C
+    bne lbl_sound_updateActiveTasks_0000013C
     stw r29, 0x18(r1)
     addi r3, r31, lbl_80775BC8@l
     stb r30, 0x8(r1)
@@ -339,19 +339,19 @@ lbl_fn_80046228_00000084:
     stw r19, 0x14(r1)
     bl fn_800844D8
     cmpwi r3, 0x0
-    beq lbl_fn_80046228_000000E8
+    beq lbl_sound_updateActiveTasks_000000E8
     stw r20, 0x4(r3)
     stw r20, 0x8(r3)
     stw r21, 0x0(r3)
     stw r18, 0xc(r3)
-lbl_fn_80046228_000000E8:
+lbl_sound_updateActiveTasks_000000E8:
     cmpwi r22, 0x0
     stw r3, 0x20(r1)
     stw r22, 0x10(r1)
-    beq lbl_fn_80046228_00000100
+    beq lbl_sound_updateActiveTasks_00000100
     li r3, 0x0
     bl fn_80084C24
-lbl_fn_80046228_00000100:
+lbl_sound_updateActiveTasks_00000100:
     lwz r3, 0x1c(r1)
     addi r4, r31, lbl_80775BC8@l
     bl strcpy
@@ -359,15 +359,15 @@ lbl_fn_80046228_00000100:
     addi r3, r1, 0x18
     bl fn_800DCA6C
     cmpwi r28, 0x0
-    beq lbl_fn_80046228_0000013C
+    beq lbl_sound_updateActiveTasks_0000013C
     addic. r3, r28, 0x4
-    beq lbl_fn_80046228_0000013C
-    beq lbl_fn_80046228_0000013C
+    beq lbl_sound_updateActiveTasks_0000013C
+    beq lbl_sound_updateActiveTasks_0000013C
     lwz r3, 0x4(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_80046228_0000013C
+    beq lbl_sound_updateActiveTasks_0000013C
     bl fn_806952C4
-lbl_fn_80046228_0000013C:
+lbl_sound_updateActiveTasks_0000013C:
     lwz r4, 0x0(r26)
     addi r3, r26, 0x4
     lwz r12, 0x4(r4)
@@ -375,11 +375,11 @@ lbl_fn_80046228_0000013C:
     bctrl
     addi r27, r27, 0x1
     addi r24, r24, 0x14
-lbl_fn_80046228_00000158:
+lbl_sound_updateActiveTasks_00000158:
     lwz r0, 0x0(r25)
     cmplw r27, r0
-    blt lbl_fn_80046228_00000084
-lbl_fn_80046228_00000164:
+    blt lbl_sound_updateActiveTasks_00000084
+lbl_sound_updateActiveTasks_00000164:
     lis r4, 0x8000
     lis r3, 0x1062
     lwz r0, 0xf8(r4)

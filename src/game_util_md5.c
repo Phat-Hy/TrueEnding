@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dtor_80084684(void);
-extern void fn_80046228(void);
+extern void sound_updateActiveTasks(void);
 extern void fn_80046398(void);
 extern void fn_8059F72C(void);
 extern void OSInitMutex(void);
@@ -346,7 +346,7 @@ lbl_fn_8059DC68_00000244:
     lwz r0, lbl_8087EE84
     b lbl_fn_8059DC68_00000260
 lbl_fn_8059DC68_00000258:
-    bl fn_80046228
+    bl sound_updateActiveTasks
     b lbl_fn_8059DC68_00000244
 lbl_fn_8059DC68_00000260:
     cmplwi r0, 0x40
@@ -430,7 +430,7 @@ lbl_fn_8059DD4C_00000360:
     lwz r0, lbl_8087EE84
     b lbl_fn_8059DD4C_0000037C
 lbl_fn_8059DD4C_00000374:
-    bl fn_80046228
+    bl sound_updateActiveTasks
     b lbl_fn_8059DD4C_00000360
 lbl_fn_8059DD4C_0000037C:
     cmplw r0, r31

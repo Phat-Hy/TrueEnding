@@ -33,7 +33,7 @@ extern void fn_8011FD5C(void);
 extern void fn_8011FD84(void);
 extern void fn_801354B4(void);
 extern void fn_80136138(void);
-extern void fn_8013655C(void);
+extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
 extern void fn_80145334(void);
 extern void dialog_renderWindow(void);
@@ -627,7 +627,7 @@ asm void fn_80547D9C(void)
     stwu r1, -0x10(r1)
     mflr r0
     stw r0, 0x14(r1)
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cntlzw r0, r3
     srwi r3, r0, 5
     lwz r0, 0x14(r1)

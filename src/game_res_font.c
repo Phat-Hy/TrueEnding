@@ -109,8 +109,8 @@ extern u32 lbl_80883138;
 void fn_802348E4(void);
 void fn_80234958(void);
 void fn_80234A60(void);
-void fn_80234A8C(void);
-void fn_80234C24(void);
+void font_loadGlyphMetrics(void);
+void font_initGlyphDesc(void);
 void fn_80234C54(void);
 void fn_80234C84(void);
 void font_renderString(void);
@@ -253,7 +253,7 @@ asm void fn_80234A60(void)
     blr
 }
 
-asm void fn_80234A8C(void)
+asm void font_loadGlyphMetrics(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -265,10 +265,10 @@ asm void fn_80234A8C(void)
     stw r3, lbl_8087DBF8
     stw r4, lbl_8087DBFC
     stw r5, lbl_8087DC00
-    bge lbl_fn_80234A8C_000001D8
+    bge lbl_font_loadGlyphMetrics_000001D8
     slwi r0, r3, 3
     stw r0, lbl_8087F378
-lbl_fn_80234A8C_000001D8:
+lbl_font_loadGlyphMetrics_000001D8:
     lis r31, lbl_80742FB8@ha
     li r3, 0x1000
     addi r5, r31, lbl_80742FB8@l
@@ -285,9 +285,9 @@ lbl_fn_80234A8C_000001D8:
     li r7, 0x0
     addi r3, r3, 0x10
     bl fn_800846FC
-    lis r4, fn_80234C24@ha
+    lis r4, font_initGlyphDesc@ha
     mr r7, r30
-    addi r4, r4, fn_80234C24@l
+    addi r4, r4, font_initGlyphDesc@l
     li r5, 0x0
     li r6, 0x70
     bl fn_80695720
@@ -330,7 +330,7 @@ lbl_fn_80234A8C_000001D8:
     stw r0, lbl_8087F39C
     stw r0, lbl_8087F3AC
     stw r0, lbl_8087F3A4
-    beq lbl_fn_80234A8C_00000328
+    beq lbl_font_loadGlyphMetrics_00000328
     addi r31, r31, lbl_80742FB8@l
     lwz r3, 0x4c(r4)
     addi r4, r31, 0x1
@@ -353,7 +353,7 @@ lbl_fn_80234A8C_000001D8:
     li r6, 0x0
     li r7, 0x0
     bl fn_8008771C
-lbl_fn_80234A8C_00000328:
+lbl_font_loadGlyphMetrics_00000328:
     lwz r0, 0x14(r1)
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)
@@ -362,7 +362,7 @@ lbl_fn_80234A8C_00000328:
     blr
 }
 
-asm void fn_80234C24(void)
+asm void font_initGlyphDesc(void)
 {
     nofralloc
     lfs f0, lbl_8088311C

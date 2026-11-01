@@ -95,7 +95,7 @@ extern void fn_80618570(void);
 extern void fn_806185C0(void);
 extern void fn_80618630(void);
 extern void __GXSetIndTexMtx(void);
-extern void fn_80618730(void);
+extern void __GXSetTevKonst(void);
 extern void fn_80618F50(void);
 extern void fn_80611060(void);
 extern void fn_80611150(void);
@@ -1118,7 +1118,7 @@ lbl___GXInitGX_00000DF8:
     bl fn_806142D0
     li r3, 0x23
     li r4, 0x16
-    bl fn_80618730
+    bl __GXSetTevKonst
     bl fn_80618F50
     addi r11, r1, 0xa0
     bl _restgpr_27

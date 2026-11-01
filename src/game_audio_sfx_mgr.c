@@ -24,7 +24,7 @@ extern void fn_800C344C(void);
 extern void atn_Task_setActive(void);
 extern void fn_800DC288(void);
 extern void fn_8012D8B8(void);
-extern void fn_8013655C(void);
+extern void boss_updatePhaseState(void);
 extern void fn_80145334(void);
 extern void fn_80148990(void);
 extern void dialog_renderWindow(void);
@@ -557,7 +557,7 @@ asm void fn_803104D4(void)
     addi r11, r1, 0xb0
     bl _savegpr_24
     mr r25, r3
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     beq lbl_fn_803104D4_00000654
     li r3, 0x0

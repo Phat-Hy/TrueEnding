@@ -35,7 +35,7 @@ extern void fn_80084A78(void);
 extern void fn_80084C24(void);
 extern void fn_80089620(void);
 extern void fn_8008BBD8(void);
-extern void fn_800A2C48(void);
+extern void font_calcTextExtents(void);
 extern void fn_800A5508(void);
 extern void fn_800A5554(void);
 extern void fn_800A8FF0(void);
@@ -88,7 +88,7 @@ extern void fn_805A6BD8(void);
 extern void fn_805A6BDC(void);
 extern void fn_805A6D14(void);
 extern void OSInitMutex(void);
-extern void fn_80603AA0(void);
+extern void VISetNextFrameBuffer(void);
 extern void fn_80682428(void);
 extern void fn_806846C4(void);
 extern void fn_806846FC(void);
@@ -1259,7 +1259,7 @@ asm void taskManager_initSystem(void)
     addi r3, r3, 0x1b4
     bl OSInitMutex
     bl DVDInit
-    bl fn_80603AA0
+    bl VISetNextFrameBuffer
     bl NWC24SuspendScheduler
     bl fn_80570C54
     bl SCGetLanguage
@@ -1888,7 +1888,7 @@ lbl_taskManager_initSystem_00001658:
     lwz r3, lbl_8087F530
     bl fn_801F0D80
     lwz r3, lbl_8087F530
-    bl fn_800A2C48
+    bl font_calcTextExtents
     lwz r3, lbl_8087F530
     bl fn_804405F8
     bl fn_80207F80

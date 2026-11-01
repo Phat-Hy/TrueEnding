@@ -58,7 +58,7 @@ extern void fn_80122550(void);
 extern void fn_801240B4(void);
 extern void fn_80129978(void);
 extern void fn_80129A48(void);
-extern void fn_8013655C(void);
+extern void boss_updatePhaseState(void);
 extern void fn_80139F2C(void);
 extern void fn_8013A13C(void);
 extern void fn_80145334(void);
@@ -1436,7 +1436,7 @@ asm void fn_8045FE70(void)
     mr r31, r3
     stw r30, 0x778(r1)
     stw r29, 0x774(r1)
-    bl fn_8013655C
+    bl boss_updatePhaseState
     cmpwi r3, 0x0
     bne lbl_fn_8045FE70_00001690
     addi r3, r31, 0x14b0
