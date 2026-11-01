@@ -11,7 +11,7 @@ extern void mem_getAllocSize(void);
 extern void route_createSegment(void);
 extern void node_createNamedChild(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
 extern void system_getNextSequenceId(void);
@@ -1805,7 +1805,7 @@ lbl_fn_803132D0_0000180C:
     stfs f0, 0x28(r1)
     lwz r3, 0x14e4(r31)
     addi r3, r3, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_803132D0_00001890
     li r27, 0x3a

@@ -24,7 +24,7 @@ extern void fn_800C1814(void);
 extern void fn_800C1990(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void atn_LH_Texture_destructAndFree(void);
 extern void str_parseInt(void);
@@ -42,7 +42,7 @@ extern void world_getGlobalFlag(void);
 extern void world_setGlobalFlag(void);
 extern void fn_80375184(void);
 extern void fn_80376730(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC758(void);
 extern void fn_803EC91C(void);
@@ -448,7 +448,7 @@ lbl_fn_80422084_000003F8:
     bl skin_applyWeights
     addi r3, r31, 0x104
     addi r4, r1, 0x14
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -759,7 +759,7 @@ asm void fn_80422684(void)
     mr r30, r3
     lwz r5, 0x18(r5)
     lwz r6, 0x1c(r31)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078E2A8@ha
     stw r31, 0xf4(r30)
     addi r4, r4, lbl_8078E2A8@l
@@ -1724,7 +1724,7 @@ asm void fn_8042335C(void)
     mr r4, r28
     mr r5, r29
     mr r6, r30
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078E340@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078E340@l

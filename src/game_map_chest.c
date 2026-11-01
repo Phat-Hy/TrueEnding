@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
@@ -731,7 +731,7 @@ lbl_fn_80189CB4_0000080C:
     frsp f29, f1
     mr r3, r30
     li r4, 0x158
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_80189CB4_00000D50
     fcmpo cr0, f31, f30
@@ -1140,7 +1140,7 @@ lbl_fn_80189CB4_00000E40:
     lwz r3, 0x4(r29)
     addi r3, r3, 0xb0
     lwz r4, 0x22c(r3)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     bl atn_LoadHandle_getName
     bl fn_802097C4
     stw r3, 0x8(r29)
@@ -1582,7 +1582,7 @@ lbl_fn_8018A8CC_00001498:
 lbl_fn_8018A8CC_0000149C:
     mr r3, r30
     li r4, 0x158
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_8018A8CC_00001950
     fcmpo cr0, f31, f30
@@ -1984,7 +1984,7 @@ lbl_fn_8018A8CC_00001A40:
     lwz r3, 0x4(r26)
     addi r3, r3, 0xb0
     lwz r4, 0x22c(r3)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     bl atn_LoadHandle_getName
     bl fn_802097C4
     stw r3, 0x8(r26)

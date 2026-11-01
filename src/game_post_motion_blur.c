@@ -9,7 +9,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_80126214(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_8017A300(void);
@@ -732,7 +732,7 @@ lbl_fn_802C25C4_00000888:
     lfs f0, 0x10(r5)
     fadds f0, f3, f0
     stfs f0, 0x20(r31)
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

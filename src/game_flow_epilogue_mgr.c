@@ -9,7 +9,7 @@ extern void _savegpr_14(void);
 extern void _savegpr_24(void);
 extern void ui_destroyWidget(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB58C(void);
 extern void battle_awardExp(void);
 extern void fn_803E9B7C(void);
@@ -688,7 +688,7 @@ lbl_fn_804E82C8_00000768:
     bl fn_803E9B7C
     addi r3, r25, 0x2b70
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

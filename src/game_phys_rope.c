@@ -12,7 +12,7 @@ extern void fn_8000DD0C(void);
 extern void vec3_toEulerAngles(void);
 extern void* atn_Model_getBoneMatrix(void* model, u32 bone_id);
 extern void ui_destroyWidget(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void fn_8005361C(void);
 extern void atn_Matrix_copy_2(void);
@@ -26,7 +26,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_800FB1BC(void);
 extern void fn_800FB4B0(void);
 extern void fn_80110858(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_8021A8D0(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -1537,7 +1537,7 @@ asm void fn_801100A0(void)
     cmpwi r4, 0x0
     beq lbl_fn_801100A0_0000187C
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_801100A0_0000187C
     lfs f2, 0x1c(r31)
@@ -1886,7 +1886,7 @@ lbl_fn_801100A0_00001924:
     stfs f6, 0x18(r1)
     lwz r10, 0x68(r31)
     lfs f1, 0x58(r10)
-    bl fn_8004D388
+    bl collision_queryGeometry
     mr r29, r3
     b lbl_fn_801100A0_000019A8
 lbl_fn_801100A0_0000198C:

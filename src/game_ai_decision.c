@@ -23,7 +23,7 @@ extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
@@ -42,7 +42,7 @@ extern void fn_8026442C(void);
 extern void fn_8026474C(void);
 extern void fn_802648CC(void);
 extern void fn_80264C88(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void fn_803C1560(void);
 extern void chest_spawnLoot(void);
@@ -736,7 +736,7 @@ asm void fn_80262938(void)
     mr r31, r5
     mr r30, r3
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80784BF8@ha
     addi r28, r30, 0x14b0
     addi r3, r3, lbl_80784BF8@l
@@ -1851,7 +1851,7 @@ lbl_fn_80263580_0000189C:
 lbl_fn_80263580_000018AC:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

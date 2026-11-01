@@ -21,7 +21,7 @@ extern void map_processTrigger(void);
 extern void fn_80097510(void);
 extern void fn_80097A20(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
 extern void atn_Task_setActive(void);
@@ -866,7 +866,7 @@ lbl_fn_800EB270_000009E4:
     bne lbl_fn_800EB270_00000A50
     addi r3, r29, 0xb0
     li r4, 0x161
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_800EB270_00000A50
     mr r3, r30

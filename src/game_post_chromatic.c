@@ -50,7 +50,7 @@ extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void fn_8016DDB0(void);
@@ -72,7 +72,7 @@ extern void fn_802CF054(void);
 extern void fn_802CF3AC(void);
 extern void fn_802CF728(void);
 extern void fn_802CFAE4(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void world_getLocalFlag(void);
 extern void fn_803E3384(void);
@@ -180,7 +180,7 @@ asm void fn_802CCBD4(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -474,7 +474,7 @@ asm void fn_802CCFD8(void)
     stw r28, 0x100(r1)
     mr r28, r3
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r4, lbl_80786B18@ha
     addi r3, r28, 0x14b0
     addi r4, r4, lbl_80786B18@l
@@ -1896,7 +1896,7 @@ lbl_fn_802CE430_00001918:
 lbl_fn_802CE430_0000194C:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

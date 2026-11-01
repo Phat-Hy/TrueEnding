@@ -24,7 +24,7 @@ extern void clip_calculateFrustum(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_ctorRewardItem(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void fn_801CB100(void);
 extern void fn_801CB130(void);
@@ -426,7 +426,7 @@ lbl_fn_802DF96C_00000478:
     stw r0, 0x50(r4)
     stfs f1, 0x14(r4)
     stfs f0, 0x18(r4)
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 29
     bne lbl_fn_802DF96C_000004D8

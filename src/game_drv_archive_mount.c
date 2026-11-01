@@ -26,7 +26,7 @@ extern void fn_800A5920(void);
 extern void skin_playAnimationByName(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
@@ -44,7 +44,7 @@ extern void fn_80160324(void);
 extern void fn_8016034C(void);
 extern void fn_8017ABD4(void);
 extern void save_validateHeader(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void task_mapIdToQueue(void);
 extern void task_findEntryById(void);
 extern void fn_8021A77C(void);
@@ -1320,25 +1320,25 @@ lbl_fn_805A715C_00000FA0:
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r29, 0x6d
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x15bc(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r29, 0x8d
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x15c8(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r29, 0xad
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x15c0(r30)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r30
     addi r4, r29, 0xcd
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x15c4(r30)
     li r4, 0x1
     bl atn_Task_setActive
@@ -2842,7 +2842,7 @@ lbl_fn_805A7820_000024D8:
     bl fn_805A70D8
     addi r3, r24, 0x16c0
     addi r4, r1, 0x1c
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x1c
     li r4, -0x1
     bl ref_releaseHandle

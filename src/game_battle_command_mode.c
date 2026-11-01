@@ -27,7 +27,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB518(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
@@ -35,7 +35,7 @@ extern void fn_802180A8(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_findResourceSlot(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC91C(void);
 extern void fn_803ED0D4(void);
@@ -684,7 +684,7 @@ asm void fn_80405A14(void)
     bl skin_applyWeights
     addi r3, r30, 0x430
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -934,7 +934,7 @@ asm void fn_80405E48(void)
     mr r29, r3
     lwz r5, 0x18(r5)
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078D290@ha
     li r31, 0x0
     addi r3, r3, lbl_8078D290@l
@@ -1342,7 +1342,7 @@ lbl_fn_804062FC_00001094:
     bl skin_applyWeights
     addi r3, r31, 0x634
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1685,7 +1685,7 @@ asm void fn_804068B8(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078D328@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078D328@l

@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void fn_80041A28(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB58C(void);
 extern void morph_updateMesh(void);
 extern void system_getNextSequenceId(void);
@@ -216,7 +216,7 @@ lbl_fn_8032F6A8_000001B0:
     bl fn_803EA09C
     addi r3, r31, 0x15b0
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

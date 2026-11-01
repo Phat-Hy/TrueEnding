@@ -36,7 +36,7 @@ extern void lockon_updateTarget(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void atn_Task_setActive(void);
@@ -81,7 +81,7 @@ extern void fn_80317034(void);
 extern void kpad_getClampData(void);
 extern void fn_803750E4(void);
 extern void fn_803D6E24(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC91C(void);
 extern void fn_803ED774(void);
@@ -304,7 +304,7 @@ asm void fn_803F9FA8(void)
     mr r29, r5
     lwz r5, 0x18(r5)
     lwz r6, 0x1c(r29)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078CE90@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078CE90@l
@@ -1313,7 +1313,7 @@ asm void fn_803FAE08(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_800CB440
+    bl morph_updateWeights
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

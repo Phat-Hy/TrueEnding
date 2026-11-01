@@ -5,7 +5,7 @@
 extern void OSGetTime(void);
 extern void __register_global_object(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800838B8(void);
+extern void town_synchronizedDispatch(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
 extern void fn_8047961C(void);
@@ -95,7 +95,7 @@ asm void fn_804F4CBC(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F4CBC_00000068:
     lwz r0, lbl_8087F600
@@ -114,7 +114,7 @@ lbl_fn_804F4CBC_00000078:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F4CBC_000000AC:
     lbz r0, lbl_8087F5F8
@@ -202,7 +202,7 @@ asm void fn_804F4E44(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F4E44_000001D8:
     lwz r29, lbl_8087F600
@@ -321,7 +321,7 @@ asm void fn_804F4FC8(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F4FC8_00000364:
     lwz r28, lbl_8087F600

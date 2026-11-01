@@ -13,7 +13,7 @@ extern void fn_80080048(void);
 extern void fn_80080528(void);
 extern void fn_800816A8(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800838B8(void);
+extern void town_synchronizedDispatch(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_800902C0(void);
@@ -235,7 +235,7 @@ lbl_fn_8008C950_0000020C:
     li r9, 0x0
     li r6, 0x9
     mr r8, r7
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     lwz r0, 0xe8(r30)
     stw r3, 0x58(r30)
     lwz r3, 0x8(r31)

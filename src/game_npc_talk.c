@@ -8,7 +8,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_8004D314(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void fn_8004ECC0(void);
 extern void collision_testLineSegment(void);
 extern void fn_8006B174(void);
@@ -794,7 +794,7 @@ lbl_npc_updateTalkInteraction_000009B0:
     addi r6, r1, 0x3c8
     addi r8, r27, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     lwz r0, 0x54c(r27)
     mr r25, r3
     rlwinm r0, r0, 0, 22, 22

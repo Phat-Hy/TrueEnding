@@ -28,7 +28,7 @@ extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
 extern void res_Resource_destructor(void);
@@ -1206,7 +1206,7 @@ lbl_fn_802FDDAC_00000F70:
 lbl_fn_802FDDAC_00000F98:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -1543,7 +1543,7 @@ lbl_fn_802FDDAC_0000145C:
 lbl_fn_802FDDAC_00001484:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

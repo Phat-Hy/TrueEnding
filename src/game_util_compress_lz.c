@@ -26,7 +26,7 @@ extern void save_validateHeader(void);
 extern void fn_801F48C8(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
@@ -2089,7 +2089,7 @@ lbl_fn_8058AC94_00001BD0:
 lbl_fn_8058AC94_00001C44:
     mr r3, r31
     mr r4, r28
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r29, 0x2
     li r4, 0x1
     addi r0, r5, 0x5b7c
@@ -2103,14 +2103,14 @@ lbl_fn_8058AC94_00001C44:
     mr r3, r31
     addi r30, r30, lbl_80761D5C@l
     addi r4, r30, 0xf5
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5ba4(r5)
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0x117
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r31, 0x2
     li r4, 0x1
     stw r3, 0x5bb8(r5)
@@ -2122,7 +2122,7 @@ lbl_fn_8058AC94_00001C44:
 lbl_fn_8058AC94_00001CC4:
     mr r3, r31
     mr r4, r28
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r30, 0x2
     li r4, 0x1
     addi r0, r5, 0x5ba8
@@ -2130,7 +2130,7 @@ lbl_fn_8058AC94_00001CC4:
     bl atn_Task_setActive
     mr r3, r31
     mr r4, r29
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r30, 0x2
     li r4, 0x1
     addi r0, r5, 0x5bb0
@@ -2148,7 +2148,7 @@ lbl_fn_8058AC94_00001CC4:
 lbl_fn_8058AC94_00001D28:
     mr r3, r31
     mr r4, r28
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r29, 0x2
     li r4, 0x1
     addi r0, r5, 0x5bbc
@@ -2167,7 +2167,7 @@ lbl_fn_8058AC94_00001D28:
 lbl_fn_8058AC94_00001D70:
     mr r3, r31
     mr r4, r28
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r30, 0x2
     li r4, 0x1
     addi r0, r5, 0x5bc8
@@ -2175,7 +2175,7 @@ lbl_fn_8058AC94_00001D70:
     bl atn_Task_setActive
     mr r3, r31
     mr r4, r29
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r30, 0x2
     li r4, 0x1
     addi r0, r5, 0x5bd4

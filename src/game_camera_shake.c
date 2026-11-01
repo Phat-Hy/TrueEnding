@@ -15,7 +15,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void wcs_vformat(void);
@@ -131,7 +131,7 @@ asm void fn_802DC1C0(void)
     bl skin_applyWeights
     addi r3, r29, 0x1588
     addi r4, r1, 0x10
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle

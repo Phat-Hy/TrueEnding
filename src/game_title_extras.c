@@ -22,7 +22,7 @@ extern void fn_800E0908(void);
 extern void fn_801248DC(void);
 extern void fn_80124C6C(void);
 extern void fn_801F0544(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F6C38(void);
 extern void save_computeCrc32(void);
@@ -148,7 +148,7 @@ asm void fn_803B434C(void)
     stw r30, 0x78(r29)
     stw r30, 0x7c(r29)
     stw r30, 0x80(r29)
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x4c(r29)
     li r4, 0x1
     stb r30, 0x4d(r3)
@@ -156,25 +156,25 @@ asm void fn_803B434C(void)
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x1f
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x50(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x3f
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x54(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x5f
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x58(r29)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     addi r4, r31, 0x7f
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x5c(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1361,7 +1361,7 @@ asm void fn_803B5470(void)
     stw r31, 0x4c(r29)
     stw r31, 0x50(r29)
     stw r31, 0x58(r29)
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x48(r29)
     li r4, 0x1
     stb r31, 0x4d(r3)

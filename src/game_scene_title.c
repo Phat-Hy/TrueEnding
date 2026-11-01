@@ -8,7 +8,7 @@ extern void _restgpr_26(void);
 extern void _savegpr_19(void);
 extern void _savegpr_26(void);
 extern void dtor_80084684(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void mem_free(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -1050,7 +1050,7 @@ lbl_fn_801A4E08_00000CE8:
     lfs f0, 0x180(r1)
     fadds f0, f0, f1
     stfs f0, 0x180(r1)
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_801A4E08_00000D68
     lfs f0, 0x318(r1)

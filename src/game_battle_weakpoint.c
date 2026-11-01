@@ -28,7 +28,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_803C1560(void);
 extern void fn_803CD958(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC91C(void);
 extern void fn_803ED0D4(void);
@@ -736,7 +736,7 @@ asm void fn_803FBFA8(void)
     lwz r5, 0x18(r29)
     mr r4, r31
     lwz r6, 0x1c(r29)
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078CF28@ha
     li r31, 0x0
     addi r3, r3, lbl_8078CF28@l
@@ -1423,7 +1423,7 @@ asm void fn_803FC8D8(void)
     lwz r5, 0x18(r30)
     mr r4, r29
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078CFE8@ha
     li r3, 0x0
     addi r4, r4, lbl_8078CFE8@l

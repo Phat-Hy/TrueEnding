@@ -14,7 +14,7 @@ extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
 extern void item_useConsumable(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void fn_80057A68(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -1024,7 +1024,7 @@ lbl_fn_80387DE4_00000D0C:
     li r8, 0x0
     stfs f0, 0x28(r1)
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_80387DE4_00000D58
     lwz r3, 0x9c(r1)
@@ -1072,7 +1072,7 @@ lbl_fn_80387DE4_00000DC4:
     addi r6, r1, 0x50
     stfs f0, 0x54(r1)
     li r8, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_80387DE4_00000E7C
     lfs f3, 0xd0(r1)

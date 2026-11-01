@@ -21,7 +21,7 @@ extern void fn_801426A4(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_80158BB4(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
@@ -926,7 +926,7 @@ lbl_fn_802F87E0_00000BDC:
 lbl_fn_802F87E0_00000C10:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

@@ -15,7 +15,7 @@ extern void fn_8005C220(void);
 extern void fn_8006A250(void);
 extern void fn_8007708C(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800838B8(void);
+extern void town_synchronizedDispatch(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void route_findNextWaypoint(void);
@@ -1942,7 +1942,7 @@ lbl_fn_804D0328_000017A0:
     la r7, lbl_8087E1C0
     la r8, lbl_8087E1BC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, 0x8(r28)
     bl dungeon_initGlobalContext
     li r4, 0x1000
@@ -1951,7 +1951,7 @@ lbl_fn_804D0328_000017A0:
     la r7, lbl_8087E1B8
     la r8, lbl_8087E1B4
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, 0xc(r28)
     lis r4, lbl_807908D0@ha
     addi r4, r4, lbl_807908D0@l
@@ -1972,7 +1972,7 @@ lbl_fn_804D0328_000017A0:
     la r7, lbl_8087E1A8
     la r8, lbl_8087E1A4
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, 0x14(r28)
     mr r3, r28
     lwz r12, 0x0(r28)
@@ -1987,7 +1987,7 @@ lbl_fn_804D0328_000017A0:
     la r7, lbl_8087E1A0
     la r8, lbl_8087E19C
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, 0x18(r28)
 lbl_fn_804D0328_00001918:
     stw r28, 0x14(r27)

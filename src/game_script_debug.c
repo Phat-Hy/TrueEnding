@@ -47,7 +47,7 @@ extern void fn_801644D4(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
 extern void fn_8016EB48(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_80178208(void);
 extern void fn_80179AD0(void);
 extern void fn_801CCD00(void);
@@ -66,7 +66,7 @@ extern void fn_80252E6C(void);
 extern void fn_802531F4(void);
 extern void fn_80253884(void);
 extern void fn_80253C9C(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void world_setGlobalFlag(void);
 extern void world_getLocalFlag(void);
@@ -207,7 +207,7 @@ lbl_fn_80250884_000000DC:
     mr r3, r30
     mr r4, r29
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_80250884_0000014C
     lfs f3, 0x530(r30)
@@ -263,7 +263,7 @@ asm void fn_80250A24(void)
     mr r31, r5
     mr r30, r3
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_807843B8@ha
     li r29, 0x0
     addi r3, r3, lbl_807843B8@l

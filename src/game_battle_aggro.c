@@ -58,7 +58,7 @@ extern u32 lbl_808819DC;
 
 /* Function declarations */
 void fn_8016F368(void);
-void fn_8016F3D0(void);
+void battle_canTargetActor(void);
 void fn_8016F4D8(void);
 void fn_8016F530(void);
 void fn_8016F5EC(void);
@@ -103,81 +103,81 @@ lbl_fn_8016F368_00000058:
     blr
 }
 
-asm void fn_8016F3D0(void)
+asm void battle_canTargetActor(void)
 {
     nofralloc
     cmpwi r5, 0x0
-    beq lbl_fn_8016F3D0_000000D0
+    beq lbl_battle_canTargetActor_000000D0
     cmplw r3, r4
-    beq lbl_fn_8016F3D0_000000D0
+    beq lbl_battle_canTargetActor_000000D0
     lwz r6, lbl_8087F610
     cmpwi r6, 0x0
-    beq lbl_fn_8016F3D0_00000098
+    beq lbl_battle_canTargetActor_00000098
     lwz r0, 0x540(r6)
     cmpwi r0, 0x0
-    bne lbl_fn_8016F3D0_00000098
+    bne lbl_battle_canTargetActor_00000098
     li r3, 0x0
     blr
-lbl_fn_8016F3D0_00000098:
+lbl_battle_canTargetActor_00000098:
     lwz r0, 0x7e0(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8016F3D0_000000C8
+    beq lbl_battle_canTargetActor_000000C8
     lwz r0, 0x7e0(r4)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_8016F3D0_000000C8
+    beq lbl_battle_canTargetActor_000000C8
     lwz r6, lbl_8087F0A8
     lwz r0, 0xcc(r6)
     cmpwi r0, 0x0
-    beq lbl_fn_8016F3D0_000000D0
-lbl_fn_8016F3D0_000000C8:
+    beq lbl_battle_canTargetActor_000000D0
+lbl_battle_canTargetActor_000000C8:
     li r3, 0x0
     blr
-lbl_fn_8016F3D0_000000D0:
+lbl_battle_canTargetActor_000000D0:
     cmpwi r5, 0x0
-    beq lbl_fn_8016F3D0_00000100
+    beq lbl_battle_canTargetActor_00000100
     lwz r5, 0xf14(r3)
     cmpwi r5, 0x0
-    blt lbl_fn_8016F3D0_00000100
+    blt lbl_battle_canTargetActor_00000100
     lwz r0, 0xf14(r4)
     cmpwi r0, 0x0
-    blt lbl_fn_8016F3D0_00000100
+    blt lbl_battle_canTargetActor_00000100
     subf r0, r5, r0
     cntlzw r0, r0
     srwi r3, r0, 5
     blr
-lbl_fn_8016F3D0_00000100:
+lbl_battle_canTargetActor_00000100:
     lwz r6, 0x48(r3)
     li r5, 0x1
     lwz r4, 0x48(r4)
     li r3, 0x1
     cmpw r6, r4
-    beq lbl_fn_8016F3D0_0000013C
+    beq lbl_battle_canTargetActor_0000013C
     cmpwi r6, 0x0
     li r0, 0x0
-    bne lbl_fn_8016F3D0_00000130
+    bne lbl_battle_canTargetActor_00000130
     cmpwi r4, 0x3
-    bne lbl_fn_8016F3D0_00000130
+    bne lbl_battle_canTargetActor_00000130
     li r0, 0x1
-lbl_fn_8016F3D0_00000130:
+lbl_battle_canTargetActor_00000130:
     cmpwi r0, 0x0
-    bne lbl_fn_8016F3D0_0000013C
+    bne lbl_battle_canTargetActor_0000013C
     li r3, 0x0
-lbl_fn_8016F3D0_0000013C:
+lbl_battle_canTargetActor_0000013C:
     cmpwi r3, 0x0
-    bne lbl_fn_8016F3D0_00000168
+    bne lbl_battle_canTargetActor_00000168
     cmpwi r6, 0x3
     li r0, 0x0
-    bne lbl_fn_8016F3D0_0000015C
+    bne lbl_battle_canTargetActor_0000015C
     cmpwi r4, 0x0
-    bne lbl_fn_8016F3D0_0000015C
+    bne lbl_battle_canTargetActor_0000015C
     li r0, 0x1
-lbl_fn_8016F3D0_0000015C:
+lbl_battle_canTargetActor_0000015C:
     cmpwi r0, 0x0
-    bne lbl_fn_8016F3D0_00000168
+    bne lbl_battle_canTargetActor_00000168
     li r5, 0x0
-lbl_fn_8016F3D0_00000168:
+lbl_battle_canTargetActor_00000168:
     mr r3, r5
     blr
 }

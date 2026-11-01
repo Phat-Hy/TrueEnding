@@ -16,7 +16,7 @@ extern void mem_free(void);
 extern void map_debugLog(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
@@ -360,7 +360,7 @@ lbl_fn_801AD34C_0000037C:
     blt lbl_fn_801AD34C_000003AC
     mr r3, r30
     mr r4, r29
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_fn_801AD34C_000003AC
     li r29, -0x1
@@ -395,7 +395,7 @@ lbl_fn_801AD34C_00000404:
     bne lbl_fn_801AD34C_0000047C
     mr r3, r30
     addi r4, r25, 0x2e
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_801AD34C_00000454
     lfs f1, lbl_808822EC
@@ -422,7 +422,7 @@ lbl_fn_801AD34C_00000454:
 lbl_fn_801AD34C_0000047C:
     mr r3, r30
     addi r4, r25, 0x39
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_801AD34C_000004B8
     lfs f1, lbl_808822EC
@@ -485,7 +485,7 @@ lbl_fn_801AD34C_00000548:
 lbl_fn_801AD34C_0000055C:
     lwz r4, 0x22c(r30)
     mr r3, r30
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_801AD34C_00000878
     bl atn_LoadHandle_getName
@@ -868,7 +868,7 @@ lbl_fn_801ADC14_00000A90:
     beq lbl_fn_801ADC14_00000CDC
     mr r3, r30
     li r4, 0x3d
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_801ADC14_00000CDC
     lwz r5, 0x4(r29)

@@ -15,7 +15,7 @@ extern void fn_800D5908(void);
 extern void atn_LH_Texture_update(void);
 extern void save_validateHeader(void);
 extern void fn_801F4FF4(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void fn_801F8994(void);
 extern void fn_80202A6C(void);
 extern void res_Resource_unload(void);
@@ -459,13 +459,13 @@ asm void fn_803D022C(void)
     addi r20, r20, lbl_807506A0@l
     mr r19, r3
     addi r4, r20, 0x1b9
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x5c(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r20, 0x1da
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x60(r19)
     li r4, 0x1
     bl atn_Task_setActive
@@ -483,7 +483,7 @@ lbl_fn_803D022C_00000640:
     mr r3, r19
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x1ff
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x64(r19)
     li r4, 0x1
     bl atn_Task_setActive
@@ -492,7 +492,7 @@ lbl_fn_803D022C_00000660:
     mr r3, r19
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x21e
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x68(r19)
     li r4, 0x1
     bl atn_Task_setActive
@@ -510,7 +510,7 @@ lbl_fn_803D022C_000006A4:
     mr r3, r19
     addi r4, r4, lbl_807506A0@l
     addi r4, r4, 0x249
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x6c(r19)
     li r4, 0x1
     bl atn_Task_setActive
@@ -519,25 +519,25 @@ lbl_fn_803D022C_000006C4:
     mr r3, r19
     addi r30, r4, lbl_807506A0@l
     addi r4, r30, 0x26a
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x70(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r30, 0x28b
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x74(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r30, 0x2b6
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x78(r19)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     addi r4, r30, 0x2dd
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x7c(r19)
     li r4, 0x1
     bl atn_Task_setActive
@@ -555,13 +555,13 @@ lbl_fn_803D022C_000006C4:
 lbl_fn_803D022C_00000758:
     mr r3, r19
     mr r4, r29
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0xbc(r22)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     mr r4, r28
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0xc0(r22)
     li r4, 0x1
     bl atn_Task_setActive
@@ -576,14 +576,14 @@ lbl_fn_803D022C_00000758:
 lbl_fn_803D022C_000007A8:
     mr r3, r19
     addi r4, r30, 0x403
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0xc4(r22)
     li r4, 0x1
     bl atn_Task_setActive
 lbl_fn_803D022C_000007C0:
     mr r3, r19
     mr r4, r27
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0xc8(r22)
     li r4, 0x1
     bl atn_Task_setActive
@@ -598,32 +598,32 @@ lbl_fn_803D022C_000007C0:
 lbl_fn_803D022C_000007F8:
     mr r3, r19
     addi r4, r30, 0x422
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0xcc(r22)
     li r4, 0x1
     bl atn_Task_setActive
 lbl_fn_803D022C_00000810:
     mr r3, r19
     mr r4, r26
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0xd0(r22)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     mr r4, r25
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0xdc(r22)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     mr r4, r24
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x32c(r21)
     li r4, 0x0
     bl atn_Task_setActive
     mr r3, r19
     mr r4, r23
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x330(r21)
     li r4, 0x0
     bl atn_Task_setActive
@@ -640,7 +640,7 @@ lbl_fn_803D022C_0000088C:
     bne lbl_fn_803D022C_000008B0
     mr r3, r19
     addi r4, r30, 0x443
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x318(r18)
     li r4, 0x1
     bl atn_Task_setActive
@@ -678,13 +678,13 @@ lbl_fn_803D022C_000008B8:
 lbl_fn_803D022C_00000920:
     mr r3, r19
     mr r4, r21
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x574(r22)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r19
     mr r4, r20
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x594(r22)
     li r4, 0x1
     bl atn_Task_setActive
@@ -714,7 +714,7 @@ lbl_fn_803D022C_00000920:
 lbl_fn_803D022C_000009AC:
     mr r3, r19
     mr r4, r20
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x3dc(r21)
     li r4, 0x1
     bl atn_Task_setActive
@@ -730,7 +730,7 @@ lbl_fn_803D022C_000009AC:
 lbl_fn_803D022C_000009E8:
     mr r3, r19
     mr r4, r20
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x6fc(r21)
     li r4, 0x1
     bl atn_Task_setActive
@@ -788,7 +788,7 @@ lbl_fn_803D022C_000009E8:
 lbl_fn_803D022C_00000ACC:
     mr r3, r19
     mr r4, r20
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x8a0(r21)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1102,7 +1102,7 @@ lbl_fn_803D0B20_00000F38:
 lbl_fn_803D0B20_00000F90:
     mr r3, r31
     mr r4, r30
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0xa90(r27)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1150,7 +1150,7 @@ lbl_fn_803D0B20_00001000:
 lbl_fn_803D0B20_00001048:
     mr r3, r31
     mr r4, r28
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x10b4(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1202,7 +1202,7 @@ lbl_fn_803D0B20_00001048:
 lbl_fn_803D0B20_00001114:
     mr r3, r31
     mr r4, r28
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x84c(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -1225,7 +1225,7 @@ lbl_fn_803D0B20_00001114:
 lbl_fn_803D0B20_0000116C:
     mr r3, r31
     mr r4, r28
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x878(r29)
     li r4, 0x1
     bl atn_Task_setActive

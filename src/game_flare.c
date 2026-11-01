@@ -40,7 +40,7 @@ extern void fn_80166544(void);
 extern void fn_80166A54(void);
 extern void fn_8016DC14(void);
 extern void actor_setState(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_80178018(void);
 extern void fn_80178668(void);
 extern void fn_80179FA8(void);
@@ -317,7 +317,7 @@ lbl_fn_800E3F5C_0000024C:
     li r31, 0x0
     li r5, 0x1
     mr r3, r26
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800E3F5C_000002D8
     lwz r3, 0x48(r26)

@@ -24,7 +24,7 @@ extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void fn_80194550(void);
 extern void sound_initGlobalInstances(void);
@@ -615,7 +615,7 @@ asm void fn_802D9248(void)
     stw r0, 0x50(r4)
     stfs f1, 0x14(r4)
     stfs f0, 0x18(r4)
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

@@ -5,7 +5,7 @@
 extern void _restgpr_19(void);
 extern void _savegpr_19(void);
 extern void fn_8003EA3C(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
@@ -22,7 +22,7 @@ extern void fn_8015CF98(void);
 extern void fn_8015D2A0(void);
 extern void fn_8015D5B0(void);
 extern void actor_setState(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_80176548(void);
 extern void fn_801781B0(void);
 extern void fn_8017A450(void);
@@ -353,7 +353,7 @@ lbl_fn_802692B4_00000334:
     beq lbl_fn_802692B4_00000390
     mr r3, r20
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_802692B4_00000390
     lwz r0, 0xd18(r21)
@@ -1304,7 +1304,7 @@ lbl_fn_8026A010_000010C0:
     addi r8, r31, 0x5b8
     lis r7, 0x8000
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r4, r1, 0x48
     addi r3, r1, 0x8
     psq_l f1, 0x0(r4), 0, 0

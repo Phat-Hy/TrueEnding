@@ -8,7 +8,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void atn_Model_findBoneIndex(void);
 extern void motion_updateFogAdj(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_801F6D7C(void);
 extern void fn_801F7DF0(void);
 extern void save_findEntryByName(void);
@@ -1304,7 +1304,7 @@ lbl_fn_803DF648_000010FC:
     cmpwi r3, 0x0
     beq lbl_fn_803DF648_00001174
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_803DF648_00001174
     lwz r0, 0xc(r1)

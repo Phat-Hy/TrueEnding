@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void ui_destroyWidget(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void fn_8004FF58(void);
 extern void fn_80058078(void);
 extern void fn_800580BC(void);
@@ -26,7 +26,7 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
@@ -40,7 +40,7 @@ extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC91C(void);
 extern void fn_803ED0D4(void);
@@ -861,7 +861,7 @@ lbl_fn_80407408_000009FC:
     bl skin_applyWeights
     addi r3, r30, 0x940
     addi r4, r1, 0x14
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -1172,7 +1172,7 @@ lbl_fn_80407D24_00000E88:
     stfs f6, 0x10(r1)
     stfs f0, 0x1c(r1)
     stfs f1, 0x24(r1)
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_80407D24_00000F3C
     lfs f0, lbl_80886258
@@ -1605,7 +1605,7 @@ asm void fn_804083A8(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078D3C0@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078D3C0@l

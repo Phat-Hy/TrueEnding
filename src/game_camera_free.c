@@ -12,7 +12,7 @@ extern void fn_80126214(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_ctorRewardItem(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void equip_applyToCharacter(void);
 extern void debuff_clearStatus(void);
 extern void actor_setState(void);
@@ -702,7 +702,7 @@ asm void fn_802E7120(void)
     lwz r0, 0x44(r4)
     cmpwi r0, 0x1
     beq lbl_fn_802E7120_0000095C
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 29
     bne lbl_fn_802E7120_00000944

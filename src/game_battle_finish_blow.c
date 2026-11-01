@@ -27,7 +27,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void fn_80097E80(void);
 extern void fn_80158CA4(void);
 extern void world_getLocalFlag(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC758(void);
 extern void fn_803EC91C(void);
@@ -883,7 +883,7 @@ asm void fn_80402978(void)
     lwz r5, 0x18(r30)
     mr r4, r29
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078D1F8@ha
     li r3, 0xa
     addi r4, r4, lbl_8078D1F8@l

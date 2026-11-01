@@ -16,7 +16,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_setActive(void);
 extern void str_parseInt(void);
@@ -52,7 +52,7 @@ extern void fn_802E3B24(void);
 extern void fn_802E3EE8(void);
 extern void fn_802E470C(void);
 extern void fn_802E8084(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void fn_80375184(void);
 extern void boss_getOffset54(void);
@@ -448,7 +448,7 @@ asm void fn_802E1414(void)
     bl skin_applyWeights
     addi r3, r29, 0x1560
     addi r4, r1, 0x10
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1344,7 +1344,7 @@ asm void fn_802E211C(void)
     stw r28, 0x110(r1)
     mr r28, r3
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80787160@ha
     addi r31, r28, 0x14b0
     addi r3, r3, lbl_80787160@l

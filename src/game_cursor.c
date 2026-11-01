@@ -97,7 +97,7 @@ void fn_80097B74(void);
 void vec3_clear(void* ptr);
 void atn_Anim_setLayerAnimation(void);
 void cursor_updateSlotState(void);
-void fn_80097D40(void);
+void atn_Anim_getLayerTrack(void);
 void atn_Anim_getLayerDuration(void);
 void fn_80097D9C(void);
 void fn_80097E80(void);
@@ -963,18 +963,18 @@ lbl_cursor_updateSlotState_00000B44:
     blr
 }
 
-asm void fn_80097D40(void)
+asm void atn_Anim_getLayerTrack(void)
 {
     nofralloc
     cmpwi r4, 0x0
-    blt lbl_fn_80097D40_00000B80
+    blt lbl_atn_Anim_getLayerTrack_00000B80
     lwz r0, 0x224(r3)
     cmpw r4, r0
-    blt lbl_fn_80097D40_00000B88
-lbl_fn_80097D40_00000B80:
+    blt lbl_atn_Anim_getLayerTrack_00000B88
+lbl_atn_Anim_getLayerTrack_00000B80:
     li r3, 0x0
     blr
-lbl_fn_80097D40_00000B88:
+lbl_atn_Anim_getLayerTrack_00000B88:
     mulli r0, r4, 0xc
     lwz r3, 0x228(r3)
     add r3, r3, r0

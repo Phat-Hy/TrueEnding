@@ -9,7 +9,7 @@ extern void _savegpr_23(void);
 extern void dtor_80084684(void);
 extern void vec3_copy(void);
 extern void vec3_assign(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void atn_ColliBase_destructor(void);
 extern void atn_ColliCapsule_destructor(void);
@@ -42,7 +42,7 @@ extern void fn_8013C504(void);
 extern void fn_80158E1C(void);
 extern void actor_setState(void);
 extern void save_validateHeader(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void thread_findAndNotify(void);
 extern void res_Resource_destructor(void);
 extern void res_MsgHandle_unload(void);
@@ -643,7 +643,7 @@ lbl_fn_80468534_000006D8:
     addi r8, r22, 0x5b8
     lis r7, 0x8000
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     psq_l f1, 0x0(r27), 0, 0
     addi r3, r1, 0x8
     psq_st f1, 0x0(r29), 0, 0
@@ -1380,7 +1380,7 @@ asm void fn_80468FBC(void)
 lbl_fn_80468FBC_0000112C:
     mr r3, r28
     mr r4, r30
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r28, r31
     li r4, 0x1
     stw r3, 0x58(r5)
@@ -1407,7 +1407,7 @@ lbl_fn_80468FBC_0000112C:
     bl atn_Task_setActive
     mr r3, r28
     addi r4, r31, 0xa7
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x80(r28)
     li r4, 0x1
     bl atn_Task_setActive

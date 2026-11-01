@@ -12,7 +12,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_80045694(void);
 extern void fn_8006B174(void);
 extern void atn_Model_findBoneIndex(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void skin_playAnimationByName(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
@@ -1520,7 +1520,7 @@ asm void fn_80106878(void)
     mr r28, r3
     lwz r4, 0x2dc(r4)
     mr r3, r31
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_80106878_00001BA0
     bl atn_LoadHandle_getName

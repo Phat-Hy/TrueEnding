@@ -16,7 +16,7 @@ extern void npc_getPosition(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_801595BC(void);
 extern void fn_8015AC48(void);
 extern void fn_8015E7A0(void);
@@ -128,7 +128,7 @@ lbl_fn_802E2E88_00000038:
 lbl_fn_802E2E88_00000064:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

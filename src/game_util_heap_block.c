@@ -17,7 +17,7 @@ extern void actor_spawnActorWithId(void);
 extern void fn_801173A8(void);
 extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_80206B9C(void);
@@ -1301,19 +1301,19 @@ lbl_fn_80585084_0000102C:
 lbl_fn_80585084_00001048:
     mr r3, r29
     mr r4, r25
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x0(r26)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     mr r4, r24
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x0(r27)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r29
     mr r4, r23
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x0(r28)
     li r4, 0x1
     bl atn_Task_setActive

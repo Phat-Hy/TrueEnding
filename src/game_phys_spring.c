@@ -21,7 +21,7 @@ extern void fn_80134134(void);
 extern void fn_80134168(void);
 extern void fn_801346C8(void);
 extern void fn_8015E1B8(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_801789D8(void);
 extern void event_findEntryById(void);
 extern void task_mapIdToQueue(void);
@@ -162,7 +162,7 @@ lbl_fn_8010C00C_000000D8:
     mr r3, r23
     mr r4, r29
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_8010C00C_00000110
     addi r3, r23, 0x7d4
@@ -338,7 +338,7 @@ lbl_fn_8010C00C_0000034C:
     mr r3, r25
     mr r4, r29
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_8010C00C_00000384
     addi r3, r25, 0x7d4
@@ -498,13 +498,13 @@ lbl_fn_8010C3E4_00000550:
     mr r3, r24
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_8010C3E4_000008C4
     mr r3, r24
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_8010C3E4_000008C4
     lwz r6, 0x38(r30)

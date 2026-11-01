@@ -16,7 +16,7 @@ extern void fn_80133130(void);
 extern void fn_8013322C(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void actor_getMovementFlags(void);
 extern void res_findResourceSlot(void);
@@ -609,7 +609,7 @@ lbl_fn_802956D8_00000790:
     srwi r30, r5, 5
     stfs f2, 0x18(r4)
     stw r0, 0x50(r4)
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r31)
     mr r3, r31
     mr r4, r29

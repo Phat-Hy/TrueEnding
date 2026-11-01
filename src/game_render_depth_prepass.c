@@ -28,7 +28,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB58C(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
@@ -42,7 +42,7 @@ extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80158BB4(void);
 extern void debuff_clearStatus(void);
@@ -1475,7 +1475,7 @@ lbl_fn_802B2F64_0000127C:
     bl skin_applyWeights
     addi r3, r31, 0x1548
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1678,7 +1678,7 @@ asm void fn_802B3498(void)
     stfs f2, 0x18(r4)
     psq_st f1, 0x10(r4), 0, 0
     stw r0, 0x50(r4)
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 29
     bne lbl_fn_802B3498_000015D8

@@ -41,7 +41,7 @@ extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC758(void);
 extern void fn_803EC7A0(void);
@@ -607,7 +607,7 @@ asm void fn_80420ADC(void)
     lwz r5, 0x18(r29)
     mr r4, r31
     lwz r6, 0x1c(r29)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078E0E0@ha
     addi r3, r30, 0xf4
     addi r4, r4, lbl_8078E0E0@l
@@ -1316,7 +1316,7 @@ asm void fn_80421454(void)
     lwz r5, 0x18(r30)
     mr r4, r29
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078E178@ha
     li r3, 0x0
     addi r4, r4, lbl_8078E178@l
@@ -1780,7 +1780,7 @@ asm void fn_80421AB8(void)
     lwz r5, 0x18(r30)
     mr r4, r29
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078E210@ha
     addi r3, r31, 0xf8
     addi r4, r4, lbl_8078E210@l

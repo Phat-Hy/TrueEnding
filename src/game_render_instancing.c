@@ -11,7 +11,7 @@ extern void atn_ColliCapsule_destructor(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void wcs_vformat(void);
 extern void fn_800EB7A0(void);
@@ -795,7 +795,7 @@ asm void fn_802AB510(void)
     bl skin_applyWeights
     addi r3, r30, 0x1538
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

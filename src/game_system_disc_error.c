@@ -41,7 +41,7 @@ extern void res_Resource_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -852,7 +852,7 @@ asm void fn_803545E0(void)
     mr r27, r5
     lwz r5, 0x20(r5)
     mr r31, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_807896B8@ha
     addi r30, r31, 0x14b0
     addi r3, r3, lbl_807896B8@l

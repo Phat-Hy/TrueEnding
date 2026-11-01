@@ -9,13 +9,13 @@ extern void _restgpr_23(void);
 extern void _savegpr_23(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB518(void);
 extern void fn_800CB58C(void);
 extern void morph_updateMesh(void);
 extern void fn_80102EAC(void);
 extern void fn_801031D0(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void task_findEntryById(void);
 extern void fn_8021A684(void);
 extern void fn_803E9608(void);
@@ -507,7 +507,7 @@ lbl_fn_804EB938_00000520:
     lwz r3, lbl_8087F610
     addi r4, r1, 0x4c
     addi r3, r3, 0x2b74
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x4c
     li r4, -0x1
     bl ref_releaseHandle
@@ -530,7 +530,7 @@ lbl_fn_804EB938_000005C0:
     lwz r3, lbl_8087F610
     addi r4, r1, 0x48
     addi r3, r3, 0x2b78
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x48
     li r4, -0x1
     bl ref_releaseHandle
@@ -701,7 +701,7 @@ lbl_fn_804EB938_00000828:
     beq lbl_fn_804EB938_00000EC0
     lwz r4, 0x4(r30)
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_804EB938_00000EC0
     lwz r27, lbl_8087F610
@@ -1308,7 +1308,7 @@ lbl_fn_804EB938_00001050:
     beq lbl_fn_804EB938_00001080
     lwz r4, 0x4(r30)
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_804EB938_00001080
     lwz r3, lbl_8087F610

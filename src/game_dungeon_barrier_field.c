@@ -91,7 +91,7 @@ extern u32 lbl_80885F80;
 extern u32 lbl_80885F84;
 
 /* Function declarations */
-void fn_803EC568(void);
+void task_createWorker(void);
 void fn_803EC69C(void);
 void fn_803EC758(void);
 void fn_803EC7A0(void);
@@ -114,7 +114,7 @@ void fn_803EDB18(void);
 void fn_803EDCF4(void);
 void fn_803EDE34(void);
 
-asm void fn_803EC568(void)
+asm void task_createWorker(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -178,17 +178,17 @@ asm void fn_803EC568(void)
     stw r0, 0xe8(r27)
     stw r0, 0xec(r27)
     stw r31, 0xf0(r27)
-    bge lbl_fn_803EC568_00000104
+    bge lbl_task_createWorker_00000104
     mulli r0, r3, 0x3e8
     stw r3, 0x50(r27)
     stw r0, 0x48(r27)
-lbl_fn_803EC568_00000104:
+lbl_task_createWorker_00000104:
     lwz r3, lbl_8087F4A0
     cmpwi r3, 0x0
-    beq lbl_fn_803EC568_00000118
+    beq lbl_task_createWorker_00000118
     mr r4, r27
     bl fn_803EE3F0
-lbl_fn_803EC568_00000118:
+lbl_task_createWorker_00000118:
     addi r11, r1, 0x20
     mr r3, r27
     bl _restgpr_27

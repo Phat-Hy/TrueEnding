@@ -26,7 +26,7 @@ extern void fn_80094958(void);
 extern void fn_80097A9C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Task_destructor(void);
 extern void str_findChar(void);
 extern void fn_8011E81C(void);
@@ -1965,7 +1965,7 @@ lbl_fn_800119C0_00001998:
 lbl_fn_800119C0_000019BC:
     mr r3, r24
     mr r4, r26
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_800119C0_000019F8
     bl fn_804768D0
@@ -2525,7 +2525,7 @@ lbl_fn_800121F0_0000211C:
     li r31, 0x0
 lbl_fn_800121F0_00002120:
     mr r3, r31
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_800121F0_0000213C
     bl atn_LoadHandle_getName
@@ -2593,7 +2593,7 @@ lbl_fn_80012294_000021D0:
 lbl_fn_80012294_000021F4:
     mr r3, r30
     mr r4, r5
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_80012294_0000223C
     bl fn_804768D0

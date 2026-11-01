@@ -38,7 +38,7 @@ extern void fn_8014052C(void);
 extern void quest_updateFlow(void);
 extern void dialog_setScriptSlot(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_8015D8C0(void);
 extern void fn_8015E4B0(void);
 extern void fn_8016D0A0(void);
@@ -1069,7 +1069,7 @@ lbl_fn_80266254_00000C38:
     stfs f3, 0x14(r4)
     stfs f0, 0x18(r4)
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -1413,7 +1413,7 @@ lbl_fn_80266254_00001188:
 lbl_fn_80266254_00001198:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -1431,7 +1431,7 @@ lbl_fn_80266254_000011C0:
 lbl_fn_80266254_000011D8:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

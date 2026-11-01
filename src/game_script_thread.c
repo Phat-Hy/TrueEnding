@@ -10,7 +10,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_24(void);
 extern void _savegpr_25(void);
 extern void _savegpr_27(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1082,7 +1082,7 @@ lbl_fn_8024F9B8_00000CE8:
     addi r6, r1, 0x8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r4, r1, 0x60
     lfs f2, 0x68(r1)
     addi r29, r1, 0x20

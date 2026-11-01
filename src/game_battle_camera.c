@@ -10,7 +10,7 @@ extern void fn_80017064(void);
 extern void fn_80044E0C(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_8011BEB8(void);
@@ -1760,7 +1760,7 @@ lbl_fn_801725EC_00001734:
 lbl_fn_801725EC_000017A0:
     addi r3, r27, 0xb0
     li r4, 0x41
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_fn_801725EC_000017BC
     li r3, 0x0
@@ -1899,7 +1899,7 @@ lbl_fn_801725EC_00001990:
 lbl_fn_801725EC_00001998:
     lwz r4, 0x494(r27)
     addi r3, r29, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_fn_801725EC_000019B4
     li r3, 0x0

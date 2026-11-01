@@ -18,7 +18,7 @@ extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_80168E60(void);
 extern void actor_setState(void);
 extern void actor_getMovementFlags(void);
@@ -960,7 +960,7 @@ lbl_fn_80289978_00000C1C:
 lbl_fn_80289978_00000C34:
     mr r3, r31
     mr r4, r29
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r31)
     mr r3, r31
     mr r4, r29

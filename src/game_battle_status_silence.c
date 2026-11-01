@@ -44,7 +44,7 @@ extern void dialog_renderWindow(void);
 extern void fn_80176548(void);
 extern void fn_802180A8(void);
 extern void kpad_getClampData(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC758(void);
 extern void fn_803EC7A0(void);
@@ -997,7 +997,7 @@ asm void fn_8042CE30(void)
     mr r4, r28
     mr r5, r29
     mr r6, r30
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078E9A8@ha
     li r0, 0x0
     addi r3, r3, lbl_8078E9A8@l
@@ -1611,7 +1611,7 @@ asm void fn_8042D628(void)
     mr r4, r28
     mr r5, r29
     mr r6, r30
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078EA40@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078EA40@l

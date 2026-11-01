@@ -21,7 +21,7 @@ extern void fn_8009EE30(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_ctor(void);
@@ -36,7 +36,7 @@ extern void res_findResourceSlot(void);
 extern void fn_8023A02C(void);
 extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC7A0(void);
 extern void fn_803EC91C(void);
@@ -238,7 +238,7 @@ asm void fn_803F69E4(void)
     mr r4, r28
     mr r5, r29
     mr r6, r31
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078CCC8@ha
     lis r4, fn_803F6AC4@ha
     addi r3, r3, lbl_8078CCC8@l
@@ -942,7 +942,7 @@ lbl_fn_803F7198_00000ADC:
     bne lbl_fn_803F7198_00000B0C
     addi r3, r29, 0x168
     addi r4, r1, 0x18
-    bl fn_800CB440
+    bl morph_updateWeights
 lbl_fn_803F7198_00000B0C:
     cntlzw r0, r30
     addi r3, r1, 0x18
@@ -1103,7 +1103,7 @@ asm void fn_803F75B8(void)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078CD60@ha
     addi r3, r28, 0xf4
     addi r4, r4, lbl_8078CD60@l

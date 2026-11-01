@@ -23,7 +23,7 @@ extern void atn_Task_destructor(void);
 extern void atn_Task_unlink(void);
 extern void atn_Task_setActive(void);
 extern void save_validateHeader(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void fn_801F69A8(void);
 extern void fn_801F6A38(void);
 extern void res_MsgHandle_ctor(void);
@@ -223,7 +223,7 @@ asm void fn_80202AF0(void)
     stw r0, 0x104(r28)
     mr r3, r28
     addi r4, r28, 0x4c
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x48(r28)
     li r4, 0x1
     stb r31, 0x4e(r3)
@@ -282,7 +282,7 @@ asm void fn_80202CA4(void)
     rlwimi r0, r4, 24, 0, 7
     stw r0, 0x104(r3)
     addi r4, r3, 0x4c
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x48(r31)
     li r0, 0x0
     li r4, 0x1

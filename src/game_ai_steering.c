@@ -40,7 +40,7 @@ extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void fn_8026580C(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void world_setLocalFlag(void);
 extern void chest_spawnLoot(void);
@@ -1301,7 +1301,7 @@ asm void fn_80264DB4(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80784DD8@ha
     addi r28, r30, 0x14b0
     addi r3, r3, lbl_80784DD8@l

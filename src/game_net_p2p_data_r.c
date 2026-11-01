@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_8006F420(void);
 extern void str_assignBuffer(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800838B8(void);
+extern void town_synchronizedDispatch(void);
 extern void fn_800A5218(void);
 extern void fn_800DBF68(void);
 extern void fn_800DC500(void);
@@ -629,7 +629,7 @@ lbl_fn_8050E098_0000069C:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_8050E098_000006CC:
     lwz r5, 0x8(r1)
@@ -809,7 +809,7 @@ lbl_fn_8050E414_00000924:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_8050E414_00000954:
     lwz r5, 0x0(r28)

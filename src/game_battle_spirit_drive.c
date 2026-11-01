@@ -25,7 +25,7 @@ extern void fn_8009F788(void);
 extern void fn_8009FFCC(void);
 extern void str_skipWhitespace(void);
 extern void fn_8036554C(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC91C(void);
 extern void fn_80401E50(void);
@@ -379,7 +379,7 @@ asm void fn_80400728(void)
     mr r4, r28
     mr r5, r29
     mr r6, r30
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078D130@ha
     lfs f3, lbl_80886118
     addi r3, r3, lbl_8078D130@l

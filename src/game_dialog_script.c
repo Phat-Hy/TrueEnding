@@ -14,7 +14,7 @@ extern void route_createWaypoint(void);
 extern void fn_80088724(void);
 extern void node_createNamedChild(void);
 extern void fn_80094F98(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void fn_800C122C(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
@@ -331,7 +331,7 @@ asm void dialog_setScriptSlot(void)
 lbl_dialog_setScriptSlot_00000348:
     mr r4, r5
     addi r3, r3, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_dialog_setScriptSlot_00000368
     bl atn_LoadHandle_getName
@@ -354,7 +354,7 @@ lbl_dialog_setScriptSlot_00000380:
 lbl_dialog_setScriptSlot_00000390:
     mr r4, r5
     addi r3, r3, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_dialog_setScriptSlot_000003B0
     bl atn_LoadHandle_getName
@@ -377,7 +377,7 @@ lbl_dialog_setScriptSlot_000003C8:
 lbl_dialog_setScriptSlot_000003D8:
     mr r4, r5
     addi r3, r3, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_dialog_setScriptSlot_000003F8
     bl atn_LoadHandle_getName
@@ -400,7 +400,7 @@ lbl_dialog_setScriptSlot_00000410:
 lbl_dialog_setScriptSlot_00000420:
     mr r4, r5
     addi r3, r3, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_dialog_setScriptSlot_00000440
     bl atn_LoadHandle_getName

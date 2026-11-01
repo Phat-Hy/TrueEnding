@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
@@ -602,7 +602,7 @@ asm void fn_8018B6A0(void)
     addi r3, r3, 0xb0
     stfs f2, 0x18(r31)
     lwz r4, 0x22c(r3)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     bl atn_LoadHandle_getName
     bl fn_802097C4
     stw r3, 0x8(r31)
@@ -940,7 +940,7 @@ asm void fn_8018BB7C(void)
     addi r3, r3, 0xb0
     stfs f2, 0x18(r31)
     lwz r4, 0x22c(r3)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     bl atn_LoadHandle_getName
     bl fn_802097C4
     stw r3, 0x8(r31)
@@ -1316,7 +1316,7 @@ asm void fn_8018C0EC(void)
     addi r3, r3, 0xb0
     stfs f2, 0x18(r31)
     lwz r4, 0x22c(r3)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     bl atn_LoadHandle_getName
     bl fn_802097C4
     stw r3, 0x8(r31)
@@ -1699,7 +1699,7 @@ lbl_fn_8018C6B8_00001730:
     lwz r3, 0x4(r31)
     addi r3, r3, 0xb0
     lwz r4, 0x22c(r3)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     bl atn_LoadHandle_getName
     bl fn_802097C4
     stw r3, 0x8(r31)

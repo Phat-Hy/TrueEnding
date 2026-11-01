@@ -50,7 +50,7 @@ extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC91C(void);
 extern void fn_803ED0D4(void);
@@ -631,7 +631,7 @@ asm void fn_804114B4(void)
     mr r30, r3
     lwz r5, 0x18(r5)
     lwz r6, 0x1c(r31)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078D818@ha
     addi r3, r30, 0xf4
     addi r4, r4, lbl_8078D818@l

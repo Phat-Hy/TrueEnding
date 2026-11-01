@@ -46,7 +46,7 @@ extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_Shader_bindParams(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -969,7 +969,7 @@ asm void fn_802F6E64(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80787AA8@ha
     li r29, 0x0
     addi r3, r3, lbl_80787AA8@l

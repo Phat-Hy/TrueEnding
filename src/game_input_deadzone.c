@@ -10,7 +10,7 @@ extern void fn_80011410(void);
 extern void vec3_sub(void);
 extern void fn_800133B0(void);
 extern void fn_80013484(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -1785,7 +1785,7 @@ lbl_fn_802F0328_000017C0:
     addi r8, r31, 0x5b8
     li r7, 0x80
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r3, r31, 0x528
     addi r4, r1, 0xd8
     bl vec3_copy

@@ -9,7 +9,7 @@ extern void _savegpr_25(void);
 extern void _savegpr_27(void);
 extern void ui_destroyWidget(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800838B8(void);
+extern void town_synchronizedDispatch(void);
 extern void fn_800EFD04(void);
 extern void fn_800F7F90(void);
 extern void fn_801010A0(void);
@@ -1385,7 +1385,7 @@ asm void fn_804EE838(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804EE838_00001114:
     lwz r4, lbl_8087F600
@@ -1404,7 +1404,7 @@ lbl_fn_804EE838_00001114:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804EE838_0000115C:
     lwz r4, 0x0(r31)
@@ -1450,7 +1450,7 @@ asm void fn_804EE908(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804EE908_000011F8:
     lwz r4, lbl_8087F628
@@ -1521,7 +1521,7 @@ asm void fn_804EE9F4(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804EE9F4_000012E4:
     lwz r4, lbl_8087F628
@@ -1614,7 +1614,7 @@ asm void fn_804EEB38(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804EEB38_00001424:
     lwz r31, lbl_8087F600
@@ -1780,7 +1780,7 @@ asm void fn_804EED80(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804EED80_00001674:
     lwz r30, lbl_8087F600
@@ -2027,7 +2027,7 @@ asm void fn_804EF0F4(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804EF0F4_000019E4:
     lwz r3, lbl_8087F4A0

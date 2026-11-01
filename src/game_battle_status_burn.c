@@ -36,7 +36,7 @@ extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void str_skipWhitespace(void);
 extern void str_findChar(void);
@@ -53,7 +53,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_803EBD6C(void);
 extern void fn_803EBE74(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC758(void);
 extern void fn_803EC7A0(void);
@@ -1089,7 +1089,7 @@ asm void fn_8042618C(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078E470@ha
     addi r3, r30, 0xf4
     addi r4, r4, lbl_8078E470@l
@@ -2132,7 +2132,7 @@ lbl_fn_80426CF8_00001B94:
     mr r27, r3
     beq lbl_fn_80426CF8_00001C20
     li r4, 0x1
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_80426CF8_00001C20
     lfs f1, lbl_808866A4
@@ -2271,7 +2271,7 @@ lbl_fn_80426CF8_00001DA8:
     mr r27, r3
     beq lbl_fn_80426CF8_00001E34
     li r4, 0x0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_80426CF8_00001E34
     lfs f1, lbl_808866A4

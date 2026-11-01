@@ -19,7 +19,7 @@ extern void wcs_vformat(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
@@ -1000,7 +1000,7 @@ asm void fn_80588714(void)
 lbl_fn_80588714_00000C78:
     mr r3, r28
     mr r4, r31
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r30, 0x2
     li r4, 0x1
     addi r0, r5, 0x5b74

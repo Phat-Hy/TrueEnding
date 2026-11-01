@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void vec3_mag(void);
 extern void vec3_assign(void);
 extern void vec3_sub(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -1950,7 +1950,7 @@ lbl_fn_80268CB4_000019E0:
     addi r8, r31, 0x5b8
     lis r7, 0x8000
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r4, r1, 0x198
     addi r3, r1, 0x8
     psq_l f1, 0x0(r4), 0, 0

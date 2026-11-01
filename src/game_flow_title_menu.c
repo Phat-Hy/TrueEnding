@@ -20,7 +20,7 @@ extern void res_Resource_unload(void);
 extern void fn_8023772C(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_80365708(void);
 extern void world_setLocalFlag(void);
 extern void fn_80374964(void);
@@ -1542,7 +1542,7 @@ lbl_fn_804DE888_000012AC:
     beq lbl_fn_804DE888_00001394
     mr r4, r20
     mr r5, r22
-    bl fn_8035B694
+    bl entity_Instance_constructor
     stw r30, 0x0(r21)
     stw r31, 0x14b0(r21)
     stw r31, 0x14b4(r21)

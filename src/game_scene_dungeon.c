@@ -9,7 +9,7 @@ extern void _savegpr_26(void);
 extern void dtor_80084684(void);
 extern void fn_8004ECC0(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_800A55D4(void);
 extern void npc_updateTalkInteraction(void);
@@ -1415,7 +1415,7 @@ lbl_fn_801AC434_000012D4:
 lbl_fn_801AC434_000012E0:
     mr r3, r31
     mr r4, r29
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_fn_801AC434_000012F8
     li r29, 0x33

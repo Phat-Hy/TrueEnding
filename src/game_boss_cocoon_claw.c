@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void fn_80063D3C(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void cursor_updateSlotState(void);
@@ -726,7 +726,7 @@ lbl_fn_80464CF0_00000888:
     stfs f0, 0x5c(r1)
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r3, r1, 0x2c8
     lfs f2, 0x2d0(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -908,7 +908,7 @@ lbl_fn_80464CF0_00000BB0:
     stfs f0, 0x3c(r1)
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r3, r1, 0x228
     lfs f2, 0x230(r1)
     psq_l f1, 0x0(r3), 0, 0

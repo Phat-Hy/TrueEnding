@@ -36,7 +36,7 @@ extern void fn_80097E80(void);
 extern void str_skipWhitespace(void);
 extern void fn_802180A8(void);
 extern void fn_803C1560(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC758(void);
 extern void fn_803EC91C(void);
@@ -986,7 +986,7 @@ asm void fn_80427F28(void)
     mr r30, r3
     lwz r5, 0x18(r5)
     lwz r6, 0x1c(r31)
-    bl fn_803EC568
+    bl task_createWorker
     lfs f0, lbl_808866D0
     lis r3, lbl_8078E508@ha
     li r0, 0x0
@@ -1846,7 +1846,7 @@ asm void fn_80428B0C(void)
     lwz r5, 0x18(r30)
     mr r4, r29
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078E5A8@ha
     li r3, 0x0
     addi r4, r4, lbl_8078E5A8@l

@@ -71,7 +71,7 @@ extern void fn_802A36B0(void);
 extern void fn_802A36B8(void);
 extern void fn_802A3D6C(void);
 extern void fn_802A7970(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void fn_8037D4C0(void);
 extern void fn_803C1560(void);
@@ -1008,7 +1008,7 @@ asm void fn_802A4BBC(void)
     mr r30, r5
     lwz r5, 0x20(r5)
     mr r29, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f0, lbl_80883E38
     lis r3, lbl_80785D28@ha
     li r31, 0x0

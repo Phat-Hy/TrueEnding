@@ -16,7 +16,7 @@ extern void mem_free(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void fn_800EB7A0(void);
 extern void fn_800F72CC(void);
@@ -32,7 +32,7 @@ extern void npc_getPosition(void);
 extern void fn_801404F8(void);
 extern void fn_80140500(void);
 extern void dialog_renderWindow(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_801533C8(void);
 extern void actor_setState(void);
 extern void task_findEntryById(void);
@@ -115,7 +115,7 @@ asm void fn_8031C534(void)
     mr r31, r4
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -1934,7 +1934,7 @@ lbl_fn_8031D6DC_00001A94:
     bl skin_applyWeights
     addi r3, r28, 0x38
     addi r4, r1, 0x24
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x24
     li r4, -0x1
     bl ref_releaseHandle

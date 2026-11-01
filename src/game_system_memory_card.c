@@ -21,7 +21,7 @@ extern void fn_8013322C(void);
 extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_80158CA4(void);
 extern void fn_8015E4B0(void);
 extern void fn_8015E7A0(void);
@@ -194,7 +194,7 @@ asm void fn_8035586C(void)
     lwz r0, 0x58c(r3)
     cmpwi r0, 0x6
     beq lbl_fn_8035586C_00000150
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

@@ -8,7 +8,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_22(void);
 extern void _savegpr_23(void);
 extern void _savegpr_25(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
@@ -21,7 +21,7 @@ extern void fn_80126214(void);
 extern void fn_8013A258(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_8015B238(void);
 extern void fn_8016D454(void);
 extern void actor_setState(void);
@@ -151,7 +151,7 @@ lbl_fn_80460A94_00000054:
 lbl_fn_80460A94_0000007C:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -1925,7 +1925,7 @@ lbl_fn_80462038_000019E8:
     addi r6, r1, 0x9c
     addi r8, r30, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r5, r1, 0x140
     lfs f2, 0x148(r1)
     addi r4, r1, 0xb4

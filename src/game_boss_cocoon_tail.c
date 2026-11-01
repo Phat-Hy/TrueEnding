@@ -15,7 +15,7 @@ extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
 extern void fn_80063D3C(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void atn_Anim_getDuration(void);
 extern void skin_applyWeights(void);
@@ -208,7 +208,7 @@ lbl_fn_804628B4_0000011C:
     addi r3, r31, 0xb0
     lwz r4, 0x488(r31)
     lfs f29, 0x3a4(r5)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_804628B4_00000140
     bl atn_Anim_getDuration
@@ -220,7 +220,7 @@ lbl_fn_804628B4_00000144:
     fcmpu cr0, f0, f1
     lwz r4, 0x490(r31)
     addi r3, r31, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_804628B4_00000168
     bl atn_Anim_getDuration

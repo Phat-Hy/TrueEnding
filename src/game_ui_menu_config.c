@@ -21,7 +21,7 @@ extern void fn_8010CB2C(void);
 extern void fn_8011BF3C(void);
 extern void fn_801240B4(void);
 extern void debuff_clearStatus(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_801B2EDC(void);
 extern void fn_801C3458(void);
 extern void fn_801C3D1C(void);
@@ -1244,7 +1244,7 @@ lbl_fn_801BC97C_00001080:
     cmpwi r0, 0x0
     beq lbl_fn_801BC97C_000010B0
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_801BC97C_000010B0
     lwz r3, 0x4(r25)

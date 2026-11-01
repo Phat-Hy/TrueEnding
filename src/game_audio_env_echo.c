@@ -9,7 +9,7 @@ extern void vec3_toEulerAngles(void);
 extern void fn_80012C88(void);
 extern void vec3_sub(void);
 extern void vec3_add(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void fn_80051BC4(void);
 extern void mission_updateStub(void);
@@ -607,7 +607,7 @@ lbl_fn_80319090_000006BC:
     addi r6, r31, 0x1540
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     lfs f3, 0x1544(r31)
     cmpwi r3, 0x0
     lfs f0, 0x154c(r31)

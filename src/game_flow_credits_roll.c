@@ -15,7 +15,7 @@ extern void fn_801539E0(void);
 extern void equip_applyToCharacter(void);
 extern void fn_80155DAC(void);
 extern void actor_setState(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void net_getPacketManager(void);
 extern void net_voiceCodec_destroy(void);
 extern void fn_804FC7E4(void);
@@ -1241,7 +1241,7 @@ lbl_fn_804EAA88_00000FB4:
     beq lbl_fn_804EAA88_00001034
     lwz r4, 0x0(r28)
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_804EAA88_00001034
     lwz r4, 0x0(r23)

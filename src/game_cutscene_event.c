@@ -32,7 +32,7 @@ extern void fn_800E2FE0(void);
 extern void cam_destroyMsgHandle(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_ctor(void);
 extern void res_Resource_unload(void);
@@ -43,7 +43,7 @@ extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803750E4(void);
@@ -594,7 +594,7 @@ asm void fn_8032C52C(void)
     mr r27, r5
     mr r31, r3
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80788D20@ha
     lis r4, fn_80057F28@ha
     addi r3, r3, lbl_80788D20@l
@@ -2056,7 +2056,7 @@ lbl_fn_8032D5EC_00001BD4:
 lbl_fn_8032D5EC_00001BDC:
     mr r3, r28
     mr r4, r29
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r28)
     mr r3, r28
     mr r4, r29

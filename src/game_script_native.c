@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_17(void);
 extern void _savegpr_17(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void atn_Anim_setLayerAnimation(void);
 extern void atn_Anim_getLayerDuration(void);
@@ -21,7 +21,7 @@ extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
 extern void fn_801489CC(void);
 extern void dialog_renderWindow(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_80158BB4(void);
 extern void fn_80158CA4(void);
 extern void fn_8015DEC0(void);
@@ -261,7 +261,7 @@ lbl_fn_80252A90_0000021C:
 lbl_fn_80252A90_00000230:
     mr r3, r28
     mr r4, r29
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r28)
     mr r3, r28
     mr r4, r29
@@ -1895,7 +1895,7 @@ lbl_fn_80253F00_00001984:
     addi r6, r1, 0x8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_80253F00_00001A00
     psq_l f1, 0x0(r22), 0, 0

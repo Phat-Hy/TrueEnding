@@ -36,7 +36,7 @@ extern void boss_updatePhaseState(void);
 extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_8015AC48(void);
 extern void fn_8015E7A0(void);
 extern void actor_setState(void);
@@ -51,7 +51,7 @@ extern void res_registerResource(void);
 extern void fn_802AC550(void);
 extern void fn_802BABC0(void);
 extern void fn_802FCF14(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_8045ABB4(void);
@@ -591,7 +591,7 @@ asm void fn_80458270(void)
     stw r28, 0x100(r1)
     mr r28, r3
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r4, lbl_8078F7F0@ha
     addi r3, r28, 0x14b0
     addi r4, r4, lbl_8078F7F0@l
@@ -1955,7 +1955,7 @@ lbl_fn_80459358_000019D8:
 lbl_fn_80459358_00001A64:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

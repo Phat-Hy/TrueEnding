@@ -35,7 +35,7 @@ extern void fn_8019AFE8(void);
 extern void task_mapIdToQueue(void);
 extern void res_registerResource(void);
 extern void fn_80249588(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8036554C(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
@@ -1416,7 +1416,7 @@ asm void fn_80248E88(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80783F78@ha
     addi r31, r30, 0x14b0
     addi r3, r3, lbl_80783F78@l

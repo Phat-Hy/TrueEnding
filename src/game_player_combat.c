@@ -19,7 +19,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_80089EE4(void);
 extern void map_processTrigger(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void fn_80098948(void);
 extern void fn_80099010(void);
 extern void fn_800A0548(void);
@@ -225,7 +225,7 @@ lbl_fn_8011E200_00000214:
     lwzx r4, r4, r0
     lbz r0, 0x38(r1)
     add r4, r4, r0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     mr r31, r3
     beq lbl_fn_8011E200_0000056C

@@ -17,7 +17,7 @@ extern void fn_800133B0(void);
 extern void vec3_add(void);
 extern void fn_80013484(void);
 extern void item_useConsumable(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void fn_80050900(void);
 extern void fn_80051B70(void);
@@ -510,7 +510,7 @@ lbl_fn_80382A1C_0000054C:
     addi r7, r7, 0x8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_80382A1C_0000058C
     addi r3, r1, 0x188
@@ -3101,7 +3101,7 @@ lbl_fn_80384188_00002B84:
     addi r7, r7, 0x8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_80384188_00002C2C
     addi r4, r1, 0x8c8
@@ -3228,7 +3228,7 @@ lbl_fn_80384188_00002D78:
     addi r7, r7, 0x8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_80384188_00002E20
     addi r4, r1, 0x8c8

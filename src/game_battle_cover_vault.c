@@ -45,7 +45,7 @@ extern void fn_8023A02C(void);
 extern void res_Shader_bindParams(void);
 extern void res_registerResource(void);
 extern void fn_803E598C(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC7A0(void);
 extern void fn_803EC91C(void);
 extern void fn_803ED774(void);
@@ -1354,7 +1354,7 @@ asm void fn_803F9420(void)
     lwz r5, 0x18(r30)
     mr r4, r29
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078CDF8@ha
     li r3, 0x0
     addi r4, r4, lbl_8078CDF8@l

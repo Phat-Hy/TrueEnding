@@ -8,7 +8,7 @@ extern void vec3_assign(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_80011220(void);
 extern void vec3_sub(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void mission_updateStub(void);
 extern void fn_80057A68(void);
 extern void fn_80063484(void);
@@ -36,7 +36,7 @@ extern void fn_801495E8(void);
 extern void fn_80149624(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015B238(void);
 extern void fn_8015E4B0(void);
@@ -773,7 +773,7 @@ asm void fn_80323CDC(void)
     lwz r0, 0x4(r5)
     cmpwi r0, 0x2710
     bne lbl_fn_80323CDC_00000860
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -813,7 +813,7 @@ lbl_fn_80323CDC_000008BC:
     bne lbl_fn_80323CDC_000008F4
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -847,7 +847,7 @@ lbl_fn_80323CDC_000008F4:
 lbl_fn_80323CDC_0000094C:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -1989,7 +1989,7 @@ lbl_fn_80324A38_000019B0:
     addi r6, r1, 0x9c
     addi r8, r30, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r5, r1, 0x140
     lfs f2, 0x148(r1)
     addi r4, r1, 0xb4

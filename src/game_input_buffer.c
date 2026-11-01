@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_8009373C(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -18,7 +18,7 @@ extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
 extern void quest_evaluateConditions(void);
 extern void dialog_renderWindow(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_80170A20(void);
@@ -151,7 +151,7 @@ asm void fn_802E9DEC(void)
     lwz r6, 0x4(r5)
     cmpwi r6, 0x2710
     bne lbl_fn_802E9DEC_00000100
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r31)
     mr r3, r31
     mr r4, r30
@@ -256,7 +256,7 @@ lbl_fn_802E9DEC_00000248:
 lbl_fn_802E9DEC_00000254:
     mr r3, r31
     mr r4, r30
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r31)
     mr r3, r31
     mr r4, r30
@@ -1431,7 +1431,7 @@ lbl_fn_802EAF68_0000132C:
     li r9, 0x0
     stw r31, 0x78(r1)
     lfs f1, 0x620(r30)
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_802EAF68_00001378
     li r31, 0x1

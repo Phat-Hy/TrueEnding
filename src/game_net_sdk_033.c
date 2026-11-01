@@ -68,7 +68,7 @@ extern void fn_806E87A0(void);
 extern void fn_806E8B60(void);
 extern void fn_806E8D30(void);
 extern void fn_806E8E10(void);
-extern void fn_806E91A0(void);
+extern void net_setTaggedString(void);
 extern void net_copyStringSafe(void);
 extern int sprintf(char* str, const char* format, ...);
 extern u32 strlen(const char* str);
@@ -871,7 +871,7 @@ lbl_fn_806E4B90_000009AC:
     mr r3, r29
     addi r5, r5, lbl_807C3A00@l
     li r4, 0x5
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r29
     li r4, 0x3
     li r5, 0x0
@@ -1586,7 +1586,7 @@ lbl_fn_806E5570_00001388:
     mr r3, r28
     addi r5, r30, 0x10c
     li r4, 0x1
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r28
     li r4, 0x3
     li r5, 0x1
@@ -1604,7 +1604,7 @@ lbl_fn_806E5570_000013C8:
     mr r3, r28
     addi r5, r30, 0x10c
     li r4, 0x1
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r28
     li r4, 0x3
     li r5, 0x1
@@ -1784,7 +1784,7 @@ lbl_fn_806E5840_00001654:
     mr r3, r27
     addi r5, r31, 0x10c
     li r4, 0x1
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r27
     li r4, 0x3
     li r5, 0x1
@@ -2173,7 +2173,7 @@ lbl_fn_806E5D70_00001B84:
     mr r3, r24
     addi r5, r28, 0x10c
     li r4, 0x1
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r24
     li r4, 0x3
     li r5, 0x1
@@ -2193,7 +2193,7 @@ lbl_fn_806E5D70_00001BCC:
     mr r3, r24
     addi r5, r28, 0x10c
     li r4, 0x1
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r24
     li r4, 0x3
     li r5, 0x1
@@ -2246,7 +2246,7 @@ lbl_fn_806E5D70_00001C8C:
     mr r3, r24
     addi r5, r28, 0x10c
     li r4, 0x1
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r24
     li r4, 0x3
     li r5, 0x1
@@ -2327,7 +2327,7 @@ lbl_fn_806E5F90_00001DB4:
     mr r3, r27
     addi r5, r30, 0x50
     li r4, 0x5
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r27
     li r4, 0x3
     li r5, 0x1
@@ -2342,7 +2342,7 @@ lbl_fn_806E5F90_00001DF8:
     mr r3, r27
     addi r5, r30, 0x78
     li r4, 0x5
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r27
     li r4, 0x3
     li r5, 0x1
@@ -2358,7 +2358,7 @@ lbl_fn_806E5F90_00001E30:
     mr r3, r27
     addi r5, r30, 0xac
     li r4, 0x5
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r27
     li r4, 0x3
     li r5, 0x1
@@ -2396,7 +2396,7 @@ lbl_fn_806E5F90_00001E6C:
     mr r3, r27
     addi r5, r30, 0xe0
     li r4, 0x5
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r27
     li r4, 0x3
     li r5, 0x1

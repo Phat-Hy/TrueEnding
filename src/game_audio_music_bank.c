@@ -42,7 +42,7 @@ extern void quest_updateFlow(void);
 extern void fn_80149624(void);
 extern void dialog_renderWindow(void);
 extern void fn_801513D0(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void battle_awardExp(void);
 extern void sound_initGlobalInstances(void);
@@ -1143,7 +1143,7 @@ lbl_fn_8030B41C_00000E64:
 lbl_fn_8030B41C_00000EC0:
     mr r3, r31
     mr r4, r30
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r31)
     mr r3, r31
     mr r4, r30

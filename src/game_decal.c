@@ -10,7 +10,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_80084A78(void);
 extern void mem_getAllocSize(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
@@ -160,7 +160,7 @@ lbl_fn_800E589C_00000078:
     bne lbl_fn_800E589C_000000B4
     li r4, 0xc8
     addi r3, r3, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_800E589C_000000B4
     lfs f1, lbl_808812D8

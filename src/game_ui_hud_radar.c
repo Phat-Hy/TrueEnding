@@ -12,7 +12,7 @@ extern void vec3_copy(void);
 extern void fn_8000DD0C(void);
 extern void vec3_toEulerAngles(void);
 extern void fn_800133B0(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void mission_updateStub(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -1496,7 +1496,7 @@ lbl_fn_801C1084_000011B0:
     addi r5, r1, 0x78
     addi r6, r1, 0x94
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r5, r1, 0xd8
     lwz r6, 0x4(r31)
     addi r4, r1, 0x68

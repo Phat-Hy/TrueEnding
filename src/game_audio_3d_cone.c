@@ -5,7 +5,7 @@
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void dtor_80084684(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void node_destroy(void);
@@ -32,7 +32,7 @@ extern void fn_803234C8(void);
 extern void fn_803234F4(void);
 extern void fn_803235AC(void);
 extern void fn_803235D8(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXConcat(void);
@@ -1516,7 +1516,7 @@ lbl_fn_80322AD4_0000142C:
     addi r7, r7, 0x80
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r3, r1, 0x38
     lfs f2, 0x40(r1)
     psq_l f1, 0x0(r3), 0, 0
@@ -1569,7 +1569,7 @@ asm void fn_80322C68(void)
     stw r31, 0xc(r1)
     mr r31, r3
     stw r30, 0x8(r1)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f0, lbl_80884F10
     lis r3, lbl_80788BD0@ha
     li r30, 0x0

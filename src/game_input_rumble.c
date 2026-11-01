@@ -11,7 +11,7 @@ extern void dtor_80084684(void);
 extern void actor_validateIndex(void);
 extern void actor_dispatchMessage(void);
 extern void fn_80040B40(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
 extern void talk_setSpeakerName(void);
@@ -71,7 +71,7 @@ extern void fn_802F5370(void);
 extern void fn_802F566C(void);
 extern void fn_802F58A0(void);
 extern void fn_802F66CC(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -491,7 +491,7 @@ lbl_fn_802F09D4_000003BC:
     addi r6, r1, 0x24
     addi r8, r30, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r4, r1, 0xc8
     lfs f2, 0xd0(r1)
     psq_l f1, 0x0(r4), 0, 0
@@ -1046,7 +1046,7 @@ asm void fn_802F1524(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80787938@ha
     li r29, 0x0
     addi r3, r3, lbl_80787938@l

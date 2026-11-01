@@ -57,7 +57,7 @@ extern void fn_8025BD1C(void);
 extern void fn_8025BF58(void);
 extern void fn_8025C29C(void);
 extern void fn_8025C460(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
@@ -990,7 +990,7 @@ asm void fn_8025A060(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_807847E0@ha
     addi r28, r30, 0x14b0
     addi r3, r3, lbl_807847E0@l

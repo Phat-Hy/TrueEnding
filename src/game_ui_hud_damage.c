@@ -31,7 +31,7 @@ extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void chest_spawnLoot(void);
 extern void atn_LoadHandle_constructor(void);
@@ -1779,7 +1779,7 @@ lbl_fn_801CC0AC_000016B0:
     mr r3, r29
     mr r4, r30
     mr r5, r6
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_807824D8@ha
     li r28, 0x0
     addi r3, r3, lbl_807824D8@l

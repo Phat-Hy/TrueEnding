@@ -6,7 +6,7 @@ extern void _restgpr_14(void);
 extern void _restgpr_22(void);
 extern void _savegpr_14(void);
 extern void _savegpr_22(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void fn_800A55D4(void);
 extern void fn_800A56A8(void);
@@ -1206,7 +1206,7 @@ lbl_fn_80390A88_00001030:
     addi r6, r1, 0x158
     li r8, 0x0
     li r9, -0x1
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_80390A88_00001224
     stw r27, 0x1ec(r1)
@@ -1362,7 +1362,7 @@ lbl_fn_80390A88_00001288:
     addi r6, r1, 0x158
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     lfs f5, 0x1b0(r1)
     lfs f4, 0x154(r1)
     lfs f3, 0x1a8(r1)

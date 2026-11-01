@@ -49,7 +49,7 @@ extern void fn_801647BC(void);
 extern void fn_80164DCC(void);
 extern void fn_8016D74C(void);
 extern void fn_8016DDB0(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_80178018(void);
 extern void fn_80178078(void);
 extern void fn_801781B0(void);
@@ -1352,7 +1352,7 @@ lbl_fn_800E7F04_00001120:
     beq lbl_fn_800E7F04_00001180
     mr r3, r17
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800E7F04_00001180
     lwz r0, 0x7e0(r18)

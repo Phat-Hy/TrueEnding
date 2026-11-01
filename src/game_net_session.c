@@ -26,7 +26,7 @@ extern void fn_80147A18(void);
 extern void quest_checkCondition(void);
 extern void fn_8016E800(void);
 extern void save_validateHeader(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void fn_801F6D7C(void);
 extern void thread_dispatchToQueue(void);
 extern void profile_getMetricValue(void);
@@ -400,7 +400,7 @@ asm void fn_801E807C(void)
     mr r3, r29
     addi r4, r4, lbl_8073CB8C@l
     addi r4, r4, 0x1
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x474(r29)
     li r4, 0x1
     bl atn_Task_setActive

@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void __files(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -1806,7 +1806,7 @@ lbl_fn_80198874_00001898:
     addi r6, r1, 0x40
     lis r7, 0x8000
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r4, r1, 0x1d0
     lwz r5, 0x4(r30)
     addi r3, r1, 0x20

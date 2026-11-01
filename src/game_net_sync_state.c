@@ -10,7 +10,7 @@ extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
 extern void fn_800C32E0(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void str_findChar(void);
 extern void actor_spawnActorWithId(void);
@@ -489,7 +489,7 @@ lbl_fn_804C9EF8_00000558:
     bl fn_800C32E0
     addi r3, r31, 0x174
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -685,7 +685,7 @@ lbl_fn_804CA250_000007F4:
     bl fn_800C32E0
     addi r3, r29, 0x174
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

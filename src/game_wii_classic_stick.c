@@ -15,7 +15,7 @@ extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
 extern void fn_800CB404(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB4A4(void);
 extern void fn_800CB518(void);
 extern void fn_800CB5B4(void);
@@ -934,7 +934,7 @@ lbl_fn_8055F690_00000AB8:
     bl skin_applyWeights
     addi r3, r1, 0x34
     addi r4, r1, 0x2c
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x2c
     li r4, -0x1
     bl ref_releaseHandle
@@ -960,7 +960,7 @@ lbl_fn_8055F690_00000B18:
     bl skin_playAnimationByName
     addi r3, r1, 0x34
     addi r4, r1, 0x28
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x28
     li r4, -0x1
     bl ref_releaseHandle
@@ -1282,7 +1282,7 @@ lbl_fn_8055FE0C_00000F58:
     bl skin_playAnimationByName
     mr r3, r29
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -1731,7 +1731,7 @@ lbl_fn_805602B0_00001524:
     bl fn_803EA09C
     addi r3, r1, 0x14
     addi r4, r1, 0xc
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1753,7 +1753,7 @@ lbl_fn_805602B0_00001574:
     bl fn_803E9608
     addi r3, r1, 0x14
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

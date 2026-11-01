@@ -25,7 +25,7 @@ extern void task_findEntryById(void);
 extern void res_MsgHandle_constructor(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_805A3D00(void);
@@ -1523,7 +1523,7 @@ asm void fn_8030A144(void)
     mr r29, r3
     stw r28, 0x650(r1)
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f0, lbl_80884BAC
     lis r3, lbl_807880D0@ha
     li r31, 0x0

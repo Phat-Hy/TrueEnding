@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void item_useConsumable(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80116BD4(void);
@@ -1825,7 +1825,7 @@ lbl_fn_8038E23C_00001998:
     stfs f0, 0x50(r1)
     stfs f0, 0x54(r1)
     stfs f0, 0x58(r1)
-    bl fn_8004D388
+    bl collision_queryGeometry
     psq_l f1, 0x0(r27), 0, 0
     lfs f2, 0x98(r1)
     psq_st f1, 0x0(r28), 0, 0

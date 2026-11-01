@@ -11,7 +11,7 @@ extern void fn_8006B0C8(void);
 extern void fn_8006B174(void);
 extern void script_executeOpcode(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800838B8(void);
+extern void town_synchronizedDispatch(void);
 extern void fn_80083AD4(void);
 extern void mem_alloc(void);
 extern void msg_formatTextWithAlignment(void* res, void* font, u32 mode);
@@ -930,7 +930,7 @@ lbl_fn_800A2DE0_00000C84:
     mr r8, r7
     li r9, 0x0
     clrrwi r4, r0, 5
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     lwz r5, 0x150(r31)
     li r4, 0x0
     stw r3, 0x14c(r31)

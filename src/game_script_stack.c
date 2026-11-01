@@ -47,7 +47,7 @@ extern void res_registerResource(void);
 extern void fn_80247DA4(void);
 extern void fn_80247FB0(void);
 extern void fn_8024845C(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void world_setLocalFlag(void);
 extern void atn_LoadHandle_destructor(void);
@@ -1559,7 +1559,7 @@ asm void fn_802476D0(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80783E48@ha
     li r0, 0x0
     addi r3, r3, lbl_80783E48@l

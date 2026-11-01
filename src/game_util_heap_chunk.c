@@ -28,7 +28,7 @@ extern void fn_801F4728(void);
 extern void fn_801F48C8(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void fn_801F7590(void);
@@ -1460,7 +1460,7 @@ asm void fn_80586E40(void)
 lbl_fn_80586E40_000012C8:
     mr r3, r31
     mr r4, r30
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r29, 0x2
     li r4, 0x1
     addi r0, r5, 0x5b78
@@ -1478,7 +1478,7 @@ lbl_fn_80586E40_000012C8:
 lbl_fn_80586E40_0000130C:
     mr r3, r31
     mr r4, r30
-    bl fn_801F64D0
+    bl save_createWorkerTask
     addis r5, r29, 0x2
     li r4, 0x1
     addi r0, r5, 0x5ba0

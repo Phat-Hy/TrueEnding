@@ -22,7 +22,7 @@ extern void fn_801CCE50(void);
 extern void fn_801CD184(void);
 extern void fn_801CE4CC(void);
 extern void save_validateHeader(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void fn_80201E78(void);
 extern void fn_80202A6C(void);
 extern void fn_80206B14(void);
@@ -2006,7 +2006,7 @@ lbl_fn_801D1324_00001A28:
     mr r3, r31
     addi r4, r4, lbl_8073C56C@l
     addi r4, r4, 0x2eb
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0xb88(r31)
     li r4, 0x1
     bl atn_Task_setActive

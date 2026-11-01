@@ -31,7 +31,7 @@ extern void fn_8011B018(void);
 extern void fn_8011B8D4(void);
 extern void fn_801F3E20(void);
 extern void save_validateHeader(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void thread_findAndNotify(void);
 extern void fn_8021771C(void);
 extern void world_getGlobalFlag(void);
@@ -1522,7 +1522,7 @@ lbl_fn_80117B54_000011D0:
     bl atn_Task_setActive
     mr r3, r31
     mr r4, r28
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0xf4(r26)
     li r4, 0x1
     bl atn_Task_setActive

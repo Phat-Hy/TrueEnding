@@ -13,12 +13,12 @@ extern void fn_8003EA3C(void);
 extern void ui_destroyWidget(void);
 extern void fn_80051C78(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB58C(void);
 extern void fn_8014EEC4(void);
 extern void fn_8015EB2C(void);
 extern void fn_8015EFAC(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_80178668(void);
 extern void fn_80178864(void);
 extern void fn_8017C7F8(void);
@@ -1447,7 +1447,7 @@ lbl_fn_804E4EB4_000011DC:
     beq lbl_fn_804E4EB4_00001238
     lwz r3, 0x0(r23)
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_804E4EB4_00001238
     lwz r3, 0x0(r23)
@@ -2369,7 +2369,7 @@ lbl_fn_804E5BC8_00001E34:
     bl fn_803E9608
     addi r3, r27, 0x2b74
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

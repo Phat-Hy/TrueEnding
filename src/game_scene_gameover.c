@@ -11,7 +11,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void fn_8010653C(void);
 extern void fn_801065E4(void);
@@ -1947,7 +1947,7 @@ lbl_fn_801B3098_00001980:
     rlwinm r0, r0, 0, 28, 28
     subf r0, r0, r5
     srwi r21, r0, 31
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_801B3098_000019D0
     lfs f21, 0x234(r31)

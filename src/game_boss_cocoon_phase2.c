@@ -86,7 +86,7 @@ extern void fn_802BABC0(void);
 extern void fn_803165E0(void);
 extern void fn_80339F7C(void);
 extern void fn_80339F84(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void world_setLocalFlag(void);
 extern void kpad_getClampData(void);
@@ -1186,7 +1186,7 @@ asm void fn_8045FAB0(void)
     stw r28, 0x100(r1)
     mr r28, r3
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r4, lbl_8078F980@ha
     addi r3, r28, 0x14b0
     addi r4, r4, lbl_8078F980@l

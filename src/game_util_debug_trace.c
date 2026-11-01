@@ -14,14 +14,14 @@ extern void mem_getAllocSize(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6E4(void);
 extern void fn_800DCA6C(void);
 extern void fn_800EFC64(void);
 extern void fn_800EFE3C(void);
 extern void fn_800EFEA0(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_8017639C(void);
 extern void fn_801763E0(void);
 extern void fn_80178864(void);
@@ -1349,7 +1349,7 @@ lbl_fn_80599458_00001184:
     bl skin_applyWeights
     addi r3, r30, 0x64
     addi r4, r1, 0x10
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1768,7 +1768,7 @@ lbl_fn_80599C94_000017C4:
     mr r3, r4
     mr r4, r5
     li r5, 0x0
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_80599C94_0000181C
     li r3, 0x0
@@ -1780,7 +1780,7 @@ lbl_fn_80599C94_000017F0:
     mr r3, r4
     mr r4, r5
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_80599C94_0000181C
     li r3, 0x0
@@ -1846,7 +1846,7 @@ lbl_fn_80599D64_000018C8:
     mr r3, r31
     mr r4, r6
     li r5, 0x0
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_80599D64_00001920
     li r0, 0x0
@@ -1858,7 +1858,7 @@ lbl_fn_80599D64_000018F4:
     mr r3, r31
     mr r4, r6
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_80599D64_00001920
     li r0, 0x0

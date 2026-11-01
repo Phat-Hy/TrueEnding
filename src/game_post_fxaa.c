@@ -11,7 +11,7 @@ extern void system_getNextSequenceId(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_renderWindow(void);
 extern void fn_8014FCC4(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void fn_801799BC(void);
 extern void sound_initGlobalInstances(void);
@@ -82,7 +82,7 @@ asm void fn_802D22A0(void)
     lwz r0, 0x4(r5)
     cmpwi r0, 0x2710
     bne lbl_fn_802D22A0_00000064
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -422,7 +422,7 @@ lbl_fn_802D22A0_00000478:
     stfs f4, 0x10(r31)
     stfs f3, 0x14(r31)
     stfs f0, 0x18(r31)
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

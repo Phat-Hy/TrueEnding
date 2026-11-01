@@ -44,7 +44,7 @@ extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void fn_80239AB8(void);
 extern void fn_80239D1C(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void atn_LoadHandle_constructor(void);
 extern void atn_LoadHandle_destructor(void);
 extern void strcmp(void);
@@ -2045,7 +2045,7 @@ asm void fn_80244228(void)
     mr r29, r5
     lwz r5, 0x20(r5)
     mr r28, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80783D08@ha
     addi r30, r28, 0x14b0
     addi r3, r3, lbl_80783D08@l

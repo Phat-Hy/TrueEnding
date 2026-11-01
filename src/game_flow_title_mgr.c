@@ -11,7 +11,7 @@ extern void dtor_80084684(void);
 extern void fn_8006F2F0(void);
 extern void fn_8006F420(void);
 extern void fn_800DC97C(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void net_getPacketManager(void);
 extern void net_voiceCodec_destroy(void);
 extern void fn_804FB224(void);
@@ -1961,7 +1961,7 @@ lbl_fn_804DD3F4_00001890:
     beq lbl_fn_804DD3F4_000018C8
     lwz r4, 0x0(r28)
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_804DD3F4_000018C8
     lwz r0, 0xb0(r30)

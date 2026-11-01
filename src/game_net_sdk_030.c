@@ -67,7 +67,7 @@ extern void fn_806E5D00(void);
 extern void fn_806E8B10(void);
 extern void fn_806E8E10(void);
 extern void fn_806E8FB0(void);
-extern void fn_806E91A0(void);
+extern void net_setTaggedString(void);
 extern void net_copyStringSafe(void);
 extern void memmove(void);
 extern int sprintf(char* str, const char* format, ...);
@@ -217,7 +217,7 @@ lbl_fn_806DDA30_00000114:
     mr r3, r20
     addi r5, r23, 0x18c
     li r4, 0x1
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r20
     li r4, 0x3
     li r5, 0x0
@@ -953,7 +953,7 @@ lbl_fn_806DE550_00000BA8:
     mr r3, r27
     addi r5, r5, lbl_807C2FE0@l
     li r4, 0x5
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r27
     li r4, 0x3
     li r5, 0x0
@@ -1971,7 +1971,7 @@ lbl_fn_806DF2E0_00001984:
     mr r3, r26
     addi r5, r30, 0x50
     li r4, 0x8
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r26
     li r4, 0x3
     li r5, 0x1
@@ -2006,7 +2006,7 @@ lbl_fn_806DF2E0_000019D0:
     mr r3, r26
     addi r5, r30, 0x78
     li r4, 0x8
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r26
     li r4, 0x3
     li r5, 0x1
@@ -2030,7 +2030,7 @@ lbl_fn_806DF2E0_00001A48:
     mr r3, r26
     addi r5, r30, 0xa4
     li r4, 0x5
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r26
     li r4, 0x3
     li r5, 0x1
@@ -2045,7 +2045,7 @@ lbl_fn_806DF2E0_00001A8C:
     mr r3, r26
     addi r5, r30, 0xcc
     li r4, 0x5
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r26
     li r4, 0x3
     li r5, 0x1
@@ -2071,7 +2071,7 @@ lbl_fn_806DF2E0_00001AC4:
     mr r3, r26
     addi r5, r30, 0x100
     li r4, 0x5
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r26
     li r4, 0x3
     li r5, 0x1
@@ -2109,7 +2109,7 @@ lbl_fn_806DF2E0_00001B48:
     mr r3, r26
     addi r5, r30, 0x138
     li r4, 0x5
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r26
     li r4, 0x3
     li r5, 0x1

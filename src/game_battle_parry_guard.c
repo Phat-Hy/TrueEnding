@@ -51,7 +51,7 @@ extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
 extern void fn_803EBE74(void);
 extern void fn_803EC0F8(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC7A0(void);
 extern void fn_803EC91C(void);
@@ -359,7 +359,7 @@ asm void fn_80412B80(void)
     stw r31, 0xc(r1)
     mr r31, r3
     stw r30, 0x8(r1)
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078D8B0@ha
     li r30, 0x0
     addi r3, r3, lbl_8078D8B0@l

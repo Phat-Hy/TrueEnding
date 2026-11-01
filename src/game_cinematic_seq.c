@@ -32,7 +32,7 @@ extern void fn_801437D0(void);
 extern void quest_updateFlow(void);
 extern void dialog_setScriptSlot(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_8015783C(void);
 extern void fn_8015E4B0(void);
 extern void fn_80168F3C(void);
@@ -165,7 +165,7 @@ asm void fn_803349EC(void)
     stfs f2, 0x10(r4)
     stfs f1, 0x14(r4)
     stfs f0, 0x18(r4)
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

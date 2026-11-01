@@ -16,7 +16,7 @@ extern void atn_Task_constructor(void);
 extern void atn_Task_destructor(void);
 extern void atn_Task_setActive(void);
 extern void fn_8010A828(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void fn_801F6C2C(void);
 extern void fn_801F791C(void);
 extern void event_findEntryById(void);
@@ -991,13 +991,13 @@ lbl_fn_8044D9BC_00000B14:
     mr r3, r23
     addi r4, r24, lbl_8078F4E0@l
     add r21, r0, r19
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x0(r21)
     li r22, 0x0
 lbl_fn_8044D9BC_00000B30:
     mr r3, r23
     addi r4, r25, lbl_8078F4C4@l
-    bl fn_801F64D0
+    bl save_createWorkerTask
     lwz r0, 0x4(r21)
     cmplwi r0, 0x3
     bge lbl_fn_8044D9BC_00000B6C
@@ -1014,7 +1014,7 @@ lbl_fn_8044D9BC_00000B60:
 lbl_fn_8044D9BC_00000B6C:
     mr r3, r23
     addi r4, r26, lbl_8078F4A8@l
-    bl fn_801F64D0
+    bl save_createWorkerTask
     lwz r0, 0x14(r21)
     cmplwi r0, 0x3
     bge lbl_fn_8044D9BC_00000BA8
@@ -1034,7 +1034,7 @@ lbl_fn_8044D9BC_00000BA8:
     blt lbl_fn_8044D9BC_00000B30
     mr r3, r23
     addi r4, r27, lbl_8078F488@l
-    bl fn_801F64D0
+    bl save_createWorkerTask
     lwz r0, 0x24(r21)
     cmplwi r0, 0x2
     bge lbl_fn_8044D9BC_00000BF0
@@ -1051,7 +1051,7 @@ lbl_fn_8044D9BC_00000BE4:
 lbl_fn_8044D9BC_00000BF0:
     mr r3, r23
     addi r4, r28, lbl_8078F464@l
-    bl fn_801F64D0
+    bl save_createWorkerTask
     lwz r0, 0x24(r21)
     cmplwi r0, 0x2
     bge lbl_fn_8044D9BC_00000C2C
@@ -1068,7 +1068,7 @@ lbl_fn_8044D9BC_00000C20:
 lbl_fn_8044D9BC_00000C2C:
     mr r3, r23
     addi r4, r29, lbl_8078F444@l
-    bl fn_801F64D0
+    bl save_createWorkerTask
     lwz r0, 0x30(r21)
     cmplwi r0, 0x2
     bge lbl_fn_8044D9BC_00000C68
@@ -1085,7 +1085,7 @@ lbl_fn_8044D9BC_00000C5C:
 lbl_fn_8044D9BC_00000C68:
     mr r3, r23
     addi r4, r30, lbl_8078F420@l
-    bl fn_801F64D0
+    bl save_createWorkerTask
     lwz r0, 0x30(r21)
     cmplwi r0, 0x2
     bge lbl_fn_8044D9BC_00000CA4
@@ -1102,7 +1102,7 @@ lbl_fn_8044D9BC_00000C98:
 lbl_fn_8044D9BC_00000CA4:
     mr r3, r23
     addi r4, r31, lbl_8078F400@l
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x3c(r21)
     li r3, 0x0
     li r4, 0x0

@@ -5,7 +5,7 @@
 extern void _restgpr_22(void);
 extern void _savegpr_22(void);
 extern void fn_8003EA3C(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void fn_80063D3C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void fn_80094958(void);
@@ -2778,7 +2778,7 @@ lbl_fn_802BEE44_00002554:
     addi r6, r1, 0xa8
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r4, r1, 0x1b8
     lfs f2, 0x1c0(r1)
     addi r3, r1, 0xc0
@@ -3377,7 +3377,7 @@ lbl_fn_802BF5C0_00002DF0:
     addi r6, r1, 0xe4
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r3, r1, 0x240
     lfs f2, 0x248(r1)
     psq_l f1, 0x0(r3), 0, 0

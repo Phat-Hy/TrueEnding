@@ -20,7 +20,7 @@ extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800F72CC(void);
 extern void fn_800F7FD8(void);
@@ -182,7 +182,7 @@ lbl_fn_803252E0_0000011C:
     addi r3, r31, 0xb0
     lwz r4, 0x488(r31)
     lfs f29, 0x3a4(r5)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_803252E0_00000140
     bl atn_Anim_getDuration
@@ -194,7 +194,7 @@ lbl_fn_803252E0_00000144:
     fcmpu cr0, f0, f1
     lwz r4, 0x490(r31)
     addi r3, r31, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_803252E0_00000168
     bl atn_Anim_getDuration

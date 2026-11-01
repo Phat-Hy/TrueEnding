@@ -32,7 +32,7 @@ extern void fn_80170F20(void);
 extern void fn_802180A8(void);
 extern void kpad_getClampData(void);
 extern void fn_803CD958(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC91C(void);
 extern void fn_8042AB58(void);
@@ -752,7 +752,7 @@ asm void fn_804296DC(void)
     mr r29, r3
     lwz r5, 0x18(r5)
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078E640@ha
     li r31, 0x0
     addi r3, r3, lbl_8078E640@l

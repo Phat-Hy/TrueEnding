@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_26(void);
 extern void _savegpr_26(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void fn_80063D3C(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1045,7 +1045,7 @@ lbl_fn_80302F94_00000DDC:
     stfs f0, 0x1ac(r1)
     lfs f1, 0x16e0(r29)
     stfs f1, 0x1b4(r1)
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_80302F94_00001628
     lwz r0, 0x6e4(r1)

@@ -16,7 +16,7 @@ extern void viewport_updateCulling(void);
 extern void scissor_clipFrustum(void);
 extern void clip_calculateFrustum(void);
 extern void actor_setState(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_801781B0(void);
 extern void task_findEntryById(void);
 extern void res_findResourceSlot(void);
@@ -484,7 +484,7 @@ lbl_fn_8033DB8C_00000598:
     beq lbl_fn_8033DB8C_000005F4
     mr r3, r21
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_8033DB8C_000005F4
     lwz r0, 0xd18(r22)

@@ -60,7 +60,7 @@ extern void task_findEntryById(void);
 extern void fn_80223EE0(void);
 extern void fn_8032AC1C(void);
 extern void fn_8032AF90(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC758(void);
 extern void fn_803EC91C(void);
@@ -1535,7 +1535,7 @@ asm void fn_8043D618(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_803EC568
+    bl task_createWorker
     lfs f1, lbl_808869C8
     lis r3, lbl_8078F178@ha
     li r0, 0x0

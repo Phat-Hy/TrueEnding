@@ -36,7 +36,7 @@ extern void boss_updatePhaseState(void);
 extern void fn_8013A258(void);
 extern void npc_updateTalkInteraction(void);
 extern void dialog_renderWindow(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015E4B0(void);
 extern void fn_801603CC(void);
@@ -54,7 +54,7 @@ extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_8025CFF4(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
@@ -259,7 +259,7 @@ lbl_fn_8025B5D8_0000018C:
 lbl_fn_8025B5D8_000001CC:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -1513,7 +1513,7 @@ asm void fn_8025C998(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80784958@ha
     addi r28, r30, 0x14b0
     addi r3, r3, lbl_80784958@l

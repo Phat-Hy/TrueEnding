@@ -40,7 +40,7 @@ extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void quest_ctorRewardItem(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void fn_801CB100(void);
 extern void fn_801CB130(void);
@@ -1815,7 +1815,7 @@ lbl_fn_802BAFAC_000017D4:
 lbl_fn_802BAFAC_000017F8:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r0, 0x12a4(r30)
     extrwi. r0, r0, 1, 29
     bne lbl_fn_802BAFAC_0000182C

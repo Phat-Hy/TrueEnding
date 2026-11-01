@@ -21,7 +21,7 @@ extern void str_findChar(void);
 extern void actor_spawnActorWithId(void);
 extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void thread_findAndNotify(void);
 extern void thread_dispatchToQueue(void);
 extern void fn_8036E89C(void);
@@ -781,7 +781,7 @@ lbl_fn_8057F284_00000998:
     mr r3, r29
     addi r31, r31, lbl_807612E4@l
     addi r4, r31, 0x11
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x68(r29)
     li r4, 0x1
     bl atn_Task_setActive
@@ -826,7 +826,7 @@ lbl_fn_8057F284_00000998:
 lbl_fn_8057F284_00000A50:
     mr r3, r29
     mr r4, r25
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r29, r26
     li r4, 0x1
     stw r3, 0x98(r5)
@@ -850,7 +850,7 @@ lbl_fn_8057F284_00000A50:
 lbl_fn_8057F284_00000AAC:
     mr r3, r29
     mr r4, r25
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r29, r26
     li r4, 0x1
     stw r3, 0xac(r5)

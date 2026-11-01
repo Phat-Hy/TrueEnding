@@ -34,7 +34,7 @@ extern void dialog_selectChoice(void);
 extern void actor_setState(void);
 extern void fn_8017039C(void);
 extern void fn_801718F8(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void world_getGlobalFlag(void);
 extern void fn_803C17FC(void);
 extern void PSMTXRotRad(void);
@@ -1827,7 +1827,7 @@ asm void fn_8017CB9C(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f3, lbl_80881B78
     lis r3, lbl_8077C968@ha
     li r19, 0x0

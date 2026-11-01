@@ -18,7 +18,7 @@ extern void system_getNextSequenceId(void);
 extern void fn_8013322C(void);
 extern void npc_getPosition(void);
 extern void quest_ctorRewardItem(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void fn_801C3910(void);
 extern void sound_initGlobalInstances(void);
@@ -270,7 +270,7 @@ lbl_fn_80339F8C_000001F0:
 lbl_fn_80339F8C_00000214:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

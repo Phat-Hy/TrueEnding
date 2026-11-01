@@ -24,7 +24,7 @@ extern void mem_alloc(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void fn_8008B130(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Task_constructor(void);
 extern void atn_Task_setActive(void);
 struct atn_LH_Texture; struct atn_LH_Texture* atn_LH_Texture_constructor(struct atn_LH_Texture* this);
@@ -537,7 +537,7 @@ lbl_fn_80227434_000005D8:
     blt lbl_fn_80227434_000005F4
     mr r4, r24
     addi r3, r26, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_fn_80227434_000005F8
 lbl_fn_80227434_000005F4:

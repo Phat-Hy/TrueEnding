@@ -29,7 +29,7 @@ extern void save_validateHeader(void);
 extern void fn_801F4AA0(void);
 extern void save_formatSlotTitle(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6E78(void);
 extern void save_findEntryByName(void);
@@ -884,7 +884,7 @@ lbl_fn_805716B4_00000A3C:
 lbl_fn_805716B4_00000A88:
     mr r3, r28
     mr r4, r31
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r28, r30
     li r4, 0x1
     stw r3, 0x4c(r5)

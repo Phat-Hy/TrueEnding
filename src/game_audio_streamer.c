@@ -35,7 +35,7 @@ extern void res_MsgHandle_destructor(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_802FCF14(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void PSMTXRotRad(void);
 extern void PSMTX44Identity(void);
 extern void PSVECNormalize(void);
@@ -1548,7 +1548,7 @@ asm void fn_802FC850(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f0, lbl_80884A20
     lis r4, lbl_80787C10@ha
     li r28, 0x0

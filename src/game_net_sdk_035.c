@@ -75,7 +75,7 @@ void fn_806E8D30(void);
 void fn_806E8E10(void);
 void fn_806E8EC0(void);
 void fn_806E8FB0(void);
-void fn_806E91A0(void);
+void net_setTaggedString(void);
 void net_copyStringSafe(void);
 void fn_806E9230(void);
 void fn_806E92D0(void);
@@ -312,7 +312,7 @@ lbl_fn_806E8890_00000294:
     mr r3, r28
     addi r5, r31, 0x58
     li r4, 0x1
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r28
     li r4, 0x3
     li r5, 0x1
@@ -399,7 +399,7 @@ lbl_fn_806E89D0_000003D4:
     mr r3, r28
     addi r5, r31, 0x58
     li r4, 0x1
-    bl fn_806E91A0
+    bl net_setTaggedString
     mr r3, r28
     li r4, 0x3
     li r5, 0x1
@@ -933,7 +933,7 @@ lbl_fn_806E8FB0_00000B38:
     blr
 }
 
-asm void fn_806E91A0(void)
+asm void net_setTaggedString(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

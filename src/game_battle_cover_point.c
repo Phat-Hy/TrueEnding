@@ -16,11 +16,11 @@ extern void atn_Anim_setLayerAnimation(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB518(void);
 extern void morph_updateMesh(void);
 extern void fn_800CB6B0(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC91C(void);
 extern void fn_8040B560(void);
@@ -1453,7 +1453,7 @@ asm void fn_8040D244(void)
     mr r29, r3
     lwz r5, 0x18(r5)
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078D500@ha
     li r31, 0x0
     addi r3, r3, lbl_8078D500@l
@@ -1856,7 +1856,7 @@ lbl_fn_8040D6F8_00001910:
     bl skin_applyWeights
     addi r3, r31, 0x638
     addi r4, r1, 0x10
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x10
     li r4, -0x1
     bl ref_releaseHandle
@@ -1897,7 +1897,7 @@ lbl_fn_8040D6F8_000019CC:
     bl skin_applyWeights
     addi r3, r31, 0x638
     addi r4, r1, 0xc
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0xc
     li r4, -0x1
     bl ref_releaseHandle
@@ -1924,7 +1924,7 @@ lbl_fn_8040D6F8_00001A50:
     bl skin_applyWeights
     addi r3, r31, 0x638
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle

@@ -22,7 +22,7 @@ extern void str_findChar(void);
 extern void cam_initStickBindings(void);
 extern void fn_801334CC(void);
 extern void save_validateHeader(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void fn_801F6C2C(void);
 extern void save_computeCrc32(void);
 extern void fn_801F6D7C(void);
@@ -798,28 +798,28 @@ asm void fn_800EFFD8(void)
 lbl_fn_800EFFD8_000008BC:
     mr r3, r31
     mr r4, r29
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r31, r26
     li r4, 0x1
     stw r3, 0x54(r5)
     bl atn_Task_setActive
     mr r3, r31
     mr r4, r28
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r31, r26
     li r4, 0x1
     stw r3, 0x70(r5)
     bl atn_Task_setActive
     mr r3, r31
     mr r4, r27
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r31, r26
     li r4, 0x1
     stw r3, 0x8c(r5)
     bl atn_Task_setActive
     mr r3, r31
     mr r4, r30
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r31, r26
     li r4, 0x1
     stw r3, 0xa8(r5)
@@ -832,13 +832,13 @@ lbl_fn_800EFFD8_000008BC:
     mr r3, r31
     addi r30, r30, lbl_80735460@l
     addi r4, r30, 0xbd
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x17c(r31)
     li r4, 0x1
     bl atn_Task_setActive
     mr r3, r31
     addi r4, r30, 0xe1
-    bl fn_801F64D0
+    bl save_createWorkerTask
     stw r3, 0x180(r31)
     li r4, 0x1
     bl atn_Task_setActive

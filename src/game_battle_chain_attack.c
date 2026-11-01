@@ -32,7 +32,7 @@ extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC91C(void);
 extern void fn_803ECBD4(void);
@@ -1279,7 +1279,7 @@ asm void fn_803FE390(void)
     mr r4, r30
     mr r5, r29
     mr r6, r28
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078D098@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078D098@l
@@ -1406,7 +1406,7 @@ asm void fn_803FE570(void)
     lwz r6, 0x1c(r30)
     mr r4, r27
     lwz r5, 0x18(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078D098@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078D098@l

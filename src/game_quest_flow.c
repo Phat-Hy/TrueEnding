@@ -10,7 +10,7 @@ extern void ui_destroyWidget(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
 extern void item_useConsumable(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void fn_8007A7BC(void);
 extern void fn_8009076C(void);
 extern void fn_80092A4C(void);
@@ -1248,7 +1248,7 @@ lbl_quest_updateFlow_00001020:
     fadds f1, f0, f30
     li r9, 0x0
     stfs f1, 0x254(r1)
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_quest_updateFlow_0000114C
     lfs f9, 0x250(r1)

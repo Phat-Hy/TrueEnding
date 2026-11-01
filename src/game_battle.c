@@ -60,7 +60,7 @@ extern void fn_80134290(void);
 extern void fn_801342B0(void);
 extern void dialog_selectChoice(void);
 extern void fn_8014EEC4(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void actor_getMovementFlags(void);
 extern void fn_802180A8(void);
 extern void task_findEntryById(void);
@@ -3897,7 +3897,7 @@ lbl_fn_8001A510_0000344C:
     mr r3, r28
     mr r4, r25
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_8001A510_000034A0
     lwz r3, 0xd0c(r28)

@@ -18,7 +18,7 @@ extern void motion_updateFogAdj(void);
 extern void str_findChar(void);
 extern void wcs_vformat(void);
 extern void fn_80103484(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void thread_findAndNotify(void);
 extern void PSMTXRotRad(void);
 extern void PSMTXMultVec(void);
@@ -745,7 +745,7 @@ lbl_fn_800F5314_00000978:
     beq lbl_fn_800F5314_00000998
     lwz r4, 0x0(r23)
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800F5314_00000998
     addi r21, r21, 0x1
@@ -818,7 +818,7 @@ lbl_fn_800F5314_00000A8C:
     beq lbl_fn_800F5314_00000BA4
     lwz r4, 0x0(r23)
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800F5314_00000BA4
     lwz r4, 0x0(r23)
@@ -918,7 +918,7 @@ lbl_fn_800F5314_00000C04:
     beq lbl_fn_800F5314_00000D1C
     lwz r4, 0x0(r23)
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800F5314_00000D1C
     lwz r4, 0x0(r17)
@@ -1101,7 +1101,7 @@ lbl_fn_800F5314_00000E88:
     beq lbl_fn_800F5314_00000EC8
     mr r4, r21
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_800F5314_00000EC8
     addi r22, r22, 0x1
@@ -1218,7 +1218,7 @@ lbl_fn_800F5314_0000100C:
     mr r3, r30
     mr r4, r21
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_800F5314_00001130
     cmplw r19, r30

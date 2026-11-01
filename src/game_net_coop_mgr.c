@@ -18,7 +18,7 @@ extern void msg_getMessageById(void);
 extern void msg_getMessageString(void);
 extern void skin_playAnimationByName(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void fn_800CB518(void);
 extern void morph_updateMesh(void);
 extern void atn_Task_constructor(void);
@@ -30,7 +30,7 @@ extern void actor_spawnActorWithId(void);
 extern void fn_80124B60(void);
 extern void save_validateHeader(void);
 extern void saveSlot_readSummary(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void fn_801F6C10(void);
 extern void thread_findAndNotify(void);
 extern void thread_findAndNotifySlot(void);
@@ -405,7 +405,7 @@ lbl_fn_804A233C_000003CC:
     bl skin_playAnimationByName
     addi r3, r31, 0x23c
     addi r4, r1, 0x8
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x8
     li r4, -0x1
     bl ref_releaseHandle
@@ -958,7 +958,7 @@ lbl_fn_804A2A34_00000AFC:
 lbl_fn_804A2A34_00000B40:
     mr r3, r31
     mr r4, r29
-    bl fn_801F64D0
+    bl save_createWorkerTask
     add r5, r31, r28
     li r4, 0x1
     stw r3, 0x8c(r5)

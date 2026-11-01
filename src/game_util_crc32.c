@@ -7,7 +7,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_18(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_801784BC(void);
 extern void fn_80178A6C(void);
 extern void fn_80179730(void);
@@ -1544,7 +1544,7 @@ lbl_fn_8059D310_000012AC:
     beq lbl_fn_8059D310_00001300
     mr r4, r26
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_8059D310_00001300
     lwz r27, 0x4c(r31)
@@ -1624,7 +1624,7 @@ lbl_fn_8059D3B4_000013C0:
     beq lbl_fn_8059D3B4_00001714
     mr r4, r23
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_8059D3B4_00001714
     mr r3, r25

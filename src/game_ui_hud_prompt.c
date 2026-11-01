@@ -6,7 +6,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8003EA3C(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -436,7 +436,7 @@ lbl_fn_801C900C_000003BC:
     addi r6, r1, 0x18
     addi r7, r7, 0x80
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     lwz r5, 0x4(r31)
     addi r4, r1, 0x190
     lfs f7, 0x190(r1)

@@ -22,7 +22,7 @@ extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void ref_releaseHandle(void);
@@ -41,7 +41,7 @@ extern void res_MsgHandle_update(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void world_getGlobalFlag(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC7A0(void);
 extern void fn_803EC91C(void);
@@ -293,7 +293,7 @@ asm void fn_8040DC30(void)
     mr r4, r28
     mr r5, r29
     mr r6, r31
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078D598@ha
     addi r3, r30, 0xf4
     addi r4, r4, lbl_8078D598@l
@@ -591,7 +591,7 @@ lbl_fn_8040DE48_00000620:
 lbl_fn_8040DE48_0000065C:
     addi r3, r31, 0xf4
     li r4, 0x1
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_8040DE48_000006D4
     lfs f31, 0x328(r31)
@@ -1054,7 +1054,7 @@ lbl_fn_8040E620_00000C48:
     addi r3, r30, 0xf4
     li r4, 0x2
     stw r0, 0xb8(r5)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_8040E620_00000D1C
     lfs f1, lbl_80886390
@@ -1278,7 +1278,7 @@ lbl_fn_8040E620_00001018:
     bl res_findResourceSlot
     addi r3, r30, 0xf4
     li r4, 0x1
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_8040E620_00001070
     lfs f1, lbl_80886390
@@ -1447,7 +1447,7 @@ asm void fn_8040EC30(void)
     mr r4, r28
     mr r5, r29
     mr r6, r30
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078D650@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078D650@l
@@ -1505,7 +1505,7 @@ asm void fn_8040ED00(void)
     lwz r5, 0x18(r30)
     mr r4, r29
     lwz r6, 0x1c(r30)
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078D650@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078D650@l

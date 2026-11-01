@@ -39,7 +39,7 @@ extern void fn_803EBC44(void);
 extern void fn_803EBE74(void);
 extern void fn_803EC0A4(void);
 extern void fn_803EC0F8(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC758(void);
 extern void fn_803EC7A0(void);
@@ -1855,7 +1855,7 @@ asm void fn_8043119C(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078EDA8@ha
     addi r3, r30, 0xf4
     addi r4, r4, lbl_8078EDA8@l

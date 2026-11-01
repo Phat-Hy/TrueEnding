@@ -10,7 +10,7 @@ extern void actor_dispatchMessage(void);
 extern void fn_80044C50(void);
 extern void fn_80044CCC(void);
 extern void fn_80044E0C(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void mem_realloc(void);
 extern void fn_800E2FE0(void);
@@ -18,7 +18,7 @@ extern void fn_800EC7F0(void);
 extern void fn_800EF7F8(void);
 extern void fn_8011F970(void);
 extern void fn_8014FB60(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80207C00(void);
 extern void fn_80207C08(void);
@@ -672,7 +672,7 @@ lbl_fn_800EE640_00000740:
     mr r3, r31
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800EE640_00000768
     li r3, 0x0
@@ -1221,7 +1221,7 @@ lbl_fn_800EE794_00000EE0:
     addi r6, r1, 0x8
     li r8, 0x0
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_800EE794_00000F74
     addi r3, r1, 0xd8

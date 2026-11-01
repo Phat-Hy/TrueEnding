@@ -5,7 +5,7 @@
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void mem_alloc(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void actor_setState(void);
 extern void fn_80192908(void);
 extern void fn_8019356C(void);
@@ -262,7 +262,7 @@ asm void fn_8016BBCC(void)
     addi r31, r31, lbl_8077A720@l
     li r4, 0x52
     addi r3, r3, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_8016BBCC_000005F4
     lwz r0, 0x139c(r29)

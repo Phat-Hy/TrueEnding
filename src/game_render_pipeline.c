@@ -29,7 +29,7 @@ extern void fn_8013A13C(void);
 extern void fn_8013A194(void);
 extern void fn_8013C480(void);
 extern void actor_setState(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_801A03E0(void);
 extern void fn_801A03EC(void);
 extern void fn_801A0408(void);
@@ -1897,7 +1897,7 @@ lbl_fn_802A3D80_000019B4:
     lwz r3, 0xc(r1)
     mr r4, r27
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_802A3D80_000019F4
     lwz r3, 0xc(r1)

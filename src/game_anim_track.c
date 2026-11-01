@@ -28,7 +28,7 @@ extern void boss_updatePhaseState(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_8015C6A0(void);
 extern void actor_setState(void);
 extern void res_MsgHandle_ctor(void);
@@ -1773,7 +1773,7 @@ lbl_fn_80274268_000017A8:
 lbl_fn_80274268_00001808:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

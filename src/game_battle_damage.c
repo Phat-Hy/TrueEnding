@@ -7,7 +7,7 @@ extern void _savegpr_27(void);
 extern void fn_80044E0C(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void fn_801059F8(void);
 extern void fn_80105B3C(void);
 extern void fn_8011BEB8(void);
@@ -1168,7 +1168,7 @@ lbl_fn_8016ADF4_00000F74:
 lbl_fn_8016ADF4_00000F88:
     li r4, 0x46
     addi r3, r3, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_fn_8016ADF4_00000FA4
     li r3, 0x0

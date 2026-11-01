@@ -29,7 +29,7 @@ extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC91C(void);
 extern void fn_803EDCF4(void);
@@ -1174,7 +1174,7 @@ asm void fn_8041DDE4(void)
     mr r4, r28
     mr r5, r29
     mr r6, r30
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078DEF0@ha
     li r0, 0x0
     addi r3, r3, lbl_8078DEF0@l

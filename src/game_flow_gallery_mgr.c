@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void dungeon_initGlobalContext(void);
-extern void fn_800838B8(void);
+extern void town_synchronizedDispatch(void);
 extern void atn_Task_setActive(void);
 extern void fn_800E2A24(void);
 extern void fn_8012111C(void);
@@ -109,7 +109,7 @@ asm void fn_804F149C(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F149C_00000080:
     lwz r0, lbl_8087F600
@@ -128,7 +128,7 @@ lbl_fn_804F149C_00000090:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F149C_000000C4:
     lwz r3, lbl_8087F600
@@ -178,7 +178,7 @@ asm void fn_804F1568(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F1568_00000170:
     lwz r0, lbl_8087F600
@@ -197,7 +197,7 @@ lbl_fn_804F1568_00000180:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F1568_000001B4:
     lwz r31, lbl_8087F600
@@ -273,7 +273,7 @@ lbl_fn_804F1568_00000294:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F1568_000002D0:
     lwz r4, lbl_8087F628
@@ -458,7 +458,7 @@ asm void fn_804F1954(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F1954_00000538:
     lwz r0, lbl_8087F600
@@ -477,7 +477,7 @@ lbl_fn_804F1954_00000548:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F1954_0000057C:
     lwz r3, lbl_8087F600
@@ -683,7 +683,7 @@ asm void fn_804F1CA4(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F1CA4_00000888:
     lwz r0, lbl_8087F600
@@ -702,7 +702,7 @@ lbl_fn_804F1CA4_00000898:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F1CA4_000008CC:
     lwz r3, lbl_8087F600
@@ -744,7 +744,7 @@ asm void fn_804F1D74(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F1D74_00000958:
     lwz r0, lbl_8087F600
@@ -763,7 +763,7 @@ lbl_fn_804F1D74_00000968:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F1D74_0000099C:
     lwz r4, lbl_8087F600
@@ -949,7 +949,7 @@ asm void fn_804F2044(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F2044_00000C28:
     lwz r31, lbl_8087F600
@@ -1056,7 +1056,7 @@ lbl_fn_804F2044_00000D1C:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F2044_00000DA8:
     lwz r12, 0x0(r30)
@@ -1099,7 +1099,7 @@ asm void fn_804F225C(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F225C_00000E38:
     lwz r31, lbl_8087F600
@@ -1247,7 +1247,7 @@ asm void fn_804F2454(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F2454_0000104C:
     lwz r31, lbl_8087F600
@@ -1307,7 +1307,7 @@ lbl_fn_804F2454_000010A8:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F2454_00001128:
     lwz r4, lbl_8087F600
@@ -1326,7 +1326,7 @@ lbl_fn_804F2454_00001128:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F2454_00001170:
     lwz r3, lbl_8087F600
@@ -1541,7 +1541,7 @@ lbl_fn_804F2454_00001428:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F2454_00001488:
     lwz r3, lbl_8087F600
@@ -1608,7 +1608,7 @@ asm void fn_804F2998(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F2998_00001578:
     lwz r30, lbl_8087F600
@@ -1806,7 +1806,7 @@ asm void fn_804F2C48(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F2C48_00001824:
     lwz r3, 0x0(r31)
@@ -1859,7 +1859,7 @@ asm void fn_804F2CEC(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F2CEC_000018D0:
     lwz r0, lbl_8087F600
@@ -1878,7 +1878,7 @@ lbl_fn_804F2CEC_000018E0:
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F2CEC_00001914:
     lwz r4, lbl_8087F600
@@ -1917,7 +1917,7 @@ asm void fn_804F2DB0(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F2DB0_00001994:
     lwz r0, lbl_8087F600
@@ -1961,7 +1961,7 @@ asm void fn_804F2E40(void)
     la r7, lbl_8087E1B0
     la r8, lbl_8087E1AC
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, lbl_8087F600
 lbl_fn_804F2E40_00001A24:
     lwz r0, lbl_8087F600

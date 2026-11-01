@@ -42,7 +42,7 @@ extern void res_findResourceSlot(void);
 extern void res_Shader_bindParams(void);
 extern void fn_8031FAA4(void);
 extern void fn_8031FE4C(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void world_setLocalFlag(void);
 extern void PSMTXConcat(void);
@@ -882,7 +882,7 @@ asm void fn_8031EB3C(void)
     stw r31, 0xc(r1)
     stw r30, 0x8(r1)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lwz r7, 0x12a4(r30)
     li r12, 0x0
     lfs f7, lbl_80884E48

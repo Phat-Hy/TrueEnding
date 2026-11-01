@@ -88,7 +88,7 @@ void morph_reset(void);
 void fn_800CB36C(void);
 void ref_releaseHandle(void);
 void fn_800CB404(void);
-void fn_800CB440(void);
+void morph_updateWeights(void);
 void fn_800CB480(void);
 void fn_800CB4A4(void);
 void fn_800CB4C4(void);
@@ -1380,18 +1380,18 @@ lbl_fn_800CB404_00000FF8:
     blr
 }
 
-asm void fn_800CB440(void)
+asm void morph_updateWeights(void)
 {
     nofralloc
     lwz r6, 0x0(r3)
     cmpwi r6, 0x0
-    beq lbl_fn_800CB440_00001034
+    beq lbl_morph_updateWeights_00001034
     lwz r5, 0xa4(r6)
     li r0, 0x0
     subi r5, r5, 0x1
     stw r5, 0xa4(r6)
     stw r0, 0x0(r3)
-lbl_fn_800CB440_00001034:
+lbl_morph_updateWeights_00001034:
     lwz r4, 0x0(r4)
     stw r4, 0x0(r3)
     cmpwi r4, 0x0

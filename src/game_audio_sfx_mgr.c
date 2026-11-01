@@ -32,7 +32,7 @@ extern void dialog_updateScriptState(void);
 extern void fn_8015AC48(void);
 extern void fn_8016E4C4(void);
 extern void actor_setState(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_80178A6C(void);
 extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
@@ -128,7 +128,7 @@ lbl_fn_8030FEAC_00000038:
     mr r3, r29
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_8030FEAC_00000098
     lfs f1, 0x530(r30)
@@ -161,7 +161,7 @@ lbl_fn_8030FEAC_000000B0:
     mr r3, r29
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_8030FEAC_00000110
     lfs f1, 0x530(r30)

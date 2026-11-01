@@ -2,7 +2,7 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void fn_80063D3C(void);
 extern void atn_Model_findBoneIndex(void);
 extern void atn_Anim_setLayerAnimation(void);
@@ -1134,7 +1134,7 @@ lbl_fn_802CA490_00000E10:
     addi r8, r31, 0x5b8
     lis r7, 0x2000
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r3, r1, 0x70
     lfs f2, 0x78(r1)
     psq_l f1, 0x0(r3), 0, 0

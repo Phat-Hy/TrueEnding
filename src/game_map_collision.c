@@ -31,7 +31,7 @@ extern void fn_801598B4(void);
 extern void fn_80159BA4(void);
 extern void actor_getMovementFlags(void);
 extern void fn_80182134(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void fn_803C1560(void);
 extern void fn_803CD958(void);
@@ -130,7 +130,7 @@ asm void fn_801805A4(void)
     mr r18, r5
     lwz r5, 0x20(r5)
     mr r21, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f0, lbl_80881BF8
     lis r3, lbl_8077CAE0@ha
     li r23, 0x0

@@ -19,7 +19,7 @@ extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_setScriptSlot(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_801561E4(void);
 extern void fn_80158BB4(void);
 extern void fn_80158CA4(void);
@@ -793,7 +793,7 @@ lbl_fn_80260EBC_00000A54:
     bl fn_80134674
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

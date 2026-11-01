@@ -38,7 +38,7 @@ extern void fn_800971D4(void);
 extern void fn_80097510(void);
 extern void atn_Anim_applyLayerTransform(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void fn_80097E80(void);
 extern void fn_80099E9C(void);
 extern void ref_releaseHandle(void);
@@ -1195,7 +1195,7 @@ lbl_boss_updatePhaseState_00000E34:
     bctrl
     addi r3, r30, 0xb0
     li r4, 0x1dc
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000EA8
     lwz r0, 0x7ec(r30)
@@ -1214,7 +1214,7 @@ lbl_boss_updatePhaseState_00000EA8:
 lbl_boss_updatePhaseState_00000ECC:
     addi r3, r30, 0xb0
     li r4, 0x45
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000EEC
     lwz r0, 0xc10(r30)
@@ -1223,7 +1223,7 @@ lbl_boss_updatePhaseState_00000ECC:
 lbl_boss_updatePhaseState_00000EEC:
     addi r3, r30, 0xb0
     li r4, 0x1dd
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000F0C
     lwz r0, 0xc10(r30)
@@ -1232,7 +1232,7 @@ lbl_boss_updatePhaseState_00000EEC:
 lbl_boss_updatePhaseState_00000F0C:
     addi r3, r30, 0xb0
     li r4, 0x46
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000F2C
     lwz r0, 0xc10(r30)
@@ -1241,7 +1241,7 @@ lbl_boss_updatePhaseState_00000F0C:
 lbl_boss_updatePhaseState_00000F2C:
     addi r3, r30, 0xb0
     li r4, 0x68
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000F4C
     lwz r0, 0xc10(r30)
@@ -1250,7 +1250,7 @@ lbl_boss_updatePhaseState_00000F2C:
 lbl_boss_updatePhaseState_00000F4C:
     addi r3, r30, 0xb0
     li r4, 0x1de
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000F6C
     lwz r0, 0xc10(r30)
@@ -1271,7 +1271,7 @@ lbl_boss_updatePhaseState_00000F88:
     beq lbl_boss_updatePhaseState_00000FAC
     addi r3, r30, 0xb0
     li r4, 0x8e
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00000FB8
 lbl_boss_updatePhaseState_00000FAC:
@@ -1292,7 +1292,7 @@ lbl_boss_updatePhaseState_00000FB8:
 lbl_boss_updatePhaseState_00000FE0:
     addi r3, r30, 0xb0
     li r4, 0x5d
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     bne lbl_boss_updatePhaseState_00001000
     lwz r0, 0x54c(r30)

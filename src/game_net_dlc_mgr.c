@@ -37,7 +37,7 @@ extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void sound_initGlobalInstances(void);
 extern void res_registerResource(void);
 extern void fn_8032B314(void);
@@ -2637,7 +2637,7 @@ lbl_fn_80548E74_000022D0:
     mr r3, r16
     mr r4, r22
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_80548E74_000023BC
     lwz r0, 0xd18(r16)

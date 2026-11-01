@@ -2,9 +2,9 @@
 #pragma function_align 4
 
 /* External function declarations */
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_800EAECC(void);
 extern void fn_800EB270(void);
@@ -16,7 +16,7 @@ extern void fn_80126214(void);
 extern void fn_80134270(void);
 extern void fn_8013A258(void);
 extern void quest_evaluateConditions(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_80158BB4(void);
 extern void fn_80158CA4(void);
 extern void fn_8015E4B0(void);
@@ -286,7 +286,7 @@ lbl_fn_8031FBFC_00000254:
 lbl_fn_8031FBFC_00000260:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     mr r3, r30
     mr r4, r31
     bl fn_8031FD34
@@ -1521,7 +1521,7 @@ lbl_fn_803209E0_00001400:
     addi r6, r1, 0xa8
     addi r8, r29, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r5, r1, 0x180
     lfs f2, 0x188(r1)
     addi r4, r1, 0xc0
@@ -1899,7 +1899,7 @@ lbl_fn_8032130C_00001984:
     addi r3, r31, 0xb0
     lwz r4, 0x488(r31)
     lfs f29, 0x3a4(r5)
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_8032130C_000019A8
     bl atn_Anim_getDuration
@@ -1911,7 +1911,7 @@ lbl_fn_8032130C_000019AC:
     fcmpu cr0, f0, f1
     lwz r4, 0x490(r31)
     addi r3, r31, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_8032130C_000019D0
     bl atn_Anim_getDuration

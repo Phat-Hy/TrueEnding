@@ -111,7 +111,7 @@ void fn_8035B234(void);
 void fn_8035B368(void);
 void fn_8035B42C(void);
 void fn_8035B534(void);
-void fn_8035B694(void);
+void entity_Instance_constructor(void);
 void fn_8035B78C(void);
 void fn_8035B808(void);
 void fn_8035B824(void);
@@ -1018,7 +1018,7 @@ lbl_fn_8035B534_00000C84:
     blr
 }
 
-asm void fn_8035B694(void)
+asm void entity_Instance_constructor(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -1041,12 +1041,12 @@ asm void fn_8035B694(void)
     addi r3, r3, 0x1
     stw r3, 0x50(r4)
     cmpw r3, r0
-    ble lbl_fn_8035B694_00000D04
+    ble lbl_entity_Instance_constructor_00000D04
     lwz r3, 0x50(r4)
     subis r3, r3, 0x2
     addi r0, r3, 0x7960
     stw r0, 0x50(r4)
-lbl_fn_8035B694_00000D04:
+lbl_entity_Instance_constructor_00000D04:
     lwz r0, 0x50(r4)
     mr r4, r31
     stw r0, 0x80(r31)
@@ -1062,7 +1062,7 @@ lbl_fn_8035B694_00000D04:
     stw r0, 0xf14(r31)
     lwz r0, 0xd0(r3)
     cmpwi r0, 0x0
-    ble lbl_fn_8035B694_00000D80
+    ble lbl_entity_Instance_constructor_00000D80
     lwz r3, lbl_8087F4A0
     li r4, 0x4650
     lwz r5, 0x80(r31)
@@ -1078,7 +1078,7 @@ lbl_fn_8035B694_00000D04:
     lwz r3, 0x1438(r31)
     li r4, 0x1
     bl atn_Task_setActive
-lbl_fn_8035B694_00000D80:
+lbl_entity_Instance_constructor_00000D80:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -1632,7 +1632,7 @@ asm void fn_8035BEA4(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80789B88@ha
     addi r29, r31, 0x14b0
     addi r3, r3, lbl_80789B88@l

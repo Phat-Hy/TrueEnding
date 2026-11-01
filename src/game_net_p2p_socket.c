@@ -13,7 +13,7 @@ extern void OSWakeupThread(void);
 extern void __files(void);
 extern void dtor_80084684(void);
 extern void dungeon_initGlobalContext(void);
-extern void fn_800838B8(void);
+extern void town_synchronizedDispatch(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void);
 extern void mem_alloc(void);
@@ -1038,7 +1038,7 @@ asm void fn_8050CDD4(void)
     subi r4, r31, 0x1
     li r9, 0x0
     mr r8, r7
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     cmpwi r3, 0x0
     stw r3, 0x0(r28)
     bne lbl_fn_8050CDD4_00000CD0
@@ -1952,7 +1952,7 @@ lbl_fn_8050D7F0_00001920:
     la r7, lbl_8087E47C
     la r8, lbl_8087E478
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, 0x28(r30)
     mr r5, r31
     li r4, 0x0
@@ -1964,7 +1964,7 @@ lbl_fn_8050D7F0_00001920:
     la r7, lbl_8087E474
     la r8, lbl_8087E470
     li r9, 0x0
-    bl fn_800838B8
+    bl town_synchronizedDispatch
     stw r3, 0x2c(r30)
     mr r5, r31
     li r4, 0x0

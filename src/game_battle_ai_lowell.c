@@ -51,7 +51,7 @@ extern void world_setGlobalFlag(void);
 extern void fn_803750E4(void);
 extern void fn_80375184(void);
 extern void fn_803E3050(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC758(void);
 extern void fn_803EC7A0(void);
@@ -1230,7 +1230,7 @@ asm void fn_80436EB8(void)
     mr r31, r3
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
-    bl fn_803EC568
+    bl task_createWorker
     addi r4, r31, 0x15c
     addi r5, r31, 0x288
     lfs f0, lbl_80886900

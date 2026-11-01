@@ -43,7 +43,7 @@ extern void quest_updateFlow(void);
 extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_80158BB4(void);
 extern void fn_80158CA4(void);
 extern void fn_8015E7A0(void);
@@ -57,7 +57,7 @@ extern void sound_initGlobalInstances(void);
 extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_8031F2A4(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void fn_803754C4(void);
 extern void fn_803C1560(void);
@@ -535,7 +535,7 @@ asm void fn_80566424(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lwz r0, 0x14a8(r31)
     li r6, 0x0
     lfs f5, lbl_80887F40
@@ -1322,7 +1322,7 @@ asm void fn_80566F04(void)
     mr r31, r4
     stw r30, 0x18(r1)
     mr r30, r3
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r0, 0x7e0(r30)
     li r3, 0x0
     stw r3, 0x638(r30)

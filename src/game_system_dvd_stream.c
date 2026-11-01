@@ -9,7 +9,7 @@ extern void _savegpr_20(void);
 extern void dtor_80084684(void);
 extern void fn_8004B290(void);
 extern void item_useConsumable(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void fn_8004ECC0(void);
 extern void collision_testLineSegment(void);
 extern void fn_8006A250(void);
@@ -1907,7 +1907,7 @@ lbl_fn_80378D34_000018C4:
     stfs f29, 0x38(r1)
     stfs f29, 0x3c(r1)
     stfs f29, 0x40(r1)
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_80378D34_00001A00
     lfs f3, 0xb4(r1)

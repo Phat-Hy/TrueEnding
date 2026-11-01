@@ -9,7 +9,7 @@ extern void dtor_80084684(void);
 extern void vec3_set(void);
 extern void vec3_assign(void);
 extern void fn_80011410(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void mem_alloc(void);
 extern void mem_free(void);
 extern void map_debugLog(void);
@@ -1787,7 +1787,7 @@ lbl_fn_801B6E70_000017EC:
     addi r6, r1, 0x28
     lis r7, 0x8000
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r4, r1, 0x1a0
     lwz r5, 0x4(r30)
     addi r3, r1, 0x8

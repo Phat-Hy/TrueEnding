@@ -27,7 +27,7 @@ extern void quest_ctorRewardItem(void);
 extern void quest_checkCondition(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_80178A6C(void);
@@ -48,7 +48,7 @@ extern void fn_802CB74C(void);
 extern void fn_802CB8A0(void);
 extern void fn_802CC39C(void);
 extern void fn_802CC708(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void atn_LoadHandle_destructor(void);
 extern void fn_8059B670(void);
@@ -246,7 +246,7 @@ asm void fn_802C7BE4(void)
     stw r0, 0x14(r1)
     stw r31, 0xc(r1)
     mr r31, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lwz r0, 0x12a4(r31)
     li r8, 0x0
     lfs f2, lbl_808843E8
@@ -1153,7 +1153,7 @@ lbl_fn_802C881C_00000E7C:
 lbl_fn_802C881C_00000E94:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

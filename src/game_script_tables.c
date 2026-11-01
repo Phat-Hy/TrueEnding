@@ -29,7 +29,7 @@ extern void fn_8011CD84(void);
 extern void skill_findNodeById(void);
 extern void boss_updatePhaseState(void);
 extern void fn_80139560(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void fn_80152D10(void);
 extern void equip_applyToCharacter(void);
 extern void fn_8015E7A0(void);
@@ -52,7 +52,7 @@ extern void res_MsgHandle_destructor(void);
 extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void res_registerResource(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void world_getLocalFlag(void);
 extern void world_setLocalFlag(void);
@@ -599,7 +599,7 @@ asm void fn_80249C14(void)
     fmuls f0, f3, f5
     stfs f4, 0x10(r4)
     stfs f0, 0x14(r4)
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31
@@ -865,7 +865,7 @@ asm void fn_8024A004(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_807840A8@ha
     li r30, 0x0
     addi r3, r3, lbl_807840A8@l
@@ -1325,7 +1325,7 @@ asm void fn_8024A650(void)
     mr r30, r5
     lwz r5, 0x20(r5)
     mr r29, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r3, lbl_80784210@ha
     li r28, 0x0
     addi r3, r3, lbl_80784210@l

@@ -26,7 +26,7 @@ extern void atn_Task_setActive(void);
 extern void bloom_processPasses(void);
 extern void cam_destroyMsgHandle(void);
 extern void fn_80161570(void);
-extern void fn_801F64D0(void);
+extern void save_createWorkerTask(void);
 extern void fn_802180A8(void);
 extern void sound_initGlobalInstances(void);
 extern void res_MsgHandle_constructor(void);
@@ -37,7 +37,7 @@ extern void res_findResourceSlot(void);
 extern void fn_8023A1F4(void);
 extern void res_registerResource(void);
 extern void kpad_getClampData(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC758(void);
 extern void fn_803EC91C(void);
 extern void fn_803ED0D4(void);
@@ -962,7 +962,7 @@ asm void fn_80409438(void)
     mr r31, r3
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
-    bl fn_803EC568
+    bl task_createWorker
     lis r3, lbl_8078D458@ha
     lis r4, res_MsgHandle_constructor@ha
     addi r3, r3, lbl_8078D458@l
@@ -1013,7 +1013,7 @@ asm void fn_80409438(void)
     oris r0, r0, 0x100
     stw r0, 0x288(r31)
     addi r4, r4, 0x1
-    bl fn_801F64D0
+    bl save_createWorkerTask
     lwz r0, 0x290(r31)
     cmplwi r0, 0x2
     bge lbl_fn_80409438_00000C94
@@ -1032,7 +1032,7 @@ lbl_fn_80409438_00000C94:
     mr r3, r31
     addi r4, r4, lbl_80752A5C@l
     addi r4, r4, 0x1e
-    bl fn_801F64D0
+    bl save_createWorkerTask
     lwz r0, 0x290(r31)
     cmplwi r0, 0x2
     bge lbl_fn_80409438_00000CD8

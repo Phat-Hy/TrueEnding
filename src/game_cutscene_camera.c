@@ -15,7 +15,7 @@ extern void dtor_80084684(void);
 extern void vec3_copy(void);
 extern void fn_8000D844(void);
 extern void vec3_assign(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void mem_free(void);
 extern void fn_800EC204(void);
 extern void equip_getGlobalManager(void);
@@ -159,7 +159,7 @@ lbl_fn_8032A3D4_000000F4:
     addi r8, r22, 0x5b8
     lis r7, 0x8000
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     psq_l f1, 0x0(r27), 0, 0
     addi r3, r1, 0x8
     psq_st f1, 0x0(r29), 0, 0

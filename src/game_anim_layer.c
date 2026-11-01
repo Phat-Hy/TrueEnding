@@ -25,7 +25,7 @@ extern void quest_evaluateConditions(void);
 extern void quest_updateFlow(void);
 extern void dialog_renderWindow(void);
 extern void dialog_updateScriptState(void);
-extern void fn_80151448(void);
+extern void inventory_applyItemStats(void);
 extern void actor_setState(void);
 extern void fn_80170A20(void);
 extern void fn_801781B0(void);
@@ -49,7 +49,7 @@ extern void fn_80271DAC(void);
 extern void fn_802721A0(void);
 extern void fn_8027232C(void);
 extern void fn_80272660(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void atn_LoadHandle_destructor(void);
 extern void PSMTXRotRad(void);
@@ -720,7 +720,7 @@ asm void fn_8026FC0C(void)
     stw r31, 0xc(r1)
     mr r31, r3
     stw r30, 0x8(r1)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f0, lbl_8088379C
     lis r3, lbl_80784F48@ha
     li r30, 0x0
@@ -1647,7 +1647,7 @@ lbl_fn_80270774_000015AC:
 lbl_fn_80270774_0000160C:
     mr r3, r30
     mr r4, r31
-    bl fn_80151448
+    bl inventory_applyItemStats
     lwz r12, 0x0(r30)
     mr r3, r30
     mr r4, r31

@@ -24,7 +24,7 @@ extern void fn_800FD658(void);
 extern void fn_80148B0C(void);
 extern void fn_801533C8(void);
 extern void fn_80154E38(void);
-extern void fn_8016F3D0(void);
+extern void battle_canTargetActor(void);
 extern void fn_80178668(void);
 extern void fn_8017AC24(void);
 extern void task_findEntryById(void);
@@ -1256,7 +1256,7 @@ lbl_fn_800FB4B0_0000106C:
     mr r3, r23
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800FB4B0_000011E4
 lbl_fn_800FB4B0_00001090:
@@ -1266,7 +1266,7 @@ lbl_fn_800FB4B0_00001090:
     mr r3, r23
     mr r4, r30
     li r5, 0x0
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_800FB4B0_000011E4
 lbl_fn_800FB4B0_000010B4:
@@ -1378,7 +1378,7 @@ lbl_fn_800FB4B0_00001234:
     mr r3, r23
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800FB4B0_000013AC
 lbl_fn_800FB4B0_00001258:
@@ -1388,7 +1388,7 @@ lbl_fn_800FB4B0_00001258:
     mr r3, r23
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_800FB4B0_000013AC
 lbl_fn_800FB4B0_0000127C:
@@ -1671,7 +1671,7 @@ lbl_fn_800FBA9C_00001644:
     mr r3, r29
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     beq lbl_fn_800FBA9C_00001694
     mr r3, r29
@@ -1688,7 +1688,7 @@ lbl_fn_800FBA9C_00001694:
     mr r3, r29
     mr r4, r30
     li r5, 0x1
-    bl fn_8016F3D0
+    bl battle_canTargetActor
     cmpwi r3, 0x0
     bne lbl_fn_800FBA9C_000016C0
     li r3, -0x1

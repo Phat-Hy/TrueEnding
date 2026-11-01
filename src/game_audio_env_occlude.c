@@ -66,7 +66,7 @@ extern void fn_8031CA30(void);
 extern void fn_8031D350(void);
 extern void fn_8031D4F4(void);
 extern void fn_8031E8BC(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void boss_getOffset54(void);
 extern void boss_getOffset50(void);
@@ -1017,7 +1017,7 @@ asm void fn_8031B0A8(void)
     stw r29, 0x104(r1)
     mr r29, r3
     lwz r5, 0x20(r5)
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lis r4, lbl_80788890@ha
     addi r3, r29, 0x14b0
     addi r4, r4, lbl_80788890@l

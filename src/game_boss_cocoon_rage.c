@@ -6,7 +6,7 @@ extern void _restgpr_21(void);
 extern void _restgpr_22(void);
 extern void _savegpr_21(void);
 extern void _savegpr_22(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void mem_realloc(void);
 extern void mem_getAllocSize(void);
 extern void atn_Model_findBoneIndex(void);
@@ -1779,7 +1779,7 @@ lbl_fn_8045ABB4_00001814:
     addi r6, r1, 0xb4
     addi r8, r31, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     addi r3, r1, 0x188
     lwz r4, 0x1ac(r1)
     psq_l f1, 0x0(r3), 0, 0

@@ -43,7 +43,7 @@ extern void fn_80244FC0(void);
 extern void fn_802D8B6C(void);
 extern void fn_802DDBB0(void);
 extern void fn_802E2468(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8035B78C(void);
 extern void fn_8036554C(void);
 extern void boss_getOffset54(void);
@@ -434,7 +434,7 @@ asm void fn_802D7480(void)
     mr r31, r5
     lwz r5, 0x20(r5)
     mr r30, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f0, lbl_808845E8
     lis r3, lbl_80786E20@ha
     li r28, 0x0

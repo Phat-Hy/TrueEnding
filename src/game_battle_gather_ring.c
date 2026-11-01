@@ -26,9 +26,9 @@ extern void fn_80095D44(void);
 extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void atn_Anim_applyLayerTransform(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getLayerDuration(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void str_skipWhitespace(void);
 extern void system_getNextSequenceId(void);
@@ -41,7 +41,7 @@ extern void res_MsgHandle_unload(void);
 extern void res_MsgHandle_update(void);
 extern void fn_803EBE74(void);
 extern void fn_803EC0F8(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC7A0(void);
 extern void fn_803EC91C(void);
@@ -170,7 +170,7 @@ lbl_fn_803F1A38_000000B4:
     stw r0, 0x64(r28)
     lwz r0, 0x78(r28)
     stw r0, 0x68(r28)
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r28, r28, 0x10
     addi r27, r27, 0x10
     addi r29, r29, 0x1
@@ -268,7 +268,7 @@ asm void fn_803F1C38(void)
     stw r30, 0x18(r1)
     stw r29, 0x14(r1)
     mr r29, r3
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078CB98@ha
     addi r3, r29, 0xf4
     addi r4, r4, lbl_8078CB98@l
@@ -1031,7 +1031,7 @@ lbl_fn_803F2344_00000CD8:
 lbl_fn_803F2344_00000CEC:
     addi r3, r31, 0x65c
     li r4, 0x2
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_803F2344_00000D3C
     lwz r12, 0x0(r31)
@@ -1070,7 +1070,7 @@ lbl_fn_803F2344_00000D70:
     bne lbl_fn_803F2344_00000E68
     addi r3, r31, 0x65c
     li r4, 0x1
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_803F2344_00000DC8
     lwz r12, 0x0(r31)

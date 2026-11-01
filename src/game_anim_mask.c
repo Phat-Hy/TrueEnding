@@ -19,7 +19,7 @@ extern void atn_Anim_getLayerDuration(void);
 extern void skin_applyWeights(void);
 extern void morph_reset(void);
 extern void ref_releaseHandle(void);
-extern void fn_800CB440(void);
+extern void morph_updateWeights(void);
 extern void morph_updateMesh(void);
 extern void fn_800EB7A0(void);
 extern void fn_800EE360(void);
@@ -40,7 +40,7 @@ extern void res_findResourceSlot(void);
 extern void res_registerResource(void);
 extern void fn_80272C6C(void);
 extern void fn_80272CF0(void);
-extern void fn_8035B694(void);
+extern void entity_Instance_constructor(void);
 extern void fn_8036554C(void);
 extern void atn_LoadHandle_constructor(void);
 extern void PSMTXRotRad(void);
@@ -224,7 +224,7 @@ lbl_fn_80271104_000000D0:
     bl skin_applyWeights
     addi r3, r31, 0x153c
     addi r4, r1, 0x14
-    bl fn_800CB440
+    bl morph_updateWeights
     addi r3, r1, 0x14
     li r4, -0x1
     bl ref_releaseHandle
@@ -1735,7 +1735,7 @@ asm void fn_8027278C(void)
     mr r29, r5
     lwz r5, 0x20(r5)
     mr r28, r3
-    bl fn_8035B694
+    bl entity_Instance_constructor
     lfs f3, lbl_80883820
     lis r3, lbl_807850E0@ha
     li r31, 0x0

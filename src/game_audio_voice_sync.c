@@ -6,7 +6,7 @@ extern void _restgpr_20(void);
 extern void _restgpr_27(void);
 extern void _savegpr_20(void);
 extern void _savegpr_27(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void collision_testLineSegment(void);
 extern void talk_parseQuotedString(void);
 extern void talk_scanQuotedString(void);
@@ -2999,7 +2999,7 @@ lbl_fn_803073C4_0000289C:
     stfs f0, 0x2c4(r1)
     stfs f3, 0x2c0(r1)
     stfs f4, 0x2c8(r1)
-    bl fn_8004D388
+    bl collision_queryGeometry
     cmpwi r3, 0x0
     beq lbl_fn_803073C4_00002B00
     addi r5, r1, 0x688

@@ -32,7 +32,7 @@ extern void str_skipWhitespace(void);
 extern void cam_destroyMsgHandle(void);
 extern void res_MsgHandle_constructor(void);
 extern void kpad_getClampData(void);
-extern void fn_803EC568(void);
+extern void task_createWorker(void);
 extern void fn_803EC69C(void);
 extern void fn_803EC758(void);
 extern void fn_803EC7A0(void);
@@ -435,7 +435,7 @@ asm void fn_80418198(void)
     mr r4, r28
     mr r5, r29
     mr r6, r30
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078DBA8@ha
     addi r3, r31, 0xf4
     addi r4, r4, lbl_8078DBA8@l
@@ -1466,7 +1466,7 @@ asm void fn_80419010(void)
     stw r29, 0x14(r1)
     stw r28, 0x10(r1)
     mr r28, r3
-    bl fn_803EC568
+    bl task_createWorker
     lis r4, lbl_8078DC88@ha
     addi r3, r28, 0xf4
     addi r4, r4, lbl_8078DC88@l

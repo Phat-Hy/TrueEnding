@@ -3,12 +3,12 @@
 
 /* External function declarations */
 extern void fn_8004D314(void);
-extern void fn_8004D388(void);
+extern void collision_queryGeometry(void);
 extern void fn_8004ECC0(void);
 extern void collision_testLineSegment(void);
 extern void mem_alloc(void);
 extern void atn_Anim_setLayerAnimation(void);
-extern void fn_80097D40(void);
+extern void atn_Anim_getLayerTrack(void);
 extern void atn_Anim_getDuration(void);
 extern void fn_80125474(void);
 extern void actor_setState(void);
@@ -641,7 +641,7 @@ lbl_fn_801426A4_000007FC:
     addi r6, r1, 0x120
     addi r8, r29, 0x5b8
     li r9, 0x0
-    bl fn_8004D388
+    bl collision_queryGeometry
     lwz r0, 0x54c(r29)
     mr r31, r3
     rlwinm r0, r0, 0, 22, 22
@@ -1872,7 +1872,7 @@ lbl_fn_801437D0_000019AC:
 lbl_fn_801437D0_000019D8:
     lwz r4, 0x488(r30)
     addi r3, r30, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_801437D0_000019F4
     bl atn_Anim_getDuration
@@ -1888,7 +1888,7 @@ lbl_fn_801437D0_000019F8:
 lbl_fn_801437D0_00001A0C:
     lwz r4, 0x48c(r30)
     addi r3, r30, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_801437D0_00001A28
     bl atn_Anim_getDuration
@@ -1904,7 +1904,7 @@ lbl_fn_801437D0_00001A2C:
 lbl_fn_801437D0_00001A40:
     lwz r4, 0x490(r30)
     addi r3, r30, 0xb0
-    bl fn_80097D40
+    bl atn_Anim_getLayerTrack
     cmpwi r3, 0x0
     beq lbl_fn_801437D0_00001A5C
     bl atn_Anim_getDuration
