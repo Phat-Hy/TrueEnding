@@ -125,7 +125,33 @@ Set-Location $root
 # three are fades that get slightly darker. Handover 1680 and the save (1 348 992 / 29 344 B)
 # are UNCHANGED. The escape hatch is TLS_NO_TEV_TEXCOORD=1 (value-tested): it reproduces the
 # superseded 5BB1538F... / 77BF4AB2... exactly.
-$EXPECTED_SHA = '22B1CE31D81A75BA6E0E18A2A68DB2F748F4BDCA83A05D0418525D85FCD7BBEE'
+#
+# RE-RECORDED IN 5c.46 AP-BR - **P4 LANDED: THIS GATE NOW MEASURES AURORA, NOT THE LAYER.** The script
+# sets TLS_AURORA=1 and TLS_AURORA_PUBLISH=1 ITSELF (right after the scrub loop, so an inherited value
+# cannot silently put the layer back in front of the camera). aurora feeds the frame's bytes at the top
+# of d3d11_present(), reads its own 640x448 EFB back and blits it into the 1280x720 back buffer BEFORE
+# the screenshot, so the two hashes below are aurora's picture. TLS_LAYER=1 beats TLS_AURORA and
+# reproduces the LAYER references exactly (B4646917... / 22B1CE31..., measured) - which is what makes
+# "the promotion is the only difference" a measurement rather than a claim.
+#
+# The WINDOWS did not move, only the hashes - AP-BP measured that before any code was written:
+#   guest 2800 (content): B4646917... luma 36.51 / 0.00 % -> 54CB46BD... luma 38.20 / 0.00 %
+#   guest 3500 (popup)  : 22B1CE31... luma 46.18 / 2.03 % -> A81F3E35... luma 89.89 / 1.85 %
+# Both sit inside 15..120 / < 10 % and < 150 / 0.5..10 % with margin (the popup frame is 28 luma
+# brighter under aurora - the composite-half difference AP-BJ measured, arriving as a gate number).
+#
+# THE BLOCKER AP-BQ RECORDED DID NOT REPRODUCE, and it is now instrumented instead of explained away.
+# A 3 520-frame promotion run died at probe copy #1 689 in that session with nothing in the log. On
+# this binary FOUR complete 3 520-frame promotion runs agree on both hashes
+# (logs_ap/br_a.log, br_b.log, bq_record_c.log, bq_record_d.log), every one at handover 1680, and the
+# DLL's own counters show the readback's FAILURE PATH WAS NEVER TAKEN: fail=0 over 3 086 calls, ~2.1
+# pumped frames per publish (2.06 rising to 2.82 across the run, identically in both instrumented
+# runs - deterministic, not load). Memory steps ONCE at ignition, not per publish: private bytes go
+# 2 068 MB -> 6 336 MB over the first ~490 publishes (aurora's first textures and pipelines) and then
+# grow ~40-60 KB per publish. So the old cause is unproven; if it returns, host_runner.c's
+# SetUnhandledExceptionFilter now prints the fatal exception code, the faulting module and the
+# publish/readback counters at the moment of death, instead of leaving a log that simply stops.
+$EXPECTED_SHA = 'A81F3E35D32232C6CAF2B6AE07DA34203637CD18CFC9F4351128CB91F95372B2'
 $SHOT_FRAME   = '3500'
 $INPUT        = '600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1612:A,1700-1712:A,1800-1812:A'
 
@@ -168,16 +194,18 @@ $INPUT        = '600-612:A,900-912:A,1200-1212:A,1440-1452:UP,1500-1512:A,1600-1
 # load. A gate reference is therefore only valid for a fixed INSTRUMENT as well as a fixed build.
 # The values below are recorded for THIS shot list and were each measured twice on an idle host;
 # a 3500-only run still produces C5447108... (kept here so the older reference is not lost).
+# 5c.46 AP-BR: re-recorded on the PROMOTED (aurora) renderer - see the AP-BR block above for the old
+# layer pair, the four runs that agree on this pair, and the escape hatch that reproduces the old one.
 $CONTENT_FRAME          = '2800'
-$EXPECTED_SHA_CONTENT   = 'B4646917A98EC7CE3036B583E7A8479D416F47B08FB484BE2AA316C911FE56B1'
+$EXPECTED_SHA_CONTENT   = '54CB46BD379983EDA45B2FBCF60392D8EBF42349109BAECCD33FF6C6744F2AA8'
 $CONTENT_LUMA_MIN       = 15.0
 $CONTENT_LUMA_MAX       = 120.0
 $CONTENT_BRIGHT_MAX     = 0.10
 # 5c.46 AP-AR: was $POPUP_LUMA_MIN = 200.0, i.e. "the popup frame is the white plateau". That frame
 # is gone (the plateau was the renderer defect), so the assertion is inverted into what it was
 # really guarding: the popup frame must NOT be a white-out, and must still show the band's text.
-$POPUP_LUMA_MAX         = 150.0   # measured 48.17 (full image) / 48.53 (this script's sampling)
-$POPUP_BRIGHT_MIN       = 0.005   # measured 2.02 % above luma 250 (the band and its prompt)
+$POPUP_LUMA_MAX         = 150.0   # measured 86.45 (full image) / 89.89 (this script's sampling)
+$POPUP_BRIGHT_MIN       = 0.005   # measured 1.74 % full / 1.85 % sampled above luma 250 (the band)
 $POPUP_BRIGHT_MAX       = 0.10    # a wash would be ~100 %; the plateau was 99.30 %
 
 # Mean luma of a binary P6 PPM, sampled every $Step-th pixel. PowerShell-native on purpose: the
@@ -249,14 +277,28 @@ foreach ($v in 'TLS_SCRIPT_FILTER','TLS_NO_SCRIPT_FILTER','TLS_FAKE_FADE','TLS_N
                'TLS_GLOW_ALL','TLS_INK_STATS','TLS_TEX_DUMP_FINAL','TLS_TEV_UNIFORM','TLS_TEV_TEXCOORD','TLS_NO_TEV_TEXCOORD',
                # 5c.46 AP-AZ: the per-bind texture log and the aurora live range/enable are instruments
                # too. TLS_TEX_CACHE_LOG cannot change the picture (it only prints, and its mean
-               # reduction is guarded by the same variable), and TLS_AURORA is inert on the default
-               # path - but a gate run must measure the default renderer, so neither may leak in.
+               # reduction is guarded by the same variable) - but a gate run must measure ONE known
+               # renderer, so none of these may leak in. 5c.46 AP-BR: TLS_AURORA / TLS_AURORA_PUBLISH
+               # are now set DELIBERATELY below (aurora is the promoted renderer), and they are still
+               # scrubbed first so that an inherited "0" cannot measure something else; TLS_LAYER is
+               # scrubbed for the same reason in the other direction - an inherited TLS_LAYER=1 would
+               # quietly measure the hand-rolled layer and every hash would miss.
                'TLS_TEX_CACHE_LOG','TLS_AURORA','TLS_AURORA_FROM','TLS_AURORA_TO','TLS_AURORA_FRAME',
                'TLS_AURORA_SHOTS','TLS_AURORA_NO_RESYNC','TLS_AURORA_TEX_BYTES','TLS_AURORA_STATS',
-               'TLS_AURORA_LEGACY_FEED','TLS_AURORA_DUMP_DRAW',
+               'TLS_AURORA_LEGACY_FEED','TLS_AURORA_DUMP_DRAW','TLS_AURORA_PUBLISH','TLS_LAYER',
+               # 5c.46 AP-BR: the long-run instruments print (they cannot change the picture), but a
+               # gate log is evidence and 3 500 sampler lines per attempt would bury the shots list.
+               'TLS_MEMWATCH',
                'TLS_AURORA_TEST_NO_DEPTH','TLS_AURORA_TEST_WHITE_TEV','TLS_AURORA_TEST_MAT_WHITE') {
     Remove-Item "Env:\$v" -ErrorAction SilentlyContinue
 }
+
+# 5c.46 AP-BR: THE PROMOTED RENDERER IS WHAT THIS GATE MEASURES. Set AFTER the scrub loop, on purpose:
+# the gate's references must be a property of this script, not of the shell that launched it.
+# TLS_LAYER=1 (the escape hatch) is scrubbed above, so the ONLY way to see the layer is to run the
+# runner directly with it - which is how the layer pair B4646917... / 22B1CE31... was re-verified.
+$env:TLS_AURORA         = '1'
+$env:TLS_AURORA_PUBLISH = '1'
 
 $env:TLS_INPUT_SCRIPT = $INPUT
 # TLS_SHOT_GUEST=1 IS REQUIRED (5c.46 AP-AO). Without it, `TLS_SHOT_FRAMES` matches the PRESENT

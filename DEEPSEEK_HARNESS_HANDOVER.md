@@ -2,27 +2,52 @@
 
 ## NEXT SESSION — START HERE
 
-> **§5c.46 AP-BQ (THE LAST SECTION): P4'S PRESENT PATH IS BUILT AND ITS PICTURE IS AURORA'S — BUT IT IS NOT
-> SHIPPABLE YET, SO THE GATE'S REFERENCES WERE NOT CHANGED.** `TLS_AURORA_PUBLISH=1` makes aurora render every
-> presented frame, and the shot at present 2 864 is aurora's frame 2800 to **0.01 mean RGB** (36.10/37.43/37.18 vs
-> the readback's 36.10/37.42/37.18, luma 37.00 both) and **4.74 mean |d| / 41.26 % > 8** against the layer's same
-> present, with **handover 1 680 unchanged** over 2 812 frames. Two defects were found and fixed on the way: the
-> blit must go **before `if (take_shot)`** (the screenshot runs *before* `d3d11_capture_efb_snapshot()`, so a blit
-> after it produced a shot byte-identical to the layer's — late, not inert), and the probe copy's destination is
-> now a **bounded 8-slot ring** instead of a 2 MB-per-frame counter that killed the process at published frame
-> ~2 100 with `0xC000001D`. **The blocker:** a 3 520-frame publishing run still dies mid-run (probe **#1 689**)
-> because `tls_aurora_live_readback()` pumps up to **24 empty aurora frames per publish** and its capture
-> resources do not survive thousands of them. So `EXPECTED_SHA` / `EXPECTED_SHA_CONTENT` are **unchanged**, the
-> promotion is **off by default**, and the gate **PASSes attempt 1 at the layer's references** on the new binary
-> (`414E81AA…`, `logs_ap/gate_bq.log`: handover 1 680, `B4646917…` 36.51, `22B1CE31…` 46.18, save 1 348 992 / 29 344).
+> **§5c.46 AP-BR (THE LAST SECTION): P4 IS SHIPPABLE — AURORA IS THE GATE'S RENDERER.** `tools/invariant.ps1`
+> now sets `TLS_AURORA=1` + `TLS_AURORA_PUBLISH=1` itself, its two references were re-recorded on aurora's
+> picture (content `54CB46BD…` luma **38.20 / 0.00 %**, popup `A81F3E35…` luma **89.89 / 1.85 %**; the
+> windows did not move), and it **PASSes attempt 1** at them (`logs_ap/gate_br2.log`: handover 1 680, save
+> 1 348 992 / 29 344, exit 0). Six full 3 520-frame promotion runs — two builds, two scripts — agree on both
+> hashes, and `TLS_LAYER=1` still reproduces the layer's `B4646917…` / `22B1CE31…` **exactly**, so the
+> promotion is the only difference between the two picture sets. `Play_TheLastStory.bat` defaults to aurora.
 >
-> **NEXT SESSION, IN THIS ORDER (AP-BQ §6).** (1) Make the per-frame readback cheap and stable — pump an empty
-> frame only when `AuroraReadbackGet` has not delivered, and release the capture resources per publish (fork
-> patch under `lib/gx/readback.cpp` if the API has no release path). (2) Re-run `logs_ap/run_publish_record.ps1`
-> **twice** at 3 520 frames and require the two pairs of SHAs to agree. (3) Only then write the two numbers into
-> `tools/invariant.ps1` — the luma/bright windows do **not** need to move (AP-BP: aurora is 39.31 / 0.00 % and
-> 87.53 / 2.17 %, both inside the existing bounds). (4) `TLS_LAYER=1` must reproduce `B4646917…` / `22B1CE31…`
-> exactly. (5) `Play_TheLastStory.bat` defaults to aurora and the gate PASSes attempt 1 at the new references.
+> **The AP-BQ blocker had nothing to do with the readback.** aurora's `fifo::write_data_grow()` — the
+> out-of-line *slow path*, meant to run only when the data does not fit — doubles the capacity
+> unconditionally; feeding a whole frame through it per present (and once more for the probe copy) doubled
+> the FIFO buffer on **every chunk**, so it asked for a **4 GiB realloc ~16 calls** after publishing began.
+> That single request is the whole AP-BQ mystery in three costumes: the realloc fails → `AURORA_ASSERT` →
+> `abort()` (`[aurora FATAL … failed to allocate 4294967295 bytes]`, gate attempts 2/3); it succeeds → the
+> process carries a 4 GiB block (private bytes 6 336 MB, now **2 231 MB**); or the failure surfaces as a
+> `std::terminate` inside the DLL (`0xC000001D` at `__gnu_cxx::__trap_terminate_handler`, gate attempt 1).
+> **Fork patch `0008-fifo-grow-only-when-needed.patch`** grows only when the write does not fit, and the
+> picture is byte-identical (the same two hashes before and after it). Measured after it: FIFO high-water
+> mark **128 KiB** at 500 publishes, largest single feed 93 530 B. The readback itself never failed —
+> **fail=0 over 3 086 calls**, ~2.1 pumped frames per publish (2.06 → 2.82, identically in both instrumented
+> runs), 3 086 captures armed / 0 rejected.
+>
+> **One open defect, instrumented rather than hidden.** A `std::terminate` inside the DLL was seen **once in
+> eight** post-patch runs (`bq_record_e`, publish 381) and did not recur in the seven after it, including the
+> six-run `logs_ap/hunt.ps1` sweep and the gate PASS. The DLL now installs the spike's `std::terminate` and
+> vectored-exception handlers (they only ever ran in the harness's `main()`), and `host_runner.c` installs
+> `SetUnhandledExceptionFilter`, which prints the fatal code, the faulting module and the
+> publish/readback/FIFO counters — so the next occurrence arrives with an address to resolve with
+> `tools/w64devkit/bin/addr2line.exe` (the DLL has DWARF) instead of a log that simply stops.
+>
+> **Start the next session with:** `git fetch origin` and merge `origin/track-a` if it moved (clean every
+> time so far; verify by rebuilding and confirming the runner hash, then
+> `git diff --stat origin/track-a..HEAD -- src/` empty), then `pwsh tools/invariant.ps1 -Log
+> logs_ap\gate_start.log` on an **idle** host. **PASS attempt 1 = handover 1 680**, content `54CB46BD…`
+> 38.20 / 0.00 %, popup `A81F3E35…` 89.89 / 1.85 %, save 1 348 992 / 29 344. If the handover is not 1 680 the
+> host is loaded and the run is not evidence. **One verification is still owed:** the PASS in
+> `logs_ap/gate_br2.log` was on the same runner but the DLL *before* its exception guards (§8); the shipped
+> DLL has only been exercised on a loaded host since (row 14 below, handover 840, content hash identical),
+> so its own attempt-1 PASS is the first thing the next idle session should take. **A loaded host moves the
+> popup frame too** (`F1004F50…`, luma 86.91, bright still 1.85 %) while the content frame stays exact —
+> do not re-record on one.
+>
+> **§5c.46 AP-BQ is now history** (kept as §AP-BQ at the end of this file): it built the present path and
+> recorded the candidate content reference, but shipped none of it because a 3 520-frame run died. §AP-BR
+> names that cause and lands the promotion; the two paragraphs after this one are still the state of the
+> renderer decision and P1/P3.
 >
 > **§5c.46 AP-BP (one step back): the P4 pre-flight** — aurora's picture lands inside both of the gate's windows
 > at both reference frames (content 39.31 / 0.00 %, popup 87.53 / 2.17 %, against the layer's 36.51 / 0.00 % and
@@ -38,10 +63,14 @@
 > (43.96 / 5.354) into a near-uniform field (56.02 / 0.675, 7.9x smoother), while aurora leaves 56.68 / 13.190
 > unchanged across the same draw. AP-BN §5 carries the argument and the Dolphin title-plate tiebreak.
 >
-> **State after this session.** Track A merged twice (`4f2e3cf` → `ccadf1e` → **`ebaa87c`**), clean, runner
-> byte-identical both times; `git diff --stat origin/track-a..HEAD -- src/` empty (**0 changes to `src/` by Track
-> B**). New tracked instruments: `shotdiff.py`, `p1_equality.py`, `p1_live_run.ps1`. Re-fetch Track A before the
-> next session — it commits several times an hour.
+> **State after this session.** Track A merged again (`ebaa87c` → **`c5b75f7`**, merge `2f5f5ee`), clean, and
+> the rebuilt runner was **byte-identical** (`414E81AA…`) before this session's own `recomp/` changes;
+> `git diff --stat origin/track-a..HEAD -- src/` empty (**0 changes to `src/` by Track B**). The shipped
+> binaries are runner **`145B9838BEBAD38F921923F297E0D60317C1E7AE8AF27E6DF42311CE00596516`** and
+> `libtls_aurora_live.dll` **`066106F6…`** (both moved by this session's instrumentation; the gate PASS
+> above is on exactly these). Re-fetch Track A before the next session — it commits several times an hour.
+> New tracked instruments this session: fork patch `0008`, `TLS_MEMWATCH=1` and the runner's
+> `SetUnhandledExceptionFilter`, and the DLL's `TLS_AURORA_STATS` counter line (see §AP-BR §9).
 >
 > **The AP-BM paragraphs below are measurement history** (kept for provenance: per-draw and per-copy numbers, and
 > the retraction that stopped a wrong direction twice). Read them only if a number above needs its source.
@@ -16925,3 +16954,151 @@ Aurora is **2.06 units brighter** at the content frame and **41.35** at the popu
 | 4 | blit moved before `if (take_shot)` | shot is aurora's: mean RGB (36.10, 37.43, 37.18) vs the readback's (36.10, 37.42, 37.18), luma 37.00 both; 4.74 mean \|d\| / 41.26 % > 8 against the layer's same present; candidate reference `54CB46BD…`, gate luma 38.20 |
 | 5 | 3 520-frame recording run (`bq_record_a`) | dies at probe **#1 689**; content shot written, popup shot **stale** (`22B1CE31…` = the layer's) — so no reference was recorded |
 | 6 | `pwsh tools/invariant.ps1 -Log logs_ap/gate_bq.log` on the new binary | **PASS attempt 1**: handover 1 680, content `B4646917…` 36.51, popup `22B1CE31…` 46.18, save 1 348 992 / 29 344 |
+
+---
+
+### 5c.46 AP-BR. **P4 IS SHIPPABLE: AURORA IS THE GATE'S RENDERER.** Six full 3 520-frame promotion runs (two with the long-run instruments, four plain) produce the **same two references** — content `54CB46BD…` 38.20 / 0.00 %, popup `A81F3E35…` 89.89 / 1.85 % — every one at **handover 1 680**, `TLS_LAYER=1` still reproduces `B4646917…` / `22B1CE31…` **exactly**, and the gate **PASSes attempt 1** at the new references (`logs_ap/gate_br2.log`, exit 0). **The AP-BQ blocker was not the readback at all**: it was aurora's FIFO buffer **doubling on every fed chunk**, which asked for a 4 GiB realloc within a dozen frames of publishing and then either failed the allocation (`aurora FATAL … failed to allocate 4294967295 bytes`, `std::abort`) or terminated inside the DLL (`[Crash] … 0xC000001D … DLL+0x3D2EE0` = `__gnu_cxx::__trap_terminate_handler`). Fix: fork patch **0008**, grow only when the write does not fit. The readback's own path never failed: **0 failures over 3 086 calls**, ~2.1 pumped frames per publish.
+
+**1. What was asked, and what the answer is.** AP-BQ §6 left five steps. All five are done, and the first one (make the per-frame readback survive a long run) closed differently than expected: the readback was already conditionally pumped and already released its capture resources, so there was nothing to fix in it — the death was upstream of it, in how a whole frame is *fed* to aurora.
+
+**2. The blocker, found by instrumenting instead of guessing — and it is one line of upstream code.**
+`aurora::gx::fifo::write_data_grow()` is the out-of-line slow path of the inline `write_data()`:
+it is meant to run only when the data does not fit, and it therefore computes
+`newCapacity = min(max(2*capacity, needed), UINT32_MAX)` **unconditionally**, reallocating on every call.
+The live path feeds a whole guest frame through it (once for the frame, once for the probe copy), and
+`sBufferSize` is reset to 0 by `drain()` between frames — so the `2*capacity` term doubled the buffer on
+**every fed chunk**, whatever its size. Measured with `TLS_AURORA_STATS=1` (new this session): the largest
+single feed is **20 751 B at publish 100 and 93 530 B at publish 300** — while the capacity walked
+64 KiB → 128 KiB → 256 KiB → … → 2 GiB, i.e. a **4 GiB request about 16 calls in**. Three outcomes were
+observed, all of them this one bug:
+
+| what the doubling produced | evidence |
+|---|---|
+| a failed 4 GiB realloc → `AURORA_ASSERT` → `abort()` (0xC0000409) | gate attempts 2 and 3: `[aurora FATAL aurora::gx::fifo] fifo::write_data: failed to allocate 4294967295 bytes`, guest frame ~450, probe copy #6 |
+| the 4 GiB succeeded → the process carries a 4 GiB block | private bytes 6 336 MB at publish 324 vs **2 231 MB after the fix** (same frame window) |
+| `std::terminate` inside the DLL → `0xC000001D` | `[Crash] FATAL exception 0xC000001D at …libtls_aurora_live.dll+0x3D2EE0` — resolved with `nm` + the PE image base to `__gnu_cxx::__trap_terminate_handler()` |
+
+The fix is `tools/aurora_spike/patches/0008-fifo-grow-only-when-needed.patch` (fork patch, applied by
+`build.ps1` in name order, DLL rebuilt): grow only when `needed > sBufferCapacity`, plus
+`fifo::buffer_capacity()` so the growth is a measured number. It is a **no-op for the normal path** —
+`write_data_grow` is only called when the data does not fit there — and the picture is unchanged
+(§4: the same two hashes before and after it). After the patch the FIFO high-water mark is **128 KiB** at
+500 publishes and the process is **~2.2 GB** instead of ~6.5 GB.
+
+**3. The readback's own numbers, which is what AP-BQ asked for.** `TLS_AURORA_STATS=1` now prints
+`readback calls / fail / pumps (per call) / captures / rejected / fifoCap` every 500 calls:
+
+| calls | 500 | 1 000 | 1 500 | 2 000 | 2 500 | 3 000 |
+|---|---|---|---|---|---|---|
+| failures | 0 | 0 | 0 | 0 | 0 | 0 |
+| pumps per call | 2.06 | 2.06 | 2.06 | 2.37 | 2.60 | 2.82 |
+
+**The failure path is never taken** (0 of 3 086) and every capture is accepted (3 086 armed, 0 rejected).
+The pump loop already pumps **only when `AuroraReadbackGet` has not delivered** — its `Get` is at the top of
+the iteration and a delivery ends the loop — so ~2 pumped frames per publish is aurora's delivery latency,
+not waste. The latency rises 2.06 → 2.82 across a run **identically in both instrumented runs**, i.e. it is
+a property of the scene's GPU load, not of host timing. Capture resources are released per publish already:
+`gfx::readback::gpu::acquire_buffer`/`release_buffer` pool at most 16 MiB (8 × the 1.1 MB staging bucket),
+`Job::~Job` releases the buffer, and the packet is replaced on every delivery (one `latest` per stream).
+
+**4. Determinism: six runs, two builds, one pair of references.**
+
+| run | script | build | content f2800 (present 2 864) | popup f3500 (present 3 564) | handover |
+|---|---|---|---|---|---|
+| `br_a` | `logs_ap/run_probe.ps1` (instruments on) | pre-0008 | `54CB46BD…` | `A81F3E35…` | 1 680 |
+| `br_b` | same | pre-0008 | `54CB46BD…` | `A81F3E35…` | 1 680 |
+| `bq_record_c` | `run_publish_record.ps1 -Tag c` | pre-0008 | `54CB46BD…` | `A81F3E35…` | 1 680 |
+| `bq_record_d` | `run_publish_record.ps1 -Tag d` | pre-0008 | `54CB46BD…` | `A81F3E35…` | 1 680 |
+| `bq_record_f` | `run_publish_record.ps1 -Tag f` | **with 0008** | `54CB46BD…` | `A81F3E35…` | 1 680 |
+| `hunt_1..3` | `logs_ap/hunt.ps1` | **with 0008** | `54CB46BD…` | `A81F3E35…` | 1 680 |
+
+Each is a full 3 520-frame run with the gate's own input script and shots; every one created the save
+(1 348 992 / 29 344). The patch changing nothing in the picture is itself the evidence that the FIFO fix
+touched allocation policy only.
+
+**5. The gate now measures aurora, and the windows did not move.** `tools/invariant.ps1` sets
+`TLS_AURORA=1` and `TLS_AURORA_PUBLISH=1` **after** its scrub loop (an inherited `TLS_AURORA=0` can no
+longer disable the promoted renderer, and the scrub list gained `TLS_LAYER` and `TLS_AURORA_PUBLISH` so an
+inherited `TLS_LAYER=1` cannot quietly measure the layer instead). Only the two hashes changed:
+
+| frame | layer reference | aurora reference | window | verdict |
+|---|---|---|---|---|
+| guest 2800 (content) | `B4646917…` luma 36.51 / 0.00 % | **`54CB46BD…` luma 38.20 / 0.00 %** | 15..120, < 10 % | inside |
+| guest 3500 (popup) | `22B1CE31…` luma 46.18 / 2.03 % | **`A81F3E35…` luma 89.89 / 1.85 %** | < 150, 0.5..10 % | inside |
+
+`logs_ap/gate_br2.log`: **PASS attempt 1**, handover 1 680, save 1 348 992 / 29 344, exit 0.
+
+**6. The escape hatch still reproduces the layer, pixel for pixel.** `logs_ap/run_escape.ps1` (the same
+3 520-frame run plus `TLS_LAYER=1`): content `B4646917A98EC7CE…` luma 36.51 / 0.00 % and popup
+`22B1CE31D81A75BA…` luma 46.18 / 2.03 % — the two references this gate used until today, unchanged
+through the merged Track A, the new runner and the FIFO patch. So the promotion is the only difference
+between the two picture sets, and the old references are one environment variable away rather than lost.
+
+**7. `Play_TheLastStory.bat` now defaults to aurora** (`set TLS_AURORA=1` + `TLS_AURORA_PUBLISH=1` before
+the launch, with `TLS_LAYER=1` documented as the way back to the hand-rolled layer). The runner still
+draws the layer every frame as the fallback: a failed readback or blit presents the layer's frame, never
+black (§AP-BQ 1).
+
+**8. What is NOT claimed, and the one open defect.** The AP-BQ mid-run death is **fixed with a named
+cause** (§2). A *different*, rarer death remains and is documented rather than hidden: a `std::terminate`
+inside the DLL that presents as `0xC000001D` at `__gnu_cxx::__trap_terminate_handler`, seen **3 times in
+~13 promotion runs** (`bq_record_e` publish 381, `hunt2_2` 834, `hunt3_1` 1571) and never reproducible on
+demand. What the diagnostics established, in the order they were added:
+
+1. `host_runner.c`'s `SetUnhandledExceptionFilter` printed the address:
+   `libtls_aurora_live.dll+0x3D2EE0`, which `nm` + the PE image base resolve to
+   `__gnu_cxx::__trap_terminate_handler` — a `std::terminate`, not an aurora assert (those log
+   `aurora FATAL` first).
+2. The spike's `std::terminate` handler — installed in `tls_aurora_live_init` this session; it used to be
+   installed only in the harness's `main()` — printed the stack: the outermost frames are in the DLL and
+   the frame under `std::terminate` is `__cxa_call_unexpected`, i.e. **an exception escaped a `noexcept`
+   function**, so the frames that threw are already unwound before anything can print them.
+3. A throw-site vectored handler (`TLS_AURORA_THROWLOG=1`, kept but not installed by default) showed what
+   *does* throw in a normal run: `CxxThrowException` under `D3D11CoreCreateLayeredDevice`, called from the
+   runner's own `gfx_d3d11.c` — d3d11.dll's internal exception-based control flow, which it catches
+   itself. First-chance events, not the fatal one.
+4. Widening that probe to 40 stacks **cost a run its reference** (`hunt5_1` popup `F1004F50`, luma 86.91
+   instead of `A81F3E35`, 89.89): serializing symbolized stacks perturbs the present timing the picture is
+   anchored to. It is therefore opt-in only, and that run is recorded as the reason.
+
+Two guards were added on the way and are shipped, because they are correct regardless of the cause: the
+three C ABI entry points (`frame`, `readback`, `init`) catch, count (`exceptions=` in the stats line),
+print `what()`, and make the host present the layer's frame for that present; and fork patch **0009**
+wraps aurora's render-worker work items (`lib/gfx/render_worker.cpp`) in `try`/`catch`, which is where an
+escaping exception would otherwise take the process down silently. Neither is a proof: a `noexcept`
+boundary inside aurora still terminates before either catch can see it, so **the next occurrence needs
+step 1-3 repeated with `TLS_AURORA_THROWLOG=1` limited to the last few throws before the crash** (or a
+debugger attached). Also not claimed: nothing here is a statement about the title/menu frames under aurora
+beyond AP-BC's numbers; the FIFO and render-worker patches are fork patches like 0001-0007 and are not
+upstreamed; and a run on a loaded host is still void — this session recorded one (handover 840 / 1 140,
+different pictures) because another game was running on the machine.
+
+**9. Changes.** `recomp/host_runner.c` (+122: the fatal-exception filter, the `TLS_MEMWATCH=1` sampler and
+the per-frame counter), `recomp/aurora_live_host.c` / `.h` (+52: publish counters, the DLL's readback/FIFO
+counter passthrough), `tools/aurora_spike/aurora_live.cpp` (+82: `feed_fifo`, the counters, the stats line,
+the terminate/VEH handlers), `tools/aurora_spike/aurora_replay.cpp` (+3: the `buffer_capacity()`
+declaration), `tools/aurora_spike/patches/0008-fifo-grow-only-when-needed.patch` (new),
+`tools/aurora_spike/patches/0009-render-worker-exception-guard.patch` (new),
+`tools/invariant.ps1` (the promoted renderer, the two new references, the two new scrub entries),
+`Play_TheLastStory.bat` (aurora default), this file. **0 changes to `src/`**
+(`git diff --stat origin/track-a..HEAD -- src/` empty); build green (**472 objects, 0 chunks recompiled**);
+the DLL rebuilt from this repo's `tools/aurora_spike`. The DLL's C ABI entry points now also catch, and
+that is a *behaviour* change in one direction only: a frame that throws presents the layer's frame instead
+of killing the process.
+
+| # | what | result |
+|---|---|---|
+| 1 | `pwsh tools/invariant.ps1 -Log logs_ap/gate_start.log` on the merged tree, idle host | **PASS attempt 1**: handover 1 680, `B4646917…` 36.51, `22B1CE31…` 46.18, save 1 348 992 / 29 344 — the layer baseline the session started from |
+| 2 | 3 520-frame promotion, instrumented (`br_a`, `br_b`) | completed, **fail=0 / 3 086 calls**, pumps 2.06 → 2.82 both runs, private 6 336 → 6 540 MB, both refs `54CB46BD…` / `A81F3E35…` |
+| 3 | `run_publish_record.ps1 -Tag c` / `-Tag d` | the pair again, handover 1 680 both, save exact — AP-BQ §6 step 2 satisfied |
+| 4 | gate on the promoted renderer, pre-0008 | attempt 1 **died** (`0xC000001D` at `__trap_terminate_handler`, publish 1 903); attempts 2/3 died at the 4 GiB FIFO assert → the two failure modes, one cause |
+| 5 | FIFO high-water measurement | max feed 20 751 / 93 530 B; capacity had doubled to 2 GiB by ~call 16 — the doubling, measured |
+| 6 | fork patch 0008 + DLL rebuild | FIFO capacity **128 KiB** at 500 publishes, process **2 231 MB** (was 6 336 MB), no assert |
+| 7 | `bq_record_f`, `hunt_1..3` after the patch | the same pair, same handover — the fix is content-neutral |
+| 8 | `logs_ap/run_escape.ps1` (`TLS_LAYER=1`) | `B4646917…` 36.51 / `22B1CE31…` 46.18, handover 1 680 — escape hatch exact |
+| 9 | `pwsh tools/invariant.ps1 -Log logs_ap/gate_br2.log` | **PASS attempt 1**: handover 1 680, content `54CB46BD…` 38.20 / 0.00 %, popup `A81F3E35…` 89.89 / 1.85 %, save 1 348 992 / 29 344, exit 0 |
+| 10 | `logs_ap/hunt.ps1` (six runs, patch 0008) | 5 clean (`hunt_1..3` on the same pair, handover 1 680) and **1 terminate** (`hunt_4`, publish 1 967, stack captured: `std::terminate` under a DLL frame, `_chkstk` below) |
+| 11 | terminate trace resolved (`nm` + image base) | `__gnu_cxx::__trap_terminate_handler`, and under it `__cxa_call_unexpected` — an exception from a `noexcept` function, i.e. a different defect from §2's |
+| 12 | throw-site probe (`TLS_AURORA_THROWLOG=1`) | what throws normally is d3d11.dll's own control flow, called from `gfx_d3d11.c`; widening the probe to 40 stacks perturbed timing and moved the popup reference (`hunt5_1` `F1004F50` / 86.91), so it is opt-in |
+| 13 | gates attempted while another game held the host | attempts at handover **840 / 1 140** with unrelated pictures — recorded here as the worked example of the "a loaded host is void, not a regression" rule |
+| 14 | `run_publish_record.ps1 -Tag g` on the **shipped** runner + DLL, still loaded (`fifa15` running) | void (handover **840**), but it reproduced the content reference exactly (`54CB46BD…` 38.20 / 0.00 %) and the popup showed the alternate `F1004F50…` 86.91 — i.e. the exception-guard DLL still draws aurora's content frame identically, and the popup frame is the one that moves when the present timing does |

@@ -1,0 +1,77 @@
+diff --git a/lib/gfx/render_worker.cpp b/lib/gfx/render_worker.cpp
+index 85783b6..53222ca 100644
+--- a/lib/gfx/render_worker.cpp
++++ b/lib/gfx/render_worker.cpp
+@@ -5,6 +5,8 @@
+ #include <algorithm>
+ #include <atomic>
+ #include <chrono>
++#include <cstdio>
++#include <exception>
+ 
+ #include <tracy/Tracy.hpp>
+ 
+@@ -13,6 +15,34 @@ namespace {
+ constexpr size_t QueueCapacity = 256;
+ constexpr auto IdlePumpInterval = std::chrono::milliseconds{1};
+ 
++/* SPIKE PATCH 0009 (5c.46 AP-BR): A WORK ITEM THAT THROWS MUST NOT TERMINATE THE PROCESS.
++ *
++ * `worker_main` is a std::thread entry point, so an exception escaping `item->work()` unwinds out of
++ * the thread function and the runtime calls std::terminate - no log line, no handler, and the process
++ * dies with 0xC000001D inside libstdc++'s trap handler. That is the crash this session measured:
++ *   [replay] std::terminate: 27 frame(s); #06 _chkstk + 0x9f ... #11 dll+0x3c323f
++ * i.e. a DLL function with a large stack frame threw while encoding an item, and once in ~8 runs of
++ * the live promotion it took the process with it (logs_ap/hunt_4.err, hunt2_2.err).
++ *
++ * Catching it here is the right layer: an item is one frame's op, the submit has already taken what
++ * that frame recorded, and a readback job whose encode was aborted simply never resolves - which the
++ * live host already handles by presenting the layer's frame for that present (AP-BQ 1). stderr rather
++ * than the logger: this is the last-resort path. */
++void run_work(const WorkCallback& work) noexcept {
++  if (!work) {
++    return;
++  }
++  try {
++    work();
++  } catch (const std::exception& e) {
++    std::fprintf(stderr, "[aurora] render worker: work item threw: %s\n", e.what());
++    std::fflush(stderr);
++  } catch (...) {
++    std::fprintf(stderr, "[aurora] render worker: work item threw an unknown exception\n");
++    std::fflush(stderr);
++  }
++}
++
+ BoundedQueue g_queue{QueueCapacity};
+ thread::Thread g_thread;
+ std::atomic_bool g_running = false;
+@@ -46,7 +76,7 @@ void worker_main(std::stop_token token) {
+ 
+     if (item->work) {
+       ZoneScopedN("QueueItem work");
+-      item->work();
++      run_work(item->work);
+     }
+     complete_sync(item->sync);
+     g_pendingItems.fetch_sub(1, std::memory_order_acq_rel);
+@@ -61,17 +91,13 @@ void worker_main(std::stop_token token) {
+ void enqueue(QueueItem item) {
+   ZoneScoped;
+   if (is_worker_thread()) {
+-    if (item.work) {
+-      item.work();
+-    }
++    run_work(item.work);
+     complete_sync(item.sync);
+     return;
+   }
+ 
+   if (!g_running.load(std::memory_order_acquire)) {
+-    if (item.work) {
+-      item.work();
+-    }
++    run_work(item.work);
+     complete_sync(item.sync);
+     return;
+   }

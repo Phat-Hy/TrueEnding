@@ -24,6 +24,7 @@ typedef void (*tls_aurora_frame_fn)(const void*, uint32_t, int, int*, int*);
 typedef int (*tls_aurora_readback_fn)(uint8_t*, uint32_t, uint32_t*, uint32_t*);
 typedef void (*tls_aurora_shutdown_fn)(void);
 typedef int (*tls_aurora_map_fn)(const void*, uint32_t, const void*, uint32_t);
+typedef void (*tls_aurora_stats_fn)(uint64_t*, uint64_t*, uint64_t*, uint64_t*, uint64_t*, uint32_t*);
 
 static HMODULE s_mod;
 static tls_aurora_init_fn s_init;
@@ -31,6 +32,7 @@ static tls_aurora_frame_fn s_frame;
 static tls_aurora_readback_fn s_readback;
 static tls_aurora_shutdown_fn s_shutdown;
 static tls_aurora_map_fn s_map;
+static tls_aurora_stats_fn s_stats;
 
 /* The byte buffer for one guest frame. Grown on demand: a full frame of this game is ~1.3 MB and
  * the capture format's own frames are 0.6-1.3 MB, so a 4 MB start avoids a realloc per frame. */
@@ -116,6 +118,7 @@ static void load(void) {
     s_readback = (tls_aurora_readback_fn)(void*)GetProcAddress(s_mod, "tls_aurora_live_readback");
     s_shutdown = (tls_aurora_shutdown_fn)(void*)GetProcAddress(s_mod, "tls_aurora_live_shutdown");
     s_map = (tls_aurora_map_fn)(void*)GetProcAddress(s_mod, "tls_aurora_live_map");
+    s_stats = (tls_aurora_stats_fn)(void*)GetProcAddress(s_mod, "tls_aurora_live_stats");
     if (!s_init || !s_frame || !s_readback) {
         printf("[AuroraLive] %s is missing the live ABI\n", dll);
         fflush(stdout);
@@ -321,6 +324,43 @@ static size_t s_pub_cap;
 static uint32_t s_pub_w, s_pub_h;
 static int s_pub_ok;
 static unsigned long s_pub_frames, s_pub_fail;
+
+/* Observable counters for the long-run question (5c.46 AP-BR). The publish path is deliberately
+ * silent (it runs 3 500 times), so the leak hunt needs a way to ask "how many publishes, how many
+ * of them fell back to the layer" from outside without parsing a log. */
+void tls_aurora_publish_stats(unsigned long* frames, unsigned long* fails) {
+    if (frames) *frames = s_pub_frames;
+    if (fails) *fails = s_pub_fail;
+}
+
+/* The DLL's own long-run counters (5c.46 AP-BR). "readback calls / failures / pumped empty frames
+ * / captures issued / captures rejected" is what separates a readback that is falling back from one
+ * that is merely slow - the two look identical from the host. */
+void tls_aurora_live_probe_stats(unsigned long long* calls, unsigned long long* fails,
+                                 unsigned long long* pumps, unsigned long long* captures,
+                                 unsigned long long* rejected, unsigned long long* fifo_cap) {
+#ifdef _WIN32
+    if (calls) *calls = 0;
+    if (fails) *fails = 0;
+    if (pumps) *pumps = 0;
+    if (captures) *captures = 0;
+    if (rejected) *rejected = 0;
+    if (fifo_cap) *fifo_cap = 0;
+    if (s_stats) {
+        uint64_t c = 0, f = 0, p = 0, cap = 0, rej = 0;
+        uint32_t fifo = 0;
+        s_stats(&c, &f, &p, &cap, &rej, &fifo);
+        if (calls) *calls = c;
+        if (fails) *fails = f;
+        if (pumps) *pumps = p;
+        if (captures) *captures = cap;
+        if (rejected) *rejected = rej;
+        if (fifo_cap) *fifo_cap = fifo;
+    }
+#else
+    (void)calls; (void)fails; (void)pumps; (void)captures; (void)rejected; (void)fifo_cap;
+#endif
+}
 
 const uint8_t* tls_aurora_published(uint32_t* w, uint32_t* h) {
     if (!s_pub_ok) return NULL;

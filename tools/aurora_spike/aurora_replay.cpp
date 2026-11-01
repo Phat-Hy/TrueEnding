@@ -39,6 +39,9 @@
  * in lib/dolphin/gx. write_data_grow() is its out-of-line append path. */
 namespace aurora::gx::fifo {
 void write_data_grow(const void* data, uint32_t length);
+/* SPIKE PATCH 0008 (5c.46 AP-BR): the buffer's current capacity, so a whole-frame feed can report
+ * (and prove it no longer doubles the buffer per frame). */
+uint32_t buffer_capacity() noexcept;
 }
 
 #define WIN32_LEAN_AND_MEAN

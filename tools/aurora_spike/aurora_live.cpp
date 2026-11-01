@@ -69,6 +69,63 @@ std::vector<uint8_t> g_probePayload;
 uint32_t g_probeKey = 2;
 uint32_t g_probeSeq = 0;
 
+/* LONG-RUN COUNTERS (5c.46 AP-BR). The 3 520-frame promotion dies mid-run with no message, so the
+ * two questions that decide where to look are "is the readback's failure path being taken" (it pumps
+ * up to 24 empty aurora frames per publish) and "how many captures were issued". Counted here,
+ * printed behind TLS_AURORA_STATS every 500 readbacks - a per-frame line would itself be 3 500 lines
+ * and could change what is being measured. */
+uint64_t g_readbackCalls = 0;
+uint64_t g_readbackFail = 0;
+uint64_t g_readbackPumps = 0;
+uint64_t g_probeArmed = 0;
+uint64_t g_captureRejected = 0;
+bool g_statsOn = false;
+uint32_t g_fifoCapMax = 0;
+uint32_t g_feedMax = 0;
+bool g_frameFailed = false;
+uint64_t g_frameExceptions = 0;
+
+/* ================================================================================================
+ * FEEDING A WHOLE FRAME MUST NOT DOUBLE THE FIFO BUFFER (5c.46 AP-BR).
+ *
+ * `aurora::gx::fifo::write_data_grow()` is the SLOW PATH of the inline `write_data()`: it was meant
+ * to run only when the data does not fit, and upstream therefore doubles the capacity
+ * unconditionally (`newCapacity = min(max(2*capacity, needed), UINT32_MAX)`). A whole-frame feed is
+ * the opposite shape - ONE call per frame, with `sBufferSize` reset to 0 by drain() in between - so
+ * the doubling happened on EVERY fed frame (and again for the probe copy command): the FIFO asked
+ * for 1.6 MB -> 3.2 -> 6.4 -> ... -> 2 GiB -> a 4 GiB realloc within a dozen frames of publishing
+ * starting, and when that request failed aurora asserted
+ *     [aurora FATAL aurora::gx::fifo] fifo::write_data: failed to allocate 4294967295 bytes
+ * and the process died with 0xC000001D (measured: gate attempts 2 and 3, frame ~450, probe copy #6).
+ *
+ * The fix is the fork patch `0008-fifo-grow-only-when-needed.patch`: write_data_grow grows only when
+ * the write does not fit. `g_fifoCapMax` records the high-water mark from `buffer_capacity()`, so
+ * the growth is now a measured number in the stats line instead of an inference.
+ * ============================================================================== */
+static void feed_fifo(const void* data, uint32_t length) {
+  aurora::gx::fifo::write_data_grow(data, length);
+  const uint32_t capacity = aurora::gx::fifo::buffer_capacity();
+  if (capacity > g_fifoCapMax) g_fifoCapMax = capacity;
+  if (length > g_feedMax) g_feedMax = length;
+}
+
+/* THROW-SITE PROBE - KEPT BUT NOT INSTALLED (5c.46 AP-BR §8). A terminate that follows
+ * __cxa_call_unexpected means an exception escaped a `noexcept` function, and by then the frames that
+ * threw are unwound. This handler printed the throwing stack at the C++ throw code (0xE06D7363) and it
+ * works - `logs_ap/hunt4_1.err` shows CxxThrowException under D3D11CoreCreateLayeredDevice called from
+ * the runner's own gfx_d3d11.c, i.e. d3d11.dll's internal exception-based control flow, not the fatal
+ * throw. Widening the window to 40 stacks cost a run its reference: hunt5_1 produced popup F1004F50
+ * (luma 86.91) instead of A81F3E35 (89.89), because serializing 40 symbolized stacks perturbs the
+ * frame timing the picture is anchored to. It is therefore registered ONLY under TLS_AURORA_THROWLOG=1:
+ * a diagnostic that has to be switched on knowingly, never part of a gate run. */
+static volatile long g_throwsSeen = 0;
+static LONG WINAPI tls_throw_veh(EXCEPTION_POINTERS* info) {
+  if (info->ExceptionRecord->ExceptionCode == 0xE06D7363) {
+    if (InterlockedIncrement(&g_throwsSeen) <= 40) print_stack("C++ throw");
+  }
+  return EXCEPTION_CONTINUE_SEARCH;
+}
+
 }  // namespace
 
 extern "C" {
@@ -79,8 +136,18 @@ extern "C" {
 #define TLS_LIVE_EXPORT __attribute__((visibility("default")))
 #endif
 
-TLS_LIVE_EXPORT int tls_aurora_live_init(uint32_t fb_w, uint32_t fb_h) {
+static int init_impl(uint32_t fb_w, uint32_t fb_h) {
   if (g_liveInit) return 1;
+  g_statsOn = std::getenv("TLS_AURORA_STATS") != nullptr;
+  /* THE SHIPPED PATH NEEDS THE SPIKE'S CRASH DIAGNOSTICS (5c.46 AP-BR). aurora_replay.cpp installs a
+   * std::terminate handler and a vectored exception handler in its main(); inside the runner there is
+   * no main, so a terminate in this DLL was SILENT - the gate saw only
+   *   [Crash] FATAL exception 0xC000001D at libtls_aurora_live.dll+0x3D2EE0
+   * which resolves to __gnu_cxx::__trap_terminate_handler() and says nothing about who threw.
+   * Installing them here turns that into a symbolized stack on stderr. */
+  std::set_terminate(terminate_handler);
+  if (std::getenv("TLS_AURORA_THROWLOG") != nullptr) AddVectoredExceptionHandler(1, tls_throw_veh);
+  AddVectoredExceptionHandler(2, veh_handler);
   AuroraConfig config{};
   config.appName = "TLS aurora live";
   config.logCallback = &log_callback;
@@ -133,6 +200,22 @@ TLS_LIVE_EXPORT int tls_aurora_live_init(uint32_t fb_w, uint32_t fb_h) {
   g_liveRequested = false;
   g_liveInit = true;
   return 1;
+}
+
+/* The init body can throw too (filesystem, AuroraInfo, GXInit) - see the C ABI note below the frame
+ * entry point: an exception crossing into the C host is a terminate, and a failed init must simply
+ * leave `tls_aurora_live_on` at 0 so the runner keeps its hand-rolled layer. */
+TLS_LIVE_EXPORT int tls_aurora_live_init(uint32_t fb_w, uint32_t fb_h) {
+  try {
+    return init_impl(fb_w, fb_h);
+  } catch (const std::exception& e) {
+    std::printf("[AuroraLive] EXCEPTION in init: %s - the layer stays the renderer\n", e.what());
+    std::fflush(stdout);
+  } catch (...) {
+    std::printf("[AuroraLive] EXCEPTION in init: unknown type - the layer stays the renderer\n");
+    std::fflush(stdout);
+  }
+  return 0;
 }
 
 /* Map the runner's guest memory at the GUEST'S OWN ADDRESSES.
@@ -206,8 +289,8 @@ TLS_LIVE_EXPORT int tls_aurora_live_map(const void* mem1, uint32_t mem1_size, co
  * already inlined); `want_readback` asks for the EFB probe copy to be taken after this frame's
  * draws (5c.46 AP-BI: it is a per-frame request, not "the last frame", so the host can ask for a
  * readback at SEVERAL consecutive guest frames in one launch - the alignment matrix). */
-TLS_LIVE_EXPORT void tls_aurora_live_frame(const void* fifo, uint32_t len, int want_readback,
-                                           int* draws_out, int* rewritten_out) {
+static void frame_impl(const void* fifo, uint32_t len, int want_readback, int* draws_out,
+                       int* rewritten_out) {
   if (!g_liveInit) return;
   /* The planes are a snapshot taken at tls_aurora_live_map(); make them live before this frame is
    * decoded, or every texture the guest wrote since is invisible (see THE SNAPSHOT PROBLEM). */
@@ -229,8 +312,7 @@ TLS_LIVE_EXPORT void tls_aurora_live_frame(const void* fifo, uint32_t len, int w
       std::printf("[AuroraLive] adapter failed: %s\n", err.c_str());
       std::fflush(stdout);
     } else {
-      aurora::gx::fifo::write_data_grow(g_liveRewritten.data(),
-                                        static_cast<uint32_t>(g_liveRewritten.size()));
+      feed_fifo(g_liveRewritten.data(), static_cast<uint32_t>(g_liveRewritten.size()));
       if (draws_out) *draws_out = static_cast<int>(g_draws - drawsBefore);
       if (rewritten_out) *rewritten_out = static_cast<int>(copies);
       if (consumed != len) std::printf("[AuroraLive] adapter consumed %u of %u bytes\n", consumed, len);
@@ -268,14 +350,15 @@ TLS_LIVE_EXPORT void tls_aurora_live_frame(const void* fifo, uint32_t len, int w
       g_probeCopyCmd.push_back(0x61);
       append_u32(g_probeCopyCmd, (uint32_t(0x52) << 24) | (exec & 0xFFFFFFu));
     }
-    aurora::gx::fifo::write_data_grow(g_probeCopyCmd.data(),
-                                      static_cast<uint32_t>(g_probeCopyCmd.size()));
+    feed_fifo(g_probeCopyCmd.data(), static_cast<uint32_t>(g_probeCopyCmd.size()));
     const uint32_t key = dst;
     const AuroraReadbackCopySrc src{key, reinterpret_cast<const void*>(static_cast<uintptr_t>(dst))};
     g_probeKey = key;
     g_liveW = kProbeCopyW;
     g_liveH = kProbeCopyH;
     g_liveRequested = AuroraReadbackCaptureCopies(g_liveStream, &src, 1) == GX_TRUE;
+    ++g_probeArmed;
+    if (!g_liveRequested) ++g_captureRejected;
     std::printf("[AuroraLive] probe copy #%u armed: %ux%u RGBA8 -> dst/key 0x%08X, capture %s\n",
                 seq, kProbeCopyW, kProbeCopyH, key, g_liveRequested ? "accepted" : "REJECTED");
     std::fflush(stdout);
@@ -293,12 +376,62 @@ TLS_LIVE_EXPORT void tls_aurora_live_frame(const void* fifo, uint32_t len, int w
   std::fflush(stdout);
 }
 
+/* ================================================================================================
+ * THE C ABI MUST NOT LET AN EXCEPTION THROUGH (5c.46 AP-BR §8).
+ *
+ * The runner is C. A C++ exception that unwinds out of one of these exported functions crosses a
+ * frame with no unwind tables and no handler, so the runtime calls std::terminate - which is exactly
+ * the `0xC000001D at __gnu_cxx::__trap_terminate_handler` this session observed once in eight runs
+ * (`logs_ap/hunt_4.err` carries the stack: `std::terminate` under a DLL frame whose return address
+ * is `_chkstk`, i.e. a large-stack-frame function that threw). The cause inside aurora is still
+ * unproven - a length_error/bad_alloc from guest-driven data is the leading candidate - but the
+ * CONTRACT does not depend on knowing it: a frame that throws is a frame aurora cannot draw, and
+ * this project already has a correct answer for that (present the layer's frame, AP-BQ §1).
+ *
+ * So the exported entry points catch, count, print what() once, and tell the host to fall back for
+ * that frame. `g_frameFailed` is what makes the fallback honest: tls_aurora_live_readback returns 0
+ * for a frame that threw, so the present path uses the layer's picture instead of a half-fed aurora
+ * frame. The counters are in the same stats line as the readback's.
+ * ============================================================================== */
+TLS_LIVE_EXPORT void tls_aurora_live_frame(const void* fifo, uint32_t len, int want_readback,
+                                           int* draws_out, int* rewritten_out) {
+  if (!g_liveInit) return;
+  g_frameFailed = false;
+  try {
+    frame_impl(fifo, len, want_readback, draws_out, rewritten_out);
+  } catch (const std::exception& e) {
+    g_frameFailed = true;
+    ++g_frameExceptions;
+    std::printf("[AuroraLive] EXCEPTION in frame (publish %llu): %s - presenting the layer's frame\n",
+                (unsigned long long)g_probeArmed, e.what());
+    std::fflush(stdout);
+  } catch (...) {
+    g_frameFailed = true;
+    ++g_frameExceptions;
+    std::printf("[AuroraLive] EXCEPTION in frame (publish %llu): unknown type - presenting the layer's frame\n",
+                (unsigned long long)g_probeArmed);
+    std::fflush(stdout);
+  }
+}
+
 /* Pump empty frames until the capture lands, then copy RGBA8 into `rgba`. Returns the number of
  * bytes written, or 0 if it never arrived. */
-TLS_LIVE_EXPORT int tls_aurora_live_readback(uint8_t* rgba, uint32_t cap, uint32_t* w, uint32_t* h) {
+static int readback_impl(uint8_t* rgba, uint32_t cap, uint32_t* w, uint32_t* h) {
   if (!g_liveInit) return 0;
   const size_t need = static_cast<size_t>(kProbeCopyW) * kProbeCopyH * 4u;
   if (g_probePayload.size() < need) g_probePayload.assign(need, 0);
+  ++g_readbackCalls;
+  if (g_statsOn && (g_readbackCalls % 500) == 0) {
+    std::printf("[AuroraLive] stats: readback calls=%llu fail=%llu pumps=%llu (%.2f/call) captures=%llu rejected=%llu exceptions=%llu fifoCap=%u (%.2f MB) maxFeed=%u\n",
+                (unsigned long long)g_readbackCalls, (unsigned long long)g_readbackFail,
+                (unsigned long long)g_readbackPumps,
+                static_cast<double>(g_readbackPumps) / static_cast<double>(g_readbackCalls),
+                (unsigned long long)g_probeArmed, (unsigned long long)g_captureRejected,
+                (unsigned long long)g_frameExceptions,
+                g_fifoCapMax, static_cast<double>(g_fifoCapMax) / (1024.0 * 1024.0), g_feedMax);
+    std::fflush(stdout);
+  }
+  uint32_t pumped = 0;
   for (int i = 0; i < 24; ++i) {
     if (g_liveRequested) {
       AuroraReadbackDest dest{g_probeKey, g_probePayload.data(),
@@ -325,20 +458,60 @@ TLS_LIVE_EXPORT int tls_aurora_live_readback(uint8_t* rgba, uint32_t cap, uint32
         if (h) *h = kProbeCopyH;
         /* Consumed: the next request must issue its own capture (5c.46 AP-BI). */
         g_liveRequested = GX_FALSE;
+        g_readbackPumps += pumped;
         return static_cast<int>(need);
       }
     }
     if (!aurora_begin_frame()) break;
     aurora_end_frame();
+    ++pumped;
   }
+  g_readbackPumps += pumped;
   g_liveRequested = GX_FALSE;
+  ++g_readbackFail;
   return 0;
 }
 
-TLS_LIVE_EXPORT void tls_aurora_live_shutdown(void) {
-  if (!g_liveInit) return;
+TLS_LIVE_EXPORT int tls_aurora_live_readback(uint8_t* rgba, uint32_t cap, uint32_t* w, uint32_t* h) {
+  /* A frame that threw must not present a half-fed aurora picture (see the C ABI note above). */
+  if (g_frameFailed) {
+    if (w) *w = 0;
+    if (h) *h = 0;
+    return 0;
+  }
+  try {
+    return readback_impl(rgba, cap, w, h);
+  } catch (const std::exception& e) {
+    ++g_frameExceptions;
+    g_frameFailed = true;
+    std::printf("[AuroraLive] EXCEPTION in readback: %s - presenting the layer's frame\n", e.what());
+    std::fflush(stdout);
+  } catch (...) {
+    ++g_frameExceptions;
+    g_frameFailed = true;
+    std::printf("[AuroraLive] EXCEPTION in readback: unknown type - presenting the layer's frame\n");
+    std::fflush(stdout);
+  }
+  g_liveRequested = GX_FALSE;
+  ++g_readbackFail;
+  return 0;
+}
+
+TLS_LIVE_EXPORT void tls_aurora_live_shutdown(void) {  if (!g_liveInit) return;
   aurora_shutdown();
   g_liveInit = false;
+}
+
+/* Counters for the runner's memory sampler (5c.46 AP-BR): the leak hunt needs the pump count and
+ * the failure count at the moment of death, not a log line per frame. */
+TLS_LIVE_EXPORT void tls_aurora_live_stats(uint64_t* calls, uint64_t* fails, uint64_t* pumps,
+                                           uint64_t* captures, uint64_t* rejected, uint32_t* fifoCap) {
+  if (calls) *calls = g_readbackCalls;
+  if (fails) *fails = g_readbackFail;
+  if (pumps) *pumps = g_readbackPumps;
+  if (captures) *captures = g_probeArmed;
+  if (rejected) *rejected = g_captureRejected;
+  if (fifoCap) *fifoCap = g_fifoCapMax;
 }
 
 }  // extern "C"

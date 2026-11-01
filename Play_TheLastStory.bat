@@ -4,7 +4,7 @@ cd /d "%~dp0"
 
 echo ========================================================
 echo   Launching The Last Story (TrueEnding PC Port)
-echo   Renderer: Direct3D 11 Hardware Accelerated
+echo   Renderer: AURORA (WebGPU/D3D12) - layer fallback per frame
 echo ========================================================
 echo Controls:
 echo   [Controller] Standard Xbox / XInput controllers supported
@@ -45,5 +45,19 @@ REM gate's content frame: the layer-vs-aurora difference halves (mean |d| 11.20 
 REM The former TLS_TEV_TEXCOORD=1 is a no-op now; TLS_NO_TEV_TEXCOORD=1 restores the old
 REM "every stage samples coordinate 0" picture if a scene ever needs it. AP-AU in the
 REM handover has the numbers.
+
+REM --- AP-BR: THE DEFAULT RENDERER IS NOW AURORA (handover 5c.46 AP-BR) ------------------
+REM The promotion P4 built and AP-BQ demonstrated is now what this launcher runs: the frame's GX
+REM byte stream is handed to aurora at the top of d3d11_present(), aurora's own 640x448 EFB readback
+REM is blitted into the 1280x720 back buffer before the screenshot, and the gate's two references
+REM were re-recorded on that picture (content 54CB46BD..., popup A81F3E35..., both inside the
+REM unchanged luma/bright windows). The hand-rolled GX layer is still built and still drawn - it is
+REM the fallback for any frame whose readback or blit fails - and TLS_LAYER=1 forces it:
+REM     set TLS_LAYER=1  then run this file, to get the old renderer (and the old gate references
+REM     B4646917... / 22B1CE31...) back, pixel for pixel.
+REM TLS_AURORA_PUBLISH=1 is what makes aurora present (TLS_AURORA alone only renders a window of
+REM frames for measurement), so both are set here and neither is optional for playing.
+set TLS_AURORA=1
+set TLS_AURORA_PUBLISH=1
 
 start "" "%~dp0build\recomp\tls_runner.exe" --window --minimized --fps 60 %*

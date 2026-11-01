@@ -1107,9 +1107,128 @@ static void host_dump_mem_bin(CPUState* cpu, int frame) {
     }
 }
 
+/* ================================================================================================
+ * LONG-RUN INSTRUMENTATION (handover 5c.46 AP-BR).
+ *
+ * The 3 520-frame aurora PUBLISH run dies mid-run (last probe copy #1 689) with NOTHING in the log:
+ * the last line is the probe-copy arm message, so the death happens inside that same aurora frame
+ * (end_frame, or the readback pump that follows it). A silent death cannot be attributed by reading
+ * code, and both candidate causes - a growing allocation and a device/thread falling over - predict
+ * the same log. So this block answers the two questions a reader cannot:
+ *
+ *   1. SetUnhandledExceptionFilter prints the FATAL exception's code, faulting address, owning
+ *      module and the guest/publish/readback counters at the moment of death. `0xC000001D`
+ *      (STATUS_ILLEGAL_INSTRUCTION) is what this project already knows as "a static std::thread was
+ *      destroyed while running" (see the exit-hang note in main()), so the module matters: inside
+ *      the DLL means aurora's own teardown/thread machinery, inside the runner means the host.
+ *      It prints and then lets the process die - it never suppresses or "fixes" the crash.
+ *
+ *   2. `TLS_MEMWATCH=1` starts a sampler thread that prints committed private bytes and the working
+ *      set every 2 s together with the frame and publish counters. A leak anywhere - the readback's
+ *      Dawn buffers, the copy-texture ring, aurora's pipeline caches - shows up here as a straight
+ *      line, and the slope names the per-frame cost. Off by default so gate logs stay clean.
+ *
+ * Both are inert unless they fire: no allocation, no timing change, and one branch per frame for the
+ * frame counter.
+ * ============================================================================================== */
+#ifdef _WIN32
+static volatile long g_instr_frame = 0;
+
+/* PROCESS_MEMORY_COUNTERS_EX without <psapi.h> (and therefore without a psapi link dependency):
+ * layout-compatible, filled by K32GetProcessMemoryInfo in kernel32, resolved at runtime. */
+typedef struct {
+    DWORD cb;
+    DWORD PageFaultCount;
+    SIZE_T PeakWorkingSetSize;
+    SIZE_T WorkingSetSize;
+    SIZE_T QuotaPeakPagedPoolUsage;
+    SIZE_T QuotaPagedPoolUsage;
+    SIZE_T QuotaPeakNonPagedPoolUsage;
+    SIZE_T QuotaNonPagedPoolUsage;
+    SIZE_T PagefileUsage;
+    SIZE_T PeakPagefileUsage;
+    SIZE_T PrivateUsage;
+} TlsMemCountersEx;
+
+typedef BOOL(WINAPI* TlsGetProcessMemoryInfoFn)(HANDLE, TlsMemCountersEx*, DWORD);
+
+static TlsGetProcessMemoryInfoFn tls_get_mem_info(void) {
+    static TlsGetProcessMemoryInfoFn fn;
+    static int tried;
+    if (!tried) {
+        tried = 1;
+        HMODULE k32 = GetModuleHandleA("kernel32.dll");
+        if (k32) fn = (TlsGetProcessMemoryInfoFn)(void*)GetProcAddress(k32, "K32GetProcessMemoryInfo");
+    }
+    return fn;
+}
+
+static void tls_print_mem_line(const char* tag) {
+    TlsMemCountersEx mc;
+    memset(&mc, 0, sizeof(mc));
+    mc.cb = sizeof(mc);
+    TlsGetProcessMemoryInfoFn fn = tls_get_mem_info();
+    unsigned long frames = 0, fails = 0;
+    unsigned long long calls = 0, rbfail = 0, pumps = 0, caps = 0, rej = 0, fifo = 0;
+    tls_aurora_publish_stats(&frames, &fails);
+    tls_aurora_live_probe_stats(&calls, &rbfail, &pumps, &caps, &rej, &fifo);
+    if (fn && fn(GetCurrentProcess(), &mc, sizeof(mc))) {
+        printf("[Mem %s] frame=%ld publish=%lu pubfail=%lu | rb: calls=%llu fail=%llu pumps=%llu caps=%llu rej=%llu fifo=%.2fMB"
+               " | private=%.1f MB ws=%.1f MB pagefile=%.1f MB\n",
+               tag, g_instr_frame, frames, fails, calls, rbfail, pumps, caps, rej,
+               (double)fifo / (1024.0 * 1024.0),
+               (double)mc.PrivateUsage / (1024.0 * 1024.0), (double)mc.WorkingSetSize / (1024.0 * 1024.0),
+               (double)mc.PagefileUsage / (1024.0 * 1024.0));
+    } else {
+        printf("[Mem %s] frame=%ld publish=%lu pubfail=%lu | rb: calls=%llu fail=%llu pumps=%llu caps=%llu rej=%llu fifo=%.2fMB"
+               " | (memory query unavailable)\n",
+               tag, g_instr_frame, frames, fails, calls, rbfail, pumps, caps, rej,
+               (double)fifo / (1024.0 * 1024.0));
+    }
+    fflush(stdout);
+}
+
+static DWORD WINAPI tls_memwatch_thread(LPVOID unused) {
+    (void)unused;
+    for (;;) {
+        Sleep(2000);
+        tls_print_mem_line("watch");
+    }
+}
+
+static LONG WINAPI tls_crash_filter(EXCEPTION_POINTERS* ep) {
+    const DWORD code = ep->ExceptionRecord->ExceptionCode;
+    const void* addr = ep->ExceptionRecord->ExceptionAddress;
+    char module[MAX_PATH] = { 0 };
+    unsigned long long offset = 0;
+    HMODULE mod = NULL;
+    if (GetModuleHandleExA(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_UNCHANGED_REFCOUNT,
+                           (LPCSTR)addr, &mod) && mod) {
+        GetModuleFileNameA(mod, module, sizeof(module));
+        offset = (unsigned long long)((const char*)addr - (const char*)mod);
+    }
+    printf("\n[Crash] FATAL exception 0x%08lX at %p (%s+0x%llX), thread %lu\n", (unsigned long)code, addr,
+           module[0] ? module : "?", offset, (unsigned long)GetCurrentThreadId());
+    if (code == EXCEPTION_ACCESS_VIOLATION && ep->ExceptionRecord->NumberParameters >= 2) {
+        const ULONG_PTR what = ep->ExceptionRecord->ExceptionInformation[0];
+        printf("[Crash]   access violation: %s of %p\n", what == 0 ? "read" : (what == 1 ? "write" : "execute"),
+               (void*)ep->ExceptionRecord->ExceptionInformation[1]);
+    }
+    tls_print_mem_line("crash");
+    printf("[Crash] last guest frame %ld, publishes and readback counters above\n", g_instr_frame);
+    fflush(NULL);
+    return EXCEPTION_CONTINUE_SEARCH; /* never swallow: the process dies exactly as it would have */
+}
+#endif
+
 int main(int argc, char** argv) {
 #ifdef _WIN32
     timeBeginPeriod(1);
+    SetUnhandledExceptionFilter(tls_crash_filter);
+    if (getenv("TLS_MEMWATCH")) {
+        HANDLE th = CreateThread(NULL, 0, tls_memwatch_thread, NULL, 0, NULL);
+        if (th) CloseHandle(th);
+    }
 #endif
     const char* dol_path = "orig/main.dol";
     u32 max_blocks = 300000;
@@ -1340,6 +1459,9 @@ int main(int argc, char** argv) {
     int result = 0;
     int frame = 0;
     for (; max_frames == 0 || frame < max_frames; frame++) {
+#ifdef _WIN32
+        g_instr_frame = frame;
+#endif
         gx_pipeline_begin_frame();
 #ifdef _WIN32
         LARGE_INTEGER qpc_freq, t_start, t_end;

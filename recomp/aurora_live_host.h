@@ -86,4 +86,16 @@ void tls_aurora_shutdown_host(void);
 int tls_aurora_publish_frame(void);
 const uint8_t* tls_aurora_published(uint32_t* w, uint32_t* h);
 
+/* Cumulative publish counters (5c.46 AP-BR): publishes attempted and publishes that fell back to
+ * the layer's picture. Read from the memory sampler, so a long run can be correlated with frames. */
+void tls_aurora_publish_stats(unsigned long* frames, unsigned long* fails);
+
+/* The DLL's cumulative readback counters (5c.46 AP-BR): calls, failures, pumped empty frames,
+ * captures armed, captures rejected, and the FIFO buffer's high-water mark in bytes. Zeroes when no
+ * DLL is loaded. The FIFO capacity is the one that proves a growth bug: feeding a whole frame
+ * through `fifo::write_data_grow()` doubled it on every call (AP-BR §3). */
+void tls_aurora_live_probe_stats(unsigned long long* calls, unsigned long long* fails,
+                                 unsigned long long* pumps, unsigned long long* captures,
+                                 unsigned long long* rejected, unsigned long long* fifo_cap);
+
 #endif
