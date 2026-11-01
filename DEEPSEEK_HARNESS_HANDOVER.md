@@ -16496,3 +16496,28 @@ New switch **`TLS_AURORA_TEXOBJID=1`** (`tools/aurora_spike/aurora_replay.cpp`):
 Identical to the second decimal, with a replay that parsed **113 525 draws / 845 916 vertices**. So the identity hypothesis is closed - not because a session looked at 203 draws, but because a session looked at the whole frame - and the difference between the composite frames is not the texture object identity either.
 
 What that leaves, with the numbers already in hand: **the composite frame draws 5 819 primitives against the geometry frame''s 22 553** (`TLS_AURORA_STATS`), and aurora logs `STUB: display copy is not implemented` for the XFB display copies the guest uses to put the composite on screen. Those two - what the odd frame actually draws, and the display-copy path - are the next measurements, and they are aurora-side, so they begin with `TLS_AURORA_STATS`/`TLS_AURORA_DUMP_DRAW` on frame 2801 and a decision about the stub.
+
+---
+
+### AP-BL. THE COMPOSITE SAMPLES THE WRONG COPY BECAUSE THE ADDRESS IS WRITTEN AT SEVERAL SIZES: guest memory at 0x9038D1C0 holds the LAST writer's content (mean byte 119.46, the 320x224 copy's 113.25) and not the 80x56 copy a quad binds (69.75) - measured against a single-size control address where guest memory, the layer and aurora all agree (113.76 / 106.0 / 111.34)
+
+AP-BK excluded the copy content and the sample size; this locates what is left. The tail writes **one address at several sizes inside one frame**: frame 2801 writes `0x9038D1C0` as 80x56 (copies 6, 8, 9, 11) and then as 320x224 (copy 13), binding it at 80x56 for three of the composite quads. A copy destination is not a unique texture identity - it is an **address** - so whichever bytes are at that address when a draw executes is what the draw samples, and the bytes that are there are the last writer's.
+
+**The measurement.** Read the capture's RAM plane at the two destinations after a replay (`--ram-out <addr>:<size>:<file>`), and compare the payload mean with the copy's own means from AP-BK (layer `dstavg`, aurora readback):
+
+| destination | copies writing it in frame 2801 | payload mean | what is at the address after the frame | reading |
+|---|---|---|---|---|
+| `0x903DBDC0` (control, one size) | 160x112 once (copy 4) | layer **106.0**, aurora **111.34** | **113.76** | agrees to 7 % - **the method is sound** |
+| `0x9038D1C0` (multi-size) | 80x56 four times, then 320x224 | 80x56 copy = **69.75**, 320x224 copy = **113.25** | **119.46** | matches the **320x224** last writer, 71 % away from the 80x56 copy |
+
+So the 80x56 content a composite quad binds is **not** what a sample of that address returns; it returns the 320x224 copy written later in the same frame. That is exactly the sharp, bright composite aurora measures (luma 87, gradient 20.9) against the layer's blur (luma 43, gradient 1.1): a **crop of the larger copy**, not a downscale. The control address, written at one size, agrees on all three sides, which is why this is the copy-order property and not measurement noise.
+
+**Why the layer is right and aurora is not.** The layer services each copy as the batch loop reaches it, so at the moment a quad draws, the address holds *that* copy's bytes. Aurora does not write copy destinations into guest memory at all (its copies are GPU-side shadow textures, AP-BA), so a textured sample of a copy address reads the RAM the planes were mapped with - the capture's window-end snapshot in the harness, the layer's frame-final planes in the live path (re-synced per frame, AP-BH). Both are *end of frame*, so both hold the last writer. **This is the same class of defect as AP-BH one level deeper: AP-BH fixed "written after arming"; this is "written later in the same frame".**
+
+**Two fixes, both one session each.**
+1. **Adapter-side, no aurora change**: keep a per-(address, size, format) alias. `emit_copy_state` rewrites a copy destination to an alias in a reserved MEM2 scratch pool, and `emit_texobj` rewrites `image3` to the same alias when the guest binds that (address, size, format). Each alias then has exactly one size, so aurora's per-address copy texture can no longer be overwritten at a different size. Roughly 40 lines in `tools/aurora_spike/aurora_replay.cpp`, testable entirely in the harness (no runner needed) by measuring the composite probe copy's gradient against the layer's 1.123.
+2. **Aurora-side**: key `g_gxState.copyTextures` by (address, width, height, format) and match at texture-view creation. Correct, but it changes aurora, so it needs a full rebuild and the live path re-validated.
+
+Option 1 is the cheaper one and it is measurable with the instrument already in hand: replay the capture and the probe copy's gradient must fall from **20.889** towards the layer's **1.123**.
+
+**Changes.** None to the port (this section is measurement). `logs_ap/bk_ram80.bin`, `logs_ap/bk_ram160.bin`, `logs_ap/bk_copy320.bin`, `logs_ap/bk_ab_*.log` are the evidence; the capture is `build/recomp/gxcap/gxfifo.tlscap` (frames 2794..2801).
