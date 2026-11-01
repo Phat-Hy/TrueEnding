@@ -9,8 +9,8 @@ extern void IPCGetBufferHi(void);
 extern void IPCGetBufferLo(void);
 extern void IPCSetBufferLo(void);
 extern void OSReport(const char*, ...);
-extern void fn_8061C7E0(void);
-extern void fn_8061C8A0(void);
+extern void IOS_CloseAsync(void);
+extern void IOS_Close(void);
 extern void fn_8061C950(void);
 extern void fn_8061CA50(void);
 extern void fn_8061CB60(void);
@@ -1638,7 +1638,7 @@ lbl_fn_8061BAC0_0000157C:
 asm void fn_8061BB70(void)
 {
     nofralloc
-    b fn_8061C8A0
+    b IOS_Close
 }
 
 asm void fn_8061BB80(void)
@@ -1670,7 +1670,7 @@ lbl_fn_8061BB80_000015F4:
     addi r4, r4, _isfsFuncCb@l
     stw r0, 0x108(r3)
     mr r3, r29
-    bl fn_8061C7E0
+    bl IOS_CloseAsync
 lbl_fn_8061BB80_00001618:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)

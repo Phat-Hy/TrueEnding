@@ -9,7 +9,7 @@ extern void _restgpr_27(void);
 extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void OSUnlockMutex(void);
-extern void fn_8061C8A0(void);
+extern void IOS_Close(void);
 extern void fn_806954D4(void);
 extern void fn_806954E0(void);
 extern void fn_806954EC(void);
@@ -44,7 +44,7 @@ void gecko_walkStackFrames(void);
 void fn_8069766C(void);
 void fn_806976AC(void);
 void fn_806977B0(void);
-void fn_80697BB8(void);
+void gecko_saveContextAndDispatch(void);
 void fn_80697CFC(void);
 void fn_80697D28(void);
 void fn_80697D34(void);
@@ -1163,7 +1163,7 @@ lbl_gecko_walkStackFrames_00000F38:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_gecko_walkStackFrames_00000F50:
     lis r28, lbl_807667EC@ha
     mr r27, r30
@@ -1199,7 +1199,7 @@ lbl_gecko_walkStackFrames_00000F9C:
     addi r3, r3, 0x11
     addi r4, r31, 0x18
     addi r5, r5, fn_8069766C@l
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_gecko_walkStackFrames_00000FCC:
     lis r3, lbl_807667EC@ha
     mr r27, r30
@@ -1236,7 +1236,7 @@ lbl_gecko_walkStackFrames_0000101C:
     addi r3, r3, 0x11
     addi r4, r31, 0x14
     addi r5, r5, fn_8069766C@l
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_gecko_walkStackFrames_0000104C:
     addi r3, r31, 0x20
     bl fn_80697CFC
@@ -1637,7 +1637,7 @@ lbl_fn_806977B0_000015BC:
     blr
 }
 
-asm void fn_80697BB8(void)
+asm void gecko_saveContextAndDispatch(void)
 {
     nofralloc
     stwu r1, -0x2c0(r1)
@@ -1979,7 +1979,7 @@ lbl_fn_80697F84_00001A5C:
     li r29, -0x1
 lbl_fn_80697F84_00001A60:
     mr r3, r28
-    bl fn_8061C8A0
+    bl IOS_Close
     cmpwi r3, 0x0
     bge lbl_fn_80697F84_00001A74
     li r29, -0x1

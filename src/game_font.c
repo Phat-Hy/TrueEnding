@@ -33,7 +33,7 @@ extern void fn_8061E9E0(void);
 extern void fn_8061EC60(void);
 extern void fn_8061EF10(void);
 extern void fn_8061EF90(void);
-extern void fn_8061F460(void);
+extern void msg_setStringPointer(void);
 extern void* msg_getStringPointer(const char* str);
 extern void fn_8061F9F0(void);
 extern void fn_8061FBE0(void);
@@ -425,7 +425,7 @@ lbl_fn_800A2DE0_00000520:
     stw r0, 0x15c(r3)
     mr r4, r31
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r5, 0x1
     lis r8, font_drawTextRight@ha
     addi r7, r5, -0x8000
@@ -526,7 +526,7 @@ lbl_fn_800A2DE0_000006A4:
     stw r0, 0x15c(r31)
     mr r4, r31
     addi r3, r31, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r6, fn_800A2A2C@ha
     addi r3, r1, 0xd0
     addi r4, r31, 0x234
@@ -544,7 +544,7 @@ lbl_fn_800A2DE0_000006F0:
     stw r0, 0x15c(r31)
     mr r4, r31
     addi r3, r31, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r6, font_drawTextLeft@ha
     addi r3, r1, 0xd0
     addi r6, r6, font_drawTextLeft@l
@@ -638,7 +638,7 @@ lbl_fn_800A2DE0_00000850:
     stw r0, 0x15c(r31)
     mr r4, r31
     addi r3, r31, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r6, font_drawTextLeft@ha
     addi r3, r1, 0x5d0
     addi r6, r6, font_drawTextLeft@l
@@ -668,7 +668,7 @@ lbl_fn_800A2DE0_000008C4:
     stw r0, 0x15c(r3)
     mr r4, r31
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r6, font_drawTextLeft@ha
     addi r3, r31, 0x4c
     addi r6, r6, font_drawTextLeft@l
@@ -779,7 +779,7 @@ lbl_fn_800A2DE0_00000A64:
     stw r0, 0x15c(r31)
     mr r4, r31
     addi r3, r31, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r6, fn_800A2A2C@ha
     addi r3, r1, 0x4d0
     addi r4, r31, 0x234
@@ -868,7 +868,7 @@ lbl_fn_800A2DE0_00000BAC:
     stw r0, 0x15c(r31)
     mr r4, r31
     addi r3, r31, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r6, fn_800A2A2C@ha
     addi r3, r1, 0x3d0
     addi r4, r31, 0x234
@@ -943,7 +943,7 @@ lbl_fn_800A2DE0_00000C84:
     mr r4, r31
     lwz r30, 0x14c(r31)
     addi r3, r31, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r6, fn_800A2AA4@ha
     mr r4, r30
     mr r5, r29
@@ -973,7 +973,7 @@ lbl_fn_800A2DE0_00000C84:
     stw r5, 0x16c(r31)
     addi r3, r31, 0x178
     stw r0, 0x15c(r31)
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2B1C@ha
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B1C@l
@@ -991,7 +991,7 @@ lbl_fn_800A2DE0_00000D80:
     stw r0, 0x15c(r3)
     mr r4, r31
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r6, fn_800A2B58@ha
     mr r4, r28
     addi r3, r31, 0x234
@@ -1011,7 +1011,7 @@ lbl_fn_800A2DE0_00000DD0:
     mr r4, r31
     lwz r29, 0x14c(r3)
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r6, fn_800A2AA4@ha
     mr r4, r29
     mr r5, r30
@@ -1039,7 +1039,7 @@ lbl_fn_800A2DE0_00000E18:
     stw r0, 0x15c(r31)
     or r0, r7, r5
     stw r0, 0x16c(r31)
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2B94@ha
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B94@l
@@ -1056,7 +1056,7 @@ lbl_fn_800A2DE0_00000E7C:
     mr r4, r31
     lwz r29, 0x14c(r3)
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r6, fn_800A2AA4@ha
     mr r4, r29
     mr r5, r30
@@ -1082,7 +1082,7 @@ lbl_fn_800A2DE0_00000E7C:
     or r0, r3, r5
     addi r3, r31, 0x178
     stw r0, 0x16c(r31)
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2B1C@ha
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B1C@l
@@ -1100,7 +1100,7 @@ lbl_fn_800A2DE0_00000F24:
     stw r0, 0x15c(r3)
     mr r4, r31
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r6, fn_800A2B58@ha
     mr r4, r28
     addi r3, r31, 0x234
@@ -1120,7 +1120,7 @@ lbl_fn_800A2DE0_00000F74:
     mr r4, r31
     lwz r29, 0x14c(r3)
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r6, fn_800A2A68@ha
     mr r4, r29
     mr r5, r30
@@ -1148,7 +1148,7 @@ lbl_fn_800A2DE0_00000FBC:
     stw r0, 0x15c(r31)
     or r0, r7, r5
     stw r0, 0x16c(r31)
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2B94@ha
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B94@l
@@ -1170,7 +1170,7 @@ lbl_fn_800A2DE0_00001020:
     mr r4, r31
     stw r0, 0x15c(r3)
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2B94@ha
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B94@l
@@ -1198,7 +1198,7 @@ lbl_fn_800A2DE0_00001080:
     stw r0, 0x15c(r3)
     mr r4, r31
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2B94@ha
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B94@l
@@ -1213,7 +1213,7 @@ lbl_fn_800A2DE0_000010DC:
     stw r0, 0x15c(r3)
     mr r4, r31
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2B1C@ha
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B1C@l
@@ -1244,7 +1244,7 @@ lbl_fn_800A2DE0_00001148:
     mr r4, r31
     lwz r29, 0x14c(r3)
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r6, fn_800A2AA4@ha
     mr r4, r29
     mr r5, r30
@@ -1270,7 +1270,7 @@ lbl_fn_800A2DE0_00001148:
     or r0, r3, r5
     addi r3, r31, 0x178
     stw r0, 0x16c(r31)
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2B94@ha
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B94@l
@@ -1287,7 +1287,7 @@ lbl_fn_800A2DE0_000011F0:
     mr r4, r31
     lwz r29, 0x14c(r3)
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r6, fn_800A2A68@ha
     mr r4, r29
     mr r5, r30
@@ -1313,7 +1313,7 @@ lbl_fn_800A2DE0_000011F0:
     or r0, r3, r5
     addi r3, r31, 0x178
     stw r0, 0x16c(r31)
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2B94@ha
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B94@l
@@ -1335,7 +1335,7 @@ lbl_fn_800A2DE0_00001298:
     or r0, r7, r5
     stw r0, 0x16c(r3)
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2B94@ha
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B94@l
@@ -1364,7 +1364,7 @@ lbl_fn_800A2DE0_00001318:
     stw r0, 0x15c(r31)
     mr r4, r31
     addi r3, r31, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2B1C@ha
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B1C@l
@@ -1392,7 +1392,7 @@ lbl_fn_800A2DE0_00001390:
     stw r0, 0x15c(r3)
     mr r4, r31
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2AE0@ha
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2AE0@l
@@ -1420,7 +1420,7 @@ lbl_fn_800A2DE0_000013FC:
     stw r0, 0x15c(r3)
     mr r4, r31
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2B1C@ha
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B1C@l
@@ -1461,7 +1461,7 @@ lbl_fn_800A2DE0_00001498:
     stw r0, 0x15c(r31)
     mr r4, r31
     addi r3, r31, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2B94@ha
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B94@l
@@ -1485,7 +1485,7 @@ lbl_fn_800A2DE0_000014F4:
     stw r0, 0x15c(r3)
     mr r4, r31
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2AE0@ha
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2AE0@l
@@ -1524,7 +1524,7 @@ lbl_fn_800A2DE0_0000156C:
     or r0, r7, r5
     stw r0, 0x16c(r3)
     addi r3, r3, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2B94@ha
     addi r3, r31, 0x234
     addi r4, r4, fn_800A2B94@l
@@ -1628,7 +1628,7 @@ lbl_fn_800A2DE0_0000169C:
 lbl_fn_800A2DE0_00001718:
     mr r4, r31
     addi r3, r31, 0x178
-    bl fn_8061F460
+    bl msg_setStringPointer
     lwz r0, 0x3c(r1)
     addi r3, r1, 0x2d0
     srwi. r0, r0, 31
@@ -2229,7 +2229,7 @@ lbl_fn_800A4794_00001ED8:
     stw r31, 0x154(r28)
     stw r31, 0x158(r28)
     stw r0, 0x15c(r28)
-    bl fn_8061F460
+    bl msg_setStringPointer
     srawi r0, r29, 14
     lis r6, font_drawTextCenter@ha
     addze r3, r0
@@ -2388,7 +2388,7 @@ lbl_fn_800A49C4_00002108:
     stw r28, 0x154(r31)
     stw r30, 0x158(r31)
     stw r0, 0x15c(r31)
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r5, 0x1
     lis r8, font_drawTextRight@ha
     addi r7, r5, -0x8000
@@ -2464,7 +2464,7 @@ lbl_fn_800A4AD4_00002218:
     stw r30, 0x154(r31)
     stw r30, 0x158(r31)
     stw r0, 0x15c(r31)
-    bl fn_8061F460
+    bl msg_setStringPointer
     srawi r0, r27, 14
     lis r6, font_drawTextCenter@ha
     addze r3, r0
@@ -2540,7 +2540,7 @@ lbl_fn_800A4BE4_00002328:
     stw r31, 0x154(r28)
     stw r31, 0x158(r28)
     stw r0, 0x15c(r28)
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r5, 0x1
     lis r8, font_drawTextRight@ha
     addi r7, r5, -0x8000
@@ -2620,7 +2620,7 @@ lbl_fn_800A4D00_00002448:
     stw r29, 0x154(r26)
     stw r31, 0x158(r26)
     stw r0, 0x15c(r26)
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r6, fn_800A2B58@ha
     mr r4, r29
     addi r3, r26, 0x234
@@ -2693,7 +2693,7 @@ lbl_fn_800A4E08_0000254C:
     stw r31, 0x154(r29)
     stw r31, 0x158(r29)
     stw r0, 0x15c(r29)
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2AE0@ha
     addi r3, r29, 0x234
     addi r4, r4, fn_800A2AE0@l
@@ -2765,7 +2765,7 @@ lbl_fn_800A4F0C_0000264C:
     stw r31, 0x154(r29)
     stw r31, 0x158(r29)
     stw r0, 0x15c(r29)
-    bl fn_8061F460
+    bl msg_setStringPointer
     lis r4, fn_800A2BD0@ha
     addi r3, r29, 0x4c
     addi r4, r4, fn_800A2BD0@l

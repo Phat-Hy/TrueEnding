@@ -31,7 +31,7 @@ void fn_805193C8(void *dst, void *src);
 void fn_805193D4(void);
 void fn_805193E8(void *dst, void *src);
 void fn_805193F4(void *p);
-u32 fn_80519404(void *p);
+u32 net_error_getCode(void *p);
 void fn_8051940C(void *p);
 void fn_8051941C(void);
 void fn_8051994C(void);
@@ -69,7 +69,7 @@ void fn_805193F4(void *p)
     *(u32 *)p += 0x18;
 }
 
-u32 fn_80519404(void *p)
+u32 net_error_getCode(void *p)
 {
     return *(u32 *)p;
 }
@@ -189,10 +189,10 @@ lbl_fn_8051941C_000001EC:
     bl fn_805193F4
 lbl_fn_8051941C_000001F4:
     addi r3, r1, 0x38
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -208,10 +208,10 @@ lbl_fn_8051941C_00000220:
     cmpwi r3, 0x0
     beq lbl_fn_8051941C_00000268
     addi r3, r1, 0x38
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x3c
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -225,10 +225,10 @@ lbl_fn_8051941C_00000268:
     cmpwi r3, 0x0
     beq lbl_fn_8051941C_00000344
     addi r3, r1, 0x3c
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r30
     bl fn_8051900C
     addi r3, r1, 0x40
@@ -239,10 +239,10 @@ lbl_fn_8051941C_000002A4:
     bl fn_805193F4
 lbl_fn_8051941C_000002AC:
     addi r3, r1, 0x38
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -251,11 +251,11 @@ lbl_fn_8051941C_000002AC:
     bne lbl_fn_8051941C_000002A4
 lbl_fn_8051941C_000002D8:
     addi r3, r1, 0x38
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x3c
     bl fn_8051940C
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -268,10 +268,10 @@ lbl_fn_8051941C_000002D8:
     cmpwi r3, 0x0
     bne lbl_fn_8051941C_00000344
     addi r3, r1, 0x3c
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r30
     bl fn_8051900C
     addi r3, r1, 0x40
@@ -284,10 +284,10 @@ lbl_fn_8051941C_00000344:
     cmpwi r3, 0x0
     beq lbl_fn_8051941C_000004FC
     addi r3, r1, 0x38
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r30
     bl fn_8051900C
     addi r3, r1, 0x40
@@ -297,10 +297,10 @@ lbl_fn_8051941C_00000344:
     bl fn_805193E8
     addi r3, r1, 0x3c
     bl fn_8051940C
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     mr r3, r27
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -318,10 +318,10 @@ lbl_fn_8051941C_000003C4:
     cmpwi r3, 0x0
     beq lbl_fn_8051941C_00000404
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     mr r3, r27
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -335,10 +335,10 @@ lbl_fn_8051941C_00000404:
     cmpwi r3, 0x0
     beq lbl_fn_8051941C_00000434
     addi r3, r1, 0x3c
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r30
     bl fn_8051900C
 lbl_fn_8051941C_00000434:
@@ -353,10 +353,10 @@ lbl_fn_8051941C_0000044C:
     bl fn_805193F4
 lbl_fn_8051941C_00000454:
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     mr r3, r27
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -366,10 +366,10 @@ lbl_fn_8051941C_00000454:
 lbl_fn_8051941C_00000480:
     addi r3, r1, 0x3c
     bl fn_8051940C
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     mr r3, r27
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -382,10 +382,10 @@ lbl_fn_8051941C_00000480:
     cmpwi r3, 0x0
     bne lbl_fn_8051941C_000004EC
     addi r3, r1, 0x3c
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r30
     bl fn_8051900C
     addi r3, r1, 0x40
@@ -772,10 +772,10 @@ lbl_fn_80519C6C_00000A3C:
     bl fn_805193F4
 lbl_fn_80519C6C_00000A44:
     addi r3, r1, 0x38
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -791,10 +791,10 @@ lbl_fn_80519C6C_00000A70:
     cmpwi r3, 0x0
     beq lbl_fn_80519C6C_00000AB8
     addi r3, r1, 0x38
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x3c
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -808,10 +808,10 @@ lbl_fn_80519C6C_00000AB8:
     cmpwi r3, 0x0
     beq lbl_fn_80519C6C_00000B94
     addi r3, r1, 0x3c
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r30
     bl fn_8051900C
     addi r3, r1, 0x40
@@ -822,10 +822,10 @@ lbl_fn_80519C6C_00000AF4:
     bl fn_805193F4
 lbl_fn_80519C6C_00000AFC:
     addi r3, r1, 0x38
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -834,11 +834,11 @@ lbl_fn_80519C6C_00000AFC:
     bne lbl_fn_80519C6C_00000AF4
 lbl_fn_80519C6C_00000B28:
     addi r3, r1, 0x38
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x3c
     bl fn_8051940C
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -851,10 +851,10 @@ lbl_fn_80519C6C_00000B28:
     cmpwi r3, 0x0
     bne lbl_fn_80519C6C_00000B94
     addi r3, r1, 0x3c
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r30
     bl fn_8051900C
     addi r3, r1, 0x40
@@ -867,10 +867,10 @@ lbl_fn_80519C6C_00000B94:
     cmpwi r3, 0x0
     beq lbl_fn_80519C6C_00000D4C
     addi r3, r1, 0x38
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r30
     bl fn_8051900C
     addi r3, r1, 0x40
@@ -880,10 +880,10 @@ lbl_fn_80519C6C_00000B94:
     bl fn_805193E8
     addi r3, r1, 0x3c
     bl fn_8051940C
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     mr r3, r27
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -901,10 +901,10 @@ lbl_fn_80519C6C_00000C14:
     cmpwi r3, 0x0
     beq lbl_fn_80519C6C_00000C54
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     mr r3, r27
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -918,10 +918,10 @@ lbl_fn_80519C6C_00000C54:
     cmpwi r3, 0x0
     beq lbl_fn_80519C6C_00000C84
     addi r3, r1, 0x3c
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r30
     bl fn_8051900C
 lbl_fn_80519C6C_00000C84:
@@ -936,10 +936,10 @@ lbl_fn_80519C6C_00000C9C:
     bl fn_805193F4
 lbl_fn_80519C6C_00000CA4:
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     mr r3, r27
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -949,10 +949,10 @@ lbl_fn_80519C6C_00000CA4:
 lbl_fn_80519C6C_00000CD0:
     addi r3, r1, 0x3c
     bl fn_8051940C
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     mr r3, r27
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r3
     mr r3, r29
     mr r5, r30
@@ -965,10 +965,10 @@ lbl_fn_80519C6C_00000CD0:
     cmpwi r3, 0x0
     bne lbl_fn_80519C6C_00000D3C
     addi r3, r1, 0x3c
-    bl fn_80519404
+    bl net_error_getCode
     mr r30, r3
     addi r3, r1, 0x40
-    bl fn_80519404
+    bl net_error_getCode
     mr r4, r30
     bl fn_8051900C
     addi r3, r1, 0x40

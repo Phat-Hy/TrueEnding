@@ -22,7 +22,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_22(void);
 extern void _savegpr_26(void);
 extern void _savegpr_27(void);
-extern void fn_8061C8A0(void);
+extern void IOS_Close(void);
 extern void fn_8061D080(void);
 extern void fn_80697F84(void);
 extern void fn_80698A2C(void);
@@ -857,7 +857,7 @@ lbl_fn_806A2A64_000009D8:
     cmpwi r18, 0x0
     beq lbl_fn_806A2A64_000009FC
     lwz r3, 0xc(r25)
-    bl fn_8061C8A0
+    bl IOS_Close
     cmpwi r3, 0x0
     bge lbl_fn_806A2A64_000009F8
     lis r18, 0x8000
@@ -1027,7 +1027,7 @@ lbl_fn_806A2E8C_00000C10:
     lis r31, lbl_808340E0@ha
     addi r31, r31, lbl_808340E0@l
     lwz r3, 0xc(r31)
-    bl fn_8061C8A0
+    bl IOS_Close
     cmpwi r3, 0x0
     bge lbl_fn_806A2E8C_00000C38
     lis r30, 0x8000
@@ -1459,7 +1459,7 @@ lbl_fn_806A3300_0000119C:
     lis r3, lbl_808340E0@ha
     addi r3, r3, lbl_808340E0@l
     lwz r3, 0xc(r3)
-    bl fn_8061C8A0
+    bl IOS_Close
     cmpwi r3, 0x0
     bge lbl_fn_806A3300_000011B8
     lis r30, 0x8000
@@ -1548,7 +1548,7 @@ lbl_fn_806A35D8_000012C0:
     lis r3, lbl_808340E0@ha
     addi r3, r3, lbl_808340E0@l
     lwz r3, 0xc(r3)
-    bl fn_8061C8A0
+    bl IOS_Close
     cmpwi r3, 0x0
     bge lbl_fn_806A35D8_000012DC
     lis r30, 0x8000

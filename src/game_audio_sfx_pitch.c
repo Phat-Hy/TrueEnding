@@ -84,7 +84,7 @@ extern void fn_80267B20(void);
 extern void fn_80267B28(void);
 extern void fn_80276AE4(void);
 extern void fn_802F0988(void);
-extern void fn_802F0990(void);
+extern void input_rumble_isEnabled(void);
 extern void fn_80315644(void);
 extern void fn_8031564C(void);
 extern void fn_80315654(void);
@@ -2094,7 +2094,7 @@ lbl_fn_80314BD8_00001B38:
     bl proj_getMatrix
     bl enemy_evalAnimTrack
     fmr f30, f1
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_802F0988
     fmuls f29, f1, f30
     lfs f3, 0x52c(r30)

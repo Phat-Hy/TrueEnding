@@ -43,7 +43,7 @@ extern void fn_805EC060(void);
 extern void fn_805EC3B0(void);
 extern void fn_805EDC80(void);
 extern void fn_806056C0(void);
-extern void fn_8061C7E0(void);
+extern void IOS_CloseAsync(void);
 extern void IOS_IoctlvAsync(void);
 extern void fn_80624B90(void);
 extern void fn_80624C00(void);
@@ -141,7 +141,7 @@ extern u32 lbl_80880274;
 extern u32 lbl_80880278;
 
 /* Function declarations */
-void fn_8065B990(void);
+void usb_logPrintf(void);
 void fn_8065BA40(void);
 u32 fn_8065BB40(void);
 void fn_8065BB50(void);
@@ -195,7 +195,7 @@ void fn_8065F6B0(void);
 void fn_8065F7A0(void);
 void fn_8065F8D0(void);
 
-asm void fn_8065B990(void)
+asm void usb_logPrintf(void)
 {
     nofralloc
     stwu r1, -0x80(r1)
@@ -203,7 +203,7 @@ asm void fn_8065B990(void)
     stw r0, 0x84(r1)
     stw r31, 0x7c(r1)
     mr r31, r3
-    bne cr1, lbl_fn_8065B990_00000038
+    bne cr1, lbl_usb_logPrintf_00000038
     stfd f1, 0x28(r1)
     stfd f2, 0x30(r1)
     stfd f3, 0x38(r1)
@@ -212,7 +212,7 @@ asm void fn_8065B990(void)
     stfd f6, 0x50(r1)
     stfd f7, 0x58(r1)
     stfd f8, 0x60(r1)
-lbl_fn_8065B990_00000038:
+lbl_usb_logPrintf_00000038:
     lbz r0, lbl_8087EBAC
     stw r3, 0x8(r1)
     cmpwi r0, 0x0
@@ -223,7 +223,7 @@ lbl_fn_8065B990_00000038:
     stw r8, 0x1c(r1)
     stw r9, 0x20(r1)
     stw r10, 0x24(r1)
-    beq lbl_fn_8065B990_00000098
+    beq lbl_usb_logPrintf_00000098
     lis r3, lbl_807B8A98@ha
     addi r3, r3, lbl_807B8A98@l
     crclr 6
@@ -237,7 +237,7 @@ lbl_fn_8065B990_00000038:
     mr r3, r31
     stw r0, 0x70(r1)
     bl vprintf
-lbl_fn_8065B990_00000098:
+lbl_usb_logPrintf_00000098:
     lwz r0, 0x84(r1)
     lwz r31, 0x7c(r1)
     mtlr r0
@@ -287,7 +287,7 @@ lbl_fn_8065BA40_000000F8:
     ble lbl_fn_8065BA40_00000154
     addi r3, r31, 0x5c
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
     li r30, -0x16
     b lbl_fn_8065BA40_00000180
 lbl_fn_8065BA40_00000154:
@@ -301,7 +301,7 @@ lbl_fn_8065BA40_00000158:
     bge lbl_fn_8065BA40_00000180
     addi r3, r31, 0x74
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
     li r30, -0x16
 lbl_fn_8065BA40_00000180:
     mr r3, r29
@@ -351,7 +351,7 @@ asm void fn_8065BB50(void)
     beq lbl_fn_8065BB50_00000234
     addi r3, r31, 0xc8
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
     b lbl_fn_8065BB50_000002A8
 lbl_fn_8065BB50_00000234:
     mr r29, r27
@@ -376,7 +376,7 @@ lbl_fn_8065BB50_00000240:
     mr r5, r30
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065BB50_0000028C:
     addi r29, r29, 0x4
     addi r28, r28, 0x1
@@ -426,7 +426,7 @@ lbl_fn_8065BB50_0000030C:
     mr r5, r27
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065BB50_00000340:
     addi r11, r1, 0x20
     mr r3, r26
@@ -469,13 +469,13 @@ lbl_fn_8065BCF0_000003A0:
     addi r3, r31, 0x154
     li r5, 0x80
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065BCF0_000003D4:
     cmpwi r29, 0x0
     bne lbl_fn_8065BCF0_000003F0
     addi r3, r31, 0x178
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
     li r30, -0x16
     b lbl_fn_8065BCF0_00000454
 lbl_fn_8065BCF0_000003F0:
@@ -517,7 +517,7 @@ lbl_fn_8065BCF0_00000454:
     mr r5, r29
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065BCF0_00000488:
     addi r11, r1, 0x20
     mr r3, r30
@@ -556,13 +556,13 @@ asm void fn_8065BE40(void)
     addi r3, r31, 0x154
     li r5, 0x80
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065BE40_00000518:
     cmpwi r30, 0x0
     bne lbl_fn_8065BE40_00000534
     addi r3, r31, 0x240
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
     li r29, -0x16
     b lbl_fn_8065BE40_000005B8
 lbl_fn_8065BE40_00000534:
@@ -578,7 +578,7 @@ lbl_fn_8065BE40_00000534:
     mr r5, r30
     addi r4, r4, fn_8065BB50@l
     stw r0, 0x34(r30)
-    bl fn_8061C7E0
+    bl IOS_CloseAsync
     mr r29, r3
     addi r3, r31, 0x224
     mr r4, r29
@@ -598,7 +598,7 @@ lbl_fn_8065BE40_00000534:
     mr r5, r30
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065BE40_000005B8:
     addi r11, r1, 0x20
     mr r3, r29
@@ -638,7 +638,7 @@ asm void fn_8065BF70(void)
     addi r3, r31, 0x154
     li r5, 0x60
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065BF70_0000064C:
     lwz r3, lbl_8087EBA8
     li r4, 0x20
@@ -652,7 +652,7 @@ lbl_fn_8065BF70_0000064C:
     addi r3, r31, 0x154
     li r5, 0x20
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065BF70_00000680:
     lwz r3, lbl_8087EBA8
     li r4, 0x20
@@ -666,7 +666,7 @@ lbl_fn_8065BF70_00000680:
     addi r3, r31, 0x154
     li r5, 0x20
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065BF70_000006B4:
     cmpwi r29, 0x0
     beq lbl_fn_8065BF70_000006CC
@@ -677,7 +677,7 @@ lbl_fn_8065BF70_000006B4:
 lbl_fn_8065BF70_000006CC:
     addi r3, r31, 0x2c0
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
     li r30, -0x16
     b lbl_fn_8065BF70_0000087C
 lbl_fn_8065BF70_000006E0:
@@ -727,13 +727,13 @@ lbl_fn_8065BF70_00000764:
     addi r3, r31, 0x154
     li r5, 0x80
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065BF70_00000798:
     cmpwi r26, 0x0
     bne lbl_fn_8065BF70_000007B4
     addi r3, r31, 0x304
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
     li r30, -0x16
     b lbl_fn_8065BF70_0000087C
 lbl_fn_8065BF70_000007B4:
@@ -787,7 +787,7 @@ lbl_fn_8065BF70_00000848:
     mr r5, r26
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065BF70_0000087C:
     cmpwi r28, 0x0
     beq lbl_fn_8065BF70_000008B0
@@ -801,7 +801,7 @@ lbl_fn_8065BF70_0000087C:
     mr r5, r28
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065BF70_000008B0:
     cmpwi r27, 0x0
     beq lbl_fn_8065BF70_000008E4
@@ -815,7 +815,7 @@ lbl_fn_8065BF70_000008B0:
     mr r5, r27
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065BF70_000008E4:
     cmpwi r29, 0x0
     beq lbl_fn_8065BF70_00000918
@@ -829,7 +829,7 @@ lbl_fn_8065BF70_000008E4:
     mr r5, r29
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065BF70_00000918:
     addi r11, r1, 0x40
     mr r3, r30
@@ -870,7 +870,7 @@ asm void fn_8065C2D0(void)
     addi r3, r31, 0x154
     li r5, 0x60
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C2D0_000009B0:
     lwz r3, lbl_8087EBA8
     li r4, 0x20
@@ -884,7 +884,7 @@ lbl_fn_8065C2D0_000009B0:
     addi r3, r31, 0x154
     li r5, 0x20
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C2D0_000009E4:
     lwz r3, lbl_8087EBA8
     li r4, 0x20
@@ -898,7 +898,7 @@ lbl_fn_8065C2D0_000009E4:
     addi r3, r31, 0x154
     li r5, 0x20
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C2D0_00000A18:
     cmpwi r29, 0x0
     beq lbl_fn_8065C2D0_00000A30
@@ -909,7 +909,7 @@ lbl_fn_8065C2D0_00000A18:
 lbl_fn_8065C2D0_00000A30:
     addi r3, r31, 0x388
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
     li r30, -0x16
     b lbl_fn_8065C2D0_00000BE0
 lbl_fn_8065C2D0_00000A44:
@@ -959,13 +959,13 @@ lbl_fn_8065C2D0_00000AC8:
     addi r3, r31, 0x154
     li r5, 0x80
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C2D0_00000AFC:
     cmpwi r26, 0x0
     bne lbl_fn_8065C2D0_00000B18
     addi r3, r31, 0x3cc
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
     li r30, -0x16
     b lbl_fn_8065C2D0_00000BE0
 lbl_fn_8065C2D0_00000B18:
@@ -1019,7 +1019,7 @@ lbl_fn_8065C2D0_00000BAC:
     mr r5, r26
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C2D0_00000BE0:
     cmpwi r28, 0x0
     beq lbl_fn_8065C2D0_00000C14
@@ -1033,7 +1033,7 @@ lbl_fn_8065C2D0_00000BE0:
     mr r5, r28
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C2D0_00000C14:
     cmpwi r27, 0x0
     beq lbl_fn_8065C2D0_00000C48
@@ -1047,7 +1047,7 @@ lbl_fn_8065C2D0_00000C14:
     mr r5, r27
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C2D0_00000C48:
     cmpwi r29, 0x0
     beq lbl_fn_8065C2D0_00000C7C
@@ -1061,7 +1061,7 @@ lbl_fn_8065C2D0_00000C48:
     mr r5, r29
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C2D0_00000C7C:
     addi r11, r1, 0x40
     mr r3, r30
@@ -1231,7 +1231,7 @@ lbl_fn_8065C7F0_00000EBC:
     addi r3, r31, 0x48c
     li r15, -0x4
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
     b lbl_fn_8065C7F0_000013E8
 lbl_fn_8065C7F0_00000ED0:
     lwz r3, lbl_8087EBA8
@@ -1246,7 +1246,7 @@ lbl_fn_8065C7F0_00000ED0:
     addi r3, r31, 0x154
     li r5, 0xe0
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C7F0_00000F04:
     lwz r3, lbl_8087EBA8
     li r4, 0x20
@@ -1260,7 +1260,7 @@ lbl_fn_8065C7F0_00000F04:
     addi r3, r31, 0x154
     li r5, 0x20
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C7F0_00000F38:
     lwz r3, lbl_8087EBA8
     li r4, 0x20
@@ -1274,7 +1274,7 @@ lbl_fn_8065C7F0_00000F38:
     addi r3, r31, 0x154
     li r5, 0x20
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C7F0_00000F6C:
     lwz r3, lbl_8087EBA8
     li r4, 0x20
@@ -1288,7 +1288,7 @@ lbl_fn_8065C7F0_00000F6C:
     addi r3, r31, 0x154
     li r5, 0x20
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C7F0_00000FA0:
     lwz r3, lbl_8087EBA8
     li r4, 0x20
@@ -1302,7 +1302,7 @@ lbl_fn_8065C7F0_00000FA0:
     addi r3, r31, 0x154
     li r5, 0x20
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C7F0_00000FD4:
     lwz r3, lbl_8087EBA8
     li r4, 0x20
@@ -1316,7 +1316,7 @@ lbl_fn_8065C7F0_00000FD4:
     addi r3, r31, 0x154
     li r5, 0x20
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C7F0_00001008:
     lwz r3, lbl_8087EBA8
     li r4, 0x20
@@ -1330,7 +1330,7 @@ lbl_fn_8065C7F0_00001008:
     addi r3, r31, 0x154
     li r5, 0x20
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C7F0_0000103C:
     cmpwi r29, 0x0
     beq lbl_fn_8065C7F0_00001074
@@ -1349,7 +1349,7 @@ lbl_fn_8065C7F0_0000103C:
 lbl_fn_8065C7F0_00001074:
     addi r3, r31, 0x4a8
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
     li r15, -0x16
     b lbl_fn_8065C7F0_0000127C
 lbl_fn_8065C7F0_00001088:
@@ -1420,13 +1420,13 @@ lbl_fn_8065C7F0_00001160:
     addi r3, r31, 0x154
     li r5, 0x80
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C7F0_00001194:
     cmpwi r14, 0x0
     bne lbl_fn_8065C7F0_000011B0
     addi r3, r31, 0x4c8
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
     li r15, -0x16
     b lbl_fn_8065C7F0_0000127C
 lbl_fn_8065C7F0_000011B0:
@@ -1480,7 +1480,7 @@ lbl_fn_8065C7F0_000011B0:
     mr r5, r14
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C7F0_0000127C:
     cmpwi r29, 0x0
     beq lbl_fn_8065C7F0_000012B0
@@ -1494,7 +1494,7 @@ lbl_fn_8065C7F0_0000127C:
     mr r5, r29
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C7F0_000012B0:
     cmpwi r28, 0x0
     beq lbl_fn_8065C7F0_000012E4
@@ -1508,7 +1508,7 @@ lbl_fn_8065C7F0_000012B0:
     mr r5, r28
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C7F0_000012E4:
     cmpwi r26, 0x0
     beq lbl_fn_8065C7F0_00001318
@@ -1522,7 +1522,7 @@ lbl_fn_8065C7F0_000012E4:
     mr r5, r26
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C7F0_00001318:
     cmpwi r25, 0x0
     beq lbl_fn_8065C7F0_0000134C
@@ -1536,7 +1536,7 @@ lbl_fn_8065C7F0_00001318:
     mr r5, r25
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C7F0_0000134C:
     cmpwi r24, 0x0
     beq lbl_fn_8065C7F0_00001380
@@ -1550,7 +1550,7 @@ lbl_fn_8065C7F0_0000134C:
     mr r5, r24
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C7F0_00001380:
     cmpwi r27, 0x0
     beq lbl_fn_8065C7F0_000013B4
@@ -1564,7 +1564,7 @@ lbl_fn_8065C7F0_00001380:
     mr r5, r27
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C7F0_000013B4:
     cmpwi r30, 0x0
     beq lbl_fn_8065C7F0_000013E8
@@ -1578,7 +1578,7 @@ lbl_fn_8065C7F0_000013B4:
     mr r5, r30
     addi r3, r31, 0x108
     crclr 6
-    bl fn_8065B990
+    bl usb_logPrintf
 lbl_fn_8065C7F0_000013E8:
     addi r11, r1, 0x50
     mr r3, r15

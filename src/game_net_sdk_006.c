@@ -18,7 +18,7 @@ extern void _savegpr_26(void);
 extern void OSInitMutex(void);
 extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
-extern void fn_8061C8A0(void);
+extern void IOS_Close(void);
 extern void fn_8061D080(void);
 extern void fn_80698A2C(void);
 extern void fn_80698DEC(void);
@@ -929,7 +929,7 @@ lbl_fn_806A4F3C_00000AD0:
     stw r0, 0x74(r1)
     bl IOS_Ioctlv
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     lwz r3, 0x60(r1)
     lwz r3, 0x0(r3)
 lbl_fn_806A4F3C_00000B40:
@@ -988,7 +988,7 @@ lbl_fn_806A5094_00000BB4:
     stw r9, 0x94(r1)
     bl IOS_Ioctlv
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     lwz r3, 0x20(r1)
 lbl_fn_806A5094_00000C0C:
     lwz r10, 0x0(r1)
@@ -1039,7 +1039,7 @@ lbl_fn_806A515C_00000C74:
     stw r8, 0x6c(r1)
     bl IOS_Ioctlv
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     lwz r3, 0x20(r1)
 lbl_fn_806A515C_00000CBC:
     lwz r10, 0x0(r1)
@@ -1129,7 +1129,7 @@ lbl_fn_806A5208_00000D78:
     cmplw r26, r25
     bge lbl_fn_806A5208_00000DFC
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     mr r3, r24
     b lbl_fn_806A5208_00000F8C
 lbl_fn_806A5208_00000DFC:
@@ -1138,7 +1138,7 @@ lbl_fn_806A5208_00000DFC:
     b lbl_fn_806A5208_00000E18
 lbl_fn_806A5208_00000E08:
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     mr r3, r26
     b lbl_fn_806A5208_00000F8C
 lbl_fn_806A5208_00000E18:
@@ -1171,7 +1171,7 @@ lbl_fn_806A5208_00000E18:
     add r24, r24, r26
     bge lbl_fn_806A5208_00000E98
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     mr r3, r24
     b lbl_fn_806A5208_00000F8C
 lbl_fn_806A5208_00000E98:
@@ -1180,7 +1180,7 @@ lbl_fn_806A5208_00000E98:
     b lbl_fn_806A5208_00000EC4
 lbl_fn_806A5208_00000EA4:
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     cmpwi r24, 0x0
     ble lbl_fn_806A5208_00000EBC
     mr r3, r24
@@ -1227,7 +1227,7 @@ lbl_fn_806A5208_00000EC4:
     b lbl_fn_806A5208_00000F74
 lbl_fn_806A5208_00000F54:
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     cmpwi r24, 0x0
     ble lbl_fn_806A5208_00000F6C
     mr r3, r24
@@ -1241,7 +1241,7 @@ lbl_fn_806A5208_00000F74:
     mr r26, r24
 lbl_fn_806A5208_00000F80:
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     mr r3, r26
 lbl_fn_806A5208_00000F8C:
     lwz r10, 0x0(r1)
@@ -1326,7 +1326,7 @@ lbl_fn_806A54D8_00001038:
     mr r25, r27
     bge lbl_fn_806A54D8_000010BC
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     mr r3, r27
     b lbl_fn_806A54D8_0000124C
 lbl_fn_806A54D8_000010BC:
@@ -1335,7 +1335,7 @@ lbl_fn_806A54D8_000010BC:
     b lbl_fn_806A54D8_000010D8
 lbl_fn_806A54D8_000010C8:
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     mr r3, r27
     b lbl_fn_806A54D8_0000124C
 lbl_fn_806A54D8_000010D8:
@@ -1368,7 +1368,7 @@ lbl_fn_806A54D8_000010D8:
     add r25, r25, r27
     bge lbl_fn_806A54D8_00001158
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     mr r3, r25
     b lbl_fn_806A54D8_0000124C
 lbl_fn_806A54D8_00001158:
@@ -1377,7 +1377,7 @@ lbl_fn_806A54D8_00001158:
     b lbl_fn_806A54D8_00001184
 lbl_fn_806A54D8_00001164:
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     cmpwi r25, 0x0
     ble lbl_fn_806A54D8_0000117C
     mr r3, r25
@@ -1424,7 +1424,7 @@ lbl_fn_806A54D8_00001184:
     b lbl_fn_806A54D8_00001234
 lbl_fn_806A54D8_00001214:
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     cmpwi r25, 0x0
     ble lbl_fn_806A54D8_0000122C
     mr r3, r25
@@ -1438,7 +1438,7 @@ lbl_fn_806A54D8_00001234:
     mr r27, r25
 lbl_fn_806A54D8_00001240:
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     mr r3, r27
 lbl_fn_806A54D8_0000124C:
     lwz r10, 0x0(r1)
@@ -1488,7 +1488,7 @@ lbl_fn_806A5798_000012B0:
     stw r8, 0x6c(r1)
     bl IOS_Ioctlv
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     lwz r3, 0x20(r1)
 lbl_fn_806A5798_000012F8:
     lwz r10, 0x0(r1)
@@ -1587,7 +1587,7 @@ lbl_fn_806A5844_000013C8:
     addi r3, r31, 0x0
     bl fn_806A5C90
     mr r3, r29
-    bl fn_8061C8A0
+    bl IOS_Close
     lwz r3, 0x40(r1)
 lbl_fn_806A5844_00001464:
     lwz r10, 0x0(r1)
@@ -1677,7 +1677,7 @@ lbl_fn_806A59B0_0000152C:
     addi r3, r31, 0x0
     bl fn_806A5C90
     mr r3, r29
-    bl fn_8061C8A0
+    bl IOS_Close
     lwz r3, 0x40(r1)
 lbl_fn_806A59B0_000015AC:
     lwz r10, 0x0(r1)
@@ -1733,7 +1733,7 @@ lbl_fn_806A5AF8_00001618:
     stw r9, 0x94(r1)
     bl IOS_Ioctlv
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     lwz r3, 0x60(r1)
 lbl_fn_806A5AF8_00001670:
     lwz r10, 0x0(r1)
@@ -1790,7 +1790,7 @@ lbl_fn_806A5BC0_000016E0:
     stw r9, 0x94(r1)
     bl IOS_Ioctlv
     mr r3, r31
-    bl fn_8061C8A0
+    bl IOS_Close
     lwz r3, 0x60(r1)
 lbl_fn_806A5BC0_00001738:
     lwz r10, 0x0(r1)

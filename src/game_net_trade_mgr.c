@@ -45,7 +45,7 @@ extern void fn_801D0BAC(void);
 extern void fn_8020A3E4(void);
 extern void fn_8023A614(void);
 extern void fn_802BABC0(void);
-extern void fn_802F0990(void);
+extern void input_rumble_isEnabled(void);
 extern void fn_8037529C(void);
 extern void fn_8037F688(void);
 extern void fn_803BF818(void);
@@ -1036,12 +1036,12 @@ lbl_fn_8052B190_00000B74:
     li r4, 0x0
     bl fn_8052DEF0
     li r29, 0x0
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_8052B7F4
     stw r29, 0x4(r3)
     addi r3, r25, 0x468
     bl fn_8052E1A4
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_8052B7FC
     mr r3, r25
     bl fn_805303D4

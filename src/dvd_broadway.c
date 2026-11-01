@@ -20,7 +20,7 @@ extern void _savegpr_24(void);
 extern void _savegpr_27(void);
 extern void fn_806070F0(void);
 extern void fn_80607230(void);
-extern void fn_8061C8A0(void);
+extern void IOS_Close(void);
 extern void IOS_IoctlvAsync(void);
 extern void strncpy(void);
 extern void fn_80696324(void);
@@ -408,7 +408,7 @@ asm void fn_80600800(void)
     mflr r0
     stw r0, 0x14(r1)
     lwz r3, lbl_8087E7F8
-    bl fn_8061C8A0
+    bl IOS_Close
     cmpwi r3, 0x0
     beq lbl_fn_80600800_434
     lis r3, lbl_807AAB68@ha

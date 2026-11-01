@@ -80,7 +80,7 @@ extern void fn_802660FC(void);
 extern void fn_802A36B0(void);
 extern void fn_802A4094(void);
 extern void fn_802BABC0(void);
-extern void fn_802F0990(void);
+extern void input_rumble_isEnabled(void);
 extern void fn_803165E0(void);
 extern void fn_80339F74(void);
 extern void entity_Instance_constructor(void);
@@ -1751,12 +1751,12 @@ lbl_fn_8045374C_00001610:
 lbl_fn_8045374C_00001628:
     cmpwi r24, 0x0
     bne lbl_fn_8045374C_000015A4
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_80453DB4
     mr r4, r3
     addi r3, r31, 0x2560
     bl fn_80453C88
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_80373100
     mr r4, r3
     addi r3, r31, 0x25e0

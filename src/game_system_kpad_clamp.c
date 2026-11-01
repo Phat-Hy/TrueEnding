@@ -73,7 +73,7 @@ extern void fn_80244FC0(void);
 extern void fn_80267B20(void);
 extern void fn_802A4170(void);
 extern void fn_802A4184(void);
-extern void fn_802F0990(void);
+extern void input_rumble_isEnabled(void);
 extern void fn_80316E38(void);
 extern void fn_80317034(void);
 extern void fn_80318F90(void);
@@ -905,23 +905,23 @@ lbl_fn_803729B4_000009B4:
     bl fn_80371664
     bl fn_8036635C
     bl fn_8054E520
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     li r4, 0x0
     bl fn_80366DF8
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_80373100
     mr r4, r3
     addi r3, r1, 0x180
     bl fn_8037309C
     li r30, 0x0
     stw r30, 0x1c8(r1)
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     addi r4, r1, 0x180
     bl fn_80366D40
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     lfs f1, lbl_80885708
     bl fn_80366E00
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_80366DA4
     mr r4, r3
     addi r3, r1, 0x128
@@ -931,7 +931,7 @@ lbl_fn_803729B4_000009B4:
     addi r4, r1, 0x128
     bl fn_80366E08
     mr r30, r3
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     mr r4, r30
     bl fn_80366DAC
     bl viewport_getFlag

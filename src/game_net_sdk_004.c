@@ -26,7 +26,7 @@ extern void OSUnlockMutex(void);
 extern void fn_805F3410(void);
 extern void fn_805F3420(void);
 extern void fn_805F6DF0(void);
-extern void fn_8061C8A0(void);
+extern void IOS_Close(void);
 extern void fn_8061D080(void);
 extern void fn_80624970(void);
 extern void fn_80624B10(void);
@@ -2605,7 +2605,7 @@ asm void fn_806A21B0(void)
     mflr r0
     mr r3, r4
     stw r0, 0x14(r1)
-    bl fn_8061C8A0
+    bl IOS_Close
     cmpwi r3, 0x0
     li r3, 0x0
     bge lbl_fn_806A21B0_00001F14

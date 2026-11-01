@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void __register_global_object(void);
-extern void fn_80082BE0(void);
+extern void dungeon_destroyContext(void);
 extern void fn_80082CAC(void);
 extern void field_initContext(void);
 extern void fn_80084FA0(void);
@@ -1062,10 +1062,10 @@ lbl_fn_80083F50_00000DD4:
     mr r3, r31
     bl fn_80082CAC
     lis r3, lbl_807C709C@ha
-    lis r4, fn_80082BE0@ha
+    lis r4, dungeon_destroyContext@ha
     lis r5, lbl_807C7090@ha
     addi r3, r3, lbl_807C709C@l
-    addi r4, r4, fn_80082BE0@l
+    addi r4, r4, dungeon_destroyContext@l
     addi r5, r5, lbl_807C7090@l
     bl __register_global_object
     li r0, 0x1

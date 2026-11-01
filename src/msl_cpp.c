@@ -30,7 +30,7 @@ extern void wmemcpy(void);
 extern void wcslen(void);
 extern void atexit(void);
 extern void gecko_walkStackFrames(void);
-extern void fn_80697BB8(void);
+extern void gecko_saveContextAndDispatch(void);
 extern void fn_80697CFC(void);
 extern void memmove(void);
 extern char* strcpy(char* dest, const char* src);
@@ -5608,7 +5608,7 @@ lbl_fn_8068B39C_00004548:
     mr r4, r30
     addi r3, r3, lbl_807661D8@l
     addi r5, r5, fn_8068B47C@l
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
     lwz r0, 0x44(r1)
     lwz r31, 0x3c(r1)
     lwz r30, 0x38(r1)
@@ -5799,7 +5799,7 @@ lbl_fn_8068B610_000047D8:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
     addi r3, r31, 0x20
     bl fn_80697CFC
     nop
@@ -5936,7 +5936,7 @@ lbl_fn_8068B770_00004968:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068B770_000049D0:
     addi r27, r30, 0x50
     li r3, 0x48
@@ -5958,7 +5958,7 @@ lbl_fn_8068B770_000049D0:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068B770_00004A24:
     addi r27, r30, 0xe0
     li r3, 0x48
@@ -5980,7 +5980,7 @@ lbl_fn_8068B770_00004A24:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068B770_00004A78:
     addi r27, r30, 0x98
     li r3, 0x48
@@ -6002,7 +6002,7 @@ lbl_fn_8068B770_00004A78:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068B770_00004ACC:
     lwz r3, 0x0(r30)
     addi r4, r30, 0x50
@@ -6381,7 +6381,7 @@ lbl_fn_8068BD60_00004F58:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068BD60_00004FC0:
     addi r27, r30, 0x178
     li r3, 0x48
@@ -6403,7 +6403,7 @@ lbl_fn_8068BD60_00004FC0:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068BD60_00005014:
     addi r27, r30, 0x208
     li r3, 0x48
@@ -6425,7 +6425,7 @@ lbl_fn_8068BD60_00005014:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068BD60_00005068:
     addi r27, r30, 0x1c0
     li r3, 0x48
@@ -6447,7 +6447,7 @@ lbl_fn_8068BD60_00005068:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068BD60_000050BC:
     lwz r3, 0x128(r30)
     addi r4, r30, 0x178
@@ -7283,7 +7283,7 @@ lbl_fn_8068C9A0_00005BE0:
     mr r4, r28
     addi r3, r3, 0x2e
     addi r5, r5, fn_8001A270@l
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068C9A0_00005C08:
     mr r4, r30
     addi r3, r31, 0x30
@@ -7414,7 +7414,7 @@ lbl_fn_8068C9A0_00005DB8:
     mr r4, r28
     addi r3, r3, 0x2e
     addi r5, r5, fn_8001A270@l
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068C9A0_00005DE0:
     addic. r3, r31, 0x30
     beq lbl_fn_8068C9A0_00005E08
@@ -7541,7 +7541,7 @@ lbl_fn_8068CD2C_00005F6C:
     mr r4, r28
     addi r3, r3, 0x2e
     addi r5, r5, fn_8001A270@l
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068CD2C_00005F94:
     mr r4, r30
     addi r3, r31, 0x30
@@ -7672,7 +7672,7 @@ lbl_fn_8068CD2C_00006144:
     mr r4, r28
     addi r3, r3, 0x2e
     addi r5, r5, fn_8001A270@l
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068CD2C_0000616C:
     addic. r3, r31, 0x30
     beq lbl_fn_8068CD2C_00006194
@@ -9198,7 +9198,7 @@ asm void fn_8068E3FC(void)
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068E3FC_000075A4:
     addi r3, r31, 0x10
     bl fn_80697CFC
@@ -10250,7 +10250,7 @@ lbl_fn_8068F138_0000830C:
     mr r4, r27
     addi r3, r3, 0x2e
     addi r5, r5, fn_8001A270@l
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068F138_00008334:
     lwz r0, lbl_808803CC
     li r3, 0x0
@@ -10378,7 +10378,7 @@ lbl_fn_8068F138_000084D8:
     mr r4, r27
     addi r3, r3, 0x2e
     addi r5, r5, fn_8001A270@l
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068F138_00008500:
     mr r10, r31
     lmw r26, 0x78(r10)
@@ -11035,7 +11035,7 @@ lbl_fn_8068FB84_00008D58:
     mr r4, r27
     addi r3, r3, 0x2e
     addi r5, r5, fn_8001A270@l
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068FB84_00008D80:
     lwz r0, lbl_808803C8
     li r3, 0x0
@@ -11163,7 +11163,7 @@ lbl_fn_8068FB84_00008F24:
     mr r4, r27
     addi r3, r3, 0x2e
     addi r5, r5, fn_8001A270@l
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8068FB84_00008F4C:
     mr r10, r31
     lmw r26, 0x78(r10)
@@ -11839,7 +11839,7 @@ lbl_fn_80690630_00009804:
     mr r4, r27
     addi r3, r3, 0x2e
     addi r5, r5, fn_8001A270@l
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_80690630_0000982C:
     lwz r0, lbl_808803CC
     li r3, 0x0
@@ -11992,7 +11992,7 @@ lbl_fn_80690630_00009A28:
     mr r4, r26
     addi r3, r3, 0x2e
     addi r5, r5, fn_8001A270@l
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_80690630_00009A50:
     lwz r0, 0x14(r29)
     cmpwi r0, 0x0
@@ -12761,7 +12761,7 @@ lbl_fn_806912D8_0000A4AC:
     mr r4, r27
     addi r3, r3, 0x2e
     addi r5, r5, fn_8001A270@l
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_806912D8_0000A4D4:
     lwz r0, lbl_808803C8
     li r3, 0x0
@@ -12914,7 +12914,7 @@ lbl_fn_806912D8_0000A6D0:
     mr r4, r26
     addi r3, r3, 0x2e
     addi r5, r5, fn_8001A270@l
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_806912D8_0000A6F8:
     lwz r0, 0x14(r29)
     cmpwi r0, 0x0
@@ -13244,7 +13244,7 @@ lbl_fn_8069194C_0000AB68:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_8069194C_0000AB90:
     addi r3, r31, 0x8
     bl fn_80697CFC
@@ -13844,7 +13844,7 @@ lbl_std_string_append_0000B2F4:
     mr r4, r30
     addi r5, r5, fn_8069519C@l
     addi r3, r3, 0x14
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_std_string_append_0000B328:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -13935,7 +13935,7 @@ lbl_std_string_append_0000B448:
     mr r4, r28
     addi r5, r5, fn_8069519C@l
     addi r3, r3, 0x14
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_std_string_append_0000B47C:
     lis r3, 0x1555
     addi r0, r3, 0x5555
@@ -14034,7 +14034,7 @@ lbl_std_string_append_0000B5B4:
     mr r4, r30
     addi r5, r5, fn_8069519C@l
     addi r3, r3, 0x14
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_std_string_append_0000B5E8:
     slwi r3, r29, 2
     bl mem_free
@@ -14132,7 +14132,7 @@ lbl_std_string_append_0000B74C:
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
     addi r3, r31, 0xa0
     bl fn_80697CFC
     nop
@@ -16751,7 +16751,7 @@ lbl_fn_80694790_0000D968:
     mr r4, r29
     addi r5, r5, fn_8069519C@l
     addi r3, r3, 0x14
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_80694790_0000D99C:
     lis r3, 0xaab
     subi r0, r3, 0x5556
@@ -16855,7 +16855,7 @@ lbl_fn_80694790_0000DAEC:
     mr r4, r30
     addi r5, r5, fn_8069519C@l
     addi r3, r3, 0x14
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_80694790_0000DB20:
     lis r3, 0xaab
     subi r0, r3, 0x5556
@@ -16952,7 +16952,7 @@ lbl_fn_80694790_0000DC50:
     mr r4, r29
     addi r5, r5, fn_8069519C@l
     addi r3, r3, 0x14
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_80694790_0000DC84:
     slwi r3, r31, 3
     bl mem_free
@@ -17074,7 +17074,7 @@ lbl_fn_80694C38_0000DE10:
     mr r4, r29
     addi r5, r5, fn_8069519C@l
     addi r3, r3, 0x14
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_80694C38_0000DE44:
     lis r3, 0xaab
     subi r0, r3, 0x5556
@@ -17178,7 +17178,7 @@ lbl_fn_80694C38_0000DF94:
     mr r4, r30
     addi r5, r5, fn_8069519C@l
     addi r3, r3, 0x14
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_80694C38_0000DFC8:
     lis r3, 0xaab
     subi r0, r3, 0x5556
@@ -17275,7 +17275,7 @@ lbl_fn_80694C38_0000E0F8:
     mr r4, r29
     addi r5, r5, fn_8069519C@l
     addi r3, r3, 0x14
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl_fn_80694C38_0000E12C:
     slwi r3, r31, 3
     bl mem_free

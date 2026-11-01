@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void __register_global_object(void);
 extern void fn_80082970(void);
-extern void fn_80082BE0(void);
+extern void dungeon_destroyContext(void);
 extern void fn_80082CAC(void);
 extern void fn_800832AC(void);
 extern void town_updateInteractionPoints(void);
@@ -157,10 +157,10 @@ lbl_fn_80084110_00000130:
     mr r3, r31
     bl fn_80082CAC
     lis r3, lbl_807C709C@ha
-    lis r4, fn_80082BE0@ha
+    lis r4, dungeon_destroyContext@ha
     lis r5, lbl_807C7090@ha
     addi r3, r3, lbl_807C709C@l
-    addi r4, r4, fn_80082BE0@l
+    addi r4, r4, dungeon_destroyContext@l
     addi r5, r5, lbl_807C7090@l
     bl __register_global_object
     li r0, 0x1
@@ -179,10 +179,10 @@ lbl_fn_80084110_0000018C:
     bne lbl_fn_80084110_000001E0
     mr r3, r30
     bl fn_80082970
-    lis r4, fn_80082BE0@ha
+    lis r4, dungeon_destroyContext@ha
     lis r5, lbl_807C7090@ha
     mr r3, r30
-    addi r4, r4, fn_80082BE0@l
+    addi r4, r4, dungeon_destroyContext@l
     addi r5, r5, lbl_807C7090@l
     bl __register_global_object
     li r0, 0x1
@@ -299,10 +299,10 @@ lbl_mem_alloc_00000338:
     mr r3, r31
     bl fn_80082CAC
     lis r3, lbl_807C709C@ha
-    lis r4, fn_80082BE0@ha
+    lis r4, dungeon_destroyContext@ha
     lis r5, lbl_807C7090@ha
     addi r3, r3, lbl_807C709C@l
-    addi r4, r4, fn_80082BE0@l
+    addi r4, r4, dungeon_destroyContext@l
     addi r5, r5, lbl_807C7090@l
     bl __register_global_object
     li r0, 0x1
@@ -417,10 +417,10 @@ lbl_mem_free_000004E8:
     mr r3, r31
     bl fn_80082CAC
     lis r3, lbl_807C709C@ha
-    lis r4, fn_80082BE0@ha
+    lis r4, dungeon_destroyContext@ha
     lis r5, lbl_807C7090@ha
     addi r3, r3, lbl_807C709C@l
-    addi r4, r4, fn_80082BE0@l
+    addi r4, r4, dungeon_destroyContext@l
     addi r5, r5, lbl_807C7090@l
     bl __register_global_object
     li r0, 0x1
@@ -455,10 +455,10 @@ asm void dtor_80084684(void)
     lis r31, lbl_807C709C@ha
     addi r3, r31, lbl_807C709C@l
     bl fn_80082970
-    lis r4, fn_80082BE0@ha
+    lis r4, dungeon_destroyContext@ha
     lis r5, lbl_807C7090@ha
     addi r3, r31, lbl_807C709C@l
-    addi r4, r4, fn_80082BE0@l
+    addi r4, r4, dungeon_destroyContext@l
     addi r5, r5, lbl_807C7090@l
     bl __register_global_object
     li r0, 0x1
@@ -572,10 +572,10 @@ lbl_mem_realloc_00000714:
     mr r3, r31
     bl fn_80082CAC
     lis r3, lbl_807C709C@ha
-    lis r4, fn_80082BE0@ha
+    lis r4, dungeon_destroyContext@ha
     lis r5, lbl_807C7090@ha
     addi r3, r3, lbl_807C709C@l
-    addi r4, r4, fn_80082BE0@l
+    addi r4, r4, dungeon_destroyContext@l
     addi r5, r5, lbl_807C7090@l
     bl __register_global_object
     li r0, 0x1
@@ -694,10 +694,10 @@ lbl_fn_800848B4_000008D4:
     mr r3, r31
     bl fn_80082CAC
     lis r3, lbl_807C709C@ha
-    lis r4, fn_80082BE0@ha
+    lis r4, dungeon_destroyContext@ha
     lis r5, lbl_807C7090@ha
     addi r3, r3, lbl_807C709C@l
-    addi r4, r4, fn_80082BE0@l
+    addi r4, r4, dungeon_destroyContext@l
     addi r5, r5, lbl_807C7090@l
     bl __register_global_object
     li r0, 0x1
@@ -813,10 +813,10 @@ lbl_field_initGridPoints_00000A88:
     mr r3, r31
     bl fn_80082CAC
     lis r3, lbl_807C709C@ha
-    lis r4, fn_80082BE0@ha
+    lis r4, dungeon_destroyContext@ha
     lis r5, lbl_807C7090@ha
     addi r3, r3, lbl_807C709C@l
-    addi r4, r4, fn_80082BE0@l
+    addi r4, r4, dungeon_destroyContext@l
     addi r5, r5, lbl_807C7090@l
     bl __register_global_object
     li r0, 0x1
@@ -930,10 +930,10 @@ lbl_mem_getAllocSize_00000C34:
     mr r3, r31
     bl fn_80082CAC
     lis r3, lbl_807C709C@ha
-    lis r4, fn_80082BE0@ha
+    lis r4, dungeon_destroyContext@ha
     lis r5, lbl_807C7090@ha
     addi r3, r3, lbl_807C709C@l
-    addi r4, r4, fn_80082BE0@l
+    addi r4, r4, dungeon_destroyContext@l
     addi r5, r5, lbl_807C7090@l
     bl __register_global_object
     li r0, 0x1

@@ -3,10 +3,10 @@
 
 /* External functions */
 extern void fn_805EAA00(void);
-extern void fn_80610510(void);
+extern void DSPCheckInit(void);
 extern void fn_80610520(void);
 extern void fn_80610530(void);
-extern void fn_80610550(void);
+extern void DSPSendMailBox(void);
 extern void fn_80612B10(void);
 extern void fn_80613CC0(void);
 extern void fn_806142F0(void);
@@ -234,9 +234,9 @@ lbl_fn_806107C0_00000268:
     bne lbl_fn_806107C0_000002C0
     lis r3, 0xcdd1
     addi r3, r3, 0x3
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_806107C0_0000028C:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_806107C0_0000028C
     li r0, 0x0
@@ -252,9 +252,9 @@ lbl_fn_806107C0_0000028C:
 lbl_fn_806107C0_000002C0:
     lis r3, 0xcdd1
     addi r3, r3, 0x1
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_806107C0_000002CC:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_806107C0_000002CC
     lwz r3, lbl_80880054
@@ -278,9 +278,9 @@ lbl_fn_806107C0_00000308:
     bne lbl_fn_806107C0_00000354
     lis r3, 0xcdd1
     addi r3, r3, 0x3
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_806107C0_0000032C:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_806107C0_0000032C
     lwz r3, lbl_80880054
@@ -293,9 +293,9 @@ lbl_fn_806107C0_0000032C:
 lbl_fn_806107C0_00000354:
     lis r3, 0xcdd1
     addi r3, r3, 0x1
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_806107C0_00000360:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_806107C0_00000360
     lwz r3, lbl_80880054
@@ -310,9 +310,9 @@ lbl_fn_806107C0_00000360:
 lbl_fn_806107C0_00000390:
     lis r3, 0xcdd1
     addi r3, r3, 0x1
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_806107C0_0000039C:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_806107C0_0000039C
     lwz r3, lbl_80880054
@@ -341,9 +341,9 @@ lbl_fn_806107C0_000003D0:
 lbl_fn_806107C0_00000400:
     lis r3, 0xcdd1
     addi r3, r3, 0x1
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_806107C0_0000040C:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_806107C0_0000040C
     lwz r4, lbl_80880044
@@ -377,9 +377,9 @@ lbl_fn_806107C0_00000450:
 lbl_fn_806107C0_00000480:
     lis r3, 0xcdd1
     addi r3, r3, 0x2
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_806107C0_0000048C:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_806107C0_0000048C
     lwz r3, lbl_80880054
@@ -398,9 +398,9 @@ lbl_fn_806107C0_000004B0:
 lbl_fn_806107C0_000004C8:
     lis r3, 0xcdd1
     addi r3, r3, 0x1
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_806107C0_000004D4:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_806107C0_000004D4
     lwz r4, lbl_80880054
@@ -424,9 +424,9 @@ lbl_fn_806107C0_0000050C:
 lbl_fn_806107C0_00000524:
     lis r3, 0xcdd1
     addi r3, r3, 0x1
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_806107C0_00000530:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_806107C0_00000530
     lwz r4, lbl_80880054
@@ -474,113 +474,113 @@ asm void fn_80610BF0(void)
     mr r30, r3
     beq lbl_fn_80610BF0_00000614
     lwz r3, 0x18(r3)
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_000005DC:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_000005DC
     lwz r3, 0x1c(r30)
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_000005F0:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_000005F0
     lwz r3, 0x20(r30)
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_00000604:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_00000604
     b lbl_fn_80610BF0_00000650
 lbl_fn_80610BF0_00000614:
     li r3, 0x0
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_0000061C:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_0000061C
     li r3, 0x0
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_00000630:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_00000630
     li r3, 0x0
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_00000644:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_00000644
 lbl_fn_80610BF0_00000650:
     lwz r3, 0xc(r31)
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_00000658:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_00000658
     lwz r3, 0x10(r31)
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_0000066C:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_0000066C
     lwz r3, 0x14(r31)
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_00000680:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_00000680
     lwz r0, 0x0(r31)
     cmpwi r0, 0x0
     bne lbl_fn_80610BF0_000006EC
     lhz r3, 0x24(r31)
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_000006A0:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_000006A0
     li r3, 0x0
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_000006B4:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_000006B4
     li r3, 0x0
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_000006C8:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_000006C8
     li r3, 0x0
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_000006DC:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_000006DC
     b lbl_fn_80610BF0_0000073C
 lbl_fn_80610BF0_000006EC:
     lhz r3, 0x26(r31)
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_000006F4:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_000006F4
     lwz r3, 0x18(r31)
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_00000708:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_00000708
     lwz r3, 0x1c(r31)
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_0000071C:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_0000071C
     lwz r3, 0x20(r31)
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610BF0_00000730:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610BF0_00000730
 lbl_fn_80610BF0_0000073C:
@@ -611,68 +611,68 @@ lbl_fn_80610DA0_00000780:
     stw r3, 0x8(r1)
     lis r3, 0x80f4
     subi r3, r3, 0x5fff
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610DA0_000007A0:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610DA0_000007A0
     lwz r3, 0xc(r30)
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610DA0_000007B4:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610DA0_000007B4
     lis r3, 0x80f4
     subi r3, r3, 0x3ffe
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610DA0_000007CC:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610DA0_000007CC
     lwz r0, 0x14(r30)
     clrlwi r3, r0, 16
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610DA0_000007E4:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610DA0_000007E4
     lis r3, 0x80f4
     subi r3, r3, 0x5ffe
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610DA0_000007FC:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610DA0_000007FC
     lwz r3, 0x10(r30)
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610DA0_00000810:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610DA0_00000810
     lis r3, 0x80f4
     subi r3, r3, 0x4ffe
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610DA0_00000828:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610DA0_00000828
     li r3, 0x0
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610DA0_0000083C:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610DA0_0000083C
     lis r3, 0x80f4
     subi r3, r3, 0x2fff
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610DA0_00000854:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610DA0_00000854
     lhz r3, 0x24(r30)
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80610DA0_00000868:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80610DA0_00000868
     mr r4, r30

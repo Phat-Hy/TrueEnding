@@ -50,8 +50,8 @@ void fn_8061C2A0(void);
 void __ios_Ipc2(void);
 void IOS_OpenAsync(void);
 void IOS_Open(void);
-void fn_8061C7E0(void);
-void fn_8061C8A0(void);
+void IOS_CloseAsync(void);
+void IOS_Close(void);
 void fn_8061C950(void);
 void fn_8061CA50(void);
 void fn_8061CB60(void);
@@ -505,7 +505,7 @@ lbl_IOS_Open_000005D0:
     blr
 }
 
-asm void fn_8061C7E0(void)
+asm void IOS_CloseAsync(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -520,20 +520,20 @@ asm void fn_8061C7E0(void)
     mr r29, r4
     stw r28, 0x10(r1)
     mr r28, r3
-    bne lbl_fn_8061C7E0_0000063C
+    bne lbl_IOS_CloseAsync_0000063C
     li r31, -0x4
-    b lbl_fn_8061C7E0_00000684
-lbl_fn_8061C7E0_0000063C:
+    b lbl_IOS_CloseAsync_00000684
+lbl_IOS_CloseAsync_0000063C:
     lwz r3, hid_8087E8D4
     li r4, 0x40
     li r5, 0x20
     bl iosAllocAligned
     cmpwi r3, 0x0
     stw r3, 0x8(r1)
-    bne lbl_fn_8061C7E0_00000660
+    bne lbl_IOS_CloseAsync_00000660
     li r31, -0x16
-    b lbl_fn_8061C7E0_00000684
-lbl_fn_8061C7E0_00000660:
+    b lbl_IOS_CloseAsync_00000684
+lbl_IOS_CloseAsync_00000660:
     stw r29, 0x20(r3)
     li r5, 0x0
     li r0, 0x2
@@ -543,14 +543,14 @@ lbl_fn_8061C7E0_00000660:
     stw r5, 0x28(r4)
     stw r0, 0x0(r3)
     stw r28, 0x8(r3)
-lbl_fn_8061C7E0_00000684:
+lbl_IOS_CloseAsync_00000684:
     cmpwi r31, 0x0
-    bne lbl_fn_8061C7E0_0000069C
+    bne lbl_IOS_CloseAsync_0000069C
     lwz r3, 0x8(r1)
     mr r4, r29
     bl __ios_Ipc2
     mr r31, r3
-lbl_fn_8061C7E0_0000069C:
+lbl_IOS_CloseAsync_0000069C:
     mr r3, r31
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -562,7 +562,7 @@ lbl_fn_8061C7E0_0000069C:
     blr
 }
 
-asm void fn_8061C8A0(void)
+asm void IOS_Close(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -573,20 +573,20 @@ asm void fn_8061C8A0(void)
     li r31, 0x0
     stw r30, 0x18(r1)
     mr r30, r3
-    bne lbl_fn_8061C8A0_000006EC
+    bne lbl_IOS_Close_000006EC
     li r31, -0x4
-    b lbl_fn_8061C8A0_00000734
-lbl_fn_8061C8A0_000006EC:
+    b lbl_IOS_Close_00000734
+lbl_IOS_Close_000006EC:
     lwz r3, hid_8087E8D4
     li r4, 0x40
     li r5, 0x20
     bl iosAllocAligned
     cmpwi r3, 0x0
     stw r3, 0x8(r1)
-    bne lbl_fn_8061C8A0_00000710
+    bne lbl_IOS_Close_00000710
     li r31, -0x16
-    b lbl_fn_8061C8A0_00000734
-lbl_fn_8061C8A0_00000710:
+    b lbl_IOS_Close_00000734
+lbl_IOS_Close_00000710:
     li r5, 0x0
     stw r5, 0x20(r3)
     li r0, 0x2
@@ -596,14 +596,14 @@ lbl_fn_8061C8A0_00000710:
     stw r5, 0x28(r4)
     stw r0, 0x0(r3)
     stw r30, 0x8(r3)
-lbl_fn_8061C8A0_00000734:
+lbl_IOS_Close_00000734:
     cmpwi r31, 0x0
-    bne lbl_fn_8061C8A0_0000074C
+    bne lbl_IOS_Close_0000074C
     lwz r3, 0x8(r1)
     li r4, 0x0
     bl __ios_Ipc2
     mr r31, r3
-lbl_fn_8061C8A0_0000074C:
+lbl_IOS_Close_0000074C:
     mr r3, r31
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

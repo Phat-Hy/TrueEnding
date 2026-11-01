@@ -102,7 +102,7 @@ extern void fn_802A4094(void);
 extern void fn_802A7910(void);
 extern void fn_802A7964(void);
 extern void fn_802F0988(void);
-extern void fn_802F0990(void);
+extern void input_rumble_isEnabled(void);
 extern void fn_8030B408(void);
 extern void fn_80315644(void);
 extern void fn_80318F90(void);
@@ -765,7 +765,7 @@ lbl_fn_803D2A6C_00000694:
     stfs f0, 0x600(r1)
     bl fn_80366E08
     mr r21, r3
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     mr r4, r21
     bl fn_80366DAC
     b lbl_fn_803D2A6C_00000930
@@ -808,7 +808,7 @@ lbl_fn_803D2A6C_0000076C:
     fsubs f26, f1, f2
     fcmpo cr0, f26, f0
     ble lbl_fn_803D2A6C_000007D4
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_802F0988
     lfs f0, lbl_80885E00
     fmuls f0, f0, f1
@@ -816,7 +816,7 @@ lbl_fn_803D2A6C_0000076C:
     bge lbl_fn_803D2A6C_000007B4
     b lbl_fn_803D2A6C_000007C4
 lbl_fn_803D2A6C_000007B4:
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_802F0988
     lfs f0, lbl_80885E00
     fmuls f26, f0, f1
@@ -827,7 +827,7 @@ lbl_fn_803D2A6C_000007C4:
     b lbl_fn_803D2A6C_00000810
 lbl_fn_803D2A6C_000007D4:
     bge lbl_fn_803D2A6C_00000810
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_802F0988
     lfs f0, lbl_80885E04
     fmuls f0, f0, f1
@@ -835,7 +835,7 @@ lbl_fn_803D2A6C_000007D4:
     ble lbl_fn_803D2A6C_000007F4
     b lbl_fn_803D2A6C_00000804
 lbl_fn_803D2A6C_000007F4:
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_802F0988
     lfs f0, lbl_80885E04
     fmuls f26, f0, f1
@@ -866,7 +866,7 @@ lbl_fn_803D2A6C_0000084C:
     fmr f2, f0
 lbl_fn_803D2A6C_00000850:
     stfs f2, 0x4c(r24)
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_80366DA4
     mr r4, r3
     addi r3, r1, 0x5c0
@@ -879,7 +879,7 @@ lbl_fn_803D2A6C_00000850:
     cntlzw r0, r0
     srwi r0, r0, 5
     stw r0, 0x5c0(r1)
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_802F0988
     lfs f2, 0x48(r24)
     lfs f0, lbl_80885E0C
@@ -919,7 +919,7 @@ lbl_fn_803D2A6C_000008B4:
     stfs f1, 0x5e0(r1)
     bl fn_80366E08
     mr r21, r3
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     mr r4, r21
     bl fn_80366DAC
 lbl_fn_803D2A6C_00000930:

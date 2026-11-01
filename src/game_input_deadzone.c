@@ -48,7 +48,7 @@ extern void vec3_dot(void);
 extern void task_findEntryById(void);
 extern void fn_802F0964(void);
 extern void fn_802F0988(void);
-extern void fn_802F0990(void);
+extern void input_rumble_isEnabled(void);
 extern void fn_802F0998(void);
 extern void fn_802F09D4(void);
 extern void fn_802F0F60(void);
@@ -1765,7 +1765,7 @@ lbl_fn_802F0328_000017C0:
     cror eq, lt, eq
     bne lbl_fn_802F0328_00001938
     lfs f29, lbl_808848A0
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_802F0988
     fmr f30, f1
     addi r3, r1, 0x44

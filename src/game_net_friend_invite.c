@@ -67,7 +67,7 @@ extern void script_setTaskTerminated(void);
 extern void fn_8026607C(void);
 extern void fn_80266FA4(void);
 extern void fn_80266FB4(void);
-extern void fn_802F0990(void);
+extern void input_rumble_isEnabled(void);
 extern void fn_803396FC(void);
 extern void fn_80364E7C(void);
 extern void fn_8036503C(void);
@@ -2526,7 +2526,7 @@ lbl_fn_804D25D4_00001DD0:
     fmr f3, f1
     bl fn_800D8814
     mr r22, r3
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     mr r4, r22
     bl fn_804D0304
     mr r3, r24

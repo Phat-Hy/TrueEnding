@@ -12,8 +12,8 @@ extern void fn_80609FA0(void);
 extern void fn_8060A2E0(void);
 extern void fn_8060A840(void);
 extern void fn_8060B090(void);
-extern void fn_80610510(void);
-extern void fn_80610550(void);
+extern void DSPCheckInit(void);
+extern void DSPSendMailBox(void);
 extern void fn_80610570(void);
 extern void fn_80610630(void);
 extern void fn_80610640(void);
@@ -188,15 +188,15 @@ lbl_fn_80609670_00000160:
     lis r4, 0xbabe
     mr r29, r3
     addi r3, r4, 0x80
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80609670_00000178:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80609670_00000178
     mr r3, r29
-    bl fn_80610550
+    bl DSPSendMailBox
 lbl_fn_80609670_0000018C:
-    bl fn_80610510
+    bl DSPCheckInit
     cmpwi r3, 0x0
     bne lbl_fn_80609670_0000018C
     bl fn_80607E00

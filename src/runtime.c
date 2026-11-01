@@ -6,7 +6,7 @@ extern void dtor_80084684(void);
 extern void mem_getAllocSize(void);
 extern void fn_80394068(void);
 extern void abort(void);
-extern void fn_80697BB8(void);
+extern void gecko_saveContextAndDispatch(void);
 
 /* External data declarations */
 extern u8 atexit_funcs_80832C50[];
@@ -832,7 +832,7 @@ lbl___dynamic_cast_000008BC:
     addi r3, r3, 0x27
     addi r4, r1, 0x8
     addi r5, r5, fn_80394068@l
-    bl fn_80697BB8
+    bl gecko_saveContextAndDispatch
 lbl___dynamic_cast_000008EC:
     li r3, 0x0
 lbl___dynamic_cast_000008F0:

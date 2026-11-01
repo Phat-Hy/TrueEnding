@@ -24,7 +24,7 @@ extern void _savegpr_27(void);
 extern void OSInitMutex(void);
 extern void OSLockMutex(void);
 extern void OSUnlockMutex(void);
-extern void fn_8061C8A0(void);
+extern void IOS_Close(void);
 
 /* External data declarations */
 extern u8 lbl_80766840[];
@@ -148,7 +148,7 @@ lbl_fn_80698088_000000CC:
     bl memcpy
 lbl_fn_80698088_000000E8:
     mr r3, r29
-    bl fn_8061C8A0
+    bl IOS_Close
     cmpwi r3, 0x0
     bge lbl_fn_80698088_000000FC
     li r30, -0x1
@@ -380,7 +380,7 @@ lbl_fn_8069832C_000003FC:
     lwz r30, 0x20(r31)
 lbl_fn_8069832C_00000400:
     mr r3, r29
-    bl fn_8061C8A0
+    bl IOS_Close
     cmpwi r3, 0x0
     bge lbl_fn_8069832C_00000414
     li r30, -0x1

@@ -20,7 +20,7 @@ extern void mem_alloc(void);
 extern void mem_free(void);
 extern void fn_80507794(void);
 extern void fn_805077F4(void);
-extern void fn_8061C8A0(void);
+extern void IOS_Close(void);
 extern void fn_8061D4C0(void);
 extern void printf(void);
 extern void abort(void);
@@ -1881,7 +1881,7 @@ asm void ESP_CloseLib(void)
     lwz r3, __esFd_8087E708
     cmpwi r3, 0x0
     blt lbl_ESP_CloseLib_000017D4
-    bl fn_8061C8A0
+    bl IOS_Close
     cmpwi r3, 0x0
     mr r4, r3
     bne lbl_ESP_CloseLib_000017D4

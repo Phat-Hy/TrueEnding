@@ -75,7 +75,7 @@ extern void thread_findAndNotifySlot(void);
 extern void script_setTaskTerminated(void);
 extern void fn_802A4968(void);
 extern void fn_802A49BC(void);
-extern void fn_802F0990(void);
+extern void input_rumble_isEnabled(void);
 extern void fn_80316E38(void);
 extern void fn_80317034(void);
 extern void fn_80357F38(void);
@@ -404,7 +404,7 @@ lbl_fn_805BAC18_0000034C:
     lwz r0, 0x50(r29)
     cmpwi r0, 0x0
     beq lbl_fn_805BAC18_000006A0
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     li r4, 0x1
     bl fn_80366DF8
     lfs f1, 0x84(r29)
@@ -899,7 +899,7 @@ lbl_fn_805BAC18_00000A80:
 lbl_fn_805BAC18_00000AA8:
     cmpwi r30, 0x0
     beq lbl_fn_805BAC18_00000BC4
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     li r4, 0x0
     bl fn_80366DF8
     lwz r3, 0x5b8(r29)

@@ -39,7 +39,7 @@ extern void fn_80217D9C(void);
 extern void task_getWorkerByIndex(void);
 extern void fn_8023A664(void);
 extern void fn_80244CA0(void);
-extern void fn_802F0990(void);
+extern void input_rumble_isEnabled(void);
 extern void fn_80366DAC(void);
 extern void fn_80366E08(void);
 extern void fn_8036E624(void);
@@ -468,7 +468,7 @@ lbl_fn_8052C10C_00000408:
     addi r4, r31, 0x1310
     bl fn_80366E08
     mr r30, r3
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     mr r4, r30
     bl fn_80366DAC
     lwz r4, 0x48(r31)
@@ -1539,14 +1539,14 @@ asm void fn_8052D46C(void)
     bl sys_getMainManager
     addi r4, r1, 0x1e8
     bl fn_8052C6D0
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_8052D3CC
     mr r4, r3
     addi r3, r1, 0x1c4
     bl fn_8052D420
     li r0, 0x0
     stw r0, 0x1c4(r1)
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     addi r4, r1, 0x1c4
     bl fn_8052D3D4
     lwz r0, 0x136c(r31)
@@ -1892,14 +1892,14 @@ lbl_fn_8052D46C_00001930:
 lbl_fn_8052D46C_00001948:
     cmpwi r29, 0x0
     beq lbl_fn_8052D46C_00001978
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_8052D3CC
     mr r4, r3
     addi r3, r1, 0x1a0
     bl fn_8052D420
     li r0, 0x0
     stw r0, 0x1a0(r1)
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     addi r4, r1, 0x1a0
     bl fn_8052D3D4
 lbl_fn_8052D46C_00001978:

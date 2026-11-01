@@ -18,14 +18,14 @@ extern u32 lbl_80880050;
 extern u32 lbl_80880054;
 
 /* Function declarations */
-void fn_80610510(void);
+void DSPCheckInit(void);
 void fn_80610520(void);
 void fn_80610530(void);
-void fn_80610550(void);
+void DSPSendMailBox(void);
 void fn_80610570(void);
 void fn_80610630(void);
 
-asm void fn_80610510(void)
+asm void DSPCheckInit(void)
 {
     nofralloc
     lis r3, 0xcc00
@@ -53,7 +53,7 @@ asm void fn_80610530(void)
     blr
 }
 
-asm void fn_80610550(void)
+asm void DSPSendMailBox(void)
 {
     nofralloc
     lis r4, 0xcc00

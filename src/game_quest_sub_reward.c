@@ -46,7 +46,7 @@ extern void fn_80221F54(void);
 extern void script_setTaskTerminated(void);
 extern void fn_802A7964(void);
 extern void fn_802F0988(void);
-extern void fn_802F0990(void);
+extern void input_rumble_isEnabled(void);
 extern void fn_803606CC(void);
 extern void fn_80360780(void);
 extern void fn_8037D34C(void);
@@ -585,7 +585,7 @@ lbl_fn_80487490_00000664:
     lfs f0, lbl_80886F8C
     fcmpo cr0, f1, f0
     ble lbl_fn_80487490_0000069C
-    bl fn_802F0990
+    bl input_rumble_isEnabled
     bl fn_802F0988
     lfs f2, 0x1f6c(r31)
     lfs f0, lbl_80886F8C
