@@ -2160,10 +2160,8 @@ asm void atn_Fade_slot1(void)
     blr
 }
 
-asm void atn_FadeCommon_draw(void)
+void atn_FadeCommon_draw(void)
 {
-    nofralloc
-    blr
 }
 
 void atn_normalizePath(char* str)

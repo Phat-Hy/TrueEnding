@@ -1958,10 +1958,8 @@ lbl_fn_8000F1EC_00001940:
     blr
 }
 
-asm void fn_8000FAE4(void)
+void fn_8000FAE4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_8000FAE8(void)

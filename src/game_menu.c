@@ -4812,10 +4812,8 @@ lbl_fn_80045694_00003D48:
     blr
 }
 
-asm void Arms_slot4(void)
+void Arms_slot4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800457A4(void)

@@ -1201,10 +1201,8 @@ asm void fn_8001C1B8(void)
     b fn_8001E730
 }
 
-asm void fn_8001C1BC(void)
+void fn_8001C1BC(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_8001C1C0(void)

@@ -128,10 +128,8 @@ asm void atn_LensFlare_slot3(void)
     blr
 }
 
-asm void atn_LensFlare_slot4(void)
+void atn_LensFlare_slot4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_80079044(void)

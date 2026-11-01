@@ -452,16 +452,12 @@ asm void fn_800897C8(void)
     blr
 }
 
-asm void fn_800897D0(void)
+void fn_800897D0(void)
 {
-    nofralloc
-    blr
 }
 
-asm void fn_800897D4(void)
+void fn_800897D4(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_800897D8(void)

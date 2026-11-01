@@ -2250,10 +2250,8 @@ lbl_fn_8004D124_00001EB0:
     blr
 }
 
-asm void atn_ColliBase_getAABB(void)
+void atn_ColliBase_getAABB(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_8004D258(void)
@@ -2312,10 +2310,8 @@ lbl_fn_8004D258_00001F78:
     blr
 }
 
-asm void atn_ColliBase_testBox(void)
+void atn_ColliBase_testBox(void)
 {
-    nofralloc
-    blr
 }
 
 asm void fn_8004D314(void)
