@@ -6,7 +6,7 @@ extern void _restgpr_22(void);
 extern void _restgpr_27(void);
 extern void _savegpr_22(void);
 extern void _savegpr_27(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8004ED34(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
@@ -1487,7 +1487,7 @@ lbl_fn_8037EF48_00001438:
     stfs f2, 0x1c(r30)
     psq_st f1, 0x14(r30), 0, 0
     stfs f0, 0x50(r30)
-    bl fn_8004B378
+    bl item_useConsumable
     mr r4, r30
     addi r3, r30, 0x1f4
     bl fn_80392A04
@@ -1502,7 +1502,7 @@ lbl_fn_8037EF48_00001438:
     mr r3, r30
     bl fn_803928C0
     addi r3, r30, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r30, 0x1f4
     bl fn_80116BD4

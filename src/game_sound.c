@@ -12,7 +12,7 @@ extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
 extern void fn_8003E120(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
 extern void fn_8005B6E8(void);
@@ -6331,7 +6331,7 @@ asm void fn_8004B290(void)
     stfs f5, 0x54(r3)
     stfs f5, 0xc8(r3)
     stfs f0, 0xcc(r3)
-    bl fn_8004B378
+    bl item_useConsumable
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)

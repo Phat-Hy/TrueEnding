@@ -124,10 +124,10 @@ void fn_8071D260(void);
 void fn_8071D300(void);
 void fn_8071D370(void);
 void fn_8071D3D0(void);
-void fn_8071D3F0(void);
+void net_packet_enqueueSend(void);
 void fn_8071D470(void);
 void fn_8071D5D0(void);
-void fn_8071D6E0(void);
+void net_packet_flushQueue(void);
 void fn_8071D760(void);
 void fn_8071D860(void);
 void net_waitForEvent(void);
@@ -241,7 +241,7 @@ lbl_fn_8071BF80_00000158:
     bl fn_8071D260
     mr r4, r28
     mr r5, r31
-    bl fn_8071D3F0
+    bl net_packet_enqueueSend
     lwz r3, 0x130(r29)
     lwz r0, 0x144(r29)
     addi r3, r3, 0x1
@@ -1694,7 +1694,7 @@ asm void fn_8071D3D0(void)
     blr
 }
 
-asm void fn_8071D3F0(void)
+asm void net_packet_enqueueSend(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1914,7 +1914,7 @@ lbl_fn_8071D5D0_00001740:
     blr
 }
 
-asm void fn_8071D6E0(void)
+asm void net_packet_flushQueue(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -1927,10 +1927,10 @@ asm void fn_8071D6E0(void)
     bl fn_8071D470
     cmpwi r3, 0x0
     mr r30, r3
-    bne lbl_fn_8071D6E0_00001794
+    bne lbl_net_packet_flushQueue_00001794
     li r3, 0x0
-    b lbl_fn_8071D6E0_000017C0
-lbl_fn_8071D6E0_00001794:
+    b lbl_net_packet_flushQueue_000017C0
+lbl_net_packet_flushQueue_00001794:
     stw r3, 0x24(r29)
     li r31, 0x0
     stb r31, 0xc(r3)
@@ -1942,7 +1942,7 @@ lbl_fn_8071D6E0_00001794:
     addi r3, r29, 0x34
     bl OSWakeupThread
     mr r3, r30
-lbl_fn_8071D6E0_000017C0:
+lbl_net_packet_flushQueue_000017C0:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -2309,7 +2309,7 @@ lbl_net_pollEvent_00001C78:
     cmpwi r0, 0x0
     bne lbl_net_pollEvent_00001CA0
     bl fn_8071D260
-    bl fn_8071D6E0
+    bl net_packet_flushQueue
 lbl_net_pollEvent_00001C94:
     lbz r0, 0x31c(r31)
     cmpwi r0, 0x0

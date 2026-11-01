@@ -81,7 +81,7 @@ extern void fn_8052E984(void);
 extern void fn_8052EEC0(void);
 extern void fn_8052F890(void);
 extern void fn_80533BE0(void);
-extern void fn_80536CAC(void);
+extern void spectateView_renderInterface(void);
 extern void fn_805F98D0(void);
 extern void fn_806163C0(void);
 extern void fn_806163E0(void);
@@ -1719,7 +1719,7 @@ lbl_spectateManager_update_000015F4:
     mr r3, r30
     addi r0, r4, 0x1
     stw r0, 0x2a8(r30)
-    bl fn_80536CAC
+    bl spectateView_renderInterface
     lis r4, lbl_8075D5B0@ha
     addi r3, r30, 0x268
     addi r4, r4, lbl_8075D5B0@l

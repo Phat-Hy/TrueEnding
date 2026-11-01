@@ -13,7 +13,7 @@ extern void fn_80011410(void);
 extern void fn_80012C88(void);
 extern void fn_80013338(void);
 extern void fn_80013410(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8004D388(void);
 extern void fn_8004ED34(void);
 extern void fn_80057A68(void);
@@ -352,7 +352,7 @@ lbl_fn_80387548_000001C8:
     lfs f2, 0xac(r1)
     stfs f2, 0x1c(r30)
     psq_st f1, 0x14(r30), 0, 0
-    bl fn_8004B378
+    bl item_useConsumable
     mr r4, r30
     addi r3, r30, 0x1f4
     bl fn_80392A04
@@ -361,7 +361,7 @@ lbl_fn_80387548_000001C8:
     mr r3, r30
     bl fn_803928C0
     addi r3, r30, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r30, 0x1f4
     bl fn_80116BD4
@@ -678,7 +678,7 @@ lbl_fn_80387910_00000834:
     mr r3, r29
     bl fn_8037F688
     mr r3, r29
-    bl fn_8004B378
+    bl item_useConsumable
     mr r3, r29
     li r4, 0x0
     li r5, 0x1
@@ -1541,7 +1541,7 @@ lbl_fn_803884B8_000014C4:
     stfs f0, 0x50(r29)
 lbl_fn_803884B8_000014CC:
     mr r3, r29
-    bl fn_8004B378
+    bl item_useConsumable
     mr r4, r29
     addi r3, r29, 0x1f4
     bl fn_80392A04
@@ -1550,7 +1550,7 @@ lbl_fn_803884B8_000014CC:
     mr r3, r29
     bl fn_803928C0
     addi r3, r29, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r29, 0x1f4
     bl fn_80116BD4
@@ -1670,7 +1670,7 @@ lbl_fn_80388A88_000016AC:
     stfs f3, 0x50(r31)
 lbl_fn_80388A88_000016B0:
     mr r3, r31
-    bl fn_8004B378
+    bl item_useConsumable
     mr r4, r31
     addi r3, r31, 0x1f4
     bl fn_80392A04
@@ -1679,7 +1679,7 @@ lbl_fn_80388A88_000016B0:
     mr r3, r31
     bl fn_803928C0
     addi r3, r31, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r31, 0x1f4
     bl fn_80116BD4
@@ -1937,7 +1937,7 @@ lbl_fn_80388C44_00001A88:
     stfs f2, 0x1c(r31)
     psq_st f1, 0x14(r31), 0, 0
     stfs f0, 0x50(r31)
-    bl fn_8004B378
+    bl item_useConsumable
     mr r4, r31
     addi r3, r31, 0x1f4
     bl fn_80392A04
@@ -1950,7 +1950,7 @@ lbl_fn_80388C44_00001A88:
     mr r3, r31
     bl fn_803928C0
     addi r3, r31, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r31, 0x1f4
     bl fn_80116BD4

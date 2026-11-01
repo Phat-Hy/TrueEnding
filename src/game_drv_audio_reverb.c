@@ -20,7 +20,7 @@ extern void fn_80013338(void);
 extern void fn_80013410(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8004ED34(void);
 extern void fn_8005B3CC(void);
 extern void fn_8005B5F8(void);
@@ -559,7 +559,7 @@ lbl_fn_805BAC18_00000420:
     addi r3, r29, 0x280
     bl fn_8037F688
     addi r3, r29, 0x280
-    bl fn_8004B378
+    bl item_useConsumable
     bl fn_8008B964
     addi r4, r29, 0x280
     bl fn_80116BD4

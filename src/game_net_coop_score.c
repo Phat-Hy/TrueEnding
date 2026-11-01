@@ -14,7 +14,7 @@ extern void fn_8000D114(void);
 extern void fn_8000DD14(void);
 extern void fn_8000DD98(void);
 extern void fn_8004B338(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8005ED68(void);
 extern void atn_ComDrawTextureMask_execute(void);
 extern void fn_8006F72C(void);
@@ -657,7 +657,7 @@ asm void fn_804ABF84(void)
     fmr f2, f1
     bl fn_804A9E74
     addi r3, r1, 0x38
-    bl fn_8004B378
+    bl item_useConsumable
     mr r3, r27
     addi r4, r1, 0x38
     bl fn_80116BD4

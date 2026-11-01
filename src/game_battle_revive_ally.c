@@ -17,7 +17,7 @@ extern void fn_800846FC(void);
 extern void fn_8008AD4C(void);
 extern void fn_8009076C(void);
 extern void fn_80092A4C(void);
-extern void fn_80096E94(void);
+extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void fn_80097A88(void);
 extern void fn_80097C08(void);
@@ -293,7 +293,7 @@ asm void fn_80403B58(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0x10
-    bl fn_80096E94
+    bl lockon_updateTarget
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r0, 0x14(r1)
@@ -1121,7 +1121,7 @@ asm void fn_804047A4(void)
     stw r31, 0xc(r1)
     mr r31, r3
     addi r3, r3, 0x4
-    bl fn_80096E94
+    bl lockon_updateTarget
     lfs f0, lbl_808861F0
     li r4, 0x0
     li r0, 0x3

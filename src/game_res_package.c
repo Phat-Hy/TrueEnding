@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_80071D68(void);
 extern void fn_800760BC(void);
 extern void fn_800760D0(void);
@@ -169,7 +169,7 @@ lbl_fn_8022526C_00000100:
     stfs f1, 0x1434(r29)
     stfs f1, 0x1438(r29)
     stfs f0, 0x143c(r29)
-    bl fn_8004B378
+    bl item_useConsumable
     li r0, 0x1
     stw r0, 0x1624(r29)
     addi r3, r29, 0x1840
@@ -307,7 +307,7 @@ asm void fn_802254B0(void)
     stfs f31, 0x48(r1)
     stfs f9, 0x4c(r1)
     stfs f0, 0x50(r1)
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r0, 0x8(r1)
     addi r3, r1, 0x10
     stw r0, 0x162c(r31)
@@ -1168,7 +1168,7 @@ lbl_fn_80225DDC_00000EA4:
     stfs f2, 0x4c(r1)
     psq_st f1, 0x0(r5), 0, 0
     stfs f2, 0x143c(r31)
-    bl fn_8004B378
+    bl item_useConsumable
     lfs f8, 0x1820(r31)
     lfs f0, lbl_80883070
     fcmpo cr0, f8, f0
@@ -1844,7 +1844,7 @@ asm void fn_80226B48(void)
     mr r30, r3
     mr r31, r4
     addi r3, r3, 0x142c
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EEE0
     li r4, 0x0
     li r5, 0x0

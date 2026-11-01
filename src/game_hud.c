@@ -80,7 +80,7 @@ void fn_8009EB20(void);
 void fn_8009EC2C(void);
 void fn_8009EE30(void);
 void hud_projectWorldPoints(void);
-void fn_8009F448(void);
+void hud_copyBoneMatrices(void);
 void atn_HUD_projectWorldPoints(void);
 void fn_8009F688(void);
 void fn_8009F690(void);
@@ -874,11 +874,11 @@ lbl_fn_8009EC2C_00000AC0:
     lis r5, hud_projectWorldPoints@ha
     lwz r0, 0x4(r31)
     addi r5, r5, hud_projectWorldPoints@l
-    lis r4, fn_8009F448@ha
+    lis r4, hud_copyBoneMatrices@ha
     stw r5, 0x18(r1)
     or r0, r0, r6
     stw r0, 0x4(r31)
-    addi r4, r4, fn_8009F448@l
+    addi r4, r4, hud_copyBoneMatrices@l
     psq_l f2, 0x38(r3), 0, 0
     psq_l f3, 0x40(r3), 0, 0
     psq_l f4, 0x48(r3), 0, 0
@@ -1377,14 +1377,14 @@ void hud_projectWorldPoints(void)
     atn_HUD_projectWorldPoints();
 }
 
-asm void fn_8009F448(void)
+asm void hud_copyBoneMatrices(void)
 {
     nofralloc
     lwz r8, 0x3c(r4)
     li r7, 0x0
     li r3, 0x0
-    b lbl_fn_8009F448_000012B8
-lbl_fn_8009F448_00001274:
+    b lbl_hud_copyBoneMatrices_000012B8
+lbl_hud_copyBoneMatrices_00001274:
     lwz r0, lbl_8087EF40
     add r6, r8, r3
     addi r7, r7, 0x1
@@ -1402,10 +1402,10 @@ lbl_fn_8009F448_00001274:
     psq_st f4, 0x18(r6), 0, 0
     psq_st f5, 0x20(r6), 0, 0
     psq_st f6, 0x28(r6), 0, 0
-lbl_fn_8009F448_000012B8:
+lbl_hud_copyBoneMatrices_000012B8:
     lwz r0, 0x38(r4)
     cmplw r7, r0
-    blt lbl_fn_8009F448_00001274
+    blt lbl_hud_copyBoneMatrices_00001274
     blr
 }
 

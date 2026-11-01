@@ -22,7 +22,7 @@ extern void fn_80617220(void);
 extern void fn_80617340(void);
 extern void fn_806173E0(void);
 extern void fn_80617420(void);
-extern void fn_80617460(void);
+extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void GXSetTevSwapMode(void);
 extern void fn_80617730(void);
@@ -1782,7 +1782,7 @@ lbl_fn_805D8520_00001784:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x0
     li r5, 0x0

@@ -32,7 +32,7 @@ extern void fn_8008B140(void);
 extern void atn_Matrix_copy_2(void);
 extern void fn_80092814(void);
 extern void fn_80092F1C(void);
-extern void fn_80096E94(void);
+extern void lockon_updateTarget(void);
 extern void fn_800C344C(void);
 extern void fn_800CB360(void);
 extern void fn_800CB3A0(void);
@@ -311,7 +311,7 @@ asm void fn_803F9FA8(void)
     stw r4, 0x0(r31)
     li r4, 0x1
     li r5, 0x20
-    bl fn_80096E94
+    bl lockon_updateTarget
     li r30, 0x0
     li r0, 0x1
     stw r29, 0x4c4(r31)

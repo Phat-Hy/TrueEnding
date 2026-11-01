@@ -18,7 +18,7 @@ extern void fn_800844D8(void);
 extern void fn_800846FC(void);
 extern void fn_80084A78(void);
 extern void fn_80084C24(void);
-extern void fn_8008A4B0(void);
+extern void area_refresh(void);
 extern void fn_8008A76C(void);
 extern void fn_800970CC(void);
 extern void fn_80097180(void);
@@ -617,9 +617,9 @@ lbl_fn_800977F0_000006E4:
     addi r3, r3, 0x10
     li r7, 0x0
     bl fn_800846FC
-    lis r4, fn_8008A4B0@ha
+    lis r4, area_refresh@ha
     mr r7, r30
-    addi r4, r4, fn_8008A4B0@l
+    addi r4, r4, area_refresh@l
     li r5, 0x0
     li r6, 0x2c
     bl fn_80695720

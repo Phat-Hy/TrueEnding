@@ -21,7 +21,7 @@ extern void fn_800827E0(void);
 extern void fn_80084320(void);
 extern void fn_80089ACC(void);
 extern void fn_8008AD4C(void);
-extern void fn_80096E94(void);
+extern void lockon_updateTarget(void);
 extern void fn_800DC288(void);
 extern void fn_800E0AA8(void);
 extern void fn_800EC254(void);
@@ -62,7 +62,7 @@ extern void fn_803C7F30(void);
 extern void fn_803C7F38(void);
 extern void fn_803C7FE4(void);
 extern void fn_803C8130(void);
-extern void fn_803C81DC(void);
+extern void soundTest_initOption(void);
 extern void fn_803C8288(void);
 extern void fn_803C8334(void);
 extern void fn_803C833C(void);
@@ -661,7 +661,7 @@ lbl_fn_803C3894_00000658:
     beq lbl_fn_803C3894_000006AC
     li r4, 0x100
     li r5, 0x20
-    bl fn_80096E94
+    bl lockon_updateTarget
     mr r19, r3
 lbl_fn_803C3894_000006AC:
     mr r4, r18
@@ -967,7 +967,7 @@ lbl_fn_803C3894_00000ADC:
     addi r3, r28, 0xac
     addi r6, r25, 0x1e0
     li r5, 0x3
-    bl fn_803C81DC
+    bl soundTest_initOption
     li r21, 0x0
     b lbl_fn_803C3894_00000C98
 lbl_fn_803C3894_00000B38:

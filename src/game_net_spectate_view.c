@@ -87,7 +87,7 @@ extern u32 lbl_80887C6C;
 
 /* Function declarations */
 void spectateView_update(void);
-void fn_80536CAC(void);
+void spectateView_renderInterface(void);
 void fn_8053770C(void);
 void fn_80537784(void);
 void fn_805377F4(void);
@@ -690,7 +690,7 @@ lbl_spectateView_update_00000854:
     blr
 }
 
-asm void fn_80536CAC(void)
+asm void spectateView_renderInterface(void)
 {
     nofralloc
     stwu r1, -0x6e0(r1)
@@ -751,14 +751,14 @@ asm void fn_80536CAC(void)
     lis r30, 0xaab
     lis r31, 0x2000
     lis r14, 0x1555
-lbl_fn_80536CAC_0000099C:
+lbl_spectateView_renderInterface_0000099C:
     addi r3, r1, 0x50
     bl fn_8005B3CC
     mr r16, r3
     addi r4, r22, 0x286
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_000009EC
+    bne lbl_spectateView_renderInterface_000009EC
     addi r3, r1, 0x50
     bl fn_8005B3CC
     bl fn_800DC288
@@ -771,13 +771,13 @@ lbl_fn_80536CAC_0000099C:
     bl fn_8005B3CC
     bl fn_800DC288
     stfs f1, 0x448(r15)
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_000009EC:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_000009EC:
     mr r3, r16
     addi r4, r22, 0x28f
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_00000A34
+    bne lbl_spectateView_renderInterface_00000A34
     addi r3, r1, 0x50
     bl fn_8005B3CC
     bl fn_800DC288
@@ -790,36 +790,36 @@ lbl_fn_80536CAC_000009EC:
     bl fn_8005B3CC
     bl fn_800DC288
     stfs f1, 0x454(r15)
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_00000A34:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_00000A34:
     mr r3, r16
     addi r4, r22, 0x298
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_00000A60
+    bne lbl_spectateView_renderInterface_00000A60
     addi r3, r1, 0x50
     bl fn_8005B3CC
     bl fn_800DC288
     fmuls f0, f31, f1
     stfs f0, 0x458(r15)
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_00000A60:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_00000A60:
     mr r3, r16
     addi r4, r22, 0x2a1
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_00000A88
+    bne lbl_spectateView_renderInterface_00000A88
     addi r3, r1, 0x50
     bl fn_8005B3CC
     bl fn_800DC288
     stfs f1, 0x45c(r15)
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_00000A88:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_00000A88:
     mr r3, r16
     addi r4, r22, 0x2af
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_00000AD0
+    bne lbl_spectateView_renderInterface_00000AD0
     addi r3, r1, 0x50
     bl fn_8005B3CC
     bl fn_800DC288
@@ -832,13 +832,13 @@ lbl_fn_80536CAC_00000A88:
     bl fn_8005B3CC
     bl fn_800DC288
     stfs f1, 0x468(r15)
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_00000AD0:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_00000AD0:
     mr r3, r16
     addi r4, r22, 0x2b6
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_00000B18
+    bne lbl_spectateView_renderInterface_00000B18
     addi r3, r1, 0x50
     bl fn_8005B3CC
     bl fn_800DC288
@@ -851,36 +851,36 @@ lbl_fn_80536CAC_00000AD0:
     bl fn_8005B3CC
     bl fn_800DC288
     stfs f1, 0x474(r15)
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_00000B18:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_00000B18:
     mr r3, r16
     addi r4, r22, 0x2bd
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_00000B44
+    bne lbl_spectateView_renderInterface_00000B44
     addi r3, r1, 0x50
     bl fn_8005B3CC
     bl fn_800DC288
     fmuls f0, f31, f1
     stfs f0, 0x478(r15)
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_00000B44:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_00000B44:
     mr r3, r16
     addi r4, r22, 0x2c4
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_00000B6C
+    bne lbl_spectateView_renderInterface_00000B6C
     addi r3, r1, 0x50
     bl fn_8005B3CC
     bl fn_800DC288
     stfs f1, 0x47c(r15)
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_00000B6C:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_00000B6C:
     mr r3, r16
     addi r4, r22, 0x2d0
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_00000BB4
+    bne lbl_spectateView_renderInterface_00000BB4
     addi r3, r1, 0x50
     bl fn_8005B3CC
     bl fn_800DC288
@@ -893,13 +893,13 @@ lbl_fn_80536CAC_00000B6C:
     bl fn_8005B3CC
     bl fn_800DC288
     stfs f1, 0x488(r15)
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_00000BB4:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_00000BB4:
     mr r3, r16
     addi r4, r22, 0x2d8
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_00000BFC
+    bne lbl_spectateView_renderInterface_00000BFC
     addi r3, r1, 0x50
     bl fn_8005B3CC
     bl fn_800DC288
@@ -912,36 +912,36 @@ lbl_fn_80536CAC_00000BB4:
     bl fn_8005B3CC
     bl fn_800DC288
     stfs f1, 0x494(r15)
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_00000BFC:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_00000BFC:
     mr r3, r16
     addi r4, r22, 0x2e0
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_00000C28
+    bne lbl_spectateView_renderInterface_00000C28
     addi r3, r1, 0x50
     bl fn_8005B3CC
     bl fn_800DC288
     fmuls f0, f31, f1
     stfs f0, 0x498(r15)
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_00000C28:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_00000C28:
     mr r3, r16
     addi r4, r22, 0x2e8
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_00000C50
+    bne lbl_spectateView_renderInterface_00000C50
     addi r3, r1, 0x50
     bl fn_8005B3CC
     bl fn_800DC288
     stfs f1, 0x49c(r15)
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_00000C50:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_00000C50:
     mr r3, r16
     addi r4, r22, 0x2f4
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_00000C8C
+    bne lbl_spectateView_renderInterface_00000C8C
     addi r3, r1, 0x50
     bl fn_8005B3CC
     addi r4, r22, 0x2f8
@@ -951,32 +951,32 @@ lbl_fn_80536CAC_00000C50:
     addi r4, r22, 0x2fa
     crclr 6
     bl sprintf
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_00000C8C:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_00000C8C:
     mr r3, r16
     addi r4, r22, 0x306
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_00000CD0
+    bne lbl_spectateView_renderInterface_00000CD0
     addi r3, r1, 0x50
     bl fn_8005B3CC
     lwz r4, lbl_8087F0A8
     lwz r0, 0x15c(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_80536CAC_00000CBC
+    beq lbl_spectateView_renderInterface_00000CBC
     addi r3, r22, 0x30a
-lbl_fn_80536CAC_00000CBC:
+lbl_spectateView_renderInterface_00000CBC:
     mr r4, r3
     addi r3, r15, 0x27c
     li r5, 0x0
     bl fn_8004AE84
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_00000CD0:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_00000CD0:
     mr r3, r16
     addi r4, r22, 0x31b
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_00000D20
+    bne lbl_spectateView_renderInterface_00000D20
     addi r3, r1, 0x50
     bl fn_8005B3CC
     addi r4, r22, 0x2f8
@@ -984,21 +984,21 @@ lbl_fn_80536CAC_00000CD0:
     lwz r4, lbl_8087F0A8
     lwz r0, 0x15c(r4)
     cmpwi r0, 0x0
-    beq lbl_fn_80536CAC_00000D08
+    beq lbl_spectateView_renderInterface_00000D08
     addi r3, r22, 0x31e
-lbl_fn_80536CAC_00000D08:
+lbl_spectateView_renderInterface_00000D08:
     mr r5, r3
     addi r3, r15, 0x5a0
     addi r4, r22, 0x330
     crclr 6
     bl sprintf
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_00000D20:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_00000D20:
     mr r3, r16
     addi r4, r22, 0x341
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_00000D64
+    bne lbl_spectateView_renderInterface_00000D64
     addi r3, r1, 0x50
     bl fn_8005B3CC
     addi r4, r22, 0x34b
@@ -1010,13 +1010,13 @@ lbl_fn_80536CAC_00000D20:
     bl fn_8005B3CC
     bl fn_800DC288
     stfs f1, 0x430(r15)
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_00000D64:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_00000D64:
     mr r3, r16
     addi r4, r22, 0x350
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_0000104C
+    bne lbl_spectateView_renderInterface_0000104C
     addi r3, r1, 0x50
     bl fn_8005B3CC
     mr r19, r3
@@ -1024,7 +1024,7 @@ lbl_fn_80536CAC_00000D64:
     li r5, 0x2
     bl fn_80682544
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_000012DC
+    bne lbl_spectateView_renderInterface_000012DC
     addi r3, r19, 0x2
     bl fn_800DC12C
     mulli r16, r3, 0x3e8
@@ -1045,7 +1045,7 @@ lbl_fn_80536CAC_00000D64:
     mr r25, r3
     lwz r4, 0x2d8(r15)
     cmplw r5, r4
-    bge lbl_fn_80536CAC_00000E14
+    bge lbl_spectateView_renderInterface_00000E14
     addi r5, r5, 0x1
     lwz r4, 0x2d0(r15)
     subi r0, r5, 0x1
@@ -1055,18 +1055,18 @@ lbl_fn_80536CAC_00000D64:
     stw r23, 0x4(r4)
     stw r24, 0x8(r4)
     stw r3, 0xc(r4)
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_00000E14:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_00000E14:
     subi r0, r26, 0x1
     subf r0, r4, r0
     cmplwi r0, 0x1
-    bge lbl_fn_80536CAC_00000E38
+    bge lbl_spectateView_renderInterface_00000E38
     addi r4, r22, 0x35b
     addi r3, r27, 0xa0
     crclr 6
     bl fn_80680770
     bl fn_80686EA4
-lbl_fn_80536CAC_00000E38:
+lbl_spectateView_renderInterface_00000E38:
     lwz r3, 0x2d4(r15)
     addi r4, r15, 0x2d8
     lwz r19, 0x2d8(r15)
@@ -1081,16 +1081,16 @@ lbl_fn_80536CAC_00000E38:
     stw r4, 0x48(r1)
     stw r21, 0x4c(r1)
     stw r3, 0x1c(r1)
-    ble lbl_fn_80536CAC_00000E88
+    ble lbl_spectateView_renderInterface_00000E88
     addi r4, r22, 0x35b
     addi r3, r27, 0xa0
     crclr 6
     bl fn_80680770
     bl fn_80686EA4
-lbl_fn_80536CAC_00000E88:
+lbl_spectateView_renderInterface_00000E88:
     addi r0, r28, 0x5555
     cmplw r19, r0
-    bge lbl_fn_80536CAC_00000ED0
+    bge lbl_spectateView_renderInterface_00000ED0
     addi r4, r19, 0x1
     subi r5, r29, 0x3333
     slwi r3, r4, 2
@@ -1101,52 +1101,52 @@ lbl_fn_80536CAC_00000E88:
     srwi r4, r4, 2
     stw r4, 0x14(r1)
     cmplw r4, r0
-    bge lbl_fn_80536CAC_00000EC4
+    bge lbl_spectateView_renderInterface_00000EC4
     addi r3, r1, 0x1c
-lbl_fn_80536CAC_00000EC4:
+lbl_spectateView_renderInterface_00000EC4:
     lwz r0, 0x0(r3)
     add r20, r19, r0
-    b lbl_fn_80536CAC_00000F0C
-lbl_fn_80536CAC_00000ED0:
+    b lbl_spectateView_renderInterface_00000F0C
+lbl_spectateView_renderInterface_00000ED0:
     subi r0, r30, 0x5556
     cmplw r19, r0
-    bge lbl_fn_80536CAC_00000F08
+    bge lbl_spectateView_renderInterface_00000F08
     addi r3, r19, 0x1
     lwz r0, 0x1c(r1)
     srwi r3, r3, 1
     stw r3, 0x18(r1)
     cmplw r3, r0
     addi r3, r1, 0x18
-    bge lbl_fn_80536CAC_00000EFC
+    bge lbl_spectateView_renderInterface_00000EFC
     addi r3, r1, 0x1c
-lbl_fn_80536CAC_00000EFC:
+lbl_spectateView_renderInterface_00000EFC:
     lwz r0, 0x0(r3)
     add r20, r19, r0
-    b lbl_fn_80536CAC_00000F0C
-lbl_fn_80536CAC_00000F08:
+    b lbl_spectateView_renderInterface_00000F0C
+lbl_spectateView_renderInterface_00000F08:
     subi r20, r26, 0x1
-lbl_fn_80536CAC_00000F0C:
+lbl_spectateView_renderInterface_00000F0C:
     subi r0, r26, 0x1
     cmplw r20, r0
-    ble lbl_fn_80536CAC_00000F2C
+    ble lbl_spectateView_renderInterface_00000F2C
     addi r4, r22, 0x35b
     addi r3, r27, 0xa0
     crclr 6
     bl fn_80680770
     bl fn_80686EA4
-lbl_fn_80536CAC_00000F2C:
+lbl_spectateView_renderInterface_00000F2C:
     slwi r3, r20, 4
     bl fn_800844D8
     cmpwi r3, 0x0
     mr r19, r3
-    bne lbl_fn_80536CAC_00000F58
+    bne lbl_spectateView_renderInterface_00000F58
     lis r4, lbl_80793A58@ha
     addi r3, r27, 0xa0
     addi r4, r4, lbl_80793A58@l
     crclr 6
     bl fn_80680770
     bl fn_80686EA4
-lbl_fn_80536CAC_00000F58:
+lbl_spectateView_renderInterface_00000F58:
     lwz r5, 0x2d4(r15)
     lwz r4, 0x40(r1)
     slwi r0, r5, 4
@@ -1171,11 +1171,11 @@ lbl_fn_80536CAC_00000F58:
     stw r4, 0x40(r1)
     mtctr r0
     cmplw r6, r7
-    ble lbl_fn_80536CAC_00001004
-lbl_fn_80536CAC_00000FBC:
+    ble lbl_spectateView_renderInterface_00001004
+lbl_spectateView_renderInterface_00000FBC:
     subic. r3, r3, 0x10
     subi r6, r6, 0x10
-    beq lbl_fn_80536CAC_00000FE8
+    beq lbl_spectateView_renderInterface_00000FE8
     lwz r0, 0x4(r6)
     lwz r4, 0x0(r6)
     stw r4, 0x0(r3)
@@ -1184,15 +1184,15 @@ lbl_fn_80536CAC_00000FBC:
     lwz r4, 0x8(r6)
     stw r4, 0x8(r3)
     stw r0, 0xc(r3)
-lbl_fn_80536CAC_00000FE8:
+lbl_spectateView_renderInterface_00000FE8:
     lwz r5, 0x4c(r1)
     lwz r4, 0x40(r1)
     subi r0, r5, 0x1
     stw r0, 0x4c(r1)
     addi r0, r4, 0x1
     stw r0, 0x40(r1)
-    bdnz lbl_fn_80536CAC_00000FBC
-lbl_fn_80536CAC_00001004:
+    bdnz lbl_spectateView_renderInterface_00000FBC
+lbl_spectateView_renderInterface_00001004:
     lwz r0, 0x40(r1)
     cmpwi r18, 0x0
     lwz r6, 0x2d8(r15)
@@ -1205,18 +1205,18 @@ lbl_fn_80536CAC_00001004:
     stw r3, 0x3c(r1)
     stw r0, 0x2d4(r15)
     stw r21, 0x40(r1)
-    beq lbl_fn_80536CAC_000012DC
+    beq lbl_spectateView_renderInterface_000012DC
     cmpwi r3, 0x0
-    beq lbl_fn_80536CAC_000012DC
+    beq lbl_spectateView_renderInterface_000012DC
     stw r21, 0x40(r1)
     bl dtor_80084684
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_0000104C:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_0000104C:
     mr r3, r16
     addi r4, r22, 0x36f
     bl fn_80682428
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_000012DC
+    bne lbl_spectateView_renderInterface_000012DC
     addi r3, r1, 0x50
     bl fn_8005B3CC
     bl fn_800DC12C
@@ -1228,7 +1228,7 @@ lbl_fn_80536CAC_0000104C:
     lwz r3, 0x2ec(r15)
     stfs f1, 0x24(r1)
     cmplw r4, r3
-    bge lbl_fn_80536CAC_000010B8
+    bge lbl_spectateView_renderInterface_000010B8
     addi r3, r4, 0x1
     lwz r4, 0x2e4(r15)
     subi r0, r3, 0x1
@@ -1238,18 +1238,18 @@ lbl_fn_80536CAC_0000104C:
     frsp f0, f1
     stwux r0, r3, r4
     stfs f0, 0x4(r3)
-    b lbl_fn_80536CAC_000012DC
-lbl_fn_80536CAC_000010B8:
+    b lbl_spectateView_renderInterface_000012DC
+lbl_spectateView_renderInterface_000010B8:
     subi r0, r31, 0x1
     subf r0, r3, r0
     cmplwi r0, 0x1
-    bge lbl_fn_80536CAC_000010DC
+    bge lbl_spectateView_renderInterface_000010DC
     addi r4, r22, 0x35b
     addi r3, r27, 0xa0
     crclr 6
     bl fn_80680770
     bl fn_80686EA4
-lbl_fn_80536CAC_000010DC:
+lbl_spectateView_renderInterface_000010DC:
     lwz r3, 0x2e8(r15)
     addi r4, r15, 0x2ec
     lwz r16, 0x2ec(r15)
@@ -1264,16 +1264,16 @@ lbl_fn_80536CAC_000010DC:
     stw r4, 0x34(r1)
     stw r21, 0x38(r1)
     stw r3, 0x10(r1)
-    ble lbl_fn_80536CAC_0000112C
+    ble lbl_spectateView_renderInterface_0000112C
     addi r4, r22, 0x35b
     addi r3, r27, 0xa0
     crclr 6
     bl fn_80680770
     bl fn_80686EA4
-lbl_fn_80536CAC_0000112C:
+lbl_spectateView_renderInterface_0000112C:
     subi r0, r30, 0x5556
     cmplw r16, r0
-    bge lbl_fn_80536CAC_00001174
+    bge lbl_spectateView_renderInterface_00001174
     addi r4, r16, 0x1
     subi r5, r29, 0x3333
     slwi r3, r4, 2
@@ -1284,52 +1284,52 @@ lbl_fn_80536CAC_0000112C:
     srwi r4, r4, 2
     stw r4, 0x8(r1)
     cmplw r4, r0
-    bge lbl_fn_80536CAC_00001168
+    bge lbl_spectateView_renderInterface_00001168
     addi r3, r1, 0x10
-lbl_fn_80536CAC_00001168:
+lbl_spectateView_renderInterface_00001168:
     lwz r0, 0x0(r3)
     add r16, r16, r0
-    b lbl_fn_80536CAC_000011B0
-lbl_fn_80536CAC_00001174:
+    b lbl_spectateView_renderInterface_000011B0
+lbl_spectateView_renderInterface_00001174:
     addi r0, r14, 0x5554
     cmplw r16, r0
-    bge lbl_fn_80536CAC_000011AC
+    bge lbl_spectateView_renderInterface_000011AC
     addi r3, r16, 0x1
     lwz r0, 0x10(r1)
     srwi r3, r3, 1
     stw r3, 0xc(r1)
     cmplw r3, r0
     addi r3, r1, 0xc
-    bge lbl_fn_80536CAC_000011A0
+    bge lbl_spectateView_renderInterface_000011A0
     addi r3, r1, 0x10
-lbl_fn_80536CAC_000011A0:
+lbl_spectateView_renderInterface_000011A0:
     lwz r0, 0x0(r3)
     add r16, r16, r0
-    b lbl_fn_80536CAC_000011B0
-lbl_fn_80536CAC_000011AC:
+    b lbl_spectateView_renderInterface_000011B0
+lbl_spectateView_renderInterface_000011AC:
     subi r16, r31, 0x1
-lbl_fn_80536CAC_000011B0:
+lbl_spectateView_renderInterface_000011B0:
     subi r0, r31, 0x1
     cmplw r16, r0
-    ble lbl_fn_80536CAC_000011D0
+    ble lbl_spectateView_renderInterface_000011D0
     addi r4, r22, 0x35b
     addi r3, r27, 0xa0
     crclr 6
     bl fn_80680770
     bl fn_80686EA4
-lbl_fn_80536CAC_000011D0:
+lbl_spectateView_renderInterface_000011D0:
     slwi r3, r16, 3
     bl fn_800844D8
     cmpwi r3, 0x0
     mr r19, r3
-    bne lbl_fn_80536CAC_000011FC
+    bne lbl_spectateView_renderInterface_000011FC
     lis r4, lbl_80793A74@ha
     addi r3, r27, 0xa0
     addi r4, r4, lbl_80793A74@l
     crclr 6
     bl fn_80680770
     bl fn_80686EA4
-lbl_fn_80536CAC_000011FC:
+lbl_spectateView_renderInterface_000011FC:
     lwz r6, 0x2e8(r15)
     lwz r5, 0x2c(r1)
     slwi r3, r6, 3
@@ -1354,24 +1354,24 @@ lbl_fn_80536CAC_000011FC:
     stw r4, 0x2c(r1)
     mtctr r0
     cmplw r7, r5
-    ble lbl_fn_80536CAC_00001298
-lbl_fn_80536CAC_00001260:
+    ble lbl_spectateView_renderInterface_00001298
+lbl_spectateView_renderInterface_00001260:
     subic. r3, r3, 0x8
     subi r7, r7, 0x8
-    beq lbl_fn_80536CAC_0000127C
+    beq lbl_spectateView_renderInterface_0000127C
     lwz r0, 0x4(r7)
     lwz r4, 0x0(r7)
     stw r4, 0x0(r3)
     stw r0, 0x4(r3)
-lbl_fn_80536CAC_0000127C:
+lbl_spectateView_renderInterface_0000127C:
     lwz r5, 0x38(r1)
     lwz r4, 0x2c(r1)
     subi r0, r5, 0x1
     stw r0, 0x38(r1)
     addi r0, r4, 0x1
     stw r0, 0x2c(r1)
-    bdnz lbl_fn_80536CAC_00001260
-lbl_fn_80536CAC_00001298:
+    bdnz lbl_spectateView_renderInterface_00001260
+lbl_spectateView_renderInterface_00001298:
     lwz r0, 0x2c(r1)
     cmpwi r17, 0x0
     lwz r6, 0x2ec(r15)
@@ -1384,16 +1384,16 @@ lbl_fn_80536CAC_00001298:
     stw r3, 0x28(r1)
     stw r0, 0x2e8(r15)
     stw r21, 0x2c(r1)
-    beq lbl_fn_80536CAC_000012DC
+    beq lbl_spectateView_renderInterface_000012DC
     cmpwi r3, 0x0
-    beq lbl_fn_80536CAC_000012DC
+    beq lbl_spectateView_renderInterface_000012DC
     stw r21, 0x2c(r1)
     bl dtor_80084684
-lbl_fn_80536CAC_000012DC:
+lbl_spectateView_renderInterface_000012DC:
     addi r3, r1, 0x50
     bl fn_8005B5F8
     cmpwi r3, 0x0
-    bne lbl_fn_80536CAC_0000099C
+    bne lbl_spectateView_renderInterface_0000099C
     addi r3, r15, 0x438
     bl fn_80473F88
     addi r11, r1, 0x6d0

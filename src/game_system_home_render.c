@@ -31,7 +31,7 @@ extern void fn_8008937C(void);
 extern void fn_800897D8(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
-extern void fn_80096E94(void);
+extern void lockon_updateTarget(void);
 extern void fn_80097A88(void);
 extern void fn_800BFAC8(void);
 extern void atn_Task_constructor(void);
@@ -1734,7 +1734,7 @@ asm void fn_80363284(void)
     li r4, 0x505
     li r5, 0x20
     addi r3, r3, 0x4
-    bl fn_80096E94
+    bl lockon_updateTarget
     lwz r0, 0x3dc(r29)
     addi r31, r29, 0x3ec
     lfs f0, lbl_808856C0

@@ -7,7 +7,7 @@ extern void _restgpr_25(void);
 extern void _savegpr_20(void);
 extern void _savegpr_25(void);
 extern void fn_8000D430(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8004ED34(void);
 extern void fn_80097C08(void);
 extern void fn_80097D7C(void);
@@ -3323,7 +3323,7 @@ lbl_fn_803792F0_00002FEC:
     lfs f2, 0x514(r1)
     stfs f2, 0x30(r28)
     psq_st f1, 0x28(r28), 0, 0
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r0, 0x394(r28)
     cmpwi r0, 0x0
     beq lbl_fn_803792F0_000032A4

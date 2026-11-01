@@ -3,7 +3,7 @@
 
 /* External function declarations */
 extern void fn_8004B338(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8004ED34(void);
 extern void fn_80063764(void);
 extern void fn_80097C08(void);
@@ -1513,7 +1513,7 @@ lbl_fn_803012AC_00001414:
     psq_st f1, 0x0(r30), 0, 0
     addi r3, r1, 0x1b8
     stfs f2, 0x1e0(r1)
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r7, lbl_8087EFB4
     addi r3, r1, 0x1e4
     lwz r0, 0x1b8(r1)

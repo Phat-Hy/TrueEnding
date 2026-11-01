@@ -86,7 +86,7 @@ extern u32 lbl_80880938;
 extern u32 lbl_8088093C;
 
 /* Function declarations */
-void fn_8004B378(void);
+void item_useConsumable(void);
 void fn_8004BF64(void);
 void fn_8004C9B4(void);
 void fn_8004CB70(void);
@@ -109,7 +109,7 @@ void fn_8004F45C(void);
 void fn_8004F50C(void);
 void fn_8004F5B8(void);
 
-asm void fn_8004B378(void)
+asm void item_useConsumable(void)
 {
     nofralloc
     stwu r1, -0x5f0(r1)
@@ -136,13 +136,13 @@ asm void fn_8004B378(void)
     stw r30, 0x568(r1)
     lwz r0, 0x0(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8004B378_00000078
+    beq lbl_item_useConsumable_00000078
     cmpwi r0, 0x2
-    beq lbl_fn_8004B378_00000378
+    beq lbl_item_useConsumable_00000378
     cmpwi r0, 0x1
-    beq lbl_fn_8004B378_00000640
-    b lbl_fn_8004B378_000009DC
-lbl_fn_8004B378_00000078:
+    beq lbl_item_useConsumable_00000640
+    b lbl_item_useConsumable_000009DC
+lbl_item_useConsumable_00000078:
     lfs f9, 0x10(r3)
     lfs f0, 0x1c(r3)
     lfs f11, 0xc(r3)
@@ -161,12 +161,12 @@ lbl_fn_8004B378_00000078:
     lfs f0, lbl_808808B0
     frsp f9, f9
     fcmpo cr0, f9, f0
-    bge lbl_fn_8004B378_000000D4
+    bge lbl_item_useConsumable_000000D4
     lfs f9, 0x1c(r31)
     lfs f0, lbl_808808B4
     fadds f0, f9, f0
     stfs f0, 0x1c(r31)
-lbl_fn_8004B378_000000D4:
+lbl_item_useConsumable_000000D4:
     addi r3, r1, 0x440
     addi r4, r31, 0x8
     addi r5, r31, 0x20
@@ -223,25 +223,25 @@ lbl_fn_8004B378_000000D4:
     frsp f9, f9
     stfs f2, 0x34(r31)
     fcmpo cr0, f9, f0
-    bge lbl_fn_8004B378_000001DC
+    bge lbl_item_useConsumable_000001DC
     lfs f9, 0x2c(r31)
     lfs f0, lbl_8088089C
     fcmpo cr0, f9, f0
-    ble lbl_fn_8004B378_000001D0
+    ble lbl_item_useConsumable_000001D0
     lfs f0, lbl_808808B8
-    b lbl_fn_8004B378_000001D4
-lbl_fn_8004B378_000001D0:
+    b lbl_item_useConsumable_000001D4
+lbl_item_useConsumable_000001D0:
     lfs f0, lbl_808808BC
-lbl_fn_8004B378_000001D4:
+lbl_item_useConsumable_000001D4:
     stfs f0, 0x18(r1)
-    b lbl_fn_8004B378_000001F0
-lbl_fn_8004B378_000001DC:
+    b lbl_item_useConsumable_000001F0
+lbl_item_useConsumable_000001DC:
     frsp f2, f2
     lfs f1, 0x2c(r31)
     bl fn_8068AEA4
     frsp f0, f1
     stfs f0, 0x18(r1)
-lbl_fn_8004B378_000001F0:
+lbl_item_useConsumable_000001F0:
     lfs f0, 0x18(r1)
     addi r3, r1, 0x410
     li r4, 0x79
@@ -302,26 +302,26 @@ lbl_fn_8004B378_000001F0:
     fabs f9, f2
     frsp f9, f9
     fcmpo cr0, f9, f0
-    bge lbl_fn_8004B378_0000030C
+    bge lbl_item_useConsumable_0000030C
     lfs f9, 0x24(r1)
     lfs f0, lbl_8088089C
     fcmpo cr0, f9, f0
-    ble lbl_fn_8004B378_000002FC
+    ble lbl_item_useConsumable_000002FC
     lfs f0, lbl_808808B8
-    b lbl_fn_8004B378_00000300
-lbl_fn_8004B378_000002FC:
+    b lbl_item_useConsumable_00000300
+lbl_item_useConsumable_000002FC:
     lfs f0, lbl_808808BC
-lbl_fn_8004B378_00000300:
+lbl_item_useConsumable_00000300:
     fneg f0, f0
     stfs f0, 0x14(r1)
-    b lbl_fn_8004B378_00000320
-lbl_fn_8004B378_0000030C:
+    b lbl_item_useConsumable_00000320
+lbl_item_useConsumable_0000030C:
     lfs f1, 0x24(r1)
     bl fn_8068AEA4
     frsp f0, f1
     fneg f0, f0
     stfs f0, 0x14(r1)
-lbl_fn_8004B378_00000320:
+lbl_item_useConsumable_00000320:
     lfs f9, 0x1c(r31)
     addi r3, r1, 0x14
     lfs f0, 0x10(r31)
@@ -343,8 +343,8 @@ lbl_fn_8004B378_00000320:
     stfs f12, 0x7c(r1)
     bl fn_805F9940
     stfs f1, 0x4c(r31)
-    b lbl_fn_8004B378_000009DC
-lbl_fn_8004B378_00000378:
+    b lbl_item_useConsumable_000009DC
+lbl_item_useConsumable_00000378:
     lfs f9, 0x10(r3)
     lfs f0, 0x1c(r3)
     lfs f11, 0xc(r3)
@@ -373,10 +373,10 @@ lbl_fn_8004B378_00000378:
     stfs f11, 0x58(r3)
     lfs f0, 0x104(r1)
     fcmpu cr0, f12, f0
-    bne lbl_fn_8004B378_000004E8
+    bne lbl_item_useConsumable_000004E8
     lfs f0, 0x10c(r1)
     fcmpu cr0, f12, f0
-    bne lbl_fn_8004B378_000004E8
+    bne lbl_item_useConsumable_000004E8
     lfs f0, 0xc(r3)
     lfs f10, 0x10(r3)
     fneg f13, f0
@@ -398,22 +398,22 @@ lbl_fn_8004B378_00000378:
     stfs f11, 0xd8(r1)
     stfs f12, 0xdc(r1)
     cror eq, lt, eq
-    bne lbl_fn_8004B378_0000046C
+    bne lbl_item_useConsumable_0000046C
     frsp f0, f10
     lfs f10, lbl_808808A4
     fmuls f9, f11, f10
     fmuls f0, f0, f10
     stfs f9, 0xd8(r1)
     stfs f0, 0xf0(r1)
-    b lbl_fn_8004B378_00000484
-lbl_fn_8004B378_0000046C:
+    b lbl_item_useConsumable_00000484
+lbl_item_useConsumable_0000046C:
     frsp f0, f13
     lfs f10, lbl_808808A4
     fmuls f9, f11, f10
     fmuls f0, f0, f10
     stfs f9, 0xe8(r1)
     stfs f0, 0xf4(r1)
-lbl_fn_8004B378_00000484:
+lbl_item_useConsumable_00000484:
     lfs f26, 0xf4(r1)
     lfs f25, 0xf0(r1)
     lfs f24, 0xec(r1)
@@ -438,8 +438,8 @@ lbl_fn_8004B378_00000484:
     stfs f0, 0x7c(r3)
     lfs f0, 0x10c(r1)
     stfs f0, 0x80(r3)
-    b lbl_fn_8004B378_000009DC
-lbl_fn_8004B378_000004E8:
+    b lbl_item_useConsumable_000009DC
+lbl_item_useConsumable_000004E8:
     lfs f0, 0x104(r1)
     addi r3, r1, 0x104
     lfs f9, 0x10c(r1)
@@ -525,8 +525,8 @@ lbl_fn_8004B378_000004E8:
     stfs f0, 0x7c(r31)
     lfs f0, 0x10c(r1)
     stfs f0, 0x80(r31)
-    b lbl_fn_8004B378_000009DC
-lbl_fn_8004B378_00000640:
+    b lbl_item_useConsumable_000009DC
+lbl_item_useConsumable_00000640:
     lfs f1, 0x8(r31)
     addi r3, r1, 0x500
     lfs f2, 0xc(r31)
@@ -562,7 +562,7 @@ lbl_fn_8004B378_00000640:
     stfs f0, 0x4d0(r1)
     lfs f1, 0x34(r31)
     fcmpu cr0, f9, f1
-    beq lbl_fn_8004B378_00000720
+    beq lbl_item_useConsumable_00000720
     addi r3, r1, 0x2e0
     li r4, 0x7a
     bl fn_805F8E70
@@ -583,11 +583,11 @@ lbl_fn_8004B378_00000640:
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
-lbl_fn_8004B378_00000720:
+lbl_item_useConsumable_00000720:
     lfs f0, lbl_8088089C
     lfs f1, 0x30(r31)
     fcmpu cr0, f0, f1
-    beq lbl_fn_8004B378_00000780
+    beq lbl_item_useConsumable_00000780
     addi r3, r1, 0x340
     li r4, 0x79
     bl fn_805F8E70
@@ -608,11 +608,11 @@ lbl_fn_8004B378_00000720:
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
-lbl_fn_8004B378_00000780:
+lbl_item_useConsumable_00000780:
     lfs f0, lbl_8088089C
     lfs f1, 0x2c(r31)
     fcmpu cr0, f0, f1
-    beq lbl_fn_8004B378_000007E0
+    beq lbl_item_useConsumable_000007E0
     addi r3, r1, 0x3a0
     li r4, 0x78
     bl fn_805F8E70
@@ -633,7 +633,7 @@ lbl_fn_8004B378_00000780:
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
-lbl_fn_8004B378_000007E0:
+lbl_item_useConsumable_000007E0:
     addi r4, r31, 0x58
     addi r3, r1, 0x4d0
     mr r5, r4
@@ -676,7 +676,7 @@ lbl_fn_8004B378_000007E0:
     stfs f0, 0x4c8(r1)
     stfs f0, 0x4b4(r1)
     stfs f0, 0x4a0(r1)
-    beq lbl_fn_8004B378_000008DC
+    beq lbl_item_useConsumable_000008DC
     addi r3, r1, 0x250
     li r4, 0x7a
     bl fn_805F8E70
@@ -697,11 +697,11 @@ lbl_fn_8004B378_000007E0:
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
-lbl_fn_8004B378_000008DC:
+lbl_item_useConsumable_000008DC:
     lfs f0, lbl_8088089C
     lfs f1, 0x8(r1)
     fcmpu cr0, f0, f1
-    beq lbl_fn_8004B378_0000093C
+    beq lbl_item_useConsumable_0000093C
     addi r3, r1, 0x1f0
     li r4, 0x78
     bl fn_805F8E70
@@ -722,11 +722,11 @@ lbl_fn_8004B378_000008DC:
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
-lbl_fn_8004B378_0000093C:
+lbl_item_useConsumable_0000093C:
     lfs f0, lbl_8088089C
     lfs f1, 0xc(r1)
     fcmpu cr0, f0, f1
-    beq lbl_fn_8004B378_0000099C
+    beq lbl_item_useConsumable_0000099C
     addi r3, r1, 0x190
     li r4, 0x79
     bl fn_805F8E70
@@ -747,7 +747,7 @@ lbl_fn_8004B378_0000093C:
     psq_st f4, 0x18(r30), 0, 0
     psq_st f5, 0x20(r30), 0, 0
     psq_st f6, 0x28(r30), 0, 0
-lbl_fn_8004B378_0000099C:
+lbl_item_useConsumable_0000099C:
     addi r3, r1, 0x530
     psq_l f1, 0x0(r30), 0, 0
     psq_l f2, 0x8(r30), 0, 0
@@ -764,14 +764,14 @@ lbl_fn_8004B378_0000099C:
     psq_st f5, 0x20(r3), 0, 0
     psq_st f6, 0x28(r3), 0, 0
     bl fn_805F93C0
-lbl_fn_8004B378_000009DC:
+lbl_item_useConsumable_000009DC:
     lwz r0, 0x4(r31)
     cmpwi r0, 0x0
-    beq lbl_fn_8004B378_000009F4
+    beq lbl_item_useConsumable_000009F4
     cmpwi r0, 0x1
-    beq lbl_fn_8004B378_00000A5C
-    b lbl_fn_8004B378_00000AC0
-lbl_fn_8004B378_000009F4:
+    beq lbl_item_useConsumable_00000A5C
+    b lbl_item_useConsumable_00000AC0
+lbl_item_useConsumable_000009F4:
     lfs f9, 0x50(r31)
     addi r3, r1, 0x150
     lfs f0, lbl_808808C0
@@ -797,8 +797,8 @@ lbl_fn_8004B378_000009F4:
     psq_st f5, 0xa8(r31), 0, 0
     psq_st f6, 0xb0(r31), 0, 0
     psq_st f7, 0xb8(r31), 0, 0
-    b lbl_fn_8004B378_00000AC0
-lbl_fn_8004B378_00000A5C:
+    b lbl_item_useConsumable_00000AC0
+lbl_item_useConsumable_00000A5C:
     lfs f6, 0xcc(r31)
     addi r3, r1, 0x110
     lfs f5, 0xc8(r31)
@@ -824,7 +824,7 @@ lbl_fn_8004B378_00000A5C:
     psq_st f5, 0xa8(r31), 0, 0
     psq_st f6, 0xb0(r31), 0, 0
     psq_st f7, 0xb8(r31), 0, 0
-lbl_fn_8004B378_00000AC0:
+lbl_item_useConsumable_00000AC0:
     psq_l f1, 0x58(r31), 0, 0
     addi r30, r1, 0x470
     psq_l f2, 0x60(r31), 0, 0
@@ -855,11 +855,11 @@ lbl_fn_8004B378_00000AC0:
     psq_st f3, 0xe0(r31), 0, 0
     psq_st f4, 0xe8(r31), 0, 0
     psq_st f5, 0xf0(r31), 0, 0
-    beq lbl_fn_8004B378_00000B48
+    beq lbl_item_useConsumable_00000B48
     cmpwi r0, 0x1
-    beq lbl_fn_8004B378_00000B68
-    b lbl_fn_8004B378_00000B94
-lbl_fn_8004B378_00000B48:
+    beq lbl_item_useConsumable_00000B68
+    b lbl_item_useConsumable_00000B94
+lbl_item_useConsumable_00000B48:
     lfs f1, 0x50(r31)
     addi r3, r31, 0x100
     lfs f2, 0x54(r31)
@@ -867,8 +867,8 @@ lbl_fn_8004B378_00000B48:
     lfs f3, 0xc8(r31)
     lfs f4, 0xcc(r31)
     bl fn_8004F50C
-    b lbl_fn_8004B378_00000B94
-lbl_fn_8004B378_00000B68:
+    b lbl_item_useConsumable_00000B94
+lbl_item_useConsumable_00000B68:
     lfs f1, 0x3c(r31)
     addi r3, r31, 0x100
     lfs f2, 0x40(r31)
@@ -880,7 +880,7 @@ lbl_fn_8004B378_00000B68:
     lfs f6, 0xcc(r31)
     lfs f7, lbl_80880898
     bl fn_8004F5B8
-lbl_fn_8004B378_00000B94:
+lbl_item_useConsumable_00000B94:
     lwz r0, 0x5f4(r1)
     psq_l f31, 0x5e8(r1), 0, 0
     lfd f31, 0x5e0(r1)
@@ -1575,7 +1575,7 @@ lbl_fn_8004BF64_0000157C:
     stfs f0, 0x1c0(r1)
     psq_st f1, 0x14(r31), 0, 0
     stfs f2, 0x1c(r31)
-    bl fn_8004B378
+    bl item_useConsumable
     psq_l f31, 0x2f8(r1), 0, 0
     mr r3, r29
     lfd f31, 0x2f0(r1)

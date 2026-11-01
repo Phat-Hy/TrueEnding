@@ -16,7 +16,7 @@ extern u8 lbl_8087E878[8];
 /* Function declarations */
 void fn_80612E80(void);
 void fn_806130F0(void);
-void fn_80613300(void);
+void __GXSetVtxDescs(void);
 void fn_806133B0(void);
 void fn_806134E0(void);
 void fn_80613520(void);
@@ -336,7 +336,7 @@ lbl_fn_806130F0_00000470:
     blr
 }
 
-asm void fn_80613300(void)
+asm void __GXSetVtxDescs(void)
 {
     nofralloc
     lis r5, 0xcc01
@@ -354,15 +354,15 @@ asm void fn_80613300(void)
     stw r0, -0x8000(r5)
     lbz r0, 0x525(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_80613300_000004C8
+    beq lbl___GXSetVtxDescs_000004C8
     li r8, 0x2
-    b lbl_fn_80613300_000004D8
-lbl_fn_80613300_000004C8:
+    b lbl___GXSetVtxDescs_000004D8
+lbl___GXSetVtxDescs_000004C8:
     lbz r4, 0x524(r3)
     neg r0, r4
     or r0, r0, r4
     srwi r8, r0, 31
-lbl_fn_80613300_000004D8:
+lbl___GXSetVtxDescs_000004D8:
     lwz r0, 0x14(r3)
     lis r6, 0xcc01
     lwz r5, 0x18(r3)

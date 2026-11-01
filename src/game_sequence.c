@@ -20,7 +20,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_80071088(void);
 extern void fn_80079994(void);
 extern void fn_80084320(void);
@@ -80,7 +80,7 @@ extern void fn_80617220(void);
 extern void fn_80617340(void);
 extern void fn_806173E0(void);
 extern void fn_80617420(void);
-extern void fn_80617460(void);
+extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_806175F0(void);
 extern void GXSetTevKColorSel(void);
@@ -1879,7 +1879,7 @@ lbl_fn_80073194_00001860:
     stfs f8, 0x350(r1)
     stfs f9, 0x354(r1)
     stfs f0, 0x358(r1)
-    bl fn_8004B378
+    bl item_useConsumable
     lfs f5, lbl_80880A90
     addi r3, r1, 0x1f0
     lfs f9, lbl_80880A70
@@ -1976,7 +1976,7 @@ lbl_fn_80073194_00001A2C:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     b lbl_fn_80073194_00001BB0
 lbl_fn_80073194_00001A64:
     mr r3, r31
@@ -1991,7 +1991,7 @@ lbl_fn_80073194_00001A64:
     li r6, 0x1
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     b lbl_fn_80073194_00001BB0
 lbl_fn_80073194_00001A9C:
     mr r3, r31
@@ -2006,7 +2006,7 @@ lbl_fn_80073194_00001A9C:
     li r6, 0x2
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     b lbl_fn_80073194_00001BB0
 lbl_fn_80073194_00001AD4:
     mr r3, r31
@@ -2021,7 +2021,7 @@ lbl_fn_80073194_00001AD4:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     b lbl_fn_80073194_00001BB0
 lbl_fn_80073194_00001B0C:
     mr r3, r31
@@ -2036,7 +2036,7 @@ lbl_fn_80073194_00001B0C:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     b lbl_fn_80073194_00001BB0
 lbl_fn_80073194_00001B44:
     mr r3, r31
@@ -2051,7 +2051,7 @@ lbl_fn_80073194_00001B44:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     b lbl_fn_80073194_00001BB0
 lbl_fn_80073194_00001B7C:
     mr r3, r31
@@ -2066,7 +2066,7 @@ lbl_fn_80073194_00001B7C:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
 lbl_fn_80073194_00001BB0:
     lwz r3, lbl_8087EFA8
     lwz r0, 0x14c(r3)
@@ -2084,7 +2084,7 @@ lbl_fn_80073194_00001BB0:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
 lbl_fn_80073194_00001BF4:
     mr r3, r31
     bl fn_80617220
@@ -2409,7 +2409,7 @@ lbl_fn_80073A6C_00002034:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80617460
+    bl GXSetTevIndirect
     mr r3, r28
     mr r5, r31
     li r4, 0x0
@@ -2446,7 +2446,7 @@ lbl_fn_80073A6C_00002034:
     li r6, 0x0
     li r7, 0x0
     li r8, 0x2
-    bl fn_80617460
+    bl GXSetTevIndirect
     mr r3, r27
     mr r5, r30
     li r4, 0x0
@@ -2490,7 +2490,7 @@ lbl_fn_80073A6C_00002034:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     mr r3, r26
     li r4, 0x0
     li r5, 0x0
@@ -2534,7 +2534,7 @@ lbl_fn_80073A6C_00002238:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80617460
+    bl GXSetTevIndirect
     mr r3, r26
     li r4, 0x0
     li r5, 0x0
@@ -2571,7 +2571,7 @@ lbl_fn_80073A6C_00002238:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     mr r3, r24
     li r4, 0x0
     li r5, 0x0
@@ -2613,7 +2613,7 @@ lbl_fn_80073A6C_00002378:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80617460
+    bl GXSetTevIndirect
     mr r3, r26
     li r4, 0x0
     li r5, 0x0
@@ -2650,7 +2650,7 @@ lbl_fn_80073A6C_00002378:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     mr r3, r24
     li r4, 0x0
     li r5, 0x0
@@ -2970,7 +2970,7 @@ lbl_fn_800742C8_00002808:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80617460
+    bl GXSetTevIndirect
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
@@ -3007,7 +3007,7 @@ lbl_fn_800742C8_00002808:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x1
-    bl fn_80617460
+    bl GXSetTevIndirect
     mr r3, r30
     li r4, 0x0
     li r5, 0x0
@@ -3055,7 +3055,7 @@ lbl_fn_800742C8_00002A54:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     mr r3, r29
     li r4, 0x0
     li r5, 0x0
@@ -3213,7 +3213,7 @@ lbl_fn_800748D8_00002CA0:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
@@ -3407,7 +3407,7 @@ lbl_fn_80074B24_00002EB0:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x3
-    bl fn_80617460
+    bl GXSetTevIndirect
     mr r3, r31
     li r4, 0x0
     li r5, 0x0
@@ -3444,7 +3444,7 @@ lbl_fn_80074B24_00002EB0:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     mr r3, r30
     li r4, 0x0
     li r5, 0x0
@@ -3916,7 +3916,7 @@ lbl_gx_beginQuadBatch_00003680:
     clrlwi r7, r0, 24
     lwz r6, 0xf8(r1)
     lwz r8, 0x100(r1)
-    bl fn_80617460
+    bl GXSetTevIndirect
     lwz r4, 0x104(r1)
     mr r3, r18
     lwz r5, 0x108(r1)

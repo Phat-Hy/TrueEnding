@@ -12,7 +12,7 @@ extern void fn_8001047C(void);
 extern void fn_80012C88(void);
 extern void fn_80013410(void);
 extern void fn_8004B338(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8004BF64(void);
 extern void fn_8008B964(void);
 extern void fn_800A97C4(void);
@@ -452,7 +452,7 @@ lbl_fn_8052C10C_00000408:
     addi r3, r31, 0x6c
     bl fn_8037F688
     addi r3, r31, 0x6c
-    bl fn_8004B378
+    bl item_useConsumable
     bl fn_8008B964
     addi r4, r31, 0x6c
     bl fn_80116BD4
@@ -1555,7 +1555,7 @@ asm void fn_8052D46C(void)
     addi r4, r1, 0x188
     bl fn_80112960
     addi r3, r1, 0x1e8
-    bl fn_8004B378
+    bl item_useConsumable
     bl fn_8008B964
     addi r4, r1, 0x1e8
     bl fn_8052C6D0
@@ -1940,7 +1940,7 @@ lbl_fn_8052D46C_000019A8:
     addi r3, r31, 0x6c
     bl fn_8037F688
     addi r3, r31, 0x6c
-    bl fn_8004B378
+    bl item_useConsumable
     bl fn_8008B964
     addi r4, r31, 0x6c
     bl fn_80116BD4

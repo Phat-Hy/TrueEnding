@@ -13,7 +13,7 @@ extern void _savegpr_25(void);
 extern void dtor_80084684(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_80061824(void);
 extern void atn_normalizePath(char* str);
 extern void fn_8006B404(void);
@@ -390,7 +390,7 @@ lbl_fn_804778DC_0000037C:
     stw r0, 0x4(r17)
 lbl_fn_804778DC_000003B8:
     mr r3, r17
-    bl fn_8004B378
+    bl item_useConsumable
     addi r19, r19, 0x1
     addi r31, r31, 0x1f4
     addi r30, r30, 0x4

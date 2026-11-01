@@ -13,7 +13,7 @@ extern void _savegpr_27(void);
 extern void dtor_80084684(void*);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void* fn_800827E0(void);
 extern void fn_800839EC(void);
 extern void fn_80083AD4(void*, void*);
@@ -1144,7 +1144,7 @@ lbl_fn_800D5F68_00000FA8:
     stfs f8, 0x40(r28)
     stfs f28, 0x48(r28)
     stfs f7, 0x44(r28)
-    bl fn_8004B378
+    bl item_useConsumable
     b lbl_fn_800D5F68_00001078
 lbl_fn_800D5F68_00001050:
     lwz r3, lbl_8087EFB4

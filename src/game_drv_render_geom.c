@@ -41,7 +41,7 @@ extern void fn_80617200(void);
 extern void fn_80617220(void);
 extern void fn_806173E0(void);
 extern void fn_80617420(void);
-extern void fn_80617460(void);
+extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_80617580(void);
 extern void fn_806175F0(void);
@@ -922,7 +922,7 @@ lbl_fn_805D1A40_00000B5C:
     extrwi r6, r6, 2, 24
     clrlwi r7, r0, 31
     extrwi r8, r0, 2, 29
-    bl fn_80617460
+    bl GXSetTevIndirect
     lbz r0, 0x7(r25)
     mr r3, r28
     extrwi r4, r0, 5, 24
@@ -1220,7 +1220,7 @@ lbl_fn_805D1A40_00001014:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     mr r3, r24
     li r4, 0x0
     li r5, 0x0

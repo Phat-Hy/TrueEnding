@@ -9,7 +9,7 @@ extern void _savegpr_21(void);
 extern void _savegpr_22(void);
 extern void _savegpr_27(void);
 extern void fn_8004B338(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8005DF90(void);
 extern void fn_80063764(void);
 extern void fn_800638B0(void);
@@ -662,7 +662,7 @@ lbl_fn_800B7090_00000410:
     stfs f2, 0x10(r22)
     stfs f31, 0xc8(r22)
     stfs f10, 0xcc(r22)
-    bl fn_8004B378
+    bl item_useConsumable
     addi r11, r1, 0x210
     psq_l f31, 0x248(r1), 0, 0
     lfd f31, 0x240(r1)

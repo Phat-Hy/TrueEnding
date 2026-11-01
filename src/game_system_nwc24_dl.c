@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8004D388(void);
 extern void fn_8004ED34(void);
 extern void fn_80050900(void);
@@ -176,7 +176,7 @@ lbl_fn_80385B48_000000BC:
     psq_st f1, 0x14(r3), 0, 0
     stfs f2, 0x1c(r3)
     mr r3, r28
-    bl fn_8004B378
+    bl item_useConsumable
     mr r4, r28
     addi r3, r28, 0x1f4
     bl fn_80392A04
@@ -187,7 +187,7 @@ lbl_fn_80385B48_000000BC:
     mr r3, r28
     bl fn_803928C0
     addi r3, r28, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r28, 0x1f4
     bl fn_80116BD4
@@ -1780,7 +1780,7 @@ lbl_fn_80385B48_00001948:
 lbl_fn_80385B48_0000195C:
     stfs f7, 0x50(r28)
     mr r3, r28
-    bl fn_8004B378
+    bl item_useConsumable
     mr r4, r28
     addi r3, r28, 0x1f4
     bl fn_80392A04
@@ -1791,7 +1791,7 @@ lbl_fn_80385B48_0000195C:
     mr r3, r28
     bl fn_803928C0
     addi r3, r28, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r28, 0x1f4
     bl fn_80116BD4

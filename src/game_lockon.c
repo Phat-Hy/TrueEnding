@@ -16,7 +16,7 @@ extern void fn_80080048(void);
 extern void fn_80084320(void);
 extern void fn_800846FC(void);
 extern void fn_80084C24(void);
-extern void fn_8008A4B0(void);
+extern void area_refresh(void);
 extern void fn_8008A4E0(void);
 extern void atn_AABB_getMax(void);
 extern void atn_AABB_getMin(void);
@@ -84,7 +84,7 @@ void fn_80095CD0(void);
 void fn_80095D44(void);
 void fn_80095F10(void);
 void fn_80096218(void);
-void fn_80096E94(void);
+void lockon_updateTarget(void);
 void fn_800970CC(void);
 void atn_LH_Motion_destructor(void);
 void fn_80097180(void);
@@ -2265,7 +2265,7 @@ lbl_fn_80096218_00001EDC:
     blr
 }
 
-asm void fn_80096E94(void)
+asm void lockon_updateTarget(void)
 {
     nofralloc
     stwu r1, -0x10(r1)
@@ -2308,7 +2308,7 @@ asm void fn_80096E94(void)
     stb r4, 0x3c8(r31)
     lwz r0, lbl_8087EF18
     cmpwi r0, 0x0
-    bne lbl_fn_80096E94_00001FE0
+    bne lbl_lockon_updateTarget_00001FE0
     lis r3, lbl_80732368@ha
     lis r6, 0x1
     addi r3, r3, lbl_80732368@l
@@ -2318,14 +2318,14 @@ asm void fn_80096E94(void)
     subi r3, r6, 0x4ff0
     mr r6, r5
     bl fn_800846FC
-    lis r4, fn_8008A4B0@ha
+    lis r4, area_refresh@ha
     li r5, 0x0
-    addi r4, r4, fn_8008A4B0@l
+    addi r4, r4, area_refresh@l
     li r6, 0x2c
     li r7, 0x400
     bl fn_80695720
     stw r3, lbl_8087EF18
-lbl_fn_80096E94_00001FE0:
+lbl_lockon_updateTarget_00001FE0:
     li r0, 0x2
     mr r6, r31
     lfs f2, lbl_80880BF8
@@ -2335,7 +2335,7 @@ lbl_fn_80096E94_00001FE0:
     lfs f0, lbl_80880C24
     li r3, 0x0
     mtctr r0
-lbl_fn_80096E94_00002004:
+lbl_lockon_updateTarget_00002004:
     stw r5, 0x22c(r6)
     stfs f2, 0x234(r6)
     stfs f1, 0x238(r6)
@@ -2373,21 +2373,21 @@ lbl_fn_80096E94_00002004:
     stfs f2, 0x2b4(r6)
     stfs f2, 0x2b8(r6)
     addi r6, r6, 0x90
-    bdnz lbl_fn_80096E94_00002004
+    bdnz lbl_lockon_updateTarget_00002004
     lwz r0, 0x4(r31)
     clrlwi r0, r0, 31
     cmplwi r0, 0x1
-    beq lbl_fn_80096E94_00002118
+    beq lbl_lockon_updateTarget_00002118
     lwz r3, 0x228(r31)
     cmpwi r3, 0x0
-    beq lbl_fn_80096E94_000020C4
+    beq lbl_lockon_updateTarget_000020C4
     lis r4, fn_800970CC@ha
     addi r4, r4, fn_800970CC@l
     bl fn_80695A50
-lbl_fn_80096E94_000020C4:
+lbl_lockon_updateTarget_000020C4:
     cmpwi r30, 0x0
     stw r30, 0x224(r31)
-    beq lbl_fn_80096E94_00002110
+    beq lbl_lockon_updateTarget_00002110
     mulli r3, r30, 0xc
     li r4, 0xb
     la r5, lbl_8087D7C8
@@ -2403,11 +2403,11 @@ lbl_fn_80096E94_000020C4:
     addi r5, r5, fn_800970CC@l
     bl fn_80695720
     stw r3, 0x228(r31)
-    b lbl_fn_80096E94_00002118
-lbl_fn_80096E94_00002110:
+    b lbl_lockon_updateTarget_00002118
+lbl_lockon_updateTarget_00002110:
     li r0, 0x0
     stw r0, 0x228(r31)
-lbl_fn_80096E94_00002118:
+lbl_lockon_updateTarget_00002118:
     mr r3, r31
     lwz r31, 0xc(r1)
     lwz r30, 0x8(r1)

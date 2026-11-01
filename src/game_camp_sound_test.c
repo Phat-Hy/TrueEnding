@@ -85,8 +85,8 @@ void fn_803C7FE0(void);
 void fn_803C7FE4(void);
 void fn_803C8130(void);
 void fn_803C81D8(void);
-void fn_803C81DC(void);
-void fn_803C8284(void);
+void soundTest_initOption(void);
+void soundTest_dummyCallback(void);
 void fn_803C8288(void);
 void fn_803C8330(void);
 void fn_803C8334(void);
@@ -785,7 +785,7 @@ asm void fn_803C81D8(void)
     blr
 }
 
-asm void fn_803C81DC(void)
+asm void soundTest_initOption(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -799,14 +799,14 @@ asm void fn_803C81DC(void)
     mr r29, r3
     lwz r6, 0x4(r3)
     cmpwi r6, 0x0
-    beq lbl_fn_803C81DC_000008BC
-    beq lbl_fn_803C81DC_000008BC
+    beq lbl_soundTest_initOption_000008BC
+    beq lbl_soundTest_initOption_000008BC
     subi r3, r6, 0x10
     bl fn_80084C24
-lbl_fn_803C81DC_000008BC:
+lbl_soundTest_initOption_000008BC:
     cmpwi r30, 0x0
     stw r30, 0x0(r29)
-    beq lbl_fn_803C81DC_00000904
+    beq lbl_soundTest_initOption_00000904
     slwi r3, r30, 6
     mr r4, r31
     addi r3, r3, 0x10
@@ -814,18 +814,18 @@ lbl_fn_803C81DC_000008BC:
     la r6, lbl_8087DE60
     li r7, 0x0
     bl fn_800846FC
-    lis r4, fn_803C8284@ha
+    lis r4, soundTest_dummyCallback@ha
     mr r7, r30
-    addi r4, r4, fn_803C8284@l
+    addi r4, r4, soundTest_dummyCallback@l
     li r5, 0x0
     li r6, 0x40
     bl fn_80695720
     stw r3, 0x4(r29)
-    b lbl_fn_803C81DC_0000090C
-lbl_fn_803C81DC_00000904:
+    b lbl_soundTest_initOption_0000090C
+lbl_soundTest_initOption_00000904:
     li r0, 0x0
     stw r0, 0x4(r29)
-lbl_fn_803C81DC_0000090C:
+lbl_soundTest_initOption_0000090C:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)
@@ -835,7 +835,7 @@ lbl_fn_803C81DC_0000090C:
     blr
 }
 
-asm void fn_803C8284(void)
+asm void soundTest_dummyCallback(void)
 {
     nofralloc
     blr

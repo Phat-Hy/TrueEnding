@@ -10,7 +10,7 @@ extern void dtor_80084684(void);
 extern void fn_8000D430(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8005E3E4(void);
 extern void fn_8005E7F4(void);
 extern void fn_8005EDF0(void);
@@ -26,7 +26,7 @@ extern void fn_800897D8(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
 extern void fn_80092954(void);
-extern void fn_80096E94(void);
+extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void fn_800BDB58(void);
 extern void atn_Task_constructor(void);
@@ -1164,7 +1164,7 @@ asm void fn_804A7F18(void)
     addi r3, r30, 0x208
     addi r4, r4, 0x1
     li r5, 0x20
-    bl fn_80096E94
+    bl lockon_updateTarget
     lfs f4, lbl_80887258
     addi r3, r30, 0x640
     lfs f6, lbl_80887250
@@ -3247,7 +3247,7 @@ lbl_fn_804A894C_00002AAC:
     stfs f0, 0x688(r24)
     fmuls f0, f3, f6
     stfs f0, 0x684(r24)
-    bl fn_8004B378
+    bl item_useConsumable
     cmpwi r24, 0x0
     mr r4, r24
     beq lbl_fn_804A894C_00002B9C

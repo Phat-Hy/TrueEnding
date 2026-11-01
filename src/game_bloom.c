@@ -15,7 +15,7 @@ extern u8 lbl_807C75D8[];
 /* Function declarations */
 void fn_800D3F28(void);
 void fn_800D3FA4(void);
-void fn_800D4280(void);
+void bloom_renderExtractPass(void);
 void fn_800D4558(void);
 void fn_800D498C(void);
 void fn_800D4DB8(void);
@@ -121,7 +121,7 @@ lbl_fn_800D3FA4_00000128:
     bl atn_TaskBase_isValid
 lbl_fn_800D3FA4_00000140:
     mr r3, r29
-    bl fn_800D4280
+    bl bloom_renderExtractPass
 lbl_fn_800D3FA4_00000148:
     cmpwi r3, 0x0
     beq lbl_fn_800D3FA4_00000170
@@ -133,7 +133,7 @@ lbl_fn_800D3FA4_00000148:
     bl atn_TaskBase_isValid
 lbl_fn_800D3FA4_00000168:
     mr r3, r29
-    bl fn_800D4280
+    bl bloom_renderExtractPass
 lbl_fn_800D3FA4_00000170:
     cmpwi r3, 0x0
     beq lbl_fn_800D3FA4_000001F4
@@ -160,7 +160,7 @@ lbl_fn_800D3FA4_000001AC:
     bl atn_TaskBase_isValid
 lbl_fn_800D3FA4_000001C4:
     mr r3, r30
-    bl fn_800D4280
+    bl bloom_renderExtractPass
 lbl_fn_800D3FA4_000001CC:
     cmpwi r3, 0x0
     beq lbl_fn_800D3FA4_000001F4
@@ -172,7 +172,7 @@ lbl_fn_800D3FA4_000001CC:
     bl atn_TaskBase_isValid
 lbl_fn_800D3FA4_000001EC:
     mr r3, r29
-    bl fn_800D4280
+    bl bloom_renderExtractPass
 lbl_fn_800D3FA4_000001F4:
     cmpwi r3, 0x0
     beq lbl_fn_800D3FA4_00000338
@@ -214,7 +214,7 @@ lbl_fn_800D3FA4_00000264:
     bl atn_TaskBase_isValid
 lbl_fn_800D3FA4_0000027C:
     mr r3, r31
-    bl fn_800D4280
+    bl bloom_renderExtractPass
 lbl_fn_800D3FA4_00000284:
     cmpwi r3, 0x0
     beq lbl_fn_800D3FA4_000002AC
@@ -226,7 +226,7 @@ lbl_fn_800D3FA4_00000284:
     bl atn_TaskBase_isValid
 lbl_fn_800D3FA4_000002A4:
     mr r3, r30
-    bl fn_800D4280
+    bl bloom_renderExtractPass
 lbl_fn_800D3FA4_000002AC:
     cmpwi r3, 0x0
     beq lbl_fn_800D3FA4_00000338
@@ -253,7 +253,7 @@ lbl_fn_800D3FA4_000002E8:
     bl atn_TaskBase_isValid
 lbl_fn_800D3FA4_00000300:
     mr r3, r30
-    bl fn_800D4280
+    bl bloom_renderExtractPass
 lbl_fn_800D3FA4_00000308:
     cmpwi r3, 0x0
     beq lbl_fn_800D3FA4_00000338
@@ -265,7 +265,7 @@ lbl_fn_800D3FA4_00000308:
     bl atn_TaskBase_isValid
 lbl_fn_800D3FA4_00000328:
     mr r3, r29
-    bl fn_800D4280
+    bl bloom_renderExtractPass
     b lbl_fn_800D3FA4_00000338
 lbl_fn_800D3FA4_00000334:
     li r3, 0x1
@@ -280,7 +280,7 @@ lbl_fn_800D3FA4_00000338:
     blr
 }
 
-asm void fn_800D4280(void)
+asm void bloom_renderExtractPass(void)
 {
     nofralloc
     stwu r1, -0x20(r1)
@@ -295,200 +295,200 @@ asm void fn_800D4280(void)
     lwz r0, 0x38(r3)
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_800D4280_00000394
+    beq lbl_bloom_renderExtractPass_00000394
     li r3, 0x0
-    b lbl_fn_800D4280_00000610
-lbl_fn_800D4280_00000394:
+    b lbl_bloom_renderExtractPass_00000610
+lbl_bloom_renderExtractPass_00000394:
     lwz r31, 0x18(r3)
     cmpwi r31, 0x0
-    beq lbl_fn_800D4280_000004CC
-    beq lbl_fn_800D4280_000003AC
+    beq lbl_bloom_renderExtractPass_000004CC
+    beq lbl_bloom_renderExtractPass_000003AC
     mr r3, r31
     bl atn_TaskBase_isValid
-lbl_fn_800D4280_000003AC:
+lbl_bloom_renderExtractPass_000003AC:
     lwz r0, 0x38(r31)
     li r3, 0x1
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_800D4280_000003C8
+    beq lbl_bloom_renderExtractPass_000003C8
     li r3, 0x0
-    b lbl_fn_800D4280_000004C8
-lbl_fn_800D4280_000003C8:
+    b lbl_bloom_renderExtractPass_000004C8
+lbl_bloom_renderExtractPass_000003C8:
     lwz r30, 0x18(r31)
     cmpwi r30, 0x0
-    beq lbl_fn_800D4280_00000444
-    beq lbl_fn_800D4280_000003E0
+    beq lbl_bloom_renderExtractPass_00000444
+    beq lbl_bloom_renderExtractPass_000003E0
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D4280_000003E0:
+lbl_bloom_renderExtractPass_000003E0:
     lwz r0, 0x38(r30)
     li r3, 0x1
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_800D4280_000003FC
+    beq lbl_bloom_renderExtractPass_000003FC
     li r3, 0x0
-    b lbl_fn_800D4280_00000444
-lbl_fn_800D4280_000003FC:
+    b lbl_bloom_renderExtractPass_00000444
+lbl_bloom_renderExtractPass_000003FC:
     lwz r29, 0x18(r30)
     cmpwi r29, 0x0
-    beq lbl_fn_800D4280_0000041C
-    beq lbl_fn_800D4280_00000414
+    beq lbl_bloom_renderExtractPass_0000041C
+    beq lbl_bloom_renderExtractPass_00000414
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D4280_00000414:
+lbl_bloom_renderExtractPass_00000414:
     mr r3, r29
-    bl fn_800D4280
-lbl_fn_800D4280_0000041C:
+    bl bloom_renderExtractPass
+lbl_bloom_renderExtractPass_0000041C:
     cmpwi r3, 0x0
-    beq lbl_fn_800D4280_00000444
+    beq lbl_bloom_renderExtractPass_00000444
     lwz r29, 0x1c(r30)
     cmpwi r29, 0x0
-    beq lbl_fn_800D4280_00000444
-    beq lbl_fn_800D4280_0000043C
+    beq lbl_bloom_renderExtractPass_00000444
+    beq lbl_bloom_renderExtractPass_0000043C
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D4280_0000043C:
+lbl_bloom_renderExtractPass_0000043C:
     mr r3, r29
-    bl fn_800D4280
-lbl_fn_800D4280_00000444:
+    bl bloom_renderExtractPass
+lbl_bloom_renderExtractPass_00000444:
     cmpwi r3, 0x0
-    beq lbl_fn_800D4280_000004C8
+    beq lbl_bloom_renderExtractPass_000004C8
     lwz r29, 0x1c(r31)
     cmpwi r29, 0x0
-    beq lbl_fn_800D4280_000004C8
-    beq lbl_fn_800D4280_00000464
+    beq lbl_bloom_renderExtractPass_000004C8
+    beq lbl_bloom_renderExtractPass_00000464
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D4280_00000464:
+lbl_bloom_renderExtractPass_00000464:
     lwz r0, 0x38(r29)
     li r3, 0x1
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_800D4280_00000480
+    beq lbl_bloom_renderExtractPass_00000480
     li r3, 0x0
-    b lbl_fn_800D4280_000004C8
-lbl_fn_800D4280_00000480:
+    b lbl_bloom_renderExtractPass_000004C8
+lbl_bloom_renderExtractPass_00000480:
     lwz r30, 0x18(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D4280_000004A0
-    beq lbl_fn_800D4280_00000498
+    beq lbl_bloom_renderExtractPass_000004A0
+    beq lbl_bloom_renderExtractPass_00000498
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D4280_00000498:
+lbl_bloom_renderExtractPass_00000498:
     mr r3, r30
-    bl fn_800D4280
-lbl_fn_800D4280_000004A0:
+    bl bloom_renderExtractPass
+lbl_bloom_renderExtractPass_000004A0:
     cmpwi r3, 0x0
-    beq lbl_fn_800D4280_000004C8
+    beq lbl_bloom_renderExtractPass_000004C8
     lwz r29, 0x1c(r29)
     cmpwi r29, 0x0
-    beq lbl_fn_800D4280_000004C8
-    beq lbl_fn_800D4280_000004C0
+    beq lbl_bloom_renderExtractPass_000004C8
+    beq lbl_bloom_renderExtractPass_000004C0
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D4280_000004C0:
+lbl_bloom_renderExtractPass_000004C0:
     mr r3, r29
-    bl fn_800D4280
-lbl_fn_800D4280_000004C8:
+    bl bloom_renderExtractPass
+lbl_bloom_renderExtractPass_000004C8:
     mr r4, r3
-lbl_fn_800D4280_000004CC:
+lbl_bloom_renderExtractPass_000004CC:
     cmpwi r4, 0x0
-    beq lbl_fn_800D4280_0000060C
+    beq lbl_bloom_renderExtractPass_0000060C
     lwz r29, 0x1c(r28)
     cmpwi r29, 0x0
-    beq lbl_fn_800D4280_0000060C
-    beq lbl_fn_800D4280_000004EC
+    beq lbl_bloom_renderExtractPass_0000060C
+    beq lbl_bloom_renderExtractPass_000004EC
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D4280_000004EC:
+lbl_bloom_renderExtractPass_000004EC:
     lwz r0, 0x38(r29)
     li r3, 0x1
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_800D4280_00000508
+    beq lbl_bloom_renderExtractPass_00000508
     li r3, 0x0
-    b lbl_fn_800D4280_00000608
-lbl_fn_800D4280_00000508:
+    b lbl_bloom_renderExtractPass_00000608
+lbl_bloom_renderExtractPass_00000508:
     lwz r30, 0x18(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D4280_00000584
-    beq lbl_fn_800D4280_00000520
+    beq lbl_bloom_renderExtractPass_00000584
+    beq lbl_bloom_renderExtractPass_00000520
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D4280_00000520:
+lbl_bloom_renderExtractPass_00000520:
     lwz r0, 0x38(r30)
     li r3, 0x1
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_800D4280_0000053C
+    beq lbl_bloom_renderExtractPass_0000053C
     li r3, 0x0
-    b lbl_fn_800D4280_00000584
-lbl_fn_800D4280_0000053C:
+    b lbl_bloom_renderExtractPass_00000584
+lbl_bloom_renderExtractPass_0000053C:
     lwz r31, 0x18(r30)
     cmpwi r31, 0x0
-    beq lbl_fn_800D4280_0000055C
-    beq lbl_fn_800D4280_00000554
+    beq lbl_bloom_renderExtractPass_0000055C
+    beq lbl_bloom_renderExtractPass_00000554
     mr r3, r31
     bl atn_TaskBase_isValid
-lbl_fn_800D4280_00000554:
+lbl_bloom_renderExtractPass_00000554:
     mr r3, r31
-    bl fn_800D4280
-lbl_fn_800D4280_0000055C:
+    bl bloom_renderExtractPass
+lbl_bloom_renderExtractPass_0000055C:
     cmpwi r3, 0x0
-    beq lbl_fn_800D4280_00000584
+    beq lbl_bloom_renderExtractPass_00000584
     lwz r30, 0x1c(r30)
     cmpwi r30, 0x0
-    beq lbl_fn_800D4280_00000584
-    beq lbl_fn_800D4280_0000057C
+    beq lbl_bloom_renderExtractPass_00000584
+    beq lbl_bloom_renderExtractPass_0000057C
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D4280_0000057C:
+lbl_bloom_renderExtractPass_0000057C:
     mr r3, r30
-    bl fn_800D4280
-lbl_fn_800D4280_00000584:
+    bl bloom_renderExtractPass
+lbl_bloom_renderExtractPass_00000584:
     cmpwi r3, 0x0
-    beq lbl_fn_800D4280_00000608
+    beq lbl_bloom_renderExtractPass_00000608
     lwz r29, 0x1c(r29)
     cmpwi r29, 0x0
-    beq lbl_fn_800D4280_00000608
-    beq lbl_fn_800D4280_000005A4
+    beq lbl_bloom_renderExtractPass_00000608
+    beq lbl_bloom_renderExtractPass_000005A4
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D4280_000005A4:
+lbl_bloom_renderExtractPass_000005A4:
     lwz r0, 0x38(r29)
     li r3, 0x1
     rlwinm r0, r0, 0, 30, 30
     cmplwi r0, 0x2
-    beq lbl_fn_800D4280_000005C0
+    beq lbl_bloom_renderExtractPass_000005C0
     li r3, 0x0
-    b lbl_fn_800D4280_00000608
-lbl_fn_800D4280_000005C0:
+    b lbl_bloom_renderExtractPass_00000608
+lbl_bloom_renderExtractPass_000005C0:
     lwz r30, 0x18(r29)
     cmpwi r30, 0x0
-    beq lbl_fn_800D4280_000005E0
-    beq lbl_fn_800D4280_000005D8
+    beq lbl_bloom_renderExtractPass_000005E0
+    beq lbl_bloom_renderExtractPass_000005D8
     mr r3, r30
     bl atn_TaskBase_isValid
-lbl_fn_800D4280_000005D8:
+lbl_bloom_renderExtractPass_000005D8:
     mr r3, r30
-    bl fn_800D4280
-lbl_fn_800D4280_000005E0:
+    bl bloom_renderExtractPass
+lbl_bloom_renderExtractPass_000005E0:
     cmpwi r3, 0x0
-    beq lbl_fn_800D4280_00000608
+    beq lbl_bloom_renderExtractPass_00000608
     lwz r29, 0x1c(r29)
     cmpwi r29, 0x0
-    beq lbl_fn_800D4280_00000608
-    beq lbl_fn_800D4280_00000600
+    beq lbl_bloom_renderExtractPass_00000608
+    beq lbl_bloom_renderExtractPass_00000600
     mr r3, r29
     bl atn_TaskBase_isValid
-lbl_fn_800D4280_00000600:
+lbl_bloom_renderExtractPass_00000600:
     mr r3, r29
-    bl fn_800D4280
-lbl_fn_800D4280_00000608:
+    bl bloom_renderExtractPass
+lbl_bloom_renderExtractPass_00000608:
     mr r4, r3
-lbl_fn_800D4280_0000060C:
+lbl_bloom_renderExtractPass_0000060C:
     mr r3, r4
-lbl_fn_800D4280_00000610:
+lbl_bloom_renderExtractPass_00000610:
     lwz r0, 0x24(r1)
     lwz r31, 0x1c(r1)
     lwz r30, 0x18(r1)

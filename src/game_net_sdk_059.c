@@ -42,7 +42,7 @@ extern void fn_8071C1B0(void);
 extern void fn_8071C270(void);
 extern void fn_8071C380(void);
 extern void fn_8071D260(void);
-extern void fn_8071D3F0(void);
+extern void net_packet_enqueueSend(void);
 extern void fn_8071D760(void);
 extern void fn_8071E680(void);
 extern void fn_8071E750(void);
@@ -204,7 +204,7 @@ lbl_fn_8071A000_00000104:
     bl fn_8071D260
     mr r4, r31
     li r5, 0x1
-    bl fn_8071D3F0
+    bl net_packet_enqueueSend
     bl fn_807187D0
     addi r3, r3, 0x354
     bl OSUnlockMutex

@@ -37,7 +37,7 @@ extern void fn_801FE090(void);
 extern void fn_80200ED0(void);
 extern void fn_80201794(void);
 extern void fn_80201DC4(void);
-extern void fn_80201DD4(void);
+extern void profile_initMetric(void);
 extern void fn_80201DE8(void);
 extern void fn_80680770(void);
 extern void fn_80686A48(void);
@@ -87,7 +87,7 @@ u32 player_getClockFieldA0(void* ptr);
 void fn_801FF778(void);
 void clock_dummyCallback(void);
 void fn_801FF8F0(void);
-void fn_801FFA04(void);
+void player_clock_updateIntervals(void);
 
 asm void fn_801FEEFC(void)
 {
@@ -886,7 +886,7 @@ lbl_fn_801FF8F0_00000AC8:
     blr
 }
 
-asm void fn_801FFA04(void)
+asm void player_clock_updateIntervals(void)
 {
     nofralloc
     stwu r1, -0x300(r1)
@@ -961,7 +961,7 @@ asm void fn_801FFA04(void)
     cmpwi r0, 0x514
     addi r4, r3, 0x4
     stw r4, 0xa0(r1)
-    blt lbl_fn_801FFA04_00000C4C
+    blt lbl_player_clock_updateIntervals_00000C4C
     lwz r0, 0x98(r1)
     addi r3, r1, 0x64
     li r5, 0x4
@@ -970,7 +970,7 @@ asm void fn_801FFA04(void)
     lwz r3, 0xa0(r1)
     addi r0, r3, 0x4
     stw r0, 0xa0(r1)
-lbl_fn_801FFA04_00000C4C:
+lbl_player_clock_updateIntervals_00000C4C:
     lwz r4, 0x78(r1)
     mr r3, r30
     lwz r5, 0x74(r1)
@@ -981,7 +981,7 @@ lbl_fn_801FFA04_00000C4C:
     bl fn_801EF15C
     lwz r0, 0x90(r1)
     cmpwi r0, 0x578
-    blt lbl_fn_801FFA04_00000CD8
+    blt lbl_player_clock_updateIntervals_00000CD8
     lfs f0, lbl_80882CD0
     addi r3, r1, 0x60
     lwz r4, 0x98(r1)
@@ -1006,7 +1006,7 @@ lbl_fn_801FFA04_00000C4C:
     addi r0, r3, 0x4
     stw r0, 0xa0(r1)
     stfs f0, 0x64(r30)
-lbl_fn_801FFA04_00000CD8:
+lbl_player_clock_updateIntervals_00000CD8:
     lwz r4, 0x98(r1)
     li r6, 0x0
     lwz r0, 0xa0(r1)
@@ -1026,12 +1026,12 @@ lbl_fn_801FFA04_00000CD8:
     stw r0, 0xa0(r1)
     lwz r3, 0x84(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_801FFA04_00000D2C
+    beq lbl_player_clock_updateIntervals_00000D2C
     bl fn_80084C24
-lbl_fn_801FFA04_00000D2C:
+lbl_player_clock_updateIntervals_00000D2C:
     cmpwi r24, 0x0
     stw r24, 0x80(r30)
-    beq lbl_fn_801FFA04_00000D58
+    beq lbl_player_clock_updateIntervals_00000D58
     mr r3, r24
     li r4, 0x8
     la r5, lbl_8087D824
@@ -1039,11 +1039,11 @@ lbl_fn_801FFA04_00000D2C:
     li r7, 0x0
     bl fn_800846FC
     stw r3, 0x84(r30)
-    b lbl_fn_801FFA04_00000D60
-lbl_fn_801FFA04_00000D58:
+    b lbl_player_clock_updateIntervals_00000D60
+lbl_player_clock_updateIntervals_00000D58:
     li r0, 0x0
     stw r0, 0x84(r30)
-lbl_fn_801FFA04_00000D60:
+lbl_player_clock_updateIntervals_00000D60:
     lwz r4, 0x98(r1)
     addi r3, r1, 0x58
     lwz r0, 0xa0(r1)
@@ -1056,14 +1056,14 @@ lbl_fn_801FFA04_00000D60:
     stw r0, 0xa0(r1)
     lwz r3, 0x6c(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_801FFA04_00000DA0
-    beq lbl_fn_801FFA04_00000DA0
+    beq lbl_player_clock_updateIntervals_00000DA0
+    beq lbl_player_clock_updateIntervals_00000DA0
     subi r3, r3, 0x10
     bl fn_80084C24
-lbl_fn_801FFA04_00000DA0:
+lbl_player_clock_updateIntervals_00000DA0:
     cmpwi r24, 0x0
     stw r24, 0x68(r30)
-    beq lbl_fn_801FFA04_00000DE8
+    beq lbl_player_clock_updateIntervals_00000DE8
     slwi r3, r24, 3
     li r4, 0x8
     addi r3, r3, 0x10
@@ -1078,11 +1078,11 @@ lbl_fn_801FFA04_00000DA0:
     li r6, 0x8
     bl fn_80695720
     stw r3, 0x6c(r30)
-    b lbl_fn_801FFA04_00000DF0
-lbl_fn_801FFA04_00000DE8:
+    b lbl_player_clock_updateIntervals_00000DF0
+lbl_player_clock_updateIntervals_00000DE8:
     li r0, 0x0
     stw r0, 0x6c(r30)
-lbl_fn_801FFA04_00000DF0:
+lbl_player_clock_updateIntervals_00000DF0:
     lwz r4, 0x98(r1)
     addi r3, r1, 0x54
     lwz r0, 0xa0(r1)
@@ -1095,14 +1095,14 @@ lbl_fn_801FFA04_00000DF0:
     stw r0, 0xa0(r1)
     lwz r3, 0x74(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_801FFA04_00000E30
-    beq lbl_fn_801FFA04_00000E30
+    beq lbl_player_clock_updateIntervals_00000E30
+    beq lbl_player_clock_updateIntervals_00000E30
     subi r3, r3, 0x10
     bl fn_80084C24
-lbl_fn_801FFA04_00000E30:
+lbl_player_clock_updateIntervals_00000E30:
     cmpwi r24, 0x0
     stw r24, 0x70(r30)
-    beq lbl_fn_801FFA04_00000E78
+    beq lbl_player_clock_updateIntervals_00000E78
     slwi r3, r24, 3
     li r4, 0x8
     addi r3, r3, 0x10
@@ -1110,18 +1110,18 @@ lbl_fn_801FFA04_00000E30:
     la r6, lbl_8087DB10
     li r7, 0x0
     bl fn_800846FC
-    lis r4, fn_80201DD4@ha
+    lis r4, profile_initMetric@ha
     mr r7, r24
-    addi r4, r4, fn_80201DD4@l
+    addi r4, r4, profile_initMetric@l
     li r5, 0x0
     li r6, 0x8
     bl fn_80695720
     stw r3, 0x74(r30)
-    b lbl_fn_801FFA04_00000E80
-lbl_fn_801FFA04_00000E78:
+    b lbl_player_clock_updateIntervals_00000E80
+lbl_player_clock_updateIntervals_00000E78:
     li r0, 0x0
     stw r0, 0x74(r30)
-lbl_fn_801FFA04_00000E80:
+lbl_player_clock_updateIntervals_00000E80:
     lwz r4, 0x98(r1)
     addi r3, r1, 0x50
     lwz r0, 0xa0(r1)
@@ -1134,14 +1134,14 @@ lbl_fn_801FFA04_00000E80:
     stw r0, 0xa0(r1)
     lwz r3, 0x7c(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_801FFA04_00000EC0
+    beq lbl_player_clock_updateIntervals_00000EC0
     lis r4, fn_801EEF04@ha
     addi r4, r4, fn_801EEF04@l
     bl fn_80695A50
-lbl_fn_801FFA04_00000EC0:
+lbl_player_clock_updateIntervals_00000EC0:
     cmpwi r24, 0x0
     stw r24, 0x78(r30)
-    beq lbl_fn_801FFA04_00000F0C
+    beq lbl_player_clock_updateIntervals_00000F0C
     slwi r3, r24, 4
     li r4, 0x8
     addi r3, r3, 0x10
@@ -1157,11 +1157,11 @@ lbl_fn_801FFA04_00000EC0:
     addi r5, r5, fn_801EEF04@l
     bl fn_80695720
     stw r3, 0x7c(r30)
-    b lbl_fn_801FFA04_00000F14
-lbl_fn_801FFA04_00000F0C:
+    b lbl_player_clock_updateIntervals_00000F14
+lbl_player_clock_updateIntervals_00000F0C:
     li r0, 0x0
     stw r0, 0x7c(r30)
-lbl_fn_801FFA04_00000F14:
+lbl_player_clock_updateIntervals_00000F14:
     lwz r4, 0x98(r1)
     addi r3, r1, 0x4c
     lwz r0, 0xa0(r1)
@@ -1174,14 +1174,14 @@ lbl_fn_801FFA04_00000F14:
     stw r0, 0xa0(r1)
     lwz r3, 0x8c(r30)
     cmpwi r3, 0x0
-    beq lbl_fn_801FFA04_00000F54
-    beq lbl_fn_801FFA04_00000F54
+    beq lbl_player_clock_updateIntervals_00000F54
+    beq lbl_player_clock_updateIntervals_00000F54
     subi r3, r3, 0x10
     bl fn_80084C24
-lbl_fn_801FFA04_00000F54:
+lbl_player_clock_updateIntervals_00000F54:
     cmpwi r24, 0x0
     stw r24, 0x88(r30)
-    beq lbl_fn_801FFA04_00000F9C
+    beq lbl_player_clock_updateIntervals_00000F9C
     slwi r3, r24, 4
     li r4, 0x8
     addi r3, r3, 0x10
@@ -1196,11 +1196,11 @@ lbl_fn_801FFA04_00000F54:
     li r6, 0x10
     bl fn_80695720
     stw r3, 0x8c(r30)
-    b lbl_fn_801FFA04_00000FA4
-lbl_fn_801FFA04_00000F9C:
+    b lbl_player_clock_updateIntervals_00000FA4
+lbl_player_clock_updateIntervals_00000F9C:
     li r0, 0x0
     stw r0, 0x8c(r30)
-lbl_fn_801FFA04_00000FA4:
+lbl_player_clock_updateIntervals_00000FA4:
     lwz r4, 0x98(r1)
     addi r3, r1, 0xc0
     lwz r0, 0xa0(r1)
@@ -1265,7 +1265,7 @@ lbl_fn_801FFA04_00000FA4:
     stw r4, 0xa0(r1)
     cmpwi r23, 0x0
     lwz r3, 0x84(r30)
-    ble lbl_fn_801FFA04_000010C4
+    ble lbl_player_clock_updateIntervals_000010C4
     lwz r0, 0x98(r1)
     mr r5, r23
     add r4, r0, r4
@@ -1273,12 +1273,12 @@ lbl_fn_801FFA04_00000FA4:
     lwz r0, 0xa0(r1)
     add r0, r0, r23
     stw r0, 0xa0(r1)
-lbl_fn_801FFA04_000010C4:
+lbl_player_clock_updateIntervals_000010C4:
     lwz r24, 0x68(r30)
     li r25, 0x0
     lwz r23, 0x6c(r30)
-    b lbl_fn_801FFA04_00001120
-lbl_fn_801FFA04_000010D4:
+    b lbl_player_clock_updateIntervals_00001120
+lbl_player_clock_updateIntervals_000010D4:
     lwz r4, 0x98(r1)
     mr r3, r23
     lwz r0, 0xa0(r1)
@@ -1298,14 +1298,14 @@ lbl_fn_801FFA04_000010D4:
     addi r25, r25, 0x1
     addi r0, r3, 0x4
     stw r0, 0xa0(r1)
-lbl_fn_801FFA04_00001120:
+lbl_player_clock_updateIntervals_00001120:
     cmpw r25, r24
-    blt lbl_fn_801FFA04_000010D4
+    blt lbl_player_clock_updateIntervals_000010D4
     lwz r24, 0x70(r30)
     li r25, 0x0
     lwz r23, 0x74(r30)
-    b lbl_fn_801FFA04_00001184
-lbl_fn_801FFA04_00001138:
+    b lbl_player_clock_updateIntervals_00001184
+lbl_player_clock_updateIntervals_00001138:
     lwz r4, 0x98(r1)
     mr r3, r23
     lwz r0, 0xa0(r1)
@@ -1325,19 +1325,19 @@ lbl_fn_801FFA04_00001138:
     addi r25, r25, 0x1
     addi r0, r3, 0x4
     stw r0, 0xa0(r1)
-lbl_fn_801FFA04_00001184:
+lbl_player_clock_updateIntervals_00001184:
     cmpw r25, r24
-    blt lbl_fn_801FFA04_00001138
+    blt lbl_player_clock_updateIntervals_00001138
     lwz r28, 0x78(r30)
     li r29, 0x0
     lwz r25, 0x7c(r30)
     cmpwi r28, 0x0
-    ble lbl_fn_801FFA04_00001284
+    ble lbl_player_clock_updateIntervals_00001284
     lbz r24, 0xc(r1)
     addi r26, r1, 0xd8
     li r27, 0x0
-    b lbl_fn_801FFA04_0000127C
-lbl_fn_801FFA04_000011B0:
+    b lbl_player_clock_updateIntervals_0000127C
+lbl_player_clock_updateIntervals_000011B0:
     lwz r4, 0x98(r1)
     mr r3, r25
     lwz r0, 0xa0(r1)
@@ -1370,13 +1370,13 @@ lbl_fn_801FFA04_000011B0:
     sthx r27, r26, r0
     lwz r0, 0x4(r25)
     srwi. r0, r0, 31
-    bne lbl_fn_801FFA04_00001240
+    bne lbl_player_clock_updateIntervals_00001240
     lbz r0, 0x4(r25)
     clrlwi r23, r0, 25
-    b lbl_fn_801FFA04_00001244
-lbl_fn_801FFA04_00001240:
+    b lbl_player_clock_updateIntervals_00001244
+lbl_player_clock_updateIntervals_00001240:
     lwz r23, 0x8(r25)
-lbl_fn_801FFA04_00001244:
+lbl_player_clock_updateIntervals_00001244:
     stb r24, 0x8(r1)
     addi r3, r1, 0xd8
     bl fn_80686A48
@@ -1391,10 +1391,10 @@ lbl_fn_801FFA04_00001244:
     bl fn_8006F72C
     addi r25, r25, 0x10
     addi r29, r29, 0x1
-lbl_fn_801FFA04_0000127C:
+lbl_player_clock_updateIntervals_0000127C:
     cmpw r29, r28
-    blt lbl_fn_801FFA04_000011B0
-lbl_fn_801FFA04_00001284:
+    blt lbl_player_clock_updateIntervals_000011B0
+lbl_player_clock_updateIntervals_00001284:
     lwz r4, 0x98(r1)
     li r29, 0x0
     lwz r0, 0xa0(r1)
@@ -1414,8 +1414,8 @@ lbl_fn_801FFA04_00001284:
     stw r0, 0xa0(r1)
     lwz r27, 0x88(r30)
     lwz r25, 0x8c(r30)
-    b lbl_fn_801FFA04_00001390
-lbl_fn_801FFA04_000012D4:
+    b lbl_player_clock_updateIntervals_00001390
+lbl_player_clock_updateIntervals_000012D4:
     lwz r6, 0xa4(r1)
     addi r3, r1, 0x34
     lwz r4, 0x98(r1)
@@ -1451,34 +1451,34 @@ lbl_fn_801FFA04_000012D4:
     cmpwi r5, 0x0
     addi r0, r3, 0x4
     stw r0, 0xa0(r1)
-    blt lbl_fn_801FFA04_00001388
+    blt lbl_player_clock_updateIntervals_00001388
     lwz r0, 0x70(r28)
     cmpwi r0, 0x0
-    beq lbl_fn_801FFA04_00001388
+    beq lbl_player_clock_updateIntervals_00001388
     lwz r4, 0x38(r1)
     slwi r0, r5, 3
     lwz r3, 0x74(r28)
     add r0, r3, r0
     stw r0, 0x4(r25)
     stw r4, 0x8(r25)
-lbl_fn_801FFA04_00001388:
+lbl_player_clock_updateIntervals_00001388:
     addi r25, r25, 0x10
     addi r26, r26, 0x1
-lbl_fn_801FFA04_00001390:
+lbl_player_clock_updateIntervals_00001390:
     cmpw r26, r27
-    blt lbl_fn_801FFA04_000012D4
+    blt lbl_player_clock_updateIntervals_000012D4
     li r3, 0x0
     stw r3, 0x7c(r1)
     stw r3, 0x80(r1)
     stw r3, 0x84(r1)
     lwz r26, 0x88(r30)
     cmplw r26, r3
-    ble lbl_fn_801FFA04_00001688
-    bgt lbl_fn_801FFA04_000013C4
+    ble lbl_player_clock_updateIntervals_00001688
+    bgt lbl_player_clock_updateIntervals_000013C4
     neg r0, r26
     cmplw r3, r0
-    ble lbl_fn_801FFA04_0000142C
-lbl_fn_801FFA04_000013C4:
+    ble lbl_player_clock_updateIntervals_0000142C
+lbl_player_clock_updateIntervals_000013C4:
     lis r3, 0x4000
     lwz r4, 0x80(r1)
     subi r0, r3, 0x1
@@ -1486,7 +1486,7 @@ lbl_fn_801FFA04_000013C4:
     add r3, r4, r26
     subf r0, r24, r0
     cmplw r3, r0
-    ble lbl_fn_801FFA04_00001404
+    ble lbl_player_clock_updateIntervals_00001404
     lis r3, __files@ha
     lis r4, lbl_8073E628@ha
     addi r3, r3, __files@l
@@ -1495,19 +1495,19 @@ lbl_fn_801FFA04_000013C4:
     crclr 6
     bl fn_80680770
     bl fn_80686EA4
-lbl_fn_801FFA04_00001404:
+lbl_player_clock_updateIntervals_00001404:
     lis r3, 0x1555
     addi r0, r3, 0x5555
     cmplw r24, r0
-    bge lbl_fn_801FFA04_00001418
-    b lbl_fn_801FFA04_0000144C
-lbl_fn_801FFA04_00001418:
+    bge lbl_player_clock_updateIntervals_00001418
+    b lbl_player_clock_updateIntervals_0000144C
+lbl_player_clock_updateIntervals_00001418:
     lis r3, 0x2aab
     subi r0, r3, 0x5556
     cmplw r24, r0
-    bge lbl_fn_801FFA04_0000144C
-    b lbl_fn_801FFA04_0000144C
-lbl_fn_801FFA04_0000142C:
+    bge lbl_player_clock_updateIntervals_0000144C
+    b lbl_player_clock_updateIntervals_0000144C
+lbl_player_clock_updateIntervals_0000142C:
     slwi r5, r26, 2
     li r3, 0x0
     li r4, 0x0
@@ -1515,8 +1515,8 @@ lbl_fn_801FFA04_0000142C:
     lwz r0, 0x80(r1)
     add r0, r0, r26
     stw r0, 0x80(r1)
-    b lbl_fn_801FFA04_00001698
-lbl_fn_801FFA04_0000144C:
+    b lbl_player_clock_updateIntervals_00001698
+lbl_player_clock_updateIntervals_0000144C:
     lwz r0, 0x80(r1)
     li r6, 0x0
     lis r3, 0x4000
@@ -1533,7 +1533,7 @@ lbl_fn_801FFA04_0000144C:
     stw r5, 0xb4(r1)
     stw r6, 0xb8(r1)
     stw r3, 0x30(r1)
-    ble lbl_fn_801FFA04_000014B0
+    ble lbl_player_clock_updateIntervals_000014B0
     lis r3, __files@ha
     lis r4, lbl_8073E628@ha
     addi r3, r3, __files@l
@@ -1542,11 +1542,11 @@ lbl_fn_801FFA04_0000144C:
     crclr 6
     bl fn_80680770
     bl fn_80686EA4
-lbl_fn_801FFA04_000014B0:
+lbl_player_clock_updateIntervals_000014B0:
     lis r3, 0x1555
     addi r0, r3, 0x5555
     cmplw r28, r0
-    bge lbl_fn_801FFA04_00001500
+    bge lbl_player_clock_updateIntervals_00001500
     addi r5, r28, 0x1
     lis r3, 0xcccd
     slwi r4, r5, 2
@@ -1558,37 +1558,37 @@ lbl_fn_801FFA04_000014B0:
     srwi r4, r4, 2
     stw r4, 0x28(r1)
     cmplw r4, r0
-    bge lbl_fn_801FFA04_000014F4
+    bge lbl_player_clock_updateIntervals_000014F4
     addi r3, r1, 0x30
-lbl_fn_801FFA04_000014F4:
+lbl_player_clock_updateIntervals_000014F4:
     lwz r0, 0x0(r3)
     add r24, r28, r0
-    b lbl_fn_801FFA04_00001544
-lbl_fn_801FFA04_00001500:
+    b lbl_player_clock_updateIntervals_00001544
+lbl_player_clock_updateIntervals_00001500:
     lis r3, 0x2aab
     subi r0, r3, 0x5556
     cmplw r28, r0
-    bge lbl_fn_801FFA04_0000153C
+    bge lbl_player_clock_updateIntervals_0000153C
     addi r3, r28, 0x1
     lwz r0, 0x30(r1)
     srwi r3, r3, 1
     stw r3, 0x2c(r1)
     cmplw r3, r0
     addi r3, r1, 0x2c
-    bge lbl_fn_801FFA04_00001530
+    bge lbl_player_clock_updateIntervals_00001530
     addi r3, r1, 0x30
-lbl_fn_801FFA04_00001530:
+lbl_player_clock_updateIntervals_00001530:
     lwz r0, 0x0(r3)
     add r24, r28, r0
-    b lbl_fn_801FFA04_00001544
-lbl_fn_801FFA04_0000153C:
+    b lbl_player_clock_updateIntervals_00001544
+lbl_player_clock_updateIntervals_0000153C:
     lis r3, 0x4000
     subi r24, r3, 0x1
-lbl_fn_801FFA04_00001544:
+lbl_player_clock_updateIntervals_00001544:
     lis r3, 0x4000
     subi r0, r3, 0x1
     cmplw r24, r0
-    ble lbl_fn_801FFA04_00001574
+    ble lbl_player_clock_updateIntervals_00001574
     lis r3, __files@ha
     lis r4, lbl_8073E628@ha
     addi r3, r3, __files@l
@@ -1597,12 +1597,12 @@ lbl_fn_801FFA04_00001544:
     crclr 6
     bl fn_80680770
     bl fn_80686EA4
-lbl_fn_801FFA04_00001574:
+lbl_player_clock_updateIntervals_00001574:
     slwi r3, r24, 2
     bl fn_800844D8
     cmpwi r3, 0x0
     mr r25, r3
-    bne lbl_fn_801FFA04_000015A8
+    bne lbl_player_clock_updateIntervals_000015A8
     lis r3, __files@ha
     lis r4, lbl_80775A88@ha
     addi r3, r3, __files@l
@@ -1611,7 +1611,7 @@ lbl_fn_801FFA04_00001574:
     crclr 6
     bl fn_80680770
     bl fn_80686EA4
-lbl_fn_801FFA04_000015A8:
+lbl_player_clock_updateIntervals_000015A8:
     lwz r7, 0x80(r1)
     slwi r5, r26, 2
     lwz r0, 0xac(r1)
@@ -1662,23 +1662,23 @@ lbl_fn_801FFA04_000015A8:
     stw r3, 0xa8(r1)
     stw r6, 0x80(r1)
     stw r5, 0xac(r1)
-    beq lbl_fn_801FFA04_00001698
+    beq lbl_player_clock_updateIntervals_00001698
     cmpwi r3, 0x0
-    beq lbl_fn_801FFA04_00001698
+    beq lbl_player_clock_updateIntervals_00001698
     stw r5, 0xac(r1)
     bl dtor_80084684
-    b lbl_fn_801FFA04_00001698
-lbl_fn_801FFA04_00001688:
-    bge lbl_fn_801FFA04_00001698
+    b lbl_player_clock_updateIntervals_00001698
+lbl_player_clock_updateIntervals_00001688:
+    bge lbl_player_clock_updateIntervals_00001698
     neg r0, r26
     neg r0, r0
     stw r0, 0x80(r1)
-lbl_fn_801FFA04_00001698:
+lbl_player_clock_updateIntervals_00001698:
     li r7, 0x0
     li r5, 0x0
     li r6, 0x0
-    b lbl_fn_801FFA04_000016C8
-lbl_fn_801FFA04_000016A8:
+    b lbl_player_clock_updateIntervals_000016C8
+lbl_player_clock_updateIntervals_000016A8:
     lwz r0, 0x8c(r30)
     addi r7, r7, 0x1
     lwz r3, 0x7c(r1)
@@ -1687,10 +1687,10 @@ lbl_fn_801FFA04_000016A8:
     addi r0, r4, 0xc
     stwx r0, r3, r6
     addi r6, r6, 0x4
-lbl_fn_801FFA04_000016C8:
+lbl_player_clock_updateIntervals_000016C8:
     lwz r0, 0x88(r30)
     cmplw r7, r0
-    blt lbl_fn_801FFA04_000016A8
+    blt lbl_player_clock_updateIntervals_000016A8
     addi r3, r30, 0x80
     addi r4, r1, 0x7c
     bl fn_800A6E8C
@@ -1709,8 +1709,8 @@ lbl_fn_801FFA04_000016C8:
     add r0, r4, r0
     add r4, r7, r6
     add r25, r4, r0
-    b lbl_fn_801FFA04_00001AC8
-lbl_fn_801FFA04_00001720:
+    b lbl_player_clock_updateIntervals_00001AC8
+lbl_player_clock_updateIntervals_00001720:
     lwz r4, 0x98(r1)
     addi r3, r1, 0x14
     lwz r0, 0xa0(r1)
@@ -1732,19 +1732,19 @@ lbl_fn_801FFA04_00001720:
     cmpwi r4, 0x0
     addi r0, r3, 0x2
     stw r0, 0xa0(r1)
-    beq lbl_fn_801FFA04_000017A4
+    beq lbl_player_clock_updateIntervals_000017A4
     cmpwi r4, 0x1
-    beq lbl_fn_801FFA04_000017C4
+    beq lbl_player_clock_updateIntervals_000017C4
     cmpwi r4, 0x2
-    beq lbl_fn_801FFA04_000018DC
+    beq lbl_player_clock_updateIntervals_000018DC
     cmpwi r4, 0x4
-    beq lbl_fn_801FFA04_000018FC
+    beq lbl_player_clock_updateIntervals_000018FC
     cmpwi r4, 0x3
-    beq lbl_fn_801FFA04_0000191C
+    beq lbl_player_clock_updateIntervals_0000191C
     cmpwi r4, 0x5
-    beq lbl_fn_801FFA04_000019E4
-    b lbl_fn_801FFA04_00001AC4
-lbl_fn_801FFA04_000017A4:
+    beq lbl_player_clock_updateIntervals_000019E4
+    b lbl_player_clock_updateIntervals_00001AC4
+lbl_player_clock_updateIntervals_000017A4:
     lhz r5, 0x12(r1)
     mr r3, r30
     bl fn_801EF36C
@@ -1752,8 +1752,8 @@ lbl_fn_801FFA04_000017A4:
     addi r4, r28, 0x14
     addi r3, r1, 0x98
     bl fn_80201794
-    b lbl_fn_801FFA04_00001AC4
-lbl_fn_801FFA04_000017C4:
+    b lbl_player_clock_updateIntervals_00001AC4
+lbl_player_clock_updateIntervals_000017C4:
     lhz r5, 0x12(r1)
     mr r3, r30
     bl fn_801EF36C
@@ -1813,18 +1813,18 @@ lbl_fn_801FFA04_000017C4:
     cmpwi r5, 0x0
     addi r0, r3, 0x4
     stw r0, 0xa0(r1)
-    blt lbl_fn_801FFA04_00001AC4
+    blt lbl_player_clock_updateIntervals_00001AC4
     lwz r0, 0x78(r29)
     cmpwi r0, 0x0
-    beq lbl_fn_801FFA04_00001AC4
+    beq lbl_player_clock_updateIntervals_00001AC4
     lwz r4, 0x20(r1)
     slwi r0, r5, 4
     lwz r3, 0x7c(r29)
     add r0, r3, r0
     stw r0, 0x138(r26)
     stw r4, 0x13c(r26)
-    b lbl_fn_801FFA04_00001AC4
-lbl_fn_801FFA04_000018DC:
+    b lbl_player_clock_updateIntervals_00001AC4
+lbl_player_clock_updateIntervals_000018DC:
     lhz r5, 0x12(r1)
     mr r3, r30
     bl fn_801EF36C
@@ -1832,8 +1832,8 @@ lbl_fn_801FFA04_000018DC:
     addi r4, r28, 0x1c
     addi r3, r1, 0x98
     bl fn_80200ED0
-    b lbl_fn_801FFA04_00001AC4
-lbl_fn_801FFA04_000018FC:
+    b lbl_player_clock_updateIntervals_00001AC4
+lbl_player_clock_updateIntervals_000018FC:
     lhz r5, 0x12(r1)
     mr r3, r30
     bl fn_801EF36C
@@ -1841,8 +1841,8 @@ lbl_fn_801FFA04_000018FC:
     addi r4, r28, 0x1c
     addi r3, r1, 0x98
     bl fn_80200ED0
-    b lbl_fn_801FFA04_00001AC4
-lbl_fn_801FFA04_0000191C:
+    b lbl_player_clock_updateIntervals_00001AC4
+lbl_player_clock_updateIntervals_0000191C:
     lhz r5, 0x12(r1)
     mr r3, r30
     bl fn_801EF36C
@@ -1892,8 +1892,8 @@ lbl_fn_801FFA04_0000191C:
     lwz r3, 0xa0(r1)
     addi r0, r3, 0x4
     stw r0, 0xa0(r1)
-    b lbl_fn_801FFA04_00001AC4
-lbl_fn_801FFA04_000019E4:
+    b lbl_player_clock_updateIntervals_00001AC4
+lbl_player_clock_updateIntervals_000019E4:
     lhz r5, 0x12(r1)
     mr r3, r30
     bl fn_801EF36C
@@ -1915,12 +1915,12 @@ lbl_fn_801FFA04_000019E4:
     stw r0, 0xa0(r1)
     lwz r3, 0x130(r26)
     cmpwi r3, 0x0
-    beq lbl_fn_801FFA04_00001A40
+    beq lbl_player_clock_updateIntervals_00001A40
     bl fn_80084C24
-lbl_fn_801FFA04_00001A40:
+lbl_player_clock_updateIntervals_00001A40:
     cmpwi r29, 0x0
     stw r29, 0x12c(r26)
-    beq lbl_fn_801FFA04_00001A6C
+    beq lbl_player_clock_updateIntervals_00001A6C
     slwi r3, r29, 2
     li r4, 0x8
     la r5, lbl_8087DAFC
@@ -1928,14 +1928,14 @@ lbl_fn_801FFA04_00001A40:
     li r7, 0x0
     bl fn_800846FC
     stw r3, 0x130(r26)
-    b lbl_fn_801FFA04_00001A70
-lbl_fn_801FFA04_00001A6C:
+    b lbl_player_clock_updateIntervals_00001A70
+lbl_player_clock_updateIntervals_00001A6C:
     stw r24, 0x130(r26)
-lbl_fn_801FFA04_00001A70:
+lbl_player_clock_updateIntervals_00001A70:
     li r29, 0x0
     li r23, 0x0
-    b lbl_fn_801FFA04_00001AB8
-lbl_fn_801FFA04_00001A7C:
+    b lbl_player_clock_updateIntervals_00001AB8
+lbl_player_clock_updateIntervals_00001A7C:
     lwz r4, 0x98(r1)
     addi r3, r1, 0x10
     lwz r0, 0xa0(r1)
@@ -1951,32 +1951,32 @@ lbl_fn_801FFA04_00001A7C:
     lwz r3, 0x130(r26)
     stwx r0, r3, r23
     addi r23, r23, 0x4
-lbl_fn_801FFA04_00001AB8:
+lbl_player_clock_updateIntervals_00001AB8:
     lwz r0, 0x12c(r26)
     cmplw r29, r0
-    blt lbl_fn_801FFA04_00001A7C
-lbl_fn_801FFA04_00001AC4:
+    blt lbl_player_clock_updateIntervals_00001A7C
+lbl_player_clock_updateIntervals_00001AC4:
     addi r27, r27, 0x1
-lbl_fn_801FFA04_00001AC8:
+lbl_player_clock_updateIntervals_00001AC8:
     cmpw r27, r25
-    blt lbl_fn_801FFA04_00001720
+    blt lbl_player_clock_updateIntervals_00001720
     li r24, 0x0
     li r25, 0x0
     li r29, 0x8
-    b lbl_fn_801FFA04_00001DCC
-lbl_fn_801FFA04_00001AE0:
+    b lbl_player_clock_updateIntervals_00001DCC
+lbl_player_clock_updateIntervals_00001AE0:
     lwz r0, 0x18(r30)
     lwz r3, 0x8c(r30)
     cmpwi r0, 0x0
     add r28, r3, r25
-    beq lbl_fn_801FFA04_00001B00
+    beq lbl_player_clock_updateIntervals_00001B00
     lwz r0, 0x14(r30)
     cmpwi r0, 0x0
-    bne lbl_fn_801FFA04_00001C50
-lbl_fn_801FFA04_00001B00:
+    bne lbl_player_clock_updateIntervals_00001C50
+lbl_player_clock_updateIntervals_00001B00:
     lwz r0, 0x14(r30)
     cmplwi r0, 0x8
-    bgt lbl_fn_801FFA04_00001DA8
+    bgt lbl_player_clock_updateIntervals_00001DA8
     li r3, 0x20
     li r4, 0x0
     la r5, lbl_8087DAB4
@@ -1986,27 +1986,27 @@ lbl_fn_801FFA04_00001B00:
     lwz r0, 0x18(r30)
     mr r26, r3
     cmpwi r0, 0x0
-    beq lbl_fn_801FFA04_00001C44
+    beq lbl_player_clock_updateIntervals_00001C44
     lwz r0, 0x10(r30)
     li r4, 0x8
     cmplwi r0, 0x8
-    bge lbl_fn_801FFA04_00001B48
+    bge lbl_player_clock_updateIntervals_00001B48
     mr r4, r0
-lbl_fn_801FFA04_00001B48:
+lbl_player_clock_updateIntervals_00001B48:
     cmpwi r4, 0x0
     li r5, 0x0
-    beq lbl_fn_801FFA04_00001C3C
+    beq lbl_player_clock_updateIntervals_00001C3C
     cmplwi r4, 0x8
     subi r8, r4, 0x8
-    ble lbl_fn_801FFA04_00001C08
+    ble lbl_player_clock_updateIntervals_00001C08
     addi r0, r8, 0x7
     mr r7, r26
     srwi r0, r0, 3
     li r6, 0x0
     mtctr r0
     cmplwi r8, 0x0
-    ble lbl_fn_801FFA04_00001C08
-lbl_fn_801FFA04_00001B7C:
+    ble lbl_player_clock_updateIntervals_00001C08
+lbl_player_clock_updateIntervals_00001B7C:
     lwz r8, 0x18(r30)
     addi r5, r5, 0x8
     lwzx r0, r8, r6
@@ -2041,36 +2041,36 @@ lbl_fn_801FFA04_00001B7C:
     lwz r0, 0x1c(r8)
     stw r0, 0x1c(r7)
     addi r7, r7, 0x20
-    bdnz lbl_fn_801FFA04_00001B7C
-lbl_fn_801FFA04_00001C08:
+    bdnz lbl_player_clock_updateIntervals_00001B7C
+lbl_player_clock_updateIntervals_00001C08:
     slwi r7, r5, 2
     subf r0, r5, r4
     add r6, r3, r7
     mtctr r0
     cmplw r5, r4
-    bge lbl_fn_801FFA04_00001C3C
-lbl_fn_801FFA04_00001C20:
+    bge lbl_player_clock_updateIntervals_00001C3C
+lbl_player_clock_updateIntervals_00001C20:
     lwz r3, 0x18(r30)
     addi r5, r5, 0x1
     lwzx r0, r3, r7
     addi r7, r7, 0x4
     stw r0, 0x0(r6)
     addi r6, r6, 0x4
-    bdnz lbl_fn_801FFA04_00001C20
-lbl_fn_801FFA04_00001C3C:
+    bdnz lbl_player_clock_updateIntervals_00001C20
+lbl_player_clock_updateIntervals_00001C3C:
     lwz r3, 0x18(r30)
     bl fn_80084C24
-lbl_fn_801FFA04_00001C44:
+lbl_player_clock_updateIntervals_00001C44:
     stw r26, 0x18(r30)
     stw r29, 0x14(r30)
-    b lbl_fn_801FFA04_00001DA8
-lbl_fn_801FFA04_00001C50:
+    b lbl_player_clock_updateIntervals_00001DA8
+lbl_player_clock_updateIntervals_00001C50:
     lwz r3, 0x10(r30)
     cmplw r3, r0
-    blt lbl_fn_801FFA04_00001DA8
+    blt lbl_player_clock_updateIntervals_00001DA8
     slwi r26, r3, 1
     cmplw r0, r26
-    bgt lbl_fn_801FFA04_00001DA8
+    bgt lbl_player_clock_updateIntervals_00001DA8
     slwi r3, r26, 2
     li r4, 0x0
     la r5, lbl_8087DAB4
@@ -2080,27 +2080,27 @@ lbl_fn_801FFA04_00001C50:
     lwz r0, 0x18(r30)
     mr r27, r3
     cmpwi r0, 0x0
-    beq lbl_fn_801FFA04_00001DA0
+    beq lbl_player_clock_updateIntervals_00001DA0
     lwz r0, 0x10(r30)
     mr r4, r26
     cmplw r26, r0
-    ble lbl_fn_801FFA04_00001CA4
+    ble lbl_player_clock_updateIntervals_00001CA4
     mr r4, r0
-lbl_fn_801FFA04_00001CA4:
+lbl_player_clock_updateIntervals_00001CA4:
     cmpwi r4, 0x0
     li r5, 0x0
-    beq lbl_fn_801FFA04_00001D98
+    beq lbl_player_clock_updateIntervals_00001D98
     cmplwi r4, 0x8
     subi r8, r4, 0x8
-    ble lbl_fn_801FFA04_00001D64
+    ble lbl_player_clock_updateIntervals_00001D64
     addi r0, r8, 0x7
     mr r7, r27
     srwi r0, r0, 3
     li r6, 0x0
     mtctr r0
     cmplwi r8, 0x0
-    ble lbl_fn_801FFA04_00001D64
-lbl_fn_801FFA04_00001CD8:
+    ble lbl_player_clock_updateIntervals_00001D64
+lbl_player_clock_updateIntervals_00001CD8:
     lwz r8, 0x18(r30)
     addi r5, r5, 0x8
     lwzx r0, r8, r6
@@ -2135,29 +2135,29 @@ lbl_fn_801FFA04_00001CD8:
     lwz r0, 0x1c(r8)
     stw r0, 0x1c(r7)
     addi r7, r7, 0x20
-    bdnz lbl_fn_801FFA04_00001CD8
-lbl_fn_801FFA04_00001D64:
+    bdnz lbl_player_clock_updateIntervals_00001CD8
+lbl_player_clock_updateIntervals_00001D64:
     slwi r7, r5, 2
     subf r0, r5, r4
     add r6, r3, r7
     mtctr r0
     cmplw r5, r4
-    bge lbl_fn_801FFA04_00001D98
-lbl_fn_801FFA04_00001D7C:
+    bge lbl_player_clock_updateIntervals_00001D98
+lbl_player_clock_updateIntervals_00001D7C:
     lwz r3, 0x18(r30)
     addi r5, r5, 0x1
     lwzx r0, r3, r7
     addi r7, r7, 0x4
     stw r0, 0x0(r6)
     addi r6, r6, 0x4
-    bdnz lbl_fn_801FFA04_00001D7C
-lbl_fn_801FFA04_00001D98:
+    bdnz lbl_player_clock_updateIntervals_00001D7C
+lbl_player_clock_updateIntervals_00001D98:
     lwz r3, 0x18(r30)
     bl fn_80084C24
-lbl_fn_801FFA04_00001DA0:
+lbl_player_clock_updateIntervals_00001DA0:
     stw r27, 0x18(r30)
     stw r26, 0x14(r30)
-lbl_fn_801FFA04_00001DA8:
+lbl_player_clock_updateIntervals_00001DA8:
     lwz r0, 0x10(r30)
     addi r25, r25, 0x10
     lwz r3, 0x18(r30)
@@ -2167,23 +2167,23 @@ lbl_fn_801FFA04_00001DA8:
     lwz r3, 0x10(r30)
     addi r0, r3, 0x1
     stw r0, 0x10(r30)
-lbl_fn_801FFA04_00001DCC:
+lbl_player_clock_updateIntervals_00001DCC:
     lwz r0, 0x88(r30)
     cmplw r24, r0
-    blt lbl_fn_801FFA04_00001AE0
+    blt lbl_player_clock_updateIntervals_00001AE0
     li r25, 0x0
     li r24, 0x0
-    b lbl_fn_801FFA04_00001E40
-lbl_fn_801FFA04_00001DE4:
+    b lbl_player_clock_updateIntervals_00001E40
+lbl_player_clock_updateIntervals_00001DE4:
     lwz r3, 0xc(r30)
     lwzx r26, r3, r24
     lhz r0, 0x8(r26)
     cmpwi r0, 0x5
-    bne lbl_fn_801FFA04_00001E38
+    bne lbl_player_clock_updateIntervals_00001E38
     li r27, 0x0
     li r23, 0x0
-    b lbl_fn_801FFA04_00001E2C
-lbl_fn_801FFA04_00001E04:
+    b lbl_player_clock_updateIntervals_00001E2C
+lbl_player_clock_updateIntervals_00001E04:
     lwz r4, 0x130(r26)
     mr r3, r30
     lwzx r4, r4, r23
@@ -2194,130 +2194,130 @@ lbl_fn_801FFA04_00001E04:
     bl fn_801ED910
     addi r23, r23, 0x4
     addi r27, r27, 0x1
-lbl_fn_801FFA04_00001E2C:
+lbl_player_clock_updateIntervals_00001E2C:
     lwz r0, 0x12c(r26)
     cmplw r27, r0
-    blt lbl_fn_801FFA04_00001E04
-lbl_fn_801FFA04_00001E38:
+    blt lbl_player_clock_updateIntervals_00001E04
+lbl_player_clock_updateIntervals_00001E38:
     addi r25, r25, 0x1
     addi r24, r24, 0x4
-lbl_fn_801FFA04_00001E40:
+lbl_player_clock_updateIntervals_00001E40:
     lwz r0, 0x4(r30)
     cmplw r25, r0
-    blt lbl_fn_801FFA04_00001DE4
+    blt lbl_player_clock_updateIntervals_00001DE4
     cmpwi r31, 0x0
-    beq lbl_fn_801FFA04_00001F8C
+    beq lbl_player_clock_updateIntervals_00001F8C
     li r24, 0x0
     li r27, 0x0
-    b lbl_fn_801FFA04_00001F80
-lbl_fn_801FFA04_00001E60:
+    b lbl_player_clock_updateIntervals_00001F80
+lbl_player_clock_updateIntervals_00001E60:
     lwz r3, 0xc(r30)
     lwzx r29, r3, r27
     lhz r0, 0x8(r29)
     cmpwi r0, 0x1
-    bne lbl_fn_801FFA04_00001F78
+    bne lbl_player_clock_updateIntervals_00001F78
     li r25, 0x0
     li r26, 0x0
-    b lbl_fn_801FFA04_00001F6C
-lbl_fn_801FFA04_00001E80:
+    b lbl_player_clock_updateIntervals_00001F6C
+lbl_player_clock_updateIntervals_00001E80:
     lwz r0, 0x138(r29)
     add r4, r0, r26
     lwzu r0, 0x4(r4)
     srwi. r0, r0, 31
-    bne lbl_fn_801FFA04_00001EA0
+    bne lbl_player_clock_updateIntervals_00001EA0
     lbz r0, 0x0(r4)
     clrlwi r0, r0, 25
-    b lbl_fn_801FFA04_00001EA4
-lbl_fn_801FFA04_00001EA0:
+    b lbl_player_clock_updateIntervals_00001EA4
+lbl_player_clock_updateIntervals_00001EA0:
     lwz r0, 0x4(r4)
-lbl_fn_801FFA04_00001EA4:
+lbl_player_clock_updateIntervals_00001EA4:
     cmpwi r0, 0x0
-    beq lbl_fn_801FFA04_00001F64
+    beq lbl_player_clock_updateIntervals_00001F64
     lwz r0, 0x0(r4)
     srwi r0, r0, 31
     cntlzw r0, r0
     srwi. r6, r0, 5
-    beq lbl_fn_801FFA04_00001EC8
+    beq lbl_player_clock_updateIntervals_00001EC8
     addi r3, r4, 0x2
-    b lbl_fn_801FFA04_00001ECC
-lbl_fn_801FFA04_00001EC8:
+    b lbl_player_clock_updateIntervals_00001ECC
+lbl_player_clock_updateIntervals_00001EC8:
     lwz r3, 0x8(r4)
-lbl_fn_801FFA04_00001ECC:
+lbl_player_clock_updateIntervals_00001ECC:
     lhz r0, 0x0(r3)
     cmplwi r0, 0xffff
-    bne lbl_fn_801FFA04_00001F64
+    bne lbl_player_clock_updateIntervals_00001F64
     lwz r0, 0x90(r1)
     cmpwi r0, 0x581
-    blt lbl_fn_801FFA04_00001F44
+    blt lbl_player_clock_updateIntervals_00001F44
     cmpwi r6, 0x0
-    beq lbl_fn_801FFA04_00001EF4
+    beq lbl_player_clock_updateIntervals_00001EF4
     addi r3, r4, 0x2
-    b lbl_fn_801FFA04_00001EF8
-lbl_fn_801FFA04_00001EF4:
+    b lbl_player_clock_updateIntervals_00001EF8
+lbl_player_clock_updateIntervals_00001EF4:
     lwz r3, 0x8(r4)
-lbl_fn_801FFA04_00001EF8:
+lbl_player_clock_updateIntervals_00001EF8:
     lhz r0, 0x2(r3)
     cmpwi r6, 0x0
     slwi r5, r0, 20
-    beq lbl_fn_801FFA04_00001F10
+    beq lbl_player_clock_updateIntervals_00001F10
     addi r3, r4, 0x2
-    b lbl_fn_801FFA04_00001F14
-lbl_fn_801FFA04_00001F10:
+    b lbl_player_clock_updateIntervals_00001F14
+lbl_player_clock_updateIntervals_00001F10:
     lwz r3, 0x8(r4)
-lbl_fn_801FFA04_00001F14:
+lbl_player_clock_updateIntervals_00001F14:
     lhz r0, 0x4(r3)
     cmpwi r6, 0x0
     clrlslwi r0, r0, 20, 8
     add r5, r5, r0
-    beq lbl_fn_801FFA04_00001F30
+    beq lbl_player_clock_updateIntervals_00001F30
     addi r3, r4, 0x2
-    b lbl_fn_801FFA04_00001F34
-lbl_fn_801FFA04_00001F30:
+    b lbl_player_clock_updateIntervals_00001F34
+lbl_player_clock_updateIntervals_00001F30:
     lwz r3, 0x8(r4)
-lbl_fn_801FFA04_00001F34:
+lbl_player_clock_updateIntervals_00001F34:
     lhz r0, 0x6(r3)
     clrlwi r0, r0, 24
     add r5, r5, r0
-    b lbl_fn_801FFA04_00001F5C
-lbl_fn_801FFA04_00001F44:
+    b lbl_player_clock_updateIntervals_00001F5C
+lbl_player_clock_updateIntervals_00001F44:
     cmpwi r6, 0x0
-    beq lbl_fn_801FFA04_00001F54
+    beq lbl_player_clock_updateIntervals_00001F54
     addi r3, r4, 0x2
-    b lbl_fn_801FFA04_00001F58
-lbl_fn_801FFA04_00001F54:
+    b lbl_player_clock_updateIntervals_00001F58
+lbl_player_clock_updateIntervals_00001F54:
     lwz r3, 0x8(r4)
-lbl_fn_801FFA04_00001F58:
+lbl_player_clock_updateIntervals_00001F58:
     lhz r5, 0x2(r3)
-lbl_fn_801FFA04_00001F5C:
+lbl_player_clock_updateIntervals_00001F5C:
     mr r3, r31
     bl fn_801F3E20
-lbl_fn_801FFA04_00001F64:
+lbl_player_clock_updateIntervals_00001F64:
     addi r26, r26, 0x10
     addi r25, r25, 0x1
-lbl_fn_801FFA04_00001F6C:
+lbl_player_clock_updateIntervals_00001F6C:
     lwz r0, 0x13c(r29)
     cmpw r25, r0
-    blt lbl_fn_801FFA04_00001E80
-lbl_fn_801FFA04_00001F78:
+    blt lbl_player_clock_updateIntervals_00001E80
+lbl_player_clock_updateIntervals_00001F78:
     addi r24, r24, 0x1
     addi r27, r27, 0x4
-lbl_fn_801FFA04_00001F80:
+lbl_player_clock_updateIntervals_00001F80:
     lwz r0, 0x4(r30)
     cmplw r24, r0
-    blt lbl_fn_801FFA04_00001E60
-lbl_fn_801FFA04_00001F8C:
+    blt lbl_player_clock_updateIntervals_00001E60
+lbl_player_clock_updateIntervals_00001F8C:
     addic. r0, r1, 0x7c
-    beq lbl_fn_801FFA04_00001FB8
-    beq lbl_fn_801FFA04_00001FB8
-    beq lbl_fn_801FFA04_00001FB8
+    beq lbl_player_clock_updateIntervals_00001FB8
+    beq lbl_player_clock_updateIntervals_00001FB8
+    beq lbl_player_clock_updateIntervals_00001FB8
     lwz r3, 0x7c(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_801FFA04_00001FB8
+    beq lbl_player_clock_updateIntervals_00001FB8
     lwz r0, 0x80(r1)
     subf r0, r0, r0
     stw r0, 0x80(r1)
     bl dtor_80084684
-lbl_fn_801FFA04_00001FB8:
+lbl_player_clock_updateIntervals_00001FB8:
     addi r11, r1, 0x300
     li r3, 0x1
     bl _restgpr_23

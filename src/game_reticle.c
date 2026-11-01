@@ -56,7 +56,7 @@ extern void fn_80616EF0(void);
 extern void fn_80617340(void);
 extern void fn_806173E0(void);
 extern void fn_80617420(void);
-extern void fn_80617460(void);
+extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void fn_80617520(void);
 extern void fn_806175F0(void);
@@ -129,7 +129,7 @@ void fn_8009C84C(void);
 void fn_8009CC28(void);
 void fn_8009D1A4(void);
 void atn_Model_drawMeshNode(void);
-void fn_8009DCE0(void);
+void reticle_updateTargetNodes(void);
 void atn_Reticle_updateDraw(void);
 
 asm void fn_8009B938(void)
@@ -612,7 +612,7 @@ lbl_atn_Model_setupMeshMaterial_00000670:
     cmpwi r0, 0x0
     beq lbl_atn_Model_setupMeshMaterial_0000088C
     mr r3, r29
-    bl fn_8009DCE0
+    bl reticle_updateTargetNodes
     lwz r0, 0x18(r29)
     lis r4, lbl_80732638@ha
     stw r0, 0x48(r1)
@@ -1775,7 +1775,7 @@ lbl_fn_8009CC28_00001674:
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x7
     li r5, 0x7
@@ -2659,7 +2659,7 @@ lbl_atn_Model_drawMeshNode_00002388:
     blr
 }
 
-asm void fn_8009DCE0(void)
+asm void reticle_updateTargetNodes(void)
 {
     nofralloc
     stwu r1, -0x40(r1)
@@ -2671,102 +2671,102 @@ asm void fn_8009DCE0(void)
     li r28, 0x0
     li r27, 0x0
     li r25, 0x0
-    b lbl_fn_8009DCE0_00002508
-lbl_fn_8009DCE0_000023D0:
+    b lbl_reticle_updateTargetNodes_00002508
+lbl_reticle_updateTargetNodes_000023D0:
     lwz r0, 0x4(r29)
     lwzx r30, r25, r0
     add r6, r0, r25
     lwz r31, 0x4(r6)
     cmpwi r30, 0xb
-    bne lbl_fn_8009DCE0_00002500
+    bne lbl_reticle_updateTargetNodes_00002500
     mulli r5, r28, 0x18
     lbz r4, 0x4a(r26)
-    b lbl_fn_8009DCE0_000023FC
-lbl_fn_8009DCE0_000023F4:
+    b lbl_reticle_updateTargetNodes_000023FC
+lbl_reticle_updateTargetNodes_000023F4:
     addi r5, r5, 0x18
     addi r28, r28, 0x1
-lbl_fn_8009DCE0_000023FC:
+lbl_reticle_updateTargetNodes_000023FC:
     cmpw r28, r4
-    bge lbl_fn_8009DCE0_0000241C
+    bge lbl_reticle_updateTargetNodes_0000241C
     lwz r0, 0xc(r26)
     add r3, r0, r5
     lbz r0, 0x10(r3)
     extsb r0, r0
     cmpw r0, r30
-    blt lbl_fn_8009DCE0_000023F4
-lbl_fn_8009DCE0_0000241C:
+    blt lbl_reticle_updateTargetNodes_000023F4
+lbl_reticle_updateTargetNodes_0000241C:
     cmpw r28, r4
-    bge lbl_fn_8009DCE0_00002448
+    bge lbl_reticle_updateTargetNodes_00002448
     mulli r0, r28, 0x18
     lwz r3, 0xc(r26)
     add r23, r3, r0
     lbz r0, 0x10(r23)
     extsb r0, r0
     cmpw r30, r0
-    bne lbl_fn_8009DCE0_00002448
+    bne lbl_reticle_updateTargetNodes_00002448
     addi r28, r28, 0x1
-    b lbl_fn_8009DCE0_0000244C
-lbl_fn_8009DCE0_00002448:
+    b lbl_reticle_updateTargetNodes_0000244C
+lbl_reticle_updateTargetNodes_00002448:
     lwz r23, 0x8(r6)
-lbl_fn_8009DCE0_0000244C:
+lbl_reticle_updateTargetNodes_0000244C:
     cmpwi r23, 0x0
     li r21, 0x0
-    beq lbl_fn_8009DCE0_000024C0
+    beq lbl_reticle_updateTargetNodes_000024C0
     lwz r22, 0x4(r23)
     cmpwi r22, 0x0
-    beq lbl_fn_8009DCE0_000024A8
+    beq lbl_reticle_updateTargetNodes_000024A8
     lwz r0, 0x28(r22)
     li r24, 0x0
     cmpwi r0, 0x0
-    bne lbl_fn_8009DCE0_00002494
+    bne lbl_reticle_updateTargetNodes_00002494
     mr r3, r22
     bl atn_LH_Texture_update
     cmpwi r3, 0x0
-    bne lbl_fn_8009DCE0_00002498
+    bne lbl_reticle_updateTargetNodes_00002498
     addi r3, r22, 0x20
     bl atn_LoadHandle_getStatus
     cmpwi r3, 0x3
-    bne lbl_fn_8009DCE0_00002498
-lbl_fn_8009DCE0_00002494:
+    bne lbl_reticle_updateTargetNodes_00002498
+lbl_reticle_updateTargetNodes_00002494:
     li r24, 0x1
-lbl_fn_8009DCE0_00002498:
+lbl_reticle_updateTargetNodes_00002498:
     cmpwi r24, 0x0
-    beq lbl_fn_8009DCE0_000024A8
+    beq lbl_reticle_updateTargetNodes_000024A8
     lwz r21, 0x4(r23)
-    b lbl_fn_8009DCE0_000024C0
-lbl_fn_8009DCE0_000024A8:
+    b lbl_reticle_updateTargetNodes_000024C0
+lbl_reticle_updateTargetNodes_000024A8:
     lwz r0, 0x4(r29)
     add r3, r0, r25
     lwz r3, 0x8(r3)
     cmpwi r3, 0x0
-    beq lbl_fn_8009DCE0_000024C0
+    beq lbl_reticle_updateTargetNodes_000024C0
     lwz r21, 0x4(r3)
-lbl_fn_8009DCE0_000024C0:
+lbl_reticle_updateTargetNodes_000024C0:
     cmpwi r30, 0xb
-    bne lbl_fn_8009DCE0_000024E0
+    bne lbl_reticle_updateTargetNodes_000024E0
     lwz r3, lbl_8087EFA8
     lwz r0, 0x28(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8009DCE0_000024E0
+    beq lbl_reticle_updateTargetNodes_000024E0
     lwz r3, lbl_8087EEB0
     addi r21, r3, 0x40
-lbl_fn_8009DCE0_000024E0:
+lbl_reticle_updateTargetNodes_000024E0:
     cmpwi r21, 0x0
-    bne lbl_fn_8009DCE0_000024F0
+    bne lbl_reticle_updateTargetNodes_000024F0
     lwz r3, lbl_8087EEB0
     addi r21, r3, 0x10
-lbl_fn_8009DCE0_000024F0:
+lbl_reticle_updateTargetNodes_000024F0:
     lwz r3, lbl_8087EEE0
     mr r4, r31
     mr r5, r21
     bl fn_800763C0
-lbl_fn_8009DCE0_00002500:
+lbl_reticle_updateTargetNodes_00002500:
     addi r27, r27, 0x1
     addi r25, r25, 0xc
-lbl_fn_8009DCE0_00002508:
+lbl_reticle_updateTargetNodes_00002508:
     lwz r0, 0x0(r29)
     cmplw r27, r0
-    blt lbl_fn_8009DCE0_000023D0
+    blt lbl_reticle_updateTargetNodes_000023D0
     lmw r21, 0x14(r1)
     lwz r0, 0x44(r1)
     mtlr r0
@@ -2892,7 +2892,7 @@ lbl_atn_Reticle_updateDraw_00002690:
     lwz r5, 0x1c0(r8)
     clrlwi r7, r0, 24
     lwz r8, 0x1cc(r8)
-    bl fn_80617460
+    bl GXSetTevIndirect
 lbl_atn_Reticle_updateDraw_000026D4:
     lwz r3, lbl_8087EEE0
     mr r4, r27

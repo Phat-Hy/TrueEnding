@@ -8,7 +8,7 @@ extern void _savegpr_26(void);
 extern void _savegpr_27(void);
 extern void fn_8004B158(void);
 extern void fn_8004B1EC(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8004BF64(void);
 extern void fn_8006A204(void);
 extern void fn_8006A900(void);
@@ -2737,7 +2737,7 @@ lbl_spectateCamera_update_00002678:
     stfs f0, 0x260(r3)
 lbl_spectateCamera_update_000026C4:
     addi r3, r28, 0x64
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r6, lbl_8087EFB4
     lwz r0, 0x64(r28)
     stw r0, 0x104(r6)

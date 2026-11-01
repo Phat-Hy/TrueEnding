@@ -162,7 +162,7 @@ void fn_8047A158(void);
 void fn_8047A410(void);
 void fn_8047A424(void);
 void taskManager_initSystem(void);
-void fn_8047AEBC(void);
+void cutscene_actor_updatePose(void);
 
 asm void fn_8047961C(void)
 {
@@ -1397,7 +1397,7 @@ lbl_taskManager_initSystem_000010F4:
 lbl_taskManager_initSystem_000010FC:
     lwz r3, g_TaskManager
     addi r4, r1, 0x228
-    bl fn_8047AEBC
+    bl cutscene_actor_updatePose
     addic. r4, r1, 0x228
     beq lbl_taskManager_initSystem_00001144
     lwz r5, 0x228(r1)
@@ -1491,7 +1491,7 @@ lbl_taskManager_initSystem_0000124C:
 lbl_taskManager_initSystem_00001254:
     lwz r3, g_TaskManager
     addi r4, r1, 0x214
-    bl fn_8047AEBC
+    bl cutscene_actor_updatePose
     addic. r4, r1, 0x214
     beq lbl_taskManager_initSystem_0000129C
     lwz r5, 0x214(r1)
@@ -1585,7 +1585,7 @@ lbl_taskManager_initSystem_000013A4:
 lbl_taskManager_initSystem_000013AC:
     lwz r3, g_TaskManager
     addi r4, r1, 0x200
-    bl fn_8047AEBC
+    bl cutscene_actor_updatePose
     addic. r4, r1, 0x200
     beq lbl_taskManager_initSystem_000013F4
     lwz r5, 0x200(r1)
@@ -1908,7 +1908,7 @@ lbl_taskManager_initSystem_00001658:
     blr
 }
 
-asm void fn_8047AEBC(void)
+asm void cutscene_actor_updatePose(void)
 {
     nofralloc
     stwu r1, -0xb0(r1)
@@ -1919,14 +1919,14 @@ asm void fn_8047AEBC(void)
     mr r31, r4
     lwz r0, 0x8(r3)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_000018D0
+    beq lbl_cutscene_actor_updatePose_000018D0
     lwz r0, 0x4(r3)
     cmpwi r0, 0x0
-    bne lbl_fn_8047AEBC_00001B2C
-lbl_fn_8047AEBC_000018D0:
+    bne lbl_cutscene_actor_updatePose_00001B2C
+lbl_cutscene_actor_updatePose_000018D0:
     lwz r0, 0x4(r3)
     cmplwi r0, 0x8
-    bgt lbl_fn_8047AEBC_00001D90
+    bgt lbl_cutscene_actor_updatePose_00001D90
     li r3, 0xb0
     li r4, 0x0
     la r5, lbl_8087E084
@@ -1943,29 +1943,29 @@ lbl_fn_8047AEBC_000018D0:
     lwz r0, 0x8(r30)
     mr r26, r3
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001B1C
+    beq lbl_cutscene_actor_updatePose_00001B1C
     lwz r0, 0x0(r30)
     li r29, 0x8
     cmplwi r0, 0x8
-    bge lbl_fn_8047AEBC_00001934
+    bge lbl_cutscene_actor_updatePose_00001934
     mr r29, r0
-lbl_fn_8047AEBC_00001934:
+lbl_cutscene_actor_updatePose_00001934:
     cmpwi r29, 0x0
     li r24, 0x0
-    beq lbl_fn_8047AEBC_00001B0C
+    beq lbl_cutscene_actor_updatePose_00001B0C
     mr r22, r26
     addi r25, r1, 0x8
     addi r27, r1, 0x1c
     li r21, 0x0
     li r28, 0x0
-    b lbl_fn_8047AEBC_00001B04
-lbl_fn_8047AEBC_00001958:
+    b lbl_cutscene_actor_updatePose_00001B04
+lbl_cutscene_actor_updatePose_00001958:
     lwz r0, 0x8(r30)
     stw r28, 0x8(r1)
     add r6, r0, r21
     lwzx r0, r21, r0
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001990
+    beq lbl_cutscene_actor_updatePose_00001990
     stw r0, 0x8(r1)
     addi r3, r6, 0x4
     addi r4, r25, 0x4
@@ -1974,13 +1974,13 @@ lbl_fn_8047AEBC_00001958:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001990:
+lbl_cutscene_actor_updatePose_00001990:
     cmplw r22, r25
-    beq lbl_fn_8047AEBC_00001AC0
+    beq lbl_cutscene_actor_updatePose_00001AC0
     lwz r0, 0x8(r1)
     stw r28, 0x1c(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_000019C8
+    beq lbl_cutscene_actor_updatePose_000019C8
     lwz r6, 0x8(r1)
     addi r3, r1, 0xc
     stw r6, 0x1c(r1)
@@ -1989,26 +1989,26 @@ lbl_fn_8047AEBC_00001990:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_000019C8:
+lbl_cutscene_actor_updatePose_000019C8:
     cmplw r22, r25
-    beq lbl_fn_8047AEBC_00001A2C
+    beq lbl_cutscene_actor_updatePose_00001A2C
     lwz r3, 0x8(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001A00
+    beq lbl_cutscene_actor_updatePose_00001A00
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_000019FC
+    beq lbl_cutscene_actor_updatePose_000019FC
     addi r3, r1, 0xc
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_000019FC:
+lbl_cutscene_actor_updatePose_000019FC:
     stw r28, 0x8(r1)
-lbl_fn_8047AEBC_00001A00:
+lbl_cutscene_actor_updatePose_00001A00:
     lwz r0, 0x0(r22)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001A2C
+    beq lbl_cutscene_actor_updatePose_00001A2C
     stw r0, 0x8(r1)
     addi r3, r22, 0x4
     addi r4, r1, 0xc
@@ -2017,26 +2017,26 @@ lbl_fn_8047AEBC_00001A00:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001A2C:
+lbl_cutscene_actor_updatePose_00001A2C:
     cmplw r27, r22
-    beq lbl_fn_8047AEBC_00001A90
+    beq lbl_cutscene_actor_updatePose_00001A90
     lwz r3, 0x0(r22)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001A64
+    beq lbl_cutscene_actor_updatePose_00001A64
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001A60
+    beq lbl_cutscene_actor_updatePose_00001A60
     addi r3, r22, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001A60:
+lbl_cutscene_actor_updatePose_00001A60:
     stw r28, 0x0(r22)
-lbl_fn_8047AEBC_00001A64:
+lbl_cutscene_actor_updatePose_00001A64:
     lwz r0, 0x1c(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001A90
+    beq lbl_cutscene_actor_updatePose_00001A90
     stw r0, 0x0(r22)
     addi r3, r1, 0x20
     addi r4, r22, 0x4
@@ -2045,60 +2045,60 @@ lbl_fn_8047AEBC_00001A64:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001A90:
+lbl_cutscene_actor_updatePose_00001A90:
     lwz r3, 0x1c(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001AC0
+    beq lbl_cutscene_actor_updatePose_00001AC0
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001ABC
+    beq lbl_cutscene_actor_updatePose_00001ABC
     addi r3, r1, 0x20
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001ABC:
+lbl_cutscene_actor_updatePose_00001ABC:
     stw r28, 0x1c(r1)
-lbl_fn_8047AEBC_00001AC0:
+lbl_cutscene_actor_updatePose_00001AC0:
     cmpwi r25, 0x0
-    beq lbl_fn_8047AEBC_00001AF8
+    beq lbl_cutscene_actor_updatePose_00001AF8
     lwz r3, 0x8(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001AF8
+    beq lbl_cutscene_actor_updatePose_00001AF8
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001AF4
+    beq lbl_cutscene_actor_updatePose_00001AF4
     addi r3, r25, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001AF4:
+lbl_cutscene_actor_updatePose_00001AF4:
     stw r28, 0x8(r1)
-lbl_fn_8047AEBC_00001AF8:
+lbl_cutscene_actor_updatePose_00001AF8:
     addi r21, r21, 0x14
     addi r22, r22, 0x14
     addi r24, r24, 0x1
-lbl_fn_8047AEBC_00001B04:
+lbl_cutscene_actor_updatePose_00001B04:
     cmplw r24, r29
-    blt lbl_fn_8047AEBC_00001958
-lbl_fn_8047AEBC_00001B0C:
+    blt lbl_cutscene_actor_updatePose_00001958
+lbl_cutscene_actor_updatePose_00001B0C:
     lis r4, fn_800C622C@ha
     lwz r3, 0x8(r30)
     addi r4, r4, fn_800C622C@l
     bl fn_80695A50
-lbl_fn_8047AEBC_00001B1C:
+lbl_cutscene_actor_updatePose_00001B1C:
     li r0, 0x8
     stw r26, 0x8(r30)
     stw r0, 0x4(r30)
-    b lbl_fn_8047AEBC_00001D90
-lbl_fn_8047AEBC_00001B2C:
+    b lbl_cutscene_actor_updatePose_00001D90
+lbl_cutscene_actor_updatePose_00001B2C:
     lwz r3, 0x0(r3)
     cmplw r3, r0
-    blt lbl_fn_8047AEBC_00001D90
+    blt lbl_cutscene_actor_updatePose_00001D90
     slwi r24, r3, 1
     cmplw r0, r24
-    bgt lbl_fn_8047AEBC_00001D90
+    bgt lbl_cutscene_actor_updatePose_00001D90
     mulli r3, r24, 0x14
     li r4, 0x0
     la r5, lbl_8087E084
@@ -2116,29 +2116,29 @@ lbl_fn_8047AEBC_00001B2C:
     lwz r0, 0x8(r30)
     mr r23, r3
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001D88
+    beq lbl_cutscene_actor_updatePose_00001D88
     lwz r0, 0x0(r30)
     mr r27, r24
     cmplw r24, r0
-    ble lbl_fn_8047AEBC_00001BA0
+    ble lbl_cutscene_actor_updatePose_00001BA0
     mr r27, r0
-lbl_fn_8047AEBC_00001BA0:
+lbl_cutscene_actor_updatePose_00001BA0:
     cmpwi r27, 0x0
     li r26, 0x0
-    beq lbl_fn_8047AEBC_00001D78
+    beq lbl_cutscene_actor_updatePose_00001D78
     mr r21, r23
     addi r25, r1, 0x30
     addi r29, r1, 0x44
     li r22, 0x0
     li r28, 0x0
-    b lbl_fn_8047AEBC_00001D70
-lbl_fn_8047AEBC_00001BC4:
+    b lbl_cutscene_actor_updatePose_00001D70
+lbl_cutscene_actor_updatePose_00001BC4:
     lwz r0, 0x8(r30)
     stw r28, 0x30(r1)
     add r6, r0, r22
     lwzx r0, r22, r0
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001BFC
+    beq lbl_cutscene_actor_updatePose_00001BFC
     stw r0, 0x30(r1)
     addi r3, r6, 0x4
     addi r4, r25, 0x4
@@ -2147,13 +2147,13 @@ lbl_fn_8047AEBC_00001BC4:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001BFC:
+lbl_cutscene_actor_updatePose_00001BFC:
     cmplw r21, r25
-    beq lbl_fn_8047AEBC_00001D2C
+    beq lbl_cutscene_actor_updatePose_00001D2C
     lwz r0, 0x30(r1)
     stw r28, 0x44(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001C34
+    beq lbl_cutscene_actor_updatePose_00001C34
     lwz r6, 0x30(r1)
     addi r3, r1, 0x34
     stw r6, 0x44(r1)
@@ -2162,26 +2162,26 @@ lbl_fn_8047AEBC_00001BFC:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001C34:
+lbl_cutscene_actor_updatePose_00001C34:
     cmplw r21, r25
-    beq lbl_fn_8047AEBC_00001C98
+    beq lbl_cutscene_actor_updatePose_00001C98
     lwz r3, 0x30(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001C6C
+    beq lbl_cutscene_actor_updatePose_00001C6C
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001C68
+    beq lbl_cutscene_actor_updatePose_00001C68
     addi r3, r1, 0x34
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001C68:
+lbl_cutscene_actor_updatePose_00001C68:
     stw r28, 0x30(r1)
-lbl_fn_8047AEBC_00001C6C:
+lbl_cutscene_actor_updatePose_00001C6C:
     lwz r0, 0x0(r21)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001C98
+    beq lbl_cutscene_actor_updatePose_00001C98
     stw r0, 0x30(r1)
     addi r3, r21, 0x4
     addi r4, r1, 0x34
@@ -2190,26 +2190,26 @@ lbl_fn_8047AEBC_00001C6C:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001C98:
+lbl_cutscene_actor_updatePose_00001C98:
     cmplw r29, r21
-    beq lbl_fn_8047AEBC_00001CFC
+    beq lbl_cutscene_actor_updatePose_00001CFC
     lwz r3, 0x0(r21)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001CD0
+    beq lbl_cutscene_actor_updatePose_00001CD0
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001CCC
+    beq lbl_cutscene_actor_updatePose_00001CCC
     addi r3, r21, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001CCC:
+lbl_cutscene_actor_updatePose_00001CCC:
     stw r28, 0x0(r21)
-lbl_fn_8047AEBC_00001CD0:
+lbl_cutscene_actor_updatePose_00001CD0:
     lwz r0, 0x44(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001CFC
+    beq lbl_cutscene_actor_updatePose_00001CFC
     stw r0, 0x0(r21)
     addi r3, r1, 0x48
     addi r4, r21, 0x4
@@ -2218,52 +2218,52 @@ lbl_fn_8047AEBC_00001CD0:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001CFC:
+lbl_cutscene_actor_updatePose_00001CFC:
     lwz r3, 0x44(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001D2C
+    beq lbl_cutscene_actor_updatePose_00001D2C
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001D28
+    beq lbl_cutscene_actor_updatePose_00001D28
     addi r3, r1, 0x48
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001D28:
+lbl_cutscene_actor_updatePose_00001D28:
     stw r28, 0x44(r1)
-lbl_fn_8047AEBC_00001D2C:
+lbl_cutscene_actor_updatePose_00001D2C:
     cmpwi r25, 0x0
-    beq lbl_fn_8047AEBC_00001D64
+    beq lbl_cutscene_actor_updatePose_00001D64
     lwz r3, 0x30(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001D64
+    beq lbl_cutscene_actor_updatePose_00001D64
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001D60
+    beq lbl_cutscene_actor_updatePose_00001D60
     addi r3, r25, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001D60:
+lbl_cutscene_actor_updatePose_00001D60:
     stw r28, 0x30(r1)
-lbl_fn_8047AEBC_00001D64:
+lbl_cutscene_actor_updatePose_00001D64:
     addi r22, r22, 0x14
     addi r21, r21, 0x14
     addi r26, r26, 0x1
-lbl_fn_8047AEBC_00001D70:
+lbl_cutscene_actor_updatePose_00001D70:
     cmplw r26, r27
-    blt lbl_fn_8047AEBC_00001BC4
-lbl_fn_8047AEBC_00001D78:
+    blt lbl_cutscene_actor_updatePose_00001BC4
+lbl_cutscene_actor_updatePose_00001D78:
     lis r4, fn_800C622C@ha
     lwz r3, 0x8(r30)
     addi r4, r4, fn_800C622C@l
     bl fn_80695A50
-lbl_fn_8047AEBC_00001D88:
+lbl_cutscene_actor_updatePose_00001D88:
     stw r23, 0x8(r30)
     stw r24, 0x4(r30)
-lbl_fn_8047AEBC_00001D90:
+lbl_cutscene_actor_updatePose_00001D90:
     lwz r3, 0x0(r30)
     li r0, 0x0
     lwz r4, 0x8(r30)
@@ -2272,7 +2272,7 @@ lbl_fn_8047AEBC_00001D90:
     lwz r6, 0x0(r31)
     add r27, r4, r3
     cmpwi r6, 0x0
-    beq lbl_fn_8047AEBC_00001DD0
+    beq lbl_cutscene_actor_updatePose_00001DD0
     stw r6, 0x6c(r1)
     addi r3, r31, 0x4
     addi r4, r1, 0x70
@@ -2280,15 +2280,15 @@ lbl_fn_8047AEBC_00001D90:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001DD0:
+lbl_cutscene_actor_updatePose_00001DD0:
     addi r0, r1, 0x6c
     cmplw r27, r0
-    beq lbl_fn_8047AEBC_00001F1C
+    beq lbl_cutscene_actor_updatePose_00001F1C
     lwz r3, 0x6c(r1)
     li r0, 0x0
     stw r0, 0x58(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001E10
+    beq lbl_cutscene_actor_updatePose_00001E10
     lwz r6, 0x6c(r1)
     addi r3, r1, 0x70
     stw r6, 0x58(r1)
@@ -2297,28 +2297,28 @@ lbl_fn_8047AEBC_00001DD0:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001E10:
+lbl_cutscene_actor_updatePose_00001E10:
     addi r0, r1, 0x6c
     cmplw r27, r0
-    beq lbl_fn_8047AEBC_00001E7C
+    beq lbl_cutscene_actor_updatePose_00001E7C
     lwz r3, 0x6c(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001E50
+    beq lbl_cutscene_actor_updatePose_00001E50
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001E48
+    beq lbl_cutscene_actor_updatePose_00001E48
     addi r3, r1, 0x70
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001E48:
+lbl_cutscene_actor_updatePose_00001E48:
     li r0, 0x0
     stw r0, 0x6c(r1)
-lbl_fn_8047AEBC_00001E50:
+lbl_cutscene_actor_updatePose_00001E50:
     lwz r0, 0x0(r27)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001E7C
+    beq lbl_cutscene_actor_updatePose_00001E7C
     stw r0, 0x6c(r1)
     addi r3, r27, 0x4
     addi r4, r1, 0x70
@@ -2327,28 +2327,28 @@ lbl_fn_8047AEBC_00001E50:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001E7C:
+lbl_cutscene_actor_updatePose_00001E7C:
     addi r0, r1, 0x58
     cmplw r0, r27
-    beq lbl_fn_8047AEBC_00001EE8
+    beq lbl_cutscene_actor_updatePose_00001EE8
     lwz r3, 0x0(r27)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001EBC
+    beq lbl_cutscene_actor_updatePose_00001EBC
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001EB4
+    beq lbl_cutscene_actor_updatePose_00001EB4
     addi r3, r27, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001EB4:
+lbl_cutscene_actor_updatePose_00001EB4:
     li r0, 0x0
     stw r0, 0x0(r27)
-lbl_fn_8047AEBC_00001EBC:
+lbl_cutscene_actor_updatePose_00001EBC:
     lwz r0, 0x58(r1)
     cmpwi r0, 0x0
-    beq lbl_fn_8047AEBC_00001EE8
+    beq lbl_cutscene_actor_updatePose_00001EE8
     stw r0, 0x0(r27)
     addi r3, r1, 0x5c
     addi r4, r27, 0x4
@@ -2357,39 +2357,39 @@ lbl_fn_8047AEBC_00001EBC:
     lwz r12, 0x0(r6)
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001EE8:
+lbl_cutscene_actor_updatePose_00001EE8:
     lwz r3, 0x58(r1)
     cmpwi r3, 0x0
-    beq lbl_fn_8047AEBC_00001F1C
+    beq lbl_cutscene_actor_updatePose_00001F1C
     lwz r12, 0x0(r3)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001F14
+    beq lbl_cutscene_actor_updatePose_00001F14
     addi r3, r1, 0x5c
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001F14:
+lbl_cutscene_actor_updatePose_00001F14:
     li r0, 0x0
     stw r0, 0x58(r1)
-lbl_fn_8047AEBC_00001F1C:
+lbl_cutscene_actor_updatePose_00001F1C:
     addic. r3, r1, 0x6c
-    beq lbl_fn_8047AEBC_00001F58
+    beq lbl_cutscene_actor_updatePose_00001F58
     lwz r4, 0x6c(r1)
     cmpwi r4, 0x0
-    beq lbl_fn_8047AEBC_00001F58
+    beq lbl_cutscene_actor_updatePose_00001F58
     lwz r12, 0x0(r4)
     cmpwi r12, 0x0
-    beq lbl_fn_8047AEBC_00001F50
+    beq lbl_cutscene_actor_updatePose_00001F50
     addi r3, r3, 0x4
     li r5, 0x1
     mr r4, r3
     mtctr r12
     bctrl
-lbl_fn_8047AEBC_00001F50:
+lbl_cutscene_actor_updatePose_00001F50:
     li r0, 0x0
     stw r0, 0x6c(r1)
-lbl_fn_8047AEBC_00001F58:
+lbl_cutscene_actor_updatePose_00001F58:
     lwz r3, 0x0(r30)
     addi r0, r3, 0x1
     stw r0, 0x0(r30)

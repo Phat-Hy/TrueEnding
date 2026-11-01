@@ -55,7 +55,7 @@ extern u32 lbl_80882CF0;
 void fn_80200ED0(void);
 void fn_80201794(void);
 void fn_80201DC4(void);
-void fn_80201DD4(void);
+void profile_initMetric(void);
 void fn_80201DE8(void);
 void fn_80201E10(void);
 void fn_80201E1C(void);
@@ -1089,7 +1089,7 @@ asm void fn_80201DC4(void)
     blr
 }
 
-asm void fn_80201DD4(void)
+asm void profile_initMetric(void)
 {
     nofralloc
     lfs f0, lbl_80882CD0

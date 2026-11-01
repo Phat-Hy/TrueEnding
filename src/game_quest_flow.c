@@ -9,7 +9,7 @@ extern void fn_8000D430(void);
 extern void fn_8003EFB0(void);
 extern void fn_8004B290(void);
 extern void fn_8004B338(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8004D388(void);
 extern void fn_8007A7BC(void);
 extern void fn_8009076C(void);
@@ -765,7 +765,7 @@ asm void fn_80144F4C(void)
     stfs f28, 0x244(r1)
     stfs f9, 0x248(r1)
     stfs f0, 0x24c(r1)
-    bl fn_8004B378
+    bl item_useConsumable
     li r0, 0x0
     stw r0, 0x8(r1)
     addi r3, r1, 0x10

@@ -14,7 +14,7 @@ extern void fn_80084C24(void);
 extern void fn_8008A00C(void);
 extern void fn_8008AD4C(void);
 extern void fn_8008B140(void);
-extern void fn_80096E94(void);
+extern void lockon_updateTarget(void);
 extern void fn_800A03A0(void);
 extern void fn_800A03E4(void);
 extern void fn_800A0448(void);
@@ -1411,7 +1411,7 @@ asm void fn_80203C7C(void)
     beq lbl_fn_80203C7C_00001254
     li r4, 0x100
     li r5, 0x28
-    bl fn_80096E94
+    bl lockon_updateTarget
 lbl_fn_80203C7C_00001254:
     lwz r0, 0x8(r31)
     stw r3, 0x24(r31)

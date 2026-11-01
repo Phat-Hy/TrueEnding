@@ -5,7 +5,7 @@ extern void _savegpr_22(void);
 extern void _restgpr_22(void);
 
 /* External functions referenced */
-extern void fn_80613300(void);
+extern void __GXSetVtxDescs(void);
 extern void fn_806133B0(void);
 extern void fn_80613890(void);
 extern void fn_806169C0(void);
@@ -60,7 +60,7 @@ lbl___GXSetDirtyState_00000034:
 lbl___GXSetDirtyState_0000005C:
     rlwinm. r0, r30, 0, 28, 28
     beq lbl___GXSetDirtyState_00000068
-    bl fn_80613300
+    bl __GXSetVtxDescs
 lbl___GXSetDirtyState_00000068:
     rlwinm. r0, r30, 0, 27, 27
     beq lbl___GXSetDirtyState_00000074

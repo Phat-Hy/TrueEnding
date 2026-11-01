@@ -4,7 +4,7 @@
 /* External function declarations */
 extern void _restgpr_27(void);
 extern void _savegpr_27(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8004ED34(void);
 extern void fn_80092814(void);
 extern void fn_80116BD4(void);
@@ -209,7 +209,7 @@ lbl_fn_8038AEF0_000001E8:
     stfs f2, 0x1c(r31)
     psq_st f1, 0x14(r31), 0, 0
     stfs f31, 0x50(r31)
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r0, 0xc4(r1)
     psq_l f31, 0xb8(r1), 0, 0
     lfd f31, 0xb0(r1)
@@ -497,7 +497,7 @@ lbl_fn_8038B148_000005CC:
     mr r3, r30
     bl fn_803928C0
     addi r3, r30, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r30, 0x1f4
     bl fn_80116BD4
@@ -1027,7 +1027,7 @@ lbl_fn_8038B650_00000D68:
     mr r3, r30
     bl fn_803928C0
     addi r3, r30, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r30, 0x1f4
     bl fn_80116BD4
@@ -1230,7 +1230,7 @@ lbl_fn_8038BD78_00000F78:
     mr r3, r31
     bl fn_803928C0
     addi r3, r31, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r31, 0x1f4
     bl fn_80116BD4
@@ -1559,7 +1559,7 @@ lbl_fn_8038C070_000015A0:
     stfs f2, 0x1c(r29)
     psq_st f1, 0x14(r29), 0, 0
     stfs f29, 0x50(r29)
-    bl fn_8004B378
+    bl item_useConsumable
     mr r4, r29
     addi r3, r29, 0x1f4
     bl fn_80392A04
@@ -1568,7 +1568,7 @@ lbl_fn_8038C070_000015A0:
     mr r3, r29
     bl fn_803928C0
     addi r3, r29, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r29, 0x1f4
     bl fn_80116BD4
@@ -1817,7 +1817,7 @@ lbl_fn_8038C5B0_00001994:
     fsubs f0, f0, f3
     fmadds f0, f13, f0, f3
     stfs f0, 0x50(r31)
-    bl fn_8004B378
+    bl item_useConsumable
     mr r4, r31
     addi r3, r31, 0x1f4
     bl fn_80392A04
@@ -1826,7 +1826,7 @@ lbl_fn_8038C5B0_00001994:
     mr r3, r31
     bl fn_803928C0
     addi r3, r31, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     lwz r3, lbl_8087EFB4
     addi r4, r31, 0x1f4
     bl fn_80116BD4

@@ -101,7 +101,7 @@ void fn_80089CE4(void);
 void fn_80089D70(void);
 void fn_80089EE4(void);
 void fn_8008A00C(void);
-void fn_8008A4B0(void);
+void area_refresh(void);
 void fn_8008A4E0(void);
 void atn_LH_Material_destructor(void);
 void fn_8008A76C(void);
@@ -1441,7 +1441,7 @@ lbl_fn_8008A00C_0000110C:
     blr
 }
 
-asm void fn_8008A4B0(void)
+asm void area_refresh(void)
 {
     nofralloc
     stwu r1, -0x10(r1)

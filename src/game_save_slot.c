@@ -29,7 +29,7 @@ extern void fn_801FEDBC(void);
 extern void fn_801FEE08(void);
 extern void fn_801FEEFC(void);
 extern void fn_801FEF40(void);
-extern void fn_801FFA04(void);
+extern void player_clock_updateIntervals(void);
 extern void fn_80470580(void);
 extern void fn_8047059C(void);
 extern void atn_LoadHandle_destructor(void);
@@ -173,7 +173,7 @@ lbl_saveSlot_updateLoadState_000000C4:
     addi r5, r30, 0x48
     li r7, 0x1
     addi r6, r6, 0x168
-    bl fn_801FFA04
+    bl player_clock_updateIntervals
     addi r3, r30, 0x48
     bl fn_801EFB00
     addi r3, r30, 0xf0

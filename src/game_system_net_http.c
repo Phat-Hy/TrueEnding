@@ -6,7 +6,7 @@ extern void dtor_80084684(void);
 extern void fn_80013DC4(void);
 extern void fn_80013F78(void);
 extern void atn_LH_Binary_destructor(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_800616C0(void);
 extern void fn_80063D3C(void);
 extern void fn_8006AA20(void);
@@ -699,7 +699,7 @@ lbl_fn_80392964_0000090C:
     mr r3, r27
     bl fn_803928C0
     addi r3, r27, 0x1f4
-    bl fn_8004B378
+    bl item_useConsumable
     bl fn_8008B964
     addi r4, r27, 0x1f4
     bl fn_80116BD4

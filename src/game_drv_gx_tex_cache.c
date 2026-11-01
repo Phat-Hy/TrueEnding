@@ -79,7 +79,7 @@ extern void fn_80615D50(void);
 extern void fn_80617200(void);
 extern void fn_806173E0(void);
 extern void fn_80617420(void);
-extern void fn_80617460(void);
+extern void GXSetTevIndirect(void);
 extern void fn_806174C0(void);
 extern void GXSetTevSwapMode(void);
 extern void fn_80617730(void);
@@ -1172,7 +1172,7 @@ asm void fn_805C3FE0(void)
     li r6, 0x0
     li r7, 0x1
     li r8, 0x0
-    bl fn_80617460
+    bl GXSetTevIndirect
     li r3, 0x0
     li r4, 0x7
     li r5, 0x7

@@ -38,7 +38,7 @@ extern void fn_80718D00(void);
 extern void fn_80718D70(void);
 extern void fn_8071D220(void);
 extern void fn_8071D260(void);
-extern void fn_8071D3F0(void);
+extern void net_packet_enqueueSend(void);
 extern void fn_8071D760(void);
 extern void fn_807252A0(void);
 extern void fn_807252D0(void);
@@ -1575,7 +1575,7 @@ lbl_fn_80712EC0_00001388:
     bl fn_8071D260
     addi r4, r29, 0x490
     li r5, 0x1
-    bl fn_8071D3F0
+    bl net_packet_enqueueSend
     li r0, 0x1
 lbl_fn_80712EC0_000013BC:
     cmpwi r0, 0x0

@@ -26,7 +26,7 @@ extern void fn_8008B140(void);
 extern void fn_80092814(void);
 extern void fn_80092F1C(void);
 extern void fn_80095D44(void);
-extern void fn_80096E94(void);
+extern void lockon_updateTarget(void);
 extern void fn_800971D4(void);
 extern void fn_80097A88(void);
 extern void fn_80097C08(void);
@@ -584,7 +584,7 @@ asm void fn_80412E94(void)
     nofralloc
     li r4, 0x8
     li r5, 0x20
-    b fn_80096E94
+    b lockon_updateTarget
 }
 
 asm void fn_80412EA0(void)

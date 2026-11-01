@@ -13,7 +13,7 @@ extern void fn_80011220(void);
 extern void fn_80013338(void);
 extern void fn_800133B0(void);
 extern void fn_80013410(void);
-extern void fn_8004B378(void);
+extern void item_useConsumable(void);
 extern void fn_8008B964(void);
 extern void fn_800A56A8(void);
 extern void fn_800A58D0(void);
@@ -1880,7 +1880,7 @@ lbl_fn_801162A4_0000188C:
     bl fn_80116BB8
 lbl_fn_801162A4_00001924:
     mr r3, r29
-    bl fn_8004B378
+    bl item_useConsumable
     cmpwi r30, 0x0
     beq lbl_fn_801162A4_000019A8
     mr r3, r29
